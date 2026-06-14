@@ -36,7 +36,7 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 16 | M02.T05 | AMB-1131 | Step Elasticity Engine | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit (`44bda601b6fba878b4192d3de6458eba13a856d8`) |
 | 17 | M02.T06 | AMB-1132 | Schedule Install Kernel | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit (`448b7dc0f805f71ab0a285906ca789edd8e1d40f`) |
 | 18 | M02.T07 | AMB-1133 | Life Consequence Engine | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit (`75ecbf553b9bb43b17736ee7d45bc8671928e796`) |
-| 19 | M02.T08 | AMB-1117 | High-risk safety and jurisdiction handling | `scripts/codex/program-phase-gate.sh amb-master M02` | Backlog |
+| 19 | M02.T08 | AMB-1117 | High-risk safety and jurisdiction handling | `scripts/codex/program-phase-gate.sh amb-master M02` | Green / source commit pending |
 | 20 | M03.T01 | AMB-1114 | Golden vertical slice | `scripts/codex/program-phase-gate.sh amb-master M03` | Backlog |
 | 21 | M03.T02 | AMB-1115 | First-run activation | `scripts/codex/program-phase-gate.sh amb-master M03` | Backlog |
 | 22 | M04 | live AMB issue set | Native Shell + Design System Foundation | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M03 |
@@ -50,4 +50,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Commit and push AMB-1133 source-SHA closeout metadata, post final AMB-1133 closeout activity, then refresh live Linear and execute `AMB-1117` / `M02.T08`.
+Commit and push AMB-1117 source/control-plane artifacts, post AMB-1117 source-push activity, then complete AMB-1117 metadata reconciliation and Linear closeout before refreshing live Linear for `AMB-1114` / `M03.T01`.

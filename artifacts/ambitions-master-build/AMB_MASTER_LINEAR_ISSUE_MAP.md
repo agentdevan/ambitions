@@ -35,10 +35,10 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 | M02.T05 | AMB-1131 | Step Elasticity Engine: Shrink, Replace, Keep momentum, and proof-safe variants | M02 | Done / source commit `44bda601b6fba878b4192d3de6458eba13a856d8` |
 | M02.T06 | AMB-1132 | Schedule Install Kernel: preview, commit, rollback, protected time | M02 | Done / source commit `448b7dc0f805f71ab0a285906ca789edd8e1d40f` |
 | M02.T07 | AMB-1133 | Life Consequence Engine: cross-goal reflow, treaties, non-suppressible events | M02 | Done / source commit `75ecbf553b9bb43b17736ee7d45bc8671928e796` |
-| M02.T08 | AMB-1117 | High-risk safety and jurisdiction handling: runtime fail-safe boundaries | M02 | Backlog |
+| M02.T08 | AMB-1117 | High-risk safety and jurisdiction handling: runtime fail-safe boundaries | M02 | Green / source commit pending |
 | M03.T01 | AMB-1114 | Golden vertical slice: music release goal from intake to replay | M03 | Backlog |
 | M03.T02 | AMB-1115 | First-run activation: first goal, first Recommended Step, first recovery option | M03 | Backlog |
 
 ## Refresh Rule
 
-Refresh this map from live Linear before each new train. Next eligible after AMB-1133 source-SHA closeout metadata and final Linear closeout activity is `AMB-1117` / `M02.T08`. If a train label has no `AMB-*` binding or live Linear contradicts this file, live Linear plus current repo truth wins and this map must be updated before execution.
+Refresh this map from live Linear before each new train. Next eligible after AMB-1117 source/control-plane push and final Linear closeout activity is `AMB-1114` / `M03.T01`. If a train label has no `AMB-*` binding or live Linear contradicts this file, live Linear plus current repo truth wins and this map must be updated before execution.
