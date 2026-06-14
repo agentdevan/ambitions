@@ -5793,6 +5793,25 @@ files:
       - "StorageMigrationExecutionReadinessIssue"
       - "StorageMigrationExecutionReadiness"
       - "StorageMigrationExecutionReadinessEvaluator"
+  - path: "Native/Ambitions/Persistence/StorageMigrationFoundation.swift"
+    target_membership: "App"
+    reachability: "Referenced by active target"
+    concept_area: "proof_receipt_replay"
+    canonical_owner_id: "proof_receipt_replay"
+    classification: "CANONICAL_HELPER"
+    evidence: "membership=App; declared_types=9; AMB-1050 composed migration foundation adapter"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "StorageMigrationFoundationReviewState"
+      - "StorageMigrationFoundationBlockerKind"
+      - "StorageMigrationFoundationBlocker"
+      - "StorageMigrationCompactionHookKind"
+      - "StorageMigrationCompactionHook"
+      - "StorageMigrationSchemaManifest"
+      - "StorageMigrationResetReview"
+      - "StorageMigrationFoundationReport"
+      - "StorageMigrationFoundationAdapter"
   - path: "Native/Ambitions/Persistence/StorageMigrationPlanScaffold.swift"
     target_membership: "App"
     reachability: "Referenced by active target"
@@ -9533,6 +9552,17 @@ files:
     owner_review_needed: false
     declared_types:
       - "ActionReceiptHistoryRepositoryTests"
+  - path: "Native/AmbitionsTests/Persistence/ExecutionLedgerReplayInspectionRepositoryTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Referenced by active target"
+    concept_area: "proof_receipt_replay"
+    canonical_owner_id: "proof_receipt_replay"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=1; text_reference_signal=2"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "ExecutionLedgerReplayInspectionRepositoryTests"
   - path: "Native/AmbitionsTests/Persistence/AmbitionGraphStoreSplitRepositoryTests.swift"
     target_membership: "Unit tests"
     reachability: "Unknown"
@@ -9736,6 +9766,19 @@ files:
     owner_review_needed: false
     declared_types:
       - "StorageMigrationExecutionReadinessTestingTests"
+  - path: "Native/AmbitionsTests/Persistence/StorageMigrationFoundationTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Referenced by active target"
+    concept_area: "proof_receipt_replay"
+    canonical_owner_id: "proof_receipt_replay"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=3; AMB-1050 migration foundation coverage"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "StorageMigrationFoundationTests"
+      - "FixedMigrationSnapshotService"
+      - "MigrationFoundationFixtureError"
   - path: "Native/AmbitionsTests/Persistence/StorageMigrationPlanScaffoldTests.swift"
     target_membership: "Unit tests"
     reachability: "Unknown"

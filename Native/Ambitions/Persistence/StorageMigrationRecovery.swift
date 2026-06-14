@@ -89,7 +89,7 @@ struct StorageMigrationRecoveryCoordinator: Sendable {
     ) -> StorageRecoveryAssessment {
         var issues: [StorageRecoveryIssue] = []
 
-        if readiness.canRequestMigrationExecution == false {
+        if plan.mutationEntries.isEmpty == false && readiness.canRequestMigrationExecution == false {
             issues.append(
                 StorageRecoveryIssue(
                     id: "migration_readiness_blocked",
