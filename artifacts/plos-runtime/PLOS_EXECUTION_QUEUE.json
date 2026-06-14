@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-        "current_request_scope": "AMB-706 / PLOS-084 Location context adapter",
+    "current_request_scope": "AMB-707 / PLOS-085 Files/Photos/OCR explicit import context paths",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -88,7 +88,7 @@
       "linear_id": "AMB-614",
       "linear_lookup_identifier": "AMB-614",
       "title": "Source Authority Mesh",
-            "state": "done_in_linear_green_control_plane_AMB-686_through_AMB-691_done_duplicates_AMB-748_through_AMB-753",
+      "state": "done_in_linear_green_control_plane_AMB-686_through_AMB-691_done_duplicates_AMB-748_through_AMB-753",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M06"
     },
@@ -98,7 +98,7 @@
       "linear_id": "AMB-615",
       "linear_lookup_identifier": "AMB-615",
       "title": "Any Goal Solution Loop",
-            "state": "done_in_linear_AMB-692_done_AMB-755_done_AMB-694_done_AMB-695_done_AMB-696_done_AMB-697_done_AMB-698_done_AMB-699_done_AMB-700_done_AMB-701_done_duplicates_AMB-754_AMB-756_through_AMB-763_archived_AMB-693_non_active",
+      "state": "done_in_linear_AMB-692_done_AMB-755_done_AMB-694_done_AMB-695_done_AMB-696_done_AMB-697_done_AMB-698_done_AMB-699_done_AMB-700_done_AMB-701_done_duplicates_AMB-754_AMB-756_through_AMB-763_archived_AMB-693_non_active",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M07"
     },
@@ -108,7 +108,7 @@
       "linear_id": "AMB-616",
       "linear_lookup_identifier": "AMB-616",
       "title": "Native Context Mesh and permission explainers",
-            "state": "active_AMB-702_done_AMB-703_done_AMB-704_done_AMB-705_done_AMB-706_in_progress_AMB-706_through_AMB-708_AMB-771_AMB-710_active_duplicates_AMB-764_through_AMB-770_AMB-772_archived_AMB-709",
+      "state": "active_AMB-702_done_AMB-703_done_AMB-704_done_AMB-705_done_AMB-706_done_AMB-707_in_progress_AMB-707_AMB-708_AMB-771_AMB-710_active_duplicates_AMB-764_through_AMB-770_AMB-772_archived_AMB-709",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M08"
     },

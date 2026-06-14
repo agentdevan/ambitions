@@ -1,0 +1,296 @@
+artifacts/personal-life-os/reports/PLOS-006-trust-adhd-ui-laws-report.md:54:## Files Changed
+Sources/Previews/SignatureInterfaceVisualQAFixtures.swift:272:    public static let sourceFiles: [String] = [
+docs/truth/README.md:1:# Ambitions Truth Files
+docs/truth/RELEASE_TRUTH.md:31:## 2. Relationship to Other Truth Files
+docs/truth/RELEASE_TRUTH.md:1013:Files changed:
+docs/truth/HISTORICAL_POLICY.md:1037:Files archived:
+docs/truth/HISTORICAL_POLICY.md:1038:Files deleted:
+docs/truth/HISTORICAL_POLICY.md:1039:Files extracted:
+docs/truth/HISTORICAL_POLICY.md:1040:Files marked historical:
+docs/truth/CODEX_PROCESS_TRUTH.md:339:Files/areas likely affected:
+docs/truth/CODEX_PROCESS_TRUTH.md:396:Files likely touched:
+docs/truth/CODEX_PROCESS_TRUTH.md:397:Files explicitly not touched:
+docs/truth/CODEX_PROCESS_TRUTH.md:586:[ ] Files touched listed.
+docs/truth/CODEX_PROCESS_TRUTH.md:734:Files changed:
+docs/truth/CODEX_PROCESS_TRUTH.md:1315:## Files Changed
+docs/truth/IMPLEMENTATION_TRUTH.md:45:## 2. Relationship to Other Truth Files
+docs/truth/IMPLEMENTATION_TRUTH.md:99:| Source-present | Files/source exist in the repo. |
+Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift:446:    public static let sourceFiles: [String] = [
+Native/AmbitionsTests/Persistence/StoragePackageBoundaryModelsTests.swift:20:    func testValidatorAcceptsPersistenceFilesWhenWiringAndLocalOwnershipAreDeclared() {
+Native/AmbitionsTests/Persistence/StoragePackageBoundaryModelsTests.swift:45:    func testValidatorBlocksForbiddenImportsOutOfRootFilesAndUnownedStorage() {
+Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTrustReceiptModelsTests.swift:112:    func testSafeTranslationAndOCRReceiptsStayReviewBounded() {
+docs/codex/reports/AMB-521-packet-13-rename-migration-closeout.md:14:## Active Truth Files Inspected
+docs/codex/reports/AMB-521-packet-13-rename-migration-closeout.md:29:## Files Changed
+docs/codex/reports/AMB-508-packet-0r-closeout.md:13:## Active Truth Files Inspected
+docs/codex/reports/AMB-507-install-codex-self-healing-authority.md:88:## Missing Supporting Files
+docs/codex/reports/AMB-520-packet-12-visual-proof-closeout.md:14:## Active Truth Files Inspected
+docs/codex/reports/AMB-520-packet-12-visual-proof-closeout.md:29:## Files Changed
+Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift:275:            text: "OCR derived",
+docs/codex/reports/AMB-522-internal-testflight-readiness-review.md:15:## Active Truth Files Inspected
+docs/codex/reports/AMB-522-internal-testflight-readiness-review.md:30:## Files Changed
+docs/codex/PROGRAM_EXECUTION_CONTRACT.md:111:- Files changed
+docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md:112:- OCR output
+docs/codex/PLOS_GREEN_YELLOW_RED_REPORTING.md:86:## Files Changed
+docs/codex/chatgpt-pro-project-upload-manifest.md:3:## Files to Upload (In Order)
+docs/codex/chatgpt-pro-project-upload-manifest.md:29:## Max Recommended Files
+Native/AmbitionsTests/Runtime/RuntimePackageBoundaryModelsTests.swift:20:    func testValidatorAcceptsRuntimeFilesWhenWiringAndLocalRuntimeAreDeclared() {
+Native/AmbitionsTests/Runtime/RuntimePackageBoundaryModelsTests.swift:45:    func testValidatorBlocksForbiddenImportsOutOfRootFilesAndRemoteRuntimeClaims() {
+docs/codex/existing-code-champion-coverage.yml:3544:  - path: "Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift"
+docs/codex/existing-code-champion-coverage.yml:3554:      - "SourceAtlasVisionOCRInputKind"
+docs/codex/existing-code-champion-coverage.yml:3555:      - "SourceAtlasVisionOCRQualityLabel"
+docs/codex/existing-code-champion-coverage.yml:3556:      - "SourceAtlasVisionOCRFallbackExtractionQuality"
+docs/codex/existing-code-champion-coverage.yml:3557:      - "SourceAtlasVisionOCRFallbackFailure"
+docs/codex/existing-code-champion-coverage.yml:3558:      - "SourceAtlasVisionOCRFallbackReason"
+docs/codex/existing-code-champion-coverage.yml:3559:      - "SourceAtlasVisionOCRPageLocator"
+docs/codex/existing-code-champion-coverage.yml:3560:      - "SourceAtlasVisionOCRImageLocator"
+docs/codex/existing-code-champion-coverage.yml:3561:      - "SourceAtlasVisionOCRTextBlock"
+docs/codex/existing-code-champion-coverage.yml:3562:      - "SourceAtlasVisionOCRFallbackRequest"
+docs/codex/existing-code-champion-coverage.yml:3563:      - "SourceAtlasVisionOCRFallbackCandidate"
+docs/codex/existing-code-champion-coverage.yml:3564:      - "SourceAtlasVisionOCRFallback"
+docs/codex/existing-code-champion-coverage.yml:7046:      - "OCRReviewNotice"
+docs/codex/existing-code-champion-coverage.yml:9277:  - path: "Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift"
+docs/codex/existing-code-champion-coverage.yml:9287:      - "SourceAtlasVisionOCRFallbackModelsTests"
+artifacts/personal-life-os/reports/PLOS-055-contradiction-freshness-scan.md:102:## Files Changed
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:4:final class SourceAtlasVisionOCRFallbackModelsTests: XCTestCase {
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:5:    func testOCRFallbackDefaultsToUserProvidedSourceNeededAndPrivacyReviewRequired() {
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:6:        let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:12:                    SourceAtlasVisionOCRPageLocator(pageIndex: 0, text: "Page 1")
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:15:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:17:                        text: "  First page  OCR text. ",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:47:                SourceAtlasVisionOCRPageLocator(pageIndex: 0, text: "Ignored for images")
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:50:                SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: " Image 1 "),
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:51:                SourceAtlasVisionOCRImageLocator(imageIndex: 1, text: "Image 2")
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:54:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:56:                    text: "  First   OCR\nblock. ",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:59:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:61:                    text: "First OCR block.",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:64:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:66:                    text: "Second OCR block.",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:72:        let first = SourceAtlasVisionOCRFallback().fallbackOCR(request)
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:73:        let second = SourceAtlasVisionOCRFallback().fallbackOCR(request)
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:75:        XCTAssertEqual(first.normalizedTextBlocks, ["First OCR block.", "Second OCR block."])
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:86:    func testSuppliedSourceHashIsUsedWithoutTreatingOCRAsOfficial() {
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:87:        let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:91:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:93:                        text: "Owner-supplied OCR text.",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:108:        let unsupported = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:113:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:121:        let noText = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:126:                    SourceAtlasVisionOCRPageLocator(pageIndex: 0, text: nil)
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:130:        let empty = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:159:            let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:163:                        SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:165:                            text: "Official-looking OCR text still needs review.",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:192:            let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:196:                        SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:198:                            text: "OCR preserves explicit state boundaries.",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:213:        let current = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:217:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:226:        let stale = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:230:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:232:                        text: "Stale OCR text stays stale.",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:239:        let unknown = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:243:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:252:        let revoked = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:256:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:274:        let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:279:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:281:                        text: "Local proof OCR still needs review.",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:298:private extension SourceAtlasVisionOCRFallbackModelsTests {
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:301:        title: String? = "OCR needs review",
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:303:        inputKind: SourceAtlasVisionOCRInputKind = .unknown,
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:304:        pageLocators: [SourceAtlasVisionOCRPageLocator] = [],
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:305:        imageLocators: [SourceAtlasVisionOCRImageLocator] = [],
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:306:        textBlocks: [SourceAtlasVisionOCRTextBlock] = [],
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:310:    ) -> SourceAtlasVisionOCRFallbackRequest {
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:311:        SourceAtlasVisionOCRFallbackRequest(
+artifacts/personal-life-os/reports/PLOS-035-third-party-sdk-minimization-policy.md:130:Files changed:
+artifacts/personal-life-os/reports/PLOS-078-unsupported-unsafe-routing.md:87:## Files Changed
+docs/codex/ambitions_post_reconstruction_polish_plan.md:52:- Files changed
+artifacts/personal-life-os/reports/AMB-614-plos-m06-parent-acceptance-report.md:116:Files changed:
+artifacts/personal-life-os/reports/PLOS-063-source-authority-non-ready-routing.md:93:## Files Changed
+Native/AmbitionsTests/Domain/DomainPackageBoundaryModelsTests.swift:16:    func testValidatorAcceptsDomainFoundationOnlyFilesWhenWiringDeclared() {
+Native/AmbitionsTests/Domain/DomainPackageBoundaryModelsTests.swift:37:    func testValidatorBlocksForbiddenImportsAndOutOfRootFiles() {
+artifacts/personal-life-os/reports/PLOS-047-pathing-data-download-language.md:47:## Files Changed
+docs/codex/proofs/chatgpt-pro-ui-context-pack-proof.md:5:## Files Created/Updated
+artifacts/personal-life-os/reports/PLOS-046-source-atlas-freshness-cadence.md:42:## Files Changed
+docs/codex/proofs/context-budget-system-proof.md:6:## Files Changed
+artifacts/personal-life-os/reports/PLOS-052-pack-states-review-workflow.md:98:## Files Changed
+docs/codex/SKILL_DEDUP_AUDIT.md:19:## Files Affected
+artifacts/personal-life-os/reports/PLOS-004-step-elasticity-law-report.md:53:## Files Changed
+artifacts/personal-life-os/reports/PLOS-064-source-settings-drill-down-model.md:92:## Files Changed
+artifacts/personal-life-os/reports/PLOS-031-pack-manifest-signing-policy.md:133:Files changed:
+artifacts/personal-life-os/reports/PLOS-084-location-context-adapter.md:114:## Files Changed
+artifacts/personal-life-os/reports/PLOS-M05-R2-r2-staging-activation.md:110:## Files Changed
+artifacts/personal-life-os/reports/PLOS-079-high-risk-guarded-routing.md:96:## Files Changed
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:169:    func testSI15SourceFilesStayWithinAllowedOwnerFamilies() {
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:170:        for path in SI15AccessibilityAdaptiveInterfaceReview.sourceFiles {
+artifacts/personal-life-os/reports/PLOS-073-clarification-engine.md:88:## Files Changed
+artifacts/personal-life-os/reports/PLOS-053-source-import-hash-binding.md:103:## Files Changed
+artifacts/personal-life-os/reports/PLOS-061-source-authority-user-facing-state-model.md:92:## Files Changed
+artifacts/personal-life-os/reports/PLOS-036-r2-api-compatibility-validation-plan.md:137:Files changed:
+artifacts/personal-life-os/reports/PLOS-007-data-sharing-safety-laws-report.md:67:## Files Changed
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:11:                    SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: "screen 1")
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:14:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:49:                SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: "Image 1"),
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:50:                SourceAtlasVisionOCRImageLocator(imageIndex: 1, text: "Image 2")
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:53:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:55:                    text: "  First   OCR\nblock. ",
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:58:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:60:                    text: "First OCR block.",
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:63:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:65:                    text: "Second OCR block.",
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:76:        XCTAssertEqual(first.normalizedTextBlocks, ["First OCR block.", "Second OCR block."])
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:107:                    SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: "Unsupported")
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:116:                    SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: "Screenshot locator")
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:229:        imageLocators: [SourceAtlasVisionOCRImageLocator] = [],
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:230:        textBlocks: [SourceAtlasVisionOCRTextBlock] = [],
+artifacts/personal-life-os/reports/PLOS-043-freshness-revocation-manifests.md:51:## Files Changed
+artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:107:## Files Changed
+artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:13:Out of scope: app source changes, Swift/domain implementation, runtime adapter implementation, permission prompting, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshots, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 writes, production certification, AMB-616 parent completion, and full PLOS project completion.
+artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:20:Green/Yellow/Red status: Green for scoped documentation/control-plane Native Context Mesh adapter contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission ledger implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Health/Fitness, Location, Photos/OCR, and M08 parent completion proof not claimed.
+artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:55:- Explicit import seams exist through external creation import and Source Atlas PDF/Vision OCR/URL/plain-text boundary models.
+artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:64:- It classifies Calendar, Reminders, Health/Fitness, Location, Files/Photos/OCR, CloudKit sync state, Notifications, Focus/Shortcuts, and manual life context.
+artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:97:- Swift/domain implementation, runtime adapter implementation, permission ledger implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Health/Fitness, Location, Photos/OCR, and AMB-616 parent completion remain future-owned.
+artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:103:## Files Changed
+artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:116:AMB-702 does not claim app source change, Swift/domain implementation, runtime adapter implementation, runtime permission flow implementation, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+artifacts/personal-life-os/reports/PLOS-041-immutable-pack-path-strategy.md:69:## Files Changed
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:104:    func testSI16SourceFilesStayWithinAllowedOwnerFamilies() {
+Native/AmbitionsTests/App/SignatureInterfaceVisualQAFixtureTests.swift:105:        for path in SI16PreviewFixtureCatalog.sourceFiles {
+artifacts/personal-life-os/reports/PLOS-003-source-atlas-seed-laws-report.md:55:## Files Changed
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:3:let sourceAtlasVisionOCRFallbackSchemaVersion = "source_atlas_vision_ocr_fallback.native.v1"
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:5:enum SourceAtlasVisionOCRInputKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:12:enum SourceAtlasVisionOCRQualityLabel: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:30:enum SourceAtlasVisionOCRFallbackExtractionQuality: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:37:enum SourceAtlasVisionOCRFallbackFailure: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:44:enum SourceAtlasVisionOCRFallbackReason: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:50:struct SourceAtlasVisionOCRPageLocator: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:82:struct SourceAtlasVisionOCRImageLocator: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:112:struct SourceAtlasVisionOCRTextBlock: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:116:    let qualityLabel: SourceAtlasVisionOCRQualityLabel
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:118:    init(locator: String? = nil, text: String, qualityLabel: SourceAtlasVisionOCRQualityLabel) {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:145:        qualityLabel: SourceAtlasVisionOCRQualityLabel
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:162:struct SourceAtlasVisionOCRFallbackRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:167:    let inputKind: SourceAtlasVisionOCRInputKind
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:168:    let pageLocators: [SourceAtlasVisionOCRPageLocator]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:169:    let imageLocators: [SourceAtlasVisionOCRImageLocator]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:170:    let textBlocks: [SourceAtlasVisionOCRTextBlock]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:182:        inputKind: SourceAtlasVisionOCRInputKind = .unknown,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:183:        pageLocators: [SourceAtlasVisionOCRPageLocator] = [],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:184:        imageLocators: [SourceAtlasVisionOCRImageLocator] = [],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:185:        textBlocks: [SourceAtlasVisionOCRTextBlock] = [],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:217:    private static func normalizedTextBlocks(_ blocks: [SourceAtlasVisionOCRTextBlock]) -> [SourceAtlasVisionOCRTextBlock] {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:231:struct SourceAtlasVisionOCRFallbackCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:236:    let inputKind: SourceAtlasVisionOCRInputKind
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:237:    let pageLocators: [SourceAtlasVisionOCRPageLocator]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:238:    let imageLocators: [SourceAtlasVisionOCRImageLocator]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:240:    let ocrQualityLabels: [SourceAtlasVisionOCRQualityLabel]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:242:    let extractionQuality: SourceAtlasVisionOCRFallbackExtractionQuality
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:243:    let failure: SourceAtlasVisionOCRFallbackFailure
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:271:    var fallbackReason: SourceAtlasVisionOCRFallbackReason {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:281:struct SourceAtlasVisionOCRFallback {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:282:    func fallbackOCR(_ request: SourceAtlasVisionOCRFallbackRequest) -> SourceAtlasVisionOCRFallbackCandidate {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:311:            title: request.title ?? "OCR output needs review",
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:334:        return SourceAtlasVisionOCRFallbackCandidate(
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:336:            title: request.title ?? "OCR output needs review",
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:360:            schemaVersion: sourceAtlasVisionOCRFallbackSchemaVersion
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:365:        inputKind: SourceAtlasVisionOCRInputKind,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:366:        pageLocators: [SourceAtlasVisionOCRPageLocator],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:367:        imageLocators: [SourceAtlasVisionOCRImageLocator],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:369:    ) -> SourceAtlasVisionOCRFallbackFailure {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:383:        failure: SourceAtlasVisionOCRFallbackFailure,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:385:        qualityLabels: [SourceAtlasVisionOCRQualityLabel]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:386:    ) -> SourceAtlasVisionOCRFallbackExtractionQuality {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:425:    private static func containerKind(for inputKind: SourceAtlasVisionOCRInputKind) -> SourceAtlasSourceContainerKind {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:435:        failure: SourceAtlasVisionOCRFallbackFailure,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:436:        extractionQuality: SourceAtlasVisionOCRFallbackExtractionQuality
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:458:        failure: SourceAtlasVisionOCRFallbackFailure,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:481:        failure: SourceAtlasVisionOCRFallbackFailure,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:482:        extractionQuality: SourceAtlasVisionOCRFallbackExtractionQuality
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:483:    ) -> SourceAtlasVisionOCRQualityLabel {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:499:        inputKind: SourceAtlasVisionOCRInputKind,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:500:        pageLocators: [SourceAtlasVisionOCRPageLocator],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:501:        imageLocators: [SourceAtlasVisionOCRImageLocator],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:502:        textBlocks: [SourceAtlasVisionOCRTextBlock],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:505:        failure: SourceAtlasVisionOCRFallbackFailure
+artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:108:## Files Changed
+artifacts/personal-life-os/reports/PLOS-034-dependency-audit-secrets-scanning-policy.md:134:Files changed:
+artifacts/personal-life-os/reports/PLOS-077-fresh-coverage-arrival-detection.md:88:## Files Changed
+artifacts/personal-life-os/reports/AMB-615-plos-m07-parent-acceptance-report.md:135:Files changed:
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:47:    let imageLocators: [SourceAtlasVisionOCRImageLocator]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:48:    let textBlocks: [SourceAtlasVisionOCRTextBlock]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:63:        imageLocators: [SourceAtlasVisionOCRImageLocator] = [],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:64:        textBlocks: [SourceAtlasVisionOCRTextBlock] = [],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:99:    private static func normalizedTextBlocks(_ blocks: [SourceAtlasVisionOCRTextBlock]) -> [SourceAtlasVisionOCRTextBlock] {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:119:    let imageLocators: [SourceAtlasVisionOCRImageLocator]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:121:    let ocrQualityLabels: [SourceAtlasVisionOCRQualityLabel]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:251:        imageLocators: [SourceAtlasVisionOCRImageLocator],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:270:        qualityLabels: [SourceAtlasVisionOCRQualityLabel]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:365:    ) -> SourceAtlasVisionOCRQualityLabel {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:382:        imageLocators: [SourceAtlasVisionOCRImageLocator],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:383:        textBlocks: [SourceAtlasVisionOCRTextBlock],
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:13:        let checkedFiles = [
+Native/AmbitionsTests/App/FrontendRecoveryGateTests.swift:21:        for relativePath in checkedFiles {
+Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift:170:    func testEB27AdjustmentEvidenceNamesExistingOwnerFilesAndManualLimits() {
+artifacts/personal-life-os/reports/PLOS-070-any-goal-operating-mode-model.md:91:## Files Changed
+artifacts/personal-life-os/reports/PLOS-044-release-rings-rollback-manifests.md:52:## Files Changed
+artifacts/personal-life-os/reports/PLOS-050-pack-seed-foundry-pipeline.md:97:## Files Changed
+artifacts/personal-life-os/reports/PLOS-042-manifest-compatibility-spec.md:49:## Files Changed
+docs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md:187:| `Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift` | App | SourceAtlasVisionOCRInputKind, SourceAtlasVisionOCRQualityLabel, SourceAtlasVisionOCRFallbackExtractionQuality, SourceAtlasVisionOCRFallbackFailure, SourceAtlasVisionOCRFallbackReason, SourceAtlasVisionOCRPageLocator, SourceAtlasVisionOCRImageLocator, SourceAtlasVisionOCRTextBlock, SourceAtlasVisionOCRFallbackRequest, SourceAtlasVisionOCRFallbackCandidate, SourceAtlasVisionOCRFallback | Referenced by active target | goals | goals_root | CANONICAL_HELPER | membership=App; declared_types=11; text_reference_signal=139 | Keep under canonical owner review | False |
+docs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md:395:| `Native/Ambitions/UI/SourceAtlasUIPrimitives.swift` | App | SourceBadge, FreshnessBadge, SourceNeededFold, RequirementSourceFold, ClaimReviewDrawer, SourceBinderReviewSheet, PackUpdateReceipt, PrivateSourceShield, OCRReviewNotice, SourceImpactReceipt, ProjectionReceiptFold, SkillSliceIndicator, AlternativePathReceipt, OptionValueFold | Referenced by active target | goals | goals_root | CANONICAL_HELPER | membership=App; declared_types=14; text_reference_signal=44 | Keep under canonical owner review | False |
+docs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md:586:| `Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift` | Unit tests | SourceAtlasVisionOCRFallbackModelsTests | Referenced by active target | goals | goals_root | TEST_ONLY | membership=Unit tests; declared_types=1; text_reference_signal=2 | Keep under canonical owner review | False |
+artifacts/personal-life-os/reports/AMB-610-plos-m02-parent-acceptance-report.md:97:Files changed:
+artifacts/personal-life-os/reports/AMB-612-plos-m04-parent-acceptance-report.md:115:Files changed:
+artifacts/personal-life-os/reports/PLOS-056-risk-jurisdiction-classification.md:106:## Files Changed
+artifacts/personal-life-os/reports/PLOS-060-source-authority-internal-state-machine.md:90:## Files Changed
+artifacts/personal-life-os/reports/PLOS-008-program-execution-contract-report.md:52:## Files Changed
+artifacts/personal-life-os/reports/PLOS-005-life-consequence-law-report.md:54:## Files Changed
+artifacts/personal-life-os/reports/PLOS-074-source-needed-local-scaffold.md:90:## Files Changed
+artifacts/personal-life-os/reports/PLOS-058-release-receipt-requirements.md:101:## Files Changed
+artifacts/personal-life-os/reports/PLOS-045-fetch-verify-cache-quarantine-plan.md:44:## Files Changed
+artifacts/personal-life-os/reports/PLOS-032-key-rotation-emergency-revocation-policy.md:141:Files changed:
+artifacts/personal-life-os/reports/PLOS-025-r2-source-only-boundary-matrix.md:124:| Public source records | Yes, when redistribution rights and source authority are recorded. | Source Atlas needs public source binding. | Source id, title, locator, retrieved/review date, content hash, approved-for-official-claims flag, license/redistribution posture. | Private imports, OCR output, private files/photos, user notes, proprietary personal documents. | M04/M06/M18. |
+artifacts/personal-life-os/reports/PLOS-054-claim-extraction-duplicate-detection.md:103:## Files Changed
+artifacts/personal-life-os/reports/PLOS-076-abstract-coverage-request.md:87:## Files Changed
+artifacts/personal-life-os/reports/PLOS-000-governance-inventory.md:152:Files changed:
+artifacts/personal-life-os/reports/PLOS-002-any-goal-solution-loop-law-report.md:49:## Files Changed
+artifacts/personal-life-os/reports/PLOS-033-r2-write-token-isolation-policy.md:139:Files changed:
+artifacts/personal-life-os/reports/PLOS-051-reusable-seed-taxonomy.md:96:## Files Changed
+artifacts/personal-life-os/reports/PLOS-059-no-hardcoded-steps-enforcement.md:92:## Files Changed
+artifacts/personal-life-os/reports/PLOS-001-personal-life-os-law-report.md:50:## Files Changed
+artifacts/personal-life-os/reports/PLOS-057-seed-family-generation.md:102:## Files Changed
+artifacts/personal-life-os/reports/PLOS-065-source-authority-validation-gauntlet.md:90:## Files Changed
+artifacts/personal-life-os/reports/PLOS-072-goal-shape-fingerprint.md:89:## Files Changed
+artifacts/personal-life-os/reports/PLOS-075-coverage-demand-queue.md:88:## Files Changed
+artifacts/personal-life-os/reports/PLOS-071-goal-intent-geometry-classifier.md:92:## Files Changed
+artifacts/personal-life-os/reports/PLOS-011-source-atlas-factory-runtime-map.md:100:| Importers | URL, PDF, PDFKit, plain text, image/screenshot, OCR fallback, document classifier models | Compiled domain models | Import boundary models exist. Production importer UI/storage/resource wiring was not proven. | M05/M06 |
+artifacts/personal-life-os/reports/PLOS-027-20-year-compaction-annual-snapshot-policy.md:190:Files changed:
+artifacts/personal-life-os/reports/AMB-613-plos-m05-parent-acceptance-report.md:125:Files changed:
+artifacts/personal-life-os/reports/AMB-611-plos-m03-parent-acceptance-report.md:108:Files changed:
+artifacts/personal-life-os/reports/PLOS-062-source-applicability-envelope.md:90:## Files Changed
+artifacts/personal-life-os/reports/PLOS-083-health-fitness-context-adapter-if-useful.md:112:## Files Changed
+artifacts/personal-life-os/reports/PLOS-030-security-supply-chain-plan.md:160:Files changed:
+artifacts/personal-life-os/reports/PLOS-009-validation-reporting-install-report.md:32:## Files Changed
+artifacts/source-atlas-factory/SOURCE_ATLAS_PACK_STATE_REVIEW_WORKFLOW.md:56:- private-data leak scan flags user goals, captures, schedules, proof, receipts, profile, files, OCR, health/location, diagnostics, identifiers, or inferred private context
+artifacts/personal-life-os/native-context/HEALTH_FITNESS_CONTEXT_ADAPTER_CONTRACT.md:184:- AMB-707 / PLOS-085 Files/Photos/OCR explicit import paths
+artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:176:- AMB-707 / PLOS-085 Files/Photos/OCR explicit import paths
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:9:This is not Swift implementation, runtime adapter implementation, permission prompting, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement change, privacy manifest change, background ingestion, runtime path selection, generated Step behavior, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, or M08 parent completion.
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:33:- `Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift`
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:64:| `sourceKind` | Calendar, reminders, Health/Fitness, location, files/photos/OCR import, CloudKit sync state, notifications, Focus/Shortcuts, manual life context, or other future native source. | Source is treated as generic Source Atlas content or public pack data. |
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:134:| Files/Photos/OCR | Explicit import candidate, extracted local text summary, source-needed marker | explicit import/local-only | imported-private/high-risk-sensitive | User-initiated import only | User-approved capture/source candidate, local source-needed scaffold | Background library scan, private import in Source Atlas/R2, raw OCR in Linear |
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:148:| Explicit import candidate | Local Held Object, Source Needed local scaffold, user-confirmed source candidate | Public Source Atlas pack, R2 object, raw OCR leakage, automatic source-backed path |
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:177:- Files/Photos/OCR import is user-initiated and never background scans
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:178:- imported OCR/private file text never enters R2, public Source Atlas, Linear, logs, or support bundles
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:192:- raw calendar events, reminders, health data, location, files, photos, OCR text, or personal context leave the local/user-owned boundary
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:205:- AMB-707 / PLOS-085 Files/Photos/OCR explicit import paths
+artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:218:This artifact does not claim app source change, Swift/domain implementation, runtime adapter implementation, runtime permission flow implementation, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+artifacts/personal-life-os/native-context/LOCATION_CONTEXT_ADAPTER_CONTRACT.md:216:- AMB-707 / PLOS-085 Files/Photos/OCR explicit import context paths
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:214:/// Notice for OCR-derived content.
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:215:struct OCRReviewNotice: View {
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:223:            Text("OCR Review Needed")
+Native/Ambitions/UI/SourceAtlasUIPrimitives.swift:331:        OCRReviewNotice()
+artifacts/source-atlas-factory/SAF_HARDENING_PLAN.md:34:- Private documents, OCR output, photos, files, notes, or reminders.
+artifacts/source-atlas-factory/r2/R2_BUCKET_LAYOUT.md:27:- user goals, captures, schedules, proof, receipts, replay, local learning, private profile/context, private imports, files, photos, OCR output, reminders, health/location data, diagnostics, support bundles, exports, or any raw private text
+artifacts/source-atlas-factory/SOURCE_ATLAS_PACK_SEED_FOUNDRY_PIPELINE.md:14:The foundry handles public-reference Source Atlas material and non-user-specific reusable seed templates only. It must never place private user goals, captures, schedules, proof, receipts, profile data, files, OCR output, health/location data, private imports, diagnostics, support bundles, user identifiers, or inferred private life context into public packs, seeds, manifests, R2 objects, validation reports, or release receipts.
+artifacts/source-atlas-factory/SOURCE_ATLAS_RELEASE_RECEIPT_REQUIREMENTS.md:14:Release receipts are public Source Atlas provenance records. They must never contain private user goals, captures, schedules, proof, receipts, profile data, files, OCR output, health/location data, private imports, diagnostics, support bundles, user identifiers, secrets, account ids, write tokens, raw private text, inferred private life context, or private source-needed requests.
+artifacts/source-atlas-factory/r2/R2_NO_PRIVATE_DATA_AUDIT.md:31:- private user goals, captures, tasks, schedules, proof, receipts, replay, local learning, profile/capacity/location data, health data, files, OCR output, reminders, private imports, diagnostics, support bundles, user identifiers, device identifiers, account ids, API keys, access keys, secret keys, tokens, presigned URLs, or runtime write credentials

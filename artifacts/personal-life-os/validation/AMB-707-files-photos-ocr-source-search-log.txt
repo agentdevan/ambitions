@@ -1,0 +1,409 @@
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:17:enum PortableImportMode: String, Codable, Sendable {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:418:struct PortableImportWarning: Codable, Sendable, Equatable, Identifiable {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:423:struct PortableImportSafetySummary: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:424:    let mode: PortableImportMode
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:433:struct PortableImportDryRunSafetySummary: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:434:    let mode: PortableImportMode
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:443:struct PortableImportDryRunReport: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:444:    let mode: PortableImportMode
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:456:    let warnings: [PortableImportWarning]
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:457:    let safetySummary: PortableImportDryRunSafetySummary
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:461:        mode: PortableImportMode,
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:473:        warnings: [PortableImportWarning],
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:475:        safetySummary: PortableImportDryRunSafetySummary? = nil
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:491:        self.safetySummary = safetySummary ?? PortableImportDryRunSafetySummary(
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:519:    let mode: PortableImportMode
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:527:    init(dryRunReport: PortableImportDryRunReport) {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:548:struct PortableImportReport: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:549:    let mode: PortableImportMode
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:560:    let warnings: [PortableImportWarning]
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:561:    let safetySummary: PortableImportSafetySummary
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:564:        mode: PortableImportMode,
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:575:        warnings: [PortableImportWarning],
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:576:        safetySummary: PortableImportSafetySummary? = nil
+Native/Ambitions/Persistence/PortableSnapshotContracts.swift:590:        self.safetySummary = safetySummary ?? PortableImportSafetySummary(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:7:    func dryRunImportSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportDryRunReport
+Native/Ambitions/Persistence/PortableSnapshotService.swift:8:    func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport
+Native/Ambitions/Persistence/PortableSnapshotService.swift:92:    func dryRunImportSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportDryRunReport {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:97:            return PortableImportDryRunReport(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:122:    func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:135:    func validate(_ snapshot: PortableAppSnapshot) throws -> [PortableImportWarning] {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:143:    func replaceLocalStore(with snapshot: PortableAppSnapshot, warnings: [PortableImportWarning]) async throws -> PortableImportReport {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:175:        return PortableImportReport(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:191:    func mergeWithConflictReport(_ snapshot: PortableAppSnapshot, warnings: [PortableImportWarning]) async throws -> PortableImportReport {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:246:        return PortableImportReport(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:262:    func dryRunMergeWithConflictReport(_ snapshot: PortableAppSnapshot, warnings: [PortableImportWarning]) async throws -> PortableImportDryRunReport {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:279:        return PortableImportDryRunReport(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:326:    func validationWarnings(for snapshot: PortableAppSnapshot) -> [PortableImportWarning] {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:330:    func manifestWarnings(for snapshot: PortableAppSnapshot) -> [PortableImportWarning] {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:342:                return PortableImportWarning(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:348:            return PortableImportWarning(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:355:    func referenceWarnings(for snapshot: PortableAppSnapshot) -> [PortableImportWarning] {
+Native/Ambitions/Persistence/PortableSnapshotService.swift:364:        var warnings: [PortableImportWarning] = []
+Native/Ambitions/Persistence/PortableSnapshotService.swift:367:            .compactMap { draft -> PortableImportWarning? in
+Native/Ambitions/Persistence/PortableSnapshotService.swift:371:                return PortableImportWarning(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:380:                PortableImportWarning(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:389:                PortableImportWarning(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:396:            .compactMap { capture -> PortableImportWarning? in
+Native/Ambitions/Persistence/PortableSnapshotService.swift:400:                return PortableImportWarning(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:409:                PortableImportWarning(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:417:                PortableImportWarning(
+Native/Ambitions/Persistence/PortableSnapshotService.swift:427:                PortableImportWarning(
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:20:    let requestedMode: PortableImportMode
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:21:    let incomingDryRunReport: PortableImportDryRunReport?
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:22:    let rollbackDryRunReport: PortableImportDryRunReport?
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:23:    let importReport: PortableImportReport?
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:24:    let rollbackReport: PortableImportReport?
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:49:        requestedMode: PortableImportMode,
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:50:        incomingDryRunReport: PortableImportDryRunReport?,
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:51:        rollbackDryRunReport: PortableImportDryRunReport?,
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:52:        importReport: PortableImportReport?,
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:53:        rollbackReport: PortableImportReport?,
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:82:        self.requestedMode = try container.decode(PortableImportMode.self, forKey: .requestedMode)
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:83:        self.incomingDryRunReport = try container.decodeIfPresent(PortableImportDryRunReport.self, forKey: .incomingDryRunReport)
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:84:        self.rollbackDryRunReport = try container.decodeIfPresent(PortableImportDryRunReport.self, forKey: .rollbackDryRunReport)
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:85:        self.importReport = try container.decodeIfPresent(PortableImportReport.self, forKey: .importReport)
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:86:        self.rollbackReport = try container.decodeIfPresent(PortableImportReport.self, forKey: .rollbackReport)
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:117:        mode: PortableImportMode,
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:120:        let incomingDryRun: PortableImportDryRunReport
+Native/Ambitions/Persistence/PortableRestoreRollback.swift:158:        let rollbackDryRun: PortableImportDryRunReport
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:5:enum SourceAtlasPDFImportRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:10:enum SourceAtlasPDFImportExtractionQuality: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:16:enum SourceAtlasPDFImportFailure: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:28:enum SourceAtlasPDFImportFallbackReason: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:34:struct SourceAtlasPDFImportRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:42:    let declaredFailure: SourceAtlasPDFImportFailure
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:54:        declaredFailure: SourceAtlasPDFImportFailure = .none,
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:81:struct SourceAtlasPDFImportCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:86:    let route: SourceAtlasPDFImportRoute?
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:88:    let extractionQuality: SourceAtlasPDFImportExtractionQuality
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:89:    let failure: SourceAtlasPDFImportFailure
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:116:    var fallbackReason: SourceAtlasPDFImportFallbackReason {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:128:struct SourceAtlasPDFImportBoundary: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:129:    func importPDF(_ request: SourceAtlasPDFImportRequest) -> SourceAtlasPDFImportCandidate {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:175:        return SourceAtlasPDFImportCandidate(
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:195:    private static func route(for locator: String) -> SourceAtlasPDFImportRoute? {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:236:        declaredFailure: SourceAtlasPDFImportFailure,
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:238:        route: SourceAtlasPDFImportRoute?
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:239:    ) -> SourceAtlasPDFImportFailure {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:272:        for route: SourceAtlasPDFImportRoute?
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:285:        failure: SourceAtlasPDFImportFailure,
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:286:        route: SourceAtlasPDFImportRoute?
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:287:    ) -> SourceAtlasPDFImportExtractionQuality {
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:299:        failure: SourceAtlasPDFImportFailure
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:312:        failure: SourceAtlasPDFImportFailure,
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:341:        route: SourceAtlasPDFImportRoute?,
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:342:        failure: SourceAtlasPDFImportFailure
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:359:        route: SourceAtlasPDFImportRoute?,
+Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift:360:        failure: SourceAtlasPDFImportFailure,
+Native/Ambitions/Services/ExternalCreationImportService.swift:3:struct ExternalCreationImportResult: Sendable, Equatable {
+Native/Ambitions/Services/ExternalCreationImportService.swift:12:protocol ExternalCreationImporting: AnyObject {
+Native/Ambitions/Services/ExternalCreationImportService.swift:13:    func importPendingCreations(now: Date) async -> ExternalCreationImportResult
+Native/Ambitions/Services/ExternalCreationImportService.swift:17:final class DefaultExternalCreationImportService: ExternalCreationImporting {
+Native/Ambitions/Services/ExternalCreationImportService.swift:29:    func importPendingCreations(now: Date = .now) async -> ExternalCreationImportResult {
+Native/Ambitions/Services/ExternalCreationImportService.swift:34:            return ExternalCreationImportResult(importedCaptureIDs: [], preferredLanding: nil, source: nil)
+Native/Ambitions/Services/ExternalCreationImportService.swift:62:        return ExternalCreationImportResult(importedCaptureIDs: importedIDs, preferredLanding: preferredLanding, source: source)
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:152:        importCandidate: SourceAtlasPDFImportCandidate,
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:174:    ) -> SourceAtlasPDFImportCandidate {
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:175:        SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift:176:            SourceAtlasPDFImportRequest(
+Native/Ambitions/Persistence/PersistenceContracts.swift:36:    var lastImportSummary: LegacyImportSummary?
+Native/Ambitions/Persistence/PersistenceContracts.swift:110:        lastImportSummary: LegacyImportSummary?,
+Native/Ambitions/Persistence/PersistenceContracts.swift:153:        lastImportSummary = try container.decodeIfPresent(LegacyImportSummary.self, forKey: .lastImportSummary)
+Native/Ambitions/Persistence/PersistenceContracts.swift:261:struct LegacyImportSummary: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PersistenceContracts.swift:271:struct LegacyImportReport: Codable, Sendable, Equatable {
+Native/Ambitions/Persistence/PersistenceContracts.swift:274:    let summary: LegacyImportSummary
+Native/Ambitions/Persistence/PersistenceContracts.swift:672:protocol LegacyImportServicing: Sendable {
+Native/Ambitions/Persistence/PersistenceContracts.swift:673:    func importSnapshot(_ snapshot: LegacyPrototypeSnapshot) async throws -> LegacyImportReport
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:5:enum SourceAtlasPlainTextImportChannel: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:11:enum SourceAtlasPlainTextInputKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:19:enum SourceAtlasPlainTextSourceCategory: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:27:enum SourceAtlasPlainTextExtractionQuality: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:33:enum SourceAtlasPlainTextImportFailure: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:40:enum SourceAtlasPlainTextImportFallbackReason: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:46:struct SourceAtlasPlainTextImportRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:50:    let channel: SourceAtlasPlainTextImportChannel
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:51:    let inputKind: SourceAtlasPlainTextInputKind
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:52:    let declaredSourceCategory: SourceAtlasPlainTextSourceCategory?
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:63:        channel: SourceAtlasPlainTextImportChannel = .pasteboard,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:64:        inputKind: SourceAtlasPlainTextInputKind = .plainText,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:65:        declaredSourceCategory: SourceAtlasPlainTextSourceCategory? = nil,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:96:struct SourceAtlasPlainTextImportCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:99:    let channel: SourceAtlasPlainTextImportChannel
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:100:    let inputKind: SourceAtlasPlainTextInputKind
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:101:    let sourceCategory: SourceAtlasPlainTextSourceCategory
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:104:    let extractionQuality: SourceAtlasPlainTextExtractionQuality
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:105:    let failure: SourceAtlasPlainTextImportFailure
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:132:    var fallbackReason: SourceAtlasPlainTextImportFallbackReason {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:142:struct SourceAtlasPlainTextImporter: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:143:    func importPlainText(_ request: SourceAtlasPlainTextImportRequest) -> SourceAtlasPlainTextImportCandidate {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:197:        return SourceAtlasPlainTextImportCandidate(
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:219:        inputKind: SourceAtlasPlainTextInputKind,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:221:    ) -> SourceAtlasPlainTextImportFailure {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:271:        declared: SourceAtlasPlainTextSourceCategory?,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:272:        channel: SourceAtlasPlainTextImportChannel,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:273:        inputKind: SourceAtlasPlainTextInputKind,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:275:        failure: SourceAtlasPlainTextImportFailure
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:276:    ) -> SourceAtlasPlainTextSourceCategory {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:301:        failure: SourceAtlasPlainTextImportFailure,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:303:    ) -> SourceAtlasPlainTextExtractionQuality {
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:316:        failure: SourceAtlasPlainTextImportFailure
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:331:        failure: SourceAtlasPlainTextImportFailure
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:345:        failure: SourceAtlasPlainTextImportFailure,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:368:        inputKind: SourceAtlasPlainTextInputKind,
+Native/Ambitions/Domain/SourceAtlasPlainTextImporterModels.swift:369:        sourceCategory: SourceAtlasPlainTextSourceCategory,
+Native/Ambitions/Persistence/LegacyImportService.swift:3:struct LegacyImportService: LegacyImportServicing {
+Native/Ambitions/Persistence/LegacyImportService.swift:8:    func importSnapshot(_ snapshot: LegacyPrototypeSnapshot) async throws -> LegacyImportReport {
+Native/Ambitions/Persistence/LegacyImportService.swift:64:        let summary = LegacyImportSummary(
+Native/Ambitions/Persistence/LegacyImportService.swift:87:        return LegacyImportReport(
+Native/Ambitions/Persistence/LegacyImportService.swift:95:private extension LegacyImportService {
+Native/AmbitionsTests/Persistence/PreMigrationBackupTests.swift:121:    func dryRunImportSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportDryRunReport {
+Native/AmbitionsTests/Persistence/PreMigrationBackupTests.swift:122:        PortableImportDryRunReport(
+Native/AmbitionsTests/Persistence/PreMigrationBackupTests.swift:141:    func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
+Native/AmbitionsTests/Persistence/PreMigrationBackupTests.swift:142:        PortableImportReport(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:4:final class SourceAtlasImageScreenshotImporterModelsTests: XCTestCase {
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:6:        let candidate = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:11:                    SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: "screen 1")
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:14:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:49:                SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: "Image 1"),
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:50:                SourceAtlasVisionOCRImageLocator(imageIndex: 1, text: "Image 2")
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:53:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:58:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:63:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:73:        let first = SourceAtlasImageScreenshotImporter().importImageScreenshot(request)
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:74:        let second = SourceAtlasImageScreenshotImporter().importImageScreenshot(request)
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:88:        let candidate = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:102:        let unsupported = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:107:                    SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: "Unsupported")
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:111:        let noText = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:116:                    SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: "Screenshot locator")
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:120:        let empty = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:149:            let candidate = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:175:            let candidate = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:189:        let current = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:195:        let stale = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:201:        let unknown = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:207:        let revoked = SourceAtlasImageScreenshotImporter().importImageScreenshot(
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:222:private extension SourceAtlasImageScreenshotImporterModelsTests {
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:228:        inputKind: SourceAtlasImageScreenshotInputKind = .screenshot,
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:229:        imageLocators: [SourceAtlasVisionOCRImageLocator] = [],
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:230:        textBlocks: [SourceAtlasVisionOCRTextBlock] = [],
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:231:        manualCorrectionState: SourceAtlasImageScreenshotManualCorrectionState = .none,
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:236:    ) -> SourceAtlasImageScreenshotImportRequest {
+Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift:237:        SourceAtlasImageScreenshotImportRequest(
+Native/AmbitionsTests/Persistence/LegacyImportServiceTests.swift:4:final class LegacyImportServiceTests: XCTestCase {
+Native/AmbitionsTests/Persistence/LegacyImportServiceTests.swift:7:        let service = LegacyImportService(goals: repositories.goals, drafts: repositories.drafts, appState: repositories.appState)
+Native/AmbitionsTests/Persistence/LegacyImportServiceTests.swift:45:        let service = LegacyImportService(goals: repositories.goals, drafts: repositories.drafts, appState: repositories.appState)
+Native/AmbitionsTests/Persistence/LegacyImportServiceTests.swift:87:private extension LegacyImportServiceTests {
+Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift:191:    func dryRunImportSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportDryRunReport {
+Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift:195:        return PortableImportDryRunReport(
+Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift:215:    func importSnapshot(_ snapshot: PortableAppSnapshot, mode: PortableImportMode) async throws -> PortableImportReport {
+Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift:226:        return PortableImportReport(
+Native/Ambitions/Domain/SourceAtlasURLSourceImporterModels.swift:159:struct SourceAtlasURLSourceImporter: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:28:    let importCandidate: SourceAtlasPDFImportCandidate
+Native/Ambitions/Domain/SourceAtlasPDFKitTextExtractionModels.swift:38:        importCandidate: SourceAtlasPDFImportCandidate,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:3:let sourceAtlasVisionOCRFallbackSchemaVersion = "source_atlas_vision_ocr_fallback.native.v1"
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:5:enum SourceAtlasVisionOCRInputKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:12:enum SourceAtlasVisionOCRQualityLabel: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:30:enum SourceAtlasVisionOCRFallbackExtractionQuality: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:37:enum SourceAtlasVisionOCRFallbackFailure: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:44:enum SourceAtlasVisionOCRFallbackReason: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:50:struct SourceAtlasVisionOCRPageLocator: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:82:struct SourceAtlasVisionOCRImageLocator: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:112:struct SourceAtlasVisionOCRTextBlock: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:116:    let qualityLabel: SourceAtlasVisionOCRQualityLabel
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:118:    init(locator: String? = nil, text: String, qualityLabel: SourceAtlasVisionOCRQualityLabel) {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:145:        qualityLabel: SourceAtlasVisionOCRQualityLabel
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:162:struct SourceAtlasVisionOCRFallbackRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:167:    let inputKind: SourceAtlasVisionOCRInputKind
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:168:    let pageLocators: [SourceAtlasVisionOCRPageLocator]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:169:    let imageLocators: [SourceAtlasVisionOCRImageLocator]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:170:    let textBlocks: [SourceAtlasVisionOCRTextBlock]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:182:        inputKind: SourceAtlasVisionOCRInputKind = .unknown,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:183:        pageLocators: [SourceAtlasVisionOCRPageLocator] = [],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:184:        imageLocators: [SourceAtlasVisionOCRImageLocator] = [],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:185:        textBlocks: [SourceAtlasVisionOCRTextBlock] = [],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:217:    private static func normalizedTextBlocks(_ blocks: [SourceAtlasVisionOCRTextBlock]) -> [SourceAtlasVisionOCRTextBlock] {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:231:struct SourceAtlasVisionOCRFallbackCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:236:    let inputKind: SourceAtlasVisionOCRInputKind
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:237:    let pageLocators: [SourceAtlasVisionOCRPageLocator]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:238:    let imageLocators: [SourceAtlasVisionOCRImageLocator]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:240:    let ocrQualityLabels: [SourceAtlasVisionOCRQualityLabel]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:242:    let extractionQuality: SourceAtlasVisionOCRFallbackExtractionQuality
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:243:    let failure: SourceAtlasVisionOCRFallbackFailure
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:271:    var fallbackReason: SourceAtlasVisionOCRFallbackReason {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:281:struct SourceAtlasVisionOCRFallback {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:282:    func fallbackOCR(_ request: SourceAtlasVisionOCRFallbackRequest) -> SourceAtlasVisionOCRFallbackCandidate {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:334:        return SourceAtlasVisionOCRFallbackCandidate(
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:360:            schemaVersion: sourceAtlasVisionOCRFallbackSchemaVersion
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:365:        inputKind: SourceAtlasVisionOCRInputKind,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:366:        pageLocators: [SourceAtlasVisionOCRPageLocator],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:367:        imageLocators: [SourceAtlasVisionOCRImageLocator],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:369:    ) -> SourceAtlasVisionOCRFallbackFailure {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:383:        failure: SourceAtlasVisionOCRFallbackFailure,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:385:        qualityLabels: [SourceAtlasVisionOCRQualityLabel]
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:386:    ) -> SourceAtlasVisionOCRFallbackExtractionQuality {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:425:    private static func containerKind(for inputKind: SourceAtlasVisionOCRInputKind) -> SourceAtlasSourceContainerKind {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:435:        failure: SourceAtlasVisionOCRFallbackFailure,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:436:        extractionQuality: SourceAtlasVisionOCRFallbackExtractionQuality
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:458:        failure: SourceAtlasVisionOCRFallbackFailure,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:481:        failure: SourceAtlasVisionOCRFallbackFailure,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:482:        extractionQuality: SourceAtlasVisionOCRFallbackExtractionQuality
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:483:    ) -> SourceAtlasVisionOCRQualityLabel {
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:499:        inputKind: SourceAtlasVisionOCRInputKind,
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:500:        pageLocators: [SourceAtlasVisionOCRPageLocator],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:501:        imageLocators: [SourceAtlasVisionOCRImageLocator],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:502:        textBlocks: [SourceAtlasVisionOCRTextBlock],
+Native/Ambitions/Domain/SourceAtlasVisionOCRFallbackModels.swift:505:        failure: SourceAtlasVisionOCRFallbackFailure
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:5:enum SourceAtlasImageScreenshotInputKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:12:enum SourceAtlasImageScreenshotManualCorrectionState: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:21:enum SourceAtlasImageScreenshotImportExtractionQuality: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:28:enum SourceAtlasImageScreenshotImportFailure: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:35:enum SourceAtlasImageScreenshotImportFallbackReason: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:41:struct SourceAtlasImageScreenshotImportRequest: Codable, Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:46:    let inputKind: SourceAtlasImageScreenshotInputKind
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:47:    let imageLocators: [SourceAtlasVisionOCRImageLocator]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:48:    let textBlocks: [SourceAtlasVisionOCRTextBlock]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:49:    let manualCorrectionState: SourceAtlasImageScreenshotManualCorrectionState
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:62:        inputKind: SourceAtlasImageScreenshotInputKind = .screenshot,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:63:        imageLocators: [SourceAtlasVisionOCRImageLocator] = [],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:64:        textBlocks: [SourceAtlasVisionOCRTextBlock] = [],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:65:        manualCorrectionState: SourceAtlasImageScreenshotManualCorrectionState = .none,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:99:    private static func normalizedTextBlocks(_ blocks: [SourceAtlasVisionOCRTextBlock]) -> [SourceAtlasVisionOCRTextBlock] {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:113:struct SourceAtlasImageScreenshotImportCandidate: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:118:    let inputKind: SourceAtlasImageScreenshotInputKind
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:119:    let imageLocators: [SourceAtlasVisionOCRImageLocator]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:121:    let ocrQualityLabels: [SourceAtlasVisionOCRQualityLabel]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:122:    let manualCorrectionState: SourceAtlasImageScreenshotManualCorrectionState
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:125:    let extractionQuality: SourceAtlasImageScreenshotImportExtractionQuality
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:126:    let failure: SourceAtlasImageScreenshotImportFailure
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:154:    var fallbackReason: SourceAtlasImageScreenshotImportFallbackReason {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:164:struct SourceAtlasImageScreenshotImporter: Sendable, Equatable, Hashable {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:165:    func importImageScreenshot(_ request: SourceAtlasImageScreenshotImportRequest) -> SourceAtlasImageScreenshotImportCandidate {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:218:        return SourceAtlasImageScreenshotImportCandidate(
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:250:        inputKind: SourceAtlasImageScreenshotInputKind,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:251:        imageLocators: [SourceAtlasVisionOCRImageLocator],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:253:    ) -> SourceAtlasImageScreenshotImportFailure {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:267:        failure: SourceAtlasImageScreenshotImportFailure,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:268:        manualCorrectionState: SourceAtlasImageScreenshotManualCorrectionState,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:270:        qualityLabels: [SourceAtlasVisionOCRQualityLabel]
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:271:    ) -> SourceAtlasImageScreenshotImportExtractionQuality {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:313:    private static func defaultTitle(inputKind: SourceAtlasImageScreenshotInputKind) -> String {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:323:        failure: SourceAtlasImageScreenshotImportFailure,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:324:        extractionQuality: SourceAtlasImageScreenshotImportExtractionQuality
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:340:        failure: SourceAtlasImageScreenshotImportFailure,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:363:        failure: SourceAtlasImageScreenshotImportFailure,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:364:        extractionQuality: SourceAtlasImageScreenshotImportExtractionQuality
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:365:    ) -> SourceAtlasVisionOCRQualityLabel {
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:381:        inputKind: SourceAtlasImageScreenshotInputKind,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:382:        imageLocators: [SourceAtlasVisionOCRImageLocator],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:383:        textBlocks: [SourceAtlasVisionOCRTextBlock],
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:384:        manualCorrectionState: SourceAtlasImageScreenshotManualCorrectionState,
+Native/Ambitions/Domain/SourceAtlasImageScreenshotImporterModels.swift:388:        failure: SourceAtlasImageScreenshotImportFailure
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:4:final class SourceAtlasPDFImportBoundaryModelsTests: XCTestCase {
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:6:        let candidate = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:30:        let candidate = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:56:        let first = SourceAtlasPDFImportBoundary().importPDF(request)
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:57:        let second = SourceAtlasPDFImportBoundary().importPDF(request)
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:66:        let locked = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:72:        let corrupt = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:78:        let huge = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:84:        let partial = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:90:        let noText = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:96:        let privateSensitive = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:103:        let unsupported = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:128:        let localTextFile = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:131:        let webPage = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:153:            let candidate = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:179:            let candidate = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:193:        let current = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:199:        let stale = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:205:        let unknown = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:211:        let revoked = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:226:        let candidate = SourceAtlasPDFImportBoundary().importPDF(
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:242:private extension SourceAtlasPDFImportBoundaryModelsTests {
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:251:        declaredFailure: SourceAtlasPDFImportFailure = .none
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:252:    ) -> SourceAtlasPDFImportRequest {
+Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift:253:        SourceAtlasPDFImportRequest(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:4:final class SourceAtlasVisionOCRFallbackModelsTests: XCTestCase {
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:6:        let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:12:                    SourceAtlasVisionOCRPageLocator(pageIndex: 0, text: "Page 1")
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:15:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:47:                SourceAtlasVisionOCRPageLocator(pageIndex: 0, text: "Ignored for images")
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:50:                SourceAtlasVisionOCRImageLocator(imageIndex: 0, text: " Image 1 "),
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:51:                SourceAtlasVisionOCRImageLocator(imageIndex: 1, text: "Image 2")
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:54:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:59:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:64:                SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:72:        let first = SourceAtlasVisionOCRFallback().fallbackOCR(request)
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:73:        let second = SourceAtlasVisionOCRFallback().fallbackOCR(request)
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:87:        let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:91:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:108:        let unsupported = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:113:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:121:        let noText = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:126:                    SourceAtlasVisionOCRPageLocator(pageIndex: 0, text: nil)
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:130:        let empty = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:159:            let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:163:                        SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:192:            let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:196:                        SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:213:        let current = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:217:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:226:        let stale = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:230:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:239:        let unknown = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:243:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:252:        let revoked = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:256:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:274:        let candidate = SourceAtlasVisionOCRFallback().fallbackOCR(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:279:                    SourceAtlasVisionOCRTextBlock(
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:298:private extension SourceAtlasVisionOCRFallbackModelsTests {
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:303:        inputKind: SourceAtlasVisionOCRInputKind = .unknown,
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:304:        pageLocators: [SourceAtlasVisionOCRPageLocator] = [],
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:305:        imageLocators: [SourceAtlasVisionOCRImageLocator] = [],
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:306:        textBlocks: [SourceAtlasVisionOCRTextBlock] = [],
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:310:    ) -> SourceAtlasVisionOCRFallbackRequest {
+Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift:311:        SourceAtlasVisionOCRFallbackRequest(
+Native/Ambitions/PreviewSupport/PreviewAppContainer.swift:63:            externalCreationImportService: DefaultExternalCreationImportService(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:4:final class SourceAtlasPlainTextImporterModelsTests: XCTestCase {
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:6:        let candidate = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:43:        let first = SourceAtlasPlainTextImporter().importPlainText(request)
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:44:        let second = SourceAtlasPlainTextImporter().importPlainText(request)
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:53:        let candidate = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:67:        let candidate = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:81:        let empty = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:84:        let tooShort = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:87:        let unsupported = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:116:            let candidate = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:141:            let candidate = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:155:        let stale = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:161:        let contradicted = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:167:        let revoked = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:181:        let candidate = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:211:            let candidate = SourceAtlasPlainTextImporter().importPlainText(
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:225:private extension SourceAtlasPlainTextImporterModelsTests {
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:230:        channel: SourceAtlasPlainTextImportChannel = .pasteboard,
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:231:        inputKind: SourceAtlasPlainTextInputKind = .plainText,
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:232:        declaredSourceCategory: SourceAtlasPlainTextSourceCategory? = nil,
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:236:    ) -> SourceAtlasPlainTextImportRequest {
+Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift:237:        SourceAtlasPlainTextImportRequest(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:4:final class SourceAtlasURLSourceImporterModelsTests: XCTestCase {
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:6:        let candidate = SourceAtlasURLSourceImporter().importURL(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:29:        let candidate = SourceAtlasURLSourceImporter().importURL(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:59:        let first = SourceAtlasURLSourceImporter().importURL(request)
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:60:        let second = SourceAtlasURLSourceImporter().importURL(request)
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:69:        let candidate = SourceAtlasURLSourceImporter().importURL(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:83:        let candidate = SourceAtlasURLSourceImporter().importURL(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:96:        let unsupportedScheme = SourceAtlasURLSourceImporter().importURL(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:99:        let unsupportedContent = SourceAtlasURLSourceImporter().importURL(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:122:            let candidate = SourceAtlasURLSourceImporter().importURL(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:147:            let candidate = SourceAtlasURLSourceImporter().importURL(
+Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift:161:private extension SourceAtlasURLSourceImporterModelsTests {
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:5:final class ExternalCreationImportServiceTests: XCTestCase {
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:21:        let service = DefaultExternalCreationImportService(store: store, captureService: captureService)
+Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift:48:        let service = DefaultExternalCreationImportService(store: store, captureService: captureService)
+Native/Ambitions/App/AppContainer.swift:40:    let externalCreationImportService: any ExternalCreationImporting
+Native/Ambitions/App/AppContainer.swift:64:        externalCreationImportService: any ExternalCreationImporting,
+Native/Ambitions/App/AppCapabilities.swift:33:    let externalCreationImportService: any ExternalCreationImporting
+Native/Ambitions/App/AppContainerFactory.swift:73:        let externalCreationImportService = DefaultExternalCreationImportService(

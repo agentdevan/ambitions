@@ -84,7 +84,7 @@
       "label": "PLOS-M06",
       "linear_id": "AMB-614",
       "title": "PLOS-M06 - Source Authority Mesh",
-            "status_at_query": "Done in Linear as of 2026-06-13 America/New_York; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 are Done, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
+      "status_at_query": "Done in Linear as of 2026-06-13 America/New_York; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 are Done, and AMB-748 through AMB-753 are Duplicate/archived/canceled",
       "url": "https://linear.app/ambitionsos/issue/AMB-614",
       "execution_rank": 6
     },
@@ -93,7 +93,7 @@
       "label": "PLOS-M07",
       "linear_id": "AMB-615",
       "title": "PLOS-M07 - Any Goal Solution Loop",
-            "status_at_query": "Done in Linear as of 2026-06-13 America/New_York after AMB-615 parent acceptance push; AMB-692 / PLOS-070, AMB-755 / PLOS-071, AMB-694 / PLOS-072, AMB-695 / PLOS-073, AMB-696 / PLOS-074, AMB-697 / PLOS-075, AMB-698 / PLOS-076, AMB-699 / PLOS-077, AMB-700 / PLOS-078, and AMB-701 / PLOS-079 are Done, AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled, and AMB-693 is archived/non-active",
+      "status_at_query": "Done in Linear as of 2026-06-13 America/New_York after AMB-615 parent acceptance push; AMB-692 / PLOS-070, AMB-755 / PLOS-071, AMB-694 / PLOS-072, AMB-695 / PLOS-073, AMB-696 / PLOS-074, AMB-697 / PLOS-075, AMB-698 / PLOS-076, AMB-699 / PLOS-077, AMB-700 / PLOS-078, and AMB-701 / PLOS-079 are Done, AMB-754 and AMB-756 through AMB-763 are Duplicate/archived/canceled, and AMB-693 is archived/non-active",
       "url": "https://linear.app/ambitionsos/issue/AMB-615",
       "execution_rank": 7
     },
@@ -102,7 +102,7 @@
       "label": "PLOS-M08",
       "linear_id": "AMB-616",
       "title": "PLOS-M08 - Native Context Mesh and permission explainers",
-            "status_at_query": "Active as of 2026-06-13 America/New_York; AMB-702 / PLOS-080 through AMB-705 / PLOS-083 are Done, AMB-706 / PLOS-084 is in progress, AMB-706 through AMB-708, AMB-771, and AMB-710 are active children, AMB-764 through AMB-770 plus AMB-772 are Duplicate/archived/canceled, and AMB-709 is archived/non-active",
+      "status_at_query": "Active as of 2026-06-13 America/New_York; AMB-702 / PLOS-080 through AMB-706 / PLOS-084 are Done, AMB-707 / PLOS-085 is in progress, AMB-707, AMB-708, AMB-771, and AMB-710 are active children, AMB-764 through AMB-770 plus AMB-772 are Duplicate/archived/canceled, and AMB-709 is archived/non-active",
       "url": "https://linear.app/ambitionsos/issue/AMB-616",
       "execution_rank": 8
     },
@@ -468,266 +468,266 @@
       "parent_linear_id": "AMB-612",
       "title": "PLOS-040 - Create R2 bucket/object layout spec"
     },
-  {
-    "label": "PLOS-041",
-    "linear_id": "AMB-669",
-    "parent_linear_id": "AMB-612",
-    "title": "PLOS-041 - Define immutable pack path strategy"
-  },
-  {
-    "label": "PLOS-042",
-    "linear_id": "AMB-670",
-    "parent_linear_id": "AMB-612",
-    "title": "PLOS-042 - Define signed manifest and compatibility manifest"
-  },
-  {
-    "label": "PLOS-043",
-    "linear_id": "AMB-671",
-    "parent_linear_id": "AMB-612",
-    "title": "PLOS-043 - Define freshness and revocation manifests"
-  },
-  {
-    "label": "PLOS-044",
-    "linear_id": "AMB-672",
-    "parent_linear_id": "AMB-612",
-    "title": "PLOS-044 - Define release rings and rollback manifests"
-  },
-  {
-    "label": "PLOS-045",
-    "linear_id": "AMB-673",
-    "parent_linear_id": "AMB-612",
-    "title": "PLOS-045 - Build app fetch/verify/cache/quarantine plan"
-  },
-  {
-    "label": "PLOS-046",
-    "linear_id": "AMB-674",
-    "parent_linear_id": "AMB-612",
-    "title": "PLOS-046 - Define Source Atlas freshness cadence"
-  },
-  {
-    "label": "PLOS-047",
-    "linear_id": "AMB-675",
-    "parent_linear_id": "AMB-612",
-    "title": "PLOS-047 - Define user-facing pathing-data download language"
-  },
-  {
-    "label": "PLOS-050",
-    "linear_id": "AMB-676",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-050 - Define Pack / Seed Foundry pipeline"
-  },
-  {
-    "label": "PLOS-051",
-    "linear_id": "AMB-677",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-051 - Define reusable seed taxonomy"
-  },
-  {
-    "label": "PLOS-052",
-    "linear_id": "AMB-678",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-052 - Define pack states and review workflow"
-  },
-  {
-    "label": "PLOS-053",
-    "linear_id": "AMB-679",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-053 - Define source import and source hash binding"
-  },
-  {
-    "label": "PLOS-054",
-    "linear_id": "AMB-680",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-054 - Define claim extraction and duplicate detection"
-  },
-  {
-    "label": "PLOS-055",
-    "linear_id": "AMB-681",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-055 - Define contradiction and freshness scan"
-  },
-  {
-    "label": "PLOS-056",
-    "linear_id": "AMB-682",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-056 - Define risk and jurisdiction review states"
-  },
-  {
-    "label": "PLOS-057",
-    "linear_id": "AMB-683",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-057 - Define seed coverage and gap reporting"
-  },
-  {
-    "label": "PLOS-058",
-    "linear_id": "AMB-684",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-058 - Define Source Atlas release receipt format"
-  },
-  {
-    "label": "PLOS-059",
-    "linear_id": "AMB-685",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-059 - Define no-hardcoded-Step enforcement"
-  },
-  {
-    "label": "PLOS-M05-R2",
-    "linear_id": "AMB-973",
-    "parent_linear_id": "AMB-613",
-    "title": "PLOS-M05-R2 - Activate Cloudflare R2 staging infrastructure for Source Atlas Foundry"
-  },
-  {
-    "label": "PLOS-060",
-    "linear_id": "AMB-686",
-    "parent_linear_id": "AMB-614",
-    "title": "PLOS-060 - Define source authority internal state machine"
-  },
-  {
-    "label": "PLOS-061",
-    "linear_id": "AMB-687",
-    "parent_linear_id": "AMB-614",
-    "title": "PLOS-061 - Define compressed user-facing state model"
-  },
-  {
-    "label": "PLOS-062",
-    "linear_id": "AMB-688",
-    "parent_linear_id": "AMB-614",
-    "title": "PLOS-062 - Define source applicability envelope"
-  },
-  {
-    "label": "PLOS-063",
-    "linear_id": "AMB-689",
-    "parent_linear_id": "AMB-614",
-    "title": "PLOS-063 - Define source-needed/review-required/stale/revoked/blocked routing"
-  },
-  {
-    "label": "PLOS-064",
-    "linear_id": "AMB-690",
-    "parent_linear_id": "AMB-614",
-    "title": "PLOS-064 - Define Source Settings drill-down model"
-  },
-  {
-    "label": "PLOS-065",
-    "linear_id": "AMB-691",
-    "parent_linear_id": "AMB-614",
-    "title": "PLOS-065 - Define source authority validation gauntlet"
-  },
-  {
-    "label": "PLOS-070",
-    "linear_id": "AMB-692",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-070 - Define Any Goal operating mode model"
-  },
-  {
-    "label": "PLOS-071",
-    "linear_id": "AMB-755",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-071 - Define Goal Intent Geometry classifier"
-  },
-  {
-    "label": "PLOS-072",
-    "linear_id": "AMB-694",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-072 - Define Goal Shape Fingerprint"
-  },
-  {
-    "label": "PLOS-073",
-    "linear_id": "AMB-695",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-073 - Define clarification engine"
-  },
-  {
-    "label": "PLOS-074",
-    "linear_id": "AMB-696",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-074 - Define source-needed local scaffold"
-  },
-  {
-    "label": "PLOS-075",
-    "linear_id": "AMB-697",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-075 - Define Coverage Demand Queue"
-  },
-  {
-    "label": "PLOS-076",
-    "linear_id": "AMB-698",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-076 - Define optional anonymous abstract coverage request"
-  },
-  {
-    "label": "PLOS-077",
-    "linear_id": "AMB-699",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-077 - Define fresh coverage arrival detection"
-  },
-  {
-    "label": "PLOS-078",
-    "linear_id": "AMB-700",
-    "parent_linear_id": "AMB-615",
-    "title": "PLOS-078 - Define unsupported and unsafe modes"
-  },
-        {
-            "label": "PLOS-079",
-            "linear_id": "AMB-701",
-            "parent_linear_id": "AMB-615",
-            "title": "PLOS-079 - Define high-risk guarded routing"
-        },
-        {
-            "label": "PLOS-080",
-            "linear_id": "AMB-702",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-080 - Define Native Context Mesh adapter model"
-        },
-        {
-            "label": "PLOS-081",
-            "linear_id": "AMB-703",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-081 - Define Calendar context adapter and explainer"
-        },
-        {
-            "label": "PLOS-082",
-            "linear_id": "AMB-704",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-082 - Define Reminders context adapter if useful"
-        },
-        {
-            "label": "PLOS-083",
-            "linear_id": "AMB-705",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-083 - Define Health/Fitness context adapter if useful"
-        },
-        {
-            "label": "PLOS-084",
-            "linear_id": "AMB-706",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-084 - Define Location context adapter"
-        },
-        {
-            "label": "PLOS-085",
-            "linear_id": "AMB-707",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-085 - Define Files/Photos/OCR explicit import context paths"
-        },
-        {
-            "label": "PLOS-086",
-            "linear_id": "AMB-708",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-086 - Define CloudKit sync state context adapter"
-        },
-        {
-            "label": "PLOS-087",
-            "linear_id": "AMB-771",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-087 - Define permission value proof pattern"
-        },
-        {
-            "label": "PLOS-088",
-            "linear_id": "AMB-710",
-            "parent_linear_id": "AMB-616",
-            "title": "PLOS-088 - Define permission ledger and revocation controls"
-        },
-        {
-            "label": "PLOS-090",
+    {
+      "label": "PLOS-041",
+      "linear_id": "AMB-669",
+      "parent_linear_id": "AMB-612",
+      "title": "PLOS-041 - Define immutable pack path strategy"
+    },
+    {
+      "label": "PLOS-042",
+      "linear_id": "AMB-670",
+      "parent_linear_id": "AMB-612",
+      "title": "PLOS-042 - Define signed manifest and compatibility manifest"
+    },
+    {
+      "label": "PLOS-043",
+      "linear_id": "AMB-671",
+      "parent_linear_id": "AMB-612",
+      "title": "PLOS-043 - Define freshness and revocation manifests"
+    },
+    {
+      "label": "PLOS-044",
+      "linear_id": "AMB-672",
+      "parent_linear_id": "AMB-612",
+      "title": "PLOS-044 - Define release rings and rollback manifests"
+    },
+    {
+      "label": "PLOS-045",
+      "linear_id": "AMB-673",
+      "parent_linear_id": "AMB-612",
+      "title": "PLOS-045 - Build app fetch/verify/cache/quarantine plan"
+    },
+    {
+      "label": "PLOS-046",
+      "linear_id": "AMB-674",
+      "parent_linear_id": "AMB-612",
+      "title": "PLOS-046 - Define Source Atlas freshness cadence"
+    },
+    {
+      "label": "PLOS-047",
+      "linear_id": "AMB-675",
+      "parent_linear_id": "AMB-612",
+      "title": "PLOS-047 - Define user-facing pathing-data download language"
+    },
+    {
+      "label": "PLOS-050",
+      "linear_id": "AMB-676",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-050 - Define Pack / Seed Foundry pipeline"
+    },
+    {
+      "label": "PLOS-051",
+      "linear_id": "AMB-677",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-051 - Define reusable seed taxonomy"
+    },
+    {
+      "label": "PLOS-052",
+      "linear_id": "AMB-678",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-052 - Define pack states and review workflow"
+    },
+    {
+      "label": "PLOS-053",
+      "linear_id": "AMB-679",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-053 - Define source import and source hash binding"
+    },
+    {
+      "label": "PLOS-054",
+      "linear_id": "AMB-680",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-054 - Define claim extraction and duplicate detection"
+    },
+    {
+      "label": "PLOS-055",
+      "linear_id": "AMB-681",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-055 - Define contradiction and freshness scan"
+    },
+    {
+      "label": "PLOS-056",
+      "linear_id": "AMB-682",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-056 - Define risk and jurisdiction review states"
+    },
+    {
+      "label": "PLOS-057",
+      "linear_id": "AMB-683",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-057 - Define seed coverage and gap reporting"
+    },
+    {
+      "label": "PLOS-058",
+      "linear_id": "AMB-684",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-058 - Define Source Atlas release receipt format"
+    },
+    {
+      "label": "PLOS-059",
+      "linear_id": "AMB-685",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-059 - Define no-hardcoded-Step enforcement"
+    },
+    {
+      "label": "PLOS-M05-R2",
+      "linear_id": "AMB-973",
+      "parent_linear_id": "AMB-613",
+      "title": "PLOS-M05-R2 - Activate Cloudflare R2 staging infrastructure for Source Atlas Foundry"
+    },
+    {
+      "label": "PLOS-060",
+      "linear_id": "AMB-686",
+      "parent_linear_id": "AMB-614",
+      "title": "PLOS-060 - Define source authority internal state machine"
+    },
+    {
+      "label": "PLOS-061",
+      "linear_id": "AMB-687",
+      "parent_linear_id": "AMB-614",
+      "title": "PLOS-061 - Define compressed user-facing state model"
+    },
+    {
+      "label": "PLOS-062",
+      "linear_id": "AMB-688",
+      "parent_linear_id": "AMB-614",
+      "title": "PLOS-062 - Define source applicability envelope"
+    },
+    {
+      "label": "PLOS-063",
+      "linear_id": "AMB-689",
+      "parent_linear_id": "AMB-614",
+      "title": "PLOS-063 - Define source-needed/review-required/stale/revoked/blocked routing"
+    },
+    {
+      "label": "PLOS-064",
+      "linear_id": "AMB-690",
+      "parent_linear_id": "AMB-614",
+      "title": "PLOS-064 - Define Source Settings drill-down model"
+    },
+    {
+      "label": "PLOS-065",
+      "linear_id": "AMB-691",
+      "parent_linear_id": "AMB-614",
+      "title": "PLOS-065 - Define source authority validation gauntlet"
+    },
+    {
+      "label": "PLOS-070",
+      "linear_id": "AMB-692",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-070 - Define Any Goal operating mode model"
+    },
+    {
+      "label": "PLOS-071",
+      "linear_id": "AMB-755",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-071 - Define Goal Intent Geometry classifier"
+    },
+    {
+      "label": "PLOS-072",
+      "linear_id": "AMB-694",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-072 - Define Goal Shape Fingerprint"
+    },
+    {
+      "label": "PLOS-073",
+      "linear_id": "AMB-695",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-073 - Define clarification engine"
+    },
+    {
+      "label": "PLOS-074",
+      "linear_id": "AMB-696",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-074 - Define source-needed local scaffold"
+    },
+    {
+      "label": "PLOS-075",
+      "linear_id": "AMB-697",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-075 - Define Coverage Demand Queue"
+    },
+    {
+      "label": "PLOS-076",
+      "linear_id": "AMB-698",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-076 - Define optional anonymous abstract coverage request"
+    },
+    {
+      "label": "PLOS-077",
+      "linear_id": "AMB-699",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-077 - Define fresh coverage arrival detection"
+    },
+    {
+      "label": "PLOS-078",
+      "linear_id": "AMB-700",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-078 - Define unsupported and unsafe modes"
+    },
+    {
+      "label": "PLOS-079",
+      "linear_id": "AMB-701",
+      "parent_linear_id": "AMB-615",
+      "title": "PLOS-079 - Define high-risk guarded routing"
+    },
+    {
+      "label": "PLOS-080",
+      "linear_id": "AMB-702",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-080 - Define Native Context Mesh adapter model"
+    },
+    {
+      "label": "PLOS-081",
+      "linear_id": "AMB-703",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-081 - Define Calendar context adapter and explainer"
+    },
+    {
+      "label": "PLOS-082",
+      "linear_id": "AMB-704",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-082 - Define Reminders context adapter if useful"
+    },
+    {
+      "label": "PLOS-083",
+      "linear_id": "AMB-705",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-083 - Define Health/Fitness context adapter if useful"
+    },
+    {
+      "label": "PLOS-084",
+      "linear_id": "AMB-706",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-084 - Define Location context adapter"
+    },
+    {
+      "label": "PLOS-085",
+      "linear_id": "AMB-707",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-085 - Define Files/Photos/OCR explicit import context paths"
+    },
+    {
+      "label": "PLOS-086",
+      "linear_id": "AMB-708",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-086 - Define CloudKit sync state context adapter"
+    },
+    {
+      "label": "PLOS-087",
+      "linear_id": "AMB-771",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-087 - Define permission value proof pattern"
+    },
+    {
+      "label": "PLOS-088",
+      "linear_id": "AMB-710",
+      "parent_linear_id": "AMB-616",
+      "title": "PLOS-088 - Define permission ledger and revocation controls"
+    },
+    {
+      "label": "PLOS-090",
       "linear_id": "AMB-711",
       "parent_linear_id": "AMB-627",
       "title": "PLOS-090 - Install Step Quality Firewall contract"

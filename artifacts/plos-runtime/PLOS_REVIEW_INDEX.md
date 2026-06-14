@@ -1,5 +1,6 @@
 # PLOS REVIEW INDEX
 
+- 2026-06-13: AMB-707 / PLOS-085 read-only Files/Photos/OCR import-context privacy/safety/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-707-files-photos-ocr-closeout-review.md`.
 - 2026-06-13: AMB-706 / PLOS-084 read-only Location context/privacy/safety/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-706-location-context-closeout-review.md`.
 - 2026-06-13: AMB-705 / PLOS-083 read-only Health/Fitness context/privacy/safety/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-705-health-fitness-context-closeout-review.md`.
 - 2026-06-13: AMB-704 / PLOS-082 read-only Reminders context/privacy/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-704-reminders-context-closeout-review.md`.

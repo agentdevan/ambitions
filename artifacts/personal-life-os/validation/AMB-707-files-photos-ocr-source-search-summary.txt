@@ -1,0 +1,25 @@
+AMB-707 / PLOS-085 Files/Photos/OCR source search summary
+
+Required issue search:
+- Command: rg -n "Files|Photos|OCR|import context" Native Sources AppUI docs artifacts/personal-life-os artifacts/source-atlas-factory project.yml Package.swift -g '!artifacts/personal-life-os/validation/**' -g '!artifacts/plos-runtime/script-output/**'
+- Artifact: artifacts/personal-life-os/validation/AMB-707-required-files-photos-ocr-import-context-search-log.txt
+- Size: 296 lines / 42,800 bytes
+- Exit: 0
+
+Focused source ownership search:
+- Command: rg -n "SourceAtlasPDFImport|SourceAtlasVisionOCR|SourceAtlasImageScreenshot|SourceAtlasPlainText|SourceAtlasURLSource|ExternalCreationImport|PortableImport|LegacyImport|PhotosUI|PHPicker|PhotoLibrary|FileImporter|fileImporter|UIDocumentPicker|DocumentPicker|Vision" Native/Ambitions Native/AmbitionsTests project.yml Package.swift
+- Artifact: artifacts/personal-life-os/validation/AMB-707-files-photos-ocr-source-search-log.txt
+- Size: 409 lines / 57,031 bytes
+- Exit: 0
+
+Source ownership findings:
+- Existing Source Atlas import/OCR owners are present in `Native/Ambitions/Domain/SourceAtlasPDFImportBoundaryModels.swift`, `SourceAtlasVisionOCRFallbackModels.swift`, `SourceAtlasImageScreenshotImporterModels.swift`, `SourceAtlasPlainTextImporterModels.swift`, `SourceAtlasURLSourceImporterModels.swift`, and `SourceAtlasPDFKitTextExtractionModels.swift`.
+- Existing import candidates default to user-provided/sensitive/review-required/non-mutating posture and cannot support official-current claims without future source authority proof.
+- Existing local data import owners are present in `PortableSnapshotContracts`, `PortableSnapshotService`, `PortableRestoreRollback`, `LegacyImportService`, and `ExternalCreationImportService`.
+- Focused search found no active app-source evidence of `PhotosUI`, `PHPicker`, Photo Library, `FileImporter`/`fileImporter`, `UIDocumentPicker`, `DocumentPicker`, or Vision framework integration in production source for this AMB-707 scope.
+- AMB-707 therefore defines explicit import context paths as a downstream documentation/control-plane contract, not a new Photos/Files/Vision/OCR runtime implementation.
+
+Boundary findings:
+- Files/Photos/OCR import context must be explicit user-initiated only.
+- Raw private file/photo/OCR payloads are local-only and forbidden from R2, public Source Atlas, Linear, support bundles, logs, external prompts, analytics, telemetry, screenshots, and share/progress-story artifacts.
+- OCR-derived summaries remain review-bound and cannot become source-backed pathing or official-current source without future Source Authority/release proof.
