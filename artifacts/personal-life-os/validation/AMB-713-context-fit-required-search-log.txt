@@ -1,0 +1,348 @@
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:1297:- time fit
+./Native/Ambitions/Services/GoalContradictionService.swift:376:                        code: .energyFitVsSameGoalBehaviorFriction,
+./Native/Ambitions/Services/GoalContradictionService.swift:380:                        summary: "Canonical energy fit is strongly positive, but same-step behavior shows repeated friction.",
+./Native/Ambitions/Services/GoalContradictionService.swift:397:                        code: .energyFitVsSameGoalBehaviorSupport,
+./Native/Ambitions/Services/GoalContradictionService.swift:401:                        summary: "Canonical energy fit is strongly negative, but same-step behavior shows repeated successful completion.",
+./Native/Ambitions/Services/MemoryLensService.swift:561:        case .energyFitCorrection:
+./Native/Ambitions/Services/GoalExplainabilityProjector.swift:380:                teachingSignalKind: .energyFitCorrection,
+./Native/Ambitions/Services/GoalExplainabilityProjector.swift:381:                payload: .energyFit(
+./Native/Ambitions/Services/GoalExplainabilityProjector.swift:415:        case let .energyFit(payload):
+./tools/source-atlas/coverage.py:163:        "start_here_receipt_expectation": f"Start here receipt names the Recommended step, why now, time fit, capacity fit, source quality, uncertainty, and user control. Risk: {cell['start_here_receipt_risk']}.",
+./Native/Ambitions/Services/GoalTeachingSignalService.swift:109:        case (.energyFitCorrection, .energyFit(_), .energyEvaluation):
+./Native/Ambitions/Services/RealityModelProjector.swift:129:            contextFitSummary: contextFitSummary(activeContextLens: input.activeContextLens, openCandidates: openCandidates),
+./Native/Ambitions/Services/RealityModelProjector.swift:246:        let deadlineFits = nextDeadline.map { end <= $0 } ?? true
+./Native/Ambitions/Services/RealityModelProjector.swift:255:                canFitDeadlineItem: deadlineFits
+./Native/Ambitions/Services/RealityModelProjector.swift:294:            timeFitProofSummary: "Time fit proof: \(firstFitSummary) Deadline pressure: \(deadlinePressure.summary)",
+./Native/Ambitions/Services/RealityModelProjector.swift:295:            deadlineFitProofSummary: deadlinePressure.summary,
+./Native/Ambitions/Services/RealityModelProjector.swift:350:    func contextFitSummary(activeContextLens: NowContextLens, openCandidates: [OpenWindowCandidate]) -> String {
+./Native/Ambitions/Services/AmbitionsCommandExecutor.swift:761:            contextFit: commandHints.contextFit,
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:25:        let contextFit = contextFit(for: input, contextLens: contextLens)
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:36:            contextFit: contextFit,
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:50:            contextFit: contextFit
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:115:            contextFit: contextFit,
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:382:    func contextFit(for input: BelievabilityProjectionInput, contextLens: NowContextLens) -> NowPressureLevel {
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:449:        contextFit: NowPressureLevel,
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:462:        let overall = maxPressure([importance, urgency, deadline, consequence, effort, contextFit, goalRelationship, userPreference, capacity, recoveryPressure])
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:469:            contextFit: contextFit,
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:487:        contextFit: NowPressureLevel
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:500:        if rank(contextFit) >= rank(.high) { signals.append(.contextMismatch) }
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:591:        if priority.contextFit == .high {
+./Native/Ambitions/Services/LearningAnticipationService.swift:96:            energyFitPattern: energyFit(from: goalEvidence, frictionCount: goalFeedback.count),
+./Native/Ambitions/Services/LearningAnticipationService.swift:109:    func energyFit(from evidence: [ProgressEvidence], frictionCount: Int) -> EnergyFitPattern {
+./Native/Ambitions/Services/GoalEnergyLearningService.swift:10:        energyFit: PlanningEnergyFitSummary?,
+./Native/Ambitions/Services/GoalEnergyLearningService.swift:22:        energyFit: PlanningEnergyFitSummary?,
+./Native/Ambitions/Services/GoalEnergyLearningService.swift:28:              energyFit?.source == .canonicalMetadata else {
+./Native/Ambitions/Services/CanonicalNowStateProjector.swift:411:            contextFit: passiveLevel == .low && rank(activeLevel) > rank(passiveLevel) ? .moderate : .low,
+./Native/Ambitions/Services/GoalEnergyFitService.swift:367:            return "Provisional path state keeps energy fit conservative."
+./Packages/AmbitionsExperienceKernel/Sources/AmbitionsExperienceKernel/Resources/Manifests/inventions.json:85:      "id": "timeFitRibbon",
+./Native/Ambitions/Services/CaptureService.swift:738:                contextFit: existing.priorityHints.contextFit,
+./Native/Ambitions/Services/CaptureService.swift:1124:            contextFit: priorityHints.contextFit,
+./Native/Ambitions/Domain/CanonicalNowStateModels.swift:188:    let contextFit: NowPressureLevel
+./Native/Ambitions/Domain/CanonicalNowStateModels.swift:202:        contextFit: NowPressureLevel = .none,
+./Native/Ambitions/Domain/CanonicalNowStateModels.swift:215:        self.contextFit = contextFit
+./Native/Ambitions/Domain/CorrectionFoldModels.swift:9:    case timeFitDecision = "time_fit_decision"
+./Native/Ambitions/Domain/CorrectionFoldModels.swift:237:            return "Similar recommendations should be lower when the time fit looks the same."
+./Native/Ambitions/Domain/CorrectionFoldModels.swift:477:    static func timeFitDecision(
+./Native/Ambitions/Domain/CorrectionFoldModels.swift:487:            target: .timeFitDecision,
+./Native/Ambitions/Domain/CorrectionFoldModels.swift:539:        case .timeFitDecision:
+./Native/Ambitions/Domain/ProofMode/AppDrivingProofModeRouter.swift:45:        public let timeFit: String
+./Native/Ambitions/Domain/ProofMode/AppDrivingProofModeRouter.swift:67:            timeFit: "Fits \(plannedMinutes)m inside \(context.openWindowMinutes)m open window with \(context.protectedTimeMinutes)m protected.",
+./Native/Ambitions/Domain/RealityModels.swift:159:    let timeFitProofSummary: String
+./Native/Ambitions/Domain/RealityModels.swift:160:    let deadlineFitProofSummary: String
+./Native/Ambitions/Domain/RealityModels.swift:394:    let contextFitSummary: String
+./Native/Ambitions/Domain/RealityModels.swift:416:        contextFitSummary: String,
+./Native/Ambitions/Domain/RealityModels.swift:444:        self.contextFitSummary = contextFitSummary
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:11:    case energyFitCorrection = "energy_fit_correction"
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:249:    case energyFit(GoalTeachingEnergyFitCorrection)
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:260:        case energyFit
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:269:        case energyFit
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:290:        case let .energyFit(value):
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:291:            try container.encode(PayloadType.energyFit, forKey: .type)
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:292:            try container.encode(value, forKey: .energyFit)
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:309:        case .energyFit:
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:310:            self = .energyFit(try container.decode(GoalTeachingEnergyFitCorrection.self, forKey: .energyFit))
+./Native/Ambitions/Domain/GoalEngine/GoalTeachingModels.swift:424:        case let .energyFit(value):
+./Native/Ambitions/Domain/GoalEngine/GoalContradictionModels.swift:16:    case energyFitVsSameGoalBehaviorFriction = "energy_fit_vs_same_goal_behavior_friction"
+./Native/Ambitions/Domain/GoalEngine/GoalContradictionModels.swift:17:    case energyFitVsSameGoalBehaviorSupport = "energy_fit_vs_same_goal_behavior_support"
+./Sources/Components/MotionPrimitives.swift:557:                nonMotionCues: ["selected label", "because line", "time fit proof"],
+./Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift:10:    private let energyFitService: any GoalEnergyFitEvaluating
+./Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift:20:        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService(),
+./Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift:29:        self.energyFitService = energyFitService
+./Native/Ambitions/Domain/GoalEngine/GoalEngineOrchestrator.swift:240:        let energyModel = energyFitService.evaluate(
+./Sources/Components/StartHereProductPrimitives.swift:32:    public let timeFitProof: StartHereProductFact
+./Sources/Components/StartHereProductPrimitives.swift:47:        timeFitProof: StartHereProductFact,
+./Sources/Components/StartHereProductPrimitives.swift:61:        self.timeFitProof = timeFitProof
+./Sources/Components/StartHereProductPrimitives.swift:69:        [contextEdge, timeFitProof, goalThread]
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:125:    let contextFit: NowPressureLevel
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:139:        contextFit: NowPressureLevel = .none,
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:152:        self.contextFit = contextFit
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:293:    let contextFit: NowPressureLevel
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:325:        contextFit: NowPressureLevel,
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:356:        self.contextFit = contextFit
+./Native/Ambitions/Domain/LearningAnticipationModels.swift:78:    let energyFitPattern: EnergyFitPattern
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:293:    let energyFit: PlanningEnergyFitSummary?
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:498:    private let energyFitService: any GoalEnergyFitEvaluating
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:504:        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService(),
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:509:        self.energyFitService = energyFitService
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:567:                    let energyFit = energyFitService.planningSummary(
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:582:                            energyFit: energyFit,
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:606:                            energyFit: energyFit,
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:615:                                energyFit: energyFit,
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:710:        energyFit: PlanningEnergyFitSummary?,
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:735:            energyFit: energyFit,
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:756:            explanationSummary: "Local deterministic rules ranked this step through inspectable context. Source, receipt, reason, time fit, closure evidence, confidence, and fallback reasons stay visible.",
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:767:        energyFit: PlanningEnergyFitSummary?,
+./Native/Ambitions/Domain/Planning/PlanningEvaluation.swift:780:        if energyFit == nil {
+./Native/Ambitions/Domain/FutureProofContextCandidate.swift:329:                    "runtime fit checks"
+./Native/Ambitions/Domain/FutureProofContextCandidate.swift:546:                    "runtime fit checks"
+./Native/Ambitions/Domain/CaptureModels.swift:617:    let contextFit: NowPressureLevel?
+./Native/Ambitions/Domain/CaptureModels.swift:628:        contextFit: NowPressureLevel? = nil,
+./Native/Ambitions/Domain/CaptureModels.swift:638:        self.contextFit = contextFit
+./Native/Ambitions/Domain/AmbitionsCommandModels.swift:152:    let contextFit: NowPressureLevel?
+./Native/Ambitions/Domain/AmbitionsCommandModels.swift:164:        contextFit: NowPressureLevel? = nil,
+./Native/Ambitions/Domain/AmbitionsCommandModels.swift:175:        self.contextFit = contextFit
+./Native/Ambitions/Domain/AmbitionsCommandModels.swift:184:            contextFit != nil || goalRelationship != nil || userPreference != nil || capacityHint != nil ||
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:300:                timeFitProof: hero.timeFitProof,
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:384:            timeFitProof: action.state == .disabled
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:385:                ? StartHereTimeFitProofState(title: baseHero.timeFitProof.title, summary: baseHero.timeFitProof.summary, detail: "Review before starting.")
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:386:                : baseHero.timeFitProof,
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:468:            timeFitProof: StartHereTimeFitProofState(
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:469:                title: baseHero.timeFitProof.title,
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:470:                summary: baseHero.timeFitProof.summary,
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:471:                detail: freshness == .blocked || freshness == .partial ? "Review before starting." : baseHero.timeFitProof.detail
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:611:            timeFitProof: baseHero.timeFitProof,
+./Native/Ambitions/PreviewSupport/PreviewTodayScenarios.swift:699:            timeFitProof: baseHero.timeFitProof,
+./Packages/AmbitionsExperienceKernel/Codex/Inventions/17_timeFitRibbon.md:1:# 17. timeFitRibbon
+./Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift:18:        let energyFitService = DefaultGoalEnergyFitService()
+./Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift:23:            energyFitService: energyFitService,
+./Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift:29:        let goalOrchestrator = GoalEngineOrchestrator(energyFitService: energyFitService)
+./Native/Ambitions/Runtime/AmbitionsRuntimeFactory.swift:53:                energyFitService: energyFitService,
+./artifacts/ambitions-ui-reconstruction/final-gate/AMB-559-banned-term-scan-output.txt:408:Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:181:        XCTAssertEqual(canonicalSelection.candidate.energyFit?.score, canonicalStepEvaluation.score)
+./Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:497:            timeFitProof: StartHereTimeFitProofState(
+./Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:554:                timeFitProof.title,
+./Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:555:                timeFitProof.summary,
+./Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift:556:                timeFitProof.detail,
+./Native/Ambitions/Features/Today/DayRailViewState.swift:101:    let timeFitProof: StartHereTimeFitProofState
+./Native/Ambitions/Features/Today/DayRailViewState.swift:124:        timeFitProof: StartHereTimeFitProofState,
+./Native/Ambitions/Features/Today/DayRailViewState.swift:146:        self.timeFitProof = timeFitProof
+./Native/Ambitions/Features/Today/DayRailProjection.swift:43:            timeFitProof: StartHereTimeFitProofState(
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:27:        energyFitService: any GoalEnergyFitEvaluating = DefaultGoalEnergyFitService(),
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:45:            energyFitService: energyFitService,
+./Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift:18:            timeFitProof: StartHereProductFact(
+./Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift:20:                title: timeFitProof.title,
+./Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift:21:                summary: timeFitProof.summary,
+./Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift:22:                detail: timeFitProof.detail
+./Native/Ambitions/Features/Today/TodayExecutionProjector.swift:154:            timeFitProof: StartHereTimeFitProofState(
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:18:            energyFit: PlanningEnergyFitSummary(
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:52:            energyFit: PlanningEnergyFitSummary(
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:83:            energyFit: PlanningEnergyFitSummary(
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:115:            energyFit: PlanningEnergyFitSummary(
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:143:            energyFit: PlanningEnergyFitSummary(
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:169:        let energyFit = PlanningEnergyFitSummary(
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:183:            energyFit: energyFit,
+./Native/AmbitionsTests/Services/GoalEnergyLearningServiceTests.swift:192:            energyFit: energyFit,
+./Native/AmbitionsTests/Services/GoalTeachingSignalServiceTests.swift:163:            kind: .energyFitCorrection,
+./Native/AmbitionsTests/Services/GoalTeachingSignalServiceTests.swift:164:            payload: .energyFit(
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:3910:        case .energyFitCorrection:
+./Native/AmbitionsTests/Services/GoalContradictionServiceTests.swift:218:        XCTAssertTrue(report.records.contains(where: { $0.code == .energyFitVsSameGoalBehaviorFriction }))
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:663:                timeFitProofSummary: "Protected time stays inspectable.",
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:664:                deadlineFitProofSummary: "Open room remains available.",
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:671:            contextFitSummary: "Protected free time remains available locally.",
+./Native/AmbitionsTests/Domain/AmbitionsCommandModelsTests.swift:201:                    contextFit: .high,
+./Native/AmbitionsTests/Domain/RealityModelsTests.swift:26:        XCTAssertTrue(snapshot.capacityEstimate.timeFitProofSummary.contains("Time fit proof"))
+./Native/AmbitionsTests/Domain/RealityModelsTests.swift:27:        XCTAssertTrue(snapshot.capacityEstimate.deadlineFitProofSummary.contains("No deadline pressure"))
+./Native/AmbitionsTests/Domain/RealityModelsTests.swift:160:        XCTAssertTrue(snapshot.capacityEstimate.timeFitProofSummary.contains("Time fit proof"))
+./Native/AmbitionsTests/Domain/RealityModelsTests.swift:161:        XCTAssertTrue(snapshot.capacityEstimate.timeFitProofSummary.contains("Deadline pressure:"))
+./Native/AmbitionsTests/Domain/RealityModelsTests.swift:162:        XCTAssertEqual(snapshot.capacityEstimate.deadlineFitProofSummary, snapshot.deadlinePressure.summary)
+./Native/AmbitionsTests/Domain/RealityModelsTests.swift:163:        XCTAssertTrue(snapshot.capacityEstimate.deadlineFitProofSummary.contains("open minutes are visible before the next deadline"))
+./Native/AmbitionsTests/Domain/GoalBelievabilityModelsTests.swift:75:            contextFit: .low,
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:180:        XCTAssertEqual(canonicalSelection.candidate.energyFit?.source, .canonicalMetadata)
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:181:        XCTAssertEqual(canonicalSelection.candidate.energyFit?.score, canonicalStepEvaluation.score)
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:182:        XCTAssertEqual(canonicalSelection.candidate.energyFit?.reasonCodes, canonicalStepEvaluation.reasons.map(\.code).sorted { $0.rawValue < $1.rawValue })
+./Native/AmbitionsTests/Domain/PlanningDomainModelsTests.swift:183:        XCTAssertTrue(withEnergy.allSatisfy { $0.candidate.energyFit != nil })
+./Native/AmbitionsTests/Domain/LearningAnticipationServiceTests.swift:33:        XCTAssertNil(summary.energyFitPattern.preferredSessionLength)
+./Native/AmbitionsTests/Domain/LearningAnticipationServiceTests.swift:58:        XCTAssertEqual(summary.energyFitPattern.preferredSessionLength, .short)
+./Native/AmbitionsTests/Domain/CorrectionFoldModelsTests.swift:178:        let correction = CorrectionFoldRecord.timeFitDecision(
+./Native/AmbitionsTests/Domain/CorrectionFoldModelsTests.swift:188:        XCTAssertEqual(correction.target, .timeFitDecision)
+./Native/AmbitionsTests/Domain/CorrectionFoldModelsTests.swift:249:                .timeFitDecision,
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:1065:    let timeFitTitle: String?
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:1066:    let timeFitSummary: String?
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:1081:            timeFitTitle: hero?.timeFitProof.title,
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:1082:            timeFitSummary: hero?.timeFitProof.summary,
+./Native/AmbitionsTests/Domain/CanonicalNowStateModelsTests.swift:27:            contextFit: .elevated,
+./Native/AmbitionsTests/Domain/CanonicalNowStateModelsTests.swift:40:        XCTAssertEqual(priority.contextFit, .elevated)
+./Native/AmbitionsTests/Domain/CanonicalNowStateModelsTests.swift:114:                contextFit: .elevated,
+./Native/AmbitionsTests/Domain/RescheduleEngineTests.swift:241:                    energyFitPattern: EnergyFitPattern(preferredSessionLength: .short, supportingEvidenceCount: 4, frictionEventCount: 0, confidence: .high, summary: "Short focused passes have the strongest observed fit."),
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:649:                kind: .energyFitCorrection,
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:661:                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1000:                kind: .energyFitCorrection,
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1012:                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1132:                kind: .energyFitCorrection,
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1144:                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1237:                kind: .energyFitCorrection,
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1249:                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1363:                kind: .energyFitCorrection,
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1375:                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1754:                kind: .energyFitCorrection,
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1766:                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+./Native/AmbitionsTests/Ritual/RitualOrchestrationServiceTests.swift:152:                            energyFitPattern: EnergyFitPattern(preferredSessionLength: nil, supportingEvidenceCount: 1, frictionEventCount: 0, confidence: .low, summary: "Observed history is still limited."),
+./Native/AmbitionsTests/ProofMode/AppDrivingProofModeRouterTests.swift:22:        XCTAssertTrue(outputs[0].timeFit.contains("Fits"))
+./Native/AmbitionsTests/ProofMode/AppDrivingProofModeRouterTests.swift:23:        XCTAssertTrue(outputs[1].timeFit.contains("Fits"))
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:190:        XCTAssertEqual(heroStep.timeFitProof.title, "Time fit")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:246:            rail.heroStep?.timeFitProof.detail,
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:386:        XCTAssertEqual(hero.timeFitProof.title, "Time fit")
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:606:        XCTAssertTrue(summary.contains(hero.timeFitProof.title))
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:1353:            rail.heroStep?.timeFitProof.title,
+./Native/AmbitionsTests/Today/TodayViewModelTests.swift:1354:            rail.heroStep?.timeFitProof.detail,
+./Native/AmbitionsTests/Goals/GoalDetailExplainabilityActionTests.swift:96:        XCTAssertEqual(signals.first?.kind, .energyFitCorrection)
+./Native/AmbitionsTests/App/MemoryLensServiceTests.swift:64:                kind: .energyFitCorrection,
+./Native/AmbitionsTests/App/MemoryLensServiceTests.swift:76:                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+./Native/AmbitionsTests/App/MemoryLensServiceTests.swift:248:                kind: .energyFitCorrection,
+./Native/AmbitionsTests/App/MemoryLensServiceTests.swift:260:                payload: .energyFit(.init(correctedDisposition: .lighterVersionNeeded)),
+./Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift:62:            timeFitProof: StartHereProductFact(id: "time-fit", title: "Time fit", summary: "Fits before work", detail: "30 minutes plus buffer"),
+./scripts/codex/step-quality-firewall-validate.py:149:    context_validator = contract.get("contextFitValidator")
+./scripts/codex/step-quality-firewall-validate.py:151:        errors.append("contract missing contextFitValidator linkage")
+./scripts/codex/step-quality-firewall-validate.py:155:                errors.append(f"contract contextFitValidator missing {key}")
+./scripts/codex/step-quality-firewall-validate.py:213:        "timeFit": "context_time_mismatch",
+./scripts/codex/step-quality-firewall-validate.py:214:        "energyFit": "context_energy_mismatch",
+./scripts/codex/step-quality-firewall-validate.py:215:        "resourceFit": "context_resource_mismatch",
+./scripts/codex/step-quality-firewall-validate.py:216:        "locationFit": "context_location_mismatch",
+./scripts/codex/step-quality-firewall-validate.py:217:        "deadlineFit": "context_deadline_mismatch",
+./scripts/codex/step-quality-firewall-validate.py:218:        "dependencyFit": "context_dependency_mismatch",
+./scripts/codex/step-quality-firewall-validate.py:282:    context = step_input.get("contextFit", {})
+./scripts/codex/step-quality-firewall-validate.py:285:        for field in contract["models"]["StepQualityInput"]["fieldRequirements"]["contextFit"]:
+./scripts/codex/step-quality-firewall-validate.py:436:    context = step_input.get("contextFit", {})
+./scripts/harness/ambitions_install_proofmode_001.py:115:            let timeFit: String
+./scripts/harness/ambitions_install_proofmode_001.py:135:                timeFit: "Fits \(plannedMinutes)m inside \(context.openWindowMinutes)m open window with \(context.protectedTimeMinutes)m protected.",
+./scripts/harness/ambitions_install_proofmode_001.py:236:            XCTAssertTrue(outputs[0].timeFit.contains("Fits"))
+./scripts/harness/ambitions_install_proofmode_001.py:237:            XCTAssertTrue(outputs[1].timeFit.contains("Fits"))
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:23:    "contextFitValidator": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:49:        "contextFit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:63:        "contextFit": [
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:64:          "timeFit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:65:          "energyFit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:66:          "resourceFit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:67:          "locationFit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:68:          "deadlineFit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json:69:          "dependencyFit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:21:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:22:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:23:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:24:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:25:          "locationFit": "bounded",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:26:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:27:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:81:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:82:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:83:          "energyFit": "bounded",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:84:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:85:          "locationFit": "bounded",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:86:          "deadlineFit": "bounded",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:87:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:143:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:144:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:145:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:146:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:147:          "locationFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:148:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:149:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:205:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:206:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:207:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:208:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:209:          "locationFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:210:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:211:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:267:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:268:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:269:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:270:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:271:          "locationFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:272:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:273:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:329:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:330:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:331:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:332:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:333:          "locationFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:334:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:335:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:391:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:392:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:393:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:394:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:395:          "locationFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:396:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:397:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:453:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:454:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:455:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:456:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:457:          "locationFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:458:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:459:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:515:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:516:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:517:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:518:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:519:          "locationFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:520:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:521:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:577:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:578:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:579:          "energyFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:580:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:581:          "locationFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:582:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json:583:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md:20:| AMB-713 / PLOS-092 | Fill in context-fit validation over time, energy, resources, location, deadline, and dependency fit. Validator authority: `artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md`. |
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md:39:- `contextFit`: time, energy, resource, location, deadline, and dependency fit.
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md:105:AMB-713 extends the context-fit family through:
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md:152:- the AMB-713 context-fit fixtures are missing or fail
+./artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.md:186:- full context-fit validator
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:3:Status: Active PLOS M09 context-fit validator contract
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:17:The validator evaluates `StepQualityInput.contextFit`, while preserving the AMB-711 `StepQualityInput` and `StepQualityVerdict` contract.
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:21:- `timeFit`
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:22:- `energyFit`
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:23:- `resourceFit`
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:24:- `locationFit`
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:25:- `deadlineFit`
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:26:- `dependencyFit`
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.md:74:This contract does not duplicate those Swift owners. It provides a local runnable context-fit gate that downstream M09 children and AMB-617 / PLOS-M10 can consume until a production integration issue owns Swift wiring.
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:8:  "title": "Step context-fit validator",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:14:    "timeFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:21:    "energyFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:28:    "resourceFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:35:    "locationFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:42:    "deadlineFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:49:    "dependencyFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:70:      "repair-context-fit",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json:75:    "annotationCode": "context-fit-mismatch"
+./artifacts/personal-life-os/reports/PLOS-091-generic-step-blocked-list-scanner.md:36:- AMB-713 / PLOS-092 for context-fit validation using scanner outputs as an upstream non-generic precondition.
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:6:      "id": "accepted-all-context-fit",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:10:        "id": "accepted-all-context-fit",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:21:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:22:          "timeFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:23:          "energyFit": "bounded",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:24:          "resourceFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:25:          "locationFit": "bounded",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:26:          "deadlineFit": "fit",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:27:          "dependencyFit": "fit"
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:60:          "fallback": "repair-context-fit",
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:61:          "annotationCode": "context-fit-ready"
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:75:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:76:          "timeFit": "unavailable"
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:90:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:91:          "energyFit": "overloaded"
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:105:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:106:          "resourceFit": "missing"
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:120:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:121:          "locationFit": "unavailable"
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:135:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:136:          "deadlineFit": "conflict"
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:150:        "contextFit": {
+./artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json:151:          "dependencyFit": "blocked"
+./artifacts/personal-life-os/reports/PLOS-090-step-quality-firewall-contract.md:35:- AMB-713 / PLOS-092 for context-fit validation.
+./artifacts/personal-life-os/reports/PLOS-090-step-quality-firewall-contract.md:69:- Full generic phrase scanner, context-fit validator, source/proof validator, accessibility validator, elasticity validator, and compiler repair implementation remain owned by AMB-712 through AMB-717.
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:745:      "title": "PLOS-092 - Define Step context-fit validation"
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:137:| PLOS-092 | AMB-713 | AMB-627 | Define Step context-fit validation |

@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-712 / PLOS-091 generic Step blocked-list scanner
+Run type: AMB-713 / PLOS-092 Step context-fit validator
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M09"
   linear_id: "AMB-627"
   title: "Step Quality Firewall"
-  status: "Active after AMB-616 / PLOS-M08 parent acceptance was pushed at 7f7c0830765df83c881139bbc743be3471ca66bc and moved to Done in Linear; live M09 re-fetch found AMB-711 Done, AMB-712 In Progress, AMB-713 through AMB-717 Backlog, and Duplicate/archived/canceled children AMB-773 through AMB-779"
+  status: "Active after AMB-616 / PLOS-M08 parent acceptance was pushed at 7f7c0830765df83c881139bbc743be3471ca66bc and moved to Done in Linear; live M09 re-fetch found AMB-711 and AMB-712 Done, AMB-713 In Progress, AMB-714 through AMB-717 Backlog, and Duplicate/archived/canceled children AMB-773 through AMB-779"
 current_child:
-  label: "PLOS-091"
-  linear_id: "AMB-712"
-  title: "Define generic Step blocked-list scanner"
-  status: "In Progress in Linear; generic Step blocked-list scanner contract, machine-readable scanner rules, scanner fixtures, StepQualityVerdict linkage, compiler repair fallback linkage, and existing validator extension are active local scope"
+  label: "PLOS-092"
+  linear_id: "AMB-713"
+  title: "Define Step context-fit validation"
+  status: "In Progress in Linear; Step context-fit validator contract, machine-readable context rules, context fixtures, StepQualityVerdict linkage, compiler repair fallback linkage, and existing validator extension are active local scope"
 next_allowed_action:
-  action: "Validate AMB-712 / PLOS-091, commit with the real Linear identifier, push to main, update AMB-712 in Linear, then re-fetch AMB-627 / PLOS-M09 and current M09 children before starting AMB-713 / PLOS-092"
-  after_current_child: "AMB-712 owns contract/control-plane generic scanner artifacts and a local validator extension only; do not claim Swift/domain implementation, production runtime Step Quality Firewall wiring, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, R2/Source Atlas publication, M09 parent completion, M10 Golden Slice readiness, M26 certification, or production readiness"
+  action: "Validate AMB-713 / PLOS-092, commit with the real Linear identifier, push to main, update AMB-713 in Linear, then re-fetch AMB-627 / PLOS-M09 and current M09 children before starting AMB-714 / PLOS-093"
+  after_current_child: "AMB-713 owns contract/control-plane context-fit validator artifacts and a local validator extension only; do not claim Swift/domain implementation, production runtime Step Quality Firewall wiring, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, R2/Source Atlas publication, M09 parent completion, M10 Golden Slice readiness, M26 certification, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-712 generic Step blocked-list scanner artifacts, local validator extension, validation summaries, child report/reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-713 Step context-fit validator artifacts, local validator extension, validation summaries, child report/reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -44,15 +44,19 @@ validation_required_before_execution:
   - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json"
   - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.json"
   - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER_FIXTURES.json"
+  - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json"
+  - "python3 -m json.tool artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json"
   - "scripts/codex/program-preflight.sh plos"
   - "scripts/codex/program-phase-gate.sh plos M09"
   - "python3 scripts/codex/step-quality-firewall-validate.py"
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-091-generic-step-blocked-list-scanner.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-092-step-context-fit-validator.md"
 validation_not_run_by_current_scope: []
 ```
+
+Completed child: `AMB-712` / `PLOS-091`, pushed to `main` at `60d8fa83aeec106936a712f29bf19cf58ef15dd4` and moved to Done in Linear on 2026-06-13 America/New_York. AMB-712 is scanner/control-plane scope only; app source, Swift/domain implementation, production Step Quality Firewall wiring, UI implementation, accessibility certification, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, Source Atlas publication, R2 write, M09 parent completion, and M10 Golden Slice readiness remain out of scope.
 
 Completed child: `AMB-711` / `PLOS-090`, pushed to `main` at `dd264367f3a0284218e39f293bcc9be65dff5c12` and moved to Done in Linear on 2026-06-13 America/New_York. AMB-711 is contract/control-plane scope only; app source, Swift/domain implementation, production Step Quality Firewall wiring, UI implementation, accessibility certification, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, Source Atlas publication, R2 write, M09 parent completion, and M10 Golden Slice readiness remain out of scope.
 

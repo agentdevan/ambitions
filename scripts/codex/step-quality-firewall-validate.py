@@ -6,6 +6,7 @@ from __future__ import annotations
 import json
 import re
 import sys
+from copy import deepcopy
 from pathlib import Path
 from typing import Any
 
@@ -15,6 +16,8 @@ CONTRACT_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_QUALITY_FIR
 FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json"
 SCANNER_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.json"
 SCANNER_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER_FIXTURES.json"
+CONTEXT_VALIDATOR_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR.json"
+CONTEXT_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_CONTEXT_FIT_VALIDATOR_FIXTURES.json"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -29,6 +32,16 @@ def get_nested(value: dict[str, Any], path: str) -> Any:
             return None
         current = current[part]
     return current
+
+
+def merge_nested(base: dict[str, Any], patch: dict[str, Any]) -> dict[str, Any]:
+    merged = deepcopy(base)
+    for key, value in patch.items():
+        if isinstance(value, dict) and isinstance(merged.get(key), dict):
+            merged[key] = merge_nested(merged[key], value)
+        else:
+            merged[key] = value
+    return merged
 
 
 def is_present(value: Any) -> bool:
@@ -133,6 +146,14 @@ def validate_contract_shape(contract: dict[str, Any]) -> list[str]:
             if not scanner.get(key):
                 errors.append(f"contract genericScanner missing {key}")
 
+    context_validator = contract.get("contextFitValidator")
+    if not isinstance(context_validator, dict):
+        errors.append("contract missing contextFitValidator linkage")
+    else:
+        for key in ("linearIssue", "schema", "fixtures", "requiredOutputs"):
+            if not context_validator.get(key):
+                errors.append(f"contract contextFitValidator missing {key}")
+
     return errors
 
 
@@ -161,6 +182,49 @@ def validate_scanner_shape(scanner: dict[str, Any]) -> list[str]:
     repair = scanner.get("repairLinkage", {})
     if not isinstance(repair, dict) or repair.get("requiredOwner") != "step-graph-compiler" or not repair.get("fallbacks"):
         errors.append("scanner repairLinkage must name Step Graph Compiler and safe fallbacks")
+    return errors
+
+
+def validate_context_validator_shape(context_validator: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    required_keys = ("inputModel", "verdictModel", "contextFields", "validatorOutputs", "repairLinkage")
+    for key in required_keys:
+        if not context_validator.get(key):
+            errors.append(f"context validator missing {key}")
+    if context_validator.get("inputModel") != "StepQualityInput":
+        errors.append("context validator inputModel must be StepQualityInput")
+    if context_validator.get("verdictModel") != "StepQualityVerdict":
+        errors.append("context validator verdictModel must be StepQualityVerdict")
+    required_outputs = {
+        "context_mismatch",
+        "context_time_mismatch",
+        "context_energy_mismatch",
+        "context_resource_mismatch",
+        "context_location_mismatch",
+        "context_deadline_mismatch",
+        "context_dependency_mismatch",
+        "context_repair_required",
+    }
+    missing_outputs = sorted(required_outputs.difference(context_validator.get("validatorOutputs", [])))
+    if missing_outputs:
+        errors.append(f"context validator missing outputs {missing_outputs}")
+    context_fields = context_validator.get("contextFields", {})
+    for field, expected_code in {
+        "timeFit": "context_time_mismatch",
+        "energyFit": "context_energy_mismatch",
+        "resourceFit": "context_resource_mismatch",
+        "locationFit": "context_location_mismatch",
+        "deadlineFit": "context_deadline_mismatch",
+        "dependencyFit": "context_dependency_mismatch",
+    }.items():
+        field_rule = context_fields.get(field)
+        if not isinstance(field_rule, dict):
+            errors.append(f"context validator missing field rule {field}")
+        elif field_rule.get("blockingCode") != expected_code or not field_rule.get("accepted"):
+            errors.append(f"context validator field rule {field} is incomplete")
+    repair = context_validator.get("repairLinkage", {})
+    if not isinstance(repair, dict) or repair.get("requiredOwner") != "step-graph-compiler" or not repair.get("fallbacks"):
+        errors.append("context validator repairLinkage must name Step Graph Compiler and safe fallbacks")
     return errors
 
 
@@ -367,17 +431,104 @@ def validate_scanner_fixtures(scanner: dict[str, Any], fixtures_packet: dict[str
     return errors
 
 
+def evaluate_context_validator(context_validator: dict[str, Any], step_input: dict[str, Any]) -> list[str]:
+    codes: list[str] = []
+    context = step_input.get("contextFit", {})
+    if not isinstance(context, dict):
+        return ["context_mismatch", "context_repair_required"]
+
+    for field, rule in context_validator.get("contextFields", {}).items():
+        accepted_values = set(rule.get("accepted", []))
+        if context.get(field) not in accepted_values:
+            codes.append(rule.get("blockingCode", "context_mismatch"))
+
+    if codes:
+        codes.append("context_mismatch")
+        codes.append("context_repair_required")
+    return sorted(set(codes))
+
+
+def validate_context_fixtures(context_validator: dict[str, Any], fixtures_packet: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    fixtures = fixtures_packet.get("fixtures")
+    if not isinstance(fixtures, list) or not fixtures:
+        return ["context fixture matrix has no fixtures"]
+
+    base_input: dict[str, Any] | None = None
+    accepted_seen = False
+    rejected_codes_seen: set[str] = set()
+
+    for fixture in fixtures:
+        if fixture.get("expectedDecision") == "accept" and isinstance(fixture.get("input"), dict):
+            base_input = fixture["input"]
+            break
+
+    if base_input is None:
+        return ["context fixture matrix has no accepted base input"]
+
+    for fixture in fixtures:
+        fixture_id = fixture.get("id", "<missing-id>")
+        if isinstance(fixture.get("input"), dict):
+            step_input = fixture["input"]
+        else:
+            step_input = merge_nested(base_input, fixture.get("inputPatch", {}))
+        step_input["id"] = fixture_id
+
+        context_codes = evaluate_context_validator(context_validator, step_input)
+        actual_decision = "accept" if not context_codes else "reject"
+        expected = fixture.get("expectedDecision")
+
+        if expected == "accept":
+            accepted_seen = True
+            if actual_decision != "accept":
+                errors.append(f"{fixture_id}: expected context accept but got reject codes={context_codes}")
+            full_codes = evaluate_input(load_json(CONTRACT_PATH), step_input)
+            if full_codes:
+                errors.append(f"{fixture_id}: accepted context fixture fails base firewall codes={full_codes}")
+        elif expected == "reject":
+            if actual_decision != "reject":
+                errors.append(f"{fixture_id}: expected context reject but got accept")
+            expected_codes = set(fixture.get("expectedContextCodes", []))
+            missing_codes = sorted(expected_codes.difference(context_codes))
+            if missing_codes:
+                errors.append(f"{fixture_id}: missing expected context codes {missing_codes}; actual={context_codes}")
+            rejected_codes_seen.update(expected_codes)
+        else:
+            errors.append(f"{fixture_id}: expectedDecision must be accept or reject")
+
+    required_red_paths = {
+        "context_mismatch",
+        "context_time_mismatch",
+        "context_energy_mismatch",
+        "context_resource_mismatch",
+        "context_location_mismatch",
+        "context_deadline_mismatch",
+        "context_dependency_mismatch",
+        "context_repair_required",
+    }
+    missing_red_paths = sorted(required_red_paths.difference(rejected_codes_seen))
+    if missing_red_paths:
+        errors.append(f"context fixture matrix missing required rejected paths: {missing_red_paths}")
+    if not accepted_seen:
+        errors.append("context fixture matrix has no accepted fixture")
+    return errors
+
+
 def main() -> int:
     contract = load_json(CONTRACT_PATH)
     fixtures = load_json(FIXTURES_PATH)
     scanner = load_json(SCANNER_PATH)
     scanner_fixtures = load_json(SCANNER_FIXTURES_PATH)
+    context_validator = load_json(CONTEXT_VALIDATOR_PATH)
+    context_fixtures = load_json(CONTEXT_FIXTURES_PATH)
 
     errors = []
     errors.extend(validate_contract_shape(contract))
     errors.extend(validate_scanner_shape(scanner))
+    errors.extend(validate_context_validator_shape(context_validator))
     errors.extend(validate_fixtures(contract, fixtures))
     errors.extend(validate_scanner_fixtures(scanner, scanner_fixtures))
+    errors.extend(validate_context_fixtures(context_validator, context_fixtures))
 
     if errors:
         print("FAIL Step Quality Firewall validator")
@@ -390,8 +541,11 @@ def main() -> int:
     print(f"fixtures={FIXTURES_PATH.relative_to(ROOT)}")
     print(f"scanner={SCANNER_PATH.relative_to(ROOT)}")
     print(f"scanner_fixtures={SCANNER_FIXTURES_PATH.relative_to(ROOT)}")
+    print(f"context_validator={CONTEXT_VALIDATOR_PATH.relative_to(ROOT)}")
+    print(f"context_fixtures={CONTEXT_FIXTURES_PATH.relative_to(ROOT)}")
     print("models=StepQualityInput, StepQualityVerdict")
     print("generic_scanner=runnable")
+    print("context_fit_validator=runnable")
     print("m10_dependency=runnable")
     return 0
 

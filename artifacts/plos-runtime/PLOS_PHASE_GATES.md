@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-712 / PLOS-091 generic Step blocked-list scanner; no PLOS runtime feature implementation
+Scope of current packet: AMB-713 / PLOS-092 Step context-fit validator; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -208,7 +208,7 @@ Linear issue: `AMB-627`
 Label: `PLOS-M09`
 Purpose: Step Quality Firewall.
 
-Current M09 status: Active under `AMB-627`. Live Linear verification on 2026-06-13 America/New_York found canonical active children `AMB-711` / `PLOS-090` through `AMB-717` / `PLOS-096`, with duplicate/canceled lineage `AMB-773` through `AMB-779` marked Duplicate/archived/canceled. `AMB-711` is Done after pushed commit `dd264367f3a0284218e39f293bcc9be65dff5c12`. `AMB-712` is In Progress and owns the generic Step blocked-list scanner, scanner fixtures, `StepQualityVerdict` blocking-code linkage, and compiler repair fallback linkage.
+Current M09 status: Active under `AMB-627`. Live Linear verification on 2026-06-13 America/New_York found canonical active children `AMB-711` / `PLOS-090` through `AMB-717` / `PLOS-096`, with duplicate/canceled lineage `AMB-773` through `AMB-779` marked Duplicate/archived/canceled. `AMB-711` is Done after pushed commit `dd264367f3a0284218e39f293bcc9be65dff5c12`. `AMB-712` is Done after pushed commit `60d8fa83aeec106936a712f29bf19cf58ef15dd4`. `AMB-713` is In Progress and owns the Step context-fit validator, context fixtures, field-level context blocking-code linkage, and compiler repair fallback linkage.
 
 Required before Green:
 
