@@ -29,13 +29,13 @@ last_closed_train:
   label: "M02.T03"
   linear_id: "AMB-1129"
   title: "Multi-Path Lattice"
-  status: "Source commit 9f454beb0f6df132a2c8f700496986f2f07ca3e7 pushed to main and remote verified; closeout metadata commit pending"
+  status: "Source commit 9f454beb0f6df132a2c8f700496986f2f07ca3e7 and closeout metadata commit 98fdd4410d56f00935076883b9a1da843020477a pushed to main, remote verified, and AMB-1129 marked Done in Linear"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1129 closeout metadata, reconcile AMB-1129 in Linear, then refresh live Linear and execute AMB-1130 / M02.T04."
+  action: "Refresh live Linear and execute AMB-1130 / M02.T04."
 latest_local_scope:
   changed_path_policy: "AMB-1129 touched owned Multi-Path Lattice runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1129 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M02"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1129-multi-path-lattice.md"
 latest_validation:
-  status: "AMB-1129 focused implementation validation Green; source commit pushed to main; closeout metadata and Linear Done reconciliation pending"
+  status: "AMB-1129 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; final reconciliation metadata records Linear closeout IDs and remote-verified metadata commit"
   logs:
     - "build/reports/xcode/AMB-1129-MultiPathLatticeTests-rerun.xcresult"
     - "build/reports/xcode/AMB-1129-AdjacentPathRuntimeTests.xcresult"
@@ -77,7 +77,7 @@ latest_validation:
 - `AMB-1113` / `M02.T00`: `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` source implementation; `04984e84ed9ca33f8834bfcfff1ba9969a765ae4` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`f390c8a8-fd1e-422d-a4d6-b11e34ed7aad`)
 - `AMB-1111` / `M02.T01`: `3896c8af1909389f389aca1d5e8478c2f2059660` source implementation; `78744d2643b18c80e5a02061dda6e652dedd7bc8` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`c54f3f99-072f-4c18-9241-f79ae373084c`)
 - `AMB-1112` / `M02.T02`: `26a83b0f4b91b34d14620ee71f24e43cc7d01818` source implementation; `4ae6ea185045e18f8c75437fa8e2f6db592abcb2` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`9fba7ade-0861-48b5-9450-243968cc415d`)
-- `AMB-1129` / `M02.T03`: `9f454beb0f6df132a2c8f700496986f2f07ca3e7` source implementation pushed to `main` and remote verified; closeout metadata pending
+- `AMB-1129` / `M02.T03`: `9f454beb0f6df132a2c8f700496986f2f07ca3e7` source implementation; `98fdd4410d56f00935076883b9a1da843020477a` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`ba6e6d23-7555-4bc1-a482-ebdd88b35a46`)
 
 ## Non-Claims
 

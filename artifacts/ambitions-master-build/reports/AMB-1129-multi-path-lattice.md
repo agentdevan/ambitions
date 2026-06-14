@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1113`
 
 Green/Yellow/Red status: Green for the focused AMB-1129 Multi-Path Lattice selectable-path runtime scope
 
-Pushed to main: yes; source implementation commit `9f454beb0f6df132a2c8f700496986f2f07ca3e7` pushed and remote verified; closeout metadata commit pending at initial report creation
+Pushed to main: yes; source implementation commit `9f454beb0f6df132a2c8f700496986f2f07ca3e7` and closeout metadata commit `98fdd4410d56f00935076883b9a1da843020477a` pushed and remote verified
 
-Push hash: source implementation commit `9f454beb0f6df132a2c8f700496986f2f07ca3e7`
+Push hash: source implementation commit `9f454beb0f6df132a2c8f700496986f2f07ca3e7`; closeout metadata commit `98fdd4410d56f00935076883b9a1da843020477a`
 
 App source changed: yes
 
@@ -109,7 +109,9 @@ Linear reconciliation:
 - AMB-1129 pre-source-commit project status update: `8f6675d3-19c5-401a-b77a-521cb4644374`.
 - AMB-1129 source-push issue comment: `91b6fb2f-eca5-4bc8-ad30-83bc7d69bdd3`.
 - AMB-1129 source-push project status update: `4a26b518-6394-4503-8135-c90e45aedbe0`.
-- AMB-1129 final closeout issue comment: pending after metadata push.
-- AMB-1129 final project status update: pending after metadata push.
+- AMB-1129 final closeout issue comment: `948dcd39-d8f5-4577-8033-5d104e67f9c2`.
+- AMB-1129 final project closeout comment: `69deae07-cc89-4c64-bfc1-84349ed6b06c`.
+- AMB-1129 final project status update: `ba6e6d23-7555-4bc1-a482-ebdd88b35a46`.
+- AMB-1129 moved to Done in Linear on 2026-06-14 after remote main verification.
 
 Next train: `AMB-1130` / `M02.T04`
