@@ -5,6 +5,7 @@ ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd -P)"
 cd "$ROOT"
 
 SERVER_NAME="xcodebuildmcp"
+NATIVE_XCODE_SERVER_NAME="xcode"
 TOOL_TIMEOUT_SECONDS="${XCODEBUILDMCP_TOOL_TIMEOUT_SECONDS:-1800}"
 STARTUP_TIMEOUT_SECONDS="${XCODEBUILDMCP_STARTUP_TIMEOUT_SECONDS:-60}"
 
@@ -26,6 +27,15 @@ sessionDefaults:
     simulatorName: iPhone 17
     bundleId: com.ambitions.ios
 YAML
+fi
+
+if xcrun --find mcpbridge >/dev/null 2>&1; then
+  if codex mcp list 2>/dev/null | grep -q "^${NATIVE_XCODE_SERVER_NAME}\b"; then
+    codex mcp remove "$NATIVE_XCODE_SERVER_NAME" >/dev/null 2>&1 || true
+  fi
+  codex mcp add "$NATIVE_XCODE_SERVER_NAME" -- xcrun mcpbridge
+else
+  echo "YELLOW: Apple-native Xcode MCP bridge not found via xcrun mcpbridge; keeping xcodebuildmcp fallback." >&2
 fi
 
 # Prefer a local, repo-stable MCP registration over a volatile global npx entry.
@@ -53,5 +63,6 @@ JSON
 
 codex mcp list
 
-echo "GREEN: xcodebuildmcp registered. Tool timeout policy recorded at .xcodebuildmcp/codex-timeout-policy.json"
+echo "GREEN: Xcode/Codex bridge registration completed. Native Xcode MCP is registered when xcrun mcpbridge is available; xcodebuildmcp fallback is registered."
+echo "GREEN: xcodebuildmcp timeout policy recorded at .xcodebuildmcp/codex-timeout-policy.json"
 echo "NOTE: If Codex still enforces a hard 120-second MCP tool timeout, use ambitionsProof.run_named_validation with xcode_validate_focused_test for focused XCTest proof."

@@ -17,18 +17,24 @@ xcodebuild -version
 xcode-select -p
 ```
 
-If local command output reports a different Xcode version, command output wins for the current run and the closeout must report the mismatch. Do not assume Xcode 27 is installed. Do not claim native Xcode 27 agent skills are available unless local commands prove them.
+If local command output reports a different Xcode version, command output wins for the current run and the closeout must report the mismatch. On the current machine after the Xcode update, observed proof output may be newer than the owner-declared baseline, for example Xcode 26.6. Do not assume Xcode 27 is installed. Do not claim native Xcode 27 agent skills are available unless local commands prove them.
 
 ## Architecture
 
 Preferred execution path:
 
-1. Apple-native Xcode MCP tools when they are visible to Codex and local command output proves availability.
+1. Apple-native Xcode MCP tools when they are visible to Codex and local command output proves availability. The expected Codex registration is `xcode -> xcrun mcpbridge`.
 2. Existing `xcodebuildmcp` for build, test, simulator launch, screenshot, hierarchy, and UI interaction fallback.
 3. Repo scripts for deterministic proof, including `scripts/ambitions-xcode-validate.sh`, `scripts/codex/xcode-codex-bridge-doctor.sh`, `scripts/codex/scan-sdk27-swiftui-usage.sh`, and relevant Goal Mode program gates.
 4. Manual owner/device proof only where automation cannot prove the claim.
 
-Xcode MCP is enabled by the owner in Xcode settings, but local proof must still confirm which tools Codex can actually see through `codex mcp list`, `xcrun --find agent`, and `xcrun agent skills export`.
+Xcode MCP is enabled by the owner in Xcode settings, but local proof must still confirm which tools Codex can actually see through `codex mcp list`, `xcrun --find mcpbridge`, `xcrun --find agent`, and `xcrun agent skills export`.
+
+Apple-native Xcode MCP bridge availability and Xcode agent skills are separate claims:
+
+- MCP bridge available: `codex mcp list` shows `xcode` with command `xcrun` and args `mcpbridge`.
+- Agent CLI available: `xcrun --find agent` resolves a local tool path.
+- Agent skills available: `xcrun agent skills export` exports actual skill bundles. If it reports `No skills available to export`, do not claim native Xcode agent skills exist.
 
 `xcodebuildmcp` remains the configured fallback bridge. It is not replaced by Apple-native Xcode MCP, and it should remain available for simulator workflow, build/test proof, and UI inspection where native MCP is unavailable.
 
@@ -119,6 +125,7 @@ Bridge closeouts must report:
 - selected developer directory
 - whether Apple-native Xcode MCP was visible to Codex
 - whether Xcode agent skill export worked
+- whether Xcode agent skills were actually exported
 - whether `xcodebuildmcp` fallback remains configured
 - validation commands and results
 - whether SDK 27 APIs were found

@@ -32,7 +32,7 @@ Active IA remains `Today / Goals / Time / Motion / You`; `Capture` is global, no
 3. Use Ambitions deterministic scripts for proof, especially `scripts/ambitions-xcode-validate.sh`, `scripts/codex/xcode-codex-bridge-doctor.sh`, and focused program gates.
 4. Use manual owner/device proof only where local automation cannot prove the claim.
 
-Never claim native Xcode 27 agent skills are available unless local commands prove them. Under an Xcode 26.x proof compiler, treat Xcode 27 material as future-readiness guidance only.
+Never claim native Xcode 27 agent skills are available unless local commands prove them. Under an Xcode 26.x proof compiler, treat Xcode 27 material as future-readiness guidance only. Apple-native Xcode MCP visibility means Codex can see an `xcode` MCP server backed by `xcrun mcpbridge`; Xcode agent skill availability is a separate claim that requires `xcrun agent skills export` to return actual exported skills.
 
 ## Xcode MCP Detection
 
@@ -44,11 +44,13 @@ git rev-parse HEAD
 xcodebuild -version
 xcode-select -p
 codex mcp list
+xcrun --find mcpbridge || true
+xcrun mcpbridge --help || true
 xcrun --find agent || true
 xcrun agent skills export || true
 ```
 
-If `codex mcp list`, `xcrun --find agent`, or `xcrun agent skills export` fails, record the exact failure. That is Yellow when `xcodebuildmcp` and repo validation scripts are still configured; it is not proof that Xcode 27 agent skills exist.
+If `codex mcp list` fails, repair the local Codex config only when explicitly authorized and then retry. If `xcrun --find mcpbridge` succeeds and `codex mcp list` shows `xcode -> xcrun mcpbridge`, Apple-native Xcode MCP is configured for Codex. If `xcrun agent skills export` succeeds but reports no skills, report that as no native Xcode agent skills available, not as a failure of the MCP bridge. If native Xcode MCP is unavailable, close Yellow when `xcodebuildmcp` and repo validation scripts are still configured.
 
 ## Fallback Validation
 
@@ -129,6 +131,7 @@ Closeouts using this skill must report:
 - baseline and final commit SHA when committed
 - whether Apple-native Xcode MCP was detected by Codex
 - whether Xcode agent skill export worked
+- whether Xcode agent skills were actually exported
 - whether `xcodebuildmcp` fallback was used or remains configured
 - whether simulator/device proof was captured
 - whether SDK 27 APIs were avoided
@@ -136,4 +139,4 @@ Closeouts using this skill must report:
 - Green/Yellow/Red status
 - proof boundaries and non-claims
 
-Green requires scoped completion, validation appropriate to the docs/tooling or source scope, no SDK 27 API drift, and no proof overclaim. Yellow is appropriate when Apple-native Xcode MCP or agent skills are not visible but the fallback bridge remains configured, or when manual simulator/device proof is pending. Red requires missing Xcode, missing repo validation bridge, forbidden source/release/security changes, SDK 27 API source usage under Xcode 26.x, or false readiness claims.
+Green requires scoped completion, validation appropriate to the docs/tooling or source scope, Apple-native Xcode MCP configured or `xcodebuildmcp` fallback present as the stated bridge path, no SDK 27 API drift, and no proof overclaim. Yellow is appropriate when Apple-native Xcode MCP is unavailable but the fallback bridge remains configured, when Xcode agent skills export no skills, or when manual simulator/device proof is pending. Red requires missing Xcode, missing repo validation bridge, forbidden source/release/security changes, SDK 27 API source usage under Xcode 26.x, or false readiness claims.

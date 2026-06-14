@@ -57,12 +57,26 @@ fi
 
 section "Codex MCP"
 codex_mcp_visible=0
+native_xcode_mcp_visible=0
+xcodebuildmcp_mcp_visible=0
 if command -v codex >/dev/null 2>&1; then
   codex_mcp_output="$(codex mcp list 2>&1)"
   codex_mcp_status=$?
   printf '%s\n' "$codex_mcp_output"
   if [[ "$codex_mcp_status" -eq 0 ]]; then
     codex_mcp_visible=1
+    if printf '%s\n' "$codex_mcp_output" | awk '$1 == "xcode" && $2 == "xcrun" && $3 == "mcpbridge" { found=1 } END { exit(found ? 0 : 1) }'; then
+      native_xcode_mcp_visible=1
+      printf 'GREEN: Codex MCP server xcode -> xcrun mcpbridge is configured.\n'
+    else
+      mark_yellow "Codex MCP server xcode -> xcrun mcpbridge is not configured"
+    fi
+    if printf '%s\n' "$codex_mcp_output" | awk '$1 == "xcodebuildmcp" { found=1 } END { exit(found ? 0 : 1) }'; then
+      xcodebuildmcp_mcp_visible=1
+      printf 'GREEN: Codex MCP server xcodebuildmcp fallback is configured.\n'
+    else
+      mark_yellow "Codex MCP server xcodebuildmcp fallback is not visible"
+    fi
   else
     mark_yellow "codex mcp list failed"
   fi
@@ -82,15 +96,32 @@ else
   mark_yellow "xcrun agent CLI is not visible"
 fi
 
+section "Xcode MCP Bridge CLI"
+mcpbridge_visible=0
+mcpbridge_find_output="$(xcrun --find mcpbridge 2>&1)"
+mcpbridge_find_status=$?
+printf '%s\n' "$mcpbridge_find_output"
+if [[ "$mcpbridge_find_status" -eq 0 ]]; then
+  mcpbridge_visible=1
+  xcrun mcpbridge --help 2>&1 | sed -n '1,80p'
+else
+  mark_yellow "xcrun mcpbridge is not visible"
+fi
+
 section "Xcode Agent Skill Export"
-agent_export_output="$(xcrun agent skills export 2>&1)"
+agent_export_dir="$(mktemp -d "${TMPDIR:-/tmp}/ambitions-xcode-skills.XXXXXX")"
+agent_export_output="$(xcrun agent skills export --output-dir "$agent_export_dir" --replace-existing 2>&1)"
 agent_export_status=$?
 printf '%s\n' "$agent_export_output"
 if [[ "$agent_export_status" -eq 0 ]]; then
   agent_skill_export_visible=1
+  if printf '%s\n' "$agent_export_output" | grep -qi "No skills available"; then
+    mark_yellow "xcrun agent skills export worked but no native skills are available to export"
+  fi
 else
   mark_yellow "xcrun agent skills export is not visible"
 fi
+rm -rf "$agent_export_dir"
 
 section "xcodebuildmcp Fallback"
 xcodebuildmcp_fallback=0
@@ -175,13 +206,16 @@ if [[ "$red" -eq 1 ]]; then
   exit 1
 fi
 
-if [[ "$agent_cli_visible" -eq 1 && "$agent_skill_export_visible" -eq 1 && "$validation_bridge" -eq 1 ]]; then
-  printf 'GREEN: Xcode is present, Apple-native Xcode agent surface is visible, and repo validation scripts are present.\n'
+if [[ "$native_xcode_mcp_visible" -eq 1 && "$mcpbridge_visible" -eq 1 && "$validation_bridge" -eq 1 ]]; then
+  printf 'GREEN: Xcode is present, Apple-native Xcode MCP bridge is configured, and repo validation scripts are present.\n'
+  if [[ "$agent_skill_export_visible" -eq 1 ]]; then
+    printf 'NOTE: Xcode agent skill export command executed; see output above for whether any skills were available.\n'
+  fi
   exit 0
 fi
 
 if [[ "$xcodebuildmcp_fallback" -eq 1 && "$validation_bridge" -eq 1 ]]; then
-  printf 'YELLOW: Apple-native Xcode MCP/agent skill export is not fully visible, but xcodebuildmcp fallback and repo validation scripts are present.\n'
+  printf 'YELLOW: Apple-native Xcode MCP bridge is not fully visible, but xcodebuildmcp fallback and repo validation scripts are present.\n'
   exit 0
 fi
 
