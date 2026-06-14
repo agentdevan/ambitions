@@ -87,6 +87,7 @@ def runtime_systems() -> list[RuntimeSystem]:
     app_container = "Native/Ambitions/App/AppContainer.swift"
     app_tests = "Native/AmbitionsTests/App/CoreSurfaceIntegrationScenarioTests.swift"
     boundary_tests = "Native/AmbitionsTests/Runtime/AmbitionsRuntimeBoundaryTests.swift"
+    root_environment = "Native/Ambitions/App/AppEnvironment.swift"
 
     return [
         RuntimeSystem(
@@ -97,7 +98,7 @@ def runtime_systems() -> list[RuntimeSystem]:
                 EvidenceCheck("factory creates kernel", factory, ("let privateLifeRuntimeKernel = PrivateLifeRuntimeKernel()", "privateLifeRuntimeKernel: privateLifeRuntimeKernel")),
                 EvidenceCheck("runtime stores kernel", contracts, ("let privateLifeRuntimeKernel: PrivateLifeRuntimeKernel", "self.privateLifeRuntimeKernel = privateLifeRuntimeKernel")),
             ),
-            ui=(),
+            ui=(EvidenceCheck("top-level environment exposes runtime capability", root_environment, ("appRuntimeCapability", "container.runtimeCapability"), "all"),),
             tests=(EvidenceCheck("runtime boundary test observes kernel", boundary_tests, ("runtime.privateLifeRuntimeKernel.boundary", "isLocalOnly")),),
         ),
         RuntimeSystem(
