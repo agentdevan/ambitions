@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "plos",
-  "head": "17bb0d2670ad24a17a09dcec5162fc624ac3393a",
+  "head": "c9a120ec25a12c9c28f84d8e8510fe845b50b662",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -11,7 +11,7 @@
       "lines": [
         "",
         "- Claim: AMB-706 defines the documentation/control-plane Location context adapter usefulness and sensitive permission/value contract, including manual/coarse launch baseline, no CoreLocation prompt by default, future coarse local place/travel-friction gates, `PermissionValueProof` linkage, `PermissionLedger` and revocation linkage, sensitivity classes, precision policy, context-to-path influence matrix, local/iCloud/R2 privacy boundaries, fixture obligations, and no-tracking/no-surveillance/no-high-risk-approval claim boundaries for M08 native context work.",
-        "- Commit: pending before AMB-706 closeout commit.",
+        "- Commit: `c9a120ec25a12c9c28f84d8e8510fe845b50b662` pushed to `main`; AMB-706 moved to Done in Linear after evidence comment.",
         "- Touched files: `artifacts/personal-life-os/native-context/LOCATION_CONTEXT_ADAPTER_CONTRACT.md`; `artifacts/personal-life-os/native-context/LOCATION_CONTEXT_ADAPTER_CONTRACT.json`; `artifacts/personal-life-os/reports/PLOS-084-location-context-adapter.md`; `artifacts/personal-life-os/validation/AMB-706-location-context-source-search-log.txt`; `artifacts/personal-life-os/validation/AMB-706-required-location-context-search-log.txt`; `artifacts/personal-life-os/validation/AMB-706-location-context-source-search-summary.txt`; `artifacts/plos-runtime/reviewer-output/AMB-706-location-context-closeout-review.md`; PLOS run-state/control-plane artifacts; proof ledger/index artifacts.",
         "- Command: live Linear issue fetch and status update for `AMB-706`; live Linear project/M08 child resolution; `git status --short --branch`; `git pull --ff-only`; PLOS preflight; M08 phase gate; focused Location context source search; issue-required Location/context adapter/permission search; bounded CoreLocation absence search; JSON parse; PLOS readiness validators; Linear closeout validator; proof-index generation.",
         "- Exit code: validation exits are recorded in the AMB-706 report after validation.",
