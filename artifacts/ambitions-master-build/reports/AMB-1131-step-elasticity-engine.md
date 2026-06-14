@@ -10,11 +10,11 @@ Train label: `M02.T05`
 
 Parent or umbrella issue: `AMB-1113`
 
-Green/Yellow/Red status: Green for the focused AMB-1131 Step Elasticity Engine runtime scope; source commit is pushed and remote verified; final Linear closeout metadata commit is pending.
+Green/Yellow/Red status: Green for the focused AMB-1131 Step Elasticity Engine runtime scope; source and closeout metadata commits are pushed and remote verified; final Linear closeout is posted.
 
-Pushed to main: yes; source implementation commit `44bda601b6fba878b4192d3de6458eba13a856d8` pushed and remote verified.
+Pushed to main: yes; source implementation commit `44bda601b6fba878b4192d3de6458eba13a856d8` and closeout metadata commit `ae2c391733b4cd221e239506ded0defbfc65dfaa` pushed and remote verified.
 
-Push hash: source implementation commit `44bda601b6fba878b4192d3de6458eba13a856d8`
+Push hash: source implementation commit `44bda601b6fba878b4192d3de6458eba13a856d8`; closeout metadata commit `ae2c391733b4cd221e239506ded0defbfc65dfaa`
 
 App source changed: yes
 
@@ -111,9 +111,9 @@ Linear reconciliation:
 - AMB-1131 guard/scanner project status update: `5570d5a5-1811-4530-9432-a6c63fee25f3`.
 - AMB-1131 source-push issue comment: `a50836c0-99f4-4d72-a3a3-605d46eaeb26`.
 - AMB-1131 source-push project status update: `c7c03a7b-633c-43b0-a808-56341450c33c`.
-- AMB-1131 final closeout issue comment: pending.
-- AMB-1131 final project closeout comment: pending.
-- AMB-1131 final project status update: pending.
+- AMB-1131 final closeout issue comment: `8e1d4569-1cc5-4771-9f82-08ab63badfa5`.
+- AMB-1131 final project closeout comment: `db820031-a5ef-43bf-bbce-9a16a146bb14`.
+- AMB-1131 final project status update: `dc641982-ec5b-4568-96f1-de60cb925059`.
 - AMB-1131 moved to Done in Linear on 2026-06-14 after source commit remote main verification.
 
 Next train: `AMB-1132` / `M02.T06`

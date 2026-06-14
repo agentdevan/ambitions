@@ -29,13 +29,13 @@ last_closed_train:
   label: "M02.T05"
   linear_id: "AMB-1131"
   title: "Step Elasticity Engine"
-  status: "Source commit 44bda601b6fba878b4192d3de6458eba13a856d8 pushed to main, remote verified, and AMB-1131 marked Done in Linear; final metadata reconciliation pending"
+  status: "Source commit 44bda601b6fba878b4192d3de6458eba13a856d8 and closeout metadata commit ae2c391733b4cd221e239506ded0defbfc65dfaa pushed to main, remote verified, AMB-1131 marked Done in Linear, and project activity updated"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1131 metadata reconciliation, post final Linear closeout activity, then refresh live Linear and execute AMB-1132 / M02.T06."
+  action: "Refresh live Linear and execute AMB-1132 / M02.T06."
 latest_local_scope:
   changed_path_policy: "AMB-1131 touched owned Step Elasticity Engine runtime source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1131 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M02"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1131-step-elasticity-engine.md"
 latest_validation:
-  status: "AMB-1131 focused implementation validation Green; source commit pushed to main, remote verified, issue moved Done in Linear; final metadata reconciliation pending"
+  status: "AMB-1131 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; final reconciliation metadata records Linear closeout IDs"
   logs:
     - "build/reports/xcode/AMB-1131-StepElasticityEngineTests.xcresult"
     - "build/reports/xcode/AMB-1131-AdjacentElasticityRuntimeTests.xcresult"
@@ -79,7 +79,7 @@ latest_validation:
 - `AMB-1112` / `M02.T02`: `26a83b0f4b91b34d14620ee71f24e43cc7d01818` source implementation; `4ae6ea185045e18f8c75437fa8e2f6db592abcb2` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`9fba7ade-0861-48b5-9450-243968cc415d`)
 - `AMB-1129` / `M02.T03`: `9f454beb0f6df132a2c8f700496986f2f07ca3e7` source implementation; `98fdd4410d56f00935076883b9a1da843020477a` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`ba6e6d23-7555-4bc1-a482-ebdd88b35a46`)
 - `AMB-1130` / `M02.T04`: `b335815da8f92feafc069b082f1390015282b822` source implementation; `64fe6dea24d174fb002f13104b5c4fa06329cde8` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`0c235c05-da3e-445d-a015-6d81ce04d6a0`)
-- `AMB-1131` / `M02.T05`: `44bda601b6fba878b4192d3de6458eba13a856d8` source implementation pushed to `main`, remote verified, marked Done in Linear; closeout metadata reconciliation pending
+- `AMB-1131` / `M02.T05`: `44bda601b6fba878b4192d3de6458eba13a856d8` source implementation; `ae2c391733b4cd221e239506ded0defbfc65dfaa` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`dc641982-ec5b-4568-96f1-de60cb925059`)
 
 ## Non-Claims
 
