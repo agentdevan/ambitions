@@ -16,7 +16,7 @@ This contract is a downstream blocking contract for M09 children and for AMB-617
 
 | Consumer | Required use |
 |---|---|
-| AMB-712 / PLOS-091 | Extend the generic Step blocked-list scanner without weakening this contract. |
+| AMB-712 / PLOS-091 | Extend the generic Step blocked-list scanner without weakening this contract. Scanner authority: `artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.md`. |
 | AMB-713 / PLOS-092 | Fill in context-fit validation over time, energy, resources, location, deadline, and dependency fit. |
 | AMB-714 / PLOS-093 | Fill in source/proof validation over authority state, trace, proof primitive, runtime eligibility, and stale/revoked blocks. |
 | AMB-715 / PLOS-094 | Fill in accessibility and VoiceOver validation. |
@@ -92,6 +92,14 @@ The baseline blocked-list is intentionally conservative and must not be weakened
 
 Downstream scanner work may add stemming, semantic similarity, phrase windows, and locale support, but these exact phrases remain Red when used as candidate Step copy.
 
+AMB-712 extends this baseline through:
+
+- `artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.md`
+- `artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.json`
+- `artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER_FIXTURES.json`
+
+The AMB-712 scanner adds case-insensitive, whitespace-normalized, punctuation-tolerant exact matching; vague verb plus generic object detection; generic progress-language blocking; and StepQualityVerdict repair linkage.
+
 ## Acceptance Fixture Requirements
 
 Accepted fixtures must prove:
@@ -130,6 +138,7 @@ The validator loads the JSON contract and fixture matrix, computes deterministic
 - an accepted fixture is rejected
 - a rejected fixture passes
 - an expected blocking code is missing
+- the AMB-712 scanner fixtures are missing or fail
 - a generic Step passes
 - a beginner/expert mismatch passes
 - a stale/revoked/blocked source passes

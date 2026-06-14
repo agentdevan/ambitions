@@ -13,6 +13,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 CONTRACT_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json"
 FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json"
+SCANNER_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.json"
+SCANNER_FIXTURES_PATH = ROOT / "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER_FIXTURES.json"
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -41,6 +43,12 @@ def normalize_text(value: str) -> str:
     return re.sub(r"\s+", " ", value.strip().lower())
 
 
+def normalize_for_scan(value: str) -> str:
+    lowered = value.strip().lower()
+    without_punctuation = re.sub(r"[^a-z0-9\s]", " ", lowered)
+    return re.sub(r"\s+", " ", without_punctuation).strip()
+
+
 def contains_blocked_phrase(step_text: str, phrases: list[str]) -> bool:
     normalized = normalize_text(step_text)
     for phrase in phrases:
@@ -48,6 +56,55 @@ def contains_blocked_phrase(step_text: str, phrases: list[str]) -> bool:
         if re.search(phrase_pattern, normalized):
             return True
     return False
+
+
+def scanner_exact_phrase(step_text: str, phrases: list[str]) -> str | None:
+    normalized = normalize_for_scan(step_text)
+    for phrase in phrases:
+        normalized_phrase = normalize_for_scan(phrase)
+        pattern = r"\b" + re.escape(normalized_phrase) + r"\b"
+        if re.search(pattern, normalized):
+            return phrase
+    return None
+
+
+def has_generic_verb_object(step_text: str, scanner: dict[str, Any]) -> bool:
+    normalized = normalize_for_scan(step_text)
+    rules = scanner.get("genericVerbObjectRules", {})
+    verbs = [normalize_for_scan(value) for value in rules.get("verbs", [])]
+    objects = [normalize_for_scan(value) for value in rules.get("genericObjects", [])]
+    for verb in verbs:
+        for generic_object in objects:
+            if re.search(r"\b" + re.escape(f"{verb} {generic_object}") + r"\b", normalized):
+                return True
+        if normalized == verb and verb == "continue":
+            return True
+    return False
+
+
+def has_generic_progress_language(step_text: str, scanner: dict[str, Any]) -> bool:
+    normalized = normalize_for_scan(step_text)
+    concrete_signals = scanner.get("concreteObjectSignals", [])
+    if any(re.search(r"\b" + re.escape(normalize_for_scan(signal)) + r"\b", normalized) for signal in concrete_signals):
+        return False
+    for term in scanner.get("genericProgressTerms", []):
+        if re.search(r"\b" + re.escape(normalize_for_scan(term)) + r"\b", normalized):
+            return True
+    return False
+
+
+def evaluate_generic_scanner(scanner: dict[str, Any], step_text: str) -> tuple[list[str], str | None]:
+    codes: list[str] = []
+    matched_phrase = scanner_exact_phrase(step_text, scanner.get("exactBlockedPhrases", []))
+    if matched_phrase:
+        codes.append("generic_step")
+    if has_generic_verb_object(step_text, scanner):
+        codes.append("generic_pattern")
+    if has_generic_progress_language(step_text, scanner):
+        codes.append("generic_progress_language")
+    if codes:
+        codes.append("generic_repair_required")
+    return sorted(set(codes)), matched_phrase
 
 
 def validate_contract_shape(contract: dict[str, Any]) -> list[str]:
@@ -68,6 +125,42 @@ def validate_contract_shape(contract: dict[str, Any]) -> list[str]:
     if not Path(FIXTURES_PATH).exists():
         errors.append("fixture matrix is missing")
 
+    scanner = contract.get("genericScanner")
+    if not isinstance(scanner, dict):
+        errors.append("contract missing genericScanner linkage")
+    else:
+        for key in ("linearIssue", "schema", "fixtures", "requiredOutputs"):
+            if not scanner.get(key):
+                errors.append(f"contract genericScanner missing {key}")
+
+    return errors
+
+
+def validate_scanner_shape(scanner: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    required_keys = (
+        "inputModel",
+        "verdictModel",
+        "scannerOutputs",
+        "exactBlockedPhrases",
+        "genericVerbObjectRules",
+        "genericProgressTerms",
+        "repairLinkage",
+    )
+    for key in required_keys:
+        if not scanner.get(key):
+            errors.append(f"scanner missing {key}")
+    if scanner.get("inputModel") != "StepQualityInput":
+        errors.append("scanner inputModel must be StepQualityInput")
+    if scanner.get("verdictModel") != "StepQualityVerdict":
+        errors.append("scanner verdictModel must be StepQualityVerdict")
+    required_outputs = {"generic_step", "generic_pattern", "generic_progress_language", "generic_repair_required"}
+    missing_outputs = sorted(required_outputs.difference(scanner.get("scannerOutputs", [])))
+    if missing_outputs:
+        errors.append(f"scanner missing outputs {missing_outputs}")
+    repair = scanner.get("repairLinkage", {})
+    if not isinstance(repair, dict) or repair.get("requiredOwner") != "step-graph-compiler" or not repair.get("fallbacks"):
+        errors.append("scanner repairLinkage must name Step Graph Compiler and safe fallbacks")
     return errors
 
 
@@ -229,13 +322,62 @@ def validate_fixtures(contract: dict[str, Any], fixtures_packet: dict[str, Any])
     return errors
 
 
+def validate_scanner_fixtures(scanner: dict[str, Any], fixtures_packet: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    fixtures = fixtures_packet.get("fixtures")
+    if not isinstance(fixtures, list) or not fixtures:
+        return ["scanner fixture matrix has no fixtures"]
+
+    accepted_seen = False
+    rejected_codes_seen: set[str] = set()
+
+    for fixture in fixtures:
+        fixture_id = fixture.get("id", "<missing-id>")
+        step_text = str(fixture.get("stepText", ""))
+        codes, matched_phrase = evaluate_generic_scanner(scanner, step_text)
+        actual_decision = "accept" if not codes else "reject"
+        expected = fixture.get("expectedDecision")
+
+        if expected == "accept":
+            accepted_seen = True
+            if actual_decision != "accept":
+                errors.append(f"{fixture_id}: expected scanner accept but got reject codes={codes}")
+        elif expected == "reject":
+            if actual_decision != "reject":
+                errors.append(f"{fixture_id}: expected scanner reject but got accept")
+            expected_codes = set(fixture.get("expectedScannerCodes", []))
+            missing_codes = sorted(expected_codes.difference(codes))
+            if missing_codes:
+                errors.append(f"{fixture_id}: missing expected scanner codes {missing_codes}; actual={codes}")
+            expected_phrase = fixture.get("expectedPhrase")
+            if expected_phrase and normalize_for_scan(expected_phrase) != normalize_for_scan(matched_phrase or ""):
+                errors.append(f"{fixture_id}: expected matched phrase {expected_phrase!r} but got {matched_phrase!r}")
+            rejected_codes_seen.update(expected_codes)
+        else:
+            errors.append(f"{fixture_id}: expectedDecision must be accept or reject")
+
+    required_red_paths = {"generic_step", "generic_pattern", "generic_progress_language", "generic_repair_required"}
+    missing_red_paths = sorted(required_red_paths.difference(rejected_codes_seen))
+    if missing_red_paths:
+        errors.append(f"scanner fixture matrix missing required rejected paths: {missing_red_paths}")
+
+    if not accepted_seen:
+        errors.append("scanner fixture matrix has no accepted fixture")
+
+    return errors
+
+
 def main() -> int:
     contract = load_json(CONTRACT_PATH)
     fixtures = load_json(FIXTURES_PATH)
+    scanner = load_json(SCANNER_PATH)
+    scanner_fixtures = load_json(SCANNER_FIXTURES_PATH)
 
     errors = []
     errors.extend(validate_contract_shape(contract))
+    errors.extend(validate_scanner_shape(scanner))
     errors.extend(validate_fixtures(contract, fixtures))
+    errors.extend(validate_scanner_fixtures(scanner, scanner_fixtures))
 
     if errors:
         print("FAIL Step Quality Firewall validator")
@@ -246,7 +388,10 @@ def main() -> int:
     print("PASS Step Quality Firewall validator")
     print(f"contract={CONTRACT_PATH.relative_to(ROOT)}")
     print(f"fixtures={FIXTURES_PATH.relative_to(ROOT)}")
+    print(f"scanner={SCANNER_PATH.relative_to(ROOT)}")
+    print(f"scanner_fixtures={SCANNER_FIXTURES_PATH.relative_to(ROOT)}")
     print("models=StepQualityInput, StepQualityVerdict")
+    print("generic_scanner=runnable")
     print("m10_dependency=runnable")
     return 0
 

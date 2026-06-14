@@ -1,0 +1,122 @@
+Native/Ambitions/Runtime/SourceAtlasStepCandidateFieldBridge.swift:4:    private let generator = StepCandidateFieldGenerator()
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:3:struct StepCandidateFieldGenerator: Sendable {
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:106:private extension StepCandidateFieldGenerator {
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:144:        rejectionHistory: [StepCandidateRejectionRecord]
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:178:        rejectionHistory: [StepCandidateRejectionRecord]
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:283:        rejectionHistory: [StepCandidateRejectionRecord]
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:284:    ) -> StepCandidateRejectionRecord? {
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:308:        record: StepCandidateRejectionRecord?
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:966:    ) -> CandidateValidity {
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:1026:        validity: CandidateValidity,
+Native/Ambitions/Runtime/StepCandidateFieldGenerator.swift:1052:        validity: CandidateValidity,
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:11:    case genericText = "generic_text"
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:164:        return .genericText
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:185:        case .genericText:
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:225:            case .genericText:
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:257:        case .genericText:
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:276:        case .genericText:
+Native/Ambitions/Domain/SourceAtlasDocumentTypeClassifierModels.swift:305:        case .genericText:
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift:37:    case genericPriorityOnly = "generic_priority_only"
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift:204:            issues.contains(.genericPriorityOnly) {
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift:405:        case .genericPriorityOnly:
+Native/Ambitions/Domain/AmbitionsOSLivingDreamTodayBridgeModels.swift:406:            return .genericPriorityOnly
+Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:40:    case genericDashboardDrift = "generic_dashboard_drift"
+Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:518:            issues.insert(.genericDashboardDrift)
+Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift:46:    case genericPriorityOnly = "generic_priority_only"
+Native/Ambitions/Domain/AmbitionsOSRecommendationStartHereModels.swift:334:            issues.insert(.genericPriorityOnly)
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:33:    private let rewriter = GoalEngineStepRewriter()
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:283:                PlannerStepDraft(title: "Complete one session-sized build slice", summary: "Advance the workstream with one bounded unit rather than a vague push.", type: .actionUnit, timingType: .suggestedNext, actionability: actionability(action: "Complete one bounded slice of the active workstream for \(subject.lowercased()).", completion: "One visible slice is finished and can be shown or described in a sentence.", evidence: ["A changed artifact, checklist mark, or progress note shows the slice is done."], micro: "Set up the file, tool, or materials needed for the slice and stop there if time is low.", contextRequirements: ["Only gather materials if they are required to start the slice."]), suggestedNextAt: now),
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlanner.swift:318:            PlannerSectionDraft(title: "Checkpoints", summary: "Checkpoint language should emphasize evidence of understanding rather than vague effort.", kind: .review, steps: [
+Native/Ambitions/Domain/LifeGraphModels.swift:445:    case generic
+Native/Ambitions/Domain/LifeGraphModels.swift:519:            return .generic
+Native/Ambitions/Domain/LifeGraphModels.swift:540:        case .support, .attachment, .generic:
+Native/Ambitions/Domain/SourceAtlasBridgeReceiptReplayModels.swift:139:    let rejectedCandidateHistory: [StepCandidateRejectionRecord]
+Native/Ambitions/Domain/SourceAtlasBridgeReceiptReplayModels.swift:143:        rejectedCandidateHistory: [StepCandidateRejectionRecord] = []
+Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:26:        run(id: "exploratory-vague-goal", input: "Launch my business", context: GoalEngineOrchestrationContext(preferredPlanningStrictness: .starterFriendly, referenceNow: fixedNow)),
+Native/Ambitions/Domain/GoalEngine/GoalEngineFixtures.swift:44:        plannerFixture(id: "vague-safe-starter-plan", input: "Launch my business", context: GoalEngineOrchestrationContext(preferredPlanningStrictness: .starterFriendly, referenceNow: fixedNow)),
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlannerLinter.swift:19:    private let rewriter = GoalEngineStepRewriter()
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlannerLinter.swift:45:                    code: .vagueStep,
+Native/Ambitions/Domain/GoalEngine/GoalEnginePlannerLinter.swift:49:                    message: "Planner steps must avoid vague verbs and define an exact action.",
+Native/Ambitions/Domain/Planning/LivingPlanMergeLedger.swift:61:                    kind: .attachedCaptureToGoal, // closest match or generic
+Native/Ambitions/Domain/GoalEngine/GoalEngineContracts.swift:246:    case vagueStep = "vague_step"
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:16:enum CandidateValidity: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:174:struct StepCandidateRejectionRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:333:    var defaultValidity: CandidateValidity {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:659:    let validity: CandidateValidity
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:684:        validity: CandidateValidity,
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:811:        validity: CandidateValidity
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:997:        validity: CandidateValidity
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1033:        validity: CandidateValidity
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1269:    let rejectionHistory: [StepCandidateRejectionRecord]
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1284:        rejectionHistory: [StepCandidateRejectionRecord] = [],
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1349:    var relevantRejectionHistory: [StepCandidateRejectionRecord] {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1428:private extension CandidateValidity {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1529:        validity: CandidateValidity,
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1667:    static func validityScore(for validity: CandidateValidity) -> Double {
+Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift:1713:private extension StepCandidateRejectionRecord {
+Native/Ambitions/Domain/GoalEngine/GoalEngineAdaptationService.swift:89:                    "Replace vague language in \"\(input.selectedStep.title)\" with one observable action.",
+Native/Ambitions/Domain/GoalEngine/GoalEngineStepRewriter.swift:3:private let vagueStepPatterns: [String] = [
+Native/Ambitions/Domain/GoalEngine/GoalEngineStepRewriter.swift:13:struct GoalEngineStepRewriter {
+Native/Ambitions/Domain/GoalEngine/GoalEngineStepRewriter.swift:71:        return vagueStepPatterns.contains { pattern in
+Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift:965:                    id: "path-generic",
+Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift:990:            "path-generic"
+Native/AmbitionsTests/Domain/AmbitionsOSExperienceModelsTests.swift:79:        XCTAssertTrue(issues.contains(.genericDashboardDrift))
+Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamTodayBridgeModelsTests.swift:109:        XCTAssertTrue(issues.contains(.genericPriorityOnly))
+Native/AmbitionsTests/Domain/AmbitionsOSRecommendationStartHereModelsTests.swift:179:        XCTAssertTrue(issues.contains(.genericPriorityOnly))
+Native/AmbitionsTests/Domain/SourceAtlasDocumentTypeClassifierModelsTests.swift:52:                .genericText,
+Native/AmbitionsTests/Domain/SourceAtlasDocumentTypeClassifierModelsTests.swift:124:        XCTAssertEqual(decision.documentType, .genericText)
+Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift:398:            let rejection = StepCandidateRejectionRecord(
+Native/AmbitionsTests/GoalEngine/GoalEngineOrchestratorTests.swift:54:        let fixture = try unwrapFixture("exploratory-vague-goal")
+Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeReplayTests.swift:200:        let correctionRecord = StepCandidateRejectionRecord(
+Native/AmbitionsTests/GoalEngine/PlanningEngineV2Tests.swift:35:        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "exploratory-vague-goal"))
+Native/AmbitionsTests/GoalEngine/GoalEnginePlannerTests.swift:79:        let fixture = try XCTUnwrap(GoalEngineFixtures.plannerFixture(id: "vague-safe-starter-plan"))
+Native/AmbitionsTests/GoalEngine/GoalEnginePlannerTests.swift:115:        let vagueStep = Step(
+Native/AmbitionsTests/GoalEngine/GoalEnginePlannerTests.swift:132:        let rewritten = GoalEngineStepRewriter().rewrite(step: vagueStep, goal: draft)
+Native/AmbitionsTests/GoalEngine/GoalEnginePlannerTests.swift:133:        XCTAssertFalse(GoalEngineStepRewriter().isVague(step: rewritten))
+Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift:171:        let vagueResponse = try await service.createGoal(
+Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift:177:        let vagueDraftID = try XCTUnwrap(vagueResponse.target.draftID)
+Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift:179:        let storedVagueDraft = try await repositories.drafts.draft(id: vagueDraftID)
+Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift:181:        let vagueDraft = try XCTUnwrap(storedVagueDraft)
+Native/AmbitionsTests/Goals/GoalCreationServiceTests.swift:187:        XCTAssertNil(vagueDraft.draft.lifeGraph)
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:108:            XCTAssertFalse(behavior.visibleFallback.localizedCaseInsensitiveContains("generic workaround"))
+Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift:109:            XCTAssertFalse(behavior.evidenceSummary.localizedCaseInsensitiveContains("generic workaround"))
+Native/AmbitionsTests/App/ClosureRecoveryPrimitiveFamilyTests.swift:14:        XCTAssertTrue(contract.replacesStructures.contains("generic closure panels"))
+Native/AmbitionsTests/App/ClosureRecoveryPrimitiveFamilyTests.swift:15:        XCTAssertTrue(contract.replacesStructures.contains("generic recovery panels"))
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:14:        XCTAssertTrue(contract.replacesStructures.contains("generic trace chips"))
+Native/AmbitionsTests/App/ProofRelationshipTracePrimitiveFamilyTests.swift:27:        XCTAssertTrue(contract.forbiddenPatterns.contains("generic trace chip"))
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:4:final class StepCandidateFieldGeneratorTests: XCTestCase {
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:21:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:56:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:79:        let generator = StepCandidateFieldGenerator()
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:158:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:175:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:204:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:231:        let baseline = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:233:        let rejectedRecord = StepCandidateRejectionRecord(
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:256:        let rebased = StepCandidateFieldGenerator().generate(rebasedContext)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:262:        XCTAssertEqual(rebased, StepCandidateFieldGenerator().generate(rebasedContext))
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:282:                StepCandidateRejectionRecord(
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:294:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:319:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:346:        let baseline = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:348:        let rejectedRecord = StepCandidateRejectionRecord(
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:371:        let field = StepCandidateFieldGenerator().generate(rejectedContext)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:398:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:425:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:449:        let field = StepCandidateFieldGenerator().generate(context)
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:564:    private let generator = StepCandidateFieldGenerator()
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:770:                        let rejectionRecord = StepCandidateRejectionRecord(
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:859:            "make xcode-focused-test BATCH=IOS26-T04B-B05 TEST=AmbitionsTests/StepCandidateFieldGeneratorTests/testSimulationGauntletCoversDeterministicScenarioMatrixAndWritesProofReport"
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1422:private extension StepCandidateFieldGeneratorTests {
+Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1427:        rejectionHistory: [StepCandidateRejectionRecord] = [],
+Native/AmbitionsTests/App/LoadingDegradedStateDesignSystemTests.swift:100:            XCTAssertFalse(entry.accessibilitySummary.localizedCaseInsensitiveContains("generic error"))
+Native/AmbitionsTests/App/LoadingDegradedStateDesignSystemTests.swift:122:        XCTAssertFalse(combinedCopy.localizedCaseInsensitiveContains("generic error"))
+Native/AmbitionsTests/App/ExternalRoutingTests.swift:260:            .genericExternalEntry(
+Native/AmbitionsTests/App/ExternalRoutingTests.swift:605:        router.dispatch(.genericExternalEntry(kind: "future", payload: [:]), source: .deepLink)
+Native/AmbitionsTests/App/CaptureRoutingPrimitiveFamilyTests.swift:14:        XCTAssertTrue(contract.replacesStructures.contains("generic routing panels"))
+Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift:127:        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("generic settings wall"))
+Native/AmbitionsTests/Persistence/PersistenceRepositoryTests.swift:156:        let starterFixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "exploratory-vague-goal"))
+Native/AmbitionsTests/Persistence/PersistenceRepositoryTests.swift:171:        let fixture = try XCTUnwrap(GoalEngineFixtures.fixture(id: "exploratory-vague-goal"))
+Native/AmbitionsTests/Time/HorizonCapacityPrimitiveFamilyTests.swift:14:        XCTAssertTrue(contract.replacesStructures.contains("generic horizon chips"))
+Native/AmbitionsTests/Time/HorizonCapacityPrimitiveFamilyTests.swift:27:        XCTAssertTrue(contract.forbiddenPatterns.contains("generic horizon card"))
+Native/AmbitionsTests/App/QuietReflowPrimitiveFamilyTests.swift:14:        XCTAssertTrue(contract.replacesStructures.contains("generic reflow panels"))

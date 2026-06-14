@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
-Scope of current run: AMB-711 / PLOS-090 Step Quality Firewall contract
+Scope of current run: AMB-712 / PLOS-091 generic Step blocked-list scanner
 PLOS-M00 execution status: Green for governance scope after AMB-608 parent acceptance
 PLOS-M01 execution status: Green for live runtime truth-map scope; AMB-609 Done in Linear
 Owner review: owner accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous PLOS execution from AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26 on 2026-06-12, subject to strict phase gates
@@ -32,7 +32,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 | 6 | M06 | AMB-614 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh plos M06` | Done in Linear; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 Done; AMB-748 through AMB-753 Duplicate |
 | 7 | M07 | AMB-615 | Any Goal Solution Loop | `scripts/codex/program-phase-gate.sh plos M07` | Done in Linear; AMB-692 / PLOS-070 Done, AMB-755 / PLOS-071 Done, AMB-694 / PLOS-072 Done, AMB-695 / PLOS-073 Done, AMB-696 / PLOS-074 Done, AMB-697 / PLOS-075 Done, AMB-698 / PLOS-076 Done, AMB-699 / PLOS-077 Done, AMB-700 / PLOS-078 Done, AMB-701 / PLOS-079 Done; AMB-754 and AMB-756 through AMB-763 Duplicate; AMB-693 archived/non-active |
 | 8 | M08 | AMB-616 | Native Context Mesh and permission explainers | `scripts/codex/program-phase-gate.sh plos M08` | Done in Linear; AMB-702 / PLOS-080 through AMB-708 / PLOS-086 Done; AMB-771 / PLOS-087 Done; AMB-710 / PLOS-088 Done; AMB-764 through AMB-770 and AMB-772 Duplicate; AMB-709 archived/non-active |
-| 9 | M09 | AMB-627 | Step Quality Firewall | `scripts/codex/program-phase-gate.sh plos M09` | Active; AMB-711 / PLOS-090 In Progress; AMB-712 through AMB-717 Backlog; AMB-773 through AMB-779 Duplicate/archived/canceled |
+| 9 | M09 | AMB-627 | Step Quality Firewall | `scripts/codex/program-phase-gate.sh plos M09` | Active; AMB-711 / PLOS-090 Done; AMB-712 / PLOS-091 In Progress; AMB-713 through AMB-717 Backlog; AMB-773 through AMB-779 Duplicate/archived/canceled |
 | 10 | M10 | AMB-617 | Golden vertical slice | `scripts/codex/program-phase-gate.sh plos M10` | Blocked pending M09 |
 | 11 | M11 | AMB-618 | Onboarding and first-run activation | `scripts/codex/program-phase-gate.sh plos M11` | Blocked pending M10 |
 | 12 | M12 | AMB-619 | Multi-Path Lattice | `scripts/codex/program-phase-gate.sh plos M12` | Blocked pending M11 |
@@ -53,4 +53,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Validate AMB-711 / PLOS-090 Step Quality Firewall contract, commit and push to `main`, update AMB-711 in Linear, then re-fetch AMB-627 and current M09 children before starting AMB-712 / PLOS-091 if no new active M09 child was added ahead of it.
+Validate AMB-712 / PLOS-091 generic Step blocked-list scanner, commit and push to `main`, update AMB-712 in Linear, then re-fetch AMB-627 and current M09 children before starting AMB-713 / PLOS-092 if no new active M09 child was added ahead of it.

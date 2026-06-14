@@ -5,9 +5,22 @@
   "label": "PLOS-090",
   "linearIssue": "AMB-711",
   "parentIssue": "AMB-627",
-  "title": "Step Quality Firewall contract",
-  "runtimeImplementationProof": false,
-  "models": {
+    "title": "Step Quality Firewall contract",
+    "runtimeImplementationProof": false,
+    "genericScanner": {
+        "linearIssue": "AMB-712",
+        "label": "PLOS-091",
+        "spec": "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.md",
+        "schema": "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.json",
+        "fixtures": "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER_FIXTURES.json",
+        "requiredOutputs": [
+            "generic_step",
+            "generic_pattern",
+            "generic_progress_language",
+            "generic_repair_required"
+        ]
+    },
+    "models": {
     "StepQualityInput": {
       "requiredFields": [
         "id",
@@ -139,8 +152,11 @@
     "repair_path"
   ],
   "blockingCodes": {
-    "generic_step": "Candidate text matches a blocked generic Step phrase.",
-    "missing_specific_action": "Candidate has no concrete action verb.",
+        "generic_step": "Candidate text matches a blocked generic Step phrase.",
+        "generic_pattern": "Candidate uses a vague verb with a generic object or pronoun.",
+        "generic_progress_language": "Candidate uses progress or improvement language without a concrete artifact, source, proof, or action object.",
+        "generic_repair_required": "Generic Step rejection must link to Step Graph Compiler repair and safe fallback.",
+        "missing_specific_action": "Candidate has no concrete action verb.",
     "missing_clear_object": "Candidate has no concrete object or target.",
     "invalid_duration": "Candidate duration is missing or outside the allowed range.",
     "beginner_expert_mismatch": "Candidate expects expert skill from a beginner without scaffold.",

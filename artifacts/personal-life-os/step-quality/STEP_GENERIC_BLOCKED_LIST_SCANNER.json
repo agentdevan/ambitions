@@ -1,0 +1,111 @@
+{
+  "scannerVersion": "2026-06-13.amb-712.v1",
+  "program": "plos",
+  "phase": "M09",
+  "label": "PLOS-091",
+  "linearIssue": "AMB-712",
+  "parentIssue": "AMB-627",
+  "title": "Generic Step blocked-list scanner",
+  "baseContract": "artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_CONTRACT.json",
+  "runtimeImplementationProof": false,
+  "inputModel": "StepQualityInput",
+  "verdictModel": "StepQualityVerdict",
+  "scannerOutputs": [
+    "generic_step",
+    "generic_pattern",
+    "generic_progress_language",
+    "generic_repair_required"
+  ],
+  "normalization": {
+    "caseInsensitive": true,
+    "collapseWhitespace": true,
+    "punctuationTolerant": true,
+    "wordBoundaryRequired": true
+  },
+  "exactBlockedPhrases": [
+    "work on your goal",
+    "make progress",
+    "make progress on your goal",
+    "research this",
+    "review your plan",
+    "continue",
+    "continue your plan",
+    "do the next thing",
+    "try to improve",
+    "keep going",
+    "make a plan",
+    "work on it"
+  ],
+  "genericVerbObjectRules": {
+    "verbs": [
+      "work on",
+      "make progress",
+      "continue",
+      "handle",
+      "deal with",
+      "improve",
+      "research",
+      "review",
+      "make"
+    ],
+    "genericObjects": [
+      "it",
+      "this",
+      "that",
+      "your goal",
+      "the goal",
+      "your plan",
+      "the plan",
+      "the next thing",
+      "everything"
+    ]
+  },
+  "genericProgressTerms": [
+    "progress",
+    "improve",
+    "advance",
+    "move forward"
+  ],
+  "concreteObjectSignals": [
+    "source",
+    "outline",
+    "note",
+    "draft",
+    "receipt",
+    "checklist",
+    "question",
+    "line",
+    "artifact",
+    "file",
+    "entry"
+  ],
+  "repairLinkage": {
+    "requiredOwner": "step-graph-compiler",
+    "fallbacks": [
+      "repair-specific-action",
+      "safe-starter-guidance",
+      "source-needed-local-scaffold",
+      "coverage-gap"
+    ],
+    "annotationCode": "generic-step"
+  },
+  "downstreamConsumers": [
+    "AMB-713",
+    "AMB-714",
+    "AMB-715",
+    "AMB-716",
+    "AMB-717",
+    "AMB-617"
+  ],
+  "noClaimBoundary": [
+    "No app source changes",
+    "No Swift/domain runtime implementation",
+    "No production Step Quality Firewall wiring",
+    "No UI implementation",
+    "No accessibility certification",
+    "No device proof",
+    "No measured performance proof",
+    "No R2 write or Source Atlas publication",
+    "No release, TestFlight, App Store, privacy, or legal readiness"
+  ]
+}

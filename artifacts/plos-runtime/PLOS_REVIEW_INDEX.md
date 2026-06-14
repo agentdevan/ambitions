@@ -1,5 +1,6 @@
 # PLOS REVIEW INDEX
 
+- 2026-06-13: AMB-712 / PLOS-091 read-only generic Step scanner/privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-712-generic-step-scanner-review.md`.
 - 2026-06-13: AMB-711 / PLOS-090 read-only Step Quality contract/privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-711-step-quality-contract-review.md`.
 - 2026-06-13: AMB-616 / PLOS-M08 phase closeout review recorded at `artifacts/plos-runtime/reviewer-output/AMB-616-phase-closeout-review.md`.
 - 2026-06-13: AMB-710 / PLOS-088 read-only PermissionLedger/revocation privacy/source/runtime risk review recorded at `artifacts/plos-runtime/reviewer-output/AMB-710-permission-ledger-revocation-closeout-review.md`.

@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-711 / PLOS-090 Step Quality Firewall contract
-Current execution state: PLOS-M00 through PLOS-M08 complete in Linear. M09 is active after live Linear verification confirmed AMB-627 / PLOS-M09 is Backlog, AMB-711 through AMB-717 are the canonical active M09 children, and AMB-773 through AMB-779 are Duplicate/archived/canceled.
+Current allowed run type: AMB-712 / PLOS-091 generic Step blocked-list scanner
+Current execution state: PLOS-M00 through PLOS-M08 complete in Linear. M09 is active after live Linear verification confirmed AMB-627 / PLOS-M09 is Backlog, AMB-711 is Done, AMB-712 is In Progress, AMB-713 through AMB-717 are Backlog, and AMB-773 through AMB-779 are Duplicate/archived/canceled.
 
 ## Mission
 

@@ -1,0 +1,22 @@
+AMB-712 / PLOS-091 generic Step blocked-list scanner search summary
+
+Commands:
+- rg -n "generic Step|blocked-list|Make progress|Work on your goal|make progress|work on your goal|continue|do the next thing|try to improve|keep going" . --glob '!artifacts/personal-life-os/validation/*.txt' --glob '!artifacts/plos-runtime/script-output/*.log' --glob '!output/**' --glob '!DerivedData/**'
+- rg -n "StepCandidateFieldGenerator|GoalEngineStepRewriter|GoalEnginePlannerLinter|CandidateValidity|StepCandidateRejectionRecord|vague|generic" Native/Ambitions/Domain Native/Ambitions/Runtime Native/AmbitionsTests --glob '*.swift'
+
+Artifacts:
+- artifacts/personal-life-os/validation/AMB-712-generic-step-blocked-list-search-log.txt
+- artifacts/personal-life-os/validation/AMB-712-generic-step-source-ownership-search-log.txt
+
+Counts:
+- Required generic scanner search: 750 lines, 120,510 bytes.
+- Source ownership search: 122 lines, 17,038 bytes.
+
+Findings:
+- Existing vague Step ownership already exists in `GoalEngineStepRewriter`, `GoalEnginePlannerLinter`, `GoalEngineContracts`, `StepCandidateFieldModels`, and `StepCandidateFieldGenerator`.
+- AMB-712 extends the AMB-711 contract with scanner-specific machine-readable rules and fixtures instead of adding a parallel Swift runtime path.
+- No raw scan log exceeds the large-log threshold; no compression or split artifact was required.
+
+Boundary:
+- The searches prove scanner discoverability and existing-first ownership context only.
+- They do not prove Swift runtime integration, UI behavior, accessibility certification, device proof, performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, M09 parent completion, M10 readiness, or production Step Quality Firewall wiring.

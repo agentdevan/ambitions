@@ -1,0 +1,102 @@
+{
+  "fixtureVersion": "2026-06-13.amb-712.v1",
+  "scanner": "artifacts/personal-life-os/step-quality/STEP_GENERIC_BLOCKED_LIST_SCANNER.json",
+  "fixtures": [
+    {
+      "id": "accepted-concrete-review-step",
+      "stepText": "Review the three signed source notes and mark the stale one for repair.",
+      "expectedDecision": "accept",
+      "expectedScannerCodes": []
+    },
+    {
+      "id": "accepted-concrete-draft-step",
+      "stepText": "Draft two receipt lines from the approved source outline.",
+      "expectedDecision": "accept",
+      "expectedScannerCodes": []
+    },
+    {
+      "id": "rejected-exact-work-on-goal",
+      "stepText": "Work on your goal.",
+      "expectedDecision": "reject",
+      "expectedScannerCodes": [
+        "generic_step",
+        "generic_pattern",
+        "generic_repair_required"
+      ],
+      "expectedPhrase": "work on your goal"
+    },
+    {
+      "id": "rejected-normalized-make-progress",
+      "stepText": "  MAKE    PROGRESS!!! ",
+      "expectedDecision": "reject",
+      "expectedScannerCodes": [
+        "generic_step",
+        "generic_progress_language",
+        "generic_repair_required"
+      ],
+      "expectedPhrase": "make progress"
+    },
+    {
+      "id": "rejected-continue-single-word",
+      "stepText": "Continue",
+      "expectedDecision": "reject",
+      "expectedScannerCodes": [
+        "generic_step",
+        "generic_pattern",
+        "generic_repair_required"
+      ],
+      "expectedPhrase": "continue"
+    },
+    {
+      "id": "rejected-research-this",
+      "stepText": "Research this before the meeting.",
+      "expectedDecision": "reject",
+      "expectedScannerCodes": [
+        "generic_step",
+        "generic_pattern",
+        "generic_repair_required"
+      ],
+      "expectedPhrase": "research this"
+    },
+    {
+      "id": "rejected-review-your-plan",
+      "stepText": "Review your plan",
+      "expectedDecision": "reject",
+      "expectedScannerCodes": [
+        "generic_step",
+        "generic_pattern",
+        "generic_repair_required"
+      ],
+      "expectedPhrase": "review your plan"
+    },
+    {
+      "id": "rejected-try-to-improve",
+      "stepText": "Try to improve.",
+      "expectedDecision": "reject",
+      "expectedScannerCodes": [
+        "generic_step",
+        "generic_progress_language",
+        "generic_repair_required"
+      ],
+      "expectedPhrase": "try to improve"
+    },
+    {
+      "id": "rejected-move-forward-without-object",
+      "stepText": "Move forward today.",
+      "expectedDecision": "reject",
+      "expectedScannerCodes": [
+        "generic_progress_language",
+        "generic_repair_required"
+      ]
+    },
+    {
+      "id": "rejected-handle-it",
+      "stepText": "Handle it.",
+      "expectedDecision": "reject",
+      "expectedScannerCodes": [
+        "generic_pattern",
+        "generic_repair_required"
+      ]
+    }
+  ]
+}
