@@ -70,6 +70,7 @@ locked_concepts:
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-515"
       - "AMB-1049"
+      - "AMB-1113"
       - "AMB-582"
     blocked_paths:
       - "Native/Ambitions/Runtime"
@@ -85,7 +86,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-05-24"
+    last_updated: "2026-06-14"
   - concept_id: "proof_receipt_replay"
     concept_name: "Proof / Receipt / ReplayTrace"
     reason: "Duplicate/supersession risk requires Champion Merge resolution before feature work."
@@ -97,6 +98,7 @@ locked_concepts:
       - "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-"
       - "AMB-515"
       - "AMB-1049"
+      - "AMB-1113"
     blocked_paths:
       - "Native/Ambitions/Domain"
       - "Native/Ambitions/Services"
@@ -111,7 +113,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-05-24"
+    last_updated: "2026-06-14"
   - concept_id: "time_plan_lifeshape"
     concept_name: "Time / Plan / LifeShape provider"
     reason: "Duplicate/supersession risk requires Champion Merge resolution before feature work."

@@ -6353,6 +6353,24 @@ files:
       - "PrivateLifeRuntimeKernelDecisionRecord"
       - "PrivateLifeRuntimeKernelDecisionOutput"
       - "PrivateLifeRuntimeKernel"
+  - path: "Native/Ambitions/Runtime/RuntimeCoreUmbrellaGate.swift"
+    target_membership: "App"
+    reachability: "Referenced by active target"
+    concept_area: "runtime"
+    canonical_owner_id: "private_life_runtime"
+    classification: "CANONICAL_HELPER"
+    evidence: "membership=App; declared_types=7; added_by=AMB-1113"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "RuntimeCoreChainSegmentKind"
+      - "RuntimeCoreChainSegmentState"
+      - "RuntimeCoreUmbrellaGateIssue"
+      - "RuntimeCoreChainSegment"
+      - "RuntimeCoreUmbrellaGateInput"
+      - "RuntimeCoreUmbrellaGateRow"
+      - "RuntimeCoreUmbrellaGateRecord"
+      - "RuntimeCoreUmbrellaGate"
   - path: "Native/Ambitions/Runtime/ReplayableDecisionTraceModels.swift"
     target_membership: "App"
     reachability: "Referenced by active target"
@@ -10075,6 +10093,17 @@ files:
     owner_review_needed: false
     declared_types:
       - "AmbitionsRuntimeKernelContractsTests"
+  - path: "Native/AmbitionsTests/Runtime/RuntimeCoreUmbrellaGateTests.swift"
+    target_membership: "Unit tests"
+    reachability: "Referenced by active target"
+    concept_area: "runtime"
+    canonical_owner_id: "private_life_runtime"
+    classification: "TEST_ONLY"
+    evidence: "membership=Unit tests; declared_types=1; added_by=AMB-1113"
+    action_required: "Keep under canonical owner review"
+    owner_review_needed: false
+    declared_types:
+      - "RuntimeCoreUmbrellaGateTests"
   - path: "Native/AmbitionsTests/Runtime/CaptureRuntimeGauntletTests.swift"
     target_membership: "Unit tests"
     reachability: "Referenced by active target"
