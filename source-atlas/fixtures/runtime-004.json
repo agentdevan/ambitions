@@ -1,0 +1,14 @@
+{
+  "id": "fixture.runtime.004",
+  "version": "runtime_fixture.v1",
+  "family": "runtime",
+  "candidate_id": "candidate.runtime.004",
+  "scenario_ids": ["scenario.runtime.004"],
+  "input_hash": "4444444444444444444444444444444444444444444444444444444444444444",
+  "candidate_score": 91,
+  "generated_derivative_notice": true,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Keeps runtime fixture promotion bounded to deterministic test input validation.",
+  "privacy_boundary": "Only reusable fixture taxonomy appears in this record.",
+  "local_only_requirement": "Local fixture input only; native runtime gates own any later decision."
+}

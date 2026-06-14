@@ -1,0 +1,14 @@
+{
+  "id": "fixture.reality-meridian.002",
+  "version": "runtime_fixture.v1",
+  "family": "reality-meridian",
+  "candidate_id": "candidate.reality-meridian.002",
+  "scenario_ids": ["scenario.reality-meridian.002"],
+  "input_hash": "9999999999999999999999999999999999999999999999999999999999999999",
+  "candidate_score": 93,
+  "generated_derivative_notice": true,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Confirms Reality Meridian fixtures stay derivative and non-authoritative.",
+  "privacy_boundary": "Abstract fixture has no user schedule or personal proof.",
+  "local_only_requirement": "Local fixture input only; no schedule install is implied."
+}

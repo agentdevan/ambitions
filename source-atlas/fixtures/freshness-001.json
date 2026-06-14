@@ -1,0 +1,14 @@
+{
+  "id": "fixture.freshness.001",
+  "version": "runtime_fixture.v1",
+  "family": "freshness",
+  "candidate_id": "candidate.freshness.001",
+  "scenario_ids": ["scenario.freshness.001"],
+  "input_hash": "efefefefefefefefefefefefefefefefefefefefefefefefefefefefefefefef",
+  "candidate_score": 94,
+  "generated_derivative_notice": true,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Validates freshness fixture coverage without treating it as source freshness proof.",
+  "privacy_boundary": "Only abstract freshness taxonomy is represented.",
+  "local_only_requirement": "Local fixture input only; source freshness checks remain authority-owned."
+}

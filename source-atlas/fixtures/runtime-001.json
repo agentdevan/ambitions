@@ -1,0 +1,14 @@
+{
+  "id": "fixture.runtime.001",
+  "version": "runtime_fixture.v1",
+  "family": "runtime",
+  "candidate_id": "candidate.runtime.001",
+  "scenario_ids": ["scenario.runtime.001"],
+  "input_hash": "1111111111111111111111111111111111111111111111111111111111111111",
+  "candidate_score": 94,
+  "generated_derivative_notice": true,
+  "cannot_satisfy_proof_alone": true,
+  "expected_test_behavior": "Valid runtime fixture remains value-model-only and requires native validation before use.",
+  "privacy_boundary": "Abstract fixture contains no private user context.",
+  "local_only_requirement": "Local fixture input only; no external provider requirement."
+}
