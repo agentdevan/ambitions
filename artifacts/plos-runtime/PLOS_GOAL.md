@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-708 / PLOS-086 CloudKit sync-state context adapter
-Current execution state: PLOS-M00 through PLOS-M07 complete in Linear. M08 is active after live Linear verification confirmed AMB-615 / PLOS-M07 is Done, AMB-616 / PLOS-M08 is Backlog, AMB-702 / PLOS-080 through AMB-707 / PLOS-085 are Done, active M08 children now resolve to AMB-708, AMB-771, and AMB-710, and duplicate/canceled children AMB-764 through AMB-770 plus AMB-772 and archived AMB-709 are non-active. AMB-708 is the current child.
+Current allowed run type: AMB-771 / PLOS-087 Permission value proof pattern
+Current execution state: PLOS-M00 through PLOS-M07 complete in Linear. M08 is active after live Linear verification confirmed AMB-615 / PLOS-M07 is Done, AMB-616 / PLOS-M08 is Backlog, AMB-702 / PLOS-080 through AMB-708 / PLOS-086 are Done, active M08 children now resolve to AMB-771 and AMB-710, and duplicate/canceled children AMB-764 through AMB-770 plus AMB-772 and archived AMB-709 are non-active. AMB-771 is the current child.
 
 ## Mission
 
