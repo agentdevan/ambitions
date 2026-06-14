@@ -10,13 +10,13 @@ Train label: `M02.T08`
 
 Parent or umbrella issue: `AMB-1113`
 
-Green/Yellow/Red status: Green for the focused AMB-1117 high-risk safety and jurisdiction runtime scope; source/control-plane commit is pushed and remote verified; closeout metadata commit is pending.
+Green/Yellow/Red status: Green for the focused AMB-1117 high-risk safety and jurisdiction runtime scope; source/control-plane and closeout metadata commits are pushed and remote verified; final repository reconciliation is pending.
 
 Pushed to main: yes
 
-Push hash: `172614b0b8b543fbf2f8287ddc7abfc101172195`
+Push hash: `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75`
 
-Closeout metadata hash: pending
+Closeout metadata hash: `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75`
 
 App source changed: yes
 
@@ -64,6 +64,11 @@ Validation run:
 - `bash scripts/codex/program-proof-index.sh amb-master` - pass after metadata edit; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142910.log`.
 - `bash scripts/codex/program-preflight.sh amb-master` - Green before metadata commit; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T142925.log`.
 - `bash scripts/codex/program-phase-gate.sh amb-master M02` - pass before metadata commit; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142925.log`.
+- `git push origin main` - pushed closeout metadata commit `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75`.
+- `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` - local HEAD and `origin/main` both returned `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass before final repository reconciliation commit; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T143225.log`.
+- `bash scripts/codex/program-phase-gate.sh amb-master M02` - pass before final repository reconciliation commit; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T143243.log`.
+- `bash scripts/codex/program-preflight.sh amb-master` - Green before final repository reconciliation commit; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T143250.log`.
 
 Reviewer passes:
 - Deterministic guard pass via pre/post parallel implementation guard; no separate read-only reviewer produced source edits.
@@ -79,6 +84,9 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T142910.log`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T142925.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142925.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T143225.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T143243.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T143250.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/parallel-implementation-guard/AMB-1117-pre.md`
 - `build/reports/parallel-implementation-guard/AMB-1117-post.md`
@@ -126,4 +134,4 @@ Linear reconciliation:
 - AMB-1117 source-push project comment: `b9fdb1ec-4938-446f-ac71-1c7eee9278ae`.
 - AMB-1117 source-push project status update: `92e55806-ef81-4787-8eb7-2c4b8b571821`.
 
-Next train: `AMB-1114` / `M03.T01`
+Next train: `AMB-1114` / `M03.T01` after final repository reconciliation and Linear Done update

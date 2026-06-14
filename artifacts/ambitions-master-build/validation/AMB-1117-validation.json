@@ -4,8 +4,8 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "172614b0b8b543fbf2f8287ddc7abfc101172195",
-  "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "172614b0b8b543fbf2f8287ddc7abfc101172195",
+  "closeout_metadata_commit": "90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75",
+  "remote_verified_commit": "90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75",
   "linear_issue_status": "In Progress",
   "linear_start_issue_comment": "82f22f23-51ac-44a9-b95d-a1dfd4d807c0",
   "linear_start_project_comment": "2dc47d8d-2051-403f-80e2-f23f46823b25",
@@ -26,7 +26,7 @@
   "linear_source_push_issue_comment": "bdf03bfe-344d-474c-a10d-97a5262dbb3a",
   "linear_source_push_project_comment": "b9fdb1ec-4938-446f-ac71-1c7eee9278ae",
   "linear_source_push_project_status_update": "92e55806-ef81-4787-8eb7-2c4b8b571821",
-  "status": "Green for the focused AMB-1117 high-risk safety and jurisdiction runtime source scope; source/control-plane commit pushed and remote verified; closeout metadata commit pending",
+  "status": "Green for the focused AMB-1117 high-risk safety and jurisdiction runtime source scope; source/control-plane and closeout metadata commits pushed and remote verified; final repository reconciliation pending",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -149,6 +149,29 @@
       "command": "bash scripts/codex/program-phase-gate.sh amb-master M02",
       "result": "pass before metadata commit",
       "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T142925.log"
+    },
+    {
+      "command": "git push origin main",
+      "result": "pushed closeout metadata commit 90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "local HEAD and origin/main both 90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass before final repository reconciliation commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T143225.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M02",
+      "result": "pass before final repository reconciliation commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T143243.log"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "Green before final repository reconciliation commit",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T143250.log"
     }
   ],
   "non_claims": [
