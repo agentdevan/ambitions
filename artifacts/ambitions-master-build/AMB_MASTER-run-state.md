@@ -29,13 +29,13 @@ last_closed_train:
   label: "M01.T05"
   linear_id: "AMB-1053"
   title: "Source Atlas cache and failure-safe runtime consumption"
-  status: "Source commit fac32c9440cb04a93515cf0e99b4564e39d28ff7 pushed to main and remote verified; closeout metadata commit pending in this reconciliation pass"
+  status: "Done in Linear; source commit fac32c9440cb04a93515cf0e99b4564e39d28ff7 and closeout metadata commit f743c073781f55d629ca55c3b753136357125dd7 pushed to main and remote verified"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1053 / M01.T05 metadata reconciliation, then refresh live Linear and execute AMB-1127 / M01.T06A."
+  action: "Refresh and execute AMB-1127 / M01.T06A from live Linear."
 latest_local_scope:
   changed_path_policy: "AMB-1053 touched owned Persistence Source Atlas local-pack cache source plus focused persistence tests, champion coverage, and AMB-1053 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M01"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1053-<slug>.md"
 latest_validation:
-  status: "AMB-1053 focused implementation validation Green; source commit pushed to main; closeout metadata reconciliation in progress"
+  status: "AMB-1053 focused implementation validation Green; source and closeout metadata pushed to main; Linear issue Done and project activity updated"
   logs:
     - "build/reports/xcode/AMB-1053-SourceAtlasLocalPackCacheTests.xcresult"
     - "build/reports/xcode/AMB-1053-AdjacentSourceAtlasCacheTests.xcresult"
@@ -59,6 +59,9 @@ latest_validation:
     - "build/reports/parallel-implementation-guard/AMB-1053-post.md"
     - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T062045.log"
     - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T062045.log"
+    - "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T065915.log"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T065923.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T065923.log"
 ```
 
 ## Pushed SHA Log
@@ -70,7 +73,7 @@ latest_validation:
 - `AMB-1050` / `M01.T02`: `daaed647d` source implementation; closeout metadata pushed to `main` and reconciled in Linear
 - `AMB-1051` / `M01.T03`: `fe0fc39f387754bc24ae97c1794f0f0b4af454d0` source implementation; `c6ace5b5bbfcd812b110937ad2703983d4b23eb6` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated
 - `AMB-1052` / `M01.T04`: `576cea9e6b7e5fb04b00d6be68d42353883b8817` source implementation; `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`8b0423a5-827e-49bb-9b04-b4e3696b0ffa`)
-- `AMB-1053` / `M01.T05`: `fac32c9440cb04a93515cf0e99b4564e39d28ff7` source implementation pushed to `main` and remote verified; closeout metadata reconciliation pending
+- `AMB-1053` / `M01.T05`: `fac32c9440cb04a93515cf0e99b4564e39d28ff7` source implementation; `f743c073781f55d629ca55c3b753136357125dd7` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`b995bd06-116c-440d-9043-d3424469ae9f`)
 
 ## Non-Claims
 

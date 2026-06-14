@@ -4,10 +4,12 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "fac32c9440cb04a93515cf0e99b4564e39d28ff7",
-  "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "fac32c9440cb04a93515cf0e99b4564e39d28ff7",
-  "linear_issue_status": "In Progress pending metadata closeout",
-  "status": "Green for the focused AMB-1053 Source Atlas local cache and failure-safe runtime consumption scope; source commit pushed to origin/main and metadata closeout in progress",
+  "closeout_metadata_commit": "f743c073781f55d629ca55c3b753136357125dd7",
+  "remote_verified_commit": "f743c073781f55d629ca55c3b753136357125dd7",
+  "linear_issue_status": "Done",
+  "linear_issue_closeout_comment": "ae9e710b-3541-4f8f-b17b-2ebd6934c81b",
+  "linear_project_status_update": "b995bd06-116c-440d-9043-d3424469ae9f",
+  "status": "Green for the focused AMB-1053 Source Atlas local cache and failure-safe runtime consumption scope; source and closeout metadata pushed to origin/main and AMB-1053 moved to Done in Linear",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -84,6 +86,21 @@
     {
       "command": "git diff --check",
       "result": "pass"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T065915.log"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T065923.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M01",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T065923.log"
     }
   ],
   "non_claims": [

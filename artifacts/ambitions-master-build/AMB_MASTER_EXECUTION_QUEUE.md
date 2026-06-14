@@ -50,4 +50,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Commit and push `AMB-1053` / `M01.T05` metadata reconciliation, then refresh live Linear and execute `AMB-1127` / `M01.T06A`.
+Refresh live Linear and execute `AMB-1127` / `M01.T06A`.
