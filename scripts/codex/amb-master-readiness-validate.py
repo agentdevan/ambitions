@@ -28,7 +28,7 @@ REQUIRED_FILES = [
     ROOT / "scripts/codex/amb-master-canon-ia-validate.py",
     ROOT / "scripts/codex/amb-master-repository-wiring-validate.py",
 ]
-REQUIRED_ISSUES = {"AMB-1126", "AMB-1046", "AMB-1047", "AMB-1048", "AMB-1049", "AMB-1050", "AMB-1051", "AMB-1052", "AMB-1053", "AMB-1127", "AMB-1128", "AMB-1113", "AMB-1111", "AMB-1112", "AMB-1129"}
+REQUIRED_ISSUES = {"AMB-1126", "AMB-1046", "AMB-1047", "AMB-1048", "AMB-1049", "AMB-1050", "AMB-1051", "AMB-1052", "AMB-1053", "AMB-1127", "AMB-1128", "AMB-1113", "AMB-1111", "AMB-1112", "AMB-1129", "AMB-1130"}
 REQUIRED_PHASES = [f"M{i:02d}" for i in range(12)]
 
 

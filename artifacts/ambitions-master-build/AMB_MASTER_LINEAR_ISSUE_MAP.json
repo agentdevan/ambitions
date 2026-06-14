@@ -23,7 +23,7 @@
     {"train": "M02.T00", "linear_id": "AMB-1113", "title": "Runtime core umbrella: split execution chain and proof gate", "milestone": "M02", "status": "Done / source commit 301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6"},
     {"train": "M02.T01", "linear_id": "AMB-1111", "title": "Step Quality Firewall: fail-closed gate for every visible Step", "milestone": "M02", "status": "Done / source commit 3896c8af1909389f389aca1d5e8478c2f2059660"},
     {"train": "M02.T02", "linear_id": "AMB-1112", "title": "Any Goal Runtime: operating modes and coverage loop", "milestone": "M02", "status": "Done / source commit 26a83b0f4b91b34d14620ee71f24e43cc7d01818"},
-    {"train": "M02.T03", "linear_id": "AMB-1129", "title": "Multi-Path Lattice: selectable path architecture", "milestone": "M02", "status": "Backlog"},
+    {"train": "M02.T03", "linear_id": "AMB-1129", "title": "Multi-Path Lattice: selectable path architecture", "milestone": "M02", "status": "Done / source commit 9f454beb0f6df132a2c8f700496986f2f07ca3e7"},
     {"train": "M02.T04", "linear_id": "AMB-1130", "title": "Step Graph Compiler: installed, reserve, proof, review, and dependency graph", "milestone": "M02", "status": "Backlog"},
     {"train": "M02.T05", "linear_id": "AMB-1131", "title": "Step Elasticity Engine: Shrink, Replace, Keep momentum, and proof-safe variants", "milestone": "M02", "status": "Backlog"},
     {"train": "M02.T06", "linear_id": "AMB-1132", "title": "Schedule Install Kernel: preview, commit, rollback, protected time", "milestone": "M02", "status": "Backlog"},
