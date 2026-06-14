@@ -4,6 +4,7 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "fe0fc39f387754bc24ae97c1794f0f0b4af454d0",
+  "pushed_main_sha": "c6ace5b5bbfcd812b110937ad2703983d4b23eb6",
   "status": "Green for the focused AMB-1051 privacy/security storage boundary scope",
   "validation": [
     {
@@ -89,8 +90,41 @@
       "command": "scripts/codex/program-phase-gate.sh amb-master M01",
       "result": "pass",
       "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T054316.log"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T054504.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M01",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T054504.log"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T054809.log",
+      "entries": 121
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T054837.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M01",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T054837.log"
     }
   ],
+  "linear_reconciliation": {
+    "issue_state": "Done",
+    "issue_completed_at": "2026-06-14T09:45:48.777Z",
+    "issue_closeout_comment_id": "9d83601c-451c-439d-bb81-c6dd87943f38",
+    "project_activity_comment_id": "925865ca-4144-41a2-a55a-888b5da9c66f",
+    "project_status_update_id": "9b66cb95-81a0-4cd7-b371-aa4513a49891"
+  },
   "non_claims": [
     "No user-facing UI changed.",
     "No visual proof is claimed.",
