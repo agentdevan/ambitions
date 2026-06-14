@@ -17,29 +17,29 @@ project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "M00"
-  title: "Linear Control Plane + Canon Lock"
+  label: "M01"
+  title: "Persistence, Privacy, Source, and Diagnostics Foundation"
   status: "Active"
 current_train:
+  label: "M01.T02"
+  linear_id: "AMB-1050"
+  title: "Migration and versioned schema foundation: fail-safe evolution"
+  status: "Next eligible after AMB-1049 source implementation and local validation; refresh live Linear before execution"
+last_closed_train:
   label: "M01.T01"
   linear_id: "AMB-1049"
   title: "Data lifecycle and replay foundation: deterministic receipts and state recovery"
-  status: "In Progress in Linear; live issue fetched; M01 phase gate passed; source ownership/preflight pending"
-last_closed_train:
-  label: "M00.T02"
-  linear_id: "AMB-1048"
-  title: "Live repository wiring and quarantine proof"
-  status: "Done in Linear; pushed SHA b0f9305aff9ce5b44ef17e6d1ebe4a2414955f30"
+  status: "Implemented locally; source commit 146b35efc; focused validation Green; Linear closeout/push reconciliation pending"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Execute AMB-1049 / M01.T01 from live Linear: prove source ownership, run M01 gate, implement deterministic receipt/replay persistence, validate, push, and reconcile Linear."
+  action: "Push AMB-1049 reconciliation, close AMB-1049 in Linear with evidence, then refresh and execute AMB-1050 / M01.T02 from live Linear."
 latest_local_scope:
-  changed_path_policy: "Post-push metadata reconciliation after AMB-1048 closeout and AMB-1049 Linear start."
-  app_source_changed: false
-  runtime_behavior_changed: "No app runtime behavior changed by this reconciliation."
+  changed_path_policy: "AMB-1049 touched owned Domain/Persistence/App wiring plus focused tests and AMB-1049 guard prompt."
+  app_source_changed: true
+  runtime_behavior_changed: "Added local-only replay inspection projection/repository wiring over existing command, receipt, and runtime snapshot ledgers; no user-facing UI shipped."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -51,11 +51,14 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M01"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1049-<slug>.md"
 latest_validation:
-  status: "AMB-1048 post-push metadata reconciled; AMB-1049 In Progress in Linear; M01 phase gate passed; no AMB-1049 implementation validation yet"
+  status: "AMB-1049 focused implementation validation Green at source commit 146b35efc; final push and Linear closeout pending"
   logs:
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T032946.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M00-20260614T032945.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T033308.log"
+    - "build/reports/xcode/AMB-1049-ExecutionLedgerReplayInspectionRepositoryTests.xcresult"
+    - "build/reports/xcode/AMB-1049-AppContainerFactoryTests.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1049-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1049-post.md"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T042403.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T042402.log"
 ```
 
 ## Pushed SHA Log
@@ -63,7 +66,8 @@ latest_validation:
 - `AMB-1046` / `M00.T00`: `004a258378a92a21ad384c6ce239b2fb36c94e7d`
 - `AMB-1047` / `M00.T01`: `8f5cfc1dae8c684571e17dabba765eb937ab2169`
 - `AMB-1048` / `M00.T02`: `b0f9305aff9ce5b44ef17e6d1ebe4a2414955f30`
+- `AMB-1049` / `M01.T01`: `146b35efc` (source implementation commit; Linear closeout push reconciliation pending)
 
 ## Non-Claims
 
-AMB-1049 is active but not yet implemented. No AMB-1049 runtime behavior, app build/test coverage, visual approval, accessibility certification, privacy/legal approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.
+AMB-1049 added local replay inspection runtime plumbing and focused tests only. No user-facing UI, visual approval, accessibility certification, privacy/legal approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, or full project completion is claimed.

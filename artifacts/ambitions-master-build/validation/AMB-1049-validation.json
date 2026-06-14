@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "program": "amb-master",
+  "linear_project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
+  "issue": "AMB-1049",
+  "train": "M01.T01",
+  "status": "Green for focused source scope",
+  "source_commit": "146b35efc",
+  "validation": [
+    {
+      "command": "python3 scripts/ambitions-champion-coverage-check.py --batch AMB-1049",
+      "result": "pass",
+      "artifact": "build/reports/intelligence-consolidation/champion-coverage-check.md"
+    },
+    {
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch AMB-1049 --prompt artifacts/ambitions-master-build/validation/AMB-1049-parallel-guard-prompt.md --batch-type source-changing",
+      "result": "pass",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1049-pre.md"
+    },
+    {
+      "command": "xcodegen generate",
+      "result": "pass"
+    },
+    {
+      "command": "xcodebuild build-for-testing -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.3.1' -quiet",
+      "result": "pass"
+    },
+    {
+      "command": "xcodebuild test-without-building -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.3.1' -destination-timeout 120 -only-testing:AmbitionsTests/ExecutionLedgerReplayInspectionRepositoryTests -resultBundlePath build/reports/xcode/AMB-1049-ExecutionLedgerReplayInspectionRepositoryTests.xcresult -quiet",
+      "result": "pass",
+      "artifact": "build/reports/xcode/AMB-1049-ExecutionLedgerReplayInspectionRepositoryTests.xcresult",
+      "observed_status": "succeeded",
+      "tests_count": 3
+    },
+    {
+      "command": "xcodebuild test-without-building -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,name=iPhone 17,OS=26.3.1' -destination-timeout 120 -only-testing:AmbitionsTests/AppContainerFactoryTests/testAppContainerExposesRuntimeWhilePreservingIPhoneServiceFacade -resultBundlePath build/reports/xcode/AMB-1049-AppContainerFactoryTests.xcresult -quiet",
+      "result": "pass",
+      "artifact": "build/reports/xcode/AMB-1049-AppContainerFactoryTests.xcresult",
+      "observed_status": "succeeded",
+      "tests_count": 1
+    },
+    {
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-1049 --prompt artifacts/ambitions-master-build/validation/AMB-1049-parallel-guard-prompt.md --changed-from 65fa9bc95b23d9052cdcb1f43efc9f862f1df396 --batch-type source-changing",
+      "result": "pass",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1049-post.md"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-readiness-validate.py",
+      "result": "pass"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-repository-wiring-validate.py",
+      "result": "pass"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T042403.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M01",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M01-20260614T042402.log"
+    }
+  ],
+  "non_claims": [
+    "No user-facing UI was changed.",
+    "No visual approval is claimed.",
+    "No accessibility certification is claimed.",
+    "No privacy/legal approval is claimed.",
+    "No TestFlight, App Store, release readiness, physical-device, or performance certification is claimed.",
+    "No full project completion is claimed."
+  ]
+}
