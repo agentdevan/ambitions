@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1046`
 
 Green/Yellow/Red status: Green for the focused AMB-1128 Source Authority Mesh scope
 
-Pushed to main: yes; source implementation commit `88d549dea8acd7d7601d302db6e7f819bd16cfb2` pushed and remote verified; closeout metadata commit pending before final Linear Done reconciliation
+Pushed to main: yes; source implementation commit `88d549dea8acd7d7601d302db6e7f819bd16cfb2` and closeout metadata commit `15be81b068fd3113b25ea07f555c0b01b4e43286` pushed and remote verified
 
-Push hash: source implementation commit `88d549dea8acd7d7601d302db6e7f819bd16cfb2`; closeout metadata commit pending
+Push hash: source implementation commit `88d549dea8acd7d7601d302db6e7f819bd16cfb2`; closeout metadata commit `15be81b068fd3113b25ea07f555c0b01b4e43286`
 
 App source changed: yes
 
@@ -115,6 +115,9 @@ Linear reconciliation:
 - AMB-1128 source-push checkpoint issue comment: `7de51dad-72d0-445e-9791-21f276b8a63b`.
 - AMB-1128 source-push checkpoint project comment: `1a6699ec-d3ae-49d8-8733-5cd77cf32bd2`.
 - AMB-1128 source-push project status update: `f6a81ef7-503e-453c-b5a9-dba73fb8feb8`.
-- Final Linear Done closeout pending closeout metadata push.
+- AMB-1128 final closeout issue comment: `ba6c7ccc-2ff6-4a26-8ee3-75f1c84ad5c1`.
+- AMB-1128 final closeout project comment: `70c736c7-1a51-4604-bef4-0cfb46bedd62`.
+- AMB-1128 final project status update: `c79e4c1c-b1b8-4e16-9042-10292420227f`.
+- AMB-1128 moved to Done in Linear on 2026-06-14 after remote main verification.
 
 Next train: `AMB-1113` / `M02.T00`

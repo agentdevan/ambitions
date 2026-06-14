@@ -19,7 +19,7 @@ project:
 current_phase:
   label: "M02"
   title: "Runtime Moat Kernel"
-  status: "Next eligible after AMB-1128 closeout"
+  status: "Active"
 current_train:
   label: "M02.T00"
   linear_id: "AMB-1113"
@@ -29,13 +29,13 @@ last_closed_train:
   label: "M01.T06B"
   linear_id: "AMB-1128"
   title: "Source Authority Mesh"
-  status: "Source commit 88d549dea8acd7d7601d302db6e7f819bd16cfb2 pushed to main and remote verified; closeout metadata pending before AMB-1128 Done reconciliation"
+  status: "Source commit 88d549dea8acd7d7601d302db6e7f819bd16cfb2 and closeout metadata commit 15be81b068fd3113b25ea07f555c0b01b4e43286 pushed to main, remote verified, and AMB-1128 marked Done in Linear"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1128 / M01.T06B closeout metadata, reconcile AMB-1128 in Linear, then refresh live Linear and execute AMB-1113 / M02.T00."
+  action: "Commit and push AMB-1128 / M01.T06B post-push reconciliation metadata, then refresh live Linear and execute AMB-1113 / M02.T00."
 latest_local_scope:
   changed_path_policy: "AMB-1128 touched owned Persistence Source Atlas authority mesh source plus focused persistence tests, champion coverage, and AMB-1128 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M01"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1128-source-authority-mesh.md"
 latest_validation:
-  status: "AMB-1128 focused implementation validation Green; source commit pushed to main; closeout metadata and Linear Done reconciliation in progress"
+  status: "AMB-1128 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; post-push reconciliation in progress"
   logs:
     - "build/reports/xcode/AMB-1128-SourceAtlasAuthorityMeshTests-rerun1.xcresult"
     - "build/reports/xcode/AMB-1128-AdjacentSourceAuthorityMeshTests.xcresult"
@@ -75,7 +75,7 @@ latest_validation:
 - `AMB-1052` / `M01.T04`: `576cea9e6b7e5fb04b00d6be68d42353883b8817` source implementation; `9b5db4a0a2319c68a66ea6dc4ec601d8a744e7b3` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`8b0423a5-827e-49bb-9b04-b4e3696b0ffa`)
 - `AMB-1053` / `M01.T05`: `fac32c9440cb04a93515cf0e99b4564e39d28ff7` source implementation; `f743c073781f55d629ca55c3b753136357125dd7` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`b995bd06-116c-440d-9043-d3424469ae9f`)
 - `AMB-1127` / `M01.T06A`: `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` source implementation; `37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`85d8c69e-fc21-45ee-9794-0626a4ece06f`)
-- `AMB-1128` / `M01.T06B`: `88d549dea8acd7d7601d302db6e7f819bd16cfb2` source implementation pushed to `main`, remote verified; closeout metadata pending before final Linear Done reconciliation
+- `AMB-1128` / `M01.T06B`: `88d549dea8acd7d7601d302db6e7f819bd16cfb2` source implementation; `15be81b068fd3113b25ea07f555c0b01b4e43286` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`c79e4c1c-b1b8-4e16-9042-10292420227f`)
 
 ## Non-Claims
 
