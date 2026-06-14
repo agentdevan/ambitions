@@ -10,13 +10,13 @@ Train label: `M03.T01`
 
 Parent or umbrella issue: `AMB-1113`
 
-Green/Yellow/Red status: Green for the focused AMB-1114 Golden Vertical Slice runtime scope; source/control-plane commit is pushed and remote-verified; closeout metadata commit is pending.
+Green/Yellow/Red status: Green for the focused AMB-1114 Golden Vertical Slice runtime scope; source/control-plane and closeout metadata commits are pushed and remote-verified; final Linear closeout is pending.
 
 Pushed to main: yes; source/control-plane commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` is pushed and remote-verified.
 
 Push hash: `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc`
 
-Closeout metadata hash: pending closeout metadata commit.
+Closeout metadata hash: `b95399da61bdb433c6ea52087a25a47695cdb465`
 
 App source changed: yes
 
@@ -76,6 +76,11 @@ Validation run:
 - `bash scripts/sa-no-claim-scan.sh` - pass before closeout metadata commit; `artifacts/ambitions-master-build/script-output/AMB-1114-sa-no-claim-scan-final-metadata-20260614T185518.log`.
 - `bash scripts/privacy-boundary-scan.sh` - Yellow advisory scan before closeout metadata commit; `artifacts/ambitions-master-build/script-output/AMB-1114-privacy-boundary-scan-final-metadata-20260614T185518.log`.
 - `git diff --check` - pass before closeout metadata commit.
+- `git push origin main` - pushed closeout metadata commit `b95399da61bdb433c6ea52087a25a47695cdb465`.
+- `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` - local HEAD and `origin/main` both returned `b95399da61bdb433c6ea52087a25a47695cdb465` after closeout metadata push.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after closeout metadata push; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T185632.log`.
+- `scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata push; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T185632.log`.
+- `scripts/codex/program-phase-gate.sh amb-master M03` - pass after closeout metadata push; `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185632.log`.
 
 Reviewer passes:
 - Deterministic guard pass via pre/post parallel implementation guard; no separate read-only reviewer produced source edits.
@@ -101,6 +106,9 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/AMB-1114-release-claim-safety-scan-final-metadata-20260614T185517.log`
 - `artifacts/ambitions-master-build/script-output/AMB-1114-sa-no-claim-scan-final-metadata-20260614T185518.log`
 - `artifacts/ambitions-master-build/script-output/AMB-1114-privacy-boundary-scan-final-metadata-20260614T185518.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T185632.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T185632.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185632.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/parallel-implementation-guard/AMB-1114-pre.md`
 - `build/reports/parallel-implementation-guard/AMB-1114-post.md`
@@ -124,7 +132,7 @@ Accessibility certification claimed: no
 Privacy/legal approval claimed: no
 
 Rollback:
-- Revert source/control-plane commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` and the follow-up AMB-1114 closeout metadata commit if the train must be backed out.
+- Revert source/control-plane commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` and closeout metadata commit `b95399da61bdb433c6ea52087a25a47695cdb465` if the train must be backed out.
 
 Linear reconciliation:
 - AMB-1114 validation compile blocker issue comment: `afbe85a3-2c02-4fe5-aff1-b08a602f8d2f`.

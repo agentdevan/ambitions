@@ -4,8 +4,8 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc",
-  "closeout_metadata_commit": "pending closeout metadata commit",
-  "remote_verified_commit": "9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc",
+  "closeout_metadata_commit": "b95399da61bdb433c6ea52087a25a47695cdb465",
+  "remote_verified_commit": "b95399da61bdb433c6ea52087a25a47695cdb465",
   "linear_issue_status": "In Progress",
   "linear_compile_blocker_issue_comment": "afbe85a3-2c02-4fe5-aff1-b08a602f8d2f",
   "linear_compile_blocker_project_comment": "89a1c671-5cf5-49a0-a207-e6e256512ec9",
@@ -19,7 +19,7 @@
   "linear_final_validation_project_comment": "04835ae2-db5d-4679-85bc-0c76969506b1",
   "linear_source_push_issue_comment": "316912c3-2b73-46e2-b650-83ba558f4fd3",
   "linear_source_push_project_comment": "c9c021e6-59ec-42ff-98b5-123875e30de0",
-  "status": "Green for the focused AMB-1114 Golden Vertical Slice runtime source scope; source/control-plane commit pushed and remote verified; closeout metadata commit pending",
+  "status": "Green for the focused AMB-1114 Golden Vertical Slice runtime source scope; source/control-plane and closeout metadata commits pushed and remote verified; final Linear closeout pending",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -177,6 +177,29 @@
     {
       "command": "git diff --check",
       "result": "pass before closeout metadata commit"
+    },
+    {
+      "command": "git push origin main",
+      "result": "pushed closeout metadata commit b95399da61bdb433c6ea52087a25a47695cdb465"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "local HEAD and origin/main both b95399da61bdb433c6ea52087a25a47695cdb465 after closeout metadata push"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass after closeout metadata push",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T185632.log"
+    },
+    {
+      "command": "scripts/codex/program-preflight.sh amb-master",
+      "result": "Green after closeout metadata push",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T185632.log"
+    },
+    {
+      "command": "scripts/codex/program-phase-gate.sh amb-master M03",
+      "result": "pass after closeout metadata push",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185632.log"
     }
   ],
   "non_claims": [

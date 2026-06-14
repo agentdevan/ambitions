@@ -36,7 +36,7 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 | M02.T06 | AMB-1132 | Schedule Install Kernel: preview, commit, rollback, protected time | M02 | Done / source commit `448b7dc0f805f71ab0a285906ca789edd8e1d40f` |
 | M02.T07 | AMB-1133 | Life Consequence Engine: cross-goal reflow, treaties, non-suppressible events | M02 | Done / source commit `75ecbf553b9bb43b17736ee7d45bc8671928e796` |
 | M02.T08 | AMB-1117 | High-risk safety and jurisdiction handling: runtime fail-safe boundaries | M02 | Done / source commit `172614b0b8b543fbf2f8287ddc7abfc101172195` / closeout metadata `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` / AMB-1114 handoff active |
-| M03.T01 | AMB-1114 | Golden vertical slice: music release goal from intake to replay | M03 | Green / source commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` / closeout metadata pending |
+| M03.T01 | AMB-1114 | Golden vertical slice: music release goal from intake to replay | M03 | Green / source commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` / closeout metadata `b95399da61bdb433c6ea52087a25a47695cdb465` / final Linear closeout pending |
 | M03.T02 | AMB-1115 | First-run activation: first goal, first Recommended Step, first recovery option | M03 | Backlog |
 
 ## Refresh Rule
