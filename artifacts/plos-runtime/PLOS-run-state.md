@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-707 / PLOS-085 Files/Photos/OCR explicit import context paths
+Run type: AMB-708 / PLOS-086 CloudKit sync-state context adapter
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -24,15 +24,15 @@ current_phase:
   title: "Native Context Mesh and permission explainers"
   status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-707 Done, active remaining children AMB-708, AMB-771, and AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
 current_child:
-  label: "PLOS-085"
-  linear_id: "AMB-707"
-  title: "Define Files/Photos/OCR explicit import context paths"
-  status: "Done in Linear after documentation/control-plane explicit Files/Photos/OCR import context path contract was pushed at f526df369ad2409a8696c281a9ebc5f02d390a03; proof-ledger reconciliation pending"
+  label: "PLOS-086"
+  linear_id: "AMB-708"
+  title: "Define CloudKit sync state context adapter"
+  status: "In Progress in Linear after live AMB-616 / M08 re-fetch confirmed AMB-702 through AMB-707 Done, AMB-708, AMB-771, and AMB-710 active, AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled, and AMB-709 archived/non-active"
 next_allowed_action:
-  action: "Reconcile AMB-707 proof ledger/report commit metadata, push, then re-fetch AMB-616 and current M08 children before starting AMB-708 / PLOS-086 if the M08 phase gate remains Green"
-  after_current_child: "AMB-707 owns documentation/control-plane Files/Photos/OCR explicit import context path contract only; do not claim Swift/domain implementation, runtime adapter implementation, Photos integration, Files integration, Vision/OCR implementation, permission prompting implementation, privacy manifest changes, entitlement changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Source Atlas publication, R2 write, AMB-616 parent completion, or production readiness"
+  action: "Validate AMB-708, commit with the real Linear identifier, push to main, update AMB-708 in Linear, then re-fetch AMB-616 and current M08 children before starting AMB-771 / PLOS-087 if the M08 phase gate remains Green"
+  after_current_child: "AMB-708 owns documentation/control-plane CloudKit sync-state context adapter contract only; do not claim Swift/domain implementation, runtime adapter implementation, CloudKit transport, account setup, entitlement or privacy manifest changes, user-data upload or mutation, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, M23 sync hardening, M26 certification, AMB-616 parent completion, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-707 files/photos/ocr import-context contract artifacts, report, bounded source search logs/summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-708 CloudKit sync-state context adapter artifacts, report, bounded source search logs/summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -45,7 +45,7 @@ validation_required_before_execution:
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-085-files-photos-ocr-import-context-paths.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-086-cloudkit-sync-state-context-adapter.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -94,6 +94,8 @@ Completed child: `AMB-705` / `PLOS-083`, pushed to `main` at `17bb0d2670ad24a17a
 Completed child: `AMB-706` / `PLOS-084`, pushed to `main` at `c9a120ec25a12c9c28f84d8e8510fe845b50b662`, proof-ledger reconciliation pushed at `b03fa0990b1d1e76f9a3827be4901649299f911a`, and moved to Done in Linear on 2026-06-13 America/New_York.
 
 Completed child: `AMB-707` / `PLOS-085`, pushed to `main` at `f526df369ad2409a8696c281a9ebc5f02d390a03` and moved to Done in Linear on 2026-06-13 America/New_York. AMB-707 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, Photos integration, Files integration, Vision/OCR implementation, permission prompting implementation, entitlement changes, privacy manifest changes, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, Source Atlas publication, R2 write, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` through `AMB-707` Done; active M08 children `AMB-708`, `AMB-771`, and `AMB-710`; `AMB-764` through `AMB-770` plus `AMB-772` are Duplicate/archived/canceled, and `AMB-709` is archived/non-active.
+
+Current child in progress: `AMB-708` / `PLOS-086` - Define CloudKit sync state context adapter. AMB-708 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, CloudKit environment setup, CloudKit transport implementation, iCloud account setup, entitlement changes, privacy manifest changes, runtime sync integration, user-data upload, user-data mutation, conflict UI, delete/reset/export propagation, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, R2 write, Source Atlas publication, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope.
 
 ## Active Authorization
 
