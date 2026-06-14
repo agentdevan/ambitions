@@ -10,6 +10,228 @@ enum AppExternalRoute: Equatable, Sendable {
     case genericExternalEntry(kind: String, payload: [String: String])
 }
 
+
+struct AppDeepLinkRegistryEntry: Equatable, Identifiable, Sendable {
+    enum ObjectKind: String, Sendable {
+        case rootTab
+        case todayContext
+        case goal
+        case timeRoute
+        case youRoute
+        case overlay
+    }
+
+    let id: String
+    let objectKind: ObjectKind
+    let owningTab: AppTab
+    let canonicalRoute: AppExternalRoute
+    let deepLinkTemplate: String
+    let allowedSources: [AppExternalRouteSource]
+    let privacyBoundary: String
+
+    var opensWithoutDeadEnd: Bool {
+        switch canonicalRoute {
+        case let .openTab(tab):
+            tab.canonicalTopLevelTab.isCanonicalTopLevel
+        case let .openToday(context):
+            context == .standard || owningTab == .today
+        case let .openGoalDetail(goalID):
+            owningTab == .goals && goalID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+        case let .openTimeRoute(target):
+            owningTab == (target == .captureInbox ? .today : .time)
+        case .openYouRoute:
+            owningTab == .you
+        case .presentOverlay:
+            owningTab == .today
+        case .genericExternalEntry:
+            false
+        }
+    }
+}
+
+enum AppDeepLinkRegistry {
+    static let externalObjectSources: [AppExternalRouteSource] = [
+        .deepLink,
+        .notificationAction,
+        .widgetAction,
+        .liveActivity,
+        .appIntent,
+        .spotlight,
+        .handoff,
+        .relaunch
+    ]
+
+    static let entries: [AppDeepLinkRegistryEntry] = [
+        AppDeepLinkRegistryEntry(
+            id: "today.root",
+            objectKind: .rootTab,
+            owningTab: .today,
+            canonicalRoute: .openTab(.today),
+            deepLinkTemplate: "ambitions://tab/today",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Root route only; carries no private object identifier."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "today.focus",
+            objectKind: .todayContext,
+            owningTab: .today,
+            canonicalRoute: .openToday(.focus),
+            deepLinkTemplate: "ambitions://tab/today?context=focus",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Context route only; opens Start here posture without mutating a step."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "today.recovery",
+            objectKind: .todayContext,
+            owningTab: .today,
+            canonicalRoute: .openToday(.recovery),
+            deepLinkTemplate: "ambitions://tab/today?context=recovery",
+            allowedSources: [.deepLink, .notificationAction, .widgetAction, .liveActivity, .appIntent, .relaunch],
+            privacyBoundary: "Recovery route only; closure still requires in-app confirmation."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "goals.root",
+            objectKind: .rootTab,
+            owningTab: .goals,
+            canonicalRoute: .openTab(.goals),
+            deepLinkTemplate: "ambitions://tab/goals",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Root route only; carries no private goal identifier."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "goals.detail",
+            objectKind: .goal,
+            owningTab: .goals,
+            canonicalRoute: .openGoalDetail(goalID: "preview-goal"),
+            deepLinkTemplate: "ambitions://goal/{goalID}",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Requires an explicit goal identifier; unknown or missing IDs fall back instead of inventing a route."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "time.root",
+            objectKind: .rootTab,
+            owningTab: .time,
+            canonicalRoute: .openTab(.time),
+            deepLinkTemplate: "ambitions://tab/time",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Root route only; opens LifeShape Field without schedule export."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "time.habits",
+            objectKind: .timeRoute,
+            owningTab: .time,
+            canonicalRoute: .openTimeRoute(.habits),
+            deepLinkTemplate: "ambitions://time/habits",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Compatibility route under Time; no streak or score payload is supported."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "time.weeklyReview",
+            objectKind: .timeRoute,
+            owningTab: .time,
+            canonicalRoute: .openTimeRoute(.weeklyReview),
+            deepLinkTemplate: "ambitions://time/weekly-review",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Review route under Time; does not claim completion or mutate history."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "motion.root",
+            objectKind: .rootTab,
+            owningTab: .motion,
+            canonicalRoute: .openTab(.motion),
+            deepLinkTemplate: "ambitions://tab/motion",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Root route only; no analytics feed or score payload is supported."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "you.root",
+            objectKind: .rootTab,
+            owningTab: .you,
+            canonicalRoute: .openTab(.you),
+            deepLinkTemplate: "ambitions://tab/you",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Root route only; opens user-owned controls without exposing profile data."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "you.history",
+            objectKind: .youRoute,
+            owningTab: .you,
+            canonicalRoute: .openYouRoute(.history),
+            deepLinkTemplate: "ambitions://you/history",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "History support route remains in-app and local; no export is implied."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "you.monthlyReview",
+            objectKind: .youRoute,
+            owningTab: .you,
+            canonicalRoute: .openYouRoute(.monthlyReview),
+            deepLinkTemplate: "ambitions://you/monthly-review",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Review support route remains in-app and local; no readiness claim is implied."
+        ),
+        AppDeepLinkRegistryEntry(
+            id: "capture.composer",
+            objectKind: .overlay,
+            owningTab: .today,
+            canonicalRoute: .presentOverlay(.commandSheet(intent: .quickCapture, entrySource: .external, presentationContext: .quickCapture)),
+            deepLinkTemplate: "ambitions://overlay/quiet-command-sheet?intent=quick_capture",
+            allowedSources: externalObjectSources,
+            privacyBoundary: "Opens the composer seam only after invocation; Capture is not a top-level tab."
+        )
+    ]
+
+    static func validationIssues(translator: AppExternalRouteTranslator = AppExternalRouteTranslator()) -> [String] {
+        var issues: [String] = []
+        let ids = entries.map(\.id)
+        if Set(ids).count != ids.count {
+            issues.append("Deep-link registry entries must have unique IDs.")
+        }
+        for entry in entries {
+            if entry.owningTab.isCanonicalTopLevel == false {
+                issues.append("\(entry.id) must resolve to a canonical top-level owner.")
+            }
+            if entry.opensWithoutDeadEnd == false {
+                issues.append("\(entry.id) does not resolve to an addressable in-app destination.")
+            }
+            if entry.allowedSources.isEmpty {
+                issues.append("\(entry.id) must declare at least one supported external source.")
+            }
+            if entry.privacyBoundary.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                issues.append("\(entry.id) must declare a no-claim privacy boundary.")
+            }
+            if translator.deepLinkURL(for: entry.canonicalRoute) == nil {
+                issues.append("\(entry.id) must generate a canonical deep link.")
+            }
+        }
+        return issues
+    }
+}
+
+struct AppNavigationGraphNode: Equatable, Identifiable, Sendable {
+    let id: String
+    let owningTab: AppTab
+    let route: AppExternalRoute
+    let presentation: String
+    let canOpenFromExternalSurface: Bool
+}
+
+enum AppNavigationGraph {
+    static let nodes: [AppNavigationGraphNode] = AppDeepLinkRegistry.entries.map { entry in
+        AppNavigationGraphNode(
+            id: entry.id,
+            owningTab: entry.owningTab,
+            route: entry.canonicalRoute,
+            presentation: entry.deepLinkTemplate,
+            canOpenFromExternalSurface: entry.opensWithoutDeadEnd
+        )
+    }
+
+    static func node(for route: AppExternalRoute) -> AppNavigationGraphNode? {
+        nodes.first { $0.route == route }
+    }
+}
+
 enum AppExternalRouteSource: String, Sendable {
     case deepLink
     case notificationAction
@@ -137,9 +359,11 @@ struct AppExternalRouteTranslator {
         if let goalID = payload.values["goalID"], goalID.isEmpty == false {
             return .openGoalDetail(goalID: goalID)
         }
-        if let tabRaw = payload.values["tab"]?.lowercased(),
-           let route = LegacyIARouteCompatibility.externalRoute(forRawTab: tabRaw) {
-            return route
+        if let tabRaw = payload.values["tab"]?.lowercased() {
+            let context = payload.values["context"].flatMap(TodayEntryContext.init(rawValue:))
+            if let route = LegacyIARouteCompatibility.externalRoute(forRawTab: tabRaw, todayContext: context) {
+                return route
+            }
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
             return .openTimeRoute(.captureInbox)
@@ -154,9 +378,11 @@ struct AppExternalRouteTranslator {
         if let goalID = payload.values["goalID"], goalID.isEmpty == false {
             return .openGoalDetail(goalID: goalID)
         }
-        if let tabRaw = payload.values["tab"]?.lowercased(),
-           let route = LegacyIARouteCompatibility.externalRoute(forRawTab: tabRaw) {
-            return route
+        if let tabRaw = payload.values["tab"]?.lowercased() {
+            let context = payload.values["context"].flatMap(TodayEntryContext.init(rawValue:))
+            if let route = LegacyIARouteCompatibility.externalRoute(forRawTab: tabRaw, todayContext: context) {
+                return route
+            }
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
             return .openTimeRoute(.captureInbox)

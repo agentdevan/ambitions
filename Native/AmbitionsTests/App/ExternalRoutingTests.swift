@@ -156,8 +156,8 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(routePayload["context"], TodayEntryContext.focus.rawValue)
         XCTAssertEqual(notificationPayload.values["context"], TodayEntryContext.focus.rawValue)
         XCTAssertEqual(widgetPayload.values["context"], TodayEntryContext.focus.rawValue)
-        XCTAssertEqual(translator.route(fromNotification: notificationPayload), .openTab(.today))
-        XCTAssertEqual(translator.route(fromWidget: widgetPayload), .openTab(.today))
+        XCTAssertEqual(translator.route(fromNotification: notificationPayload), .openToday(.focus))
+        XCTAssertEqual(translator.route(fromWidget: widgetPayload), .openToday(.focus))
     }
 
     func testDeepLinkTranslatorParsesGoalRoute() throws {
@@ -751,4 +751,58 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(translator.deepLinkURL(for: fallbackGoalWithIDs)?.absoluteString, "ambitions://tab/goals?origin=spotlight")
         XCTAssertEqual(translator.deepLinkURL(for: fallbackReceiptWithIDs)?.absoluteString, "ambitions://tab/today?origin=spotlight")
     }
+
+    func testDeepLinkRegistryDeclaresOnlySupportedAddressableRoutes() throws {
+        let translator = AppExternalRouteTranslator()
+
+        XCTAssertEqual(AppDeepLinkRegistry.validationIssues(translator: translator), [])
+        XCTAssertEqual(AppNavigationGraph.nodes.map(\.id), AppDeepLinkRegistry.entries.map(\.id))
+        XCTAssertFalse(AppDeepLinkRegistry.entries.contains { $0.canonicalRoute == .openTab(.capture) })
+        XCTAssertFalse(AppTab.allCases.contains(.capture))
+
+        for entry in AppDeepLinkRegistry.entries {
+            let url = try XCTUnwrap(translator.deepLinkURL(for: entry.canonicalRoute), entry.id)
+            let roundTripRoute = translator.route(fromDeepLink: url)
+
+            switch entry.canonicalRoute {
+            case .presentOverlay:
+                XCTAssertNotNil(roundTripRoute, entry.id)
+            default:
+                XCTAssertEqual(roundTripRoute, entry.canonicalRoute, entry.id)
+            }
+            XCTAssertTrue(entry.opensWithoutDeadEnd, entry.id)
+            XCTAssertTrue(entry.owningTab.isCanonicalTopLevel, entry.id)
+            XCTAssertFalse(entry.allowedSources.isEmpty, entry.id)
+            XCTAssertFalse(entry.privacyBoundary.isEmpty, entry.id)
+        }
+    }
+
+    @MainActor
+    func testNavigationGraphOpensWidgetNotificationAndShortcutObjectsWithoutDeadEnds() {
+        let previews = AppDeepLinkPreviewRoutes.all
+
+        for preview in previews {
+            let previewRouter = AppDeepLinkPreviewRouter()
+
+            previewRouter.open(preview)
+
+            XCTAssertEqual(previewRouter.navigation.selectedTab, preview.expectedTab, preview.id)
+            XCTAssertEqual(previewRouter.navigation.lastExternalRoute, preview.route, preview.id)
+            XCTAssertEqual(previewRouter.navigation.lastExternalRouteSource, preview.source, preview.id)
+            XCTAssertFalse(preview.privacyBoundary.isEmpty, preview.id)
+        }
+    }
+
+    @MainActor
+    func testRegistryPreviewRouterFallsBackInsteadOfInventingUnsupportedRoutes() {
+        let previewRouter = AppDeepLinkPreviewRouter(initialTab: .time)
+
+        previewRouter.openRegistryEntry(id: "missing.shared-prerequisite", source: .widgetAction)
+
+        XCTAssertEqual(previewRouter.navigation.selectedTab, .today)
+        XCTAssertEqual(previewRouter.navigation.lastExternalRouteSource, .widgetAction)
+        XCTAssertTrue(previewRouter.navigation.goalsPath.isEmpty)
+        XCTAssertTrue(previewRouter.navigation.timePath.isEmpty)
+    }
+
 }

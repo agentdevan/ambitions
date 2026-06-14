@@ -44,6 +44,7 @@ struct AmbitionsRootView: View {
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
         .onAppear {
             configureTabBarAppearance(with: resolvedTheme)
+            validateExternalNavigationGraph()
         }
         .onChange(of: systemColorScheme) { _, _ in
             configureTabBarAppearance(with: resolvedTheme)
@@ -477,6 +478,11 @@ struct AmbitionsRootView: View {
         } catch {
             onboardingError = "Unable to finish onboarding: \(error.localizedDescription)"
         }
+    }
+
+    private func validateExternalNavigationGraph() {
+        assert(AppDeepLinkRegistry.validationIssues().isEmpty, "Deep-link registry contains unsupported routes.")
+        assert(AppNavigationGraph.nodes.allSatisfy(\.canOpenFromExternalSurface), "Navigation graph contains a dead-end external route.")
     }
 
     private func configureTabBarAppearance(with theme: AmbitionTheme) {
