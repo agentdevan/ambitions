@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1046`
 
 Green/Yellow/Red status: Green for the scoped repository wiring and quarantine proof after local validators pass.
 
-Pushed to main: pending AMB-1048 commit/push; Linear closeout records the exact pushed hash after push.
+Pushed to main: yes.
 
-Push hash: pending commit.
+Push hash: `b0f9305aff9ce5b44ef17e6d1ebe4a2414955f30`.
 
 App source changed: no.
 

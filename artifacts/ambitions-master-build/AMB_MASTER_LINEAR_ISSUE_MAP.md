@@ -14,13 +14,13 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 | CONTROL | AMB-1126 | Rebuild Linear as the Ambitions execution control plane | M00 | Done |
 | M00.T00 | AMB-1046 | Program umbrella: master build authority and execution run | M00 | Done / pushed (`004a258378a92a21ad384c6ce239b2fb36c94e7d`) |
 | M00.T01 | AMB-1047 | Canon authority and IA lock: Today / Goals / Time / Motion / You | M00 | Done / pushed (`8f5cfc1dae8c684571e17dabba765eb937ab2169`) |
-| M00.T02 | AMB-1048 | Live repository wiring and quarantine proof | M00 | Local Green pending push |
+| M00.T02 | AMB-1048 | Live repository wiring and quarantine proof | M00 | Done / pushed (`b0f9305aff9ce5b44ef17e6d1ebe4a2414955f30`) |
 
 ## Initial Source Execution Bindings
 
 | Train | Linear issue | Title | Milestone | Live status at install |
 |---|---|---|---|---|
-| M01.T01 | AMB-1049 | Data lifecycle and replay foundation: deterministic receipts and state recovery | M01 | Backlog |
+| M01.T01 | AMB-1049 | Data lifecycle and replay foundation: deterministic receipts and state recovery | M01 | In Progress |
 | M01.T02 | AMB-1050 | Migration and versioned schema foundation: fail-safe evolution | M01 | Backlog |
 | M01.T03 | AMB-1051 | Privacy and security storage boundary: local-first enforcement | M01 | Backlog |
 | M01.T04 | AMB-1052 | Support bundle and diagnostics: bounded inspection and export proof | M01 | Backlog |

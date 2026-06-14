@@ -20,8 +20,8 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 0 | CONTROL | AMB-1126 | Rebuild Linear as the Ambitions execution control plane | `scripts/codex/program-phase-gate.sh amb-master M00` | Done in Linear |
 | 1 | M00.T00 | AMB-1046 | Program umbrella: master build authority and execution run | `scripts/codex/program-phase-gate.sh amb-master M00` | Done / pushed (`004a258378a92a21ad384c6ce239b2fb36c94e7d`) |
 | 2 | M00.T01 | AMB-1047 | Canon authority and IA lock: Today / Goals / Time / Motion / You | `scripts/codex/program-phase-gate.sh amb-master M00` | Done / pushed (`8f5cfc1dae8c684571e17dabba765eb937ab2169`) |
-| 3 | M00.T02 | AMB-1048 | Live repository wiring and quarantine proof | `scripts/codex/program-phase-gate.sh amb-master M00` | Local Green; commit/push/Linear closeout pending |
-| 4 | M01.T01 | AMB-1049 | Data lifecycle and replay foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
+| 3 | M00.T02 | AMB-1048 | Live repository wiring and quarantine proof | `scripts/codex/program-phase-gate.sh amb-master M00` | Done / pushed (`b0f9305aff9ce5b44ef17e6d1ebe4a2414955f30`) |
+| 4 | M01.T01 | AMB-1049 | Data lifecycle and replay foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | In Progress |
 | 5 | M01.T02 | AMB-1050 | Migration and versioned schema foundation | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
 | 6 | M01.T03 | AMB-1051 | Privacy and security storage boundary | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
 | 7 | M01.T04 | AMB-1052 | Support bundle and diagnostics | `scripts/codex/program-phase-gate.sh amb-master M01` | Backlog |
@@ -50,4 +50,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Commit and push `AMB-1048` / `M00.T02`, update Linear with the pushed evidence, then execute `AMB-1049` / `M01.T01`.
+Execute `AMB-1049` / `M01.T01` from live Linear: prove source ownership, run the M01 gate, implement deterministic receipt/replay persistence, validate, push, and reconcile Linear.
