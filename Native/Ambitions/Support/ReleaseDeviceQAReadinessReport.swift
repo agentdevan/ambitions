@@ -63,7 +63,7 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseDeviceQACheck(
             id: "returning-user",
             scope: .returningUser,
-            requiredJourney: "Launch with existing local data and verify Today, Goals, Time, You, Reviews, and receipts still orient the user.",
+            requiredJourney: "Launch with existing local data and verify Today, Goals, Time, Motion, You, Reviews, and receipts still orient the user.",
             evidence: "Preview bootstrap, core-surface scenario catalog, and repository-backed service tests cover returning-user local data paths.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "Returning users may lose context or trust."

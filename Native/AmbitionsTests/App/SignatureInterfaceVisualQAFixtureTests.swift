@@ -37,7 +37,7 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
     }
 
     func testSI16SurfaceCoverageRowsMapTheFiveTopLevelSurfaces() {
-        XCTAssertEqual(SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces, ["Today", "Goals", "Capture", "Time", "You"])
+        XCTAssertEqual(SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces, ["Today", "Goals", "Time", "Motion", "You"])
         XCTAssertEqual(
             SI16PreviewFixtureCatalog.surfaceCoverageRows.map(\.ownerSurface),
             SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces
@@ -123,7 +123,7 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
         XCTAssertEqual(AFI13VisualQACatalog.ownerBatch, "AFI13")
         XCTAssertEqual(
             AFI13VisualQACatalog.activeTopLevelSurfaces,
-            ["Today", "Goals", "Capture", "Time", "You"]
+            ["Today", "Goals", "Time", "Motion", "You"]
         )
         XCTAssertFalse(AFI13VisualQACatalog.containsPlanTopLevelSurface)
         XCTAssertFalse(AFI13VisualQACatalog.changesRuntimeBehavior)
@@ -144,7 +144,7 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
         for entry in AFI13VisualQACatalog.scorecards {
             XCTAssertGreaterThanOrEqual(entry.minimumScore, 95)
             XCTAssertGreaterThanOrEqual(entry.targetScore, entry.minimumScore)
-            if entry.surface == "Today" || entry.surface == "Capture" {
+            if entry.surface == "Today" {
                 XCTAssertEqual(entry.targetScore, 98)
             }
             XCTAssertFalse(entry.requiredRenderedInventory.isEmpty)
@@ -166,8 +166,8 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
             "Quiet Glass",
             "Today",
             "Goals",
-            "Capture",
             "Time",
+            "Motion",
             "You",
             "Trust",
             "Continuity Dock"

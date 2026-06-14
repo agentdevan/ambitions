@@ -286,7 +286,7 @@ extension AmbitionsAppShortcutDestination {
 
 struct OpenAmbitionsDestinationIntent: AppIntent {
     static let title: LocalizedStringResource = "Open Ambitions"
-    static let description = IntentDescription("Open Today, Goals, Capture, Time, You, or another Ambitions surface.")
+    static let description = IntentDescription("Open Today, Goals, Time, Motion, You, global Capture, or another Ambitions surface.")
     static let openAppWhenRun = true
 
     @Parameter(title: "Destination")

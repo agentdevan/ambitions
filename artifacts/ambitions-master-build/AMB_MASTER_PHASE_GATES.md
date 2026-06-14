@@ -36,7 +36,7 @@ Required before Green:
 - Local `amb-master` Goal Mode adapter exists and validates.
 - Program registry includes `amb-master`.
 - Queue/map/run-state bind train labels to `AMB-*` issues.
-- Canon and IA authority checks can be executed.
+- Canon and IA authority checks can be executed through `python3 scripts/codex/amb-master-canon-ia-validate.py`.
 - No app source behavior is changed by adapter installation.
 
 ## M01

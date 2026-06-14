@@ -1637,7 +1637,7 @@ Codex must support:
 
 ## 21. Motion Surface Truth
 
-The fourth tab is Motion.
+The Motion top-level surface is Motion in the active five-tab IA.
 
 Screen title:
 

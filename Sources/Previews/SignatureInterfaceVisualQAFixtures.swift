@@ -250,8 +250,8 @@ public struct SI16VisualQAFixtureSnapshotCard: View {
         switch fixture.ownerSurface {
         case "Today": Color(red: 0.47, green: 0.85, blue: 0.70)
         case "Goals": Color(red: 0.68, green: 0.72, blue: 1.00)
-        case "Capture": Color(red: 0.90, green: 0.66, blue: 0.84)
         case "Time": Color(red: 0.86, green: 0.76, blue: 0.42)
+        case "Motion": Color(red: 0.90, green: 0.66, blue: 0.84)
         case "You": Color(red: 0.57, green: 0.78, blue: 1.00)
         default: Color.white
         }
@@ -267,7 +267,7 @@ public enum SI16PreviewFixtureCatalog {
     public static let claimsHumanApproval = false
     public static let claimsDeviceProof = false
     public static let changesRuntimeBehavior = false
-    public static let canonicalTopLevelSurfaces = ["Today", "Goals", "Capture", "Time", "You"]
+    public static let canonicalTopLevelSurfaces = ["Today", "Goals", "Time", "Motion", "You"]
 
     public static let sourceFiles: [String] = [
         "Sources/Previews/SignatureInterfaceVisualQAFixtures.swift",
@@ -282,25 +282,25 @@ public enum SI16PreviewFixtureCatalog {
     public static let fixtures: [SI16VisualQAFixture] = [
         fixture(.normal, "Today", "Reality Meridian", lane: nil),
         fixture(.selected, "Goals", "Constellation Atlas", lane: nil),
-        fixture(.focused, "Capture", "Atmosphere Composer", lane: "clarification_needed"),
+        fixture(.focused, "Motion", "Motion Current focus thread", lane: "clarification_needed"),
         fixture(.loading, "Time", "LifeShape Field", lane: "source_check_first"),
         fixture(.empty, "You", "User System Profile", lane: nil),
         fixture(.disabled, "Today", "Start here decision", lane: "user_review_required"),
         fixture(.degraded, "Goals", "Source review lane", lane: "source_conflict_review"),
         fixture(.privacySensitive, "You", "Trust receipt", lane: "privacy_sensitive_plan"),
         fixture(.reducedMotion, "Time", "Capacity transition", lane: nil),
-        fixture(.dynamicType, "Capture", "Atmosphere Composer route reveal", lane: nil),
+        fixture(.dynamicType, "Motion", "Motion Current large-text proof", lane: nil),
         fixture(.staleSource, "Goals", "Requirement source", lane: "source_stale_review"),
         fixture(.partialSource, "Time", "Pressure source", lane: "source_check_first"),
         fixture(.offlineLocalOnly, "You", "Local-only privacy state", lane: "local_only_private_plan"),
-        fixture(.blocked, "Capture", "Unsafe redirect", lane: "unsafe_blocked"),
+        fixture(.blocked, "Motion", "Unsafe proof redirect", lane: "unsafe_blocked"),
         fixture(.waiting, "Today", "Waiting closure", lane: nil),
         fixture(.needsReview, "Goals", "Professional boundary review", lane: "professional_boundary_scaffold"),
         fixture(.recovery, "Today", "Still Counts recovery", lane: nil),
         fixture(.overwhelmingDay, "Time", "Recovery capacity lane", lane: nil),
         fixture(.setupNeeded, "You", "Setup control row", lane: nil),
         fixture(.deniedSource, "Time", "Denied source state", lane: "source_check_first"),
-        fixture(.noDataYet, "Capture", "No placed capture yet", lane: "parked_thought")
+        fixture(.noDataYet, "Motion", "No proof yet", lane: "parked_thought")
     ]
 
     public static let surfaceCoverageRows: [SI16PreviewSurfaceCoverageRow] = [
@@ -329,18 +329,6 @@ public enum SI16PreviewFixtureCatalog {
             nonColorNote: "The atlas remains readable through text hierarchy and status symbols even when the state is degraded."
         ),
         surfaceRow(
-            "Capture",
-            object: "Atmosphere Composer",
-            fixtureIDs: [
-                "capture.focused",
-                "capture.noDataYet",
-                "capture.blocked",
-                "capture.dynamicType"
-            ],
-            accessibilityNote: "Capture covers routed, empty, blocked, and large-text proof without turning into a task inbox.",
-            nonColorNote: "The composer uses copy, spacing, and status symbols to avoid color-only meaning."
-        ),
-        surfaceRow(
             "Time",
             object: "LifeShape Field",
             fixtureIDs: [
@@ -352,6 +340,18 @@ public enum SI16PreviewFixtureCatalog {
             ],
             accessibilityNote: "Time stays legible in loading, partial-source, denied-source, overwhelmed-day, and reduce-motion states.",
             nonColorNote: "Capacity, source, and recovery cues remain explicit in the surface text, not just the palette."
+        ),
+        surfaceRow(
+            "Motion",
+            object: "Motion Current",
+            fixtureIDs: [
+                "motion.focused",
+                "motion.noDataYet",
+                "motion.blocked",
+                "motion.dynamicType"
+            ],
+            accessibilityNote: "Motion covers focused proof, empty movement, blocked recovery, and large-text inspection without turning into a feed.",
+            nonColorNote: "Proof and recovery state use copy, spacing, and status symbols to avoid color-only meaning."
         ),
         surfaceRow(
             "You",
@@ -599,7 +599,7 @@ public struct AFI13VisualDriftGalleryExample: Identifiable, Hashable, Sendable {
 
 public enum AFI13VisualQACatalog {
     public static let ownerBatch = "AFI13"
-    public static let activeTopLevelSurfaces = ["Today", "Goals", "Capture", "Time", "You"]
+    public static let activeTopLevelSurfaces = ["Today", "Goals", "Time", "Motion", "You"]
     public static let changesRuntimeBehavior = false
     public static let claimsRenderedScreenshotProof = false
     public static let claimsHumanVisualApproval = false
@@ -631,18 +631,6 @@ public enum AFI13VisualQACatalog {
             redExamples: ["KPI dashboard", "astrology chart", "ranked life score"]
         ),
         scorecard(
-            "Capture",
-            object: "Atmosphere Composer",
-            target: 98,
-            inventory: [
-                "capture-atmosphere-composer-empty.png",
-                "capture-atmosphere-composer-keyboard.png",
-                "capture-atmosphere-composer-needs-place.png",
-                "capture-atmosphere-composer-reduce-motion.png"
-            ],
-            redExamples: ["notes feed", "inbox", "chatbot"]
-        ),
-        scorecard(
             "Time",
             object: "LifeShape Field",
             target: 95,
@@ -653,6 +641,18 @@ public enum AFI13VisualQACatalog {
                 "time-lifeshape-field-reduce-motion.png"
             ],
             redExamples: ["calendar clone", "analytics dashboard", "red overload grid"]
+        ),
+        scorecard(
+            "Motion",
+            object: "Motion Current",
+            target: 95,
+            inventory: [
+                "motion-current-default.png",
+                "motion-current-proof-thread.png",
+                "motion-current-recovery.png",
+                "motion-current-reduce-motion.png"
+            ],
+            redExamples: ["analytics dashboard", "activity feed", "XP score"]
         ),
         scorecard(
             "You",
@@ -675,8 +675,8 @@ public enum AFI13VisualQACatalog {
         example("Quiet Glass", pass: "restrained touch controls", fail: "generic glassmorphism", label: "Yellow: adjacent drift", surface: nil),
         example("Today", pass: "Reality Meridian plus Start Here", fail: "task list or timeline", label: "Red: generic productivity", surface: "Today"),
         example("Goals", pass: "equal-weight atlas", fail: "KPI dashboard or astrology", label: "Red: SaaS/dashboard", surface: "Goals"),
-        example("Capture", pass: "quiet composer", fail: "notes feed, inbox, or chatbot", label: "Red: generic productivity", surface: "Capture"),
         example("Time", pass: "capacity field", fail: "calendar clone or analytics", label: "Red: canon violation", surface: "Time"),
+        example("Motion", pass: "proof/recovery current", fail: "activity feed, score, or dashboard", label: "Red: canon violation", surface: "Motion"),
         example("You", pass: "premium user system profile", fail: "social profile or admin console", label: "Red: canon violation", surface: "You"),
         example("Trust", pass: "seam, source, and receipt", fail: "AI assistant drawer", label: "Red: inaccessible visual state", surface: nil),
         example("Continuity Dock", pass: "native five-tab with calm markers", fail: "red badges or notification bar", label: "Red: canon violation", surface: nil)

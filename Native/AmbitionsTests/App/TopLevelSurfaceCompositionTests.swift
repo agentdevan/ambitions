@@ -5,12 +5,12 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
     func testSI17CompositionKeepsFiveCanonicalSurfacesOnly() {
         XCTAssertEqual(
             AmbitionsTopLevelSurfaceComposition.allCases,
-            [.today, .goals, .capture, .time, .you]
+            [.today, .goals, .time, .motion, .you]
         )
 
         XCTAssertEqual(
             AmbitionsTopLevelSurfaceComposition.allCases.map(\.title),
-            ["Today", "Goals", "Capture", "Time", "You"]
+            ["Today", "Goals", "Time", "Motion", "You"]
         )
     }
 
@@ -56,11 +56,11 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
         XCTAssertEqual(AFI14CrossSurfaceCoherenceCatalog.ownerBatch, "AFI14")
         XCTAssertEqual(
             AFI14CrossSurfaceCoherenceCatalog.activeTopLevelSurfaces,
-            ["Today", "Goals", "Capture", "Time", "You"]
+            ["Today", "Goals", "Time", "Motion", "You"]
         )
         XCTAssertEqual(
             AFI14CrossSurfaceCoherenceCatalog.productGrammar,
-            ["Capture", "Clarify", "Shape", "Start", "Close", "Remember"]
+            ["Capture", "Clarify", "Shape", "Start", "Inspect", "Close", "Remember"]
         )
         XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.activeTopLevelSurfaces.contains("Plan"))
         XCTAssertFalse(AFI14CrossSurfaceCoherenceCatalog.changesRuntimeBehavior)
@@ -79,6 +79,7 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
             "Give it a place.",
             "Shape your time around what matters.",
             "Start where reality allows.",
+            "See what moved and what can re-enter.",
             "Close the loop without shame.",
             "Trust what changed."
         ])
@@ -92,7 +93,7 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
 
         let handoffs = AFI14CrossSurfaceCoherenceCatalog.handoffs
         XCTAssertGreaterThanOrEqual(handoffs.count, 9)
-        XCTAssertTrue(handoffs.contains { $0.fromSurface == "Capture" && $0.toSurface == "Goals" })
+        XCTAssertTrue(handoffs.contains { $0.fromSurface == "Global Capture" && $0.toSurface == "Goals" })
         XCTAssertTrue(handoffs.contains { $0.fromSurface == "Time" && $0.toSurface == "Today" })
         XCTAssertTrue(handoffs.contains { $0.fromSurface == "Today" && $0.toSurface == "Goals" })
         XCTAssertTrue(handoffs.contains { $0.fromSurface == "Any" && $0.toSurface == "You" })

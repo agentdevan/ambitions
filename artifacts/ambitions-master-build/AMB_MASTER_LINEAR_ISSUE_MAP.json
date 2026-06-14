@@ -10,8 +10,8 @@
   "generated_from": "Live Linear fetches on 2026-06-14 plus current repo state",
   "bindings": [
     {"train": "CONTROL", "linear_id": "AMB-1126", "title": "Rebuild Linear as the Ambitions execution control plane", "milestone": "M00", "status": "Done"},
-    {"train": "M00.T00", "linear_id": "AMB-1046", "title": "Program umbrella: master build authority and execution run", "milestone": "M00", "status": "Backlog"},
-    {"train": "M00.T01", "linear_id": "AMB-1047", "title": "Canon authority and IA lock: Today / Goals / Time / Motion / You", "milestone": "M00", "status": "Backlog"},
+    {"train": "M00.T00", "linear_id": "AMB-1046", "title": "Program umbrella: master build authority and execution run", "milestone": "M00", "status": "Done / pushed 004a258378a92a21ad384c6ce239b2fb36c94e7d"},
+    {"train": "M00.T01", "linear_id": "AMB-1047", "title": "Canon authority and IA lock: Today / Goals / Time / Motion / You", "milestone": "M00", "status": "In Progress / local Green pending push"},
     {"train": "M00.T02", "linear_id": "AMB-1048", "title": "Live repository wiring and quarantine proof", "milestone": "M00", "status": "Backlog"},
     {"train": "M01.T01", "linear_id": "AMB-1049", "title": "Data lifecycle and replay foundation: deterministic receipts and state recovery", "milestone": "M01", "status": "Backlog"},
     {"train": "M01.T02", "linear_id": "AMB-1050", "title": "Migration and versioned schema foundation: fail-safe evolution", "milestone": "M01", "status": "Backlog"},

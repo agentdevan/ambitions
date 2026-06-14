@@ -41,8 +41,8 @@ let releasePerformanceObservatoryLabel = "PerformanceBudget.afep022.performance-
 enum ReleasePerformanceSurface: String, CaseIterable, Sendable, Equatable, Hashable {
     case today
     case goals
-    case capture
     case time
+    case motion
     case you
 }
 
@@ -175,10 +175,10 @@ enum ReleasePerformanceObservatoryRegistry {
             owner: "Goals performance observatory"
         ),
         makePlan(
-            surface: .capture,
+            surface: .motion,
             metricKinds: [.launch, .scroll, .wakeup],
-            fallbackSummary: "Keep capture input immediate, defer background work, and preserve low-latency intake.",
-            owner: "Capture performance observatory"
+            fallbackSummary: "Keep Motion proof and recovery inspection legible, defer background work, and preserve low-latency re-entry.",
+            owner: "Motion performance observatory"
         ),
         makePlan(
             surface: .time,
@@ -264,7 +264,7 @@ enum ReleasePerformanceResponsivenessReport {
             id: "tab-switching",
             area: .tabSwitching,
             budget: "The canonical five-tab shell must stay stable without hidden navigation or extra top-level surfaces.",
-            evidence: "M12 shell continuity tests cover Today, Goals, Capture, Time, You, and review routes; R02 keeps this as a regression lane.",
+            evidence: "M12 shell continuity tests cover Today, Goals, Time, Motion, You, global Capture, and review routes; R02 keeps this as a regression lane.",
             evidenceLevel: .automatedSimulator,
             readiness: .acceptableForInternalTesting,
             limitation: "Touch latency and animation smoothness need manual device review."

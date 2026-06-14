@@ -133,7 +133,7 @@ struct CaptureScreen: View {
                     Spacer()
                         .frame(height: 60)
 
-                    TopLevelSurfaceCompositionBar(surface: .capture)
+                    capturePrompt
 
                     AtmosphereComposerCanvas(
                         inputText: Binding(

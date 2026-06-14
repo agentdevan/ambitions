@@ -16,7 +16,7 @@ struct TopLevelSurfaceCompositionPreviewGallery: View {
                 ForEach(AmbitionsTopLevelSurfaceComposition.allCases) { surface in
                     TopLevelSurfaceCompositionBar(
                         surface: surface,
-                        state: surface == .capture ? .selected : .default
+                        state: surface == .motion ? .selected : .default
                     )
                 }
             }

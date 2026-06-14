@@ -92,9 +92,9 @@ Reviewer passes:
 
 - Not run as a separate subagent; this train is a deterministic control-plane install with direct validation. Reviewer prompt library was installed for subsequent source-changing trains.
 
-Pushed to main: no, pending AMB-1046 adapter commit.
+Pushed to main: yes.
 
-Push hash: not pushed yet.
+Push hash: `004a258378a92a21ad384c6ce239b2fb36c94e7d`.
 
 App source changed: no.
 

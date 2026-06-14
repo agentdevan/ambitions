@@ -16,6 +16,7 @@ Authority posture: Supporting registry subordinate to `docs/truth/*`, current so
 | Lane | Command | Green boundary |
 |---|---|---|
 | Master readiness | `python3 scripts/codex/amb-master-readiness-validate.py` | Structural proof that `amb-master` artifacts exist, bind to the new Linear project, and contain AMB issue IDs for active trains. |
+| Canon IA lock | `python3 scripts/codex/amb-master-canon-ia-validate.py` | Regression proof that active authority, app shell locks, preview fixtures, support reports, and focused tests agree on Today / Goals / Time / Motion / You with global Capture. |
 | Program preflight | `scripts/codex/program-preflight.sh amb-master` | Required files exist and forbidden dirty source/project paths are absent at run time. |
 | Program phase gate | `scripts/codex/program-phase-gate.sh amb-master <phase>` | Requested phase is declared and readiness validator passes for that phase. |
 | Closeout | `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child <file>` | Required closeout fields exist and forbidden overclaims/identifier drift are absent. |

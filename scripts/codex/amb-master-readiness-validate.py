@@ -25,6 +25,7 @@ REQUIRED_FILES = [
     ROOT / ".agents/skills/ambitions-master-build/SKILL.md",
     ROOT / ".agents/skills/ambitions-master-build/references/amb-master-closeout-template.md",
     ROOT / ".agents/skills/ambitions-master-build/references/amb-master-reviewer-prompts.md",
+    ROOT / "scripts/codex/amb-master-canon-ia-validate.py",
 ]
 REQUIRED_ISSUES = {"AMB-1126", "AMB-1046", "AMB-1047", "AMB-1048"}
 REQUIRED_PHASES = [f"M{i:02d}" for i in range(12)]
@@ -75,6 +76,19 @@ def validate(phase: str | None = None) -> list[str]:
         failures.append("train label appears in Linear issue field")
     if "AMB_MASTER" not in combined:
         failures.append("amb-master artifact marker missing")
+    canon_validator = ROOT / "scripts/codex/amb-master-canon-ia-validate.py"
+    if canon_validator.exists():
+        import subprocess
+
+        result = subprocess.run(
+            [sys.executable, str(canon_validator)],
+            cwd=ROOT,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+        if result.returncode != 0:
+            failures.append("canon IA validator failed:\n" + result.stdout.strip())
     return failures
 
 
