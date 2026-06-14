@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1113`
 
 Green/Yellow/Red status: Green for the focused AMB-1130 Step Graph Compiler runtime scope
 
-Pushed to main: yes; source implementation commit `b335815da8f92feafc069b082f1390015282b822` pushed and remote verified. Closeout metadata commit pending at initial report creation.
+Pushed to main: yes; source implementation commit `b335815da8f92feafc069b082f1390015282b822` and closeout metadata commit `64fe6dea24d174fb002f13104b5c4fa06329cde8` pushed and remote verified.
 
-Push hash: source implementation commit `b335815da8f92feafc069b082f1390015282b822`
+Push hash: source implementation commit `b335815da8f92feafc069b082f1390015282b822`; closeout metadata commit `64fe6dea24d174fb002f13104b5c4fa06329cde8`
 
 App source changed: yes
 
@@ -107,8 +107,9 @@ Linear reconciliation:
 - AMB-1130 guard checkpoint project status update: `933210c6-956d-494d-bb9a-5c750dd33c68`.
 - AMB-1130 source-push issue comment: `c84e7cc7-dc14-46c0-bfab-6a7badbe271e`.
 - AMB-1130 source-push project status update: `4fafb8b3-56d7-4667-a5d8-4e22d107c247`.
-- AMB-1130 final closeout issue comment: pending.
-- AMB-1130 final project closeout comment: pending.
-- AMB-1130 final project status update: pending.
+- AMB-1130 final closeout issue comment: `213715bf-25dd-43ea-b746-078a1fab9fc2`.
+- AMB-1130 final project closeout comment: `b7800f98-a1e0-44b2-afad-6ad043123e7d`.
+- AMB-1130 final project status update: `0c235c05-da3e-445d-a015-6d81ce04d6a0`.
+- AMB-1130 moved to Done in Linear on 2026-06-14 after remote main verification.
 
 Next train: `AMB-1131` / `M02.T05`
