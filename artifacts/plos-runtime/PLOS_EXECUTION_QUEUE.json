@@ -108,7 +108,7 @@
       "linear_id": "AMB-616",
       "linear_lookup_identifier": "AMB-616",
       "title": "Native Context Mesh and permission explainers",
-      "state": "parent_acceptance_in_progress_AMB-702_through_AMB-708_done_AMB-771_done_AMB-710_done_duplicates_AMB-764_through_AMB-770_AMB-772_archived_AMB-709",
+      "state": "done_in_linear_AMB-702_through_AMB-708_done_AMB-771_done_AMB-710_done_duplicates_AMB-764_through_AMB-770_AMB-772_archived_AMB-709",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M08"
     },
@@ -118,7 +118,7 @@
       "linear_id": "AMB-627",
       "linear_lookup_identifier": "AMB-627",
       "title": "Step Quality Firewall",
-      "state": "blocked_pending_AMB-616_parent_acceptance",
+      "state": "active_AMB-711_in_progress_AMB-712_through_AMB-717_backlog_AMB-773_through_AMB-779_duplicate_archived_canceled",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M09"
     },

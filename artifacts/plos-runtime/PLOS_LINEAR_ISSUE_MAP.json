@@ -733,6 +733,42 @@
       "title": "PLOS-090 - Install Step Quality Firewall contract"
     },
     {
+      "label": "PLOS-091",
+      "linear_id": "AMB-712",
+      "parent_linear_id": "AMB-627",
+      "title": "PLOS-091 - Define generic Step blocked-list scanner"
+    },
+    {
+      "label": "PLOS-092",
+      "linear_id": "AMB-713",
+      "parent_linear_id": "AMB-627",
+      "title": "PLOS-092 - Define Step context-fit validation"
+    },
+    {
+      "label": "PLOS-093",
+      "linear_id": "AMB-714",
+      "parent_linear_id": "AMB-627",
+      "title": "PLOS-093 - Define Step source/proof validation"
+    },
+    {
+      "label": "PLOS-094",
+      "linear_id": "AMB-715",
+      "parent_linear_id": "AMB-627",
+      "title": "PLOS-094 - Define Step accessibility and VoiceOver validation"
+    },
+    {
+      "label": "PLOS-095",
+      "linear_id": "AMB-716",
+      "parent_linear_id": "AMB-627",
+      "title": "PLOS-095 - Define Step elasticity coverage validation"
+    },
+    {
+      "label": "PLOS-096",
+      "linear_id": "AMB-717",
+      "parent_linear_id": "AMB-627",
+      "title": "PLOS-096 - Define compiler repair path for failed Steps"
+    },
+    {
       "label": "PLOS-274",
       "linear_id": "AMB-941",
       "parent_linear_id": "AMB-635",

@@ -2,8 +2,8 @@
 
 Status: Active Goal Mode program authority for PLOS
 Program: Personal Life OS Runtime Master Build
-Current allowed run type: AMB-616 / PLOS-M08 parent acceptance
-Current execution state: PLOS-M00 through PLOS-M07 complete in Linear. M08 parent acceptance is active after live Linear verification confirmed AMB-702 / PLOS-080 through AMB-708 / PLOS-086, AMB-771 / PLOS-087, and AMB-710 / PLOS-088 are Done; AMB-764 through AMB-770 plus AMB-772 are Duplicate/archived/canceled; and AMB-709 is archived/non-active.
+Current allowed run type: AMB-711 / PLOS-090 Step Quality Firewall contract
+Current execution state: PLOS-M00 through PLOS-M08 complete in Linear. M09 is active after live Linear verification confirmed AMB-627 / PLOS-M09 is Backlog, AMB-711 through AMB-717 are the canonical active M09 children, and AMB-773 through AMB-779 are Duplicate/archived/canceled.
 
 ## Mission
 

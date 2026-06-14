@@ -28,8 +28,8 @@ This map binds PLOS phase labels to actual Linear `AMB-*` issue identifiers. PLO
 | M05 | PLOS-M05 | AMB-613 | Source Atlas Pack / Seed Foundry | Done in Linear; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 Done; AMB-973 / PLOS-M05-R2 Done after staging R2 body-read/hash proof; AMB-738 through AMB-747 Duplicate |
 | M06 | PLOS-M06 | AMB-614 | Source Authority Mesh | Done in Linear; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 Done; AMB-748 through AMB-753 Duplicate/archived/canceled |
 | M07 | PLOS-M07 | AMB-615 | Any Goal Solution Loop | Done in Linear; AMB-692 / PLOS-070 Done; AMB-755 / PLOS-071 Done; AMB-694 / PLOS-072 Done; AMB-695 / PLOS-073 Done; AMB-696 / PLOS-074 Done; AMB-697 / PLOS-075 Done; AMB-698 / PLOS-076 Done; AMB-699 / PLOS-077 Done; AMB-700 / PLOS-078 Done; AMB-701 / PLOS-079 Done; AMB-754 and AMB-756 through AMB-763 Duplicate/archived/canceled; AMB-693 archived/non-active |
-| M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Active; AMB-702 / PLOS-080 through AMB-708 / PLOS-086 Done; AMB-771 / PLOS-087 In Progress; active remaining child AMB-710; AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled; AMB-709 archived/non-active |
-| M09 | PLOS-M09 | AMB-627 | Step Quality Firewall | Blocked pending M08 |
+| M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Done in Linear; AMB-702 / PLOS-080 through AMB-708 / PLOS-086 Done; AMB-771 / PLOS-087 Done; AMB-710 / PLOS-088 Done; AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled; AMB-709 archived/non-active |
+| M09 | PLOS-M09 | AMB-627 | Step Quality Firewall | Active; AMB-711 / PLOS-090 In Progress; AMB-712 through AMB-717 Backlog; AMB-773 through AMB-779 Duplicate/archived/canceled |
 | M10 | PLOS-M10 | AMB-617 | Golden vertical slice | Blocked pending M09 |
 | M11 | PLOS-M11 | AMB-618 | Onboarding and first-run activation | Blocked pending M10 |
 | M12 | PLOS-M12 | AMB-619 | Multi-Path Lattice | Blocked pending M11 |
@@ -133,6 +133,12 @@ Known examples:
 | PLOS-087 | AMB-771 | AMB-616 | Define permission value proof pattern |
 | PLOS-088 | AMB-710 | AMB-616 | Define permission ledger and revocation controls |
 | PLOS-090 | AMB-711 | AMB-627 | Install Step Quality Firewall contract |
+| PLOS-091 | AMB-712 | AMB-627 | Define generic Step blocked-list scanner |
+| PLOS-092 | AMB-713 | AMB-627 | Define Step context-fit validation |
+| PLOS-093 | AMB-714 | AMB-627 | Define Step source/proof validation |
+| PLOS-094 | AMB-715 | AMB-627 | Define Step accessibility and VoiceOver validation |
+| PLOS-095 | AMB-716 | AMB-627 | Define Step elasticity coverage validation |
+| PLOS-096 | AMB-717 | AMB-627 | Define compiler repair path for failed Steps |
 | PLOS-274 | AMB-941 | AMB-635 | Build Coverage Demand Queue gauntlet |
 | PLOS-287 | AMB-954 | AMB-635 | Build Golden vertical slice final proof |
 

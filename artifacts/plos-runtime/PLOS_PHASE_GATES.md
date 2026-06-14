@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode phase-gate contract
 Updated: 2026-06-13
-Scope of current packet: AMB-710 / PLOS-088 Permission ledger and revocation controls; no PLOS runtime feature implementation
+Scope of current packet: AMB-711 / PLOS-090 Step Quality Firewall contract; no PLOS runtime feature implementation
 
 Every phase must satisfy the global gates plus its phase-specific gate before execution can be closed Green. A phase label is not a Linear identifier. Use the `AMB-*` issue in `PLOS_LINEAR_ISSUE_MAP.json`.
 
@@ -194,7 +194,7 @@ Linear issue: `AMB-616`
 Label: `PLOS-M08`
 Purpose: Native Context Mesh and permission explainers.
 
-Current M08 status: Parent acceptance in progress under `AMB-616`. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` / `PLOS-080` through `AMB-708` / `PLOS-086` Done; `AMB-771` / `PLOS-087` Done; `AMB-710` / `PLOS-088` Done. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active. AMB-627 / PLOS-M09 is eligible only after AMB-616 parent acceptance is validated, pushed, moved to Done in Linear, and the M09 phase gate passes after live re-fetch.
+Current M08 status: Done in Linear after AMB-616 parent acceptance was pushed at `7f7c0830765df83c881139bbc743be3471ca66bc` and moved to Done in Linear. Live Linear verification found `AMB-702` / `PLOS-080` through `AMB-708` / `PLOS-086` Done; `AMB-771` / `PLOS-087` Done; `AMB-710` / `PLOS-088` Done. `AMB-764` through `AMB-770` and `AMB-772` are Duplicate/archived/canceled; `AMB-709` is archived/non-active.
 
 Required before Green:
 
@@ -208,11 +208,14 @@ Linear issue: `AMB-627`
 Label: `PLOS-M09`
 Purpose: Step Quality Firewall.
 
+Current M09 status: Active under `AMB-627`. Live Linear verification on 2026-06-13 America/New_York found canonical active children `AMB-711` / `PLOS-090` through `AMB-717` / `PLOS-096`, with duplicate/canceled lineage `AMB-773` through `AMB-779` marked Duplicate/archived/canceled. `AMB-711` is In Progress and owns the contract, machine-readable `StepQualityInput` / `StepQualityVerdict` artifacts, accepted/rejected fixture matrix, and local runnable validator only.
+
 Required before Green:
 
 - Generic, unsafe, source-weak, context-mismatched, inaccessible, or uninspectable steps are blocked or degraded.
 - Canonical user-facing language uses `Recommended step`, `Start now`, `Open step`, and `Step`.
 - Accessibility and VoiceOver validation expectations are explicit.
+- A runnable local validator exists by the M10 dependency and rejects generic, capability-mismatched, stale/revoked-source, missing-proof, inaccessible, and rigid/no-elasticity fixtures before AMB-617 / PLOS-M10 starts.
 
 ## M10
 

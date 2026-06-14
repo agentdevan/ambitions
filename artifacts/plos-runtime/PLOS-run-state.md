@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-616 / PLOS-M08 parent acceptance
+Run type: AMB-711 / PLOS-090 Step Quality Firewall contract
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -19,20 +19,20 @@ linear_project:
   team: "Ambitions"
   team_id: "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
 current_phase:
-  label: "PLOS-M08"
-  linear_id: "AMB-616"
-  title: "Native Context Mesh and permission explainers"
-  status: "Parent acceptance in progress after AMB-710 was pushed at 16cdb6680317254b3fce8d35d542146a5cefdb76 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-708, AMB-771, and AMB-710 Done, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
+  label: "PLOS-M09"
+  linear_id: "AMB-627"
+  title: "Step Quality Firewall"
+  status: "Active after AMB-616 / PLOS-M08 parent acceptance was pushed at 7f7c0830765df83c881139bbc743be3471ca66bc and moved to Done in Linear; live M09 re-fetch found canonical active children AMB-711 through AMB-717 and Duplicate/archived/canceled children AMB-773 through AMB-779"
 current_child:
-  label: "PLOS-M08-parent"
-  linear_id: "AMB-616"
-  title: "Parent acceptance for Native Context Mesh and permission explainers"
-  status: "In progress locally; AMB-702 through AMB-708, AMB-771, and AMB-710 are Done in Linear after AMB-710 closeout comment and status update; no active M08 child remains after live re-fetch"
+  label: "PLOS-090"
+  linear_id: "AMB-711"
+  title: "Install Step Quality Firewall contract"
+  status: "In Progress in Linear; contract, machine-readable StepQualityInput/StepQualityVerdict artifacts, accepted/rejected fixture matrix, and runnable validator are active local scope"
 next_allowed_action:
-  action: "Validate AMB-616 / PLOS-M08 parent acceptance, commit with the real Linear identifier, push to main, update AMB-616 in Linear, then re-fetch AMB-627 / PLOS-M09 and current M09 children before starting M09 if no new M08 active child was added"
-  after_current_child: "AMB-616 owns documentation/control-plane Native Context Mesh and permission explainer parent acceptance only; do not claim Swift/domain implementation, runtime adapters, PermissionLedger runtime implementation, runtime permission prompting, UI implementation, entitlement or privacy manifest changes, user-data upload or mutation, R2/Source Atlas publication, accessibility/device/performance/privacy/legal/release/App Review proof, M23 sync hardening, M26 certification, M09 completion, or production readiness"
+  action: "Validate AMB-711 / PLOS-090, commit with the real Linear identifier, push to main, update AMB-711 in Linear, then re-fetch AMB-627 / PLOS-M09 and current M09 children before starting AMB-712 / PLOS-091"
+  after_current_child: "AMB-711 owns contract/control-plane Step Quality Firewall artifacts and a local validator only; do not claim Swift/domain implementation, production runtime Step Quality Firewall wiring, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, R2/Source Atlas publication, M09 parent completion, M10 Golden Slice readiness, M26 certification, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-616 M08 parent acceptance report, phase review output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-711 Step Quality Firewall contract artifacts, local validator, validation summaries, child report/reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -41,11 +41,12 @@ validation_required_before_execution:
   - "python3 -m json.tool artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json"
   - "python3 -m json.tool artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json"
   - "scripts/codex/program-preflight.sh plos"
-  - "scripts/codex/program-phase-gate.sh plos M08"
+  - "scripts/codex/program-phase-gate.sh plos M09"
+  - "python3 scripts/codex/step-quality-firewall-validate.py"
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope phase artifacts/personal-life-os/reports/AMB-616-plos-m08-parent-acceptance-report.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-090-step-quality-firewall-contract.md"
 validation_not_run_by_current_scope: []
 ```
 
