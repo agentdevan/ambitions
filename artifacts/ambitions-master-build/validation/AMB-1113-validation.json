@@ -4,13 +4,16 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6",
-  "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6",
-  "linear_issue_status": "In Progress pending closeout metadata",
+  "closeout_metadata_commit": "04984e84ed9ca33f8834bfcfff1ba9969a765ae4",
+  "remote_verified_commit": "04984e84ed9ca33f8834bfcfff1ba9969a765ae4",
+  "linear_issue_status": "Done",
   "linear_source_push_issue_comment": "b38ca78e-c64c-4dc0-99c0-06a9ef9af488",
   "linear_source_push_project_comment": "2a0bdb29-7491-42c9-9605-1a1e849c3d94",
   "linear_source_push_project_status_update": "12bcc8fe-7993-4ebb-b09e-ef359fc9d583",
-  "status": "Green for the focused AMB-1113 Runtime core umbrella scope; source implementation pushed to origin/main and closeout metadata pending",
+  "linear_issue_closeout_comment": "a78e4a0c-494b-47d6-a747-048673a8fa38",
+  "linear_project_closeout_comment": "78695f73-ea85-42dd-b27b-ff865d7fd19c",
+  "linear_project_status_update": "f390c8a8-fd1e-422d-a4d6-b11e34ed7aad",
+  "status": "Green for the focused AMB-1113 Runtime core umbrella scope; source and closeout metadata pushed to origin/main and AMB-1113 moved to Done in Linear",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -104,17 +107,17 @@
       "command": "bash scripts/codex/program-proof-index.sh amb-master",
       "result": "pass",
       "entries": 126,
-      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T083916.log"
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T084222.log"
     },
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
       "result": "Green after metadata/proof-index regeneration",
-      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T083923.log"
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260614T084227.log"
     },
     {
       "command": "scripts/codex/program-phase-gate.sh amb-master M02",
       "result": "pass after queue advance to AMB-1111/M02.T01",
-      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T083923.log"
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T084227.log"
     }
   ],
   "non_claims": [

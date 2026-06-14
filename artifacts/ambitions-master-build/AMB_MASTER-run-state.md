@@ -29,13 +29,13 @@ last_closed_train:
   label: "M02.T00"
   linear_id: "AMB-1113"
   title: "Runtime core umbrella"
-  status: "Source commit 301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6 pushed to main and remote verified; closeout metadata pending commit/push before AMB-1113 Done reconciliation"
+  status: "Source commit 301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6 and closeout metadata commit 04984e84ed9ca33f8834bfcfff1ba9969a765ae4 pushed to main, remote verified, and AMB-1113 marked Done in Linear"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1113 / M02.T00 closeout metadata, move AMB-1113 Done in Linear after remote verification, then refresh live Linear and execute AMB-1111 / M02.T01."
+  action: "Commit and push AMB-1113 / M02.T00 post-push reconciliation metadata, then refresh live Linear and execute AMB-1111 / M02.T01."
 latest_local_scope:
   changed_path_policy: "AMB-1113 touched owned Runtime umbrella gate source plus focused runtime tests, concept-lock allowlists, champion coverage, and AMB-1113 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M02"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1113-runtime-core-umbrella.md"
 latest_validation:
-  status: "AMB-1113 focused implementation validation Green; source commit pushed to main and remote verified; closeout metadata in progress"
+  status: "AMB-1113 focused implementation validation Green; source and closeout metadata commits pushed to main; issue moved Done in Linear; post-push reconciliation in progress"
   logs:
     - "build/reports/xcode/AMB-1113-RuntimeCoreUmbrellaGateTests.xcresult"
     - "build/reports/xcode/AMB-1113-AdjacentRuntimeCoreTests.xcresult"
@@ -73,7 +73,7 @@ latest_validation:
 - `AMB-1053` / `M01.T05`: `fac32c9440cb04a93515cf0e99b4564e39d28ff7` source implementation; `f743c073781f55d629ca55c3b753136357125dd7` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`b995bd06-116c-440d-9043-d3424469ae9f`)
 - `AMB-1127` / `M01.T06A`: `9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3` source implementation; `37bd2c6f0cfcf4d9cec3f7798cb7ea4729bd0a53` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`85d8c69e-fc21-45ee-9794-0626a4ece06f`)
 - `AMB-1128` / `M01.T06B`: `88d549dea8acd7d7601d302db6e7f819bd16cfb2` source implementation; `15be81b068fd3113b25ea07f555c0b01b4e43286` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`c79e4c1c-b1b8-4e16-9042-10292420227f`)
-- `AMB-1113` / `M02.T00`: `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` source implementation pushed to `main` and remote verified; closeout metadata pending commit/push
+- `AMB-1113` / `M02.T00`: `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` source implementation; `04984e84ed9ca33f8834bfcfff1ba9969a765ae4` closeout metadata pushed to `main`, remote verified, marked Done in Linear, and project activity updated (`f390c8a8-fd1e-422d-a4d6-b11e34ed7aad`)
 
 ## Non-Claims
 

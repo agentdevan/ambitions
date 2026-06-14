@@ -12,9 +12,9 @@ Parent or umbrella issue: `AMB-1046`
 
 Green/Yellow/Red status: Green for the focused AMB-1113 Runtime core umbrella scope
 
-Pushed to main: yes; source implementation commit `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` pushed and remote verified; closeout metadata commit pending
+Pushed to main: yes; source implementation commit `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6` and closeout metadata commit `04984e84ed9ca33f8834bfcfff1ba9969a765ae4` pushed and remote verified
 
-Push hash: source implementation commit `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6`; closeout metadata commit pending
+Push hash: source implementation commit `301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6`; closeout metadata commit `04984e84ed9ca33f8834bfcfff1ba9969a765ae4`
 
 App source changed: yes
 
@@ -61,9 +61,9 @@ Validation run:
 - `bash scripts/release-claim-safety-scan.sh` - Green, no proof-sensitive release claims found.
 - `git diff --check` - pass.
 - `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1113-runtime-core-umbrella.md` - pass.
-- `bash scripts/codex/program-proof-index.sh amb-master` - pass; regenerated `artifacts/proof-ledger/proof-index.json` with 126 entries; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T083916.log`.
-- `scripts/codex/program-preflight.sh amb-master` - Green after metadata/proof-index regeneration; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T083923.log`.
-- `scripts/codex/program-phase-gate.sh amb-master M02` - pass after queue advance to AMB-1111/M02.T01; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T083923.log`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass; regenerated `artifacts/proof-ledger/proof-index.json` with 126 entries; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T084222.log`.
+- `scripts/codex/program-preflight.sh amb-master` - Green after metadata/proof-index regeneration; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T084227.log`.
+- `scripts/codex/program-phase-gate.sh amb-master M02` - pass after queue advance to AMB-1111/M02.T01; `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T084227.log`.
 
 Reviewer passes:
 - Deterministic guard pass via pre/post parallel implementation guard; no separate read-only reviewer produced source edits.
@@ -73,9 +73,9 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/validation/AMB-1113-parallel-guard-prompt.md`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T081131.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T081132.log`
-- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T083916.log`
-- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T083923.log`
-- `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T083923.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T084222.log`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260614T084227.log`
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M02-20260614T084227.log`
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `build/reports/parallel-implementation-guard/AMB-1113-pre.md`
 - `build/reports/parallel-implementation-guard/AMB-1113-post.md`
@@ -116,5 +116,9 @@ Linear reconciliation:
 - AMB-1113 source-push checkpoint issue comment: `b38ca78e-c64c-4dc0-99c0-06a9ef9af488`.
 - AMB-1113 source-push checkpoint project comment: `2a0bdb29-7491-42c9-9605-1a1e849c3d94`.
 - AMB-1113 source-push project status update: `12bcc8fe-7993-4ebb-b09e-ef359fc9d583`.
+- AMB-1113 final closeout issue comment: `a78e4a0c-494b-47d6-a747-048673a8fa38`.
+- AMB-1113 final closeout project comment: `78695f73-ea85-42dd-b27b-ff865d7fd19c`.
+- AMB-1113 final project status update: `f390c8a8-fd1e-422d-a4d6-b11e34ed7aad`.
+- AMB-1113 moved to Done in Linear on 2026-06-14 after remote main verification.
 
 Next train: `AMB-1111` / `M02.T01`
