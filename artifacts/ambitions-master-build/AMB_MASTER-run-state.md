@@ -19,23 +19,23 @@ project:
 current_phase:
   label: "M03"
   title: "Golden Slice + First-Run Proof"
-  status: "AMB-1114 validation Green for focused runtime source scope; source/control-plane and closeout metadata commits pushed and remote verified; final Linear closeout pending"
+  status: "AMB-1114 Done in Linear after focused runtime Green validation, source/control-plane push, closeout metadata push, and final proof-index reconciliation"
 current_train:
+  label: "M03.T02"
+  linear_id: "AMB-1115"
+  title: "First-run activation: first goal, first Recommended Step, first recovery option"
+  status: "Next eligible train; refresh live Linear before source edits"
+last_closed_train:
   label: "M03.T01"
   linear_id: "AMB-1114"
   title: "Golden vertical slice: music release goal from intake to replay"
-  status: "Focused source scope validated Green; source/control-plane and closeout metadata commits pushed and remote verified; final Linear closeout pending"
-last_closed_train:
-  label: "M02.T08"
-  linear_id: "AMB-1117"
-  title: "High-risk safety and jurisdiction handling"
-  status: "Source/control-plane and closeout metadata commits pushed and remote verified; AMB-1114 handoff active"
+  status: "Done in Linear; source/control-plane commit 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc, closeout metadata b95399da61bdb433c6ea52087a25a47695cdb465, final reconciliation ecc905cf854ab1b0d6feb1167beaca4da6369437"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Commit and push AMB-1114 final proof-index reconciliation, move AMB-1114 to Done in Linear if final checks stay Green, then refresh live Linear before AMB-1115 / M03.T02."
+  action: "Refresh live Linear for AMB-1115 / M03.T02, run AMB-MASTER preflight and M03 phase gate, then execute the first-run activation train."
 latest_local_scope:
   changed_path_policy: "AMB-1114 touched owned Golden Vertical Slice runtime source plus focused runtime tests, narrow Swift solver repairs in Today/Goals/You tests/service code, concept-lock allowlists, champion coverage, and AMB-1114 guard prompt."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M03"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1114-golden-vertical-slice-runtime.md"
 latest_validation:
-  status: "AMB-1114 focused implementation validation Green; source/control-plane and closeout metadata commits pushed and remote verified; final Linear closeout pending"
+  status: "AMB-1114 focused implementation validation Green; source/control-plane, closeout metadata, and final proof-index reconciliation commits pushed and remote verified; AMB-1114 Done in Linear"
   logs:
     - "DerivedData Test-Ambitions-2026.06.14_18-40-50--0400.xcresult"
     - "DerivedData Test-Ambitions-2026.06.14_18-42-36--0400.xcresult"
@@ -101,7 +101,7 @@ latest_validation:
 - `AMB-1132` / `M02.T06`: `448b7dc0f805f71ab0a285906ca789edd8e1d40f` source implementation; `483d1203d8bca4758e66ea4a79c1e2d8435fd264` closeout metadata; `cc38fd08a2996af345cf7de3389070d6fafbb2c4` final reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`b7521f07-e8aa-405b-8cd8-093f2464e487`)
 - `AMB-1133` / `M02.T07`: `75ecbf553b9bb43b17736ee7d45bc8671928e796` source implementation/control-plane commit; `bf1511cd4e7fbd585772bd99ba765624c0fb83d4` closeout metadata commit; `bf1e7afc56dee127c7fe49bc4326d37086a7262e` final repository reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`3ee2a773-f15f-4e39-8e2f-ef4bf5610278`).
 - `AMB-1117` / `M02.T08`: source/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195` and closeout metadata commit `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` pushed and remote verified after Green focused validation; AMB-1114 handoff active.
-- `AMB-1114` / `M03.T01`: focused Golden Vertical Slice runtime validation Green; source/control-plane commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` and closeout metadata commit `b95399da61bdb433c6ea52087a25a47695cdb465` pushed and remote verified; final Linear closeout pending; next train after reconciliation is `AMB-1115` / `M03.T02`.
+- `AMB-1114` / `M03.T01`: final proof-index reconciliation commit `ecc905cf854ab1b0d6feb1167beaca4da6369437` pushed and remote verified; AMB-1114 marked Done in Linear; next train is `AMB-1115` / `M03.T02`.
 
 ## Non-Claims
 

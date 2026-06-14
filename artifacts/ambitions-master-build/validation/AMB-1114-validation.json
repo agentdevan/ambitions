@@ -5,8 +5,8 @@
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc",
   "closeout_metadata_commit": "b95399da61bdb433c6ea52087a25a47695cdb465",
-  "remote_verified_commit": "b95399da61bdb433c6ea52087a25a47695cdb465",
-  "linear_issue_status": "In Progress",
+  "remote_verified_commit": "ecc905cf854ab1b0d6feb1167beaca4da6369437",
+  "linear_issue_status": "Done",
   "linear_compile_blocker_issue_comment": "afbe85a3-2c02-4fe5-aff1-b08a602f8d2f",
   "linear_compile_blocker_project_comment": "89a1c671-5cf5-49a0-a207-e6e256512ec9",
   "linear_second_compile_blocker_issue_comment": "35b28982-d52f-4730-a05f-56a5c67f7613",
@@ -19,7 +19,11 @@
   "linear_final_validation_project_comment": "04835ae2-db5d-4679-85bc-0c76969506b1",
   "linear_source_push_issue_comment": "316912c3-2b73-46e2-b650-83ba558f4fd3",
   "linear_source_push_project_comment": "c9c021e6-59ec-42ff-98b5-123875e30de0",
-  "status": "Green for the focused AMB-1114 Golden Vertical Slice runtime source scope; source/control-plane and closeout metadata commits pushed and remote verified; final Linear closeout pending",
+  "linear_final_closeout_issue_comment": "edc7bebd-30f6-47eb-ba08-403e51f4d4d1",
+  "linear_final_closeout_project_comment": "fcec1cec-178b-487a-b88a-ec1a3c8699a3",
+  "linear_done_transition": "2026-06-14T22:59:23.441Z",
+  "final_reconciliation_commit": "ecc905cf854ab1b0d6feb1167beaca4da6369437",
+  "status": "Green for the focused AMB-1114 Golden Vertical Slice runtime source scope; source/control-plane, closeout metadata, and proof-index reconciliation commits pushed and remote verified; AMB-1114 Done in Linear",
   "validation": [
     {
       "command": "scripts/codex/program-preflight.sh amb-master",
@@ -200,6 +204,18 @@
       "command": "scripts/codex/program-phase-gate.sh amb-master M03",
       "result": "pass after closeout metadata push",
       "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185632.log"
+    },
+    {
+      "command": "git push origin main",
+      "result": "pushed final proof-index reconciliation commit ecc905cf854ab1b0d6feb1167beaca4da6369437"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "local HEAD and origin/main both ecc905cf854ab1b0d6feb1167beaca4da6369437 after final proof-index reconciliation push"
+    },
+    {
+      "command": "mcp__linear.save_issue id=AMB-1114 state=Done",
+      "result": "AMB-1114 moved to Done in Linear at 2026-06-14T22:59:23.441Z"
     }
   ],
   "non_claims": [

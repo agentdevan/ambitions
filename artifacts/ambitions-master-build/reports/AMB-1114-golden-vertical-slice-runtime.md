@@ -10,13 +10,15 @@ Train label: `M03.T01`
 
 Parent or umbrella issue: `AMB-1113`
 
-Green/Yellow/Red status: Green for the focused AMB-1114 Golden Vertical Slice runtime scope; source/control-plane and closeout metadata commits are pushed and remote-verified; final Linear closeout is pending.
+Green/Yellow/Red status: Green for the focused AMB-1114 Golden Vertical Slice runtime scope; source/control-plane, closeout metadata, and final proof-index reconciliation commits are pushed and remote-verified; AMB-1114 is Done in Linear.
 
 Pushed to main: yes; source/control-plane commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` is pushed and remote-verified.
 
 Push hash: `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc`
 
 Closeout metadata hash: `b95399da61bdb433c6ea52087a25a47695cdb465`
+
+Final reconciliation hash: `ecc905cf854ab1b0d6feb1167beaca4da6369437`
 
 App source changed: yes
 
@@ -81,6 +83,9 @@ Validation run:
 - `bash scripts/codex/program-proof-index.sh amb-master` - pass after closeout metadata push; `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T185632.log`.
 - `scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata push; `artifacts/ambitions-master-build/script-output/program-preflight-20260614T185632.log`.
 - `scripts/codex/program-phase-gate.sh amb-master M03` - pass after closeout metadata push; `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T185632.log`.
+- `git push origin main` - pushed final proof-index reconciliation commit `ecc905cf854ab1b0d6feb1167beaca4da6369437`.
+- `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` - local HEAD and `origin/main` both returned `ecc905cf854ab1b0d6feb1167beaca4da6369437` after final proof-index reconciliation push.
+- `mcp__linear.save_issue id=AMB-1114 state=Done` - AMB-1114 moved to Done in Linear at `2026-06-14T22:59:23.441Z`.
 
 Reviewer passes:
 - Deterministic guard pass via pre/post parallel implementation guard; no separate read-only reviewer produced source edits.
@@ -147,6 +152,9 @@ Linear reconciliation:
 - AMB-1114 final validation project comment: `04835ae2-db5d-4679-85bc-0c76969506b1`.
 - AMB-1114 source-push issue comment: `316912c3-2b73-46e2-b650-83ba558f4fd3`.
 - AMB-1114 source-push project comment: `c9c021e6-59ec-42ff-98b5-123875e30de0`.
+- AMB-1114 final closeout issue comment: `edc7bebd-30f6-47eb-ba08-403e51f4d4d1`.
+- AMB-1114 final project closeout comment: `fcec1cec-178b-487a-b88a-ec1a3c8699a3`.
+- AMB-1114 Done transition: complete in Linear at `2026-06-14T22:59:23.441Z`.
 - `codex_apps` Linear fetch/status-update tools returned token-invalidated HTTP 401 during the run; issue/project comments were posted through the active `mcp__linear.save_comment` path.
 
 Next train: `AMB-1115` / `M03.T02`

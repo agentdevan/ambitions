@@ -23,7 +23,7 @@
     {"rank": 17, "train": "M02.T06", "linear_id": "AMB-1132", "phase": "M02", "title": "Schedule Install Kernel", "state": "Done / source commit 448b7dc0f805f71ab0a285906ca789edd8e1d40f"},
     {"rank": 18, "train": "M02.T07", "linear_id": "AMB-1133", "phase": "M02", "title": "Life Consequence Engine", "state": "Done / source commit 75ecbf553b9bb43b17736ee7d45bc8671928e796"},
     {"rank": 19, "train": "M02.T08", "linear_id": "AMB-1117", "phase": "M02", "title": "High-risk safety and jurisdiction handling", "state": "Done / source commit 172614b0b8b543fbf2f8287ddc7abfc101172195 / closeout metadata 90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75 / AMB-1114 handoff active"},
-    {"rank": 20, "train": "M03.T01", "linear_id": "AMB-1114", "phase": "M03", "title": "Golden vertical slice", "state": "Green / source commit 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc / closeout metadata b95399da61bdb433c6ea52087a25a47695cdb465 / final Linear closeout pending"},
+    {"rank": 20, "train": "M03.T01", "linear_id": "AMB-1114", "phase": "M03", "title": "Golden vertical slice", "state": "Done / source commit 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc / closeout metadata b95399da61bdb433c6ea52087a25a47695cdb465 / final reconciliation ecc905cf854ab1b0d6feb1167beaca4da6369437"},
     {"rank": 21, "train": "M03.T02", "linear_id": "AMB-1115", "phase": "M03", "title": "First-run activation", "state": "Backlog"},
     {"rank": 22, "train": "M04", "linear_id": "live AMB issue set", "phase": "M04", "title": "Native Shell + Design System Foundation", "state": "blocked pending M03"},
     {"rank": 23, "train": "M05", "linear_id": "live AMB issue set", "phase": "M05", "title": "Today + Step Execution Surface", "state": "blocked pending M04"},
