@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "issue_id": "AMB-705",
+  "plos_label": "PLOS-083",
+  "parent_issue_id": "AMB-616",
+  "artifact": "Health/Fitness Context Adapter Contract",
+  "status": "documentation_control_plane_contract",
+  "downstream_consumable": true,
+  "source_kind": "health_fitness",
+  "usefulness_decision": {
+    "default": "not_useful_for_launch_core",
+    "future_allowed_only_after": [
+      "separate_value_proof",
+      "issue_authority",
+      "coarse_local_summary_contract",
+      "revocation_fixture_coverage",
+      "user_controls",
+      "privacy_manifest_review_if_needed"
+    ],
+    "future_allowed_summary_families": [
+      "coarse_energy_recovery_band",
+      "movement_readiness_band"
+    ],
+    "not_useful_when": [
+      "would_request_permission_before_value_proof",
+      "would_use_precise_health_values",
+      "would_create_medical_advice_or_diagnosis",
+      "would_create_training_or_safety_clearance",
+      "would_send_health_context_to_r2_source_atlas_linear_support_external_prompts_analytics_or_telemetry",
+      "would_create_shame_streak_score_or_fitness_app_anatomy"
+    ]
+  },
+  "non_claims": [
+    "no_app_source_change",
+    "no_swift_domain_implementation",
+    "no_runtime_adapter_implementation",
+    "no_healthkit_integration",
+    "no_healthkit_entitlement_change",
+    "no_permission_prompting_implementation",
+    "no_privacy_manifest_change",
+    "no_health_fitness_read_implementation",
+    "no_health_fitness_replacement_claim",
+    "no_medical_advice_claim",
+    "no_cloudkit_sync_readiness",
+    "no_release_readiness",
+    "no_accessibility_proof",
+    "no_device_proof",
+    "no_performance_proof"
+  ],
+  "adapter_required_fields": [
+    "adapterId",
+    "sourceKind",
+    "permissionScope",
+    "usefulnessDecision",
+    "sensitivityClass",
+    "valueProof",
+    "permissionLedgerRef",
+    "slotTypes",
+    "freshnessPolicy",
+    "revocationPolicy",
+    "allowedInfluence",
+    "storageBoundary",
+    "receiptPolicy",
+    "fallbackBehavior",
+    "blockedUses"
+  ],
+  "slot_types": [
+    "health_not_useful",
+    "health_denied_fallback",
+    "coarse_energy_recovery_band",
+    "movement_readiness_band",
+    "health_stale_or_revoked"
+  ],
+  "sensitivity_classes": [
+    {
+      "class": "health_not_useful",
+      "meaning": "adapter disabled or not useful for current feature",
+      "allowed_storage": "local_configuration_or_receipt_only"
+    },
+    {
+      "class": "health_denied_fallback",
+      "meaning": "permission denied restricted revoked unavailable or not requested",
+      "allowed_storage": "local_permission_state_and_reduced_precision_explanation_only"
+    },
+    {
+      "class": "coarse_energy_recovery_band",
+      "meaning": "future derived local energy or recovery band without raw values",
+      "allowed_storage": "local_only_transient_or_future_encrypted_local_store"
+    },
+    {
+      "class": "movement_readiness_band",
+      "meaning": "future coarse movement readiness band without workouts or precise activity history",
+      "allowed_storage": "local_only_transient_or_future_encrypted_local_store"
+    },
+    {
+      "class": "health_sensitive_never_transmit",
+      "meaning": "permissioned Health/Fitness-derived summary",
+      "allowed_storage": "never_r2_source_atlas_linear_support_external_prompt_analytics_telemetry_or_public_proof"
+    }
+  ],
+  "permission_value_proofs": [
+    {
+      "proof": "future_coarse_energy_recovery",
+      "status": "future_separately_authorized_only",
+      "benefit": "Make a local recommendation gentler when coarse energy or recovery context suggests a lighter day.",
+      "improves": [
+        "recovery_safe_step_variants",
+        "path_density",
+        "local_explanation_quality"
+      ],
+      "does_not_do": [
+        "diagnose",
+        "treat",
+        "prescribe",
+        "train",
+        "upload_health_data",
+        "create_source_atlas_content",
+        "create_r2_objects",
+        "train_models",
+        "rank_the_user",
+        "share_health_fitness_context"
+      ],
+      "fallback": "keep_start_here_step_goal_detail_local_closure_and_recovery_usable_with_manual_or_assumed_neutral_energy_context"
+    }
+  ],
+  "permission_ledger_states": [
+    {"state": "not_determined", "behavior": "show_value_proof_only_when_user_chooses_health_fitness_aware_path"},
+    {"state": "granted_limited", "behavior": "use_only_exact_coarse_summary_family_covered_by_value_proof"},
+    {"state": "granted_read", "behavior": "emit_only_allowed_coarse_derived_local_slots"},
+    {"state": "denied", "behavior": "keep_assumed_neutral_manual_energy_and_recovery_behavior"},
+    {"state": "restricted", "behavior": "explain_reduced_precision_without_repeated_nagging"},
+    {"state": "revoked", "behavior": "invalidate_current_permissioned_summaries_and_stop_health_fitness_influence_until_fresh_value_proof"},
+    {"state": "unavailable", "behavior": "use_baseline_manual_energy_and_recovery_behavior"},
+    {"state": "needs_review", "behavior": "hold_health_fitness_influence_until_user_reviews_permission_value_state"}
+  ],
+  "context_to_path_matrix": [
+    {
+      "slot": "health_not_useful",
+      "may_influence": ["skip_permission_prompt", "keep_manual_energy_behavior", "explain_no_health_fitness_use"],
+      "must_not_influence": ["hidden_permission_request", "feature_disabled_copy", "health_fitness_dependency_claim"]
+    },
+    {
+      "slot": "health_denied_fallback",
+      "may_influence": ["assumed_neutral_energy_recovery", "manual_edit_route", "reduced_precision_explanation", "no_nagging_fallback"],
+      "must_not_influence": ["broken_app_state", "false_precision", "shame", "streaks", "readiness_score", "engagement_pressure"]
+    },
+    {
+      "slot": "coarse_energy_recovery_band",
+      "may_influence": ["future_recovery_safe_step_variant", "future_lighter_path_density", "future_elasticity_ranking", "local_explanation"],
+      "must_not_influence": ["medical_advice", "diagnosis", "treatment", "training_plan", "high_risk_approval", "source_authority", "public_or_share_artifact"],
+      "status": "future_separately_authorized_only"
+    },
+    {
+      "slot": "movement_readiness_band",
+      "may_influence": ["future_lightweight_movement_compatible_variant", "future_recovery_caution_when_user_asked_for_it"],
+      "must_not_influence": ["fitness_coaching", "workout_prescription", "safety_clearance", "productivity_score", "life_score", "generic_habit_streak"],
+      "status": "future_separately_authorized_only"
+    },
+    {
+      "slot": "health_stale_or_revoked",
+      "may_influence": ["invalidate_current_health_fitness_influence", "fall_back_to_manual_or_baseline_context"],
+      "must_not_influence": ["continuing_current_influence", "hidden_mutation", "learning_update", "share_projection", "source_atlas_or_r2_content"]
+    }
+  ],
+  "privacy_boundary": {
+    "allowed_local_summaries": [
+      "permission_state",
+      "adapter_usefulness_decision",
+      "local_explanation_id",
+      "local_receipt_or_ledger_id",
+      "future_coarse_energy_recovery_band_after_separate_proof",
+      "future_movement_readiness_band_after_separate_proof"
+    ],
+    "blocked_raw_material": [
+      "healthkit_samples_or_identifiers",
+      "step_counts",
+      "workouts",
+      "activity_rings",
+      "calories",
+      "distance",
+      "heart_rate",
+      "hrv",
+      "vo2",
+      "sleep_stages",
+      "respiratory_metrics",
+      "symptoms",
+      "medications",
+      "diagnoses",
+      "lab_results",
+      "fertility_or_cycle_data",
+      "body_measurements",
+      "mindfulness_data",
+      "clinical_records",
+      "detailed_timestamps"
+    ],
+    "forbidden_destinations": [
+      "r2_objects",
+      "source_atlas_packs_or_seeds",
+      "public_pathing_data",
+      "linear_private_health_fitness_content",
+      "unredacted_support_bundle",
+      "external_model_prompt",
+      "analytics_or_telemetry_payload",
+      "crash_payload",
+      "public_share_or_progress_story_artifact"
+    ]
+  },
+  "fixture_matrix": [
+    "health_fitness_not_useful_for_launch_core_produces_no_permission_ask",
+    "not_determined_state_shows_value_proof_before_system_permission_prompt",
+    "value_proof_names_exact_coarse_summary_family_and_denies_broad_access",
+    "denied_permission_leaves_start_here_step_goal_detail_local_closure_and_recovery_usable",
+    "restricted_or_unavailable_state_uses_baseline_manual_energy_and_recovery_without_nagging",
+    "revoked_permission_invalidates_current_permissioned_summaries",
+    "stale_summaries_cannot_drive_current_path_density_today_copy_schedule_fit_elasticity_or_learning",
+    "granted_limited_read_scope_emits_only_coarse_local_bands_and_no_raw_records_or_precise_values",
+    "raw_health_fitness_values_never_enter_r2_source_atlas_linear_support_external_prompts_analytics_telemetry_screenshots_or_public_artifacts",
+    "health_fitness_context_cannot_approve_high_risk_guarded_routes_or_soften_unsafe_blocked_behavior",
+    "health_fitness_context_cannot_create_medical_diagnosis_treatment_training_nutrition_medication_fertility_pregnancy_or_professional_boundary_guidance",
+    "health_fitness_context_cannot_create_shame_streak_readiness_score_productivity_score_life_score_or_generic_fitness_app_anatomy",
+    "manual_user_provided_energy_and_recovery_context_remains_available_without_health_fitness_access",
+    "fixture_test_generated_health_fitness_data_is_not_production_runtime_proof",
+    "healthkit_integration_and_release_claims_are_blocked_without_exact_proof"
+  ],
+  "red_conditions": [
+    "permission_ask_before_value_proof",
+    "denied_restricted_revoked_stale_or_unavailable_permission_breaks_app_value_or_leaves_stale_influence_active",
+    "raw_or_precise_health_fitness_values_drive_runtime_directly",
+    "health_fitness_context_becomes_source_atlas_r2_public_pack_linear_support_external_prompt_analytics_telemetry_crash_or_share_material",
+    "health_fitness_context_produces_medical_advice_diagnosis_treatment_training_safety_clearance_nutrition_medication_fertility_pregnancy_mental_health_or_professional_boundary_guidance",
+    "health_fitness_context_bypasses_high_risk_unsafe_step_quality_or_source_authority_gates",
+    "health_fitness_context_silently_mutates_without_receipt",
+    "shame_streak_readiness_score_productivity_score_life_score_fitness_gamification_or_generic_habit_fitness_app_framing",
+    "health_fitness_healthkit_release_privacy_legal_accessibility_device_performance_testflight_app_store_or_app_review_readiness_claim_without_proof"
+  ],
+  "downstream_consumers": [
+    "AMB-706",
+    "AMB-707",
+    "AMB-708",
+    "AMB-771",
+    "AMB-710",
+    "AMB-619",
+    "AMB-621",
+    "AMB-623",
+    "AMB-625",
+    "AMB-628",
+    "AMB-632",
+    "AMB-635"
+  ]
+}

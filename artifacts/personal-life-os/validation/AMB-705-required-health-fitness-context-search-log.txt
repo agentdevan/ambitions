@@ -1,0 +1,805 @@
+./docs/architecture/DEPENDENCY_CLIENTS.md:9:        | Calendar | schedule access and permission boundaries | generic calendar clone behavior |
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:77:| Anti-creepy learning | Learn behaviors, not identity labels; avoid sensitive inference; explain pattern use. | Personal but not invasive. | Extends privacy classes. | Health apps show risks of over-personalization. | Never infer protected/sensitive identity attributes for recommendations. |
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:1435:- Fitness
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:1439:- Health
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:1916:- source permissions
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:1970:- source permissions
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:2150:- permission clarity
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:2648:- blocking Goals because permissions are denied
+./docs/truth/PRODUCT_DESIGN_TRUTH.md:2777:- Surface does not require calendar permission for basic value.
+./docs/truth/RELEASE_TRUTH.md:883:- notification permission states
+./docs/truth/RELEASE_TRUTH.md:884:- calendar permission states if enabled
+./docs/architecture/dependencies/CALENDAR_CLIENT.md:7:        calendar-aware reads and permission boundaries
+./docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md:118:  App lifecycle, shell, navigation, composition root, permissions.
+./docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md:41:  - source-present privacy safety policy includes sensitive areas, permission states, projection policy, tool intent, redaction, receipts, local projection, and external projection blocking.
+./docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md:63:| permission/context changes | Does lost or gained context change eligibility, privacy, source, location, or safety assumptions? |
+./docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md:131:- Fitness stays recovery-safe this week.
+./docs/codex/existing-code-champion-coverage.yml:1598:      - "GoalHealthStatus"
+./docs/codex/existing-code-champion-coverage.yml:1599:      - "GoalHealthSignal"
+./docs/codex/existing-code-champion-coverage.yml:3790:      - "ExternalSurfaceSyncHealth"
+./docs/codex/existing-code-champion-coverage.yml:3796:      - "ExternalSurfaceSyncHealthState"
+./docs/truth/IMPLEMENTATION_TRUTH.md:1110:- EventKit permission and data flow behavior
+./Native/Ambitions/Services/PolicyGuardedCommandExecutor.swift:31:        guard record.mayExecuteWithoutUserConfirmation || decision.permissionLevel == .executeLocalOnly else {
+./Native/Ambitions/Services/PolicyGuardedCommandExecutor.swift:51:                "permissionLevel": decision.permissionLevel.rawValue,
+./Native/Ambitions/Services/PolicyGuardedCommandExecutor.swift:60:        switch decision.permissionLevel {
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:488:    ) -> [GoalHealthSignal] {
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:489:        var signals: [GoalHealthSignal] = []
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:514:        signals: [GoalHealthSignal],
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:518:    ) -> GoalHealthStatus {
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:539:        status: GoalHealthStatus,
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:543:        signals: [GoalHealthSignal]
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:556:        status: GoalHealthStatus,
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:623:    func recommendations(status: GoalHealthStatus, signals: [GoalHealthSignal], posture: GoalPosture) -> [GoalBelievabilityRecommendation] {
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:642:    func correctionSuggestions(signals: [GoalHealthSignal], posture: GoalPosture) -> [RecommendationExplanationCorrectionActionKind] {
+./Native/Ambitions/Services/GoalBelievabilityProjector.swift:677:    func title(for type: RecommendationExplanationType, status: GoalHealthStatus) -> String {
+./Native/Ambitions/Services/GoalDomainPacks.swift:107:        displayName: "Health Pack",
+./Native/Ambitions/Services/GoalDomainPacks.swift:111:        domainLimit: "Health guidance stays organizational and does not replace medical or clinical advice."
+./Native/Ambitions/Services/ExecutionResilienceProjector.swift:649:    func disruptionKind(for signal: GoalHealthSignal, assessment: GoalBelievabilityAssessment) -> ExecutionDisruptionKind? {
+./Native/Ambitions/Services/AppServices.swift:95:    /// - Throws: An error if persistence retrieval fails or system permissions cannot be resolved.
+./Native/Ambitions/Services/RealityIntegrationAdapters.swift:16:            semanticState: snapshot.calendarContext?.permissionState.rawValue,
+./Native/Ambitions/Services/RealityIntegrationAdapters.swift:29:                "permissionState": snapshot.calendarContext?.permissionState.rawValue ?? CalendarPermissionState.unavailable.rawValue,
+./Native/Ambitions/Services/RealityIntegrationAdapters.swift:108:                    id: "uncertainty.calendar.permission",
+./Native/Ambitions/Services/PathIntelligenceProjector.swift:437:            return "Health guidance stays organizational and should not replace professional medical advice."
+./docs/codex-os/PROGRAM_ADAPTER_STANDARD.md:12:It is not product implementation, a roadmap promise, release proof, or permission to skip source ownership.
+./Native/Ambitions/Notifications/LocalNotificationFoundation.swift:270:        userInfo["continuity"] = snapshot?.continuity.syncHealth.state.rawValue ?? ExternalSurfaceSyncHealthState.localFirst.rawValue
+./Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift:249:    let permissionState: AmbitionsOSAdaptationPermissionState
+./Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift:268:        permissionState: AmbitionsOSAdaptationPermissionState,
+./Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift:286:        self.permissionState = permissionState
+./Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift:340:        if profile.permissionState.blocksUse {
+./Native/Ambitions/Domain/YouPlanningDefaultsModels.swift:33:        footer: "Planning setup is optional and does not request permissions by itself."
+./Native/Ambitions/Domain/ScreenContractModels.swift:561:        forbiddenFirstScreenContent: ["Onboarding permission request", "Raw calendar list", "Calendar clone", "Agenda", "Analytics dashboard", "Red warning surface", "Silent scheduler"],
+./Native/Ambitions/Domain/ScreenContractModels.swift:566:        accessibilityRequirements: ["LifeShape Field summarizes open time, goal time, protected time, and pressure.", "Calendar controls have permission rationale.", "Timeline has non-gesture controls."],
+./docs/codex-os/REVIEWER_BOARD_STANDARD.md:12:It is not implementation proof, release proof, owner approval, or permission for reviewers to edit files.
+./Sources/Accessibility/AccessibilityNutrition.swift:61:            "Verify error, denied-permission, empty, unresolved, and degraded states include a clear next step or safe escape."
+./docs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md:96:| `Native/Ambitions/Domain/GoalBelievabilityModels.swift` | App | GoalHealthStatus, GoalHealthSignal, GoalBelievabilitySubjectKind, GoalPosture, GoalCapacityFit, GoalDeadlineRisk, GoalPriorityRealityAssessment, GoalBelievabilityReason, GoalBelievabilityRecommendation, GoalBelievabilityAssumption, GoalBelievabilityInput, GoalBelievabilityAssessment, GoalBelievabilitySnapshot, GoalBelievabilitySummary | Referenced by active target | capture | capture_root | CANONICAL_HELPER | membership=App; declared_types=14; text_reference_signal=171 | Keep under canonical owner review | False |
+./docs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md:197:| `Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift` | App | ExternalSurfaceSnapshot, CodingKeys, ExternalSurfaceNextAction, ExternalSurfaceDisplayMetadata, ExternalSurfaceGoalMode, ExternalSurfaceStepState, ExternalSurfaceUrgency, ExternalSurfaceTiming, ExternalSurfaceNowState, ExternalSurfaceAmbientState, ExternalSurfaceVariantState, ExternalSurfaceVariantAction, ExternalSurfaceVariantKind, ExternalSurfaceVariantProminence, ExternalSurfaceContinuityState, CodingKeys, ExternalSurfaceNowStateLease, ExternalSurfaceSyncHealth, ExternalSurfaceContinuityReceipt, ExternalSurfaceLifecycleContext, ExternalSurfaceLifecycleSourceState, ExternalSurfaceLifecycleReconciliationState, ExternalSurfaceLeaseStatus, ExternalSurfaceSyncHealthState, ExternalSurfaceOrigin, ExternalSurfaceActionReference, ExternalSurfaceBlockerSummary, ExternalSurfaceCommandDescriptor, ExternalSurfaceRitualCue, ExternalSurfaceTodayPosture, ExternalSurfacePressureLevel, ExternalSurfaceCaptureUrgency, ExternalSurfaceRitualKind, ExternalSurfaceRitualProgressState, ExternalSurfaceCommandKind | Referenced by active target | today | today_root | CANONICAL_HELPER | membership=App; declared_types=35; text_reference_signal=774 | Keep under canonical owner review | False |
+./Sources/Components/LifeDirectionalIntegrationPrimitives.swift:313:        VectorNode(id: 0, label: "Core Health", x: 0.25, y: 0.35, speedX: 0.002, speedY: 0.003),
+./Sources/Components/AmbitionsExtendedTactileKit.swift:514:                Text(isOvercommitted ? "Overcommitted" : "Healthy")
+./Sources/Components/AmbitionsExtendedTactileKit.swift:541:        "\(isOvercommitted ? "Overcommitted" : "Healthy"). \(Int((stressScore * 100).rounded())) percent. Non-color cue: the symbol and text carry the state."
+./Native/Ambitions/Domain/RealityModels.swift:189:    let permissionState: CalendarPermissionState
+./Native/Ambitions/Domain/RealityModels.swift:202:        permissionState: CalendarPermissionState,
+./Native/Ambitions/Domain/RealityModels.swift:211:        self.permissionState = permissionState
+./Native/Ambitions/Domain/RealityModels.swift:215:        self.hasCalendarReadAccess = permissionState.canRead
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:162:    let permissionLevel: SafeAutomationPermissionLevel
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:177:        permissionLevel: SafeAutomationPermissionLevel,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:192:        self.permissionLevel = permissionLevel
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:210:        switch permissionLevel {
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:219:        permissionLevel == .executeLocalOnly && confirmationRequirement == .notRequired
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:380:                permission: .requiresConfirmation,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:396:                permission: .suggestOnly,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:406:                permission: .executeLocalOnly,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:420:                permission: .requiresConfirmation,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:433:                permission: .prepareDraft,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:446:                permission: .requiresConfirmation,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:459:                permission: .prepareDraft,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:471:                permission: .requiresConfirmation,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:483:                permission: .prepareDraft,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:495:                permission: .notSupportedYet,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:507:                permission: .neverAutomate,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:519:                permission: .neverAutomate,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:531:                permission: .requiresConfirmation,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:551:                permission: .notSupportedYet,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:563:            permission: .executeLocalOnly,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:574:        permission: SafeAutomationPermissionLevel,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:589:            permissionLevel: permission,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:600:                correctionAvailability: correctionAvailability(permission: permission, receiptState: receiptState),
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:607:        permission: SafeAutomationPermissionLevel,
+./Native/Ambitions/Domain/SafeAutomationPolicyModels.swift:610:        switch permission {
+./prompts/batches/AMB-515.md:54:Calendar clone, agenda clone, free/busy grid, heatmap analytics, productivity rating, resource allocation chart, AI scheduling surface, calendar permission required for basic value, Preview Reflow missing, no manual fallback, stale runtime-root treatment, or Capture/Goals/You canon drift.
+./prompts/batches/AMB-518.md:38:Implement/analyze top Personal Runtime / Trust summary and grouped controls: Trust & Automation, Privacy, Receipts & History, Planning Setup, Source Settings, Account & Preferences, Support/System. Expose automation level, what Ambitions can do, learning summary, source permissions, calendar state, recommendation behavior, receipt history, privacy controls, clear/reset/pause/disable controls.
+./prompts/batches/AMB-548.md:40:- The default visible fixture contract includes: Music, Fitness, Money, Relationships, Career, Health, Learning, Home, Creative, Personal Growth.
+./Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift:148:    let permissionState: PersonalizationFactorLedgerPermissionState
+./Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift:154:        permissionState: PersonalizationFactorLedgerPermissionState,
+./Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift:159:        self.permissionState = permissionState
+./Native/Ambitions/Domain/PersonalizationFactorLedgerModels.swift:274:    let permissionRequiredFactorIDs: [String]
+./Native/Ambitions/Domain/SmartAttachmentModels.swift:46:        case .fitness: "Fitness"
+./Native/Ambitions/Domain/SmartAttachmentModels.swift:47:        case .health: "Health"
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:105:    let permissionState: AmbitionsOSPrivacyPermissionState
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:125:        permissionState: AmbitionsOSPrivacyPermissionState,
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:144:        self.permissionState = permissionState
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:217:        let isBlocked = policy.permissionState == .deletePending || policy.permissionState == .externalBlocked ||
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:218:            policy.permissionState == .hide || policy.permissionState == .reject || policy.permissionState == .forget
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:229:            policy.permissionState.blocksProjection == false
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:380:        if policy.permissionState == .inferredNeedsReview && policy.reviewState == .ready {
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:386:        if policy.permissionState == .deletePending && policy.projectionPolicy != .hidden {
+./Native/Ambitions/Domain/AmbitionsOSPrivacySafetyModels.swift:395:        if policy.permissionState.blocksProjection && policy.projectionPolicy != .hidden {
+./Native/Ambitions/Domain/YouModels.swift:683:    case permission
+./Native/Ambitions/Domain/YouModels.swift:689:        case .permission:
+./Native/Ambitions/Domain/YouModels.swift:707:    let permissionLabel: String
+./Native/Ambitions/Domain/YouModels.swift:729:        subtitle: "Sensitive local signal rows and permission labels stay visible before stronger control work lands.",
+./Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:23:    case requestPlatformPermission = "request_platform_permission"
+./Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:46:    case permissionPromptNotAllowed = "permission_prompt_not_allowed"
+./Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:245:            issues.insert(.permissionPromptNotAllowed)
+./Native/Ambitions/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift:13:    case dangerousHealthFitness = "dangerous_health_fitness"
+./Native/Ambitions/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift:29:        case .dangerousHealthFitness, .regulatedProfessionalDomain,
+./Native/Ambitions/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift:102:            concerns.contains(.dangerousHealthFitness) ||
+./Native/Ambitions/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift:226:            request.concerns.contains(.dangerousHealthFitness) {
+./Native/Ambitions/Domain/AmbitionsOSLivingDreamSafetyTriageModels.swift:358:        .init(id: "ldi03-dangerous-health", fixtureFamilyNumber: 13, concern: .dangerousHealthFitness, expectedLane: .professionalBoundaryScaffold, expectedDisposition: .professionalBoundaryReview),
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:5:enum GoalHealthStatus: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:17:enum GoalHealthSignal: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:164:    let signal: GoalHealthSignal?
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:170:        signal: GoalHealthSignal? = nil,
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:284:    let status: GoalHealthStatus
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:295:    let signals: [GoalHealthSignal]
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:316:        status: GoalHealthStatus,
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:327:        signals: [GoalHealthSignal],
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:448:    let status: GoalHealthStatus
+./Native/Ambitions/Domain/GoalBelievabilityModels.swift:453:    let signals: [GoalHealthSignal]
+./Native/Ambitions/Domain/LifeAreaModels.swift:33:            return "Health"
+./Native/Ambitions/Domain/SmartAttachmentPlacementPreview.swift:94:            return "May support: Fitness / Social activity / Sports context."
+./Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:103:            permissionLabel: "Optional",
+./Native/Ambitions/PreviewSupport/PreviewTimeScenarios.swift:517:            permissionLabel: "Optional",
+./Native/Ambitions/Features/You/YouRootSurface.swift:100:            "permission and receipt drill-down controls"
+./Native/Ambitions/Features/You/YouTrustHistoryProjector.swift:11:        let permissionSummary: String
+./Native/Ambitions/Features/You/YouTrustHistoryProjector.swift:20:            permissionSummary: String,
+./Native/Ambitions/Features/You/YouTrustHistoryProjector.swift:28:            self.permissionSummary = permissionSummary
+./Native/Ambitions/Features/You/YouTrustHistoryProjector.swift:61:            footer: "\(input.permissionSummary) This is a review surface, not a feed; raw logs and private detail stay behind owning surfaces."
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:310:                            YouSystemCenterItem(id: "notifications", title: "Notifications", subtitle: "Reminder permission.", icon: "bell.badge", statusLabel: "Not requested", semanticState: .neutral, accessibilityHint: "Opens notification settings."),
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:348:                    YouConstitutionRule(id: "constitution-sensitive-memory", title: "Ask before sensitive memory", detail: "Health, relationship, financial, location, calendar-derived, and sensitive Life Area context requires user review before stronger memory use.", statusLabel: "Approval required", state: .warning),
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:530:                subtitle: "Sensitive local signal rows keep storage, export, reset, delete, provenance, privacy, and permission labels visible without hidden inference.",
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:549:                                permissionLabel: "User-owned",
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:553:                                accessibilityHint: "Shows the profile defaults row and the visible storage, export, reset, delete, provenance, privacy, and permission labels."
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:556:                                id: "personal-vault-permissions",
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:557:                                kind: .permission,
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:567:                                permissionLabel: "Permission-gated",
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:571:                                accessibilityHint: "Shows the permission matrix row and its local-first trust boundary."
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:592:                                permissionLabel: "Inspect in Trust Center",
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:600:                                kind: .permission,
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:610:                                permissionLabel: "Future-owned",
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:736:                    YouTrustDataMapItem(id: "trust-data-map-permissions", title: "Permission boundaries", dataTypes: "Notifications and Time-owned calendar awareness", sourceLabel: "Notifications not requested; calendar not requested", controlLabel: "System permission controls stay explicit", privacyLabel: "No silent calendar writes", statusLabel: "Permission-gated", semanticState: .calendarDerived),
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:747:                            YouTrustCenterRoute(id: "trust-route-calendar", title: "Calendar boundary", subtitle: "Calendar awareness is Time-owned. Writes require confirmation.", icon: "calendar.badge.clock", statusLabel: "Not requested", semanticState: .calendarDerived, accessibilityHint: "Shows calendar permission and write boundary."),
+./Native/Ambitions/PreviewSupport/PreviewFixtures.swift:795:                title: "Integrations and permissions",
+./Native/Ambitions/Features/You/YouScreen.swift:131:            return DegradedStateOrchestrator.permissionDeniedNotifications()
+./Native/Ambitions/Features/You/YouScreen.swift:134:            return DegradedStateOrchestrator.permissionNeededNotifications()
+./Native/Ambitions/Features/You/YouScreen.swift:354:                    primaryAccessibilityIdentifier: "you.notification-permission.primary",
+./Native/Ambitions/Features/You/YouScreen.swift:355:                    secondaryAccessibilityIdentifier: "you.notification-permission.secondary",
+./Native/Ambitions/Features/You/YouScreen.swift:379:                YouControlGroup(eyebrow: "Permission edges", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.local-data-permissions-control-group")
+./Native/Ambitions/Features/You/YouScreen.swift:499:                        subtitle: "\(profileProjection.personalVault.sections.flatMap(\.rows).count) local signal and permission rows show source, storage, export, reset, delete, provenance, privacy, and permission labels.",
+./Native/Ambitions/Features/You/YouScreen.swift:2598:                        subtitle: "A compact inventory of local context, permissions, receipts, and future-owned edges."
+./Native/Ambitions/Features/You/YouScreen.swift:3148:                            eyebrow: section.id.localizedCaseInsensitiveContains("permission") ? "Permissions Center" : "Sensitive Local Signals",
+./Native/Ambitions/Features/You/YouScreen.swift:3168:            value: "\(personalVault.sections.count) sections, \(personalVault.sections.flatMap(\.rows).count) rows, \(personalVault.sections.flatMap(\.rows).filter { $0.kind == .permission }.count) permission rows.",
+./Native/Ambitions/Features/You/YouScreen.swift:3169:            hint: "Review the local signal rows, permission labels, and export/reset/delete boundaries."
+./Native/Ambitions/Features/You/YouScreen.swift:3211:                    TagPill(row.permissionLabel, icon: "lock.shield", state: row.state)
+./Native/Ambitions/Features/You/YouScreen.swift:3229:        case .permission:
+./Native/Ambitions/Domain/LifeContextModels.swift:46:    case precisePermissioned = "precise_permissioned"
+./Native/Ambitions/Domain/LifeContextModels.swift:1145:                    eligibilityRulesSummary: "School portfolio pathway with age, permission, and review progression.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:5:/// system preferences, trust parameters, and external service permissions.
+./Native/Ambitions/Features/You/YouFeatureService.swift:410:                subtitle: "Truthful status for local-first data, permissions, personal vault rows, external surfaces, sync, automation, and recovery.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:414:                    detail: "Stored on this device. Optional permissions are explicit. Future sync and external surfaces remain labeled until verified.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:501:                        subtitle: "Sensitive signal rows and permission labels stay reviewable through You.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:551:                title: "Integrations and permissions",
+./Native/Ambitions/Features/You/YouFeatureService.swift:682:                dataTypes: "Sensitive local signals, permissions, export, reset, delete, provenance, privacy policy",
+./Native/Ambitions/Features/You/YouFeatureService.swift:700:                id: "trust-data-map-permissions",
+./Native/Ambitions/Features/You/YouFeatureService.swift:704:                controlLabel: "System permission controls stay explicit",
+./Native/Ambitions/Features/You/YouFeatureService.swift:749:                footer: "These rows describe current runtime truth. They do not request permissions or enable future services by themselves.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:767:                        accessibilityHint: "Shows calendar permission and write boundary."
+./Native/Ambitions/Features/You/YouFeatureService.swift:772:                        subtitle: "Local reminders are optional and permission-gated. Ambitions still works without notification access.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:776:                        accessibilityHint: "Shows notification permission status."
+./Native/Ambitions/Features/You/YouFeatureService.swift:790:                        subtitle: "Sensitive local signal rows, provenance, and permission labels stay visible before broader policy work.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:794:                        accessibilityHint: "Shows personal vault and permissions posture."
+./Native/Ambitions/Features/You/YouFeatureService.swift:1089:                            subtitle: "Reminder permission.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1229:            forgetMemory.permissionLevel == .neverAutomate &&
+./Native/Ambitions/Features/You/YouFeatureService.swift:1302:                    detail: "Health, relationship, financial, location, calendar-derived, and sensitive Life Area context requires user review before stronger memory use.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1582:            permissionLabel: "User-owned",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1584:            accessibilityHint: "Shows the profile defaults row and the visible storage, export, reset, delete, provenance, privacy, and permission labels."
+./Native/Ambitions/Features/You/YouFeatureService.swift:1598:            permissionLabel: "Review gated",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1614:            permissionLabel: "Inspect in Trust Center",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1618:        let permissionsRow = makePersonalVaultRow(
+./Native/Ambitions/Features/You/YouFeatureService.swift:1619:            id: "personal-vault-permissions",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1620:            kind: .permission,
+./Native/Ambitions/Features/You/YouFeatureService.swift:1630:            permissionLabel: "Permission-gated",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1632:            accessibilityHint: "Shows the permission matrix row and its local-first trust boundary."
+./Native/Ambitions/Features/You/YouFeatureService.swift:1636:            kind: .permission,
+./Native/Ambitions/Features/You/YouFeatureService.swift:1646:            permissionLabel: "Future-owned",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1653:            subtitle: "Sensitive local signal rows keep storage, export, reset, delete, provenance, privacy, and permission labels visible without hidden inference.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1666:                    id: "personal-vault-permissions",
+./Native/Ambitions/Features/You/YouFeatureService.swift:1670:                        permissionsRow,
+./Native/Ambitions/Features/You/YouFeatureService.swift:1691:        permissionLabel: String,
+./Native/Ambitions/Features/You/YouFeatureService.swift:1702:            permissionLabel
+./Native/Ambitions/Features/You/YouFeatureService.swift:1718:            permissionLabel: permissionLabel,
+./Native/Ambitions/Features/You/YouFeatureService.swift:4045:                $0.sensitiveUse.permissionState == .blocked
+./Native/Ambitions/Features/You/YouFeatureService.swift:4077:                runtimePermissionLabel: factor.sensitiveUse.permissionState.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+./Native/Ambitions/Features/You/YouFeatureService.swift:4090:        let sensitiveFactors = ledger.factors.filter { $0.sensitiveUse.isSensitive || $0.sensitiveUse.permissionState != .allowed }
+./Native/Ambitions/Features/You/YouFeatureService.swift:4119:                activityLabel: factor.sensitiveUse.permissionState == .allowed ? "Allowed" : "Blocked",
+./Native/Ambitions/Features/You/YouFeatureService.swift:4121:                runtimePermissionLabel: factor.sensitiveUse.permissionState.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+./Native/Ambitions/Features/You/YouFeatureService.swift:4173:            $0.control.active == false || $0.allowedForRuntimeUse == false || $0.sensitiveUse.permissionState == .disabled
+./Native/Ambitions/Features/You/YouFeatureService.swift:4205:                runtimePermissionLabel: factor.sensitiveUse.permissionState.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
+./Native/Ambitions/Features/You/YouFeatureService.swift:4667:            return "Precise with permission"
+./Native/Ambitions/Features/You/YouFeatureService.swift:4695:            return "Health"
+./Native/Ambitions/Features/You/YouFeatureService.swift:5648:                            title: "Reflow permission",
+./Native/Ambitions/Features/You/YouFeatureService.swift:5653:                            accessibilityHint: "Explains the reflow permission boundary.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:5690:                    subtitle: "Trust comes before automation; automation remains permission posture, not silent control.",
+./Native/Ambitions/Features/You/YouFeatureService.swift:5713:                    footer: "This center explains the default. It does not execute calendar writes, permission requests, or broad reflow."
+./Native/Ambitions/Features/You/YouFeatureService.swift:5828:            footer: "Availability Center explains how defaults affect Today and Plan. It does not request permissions, write calendars, auto-fill open time, or run broad reflow."
+./Native/Ambitions/Features/You/YouFeatureService.swift:5915:                permissionSummary: "Notifications \(notificationStatus.statusLabel); calendar \(calendarAuthorizationLabel(calendarAuthorization))."
+./Native/Ambitions/Domain/LifeGraphEventLogModels.swift:17:    case privacyPermission = "privacy_permission"
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:1370:        .init(id: "fitness", title: "Fitness", summary: "Training, strength, mobility, and physical practice.", domainKey: nil),
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:1374:        .init(id: "health", title: "Health", summary: "Body, recovery, energy, and care.", domainKey: .health),
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:1482:            equalWeightSummary: "Music, Fitness, Money, Relationships, Career, Health, Learning, Home, Creative, and Personal Growth stay equal-weight by default.",
+./Native/Ambitions/Features/Goals/GoalsFeatureService.swift:2738:                        title: "Reminders permission needed",
+./Native/Ambitions/Domain/SideEffectLedgerModels.swift:195:            switch decision.permissionLevel {
+./Native/Ambitions/Persistence/CloudKitContinuityClient.swift:67:            case .permissionFailure:
+./Native/Ambitions/Persistence/CloudKitContinuityClient.swift:236:        case .quotaExceeded, .permissionFailure, .serverRejectedRequest:
+./Native/Ambitions/Persistence/CloudKitContinuityClient.swift:251:        case .quotaExceeded, .permissionFailure, .serverRejectedRequest:
+./Native/Ambitions/Support/CrossSurfaceContinuityMaturityReport.swift:173:            requiredEvidence: "Fresh install, returning user, denied permissions, data volume, disrupted week, export/import, and external surface device checks."
+./Native/Ambitions/Support/ReleaseCandidateLockDecisionReport.swift:73:            nextAction: "Run the R03 fresh install, returning user, denied permissions, lots-of-data, disrupted-week, export/import, and external-surface journeys on a supported iPhone."
+./Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift:161:            expectedEvidence: ["User choice", "Time-owned permission boundary", "No connected-calendar claim"],
+./Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift:257:            budget: "Launch must compile cleanly, avoid permission prompts during startup, and keep first-run claims conservative.",
+./Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift:297:            limitation: "Calendar permission permutations and real-device interaction timing remain R03 checks."
+./Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift:66:            limitation: "App Store Connect labels must be reconciled against the final signed build, any Apple permission prompts, support URLs, and human legal/privacy review before submission."
+./Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift:71:            preparedStatement: "Reviewer notes draft: no login is required; Calendar-style permissions are optional and manual planning remains available; external surfaces should be evaluated only where the submitted build enables them.",
+./Native/Ambitions/Support/ReleaseExternalTruthReadinessPacket.swift:72:            evidence: "R03 records no-account fresh-install proof paths, denied-permission fallbacks, and external-surface device gates without claiming TestFlight or App Store readiness.",
+./Native/Ambitions/Features/Time/TimeFeatureModels.swift:437:    let permissionLabel: String
+./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:7:    case deniedPermissions = "Denied permissions"
+./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:72:            id: "denied-permissions",
+./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:74:            requiredJourney: "Deny or restrict Calendar/notification-style permissions and verify user choice remains clear.",
+./Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift:75:            evidence: "Plan, calendar reality, EventKit, activation, and external verification tests cover denied/unavailable permission fallback without silent writes.",
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:120:    let permissionState: CalendarPermissionState
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:139:                return "Reminders permission is required before creating reminder items."
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:141:                return "Calendar permission is required before creating calendar events."
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:264:        let permission = await calendarPermissionState()
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:267:            permissionState: permission,
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:272:            explanation: permission.canRead
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:286:            permissionState: permission,
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:383:                blockedFacts: ["Calendar write permission was not available for this requested calendar event."]
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:630:        let permission = await requestCalendarReadAccessFromPlan(actionName: request.userInitiatedPlanAction)
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:632:        if permission.canRead {
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:646:            permissionState: permission,
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:651:            explanation: permission.canRead
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:664:        if permission.canRead {
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:675:            permissionState: permission,
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:694:        let permission = await requestCalendarWriteAccessForConfirmedBlock(intent: intent)
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:695:        guard permission.canWrite else {
+./Native/Ambitions/Integrations/CalendarReminders/EventKitIntegrationService.swift:702:                blockedFacts: ["Calendar write permission was not available for the confirmed block."]
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:68:            permissionRequiredFactorIDs: factors.filter { $0.sensitiveUse.permissionState != .allowed }.map(\.id).sorted(),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:158:                        permissionState: .allowed,
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:196:                        permissionState: .allowed,
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:233:                        permissionState: .allowed,
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:258:                        permissionState: .allowed,
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:283:                        permissionState: .allowed,
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:311:                        permissionState: .allowed,
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:337:                        permissionState: equipmentDetail.isEmpty ? .needsReview : .allowed,
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:361:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:385:                    sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:409:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:434:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:456:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:480:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:499:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:521:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:543:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:567:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:589:                        sensitive: .init(isSensitive: true, permissionState: .needsReview, sensitiveUseLabel: "Sensitive recovery context", redactedReason: "Recovery context is summarized rather than quoted."),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:611:                        sensitive: .init(isSensitive: false, permissionState: .allowed, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:642:                    sensitive: .init(isSensitive: false, permissionState: eligibilityModel.contains(where: { $0.userConfirmed || $0.locationDependent }) ? .allowed : .needsReview, sensitiveUseLabel: "Not sensitive", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:671:                        sensitive: .init(isSensitive: false, permissionState: .blocked, sensitiveUseLabel: "Freshness needs review", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:684:                    reason: "Sensitive context is present and needs explicit permission before runtime use.",
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:686:                    freshness: freshnessProjection(for: projection, area: "Sensitive context", fallbackReason: "Sensitive context needs explicit permission."),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:696:                        permissionState: .blocked,
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:721:                    sensitive: .init(isSensitive: false, permissionState: .needsReview, sensitiveUseLabel: "Proof needs review", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:741:                    sensitive: .init(isSensitive: false, permissionState: trace.receiptBehavior.satisfiesTraceContract ? .allowed : .needsReview, sensitiveUseLabel: "Receipt-backed proof", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:763:                    sensitive: .init(isSensitive: false, permissionState: trace.source.canSupportRecommendation ? .allowed : .needsReview, sensitiveUseLabel: "Trace trust", redactedReason: nil),
+./Native/Ambitions/Runtime/PersonalizationFactorLedgerBuilder.swift:886:                            $0.sensitiveUse.permissionState != .allowed
+./Native/Ambitions/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModels.swift:380:            policy.permissionState.blocksProjection ||
+./Native/Ambitions/Domain/PlanInsertionCandidate.swift:24:    case calendarPermissionGate = "calendar_permission_gate"
+./Native/Ambitions/Domain/PlanInsertionCandidate.swift:42:    case calendarPermissionRequired = "calendar_permission_required"
+./Native/Ambitions/Domain/PlanInsertionCandidate.swift:50:        case .calendarPermissionRequired: "Calendar permission required"
+./Native/Ambitions/Domain/PlanInsertionCandidate.swift:149:                requiresCalendarPermission ? "Calendar permission required before any write." : "Calendar permission not required for the local proposal.",
+./Native/Ambitions/Domain/PlanInsertionCandidate.swift:217:            requiresCalendarPermission ? "Calendar permission required before any write." : "Calendar permission not required for the local proposal.",
+./Native/Ambitions/Features/Time/TimeScreen.swift:589:                        TagPill(boundary.permissionLabel, icon: "calendar", state: boundary.visualState)
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:24:        let permission = await calendarRealityService?.calendarPermissionState() ?? .unavailable
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:28:            permission: permission,
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:44:                permission: .unavailable,
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:75:            permission: result.permissionState,
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:1486:            permissionLabel: calendarAwareness.valueLabel,
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:2421:    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> TimeCalendarAwarenessState
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:2428:        permission: CalendarPermissionState,
+./Native/Ambitions/Features/Time/TimeFeatureService.swift:2438:        let calendarAwareness = source.makeCalendarAwarenessState(permission: permission, openWindowCount: openWindowCount)
+./Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:44:    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> TimeCalendarAwarenessState {
+./Native/Ambitions/Features/Time/TimeCalendarAwarenessSupport.swift:45:        switch permission {
+./Native/Ambitions/Features/Shared/ActivationContract.swift:90:        ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AppTab.you.systemImage)
+./Native/Ambitions/Features/Shared/ActivationContract.swift:208:                explanation: "You can begin without connecting anything. Trust, preferences, and optional permissions live here without claiming sync or export is ready.",
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:7:    case permissionNeeded
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:8:    case permissionDenied
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:80:        case .permissionNeeded:
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:82:        case .permissionDenied:
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:383:    static func permissionDeniedNotifications() -> DegradedStatePresentation {
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:385:            id: "degraded.permission.notifications.denied",
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:386:            kind: .permissionDenied,
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:396:    static func permissionNeededNotifications() -> DegradedStatePresentation {
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:398:            id: "degraded.permission.notifications.needed",
+./Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift:399:            kind: .permissionNeeded,
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1456:                    title: "Reminders permission needed",
+./Native/Ambitions/Features/Today/TodayFeatureService.swift:1472:                body: "Today will not request Calendar permission or write calendar blocks. Open Time to make planning calendar-aware from there.",
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:204:    let syncHealth: ExternalSurfaceSyncHealth
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:216:            syncHealth: ExternalSurfaceSyncHealth(
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:228:        syncHealth: ExternalSurfaceSyncHealth,
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:234:        self.syncHealth = syncHealth
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:239:            syncHealthState: syncHealth.state,
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:246:        case syncHealth
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:254:        let syncHealth = try container.decode(ExternalSurfaceSyncHealth.self, forKey: .syncHealth)
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:260:            syncHealth: syncHealth,
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:274:struct ExternalSurfaceSyncHealth: Codable, Sendable, Equatable {
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:275:    let state: ExternalSurfaceSyncHealthState
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:314:            syncHealthState: .localFirst,
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:322:        syncHealthState: ExternalSurfaceSyncHealthState,
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:328:        switch (leaseStatus, syncHealthState) {
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift:377:enum ExternalSurfaceSyncHealthState: String, Codable, Sendable {
+./Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift:85:                syncLabel: glance.continuity.syncHealth.label,
+./Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift:37:        self.trustSummary = "\(glance.continuity.syncHealth.label) · \(glance.continuity.lease.freshnessLabel)"
+./Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads.swift:568:                syncHealth: ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift:17:        let activeHealth = makeGoal(id: "health-active", title: "Rebuild sleep", domain: .health, state: .active)
+./Native/AmbitionsTests/Services/LifeAreaAtlasProjectorTests.swift:20:        let overview = projector.overview(from: .init(goals: [parkedCareer, activeHealth]))
+./Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:12:                    permissionState: .denied,
+./Native/AmbitionsTests/Services/RealityIntegrationAdaptersTests.swift:33:        let context = CalendarDerivedContext(permissionState: .readWrite, explanation: "Derived busy time was used locally.")
+./Native/AmbitionsTests/Services/ExecutionResilienceProjectorTests.swift:504:                permissionState: .readWrite,
+./Native/AmbitionsTests/Services/GoalBelievabilityProjectorTests.swift:481:                permissionState: .readWrite,
+./Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift:27:        XCTAssertEqual(result.metadata["permissionLevel"], SafeAutomationPermissionLevel.requiresConfirmation.rawValue)
+./Native/AmbitionsTests/Services/SmartAttachmentServiceTests.swift:442:        XCTAssertTrue(receipt?.accessibilityValue.localizedCaseInsensitiveContains("Calendar permission required before any write.") == true)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:41:            permissionState: .readWrite,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:180:            permissionState: .denied,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:201:        XCTAssertEqual(calendarContext.permissionState, .denied)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:209:        XCTAssertEqual(scheduleEntry.metadata["permissionState"], CalendarPermissionState.denied.rawValue)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:220:        XCTAssertEqual(result.domainCounts[.permissionsAndStaleItems], 60)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:226:        XCTAssertEqual(result.aspectCounts[.permissions], 30)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:233:        XCTAssertEqual(result.permissionCounts[.notDetermined], 50)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:234:        XCTAssertEqual(result.permissionCounts[.denied], 50)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:235:        XCTAssertEqual(result.permissionCounts[.restricted], 50)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:236:        XCTAssertEqual(result.permissionCounts[.readWrite], 50)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:237:        XCTAssertEqual(result.permissionCounts[.writeOnly], 50)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:238:        XCTAssertEqual(result.permissionCounts[.unavailable], 50)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:274:        if eventKitPermissionEvidence == false { items.append("EventKit permission") }
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:300:    case permissionsAndStaleItems = "permissions-and-stale-items"
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:309:    case permissions = "permissions"
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:321:    let permissionState: CalendarPermissionState
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:324:        "\(domain.rawValue).\(aspect.rawValue).\(permissionState.rawValue)"
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:328:        "Calendar P0 \(domain.rawValue) / \(aspect.rawValue) / \(permissionState.rawValue)"
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:370:    var permissionCounts: [CalendarPermissionState: Int] {
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:371:        Dictionary(grouping: outcomes, by: { $0.scenario.permissionState }).mapValues(\.count)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:389:            CalendarPermissionState.allCases.flatMap { permissionState in
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:394:                        permissionState: permissionState
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:410:        let permission = calendarRemindersAuthorizationState(for: scenario.permissionState)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:411:        let readState = CalendarPermissionState(calendarRemindersState: permission)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:412:        let awarenessState = timeCalendarAwarenessState(for: scenario.permissionState)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:415:        record(permission.canWrite == scenario.permissionState.canWrite, "Permission write capability drifted.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:416:        record(permission.canReadCalendarContext == scenario.permissionState.canRead, "Permission read capability drifted.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:417:        if scenario.permissionState == .unavailable {
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:418:            record(permission.canReadCalendarContext == false, "Unavailable calendar permission must not read calendar context.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:419:            record(permission.canWrite == false, "Unavailable calendar permission must not write calendar context.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:421:            record(readState == scenario.permissionState, "Calendar permission mapping drifted.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:424:            awarenessState.canRequestCalendarRead == (scenario.permissionState == .notDetermined),
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:432:            validateTodayConsumptionScenario(scenario, permission: permission, awarenessState: awarenessState, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:434:            validateStaleItemsScenario(scenario, permission: permission, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:435:        case .permissions:
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:436:            validatePermissionsScenario(scenario, permission: permission, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:438:            validateRecurrenceScenario(scenario, permission: permission, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:440:            validateConflictScenario(scenario, permission: permission, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:442:            validateProtectedFreeTimeScenario(scenario, permission: permission, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:444:            validateFreeTimeScenario(scenario, permission: permission, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:446:            validateReceiptsReplayScenario(scenario, permission: permission, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:448:            validateExportDeleteScenario(scenario, permission: permission, record: record)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:469:                title: "Calendar P0 replacement \(scenario.permissionState.rawValue)",
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:475:                isUserConfirmed: scenario.permissionState.canWrite,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:476:                calendarEventIdentifier: scenario.permissionState.canWrite ? "event.\(scenario.id)" : nil
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:494:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:499:            permissionState: scenario.permissionState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:502:            derivedBusyWindowCount: permission.canReadCalendarContext ? 1 : 0,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:504:            explanation: permission.canReadCalendarContext
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:511:        record(calendarContext.hasCalendarReadAccess == permission.canReadCalendarContext, "Calendar-derived read access must match the permission state.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:519:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:523:            permissionState: scenario.permissionState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:526:            derivedBusyWindowCount: permission.canReadCalendarContext ? 2 : 0,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:535:        record(staleContext.hasCalendarReadAccess == permission.canReadCalendarContext, "Stale-item read access must match the permission state.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:541:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:546:        record(permission.canWrite == scenario.permissionState.canWrite, "Calendar permission write gating must stay consistent.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:547:        record(permission.canReadCalendarContext == scenario.permissionState.canRead, "Calendar permission read gating must stay consistent.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:548:        record(calendarError.errorDescription?.contains("Calendar permission") == true, "Calendar permission error copy must stay local and specific.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:553:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:562:            suggestedDate: permission.canWrite ? fixedNow.addingTimeInterval(3_600) : nil
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:567:        record(selection.suggestedDate != nil || permission.canWrite == false, "Recurrence suggestions must respect the permission gate.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:572:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:585:            nearbyAvailableWindow: permission.canReadCalendarContext
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:588:            pressure: permission.canReadCalendarContext ? .moderate : .low
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:593:        record(report.pressure == (permission.canReadCalendarContext ? .moderate : .low), "Conflict pressure must remain grounded in the permission state.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:594:        record(report.nearbyAvailableWindow != nil || permission.canReadCalendarContext == false, "Nearby room must remain bounded by the permission state.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:599:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:631:                calendarDerivedBusyCount: permission.canReadCalendarContext ? 1 : 0,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:636:                permissionState: scenario.permissionState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:639:                derivedBusyWindowCount: permission.canReadCalendarContext ? 1 : 0,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:645:                calendarConflictCount: permission.canReadCalendarContext ? 1 : 0,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:662:                calendarBusyMinutes: permission.canReadCalendarContext ? 60 : 0,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:684:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:687:        let awarenessState = timeCalendarAwarenessState(for: scenario.permissionState)
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:696:        record(awarenessState.status == expectedAwarenessStatus(for: scenario.permissionState), "Free-time calendar awareness must remain grounded in the permission state.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:703:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:751:        record(permission.canReadCalendarContext == (scenario.permissionState.canRead), "Replay scenarios must stay tied to the permission state.")
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:760:        permission: CalendarRemindersAuthorizationState,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:776:                isUserConfirmed: permission.canWrite,
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:777:                calendarEventIdentifier: permission.canWrite ? "event.export.\(scenario.id)" : nil
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:794:    private func timeCalendarAwarenessState(for permission: CalendarPermissionState) -> TimeCalendarAwarenessState {
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:795:        switch permission {
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:859:    private func expectedAwarenessStatus(for permission: CalendarPermissionState) -> TimeCalendarAwarenessStatus {
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:860:        switch permission {
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:874:    private func calendarRemindersAuthorizationState(for permissionState: CalendarPermissionState) -> CalendarRemindersAuthorizationState {
+./Native/AmbitionsTests/Domain/IOS26CalendarP0ContractHarnessTests.swift:875:        switch permissionState {
+./Native/AmbitionsTests/Domain/RealityModelsTests.swift:178:            permissionState: .readWrite,
+./Native/AmbitionsTests/Domain/FoundationPerformancePersistenceBudgetTests.swift:144:        XCTAssertEqual(prepareExport.permissionLevel, .prepareDraft)
+./Native/AmbitionsTests/Domain/FoundationPerformancePersistenceBudgetTests.swift:151:        XCTAssertEqual(performExport.permissionLevel, .requiresConfirmation)
+./Native/AmbitionsTests/Domain/FoundationPerformancePersistenceBudgetTests.swift:158:        XCTAssertEqual(sync.permissionLevel, .notSupportedYet)
+./Native/AmbitionsTests/Domain/FoundationPerformancePersistenceBudgetTests.swift:176:        XCTAssertEqual(external.permissionLevel, .requiresConfirmation)
+./Native/AmbitionsTests/Domain/GoalBelievabilityModelsTests.swift:5:    func testGoalHealthStatusTaxonomyCoversBatch71States() {
+./Native/AmbitionsTests/Domain/GoalBelievabilityModelsTests.swift:7:            Set(GoalHealthStatus.allCases),
+./Native/AmbitionsTests/Domain/GoalBelievabilityModelsTests.swift:22:    func testGoalHealthSignalTaxonomyCoversPriorityRealityInputs() {
+./Native/AmbitionsTests/Domain/GoalBelievabilityModelsTests.swift:24:            Set(GoalHealthSignal.allCases),
+./Native/AmbitionsTests/Domain/AmbitionsOSAdaptationModelsTests.swift:15:        XCTAssertEqual(decoded.permissionState, .userApproved)
+./Native/AmbitionsTests/Domain/AmbitionsOSAdaptationModelsTests.swift:38:        let profile = adaptationProfile(permissionState: .inferredNeedsReview)
+./Native/AmbitionsTests/Domain/AmbitionsOSAdaptationModelsTests.swift:205:        permissionState: AmbitionsOSAdaptationPermissionState = .userApproved,
+./Native/AmbitionsTests/Domain/AmbitionsOSAdaptationModelsTests.swift:224:            permissionState: permissionState,
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamSafetyTriageModelsTests.swift:35:            .dangerousHealthFitness
+./Native/AmbitionsTests/Domain/SmartAttachmentModelsTests.swift:166:                XCTAssertEqual(preview.mayAffectLabel, "May support: Fitness / Social activity / Sports context.")
+./Native/AmbitionsTests/Domain/PlanInsertionCandidateTests.swift:49:        XCTAssertTrue(receipt?.accessibilityValue.localizedCaseInsensitiveContains("Calendar permission required before any write.") == true)
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:14:        XCTAssertEqual(decoded.permissionState, .privateOnly)
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:61:            permissionState: .deletePending,
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:67:            permissionState: .externalBlocked,
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:140:            permissionState: .inferredNeedsReview,
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:150:            permissionState: .remember,
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:166:            permissionState: .externalBlocked,
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:179:            permissionState: .deletePending,
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:239:        permissionState: AmbitionsOSPrivacyPermissionState = .privateOnly,
+./Native/AmbitionsTests/Domain/AmbitionsOSPrivacySafetyModelsTests.swift:259:            permissionState: permissionState,
+./scripts/ambitions-runner-access-guard.py:5:not grant OS permissions by itself; it ensures the Ambitions repo config keeps
+./Native/AmbitionsTests/Domain/SourceAtlasCapabilityPathCompositionModelsTests.swift:804:            permissionState: .allowed,
+./Native/AmbitionsTests/Domain/SourceAtlasCapabilityPathCompositionModelsTests.swift:848:                permissionRequiredFactorIDs: [],
+./Native/AmbitionsTests/Domain/AmbitionsOSInteroperabilityModelsTests.swift:41:        let permission = interoperabilityPlan(
+./Native/AmbitionsTests/Domain/AmbitionsOSInteroperabilityModelsTests.swift:52:        let permissionIssues = validator.validate(permission)
+./Native/AmbitionsTests/Domain/AmbitionsOSInteroperabilityModelsTests.swift:53:        XCTAssertTrue(permissionIssues.contains(.permissionPromptNotAllowed))
+./Native/AmbitionsTests/Domain/SourceAtlasQueryEngineModelsTests.swift:246:                title: "Health source",
+./Native/AmbitionsTests/Domain/LifeContextModelsTests.swift:130:                    eligibilityRulesSummary: "Fitness and safety path.",
+./scripts/ios26-flagship-run-sequential.sh:224:run_batch IOS26-T04F-B02 prompts/batches/IOS26-T04F-B02-eventkit-mirror-and-permission-boundary.md
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:225:                    permissionState: .readWrite,
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:234:                    permissionState: .denied,
+./Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:553:                TodayPillState(id: "health", title: "Health", icon: "heart", state: .selected),
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:68:        XCTAssertEqual(decision.permissionLevel, .executeLocalOnly)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:84:        XCTAssertEqual(decision.permissionLevel, .notSupportedYet)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:109:        XCTAssertEqual(decision.permissionLevel, .requiresConfirmation)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:129:        XCTAssertEqual(calendarDecision.permissionLevel, .prepareDraft)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:133:        XCTAssertEqual(exportDecision.permissionLevel, .prepareDraft)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:144:        XCTAssertEqual(decision.permissionLevel, .requiresConfirmation)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:166:        XCTAssertEqual(deleteDecision.permissionLevel, .neverAutomate)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:173:        XCTAssertEqual(syncDecision.permissionLevel, .notSupportedYet)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:178:        XCTAssertEqual(forgetDecision.permissionLevel, .neverAutomate)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:192:        XCTAssertEqual(decision.permissionLevel, .requiresConfirmation)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:216:        XCTAssertEqual(decision.permissionLevel, .requiresConfirmation)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:272:        XCTAssertEqual(prepareDecision.permissionLevel, .prepareDraft)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:273:        XCTAssertEqual(performDecision.permissionLevel, .requiresConfirmation)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:274:        XCTAssertEqual(deleteDecision.permissionLevel, .neverAutomate)
+./Native/AmbitionsTests/Domain/SafeAutomationPolicyModelsTests.swift:275:        XCTAssertEqual(forgetDecision.permissionLevel, .neverAutomate)
+./Native/AmbitionsTests/Domain/AmbitionsOSLivingDreamStartingPositionPrivacyIntakeModelsTests.swift:291:            permissionState: .localOnly,
+./Native/AmbitionsTests/Domain/LivingPlanMutationPermissionTests.swift:11:        let permission = LivingPlanMutationPermission(
+./Native/AmbitionsTests/Domain/LivingPlanMutationPermissionTests.swift:20:        XCTAssertTrue(permission.requiresExplicitConfirmation)
+./Native/AmbitionsTests/Domain/LivingPlanMutationPermissionTests.swift:21:        XCTAssertEqual(permission.impactLevel, .level4)
+./Native/AmbitionsTests/Domain/AFEP009ExecutionLedgerReplayBrowserTests.swift:156:                permissionSummary: "Notifications allowed; calendar allowed.",
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:328:            $0.detail.contains("Health, relationship, financial, location, calendar-derived") &&
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:569:            "trust-data-map-permissions",
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:586:            $0.id == "trust-data-map-permissions" &&
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1656:            "personal-vault-permissions"
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1667:            $0.permissionLabel == "User-owned"
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1670:            $0.id == "personal-vault-permissions" &&
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1676:            $0.permissionLabel == "Permission-gated"
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1684:            $0.permissionLabel == "Future-owned"
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1719:                row.permissionLabel,
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1903:        XCTAssertTrue(visibleCopy.contains("This center explains the default. It does not execute calendar writes, permission requests, or broad reflow."))
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1909:        XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("permission grab"))
+./Native/AmbitionsTests/You/YouFeatureServiceTests.swift:1935:        XCTAssertTrue(visibleCopy.contains("does not request permissions, write calendars, auto-fill open time, or run broad reflow"))
+./Native/AmbitionsTests/Ritual/RitualOrchestrationServiceTests.swift:161:                        UnderrepresentedGoalSignal(goalID: "goal-health", domain: .health, pressureScore: 0.78, summary: "Health work is underrepresented against the active portfolio.")
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:198:            calendarRealityService: FixedPermissionCalendarRealityService(permission: .readWrite)
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:201:        let timeState = service.makeCalendarAwarenessState(permission: .readWrite, openWindowCount: 1)
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:610:            permission: .unavailable,
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:639:            permission: .denied,
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:695:            permission: .notDetermined,
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:701:        XCTAssertEqual(extracted.calendarBoundary.permissionLabel, "Optional")
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:719:            permission: .unavailable,
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:728:            permission: .unavailable
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:776:            calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1038:            calendarRealityService: FixedPermissionCalendarRealityService(permission: .denied)
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1478:    func makeCalendarAwarenessState(permission: CalendarPermissionState, openWindowCount: Int?) -> TimeCalendarAwarenessState {
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1479:        service.makeCalendarAwarenessState(permission: permission, openWindowCount: openWindowCount)
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1515:        let permission = await requestCalendarReadAccessFromPlan(actionName: request.userInitiatedPlanAction)
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1519:            permissionState: permission,
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1535:            permissionState: permission,
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1552:    let permission: CalendarPermissionState
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1555:        permission
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1560:        return permission
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1565:        return permission
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1575:            permissionState: permission,
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1578:                permissionState: permission,
+./Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift:1583:                explanation: "Calendar permission unavailable."
+./Native/AmbitionsTests/Runtime/CaptureRuntimeGauntletTests.swift:152:            record(planCandidate?.requiresCalendarPermission == true, "Ambiguous time should require calendar permission before any write.")
+./Native/AmbitionsTests/Runtime/CaptureRuntimeGauntletTests.swift:178:            record(planCandidate?.requiresCalendarPermission == true, "Plan conflict should require calendar permission before any write.")
+./Native/AmbitionsTests/Runtime/CaptureRuntimeGauntletTests.swift:184:            record(planCandidate?.requiresCalendarPermission == true, "Protected time conflict should require calendar permission before any write.")
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:465:    func testSimulationGauntletShard03CoversMoneyAndFitnessScenarios() throws {
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1120:            .init(id: "profile-caregiver", exactAgeYears: 41, timezone: "America/New_York", locale: "en_US", locationLabel: "Home base", locationPrecision: .timezone, lifeStage: .caregiver, schoolOrWorkContext: "Caregiving schedule", travelRadiusMinutes: 20, travelRadiusMiles: 6, transportationAccess: .limited, scheduleAnchors: ["School dropoff", "Care block"], dependencyConstraints: ["Care window"], budgetConstraintBand: .tight, energyPattern: .variable, recoveryConstraints: ["Low-spread recovery"], accessibilityNeeds: ["Shorter steps"], userNotes: "Caregiver with limited travel.", pathwayType: .health, pathwayFreshness: .mayNeedReview, ageWindow: .init(lowerBoundYears: 30, upperBoundYears: 55), locationDependent: false, eligibilitySummary: "Health path with care windows."),
+./Native/AmbitionsTests/Runtime/StepCandidateFieldGeneratorTests.swift:1122:            .init(id: "profile-recovery", exactAgeYears: 35, timezone: "America/New_York", locale: "en_US", locationLabel: "Home only", locationPrecision: .none, lifeStage: .adult, schoolOrWorkContext: "Recovery-focused", travelRadiusMinutes: 10, travelRadiusMiles: 2, transportationAccess: .limited, scheduleAnchors: ["Rest", "Therapy"], dependencyConstraints: ["Low energy"], budgetConstraintBand: .tight, energyPattern: .evening, recoveryConstraints: ["Protected rest"], accessibilityNeeds: ["Low load"], userNotes: "Recovery profile.", pathwayType: .health, pathwayFreshness: .basedOnOlderContext, ageWindow: .init(lowerBoundYears: 20, upperBoundYears: 55), locationDependent: false, eligibilitySummary: "Health path with recovery constraints."),
+./Native/AmbitionsTests/Goals/GoalsOverviewBoardTests.swift:333:        XCTAssertEqual(overview.lifeAreas.items.map(\.title), ["Music", "Fitness", "Money", "Relationships", "Career", "Health", "Learning", "Home", "Creative", "Personal Growth"])
+./scripts/ambitions-ia-surface-vocabulary-ledger.py:165:    if rel in {"README.md", "AGENTS.md", "docs/README.md"} or rel.startswith("docs/status/") or rel.startswith("docs/codex/") or rel.startswith("docs/governance/") or rel.startswith("docs/proof/") or rel.startswith("docs/review/") or rel.startswith("docs/permissions-") or rel.startswith(".codex/") or rel.startswith(".agents/") or rel.startswith("scripts/") or rel.startswith("tools/") or rel.startswith("build/audits/") or rel.startswith("build/reports/") or rel.startswith("frontend/visual-encyclopedia/"):
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:64:        XCTAssertEqual(snapshot.continuity.syncHealth.state, .localFirst)
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:198:        XCTAssertEqual(decoded.continuity.syncHealth.state, .localFirst)
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:203:        let cases: [(ExternalSurfaceLifecycleContext, ExternalSurfaceNowStateLease, ExternalSurfaceSyncHealth, ExternalSurfaceLifecycleSourceState)] = [
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:212:                ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:227:                ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:242:                ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:257:                ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:272:                ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:287:                ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:296:        for (context, lease, syncHealth, expectedSourceState) in cases {
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:302:                    syncHealth: syncHealth,
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:330:                syncHealth: ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:348:        XCTAssertEqual(decoded.continuity.syncHealth.state, .stale)
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:425:                syncHealth: ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceSnapshotTests.swift:509:                syncHealth: ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalSurfaceVerificationChecklistTests.swift:82:                syncHealth: ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift:226:        XCTAssertTrue(record?.blockedFacts.contains("Calendar write permission was not available for this requested calendar event.") == true)
+./Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:182:                syncHealth: ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/ExternalWidgetProjectionTests.swift:262:                syncHealth: ExternalSurfaceSyncHealth(
+./scripts/ambitions-repair-classifier.py:10:    ("permission_or_local_wrapper", [r"approval policy", r"permission denied", r"operation not permitted", r"sandbox", r"blocked by local"]),
+./scripts/ambitions-repair-classifier.py:23:    "permission_or_local_wrapper": "Use ACCESS_MODE=bypass and direct native git with --no-verify only after scoped proof passes.",
+./Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift:137:            syncHealth: ExternalSurfaceSyncHealth(
+./Native/AmbitionsTests/App/CalendarReminderActionFlowTests.swift:101:            "Today will not request Calendar permission or write calendar blocks. Open Time to make planning calendar-aware from there."
+./Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:100:        let state = DegradedStateOrchestrator.permissionDeniedNotifications()
+./Native/AmbitionsTests/App/OnboardingAndDegradedStateTests.swift:102:        XCTAssertEqual(state.kind, .permissionDenied)
+./Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:110:        XCTAssertEqual(glance.continuity.syncHealth.label, "Local-first and stable")
+./Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:157:        XCTAssertEqual(glance.continuity.syncHealth.state, .unavailable)
+./Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:158:        XCTAssertEqual(glance.continuity.syncHealth.label, "This surface may be behind")
+./Native/AmbitionsTests/App/ExternalSurfaceActionPayloadTests.swift:159:        XCTAssertEqual(glance.continuity.syncHealth.detail, "Local app truth is available when Ambitions opens")
+./Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:30:        XCTAssertEqual(result.permissionState, .readWrite)
+./Native/AmbitionsTests/App/CalendarRealityServiceTests.swift:61:        XCTAssertEqual(result.permissionState, .denied)
+./Native/AmbitionsTests/Capture/CaptureViewModelTests.swift:139:        XCTAssertEqual(preview.mayAffectLabel, "May support: Fitness / Social activity / Sports context.")
+./Native/AmbitionsTests/Capture/CaptureViewModelTests.swift:150:        XCTAssertTrue(preview.accessibilityValue.localizedCaseInsensitiveContains("May support: Fitness / Social activity / Sports context."))
+./scripts/ambitions-batch-ledger-touchpoint-detect.py:160:        r"permission",
+./scripts/visual_final_form_common.py:43:    "permission_missing",
+./scripts/visual_final_form_common.py:503:        "permission_missing": ["permission", "allow access", "not authorized", "missing permission"],
+./scripts/visual_final_form_common.py:590:        "permission_missing": f"{label} explains the missing permission in context and routes the user to a visible alternative instead of requesting surprise access.",
+./scripts/visual_final_form_common.py:597:        "first_use": f"{label} orients the first-time user around {destination} and {primary_object} without onboarding permission prompts outside the owning surface.",
+./scripts/ambitions-codex-os-validate.py:101:    ROOT / ".codex" / "hooks" / "permission_request_guard.py",
+./scripts/ambitions-codex-os-validate.py:229:    ("permission_request_guard.py", {"tool_input": {"command": "rg openai docs/truth"}}, "allow"),
+./scripts/ambitions-codex-os-validate.py:230:    ("permission_request_guard.py", {"tool_input": {"command": "OPENAI_API_KEY=secret python3 script.py"}}, "deny"),
+./scripts/ambitions-codex-os-validate.py:231:    ("permission_request_guard.py", {"tool_input": {"command": "npm install"}}, "deny"),
+./scripts/ambitions-codex-os-validate.py:729:        decision = str(result.get("permissionDecision") or result.get("decision") or "").lower()
+./tools/mcp/ambitions_repo_mcp/autonomy_tools.py:259:            "note": "Findings flag stale or risky authority language; they are not automatic rewrite permission.",
+./scripts/ambitions_design_system_15_common.py:729:                ["Calendar", "schedule access and permission boundaries", "generic calendar clone behavior"],
+./scripts/ambitions_design_system_15_common.py:740:        "CALENDAR_CLIENT.md": ("Calendar Client", "calendar-aware reads and permission boundaries", ["read schedule", "derived capacity", "time-owned"], "The client must stay Time-owned and not become a calendar clone."),
+./artifacts/ui-quality-lockdown/UIQL-008-AMB-963-goals-reconstruction.md:79:- Large Dynamic Type/text-wrap state keeps `Your Direction`, `Equal-weight areas`, `Career`, `Music`, `Fitness`, `Money`, and the dock labels readable; the previous `Sel...` truncation is gone.
+./artifacts/ambitions-ui-reconstruction/object-stage/AMB-576-you-object-stage.md:33:- Replaced the generic `YouSectionCard` wrapper with `YouControlGroup` for receipts, corrections, proof, durations, source settings, local data, permissions, integrations, accessibility, help, and about drill-down content.
+./tools/source-atlas/lakehouse-workbench/data/sample_domains.json:11:      "title": "Physical Health & Fitness",
+./tools/source-atlas/lakehouse-workbench/data/sample_domains.json:23:      "title": "Mindfulness & Mental Health",
+./tools/source-atlas/lakehouse-workbench/tests/test_workbench.py:17:    dom = GoalDomain(code="fitness-health", title="Fitness & Health", description="Test", categories=["cardio"])
+./tools/source-atlas/lakehouse-workbench/tests/test_workbench.py:22:        GoalDomain(code="Fitness", title="Fitness", description="Test")
+./artifacts/ambitions-ui-reconstruction/primitive-audit/AMB-566-scan-card-tile-dashboard.txt:193:Native/Ambitions/Features/You/YouScreen.swift:359:                YouSectionCard(eyebrow: "Permission edges", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.local-data-permissions-card")
+./artifacts/ambitions-ui-reconstruction/primitive-audit/AMB-566-scan-panel-chip-container.txt:483:Native/AmbitionsTests/Domain/AmbitionsMoatScenarioProof98Tests.swift:553:                TodayPillState(id: "health", title: "Health", icon: "heart", state: .selected),
+./artifacts/ambitions-ui-reconstruction/primitive-audit/AMB-566-scan-panel-chip-container.txt:762:Native/Ambitions/Features/You/YouScreen.swift:359:                YouSectionCard(eyebrow: "Permission edges", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.local-data-permissions-card")
+./artifacts/ambitions-ui-reconstruction/primitive-audit/AMB-566-scan-panel-chip-container.txt:927:Native/Ambitions/Features/You/YouScreen.swift:3350:                    TagPill(row.permissionLabel, icon: "lock.shield", state: row.state)
+./artifacts/ambitions-ui-reconstruction/primitive-audit/AMB-566-scan-panel-chip-container.txt:1229:Native/Ambitions/Features/Time/TimeScreen.swift:582:                        TagPill(boundary.permissionLabel, icon: "calendar", state: boundary.visualState)
+./artifacts/ambitions-ui-reconstruction/relationship-motion/AMB-581-horizon-capacity-family.md:39:- Registered the primitive family and AMB-581 guard/coverage permissions.
+./artifacts/proof-ledger/proof-index.json:13:        "- Claim: AMB-704 defines the documentation/control-plane Reminders context adapter usefulness and permission/value contract, including explicit user-confirmed write-receipt default, future read-summary gate, `PermissionValueProof` linkage, `PermissionLedger` and revocation linkage, context-to-path influence matrix, local/iCloud/R2 privacy boundaries, fixture obligations, and no-Reminders-replacement claim boundaries for M08 native context work.",
+./artifacts/proof-ledger/proof-index.json:16:        "- Command: live Linear parent fetch for `AMB-616`; live Linear child list for `parentId: AMB-616`; live Linear issue fetch and status update for `AMB-704`; `git status --short --branch`; `git pull --ff-only`; PLOS preflight; M08 phase gate; focused Reminders context source search; issue-required Reminders/context adapter/permission search; JSON parse; PLOS readiness validators; Linear closeout validator; proof-index generation.",
+./artifacts/proof-ledger/proof-index.json:20:        "- Scope: AMB-704 / PLOS-082 documentation/control-plane Reminders context adapter if useful only.",
+./artifacts/proof-ledger/proof-index.json:21:        "- Non-claims: no app source change, Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, EventKit entitlement change, privacy manifest change, background ingestion, Reminders read implementation, Apple Reminders import implementation, generic task-list replacement, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.",
+./artifacts/proof-ledger/proof-index.json:25:        "- Evidence status: Green for scoped AMB-704 documentation/control-plane Reminders context adapter if useful contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission prompt implementation, PermissionLedger runtime, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, Reminders replacement, and M08 parent completion proof.",
+./artifacts/proof-ledger/proof-index.json:34:        "- Claim: AMB-703 defines the documentation/control-plane Calendar context adapter and permission explainer contract, including Calendar read/write `PermissionValueProof` linkage, `PermissionLedger` and revocation linkage, context-to-path influence matrix, local/iCloud/R2 privacy boundaries, fixture obligations, and no-Calendar-replacement claim boundaries for M08 native context work.",
+./artifacts/proof-ledger/proof-index.json:41:        "- Scope: AMB-703 / PLOS-081 documentation/control-plane Calendar context adapter and explainer only.",
+./artifacts/proof-ledger/proof-index.json:42:        "- Non-claims: no app source change, Swift/domain implementation, runtime adapter implementation, EventKit permission prompting implementation, EventKit entitlement change, privacy manifest change, background ingestion, schedule install implementation, Calendar replacement, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.",
+./artifacts/proof-ledger/proof-index.json:46:        "- Evidence status: Green for scoped AMB-703 documentation/control-plane Calendar context adapter and explainer contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission prompt implementation, PermissionLedger runtime, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Calendar replacement, and AMB-616 parent completion proof.",
+./artifacts/proof-ledger/proof-index.json:63:        "- Non-claims: no app source change, Swift/domain implementation, runtime adapter implementation, runtime permission flow implementation, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.",
+./artifacts/proof-ledger/proof-index.json:67:        "- Evidence status: Green for scoped AMB-702 documentation/control-plane Native Context Mesh adapter contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission ledger implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Health/Fitness, Location, Photos/OCR, and AMB-616 parent completion proof.",
+./artifacts/proof-ledger/PROOF_LEDGER.md:5:- Claim: AMB-704 defines the documentation/control-plane Reminders context adapter usefulness and permission/value contract, including explicit user-confirmed write-receipt default, future read-summary gate, `PermissionValueProof` linkage, `PermissionLedger` and revocation linkage, context-to-path influence matrix, local/iCloud/R2 privacy boundaries, fixture obligations, and no-Reminders-replacement claim boundaries for M08 native context work.
+./artifacts/proof-ledger/PROOF_LEDGER.md:8:- Command: live Linear parent fetch for `AMB-616`; live Linear child list for `parentId: AMB-616`; live Linear issue fetch and status update for `AMB-704`; `git status --short --branch`; `git pull --ff-only`; PLOS preflight; M08 phase gate; focused Reminders context source search; issue-required Reminders/context adapter/permission search; JSON parse; PLOS readiness validators; Linear closeout validator; proof-index generation.
+./artifacts/proof-ledger/PROOF_LEDGER.md:12:- Scope: AMB-704 / PLOS-082 documentation/control-plane Reminders context adapter if useful only.
+./artifacts/proof-ledger/PROOF_LEDGER.md:13:- Non-claims: no app source change, Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, EventKit entitlement change, privacy manifest change, background ingestion, Reminders read implementation, Apple Reminders import implementation, generic task-list replacement, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/proof-ledger/PROOF_LEDGER.md:17:- Evidence status: Green for scoped AMB-704 documentation/control-plane Reminders context adapter if useful contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission prompt implementation, PermissionLedger runtime, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, Reminders replacement, and M08 parent completion proof.
+./artifacts/proof-ledger/PROOF_LEDGER.md:21:- Claim: AMB-703 defines the documentation/control-plane Calendar context adapter and permission explainer contract, including Calendar read/write `PermissionValueProof` linkage, `PermissionLedger` and revocation linkage, context-to-path influence matrix, local/iCloud/R2 privacy boundaries, fixture obligations, and no-Calendar-replacement claim boundaries for M08 native context work.
+./artifacts/proof-ledger/PROOF_LEDGER.md:28:- Scope: AMB-703 / PLOS-081 documentation/control-plane Calendar context adapter and explainer only.
+./artifacts/proof-ledger/PROOF_LEDGER.md:29:- Non-claims: no app source change, Swift/domain implementation, runtime adapter implementation, EventKit permission prompting implementation, EventKit entitlement change, privacy manifest change, background ingestion, schedule install implementation, Calendar replacement, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/proof-ledger/PROOF_LEDGER.md:33:- Evidence status: Green for scoped AMB-703 documentation/control-plane Calendar context adapter and explainer contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission prompt implementation, PermissionLedger runtime, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Calendar replacement, and AMB-616 parent completion proof.
+./artifacts/proof-ledger/PROOF_LEDGER.md:45:- Non-claims: no app source change, Swift/domain implementation, runtime adapter implementation, runtime permission flow implementation, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/proof-ledger/PROOF_LEDGER.md:49:- Evidence status: Green for scoped AMB-702 documentation/control-plane Native Context Mesh adapter contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission ledger implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Health/Fitness, Location, Photos/OCR, and AMB-616 parent completion proof.
+./artifacts/personal-life-os/reports/PLOS-035-third-party-sdk-minimization-policy.md:79:| Privacy manifest/App Privacy | Required manifest changes, labels, permission copy, and legal review owner. |
+./artifacts/personal-life-os/reports/PLOS-007-data-sharing-safety-laws-report.md:62:- Privacy/safety models already classify sensitive areas, permission states, projection policies, redaction summaries, receipts, external-blocked states, and local projection.
+./artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:11:AMB-703 defines the downstream Calendar context adapter and permission explainer contract for M08. It specializes AMB-702's Native Context Mesh contract into Calendar read/write value proofs, PermissionLedger and revocation linkage, context-to-path influence rules, local/iCloud/R2 privacy boundaries, and a fixture matrix.
+./artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:13:Out of scope: app source changes, Swift/domain implementation, runtime adapter implementation, EventKit permission prompting implementation, EventKit entitlement work, privacy manifest changes, background ingestion, schedule install implementation, Calendar replacement, UI implementation, screenshots, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 writes, production certification, AMB-616 parent completion, and full PLOS project completion.
+./artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:20:Green/Yellow/Red status: Green for scoped documentation/control-plane Calendar context adapter and explainer contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission prompt implementation, PermissionLedger runtime, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Calendar replacement, and M08 parent completion proof not claimed.
+./artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:29:Yellow limits: no Swift/domain implementation, no runtime adapter implementation, no permission prompting implementation, no PermissionLedger runtime implementation, no executable validator/test harness, no UI implementation, no accessibility/device/performance/privacy/legal/release/App Review proof, no CloudKit sync readiness, no Calendar replacement proof, and no AMB-616 parent completion.
+./artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:82:- Issue-required search `rg -n "Calendar context adapter|permission explainer|Calendar" .` with generated/log bundles excluded - pass, `artifacts/personal-life-os/validation/AMB-703-required-calendar-context-search-log.txt`, 12,311 lines / 5,212,401 bytes.
+./artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:101:- Swift/domain implementation, runtime adapter implementation, permission prompt implementation, PermissionLedger runtime implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Calendar replacement, and AMB-616 parent completion remain future-owned.
+./artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:105:- None for AMB-703 scoped documentation/control-plane Calendar context adapter and explainer contract.
+./artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md:120:AMB-703 does not claim app source change, Swift/domain implementation, runtime adapter implementation, EventKit permission prompting implementation, EventKit entitlement change, privacy manifest change, background ingestion, schedule install implementation, Calendar replacement, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:13:Out of scope: app source changes, Swift/domain implementation, runtime adapter implementation, permission prompting, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshots, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 writes, production certification, AMB-616 parent completion, and full PLOS project completion.
+./artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:20:Green/Yellow/Red status: Green for scoped documentation/control-plane Native Context Mesh adapter contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission ledger implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Health/Fitness, Location, Photos/OCR, and M08 parent completion proof not claimed.
+./artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:29:Yellow limits: no Swift/domain implementation, no runtime adapter implementation, no permission prompting, no permission ledger implementation, no executable validator/test harness, no UI implementation, no accessibility/device/performance/privacy/legal/release/App Review proof, no CloudKit sync readiness, no native framework integration readiness, and no AMB-616 parent completion.
+./artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:51:- EventKit permission/read/write seams already exist in `EventKitIntegrationService`.
+./artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:64:- It classifies Calendar, Reminders, Health/Fitness, Location, Files/Photos/OCR, CloudKit sync state, Notifications, Focus/Shortcuts, and manual life context.
+./artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:97:- Swift/domain implementation, runtime adapter implementation, permission ledger implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, CloudKit sync, Health/Fitness, Location, Photos/OCR, and AMB-616 parent completion remain future-owned.
+./artifacts/personal-life-os/reports/PLOS-080-native-context-mesh-adapter-model.md:116:AMB-702 does not claim app source change, Swift/domain implementation, runtime adapter implementation, runtime permission flow implementation, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:11:AMB-704 defines the downstream Reminders context adapter usefulness and permission/value behavior contract for M08. It specializes AMB-702's Native Context Mesh contract into a conservative Reminders write-receipt default, future-read-summary gate, PermissionValueProof linkage, PermissionLedger and revocation linkage, context-to-path influence rules, local/iCloud/R2 privacy boundaries, and a fixture matrix.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:13:Out of scope: app source changes, Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, EventKit entitlement work, privacy manifest changes, background ingestion, Reminders read/import implementation, generic to-do/task replacement, UI implementation, screenshots, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 writes, production certification, AMB-616 parent completion, and full PLOS project completion.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:20:Green/Yellow/Red status: Green for scoped documentation/control-plane Reminders context adapter usefulness and permission/value contract; Yellow for Swift/domain implementation, runtime adapter implementation, permission prompt implementation, PermissionLedger runtime, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, Reminders replacement, and M08 parent completion proof not claimed.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:27:Validation run: `git status --short --branch`; `git pull --ff-only`; live Linear parent fetch for `AMB-616`; live Linear child list for `parentId: AMB-616`; live Linear issue fetch and update for `AMB-704`; `scripts/codex/program-preflight.sh plos`; `scripts/codex/program-phase-gate.sh plos M08`; focused Reminders context source search; issue-required Reminders/context adapter/permission search; JSON parse validations; PLOS readiness validators; closeout validator.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:29:Yellow limits: no Swift/domain implementation, no runtime adapter implementation, no permission prompting implementation, no PermissionLedger runtime implementation, no executable validator/test harness, no UI implementation, no accessibility/device/performance/privacy/legal/release/App Review proof, no Reminders replacement proof, and no AMB-616 parent completion.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:66:- It defines context-to-path influence rules for write receipts, permission fallback, future pressure summaries, and not-useful routing.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:83:- Issue-required search `rg -n "Reminders|context adapter|permission" .` with generated/log bundles excluded - pass, `artifacts/personal-life-os/validation/AMB-704-required-reminders-context-search-log.txt`, 824 lines / 149,170 bytes.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:102:- Swift/domain implementation, runtime adapter implementation, permission prompt implementation, PermissionLedger runtime implementation, executable validator/test harness, UI implementation, accessibility, device, performance, privacy/legal, release, App Review, Reminders replacement, and AMB-616 parent completion remain future-owned.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:106:- None for AMB-704 scoped documentation/control-plane Reminders context adapter contract.
+./artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md:121:AMB-704 does not claim app source change, Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, EventKit entitlement change, privacy manifest change, background ingestion, Reminders read implementation, Apple Reminders import implementation, generic task-list replacement, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/personal-life-os/reports/AMB-615-plos-m07-parent-acceptance-report.md:133:Next recommended action: AMB-616 / PLOS-M08 Native Context Mesh and permission explainers after AMB-615 is pushed, moved to Done in Linear, and the M08 phase gate remains Green.
+./artifacts/personal-life-os/reports/PLOS-013-runtime-model-ownership-map.md:56:| Calendar/native context | `CalendarPermissionState`, `CalendarDerivedContext`, EventKit integration service, Time calendar-aware service. | Domain/Reality, Integrations/CalendarReminders, Time. | Partial/live optional context. | Calendar-derived context is service/projection-owned; app persistence is local. | Cloud sync not implied; EventKit is native source context, not Ambitions backend. | Native calendar source must be permissioned, revocable, and source-labeled. | Sensitive schedule/location/life context. | Calendar scans must be bounded and permission-aware. | `CalendarRealityServiceTests`, `EventKitIntegrationServiceTests`, Time tests. | Native Context Mesh phase, Local Data Cloud Boundary law. | M08, M15. |
+./artifacts/personal-life-os/reports/PLOS-013-runtime-model-ownership-map.md:126:    M08 Native Context Mesh permission explainers
+./artifacts/personal-life-os/reports/PLOS-005-life-consequence-law-report.md:75:| All reflow triggers listed | Green | Reflow Triggers table covers add/change goal, skip/shrink/extend/replace/split/merge Step, deadline change, complete early, pause/resume, source pack changes, source revoked/stale, schedule availability, and permission/context changes. |
+./artifacts/personal-life-os/reports/PLOS-020-local-data-cloud-boundary.md:84:| Calendar/native context | Local-only derived projection | User iCloud only if a later issue proves user-owned sync for Ambitions-derived context | No | Derived/redacted summary only | Sensitive permissioned context | Raw native calendar details are not R2 or default export material. |
+./artifacts/personal-life-os/reports/PLOS-026-app-privacy-declaration-matrix.md:3:Status: Green for AMB-659 App privacy declaration mapping documentation scope; Yellow for final signed-build reconciliation, App Store Connect labels, human legal/privacy review, Apple permission prompt review, CloudKit/R2 future implementation, diagnostics/export proof, device, accessibility, and release proof
+./artifacts/personal-life-os/reports/PLOS-026-app-privacy-declaration-matrix.md:24:- Yellow limits: this report maps current source truth to privacy declaration posture. It does not update `PrivacyInfo.xcprivacy`, App Store Connect labels, permissions, entitlements, CloudKit/R2 behavior, diagnostics, export flows, or release artifacts.
+./artifacts/personal-life-os/reports/PLOS-026-app-privacy-declaration-matrix.md:87:| Schedule/calendar context | EventKit/native context is local-only; raw calendar events are excluded from portable export in current source. | No collected data types. | Match for current source inspection. | Apple permission prompts and accessed API reasons remain final-build review items. |
+./artifacts/personal-life-os/reports/PLOS-026-app-privacy-declaration-matrix.md:104:- Apple permission prompt inventory is not final.
+./artifacts/personal-life-os/reports/PLOS-027-20-year-compaction-annual-snapshot-policy.md:143:- M25 / AMB-634: App Review/compliance reconciliation for final privacy labels, permission prompts, legal/privacy review, and support copy.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:12:    "no_permission_prompting",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:24:    "permissionScope",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:42:    "permissionState",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:51:  "permission_states": [
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:77:      "permissionPosture": "value_proof_required_before_read_or_write",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:86:      "permissionPosture": "value_proof_required_if_reading_or_writing",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:95:      "permissionPosture": "strong_value_proof_guarded_optional",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:104:      "permissionPosture": "strong_value_proof_coarse_by_default",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:113:      "permissionPosture": "user_initiated_import_only",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:122:      "permissionPosture": "user_owned_sync_controls_no_data_read_permission",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:131:      "permissionPosture": "value_proof_required_before_notifications",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:140:      "permissionPosture": "user_control_required",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:168:    "calendar_not_determined_shows_value_proof_before_permission_request",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:185:    "permission_ask_before_value_proof",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:186:    "denied_or_revoked_permission_breaks_app_value",
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.json:192:    "notification_permission_becomes_engagement_pressure",
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:5:Scope: Documentation/control-plane contract for Calendar-derived context and permission explainer behavior.
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:7:This artifact specializes the AMB-702 Native Context Mesh contract for Calendar. It defines how a future Calendar context adapter may convert EventKit state into local, inspectable `ContextSlot` summaries for schedule fit, open-window detection, path density, deadline pressure, and trust explanations.
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:9:This is not Swift implementation, runtime adapter implementation, EventKit entitlement work, permission prompting implementation, privacy manifest change, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, App Review readiness, release readiness, Calendar replacement proof, or AMB-616 parent completion.
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:38:| `permissionScope` | EventKit read or write-only event scope, separated by action. | One broad permission ask covers unrelated behavior. |
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:39:| `valueProof` | Calendar-specific `PermissionValueProof` shown before read or write prompt. | System permission prompt appears before value proof. |
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:40:| `permissionLedgerRef` | Local `PermissionLedger` record for request/grant/denial/revocation. | Permission state is inferred without local ledger trail. |
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:42:| `freshnessPolicy` | Calendar-derived slots expire at the end of their observed horizon or when permission changes. | Old calendar slots remain current after revocation or horizon expiry. |
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:79:| `not_determined` | Show value proof; do not request permission until the user chooses the Calendar-aware action. |
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:116:- permission state
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:134:- not-determined read shows value proof before system permission prompt
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:153:- AMB-704 / PLOS-082 Reminders context adapter if useful
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:165:- Calendar permission ask happens before value proof
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:166:- denied/revoked Calendar permission breaks Ambitions
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md:177:AMB-703 does not claim app source change, Swift/domain implementation, runtime adapter implementation, EventKit permission prompting implementation, EventKit entitlement change, privacy manifest change, background ingestion, schedule install implementation, Calendar replacement, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:5:Scope: Documentation/control-plane contract for Reminders context adapter usefulness, permission/value behavior, and privacy-safe local influence.
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:7:This artifact specializes the AMB-702 Native Context Mesh contract for Reminders. It defines when a future Reminders adapter is useful, what it may emit, what it must not import, how it links to `PermissionValueProof`, how denied or revoked permission degrades, and which fixture obligations later implementation/validator phases must satisfy.
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:9:This is not Swift implementation, runtime adapter implementation, EventKit/Reminders entitlement work, permission prompting implementation, privacy manifest change, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, App Review readiness, release readiness, Reminders replacement proof, or AMB-616 parent completion.
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:27:Existing source already contains EventKit reminder write seams, local reminder domain models, reminder source/receipt/replay inspection boundaries, repository export/delete behavior, Goal Detail reminder creation action flow, and tests that block broad Reminders replacement/readiness claims. AMB-704 binds a downstream context adapter contract to those owners; it does not implement new app behavior.
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:60:| `permissionScope` | EventKit Reminders write scope by default; future read scope requires separate value proof and issue authority. | One broad permission ask covers write, read, import, and background ingestion. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:62:| `valueProof` | Reminders-specific `PermissionValueProof` shown before any Reminders permission prompt. | System permission prompt appears before value proof. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:63:| `permissionLedgerRef` | Local `PermissionLedger` record for request/grant/denial/revocation. | Permission state is inferred without local ledger trail. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:64:| `slotTypes` | `reminder_write_receipt`, `reminder_permission_fallback`, future `reminder_pressure_summary` only after proof. | Raw reminders, lists, notes, recurrence details, or completed-reminder history drive runtime directly. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:65:| `freshnessPolicy` | Write receipts remain historical; pressure summaries expire quickly and become unavailable on permission change. | Old or revoked Reminders summaries remain current. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:66:| `revocationPolicy` | Denied/restricted/revoked/unavailable clears current permissioned slots and falls back to Ambitions-local reminder behavior. | Denial or revocation breaks planning, reminder creation, or Step execution. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:102:| `not_determined` | Show value proof; do not request permission until the user chooses a Reminders-aware action. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:106:| `revoked` | Invalidate current permissioned summaries and stop Apple Reminders writes until fresh value proof and user action. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:108:| `needs_review` | Hold Reminders influence until user reviews the permission/value state. |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:117:| `reminder_permission_fallback` | Keep local Ambitions reminder behavior, explain reduced external continuity, avoid repeated permission nagging | Broken app state, false precision, shame/overdue pressure, engagement pressure |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:119:| `reminder_not_useful` | Skip permission prompt and keep Ambitions-local behavior | Hidden permission request, feature disabled messaging that implies Ambitions cannot work |
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:137:- permission state
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:157:- not-determined write shows value proof before system permission prompt
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:168:- denied Reminders permission cannot block Start here, Step, Goal Detail, or local closure
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:174:- AMB-705 / PLOS-083 Health/Fitness context adapter if useful
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:175:- AMB-706 / PLOS-084 Location context adapter
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:177:- AMB-708 / PLOS-086 CloudKit sync-state context adapter
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:189:- Reminders permission ask happens before value proof
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:190:- denied or revoked Reminders permission breaks Ambitions
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md:203:AMB-704 does not claim app source change, Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, EventKit entitlement change, privacy manifest change, background ingestion, Reminders read implementation, Apple Reminders import implementation, generic task-list replacement, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:7:This artifact defines the future `NativeContextAdapter`, `ContextSlot`, and native context influence rules for M08. It turns iOS-native and user-owned context into explicit local signals that later phases can consume only after value proof, permission state checks, privacy classification, freshness checks, and revocation behavior are satisfied.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:9:This is not Swift implementation, runtime adapter implementation, permission prompting, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement change, privacy manifest change, background ingestion, runtime path selection, generated Step behavior, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, or M08 parent completion.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:42:Native context may improve local planning only as a bounded local signal. It must never become Source Atlas content, R2 content, a public pack, a Linear artifact containing private context, an Ambitions-owned backend profile, or a permission request without prior value proof.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:46:1. Prove user-visible value without requesting the permission.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:48:3. Resolve permission state to `not_determined`, `granted_limited`, `granted_read`, `granted_write`, `granted_read_write`, `denied`, `restricted`, `revoked`, `unavailable`, or `needs_review`.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:53:8. Fall back gracefully when permission is denied, restricted, revoked, stale, or unavailable.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:64:| `sourceKind` | Calendar, reminders, Health/Fitness, location, files/photos/OCR import, CloudKit sync state, notifications, Focus/Shortcuts, manual life context, or other future native source. | Source is treated as generic Source Atlas content or public pack data. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:65:| `permissionScope` | Exact platform/user permission needed, or `none` for local/manual/system state. | Broad permission ask without scope. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:66:| `valueProof` | Proof shown before the permission ask. | Permission request appears before value is explained. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:70:| `revocationPolicy` | What happens when permission is denied, restricted, revoked, or becomes unavailable. | Denial/revocation breaks the app or leaves hidden context active. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:75:| `fallbackBehavior` | Baseline behavior when data is absent. | Denied permission stops planning or creates false precision. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:90:| `permissionState` | Current permission state at slot creation. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:91:| `precision` | None, coarse, bounded, limited, derived, precise-permissioned, or explicit-user-provided. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:103:Every permissioned adapter must show a value proof before the system permission prompt.
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:120:- asking for permission before explaining value
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:123:- implying Calendar/Health/Location grants source authority
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:132:| Health/Fitness | Coarse energy/recovery band only when useful | local-only or never-transmitted | health-sensitive | Strong value proof, guarded and optional | Elasticity, recovery-safe variants, lighter path density | Medical advice, diagnosis, precise health values in public artifacts |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:135:| CloudKit sync state | Sync health, local-only fallback, account unavailable, paused/needs review | user-iCloud state | sync-state | No data-read permission; user-owned sync controls | Trust/explanation, conflict/review posture, local-only fallback | Claiming sync readiness, blocking local operation, custom backend drift |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:138:| Manual life context | User-confirmed editable context | local-only; optional user iCloud later | standard/high-risk-sensitive depending field | No platform permission; user control required | Path fit, eligibility, capacity, constraints | Protected/sensitive inference without review |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:146:| Energy/recovery band | Elasticity ranking, recovery-safe variant, lighter day shape | Health advice, diagnosis, medical plan, high-risk bypass |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:157:| Not determined | Baseline/manual mode | Show value proof before any permission ask; do not block planning. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:159:| Denied/restricted | Baseline/manual mode | Keep app usable; remove or mark permissioned slots unavailable; explain reduced precision. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:160:| Revoked | Invalidate permissioned slots | Do not treat old slots as current; keep only safe receipts/history allowed by retention policy. |
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:168:- calendar not determined shows value proof before permission request
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:174:- Health/Fitness not useful routes to no adapter and no permission ask
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:175:- Health/Fitness useful emits only coarse local energy/recovery band, not medical advice
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:188:- permission ask happens before value proof
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:189:- denied or revoked permission breaks app value
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:193:- Health/Fitness or Location context produces medical, safety, legal, or financial advice
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:195:- notification permission becomes engagement pressure, productivity scoring, streak, or shame
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:201:- AMB-703 / PLOS-081 Calendar context adapter and explainer
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:202:- AMB-704 / PLOS-082 Reminders context adapter if useful
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:203:- AMB-705 / PLOS-083 Health/Fitness context adapter if useful
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:204:- AMB-706 / PLOS-084 Location context adapter
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:206:- AMB-708 / PLOS-086 CloudKit sync-state context adapter
+./artifacts/personal-life-os/native-context/NATIVE_CONTEXT_MESH_ADAPTER_CONTRACT.md:218:This artifact does not claim app source change, Swift/domain implementation, runtime adapter implementation, runtime permission flow implementation, EventKit/HealthKit/CoreLocation/Photos/Vision/CloudKit integration, entitlement changes, privacy manifest changes, background ingestion, runtime path selection, generated Step behavior, schedule install implementation, UI implementation, screenshot proof, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, TestFlight readiness, App Store readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, or full PLOS project completion.
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:14:    "no_permission_prompting_implementation",
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:27:    "permissionScope",
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:29:    "permissionLedgerRef",
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:45:  "permission_value_proofs": [
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:61:  "permission_ledger_states": [
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:64:      "behavior": "show_value_proof_before_permission_request"
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:129:      "permission_state",
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:172:    "permission_ask_before_value_proof",
+./artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json:173:    "denied_or_revoked_calendar_permission_breaks_app_value",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:24:    "no_permission_prompting_implementation",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:38:    "permissionScope",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:41:    "permissionLedgerRef",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:52:    "reminder_permission_fallback",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:56:  "permission_value_proofs": [
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:88:  "permission_ledger_states": [
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:89:    {"state": "not_determined", "behavior": "show_value_proof_before_permission_request"},
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:95:    {"state": "revoked", "behavior": "invalidate_current_permissioned_summaries_and_stop_apple_reminders_writes_until_fresh_value_proof"},
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:97:    {"state": "needs_review", "behavior": "hold_reminders_influence_until_user_reviews_permission_value_state"}
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:106:      "slot": "reminder_permission_fallback",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:118:      "may_influence": ["skip_permission_prompt", "keep_ambitions_local_behavior"],
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:119:      "must_not_influence": ["hidden_permission_request", "ambitions_cannot_work_message"]
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:124:      "permission_state",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:161:    "denied_reminders_permission_cannot_block_start_here_step_goal_detail_or_local_closure",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:166:    "permission_ask_before_value_proof",
+./artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json:167:    "denied_or_revoked_reminders_permission_breaks_app_value",
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:104:      "title": "PLOS-M08 - Native Context Mesh and permission explainers",
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:685:            "title": "PLOS-081 - Define Calendar context adapter and explainer"
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:691:            "title": "PLOS-082 - Define Reminders context adapter if useful"
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:697:            "title": "PLOS-083 - Define Health/Fitness context adapter if useful"
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:703:            "title": "PLOS-084 - Define Location context adapter"
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:715:            "title": "PLOS-086 - Define CloudKit sync state context adapter"
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:721:            "title": "PLOS-087 - Define permission value proof pattern"
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.json:727:            "title": "PLOS-088 - Define permission ledger and revocation controls"
+./artifacts/plos-runtime/PLOS_DECISIONS.md:3:- 2026-06-13: AMB-704 / PLOS-082 defines Reminders context adapter usefulness as explicit user-confirmed Apple Reminders write receipts by default. Broad Reminders read/import behavior is not useful unless a future issue separately proves user-visible value, local-only redacted summaries, revocation behavior, fixture coverage, and user controls. Existing Apple Reminders lists must not become Ambitions tasks, Source Atlas content, R2 content, external prompts, analytics/telemetry, or generic to-do-list anatomy.
+./artifacts/plos-runtime/PLOS_DECISIONS.md:4:- 2026-06-13: AMB-703 / PLOS-081 defines Calendar context as a local-only derived signal, not Calendar replacement, Source Atlas content, R2 material, or public proof. Calendar read permission requires value proof before a prompt and may emit only derived busy windows, open-window confidence, schedule pressure, denied fallback, and local explanations. Calendar write behavior is separated from read access and requires explicit user confirmation. Denied, restricted, revoked, unavailable, or stale Calendar state must fall back to baseline/manual planning and cannot keep current Calendar-derived influence. Raw event titles, attendees, locations, notes, calendar names, and unredacted recurrence details are blocked from Linear, R2, public artifacts, support bundles, external prompts, analytics, or telemetry.
+./artifacts/plos-runtime/PLOS_DECISIONS.md:54:- 2026-06-12: AMB-659 / PLOS-026 treats the checked-in privacy manifest as source evidence only: `NSPrivacyTracking=false`, no collected data types, and no accessed API reasons. Current source inspection supports local-first/no-collected-data posture for this docs scope, while final signed-build review, App Store Connect labels, legal/privacy approval, Apple permission prompts, CloudKit/R2 future implementation, diagnostics/export support, and release readiness remain Yellow/future-owned.
+./artifacts/plos-runtime/PLOS_DECISIONS.md:71:- 2026-06-12: AMB-608 parent acceptance closes PLOS-M00 Green for governance scope only. M00 is not runtime implementation proof, release proof, owner approval, app source proof, or permission to execute M01+ in this run. The next action is owner review before any future AMB-609 / PLOS-M01 start.
+./artifacts/plos-runtime/PLOS-run-state.md:5:Run type: AMB-704 / PLOS-082 Reminders context adapter if useful
+./artifacts/plos-runtime/PLOS-run-state.md:24:  title: "Native Context Mesh and permission explainers"
+./artifacts/plos-runtime/PLOS-run-state.md:29:  title: "Define Reminders context adapter if useful"
+./artifacts/plos-runtime/PLOS-run-state.md:30:  status: "In progress for documentation/control-plane Reminders context adapter usefulness, write-receipt default, future read-summary gate, PermissionValueProof linkage, PermissionLedger/revocation linkage, privacy boundary, influence matrix, and fixture contract"
+./artifacts/plos-runtime/PLOS-run-state.md:33:  after_current_child: "AMB-704 owns documentation/control-plane Reminders context adapter if useful contract only; do not claim Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, entitlement changes, privacy manifest changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Reminders replacement proof, Apple Reminders import proof, CloudKit sync readiness, AMB-616 parent completion, or production readiness"
+./artifacts/plos-runtime/PLOS-run-state.md:90:Current child in progress: `AMB-704` / `PLOS-082` - Define Reminders context adapter if useful. AMB-704 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, entitlement changes, privacy manifest changes, background ingestion, Apple Reminders read/import implementation, generic task-list replacement, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` and `AMB-703` Done; active M08 children `AMB-704` through `AMB-708`, `AMB-771`, and `AMB-710`; `AMB-764` through `AMB-770` plus `AMB-772` are Duplicate/archived/canceled, and `AMB-709` is archived/non-active.
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:31:| M08 | PLOS-M08 | AMB-616 | Native Context Mesh and permission explainers | Active; AMB-702 / PLOS-080 and AMB-703 / PLOS-081 Done; AMB-704 / PLOS-082 in progress; active children AMB-704 through AMB-708, AMB-771, and AMB-710; AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled; AMB-709 archived/non-active |
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:127:| PLOS-081 | AMB-703 | AMB-616 | Define Calendar context adapter and explainer |
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:128:| PLOS-082 | AMB-704 | AMB-616 | Define Reminders context adapter if useful |
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:129:| PLOS-083 | AMB-705 | AMB-616 | Define Health/Fitness context adapter if useful |
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:130:| PLOS-084 | AMB-706 | AMB-616 | Define Location context adapter |
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:132:| PLOS-086 | AMB-708 | AMB-616 | Define CloudKit sync state context adapter |
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:133:| PLOS-087 | AMB-771 | AMB-616 | Define permission value proof pattern |
+./artifacts/plos-runtime/PLOS_LINEAR_ISSUE_MAP.md:134:| PLOS-088 | AMB-710 | AMB-616 | Define permission ledger and revocation controls |
+./artifacts/plos-runtime/PLOS_PHASE_GATES.md:5:Scope of current packet: AMB-704 / PLOS-082 Reminders context adapter if useful; no PLOS runtime feature implementation
+./artifacts/plos-runtime/PLOS_PHASE_GATES.md:195:Purpose: Native Context Mesh and permission explainers.
+./artifacts/plos-runtime/PLOS_PHASE_GATES.md:201:- Calendar, reminders, files/photos/OCR, location, Health/Fitness, CloudKit, and permission state adapters are classified.
+./artifacts/plos-runtime/PLOS_PHASE_GATES.md:410:- App Review, privacy label, permission copy, high-risk safety, and data lifecycle evidence are current.
+./artifacts/plos-runtime/PLOS_CHANGELOG.md:3:- 2026-06-13: AMB-704 / PLOS-082 continued AMB-616 / PLOS-M08 after AMB-703 was pushed at `fce911277d37bd6de98761badb88c380122a1f96` and moved to Done in Linear. Re-fetched AMB-616, AMB-704, and current M08 children, then moved AMB-704 to In Progress. Produced `artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.md`, `artifacts/personal-life-os/native-context/REMINDERS_CONTEXT_ADAPTER_CONTRACT.json`, `artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md`, bounded Reminders context source and required search logs plus summary, and read-only reviewer output. The contract defines Reminders adapter usefulness, write-receipt default, future read-summary gate, PermissionValueProof linkage, PermissionLedger/revocation linkage, local-only privacy boundary, context-to-path influence matrix, fixture obligations, and Red conditions without changing app source, implementing EventKit Reminders permission prompting, implementing a runtime adapter, importing Apple Reminders lists as Ambitions tasks, claiming Reminders replacement, performing R2 writes, or claiming release/privacy/legal/accessibility/device/performance/App Review proof.
+./artifacts/plos-runtime/PLOS_CHANGELOG.md:4:- 2026-06-13: AMB-703 / PLOS-081 continued AMB-616 / PLOS-M08 after AMB-702 was pushed at `0d8d3870a9fcf6055a79b2f264cfd45b83a3fc57` and moved to Done in Linear. Re-fetched the Linear project, AMB-616, AMB-703, and current M08 children, then moved AMB-703 to In Progress. Produced `artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.md`, `artifacts/personal-life-os/native-context/CALENDAR_CONTEXT_ADAPTER_CONTRACT.json`, `artifacts/personal-life-os/reports/PLOS-081-calendar-context-adapter-explainer.md`, bounded Calendar context source and required search logs plus summary, and read-only reviewer output. The contract defines Calendar read/write PermissionValueProof linkage, PermissionLedger/revocation linkage, local-only privacy boundary, context-to-path influence matrix, fixture obligations, and Red conditions without changing app source, implementing EventKit permission prompting, implementing a runtime adapter, claiming Calendar replacement, performing R2 writes, or claiming release/privacy/legal/accessibility/device/performance/App Review proof.
+./artifacts/plos-runtime/PLOS_GOAL.md:5:Current allowed run type: AMB-704 / PLOS-082 Reminders context adapter if useful
+./artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json:9:        "current_request_scope": "AMB-704 / PLOS-082 Reminders context adapter if useful",
+./artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.json:110:      "title": "Native Context Mesh and permission explainers",
+./artifacts/plos-runtime/reviewer-output/AMB-702-native-context-closeout-review.md:27:- Calendar, Reminders, Health/Fitness, Location, Files/Photos/OCR, CloudKit sync state, Notifications, Focus/Shortcuts, and manual life context have bounded roles.
+./artifacts/plos-runtime/reviewer-output/AMB-702-native-context-closeout-review.md:43:AMB-702 may close Green for the documentation/control-plane contract after structural validation and push. The closeout must not claim runtime adapter implementation, permission prompting, native framework integration, sync readiness, release readiness, accessibility proof, device proof, performance proof, or privacy/legal approval.
+./artifacts/plos-runtime/reviewer-output/AMB-704-reminders-context-closeout-review.md:37:The AMB-704 packet must not be used to claim app source change, runtime adapter implementation, EventKit Reminders permission prompt implementation, Apple Reminders import behavior, generic task/reminder replacement, UI implementation, accessibility proof, device proof, performance proof, privacy/legal approval, release readiness, App Review readiness, CloudKit sync readiness, R2 write, AMB-616 parent completion, or full PLOS completion.
+./artifacts/plos-runtime/reviewer-output/AMB-703-calendar-context-closeout-review.md:26:- Read and write permission value proofs are separated and require value proof before prompts.
+./artifacts/plos-runtime/reviewer-output/AMB-703-calendar-context-closeout-review.md:34:- No permission prompt, permission ledger, revocation runtime, UI, screenshot, accessibility, device, performance, privacy/legal, App Review, or release proof was produced.
+./artifacts/plos-runtime/reviewer-output/AMB-703-calendar-context-closeout-review.md:43:AMB-703 may close Green for the documentation/control-plane Calendar adapter and explainer contract after structural validation and push. The closeout must not claim EventKit integration readiness, Calendar replacement, permission prompt implementation, runtime adapter implementation, CloudKit sync readiness, release readiness, accessibility proof, device proof, performance proof, or privacy/legal approval.
+./artifacts/plos-runtime/PLOS_RISK_REGISTER.md:8:| Reminders adapter drift | Red/Yellow | Reminders can collapse Ambitions into a generic task/reminder app, leak raw reminder details, or become Source Atlas/R2/public material. | AMB-704 blocks importing Apple Reminders lists as Ambitions tasks, Source Atlas content, R2 material, external prompt content, telemetry/analytics, or generic to-do-list anatomy. The adapter contract defaults to explicit user-confirmed write receipts and requires separate future value proof before any read summary. | Controlled for AMB-704 documentation/control-plane scope; Swift/runtime adapter, permission prompt, PermissionLedger implementation, executable validators, UI, accessibility, device, privacy/legal, performance, App Review, release proof, and M08 parent acceptance remain future-owned. |
+./artifacts/plos-runtime/PLOS_RISK_REGISTER.md:32:| Calendar context privacy or replacement drift | Red/Yellow | Calendar-derived context could leak raw event titles, attendees, locations, notes, or calendar names; become Source Atlas/R2/public material; silently mutate schedule/path behavior; or be overclaimed as Calendar replacement, release, privacy/legal, accessibility, performance, TestFlight, App Store, or App Review proof. | AMB-703 defines `CalendarContextAdapter`, read/write `PermissionValueProof`, `PermissionLedger`/revocation linkage, local-only allowed summaries, blocked raw material, context-to-path influence matrix, and fixture obligations that fail closed for denied/revoked/stale/unconfirmed/broad-claim cases. | Controlled for AMB-703 documentation/control-plane scope; Swift/domain implementation, permission prompt implementation, PermissionLedger runtime, executable validators, UI proof, Calendar replacement proof, privacy/legal, device, accessibility, performance, release, and production certification remain future-owned. |
+./artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md:5:Scope of current run: AMB-704 / PLOS-082 Reminders context adapter if useful
+./artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md:34:| 8 | M08 | AMB-616 | Native Context Mesh and permission explainers | `scripts/codex/program-phase-gate.sh plos M08` | Active; AMB-702 / PLOS-080 and AMB-703 / PLOS-081 Done; AMB-704 / PLOS-082 in progress; active children AMB-704 through AMB-708, AMB-771, and AMB-710 live-resolved; AMB-764 through AMB-770 and AMB-772 Duplicate; AMB-709 archived/non-active |
+./artifacts/plos-runtime/PLOS_EXECUTION_QUEUE.md:56:Validate, commit, push, and update AMB-704 / PLOS-082. AMB-704 Reminders context adapter documentation/control-plane proof must not be converted into Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, entitlement changes, privacy manifest changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Reminders replacement proof, Apple Reminders import proof, CloudKit sync readiness, R2 write, AMB-616 parent completion, M10 runtime consumption, M23 sync readiness, M26 certification, or production readiness. After AMB-704 is Done, re-fetch AMB-616 and current M08 children before AMB-705 execution.
+./artifacts/source-atlas-factory/SOURCE_ATLAS_CONTRADICTION_FRESHNESS_SCAN.md:36:| `value_conflict` | same subject/scope has incompatible facts, thresholds, dates, permissions, costs, or deadlines | contradiction review |
+./artifacts/source-atlas-factory/SOURCE_ATLAS_RISK_JURISDICTION_CLASSIFICATION.md:83:Jurisdiction classification must be explicit when rules, eligibility, deadlines, costs, permissions, safety posture, or required sources vary by:
+./artifacts/source-atlas-factory/SOURCE_ATLAS_CLAIM_EXTRACTION_DUPLICATE_DETECTION.md:62:| `contradictory_claim` | claims conflict in value, permission, deadline, eligibility, safety, or source state | do not merge; route to contradiction review |

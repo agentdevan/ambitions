@@ -6,7 +6,7 @@
   "linear_project_id": "3cd7ed7e-96ca-4d18-ba27-60d533b4364c",
   "run_policy": {
     "branch_policy": "main only",
-        "current_request_scope": "AMB-704 / PLOS-082 Reminders context adapter if useful",
+        "current_request_scope": "AMB-705 / PLOS-083 Health/Fitness context adapter if useful",
     "plos_m00_executed": true,
     "runtime_features_implemented": false,
     "owner_review_required_before_execution": false,
@@ -108,7 +108,7 @@
       "linear_id": "AMB-616",
       "linear_lookup_identifier": "AMB-616",
       "title": "Native Context Mesh and permission explainers",
-            "state": "active_AMB-702_done_AMB-703_done_AMB-704_in_progress_AMB-704_through_AMB-708_AMB-771_AMB-710_active_duplicates_AMB-764_through_AMB-770_AMB-772_archived_AMB-709",
+            "state": "active_AMB-702_done_AMB-703_done_AMB-704_done_AMB-705_in_progress_AMB-705_through_AMB-708_AMB-771_AMB-710_active_duplicates_AMB-764_through_AMB-770_AMB-772_archived_AMB-709",
       "requires_previous_phase_green": true,
       "phase_gate_command": "scripts/codex/program-phase-gate.sh plos M08"
     },

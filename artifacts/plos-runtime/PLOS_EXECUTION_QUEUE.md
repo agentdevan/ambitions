@@ -2,7 +2,7 @@
 
 Status: Active PLOS Goal Mode queue
 Generated: 2026-06-12
-Scope of current run: AMB-704 / PLOS-082 Reminders context adapter if useful
+Scope of current run: AMB-705 / PLOS-083 Health/Fitness context adapter if useful
 PLOS-M00 execution status: Green for governance scope after AMB-608 parent acceptance
 PLOS-M01 execution status: Green for live runtime truth-map scope; AMB-609 Done in Linear
 Owner review: owner accepted AMB-608 / PLOS-M00 and AMB-609 / PLOS-M01 as complete and authorized continuous PLOS execution from AMB-610 / PLOS-M02 through AMB-635 / PLOS-M26 on 2026-06-12, subject to strict phase gates
@@ -31,7 +31,7 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 | 5 | M05 | AMB-613 | Source Atlas Pack / Seed Foundry | `scripts/codex/program-phase-gate.sh plos M05` | Done in Linear; AMB-676 / PLOS-050 through AMB-685 / PLOS-059 Done; AMB-973 / PLOS-M05-R2 Done after staging R2 body-read/hash proof; AMB-738 through AMB-747 Duplicate |
 | 6 | M06 | AMB-614 | Source Authority Mesh | `scripts/codex/program-phase-gate.sh plos M06` | Done in Linear; AMB-686 / PLOS-060 through AMB-691 / PLOS-065 Done; AMB-748 through AMB-753 Duplicate |
 | 7 | M07 | AMB-615 | Any Goal Solution Loop | `scripts/codex/program-phase-gate.sh plos M07` | Done in Linear; AMB-692 / PLOS-070 Done, AMB-755 / PLOS-071 Done, AMB-694 / PLOS-072 Done, AMB-695 / PLOS-073 Done, AMB-696 / PLOS-074 Done, AMB-697 / PLOS-075 Done, AMB-698 / PLOS-076 Done, AMB-699 / PLOS-077 Done, AMB-700 / PLOS-078 Done, AMB-701 / PLOS-079 Done; AMB-754 and AMB-756 through AMB-763 Duplicate; AMB-693 archived/non-active |
-| 8 | M08 | AMB-616 | Native Context Mesh and permission explainers | `scripts/codex/program-phase-gate.sh plos M08` | Active; AMB-702 / PLOS-080 and AMB-703 / PLOS-081 Done; AMB-704 / PLOS-082 in progress; active children AMB-704 through AMB-708, AMB-771, and AMB-710 live-resolved; AMB-764 through AMB-770 and AMB-772 Duplicate; AMB-709 archived/non-active |
+| 8 | M08 | AMB-616 | Native Context Mesh and permission explainers | `scripts/codex/program-phase-gate.sh plos M08` | Active; AMB-702 / PLOS-080 through AMB-704 / PLOS-082 Done; AMB-705 / PLOS-083 in progress; active children AMB-705 through AMB-708, AMB-771, and AMB-710 live-resolved; AMB-764 through AMB-770 and AMB-772 Duplicate; AMB-709 archived/non-active |
 | 9 | M09 | AMB-627 | Step Quality Firewall | `scripts/codex/program-phase-gate.sh plos M09` | Blocked pending M08 |
 | 10 | M10 | AMB-617 | Golden vertical slice | `scripts/codex/program-phase-gate.sh plos M10` | Blocked pending M09 |
 | 11 | M11 | AMB-618 | Onboarding and first-run activation | `scripts/codex/program-phase-gate.sh plos M11` | Blocked pending M10 |
@@ -53,4 +53,4 @@ This queue defines the only allowed phase order for the Ambitions Personal Life 
 
 ## Next Eligible Action
 
-Validate, commit, push, and update AMB-704 / PLOS-082. AMB-704 Reminders context adapter documentation/control-plane proof must not be converted into Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, entitlement changes, privacy manifest changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Reminders replacement proof, Apple Reminders import proof, CloudKit sync readiness, R2 write, AMB-616 parent completion, M10 runtime consumption, M23 sync readiness, M26 certification, or production readiness. After AMB-704 is Done, re-fetch AMB-616 and current M08 children before AMB-705 execution.
+Validate, commit, push, and update AMB-705 / PLOS-083. AMB-705 Health/Fitness context adapter documentation/control-plane proof must not be converted into Swift/domain implementation, runtime adapter implementation, HealthKit integration, HealthKit entitlement changes, permission prompting implementation, privacy manifest changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Health/Fitness replacement proof, medical/training/professional advice proof, CloudKit sync readiness, R2 write, AMB-616 parent completion, M10 runtime consumption, M18 high-risk implementation, M23 sync readiness, M26 certification, or production readiness. After AMB-705 is Done, re-fetch AMB-616 and current M08 children before AMB-706 execution.

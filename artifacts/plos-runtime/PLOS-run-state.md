@@ -2,7 +2,7 @@
 
 Updated: 2026-06-13
 Program: PLOS Runtime Master Build
-Run type: AMB-704 / PLOS-082 Reminders context adapter if useful
+Run type: AMB-705 / PLOS-083 Health/Fitness context adapter if useful
 Branch policy: main only
 PLOS-M00 executed: yes, governance scope complete after parent acceptance
 PLOS-M01 executed: Green for live runtime truth-map scope; parent accepted and closed in Linear
@@ -22,17 +22,17 @@ current_phase:
   label: "PLOS-M08"
   linear_id: "AMB-616"
   title: "Native Context Mesh and permission explainers"
-  status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 and AMB-703 Done, AMB-704 in progress, active children AMB-704 through AMB-708, AMB-771, and AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
+  status: "Active after AMB-615 / PLOS-M07 parent acceptance was pushed at 4b10e3b7a410248f791f24a60119df0b9ceea383 and moved to Done in Linear; live M08 re-fetch found AMB-702 through AMB-704 Done, AMB-705 in progress, active children AMB-705 through AMB-708, AMB-771, and AMB-710, with AMB-764 through AMB-770 plus AMB-772 Duplicate/archived/canceled and AMB-709 archived/non-active"
 current_child:
-  label: "PLOS-082"
-  linear_id: "AMB-704"
-  title: "Define Reminders context adapter if useful"
-  status: "In progress for documentation/control-plane Reminders context adapter usefulness, write-receipt default, future read-summary gate, PermissionValueProof linkage, PermissionLedger/revocation linkage, privacy boundary, influence matrix, and fixture contract"
+  label: "PLOS-083"
+  linear_id: "AMB-705"
+  title: "Define Health/Fitness context adapter if useful"
+  status: "In progress for documentation/control-plane Health/Fitness context adapter usefulness, not-useful-for-launch-core default, future coarse local energy/recovery and movement-readiness gates, PermissionValueProof linkage, PermissionLedger/revocation linkage, sensitivity classes, privacy boundary, influence matrix, and fixture contract"
 next_allowed_action:
-  action: "Validate, commit, push, and update AMB-704; next eligible child is AMB-705 / PLOS-083 only after AMB-704 is moved to Done in Linear, current M08 parent/children are re-fetched, and the M08 phase gate remains Green"
-  after_current_child: "AMB-704 owns documentation/control-plane Reminders context adapter if useful contract only; do not claim Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, entitlement changes, privacy manifest changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Reminders replacement proof, Apple Reminders import proof, CloudKit sync readiness, AMB-616 parent completion, or production readiness"
+  action: "Validate, commit, push, and update AMB-705; next eligible child is AMB-706 / PLOS-084 only after AMB-705 is moved to Done in Linear, current M08 parent/children are re-fetched, and the M08 phase gate remains Green"
+  after_current_child: "AMB-705 owns documentation/control-plane Health/Fitness context adapter if useful contract only; do not claim Swift/domain implementation, runtime adapter implementation, HealthKit integration, HealthKit entitlement changes, permission prompting implementation, privacy manifest changes, UI implementation, accessibility/device/performance/privacy/legal/release/App Review proof, Health/Fitness replacement proof, medical/training/professional advice proof, CloudKit sync readiness, AMB-616 parent completion, or production readiness"
 latest_local_scope:
-  changed_path_policy: "AMB-704 reminders-context contract artifacts, report, bounded source search logs/summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
+  changed_path_policy: "AMB-705 health-fitness-context contract artifacts, report, bounded source search logs/summary, reviewer output, PLOS run-state/control-plane artifacts, proof ledger, and proof index only"
   app_source_changed: false
   runtime_features_implemented: false
   linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status"
@@ -45,7 +45,7 @@ validation_required_before_execution:
   - "python3 scripts/codex/plos-readiness-validate.py"
   - "python3 scripts/codex/source-atlas-readiness-validate.py --self-test"
   - "python3 scripts/codex/source-atlas-readiness-validate.py"
-  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-082-reminders-context-adapter-if-useful.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program plos --scope child artifacts/personal-life-os/reports/PLOS-083-health-fitness-context-adapter-if-useful.md"
 validation_not_run_by_current_scope: []
 ```
 
@@ -87,7 +87,9 @@ Completed child: `AMB-702` / `PLOS-080`, pushed to `main` at `0d8d3870a9fcf6055a
 
 Completed child: `AMB-703` / `PLOS-081`, pushed to `main` at `fce911277d37bd6de98761badb88c380122a1f96` and moved to Done in Linear on 2026-06-13 America/New_York.
 
-Current child in progress: `AMB-704` / `PLOS-082` - Define Reminders context adapter if useful. AMB-704 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, EventKit Reminders permission prompting implementation, entitlement changes, privacy manifest changes, background ingestion, Apple Reminders read/import implementation, generic task-list replacement, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` and `AMB-703` Done; active M08 children `AMB-704` through `AMB-708`, `AMB-771`, and `AMB-710`; `AMB-764` through `AMB-770` plus `AMB-772` are Duplicate/archived/canceled, and `AMB-709` is archived/non-active.
+Completed child: `AMB-704` / `PLOS-082`, pushed to `main` at `586fc8462de866f06a0c4af3680e1b2cc44ae3ae` and moved to Done in Linear on 2026-06-13 America/New_York.
+
+Current child in progress: `AMB-705` / `PLOS-083` - Define Health/Fitness context adapter if useful. AMB-705 is documentation/control-plane scope only; app source, Swift/domain implementation, runtime adapter implementation, HealthKit integration, HealthKit entitlement changes, permission prompting implementation, privacy manifest changes, background ingestion, Health/Fitness read implementation, medical/training/professional advice, generic fitness app anatomy, UI implementation, accessibility proof, device proof, measured performance proof, privacy/legal approval, release readiness, App Review readiness, CloudKit sync readiness, R2 write, production certification, AMB-616 parent completion, and full PLOS project completion remain out of scope. Live Linear verification on 2026-06-13 America/New_York found `AMB-702` through `AMB-704` Done; active M08 children `AMB-705` through `AMB-708`, `AMB-771`, and `AMB-710`; `AMB-764` through `AMB-770` plus `AMB-772` are Duplicate/archived/canceled, and `AMB-709` is archived/non-active.
 
 ## Active Authorization
 
