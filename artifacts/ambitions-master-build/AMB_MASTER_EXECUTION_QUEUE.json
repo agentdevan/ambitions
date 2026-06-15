@@ -193,7 +193,7 @@
       "linear_id": "AMB-1059",
       "phase": "M04",
       "title": "Global search entry and presentation: trusted retrieval handoff",
-      "state": "Next eligible; refresh live Linear before source edits"
+      "state": "Done in source / source 7d45c59f6f3f0e449f92e023f73a25e4ce02a34a / closeout metadata pending this commit / final proof-index pending"
     },
     {
       "rank": 24,
@@ -201,7 +201,7 @@
       "linear_id": "AMB-1060",
       "phase": "M04",
       "title": "Tokenized design system foundation: flagship semantic base",
-      "state": "blocked pending M04.T02"
+      "state": "Next eligible after AMB-1059 metadata/proof-index reconciliation and Linear Done"
     },
     {
       "rank": 25,
@@ -285,7 +285,7 @@
     }
   ],
   "next": {
-    "train": "M04.T02",
-    "linear_id": "AMB-1059"
+    "train": "M04.T03",
+    "linear_id": "AMB-1060"
   }
 }

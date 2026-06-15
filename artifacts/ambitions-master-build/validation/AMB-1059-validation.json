@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "program": "amb-master",
+  "linear_project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
+  "linear_issue": "AMB-1059",
+  "train_label": "M04.T02",
+  "title": "Global search entry and presentation: trusted retrieval handoff",
+  "status": "green_for_source_control_plane_scope",
+  "source_commit": "7d45c59f6f3f0e449f92e023f73a25e4ce02a34a",
+  "closeout_metadata_commit": "pending_this_metadata_commit",
+  "final_reconciliation_commit": "pending_final_proof_index_reconciliation",
+  "baseline_commit": "90780953d9fb170895a7a0d657b03493f500d7e4",
+  "branch": "main",
+  "remote_verification": {
+    "remote": "origin",
+    "ref": "refs/heads/main",
+    "sha": "7d45c59f6f3f0e449f92e023f73a25e4ce02a34a"
+  },
+  "claim": "Memory Lens has a shell-owned local search entry that produces trusted retrieval handoffs, blocks stale top-level IA destinations, routes trusted results into the owning surface, and keeps Capture as Global Capture rather than a root tab.",
+  "commands": [
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260615T084729.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T084729.log"
+    },
+    {
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch AMB-1059 --prompt artifacts/ambitions-master-build/validation/AMB-1059-parallel-guard-prompt.md --batch-type source-changing",
+      "result": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1059-pre.md"
+    },
+    {
+      "command": "xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath /Users/devan/Documents/GitHub/ambitions/output/DerivedData-AMB1059 -only-testing:AmbitionsTests/MemoryLensServiceTests -only-testing:AmbitionsTests/ShellCommandRouterTests -enableCodeCoverage NO",
+      "result": "pass_18_selected_tests_0_failures",
+      "artifact": "artifacts/ambitions-master-build/validation/AMB-1059/focused-search-routing-tests.log"
+    },
+    {
+      "command": "XcodeBuildMCP install_app_sim, launch_app_sim with AMBITIONS_USE_PREVIEW_DATA=1 and AMBITIONS_LAUNCH_URL=ambitions://overlay/memory-lens, screenshot, and main-agent visual inspection",
+      "result": "pass_for_scoped_memory_lens_handoff_presentation",
+      "artifact": "artifacts/ambitions-master-build/screenshots/AMB-1059/memory-lens-trusted-handoff.png"
+    },
+    {
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-1059 --prompt artifacts/ambitions-master-build/validation/AMB-1059-parallel-guard-prompt.md --changed-from 90780953d9fb170895a7a0d657b03493f500d7e4 --batch-type source-changing",
+      "result": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1059-post.md"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "git diff --cached --check",
+      "result": "pass_after_normalizing_focused_test_log",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "git push origin main && git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "pass_source_remote_verified",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1059-validation.json",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1059-global-search-trusted-retrieval-handoff.md",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-readiness-validate.py --phase M04",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-repository-wiring-validate.py",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260615T093202.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093202.log"
+    }
+  ],
+  "screenshots": [
+    {
+      "surface": "Memory Lens",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1059/memory-lens-trusted-handoff.png",
+      "visual_evaluation": "The sheet shows What Ambitions knows, local search copy, fitted search field and Search button, 4 trusted results, and a fully visible first trusted handoff row with owner, action, title, and source/trust summary; Capture remains outside the root tab dock."
+    }
+  ],
+  "parallel_guard": {
+    "pre": {
+      "status": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1059-pre.md"
+    },
+    "post": {
+      "status": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1059-post.md",
+      "duplicate_risks": 0,
+      "runtime_wiring_gaps": 0,
+      "old_term_violations": 0,
+      "locked_concepts_touched": "none"
+    }
+  },
+  "proof_class": "source implementation, focused XCTest, guard, and visual Memory Lens handoff proof",
+  "non_claims": [
+    "No broad search ranking quality certification.",
+    "No all-surface search completion claim.",
+    "No public accessibility certification.",
+    "No physical-device proof.",
+    "No measured performance certification.",
+    "No privacy/legal approval.",
+    "No release readiness, TestFlight readiness, or App Store readiness.",
+    "No full-project Green."
+  ],
+  "yellow_limits": [
+    "Memory Lens proof covers shell-owned entry, local retrieval presentation, trusted handoff routing, and stale-root blockers only.",
+    "Visual proof was inspected on the iPhone 17 simulator with preview data; it is not public accessibility certification or physical-device proof.",
+    "Focused tests cover MemoryLensService and ShellCommandRouter paths; full app test suite and measured performance are not claimed for this train."
+  ],
+  "responsible_program": "amb-master",
+  "related_linear_issue": "AMB-1059",
+  "evidence_status": "green_for_scoped_AMB_1059_trusted_search_handoff_source_control_plane"
+}

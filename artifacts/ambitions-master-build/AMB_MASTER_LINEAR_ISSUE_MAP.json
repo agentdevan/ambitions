@@ -7,7 +7,7 @@
     "team": "Ambitions",
     "team_id": "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
   },
-  "generated_from": "Live Linear fetches on 2026-06-15 plus current repo state; M04 issue set refreshed during AMB-1058 closeout metadata",
+  "generated_from": "Live Linear fetches on 2026-06-15 plus current repo state; M04 issue set refreshed during AMB-1059 closeout metadata",
   "bindings": [
     {
       "train": "CONTROL",
@@ -175,14 +175,14 @@
       "linear_id": "AMB-1059",
       "title": "Global search entry and presentation: trusted retrieval handoff",
       "milestone": "M04",
-      "status": "Backlog / next eligible after AMB-1058 Done"
+      "status": "Done in source / source 7d45c59f6f3f0e449f92e023f73a25e4ce02a34a / closeout metadata pending this commit / final proof-index pending"
     },
     {
       "train": "M04.T03",
       "linear_id": "AMB-1060",
       "title": "Tokenized design system foundation: flagship semantic base",
       "milestone": "M04",
-      "status": "Backlog"
+      "status": "Backlog / next eligible after AMB-1059 metadata and Linear Done"
     },
     {
       "train": "M04.T04",
@@ -206,5 +206,5 @@
       "status": "Backlog"
     }
   ],
-  "refresh_rule": "Refresh from live Linear before each new train. Next eligible after AMB-1058 Done is AMB-1059 / M04.T02. Train labels are aliases; AMB-* identifiers are authoritative."
+  "refresh_rule": "Refresh from live Linear before each new train. Next eligible after AMB-1059 Done is AMB-1060 / M04.T03. Train labels are aliases; AMB-* identifiers are authoritative."
 }

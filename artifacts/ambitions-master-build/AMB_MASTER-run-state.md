@@ -19,27 +19,27 @@ project:
 current_phase:
   label: "M04"
   title: "Native Shell + Design System Foundation"
-  status: "AMB-1058 / M04.T01 Done in Linear after source/control-plane, closeout metadata, and final proof-index reconciliation pushes; AMB-1059 / M04.T02 next eligible"
+  status: "AMB-1059 / M04.T02 source/control-plane pushed after focused validation; closeout metadata and final proof-index reconciliation in progress; AMB-1060 / M04.T03 next eligible after Linear Done"
 current_train:
+  label: "M04.T03"
+  linear_id: "AMB-1060"
+  title: "Tokenized design system foundation: flagship semantic base"
+  status: "Next eligible after AMB-1059 metadata/proof-index reconciliation and Linear Done; refresh live Linear, run AMB-MASTER preflight and M04 phase gate, then execute the tokenized design system foundation train."
+last_closed_train:
   label: "M04.T02"
   linear_id: "AMB-1059"
   title: "Global search entry and presentation: trusted retrieval handoff"
-  status: "Next eligible; refresh live Linear, run AMB-MASTER preflight and M04 phase gate, then execute the global search trusted retrieval handoff train."
-last_closed_train:
-  label: "M04.T01"
-  linear_id: "AMB-1058"
-  title: "Root navigation architecture: five-surface shell proof"
-  status: "Done in Linear at 2026-06-15T12:41:31.654Z; source/control-plane commit efd6957c9022f66f3316d06e9862c92a61832990, closeout metadata dea3cf942487b77b20aec07569ebd94b2b844674, final proof-index reconciliation 83c5c9558064013628890ec311ef8eca8303a813"
+  status: "Source/control-plane commit 7d45c59f6f3f0e449f92e023f73a25e4ce02a34a pushed and remote verified; closeout metadata pending this commit; final proof-index reconciliation pending"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Refresh live Linear for AMB-1059 / M04.T02, run AMB-MASTER preflight and M04 phase gate, then execute the global search entry and trusted retrieval handoff train."
+  action: "Complete AMB-1059 metadata/proof-index reconciliation and Linear Done, then refresh live Linear for AMB-1060 / M04.T03, run AMB-MASTER preflight and M04 phase gate, and execute the tokenized design system foundation train."
 latest_local_scope:
-  changed_path_policy: "AMB-1058 touched app shell/navigation owners, focused app/runtime tests, AMB master canon IA validator, root-shell screenshots, focused test log, and AMB-1058 guard prompt/reports."
+  changed_path_policy: "AMB-1059 touched shell command models/router/presentation owners, focused app tests, AMB-1059 guard prompt/reports, focused test log, and Memory Lens screenshot proof."
   app_source_changed: true
-  runtime_behavior_changed: "Removed Capture as a raw AppTab/root tab, kept AppTab.allCases limited to Today / Goals / Time / Motion / You, routed legacy Capture inputs through Today/global Capture overlay or capture-inbox compatibility, preserved Motion as fifth root and Plan/Pulse as compatibility-only, and added shell-owned top clearance for root content."
+  runtime_behavior_changed: "Memory Lens now presents local search from the shell, filters results through trusted handoff records, routes trusted results into owning surfaces, records source/trust continuity receipts, blocks stale top-level IA destinations, and keeps Capture as Global Capture rather than a root tab."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -49,21 +49,17 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
   - "scripts/codex/program-phase-gate.sh amb-master M04"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1058-root-navigation-five-surface-shell-proof.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1059-global-search-trusted-retrieval-handoff.md"
 latest_validation:
-  status: "AMB-1058 focused implementation validation Green; source/control-plane, closeout metadata, and final proof-index reconciliation commits pushed and remote verified; AMB-1058 Done in Linear"
+  status: "AMB-1059 focused implementation validation Green; source/control-plane commit pushed and remote verified; closeout metadata and final proof-index reconciliation in progress"
   logs:
-    - "DerivedData Test-Ambitions-2026.06.15_00-32-20--0400.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1058-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1058-post.md"
-    - "artifacts/ambitions-master-build/validation/AMB-1058/focused-root-shell-tests.log"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-today.png"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-goals.png"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-time.png"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-motion.png"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-you.png"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260615T004417.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T004417.log"
+    - "DerivedData Test-Ambitions-2026.06.15_09-22-41--0400.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1059-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1059-post.md"
+    - "artifacts/ambitions-master-build/validation/AMB-1059/focused-search-routing-tests.log"
+    - "artifacts/ambitions-master-build/screenshots/AMB-1059/memory-lens-trusted-handoff.png"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260615T084729.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T084729.log"
 ```
 
 ## Pushed SHA Log
@@ -90,7 +86,8 @@ latest_validation:
 - `AMB-1114` / `M03.T01`: final proof-index reconciliation commit `ecc905cf854ab1b0d6feb1167beaca4da6369437` pushed and remote verified; AMB-1114 marked Done in Linear; next train is `AMB-1115` / `M03.T02`.
 - `AMB-1115` / `M03.T02`: final proof-index reconciliation commit `ea6aae422940715a981df7fc3919f596bc74ab18` pushed and remote verified; AMB-1115 marked Done in Linear; next train is `AMB-1058` / `M04.T01`.
 - `AMB-1058` / `M04.T01`: final proof-index reconciliation commit `83c5c9558064013628890ec311ef8eca8303a813` pushed and remote verified; AMB-1058 marked Done in Linear; next train is `AMB-1059` / `M04.T02`.
+- `AMB-1059` / `M04.T02`: source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` pushed and remote verified; closeout metadata and final proof-index reconciliation in progress; next train is `AMB-1060` / `M04.T03` after Linear Done.
 
 ## Non-Claims
 
-AMB-1058 proves the root navigation shell contract only. No broad per-surface feature completion, final body fixture polish, public accessibility certification, physical-device proof, measured performance certification, privacy/legal approval, external security audit approval, release readiness, TestFlight readiness, App Store readiness, owner approval, AMB-1059 execution, or full project completion is claimed.
+AMB-1059 proves the shell-owned Memory Lens search entry and trusted retrieval handoff only. No broad search ranking quality certification, all-surface search completion, public accessibility certification, physical-device proof, measured performance certification, privacy/legal approval, external security audit approval, release readiness, TestFlight readiness, App Store readiness, owner approval, AMB-1060 execution, or full project completion is claimed.
