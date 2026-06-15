@@ -10,13 +10,13 @@ Train label: `M04.T03`
 
 Parent or umbrella issue: `AMB-1046`
 
-Green/Yellow/Red status: Green for the focused AMB-1060 tokenized design system foundation source/proof scope; source/proof commit `f60258d6a0494223cc5e5899b21cbc37272bcb9d` is pushed and remote-verified on `origin/main`. Closeout metadata, Linear Done transition, and final proof-index reconciliation are pending in the current closeout pass.
+Green/Yellow/Red status: Green for the focused AMB-1060 tokenized design system foundation source/proof and closeout metadata scope; source/proof commit `f60258d6a0494223cc5e5899b21cbc37272bcb9d` and closeout metadata commit `5958d6d498bf5494f3da7526e3e4d4a11d53e6a2` are pushed and remote-verified on `origin/main`. Linear Done transition and final proof-index reconciliation are pending in the current closeout pass.
 
 Pushed to main: yes; source/proof commit `f60258d6a0494223cc5e5899b21cbc37272bcb9d` is pushed and remote-verified.
 
 Push hash: `f60258d6a0494223cc5e5899b21cbc37272bcb9d`
 
-Closeout metadata hash: pending until this metadata commit is created.
+Closeout metadata hash: `5958d6d498bf5494f3da7526e3e4d4a11d53e6a2`
 
 Final reconciliation hash: pending until proof-index reconciliation commit is created.
 
@@ -58,6 +58,7 @@ Validation run:
 - `python3 scripts/codex/amb-master-repository-wiring-validate.py` - pass after updating the program registry and repository wiring validator to expect AMB-1061 as the next runnable gate.
 - `bash scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-preflight-20260615T142037.log`.
 - `bash scripts/codex/program-phase-gate.sh amb-master M04` - pass after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T142037.log`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1060 proof-ledger entry and metadata push; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T142252.log`.
 
 Reviewer passes:
 - Deterministic pre/post parallel implementation guard passed Green.
@@ -81,6 +82,8 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/screenshots/AMB-1060/you-semantic-foundation.png`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260615T142037.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T142037.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T142252.log` - local ignored script output.
+- `artifacts/proof-ledger/proof-index.json`
 
 Red blockers: none
 

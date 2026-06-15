@@ -5,9 +5,9 @@
   "linear_issue": "AMB-1060",
   "train_label": "M04.T03",
   "title": "Tokenized design system foundation: flagship semantic base",
-  "status": "green_for_source_proof_scope_pending_closeout_metadata_push",
+  "status": "green_for_source_proof_and_closeout_metadata_scope_pending_final_reconciliation",
   "source_commit": "f60258d6a0494223cc5e5899b21cbc37272bcb9d",
-  "closeout_metadata_commit": "pending_current_metadata_commit",
+  "closeout_metadata_commit": "5958d6d498bf5494f3da7526e3e4d4a11d53e6a2",
   "final_reconciliation_commit": "pending_proof_index_reconciliation",
   "linear_completed_at": "pending_linear_done_transition",
   "baseline_commit": "861d74936c513d60e882c8f4034a3b7bc18a1f4d",
@@ -98,6 +98,11 @@
       "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
       "result": "pass",
       "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T142037.log"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260615T142252.log"
     }
   ],
   "screenshots": [
@@ -159,5 +164,5 @@
   ],
   "responsible_program": "amb-master",
   "related_linear_issue": "AMB-1060",
-  "evidence_status": "green_for_scoped_AMB_1060_tokenized_design_system_foundation_source_proof_pending_metadata_and_final_reconciliation"
+  "evidence_status": "green_for_scoped_AMB_1060_tokenized_design_system_foundation_source_proof_and_metadata_pending_final_reconciliation"
 }
