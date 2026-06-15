@@ -10,13 +10,13 @@ Train label: `M04.T01`
 
 Parent or umbrella issue: `AMB-1046`
 
-Green/Yellow/Red status: Green for the focused AMB-1058 root navigation architecture source/control-plane scope; source/control-plane commit `efd6957c9022f66f3316d06e9862c92a61832990` is pushed and remote-verified on `origin/main`. Closeout metadata and proof-index reconciliation are in progress and will be recorded in follow-up metadata commits before Linear Done.
+Green/Yellow/Red status: Green for the focused AMB-1058 root navigation architecture source/control-plane scope; source/control-plane commit `efd6957c9022f66f3316d06e9862c92a61832990` and closeout metadata commit `dea3cf942487b77b20aec07569ebd94b2b844674` are pushed and remote-verified on `origin/main`. Final proof-index reconciliation is in progress before Linear Done.
 
 Pushed to main: yes; source/control-plane commit `efd6957c9022f66f3316d06e9862c92a61832990` is pushed and remote-verified.
 
 Push hash: `efd6957c9022f66f3316d06e9862c92a61832990`
 
-Closeout metadata hash: pending until metadata commit is pushed and remote-verified.
+Closeout metadata hash: `dea3cf942487b77b20aec07569ebd94b2b844674`
 
 Final reconciliation hash: pending until proof-index reconciliation is pushed and remote-verified.
 
@@ -69,6 +69,8 @@ Validation run:
 - `bash scripts/sa-no-claim-scan.sh` - pass with no output; local ignored log `artifacts/ambitions-master-build/script-output/AMB-1058-sa-no-claim-scan.log`.
 - `bash scripts/privacy-boundary-scan.sh` - Yellow advisory on existing privacy/local-first/control-plane/proof-ledger terminology; local ignored log `artifacts/ambitions-master-build/script-output/AMB-1058-privacy-boundary-scan.log`.
 - `git diff --check` - pass after closeout metadata updates.
+- `git push origin main`, `git rev-parse HEAD`, and `git ls-remote origin refs/heads/main` - pushed closeout metadata commit `dea3cf942487b77b20aec07569ebd94b2b844674`; local HEAD and `origin/main` both returned `dea3cf942487b77b20aec07569ebd94b2b844674` after metadata push.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1058 proof-ledger entry; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T083755.log`.
 
 Reviewer passes:
 - Deterministic pre/post parallel implementation guard passed Green.
@@ -93,6 +95,8 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/AMB-1058-no-unsupported-ai-claim-scan.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/AMB-1058-sa-no-claim-scan.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/AMB-1058-privacy-boundary-scan.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T083755.log` - local ignored script output.
+- `artifacts/proof-ledger/proof-index.json`
 
 Red blockers: none
 
@@ -118,6 +122,9 @@ Linear reconciliation:
 - AMB-1058 source-push issue comment: `14edf5ca-bde7-4caa-aa6a-615abe883ed8`.
 - AMB-1058 source-push project comment: `28c1c493-4209-4c1a-9b41-5068ef09f5db`.
 - AMB-1058 project status update: `5fbf9688-4367-4ef2-bcf8-7e1fb13d1154`.
-- AMB-1058 Done transition: pending closeout metadata and proof-index reconciliation.
+- AMB-1058 closeout metadata issue comment: `2af7b605-2ec4-4003-9499-965712be0f00`.
+- AMB-1058 closeout metadata project comment: `ca9bc24b-47f2-4147-9c9c-e1231bbc68d5`.
+- AMB-1058 closeout metadata project status update: `0b2606ae-dc7a-4954-a2dd-bf1c774be263`.
+- AMB-1058 Done transition: pending proof-index reconciliation.
 
 Next train: `AMB-1059` / `M04.T02`

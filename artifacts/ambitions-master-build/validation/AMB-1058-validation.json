@@ -7,6 +7,7 @@
   "title": "Root navigation architecture: five-surface shell proof",
   "status": "green_for_source_control_plane_scope",
   "source_commit": "efd6957c9022f66f3316d06e9862c92a61832990",
+  "closeout_metadata_commit": "dea3cf942487b77b20aec07569ebd94b2b844674",
   "baseline_commit": "d3a3560a19c364c20e775cc499f887620b9537e3",
   "branch": "main",
   "remote_verification": {
@@ -125,6 +126,16 @@
       "command": "git diff --check",
       "result": "pass",
       "artifact": "terminal output"
+    },
+    {
+      "command": "git push origin main && git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "pass_closeout_metadata_remote_verified",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260615T083755.log"
     }
   ],
   "screenshots": [

@@ -185,7 +185,7 @@
       "linear_id": "AMB-1058",
       "phase": "M04",
       "title": "Root navigation architecture: five-surface shell proof",
-      "state": "Source/control-plane pushed efd6957c9022f66f3316d06e9862c92a61832990; closeout metadata/proof-index/Linear Done pending"
+      "state": "Source/control-plane efd6957c9022f66f3316d06e9862c92a61832990 and closeout metadata dea3cf942487b77b20aec07569ebd94b2b844674 pushed; proof-index/Linear Done pending"
     },
     {
       "rank": 23,

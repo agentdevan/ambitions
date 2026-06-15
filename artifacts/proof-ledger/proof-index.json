@@ -2,9 +2,30 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "amb-master",
-  "head": "ea6aae422940715a981df7fc3919f596bc74ab18",
+  "head": "dea3cf942487b77b20aec07569ebd94b2b844674",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
+    {
+      "id": "2026-06-15---amb-1058-root-navigation-five-surface-shell-proof",
+      "title": "2026-06-15 - AMB-1058 Root Navigation Five-surface Shell Proof",
+      "lines": [
+        "",
+        "- Claim: AMB-1058 proves the root navigation architecture is constrained to Today / Goals / Time / Motion / You; Capture is a global action or compatibility overlay/inbox route only, not a root tab; Motion is the fifth root surface; Plan and Pulse are compatibility-only; and shell-owned top-clearance geometry prevents root content from being pulled under top chrome.",
+        "- Commit: source/control-plane commit `efd6957c9022f66f3316d06e9862c92a61832990`; closeout metadata commit `dea3cf942487b77b20aec07569ebd94b2b844674`; final proof-index reconciliation pending.",
+        "- Touched files: `Native/Ambitions/App/AppTab.swift`; `Native/Ambitions/App/AppNavigation.swift`; `Native/Ambitions/App/AppExternalRouting.swift`; `Native/Ambitions/App/ShellCommandModels.swift`; `Native/Ambitions/App/ShellCommandRouter.swift`; `Native/Ambitions/App/AppShellView.swift`; `Native/Ambitions/App/AmbitionsRootView.swift`; `Native/Ambitions/Features/Onboarding/ProgressiveIntelligenceOnboarding.swift`; `Native/Ambitions/Features/Shared/DegradedStateOrchestrator.swift`; `Native/Ambitions/PreviewSupport/ToolbarPreviewCatalog.swift`; focused app/runtime tests; `scripts/codex/amb-master-canon-ia-validate.py`; AMB-1058 guard, screenshot, validation, report, and proof artifacts.",
+        "- Command: live Linear issue fetch for `AMB-1058`; live next-issue fetch for `AMB-1059`; live project fetch for project `ca716546-e3d4-4d5b-a399-03076ccba9ee`; `xcodegen generate`; AMB-1058 pre parallel implementation guard; focused root shell XCTest lane; visual screenshot capture and visual inspection for Today, Goals, Time, Motion, and You; AMB-1058 post parallel implementation guard; `python3 scripts/codex/amb-master-canon-ia-validate.py`; `git diff --check`; `git diff --cached --check`; clean-tree `bash scripts/codex/program-preflight.sh amb-master`; clean-tree `bash scripts/codex/program-phase-gate.sh amb-master M04`; `git push origin main`; `git rev-parse HEAD`; `git ls-remote origin refs/heads/main`; Linear issue/project source-push comments and project status update.",
+        "- Exit code: focused root shell XCTest lane passed 133 selected tests with 0 failures; pre/post parallel implementation guard was Green; canon IA validator passed after stale-validator repair; clean-tree AMB master preflight was Green; M04 phase gate passed; source/control-plane commit was pushed and remote verified at `origin/main`.",
+        "- Artifact path: `artifacts/ambitions-master-build/reports/AMB-1058-root-navigation-five-surface-shell-proof.md`.",
+        "- Proof class: source implementation, focused XCTest, guard, and visual root-shell proof; not broad per-surface feature completion, public accessibility certification, physical-device proof, measured performance proof, privacy/legal approval, release proof, TestFlight proof, App Store proof, or full-project completion proof.",
+        "- Scope: AMB-1058 / M04.T01 Root navigation architecture only.",
+        "- Non-claims: no broad feature completion within Today, Goals, Time, Motion, or You; no final Goals body fixture polish; no public accessibility certification; no physical-device proof; no performance certification; no privacy/legal approval; no release readiness; no TestFlight readiness; no App Store readiness; no owner approval; no AMB-1059 execution; no full project completion.",
+        "- Freshness: current on 2026-06-15 America/New_York for branch `main` after validating source locally, pushing source/control-plane commit `efd6957c9022f66f3316d06e9862c92a61832990`, pushing closeout metadata commit `dea3cf942487b77b20aec07569ebd94b2b844674`, verifying `origin/main` at the same closeout metadata SHA, and regenerating the AMB master proof index.",
+        "- Rollback: revert AMB-1058 source/control-plane commit `efd6957c9022f66f3316d06e9862c92a61832990` and follow-up AMB-1058 metadata/proof-index commits if unsafe.",
+        "- Related Linear issue: AMB-1058.",
+        "- Evidence status: Green for scoped AMB-1058 root navigation source/control-plane proof; Yellow for broad surface completion, full visual polish, public accessibility certification, device proof, measured performance, privacy/legal approval, release/TestFlight/App Store readiness, owner approval, and full project completion.",
+        ""
+      ]
+    },
     {
       "id": "2026-06-14---amb-1115-first-run-activation-runtime",
       "title": "2026-06-14 - AMB-1115 First-run Activation Runtime",
