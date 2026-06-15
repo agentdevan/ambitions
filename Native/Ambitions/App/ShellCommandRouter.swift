@@ -29,6 +29,8 @@ protocol ShellCommandRouting: AnyObject {
     )
     func presentCreateGoal(source: ShellCommandEntrySource, seedText: String, captureID: String?)
     func route(to destination: ShellCommandDestination, source: ShellCommandEntrySource)
+    @discardableResult
+    func route(searchResult result: MemoryLensResult, source: ShellCommandEntrySource) -> ShellTrustedSearchHandoff
     func execute(
         intent: ShellCommandIntent,
         text: String,
@@ -133,6 +135,30 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             destination: destination,
             receiptBody: receiptBody(for: destination, source: source)
         )
+    }
+
+    @discardableResult
+    func route(searchResult result: MemoryLensResult, source: ShellCommandEntrySource) -> ShellTrustedSearchHandoff {
+        let handoff = result.trustedSearchHandoff(source: source)
+        guard handoff.isTrusted else {
+            navigation.recordRoute(
+                title: "Search handoff held",
+                source: source,
+                presentationContext: .recall,
+                destination: .overlay(.memoryLens(entrySource: source)),
+                receiptBody: handoff.body
+            )
+            return handoff
+        }
+
+        route(to: result.destination, source: source)
+        navigation.continuityReceipt = ShellContinuityReceipt(
+            title: "Search handoff",
+            body: handoff.body,
+            source: source,
+            destinationLabel: result.destination.displayLabel
+        )
+        return handoff
     }
 
     func execute(

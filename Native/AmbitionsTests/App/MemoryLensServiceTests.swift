@@ -285,6 +285,37 @@ final class MemoryLensServiceTests: XCTestCase {
         }))
         XCTAssertTrue(correctionTrail.allSatisfy { !$0.allowsMemoryClaim })
     }
+
+    func testAMB1059SearchResultsExposeTrustedHandoffOwnersWithoutStaleIADestinations() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
+        try await repositories.goals.saveGoals([goal])
+        try await repositories.captures.saveCaptures([
+            Capture(
+                id: "capture-unplaced",
+                createdAt: "2026-04-20T10:00:00Z",
+                updatedAt: "2026-04-20T10:00:00Z",
+                rawText: "Capture venue deposit reminder",
+                sourceType: nil,
+                status: .actionable,
+                linkedGoalID: nil
+            )
+        ])
+        let service = DefaultMemoryLensService(repositories: repositories)
+
+        let results = await service.search(query: "", seedIntent: .memoryLens)
+
+        XCTAssertFalse(results.isEmpty)
+        XCTAssertTrue(results.allSatisfy { $0.staleIADestinationBlockers.isEmpty })
+        XCTAssertTrue(results.allSatisfy { $0.trustedSearchHandoff(source: .shellUtility).isTrusted })
+        XCTAssertTrue(results.contains { $0.kind == .goal && $0.trustedSearchHandoffOwner == .goals })
+        XCTAssertTrue(results.contains { $0.kind == .week && $0.trustedSearchHandoffOwner == .time })
+        XCTAssertTrue(results.contains { $0.kind == .capture && $0.trustedSearchHandoffOwner == .globalCapture })
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("pulse"))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("plan"))
+    }
 }
 
 private extension MemoryLensServiceTests {

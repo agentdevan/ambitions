@@ -160,4 +160,62 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(timePatch.destination, .tab(.time))
         XCTAssertTrue(timePatch.safetySummary.contains("without writing calendar"))
     }
+
+    func testAMB1059RoutesMemoryLensGoalResultWithTrustedHandoffContext() {
+        let navigation = AppNavigationModel(selectedTab: .today)
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+        let result = MemoryLensResult(
+            id: "goal-release",
+            title: "Release the single",
+            subtitle: "Current plan",
+            explanation: "Open canonical goal detail.",
+            queryText: "release single",
+            timestamp: "2026-04-22T10:00:00Z",
+            kind: .goal,
+            facet: .open,
+            actionTitle: "Open goal",
+            destination: .goal("goal-release")
+        )
+
+        let handoff = router.route(searchResult: result, source: .shellUtility)
+
+        XCTAssertTrue(handoff.isTrusted)
+        XCTAssertEqual(handoff.owner, .goals)
+        XCTAssertEqual(navigation.selectedTab, .goals)
+        XCTAssertEqual(navigation.goalsPath.first?.goalID, "goal-release")
+        XCTAssertEqual(navigation.continuityReceipt?.title, "Search handoff")
+        XCTAssertEqual(navigation.continuityReceipt?.destinationLabel, "Goal Detail")
+        XCTAssertTrue(navigation.continuityReceipt?.body.contains("What Ambitions knows") == true)
+        XCTAssertTrue(navigation.continuityReceipt?.body.contains("Goals") == true)
+    }
+
+    func testAMB1059RoutesMemoryLensCaptureResultToGlobalCaptureHandoffNotCaptureTab() {
+        let navigation = AppNavigationModel(selectedTab: .motion)
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+        let result = MemoryLensResult(
+            id: "capture-unplaced",
+            title: "Book the rehearsal room",
+            subtitle: "Needs a Place",
+            explanation: "Open global Capture handoff.",
+            queryText: "book rehearsal room",
+            timestamp: "2026-04-22T10:00:00Z",
+            kind: .capture,
+            facet: .open,
+            actionTitle: "Open Capture",
+            destination: .timeRoute(.captureInbox)
+        )
+
+        let handoff = router.route(searchResult: result, source: .shellUtility)
+
+        XCTAssertTrue(handoff.isTrusted)
+        XCTAssertEqual(handoff.owner, .globalCapture)
+        XCTAssertEqual(navigation.selectedTab, .motion)
+        XCTAssertTrue(navigation.timePath.isEmpty)
+        XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+        XCTAssertEqual(navigation.activeOverlay?.entrySource, .shellUtility)
+        XCTAssertEqual(navigation.continuityReceipt?.destinationLabel, "Capture")
+        XCTAssertTrue(navigation.continuityReceipt?.body.contains("Global Capture") == true)
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+    }
 }
