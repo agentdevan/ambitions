@@ -19,23 +19,23 @@ project:
 current_phase:
   label: "M04"
   title: "Native Shell + Design System Foundation"
-  status: "M04.T01 source/control-plane and closeout metadata pushed and remote verified for AMB-1058; proof-index reconciliation in progress before Linear Done"
+  status: "AMB-1058 / M04.T01 Done in Linear after source/control-plane, closeout metadata, and final proof-index reconciliation pushes; AMB-1059 / M04.T02 next eligible"
 current_train:
   label: "M04.T02"
   linear_id: "AMB-1059"
   title: "Global search entry and presentation: trusted retrieval handoff"
-  status: "Next eligible after AMB-1058 closeout metadata, proof-index reconciliation, and Linear Done"
+  status: "Next eligible; refresh live Linear, run AMB-MASTER preflight and M04 phase gate, then execute the global search trusted retrieval handoff train."
 last_closed_train:
   label: "M04.T01"
   linear_id: "AMB-1058"
   title: "Root navigation architecture: five-surface shell proof"
-  status: "Source/control-plane commit efd6957c9022f66f3316d06e9862c92a61832990 and closeout metadata commit dea3cf942487b77b20aec07569ebd94b2b844674 pushed and remote verified; Linear Done pending proof-index reconciliation"
+  status: "Done in Linear at 2026-06-15T12:41:31.654Z; source/control-plane commit efd6957c9022f66f3316d06e9862c92a61832990, closeout metadata dea3cf942487b77b20aec07569ebd94b2b844674, final proof-index reconciliation 83c5c9558064013628890ec311ef8eca8303a813"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Finish AMB-1058 closeout metadata/proof-index/Linear Done, then refresh live Linear for AMB-1059 / M04.T02 and execute the global search entry and trusted retrieval handoff train."
+  action: "Refresh live Linear for AMB-1059 / M04.T02, run AMB-MASTER preflight and M04 phase gate, then execute the global search entry and trusted retrieval handoff train."
 latest_local_scope:
   changed_path_policy: "AMB-1058 touched app shell/navigation owners, focused app/runtime tests, AMB master canon IA validator, root-shell screenshots, focused test log, and AMB-1058 guard prompt/reports."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M04"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1058-root-navigation-five-surface-shell-proof.md"
 latest_validation:
-  status: "AMB-1058 source/control-plane and closeout metadata validation Green; source/control-plane and closeout metadata commits pushed and remote verified; proof-index reconciliation in progress"
+  status: "AMB-1058 focused implementation validation Green; source/control-plane, closeout metadata, and final proof-index reconciliation commits pushed and remote verified; AMB-1058 Done in Linear"
   logs:
     - "DerivedData Test-Ambitions-2026.06.15_00-32-20--0400.xcresult"
     - "build/reports/parallel-implementation-guard/AMB-1058-pre.md"
@@ -89,7 +89,7 @@ latest_validation:
 - `AMB-1117` / `M02.T08`: source/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195` and closeout metadata commit `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` pushed and remote verified after Green focused validation; AMB-1114 handoff active.
 - `AMB-1114` / `M03.T01`: final proof-index reconciliation commit `ecc905cf854ab1b0d6feb1167beaca4da6369437` pushed and remote verified; AMB-1114 marked Done in Linear; next train is `AMB-1115` / `M03.T02`.
 - `AMB-1115` / `M03.T02`: final proof-index reconciliation commit `ea6aae422940715a981df7fc3919f596bc74ab18` pushed and remote verified; AMB-1115 marked Done in Linear; next train is `AMB-1058` / `M04.T01`.
-- `AMB-1058` / `M04.T01`: source/control-plane commit `efd6957c9022f66f3316d06e9862c92a61832990` and closeout metadata commit `dea3cf942487b77b20aec07569ebd94b2b844674` pushed and remote verified; final proof-index reconciliation pending before Linear Done; next train will be `AMB-1059` / `M04.T02`.
+- `AMB-1058` / `M04.T01`: final proof-index reconciliation commit `83c5c9558064013628890ec311ef8eca8303a813` pushed and remote verified; AMB-1058 marked Done in Linear; next train is `AMB-1059` / `M04.T02`.
 
 ## Non-Claims
 

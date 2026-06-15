@@ -8,6 +8,8 @@
   "status": "green_for_source_control_plane_scope",
   "source_commit": "efd6957c9022f66f3316d06e9862c92a61832990",
   "closeout_metadata_commit": "dea3cf942487b77b20aec07569ebd94b2b844674",
+  "final_reconciliation_commit": "83c5c9558064013628890ec311ef8eca8303a813",
+  "linear_completed_at": "2026-06-15T12:41:31.654Z",
   "baseline_commit": "d3a3560a19c364c20e775cc499f887620b9537e3",
   "branch": "main",
   "remote_verification": {
@@ -136,6 +138,11 @@
       "command": "bash scripts/codex/program-proof-index.sh amb-master",
       "result": "pass",
       "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260615T083755.log"
+    },
+    {
+      "command": "git push origin main && git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "pass_final_reconciliation_remote_verified",
+      "artifact": "terminal output"
     }
   ],
   "screenshots": [

@@ -18,7 +18,7 @@ Push hash: `efd6957c9022f66f3316d06e9862c92a61832990`
 
 Closeout metadata hash: `dea3cf942487b77b20aec07569ebd94b2b844674`
 
-Final reconciliation hash: pending until proof-index reconciliation is pushed and remote-verified.
+Final reconciliation hash: `83c5c9558064013628890ec311ef8eca8303a813`
 
 App source changed: yes
 
@@ -71,6 +71,7 @@ Validation run:
 - `git diff --check` - pass after closeout metadata updates.
 - `git push origin main`, `git rev-parse HEAD`, and `git ls-remote origin refs/heads/main` - pushed closeout metadata commit `dea3cf942487b77b20aec07569ebd94b2b844674`; local HEAD and `origin/main` both returned `dea3cf942487b77b20aec07569ebd94b2b844674` after metadata push.
 - `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1058 proof-ledger entry; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T083755.log`.
+- `git push origin main`, `git rev-parse HEAD`, and `git ls-remote origin refs/heads/main` - pushed final proof-index reconciliation commit `83c5c9558064013628890ec311ef8eca8303a813`; local HEAD and `origin/main` both returned `83c5c9558064013628890ec311ef8eca8303a813` after final proof-index reconciliation push.
 
 Reviewer passes:
 - Deterministic pre/post parallel implementation guard passed Green.
@@ -125,6 +126,12 @@ Linear reconciliation:
 - AMB-1058 closeout metadata issue comment: `2af7b605-2ec4-4003-9499-965712be0f00`.
 - AMB-1058 closeout metadata project comment: `ca9bc24b-47f2-4147-9c9c-e1231bbc68d5`.
 - AMB-1058 closeout metadata project status update: `0b2606ae-dc7a-4954-a2dd-bf1c774be263`.
-- AMB-1058 Done transition: pending proof-index reconciliation.
+- AMB-1058 final proof-index issue comment: `1fd558a8-2e3c-42fd-bb37-b081ad356f79`.
+- AMB-1058 final proof-index project comment: `5fb64f29-d0fb-4ad0-9dfa-388b1d7c07b1`.
+- AMB-1058 final proof-index project status update: `50d39645-bf27-4b56-b23d-c6399e6adc33`.
+- AMB-1058 Done issue comment: `554cebec-3960-43c8-aec2-5cf4cc6c480e`.
+- AMB-1058 Done project comment: `6cef0cc6-978b-4f55-9eb0-b57909d5f5eb`.
+- AMB-1058 Done project status update: `0ba28b89-1eaa-404c-af6f-8a674ec7f72c`.
+- AMB-1058 Done transition: complete in Linear at `2026-06-15T12:41:31.654Z`.
 
 Next train: `AMB-1059` / `M04.T02`

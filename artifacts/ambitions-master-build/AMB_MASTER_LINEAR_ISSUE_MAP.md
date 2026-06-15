@@ -43,7 +43,7 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 
 | Train | Linear issue | Title | Milestone | Live status at refresh |
 |---|---|---|---|---|
-| M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | M04 | Source/control-plane `efd6957c9022f66f3316d06e9862c92a61832990` and closeout metadata `dea3cf942487b77b20aec07569ebd94b2b844674` pushed; proof-index/Linear Done pending |
+| M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | M04 | Done in Linear / source `efd6957c9022f66f3316d06e9862c92a61832990` / closeout metadata `dea3cf942487b77b20aec07569ebd94b2b844674` / final proof-index `83c5c9558064013628890ec311ef8eca8303a813` |
 | M04.T02 | AMB-1059 | Global search entry and presentation: trusted retrieval handoff | M04 | Backlog / next eligible after AMB-1058 Done |
 | M04.T03 | AMB-1060 | Tokenized design system foundation: flagship semantic base | M04 | Backlog |
 | M04.T04 | AMB-1061 | Core reusable component set: native interaction primitives | M04 | Backlog |
