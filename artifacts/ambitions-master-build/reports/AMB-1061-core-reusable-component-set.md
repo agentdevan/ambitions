@@ -10,11 +10,15 @@ Train label: `M04.T04`
 
 Parent or umbrella issue: `AMB-1046`
 
-Green/Yellow/Red status: Green for the focused AMB-1061 reusable native interaction primitive source/proof scope; source/proof commit `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3` is pushed and remote-verified on `origin/main`. Closeout metadata and final proof-index reconciliation are pending.
+Green/Yellow/Red status: Green for the focused AMB-1061 reusable native interaction primitive source/proof and closeout metadata scope; source/proof commit `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3` and closeout metadata commit `ff57261d940c2fa8d8939fbe5244ee24d993538d` are pushed and remote-verified on `origin/main`. Final proof-index reconciliation is pending.
 
 Pushed to main: yes; source/proof commit `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3` is pushed and remote-verified.
 
 Push hash: `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3`
+
+Closeout metadata hash: `ff57261d940c2fa8d8939fbe5244ee24d993538d`
+
+Final reconciliation hash: `pending`
 
 App source changed: yes
 
@@ -48,6 +52,14 @@ Validation run:
 - `python3 scripts/codex/amb-master-render-core-interaction-preview.py` - pass; rendered two PNGs under `artifacts/ambitions-master-build/screenshots/AMB-1061/`.
 - Main-agent visual inspection of `artifacts/ambitions-master-build/screenshots/AMB-1061/core-reusable-interaction-primitives.png` and `artifacts/ambitions-master-build/screenshots/AMB-1061/core-reusable-interaction-primitives-dynamic-type.png` - pass for scoped preview screenshot proof; both images are nonblank, show launch-path controls and state coverage, and keep Capture as Global Capture / Atmosphere Composer.
 - `git push origin main`, `git rev-parse HEAD`, and `git ls-remote origin refs/heads/main` - pushed source/proof commit `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3`; local HEAD and `origin/main` both returned `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3` after source/proof push.
+- `python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json`, `python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json`, and `python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1061-validation.json` - pass after closeout metadata updates.
+- `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1061-core-reusable-component-set.md` - pass after closeout metadata updates.
+- `python3 scripts/codex/amb-master-readiness-validate.py --phase M04` - pass after advancing next train to AMB-1062.
+- `python3 scripts/codex/amb-master-repository-wiring-validate.py` - pass after updating the program registry and repository wiring validator to expect AMB-1062 as the next runnable gate.
+- `bash scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-preflight-20260615T152146.log`.
+- `bash scripts/codex/program-phase-gate.sh amb-master M04` - pass after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T152146.log`.
+- `git push origin main`, `git rev-parse HEAD`, and `git ls-remote origin refs/heads/main` - pushed closeout metadata commit `ff57261d940c2fa8d8939fbe5244ee24d993538d`; local HEAD and `origin/main` both returned `ff57261d940c2fa8d8939fbe5244ee24d993538d` after metadata push.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1061 closeout metadata push; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T152321.log`.
 
 Reviewer passes:
 - Deterministic pre/post parallel implementation guard passed Green.
@@ -63,6 +75,10 @@ Proof artifacts:
 - `build/reports/intelligence-consolidation/champion-coverage-check.md`
 - `artifacts/ambitions-master-build/screenshots/AMB-1061/core-reusable-interaction-primitives.png`
 - `artifacts/ambitions-master-build/screenshots/AMB-1061/core-reusable-interaction-primitives-dynamic-type.png`
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260615T152146.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T152146.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T152321.log` - local ignored script output.
+- `artifacts/proof-ledger/proof-index.json`
 
 Red blockers: none
 

@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "amb-master",
-  "head": "47eec76ebab5977c14937acb021a02bf455fb91e",
+  "head": "ff57261d940c2fa8d8939fbe5244ee24d993538d",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {

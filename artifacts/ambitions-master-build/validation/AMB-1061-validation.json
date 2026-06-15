@@ -5,9 +5,9 @@
   "linear_issue": "AMB-1061",
   "train_label": "M04.T04",
   "title": "Core reusable component set: native interaction primitives",
-  "status": "green_for_scoped_source_proof_and_pending_closeout_metadata_reconciliation",
+  "status": "green_for_scoped_source_proof_closeout_metadata_and_pending_proof_index_reconciliation",
   "source_commit": "6cc985f4acfb5075f9c9d38a0d9f62357660e0a3",
-  "closeout_metadata_commit": "pending",
+  "closeout_metadata_commit": "ff57261d940c2fa8d8939fbe5244ee24d993538d",
   "final_reconciliation_commit": "pending",
   "linear_completed_at": "pending",
   "baseline_commit": "56688c7a8dd5dbcbee0a051c52ffadf70c54790a",
@@ -63,6 +63,46 @@
       "command": "git push origin main && git rev-parse HEAD && git ls-remote origin refs/heads/main",
       "result": "pass_source_remote_verified",
       "artifact": "terminal output"
+    },
+    {
+      "command": "python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1061-validation.json",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1061-core-reusable-component-set.md",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-readiness-validate.py --phase M04",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-repository-wiring-validate.py",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260615T152146.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T152146.log"
+    },
+    {
+      "command": "git push origin main && git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "pass_closeout_metadata_remote_verified",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260615T152321.log"
     }
   ],
   "screenshots": [
@@ -107,5 +147,5 @@
   ],
   "responsible_program": "amb-master",
   "related_linear_issue": "AMB-1061",
-  "evidence_status": "green_for_scoped_AMB_1061_core_reusable_interaction_primitives_source_proof_pending_closeout_metadata_reconciliation"
+  "evidence_status": "green_for_scoped_AMB_1061_core_reusable_interaction_primitives_source_proof_closeout_metadata_pending_proof_index_reconciliation"
 }

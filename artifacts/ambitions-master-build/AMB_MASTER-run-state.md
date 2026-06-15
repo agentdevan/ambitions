@@ -19,7 +19,7 @@ project:
 current_phase:
   label: "M04"
   title: "Native Shell + Design System Foundation"
-  status: "AMB-1061 / M04.T04 source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 pushed and remote verified; closeout metadata and final proof-index reconciliation pending; AMB-1062 / M04.T05 next eligible after AMB-1061 closeout"
+  status: "AMB-1061 / M04.T04 source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 and closeout metadata commit ff57261d940c2fa8d8939fbe5244ee24d993538d pushed and remote verified; final proof-index reconciliation pending; AMB-1062 / M04.T05 next eligible after AMB-1061 closeout"
 current_train:
   label: "M04.T05"
   linear_id: "AMB-1062"
@@ -29,7 +29,7 @@ last_closed_train:
   label: "M04.T04"
   linear_id: "AMB-1061"
   title: "Core reusable component set: native interaction primitives"
-  status: "Source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 pushed and remote verified; closeout metadata and Linear Done pending."
+  status: "Source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 and closeout metadata commit ff57261d940c2fa8d8939fbe5244ee24d993538d pushed and remote verified; proof-index reconciliation and Linear Done pending."
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M04"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1061-core-reusable-component-set.md"
 latest_validation:
-  status: "AMB-1061 source/proof validation Green; source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 pushed and remote verified; closeout metadata and final proof-index reconciliation pending"
+  status: "AMB-1061 source/proof and closeout metadata validation Green; source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 and closeout metadata commit ff57261d940c2fa8d8939fbe5244ee24d993538d pushed and remote verified; final proof-index reconciliation pending"
   logs:
     - "output/DerivedData-AMB1061/Logs/Test/Test-Ambitions-2026.06.15_15-03-26--0400.xcresult"
     - "build/reports/parallel-implementation-guard/AMB-1061-pre.md"
@@ -89,7 +89,7 @@ latest_validation:
 - `AMB-1058` / `M04.T01`: final proof-index reconciliation commit `83c5c9558064013628890ec311ef8eca8303a813` pushed and remote verified; AMB-1058 marked Done in Linear; next train is `AMB-1059` / `M04.T02`.
 - `AMB-1059` / `M04.T02`: final proof-index reconciliation commit `396729b78af8e663e453a15d8f90ac0410caf43b` pushed and remote verified; AMB-1059 marked Done in Linear; next train is `AMB-1060` / `M04.T03`.
 - `AMB-1060` / `M04.T03`: final proof-index reconciliation commit `47eec76ebab5977c14937acb021a02bf455fb91e` pushed and remote verified; AMB-1060 marked Done in Linear; next train is `AMB-1061` / `M04.T04`.
-- `AMB-1061` / `M04.T04`: source/proof commit `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3` pushed and remote verified after focused XCTest, guard, coverage, renderer, and visual screenshot proof; closeout metadata and final proof-index reconciliation pending; next train is `AMB-1062` / `M04.T05`.
+- `AMB-1061` / `M04.T04`: source/proof commit `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3` and closeout metadata commit `ff57261d940c2fa8d8939fbe5244ee24d993538d` pushed and remote verified after focused XCTest, guard, coverage, renderer, and visual screenshot proof; final proof-index reconciliation pending; next train is `AMB-1062` / `M04.T05`.
 
 ## Non-Claims
 

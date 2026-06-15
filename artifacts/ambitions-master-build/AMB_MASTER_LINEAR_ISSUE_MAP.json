@@ -189,7 +189,7 @@
       "linear_id": "AMB-1061",
       "title": "Core reusable component set: native interaction primitives",
       "milestone": "M04",
-      "status": "Source/proof pushed 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3; closeout metadata pending"
+      "status": "Source/proof 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 / closeout metadata ff57261d940c2fa8d8939fbe5244ee24d993538d / proof-index pending"
     },
     {
       "train": "M04.T05",
