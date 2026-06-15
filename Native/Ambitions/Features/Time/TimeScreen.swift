@@ -1833,7 +1833,7 @@ private struct TimeGoalRelationshipSurface: View {
                     title: "Goals shaping the week",
                     subtitle: items.isEmpty
                         ? "No active goals are asking the week for structure yet."
-                        : "Plan stays tied to active goals instead of turning into a disconnected scheduler."
+                        : "Time stays tied to active goals instead of turning into a disconnected scheduler."
                 )
                 .accessibilityIdentifier("time.goal-relationship-card")
 

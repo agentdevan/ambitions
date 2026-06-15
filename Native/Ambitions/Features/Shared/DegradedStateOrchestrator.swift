@@ -250,7 +250,7 @@ enum FlagshipObjectStateMatrix {
         case .capturePlacementShelf:
             "Capture stays composer-first with review before placement, learning, or goal creation."
         case .lifeShapeContourMap:
-            "Plan stays contour-first with reviewed reflow and grounded time language."
+            "Time stays contour-first with reviewed reflow and grounded time language."
         case .personalSystemCenter:
             "Setup, trust, memory, and receipts stay explicit and user-owned."
         case .memoryLens:

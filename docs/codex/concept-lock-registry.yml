@@ -154,6 +154,7 @@ locked_concepts:
       - "AMB-581"
       - "AMB-583"
       - "AMB-591"
+      - "AMB-1060"
     blocked_paths:
       - "Native/Ambitions/Features/Time"
       - "Native/Ambitions/Features/Plan"
@@ -168,7 +169,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-06-05"
+    last_updated: "2026-06-15"
   - concept_id: "you_profile_personal_runtime"
     concept_name: "You / Profile / Personal Runtime"
     reason: "Duplicate/supersession risk requires Champion Merge resolution before feature work."
@@ -237,6 +238,7 @@ locked_concepts:
       - "AMB-581"
       - "AMB-582"
       - "AMB-583"
+      - "AMB-1060"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"

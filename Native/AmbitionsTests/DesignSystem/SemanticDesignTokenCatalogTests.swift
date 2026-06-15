@@ -51,4 +51,70 @@ proof.receipt | Cross-surface | Proof receipt | Inspectable why, source, freshne
         XCTAssertFalse(searchable.localizedCaseInsensitiveContains("Score"))
         XCTAssertFalse(searchable.localizedCaseInsensitiveContains("Custom theme"))
     }
+
+    func testFlagshipSemanticFoundationSnapshotIsStableAndThemeBacked() {
+        XCTAssertEqual(
+            AmbitionFlagshipSemanticFoundationCatalog.snapshot,
+            """
+today.realityMeridian.foundation | Today | Reality Meridian / Start here | topLevel=true | token=today.startHere | material=hero->AmbitionTheme.Materials.heroGradient | type=heroDisplay->AmbitionTheme.Typography.heroDisplay | spacing=heroInner->AmbitionTheme.Spacing.heroInner | hierarchy=primaryObject | tap=48 | fallback=VoiceOver summarizes current reality, source, receipt path, and action before secondary context. | rule=Hero instrument must stay state-led, source-aware, receipt-backed, and reachable without custom gesture dependence.
+goals.constellationAtlas.foundation | Goals | Constellation Atlas | topLevel=true | token=goals.constellationAtlas | material=hero->AmbitionTheme.Materials.heroGradient | type=title->AmbitionTheme.Typography.title | spacing=sectionBreak->AmbitionTheme.Spacing.sectionBreak | hierarchy=primaryObject | tap=48 | fallback=Relationships expose labels, selected thread, proof gap, and open detail action without relying on position or color. | rule=Atlas relationship depth uses shared hero material and title scale before compact supporting evidence.
+time.lifeShapeField.foundation | Time | LifeShape Field / Time Texture | topLevel=true | token=time.lifeShapeField | material=band->AmbitionTheme.Materials.bandGradient | type=title->AmbitionTheme.Typography.title | spacing=sectionBreak->AmbitionTheme.Spacing.sectionBreak | hierarchy=primaryObject | tap=48 | fallback=Capacity bands expose text labels, protected-time state, and fallback outlines under contrast or transparency changes. | rule=Time texture is rendered as capacity bands and source-aware lanes, never as a free-busy grid.
+motion.motionCurrent.foundation | Motion | Motion Current | topLevel=true | token=motion.motionCurrent | material=elevated->AmbitionTheme.Materials.elevatedGradient | type=titleCompact->AmbitionTheme.Typography.titleCompact | spacing=standard->AmbitionTheme.Spacing.standard | hierarchy=sourceTrust | tap=44 | fallback=Progress and receipt states are grouped by object with explicit labels and non-color status text. | rule=Motion shows inspectable movement through object evidence and receipts, not competitive pressure or vanity metrics.
+you.userSystemProfile.foundation | You | User System Profile | topLevel=true | token=you.userSystemProfile | material=elevated->AmbitionTheme.Materials.elevatedGradient | type=sectionTitle->AmbitionTheme.Typography.sectionTitle | spacing=standard->AmbitionTheme.Spacing.standard | hierarchy=sourceTrust | tap=44 | fallback=Grouped controls expose local learning, reset, delete, receipt, and what ambitions knows inspection order. | rule=System profile controls use grouped native rows, explicit trust language, and reversible local learning actions.
+capture.atmosphereComposer.foundation | Capture | Atmosphere Composer | topLevel=false | token=capture.atmosphereComposer | material=overlay->AmbitionTheme.Materials.overlayGradient | type=titleCompact->AmbitionTheme.Typography.titleCompact | spacing=standard->AmbitionTheme.Spacing.standard | hierarchy=globalActionLayer | tap=48 | fallback=Composer entry, route reveal, correction, and held-state actions remain labeled when atmosphere is reduced. | rule=Capture appears as a contextual global action layer with correction paths and no root-destination treatment.
+crossSurface.proofReceipt.foundation | Cross-surface | Proof receipt | topLevel=false | token=proof.receipt | material=receipt->AmbitionTheme.ShellTokens.receiptMaterial | type=caption->AmbitionTheme.Typography.caption | spacing=compact->AmbitionTheme.Spacing.compact | hierarchy=receiptEvidence | tap=44 | fallback=Receipt rows expose SourceRecord, Receipt, ReplayTrace, freshness, and what ambitions knows inspection in reading order. | rule=Receipt treatment is shared across adaptive surfaces so source, reason, freshness, and replay context remain inspectable.
+"""
+        )
+    }
+
+    func testFlagshipSemanticFoundationValidationPassesAndPreservesCaptureAsGlobalAction() throws {
+        XCTAssertTrue(
+            AmbitionFlagshipSemanticFoundationCatalog.validationFailures().isEmpty,
+            AmbitionFlagshipSemanticFoundationCatalog.validationFailures().joined(separator: "\n")
+        )
+
+        let rootSurfaces = AmbitionFlagshipSemanticFoundationCatalog.contracts
+            .filter(\.isTopLevelSurface)
+            .map(\.surface)
+        XCTAssertEqual(rootSurfaces, ["Today", "Goals", "Time", "Motion", "You"])
+
+        let captureContract = try XCTUnwrap(AmbitionFlagshipSemanticFoundationCatalog.contracts.first { $0.surface == "Capture" })
+        XCTAssertFalse(captureContract.isTopLevelSurface)
+        XCTAssertEqual(captureContract.hierarchyRole, .globalActionLayer)
+    }
+
+    func testFlagshipSemanticFoundationUsesExistingTokensThemeAndNativeTapTargets() {
+        let semanticTokenIDs = Set(AmbitionSemanticDesignTokenCatalog.allTokens.map(\.id))
+        for contract in AmbitionFlagshipSemanticFoundationCatalog.contracts {
+            XCTAssertTrue(semanticTokenIDs.contains(contract.semanticTokenID), contract.id)
+            XCTAssertGreaterThanOrEqual(contract.minimumTapTarget, AmbitionFlagshipSemanticFoundationCatalog.requiredMinimumTapTarget, contract.id)
+            XCTAssertTrue(contract.materialRole.themeBridge.hasPrefix("AmbitionTheme."), contract.id)
+            XCTAssertTrue(contract.typographyRole.themeBridge.hasPrefix("AmbitionTheme."), contract.id)
+            XCTAssertTrue(contract.spacingRole.themeBridge.hasPrefix("AmbitionTheme."), contract.id)
+        }
+    }
+
+    func testFlagshipSemanticFoundationDetectsForbiddenActiveLanguageWhenProvidedByCaller() {
+        var mutated = AmbitionFlagshipSemanticFoundationCatalog.contracts
+        mutated[0] = AmbitionFlagshipSemanticFoundationContract(
+            id: mutated[0].id,
+            surface: mutated[0].surface,
+            primaryObject: mutated[0].primaryObject,
+            semanticTokenID: mutated[0].semanticTokenID,
+            isTopLevelSurface: mutated[0].isTopLevelSurface,
+            materialRole: mutated[0].materialRole,
+            typographyRole: mutated[0].typographyRole,
+            spacingRole: mutated[0].spacingRole,
+            hierarchyRole: mutated[0].hierarchyRole,
+            minimumTapTarget: mutated[0].minimumTapTarget,
+            accessibilityFallback: mutated[0].accessibilityFallback,
+            nativeConsistencyRule: "Forbidden term fixture"
+        )
+
+        let failures = AmbitionFlagshipSemanticFoundationCatalog.validationFailures(
+            contracts: mutated,
+            forbiddenTerms: ["forbidden term"]
+        )
+        XCTAssertEqual(failures, ["Foundation contract contains forbidden active language term: forbidden term."])
+    }
 }

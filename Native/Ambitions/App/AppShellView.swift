@@ -396,7 +396,7 @@ private struct AppShellHeaderRail: View {
         if dynamicTypeSize.isAccessibilitySize {
             return posture.headerLensTitle
         }
-        return "· \(headerSubtitle)"
+        return "· \(subtitle ?? posture.title)"
     }
 
     private var rootCrownAccent: Color {

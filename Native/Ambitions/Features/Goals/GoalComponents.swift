@@ -407,7 +407,7 @@ struct GoalsConstellationAtlasStage: View {
     }
 
     private var atlasInlineTrustDepth: some View {
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
             ForEach(Array(laneStates.prefix(2))) { lane in
                 atlasLane(lane, isCompact: true)
             }
