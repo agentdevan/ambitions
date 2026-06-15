@@ -3316,6 +3316,7 @@ private struct YouSettingRow: View {
     }
 }
 
+#if DEBUG
 #Preview("You Minimal State") {
     NavigationStack {
         YouScreen(viewModel: YouViewModel(state: .loaded(PreviewFixtures.default.youDashboard)))
@@ -3507,3 +3508,4 @@ private struct YouSettingRow: View {
     .ambitionTheme(.dark)
     .preferredColorScheme(.dark)
 }
+#endif
