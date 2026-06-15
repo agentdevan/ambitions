@@ -1,3 +1,5 @@
+#if DEBUG
+
 import AmbitionsDesignSystem
 import Foundation
 
@@ -17,8 +19,8 @@ enum PreviewAppContainerFactory {
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
         let todayService = StubTodayService(experience: todayExperience)
         let captureService = StubCaptureService(captures: fixtures.captures)
-        let goalsService = StubGoalsService()
         let runtime = makePreviewRuntime()
+        let goalsService = runtime.goalsService
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,
             captureService: captureService
@@ -91,3 +93,5 @@ enum PreviewAppContainerFactory {
         )
     }
 }
+
+#endif
