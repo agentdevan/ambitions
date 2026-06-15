@@ -2,6 +2,131 @@ import XCTest
 @testable import Ambitions
 
 final class GoldenVerticalSliceRuntimeTests: XCTestCase {
+    func testFirstRunActivationConnectsFirstGoalRecommendedStepAndRecoveryOptionToGoldenSlice() throws {
+        let firstRunArtist = try goldenSlice(
+            prefix: "first-run-artist",
+            displayName: "Sal",
+            rawGoal: "Release my first music single with a proof-backed local path.",
+            normalizedGoal: "Release a music single through a calm first-run path.",
+            lifeContext: "Has one evening window and wants the first action to stay small.",
+            capacityProfile: "One short evening block with a weekend review cushion.",
+            creativeConstraint: "Needs a checklist before sharing release assets.",
+            supportPreference: "Prefers visible local receipts and a recovery-safe fallback."
+        )
+        let program = GoldenVerticalSliceRuntime().evaluate(
+            GoldenVerticalSliceProgramInput(
+                slices: [firstRunArtist, try companionSlice()],
+                evaluatedAt: "2026-06-14T20:00:00Z"
+            )
+        )
+
+        let activation = FirstRunActivationRuntime().evaluate(
+            FirstRunActivationInput(
+                goldenProgram: program,
+                selectedSliceID: firstRunArtist.endUserBackground.id,
+                activatedAt: "2026-06-14T20:05:00Z"
+            )
+        )
+
+        XCTAssertTrue(program.canProveBothPersonalizedSlices, "\(program.issues)")
+        XCTAssertTrue(activation.canActivateFirstRun, "\(activation.issues)")
+        XCTAssertEqual(activation.state, .ready)
+        XCTAssertEqual(activation.issues, [])
+        XCTAssertEqual(activation.firstGoal?.id, "goal.first-run-artist.music-release")
+        XCTAssertEqual(activation.recommendedStep?.id, "step.first-run-artist.release-checklist")
+        XCTAssertEqual(activation.recoveryOption?.kind, .shrink)
+        XCTAssertEqual(activation.receipt?.topLevelTabs, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(activation.receipt?.captureRole, "global action")
+        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertTrue(activation.receipt?.sourceRecordIDs.contains("SourceRecord.first-run-artist.background") == true)
+        XCTAssertTrue(activation.receipt?.sourceRecordIDs.contains("SourceRecord.first-run-artist.intake") == true)
+        XCTAssertTrue(activation.receipt?.receiptIDs.contains("Receipt.first-run-artist.completion") == true)
+        XCTAssertTrue(activation.receipt?.replayTraceIDs.contains("ReplayTrace.first-run-artist.completion") == true)
+        XCTAssertTrue(activation.receipt?.whatAmbitionsKnowsRoute?.contains("you://what-ambitions-knows/first-run-activation") == true)
+        XCTAssertTrue(activation.receipt?.continuitySummary.contains("Recommended step") == true)
+        XCTAssertTrue(activation.receipt?.continuitySummary.contains("recovery option") == true)
+        XCTAssertTrue(activation.receipt?.continuitySummary.contains("local receipt replay") == true)
+    }
+
+    func testFirstRunActivationBlocksGenericOnboardingTheater() throws {
+        let program = GoldenVerticalSliceRuntime().evaluate(
+            GoldenVerticalSliceProgramInput(
+                slices: [try firstRunSlice(), try companionSlice()],
+                evaluatedAt: "2026-06-14T20:10:00Z"
+            )
+        )
+
+        let activation = FirstRunActivationRuntime().evaluate(
+            FirstRunActivationInput(
+                goldenProgram: program,
+                activatedAt: "2026-06-14T20:11:00Z",
+                continuitySummaryOverride: "Finish setup tour before anything real."
+            )
+        )
+
+        XCTAssertFalse(activation.canActivateFirstRun)
+        XCTAssertEqual(activation.state, .blocked)
+        XCTAssertTrue(activation.issues.contains(.genericOnboardingTheater), "\(activation.issues)")
+        XCTAssertTrue(activation.issues.contains(.calmContinuityMissing), "\(activation.issues)")
+    }
+
+    func testFirstRunActivationBlocksWhenGoldenProgramIsNotReady() throws {
+        let blockedSlice = try goldenSlice(
+            prefix: "first-run-protected-window",
+            displayName: "Lane",
+            rawGoal: "Release a music track while protecting evening care time.",
+            normalizedGoal: "Release a music track without crossing protected time.",
+            lifeContext: "Evening care time is protected.",
+            capacityProfile: "Morning release prep only.",
+            creativeConstraint: "Needs mastering prep away from protected time.",
+            supportPreference: "Prefers explicit recovery before schedule install.",
+            selectedWindow: .protectedEvening
+        )
+        let program = GoldenVerticalSliceRuntime().evaluate(
+            GoldenVerticalSliceProgramInput(
+                slices: [blockedSlice, try companionSlice()],
+                evaluatedAt: "2026-06-14T20:15:00Z"
+            )
+        )
+
+        let activation = FirstRunActivationRuntime().evaluate(
+            FirstRunActivationInput(
+                goldenProgram: program,
+                selectedSliceID: blockedSlice.endUserBackground.id,
+                activatedAt: "2026-06-14T20:16:00Z"
+            )
+        )
+
+        XCTAssertFalse(program.canProveBothPersonalizedSlices)
+        XCTAssertFalse(activation.canActivateFirstRun)
+        XCTAssertTrue(activation.issues.contains(.goldenProgramNotReady), "\(activation.issues)")
+        XCTAssertTrue(activation.issues.contains(.goldenSliceMissing), "\(activation.issues)")
+        XCTAssertTrue(activation.issues.contains(.activationReceiptMissing), "\(activation.issues)")
+    }
+
+    func testFirstRunActivationRequiresFirstGoalFlow() throws {
+        let program = GoldenVerticalSliceRuntime().evaluate(
+            GoldenVerticalSliceProgramInput(
+                slices: [try firstRunSlice(), try companionSlice()],
+                evaluatedAt: "2026-06-14T20:20:00Z"
+            )
+        )
+
+        let activation = FirstRunActivationRuntime().evaluate(
+            FirstRunActivationInput(
+                goldenProgram: program,
+                onboardingChoice: .enterToday,
+                activatedAt: "2026-06-14T20:21:00Z"
+            )
+        )
+
+        XCTAssertFalse(activation.canActivateFirstRun)
+        XCTAssertEqual(activation.state, .blocked)
+        XCTAssertTrue(activation.issues.contains(.firstGoalFlowMissing), "\(activation.issues)")
+        XCTAssertFalse(activation.issues.contains(.recommendedStepMissing), "\(activation.issues)")
+        XCTAssertFalse(activation.issues.contains(.recoveryOptionMissing), "\(activation.issues)")
+    }
+
     func testTwoPersonalizedMusicReleaseSlicesOpenRuntimeCoreAndReplay() throws {
         let touringParent = try goldenSlice(
             prefix: "touring-parent",
@@ -167,6 +292,19 @@ private extension GoldenVerticalSliceRuntimeTests {
             capacityProfile: "One weekend block and short weekday check-ins.",
             creativeConstraint: "Needs artwork and export checks before release.",
             supportPreference: "Prefers visible receipts and recovery-safe alternates."
+        )
+    }
+
+    func firstRunSlice() throws -> GoldenVerticalSliceInput {
+        try goldenSlice(
+            prefix: "first-run",
+            displayName: "Rin",
+            rawGoal: "Release a music single through a local first-run path.",
+            normalizedGoal: "Release a music single with first-run receipt proof.",
+            lifeContext: "Has one focused evening and wants a calm first activation.",
+            capacityProfile: "Short evening window with a weekend review buffer.",
+            creativeConstraint: "Needs a release checklist before artwork review.",
+            supportPreference: "Prefers local receipts and a shrink-safe recovery option."
         )
     }
 
@@ -495,7 +633,7 @@ private extension GoldenVerticalSliceRuntimeTests {
             reviewState: .ready,
             privacyClass: .privateLife,
             professionalBoundaryApplies: false,
-            claimsGuaranteedOutcome: false,
+            claimsGuaranteedOutcome: false, // not a release claim; this fixture rejects guaranteed outcomes.
             externalProjectionRequested: false
         )
     }
