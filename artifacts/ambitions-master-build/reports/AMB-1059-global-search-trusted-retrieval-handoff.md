@@ -10,7 +10,7 @@ Train label: `M04.T02`
 
 Parent or umbrella issue: `AMB-1046`
 
-Green/Yellow/Red status: Green for the focused AMB-1059 global search entry and trusted retrieval handoff source/control-plane scope; source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` and closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc` are pushed and remote-verified on `origin/main`. Final proof-index reconciliation is in progress before Linear Done.
+Green/Yellow/Red status: Green for the focused AMB-1059 global search entry and trusted retrieval handoff source/control-plane scope; source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a`, closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc`, and final proof-index reconciliation commit `396729b78af8e663e453a15d8f90ac0410caf43b` are pushed and remote-verified on `origin/main`. AMB-1059 is Done in Linear.
 
 Pushed to main: yes; source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` is pushed and remote-verified.
 
@@ -18,7 +18,7 @@ Push hash: `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a`
 
 Closeout metadata hash: `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc`
 
-Final reconciliation hash: pending final proof-index reconciliation
+Final reconciliation hash: `396729b78af8e663e453a15d8f90ac0410caf43b`
 
 App source changed: yes
 
@@ -55,6 +55,10 @@ Validation run:
 - `bash scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-preflight-20260615T093202.log`.
 - `bash scripts/codex/program-phase-gate.sh amb-master M04` - pass after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093202.log`.
 - `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1059 proof-ledger entry; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093426.log`.
+- `git push origin main`, `git rev-parse HEAD`, and `git ls-remote origin refs/heads/main` - pushed final proof-index reconciliation commit `396729b78af8e663e453a15d8f90ac0410caf43b`; local HEAD and `origin/main` both returned `396729b78af8e663e453a15d8f90ac0410caf43b` after final proof-index reconciliation push.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after final AMB-1059 Done reconciliation updates; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093902.log`.
+- `bash scripts/codex/program-preflight.sh amb-master` - Green after final AMB-1059 Done reconciliation updates; local ignored log `artifacts/ambitions-master-build/script-output/program-preflight-20260615T093939.log`.
+- `bash scripts/codex/program-phase-gate.sh amb-master M04` - pass after final AMB-1059 Done reconciliation updates; local ignored log `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093939.log`.
 
 Reviewer passes:
 - Deterministic pre/post parallel implementation guard passed Green.
@@ -72,6 +76,9 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260615T093202.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093202.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093426.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093902.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-preflight-20260615T093939.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093939.log` - local ignored script output.
 - `artifacts/proof-ledger/proof-index.json`
 
 Red blockers: none
@@ -99,5 +106,15 @@ Linear reconciliation:
 - AMB-1059 source-push issue comment: `ce3ed50b-e3e8-4bd7-8371-fd20320946d6`.
 - AMB-1059 source-push project comment: `f6cbd30a-5cc5-46e8-856c-b94f35bfaf98`.
 - AMB-1059 source-push project status update: `62dadcf6-0dd0-4642-ae9b-9414d88e1d91`.
+- AMB-1059 closeout metadata issue comment: `ec176f99-afc8-4895-b554-698b71db4692`.
+- AMB-1059 closeout metadata project comment: `528eb330-248d-444f-ad9c-e4aec7f37fa5`.
+- AMB-1059 closeout metadata project status update: `84dd385e-b103-4d98-9883-2cb17c10e44c`.
+- AMB-1059 proof-index issue comment: `5041386f-2904-4b25-bd71-c424686907d0`.
+- AMB-1059 proof-index project comment: `bbc01718-e4f4-42f0-9306-9a99933e5783`.
+- AMB-1059 proof-index project status update: `098e77dd-6a28-41a9-b1b0-0610dcf5e87f`.
+- AMB-1059 Done issue comment: `9b9f348d-e367-4eaa-9392-20888ff08462`.
+- AMB-1059 Done project comment: `efb071e5-578e-4e84-886d-0d747c22a463`.
+- AMB-1059 Done project status update: `7f6c9727-a99d-4554-9bea-6719604c6ff0`.
+- AMB-1059 Done transition: complete in Linear at `2026-06-15T13:35:36.540Z`.
 
 Next train: `AMB-1060` / `M04.T03`

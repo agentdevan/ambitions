@@ -8,7 +8,8 @@
   "status": "green_for_source_control_plane_scope",
   "source_commit": "7d45c59f6f3f0e449f92e023f73a25e4ce02a34a",
   "closeout_metadata_commit": "e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc",
-  "final_reconciliation_commit": "pending_final_proof_index_reconciliation",
+  "final_reconciliation_commit": "396729b78af8e663e453a15d8f90ac0410caf43b",
+  "linear_completed_at": "2026-06-15T13:35:36.540Z",
   "baseline_commit": "90780953d9fb170895a7a0d657b03493f500d7e4",
   "branch": "main",
   "remote_verification": {
@@ -97,6 +98,21 @@
       "command": "bash scripts/codex/program-proof-index.sh amb-master",
       "result": "pass",
       "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093426.log"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass_final_done_reconciliation",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093902.log"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "green_final_done_reconciliation",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260615T093939.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
+      "result": "pass_final_done_reconciliation",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093939.log"
     }
   ],
   "screenshots": [

@@ -44,8 +44,8 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 | Train | Linear issue | Title | Milestone | Live status at refresh |
 |---|---|---|---|---|
 | M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | M04 | Done in Linear / source `efd6957c9022f66f3316d06e9862c92a61832990` / closeout metadata `dea3cf942487b77b20aec07569ebd94b2b844674` / final proof-index `83c5c9558064013628890ec311ef8eca8303a813` |
-| M04.T02 | AMB-1059 | Global search entry and presentation: trusted retrieval handoff | M04 | Done in source / source `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` / closeout metadata `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc` / final proof-index pending |
-| M04.T03 | AMB-1060 | Tokenized design system foundation: flagship semantic base | M04 | Backlog / next eligible after AMB-1059 metadata and Linear Done |
+| M04.T02 | AMB-1059 | Global search entry and presentation: trusted retrieval handoff | M04 | Done in Linear / source `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` / closeout metadata `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc` / final proof-index `396729b78af8e663e453a15d8f90ac0410caf43b` |
+| M04.T03 | AMB-1060 | Tokenized design system foundation: flagship semantic base | M04 | Backlog / next eligible after AMB-1059 Done |
 | M04.T04 | AMB-1061 | Core reusable component set: native interaction primitives | M04 | Backlog |
 | M04.T05 | AMB-1062 | Contextual toolbar and action surfaces: focused command grammar | M04 | Backlog |
 | M04.T06 | AMB-1063 | Motion grammar primitives: flagship pace and restraint | M04 | Backlog |

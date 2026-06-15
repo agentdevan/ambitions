@@ -2,7 +2,7 @@
   "schema_version": 1,
   "generated_by": "scripts/codex/program-proof-index.sh",
   "program_filter": "amb-master",
-  "head": "e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc",
+  "head": "396729b78af8e663e453a15d8f90ac0410caf43b",
   "ledger": "artifacts/proof-ledger/PROOF_LEDGER.md",
   "entries": [
     {
@@ -11,7 +11,7 @@
       "lines": [
         "",
         "- Claim: AMB-1059 adds a shell-owned local Memory Lens search entry that produces trusted retrieval handoffs with owner surface, source evidence, trust summary, stale IA blockers, and continuity receipts; trusted results route into owning surfaces, Capture results route through Global Capture, and Capture/Pulse/Plan are not reintroduced as root tabs.",
-        "- Commit: source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a`; closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc`; final proof-index reconciliation pending.",
+        "- Commit: source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a`; closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc`; final proof-index reconciliation commit `396729b78af8e663e453a15d8f90ac0410caf43b`.",
         "- Touched files: `Native/Ambitions/App/ShellCommandModels.swift`; `Native/Ambitions/App/ShellCommandRouter.swift`; `Native/Ambitions/App/AppShellView.swift`; focused app tests; AMB-1059 guard, screenshot, validation, report, and proof artifacts.",
         "- Command: live Linear AMB-1059/project progress comments and project status updates; clean-tree `bash scripts/codex/program-preflight.sh amb-master`; clean-tree `bash scripts/codex/program-phase-gate.sh amb-master M04`; AMB-1059 pre parallel implementation guard; focused `MemoryLensServiceTests` and `ShellCommandRouterTests`; XcodeBuildMCP install/launch/screenshot with Memory Lens deep link; visual screenshot inspection; AMB-1059 post parallel implementation guard; `git diff --check`; `git diff --cached --check`; `git push origin main`; `git rev-parse HEAD`; `git ls-remote origin refs/heads/main`; Linear issue/project source-push comments and project status update.",
         "- Exit code: focused Memory Lens and shell router XCTest lane passed 18 selected tests with 0 failures; pre/post parallel implementation guard was Green; visual proof passed after rejecting earlier clipped layouts; source/control-plane commit was pushed and remote verified at `origin/main`.",
@@ -19,7 +19,7 @@
         "- Proof class: source implementation, focused XCTest, guard, and visual Memory Lens handoff proof; not broad search ranking certification, every-surface search completion, public accessibility certification, physical-device proof, measured performance proof, privacy/legal approval, release proof, TestFlight proof, App Store proof, or full-project completion proof.",
         "- Scope: AMB-1059 / M04.T02 Global search entry and trusted retrieval handoff only.",
         "- Non-claims: no broad search ranking quality certification; no all-surface search completion claim; no public accessibility certification; no physical-device proof; no performance certification; no privacy/legal approval; no release readiness; no TestFlight readiness; no App Store readiness; no owner approval; no AMB-1060 execution; no full project completion.",
-        "- Freshness: current on 2026-06-15 America/New_York for branch `main` after validating source locally, pushing source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a`, pushing closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc`, and verifying `origin/main` at the same metadata SHA; final proof-index reconciliation is pending.",
+        "- Freshness: current on 2026-06-15 America/New_York for branch `main` after validating source locally, pushing source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a`, pushing closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc`, pushing final proof-index reconciliation commit `396729b78af8e663e453a15d8f90ac0410caf43b`, verifying `origin/main` at the same final reconciliation SHA, and moving AMB-1059 to Done in Linear.",
         "- Rollback: revert AMB-1059 source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` and follow-up AMB-1059 metadata/proof-index commits if unsafe.",
         "- Related Linear issue: AMB-1059.",
         "- Evidence status: Green for scoped AMB-1059 trusted search handoff source/control-plane proof; Yellow for broad search completion, public accessibility certification, device proof, measured performance, privacy/legal approval, release/TestFlight/App Store readiness, owner approval, and full project completion.",

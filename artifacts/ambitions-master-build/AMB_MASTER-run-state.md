@@ -19,23 +19,23 @@ project:
 current_phase:
   label: "M04"
   title: "Native Shell + Design System Foundation"
-  status: "AMB-1059 / M04.T02 source/control-plane pushed after focused validation; closeout metadata and final proof-index reconciliation in progress; AMB-1060 / M04.T03 next eligible after Linear Done"
+  status: "AMB-1059 / M04.T02 Done in Linear after source/control-plane, closeout metadata, and final proof-index reconciliation pushes; AMB-1060 / M04.T03 next eligible"
 current_train:
   label: "M04.T03"
   linear_id: "AMB-1060"
   title: "Tokenized design system foundation: flagship semantic base"
-  status: "Next eligible after AMB-1059 metadata/proof-index reconciliation and Linear Done; refresh live Linear, run AMB-MASTER preflight and M04 phase gate, then execute the tokenized design system foundation train."
+  status: "Next eligible; refresh live Linear, run AMB-MASTER preflight and M04 phase gate, then execute the tokenized design system foundation train."
 last_closed_train:
   label: "M04.T02"
   linear_id: "AMB-1059"
   title: "Global search entry and presentation: trusted retrieval handoff"
-  status: "Source/control-plane commit 7d45c59f6f3f0e449f92e023f73a25e4ce02a34a and closeout metadata commit e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc pushed and remote verified; final proof-index reconciliation pending"
+  status: "Done in Linear at 2026-06-15T13:35:36.540Z; source/control-plane commit 7d45c59f6f3f0e449f92e023f73a25e4ce02a34a, closeout metadata e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc, final proof-index reconciliation 396729b78af8e663e453a15d8f90ac0410caf43b"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Complete AMB-1059 metadata/proof-index reconciliation and Linear Done, then refresh live Linear for AMB-1060 / M04.T03, run AMB-MASTER preflight and M04 phase gate, and execute the tokenized design system foundation train."
+  action: "Refresh live Linear for AMB-1060 / M04.T03, run AMB-MASTER preflight and M04 phase gate, and execute the tokenized design system foundation train."
 latest_local_scope:
   changed_path_policy: "AMB-1059 touched shell command models/router/presentation owners, focused app tests, AMB-1059 guard prompt/reports, focused test log, and Memory Lens screenshot proof."
   app_source_changed: true
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M04"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1059-global-search-trusted-retrieval-handoff.md"
 latest_validation:
-  status: "AMB-1059 focused implementation validation Green; source/control-plane commit pushed and remote verified; closeout metadata and final proof-index reconciliation in progress"
+  status: "AMB-1059 focused implementation validation Green; source/control-plane, closeout metadata, and final proof-index reconciliation commits pushed and remote verified; AMB-1059 Done in Linear"
   logs:
     - "DerivedData Test-Ambitions-2026.06.15_09-22-41--0400.xcresult"
     - "build/reports/parallel-implementation-guard/AMB-1059-pre.md"
@@ -86,7 +86,7 @@ latest_validation:
 - `AMB-1114` / `M03.T01`: final proof-index reconciliation commit `ecc905cf854ab1b0d6feb1167beaca4da6369437` pushed and remote verified; AMB-1114 marked Done in Linear; next train is `AMB-1115` / `M03.T02`.
 - `AMB-1115` / `M03.T02`: final proof-index reconciliation commit `ea6aae422940715a981df7fc3919f596bc74ab18` pushed and remote verified; AMB-1115 marked Done in Linear; next train is `AMB-1058` / `M04.T01`.
 - `AMB-1058` / `M04.T01`: final proof-index reconciliation commit `83c5c9558064013628890ec311ef8eca8303a813` pushed and remote verified; AMB-1058 marked Done in Linear; next train is `AMB-1059` / `M04.T02`.
-- `AMB-1059` / `M04.T02`: source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` and closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc` pushed and remote verified; final proof-index reconciliation in progress; next train is `AMB-1060` / `M04.T03` after Linear Done.
+- `AMB-1059` / `M04.T02`: final proof-index reconciliation commit `396729b78af8e663e453a15d8f90ac0410caf43b` pushed and remote verified; AMB-1059 marked Done in Linear; next train is `AMB-1060` / `M04.T03`.
 
 ## Non-Claims
 
