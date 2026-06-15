@@ -38,16 +38,21 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 18 | M02.T07 | AMB-1133 | Life Consequence Engine | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit (`75ecbf553b9bb43b17736ee7d45bc8671928e796`) |
 | 19 | M02.T08 | AMB-1117 | High-risk safety and jurisdiction handling | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit `172614b0b8b543fbf2f8287ddc7abfc101172195` / closeout metadata `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` / AMB-1114 handoff active |
 | 20 | M03.T01 | AMB-1114 | Golden vertical slice | `scripts/codex/program-phase-gate.sh amb-master M03` | Done / source commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` / closeout metadata `b95399da61bdb433c6ea52087a25a47695cdb465` / final reconciliation `ecc905cf854ab1b0d6feb1167beaca4da6369437` |
-| 21 | M03.T02 | AMB-1115 | First-run activation | `scripts/codex/program-phase-gate.sh amb-master M03` | Backlog |
-| 22 | M04 | live AMB issue set | Native Shell + Design System Foundation | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M03 |
-| 23 | M05 | live AMB issue set | Today + Step Execution Surface | `scripts/codex/program-phase-gate.sh amb-master M05` | Blocked pending M04 |
-| 24 | M06 | live AMB issue set | Goals, Paths, Capture, and Time | `scripts/codex/program-phase-gate.sh amb-master M06` | Blocked pending M05 |
-| 25 | M07 | live AMB issue set | Motion, Proof, Recovery, Sharing, Year | `scripts/codex/program-phase-gate.sh amb-master M07` | Blocked pending M06 |
-| 26 | M08 | live AMB issue set | You, Privacy, Diagnostics, Export, Support | `scripts/codex/program-phase-gate.sh amb-master M08` | Blocked pending M07 |
-| 27 | M09 | live AMB issue set | Apple System Surfaces | `scripts/codex/program-phase-gate.sh amb-master M09` | Blocked pending M08 |
-| 28 | M10 | live AMB issue set | Commerce, Demo, Review, Compliance | `scripts/codex/program-phase-gate.sh amb-master M10` | Blocked pending M09 |
-| 29 | M11 | live AMB issue set | Accessibility, Performance, Polish, Certification | `scripts/codex/program-phase-gate.sh amb-master M11` | Blocked pending M10 |
+| 21 | M03.T02 | AMB-1115 | First-run activation | `scripts/codex/program-phase-gate.sh amb-master M03` | Source/control-plane pushed (`7ea6a1de182443d87f02898a2510fc2f251ac08c`) / closeout metadata pending |
+| 22 | M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | `scripts/codex/program-phase-gate.sh amb-master M04` | Next eligible after AMB-1115 closeout |
+| 23 | M04.T02 | AMB-1059 | Global search entry and presentation: trusted retrieval handoff | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T01 |
+| 24 | M04.T03 | AMB-1060 | Tokenized design system foundation: flagship semantic base | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T02 |
+| 25 | M04.T04 | AMB-1061 | Core reusable component set: native interaction primitives | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T03 |
+| 26 | M04.T05 | AMB-1062 | Contextual toolbar and action surfaces: focused command grammar | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T04 |
+| 27 | M04.T06 | AMB-1063 | Motion grammar primitives: flagship pace and restraint | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T05 |
+| 28 | M05 | live AMB issue set | Today + Step Execution Surface | `scripts/codex/program-phase-gate.sh amb-master M05` | Blocked pending M04 |
+| 29 | M06 | live AMB issue set | Goals, Paths, Capture, and Time | `scripts/codex/program-phase-gate.sh amb-master M06` | Blocked pending M05 |
+| 30 | M07 | live AMB issue set | Motion, Proof, Recovery, Sharing, Year | `scripts/codex/program-phase-gate.sh amb-master M07` | Blocked pending M06 |
+| 31 | M08 | live AMB issue set | You, Privacy, Diagnostics, Export, Support | `scripts/codex/program-phase-gate.sh amb-master M08` | Blocked pending M07 |
+| 32 | M09 | live AMB issue set | Apple System Surfaces | `scripts/codex/program-phase-gate.sh amb-master M09` | Blocked pending M08 |
+| 33 | M10 | live AMB issue set | Commerce, Demo, Review, Compliance | `scripts/codex/program-phase-gate.sh amb-master M10` | Blocked pending M09 |
+| 34 | M11 | live AMB issue set | Accessibility, Performance, Polish, Certification | `scripts/codex/program-phase-gate.sh amb-master M11` | Blocked pending M10 |
 
 ## Next Eligible Action
 
-Refresh live Linear for `AMB-1115` / `M03.T02`, then start the First-run activation train.
+Finish AMB-1115 closeout metadata and Linear Done reconciliation, then refresh live Linear for `AMB-1058` / `M04.T01` and start the Root navigation architecture train.

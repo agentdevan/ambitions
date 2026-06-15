@@ -3,36 +3,289 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "queue": [
-    {"rank": 0, "train": "CONTROL", "linear_id": "AMB-1126", "phase": "M00", "title": "Rebuild Linear as the Ambitions execution control plane", "state": "Done"},
-    {"rank": 1, "train": "M00.T00", "linear_id": "AMB-1046", "phase": "M00", "title": "Program umbrella: master build authority and execution run", "state": "Done / pushed 004a258378a92a21ad384c6ce239b2fb36c94e7d"},
-    {"rank": 2, "train": "M00.T01", "linear_id": "AMB-1047", "phase": "M00", "title": "Canon authority and IA lock", "state": "Done / pushed 8f5cfc1dae8c684571e17dabba765eb937ab2169"},
-    {"rank": 3, "train": "M00.T02", "linear_id": "AMB-1048", "phase": "M00", "title": "Live repository wiring and quarantine proof", "state": "Done / pushed b0f9305aff9ce5b44ef17e6d1ebe4a2414955f30"},
-    {"rank": 4, "train": "M01.T01", "linear_id": "AMB-1049", "phase": "M01", "title": "Data lifecycle and replay foundation", "state": "Done / pushed e2625489ab6d71a9d90021e2f66bf679a248f80e"},
-    {"rank": 5, "train": "M01.T02", "linear_id": "AMB-1050", "phase": "M01", "title": "Migration and versioned schema foundation", "state": "Done / source commit daaed647d"},
-    {"rank": 6, "train": "M01.T03", "linear_id": "AMB-1051", "phase": "M01", "title": "Privacy and security storage boundary", "state": "Done / source commit fe0fc39f"},
-    {"rank": 7, "train": "M01.T04", "linear_id": "AMB-1052", "phase": "M01", "title": "Support bundle and diagnostics", "state": "Done / source commit 576cea9e6b7e5fb04b00d6be68d42353883b8817"},
-    {"rank": 8, "train": "M01.T05", "linear_id": "AMB-1053", "phase": "M01", "title": "Source Atlas cache and failure-safe runtime consumption", "state": "Done / source commit fac32c9440cb04a93515cf0e99b4564e39d28ff7"},
-    {"rank": 9, "train": "M01.T06A", "linear_id": "AMB-1127", "phase": "M01", "title": "Source Atlas Pack / Seed Foundry", "state": "Done / source commit 9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3"},
-    {"rank": 10, "train": "M01.T06B", "linear_id": "AMB-1128", "phase": "M01", "title": "Source Authority Mesh", "state": "Done / source commit 88d549dea8acd7d7601d302db6e7f819bd16cfb2"},
-    {"rank": 11, "train": "M02.T00", "linear_id": "AMB-1113", "phase": "M02", "title": "Runtime core umbrella", "state": "Done / source commit 301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6"},
-    {"rank": 12, "train": "M02.T01", "linear_id": "AMB-1111", "phase": "M02", "title": "Step Quality Firewall", "state": "Done / source commit 3896c8af1909389f389aca1d5e8478c2f2059660"},
-    {"rank": 13, "train": "M02.T02", "linear_id": "AMB-1112", "phase": "M02", "title": "Any Goal Runtime", "state": "Done / source commit 26a83b0f4b91b34d14620ee71f24e43cc7d01818"},
-    {"rank": 14, "train": "M02.T03", "linear_id": "AMB-1129", "phase": "M02", "title": "Multi-Path Lattice", "state": "Done / source commit 9f454beb0f6df132a2c8f700496986f2f07ca3e7"},
-    {"rank": 15, "train": "M02.T04", "linear_id": "AMB-1130", "phase": "M02", "title": "Step Graph Compiler", "state": "Done / source commit b335815da8f92feafc069b082f1390015282b822"},
-    {"rank": 16, "train": "M02.T05", "linear_id": "AMB-1131", "phase": "M02", "title": "Step Elasticity Engine", "state": "Done / source commit 44bda601b6fba878b4192d3de6458eba13a856d8"},
-    {"rank": 17, "train": "M02.T06", "linear_id": "AMB-1132", "phase": "M02", "title": "Schedule Install Kernel", "state": "Done / source commit 448b7dc0f805f71ab0a285906ca789edd8e1d40f"},
-    {"rank": 18, "train": "M02.T07", "linear_id": "AMB-1133", "phase": "M02", "title": "Life Consequence Engine", "state": "Done / source commit 75ecbf553b9bb43b17736ee7d45bc8671928e796"},
-    {"rank": 19, "train": "M02.T08", "linear_id": "AMB-1117", "phase": "M02", "title": "High-risk safety and jurisdiction handling", "state": "Done / source commit 172614b0b8b543fbf2f8287ddc7abfc101172195 / closeout metadata 90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75 / AMB-1114 handoff active"},
-    {"rank": 20, "train": "M03.T01", "linear_id": "AMB-1114", "phase": "M03", "title": "Golden vertical slice", "state": "Done / source commit 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc / closeout metadata b95399da61bdb433c6ea52087a25a47695cdb465 / final reconciliation ecc905cf854ab1b0d6feb1167beaca4da6369437"},
-    {"rank": 21, "train": "M03.T02", "linear_id": "AMB-1115", "phase": "M03", "title": "First-run activation", "state": "Backlog"},
-    {"rank": 22, "train": "M04", "linear_id": "live AMB issue set", "phase": "M04", "title": "Native Shell + Design System Foundation", "state": "blocked pending M03"},
-    {"rank": 23, "train": "M05", "linear_id": "live AMB issue set", "phase": "M05", "title": "Today + Step Execution Surface", "state": "blocked pending M04"},
-    {"rank": 24, "train": "M06", "linear_id": "live AMB issue set", "phase": "M06", "title": "Goals, Paths, Capture, and Time", "state": "blocked pending M05"},
-    {"rank": 25, "train": "M07", "linear_id": "live AMB issue set", "phase": "M07", "title": "Motion, Proof, Recovery, Sharing, Year", "state": "blocked pending M06"},
-    {"rank": 26, "train": "M08", "linear_id": "live AMB issue set", "phase": "M08", "title": "You, Privacy, Diagnostics, Export, Support", "state": "blocked pending M07"},
-    {"rank": 27, "train": "M09", "linear_id": "live AMB issue set", "phase": "M09", "title": "Apple System Surfaces", "state": "blocked pending M08"},
-    {"rank": 28, "train": "M10", "linear_id": "live AMB issue set", "phase": "M10", "title": "Commerce, Demo, Review, Compliance", "state": "blocked pending M09"},
-    {"rank": 29, "train": "M11", "linear_id": "live AMB issue set", "phase": "M11", "title": "Accessibility, Performance, Polish, Certification", "state": "blocked pending M10"}
+    {
+      "rank": 0,
+      "train": "CONTROL",
+      "linear_id": "AMB-1126",
+      "phase": "M00",
+      "title": "Rebuild Linear as the Ambitions execution control plane",
+      "state": "Done"
+    },
+    {
+      "rank": 1,
+      "train": "M00.T00",
+      "linear_id": "AMB-1046",
+      "phase": "M00",
+      "title": "Program umbrella: master build authority and execution run",
+      "state": "Done / pushed 004a258378a92a21ad384c6ce239b2fb36c94e7d"
+    },
+    {
+      "rank": 2,
+      "train": "M00.T01",
+      "linear_id": "AMB-1047",
+      "phase": "M00",
+      "title": "Canon authority and IA lock",
+      "state": "Done / pushed 8f5cfc1dae8c684571e17dabba765eb937ab2169"
+    },
+    {
+      "rank": 3,
+      "train": "M00.T02",
+      "linear_id": "AMB-1048",
+      "phase": "M00",
+      "title": "Live repository wiring and quarantine proof",
+      "state": "Done / pushed b0f9305aff9ce5b44ef17e6d1ebe4a2414955f30"
+    },
+    {
+      "rank": 4,
+      "train": "M01.T01",
+      "linear_id": "AMB-1049",
+      "phase": "M01",
+      "title": "Data lifecycle and replay foundation",
+      "state": "Done / pushed e2625489ab6d71a9d90021e2f66bf679a248f80e"
+    },
+    {
+      "rank": 5,
+      "train": "M01.T02",
+      "linear_id": "AMB-1050",
+      "phase": "M01",
+      "title": "Migration and versioned schema foundation",
+      "state": "Done / source commit daaed647d"
+    },
+    {
+      "rank": 6,
+      "train": "M01.T03",
+      "linear_id": "AMB-1051",
+      "phase": "M01",
+      "title": "Privacy and security storage boundary",
+      "state": "Done / source commit fe0fc39f"
+    },
+    {
+      "rank": 7,
+      "train": "M01.T04",
+      "linear_id": "AMB-1052",
+      "phase": "M01",
+      "title": "Support bundle and diagnostics",
+      "state": "Done / source commit 576cea9e6b7e5fb04b00d6be68d42353883b8817"
+    },
+    {
+      "rank": 8,
+      "train": "M01.T05",
+      "linear_id": "AMB-1053",
+      "phase": "M01",
+      "title": "Source Atlas cache and failure-safe runtime consumption",
+      "state": "Done / source commit fac32c9440cb04a93515cf0e99b4564e39d28ff7"
+    },
+    {
+      "rank": 9,
+      "train": "M01.T06A",
+      "linear_id": "AMB-1127",
+      "phase": "M01",
+      "title": "Source Atlas Pack / Seed Foundry",
+      "state": "Done / source commit 9c14aa056f6fe96a548cb2c34bb00ed9fdb7b8a3"
+    },
+    {
+      "rank": 10,
+      "train": "M01.T06B",
+      "linear_id": "AMB-1128",
+      "phase": "M01",
+      "title": "Source Authority Mesh",
+      "state": "Done / source commit 88d549dea8acd7d7601d302db6e7f819bd16cfb2"
+    },
+    {
+      "rank": 11,
+      "train": "M02.T00",
+      "linear_id": "AMB-1113",
+      "phase": "M02",
+      "title": "Runtime core umbrella",
+      "state": "Done / source commit 301f18de0c66e69e1e56dc8aa0d54f0cffbc3dc6"
+    },
+    {
+      "rank": 12,
+      "train": "M02.T01",
+      "linear_id": "AMB-1111",
+      "phase": "M02",
+      "title": "Step Quality Firewall",
+      "state": "Done / source commit 3896c8af1909389f389aca1d5e8478c2f2059660"
+    },
+    {
+      "rank": 13,
+      "train": "M02.T02",
+      "linear_id": "AMB-1112",
+      "phase": "M02",
+      "title": "Any Goal Runtime",
+      "state": "Done / source commit 26a83b0f4b91b34d14620ee71f24e43cc7d01818"
+    },
+    {
+      "rank": 14,
+      "train": "M02.T03",
+      "linear_id": "AMB-1129",
+      "phase": "M02",
+      "title": "Multi-Path Lattice",
+      "state": "Done / source commit 9f454beb0f6df132a2c8f700496986f2f07ca3e7"
+    },
+    {
+      "rank": 15,
+      "train": "M02.T04",
+      "linear_id": "AMB-1130",
+      "phase": "M02",
+      "title": "Step Graph Compiler",
+      "state": "Done / source commit b335815da8f92feafc069b082f1390015282b822"
+    },
+    {
+      "rank": 16,
+      "train": "M02.T05",
+      "linear_id": "AMB-1131",
+      "phase": "M02",
+      "title": "Step Elasticity Engine",
+      "state": "Done / source commit 44bda601b6fba878b4192d3de6458eba13a856d8"
+    },
+    {
+      "rank": 17,
+      "train": "M02.T06",
+      "linear_id": "AMB-1132",
+      "phase": "M02",
+      "title": "Schedule Install Kernel",
+      "state": "Done / source commit 448b7dc0f805f71ab0a285906ca789edd8e1d40f"
+    },
+    {
+      "rank": 18,
+      "train": "M02.T07",
+      "linear_id": "AMB-1133",
+      "phase": "M02",
+      "title": "Life Consequence Engine",
+      "state": "Done / source commit 75ecbf553b9bb43b17736ee7d45bc8671928e796"
+    },
+    {
+      "rank": 19,
+      "train": "M02.T08",
+      "linear_id": "AMB-1117",
+      "phase": "M02",
+      "title": "High-risk safety and jurisdiction handling",
+      "state": "Done / source commit 172614b0b8b543fbf2f8287ddc7abfc101172195 / closeout metadata 90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75 / AMB-1114 handoff active"
+    },
+    {
+      "rank": 20,
+      "train": "M03.T01",
+      "linear_id": "AMB-1114",
+      "phase": "M03",
+      "title": "Golden vertical slice",
+      "state": "Done / source commit 9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc / closeout metadata b95399da61bdb433c6ea52087a25a47695cdb465 / final reconciliation ecc905cf854ab1b0d6feb1167beaca4da6369437"
+    },
+    {
+      "rank": 21,
+      "train": "M03.T02",
+      "linear_id": "AMB-1115",
+      "phase": "M03",
+      "title": "First-run activation",
+      "state": "Source/control-plane pushed 7ea6a1de182443d87f02898a2510fc2f251ac08c / closeout metadata pending"
+    },
+    {
+      "rank": 22,
+      "train": "M04.T01",
+      "linear_id": "AMB-1058",
+      "phase": "M04",
+      "title": "Root navigation architecture: five-surface shell proof",
+      "state": "Next eligible after AMB-1115 closeout"
+    },
+    {
+      "rank": 23,
+      "train": "M04.T02",
+      "linear_id": "AMB-1059",
+      "phase": "M04",
+      "title": "Global search entry and presentation: trusted retrieval handoff",
+      "state": "blocked pending M04.T01"
+    },
+    {
+      "rank": 24,
+      "train": "M04.T03",
+      "linear_id": "AMB-1060",
+      "phase": "M04",
+      "title": "Tokenized design system foundation: flagship semantic base",
+      "state": "blocked pending M04.T02"
+    },
+    {
+      "rank": 25,
+      "train": "M04.T04",
+      "linear_id": "AMB-1061",
+      "phase": "M04",
+      "title": "Core reusable component set: native interaction primitives",
+      "state": "blocked pending M04.T03"
+    },
+    {
+      "rank": 26,
+      "train": "M04.T05",
+      "linear_id": "AMB-1062",
+      "phase": "M04",
+      "title": "Contextual toolbar and action surfaces: focused command grammar",
+      "state": "blocked pending M04.T04"
+    },
+    {
+      "rank": 27,
+      "train": "M04.T06",
+      "linear_id": "AMB-1063",
+      "phase": "M04",
+      "title": "Motion grammar primitives: flagship pace and restraint",
+      "state": "blocked pending M04.T05"
+    },
+    {
+      "rank": 28,
+      "train": "M05",
+      "linear_id": "live AMB issue set",
+      "phase": "M05",
+      "title": "Today + Step Execution Surface",
+      "state": "blocked pending M04"
+    },
+    {
+      "rank": 29,
+      "train": "M06",
+      "linear_id": "live AMB issue set",
+      "phase": "M06",
+      "title": "Goals, Paths, Capture, and Time",
+      "state": "blocked pending M05"
+    },
+    {
+      "rank": 30,
+      "train": "M07",
+      "linear_id": "live AMB issue set",
+      "phase": "M07",
+      "title": "Motion, Proof, Recovery, Sharing, Year",
+      "state": "blocked pending M06"
+    },
+    {
+      "rank": 31,
+      "train": "M08",
+      "linear_id": "live AMB issue set",
+      "phase": "M08",
+      "title": "You, Privacy, Diagnostics, Export, Support",
+      "state": "blocked pending M07"
+    },
+    {
+      "rank": 32,
+      "train": "M09",
+      "linear_id": "live AMB issue set",
+      "phase": "M09",
+      "title": "Apple System Surfaces",
+      "state": "blocked pending M08"
+    },
+    {
+      "rank": 33,
+      "train": "M10",
+      "linear_id": "live AMB issue set",
+      "phase": "M10",
+      "title": "Commerce, Demo, Review, Compliance",
+      "state": "blocked pending M09"
+    },
+    {
+      "rank": 34,
+      "train": "M11",
+      "linear_id": "live AMB issue set",
+      "phase": "M11",
+      "title": "Accessibility, Performance, Polish, Certification",
+      "state": "blocked pending M10"
+    }
   ],
-  "next": {"train": "M03.T02", "linear_id": "AMB-1115"}
+  "next": {
+    "train": "M04.T01",
+    "linear_id": "AMB-1058"
+  }
 }
