@@ -161,14 +161,14 @@
       "linear_id": "AMB-1115",
       "title": "First-run activation: first goal, first Recommended Step, first recovery option",
       "milestone": "M03",
-      "status": "Source/control-plane pushed 7ea6a1de182443d87f02898a2510fc2f251ac08c / closeout metadata pushed 70defd7018d5da1edbdebca02b7efeaac6154e28 / final proof-index pending"
+      "status": "Done in Linear / source 7ea6a1de182443d87f02898a2510fc2f251ac08c / closeout metadata 70defd7018d5da1edbdebca02b7efeaac6154e28 / final proof-index ea6aae422940715a981df7fc3919f596bc74ab18"
     },
     {
       "train": "M04.T01",
       "linear_id": "AMB-1058",
       "title": "Root navigation architecture: five-surface shell proof",
       "milestone": "M04",
-      "status": "Backlog"
+      "status": "Backlog / next eligible after AMB-1115 Done"
     },
     {
       "train": "M04.T02",
@@ -206,5 +206,5 @@
       "status": "Backlog"
     }
   ],
-  "refresh_rule": "Refresh from live Linear before each new train. Next eligible after AMB-1115 closeout metadata, proof-index, and Linear Done reconciliation is AMB-1058 / M04.T01. Train labels are aliases; AMB-* identifiers are authoritative."
+  "refresh_rule": "Refresh from live Linear before each new train. Next eligible after AMB-1115 Done is AMB-1058 / M04.T01. Train labels are aliases; AMB-* identifiers are authoritative."
 }

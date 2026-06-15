@@ -38,8 +38,8 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 18 | M02.T07 | AMB-1133 | Life Consequence Engine | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit (`75ecbf553b9bb43b17736ee7d45bc8671928e796`) |
 | 19 | M02.T08 | AMB-1117 | High-risk safety and jurisdiction handling | `scripts/codex/program-phase-gate.sh amb-master M02` | Done / source commit `172614b0b8b543fbf2f8287ddc7abfc101172195` / closeout metadata `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` / AMB-1114 handoff active |
 | 20 | M03.T01 | AMB-1114 | Golden vertical slice | `scripts/codex/program-phase-gate.sh amb-master M03` | Done / source commit `9e2a26757bb6c421492c55d3e0898dbbb8f4cdfc` / closeout metadata `b95399da61bdb433c6ea52087a25a47695cdb465` / final reconciliation `ecc905cf854ab1b0d6feb1167beaca4da6369437` |
-| 21 | M03.T02 | AMB-1115 | First-run activation | `scripts/codex/program-phase-gate.sh amb-master M03` | Source/control-plane pushed (`7ea6a1de182443d87f02898a2510fc2f251ac08c`) / closeout metadata pushed (`70defd7018d5da1edbdebca02b7efeaac6154e28`) / final proof-index pending |
-| 22 | M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | `scripts/codex/program-phase-gate.sh amb-master M04` | Next eligible after AMB-1115 closeout |
+| 21 | M03.T02 | AMB-1115 | First-run activation | `scripts/codex/program-phase-gate.sh amb-master M03` | Done in Linear / source `7ea6a1de182443d87f02898a2510fc2f251ac08c` / closeout metadata `70defd7018d5da1edbdebca02b7efeaac6154e28` / final proof-index `ea6aae422940715a981df7fc3919f596bc74ab18` |
+| 22 | M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | `scripts/codex/program-phase-gate.sh amb-master M04` | Next eligible; refresh live Linear before source edits |
 | 23 | M04.T02 | AMB-1059 | Global search entry and presentation: trusted retrieval handoff | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T01 |
 | 24 | M04.T03 | AMB-1060 | Tokenized design system foundation: flagship semantic base | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T02 |
 | 25 | M04.T04 | AMB-1061 | Core reusable component set: native interaction primitives | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T03 |
@@ -55,4 +55,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Finish AMB-1115 closeout metadata and Linear Done reconciliation, then refresh live Linear for `AMB-1058` / `M04.T01` and start the Root navigation architecture train.
+Refresh live Linear for `AMB-1058` / `M04.T01`, then start the Root navigation architecture train.

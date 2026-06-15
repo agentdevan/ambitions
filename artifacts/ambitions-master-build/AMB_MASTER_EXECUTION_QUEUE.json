@@ -177,7 +177,7 @@
       "linear_id": "AMB-1115",
       "phase": "M03",
       "title": "First-run activation",
-      "state": "Source/control-plane pushed 7ea6a1de182443d87f02898a2510fc2f251ac08c / closeout metadata pushed 70defd7018d5da1edbdebca02b7efeaac6154e28 / final proof-index pending"
+      "state": "Done in Linear / source 7ea6a1de182443d87f02898a2510fc2f251ac08c / closeout metadata 70defd7018d5da1edbdebca02b7efeaac6154e28 / final proof-index ea6aae422940715a981df7fc3919f596bc74ab18"
     },
     {
       "rank": 22,
@@ -185,7 +185,7 @@
       "linear_id": "AMB-1058",
       "phase": "M04",
       "title": "Root navigation architecture: five-surface shell proof",
-      "state": "Next eligible after AMB-1115 closeout"
+      "state": "Next eligible; refresh live Linear before source edits"
     },
     {
       "rank": 23,

@@ -5,13 +5,13 @@
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "7ea6a1de182443d87f02898a2510fc2f251ac08c",
   "closeout_metadata_commit": "70defd7018d5da1edbdebca02b7efeaac6154e28",
-  "remote_verified_commit": "70defd7018d5da1edbdebca02b7efeaac6154e28",
-  "linear_issue_status": "In Progress",
+  "remote_verified_commit": "ea6aae422940715a981df7fc3919f596bc74ab18",
+  "linear_issue_status": "Done",
   "linear_progress_issue_comment": "9bbaa9d7-79f7-43c2-a79d-cbea58fb1be0",
   "linear_progress_project_comment": "3aee4a01-e8fb-440c-8ec4-bb509f11ab99",
   "linear_source_push_issue_comment": "63bd19b1-dadf-4b86-a5fb-11eeba9ea963",
   "linear_source_push_project_comment": "3f432d84-939f-42d8-a510-9679391265b9",
-  "status": "Green for the focused AMB-1115 First-run Activation runtime source and closeout metadata scope; source/control-plane and closeout metadata commits pushed and remote verified; final proof-index and Linear Done reconciliation pending",
+  "status": "Green for the focused AMB-1115 First-run Activation runtime source and control-plane closeout scope; source/control-plane, closeout metadata, and proof-index reconciliation commits pushed and remote verified; AMB-1115 Done in Linear",
   "validation": [
     {
       "command": "xcodegen generate",
@@ -126,7 +126,7 @@
     {
       "command": "bash scripts/codex/program-proof-index.sh amb-master",
       "result": "pass after AMB-1115 proof-ledger entry and M04 queue/map advance",
-      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T233252.log"
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T233610.log"
     },
     {
       "command": "python3 -m json.tool artifacts/proof-ledger/proof-index.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1115-validation.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json",
@@ -172,5 +172,11 @@
     "title": "Root navigation architecture: five-surface shell proof"
   },
   "linear_closeout_metadata_issue_comment": "5a4c386b-0f70-4991-bd3d-a59a28ded6c5",
-  "linear_closeout_metadata_project_comment": "d25bdc0c-bc73-454b-b93a-726f86b4b2e2"
+  "linear_closeout_metadata_project_comment": "d25bdc0c-bc73-454b-b93a-726f86b4b2e2",
+  "final_reconciliation_commit": "ea6aae422940715a981df7fc3919f596bc74ab18",
+  "linear_done_transition": "2026-06-15T03:34:02.710Z",
+  "linear_done_issue_comment": "93802cf1-bc6f-4471-9407-ff568f4c07cb",
+  "linear_done_project_comment": "d3f170d4-c35d-4878-84a6-5e30f82ed423",
+  "linear_final_proof_issue_comment": "13b66f3e-2f89-4425-bc76-06ae02cc52c6",
+  "linear_final_proof_project_comment": "2a1037ac-59e9-40e5-83f6-9a33ff50f8cf"
 }
