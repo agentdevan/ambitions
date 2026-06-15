@@ -10,13 +10,13 @@ Train label: `M03.T02`
 
 Parent or umbrella issue: `AMB-1114`
 
-Green/Yellow/Red status: Green for the focused AMB-1115 First-run Activation runtime source scope; source/control-plane commit `7ea6a1de182443d87f02898a2510fc2f251ac08c` is pushed and remote-verified; closeout metadata and final Linear Done reconciliation are in progress.
+Green/Yellow/Red status: Green for the focused AMB-1115 First-run Activation runtime source and closeout metadata scope; source/control-plane commit `7ea6a1de182443d87f02898a2510fc2f251ac08c` and closeout metadata commit `70defd7018d5da1edbdebca02b7efeaac6154e28` are pushed and remote-verified; final proof-index and Linear Done reconciliation are in progress.
 
 Pushed to main: yes; source/control-plane commit `7ea6a1de182443d87f02898a2510fc2f251ac08c` is pushed and remote-verified.
 
 Push hash: `7ea6a1de182443d87f02898a2510fc2f251ac08c`
 
-Closeout metadata hash: pending
+Closeout metadata hash: `70defd7018d5da1edbdebca02b7efeaac6154e28`
 
 Final reconciliation hash: pending
 
@@ -61,7 +61,9 @@ Validation run:
 - `scripts/codex/program-phase-gate.sh amb-master M03` - pass on committed source/control-plane SHA `7ea6a1de182443d87f02898a2510fc2f251ac08c`; `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T232030.log`.
 - `git push origin main` - pushed source/control-plane commit `7ea6a1de182443d87f02898a2510fc2f251ac08c`.
 - `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` - local HEAD and `origin/main` both returned `7ea6a1de182443d87f02898a2510fc2f251ac08c` after source/control-plane push.
-- `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1115 proof-ledger entry and M04 queue/map advance; latest rerun `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T232924.log`.
+- `git push origin main` - pushed closeout metadata commit `70defd7018d5da1edbdebca02b7efeaac6154e28`.
+- `git rev-parse HEAD` and `git ls-remote origin refs/heads/main` - local HEAD and `origin/main` both returned `70defd7018d5da1edbdebca02b7efeaac6154e28` after closeout metadata push.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1115 proof-ledger entry and M04 queue/map advance; latest rerun `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T233252.log`.
 - `python3 -m json.tool artifacts/proof-ledger/proof-index.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1115-validation.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json` - pass after metadata advance.
 - `python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1115-first-run-activation-runtime.md` - pass after metadata advance.
 - `python3 scripts/codex/amb-master-readiness-validate.py --phase M03` - pass after metadata advance.
@@ -83,7 +85,7 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/validation/AMB-1115/adjacent-first-run-activation-tests.log`
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260614T232030.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T232030.log`
-- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T232924.log`
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260614T233252.log`
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260614T232803.log`
 - `artifacts/ambitions-master-build/script-output/AMB-1115-release-claim-safety-scan-rerun.log`
 - `artifacts/ambitions-master-build/script-output/AMB-1115-no-unsupported-ai-claim-scan-rerun.log`
@@ -120,6 +122,8 @@ Linear reconciliation:
 - AMB-1115 progress project comment: `3aee4a01-e8fb-440c-8ec4-bb509f11ab99`.
 - AMB-1115 source-push issue comment: `63bd19b1-dadf-4b86-a5fb-11eeba9ea963`.
 - AMB-1115 source-push project comment: `3f432d84-939f-42d8-a510-9679391265b9`.
+- AMB-1115 closeout metadata issue comment: `5a4c386b-0f70-4991-bd3d-a59a28ded6c5`.
+- AMB-1115 closeout metadata project comment: `d25bdc0c-bc73-454b-b93a-726f86b4b2e2`.
 - AMB-1115 Done transition: pending final metadata validation and Linear update.
 
 Next train: `AMB-1058` / `M04.T01`

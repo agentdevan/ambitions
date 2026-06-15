@@ -161,7 +161,7 @@
       "linear_id": "AMB-1115",
       "title": "First-run activation: first goal, first Recommended Step, first recovery option",
       "milestone": "M03",
-      "status": "Source/control-plane pushed 7ea6a1de182443d87f02898a2510fc2f251ac08c / closeout metadata pending"
+      "status": "Source/control-plane pushed 7ea6a1de182443d87f02898a2510fc2f251ac08c / closeout metadata pushed 70defd7018d5da1edbdebca02b7efeaac6154e28 / final proof-index pending"
     },
     {
       "train": "M04.T01",

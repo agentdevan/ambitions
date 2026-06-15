@@ -4,14 +4,14 @@
   "program": "amb-master",
   "project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
   "source_commit": "7ea6a1de182443d87f02898a2510fc2f251ac08c",
-  "closeout_metadata_commit": "pending",
-  "remote_verified_commit": "7ea6a1de182443d87f02898a2510fc2f251ac08c",
+  "closeout_metadata_commit": "70defd7018d5da1edbdebca02b7efeaac6154e28",
+  "remote_verified_commit": "70defd7018d5da1edbdebca02b7efeaac6154e28",
   "linear_issue_status": "In Progress",
   "linear_progress_issue_comment": "9bbaa9d7-79f7-43c2-a79d-cbea58fb1be0",
   "linear_progress_project_comment": "3aee4a01-e8fb-440c-8ec4-bb509f11ab99",
   "linear_source_push_issue_comment": "63bd19b1-dadf-4b86-a5fb-11eeba9ea963",
   "linear_source_push_project_comment": "3f432d84-939f-42d8-a510-9679391265b9",
-  "status": "Green for the focused AMB-1115 First-run Activation runtime source scope; source/control-plane commit pushed and remote verified; closeout metadata and Linear Done transition pending",
+  "status": "Green for the focused AMB-1115 First-run Activation runtime source and closeout metadata scope; source/control-plane and closeout metadata commits pushed and remote verified; final proof-index and Linear Done reconciliation pending",
   "validation": [
     {
       "command": "xcodegen generate",
@@ -121,12 +121,12 @@
     },
     {
       "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main",
-      "result": "local HEAD and origin/main both 7ea6a1de182443d87f02898a2510fc2f251ac08c after source/control-plane push"
+      "result": "local HEAD and origin/main both 70defd7018d5da1edbdebca02b7efeaac6154e28 after closeout metadata push"
     },
     {
       "command": "bash scripts/codex/program-proof-index.sh amb-master",
       "result": "pass after AMB-1115 proof-ledger entry and M04 queue/map advance",
-      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T232924.log"
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260614T233252.log"
     },
     {
       "command": "python3 -m json.tool artifacts/proof-ledger/proof-index.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1115-validation.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json",
@@ -140,6 +140,14 @@
       "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
       "result": "pass after queue/map next-train advance",
       "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260614T232803.log"
+    },
+    {
+      "command": "git push origin main # closeout metadata",
+      "result": "pushed closeout metadata commit 70defd7018d5da1edbdebca02b7efeaac6154e28"
+    },
+    {
+      "command": "git rev-parse HEAD && git ls-remote origin refs/heads/main # closeout metadata",
+      "result": "local HEAD and origin/main both 70defd7018d5da1edbdebca02b7efeaac6154e28 after closeout metadata push"
     }
   ],
   "proof_artifacts": [
@@ -162,5 +170,7 @@
     "train": "M04.T01",
     "linear_id": "AMB-1058",
     "title": "Root navigation architecture: five-surface shell proof"
-  }
+  },
+  "linear_closeout_metadata_issue_comment": "5a4c386b-0f70-4991-bd3d-a59a28ded6c5",
+  "linear_closeout_metadata_project_comment": "d25bdc0c-bc73-454b-b93a-726f86b4b2e2"
 }

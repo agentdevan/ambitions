@@ -19,7 +19,7 @@ project:
 current_phase:
   label: "M04"
   title: "Native Shell + Design System Foundation"
-  status: "M03 source trains complete through AMB-1115 source/control-plane push; AMB-1115 closeout metadata and final Linear Done reconciliation in progress"
+  status: "M03 source trains complete through AMB-1115 source/control-plane and closeout metadata pushes; AMB-1115 final proof-index and Linear Done reconciliation in progress"
 current_train:
   label: "M04.T01"
   linear_id: "AMB-1058"
@@ -29,7 +29,7 @@ last_closed_train:
   label: "M03.T02"
   linear_id: "AMB-1115"
   title: "First-run activation: first goal, first Recommended Step, first recovery option"
-  status: "Source/control-plane commit 7ea6a1de182443d87f02898a2510fc2f251ac08c pushed and remote verified; closeout metadata and Done transition pending"
+  status: "Source/control-plane commit 7ea6a1de182443d87f02898a2510fc2f251ac08c and closeout metadata commit 70defd7018d5da1edbdebca02b7efeaac6154e28 pushed and remote verified; final proof-index and Done transition pending"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
@@ -51,7 +51,7 @@ validation_required_before_closeout:
   - "scripts/codex/program-phase-gate.sh amb-master M03"
   - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1115-first-run-activation-runtime.md"
 latest_validation:
-  status: "AMB-1115 focused implementation validation Green; source/control-plane commit pushed and remote verified; closeout metadata and final Linear Done reconciliation pending"
+  status: "AMB-1115 focused implementation validation Green; source/control-plane and closeout metadata commits pushed and remote verified; final proof-index and Linear Done reconciliation pending"
   logs:
     - "DerivedData Test-Ambitions-2026.06.14_19-11-03--0400.xcresult"
     - "DerivedData Test-Ambitions-2026.06.14_19-16-37--0400.xcresult"
@@ -90,7 +90,7 @@ latest_validation:
 - `AMB-1133` / `M02.T07`: `75ecbf553b9bb43b17736ee7d45bc8671928e796` source implementation/control-plane commit; `bf1511cd4e7fbd585772bd99ba765624c0fb83d4` closeout metadata commit; `bf1e7afc56dee127c7fe49bc4326d37086a7262e` final repository reconciliation pushed to `main`, remote verified, marked Done in Linear, and final project activity updated (`3ee2a773-f15f-4e39-8e2f-ef4bf5610278`).
 - `AMB-1117` / `M02.T08`: source/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195` and closeout metadata commit `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` pushed and remote verified after Green focused validation; AMB-1114 handoff active.
 - `AMB-1114` / `M03.T01`: final proof-index reconciliation commit `ecc905cf854ab1b0d6feb1167beaca4da6369437` pushed and remote verified; AMB-1114 marked Done in Linear; next train is `AMB-1115` / `M03.T02`.
-- `AMB-1115` / `M03.T02`: source/control-plane commit `7ea6a1de182443d87f02898a2510fc2f251ac08c` pushed and remote verified; closeout metadata and final Linear Done reconciliation pending; next train is `AMB-1058` / `M04.T01`.
+- `AMB-1115` / `M03.T02`: source/control-plane commit `7ea6a1de182443d87f02898a2510fc2f251ac08c` and closeout metadata commit `70defd7018d5da1edbdebca02b7efeaac6154e28` pushed and remote verified; final proof-index and Linear Done reconciliation pending; next train is `AMB-1058` / `M04.T01`.
 
 ## Non-Claims
 
