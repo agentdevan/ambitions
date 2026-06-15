@@ -7,7 +7,7 @@
   "title": "Global search entry and presentation: trusted retrieval handoff",
   "status": "green_for_source_control_plane_scope",
   "source_commit": "7d45c59f6f3f0e449f92e023f73a25e4ce02a34a",
-  "closeout_metadata_commit": "pending_this_metadata_commit",
+  "closeout_metadata_commit": "e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc",
   "final_reconciliation_commit": "pending_final_proof_index_reconciliation",
   "baseline_commit": "90780953d9fb170895a7a0d657b03493f500d7e4",
   "branch": "main",
@@ -92,6 +92,11 @@
       "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
       "result": "pass",
       "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093202.log"
+    },
+    {
+      "command": "bash scripts/codex/program-proof-index.sh amb-master",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093426.log"
     }
   ],
   "screenshots": [

@@ -10,13 +10,13 @@ Train label: `M04.T02`
 
 Parent or umbrella issue: `AMB-1046`
 
-Green/Yellow/Red status: Green for the focused AMB-1059 global search entry and trusted retrieval handoff source/control-plane scope; source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` is pushed and remote-verified on `origin/main`. Closeout metadata and final proof-index reconciliation are in progress before Linear Done.
+Green/Yellow/Red status: Green for the focused AMB-1059 global search entry and trusted retrieval handoff source/control-plane scope; source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` and closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc` are pushed and remote-verified on `origin/main`. Final proof-index reconciliation is in progress before Linear Done.
 
 Pushed to main: yes; source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` is pushed and remote-verified.
 
 Push hash: `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a`
 
-Closeout metadata hash: pending this metadata commit
+Closeout metadata hash: `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc`
 
 Final reconciliation hash: pending final proof-index reconciliation
 
@@ -54,6 +54,7 @@ Validation run:
 - `python3 scripts/codex/amb-master-repository-wiring-validate.py` - pass after updating the program registry and repository wiring validator to expect AMB-1060 as the next runnable gate.
 - `bash scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-preflight-20260615T093202.log`.
 - `bash scripts/codex/program-phase-gate.sh amb-master M04` - pass after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093202.log`.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1059 proof-ledger entry; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093426.log`.
 
 Reviewer passes:
 - Deterministic pre/post parallel implementation guard passed Green.
@@ -70,6 +71,8 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T084729.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260615T093202.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T093202.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T093426.log` - local ignored script output.
+- `artifacts/proof-ledger/proof-index.json`
 
 Red blockers: none
 

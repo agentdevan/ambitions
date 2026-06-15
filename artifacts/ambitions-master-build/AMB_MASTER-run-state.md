@@ -29,7 +29,7 @@ last_closed_train:
   label: "M04.T02"
   linear_id: "AMB-1059"
   title: "Global search entry and presentation: trusted retrieval handoff"
-  status: "Source/control-plane commit 7d45c59f6f3f0e449f92e023f73a25e4ce02a34a pushed and remote verified; closeout metadata pending this commit; final proof-index reconciliation pending"
+  status: "Source/control-plane commit 7d45c59f6f3f0e449f92e023f73a25e4ce02a34a and closeout metadata commit e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc pushed and remote verified; final proof-index reconciliation pending"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
@@ -86,7 +86,7 @@ latest_validation:
 - `AMB-1114` / `M03.T01`: final proof-index reconciliation commit `ecc905cf854ab1b0d6feb1167beaca4da6369437` pushed and remote verified; AMB-1114 marked Done in Linear; next train is `AMB-1115` / `M03.T02`.
 - `AMB-1115` / `M03.T02`: final proof-index reconciliation commit `ea6aae422940715a981df7fc3919f596bc74ab18` pushed and remote verified; AMB-1115 marked Done in Linear; next train is `AMB-1058` / `M04.T01`.
 - `AMB-1058` / `M04.T01`: final proof-index reconciliation commit `83c5c9558064013628890ec311ef8eca8303a813` pushed and remote verified; AMB-1058 marked Done in Linear; next train is `AMB-1059` / `M04.T02`.
-- `AMB-1059` / `M04.T02`: source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` pushed and remote verified; closeout metadata and final proof-index reconciliation in progress; next train is `AMB-1060` / `M04.T03` after Linear Done.
+- `AMB-1059` / `M04.T02`: source/control-plane commit `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` and closeout metadata commit `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc` pushed and remote verified; final proof-index reconciliation in progress; next train is `AMB-1060` / `M04.T03` after Linear Done.
 
 ## Non-Claims
 
