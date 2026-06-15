@@ -21,6 +21,7 @@ locked_concepts:
       - "AMB-579"
       - "AMB-590"
       - "AMB-1114"
+      - "AMB-1061"
     blocked_paths:
       - "Native/Ambitions/Features/Today"
       - "Sources/Previews"
@@ -33,7 +34,7 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-06-14"
+    last_updated: "2026-06-15"
   - concept_id: "capture_routing"
     concept_name: "Capture parser/routing/SmartAttachment"
     reason: "Duplicate/supersession risk requires Champion Merge resolution before feature work."
@@ -239,6 +240,7 @@ locked_concepts:
       - "AMB-582"
       - "AMB-583"
       - "AMB-1060"
+      - "AMB-1061"
     blocked_paths:
       - "Sources"
       - "AppUI/Sources"
@@ -253,4 +255,4 @@ locked_concepts:
       - "docs/audits/intelligence-consolidation/BEST_CODE_RESCUE_LEDGER.md"
     no_claim_boundary: "No feature train may claim this concept final until Champion Merge proof closes."
     created_by_batch: "AMB-INTELLIGENCE-CONSOLIDATION-CHAMPION-MERGE-PLAN-02"
-    last_updated: "2026-06-08"
+    last_updated: "2026-06-15"
