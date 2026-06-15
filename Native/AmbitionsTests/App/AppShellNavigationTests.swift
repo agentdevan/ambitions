@@ -6,7 +6,6 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(AppTab.allCases, [.today, .goals, .time, .motion, .you])
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
         XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "motion", "you"])
-        XCTAssertFalse(AppTab.allCases.contains(.capture))
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
@@ -16,7 +15,7 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     func testCanonicalRawValuesStayLimitedToActiveTopLevelTabs() {
-        XCTAssertEqual(AppTab(rawValue: "capture"), .capture)
+        XCTAssertNil(AppTab(rawValue: "capture"))
         XCTAssertEqual(AppTab(rawValue: "time"), .time)
         XCTAssertEqual(AppTab(rawValue: "motion"), .motion)
         XCTAssertEqual(AppTab(rawValue: "you"), .you)
@@ -26,13 +25,12 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertNil(AppTab(rawValue: "profile"))
         XCTAssertNil(AppTab(rawValue: "habits"))
         XCTAssertNil(AppTab(rawValue: "insights"))
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "captures"), .capture)
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "captures"), .today)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "pulse"), .motion)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "plan"), .time)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "profile"), .you)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "habits"), .time)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "insights"), .you)
-        XCTAssertEqual(AppTab.capture.canonicalTopLevelTab, .today)
         XCTAssertEqual(AppTab.time.canonicalTopLevelTab, .time)
         XCTAssertEqual(AppTab.motion.canonicalTopLevelTab, .motion)
         XCTAssertEqual(AppTab.you.canonicalTopLevelTab, .you)
@@ -42,10 +40,57 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(AppTab.motion.title, "Motion")
         XCTAssertEqual(AppTab.you.rawValue, "you")
         XCTAssertEqual(AppTab.you.title, "You")
-        XCTAssertFalse(AppTab.capture.isCanonicalTopLevel)
         XCTAssertTrue(AppTab.time.isCanonicalTopLevel)
         XCTAssertTrue(AppTab.motion.isCanonicalTopLevel)
         XCTAssertTrue(AppTab.you.isCanonicalTopLevel)
+    }
+
+    func testRootShellTopInsetDoesNotPullSurfaceContentUnderHeader() {
+        XCTAssertGreaterThanOrEqual(
+            AppShellGeometry.topInsetSpacing(
+                hasBackButton: false,
+                dynamicTypeIsAccessibilitySize: false
+            ),
+            0
+        )
+        XCTAssertGreaterThanOrEqual(
+            AppShellGeometry.topInsetSpacing(
+                hasBackButton: false,
+                dynamicTypeIsAccessibilitySize: true
+            ),
+            0
+        )
+        XCTAssertEqual(
+            AppShellGeometry.topInsetSpacing(
+                hasBackButton: true,
+                dynamicTypeIsAccessibilitySize: false
+            ),
+            0
+        )
+        XCTAssertGreaterThanOrEqual(
+            AppShellGeometry.topContentClearance(
+                reservesPrimaryObjectTopClearance: true,
+                dynamicTypeIsAccessibilitySize: false
+            ),
+            80
+        )
+        XCTAssertGreaterThan(
+            AppShellGeometry.topContentClearance(
+                reservesPrimaryObjectTopClearance: true,
+                dynamicTypeIsAccessibilitySize: true
+            ),
+            AppShellGeometry.topContentClearance(
+                reservesPrimaryObjectTopClearance: true,
+                dynamicTypeIsAccessibilitySize: false
+            )
+        )
+        XCTAssertEqual(
+            AppShellGeometry.topContentClearance(
+                reservesPrimaryObjectTopClearance: false,
+                dynamicTypeIsAccessibilitySize: true
+            ),
+            0
+        )
     }
 
     func testCanonicalSurfaceContractsBindEachTabToOnePrimaryObject() {
@@ -65,7 +110,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(AppTab.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
         XCTAssertEqual(AppTab.motion.surfaceContract.primaryObjectTitle, "Motion Current")
         XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "Personal Runtime")
-        XCTAssertFalse(AmbitionsSurfaceContractRegistry.canonicalContracts.map(\.tab).contains(.capture))
+        XCTAssertFalse(AmbitionsSurfaceContractRegistry.canonicalContracts.map(\.tab.rawValue).contains("capture"))
     }
 
     func testSurfaceContractsPreserveRuntimeInspectionRequirements() {
@@ -232,23 +277,22 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testNavigationInitializesCapturePreferenceIntoTodayCompatibilityFallback() {
-        let navigation = AppNavigationModel(selectedTab: .capture)
+    func testLegacyCapturePreferenceLoadsIntoTodayCompatibilityFallback() {
+        let navigation = AppNavigationModel(legacyTabRawValue: "capture")
 
         XCTAssertEqual(navigation.selectedTab, .today)
-        XCTAssertFalse(AppTab.capture.isCanonicalTopLevel)
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertTrue(navigation.youPath.isEmpty)
     }
 
     @MainActor
-    func testLegacyCapturePreferenceLoadsIntoTodayCompatibilityFallback() {
+    func testLegacyCapturesPreferenceLoadsIntoTodayCompatibilityFallback() {
         let navigation = AppNavigationModel(legacyTabRawValue: "captures")
 
         XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertNil(navigation.activeOverlay)
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
     }
 
     @MainActor
@@ -276,7 +320,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
     }
 
     @MainActor

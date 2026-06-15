@@ -91,7 +91,7 @@ final class OnboardingAndDegradedStateTests: XCTestCase {
     func testCaptureFirstRouteDecision() {
         let decision = RepositoryBackedOnboardingService.routeDecision(for: .captureFirst)
 
-        XCTAssertEqual(decision.selectedTab, .capture)
+        XCTAssertEqual(decision.selectedTab, .today)
         XCTAssertEqual(decision.overlayIntent, .quickCapture)
         XCTAssertEqual(decision.presentationContext, .quickCapture)
     }

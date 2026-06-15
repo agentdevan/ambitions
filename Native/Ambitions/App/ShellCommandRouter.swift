@@ -102,10 +102,6 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
     func route(to destination: ShellCommandDestination, source: ShellCommandEntrySource) {
         switch destination {
         case let .tab(tab):
-            if tab == .capture {
-                navigation.presentCaptureCompatibilityRoute(source: source)
-                return
-            }
             navigation.selectTab(tab)
         case let .goal(goalID):
             navigation.openGoalDetail(goalID: goalID)

@@ -10,7 +10,7 @@ final class ShellPreviewMatrixTests: XCTestCase {
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.dynamicTypeCategory.contains("Accessibility") })
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.reduceMotion })
         XCTAssertTrue(ShellPreviewMatrix.validationFailures().isEmpty)
-        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
     }
 
     func testAFRI005PreviewMatrixCoversMajorShellStates() {

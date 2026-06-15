@@ -8,10 +8,13 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     case time
     case motion
     case you
-    case capture
 
     static var allCases: [AppTab] {
         [.today, .goals, .time, .motion, .you]
+    }
+
+    static var capture: AppShellCaptureCompatibilityMetadata.Type {
+        AppShellCaptureCompatibilityMetadata.self
     }
 
     var id: String { rawValue }
@@ -19,7 +22,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     init?(rawValue: String) {
         switch rawValue.lowercased() {
         case "today": self = .today
-        case "capture": self = .capture
         case "goals": self = .goals
         case "time": self = .time
         case "motion": self = .motion
@@ -53,17 +55,11 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case .time: return "time"
         case .motion: return "motion"
         case .you: return "you"
-        case .capture: return "capture"
         }
     }
 
     var canonicalTopLevelTab: AppTab {
-        switch self {
-        case .capture:
-            .today
-        default:
-            self
-        }
+        self
     }
 
     var isCanonicalTopLevel: Bool {
@@ -77,7 +73,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case .time: "Time"
         case .motion: "Motion"
         case .you: "You"
-        case .capture: "Capture"
         }
     }
 
@@ -88,7 +83,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case .time: "clock.badge"
         case .motion: "point.topleft.down.curvedto.point.bottomright.up"
         case .you: "person.crop.circle"
-        case .capture: "tray.full"
         }
     }
 
@@ -99,6 +93,10 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     var surfaceContract: AmbitionsSurfaceContract {
         AmbitionsSurfaceContractRegistry.contract(for: self)
     }
+}
+
+enum AppShellCaptureCompatibilityMetadata {
+    static let systemImage = AppShellCaptureAccessModel.systemImage
 }
 
 struct AmbitionsSurfaceContract: Hashable, Sendable {
@@ -184,7 +182,6 @@ enum AmbitionsSurfaceContractRegistry {
         case .time: "LifeShape Field"
         case .motion: "Motion Current"
         case .you: "Personal Runtime"
-        case .capture: "Placement Field"
         }
     }
 }
@@ -193,7 +190,7 @@ enum LegacyIARouteCompatibility {
     static func canonicalTab(forRawTab rawValue: String) -> AppTab? {
         switch rawValue.lowercased() {
         case "capture", "captures":
-            .capture
+            .today
         case "pulse":
             .motion
         case "plan", "habits":

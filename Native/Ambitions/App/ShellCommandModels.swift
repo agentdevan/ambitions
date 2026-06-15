@@ -326,8 +326,6 @@ enum AppShellContextualToolbarCatalog {
                 accessibilityIdentifier: "shell.you.history-button",
                 accessibilityHint: "Opens the You-owned history surface."
             )
-        case .capture:
-            return primaryAction(for: .today)
         }
     }
 
@@ -346,6 +344,7 @@ enum AppShellContextualToolbarCatalog {
 
 enum AppShellCaptureAccessModel {
     static let toolbarTitle = "Capture"
+    static let systemImage = "square.and.pencil"
     static let toolbarAccessibilityLabel = "Capture"
     static let toolbarAccessibilityHint = "Opens the Capture composer for this surface/context."
     static let activatedSeamAccessibilityLabel = "Capture composer"
@@ -363,8 +362,6 @@ enum AppShellCaptureAccessModel {
             .motionQuickCapture
         case .you:
             .youQuickCapture
-        case .capture:
-            .todayQuickCapture
         }
     }
 

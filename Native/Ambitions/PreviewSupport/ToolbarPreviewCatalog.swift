@@ -57,7 +57,6 @@ enum ToolbarPreviewCatalog {
         case .time: "LifeShape Field"
         case .motion: "Motion Current"
         case .you: "User System Profile"
-        case .capture: "Atmosphere Composer"
         }
     }
 }

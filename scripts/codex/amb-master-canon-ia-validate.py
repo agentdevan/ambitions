@@ -84,7 +84,9 @@ def validate() -> list[str]:
 
     app_tab = read("Native/Ambitions/App/AppTab.swift")
     check(re.search(r"static var allCases: \[AppTab\]\s*\{\s*\[\.today, \.goals, \.time, \.motion, \.you\]", app_tab, re.S) is not None, failures, "AppTab.allCases does not lock Today/Goals/Time/Motion/You")
-    check("case .capture:\n            .today" in app_tab, failures, "Capture compatibility must map to Today, not a root tab")
+    check('case "capture": self = .capture' not in app_tab, failures, "AppTab raw capture case must not reappear as a root tab")
+    check('case "capture", "captures":\n            .today' in app_tab, failures, "Capture compatibility must map to Today, not a root tab")
+    check('case "capture", "captures":\n            return .openTimeRoute(.captureInbox)' in app_tab, failures, "Capture external compatibility must route to the global Capture overlay/inbox path")
     check('case "pulse":\n            .motion' in app_tab, failures, "Pulse compatibility must map to Motion")
     app_intent = read("Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift")
     check("Open Today, Goals, Time, Motion, You, global Capture" in app_intent, failures, "Open Ambitions app intent description is stale")

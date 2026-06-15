@@ -295,7 +295,7 @@ enum DegradedStateOrchestrator {
             title: "The LifeShape Field is open",
             explanation: FlagshipObjectStateOwner.lifeShapeContourMap.emptyExplanation,
             primaryAction: DegradedStateAction(title: "Create a goal", systemImage: AppTab.goals.systemImage, routingHint: .createGoal),
-            secondaryAction: DegradedStateAction(title: "Open Capture", systemImage: AppTab.capture.systemImage, routingHint: .captures),
+            secondaryAction: DegradedStateAction(title: "Open Capture", systemImage: AppShellCaptureAccessModel.systemImage, routingHint: .captures),
             tone: .selected,
             icon: FlagshipObjectStateOwner.lifeShapeContourMap.icon
         )

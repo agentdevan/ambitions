@@ -32,11 +32,11 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Saved as Idea")
     }
 
-    func testRouteToLegacyCaptureTabUsesGlobalCaptureOverlay() {
+    func testRouteToCaptureInboxUsesGlobalCaptureOverlay() {
         let navigation = AppNavigationModel(selectedTab: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
-        router.route(to: .tab(.capture), source: .deepLink)
+        router.route(to: .timeRoute(.captureInbox), source: .deepLink)
 
         XCTAssertEqual(navigation.selectedTab, .time)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)

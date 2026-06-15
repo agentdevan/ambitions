@@ -239,9 +239,6 @@ final class AppNavigationModel {
     }
 
     func presentCaptureCompatibilityRoute(source: ShellCommandEntrySource) {
-        if selectedTab == .capture {
-            selectedTab = .today
-        }
         presentCommandSheet(
             intent: .quickCapture,
             source: source,
@@ -374,8 +371,6 @@ final class AppNavigationModel {
             todayEntryContext = .standard
         case .goals:
             goalsPath = []
-        case .capture:
-            break
         case .time:
             timePath = []
         case .motion:

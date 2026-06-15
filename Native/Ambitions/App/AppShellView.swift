@@ -109,6 +109,20 @@ struct AppShellHeaderKeyboardShortcut {
     let modifiers: EventModifiers
 }
 
+enum AppShellGeometry {
+    static func topInsetSpacing(hasBackButton: Bool, dynamicTypeIsAccessibilitySize: Bool) -> CGFloat {
+        0
+    }
+
+    static func topContentClearance(
+        reservesPrimaryObjectTopClearance: Bool,
+        dynamicTypeIsAccessibilitySize: Bool
+    ) -> CGFloat {
+        guard reservesPrimaryObjectTopClearance else { return 0 }
+        return dynamicTypeIsAccessibilitySize ? 132 : 92
+    }
+}
+
 struct AppShellScaffold<Content: View>: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
@@ -118,6 +132,7 @@ struct AppShellScaffold<Content: View>: View {
     let backButtonAccessibilityIdentifier: String?
     let onBack: (() -> Void)?
     let trailingButtons: [AppShellHeaderButton]
+    let reservesPrimaryObjectTopClearance: Bool
     let content: Content
 
     init(
@@ -127,6 +142,7 @@ struct AppShellScaffold<Content: View>: View {
         backButtonAccessibilityIdentifier: String? = nil,
         onBack: (() -> Void)? = nil,
         trailingButtons: [AppShellHeaderButton] = [],
+        reservesPrimaryObjectTopClearance: Bool = false,
         @ViewBuilder content: () -> Content
     ) {
         self.title = title
@@ -135,6 +151,7 @@ struct AppShellScaffold<Content: View>: View {
         self.backButtonAccessibilityIdentifier = backButtonAccessibilityIdentifier
         self.onBack = onBack
         self.trailingButtons = trailingButtons
+        self.reservesPrimaryObjectTopClearance = reservesPrimaryObjectTopClearance
         self.content = content()
     }
 
@@ -146,6 +163,7 @@ struct AppShellScaffold<Content: View>: View {
     @ViewBuilder
     private var scaffoldedContent: some View {
         content
+            .padding(.top, topContentClearance)
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 Color.clear
                     .frame(height: bottomChromeClearance)
@@ -153,6 +171,13 @@ struct AppShellScaffold<Content: View>: View {
             }
             .safeAreaInset(edge: .top, spacing: topInsetSpacing) {
                 headerRail
+                    .hidden()
+                    .accessibilityHidden(true)
+            }
+            .overlay(alignment: .top) {
+                headerRail
+                    .safeAreaPadding(.top)
+                    .zIndex(1)
             }
     }
 
@@ -172,10 +197,17 @@ struct AppShellScaffold<Content: View>: View {
     }
 
     private var topInsetSpacing: CGFloat {
-        if onBack == nil {
-            return dynamicTypeSize.isAccessibilitySize ? -28 : -48
-        }
-        return 0
+        AppShellGeometry.topInsetSpacing(
+            hasBackButton: onBack != nil,
+            dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+        )
+    }
+
+    private var topContentClearance: CGFloat {
+        AppShellGeometry.topContentClearance(
+            reservesPrimaryObjectTopClearance: reservesPrimaryObjectTopClearance,
+            dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+        )
     }
 }
 
@@ -195,6 +227,7 @@ private struct AppShellHeaderRail: View {
             headerRow
             divider
         }
+        .frame(maxWidth: .infinity)
         .background(headerMaterial)
         .shadow(color: headerShadowColor, radius: headerShadowRadius, x: 0, y: 6)
         .accessibilityElement(children: .contain)
@@ -218,6 +251,7 @@ private struct AppShellHeaderRail: View {
         .padding(.horizontal, theme.spacing.lg)
         .padding(.top, headerTopClearance)
         .padding(.bottom, headerBottomClearance)
+        .frame(maxWidth: .infinity)
         .background(headerMaterial)
     }
 

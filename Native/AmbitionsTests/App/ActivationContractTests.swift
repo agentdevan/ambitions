@@ -32,7 +32,7 @@ final class ActivationContractTests: XCTestCase {
 
         XCTAssertEqual(rules.map(\.surface), [.today, .goals, .capture, .plan, .you])
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
         XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), AppTab.allCases.map(\.title))
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .capture).surface.title, "Capture")
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .plan).surface.title, "Time")

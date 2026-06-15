@@ -39,7 +39,7 @@ struct RepositoryBackedOnboardingService: OnboardingServicing {
         case .captureFirst:
             return OnboardingRouteDecision(
                 choice: choice,
-                selectedTab: .capture,
+                selectedTab: .today,
                 overlayIntent: .quickCapture,
                 overlaySource: .shellCompose,
                 presentationContext: .quickCapture

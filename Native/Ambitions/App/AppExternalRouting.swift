@@ -32,7 +32,7 @@ struct AppDeepLinkRegistryEntry: Equatable, Identifiable, Sendable {
     var opensWithoutDeadEnd: Bool {
         switch canonicalRoute {
         case let .openTab(tab):
-            tab.canonicalTopLevelTab.isCanonicalTopLevel
+            tab.isCanonicalTopLevel
         case let .openToday(context):
             context == .standard || owningTab == .today
         case let .openGoalDetail(goalID):
@@ -396,9 +396,6 @@ struct AppExternalRouteTranslator {
     func deepLinkURL(for route: AppExternalRoute) -> URL? {
         switch route {
         case let .openTab(tab):
-            if tab == .capture {
-                return deepLinkURL(for: .openTimeRoute(.captureInbox))
-            }
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: tab.rawValue)
         case let .openToday(context):
             var components = URLComponents()
@@ -506,9 +503,6 @@ struct AppExternalRouteTranslator {
     func routePayload(for route: AppExternalRoute) -> [String: String] {
         switch route {
         case let .openTab(tab):
-            if tab == .capture {
-                return routePayload(for: .openTimeRoute(.captureInbox))
-            }
             return ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: tab.rawValue)
         case let .openToday(context):
             var values = ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: AppTab.today.rawValue)
@@ -574,9 +568,6 @@ struct AppExternalRouteTranslator {
         let actionName = ExternalSurfaceActionName(rawAction: action)
         switch route {
         case let .openTab(tab):
-            if tab == .capture {
-                return commandPayload(for: .openTimeRoute(.captureInbox), action: action)
-            }
             return ExternalSurfaceActionPayload.commandPayload(
                 action: actionName,
                 surface: .tab,
@@ -770,10 +761,6 @@ final class DefaultAppExternalRouter: AppExternalRouting {
 
         switch route {
         case let .openTab(tab):
-            if tab == .capture {
-                navigation.presentCaptureCompatibilityRoute(source: entrySource)
-                return
-            }
             navigation.selectTab(tab)
             navigation.recordRoute(
                 title: "Open \(tab.title)",

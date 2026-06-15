@@ -148,7 +148,8 @@ struct AmbitionsRootView: View {
                 title: "Today",
                 subtitle: "Execution",
                 posture: .execution,
-                trailingButtons: shellUtilityButtons(for: .today)
+                trailingButtons: shellUtilityButtons(for: .today),
+                reservesPrimaryObjectTopClearance: true
             ) {
                 TodayScreen(showsNavigationChrome: false)
             }

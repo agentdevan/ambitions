@@ -121,15 +121,16 @@ final class ExternalRoutingTests: XCTestCase {
         let translator = AppExternalRouteTranslator()
         let captureURL = try XCTUnwrap(URL(string: "ambitions://tab/capture"))
         let capturesURL = try XCTUnwrap(URL(string: "ambitions://tab/captures"))
-        let generatedURL = try XCTUnwrap(translator.deepLinkURL(for: .openTab(.capture)))
-        let generatedPayload = translator.routePayload(for: .openTab(.capture))
+        let generatedURL = try XCTUnwrap(translator.deepLinkURL(for: .openTimeRoute(.captureInbox)))
+        let generatedPayload = translator.routePayload(for: .openTimeRoute(.captureInbox))
 
         XCTAssertEqual(translator.route(fromDeepLink: captureURL), .openTimeRoute(.captureInbox))
         XCTAssertEqual(translator.route(fromDeepLink: capturesURL), .openTimeRoute(.captureInbox))
         XCTAssertEqual(generatedURL.absoluteString, "ambitions://captures/inbox")
         XCTAssertEqual(generatedPayload["surface"], "captures-inbox")
         XCTAssertEqual(generatedPayload["tab"], AppTab.today.rawValue)
-        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertNil(AppTab(rawValue: "capture"))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
     }
 
     func testDeepLinkTranslatorParsesTodayEntryContextRoute() throws {
@@ -503,7 +504,7 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(payload["tab"], AppTab.today.rawValue)
         XCTAssertEqual(notificationPayload.values["surface"], "captures-inbox")
         XCTAssertEqual(notificationPayload.values["tab"], AppTab.today.rawValue)
-        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
     }
 
     func testOverlayPayloadCarriesIntentForCanonicalNormalization() {
@@ -547,11 +548,11 @@ final class ExternalRoutingTests: XCTestCase {
     }
 
     @MainActor
-    func testRouterDispatchesCaptureTabAndLegacyHabitsTabIntoCanonicalDestinations() {
+    func testRouterDispatchesCaptureCompatibilityAndLegacyHabitsIntoCanonicalDestinations() {
         let navigation = AppNavigationModel(selectedTab: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
-        router.dispatch(.openTab(.capture), source: .deepLink)
+        router.dispatch(.openTimeRoute(.captureInbox), source: .deepLink)
         XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
@@ -757,8 +758,8 @@ final class ExternalRoutingTests: XCTestCase {
 
         XCTAssertEqual(AppDeepLinkRegistry.validationIssues(translator: translator), [])
         XCTAssertEqual(AppNavigationGraph.nodes.map(\.id), AppDeepLinkRegistry.entries.map(\.id))
-        XCTAssertFalse(AppDeepLinkRegistry.entries.contains { $0.canonicalRoute == .openTab(.capture) })
-        XCTAssertFalse(AppTab.allCases.contains(.capture))
+        XCTAssertFalse(AppDeepLinkRegistry.entries.contains { $0.objectKind == .rootTab && $0.deepLinkTemplate.localizedCaseInsensitiveContains("capture") })
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
 
         for entry in AppDeepLinkRegistry.entries {
             let url = try XCTUnwrap(translator.deepLinkURL(for: entry.canonicalRoute), entry.id)
