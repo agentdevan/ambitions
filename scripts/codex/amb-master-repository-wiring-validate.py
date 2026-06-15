@@ -98,7 +98,7 @@ def validate() -> list[str]:
     check("## AMB-MASTER - Personal Life OS Runtime + Native iPhone App Master Build" in registry, failures, "program registry missing AMB-MASTER entry")
     check(PROJECT_ID in registry, failures, "program registry missing amb-master Linear project id")
     check("do not create a duplicate master-build program or reuse PLOS labels" in registry, failures, "program registry missing duplicate/PLOS reuse quarantine rule")
-    check("Next runnable gate: AMB-1060 / M04.T03" in registry, failures, "program registry next runnable gate is stale")
+    check("Next runnable gate: AMB-1061 / M04.T04" in registry, failures, "program registry next runnable gate is stale")
 
     for rel, snippets in REQUIRED_DISPATCH.items():
         text = read(rel)
@@ -136,7 +136,7 @@ def validate() -> list[str]:
         check(issue in queue_entries, failures, f"queue missing binding: {issue}")
     check(AMB_1047_SHA in bindings.get("AMB-1047", {}).get("status", ""), failures, "issue map does not record AMB-1047 pushed SHA")
     check(AMB_1047_SHA in queue_entries.get("AMB-1047", {}).get("state", ""), failures, "queue does not record AMB-1047 pushed SHA")
-    check(queue.get("next", {}).get("linear_id") == "AMB-1060", failures, "execution queue next issue must be AMB-1060 after AMB-1059 closeout")
+    check(queue.get("next", {}).get("linear_id") == "AMB-1061", failures, "execution queue next issue must be AMB-1061 after AMB-1060 closeout")
 
     combined = "\n".join(read(rel) for rel in AMB_MASTER_ACTIVE_FILES)
     forbidden_patterns = [

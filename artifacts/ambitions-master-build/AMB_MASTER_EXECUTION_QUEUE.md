@@ -41,8 +41,8 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 | 21 | M03.T02 | AMB-1115 | First-run activation | `scripts/codex/program-phase-gate.sh amb-master M03` | Done in Linear / source `7ea6a1de182443d87f02898a2510fc2f251ac08c` / closeout metadata `70defd7018d5da1edbdebca02b7efeaac6154e28` / final proof-index `ea6aae422940715a981df7fc3919f596bc74ab18` |
 | 22 | M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | `scripts/codex/program-phase-gate.sh amb-master M04` | Done in Linear / source `efd6957c9022f66f3316d06e9862c92a61832990` / closeout metadata `dea3cf942487b77b20aec07569ebd94b2b844674` / final proof-index `83c5c9558064013628890ec311ef8eca8303a813` |
 | 23 | M04.T02 | AMB-1059 | Global search entry and presentation: trusted retrieval handoff | `scripts/codex/program-phase-gate.sh amb-master M04` | Done in Linear / source `7d45c59f6f3f0e449f92e023f73a25e4ce02a34a` / closeout metadata `e5130c5e4ea9c6fbf6fb830f1751f3f5f53ff7cc` / final proof-index `396729b78af8e663e453a15d8f90ac0410caf43b` |
-| 24 | M04.T03 | AMB-1060 | Tokenized design system foundation: flagship semantic base | `scripts/codex/program-phase-gate.sh amb-master M04` | Next eligible after AMB-1059 Done |
-| 25 | M04.T04 | AMB-1061 | Core reusable component set: native interaction primitives | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T03 |
+| 24 | M04.T03 | AMB-1060 | Tokenized design system foundation: flagship semantic base | `scripts/codex/program-phase-gate.sh amb-master M04` | Source/proof pushed (`f60258d6a0494223cc5e5899b21cbc37272bcb9d`) / closeout metadata in progress |
+| 25 | M04.T04 | AMB-1061 | Core reusable component set: native interaction primitives | `scripts/codex/program-phase-gate.sh amb-master M04` | Next eligible after AMB-1060 closeout metadata, Linear Done update, and final proof-index reconciliation |
 | 26 | M04.T05 | AMB-1062 | Contextual toolbar and action surfaces: focused command grammar | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T04 |
 | 27 | M04.T06 | AMB-1063 | Motion grammar primitives: flagship pace and restraint | `scripts/codex/program-phase-gate.sh amb-master M04` | Blocked pending M04.T05 |
 | 28 | M05 | live AMB issue set | Today + Step Execution Surface | `scripts/codex/program-phase-gate.sh amb-master M05` | Blocked pending M04 |
@@ -55,4 +55,4 @@ Scope: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Progr
 
 ## Next Eligible Action
 
-Refresh live Linear for `AMB-1060` / `M04.T03`, then start the tokenized design system foundation train.
+Complete AMB-1060 closeout metadata, Linear Done update, and final proof-index reconciliation, then refresh live Linear for `AMB-1061` / `M04.T04` and start the core reusable component set train.

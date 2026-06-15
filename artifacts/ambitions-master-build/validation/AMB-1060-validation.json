@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "program": "amb-master",
+  "linear_project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
+  "linear_issue": "AMB-1060",
+  "train_label": "M04.T03",
+  "title": "Tokenized design system foundation: flagship semantic base",
+  "status": "green_for_source_proof_scope_pending_closeout_metadata_push",
+  "source_commit": "f60258d6a0494223cc5e5899b21cbc37272bcb9d",
+  "closeout_metadata_commit": "pending_current_metadata_commit",
+  "final_reconciliation_commit": "pending_proof_index_reconciliation",
+  "linear_completed_at": "pending_linear_done_transition",
+  "baseline_commit": "861d74936c513d60e882c8f4034a3b7bc18a1f4d",
+  "branch": "main",
+  "remote_verification": {
+    "remote": "origin",
+    "ref": "refs/heads/main",
+    "sha": "f60258d6a0494223cc5e5899b21cbc37272bcb9d"
+  },
+  "claim": "AMB-1060 adds audited flagship semantic foundation roles and contracts to the shared design token catalog, verifies them with focused unit tests and token scans, and records visually inspected simulator screenshots for the five canonical root surfaces without adding Capture as a root tab.",
+  "commands": [
+    {
+      "command": "python3 scripts/ambitions-champion-coverage-check.py --batch AMB-1060",
+      "result": "green",
+      "artifact": "build/reports/intelligence-consolidation/champion-coverage-check.md"
+    },
+    {
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch AMB-1060 --prompt artifacts/ambitions-master-build/validation/AMB-1060-parallel-guard-prompt.md --batch-type source-changing",
+      "result": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1060-pre.md"
+    },
+    {
+      "command": "xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath output/DerivedData-AMB1060 -only-testing:AmbitionsTests/SemanticDesignTokenCatalogTests -skip-testing:AmbitionsUITests -enableCodeCoverage NO COMPILER_INDEX_STORE_ENABLE=NO",
+      "result": "pass_8_selected_tests_0_failures",
+      "artifact": "artifacts/ambitions-master-build/validation/AMB-1060/focused-design-token-tests.log"
+    },
+    {
+      "command": "python3 scripts/ambitions-token-contract-check.py",
+      "result": "green",
+      "artifact": "build/reports/design-token-contract.json"
+    },
+    {
+      "command": "python3 scripts/ambitions-design-token-completeness-check.py",
+      "result": "green",
+      "artifact": "build/reports/design-token-completeness.json"
+    },
+    {
+      "command": "python3 scripts/ambitions-token-drift-check.py",
+      "result": "green",
+      "artifact": "build/reports/design-token-drift.json"
+    },
+    {
+      "command": "Simulator install/launch with demo preview data for Today, Goals, Time, Motion, and You, screenshots, and main-agent visual inspection",
+      "result": "pass_for_scoped_root_surface_semantic_foundation_visual_proof",
+      "artifact": "artifacts/ambitions-master-build/screenshots/AMB-1060/"
+    },
+    {
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-1060 --prompt artifacts/ambitions-master-build/validation/AMB-1060-parallel-guard-prompt.md --changed-from 861d74936c513d60e882c8f4034a3b7bc18a1f4d --batch-type source-changing",
+      "result": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1060-post.md"
+    },
+    {
+      "command": "git diff --cached --check",
+      "result": "pass_after_normalizing_focused_test_log",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "git push origin main && git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "pass_source_remote_verified",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1060-validation.json",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1060-tokenized-design-system-foundation.md",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-readiness-validate.py --phase M04",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-repository-wiring-validate.py",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260615T142037.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T142037.log"
+    }
+  ],
+  "screenshots": [
+    {
+      "surface": "Today",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1060/today-semantic-foundation.png",
+      "visual_evaluation": "Today renders live demo content with the canonical dock and semantic shell treatment; Capture is not a root tab."
+    },
+    {
+      "surface": "Goals",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1060/goals-semantic-foundation.png",
+      "visual_evaluation": "Goals renders Constellation Atlas content with the source/proof evidence cells stacked and legible in the first viewport."
+    },
+    {
+      "surface": "Time",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1060/time-semantic-foundation.png",
+      "visual_evaluation": "Time renders LifeShape content with stale Plan wording removed from the represented recovery copy."
+    },
+    {
+      "surface": "Motion",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1060/motion-semantic-foundation.png",
+      "visual_evaluation": "Motion renders Motion Current content without root header context truncation in the first viewport."
+    },
+    {
+      "surface": "You",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1060/you-semantic-foundation.png",
+      "visual_evaluation": "You renders User System Profile content with the canonical dock and semantic shell treatment."
+    }
+  ],
+  "parallel_guard": {
+    "pre": {
+      "status": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1060-pre.md"
+    },
+    "post": {
+      "status": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1060-post.md",
+      "duplicate_risks": 0,
+      "runtime_wiring_gaps": 0,
+      "old_term_violations": 0,
+      "locked_concepts_touched": "design_primitives and time_plan_lifeshape allowlisted for AMB-1060"
+    }
+  },
+  "proof_class": "source implementation, focused XCTest, token scan, guard, and simulator visual root-surface proof",
+  "non_claims": [
+    "No full reusable component library completion.",
+    "No broad per-surface feature completion.",
+    "No public accessibility certification.",
+    "No physical-device proof.",
+    "No measured performance certification.",
+    "No privacy/legal approval.",
+    "No release readiness, TestFlight readiness, or App Store readiness.",
+    "No full-project Green."
+  ],
+  "yellow_limits": [
+    "AMB-1060 proves semantic design token foundation contracts and representative root-surface rendering only.",
+    "Visual proof was inspected on the iPhone 17 simulator with preview data; it is not public accessibility certification or physical-device proof.",
+    "Focused tests cover SemanticDesignTokenCatalog contracts; full app test suite and measured performance are not claimed for this train."
+  ],
+  "responsible_program": "amb-master",
+  "related_linear_issue": "AMB-1060",
+  "evidence_status": "green_for_scoped_AMB_1060_tokenized_design_system_foundation_source_proof_pending_metadata_and_final_reconciliation"
+}
