@@ -7,7 +7,7 @@
     "team": "Ambitions",
     "team_id": "ae5289a0-e901-4ff3-97c2-82a7e7e8ec96"
   },
-  "generated_from": "Live Linear fetches on 2026-06-14 plus current repo state; M04 issue set refreshed before AMB-1115 closeout metadata",
+  "generated_from": "Live Linear fetches on 2026-06-15 plus current repo state; M04 issue set refreshed during AMB-1058 closeout metadata",
   "bindings": [
     {
       "train": "CONTROL",
@@ -168,14 +168,14 @@
       "linear_id": "AMB-1058",
       "title": "Root navigation architecture: five-surface shell proof",
       "milestone": "M04",
-      "status": "Backlog / next eligible after AMB-1115 Done"
+      "status": "Source/control-plane pushed efd6957c9022f66f3316d06e9862c92a61832990; closeout metadata/proof-index/Linear Done pending"
     },
     {
       "train": "M04.T02",
       "linear_id": "AMB-1059",
       "title": "Global search entry and presentation: trusted retrieval handoff",
       "milestone": "M04",
-      "status": "Backlog"
+      "status": "Backlog / next eligible after AMB-1058 Done"
     },
     {
       "train": "M04.T03",
@@ -206,5 +206,5 @@
       "status": "Backlog"
     }
   ],
-  "refresh_rule": "Refresh from live Linear before each new train. Next eligible after AMB-1115 Done is AMB-1058 / M04.T01. Train labels are aliases; AMB-* identifiers are authoritative."
+  "refresh_rule": "Refresh from live Linear before each new train. Next eligible after AMB-1058 Done is AMB-1059 / M04.T02. Train labels are aliases; AMB-* identifiers are authoritative."
 }

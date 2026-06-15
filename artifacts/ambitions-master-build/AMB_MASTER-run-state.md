@@ -1,6 +1,6 @@
 # Ambitions Master Build Run State
 
-Updated: 2026-06-14
+Updated: 2026-06-15
 Program: `amb-master`
 Linear project: Ambitions Personal Life OS Runtime + Native iPhone App Master Build Program
 Linear project ID: `ca716546-e3d4-4d5b-a399-03076ccba9ee`
@@ -19,27 +19,27 @@ project:
 current_phase:
   label: "M04"
   title: "Native Shell + Design System Foundation"
-  status: "M03 source trains complete through AMB-1115; AMB-1115 Done in Linear after source/control-plane push, closeout metadata push, and final proof-index reconciliation"
+  status: "M04.T01 source/control-plane pushed and remote verified for AMB-1058; closeout metadata and proof-index reconciliation in progress before Linear Done"
 current_train:
+  label: "M04.T02"
+  linear_id: "AMB-1059"
+  title: "Global search entry and presentation: trusted retrieval handoff"
+  status: "Next eligible after AMB-1058 closeout metadata, proof-index reconciliation, and Linear Done"
+last_closed_train:
   label: "M04.T01"
   linear_id: "AMB-1058"
   title: "Root navigation architecture: five-surface shell proof"
-  status: "Next eligible train; refresh live Linear before source edits"
-last_closed_train:
-  label: "M03.T02"
-  linear_id: "AMB-1115"
-  title: "First-run activation: first goal, first Recommended Step, first recovery option"
-  status: "Done in Linear; source/control-plane commit 7ea6a1de182443d87f02898a2510fc2f251ac08c, closeout metadata 70defd7018d5da1edbdebca02b7efeaac6154e28, final proof-index reconciliation ea6aae422940715a981df7fc3919f596bc74ab18"
+  status: "Source/control-plane commit efd6957c9022f66f3316d06e9862c92a61832990 pushed and remote verified; Linear Done pending closeout metadata and proof-index reconciliation"
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Refresh live Linear for AMB-1058 / M04.T01, run AMB-MASTER preflight and M04 phase gate, then execute the root navigation architecture train."
+  action: "Finish AMB-1058 closeout metadata/proof-index/Linear Done, then refresh live Linear for AMB-1059 / M04.T02 and execute the global search entry and trusted retrieval handoff train."
 latest_local_scope:
-  changed_path_policy: "AMB-1115 touched owned First-run Activation runtime source plus focused Golden Vertical Slice runtime tests, concept-lock allowlists, champion coverage, and AMB-1115 guard prompt."
+  changed_path_policy: "AMB-1058 touched app shell/navigation owners, focused app/runtime tests, AMB master canon IA validator, root-shell screenshots, focused test log, and AMB-1058 guard prompt/reports."
   app_source_changed: true
-  runtime_behavior_changed: "Added a local deterministic First-run Activation runtime that evaluates the AMB-1114 golden vertical slice into first goal, first Recommended step, first recovery option, activation receipt, replay evidence, You / What Ambitions knows inspection route, active five-tab IA, and global Capture role; it fails closed for unready golden programs, missing first-goal flow, missing Recommended step or recovery option, generic onboarding theater, missing calm continuity, missing receipt/replay/inspection proof, and non-local activation boundaries."
+  runtime_behavior_changed: "Removed Capture as a raw AppTab/root tab, kept AppTab.allCases limited to Today / Goals / Time / Motion / You, routed legacy Capture inputs through Today/global Capture overlay or capture-inbox compatibility, preserved Motion as fifth root and Plan/Pulse as compatibility-only, and added shell-owned top clearance for root content."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -48,24 +48,22 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-readiness-validate.py"
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
-  - "scripts/codex/program-phase-gate.sh amb-master M03"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1115-first-run-activation-runtime.md"
+  - "scripts/codex/program-phase-gate.sh amb-master M04"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1058-root-navigation-five-surface-shell-proof.md"
 latest_validation:
-  status: "AMB-1115 focused implementation validation Green; source/control-plane, closeout metadata, and final proof-index reconciliation commits pushed and remote verified; AMB-1115 Done in Linear"
+  status: "AMB-1058 source/control-plane validation Green; source/control-plane commit pushed and remote verified; closeout metadata and proof-index reconciliation in progress"
   logs:
-    - "DerivedData Test-Ambitions-2026.06.14_19-11-03--0400.xcresult"
-    - "DerivedData Test-Ambitions-2026.06.14_19-16-37--0400.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1115-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1115-post.md"
-    - "build/reports/intelligence-consolidation/champion-coverage-check.md"
-    - "artifacts/ambitions-master-build/validation/AMB-1115/focused-first-run-activation-tests.log"
-    - "artifacts/ambitions-master-build/validation/AMB-1115/adjacent-first-run-activation-tests.log"
-    - "artifacts/ambitions-master-build/script-output/AMB-1115-release-claim-safety-scan-rerun.log"
-    - "artifacts/ambitions-master-build/script-output/AMB-1115-no-unsupported-ai-claim-scan-rerun.log"
-    - "artifacts/ambitions-master-build/script-output/AMB-1115-sa-no-claim-scan-rerun.log"
-    - "artifacts/ambitions-master-build/script-output/AMB-1115-privacy-boundary-scan.log"
-    - "artifacts/ambitions-master-build/script-output/program-preflight-20260614T232030.log"
-    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M03-20260614T232030.log"
+    - "DerivedData Test-Ambitions-2026.06.15_00-32-20--0400.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1058-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1058-post.md"
+    - "artifacts/ambitions-master-build/validation/AMB-1058/focused-root-shell-tests.log"
+    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-today.png"
+    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-goals.png"
+    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-time.png"
+    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-motion.png"
+    - "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-you.png"
+    - "artifacts/ambitions-master-build/script-output/program-preflight-20260615T004417.log"
+    - "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T004417.log"
 ```
 
 ## Pushed SHA Log
@@ -91,7 +89,8 @@ latest_validation:
 - `AMB-1117` / `M02.T08`: source/control-plane commit `172614b0b8b543fbf2f8287ddc7abfc101172195` and closeout metadata commit `90a8eb37b0cc433791181c3cf8a77bf3ff4e4b75` pushed and remote verified after Green focused validation; AMB-1114 handoff active.
 - `AMB-1114` / `M03.T01`: final proof-index reconciliation commit `ecc905cf854ab1b0d6feb1167beaca4da6369437` pushed and remote verified; AMB-1114 marked Done in Linear; next train is `AMB-1115` / `M03.T02`.
 - `AMB-1115` / `M03.T02`: final proof-index reconciliation commit `ea6aae422940715a981df7fc3919f596bc74ab18` pushed and remote verified; AMB-1115 marked Done in Linear; next train is `AMB-1058` / `M04.T01`.
+- `AMB-1058` / `M04.T01`: source/control-plane commit `efd6957c9022f66f3316d06e9862c92a61832990` pushed and remote verified; closeout metadata and final proof-index reconciliation pending before Linear Done; next train will be `AMB-1059` / `M04.T02`.
 
 ## Non-Claims
 
-AMB-1115 added a local First-run Activation runtime value model and focused tests only. No user-facing UI, visual approval, persistence mutation, Calendar/EventKit integration, notification scheduling, visible Time UI, visible Step launch, Source Atlas/R2 publication, live source-pack download, private user data export, third-party analytics integration, accessibility certification, privacy/legal approval, external security audit approval, physical-device proof, performance certification, release readiness, TestFlight readiness, App Store readiness, owner approval, AMB-1058 execution, or full project completion is claimed.
+AMB-1058 proves the root navigation shell contract only. No broad per-surface feature completion, final body fixture polish, public accessibility certification, physical-device proof, measured performance certification, privacy/legal approval, external security audit approval, release readiness, TestFlight readiness, App Store readiness, owner approval, AMB-1059 execution, or full project completion is claimed.

@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "program": "amb-master",
+  "linear_project_id": "ca716546-e3d4-4d5b-a399-03076ccba9ee",
+  "linear_issue": "AMB-1058",
+  "train_label": "M04.T01",
+  "title": "Root navigation architecture: five-surface shell proof",
+  "status": "green_for_source_control_plane_scope",
+  "source_commit": "efd6957c9022f66f3316d06e9862c92a61832990",
+  "baseline_commit": "d3a3560a19c364c20e775cc499f887620b9537e3",
+  "branch": "main",
+  "remote_verification": {
+    "remote": "origin",
+    "ref": "refs/heads/main",
+    "sha": "efd6957c9022f66f3316d06e9862c92a61832990"
+  },
+  "claim": "Root navigation is constrained to Today / Goals / Time / Motion / You, Capture is global action or compatibility overlay/inbox only, Motion is the fifth root, Plan and Pulse are compatibility-only, and shell top geometry does not pull root content under top chrome.",
+  "commands": [
+    {
+      "command": "xcodegen generate",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase pre --batch AMB-1058 --prompt artifacts/ambitions-master-build/validation/AMB-1058-parallel-guard-prompt.md --batch-type source-changing",
+      "result": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1058-pre.md"
+    },
+    {
+      "command": "xcodebuild test -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath /Users/devan/Documents/GitHub/ambitions-local-bulk-20260614T1518/DerivedData-AMB1058 -only-testing:AmbitionsTests/AppShellNavigationTests -only-testing:AmbitionsTests/ExternalRoutingTests -only-testing:AmbitionsTests/ShellCommandRouterTests -only-testing:AmbitionsTests/OnboardingAndDegradedStateTests -only-testing:AmbitionsTests/ActivationContractTests -only-testing:AmbitionsTests/ShellPreviewMatrixTests -only-testing:AmbitionsTests/GoldenVerticalSliceRuntimeTests -enableCodeCoverage NO",
+      "result": "pass_133_selected_tests_0_failures",
+      "artifact": "artifacts/ambitions-master-build/validation/AMB-1058/focused-root-shell-tests.log"
+    },
+    {
+      "command": "visual inspection of artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-*.png",
+      "result": "pass_for_scoped_root_shell_contract",
+      "artifact": "artifacts/ambitions-master-build/screenshots/AMB-1058/"
+    },
+    {
+      "command": "python3 scripts/ambitions-parallel-implementation-guard.py --phase post --batch AMB-1058 --prompt artifacts/ambitions-master-build/validation/AMB-1058-parallel-guard-prompt.md --changed-from d3a3560a19c364c20e775cc499f887620b9537e3 --batch-type source-changing",
+      "result": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1058-post.md"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-canon-ia-validate.py",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "git diff --cached --check",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260615T004417.log"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T004417.log"
+    },
+    {
+      "command": "git push origin main && git rev-parse HEAD && git ls-remote origin refs/heads/main",
+      "result": "pass_remote_verified",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_EXECUTION_QUEUE.json && python3 -m json.tool artifacts/ambitions-master-build/AMB_MASTER_LINEAR_ISSUE_MAP.json && python3 -m json.tool artifacts/ambitions-master-build/validation/AMB-1058-validation.json",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1058-root-navigation-five-surface-shell-proof.md",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-readiness-validate.py --phase M04",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "python3 scripts/codex/amb-master-repository-wiring-validate.py",
+      "result": "pass",
+      "artifact": "terminal output"
+    },
+    {
+      "command": "bash scripts/codex/program-phase-gate.sh amb-master M04",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T005000.log"
+    },
+    {
+      "command": "bash scripts/codex/program-preflight.sh amb-master",
+      "result": "green",
+      "artifact": "artifacts/ambitions-master-build/script-output/program-preflight-20260615T005012.log"
+    },
+    {
+      "command": "bash scripts/release-claim-safety-scan.sh",
+      "result": "green",
+      "artifact": "artifacts/ambitions-master-build/script-output/AMB-1058-release-claim-safety-scan.log"
+    },
+    {
+      "command": "bash scripts/no-unsupported-ai-claim-scan.sh",
+      "result": "yellow_advisory",
+      "artifact": "artifacts/ambitions-master-build/script-output/AMB-1058-no-unsupported-ai-claim-scan.log"
+    },
+    {
+      "command": "bash scripts/sa-no-claim-scan.sh",
+      "result": "pass",
+      "artifact": "artifacts/ambitions-master-build/script-output/AMB-1058-sa-no-claim-scan.log"
+    },
+    {
+      "command": "bash scripts/privacy-boundary-scan.sh",
+      "result": "yellow_advisory",
+      "artifact": "artifacts/ambitions-master-build/script-output/AMB-1058-privacy-boundary-scan.log"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass",
+      "artifact": "terminal output"
+    }
+  ],
+  "screenshots": [
+    {
+      "surface": "Today",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-today.png",
+      "visual_evaluation": "Today selected; dock exactly Today / Goals / Time / Motion / You; Capture not a root tab; top content clears status/dynamic-island area."
+    },
+    {
+      "surface": "Goals",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-goals.png",
+      "visual_evaluation": "Goals selected; dock exactly five root surfaces; global Capture toolbar action visible; no Capture/Plan/Pulse root."
+    },
+    {
+      "surface": "Time",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-time.png",
+      "visual_evaluation": "Time selected; dock exactly five root surfaces; global Capture toolbar action visible; no Capture/Plan/Pulse root."
+    },
+    {
+      "surface": "Motion",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-motion.png",
+      "visual_evaluation": "Motion selected as fifth root; no Pulse root; global Capture toolbar action visible."
+    },
+    {
+      "surface": "You",
+      "path": "artifacts/ambitions-master-build/screenshots/AMB-1058/root-shell-you.png",
+      "visual_evaluation": "You selected; dock exactly five root surfaces; global Capture toolbar action visible."
+    }
+  ],
+  "parallel_guard": {
+    "pre": {
+      "status": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1058-pre.md"
+    },
+    "post": {
+      "status": "green",
+      "artifact": "build/reports/parallel-implementation-guard/AMB-1058-post.md",
+      "duplicate_risks": 0,
+      "runtime_wiring_gaps": 0,
+      "old_term_violations": 0,
+      "locked_concepts_touched": "none"
+    }
+  },
+  "proof_class": "source implementation, focused XCTest, guard, and visual root-shell proof",
+  "non_claims": [
+    "No broad feature completion inside Today, Goals, Time, Motion, or You.",
+    "No public accessibility certification.",
+    "No physical-device proof.",
+    "No measured performance certification.",
+    "No privacy/legal approval.",
+    "No release readiness, TestFlight readiness, or App Store readiness.",
+    "No full-project Green."
+  ],
+  "yellow_limits": [
+    "Root-shell proof only; body fixture polish is not fully certified.",
+    "Goals screenshot body fixture remains dense/truncated in context and is not claimed final surface polish.",
+    "Metadata-only AppTab.capture.systemImage compatibility remains for existing locked feature icon references; it is not a root tab case or route.",
+    "Unsupported-AI and privacy-boundary scans are advisory context only and do not prove privacy/legal approval or external security review."
+  ],
+  "responsible_program": "amb-master",
+  "related_linear_issue": "AMB-1058",
+  "evidence_status": "green_for_scoped_AMB_1058_root_shell_source_control_plane"
+}

@@ -185,7 +185,7 @@
       "linear_id": "AMB-1058",
       "phase": "M04",
       "title": "Root navigation architecture: five-surface shell proof",
-      "state": "Next eligible; refresh live Linear before source edits"
+      "state": "Source/control-plane pushed efd6957c9022f66f3316d06e9862c92a61832990; closeout metadata/proof-index/Linear Done pending"
     },
     {
       "rank": 23,
@@ -193,7 +193,7 @@
       "linear_id": "AMB-1059",
       "phase": "M04",
       "title": "Global search entry and presentation: trusted retrieval handoff",
-      "state": "blocked pending M04.T01"
+      "state": "Next eligible after AMB-1058 closeout metadata, proof-index reconciliation, and Linear Done"
     },
     {
       "rank": 24,
@@ -285,7 +285,7 @@
     }
   ],
   "next": {
-    "train": "M04.T01",
-    "linear_id": "AMB-1058"
+    "train": "M04.T02",
+    "linear_id": "AMB-1059"
   }
 }

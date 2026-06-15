@@ -43,8 +43,8 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 
 | Train | Linear issue | Title | Milestone | Live status at refresh |
 |---|---|---|---|---|
-| M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | M04 | Backlog / next eligible after AMB-1115 Done |
-| M04.T02 | AMB-1059 | Global search entry and presentation: trusted retrieval handoff | M04 | Backlog |
+| M04.T01 | AMB-1058 | Root navigation architecture: five-surface shell proof | M04 | Source/control-plane pushed (`efd6957c9022f66f3316d06e9862c92a61832990`); closeout metadata/proof-index/Linear Done pending |
+| M04.T02 | AMB-1059 | Global search entry and presentation: trusted retrieval handoff | M04 | Backlog / next eligible after AMB-1058 Done |
 | M04.T03 | AMB-1060 | Tokenized design system foundation: flagship semantic base | M04 | Backlog |
 | M04.T04 | AMB-1061 | Core reusable component set: native interaction primitives | M04 | Backlog |
 | M04.T05 | AMB-1062 | Contextual toolbar and action surfaces: focused command grammar | M04 | Backlog |
@@ -52,4 +52,4 @@ Train labels are local routing aliases. Use only `AMB-*` identifiers for Linear 
 
 ## Refresh Rule
 
-Refresh this map from live Linear before each new train. Next eligible after AMB-1115 Done is `AMB-1058` / `M04.T01`. If a train label has no `AMB-*` binding or live Linear contradicts this file, live Linear plus current repo truth wins and this map must be updated before execution.
+Refresh this map from live Linear before each new train. Next eligible after AMB-1058 Done is `AMB-1059` / `M04.T02`. If a train label has no `AMB-*` binding or live Linear contradicts this file, live Linear plus current repo truth wins and this map must be updated before execution.
