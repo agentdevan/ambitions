@@ -209,7 +209,7 @@
       "linear_id": "AMB-1061",
       "phase": "M04",
       "title": "Core reusable component set: native interaction primitives",
-      "state": "next eligible after AMB-1060 Done"
+      "state": "source/proof pushed 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3; closeout metadata pending"
     },
     {
       "rank": 26,
@@ -217,7 +217,7 @@
       "linear_id": "AMB-1062",
       "phase": "M04",
       "title": "Contextual toolbar and action surfaces: focused command grammar",
-      "state": "blocked pending M04.T04"
+      "state": "next eligible after AMB-1061 closeout metadata"
     },
     {
       "rank": 27,
@@ -285,7 +285,7 @@
     }
   ],
   "next": {
-    "train": "M04.T04",
-    "linear_id": "AMB-1061"
+    "train": "M04.T05",
+    "linear_id": "AMB-1062"
   }
 }

@@ -19,27 +19,27 @@ project:
 current_phase:
   label: "M04"
   title: "Native Shell + Design System Foundation"
-  status: "AMB-1060 / M04.T03 Done in Linear after source/proof commit f60258d6a0494223cc5e5899b21cbc37272bcb9d, closeout metadata commit 5958d6d498bf5494f3da7526e3e4d4a11d53e6a2, and final proof-index reconciliation commit 47eec76ebab5977c14937acb021a02bf455fb91e; AMB-1061 / M04.T04 next eligible"
+  status: "AMB-1061 / M04.T04 source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 pushed and remote verified; closeout metadata and final proof-index reconciliation pending; AMB-1062 / M04.T05 next eligible after AMB-1061 closeout"
 current_train:
+  label: "M04.T05"
+  linear_id: "AMB-1062"
+  title: "Contextual toolbar and action surfaces: focused command grammar"
+  status: "Next eligible after AMB-1061 closeout metadata, final proof-index reconciliation, and Linear Done."
+last_closed_train:
   label: "M04.T04"
   linear_id: "AMB-1061"
   title: "Core reusable component set: native interaction primitives"
-  status: "Next eligible after AMB-1060 Done; refresh live Linear, run AMB-MASTER preflight and M04 phase gate, then execute the reusable component set train."
-last_closed_train:
-  label: "M04.T03"
-  linear_id: "AMB-1060"
-  title: "Tokenized design system foundation: flagship semantic base"
-  status: "Done in Linear at 2026-06-15T18:25:04.872Z; source/proof commit f60258d6a0494223cc5e5899b21cbc37272bcb9d, closeout metadata commit 5958d6d498bf5494f3da7526e3e4d4a11d53e6a2, and final proof-index reconciliation commit 47eec76ebab5977c14937acb021a02bf455fb91e pushed and remote verified."
+  status: "Source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 pushed and remote verified; closeout metadata and Linear Done pending."
 control_plane_dependency:
   linear_id: "AMB-1126"
   title: "Rebuild Linear as the Ambitions execution control plane"
   status: "Done in Linear as of live fetch on 2026-06-14"
 next_allowed_action:
-  action: "Refresh live Linear for AMB-1061 / M04.T04, run AMB-MASTER preflight and M04 phase gate, and execute the reusable component set train."
+  action: "Finish AMB-1061 closeout metadata, run AMB-MASTER closeout validators and proof-index reconciliation, update Linear Done, then refresh live Linear for AMB-1062 / M04.T05."
 latest_local_scope:
-  changed_path_policy: "AMB-1060 touched the shared semantic token catalog and focused design token tests, plus small screenshot-driven shell/Goals/Time copy and layout repairs, AMB-1060 guard prompt/reports, token inventory, focused test log, token reports, visual encyclopedia matrix, screenshot proof, and concept-lock allowlist entries."
+  changed_path_policy: "AMB-1061 touched the shared DesignSystem interaction primitive source, preview gallery, focused tests, preview renderer, AMB-1061 guard/coverage proof, component inventory, screenshot proof, and concept-lock/champion-coverage registry entries."
   app_source_changed: true
-  runtime_behavior_changed: "Shared token catalog now exposes audited flagship semantic foundation roles/contracts for Today, Goals, Time, Motion, You, non-root Capture, and cross-surface proof receipts; representative root surfaces render rebuilt simulator proof with canonical dock and no Capture root tab."
+  runtime_behavior_changed: "Shared DesignSystem package now exposes reusable interaction primitive contracts, state semantics, role mappings, SwiftUI wrappers, and preview matrix for launch-path controls while keeping Capture as Global Capture / Atmosphere Composer."
 linear_identifier_policy: "Use AMB-* only for Linear reads/writes/comments/status."
 validation_required_before_closeout:
   - "git diff --check"
@@ -49,24 +49,18 @@ validation_required_before_closeout:
   - "python3 scripts/codex/amb-master-repository-wiring-validate.py"
   - "scripts/codex/program-preflight.sh amb-master"
   - "scripts/codex/program-phase-gate.sh amb-master M04"
-  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1060-tokenized-design-system-foundation.md"
+  - "python3 scripts/codex/linear-closeout-validate.py --program amb-master --scope child artifacts/ambitions-master-build/reports/AMB-1061-core-reusable-component-set.md"
 latest_validation:
-  status: "AMB-1060 focused implementation validation Green; source/proof, closeout metadata, and final proof-index reconciliation commits pushed and remote verified; AMB-1060 Done in Linear"
+  status: "AMB-1061 source/proof validation Green; source/proof commit 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3 pushed and remote verified; closeout metadata and final proof-index reconciliation pending"
   logs:
-    - "output/DerivedData-AMB1060/Logs/Test/Test-Ambitions-2026.06.15_10-19-30--0400.xcresult"
-    - "build/reports/parallel-implementation-guard/AMB-1060-pre.md"
-    - "build/reports/parallel-implementation-guard/AMB-1060-post.md"
-    - "artifacts/ambitions-master-build/validation/AMB-1060/focused-design-token-tests.log"
-    - "artifacts/ambitions-master-build/validation/AMB-1060-token-inventory.md"
-    - "build/reports/design-token-contract.json"
-    - "build/reports/design-token-completeness.json"
-    - "build/reports/design-token-drift.json"
-    - "frontend/visual-encyclopedia/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1060/today-semantic-foundation.png"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1060/goals-semantic-foundation.png"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1060/time-semantic-foundation.png"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1060/motion-semantic-foundation.png"
-    - "artifacts/ambitions-master-build/screenshots/AMB-1060/you-semantic-foundation.png"
+    - "output/DerivedData-AMB1061/Logs/Test/Test-Ambitions-2026.06.15_15-03-26--0400.xcresult"
+    - "build/reports/parallel-implementation-guard/AMB-1061-pre.md"
+    - "build/reports/parallel-implementation-guard/AMB-1061-post.md"
+    - "build/reports/intelligence-consolidation/champion-coverage-check.md"
+    - "artifacts/ambitions-master-build/validation/AMB-1061-focused-component-tests.log"
+    - "artifacts/ambitions-master-build/validation/AMB-1061-component-inventory.md"
+    - "artifacts/ambitions-master-build/screenshots/AMB-1061/core-reusable-interaction-primitives.png"
+    - "artifacts/ambitions-master-build/screenshots/AMB-1061/core-reusable-interaction-primitives-dynamic-type.png"
 ```
 
 ## Pushed SHA Log
@@ -95,7 +89,8 @@ latest_validation:
 - `AMB-1058` / `M04.T01`: final proof-index reconciliation commit `83c5c9558064013628890ec311ef8eca8303a813` pushed and remote verified; AMB-1058 marked Done in Linear; next train is `AMB-1059` / `M04.T02`.
 - `AMB-1059` / `M04.T02`: final proof-index reconciliation commit `396729b78af8e663e453a15d8f90ac0410caf43b` pushed and remote verified; AMB-1059 marked Done in Linear; next train is `AMB-1060` / `M04.T03`.
 - `AMB-1060` / `M04.T03`: final proof-index reconciliation commit `47eec76ebab5977c14937acb021a02bf455fb91e` pushed and remote verified; AMB-1060 marked Done in Linear; next train is `AMB-1061` / `M04.T04`.
+- `AMB-1061` / `M04.T04`: source/proof commit `6cc985f4acfb5075f9c9d38a0d9f62357660e0a3` pushed and remote verified after focused XCTest, guard, coverage, renderer, and visual screenshot proof; closeout metadata and final proof-index reconciliation pending; next train is `AMB-1062` / `M04.T05`.
 
 ## Non-Claims
 
-AMB-1060 proves the scoped semantic design token foundation, focused token catalog contract tests, token scans, and visually inspected simulator screenshots for representative root surfaces only. No full component library completion, broad per-surface feature completion, public accessibility certification, physical-device proof, measured performance certification, privacy/legal approval, external security audit approval, release readiness, TestFlight readiness, App Store readiness, owner approval, AMB-1061 execution, or full project completion is claimed.
+AMB-1061 proves the scoped reusable interaction primitive contracts, focused CoreReusableInteractionPrimitiveTests, champion coverage, parallel guard, renderer output, and visually inspected SwiftUI preview screenshots only. No full reusable UI-system completion, broad per-surface feature completion, public accessibility certification, physical-device proof, measured performance certification, privacy/legal approval, external security audit approval, release readiness, TestFlight readiness, App Store readiness, owner approval, AMB-1062 execution, or full project completion is claimed.

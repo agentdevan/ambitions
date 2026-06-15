@@ -189,7 +189,7 @@
       "linear_id": "AMB-1061",
       "title": "Core reusable component set: native interaction primitives",
       "milestone": "M04",
-      "status": "Next eligible after AMB-1060 Done"
+      "status": "Source/proof pushed 6cc985f4acfb5075f9c9d38a0d9f62357660e0a3; closeout metadata pending"
     },
     {
       "train": "M04.T05",
@@ -206,5 +206,5 @@
       "status": "Backlog"
     }
   ],
-  "refresh_rule": "Refresh from live Linear before each new train. Next eligible after AMB-1060 Done is AMB-1061 / M04.T04. Train labels are aliases; AMB-* identifiers are authoritative."
+  "refresh_rule": "Refresh from live Linear before each new train. Next eligible after AMB-1061 closeout metadata is AMB-1062 / M04.T05. Train labels are aliases; AMB-* identifiers are authoritative."
 }
