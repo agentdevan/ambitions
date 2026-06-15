@@ -10,7 +10,7 @@ Train label: `M04.T03`
 
 Parent or umbrella issue: `AMB-1046`
 
-Green/Yellow/Red status: Green for the focused AMB-1060 tokenized design system foundation source/proof and closeout metadata scope; source/proof commit `f60258d6a0494223cc5e5899b21cbc37272bcb9d` and closeout metadata commit `5958d6d498bf5494f3da7526e3e4d4a11d53e6a2` are pushed and remote-verified on `origin/main`. Linear Done transition and final proof-index reconciliation are pending in the current closeout pass.
+Green/Yellow/Red status: Green for the focused AMB-1060 tokenized design system foundation source/proof, closeout metadata, and final proof-index reconciliation scope; source/proof commit `f60258d6a0494223cc5e5899b21cbc37272bcb9d`, closeout metadata commit `5958d6d498bf5494f3da7526e3e4d4a11d53e6a2`, and final proof-index reconciliation commit `47eec76ebab5977c14937acb021a02bf455fb91e` are pushed and remote-verified on `origin/main`. AMB-1060 is Done in Linear.
 
 Pushed to main: yes; source/proof commit `f60258d6a0494223cc5e5899b21cbc37272bcb9d` is pushed and remote-verified.
 
@@ -18,7 +18,7 @@ Push hash: `f60258d6a0494223cc5e5899b21cbc37272bcb9d`
 
 Closeout metadata hash: `5958d6d498bf5494f3da7526e3e4d4a11d53e6a2`
 
-Final reconciliation hash: pending until proof-index reconciliation commit is created.
+Final reconciliation hash: `47eec76ebab5977c14937acb021a02bf455fb91e`
 
 App source changed: yes
 
@@ -59,6 +59,8 @@ Validation run:
 - `bash scripts/codex/program-preflight.sh amb-master` - Green after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-preflight-20260615T142037.log`.
 - `bash scripts/codex/program-phase-gate.sh amb-master M04` - pass after closeout metadata updates; local ignored log `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T142037.log`.
 - `bash scripts/codex/program-proof-index.sh amb-master` - pass after AMB-1060 proof-ledger entry and metadata push; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T142252.log`.
+- `git push origin main`, `git rev-parse HEAD`, and `git ls-remote origin refs/heads/main` - pushed final proof-index reconciliation commit `47eec76ebab5977c14937acb021a02bf455fb91e`; local HEAD and `origin/main` both returned `47eec76ebab5977c14937acb021a02bf455fb91e` after final proof-index reconciliation push.
+- `bash scripts/codex/program-proof-index.sh amb-master` - pass after final AMB-1060 Done reconciliation updates; local ignored log `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T142706.log`.
 
 Reviewer passes:
 - Deterministic pre/post parallel implementation guard passed Green.
@@ -83,6 +85,7 @@ Proof artifacts:
 - `artifacts/ambitions-master-build/script-output/program-preflight-20260615T142037.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/program-phase-gate-M04-20260615T142037.log` - local ignored script output.
 - `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T142252.log` - local ignored script output.
+- `artifacts/ambitions-master-build/script-output/program-proof-index-20260615T142706.log` - local ignored script output.
 - `artifacts/proof-ledger/proof-index.json`
 
 Red blockers: none
@@ -110,6 +113,15 @@ Linear reconciliation:
 - AMB-1060 source-push issue comment: `06cf3197-ad3a-45de-9350-a0f1af46c5c8`.
 - AMB-1060 source-push project comment: `ab26f2c9-439e-498e-9379-4ff3af20a950`.
 - AMB-1060 source-push project status update: `f9fc0236-d380-4ab5-9472-eade5dc76692`.
-- AMB-1060 closeout metadata issue/project activity, proof-index activity, Done transition, and final project status update pending in current closeout pass.
+- AMB-1060 closeout metadata issue comment: `2983ef76-9e9e-488f-88a4-7a8af4425a8e`.
+- AMB-1060 closeout metadata project comment: `8809e8fc-821a-4fc0-acfc-24b1dc5d6b3b`.
+- AMB-1060 closeout metadata project status update: `1b41e8d7-902e-4c43-9ab0-edb637fe45a6`.
+- AMB-1060 proof-index issue comment: `99e54035-24ae-4171-b4af-838280b8f9ce`.
+- AMB-1060 proof-index project comment: `5f028e68-5914-41e2-96d6-d8a8fd513d10`.
+- AMB-1060 proof-index project status update: `99d54536-5c1c-4920-9dcc-66fbbad1d999`.
+- AMB-1060 Done issue comment: `e34886a5-7756-485c-b825-600cca96e9da`.
+- AMB-1060 Done project comment: `c278531b-2f68-4abe-85fd-e9df9ab2190b`.
+- AMB-1060 Done project status update: `5cd471e7-cae9-4604-aea3-4792118a7e29`.
+- AMB-1060 Done transition: complete in Linear at `2026-06-15T18:25:04.872Z`.
 
 Next train: `AMB-1061` / `M04.T04`

@@ -201,7 +201,7 @@
       "linear_id": "AMB-1060",
       "phase": "M04",
       "title": "Tokenized design system foundation: flagship semantic base",
-      "state": "Source/proof pushed f60258d6a0494223cc5e5899b21cbc37272bcb9d / closeout metadata 5958d6d498bf5494f3da7526e3e4d4a11d53e6a2 / final proof-index in progress"
+      "state": "Done in Linear / source f60258d6a0494223cc5e5899b21cbc37272bcb9d / closeout metadata 5958d6d498bf5494f3da7526e3e4d4a11d53e6a2 / final proof-index 47eec76ebab5977c14937acb021a02bf455fb91e"
     },
     {
       "rank": 25,
@@ -209,7 +209,7 @@
       "linear_id": "AMB-1061",
       "phase": "M04",
       "title": "Core reusable component set: native interaction primitives",
-      "state": "next eligible after AMB-1060 closeout metadata, Linear Done update, and final proof-index reconciliation"
+      "state": "next eligible after AMB-1060 Done"
     },
     {
       "rank": 26,
