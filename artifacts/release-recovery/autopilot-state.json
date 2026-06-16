@@ -1283,8 +1283,8 @@
     },
     {
       "batch": "batch_30_shell_drilldown_visual_reconstruction",
-      "commit_sha": "15c335aa156e832dd265395743dd3aa05f1c485f",
-      "finished_at": "2026-06-16T18:26:43.871206+00:00",
+      "commit_sha": "041f920f2184dbd0704fb8a33e31bbffaa5af72a",
+      "finished_at": "2026-06-16T18:37:14.089877+00:00",
       "results": [
         {
           "blocking": true,
@@ -1292,7 +1292,7 @@
             "python3",
             "scripts/release_recovery/apply_batch_30_shell_drilldown_visual_reconstruction.py"
           ],
-          "log_path": "artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/apply-batch.log",
+          "log_path": "artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/apply-batch.log",
           "name": "apply_batch",
           "returncode": 0
         },
@@ -1302,7 +1302,7 @@
             "python3",
             "scripts/ambitions-release-red-guard.py"
           ],
-          "log_path": "artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/release-red-guard.log",
+          "log_path": "artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/release-red-guard.log",
           "name": "release_red_guard",
           "returncode": 0
         },
@@ -1312,7 +1312,7 @@
             "python3",
             "scripts/ambitions-empty-action-lint.py"
           ],
-          "log_path": "artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/empty-action-lint.log",
+          "log_path": "artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/empty-action-lint.log",
           "name": "empty_action_lint",
           "returncode": 0
         },
@@ -1322,7 +1322,7 @@
             "python3",
             "scripts/ambitions-copy-contract-lint.py"
           ],
-          "log_path": "artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/copy-contract-lint.log",
+          "log_path": "artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/copy-contract-lint.log",
           "name": "copy_contract_lint",
           "returncode": 0
         },
@@ -1332,7 +1332,7 @@
             "python3",
             "scripts/ambitions-first-viewport-card-lint.py"
           ],
-          "log_path": "artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/first-viewport-card-lint.log",
+          "log_path": "artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/first-viewport-card-lint.log",
           "name": "first_viewport_card_lint",
           "returncode": 0
         },
@@ -1340,9 +1340,9 @@
           "blocking": true,
           "command": [
             "bash",
-            "artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/generate-xcode-project.sh"
+            "artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/generate-xcode-project.sh"
           ],
-          "log_path": "artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/xcodegen.log",
+          "log_path": "artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/xcodegen.log",
           "name": "xcodegen",
           "returncode": 0
         },
@@ -1357,17 +1357,17 @@
             "-destination",
             "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5",
             "-derivedDataPath",
-            "/Users/devan/actions-runner/_work/ambitions/ambitions/artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/DerivedData",
+            "/Users/devan/actions-runner/_work/ambitions/ambitions/artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/DerivedData",
             "-skipPackagePluginValidation",
             "-skipMacroValidation",
             "build"
           ],
-          "log_path": "artifacts/release-recovery/runs/20260616T182316Z-batch_30_shell_drilldown_visual_reconstruction/xcodebuild.log",
+          "log_path": "artifacts/release-recovery/runs/20260616T183338Z-batch_30_shell_drilldown_visual_reconstruction/xcodebuild.log",
           "name": "xcodebuild",
           "returncode": 0
         }
       ],
-      "started_at": "2026-06-16T18:23:16.492260+00:00",
+      "started_at": "2026-06-16T18:33:38.321783+00:00",
       "status": "green"
     }
   ],
