@@ -80,7 +80,7 @@ public struct ObjectStageGlance<Content: View>: View {
             case .selected, .success, .celebration:
                 return AmbitionsIOS26SemanticTokens.Accent.yellowDark
             case .warning:
-                return AmbitionsIOS26SemanticTokens.Accent.copperDark
+                return AmbitionsIOS26SemanticTokens.Accent.greenDark
             case .loading:
                 return AmbitionsIOS26SemanticTokens.Accent.blueDark
             case .disabled:
