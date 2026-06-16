@@ -16,9 +16,10 @@
     "batch_14_report_shell_nav",
     "batch_15_report_surface_language",
     "batch_16_report_closure_gate",
-    "batch_17_apple_token_bridge"
+    "batch_17_apple_token_bridge",
+    "batch_18_shell_navigation_reconstruction"
   ],
-  "last_green_batch": "batch_17_apple_token_bridge",
+  "last_green_batch": "batch_18_shell_navigation_reconstruction",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

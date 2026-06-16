@@ -31,23 +31,23 @@ struct AppMeridianDestinationRail: View {
 
     private var railMaterial: some View {
         RoundedRectangle(cornerRadius: 34, style: .continuous)
-            .fill(theme.colors.surfacePrimary.opacity(theme.mode == .dark ? 0.96 : 0.94))
+            .fill(AmbitionsIOS26SemanticTokens.LiquidGlass.darkDockCore.opacity(theme.mode == .dark ? 0.72 : 0.58))
             .overlay(
                 RoundedRectangle(cornerRadius: 34, style: .continuous)
-                    .fill(theme.shell.bottomBarMaterial.opacity(theme.mode == .dark ? 0.26 : 0.18))
+                    .fill(AmbitionsIOS26SemanticTokens.LiquidGlass.darkDockBase.opacity(theme.mode == .dark ? 0.38 : 0.24))
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 34, style: .continuous)
-                    .stroke(theme.shell.divider.opacity(0.56), lineWidth: 1)
+                    .stroke(AmbitionsIOS26SemanticTokens.Separator.darkNonOpaque.opacity(0.42), lineWidth: 1)
             )
             .overlay(alignment: .top) {
                 RoundedRectangle(cornerRadius: 34, style: .continuous)
-                    .stroke(theme.colors.textPrimary.opacity(theme.mode == .dark ? 0.08 : 0.10), lineWidth: 1)
+                    .stroke(theme.colors.textPrimary.opacity(theme.mode == .dark ? 0.035 : 0.06), lineWidth: 1)
                     .blendMode(.screen)
                     .allowsHitTesting(false)
             }
             .shadow(
-                color: theme.depth.resting.color.opacity(theme.mode == .dark ? 0.82 : 0.36),
+                color: theme.depth.resting.color.opacity(theme.mode == .dark ? 0.28 : 0.18),
                 radius: theme.depth.resting.radius,
                 x: theme.depth.resting.x,
                 y: theme.depth.resting.y
@@ -57,10 +57,10 @@ struct AppMeridianDestinationRail: View {
     private func destinationButton(_ destination: AppMeridianDestination) -> some View {
         let isSelected = destination.tab == selectedTab
         let accessibilityCompact = dynamicTypeSize.isAccessibilitySize
-        let iconSize: CGFloat = accessibilityCompact ? (isSelected ? 15 : 14) : (isSelected ? 20 : 19)
+        let iconSize: CGFloat = accessibilityCompact ? (isSelected ? 14 : 13) : (isSelected ? 18 : 17)
         let iconFrame = CGSize(
-            width: accessibilityCompact ? 24 : 32,
-            height: accessibilityCompact ? 22 : 28
+            width: accessibilityCompact ? 24 : 30,
+            height: accessibilityCompact ? 22 : 26
         )
         let labelSize: CGFloat = accessibilityCompact ? 10.5 : 12
 
@@ -70,12 +70,11 @@ struct AppMeridianDestinationRail: View {
             VStack(spacing: accessibilityCompact ? 3 : 5) {
                 ZStack {
                     if isSelected {
-                        Circle()
-                            .fill(theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.20 : 0.14))
-                            .overlay(
-                                Circle()
-                                    .stroke(theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.34 : 0.24), lineWidth: 1)
-                            )
+                        Capsule(style: .continuous)
+                            .fill(theme.shell.activeTabForeground.opacity(theme.mode == .dark ? 0.78 : 0.64))
+                            .frame(width: accessibilityCompact ? 14 : 18, height: 2)
+                            .offset(y: accessibilityCompact ? 15 : 18)
+                            .accessibilityHidden(true)
                     }
 
                     Image(systemName: destination.systemImage)
@@ -102,9 +101,9 @@ struct AppMeridianDestinationRail: View {
                         .fill(
                             LinearGradient(
                                 colors: [
-                                    theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.24 : 0.15),
-                                    theme.colors.accentPrimary.opacity(theme.mode == .dark ? 0.12 : 0.08),
-                                    theme.colors.canvasElevated.opacity(0.10)
+                                    theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.070 : 0.055),
+                                    theme.colors.accentPrimary.opacity(theme.mode == .dark ? 0.045 : 0.035),
+                                    theme.colors.canvasElevated.opacity(0.025)
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
@@ -115,7 +114,7 @@ struct AppMeridianDestinationRail: View {
             .overlay {
                 if isSelected {
                     RoundedRectangle(cornerRadius: accessibilityCompact ? 18 : 24, style: .continuous)
-                        .stroke(theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.36 : 0.22), lineWidth: 1)
+                        .stroke(theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.14 : 0.10), lineWidth: 1)
                 }
             }
             .contentShape(RoundedRectangle(cornerRadius: accessibilityCompact ? 18 : 24, style: .continuous))
