@@ -18,7 +18,7 @@ struct MotionObjectStagePrimitiveContract: Equatable {
         primitiveID: "motion-object-stage",
         ownerSurface: "Motion",
         productObject: "Motion Current",
-        firstViewportStructure: "Full-bleed Motion Current object stage with inline proof, recovery, re-entry, source, proof, receipt relationships, and a visible re-entry action.",
+        firstViewportStructure: "Full-bleed Motion Current object stage with what changed, where to re-enter, what needs recovery, and inspectable proof relationships.",
         replacesFirstViewportStructures: [
             "rounded Motion Current field panel",
             "lane cards",
@@ -60,12 +60,9 @@ struct MotionCurrentScreen: View {
 
         ScrollView {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                MotionCurrentField(state: projection.field, lanes: projection.lanes, reduceMotion: reduceMotion)
                 MotionContextCrown(state: projection.crown)
-                Color.clear
-                    .frame(height: theme.spacing.xxl)
-                    .allowsHitTesting(false)
-                    .accessibilityHidden(true)
+                MotionCurrentField(state: projection.field, lanes: projection.lanes, reduceMotion: reduceMotion)
+                MotionReentryPrompt()
                 MotionLaneCluster(lanes: projection.lanes)
                 MotionSourceReceiptAffordance(state: projection.affordance)
                 MotionContinuityDock(actions: projection.dockActions)
@@ -83,6 +80,30 @@ struct MotionCurrentScreen: View {
         }
         .accessibilityIdentifier("motion.current.screen")
         .accessibilityValue(objectStageContract.firstViewportStructure)
+    }
+}
+
+private struct MotionReentryPrompt: View {
+    @Environment(\.ambitionTheme) private var theme
+
+    var body: some View {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
+            Image(systemName: "arrow.uturn.forward.circle")
+                .font(.system(size: theme.icon.mediumSize, weight: .semibold))
+                .foregroundStyle(theme.colors.accentWarm)
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text("Re-enter from here")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                Text("Motion shows what changed, where to return, and what needs recovery.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.vertical, theme.spacing.xs)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("motion.reentry.prompt")
     }
 }
 
