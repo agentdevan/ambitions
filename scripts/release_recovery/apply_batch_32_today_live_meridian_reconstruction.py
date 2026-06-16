@@ -12,40 +12,64 @@ def replace_once(text: str, before: str, after: str, label: str) -> str:
     return text.replace(before, after, 1)
 
 
+def ensure_today_zoom_titles(text: str) -> str:
+    if "var title: String" in text.split("/// The Reality Meridian", 1)[0]:
+        return text
+    return replace_once(
+        text,
+        "private enum TodayMeridianZoom: String, CaseIterable {\n    case window\n    case day\n}\n",
+        "private enum TodayMeridianZoom: String, CaseIterable {\n    case window\n    case day\n\n    var title: String {\n        switch self {\n        case .window: \"Start Here\"\n        case .day: \"Meridian\"\n        }\n    }\n}\n",
+        "TodayMeridianZoom title",
+    )
+
+
+def ensure_today_mode_selector(text: str) -> str:
+    if "private var todayModeSelector: some View" in text:
+        return text
+    text = replace_once(
+        text,
+        "                    if dynamicTypeSize.isAccessibilitySize {\n                        accessibilityContextCrown\n                    }\n\n                    HStack(alignment: .top, spacing: theme.spacing.lg) {",
+        "                    if dynamicTypeSize.isAccessibilitySize {\n                        accessibilityContextCrown\n                    } else {\n                        todayModeSelector\n                            .padding(.bottom, theme.spacing.md)\n                    }\n\n                    HStack(alignment: .top, spacing: theme.spacing.lg) {",
+        "Today mode selector insertion",
+    )
+    return replace_once(
+        text,
+        "    private var timeSpine: some View {\n",
+        "    private var todayModeSelector: some View {\n        Picker(\"Today mode\", selection: $meridianZoom) {\n            ForEach(TodayMeridianZoom.allCases, id: \\.self) { zoom in\n                Text(zoom.title).tag(zoom)\n            }\n        }\n        .pickerStyle(.segmented)\n        .accessibilityIdentifier(\"TodayRealityMeridianModeSelector\")\n        .accessibilityLabel(\"Today mode\")\n        .accessibilityHint(\"Switches between the recommended step and the day meridian.\")\n    }\n\n    private var timeSpine: some View {\n",
+        "Today mode selector helper",
+    )
+
+
+def ensure_live_meridian_meta(text: str) -> str:
+    text = text.replace('Text("Now")', 'Text("Live now")')
+    text = text.replace(
+        'Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : metaLine(for: heroStep))',
+        'Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : liveMeridianMetaLine(for: heroStep))',
+    )
+    if "private func liveMeridianMetaLine(for heroStep: DayRailHeroStepState) -> String" in text:
+        return text
+    return replace_once(
+        text,
+        "    private func primaryActionButton(for heroStep: DayRailHeroStepState) -> some View {\n",
+        "    private func liveMeridianMetaLine(for heroStep: DayRailHeroStepState) -> String {\n        \"Now-aware fit · \\(metaLine(for: heroStep))\"\n    }\n\n    private func primaryActionButton(for heroStep: DayRailHeroStepState) -> some View {\n",
+        "Today live meta helper",
+    )
+
+
 def main() -> int:
     text = read(TODAY)
-    if "var title: String" not in text.split("/// The Reality Meridian", 1)[0]:
-        text = replace_once(
-            text,
-            "private enum TodayMeridianZoom: String, CaseIterable {\n    case window\n    case day\n}\n",
-            "private enum TodayMeridianZoom: String, CaseIterable {\n    case window\n    case day\n\n    var title: String {\n        switch self {\n        case .window: \"Start Here\"\n        case .day: \"Meridian\"\n        }\n    }\n}\n",
-            "TodayMeridianZoom title",
-        )
-    if "todayModeSelector" not in text:
-        text = replace_once(
-            text,
-            "                    if dynamicTypeSize.isAccessibilitySize {\n                        accessibilityContextCrown\n                    }\n\n                    HStack(alignment: .top, spacing: theme.spacing.lg) {",
-            "                    if dynamicTypeSize.isAccessibilitySize {\n                        accessibilityContextCrown\n                    } else {\n                        todayModeSelector\n                            .padding(.bottom, theme.spacing.md)\n                    }\n\n                    HStack(alignment: .top, spacing: theme.spacing.lg) {",
-            "Today mode selector insertion",
-        )
-        text = replace_once(
-            text,
-            "    private var timeSpine: some View {\n",
-            "    private var todayModeSelector: some View {\n        Picker(\"Today mode\", selection: $meridianZoom) {\n            ForEach(TodayMeridianZoom.allCases, id: \\.self) { zoom in\n                Text(zoom.title).tag(zoom)\n            }\n        }\n        .pickerStyle(.segmented)\n        .accessibilityIdentifier(\"TodayRealityMeridianModeSelector\")\n        .accessibilityLabel(\"Today mode\")\n        .accessibilityHint(\"Switches between the recommended step and the day meridian.\")\n    }\n\n    private var timeSpine: some View {\n",
-            "Today mode selector helper",
-        )
-    text = text.replace('Text("Now")', 'Text("Live now")')
-    text = text.replace('Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : metaLine(for: heroStep))', 'Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : liveMeridianMetaLine(for: heroStep))')
-    if "liveMeridianMetaLine" not in text:
-        text = replace_once(
-            text,
-            "    private func primaryActionButton(for heroStep: DayRailHeroStepState) -> some View {\n",
-            "    private func liveMeridianMetaLine(for heroStep: DayRailHeroStepState) -> String {\n        \"Now-aware fit · \\(metaLine(for: heroStep))\"\n    }\n\n    private func primaryActionButton(for heroStep: DayRailHeroStepState) -> some View {\n",
-            "Today live meta helper",
-        )
+    text = ensure_today_zoom_titles(text)
+    text = ensure_today_mode_selector(text)
+    text = ensure_live_meridian_meta(text)
     write(TODAY, text)
 
-    require_markers(TODAY, ["TimelineView(.periodic", "TodayRealityMeridianModeSelector", "Live now", "liveMeridianMetaLine", "Now-aware fit"])
+    require_markers(TODAY, [
+        "TimelineView(.periodic",
+        "TodayRealityMeridianModeSelector",
+        "Live now",
+        "private func liveMeridianMetaLine",
+        "Now-aware fit",
+    ])
 
     write_proof(
         "REPORT_BATCH_32_TODAY_LIVE_MERIDIAN_RECONSTRUCTION.md",
@@ -65,7 +89,7 @@ Native interaction law:
 - Today must orient the user around live current reality before explaining runtime fit.
 
 Validation:
-- Source markers prove the live now marker, mode selector, and now-aware fit text exist.
+- Source markers prove the live now marker, mode selector, and now-aware fit helper exist.
 - Xcode build remains the blocking gate.
 """,
     )
