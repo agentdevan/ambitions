@@ -352,8 +352,8 @@ struct AmbitionsRootView: View {
         LinearGradient(
             colors: [
                 theme.colors.canvas.opacity(0.0),
-                theme.colors.canvas.opacity(theme.mode == .dark ? 0.98 : 0.94),
-                theme.colors.canvas.opacity(1.0)
+                theme.colors.canvas.opacity(theme.mode == .dark ? 0.42 : 0.34),
+                theme.colors.canvas.opacity(theme.mode == .dark ? 0.70 : 0.58)
             ],
             startPoint: .top,
             endPoint: .bottom
@@ -384,7 +384,7 @@ struct AmbitionsRootView: View {
     }
 
     private func shellDockClearance(theme: AmbitionTheme) -> CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 112 : 124
+        dynamicTypeSize.isAccessibilitySize ? 156 : 152
     }
 
     private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {

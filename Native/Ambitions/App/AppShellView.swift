@@ -194,7 +194,7 @@ struct AppShellScaffold<Content: View>: View {
     }
 
     private var bottomChromeClearance: CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 128 : 124
+        dynamicTypeSize.isAccessibilitySize ? 180 : 164
     }
 
     private var topInsetSpacing: CGFloat {
@@ -380,8 +380,8 @@ private struct AppShellHeaderRail: View {
 
     private var divider: some View {
         Rectangle()
-            .fill(theme.shell.divider)
-            .frame(height: 1)
+            .fill(Color.clear)
+            .frame(height: 0)
     }
 
     private var shouldShowTitleBlock: Bool {
@@ -414,7 +414,7 @@ private struct AppShellHeaderRail: View {
 
     private var headerMaterial: AnyShapeStyle {
         if onBack == nil {
-            return AnyShapeStyle(theme.colors.canvas.opacity(theme.mode == .dark ? 0.96 : 0.92))
+            return AnyShapeStyle(theme.colors.canvas.opacity(theme.mode == .dark ? 0.28 : 0.22))
         }
         return AnyShapeStyle(theme.shell.headerMaterial)
     }
