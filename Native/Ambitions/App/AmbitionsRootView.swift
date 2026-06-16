@@ -146,7 +146,7 @@ struct AmbitionsRootView: View {
         NavigationStack {
             AppShellScaffold(
                 title: "Today",
-                subtitle: "Execution",
+                subtitle: "Start here",
                 posture: .execution,
                 trailingButtons: shellUtilityButtons(for: .today),
                 reservesPrimaryObjectTopClearance: true
@@ -160,7 +160,7 @@ struct AmbitionsRootView: View {
         NavigationStack(path: $navigation.goalsPath) {
             AppShellScaffold(
                 title: "Goals",
-                subtitle: "Direction",
+                subtitle: "Constellation Atlas",
                 posture: .direction,
                 trailingButtons: shellUtilityButtons(for: .goals)
             ) {
@@ -183,7 +183,7 @@ struct AmbitionsRootView: View {
         NavigationStack(path: $navigation.timePath) {
             AppShellScaffold(
                 title: "Time",
-                subtitle: "Shape Time",
+                subtitle: "LifeShape Field",
                 posture: .shaping,
                 trailingButtons: shellUtilityButtons(for: .time)
             ) {
@@ -194,7 +194,7 @@ struct AmbitionsRootView: View {
                 case .captureInbox:
                     AppShellScaffold(
                         title: "Capture",
-                        subtitle: "Time support route",
+                        subtitle: "Open Field",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
@@ -205,7 +205,7 @@ struct AmbitionsRootView: View {
                 case .habits:
                     AppShellScaffold(
                         title: "Rituals",
-                        subtitle: "Time-owned loop view",
+                        subtitle: "LifeShape Field",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
@@ -216,7 +216,7 @@ struct AmbitionsRootView: View {
                 case .weeklyReview:
                     AppShellScaffold(
                         title: "Weekly Review",
-                        subtitle: "Time shaping continuation",
+                        subtitle: "LifeShape Field",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
