@@ -15,9 +15,10 @@
     "batch_13_report_today_mutation",
     "batch_14_report_shell_nav",
     "batch_15_report_surface_language",
-    "batch_16_report_closure_gate"
+    "batch_16_report_closure_gate",
+    "batch_17_apple_token_bridge"
   ],
-  "last_green_batch": "batch_16_report_closure_gate",
+  "last_green_batch": "batch_17_apple_token_bridge",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
