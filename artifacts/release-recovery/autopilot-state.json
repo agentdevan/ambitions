@@ -5,9 +5,10 @@
     "batch_03_object_stage_card_names",
     "batch_04_today_meridian_copy",
     "batch_05_capture_composer_copy",
-    "batch_06_shell_chrome_copy"
+    "batch_06_shell_chrome_copy",
+    "batch_07_flagship_runtime_primitives"
   ],
-  "last_green_batch": "batch_06_shell_chrome_copy",
+  "last_green_batch": "batch_07_flagship_runtime_primitives",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
