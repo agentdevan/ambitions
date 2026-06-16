@@ -27,9 +27,10 @@
     "batch_25_goals_constellation_atlas",
     "batch_26_shared_visual_decardification",
     "batch_27_screenshot_acceptance_gate",
-    "batch_28_motion_reentry_acceptance_copy"
+    "batch_28_motion_reentry_acceptance_copy",
+    "batch_28_native_interaction_truth"
   ],
-  "last_green_batch": "batch_28_motion_reentry_acceptance_copy",
+  "last_green_batch": "batch_28_native_interaction_truth",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
