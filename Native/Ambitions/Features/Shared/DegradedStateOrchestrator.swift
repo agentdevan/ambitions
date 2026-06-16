@@ -155,21 +155,21 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
     var emptyExplanation: String {
         switch self {
         case .startHere:
-            "Start Here waits for one real goal, capture, or promise instead of inventing urgency."
+            "No recommended step fits right now. Ambitions will stay quiet instead of inventing urgency."
         case .realityRail:
-            "The rail can stay open; empty space is not treated as failure."
+            "The Reality Meridian can stay open; quiet space is part of the day."
         case .missionControlTimeSpine:
-            "Your Direction waits for a goal with enough local shape to inspect."
+            "Your Direction waits for a goal thread with enough shape to inspect."
         case .proofSpine:
             "No proof is shown until the user saves evidence or a local receipt exists."
         case .capturePlacementShelf:
-            "The composer stays quiet until there is a capture that needs a place."
+            "The composer stays quiet until something needs a place."
         case .lifeShapeContourMap:
-            "The LifeShape Field can stay open when no real constraints need shaping."
+            "The LifeShape Field can stay open when no real pressure needs shaping."
         case .personalSystemCenter:
-            "Your System starts with setup and trust controls before it shows deeper history."
+            "Your System starts with profile, defaults, privacy, and history controls."
         case .memoryLens:
-            "Search stays quiet until explicit local evidence makes recall useful."
+            "Search stays quiet until local evidence makes recall useful."
         }
     }
 
