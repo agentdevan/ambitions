@@ -1,0 +1,156 @@
+name: Ambitions Report Screenshot Proof
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/ambitions-report-screenshots.yml
+
+permissions:
+  contents: read
+
+env:
+  SCREENSHOT_BATCH: report-screenshot-proof
+
+concurrency:
+  group: ambitions-report-screenshot-proof
+  cancel-in-progress: false
+
+jobs:
+  screenshots:
+    runs-on: [self-hosted, Ambitions-XCode26]
+    timeout-minutes: 180
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Toolchain proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          sw_vers || true
+          xcodebuild -version
+          xcode-select -p
+          git status --short --branch
+          git rev-parse HEAD
+          xcrun simctl list devices available | sed -n '1,160p'
+          command -v xcparse || true
+
+      - name: Build for screenshot UI tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          scripts/ambitions-xcode-sim-health.sh --repair --json | tee artifacts-report-sim-health.json || true
+          scripts/ambitions-xcode-build-for-testing.sh \
+            --batch "${SCREENSHOT_BATCH}" \
+            --results-dir ".codex/xcode-results" \
+            --logs-dir ".codex/xcode-logs" \
+            --summaries-dir ".codex/xcode-summaries"
+
+      - name: Capture canonical shell screenshots
+        id: shell_shots
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          scripts/ambitions-xcode-test-focused.sh \
+            --batch "${SCREENSHOT_BATCH}" \
+            --only-testing "AmbitionsUITests/AmbitionsUITests/testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs" \
+            --results-dir ".codex/xcode-results" \
+            --logs-dir ".codex/xcode-logs" \
+            --summaries-dir ".codex/xcode-summaries"
+
+      - name: Capture activated Capture screenshots
+        id: capture_shots
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          scripts/ambitions-xcode-test-focused.sh \
+            --batch "${SCREENSHOT_BATCH}" \
+            --only-testing "AmbitionsUITests/AmbitionsUITests/testAMB967CaptureCreateGoalScreenshotMatrix" \
+            --results-dir ".codex/xcode-results" \
+            --logs-dir ".codex/xcode-logs" \
+            --summaries-dir ".codex/xcode-summaries"
+
+      - name: Capture Time screenshot matrix
+        id: time_shots
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          scripts/ambitions-xcode-test-focused.sh \
+            --batch "${SCREENSHOT_BATCH}" \
+            --only-testing "AmbitionsUITests/AmbitionsUITests/testAMB964TimeReconstructionScreenshotMatrix" \
+            --results-dir ".codex/xcode-results" \
+            --logs-dir ".codex/xcode-logs" \
+            --summaries-dir ".codex/xcode-summaries"
+
+      - name: Capture Motion screenshot matrix
+        id: motion_shots
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          scripts/ambitions-xcode-test-focused.sh \
+            --batch "${SCREENSHOT_BATCH}" \
+            --only-testing "AmbitionsUITests/AmbitionsUITests/testAMB965MotionReconstructionScreenshotMatrix" \
+            --results-dir ".codex/xcode-results" \
+            --logs-dir ".codex/xcode-logs" \
+            --summaries-dir ".codex/xcode-summaries"
+
+      - name: Capture You screenshot matrix
+        id: you_shots
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          scripts/ambitions-xcode-test-focused.sh \
+            --batch "${SCREENSHOT_BATCH}" \
+            --only-testing "AmbitionsUITests/AmbitionsUITests/testAMB966YouReconstructionScreenshotMatrix" \
+            --results-dir ".codex/xcode-results" \
+            --logs-dir ".codex/xcode-logs" \
+            --summaries-dir ".codex/xcode-summaries"
+
+      - name: Summarize screenshot proof
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/report-screenshots
+          cat > artifacts/report-screenshots/SUMMARY.md <<EOF
+          # Ambitions Report Screenshot Proof
+
+          Commit: $(git rev-parse HEAD)
+
+          Focused UI screenshot runs:
+          - shell tabs: ${{ steps.shell_shots.outcome }}
+          - activated Capture: ${{ steps.capture_shots.outcome }}
+          - Time matrix: ${{ steps.time_shots.outcome }}
+          - Motion matrix: ${{ steps.motion_shots.outcome }}
+          - You matrix: ${{ steps.you_shots.outcome }}
+
+          Artifacts include extracted screenshots when xcparse is installed, raw xcresult bundles otherwise, and focused test logs/summaries.
+          EOF
+          find .codex/xcode-summaries/${SCREENSHOT_BATCH} -type f -maxdepth 4 -print 2>/dev/null | sort > artifacts/report-screenshots/summary-files.txt || true
+          find .codex/xcode-results/${SCREENSHOT_BATCH} -maxdepth 4 -name '*.xcresult' -print 2>/dev/null | sort > artifacts/report-screenshots/result-bundles.txt || true
+          find .codex/xcode-summaries/${SCREENSHOT_BATCH} -path '*/extract/screenshots/*' -type f -print 2>/dev/null | sort > artifacts/report-screenshots/extracted-screenshots.txt || true
+
+      - name: Upload screenshot proof artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ambitions-report-screenshot-proof
+          path: |
+            artifacts/report-screenshots/**
+            artifacts-report-sim-health.json
+            .codex/xcode-results/report-screenshot-proof/**
+            .codex/xcode-logs/report-screenshot-proof/**
+            .codex/xcode-summaries/report-screenshot-proof/**
+          if-no-files-found: warn
+          retention-days: 7
