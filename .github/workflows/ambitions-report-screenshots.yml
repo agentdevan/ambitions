@@ -46,6 +46,7 @@ jobs:
           command -v xcparse || true
 
       - name: Build for screenshot UI tests
+        id: build_for_testing
         shell: bash
         run: |
           set -euo pipefail
@@ -59,7 +60,7 @@ jobs:
       - name: Capture canonical shell screenshots
         id: shell_shots
         shell: bash
-        continue-on-error: false
+        continue-on-error: true
         run: |
           set -euo pipefail
           scripts/ambitions-xcode-test-focused.sh \
@@ -72,7 +73,7 @@ jobs:
       - name: Capture Today screenshot matrix
         id: today_shots
         shell: bash
-        continue-on-error: false
+        continue-on-error: true
         run: |
           set -euo pipefail
           scripts/ambitions-xcode-test-focused.sh \
@@ -85,7 +86,7 @@ jobs:
       - name: Capture Goals screenshot matrix
         id: goals_shots
         shell: bash
-        continue-on-error: false
+        continue-on-error: true
         run: |
           set -euo pipefail
           scripts/ambitions-xcode-test-focused.sh \
@@ -98,7 +99,7 @@ jobs:
       - name: Capture activated Capture screenshots
         id: capture_shots
         shell: bash
-        continue-on-error: false
+        continue-on-error: true
         run: |
           set -euo pipefail
           scripts/ambitions-xcode-test-focused.sh \
@@ -111,7 +112,7 @@ jobs:
       - name: Capture Time screenshot matrix
         id: time_shots
         shell: bash
-        continue-on-error: false
+        continue-on-error: true
         run: |
           set -euo pipefail
           scripts/ambitions-xcode-test-focused.sh \
@@ -124,7 +125,7 @@ jobs:
       - name: Capture Motion screenshot matrix
         id: motion_shots
         shell: bash
-        continue-on-error: false
+        continue-on-error: true
         run: |
           set -euo pipefail
           scripts/ambitions-xcode-test-focused.sh \
@@ -137,7 +138,7 @@ jobs:
       - name: Capture You screenshot matrix
         id: you_shots
         shell: bash
-        continue-on-error: false
+        continue-on-error: true
         run: |
           set -euo pipefail
           scripts/ambitions-xcode-test-focused.sh \
@@ -146,6 +147,25 @@ jobs:
             --results-dir ".codex/xcode-results" \
             --logs-dir ".codex/xcode-logs" \
             --summaries-dir ".codex/xcode-summaries"
+
+      - name: Extract screenshots from result bundles
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/report-screenshots/manual-extract/screenshots artifacts/report-screenshots/manual-extract/attachments
+          if command -v xcparse >/dev/null 2>&1; then
+            find ".codex/xcode-results/${SCREENSHOT_BATCH}" -name '*.xcresult' -type d -print 2>/dev/null | sort | while IFS= read -r result; do
+              safe_name="$(printf '%s' "$result" | sed 's#[^A-Za-z0-9._-]#_#g')"
+              out_root="artifacts/report-screenshots/manual-extract/${safe_name}"
+              mkdir -p "$out_root/screenshots" "$out_root/attachments" "$out_root/logs"
+              xcparse screenshots "$result" "$out_root/screenshots" || true
+              xcparse attachments "$result" "$out_root/attachments" || true
+              xcparse logs "$result" "$out_root/logs" || true
+            done
+          else
+            echo "xcparse is missing. Install with: brew install chargepoint/xcparse/xcparse" > artifacts/report-screenshots/XCPARSE_MISSING.txt
+          fi
 
       - name: Build screenshot review index
         if: always()
@@ -158,6 +178,8 @@ jobs:
           SUMMARY_LIST="artifacts/report-screenshots/summary-files.txt"
           INDEX="artifacts/report-screenshots/SCREENSHOT_REVIEW_INDEX.md"
           find ".codex/xcode-summaries/${SCREENSHOT_BATCH}" -path '*/extract/screenshots/*' -type f \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -print 2>/dev/null | sort > "$SCREENSHOT_LIST" || true
+          find "artifacts/report-screenshots/manual-extract" -path '*/screenshots/*' -type f \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -print 2>/dev/null | sort >> "$SCREENSHOT_LIST" || true
+          awk '!seen[$0]++' "$SCREENSHOT_LIST" > "${SCREENSHOT_LIST}.tmp" && mv "${SCREENSHOT_LIST}.tmp" "$SCREENSHOT_LIST"
           find ".codex/xcode-results/${SCREENSHOT_BATCH}" -maxdepth 5 -name '*.xcresult' -print 2>/dev/null | sort > "$RESULT_LIST" || true
           find ".codex/xcode-summaries/${SCREENSHOT_BATCH}" -type f -maxdepth 6 -print 2>/dev/null | sort > "$SUMMARY_LIST" || true
           {
@@ -178,7 +200,7 @@ jobs:
             if [[ -s "$SCREENSHOT_LIST" ]]; then
               while IFS= read -r file; do
                 rel="${file#./}"
-                echo "- [$rel](../../$rel)"
+                echo "- $rel"
               done < "$SCREENSHOT_LIST"
             else
               echo "- No extracted PNG screenshots found. Install xcparse on the runner or inspect the raw .xcresult bundles listed below."
@@ -227,7 +249,7 @@ jobs:
           - raw result bundles: ${result_count}
 
           Start with artifacts/report-screenshots/SCREENSHOT_REVIEW_INDEX.md.
-          Artifacts include extracted screenshots when xcparse is installed, raw xcresult bundles otherwise, and focused test logs/summaries. This workflow fails closed when a focused screenshot proof fails.
+          Artifacts include extracted screenshots when xcparse is installed, raw xcresult bundles otherwise, and focused test logs/summaries. This workflow collects every screenshot suite before failing at the final evaluation step.
           EOF
 
       - name: Upload screenshot proof artifacts
@@ -243,3 +265,31 @@ jobs:
             .codex/xcode-summaries/report-screenshot-proof/**
           if-no-files-found: warn
           retention-days: 7
+
+      - name: Evaluate screenshot proof outcomes
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          failed=0
+          for pair in \
+            "shell tabs:${{ steps.shell_shots.outcome }}" \
+            "Today matrix:${{ steps.today_shots.outcome }}" \
+            "Goals matrix:${{ steps.goals_shots.outcome }}" \
+            "activated Capture:${{ steps.capture_shots.outcome }}" \
+            "Time matrix:${{ steps.time_shots.outcome }}" \
+            "Motion matrix:${{ steps.motion_shots.outcome }}" \
+            "You matrix:${{ steps.you_shots.outcome }}"; do
+            name="${pair%%:*}"
+            outcome="${pair#*:}"
+            if [[ "$outcome" != "success" ]]; then
+              echo "Screenshot proof failed: ${name} -> ${outcome}" >&2
+              failed=1
+            fi
+          done
+          if [[ -f artifacts/report-screenshots/extracted-screenshots.txt ]] && [[ -s artifacts/report-screenshots/extracted-screenshots.txt ]]; then
+            echo "Extracted screenshot count: $(grep -c . artifacts/report-screenshots/extracted-screenshots.txt || true)"
+          else
+            echo "No extracted screenshots were found. Install xcparse or inspect raw xcresult bundles." >&2
+          fi
+          exit "$failed"
