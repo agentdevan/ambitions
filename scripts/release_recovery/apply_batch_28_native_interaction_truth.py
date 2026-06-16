@@ -19,6 +19,7 @@ def main() -> int:
         "Ambitions uses living-object transitions, not page-open transitions",
         "Empty, low-data, and inactive states need grace",
         "Steps can have substeps, evidence, attachments, reminders, and repeats, but must not become tasks",
+        "ChatGPT | Composer quality | Capture uses premium composer",
         "Could a user understand what this screen does before reading Ambitions-specific vocabulary?",
         "NATIVE_INTERACTION_TRUTH.md",
     ]
@@ -33,8 +34,8 @@ def main() -> int:
     if "calendar clone" not in product_truth or "chatbot" not in product_truth:
         raise RuntimeError("Product Design Truth anti-drift canon must remain intact while adding Native Interaction Truth.")
 
-    if "ChatGPT" in native_truth and "Capture should use a premium bottom composer" not in native_truth:
-        raise RuntimeError("ChatGPT reference must remain translated into Capture composer law, not product imitation.")
+    if "ChatGPT" in native_truth and "copy no product category. Translate interaction law only." not in native_truth:
+        raise RuntimeError("Imported app references must remain translated into Ambitions interaction laws, not copied as product direction.")
 
     write_proof(
         "REPORT_BATCH_28_NATIVE_INTERACTION_TRUTH.md",
