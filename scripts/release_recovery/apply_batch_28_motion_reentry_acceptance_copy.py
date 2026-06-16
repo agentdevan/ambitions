@@ -22,33 +22,26 @@ MOTION_SCREEN = ROOT / "Native" / "Ambitions" / "Features" / "Motion" / "MotionC
 REPORT = ROOT / "artifacts" / "release-recovery" / "REPORT_BATCH_28_MOTION_REENTRY_ACCEPTANCE_COPY.md"
 
 
-def replace_once_or_confirm(text: str, old: str, new: str, label: str) -> tuple[str, str]:
+def replace_required_copy(text: str) -> tuple[str, list[str]]:
+    old = 'title: "Return available",'
+    new = 'title: "Re-entry available",'
+
     if new in text and old not in text:
-        return text, f"- {label}: already green; `{new}` present and stale `{old}` absent."
-    if old not in text:
-        raise RuntimeError(f"Batch 28 marker missing for {label}: {old!r}")
-    return text.replace(old, new), f"- {label}: replaced `{old}` with `{new}`."
+        return text, [f"- re-entry title: already green; `{new}` present and stale `{old}` absent."]
+
+    count = text.count(old)
+    if count == 0:
+        raise RuntimeError(f"Batch 28 marker missing: {old!r}")
+
+    return (
+        text.replace(old, new),
+        [f"- re-entry title: replaced {count} occurrence(s) of `{old}` with `{new}`."],
+    )
 
 
 def main() -> int:
     text = MOTION_SCREEN.read_text(encoding="utf-8")
-    notes: list[str] = []
-
-    text, note = replace_once_or_confirm(
-        text,
-        'title: "Return available",',
-        'title: "Re-entry available",',
-        "re-entry lane item title"
-    )
-    notes.append(note)
-
-    text, note = replace_once_or_confirm(
-        text,
-        'title: "Return available"\n',
-        'title: "Re-entry available"\n',
-        "re-entry field title"
-    )
-    notes.append(note)
+    text, notes = replace_required_copy(text)
 
     required = [
         "Re-entry available",
