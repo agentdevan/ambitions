@@ -44,9 +44,10 @@
     "batch_40_you_settings_studio_rebuild",
     "batch_41_motion_reentry_visual_rebuild",
     "batch_42_quiet_empty_state_rebuild",
-    "batch_43_visual_reconstruction_test_alignment"
+    "batch_43_visual_reconstruction_test_alignment",
+    "batch_44_visual_rebuild_gate"
   ],
-  "last_green_batch": "batch_43_visual_reconstruction_test_alignment",
+  "last_green_batch": "batch_44_visual_rebuild_gate",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
@@ -2271,6 +2272,95 @@
         }
       ],
       "started_at": "2026-06-16T21:56:49.354702+00:00",
+      "status": "green"
+    },
+    {
+      "batch": "batch_43_visual_reconstruction_test_alignment",
+      "commit_sha": "68cf0547f45a846acc74ffd878344f19a378cf6a",
+      "finished_at": "2026-06-16T22:03:34.866163+00:00",
+      "results": [
+        {
+          "blocking": true,
+          "command": [
+            "python3",
+            "scripts/release_recovery/apply_batch_43_visual_reconstruction_test_alignment.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/apply-batch.log",
+          "name": "apply_batch",
+          "returncode": 0
+        },
+        {
+          "blocking": true,
+          "command": [
+            "python3",
+            "scripts/ambitions-release-red-guard.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/release-red-guard.log",
+          "name": "release_red_guard",
+          "returncode": 0
+        },
+        {
+          "blocking": true,
+          "command": [
+            "python3",
+            "scripts/ambitions-empty-action-lint.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/empty-action-lint.log",
+          "name": "empty_action_lint",
+          "returncode": 0
+        },
+        {
+          "blocking": false,
+          "command": [
+            "python3",
+            "scripts/ambitions-copy-contract-lint.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/copy-contract-lint.log",
+          "name": "copy_contract_lint",
+          "returncode": 0
+        },
+        {
+          "blocking": false,
+          "command": [
+            "python3",
+            "scripts/ambitions-first-viewport-card-lint.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/first-viewport-card-lint.log",
+          "name": "first_viewport_card_lint",
+          "returncode": 0
+        },
+        {
+          "blocking": true,
+          "command": [
+            "bash",
+            "artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/generate-xcode-project.sh"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/xcodegen.log",
+          "name": "xcodegen",
+          "returncode": 0
+        },
+        {
+          "blocking": true,
+          "command": [
+            "xcodebuild",
+            "-project",
+            "Ambitions.xcodeproj",
+            "-scheme",
+            "Ambitions",
+            "-destination",
+            "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5",
+            "-derivedDataPath",
+            "/Users/devan/actions-runner/_work/ambitions/ambitions/artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/DerivedData",
+            "-skipPackagePluginValidation",
+            "-skipMacroValidation",
+            "build"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T220006Z-batch_43_visual_reconstruction_test_alignment/xcodebuild.log",
+          "name": "xcodebuild",
+          "returncode": 0
+        }
+      ],
+      "started_at": "2026-06-16T22:00:06.476379+00:00",
       "status": "green"
     }
   ],
