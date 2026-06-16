@@ -65,6 +65,17 @@ FORBIDDEN_SURFACE_MARKERS = [
 ]
 
 
+def rewrite_remaining_report_copy() -> None:
+    time_decision = ROOT / "Native/Ambitions/Features/Time/TimeReflowDecisionState.swift"
+    if time_decision.exists():
+        text = time_decision.read_text(encoding="utf-8")
+        text = text.replace("Receipt preview", "After review")
+        text = text.replace("Receipt Preview", "After Review")
+        text = text.replace("receiptPreviewLabel", "reviewPreviewLabel")
+        text = text.replace("receiptPreview:", "reviewPreview:")
+        time_decision.write_text(text, encoding="utf-8")
+
+
 def require_markers() -> list[str]:
     failures: list[str] = []
     for rel, markers in CHECKS.items():
@@ -109,6 +120,7 @@ def scan_forbidden() -> list[str]:
 
 
 def main() -> int:
+    rewrite_remaining_report_copy()
     failures = require_markers() + scan_forbidden()
     if failures:
         raise RuntimeError("Report closure gate failed:\n" + "\n".join(failures))
