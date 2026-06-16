@@ -20,16 +20,16 @@ TARGET_ROOTS = [
 TARGET_EXTENSIONS = {".swift"}
 
 # Visible-copy / comment-only sweep. Do not rename identifiers.
-# Keep these exact-string replacements conservative so Swift symbols and persisted enum cases remain untouched.
+# Keep exact-string replacements conservative so Swift symbols and persisted enum cases remain untouched.
 REPLACEMENTS: dict[str, str] = {
     # Shell/search/capture language
+    "case .quickFocus: \"Focus\"": "case .quickFocus: \"Start here\"",
     "What Ambitions knows": "Search Ambitions",
     "Memory Lens": "Search",
     "memory lens": "search",
     "Life Memory": "Personal context",
     "Quiet Command": "Quick action",
     "Patch Time": "Shape Time",
-    "Focus": "Start here",
     "Return to Today and center the next step.": "Return to Today and center the recommended step.",
     "Save what needs a place with a suggested route and a receipt you can change.": "Capture what changed, then decide where it belongs.",
     "Creates a local capture with source context and a receipt.": "Creates a local capture with context the user can review.",
@@ -45,8 +45,8 @@ REPLACEMENTS: dict[str, str] = {
     "source needed": "context needed",
     "Source, proof, receipt": "Why this?",
     "Source / Proof / Receipt": "Why this?",
-    "source/proof/trust": "trust",
     "source/proof/trust blocks": "trust details",
+    "source/proof/trust": "trust",
     "receipt preview": "review preview",
     "Receipt preview": "Review preview",
     "Route reveal": "Placement review",
@@ -106,6 +106,12 @@ REPLACEMENTS: dict[str, str] = {
     "Task app": "Task-app",
 }
 
+FORBIDDEN_AFTER = [
+    "quickStart here",
+    "quickStart now",
+    "AmbitionsCommandIntent.quickStart",
+]
+
 # Require these after the sweep so the batch is anchored to the new native-interaction canon.
 TRUTH_MARKERS = [
     "Time must be legible before it is intelligent",
@@ -143,6 +149,14 @@ def apply_replacements(path: Path) -> dict[str, int]:
     return counts
 
 
+def verify_no_corrupted_identifiers(files: list[Path]) -> None:
+    for path in files:
+        text = path.read_text(encoding="utf-8")
+        for marker in FORBIDDEN_AFTER:
+            if marker in text:
+                raise RuntimeError(f"Unsafe replacement introduced `{marker}` in {path}")
+
+
 def main() -> int:
     require_markers(TRUTH, TRUTH_MARKERS)
     require_markers(PRODUCT_TRUTH, [
@@ -153,14 +167,17 @@ def main() -> int:
         "chatbot",
     ])
 
+    files = iter_target_files()
     per_file: dict[str, dict[str, int]] = {}
     total_counts: defaultdict[str, int] = defaultdict(int)
-    for path in iter_target_files():
+    for path in files:
         counts = apply_replacements(path)
         if counts:
             per_file[str(path)] = counts
             for key, value in counts.items():
                 total_counts[key] += value
+
+    verify_no_corrupted_identifiers(files)
 
     for path, markers in SURFACE_MARKERS.items():
         if Path(path).exists():
@@ -199,6 +216,7 @@ Gates:
 - `docs/truth/PRODUCT_DESIGN_TRUTH.md` still preserves active IA and anti-drift canon.
 - Shell command visible copy now uses `Shape Time`, `Search Ambitions`, and `Capture what changed` language.
 - No workflow files were modified by this batch.
+- Unsafe identifier corruption markers are absent after the sweep.
 
 Hard boundary:
 - This is a sweeping source-language and interaction-contract batch. It does not claim final visual acceptance. Screenshot proof and manual report review remain required.
