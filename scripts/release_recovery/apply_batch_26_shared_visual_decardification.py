@@ -20,7 +20,13 @@ public struct ObjectStageSurface<Content: View>: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     private let content: Content
 
-    public init(@ViewBuilder content: () -> Content) {
+    public init(
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        _ = state
+        _ = accent
         self.content = content()
     }
 
@@ -35,9 +41,17 @@ public struct ObjectStageSurface<Content: View>: View {
 
 /// Compact object-stage glance without AppCard/WidgetCard chrome.
 public struct ObjectStageGlance<Content: View>: View {
+    private let state: AmbitionVisualState
+    private let accent: Color?
     private let content: Content
 
-    public init(@ViewBuilder content: () -> Content) {
+    public init(
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.accent = accent
         self.content = content()
     }
 
@@ -48,8 +62,8 @@ public struct ObjectStageGlance<Content: View>: View {
             .background(AmbitionsIOS26SemanticTokens.Fill.quaternaryDark)
             .overlay(alignment: .top) {
                 Rectangle()
-                    .fill(AmbitionsIOS26SemanticTokens.Separator.darkNonOpaque)
-                    .frame(height: 1)
+                    .fill(stateAccent.opacity(state == .selected ? 0.82 : 0.42))
+                    .frame(height: state == .selected ? 1.5 : 1)
                     .accessibilityHidden(true)
             }
             .overlay(alignment: .bottom) {
@@ -59,13 +73,38 @@ public struct ObjectStageGlance<Content: View>: View {
                     .accessibilityHidden(true)
             }
     }
+
+    private var stateAccent: Color {
+        accent ?? {
+            switch state {
+            case .selected, .success, .celebration:
+                return AmbitionsIOS26SemanticTokens.Accent.yellowDark
+            case .warning:
+                return AmbitionsIOS26SemanticTokens.Accent.copperDark
+            case .loading:
+                return AmbitionsIOS26SemanticTokens.Accent.blueDark
+            case .disabled:
+                return AmbitionsIOS26SemanticTokens.Label.tertiaryDark
+            default:
+                return AmbitionsIOS26SemanticTokens.Separator.darkNonOpaque
+            }
+        }()
+    }
 }
 
 /// Dominant object-stage hero without HeroCard chrome.
 public struct ObjectStageHero<Content: View>: View {
+    private let state: AmbitionVisualState
+    private let accent: Color?
     private let content: Content
 
-    public init(@ViewBuilder content: () -> Content) {
+    public init(
+        state: AmbitionVisualState = .default,
+        accent: Color? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.state = state
+        self.accent = accent
         self.content = content()
     }
 
@@ -92,8 +131,8 @@ public struct ObjectStageHero<Content: View>: View {
             }
             .overlay(alignment: .leading) {
                 Rectangle()
-                    .fill(AmbitionsIOS26SemanticTokens.Accent.yellowDark.opacity(0.42))
-                    .frame(width: 2)
+                    .fill((accent ?? AmbitionsIOS26SemanticTokens.Accent.yellowDark).opacity(state == .selected ? 0.72 : 0.42))
+                    .frame(width: state == .selected ? 3 : 2)
                     .accessibilityHidden(true)
             }
     }
@@ -168,6 +207,7 @@ def main() -> int:
         "ObjectStageSurface",
         "ObjectStageGlance",
         "ObjectStageHero",
+        "state: AmbitionVisualState",
         "InstrumentField",
         "TrustSeamDisclosure",
         "NativeGroupedControlSurface",
@@ -185,6 +225,7 @@ Status: applied.
 Scope:
 - Added root object-stage primitives that do not default to AppCard/WidgetCard/HeroCard chrome.
 - Added ObjectStageGlance and ObjectStageHero as real non-card primitives, not aliases to old card chrome.
+- Preserved the existing state/accent initializer contract expected by production surfaces.
 - Added InstrumentField for stateful product objects.
 - Added TrustSeamDisclosure for progressive Source / Proof / Receipt inspection.
 - Added NativeGroupedControlSurface for You/settings-style control flows.
