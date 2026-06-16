@@ -703,7 +703,7 @@ final class RecommendationExplanationModelsTests: XCTestCase {
             type: .whyThis,
             title: "Why this needs source review",
             summary: "The source state does not support recommendation behavior yet.",
-            recommendationTitle: "Review source first",
+            recommendationTitle: "Review context first",
             evidence: [.fromSourceAtlasQueryResult(blockedResult)],
             uncertainty: [
                 RecommendationExplanationUncertainty(
@@ -716,7 +716,7 @@ final class RecommendationExplanationModelsTests: XCTestCase {
                 RecommendationExplanationCorrectionAction(
                     id: "correct-source",
                     kind: .changeRoute,
-                    title: "Add or review source",
+                    title: "Add or review context",
                     targetFieldKey: "source"
                 )
             ],

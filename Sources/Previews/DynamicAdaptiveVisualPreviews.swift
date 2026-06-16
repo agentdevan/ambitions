@@ -240,7 +240,7 @@ private struct DynamicAdaptiveVisualGallery: View {
                             sourceLabel: "Saved memory",
                             freshnessLabel: "Older context",
                             undoLabel: "Ignore this source",
-                            correctionLabel: "Review source",
+                            correctionLabel: "Review context",
                             nextActionLabel: "Next: inspect before reuse",
                             state: .staleSource
                         )

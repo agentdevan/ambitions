@@ -318,7 +318,7 @@ enum ReleasePerformanceResponsivenessReport {
             id: "memory-review",
             area: .memoryReviewQueries,
             budget: "Memory and reviews must project grouped, privacy-safe evidence instead of exposing raw logs or unbounded searches.",
-            evidence: "Memory Lens, What Ambitions Knows, narrative memory, and review projector tests cover bounded local projections, source/freshness copy, correction posture, and review handoffs.",
+            evidence: "Search, What Ambitions Knows, narrative memory, and review projector tests cover bounded local projections, source/freshness copy, correction posture, and review handoffs.",
             evidenceLevel: .automatedSimulator,
             readiness: .acceptableForInternalTesting,
             limitation: "Long-running memory history and manual correction speed need device-volume review."

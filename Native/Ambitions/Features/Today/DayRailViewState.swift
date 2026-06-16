@@ -215,7 +215,7 @@ extension DayRailHeroStepState {
             ("Source", sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false),
             ("Receipt", receiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && receiptItem.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false),
             ("Reason", replayTraceLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && replayInspectionLabel.contains(replayTraceLabel)),
-            ("You / What Ambitions knows", replayInspectionLabel.contains(sourceRecordLabel) && sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false)
+            ("You / Search Ambitions", replayInspectionLabel.contains(sourceRecordLabel) && sourceRecordLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false)
         ]
         let missing = checks.compactMap { title, passes in passes ? nil : title }
         return TodayStartHereReplayCoverageState(
@@ -337,7 +337,7 @@ extension RealityMeridianContinuityProjectionState {
         let sourceRecordLabel = heroStep?.sourceRecordLabel ?? "Source record stays local"
         let receiptLabel = heroStep?.receiptLabel ?? "Start here review history"
         let replayTraceLabel = heroStep?.replayTraceLabel ?? "Review path stays inspectable"
-        let youInspectionLabel = "You / What Ambitions knows: \(sourceRecordLabel). \(replayTraceLabel)."
+        let youInspectionLabel = "You / Search Ambitions: \(sourceRecordLabel). \(replayTraceLabel)."
         let provenanceLabel = heroStep?.sourceQualityLabel
             ?? dayRail.contextLabels.first?.label
             ?? "Source-backed by the current Time shape"

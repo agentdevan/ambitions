@@ -222,7 +222,7 @@ final class AppIntentRoutingTests: XCTestCase {
 
         for phrase in reviewedPhrases {
             XCTAssertFalse(phrase.localizedCaseInsensitiveContains("Plan tab"))
-            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("next best move"))
+            XCTAssertFalse(phrase.localizedCaseInsensitiveContains("recommended step"))
             XCTAssertFalse(phrase.localizedCaseInsensitiveContains("AI"))
             XCTAssertFalse(phrase.localizedCaseInsensitiveContains("score"))
         }

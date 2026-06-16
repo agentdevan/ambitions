@@ -81,11 +81,11 @@ private struct YouTrustHistoryItemRow: View {
     private func sourceFreshnessLabel(for item: YouTrustHistoryItem) -> String {
         switch item.category {
         case .receipts, .proof:
-            return item.state == .success ? "Fresh source" : "Review source"
+            return item.state == .success ? "Fresh source" : "Review context"
         case .changes:
-            return item.state == .warning ? "Review source" : "Fresh source"
+            return item.state == .warning ? "Review context" : "Fresh source"
         case .sourceReview:
-            return item.state == .warning ? "Review source" : "Source review"
+            return item.state == .warning ? "Review context" : "Source review"
         case .privacy:
             return item.state == .success ? "Private and current" : "Private review"
         case .automation:

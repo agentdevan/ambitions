@@ -299,7 +299,7 @@ private extension TodayExecutionProjector {
         case .stale:
             return "Source needs review"
         case .denied:
-            return "Source unavailable"
+            return "Needs context"
         case .offline:
             return "Recovery stays local"
         case .localOnly:
@@ -307,7 +307,7 @@ private extension TodayExecutionProjector {
         case .blocked:
             return "Blocked or waiting"
         case .unavailable:
-            return input.mode == .empty ? "User choice" : "Source unavailable"
+            return input.mode == .empty ? "User choice" : "Needs context"
         }
     }
 

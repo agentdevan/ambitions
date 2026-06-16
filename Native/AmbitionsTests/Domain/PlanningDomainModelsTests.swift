@@ -309,7 +309,7 @@ final class PlanningDomainModelsTests: XCTestCase {
         XCTAssertEqual(trace.sourceRecordID, "SourceRecord.planning.goal-rule-trace.step-rule-trace")
         XCTAssertEqual(trace.receiptID, "Receipt.planning.goal-rule-trace.step-rule-trace")
         XCTAssertEqual(trace.replayTraceID, "ReplayTrace.planning.goal-rule-trace.step-rule-trace")
-        XCTAssertEqual(trace.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(trace.inspectionSurfaceTitle, "Search Ambitions")
         XCTAssertTrue(trace.localOnly)
         XCTAssertTrue(trace.controlVisibility.contains("reset"))
         XCTAssertTrue(trace.explanationSummary.contains("SourceRecord"))

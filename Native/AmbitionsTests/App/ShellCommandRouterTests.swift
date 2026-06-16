@@ -152,7 +152,7 @@ final class ShellCommandRouterTests: XCTestCase {
 
         let memoryLens = ShellCommandIntent.memoryLens.externalBrainCommandContract
         XCTAssertNil(memoryLens.commandKind)
-        XCTAssertEqual(memoryLens.sourceOfTruth, "Life Memory")
+        XCTAssertEqual(memoryLens.sourceOfTruth, "Personal context")
         XCTAssertTrue(memoryLens.safetySummary.contains("source-grounded"))
 
         let timePatch = ShellCommandIntent.quickTimePatch.externalBrainCommandContract
@@ -185,7 +185,7 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.goalsPath.first?.goalID, "goal-release")
         XCTAssertEqual(navigation.continuityReceipt?.title, "Search handoff")
         XCTAssertEqual(navigation.continuityReceipt?.destinationLabel, "Goal Detail")
-        XCTAssertTrue(navigation.continuityReceipt?.body.contains("What Ambitions knows") == true)
+        XCTAssertTrue(navigation.continuityReceipt?.body.contains("Search Ambitions") == true)
         XCTAssertTrue(navigation.continuityReceipt?.body.contains("Goals") == true)
     }
 

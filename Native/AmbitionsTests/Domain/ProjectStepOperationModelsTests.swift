@@ -346,7 +346,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertEqual(runtimeInput.receipt, receipt)
         XCTAssertEqual(runtimeInput.replayTrace, replayTrace)
         XCTAssertTrue(runtimeInput.isInspectableBoundary)
-        XCTAssertTrue(runtimeInput.inspectionSummary.contains("What Ambitions knows"))
+        XCTAssertTrue(runtimeInput.inspectionSummary.contains("Search Ambitions"))
         XCTAssertFalse(runtimeInput.inspectionSummary.contains(secretMarker))
         XCTAssertFalse(runtimeInput.sourceAdapterUseSummary.contains(secretMarker))
         XCTAssertTrue(trace.isLocalOnly)
@@ -487,7 +487,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         let sourceRecord = SourceRecord(
             id: "source.project-step.reallocation.personal-runtime",
             providerID: "provider.local",
-            entityTitle: "Momentum reflow personal runtime contract",
+            entityTitle: "Momentum reflow personal system contract",
             publisher: nil,
             locator: "local://project-step/reallocation/personal-runtime",
             provenanceKind: .userProvided,
@@ -1008,7 +1008,7 @@ final class ProjectStepOperationModelsTests: XCTestCase {
         XCTAssertEqual(contract.sourceRecordLabel, "Project step bulk operations contract")
         XCTAssertEqual(contract.receiptLabel, "Project step bulk operations recorded")
         XCTAssertEqual(contract.replayTraceLabel, "Replay trace stays local and inspectable")
-        XCTAssertEqual(contract.inspectionLabel, "What Ambitions knows")
+        XCTAssertEqual(contract.inspectionLabel, "Search Ambitions")
         XCTAssertTrue(contract.isInspectableBoundary)
         XCTAssertTrue(contract.isWellFormed)
         XCTAssertEqual(contract.downstreamContractIDs, ["downstream.contract.things", "downstream.contract.todoist"])
@@ -1205,7 +1205,7 @@ private extension ProjectStepOperationModelsTests {
             ),
             uncertainty: RecommendationTraceUncertainty(
                 uncertaintyIDs: ["uncertainty.project-step.bulk.1"],
-                summaries: ["What Ambitions knows inspects the receipt and replay trail."]
+                summaries: ["Search Ambitions inspects the receipt and replay trail."]
             ),
             control: RecommendationTraceControl(
                 correctionActionIDs: ["correct.project-step.bulk.1"],

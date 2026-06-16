@@ -34,7 +34,7 @@ final class SourceAtlasRuntimeBridgeReplayTests: XCTestCase {
                 .sourceAtlasReplayGenerated
             ]
         )
-        XCTAssertEqual(replay.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(replay.inspectionSurfaceTitle, "Search Ambitions")
         XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("source"))
         XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("reason"))
         XCTAssertTrue(replay.inspectionSummary.localizedCaseInsensitiveContains("receipt"))
@@ -252,7 +252,7 @@ private extension SourceAtlasRuntimeBridgeReplayTests {
             freshnessPolicy: .conservativeFreshness,
             riskPolicy: .conservative,
             disclosureCopy: SourceAtlasDisclosureCopy(
-                sourceNeeded: "Source needed.",
+                sourceNeeded: "Context needed.",
                 reviewRequired: "Review required.",
                 notProfessionalAdvice: "Not professional advice."
             ),

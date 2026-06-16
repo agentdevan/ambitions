@@ -416,7 +416,7 @@ struct StoragePrivacySecurityBoundaryValidator: Sendable, Equatable, Hashable {
             findings.append(StoragePrivacySecurityBoundaryFinding(
                 recordID: record.id,
                 issue: .whatAmbitionsKnowsInspectionMissing,
-                summary: "Storage privacy boundary must route to You / What Ambitions knows inspection."
+                summary: "Storage privacy boundary must route to You / Search Ambitions inspection."
             ))
         }
     }
@@ -440,7 +440,7 @@ enum StoragePrivacyBoundaryCatalog {
                 sourceRecordID: "SourceRecord.portable_export.\(summary.category.rawValue)",
                 receiptID: "Receipt.portable_export.\(summary.category.rawValue)",
                 replayTraceID: "ReplayTrace.portable_export.\(summary.category.rawValue)",
-                whatAmbitionsKnowsInspectionPath: "You / What Ambitions knows / Portable export / \(summary.title)",
+                whatAmbitionsKnowsInspectionPath: "You / Search Ambitions / Portable export / \(summary.title)",
                 userReviewed: userReviewed
             )
         }

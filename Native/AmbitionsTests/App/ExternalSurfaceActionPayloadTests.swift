@@ -275,7 +275,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
             "Direction Atlas",
             "Atmosphere Composer",
             "LifeShape Field",
-            "Personal Runtime"
+            "Personal system"
         ])
         XCTAssertEqual(records.map(\.rootFallbackURL.absoluteString), [
             "ambitions://tab/today",

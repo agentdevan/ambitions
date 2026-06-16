@@ -74,8 +74,8 @@ final class CommandSearchObviousnessGauntletTests: XCTestCase {
             captureID: nil
         )
 
-        XCTAssertEqual(ShellCommandIntent.memoryLens.title, "What Ambitions knows")
-        XCTAssertEqual(ShellCommandIntent.memoryLens.subtitle, "Search goals, captures, and recent changes.")
+        XCTAssertEqual(ShellCommandIntent.memoryLens.title, "Search Ambitions")
+        XCTAssertEqual(ShellCommandIntent.memoryLens.subtitle, "Search goals, captures, steps, settings, and recent changes.")
         XCTAssertEqual(
             ShellCommandIntent.openCapture.subtitle,
             "Open Capture."
@@ -84,9 +84,9 @@ final class CommandSearchObviousnessGauntletTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.intent, .memoryLens)
         XCTAssertEqual(navigation.activeOverlay?.entrySource, .shellUtility)
         XCTAssertEqual(navigation.activeOverlay?.presentationContext, .recall)
-        XCTAssertEqual(navigation.recentCommandHistory.first?.title, "What Ambitions knows")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Search Ambitions")
         XCTAssertEqual(navigation.recentCommandHistory.first?.subtitle, "Looked up \"why now\".")
-        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "What Ambitions knows")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Search Ambitions")
         XCTAssertTrue(
             ShellCommandIntent.memoryLens.externalBrainCommandContract.safetySummary.localizedCaseInsensitiveContains("source-grounded")
         )

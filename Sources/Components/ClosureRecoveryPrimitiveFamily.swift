@@ -23,13 +23,13 @@ public struct ClosureRecoveryPrimitiveFamilyContract: Equatable, Sendable {
             "generic recovery panels",
             "rounded recovery cards",
             "closure outcome cards",
-            "receipt preview cards"
+            "review preview cards"
         ],
         actionStateOrder: [
             "context",
             "outcome meaning",
             "recovery consequence",
-            "receipt preview",
+            "review preview",
             "no silent mutation"
         ],
         forbiddenPatterns: [

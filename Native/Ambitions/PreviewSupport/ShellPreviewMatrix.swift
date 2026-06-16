@@ -143,7 +143,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
                 fixtureKey: "today-reality-meridian",
                 deterministicSeed: "afep020-surface-today",
                 projectionInputName: "today_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "today-reality-meridian"
             ),
             AFEP020VisualDiffSurfaceFixture(
@@ -153,7 +153,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
                 fixtureKey: "goals-direction-atlas",
                 deterministicSeed: "afep020-surface-goals",
                 projectionInputName: "goals_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "goals-direction-atlas"
             ),
             AFEP020VisualDiffSurfaceFixture(
@@ -163,7 +163,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
                 fixtureKey: "time-lifeshape-field",
                 deterministicSeed: "afep020-surface-time",
                 projectionInputName: "time_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "time-lifeshape-field"
             ),
             AFEP020VisualDiffSurfaceFixture(
@@ -173,17 +173,17 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
                 fixtureKey: "motion-motion-current",
                 deterministicSeed: "afep020-surface-motion",
                 projectionInputName: "motion_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "motion-motion-current"
             ),
             AFEP020VisualDiffSurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
-                primaryObjectTitle: "Personal Runtime",
+                primaryObjectTitle: "Personal system",
                 fixtureKey: "you-personal-runtime",
                 deterministicSeed: "afep020-surface-you",
                 projectionInputName: "you_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "you-personal-runtime"
             )
         ],
@@ -309,9 +309,9 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             sourceRecordID: "SourceRecord.afep020.visual-diff-lab",
             receiptID: "Receipt.afep020.visual-diff-lab",
             replayTraceID: "ReplayTrace.afep020.visual-diff-lab",
-            youInspectionLabel: "You / What Ambitions knows",
-            inspectionSurfaceTitle: "What Ambitions knows",
-            inspectionSummary: "You / What Ambitions knows can inspect the AFEP-020 visual diff lab scaffold without implying rendered proof."
+            youInspectionLabel: "You / Search Ambitions",
+            inspectionSurfaceTitle: "Search Ambitions",
+            inspectionSummary: "You / Search Ambitions can inspect the AFEP-020 visual diff lab scaffold without implying rendered proof."
         ),
         claimFlags: AFEP020VisualDiffLocalClaimFlags(
             renderedScreenshotProofClaimed: false,
@@ -426,7 +426,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
         if provenanceReferences.sourceRecordID.contains("SourceRecord") == false || provenanceReferences.receiptID.contains("Receipt") == false || provenanceReferences.replayTraceID.contains("ReplayTrace") == false {
             failures.append("visual diff lab provenance identifiers must preserve SourceRecord, Receipt, and ReplayTrace references")
         }
-        if provenanceReferences.youInspectionLabel != "You / What Ambitions knows" || provenanceReferences.inspectionSurfaceTitle != "What Ambitions knows" {
+        if provenanceReferences.youInspectionLabel != "You / Search Ambitions" || provenanceReferences.inspectionSurfaceTitle != "Search Ambitions" {
             failures.append("visual diff lab must preserve the You inspection surface labels")
         }
         if provenanceReferences.inspectionSummary.contains("rendered proof") == false {
@@ -565,7 +565,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 fixtureState: "today-reality-meridian",
                 deterministicSeed: "afep021-surface-today",
                 projectionInputName: "today_accessibility_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "today-reality-meridian"
             ),
             AFEP021AccessibilitySurfaceFixture(
@@ -575,7 +575,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 fixtureState: "goals-direction-atlas",
                 deterministicSeed: "afep021-surface-goals",
                 projectionInputName: "goals_accessibility_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "goals-direction-atlas"
             ),
             AFEP021AccessibilitySurfaceFixture(
@@ -585,7 +585,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 fixtureState: "time-lifeshape-field",
                 deterministicSeed: "afep021-surface-time",
                 projectionInputName: "time_accessibility_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "time-lifeshape-field"
             ),
             AFEP021AccessibilitySurfaceFixture(
@@ -595,17 +595,17 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 fixtureState: "motion-motion-current",
                 deterministicSeed: "afep021-surface-motion",
                 projectionInputName: "motion_accessibility_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "motion-motion-current"
             ),
             AFEP021AccessibilitySurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
-                primaryObjectTitle: "Personal Runtime",
+                primaryObjectTitle: "Personal system",
                 fixtureState: "you-personal-runtime",
                 deterministicSeed: "afep021-surface-you",
                 projectionInputName: "you_accessibility_projection_input",
-                inspectionLabel: "You / What Ambitions knows",
+                inspectionLabel: "You / Search Ambitions",
                 artifactStem: "you-personal-runtime"
             )
         ],
@@ -792,9 +792,9 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             sourceRecordID: "SourceRecord.afep021.accessibility-certification-program",
             receiptID: "Receipt.afep021.accessibility-certification-program",
             replayTraceID: "ReplayTrace.afep021.accessibility-certification-program",
-            youInspectionLabel: "You / What Ambitions knows",
-            inspectionSurfaceTitle: "What Ambitions knows",
-            inspectionSummary: "You / What Ambitions knows can inspect the AFEP-021 accessibility certification scaffold without implying public certification."
+            youInspectionLabel: "You / Search Ambitions",
+            inspectionSurfaceTitle: "Search Ambitions",
+            inspectionSummary: "You / Search Ambitions can inspect the AFEP-021 accessibility certification scaffold without implying public certification."
         ),
         claimFlags: AFEP021AccessibilityLocalClaimFlags(
             sourceBackedSupportClaimed: false,
@@ -911,7 +911,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
         if provenanceReferences.sourceRecordID.contains("SourceRecord") == false || provenanceReferences.receiptID.contains("Receipt") == false || provenanceReferences.replayTraceID.contains("ReplayTrace") == false {
             failures.append("accessibility certification provenance identifiers must preserve SourceRecord, Receipt, and ReplayTrace references")
         }
-        if provenanceReferences.youInspectionLabel != "You / What Ambitions knows" || provenanceReferences.inspectionSurfaceTitle != "What Ambitions knows" {
+        if provenanceReferences.youInspectionLabel != "You / Search Ambitions" || provenanceReferences.inspectionSurfaceTitle != "Search Ambitions" {
             failures.append("accessibility certification must preserve the You inspection surface labels")
         }
         if provenanceReferences.inspectionSummary.contains("public certification") == false {

@@ -505,7 +505,7 @@ private extension AmbitionLifecycleGoldenScenarioTests {
             "model confidence",
             "confidence percentage",
             "best next move",
-            "next best move",
+            "recommended step",
             "overdue",
             "failed",
             "streak broken",

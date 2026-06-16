@@ -221,7 +221,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Source: Local source: typed in Capture"))
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Receipt: Receipt seam: save creates a local capture receipt"))
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Reason: What Ambitions thinks: Task based on local text only."))
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("You / What Ambitions knows: route stays inspectable and correctable before saving."))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("You / Search Ambitions: route stays inspectable and correctable before saving."))
         XCTAssertEqual(
             preview.atmosphereComposerCompactInspectionSummary,
             "Local source, receipt, draft state, and reason stay visible before saving."

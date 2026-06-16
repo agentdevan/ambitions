@@ -93,17 +93,17 @@ extension RepositoryBackedYouService {
             return YouRuntimeInspectionItem(
                 id: "runtime-inspection-personal-\(signal.signalType.rawValue)-\(signal.id)",
                 kind: .learned,
-                title: "What Personal Runtime learned from momentum reflow",
+                title: "What Personal system learned from momentum reflow",
                 summary: signal.personalRuntimeInspectableSummary,
                 sourceLabel: signal.sourceRecordLabel,
                 controlLabel: signal.isExcludedFromFutureRanking
-                    ? "Reset, disable, delete, or export in What Ambitions knows"
-                    : "Inspect in What Ambitions knows",
+                    ? "Reset, disable, delete, or export in Search Ambitions"
+                    : "Inspect in Search Ambitions",
                 privacyLabel: signal.personalRuntimeInspectionLabel,
                 state: state,
                 accessibilityLabel: "Momentum reflow learning signal",
                 accessibilityValue: signal.personalRuntimeInspectableSummary,
-                accessibilityHint: "Shows the source-tied momentum reflow learning signal, its review boundary, and the local controls available in What Ambitions knows."
+                accessibilityHint: "Shows the source-tied momentum reflow learning signal, its review boundary, and the local controls available in Search Ambitions."
             )
         }
     }
@@ -115,7 +115,7 @@ extension RepositoryBackedYouService {
             let sourceLabel = signal.sourceRecordLabel
             let availabilityLabel = signal.requiresSensitiveReview
                 ? "Review required"
-                : (signal.isExcludedFromFutureRanking ? "Excluded from future ranking" : "Available in What Ambitions knows")
+                : (signal.isExcludedFromFutureRanking ? "Excluded from future ranking" : "Available in Search Ambitions")
             let boundaryLabel = signal.medicalAdviceBoundarySummary
 
             return [
@@ -681,7 +681,7 @@ private extension RepositoryBackedYouService {
                 title: "Personal vault",
                 dataTypes: "Sensitive local signals, permissions, export, reset, delete, provenance, privacy policy",
                 sourceLabel: personalVaultRowCount == 0 ? "Summary only" : "\(personalVaultRowCount) rows in You",
-                controlLabel: "Inspect in What Ambitions knows",
+                controlLabel: "Inspect in Search Ambitions",
                 privacyLabel: "Private by default",
                 statusLabel: "Local and inspectable",
                 semanticState: .trust
@@ -825,7 +825,7 @@ private extension RepositoryBackedYouService {
                         icon: "arrow.triangle.2.circlepath",
                         statusLabel: "Preview first",
                         semanticState: .calendarDerived,
-                        accessibilityHint: "Shows reflow preview and user choice posture."
+                        accessibilityHint: "Shows preview changes and user choice posture."
                     ),
                     YouTrustCenterRoute(
                         id: "trust-route-corrections",
@@ -913,7 +913,7 @@ private extension RepositoryBackedYouService {
     ) -> YouSystemCenterState {
         YouSystemCenterState(
             title: "Your System",
-            subtitle: "User System Profile keeps Planning Setup, Trust & Automation, Privacy, Receipts & History, and Defaults visible.",
+            subtitle: "User System Profile keeps Planning Setup, Privacy & automation, Privacy, Receipts & History, and Defaults visible.",
             sections: [
                 YouSystemCenterSection(
                     id: "planning-behavior",
@@ -940,7 +940,7 @@ private extension RepositoryBackedYouService {
                         ),
                         YouSystemCenterItem(
                             id: "automation-trust",
-                            title: "Trust & Automation",
+                            title: "Privacy & automation",
                             subtitle: "Trust comes before automation. \(AutomationLevel.defaultLevel.explanation)",
                             icon: "hand.raised",
                             statusLabel: AutomationLevel.defaultLevel.displayLabel,
@@ -1587,11 +1587,11 @@ private extension RepositoryBackedYouService {
             id: "personal-vault-learning",
             kind: .signal,
             title: "Local learning signals",
-            summary: memoryControls.localLearningControls.isEmpty ? "Local learning stays summary-only until the current runtime collects signals." : "\(learningControlCount) local learning controls stay reviewable in What Ambitions knows.",
-            sourceLabel: "What Ambitions knows",
+            summary: memoryControls.localLearningControls.isEmpty ? "Local learning stays summary-only until the current runtime collects signals." : "\(learningControlCount) local learning controls stay reviewable in Search Ambitions.",
+            sourceLabel: "Search Ambitions",
             storageLabel: "Stored on this device",
             exportLabel: "Summary plus receipt labels",
-            resetLabel: "Reset in What Ambitions knows",
+            resetLabel: "Reset in Search Ambitions",
             deleteLabel: "Delete requires confirmation",
             provenanceLabel: "Source / Receipt / Reason",
             privacyPolicyLabel: "Private by default",
@@ -2869,7 +2869,7 @@ private extension RepositoryBackedYouService {
         case .unknown:
             return "Unknown"
         case .sourceNeeded:
-            return "Source needed"
+            return "Context needed"
         case .stale:
             return "Stale"
         case .contradicted:
@@ -5206,7 +5206,7 @@ private extension RepositoryBackedYouService {
                 id: "memory-lens-current-plan",
                 title: "Current plan context",
                 summary: proofFeedbackCount == 0
-                    ? "Memory Lens can return to the current plan, but progress proof is still light."
+                    ? "Search can return to the current plan, but progress proof is still light."
                     : "\(proofFeedbackCount) proof or feedback records can ground plan recall.",
                 sourceLabel: "Current plan",
                 sourceAgeLabel: proofFeedbackCount == 0 ? "May need review" : "Current",
@@ -5216,7 +5216,7 @@ private extension RepositoryBackedYouService {
                 correctionLabel: "Correct in owning surface",
                 rejectionLabel: "No durable memory claim",
                 state: proofFeedbackCount == 0 ? .warning : .success,
-                accessibilityLabel: "Memory Lens current plan context",
+                accessibilityLabel: "Search current plan context",
                 accessibilityValue: proofFeedbackCount == 0 ? "May need review. Summary only." : "Current. Summary only.",
                 accessibilityHint: "Shows source age, why remembered, privacy boundary, and correction posture for current plan recall."
             ),
@@ -5234,7 +5234,7 @@ private extension RepositoryBackedYouService {
                 correctionLabel: "Correct or reject reuse",
                 rejectionLabel: "Deletion waits for receipt proof",
                 state: correctionCount == 0 ? .default : .warning,
-                accessibilityLabel: "Memory Lens correction memory",
+                accessibilityLabel: "Search correction memory",
                 accessibilityValue: correctionCount == 0 ? "Based on older context. No sensitive inference." : "Current. Review before durable memory.",
                 accessibilityHint: "Shows correction, rejection, and deletion boundaries for correction memory."
             ),
@@ -5242,7 +5242,7 @@ private extension RepositoryBackedYouService {
                 id: "memory-lens-open-captures",
                 title: "Open capture context",
                 summary: openCaptures == 0
-                    ? "No open captures need Memory Lens recall right now."
+                    ? "No open captures need Search recall right now."
                     : "\(openCaptures) open captures may need placement before they influence planning.",
                 sourceLabel: "Captured thought",
                 sourceAgeLabel: openCaptures == 0 ? "Current" : "May need review",
@@ -5252,7 +5252,7 @@ private extension RepositoryBackedYouService {
                 correctionLabel: "Edit in Capture",
                 rejectionLabel: "Archive from Capture",
                 state: openCaptures == 0 ? .success : .warning,
-                accessibilityLabel: "Memory Lens open capture context",
+                accessibilityLabel: "Search open capture context",
                 accessibilityValue: openCaptures == 0 ? "Current. Stored on this device." : "May need review. Stored on this device.",
                 accessibilityHint: "Shows source age, privacy boundary, and placement controls for open capture recall."
             ),
@@ -5268,7 +5268,7 @@ private extension RepositoryBackedYouService {
                 correctionLabel: "Edit in Capture",
                 rejectionLabel: "Archive from Capture",
                 state: .success,
-                accessibilityLabel: "Memory Lens capture staging boundary",
+                accessibilityLabel: "Search capture staging boundary",
                 accessibilityValue: "Current. Stored on this device. Review before stronger use.",
                 accessibilityHint: "Shows the local staging policy for text, voice, image, share, proof, and context input kinds."
             )
@@ -5285,16 +5285,16 @@ private extension RepositoryBackedYouService {
             YouRuntimeInspectionItem(
                 id: "runtime-inspection-learned",
                 kind: .learned,
-                title: "What Personal Runtime learned",
+                title: "What Personal system learned",
                 summary: correctionCount == 0
-                    ? "No Personal Runtime learning signal is saved yet."
-                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can teach Personal Runtime how to reject or reuse similar recommendations.",
-                sourceLabel: "Personal Runtime",
-                controlLabel: correctionCount == 0 ? "Available when present" : "Reset or delete in What Ambitions knows",
+                    ? "No Personal system learning signal is saved yet."
+                    : "\(correctionCount) correction signal\(correctionCount == 1 ? "" : "s") can teach Personal system how to reject or reuse similar recommendations.",
+                sourceLabel: "Personal system",
+                controlLabel: correctionCount == 0 ? "Available when present" : "Reset or delete in Search Ambitions",
                 privacyLabel: "Local and source-tied",
                 state: correctionCount == 0 ? .default : .success,
-                accessibilityLabel: "What Personal Runtime learned",
-                accessibilityValue: correctionCount == 0 ? "No Personal Runtime learning signal saved yet. Local and source-tied." : "\(correctionCount) correction signals. Personal Runtime, local and source-tied.",
+                accessibilityLabel: "What Personal system learned",
+                accessibilityValue: correctionCount == 0 ? "No Personal system learning signal saved yet. Local and source-tied." : "\(correctionCount) correction signals. Personal system, local and source-tied.",
                 accessibilityHint: "Shows learned local correction state and where reuse can be reset, deleted, corrected, or rejected."
             ),
             YouRuntimeInspectionItem(
@@ -5686,7 +5686,7 @@ private extension RepositoryBackedYouService {
                 ),
                 YouPlanningDefaultsSection(
                     id: "automation-trust",
-                    title: "Trust & Automation",
+                    title: "Privacy & automation",
                     subtitle: "Trust comes before automation; automation remains permission posture, not silent control.",
                     preferences: [
                         YouPlanningDefaultsPreference(

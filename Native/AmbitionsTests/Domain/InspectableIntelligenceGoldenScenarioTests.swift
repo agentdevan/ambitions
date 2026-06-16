@@ -780,7 +780,7 @@ private extension InspectableIntelligenceGoldenScenarioTests {
                 strictReviewRiskClasses: SourceAtlasRiskClass.allCases.filter(\.requiresStrictReview)
             ),
             disclosureCopy: SourceAtlasDisclosureCopy(
-                sourceNeeded: "Source needed.",
+                sourceNeeded: "Context needed.",
                 reviewRequired: "Review required.",
                 notProfessionalAdvice: "Planning support only."
             ),

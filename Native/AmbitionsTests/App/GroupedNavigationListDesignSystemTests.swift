@@ -35,7 +35,7 @@ final class GroupedNavigationListDesignSystemTests: XCTestCase {
                 )
 
                 GroupedDisclosureNavigationRow(
-                    title: "What Ambitions knows",
+                    title: "Search Ambitions",
                     subtitle: "Review saved context.",
                     systemImage: "checkmark.shield",
                     badge: .init("Local", state: .trust),
@@ -132,7 +132,7 @@ final class GroupedNavigationListDesignSystemTests: XCTestCase {
             GroupedNavigationList {
                 GroupedNavigationSection(title: "Trust") {
                     GroupedDisclosureNavigationRow(
-                        title: "What Ambitions knows",
+                        title: "Search Ambitions",
                         subtitle: "Review saved context.",
                         systemImage: "checkmark.shield",
                         badge: .init("Private", state: .protected),

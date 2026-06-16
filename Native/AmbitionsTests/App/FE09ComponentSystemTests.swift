@@ -25,7 +25,7 @@ final class FE09ComponentSystemTests: XCTestCase {
             FE09ComponentSystemContract.states.map(\.title),
             [
                 "Normal",
-                "Stale / source needed",
+                "Stale / context needed",
                 "Local only / privacy",
                 "Recovery",
                 "Blocked / waiting",

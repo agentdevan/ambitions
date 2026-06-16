@@ -101,8 +101,8 @@ extension DayRailStepDetailState {
 
     static func stepSessionLabel(for target: TodayActionTarget) -> String {
         target.goalID == nil && target.stepID == nil && target.draftID == nil
-            ? "Step Session needs a selected step."
-            : "Step Session opens for this one step."
+            ? "Step session needs a selected step."
+            : "Step session opens for this one step."
     }
 
     static func proofReceiptLabel(isPrivate: Bool) -> String {

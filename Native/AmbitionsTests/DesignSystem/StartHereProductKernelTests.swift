@@ -28,7 +28,7 @@ final class StartHereProductKernelTests: XCTestCase {
     }
 
     func testKernelRequiresCanonicalPrimaryAction() {
-        let kernel = makeKernel(primaryActionTitle: "Begin Focus")
+        let kernel = makeKernel(primaryActionTitle: "Start now")
 
         XCTAssertTrue(StartHereProductKernelAudit.failures(for: kernel).contains("primary action must be Start now or Open step"))
     }

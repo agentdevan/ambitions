@@ -41,7 +41,7 @@ final class StorageMigrationRecoveryTests: XCTestCase {
         XCTAssertEqual(assessment.receipt.sourceRecordID, "SourceRecord.storage-recovery.storage-recovery-test")
         XCTAssertEqual(assessment.receipt.receiptID, "Receipt.storage-recovery.storage-recovery-test")
         XCTAssertEqual(assessment.receipt.replayTraceID, "ReplayTrace.storage-recovery.storage-recovery-test")
-        XCTAssertEqual(assessment.receipt.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(assessment.receipt.inspectionSurfaceTitle, "Search Ambitions")
         XCTAssertFalse(assessment.receipt.migrationExecutionAllowed)
         XCTAssertFalse(assessment.receipt.destructiveResetAllowed)
     }
@@ -76,7 +76,7 @@ final class StorageMigrationRecoveryTests: XCTestCase {
         XCTAssertFalse(assessment.canExecuteMigration)
         XCTAssertTrue(assessment.issues.contains { $0.kind == .corruptStoreSignal })
         XCTAssertTrue(assessment.issues.contains { $0.kind == .destructiveResetNotAuthorized })
-        XCTAssertEqual(assessment.receipt.inspectionSummary, "You / What Ambitions knows can inspect this storage migration source, receipt, and reason before any recovery action.")
+        XCTAssertEqual(assessment.receipt.inspectionSummary, "You / Search Ambitions can inspect this storage migration source, receipt, and reason before any recovery action.")
         XCTAssertFalse(assessment.receipt.destructiveResetAllowed)
     }
 }

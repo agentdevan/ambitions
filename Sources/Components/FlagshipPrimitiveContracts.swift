@@ -35,7 +35,7 @@ public enum FE04PrimitiveRole: String, CaseIterable, Identifiable, Sendable {
         case .receiptDrawer:
             return "Capture"
         case .sourceFreshnessBadge:
-            return "Trust seam"
+            return "Why this?"
         case .lifeShape:
             return "Time"
         case .atmosphereComposer:

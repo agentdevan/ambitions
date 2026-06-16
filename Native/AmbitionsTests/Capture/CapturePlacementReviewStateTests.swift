@@ -116,7 +116,7 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertEqual(contract.stageName, "Capture Object Stage")
         XCTAssertEqual(contract.screenshotIdentifier, "CaptureObjectStage")
         XCTAssertTrue(contract.keepsCaptureGlobalAction)
-        XCTAssertTrue(contract.sourceRouteOrder.contains("route reveal"))
+        XCTAssertTrue(contract.sourceRouteOrder.contains("placement review"))
         XCTAssertTrue(contract.sourceRouteOrder.contains("continuity lines"))
         XCTAssertTrue(contract.replacesStructures.contains("capture item cards"))
         XCTAssertTrue(contract.replacesStructures.contains("category-like capture buckets"))

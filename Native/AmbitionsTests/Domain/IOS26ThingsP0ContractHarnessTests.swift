@@ -161,11 +161,11 @@ final class IOS26ThingsP0ContractHarnessTests: XCTestCase {
             actionIdentifier: AppNotificationConstants.openActionID,
             userInfo: [
                 "sourceRecordID": sourceRecord.id,
-                "surface": "What Ambitions knows",
+                "surface": "Search Ambitions",
             ]
         )
         let youBoundary = ThingsYouInspectionBoundary(
-            surfaceTitle: "What Ambitions knows",
+            surfaceTitle: "Search Ambitions",
             sourceKnowledgeLabel: "Things source knowledge",
             allowsRawActivityLog: false
         )
@@ -193,9 +193,9 @@ final class IOS26ThingsP0ContractHarnessTests: XCTestCase {
         XCTAssertTrue(replayTrace.decisionReceipt?.hasProofBridge ?? false)
         XCTAssertEqual(payload?.action, "open")
         XCTAssertEqual(payload?.values["sourceRecordID"], sourceRecord.id)
-        XCTAssertEqual(payload?.values["surface"], "What Ambitions knows")
-        XCTAssertEqual(youBoundary.surfaceTitle, "What Ambitions knows")
-        XCTAssertEqual(youBoundary.inspectionLabel, "What Ambitions knows")
+        XCTAssertEqual(payload?.values["surface"], "Search Ambitions")
+        XCTAssertEqual(youBoundary.surfaceTitle, "Search Ambitions")
+        XCTAssertEqual(youBoundary.inspectionLabel, "Search Ambitions")
         XCTAssertTrue(youBoundary.blocksRawActivityLogCopy)
         XCTAssertTrue(youBoundary.isInspectableBoundary)
     }
@@ -360,6 +360,6 @@ private struct ThingsYouInspectionBoundary: Sendable, Equatable {
     }
 
     var isInspectableBoundary: Bool {
-        surfaceTitle == "What Ambitions knows" && allowsRawActivityLog == false
+        surfaceTitle == "Search Ambitions" && allowsRawActivityLog == false
     }
 }

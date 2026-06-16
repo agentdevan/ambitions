@@ -354,7 +354,7 @@ private struct CaptureRouteRevealStrip: View {
                 EvidenceLabel(
                     "Inspectable route",
                     detail: preview.atmosphereComposerCompactInspectionSummary,
-                    source: "You / What Ambitions knows",
+                    source: "You / Search Ambitions",
                     state: livingState,
                     context: .capture
                 )

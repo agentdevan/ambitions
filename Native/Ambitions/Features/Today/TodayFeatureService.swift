@@ -630,7 +630,7 @@ private extension RepositoryBackedTodayService {
         case .stepSession:
             return TodayReentryState(
                 eyebrow: "Re-entry",
-                title: "Step Session landed in Today",
+                title: "Step session landed in Today",
                 detail: "The hero is holding the clearest next step without turning the session into a timer.",
                 state: .success
             )
@@ -859,7 +859,7 @@ private extension RepositoryBackedTodayService {
             pressureField = "Pressure field: the day is tight, so extra switching should stay visible."
             recoveryLoop = "Recovery loop: lighten one ask, keep Still Counts available, and review before changing the day."
             smallerStepAnchor = "Smaller step anchor: choose the lightest useful version before adding effort."
-            receiptPreview = "Recovery receipt preview: records the lighter path and what stayed unchanged."
+            receiptPreview = "Recovery review preview: records the lighter path and what stayed unchanged."
         case .drifted:
             title = "Recovery Bloom"
             subtitle = "The day can still recover through one believable step."
@@ -867,7 +867,7 @@ private extension RepositoryBackedTodayService {
             pressureField = "Pressure field: the first plan drifted, so recovery starts with one believable lane."
             recoveryLoop = "Recovery loop: orient, shrink the next step, and preview the receipt before anything changes."
             smallerStepAnchor = "Smaller step anchor: return through one safe action, not the whole original plan."
-            receiptPreview = "Recovery receipt preview: records what changed and what still counts."
+            receiptPreview = "Recovery review preview: records what changed and what still counts."
         case .overloaded:
             title = "Lighten today"
             subtitle = "The day needs fewer simultaneous asks before effort goes up."
@@ -875,7 +875,7 @@ private extension RepositoryBackedTodayService {
             pressureField = "Pressure field: too many asks are touching today at once."
             recoveryLoop = "Recovery loop: reduce the load, offer the smaller safe next step, and keep review in front."
             smallerStepAnchor = "Smaller step anchor: make the next step small enough to start without sacrificing protected time."
-            receiptPreview = "Recovery receipt preview: records the lighter next step, protected time, and Still Counts boundary."
+            receiptPreview = "Recovery review preview: records the lighter next step, protected time, and Still Counts boundary."
         case .recovering:
             title = "Stay in the recovery lane"
             subtitle = "Use one gentle step to stabilize the rest of the day."
@@ -883,7 +883,7 @@ private extension RepositoryBackedTodayService {
             pressureField = "Pressure field: recovery is already active, so the day stays narrowed."
             recoveryLoop = "Recovery loop: continue the lighter path and keep the receipt visible."
             smallerStepAnchor = "Smaller step anchor: stay with the smallest stabilizing block."
-            receiptPreview = "Recovery receipt preview: records that recovery continued without turning into catch-up."
+            receiptPreview = "Recovery review preview: records that recovery continued without turning into catch-up."
         case .stable, .lowData, .noPlan:
             return nil
         }
@@ -978,8 +978,8 @@ private extension RepositoryBackedTodayService {
         }
 
         let detail = posture == .stable
-            ? "Step Session is narrowed to one step so the rest of Today can stay quiet."
-            : "Step Session is a calmer lane back into the day."
+            ? "Step session is narrowed to one step so the rest of Today can stay quiet."
+            : "Step session is a calmer lane back into the day."
 
         let closeAction = TodayInlineAction(
             kind: .closeActionClosure,
@@ -1033,7 +1033,7 @@ private extension RepositoryBackedTodayService {
             goalConnectionLabel: goalConnection,
             timerLabel: "Timer optional",
             sessionControlActions: [pauseAction, stopAction, closeAction],
-            receiptGenerationLabel: "Closing the loop opens the receipt preview before proof changes.",
+            receiptGenerationLabel: "Closing the loop opens the review preview before proof changes.",
             exitBoundaryLabel: "Stopping the session returns to Today without changing proof or plan."
         )
     }
@@ -2276,9 +2276,9 @@ private extension RepositoryBackedTodayService {
         case .startStepSession:
             return "Started step from Today."
         case .pauseStepSession:
-            return "Paused Step Session from Today."
+            return "Paused Step session from Today."
         case .stopStepSession:
-            return "Stopped Step Session from Today."
+            return "Stopped Step session from Today."
         case .complete:
             return "Completed from Today."
         case .defer:

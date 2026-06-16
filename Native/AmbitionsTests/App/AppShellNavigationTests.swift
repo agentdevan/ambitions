@@ -102,14 +102,14 @@ final class AppShellNavigationTests: XCTestCase {
                 "Direction Atlas",
                 "LifeShape Field",
                 "Motion Current",
-                "Personal Runtime"
+                "Personal system"
             ]
         )
         XCTAssertEqual(AppTab.today.surfaceContract.title, "Today")
         XCTAssertEqual(AppTab.goals.surfaceContract.primaryObjectTitle, "Direction Atlas")
         XCTAssertEqual(AppTab.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
         XCTAssertEqual(AppTab.motion.surfaceContract.primaryObjectTitle, "Motion Current")
-        XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "Personal Runtime")
+        XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "Personal system")
         XCTAssertFalse(AmbitionsSurfaceContractRegistry.canonicalContracts.map(\.tab.rawValue).contains("capture"))
     }
 
@@ -117,7 +117,7 @@ final class AppShellNavigationTests: XCTestCase {
         for contract in AmbitionsSurfaceContractRegistry.canonicalContracts {
             XCTAssertEqual(
                 Set(contract.runtimeInspectionRequirements),
-                Set(["SourceRecord", "Receipt", "ReplayTrace", "You / What Ambitions knows"])
+                Set(["SourceRecord", "Receipt", "ReplayTrace", "You / Search Ambitions"])
             )
         }
     }

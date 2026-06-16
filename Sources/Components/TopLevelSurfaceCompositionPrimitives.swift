@@ -152,11 +152,11 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
         handoff("Goals", "Time", thread: "goal thread asks for capacity", trust: "capacity source visible"),
         handoff("Goals", "Today", thread: "thread feeds Recommended step", trust: "Why this? route"),
         handoff("Time", "Today", thread: "capacity informs what fits now", trust: "pressure source and user choice"),
-        handoff("Today", "Time", thread: "pressure or reflow sends user to Shape Time", trust: "Quiet Reflow preview"),
+        handoff("Today", "Time", thread: "pressure or reflow sends user to Shape Time", trust: "Quiet Preview changes"),
         handoff("Today", "Goals", thread: "closed step updates goal thread proof", trust: "receipt and proof path"),
         handoff("Today", "Motion", thread: "closure and recovery become inspectable movement", trust: "proof and recovery receipt"),
         handoff("Motion", "Today", thread: "re-entry path returns to the current Recommended step", trust: "source and recovery context"),
-        handoff("Any", "You", thread: "Trust Seam routes to Trust & Automation / Privacy / Receipts & History", trust: "user-controlled review")
+        handoff("Any", "You", thread: "Trust Seam routes to Privacy & automation / Privacy / Receipts & History", trust: "user-controlled review")
     ]
 
     public static var missingStageSurfaces: [String] {

@@ -219,11 +219,11 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
             actionIdentifier: AppNotificationConstants.openActionID,
             userInfo: [
                 "sourceRecordID": sourceRecord.id,
-                "surface": "What Ambitions knows",
+                "surface": "Search Ambitions",
             ]
         )
         let youBoundary = CrossAppJourneyYouInspectionBoundary(
-            surfaceTitle: "What Ambitions knows",
+            surfaceTitle: "Search Ambitions",
             sourceKnowledgeLabel: "Half-marathon source knowledge",
             allowsRawActivityLog: false
         )
@@ -238,10 +238,10 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
         XCTAssertEqual(replayTrace.state, .ready)
         XCTAssertTrue(replayTrace.isReplayable)
         XCTAssertTrue(replayTrace.isLocalOnly)
-        XCTAssertEqual(payload?.values["surface"], "What Ambitions knows")
+        XCTAssertEqual(payload?.values["surface"], "Search Ambitions")
         XCTAssertEqual(payload?.values["sourceRecordID"], sourceRecord.id)
         XCTAssertTrue(youBoundary.blocksRawActivityLogCopy)
-        XCTAssertEqual(youBoundary.inspectionLabel, "What Ambitions knows")
+        XCTAssertEqual(youBoundary.inspectionLabel, "Search Ambitions")
     }
 
     func testMoveApartmentJourneyFixtureIncludesRequiredEvidence() throws {
@@ -343,7 +343,7 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
             goalText: "Prepare move tasks and protect weekend."
         )
         let youBoundary = CrossAppJourneyYouInspectionBoundary(
-            surfaceTitle: "What Ambitions knows",
+            surfaceTitle: "Search Ambitions",
             sourceKnowledgeLabel: "Move/apartment source knowledge",
             allowsRawActivityLog: false
         )
@@ -353,7 +353,7 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
         XCTAssertEqual(commitment.recoveryPolicy, "Keep critical tasks and adjust non-critical work.")
         XCTAssertEqual(proofLedgerEntry.sourceRecordLabel, "Source record is source-tied")
         XCTAssertEqual(replayTrace.decisionReceipt?.sourceRecordIDs, [receipt.id])
-        XCTAssertEqual(youBoundary.inspectionLabel, "What Ambitions knows")
+        XCTAssertEqual(youBoundary.inspectionLabel, "Search Ambitions")
     }
 
     func testCareerGrowthJourneyFixtureIncludesRequiredEvidence() throws {
@@ -532,7 +532,7 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
             isOfficial: false
         )
         let relationshipBoundary = CrossAppJourneyYouInspectionBoundary(
-            surfaceTitle: "What Ambitions knows",
+            surfaceTitle: "Search Ambitions",
             sourceKnowledgeLabel: "Relationship source knowledge",
             allowsRawActivityLog: false
         )
@@ -569,7 +569,7 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
             goalText: "Protect balanced relationship life commitments."
         )
 
-        XCTAssertEqual(relationshipBoundary.surfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(relationshipBoundary.surfaceTitle, "Search Ambitions")
         XCTAssertTrue(relationshipBoundary.isInspectableBoundary)
         XCTAssertEqual(proofLedgerEntry.sourceObjectID, sourceRecord.id)
         XCTAssertEqual(replayTrace.recommendation?.receipt.proofReferenceIDs, [proofLedgerEntry.proofReference!.id])
@@ -619,7 +619,7 @@ final class IOS26CrossAppJourneyContractHarnessTests: XCTestCase {
             goalText: "Reduce load when knee soreness is detected."
         )
         let boundary = CrossAppJourneyYouInspectionBoundary(
-            surfaceTitle: "What Ambitions knows",
+            surfaceTitle: "Search Ambitions",
             sourceKnowledgeLabel: "Sensitive context source knowledge",
             allowsRawActivityLog: false
         )
@@ -786,7 +786,7 @@ private struct CrossAppJourneyYouInspectionBoundary: Sendable, Equatable {
     }
 
     var isInspectableBoundary: Bool {
-        surfaceTitle == "What Ambitions knows" && allowsRawActivityLog == false
+        surfaceTitle == "Search Ambitions" && allowsRawActivityLog == false
     }
 }
 

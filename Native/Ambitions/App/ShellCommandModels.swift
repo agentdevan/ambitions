@@ -25,27 +25,27 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
         switch self {
         case .quickCapture: "Capture"
         case .newGoal: "New goal"
-        case .quickTimePatch: "Patch Time"
+        case .quickTimePatch: "Shape Time"
         case .quickRecovery: "Recover"
-        case .quickFocus: "Focus"
+        case .quickFocus: "Start here"
         case .openGoal: "Open goal"
         case .openWeek: "Open week"
         case .openCapture: "Open capture"
-        case .memoryLens: "What Ambitions knows"
+        case .memoryLens: "Search Ambitions"
         }
     }
 
     var subtitle: String {
         switch self {
-        case .quickCapture: "Save what needs a place with a suggested route and a receipt you can change."
-        case .newGoal: "Open the existing create-goal flow inside the shell-owned compose path."
+        case .quickCapture: "Capture what changed, then decide where it belongs."
+        case .newGoal: "Open Goal setup without leaving the native shell path."
         case .quickTimePatch: "Land in Time to reshape the current week."
         case .quickRecovery: "Return to Today with recovery posture in view."
-        case .quickFocus: "Return to Today and center the next step."
+        case .quickFocus: "Return to Today and center the recommended step."
         case .openGoal: "Find and open one goal in its canonical destination."
         case .openWeek: "Open Time as the canonical week surface."
         case .openCapture: "Open Capture."
-        case .memoryLens: "Search goals, captures, and recent changes."
+        case .memoryLens: "Search goals, captures, steps, settings, and recent changes."
         }
     }
 
@@ -82,7 +82,7 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
                 commandKind: .quickCapture,
                 destination: .timeRoute(.captureInbox),
                 sourceOfTruth: "Capture",
-                safetySummary: "Creates a local capture with source context and a receipt.",
+                safetySummary: "Creates a local capture with context the user can review.",
                 fallbackSummary: "If capture persistence is unavailable, leave the command blocked.",
                 touchesUserText: true
             )
@@ -120,8 +120,8 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
                 commandKind: .openDestination,
                 destination: nil,
                 sourceOfTruth: "Goals",
-                safetySummary: "Opens a known goal or asks Memory Lens for a source-grounded target.",
-                fallbackSummary: "If no goal identifier is present, open Memory Lens."
+                safetySummary: "Opens a known goal or asks Search for a source-grounded target.",
+                fallbackSummary: "If no goal identifier is present, open Search."
             )
         case .openCapture:
             ShellExternalBrainCommandContract(
@@ -137,9 +137,9 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
                 intent: self,
                 commandKind: nil,
                 destination: .overlay(.memoryLens(entrySource: .shellUtility)),
-                sourceOfTruth: "Life Memory",
+                sourceOfTruth: "Personal context",
                 safetySummary: "Searches source-grounded context without creating durable memory.",
-                fallbackSummary: "If query context is empty, open Memory Lens in recall mode.",
+                fallbackSummary: "If query context is empty, open Search in recall mode.",
                 touchesUserText: true
             )
         }
@@ -206,7 +206,7 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
 
     var displayTitle: String {
         switch self {
-        case .shellCompose: "Quiet Command"
+        case .shellCompose: "Quick action"
         case .shellUtility: "Shell"
         case .goalsCreate: "Goals"
         case .todayQuickCapture: "Today"
@@ -315,7 +315,7 @@ enum AppShellContextualToolbarCatalog {
                 title: "Inspect proof",
                 systemImage: "checkmark.seal",
                 accessibilityIdentifier: "shell.motion.inspect-proof-button",
-                accessibilityHint: "Opens the proof and memory lens without changing plans."
+                accessibilityHint: "Opens the proof and search without changing plans."
             )
         case .you:
             return AppShellContextualToolbarAction(
@@ -447,7 +447,7 @@ struct ShellTrustedSearchHandoff: Hashable, Identifiable, Sendable {
         guard isTrusted else {
             return "Search result was held because the destination is not an active Ambitions surface."
         }
-        return "Opened \(resultTitle) from What Ambitions knows into \(owner.title). \(sourceEvidenceTitle); \(trustSummary)."
+        return "Opened \(resultTitle) from Search Ambitions into \(owner.title). \(sourceEvidenceTitle); \(trustSummary)."
     }
 }
 
@@ -622,8 +622,8 @@ enum ShellCommandDestination: Hashable, Sendable {
             }
         case let .overlay(overlay):
             switch overlay.kind {
-            case .quietCommandSheet: "Quiet Command Sheet"
-            case .memoryLens: "What Ambitions knows"
+            case .quietCommandSheet: "Quick action Sheet"
+            case .memoryLens: "Search Ambitions"
             case .createGoal: "Create Goal"
             }
         }

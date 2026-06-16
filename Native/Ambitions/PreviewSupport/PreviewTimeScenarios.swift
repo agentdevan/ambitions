@@ -185,7 +185,7 @@ enum PreviewTimeScenarios {
         ),
         reflowReceiptPreview: TimeReflowReceiptPreviewState(
             title: "Before anything changes",
-            detail: "A reflow receipt preview shows the tradeoff before action, not after a silent mutation.",
+            detail: "A reflow review preview shows the tradeoff before action, not after a silent mutation.",
             whatChanged: ["Protect: Fix shell regressions", "Adjust: Make it smaller", "Receipt would show the suggested change before action."],
             whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
             momentumReflowContract: [
@@ -207,7 +207,7 @@ enum PreviewTimeScenarios {
             confirmationBoundary: "Save the Day and Reality Reflow require confirmation before broad plan changes.",
             calendarBoundary: "Manual planning works without calendar access.",
             socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
-            receiptBoundary: "A receipt preview names what would change, what would not change, and the undo boundary.",
+            receiptBoundary: "A review preview names what would change, what would not change, and the undo boundary.",
             signals: [
                 TimeRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "One day needs relief before the week widens.", statusLabel: "Needs relief", boundaryLabel: "Suggests one smaller step", visualState: .warning),
                 TimeRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "One waiting item should stay visible instead of becoming quiet pressure.", statusLabel: "Visible", boundaryLabel: "No silent routing", visualState: .warning),
@@ -577,7 +577,7 @@ enum PreviewTimeScenarios {
         ),
         reflowReceiptPreview: TimeReflowReceiptPreviewState(
             title: "Before anything changes",
-            detail: "A reflow receipt preview shows the tradeoff before action, not after a silent mutation.",
+            detail: "A reflow review preview shows the tradeoff before action, not after a silent mutation.",
             whatChanged: ["Protect: One must-do", "Adjust: Keep the plan unchanged", "No reflow would be applied."],
             whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
             momentumReflowContract: [
@@ -599,7 +599,7 @@ enum PreviewTimeScenarios {
             confirmationBoundary: "Save the Day and Reality Reflow require confirmation before broad plan changes.",
             calendarBoundary: "Manual planning works without calendar access.",
             socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
-            receiptBoundary: "A receipt preview names what would change, what would not change, and the undo boundary.",
+            receiptBoundary: "A review preview names what would change, what would not change, and the undo boundary.",
             signals: [
                 TimeRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "No rescue is needed; keep recovery room visible.", statusLabel: "Believable", boundaryLabel: "Suggests one smaller step", visualState: .success),
                 TimeRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "No waiting item or one-time commitment is currently pushing on the plan.", statusLabel: "Quiet", boundaryLabel: "No silent routing", visualState: .default),

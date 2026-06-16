@@ -363,7 +363,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(titles, [
             "Schedule & Availability",
             "Time Behavior",
-            "Trust & Automation",
+            "Privacy & automation",
             "Vacation / Away Time",
             "Durations",
             "What Ambitions Knows",
@@ -573,7 +573,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dataMap.contains(where: {
             $0.id == "trust-data-map-personal-vault" &&
             $0.dataTypes.contains("Sensitive local signals") &&
-            $0.controlLabel == "Inspect in What Ambitions knows" &&
+            $0.controlLabel == "Inspect in Search Ambitions" &&
             $0.privacyLabel == "Private by default"
         }))
         XCTAssertTrue(dataMap.contains(where: {
@@ -1288,10 +1288,10 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(inspectionItems.map(\.kind.label), ["Learned", "Used", "Ignored", "Changed"])
         XCTAssertTrue(inspectionItems.contains(where: {
             $0.id == "runtime-inspection-learned" &&
-            $0.title == "What Personal Runtime learned" &&
+            $0.title == "What Personal system learned" &&
             $0.summary.contains("1 correction signal") &&
-            $0.sourceLabel == "Personal Runtime" &&
-            $0.controlLabel == "Reset or delete in What Ambitions knows" &&
+            $0.sourceLabel == "Personal system" &&
+            $0.controlLabel == "Reset or delete in Search Ambitions" &&
             $0.privacyLabel == "Local and source-tied"
         }))
         XCTAssertTrue(inspectionItems.contains(where: {
@@ -1461,7 +1461,7 @@ final class YouFeatureServiceTests: XCTestCase {
         let sourceRecord = SourceRecord(
             id: "source.you.personal-runtime.1",
             providerID: "provider.local",
-            entityTitle: "Momentum reflow personal runtime signal",
+            entityTitle: "Momentum reflow personal system signal",
             publisher: nil,
             locator: "local://you/personal-runtime/1",
             provenanceKind: .userProvided,
@@ -1495,7 +1495,7 @@ final class YouFeatureServiceTests: XCTestCase {
             id: "receipt.you.personal-runtime.1",
             resultState: .changed,
             title: "Momentum reflow recorded",
-            summary: "The local learning signal remains inspectable in What Ambitions knows.",
+            summary: "The local learning signal remains inspectable in Search Ambitions.",
             sourceDomain: .goals,
             occurredAt: "2026-05-25T16:20:00Z",
             affectedObjects: [sourceStepObject, destinationStepObject],
@@ -1592,9 +1592,9 @@ final class YouFeatureServiceTests: XCTestCase {
 
         XCTAssertEqual(inspectionItems.count, 1)
         XCTAssertEqual(inspectionItems.first?.kind, .learned)
-        XCTAssertEqual(inspectionItems.first?.title, "What Personal Runtime learned from momentum reflow")
+        XCTAssertEqual(inspectionItems.first?.title, "What Personal system learned from momentum reflow")
         XCTAssertEqual(inspectionItems.first?.privacyLabel, "Review required")
-        XCTAssertTrue(inspectionItems.first?.controlLabel.contains("What Ambitions knows") ?? false)
+        XCTAssertTrue(inspectionItems.first?.controlLabel.contains("Search Ambitions") ?? false)
         XCTAssertEqual(controls.map { $0.id }, [
             "personal-runtime-reset-\(signal.id)",
             "personal-runtime-disable-\(signal.id)",
@@ -1689,7 +1689,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(dashboard.trustCenter.dataMap.contains(where: {
             $0.id == "trust-data-map-personal-vault" &&
             $0.dataTypes.contains("Sensitive local signals") &&
-            $0.controlLabel == "Inspect in What Ambitions knows"
+            $0.controlLabel == "Inspect in Search Ambitions"
         }))
         XCTAssertTrue(trustRouteIDs.contains("trust-route-personal-vault"))
         XCTAssertTrue(trustRouteIDs.contains("trust-route-vault-export"))
@@ -1733,7 +1733,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertTrue(visibleCopy.contains("Permission-gated"))
         XCTAssertTrue(visibleCopy.contains("Private by default"))
         XCTAssertTrue(visibleCopy.contains("Portable snapshot pending proof"))
-        XCTAssertTrue(visibleCopy.contains("Inspect in What Ambitions knows"))
+        XCTAssertTrue(visibleCopy.contains("Inspect in Search Ambitions"))
         XCTAssertTrue(visibleCopy.contains("Personal Vault stays local-first"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("protected-storage implementation is complete"))
         XCTAssertFalse(visibleCopy.localizedCaseInsensitiveContains("legal/privacy approval"))
@@ -1846,12 +1846,12 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.category == .changes &&
             $0.sourceLabel == "Source: Plan" &&
             $0.privacyLabel == "Private detail hidden" &&
-            $0.reviewLabel == "Review source"
+            $0.reviewLabel == "Review context"
         }))
         XCTAssertTrue(history.items.contains(where: {
             $0.category == .sourceReview &&
             $0.privacyLabel == "Review boundary only" &&
-            $0.reviewLabel == "Review source"
+            $0.reviewLabel == "Review context"
         }))
         XCTAssertTrue(history.items.contains(where: {
             $0.category == .privacy &&
@@ -2052,7 +2052,7 @@ private extension YouFeatureServiceTests {
                 backendKind: .localOnly,
                 trustPosture: .localOnly,
                 availability: .unavailable,
-                detail: "You personal runtime learning signal tests run local-only."
+                detail: "You personal system learning signal tests run local-only."
             ),
             knowledgeProviderStatuses: [
                 KnowledgeProviderStatus(
@@ -2082,7 +2082,7 @@ private extension YouFeatureServiceTests {
         let input = PrivateLifeRuntimeKernelDecisionInput(
             traceContext: traceContext,
             decisionKey: "you.personal-runtime.learning-signal.\(sourceRecordID)",
-            goalText: "Inspect Personal Runtime learning without leaving local proof."
+            goalText: "Inspect Personal system learning without leaving local proof."
         )
         let evaluatedOutput = PrivateLifeRuntimeKernel().evaluate(input)
         let output = PrivateLifeRuntimeKernelDecisionOutput(

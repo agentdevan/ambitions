@@ -18,7 +18,7 @@ final class ClosureRecoveryPrimitiveFamilyTests: XCTestCase {
             "context",
             "outcome meaning",
             "recovery consequence",
-            "receipt preview",
+            "review preview",
             "no silent mutation"
         ])
         XCTAssertTrue(contract.forbiddenPatterns.contains("punitive closure language"))

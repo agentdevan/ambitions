@@ -26,7 +26,7 @@ final class StorageMigrationFoundationTests: XCTestCase {
         XCTAssertTrue(report.compactionHooks.allSatisfy { $0.reviewRequired && $0.executionAllowed == false })
         XCTAssertTrue(report.compactionHooks.allSatisfy { $0.sourceRecordID.hasPrefix("SourceRecord.storage-migration-compaction.") })
         XCTAssertEqual(report.recoveryAssessment.mode, .migrationReviewRequired)
-        XCTAssertEqual(report.recoveryAssessment.receipt.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(report.recoveryAssessment.receipt.inspectionSurfaceTitle, "Search Ambitions")
         XCTAssertFalse(report.migrationExecutionAllowed)
         XCTAssertFalse(report.destructiveResetAllowed)
         XCTAssertFalse(report.recoveryAssessment.receipt.migrationExecutionAllowed)

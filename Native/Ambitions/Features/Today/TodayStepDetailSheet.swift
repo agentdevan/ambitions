@@ -194,7 +194,7 @@ struct TodayStepDetailSheet: View {
             .buttonStyle(AmbitionPressableButtonStyle(state: .default))
             .disabled(detail.primaryAction.target.goalID == nil && detail.primaryAction.target.stepID == nil && detail.primaryAction.target.draftID == nil)
             .accessibilityValue(detail.stepSessionLabel)
-            .accessibilityHint("Starts a bounded Step Session for this step.")
+            .accessibilityHint("Starts a bounded Step session for this step.")
             .accessibilityIdentifier("TodayStepDetailPrimaryAction")
 
             Button {

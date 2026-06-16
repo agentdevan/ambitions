@@ -321,7 +321,7 @@ struct TimePressureRecoveryReviewState: Sendable {
         protectedTimeConflictLabel: "Protected time conflict: nothing protected is competing loudly.",
         lateStartAdjustmentLabel: "Late-start adjustment: start with the smaller version.",
         recoveryDayReviewLabel: "Recovery-day review: Still counts.",
-        recoveryReceiptPreviewLabel: "Recovery receipt preview: nothing changes without review.",
+        recoveryReceiptPreviewLabel: "Recovery review preview: nothing changes without review.",
         capacityReviewLabel: "Capacity review: qualitative only.",
         signals: [],
         visualState: .default

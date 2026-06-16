@@ -288,8 +288,8 @@ final class RecommendationMutationLabModelsTests: XCTestCase {
         XCTAssertEqual(variant.inspectionSeam.sourceRecordID, "SourceRecord.seam-check")
         XCTAssertEqual(variant.inspectionSeam.receiptID, "Receipt.seam-check")
         XCTAssertEqual(variant.inspectionSeam.replayTraceID, "ReplayTrace.seam-check")
-        XCTAssertEqual(variant.inspectionSeam.inspectionSurfaceTitle, "What Ambitions knows")
-        XCTAssertEqual(variant.inspectionSeam.youInspectionLabel, "You / What Ambitions knows")
+        XCTAssertEqual(variant.inspectionSeam.inspectionSurfaceTitle, "Search Ambitions")
+        XCTAssertEqual(variant.inspectionSeam.youInspectionLabel, "You / Search Ambitions")
         XCTAssertFalse(variant.hasVisibleCopyGuardrailViolation)
     }
 }

@@ -23,14 +23,14 @@ public struct QuietReflowPrimitiveFamilyContract: Equatable, Sendable {
             "rounded reflow option cards",
             "before-after preview cards",
             "impact preview cards",
-            "receipt preview cards"
+            "review preview cards"
         ],
         previewOrder: [
             "current state",
             "proposed state",
             "reason",
             "user control",
-            "receipt preview",
+            "review preview",
             "user choice"
         ],
         forbiddenPatterns: [
@@ -62,10 +62,10 @@ public enum QuietReflowPrimitiveRole: String, CaseIterable, Sendable, Identifiab
 
     public var defaultEyebrow: String {
         switch self {
-        case .preview: "Reflow preview"
+        case .preview: "Preview changes"
         case .option: "Reflow option"
         case .impact: "Impact before approval"
-        case .receipt: "Receipt preview"
+        case .receipt: "Review preview"
         case .source: "Current state"
         case .noSilentChange: "No silent change"
         case .manualFallback: "User choice"
@@ -110,10 +110,10 @@ public enum QuietReflowPrimitiveRole: String, CaseIterable, Sendable, Identifiab
 
     public var accessibilityRole: String {
         switch self {
-        case .preview: "reflow preview"
+        case .preview: "preview changes"
         case .option: "reflow option"
         case .impact: "impact preview"
-        case .receipt: "receipt preview"
+        case .receipt: "review preview"
         case .source: "current source state"
         case .noSilentChange: "no silent change"
         case .manualFallback: "user choice"

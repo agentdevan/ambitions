@@ -97,7 +97,7 @@ public enum AmbitionsStatusSymbolRole: String, CaseIterable, Identifiable, Senda
         case .receiptAvailable: "Receipt"
         case .sourceFresh: "Fresh source"
         case .sourcePartial: "Partial source"
-        case .sourceStale: "Review source"
+        case .sourceStale: "Review context"
         case .sourceDenied: "Source denied"
         case .sourceConflict: "Source conflict"
         case .privacyProtected: "Private"

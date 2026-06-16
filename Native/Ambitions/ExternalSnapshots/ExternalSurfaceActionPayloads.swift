@@ -168,7 +168,7 @@ enum ExternalObjectReopeningRoot: String, Codable, Sendable, Equatable, CaseIter
         case .time:
             return "LifeShape Field"
         case .you:
-            return "Personal Runtime"
+            return "Personal system"
         }
     }
 }

@@ -300,7 +300,7 @@ struct CaptureDraftRoutePreview: Sendable, Equatable {
             "Receipt: \(receiptSeamLabel)",
             "Reason: \(resolverWhyLabel)",
             "Draft: \(stagedInputs.map(\.kind.title).joined(separator: " / "))",
-            "You / What Ambitions knows: route stays inspectable and correctable before saving."
+            "You / Search Ambitions: route stays inspectable and correctable before saving."
         ].joined(separator: " · ")
     }
 

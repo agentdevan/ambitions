@@ -826,7 +826,7 @@ struct GoalsOverview: Sendable {
             "Source: \(constellationAtlasSourceRecordSummary)",
             "Receipt: \(constellationAtlasReceiptSummary)",
             "Reason: \(constellationAtlasReplayTraceSummary)",
-            "You / What Ambitions knows: \(constellationAtlasYouSummary)"
+            "You / Search Ambitions: \(constellationAtlasYouSummary)"
         ].joined(separator: " · ")
     }
 

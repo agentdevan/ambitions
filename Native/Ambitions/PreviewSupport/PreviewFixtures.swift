@@ -485,7 +485,7 @@ struct PreviewFixtures: Sendable {
                         correctionLabel: "Correct in owning surface",
                         rejectionLabel: "No durable memory claim",
                         state: .success,
-                        accessibilityLabel: "Memory Lens current plan context",
+                        accessibilityLabel: "Search current plan context",
                         accessibilityValue: "Current. Summary only.",
                         accessibilityHint: "Shows source age, why remembered, privacy boundary, and correction posture for current plan recall."
                     ),
@@ -501,7 +501,7 @@ struct PreviewFixtures: Sendable {
                         correctionLabel: "Correct or reject reuse",
                         rejectionLabel: "Deletion waits for receipt proof",
                         state: .warning,
-                        accessibilityLabel: "Memory Lens correction memory",
+                        accessibilityLabel: "Search correction memory",
                         accessibilityValue: "Current. Review before durable memory.",
                         accessibilityHint: "Shows correction, rejection, and deletion boundaries for correction memory."
                     ),
@@ -517,7 +517,7 @@ struct PreviewFixtures: Sendable {
                         correctionLabel: "Edit in Capture",
                         rejectionLabel: "Archive from Capture",
                         state: .warning,
-                        accessibilityLabel: "Memory Lens open capture context",
+                        accessibilityLabel: "Search open capture context",
                         accessibilityValue: "May need review. Stored on this device.",
                         accessibilityHint: "Shows source age, privacy boundary, and placement controls for open capture recall."
                     )
@@ -848,22 +848,22 @@ struct PreviewFixtures: Sendable {
             ExternalBrainPreviewScenario(
                 id: "eb35-memory-context-recall",
                 title: "Memory context recall",
-                surface: "What Ambitions knows",
+                surface: "Search Ambitions",
                 fixtureOwner: "Native/Ambitions/Services/MemoryLensService.swift",
-                sourceTruth: "Life Memory / Trust",
+                sourceTruth: "Personal context / Trust",
                 commandIntent: .memoryLens,
                 memoryQuery: "safe context recall",
                 privacyBoundary: "Searches source-grounded context without creating durable memory.",
                 accessibilityExpectation: "Result rows must expose source, confidence, and review state.",
-                yellowLimit: "Rendered Memory Lens screenshots remain future-owned.",
+                yellowLimit: "Rendered Search screenshots remain future-owned.",
                 expectedEvidence: ["memory query", "source evidence", "review boundary"]
             ),
             ExternalBrainPreviewScenario(
                 id: "eb35-correction-trail",
                 title: "Correction trail requires review",
-                surface: "What Ambitions knows",
+                surface: "Search Ambitions",
                 fixtureOwner: "Native/Ambitions/Services/MemoryLensService.swift",
-                sourceTruth: "Life Memory / User Control",
+                sourceTruth: "Personal context / User Control",
                 commandIntent: .memoryLens,
                 memoryQuery: "Correction trail",
                 privacyBoundary: "Correction signals cannot become durable memory without review.",
@@ -1215,7 +1215,7 @@ private func sourceAtlasStateLabel(_ state: SourceAtlasRequirementSourceState) -
     case .unknown:
         return "Unknown"
     case .sourceNeeded:
-        return "Source needed"
+        return "Context needed"
     case .stale:
         return "Stale"
     case .contradicted:

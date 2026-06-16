@@ -1597,7 +1597,7 @@ private struct TodayStepSessionSurface: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             SectionHeader(
-                eyebrow: "Step Session",
+                eyebrow: "Step session",
                 title: state.title,
                 subtitle: state.subtitle
             )
@@ -1779,13 +1779,13 @@ private struct TodayActionAccessibilityHint: ViewModifier {
     func body(content: Content) -> some View {
         switch action.kind {
         case .startStepSession:
-            content.accessibilityHint("Starts a bounded Step Session for this one step.")
+            content.accessibilityHint("Starts a bounded Step session for this one step.")
         case .pauseStepSession:
             content.accessibilityHint("Pauses the session without changing proof or plan.")
         case .stopStepSession:
             content.accessibilityHint("Returns to Today without changing proof or plan.")
         case .closeActionClosure:
-            content.accessibilityHint("Opens closure options and receipt preview for this step.")
+            content.accessibilityHint("Opens closure options and review preview for this step.")
         case .askWhyThisMatters:
             content.accessibilityHint("Explains why this step is worth doing now.")
         case .protectLater:

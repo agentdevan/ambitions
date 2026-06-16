@@ -660,7 +660,7 @@ extension RepositoryBackedTimeService {
                 : "Protected time conflict: \(protectedConflicts.count) fixed or protected \(conflictNoun) need care before shifting anything.",
             lateStartAdjustmentLabel: "Late-start adjustment: \(saveTheDay.adjustment) Start with the smaller version.",
             recoveryDayReviewLabel: "Recovery-day review: Still counts; protect what remains and make the next ask lighter.",
-            recoveryReceiptPreviewLabel: "Recovery receipt preview: records what was lightened, what stayed protected, and what still counts before any plan change.",
+            recoveryReceiptPreviewLabel: "Recovery review preview: records what was lightened, what stayed protected, and what still counts before any plan change.",
             capacityReviewLabel: "Capacity review: \(capacityEnvelope.label.lowercased()) is qualitative, with no percentage or certainty claim.",
             signals: [
                 TimePressureRecoverySignalState(
@@ -1844,7 +1844,7 @@ extension RepositoryBackedTimeService {
 
         return TimeReflowReceiptPreviewState(
             title: "Before anything changes",
-            detail: "A reflow receipt preview shows the tradeoff before action, not after a hidden change.",
+            detail: "A reflow review preview shows the tradeoff before action, not after a hidden change.",
             whatChanged: wouldChange,
             whatWouldNotChange: wouldNotChange,
             momentumReflowContract: momentumReflowContract,
@@ -1946,7 +1946,7 @@ extension RepositoryBackedTimeService {
                 ? "Calendar context can inform open windows, but Plan still does not write calendar changes silently."
                 : "Manual planning works without calendar access.",
             socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
-            receiptBoundary: "A receipt preview names what would change, what would not change, and the undo boundary.",
+            receiptBoundary: "A review preview names what would change, what would not change, and the undo boundary.",
             signals: signals
         )
     }

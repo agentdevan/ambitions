@@ -3,7 +3,7 @@ import SwiftUI
 
 public enum FE09ComponentSystemState: String, CaseIterable, Identifiable, Sendable {
     case normal = "Normal"
-    case staleSourceNeeded = "Stale / source needed"
+    case staleSourceNeeded = "Stale / context needed"
     case localOnlyPrivacy = "Local only / privacy"
     case recovery = "Recovery"
     case blockedWaiting = "Blocked / waiting"

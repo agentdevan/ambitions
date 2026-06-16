@@ -26,7 +26,7 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
         case .goals: "Direction Atlas"
         case .time: "LifeShape Field"
         case .motion: "Motion Current"
-        case .you: "Personal Runtime"
+        case .you: "Personal system"
         }
     }
 

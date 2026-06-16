@@ -34,9 +34,9 @@ struct RecommendationMutationLabInspectionSeam: Codable, Sendable, Equatable, Ha
         replayTraceID: String,
         sourceRecordLabel: String,
         replayTraceLabel: String,
-        inspectionSurfaceTitle: String = "What Ambitions knows",
-        controlVisibility: String = "You / What Ambitions knows can inspect the local trace.",
-        youInspectionLabel: String = "You / What Ambitions knows"
+        inspectionSurfaceTitle: String = "Search Ambitions",
+        controlVisibility: String = "You / Search Ambitions can inspect the local trace.",
+        youInspectionLabel: String = "You / Search Ambitions"
     ) {
         self.sourceRecordID = sourceRecordID.trimmingCharacters(in: .whitespacesAndNewlines)
         self.receiptID = receiptID.trimmingCharacters(in: .whitespacesAndNewlines)

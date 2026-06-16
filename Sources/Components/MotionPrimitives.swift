@@ -296,11 +296,11 @@ public struct AmbitionSemanticCausalityContext: Equatable, Sendable {
         sourceRecordSeamID: "SourceRecord",
         receiptSeamID: "Receipt",
         replayTraceSeamID: "ReplayTrace",
-        whatAmbitionsKnowsSeamID: "What Ambitions knows",
+        whatAmbitionsKnowsSeamID: "Search Ambitions",
         sourceRecordLabel: "Source",
         receiptLabel: "Receipt",
         replayTraceLabel: "Reason",
-        inspectionSurfaceLabel: "What Ambitions knows"
+        inspectionSurfaceLabel: "Search Ambitions"
     )
 
     public var inspectionSummary: String {

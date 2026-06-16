@@ -435,9 +435,9 @@ private struct YouPersonalRuntimeStatusControlGroup: View {
 
     var body: some View {
         YouControlGroup(
-            eyebrow: "Personal Runtime",
+            eyebrow: "Personal system",
             section: YouSectionGroup(
-                title: "Personal Runtime",
+                title: "Personal system",
                 subtitle: "Inspectable local inputs, controls, and receipts for what Ambitions can use today.",
                 items: [
                     SettingsItem(
@@ -591,7 +591,7 @@ private struct YouMemoryControlsSurface: View {
                 if memoryControls.memoryLensItems.isEmpty == false {
                     VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         SectionHeader(
-                            eyebrow: "Memory Lens",
+                            eyebrow: "Search",
                             title: "Source-grounded recall",
                             subtitle: "Each visible memory names source age, why it is remembered, privacy posture, and review controls."
                         )
@@ -2911,7 +2911,7 @@ private extension ActionReceiptSafetyState {
         case .normal: "Freshness: current local receipt"
         case .degraded: "Freshness: degraded source"
         case .safeFailure: "Freshness: blocked safely"
-        case .externalUnavailable: "Freshness: external source unavailable"
+        case .externalUnavailable: "Freshness: external needs context"
         case .confirmationRequired: "Freshness: waiting for confirmation"
         }
     }

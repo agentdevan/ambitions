@@ -42,7 +42,7 @@ struct AmbitionsRuntimeExperienceSnapshot: Sendable, Equatable {
     let noNetworkProof: Bool
 
     var isInspectableInYou: Bool {
-        inspectionSummary.localizedCaseInsensitiveContains("What Ambitions knows")
+        inspectionSummary.localizedCaseInsensitiveContains("Search Ambitions")
     }
 }
 
@@ -175,7 +175,7 @@ struct AmbitionsRuntimeExperienceSnapshotAdapter: Sendable, Equatable {
 
     private func inspectionSummary(for input: AmbitionsRuntimeExperienceSnapshotInput) -> String {
         [
-            "You / What Ambitions knows can inspect this runtime snapshot.",
+            "You / Search Ambitions can inspect this runtime snapshot.",
             "Source IDs: \(input.sourceRecordIDs.joined(separator: ",").ifEmpty("none")).",
             "Receipt IDs: \(input.receiptIDs.joined(separator: ",").ifEmpty("none")).",
             "Reason IDs: \(input.replayTraceIDs.joined(separator: ",").ifEmpty("none"))."

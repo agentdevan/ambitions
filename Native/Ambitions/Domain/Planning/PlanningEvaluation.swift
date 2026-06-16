@@ -484,8 +484,8 @@ extension PlanningRuleTrace {
             fallbackReasonIDs: [],
             confidence: selection.candidate.evaluation.recommendationConfidence,
             explanationSummary: "Local deterministic rules ranked this step.",
-            controlVisibility: "You / What Ambitions knows can inspect the local trace.",
-            inspectionSurfaceTitle: "What Ambitions knows",
+            controlVisibility: "You / Search Ambitions can inspect the local trace.",
+            inspectionSurfaceTitle: "Search Ambitions",
             localOnly: true
         )
     }
@@ -754,8 +754,8 @@ struct PlanningNextStepSelector: Sendable {
             fallbackReasonIDs: fallbackReasonIDs,
             confidence: evaluation.recommendationConfidence,
             explanationSummary: "Local deterministic rules ranked this step through inspectable context. Source, receipt, reason, time fit, closure evidence, confidence, and fallback reasons stay visible.",
-            controlVisibility: "You / What Ambitions knows can inspect sources, reasons, confidence, fallback, and reset or correction controls.",
-            inspectionSurfaceTitle: "What Ambitions knows",
+            controlVisibility: "You / Search Ambitions can inspect sources, reasons, confidence, fallback, and reset or correction controls.",
+            inspectionSurfaceTitle: "Search Ambitions",
             localOnly: true
         )
     }

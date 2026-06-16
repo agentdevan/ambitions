@@ -151,7 +151,7 @@ public struct InstrumentField<Content: View>: View {
     }
 }
 
-/// Progressive disclosure seam for Source / Proof / Receipt detail.
+/// Progressive disclosure seam for Why this? detail.
 public struct TrustSeamDisclosure<Content: View>: View {
     private let title: String
     private let content: Content

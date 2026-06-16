@@ -113,7 +113,7 @@ struct GoalsConstellationAtlasStage: View {
             GoalMissionControlLaneState(
                 id: "context",
                 title: "Context",
-                value: overview.isSeeded ? "Preview source" : "Local source",
+                value: overview.isSeeded ? "Preview context" : "Local source",
                 detail: overview.constellationAtlasSourceFirstViewportSummary,
                 symbolName: "link",
                 state: .active,

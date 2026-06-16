@@ -59,7 +59,7 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
         let unavailable = try XCTUnwrap(PreviewTodayScenarios.sourceUnavailable.execution.dayRail.heroStep)
         let privateStep = try XCTUnwrap(PreviewTodayScenarios.privateRail.execution.dayRail.heroStep)
 
-        XCTAssertTrue(stale.receiptItem.accessibilitySummary.contains("Review source"))
+        XCTAssertTrue(stale.receiptItem.accessibilitySummary.contains("Review context"))
         XCTAssertTrue(stale.receiptItem.accessibilitySummary.contains("Review or adjust before changing the plan."))
         XCTAssertTrue(blocked.receiptItem.accessibilitySummary.contains("Blocked"))
         XCTAssertTrue(blocked.receiptItem.accessibilitySummary.contains("Waiting item"))

@@ -7,7 +7,7 @@ final class ExternalBrainPreviewFixturesTests: XCTestCase {
 
         XCTAssertGreaterThanOrEqual(scenarios.count, 6)
         XCTAssertTrue(scenarios.contains { $0.surface == "Capture" })
-        XCTAssertTrue(scenarios.contains { $0.surface == "What Ambitions knows" })
+        XCTAssertTrue(scenarios.contains { $0.surface == "Search Ambitions" })
         XCTAssertTrue(scenarios.contains { $0.surface == "Shell command" })
         XCTAssertTrue(scenarios.contains { $0.surface == "You" })
         XCTAssertTrue(scenarios.contains { $0.surface == "Today / Time" })

@@ -83,7 +83,7 @@ public enum SourceFreshnessState: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .fresh: "Fresh source"
         case .partial: "Partial source"
-        case .stale: "Review source"
+        case .stale: "Review context"
         case .denied: "Source denied"
         case .offline: "Offline"
         case .localOnly: "Local only"

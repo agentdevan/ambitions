@@ -563,7 +563,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(heroDetail.title, hero.title)
         XCTAssertEqual(heroDetail.primaryAction.title, "Start now")
         XCTAssertEqual(heroDetail.closureAction.title, "Close the loop")
-        XCTAssertEqual(heroDetail.stepSessionLabel, "Step Session opens for this one step.")
+        XCTAssertEqual(heroDetail.stepSessionLabel, "Step session opens for this one step.")
         XCTAssertEqual(heroDetail.detailTarget.kind, .stepDetail)
         XCTAssertEqual(rowDetail.timingBucket, "Now")
         XCTAssertEqual(rowDetail.title, row.title)
@@ -726,7 +726,7 @@ final class TodayViewModelTests: XCTestCase {
             target: target
         )
 
-        XCTAssertEqual(sheet.diamond.title, "Closure diamond")
+        XCTAssertEqual(sheet.diamond.title, "Outcome")
         XCTAssertEqual(sheet.diamond.centerLabel, "Close the loop")
         XCTAssertEqual(sheet.diamond.facets.map(\.title), ["Outcome", "Consequence", "Proof", "Recovery"])
         XCTAssertTrue(sheet.diamond.visibleCopy.contains("Evidence only when it is true."))
@@ -757,7 +757,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(session.sessionControlActions.map(\.title), ["Pause", "Stop session", "Close the loop"])
         XCTAssertNotEqual(session.primaryAction.kind, .closeActionClosure)
         XCTAssertEqual(session.timerLabel, "Timer optional")
-        XCTAssertTrue(session.receiptGenerationLabel.contains("receipt preview"))
+        XCTAssertTrue(session.receiptGenerationLabel.contains("review preview"))
         XCTAssertTrue(session.exitBoundaryLabel.contains("without changing proof or plan"))
     }
 
@@ -1251,7 +1251,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(recovery.pressureFieldLabel.contains("Pressure field"))
         XCTAssertTrue(recovery.recoveryLoopLabel.contains("smaller safe next step"))
         XCTAssertTrue(recovery.smallerStepAnchorLabel.contains("small enough to start"))
-        XCTAssertTrue(recovery.recoveryReceiptPreviewLabel.contains("Recovery receipt preview"))
+        XCTAssertTrue(recovery.recoveryReceiptPreviewLabel.contains("Recovery review preview"))
         XCTAssertEqual(recovery.options.first?.title, "Smaller version")
         XCTAssertEqual(recovery.options.first?.action.kind, .split)
         XCTAssertFalse(visibleCopy.contains("overdue"))
@@ -1266,7 +1266,7 @@ final class TodayViewModelTests: XCTestCase {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTodayService(repositories: repositories)
         let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-21T08:00:00Z"))
-        let goal = makeGoal(id: "goal-step-session", stepID: "step-session-step", stepTitle: "Step Session-backed step", dueAt: "2026-04-21T16:00:00Z")
+        let goal = makeGoal(id: "goal-step-session", stepID: "step-session-step", stepTitle: "Step session-backed step", dueAt: "2026-04-21T16:00:00Z")
         try await repositories.goals.saveGoals([goal])
 
         let experience = try await service.loadTodayExperience(
@@ -1277,8 +1277,8 @@ final class TodayViewModelTests: XCTestCase {
 
         XCTAssertEqual(experience.hero.truth.posture, .stable)
         XCTAssertEqual(experience.hero.primaryAction.action.kind, .complete)
-        XCTAssertEqual(experience.support.stepSession?.title, "Step Session-backed step")
-        XCTAssertTrue(experience.support.stepSession?.detail.contains("Step Session") == true)
+        XCTAssertEqual(experience.support.stepSession?.title, "Step session-backed step")
+        XCTAssertTrue(experience.support.stepSession?.detail.contains("Step session") == true)
         XCTAssertEqual(experience.support.stepSession?.primaryAction.kind, .complete)
         XCTAssertEqual(experience.support.stepSession?.contextReminderLabel, "One step is in focus. The rest of Today stays available behind it.")
         XCTAssertEqual(experience.support.stepSession?.goalConnectionLabel, "Goal context stays attached while this step is in session.")

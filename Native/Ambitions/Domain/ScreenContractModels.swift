@@ -581,7 +581,7 @@ enum ScreenContractRegistry {
     private static let you = ScreenContract(
         id: .you,
         dominantQuestion: "How does Ambitions work for me?",
-        requiredFirstScreenContent: ["Your System", "User System You", "Planning Setup", "Trust & Automation", "Privacy", "Receipts & History", "Defaults", "Grouped Navigation Lists"],
+        requiredFirstScreenContent: ["Your System", "User System You", "Planning Setup", "Privacy & automation", "Privacy", "Receipts & History", "Defaults", "Grouped Navigation Lists"],
         requiredPanels: [.trust, .review, .settingsPreference, .groupedNavigationList],
         optionalPanels: [.progress, .receipt],
         forbiddenFirstScreenContent: ["Primary execution UI", "Top-level Insights clone", "Social profile", "Admin console", "Account hub", "AI settings wall"],

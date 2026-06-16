@@ -173,7 +173,7 @@ enum PreviewTodayScenarios {
     )
     static let sourceUnavailable = makeSourceStateScenario(
         from: stable,
-        sourceQualityLabel: "Source unavailable",
+        sourceQualityLabel: "Needs context",
         freshness: .unavailable,
         sourceLabels: [],
         sourceRecordLabel: "Source record unavailable",
@@ -802,11 +802,11 @@ enum PreviewTodayScenarios {
                     )
                 ),
                 recoveryBloom: recoveryBloom(for: posture, primaryAction: primaryAction, supportingActions: supportingActions),
-                stepSession: reentry?.title.contains("Step Session") == true || reentry?.title.contains("Focus") == true
+                stepSession: reentry?.title.contains("Step session") == true || reentry?.title.contains("Focus") == true
                     ? TodayStepSessionState(
                         title: title,
                         subtitle: nowSubtitle,
-                        detail: "Step Session is narrowed to one step so the rest of Today can stay quiet.",
+                        detail: "Step session is narrowed to one step so the rest of Today can stay quiet.",
                         primaryAction: supportingActions.first ?? primaryAction,
                         secondaryActions: Array(supportingActions.dropFirst().prefix(2)),
                         trustWhisper: TodayTrustWhisperState(
@@ -981,7 +981,7 @@ enum PreviewTodayScenarios {
                 : "Pressure field: the day needs one calmer lane.",
             recoveryLoopLabel: "Recovery loop: shrink the next ask, keep Still Counts available, and preview the receipt.",
             smallerStepAnchorLabel: "Smaller step anchor: choose the lightest useful version first.",
-            recoveryReceiptPreviewLabel: "Recovery receipt preview: records the lighter path and what stayed unchanged.",
+            recoveryReceiptPreviewLabel: "Recovery review preview: records the lighter path and what stayed unchanged.",
             options: Array(options)
         )
     }

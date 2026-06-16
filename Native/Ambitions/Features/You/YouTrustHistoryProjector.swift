@@ -99,7 +99,7 @@ struct YouTrustHistoryProjector {
             title: event.title,
             summary: event.summary ?? "A local change was recorded for review context.",
             sourceLabel: event.source.trustHistorySourceLabel,
-            reviewLabel: event.trust.requiresReview ? "Review source" : "Local record",
+            reviewLabel: event.trust.requiresReview ? "Review context" : "Local record",
             privacyLabel: event.privacy.trustHistoryPrivacyLabel,
             reversibilityLabel: event.kind.trustHistoryReversibilityLabel,
             state: event.tone.trustHistoryVisualState
@@ -115,7 +115,7 @@ struct YouTrustHistoryProjector {
                 ? "No local correction or review boundary currently needs attention."
                 : "\(sourceReviewCount) local correction or review boundaries can explain why future suggestions change.",
             sourceLabel: "Source: Local records",
-            reviewLabel: sourceReviewCount == 0 ? "No review needed" : "Review source",
+            reviewLabel: sourceReviewCount == 0 ? "No review needed" : "Review context",
             privacyLabel: "Review boundary only",
             reversibilityLabel: "User correction stays available where supported",
             state: sourceReviewCount == 0 ? .default : .warning

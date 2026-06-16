@@ -51,7 +51,7 @@ final class LocalScheduleBlockRepositoryTests: XCTestCase {
             laterBlock.localScheduleReplayTraceID(action: "save"),
             "ReplayTrace.local-schedule.local-schedule.block-2.save"
         )
-        XCTAssertTrue(laterBlock.localScheduleYouInspectionSummary.contains("What Ambitions knows"))
+        XCTAssertTrue(laterBlock.localScheduleYouInspectionSummary.contains("Search Ambitions"))
     }
 
     func testFileRepositoryImportsExportIntoFreshStoreWithoutChangingInspectableIdentity() async throws {
@@ -85,7 +85,7 @@ final class LocalScheduleBlockRepositoryTests: XCTestCase {
         XCTAssertEqual(loaded, [block])
         XCTAssertEqual(importedBlock, block)
         XCTAssertEqual(importedBlock.localScheduleReceiptID(action: "save"), "Receipt.local-schedule.local-schedule.block-import.save")
-        XCTAssertTrue(importedBlock.localScheduleYouInspectionSummary.contains("What Ambitions knows"))
+        XCTAssertTrue(importedBlock.localScheduleYouInspectionSummary.contains("Search Ambitions"))
     }
 
     func testFileRepositorySerializesConcurrentUpsertsWithoutDroppingBlocks() async throws {

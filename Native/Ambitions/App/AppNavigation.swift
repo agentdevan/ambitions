@@ -263,11 +263,11 @@ final class AppNavigationModel {
             captureID: captureID
         )
         recordCommandHistory(
-            title: intent?.title ?? "What Ambitions knows",
+            title: intent?.title ?? "Search Ambitions",
             subtitle: query.isEmpty ? presentationContext.historySubtitle : "Looked up \"\(query)\".",
             source: source,
             presentationContext: presentationContext,
-            destinationLabel: "What Ambitions knows"
+            destinationLabel: "Search Ambitions"
         )
     }
 

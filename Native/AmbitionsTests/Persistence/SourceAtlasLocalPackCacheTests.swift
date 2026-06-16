@@ -280,7 +280,7 @@ private extension SourceAtlasLocalPackCacheTests {
             freshnessPolicy: .conservativeFreshness,
             riskPolicy: .conservative,
             disclosureCopy: SourceAtlasDisclosureCopy(
-                sourceNeeded: "Source needed.",
+                sourceNeeded: "Context needed.",
                 reviewRequired: "Review required.",
                 notProfessionalAdvice: "Planning support only."
             ),

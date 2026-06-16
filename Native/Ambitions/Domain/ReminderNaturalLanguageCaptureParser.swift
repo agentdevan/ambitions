@@ -54,7 +54,7 @@ struct ReminderNaturalLanguageCaptureParser: Sendable {
         sourceObject: LifeGraphObjectReference,
         receipt: Receipt? = nil,
         replayTrace: ReplayTrace? = nil,
-        surfaceTitle: String = "What Ambitions knows"
+        surfaceTitle: String = "Search Ambitions"
     ) -> ReminderNaturalLanguageCaptureParseResult? {
         let normalizedText = Self.normalizedText(rawText)
         guard normalizedText.isEmpty == false else { return nil }
@@ -119,7 +119,7 @@ struct ReminderNaturalLanguageCaptureParser: Sendable {
             record: sourceRecord,
             sourceObject: sourceObject,
             surfaceTitle: surfaceTitle,
-            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this source, receipt, and reason.",
             receipt: receipt,
             replayTrace: replayTrace,
             notes: sourceNotes

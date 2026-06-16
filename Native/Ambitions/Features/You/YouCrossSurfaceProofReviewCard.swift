@@ -74,13 +74,13 @@ private struct YouCrossSurfaceProofReviewRow: View {
     private func sourceFreshnessLabel(for item: YouCrossSurfaceProofReviewItem) -> String {
         switch item.state {
         case .success: "Fresh source"
-        case .warning: "Review source"
+        case .warning: "Review context"
         case .celebration: "Proof visible"
         case .selected: "Fresh source"
         case .loading: "Local only"
         case .disabled: "Blocked safely"
-        case .pressed: "Review source"
-        case .default: "Review source"
+        case .pressed: "Review context"
+        case .default: "Review context"
         }
     }
 }

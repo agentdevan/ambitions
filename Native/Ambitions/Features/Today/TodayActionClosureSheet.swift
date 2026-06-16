@@ -239,7 +239,7 @@ struct TodayActionClosureSheet: View {
     private var receiptPreview: some View {
         ClosureRecoveryPrimitiveStage(
             role: .receipt,
-            eyebrow: "Receipt preview",
+            eyebrow: "Review preview",
             title: state.receiptPreviewTitle,
             subtitle: receiptPreviewText,
             statusLabel: selectedOutcome.map { state.proofReceiptPeek(for: $0).noSilentChangesLabel } ?? "Changes stay reviewable",

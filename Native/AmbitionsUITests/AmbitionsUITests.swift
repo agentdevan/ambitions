@@ -324,12 +324,12 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
 
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Personal Runtime", in: app, maxAttempts: 8))
-        XCTAssertTrue(tapYouRow(named: "Personal Runtime", in: app, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "Personal system", in: app, maxAttempts: 8))
+        XCTAssertTrue(tapYouRow(named: "Personal system", in: app, maxAttempts: 10))
         XCTAssertTrue(app.descendants(matching: .any)["you.personal-runtime-status-card"].waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilStaticTextExists("runtime-backed", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("fixture-only", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("blocked-pending-model", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("local", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("preview", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("needs setup", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("No hidden automation", in: app, maxAttempts: 8))
         app.buttons["Done"].tap()
 
@@ -342,7 +342,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("No hosted account", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Policy receipt examples", in: app, maxAttempts: 8))
         XCTAssertTrue(scrollUntilStaticTextExists("Export/import drill pending", in: app, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilStaticTextExists("blocked-pending-model", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("needs setup", in: app, maxAttempts: 8))
     }
 
     func testYouScreenshotProofLaunchStatesOpenRequiredDetailSheets() throws {
@@ -463,7 +463,7 @@ final class AmbitionsUITests: XCTestCase {
 
             XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
             if item.detail == nil {
-                XCTAssertTrue(app.staticTexts["Personal Runtime / User System Profile"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.staticTexts["Personal system / User System Profile"].waitForExistence(timeout: 10))
                 XCTAssertTrue(app.staticTexts["How Ambitions works for me"].waitForExistence(timeout: 10))
                 XCTAssertTrue(app.descendants(matching: .any)["you.priority-node.trust-automation"].waitForExistence(timeout: 10))
                 XCTAssertTrue(app.descendants(matching: .any)["you.priority-node.personal-runtime"].waitForExistence(timeout: 10))
@@ -757,7 +757,7 @@ final class AmbitionsUITests: XCTestCase {
 
         let quickCapture = app.buttons["shell.command.action.quick_capture"]
         XCTAssertTrue(quickCapture.waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Quiet Command Sheet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Quick action Sheet"].waitForExistence(timeout: 10))
         quickCapture.tap()
 
         let field = app.textFields["shell.command.capture-field"]
@@ -1074,7 +1074,7 @@ final class AmbitionsUITests: XCTestCase {
             ["next", "best", "move"].joined(separator: " "),
             ["Begin", "Focus"].joined(separator: " "),
             "task list",
-            "No standalone task is pulling on Today.",
+            "No recommended step fits right now.",
             "Standalone tasks stay small.",
             "No blank dashboard"
         ]
@@ -1117,7 +1117,7 @@ final class AmbitionsUITests: XCTestCase {
                 scenario: "source-unavailable",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["Source unavailable. Manual planning still works.", "Why this?"]
+                required: ["Needs context. Manual planning still works.", "Why this?"]
             ),
             (
                 name: "active-recommended-step",
@@ -1152,7 +1152,7 @@ final class AmbitionsUITests: XCTestCase {
                 scenario: "empty",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["No step is required right now", "Capture what changed", "Shape Time", "Review source", "Close Today", "Protect this window"]
+                required: ["No step is required right now", "Capture what changed", "Shape Time", "Review context", "Record outcome", "Protect this window"]
             )
         ]
 
@@ -1361,7 +1361,7 @@ final class AmbitionsUITests: XCTestCase {
                     "motion.current.source-proof-receipt",
                     "motion.current.continuity-dock"
                 ],
-                requiredTexts: ["Recovery active", "Source, proof, receipt", "Open Trust"],
+                requiredTexts: ["Recovery active", "Why this?", "Open Trust"],
                 scrollTargetIdentifier: "motion.current.continuity-dock"
             ),
             MotionMatrixItem(
@@ -1539,7 +1539,7 @@ final class AmbitionsUITests: XCTestCase {
             }
 
             XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "KPI")).firstMatch.exists, "Time must not read as KPI dashboard for \(item.name).")
-            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "free/busy")).firstMatch.exists, "Time must not use free/busy semantics for \(item.name).")
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "capacity")).firstMatch.exists, "Time must not use capacity semantics for \(item.name).")
             if item.name == "large-dynamic-type" {
                 scrollTimeContentToCapacityProof(in: app)
             }
@@ -1882,7 +1882,7 @@ final class AmbitionsUITests: XCTestCase {
         if currentLabel.waitForExistence(timeout: 2) {
             return currentLabel
         }
-        let labeled = app.buttons["Quiet Command Sheet"]
+        let labeled = app.buttons["Quick action Sheet"]
         _ = labeled.waitForExistence(timeout: 2)
         return labeled
     }

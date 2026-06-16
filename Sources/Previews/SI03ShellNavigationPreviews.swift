@@ -18,7 +18,7 @@ private struct SI03ShellNavigationPreview: View {
                     accessibilityIdentifier: "preview.si03.command"
                 ) {},
                 secondaryAction: .init(
-                    title: "Review source",
+                    title: "Review context",
                     systemImage: "checkmark.shield",
                     accessibilityIdentifier: "preview.si03.source"
                 ) {}
@@ -50,7 +50,7 @@ private struct SI03ShellNavigationPreview: View {
 
                     GroupedNavigationSection(title: "Trust and control") {
                         GroupedStatusNavigationRow(
-                            title: "What Ambitions knows",
+                            title: "Search Ambitions",
                             subtitle: "Review saved context and receipts.",
                             systemImage: "checkmark.shield",
                             value: "Private",

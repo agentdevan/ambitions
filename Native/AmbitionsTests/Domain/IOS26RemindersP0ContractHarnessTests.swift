@@ -76,7 +76,7 @@ final class IOS26RemindersP0ContractHarnessTests: XCTestCase {
             actionIdentifier: AppNotificationConstants.snoozeActionID,
             userInfo: [
                 "sourceRecordID": sourceRecord.id,
-                "surface": "What Ambitions knows",
+                "surface": "Search Ambitions",
             ]
         )
 
@@ -99,7 +99,7 @@ final class IOS26RemindersP0ContractHarnessTests: XCTestCase {
         XCTAssertTrue(replayTrace.decisionReceipt?.hasProofBridge ?? false)
         XCTAssertEqual(payload?.action, "snooze")
         XCTAssertEqual(payload?.values["sourceRecordID"], sourceRecord.id)
-        XCTAssertEqual(payload?.values["surface"], "What Ambitions knows")
+        XCTAssertEqual(payload?.values["surface"], "Search Ambitions")
 
         let categories = LocalNotificationFoundation.defaultCategories()
         XCTAssertEqual(categories.first?.identifier, AppNotificationConstants.nextStepCategoryID)
@@ -107,15 +107,15 @@ final class IOS26RemindersP0ContractHarnessTests: XCTestCase {
     }
 
     func testReminderInspectionBoundaryUsesTheYouWhatAmbitionsKnowsSurfaceCopy() {
-        let surfaceTitle = "What Ambitions knows"
+        let surfaceTitle = "Search Ambitions"
         let youBoundary = ReminderYouInspectionBoundary(
             surfaceTitle: surfaceTitle,
             sourceKnowledgeLabel: "Reminder source knowledge",
             allowsRawActivityLog: false
         )
 
-        XCTAssertEqual(youBoundary.surfaceTitle, "What Ambitions knows")
-        XCTAssertEqual(youBoundary.inspectionLabel, "What Ambitions knows")
+        XCTAssertEqual(youBoundary.surfaceTitle, "Search Ambitions")
+        XCTAssertEqual(youBoundary.inspectionLabel, "Search Ambitions")
         XCTAssertTrue(youBoundary.blocksRawActivityLogCopy)
         XCTAssertTrue(youBoundary.isInspectableBoundary)
         XCTAssertFalse(youBoundary.allowsRawActivityLog)
@@ -264,6 +264,6 @@ private struct ReminderYouInspectionBoundary: Sendable, Equatable {
     }
 
     var isInspectableBoundary: Bool {
-        surfaceTitle == "What Ambitions knows" && allowsRawActivityLog == false
+        surfaceTitle == "Search Ambitions" && allowsRawActivityLog == false
     }
 }

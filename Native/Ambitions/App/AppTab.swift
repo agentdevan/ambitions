@@ -123,7 +123,7 @@ enum AmbitionsSurfaceContractRegistry {
         "SourceRecord",
         "Receipt",
         "ReplayTrace",
-        "You / What Ambitions knows"
+        "You / Search Ambitions"
     ]
 
     static let canonicalContracts: [AmbitionsSurfaceContract] = [

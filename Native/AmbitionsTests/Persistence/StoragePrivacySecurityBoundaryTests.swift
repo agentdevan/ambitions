@@ -83,7 +83,7 @@ final class StoragePrivacySecurityBoundaryTests: XCTestCase {
             sourceRecordID: "SourceRecord.public.rule",
             receiptID: "Receipt.public.rule",
             replayTraceID: "ReplayTrace.public.rule",
-            whatAmbitionsKnowsInspectionPath: "You / What Ambitions knows / Public sources",
+            whatAmbitionsKnowsInspectionPath: "You / Search Ambitions / Public sources",
             userReviewed: true
         )
 
@@ -149,7 +149,7 @@ private extension StoragePrivacySecurityBoundaryTests {
             sourceRecordID: "SourceRecord.storage.private",
             receiptID: "Receipt.storage.private",
             replayTraceID: "ReplayTrace.storage.private",
-            whatAmbitionsKnowsInspectionPath: "You / What Ambitions knows / Private storage",
+            whatAmbitionsKnowsInspectionPath: "You / Search Ambitions / Private storage",
             userReviewed: userReviewed
         )
     }

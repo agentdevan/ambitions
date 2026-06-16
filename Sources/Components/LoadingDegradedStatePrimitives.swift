@@ -57,7 +57,7 @@ public enum AmbitionsLoadingState: String, CaseIterable, Identifiable, Sendable 
         case .disabledPendingValidation: "Waiting for validation"
         case .staleSource: "Source may be stale"
         case .partialSource: "Source is partial"
-        case .deniedSource: "Source unavailable"
+        case .deniedSource: "Needs context"
         case .sourceConflict: "Source needs review"
         case .packUnavailable: "Source pack unavailable"
         case .iCloudUnavailable: "iCloud unavailable"

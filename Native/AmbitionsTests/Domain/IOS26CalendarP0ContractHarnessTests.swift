@@ -168,7 +168,7 @@ final class IOS26CalendarP0ContractHarnessTests: XCTestCase {
         XCTAssertEqual(saveReceipts, [block.localScheduleReceiptID(action: "save")])
         XCTAssertEqual(block.localScheduleSourceRecordID, "SourceRecord.local-schedule.local-schedule.block-1")
         XCTAssertEqual(block.localScheduleReplayTraceID(action: "save"), "ReplayTrace.local-schedule.local-schedule.block-1.save")
-        XCTAssertTrue(block.localScheduleYouInspectionSummary.contains("What Ambitions knows"))
+        XCTAssertTrue(block.localScheduleYouInspectionSummary.contains("Search Ambitions"))
         XCTAssertEqual(deleteReceipt, "Receipt.local-schedule.local-schedule.block-1.delete")
         XCTAssertTrue(afterDelete.isEmpty)
     }
@@ -483,7 +483,7 @@ private struct CalendarP0ReplacementGauntletHarness {
             record(receipts == [block.localScheduleReceiptID(action: "save")], "Local schedule receipts must stay deterministic.")
             record(loaded == [block], "Local schedule blocks must round-trip deterministically.")
             record(deleteReceipt == "Receipt.local-schedule.\(block.id).delete", "Local schedule deletes must stay inspectable.")
-            record(block.localScheduleYouInspectionSummary.contains("What Ambitions knows"), "You inspection summary must remain present.")
+            record(block.localScheduleYouInspectionSummary.contains("Search Ambitions"), "You inspection summary must remain present.")
         } catch {
             record(false, "Local schedule round-trip failed: \(error)")
         }

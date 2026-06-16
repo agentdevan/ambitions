@@ -71,7 +71,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
         originalHero: DayRailHeroStepState,
         alternatives: [TodayStepReplacementOptionState],
         defaultAlternativeID: String,
-        receiptPreviewTitle: String = "Receipt preview",
+        receiptPreviewTitle: String = "Review preview",
         impactSectionTitle: String = "Show impact",
         impactSectionSubtitle: String = "Ride momentum without moving silently. Move original Step only after you approve the receipt.",
         approvalTitle: String = "Approve replacement",
@@ -91,7 +91,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
         self.originalHero = originalHero
         self.alternatives = Array(alternatives.prefix(5))
         self.defaultAlternativeID = defaultAlternativeID
-        self.receiptPreviewTitle = receiptPreviewTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Receipt preview" : receiptPreviewTitle
+        self.receiptPreviewTitle = receiptPreviewTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Review preview" : receiptPreviewTitle
         self.impactSectionTitle = impactSectionTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Show impact" : impactSectionTitle
         self.impactSectionSubtitle = impactSectionSubtitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Ride momentum without moving silently. Move original Step only after you approve the receipt." : impactSectionSubtitle
         self.approvalTitle = approvalTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Approve replacement" : approvalTitle
@@ -426,7 +426,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
             summary: privacyVisibleSubtitle(blueprint.summary, privacy: privacy),
             deadlineImpactLabel: deadlineImpactLabel(for: impactSimulation),
             timelineImpactLabel: timelineImpactLabel(for: impactSimulation),
-            receiptPreviewLabel: "Receipt preview: \(blueprint.label) · \(deadlineImpactLabel(for: impactSimulation))",
+            receiptPreviewLabel: "Review preview: \(blueprint.label) · \(deadlineImpactLabel(for: impactSimulation))",
             approvalHint: "Approve this local replacement before Today updates.",
             heroStep: heroStep(
                 for: candidate,

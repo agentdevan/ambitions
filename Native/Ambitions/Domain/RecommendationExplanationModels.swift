@@ -1466,7 +1466,7 @@ private extension RecommendationTraceFitState {
 
 extension CorrectionFoldRecommendationLearningInfluence {
     var personalRuntimeInspectableSummary: String {
-        "\(explanation) \(sourceRecordInspectionLabel) \(replayTraceInspectionLabel) Reset, disable, or delete from You > What Ambitions knows."
+        "\(explanation) \(sourceRecordInspectionLabel) \(replayTraceInspectionLabel) Reset, disable, or delete from You > Search Ambitions."
     }
 
     var personalRuntimeInspectionRoute: String {

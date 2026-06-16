@@ -643,7 +643,7 @@ struct AnyGoalRuntimeCoverageEngine: Sendable, Equatable, Hashable {
         case .awaitingSource:
             blockedOutputs = ["visible_step", "schedule_install", "share_projection"]
             allowedLocalActions = ["queue_local_coverage_need", "watch_for_source_arrival", "explain_source_needed"]
-            boundary = "source needed before pathing; local abstract coverage need only"
+            boundary = "context needed before pathing; local abstract coverage need only"
         case .sourceArrived:
             blockedOutputs = ["visible_step", "schedule_install", "share_projection"]
             allowedLocalActions = ["run_local_route_recheck", "inspect_arrival_trace"]

@@ -299,7 +299,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
             proofsBySurface["You"],
             surface: "You",
             primaryObject: "User System Profile",
-            voiceOverSnippets: ["User System Profile", "Planning Setup", "Trust & Automation", "Privacy", "Receipts & History", "Defaults"],
+            voiceOverSnippets: ["User System Profile", "Planning Setup", "Privacy & automation", "Privacy", "Receipts & History", "Defaults"],
             dynamicTypeSnippets: ["grouped-navigation behavior", "large text sizes", "trust", "privacy", "receipts", "setup", "defaults"],
             reduceMotionSnippets: ["disclosure state"],
             nonColorSnippets: ["Trust", "private", "unavailable", "manual", "review", "future-owned"],

@@ -492,7 +492,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(summary.contains("Source:"))
         XCTAssertTrue(summary.contains("Receipt:"))
         XCTAssertTrue(summary.contains("Reason:"))
-        XCTAssertTrue(summary.contains("You / What Ambitions knows:"))
+        XCTAssertTrue(summary.contains("You / Search Ambitions:"))
         XCTAssertTrue(summary.contains("local Goals, drafts, evidence, and capture records"))
         XCTAssertTrue(summary.contains("closure receipts"))
         XCTAssertTrue(summary.contains("Active direction"))

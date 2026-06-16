@@ -37,7 +37,7 @@ public enum AmbitionCoreInteractionState: String, CaseIterable, Identifiable, Se
     case selected = "Selected"
     case loading = "Loading"
     case disabled = "Disabled"
-    case sourceNeeded = "Source needed"
+    case sourceNeeded = "Context needed"
     case localOnly = "Local only"
     case recovery = "Recovery"
     case waiting = "Waiting"
@@ -85,7 +85,7 @@ public enum AmbitionCoreInteractionState: String, CaseIterable, Identifiable, Se
         case .disabled:
             return "Disabled. Explain what is needed before use."
         case .sourceNeeded:
-            return "Source needed. SourceRecord, Receipt, or ReplayTrace should be checked."
+            return "Context needed. SourceRecord, Receipt, or ReplayTrace should be checked."
         case .localOnly:
             return "Local only. Private on this device unless changed by the user."
         case .recovery:

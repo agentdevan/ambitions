@@ -40,7 +40,7 @@ enum AppDeepLinkPreviewRoutes {
         route: .openGoalDetail(goalID: "preview-goal"),
         source: .widgetAction,
         expectedTab: .goals,
-        privacyBoundary: "Preview goal identifier is fixture-only and stays in-app."
+        privacyBoundary: "Preview goal identifier is preview and stays in-app."
     )
 
     static let notificationRecovery = AppDeepLinkPreviewRoute(

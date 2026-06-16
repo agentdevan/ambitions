@@ -114,7 +114,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .capturePlacementShelf: "Atmosphere Composer"
         case .lifeShapeContourMap: "LifeShape Field"
         case .personalSystemCenter: "User System Profile"
-        case .memoryLens: "Memory Lens"
+        case .memoryLens: "Search"
         }
     }
 
@@ -148,7 +148,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .personalSystemCenter:
             "You keeps Your System stable while setup, trust, privacy, receipts, and defaults load."
         case .memoryLens:
-            "Memory Lens waits for local source age, privacy, and correction posture before showing detail."
+            "Search waits for local source age, privacy, and correction posture before showing detail."
         }
     }
 
@@ -169,7 +169,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .personalSystemCenter:
             "Your System starts with setup and trust controls before it shows deeper history."
         case .memoryLens:
-            "Memory Lens stays quiet until explicit local evidence makes recall useful."
+            "Search stays quiet until explicit local evidence makes recall useful."
         }
     }
 
@@ -190,7 +190,7 @@ enum FlagshipObjectStateOwner: String, CaseIterable, Sendable, Equatable {
         case .personalSystemCenter:
             "You can retry without changing setup, trust, memory, or receipts."
         case .memoryLens:
-            "Memory Lens hides detail until stale or sensitive source state is reviewed."
+            "Search hides detail until stale or sensitive source state is reviewed."
         }
     }
 }

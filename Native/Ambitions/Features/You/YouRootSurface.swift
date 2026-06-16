@@ -34,7 +34,7 @@ enum YouRootDetail: String, Identifiable {
     var title: String {
         switch self {
         case .personalization: "Personalization"
-        case .personalRuntime: "Personal Runtime"
+        case .personalRuntime: "Personal system"
         case .sessionDefaults: "Session Defaults"
         case .appearance: "Appearance"
         case .whatAmbitionsKnows: "What Ambitions Knows"
@@ -46,7 +46,7 @@ enum YouRootDetail: String, Identifiable {
         case .archive: "Archive / Completed"
         case .scheduleAvailability: "Schedule & Availability"
         case .planBehavior: "Time Behavior"
-        case .automationTrust: "Trust & Automation"
+        case .automationTrust: "Privacy & automation"
         case .vacationAwayTime: "Vacation / Away Time"
         case .durations: "Durations"
         case .notifications: "Notifications"
@@ -79,7 +79,7 @@ struct YouObjectStageControlPrimitiveContract: Equatable {
     static let current = YouObjectStageControlPrimitiveContract(
         primitiveID: "personal-runtime-group",
         ownerSurface: "You",
-        productObject: "Personal Runtime / User System Profile",
+        productObject: "Personal system / User System Profile",
         stageName: "You Object Stage Control",
         screenshotIdentifier: "YouObjectStageControl",
         sourceControlOrder: [
@@ -190,8 +190,8 @@ struct PersonalSystemCenterRootView: View {
 
     private var priorityGovernanceRows: [RootSectionRow] {
         [
-            RootSectionRow(id: "trust-automation", sourceItemID: "automation-trust", title: "Trust & Automation", detail: .automationTrust),
-            RootSectionRow(id: "personal-runtime", sourceItemID: "what-ambitions-knows", title: "Personal Runtime", detail: .personalRuntime),
+            RootSectionRow(id: "trust-automation", sourceItemID: "automation-trust", title: "Privacy & automation", detail: .automationTrust),
+            RootSectionRow(id: "personal-runtime", sourceItemID: "what-ambitions-knows", title: "Personal system", detail: .personalRuntime),
             RootSectionRow(id: "receipts-history", sourceItemID: "receipts-history", title: "Receipts & History", detail: .receiptsHistory)
         ]
     }
@@ -210,8 +210,8 @@ struct PersonalSystemCenterRootView: View {
                     RootSectionRow(id: "schedule-availability", sourceItemID: "schedule-availability", title: "Schedule & Availability", detail: .scheduleAvailability),
                     RootSectionRow(id: "planning-defaults", sourceItemID: "plan-behavior", title: "Planning Defaults", detail: .planBehavior),
                     RootSectionRow(id: "vacation-away-time", sourceItemID: "vacation-away-time", title: "Vacation / Away Time", detail: .vacationAwayTime),
-                    RootSectionRow(id: "trust-automation", sourceItemID: "automation-trust", title: "Trust & Automation", detail: .automationTrust),
-                    RootSectionRow(id: "personal-runtime", sourceItemID: "what-ambitions-knows", title: "Personal Runtime", detail: .personalRuntime),
+                    RootSectionRow(id: "trust-automation", sourceItemID: "automation-trust", title: "Privacy & automation", detail: .automationTrust),
+                    RootSectionRow(id: "personal-runtime", sourceItemID: "what-ambitions-knows", title: "Personal system", detail: .personalRuntime),
                     RootSectionRow(id: "local-context-controls", sourceItemID: "what-ambitions-knows", title: "Local Context Controls", detail: .whatAmbitionsKnows)
                 ]
             ),

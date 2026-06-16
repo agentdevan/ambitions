@@ -840,8 +840,8 @@ private struct QuietCommandSheetView: View {
 
     private var fallbackTitle: String {
         switch overlay.kind {
-        case .quietCommandSheet: "Quiet Command"
-        case .memoryLens: "What Ambitions knows"
+        case .quietCommandSheet: "Quick action"
+        case .memoryLens: "Search Ambitions"
         case .createGoal: "Create Goal"
         }
     }
@@ -1418,7 +1418,7 @@ struct AppShellActivatedCaptureSeam: View {
         CaptureRoutingPrimitiveStage(
             role: .source,
             title: "Source and trust",
-            subtitle: "Local source, receipt, and reason stay inspectable from You / What Ambitions knows.",
+            subtitle: "Local source, receipt, and reason stay inspectable from You / Search Ambitions.",
             accessibilityIdentifier: "shell.activated-capture.source-trust"
         ) {
             CaptureRoutingPrimitiveLine(
@@ -1805,7 +1805,7 @@ private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
 
     func whyThisExplanation(detectedRoute: ActivatedCaptureRouteState, isCorrected: Bool) -> String {
         if isCorrected {
-            return "You corrected the route from \(detectedRoute.title) to \(title). That correction stays local; source, receipt, reason, and You / What Ambitions knows remain the inspection path."
+            return "You corrected the route from \(detectedRoute.title) to \(title). That correction stays local; source, receipt, reason, and You / Search Ambitions remain the inspection path."
         }
 
         switch self {

@@ -65,7 +65,7 @@ struct YouCrossSurfaceProofReviewProjector {
                 ? "Time changes stay quiet until an owning Time action records review context."
                 : "\(input.planReceiptCount) Time ledger entries can explain what changed and why.",
             sourceLabel: "Source: Time",
-            reviewLabel: "Review source",
+            reviewLabel: "Review context",
             privacyLabel: "Receipt, not notification",
             routeLabel: "Review in Time or Receipts",
             state: input.planReceiptCount == 0 ? .default : .warning
@@ -108,7 +108,7 @@ struct YouCrossSurfaceProofReviewProjector {
                 ? "No current review prompt needs attention."
                 : "\(input.reviewPromptCount) local review boundaries can ask before consequential reuse.",
             sourceLabel: "Source: Review",
-            reviewLabel: input.reviewPromptCount == 0 ? "No review needed" : "Review source",
+            reviewLabel: input.reviewPromptCount == 0 ? "No review needed" : "Review context",
             privacyLabel: "User-owned",
             routeLabel: "Review from owning surface",
             state: input.reviewPromptCount == 0 ? .default : .warning

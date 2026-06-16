@@ -86,7 +86,7 @@ public struct StartHereProductKernel: Equatable, Sendable {
 public enum StartHereProductKernelAudit {
     public static let bannedPhrases: [String] = [
         "best next move",
-        "next best move",
+        "recommended step",
         "recommended next step",
         "ai recommendation card",
         "recommendation card",

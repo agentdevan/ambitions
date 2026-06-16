@@ -151,8 +151,8 @@ struct StorageMigrationRecoveryCoordinator: Sendable {
             sourceRecordID: "SourceRecord.storage-recovery.\(receiptID)",
             receiptID: "Receipt.storage-recovery.\(receiptID)",
             replayTraceID: "ReplayTrace.storage-recovery.\(receiptID)",
-            inspectionSurfaceTitle: "What Ambitions knows",
-            inspectionSummary: "You / What Ambitions knows can inspect this storage migration source, receipt, and reason before any recovery action.",
+            inspectionSurfaceTitle: "Search Ambitions",
+            inspectionSummary: "You / Search Ambitions can inspect this storage migration source, receipt, and reason before any recovery action.",
             migrationExecutionAllowed: false,
             destructiveResetAllowed: false
         )

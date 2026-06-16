@@ -206,7 +206,7 @@ struct ReminderSource: Codable, Sendable, Equatable, Hashable {
     }
 
     var localReminderYouInspectionSummary: String {
-        "You / What Ambitions knows can inspect this source, receipt, and reason."
+        "You / Search Ambitions can inspect this source, receipt, and reason."
     }
 
     var isWellFormed: Bool {
@@ -450,7 +450,7 @@ struct ReminderTrigger: Codable, Sendable, Equatable, Hashable, Identifiable {
     }
 
     var localReminderYouInspectionSummary: String {
-        "You / What Ambitions knows can inspect this reminder, source, receipt, and reason."
+        "You / Search Ambitions can inspect this reminder, source, receipt, and reason."
     }
 
     var isDeleted: Bool {
@@ -561,7 +561,7 @@ struct ReminderYouInspectionBoundary: Codable, Sendable, Equatable, Hashable {
     }
 
     var isInspectableBoundary: Bool {
-        surfaceTitle == "What Ambitions knows" && allowsRawActivityLog == false
+        surfaceTitle == "Search Ambitions" && allowsRawActivityLog == false
     }
 
     private static func normalizedRequired(_ value: String) -> String {

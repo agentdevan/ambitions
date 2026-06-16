@@ -143,8 +143,8 @@ final class InteractionMotionHapticsDesignSystemTests: XCTestCase {
         XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("SourceRecord"))
         XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Receipt"))
         XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("ReplayTrace"))
-        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("What Ambitions knows"))
-        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("You / What Ambitions knows"))
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("Search Ambitions"))
+        XCTAssertTrue(output.accessibilitySummary.localizedCaseInsensitiveContains("You / Search Ambitions"))
     }
 
     func testSI12InteractionTokensCoverMeaningfulMotionPurposes() {

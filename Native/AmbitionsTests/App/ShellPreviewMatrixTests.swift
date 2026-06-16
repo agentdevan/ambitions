@@ -101,8 +101,8 @@ final class ShellPreviewMatrixTests: XCTestCase {
         XCTAssertTrue(provenance.sourceRecordID.contains("SourceRecord"))
         XCTAssertTrue(provenance.receiptID.contains("Receipt"))
         XCTAssertTrue(provenance.replayTraceID.contains("ReplayTrace"))
-        XCTAssertEqual(provenance.youInspectionLabel, "You / What Ambitions knows")
-        XCTAssertEqual(provenance.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(provenance.youInspectionLabel, "You / Search Ambitions")
+        XCTAssertEqual(provenance.inspectionSurfaceTitle, "Search Ambitions")
         XCTAssertTrue(provenance.inspectionSummary.contains("rendered proof"))
     }
 
@@ -166,8 +166,8 @@ final class ShellPreviewMatrixTests: XCTestCase {
         XCTAssertTrue(program.provenanceReferences.sourceRecordID.contains("SourceRecord"))
         XCTAssertTrue(program.provenanceReferences.receiptID.contains("Receipt"))
         XCTAssertTrue(program.provenanceReferences.replayTraceID.contains("ReplayTrace"))
-        XCTAssertEqual(program.provenanceReferences.youInspectionLabel, "You / What Ambitions knows")
-        XCTAssertEqual(program.provenanceReferences.inspectionSurfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(program.provenanceReferences.youInspectionLabel, "You / Search Ambitions")
+        XCTAssertEqual(program.provenanceReferences.inspectionSurfaceTitle, "Search Ambitions")
         XCTAssertTrue(program.provenanceReferences.inspectionSummary.localizedCaseInsensitiveContains("public certification"))
         XCTAssertFalse(program.claimFlags.sourceBackedSupportClaimed)
         XCTAssertFalse(program.claimFlags.automatedTestClaimed)

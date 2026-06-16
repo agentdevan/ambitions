@@ -3,7 +3,7 @@ import Foundation
 /// Centralized product-facing language for the release recovery train.
 ///
 /// Keep first-viewport copy plain, calm, and user-facing. Runtime governance terms such as
-/// SourceRecord, ReplayTrace, receipt seam, route reveal, and fixture-only belong in inspection
+/// SourceRecord, ReplayTrace, receipt seam, placement review, and preview belong in inspection
 /// or test/proof surfaces, not in the primary product UI.
 enum ProductCopy {
     enum Today {

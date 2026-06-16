@@ -815,7 +815,7 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
             freshnessPolicy: .conservativeFreshness,
             riskPolicy: .conservative,
             disclosureCopy: SourceAtlasDisclosureCopy(
-                sourceNeeded: "Source needed.",
+                sourceNeeded: "Context needed.",
                 reviewRequired: "Review required.",
                 notProfessionalAdvice: "Not professional advice."
             ),
@@ -1131,7 +1131,7 @@ private extension SourceAtlasRuntimeBridgeCoverageGauntletTests {
             freshnessPolicy: .conservativeFreshness,
             riskPolicy: .conservative,
             disclosureCopy: SourceAtlasDisclosureCopy(
-                sourceNeeded: "Source needed.",
+                sourceNeeded: "Context needed.",
                 reviewRequired: "Review required.",
                 notProfessionalAdvice: "Not professional advice."
             ),

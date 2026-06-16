@@ -13,13 +13,13 @@ final class QuietReflowPrimitiveFamilyTests: XCTestCase {
         XCTAssertEqual(contract.screenshotIdentifier, "QuietReflowPrimitiveFamily")
         XCTAssertTrue(contract.replacesStructures.contains("generic reflow panels"))
         XCTAssertTrue(contract.replacesStructures.contains("rounded reflow option cards"))
-        XCTAssertTrue(contract.replacesStructures.contains("receipt preview cards"))
+        XCTAssertTrue(contract.replacesStructures.contains("review preview cards"))
         XCTAssertEqual(contract.previewOrder, [
             "current state",
             "proposed state",
             "reason",
             "user control",
-            "receipt preview",
+            "review preview",
             "user choice"
         ])
         XCTAssertTrue(contract.forbiddenPatterns.contains("silent schedule mutation"))

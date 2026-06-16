@@ -169,7 +169,7 @@ struct ProjectStepBulkDownstreamContract: Codable, Sendable, Equatable, Hashable
         id: String,
         title: String,
         summary: String,
-        inspectionSurfaceTitle: String = "What Ambitions knows",
+        inspectionSurfaceTitle: String = "Search Ambitions",
         sourceRecord: SourceRecord,
         receipt: Receipt,
         replayTrace: ReplayTrace,
@@ -218,7 +218,7 @@ struct ProjectStepBulkDownstreamContract: Codable, Sendable, Equatable, Hashable
     }
 
     var isInspectableBoundary: Bool {
-        inspectionSurfaceTitle == "What Ambitions knows" && replayTrace.isLocalOnly
+        inspectionSurfaceTitle == "Search Ambitions" && replayTrace.isLocalOnly
     }
 
     var operationReceiptTitles: [String] {
@@ -230,7 +230,7 @@ struct ProjectStepBulkDownstreamContract: Codable, Sendable, Equatable, Hashable
             receipt.isWellFormed &&
             replayTrace.isLocalOnly &&
             replayTrace.isReplayable &&
-            inspectionSurfaceTitle == "What Ambitions knows" &&
+            inspectionSurfaceTitle == "Search Ambitions" &&
             title.isEmpty == false &&
             summary.isEmpty == false &&
             schemaVersion == projectStepBulkDownstreamContractSchemaVersion &&
@@ -550,7 +550,7 @@ struct ProjectStepClosureProofReplay: Codable, Sendable, Equatable, Hashable, Id
         sourceRecord: SourceRecord,
         receipt: Receipt,
         replayTrace: ReplayTrace,
-        inspectionSurfaceTitle: String = "What Ambitions knows",
+        inspectionSurfaceTitle: String = "Search Ambitions",
         originalStep: ProjectStepDisplacedStepRecord,
         continuationContext: ProjectStepContinuationContext,
         sourceGoalThreadUpdate: ProjectStepGoalThreadUpdate,
@@ -588,7 +588,7 @@ struct ProjectStepClosureProofReplay: Codable, Sendable, Equatable, Hashable, Id
     }
 
     var isInspectableBoundary: Bool {
-        inspectionSurfaceTitle == "What Ambitions knows" && replayTrace.isLocalOnly
+        inspectionSurfaceTitle == "Search Ambitions" && replayTrace.isLocalOnly
     }
 
     var isWellFormed: Bool {
@@ -596,7 +596,7 @@ struct ProjectStepClosureProofReplay: Codable, Sendable, Equatable, Hashable, Id
             receipt.isWellFormed &&
             replayTrace.isLocalOnly &&
             replayTrace.isReplayable &&
-            inspectionSurfaceTitle == "What Ambitions knows" &&
+            inspectionSurfaceTitle == "Search Ambitions" &&
             originalStep.remainsCoherent &&
             continuationContext.isWellFormed &&
             sourceGoalThreadUpdate.isWellFormed &&
@@ -731,7 +731,7 @@ struct PersonalRuntimeLearningSignal: Codable, Sendable, Equatable, Hashable, Id
         sourceRecord: SourceRecord,
         receipt: Receipt,
         replayTrace: ReplayTrace,
-        inspectionSurfaceTitle: String = "What Ambitions knows",
+        inspectionSurfaceTitle: String = "Search Ambitions",
         sourceAdapterUseSummary: String,
         inspectionSummary: String,
         reviewSummary: String,
@@ -822,7 +822,7 @@ struct PersonalRuntimeLearningSignal: Codable, Sendable, Equatable, Hashable, Id
     }
 
     var isInspectableBoundary: Bool {
-        inspectionSurfaceTitle == "What Ambitions knows" && replayTrace.isLocalOnly
+        inspectionSurfaceTitle == "Search Ambitions" && replayTrace.isLocalOnly
     }
 
     var permitsSilentMutation: Bool {
@@ -905,7 +905,7 @@ struct PersonalRuntimeLearningSignal: Codable, Sendable, Equatable, Hashable, Id
             receipt.isWellFormed &&
             replayTrace.isLocalOnly &&
             replayTrace.isReplayable &&
-            inspectionSurfaceTitle == "What Ambitions knows" &&
+            inspectionSurfaceTitle == "Search Ambitions" &&
             sourceAdapterUseSummary.isEmpty == false &&
             inspectionSummary.isEmpty == false &&
             reviewSummary.isEmpty == false &&
@@ -1140,15 +1140,15 @@ struct StepReallocationEvent: Codable, Sendable, Equatable, Hashable, Identifiab
     }
 
     var inspectionSurfaceTitle: String {
-        "What Ambitions knows"
+        "Search Ambitions"
     }
 
     var inspectionSummary: String {
-        "You / What Ambitions knows can inspect this Step Reallocation source adapter, receipt, and reason."
+        "You / Search Ambitions can inspect this Step Reallocation source adapter, receipt, and reason."
     }
 
     var isInspectableBoundary: Bool {
-        inspectionSurfaceTitle == "What Ambitions knows" && replayTrace.isLocalOnly
+        inspectionSurfaceTitle == "Search Ambitions" && replayTrace.isLocalOnly
     }
 
     var isWellFormed: Bool {
@@ -1200,11 +1200,11 @@ struct StepReallocationRuntimeInput: Sendable {
     }
 
     var inspectionSummary: String {
-        "You / What Ambitions knows can inspect this Step Reallocation source adapter, receipt, and reason."
+        "You / Search Ambitions can inspect this Step Reallocation source adapter, receipt, and reason."
     }
 
     var isInspectableBoundary: Bool {
-        inspectionSurfaceTitle == "What Ambitions knows" && replayTrace.isLocalOnly
+        inspectionSurfaceTitle == "Search Ambitions" && replayTrace.isLocalOnly
     }
 
     var runtimeInput: PrivateLifeRuntimeKernelDecisionInput {
@@ -1220,7 +1220,7 @@ struct StepReallocationRuntimeInput: Sendable {
 struct StepReallocationSourceAdapter: Sendable, Equatable, Hashable {
     let inspectionSurfaceTitle: String
 
-    init(inspectionSurfaceTitle: String = "What Ambitions knows") {
+    init(inspectionSurfaceTitle: String = "Search Ambitions") {
         self.inspectionSurfaceTitle = inspectionSurfaceTitle
     }
 
@@ -1340,7 +1340,7 @@ extension StepReallocationEvent {
             receipt: receipt,
             replayTrace: replayTrace,
             sourceAdapterUseSummary: sourceAdapterUseSummary,
-            inspectionSummary: "You / What Ambitions knows can inspect this Momentum Reflow signal, source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this Momentum Reflow signal, source, receipt, and reason.",
             reviewSummary: timeContext.requiresSensitiveReview
                 ? "Protected or sensitive time requires review before future ranking can use this signal."
                 : "Local and source-tied.",

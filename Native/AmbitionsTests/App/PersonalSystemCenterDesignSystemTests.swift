@@ -113,7 +113,7 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
 
         XCTAssertEqual(contract.primitiveID, "personal-runtime-group")
         XCTAssertEqual(contract.ownerSurface, "You")
-        XCTAssertEqual(contract.productObject, "Personal Runtime / User System Profile")
+        XCTAssertEqual(contract.productObject, "Personal system / User System Profile")
         XCTAssertEqual(contract.stageName, "You Object Stage Control")
         XCTAssertEqual(contract.screenshotIdentifier, "YouObjectStageControl")
         XCTAssertTrue(contract.avoidsGenericProfileSettingsWall)

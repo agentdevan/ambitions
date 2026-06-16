@@ -202,7 +202,7 @@ final class TrustReceiptLayerDesignSystemTests: XCTestCase {
         let staleSource = SourceTrustReceiptStripItem(
             id: "freshness",
             role: .freshness,
-            value: "Review source",
+            value: "Review context",
             detail: "Older evidence should be checked before reuse.",
             visualState: .stale
         )

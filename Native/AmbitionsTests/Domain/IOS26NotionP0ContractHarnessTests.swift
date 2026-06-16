@@ -146,11 +146,11 @@ final class IOS26NotionP0ContractHarnessTests: XCTestCase {
             actionIdentifier: AppNotificationConstants.openActionID,
             userInfo: [
                 "sourceRecordID": sourceRecord.id,
-                "surface": "What Ambitions knows",
+                "surface": "Search Ambitions",
             ]
         )
         let youBoundary = NotionYouInspectionBoundary(
-            surfaceTitle: "What Ambitions knows",
+            surfaceTitle: "Search Ambitions",
             sourceKnowledgeLabel: "Notion source knowledge",
             allowsRawActivityLog: false
         )
@@ -188,9 +188,9 @@ final class IOS26NotionP0ContractHarnessTests: XCTestCase {
         XCTAssertTrue(replayTrace.decisionReceipt?.hasProofBridge ?? false)
         XCTAssertEqual(payload?.action, "open")
         XCTAssertEqual(payload?.values["sourceRecordID"], sourceRecord.id)
-        XCTAssertEqual(payload?.values["surface"], "What Ambitions knows")
-        XCTAssertEqual(youBoundary.surfaceTitle, "What Ambitions knows")
-        XCTAssertEqual(youBoundary.inspectionLabel, "What Ambitions knows")
+        XCTAssertEqual(payload?.values["surface"], "Search Ambitions")
+        XCTAssertEqual(youBoundary.surfaceTitle, "Search Ambitions")
+        XCTAssertEqual(youBoundary.inspectionLabel, "Search Ambitions")
         XCTAssertTrue(youBoundary.blocksRawActivityLogCopy)
         XCTAssertTrue(youBoundary.isInspectableBoundary)
     }
@@ -370,7 +370,7 @@ private struct NotionYouInspectionBoundary: Sendable, Equatable {
     }
 
     var isInspectableBoundary: Bool {
-        surfaceTitle == "What Ambitions knows" && allowsRawActivityLog == false
+        surfaceTitle == "Search Ambitions" && allowsRawActivityLog == false
     }
 }
 
@@ -465,7 +465,7 @@ private struct NotionP0ReplacementGauntletHarness {
         let fixture = try makeFixture(for: scenario)
 
         record(scenario.label.contains("Notion P0"), "Scenario label must stay on the Notion gauntlet path.")
-        record(fixture.store.inspectionLabel == "What Ambitions knows", "Store inspection label must stay inspectable.")
+        record(fixture.store.inspectionLabel == "Search Ambitions", "Store inspection label must stay inspectable.")
         record(fixture.replayTrace.isLocalOnly, "Replay traces must stay local-only.")
         record(fixture.boundary.isInspectableBoundary, "You inspection boundaries must stay inspectable.")
         record(fixture.boundary.blocksRawActivityLogCopy, "You inspection boundaries must block raw activity copy.")
@@ -590,7 +590,7 @@ private struct NotionP0ReplacementGauntletHarness {
         record(fixture.convertedObject.kind == .step, "Note-to-object conversion must still produce a step object.")
         record(fixture.receipt.affectedObjects.first?.id == fixture.convertedObject.id, "Converted step objects must stay receipt-backed.")
         record(fixture.proofProjection.relationshipProjection(for: fixture.convertedObject).relationships.count == 1, "Converted step objects must stay proof-linked.")
-        record(fixture.contextEntry.localInspectionSummary.contains("What Ambitions knows"), "Converted knowledge must remain inspectable in You.")
+        record(fixture.contextEntry.localInspectionSummary.contains("Search Ambitions"), "Converted knowledge must remain inspectable in You.")
     }
 
     private func validateSourceUsage(
@@ -732,7 +732,7 @@ private struct NotionP0ReplacementGauntletHarness {
             ambitionID: "ambition.notion.\(scenarioID)",
             proofID: proofReference.id,
             closureEventID: nil,
-            text: "What Ambitions knows keeps the local source, receipt, and replay trail visible.",
+            text: "Search Ambitions keeps the local source, receipt, and replay trail visible.",
             learnedSignal: "notion_local_knowledge_\(scenario.variantIndex)",
             createdAt: fixedTimestamp
         )
@@ -927,7 +927,7 @@ private struct NotionP0ReplacementGauntletHarness {
         )
         let store = LifeKnowledgeOperationModels.Store(
             id: "store.notion.\(scenarioID)",
-            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this source, receipt, and reason.",
             sourceRecords: [sourceRecord],
             receipt: receipt,
             replayTrace: replayTrace,

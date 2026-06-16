@@ -51,7 +51,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
             ambitionID: "ambition.life-knowledge.1",
             proofID: proofLedgerEntry.proofReference?.id,
             closureEventID: nil,
-            text: "What Ambitions knows keeps the local source, receipt, and replay trail visible.",
+            text: "Search Ambitions keeps the local source, receipt, and replay trail visible.",
             learnedSignal: "structured_local_knowledge",
             createdAt: "2026-05-25T11:18:00Z"
         )
@@ -144,7 +144,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         )
         let store = LifeKnowledgeOperationModels.Store(
             id: "store.life-knowledge.1",
-            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this source, receipt, and reason.",
             sourceRecords: [sourceRecord],
             receipt: receipt,
             replayTrace: replayTrace,
@@ -159,7 +159,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
             updatedAt: "2026-05-25T11:18:00Z"
         )
         let boundary = LifeKnowledgeOperationModels.InspectionBoundary(
-            surfaceTitle: "What Ambitions knows",
+            surfaceTitle: "Search Ambitions",
             sourceKnowledgeLabel: "Life knowledge source records",
             allowsRawActivityLog: false
         )
@@ -170,21 +170,21 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         let encodedStore = try encoder.encode(store)
         let decodedStore = try decoder.decode(LifeKnowledgeOperationModels.Store.self, from: encodedStore)
 
-        XCTAssertEqual(store.surfaceTitle, "What Ambitions knows")
-        XCTAssertEqual(contextEntry.sourceSurfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(store.surfaceTitle, "Search Ambitions")
+        XCTAssertEqual(contextEntry.sourceSurfaceTitle, "Search Ambitions")
         XCTAssertEqual(contextEntry.sourceRecordIDs, [sourceRecord.id])
         XCTAssertEqual(contextEntry.receiptID, receipt.id)
         XCTAssertEqual(contextEntry.replayTraceID, replayTrace.id)
-        XCTAssertEqual(contextEntry.localInspectionSummary, "You / What Ambitions knows can inspect this source, receipt, and reason.")
+        XCTAssertEqual(contextEntry.localInspectionSummary, "You / Search Ambitions can inspect this source, receipt, and reason.")
         XCTAssertEqual(collection.entryIDs, [contextEntry.id])
         XCTAssertEqual(template.fieldKeys, ["body", "receipt", "replayTrace", "sourceRecords", "summary", "title"])
         XCTAssertEqual(decision.contextEntryID, contextEntry.id)
         XCTAssertEqual(resource.sourceRecord?.id, sourceRecord.id)
         XCTAssertEqual(personPlace.kind, .person)
-        XCTAssertEqual(store.inspectionLabel, "What Ambitions knows")
+        XCTAssertEqual(store.inspectionLabel, "Search Ambitions")
         XCTAssertTrue(store.canDelete)
         XCTAssertFalse(store.isDeleted)
-        XCTAssertEqual(snapshot.surfaceTitle, "What Ambitions knows")
+        XCTAssertEqual(snapshot.surfaceTitle, "Search Ambitions")
         XCTAssertEqual(snapshot.sourceRecordIDs, [sourceRecord.id])
         XCTAssertEqual(snapshot.contextEntryIDs, [contextEntry.id])
         XCTAssertEqual(snapshot.collectionIDs, [collection.id])
@@ -370,7 +370,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         )
         let store = LifeKnowledgeOperationModels.Store(
             id: "store.life-knowledge.relations",
-            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this source, receipt, and reason.",
             sourceRecords: [sourceRecord],
             receipt: receipt,
             replayTrace: replayTrace,
@@ -436,7 +436,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
     func testLifeKnowledgeStoreDeletionRetainsStructuredExportShape() {
         let store = LifeKnowledgeOperationModels.Store(
             id: "store.life-knowledge.delete",
-            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this source, receipt, and reason.",
             createdAt: "2026-05-25T11:18:00Z",
             updatedAt: "2026-05-25T11:18:00Z"
         )
@@ -446,7 +446,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         XCTAssertFalse(deleted.canDelete)
         XCTAssertEqual(deleted.updatedAt, "2026-05-25T11:19:00Z")
         XCTAssertEqual(deleted.exportSnapshot.deletedAt, "2026-05-25T11:19:00Z")
-        XCTAssertEqual(deleted.exportSnapshot.inspectionSummary, "You / What Ambitions knows can inspect this source, receipt, and reason.")
+        XCTAssertEqual(deleted.exportSnapshot.inspectionSummary, "You / Search Ambitions can inspect this source, receipt, and reason.")
     }
 
     func testLifeKnowledgeStoreResetClearsLocalPayloadWhilePreservingInspectableSurfaceIdentity() {
@@ -461,7 +461,7 @@ final class LifeKnowledgeOperationModelsTests: XCTestCase {
         )
         let store = LifeKnowledgeOperationModels.Store(
             id: "store.life-knowledge.reset",
-            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this source, receipt, and reason.",
             sourceRecords: [sourceRecord],
             receipt: ActionReceipt(
                 id: "receipt.life-knowledge.reset",
@@ -818,7 +818,7 @@ private extension LifeKnowledgeOperationModelsTests {
             ambitionID: "ambition.life-knowledge.search",
             proofID: proofReferenceID,
             closureEventID: nil,
-            text: "What Ambitions knows keeps the launch note visible.",
+            text: "Search Ambitions keeps the launch note visible.",
             learnedSignal: "launch_note_visible",
             createdAt: "2026-05-25T11:34:00Z"
         )
@@ -1007,7 +1007,7 @@ private extension LifeKnowledgeOperationModelsTests {
 
         return LifeKnowledgeOperationModels.Store(
             id: "store.life-knowledge.search",
-            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this source, receipt, and reason.",
             sourceRecords: [officialSourceRecord, privateSourceRecord],
             receipt: receipt,
             replayTrace: replayTrace,
@@ -1041,7 +1041,7 @@ private extension LifeKnowledgeOperationModelsTests {
         )
         return LifeKnowledgeOperationModels.Store(
             id: "store.life-knowledge.search.ranking",
-            inspectionSummary: "You / What Ambitions knows can inspect this source, receipt, and reason.",
+            inspectionSummary: "You / Search Ambitions can inspect this source, receipt, and reason.",
             sourceRecords: [officialSourceRecord],
             contextEntries: [
                 LifeKnowledgeOperationModels.ContextEntry(

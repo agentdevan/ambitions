@@ -334,7 +334,7 @@ struct ExternalSurfaceLifecycleReconciliationState: Codable, Sendable, Equatable
             sourceStateLabel = "Stale local source state"
         case (.unavailable, _), (_, .unavailable):
             sourceState = .unavailable
-            sourceStateLabel = "Source unavailable"
+            sourceStateLabel = "Needs context"
         default:
             sourceState = .fresh
             sourceStateLabel = "Fresh local source state"

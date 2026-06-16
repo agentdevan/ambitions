@@ -850,7 +850,7 @@ private extension TodayEntryContext {
         switch self {
         case .standard: "Open Today"
         case .recovery: "Quick recovery"
-        case .stepSession: "Step Session"
+        case .stepSession: "Step session"
         case .focus: "Quick focus"
         }
     }

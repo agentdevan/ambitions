@@ -775,7 +775,7 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
                     visibleDetail = fact.detail ?? fact.category.rawValue.replacingOccurrences(of: "_", with: " ")
                 } else {
                     privacyBoundary = .privateDetailHidden
-                    visibleDetail = "Private detail hidden; review in What Ambitions knows."
+                    visibleDetail = "Private detail hidden; review in Search Ambitions."
                 }
 
                 return LifeContextInspectableRecord(
@@ -790,8 +790,8 @@ struct LifeContextBundle: Codable, Sendable, Equatable, Identifiable {
                     freshness: fact.freshness,
                     privacyIndexingBoundary: privacyBoundary,
                     controlActionIDs: ["edit", "review", "pause", "delete", "reset"],
-                    inspectionSurfaceTitle: "What Ambitions knows",
-                    inspectionSummary: "You / What Ambitions knows can inspect this life context source, receipt, reason, confidence, provenance, and reset boundary."
+                    inspectionSurfaceTitle: "Search Ambitions",
+                    inspectionSummary: "You / Search Ambitions can inspect this life context source, receipt, reason, confidence, provenance, and reset boundary."
                 )
             }
             .sorted { $0.id < $1.id }

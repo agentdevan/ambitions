@@ -2,7 +2,7 @@ import Foundation
 
 enum LifeKnowledgeOperationModels {
     static let schemaVersion = "life_knowledge_operation_models.native.v1"
-    static let surfaceTitle = "What Ambitions knows"
+    static let surfaceTitle = "Search Ambitions"
 
     enum EntryKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
         case contextEntry = "context_entry"

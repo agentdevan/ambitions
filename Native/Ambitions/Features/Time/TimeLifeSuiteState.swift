@@ -150,7 +150,7 @@ enum LifeShapeRenderState: String, Sendable, Hashable {
         case .calendarDenied: "Calendar denied"
         case .pressureCluster: "Pressure cluster"
         case .sourceConflict: "Source conflict"
-        case .reflowPreview: "Reflow preview"
+        case .reflowPreview: "Preview changes"
         case .receiptAttached: "Receipt attached"
         }
     }

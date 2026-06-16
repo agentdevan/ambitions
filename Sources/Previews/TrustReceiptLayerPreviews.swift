@@ -72,7 +72,7 @@ private struct TrustReceiptLayerPreviewGallery: View {
             whyLabel: "The source is useful but older than the review window.",
             changeLabel: "No action changes until the user reviews the source.",
             correctionLabel: "Source may be replaced or corrected.",
-            reviewLabel: "Review source"
+            reviewLabel: "Review context"
         ),
         TrustReceiptLayerItem(
             id: "offline",

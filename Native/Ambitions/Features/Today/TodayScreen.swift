@@ -232,7 +232,7 @@ struct TodayScreen: View {
             shell.navigation.selectToday(entryContext: .standard)
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Back to Today",
-                body: "Step Session ended. Today is ready for the next step.",
+                body: "Step session ended. Today is ready for the next step.",
                 state: .selected
             )
         case .closeActionClosure:

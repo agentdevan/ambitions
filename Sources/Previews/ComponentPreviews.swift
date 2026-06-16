@@ -110,7 +110,7 @@ private struct DesignSystemPreviewGallery: View {
                         )
 
                         GroupedStatusNavigationRow(
-                            title: "What Ambitions knows",
+                            title: "Search Ambitions",
                             subtitle: "Review saved context.",
                             systemImage: "checkmark.shield",
                             value: "Local",

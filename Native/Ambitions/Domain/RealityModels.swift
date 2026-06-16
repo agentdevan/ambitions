@@ -305,7 +305,7 @@ extension ScheduledAmbitionsBlock {
     }
 
     var localScheduleYouInspectionSummary: String {
-        "You / What Ambitions knows can inspect this local schedule block, source, receipt, and reason."
+        "You / Search Ambitions can inspect this local schedule block, source, receipt, and reason."
     }
 }
 
