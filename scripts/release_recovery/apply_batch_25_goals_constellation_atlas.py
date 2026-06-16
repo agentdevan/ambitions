@@ -14,19 +14,19 @@ def main() -> int:
 
     text = read(GOALS)
     text = replace_all(text, {
-        "Full-bleed Constellation Atlas object stage with compact equal-weight life areas, Orbital Lens inspection, proof, source, receipt, and Today relationship lines.": "Full-bleed Constellation Atlas object stage with life-area nodes, Orbital Lens focus, Today connection, and progressive Source / Proof / Receipt inspection.",
+        "Full-bleed Constellation Atlas object stage with compact equal-weight life areas, Orbital Lens inspection, proof, source, receipt, and Today relationship lines.": "Full-bleed Constellation Atlas object stage with life-area nodes, Orbital Lens focus, Today connection, and progressive trust inspection.",
         "Life areas, proof, source, and Today connection stay in one direction object.": "Life areas and active threads stay connected to Today.",
         "Equal-weight areas": "Life areas",
         "Manual order, same size": "Choose the area to focus",
         "Equal-weight Life Areas": "Life Areas",
         "Areas use the same size and manual controls for visibility and order.": "Choose an area to inspect its active thread.",
         "source/proof/trust blocks": "progressive trust disclosures",
-        "source, proof, receipt, and Today relationships": "life-area, thread, Today, Source, Proof, and Receipt relationships",
-        "Source, proof, receipt": "Why this is here",
+        "source, proof, receipt, and Today relationships": "life-area, thread, Today, and trust-disclosure relationships",
+        "Source, proof, receipt": "Why this?",
         "source/proof/trust": "trust",
     })
     write(GOALS, text)
-    require_markers(GOALS, ["Constellation Atlas", "Orbital Lens", "Life areas", "Choose the area to focus", "Why this is here"])
+    require_markers(GOALS, ["Constellation Atlas", "Orbital Lens", "Life areas", "Choose the area to focus", "Why this?"])
     require_markers(APP_TAB, ["primaryObjectTitle: \"Constellation Atlas\""])
     write_proof(
         "REPORT_BATCH_25_GOALS_CONSTELLATION_ATLAS.md",
@@ -40,6 +40,7 @@ Scope:
 - Reframed Goals first-viewport language around life-area nodes and active threads.
 - Preserved Orbital Lens as the inspection model.
 - Moved Source / Proof / Receipt from loud first-viewport metadata framing toward progressive trust disclosure.
+- Preserved the existing Goals `Why this?` affordance instead of forcing a longer label.
 
 Atlas gates:
 - Goals remains Constellation Atlas + Orbital Lens.
