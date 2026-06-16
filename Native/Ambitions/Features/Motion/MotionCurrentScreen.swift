@@ -264,7 +264,7 @@ private struct MotionCurrentField: View {
                         accessibilityIdentifier: "motion.current.action.open-receipt"
                     )
                     motionActionButton(
-                        title: "Open thread",
+                        title: "Re-enter thread",
                         systemImage: "arrowshape.turn.up.forward",
                         accessibilityIdentifier: "motion.current.action.reenter-thread"
                     )
@@ -282,7 +282,7 @@ private struct MotionCurrentField: View {
                         accessibilityIdentifier: "motion.current.action.open-receipt"
                     )
                     motionActionButton(
-                        title: "Open thread",
+                        title: "Re-enter thread",
                         systemImage: "arrowshape.turn.up.forward",
                         accessibilityIdentifier: "motion.current.action.reenter-thread"
                     )
@@ -301,7 +301,7 @@ private struct MotionCurrentField: View {
         Button {
             NotificationCenter.default.post(
                 name: Notification.Name("AmbitionsMotionCurrentActionSelected"),
-                object: nil
+                object: title
             )
         } label: {
             Label(title, systemImage: systemImage)
@@ -687,7 +687,7 @@ private struct MotionSourceReceiptAffordance: View {
         ProofRelationshipTracePrimitiveStage(
             role: .inspection,
             title: state.title,
-            subtitle: "Context, history, and review remain inspectable before Motion changes.",
+            subtitle: "Source, proof, and receipt stay inspectable when you open the history detail.",
             accessibilityIdentifier: "motion.current.source-proof-receipt"
         ) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -733,7 +733,7 @@ private struct MotionContinuityDock: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text("Continuity Dock")
+            Text("Continue")
                 .font(theme.typography.title)
                 .foregroundStyle(theme.colors.textPrimary)
 
@@ -773,7 +773,7 @@ struct MotionCurrentProjection {
             crown: MotionContextCrownState(
             eyebrow: "Motion",
             title: "Motion Current",
-            summary: "A living field for proof, recovery, and return paths moving between Today, Goals, Time, and You.",
+            summary: "What moved, what needs recovery, and where to return.",
             chips: [
                 MotionChipState(title: "Local", icon: "iphone", semanticState: .protected),
                 MotionChipState(title: "Source-led", icon: "link", semanticState: .trust),
@@ -784,9 +784,9 @@ struct MotionCurrentProjection {
             lanes: [
             MotionLaneState(
                 id: "history",
-                title: "History lane",
-                status: "Origin visible",
-                summary: "Source, proof, and owning surface stay braided before the thread enters Today.",
+                title: "What moved",
+                status: "History available",
+                summary: "Recent movement stays attached to the step or goal it came from.",
                 icon: "checkmark.seal",
                 colorRole: .proof,
                 markers: [
@@ -835,7 +835,7 @@ struct MotionCurrentProjection {
             ),
             MotionLaneState(
                 id: "recovery",
-                title: "Recovery path",
+                title: "What needs recovery",
                 status: "Calm route",
                 summary: "A lighter route can rejoin Today with source, reason, and consent visible.",
                 icon: "arrow.uturn.backward.circle",
@@ -886,7 +886,7 @@ struct MotionCurrentProjection {
             ),
             MotionLaneState(
                 id: "reentry",
-                title: "Return lane",
+                title: "Where to return",
                 status: "Return",
                 summary: "A paused thread keeps one calm return point and a clear owner.",
                 icon: "arrowshape.turn.up.forward",
@@ -899,7 +899,7 @@ struct MotionCurrentProjection {
                 items: [
                     MotionLaneItemState(
                         id: "reentry-available",
-                        title: "Re-entry available",
+                        title: "Return available",
                         stateLabel: "Ready",
                         source: "Today",
                         proof: "Last honest point",
@@ -928,7 +928,7 @@ struct MotionCurrentProjection {
             )
             ],
             affordance: MotionSourceReceiptAffordanceState(
-            title: "Source, proof, receipt",
+            title: "History available",
             items: [
                 MotionAffordanceItem(label: "Context", value: "Local record", icon: "link", semanticState: .trust),
                 MotionAffordanceItem(label: "History", value: "Attached after closure", icon: "seal", semanticState: .success),
@@ -993,7 +993,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
             )
         case .reentryAvailable:
             MotionCurrentFieldState(
-                title: "Re-entry available",
+                title: "Return available",
                 summary: "A paused thread has one calm return point and a clear owner.",
                 source: "Today return point",
                 proof: "Last honest point",
