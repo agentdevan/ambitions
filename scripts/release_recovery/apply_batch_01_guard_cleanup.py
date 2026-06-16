@@ -16,7 +16,6 @@ Scope:
 from __future__ import annotations
 
 from pathlib import Path
-import re
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -304,18 +303,20 @@ def patch_you_debug_copy() -> None:
     rel = "Native/Ambitions/Features/You/YouScreen.swift"
     text = read(rel)
     replacements = {
-        "Runtime-backed local inspection": "Personal context",
-        "Life Context, Source Atlas, memory controls, personal vault rows, and receipt summaries are loaded through the current You projection.": "Life context, memory controls, and personal settings are available from this profile.",
-        "runtime-backed": "On device",
-        "Receipt rows explain source freshness, privacy posture, correction, undo, review, and safe fallback behavior.": "Review history explains what changed, when it changed, and what stayed protected.",
-        "blocked-pending-model": "Pending",
-        "fixture-only": "Example",
-        "Broader learning, deletion, sync, export/import, and privacy/legal proof remain blocked-pending-model until the owning source and proof gates land.": "Broader learning, deletion, sync, export, and import stay unavailable until their controls are ready.",
-        "Honest local-data status for what is backed by runtime state, what is example-only, and what remains blocked.": "Local-data controls for what Ambitions stores, shows, and can change on this device.",
-        "Receipt examples demonstrate how correction, undo, source freshness, and safe fallback should appear. They are not a production audit log.": "Examples show how review history will appear when enough local activity exists.",
+        "title: \"Runtime-backed local inspection\"": "title: \"Personal context\"",
+        "subtitle: \"Life Context, Source Atlas, memory controls, personal vault rows, and receipt summaries are loaded through the current You projection.\"": "subtitle: \"Life context, memory controls, and personal settings are available from this profile.\"",
+        "valueLabel: \"runtime-backed\"": "valueLabel: \"On device\"",
+        "subtitle: \"Receipt rows explain source freshness, privacy posture, correction, undo, review, and safe fallback behavior.\"": "subtitle: \"Review history explains what changed, when it changed, and what stayed protected.\"",
+        "valueLabel: profileProjection.receiptAudit.items.isEmpty ? \"blocked-pending-model\" : \"fixture-only\"": "valueLabel: profileProjection.receiptAudit.items.isEmpty ? \"Pending\" : \"Example\"",
+        "subtitle: \"Broader learning, deletion, sync, export/import, and privacy/legal proof remain blocked-pending-model until the owning source and proof gates land.\"": "subtitle: \"Broader learning, deletion, sync, export, and import stay unavailable until their controls are ready.\"",
+        "valueLabel: \"blocked-pending-model\"": "valueLabel: \"Pending\"",
+        "subtitle: \"Honest local-data status for what is backed by runtime state, what is example-only, and what remains blocked.\"": "subtitle: \"Local-data controls for what Ambitions stores, shows, and can change on this device.\"",
+        "valueLabel: profileProjection.personalVault.sections.flatMap(\\.rows).isEmpty ? \"blocked-pending-model\" : \"runtime-backed\"": "valueLabel: profileProjection.personalVault.sections.flatMap(\\.rows).isEmpty ? \"Pending\" : \"On device\"",
+        "subtitle: \"Receipt examples demonstrate how correction, undo, source freshness, and safe fallback should appear. They are not a production audit log.\"": "subtitle: \"Examples show how review history will appear when enough local activity exists.\"",
+        "valueLabel: \"fixture-only\"": "valueLabel: \"Example\"",
     }
     for old, new in replacements.items():
-        text = text.replace(old, new)
+        text = replace_exact(text, old, new, f"You copy replacement: {old}")
     write(rel, text)
 
 
