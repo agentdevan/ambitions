@@ -47,11 +47,14 @@ def main() -> int:
         ".opacity(theme.mode == .dark ? 0.42 : 0.34)": ".opacity(theme.mode == .dark ? 0.24 : 0.18)",
         ".opacity(theme.mode == .dark ? 0.70 : 0.58)": ".opacity(theme.mode == .dark ? 0.44 : 0.36)",
         "private var shellDockClearance: CGFloat {\n        dynamicTypeSize.isAccessibilitySize ? 156 : 152\n    }": "private var shellDockClearance: CGFloat {\n        dynamicTypeSize.isAccessibilitySize ? 184 : 164\n    }",
+        "private func shellDockClearance(theme: AmbitionTheme) -> CGFloat {\n        dynamicTypeSize.isAccessibilitySize ? 156 : 152\n    }": "private func shellDockClearance(theme: AmbitionTheme) -> CGFloat {\n        dynamicTypeSize.isAccessibilitySize ? 184 : 164\n    }",
     })
     write(ROOT, root)
 
     require_markers(SHELL, ["AmbitionsIOS26SemanticTokens.LiquidGlass.darkDockCore", "Capsule(style: .continuous)", "accessibilityIdentifier(destination.accessibilityIdentifier)"])
-    require_markers(ROOT, ["dynamicTypeSize.isAccessibilitySize ? 184 : 164"])
+    root_text = read(ROOT)
+    if "dynamicTypeSize.isAccessibilitySize ? 184 : 164" not in root_text:
+        raise RuntimeError("shell dock clearance marker missing after root patch")
     write_proof(
         "REPORT_BATCH_18_SHELL_NAVIGATION.md",
         """
