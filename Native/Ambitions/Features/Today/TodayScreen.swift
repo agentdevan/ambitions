@@ -169,6 +169,16 @@ struct TodayScreen: View {
             )
             .transition(.opacity)
 
+            if let message = viewModel.transientMessage {
+                TodayInlineFallbackState(
+                    title: message.title,
+                    message: message.body,
+                    systemImage: "checkmark.circle.fill"
+                )
+                .padding(.top, theme.spacing.md)
+                .accessibilityIdentifier("today.post-closure-feedback")
+            }
+
         default:
             TodayInlineFallbackState(
                 title: "Today could not load",
@@ -215,14 +225,14 @@ struct TodayScreen: View {
         case .pauseStepSession:
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Session paused",
-                body: "This step is still here. Nothing changes until you close the loop.",
+                body: "This step stays here until you choose an outcome.",
                 state: .selected
             )
         case .stopStepSession:
             shell.navigation.selectToday(entryContext: .standard)
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Back to Today",
-                body: "Step Session ended without changing proof or plan.",
+                body: "Step Session ended. Today is ready for the next step.",
                 state: .selected
             )
         case .closeActionClosure:
