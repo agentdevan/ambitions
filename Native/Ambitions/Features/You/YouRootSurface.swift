@@ -170,7 +170,7 @@ struct PersonalSystemCenterRootView: View {
                     .minimumScaleFactor(0.78)
                     .accessibilityIdentifier("you.root-title")
 
-                Text("Ambitions runs on this iPhone")
+                Text("Local-first personal system")
                     .font(AmbitionsIOS26SemanticTokens.Typography.subheadline)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
@@ -204,7 +204,7 @@ struct PersonalSystemCenterRootView: View {
         [
             groupedSection(
                 id: "planning-setup",
-                title: "Planning Setup",
+                title: "Planning defaults",
                 subtitle: "Time, availability, and planning defaults stay user-owned.",
                 rows: [
                     RootSectionRow(id: "schedule-availability", sourceItemID: "schedule-availability", title: "Schedule & Availability", detail: .scheduleAvailability),
@@ -217,11 +217,11 @@ struct PersonalSystemCenterRootView: View {
             ),
             groupedSection(
                 id: "runtime-preferences",
-                title: "Preferences",
+                title: "Appearance & notifications",
                 subtitle: "Capture, notifications, sessions, appearance, and privacy.",
                 rows: [
                     RootSectionRow(id: "notifications", sourceItemID: "notifications", title: "Notifications", detail: .notifications),
-                    RootSectionRow(id: "capture-preferences", sourceItemID: "integrations", title: "Capture Preferences", detail: .capturePreferences),
+                    RootSectionRow(id: "capture-preferences", sourceItemID: "integrations", title: "Capture", detail: .capturePreferences),
                     RootSectionRow(id: "session-defaults", sourceItemID: "personalization", title: "Session Defaults", detail: .sessionDefaults),
                     RootSectionRow(id: "appearance", sourceItemID: "appearance", title: "Appearance", detail: .appearance),
                     RootSectionRow(id: "privacy", sourceItemID: "trust-center", title: "Privacy", detail: .trustCenter)
@@ -229,22 +229,22 @@ struct PersonalSystemCenterRootView: View {
             ),
             groupedSection(
                 id: "history-trust",
-                title: "Privacy & Trust",
+                title: "Privacy & security",
                 subtitle: "Receipts and controls remain connected to local evidence.",
                 rows: [
                     RootSectionRow(id: "receipts-history", sourceItemID: "receipts-history", title: "Receipts & History", detail: .receiptsHistory),
                     RootSectionRow(id: "history", sourceItemID: "history", title: "History", detail: .proof),
-                    RootSectionRow(id: "source-settings", sourceItemID: "corrections", title: "Source Settings", detail: .sourceSettings),
-                    RootSectionRow(id: "local-data-controls", sourceItemID: "export-import", title: "Local Data Controls", detail: .localDataControls)
+                    RootSectionRow(id: "source-settings", sourceItemID: "corrections", title: "Sources & permissions", detail: .sourceSettings),
+                    RootSectionRow(id: "local-data-controls", sourceItemID: "export-import", title: "Local data", detail: .localDataControls)
                 ]
             ),
             groupedSection(
                 id: "support-system",
-                title: "App",
+                title: "Help & about",
                 subtitle: "Assistance and app-system context in a single system band.",
                 rows: [
                     RootSectionRow(id: "help", sourceItemID: "help-support", title: "Help", detail: .support),
-                    RootSectionRow(id: "about", sourceItemID: "about", title: "About Ambitions", detail: .about)
+                    RootSectionRow(id: "about", sourceItemID: "about", title: "About", detail: .about)
                 ]
             )
         ]
