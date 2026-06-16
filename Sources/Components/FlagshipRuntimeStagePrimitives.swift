@@ -121,17 +121,29 @@ public struct FlagshipRuntimeStage<Content: View>: View {
     }
 
     private var metricRow: some View {
-        FlowLayout(spacing: theme.spacing.xs) {
-            ForEach(metrics) { metric in
-                Label("\(metric.title): \(metric.value)", systemImage: metric.systemImage)
-                    .font(theme.typography.caption.weight(.medium))
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .padding(.vertical, theme.spacing.xxxs)
-                    .padding(.horizontal, theme.spacing.xs)
-                    .background(Capsule().fill(theme.colors.canvas.opacity(0.24)))
-                    .accessibilityIdentifier("\(screenshotIdentifier).metric.\(metric.id)")
+        ViewThatFits(in: .horizontal) {
+            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                ForEach(metrics) { metric in
+                    metricChip(metric)
+                }
+            }
+
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                ForEach(metrics) { metric in
+                    metricChip(metric)
+                }
             }
         }
+    }
+
+    private func metricChip(_ metric: FlagshipRuntimeMetric) -> some View {
+        Label("\(metric.title): \(metric.value)", systemImage: metric.systemImage)
+            .font(theme.typography.caption.weight(.medium))
+            .foregroundStyle(theme.colors.textSecondary)
+            .padding(.vertical, theme.spacing.xxxs)
+            .padding(.horizontal, theme.spacing.xs)
+            .background(Capsule().fill(theme.colors.canvas.opacity(0.24)))
+            .accessibilityIdentifier("\(screenshotIdentifier).metric.\(metric.id)")
     }
 
     private var proofHookStack: some View {
