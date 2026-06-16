@@ -190,6 +190,7 @@ struct AppShellScaffold<Content: View>: View {
                     onBack: onBack,
                     trailingButtons: trailingButtons
                 )
+                .accessibilityIdentifier("shell.flagship.chrome.header")
     }
 
     private var bottomChromeClearance: CGFloat {
