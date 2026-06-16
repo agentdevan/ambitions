@@ -23,7 +23,7 @@ def read(rel: str) -> str:
 
 
 def write(rel: str, text: str) -> None:
-    (ROOT / rel).write_text(text, encoding="utf-8")
+    (ROOT / rel).write_text(encoding="utf-8")
 
 
 def replace(text: str, old: str, new: str) -> str:
@@ -62,6 +62,23 @@ def replace_empty_button_action(text: str, notification_name: str) -> str:
     )
 
 
+def replace_empty_title_button(text: str, notification_name: str) -> str:
+    pattern = re.compile(r"Button\(([^\n]+?)\)\s*\{\s*\}")
+
+    def repl(match: re.Match[str]) -> str:
+        title = match.group(1).strip()
+        return (
+            f"Button({title}) {{\n"
+            "                        NotificationCenter.default.post(\n"
+            f"                            name: Notification.Name(\"{notification_name}\"),\n"
+            f"                            object: {title}\n"
+            "                        )\n"
+            "                    }"
+        )
+
+    return pattern.sub(repl, text)
+
+
 def ensure_foundation_import(text: str) -> str:
     if "import Foundation" in text:
         return text
@@ -98,6 +115,7 @@ def patch_today_day_rail() -> None:
 
     text = replace(text, 'return "Source unavailable. Manual planning still works."', 'return "Ambitions can hold the space until a step fits."')
     text = replace(text, '? "Source unavailable. Manual planning still works."', '? "Ambitions can hold the space until a step fits."')
+    text = replace(text, 'return "10:05 AM"', 'return "Now"')
     text = replace(text, 'return "12:15 PM"', 'return "Next"')
     text = replace(text, 'return "3:00 PM"', 'return "Next"')
     text = replace(text, 'return "5:15 PM"', 'return "Later"')
@@ -134,6 +152,7 @@ def patch_motion_actions() -> None:
     text = ensure_foundation_import(read(rel))
     text = replace_empty_button_action(text, "AmbitionsMotionCurrentActionSelected")
     text = replace_empty_button_label(text, "AmbitionsMotionCurrentActionSelected")
+    text = replace_empty_title_button(text, "AmbitionsMotionCurrentActionSelected")
     write(rel, text)
 
 
