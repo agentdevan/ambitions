@@ -24,16 +24,16 @@ struct MotionObjectStagePrimitiveContract: Equatable {
             "lane cards",
             "lane state row panels",
             "trace pills",
-            "source/proof/receipt panel"
+            "context/history/review panel"
         ],
         sourceTrustLineOrder: [
-            "source",
-            "proof",
-            "receipt",
+            "context",
+            "history",
+            "review",
             "re-entry action"
         ],
         accessibilityFallbacks: [
-            "VoiceOver names Motion Current before proof, recovery, re-entry, source, proof, and receipt relationships",
+            "VoiceOver names Motion Current before proof, recovery, re-entry, context, history, and review relationships",
             "Dynamic Type keeps lane title, state, and trace values in order",
             "Reduce Motion uses static proof-thread marks",
             "Increase Contrast strengthens rules and left-thread markers rather than restoring panels",
@@ -264,7 +264,7 @@ private struct MotionCurrentField: View {
                         accessibilityIdentifier: "motion.current.action.open-receipt"
                     )
                     motionActionButton(
-                        title: "Re-enter thread",
+                        title: "Open thread",
                         systemImage: "arrowshape.turn.up.forward",
                         accessibilityIdentifier: "motion.current.action.reenter-thread"
                     )
@@ -282,7 +282,7 @@ private struct MotionCurrentField: View {
                         accessibilityIdentifier: "motion.current.action.open-receipt"
                     )
                     motionActionButton(
-                        title: "Re-enter thread",
+                        title: "Open thread",
                         systemImage: "arrowshape.turn.up.forward",
                         accessibilityIdentifier: "motion.current.action.reenter-thread"
                     )
@@ -327,19 +327,19 @@ private struct MotionCurrentField: View {
         } else {
             HStack(alignment: .top, spacing: theme.spacing.xs) {
                 compactTraceFact(
-                    title: "Source",
+                    title: "Context",
                     subtitle: state.source,
                     systemImage: "link",
                     accessibilityIdentifier: "motion.current.fact.source"
                 )
                 compactTraceFact(
-                    title: "Proof",
+                    title: "History",
                     subtitle: state.proof,
                     systemImage: "seal",
                     accessibilityIdentifier: "motion.current.fact.proof"
                 )
                 compactTraceFact(
-                    title: "Receipt",
+                    title: "Review",
                     subtitle: state.receipt,
                     systemImage: "doc.text.magnifyingglass",
                     accessibilityIdentifier: "motion.current.fact.receipt"
@@ -388,7 +388,7 @@ private struct MotionCurrentField: View {
     private var sourceFact: some View {
         ProofRelationshipTracePrimitiveLine(
             role: .source,
-            title: "Source",
+            title: "Context",
             subtitle: state.source,
             systemImage: "link",
             accessibilityIdentifier: "motion.current.fact.source"
@@ -398,7 +398,7 @@ private struct MotionCurrentField: View {
     private var proofFact: some View {
         ProofRelationshipTracePrimitiveLine(
             role: .proof,
-            title: "Proof",
+            title: "History",
             subtitle: state.proof,
             systemImage: "seal",
             accessibilityIdentifier: "motion.current.fact.proof"
@@ -408,7 +408,7 @@ private struct MotionCurrentField: View {
     private var receiptFact: some View {
         ProofRelationshipTracePrimitiveLine(
             role: .receipt,
-            title: "Receipt",
+            title: "Review",
             subtitle: state.receipt,
             systemImage: "doc.text.magnifyingglass",
             accessibilityIdentifier: "motion.current.fact.receipt"
@@ -641,7 +641,7 @@ private struct MotionLaneStateRow: View {
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     ProofRelationshipTracePrimitiveLine(
                         role: .source,
-                        title: "Source",
+                        title: "Context",
                         subtitle: item.source,
                         systemImage: "link",
                         semanticState: item.semanticState,
@@ -649,7 +649,7 @@ private struct MotionLaneStateRow: View {
                     )
                     ProofRelationshipTracePrimitiveLine(
                         role: .proof,
-                        title: "Proof",
+                        title: "History",
                         subtitle: item.proof,
                         systemImage: "seal",
                         semanticState: item.semanticState,
@@ -657,7 +657,7 @@ private struct MotionLaneStateRow: View {
                     )
                     ProofRelationshipTracePrimitiveLine(
                         role: .receipt,
-                        title: "Receipt",
+                        title: "Review",
                         subtitle: item.receipt,
                         systemImage: "doc.text.magnifyingglass",
                         semanticState: item.semanticState,
@@ -687,7 +687,7 @@ private struct MotionSourceReceiptAffordance: View {
         ProofRelationshipTracePrimitiveStage(
             role: .inspection,
             title: state.title,
-            subtitle: "Source, proof, and receipt remain inspectable before Motion changes.",
+            subtitle: "Context, history, and review remain inspectable before Motion changes.",
             accessibilityIdentifier: "motion.current.source-proof-receipt"
         ) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
@@ -708,13 +708,13 @@ private struct MotionSourceReceiptAffordance: View {
 
 private func motionTraceRole(for label: String) -> ProofRelationshipTracePrimitiveRole {
     let value = label.lowercased()
-    if value.contains("source") || value.contains("local") {
+    if value.contains("context") || value.contains("local") {
         return .source
     }
-    if value.contains("proof") || value.contains("still counts") {
+    if value.contains("history") || value.contains("still counts") {
         return .proof
     }
-    if value.contains("receipt") {
+    if value.contains("review") {
         return .receipt
     }
     if value.contains("trace") || value.contains("return") || value.contains("next seam") {
@@ -773,18 +773,18 @@ struct MotionCurrentProjection {
             crown: MotionContextCrownState(
             eyebrow: "Motion",
             title: "Motion Current",
-            summary: "A living field for proof, recovery, and re-entry threads moving between Today, Goals, Time, and You.",
+            summary: "A living field for proof, recovery, and return paths moving between Today, Goals, Time, and You.",
             chips: [
                 MotionChipState(title: "Local", icon: "iphone", semanticState: .protected),
                 MotionChipState(title: "Source-led", icon: "link", semanticState: .trust),
-                MotionChipState(title: "Receipt", icon: "checkmark.seal", semanticState: .success)
+                MotionChipState(title: "Review", icon: "checkmark.seal", semanticState: .success)
             ]
             ),
             field: renderState.field,
             lanes: [
             MotionLaneState(
-                id: "proof",
-                title: "Proof lane",
+                id: "history",
+                title: "History lane",
                 status: "Origin visible",
                 summary: "Source, proof, and owning surface stay braided before the thread enters Today.",
                 icon: "checkmark.seal",
@@ -792,7 +792,7 @@ struct MotionCurrentProjection {
                 markers: [
                     MotionChipState(title: "Origin", icon: "point.topleft.down.curvedto.point.bottomright.up", semanticState: .focus),
                     MotionChipState(title: "Proof seam", icon: "seal", semanticState: .success),
-                    MotionChipState(title: "Receipt path", icon: "doc.text", semanticState: .trust)
+                    MotionChipState(title: "Review path", icon: "doc.text", semanticState: .trust)
                 ],
                 items: [
                     MotionLaneItemState(
@@ -800,7 +800,7 @@ struct MotionCurrentProjection {
                         title: "No proof yet",
                         stateLabel: "Seed",
                         source: "Today or Capture",
-                        proof: "Open seam",
+                        proof: "Open path",
                         receipt: "Created on close",
                         semanticState: .neutral
                     ),
@@ -824,7 +824,7 @@ struct MotionCurrentProjection {
                     ),
                     MotionLaneItemState(
                         id: "source-unavailable",
-                        title: "Source unavailable",
+                        title: "Context is light",
                         stateLabel: "Held",
                         source: "Needs local source",
                         proof: "Not widened",
@@ -835,7 +835,7 @@ struct MotionCurrentProjection {
             ),
             MotionLaneState(
                 id: "recovery",
-                title: "Recovery lane",
+                title: "Recovery path",
                 status: "Calm route",
                 summary: "A lighter route can rejoin Today with source, reason, and consent visible.",
                 icon: "arrow.uturn.backward.circle",
@@ -870,14 +870,14 @@ struct MotionCurrentProjection {
                         stateLabel: "Returnable",
                         source: "Motion",
                         proof: "Held",
-                        receipt: "Return point",
+                        receipt: "Return",
                         semanticState: .focus
                     ),
                     MotionLaneItemState(
                         id: "receipt-linked",
                         title: "Receipt linked",
                         stateLabel: "Traceable",
-                        source: "Receipt",
+                        source: "Review",
                         proof: "Related",
                         receipt: "Open",
                         semanticState: .trust
@@ -886,14 +886,14 @@ struct MotionCurrentProjection {
             ),
             MotionLaneState(
                 id: "reentry",
-                title: "Re-entry lane",
-                status: "Return point",
+                title: "Return lane",
+                status: "Return",
                 summary: "A paused thread keeps one calm return point and a clear owner.",
                 icon: "arrowshape.turn.up.forward",
                 colorRole: .reentry,
                 markers: [
                     MotionChipState(title: "Owner", icon: "person.crop.circle", semanticState: .protected),
-                    MotionChipState(title: "Return point", icon: "arrow.forward.circle", semanticState: .focus),
+                    MotionChipState(title: "Return", icon: "arrow.forward.circle", semanticState: .focus),
                     MotionChipState(title: "Next seam", icon: "line.3.horizontal.decrease", semanticState: .trust)
                 ],
                 items: [
@@ -930,9 +930,9 @@ struct MotionCurrentProjection {
             affordance: MotionSourceReceiptAffordanceState(
             title: "Source, proof, receipt",
             items: [
-                MotionAffordanceItem(label: "Source", value: "Local record", icon: "link", semanticState: .trust),
-                MotionAffordanceItem(label: "Proof", value: "Attached after closure", icon: "seal", semanticState: .success),
-                MotionAffordanceItem(label: "Receipt", value: "Visible before change", icon: "doc.text", semanticState: .trust)
+                MotionAffordanceItem(label: "Context", value: "Local record", icon: "link", semanticState: .trust),
+                MotionAffordanceItem(label: "History", value: "Attached after closure", icon: "seal", semanticState: .success),
+                MotionAffordanceItem(label: "Review", value: "Visible before change", icon: "doc.text", semanticState: .trust)
             ]
             ),
             dockActions: [
@@ -947,10 +947,10 @@ struct MotionCurrentProjection {
 
 enum MotionCurrentRenderState: String, CaseIterable {
     case emptyStructure = "empty"
-    case proofAvailable = "proof"
+    case proofAvailable = "history"
     case recoveryActive = "recovery"
     case reentryAvailable = "reentry"
-    case sourceUnavailable = "source"
+    case sourceUnavailable = "context"
 
     static var launchArgument: MotionCurrentRenderState {
         let arguments = ProcessInfo.processInfo.arguments
@@ -970,7 +970,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
                 summary: "Motion is holding the thread until closure creates proof.",
                 source: "Local source",
                 proof: "Empty proof state",
-                receipt: "Receipt path before change",
+                receipt: "Review path before change",
                 control: "Inspect source, open the future receipt path, or wait for closure."
             )
         case .proofAvailable:
@@ -1002,7 +1002,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
             )
         case .sourceUnavailable:
             MotionCurrentFieldState(
-                title: "Source unavailable",
+                title: "Context is light",
                 summary: "Motion holds the thread in place until the local source can be inspected.",
                 source: "Needs local source",
                 proof: "Not widened",

@@ -819,7 +819,7 @@ private struct TimePressureRecoveryReviewSurface: View {
                     TimeKeyValueRow(label: "Protected", value: review.protectedTimeConflictLabel, state: .selected)
                     TimeKeyValueRow(label: "Late start", value: review.lateStartAdjustmentLabel, state: .default)
                     TimeKeyValueRow(label: "Review", value: review.recoveryDayReviewLabel, state: .success)
-                    TimeKeyValueRow(label: "Receipt", value: review.recoveryReceiptPreviewLabel, state: .default)
+                    TimeKeyValueRow(label: "Review", value: review.recoveryReceiptPreviewLabel, state: .default)
                     TimeKeyValueRow(label: "Capacity", value: review.capacityReviewLabel, state: .default)
                 }
 
@@ -1101,7 +1101,7 @@ private struct TimeRecoveryMaturitySurface: View {
         case "fit": "gauge"
         case "waiting-commitments": "hourglass"
         case "social-load": "person.2"
-        case "receipt": "receipt"
+        case "review": "review"
         default: "checkmark.seal"
         }
     }

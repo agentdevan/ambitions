@@ -304,9 +304,9 @@ private struct YouRootDetailSheet: View {
             YouReviewsSurface(reviews: profileProjection.reviews)
         case .proof:
             YouControlGroup(
-                eyebrow: "Proof",
+                eyebrow: "History",
                 section: YouSectionGroup(
-                    title: "Proof",
+                    title: "History",
                     subtitle: "Progress evidence stays local and feeds reviews.",
                     items: profileProjection.reviews.projection.progressLines.map {
                         SettingsItem(id: "proof-\($0.id)", title: $0.title, subtitle: $0.detail, icon: "checkmark.seal", valueLabel: $0.sourceLabel)
@@ -2629,13 +2629,13 @@ private struct YouTrustCenterSurface: View {
 
                 WhyThisAffordance(
                     summary: "Receipts explain what changed, why it changed, and when review, correction, or undo is available.",
-                    evidence: "The surface stays local, inspectable, and explicit about source freshness instead of implying hosted intelligence.",
+                    evidence: "The surface stays local, inspectable, and explicit about context freshness instead of implying hosted intelligence.",
                     onOpen: {}
                 )
 
                 ReceiptDrawer(
                     title: "Receipt drawer",
-                    subtitle: "Receipt drawer keeps source freshness, privacy, correction, undo, and review paths visible.",
+                    subtitle: "Receipt drawer keeps context freshness, privacy, correction, undo, and review paths visible.",
                     sections: trustReceiptDrawerSections,
                     onReview: { _ in },
                     onUndo: { _ in }
@@ -2643,7 +2643,7 @@ private struct YouTrustCenterSurface: View {
 
                 ProofSpine(
                     title: "Proof trail",
-                    subtitle: "Proof stays attached to source freshness, privacy, correction, and review state.",
+                    subtitle: "Proof stays attached to context freshness, privacy, correction, and review state.",
                     beads: trustProofTrailBeads
                 )
 
@@ -3020,7 +3020,7 @@ private extension ActionReceiptDisplaySummary {
     var trustReceiptReviewLabel: String {
         switch safetyState {
         case .normal: "Review receipt"
-        case .degraded: "Review source"
+        case .degraded: "Review context"
         case .safeFailure: "Review blocked change"
         case .externalUnavailable: "Review local-only receipt"
         case .confirmationRequired: "Review before confirming"

@@ -13,9 +13,10 @@
     "batch_11_flagship_proof",
     "batch_12_report_capture_repair",
     "batch_13_report_today_mutation",
-    "batch_14_report_shell_nav"
+    "batch_14_report_shell_nav",
+    "batch_15_report_surface_language"
   ],
-  "last_green_batch": "batch_14_report_shell_nav",
+  "last_green_batch": "batch_15_report_surface_language",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

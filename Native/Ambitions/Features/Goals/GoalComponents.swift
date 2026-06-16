@@ -31,9 +31,9 @@ struct GoalsObjectStagePrimitiveContract: Equatable {
         ],
         sourceTrustLineOrder: [
             "life area",
-            "source",
-            "proof",
-            "receipt",
+            "context",
+            "history",
+            "review",
             "Today link"
         ],
         accessibilityFallbacks: [
@@ -111,8 +111,8 @@ struct GoalsConstellationAtlasStage: View {
 
         return [
             GoalMissionControlLaneState(
-                id: "source",
-                title: "Source",
+                id: "context",
+                title: "Context",
                 value: overview.isSeeded ? "Preview source" : "Local source",
                 detail: overview.constellationAtlasSourceFirstViewportSummary,
                 symbolName: "link",
@@ -120,8 +120,8 @@ struct GoalsConstellationAtlasStage: View {
                 level: 0.72
             ),
             GoalMissionControlLaneState(
-                id: "proof",
-                title: "Proof",
+                id: "history",
+                title: "History",
                 value: (proof?.count ?? 0) > 0 ? "\(proof?.count ?? 0) saved" : "Visible path",
                 detail: (proof?.count ?? 0) > 0
                     ? overview.constellationAtlasProofFirstViewportSummary
@@ -499,7 +499,7 @@ struct GoalsConstellationAtlasStage: View {
             if screenshotProofState.prioritizesOrbitalLens {
                 orbitalLensRow(title: "Proof available", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
                     .accessibilityIdentifier("goals.orbital-lens.proof")
-                orbitalLensRow(title: "Source", value: overview.orbitalLens.sourceSummary, systemImage: "link")
+                orbitalLensRow(title: "Context", value: overview.orbitalLens.sourceSummary, systemImage: "link")
                     .accessibilityIdentifier("goals.orbital-lens.source")
                 orbitalLensRow(title: "Why this?", value: overview.orbitalLens.whyThisSummary, systemImage: "questionmark.circle")
                     .accessibilityIdentifier("goals.orbital-lens.why")
@@ -510,7 +510,7 @@ struct GoalsConstellationAtlasStage: View {
                 orbitalLensRow(title: "Feeds Today", value: overview.orbitalLens.feedsTodaySummary, systemImage: "sun.max")
                 orbitalLensRow(title: "Proof available", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
                     .accessibilityIdentifier("goals.orbital-lens.proof")
-                orbitalLensRow(title: "Source", value: overview.orbitalLens.sourceSummary, systemImage: "link")
+                orbitalLensRow(title: "Context", value: overview.orbitalLens.sourceSummary, systemImage: "link")
                     .accessibilityIdentifier("goals.orbital-lens.source")
                 orbitalLensRow(title: "Why this?", value: overview.orbitalLens.whyThisSummary, systemImage: "questionmark.circle")
                     .accessibilityIdentifier("goals.orbital-lens.why")
@@ -576,8 +576,8 @@ struct GoalsConstellationAtlasStage: View {
 
     private var sourceProofTrustAffordance: some View {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
-            affordance(title: "Source", value: overview.isSeeded ? "Preview data" : "Local Goals")
-            affordance(title: "Receipt", value: (proofSummary?.count ?? 0) > 0 ? "Proof attached" : "Ready before change")
+            affordance(title: "Context", value: overview.isSeeded ? "Preview data" : "Local Goals")
+            affordance(title: "Review", value: (proofSummary?.count ?? 0) > 0 ? "Proof attached" : "Ready before change")
             affordance(title: "Today link", value: "Visible before start")
         }
         .accessibilityIdentifier("goals.source-proof-trust")
@@ -722,8 +722,8 @@ struct GoalMissionControlLanes: View {
 
         return [
             GoalMissionControlLaneState(
-                id: "proof",
-                title: "Proof",
+                id: "history",
+                title: "History",
                 value: (proof?.count ?? 0) > 0 ? "\(proof?.count ?? 0) saved" : "Not yet",
                 detail: proof?.latestTitle ?? proof?.detail ?? "Proof will appear after progress is saved.",
                 symbolName: "checkmark.seal",
@@ -1598,7 +1598,7 @@ struct GoalsAtlasSurfaceView: View {
             .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceSecondary.opacity(0.7)))
 
             HStack(alignment: .top, spacing: theme.spacing.sm) {
-                signalColumn(title: "Proof", headline: card.proofSummary.title, body: card.proofSummary.detail, state: card.proofSummary.visualState)
+                signalColumn(title: "History", headline: card.proofSummary.title, body: card.proofSummary.detail, state: card.proofSummary.visualState)
                 signalColumn(title: "Weather", headline: card.weather.title, body: card.weatherSummary, state: card.weather.visualState)
             }
 

@@ -42,7 +42,7 @@ enum YouRootDetail: String, Identifiable {
         case .receiptsHistory: "Receipts & History"
         case .corrections: "Corrections"
         case .reviews: "Reviews"
-        case .proof: "Proof"
+        case .proof: "History"
         case .archive: "Archive / Completed"
         case .scheduleAvailability: "Schedule & Availability"
         case .planBehavior: "Time Behavior"
@@ -222,7 +222,7 @@ struct PersonalSystemCenterRootView: View {
                 subtitle: "Receipts and controls remain connected to local evidence.",
                 rows: [
                     RootSectionRow(id: "receipts-history", sourceItemID: "receipts-history", title: "Receipts & History", detail: .receiptsHistory),
-                    RootSectionRow(id: "proof", sourceItemID: "proof", title: "Proof", detail: .proof),
+                    RootSectionRow(id: "history", sourceItemID: "history", title: "History", detail: .proof),
                     RootSectionRow(id: "source-settings", sourceItemID: "corrections", title: "Source Settings", detail: .sourceSettings),
                     RootSectionRow(id: "local-data-controls", sourceItemID: "export-import", title: "Local Data Controls", detail: .localDataControls)
                 ]
@@ -299,7 +299,7 @@ struct PersonalSystemCenterRootView: View {
         case "privacy": .trustCenter
 
         case "receipts-history": .receiptsHistory
-        case "proof": .proof
+        case "history": .proof
         case "source-settings": .sourceSettings
         case "local-data-controls": .localDataControls
 

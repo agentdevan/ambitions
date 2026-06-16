@@ -223,12 +223,12 @@ struct TimeObjectStagePrimitiveContract: Equatable {
             "capacity statement panel",
             "metric-row dashboard",
             "source and receipt pills",
-            "reflow preview panel"
+            "change preview panel"
         ],
         sourceTrustLineOrder: [
-            "source",
+            "context",
             "reason",
-            "receipt",
+            "review",
             "privacy"
         ],
         accessibilityFallbacks: [
@@ -309,7 +309,7 @@ struct TimeLifeShapeField: View {
         case .pressureCluster: "Pressure"
         case .sourceConflict: "Source split"
         case .reflowPreview: "Reflow"
-        case .receiptAttached: "Receipt"
+        case .receiptAttached: "Review"
         }
     }
 
@@ -321,7 +321,7 @@ struct TimeLifeShapeField: View {
         }
 
         switch arguments[arguments.index(after: flagIndex)].lowercased() {
-        case "receipt", "apply", "applied":
+        case "review", "apply", "applied":
             return .accept
         case "adjust":
             return .edit
@@ -348,11 +348,11 @@ struct TimeLifeShapeField: View {
             return .calendarDenied
         case "pressure", "pressure-cluster":
             return .pressureCluster
-        case "source", "source-conflict":
+        case "context", "source-conflict":
             return .sourceConflict
         case "reflow", "reflow-preview":
             return .reflowPreview
-        case "receipt", "receipt-attached":
+        case "review", "receipt-attached":
             return .receiptAttached
         default:
             return nil
@@ -598,7 +598,7 @@ struct TimeLifeShapeField: View {
 
             HorizonCapacityPrimitiveLine(
                 role: .continuity,
-                title: "Review before reflow",
+                title: "Preview changes",
                 subtitle: suite.field.reflowProposal.detail,
                 systemImage: "lock.shield",
                 visualState: .default
@@ -791,9 +791,9 @@ struct TimeLifeShapeField: View {
 
     private func horizonCapacityRole(for item: TimeObjectStageInlineDatum) -> HorizonCapacityPrimitiveRole {
         switch item.id {
-        case "receipt":
+        case "review":
             return .receipt
-        case "source", "privacy":
+        case "context", "privacy":
             return .source
         default:
             return .continuity
@@ -802,7 +802,7 @@ struct TimeLifeShapeField: View {
 
     private func horizonCapacityVisualState(for item: TimeObjectStageInlineDatum) -> AmbitionVisualState {
         switch item.id {
-        case "receipt":
+        case "review":
             return suite.field.receipt.visualState
         case "reason":
             return suite.field.sourceState.visualState
@@ -814,8 +814,8 @@ struct TimeLifeShapeField: View {
     private var objectStageSourceItems: [TimeObjectStageInlineDatum] {
         [
             TimeObjectStageInlineDatum(
-                id: "source",
-                title: "Source",
+                id: "context",
+                title: "Context",
                 value: displayedSourceTitle,
                 symbolName: "checkmark.shield",
                 token: .source
@@ -828,8 +828,8 @@ struct TimeLifeShapeField: View {
                 token: .sourceAttention
             ),
             TimeObjectStageInlineDatum(
-                id: "receipt",
-                title: "Receipt",
+                id: "review",
+                title: "Review",
                 value: suite.field.receipt.ageLabel,
                 symbolName: "doc.text",
                 token: .receipt
@@ -884,7 +884,7 @@ struct TimeLifeShapeField: View {
                let receiptPreview = reflowReceiptPreview {
                 QuietReflowPrimitiveStage(
                     role: .preview,
-                    title: "Reflow preview",
+                    title: "Change preview",
                     subtitle: decision.subtitle,
                     statusLabel: reflowStatusTitle,
                     visualState: reflowStatusState,
@@ -941,7 +941,7 @@ struct TimeLifeShapeField: View {
                     reflowActionRow(option)
                 }
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("Time reflow preview")
+                .accessibilityLabel("Time change preview")
                 .accessibilityValue(reflowAccessibilityValue(option: option, decision: decision, receiptPreview: receiptPreview))
             }
         }
@@ -1020,7 +1020,7 @@ struct TimeLifeShapeField: View {
 
     private var reflowStatusTitle: String {
         switch confirmedReflowAction {
-        case .accept: "Receipt"
+        case .accept: "Review"
         case .edit: "Adjustment pending"
         case .decline: "Current shape kept"
         case nil: displayedRenderStateTitle
