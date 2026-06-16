@@ -150,7 +150,7 @@ struct TodayScreen: View {
         case let .loaded(experience):
             let displayExecution = displayedExecution(from: experience)
             let displayRail = displayExecution.dayRail
-            RealityMeridianView(
+            TodayRealityMeridianFlagshipAdapter(
                 state: displayRail,
                 onAction: handleAction,
                 onOpenStepDetail: { detail in

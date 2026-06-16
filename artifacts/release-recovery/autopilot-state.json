@@ -6,9 +6,10 @@
     "batch_04_today_meridian_copy",
     "batch_05_capture_composer_copy",
     "batch_06_shell_chrome_copy",
-    "batch_07_flagship_runtime_primitives"
+    "batch_07_flagship_runtime_primitives",
+    "batch_08_today_flagship_adapter"
   ],
-  "last_green_batch": "batch_07_flagship_runtime_primitives",
+  "last_green_batch": "batch_08_today_flagship_adapter",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
@@ -186,6 +187,95 @@
         }
       ],
       "started_at": "2026-06-16T04:29:09.768829+00:00",
+      "status": "green"
+    },
+    {
+      "batch": "batch_07_flagship_runtime_primitives",
+      "commit_sha": "4d475096d020bdec287110c6cb430ee16a111a07",
+      "finished_at": "2026-06-16T04:55:47.170594+00:00",
+      "results": [
+        {
+          "blocking": true,
+          "command": [
+            "python3",
+            "scripts/release_recovery/apply_batch_07_flagship_runtime_primitives.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/apply-batch.log",
+          "name": "apply_batch",
+          "returncode": 0
+        },
+        {
+          "blocking": true,
+          "command": [
+            "python3",
+            "scripts/ambitions-release-red-guard.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/release-red-guard.log",
+          "name": "release_red_guard",
+          "returncode": 0
+        },
+        {
+          "blocking": true,
+          "command": [
+            "python3",
+            "scripts/ambitions-empty-action-lint.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/empty-action-lint.log",
+          "name": "empty_action_lint",
+          "returncode": 0
+        },
+        {
+          "blocking": false,
+          "command": [
+            "python3",
+            "scripts/ambitions-copy-contract-lint.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/copy-contract-lint.log",
+          "name": "copy_contract_lint",
+          "returncode": 0
+        },
+        {
+          "blocking": false,
+          "command": [
+            "python3",
+            "scripts/ambitions-first-viewport-card-lint.py"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/first-viewport-card-lint.log",
+          "name": "first_viewport_card_lint",
+          "returncode": 0
+        },
+        {
+          "blocking": true,
+          "command": [
+            "bash",
+            "artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/generate-xcode-project.sh"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/xcodegen.log",
+          "name": "xcodegen",
+          "returncode": 0
+        },
+        {
+          "blocking": true,
+          "command": [
+            "xcodebuild",
+            "-project",
+            "Ambitions.xcodeproj",
+            "-scheme",
+            "Ambitions",
+            "-destination",
+            "platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5",
+            "-derivedDataPath",
+            "/Users/devan/actions-runner/_work/ambitions/ambitions/artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/DerivedData",
+            "-skipPackagePluginValidation",
+            "-skipMacroValidation",
+            "build"
+          ],
+          "log_path": "artifacts/release-recovery/runs/20260616T045303Z-batch_07_flagship_runtime_primitives/xcodebuild.log",
+          "name": "xcodebuild",
+          "returncode": 0
+        }
+      ],
+      "started_at": "2026-06-16T04:53:03.409941+00:00",
       "status": "green"
     }
   ],
