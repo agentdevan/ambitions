@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from pathlib import Path
+
 from report_reconstruction_support import require_markers, write, write_proof
 
 SURFACES = "Sources/Components/ObjectStageSurfaces.swift"
+STALE_ALIASES = "Sources/Components/ObjectStageSurfaceAliases.swift"
 
 SWIFT = r'''
 #if canImport(SwiftUI)
@@ -90,8 +93,14 @@ public struct NativeGroupedControlSurface<Content: View>: View {
 
 
 def main() -> int:
+    stale_alias_path = Path(STALE_ALIASES)
+    if stale_alias_path.exists():
+        stale_alias_path.unlink()
+
     write(SURFACES, SWIFT)
     require_markers(SURFACES, ["ObjectStageSurface", "InstrumentField", "TrustSeamDisclosure", "NativeGroupedControlSurface", "AmbitionsIOS26SemanticTokens"])
+    if Path(STALE_ALIASES).exists():
+        raise RuntimeError("Stale ObjectStageSurfaceAliases.swift must not coexist with ObjectStageSurfaces.swift.")
     write_proof(
         "REPORT_BATCH_26_SHARED_VISUAL_DECARDIFICATION.md",
         """
@@ -104,6 +113,7 @@ Scope:
 - Added InstrumentField for stateful product objects.
 - Added TrustSeamDisclosure for progressive Source / Proof / Receipt inspection.
 - Added NativeGroupedControlSurface for You/settings-style control flows.
+- Removed the stale ObjectStageSurfaceAliases file so the real ObjectStageSurface primitive has a single definition.
 
 Atlas gates:
 - Root surfaces should not be generic card stacks.
