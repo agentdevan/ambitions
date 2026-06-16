@@ -81,9 +81,9 @@ struct TodayActionClosureDiamondState: Equatable, Sendable {
     }
 
     static let todayDefault = TodayActionClosureDiamondState(
-        title: "Closure diamond",
+        title: "Outcome check",
         summary: "Choose the honest outcome, then Ambitions shows the consequence before anything changes.",
-        centerLabel: "Close the loop",
+        centerLabel: "Record outcome",
         noSilentChangeLabel: "Changes stay reviewable",
         facets: [
             TodayActionClosureDiamondFacetState(
@@ -143,8 +143,8 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             privacyLabel: privacyLabel,
             diamond: .todayDefault,
             outcomes: Self.defaultOutcomes,
-            receiptPreviewTitle: "Receipt preview",
-            confirmTitle: "Save closure",
+            receiptPreviewTitle: "After saving",
+            confirmTitle: "Save outcome",
             target: target
         )
     }
@@ -175,35 +175,35 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
     }
 
     var softPriorStepPrompt: String {
-        "If the step changed shape, choose the closest honest outcome."
+        "Choose the closest honest outcome."
     }
 
     var recoveryReceiptLabel: String {
-        "Receipt records the consequence you choose; Ambitions does not rearrange the day from this sheet."
+        "Saving the outcome updates Today and keeps the result inspectable."
     }
 
     private static let defaultOutcomes: [TodayActionClosureOutcomeState] = [
         TodayActionClosureOutcomeState(
             closureState: .completed,
-            title: "Completed",
+            title: "Done",
             meaning: "Finished as intended.",
-            receiptPreview: "Completed · receipt saved",
+            receiptPreview: "Done · receipt saved",
             createsProof: true,
             isPrimary: true
         ),
         TodayActionClosureOutcomeState(
             closureState: .stillCounts,
-            title: "Still Counts",
+            title: "Still counts",
             meaning: "Meaningful progress happened differently.",
-            receiptPreview: "Still Counts · saved as proof",
+            receiptPreview: "Still counts · saved as proof",
             createsProof: true,
             isPrimary: true
         ),
         TodayActionClosureOutcomeState(
             closureState: .moved,
-            title: "Rescheduled",
+            title: "Move it",
             meaning: "Still matters, moved to another time.",
-            receiptPreview: "Rescheduled · receipt saved",
+            receiptPreview: "Move it · receipt saved",
             createsProof: false,
             isPrimary: true
         ),
@@ -213,7 +213,7 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             meaning: "Intentionally removed.",
             receiptPreview: "Not needed · receipt saved",
             createsProof: false,
-            isPrimary: true
+            isPrimary: false
         ),
         TodayActionClosureOutcomeState(
             closureState: .blocked,
@@ -229,7 +229,7 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             meaning: "Dependent on a person, time, info, place, or tool.",
             receiptPreview: "Waiting · dependency noted",
             createsProof: false,
-            isPrimary: true
+            isPrimary: false
         ),
         TodayActionClosureOutcomeState(
             closureState: .needsRecovery,
