@@ -899,7 +899,7 @@ struct MotionCurrentProjection {
                 items: [
                     MotionLaneItemState(
                         id: "reentry-available",
-                        title: "Return available",
+                        title: "Re-entry available",
                         stateLabel: "Ready",
                         source: "Today",
                         proof: "Last honest point",
@@ -993,7 +993,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
             )
         case .reentryAvailable:
             MotionCurrentFieldState(
-                title: "Return available",
+                title: "Re-entry available",
                 summary: "A paused thread has one calm return point and a clear owner.",
                 source: "Today return point",
                 proof: "Last honest point",
