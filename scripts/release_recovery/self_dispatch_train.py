@@ -18,7 +18,7 @@ import sys
 from typing import Iterable
 from urllib import error, request
 
-CONTROLLER_VERSION = "2026.06.16.1"
+CONTROLLER_VERSION = "2026.06.16.2"
 ROOT = Path(__file__).resolve().parents[2]
 STATE_PATH = ROOT / "artifacts" / "release-recovery" / "autopilot-state.json"
 BATCH_DIR = ROOT / "scripts" / "release_recovery"
