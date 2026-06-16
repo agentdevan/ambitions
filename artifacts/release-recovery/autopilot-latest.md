@@ -1,19 +1,19 @@
 # Ambitions Release Recovery Autopilot Latest
 
-Batch: `batch_13_report_today_mutation`
+Batch: `batch_18_shell_navigation_reconstruction`
 Status: `green`
-Started: `2026-06-16T05:36:40.209655+00:00`
-Finished: `2026-06-16T05:39:23.422431+00:00`
-Commit: `18bc023efdd1e61220dffeb2a408213d6b30f073`
+Started: `2026-06-16T14:08:44.357158+00:00`
+Finished: `2026-06-16T14:12:09.701640+00:00`
+Commit: `6b9b942f041366771942f686670ed589820c78c3`
 
 | Gate | Blocking | Exit | Log |
 |---|---:|---:|---|
-| apply_batch | true | 0 | `artifacts/release-recovery/runs/20260616T053640Z-batch_13_report_today_mutation/apply-batch.log` |
-| release_red_guard | true | 0 | `artifacts/release-recovery/runs/20260616T053640Z-batch_13_report_today_mutation/release-red-guard.log` |
-| empty_action_lint | true | 0 | `artifacts/release-recovery/runs/20260616T053640Z-batch_13_report_today_mutation/empty-action-lint.log` |
-| copy_contract_lint | false | 0 | `artifacts/release-recovery/runs/20260616T053640Z-batch_13_report_today_mutation/copy-contract-lint.log` |
-| first_viewport_card_lint | false | 0 | `artifacts/release-recovery/runs/20260616T053640Z-batch_13_report_today_mutation/first-viewport-card-lint.log` |
-| xcodegen | true | 0 | `artifacts/release-recovery/runs/20260616T053640Z-batch_13_report_today_mutation/xcodegen.log` |
-| xcodebuild | true | 0 | `artifacts/release-recovery/runs/20260616T053640Z-batch_13_report_today_mutation/xcodebuild.log` |
+| apply_batch | true | 0 | `artifacts/release-recovery/runs/20260616T140844Z-batch_18_shell_navigation_reconstruction/apply-batch.log` |
+| release_red_guard | true | 0 | `artifacts/release-recovery/runs/20260616T140844Z-batch_18_shell_navigation_reconstruction/release-red-guard.log` |
+| empty_action_lint | true | 0 | `artifacts/release-recovery/runs/20260616T140844Z-batch_18_shell_navigation_reconstruction/empty-action-lint.log` |
+| copy_contract_lint | false | 0 | `artifacts/release-recovery/runs/20260616T140844Z-batch_18_shell_navigation_reconstruction/copy-contract-lint.log` |
+| first_viewport_card_lint | false | 0 | `artifacts/release-recovery/runs/20260616T140844Z-batch_18_shell_navigation_reconstruction/first-viewport-card-lint.log` |
+| xcodegen | true | 0 | `artifacts/release-recovery/runs/20260616T140844Z-batch_18_shell_navigation_reconstruction/xcodegen.log` |
+| xcodebuild | true | 0 | `artifacts/release-recovery/runs/20260616T140844Z-batch_18_shell_navigation_reconstruction/xcodebuild.log` |
 
-Patch: `artifacts/release-recovery/runs/20260616T053640Z-batch_13_report_today_mutation/batch.patch`
+Patch: `artifacts/release-recovery/runs/20260616T140844Z-batch_18_shell_navigation_reconstruction/batch.patch`

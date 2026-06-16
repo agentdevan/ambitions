@@ -16,6 +16,11 @@ private struct TodayEmptyPathAction: Identifiable {
     let action: TodayInlineAction
 }
 
+private enum TodayMeridianZoom: String, CaseIterable {
+    case window
+    case day
+}
+
 /// The Reality Meridian surface for Today - the primary object presenting the daily execution rail.
 struct RealityMeridianView: View {
     let state: AmbitionsDayRailViewState
@@ -53,6 +58,7 @@ struct AmbitionsDayRailView: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var meridianZoom: TodayMeridianZoom = .window
 
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
@@ -367,9 +373,16 @@ struct AmbitionsDayRailView: View {
     }
 
     private var currentTimeNode: some View {
+        TimelineView(.periodic(from: .now, by: 60)) { timeline in
+            currentTimeNode(date: timeline.date)
+        }
+        .accessibilityIdentifier("TodayRealityRailLiveNow")
+    }
+
+    private func currentTimeNode(date: Date) -> some View {
         HStack(spacing: theme.spacing.xs) {
             VStack(alignment: .trailing, spacing: 1) {
-                Text(Date.now, format: .dateTime.hour().minute())
+                Text(date, format: .dateTime.hour().minute())
                     .font(theme.typography.micro.weight(.semibold))
                     .foregroundStyle(theme.colors.accentWarm)
                     .lineLimit(1)
@@ -382,9 +395,9 @@ struct AmbitionsDayRailView: View {
 
             ZStack {
                 Circle()
-                    .fill(theme.colors.accentWarm.opacity(0.22))
+                    .fill(theme.colors.accentWarm.opacity(reduceMotion ? 0.18 : 0.22))
                     .frame(width: 42, height: 42)
-                    .blur(radius: 2)
+                    .blur(radius: reduceMotion ? 0 : 2)
                 Circle()
                     .fill(theme.colors.accentWarm)
                     .frame(width: 16, height: 16)
@@ -526,7 +539,7 @@ struct AmbitionsDayRailView: View {
             HStack(spacing: theme.spacing.sm) {
                 startHereOriginMarker
 
-                Text("Start here")
+                Text("Available now")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.accentWarm)
             }
@@ -583,7 +596,7 @@ struct AmbitionsDayRailView: View {
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Today open paths")
+        .accessibilityLabel("Today available actions")
     }
 
     private var emptyPathActionItems: [TodayEmptyPathAction] {
@@ -772,7 +785,7 @@ struct AmbitionsDayRailView: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Source, trust, and receipt")
+        .accessibilityLabel("Why this fits")
         .accessibilityValue(items.map { "\($0.title) \($0.value)" }.joined(separator: ". "))
     }
 
