@@ -175,10 +175,10 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.buttons["time.life-shape-field.reflow.accept"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.screen", in: app))
-        XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
         XCTAssertTrue(youRow(named: "Schedule & Availability", in: app).waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Receipts & History", in: app, maxAttempts: 6))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Proof", in: app, maxAttempts: 6))
+        XCTAssertTrue(scrollUntilYouRowExists(named: "History", in: app, maxAttempts: 6))
 
         XCTAssertTrue(openCanonicalDestination("Goals", screenIdentifier: "goals.screen", in: app))
         XCTAssertFalse(app.buttons["shell.goals.create-button"].waitForExistence(timeout: 1))
@@ -299,7 +299,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
         app.tabBars.buttons["You"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(scrollUntilYouRowExists(named: "Receipts & History", in: app, maxAttempts: 6))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Privacy", in: app, maxAttempts: 6))
@@ -322,7 +322,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
         app.tabBars.buttons["You"].tap()
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(scrollUntilYouRowExists(named: "Personal system", in: app, maxAttempts: 8))
         XCTAssertTrue(tapYouRow(named: "Personal system", in: app, maxAttempts: 10))
@@ -334,7 +334,7 @@ final class AmbitionsUITests: XCTestCase {
         app.buttons["Done"].tap()
 
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.staticTexts["Planning Setup"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Local Data Controls", in: app, maxAttempts: 10))
         XCTAssertTrue(tapYouRow(named: "Local Data Controls", in: app, maxAttempts: 10))
         XCTAssertTrue(app.descendants(matching: .any)["you.local-data-controls-card"].waitForExistence(timeout: 10))
