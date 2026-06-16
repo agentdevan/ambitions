@@ -31,9 +31,10 @@
     "batch_28_native_interaction_truth",
     "batch_29_native_interaction_sweep",
     "batch_30_shell_drilldown_visual_reconstruction",
-    "batch_31_composer_choreography"
+    "batch_31_composer_choreography",
+    "batch_32_today_live_meridian_reconstruction"
   ],
-  "last_green_batch": "batch_31_composer_choreography",
+  "last_green_batch": "batch_32_today_live_meridian_reconstruction",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

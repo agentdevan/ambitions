@@ -19,6 +19,13 @@ private struct TodayEmptyPathAction: Identifiable {
 private enum TodayMeridianZoom: String, CaseIterable {
     case window
     case day
+
+    var title: String {
+        switch self {
+        case .window: "Start Here"
+        case .day: "Meridian"
+        }
+    }
 }
 
 /// The Reality Meridian surface for Today - the primary object presenting the daily execution rail.
@@ -95,6 +102,9 @@ struct AmbitionsDayRailView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     if dynamicTypeSize.isAccessibilitySize {
                         accessibilityContextCrown
+                    } else {
+                        todayModeSelector
+                            .padding(.bottom, theme.spacing.md)
                     }
 
                     HStack(alignment: .top, spacing: theme.spacing.lg) {
@@ -293,6 +303,18 @@ struct AmbitionsDayRailView: View {
         .accessibilityLabel("On-device")
     }
 
+    private var todayModeSelector: some View {
+        Picker("Today mode", selection: $meridianZoom) {
+            ForEach(TodayMeridianZoom.allCases, id: \.self) { zoom in
+                Text(zoom.title).tag(zoom)
+            }
+        }
+        .pickerStyle(.segmented)
+        .accessibilityIdentifier("TodayRealityMeridianModeSelector")
+        .accessibilityLabel("Today mode")
+        .accessibilityHint("Switches between the recommended step and the day meridian.")
+    }
+
     private var timeSpine: some View {
         Group {
             if dynamicTypeSize.isAccessibilitySize {
@@ -387,7 +409,7 @@ struct AmbitionsDayRailView: View {
                     .foregroundStyle(theme.colors.accentWarm)
                     .lineLimit(1)
                     .minimumScaleFactor(0.62)
-                Text("Now")
+                Text("Live now")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.accentWarm)
             }
@@ -448,7 +470,7 @@ struct AmbitionsDayRailView: View {
                     .accessibilityIdentifier("TodayRealityRailStepTitle")
             }
 
-            Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : metaLine(for: heroStep))
+            Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : liveMeridianMetaLine(for: heroStep))
                 .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -498,6 +520,10 @@ struct AmbitionsDayRailView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    private func liveMeridianMetaLine(for heroStep: DayRailHeroStepState) -> String {
+        "Now-aware fit · \(metaLine(for: heroStep))"
     }
 
     private func primaryActionButton(for heroStep: DayRailHeroStepState) -> some View {
