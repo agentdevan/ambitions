@@ -26,7 +26,7 @@ if [[ -z "$RESULT" || -z "$OUT_DIR" ]]; then
   exit 1
 fi
 
-if [[ ! -f "$RESULT" ]]; then
+if [[ ! -e "$RESULT" ]]; then
   echo "result bundle missing: $RESULT" >&2
   exit 1
 fi
