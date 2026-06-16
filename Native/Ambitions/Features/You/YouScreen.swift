@@ -442,10 +442,10 @@ private struct YouPersonalRuntimeStatusControlGroup: View {
                 items: [
                     SettingsItem(
                         id: "you-personal-runtime-backed",
-                        title: "Runtime-backed local inspection",
-                        subtitle: "Life Context, Source Atlas, memory controls, personal vault rows, and receipt summaries are loaded through the current You projection.",
+                        title: "Personal context",
+                        subtitle: "Life context, memory controls, and personal settings are available from this profile.",
                         icon: "internaldrive",
-                        valueLabel: "runtime-backed"
+                        valueLabel: "On device"
                     ),
                     SettingsItem(
                         id: "you-personal-runtime-controls",
@@ -457,16 +457,16 @@ private struct YouPersonalRuntimeStatusControlGroup: View {
                     SettingsItem(
                         id: "you-personal-runtime-receipts",
                         title: "Receipt behavior",
-                        subtitle: "Receipt rows explain source freshness, privacy posture, correction, undo, review, and safe fallback behavior.",
+                        subtitle: "Review history explains what changed, when it changed, and what stayed protected.",
                         icon: "doc.text.magnifyingglass",
-                        valueLabel: profileProjection.receiptAudit.items.isEmpty ? "blocked-pending-model" : "fixture-only"
+                        valueLabel: profileProjection.receiptAudit.items.isEmpty ? "Pending" : "Example"
                     ),
                     SettingsItem(
                         id: "you-personal-runtime-pending",
                         title: "No hidden automation",
-                        subtitle: "Broader learning, deletion, sync, export/import, and privacy/legal proof remain blocked-pending-model until the owning source and proof gates land.",
+                        subtitle: "Broader learning, deletion, sync, export, and import stay unavailable until their controls are ready.",
                         icon: "hand.raised",
-                        valueLabel: "blocked-pending-model"
+                        valueLabel: "Pending"
                     )
                 ],
                 footer: "This drill-down is inspection and control posture only. It is not a hosted account, cloud planning layer, marketing audit page, or release/privacy approval claim."
@@ -484,42 +484,42 @@ private struct YouLocalDataControlsControlGroup: View {
             eyebrow: "Privacy",
             section: YouSectionGroup(
                 title: "Privacy / Local Data Controls",
-                subtitle: "Honest local-data status for what is backed by runtime state, what is example-only, and what remains blocked.",
+                subtitle: "Local-data controls for what Ambitions stores, shows, and can change on this device.",
                 items: [
                     SettingsItem(
                         id: "you-local-data-state",
                         title: "Local app state",
                         subtitle: "Display preferences, default landing tab, review cadence, local evidence, captures, and recent event ledger counts come from the current on-device You projection path.",
                         icon: "internaldrive",
-                        valueLabel: "runtime-backed"
+                        valueLabel: "On device"
                     ),
                     SettingsItem(
                         id: "you-local-data-vault",
                         title: "Personal vault rows",
                         subtitle: "\(profileProjection.personalVault.sections.flatMap(\.rows).count) local signal and permission rows show source, storage, export, reset, delete, provenance, privacy, and permission labels.",
                         icon: "lock.shield",
-                        valueLabel: profileProjection.personalVault.sections.flatMap(\.rows).isEmpty ? "blocked-pending-model" : "runtime-backed"
+                        valueLabel: profileProjection.personalVault.sections.flatMap(\.rows).isEmpty ? "Pending" : "On device"
                     ),
                     SettingsItem(
                         id: "you-local-data-receipts",
                         title: "Policy receipt examples",
-                        subtitle: "Receipt examples demonstrate how correction, undo, source freshness, and safe fallback should appear. They are not a production audit log.",
+                        subtitle: "Examples show how review history will appear when enough local activity exists.",
                         icon: "doc.text.magnifyingglass",
-                        valueLabel: "fixture-only"
+                        valueLabel: "Example"
                     ),
                     SettingsItem(
                         id: "you-local-data-no-account",
                         title: "No hosted account",
                         subtitle: "This build does not introduce a hosted personal-data account, telemetry loop, external planning dependency, or cloud classification requirement.",
                         icon: "person.crop.circle.badge.xmark",
-                        valueLabel: "runtime-backed"
+                        valueLabel: "On device"
                     ),
                     SettingsItem(
                         id: "you-local-data-export-sync",
                         title: "Export/import drill pending",
                         subtitle: "Portable export/import, sync continuity, privacy/legal approval, and disaster recovery proof remain future-owned and unclaimed here.",
                         icon: "externaldrive.badge.exclamationmark",
-                        valueLabel: "blocked-pending-model"
+                        valueLabel: "Pending"
                     )
                 ],
                 footer: "These controls make status inspectable. They do not delete data, claim verified privacy compliance, enable sync, or perform destructive actions from this sheet."
@@ -1052,6 +1052,10 @@ private struct YouLifeContextFactActionButton: View {
 
     var body: some View {
         Button {
+            NotificationCenter.default.post(
+                name: Notification.Name("AmbitionsYouPlaceholderActionSelected"),
+                object: nil
+            )
         } label: {
             Label(title, systemImage: systemImage)
                 .font(theme.typography.caption.weight(.semibold))

@@ -1,0 +1,8 @@
+{
+  "completed_batches": [
+    "batch_01_guard_cleanup"
+  ],
+  "last_green_batch": "batch_01_guard_cleanup",
+  "runs": [],
+  "version": 2
+}

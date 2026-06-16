@@ -369,7 +369,7 @@ struct AmbitionsDayRailView: View {
     private var currentTimeNode: some View {
         HStack(spacing: theme.spacing.xs) {
             VStack(alignment: .trailing, spacing: 1) {
-                Text("10:05 AM")
+                Text(Date.now, format: .dateTime.hour().minute())
                     .font(theme.typography.micro.weight(.semibold))
                     .foregroundStyle(theme.colors.accentWarm)
                     .lineLimit(1)
@@ -533,7 +533,7 @@ struct AmbitionsDayRailView: View {
             Text(emptySourceLine)
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
-            Text("No step is required right now")
+            Text("This window is open")
                 .font(theme.typography.title.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -590,27 +590,9 @@ struct AmbitionsDayRailView: View {
         [
             TodayEmptyPathAction(
                 id: "capture",
-                title: "Capture what changed",
+                title: "Add what changed",
                 systemImage: "plus.bubble",
-                action: TodayInlineAction(kind: .quickLog, title: "Capture what changed", systemImage: "plus.bubble", state: .selected, target: TodayActionTarget())
-            ),
-            TodayEmptyPathAction(
-                id: "shape-time",
-                title: "Shape Time",
-                systemImage: "calendar.badge.clock",
-                action: TodayInlineAction(kind: .openTime, title: "Shape Time", systemImage: "calendar.badge.clock", state: .selected, target: TodayActionTarget())
-            ),
-            TodayEmptyPathAction(
-                id: "review-source",
-                title: "Review source",
-                systemImage: "link",
-                action: TodayInlineAction(kind: .openTime, title: "Review source", systemImage: "link", state: .default, target: TodayActionTarget())
-            ),
-            TodayEmptyPathAction(
-                id: "close-today",
-                title: "Close Today",
-                systemImage: "checkmark.seal",
-                action: TodayInlineAction(kind: .closeActionClosure, title: "Close Today", systemImage: "checkmark.seal", state: .success, target: TodayActionTarget())
+                action: TodayInlineAction(kind: .quickLog, title: "Add what changed", systemImage: "plus.bubble", state: .selected, target: TodayActionTarget())
             ),
             TodayEmptyPathAction(
                 id: "protect-window",
@@ -659,9 +641,10 @@ struct AmbitionsDayRailView: View {
             }
 
             if state.rows.isEmpty {
-                upNextRow(time: "12:15 PM", title: "Support queue", subtitle: "Internal", duration: "45 min")
-                upNextRow(time: "3:00 PM", title: "Team sync", subtitle: "Collaboration", duration: "1h")
-                upNextRow(time: "5:15 PM", title: "Review deck", subtitle: "Shallow work", duration: "45 min")
+                Text("The next step appears here when it fits.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
             } else {
                 ForEach(Array(state.rows.enumerated()), id: \.element.id) { index, row in
                     upNextRow(
@@ -881,7 +864,7 @@ struct AmbitionsDayRailView: View {
 
     private func heroCopy(for heroStep: DayRailHeroStepState) -> String {
         if heroStep.receiptItem.freshness == .unavailable {
-            return "Source unavailable. Manual planning still works."
+            return "Ambitions can hold the space until a step fits."
         }
         if heroStep.becauseLine.isEmpty == false {
             return heroStep.becauseLine
@@ -894,7 +877,7 @@ struct AmbitionsDayRailView: View {
 
     private var emptySourceLine: String {
         state.mode == .empty
-            ? "Source unavailable. Manual planning still works."
+            ? "Ambitions can hold the space until a step fits."
             : "User choice stays open."
     }
 
@@ -1003,22 +986,22 @@ private extension DayRailRowSlot {
     var mvpTimeLabel: String {
         switch self {
         case .now:
-            return "10:05 AM"
+            return "Now"
         case .next:
-            return "12:15 PM"
+            return "Next"
         case .later:
-            return "5:15 PM"
+            return "Later"
         }
     }
 
     func mvpTimeLabel(for index: Int) -> String {
         switch self {
         case .now:
-            return index == 0 ? "Now" : "10:05 AM"
+            return index == 0 ? "Now" : "Current"
         case .next:
-            return index <= 1 ? "12:15 PM" : "3:00 PM"
+            return "Next"
         case .later:
-            return "5:15 PM"
+            return "Later"
         }
     }
 }

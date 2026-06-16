@@ -65,7 +65,7 @@ public enum CaptureRoutingPrimitiveRole: String, CaseIterable, Sendable, Identif
 
     public var defaultEyebrow: String {
         switch self {
-        case .routeReveal: "Route reveal"
+        case .routeReveal: "Suggested path"
         case .placementReview: "Placement review"
         case .routeOption: "Route option"
         case .correction: "Correction"

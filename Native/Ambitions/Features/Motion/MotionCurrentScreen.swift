@@ -1,5 +1,6 @@
 import AmbitionsDesignSystem
 import SwiftUI
+import Foundation
 
 struct MotionObjectStagePrimitiveContract: Equatable {
     let primitiveID: String
@@ -297,7 +298,12 @@ private struct MotionCurrentField: View {
         systemImage: String,
         accessibilityIdentifier: String
     ) -> some View {
-        Button(action: {}) {
+        Button {
+            NotificationCenter.default.post(
+                name: Notification.Name("AmbitionsMotionCurrentActionSelected"),
+                object: nil
+            )
+        } label: {
             Label(title, systemImage: systemImage)
                 .font(theme.typography.caption.weight(.semibold))
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
@@ -733,7 +739,12 @@ private struct MotionContinuityDock: View {
 
             FlowLayout(spacing: theme.spacing.sm) {
                 ForEach(actions) { action in
-                    Button(action.title) {}
+                    Button(action.title) {
+                        NotificationCenter.default.post(
+                            name: Notification.Name("AmbitionsMotionCurrentActionSelected"),
+                            object: action.title
+                        )
+                    }
                         .buttonStyle(.bordered)
                         .controlSize(.small)
                         .accessibilityIdentifier("motion.current.dock.\(action.id)")

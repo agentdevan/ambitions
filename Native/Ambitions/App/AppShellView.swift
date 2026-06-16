@@ -1212,20 +1212,20 @@ struct AppShellActivatedCaptureSeam: View {
         let routeSource = correctedRoute == nil ? "Read locally" : "Corrected locally"
         switch selectedRoute {
         case .needsPlace:
-            return "\(routeSource): hold as Needs a Place until review."
+            return "\(routeSource): hold this until you choose where it belongs."
         case .readyToPlace:
-            return "\(routeSource): concrete action text can be reviewed for Today."
+            return "\(routeSource): this can become a step for Today."
         case .growIntoGoal:
-            return "\(routeSource): ambition-shaped text can open a goal draft."
+            return "\(routeSource): this can start a goal draft."
         case .heldForReview:
-            return "\(routeSource): ambiguous text waits for manual review."
+            return "\(routeSource): keep this for review."
         }
     }
 
     private var activatedRouteReveal: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                Text("Route reveal")
+                Text("Suggested path")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
 
@@ -1257,7 +1257,7 @@ struct AppShellActivatedCaptureSeam: View {
                 }
             }
 
-            Text("Local receipt. No cloud route.")
+            Text("Saved on this device until you choose a place.")
                 .font(theme.typography.micro)
                 .foregroundStyle(theme.colors.textTertiary)
                 .lineLimit(2)

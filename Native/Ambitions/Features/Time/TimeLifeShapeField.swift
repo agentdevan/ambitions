@@ -597,7 +597,7 @@ struct TimeLifeShapeField: View {
             shapingActionStrip
 
             HorizonCapacityPrimitiveLine(
-                role: .noRootNavigation,
+                role: .continuity,
                 title: "Review before reflow",
                 subtitle: suite.field.reflowProposal.detail,
                 systemImage: "lock.shield",
@@ -1099,12 +1099,12 @@ struct TimeLifeShapeField: View {
             }
 
             HorizonCapacityPrimitiveLine(
-                role: .noRootNavigation,
-                title: "Not root navigation",
-                subtitle: "Day, Week, and Month stay inside Time relationship state.",
+                role: .continuity,
+                title: "Context stays together",
+                subtitle: "Day, Week, and Month keep the current shape attached.",
                 systemImage: "lock.shield",
                 visualState: .default,
-                accessibilityIdentifier: "time.life-shape-field.continuity-dock.no-root-navigation"
+                accessibilityIdentifier: "time.life-shape-field.continuity-dock.context"
             )
         }
     }
