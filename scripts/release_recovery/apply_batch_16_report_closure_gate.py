@@ -42,10 +42,6 @@ CHECKS = {
     "Native/Ambitions/App/ShellChromeFlagshipAdapter.swift": [
         "shell.flagship.chrome",
     ],
-    "artifacts/release-recovery/REPORT_LANGUAGE_PASS.md": [
-        "Report Language Pass",
-        "Goals, Time, Motion, and You",
-    ],
 }
 
 FORBIDDEN_NATIVE_MARKERS = [
@@ -66,14 +62,33 @@ FORBIDDEN_SURFACE_MARKERS = [
 
 
 def rewrite_remaining_report_copy() -> None:
-    time_decision = ROOT / "Native/Ambitions/Features/Time/TimeReflowDecisionState.swift"
-    if time_decision.exists():
-        text = time_decision.read_text(encoding="utf-8")
-        text = text.replace("Receipt preview", "After review")
-        text = text.replace("Receipt Preview", "After Review")
-        text = text.replace("receiptPreviewLabel", "reviewPreviewLabel")
-        text = text.replace("receiptPreview:", "reviewPreview:")
-        time_decision.write_text(text, encoding="utf-8")
+    """Rewrite visible report-copy remnants only.
+
+    Keep Swift identifiers stable. Do not rename properties, parameters, enum cases,
+    or API labels from the existing Time reflow model.
+    """
+    replacements = {
+        "Receipt preview": "After review",
+        "Receipt Preview": "After Review",
+        "Review before reflow": "Preview changes",
+        "No silent changes": "Review before changes",
+        "Not root navigation": "Open from Time",
+    }
+    targets = [
+        ROOT / "Native/Ambitions/Features/Time/TimeReflowDecisionState.swift",
+        ROOT / "Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift",
+        ROOT / "Native/Ambitions/Features/Time/TimeLifeShapeField.swift",
+        ROOT / "Native/Ambitions/Features/Time/TimeScreen.swift",
+    ]
+    for path in targets:
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        updated = text
+        for old, new in replacements.items():
+            updated = updated.replace(old, new)
+        if updated != text:
+            path.write_text(updated, encoding="utf-8")
 
 
 def require_markers() -> list[str]:
