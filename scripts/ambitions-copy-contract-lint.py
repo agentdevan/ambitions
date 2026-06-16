@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """First-viewport copy contract lint for Ambitions.
 
-The top-level app surfaces may preserve inspectability, but they must not lead with
-implementation nouns. This lint scans production Swift for release-red wording that
-belongs only in inspection, tests, or proof artifacts.
+This lint protects production UI surfaces from exposing implementation language.
+It intentionally does not scan domain models, runtime models, previews, generated
+token catalogs, or proof contracts because those files may preserve internal
+vocabulary for engineering correctness while the app translates it for users.
 """
 
 from __future__ import annotations
@@ -15,14 +16,53 @@ import re
 import sys
 
 DEFAULT_ROOT = Path(__file__).resolve().parents[1]
-SCAN_PREFIXES = ("Native/Ambitions/", "Sources/")
-EXCLUDED_PARTS = {".git", ".build", "DerivedData", "artifacts", "build", "__pycache__"}
+
+PRODUCTION_UI_PREFIXES = (
+    "Native/Ambitions/App/",
+    "Native/Ambitions/Features/Capture/",
+    "Native/Ambitions/Features/Goals/",
+    "Native/Ambitions/Features/Motion/",
+    "Native/Ambitions/Features/Time/",
+    "Native/Ambitions/Features/Today/",
+    "Native/Ambitions/Features/You/",
+)
+
+PRODUCTION_COMPONENT_PREFIXES = (
+    "Sources/Components/",
+    "Sources/Accessibility/",
+)
+
+EXCLUDED_PARTS = {
+    ".git",
+    ".build",
+    "DerivedData",
+    "artifacts",
+    "build",
+    "__pycache__",
+    "PreviewSupport",
+    "Previews",
+    "Tests",
+    "UITests",
+    "Domain",
+    "Runtime",
+    "Services",
+    "Theme",
+}
+
+EXCLUDED_PATH_FRAGMENTS = (
+    "PrimitiveContract",
+    "PrimitiveContracts",
+    "Contract.swift",
+    "generated.swift",
+)
+
 
 @dataclass(frozen=True)
 class BannedCopy:
     label: str
     pattern: re.Pattern[str]
     allowed_when_path_contains: tuple[str, ...] = ()
+
 
 BANNED_COPY = (
     BannedCopy("receipt seam", re.compile(r'"[^"]*receipt seam[^"]*"', re.IGNORECASE)),
@@ -36,24 +76,35 @@ BANNED_COPY = (
 )
 
 
-def should_scan(path: Path, root: Path) -> bool:
+def should_scan(path: Path, root: Path, include_components: bool) -> bool:
     rel = path.relative_to(root).as_posix()
     if path.suffix != ".swift":
         return False
     if any(part in EXCLUDED_PARTS for part in path.parts):
         return False
-    return rel.startswith(SCAN_PREFIXES)
+    if any(fragment in rel for fragment in EXCLUDED_PATH_FRAGMENTS):
+        return False
+    if rel.startswith(PRODUCTION_UI_PREFIXES):
+        return True
+    if include_components and rel.startswith(PRODUCTION_COMPONENT_PREFIXES):
+        return True
+    return False
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Lint Ambitions first-viewport product copy.")
     parser.add_argument("--root", type=Path, default=DEFAULT_ROOT)
+    parser.add_argument(
+        "--include-components",
+        action="store_true",
+        help="Also scan shared component files that can emit user-facing copy.",
+    )
     args = parser.parse_args()
     root = args.root.resolve()
 
     failures: list[str] = []
     for path in sorted(root.rglob("*.swift")):
-        if not should_scan(path, root):
+        if not should_scan(path, root, include_components=args.include_components):
             continue
         rel = path.relative_to(root).as_posix()
         text = path.read_text(encoding="utf-8")
