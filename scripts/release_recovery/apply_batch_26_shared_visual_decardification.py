@@ -33,6 +33,72 @@ public struct ObjectStageSurface<Content: View>: View {
     }
 }
 
+/// Compact object-stage glance without AppCard/WidgetCard chrome.
+public struct ObjectStageGlance<Content: View>: View {
+    private let content: Content
+
+    public init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    public var body: some View {
+        content
+            .padding(.vertical, 10)
+            .padding(.horizontal, 12)
+            .background(AmbitionsIOS26SemanticTokens.Fill.quaternaryDark)
+            .overlay(alignment: .top) {
+                Rectangle()
+                    .fill(AmbitionsIOS26SemanticTokens.Separator.darkNonOpaque)
+                    .frame(height: 1)
+                    .accessibilityHidden(true)
+            }
+            .overlay(alignment: .bottom) {
+                Rectangle()
+                    .fill(AmbitionsIOS26SemanticTokens.Separator.darkNonOpaque.opacity(0.72))
+                    .frame(height: 1)
+                    .accessibilityHidden(true)
+            }
+    }
+}
+
+/// Dominant object-stage hero without HeroCard chrome.
+public struct ObjectStageHero<Content: View>: View {
+    private let content: Content
+
+    public init(@ViewBuilder content: () -> Content) {
+        self.content = content()
+    }
+
+    public var body: some View {
+        content
+            .padding(.vertical, 18)
+            .padding(.horizontal, 18)
+            .background(
+                LinearGradient(
+                    colors: [
+                        AmbitionsIOS26SemanticTokens.Graphite.elevated.opacity(0.92),
+                        AmbitionsIOS26SemanticTokens.Graphite.secondary.opacity(0.58),
+                        AmbitionsIOS26SemanticTokens.Graphite.base.opacity(0.18)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .overlay(alignment: .top) {
+                Rectangle()
+                    .fill(AmbitionsIOS26SemanticTokens.Separator.darkNonOpaque)
+                    .frame(height: 1)
+                    .accessibilityHidden(true)
+            }
+            .overlay(alignment: .leading) {
+                Rectangle()
+                    .fill(AmbitionsIOS26SemanticTokens.Accent.yellowDark.opacity(0.42))
+                    .frame(width: 2)
+                    .accessibilityHidden(true)
+            }
+    }
+}
+
 /// Instrument field surface for stateful product meaning.
 public struct InstrumentField<Content: View>: View {
     private let content: Content
@@ -98,7 +164,15 @@ def main() -> int:
         stale_alias_path.unlink()
 
     write(SURFACES, SWIFT)
-    require_markers(SURFACES, ["ObjectStageSurface", "InstrumentField", "TrustSeamDisclosure", "NativeGroupedControlSurface", "AmbitionsIOS26SemanticTokens"])
+    require_markers(SURFACES, [
+        "ObjectStageSurface",
+        "ObjectStageGlance",
+        "ObjectStageHero",
+        "InstrumentField",
+        "TrustSeamDisclosure",
+        "NativeGroupedControlSurface",
+        "AmbitionsIOS26SemanticTokens",
+    ])
     if Path(STALE_ALIASES).exists():
         raise RuntimeError("Stale ObjectStageSurfaceAliases.swift must not coexist with ObjectStageSurfaces.swift.")
     write_proof(
@@ -110,6 +184,7 @@ Status: applied.
 
 Scope:
 - Added root object-stage primitives that do not default to AppCard/WidgetCard/HeroCard chrome.
+- Added ObjectStageGlance and ObjectStageHero as real non-card primitives, not aliases to old card chrome.
 - Added InstrumentField for stateful product objects.
 - Added TrustSeamDisclosure for progressive Source / Proof / Receipt inspection.
 - Added NativeGroupedControlSurface for You/settings-style control flows.
