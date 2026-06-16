@@ -382,7 +382,8 @@ struct TimeLifeShapeField: View {
             sourceReceiptRow
             objectCanvas
             horizonControl
-            if Self.screenshotFocusesQuietReflow() == false {
+            if Self.screenshotFocusesQuietReflow() == false,
+               revealsPressure || confirmedReflowAction != nil || displayedRenderState == .reflowPreview {
                 reflowTrustSeam
             }
             continuityDock
@@ -410,7 +411,7 @@ struct TimeLifeShapeField: View {
                     .foregroundStyle(theme.colors.textPrimary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
                     .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.72 : 1)
-                Text(dynamicTypeSize.isAccessibilitySize ? "Source proof." : "Capacity, pressure, protected time, and local source state.")
+                Text(dynamicTypeSize.isAccessibilitySize ? "Capacity proof." : "Capacity, pressure, and protected time.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
@@ -431,7 +432,7 @@ struct TimeLifeShapeField: View {
         HorizonCapacityPrimitiveStage(
             role: .horizon,
             title: "Horizon",
-            subtitle: "Day, Week, and Month shape capacity without becoming root navigation.",
+            subtitle: "Day, Week, and Month change the field without changing root navigation.",
             statusLabel: selectedHorizon.title,
             accessibilityIdentifier: "time.life-shape-field.horizon-control"
         ) {
@@ -748,32 +749,38 @@ struct TimeLifeShapeField: View {
 
         return HorizonCapacityPrimitiveStage(
             role: .source,
-            title: "Source and receipt",
-            subtitle: displayedSourceDetail,
+            title: "Why this fits",
+            subtitle: "Context and proof stay inspectable when needed.",
             statusLabel: suite.field.receipt.ageLabel,
             accessibilityIdentifier: "time.life-shape-field.source-receipt"
         ) {
-            Group {
-                if dynamicTypeSize.isAccessibilitySize {
-                    ForEach(items) { item in
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .top, spacing: theme.spacing.sm) {
+                    ForEach(items.prefix(2)) { item in
                         horizonCapacitySourceLine(item)
                     }
-                } else {
-                    HStack(alignment: .top, spacing: theme.spacing.xs) {
-                        ForEach(items) { item in
-                            horizonCapacitySourceLine(item)
-                        }
+                }
+
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(items) { item in
+                        horizonCapacitySourceLine(item)
                     }
                 }
             }
 
-            HorizonCapacityPrimitiveLine(
-                role: .receipt,
-                title: suite.field.sourceState.whyThisLabel,
-                subtitle: suite.field.receipt.detail,
-                systemImage: "doc.text.magnifyingglass",
-                visualState: suite.field.receipt.visualState
-            )
+            Button {
+                confirmedReflowAction = .edit
+            } label: {
+                HorizonCapacityPrimitiveLine(
+                    role: .receipt,
+                    title: "Why this?",
+                    subtitle: "Open source, receipt, privacy, and reason detail.",
+                    systemImage: "doc.text.magnifyingglass",
+                    visualState: suite.field.receipt.visualState
+                )
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("time.life-shape-field.why-this")
         }
         .accessibilityElement(children: .combine)
     }
