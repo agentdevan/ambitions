@@ -243,6 +243,24 @@ struct TimeObjectStagePrimitiveContract: Equatable {
     )
 }
 
+private enum TimeLifeShapeZoomLevel: String, CaseIterable {
+    case field
+    case day
+    case week
+    case month
+    case list
+
+    var title: String {
+        switch self {
+        case .field: "Field"
+        case .day: "Day"
+        case .week: "Week"
+        case .month: "Month"
+        case .list: "List"
+        }
+    }
+}
+
 private struct TimeObjectStageInlineDatum: Identifiable {
     let id: String
     let title: String
@@ -258,6 +276,7 @@ struct TimeLifeShapeField: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     @State private var selectedHorizon: TimeHorizon
+    @State private var selectedZoomLevel: TimeLifeShapeZoomLevel = .field
     @State private var revealsPressure = false
     @State private var selectedReflowOptionID: String?
     @State private var confirmedReflowAction: TimeReflowDecisionActionKind?
@@ -375,6 +394,7 @@ struct TimeLifeShapeField: View {
 
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
+            lifeShapeZoomControl
             if Self.screenshotFocusesQuietReflow() {
                 reflowTrustSeam
             }
@@ -411,7 +431,7 @@ struct TimeLifeShapeField: View {
                     .foregroundStyle(theme.colors.textPrimary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
                     .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.72 : 1)
-                Text(dynamicTypeSize.isAccessibilitySize ? "Capacity proof." : "Capacity, pressure, and protected time.")
+                Text(dynamicTypeSize.isAccessibilitySize ? "Capacity proof." : "Field, day, week, month, and list stay in one LifeShape object.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
@@ -426,6 +446,18 @@ struct TimeLifeShapeField: View {
                 state: displayedRenderState.visualState
             )
         }
+    }
+
+    private var lifeShapeZoomControl: some View {
+        Picker("LifeShape zoom", selection: $selectedZoomLevel) {
+            ForEach(TimeLifeShapeZoomLevel.allCases, id: \.self) { level in
+                Text(level.title).tag(level)
+            }
+        }
+        .pickerStyle(.segmented)
+        .accessibilityIdentifier("time.life-shape-field.zoom-control")
+        .accessibilityLabel("LifeShape zoom")
+        .accessibilityHint("Moves between field, day, week, month, and list views without leaving Time.")
     }
 
     private var horizonControl: some View {
