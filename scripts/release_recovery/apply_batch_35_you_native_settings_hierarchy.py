@@ -3,19 +3,22 @@ from __future__ import annotations
 
 from report_reconstruction_support import read, require_markers, write, write_proof
 
+ROOT = "Native/Ambitions/App/AmbitionsRootView.swift"
 YOU = "Native/Ambitions/Features/You/YouScreen.swift"
 
 
 def main() -> int:
-    text = read(YOU)
-    text = text.replace('title: "trust-automation", .automationTrust', 'title: "privacy-automation", .automationTrust')
-    text = text.replace('"trust-automation": .automationTrust', '"privacy-automation": .automationTrust')
-    text = text.replace('"personal-runtime": .personalRuntime', '"personal-system": .personalRuntime')
-    text = text.replace('subtitle: "Control"', 'subtitle: "Profile and settings"')
-    text = text.replace('PersonalSystemCenterRootView(', 'PersonalSystemCenterRootView(')
-    write(YOU, text)
+    root = read(ROOT)
+    root = root.replace('subtitle: "Control",', 'subtitle: "Profile and settings",')
+    write(ROOT, root)
 
-    require_markers(YOU, ["Profile and settings", "privacy-automation", "personal-system", "receipts-history"])
+    you = read(YOU)
+    you = you.replace('"trust-automation": .automationTrust', '"privacy-automation": .automationTrust')
+    you = you.replace('"personal-runtime": .personalRuntime', '"personal-system": .personalRuntime')
+    write(YOU, you)
+
+    require_markers(ROOT, ["Profile and settings"])
+    require_markers(YOU, ["privacy-automation", "personal-system", "receipts-history"])
 
     write_proof(
         "REPORT_BATCH_35_YOU_NATIVE_SETTINGS_HIERARCHY.md",
@@ -25,7 +28,7 @@ def main() -> int:
 Status: applied.
 
 Scope:
-- Reframed You routing around profile/settings language.
+- Reframed the root shell subtitle for You around profile/settings language.
 - Moved screenshot detail identifiers away from runtime/manual language.
 - Preserved existing sheets and native grouped controls.
 
@@ -34,7 +37,8 @@ Native interaction law:
 - You must feel like profile, command center, privacy, appearance, defaults, permissions, and history.
 
 Validation:
-- Source markers prove profile/settings detail route language exists.
+- Root source marker proves the profile/settings shell subtitle exists.
+- You source markers prove updated detail-route language exists.
 - Xcode build remains the blocking gate.
 """,
     )
