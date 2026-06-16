@@ -151,30 +151,41 @@ struct PersonalSystemCenterRootView: View {
     }
 
     private var objectStageHeader: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-            Text(primitiveContract.productObject)
-                .font(theme.typography.micro)
-                .foregroundStyle(LivingTabContext.you.accent(in: theme))
+        HStack(alignment: .center, spacing: theme.spacing.md) {
+            ZStack {
+                Circle()
+                    .fill(AmbitionsIOS26SemanticTokens.Fill.tertiaryDark)
+                    .frame(width: dynamicTypeSize.isAccessibilitySize ? 54 : 48, height: dynamicTypeSize.isAccessibilitySize ? 54 : 48)
+                Image(systemName: "person.crop.circle.fill")
+                    .font(.system(size: dynamicTypeSize.isAccessibilitySize ? 30 : 27, weight: .semibold))
+                    .foregroundStyle(LivingTabContext.you.accent(in: theme))
+            }
+            .accessibilityHidden(true)
 
-            Text(profileProjection.hero.title)
-                .font(theme.typography.bodyEmphasized)
-                .foregroundStyle(theme.colors.textPrimary)
-                .accessibilityIdentifier("you.root-title")
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(profileProjection.hero.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "You" : profileProjection.hero.title)
+                    .font(dynamicTypeSize.isAccessibilitySize ? AmbitionsIOS26SemanticTokens.Typography.title3 : AmbitionsIOS26SemanticTokens.Typography.title2)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.78)
+                    .accessibilityIdentifier("you.root-title")
 
-            Text(profileProjection.hero.dominantTruth)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
-                .fixedSize(horizontal: false, vertical: true)
+                Text("Ambitions runs on this iPhone")
+                    .font(AmbitionsIOS26SemanticTokens.Typography.subheadline)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(2)
+
+                Text("User System Profile")
+                    .font(AmbitionsIOS26SemanticTokens.Typography.caption1.weight(.semibold))
+                    .foregroundStyle(LivingTabContext.you.accent(in: theme))
+                    .lineLimit(1)
+            }
         }
-        .padding(.leading, theme.spacing.sm)
-        .overlay(alignment: .leading) {
-            Rectangle()
-                .fill(LivingTabContext.you.accent(in: theme).opacity(0.55))
-                .frame(width: 2)
-        }
+        .padding(.vertical, theme.spacing.sm)
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("you.object-stage-header")
+        .accessibilityLabel("User System Profile")
+        .accessibilityValue("Ambitions runs on this iPhone.")
     }
 
     private var priorityGovernanceRows: [RootSectionRow] {
@@ -206,8 +217,8 @@ struct PersonalSystemCenterRootView: View {
             ),
             groupedSection(
                 id: "runtime-preferences",
-                title: "Runtime Preferences",
-                subtitle: "Execution controls stay explicit and local.",
+                title: "Preferences",
+                subtitle: "Capture, notifications, sessions, appearance, and privacy.",
                 rows: [
                     RootSectionRow(id: "notifications", sourceItemID: "notifications", title: "Notifications", detail: .notifications),
                     RootSectionRow(id: "capture-preferences", sourceItemID: "integrations", title: "Capture Preferences", detail: .capturePreferences),
@@ -218,7 +229,7 @@ struct PersonalSystemCenterRootView: View {
             ),
             groupedSection(
                 id: "history-trust",
-                title: "History & Trust",
+                title: "Privacy & Trust",
                 subtitle: "Receipts and controls remain connected to local evidence.",
                 rows: [
                     RootSectionRow(id: "receipts-history", sourceItemID: "receipts-history", title: "Receipts & History", detail: .receiptsHistory),
@@ -229,7 +240,7 @@ struct PersonalSystemCenterRootView: View {
             ),
             groupedSection(
                 id: "support-system",
-                title: "Support / System",
+                title: "App",
                 subtitle: "Assistance and app-system context in a single system band.",
                 rows: [
                     RootSectionRow(id: "help", sourceItemID: "help-support", title: "Help", detail: .support),
