@@ -18,6 +18,7 @@ import sys
 from typing import Iterable
 from urllib import error, request
 
+CONTROLLER_VERSION = "2026.06.16.1"
 ROOT = Path(__file__).resolve().parents[2]
 STATE_PATH = ROOT / "artifacts" / "release-recovery" / "autopilot-state.json"
 BATCH_DIR = ROOT / "scripts" / "release_recovery"
@@ -158,6 +159,7 @@ def main(argv: Iterable[str] = sys.argv[1:]) -> int:
         print("No pending recovery batches found.")
         return 0
 
+    print(f"Controller version: {CONTROLLER_VERSION}")
     print(f"Selected start batch: {start_batch}")
     exit_code = run_autopilot(args, start_batch)
     if exit_code != 0:
