@@ -181,6 +181,7 @@ struct CaptureScreen: View {
                 .padding(.horizontal, theme.spacing.lg)
                 .padding(.top, theme.spacing.md)
                 .padding(.bottom, theme.spacing.xl)
+                .flagshipCaptureComposerStage(state: captureLivingState, summary: promptSubtitle)
             }
             .scrollIndicators(.hidden)
 

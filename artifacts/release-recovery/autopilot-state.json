@@ -7,9 +7,10 @@
     "batch_05_capture_composer_copy",
     "batch_06_shell_chrome_copy",
     "batch_07_flagship_runtime_primitives",
-    "batch_08_today_flagship_adapter"
+    "batch_08_today_flagship_adapter",
+    "batch_09_capture_flagship_adapter"
   ],
-  "last_green_batch": "batch_08_today_flagship_adapter",
+  "last_green_batch": "batch_09_capture_flagship_adapter",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
