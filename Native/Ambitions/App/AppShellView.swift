@@ -847,7 +847,7 @@ private struct QuietCommandSheetView: View {
 
     private var fallbackSubtitle: String {
         switch overlay.presentationContext {
-        case .quickCapture: "Save what needs a place with a local receipt."
+        case .quickCapture: "Save what needs placement with a local receipt."
         case .createGoal: "Open a draft before anything becomes active."
         case .recall: "Inspect source-grounded context locally."
         case .neutral: "Choose a safe local action."
@@ -992,10 +992,10 @@ struct AppShellActivatedCaptureSeam: View {
     private var header: some View {
         HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("Capture Anything")
+                Text("Open Field")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("\(overlay.entrySource.displayTitle) - receipt before save")
+                Text("\(overlay.entrySource.displayTitle) - review before save")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
             }
@@ -1056,7 +1056,7 @@ struct AppShellActivatedCaptureSeam: View {
                     .frame(height: isFocused ? 1.5 : 1)
                     .accessibilityHidden(true)
             }
-            .accessibilityLabel("What needs a place?")
+            .accessibilityLabel("What needs placement?")
             .accessibilityHint("Type a thought. Save keeps it local and editable.")
             .accessibilityIdentifier("shell.activated-capture.input")
     }
@@ -1423,7 +1423,7 @@ struct AppShellActivatedCaptureSeam: View {
             CaptureRoutingPrimitiveLine(
                 role: .noSilentPlacement,
                 title: "No silent placement",
-                subtitle: "No cloud route and no route mutation happens without user-visible review."
+                subtitle: "No cloud handoff and no route mutation happens without user-visible review."
             )
         }
         .accessibilityElement(children: .combine)
@@ -1699,7 +1699,7 @@ private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
     var title: String {
         switch self {
         case .needsPlace:
-            "Needs a Place"
+            "Needs placement"
         case .readyToPlace:
             "Ready to Place"
         case .growIntoGoal:
@@ -1792,7 +1792,7 @@ private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
         let routeSource = isCorrected ? "Corrected locally" : "Read locally"
         switch self {
         case .needsPlace:
-            return "\(routeSource): save first as Needs a Place. No placement happens until you correct or open it."
+            return "\(routeSource): save first as Needs placement. No placement happens until you correct or open it."
         case .readyToPlace:
             return "\(routeSource): Ready to Place because the text looks concrete enough to review."
         case .growIntoGoal:
@@ -1809,13 +1809,13 @@ private enum ActivatedCaptureRouteState: String, CaseIterable, Identifiable {
 
         switch self {
         case .needsPlace:
-            return "Ambitions did not find clear time, action, or goal language, so it saves first as Needs a Place."
+            return "Ambitions did not find clear time, action, or goal language, so it saves first as Needs placement."
         case .readyToPlace:
             return "Time or action wording such as today, tomorrow, weekdays, or clock language makes the item ready to place after review."
         case .growIntoGoal:
             return "Goal-shaped language such as goal, ambition, launch, build, learn, career, or milestone routes this toward a goal draft after confirmation."
         case .heldForReview:
-            return "Short, question-shaped, or sensitive text is held for review so Capture does not move user data silently."
+            return "Short, question-shaped, or sensitive text is kept for review so Capture does not move user data silently."
         }
     }
 

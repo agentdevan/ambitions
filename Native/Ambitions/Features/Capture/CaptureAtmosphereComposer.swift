@@ -22,7 +22,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
     ) {
         let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
         isRouteRevealVisible = routePreview != nil && trimmedText.isEmpty == false
-        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to Place" : "Needs a Place")
+        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to Place" : "Needs placement")
         destinationLabel = routePreview?.destinationLabel ?? "Private intake"
         privacyLabel = routePreview?.privacyLabel ?? "Stored locally when saved"
 
@@ -36,7 +36,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             evidenceTitle = "Ready to Place"
             evidenceDetail = "Ambitions will suggest a route after you save."
         } else {
-            evidenceTitle = "Needs a Place"
+            evidenceTitle = "Needs placement"
             evidenceDetail = "Type one real thing; no routing pressure is added."
         }
 
@@ -443,7 +443,7 @@ private struct CaptureRouteRevealStrip: View {
                 "Place somewhere else: choose a route below.",
                 "Not a goal: no Goal is created unless you choose Goal.",
                 "Not now: Decide later keeps it out of Today.",
-                "Decide later: save to Needs a Place.",
+                "Decide later: save to Needs placement.",
                 "Discard: clear the composer before saving.",
                 "Archive: after saving, take it out of active review."
             ],
@@ -456,7 +456,7 @@ private struct CaptureRouteRevealStrip: View {
         choices: [
             CaptureDraftRouteChoice(id: "task", title: "Task", routeType: .task, isSelected: true),
             CaptureDraftRouteChoice(id: "goal", title: "Goal", routeType: .goal, isSelected: false),
-            CaptureDraftRouteChoice(id: "idea", title: "Needs a Place", routeType: .idea, isSelected: false)
+            CaptureDraftRouteChoice(id: "idea", title: "Needs placement", routeType: .idea, isSelected: false)
         ],
         accessibilityLabel: "Suggested capture route",
         accessibilityValue: "Task, Today, private item",

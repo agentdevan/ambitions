@@ -224,7 +224,7 @@ struct CaptureScreen: View {
 
     private var capturePrompt: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text("Capture Anything")
+            Text("Open Field")
                 .font(theme.typography.title)
                 .foregroundStyle(theme.colors.textPrimary)
                 .accessibilityAddTraits(.isHeader)
@@ -261,12 +261,12 @@ struct CaptureScreen: View {
         if draftIsEmpty {
             switch shellMode {
             case .timeSupport:
-                return "What needs a place? Type one real thing; placement appears only after input."
+                return "What needs placement? Type one real thing; placement appears only after input."
             case .topLevelCapture:
-                return "Where does this belong? Capture Anything is the first stop. Move onward to Today, Goals, Time, or You when it is ready."
+                return "Where does this belong? Open Field is the first stop. Move onward to Today, Goals, Time, or You when it is ready."
             }
         }
-        return "Needs a Place, Ready to Place, and Grow into Goal stay editable. Nothing becomes planned work until you save it."
+        return "Needs placement, Ready to Place, and Grow into Goal stay editable. Nothing becomes planned work until you save it."
     }
 
     @ViewBuilder
@@ -725,7 +725,7 @@ private enum CaptureFirstRunGuideItem: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .captureAnything: "Capture anything"
+        case .captureAnything: "Open field"
         case .startHere: "Start here"
         case .createGoal: "Create goal"
         case .shapeTime: "Shape time"
@@ -840,7 +840,7 @@ private extension CaptureScreenShellMode {
         case .timeSupport:
             "Absorb raw inputs into the current week without turning Capture into a holding bin, raw activity stream, or classification board."
         case .topLevelCapture:
-            "Capture Anything stays calm until a thought is ready to place, grow into a goal, or stay in Needs a Place."
+            "Open Field stays calm until a thought is ready to place, grow into a goal, or stay in Needs placement."
         }
     }
 }
@@ -864,7 +864,7 @@ private extension CaptureScreenShellMode {
     .preferredColorScheme(.dark)
 }
 
-#Preview("Capture Needs a Place") {
+#Preview("Capture Needs placement") {
     NavigationStack {
         CaptureScreen(shellMode: .topLevelCapture, viewModel: CapturePreviewFactory.needsPlace())
     }

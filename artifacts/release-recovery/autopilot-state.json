@@ -3,9 +3,10 @@
     "batch_01_guard_cleanup",
     "batch_02_copy_contract",
     "batch_03_object_stage_card_names",
-    "batch_04_today_meridian_copy"
+    "batch_04_today_meridian_copy",
+    "batch_05_capture_composer_copy"
   ],
-  "last_green_batch": "batch_04_today_meridian_copy",
+  "last_green_batch": "batch_05_capture_composer_copy",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
