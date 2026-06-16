@@ -25,7 +25,7 @@ concurrency:
 jobs:
   screenshots:
     runs-on: [self-hosted, Ambitions-XCode26]
-    timeout-minutes: 180
+    timeout-minutes: 240
 
     steps:
       - uses: actions/checkout@v4
@@ -65,6 +65,32 @@ jobs:
           scripts/ambitions-xcode-test-focused.sh \
             --batch "${SCREENSHOT_BATCH}" \
             --only-testing "AmbitionsUITests/AmbitionsUITests/testAFRI005ShellScreenshotBaselineCapturesCanonicalTabs" \
+            --results-dir ".codex/xcode-results" \
+            --logs-dir ".codex/xcode-logs" \
+            --summaries-dir ".codex/xcode-summaries"
+
+      - name: Capture Today screenshot matrix
+        id: today_shots
+        shell: bash
+        continue-on-error: false
+        run: |
+          set -euo pipefail
+          scripts/ambitions-xcode-test-focused.sh \
+            --batch "${SCREENSHOT_BATCH}" \
+            --only-testing "AmbitionsUITests/AmbitionsUITests/testAMB962TodayReconstructionScreenshotMatrix" \
+            --results-dir ".codex/xcode-results" \
+            --logs-dir ".codex/xcode-logs" \
+            --summaries-dir ".codex/xcode-summaries"
+
+      - name: Capture Goals screenshot matrix
+        id: goals_shots
+        shell: bash
+        continue-on-error: false
+        run: |
+          set -euo pipefail
+          scripts/ambitions-xcode-test-focused.sh \
+            --batch "${SCREENSHOT_BATCH}" \
+            --only-testing "AmbitionsUITests/AmbitionsUITests/testAMB963GoalsReconstructionScreenshotMatrix" \
             --results-dir ".codex/xcode-results" \
             --logs-dir ".codex/xcode-logs" \
             --summaries-dir ".codex/xcode-summaries"
@@ -121,12 +147,67 @@ jobs:
             --logs-dir ".codex/xcode-logs" \
             --summaries-dir ".codex/xcode-summaries"
 
+      - name: Build screenshot review index
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts/report-screenshots
+          SCREENSHOT_LIST="artifacts/report-screenshots/extracted-screenshots.txt"
+          RESULT_LIST="artifacts/report-screenshots/result-bundles.txt"
+          SUMMARY_LIST="artifacts/report-screenshots/summary-files.txt"
+          INDEX="artifacts/report-screenshots/SCREENSHOT_REVIEW_INDEX.md"
+          find ".codex/xcode-summaries/${SCREENSHOT_BATCH}" -path '*/extract/screenshots/*' -type f \( -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \) -print 2>/dev/null | sort > "$SCREENSHOT_LIST" || true
+          find ".codex/xcode-results/${SCREENSHOT_BATCH}" -maxdepth 5 -name '*.xcresult' -print 2>/dev/null | sort > "$RESULT_LIST" || true
+          find ".codex/xcode-summaries/${SCREENSHOT_BATCH}" -type f -maxdepth 6 -print 2>/dev/null | sort > "$SUMMARY_LIST" || true
+          {
+            echo "# Ambitions Screenshot Review Index"
+            echo
+            echo "Commit: $(git rev-parse HEAD)"
+            echo
+            echo "## Focused UI screenshot runs"
+            echo "- shell tabs: ${{ steps.shell_shots.outcome }}"
+            echo "- Today matrix: ${{ steps.today_shots.outcome }}"
+            echo "- Goals matrix: ${{ steps.goals_shots.outcome }}"
+            echo "- activated Capture: ${{ steps.capture_shots.outcome }}"
+            echo "- Time matrix: ${{ steps.time_shots.outcome }}"
+            echo "- Motion matrix: ${{ steps.motion_shots.outcome }}"
+            echo "- You matrix: ${{ steps.you_shots.outcome }}"
+            echo
+            echo "## Extracted screenshots"
+            if [[ -s "$SCREENSHOT_LIST" ]]; then
+              while IFS= read -r file; do
+                rel="${file#./}"
+                echo "- [$rel](../../$rel)"
+              done < "$SCREENSHOT_LIST"
+            else
+              echo "- No extracted PNG screenshots found. Install xcparse on the runner or inspect the raw .xcresult bundles listed below."
+            fi
+            echo
+            echo "## Result bundles"
+            if [[ -s "$RESULT_LIST" ]]; then
+              while IFS= read -r file; do
+                echo "- $file"
+              done < "$RESULT_LIST"
+            else
+              echo "- No result bundles found."
+            fi
+          } > "$INDEX"
+
       - name: Summarize screenshot proof
         if: always()
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p artifacts/report-screenshots
+          screenshot_count="0"
+          if [[ -f artifacts/report-screenshots/extracted-screenshots.txt ]]; then
+            screenshot_count="$(grep -c . artifacts/report-screenshots/extracted-screenshots.txt || true)"
+          fi
+          result_count="0"
+          if [[ -f artifacts/report-screenshots/result-bundles.txt ]]; then
+            result_count="$(grep -c . artifacts/report-screenshots/result-bundles.txt || true)"
+          fi
           cat > artifacts/report-screenshots/SUMMARY.md <<EOF
           # Ambitions Report Screenshot Proof
 
@@ -134,16 +215,20 @@ jobs:
 
           Focused UI screenshot runs:
           - shell tabs: ${{ steps.shell_shots.outcome }}
+          - Today matrix: ${{ steps.today_shots.outcome }}
+          - Goals matrix: ${{ steps.goals_shots.outcome }}
           - activated Capture: ${{ steps.capture_shots.outcome }}
           - Time matrix: ${{ steps.time_shots.outcome }}
           - Motion matrix: ${{ steps.motion_shots.outcome }}
           - You matrix: ${{ steps.you_shots.outcome }}
 
+          Artifact inventory:
+          - extracted screenshot files: ${screenshot_count}
+          - raw result bundles: ${result_count}
+
+          Start with artifacts/report-screenshots/SCREENSHOT_REVIEW_INDEX.md.
           Artifacts include extracted screenshots when xcparse is installed, raw xcresult bundles otherwise, and focused test logs/summaries. This workflow fails closed when a focused screenshot proof fails.
           EOF
-          find .codex/xcode-summaries/${SCREENSHOT_BATCH} -type f -maxdepth 4 -print 2>/dev/null | sort > artifacts/report-screenshots/summary-files.txt || true
-          find .codex/xcode-results/${SCREENSHOT_BATCH} -maxdepth 4 -name '*.xcresult' -print 2>/dev/null | sort > artifacts/report-screenshots/result-bundles.txt || true
-          find .codex/xcode-summaries/${SCREENSHOT_BATCH} -path '*/extract/screenshots/*' -type f -print 2>/dev/null | sort > artifacts/report-screenshots/extracted-screenshots.txt || true
 
       - name: Upload screenshot proof artifacts
         if: always()
