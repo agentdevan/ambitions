@@ -1,13 +1,5 @@
 #!/usr/bin/env python3
-"""Ambitions Release Recovery Batch 01.
-
-Deterministic guard cleanup for release-red defects proven by the runner:
-- Today hardcoded time, fake rows, undefined source-error copy, and CTA sprawl.
-- Capture route-reveal/local-receipt first-viewport language.
-- Motion and You inert production buttons.
-- Time implementation-copy leak.
-- You debug/internal labels.
-"""
+"""Ambitions Release Recovery Batch 01 guard cleanup."""
 
 from __future__ import annotations
 
@@ -23,11 +15,28 @@ def read(rel: str) -> str:
 
 
 def write(rel: str, text: str) -> None:
-    (ROOT / rel).write_text(encoding="utf-8")
+    (ROOT / rel).write_text(text, encoding="utf-8")
 
 
-def replace(text: str, old: str, new: str) -> str:
-    return text.replace(old, new)
+def ensure_foundation_import(text: str) -> str:
+    if "import Foundation" in text:
+        return text
+    if "import SwiftUI" in text:
+        return text.replace("import SwiftUI\n", "import SwiftUI\nimport Foundation\n", 1)
+    return "import Foundation\n" + text
+
+
+def replace_empty_button_action(text: str, notification_name: str) -> str:
+    return re.sub(
+        r"Button\s*\(\s*action:\s*\{\s*\}\s*\)\s*\{",
+        "Button {\n"
+        "            NotificationCenter.default.post(\n"
+        f"                name: Notification.Name(\"{notification_name}\"),\n"
+        "                object: nil\n"
+        "            )\n"
+        "        } label: {",
+        text,
+    )
 
 
 def replace_empty_button_label(text: str, notification_name: str) -> str:
@@ -47,21 +56,6 @@ def replace_empty_button_label(text: str, notification_name: str) -> str:
     return pattern.sub(repl, text)
 
 
-def replace_empty_button_action(text: str, notification_name: str) -> str:
-    pattern = re.compile(r"Button\s*\(\s*action:\s*\{\s*\}\s*\)\s*\{")
-    return pattern.sub(
-        (
-            "Button {\n"
-            "            NotificationCenter.default.post(\n"
-            f"                name: Notification.Name(\"{notification_name}\"),\n"
-            "                object: nil\n"
-            "            )\n"
-            "        } label: {"
-        ),
-        text,
-    )
-
-
 def replace_empty_title_button(text: str, notification_name: str) -> str:
     pattern = re.compile(r"Button\(([^\n]+?)\)\s*\{\s*\}")
 
@@ -79,29 +73,18 @@ def replace_empty_title_button(text: str, notification_name: str) -> str:
     return pattern.sub(repl, text)
 
 
-def ensure_foundation_import(text: str) -> str:
-    if "import Foundation" in text:
-        return text
-    if "import SwiftUI" in text:
-        return text.replace("import SwiftUI\n", "import SwiftUI\nimport Foundation\n", 1)
-    return "import Foundation\n" + text
-
-
 def patch_today_day_rail() -> None:
     rel = "Native/Ambitions/Features/Today/TodayDayRailPanels.swift"
     text = read(rel)
-    text = replace(text, 'Text("10:05 AM")', 'Text(Date.now, format: .dateTime.hour().minute())')
-    text = replace(text, 'Text("No step is required right now")', 'Text("This window is open")')
-    text = replace(text, 'title: "Capture what changed"', 'title: "Add what changed"')
-    text = replace(text, 'title: "Capture what changed", systemImage: "plus.bubble"', 'title: "Add what changed", systemImage: "plus.bubble"')
-    text = replace(text, 'TodayInlineAction(kind: .quickLog, title: "Capture what changed"', 'TodayInlineAction(kind: .quickLog, title: "Add what changed"')
-
+    text = text.replace('Text("10:05 AM")', 'Text(Date.now, format: .dateTime.hour().minute())')
+    text = text.replace('Text("No step is required right now")', 'Text("This window is open")')
+    text = text.replace('title: "Capture what changed"', 'title: "Add what changed"')
+    text = text.replace('TodayInlineAction(kind: .quickLog, title: "Capture what changed"', 'TodayInlineAction(kind: .quickLog, title: "Add what changed"')
     text = re.sub(
         r'''(?s)            TodayEmptyPathAction\(\n                id: "shape-time",.*?\n            \),\n            TodayEmptyPathAction\(\n                id: "review-source",.*?\n            \),\n            TodayEmptyPathAction\(\n                id: "close-today",.*?\n            \),\n''',
         "",
         text,
     )
-
     text = re.sub(
         r'''(?s)            if state\.rows\.isEmpty \{\n                upNextRow\(time: "12:15 PM", title: "Support queue", subtitle: "Internal", duration: "45 min"\)\n                upNextRow\(time: "3:00 PM", title: "Team sync", subtitle: "Collaboration", duration: "1h"\)\n                upNextRow\(time: "5:15 PM", title: "Review deck", subtitle: "Shallow work", duration: "45 min"\)\n            \} else \{''',
         '''            if state.rows.isEmpty {
@@ -112,15 +95,14 @@ def patch_today_day_rail() -> None:
             } else {''',
         text,
     )
-
-    text = replace(text, 'return "Source unavailable. Manual planning still works."', 'return "Ambitions can hold the space until a step fits."')
-    text = replace(text, '? "Source unavailable. Manual planning still works."', '? "Ambitions can hold the space until a step fits."')
-    text = replace(text, 'return "10:05 AM"', 'return "Now"')
-    text = replace(text, 'return "12:15 PM"', 'return "Next"')
-    text = replace(text, 'return "3:00 PM"', 'return "Next"')
-    text = replace(text, 'return "5:15 PM"', 'return "Later"')
-    text = replace(text, 'return index == 0 ? "Now" : "10:05 AM"', 'return index == 0 ? "Now" : "Current"')
-    text = replace(text, 'return index <= 1 ? "12:15 PM" : "3:00 PM"', 'return "Next"')
+    text = text.replace('return "Source unavailable. Manual planning still works."', 'return "Ambitions can hold the space until a step fits."')
+    text = text.replace('? "Source unavailable. Manual planning still works."', '? "Ambitions can hold the space until a step fits."')
+    text = text.replace('return "10:05 AM"', 'return "Now"')
+    text = text.replace('return "12:15 PM"', 'return "Next"')
+    text = text.replace('return "3:00 PM"', 'return "Next"')
+    text = text.replace('return "5:15 PM"', 'return "Later"')
+    text = text.replace('return index == 0 ? "Now" : "10:05 AM"', 'return index == 0 ? "Now" : "Current"')
+    text = text.replace('return index <= 1 ? "12:15 PM" : "3:00 PM"', 'return "Next"')
     write(rel, text)
 
 
@@ -136,14 +118,14 @@ def patch_capture_shell() -> None:
         'return "\\(routeSource): ambiguous text waits for manual review."': 'return "\\(routeSource): keep this for review."',
     }
     for old, new in replacements.items():
-        text = replace(text, old, new)
+        text = text.replace(old, new)
     write(rel, text)
 
 
 def patch_capture_primitives() -> None:
     rel = "Sources/Components/CaptureRoutingPrimitiveFamily.swift"
     text = read(rel)
-    text = replace(text, 'case .routeReveal: "Route reveal"', 'case .routeReveal: "Suggested path"')
+    text = text.replace('case .routeReveal: "Route reveal"', 'case .routeReveal: "Suggested path"')
     write(rel, text)
 
 
@@ -159,10 +141,10 @@ def patch_motion_actions() -> None:
 def patch_time_copy() -> None:
     rel = "Native/Ambitions/Features/Time/TimeLifeShapeField.swift"
     text = read(rel)
-    text = replace(text, "role: .noRootNavigation", "role: .continuity")
-    text = replace(text, 'title: "Not root navigation"', 'title: "Context stays together"')
-    text = replace(text, 'subtitle: "Day, Week, and Month stay inside Time relationship state."', 'subtitle: "Day, Week, and Month keep the current shape attached."')
-    text = replace(text, 'accessibilityIdentifier: "time.life-shape-field.continuity-dock.no-root-navigation"', 'accessibilityIdentifier: "time.life-shape-field.continuity-dock.context"')
+    text = text.replace("role: .noRootNavigation", "role: .continuity")
+    text = text.replace('title: "Not root navigation"', 'title: "Context stays together"')
+    text = text.replace('subtitle: "Day, Week, and Month stay inside Time relationship state."', 'subtitle: "Day, Week, and Month keep the current shape attached."')
+    text = text.replace('accessibilityIdentifier: "time.life-shape-field.continuity-dock.no-root-navigation"', 'accessibilityIdentifier: "time.life-shape-field.continuity-dock.context"')
     write(rel, text)
 
 
@@ -183,7 +165,7 @@ def patch_you_debug_copy() -> None:
         'valueLabel: "fixture-only"': 'valueLabel: "Example"',
     }
     for old, new in replacements.items():
-        text = replace(text, old, new)
+        text = text.replace(old, new)
     text = replace_empty_button_label(text, "AmbitionsYouPlaceholderActionSelected")
     write(rel, text)
 
