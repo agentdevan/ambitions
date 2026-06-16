@@ -178,7 +178,7 @@ struct TimeReflowBeforeAfterShapePreviewState: Sendable, Hashable {
         beforeLabel: "Before: current plan stays visible.",
         afterLabel: "After: no plan shape changes until you choose.",
         shapeChangeLabel: "Shape change: none yet.",
-        receiptPreviewLabel: "Receipt preview: no mutation recorded."
+        receiptPreviewLabel: "After review: no mutation recorded."
     )
 
     var accessibilityValue: String {
@@ -285,7 +285,7 @@ struct TimeReflowDecisionProjector: Sendable {
                     beforeLabel: "Before: current plan stays visible.",
                     afterLabel: "After: plan remains unchanged.",
                     shapeChangeLabel: "Shape change: none.",
-                    receiptPreviewLabel: "Receipt preview: no mutation recorded."
+                    receiptPreviewLabel: "After review: no mutation recorded."
                 ),
                 impactLabel: "No plan mutation",
                 sourceLabel: sourceLabel,
@@ -464,7 +464,7 @@ struct TimeReflowDecisionProjector: Sendable {
             beforeLabel: beforeLabel(for: suggestion),
             afterLabel: afterLabel(for: suggestion),
             shapeChangeLabel: "Shape change: \(suggestion.impactLabel).",
-            receiptPreviewLabel: "Receipt preview: \(receiptPreview.confirmationRequired)"
+            receiptPreviewLabel: "After review: \(receiptPreview.confirmationRequired)"
         )
     }
 
