@@ -1618,7 +1618,7 @@ struct AppShellActivatedCaptureSeam: View {
                 ActivatedCaptureComposerStateRow(
                     id: "shell.activated-capture.state.saving",
                     title: "Saving locally",
-                    detail: "The local receipt is being written.",
+                    detail: "The saved on this iPhone is being written.",
                     systemImage: "tray.and.arrow.down",
                     visualState: .selected
                 )

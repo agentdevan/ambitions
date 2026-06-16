@@ -267,7 +267,7 @@ struct CaptureScreen: View {
                 return "Where does this belong? Open Field is the first stop. Move onward to Today, Goals, Time, or You when it is ready."
             }
         }
-        return "Needs placement, Ready to Place, and Grow into Goal stay editable. Nothing becomes planned work until you save it."
+        return "Needs placement, Ready to Place, and Open as Goal stay editable. Nothing becomes planned work until you save it."
     }
 
     @ViewBuilder
@@ -573,7 +573,7 @@ struct CaptureScreen: View {
                         captureID: capture.id
                     )
                 } label: {
-                    Label("Grow into Goal", systemImage: "target")
+                    Label("Open as Goal", systemImage: "target")
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(canPromoteCaptureToGoal(capture) == false)
