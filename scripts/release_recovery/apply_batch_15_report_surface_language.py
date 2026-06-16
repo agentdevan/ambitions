@@ -3,7 +3,8 @@
 
 This batch removes the highest-friction internal/testing vocabulary from the
 top-level production surfaces without touching generated artifacts, tests, or
-runtime implementation internals.
+runtime implementation internals. Replacements are intentionally exact-copy
+or label-level only; Swift type and property identifiers must stay intact.
 """
 
 from __future__ import annotations
@@ -33,12 +34,10 @@ REPLACEMENTS = {
     "Receipt preview": "After saving",
     "No silent changes": "Review before changes",
 
-    # Time / shaping vocabulary
+    # Time / shaping vocabulary. These are exact visible-copy phrases only.
     "Review before reflow": "Preview changes",
     "Reflow preview": "Change preview",
     "reflow preview": "change preview",
-    "reflow": "reshape",
-    "Reflow": "Reshape",
     "Not root navigation": "Open from Time",
 
     # Motion / debug vocabulary
@@ -100,6 +99,16 @@ BLOCKED_VISIBLE_TERMS = [
     "correction-shaped ledger",
 ]
 
+FORBIDDEN_IDENTIFIER_REWRITES = [
+    "TimeReshapeDecisionState",
+    "TimeReshapeReceiptPreviewState",
+    "TimeReshapeDecisionOptionState",
+    "TimeReshapeDecisionActionKind",
+    "TimeReshapeSuggestionState",
+    "TimeRealityReshapeState",
+    "QuietReshapePrimitiveStage",
+]
+
 
 def rewrite_file(path: Path) -> bool:
     original = path.read_text(encoding="utf-8")
@@ -133,6 +142,9 @@ def main() -> int:
         for term in BLOCKED_VISIBLE_TERMS:
             if term in text:
                 failures.append(f"{rel}: {term}")
+        for term in FORBIDDEN_IDENTIFIER_REWRITES:
+            if term in text:
+                failures.append(f"{rel}: identifier rewrite {term}")
 
     proof = ROOT / "artifacts/release-recovery/REPORT_LANGUAGE_PASS.md"
     proof.parent.mkdir(parents=True, exist_ok=True)
@@ -141,6 +153,7 @@ def main() -> int:
         "Status: applied.\n\n"
         "Scope: Goals, Time, Motion, and You production surfaces.\n\n"
         "Removed or replaced user-facing instances of the highest-friction internal vocabulary called out by the testing report.\n\n"
+        "Identifier safety: broad Reflow/reshape identifier rewrites are forbidden.\n\n"
         "Changed files:\n"
         + "".join(f"- {item}\n" for item in changed)
         + "\nMissing optional targets:\n"
