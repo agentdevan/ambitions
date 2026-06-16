@@ -196,7 +196,7 @@ struct AmbitionsRootView: View {
                 case .captureInbox:
                     AppShellScaffold(
                         title: "Capture",
-                        subtitle: "Open Field",
+                        subtitle: "Composer",
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },

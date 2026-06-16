@@ -267,8 +267,7 @@ private struct AppShellHeaderRail: View {
                     .font(.system(size: theme.icon.smallSize, weight: .semibold))
                     .foregroundStyle(theme.colors.textPrimary)
                     .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
-                    .background(Circle().fill(theme.colors.surfaceOverlay))
-                    .overlay(Circle().stroke(theme.colors.strokeSubtle, lineWidth: 1))
+                    .contentShape(Circle())
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier(backButtonAccessibilityIdentifier ?? "shell.header.back-button")
@@ -334,7 +333,7 @@ private struct AppShellHeaderRail: View {
                         menuButton(entry.element)
                     }
                 } label: {
-                    Label("Actions", systemImage: "ellipsis.circle")
+                    Label("Actions", systemImage: "ellipsis")
                         .labelStyle(.iconOnly)
                         .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
                 }
@@ -419,22 +418,22 @@ private struct AppShellHeaderRail: View {
         if onBack == nil {
             return AnyShapeStyle(theme.colors.canvas.opacity(theme.mode == .dark ? 0.28 : 0.22))
         }
-        return AnyShapeStyle(theme.shell.headerMaterial)
+        return AnyShapeStyle(theme.colors.canvas.opacity(theme.mode == .dark ? 0.46 : 0.34))
     }
 
     private var headerShadowColor: Color {
-        onBack == nil ? .clear : theme.depth.resting.color
+        .clear
     }
 
     private var headerShadowRadius: CGFloat {
-        onBack == nil ? 0 : (theme.mode == .dark ? 14 : 10)
+        0
     }
 
     private var headerTopClearance: CGFloat {
         if onBack == nil {
             return dynamicTypeSize.isAccessibilitySize ? 10 : 6
         }
-        return theme.spacing.lg + theme.spacing.lg + theme.spacing.lg
+        return dynamicTypeSize.isAccessibilitySize ? theme.spacing.xl : theme.spacing.lg
     }
 
     private var headerBottomClearance: CGFloat {
