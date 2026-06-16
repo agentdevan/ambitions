@@ -533,7 +533,7 @@ struct AmbitionsDayRailView: View {
             Text(emptySourceLine)
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
-            Text("This window is open")
+            Text("This window can hold a step")
                 .font(theme.typography.title.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -641,7 +641,7 @@ struct AmbitionsDayRailView: View {
             }
 
             if state.rows.isEmpty {
-                Text("The next step appears here when it fits.")
+                Text("Start here appears when this window can hold it.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -878,7 +878,7 @@ struct AmbitionsDayRailView: View {
     private var emptySourceLine: String {
         state.mode == .empty
             ? "Ambitions can hold the space until a step fits."
-            : "User choice stays open."
+            : "Choice stays open."
     }
 
     private func receiptLabel(for heroStep: DayRailHeroStepState) -> String {
