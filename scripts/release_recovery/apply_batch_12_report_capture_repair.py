@@ -5,6 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 SHELL = ROOT / "Native/Ambitions/App/AppShellView.swift"
 CAPTURE = ROOT / "Native/Ambitions/Features/Capture/CaptureScreen.swift"
+ADAPTER = ROOT / "Native/Ambitions/Features/Capture/CaptureAtmosphereComposerFlagshipAdapter.swift"
 
 
 def replace_once(text: str, old: str, new: str) -> str:
@@ -32,13 +33,16 @@ def main() -> int:
     SHELL.write_text(text, encoding="utf-8")
 
     shell_text = SHELL.read_text(encoding="utf-8")
+    capture_text = CAPTURE.read_text(encoding="utf-8")
+    adapter_text = ADAPTER.read_text(encoding="utf-8")
     for marker in [".presentationDetents(overlay.kind == .memoryLens ? [.height(560), .large] : [.large])", "Write one thing. Save it here, place it when ready.", "shell.activated-capture.dictation-button", "Open as Goal"]:
         if marker not in shell_text:
             raise RuntimeError(f"capture repair marker missing: {marker}")
-    capture_text = CAPTURE.read_text(encoding="utf-8")
-    for marker in ["flagshipCaptureComposerStage", "capture.flagship.atmosphere-composer"]:
-        if marker not in capture_text and marker not in shell_text:
-            raise RuntimeError(f"capture stage marker missing: {marker}")
+    if "flagshipCaptureComposerStage" not in capture_text:
+        raise RuntimeError("capture screen is not wired to the flagship composer stage")
+    for marker in ["CaptureAtmosphereComposerFlagshipAdapter", "capture.flagship.atmosphere-composer", "accessibilityReduceMotion", "dynamicTypeSize"]:
+        if marker not in adapter_text:
+            raise RuntimeError(f"capture adapter marker missing: {marker}")
     print("Applied Batch 12 report Capture repair.")
     return 0
 
