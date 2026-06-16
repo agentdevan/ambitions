@@ -464,7 +464,7 @@ struct TimeLifeShapeField: View {
         HorizonCapacityPrimitiveStage(
             role: .horizon,
             title: "Horizon",
-            subtitle: "Day, Week, and Month change the field without changing root navigation.",
+            subtitle: "Today, tomorrow, week, month, and later stay inside the same field.",
             statusLabel: selectedHorizon.title,
             accessibilityIdentifier: "time.life-shape-field.horizon-control"
         ) {
@@ -475,7 +475,7 @@ struct TimeLifeShapeField: View {
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Time horizon")
+        .accessibilityLabel("Future pressure")
         .accessibilityValue(selectedHorizon.title)
     }
 
