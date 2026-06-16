@@ -23,9 +23,10 @@
     "batch_21_closure_outcome_mutation",
     "batch_22_time_lifeshape_field_object",
     "batch_23_motion_current_functional",
-    "batch_24_you_user_system_profile"
+    "batch_24_you_user_system_profile",
+    "batch_25_goals_constellation_atlas"
   ],
-  "last_green_batch": "batch_24_you_user_system_profile",
+  "last_green_batch": "batch_25_goals_constellation_atlas",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

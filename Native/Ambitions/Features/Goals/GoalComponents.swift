@@ -19,7 +19,7 @@ struct GoalsObjectStagePrimitiveContract: Equatable {
         ownerSurface: "Goals",
         productObject: "Constellation Atlas + Orbital Lens",
         stageName: "Constellation Atlas",
-        firstViewportStructure: "Full-bleed Constellation Atlas object stage with compact equal-weight life areas, Orbital Lens inspection, proof, source, receipt, and Today relationship lines.",
+        firstViewportStructure: "Full-bleed Constellation Atlas object stage with life-area nodes, Orbital Lens focus, Today connection, and progressive trust inspection.",
         replacesFirstViewportStructures: [
             "rounded equal-weight area band",
             "rounded Direction Atlas container",
@@ -27,7 +27,7 @@ struct GoalsObjectStagePrimitiveContract: Equatable {
             "rounded relationship field shell",
             "rounded Orbital Lens container",
             "rounded Atlas lane blocks",
-            "source/proof/trust blocks"
+            "progressive trust disclosures"
         ],
         sourceTrustLineOrder: [
             "life area",
@@ -37,7 +37,7 @@ struct GoalsObjectStagePrimitiveContract: Equatable {
             "Today link"
         ],
         accessibilityFallbacks: [
-            "VoiceOver names Your Direction before life area, Orbital Lens, source, proof, receipt, and Today relationships",
+            "VoiceOver names Your Direction before life area, Orbital Lens, life-area, thread, Today, and trust-disclosure relationships",
             "Dynamic Type preserves Constellation Atlas title, life area order, Orbital Lens order, and relationship lane order",
             "Reduce Motion keeps the Constellation Atlas relationship field static",
             "Increase Contrast strengthens object-stage rules and relationship markers",
@@ -191,7 +191,7 @@ struct GoalsConstellationAtlasStage: View {
                 Text("Your Direction")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Life areas, proof, source, and Today connection stay in one direction object.")
+                Text("Life areas and active threads stay connected to Today.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -204,10 +204,10 @@ struct GoalsConstellationAtlasStage: View {
     private var equalWeightLifeAreaBand: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                Text("Equal-weight areas")
+                Text("Life areas")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Manual order, same size")
+                Text("Choose the area to focus")
                     .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.textTertiary)
             }
@@ -234,9 +234,9 @@ struct GoalsConstellationAtlasStage: View {
                 .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Equal-weight Life Areas")
+        .accessibilityLabel("Life Areas")
         .accessibilityValue(overview.lifeAreas.equalWeightSummary)
-        .accessibilityHint("Areas use the same size and manual controls for visibility and order.")
+        .accessibilityHint("Choose an area to inspect its active thread.")
         .accessibilityIdentifier("goals.life-areas.equal-weight-band")
     }
 
