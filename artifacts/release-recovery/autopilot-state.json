@@ -29,9 +29,10 @@
     "batch_27_screenshot_acceptance_gate",
     "batch_28_motion_reentry_acceptance_copy",
     "batch_28_native_interaction_truth",
-    "batch_29_native_interaction_sweep"
+    "batch_29_native_interaction_sweep",
+    "batch_30_shell_drilldown_visual_reconstruction"
   ],
-  "last_green_batch": "batch_29_native_interaction_sweep",
+  "last_green_batch": "batch_30_shell_drilldown_visual_reconstruction",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

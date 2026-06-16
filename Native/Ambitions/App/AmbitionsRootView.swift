@@ -34,10 +34,12 @@ struct AmbitionsRootView: View {
 
         ZStack(alignment: .bottom) {
             shellTabView(theme: resolvedTheme)
-            shellDockBackdrop(theme: resolvedTheme)
-                .zIndex(2)
-            shellVisibleDock(theme: resolvedTheme)
-                .zIndex(3)
+            if navigation.hasRootNavigationChrome {
+                shellDockBackdrop(theme: resolvedTheme)
+                    .zIndex(2)
+                shellVisibleDock(theme: resolvedTheme)
+                    .zIndex(3)
+            }
             shellActivatedCaptureComposerSeam(theme: resolvedTheme)
             shellContinuityReceipt(theme: resolvedTheme)
         }
@@ -198,7 +200,7 @@ struct AmbitionsRootView: View {
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
-                        trailingButtons: shellUtilityButtons(for: .time)
+                        trailingButtons: []
                     ) {
                         CaptureScreen()
                     }
@@ -209,7 +211,7 @@ struct AmbitionsRootView: View {
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
-                        trailingButtons: shellUtilityButtons(for: .time)
+                        trailingButtons: []
                     ) {
                         HabitsScreen()
                     }
@@ -220,7 +222,7 @@ struct AmbitionsRootView: View {
                         posture: .shaping,
                         backButtonAccessibilityIdentifier: "shell.time.back-button",
                         onBack: { navigation.resetTimePath() },
-                        trailingButtons: shellUtilityButtons(for: .time)
+                        trailingButtons: []
                     ) {
                         WeeklyReviewScreen()
                     }
@@ -265,7 +267,7 @@ struct AmbitionsRootView: View {
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
                         onBack: { navigation.resetYouPath() },
-                        trailingButtons: shellUtilityButtons(for: .you)
+                        trailingButtons: []
                     ) {
                         InsightsMonthlyReviewScreen()
                     }
@@ -276,7 +278,7 @@ struct AmbitionsRootView: View {
                         posture: .reflection,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
                         onBack: { navigation.resetYouPath() },
-                        trailingButtons: shellUtilityButtons(for: .you)
+                        trailingButtons: []
                     ) {
                         InsightsHistoryScreen()
                     }
@@ -331,7 +333,7 @@ struct AmbitionsRootView: View {
                 }
             )
             .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
-            .offset(y: -shellDockClearance(theme: theme))
+            .offset(y: -shellCaptureComposerClearance(theme: theme))
             .transition(.opacity)
             .zIndex(2)
         }
@@ -385,6 +387,10 @@ struct AmbitionsRootView: View {
 
     private func shellDockClearance(theme: AmbitionTheme) -> CGFloat {
         dynamicTypeSize.isAccessibilitySize ? 184 : 164
+    }
+
+    private func shellCaptureComposerClearance(theme: AmbitionTheme) -> CGFloat {
+        navigation.hasRootNavigationChrome ? shellDockClearance(theme: theme) : (dynamicTypeSize.isAccessibilitySize ? 36 : 18)
     }
 
     private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {

@@ -65,6 +65,14 @@ final class AppNavigationModel {
     var isActivatedCaptureComposerVisible: Bool {
         activeOverlay?.isActivatedCaptureComposer == true
     }
+
+    var isInFocusedDrilldown: Bool {
+        goalsPath.isEmpty == false || timePath.isEmpty == false || youPath.isEmpty == false
+    }
+
+    var hasRootNavigationChrome: Bool {
+        isInFocusedDrilldown == false && isActivatedCaptureComposerVisible == false
+    }
     private var lastReselectedTopLevelTab: AppTab?
     private var lastTopLevelTabReselectionDate: Date?
 

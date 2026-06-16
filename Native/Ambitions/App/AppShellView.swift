@@ -194,7 +194,10 @@ struct AppShellScaffold<Content: View>: View {
     }
 
     private var bottomChromeClearance: CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 180 : 164
+        if onBack != nil {
+            return dynamicTypeSize.isAccessibilitySize ? 64 : 34
+        }
+        return dynamicTypeSize.isAccessibilitySize ? 180 : 164
     }
 
     private var topInsetSpacing: CGFloat {
