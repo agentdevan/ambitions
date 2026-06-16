@@ -577,9 +577,9 @@ private struct QuietCommandSheetView: View {
 
     private var quickCaptureComposer: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            TextField("Capture one thing…", text: $captureText, axis: .vertical)
+            TextField("Record what changed…", text: $captureText, axis: .vertical)
                 .focused($isCaptureFieldFocused)
-                .lineLimit(3...6)
+                .lineLimit(2...8)
                 .textFieldStyle(.plain)
                 .font(theme.typography.body)
                 .padding(theme.spacing.md)
@@ -597,7 +597,7 @@ private struct QuietCommandSheetView: View {
                 Button {
                     Task { await saveCapture() }
                 } label: {
-                    Label(saveButtonTitle, systemImage: "tray.and.arrow.down.fill")
+                    Label(saveButtonTitle, systemImage: "arrow.up.circle.fill")
                 }
                 .disabled(captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || saveState == .saving)
                 .buttonStyle(AmbitionPressableButtonStyle(state: saveButtonState))
@@ -1124,11 +1124,11 @@ struct AppShellActivatedCaptureSeam: View {
     @ViewBuilder
     private var saveButtonLabel: some View {
         if dynamicTypeSize.isAccessibilitySize {
-            Label(saveButtonTitle, systemImage: "tray.and.arrow.down.fill")
+            Label(saveButtonTitle, systemImage: "arrow.up.circle.fill")
                 .labelStyle(.titleAndIcon)
                 .frame(minHeight: 42)
         } else {
-            Label(saveButtonTitle, systemImage: "tray.and.arrow.down.fill")
+            Label(saveButtonTitle, systemImage: "arrow.up.circle.fill")
                 .labelStyle(.iconOnly)
                 .frame(minWidth: 42, minHeight: 42)
         }
