@@ -37,9 +37,10 @@
     "batch_34_atlas_threads",
     "batch_35_you_native_settings_hierarchy",
     "batch_36_flagship_reconstruction_primitives",
-    "batch_37_shell_native_chrome_rebuild"
+    "batch_37_shell_native_chrome_rebuild",
+    "batch_38_composer_control_rail"
   ],
-  "last_green_batch": "batch_37_shell_native_chrome_rebuild",
+  "last_green_batch": "batch_38_composer_control_rail",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

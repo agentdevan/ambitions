@@ -576,7 +576,7 @@ private struct QuietCommandSheetView: View {
 
     private var quickCaptureComposer: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            TextField("Record what changed…", text: $captureText, axis: .vertical)
+            TextField("Capture what changed…", text: $captureText, axis: .vertical)
                 .focused($isCaptureFieldFocused)
                 .lineLimit(2...8)
                 .textFieldStyle(.plain)
@@ -591,6 +591,12 @@ private struct QuietCommandSheetView: View {
                         .stroke(theme.colors.strokeSubtle, lineWidth: 1)
                 )
                 .accessibilityIdentifier("shell.overlay.quick-capture-field")
+
+            quickCaptureControlRail
+                .accessibilityIdentifier("shell.overlay.quick-capture.control-rail")
+
+            composerExpansionRail
+                .accessibilityIdentifier("shell.overlay.quick-capture.expansion-rail")
 
             HStack(spacing: theme.spacing.sm) {
                 Button {
@@ -611,6 +617,63 @@ private struct QuietCommandSheetView: View {
 
             statusMessage
         }
+    }
+
+    private var quickCaptureControlRail: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: theme.spacing.xs) {
+                quickCaptureControlChip("Camera", systemImage: "camera")
+                quickCaptureControlChip("Photos", systemImage: "photo.on.rectangle")
+                quickCaptureControlChip("Files", systemImage: "folder")
+                quickCaptureControlChip("Scan", systemImage: "doc.viewfinder")
+                quickCaptureControlChip("Date", systemImage: "calendar")
+                quickCaptureControlChip("Reminder", systemImage: "bell")
+                quickCaptureControlChip("Repeat", systemImage: "repeat")
+                quickCaptureControlChip("Location", systemImage: "location")
+                quickCaptureControlChip("Goal", systemImage: "target")
+                quickCaptureControlChip("Flag", systemImage: "flag")
+            }
+            .padding(.vertical, theme.spacing.xxxs)
+        }
+        .accessibilityLabel("Composer controls for camera, photos, files, scan, date, reminder, repeat, location, goal, and flag.")
+    }
+
+    private func quickCaptureControlChip(_ title: String, systemImage: String) -> some View {
+        Label(title, systemImage: systemImage)
+            .font(theme.typography.micro.weight(.semibold))
+            .foregroundStyle(theme.colors.textSecondary)
+            .padding(.horizontal, theme.spacing.xs)
+            .padding(.vertical, theme.spacing.xxs)
+            .background(Capsule(style: .continuous).fill(theme.colors.surfaceOverlay.opacity(0.82)))
+            .overlay(Capsule(style: .continuous).stroke(theme.colors.strokeSubtle.opacity(0.70), lineWidth: 1))
+            .accessibilityElement(children: .combine)
+    }
+
+    private var composerExpansionRail: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+            Text("Expand when this needs more shape")
+                .font(theme.typography.micro.weight(.semibold))
+                .foregroundStyle(theme.colors.textTertiary)
+
+            HStack(spacing: theme.spacing.xs) {
+                composerExpansionPill("Full Composer")
+                composerExpansionPill("Place later")
+                composerExpansionPill("Protect time")
+                composerExpansionPill("Add proof")
+            }
+        }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Expansion controls for full composer, place later, protect time, and add proof.")
+    }
+
+    private func composerExpansionPill(_ title: String) -> some View {
+        Text(title)
+            .font(theme.typography.micro.weight(.semibold))
+            .foregroundStyle(theme.colors.textSecondary)
+            .padding(.horizontal, theme.spacing.xs)
+            .padding(.vertical, theme.spacing.xxxs)
+            .background(Capsule(style: .continuous).fill(theme.colors.surfacePrimary.opacity(0.72)))
+            .overlay(Capsule(style: .continuous).stroke(theme.colors.strokeSubtle.opacity(0.50), lineWidth: 1))
     }
 
     @ViewBuilder
