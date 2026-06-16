@@ -84,7 +84,7 @@ struct TodayActionClosureDiamondState: Equatable, Sendable {
         title: "Closure diamond",
         summary: "Choose the honest outcome, then Ambitions shows the consequence before anything changes.",
         centerLabel: "Close the loop",
-        noSilentChangeLabel: "No silent changes",
+        noSilentChangeLabel: "Changes stay reviewable",
         facets: [
             TodayActionClosureDiamondFacetState(
                 id: "diamond.outcome",
@@ -131,13 +131,13 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
         title: String,
         context: String,
         target: TodayActionTarget,
-        startHereReceiptLabel: String = "Start Here receipt seam",
+        startHereReceiptLabel: String = "Start Here review history",
         privacyLabel: String = "Stored on this device"
     ) -> TodayActionClosureSheetState {
         TodayActionClosureSheetState(
             id: "today.action-closure.\(target.goalID ?? target.draftID ?? "today").\(target.stepID ?? "step")",
             objectTitle: title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Today step" : title,
-            startHereReceiptLabel: startHereReceiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Start Here receipt seam" : startHereReceiptLabel,
+            startHereReceiptLabel: startHereReceiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Start Here review history" : startHereReceiptLabel,
             originalContext: context.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "From Today" : context,
             prompt: "What happened with this step?",
             privacyLabel: privacyLabel,

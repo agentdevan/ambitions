@@ -26,9 +26,9 @@ struct CaptureObjectStagePrimitiveContract: Equatable {
         screenshotIdentifier: "CaptureObjectStage",
         sourceRouteOrder: [
             "open field",
-            "route reveal",
+            "suggested path",
             "placement shelf",
-            "receipt seam",
+            "review history",
             "continuity lines"
         ],
         replacesStructures: [

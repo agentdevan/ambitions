@@ -81,7 +81,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
         sourceCandidateID: String?,
         contextFingerprint: String,
         recordedAt: String,
-        noSilentChangesLabel: String = "No silent changes"
+        noSilentChangesLabel: String = "Changes stay reviewable"
     ) {
         self.id = "today.step-replacement.\(sourceStepID)"
         self.title = title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Show another" : title
@@ -102,7 +102,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
         self.sourceCandidateID = trimmedCandidateID?.isEmpty == true ? nil : trimmedCandidateID
         self.contextFingerprint = contextFingerprint.trimmingCharacters(in: .whitespacesAndNewlines)
         self.recordedAt = recordedAt.trimmingCharacters(in: .whitespacesAndNewlines)
-        self.noSilentChangesLabel = noSilentChangesLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "No silent changes" : noSilentChangesLabel
+        self.noSilentChangesLabel = noSilentChangesLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Changes stay reviewable" : noSilentChangesLabel
     }
 
     static func make(

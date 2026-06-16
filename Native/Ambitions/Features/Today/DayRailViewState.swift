@@ -335,8 +335,8 @@ extension RealityMeridianContinuityProjectionState {
         recoveryLabel: String
     ) -> RealityMeridianContinuityProjectionState {
         let sourceRecordLabel = heroStep?.sourceRecordLabel ?? "Source record stays local"
-        let receiptLabel = heroStep?.receiptLabel ?? "Start here receipt seam"
-        let replayTraceLabel = heroStep?.replayTraceLabel ?? "Replay trace stays inspectable"
+        let receiptLabel = heroStep?.receiptLabel ?? "Start here review history"
+        let replayTraceLabel = heroStep?.replayTraceLabel ?? "Review path stays inspectable"
         let youInspectionLabel = "You / What Ambitions knows: \(sourceRecordLabel). \(replayTraceLabel)."
         let provenanceLabel = heroStep?.sourceQualityLabel
             ?? dayRail.contextLabels.first?.label

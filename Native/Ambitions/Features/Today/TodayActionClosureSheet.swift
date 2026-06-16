@@ -242,7 +242,7 @@ struct TodayActionClosureSheet: View {
             eyebrow: "Receipt preview",
             title: state.receiptPreviewTitle,
             subtitle: receiptPreviewText,
-            statusLabel: selectedOutcome.map { state.proofReceiptPeek(for: $0).noSilentChangesLabel } ?? "No silent changes",
+            statusLabel: selectedOutcome.map { state.proofReceiptPeek(for: $0).noSilentChangesLabel } ?? "Changes stay reviewable",
             accessibilityIdentifier: "TodayActionClosureReceiptPreview"
         ) {
             Text(state.receiptPreviewTitle)

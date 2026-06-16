@@ -93,7 +93,7 @@ public enum FE04PrimitiveRole: String, CaseIterable, Identifiable, Sendable {
         case .lifeShape:
             return "Capacity and protected-time field."
         case .atmosphereComposer:
-            return "Capture-first input and route reveal surface."
+            return "Capture-first input and suggested path surface."
         case .constellationLane:
             return "Goals lane for threads, proof, and direction."
         case .userSystemProfile:

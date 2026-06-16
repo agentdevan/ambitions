@@ -3152,7 +3152,7 @@ private extension RepositoryBackedYouService {
             YouLifeContextSection(
                 id: "life-context-replay-receipts",
                 title: "Replay & Receipts",
-                subtitle: "The replay fingerprint and receipt seam stay visible.",
+                subtitle: "The replay fingerprint and review history stay visible.",
                 factRows: makeReplayAndReceiptRows(ledger: ledger, basePath: basePath)
             )
         ]

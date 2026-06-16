@@ -30,7 +30,7 @@ public struct ProofRelationshipTracePrimitiveFamilyContract: Equatable, Sendable
             "relationship",
             "proof",
             "receipt",
-            "replay trace",
+            "review path",
             "user inspection"
         ],
         forbiddenPatterns: [
@@ -41,10 +41,10 @@ public struct ProofRelationshipTracePrimitiveFamilyContract: Equatable, Sendable
             "relationship without source"
         ],
         accessibilityFallbacks: [
-            "Dynamic Type stacks source, relationship, proof, receipt, replay trace, and inspection rows without changing order.",
+            "Dynamic Type stacks source, relationship, proof, receipt, review path, and inspection rows without changing order.",
             "Reduce Motion keeps trace state in static symbols and labels rather than animated-only marks.",
             "Differentiate Without Color pairs every proof or relationship state with explicit source, proof, receipt, or replay text.",
-            "VoiceOver reads source, relationship, proof, receipt, replay trace, and user inspection before any action can mutate state."
+            "VoiceOver reads source, relationship, proof, receipt, review path, and user inspection before any action can mutate state."
         ]
     )
 }
@@ -65,7 +65,7 @@ public enum ProofRelationshipTracePrimitiveRole: String, CaseIterable, Sendable,
         case .relationship: "Relationship"
         case .proof: "Proof"
         case .receipt: "Receipt"
-        case .replayTrace: "Replay trace"
+        case .replayTrace: "Review path"
         case .inspection: "Inspection"
         }
     }
@@ -106,7 +106,7 @@ public enum ProofRelationshipTracePrimitiveRole: String, CaseIterable, Sendable,
         case .relationship: "relationship"
         case .proof: "proof"
         case .receipt: "receipt"
-        case .replayTrace: "replay trace"
+        case .replayTrace: "review path"
         case .inspection: "inspection"
         }
     }

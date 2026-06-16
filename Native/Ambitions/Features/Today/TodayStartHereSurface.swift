@@ -48,7 +48,7 @@ struct StartHereSurface: View {
             .accessibilityElement(children: .combine)
             .accessibilityLabel(accessibilityLabel)
             .accessibilityValue(accessibilityValue)
-            .accessibilityHint("Opens Step Detail. Start now opens Step Session. The receipt seam explains what will stay reviewable.")
+            .accessibilityHint("Opens Step Detail. Start now opens Step Session. The review history explains what will stay reviewable.")
             .accessibilityIdentifier(privacy.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayStartHereSurface")
 
             footer

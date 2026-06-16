@@ -804,7 +804,7 @@ private struct TimePressureRecoveryReviewSurface: View {
 
                 HStack(spacing: theme.spacing.xs) {
                     TagPill("Explain first", icon: "text.magnifyingglass", state: review.visualState)
-                    TagPill("No silent changes", icon: "hand.tap", state: .warning)
+                    TagPill("Changes stay reviewable", icon: "hand.tap", state: .warning)
                     TagPill("Still counts", icon: "checkmark.seal", state: .success)
                 }
                 .fixedSize(horizontal: false, vertical: true)

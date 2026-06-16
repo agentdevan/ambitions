@@ -27,7 +27,7 @@ extension AmbitionsDayRailViewState {
             whySummary: hero.explanation?.summary ?? hero.subtitle,
             sourceQualityLabel: "Source-backed by the current Time shape",
             becauseLine: "Because \(hero.explanation?.summary ?? hero.subtitle)",
-            receiptLabel: "Start Here receipt seam",
+            receiptLabel: "Start Here review history",
             proofLabel: "No change has been made yet.",
             sourceRecordLabel: DayRailHeroStepState.sourceRecordLabel(for: [source]),
             replayTraceLabel: DayRailHeroStepState.replayTraceLabel(localOnly: true),
@@ -76,7 +76,7 @@ extension AmbitionsDayRailViewState {
         )
         let proofSlot = DayRailProofSlotState(
             title: "Proof saved",
-            subtitle: "Start Here keeps the receipt seam visible before anything changes.",
+            subtitle: "Start Here keeps the review history visible before anything changes.",
             noSilentChanges: true,
             reservedForReceiptPeek: false
         )
@@ -128,7 +128,7 @@ extension DayRailHeroStepState {
     }
 
     static func replayTraceLabel(localOnly: Bool) -> String {
-        localOnly ? "Replay trace stays inspectable" : "Replay trace needs proof"
+        localOnly ? "Review path stays inspectable" : "Review path needs proof"
     }
 
     static func replayInspectionLabel(sourceRecordLabel: String, replayTraceLabel: String) -> String {
@@ -338,7 +338,7 @@ extension DayRailHeroStepState {
         TrustReceiptLayerItem(
             id: id,
             kind: .needsReview,
-            title: "Start Here receipt seam",
+            title: "Start Here review history",
             summary: "No change has been made yet.",
             sourceLabel: sourceLabel,
             freshness: freshness,
@@ -424,7 +424,7 @@ extension DayRailContinuityState {
             summary: "Start Here emerges from the active Meridian node; Now, Next, Later, closure, proof, and pressure stay connected.",
             markers: markers,
             pressureLabel: pressureLabel,
-            noSilentChangesLabel: proofSlot.noSilentChanges ? "No silent changes." : "Review before changing."
+            noSilentChangesLabel: proofSlot.noSilentChanges ? "Changes stay reviewable." : "Review before changing."
         )
     }
 }

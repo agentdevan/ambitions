@@ -813,7 +813,7 @@ public enum AFI12AccessibilityStateProof {
         primaryObject: "Atmosphere Composer",
         voiceOverSummary: "Capture. Atmosphere Composer names input purpose, text or voice action, route result, uncertainty, and correction path.",
         dynamicTypeFallback: "The composer, add action, route result, and correction choices stay visible before ambient detail.",
-        reduceMotionFallback: "Route reveal becomes static Needs a Place, Ready to Place, or Grow into Goal state text.",
+        reduceMotionFallback: "Suggested path becomes static Needs a Place, Ready to Place, or Grow into Goal state text.",
         nonColorStateSupport: "Route confidence, private item, needs-place, and correction states require labels and visible controls.",
         trustReceiptPath: "Capture placement and correction receipts show what changed, source, and undo or review path.",
         manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, keyboard, contrast, and motor review remain required."

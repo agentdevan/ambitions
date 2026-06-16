@@ -435,7 +435,7 @@ private struct CaptureRouteRevealStrip: View {
         privacyLabel: "Private item",
         localSourceLabel: "Local source: typed in Capture",
         correctionLabel: "Correction: change the route before saving",
-        receiptSeamLabel: "Receipt seam: save creates a local capture receipt",
+        receiptSeamLabel: "Review history: save creates a local capture receipt",
         resolverFoldTitle: "Resolver Fold",
         resolverWhyLabel: "What Ambitions thinks: Task based on local text only.",
         correctionReceiptLabel: "Correction receipt: saved route changes are recorded locally and stay reviewable.",

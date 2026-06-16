@@ -117,7 +117,7 @@ public enum CaptureRoutingPrimitiveRole: String, CaseIterable, Sendable, Identif
 
     public var accessibilityRole: String {
         switch self {
-        case .routeReveal: "capture route reveal"
+        case .routeReveal: "capture suggested path"
         case .placementReview: "capture placement review"
         case .routeOption: "capture route option"
         case .correction: "capture route correction"

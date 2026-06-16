@@ -212,7 +212,7 @@ struct TimeReflowDecisionProjector: Sendable {
         receiptPreview: TimeReflowReceiptPreviewState
     ) -> TimeReflowDecisionState {
         let sourceLabel = "Based on Time"
-        let trustLabel = "No silent changes"
+        let trustLabel = "Changes stay reviewable"
         let options = preferredOptions(
             from: reflow.suggestions,
             reasonLabel: reflow.reasonDetail,

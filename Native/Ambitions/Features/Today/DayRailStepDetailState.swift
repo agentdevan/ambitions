@@ -112,7 +112,7 @@ extension DayRailStepDetailState {
     }
 
     static var receiptBoundaryLabel: String {
-        "No silent changes."
+        "Changes stay reviewable."
     }
 
     var visibleCopy: String {

@@ -389,7 +389,7 @@ struct TimeLifeSuiteState: Sendable {
             ],
             sourceState: LifeShapeSourceState(title: calendarBoundaryLabel, detail: manualFallbackLabel, whyThisLabel: trustLabel, privacyLabel: "Local Time state; no silent calendar write.", visualState: .selected),
             reflowProposal: LifeShapeReflowProposal(title: "Reflow stays optional", detail: "Time can suggest relief only after capacity is clear.", actionTitle: "Review shape", visualState: fit.visualState),
-            receipt: LifeShapeReceipt(title: "No silent changes", detail: trustLabel, ageLabel: "Current", visualState: .selected),
+            receipt: LifeShapeReceipt(title: "Changes stay reviewable", detail: trustLabel, ageLabel: "Current", visualState: .selected),
             continuityDockItems: ["Open field", "Protect pocket", "Review receipt"]
         )
     }

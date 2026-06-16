@@ -138,7 +138,7 @@ private extension TodayExecutionProjector {
                 sourceSummary: sourceSummary
             ),
             becauseLine: "Because \(heroBecause)",
-            receiptLabel: "Start Here receipt seam",
+            receiptLabel: "Start Here review history",
             proofLabel: "No change has been made yet.",
             sourceRecordLabel: sourceRecordLabel,
             replayTraceLabel: replayTraceLabel,
@@ -189,7 +189,7 @@ private extension TodayExecutionProjector {
         let proofSlot = DayRailProofSlotState(
             title: "Proof saved",
             subtitle: input.nowState.evidenceSummaries.isEmpty
-                ? "Start Here keeps the receipt seam visible before anything changes."
+                ? "Start Here keeps the review history visible before anything changes."
                 : "\(input.nowState.evidenceSummaries.count) local evidence item\(input.nowState.evidenceSummaries.count == 1 ? "" : "s") counted.",
             noSilentChanges: true,
             reservedForReceiptPeek: false
@@ -330,11 +330,11 @@ private extension TodayExecutionProjector {
     ) -> String {
         switch sourceFreshness {
         case .blocked:
-            return "Replay trace blocked safely"
+            return "Review path blocked safely"
         case .denied, .unavailable:
-            return "Replay trace unavailable"
+            return "Review path unavailable"
         case .partial:
-            return input.nowState.blockersWaiting.waitingCount > 0 ? "Replay trace waits on review" : "Replay trace needs proof"
+            return input.nowState.blockersWaiting.waitingCount > 0 ? "Review path waits on review" : "Review path needs proof"
         case .offline, .localOnly, .fresh, .stale:
             return DayRailHeroStepState.replayTraceLabel(localOnly: input.nowState.localOnly)
         }
