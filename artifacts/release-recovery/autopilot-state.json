@@ -34,9 +34,10 @@
     "batch_31_composer_choreography",
     "batch_32_today_live_meridian_reconstruction",
     "batch_33_time_lifeshape_zoom_reconstruction",
-    "batch_34_atlas_threads"
+    "batch_34_atlas_threads",
+    "batch_35_you_native_settings_hierarchy"
   ],
-  "last_green_batch": "batch_34_atlas_threads",
+  "last_green_batch": "batch_35_you_native_settings_hierarchy",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

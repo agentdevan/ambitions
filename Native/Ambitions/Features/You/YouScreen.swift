@@ -152,8 +152,8 @@ struct YouScreen: View {
         }
 
         return [
-            "trust-automation": .automationTrust,
-            "personal-runtime": .personalRuntime,
+            "privacy-automation": .automationTrust,
+            "personal-system": .personalRuntime,
             "receipts-history": .receiptsHistory
         ][rawDetail.lowercased()]
     }

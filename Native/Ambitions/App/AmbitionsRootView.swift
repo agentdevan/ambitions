@@ -252,7 +252,7 @@ struct AmbitionsRootView: View {
         NavigationStack(path: $navigation.youPath) {
             AppShellScaffold(
                 title: "You",
-                subtitle: "Control",
+                subtitle: "Profile and settings",
                 posture: .utility,
                 trailingButtons: shellUtilityButtons(for: .you)
             ) {
