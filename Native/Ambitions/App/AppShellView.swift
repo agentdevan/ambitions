@@ -506,7 +506,7 @@ private struct QuietCommandSheetView: View {
             commandContent
         }
         .padding(theme.spacing.xl)
-        .presentationDetents(overlay.kind == .memoryLens ? [.height(560), .large] : [.medium, .large])
+        .presentationDetents(overlay.kind == .memoryLens ? [.height(560), .large] : [.large])
         .presentationDragIndicator(.hidden)
         .background(theme.colors.canvas)
         .onAppear {
@@ -600,7 +600,7 @@ private struct QuietCommandSheetView: View {
                 .buttonStyle(AmbitionPressableButtonStyle(state: saveButtonState))
                 .accessibilityIdentifier("shell.overlay.save-capture-button")
 
-                Button("Make Goal") {
+                Button("Open as Goal") {
                     onDismiss()
                     appContainer?.commandRouter.presentCreateGoal(source: overlay.entrySource, seedText: captureText, captureID: overlay.captureID)
                 }
@@ -848,7 +848,7 @@ private struct QuietCommandSheetView: View {
 
     private var fallbackSubtitle: String {
         switch overlay.presentationContext {
-        case .quickCapture: "Save what needs placement with a local receipt."
+        case .quickCapture: "Write one thing. Save it here, place it when ready."
         case .createGoal: "Open a draft before anything becomes active."
         case .recall: "Inspect source-grounded context locally."
         case .neutral: "Choose a safe local action."
@@ -915,7 +915,7 @@ private struct QuietCommandSheetView: View {
                 CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource)),
                 now: .now
             )
-            saveState = .saved("Saved to Capture. Nothing else changed.")
+            saveState = .saved("Saved. Place it when ready.")
             captureText = ""
         } catch {
             saveState = .error(error.localizedDescription)

@@ -10,9 +10,10 @@
     "batch_08_today_flagship_adapter",
     "batch_09_capture_flagship_adapter",
     "batch_10_shell_flagship_proof",
-    "batch_11_flagship_proof"
+    "batch_11_flagship_proof",
+    "batch_12_report_capture_repair"
   ],
-  "last_green_batch": "batch_11_flagship_proof",
+  "last_green_batch": "batch_12_report_capture_repair",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
