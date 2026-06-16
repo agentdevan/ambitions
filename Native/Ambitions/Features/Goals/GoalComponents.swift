@@ -125,7 +125,7 @@ struct GoalsConstellationAtlasStage: View {
                 value: (proof?.count ?? 0) > 0 ? "\(proof?.count ?? 0) saved" : "Visible path",
                 detail: (proof?.count ?? 0) > 0
                     ? overview.constellationAtlasProofFirstViewportSummary
-                    : "Proof path visible.",
+                    : "Proof and smaller steps stay visible inside the thread.",
                 symbolName: "checkmark.seal",
                 state: (proof?.count ?? 0) > 0 ? .proof : .calm,
                 level: min(1, max(0.24, Double(proof?.count ?? 0) / 4.0)),
@@ -191,7 +191,7 @@ struct GoalsConstellationAtlasStage: View {
                 Text("Your Direction")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Life areas and active threads stay connected to Today.")
+                Text("Life areas, threads, smaller steps, and proof stay connected to Today.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -207,7 +207,7 @@ struct GoalsConstellationAtlasStage: View {
                 Text("Life areas")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Choose the area to focus")
+                Text("Choose an area, then open its step path")
                     .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.textTertiary)
             }
