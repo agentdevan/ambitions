@@ -535,7 +535,7 @@ private struct YouConstitutionSurface: View {
     let constitution: YouConstitutionState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Constitution",
@@ -580,7 +580,7 @@ private struct YouMemoryControlsSurface: View {
     let memoryControls: YouMemoryControlState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Memory",
@@ -810,7 +810,7 @@ private struct YouLifeContextSurface: View {
     let lifeContext: YouLifeContextState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Life Context",
@@ -897,7 +897,7 @@ private struct YouLifeContextSectionDisclosure: View {
     @Binding var isExpanded: Bool
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 Button {
                     isExpanded.toggle()
@@ -1202,7 +1202,7 @@ private struct YouEverythingSearchSurface: View {
     let search: YouEverythingSearchState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Search",
@@ -1497,7 +1497,7 @@ private struct YouSourceAtlasKnowledgeSurface: View {
     let sourceAtlasKnowledge: YouSourceAtlasKnowledgeState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Source Atlas",
@@ -1735,7 +1735,7 @@ private struct YouMemoryPatternRow: View {
     let pattern: YouMemoryPattern
 
     var body: some View {
-        WidgetCard(state: pattern.state) {
+        ObjectStageGlance(state: pattern.state) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(pattern.title)
@@ -1762,7 +1762,7 @@ private struct YouAutomationBoundarySurface: View {
     let boundary: YouAutomationBoundaryState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Boundaries",
@@ -1795,7 +1795,7 @@ private struct YouReviewsSurface: View {
     var body: some View {
         let projection = reviews.projection
 
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Reviews",
@@ -2244,7 +2244,7 @@ private struct YouAppearanceStudioSurface: View {
     private let previewColumns = [GridItem(.flexible()), GridItem(.flexible())]
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Appearance",
@@ -2566,7 +2566,7 @@ private struct YouTrustCenterSurface: View {
     let onEnableNotifications: () -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Trust",
@@ -3071,7 +3071,7 @@ private struct YouContextVaultSurface: View {
     let contextVault: YouContextVaultState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Optional context",
@@ -3138,7 +3138,7 @@ private struct YouPersonalVaultSurface: View {
     let personalVault: YouPersonalVaultState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     eyebrow: "Privacy",

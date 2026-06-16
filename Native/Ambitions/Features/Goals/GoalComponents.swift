@@ -891,7 +891,7 @@ struct GoalsHeroSurface: View {
     let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
 
     var body: some View {
-        HeroCard(state: overview.heroPrimaryAction.state) {
+        ObjectStageHero(state: overview.heroPrimaryAction.state) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
                     Text(overview.hero.eyebrow)
@@ -982,7 +982,7 @@ struct GoalsWeekPressureSurface: View {
     let summary: GoalsWeekPressureSummary
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -1029,7 +1029,7 @@ struct GoalsPortfolioMaturitySurface: View {
     let summary: GoalPortfolioMaturitySummary
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: summary.title, subtitle: summary.subtitle)
 
@@ -1091,7 +1091,7 @@ struct GoalsLifecycleRailSurface: View {
     let segments: [GoalLifecycleRailSegment]
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: "Ambition portfolio", subtitle: "Previous, active, and future goals stay oriented without becoming a spreadsheet.")
 
@@ -1133,7 +1133,7 @@ struct GoalStateChipsSurface: View {
     let chips: [GoalStateChipState]
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 SectionHeader(title: "State signals", subtitle: "Kept in view, waiting, blocked, parked, completed, and cancelled remain distinct.")
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 132), spacing: theme.spacing.xs)], alignment: .leading, spacing: theme.spacing.xs) {
@@ -1161,7 +1161,7 @@ struct GoalsLifeAreasPanel: View {
     let onZoomModeChange: (GoalsSemanticZoomMode) -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
                 Text(state.equalWeightSummary)
@@ -1341,7 +1341,7 @@ struct GoalsNorthStarsRailSurface: View {
     let state: GoalsNorthStarsRailState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
 
@@ -1426,7 +1426,7 @@ struct GoalsOneStepGoalsPanel: View {
     let onPromote: (GoalsOneStepGoalPanelItemState) -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
 
@@ -1516,7 +1516,7 @@ struct GoalsAtlasBandSection: View {
     let band: GoalsAtlasBand
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: band.title, subtitle: band.subtitle)
 
@@ -1655,7 +1655,7 @@ struct GoalsLowerPriorityDisclosureSection: View {
     let onToggle: () -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle) {
                     Button(isExpanded ? "Hide" : state.disclosureTitle, action: onToggle)
@@ -1687,7 +1687,7 @@ struct GoalsHorizonLadderSurface: View {
     let state: GoalsHorizonLadderState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
 
@@ -1746,7 +1746,7 @@ struct GoalAtlasPreviewSurface: View {
     let state: GoalAtlasPreviewState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: state.title, subtitle: state.subtitle)
 
@@ -1802,7 +1802,7 @@ struct GoalArchiveSummarySurface: View {
     let summary: GoalPortfolioArchiveSummary
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 SectionHeader(title: summary.title, subtitle: summary.subtitle)
                 HStack(spacing: theme.spacing.xs) {
@@ -1857,7 +1857,7 @@ struct GoalDetailHeroSurface: View {
     let detail: GoalDetailPresentation
 
     var body: some View {
-        HeroCard(state: detail.headline.renderState.visualState, accent: detail.supportModeActive ? theme.colors.accentWarm : nil) {
+        ObjectStageHero(state: detail.headline.renderState.visualState, accent: detail.supportModeActive ? theme.colors.accentWarm : nil) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 HStack(alignment: .top, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xxs) {
@@ -2197,7 +2197,7 @@ struct LifePathThreadSurface: View {
     private var sourceFold: some View {
         let source = state.sourceFold
 
-        return AppCard(state: source.state) {
+        return ObjectStageSurface(state: source.state) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 Label(source.title, systemImage: "doc.text.magnifyingglass")
                     .font(theme.typography.micro)
@@ -2391,7 +2391,7 @@ struct GoalDetailSectionSurface: View {
     }
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: title, subtitle: subtitle)
                 content

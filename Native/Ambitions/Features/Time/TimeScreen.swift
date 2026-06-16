@@ -420,7 +420,7 @@ private struct TimeOpportunityWindowsSurface: View {
     let onOpenGoal: (GoalRouteTarget) -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: windows.title, subtitle: windows.subtitle)
 
@@ -488,7 +488,7 @@ private struct TimeDecisionListSurface: View {
     let onActivate: (TimeDecisionItemState) -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: title, subtitle: subtitle)
 
@@ -579,7 +579,7 @@ private struct TimeCalendarBoundaryContractSurface: View {
     let onPrimaryAction: () -> Void
 
     var body: some View {
-        AppCard(state: boundary.visualState) {
+        ObjectStageSurface(state: boundary.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: boundary.title, subtitle: boundary.detail)
                     .accessibilityIdentifier("time.calendar-boundary")
@@ -621,7 +621,7 @@ private struct TimeRecoveryEntrySurface: View {
     let onActivate: (TimeDecisionItemState) -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: recovery.title, subtitle: recovery.detail)
 
@@ -654,7 +654,7 @@ private struct TimeRealityReflowSurface: View {
     let onActivate: (TimeReflowSuggestionState) -> Void
 
     var body: some View {
-        AppCard(state: reflow.visualState) {
+        ObjectStageSurface(state: reflow.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: reflow.title, subtitle: reflow.detail)
                     .accessibilityIdentifier("time.reality-reflow")
@@ -750,7 +750,7 @@ private struct TimeRecoveryGradientSurface: View {
     let gradient: TimeRecoveryGradientState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: gradient.title, subtitle: gradient.detail)
 
@@ -798,7 +798,7 @@ private struct TimePressureRecoveryReviewSurface: View {
     let review: TimePressureRecoveryReviewState
 
     var body: some View {
-        AppCard(state: review.visualState) {
+        ObjectStageSurface(state: review.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: review.title, subtitle: review.detail)
 
@@ -959,7 +959,7 @@ private struct TimeSaveTheDaySurface: View {
     let saveTheDay: TimeSaveTheDayState
 
     var body: some View {
-        AppCard(state: saveTheDay.visualState) {
+        ObjectStageSurface(state: saveTheDay.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: saveTheDay.title, subtitle: saveTheDay.detail)
 
@@ -992,7 +992,7 @@ private struct TimeReflowReceiptPreviewSurface: View {
     let preview: TimeReflowReceiptPreviewState
 
     var body: some View {
-        AppCard(state: preview.visualState) {
+        ObjectStageSurface(state: preview.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: preview.title, subtitle: preview.detail)
 
@@ -1029,7 +1029,7 @@ private struct TimeRecoveryMaturitySurface: View {
     let maturity: TimeRecoveryMaturityState
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: maturity.title, subtitle: maturity.detail)
                     .accessibilityIdentifier("time.recovery-maturity")
@@ -1142,7 +1142,7 @@ private struct TimeHeroSurface: View {
     let onPrimaryAction: (TimeWeekPrimaryAction) -> Void
 
     var body: some View {
-        HeroCard(state: action.state) {
+        ObjectStageHero(state: action.state) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxs) {
                     Text(hero.eyebrow)
@@ -1221,7 +1221,7 @@ private struct TimePressureScrubberSurface: View {
     @Binding var selectedDayID: String
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: scrubber.title, subtitle: scrubber.subtitle)
                     .accessibilityIdentifier("time.pressure-scrubber")
@@ -1285,7 +1285,7 @@ private struct TimeElasticWeekSurface: View {
     @Binding var selectedDayID: String
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Weekly Plan Strip",
@@ -1406,7 +1406,7 @@ private struct TimeBelievabilitySurface: View {
     let onOpenWindow: (TimeOpenWindowState) -> Void
 
     var body: some View {
-        AppCard(state: believability.visualState) {
+        ObjectStageSurface(state: believability.visualState) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Week believability",
@@ -1565,7 +1565,7 @@ private struct TimeExecutionResilienceSurface: View {
     let onOpenTimeRoute: (TimeRouteTarget) -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: resilience.title,
@@ -1726,7 +1726,7 @@ private struct TimeShapingActionsSurface: View {
     }
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Week-shaping actions",
@@ -1827,7 +1827,7 @@ private struct TimeGoalRelationshipSurface: View {
     let onOpenGoal: (GoalRouteTarget) -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Goals shaping the week",
@@ -1916,7 +1916,7 @@ private struct TimeSecondaryDestinationsSurface: View {
     let onOpen: (TimeSecondaryDestination) -> Void
 
     var body: some View {
-        AppCard {
+        ObjectStageSurface {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: "Time-owned support routes", subtitle: "Rituals, Capture, and review stay subordinate so the week remains the dominant workspace.")
 
