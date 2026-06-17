@@ -118,25 +118,9 @@ Codex must not optimize for appearing done, broad diff volume, speculative imple
 
 ## 5. Planning and Patch Discipline
 
-Before editing, Codex must:
+Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, and identify hard-red risks.
 
-1. Read the relevant truth files.
-2. Inspect live source and current file content.
-3. Identify whether the task is product/design, implementation, release/proof, process, or historical cleanup.
-4. Define a narrow scope.
-5. Identify likely touched files.
-6. Identify validation commands.
-7. Identify rollback plan.
-8. Identify hard-red risks.
-
-Codex must not:
-
-- broad-edit without scope
-- rewrite major canon unless explicitly authorized
-- mutate app behavior during docs/governance tasks unless explicitly scoped
-- create new runtime dependencies without approval
-- silently accept stale tests/scripts as active truth
-- bulk update snapshots/proof artifacts to hide failures
+Codex must not broad-edit without scope, rewrite major canon unless explicitly authorized, mutate app behavior during docs/governance tasks unless scoped, create new runtime dependencies without approval, silently accept stale tests/scripts as active truth, or bulk update snapshots/proof artifacts to hide failures.
 
 ---
 
@@ -161,7 +145,7 @@ Stop and report Red when:
 - current product law is ambiguous or contradicted
 - Motion is reintroduced as a root destination
 - Capture is reintroduced as a root destination
-- `Today / Goals / Time / Motion / You` is promoted as active IA
+- forbidden stale active IA `Today / Goals / Time / Motion / You` is promoted as current or active
 - account sign-in becomes required for core offline use
 - private life graph backend behavior appears
 - R2 receives or stores private user context
