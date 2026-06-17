@@ -24,7 +24,7 @@ final class CoreReusableInteractionPrimitiveTests: XCTestCase {
 
         XCTAssertEqual(
             AmbitionCoreInteractionPrimitiveCatalog.canonicalTopLevelSurfaces,
-            ["Today", "Goals", "Time", "Motion", "You"]
+            ["Today", "Goals", "Time", "You"]
         )
         XCTAssertFalse(AmbitionCoreInteractionPrimitiveCatalog.canonicalTopLevelSurfaces.contains("Capture"))
     }

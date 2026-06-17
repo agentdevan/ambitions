@@ -137,11 +137,11 @@ enum AppDeepLinkRegistry {
         AppDeepLinkRegistryEntry(
             id: "motion.root",
             objectKind: .rootTab,
-            owningTab: .motion,
-            canonicalRoute: .openTab(.motion),
+            owningTab: .today,
+            canonicalRoute: .openTab(.today),
             deepLinkTemplate: "ambitions://tab/motion",
             allowedSources: externalObjectSources,
-            privacyBoundary: "Root route only; no analytics feed or score payload is supported."
+            privacyBoundary: "Legacy Motion destination maps to Today for compatibility."
         ),
         AppDeepLinkRegistryEntry(
             id: "you.root",

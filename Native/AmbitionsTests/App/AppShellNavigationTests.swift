@@ -3,9 +3,9 @@ import XCTest
 
 final class AppShellNavigationTests: XCTestCase {
     func testCanonicalTopLevelTabsMatchProductSpec() {
-        XCTAssertEqual(AppTab.allCases, [.today, .goals, .time, .motion, .you])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "motion", "you"])
+        XCTAssertEqual(AppTab.allCases, [.today, .goals, .time, .you])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "you"])
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
@@ -17,7 +17,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testCanonicalRawValuesStayLimitedToActiveTopLevelTabs() {
         XCTAssertNil(AppTab(rawValue: "capture"))
         XCTAssertEqual(AppTab(rawValue: "time"), .time)
-        XCTAssertEqual(AppTab(rawValue: "motion"), .motion)
+        XCTAssertNil(AppTab(rawValue: "motion"))
         XCTAssertEqual(AppTab(rawValue: "you"), .you)
         XCTAssertNil(AppTab(rawValue: "captures"))
         XCTAssertNil(AppTab(rawValue: "pulse"))
@@ -26,22 +26,18 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertNil(AppTab(rawValue: "habits"))
         XCTAssertNil(AppTab(rawValue: "insights"))
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "captures"), .today)
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "pulse"), .motion)
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "pulse"), .today)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "plan"), .time)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "profile"), .you)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "habits"), .time)
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "insights"), .you)
         XCTAssertEqual(AppTab.time.canonicalTopLevelTab, .time)
-        XCTAssertEqual(AppTab.motion.canonicalTopLevelTab, .motion)
         XCTAssertEqual(AppTab.you.canonicalTopLevelTab, .you)
         XCTAssertEqual(AppTab.time.rawValue, "time")
         XCTAssertEqual(AppTab.time.title, "Time")
-        XCTAssertEqual(AppTab.motion.rawValue, "motion")
-        XCTAssertEqual(AppTab.motion.title, "Motion")
         XCTAssertEqual(AppTab.you.rawValue, "you")
         XCTAssertEqual(AppTab.you.title, "You")
         XCTAssertTrue(AppTab.time.isCanonicalTopLevel)
-        XCTAssertTrue(AppTab.motion.isCanonicalTopLevel)
         XCTAssertTrue(AppTab.you.isCanonicalTopLevel)
     }
 
@@ -101,14 +97,12 @@ final class AppShellNavigationTests: XCTestCase {
                 "Reality Meridian",
                 "Direction Atlas",
                 "LifeShape Field",
-                "Motion Current",
                 "Personal system"
             ]
         )
         XCTAssertEqual(AppTab.today.surfaceContract.title, "Today")
         XCTAssertEqual(AppTab.goals.surfaceContract.primaryObjectTitle, "Direction Atlas")
         XCTAssertEqual(AppTab.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
-        XCTAssertEqual(AppTab.motion.surfaceContract.primaryObjectTitle, "Motion Current")
         XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "Personal system")
         XCTAssertFalse(AmbitionsSurfaceContractRegistry.canonicalContracts.map(\.tab.rawValue).contains("capture"))
     }
@@ -205,14 +199,13 @@ final class AppShellNavigationTests: XCTestCase {
         let destinations = AppMeridianDestination.all
 
         XCTAssertEqual(destinations.map(\.tab), AppTab.allCases)
-        XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(
             destinations.map(\.accessibilityIdentifier),
             [
                 "shell.meridian.destination.today",
                 "shell.meridian.destination.goals",
                 "shell.meridian.destination.time",
-                "shell.meridian.destination.motion",
                 "shell.meridian.destination.you"
             ]
         )
@@ -224,8 +217,8 @@ final class AppShellNavigationTests: XCTestCase {
         let chrome = AppMeridianShellChromeState.launchDefault
 
         XCTAssertEqual(chrome.title, "Ambition Meridian")
-        XCTAssertEqual(chrome.destinations.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
-        XCTAssertTrue(chrome.destinationRailLabel.contains("Today, Goals, Time, Motion, You"))
+        XCTAssertEqual(chrome.destinations.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertTrue(chrome.destinationRailLabel.contains("Today, Goals, Time, You"))
         XCTAssertFalse(chrome.destinationRailLabel.localizedCaseInsensitiveContains("Pulse"))
         XCTAssertFalse(chrome.destinationRailLabel.contains("Today, Goals, Capture, Time, You"))
         XCTAssertTrue(chrome.receiptOverlayZoneLabel.contains("temporary and dismissible"))
@@ -341,7 +334,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .time)
         XCTAssertEqual(navigation.timePath, [.habits])
         XCTAssertTrue(navigation.youPath.isEmpty)
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
         XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "plan"), .time)
         XCTAssertEqual(AppTab.time.rawValue, "time")
@@ -368,7 +361,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .you)
         XCTAssertEqual(navigation.youPath, [.history])
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
         XCTAssertEqual(AppTab.time.title, "Time")
     }
@@ -377,8 +370,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testLegacyPulsePreferenceLoadsIntoMotionCompatibilityOnly() {
         let navigation = AppNavigationModel(legacyTabRawValue: "pulse")
 
-        XCTAssertEqual(navigation.selectedTab, .motion)
-        XCTAssertTrue(AppTab.motion.isCanonicalTopLevel)
+        XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("pulse"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Pulse"))
     }
@@ -417,7 +409,6 @@ final class AppShellNavigationTests: XCTestCase {
             .today: .todayQuickCapture,
             .goals: .goalsQuickCapture,
             .time: .timeQuickCapture,
-            .motion: .motionQuickCapture,
             .you: .youQuickCapture
         ]
 
@@ -448,7 +439,6 @@ final class AppShellNavigationTests: XCTestCase {
                 "shell.today.capture-button",
                 "shell.goals.capture-button",
                 "shell.time.capture-button",
-                "shell.motion.capture-button",
                 "shell.you.capture-button"
             ]
         )
@@ -456,16 +446,16 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testActivatedCaptureComposerSeamAppearsOnlyAfterCaptureActivation() {
-        let navigation = AppNavigationModel(selectedTab: .motion)
+        let navigation = AppNavigationModel(selectedTab: .today)
 
         XCTAssertFalse(navigation.isActivatedCaptureComposerVisible)
 
         navigation.presentMemoryLens(source: .shellUtility)
         XCTAssertFalse(navigation.isActivatedCaptureComposerVisible)
 
-        navigation.presentSurfaceCapture(for: .motion)
+        navigation.presentSurfaceCapture(for: .today)
         XCTAssertTrue(navigation.isActivatedCaptureComposerVisible)
-        XCTAssertEqual(navigation.activeOverlay?.entrySource, .motionQuickCapture)
+        XCTAssertEqual(navigation.activeOverlay?.entrySource, .todayQuickCapture)
 
         navigation.dismissOverlay()
         XCTAssertFalse(navigation.isActivatedCaptureComposerVisible)
@@ -487,7 +477,6 @@ final class AppShellNavigationTests: XCTestCase {
             ("today", .today),
             ("goals", .goals),
             ("time", .time),
-            ("motion", .motion),
             ("you", .you)
         ]
 

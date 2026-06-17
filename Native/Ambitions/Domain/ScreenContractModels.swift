@@ -261,7 +261,7 @@ struct ScreenContractValidationIssue: Codable, Hashable, Sendable {
 }
 
 enum ScreenContractValidator {
-    static let canonicalTopLevelTabs = ["Today", "Goals", "Time", "Motion", "You"]
+    static let canonicalTopLevelTabs = ["Today", "Goals", "Time", "You"]
 
     static let forbiddenTopLevelTabTitles = [
         "Tasks",
@@ -326,7 +326,7 @@ enum ScreenContractValidator {
         if !snapshot.topLevelTabTitles.isEmpty {
             if snapshot.topLevelTabTitles != canonicalTopLevelTabs ||
                 snapshot.topLevelTabTitles.contains(where: { forbiddenTopLevelTabTitles.contains($0) }) {
-                issues.append(issue(.invalidTopLevelTabs, contract.id, snapshot.topLevelTabTitles.joined(separator: ", "), "Top-level tabs must remain Today, Goals, Time, Motion, You."))
+                issues.append(issue(.invalidTopLevelTabs, contract.id, snapshot.topLevelTabTitles.joined(separator: ", "), "Top-level tabs must remain Today, Goals, Time, You."))
             }
         }
 
@@ -362,7 +362,7 @@ enum ScreenContractValidator {
                 .invalidTopLevelTabs,
                 .today,
                 topLevelTitles.joined(separator: ", "),
-                "Contract registry top-level screens must remain Today, Goals, Time, Motion, You."
+                "Contract registry top-level screens must remain Today, Goals, Time, You."
             )
         ]
     }

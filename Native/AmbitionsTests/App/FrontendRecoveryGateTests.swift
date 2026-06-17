@@ -3,7 +3,7 @@ import XCTest
 
 final class FrontendRecoveryGateTests: XCTestCase {
     func testIR01TopLevelTabsStayOnActiveCanon() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Plan"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Pulse"))

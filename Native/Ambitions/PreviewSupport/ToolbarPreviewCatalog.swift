@@ -55,7 +55,6 @@ enum ToolbarPreviewCatalog {
         case .today: "Reality Meridian / Start here"
         case .goals: "Constellation Atlas"
         case .time: "LifeShape Field"
-        case .motion: "Motion Current"
         case .you: "User System Profile"
         }
     }

@@ -18,7 +18,7 @@ final class ShellPreviewMatrixTests: XCTestCase {
 
         XCTAssertEqual(coveredStates, Set(ShellPreviewState.allCases))
         XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .today && $0.variant.shellState == .steady })
-        XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .motion && $0.variant.shellState == .globalEntryOpen })
+        XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .today && $0.variant.shellState == .globalEntryOpen })
         XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .time && $0.variant.shellState == .continuityReceipt })
         XCTAssertTrue(ShellPreviewMatrix.rows.contains { $0.tab == .you && $0.variant.shellState == .externalRoute })
     }

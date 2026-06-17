@@ -37,7 +37,7 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
     }
 
     func testSI16SurfaceCoverageRowsMapTheFiveTopLevelSurfaces() {
-        XCTAssertEqual(SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces, ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(
             SI16PreviewFixtureCatalog.surfaceCoverageRows.map(\.ownerSurface),
             SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces
@@ -123,7 +123,7 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
         XCTAssertEqual(AFI13VisualQACatalog.ownerBatch, "AFI13")
         XCTAssertEqual(
             AFI13VisualQACatalog.activeTopLevelSurfaces,
-            ["Today", "Goals", "Time", "Motion", "You"]
+            ["Today", "Goals", "Time", "You"]
         )
         XCTAssertFalse(AFI13VisualQACatalog.containsPlanTopLevelSurface)
         XCTAssertFalse(AFI13VisualQACatalog.changesRuntimeBehavior)

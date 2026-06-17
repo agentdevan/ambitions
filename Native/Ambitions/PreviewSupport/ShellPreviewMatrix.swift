@@ -167,16 +167,6 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
                 artifactStem: "time-lifeshape-field"
             ),
             AFEP020VisualDiffSurfaceFixture(
-                tab: .motion,
-                surfaceTitle: "Motion",
-                primaryObjectTitle: "Motion Current",
-                fixtureKey: "motion-motion-current",
-                deterministicSeed: "afep020-surface-motion",
-                projectionInputName: "motion_projection_input",
-                inspectionLabel: "You / Search Ambitions",
-                artifactStem: "motion-motion-current"
-            ),
-            AFEP020VisualDiffSurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
                 primaryObjectTitle: "Personal system",
@@ -587,16 +577,6 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 projectionInputName: "time_accessibility_projection_input",
                 inspectionLabel: "You / Search Ambitions",
                 artifactStem: "time-lifeshape-field"
-            ),
-            AFEP021AccessibilitySurfaceFixture(
-                tab: .motion,
-                surfaceTitle: "Motion",
-                primaryObjectTitle: "Motion Current",
-                fixtureState: "motion-motion-current",
-                deterministicSeed: "afep021-surface-motion",
-                projectionInputName: "motion_accessibility_projection_input",
-                inspectionLabel: "You / Search Ambitions",
-                artifactStem: "motion-motion-current"
             ),
             AFEP021AccessibilitySurfaceFixture(
                 tab: .you,

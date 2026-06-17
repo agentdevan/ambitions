@@ -190,7 +190,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testAMB1059RoutesMemoryLensCaptureResultToGlobalCaptureHandoffNotCaptureTab() {
-        let navigation = AppNavigationModel(selectedTab: .motion)
+        let navigation = AppNavigationModel(selectedTab: .today)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
         let result = MemoryLensResult(
             id: "capture-unplaced",
@@ -209,7 +209,7 @@ final class ShellCommandRouterTests: XCTestCase {
 
         XCTAssertTrue(handoff.isTrusted)
         XCTAssertEqual(handoff.owner, .globalCapture)
-        XCTAssertEqual(navigation.selectedTab, .motion)
+        XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)

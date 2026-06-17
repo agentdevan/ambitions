@@ -3,7 +3,7 @@ import XCTest
 
 final class ContextualToolbarStateTests: XCTestCase {
     func testToolbarCatalogCoversCanonicalSurfaceToolbars() {
-        XCTAssertEqual(AppShellContextualToolbarCatalog.canonicalSurfaceCoverage, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(AppShellContextualToolbarCatalog.canonicalSurfaceCoverage, ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(ToolbarPreviewCatalog.coveredSurfaces, AppShellContextualToolbarCatalog.canonicalSurfaceCoverage)
 
         for tab in AppTab.allCases {

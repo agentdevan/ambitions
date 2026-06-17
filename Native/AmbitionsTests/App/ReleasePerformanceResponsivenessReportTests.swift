@@ -24,7 +24,7 @@ final class ReleasePerformanceResponsivenessReportTests: XCTestCase {
         XCTAssertEqual(ReleasePerformanceArea.planLoad.rawValue, "Time load")
         XCTAssertTrue(ReleasePerformanceResponsivenessReport.checks.contains { check in
             check.area == .tabSwitching &&
-            check.evidence.localizedCaseInsensitiveContains("Today, Goals, Time, Motion, You")
+            check.evidence.localizedCaseInsensitiveContains("Today, Goals, Time, You")
         })
         XCTAssertTrue(ReleasePerformanceResponsivenessReport.checks.contains { check in
             check.area == .observatoryFoundation &&
@@ -88,8 +88,8 @@ final class ReleasePerformanceResponsivenessReportTests: XCTestCase {
     func testAFEP022ObservatoryRegistryCoversCanonicalSurfacesAndBudgetLinks() {
         let plans = ReleasePerformanceObservatoryRegistry.canonicalSurfacePlans
 
-        XCTAssertEqual(plans.map(\.surface), [.today, .goals, .motion, .time, .you])
-        XCTAssertEqual(Set(plans.map(\.surface)).count, 5)
+        XCTAssertEqual(plans.map(\.surface), [.today, .goals, .time, .you])
+        XCTAssertEqual(Set(plans.map(\.surface)).count, 4)
         XCTAssertTrue(plans.allSatisfy(\.isWellFormed))
         XCTAssertTrue(plans.allSatisfy { $0.claimLock.allowsClaim == false })
         XCTAssertTrue(plans.allSatisfy { plan in

@@ -42,7 +42,6 @@ enum ReleasePerformanceSurface: String, CaseIterable, Sendable, Equatable, Hasha
     case today
     case goals
     case time
-    case motion
     case you
 }
 
@@ -175,12 +174,6 @@ enum ReleasePerformanceObservatoryRegistry {
             owner: "Goals performance observatory"
         ),
         makePlan(
-            surface: .motion,
-            metricKinds: [.launch, .scroll, .wakeup],
-            fallbackSummary: "Keep Motion proof and recovery inspection legible, defer background work, and preserve low-latency re-entry.",
-            owner: "Motion performance observatory"
-        ),
-        makePlan(
             surface: .time,
             metricKinds: [.render, .backgroundMaintenance, .energyImpact],
             fallbackSummary: "Keep Time local and legible, prefer deferred maintenance, and reduce energy impact before heavier canvas work.",
@@ -263,8 +256,8 @@ enum ReleasePerformanceResponsivenessReport {
         ReleasePerformanceCheck(
             id: "tab-switching",
             area: .tabSwitching,
-            budget: "The canonical five-tab shell must stay stable without hidden navigation or extra top-level surfaces.",
-            evidence: "M12 shell continuity tests cover Today, Goals, Time, Motion, You, global Capture, and review routes; R02 keeps this as a regression lane.",
+            budget: "The canonical four-tab shell must stay stable without hidden navigation or extra top-level surfaces.",
+            evidence: "M12 shell continuity tests cover Today, Goals, Time, You, global Capture, and review routes; R02 keeps this as a regression lane.",
             evidenceLevel: .automatedSimulator,
             readiness: .acceptableForInternalTesting,
             limitation: "Touch latency and animation smoothness need manual device review."
@@ -300,7 +293,7 @@ enum ReleasePerformanceResponsivenessReport {
             id: "afep-022-observatory-foundation",
             area: .observatoryFoundation,
             budget: "AFEP-022 observatory scaffolds surface plans, signposts, metric budgets, fallback decisions, and claim locks without asserting measured performance.",
-            evidence: "ReleasePerformanceObservatoryRegistry covers Today, Goals, Time, Motion, and You with global Capture coverage, AFEP-004 local projection and repository budget links, explicit validation packets, and false-by-default public-release claim locks.",
+            evidence: "ReleasePerformanceObservatoryRegistry covers Today, Goals, Time, and You with global Capture coverage, AFEP-004 local projection and repository budget links, explicit validation packets, and false-by-default public-release claim locks.",
             evidenceLevel: .sourceBudget,
             readiness: .acceptableForInternalTesting,
             limitation: "Measured device, Instruments, battery, thermal, and release-grade validation still need current evidence."
