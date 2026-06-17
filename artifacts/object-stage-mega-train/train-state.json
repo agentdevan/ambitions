@@ -1,0 +1,14 @@
+{
+  "completed_batches": [
+    {
+      "completed_at": "2026-06-17T04:21:57Z",
+      "id": "AMB-AOM-00",
+      "start_sha": "a74bc446d7371c9a8872bb55b027f6c3331b5a16",
+      "title": "Source Map and Migration Boundary",
+      "type": "audit"
+    }
+  ],
+  "last_completed_batch": "AMB-AOM-00",
+  "updated_at": "2026-06-17T04:21:57Z",
+  "version": 1
+}
