@@ -308,31 +308,43 @@ struct AmbitionsDayRailView: View {
     }
 
     private var timeSpine: some View {
-        Group {
-            if dynamicTypeSize.isAccessibilitySize {
-                compactTimeSpine
-            } else {
-                VStack(spacing: 0) {
-                    timeTick("6 AM", prominent: false)
-                    verticalSegment(height: 50)
-                    currentTimeNode
-                    verticalSegment(height: 58)
-                    timeTick("12 PM", prominent: false)
-                    verticalSegment(height: 72)
-                    mappedRowNode(index: 0, fallbackSymbol: "person.2.fill", fallbackColor: Color.blue.opacity(0.75))
-                    verticalSegment(height: 56)
-                    timeTick("4 PM", prominent: false)
-                    verticalSegment(height: 46)
-                    mappedRowNode(index: 1, fallbackSymbol: "person.2.fill", fallbackColor: Color.green.opacity(0.76))
-                    verticalSegment(height: 54)
-                    mappedRowNode(index: 2, fallbackSymbol: "doc.text.fill", fallbackColor: Color.purple.opacity(0.76))
-                    verticalSegment(height: 34)
-                    timeTick("8 PM", prominent: false)
+        TimelineView(.periodic(from: .now, by: 60)) { timeline in
+            Group {
+                if dynamicTypeSize.isAccessibilitySize {
+                    compactTimeSpine
+                } else {
+                    liveTimeSpine(date: timeline.date)
                 }
             }
         }
         .padding(.top, theme.spacing.xs)
+        .accessibilityIdentifier("TodayRealityRailLiveTimeSpine")
         .accessibilityHidden(true)
+    }
+
+    private func liveTimeSpine(date: Date) -> some View {
+        VStack(spacing: 0) {
+            timeTick(timeLabel(offsetHours: -3, from: date), prominent: false)
+            verticalSegment(height: 50)
+            currentTimeNode(date: date)
+            verticalSegment(height: 58)
+            timeTick(timeLabel(offsetHours: 2, from: date), prominent: false)
+            verticalSegment(height: 72)
+            mappedRowNode(index: 0, fallbackSymbol: "person.2.fill", fallbackColor: Color.blue.opacity(0.75))
+            verticalSegment(height: 56)
+            timeTick(timeLabel(offsetHours: 5, from: date), prominent: false)
+            verticalSegment(height: 46)
+            mappedRowNode(index: 1, fallbackSymbol: "person.2.fill", fallbackColor: Color.green.opacity(0.76))
+            verticalSegment(height: 54)
+            mappedRowNode(index: 2, fallbackSymbol: "doc.text.fill", fallbackColor: Color.purple.opacity(0.76))
+            verticalSegment(height: 34)
+            timeTick(timeLabel(offsetHours: 8, from: date), prominent: false)
+        }
+    }
+
+    private func timeLabel(offsetHours: Int, from date: Date) -> String {
+        let adjusted = Calendar.current.date(byAdding: .hour, value: offsetHours, to: date) ?? date
+        return adjusted.formatted(.dateTime.hour())
     }
 
     private var compactTimeSpine: some View {
@@ -501,30 +513,6 @@ struct AmbitionsDayRailView: View {
                     .padding(.top, theme.spacing.sm)
             }
 
-            HStack(spacing: theme.spacing.md) {
-                Button {
-                    onOpenStepDetail(heroStep.stepDetail(privacy: state.privacyProjection, contextLabel: state.contextSummary))
-                } label: {
-                    Label("Why this?", systemImage: "chevron.right")
-                        .font(theme.typography.caption.weight(.semibold))
-                        .labelStyle(.titleAndIcon)
-                        .foregroundStyle(theme.colors.accentWarm)
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("TodayMFPWhyThis")
-
-                if heroStep.secondaryAction != nil {
-                    Button {
-                        onShowAnother(heroStep)
-                    } label: {
-                        Text(secondaryActionTitle(for: heroStep.secondaryAction))
-                            .font(theme.typography.caption.weight(.semibold))
-                            .foregroundStyle(theme.colors.textSecondary)
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier("TodayMFPAdjust")
-                }
-            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
     }
