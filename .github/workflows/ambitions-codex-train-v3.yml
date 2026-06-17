@@ -1,4 +1,4 @@
-name: Ambitions Codex Train V3
+name: Ambitions Connector Batch Validation
 
 on:
   workflow_dispatch:
@@ -24,7 +24,7 @@ on:
           - execute
       commit_strategy:
         required: true
-        default: batch
+        default: none
         type: choice
         options:
           - none
@@ -55,11 +55,11 @@ permissions:
   actions: read
 
 concurrency:
-  group: ambitions-codex-train-v3-${{ inputs.train }}
+  group: ambitions-connector-batch-validation-${{ inputs.train }}
   cancel-in-progress: false
 
 jobs:
-  codex-train-v3:
+  connector-batch-validation:
     runs-on: [self-hosted, Ambitions-XCode26]
     timeout-minutes: 720
     steps:
@@ -86,32 +86,59 @@ jobs:
             scripts/codex/train_v3.py \
             scripts/codex/aom-completion-audit.py
 
-      - name: Run Codex Train V3
+      - name: Connector validation lane
         shell: bash
         run: |
           set -euo pipefail
-          args=(
-            --train "${{ inputs.train }}"
-            --start-batch "${{ inputs.start_batch }}"
-            --end-batch "${{ inputs.end_batch }}"
-            --mode "${{ inputs.mode }}"
-            --commit-strategy "${{ inputs.commit_strategy }}"
-            --run-tests "${{ inputs.run_tests }}"
-            --max-batches "${{ inputs.max_batches }}"
-          )
-          if [[ "${{ inputs.run_xcode_build }}" == "true" ]]; then
-            args+=(--run-xcode-build)
-          fi
-          if [[ "${{ inputs.rerun_completed }}" == "true" ]]; then
-            args+=(--rerun-completed)
-          fi
-          python3 scripts/codex/train_v3.py "${args[@]}"
+          echo "Connector validation mode: ChatGPT/GitHub connector owns source edits; this workflow does not invoke codex."
+          echo "Train: ${{ inputs.train }}"
+          echo "Batch range: ${{ inputs.start_batch }} -> ${{ inputs.end_batch }}"
+          echo "Mode: ${{ inputs.mode }}"
+          echo "Commit strategy input retained for compatibility: ${{ inputs.commit_strategy }}"
+          echo "Rerun completed input retained for compatibility: ${{ inputs.rerun_completed }}"
+
+          git diff --check
+          python3 scripts/ambitions_validate_authority_drift.py
+          python3 scripts/ambitions-local-first-boundary-scan.py
+          python3 scripts/codex/amb-master-canon-ia-validate.py
+
+          python3 scripts/codex/aom-completion-audit.py \
+            --train "trains/${{ inputs.train }}/train.json" \
+            --state "artifacts/${{ inputs.train }}/train-state.json" \
+            --from "${{ inputs.start_batch }}" \
+            --to "${{ inputs.end_batch }}" || true
+
+      - name: Xcode build validation
+        if: ${{ inputs.run_xcode_build == true }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodegen generate
+          xcodebuild \
+            -project Ambitions.xcodeproj \
+            -scheme Ambitions \
+            -resolvePackageDependencies
+          xcodebuild \
+            -project Ambitions.xcodeproj \
+            -scheme Ambitions \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Focused test validation notice
+        if: ${{ inputs.run_tests != 'none' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "run_tests=${{ inputs.run_tests }} requested."
+          echo "This connector-validation workflow currently treats Xcode build as the blocking runner proof."
+          echo "Run focused XCTest locally or add a repo-owned xcode test wrapper before making XCTest claims."
 
       - name: Upload proof artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: ambitions-codex-train-v3-proof
+          name: ambitions-connector-batch-validation-proof
           path: |
             artifacts/codex-train-v3/**
             artifacts/object-stage-mega-train/**
