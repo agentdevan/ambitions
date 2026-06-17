@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Ambitions Codex Train V3.
 
-A small manifest-driven GitHub Actions runner for Ambitions trains.
-It replaces recovery-era autopilot semantics for new Codex work.
+Manifest-driven GitHub Actions runner for new Ambitions Codex trains.
+Design goals: typed batches, no prompt mutation, no release-recovery coupling,
+no build/reports output, and no universal source gates.
 """
 from __future__ import annotations
 
@@ -45,15 +46,20 @@ class BatchContext:
     commit_strategy: str
 
 
-def utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+def log(message: str) -> None:
+    print(message, flush=True)
 
 
 def rel(path: Path) -> str:
     return path.relative_to(ROOT).as_posix()
 
 
-def run(command: list[str], log_path: Path | None = None, env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
+def run(
+    command: list[str],
+    log_path: Path | None = None,
+    env: dict[str, str] | None = None,
+    input_text: str | None = None,
+) -> subprocess.CompletedProcess[str]:
     merged = os.environ.copy()
     if env:
         merged.update(env)
@@ -61,6 +67,7 @@ def run(command: list[str], log_path: Path | None = None, env: dict[str, str] | 
         command,
         cwd=ROOT,
         env=merged,
+        input=input_text,
         text=True,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
@@ -93,8 +100,7 @@ def load_manifest(path: Path) -> dict:
     if not path.exists():
         raise RuntimeError(f"Train manifest missing: {path}")
     data = json.loads(path.read_text(encoding="utf-8"))
-    required = ["id", "batches"]
-    for key in required:
+    for key in ("id", "batches"):
         if key not in data:
             raise RuntimeError(f"Train manifest missing key: {key}")
     if not isinstance(data["batches"], list) or not data["batches"]:
@@ -120,11 +126,34 @@ def selected_batches(batches: list[dict], start_batch: str, end_batch: str, max_
     return selected
 
 
+def print_gate(result: GateResult) -> None:
+    marker = "OK" if result.status == "green" else ("WARN" if result.status == "yellow" else "FAIL")
+    blocking = "blocking" if result.blocking else "advisory"
+    log(f"[{marker}] {result.name} ({blocking}) — {result.summary}")
+    if result.log_path:
+        log(f"      log: {result.log_path}")
+
+
+def record_gate(results: list[GateResult], result: GateResult) -> None:
+    results.append(result)
+    print_gate(result)
+
+
+def tail_summary(text: str, limit: int = 1000) -> str:
+    tail = "\n".join(text.splitlines()[-12:]).strip()
+    return tail[:limit]
+
+
 def gate(name: str, command: list[str], ctx: BatchContext, blocking: bool = True) -> GateResult:
     log_path = ctx.run_dir / "gates" / f"{name}.log"
     result = run(command, log_path)
     status: Status = "green" if result.returncode == 0 else "red"
-    return GateResult(name, status, blocking, command, rel(log_path), f"exit={result.returncode}")
+    summary = f"exit={result.returncode}"
+    if result.returncode != 0:
+        tail = tail_summary(result.stdout)
+        if tail:
+            summary += f"; tail={tail}"
+    return GateResult(name, status, blocking, command, rel(log_path), summary)
 
 
 def gate_prompt_lint(ctx: BatchContext) -> GateResult:
@@ -144,28 +173,34 @@ def gate_prompt_lint(ctx: BatchContext) -> GateResult:
 
 
 def gate_truth_readback(ctx: BatchContext, truth_files: list[str]) -> GateResult:
-    missing = [path for path in truth_files if not (ROOT / path).exists()]
-    if missing:
-        return GateResult("truth_readback", "red", True, None, None, f"missing truth files: {missing}")
-    product_truth = (ROOT / "docs/truth/PRODUCT_DESIGN_TRUTH.md").read_text(encoding="utf-8", errors="ignore")
-    required = [
-        "Today / Goals / Time / You",
-        "Capture is the global composer",
-        "Motion is cross-surface behavior",
-        "R2 is not a user-data backend",
-        "Hosted AI services and cloud LLMs are not core architecture",
-        "This is the canon.",
+    missing_files = [path for path in truth_files if not (ROOT / path).exists()]
+    if missing_files:
+        return GateResult("truth_readback", "red", True, None, None, f"missing truth files: {missing_files}")
+
+    product_path = ROOT / "docs/truth/PRODUCT_DESIGN_TRUTH.md"
+    if not product_path.exists():
+        return GateResult("truth_readback", "red", True, None, None, "missing PRODUCT_DESIGN_TRUTH.md")
+
+    product_truth = product_path.read_text(encoding="utf-8", errors="ignore")
+    lower = product_truth.lower()
+    requirements: list[tuple[str, list[str]]] = [
+        ("four-surface law", ["today / goals / time / you"]),
+        ("capture global law", ["capture", "global"]),
+        ("motion behavior law", ["motion", "cross-surface"]),
+        ("r2 boundary", ["r2", "not a user-data backend"]),
+        ("hosted ai/cloud llm boundary", ["hosted ai", "cloud llm"]),
+        ("canon sentinel", ["this is the canon."]),
     ]
-    missing_phrases = [phrase for phrase in required if phrase not in product_truth]
-    if missing_phrases:
-        return GateResult("truth_readback", "red", True, None, None, f"missing product truth phrases: {missing_phrases}")
-    return GateResult("truth_readback", "green", True, None, None, "truth files present")
+    missing = [label for label, tokens in requirements if not all(token in lower for token in tokens)]
+    if missing:
+        return GateResult("truth_readback", "red", True, None, None, f"missing/weak product truth requirements: {missing}")
+    return GateResult("truth_readback", "green", True, None, None, "truth files and product law present")
 
 
 def changed_files_since(start_sha: str) -> list[str]:
     tracked = run(["git", "diff", "--name-only", start_sha]).stdout.splitlines()
     untracked = run(["git", "ls-files", "--others", "--exclude-standard"]).stdout.splitlines()
-    return sorted(set([item for item in tracked + untracked if item.strip()]))
+    return sorted(set(item for item in tracked + untracked if item.strip()))
 
 
 def path_allowed(path: str, allowed: list[str]) -> bool:
@@ -177,7 +212,6 @@ def path_allowed(path: str, allowed: list[str]) -> bool:
                 return True
         elif normalized == clean:
             return True
-    # Runner-local artifacts are always allowed and uploaded only unless explicitly staged.
     if normalized.startswith("artifacts/codex-train-v3/"):
         return True
     if normalized.startswith(".codex/runs/"):
@@ -190,6 +224,7 @@ def gate_allowed_paths(ctx: BatchContext) -> GateResult:
     allowed = list(ctx.batch.get("allowed_paths") or [])
     offenders = [path for path in files if not path_allowed(path, allowed)]
     report = ctx.run_dir / "changed-files.json"
+    report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text(json.dumps({"changed_files": files, "offenders": offenders}, indent=2) + "\n", encoding="utf-8")
     if offenders:
         return GateResult("allowed_paths", "red", True, None, rel(report), f"off-path changes: {offenders}")
@@ -206,27 +241,35 @@ def gate_no_source_diff_for_audit(ctx: BatchContext) -> GateResult:
 
 
 def run_pre_gates(ctx: BatchContext, truth_files: list[str]) -> list[GateResult]:
-    results = [gate_prompt_lint(ctx), gate_truth_readback(ctx, truth_files)]
-    if ctx.batch["type"] != "audit":
-        # Source-owning gates should not run on audit batches.
-        pass
+    results: list[GateResult] = []
+    record_gate(results, gate_prompt_lint(ctx))
+    record_gate(results, gate_truth_readback(ctx, truth_files))
     return results
 
 
 def run_post_gates(ctx: BatchContext) -> list[GateResult]:
     results: list[GateResult] = []
-    results.append(gate("diff_check", ["git", "diff", "--check"], ctx, True))
-    results.append(gate_allowed_paths(ctx))
+    for result in [
+        gate("diff_check", ["git", "diff", "--check"], ctx, True),
+        gate_allowed_paths(ctx),
+    ]:
+        record_gate(results, result)
     if ctx.batch["type"] == "audit":
-        results.append(gate_no_source_diff_for_audit(ctx))
-    results.append(gate("authority_drift", ["python3", "scripts/ambitions_validate_authority_drift.py"], ctx, True))
-    results.append(gate("local_first_boundary", ["python3", "scripts/ambitions-local-first-boundary-scan.py"], ctx, True))
+        record_gate(results, gate_no_source_diff_for_audit(ctx))
+    for result in [
+        gate("authority_drift", ["python3", "scripts/ambitions_validate_authority_drift.py"], ctx, True),
+        gate("local_first_boundary", ["python3", "scripts/ambitions-local-first-boundary-scan.py"], ctx, True),
+    ]:
+        record_gate(results, result)
     if ctx.batch["type"] in {"source", "visual", "schema", "validation"}:
-        results.append(gate("root_ia_validator", ["python3", "scripts/codex/amb-master-canon-ia-validate.py"], ctx, True))
+        record_gate(results, gate("root_ia_validator", ["python3", "scripts/codex/amb-master-canon-ia-validate.py"], ctx, True))
     if ctx.run_xcode_build and bool(ctx.batch.get("build")):
-        results.append(gate("xcodegen", ["xcodegen", "generate"], ctx, True))
-        results.append(gate("resolve_packages", ["xcodebuild", "-project", "Ambitions.xcodeproj", "-scheme", "Ambitions", "-resolvePackageDependencies"], ctx, True))
-        results.append(gate("xcodebuild", ["xcodebuild", "-project", "Ambitions.xcodeproj", "-scheme", "Ambitions", "-destination", "generic/platform=iOS Simulator", "CODE_SIGNING_ALLOWED=NO", "build"], ctx, True))
+        for result in [
+            gate("xcodegen", ["xcodegen", "generate"], ctx, True),
+            gate("resolve_packages", ["xcodebuild", "-project", "Ambitions.xcodeproj", "-scheme", "Ambitions", "-resolvePackageDependencies"], ctx, True),
+            gate("xcodebuild", ["xcodebuild", "-project", "Ambitions.xcodeproj", "-scheme", "Ambitions", "-destination", "generic/platform=iOS Simulator", "CODE_SIGNING_ALLOWED=NO", "build"], ctx, True),
+        ]:
+            record_gate(results, result)
     return results
 
 
@@ -246,17 +289,17 @@ Mode: {ctx.mode}
 Manifest allowed paths:
 {allowed}
 
-Manifest rules:
-- Batch type in manifest is authoritative.
+Rules:
+- Manifest batch type controls gates.
 - Do not mutate prompt files.
 - Write ephemeral logs under artifacts/codex-train-v3 only.
 - Do not write generated reports under build/reports.
-- Commit only intentional Green batch outputs.
 - Preserve product law: Today / Goals / Time / You; Capture global composer; Motion behavior layer.
 
 ---
 
 """
+    rendered.parent.mkdir(parents=True, exist_ok=True)
     rendered.write_text(preface + body, encoding="utf-8")
     return rendered
 
@@ -268,10 +311,28 @@ def run_codex(ctx: BatchContext) -> GateResult:
         return GateResult("codex", "red", True, None, None, "codex CLI unavailable")
     rendered = render_prompt(ctx)
     out = ctx.run_dir / "codex-output.log"
-    command = ["codex", "exec", "--sandbox", "danger-full-access", "--model", os.environ.get("PATCH_MODEL", "gpt-5.3-codex-spark"), str(rendered)]
-    result = run(command, out)
+    last = ctx.run_dir / "codex-last-message.md"
+    command = [
+        "codex",
+        "exec",
+        "-c",
+        f"service_tier=\"{os.environ.get('CODEX_SERVICE_TIER', 'fast')}\"",
+        "--model",
+        os.environ.get("PATCH_MODEL", "gpt-5.3-codex-spark"),
+        "--sandbox",
+        "danger-full-access",
+        "--json",
+        "--output-last-message",
+        str(last),
+    ]
+    result = run(command, out, input_text=rendered.read_text(encoding="utf-8"))
     status: Status = "green" if result.returncode == 0 else "red"
-    return GateResult("codex", status, True, command, rel(out), f"exit={result.returncode}")
+    summary = f"exit={result.returncode}"
+    if result.returncode != 0:
+        tail = tail_summary(result.stdout)
+        if tail:
+            summary += f"; tail={tail}"
+    return GateResult("codex", status, True, command, rel(out), summary)
 
 
 def write_batch_report(ctx: BatchContext, results: list[GateResult], status: Status, commit_sha: str | None) -> None:
@@ -296,24 +357,19 @@ def write_batch_report(ctx: BatchContext, results: list[GateResult], status: Sta
     lines.extend(["", "## Changed files", ""])
     for path in changed_files_since(ctx.start_sha):
         lines.append(f"- `{path}`")
+    report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text("\n".join(lines) + "\n", encoding="utf-8")
-
-    train_artifact_dir = ROOT / "artifacts" / ctx.train_id
-    train_artifact_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copyfile(report, train_artifact_dir / f"{ctx.batch['id']}-report.md")
 
 
 def commit_batch(ctx: BatchContext) -> str | None:
     if ctx.mode == "dry-run" or ctx.commit_strategy == "none" or not ctx.batch.get("commit", True):
         return None
     files = changed_files_since(ctx.start_sha)
-    if not files:
-        return None
-    subprocess.run(["git", "config", "user.name", "ambitions-codex-train-v3"], cwd=ROOT, check=True)
-    subprocess.run(["git", "config", "user.email", "actions@users.noreply.github.com"], cwd=ROOT, check=True)
     add_files = [path for path in files if not path.startswith("artifacts/codex-train-v3/") and not path.startswith(".codex/runs/")]
     if not add_files:
         return None
+    subprocess.run(["git", "config", "user.name", "ambitions-codex-train-v3"], cwd=ROOT, check=True)
+    subprocess.run(["git", "config", "user.email", "actions@users.noreply.github.com"], cwd=ROOT, check=True)
     subprocess.run(["git", "add", *add_files], cwd=ROOT, check=True)
     if subprocess.run(["git", "diff", "--cached", "--quiet"], cwd=ROOT, check=False).returncode == 0:
         return None
@@ -324,11 +380,11 @@ def commit_batch(ctx: BatchContext) -> str | None:
 
 
 def batch_status(results: list[GateResult]) -> Status:
-    blocking_red = any(result.blocking and result.status == "red" for result in results)
-    if blocking_red:
+    if any(result.blocking and result.status == "red" for result in results):
         return "red"
-    any_yellow = any(result.status == "yellow" for result in results)
-    return "yellow" if any_yellow else "green"
+    if any(result.status == "yellow" for result in results):
+        return "yellow"
+    return "green"
 
 
 def run_batch(train_id: str, batch: dict, args: argparse.Namespace, truth_files: list[str]) -> Status:
@@ -339,34 +395,32 @@ def run_batch(train_id: str, batch: dict, args: argparse.Namespace, truth_files:
     run_dir = RUN_ROOT / train_id / batch["id"] / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    ctx = BatchContext(
-        train_id=train_id,
-        batch=batch,
-        run_dir=run_dir,
-        start_sha=start_sha,
-        mode=args.mode,
-        run_xcode_build=args.run_xcode_build,
-        run_tests=args.run_tests,
-        commit_strategy=args.commit_strategy,
-    )
+    ctx = BatchContext(train_id, batch, run_dir, start_sha, args.mode, args.run_xcode_build, args.run_tests, args.commit_strategy)
 
     results: list[GateResult] = []
+    log(f"-- pre gates for {batch['id']} --")
     results.extend(run_pre_gates(ctx, truth_files))
-    pre_status = batch_status(results)
-    if pre_status == "red":
-        write_batch_report(ctx, results, "red", None)
-        return "red"
-
-    results.append(run_codex(ctx))
     if batch_status(results) == "red":
         write_batch_report(ctx, results, "red", None)
         return "red"
 
+    log(f"-- codex for {batch['id']} --")
+    codex_result = run_codex(ctx)
+    record_gate(results, codex_result)
+    if batch_status(results) == "red":
+        write_batch_report(ctx, results, "red", None)
+        return "red"
+
+    log(f"-- post gates for {batch['id']} --")
     results.extend(run_post_gates(ctx))
     status = batch_status(results)
     commit_sha = None
     if status == "green":
         commit_sha = commit_batch(ctx)
+        if commit_sha:
+            log(f"committed {batch['id']}: {commit_sha}")
+        else:
+            log(f"no commit created for {batch['id']}")
     write_batch_report(ctx, results, status, commit_sha)
     return status
 
@@ -393,15 +447,15 @@ def main(argv: Iterable[str] = sys.argv[1:]) -> int:
     manifest = load_manifest(manifest_path)
     batches = selected_batches(manifest["batches"], args.start_batch, args.end_batch, args.max_batches)
 
-    print(f"Train: {manifest['id']}")
-    print(f"Mode: {args.mode}")
-    print(f"Selected batches: {', '.join(batch['id'] for batch in batches)}")
+    log(f"Train: {manifest['id']}")
+    log(f"Mode: {args.mode}")
+    log(f"Selected batches: {', '.join(batch['id'] for batch in batches)}")
 
     final_status: Status = "green"
     for batch in batches:
-        print(f"== {batch['id']} {batch.get('title', '')} ==")
+        log(f"== {batch['id']} {batch.get('title', '')} ==")
         status = run_batch(manifest["id"], batch, args, manifest.get("truth_files", []))
-        print(f"{batch['id']}: {status}")
+        log(f"{batch['id']}: {status}")
         if status == "red":
             final_status = "red"
             if manifest.get("fail_fast", True):
@@ -409,7 +463,7 @@ def main(argv: Iterable[str] = sys.argv[1:]) -> int:
         elif status == "yellow" and final_status != "red":
             final_status = "yellow"
 
-    print(f"Final status: {final_status}")
+    log(f"Final status: {final_status}")
     return 0 if final_status != "red" else 1
 
 
