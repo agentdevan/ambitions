@@ -154,9 +154,7 @@ final class AppBootstrapper {
         [
             "today": .today,
             "goals": .goals,
-            "time": .time,
-            "motion": .motion,
-            "you": .you
+            "time": .time,            "you": .you
         ]
     }
 
