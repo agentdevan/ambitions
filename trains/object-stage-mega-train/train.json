@@ -19,17 +19,41 @@
       "allowed_paths": ["artifacts/object-stage-mega-train/"],
       "build": false,
       "tests": "none",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 20
     },
     {
-      "id": "AMB-AOM-01",
+      "id": "AMB-AOM-01A",
       "type": "source",
-      "title": "Root IA Refactor and AppTab Cleanup",
-      "prompt": "prompts/object-stage-mega-train/AMB-AOM-01.md",
-      "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/AppIntents/", "Native/Ambitions/Domain/ScreenContractModels.swift", "Native/AmbitionsTests/App/", "Native/AmbitionsUITests/", "scripts/", "artifacts/object-stage-mega-train/"],
+      "title": "Root Surface Contract and AppTab Cleanup",
+      "prompt": "prompts/object-stage-mega-train/AMB-AOM-01A.md",
+      "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Domain/ScreenContractModels.swift", "Native/AmbitionsTests/App/", "scripts/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 25
+    },
+    {
+      "id": "AMB-AOM-01B",
+      "type": "source",
+      "title": "Root Shell Routing and Compatibility Fallbacks",
+      "prompt": "prompts/object-stage-mega-train/AMB-AOM-01B.md",
+      "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/AppIntents/", "Native/AmbitionsTests/App/", "Native/AmbitionsUITests/", "scripts/", "artifacts/object-stage-mega-train/"],
+      "build": true,
+      "tests": "focused",
+      "commit": true,
+      "codex_timeout_minutes": 25
+    },
+    {
+      "id": "AMB-AOM-01C",
+      "type": "source",
+      "title": "Root IA Tests and Stale Motion Assertions",
+      "prompt": "prompts/object-stage-mega-train/AMB-AOM-01C.md",
+      "allowed_paths": ["Native/AmbitionsTests/", "Native/AmbitionsUITests/", "scripts/", "artifacts/object-stage-mega-train/"],
+      "build": true,
+      "tests": "focused",
+      "commit": true,
+      "codex_timeout_minutes": 25
     },
     {
       "id": "AMB-AOM-02",
@@ -39,7 +63,8 @@
       "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Native/Ambitions/Domain/", "Sources/", "Native/AmbitionsTests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-03",
@@ -49,7 +74,8 @@
       "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Features/Motion/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Sources/", "Native/AmbitionsTests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-04",
@@ -59,7 +85,8 @@
       "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Features/Capture/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Native/AmbitionsTests/", "Native/AmbitionsUITests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-05",
@@ -69,7 +96,8 @@
       "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Features/Today/", "Native/Ambitions/Features/Goals/", "Native/Ambitions/Features/Time/", "Native/Ambitions/Features/You/", "Native/Ambitions/Projection/", "Sources/", "Native/AmbitionsTests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-06",
@@ -79,7 +107,8 @@
       "allowed_paths": ["Native/Ambitions/Persistence/", "Native/Ambitions/Domain/", "Native/AmbitionsTests/Persistence/", "Native/AmbitionsTests/Domain/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-07",
@@ -89,7 +118,8 @@
       "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/UI/", "Sources/", "AppUI/", "Native/AmbitionsTests/App/", "Native/AmbitionsUITests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-08",
@@ -99,7 +129,8 @@
       "allowed_paths": ["Native/Ambitions/Features/Today/", "Native/Ambitions/App/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Sources/", "Native/AmbitionsTests/Today/", "Native/AmbitionsUITests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-09",
@@ -109,7 +140,8 @@
       "allowed_paths": ["Native/Ambitions/Features/Goals/", "Native/Ambitions/App/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Sources/", "Native/AmbitionsTests/Goals/", "Native/AmbitionsUITests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-10",
@@ -119,7 +151,8 @@
       "allowed_paths": ["Native/Ambitions/Features/Time/", "Native/Ambitions/App/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Sources/", "Native/AmbitionsTests/Time/", "Native/AmbitionsUITests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-11",
@@ -129,7 +162,8 @@
       "allowed_paths": ["Native/Ambitions/Features/You/", "Native/Ambitions/App/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Sources/", "Native/AmbitionsTests/You/", "Native/AmbitionsUITests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     },
     {
       "id": "AMB-AOM-12",
@@ -139,7 +173,8 @@
       "allowed_paths": ["Native/AmbitionsTests/", "Native/AmbitionsUITests/", "scripts/", "docs/truth/IMPLEMENTATION_TRUTH.md", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
-      "commit": true
+      "commit": true,
+      "codex_timeout_minutes": 35
     }
   ]
 }
