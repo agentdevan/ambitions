@@ -121,11 +121,11 @@ final class ExternalRoutingTests: XCTestCase {
         let translator = AppExternalRouteTranslator()
         let captureURL = try XCTUnwrap(URL(string: "ambitions://tab/capture"))
         let capturesURL = try XCTUnwrap(URL(string: "ambitions://tab/captures"))
-        let generatedURL = try XCTUnwrap(translator.deepLinkURL(for: .openTimeRoute(.captureInbox)))
-        let generatedPayload = translator.routePayload(for: .openTimeRoute(.captureInbox))
+        let generatedURL = try XCTUnwrap(translator.deepLinkURL(for: .openCaptureComposer))
+        let generatedPayload = translator.routePayload(for: .openCaptureComposer)
 
-        XCTAssertEqual(translator.route(fromDeepLink: captureURL), .openTimeRoute(.captureInbox))
-        XCTAssertEqual(translator.route(fromDeepLink: capturesURL), .openTimeRoute(.captureInbox))
+        XCTAssertEqual(translator.route(fromDeepLink: captureURL), .openCaptureComposer)
+        XCTAssertEqual(translator.route(fromDeepLink: capturesURL), .openCaptureComposer)
         XCTAssertEqual(generatedURL.absoluteString, "ambitions://captures/inbox")
         XCTAssertEqual(generatedPayload["surface"], "captures-inbox")
         XCTAssertEqual(generatedPayload["tab"], AppTab.today.rawValue)
@@ -193,7 +193,7 @@ final class ExternalRoutingTests: XCTestCase {
 
         let route = translator.route(fromDeepLink: url)
 
-        XCTAssertEqual(route, .openTimeRoute(.captureInbox))
+        XCTAssertEqual(route, .openCaptureComposer)
     }
 
     func testDeepLinkTranslatorParsesCommandOverlayRoute() throws {
@@ -288,7 +288,7 @@ final class ExternalRoutingTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(route, .openTimeRoute(.captureInbox))
+        XCTAssertEqual(route, .openCaptureComposer)
     }
 
     func testWidgetTranslatorRoutesCapturesInboxPayload() {
@@ -301,7 +301,7 @@ final class ExternalRoutingTests: XCTestCase {
             )
         )
 
-        XCTAssertEqual(route, .openTimeRoute(.captureInbox))
+        XCTAssertEqual(route, .openCaptureComposer)
     }
 
     func testWidgetTranslatorRoutesOverlayPayload() {
@@ -322,11 +322,11 @@ final class ExternalRoutingTests: XCTestCase {
 
         XCTAssertEqual(
             translator.route(fromNotification: AppNotificationRoutingPayload(action: "open", values: ["tab": "captures"])),
-            .openTimeRoute(.captureInbox)
+            .openCaptureComposer
         )
         XCTAssertEqual(
             translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "capture"])),
-            .openTimeRoute(.captureInbox)
+            .openCaptureComposer
         )
         XCTAssertEqual(
             translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "habits"])),
@@ -491,7 +491,7 @@ final class ExternalRoutingTests: XCTestCase {
         )
 
         XCTAssertEqual(translator.route(fromWidget: oldGoalPayload), .openGoalDetail(goalID: "goal-old"))
-        XCTAssertEqual(translator.route(fromNotification: oldCapturesPayload), .openTimeRoute(.captureInbox))
+        XCTAssertEqual(translator.route(fromNotification: oldCapturesPayload), .openCaptureComposer)
     }
 
     func testCapturesInboxPayloadUsesTodayCompatibilityTabHint() {
@@ -535,14 +535,14 @@ final class ExternalRoutingTests: XCTestCase {
         let navigation = AppNavigationModel(legacyTabRawValue: "insights")
         let router = DefaultAppExternalRouter(navigation: navigation)
 
-        router.dispatch(.openTimeRoute(.captureInbox), source: .widgetAction)
+        router.dispatch(.openCaptureComposer, source: .widgetAction)
 
         XCTAssertEqual(navigation.selectedTab, .you)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertEqual(navigation.activeOverlay?.entrySource, .widget)
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertEqual(navigation.lastExternalRoute, .openTimeRoute(.captureInbox))
+        XCTAssertEqual(navigation.lastExternalRoute, .openCaptureComposer)
         XCTAssertEqual(navigation.lastExternalRouteSource, .widgetAction)
         XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
     }
@@ -552,7 +552,7 @@ final class ExternalRoutingTests: XCTestCase {
         let navigation = AppNavigationModel(selectedTab: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
-        router.dispatch(.openTimeRoute(.captureInbox), source: .deepLink)
+        router.dispatch(.openCaptureComposer, source: .deepLink)
         XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)

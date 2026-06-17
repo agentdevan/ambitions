@@ -226,7 +226,7 @@ enum LegacyIARouteCompatibility {
             }
             return .openTab(.today)
         case "capture", "captures":
-            return .openTimeRoute(.captureInbox)
+            return .openCaptureComposer
         case "goals":
             return .openTab(.goals)
         case "time", "plan":

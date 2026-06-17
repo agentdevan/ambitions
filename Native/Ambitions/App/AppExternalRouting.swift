@@ -2,6 +2,7 @@ import Foundation
 
 enum AppExternalRoute: Equatable, Sendable {
     case openTab(AppTab)
+    case openCaptureComposer
     case openToday(TodayEntryContext)
     case openGoalDetail(goalID: String)
     case openTimeRoute(TimeRouteTarget)
@@ -33,6 +34,8 @@ struct AppDeepLinkRegistryEntry: Equatable, Identifiable, Sendable {
         switch canonicalRoute {
         case let .openTab(tab):
             tab.isCanonicalTopLevel
+        case .openCaptureComposer:
+            owningTab == .today
         case let .openToday(context):
             context == .standard || owningTab == .today
         case let .openGoalDetail(goalID):
@@ -174,7 +177,7 @@ enum AppDeepLinkRegistry {
             id: "capture.composer",
             objectKind: .overlay,
             owningTab: .today,
-            canonicalRoute: .presentOverlay(.commandSheet(intent: .quickCapture, entrySource: .external, presentationContext: .quickCapture)),
+            canonicalRoute: .openCaptureComposer,
             deepLinkTemplate: "ambitions://overlay/quiet-command-sheet?intent=quick_capture",
             allowedSources: externalObjectSources,
             privacyBoundary: "Opens the composer seam only after invocation; Capture is not a top-level tab."
@@ -312,14 +315,14 @@ struct AppExternalRouteTranslator {
 
         if host == "captures" || host == "inbox" {
             if pathSegments.isEmpty || pathSegments.first == "inbox" {
-                return .openTimeRoute(.captureInbox)
+                return .openCaptureComposer
             }
         }
 
         if (host == "plan" || host == "time"), let first = pathSegments.first {
             switch first.lowercased() {
             case "captures":
-                return .openTimeRoute(.captureInbox)
+                return .openCaptureComposer
             case "habits":
                 return .openTimeRoute(.habits)
             case "weekly-review":
@@ -366,7 +369,7 @@ struct AppExternalRouteTranslator {
             }
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
-            return .openTimeRoute(.captureInbox)
+            return .openCaptureComposer
         }
         if let overlay = overlayRoute(values: payload.values, fallbackAction: payload.action, source: .notification) {
             return .presentOverlay(overlay)
@@ -385,7 +388,7 @@ struct AppExternalRouteTranslator {
             }
         }
         if payload.action == "open-captures-inbox" || payload.values["surface"] == "captures-inbox" {
-            return .openTimeRoute(.captureInbox)
+            return .openCaptureComposer
         }
         if let overlay = overlayRoute(values: payload.values, fallbackAction: payload.action, source: .widget) {
             return .presentOverlay(overlay)
@@ -397,6 +400,8 @@ struct AppExternalRouteTranslator {
         switch route {
         case let .openTab(tab):
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: tab.rawValue)
+        case .openCaptureComposer:
+            return ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox)
         case let .openToday(context):
             var components = URLComponents()
             components.scheme = "ambitions"
@@ -533,6 +538,11 @@ struct AppExternalRouteTranslator {
                     ExternalSurfaceActionPayload.Key.tab: AppTab.time.rawValue
                 ]
             }
+        case .openCaptureComposer:
+            return ExternalSurfaceActionPayload.routePayload(
+                surface: .captureInbox,
+                tab: AppTab.today.rawValue
+            )
         case let .openYouRoute(target):
             return [
                 ExternalSurfaceActionPayload.Key.surface: target.rawValue,
@@ -602,6 +612,10 @@ struct AppExternalRouteTranslator {
                 values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
                 return values
             }
+        case .openCaptureComposer:
+            var values = routePayload(for: route)
+            values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
+            return values
         case let .openYouRoute(target):
             var values = routePayload(for: route)
             values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
@@ -800,6 +814,9 @@ final class DefaultAppExternalRouter: AppExternalRouting {
                 destination: .timeRoute(target),
                 receiptBody: receiptBody(for: .timeRoute(target), source: entrySource)
             )
+        case .openCaptureComposer:
+            navigation.openCapturesInbox(source: entrySource)
+            return
         case let .openYouRoute(target):
             navigation.openYouRoute(target)
             navigation.recordRoute(

@@ -48,7 +48,7 @@ enum AmbitionsAppShortcutDestination: String, CaseIterable, AppEnum {
         case .time:
             return .openTab(.time)
         case .captureInbox:
-            return .openTimeRoute(.captureInbox)
+            return .openCaptureComposer
         case .you:
             return .openTab(.you)
         case .command:

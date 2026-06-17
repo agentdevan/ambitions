@@ -13,9 +13,16 @@
       "start_sha": "54064ac802f839eca7fac214345b7f4f4b1cee48",
       "title": "Root Surface Contract and AppTab Cleanup",
       "type": "source"
+    },
+    {
+      "completed_at": "2026-06-17T13:35:35Z",
+      "id": "AMB-AOM-01B",
+      "start_sha": "8ceff04edc271ee08911bf23494f85848a030b49",
+      "title": "Root Shell Routing and Compatibility Fallbacks",
+      "type": "source"
     }
   ],
-  "last_completed_batch": "AMB-AOM-01A",
-  "updated_at": "2026-06-17T13:28:24Z",
+  "last_completed_batch": "AMB-AOM-01B",
+  "updated_at": "2026-06-17T13:35:35Z",
   "version": 1
 }
