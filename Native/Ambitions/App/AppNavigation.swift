@@ -381,8 +381,6 @@ final class AppNavigationModel {
             goalsPath = []
         case .time:
             timePath = []
-        case .motion:
-            break
         case .you:
             youPath = []
         }
