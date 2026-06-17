@@ -19,6 +19,14 @@ final class ShellCommandRouterTests: XCTestCase {
         )
 
         let captures = try await repository.listCaptures()
+        let expectedDestination = ShellCommandDestination.overlay(
+            .commandSheet(
+                intent: .quickCapture,
+                entrySource: .shellCompose,
+                presentationContext: .quickCapture
+            )
+        )
+
         XCTAssertEqual(captures.map(\.rawText), ["Capture this idea"])
         XCTAssertEqual(captures.first?.route, .captureInbox)
         XCTAssertEqual(captures.first?.assumptionSummary, "Saved as an Idea so it stays findable without becoming scheduled work.")
@@ -28,8 +36,9 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.presentationContext, .quickCapture)
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(result.title, "Saved as Idea")
-        XCTAssertEqual(result.destination, .timeRoute(.captureInbox))
+        XCTAssertEqual(result.destination, expectedDestination)
         XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Saved as Idea")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Quick action Sheet")
     }
 
     func testRouteToCaptureInboxUsesGlobalCaptureOverlay() {
@@ -56,6 +65,34 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
+    }
+
+    func testOpenCaptureCommandUsesGlobalCaptureOverlayDestination() async {
+        let navigation = AppNavigationModel(selectedTab: .you)
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
+
+        let result = await router.execute(
+            intent: .openCapture,
+            text: "",
+            goalID: nil,
+            captureID: nil,
+            source: .appIntent,
+            now: .now
+        )
+
+        let expectedDestination = ShellCommandDestination.overlay(
+            .commandSheet(
+                intent: .quickCapture,
+                entrySource: .appIntent,
+                presentationContext: .quickCapture
+            )
+        )
+        XCTAssertEqual(navigation.selectedTab, .you)
+        XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
+        XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
+        XCTAssertEqual(navigation.activeOverlay?.entrySource, .appIntent)
+        XCTAssertEqual(result.destination, expectedDestination)
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Quick action Sheet")
     }
 
     func testOpenGoalWithoutIdentifierFallsBackToMemoryLensOverlay() async {
