@@ -1,136 +1,107 @@
 # Ambitions Agent Contract
 
-Status: Active repo front-door guidance
-Audience: Codex, ChatGPT, GitHub agents, and any AI contributor touching this repository
-Last major canon refresh: 2026-06-03
-Purpose: Route agents to the right authority, prevent stale-canon work, preserve proof honesty, and keep Ambitions on a premium local-first native iPhone product path.
+Status: Active repo front-door guidance  
+Audience: Codex, ChatGPT, GitHub agents, and any AI contributor touching this repository  
+Last major canon refresh: 2026-06-16  
+Purpose: Route agents to active truth, prevent stale-canon work, preserve proof honesty, and keep Ambitions on a premium local-first native iPhone product path.
 
 This file is not implementation proof, validation proof, release proof, product completeness proof, or a roadmap. It is the standing operating contract for agents.
 
-If this file conflicts with `docs/truth/*`, the truth files win. If any lower-level doc conflicts with this file and the truth files are silent, this file wins until `docs/truth/*` is updated.
+If this file conflicts with `docs/truth/*`, the truth files win.
 
 ---
 
 ## 1. Non-negotiable Ambitions identity
 
-Ambitions is a market-defining, premium native iPhone-first, local-first Personal Life Organization and Execution Operating System. It subsumes and improves the jobs of task apps, calendar/planning apps, habit trackers, productivity apps, goal planners, and AI planning tools. It is all of these made personal through a local-first runtime that crafts goal plans, recommended steps, time-fit execution, proof, recovery, and reflow uniquely for each end user.
+Ambitions is a premium native iPhone-first, local-first Personal Life OS. It organizes life, shapes time, grounds goals in daily reality, adapts when reality changes, and helps the user make meaningful progress through calm, personalized, inspectable, non-shaming support.
 
-Ambitions may contain tasks, calendar replacement behavior, habits, productivity workflows, and AI/runtime intelligence, but it must not collapse into the commodity UI or architecture patterns of those categories: generic to-do list, calendar clone, streak/shame habit tracker, dashboard stack, chatbot wrapper, web-app shell, or cloud-LLM-first planner.
+Short product thesis:
 
-The active product standard is a polished local-first flagship iPhone experience: quiet luxury, inspectable intelligence, durable trust, privacy-first operation, recovery-aware execution, and no weak v1-feeling seams.
+```text
+Ambitions helps life make sense, then helps the user start what fits.
+```
 
-The current product moat is the Private Life Runtime: a local-first intelligence layer that converts goals and intent into personalized, inspectable, capacity-aware daily steps, then adapts execution through time reality, closure, proof, and recovery.
+The active product moat is the Private Life Runtime: a local, inspectable, user-controlled life graph that turns intent into reality-fit action, then preserves what changed over time.
 
-Agents must optimize for:
-
-- native iPhone-first product quality
-- local-first/on-device-first behavior unless active truth files explicitly allow otherwise
-- Apple-native iCloud/CloudKit continuity before custom server infrastructure
-- deterministic, inspectable intelligence before AI theater
-- proof-backed claims only
-- premium SwiftUI polish, accessibility, motion restraint, and interaction depth
-- clean repo authority hierarchy
-- safe autonomous Codex execution through Goal Mode, program GOAL files, run-state files, deterministic scripts, proof ledgers, reviewer board passes, and Linear closeouts after pushes to `main`
+Agents must optimize for native iPhone quality, local-first core behavior, offline core value with no account, optional Ambitions Account identity and entitlement support when scoped, R2/Source Atlas as public/reference/freshness infrastructure only, deterministic inspectable intelligence, proof-backed claims, premium SwiftUI polish, accessibility, privacy, and clean repo authority hierarchy.
 
 ---
 
 ## 2. Current active product canon
 
-Top-level IA is exactly:
+Top-level persistent surfaces are exactly:
 
-`Today / Goals / Time / Motion / You`
+```text
+Today / Goals / Time / You
+```
 
-Global action:
+Global composer/action layer:
 
-`Capture`
+```text
+Capture
+```
+
+Cross-surface behavior layer:
+
+```text
+Motion
+```
+
+Inspectable trust layer:
+
+```text
+Proof / Source / Privacy / History / Receipts
+```
 
 Primary objects:
 
 - Today -> Reality Meridian / Start Here
 - Goals -> Constellation Atlas
-- Time -> LifeShape Field / Time Texture
-- Motion -> Motion Current
+- Time -> LifeShape Field
 - You -> User System Profile
-- Global Capture -> Atmosphere Composer
+- Global Capture -> Atmosphere Composer / Open Field
+- Motion behavior -> Stage/Motion proof, recovery, re-entry, completion, blockage, time-shift, undo, and protected-boundary state changes
 
-Allowed active tab names are only `Today`, `Goals`, `Time`, `Motion`, and `You`.
+`Motion` is not a tab, destination, analytics surface, activity feed, XP system, score, streak, productivity report, social timeline, or dashboard. Motion belongs under `Stage/Motion` as product behavior.
 
-`Capture` is the global Atmosphere Composer/action layer, not a tab. Capture is not an inbox, notes feed, plus-tab utility, chatbot, generic intake dashboard, or persistent floating button. Capture access must use contextual surface-native entry points first, a quiet toolbar Capture fallback as the consistent escape hatch, and an activated bottom composer seam only after Capture is invoked.
+`Capture` is the global composer/action layer, not a tab, inbox, notes feed, plus-tab utility, chatbot, generic intake dashboard, category grid, or persistent floating button.
 
-`Motion` replaces `Pulse` as the approved fifth tab name. `Pulse` is prior working-name / historical context only, may appear only as stale source context or a cleanup target, and must not be treated as active product truth.
-
-The old IA `Today / Goals / Capture / Time / You` is superseded prior canon. It may appear only as stale current repo/source state, historical context, or a migration target; it must not appear as active product truth.
-
-`Plan` is not an active user-facing top-level destination. Preserve existing `PlanScreen`, `.plan`, `planNavigation()`, and `Native/Ambitions/Features/Plan/` references only as internal compatibility seams unless a scoped migration batch explicitly changes them. Never reintroduce `Plan` as top-level IA.
-
-Do not introduce or reintroduce `Plan`, `Review`, `Profile`, `Calendar`, `Inbox`, `Capture`, `Pulse`, or any sixth tab as active top-level IA without explicit active truth-file authority.
+`Plan`, `Profile`, `Captures`, `Pulse`, `Motion tab`, and `Capture tab` are historical or compatibility context only unless active truth explicitly scopes a migration.
 
 Locked user-facing language:
 
 - Use `Start here` for the flagship Today decision object.
 - Use `Recommended step`, not `Recommended next move`.
-- Use `step`, not `move`, for action items.
+- Use `Step`, not generic task/move language.
 - Use `Start now` when launching execution.
-- Use `Open step` when opening detail instead of a session.
-- Avoid shame, fake urgency, streak pressure, score pressure, and productivity-guilt framing.
-
-Current flagship product surfaces:
-
-- Today Root / Reality Meridian
-- Start Here Surface
-- Step Detail
-- Step Session
-- Action Closure / Recovery
-- Goal Detail / Mission Control
-- Global Capture / Atmosphere Composer and secondary intake routes
-- Time / LifeShape Field
-- Motion / Motion Current
-- Schedule & Availability
-- Planning Defaults
-- Vacation / Away Time
-- Automation & Trust
-- User System Profile
-
-Do not create new top-level destinations without explicit active truth-file authority.
-
-Surface role guardrails:
-
-- Today is current reality, Start Here, execution, closure, and recovery. It is not a task list.
-- Goals is direction, ambition paths, proof, simulations, and goal timelines. It is not a KPI dashboard or ranked life-score surface.
-- Time is LifeShape Field / Time Texture. It distinguishes availability from capacity and must not collapse into free/busy calendar language, schedule optimization, productivity scoring, calendar-density scores, AI scheduling scores, or resource-allocation jargon.
-- Motion is Motion Current: proof, progress, and inspection. It must not become analytics, XP, activity feed, dashboard, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface.
-- You is the context hub and user-model governance surface. It is not generic settings, a social profile, or an admin panel.
+- Use `Open step` when opening detail.
+- Use `Still counts`, `Move it`, `Blocked`, `Waiting`, `Not needed`, `Protected`, `Review`, and `Undo` for closure/control states.
+- Avoid shame, fake urgency, streak pressure, score pressure, AI branding, and productivity-guilt framing.
 
 ---
 
-## 3. Current architecture canon
+## 3. Account, R2, Source Atlas, and network law
 
-Core intelligence must be local-first and deterministic through the Private Life Runtime / Intelligence Kernel.
+Ambitions supports custom Ambitions Accounts at launch.
 
-External/cloud LLMs are not part of the core product architecture. They may only exist, if ever, as optional user-controlled extensions outside core behavior. Do not introduce a required cloud AI dependency, AI SDK, hosted inference path, telemetry-driven intelligence loop, or server-side planning runtime unless active truth files explicitly authorize it.
+Launch authentication providers:
 
-Pre-launch backend posture:
+```text
+Sign in with Apple
+Google Sign-In
+```
 
-- Favor local-first durable data and Apple-native continuity.
-- Use CloudKit/iCloud continuity before custom server/account infrastructure unless active truth files change this posture.
-- Do not assume a custom production server is required for launch.
-- Follow Apple-native and repo-owned local tooling first. Do not add new runtime dependencies without explicit approval and recorded policy gates.
-- Do not add analytics SDKs, telemetry SDKs, crash-reporting SDKs, backend SDKs, tracking, hosted CI, server dependencies, external AI infrastructure, or paid services without explicit separate approval and recorded policy gates.
-- Preserve privacy manifest honesty.
-- Preserve migration safety, durable operation/receipt handling, basic diagnostics, and release proof boundaries.
+The app must remain fully usable without an account.
 
-Runtime/product behavior must support the moat proof:
+No account means: 100% offline core app, no hosted Ambitions account, no personal backend, no network dependency for core value, bundled/local reference packs only, and local goals, captures, closures, proof, preferences, and personalization.
 
-- same intent can produce different daily plans for different users
-- execution is grounded in schedule, capacity, protected time, evidence, and user-owned constraints
-- adaptation happens locally as reality changes
-- closure/recovery changes future recommendations without shame
-- Start Here receipts explain why a recommendation was made
-- relaunch/replay preserves proof and continuity
+Ambitions Account means optional identity, entitlement, R2 freshness/reference-pack access, account recovery/support, future paid identity layer, and future approved network features.
 
-Do not claim this behavior is complete unless live source, tests, and proof artifacts demonstrate it.
+The Ambitions Account must not store the private life graph unless a future canon explicitly approves a user-owned sync architecture.
 
-Screenshots are proof artifacts, and screenshot baselines are review contracts. Do not silently bulk-update screenshot baselines, visual baselines, or snapshot fixtures to make failures disappear. Any baseline update must identify the product reason, affected surfaces, current build/source evidence, and remaining visual/accessibility proof gaps.
+R2 is first-class infrastructure for Source Atlas freshness/reference packs. R2 is not a user-data backend and must never receive goals, captures, calendar data, schedule assumptions, life areas, receipts, proof, closure history, personalization data, behavior patterns, inferred priorities, private user context, or the private life graph.
+
+Hosted AI services, external/cloud LLMs, cloud model APIs, and server-side profiling are excluded from core architecture.
 
 ---
 
@@ -155,50 +126,21 @@ Mandatory read order:
 13. relevant source, tests, scripts, build docs, status docs, and proof artifacts
 14. relevant `.codex` / `.agents` files only after truth files
 
-Supporting but subordinate material:
-
-- `docs/AmbitionsCanon/`
-- `docs/status/`
-- `docs/codex/`
-- `.codex/`
-- `.agents/`
-- historical batch-train, audit, handoff, and closeout material
-
-`.codex/REPO_INVENTORY.md` is a routing index, not product truth or proof.
-
-Older Ambitions 3.0/4.0, PXOS, SI, FCP/PFC/AOS/LDI, handoff, audit, and historical prompt material may be useful only where compatible with the truth files. It must not override active truth.
+Older material may be useful only where compatible with the truth files. It must not override active truth.
 
 ---
 
 ## 5. Repo behavior rules
 
-Default branch behavior:
-
 - Work on `main` only unless the user explicitly requests a branch or PR.
-- Do not create or switch branches for normal Ambitions execution.
-- Preserve completed implementation history as history.
-- Keep generated run artifacts out of commits unless a task explicitly requires them.
-- Do not commit `.codex/runs/` noise by default.
-
-Project structure rules:
-
 - Preserve XcodeGen.
 - Edit `project.yml` and regenerate locally; do not treat checked-in `.xcodeproj` as source truth.
 - Preserve native SwiftUI architecture.
 - Do not add runtime app dependencies during docs/tooling/governance passes.
-- Do not implement product features in docs-only or Codex OS passes unless a narrow test/compatibility fix is required.
-- Do not refactor SwiftUI source during Codex OS/developer-tooling/governance passes unless explicitly scoped.
+- Do not implement product features in docs-only or Codex OS passes unless explicitly scoped.
+- Do not refactor SwiftUI source during governance passes unless explicitly scoped.
 
-Architecture ownership:
-
-- `Native/Ambitions/App` owns app entry, dependency container, environment injection, shell, and routing.
-- `Native/Ambitions/Domain` owns domain models, contracts, state machines, receipts, proof, recommendation, planning, and private runtime logic.
-- `Native/Ambitions/Services` owns service protocols and implementations.
-- `Native/Ambitions/Persistence` owns SwiftData persistence and local durability.
-- `Native/Ambitions/Features` owns feature UI for Today, Goals, Time, Motion, You, global Capture, and secondary owned surfaces.
-- `Native/Ambitions/Features/Plan` remains an internal compatibility owner for the user-facing Time surface until a scoped migration changes it.
-- `Native/Ambitions/UI`, `Sources/`, and `AppUI/Sources` own shared UI/package surfaces.
-- `tools/mcp/` owns local developer MCP tooling only; it must not be referenced by production app targets.
+Compatibility folders and names may remain as source facts, but they do not override active product truth.
 
 ---
 
@@ -206,292 +148,57 @@ Architecture ownership:
 
 Goal Mode is the default autonomous execution model for new Ambitions work.
 
-New Goal Mode work starts from:
-
-- a program GOAL file
-- a program run-state file
-- the program registry in `docs/codex-os/PROGRAM_REGISTRY.md`
-- the relevant program skill under `.agents/skills/`
-- deterministic scripts under `scripts/codex/` and the program skill
-- proof ledger entries when claims are made
-- read-only reviewer board passes when useful
-- Linear closeout after a successful push to `main`
-
-Program GOAL files are the execution source. Program run-state files are the compact memory source. Program skills provide reusable instructions and scripts. Deterministic scripts provide validation. Reviewer agents are read-only unless explicitly scoped otherwise.
-
 The old Ambitions runner remains in the repo for historical/supporting compatibility and for active issues that explicitly request it. It is not the active default for new Goal Mode program work.
 
-Do not require runner headers for new Goal Mode program work. Do not route new Goal Mode program work through `scripts/ambitions-codex-train.sh`.
+---
 
-The legacy batch runner is:
+## 7. Evidence and reporting rules
 
-```bash
-scripts/ambitions-codex-train.sh <BATCH_ID> <PROMPT_FILE>
-```
+Do not claim implementation, release, device, accessibility, privacy, production, TestFlight, App Store, account auth, R2 freshness, sync, or readiness status without current proof.
 
-or:
+A final report must include:
 
-```bash
-make batch BATCH=<BATCH_ID> PROMPT=<PROMPT_FILE>
-```
+- Status: Green / Yellow / Red
+- Scope completed
+- Files changed
+- Product law preserved
+- Validation run
+- Validation not run
+- Proof artifacts
+- Known risks
+- Follow-up required
+- Rollback plan
 
-Legacy batch-train prompts and active issues that explicitly request the runner may run through the runner. When using a runner-compatible prompt, use:
-
-`bypass the Ambitions runner`
-
-Any Ambitions runner-compatible prompt must include this header:
-
-```html
-<!-- AMBITIONS_RUNNER_REQUIRED: true -->
-<!-- RUN_WITH: scripts/ambitions-codex-train.sh -->
-<!-- DIRECT_CODEX_EXECUTION: forbidden_unless_user_explicitly_bypasses_runner -->
-```
-
-If a legacy runner prompt is pasted directly without the header:
-
-1. Save it under `prompts/batches/<BATCH_ID>.md` when the batch ID is clear, or `prompts/inbox/` when unclear.
-2. Add the required runner header.
-3. Route it through the runner.
-4. Do not execute it directly unless the user explicitly bypasses the runner.
-
-If the requested work is Goal Mode governance/docs-only, keep it docs/governance scoped and do not imply app behavior changed. If requested work changes source, tests, project files, scripts, package manifests, runtime behavior, user data, or product surfaces, treat it as source-changing and use the relevant Goal Mode program gates plus required source ownership/parallel-implementation guards unless the active issue explicitly requests the legacy runner.
-
-Bounded Codex self-healing authority:
-
-- Codex may repair Yellow-safe repo-OS/process/metadata blockers and continue in the same run only when `docs/truth/CODEX_PROCESS_TRUTH.md` classifies the blocker as self-healable.
-- Yellow-safe repairs are limited to `.codex/**`, runner/process docs, active-batch metadata, guard/owner/concept-lock/coverage registries, `docs/codex/**`, `scripts/ambitions-codex-train.sh`, and the named guard/coverage scripts.
-- Self-heal must preserve canonical-owner coverage, the parallel implementation guard, concept-lock protections, post-change guard blocking, direct-main rules, and no-readiness-claim discipline.
-- Codex must stop for Red-class blockers, including guard weakening, product canon ambiguity, app source/test changes outside scope, locked source changes without owner authority, privacy/security/release implications, unsafe repo state, direct-main conflict, or any need to alter product truth.
-- Self-heal does not authorize app source changes, app test changes, product truth changes, release claims, TestFlight/App Store claims, accessibility claims, device claims, or app behavior changes outside the current issue.
-
-For serious Ambitions work, assume the operating sequence:
-
-`GPT-5.5 plan -> GPT-5.3-Codex-Spark bounded patch by default, falling back to GPT-5.4-mini only when Spark usage is exhausted -> GPT-5.5 review/repair/final commit`
-
-The planning/review model owns source-truth, canon, architecture, release-claim, and final commit eligibility. The bounded patch model may implement only the approved patch scope. Spark is the default bounded patch model. GPT-5.4-mini is a fallback bounded patch model only when Spark usage is exhausted, not a quality downgrade path for judgment-heavy work.
-
-Do not use stale model-tier names from older docs as current truth unless `docs/truth/CODEX_PROCESS_TRUTH.md` explicitly requires them for compatibility.
+Green means the scoped task is complete and evidence supports the claim. Green never means release-ready, App Store-ready, fully accessible, performance-validated, or product-complete unless those exact proofs exist.
 
 ---
 
-## 7. Batch train and resume rules
+## 8. Hard red stop conditions
 
-Before any batch execution or continuation, inspect:
+Stop and repair if any of these occur:
 
-- `docs/truth/README.md`
-- `docs/truth/CODEX_PROCESS_TRUTH.md`
-- `.codex/state/active-batch.yml`
-- `docs/codex/POST_BATCH_GATE_REGISTRY.md`
-- `docs/codex/BATCH_REGISTRY.md`
-- `docs/codex/GLOBAL_FULL_STACK_COMPLETION_ORDER.md`
-- active EFC overlay files when applicable
-- current repo status and dirty worktree state
-
-For `resume global batch train`, immediately inspect:
-
-- `docs/codex/RESUME_GLOBAL_BATCH_TRAIN.md`
-- `.codex/state/active-batch.yml`
-- `docs/codex/POST_BATCH_GATE_REGISTRY.md`
-- EFC overlay files
-- current batch reports and train-state files
-
-For model-tiered train work, follow the active truth files and current model-tier policy docs. Do not guess through senior-only gates. Defer or stop where the current policy requires it.
-
-Continuation is allowed only through Green and accepted Yellow states where owner, safety reason, no-claim boundary, validation posture, and post-batch gates are recorded. Hard Red stops.
-
-Every batch that touches user-facing behavior, user data, intelligence, source/freshness, side effects, accessibility, performance, release posture, or public claims must state EFC applicability: invoked, not applicable, or accepted Yellow with owner.
-
-## 7A. Ambitions Local Repo Intelligence
-
-Primary iOS 26 execution path:
-
-- Use `scripts/ios26-flagship-run-sequential.sh` for iOS 26 train execution unless explicitly directed otherwise.
-
-Use local repo-intelligence tools only as advisory developer tooling.
-
-Preference order:
-
-1. Resolve active truth and batch boundary from repo docs, manifest, and runner.
-2. Use CodeGraph, when available, for symbol context, callers/callees, impact, trace, affected-test hints.
-3. Use Semble, when available, for fast code/docs/config snippet retrieval.
-4. Use direct file reads, grep, validation scripts, and tests to verify important findings.
-5. Use Understand Anything only for optional human-facing architecture/onboarding maps, never as proof.
-
-Never commit `.codegraph/`, `.understand-anything/`, `.codex/local-indexes/`, `.codex/repo-intelligence/tools/`, or generated graph/dashboard artifacts.
-
-Never use these tools to approve Green, release readiness, privacy proof, accessibility proof, or app behavior claims.
+1. Truth hierarchy conflict cannot be resolved.
+2. Product/design patch violates `PRODUCT_DESIGN_TRUTH.md`.
+3. Implementation or release claim lacks source/proof evidence.
+4. Motion is reintroduced as a root destination.
+5. Capture is reintroduced as a root destination.
+6. A fifth/sixth persistent surface appears.
+7. Plan/Profile/Captures/Pulse returns as active top-level user-facing IA.
+8. Hosted AI, external LLM, cloud model API, or chatbot-first UI becomes required for core behavior.
+9. Hosted personal-data backend or private-life-graph backend appears.
+10. R2 receives or derives private user context.
+11. Account sign-in becomes required for core local app value.
+12. Proposed UI becomes generic task/calendar/habit/notes/dashboard/chatbot/SaaS/admin/neon HUD.
+13. Accessibility path is removed for a primary object.
+14. Privacy/legal ambiguity appears.
+15. Codex cannot inspect required source but the task requires source truth.
 
 ---
 
-## 8. Validation and proof rules
+## 9. Final agent posture
 
-Primary validation remains local VM/Mac validation unless active truth files specify otherwise.
+Act like a senior product architect, iOS SwiftUI engineer, design systems lead, local-first privacy architect, QA/release engineer, and repo-governance operator.
 
-Expected local validation options:
+Do not ship weak first drafts. Do not implement generic task-app, calendar, dashboard, chatbot, or web-app patterns. Do not treat screenshots, source presence, or docs as release proof.
 
-- `xcodegen generate`
-- `./scripts/build-local.sh`
-- focused `xcodebuild` unit tests
-- focused `xcodebuild` UI tests
-- unsigned archive sanity checks when relevant
-- repo scan/claim-scan scripts when relevant
-- raw logs saved under `output/logs/`, `.codex/logs/`, or a named proof packet
-
-Local MCP validation options:
-
-- `python3 tools/mcp/ambitions_repo_mcp/server.py --self-test`
-- `python3 -m pytest tools/mcp/ambitions_repo_mcp/tests` when pytest is available
-- `python3 tools/mcp/ambitions_proof_mcp/server.py --self-test`
-- `python3 -m pytest tools/mcp/ambitions_proof_mcp/tests` when pytest is available
-
-Dirty-worktree gate:
-
-- `bash scripts/codex-post-pk03-dirty-reconciliation.sh`
-
-If `xcodebuild` tests are blocked, disabled, or skipped by runner configuration, the closeout must explicitly say so and must not imply test coverage was proven. A disabled or non-blocking test path is Yellow at best for release proof.
-
-Local simulator evidence is not signed archive proof, TestFlight proof, App Store proof, real-device proof, public accessibility proof, legal/privacy signoff, or human release approval.
-
-Never claim:
-
-- build success without current logs
-- test success without current logs
-- accessibility verification without actual accessibility proof
-- performance verification without measured evidence
-- privacy/legal approval without reviewed artifacts
-- TestFlight/App Store readiness without matching release evidence
-- release readiness without current release proof
-- CI proof when validation is local-only
-- product behavior completion from docs-only changes
-- screenshot or visual approval from stale screenshots, missing screenshots, or silent baseline updates
-
-Validation summaries must separate:
-
-- Verified
-- Failed
-- Not verified
-- Blocked
-- Human/device follow-up
-
-Green / Yellow / Red reporting posture:
-
-- Green only when the scoped change is complete, the changed-file boundary is clean, required validation passed or is explicitly not applicable, and no proof/release/implementation overclaim is present.
-- Yellow when the scoped change is correct but validation, nested authority cleanup, visual proof, accessibility proof, device proof, or another non-blocking evidence item remains incomplete and is clearly owned.
-- Red when forbidden files changed, active product truth is wrong, old IA or Pulse is presented as current truth, a runner/source-changing gate is bypassed without explicit user instruction, or implementation/release/readiness claims are made without proof.
-
----
-
-## 9. UI, design, and product quality rules
-
-Ambitions UI must feel like a premium native Apple-quality iPhone app, not a web dashboard inside SwiftUI.
-
-Default visual/product direction:
-
-- 70% Apple quiet luxury
-- 20% on-device intelligence / inspectable reasoning
-- 10% executive command clarity
-- graphite/warm dark palette
-- restrained celestial orientation
-- calm, alive, focused, and native
-
-Do not ship or propose:
-
-- generic stacked cards as the top-level design language
-- dashboard tile grids
-- chatbot-first UI
-- calendar-clone UI
-- generic task-list hierarchy
-- ornamental AI badges without proof
-- noisy gamification
-- streak/shame mechanics
-- fake productivity scoring
-- ungrounded automation
-- silent plan mutation
-
-Top-level surfaces should follow one-primary-object discipline.
-
-Reality Meridian / Start Here is the flagship daily decision object. It must connect recommendation, current time reality, capacity, goal thread, proof, source freshness, trust receipts, and closure/recovery state. It must not degrade into a generic task card.
-
-Global Capture remains composer-driven and minimal. Secondary intake triage belongs in drill-downs, not as the default Capture experience, and Capture must not become a tab, inbox, notes feed, plus-tab utility, chatbot, or persistent floating button.
-
-Time is LifeShape Field / Time Texture, not a generic calendar clone, free/busy calendar, schedule optimizer, productivity-scoring surface, or resource-allocation surface.
-
-Motion is Motion Current, an inspectable proof/progress surface. It is not analytics, a feed, XP, a score, a streak system, a productivity report, a generic progress chart, or a dashboard.
-
-You uses an iOS Settings-style User System Profile posture with grouped navigation and trust controls.
-
-All UI changes require accessibility, Dynamic Type, VoiceOver order, Reduce Motion, and preview/snapshot consideration according to active truth and relevant gates.
-
----
-
-## 10. Safety, privacy, and dependency stop rules
-
-Hard Red stop conditions:
-
-- introducing required cloud AI/LLM infrastructure for core behavior
-- introducing analytics/tracking SDKs without explicit approval
-- introducing backend/server/account infrastructure without active truth authority
-- weakening privacy claims or privacy manifest honesty
-- adding hosted CI, signing automation, App Store upload automation, or self-hosted runners without policy gates
-- adding write-capable MCP, shell MCP, network MCP, secret-reading MCP, GitHub-write MCP, or production-affecting MCP tools without explicit approval and security review
-- making release, accessibility, privacy, device, TestFlight, App Store, CI, or legal claims without evidence
-- treating historical docs as active authority over truth files
-- reintroducing `Plan` as user-facing top-level IA
-- reintroducing `Capture` as user-facing top-level IA
-- reintroducing `Pulse` as current tab truth instead of prior working-name / historical context
-- introducing `Review`, `Profile`, `Calendar`, `Inbox`, or any sixth tab as top-level IA
-- converting Ambitions into a generic productivity app, dashboard, chatbot, or calendar clone
-- collapsing Motion into analytics, activity feed, XP, score, streak, productivity report, generic progress chart, social timeline, dashboard card stack, or shame/guilt surface
-- collapsing Time into free/busy calendar language, schedule optimization, productivity scoring, calendar-density scores, AI scheduling scores, or resource-allocation jargon
-- adding runtime dependencies, telemetry, analytics, crash SDKs, hosted services, or paid services without explicit separate approval
-- silently bulk-updating screenshot or visual baselines
-- mutating user data silently or without inspectable receipts
-- deleting historical material without following `docs/truth/HISTORICAL_POLICY.md`
-
-If a hard stop is hit, stop, record the reason, identify the smallest safe next step, and do not patch around it.
-
----
-
-## 11. MCP and tooling boundaries
-
-The local Ambitions Repo MCP under `tools/mcp/ambitions_repo_mcp/` is optional read-only Codex tooling for active-batch, EFC, source-truth, claim-scan, closeout, and changed-file impact checks. It is not an app dependency.
-
-The local Ambitions Proof MCP under `tools/mcp/ambitions_proof_mcp/` exposes allowlisted validation names only. It is not a generic shell and must not gain write, network, secrets, signing, App Store, hosted CI, or git mutation tools without explicit approval.
-
-MCP output is repo-derived execution aid, not a replacement for source truth, raw logs, release evidence, or human/device proof.
-
----
-
-## 12. Closeout standard
-
-Every non-trivial agent closeout must include:
-
-- files changed
-- why the change was needed
-- active truth files inspected
-- validation run, with raw command names
-- validation not run, with reason
-- proof/claim boundaries
-- risks or Yellow items
-- rollback notes
-- next eligible batch or gate, when relevant
-
-For docs-only updates, say docs-only. Do not imply app behavior changed.
-
-For source changes, include build/test status and relevant evidence.
-
-For UI changes, include preview/snapshot/visual proof status, accessibility status, and what remains unverified.
-
-For repo cleanup, classify touched material as active, supporting, historical, obsolete, archive-candidate, or delete-candidate when relevant.
-
----
-
-## 13. Practical first question for every agent
-
-Before touching files, ask internally:
-
-"What should a fresh Codex session believe before touching this repo, and which active truth file proves that?"
-
-If the answer is unclear, inspect truth files and source evidence before editing.
-
-If the requested change would make a fresh agent believe the wrong thing about product canon, architecture, validation, release posture, or authority hierarchy, do not make the change as requested. Propose the safe correction instead.
+Build fewer things deeper. Make every object stateful, local, inspectable, accessible, native, and unmistakably Ambitions.
