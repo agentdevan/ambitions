@@ -40,8 +40,8 @@ def build_report(surface_id: str, source_targets: list[str], batch_id: str | Non
         issues.append("surface has no proof status")
     if row.get("surface_universe_id") != surface_id:
         issues.append("surface lookup mismatch")
-    if list(ACTIVE_IA) != ["Today", "Goals", "Time", "Motion", "You"]:
-        issues.append("active IA is not the required Today / Goals / Time / Motion / You set")
+    if list(ACTIVE_IA) != ["Today", "Goals", "Time", "You"]:
+        issues.append("active IA is not the required Today / Goals / Time / You set")
     if "Capture" in ACTIVE_IA:
         issues.append("Capture is the global Atmosphere Composer/action layer, not a tab")
     if "Pulse" in ACTIVE_IA:
@@ -90,7 +90,7 @@ def build_report(surface_id: str, source_targets: list[str], batch_id: str | Non
             "tokens_known": bool(packet.get("tokens", {}).get("design_tokens")),
             "contracts_known": bool(packet.get("contracts")),
             "proof_status_known": bool(packet.get("proof_status")),
-            "active_ia_valid": list(ACTIVE_IA) == ["Today", "Goals", "Time", "Motion", "You"],
+            "active_ia_valid": list(ACTIVE_IA) == ["Today", "Goals", "Time", "You"],
             "plan_not_active_top_level": "Plan" not in ACTIVE_IA,
             "source_targets_allowed_or_extensible": not disallowed_sources or bool(allow_extension_reason),
             "packet_exists_or_generated": generated_packet_md.exists() and generated_packet_json.exists(),

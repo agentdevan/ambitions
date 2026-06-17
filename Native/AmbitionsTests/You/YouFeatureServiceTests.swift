@@ -2027,8 +2027,9 @@ final class YouFeatureServiceTests: XCTestCase {
     }
 
     func testTopLevelShellStillExcludesLegacyYouInsightsAndHabitsTabs() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertTrue(AppTab.allCases.map(\.title).contains("You"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Motion"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))

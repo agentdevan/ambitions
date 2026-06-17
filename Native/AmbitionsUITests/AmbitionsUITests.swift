@@ -141,15 +141,16 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(titleField.waitForNonExistence(timeout: 10))
     }
 
-    func testPreviewBootstrapExposesCanonicalFiveTabShellAndSecondarySurfaces() throws {
+    func testPreviewBootstrapExposesCanonicalFourTabShellAndSecondarySurfaces() throws {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        for tab in ["Today", "Goals", "Time", "Motion", "You"] {
+        for tab in ["Today", "Goals", "Time", "You"] {
             XCTAssertTrue(app.tabBars.buttons[tab].waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
             XCTAssertTrue(app.tabBars.buttons[tab].isHittable, "Top-level tab \(tab) is not hittable")
         }
         XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(app.tabBars.buttons["Motion"].exists)
         XCTAssertFalse(app.tabBars.buttons["More"].exists)
         XCTAssertFalse(app.tabBars.buttons["Insights"].exists)
         XCTAssertFalse(app.tabBars.buttons["Profile"].exists)
@@ -160,12 +161,6 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(app.descendants(matching: .any)["shell.continuity-ribbon"].waitForExistence(timeout: 1))
         XCTAssertTrue(app.buttons["shell.today.capture-button"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["shell.today.memory-lens-button"].waitForExistence(timeout: 1))
-
-        XCTAssertTrue(openCanonicalDestination("Motion", screenIdentifier: "motion.current.screen", in: app))
-        XCTAssertTrue(app.descendants(matching: .any)["motion.current.field"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["motion.current.fact.source"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["motion.current.fact.proof"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["motion.current.fact.receipt"].waitForExistence(timeout: 10))
 
         XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10))
@@ -200,7 +195,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(crown.waitForExistence(timeout: 10))
         XCTAssertLessThanOrEqual(crown.frame.maxY, window.frame.maxY, "Shell header context crown must not extend below the app window.")
         var visibleDockFrame = CGRect.null
-        for tab in ["Today", "Goals", "Time", "Motion", "You"] {
+        for tab in ["Today", "Goals", "Time", "You"] {
             let identifiedElement = app.descendants(matching: .any)["shell.meridian.destination.\(tab.lowercased())"]
             let element = identifiedElement.waitForExistence(timeout: 2) ? identifiedElement : app.buttons[tab]
             XCTAssertTrue(element.waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
@@ -231,7 +226,7 @@ final class AmbitionsUITests: XCTestCase {
         let window = app.windows.firstMatch
         XCTAssertTrue(window.waitForExistence(timeout: 10))
         var visibleDockFrame = CGRect.null
-        for tab in ["Today", "Goals", "Time", "Motion", "You"] {
+        for tab in ["Today", "Goals", "Time", "You"] {
             let identifiedElement = app.descendants(matching: .any)["shell.meridian.destination.\(tab.lowercased())"]
             let element = identifiedElement.waitForExistence(timeout: 2) ? identifiedElement : app.buttons[tab]
             XCTAssertTrue(element.waitForExistence(timeout: 10), "Missing visible dock destination \(tab)")
@@ -256,7 +251,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForShellReady(in: app))
         captureShellScreenshot(named: "today", in: app)
 
-        for tab in ["Goals", "Time", "Motion", "You"] {
+        for tab in ["Goals", "Time", "You"] {
             XCTAssertTrue(openCanonicalDestination(tab, screenIdentifier: screenIdentifier(forTab: tab), in: app))
             captureShellScreenshot(named: tab.lowercased(), in: app)
         }

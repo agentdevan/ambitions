@@ -20,9 +20,16 @@
       "start_sha": "8ceff04edc271ee08911bf23494f85848a030b49",
       "title": "Root Shell Routing and Compatibility Fallbacks",
       "type": "source"
+    },
+    {
+      "completed_at": "2026-06-17T13:39:20Z",
+      "id": "AMB-AOM-01C",
+      "start_sha": "f201641cafdff9c3f9e6af08cc76cd80dacfc415",
+      "title": "Root IA Tests and Stale Motion Assertions",
+      "type": "source"
     }
   ],
-  "last_completed_batch": "AMB-AOM-01B",
-  "updated_at": "2026-06-17T13:35:35Z",
+  "last_completed_batch": "AMB-AOM-01C",
+  "updated_at": "2026-06-17T13:39:20Z",
   "version": 1
 }

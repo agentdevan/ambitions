@@ -76,7 +76,7 @@ crossSurface.proofReceipt.foundation | Cross-surface | Proof receipt | topLevel=
         let rootSurfaces = AmbitionFlagshipSemanticFoundationCatalog.contracts
             .filter(\.isTopLevelSurface)
             .map(\.surface)
-        XCTAssertEqual(rootSurfaces, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(rootSurfaces, ["Today", "Goals", "Time", "You"])
 
         let captureContract = try XCTUnwrap(AmbitionFlagshipSemanticFoundationCatalog.contracts.first { $0.surface == "Capture" })
         XCTAssertFalse(captureContract.isTopLevelSurface)

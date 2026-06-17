@@ -35,7 +35,7 @@ final class GoldenVerticalSliceRuntimeTests: XCTestCase {
         XCTAssertEqual(activation.firstGoal?.id, "goal.first-run-artist.music-release")
         XCTAssertEqual(activation.recommendedStep?.id, "step.first-run-artist.release-checklist")
         XCTAssertEqual(activation.recoveryOption?.kind, .shrink)
-        XCTAssertEqual(activation.receipt?.topLevelTabs, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(activation.receipt?.topLevelTabs, ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(activation.receipt?.captureRole, "global action")
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
         XCTAssertTrue(activation.receipt?.sourceRecordIDs.contains("SourceRecord.first-run-artist.background") == true)

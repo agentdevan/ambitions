@@ -16,7 +16,7 @@ PROMPT_DIR = ROOT / "prompts" / "generated" / "frontend"
 RECEIPT_DIR = REPORT_DIR / "frontend-implementation-receipts"
 
 BATCH_ID = "ENCYCLOPEDIA-TO-FRONTEND-OPERATING-SYSTEM-06"
-ACTIVE_IA = ("Today", "Goals", "Capture", "Time", "You")
+ACTIVE_IA = ("Today", "Goals", "Time", "You")
 
 SURFACE_UNIVERSE_PATH = FRONTEND_ROOT / "MATURE_APP_SURFACE_UNIVERSE.yaml"
 PROVENANCE_PATH = FRONTEND_ROOT / "VISUAL_SOURCE_PROVENANCE_AND_BATCH_LINKAGE.yaml"

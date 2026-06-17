@@ -428,7 +428,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(snapshot.firstScreenContent.contains("Recently moved"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Needs recovery"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Pinned area"))
-        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Time", "You"])
 
         XCTAssertTrue(firstScreenCopy.localizedCaseInsensitiveContains("Your Direction"))
         XCTAssertTrue(firstScreenCopy.localizedCaseInsensitiveContains("Thread Focus"))
@@ -561,7 +561,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertTrue(item.canPromoteToGoal)
         XCTAssertTrue(item.accessibilityHint.contains("Standalone task"))
 
-        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Time", "You"])
     }
 
     func testD13GoalsScreenContractSnapshotSatisfiesImplementationGate() async throws {

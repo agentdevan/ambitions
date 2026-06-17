@@ -1231,8 +1231,8 @@ final class TimeFeatureServiceTests: XCTestCase {
         XCTAssertFalse(copy.contains("calendar written"))
     }
 
-    func testTopLevelIARemainsCanonicalFiveTabShell() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "Motion", "You"])
+    func testTopLevelIARemainsCanonicalFourTabShell() {
+        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
@@ -1249,7 +1249,7 @@ final class TimeFeatureServiceTests: XCTestCase {
         let snapshot = timeState.screenContractSnapshot()
 
         XCTAssertEqual(snapshot.screenID, .plan)
-        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Time", "Motion", "You"])
+        XCTAssertEqual(snapshot.topLevelTabTitles, ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(snapshot.topLevelTabTitles.contains("Capture"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("LifeShape Field"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Open time"))
