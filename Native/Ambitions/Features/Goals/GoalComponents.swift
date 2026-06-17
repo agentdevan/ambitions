@@ -54,6 +54,7 @@ struct GoalsConstellationAtlasStage: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
     @State private var isOrbitalLensExpanded: Bool
+    @State private var selectedLifeAreaID: String?
 
     let overview: GoalsOverview
     let onPrimaryAction: (GoalsAtlasPrimaryAction) -> Void
@@ -68,6 +69,7 @@ struct GoalsConstellationAtlasStage: View {
         self.onPrimaryAction = onPrimaryAction
         self.screenshotProofState = screenshotProofState
         _isOrbitalLensExpanded = State(initialValue: screenshotProofState.expandsOrbitalLens)
+        _selectedLifeAreaID = State(initialValue: screenshotProofState.highlightsSelectedLifeArea ? overview.lifeAreas.items.first(where: { $0.title == overview.orbitalLens.selectedLifeAreaTitle })?.id : nil)
     }
 
     private var primaryGoal: GoalsAtlasSurfaceState? {
@@ -88,9 +90,18 @@ struct GoalsConstellationAtlasStage: View {
         Array(overview.lifeAreas.items.prefix(4))
     }
 
+    private var selectedLifeAreaTitle: String? {
+        if let selectedLifeAreaID,
+           let selected = overview.lifeAreas.items.first(where: { $0.id == selectedLifeAreaID }) {
+            return selected.title
+        }
+        guard screenshotProofState.highlightsSelectedLifeArea else { return nil }
+        return overview.orbitalLens.selectedLifeAreaTitle
+    }
+
     private var displayedLifeAreaItems: [GoalsLifeAreaItemState] {
-        guard screenshotProofState.highlightsSelectedLifeArea,
-              let selectedIndex = overview.lifeAreas.items.firstIndex(where: { $0.title == overview.orbitalLens.selectedLifeAreaTitle }) else {
+        guard let selectedLifeAreaTitle,
+              let selectedIndex = overview.lifeAreas.items.firstIndex(where: { $0.title == selectedLifeAreaTitle }) else {
             return overview.lifeAreas.items
         }
 
@@ -216,8 +227,8 @@ struct GoalsConstellationAtlasStage: View {
                 ForEach(Array(displayedLifeAreaItems.prefix(4))) { item in
                     equalWeightLifeAreaChip(
                         item,
-                        isSelected: screenshotProofState.highlightsSelectedLifeArea
-                            && item.title == overview.orbitalLens.selectedLifeAreaTitle
+                        isSelected: item.id == selectedLifeAreaID
+                            || (screenshotProofState.highlightsSelectedLifeArea && item.title == overview.orbitalLens.selectedLifeAreaTitle)
                     )
                 }
             }
@@ -241,29 +252,43 @@ struct GoalsConstellationAtlasStage: View {
     }
 
     private func equalWeightLifeAreaChip(_ item: GoalsLifeAreaItemState, isSelected: Bool) -> some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-            if isSelected {
-                Image(systemName: "scope")
-                    .font(theme.typography.micro.weight(.semibold))
-                    .foregroundStyle(theme.colors.accentPrimary)
-                    .accessibilityHidden(true)
+        Button {
+            let selection = {
+                selectedLifeAreaID = item.id
+                isOrbitalLensExpanded = true
             }
-            Text(equalWeightLifeAreaTitleLabel(for: item))
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textPrimary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.65)
-                .allowsTightening(true)
-            Text(equalWeightLifeAreaTraceLabel(for: item))
-                .font(theme.typography.micro)
-                .foregroundStyle(theme.colors.textTertiary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.78)
+            if reduceMotion {
+                selection()
+            } else {
+                withAnimation(.snappy(duration: 0.24), selection)
+            }
+        } label: {
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                if isSelected {
+                    Image(systemName: "scope")
+                        .font(theme.typography.micro.weight(.semibold))
+                        .foregroundStyle(theme.colors.accentPrimary)
+                        .accessibilityHidden(true)
+                }
+                Text(equalWeightLifeAreaTitleLabel(for: item))
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.65)
+                    .allowsTightening(true)
+                Text(equalWeightLifeAreaTraceLabel(for: item))
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.78)
+            }
+            .frame(maxWidth: .infinity, alignment: .topLeading)
+            .frame(minHeight: 48, alignment: .topLeading)
+            .padding(.vertical, theme.spacing.xs)
+            .padding(.horizontal, theme.spacing.xs)
+            .contentShape(Rectangle())
         }
-        .frame(maxWidth: .infinity, alignment: .topLeading)
-        .frame(minHeight: 48, alignment: .topLeading)
-        .padding(.vertical, theme.spacing.xs)
-        .padding(.horizontal, theme.spacing.xs)
+        .buttonStyle(.plain)
         .overlay(alignment: .top) {
             Rectangle()
                 .fill(isSelected ? theme.colors.accentPrimary.opacity(0.88) : theme.colors.strokeSubtle.opacity(0.46))
@@ -282,8 +307,8 @@ struct GoalsConstellationAtlasStage: View {
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(item.accessibilityLabel)
         .accessibilityValue(isSelected ? "Selected Life Area. \(item.accessibilityValue)" : item.accessibilityValue)
-        .accessibilityHint(item.accessibilityHint)
-        .accessibilityIdentifier("goals.life-area.\(item.id)")
+        .accessibilityHint("Choose this Life Area to open its active thread lens. \(item.accessibilityHint)")
+        .accessibilityIdentifier("goals.life-area.\(item.id).button")
     }
 
     private var atlasObject: some View {

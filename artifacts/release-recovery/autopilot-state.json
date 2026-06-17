@@ -54,9 +54,10 @@
     "batch_50_amb_aom_07_haptic_replay",
     "batch_51_amb_aom_08_today_blocker_review",
     "batch_52_amb_aom_08_today_replay",
-    "batch_53_amb_aom_pre09_closeout"
+    "batch_53_amb_aom_pre09_closeout",
+    "batch_54_amb_aom_09_goals_reconstruction"
   ],
-  "last_green_batch": "batch_53_amb_aom_pre09_closeout",
+  "last_green_batch": "batch_54_amb_aom_09_goals_reconstruction",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
