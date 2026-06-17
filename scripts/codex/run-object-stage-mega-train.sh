@@ -27,7 +27,11 @@ fi
 git status --short --branch
 git rev-parse HEAD
 
-mapfile -t prompts < <(find "$TRAIN_DIR" -maxdepth 1 -type f -name 'AMB-AOM-*.md' | sort)
+prompts=()
+while IFS= read -r prompt; do
+  prompts+=("$prompt")
+done < <(find "$TRAIN_DIR" -maxdepth 1 -type f -name 'AMB-AOM-*.md' | sort)
+
 if [[ "${#prompts[@]}" -eq 0 ]]; then
   echo "RED: no AMB-AOM prompts found in $TRAIN_DIR" >&2
   exit 1
@@ -53,20 +57,10 @@ if [[ "${#selected[@]}" -eq 0 ]]; then
   exit 1
 fi
 
-mkdir -p artifacts/object-stage-mega-train
-{
-  echo "# Object-Stage Mega Train Run"
-  echo
-  echo "Started: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  echo "Start SHA: $(git rev-parse HEAD)"
-  echo "Start batch: $START_BATCH"
-  echo "End batch: $END_BATCH"
-  echo
-  echo "## Selected prompts"
-  for prompt in "${selected[@]}"; do
-    echo "- $prompt"
-  done
-} > artifacts/object-stage-mega-train/latest-run.md
+echo "Object-Stage Mega Train selected prompts:"
+for prompt in "${selected[@]}"; do
+  echo "- $prompt"
+done
 
 for prompt in "${selected[@]}"; do
   batch_id="$(basename "$prompt" .md)"
@@ -83,17 +77,7 @@ for prompt in "${selected[@]}"; do
   BATCH_TYPE=source-changing \
   "$RUNNER" "$batch_id" "$prompt"
   git pull --ff-only origin main
-  {
-    echo "- $batch_id: completed at $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-    echo "  sha: $(git rev-parse HEAD)"
-  } >> artifacts/object-stage-mega-train/latest-run.md
   git status --short --branch
 done
-
-{
-  echo
-  echo "Finished: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  echo "Final SHA: $(git rev-parse HEAD)"
-} >> artifacts/object-stage-mega-train/latest-run.md
 
 echo "GREEN: object-stage mega train completed selected prompts"
