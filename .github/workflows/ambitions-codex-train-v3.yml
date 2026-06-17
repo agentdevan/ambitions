@@ -1,0 +1,104 @@
+name: Ambitions Codex Train V3
+
+on:
+  workflow_dispatch:
+    inputs:
+      train:
+        required: true
+        default: object-stage-mega-train
+        type: string
+      start_batch:
+        required: true
+        default: auto
+        type: string
+      end_batch:
+        required: true
+        default: auto
+        type: string
+      mode:
+        required: true
+        default: execute
+        type: choice
+        options:
+          - dry-run
+          - execute
+      commit_strategy:
+        required: true
+        default: batch
+        type: choice
+        options:
+          - none
+          - batch
+      run_xcode_build:
+        required: true
+        default: true
+        type: boolean
+      run_tests:
+        required: true
+        default: none
+        type: choice
+        options:
+          - none
+          - focused
+          - full
+      max_batches:
+        required: true
+        default: '99'
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: ambitions-codex-train-v3-${{ inputs.train }}
+  cancel-in-progress: false
+
+jobs:
+  codex-train-v3:
+    runs-on: [self-hosted, Ambitions-XCode26]
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Toolchain proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          sw_vers || true
+          xcodebuild -version
+          xcode-select -p
+          git status --short --branch
+          git rev-parse HEAD
+
+      - name: Run Codex Train V3
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(
+            --train "${{ inputs.train }}"
+            --start-batch "${{ inputs.start_batch }}"
+            --end-batch "${{ inputs.end_batch }}"
+            --mode "${{ inputs.mode }}"
+            --commit-strategy "${{ inputs.commit_strategy }}"
+            --run-tests "${{ inputs.run_tests }}"
+            --max-batches "${{ inputs.max_batches }}"
+          )
+          if [[ "${{ inputs.run_xcode_build }}" == "true" ]]; then
+            args+=(--run-xcode-build)
+          fi
+          python3 scripts/codex/train_v3.py "${args[@]}"
+
+      - name: Upload proof artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ambitions-codex-train-v3-proof
+          path: |
+            artifacts/codex-train-v3/**
+            artifacts/object-stage-mega-train/**
+          if-no-files-found: warn
+          retention-days: 14
