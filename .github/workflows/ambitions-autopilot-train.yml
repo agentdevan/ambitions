@@ -9,7 +9,7 @@ on:
         type: string
       max_batches:
         required: true
-        default: '8'
+        default: '1'
         type: string
       gate_mode:
         required: true
@@ -36,11 +36,11 @@ on:
         type: boolean
       self_dispatch:
         required: true
-        default: true
+        default: false
         type: boolean
       cycles_remaining:
         required: true
-        default: '3'
+        default: '1'
         type: string
 
   push:
@@ -65,14 +65,14 @@ jobs:
     timeout-minutes: 240
     env:
       START_BATCH: ${{ github.event_name == 'workflow_dispatch' && inputs.start_batch || 'auto' }}
-      MAX_BATCHES: ${{ github.event_name == 'workflow_dispatch' && inputs.max_batches || '8' }}
+      MAX_BATCHES: ${{ github.event_name == 'workflow_dispatch' && inputs.max_batches || '1' }}
       GATE_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.gate_mode || 'staged' }}
       COMMIT_CHANGES: ${{ github.event_name == 'workflow_dispatch' && inputs.commit_changes || 'true' }}
       RUN_XCODE_BUILD: ${{ github.event_name == 'workflow_dispatch' && inputs.run_xcode_build || 'true' }}
       RUN_SWIFT_TESTS: ${{ github.event_name == 'workflow_dispatch' && inputs.run_swift_tests || 'false' }}
       RUN_LAUNCH_SMOKE: ${{ github.event_name == 'workflow_dispatch' && inputs.run_launch_smoke || 'false' }}
-      SELF_DISPATCH: ${{ github.event_name == 'workflow_dispatch' && inputs.self_dispatch || 'true' }}
-      CYCLES_REMAINING: ${{ github.event_name == 'workflow_dispatch' && inputs.cycles_remaining || '3' }}
+      SELF_DISPATCH: ${{ github.event_name == 'workflow_dispatch' && inputs.self_dispatch || 'false' }}
+      CYCLES_REMAINING: ${{ github.event_name == 'workflow_dispatch' && inputs.cycles_remaining || '1' }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
