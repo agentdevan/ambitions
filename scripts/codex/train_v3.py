@@ -59,20 +59,29 @@ def run(
     log_path: Path | None = None,
     env: dict[str, str] | None = None,
     input_text: str | None = None,
+    timeout_seconds: int | None = None,
 ) -> subprocess.CompletedProcess[str]:
     merged = os.environ.copy()
     if env:
         merged.update(env)
-    process = subprocess.run(
-        command,
-        cwd=ROOT,
-        env=merged,
-        input=input_text,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        check=False,
-    )
+    try:
+        process = subprocess.run(
+            command,
+            cwd=ROOT,
+            env=merged,
+            input=input_text,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+            timeout=timeout_seconds,
+        )
+    except subprocess.TimeoutExpired as exc:
+        stdout = exc.stdout or ""
+        if isinstance(stdout, bytes):
+            stdout = stdout.decode("utf-8", errors="replace")
+        stdout += f"\nTIMEOUT after {timeout_seconds}s\n"
+        process = subprocess.CompletedProcess(command, 124, stdout=stdout)
     if log_path is not None:
         log_path.parent.mkdir(parents=True, exist_ok=True)
         log_path.write_text("$ " + " ".join(command) + "\n\n" + process.stdout, encoding="utf-8")
@@ -94,6 +103,46 @@ def ensure_clean_worktree() -> None:
     status = git(["status", "--porcelain"])
     if status:
         raise RuntimeError("Dirty worktree before batch:\n" + status)
+
+
+def state_path(train_id: str) -> Path:
+    return ROOT / "artifacts" / train_id / "train-state.json"
+
+
+def load_state(train_id: str) -> dict:
+    path = state_path(train_id)
+    if not path.exists():
+        return {"version": 1, "completed_batches": []}
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def completed_batch_ids(train_id: str) -> set[str]:
+    state = load_state(train_id)
+    completed = state.get("completed_batches") or []
+    if isinstance(completed, list):
+        return {str(item.get("id") if isinstance(item, dict) else item) for item in completed}
+    return set()
+
+
+def mark_batch_completed(ctx: BatchContext, status: Status) -> None:
+    if ctx.mode != "execute" or status != "green":
+        return
+    path = state_path(ctx.train_id)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    state = load_state(ctx.train_id)
+    completed = state.setdefault("completed_batches", [])
+    completed = [item for item in completed if not (isinstance(item, dict) and item.get("id") == ctx.batch["id"]) and item != ctx.batch["id"]]
+    completed.append({
+        "id": ctx.batch["id"],
+        "title": ctx.batch.get("title", ""),
+        "type": ctx.batch.get("type", ""),
+        "completed_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "start_sha": ctx.start_sha,
+    })
+    state["completed_batches"] = completed
+    state["last_completed_batch"] = ctx.batch["id"]
+    state["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    path.write_text(json.dumps(state, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def load_manifest(path: Path) -> dict:
@@ -176,11 +225,9 @@ def gate_truth_readback(ctx: BatchContext, truth_files: list[str]) -> GateResult
     missing_files = [path for path in truth_files if not (ROOT / path).exists()]
     if missing_files:
         return GateResult("truth_readback", "red", True, None, None, f"missing truth files: {missing_files}")
-
     product_path = ROOT / "docs/truth/PRODUCT_DESIGN_TRUTH.md"
     if not product_path.exists():
         return GateResult("truth_readback", "red", True, None, None, "missing PRODUCT_DESIGN_TRUTH.md")
-
     product_truth = product_path.read_text(encoding="utf-8", errors="ignore")
     lower = product_truth.lower()
     requirements: list[tuple[str, list[str]]] = [
@@ -249,10 +296,7 @@ def run_pre_gates(ctx: BatchContext, truth_files: list[str]) -> list[GateResult]
 
 def run_post_gates(ctx: BatchContext) -> list[GateResult]:
     results: list[GateResult] = []
-    for result in [
-        gate("diff_check", ["git", "diff", "--check"], ctx, True),
-        gate_allowed_paths(ctx),
-    ]:
+    for result in [gate("diff_check", ["git", "diff", "--check"], ctx, True), gate_allowed_paths(ctx)]:
         record_gate(results, result)
     if ctx.batch["type"] == "audit":
         record_gate(results, gate_no_source_diff_for_audit(ctx))
@@ -312,22 +356,18 @@ def run_codex(ctx: BatchContext) -> GateResult:
     rendered = render_prompt(ctx)
     out = ctx.run_dir / "codex-output.log"
     last = ctx.run_dir / "codex-last-message.md"
+    timeout_minutes = int(ctx.batch.get("codex_timeout_minutes") or os.environ.get("CODEX_TRAIN_V3_TIMEOUT_MINUTES", "35"))
     command = [
-        "codex",
-        "exec",
-        "-c",
-        f"service_tier=\"{os.environ.get('CODEX_SERVICE_TIER', 'fast')}\"",
-        "--model",
-        os.environ.get("PATCH_MODEL", "gpt-5.3-codex-spark"),
-        "--sandbox",
-        "danger-full-access",
+        "codex", "exec",
+        "-c", f"service_tier=\"{os.environ.get('CODEX_SERVICE_TIER', 'fast')}\"",
+        "--model", os.environ.get("PATCH_MODEL", "gpt-5.3-codex-spark"),
+        "--sandbox", "danger-full-access",
         "--json",
-        "--output-last-message",
-        str(last),
+        "--output-last-message", str(last),
     ]
-    result = run(command, out, input_text=rendered.read_text(encoding="utf-8"))
+    result = run(command, out, input_text=rendered.read_text(encoding="utf-8"), timeout_seconds=timeout_minutes * 60)
     status: Status = "green" if result.returncode == 0 else "red"
-    summary = f"exit={result.returncode}"
+    summary = f"exit={result.returncode}; timeout={timeout_minutes}m"
     if result.returncode != 0:
         tail = tail_summary(result.stdout)
         if tail:
@@ -339,18 +379,9 @@ def write_batch_report(ctx: BatchContext, results: list[GateResult], status: Sta
     report = ctx.run_dir / "batch-report.md"
     lines = [
         f"# {ctx.batch['id']} — {ctx.batch.get('title', '')}",
-        "",
-        f"Status: {status.upper()}",
-        f"Train: `{ctx.train_id}`",
-        f"Type: `{ctx.batch['type']}`",
-        f"Start SHA: `{ctx.start_sha}`",
-        f"Commit SHA: `{commit_sha or 'none'}`",
-        f"Run dir: `{rel(ctx.run_dir)}`",
-        "",
-        "## Gates",
-        "",
-        "| Gate | Status | Blocking | Summary | Log |",
-        "|---|---|---:|---|---|",
+        "", f"Status: {status.upper()}", f"Train: `{ctx.train_id}`", f"Type: `{ctx.batch['type']}`",
+        f"Start SHA: `{ctx.start_sha}`", f"Commit SHA: `{commit_sha or 'none'}`", f"Run dir: `{rel(ctx.run_dir)}`",
+        "", "## Gates", "", "| Gate | Status | Blocking | Summary | Log |", "|---|---|---:|---|---|",
     ]
     for result in results:
         lines.append(f"| {result.name} | {result.status} | {str(result.blocking).lower()} | {result.summary} | `{result.log_path or ''}` |")
@@ -359,6 +390,9 @@ def write_batch_report(ctx: BatchContext, results: list[GateResult], status: Sta
         lines.append(f"- `{path}`")
     report.parent.mkdir(parents=True, exist_ok=True)
     report.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    durable = ROOT / "artifacts" / ctx.train_id / f"{ctx.batch['id']}-report.md"
+    durable.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(report, durable)
 
 
 def commit_batch(ctx: BatchContext) -> str | None:
@@ -394,7 +428,6 @@ def run_batch(train_id: str, batch: dict, args: argparse.Namespace, truth_files:
     run_id = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     run_dir = RUN_ROOT / train_id / batch["id"] / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
-
     ctx = BatchContext(train_id, batch, run_dir, start_sha, args.mode, args.run_xcode_build, args.run_tests, args.commit_strategy)
 
     results: list[GateResult] = []
@@ -405,8 +438,7 @@ def run_batch(train_id: str, batch: dict, args: argparse.Namespace, truth_files:
         return "red"
 
     log(f"-- codex for {batch['id']} --")
-    codex_result = run_codex(ctx)
-    record_gate(results, codex_result)
+    record_gate(results, run_codex(ctx))
     if batch_status(results) == "red":
         write_batch_report(ctx, results, "red", None)
         return "red"
@@ -416,12 +448,15 @@ def run_batch(train_id: str, batch: dict, args: argparse.Namespace, truth_files:
     status = batch_status(results)
     commit_sha = None
     if status == "green":
+        mark_batch_completed(ctx, status)
+        write_batch_report(ctx, results, status, None)
         commit_sha = commit_batch(ctx)
         if commit_sha:
             log(f"committed {batch['id']}: {commit_sha}")
         else:
             log(f"no commit created for {batch['id']}")
-    write_batch_report(ctx, results, status, commit_sha)
+    else:
+        write_batch_report(ctx, results, status, None)
     return status
 
 
@@ -436,6 +471,7 @@ def parse_args(argv: Iterable[str]) -> argparse.Namespace:
     parser.add_argument("--commit-strategy", choices=("none", "batch"), default="batch")
     parser.add_argument("--run-xcode-build", action="store_true")
     parser.add_argument("--run-tests", choices=("none", "focused", "full"), default="none")
+    parser.add_argument("--rerun-completed", action="store_true")
     return parser.parse_args(list(argv))
 
 
@@ -446,10 +482,19 @@ def main(argv: Iterable[str] = sys.argv[1:]) -> int:
         manifest_path = ROOT / manifest_path
     manifest = load_manifest(manifest_path)
     batches = selected_batches(manifest["batches"], args.start_batch, args.end_batch, args.max_batches)
+    completed = completed_batch_ids(manifest["id"])
+    if not args.rerun_completed:
+        skipped = [batch["id"] for batch in batches if batch["id"] in completed]
+        batches = [batch for batch in batches if batch["id"] not in completed]
+        for batch_id in skipped:
+            log(f"skipping completed batch: {batch_id}")
 
     log(f"Train: {manifest['id']}")
     log(f"Mode: {args.mode}")
-    log(f"Selected batches: {', '.join(batch['id'] for batch in batches)}")
+    log(f"Selected batches: {', '.join(batch['id'] for batch in batches) if batches else 'none'}")
+    if not batches:
+        log("Final status: green")
+        return 0
 
     final_status: Status = "green"
     for batch in batches:
