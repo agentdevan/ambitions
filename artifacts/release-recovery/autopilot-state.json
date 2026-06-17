@@ -51,9 +51,10 @@
     "batch_47_amb_aom_06_schema_review",
     "batch_48_amb_aom_03_behavior_review",
     "batch_49_amb_aom_07_shell_visual_review",
-    "batch_50_amb_aom_07_haptic_replay"
+    "batch_50_amb_aom_07_haptic_replay",
+    "batch_51_amb_aom_08_today_blocker_review"
   ],
-  "last_green_batch": "batch_50_amb_aom_07_haptic_replay",
+  "last_green_batch": "batch_51_amb_aom_08_today_blocker_review",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
