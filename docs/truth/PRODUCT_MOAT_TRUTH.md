@@ -1,47 +1,31 @@
 # PRODUCT_MOAT_TRUTH.md
 
-Status: Active moat strategy authority
-Scope: Product moat strategy, anti-commodity alignment, and non-negotiable moat guardrails
-Applies to: Product/design source truth, Codex patch review questions, and anti-drift checks
+Status: Active moat strategy authority  
+Scope: Product moat strategy, anti-commodity alignment, and non-negotiable moat guardrails  
+Applies to: Product/design source truth, Codex patch review questions, and anti-drift checks  
 Owner posture: Subordinate to `PRODUCT_DESIGN_TRUTH.md` when conflicts exist.
 
-## Moat Statement
+This file is not implementation proof, release proof, account proof, R2 proof, sync proof, accessibility proof, or readiness proof.
 
-Ambitions compounds private ambition context into proof-backed execution decisions.
+---
 
-The moat is not a feature list. It is an anti-commodity alignment: the repo must make it clear that Ambitions competes on durable local intelligence, proof, retention, recovery, and inspectable recommendations, not on generic task management.
+## 1. Moat Statement
 
-## Private Life Runtime Proof Target
+Ambitions’ moat is the Private Life Runtime: a local, inspectable, user-controlled life graph that turns intent into reality-fit action, then preserves what changed over time.
 
-The Private Life Runtime moat is not proven by having goals, tasks, calendar views, or recommendation-shaped UI. It is proven when Ambitions can demonstrate this behavior locally and inspectably:
+Ambitions does not win by being a better task app, calendar, habit tracker, chatbot, dashboard, or generic planning workflow. It wins when local history improves fit, timing, closure, proof, recovery, and future recommendations without weakening privacy or user control.
 
-```text
-same intent
-+ different local user context
-= different inspectable daily execution plan
-+ relaunch replay
-+ closure/recovery adaptation
-+ proof/receipt continuity
-```
-
-Minimum proof target:
-
-- same goal or intent produces meaningfully different daily execution steps for users with different schedules, capacity, protected time, and recovery state
-- each recommended step exposes why this step, why now, source context used, what the user can change, and what receipt exists when behavior changes
-- missed or unclosed execution routes through closure/recovery before stale carryover
-- early completion creates optional user-controlled reflow, not silent rearrangement
-- relaunch restores the same local recommendation and receipt unless source data changed
-- user corrections affect later behavior and remain inspectable/resettable
-
-Supporting proof spec:
+Short moat thesis:
 
 ```text
-docs/runtime/PRIVATE_LIFE_RUNTIME_PROOF_SPEC.md
+Ambitions helps life make sense, then helps the user start what fits.
 ```
 
-That spec is a proof target only. It does not prove implementation, tests, device behavior, or release readiness.
+Proof lets progress survive imperfect days, pivots, recovery, and changing capacity.
 
-## Canonical Moat Pyramid
+---
+
+## 2. Canonical Moat Hierarchy
 
 ```text
 Identity Direction
@@ -57,179 +41,278 @@ Identity Direction
                     -> Adaptation / Recovery
 ```
 
-## Non-Moat Commodity
+The moat is the continuity between:
 
-Ambitions should not be positioned as:
+```text
+what matters
+what life can hold
+what fits now
+what the user did
+what changed
+what still counts
+what needs recovery
+what Ambitions should remember locally
+```
 
-- a task app
-- a calendar app
-- a calendar optimizer
-- a note app
-- a habit tracker
-- a productivity dashboard
-- an AI chatbot
-- a habit score / life score / productivity score system
-- a legacy planning-only workflow layer
+Motion expresses movement across this hierarchy. Motion is not a destination, tab, analytics surface, activity feed, XP system, score, streak, or social timeline.
 
-## Core Moat Concepts
+---
 
-### 1) Ambition Graph
+## 3. Non-Moat Commodity Directions
 
-- A first-class product object hierarchy from `Identity Direction` to `Reflection`.
-- `Ambition`, `Commitment`, `Proof`, `Constraint`, `RecoveryThread`, `RecommendationTrace`, and `Reflection` are moat-shaped model types.
-- `Goal` and `Step` remain important execution primitives, but they are not the top of the value hierarchy.
+Ambitions must not be positioned as:
 
-### 2) Proof-Centered Retention
+- task app
+- calendar app
+- calendar optimizer
+- note app
+- habit tracker
+- productivity dashboard
+- AI chatbot
+- AI coach
+- habit score / life score / productivity score system
+- social feed
+- generic planning workflow layer
+- cloud AI planner
 
-- Progress is not complete without meaningful proof context.
-- Progress continuity exists when:
-  - closure state is honest,
-  - proof is represented,
-  - and recovery preserves learning.
+---
 
-### 3) Recovery-First Execution
+## 4. Core Moat Concepts
 
-- Recovery and re-entry are a normal behavior contract, not an exception.
-- Closure language must be humane, concrete, and non-shaming.
+### 4.1 Private Life Runtime
 
-### 4) Local Trust
+The Private Life Runtime is proven only when Ambitions can demonstrate local, inspectable behavior:
 
-- Local-only inspection is the default mode.
-- Local source of truth is the moat safety layer:
-  - what Ambitions learned
-  - what Ambitions used
-  - what user can reset/reset-delete
-  - what user can inspect
-- User-controlled "insights" must be local-first and explicit.
+```text
+same intent
++ different local user context
+= different inspectable daily execution path
++ relaunch replay
++ closure/recovery adaptation
++ proof/receipt continuity
+```
 
-### 5) Recommendation Accountability
+Minimum proof target:
+
+- same goal or intent produces meaningfully different daily execution steps for users with different schedules, capacity, protected time, and recovery state
+- each recommended Step exposes why this Step, why now, source context used, what the user can change, and what receipt exists when behavior changes
+- missed or unclosed execution routes through closure/recovery before stale carryover
+- early completion creates optional user-controlled reflow, not silent rearrangement
+- relaunch restores the same local recommendation and receipt unless source data changed
+- user corrections affect later behavior and remain inspectable/resettable
+
+### 4.2 Local Continuity
+
+Local continuity exists when:
+
+- closure state is honest
+- proof is represented
+- recovery preserves learning
+- recommendations remain inspectable
+- user corrections are retained locally
+- the user can reset, delete, or disable learning where relevant
+
+### 4.3 Recovery-First Execution
+
+Recovery and re-entry are normal behavior contracts, not exceptions. Closure language must be humane, concrete, and non-shaming.
+
+Use:
+
+- Still counts
+- Reality changed
+- Make today lighter
+- Waiting
+- Blocked
+- Not needed
+- Review when ready
+
+Avoid:
+
+- overdue
+- failed
+- streak broken
+- productivity dropped
+- get back on track
+
+### 4.4 Recommendation Accountability
 
 Every adaptive action must be explainable through:
 
 - source reference
 - reason
-- uncertainty (if relevant)
-- control option
-- and a receipt path when behavior changes meaningfully
+- uncertainty when relevant
+- user control
+- receipt path when behavior changes meaningfully
 
-Forbidden language in recommendation contexts:
-- “AI recommends”
-- “best next move”
-- “confidence percentage”
+Forbidden recommendation language:
 
-### 6) Product Intelligence Surface
+- AI recommends
+- best next move
+- confidence percentage
+- model confidence
+- optimized by Ambitions
+- productivity model
 
-- `Ambitions` should read as an external brain with local reasoning, not a generic assistant.
-- No external-hosted personal profile backend.
-- No hidden task-priority engine.
+---
 
-### 7) Native Apple Execution Layer
-
-- Native iPhone surfaces are the primary execution layer.
-- Apple-native affordances may support local capture, proof, reminders, widgets, share extension, App Intents, and future user-owned sync.
-- Native integration must serve the private Ambition Graph and proof/recovery loop, not replace it with commodity calendar, reminder, or task behavior.
-- Apple-owned sync may be planned only as user-controlled sync for user-owned Ambitions data. It is not a custom hosted Ambitions backend.
-
-## Surface-by-Surface Moat Requirements
+## 5. Surface-by-Surface Moat Requirements
 
 ### Today
 
 - Reality Meridian over task list
 - Start Here over detached cards
+- current reality over generic daily agenda
 - proof + recovery visibility
-- “Still counts” over shame
+- Still counts over shame
 
 ### Goals
 
 - Constellation Atlas over ranked score cards
-- Proof trail and direction continuity over KPI dashboards
-
-### Capture
-
-- Atmospheric holding over inbox/note feed
-- route reveal after input over forced classification
-- explicit proof/constraint routing
+- Life areas and goal threads over KPI dashboards
+- proof trail and direction continuity over generic goals list
 
 ### Time
 
 - LifeShape Field over calendar clone
-- open time, protected time, pressure, proof opportunity as core concepts
+- open capacity, protected time, pressure, recovery, and fixed points as core concepts
+- horizons as depth inside Time, not root surfaces
 
 ### You
 
 - User System Profile over social/admin/profile-account framing
-- clear local trust and learning controls
+- clear local trust, account, permissions, R2/reference, learning, reset, export, and privacy controls
 
-## Moat-Aligned Metrics
+### Capture
+
+- global composer over tab/inbox/note feed
+- Atmosphere Composer/Open Field over generic add sheet
+- save first when confidence is low
+- route input only after user can inspect/correct
+
+### Motion
+
+- cross-surface behavior over destination
+- consequence clarity over decoration
+- proof/recovery/re-entry signaling over progress dashboard
+
+---
+
+## 6. Account, R2, and Source Atlas Moat Boundary
+
+Custom Ambitions Accounts are launch canon when scoped through `PRODUCT_DESIGN_TRUTH.md`.
+
+Ambitions Account may support:
+
+- Sign in with Apple
+- Google Sign-In
+- identity
+- entitlements
+- R2 freshness/reference-pack access
+- account recovery/support
+- future paid identity layer
+- future approved network features
+
+Ambitions Account must not store the private life graph unless a future canon explicitly approves a user-owned sync architecture.
+
+R2 and Source Atlas may enrich public/reference/freshness context, but they do not own the Private Life Runtime.
+
+R2 must never receive:
+
+- goals
+- captures
+- calendar data
+- schedule assumptions
+- life areas
+- receipts
+- proof
+- closure history
+- personalization data
+- behavior patterns
+- inferred priorities
+- private user context
+- the private life graph
+
+Offline core value must work without an account, without R2, and without network access.
+
+---
+
+## 7. Local-first Boundary
+
+Hard constraints:
+
+- No external/cloud LLM core dependency.
+- No hosted AI service core dependency.
+- No hosted private life graph backend.
+- No server-side user profiling.
+- No R2 private user data path.
+- No account requirement for core Today / Goals / Time / You value.
+- No externalized user-personality inference in the active decision loop.
+- No release/accessibility/privacy claims without explicit evidence.
+
+---
+
+## 8. Moat-Aligned Product Questions
 
 Use these as product-quality questions, not release proof:
 
-- commitments that close with proof or an honest recovery state
-- recommendation actions that expose source, reason, uncertainty, control, and receipt behavior
-- captures routed into Ambition, Proof, Constraint, Commitment, Reflection, Held Item, Grow into Goal, Needs a Place, or Ready to Place
-- recovery threads that restart from the last honest point instead of discarding context
-- user-visible inspection/reset/delete controls for local learning and recommendation inputs
+- Does the work help Ambitions preserve continuity between direction, capacity, action, closure, proof, and recovery?
+- Does the recommended Step expose source, reason, uncertainty when relevant, control, and receipt behavior?
+- Does Capture route into Step, Goal Thread, Proof, Time boundary, review, or held state without becoming an inbox/feed?
+- Does recovery restart from the last honest point instead of discarding context?
+- Are user-visible inspection/reset/delete controls present for local learning and recommendation inputs?
+- Does the work preserve offline core behavior with no account?
+- Does the work keep R2/Source Atlas separate from the private life graph?
 
-## Anti-Metrics
+---
+
+## 9. Anti-Metrics
 
 Do not optimize Ambitions around:
 
 - task throughput without proof
-- calendar density without commitment fit
-- generic productivity scores or habit scores
+- calendar density without capacity fit
+- generic productivity scores
+- habit scores
 - cloud/model engagement loops
 - chatbot message volume
 - streak pressure
 - hidden recommendation acceptance
+- account conversion at the expense of offline core value
 - release/readiness claims without current proof
 
-## Forbidden Product Directions
+---
 
-Hard Red conditions:
+## 10. Hard Red Conditions
 
-- Plan as a top-level tab or active destination.
-- Any user-facing sixth tab.
-- Calendar clone or dashboard interpretation at the top level.
-- Shame language in closure.
-- Generic AI branding, assistant-first framing, or chatbot behavior.
-- Hidden recommendations with no source/explainability.
+Stop and repair if any of these happen:
 
-## Anti-Patterns / Hard Red Trigger Terms
+- Motion is treated as a root destination.
+- Capture is treated as a root destination.
+- Plan/Profile/Captures/Pulse is revived as active top-level IA.
+- A fifth/sixth persistent surface appears.
+- Top-level UI becomes a calendar clone or dashboard.
+- Closure uses shame language.
+- Recommendations have no source/explainability/control path.
+- Hosted AI or external/cloud LLM becomes core architecture.
+- Hosted private life graph backend appears.
+- Ambitions Account stores private life graph data under this canon.
+- R2 receives private user data.
+- Offline core behavior requires sign-in.
+- Product docs claim implementation/readiness without evidence.
 
-Banned in active user-facing copy:
+---
 
-- Begin Focus
-- Start Focus
-- best next move
-- next best move
-- overdue
-- failed
-- streak broken
-- productivity dropped
+## 11. Moat Review Check Questions for Codex
 
-## Local-first Boundary
+Before closing work that touches product/runtime/frontend/account/R2 behavior:
 
-Hard constraints:
-
-- No architecture path for an external cloud LLM core dependency.
-- No custom hosted personal-data backend for private Ambition Graph behavior.
-- No externalized user-personality inference in active decision loop.
-- No release/accessibility/privacy claims without explicit evidence.
-
-## Moat Review Check Questions for Codex
-
-Before closing this batch family:
-
-1. Is `Ambition` treated as a first-class conceptual value beyond tasks?
-2. Is `Proof` preserved where closure and recovery differ?
-3. Are recommendation reasons/explainability paths scaffolded and non-AI-branded?
-4. Is `You` language clearly about trust/control rather than account/settings/admin?
-5. Are forbidden terms and top-level legacy names absent from active user-facing layers?
-6. Does the work move Ambitions closer to proving same intent + different local context = different inspectable daily execution?
-
-## Hard Red Conditions
-
-- Any incompatible public top-level IA.
-- Non-explainable recommendation output.
-- Closed-closure logic that shames incomplete execution.
-- Hidden external dependency claims for local trust/private control paths.
+1. Is the product object clear?
+2. Does it preserve Today / Goals / Time / You as the only persistent surfaces?
+3. Does it keep Capture as global composer?
+4. Does it keep Motion as cross-surface behavior?
+5. Does it move Ambitions closer to proving local context changes recommendation behavior inspectably?
+6. Does it preserve source/reason/control/receipt behavior?
+7. Does it protect offline core with no account?
+8. Does it keep R2/Source Atlas public/reference-only?
+9. Does it avoid hosted AI/cloud LLM dependency?
+10. Does it avoid release/readiness claims without proof?
