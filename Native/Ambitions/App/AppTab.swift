@@ -6,11 +6,10 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     case today
     case goals
     case time
-    case motion
     case you
 
     static var allCases: [AppTab] {
-        [.today, .goals, .time, .motion, .you]
+        [.today, .goals, .time, .you]
     }
 
     static var capture: AppShellCaptureCompatibilityMetadata.Type {
@@ -24,7 +23,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case "today": self = .today
         case "goals": self = .goals
         case "time": self = .time
-        case "motion": self = .motion
         case "you": self = .you
         default: return nil
         }
@@ -53,7 +51,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case .today: return "today"
         case .goals: return "goals"
         case .time: return "time"
-        case .motion: return "motion"
         case .you: return "you"
         }
     }
@@ -71,7 +68,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case .today: "Today"
         case .goals: "Goals"
         case .time: "Time"
-        case .motion: "Motion"
         case .you: "You"
         }
     }
@@ -81,7 +77,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         case .today: "sun.max"
         case .goals: "target"
         case .time: "clock.badge"
-        case .motion: "point.topleft.down.curvedto.point.bottomright.up"
         case .you: "person.crop.circle"
         }
     }
@@ -130,7 +125,6 @@ enum AmbitionsSurfaceContractRegistry {
         AmbitionsSurfaceContract(tab: .today, title: "Today", primaryObjectTitle: "Reality Meridian"),
         AmbitionsSurfaceContract(tab: .goals, title: "Goals", primaryObjectTitle: "Constellation Atlas"),
         AmbitionsSurfaceContract(tab: .time, title: "Time", primaryObjectTitle: "LifeShape Field"),
-        AmbitionsSurfaceContract(tab: .motion, title: "Motion", primaryObjectTitle: "Motion Current"),
         AmbitionsSurfaceContract(tab: .you, title: "You", primaryObjectTitle: "User System Profile")
     ]
 
@@ -145,7 +139,7 @@ enum AmbitionsSurfaceContractRegistry {
         var issues: [String] = []
 
         if contracts.map(\.tab) != AppTab.allCases {
-            issues.append("Surface contracts must follow Today, Goals, Time, Motion, You.")
+            issues.append("Surface contracts must follow Today, Goals, Time, You.")
         }
 
         if contracts.map(\.title) != AppTab.allCases.map(\.title) {
@@ -180,7 +174,6 @@ enum AmbitionsSurfaceContractRegistry {
         case .today: "Reality Meridian"
         case .goals: "Constellation Atlas"
         case .time: "LifeShape Field"
-        case .motion: "Motion Current"
         case .you: "User System Profile"
         }
     }
@@ -191,8 +184,8 @@ enum LegacyIARouteCompatibility {
         switch rawValue.lowercased() {
         case "capture", "captures":
             .today
-        case "pulse":
-            .motion
+        case "motion", "pulse":
+            .today
         case "plan", "habits":
             .time
         case "profile", "insights":
@@ -213,7 +206,7 @@ enum LegacyIARouteCompatibility {
         case "time", "plan":
             (.time, nil, nil)
         case "motion", "pulse":
-            (.motion, nil, nil)
+            (.today, nil, nil)
         case "habits":
             (.time, .habits, nil)
         case "you", "profile":
@@ -239,7 +232,7 @@ enum LegacyIARouteCompatibility {
         case "time", "plan":
             return .openTab(.time)
         case "motion", "pulse":
-            return .openTab(.motion)
+            return .openTab(.today)
         case "habits":
             return .openTimeRoute(.habits)
         case "you", "profile":
