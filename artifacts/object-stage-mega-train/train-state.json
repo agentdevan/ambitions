@@ -41,9 +41,16 @@
       "start_sha": "29b05a966a08e595c7b037eaff7d1124992d6d59",
       "title": "Motion Demotion to Behavior",
       "type": "source"
+    },
+    {
+      "completed_at": "2026-06-17T14:31:48Z",
+      "id": "AMB-AOM-04",
+      "start_sha": "32484b183d8d61eba6f6168449b3f5248d0dca37",
+      "title": "Capture Global Composer",
+      "type": "source"
     }
   ],
-  "last_completed_batch": "AMB-AOM-03",
-  "updated_at": "2026-06-17T14:27:52Z",
+  "last_completed_batch": "AMB-AOM-04",
+  "updated_at": "2026-06-17T14:31:48Z",
   "version": 1
 }
