@@ -45,9 +45,10 @@
     "batch_41_motion_reentry_visual_rebuild",
     "batch_42_quiet_empty_state_rebuild",
     "batch_43_visual_reconstruction_test_alignment",
-    "batch_44_visual_rebuild_gate"
+    "batch_44_visual_rebuild_gate",
+    "batch_45_amb_aom_reconciliation"
   ],
-  "last_green_batch": "batch_44_visual_rebuild_gate",
+  "last_green_batch": "batch_45_amb_aom_reconciliation",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
