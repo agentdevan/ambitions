@@ -376,6 +376,17 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
+    func testLegacyMotionPreferenceLoadsIntoTodayCompatibilityFallback() {
+        let navigation = AppNavigationModel(legacyTabRawValue: "motion")
+
+        XCTAssertEqual(navigation.selectedTab, .today)
+        XCTAssertTrue(navigation.timePath.isEmpty)
+        XCTAssertTrue(navigation.youPath.isEmpty)
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("motion"))
+        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "motion"), .today)
+    }
+
+    @MainActor
     func testShellOverlayRoutesStayOwnedByTheShellLayer() {
         let navigation = AppNavigationModel(selectedTab: .today)
 

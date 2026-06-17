@@ -416,6 +416,23 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertFalse(AppTab.allCases.map(\.title).contains("Pulse"))
     }
 
+    func testLegacyMotionRoutesMapToTodayWithoutActiveMotionTab() throws {
+        let translator = AppExternalRouteTranslator()
+        let motionURL = try XCTUnwrap(URL(string: "ambitions://tab/motion"))
+
+        XCTAssertEqual(translator.route(fromDeepLink: motionURL), .openTab(.today))
+        XCTAssertEqual(
+            translator.route(fromWidget: AppWidgetRoutingPayload(action: "open", values: ["tab": "motion"])),
+            .openTab(.today)
+        )
+        XCTAssertEqual(
+            translator.route(fromNotification: AppNotificationRoutingPayload(action: "open", values: ["tab": "motion"])),
+            .openTab(.today)
+        )
+        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("motion"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Motion"))
+    }
+
     func testRouteTranslatorGeneratesDeterministicDeepLinks() throws {
         let translator = AppExternalRouteTranslator()
 
