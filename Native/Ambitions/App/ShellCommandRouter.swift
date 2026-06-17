@@ -189,17 +189,18 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     ),
                     now: now
                 )
+                let destination = captureComposerDestination(source: source)
                 navigation.openCapturesInbox(source: source)
                 navigation.recordRoute(
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
                     source: source,
                     presentationContext: .quickCapture,
-                    destination: .timeRoute(.captureInbox),
-                    receiptBody: "Saved locally with a receipt you can change in Capture."
+                    destination: destination,
+                    receiptBody: "Saved locally in Capture. Placement stays editable."
                 )
                 return ShellCommandExecutionResult(
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
-                    destination: .timeRoute(.captureInbox),
+                    destination: destination,
                     createdCaptureID: capture.id
                 )
             } catch {
@@ -258,15 +259,16 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             return ShellCommandExecutionResult(destination: .goal(goalID))
         case .openCapture:
             _ = captureID
-            navigation.openCapturesInbox(source: source)
+            let destination = captureComposerDestination(source: source)
+            navigation.presentCaptureCompatibilityRoute(source: source)
             navigation.recordRoute(
-                title: "Open capture",
+                title: "Open Capture",
                 source: source,
-                presentationContext: .recall,
-                destination: .timeRoute(.captureInbox),
-                receiptBody: "Opened Capture from \(source.displayTitle)."
+                presentationContext: .quickCapture,
+                destination: destination,
+                receiptBody: "Opened the global Capture composer from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: .timeRoute(.captureInbox))
+            return ShellCommandExecutionResult(destination: destination)
         case .memoryLens:
             presentMemoryLens(
                 intent: .memoryLens,
@@ -287,6 +289,16 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen:
             return nil
         }
+    }
+
+    private func captureComposerDestination(source: ShellCommandEntrySource) -> ShellCommandDestination {
+        .overlay(
+            .commandSheet(
+                intent: .quickCapture,
+                entrySource: source,
+                presentationContext: .quickCapture
+            )
+        )
     }
 
     private func captureSourceType(for source: ShellCommandEntrySource) -> CaptureSourceType? {
