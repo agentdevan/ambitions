@@ -1,0 +1,29 @@
+BASELINE: facebf787a5d95bb8cbbbae53f4756fde53faeed
+TIMESTAMP: 20260616T230124
+
+DELETE:
+DELETE Packages/AmbitionsExperienceKernel/Codex/Batches
+DELETE prompts/batches
+DELETE artifacts/ambitions-ui-reconstruction
+DELETE artifacts/ui-quality-lockdown
+DELETE artifacts/personal-life-os/validation
+DELETE artifacts/personal-life-os/reports
+DELETE artifacts/personal-life-os/native-context
+DELETE artifacts/plos-runtime
+DELETE build/reports
+
+KEEP:
+KEEP docs/truth
+KEEP AGENTS.md
+KEEP .codex/os/AMBITIONS_OPERATING_CONTEXT.md
+KEEP .codex/hooks
+KEEP .agents/skills
+KEEP scripts
+KEEP Native
+KEEP Sources
+KEEP AppUI
+KEEP project.yml
+KEEP Package.swift
+KEEP README.md
+KEEP docs/README.md
+KEEP docs/codex/LOCAL_DATA_CLOUD_BOUNDARY_LAW.md

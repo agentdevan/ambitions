@@ -1,9 +1,0 @@
-program-closeout-check program=uiql issue=UIQL-004 branch=main head=bd487793a
-PASS branch main
-FAIL forbidden dirty paths
-Native/Ambitions/Features/Today/StartHereProductKernelProjection.swift
-Native/Ambitions/Features/Today/TodayDayRailPanels.swift
-Native/AmbitionsTests/Today/TodayViewModelTests.swift
-Native/AmbitionsUITests/AmbitionsUITests.swift
-PASS proof index exists
-artifact=artifacts/ui-quality-lockdown/script-output/program-closeout-check-UIQL-004-20260611T035510.log

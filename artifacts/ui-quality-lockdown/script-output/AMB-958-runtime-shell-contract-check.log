@@ -1,9 +1,0 @@
-AMB-958 runtime shell contract check
-status: read-only source scan
-AppTab.allCases: today, goals, time, motion, you
-AmbitionsRootView root Tab values: today, goals, time, motion, you
-PASS - AppTab allCases is exactly Today/Goals/Time/Motion/You
-PASS - AppTab allCases excludes Capture from root tab enumeration
-PASS - AmbitionsRootView root Tab values are exactly Today/Goals/Time/Motion/You
-PASS - AmbitionsRootView root Tab excludes Capture
-PASS - Capture compatibility canonicalizes to Today for top-level selection
