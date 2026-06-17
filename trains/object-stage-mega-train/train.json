@@ -60,7 +60,7 @@
       "type": "source",
       "title": "Stage Spine and Motion Behavior",
       "prompt": "prompts/object-stage-mega-train/AMB-AOM-02.md",
-      "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Native/Ambitions/Domain/", "Sources/", "Native/AmbitionsTests/", "artifacts/object-stage-mega-train/"],
+      "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Stage/", "Native/Ambitions/Projection/", "Native/Ambitions/Domain/", "Native/Ambitions/Features/Motion/MotionCurrentAction.swift", "Native/Ambitions/Features/Motion/MotionCurrentScreen.swift", "Sources/", "Native/AmbitionsTests/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
       "commit": true,
