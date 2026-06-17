@@ -19,7 +19,7 @@ def run_git(args: list[str], *, check: bool = True) -> subprocess.CompletedProce
 
 
 def stage_recovery_paths() -> None:
-    add_paths = ["Native", "Sources", "scripts", ".github"]
+    add_paths = ["Native", "Sources", "scripts", ".github", "artifacts/object-stage-mega-train"]
     if engine.STATE_PATH.exists():
         add_paths.append(engine.rel(engine.STATE_PATH))
     if engine.LATEST_PATH.exists():
