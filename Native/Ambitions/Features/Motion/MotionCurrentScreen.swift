@@ -50,9 +50,20 @@ struct MotionCurrentScreen: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let projection: MotionCurrentProjection
+    private let onAction: (MotionCurrentAction) -> Void
 
-    init(projection: MotionCurrentProjection? = nil) {
+    init(
+        projection: MotionCurrentProjection? = nil,
+        onAction: @escaping (MotionCurrentAction) -> Void = { action in
+            NotificationCenter.default.post(
+                name: MotionCurrentAction.notificationName,
+                object: nil,
+                userInfo: action.toNotificationPayload()
+            )
+        }
+    ) {
         self.projection = projection ?? .fixture(renderState: .launchArgument)
+        self.onAction = onAction
     }
 
     var body: some View {
@@ -61,11 +72,16 @@ struct MotionCurrentScreen: View {
         ScrollView {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 MotionContextCrown(state: projection.crown)
-                MotionCurrentField(state: projection.field, lanes: projection.lanes, reduceMotion: reduceMotion)
+                MotionCurrentField(
+                    state: projection.field,
+                    lanes: projection.lanes,
+                    reduceMotion: reduceMotion,
+                    onAction: onAction
+                )
                 MotionReentryPrompt()
                 MotionLaneCluster(lanes: projection.lanes)
                 MotionSourceReceiptAffordance(state: projection.affordance)
-                MotionContinuityDock(actions: projection.dockActions)
+                MotionContinuityDock(actions: projection.dockActions, onAction: onAction)
             }
             .padding(.horizontal, theme.spacing.lg)
             .padding(.vertical, theme.spacing.md)
@@ -164,6 +180,7 @@ private struct MotionCurrentField: View {
     let state: MotionCurrentFieldState
     let lanes: [MotionLaneState]
     let reduceMotion: Bool
+    let onAction: (MotionCurrentAction) -> Void
 
     var body: some View {
         ZStack(alignment: .leading) {
@@ -277,17 +294,20 @@ private struct MotionCurrentField: View {
                     motionActionButton(
                         title: "Inspect proof",
                         systemImage: "seal",
-                        accessibilityIdentifier: "motion.current.action.inspect-proof"
+                        accessibilityIdentifier: "motion.current.action.inspect-proof",
+                        action: .inspectProof(state.proof)
                     )
                     motionActionButton(
                         title: "Open receipt",
                         systemImage: "doc.text.magnifyingglass",
-                        accessibilityIdentifier: "motion.current.action.open-receipt"
+                        accessibilityIdentifier: "motion.current.action.open-receipt",
+                        action: .openReceipt(state.receipt)
                     )
                     motionActionButton(
                         title: "Re-enter thread",
                         systemImage: "arrowshape.turn.up.forward",
-                        accessibilityIdentifier: "motion.current.action.reenter-thread"
+                        accessibilityIdentifier: "motion.current.action.reenter-thread",
+                        action: .openThread(state.control)
                     )
                 }
             } else {
@@ -295,17 +315,20 @@ private struct MotionCurrentField: View {
                     motionActionButton(
                         title: "Inspect proof",
                         systemImage: "seal",
-                        accessibilityIdentifier: "motion.current.action.inspect-proof"
+                        accessibilityIdentifier: "motion.current.action.inspect-proof",
+                        action: .inspectProof(state.proof)
                     )
                     motionActionButton(
                         title: "Open receipt",
                         systemImage: "doc.text.magnifyingglass",
-                        accessibilityIdentifier: "motion.current.action.open-receipt"
+                        accessibilityIdentifier: "motion.current.action.open-receipt",
+                        action: .openReceipt(state.receipt)
                     )
                     motionActionButton(
                         title: "Re-enter thread",
                         systemImage: "arrowshape.turn.up.forward",
-                        accessibilityIdentifier: "motion.current.action.reenter-thread"
+                        accessibilityIdentifier: "motion.current.action.reenter-thread",
+                        action: .openThread(state.control)
                     )
                 }
             }
@@ -317,13 +340,11 @@ private struct MotionCurrentField: View {
     private func motionActionButton(
         title: String,
         systemImage: String,
-        accessibilityIdentifier: String
+        accessibilityIdentifier: String,
+        action: MotionCurrentAction
     ) -> some View {
         Button {
-            NotificationCenter.default.post(
-                name: Notification.Name("AmbitionsMotionCurrentActionSelected"),
-                object: title
-            )
+            onAction(action)
         } label: {
             Label(title, systemImage: systemImage)
                 .font(theme.typography.caption.weight(.semibold))
@@ -751,6 +772,7 @@ private struct MotionContinuityDock: View {
     @Environment(\.ambitionTheme) private var theme
 
     let actions: [MotionDockAction]
+    let onAction: (MotionCurrentAction) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -761,10 +783,7 @@ private struct MotionContinuityDock: View {
             FlowLayout(spacing: theme.spacing.sm) {
                 ForEach(actions) { action in
                     Button(action.title) {
-                        NotificationCenter.default.post(
-                            name: Notification.Name("AmbitionsMotionCurrentActionSelected"),
-                            object: action.title
-                        )
+                        onAction(stageMotionAction(for: action.id))
                     }
                         .buttonStyle(.bordered)
                         .controlSize(.small)
@@ -775,6 +794,21 @@ private struct MotionContinuityDock: View {
         .padding(.bottom, theme.spacing.md)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("motion.current.continuity-dock")
+    }
+
+    private func stageMotionAction(for actionID: String) -> MotionCurrentAction {
+        switch actionID.lowercased() {
+        case "today":
+            return .openToday
+        case "goals":
+            return .openGoals
+        case "time":
+            return .openTime
+        case "trust":
+            return .openTrust
+        default:
+            return .openTrust
+        }
     }
 }
 

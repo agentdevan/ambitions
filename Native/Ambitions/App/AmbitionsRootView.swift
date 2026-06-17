@@ -11,10 +11,12 @@ struct AmbitionsRootView: View {
     private let container: AppContainer
     private let shellPresentationMode: AppShellPresentationMode
     @State private var navigation: AppNavigationModel
+    @State private var stageOwner = StageOwner()
     @State private var creationMessage: GoalDetailInlineMessage?
     @State private var goalsRefreshID = 0
     @State private var isOnboardingPresented: Bool
     @State private var onboardingError: String?
+    @State private var motionCurrentActionObserver: NSObjectProtocol?
 
     init(
         container: AppContainer,
@@ -47,6 +49,11 @@ struct AmbitionsRootView: View {
         .onAppear {
             configureTabBarAppearance(with: resolvedTheme)
             validateExternalNavigationGraph()
+            configureStageMotionBehavior()
+            registerMotionCurrentActionObserver()
+        }
+        .onDisappear {
+            unregisterMotionCurrentActionObserver()
         }
         .onChange(of: systemColorScheme) { _, _ in
             configureTabBarAppearance(with: resolvedTheme)
@@ -56,6 +63,9 @@ struct AmbitionsRootView: View {
         }
         .onChange(of: container.appearancePreference) { _, _ in
             configureTabBarAppearance(with: resolvedTheme)
+        }
+        .onChange(of: reduceMotion) { _, isReduced in
+            stageOwner.setReduceMotionEnabled(isReduced)
         }
         .sheet(item: activeSheetOverlayBinding, onDismiss: {
             guard let entryContext = navigation.takePendingTodayEntryContext() else { return }
@@ -488,6 +498,57 @@ struct AmbitionsRootView: View {
     private func validateExternalNavigationGraph() {
         assert(AppDeepLinkRegistry.validationIssues().isEmpty, "Deep-link registry contains unsupported routes.")
         assert(AppNavigationGraph.nodes.allSatisfy(\.canOpenFromExternalSurface), "Navigation graph contains a dead-end external route.")
+    }
+
+    private func configureStageMotionBehavior() {
+        stageOwner.setReduceMotionEnabled(reduceMotion)
+    }
+
+    private func registerMotionCurrentActionObserver() {
+        motionCurrentActionObserver = NotificationCenter.default.addObserver(
+            forName: MotionCurrentAction.notificationName,
+            object: nil,
+            queue: .main
+        ) { notification in
+            guard let action = notification.ambitionsMotionCurrentAction else { return }
+            let source = notification.userInfo?[MotionCurrentAction.notificationSourceKey] as? String ?? "motion.current"
+            routeStageMotionAction(action, source: source)
+        }
+    }
+
+    private func unregisterMotionCurrentActionObserver() {
+        guard let motionCurrentActionObserver else { return }
+        NotificationCenter.default.removeObserver(motionCurrentActionObserver)
+        self.motionCurrentActionObserver = nil
+    }
+
+    private func routeStageMotionAction(_ action: MotionCurrentAction, source: String) {
+        let route = stageOwner.route(for: action, source: source)
+        switch route {
+        case let .returnToToday(entryContext):
+            navigation.selectToday(entryContext: entryContext)
+        case .openGoals:
+            navigation.selectTab(.goals)
+        case .openTime:
+            navigation.selectTab(.time)
+        case .openTrust:
+            navigation.openHistory()
+        case let .presentOverlay(overlay):
+            if overlay.kind == .memoryLens {
+                navigation.presentMemoryLens(
+                    intent: overlay.intent,
+                    source: overlay.entrySource,
+                    presentationContext: overlay.presentationContext,
+                    query: overlay.query,
+                    goalID: overlay.goalID,
+                    captureID: overlay.captureID
+                )
+            } else {
+                navigation.activeOverlay = overlay
+            }
+        case .none:
+            break
+        }
     }
 
     private func configureTabBarAppearance(with theme: AmbitionTheme) {
