@@ -107,7 +107,7 @@ Current source-state reality:
 
 Implementation classification:
 
-- `Motion` source is compatibility/migration debt unless reused as `Stage/Motion` behavior infrastructure.
+- Motion source is now compatibility debt unless reused as `Stage/Motion` behavior infrastructure.
 - `Capture` source and composer logic may be reused as global Capture infrastructure, but not as a top-level tab contract.
 - `Plan` may exist as compatibility code for Time behavior, but not as a root surface.
 - `Profile` may exist as compatibility code for You behavior, but not as a root surface.
