@@ -56,9 +56,10 @@
     "batch_52_amb_aom_08_today_replay",
     "batch_53_amb_aom_pre09_closeout",
     "batch_54_amb_aom_09_goals_reconstruction",
-    "batch_55_amb_aom_09_validation"
+    "batch_55_amb_aom_09_validation",
+    "batch_56_amb_aom_10_time_reconstruction"
   ],
-  "last_green_batch": "batch_55_amb_aom_09_validation",
+  "last_green_batch": "batch_56_amb_aom_10_time_reconstruction",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

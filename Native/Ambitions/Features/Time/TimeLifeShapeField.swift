@@ -216,12 +216,15 @@ struct TimeObjectStagePrimitiveContract: Equatable {
         primitiveID: "time-object-stage",
         ownerSurface: "Time",
         productObject: "LifeShape Field",
-        firstViewportStructure: "Full-bleed LifeShape Field object stage with inline horizon control, pressure texture, plain week-capacity line, shaping actions, and source/receipt relationship.",
+        firstViewportStructure: "Full-bleed LifeShape Field object stage with capacity contours, pressure texture, protected windows, fixed points, horizons, confirmation-first shaping actions, and source/receipt inspection.",
         replacesFirstViewportStructures: [
             "calendar-like horizon chip strip",
             "rounded LifeShape canvas panel",
             "capacity statement panel",
             "metric-row dashboard",
+            "calendar clone",
+            "agenda clone",
+            "free/busy grid",
             "source and receipt pills",
             "change preview panel"
         ],
@@ -236,7 +239,7 @@ struct TimeObjectStagePrimitiveContract: Equatable {
             "Dynamic Type stacks horizon and source/receipt lines without changing object order",
             "Reduce Motion keeps pressure texture static",
             "Increase Contrast strengthens lines and text rather than adding card chrome",
-            "Differentiate Without Color exposes source, reason, receipt, and privacy as text"
+            "Differentiate Without Color exposes source, reason, receipt, privacy, protected windows, fixed points, and horizon state as text"
         ],
         screenshotIdentifier: "TimeObjectStage",
         firstViewportAvoidsCalendarCardDashboardGeometry: true
