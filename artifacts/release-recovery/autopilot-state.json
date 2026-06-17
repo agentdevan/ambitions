@@ -49,9 +49,10 @@
     "batch_45_amb_aom_reconciliation",
     "batch_46_amb_aom_04_repair",
     "batch_47_amb_aom_06_schema_review",
-    "batch_48_amb_aom_03_behavior_review"
+    "batch_48_amb_aom_03_behavior_review",
+    "batch_49_amb_aom_07_shell_visual_review"
   ],
-  "last_green_batch": "batch_48_amb_aom_03_behavior_review",
+  "last_green_batch": "batch_49_amb_aom_07_shell_visual_review",
   "runs": [
     {
       "batch": "batch_02_copy_contract",
