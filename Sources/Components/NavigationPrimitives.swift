@@ -5,7 +5,6 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
     case today
     case goals
     case time
-    case motion
     case you
 
     public var id: String { rawValue }
@@ -15,7 +14,6 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
         case .today: "Today"
         case .goals: "Goals"
         case .time: "Time"
-        case .motion: "Motion"
         case .you: "You"
         }
     }
@@ -25,7 +23,6 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
         case .today: "Reality Meridian"
         case .goals: "Direction Atlas"
         case .time: "LifeShape Field"
-        case .motion: "Motion Current"
         case .you: "Personal system"
         }
     }
@@ -35,7 +32,6 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
         case .today: "sun.max"
         case .goals: "target"
         case .time: "clock.badge"
-        case .motion: "point.topleft.down.curvedto.point.bottomright.up"
         case .you: "person.crop.circle"
         }
     }
@@ -46,9 +42,9 @@ public enum RootDestinationIdentity: String, CaseIterable, Hashable, Identifiabl
 }
 
 public enum BottomNavigationContract {
-    public static let requiredDestinations: [RootDestinationIdentity] = [.today, .goals, .time, .motion, .you]
+    public static let requiredDestinations: [RootDestinationIdentity] = [.today, .goals, .time, .you]
     public static let requiredTitles: [String] = requiredDestinations.map(\.title)
-    public static let requiredTitleSequence = "Today / Goals / Time / Motion / You"
+    public static let requiredTitleSequence = "Today / Goals / Time / You"
 
     public static func isValidTitleSequence(_ titles: [String]) -> Bool {
         titles == requiredTitles

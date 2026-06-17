@@ -62,9 +62,16 @@
       "start_sha": "4abdcdc0a2e7571e694805dbac58a4cb966c723f",
       "title": "SwiftData Schema Review",
       "type": "schema"
+    },
+    {
+      "completed_at": "2026-06-17T17:55:29Z",
+      "id": "AMB-AOM-07",
+      "start_sha": "b1baf0df7150c78ff4c7147f0bfe2e9158a313a7",
+      "title": "Shell and Visual Foundation",
+      "type": "visual"
     }
   ],
-  "last_completed_batch": "AMB-AOM-06",
-  "updated_at": "2026-06-17T14:42:14Z",
+  "last_completed_batch": "AMB-AOM-07",
+  "updated_at": "2026-06-17T17:55:29Z",
   "version": 1
 }
