@@ -572,14 +572,14 @@ struct AmbitionsDayRailView: View {
             HStack(spacing: theme.spacing.sm) {
                 startHereOriginMarker
 
-                Text("Available now")
+                Text("No clear step yet")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.accentWarm)
             }
             Text(emptySourceLine)
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
-            Text("This window can hold a step")
+            Text("Start here is ready for your next intention.")
                 .font(theme.typography.title.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -845,10 +845,10 @@ struct AmbitionsDayRailView: View {
         }
 
         if heroStep.receiptItem.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
-            return "Receipt"
+            return "Review trail"
         }
 
-        return "Receipt ready"
+        return "Review trail ready"
     }
 
     private func primaryActionTitle(for action: TodayInlineAction) -> String {
@@ -887,7 +887,7 @@ struct AmbitionsDayRailView: View {
 
     private var proofSummary: String {
         if state.proofSlot.noSilentChanges {
-            return "Receipts, closure, and proof stay local."
+            return "Review trail is local."
         }
         return state.proofSlot.subtitle
     }
@@ -916,9 +916,9 @@ struct AmbitionsDayRailView: View {
             parts.append("Attached to the current Now node")
             parts.append(heroStep.title)
             parts.append(heroStep.duration.label)
-            parts.append("Source \(state.privacyProjection.sourceLabel)")
-            parts.append("Freshness \(heroStep.receiptItem.freshness.label)")
-            parts.append("Receipt \(receiptLabel(for: heroStep))")
+            parts.append("Trust context remains local")
+            parts.append("Review state \(heroStep.receiptItem.freshness.label)")
+            parts.append("Review label \(receiptLabel(for: heroStep))")
             parts.append(primaryActionTitle(for: heroStep.primaryAction))
         } else {
             parts.append("Start here is attached to the current Now node.")

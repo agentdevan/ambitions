@@ -17,7 +17,6 @@ struct TodayRealityMeridianFlagshipAdapter: View {
             title: "Reality Meridian",
             summary: stageSummary,
             metrics: metrics,
-            proofHooks: proofHooks,
             screenshotIdentifier: "today.flagship.reality-meridian"
         ) {
             RealityMeridianView(
@@ -33,11 +32,11 @@ struct TodayRealityMeridianFlagshipAdapter: View {
     }
 
     private var stageSummary: String {
-        let motionSummary = reduceMotion ? "Motion is held static." : "Motion may clarify state changes."
+        let motionSummary = reduceMotion ? "Motion is restrained for stability." : "Motion marks state transitions."
         if dynamicTypeSize.isAccessibilitySize {
-            return "Start here, proof, and source context stack in a stable VoiceOver order. \(motionSummary)"
+            return "Start here stays in a stable VoiceOver order. \(motionSummary)"
         }
-        return "Start here stays anchored to current capacity, source context, and protected time. \(motionSummary)"
+        return "Start here stays anchored to this time and context. \(motionSummary)"
     }
 
     private var metrics: [FlagshipRuntimeMetric] {
@@ -48,11 +47,4 @@ struct TodayRealityMeridianFlagshipAdapter: View {
         ]
     }
 
-    private var proofHooks: [FlagshipRuntimeProofHook] {
-        [
-            FlagshipRuntimeProofHook(id: "source", title: "Source context", summary: state.privacyProjection.sourceLabel, accessibilityHint: "Names the local context used to hold this step."),
-            FlagshipRuntimeProofHook(id: "proof", title: "Proof", summary: state.proofSlot.title, accessibilityHint: "Explains what can be inspected after action."),
-            FlagshipRuntimeProofHook(id: "continuity", title: "Continuity", summary: state.continuity.pressureLabel, accessibilityHint: "Explains whether the current window can hold the step.")
-        ]
-    }
 }

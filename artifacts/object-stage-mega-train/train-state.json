@@ -69,9 +69,16 @@
       "start_sha": "b1baf0df7150c78ff4c7147f0bfe2e9158a313a7",
       "title": "Shell and Visual Foundation",
       "type": "visual"
+    },
+    {
+      "completed_at": "2026-06-17T18:00:09Z",
+      "id": "AMB-AOM-08",
+      "start_sha": "a6bb3656ac53b7faf6d6628abaf4f7c897816560",
+      "title": "Today Reconstruction",
+      "type": "visual"
     }
   ],
-  "last_completed_batch": "AMB-AOM-07",
-  "updated_at": "2026-06-17T17:55:29Z",
+  "last_completed_batch": "AMB-AOM-08",
+  "updated_at": "2026-06-17T18:00:09Z",
   "version": 1
 }
