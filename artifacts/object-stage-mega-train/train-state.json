@@ -55,9 +55,16 @@
       "start_sha": "8470e9860b07174fc72c1563fd68574b2cbb8d91",
       "title": "Trust Inspection Route Cleanup",
       "type": "source"
+    },
+    {
+      "completed_at": "2026-06-17T14:42:14Z",
+      "id": "AMB-AOM-06",
+      "start_sha": "4abdcdc0a2e7571e694805dbac58a4cb966c723f",
+      "title": "SwiftData Schema Review",
+      "type": "schema"
     }
   ],
-  "last_completed_batch": "AMB-AOM-05",
-  "updated_at": "2026-06-17T14:39:32Z",
+  "last_completed_batch": "AMB-AOM-06",
+  "updated_at": "2026-06-17T14:42:14Z",
   "version": 1
 }
