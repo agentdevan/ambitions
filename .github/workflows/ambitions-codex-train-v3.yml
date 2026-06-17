@@ -45,6 +45,10 @@ on:
         required: true
         default: '99'
         type: string
+      rerun_completed:
+        required: true
+        default: false
+        type: boolean
 
 permissions:
   contents: write
@@ -74,6 +78,14 @@ jobs:
           git status --short --branch
           git rev-parse HEAD
 
+      - name: Runner syntax proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            scripts/codex/train_v3.py \
+            scripts/codex/aom-completion-audit.py
+
       - name: Run Codex Train V3
         shell: bash
         run: |
@@ -89,6 +101,9 @@ jobs:
           )
           if [[ "${{ inputs.run_xcode_build }}" == "true" ]]; then
             args+=(--run-xcode-build)
+          fi
+          if [[ "${{ inputs.rerun_completed }}" == "true" ]]; then
+            args+=(--rerun-completed)
           fi
           python3 scripts/codex/train_v3.py "${args[@]}"
 
