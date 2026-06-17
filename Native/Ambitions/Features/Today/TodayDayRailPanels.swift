@@ -1,14 +1,6 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-private struct TodayObjectStageInlineDatum: Identifiable {
-    let id: String
-    let title: String
-    let value: String
-    let symbolName: String
-    let token: AmbitionPrimitiveSemanticToken
-}
-
 private struct TodayEmptyPathAction: Identifiable {
     let id: String
     let title: String
@@ -486,7 +478,22 @@ struct AmbitionsDayRailView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .lineLimit(3)
 
-                objectStageTrustLine(for: heroStep)
+                Button {
+                    onOpenStepDetail(heroStep.stepDetail(privacy: state.privacyProjection, contextLabel: state.contextSummary))
+                } label: {
+                    Text("Trust details")
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, theme.spacing.xxs)
+                        .overlay(
+                            Rectangle()
+                                .fill(theme.colors.strokeSubtle)
+                                .frame(height: 1),
+                            alignment: .bottom
+                        )
+                }
+                .buttonStyle(.plain)
                 .padding(.top, theme.spacing.xs)
                 .accessibilityIdentifier("TodayStartHereSourceFreshness")
 
@@ -782,95 +789,6 @@ struct AmbitionsDayRailView: View {
                 .frame(height: 1)
         }
         .accessibilityIdentifier("TodayRealityRailContinuityDock")
-    }
-
-    private func objectStageTrustLine(for heroStep: DayRailHeroStepState) -> some View {
-        let items = objectStageTrustItems(for: heroStep)
-
-        return Group {
-            if dynamicTypeSize.isAccessibilitySize {
-                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    ForEach(items) { item in
-                        objectStageTrustDatum(item)
-                    }
-                }
-            } else {
-                VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
-                        ForEach(items.prefix(2)) { item in
-                            objectStageTrustDatum(item)
-                        }
-                    }
-
-                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.lg) {
-                        ForEach(items.suffix(2)) { item in
-                            objectStageTrustDatum(item)
-                        }
-                    }
-                }
-            }
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Why this fits")
-        .accessibilityValue(items.map { "\($0.title) \($0.value)" }.joined(separator: ". "))
-    }
-
-    private func objectStageTrustDatum(_ item: TodayObjectStageInlineDatum) -> some View {
-        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xxxs) {
-            Image(systemName: item.symbolName)
-                .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(item.token.color(in: theme))
-                .accessibilityHidden(true)
-
-            Text(item.value)
-                .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.micro).weight(.semibold))
-                .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
-                .minimumScaleFactor(0.72)
-        }
-        .accessibilityLabel("\(item.title) \(item.value)")
-    }
-
-    private func objectStageTrustItems(for heroStep: DayRailHeroStepState) -> [TodayObjectStageInlineDatum] {
-        [
-            TodayObjectStageInlineDatum(
-                id: "source",
-                title: "Source",
-                value: nonEmpty(state.privacyProjection.sourceLabel, fallback: "Local source"),
-                symbolName: "link",
-                token: .source
-            ),
-            TodayObjectStageInlineDatum(
-                id: "freshness",
-                title: "Freshness",
-                value: heroStep.receiptItem.freshness.label,
-                symbolName: "checkmark.seal",
-                token: sourceFreshnessToken(for: heroStep.receiptItem.freshness)
-            ),
-            TodayObjectStageInlineDatum(
-                id: "receipt",
-                title: "Receipt",
-                value: receiptLabel(for: heroStep),
-                symbolName: "doc.text",
-                token: .receipt
-            ),
-            TodayObjectStageInlineDatum(
-                id: "privacy",
-                title: "Privacy",
-                value: nonEmpty(heroStep.receiptItem.privacyLabel, fallback: "Private by default"),
-                symbolName: "lock",
-                token: .privacyBoundary
-            )
-        ]
-    }
-
-    private func sourceFreshnessToken(for freshness: SourceFreshnessState) -> AmbitionPrimitiveSemanticToken {
-        switch freshness {
-        case .fresh, .localOnly:
-            return .source
-        case .partial, .stale, .offline, .denied, .blocked, .unavailable:
-            return .sourceAttention
-        }
     }
 
     private func nonEmpty(_ value: String?, fallback: String) -> String {

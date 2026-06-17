@@ -210,67 +210,42 @@ struct StartHereSurface: View {
                 .accessibilityIdentifier("TodayStartHereBecauseLine")
             }
 
-            VStack(alignment: .leading, spacing: 0) {
-                InlineTrustReceipt(item: step.receiptItem)
-                    .accessibilityIdentifier("TodayStartHereReceiptPreview")
+            Button {
+                onOpenStepDetail(step.stepDetail(privacy: privacy, contextLabel: contextLabel))
+            } label: {
+                Label("Trust details", systemImage: "doc.text.magnifyingglass")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.vertical, theme.spacing.xxs)
+                    .overlay(alignment: .bottom) {
+                        Rectangle()
+                            .fill(theme.colors.strokeSubtle)
+                            .frame(height: 1)
+                    }
             }
-            .accessibilityIdentifier("TodayStartHereSourceFreshness")
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("TodayStartHereTrustDetails")
         }
     }
 
     private var inspectionStrip: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
-                EvidenceLabel(
-                    "Source",
-                    detail: sourceSummary,
-                    source: step.sourceRecordLabel,
-                    state: privacy.isSensitiveProjection ? .sensitive : .proof,
-                    context: .today
-                )
-
-                EvidenceLabel(
-                    "Receipt",
-                    detail: step.receiptLabel,
-                    source: step.proofLabel,
-                    state: .proof,
-                    context: .trust
-                )
-            }
-
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
-                EvidenceLabel(
-                    "Proof",
-                    detail: step.proofLabel,
-                    source: step.receiptItem.privacyLabel,
-                    state: .proof,
-                    context: .trust
-                )
-
-                EvidenceLabel(
-                    "Review path",
-                    detail: step.replayInspectionLabel,
-                    source: step.sourceRecordLabel,
-                    state: .proof,
-                    context: .trust
-                )
-            }
-
-            HStack(alignment: .top, spacing: theme.spacing.sm) {
-                SourceFreshnessLabel(step.receiptItem.freshness, label: step.sourceQualityLabel)
-                    .accessibilityIdentifier("TodayStartHereSourceFreshnessState")
-
-                EvidenceLabel(
-                    "Correction",
-                    detail: step.receiptItem.correctionLabel ?? "Review or adjust before changing the plan.",
-                    source: step.receiptItem.privacyLabel,
-                    state: .proof,
-                    context: .trust
-                )
-                .accessibilityIdentifier("TodayStartHereCorrectionPath")
-            }
+        Button {
+            onOpenStepDetail(step.stepDetail(privacy: privacy, contextLabel: contextLabel))
+        } label: {
+            Label("Why this?", systemImage: "doc.text.magnifyingglass")
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textTertiary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, theme.spacing.xxs)
+                .overlay(alignment: .bottom) {
+                    Rectangle()
+                        .fill(theme.colors.strokeSubtle)
+                        .frame(height: 1)
+                }
         }
-        .accessibilityHidden(false)
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("TodayStartHereProofDetails")
     }
 
     private var proofCaption: String {

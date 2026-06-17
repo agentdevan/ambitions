@@ -261,14 +261,6 @@ private enum TimeLifeShapeZoomLevel: String, CaseIterable {
     }
 }
 
-private struct TimeObjectStageInlineDatum: Identifiable {
-    let id: String
-    let title: String
-    let value: String
-    let symbolName: String
-    let token: AmbitionPrimitiveSemanticToken
-}
-
 struct TimeLifeShapeField: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -777,36 +769,20 @@ struct TimeLifeShapeField: View {
     }
 
     private var sourceReceiptRow: some View {
-        let items = objectStageSourceItems
-
         return HorizonCapacityPrimitiveStage(
             role: .source,
             title: "Why this fits",
-            subtitle: "Context and proof stay inspectable when needed.",
+            subtitle: "Source and receipt inspection remains one tap away.",
             statusLabel: suite.field.receipt.ageLabel,
             accessibilityIdentifier: "time.life-shape-field.source-receipt"
         ) {
-            ViewThatFits(in: .horizontal) {
-                HStack(alignment: .top, spacing: theme.spacing.sm) {
-                    ForEach(items.prefix(2)) { item in
-                        horizonCapacitySourceLine(item)
-                    }
-                }
-
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(items) { item in
-                        horizonCapacitySourceLine(item)
-                    }
-                }
-            }
-
             Button {
                 confirmedReflowAction = .edit
             } label: {
                 HorizonCapacityPrimitiveLine(
                     role: .receipt,
                     title: "Why this?",
-                    subtitle: "Open source, receipt, privacy, and reason detail.",
+                    subtitle: "Open context, reason, source, and privacy detail.",
                     systemImage: "doc.text.magnifyingglass",
                     visualState: suite.field.receipt.visualState
                 )
@@ -815,72 +791,6 @@ struct TimeLifeShapeField: View {
             .accessibilityIdentifier("time.life-shape-field.why-this")
         }
         .accessibilityElement(children: .combine)
-    }
-
-    private func horizonCapacitySourceLine(_ item: TimeObjectStageInlineDatum) -> some View {
-        HorizonCapacityPrimitiveLine(
-            role: horizonCapacityRole(for: item),
-            title: item.title,
-            subtitle: item.value,
-            systemImage: item.symbolName,
-            visualState: horizonCapacityVisualState(for: item),
-            accessibilityIdentifier: "time.life-shape-field.source-receipt.\(item.id)"
-        )
-    }
-
-    private func horizonCapacityRole(for item: TimeObjectStageInlineDatum) -> HorizonCapacityPrimitiveRole {
-        switch item.id {
-        case "review":
-            return .receipt
-        case "context", "privacy":
-            return .source
-        default:
-            return .continuity
-        }
-    }
-
-    private func horizonCapacityVisualState(for item: TimeObjectStageInlineDatum) -> AmbitionVisualState {
-        switch item.id {
-        case "review":
-            return suite.field.receipt.visualState
-        case "reason":
-            return suite.field.sourceState.visualState
-        default:
-            return .default
-        }
-    }
-
-    private var objectStageSourceItems: [TimeObjectStageInlineDatum] {
-        [
-            TimeObjectStageInlineDatum(
-                id: "context",
-                title: "Context",
-                value: displayedSourceTitle,
-                symbolName: "checkmark.shield",
-                token: .source
-            ),
-            TimeObjectStageInlineDatum(
-                id: "reason",
-                title: "Reason",
-                value: nonEmpty(suite.field.sourceState.whyThisLabel, fallback: "Why this remains inspectable"),
-                symbolName: "questionmark.circle",
-                token: .sourceAttention
-            ),
-            TimeObjectStageInlineDatum(
-                id: "review",
-                title: "Review",
-                value: suite.field.receipt.ageLabel,
-                symbolName: "doc.text",
-                token: .receipt
-            ),
-            TimeObjectStageInlineDatum(
-                id: "privacy",
-                title: "Privacy",
-                value: displayedPrivacyLabel,
-                symbolName: "lock",
-                token: .privacyBoundary
-            )
-        ]
     }
 
     private var displayedSourceTitle: String {
