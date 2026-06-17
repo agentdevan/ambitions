@@ -8,7 +8,6 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[2]
 TRAIN_DIR = ROOT / "prompts" / "object-stage-mega-train"
 RUNNER = ROOT / "scripts" / "codex" / "run-object-stage-mega-train.sh"
-PROOF_DIR = ROOT / "artifacts" / "object-stage-mega-train"
 
 REQUIRED_PROMPTS = [
     "AMB-AOM-00.md",
@@ -33,15 +32,6 @@ def main() -> int:
         raise RuntimeError(f"Missing object-stage mega-train prompts: {missing}")
     if not RUNNER.exists():
         raise RuntimeError(f"Missing object-stage mega-train runner: {RUNNER}")
-
-    PROOF_DIR.mkdir(parents=True, exist_ok=True)
-    (PROOF_DIR / "AOM-45-launcher.md").write_text(
-        "# AOM-45 Object-Stage Mega Train Launcher\n\n"
-        "Status: launching via existing GitHub Actions autopilot train.\n\n"
-        "Prompt count: 13\n\n"
-        "The ordered train is defined in `prompts/object-stage-mega-train/`.\n",
-        encoding="utf-8",
-    )
 
     env = os.environ.copy()
     env.setdefault("START_BATCH", "auto")
