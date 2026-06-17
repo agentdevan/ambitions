@@ -57,13 +57,6 @@
       "type": "source"
     },
     {
-      "completed_at": "2026-06-17T14:42:14Z",
-      "id": "AMB-AOM-06",
-      "start_sha": "4abdcdc0a2e7571e694805dbac58a4cb966c723f",
-      "title": "SwiftData Schema Review",
-      "type": "schema"
-    },
-    {
       "completed_at": "2026-06-17T17:55:29Z",
       "id": "AMB-AOM-07",
       "start_sha": "b1baf0df7150c78ff4c7147f0bfe2e9158a313a7",
@@ -76,9 +69,41 @@
       "start_sha": "a6bb3656ac53b7faf6d6628abaf4f7c897816560",
       "title": "Today Reconstruction",
       "type": "visual"
+    },
+    {
+      "artifact_delta_count": 1,
+      "changed_files_by_kind": {
+        "app_source": [],
+        "other": [],
+        "persistence_schema": [],
+        "runner_artifacts": [],
+        "schema_decision": [
+          "artifacts/object-stage-mega-train/AMB-AOM-06-schema-decision.md"
+        ],
+        "scripts": [],
+        "tests": [],
+        "train_artifacts": [],
+        "truth_docs": []
+      },
+      "commit_sha": "recorded-by-git-history",
+      "completed_at": "2026-06-17T20:11:13Z",
+      "end_sha": "575c3b845c4d4ecb7c170e5e21af728def4cb689",
+      "id": "AMB-AOM-06",
+      "replay_of": "575c3b845c4d4ecb7c170e5e21af728def4cb689",
+      "schema_delta_count": 0,
+      "scope_verdict": "green",
+      "source_delta_count": 0,
+      "start_sha": "575c3b845c4d4ecb7c170e5e21af728def4cb689",
+      "status": "green",
+      "test_delta_count": 0,
+      "title": "SwiftData Schema Review",
+      "type": "schema",
+      "validation_evidence": [
+        "artifacts/object-stage-mega-train/AMB-AOM-06-schema-decision.md"
+      ]
     }
   ],
-  "last_completed_batch": "AMB-AOM-08",
-  "updated_at": "2026-06-17T18:00:09Z",
-  "version": 1
+  "last_completed_batch": "AMB-AOM-06",
+  "updated_at": "2026-06-17T20:11:13Z",
+  "version": 2
 }
