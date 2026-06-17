@@ -23,6 +23,8 @@ Scope:
 - Add or adapt Stage/Motion event and reduced-motion behavior.
 - Keep Motion out of root navigation.
 - Extend existing owners where possible.
+- Preserve existing `AppNavigationModel` routing APIs. Route Today through `selectToday(entryContext:)`; do not introduce or call `openToday(...)`.
+- Touch Motion feature files only when required to demote Motion root-surface behavior into the shared Stage/Motion behavior layer.
 
 Allowed owners:
 
@@ -34,6 +36,13 @@ Native/Ambitions/Domain/
 Sources/
 Native/AmbitionsTests/
 artifacts/object-stage-mega-train/
+```
+
+Additional exact Motion compatibility leaves allowed for this batch only:
+
+```text
+Native/Ambitions/Features/Motion/MotionCurrentAction.swift
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift
 ```
 
 Validation:
