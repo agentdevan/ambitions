@@ -225,7 +225,6 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
     }
 }
 
-
 struct AppShellContextualToolbarAction: Hashable, Identifiable, Sendable {
     enum Kind: String, Hashable, Sendable {
         case surfacePrimary
@@ -308,15 +307,6 @@ enum AppShellContextualToolbarCatalog {
                 accessibilityIdentifier: "shell.time.weekly-review-button",
                 accessibilityHint: "Opens the Time-owned weekly review surface."
             )
-        case .motion:
-            return AppShellContextualToolbarAction(
-                id: "motion-memory-lens",
-                kind: .inspection,
-                title: "Inspect proof",
-                systemImage: "checkmark.seal",
-                accessibilityIdentifier: "shell.motion.inspect-proof-button",
-                accessibilityHint: "Opens the proof and search without changing plans."
-            )
         case .you:
             return AppShellContextualToolbarAction(
                 id: "you-history",
@@ -358,8 +348,6 @@ enum AppShellCaptureAccessModel {
             .goalsQuickCapture
         case .time:
             .timeQuickCapture
-        case .motion:
-            .motionQuickCapture
         case .you:
             .youQuickCapture
         }
@@ -636,7 +624,6 @@ enum ShellCommandDestination: Hashable, Sendable {
             case .today: .today
             case .goals: .goals
             case .time: .time
-            case .motion: .motion
             case .you: .you
             }
         case .goal:
