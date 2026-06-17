@@ -218,6 +218,7 @@ struct AppShellScaffold<Content: View>: View {
 private struct AppShellHeaderRail: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     let title: String
     let subtitle: String?
@@ -353,7 +354,10 @@ private struct AppShellHeaderRail: View {
     }
 
     private func menuButton(_ button: AppShellHeaderButton) -> some View {
-        Button(action: button.action) {
+        Button {
+            AppShellSensoryFeedbackPolicy.emit(.headerAction, reduceMotionEnabled: reduceMotion)
+            button.action()
+        } label: {
             Label(button.title, systemImage: button.systemImage)
         }
         .accessibilityIdentifier(button.accessibilityIdentifier)
@@ -363,7 +367,10 @@ private struct AppShellHeaderRail: View {
 
     @ViewBuilder
     private func headerButton(_ button: AppShellHeaderButton) -> some View {
-        let base = Button(action: button.action) {
+        let base = Button {
+            AppShellSensoryFeedbackPolicy.emit(.headerAction, reduceMotionEnabled: reduceMotion)
+            button.action()
+        } label: {
             Label(button.title, systemImage: button.systemImage)
                 .labelStyle(.iconOnly)
                 .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)

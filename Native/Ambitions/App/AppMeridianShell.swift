@@ -3,6 +3,7 @@ import SwiftUI
 
 struct AppMeridianDestinationRail: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let theme: AmbitionTheme
     let selectedTab: AppTab
     let onSelect: (AppTab) -> Void
@@ -65,6 +66,9 @@ struct AppMeridianDestinationRail: View {
         let labelSize: CGFloat = accessibilityCompact ? 10.5 : 12
 
         return Button {
+            if destination.tab != selectedTab {
+                AppShellSensoryFeedbackPolicy.emit(.surfaceSelection, reduceMotionEnabled: reduceMotion)
+            }
             onSelect(destination.tab)
         } label: {
             VStack(spacing: accessibilityCompact ? 3 : 5) {
