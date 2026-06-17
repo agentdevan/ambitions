@@ -49,26 +49,32 @@ patterns = {
         r"launch[- ]time safe|scroll[- ]performance safe|privacy approved|"
         r"legally approved|App Review ready|store metadata ready|"
         r"screenshots ready|support URL verified|privacy URL verified|"
-        r"human release[- ]approved)\b",
+        r"human release[- ]approved|Ambitions Account implemented|"
+        r"Sign in with Apple validated|Google Sign-In validated|"
+        r"R2 freshness validated|Source Atlas packs production[- ]ready)\b",
         re.IGNORECASE,
     ),
-    "provider_backend_drift": re.compile(
-        r"\b(Supabase|Postgres|hosted backend|custom hosted account|"
-        r"server-side user profiling|analytics|telemetry|external LLM|"
-        r"OpenAI/API|cloud model calls|auth provider|sync server)\b",
+    "backend_or_ai_drift": re.compile(
+        r"\b(Supabase|Postgres|hosted personal-data backend|private life graph backend|"
+        r"server-side user profiling|external LLM required|hosted AI required|"
+        r"OpenAI/API dependency|cloud model calls required|sync server)\b",
         re.IGNORECASE,
     ),
     "obsolete_hierarchy": re.compile(
-        r"\b(Plan tab|Profile tab|Captures tab|Insights tab|Habits tab|"
-        r"top-level Plan|top-level Profile|top-level Captures|"
-        r"top-level Insights|top-level Habits|Ambitions 3\.0 is the active "
-        r"source of truth|PXOS active|ACUI active)\b",
+        r"\b(Plan tab|Profile tab|Captures tab|Motion tab|Pulse tab|Insights tab|Habits tab|"
+        r"top-level Plan|top-level Profile|top-level Captures|top-level Motion|"
+        r"top-level Insights|top-level Habits|approved fifth tab|"
+        r"Ambitions 3\.0 is the active source of truth|PXOS active|ACUI active)\b",
         re.IGNORECASE,
     ),
     "product_drift": re.compile(
         r"\b(AI confidence|AI recommends|chatbot|assistant tab|"
         r"productivity score|life score|streak broken|overdue queue|"
         r"best next move|next best move)\b",
+        re.IGNORECASE,
+    ),
+    "account_boundary_drift": re.compile(
+        r"\b(account required for core|sign[- ]?in required for core|R2-backed personal storage)\b",
         re.IGNORECASE,
     ),
 }
@@ -78,20 +84,22 @@ allowed_context = re.compile(
     r"without current|unless current|blocked|ban |avoid |no[- ]claim|"
     r"non[- ]claim|terms to avoid|hard claims not made|"
     r"release evidence firewall|current release posture|not yet proven|"
-    r"deleted provider|provider exclusion|historical|supporting only)",
+    r"deleted provider|provider exclusion|historical|supporting only|"
+    r"compatibility|migration debt|red if|stop and repair|hard red|"
+    r"private life graph|offline core)",
     re.IGNORECASE,
 )
 
 
 def iter_files(path: Path):
     if not path.exists():
-      return
+        return
     if path.is_file():
-      yield path
-      return
+        yield path
+        return
     for child in path.rglob("*"):
-      if child.is_file():
-        yield child
+        if child.is_file():
+            yield child
 
 
 blocking = []
