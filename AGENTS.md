@@ -62,7 +62,9 @@ Primary objects:
 - Global Capture -> Atmosphere Composer / Open Field
 - Motion behavior -> Stage/Motion proof, recovery, re-entry, completion, blockage, time-shift, undo, and protected-boundary state changes
 
-`Motion` is not a tab, destination, analytics surface, activity feed, XP system, score, streak, productivity report, social timeline, or dashboard. Motion belongs under `Stage/Motion` as product behavior.
+Motion is not a tab. Motion is not a destination. Motion is not current product root IA.
+
+Motion belongs under `Stage/Motion` as product behavior, not as analytics surface, activity feed, XP system, score, streak, productivity report, social timeline, or dashboard.
 
 `Capture` is the global composer/action layer, not a tab, inbox, notes feed, plus-tab utility, chatbot, generic intake dashboard, category grid, or persistent floating button.
 
@@ -138,67 +140,4 @@ Older material may be useful only where compatible with the truth files. It must
 - Preserve native SwiftUI architecture.
 - Do not add runtime app dependencies during docs/tooling/governance passes.
 - Do not implement product features in docs-only or Codex OS passes unless explicitly scoped.
-- Do not refactor SwiftUI source during governance passes unless explicitly scoped.
-
-Compatibility folders and names may remain as source facts, but they do not override active product truth.
-
----
-
-## 6. Goal Mode and legacy runner rule
-
-Goal Mode is the default autonomous execution model for new Ambitions work.
-
-The old Ambitions runner remains in the repo for historical/supporting compatibility and for active issues that explicitly request it. It is not the active default for new Goal Mode program work.
-
----
-
-## 7. Evidence and reporting rules
-
-Do not claim implementation, release, device, accessibility, privacy, production, TestFlight, App Store, account auth, R2 freshness, sync, or readiness status without current proof.
-
-A final report must include:
-
-- Status: Green / Yellow / Red
-- Scope completed
-- Files changed
-- Product law preserved
-- Validation run
-- Validation not run
-- Proof artifacts
-- Known risks
-- Follow-up required
-- Rollback plan
-
-Green means the scoped task is complete and evidence supports the claim. Green never means release-ready, App Store-ready, fully accessible, performance-validated, or product-complete unless those exact proofs exist.
-
----
-
-## 8. Hard red stop conditions
-
-Stop and repair if any of these occur:
-
-1. Truth hierarchy conflict cannot be resolved.
-2. Product/design patch violates `PRODUCT_DESIGN_TRUTH.md`.
-3. Implementation or release claim lacks source/proof evidence.
-4. Motion is reintroduced as a root destination.
-5. Capture is reintroduced as a root destination.
-6. A fifth/sixth persistent surface appears.
-7. Plan/Profile/Captures/Pulse returns as active top-level user-facing IA.
-8. Hosted AI, external LLM, cloud model API, or chatbot-first UI becomes required for core behavior.
-9. Hosted personal-data backend or private-life-graph backend appears.
-10. R2 receives or derives private user context.
-11. Account sign-in becomes required for core local app value.
-12. Proposed UI becomes generic task/calendar/habit/notes/dashboard/chatbot/SaaS/admin/neon HUD.
-13. Accessibility path is removed for a primary object.
-14. Privacy/legal ambiguity appears.
-15. Codex cannot inspect required source but the task requires source truth.
-
----
-
-## 9. Final agent posture
-
-Act like a senior product architect, iOS SwiftUI engineer, design systems lead, local-first privacy architect, QA/release engineer, and repo-governance operator.
-
-Do not ship weak first drafts. Do not implement generic task-app, calendar, dashboard, chatbot, or web-app patterns. Do not treat screenshots, source presence, or docs as release proof.
-
-Build fewer things deeper. Make every object stateful, local, inspectable, accessible, native, and unmistakably Ambitions.
+- No release/accessibility/privacy/device/account/R2 claims without current proof.
