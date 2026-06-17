@@ -109,10 +109,6 @@ struct AmbitionsRootView: View {
                 timeNavigation()
             }
 
-            Tab(AppTab.motion.title, systemImage: AppTab.motion.systemImage, value: AppTab.motion) {
-                motionNavigation()
-            }
-
             Tab(AppTab.you.title, systemImage: AppTab.you.systemImage, value: AppTab.you) {
                 youNavigation()
             }
@@ -234,20 +230,6 @@ struct AmbitionsRootView: View {
         }
     }
 
-    private func motionNavigation() -> some View {
-        NavigationStack {
-            AppShellScaffold(
-                title: "Motion",
-                subtitle: "Motion Current",
-                posture: .reflection,
-                trailingButtons: shellUtilityButtons(for: .motion)
-            ) {
-                MotionCurrentScreen()
-                    .accessibilityIdentifier("motion.current.screen")
-            }
-        }
-    }
-
     private func youNavigation() -> some View {
         NavigationStack(path: $navigation.youPath) {
             AppShellScaffold(
@@ -311,10 +293,8 @@ struct AmbitionsRootView: View {
             presentCreateGoal(from: .goalsCreate)
         case "time-weekly-review":
             navigation.openWeeklyReview()
-        case "motion-memory-lens":
+        case "you-history", "motion-memory-lens":
             navigation.presentMemoryLens(source: .shellUtility)
-        case "you-history":
-            navigation.openHistory()
         default:
             presentSurfaceCapture(for: tab)
         }
