@@ -6,13 +6,15 @@ Applies to: Ambitions native iPhone repo
 Owner posture: Source truth, not product vision and not release proof  
 Effective rule: Live source, project files, scripts, tests, and current proof evidence win over plans, historical docs, old canon, handoffs, batch-train docs, prompts, and aspirational reports.
 
+This file does not define what Ambitions should become. That authority belongs to `docs/truth/PRODUCT_DESIGN_TRUTH.md`.
+
+This file does not define release readiness. That authority belongs to `docs/truth/RELEASE_TRUTH.md`.
+
 ---
 
 ## 1. Purpose and Authority
 
-This file is the actual implementation/source truth for Ambitions.
-
-It answers:
+This file answers:
 
 - what exists in the repo now
 - what is source-present
@@ -24,21 +26,7 @@ It answers:
 - what is unproven
 - what Codex must not claim as implemented
 
-This file does not define what Ambitions should become. That authority belongs to:
-
-```text
-docs/truth/PRODUCT_DESIGN_TRUTH.md
-```
-
-This file does not define release readiness. That authority belongs to:
-
-```text
-docs/truth/RELEASE_TRUTH.md
-```
-
 A feature is not implemented because it appears in a plan, canon document, batch document, audit, handoff, prompt, skill, README, or future roadmap. A feature is implementation truth only when live repo source/project/test/script evidence supports that state.
-
-Current global batch/train sequence authority lives in `docs/codex/GLOBAL_BATCH_SEQUENCE.md`, with machine-readable runner policy in `docs/codex/GLOBAL_BATCH_SEQUENCE_AUTHORITY.json`. It makes the IOS26 train the runnable forward sequence and classifies non-`IOS26-*` batch IDs as historical for Codex global train selection. It does not prove implementation beyond live source, project, test, script, and current proof evidence.
 
 ---
 
@@ -49,7 +37,7 @@ Truth hierarchy for implementation work:
 1. `docs/truth/PRODUCT_DESIGN_TRUTH.md` defines product/design direction. It does not prove implementation.
 2. `docs/truth/IMPLEMENTATION_TRUTH.md` defines actual repo/source status.
 3. `docs/truth/RELEASE_TRUTH.md` defines validation and release proof.
-4. `docs/truth/CODEX_PROCESS_TRUTH.md` defines how Codex must inspect, patch, validate, repair, and report.
+4. `docs/truth/CODEX_PROCESS_TRUTH.md` defines Codex inspection, patch, validation, repair, and report behavior.
 5. `docs/truth/HISTORICAL_POLICY.md` defines how old material is extracted, archived, deleted, or quarantined.
 
 Conflict rules:
@@ -68,7 +56,7 @@ Implementation evidence may come from:
 
 - Swift source files
 - XcodeGen `project.yml`
-- Swift package manifest
+- Swift package manifests
 - app resources
 - entitlements
 - privacy manifest
@@ -105,6 +93,7 @@ Implementation state labels:
 | Not found | Inspection found no active repo/source evidence. |
 | Historical | Exists only in old docs/prompts/audits/batch material. |
 | Conflicting | Contradicts active truth, source, or release proof. |
+| Compatibility debt | Source remains for routing/migration/history but is not current product truth. |
 
 ---
 
@@ -123,8 +112,7 @@ Current repo posture from inspected evidence:
 - The app has App Group entitlement source.
 - The app has a privacy manifest source.
 - The repo has local build/setup scripts.
-- The repo has no active release proof proving TestFlight/App Store/device readiness.
-- No active hosted CI workflow was found during this inspection.
+- No active release proof proves TestFlight/App Store/device readiness.
 - Old docs and Codex/batch material are extensive and subordinate unless promoted by truth files.
 
 Primary evidence paths:
@@ -137,8 +125,6 @@ Package.swift
 docs/truth/PRODUCT_DESIGN_TRUTH.md
 docs/native-build-and-release.md
 docs/status/current-implementation-map.md
-docs/status/release-evidence-packet.md
-docs/status/repo-cleanup-index.md
 Native/Ambitions/App/AmbitionsApp.swift
 Native/Ambitions/App/AmbitionsRootView.swift
 Native/Ambitions/App/AppTab.swift
@@ -151,106 +137,61 @@ Native/Ambitions/Features/Goals/GoalsScreen.swift
 Native/Ambitions/Features/Capture/CaptureScreen.swift
 Native/Ambitions/Features/Time/TimeScreen.swift
 Native/Ambitions/Features/You/YouScreen.swift
-Sources/Theme/AmbitionTheme.swift
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift
+Native/Ambitions/Support/Ambitions.entitlements
+Native/Ambitions/Resources/PrivacyInfo.xcprivacy
 Native/AmbitionsUITests/AmbitionsUITests.swift
 scripts/build-local.sh
 scripts/setup_macos_ios_dev.sh
-Native/Ambitions/Support/Ambitions.entitlements
-Native/Ambitions/Resources/PrivacyInfo.xcprivacy
 ```
 
 ---
 
-## 5. Current App Architecture
-
-The current implementation is a native SwiftUI iOS app with:
-
-- SwiftUI `@main` app entry.
-- Bootstrapper-driven launch.
-- App container/dependency factory.
-- Local repository preparation.
-- SwiftData persistence store.
-- Runtime/services dependency graph.
-- SwiftUI shell/root view.
-- Five source-present top-level tab cases in current app-shell wiring:
-  - Today
-  - Goals
-  - Time
-  - Motion
-  - You
-- Internal compatibility names remain:
-  - `plan`
-  - `profile`
-  - `captures`
-  - `DayTimelineRail`
-  - `GoalMissionControl`
-- App Intents, external snapshots, widget/share extension targets, notification runtime, EventKit service, and external routing source exist.
-- Design system package source exists.
-- Widget UI package source exists.
-
-Implementation truth:
-
-- The architecture is source-present and substantially wired.
-- Source-present does not mean product-current.
-- The current active product/design truth is `Today / Goals / Time / Motion / You` plus global `Capture`.
-- Compatibility seams for prior IA may still be present for routing safety, but active user-facing top-level routing aligns to this canonical tab set.
-- End-to-end maturity is not proven by source presence alone.
-- Runtime correctness, persistence correctness, extension correctness, accessibility, performance, and release readiness require validation proof.
-
----
-
-## 5A. Current Motion IA Migration Gap
+## 5. Current Product/Source Alignment
 
 Active product/design truth from `PRODUCT_DESIGN_TRUTH.md` is:
 
 ```text
-Today / Goals / Time / Motion / You
+Persistent surfaces:
+Today / Goals / Time / You
 
-Global action:
-
+Global composer:
 Capture
+
+Cross-surface behavior layer:
+Motion
+
+Inspectable trust layer:
+Proof / Source / Privacy / History / Receipts
 ```
 
-Capture is the global Atmosphere Composer/action layer, not a tab. The approved Capture access model is contextual surface-native entry points first, a quiet toolbar Capture fallback, and an activated bottom composer seam only after Capture is invoked. A persistent floating Capture button must not be promoted as canonical product truth.
+Current source-state reality:
 
-Current source-state facts inspected for this update:
-
-- `Native/Ambitions/App/AppTab.swift` includes `case capture` for compatibility routing, while canonical `AppTab.allCases` is `today`, `goals`, `time`, `motion`, `you`.
-- `Native/Ambitions/App/AppTab.swift` defines `case motion`.
-- `Native/Ambitions/App/AmbitionsRootView.swift` renders `TabView` with the canonical five tabs and routes capture through global action surfaces.
-- `Native/Ambitions/Features/Capture/CaptureScreen.swift` contains reusable Atmosphere Composer / Capture source and a compatibility `CaptureScreenShellMode.topLevelCapture` mode.
-- `Native/Ambitions/App/AppNavigation.swift` keeps capture entry compatibility via overlay routes such as `captureInbox` and compatibility mapping.
-- `Native/AmbitionsTests/App/AppShellNavigationTests.swift` validates canonical tab contracts and compatibility capture behavior.
-- `rg "Pulse|ProofPulse"` found active proof/visual primitive source such as `Sources/Components/DynamicAdaptiveVisualPrimitives.swift`, `Sources/Components/TrustReceiptLayerPrimitives.swift`, and `Sources/Components/AmbitionsExtendedTactileKit.swift`. These are proof/progress/receipt primitive names, not evidence of a top-level Pulse tab.
+- Source may still contain `AppTab.motion`, Motion feature files, Motion tests, Motion screenshots, and Motion proof artifacts.
+- Source may still contain `AppTab.capture`, Capture screen modes, capture navigation routes, capture inbox terms, or other compatibility paths.
+- Source may still contain `Plan`, `Profile`, `Captures`, `Pulse`, `DayTimelineRail`, `GoalMissionControl`, and other prior compatibility names.
+- These source facts do not override current product truth.
 
 Implementation classification:
 
-- If current source routes to `AppTab.capture` as a canonical top-level tab, that is a migration regression.
-- If current source omits `AppTab.motion`, this is a known migration gap.
-- If current source/routes/tests still reference Pulse as a current tab or current surface, they must migrate to Motion. Pulse is prior working-name context only.
-- Capture source and composer logic may be reusable as global Capture infrastructure, but not as a top-level tab contract.
-- Existing proof/receipt/progress/ProofPulse material may be reusable for Motion only if Motion remains proof/progress/inspection and avoids dashboard, feed, XP, score, streak, productivity-report, generic-progress-chart, social-timeline, dashboard-card-stack, or shame/guilt drift.
+- `Motion` source is now compatibility/migration debt unless it is being reused as `Stage/Motion` behavior infrastructure.
+- `Capture` source and composer logic may be reused as global Capture infrastructure, but not as a top-level tab contract.
+- `Plan` may exist as compatibility code for Time behavior, but not as a root surface.
+- `Profile` may exist as compatibility code for You behavior, but not as a root surface.
+- `Pulse` may appear as historical/proof primitive naming only, not as a current tab or surface.
 
-This file is implementation truth, not implementation proof. This implementation-truth update does not prove app source migration, build success, test success, accessibility validation, performance validation, privacy/legal approval, release readiness, TestFlight readiness, or App Store readiness.
+Hard implementation truth:
 
-Current completion and validation focus:
-
-- M07: Time Texture / LifeShape Field.
-- M12: accessibility/performance/release evidence.
-- M13: behavior-level validation for compatibility seams and capture routing ergonomics.
+```text
+If current source routes to Motion as a canonical root tab, that is product drift.
+If current source routes to Capture as a canonical root tab, that is product drift.
+If tests require Motion as a root tab, those tests are stale and must be migrated.
+If scripts validate Today / Goals / Time / Motion / You as active IA, those scripts are stale and must be migrated.
+```
 
 ---
 
 ## 6. Native iPhone / Xcode / Project Structure
-
-Source evidence:
-
-```text
-project.yml
-docs/native-build-and-release.md
-scripts/build-local.sh
-scripts/setup_macos_ios_dev.sh
-```
 
 Implementation truth:
 
@@ -264,17 +205,17 @@ Implementation truth:
 - Resources are under `Native/Ambitions/Resources`.
 - Entitlements are configured through source paths in `project.yml`.
 
-Unproven:
+Unproven unless current logs exist:
 
-- Current project generation success.
-- Current package resolution success.
-- Current local simulator build success.
-- Current archive success.
-- Current device install behavior.
+- current project generation success
+- current package resolution success
+- current local simulator build success
+- current archive success
+- current device install behavior
 
-Required proof before claims:
+Required proof before claiming build success:
 
-```text
+```bash
 xcodegen generate
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies
 xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "<simulator>" build CODE_SIGNING_ALLOWED=NO
@@ -284,38 +225,7 @@ with current logs, exit codes, branch, and commit SHA.
 
 ---
 
-## 7. Targets and Packages
-
-Configured targets from `project.yml`:
-
-| Target | Type | Implementation Truth |
-|---|---|---|
-| `Ambitions` | iOS application | Configured app target. Source-present. Runtime/build unproven without logs. |
-| `AmbitionsWidgetExtension` | iOS app extension | Configured widget extension target. Runtime/device behavior unproven. |
-| `AmbitionsShareExtension` | iOS app extension | Configured share extension target. Runtime/device behavior unproven. |
-| `AmbitionsTests` | Unit test bundle | Configured test target. Current pass/fail unproven. |
-| `AmbitionsUITests` | UI test bundle | Configured UI test target. Current pass/fail unproven. |
-
-Configured packages from `Package.swift`:
-
-| Product | Path | Implementation Truth |
-|---|---|---|
-| `AmbitionsDesignSystem` | `Sources` | Source-present shared design system package. |
-| `AmbitionsWidgetUI` | `AppUI/Sources` | Source-present widget UI package depending on `AmbitionsDesignSystem`. |
-
-Target/package configuration does not prove:
-
-- app builds
-- tests pass
-- extensions run on device
-- widgets render correctly
-- Live Activity behavior works
-- share extension imports data correctly
-- App Store signing/export works
-
----
-
-## 8. Domain and Data Model Status
+## 7. Domain and Persistence Status
 
 Source evidence includes broad domain/model areas:
 
@@ -328,19 +238,7 @@ Native/Ambitions/Persistence/SwiftDataModels.swift
 Native/Ambitions/Persistence/SwiftDataStore.swift
 ```
 
-SwiftData persisted records are source-present for:
-
-- goals
-- goal drafts
-- goal plans
-- plan sections
-- steps
-- progress evidence
-- feedback events
-- captures
-- teaching signals
-- event ledger
-- app state
+SwiftData persisted records are source-present for goals, goal drafts, goal plans, plan sections, steps, progress evidence, feedback events, captures, teaching signals, event ledger, and app state.
 
 Implementation truth:
 
@@ -364,19 +262,11 @@ unless current source and proof establish those claims.
 
 ---
 
-## 9. Persistence and Local-First Status
+## 8. Local-First, Account, R2, and AI Status
 
-Source evidence:
+### Local persistence
 
-```text
-Native/Ambitions/App/AppContainerFactory.swift
-Native/Ambitions/Persistence/SwiftDataStore.swift
-Native/Ambitions/Persistence/SwiftDataModels.swift
-Native/Ambitions/Support/Ambitions.entitlements
-Native/Ambitions/Resources/PrivacyInfo.xcprivacy
-```
-
-Implementation truth:
+Source truth:
 
 - SwiftData persistence source exists.
 - `AmbitionsPersistenceStore` creates a SwiftData `ModelContainer`.
@@ -386,12 +276,6 @@ Implementation truth:
 - Repositories are built from `SwiftData*Repository` types in `AppContainerFactory`.
 - Unit-of-work transaction receipt source exists.
 - App Group entitlement exists.
-
-Local-first truth:
-
-- The inspected app source supports a local-first/on-device-first posture.
-- No active custom hosted personal-data backend implementation was found in inspected app source.
-- No active core external LLM implementation was found in inspected app source.
 
 Unproven:
 
@@ -404,114 +288,70 @@ Unproven:
 - App Group data behavior across extensions
 - legal/privacy correctness
 
----
+### Ambitions Account
 
-## 10. Apple Sync Status
-
-Product truth allows Apple account/iCloud-style sync as a future user-owned, Apple-native, privacy-preserving exception.
-
-Implementation evidence found:
-
-```text
-Native/Ambitions/Support/Ambitions.entitlements
-```
+Product truth requires custom Ambitions Accounts at launch using Sign in with Apple and Google Sign-In for optional identity/entitlement/R2 reference-pack access.
 
 Current source truth:
 
-- The inspected app entitlement file contains App Group entitlement.
-- No active iCloud/CloudKit entitlement was found in the inspected entitlement file.
-- No active CloudKit/iCloud sync source implementation was found during inspected source search.
-- Apple sync is not implemented or validated as current repo truth.
-
-Allowed wording:
-
 ```text
-Apple-native sync is an allowed future architecture exception.
+Unproven until source and logs prove otherwise.
 ```
 
-Forbidden wording:
+Do not claim:
 
-```text
-iCloud sync is implemented.
-CloudKit sync is working.
-User data syncs across devices.
-Sync is validated.
-```
+- Ambitions Account is implemented
+- Sign in with Apple works
+- Google Sign-In works
+- account recovery works
+- account entitlements work
+- account-gated R2 access works
 
-unless future source and proof establish those claims.
+unless current source and proof establish those claims.
 
----
+### R2 / Source Atlas
 
-## 11. Cloudflare R2 Freshness Status
-
-Product truth allows Cloudflare R2 only as a read-only external source for public, non-user-personal freshness/reference packs, such as:
-
-- public dates
-- public rules
-- public deadlines
-- public regulations
-- templates
-- public requirements
-- non-personal metadata
+Product truth makes R2 first-class for Source Atlas/reference freshness.
 
 Current source truth:
 
-- No active app-source Cloudflare R2 implementation was found during inspected source search.
-- No active app-source R2 fetch/client/cache/privacy boundary was found.
-- R2 freshness is allowed by product architecture but currently unimplemented/unproven.
+- Source Atlas model source exists in the repo.
+- No release proof currently validates R2 fetch, cache, entitlement gating, pack verification, or privacy boundary.
 
 Hard boundary:
 
-- R2 must never become a user-private life-data backend.
-- Goals, captures, calendar context, schedule assumptions, proof, receipts, closure history, behavioral patterns, inferred priorities, profile, or personal context must not be uploaded to R2.
-- Any future R2 request must be anonymous/non-personal or blocked.
+- R2 must never become a private life graph backend.
+- R2 requests must not include private user context.
+- Goals, captures, calendar context, schedule assumptions, proof, receipts, closure history, behavior patterns, inferred priorities, profile, or personal context must not be uploaded to R2.
 
-Forbidden wording:
+Do not claim:
 
-```text
-R2 freshness is implemented.
-R2 updates dates/rules in the app.
-R2 is validated.
-Freshness packs are production-ready.
-```
+- R2 freshness is implemented
+- R2 updates dates/rules in the app
+- Source Atlas packs are production-ready
+- R2 entitlement gating is validated
+- R2 privacy boundary is validated
 
-unless future source and proof establish those claims.
+unless current source and proof establish those claims.
 
----
+### External/cloud LLM status
 
-## 12. External/Cloud LLM Status
-
-Product truth:
-
-- External/cloud LLMs are excluded from the core product architecture.
-- Core intelligence must be local-first, deterministic, inspectable, and expressed through product behavior.
-- Optional future AI/cloud/extension behavior must remain outside core product truth unless explicitly scoped later.
+Product truth excludes external/cloud LLMs, hosted AI services, and cloud model APIs from core architecture.
 
 Current source truth:
 
-- No active app-source OpenAI/API/cloud LLM implementation was found during inspected source search.
+- No active app-source OpenAI/API/cloud LLM implementation is treated as core architecture by active truth.
 - Existing `.codex`, docs, prompts, or agent materials may mention AI/Codex, but those are not app runtime dependencies.
-- `.agents` provider/backend skill material is not core app architecture.
 
-Codex must not add:
-
-- external LLM dependency
-- OpenAI/API dependency
-- cloud model calls
-- chatbot-first UI
-- opaque model confidence
-- server-side user profiling
-- hosted personal-data intelligence
-
-unless the user explicitly scopes a non-core optional extension and the truth files are updated first.
+Codex must not add external LLM dependency, cloud model calls, chatbot-first UI, opaque model confidence, server-side user profiling, or hosted personal-data intelligence unless truth files are updated first.
 
 ---
 
-## 13. Surface Implementation Status
+## 9. Surface Implementation Status
 
 ### Today
 
-Evidence:
+Source-present evidence:
 
 ```text
 Native/Ambitions/App/AmbitionsRootView.swift
@@ -519,222 +359,126 @@ Native/Ambitions/Features/Today/TodayScreen.swift
 Native/Ambitions/Features/Today/
 ```
 
-Source-present implementation:
-
-- Today tab/surface is wired.
-- Today screen source exists.
-- Loading/failed/loaded states exist.
-- Day rail source exists as `DayTimelineRail`.
-- Start Here-like execution state appears in source/previews.
-- Step detail sheet source exists.
-- Action closure sheet source exists.
-- Today can route to goal detail, quick capture, and Time/Plan.
-- Preview fixtures exist for multiple Today states.
-
-Compatibility/design debt:
-
-- Product truth says active term is Reality Meridian, not DayTimelineRail.
-- Product truth says Start Here Surface must not feel like a detached card.
-- Current source still contains rail/hero naming and must be reviewed against final product design truth.
-- Source presence does not prove final flagship interaction/visual quality.
-
 Implementation truth:
 
-```text
-Today is source-present and wired, but not product-complete or release-proven.
-```
+- Today source exists and is wired in current app source.
+- Loading/failed/loaded states exist.
+- Step detail and closure sheet source exist.
+- Preview fixtures exist for multiple states.
+- Product truth says Today is Reality Meridian + Start Here, not task list, calendar timeline, or detached card stack.
+- Final live-time, mutation, accessibility, safe-area, and flagship visual behavior remain unproven unless current proof exists.
 
 ### Goals
 
-Evidence:
+Source-present evidence:
 
 ```text
-Native/Ambitions/App/AmbitionsRootView.swift
 Native/Ambitions/Features/Goals/GoalsScreen.swift
 Native/Ambitions/Features/Goals/
 ```
 
-Source-present implementation:
-
-- Goals tab/surface is wired.
-- Goals screen source exists.
-- Goal creation route exists.
-- Goal detail route exists.
-- Goal Mission Control lanes source exists.
-- Life path, life areas, north stars, one-step goals, bands, archive summary, horizon ladder, and atlas preview source elements exist.
-- Goal creation success/clarification/blocked states appear in source.
-
-Compatibility/design debt:
-
-- Product truth says Goals should be equal-weight Constellation Atlas with Orbital Lens drill-down.
-- Product truth rejects KPI dashboard/rings/ranked life scores.
-- Current source terms such as Mission Control, board, portfolio, maturity, pressure must be reviewed for drift and generic-dashboard risk.
-
 Implementation truth:
 
-```text
-Goals is source-present and wired, but the final Constellation Atlas/Orbital Lens product model is not proven complete.
-```
+- Goals source exists.
+- Goal creation and detail source exist.
+- Current source terms such as Mission Control, board, portfolio, maturity, pressure, or atlas preview may exist as compatibility/debt.
+- Product truth says Goals should be Constellation Atlas with Life Areas, Goal Threads, Step chains, proof history, and no KPI/ranked-score/dashboard drift.
+- Final Constellation Atlas/Orbital Lens behavior remains unproven unless current proof exists.
 
-### Capture
+### Time
 
-Evidence:
-
-```text
-Native/Ambitions/App/AmbitionsRootView.swift
-Native/Ambitions/Features/Capture/CaptureScreen.swift
-Native/Ambitions/Features/Capture/
-```
-
-Source-present implementation:
-
-- Capture is present as global Atmosphere Composer/action infrastructure in current app-shell wiring.
-- Capture screen source exists.
-- Bottom composer source exists.
-- Route preview source exists.
-- Capture grouping and placement actions exist.
-- Quick capture and grow-into-goal paths exist in source.
-- Capture receipt preview source exists.
-- Capture status handling source exists.
-
-Compatibility/design debt:
-
-- Product truth says Capture is global Atmosphere Composer/action infrastructure, not a top-level tab.
-- Product truth says Capture access should be contextual surface-native entry points first, a quiet toolbar fallback, and an activated bottom composer seam only after invocation.
-- Product truth says route reveal should happen after input.
-- Product truth rejects default notes feed/inbox/category grid.
-- Compatibility surfaces such as `captureNavigation()` and older capture route shells remain for backward-compatible behavior where needed.
-
-Implementation truth:
+Source-present evidence:
 
 ```text
-Capture source and composer logic are source-present, reusable for global Capture infrastructure, and are not a top-level tab contract.
-```
-
-### Motion
-
-Evidence:
-
-```text
-docs/truth/PRODUCT_DESIGN_TRUTH.md
-Native/Ambitions/App/AppTab.swift
-Native/Ambitions/App/AmbitionsRootView.swift
-Native/AmbitionsTests/App/AppShellNavigationTests.swift
-Sources/Components/DynamicAdaptiveVisualPrimitives.swift
-Sources/Components/TrustReceiptLayerPrimitives.swift
-Sources/Components/AmbitionsExtendedTactileKit.swift
-```
-
-Source-present implementation:
-
-- Product/design truth defines Motion as the approved fifth tab and Motion Current as the proof/progress/inspection surface.
-- Current inspected app-shell source defines `AppTab.motion` and renders a Motion tab.
-- Current shell tests validate canonical active tab set and compatibility behavior.
-- Proof/receipt/progress primitive source exists, including `ProofPulse` and related proof visual primitives.
-
-Compatibility/design debt:
-
-- Pulse is prior working-name / historical context only and must not be presented as current product truth.
-- `ProofPulse` and other proof/pulse primitive names are source-present shared visual/proof infrastructure, not a current top-level Pulse tab.
-- Motion may reuse proof/receipt/progress primitives only if it remains Motion Current and avoids dashboard/feed/XP/score/streak drift.
-
-Implementation truth:
-
-```text
-Motion is active product/design truth and is now source-wired as a top-level canonical tab.
-```
-
-### Time / Plan
-
-Evidence:
-
-```text
-Native/Ambitions/App/AmbitionsRootView.swift
-Native/Ambitions/App/AppTab.swift
 Native/Ambitions/Features/Time/TimeScreen.swift
 Native/Ambitions/Features/Time/
+Native/Ambitions/Features/Plan/   # compatibility/source debt where present
 ```
-
-Source-present implementation:
-
-- User-facing tab title is `Time` through `AppTab.time.title`.
-- Navigation scaffold title is `Time`.
-- `TimeScreen` source exists.
-- Time/Plan source includes capacity envelope, pressure, recovery, Life Suite, lifecycle rail, timeline strip, pressure scrubber, relationship card, secondary destinations, elastic week, believability, calendar awareness, opportunity windows, decision debt, conflict court, boundary contracts, reflow, recovery, receipts, resilience, shaping actions.
-
-Compatibility/design debt:
-
-- Product truth says final active top-level label is Time.
-- Product truth says Plan may appear only as contextual action/copy, not tab.
-- Product truth says Time primary object is LifeShape Field, not calendar grid or generic planning dashboard.
-- Current inspected app-shell source uses `AppTab.time`, `TimeRouteTarget`, `timeNavigation()`, `TimeScreen`, and Time-prefixed structures under `Features/Time/`.
-- Other Plan compatibility names may still exist outside this inspected app-shell path and require source-state verification before any migration issue.
 
 Implementation truth:
 
+- User-facing Time source exists.
+- Plan compatibility code may still exist.
+- Product truth says Time is LifeShape Field, not calendar clone, agenda clone, free/busy grid, productivity score, or AI scheduling surface.
+- Final Time/LifeShape Field implementation remains unproven unless current proof exists.
+
+### You
+
+Source-present evidence:
+
 ```text
-Time is user-facing source-present through Plan compatibility code. The final Time/LifeShape Field implementation is not proven complete.
-```
-
-### You / Profile
-
-Evidence:
-
-```text
-Native/Ambitions/App/AmbitionsRootView.swift
-Native/Ambitions/App/AppTab.swift
 Native/Ambitions/Features/You/YouScreen.swift
 Native/Ambitions/Features/You/
 ```
 
-Source-present implementation:
+Implementation truth:
 
-- User-facing tab title is `You`.
-- Internal route/source names remain `profile`.
-- `YouScreen` source exists.
-- Source includes profile/defaults, personalization, appearance, memory controls, trust center, receipts history, corrections, reviews, proof, schedule availability, plan behavior, automation trust, vacation/away time, durations, notifications, integrations/widgets/export/accessibility/support/about areas.
-- Appearance preference and accent family are saveable through Profile/You source.
+- You source exists.
+- Profile compatibility symbols may remain.
+- Product truth says You is User System Profile, not social profile/admin/AI settings wall/generic settings dump.
+- Final native settings/profile quality remains unproven unless current proof exists.
 
-Compatibility/design debt:
+### Capture
 
-- Product truth says active object is User System Profile, not Profile.
-- Product truth says You is system control, not social profile/admin/AI settings wall.
-- Current source features folder has been migrated to `You/` and `YouScreen`, while some internal route symbols remain `profile` compatibility wiring.
-- Product truth says top-level You should be iOS Settings-like, static profile header, no search/family/social profile framing.
+Source-present evidence:
+
+```text
+Native/Ambitions/Features/Capture/CaptureScreen.swift
+Native/Ambitions/Features/Capture/
+```
 
 Implementation truth:
 
+- Capture source exists and is reusable as global composer infrastructure.
+- Compatibility routes/shell modes may remain.
+- Product truth says Capture is global Atmosphere Composer/Open Field, not root tab/inbox/feed/chatbot/category grid.
+- Final keyboard-safe composer, attachments, mic/voice permission behavior, routing preview, and no-crash expansion remain unproven unless current proof exists.
+
+### Motion
+
+Source-present evidence may include:
+
 ```text
-You is source-present and wired through Profile compatibility code. Final User System Profile product model is not proven complete.
+Native/Ambitions/Features/Motion/
+Native/Ambitions/Features/Motion/MotionCurrentScreen.swift
+Sources/Components/*ProofPulse*
 ```
 
----
+Implementation truth:
 
-## 14. Core Object Implementation Status
-
-| Object / System | Current Implementation Truth | Evidence |
-|---|---|---|
-| Reality Meridian | Product truth view is implemented as `RealityMeridianView` in `TodayDayRailPanels.swift`, presenting the daily execution rail. | `PRODUCT_DESIGN_TRUTH.md`, `TodayDayRailPanels.swift` |
-| Start Here Surface | Start Here-related source/previews exist; final non-card integrated surface not proven. | `TodayScreen.swift` |
-| Constellation Atlas | Product truth object exists as direction. Source has Goals atlas preview/life areas/north stars but not proven final atlas. | `PRODUCT_DESIGN_TRUTH.md`, `GoalsScreen.swift` |
-| Atmosphere Composer | Capture composer source exists and is implemented as global Capture infrastructure with compatibility seams where needed. Final global Capture behavior proof remains open. | `CaptureScreen.swift` |
-| LifeShape Field | Product truth object exists as direction. Source has Plan/Time capacity/pressure modules; final LifeShape Field not proven. | `PRODUCT_DESIGN_TRUTH.md`, `TimeScreen.swift` |
-| User System Profile | Product truth object exists as direction. Source has Profile/You controls; final system profile not proven. | `PRODUCT_DESIGN_TRUTH.md`, `YouScreen.swift` |
-| Receipts | Event ledger/proof/capture receipt/trust UI source exists. Full lifecycle unproven. | `SwiftDataModels.swift`, `TodayScreen.swift`, `CaptureScreen.swift`, `YouScreen.swift` |
-| Action Closure | Today closure sheet and domain models source exist. Full cross-surface closure system unproven. | `TodayScreen.swift`, `Native/Ambitions/Domain/ActionClosureReceiptModels.swift` |
-| Proof | Progress evidence record and proof/trust UI source exists. Proof transfer/review lifecycle unproven. | `SwiftDataModels.swift`, `YouScreen.swift` |
-| Personal Context / Memory | Profile memory controls and event/teaching/app state records exist. Mature local learning unproven. | `SwiftDataModels.swift`, `YouScreen.swift` |
-| Recommendation / Start Here | Today service and recommendation-related domain source exists. Mature deterministic recommendation unproven. | `TodayScreen.swift`, `Native/Ambitions/Domain/RecommendationExplanationModels.swift` |
+- Motion source may exist, but Motion is not current product root IA.
+- Motion code may be migrated or reused only as `Stage/Motion` behavior infrastructure.
+- Tests or validators requiring Motion as root tab are stale and must migrate.
+- Proof/pulse primitive names may remain source-present visual/proof infrastructure, not top-level Pulse/Motion product truth.
 
 ---
 
-## 15. Frontend Primitive / Design System Status
+## 10. Core Object Implementation Status
 
-Evidence:
+| Object / System | Current Implementation Truth |
+|---|---|
+| Reality Meridian | Product truth object exists; source implementation/proof must be verified against current `Today` source. |
+| Start Here | Source/previews may exist; final integrated non-card Start Here surface not proven by source presence. |
+| Constellation Atlas | Product truth object exists; final Goals atlas behavior not proven by source presence. |
+| Atmosphere Composer | Capture composer source exists; final global Capture behavior proof remains open. |
+| LifeShape Field | Product truth object exists; final Time capacity object not proven by source presence. |
+| User System Profile | Product truth object exists; final native You surface not proven by source presence. |
+| Receipts | Event ledger/proof/capture receipt/trust UI source exists; full lifecycle unproven. |
+| Action Closure | Today closure sheet and domain models source exist; full cross-surface closure system unproven. |
+| Proof | Progress evidence and proof/trust source exist; proof transfer/review lifecycle unproven. |
+| Personal Runtime | Profile/You controls and teaching/app state records exist; mature local learning unproven. |
+| Recommendation / Start Here | Recommendation-related source exists; mature deterministic recommendation unproven. |
+| Ambitions Account | Product truth requires launch account support; implementation unproven until source/proof exists. |
+| R2 / Source Atlas | Product truth requires first-class reference freshness; implementation unproven until source/proof exists. |
+
+---
+
+## 11. Design System / Accessibility Status
+
+Source-present evidence:
 
 ```text
 Package.swift
-Sources/Theme/AmbitionTheme.swift
 Sources/
 AppUI/Sources/
 Native/Ambitions/UI/
@@ -754,7 +498,7 @@ Unproven:
 - final visual quality
 - screenshot parity with Product Design Truth
 - snapshot testing
-- device rendering
+- real-device rendering
 - Dynamic Type behavior across full app
 - Reduce Motion equivalence
 - VoiceOver equivalence
@@ -765,28 +509,18 @@ Source-present design system is not the same as flagship visual completion.
 
 ---
 
-## 16. Widget / Live Activity / Extension Status
+## 12. Extension / Widget / App Intent Status
 
-Evidence:
+Configured/source-present areas may include:
 
-```text
-project.yml
-Native/AmbitionsWidgetExtension/
-Native/AmbitionsShareExtension/
-Native/Ambitions/ExternalSnapshots/
-AppUI/Sources/
-```
+- widget extension target
+- share extension target
+- external snapshot source
+- ActivityKit-related attributes
+- Widget UI package source
+- App Group entitlement
 
-Implementation truth:
-
-- Widget extension target is configured.
-- Share extension target is configured.
-- External snapshot source exists.
-- ActivityKit-related `NextStepActivityAttributes` source appears in tracked source inventory.
-- Widget UI package source exists.
-- App Group entitlement exists.
-
-Unproven:
+Unproven unless current proof exists:
 
 - widget rendering on simulator/device
 - widget refresh behavior
@@ -797,429 +531,55 @@ Unproven:
 - App Intent / Shortcuts device behavior
 - notification routing behavior on device
 
-Do not claim external surfaces are working or device-validated without proof.
+Do not claim external surfaces work or are device-validated without proof.
 
 ---
 
-## 17. Tests and Validation Assets
+## 13. Current Claim Boundaries
 
-Evidence:
+Allowed wording:
 
 ```text
-project.yml
-Native/AmbitionsTests/
-Native/AmbitionsUITests/AmbitionsUITests.swift
-docs/native-build-and-release.md
+The repo contains native SwiftUI iOS source.
+The repo contains local persistence source.
+The repo contains source for Today / Goals / Time / You and global Capture.
+The repo contains Motion-related source that must be treated as compatibility/migration debt or Stage/Motion behavior infrastructure under current truth.
+The repo contains product/account/R2/Source Atlas truth, but implementation proof must be verified separately.
 ```
 
-Implementation truth:
-
-- Unit test target is configured.
-- UI test target is configured.
-- Unit test source exists.
-- UI test source exists.
-- UI tests cover preview/demo flows, onboarding, shell, goals, capture, Today, Plan/Time, You/Profile, command sheet, memory lens, goal detail, and Plan modules.
-- Current pass/fail is unproven.
-- UI tests include stale or compatibility naming risk: they expect `Plan` tab buttons in places while app source maps the plan tab title to `Time`.
-
-Testing truth must always separate:
+Forbidden wording without current proof:
 
 ```text
-target exists
-test source exists
-test command exists
-test was run
-test passed
-test failed
-test skipped
-test unavailable
+Motion is a canonical top-level tab.
+Capture is a canonical top-level tab.
+Ambitions Account is implemented.
+Sign in with Apple works.
+Google Sign-In works.
+R2 freshness works.
+Source Atlas packs are production-ready.
+iCloud/CloudKit sync works.
+The app is release-ready.
+The app is TestFlight-ready.
+The app is App Store-ready.
+The app is fully accessible.
+The app is device-validated.
 ```
 
 ---
 
-## 18. Build and Script Assets
-
-Evidence:
-
-```text
-scripts/build-local.sh
-scripts/setup_macos_ios_dev.sh
-docs/native-build-and-release.md
-```
-
-Implementation truth:
-
-- `scripts/build-local.sh` exists.
-- It generates `Ambitions.xcodeproj`.
-- It chooses an available iPhone simulator.
-- It runs `xcodebuild` with code signing disabled.
-- It writes logs under `output/logs`.
-- It uses `xcbeautify` when available.
-- `scripts/setup_macos_ios_dev.sh` exists.
-- It checks macOS/Xcode/Homebrew.
-- It installs/verifies XcodeGen and optional local tooling.
-- It regenerates project and verifies project discovery.
-
-Unproven:
-
-- scripts currently execute successfully
-- local machine has required toolchain
-- current build succeeds
-- generated project is clean
-- package resolution succeeds
-- current logs exist
-
----
-
-## 19. CI / Workflow Assets
-
-Evidence:
-
-```text
-docs/status/release-evidence-packet.md
-docs/native-build-and-release.md
-docs/status/repo-cleanup-index.md
-docs/audits/tracked-files.txt
-```
-
-Inspection result:
-
-- Existing release/status docs say there is no active hosted CI workflow.
-- `docs/audits/tracked-files.txt` was regenerated from `git ls-files` on 2026-05-10 and does not list `.github/workflows/ios-validate.yml`.
-- Repo code search for workflow markers did not find active workflow evidence.
-
-Implementation truth:
-
-```text
-No active hosted CI workflow was found in the inspected repo state.
-```
-
-Current inventory evidence:
-
-```text
-docs/audits/tracked-files.txt
-```
-
-is a regenerated tracked-file inventory for repo-hygiene lookup. It is not CI
-proof, implementation proof, or release proof.
-
-Forbidden claim:
-
-```text
-CI is configured.
-CI is passing.
-GitHub Actions validates the app.
-```
-
-unless a current workflow file and current run evidence exist.
-
----
-
-## 20. Known Compatibility Debt
-
-| Debt | Evidence | Risk |
-|---|---|---|
-| Plan vs Time | Folders and screen types migrated to `Time/` and `TimeScreen`, while some internal route symbols remain plan compatibility wiring. | UI tests/docs/source can drift; blind rename may break routing. |
-| Profile vs You | Folders and screen types migrated to `You/` and `YouScreen`, while some internal route symbols remain profile compatibility wiring. | Product language drift if Profile leaks into UI/docs. |
-| Capture tab vs global Capture | `AppTab.capture` remains as compatibility routing; Capture is not canonical top-level tab state. | Legacy compatibility seam is allowed only when it does not affect active top-level IA. |
-| Motion tab wiring | `AppTab.motion` and Motion top-level shell route are present in source. | Migration gap in this row is resolved; compatibility work remains focused on behavior quality gates. |
-| Pulse / ProofPulse terminology | Shared proof primitives such as `ProofPulse` exist; Pulse as a tab is historical only. | Reusable proof/progress material must not revive Pulse as current product truth or turn Motion into dashboard/feed/score/streak behavior. |
-| DayTimelineRail vs Reality Meridian | SwiftUI view class is migrated to `RealityMeridianView` in `TodayDayRailPanels.swift`. | Product identity drift. |
-| Hero Step Panel / Start Here | Old terms may persist in source/previews/docs. | Detached-card/generic AI suggestion risk. |
-| Mission Control / board / KPI language | Goals source/docs use mission-control/board/maturity/pressure terms. | Dashboard drift risk against Product Truth. |
-| Provider/backend assumptions | Provider skill roots are absent from active paths and forbidden by skill governance. | Hosted backend/provider drift risk if stale docs are reused. |
-| Hosted workflow assumptions | `.github/` is absent; workflow templates are examples only. | False CI proof risk if example files are treated as active. |
-
-Compatibility rule:
-
-- Source compatibility names may remain temporarily when renaming would be unsafe.
-- User-facing UI, active docs, and new implementation should follow `PRODUCT_DESIGN_TRUTH.md`.
-- Any source rename must include tests, route migration, and rollback plan.
-
----
-
-## 21. Known Naming Drift
-
-Active product/design names from `PRODUCT_DESIGN_TRUTH.md`:
-
-```text
-Today
-Goals
-Time
-Motion
-You
-Capture as global Atmosphere Composer/action layer
-Reality Meridian
-Start Here Surface
-Recommended step
-LifeShape Field
-Time Texture
-Motion Current
-User System Profile
-Trust Seam
-Receipt Surface
-Quiet Reflow
-Still Counts
-Needs a Place
-Ready to Place
-Grow into Goal
-```
-
-Current source/internal compatibility names found:
-
-```text
-capture as AppTab.capture
-captureNavigation
-CaptureScreenShellMode.topLevelCapture
-captureInbox
-plan
-TimeScreen
-PlanRouteTarget
-plan.screen
-YouScreen
-profile
-captures
-DayTimelineRail
-HeroStep
-GoalMissionControl
-Mission Control
-ProofPulse
-Insights
-Habits
-```
-
-Implementation truth:
-
-- Naming drift exists.
-- Naming drift is not automatically a defect if it is internal compatibility debt.
-- Naming drift becomes a defect when it leaks into active user-facing UI, active truth docs, new implementation plans, tests that block current truth, or Codex prompts.
-- Source-present does not mean product-current.
-- Capture tab and old Pulse-working-name references are stale source seams or historical/compatibility context when they conflict with `PRODUCT_DESIGN_TRUTH.md`.
-
----
-
-## 22. Known Obsolete or Conflicting Areas
-
-Areas requiring historical policy review:
-
-```text
-docs/canon/Ambitions_2_0*
-docs/canon/Ambitions_3_0*
-docs/canon/Ambitions_4_0*
-docs/codex/batches/*
-docs/audits/*
-docs/handoff/*
-.codex/skills/*
-.agents/skills/supabase*
-.agents/skills/supabase-postgres-best-practices/*
-docs/status/current-implementation-map.md
-docs/status/release-evidence-packet.md
-docs/status/repo-cleanup-index.md
-```
-
-Current truth:
-
-- These areas may contain useful history and traceability.
-- They are not active product/design truth when conflicting with `PRODUCT_DESIGN_TRUTH.md`.
-- They are not implementation truth when conflicting with live source.
-- They are not release truth when lacking current validation proof.
-- Provider/backend skills conflict with local-only core unless explicitly quarantined as non-core historical/developer material.
-
-No deletion should happen until `HISTORICAL_POLICY.md` is applied in a dedicated cleanup pass.
-
----
-
-## 23. Product Design Gap Map
-
-| Product Truth Area | Current Source Evidence | Gap |
-|---|---|---|
-| Final IA Today/Goals/Time/Motion/You plus global Capture | Current inspected app-shell source maps user-facing tabs to Today/Goals/Time/Motion/You, with Capture as global action infrastructure. | Canonical tab migration is implemented in shell source; compatibility seams remain in historical route names.
-| Today / Reality Meridian | Today source implements `RealityMeridianView` for the daily execution rail. | Completed concept migration to Reality Meridian view naming. |
-| Start Here Surface | Today source includes Start Here-like hero/step detail. | Final seamless non-card integrated Start Here Surface not proven. |
-| Goals / Constellation Atlas | Goals source includes mission-control/life-area/north-star/atlas preview parts. | Equal-weight Constellation Atlas and Orbital Lens are not proven final. |
-| Capture / Atmosphere Composer | Capture source has composer and route preview logic that is available to global infrastructure. | Final capture access model proof (contextual entry, toolbar fallback, and no persistent floating Capture affordance as canonical action) remains a behavior/QA gate.
-| Motion / Motion Current | Proof/receipt/progress primitives such as `ProofPulse` exist in shared source. | Motion source-surface is present; remaining gaps are in proof/inspection behavior quality and anti-generic quality gates.
-| Time / LifeShape Field | Time features folder and screen migrated to `Time/` and `TimeScreen`. | Final LifeShape Field as dominant primary object not proven. |
-| You / User System Profile | You features folder and screen migrated to `You/` and `YouScreen`. | User System Profile naming/static top-level/iOS Settings-like final model not proven. |
-| Local-only intelligence | SwiftData + local services source exist; no LLM source found. | Mature deterministic intelligence/local learning not proven. |
-| Apple sync exception | No active sync source found. | Allowed future, not implemented. |
-| R2 freshness exception | No active R2 source found. | Allowed future, not implemented. |
-| Trust/receipts/proof | Event ledger, progress evidence, trust UI source exist. | Full lifecycle and validation unproven. |
-| Accessibility | Labels/identifiers/reduce-motion code/previews exist. | Manual accessibility conformance unproven. |
-| Performance | Theme/motion source exists. | Profiling and performance budgets unproven. |
-| Anti-generic UI | Custom primitives and surfaces exist. | Actual flagship quality must be visually reviewed; source alone cannot prove it. |
-
----
-
-## 24. What Is Not Implemented
-
-The following are not implemented or not found as active source evidence during this inspection:
-
-- Apple/iCloud/CloudKit sync.
-- Cloudflare R2 freshness client/cache/pack ingestion.
-- Core external/cloud LLM integration.
-- Custom hosted Ambitions account system.
-- Custom hosted personal-data backend.
-- Server-side user profiling.
-- App Store/TestFlight signing pipeline.
-- Active hosted CI workflow.
-- Current release proof packet with build/test/device logs.
-- Physical-device validation.
-- Full manual accessibility validation.
-- Performance profiling evidence.
-- Final Reality Meridian terminology migration.
-- Final LifeShape Field proof.
-- Final Motion Current proof/progress/inspection surface foundation.
-- Final Constellation Atlas/Orbital Lens proof.
-- Final Capture access model proof: contextual entry points, quiet toolbar fallback, activated bottom composer seam, and no persistent floating Capture button.
-- Final User System Profile proof.
-- Production legal/privacy signoff.
-- Public support/privacy URL validation.
-- Store screenshot proof.
-- Mature local personalization proof.
-- Complete R2/Apple sync/offline fallback validation.
-
-If future source implements any of these, update this file with exact evidence paths and validation status.
-
----
-
-## 25. What Is Unproven
-
-The following may have source or plans but are unproven as working/complete:
-
-- current `xcodegen generate`
-- current package resolution
-- current simulator build
-- current unit test pass
-- current UI test pass
-- current archive sanity pass
-- widget runtime behavior
-- Live Activity runtime behavior
-- share extension runtime behavior
-- App Intent runtime behavior
-- notification runtime behavior
-- EventKit permission and data flow behavior
-- App Group data handoff behavior
-- SwiftData migration/backward compatibility
-- reset/delete/export/import behavior
-- offline behavior under real user data
-- long-session app stability
-- memory/launch/scroll performance
-- accessibility conformance
-- Dynamic Type layout quality
-- VoiceOver semantic quality
-- Reduce Motion equivalence
-- visual QA/screenshot quality
-- local learning correctness
-- recommendation correctness
-- proof/receipt lifecycle correctness
-- privacy/legal readiness
-- release readiness
-
-Unproven does not mean absent. It means no current accepted evidence proves the claim.
-
----
-
-## 26. Forbidden Implementation Claims
-
-Codex must not claim any of the following unless current source and proof explicitly support the exact claim:
-
-```text
-implemented
-complete
-fully built
-fully wired
-production-ready
-release-ready
-App Store-ready
-TestFlight-ready
-device-verified
-CI-proven
-fully tested
-fully accessible
-performance-safe
-privacy-approved
-legally approved
-signed archive ready
-R2 implemented
-iCloud sync implemented
-CloudKit sync implemented
-external surfaces validated
-widgets validated
-Live Activities validated
-share extension validated
-local learning complete
-recommendation engine complete
-external brain complete
-life OS complete
-PRODUCT_DESIGN_TRUTH fully implemented
-the app has canonical Motion source-wiring
-app source-migration compatibility seams are explicit
-builds pass
-tests pass
-accessibility verified
-performance verified
-release readiness proven
-TestFlight ready
-App Store ready
-```
-
-Allowed conservative claims when backed by current source paths:
-
-```text
-source-present
-configured
-wired at source level
-scaffolded
-preview-backed
-test target exists
-local validation path exists
-release proof absent
-device proof absent
-unproven
-not found
-historical
-conflicting
-```
-
----
-
-## 27. Codex Rules for Updating This File
-
-Codex must update this file when:
-
-- source implementation state changes
-- target/package configuration changes
-- app architecture changes
-- persistence/sync/provider posture changes
-- R2 source is added
-- Apple sync/iCloud source is added
-- external/cloud LLM or backend source appears
-- top-level IA/source wiring changes
-- Plan/Profile/Captures naming debt changes
-- Motion/global-Capture migration source state changes
-- Pulse/ProofPulse terminology moves from reusable proof primitive context into user-facing route, tab, or surface context
-- tests are added/removed materially
-- build scripts change
-- CI/workflow posture changes
-- stale docs are demoted or promoted
-- release proof changes implementation status
-
-Update requirements:
-
-1. Cite exact source paths.
-2. Separate source-present from validated.
-3. Separate configured from working.
-4. Separate product truth from implementation truth.
-5. Separate implementation truth from release truth.
-6. Record compatibility debt explicitly.
-7. Record forbidden claims if new overclaim risk appears.
-8. Do not delete historical files while updating this file unless a separate cleanup task is approved.
-9. Do not make release claims here; link to `RELEASE_TRUTH.md`.
-10. Do not use “done,” “complete,” or “ready” without evidence and scope.
-
-Final rule:
-
-```text
-When evidence is missing, write “unproven” or “not found,” not “implemented.”
-```
+## 14. Required Update Triggers
+
+Update this file whenever:
+
+- app source migrates root IA
+- Motion root source is removed, demoted, or transformed into Stage/Motion infrastructure
+- Capture root compatibility is removed or migrated
+- Ambitions Account source is added
+- Sign in with Apple / Google Sign-In source is added
+- R2/Source Atlas source is added
+- iCloud/CloudKit sync source is added or removed
+- privacy manifest/entitlements change
+- release proof changes implementation claims
+- validation proves or invalidates a source-status statement
+
+Every update must preserve no-claim boundaries.
