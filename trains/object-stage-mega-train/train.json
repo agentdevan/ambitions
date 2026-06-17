@@ -27,7 +27,7 @@
       "type": "source",
       "title": "Root Surface Contract and AppTab Cleanup",
       "prompt": "prompts/object-stage-mega-train/AMB-AOM-01A.md",
-      "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Domain/ScreenContractModels.swift", "Native/AmbitionsTests/App/", "scripts/", "artifacts/object-stage-mega-train/"],
+      "allowed_paths": ["Native/Ambitions/App/", "Native/Ambitions/Domain/ScreenContractModels.swift", "Native/Ambitions/Features/Shared/ActivationContract.swift", "Native/Ambitions/PreviewSupport/ShellPreviewMatrix.swift", "Native/Ambitions/PreviewSupport/ToolbarPreviewCatalog.swift", "Native/Ambitions/Support/ReleasePerformanceResponsivenessReport.swift", "Native/AmbitionsTests/App/", "scripts/", "artifacts/object-stage-mega-train/"],
       "build": true,
       "tests": "focused",
       "commit": true,
