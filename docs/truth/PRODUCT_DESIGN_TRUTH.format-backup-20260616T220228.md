@@ -1,6 +1,6 @@
 # PRODUCT_DESIGN_TRUTH.md — Ambitions Object-Stage Architecture + Interaction Canon  
   
-**Recommended path:** `docs/truth/PRODUCT_DESIGN_TRUTH.md`  
+**Recommended path:** ==docs/truth/PRODUCT_DESIGN_TRUTH.md==  
   
 **Status:** Active product/design source of truth; canonical product-source root  
   
@@ -12,9 +12,9 @@
   
 **Supersedes / merges:**  
   
-- `Ambitions_Object_Stage_Architecture_Source.md`  
-- `Ambitions Interaction Reference Synthesis.md`  
-- Prior `docs/truth/PRODUCT_DESIGN_TRUTH.md` content where this file is newer, stricter, or more specific  
+- ==Ambitions_Object_Stage_Architecture_Source.md==  
+- ==Ambitions Interaction Reference Synthesis.md==  
+- Prior ==docs/truth/PRODUCT_DESIGN_TRUTH.md== content where this file is newer, stricter, or more specific  
 
 ---
   
@@ -375,7 +375,8 @@ Core Ambitions value must work offline.
 
 ---
   
-## 7. Account Mode / Entitlement Matrix
+7. Account Mode / Entitlement Matrix  
+
 | Mode | Account required | Network required | R2 access | Personal backend | Core app value | Canon status |
 | -------------------------- | ---------------- | ------------------------ | ------------------------------------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------ |
 | Offline Core | No | No | No live R2; bundled/local packs only | No | Full local Private Life Runtime | Required at launch |
@@ -528,7 +529,7 @@ Any canon update must preserve active product law or explicitly state the supers
   
 Before changing this file, verify:  
   
-- the current `docs/truth/PRODUCT_DESIGN_TRUTH.md` content  
+- the current ==docs/truth/PRODUCT_DESIGN_TRUTH.md== content  
 - the intended source material  
 - the exact sections being replaced or inserted  
 - no old top-level IA is revived  
@@ -542,8 +543,8 @@ After updating this file, verify:
 - expected section count is present  
 - final architecture tree is present  
 - final non-negotiables are present  
-- the file ends with `This is the canon.`  
-- the active product law still reads `Today / Goals / Time / You`  
+- the file ends with ==This is the canon.==  
+- the active product law still reads ==Today / Goals / Time / You==  
 - Motion is still behavior  
 - Capture is still global composer  
   
@@ -593,7 +594,7 @@ Product role law:
   
 Ambitions should feel like one continuous native iPhone stage whose primary object changes, not like independent screens behind a tab bar.  
   
-The app root is `AmbitionsStage`, not a tab controller.  
+The app root is ==AmbitionsStage==, not a tab controller.  
   
 Persistent surfaces are stage states, not tabs.  
   
@@ -626,7 +627,7 @@ Rules:
 - Every surface must pass Dynamic Type, VoiceOver, High Contrast, Reduce Motion, and Reduce Transparency checks.  
 - Real-device rendering proof is required for shell, glass, keyboard, and capture behavior.  
   
-`Stage/Chrome/NativeChromePolicy.swift` and `Stage/Chrome/LiquidGlassPolicy.swift` decide:  
+==Stage/Chrome/NativeChromePolicy.swift== and ==Stage/Chrome/LiquidGlassPolicy.swift== decide:  
   
 - when to use native iOS controls  
 - when to wrap native controls in Ambitions chrome  
@@ -1003,13 +1004,13 @@ Ambitions/
   
 Explicitly removed architecture:  
   
-- `RootTab.swift` as root architecture  
-- `TabView` as the top-level product model  
-- `Surfaces/Motion/`  
-- `Surfaces/Capture/`  
-- `Projection/SurfaceLenses/MotionLens.swift`  
-- `Projection/StageScenes/MotionStageScene.swift`  
-- `Scenarios/MotionScenarios.swift` as a top-level surface scenario  
+- ==RootTab.swift== as root architecture  
+- ==TabView== as the top-level product model  
+- ==Surfaces/Motion/==  
+- ==Surfaces/Capture/==  
+- ==Projection/SurfaceLenses/MotionLens.swift==  
+- ==Projection/StageScenes/MotionStageScene.swift==  
+- ==Scenarios/MotionScenarios.swift== as a top-level surface scenario  
 
 ---
   
@@ -1037,11 +1038,11 @@ If a surface does not prove object, state, action, mutation, accessibility, and 
   
 ## 19. App Layer Canon  
   
-`App/` owns launch, root environment, dependency injection, feature flags, and root stage hosting.  
+==App/== owns launch, root environment, dependency injection, feature flags, and root stage hosting.  
   
 Required behavior:  
   
-- The app launches into `AmbitionsStageHost`.  
+- The app launches into ==AmbitionsStageHost==.  
 - The root is the object stage, not isolated screen prototypes.  
 - Feature flags cannot expose unfinished debug or internal surfaces in release.  
 - Environment injects clock, local store, runtime, permission coordinator, copy policy, design policies, and account/R2 entitlement policy.  
@@ -1059,9 +1060,9 @@ Acceptance gates:
   
 ## 20. Stage Layer Canon  
   
-`Stage/` owns the operating-system-like shell: root surfaces, overlays, transitions, chrome, safe areas, focus, gestures, effects, and mutation animations.  
+==Stage/== owns the operating-system-like shell: root surfaces, overlays, transitions, chrome, safe areas, focus, gestures, effects, and mutation animations.  
   
-`AmbitionsSurface` must include only:  
+==AmbitionsSurface== must include only:  
   
 ```
 enum AmbitionsSurface: String, CaseIterable, Identifiable, Codable, Hashable {
@@ -1076,9 +1077,9 @@ enum AmbitionsSurface: String, CaseIterable, Identifiable, Codable, Hashable {
 ```
   
   
-No `motion`. No `capture`.  
+No ==motion==. No ==capture==.  
   
-`StageOverlay` owns temporary/global experiences:  
+==StageOverlay== owns temporary/global experiences:  
   
 ```
 enum StageOverlay: Equatable {
@@ -1177,13 +1178,13 @@ Motion appears when:
   
 Required files:  
   
-- `Stage/Motion/StageMotionState.swift`  
-- `Stage/Motion/StageMotionEvent.swift`  
-- `Stage/Motion/StageMotionLayer.swift`  
-- `Stage/Motion/StageMotionCoordinator.swift`  
-- `Stage/Motion/StageMotionRenderer.swift`  
-- `Stage/Motion/StageMotionAccessibility.swift`  
-- `Stage/Motion/StageMotionReductionPolicy.swift`  
+- ==Stage/Motion/StageMotionState.swift==  
+- ==Stage/Motion/StageMotionEvent.swift==  
+- ==Stage/Motion/StageMotionLayer.swift==  
+- ==Stage/Motion/StageMotionCoordinator.swift==  
+- ==Stage/Motion/StageMotionRenderer.swift==  
+- ==Stage/Motion/StageMotionAccessibility.swift==  
+- ==Stage/Motion/StageMotionReductionPolicy.swift==  
   
 Required motion states:  
   
@@ -1224,9 +1225,9 @@ Motion reduced-mode law:
   
 ## 22. Core Domain Canon  
   
-`Core/Domain/` defines Ambitions-native product objects.  
+==Core/Domain/== defines Ambitions-native product objects.  
   
-`Step.swift` must support:  
+==Step.swift== must support:  
   
 - title  
 - optional note  
@@ -1250,7 +1251,7 @@ Motion reduced-mode law:
 - privacy classification  
 - undo availability  
   
-`GoalThread.swift` must support:  
+==GoalThread.swift== must support:  
   
 - goal identity  
 - life area  
@@ -1266,7 +1267,7 @@ Motion reduced-mode law:
 - Today feed eligibility  
 - Time capacity pressure  
   
-`RealityWindow.swift` must support:  
+==RealityWindow.swift== must support:  
   
 - start time  
 - end time  
@@ -1279,7 +1280,7 @@ Motion reduced-mode law:
 - recommended step eligibility  
 - recovery requirement  
   
-`CapacityShape.swift` must support:  
+==CapacityShape.swift== must support:  
   
 - fixed points  
 - open windows  
@@ -1292,7 +1293,7 @@ Motion reduced-mode law:
 - past-due pressure  
 - capacity confidence  
   
-`CaptureIntake.swift` must support:  
+==CaptureIntake.swift== must support:  
   
 - text  
 - voice transcript  
@@ -1311,7 +1312,7 @@ Motion reduced-mode law:
 - needs review  
 - privacy classification  
   
-`ClosureOutcome.swift` default options:  
+==ClosureOutcome.swift== default options:  
   
 - Done  
 - Still counts  
@@ -1319,7 +1320,7 @@ Motion reduced-mode law:
 - Blocked  
 - Not needed  
   
-`ClosureOutcome.swift` advanced options:  
+==ClosureOutcome.swift== advanced options:  
   
 - Add proof  
 - Add note  
@@ -1328,7 +1329,7 @@ Motion reduced-mode law:
 - Change Goal  
 - Undo  
   
-`UserSystemProfile.swift` must support:  
+==UserSystemProfile.swift== must support:  
   
 - profile identity  
 - planning defaults  
@@ -1348,22 +1349,22 @@ Motion reduced-mode law:
   
 ## 23. Core Time Canon  
   
-`Core/Time/` makes time real, reliable, testable, and previewable.  
+==Core/Time/== makes time real, reliable, testable, and previewable.  
   
 Time law:  
   
 - Today and Time must never show hardcoded current time.  
 - No production surface may render current time from fixtures.  
-- All current-time behavior must flow through `AmbitionsClock`.  
-- Previews and snapshots must freeze time through `PreviewClock`.  
+- All current-time behavior must flow through ==AmbitionsClock==.  
+- Previews and snapshots must freeze time through ==PreviewClock==.  
 - Day boundary changes must not require app relaunch.  
 - Time zone changes must be handled deliberately.  
   
 Acceptance gates:  
   
-- Today live now marker matches `SystemClock`.  
-- Time live now marker matches `SystemClock`.  
-- Preview scenarios use `PreviewClock`.  
+- Today live now marker matches ==SystemClock==.  
+- Time live now marker matches ==SystemClock==.  
+- Preview scenarios use ==PreviewClock==.  
 - Snapshot tests freeze time.  
 - Day boundary scheduler updates Today state.  
 - No hardcoded “Now” appears in production UI.  
@@ -1372,7 +1373,7 @@ Acceptance gates:
   
 ## 24. Runtime Canon  
   
-`Core/Runtime/` converts goals, captures, context, proof, and capacity into deterministic local projections.  
+==Core/Runtime/== converts goals, captures, context, proof, and capacity into deterministic local projections.  
   
 Runtime produces:  
   
@@ -1422,24 +1423,24 @@ Runtime acceptance gates:
   
 ## 25. Persistence and Permissions Canon  
   
-`Core/Persistence/` owns SwiftData models, repositories, migrations, local store, and store health.  
+==Core/Persistence/== owns SwiftData models, repositories, migrations, local store, and store health.  
   
 Required laws:  
   
 - Domain models do not become SwiftData models directly unless intentionally bridged.  
 - Migrations must be tested before release.  
-- `StoreHealthCheck` must identify broken local persistence before runtime projection depends on it.  
+- ==StoreHealthCheck== must identify broken local persistence before runtime projection depends on it.  
 - Local-first does not mean invisible failure.  
   
-`Core/Permissions/` owns all user permission state.  
+==Core/Permissions/== owns all user permission state.  
   
 Required permissions:  
   
-- `CalendarPermission.swift`  
-- `SpeechPermission.swift`  
-- `NotificationPermission.swift`  
-- `LocalAuthenticationPolicy.swift`  
-- `PermissionCoordinator.swift`  
+- ==CalendarPermission.swift==  
+- ==SpeechPermission.swift==  
+- ==NotificationPermission.swift==  
+- ==LocalAuthenticationPolicy.swift==  
+- ==PermissionCoordinator.swift==  
   
 Permission behavior law:  
   
@@ -1453,7 +1454,7 @@ Permission behavior law:
   
 ## 26. Projection Canon  
   
-`Projection/` translates runtime/domain state into user-facing Stage scenes, overlays, commands, and mutations.  
+==Projection/== translates runtime/domain state into user-facing Stage scenes, overlays, commands, and mutations.  
   
 Surface lenses:  
 
@@ -1475,7 +1476,7 @@ Overlay lenses:
 | InspectionLens.swift | Trust details only when requested or required |
   
   
-Every `StageMutation` must define:  
+Every ==StageMutation== must define:  
   
 - runtime mutation id  
 - before snapshot  
@@ -1587,7 +1588,7 @@ before they encounter deeper concepts such as proof, source, receipt, runtime, s
   
 ## 28. Trust Canon  
   
-`Trust/` makes Ambitions inspectable without making primary UI feel like an audit console.  
+==Trust/== makes Ambitions inspectable without making primary UI feel like an audit console.  
   
 Trust appears when:  
   
@@ -1608,7 +1609,7 @@ Disclosure levels:
 - confirmation detail  
 - full inspection  
   
-Top-level surfaces default to `none` or `quiet status`.  
+Top-level surfaces default to ==none== or ==quiet status==.  
   
 Trust law:  
   
@@ -1623,7 +1624,7 @@ Trust law:
   
 ## 29. Interaction Canon  
   
-`Interaction/` owns gestures, manipulation, keyboard behavior, and haptics.  
+==Interaction/== owns gestures, manipulation, keyboard behavior, and haptics.  
   
 Required gestures:  
 
@@ -1670,11 +1671,11 @@ Every visible object must answer:
   
 ## 30. Rendering Canon  
   
-`Rendering/` renders flagship product objects and their semantic mirrors.  
+==Rendering/== renders flagship product objects and their semantic mirrors.  
   
 Ambitions cannot keep using static card stacks. Rendering must make product objects legible.  
   
-`MeridianRenderer.swift` renders:  
+==MeridianRenderer.swift== renders:  
   
 - Live now marker  
 - Current window  
@@ -1685,7 +1686,7 @@ Ambitions cannot keep using static card stacks. Rendering must make product obje
 - Completed stitches  
 - Scrollable day orientation  
   
-`ConstellationRenderer.swift` renders:  
+==ConstellationRenderer.swift== renders:  
   
 - Life areas  
 - Goal threads  
@@ -1695,7 +1696,7 @@ Ambitions cannot keep using static card stacks. Rendering must make product obje
 - Completed milestones  
 - No decorative meaningless nodes  
   
-`LifeShapeRenderer.swift` renders:  
+==LifeShapeRenderer.swift== renders:  
   
 - Year/month/week/day/now hierarchy  
 - Capacity fields  
@@ -1705,7 +1706,7 @@ Ambitions cannot keep using static card stacks. Rendering must make product obje
 - Pinch detail density  
 - Contextual Today anchor  
   
-`MotionCurrentRenderer.swift` renders:  
+==MotionCurrentRenderer.swift== renders:  
   
 - Proof stitch movement  
 - Recovery band appearance  
@@ -1726,10 +1727,10 @@ Canvas output must have accessible equivalents:
   
 Required semantic mirror files:  
   
-- `MeridianSemanticModel.swift`  
-- `ConstellationSemanticModel.swift`  
-- `LifeShapeSemanticModel.swift`  
-- `MotionSemanticModel.swift`  
+- ==MeridianSemanticModel.swift==  
+- ==ConstellationSemanticModel.swift==  
+- ==LifeShapeSemanticModel.swift==  
+- ==MotionSemanticModel.swift==  
 
 ---
   
@@ -1860,7 +1861,7 @@ Today must not show by default:
   
 Today acceptance gates:  
   
-- Live now marker matches `AmbitionsClock`.  
+- Live now marker matches ==AmbitionsClock==.  
 - Start Here appears only when meaningful.  
 - No-step state is quiet and clear.  
 - Completing a Step visibly mutates Today.  
@@ -2027,8 +2028,8 @@ You must show:
   
 You must use:  
   
-- `NativeSettingsGroup`  
-- `NativeSettingsRow`  
+- ==NativeSettingsGroup==  
+- ==NativeSettingsRow==  
 - Full-screen drilldowns  
 - Toggles where direct  
 - Chevrons where deeper  
@@ -2166,8 +2167,8 @@ Closure acceptance gates:
 - Default outcome choices are immediately reachable.  
 - Advanced outcome choices are available without cluttering default closure.  
 - Saving closure visibly mutates Today.  
-- Closure can create `StageMotionEvent`.  
-- Closure can create `MutationProof`.  
+- Closure can create ==StageMotionEvent==.  
+- Closure can create ==MutationProof==.  
 - Undo is available when safe.  
 - No closure sheet reads like a system report.  
 
@@ -2527,100 +2528,100 @@ Scenarios codify the product law into testable states.
   
 Today scenarios:  
   
-- `today_live_now_marker_matches_clock`  
-- `today_empty_state_collapses_quietly`  
-- `today_start_here_available_step`  
-- `today_urgent_pressure_visible`  
-- `today_completed_section_visible`  
-- `today_protected_window_visible`  
-- `today_later_today_grouping`  
-- `today_waiting_or_blocked_visible`  
-- `today_drilldown_hides_root_dock`  
+- ==today_live_now_marker_matches_clock==  
+- ==today_empty_state_collapses_quietly==  
+- ==today_start_here_available_step==  
+- ==today_urgent_pressure_visible==  
+- ==today_completed_section_visible==  
+- ==today_protected_window_visible==  
+- ==today_later_today_grouping==  
+- ==today_waiting_or_blocked_visible==  
+- ==today_drilldown_hides_root_dock==  
   
 Goals scenarios:  
   
-- `goals_life_area_grouping`  
-- `goals_goal_thread_with_substeps`  
-- `goals_pinned_goal`  
-- `goals_completed_milestone`  
-- `goals_blocked_thread`  
-- `goals_step_attachment`  
-- `goals_step_note`  
-- `goals_goal_detail_hides_root_dock`  
-- `goals_recommended_step_feeds_today`  
+- ==goals_life_area_grouping==  
+- ==goals_goal_thread_with_substeps==  
+- ==goals_pinned_goal==  
+- ==goals_completed_milestone==  
+- ==goals_blocked_thread==  
+- ==goals_step_attachment==  
+- ==goals_step_note==  
+- ==goals_goal_detail_hides_root_dock==  
+- ==goals_recommended_step_feeds_today==  
   
 Time scenarios:  
   
-- `time_day_view_live_now`  
-- `time_list_view_today_anchor`  
-- `time_week_future_buckets`  
-- `time_month_to_day_morph`  
-- `time_year_to_month_morph`  
-- `time_pinch_zoom_density`  
-- `time_fixed_point_as_boundary`  
-- `time_protected_window`  
-- `time_no_calendar_block_clone`  
+- ==time_day_view_live_now==  
+- ==time_list_view_today_anchor==  
+- ==time_week_future_buckets==  
+- ==time_month_to_day_morph==  
+- ==time_year_to_month_morph==  
+- ==time_pinch_zoom_density==  
+- ==time_fixed_point_as_boundary==  
+- ==time_protected_window==  
+- ==time_no_calendar_block_clone==  
   
 Capture scenarios:  
   
-- `capture_composer_keyboard_choreography`  
-- `capture_multiline_expansion`  
-- `capture_max_height_internal_scroll`  
-- `capture_full_screen_expansion`  
-- `capture_plus_menu_sources`  
-- `capture_date_reminder_repeat_location_controls`  
-- `capture_scan_document`  
-- `capture_scan_text`  
-- `capture_mic_permission_denied`  
-- `capture_voice_permission_granted`  
-- `capture_routing_preview_needs_review`  
-- `capture_expansion_no_crash`  
+- ==capture_composer_keyboard_choreography==  
+- ==capture_multiline_expansion==  
+- ==capture_max_height_internal_scroll==  
+- ==capture_full_screen_expansion==  
+- ==capture_plus_menu_sources==  
+- ==capture_date_reminder_repeat_location_controls==  
+- ==capture_scan_document==  
+- ==capture_scan_text==  
+- ==capture_mic_permission_denied==  
+- ==capture_voice_permission_granted==  
+- ==capture_routing_preview_needs_review==  
+- ==capture_expansion_no_crash==  
   
 You scenarios:  
   
-- `you_profile_header`  
-- `you_native_settings_groups`  
-- `you_privacy_security_drilldown`  
-- `you_appearance_studio`  
-- `you_planning_defaults`  
-- `you_sources_permissions`  
-- `you_receipts_history`  
-- `you_export_share`  
-- `you_detail_hides_root_dock`  
-- `you_minimal_scroll_top_level`  
-- `you_account_signed_out_core_still_available`  
-- `you_account_signed_in_r2_available`  
+- ==you_profile_header==  
+- ==you_native_settings_groups==  
+- ==you_privacy_security_drilldown==  
+- ==you_appearance_studio==  
+- ==you_planning_defaults==  
+- ==you_sources_permissions==  
+- ==you_receipts_history==  
+- ==you_export_share==  
+- ==you_detail_hides_root_dock==  
+- ==you_minimal_scroll_top_level==  
+- ==you_account_signed_out_core_still_available==  
+- ==you_account_signed_in_r2_available==  
   
 Motion scenarios:  
   
-- `stage_motion_step_completed`  
-- `stage_motion_step_blocked`  
-- `stage_motion_proof_attached`  
-- `stage_motion_recovery_band_visible`  
-- `stage_motion_reentry_visible`  
-- `stage_motion_mutation_undone`  
-- `cross_surface_motion_today_to_goals`  
-- `cross_surface_motion_goals_to_time`  
-- `post_mutation_today_updates`  
-- `recovery_motion_reduce_motion_fallback`  
+- ==stage_motion_step_completed==  
+- ==stage_motion_step_blocked==  
+- ==stage_motion_proof_attached==  
+- ==stage_motion_recovery_band_visible==  
+- ==stage_motion_reentry_visible==  
+- ==stage_motion_mutation_undone==  
+- ==cross_surface_motion_today_to_goals==  
+- ==cross_surface_motion_goals_to_time==  
+- ==post_mutation_today_updates==  
+- ==recovery_motion_reduce_motion_fallback==  
   
 Stress scenarios:  
   
-- `dynamic_type_xxxl_today`  
-- `dynamic_type_xxxl_you_settings`  
-- `voiceover_today_meridian`  
-- `voiceover_capture_composer`  
-- `reduce_motion_time_morph`  
-- `reduce_transparency_shell`  
-- `dark_graphite_high_contrast`  
-- `keyboard_safe_area_capture`  
-- `broken_calendar_permission`  
-- `empty_goals`  
-- `dense_today`  
-- `dense_time_month`  
-- `post_mutation_today_updates`  
-- `offline_core_no_account`  
-- `r2_unavailable_local_core_continues`  
+- ==dynamic_type_xxxl_today==  
+- ==dynamic_type_xxxl_you_settings==  
+- ==voiceover_today_meridian==  
+- ==voiceover_capture_composer==  
+- ==reduce_motion_time_morph==  
+- ==reduce_transparency_shell==  
+- ==dark_graphite_high_contrast==  
+- ==keyboard_safe_area_capture==  
+- ==broken_calendar_permission==  
+- ==empty_goals==  
+- ==dense_today==  
+- ==dense_time_month==  
+- ==post_mutation_today_updates==  
+- ==offline_core_no_account==  
+- ==r2_unavailable_local_core_continues==  
 
 ---
   
@@ -2630,7 +2631,7 @@ Quality turns product law into automated gates and proof artifacts.
   
 Required audits:  
   
-`ShellChromeAudit.swift`  
+==ShellChromeAudit.swift==  
   
 - Root dock only appears on root surfaces.  
 - No duplicate bottom navigation shelf exists.  
@@ -2638,20 +2639,20 @@ Required audits:
 - Drilldowns use back arrow and gesture back.  
 - Composer is keyboard-safe.  
   
-`ForbiddenLanguageAudit.swift`  
+==ForbiddenLanguageAudit.swift==  
   
 - Scans primary UI strings for forbidden top-level terms.  
 - Allows restricted terms only inside Trust/Inspection surfaces.  
 - Fails release build if forbidden strings appear in primary surfaces.  
   
-`SafeAreaAudit.swift`  
+==SafeAreaAudit.swift==  
   
 - No shell header leaks into status bar.  
 - No bottom dock covers scroll content.  
 - Keyboard entry does not trap composer between dock and keyboard.  
 - All overlays respect safe area.  
   
-`DynamicTypeAudit.swift`  
+==DynamicTypeAudit.swift==  
   
 - No vertical letter wrapping.  
 - No clipped controls.  
@@ -2659,20 +2660,20 @@ Required audits:
 - Settings rows remain usable.  
 - Composer remains usable.  
   
-`MotionReductionAudit.swift`  
+==MotionReductionAudit.swift==  
   
 - All morph transitions have Reduce Motion alternatives.  
 - Pinch/zoom states have non-gesture alternatives.  
 - Mutation animations do not become required for comprehension.  
   
-`VisualRegressionHarness.swift`  
+==VisualRegressionHarness.swift==  
   
 - Captures root and drilldown surfaces.  
 - Captures graphite/OLED default.  
 - Captures empty, dense, broken-source, post-mutation states.  
 - Captures keyboard and composer states.  
   
-`RealDeviceRenderChecklist.swift`  
+==RealDeviceRenderChecklist.swift==  
   
 - Validates on real iPhone hardware.  
 - Validates OLED graphite rendering.  
@@ -3345,9 +3346,9 @@ When Codex implements against this canon:
 - Inspect live source before editing.  
 - Do not assume file names prove behavior.  
 - Do not create placeholder folders without functional contracts.  
-- Do not reintroduce `RootTab` as root architecture.  
-- Do not create `Surfaces/Motion`.  
-- Do not create `Surfaces/Capture`.  
+- Do not reintroduce ==RootTab== as root architecture.  
+- Do not create ==Surfaces/Motion==.  
+- Do not create ==Surfaces/Capture==.  
 - Do not leak runtime vocabulary into top-level UI.  
 - Do not use generic cards as the primary visual grammar.  
 - Do not report Green without screenshots and validation.  
