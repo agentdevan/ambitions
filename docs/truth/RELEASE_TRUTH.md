@@ -6,29 +6,11 @@ Applies to: Ambitions native iPhone repo
 Owner posture: Proof truth, not product vision and not implementation optimism  
 Effective rule: If proof is absent, readiness is absent.
 
----
-
-## 1. Purpose and Authority
-
-This file is the validation/release/proof truth for Ambitions.
-
-It answers:
-
-- what can be claimed safely
-- what cannot be claimed
-- what validation exists
-- what validation is missing
-- what proof is required before release claims
-- what blocks TestFlight/App Store claims
-- what Codex must report honestly
-
-This file is intentionally conservative.
-
-Source code may exist without release proof. Tests may exist without passing. Scripts may exist without successful logs. A privacy manifest may exist without legal/privacy readiness. A generated archive path may exist without signed release readiness. A product/design truth file may exist without implementation or release proof.
+This file is intentionally conservative. Source code may exist without release proof. Tests may exist without passing. Scripts may exist without successful logs. A privacy manifest may exist without legal/privacy readiness. Product/design truth may exist without implementation or release proof.
 
 ---
 
-## 2. Relationship to Other Truth Files
+## 1. Relationship to Other Truth Files
 
 Truth hierarchy for release work:
 
@@ -44,11 +26,11 @@ Conflict rules:
 - Current proof packets beat README/status wording.
 - Release truth beats batch-train completion claims.
 - No historical audit proves current release readiness unless tied to current commit/source/logs.
-- If evidence is missing, the release truth is missing.
+- If evidence is missing, release truth is missing.
 
 ---
 
-## 3. Release Evidence Standard
+## 2. Release Evidence Standard
 
 Valid release evidence must include:
 
@@ -69,44 +51,18 @@ Valid release evidence must include:
 - non-claims
 - human approval where required
 
-Release evidence may include:
+Release evidence may include current terminal logs, `.xcresult` summaries, current screenshots, simulator/device recordings, archive/export logs, App Store Connect validation result, signed artifact metadata, manual QA checklist, accessibility QA checklist, privacy/legal signoff, and owner approval.
 
-- current terminal logs
-- current `.xcresult` summaries
-- current screenshots
-- current simulator/device recordings
-- current archive/export logs
-- current App Store Connect validation result
-- signed artifact metadata
-- manual QA checklist
-- accessibility QA checklist
-- privacy/legal signoff
-- owner approval
-
-Release evidence may not be inferred from:
-
-- source presence
-- target configuration
-- old audit reports
-- old batch docs
-- old PR summaries
-- README language
-- design truth
-- Codex statements
-- expected script behavior
-- old generated project state
-- stale workflow inventory
-- screenshots not tied to current build/commit
+Release evidence may not be inferred from source presence, target configuration, old audit reports, old batch docs, old PR summaries, README language, design truth, Codex statements, expected script behavior, old generated project state, or screenshots not tied to current build/commit.
 
 ---
 
-## 4. Current Release Posture
+## 3. Current Release Posture
 
 Current release posture:
 
 ```text
 Pre-release native iOS development.
-Local validation path exists.
 Release readiness is not proven.
 TestFlight readiness is not proven.
 App Store readiness is not proven.
@@ -114,25 +70,10 @@ Physical-device readiness is not proven.
 Public accessibility conformance is not proven.
 Performance readiness is not proven.
 Legal/privacy approval is not proven.
+Ambitions Account readiness is not proven.
+R2 / Source Atlas readiness is not proven.
+Offline-with-no-account behavior is not proven by release evidence.
 ```
-
-Current evidence found:
-
-- XcodeGen project config exists.
-- Local setup/build scripts exist.
-- Unit test target exists.
-- UI test target exists.
-- UI test source exists.
-- Privacy manifest source exists.
-- Entitlements source exists.
-- Local build/test/archive commands are documented.
-- Existing release status docs explicitly avoid release-ready claims.
-- No active hosted CI workflow was found during inspection.
-- No current raw validation logs were inspected proving build/test/archive success.
-
----
-
-## 5. Allowed Claims
 
 Allowed current claims, when phrased conservatively:
 
@@ -144,30 +85,17 @@ The repo contains local build/setup scripts.
 The repo contains unit and UI test targets.
 The repo contains SwiftData local persistence source.
 The repo has a local-first/on-device-first source posture.
-The repo includes a privacy manifest source.
-The repo includes app/widget/share-extension target configuration.
-Local validation paths exist.
+The product truth requires offline core behavior with no account.
+The product truth requires custom Ambitions Accounts at launch using Sign in with Apple and Google Sign-In.
+The product truth requires R2/Source Atlas as public/reference/freshness infrastructure only.
 Release readiness is not yet claimed.
-TestFlight readiness is not yet claimed.
-App Store readiness is not yet claimed.
-Physical-device validation is not yet proven.
 ```
 
-Allowed claims must not imply:
-
-- the app currently builds
-- tests currently pass
-- device behavior works
-- extension behavior works
-- App Store submission is ready
-- accessibility conformance is complete
-- privacy/legal review is complete
-- performance is acceptable
-- final product design is fully implemented
+Allowed claims must not imply the app currently builds, tests pass, device behavior works, extensions work, account auth works, R2 works, App Store submission is ready, accessibility conformance is complete, privacy/legal review is complete, performance is acceptable, or final product design is fully implemented.
 
 ---
 
-## 6. Forbidden Claims
+## 4. Forbidden Claims Without Current Proof
 
 Forbidden current claims:
 
@@ -197,8 +125,21 @@ screenshots ready
 support URL verified
 privacy URL verified
 iCloud sync validated
+CloudKit sync validated
+Ambitions Account implemented
+Ambitions Account validated
+Sign in with Apple validated
+Google Sign-In validated
+account recovery works
+account entitlements work
+account-gated R2 access works
+R2 freshness implemented
 R2 freshness validated
+Source Atlas packs production-ready
+R2 pack verification validated
+R2 privacy boundary validated
 offline behavior validated
+offline with no account validated
 migration validated
 external surfaces validated
 widget validated
@@ -214,9 +155,9 @@ Forbidden claims may become allowed only when current proof exists and this file
 
 ---
 
-## 7. Build Evidence
+## 5. Build Evidence
 
-Evidence found:
+Evidence paths may include:
 
 ```text
 project.yml
@@ -225,853 +166,204 @@ scripts/setup_macos_ios_dev.sh
 docs/native-build-and-release.md
 ```
 
-Release truth:
-
-- XcodeGen config exists.
-- Local build script exists.
-- Local setup script exists.
-- Build command is documented.
-- Current build success is proven by `scripts/build-local.sh` and `output/logs/build-local-20260522-080717.log` for the current iOS 26 deployment-target bump.
-
 Required proof before claiming build success:
 
 ```bash
 xcodegen generate
-
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -sdk iphonesimulator \
-  -destination "generic/platform=iOS Simulator" \
-  CODE_SIGNING_ALLOWED=NO \
-  build
+xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -resolvePackageDependencies
+xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination "<simulator>" build CODE_SIGNING_ALLOWED=NO
 ```
 
-or equivalent `scripts/build-local.sh` output, with:
+or equivalent `scripts/build-local.sh` output, with commit SHA, branch, Xcode version, destination, full/summarized log, exit code, and result.
 
-- commit SHA
-- branch
-- Xcode version
-- destination
-- full/summarized log
+Allowed wording before proof:
+
+```text
+Build path exists.
+Build success is not claimed.
+```
+
+---
+
+## 6. Test Evidence
+
+Required proof before claiming tests pass:
+
+- exact test command
+- current commit SHA
+- current branch
+- simulator/device target
 - exit code
-- result
+- `.xcresult` or log summary when applicable
+
+Do not infer test pass from source existence.
+
+---
+
+## 7. Accessibility and Visual Evidence
+
+Product truth requires accessibility and flagship visual quality, but release truth requires proof.
+
+Do not claim any of these without current evidence:
+
+- VoiceOver verified
+- Dynamic Type verified
+- Reduce Motion verified
+- Reduce Transparency verified
+- Increase Contrast verified
+- Differentiate Without Color verified
+- real-device OLED graphite rendering verified
+- keyboard/safe-area behavior verified
+- screenshot parity achieved
+- visual regression harness passed
+
+Screenshots are useful proof artifacts, but screenshots alone do not prove accessibility, performance, privacy, release readiness, or device correctness.
+
+---
+
+## 8. Account / Sign-In / Entitlement Proof
+
+Product truth requires custom Ambitions Accounts at launch using:
+
+```text
+Sign in with Apple
+Google Sign-In
+```
+
+Release proof for account claims must include:
+
+- current source paths for account/auth implementation
+- entitlement/config review
+- privacy manifest review
+- sign-in flow test evidence
+- failure/cancel/retry behavior
+- offline no-account behavior proof
+- entitlement-gated R2/reference access proof if claimed
+- account recovery/support proof if claimed
+- no private life graph backend proof boundary
 
 Allowed wording before proof:
 
 ```text
-Local build path exists.
+Ambitions Account is product truth.
+Ambitions Account implementation is not release-proven.
+Offline core must remain available with no account.
 ```
 
 Forbidden wording before proof:
 
 ```text
-The app builds.
-Build passed.
-Build is green.
+Sign in with Apple works.
+Google Sign-In works.
+Ambitions Account is ready.
+Account recovery works.
+Entitlements are validated.
 ```
 
 ---
 
-## 8. Test Evidence
+## 9. R2 / Source Atlas Proof
 
-Evidence found:
+Product truth makes R2 first-class Source Atlas/reference-freshness infrastructure.
 
-```text
-project.yml
-Native/AmbitionsTests/
-docs/native-build-and-release.md
-```
+Release proof for R2/Source Atlas claims must include:
 
-Release truth:
-
-- Unit test target exists.
-- Unit test source exists.
-- Current focused unit test pass/fail is proven for `AmbitionsTests/AppReleaseConfigurationTests` by `.codex/xcode-summaries/IOS26-T01-B02/20260522T120851Z/focused-test-summary.json`.
-- Full unit test suite pass/fail is not proven by that focused lane.
-
-Required proof before claiming unit tests pass:
-
-```bash
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -destination "platform=iOS Simulator,name=<available-simulator-name>" \
-  -only-testing:AmbitionsTests \
-  test
-```
-
-with current log and exit code.
+- source path evidence
+- request shape review proving no private user context is sent
+- pack manifest/hash verification evidence if implemented
+- cache/last-known-good behavior evidence if implemented
+- quarantine/revocation behavior evidence if implemented
+- entitlement-gated access proof if claimed
+- offline fallback proof if claimed
+- privacy/no-private-life-graph boundary review
 
 Allowed wording before proof:
 
 ```text
-Unit test target exists.
+R2/Source Atlas is product truth for public/reference/freshness packs.
+R2 implementation is not release-proven.
+R2 is not a user-data backend.
 ```
 
 Forbidden wording before proof:
-
-```text
-Unit tests pass.
-Tests are green.
-```
-
----
-
-## 9. UI Test Evidence
-
-Evidence found:
-
-```text
-project.yml
-Native/AmbitionsUITests/AmbitionsUITests.swift
-docs/native-build-and-release.md
-```
-
-Release truth:
-
-- UI test target exists.
-- Substantial UI test source exists.
-- UI tests use preview/demo bootstrap paths.
-- Current UI test pass/fail is not proven.
-- Source inspection found naming drift risk: UI tests expect `Plan` tab buttons in places while app source maps the plan tab title to `Time`.
-
-Required proof before claiming UI tests pass:
-
-```bash
-xcodebuild \
-  -project Ambitions.xcodeproj \
-  -scheme Ambitions \
-  -destination "platform=iOS Simulator,name=<available-simulator-name>" \
-  -only-testing:AmbitionsUITests \
-  test
-```
-
-with current log, exit code, simulator details, and failure triage.
-
-Allowed wording before proof:
-
-```text
-UI test target and source exist.
-```
-
-Forbidden wording before proof:
-
-```text
-UI tests pass.
-The shell is UI-test validated.
-The Time/Plan migration is validated.
-```
-
----
-
-## 10. Visual QA Evidence
-
-Evidence found:
-
-- SwiftUI previews exist in source files.
-- Visual QA fixture test source appears in test inventory/search.
-- Design-system previews exist in package source.
-
-Release truth:
-
-- Preview source exists.
-- Rendered screenshot/snapshot proof was not found.
-- No current visual QA proof packet was inspected.
-- No device/simulator screenshot set tied to current commit was inspected.
-- No human visual acceptance record was inspected.
-
-Allowed wording:
-
-```text
-Preview fixtures/source exist.
-```
-
-Forbidden wording:
-
-```text
-Visual QA passed.
-Screenshots are approved.
-The UI meets flagship quality.
-The Product Design Truth is visually implemented.
-```
-
-Required proof:
-
-- current rendered screenshots
-- commit SHA
-- simulator/device
-- light/dark mode where relevant
-- Dynamic Type states where relevant
-- failure/empty/loading states
-- human review notes
-- explicit non-claims
-
----
-
-## 11. Accessibility Evidence
-
-Evidence found:
-
-- Many source files include accessibility identifiers/labels.
-- Screens read accessibility environment values such as Reduce Motion.
-- Accessibility-related unit test source appears in search results.
-
-Release truth:
-
-- Accessibility support exists at source level.
-- Public accessibility conformance is not proven.
-- Manual accessibility validation is not proven.
-- VoiceOver validation is not proven.
-- Dynamic Type validation is not proven.
-- Reduce Motion validation is not proven.
-- Increase Contrast validation is not proven.
-- Touch-target validation is not proven.
-
-Allowed wording:
-
-```text
-Accessibility hooks and source-level support exist.
-```
-
-Forbidden wording:
-
-```text
-Fully accessible.
-VoiceOver verified.
-Dynamic Type verified.
-Reduce Motion verified.
-Accessibility compliant.
-```
-
-Required proof:
-
-- manual VoiceOver path validation
-- Dynamic Type screenshots and/or logs
-- Reduce Motion comparison
-- Increase Contrast comparison
-- minimum tap target audit
-- keyboard/focus behavior where relevant
-- known exceptions
-- owner signoff
-
----
-
-## 12. Dynamic Type Validation Evidence
-
-Evidence found:
-
-- Source previews for Dynamic Type exist in some screens.
-- Design system uses semantic font tokens.
-
-Release truth:
-
-- Dynamic Type source/previews exist.
-- Dynamic Type validation is not proven.
-
-Required proof:
-
-- rendered screenshots or recordings across representative sizes
-- truncation/overlap audit
-- primary object/action/trust path preserved
-- failure notes if any
-
----
-
-## 13. VoiceOver Validation Evidence
-
-Evidence found:
-
-- Source contains accessibility labels/values/identifiers in multiple surfaces.
-
-Release truth:
-
-- VoiceOver semantics exist in source.
-- VoiceOver route validation is not proven.
-
-Required proof:
-
-- manual VoiceOver test of top-level surfaces
-- object-level summary equivalence
-- primary action discoverability
-- closure/receipt/trust path discoverability
-- known defects
-
----
-
-## 14. Reduce Motion Validation Evidence
-
-Evidence found:
-
-- Screens use `@Environment(\.accessibilityReduceMotion)`.
-- Theme provides reduced-motion-aware animation helpers.
-
-Release truth:
-
-- Reduce Motion source support exists.
-- Reduce Motion validation is not proven.
-
-Required proof:
-
-- run with Reduce Motion enabled
-- compare primary object/state transition clarity
-- confirm motion is not sole relationship cue
-- record defects
-
----
-
-## 15. Privacy / Local-Only Validation Evidence
-
-Evidence found:
-
-```text
-Native/Ambitions/Persistence/SwiftDataStore.swift
-Native/Ambitions/Persistence/SwiftDataModels.swift
-Native/Ambitions/Resources/PrivacyInfo.xcprivacy
-Native/Ambitions/Support/Ambitions.entitlements
-```
-
-Release truth:
-
-- Local SwiftData persistence source exists.
-- Privacy manifest source exists.
-- App Group entitlement source exists.
-- No active custom hosted backend source was found during inspection.
-- No active core external LLM source was found during inspection.
-- Privacy/legal readiness is not proven.
-- App Privacy answers are not proven.
-- Binary privacy behavior is not proven.
-
-Allowed wording:
-
-```text
-The source posture is local-first/on-device-first.
-The repo includes a privacy manifest source.
-```
-
-Forbidden wording:
-
-```text
-Privacy-approved.
-Legally approved.
-App Privacy ready.
-No data collection is validated.
-Local-only behavior is fully verified.
-```
-
-Required proof:
-
-- data-flow audit
-- entitlement audit
-- network/provider scan
-- privacy manifest review against actual binary behavior
-- App Privacy disclosure review
-- legal/owner signoff
-
----
-
-## 16. Apple Sync Validation Evidence
-
-Evidence found:
-
-- App Group entitlement source exists.
-- No active iCloud/CloudKit entitlement/source was found during inspection.
-
-Release truth:
-
-- Apple sync/iCloud/CloudKit is not implemented or validated as current release truth.
-- Apple sync remains an allowed future architecture exception only.
-
-Allowed wording:
-
-```text
-Apple-native sync is allowed by product architecture if later scoped.
-```
-
-Forbidden wording:
-
-```text
-iCloud sync works.
-CloudKit sync is implemented.
-User data syncs across devices.
-```
-
-Required proof:
-
-- iCloud/CloudKit entitlements
-- source implementation
-- conflict model
-- account/device tests
-- offline/merge tests
-- privacy copy
-- manual device proof
-
----
-
-## 17. Cloudflare R2 Freshness Validation Evidence
-
-Evidence found:
-
-- No active R2/Cloudflare app-source implementation found during inspection.
-
-Release truth:
-
-- R2 freshness is not implemented or validated.
-- R2 may only be future read-only public/non-personal reference data.
-- R2 must not store or receive user-private life data.
-
-Allowed wording:
-
-```text
-R2 is an allowed future public freshness/reference-pack source.
-```
-
-Forbidden wording:
 
 ```text
 R2 freshness works.
-R2 updates app requirements/dates/rules.
-R2 is validated.
-```
-
-Required proof:
-
-- source implementation
-- anonymous/non-personal request proof
-- cache policy
-- offline fallback
-- tests
-- privacy review
-- source labels in UI
-- failure/degraded states
-
----
-
-## 18. Offline Behavior Evidence
-
-Evidence found:
-
-- Local SwiftData source exists.
-- Preview/in-memory modes exist.
-- No explicit offline QA proof inspected.
-
-Release truth:
-
-- Offline-friendly source posture exists.
-- Offline behavior is not validated.
-
-Forbidden wording:
-
-```text
-Offline mode works.
-Offline behavior is validated.
-```
-
-Required proof:
-
-- airplane mode/manual offline QA
-- launch offline
-- create/edit local objects offline
-- extension behavior offline where applicable
-- R2 unavailable fallback if R2 exists later
-- data integrity after reconnect
-
----
-
-## 19. Migration / Data Integrity Evidence
-
-Evidence found:
-
-- SwiftData schema source exists.
-- Storage schema/version/migration-related files/tests appear in inventory/search.
-- Current migration test logs were not inspected.
-
-Release truth:
-
-- Migration/data integrity source may exist.
-- Migration/data integrity is not release-proven.
-
-Required proof:
-
-- current migration test run
-- old fixture to new schema proof
-- unknown persisted value degradation proof
-- backup/restore or corruption recovery proof if release requires it
-- data reset proof
-- App Group data consistency proof
-
----
-
-## 20. Crash / Logging / Observability Evidence
-
-Evidence found:
-
-- Launch failure phase exists in bootstrapper source.
-- No release-grade crash/logging/observability proof inspected.
-
-Release truth:
-
-- Crash/logging/observability readiness is not proven.
-- No production crash-free claim is allowed.
-
-Required proof:
-
-- launch failure test
-- crash/logging policy
-- symbolication/release diagnostics plan
-- privacy-safe logging review
-- failure screenshots/logs
-- owner signoff
-
----
-
-## 21. CI / Workflow Evidence
-
-Evidence found:
-
-- Existing release/status docs say hosted CI is absent.
-- Old tracked-file audit listed `.github/workflows/ios-validate.yml`.
-- Direct fetch of `.github/workflows/ios-validate.yml` returned not found during inspection.
-- Search found no active workflow evidence.
-
-Release truth:
-
-```text
-No active hosted CI proof was found.
-```
-
-Allowed wording:
-
-```text
-Validation is local VM/Mac oriented.
-```
-
-Forbidden wording:
-
-```text
-CI is configured.
-CI passed.
-GitHub Actions validates Ambitions.
-```
-
-If hosted CI is added later, this file must record:
-
-- provider
-- expected cost model
-- trigger policy
-- artifact retention
-- secrets/signing policy
-- current workflow path
-- current run evidence
-- release-claim limits
-
----
-
-## 22. Release Artifact Evidence
-
-Evidence found:
-
-- Unsigned archive command is documented.
-- No current archive log/artifact/checksum was inspected.
-- No signed archive/export proof was inspected.
-
-Release truth:
-
-- No current release artifact proof exists in inspected evidence.
-- Unsigned archive path, if run, is not installable/TestFlight/App Store proof.
-- Signed archive/App Store Connect validation is not proven.
-
-Required proof:
-
-- archive command
-- archive log
-- artifact path
-- checksum where useful
-- signing status
-- export status
-- App Store Connect validation result if claiming App Store readiness
-- human approval
-
----
-
-## 23. TestFlight Readiness
-
-Current truth:
-
-```text
-Ambitions is not TestFlight-ready by current proof.
-```
-
-Blocked by missing:
-
-- current successful build log
-- current successful unit test log
-- current successful UI test log or accepted exceptions
-- signed archive
-- provisioning profile proof
-- export proof
-- App Store Connect/TestFlight upload proof
-- privacy metadata proof
-- screenshot/demo data review where required
-- device smoke proof
-- owner approval
-
-Forbidden wording:
-
-```text
-Ready for TestFlight.
-Can ship to TestFlight.
-TestFlight build is ready.
+Source Atlas updates are production-ready.
+R2 entitlement gating is validated.
+R2 privacy boundary is validated.
 ```
 
 ---
 
-## 24. App Store Readiness
+## 10. Privacy / Local-First Proof
 
-Current truth:
+Local-first product truth does not prove privacy readiness.
 
-```text
-Ambitions is not App Store-ready by current proof.
-```
+Proof may require:
 
-Blocked by missing:
+- privacy manifest source review
+- data classification review
+- account/R2 request boundary review
+- local storage review
+- export/delete/reset behavior proof where relevant
+- no private-life-graph backend proof boundary
+- legal/privacy owner approval where release-facing
 
-- signed archive proof
-- App Store Connect validation
-- TestFlight/beta validation if required
-- physical-device runtime proof
-- accessibility proof
-- performance proof
-- privacy/legal signoff
-- App Privacy disclosures
-- support URL
-- privacy URL
-- screenshots
-- metadata
-- reviewer notes
-- final owner/human approval
-
-Forbidden wording:
-
-```text
-App Store-ready.
-Ready to submit.
-Production-ready.
-Release candidate locked.
-```
+No privacy/legal approval may be claimed without explicit evidence.
 
 ---
 
-## 25. Manual QA Requirements
+## 11. Release Green / Yellow / Red
 
-Before any release claim, manual QA must cover:
+### Green
 
-- first launch
-- onboarding
-- Today
-- Goals
-- Capture
-- Time
-- You
-- create goal
-- quick capture
-- route capture
-- close step/action closure
-- receipt/proof visibility
-- trust/memory controls
-- appearance settings
-- notification permission states
-- calendar permission states if enabled
-- offline launch and local persistence
-- app relaunch persistence
-- error/degraded states
-- Dynamic Type
-- VoiceOver
-- Reduce Motion
-- Increase Contrast
-- light/dark mode if both supported
-- widget/share/Live Activity/App Intent paths if included in release
-- privacy-sensitive demo data review
+Release claim may be Green only when the exact claim has current proof.
 
-Manual QA output must include:
+### Yellow
 
-- commit SHA
-- device/simulator
-- OS version
-- app version/build
-- pass/fail/skipped
-- screenshots where useful
-- defects
-- non-claims
+Yellow is allowed when source or process exists but validation is incomplete, unavailable, environment-limited, or not current.
+
+### Red
+
+Red is required for:
+
+- release claim without proof
+- account/auth/R2 claim without proof
+- private user data sent to R2
+- hosted AI/cloud LLM core dependency
+- private life graph backend under current canon
+- TestFlight/App Store claim without current evidence
+- accessibility or device claim without current evidence
+- unsupported human-release approval claim
 
 ---
 
-## 26. Screenshot / Preview Proof Requirements
+## 12. Final Release Reporting Contract
 
-Screenshot or preview proof must include:
-
-- current commit
-- simulator/device
-- app mode/data mode
-- surface name
-- state name
-- light/dark mode when relevant
-- Dynamic Type size when relevant
-- Reduce Motion state when relevant
-- known rendering defects
-- reviewer/owner decision
-
-Required surfaces before visual/public claims:
-
-- Today / Reality Meridian / Start Here
-- Goals / Constellation Atlas
-- Capture / Atmosphere Composer
-- Time / LifeShape Field
-- You / User System Profile
-- error/loading/empty/recovery states
-- receipt/proof/trust states
-- extension surfaces if release includes them
-
-Preview source alone is not screenshot proof.
-
----
-
-## 27. Release Blockers
-
-Current blockers:
-
-1. No current build log.
-2. No current project generation log.
-3. No current package resolution log.
-4. No current unit test log.
-5. No current UI test log.
-6. Possible UI test naming drift around Plan vs Time.
-7. No current archive log.
-8. No signed archive proof.
-9. No provisioning/export proof.
-10. No physical-device proof.
-11. No widget device proof.
-12. No Live Activity device proof.
-13. No share extension device proof.
-14. No App Intent/Shortcut device proof.
-15. No notification runtime device proof.
-16. No accessibility proof.
-17. No performance proof.
-18. No privacy/legal signoff.
-19. No App Store metadata/screenshot proof.
-20. No human release approval.
-
-Any one of these blocks broad release readiness claims.
-
----
-
-## 28. Proof Checklist Required Before Any Release Claim
-
-Minimum proof packet before saying “release candidate”:
-
-```text
-[ ] Branch and commit SHA recorded.
-[ ] Clean working tree or explicit diff scope recorded.
-[ ] Xcode version recorded.
-[ ] XcodeGen version recorded.
-[ ] `xcodegen generate` passed.
-[ ] Package resolution passed.
-[ ] Simulator build passed.
-[ ] Unit tests passed or exceptions approved.
-[ ] UI tests passed or exceptions approved.
-[ ] Unsigned Release archive sanity passed, if relevant.
-[ ] Signed archive passed, if claiming TestFlight/App Store.
-[ ] App Store Connect validation passed, if claiming App Store readiness.
-[ ] Physical device smoke test passed.
-[ ] Widget/Live Activity/share/App Intent paths validated if included.
-[ ] Accessibility manual QA completed.
-[ ] Dynamic Type manual QA completed.
-[ ] VoiceOver manual QA completed.
-[ ] Reduce Motion manual QA completed.
-[ ] Performance launch/scroll/memory checks completed.
-[ ] Privacy manifest reviewed against actual binary behavior.
-[ ] App Privacy disclosures drafted/reviewed.
-[ ] Support/privacy URLs verified.
-[ ] Screenshots generated from privacy-safe data.
-[ ] Legal/privacy/human approval recorded.
-[ ] Claims not made recorded.
-```
-
-No checklist item may be checked from memory or plan.
-
----
-
-## 29. Codex Reporting Rules
-
-Every Codex validation/release report must include:
+Every release-facing report must include:
 
 ```text
 Status: Green / Yellow / Red
-Scope:
+Commit SHA:
 Branch:
-Commit:
-Files changed:
-Commands run:
-Commands not run:
 Environment:
-Evidence:
-Passes:
-Failures:
-Skipped:
-Unproven:
-Claims allowed:
-Claims forbidden:
-Release blockers:
-Next required proof:
+Commands/procedures:
+Proof artifacts:
+Claims supported:
+Claims not supported:
+Validation not run:
+Known risks:
+Next proof required:
+Rollback plan:
 ```
 
-Rules:
-
-- “Not run” must be explicit.
-- “Could not run” must include reason.
-- “Passed previously” is not current proof.
-- “Target exists” is not “test passed.”
-- “Script exists” is not “build passed.”
-- “Archive command exists” is not “archive passed.”
-- “Privacy manifest exists” is not “privacy approved.”
-- “Accessibility labels exist” is not “accessible.”
-- “Simulator pass” is not “device pass.”
-- “Unsigned archive” is not “signed release.”
-- “Human approval required” means release is blocked until approval exists.
-
----
-
-## 30. Codex Rules for Updating This File
-
-Update this file whenever:
-
-- build/test/release validation posture changes
-- a current proof packet is added
-- CI is added or removed
-- signing/export proof is added
-- device validation is completed
-- accessibility proof is added
-- performance proof is added
-- privacy/legal status changes
-- App Store/TestFlight status changes
-- widget/share/Live Activity validation changes
-- R2 freshness is implemented/validated
-- Apple sync is implemented/validated
-- release wording in README/docs changes
-
-Update requirements:
-
-1. Add exact evidence paths.
-2. Add exact command/log references.
-3. Add date/commit when proof is current.
-4. Separate source/config from validation.
-5. Preserve forbidden-claim list until proof removes specific items.
-6. Do not weaken release standards to make a patch Green.
-7. Do not convert historical audit success into current release proof.
-8. If proof is missing, write “not proven.”
-
-Final rule:
+Account/R2 release reports must additionally include:
 
 ```text
-If proof is absent, readiness is absent.
+Offline core proof:
+Account auth proof:
+Entitlement proof:
+R2 request privacy proof:
+Private life graph backend avoided:
 ```
