@@ -58,13 +58,21 @@ find_sim_udid() {
   if [[ -z "$needle" ]]; then
     return 1
   fi
-  udid="$(echo "$DEVICES" | awk -v needle="$needle" 'index($0, needle) && /[0-9A-Fa-f-]{36}/ {
+  udid="$(echo "$DEVICES" | awk -v needle="$needle" '
+    /^[[:space:]]*-- / { next }
+    /[0-9A-Fa-f-]{36}/ {
+      name=$0
+      sub(/^[[:space:]]*/, "", name)
+      sub(/[[:space:]]*\([0-9A-Fa-f-]{36}\).*/, "", name)
+      if (name != needle) next
       for (i = 1; i <= NF; i++) {
         value=$i;
         gsub(/[()]/, "", value);
-        if (value ~ /^[0-9A-Fa-f-]{36}$/) { print value; exit }
+        if (value ~ /^[0-9A-Fa-f-]{36}$/) { udid=value }
       }
-    }')"
+    }
+    END { if (udid != "") print udid }
+  ')"
   [[ -n "$udid" ]] && { echo "$udid"; return 0; }
   return 1
 }

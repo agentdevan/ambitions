@@ -2,7 +2,7 @@
 
 Status: Train 0 readback artifact
 Branch: `main`
-Commit: `8d095586156ba72bd4e960ed69c14db511af4aa9`
+Commit: `8dc324107cd476d5b6598626c09f18920ea3763f`
 Scope: Canon readback only; not implementation proof or release proof.
 
 ## Truth Files Inspected
