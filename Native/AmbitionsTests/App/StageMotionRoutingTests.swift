@@ -3,7 +3,7 @@ import XCTest
 
 @MainActor
 final class StageMotionRoutingTests: XCTestCase {
-    func testMotionCurrentActionNotificationPayloadRoundTrips() {
+    func testMotionCurrentActionNotificationPayloadRoundTripsThroughCanonicalPayload() {
         let actions: [MotionCurrentAction] = [
             .openToday,
             .openGoals,
@@ -15,8 +15,12 @@ final class StageMotionRoutingTests: XCTestCase {
         ]
 
         for action in actions {
-            let decoded = MotionCurrentAction.fromNotificationPayload(action.toNotificationPayload(source: "test"))
-            XCTAssertEqual(decoded, action)
+            let notification = Notification(
+                name: MotionCurrentAction.notificationName,
+                object: nil,
+                userInfo: action.toNotificationPayload()
+            )
+            XCTAssertEqual(notification.ambitionsMotionCurrentAction, action)
         }
     }
 
@@ -45,28 +49,44 @@ final class StageMotionRoutingTests: XCTestCase {
         }
     }
 
-    func testStageOwnerRoutesProofReceiptAndReentryWithoutMotionRootTab() {
+    func testStageOwnerRoutesProofReceiptAndThreadReentryThroughMemoryLensOverlay() {
         let owner = StageOwner()
 
-        switch owner.route(for: .inspectProof("proof"), source: "test") {
-        case .openTrust:
-            break
-        default:
-            XCTFail("proof inspection should route to Trust/History")
-        }
+        assertMemoryLensOverlay(
+            owner.route(for: .inspectProof("proof"), source: "test"),
+            expectedQuery: "proof:proof"
+        )
+        assertMemoryLensOverlay(
+            owner.route(for: .openReceipt("receipt"), source: "test"),
+            expectedQuery: "receipt:receipt"
+        )
+        assertMemoryLensOverlay(
+            owner.route(for: .openThread("thread"), source: "test"),
+            expectedQuery: "thread:thread"
+        )
+    }
 
-        switch owner.route(for: .openReceipt("receipt"), source: "test") {
-        case .openTrust:
-            break
-        default:
-            XCTFail("receipt inspection should route to Trust/History")
-        }
+    func testStageOwnerRecordsProjectionAndReduceMotionState() {
+        let owner = StageOwner(reduceMotionEnabled: true)
+        _ = owner.route(for: .openTime, source: "stage-test")
 
-        switch owner.route(for: .openThread("thread"), source: "test") {
-        case let .returnToToday(context):
-            XCTAssertEqual(context, .focus)
+        XCTAssertEqual(owner.lastMotionProjection?.action, .openTime)
+        XCTAssertEqual(owner.lastMotionProjection?.sourceSurface, "stage-test")
+        XCTAssertEqual(owner.lastMotionProjection?.reduceMotion, true)
+        XCTAssertEqual(owner.lastMotionProjection?.displayStyle, .calm)
+    }
+
+    private func assertMemoryLensOverlay(_ route: StageMotionRoute, expectedQuery: String) {
+        switch route {
+        case let .presentOverlay(overlay):
+            switch overlay {
+            case let .memoryLens(_, _, _, query, _, _):
+                XCTAssertEqual(query, expectedQuery)
+            default:
+                XCTFail("Expected memory lens overlay")
+            }
         default:
-            XCTFail("thread re-entry should route to Today focus context")
+            XCTFail("Expected presentOverlay memory lens route")
         }
     }
 }
