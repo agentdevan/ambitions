@@ -297,9 +297,9 @@ def scan_settings(root: Path) -> list[Finding]:
     else:
         package_lines = read_text(package).splitlines()
         first_line = package_lines[0] if package_lines else ""
-        if "swift-tools-version: 6.0" not in first_line:
+        if re.match(r"//\s*swift-tools-version:\s*6(?:\.\d+)?\b", first_line) is None:
             findings.append(
-                Finding("error", "package-tools-not-6", package, 1, "Package.swift must declare swift-tools-version: 6.0.", first_line, False)
+                Finding("error", "package-tools-not-6", package, 1, "Package.swift must declare a Swift 6 tools version.", first_line, False)
             )
 
     return findings
