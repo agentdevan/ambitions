@@ -11,7 +11,7 @@ struct AmbitionsRootView: View {
     private let container: AppContainer
     private let shellPresentationMode: AppShellPresentationMode
     @State private var navigation: AppNavigationModel
-    @State private var stageOwner = StageOwner()
+    @State private var stageOwner =  StageOwner()
     @State private var creationMessage: GoalDetailInlineMessage?
     @State private var goalsRefreshID = 0
     @State private var isOnboardingPresented: Bool
