@@ -15,6 +15,18 @@ on:
         required: true
         default: 'iPhone 17 Pro'
         type: string
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/ambitions-strict-build-launch.yml'
+      - 'Native/**'
+      - 'Packages/**'
+      - 'Sources/**'
+      - 'scripts/ci/**'
+      - 'scripts/release_recovery/**'
+      - 'project.yml'
+      - 'Package.swift'
 
 permissions:
   contents: read
@@ -28,9 +40,9 @@ jobs:
     runs-on: [self-hosted, Ambitions-XCode26]
     timeout-minutes: 180
     env:
-      SCHEME: ${{ inputs.scheme }}
-      DESTINATION: ${{ inputs.destination }}
-      SIMULATOR_NAME: ${{ inputs.simulator_name }}
+      SCHEME: ${{ github.event_name == 'workflow_dispatch' && inputs.scheme || 'Ambitions' }}
+      DESTINATION: ${{ github.event_name == 'workflow_dispatch' && inputs.destination || 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5' }}
+      SIMULATOR_NAME: ${{ github.event_name == 'workflow_dispatch' && inputs.simulator_name || 'iPhone 17 Pro' }}
       RUN_STAMP: strict-${{ github.run_id }}-${{ github.run_attempt }}
       OUTPUT_ROOT: artifacts/strict-build-launch/strict-${{ github.run_id }}-${{ github.run_attempt }}
 
@@ -43,6 +55,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          echo "event=${GITHUB_EVENT_NAME}"
           echo "ref=${GITHUB_REF}"
           echo "sha=${GITHUB_SHA}"
           echo "scheme=${SCHEME}"
