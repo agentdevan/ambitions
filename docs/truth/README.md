@@ -1,28 +1,39 @@
 # Ambitions Truth Files
 
 Status: Active repo authority index  
-Scope: Product/design, implementation, release/proof, Codex process, and historical policy  
+Scope: Product/design, moat, implementation, release/proof, Codex process, and repo retention  
 Applies to: Humans, Codex, and any AI agent working in the Ambitions repo
 
-`docs/truth/` is the active authority layer for Ambitions. Start here before reading canon, status docs, `.codex`, `.agents`, batch-train material, or historical notes.
+`docs/truth/` is the active authority layer for Ambitions. Start here before reading supporting docs, source-adjacent notes, retained skills, scripts, or historical references.
 
-## Mandatory read order
+## Mandatory Read Order
 
-1. `PRODUCT_DESIGN_TRUTH.md` — product/design authority.
-2. `PRODUCT_MOAT_TRUTH.md` — moat strategy and anti-commodity guardrails (subordinate to active product/design truth).
-3. `IMPLEMENTATION_TRUTH.md` — implementation/source authority.
-4. `RELEASE_TRUTH.md` — validation, proof, release, and claim authority.
-5. `CODEX_PROCESS_TRUTH.md` — Codex operating authority.
-6. `HISTORICAL_POLICY.md` — historical extraction, quarantine, archive, and deletion policy.
+1. `PRODUCT_DESIGN_TRUTH.md` - product/design authority.
+2. `PRODUCT_MOAT_TRUTH.md` - moat strategy and anti-commodity guardrails.
+3. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
+4. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
+5. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
+6. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
 7. `AGENTS.md`.
 8. `README.md`.
 9. `docs/README.md`.
 10. `project.yml`.
 11. `Package.swift`.
-12. Relevant source, tests, scripts, release/build docs.
-13. Relevant `.codex` / `.agents` files only after the truth files.
+12. Relevant source, tests, retained scripts, build docs, and current local logs.
+13. Relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
 
-## Conflict resolution
+## Active Product Law
+
+```text
+Persistent surfaces: Today / Goals / Time / You
+Global composer: Capture
+Behavior layer: Motion
+Trust layer: Proof / Source / Privacy / History / Receipts
+```
+
+Motion is behavior, not a root destination. Capture is global composition, not a tab.
+
+## Conflict Resolution
 
 | Conflict Type | Winner |
 |---|---|
@@ -31,35 +42,25 @@ Applies to: Humans, Codex, and any AI agent working in the Ambitions repo
 | Implementation/source status | Live source/project/test/script evidence, read through `IMPLEMENTATION_TRUTH.md` |
 | Release/readiness/proof claim | Current proof/log evidence, read through `RELEASE_TRUTH.md` |
 | Codex process behavior | `CODEX_PROCESS_TRUTH.md` |
-| Historical/old-canon conflict | Active truth files |
+| Historical/old-canon conflict | Active truth files and `HISTORICAL_POLICY.md` retention rules |
 | README/docs index conflict | Active truth files |
-| `.codex`/`.agents` conflict | Active truth files |
+| Skill/script/support-material conflict | Active truth files |
 
-## Supporting material
+## Retained Supporting Material
 
-These areas are useful, but they do not override `docs/truth/*`:
+Retained non-source material is intentionally small:
 
-- `docs/AmbitionsCanon/`
-- `docs/status/`
-- `docs/codex/`
-- `.codex/`
-- `.agents/`
-- historical batch-train, audit, handoff, and closeout files
+- `docs/README.md`
+- `docs/native-build-and-release.md`
+- root `AGENTS.md`
+- root `README.md`
+- retained build, validation, privacy, claim, copy, and canon-drift scripts
+- at most three repo skills under `.agents/skills/`
 
-Use older material only when compatible with the truth files or explicitly classified by `HISTORICAL_POLICY.md`.
+Generated Codex state, old artifacts, prompts, trains, stale batch docs, backup truth files, and historical proof matrices are not retained in-repo.
 
-## What this directory does not prove
+## What Truth Files Do Not Prove
 
-The truth files define authority and standards. They do not by themselves prove:
+Truth files define authority and standards. They do not by themselves prove implementation completeness, local build success, test success, visual quality, accessibility conformance, performance validation, physical-device validation, TestFlight/App Store readiness, or release approval.
 
-- implementation completeness
-- local build success
-- test success
-- visual quality
-- accessibility conformance
-- performance validation
-- physical-device validation
-- TestFlight/App Store readiness
-- release approval
-
-Those claims require evidence through `RELEASE_TRUTH.md` and current proof artifacts.
+Those claims require current evidence through `RELEASE_TRUTH.md`.

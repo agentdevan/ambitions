@@ -66,7 +66,7 @@ Active truth hierarchy:
 2. `docs/truth/IMPLEMENTATION_TRUTH.md` — source implementation authority.
 3. `docs/truth/RELEASE_TRUTH.md` — validation/release/proof authority.
 4. `docs/truth/CODEX_PROCESS_TRUTH.md` — Codex operating authority.
-5. `docs/truth/HISTORICAL_POLICY.md` — historical/cleanup authority.
+5. `docs/truth/HISTORICAL_POLICY.md` — repo retention and stale-file deletion authority.
 6. `AGENTS.md` — front-door agent contract.
 7. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Package.swift`.
 
@@ -145,7 +145,7 @@ Stop and report Red when:
 - current product law is ambiguous or contradicted
 - Motion is reintroduced as a root destination
 - Capture is reintroduced as a root destination
-- forbidden stale active IA `Today / Goals / Time / Motion / You` is promoted as current or active
+- stale five-surface IA with Motion as a root destination is promoted as current or active
 - account sign-in becomes required for core offline use
 - private life graph backend behavior appears
 - R2 receives or stores private user context
@@ -156,18 +156,16 @@ Stop and report Red when:
 
 ---
 
-## 8. Runner V3 Policy
+## 8. Local Output and Retention Policy
 
-New architecture/product trains should use Codex Train V3 when available.
+Codex may generate local validation output during active work, but generated state is ignored by default and is not retained as history.
 
-Runner V3 policy:
+Current policy:
 
-- Manifest batch type controls gate selection.
-- Audit batches do not run source-owner/champion coverage gates.
-- CI must not mutate prompt files.
-- Ephemeral runner logs belong under `artifacts/codex-train-v3/` or `.codex/runs/`.
-- Durable proof belongs under the train artifact root.
-- Generated runner output must not be reintroduced under `build/reports/`.
-- One commit per Green batch is preferred.
+- Do not add tracked prompts, trains, Codex run-state, old artifacts, proof matrices, or generated logs.
+- Keep local validation output under ignored local paths unless the current task explicitly requires a compact retained proof file.
+- Old proof is not App Store proof.
+- One commit per Green work slice is preferred when the user requests sequential train work.
+- Commit cleanup separately from feature/source work when a cleanup pass precedes implementation.
 
 This is process authority only. It does not prove implementation, release readiness, account behavior, R2 behavior, privacy compliance, or accessibility compliance.

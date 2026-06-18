@@ -5,7 +5,7 @@ cd "$ROOT"
 name="$(basename "$0")"
 echo "$name: Codex OS deterministic advisory scan"
 files=$(git diff --name-only HEAD -- | tr "\n" " ")
-[ -z "$files" ] && files="docs/codex .codex/skills .codex/review-boards .codex/validation"
+[ -z "$files" ] && files="docs/truth README.md AGENTS.md docs/README.md docs/native-build-and-release.md .agents/skills"
 case "$name" in
   release-claim-safety-scan.sh) pattern="production ready|TestFlight ready|App Store ready|market proven|physical device passed|legal signoff|privacy certified|accessibility compliant|fully autonomous|AI understands everything|remembers everything|guaranteed" ;;
   privacy-boundary-scan.sh) pattern="sensitive memory|inference|recommendation|local-first|private mode|export/delete" ;;

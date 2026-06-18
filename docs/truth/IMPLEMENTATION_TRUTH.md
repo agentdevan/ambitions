@@ -45,13 +45,13 @@ Current repo posture from inspected evidence:
 - The app is SwiftUI-first.
 - The configured deployment target is iOS 26.0.
 - The configured Swift language version is 6.0.
-- The repo has source for app, widget extension, share extension, unit tests, UI tests, design system package, widget UI package, scripts, and substantial docs/Codex material.
+- The repo has source for app, widget extension, share extension, unit tests, UI tests, design system package, widget UI package, retained local scripts, and compact truth/build docs.
 - The app has local SwiftData persistence source.
 - The app has App Group entitlement source.
 - The app has a privacy manifest source.
 - The repo has local build/setup scripts.
 - No active release proof proves TestFlight/App Store/device readiness.
-- Old docs and Codex/batch material are subordinate unless promoted by truth files.
+- Old docs, generated proof, prompts, train material, and Codex control-plane files are not retained as implementation evidence.
 
 Primary evidence paths:
 
@@ -119,7 +119,7 @@ Hard implementation truth:
 If current source routes to Motion as a canonical root tab, that is product drift.
 If current source routes to Capture as a canonical root tab, that is product drift.
 If tests require Motion as a root tab, those tests are stale and must be migrated.
-If scripts validate Today / Goals / Time / Motion / You as active IA, those scripts are stale and must be migrated.
+If scripts validate Motion as a root IA surface, those scripts are stale and must be migrated.
 ```
 
 ---
@@ -234,7 +234,7 @@ Hosted AI services and cloud LLMs are not core architecture and are excluded fro
 Current source truth:
 
 - No active app-source OpenAI/API/cloud LLM implementation is treated as core architecture by active truth.
-- Existing `.codex`, docs, prompts, or agent materials may mention AI/Codex, but those are not app runtime dependencies.
+- Retained docs and skills may mention AI/Codex as local contributor tooling, but those are not app runtime dependencies.
 
 Codex must not add external LLM dependency, cloud model calls, chatbot-first UI, opaque model confidence, server-side user profiling, or hosted personal-data intelligence unless truth files are updated first.
 
@@ -297,18 +297,8 @@ This is implementation truth, not release proof.
 
 ---
 
-## AMB-AOM Object-Stage Mega Train Current Source Proof
+## 9. Historical Proof Is Not Current Proof
 
-Status: Source-present and Autopilot-validated through AMB-AOM-12 final validation.
+Old batch reports, generated proof ledgers, screenshots, prompts, train closeouts, and deleted control-plane material are not implementation proof.
 
-Current source/proof supports these implementation statements only:
-
-- Root runtime IA is Today / Goals / Time / You.
-- Capture is represented as a global composer/control path, not a root tab.
-- Motion is compatibility and behavior infrastructure, not a root tab.
-- Today source owns Reality Meridian / Start Here behavior with live time and a simplified action surface.
-- Goals source owns Constellation Atlas with actionable Life Areas and Orbital Lens inspection.
-- Time source owns LifeShape Field and explicitly rejects calendar clone, agenda clone, free/busy grid, and metric-dashboard geometry.
-- You source owns User System Profile with native settings-quality groups for account/profile, privacy, appearance, notifications, learning, receipts/history, export, and support.
-
-This proof does not establish App Store readiness, TestFlight readiness, device-signing readiness, privacy/legal sufficiency, data migration safety, or production analytics/crash/observability readiness.
+Current implementation claims require live source/project/test/script evidence and, where release-facing, current logs under `RELEASE_TRUTH.md`.

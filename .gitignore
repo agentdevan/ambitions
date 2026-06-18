@@ -63,36 +63,23 @@ source-atlas/generated/proof/
 *.log
 *.tmp
 
-# local validation artifacts
-.codex/logs/
-.codex/local/
-.codex/state/proof-cache.json
-build/reports/ios26-sequential-runner-shape/
-build/reports/repo-intelligence/
+# local generated state and historical control-plane output
+.codex/
+artifacts/
+prompts/
+trains/
+.linear/
+.linear-sync/
 output/logs/
 output/manual-audit/
-docs/audits/doc-qa/*.log
-docs/audits/build-logs/*.log
+build/reports/
 
 # Build-lab artifacts
-.codex/DerivedData/
-.codex/xcode-results/
-.codex/xcode-logs/
-.codex/xcode-summaries/
-.codex/xcode-benchmarks/
-.codex/build-cache/
-
-# Ambitions / Codex ephemeral run scratch
-.codex/runs/
 runs/
 
 # Ambitions local repo-intelligence caches / generated sidecars
 .codegraph/
 .understand-anything/
-.codex/local-indexes/
-.codex/repo-intelligence/tools/
-.codex/repo-intelligence/generated/
-.codex/repo-intelligence/tmp/
 
 # Python runtime caches
 __pycache__/

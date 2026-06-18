@@ -1,9 +1,0 @@
-# Compact repair state mirror. Full repair evidence belongs in raw logs and reports.
-status: idle
-last_updated: "2026-05-08"
-active_repair: null
-source: null
-classes: []
-auto_safe: false
-hard_stop: false
-next_action: "Run `python3 scripts/ai/acx_repair.py diagnose` after failed profiles, repeated Yellow, Red, or hard Red."

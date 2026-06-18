@@ -68,4 +68,4 @@ fi
 
 echo "XCODEGEN_NEEDED=0"
 echo "REASON=project build inputs unchanged"
-exit 10
+exit 0

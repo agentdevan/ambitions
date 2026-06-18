@@ -237,7 +237,9 @@ run_validation_command() {
 }
 
 scripts/ambitions-xcode-version-check.sh >/dev/null 2>&1 || true
-scripts/ambitions-build-lab-doctor.sh --json >/dev/null 2>&1 || true
+if [[ -x scripts/ambitions-build-lab-doctor.sh ]]; then
+  scripts/ambitions-build-lab-doctor.sh --json >/dev/null 2>&1 || true
+fi
 
 status=0
 failure_class="unknown"

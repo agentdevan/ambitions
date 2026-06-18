@@ -119,16 +119,16 @@ Mandatory read order:
 4. `docs/truth/IMPLEMENTATION_TRUTH.md`
 5. `docs/truth/RELEASE_TRUTH.md`
 6. `docs/truth/CODEX_PROCESS_TRUTH.md`
-7. `docs/truth/HISTORICAL_POLICY.md`
+7. `docs/truth/HISTORICAL_POLICY.md` (repo retention and stale-file deletion)
 8. `AGENTS.md`
 9. `README.md`
 10. `docs/README.md`
 11. `project.yml`
 12. `Package.swift`
-13. relevant source, tests, scripts, build docs, status docs, and proof artifacts
-14. relevant `.codex` / `.agents` files only after truth files
+13. relevant source, tests, retained scripts, build docs, and current local logs
+14. relevant retained `.agents/skills/*/SKILL.md` files only after truth files
 
-Older material may be useful only where compatible with the truth files. It must not override active truth.
+Historical material is not retained in-repo unless it is current, canon-aligned, and materially useful for App Store readiness. It must not override active truth.
 
 ---
 

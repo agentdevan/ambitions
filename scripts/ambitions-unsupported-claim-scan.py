@@ -11,7 +11,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_PATHS = [ROOT / "docs", ROOT / "prompts", ROOT / ".codex"]
+DEFAULT_PATHS = [
+    ROOT / "docs",
+    ROOT / "README.md",
+    ROOT / "AGENTS.md",
+    ROOT / ".agents" / "skills",
+]
 
 CLAIM_PATTERNS = [
     re.compile(r"visual\s+(canon|moat).{0,40}(implemented|complete|installed)", re.I),

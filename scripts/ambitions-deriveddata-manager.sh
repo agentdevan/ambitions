@@ -56,7 +56,7 @@ case "$COMMAND" in
     echo "path=$DEFAULT_PATH"
     ;;
   *)
-    echo "unsupported command: $command" >&2
+    echo "unsupported command: $COMMAND" >&2
     exit 1
     ;;
 esac

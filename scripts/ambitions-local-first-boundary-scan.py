@@ -12,9 +12,9 @@ SCAN_FILES = [
     ROOT / "docs" / "truth" / "PRODUCT_MOAT_TRUTH.md",
     ROOT / "docs" / "truth" / "IMPLEMENTATION_TRUTH.md",
     ROOT / "docs" / "truth" / "CODEX_PROCESS_TRUTH.md",
-    ROOT / "docs" / "codex" / "LOCAL_DATA_CLOUD_BOUNDARY_LAW.md",
     ROOT / "AGENTS.md",
-    ROOT / ".codex" / "os" / "AMBITIONS_OPERATING_CONTEXT.md",
+    ROOT / "README.md",
+    ROOT / "docs" / "README.md",
 ]
 
 REQUIRED_PRODUCT_TRUTH_PHRASES = [

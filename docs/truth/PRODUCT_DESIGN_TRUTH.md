@@ -616,7 +616,7 @@ This raises the standard. The app may use modern SwiftUI, native materials, Liqu
 Rules:  
   
 - Use SwiftUI-native components where they serve the product.  
-- Use custom chrome only when the object-stage model requires it.  
+- Use custom chrome only when the active product-object model requires it.  
 - Use Liquid Glass as a functional control/navigation layer, not decoration.  
 - Do not create translucent blobs and call them glass.  
 - Every glass or blur decision must preserve legibility.  
@@ -3412,7 +3412,7 @@ When this file is used as a ChatGPT Project Source:
 - Assume iOS 26 minimum.  
 - Assume SwiftUI native-first architecture.  
 - Assume the user wants senior-level, paste-ready guidance.  
-- Ground recommendations in the object-stage model.  
+- Ground recommendations in the active product-object model.  
 - Do not recommend generic task-app, calendar, dashboard, chatbot, or tab-app patterns.  
 - When asked for frontend architecture, preserve the final tree unless explicitly asked to revise it.  
 - When asked for UI direction, use Today / Goals / Time / You as persistent surfaces.  

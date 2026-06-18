@@ -1,4 +1,0 @@
-interface:
-  display_name: "Ambitions Master Build"
-  short_description: "Run the Ambitions native app master-build Goal Mode program."
-  default_prompt: "Use the Ambitions Master Build skill to execute the active master-build Linear issue on main with evidence-backed validation."

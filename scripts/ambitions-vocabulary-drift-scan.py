@@ -13,9 +13,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SCAN_FILES = [
     ROOT / "docs/truth/PRODUCT_DESIGN_TRUTH.md",
     ROOT / "docs/truth/PRODUCT_MOAT_TRUTH.md",
-    ROOT / "docs/AmbitionsCanon/11_Canonical_Vocabulary_And_Copy_Bible.md",
-    ROOT / "docs/AmbitionsCanon/17_Ambitions_Product_Grammar.md",
-    ROOT / "docs/AmbitionsCanon/03_Signature_Object_Specs.md",
+    ROOT / "docs/truth/CODEX_PROCESS_TRUTH.md",
+    ROOT / "AGENTS.md",
 ]
 
 NEGATIVE_SECTION_MARKERS = (
