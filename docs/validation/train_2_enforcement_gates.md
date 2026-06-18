@@ -14,7 +14,7 @@ Scope: Train 2 enforcement gates only. No product UI rebuild, Motion/Capture mig
 - `ScreenContractID.capture.canonicalTopLevelTitle` is no longer a top-level title.
 - Screen contract and shell matrix tests now align with current primary objects: Reality Meridian, Constellation Atlas, LifeShape Field, User System Profile.
 - `scripts/ambitions-visible-copy-drift-scan.py --strict` is bounded by default and reports file counts.
-- One visible Time hint was changed from Plan wording to Time wording.
+- One visible Time accessibility hint in `Native/Ambitions/Features/Time/TimeScreen.swift` was changed from stale Plan wording to Time wording.
 - Train 0/1 generated audit artifacts were regenerated and settled.
 
 ## Commands Run
@@ -77,9 +77,13 @@ None proven in this pass. Do not claim focused XCTest Green for Train 2.
 
 The wrapper and direct fallback both stopped before executed-test counts were produced.
 
-## Product Behavior Changed
+## Product Change Classification
 
-Only one user-facing copy string changed: the Time recovery maturity accessibility hint now says `Review Time recovery boundaries before confirming any broad change.`
+Production runtime behavior changed: No.
+
+Production UI architecture changed: No.
+
+Production accessibility copy changed: Yes. One user-facing accessibility hint in `Native/Ambitions/Features/Time/TimeScreen.swift` now says `Review Time recovery boundaries before confirming any broad change.`
 
 No root UI rebuild, Motion destination migration, Capture composer rebuild, screenshot matrix, device run, accessibility certification, privacy/account/R2 validation, TestFlight validation, App Store validation, or release validation was performed.
 

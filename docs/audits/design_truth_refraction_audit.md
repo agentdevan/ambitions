@@ -2,15 +2,15 @@
 
 Status: Yellow
 Branch: `main`
-Commit: `4cf734223e4441d9cb7efceffbed71dbd68e2972`
+Commit: `8d095586156ba72bd4e960ed69c14db511af4aa9`
 Scope: Train 0/1 only: canon readback, file inventory, classification, and audit artifacts. No product UI rebuild, file deletion, aesthetic replacement, Train 2 guard implementation, screenshot proof, accessibility proof, mutation proof, privacy proof, or release proof is claimed.
 
 ## Inventory Summary
 
-- Git-tracked files classified: 2306
+- Git-tracked files classified: 2307
 - Swift files classified: 836
-- Markdown files classified: 473
-- Status counts: Delete=5, Green=1677, Red=122, Split=114, Test-only=262, Yellow=126
+- Markdown files classified: 474
+- Status counts: Delete=5, Green=1678, Red=122, Split=114, Test-only=262, Yellow=126
 - Raw search logs over 25 MB are replaced with hit counts, samples, command lines, and top file summaries.
 
 ## Top 20 Red Files
