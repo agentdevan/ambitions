@@ -39,10 +39,10 @@ enum ScreenContractID: String, CaseIterable, Codable, Hashable, Sendable {
         switch self {
         case .today: "Today"
         case .goals: "Goals"
-        case .capture: "Capture"
         case .plan: "Time"
         case .you: "You"
-        case .goalDetail,
+        case .capture,
+             .goalDetail,
              .lifeAreasOverview,
              .northStarDetail,
              .oneStepGoalDetail,
@@ -264,6 +264,8 @@ enum ScreenContractValidator {
     static let canonicalTopLevelTabs = ["Today", "Goals", "Time", "You"]
 
     static let forbiddenTopLevelTabTitles = [
+        "Capture",
+        "Motion",
         "Tasks",
         "Insights",
         "Habits",

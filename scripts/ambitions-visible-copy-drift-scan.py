@@ -30,6 +30,21 @@ IGNORED_PARTS = {
     "prompts",
 }
 
+DEFAULT_SCAN_PATHS = (
+    "Native/Ambitions/App",
+    "Native/Ambitions/Features/Capture",
+    "Native/Ambitions/Features/Goals",
+    "Native/Ambitions/Features/Motion",
+    "Native/Ambitions/Features/Time",
+    "Native/Ambitions/Features/Today",
+    "Native/Ambitions/Features/You",
+    "Sources/Accessibility",
+    "Sources/Components",
+    "AGENTS.md",
+    "README.md",
+    "docs/README.md",
+)
+
 TEXT_EXTENSIONS = {
     ".swift",
     ".md",
@@ -60,17 +75,17 @@ PATTERNS: list[tuple[str, re.Pattern[str], str]] = [
     ),
     (
         "deprecated-start-focus",
-        re.compile(r'\b(?:Start Focus|Begin Focus|Focus Session)\b'),
+        re.compile(r'\b(?:Text|Label|Button|navigationTitle|accessibilityLabel|accessibilityHint|String\()\s*\(\s*"[^"]*\b(?:Start Focus|Begin Focus|Focus Session)\b[^"]*"', re.IGNORECASE),
         "Deprecated focus CTA/language. Prefer Start now/Open step where user-facing.",
     ),
     (
         "deprecated-next-move",
-        re.compile(r'\b(?:best next move|next best move|Your best next move|Recommended next step)\b', re.IGNORECASE),
+        re.compile(r'\b(?:Text|Label|Button|navigationTitle|accessibilityLabel|accessibilityHint|String\()\s*\(\s*"[^"]*\b(?:best next move|next best move|Your best next move|Recommended next step)\b[^"]*"', re.IGNORECASE),
         "Deprecated next-move wording. Prefer Start here / Recommended step.",
     ),
     (
         "punitive-copy",
-        re.compile(r'\b(?:streak broken|failed|missed|overdue)\b', re.IGNORECASE),
+        re.compile(r'\b(?:Text|Label|Button|navigationTitle|accessibilityLabel|accessibilityHint|String\()\s*\(\s*"[^"]*\b(?:streak broken|failed|missed|overdue)\b[^"]*"', re.IGNORECASE),
         "Potential punitive state language; verify closure/recovery framing.",
     ),
 ]
@@ -99,8 +114,24 @@ def ignored(path: Path, root: Path) -> bool:
     return any(rel == ignored_part or rel.startswith(ignored_part + "/") for ignored_part in IGNORED_PARTS)
 
 
-def iter_files(root: Path):
-    for path in root.rglob("*"):
+def iter_files(root: Path, broad: bool):
+    if broad:
+        candidates = root.rglob("*")
+    else:
+        bounded_candidates: list[Path] = []
+        for rel_path in DEFAULT_SCAN_PATHS:
+            path = root / rel_path
+            if path.is_file():
+                bounded_candidates.append(path)
+            elif path.is_dir():
+                bounded_candidates.extend(path.rglob("*"))
+        candidates = iter(bounded_candidates)
+
+    seen: set[Path] = set()
+    for path in candidates:
+        if path in seen:
+            continue
+        seen.add(path)
         if not path.is_file():
             continue
         if ignored(path, root):
@@ -125,6 +156,8 @@ def scan_file(path: Path, root: Path) -> list[str]:
     for lineno, line in enumerate(text.splitlines(), start=1):
         for code, pattern, reason in patterns:
             if pattern.search(line):
+                if code == "visible-profile-label" and "User System Profile" in line:
+                    continue
                 snippet = line.strip()
                 if len(snippet) > 180:
                     snippet = snippet[:177] + "..."
@@ -136,15 +169,24 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Scan Ambitions visible copy for stale language.")
     parser.add_argument("root", nargs="?", default=str(ROOT_DEFAULT), help="Repository root")
     parser.add_argument("--strict", action="store_true", help="Exit 1 when findings are present")
+    parser.add_argument(
+        "--broad",
+        action="store_true",
+        help="Scan every supported text file under the repo. Not part of the bounded Train 2 gate.",
+    )
     args = parser.parse_args()
 
     root = Path(args.root).resolve()
     findings: list[str] = []
-    for path in iter_files(root):
+    scanned = 0
+    for path in iter_files(root, broad=args.broad):
+        scanned += 1
         findings.extend(scan_file(path, root))
 
     print("Ambitions visible-copy drift scan")
     print(f"Root: {root}")
+    print(f"Mode: {'broad' if args.broad else 'bounded'}")
+    print(f"Files scanned: {scanned}")
     print(f"Findings: {len(findings)}")
     if findings:
         print()

@@ -44,16 +44,17 @@ final class ScreenContractRegistryTests: XCTestCase {
         )
     }
 
-    func testD10TopLevelContractsMatchCanonicalFiveTabShell() {
+    func testD10TopLevelContractsMatchCanonicalFourSurfaceShell() {
         XCTAssertEqual(AppTab.allCases.map(\.title), ScreenContractValidator.canonicalTopLevelTabs)
         XCTAssertEqual(
             ScreenContractRegistry.contracts.compactMap(\.canonicalTopLevelTitle),
             ScreenContractValidator.canonicalTopLevelTabs
         )
         XCTAssertTrue(ScreenContractValidator.validateRegistry(ScreenContractRegistry.contracts).isEmpty)
+        XCTAssertNil(ScreenContractRegistry.contract(for: .capture).canonicalTopLevelTitle)
     }
 
-    func testD10RegistryHasUniqueIDsAndImplementationAnchors() {
+    func testD10RegistryHasUniqueIDsImplementationAnchorsAndRootGuardrails() {
         let ids = ScreenContractRegistry.contracts.map(\.id)
         XCTAssertEqual(Set(ids).count, ids.count)
 
@@ -71,6 +72,10 @@ final class ScreenContractRegistryTests: XCTestCase {
             XCTAssertTrue(contract.guardrails.contains(.noGestureOnlyNavigation), "\(contract.id) can rely on gesture-only navigation.")
             XCTAssertTrue(contract.guardrails.contains(.privacySafeByDefault), "\(contract.id) lacks privacy default.")
         }
+
+        XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Time", "You"])
+        XCTAssertFalse(ScreenContractValidator.canonicalTopLevelTabs.contains("Capture"))
+        XCTAssertFalse(ScreenContractValidator.canonicalTopLevelTabs.contains("Motion"))
     }
 
     func testD10DependenciesConnectD03ThroughD09Foundations() {
@@ -166,6 +171,27 @@ final class ScreenContractRegistryTests: XCTestCase {
         XCTAssertTrue(issueKinds.contains(.forbiddenFirstScreenContent))
         XCTAssertTrue(issueKinds.contains(.forbiddenCopy))
         XCTAssertTrue(issueKinds.contains(.invalidTopLevelTabs))
+    }
+
+    func testD10ValidatorFlagsCaptureAndMotionAsInvalidTopLevelTabs() {
+        let contract = ScreenContractRegistry.contract(for: .capture)
+        let snapshot = ScreenContractImplementationSnapshot(
+            screenID: .capture,
+            firstScreenContent: contract.requiredFirstScreenContent,
+            panels: contract.requiredPanels,
+            actions: contract.primaryActions,
+            copySamples: ["Capture remains a composer overlay."],
+            topLevelTabTitles: ["Today", "Goals", "Capture", "Time", "Motion", "You"],
+            supportsDensityBehavior: true,
+            supportsPanelSizeBehavior: true,
+            hasAccessibilitySummary: true,
+            hasPrivacySafeState: true,
+            hasGestureAlternative: true
+        )
+
+        let issues = ScreenContractValidator.validate(snapshot: snapshot, against: contract)
+
+        XCTAssertTrue(issues.contains { $0.kind == .invalidTopLevelTabs })
     }
 
     func testD20ScreenContractsUseHumanStateLanguage() {

@@ -8,7 +8,7 @@ Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tes
 - Command used: `rg -n -i --glob !docs/audits/design_truth_readback.md --glob !docs/audits/design_truth_refraction_audit.md --glob !docs/audits/file_by_file_truth_ledger.md --glob !docs/audits/obsolete_architecture_audit.md --glob !docs/audits/large_swift_file_discipline_audit.md --glob !docs/audits/stub_adapter_retirement_audit.md --glob !docs/audits/forbidden_language_audit.md Source\ unavailable|receipt\ before\ save|route\ reveal|runtime\-backed|fixture\-only|proof\ seam|Close\ Today|Motion\ Current|Capture\ Anything|blocked\-pending\-model|local\ projection|receipt\ path|review\ before\ reflow|No\ silent\ changes|Open\ seam|Re\-enter\ thread|best\ next\ move|next\ best\ move|Begin\ Focus|productivity\ score|life\ score|habit\ score|streak\ broken Native Sources AppUI docs prompts scripts tools Package.swift project.yml AGENTS.md README.md`
 - Hit count: 544
 - File count: 149
-- Raw output bytes: 71264
+- Raw output bytes: 71594
 - Raw log replaced with summary: False
 
 ## Sample Findings
@@ -19,7 +19,7 @@ Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tes
 - Native/Ambitions/Domain/AmbitionsOSAdaptationModels.swift:426:            "productivity score",
 - Native/Ambitions/Domain/AmbitionsOSExperienceModels.swift:456:            "productivity score",
 - Native/Ambitions/Domain/AmbitionsOSInteroperabilityModels.swift:196:            "productivity score",
-- Native/Ambitions/Domain/ScreenContractModels.swift:532:        requiredFirstScreenContent: ["Capture Anything", "Atmosphere Composer", "Needs a Place", "Ready to Place", "Grow into Goal", "Changeable route receipt"],
+- Native/Ambitions/Domain/ScreenContractModels.swift:534:        requiredFirstScreenContent: ["Capture Anything", "Atmosphere Composer", "Needs a Place", "Ready to Place", "Grow into Goal", "Changeable route receipt"],
 - Native/Ambitions/Features/Capture/CaptureViewModel.swift:12:                "Capture Anything",
 - Native/Ambitions/Features/Capture/CaptureViewModel.swift:33:                "Capture Anything",
 - Native/Ambitions/Features/Capture/CaptureViewModel.swift:35:                "Capture anything",
@@ -205,6 +205,7 @@ Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tes
 | docs/truth/PRODUCT_DESIGN_TRUTH.md | restricted terms present in authority/audit context: Source unavailable, receipt before save, route reveal, runtime-backed, fixture-only | truth docs | Source Atlas / R2 | Red |
 | docs/truth/PRODUCT_MOAT_TRUTH.md | restricted terms present in authority/audit context: receipt path, best next move, productivity score, life score, habit score | truth docs | Source Atlas / R2 | Green |
 | docs/validation/train_1_5_validation_unblock.md | streak broken | validation docs | Codex governance | Yellow |
+| docs/validation/train_1_6_test_scanner_authority_stabilization.md | streak broken | validation docs | Codex governance | Green |
 | frontend/visual-encyclopedia/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml | route reveal | project config | Broad repo | Green |
 | frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.md | route reveal | supporting docs | Broad repo | Green |
 | prompts/object-stage-mega-train/AMB-AOM-10.md | restricted terms present in authority/audit context: productivity score | codex governance | Codex governance | Green |

@@ -8,7 +8,7 @@ Scope: Findings are classification targets only; no files were deleted or migrat
 - Command used: `rg -n -i --glob !docs/audits/design_truth_readback.md --glob !docs/audits/design_truth_refraction_audit.md --glob !docs/audits/file_by_file_truth_ledger.md --glob !docs/audits/obsolete_architecture_audit.md --glob !docs/audits/large_swift_file_discipline_audit.md --glob !docs/audits/stub_adapter_retirement_audit.md --glob !docs/audits/forbidden_language_audit.md RootTab|MainTab|TabRoot|RootTabView|MainTabView|AmbitionsTabView|TabShell|RootShell|Surfaces/Motion|MotionSurface|MotionView|MotionTab|MotionStageScene|MotionLens|MotionRoot|Surfaces/Capture|CaptureTab|CaptureRoot|CaptureDestination|CaptureScreenShellMode|topLevelCapture|captureInbox|openCapturesInbox Native Sources AppUI docs prompts scripts tools Package.swift project.yml AGENTS.md README.md`
 - Hit count: 257
 - File count: 63
-- Raw output bytes: 31608
+- Raw output bytes: 31630
 - Raw log replaced with summary: False
 
 ## Sample Findings

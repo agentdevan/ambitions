@@ -139,7 +139,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .today,
                 surfaceTitle: "Today",
-                primaryObjectTitle: "Reality Meridian",
+                primaryObjectTitle: AppTab.today.primaryObjectTitle,
                 fixtureKey: "today-reality-meridian",
                 deterministicSeed: "afep020-surface-today",
                 projectionInputName: "today_projection_input",
@@ -149,7 +149,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .goals,
                 surfaceTitle: "Goals",
-                primaryObjectTitle: "Direction Atlas",
+                primaryObjectTitle: AppTab.goals.primaryObjectTitle,
                 fixtureKey: "goals-direction-atlas",
                 deterministicSeed: "afep020-surface-goals",
                 projectionInputName: "goals_projection_input",
@@ -159,7 +159,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .time,
                 surfaceTitle: "Time",
-                primaryObjectTitle: "LifeShape Field",
+                primaryObjectTitle: AppTab.time.primaryObjectTitle,
                 fixtureKey: "time-lifeshape-field",
                 deterministicSeed: "afep020-surface-time",
                 projectionInputName: "time_projection_input",
@@ -169,7 +169,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
-                primaryObjectTitle: "Personal system",
+                primaryObjectTitle: AppTab.you.primaryObjectTitle,
                 fixtureKey: "you-personal-runtime",
                 deterministicSeed: "afep020-surface-you",
                 projectionInputName: "you_projection_input",
@@ -551,7 +551,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .today,
                 surfaceTitle: "Today",
-                primaryObjectTitle: "Reality Meridian",
+                primaryObjectTitle: AppTab.today.primaryObjectTitle,
                 fixtureState: "today-reality-meridian",
                 deterministicSeed: "afep021-surface-today",
                 projectionInputName: "today_accessibility_projection_input",
@@ -561,7 +561,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .goals,
                 surfaceTitle: "Goals",
-                primaryObjectTitle: "Direction Atlas",
+                primaryObjectTitle: AppTab.goals.primaryObjectTitle,
                 fixtureState: "goals-direction-atlas",
                 deterministicSeed: "afep021-surface-goals",
                 projectionInputName: "goals_accessibility_projection_input",
@@ -571,7 +571,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .time,
                 surfaceTitle: "Time",
-                primaryObjectTitle: "LifeShape Field",
+                primaryObjectTitle: AppTab.time.primaryObjectTitle,
                 fixtureState: "time-lifeshape-field",
                 deterministicSeed: "afep021-surface-time",
                 projectionInputName: "time_accessibility_projection_input",
@@ -581,7 +581,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
-                primaryObjectTitle: "Personal system",
+                primaryObjectTitle: AppTab.you.primaryObjectTitle,
                 fixtureState: "you-personal-runtime",
                 deterministicSeed: "afep021-surface-you",
                 projectionInputName: "you_accessibility_projection_input",

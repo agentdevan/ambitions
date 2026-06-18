@@ -1,16 +1,16 @@
 # Design Truth Refraction Audit
 
 Status: Yellow
-Branch: `design-truth-refraction`
-Commit: `c0d1dc361b6b321900d28db5bbaa020b0cf3f2e0`
+Branch: `main`
+Commit: `4cf734223e4441d9cb7efceffbed71dbd68e2972`
 Scope: Train 0/1 only: canon readback, file inventory, classification, and audit artifacts. No product UI rebuild, file deletion, aesthetic replacement, Train 2 guard implementation, screenshot proof, accessibility proof, mutation proof, privacy proof, or release proof is claimed.
 
 ## Inventory Summary
 
-- Git-tracked files classified: 2305
+- Git-tracked files classified: 2306
 - Swift files classified: 836
-- Markdown files classified: 472
-- Status counts: Delete=5, Green=1677, Red=122, Split=114, Test-only=262, Yellow=125
+- Markdown files classified: 473
+- Status counts: Delete=5, Green=1677, Red=122, Split=114, Test-only=262, Yellow=126
 - Raw search logs over 25 MB are replaced with hit counts, samples, command lines, and top file summaries.
 
 ## Top 20 Red Files
@@ -119,7 +119,7 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 - `git ls-files` inventory for all tracked files.
 - `wc -l` line counts for all tracked files.
 - Targeted architecture scan: `obsolete architecture` with 257 hits in 63 files.
-- Targeted stub/adapter scan: `stub and adapter` with 2205 hits in 455 files.
+- Targeted stub/adapter scan: `stub and adapter` with 2206 hits in 455 files.
 - Targeted forbidden-language scan: `forbidden language` with 544 hits in 149 files.
 
 ## Validation Not Run / Not Claimed In This Artifact

@@ -1091,7 +1091,7 @@ private struct TimeRecoveryMaturitySurface: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("\(maturity.title). \(maturity.detail). \(maturity.confirmationBoundary). \(maturity.calendarBoundary). \(maturity.socialBoundary).")
-        .accessibilityHint("Review Plan recovery boundaries before confirming any broad change.")
+        .accessibilityHint("Review Time recovery boundaries before confirming any broad change.")
         .ambitionPanelAccessibility()
         .accessibilityIdentifier("time.recovery-maturity")
     }

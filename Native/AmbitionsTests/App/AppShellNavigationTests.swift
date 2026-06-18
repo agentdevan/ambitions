@@ -95,15 +95,15 @@ final class AppShellNavigationTests: XCTestCase {
             AppTab.allCases.map(\.primaryObjectTitle),
             [
                 "Reality Meridian",
-                "Direction Atlas",
+                "Constellation Atlas",
                 "LifeShape Field",
-                "Personal system"
+                "User System Profile"
             ]
         )
         XCTAssertEqual(AppTab.today.surfaceContract.title, "Today")
-        XCTAssertEqual(AppTab.goals.surfaceContract.primaryObjectTitle, "Direction Atlas")
+        XCTAssertEqual(AppTab.goals.surfaceContract.primaryObjectTitle, "Constellation Atlas")
         XCTAssertEqual(AppTab.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
-        XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "Personal system")
+        XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "User System Profile")
         XCTAssertFalse(AmbitionsSurfaceContractRegistry.canonicalContracts.map(\.tab.rawValue).contains("capture"))
     }
 
@@ -213,7 +213,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertFalse(destinations.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
     }
 
-    func testFCP08MeridianShellChromeContractPreservesFiveTabsAndReceiptZone() {
+    func testFCP08MeridianShellChromeContractPreservesFourRootSurfacesAndReceiptZone() {
         let chrome = AppMeridianShellChromeState.launchDefault
 
         XCTAssertEqual(chrome.title, "Ambition Meridian")
