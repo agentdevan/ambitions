@@ -79,20 +79,29 @@ struct YouObjectStageControlPrimitiveContract: Equatable {
     static let current = YouObjectStageControlPrimitiveContract(
         primitiveID: "personal-runtime-group",
         ownerSurface: "You",
-        productObject: "Personal system / User System Profile",
-        stageName: "You Object Stage Control",
+        productObject: "User System Profile",
+        stageName: "User System Profile",
         screenshotIdentifier: "YouObjectStageControl",
         sourceControlOrder: [
-            "planning setup",
-            "runtime preferences",
-            "history and trust",
-            "support system"
+            "account and profile",
+            "privacy and automation",
+            "appearance",
+            "notifications",
+            "learning",
+            "receipts and history",
+            "export",
+            "support"
         ],
         replacesFirstViewportStructures: [
             "detached profile hero",
             "generic settings wall",
             "operator-style root overview",
-            "rounded per-row card stack"
+            "rounded per-row card stack",
+            "social profile",
+            "admin panel",
+            "AI settings wall",
+            "verbose documentation UI",
+            "internal runtime console"
         ],
         exemptedSemanticControls: [
             "native grouped navigation rows",
@@ -170,7 +179,7 @@ struct PersonalSystemCenterRootView: View {
                     .minimumScaleFactor(0.78)
                     .accessibilityIdentifier("you.root-title")
 
-                Text("Local-first personal system")
+                Text("Account, privacy, learning, and controls stay local")
                     .font(AmbitionsIOS26SemanticTokens.Typography.subheadline)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
@@ -185,7 +194,7 @@ struct PersonalSystemCenterRootView: View {
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("you.object-stage-header")
         .accessibilityLabel("User System Profile")
-        .accessibilityValue("Ambitions runs on this iPhone.")
+        .accessibilityValue("Account, privacy, appearance, notifications, learning, receipts, export, and support controls are organized locally.")
     }
 
     private var priorityGovernanceRows: [RootSectionRow] {
@@ -204,8 +213,8 @@ struct PersonalSystemCenterRootView: View {
         [
             groupedSection(
                 id: "planning-setup",
-                title: "Planning defaults",
-                subtitle: "Time, availability, and planning defaults stay user-owned.",
+                title: "Account & profile",
+                subtitle: "Profile, availability, and planning defaults stay user-owned.",
                 rows: [
                     RootSectionRow(id: "schedule-availability", sourceItemID: "schedule-availability", title: "Schedule & Availability", detail: .scheduleAvailability),
                     RootSectionRow(id: "planning-defaults", sourceItemID: "plan-behavior", title: "Planning Defaults", detail: .planBehavior),
@@ -229,8 +238,8 @@ struct PersonalSystemCenterRootView: View {
             ),
             groupedSection(
                 id: "history-trust",
-                title: "Privacy & security",
-                subtitle: "Receipts and controls remain connected to local evidence.",
+                title: "Privacy, learning & receipts",
+                subtitle: "Learning controls, receipts, history, and local data stay inspectable.",
                 rows: [
                     RootSectionRow(id: "receipts-history", sourceItemID: "receipts-history", title: "Receipts & History", detail: .receiptsHistory),
                     RootSectionRow(id: "history", sourceItemID: "history", title: "History", detail: .proof),
@@ -240,9 +249,10 @@ struct PersonalSystemCenterRootView: View {
             ),
             groupedSection(
                 id: "support-system",
-                title: "Help & about",
-                subtitle: "Assistance and app-system context in a single system band.",
+                title: "Export & support",
+                subtitle: "Export, support, and app-system context in one native settings group.",
                 rows: [
+                    RootSectionRow(id: "export-import", sourceItemID: "export-import", title: "Export / Import", detail: .exportImport),
                     RootSectionRow(id: "help", sourceItemID: "help-support", title: "Help", detail: .support),
                     RootSectionRow(id: "about", sourceItemID: "about", title: "About", detail: .about)
                 ]
@@ -314,6 +324,7 @@ struct PersonalSystemCenterRootView: View {
         case "source-settings": .sourceSettings
         case "local-data-controls": .localDataControls
 
+        case "export-import": .exportImport
         case "help": .support
         case "about": .about
         default: .scheduleAvailability
