@@ -61,9 +61,10 @@
     "batch_57_amb_aom_10_validation",
     "batch_58_amb_aom_11_you_reconstruction",
     "batch_59_amb_aom_11_validation",
-    "batch_60_amb_aom_12_final_validation"
+    "batch_60_amb_aom_12_final_validation",
+    "batch_61_amb_aom_12_truth_closeout"
   ],
-  "last_green_batch": "batch_60_amb_aom_12_final_validation",
+  "last_green_batch": "batch_61_amb_aom_12_truth_closeout",
   "runs": [
     {
       "batch": "batch_02_copy_contract",

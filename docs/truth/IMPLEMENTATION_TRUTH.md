@@ -294,3 +294,21 @@ Hard Red for implementation claims:
 - claiming accessibility/performance/device/release readiness without current proof
 
 This is implementation truth, not release proof.
+
+---
+
+## AMB-AOM Object-Stage Mega Train Current Source Proof
+
+Status: Source-present and Autopilot-validated through AMB-AOM-12 final validation.
+
+Current source/proof supports these implementation statements only:
+
+- Root runtime IA is Today / Goals / Time / You.
+- Capture is represented as a global composer/control path, not a root tab.
+- Motion is compatibility and behavior infrastructure, not a root tab.
+- Today source owns Reality Meridian / Start Here behavior with live time and a simplified action surface.
+- Goals source owns Constellation Atlas with actionable Life Areas and Orbital Lens inspection.
+- Time source owns LifeShape Field and explicitly rejects calendar clone, agenda clone, free/busy grid, and metric-dashboard geometry.
+- You source owns User System Profile with native settings-quality groups for account/profile, privacy, appearance, notifications, learning, receipts/history, export, and support.
+
+This proof does not establish App Store readiness, TestFlight readiness, device-signing readiness, privacy/legal sufficiency, data migration safety, or production analytics/crash/observability readiness.
