@@ -79,12 +79,8 @@ final class StageMotionRoutingTests: XCTestCase {
     private func assertMemoryLensOverlay(_ route: StageMotionRoute, expectedQuery: String) {
         switch route {
         case let .presentOverlay(overlay):
-            switch overlay {
-            case let .memoryLens(_, _, _, query, _, _):
-                XCTAssertEqual(query, expectedQuery)
-            default:
-                XCTFail("Expected memory lens overlay")
-            }
+            XCTAssertEqual(overlay.kind, .memoryLens)
+            XCTAssertEqual(overlay.query, expectedQuery)
         default:
             XCTFail("Expected presentOverlay memory lens route")
         }
