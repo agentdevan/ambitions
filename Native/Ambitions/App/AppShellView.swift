@@ -197,7 +197,7 @@ struct AppShellScaffold<Content: View>: View {
         if onBack != nil {
             return dynamicTypeSize.isAccessibilitySize ? 64 : 34
         }
-        return dynamicTypeSize.isAccessibilitySize ? 180 : 164
+        return 0
     }
 
     private var topInsetSpacing: CGFloat {

@@ -784,22 +784,23 @@ private extension GoldenVerticalSliceRuntime {
         consequenceRecord: LifeConsequenceRecord,
         safetyRecord: HighRiskSafetyGateRecord
     ) -> [String] {
-        normalizedIDs(
-            input.endUserBackground.receiptIDs +
-                input.intake.receiptIDs +
-                anyGoalRecord.recoveryReceipt.receiptID.asArray +
-                recommendedStep.receiptIDs +
-                [latticeRecord.selectionReceipt?.id].compactMap { $0 } +
-                (graphRecord.receipt?.receiptIDs ?? []) +
-                elasticityRecord.receipts.flatMap(\.receiptIDs) +
-                (scheduleRecord.installReceipt?.receiptIDs ?? []) +
-                consequenceRecord.receipts.flatMap(\.receiptIDs) +
-                [safetyRecord.receipt.id] +
-                safetyRecord.receipt.receiptIDs +
-                input.completionProof.receiptIDs +
-                (input.optionalShareProof?.receiptIDs ?? []) +
-                input.replayOutput.receiptIDs
-        )
+        var receiptIDs = input.endUserBackground.receiptIDs
+        receiptIDs.append(contentsOf: input.intake.receiptIDs)
+        receiptIDs.append(contentsOf: anyGoalRecord.recoveryReceipt.receiptID.asArray)
+        receiptIDs.append(contentsOf: recommendedStep.receiptIDs)
+        if let latticeReceiptID = latticeRecord.selectionReceipt?.id {
+            receiptIDs.append(latticeReceiptID)
+        }
+        receiptIDs.append(contentsOf: graphRecord.receipt?.receiptIDs ?? [])
+        receiptIDs.append(contentsOf: elasticityRecord.receipts.flatMap(\.receiptIDs))
+        receiptIDs.append(contentsOf: scheduleRecord.installReceipt?.receiptIDs ?? [])
+        receiptIDs.append(contentsOf: consequenceRecord.receipts.flatMap(\.receiptIDs))
+        receiptIDs.append(safetyRecord.receipt.id)
+        receiptIDs.append(contentsOf: safetyRecord.receipt.receiptIDs)
+        receiptIDs.append(contentsOf: input.completionProof.receiptIDs)
+        receiptIDs.append(contentsOf: input.optionalShareProof?.receiptIDs ?? [])
+        receiptIDs.append(contentsOf: input.replayOutput.receiptIDs)
+        return normalizedIDs(receiptIDs)
     }
 
     func allReplayTraceIDs(
@@ -813,21 +814,33 @@ private extension GoldenVerticalSliceRuntime {
         consequenceRecord: LifeConsequenceRecord,
         safetyRecord: HighRiskSafetyGateRecord
     ) -> [String] {
-        normalizedIDs(
-            [input.endUserBackground.replayTraceID].compactMap { $0 } +
-                [input.intake.replayTraceID].compactMap { $0 } +
-                [anyGoalRecord.recoveryReceipt.replayTraceID] +
-                [recommendedStep.replayTraceID].compactMap { $0 } +
-                [latticeRecord.selectionReceipt?.replayTraceID].compactMap { $0 } +
-                [graphRecord.trace.id] +
-                [elasticityRecord.trace.id] +
-                [scheduleRecord.trace.id] +
-                [consequenceRecord.trace.id] +
-                [safetyRecord.trace.id] +
-                [input.completionProof.replayTraceID].compactMap { $0 } +
-                [input.optionalShareProof?.replayTraceID].compactMap { $0 } +
-                input.replayOutput.replayTraceIDs
-        )
+        var replayTraceIDs: [String] = []
+        if let backgroundReplayTraceID = input.endUserBackground.replayTraceID {
+            replayTraceIDs.append(backgroundReplayTraceID)
+        }
+        if let intakeReplayTraceID = input.intake.replayTraceID {
+            replayTraceIDs.append(intakeReplayTraceID)
+        }
+        replayTraceIDs.append(anyGoalRecord.recoveryReceipt.replayTraceID)
+        if let recommendedStepReplayTraceID = recommendedStep.replayTraceID {
+            replayTraceIDs.append(recommendedStepReplayTraceID)
+        }
+        if let latticeReplayTraceID = latticeRecord.selectionReceipt?.replayTraceID {
+            replayTraceIDs.append(latticeReplayTraceID)
+        }
+        replayTraceIDs.append(graphRecord.trace.id)
+        replayTraceIDs.append(elasticityRecord.trace.id)
+        replayTraceIDs.append(scheduleRecord.trace.id)
+        replayTraceIDs.append(consequenceRecord.trace.id)
+        replayTraceIDs.append(safetyRecord.trace.id)
+        if let completionReplayTraceID = input.completionProof.replayTraceID {
+            replayTraceIDs.append(completionReplayTraceID)
+        }
+        if let shareReplayTraceID = input.optionalShareProof?.replayTraceID {
+            replayTraceIDs.append(shareReplayTraceID)
+        }
+        replayTraceIDs.append(contentsOf: input.replayOutput.replayTraceIDs)
+        return normalizedIDs(replayTraceIDs)
     }
 
     func normalizedIDs(_ values: [String]) -> [String] {

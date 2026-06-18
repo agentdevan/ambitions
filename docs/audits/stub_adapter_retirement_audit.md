@@ -6,9 +6,9 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 ## Search Summary
 
 - Command used: `rg -n -i --glob !docs/audits/design_truth_readback.md --glob !docs/audits/design_truth_refraction_audit.md --glob !docs/audits/file_by_file_truth_ledger.md --glob !docs/audits/obsolete_architecture_audit.md --glob !docs/audits/large_swift_file_discipline_audit.md --glob !docs/audits/stub_adapter_retirement_audit.md --glob !docs/audits/forbidden_language_audit.md TODO|FIXME|stub|placeholder|mock|fake|sample|demo|noop|no\-op|fatalError|preconditionFailure|return\ \[\]|return\ nil|return\ \.empty|//\ temporary|//\ for\ now|preview\ only Native Sources AppUI docs prompts scripts tools Package.swift project.yml AGENTS.md README.md`
-- Hit count: 2206
+- Hit count: 2208
 - File count: 455
-- Raw output bytes: 319193
+- Raw output bytes: 319458
 - Raw log replaced with summary: False
 
 ## Sample Findings
@@ -16,7 +16,7 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 - AGENTS.md:81:- Avoid shame, fake urgency, streak pressure, score pressure, AI branding, and productivity-guilt framing.
 - AppUI/Sources/WidgetFoundation.swift:110:    guard let handler else { return nil }
 - AppUI/Sources/WidgetPreviews.swift:100:    static let empty = Self(snapshot: .init(metadata: WidgetFixtures.metadata(family: .profileSummary), state: .empty(.init(title: "No You summary", message: "Keep this driven by demo fixtures until preferences are wired.", icon: "person.crop.circle", actionTitle: "Open You"))))
-- Native/Ambitions/App/AmbitionsRootView.swift:143:                    return nil
+- Native/Ambitions/App/AmbitionsRootView.swift:114:                    return nil
 - Native/Ambitions/App/AppAppearancePreferencePresentation.swift:8:            return nil
 - Native/Ambitions/App/AppBootstrapper.swift:123:        case .demo:
 - Native/Ambitions/App/AppBootstrapper.swift:124:            return .demo
@@ -50,8 +50,8 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | Native/AmbitionsTests/Services/GoalResourceGraphServiceTests.swift | 29 |
 | tools/source-atlas/lakehouse-workbench/app.py | 24 |
 | docs/codex/existing-code-champion-coverage.yml | 23 |
+| Native/AmbitionsUITests/AmbitionsUITests.swift | 22 |
 | tools/source-atlas/lakehouse-workbench/generator.py | 22 |
-| Native/AmbitionsUITests/AmbitionsUITests.swift | 21 |
 | scripts/ambitions-linear-sync-dry-run.py | 21 |
 | Native/AmbitionsTests/Domain/GoalResourceGraphModelsTests.swift | 20 |
 | tools/source-atlas/coverage.py | 19 |
@@ -109,8 +109,8 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | Native/Ambitions/App/AppBootstrapper.swift | needs hardening | App file owned by Stage shell. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | docs/audits/stub_adapter_retirement_audit.md | stub | Audit/proof artifact. | replace | authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | docs/codex-os/PROGRAM_REGISTRY.md | needs hardening | Codex Governance file owned by Source Atlas / R2. | harden | architecture conformance scan<br>forbidden language scan<br>stub/adapter audit | Yellow |
-| docs/audits/forbidden_language_audit.md | stub | Audit/proof artifact. | replace | authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md | needs hardening | Supporting Docs file owned by Codex governance. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
+| docs/audits/forbidden_language_audit.md | stub | Audit/proof artifact. | replace | authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | tools/source-atlas/lakehouse-workbench/publisher.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md | needs hardening | Codex Governance file owned by Codex governance. | harden | architecture conformance scan<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift | needs hardening | Repo Support file owned by Broad repo. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
@@ -121,6 +121,7 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | Native/Ambitions/App/AppContainerFactory.swift | stub | App file owned by Stage shell. | replace | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | tools/source-atlas/ambitions-pack-crypto.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | Native/Ambitions/Diagnostics/RepoTruthAuditLedger.swift | stub | Diagnostics file owned by Source Atlas / R2. | replace | build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
+| scripts/ambitions-surface-contract-lint.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | Native/AmbitionsShareExtension/ShareViewController.swift | needs hardening | Share Extension file owned by Share extension. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | artifacts/personal-life-os/any-goal/UNSUPPORTED_UNSAFE_ROUTING_CONTRACT.md | needs hardening | Supporting Docs file owned by Goals. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | scripts/ambitions-release-red-guard.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
@@ -129,7 +130,6 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | artifacts/personal-life-os/any-goal/SOURCE_NEEDED_LOCAL_SCAFFOLD.md | needs hardening | Supporting Docs file owned by Goals. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | Native/Ambitions/Support/ReleaseDeviceQAReadinessReport.swift | needs hardening | Repo Support file owned by Trust / release proof. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | docs/codex/ANY_GOAL_SOLUTION_LOOP_LAW.md | needs hardening | Codex Governance file owned by Goals. | harden | architecture conformance scan<br>forbidden language scan<br>stub/adapter audit | Yellow |
-| scripts/ambitions-surface-contract-lint.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | tools/mcp/ambitions_proof_mcp/tests/test_server_tools.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | artifacts/personal-life-os/any-goal/COVERAGE_DEMAND_QUEUE_MODEL.md | needs hardening | Supporting Docs file owned by Goals. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | artifacts/personal-life-os/any-goal/FRESH_COVERAGE_ARRIVAL_DETECTION_CONTRACT.md | needs hardening | Supporting Docs file owned by Goals. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |

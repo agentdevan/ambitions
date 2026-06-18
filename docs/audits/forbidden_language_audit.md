@@ -6,9 +6,9 @@ Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tes
 ## Search Summary
 
 - Command used: `rg -n -i --glob !docs/audits/design_truth_readback.md --glob !docs/audits/design_truth_refraction_audit.md --glob !docs/audits/file_by_file_truth_ledger.md --glob !docs/audits/obsolete_architecture_audit.md --glob !docs/audits/large_swift_file_discipline_audit.md --glob !docs/audits/stub_adapter_retirement_audit.md --glob !docs/audits/forbidden_language_audit.md Source\ unavailable|receipt\ before\ save|route\ reveal|runtime\-backed|fixture\-only|proof\ seam|Close\ Today|Motion\ Current|Capture\ Anything|blocked\-pending\-model|local\ projection|receipt\ path|review\ before\ reflow|No\ silent\ changes|Open\ seam|Re\-enter\ thread|best\ next\ move|next\ best\ move|Begin\ Focus|productivity\ score|life\ score|habit\ score|streak\ broken Native Sources AppUI docs prompts scripts tools Package.swift project.yml AGENTS.md README.md`
-- Hit count: 544
-- File count: 149
-- Raw output bytes: 71594
+- Hit count: 541
+- File count: 148
+- Raw output bytes: 71075
 - Raw log replaced with summary: False
 
 ## Sample Findings
@@ -104,7 +104,6 @@ Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tes
 | scripts/run-doc-qa.sh | best next move<br>next best move<br>productivity score | scripts | Codex governance | Green |
 | .agents/skills/ambitions-visual-product-quality/SKILL.md | next best move<br>Begin Focus | codex governance | Broad repo | Yellow |
 | Native/AmbitionsTests/DesignSystem/SemanticDesignTokenCatalogTests.swift | Motion Current<br>receipt path | tests | Broad repo | Test-only |
-| Native/AmbitionsUITests/AmbitionsUITests.swift | Motion Current<br>Re-enter thread | tests | Broad repo | Red |
 | Sources/Components/TopLevelSurfaceCompositionPrimitives.swift | Motion Current<br>Capture Anything | design system | Design system | Yellow |
 | Sources/Previews/SignatureInterfaceVisualQAFixtures.swift | Motion Current<br>life score | preview support | Design system | Red |
 | artifacts/release-recovery/IMPLEMENTATION_TRAIN_001.md | runtime-backed<br>Motion Current | supporting docs | Trust / release proof | Yellow |

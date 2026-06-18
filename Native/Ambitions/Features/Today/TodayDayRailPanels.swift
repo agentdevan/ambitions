@@ -416,8 +416,10 @@ struct AmbitionsDayRailView: View {
                 Text("Live now")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.accentWarm)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
             }
-            .frame(width: 42, alignment: .trailing)
+            .frame(width: 64, alignment: .trailing)
 
             ZStack {
                 Circle()

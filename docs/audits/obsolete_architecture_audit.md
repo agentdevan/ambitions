@@ -6,14 +6,14 @@ Scope: Findings are classification targets only; no files were deleted or migrat
 ## Search Summary
 
 - Command used: `rg -n -i --glob !docs/audits/design_truth_readback.md --glob !docs/audits/design_truth_refraction_audit.md --glob !docs/audits/file_by_file_truth_ledger.md --glob !docs/audits/obsolete_architecture_audit.md --glob !docs/audits/large_swift_file_discipline_audit.md --glob !docs/audits/stub_adapter_retirement_audit.md --glob !docs/audits/forbidden_language_audit.md RootTab|MainTab|TabRoot|RootTabView|MainTabView|AmbitionsTabView|TabShell|RootShell|Surfaces/Motion|MotionSurface|MotionView|MotionTab|MotionStageScene|MotionLens|MotionRoot|Surfaces/Capture|CaptureTab|CaptureRoot|CaptureDestination|CaptureScreenShellMode|topLevelCapture|captureInbox|openCapturesInbox Native Sources AppUI docs prompts scripts tools Package.swift project.yml AGENTS.md README.md`
-- Hit count: 257
-- File count: 63
-- Raw output bytes: 31630
+- Hit count: 260
+- File count: 64
+- Raw output bytes: 32061
 - Raw log replaced with summary: False
 
 ## Sample Findings
 
-- Native/Ambitions/App/AmbitionsRootView.swift:202:                case .captureInbox:
+- Native/Ambitions/App/AmbitionsRootView.swift:173:                case .captureInbox:
 - Native/Ambitions/App/AppBootstrapper.swift:221:        case .captureInbox, .none:
 - Native/Ambitions/App/AppBootstrapper.swift:223:                .openTimeRoute(.captureInbox),
 - Native/Ambitions/App/AppExternalRouting.swift:115:            objectKind: .rootTab,
@@ -69,7 +69,6 @@ Scope: Findings are classification targets only; no files were deleted or migrat
 | docs/truth/HISTORICAL_POLICY.md | obsolete canon | Historical policy says active IA includes Motion; PRODUCT_DESIGN_TRUTH wins with Today / Goals / Time / You. | delete | authority readback<br>forbidden language scan | Delete |
 | Native/Ambitions/Features/Capture/CaptureScreen.swift | preview-only | CaptureScreen still exposes topLevelCapture shell mode for compatibility/previews. | split | build<br>focused tests<br>forbidden language scan | Red |
 | Native/Ambitions/App/ShellCommandModels.swift | oversized | Motion-named shell command source remains as compatibility vocabulary for audit review. | split | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>large file audit | Red |
-| Native/Ambitions/App/AmbitionsRootView.swift | needs split | Root shell still uses technical TabView; native tab chrome is hidden but StageRoot guard is not yet formalized. | split | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>large file audit | Red |
 | Native/Ambitions/App/AppNavigation.swift | needs split | Capture inbox compatibility route remains and must be validated as overlay/global composer, not root destination. | split | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>large file audit | Red |
 | Native/Ambitions/Features/Motion/MotionCurrentAction.swift | obsolete architecture | Motion feature file remains outside Stage/Motion behavior ownership. | replace | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan | Red |
 | docs/audits/obsolete_architecture_audit.md | obsolete architecture | none | replace | architecture conformance scan<br>authority readback<br>forbidden language scan | Red |

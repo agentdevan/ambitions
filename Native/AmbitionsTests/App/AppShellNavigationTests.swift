@@ -132,67 +132,56 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertTrue(issues.contains { $0.contains("Primary object Reality Meridian is assigned to multiple top-level surfaces") })
     }
 
-    func testShellPresentationModeDefaultsToNativeFallbackWithMeridianOptIn() {
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(arguments: ["Ambitions"], environment: [:]),
-            .nativeFallback
-        )
-
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(
-                arguments: ["Ambitions", "--ambitions-shell=meridian"],
-                environment: [:]
-            ),
-            .meridian
-        )
+    func testStageSurfaceOwnershipRegistryLimitsRootToFourSurfaces() {
+        XCTAssertEqual(SurfaceOwnershipRegistry.validationIssues(), [])
+        XCTAssertEqual(SurfaceOwnershipRegistry.persistentSurfaceTabs, [.today, .goals, .time, .you])
+        XCTAssertEqual(SurfaceOwnershipRegistry.rootSurfaceTitles, ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(SurfaceOwnershipRegistry.rootSurfaceRawValues, ["today", "goals", "time", "you"])
+        XCTAssertFalse(SurfaceOwnershipRegistry.isPersistentRoot(rawValue: "capture"))
+        XCTAssertFalse(SurfaceOwnershipRegistry.isPersistentRoot(rawValue: "motion"))
     }
 
-    func testShellPresentationModeLaunchArgumentEnablesMeridian() {
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(
-                arguments: ["Ambitions", "--ambitions-shell=meridian"],
-                environment: [:]
-            ),
-            .meridian
-        )
-
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(
-                arguments: ["Ambitions", "--ambitions-shell", "meridian"],
-                environment: [:]
-            ),
-            .meridian
-        )
+    func testStageSurfaceOwnershipKeepsCaptureAndMotionOutOfRootChrome() {
+        XCTAssertEqual(SurfaceOwnershipRegistry.globalComposer.title, "Capture")
+        XCTAssertEqual(SurfaceOwnershipRegistry.globalComposer.layer, .globalComposer)
+        XCTAssertNil(SurfaceOwnershipRegistry.globalComposer.canonicalTab)
+        XCTAssertEqual(SurfaceOwnershipRegistry.globalComposer.routePolicy, "Overlay/global composer only")
+        XCTAssertEqual(SurfaceOwnershipRegistry.motionBehavior.title, "Motion")
+        XCTAssertEqual(SurfaceOwnershipRegistry.motionBehavior.layer, .motionBehavior)
+        XCTAssertNil(SurfaceOwnershipRegistry.motionBehavior.canonicalTab)
+        XCTAssertEqual(SurfaceOwnershipRegistry.motionBehavior.routePolicy, "Behavior layer only")
     }
 
-    func testShellPresentationModeLaunchArgumentCanRollbackToNativeFallback() {
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(
-                arguments: ["Ambitions", "--ambitions-shell=native"],
-                environment: ["AMBITIONS_SHELL_PRESENTATION": "meridian"]
-            ),
-            .nativeFallback
+    func testStagePathPolicyComputesRootDockAndOverlayClearance() {
+        let root = StagePathStore.chromePolicy(
+            routeDepth: .root,
+            overlayPresentation: .none,
+            dynamicTypeIsAccessibilitySize: false
         )
-    }
+        XCTAssertTrue(root.showsRootDock)
+        XCTAssertTrue(root.showsDockBackdrop)
+        XCTAssertEqual(root.dockClearance, 164)
+        XCTAssertEqual(root.stageContentBottomClearance, 164)
+        XCTAssertEqual(root.captureComposerClearance, 164)
 
-    func testShellPresentationModeEnvironmentEnablesMeridian() {
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(
-                arguments: ["Ambitions"],
-                environment: ["AMBITIONS_SHELL_PRESENTATION": "enabled"]
-            ),
-            .meridian
+        let capture = StagePathStore.chromePolicy(
+            routeDepth: .root,
+            overlayPresentation: .activatedCaptureComposer,
+            dynamicTypeIsAccessibilitySize: false
         )
-    }
+        XCTAssertFalse(capture.showsRootDock)
+        XCTAssertFalse(capture.showsDockBackdrop)
+        XCTAssertEqual(capture.stageContentBottomClearance, 0)
+        XCTAssertEqual(capture.captureComposerClearance, 18)
 
-    func testShellPresentationModeEnvironmentDefaultsToNativeFallbackWhenNotMeridian() {
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(
-                arguments: ["Ambitions"],
-                environment: ["AMBITIONS_SHELL_PRESENTATION": "nativeFallback"]
-            ),
-            .nativeFallback
+        let drilldown = StagePathStore.chromePolicy(
+            routeDepth: .drilldown,
+            overlayPresentation: .none,
+            dynamicTypeIsAccessibilitySize: true
         )
+        XCTAssertFalse(drilldown.showsRootDock)
+        XCTAssertEqual(drilldown.stageContentBottomClearance, 0)
+        XCTAssertEqual(drilldown.continuityReceiptBottomClearance, 40)
     }
 
     func testMeridianDestinationsMirrorCanonicalTabsWithoutNewRouteOwnership() {
@@ -224,7 +213,8 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertTrue(chrome.receiptOverlayZoneLabel.contains("temporary and dismissible"))
         XCTAssertTrue(chrome.globalActionLabel.contains("without changing tabs"))
         XCTAssertTrue(chrome.safeAreaLabel.contains("safe areas"))
-        XCTAssertTrue(chrome.rollbackLabel.contains("--ambitions-shell=native"))
+        XCTAssertTrue(chrome.rollbackLabel.contains("Train 3 Stage shell commit"))
+        XCTAssertFalse(chrome.rollbackLabel.contains("--ambitions-shell"))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("dashboard"))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("AI confidence"))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("sixth"))
@@ -236,7 +226,7 @@ final class AppShellNavigationTests: XCTestCase {
             let navigation = AppNavigationModel(selectedTab: .today)
             navigation.presentMemoryLens(source: .shellUtility)
 
-            navigation.selectTab(destination.tab)
+            navigation.selectRootSurfaceFromDock(destination.tab)
 
             XCTAssertEqual(navigation.selectedTab, destination.tab)
             XCTAssertNil(navigation.activeOverlay)
@@ -247,26 +237,21 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testShellPresentationRollbackDoesNotMutateExistingRouteState() {
+    func testStageDockReselectionReturnsCurrentSurfaceToRoot() {
         let navigation = AppNavigationModel(selectedTab: .goals)
         navigation.openGoalDetail(goalID: "goal-shell-rollback")
 
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(
-                arguments: ["Ambitions", "--ambitions-shell=meridian"],
-                environment: [:]
-            ),
-            .meridian
-        )
-        XCTAssertEqual(
-            AppShellPresentationMode.resolved(
-                arguments: ["Ambitions", "--ambitions-shell=native"],
-                environment: [:]
-            ),
-            .nativeFallback
-        )
+        XCTAssertEqual(navigation.stageRouteDepth, .drilldown)
         XCTAssertEqual(navigation.selectedTab, .goals)
         XCTAssertEqual(navigation.goalsPath.first?.goalID, "goal-shell-rollback")
+
+        let firstReselection = navigation.selectRootSurfaceFromDock(.goals, now: Date(timeIntervalSince1970: 10))
+        let secondReselection = navigation.selectRootSurfaceFromDock(.goals, now: Date(timeIntervalSince1970: 10.4))
+
+        XCTAssertEqual(firstReselection, .scrollToTop)
+        XCTAssertEqual(secondReselection, .returnToRoot)
+        XCTAssertEqual(navigation.stageRouteDepth, .root)
+        XCTAssertTrue(navigation.goalsPath.isEmpty)
     }
 
     @MainActor

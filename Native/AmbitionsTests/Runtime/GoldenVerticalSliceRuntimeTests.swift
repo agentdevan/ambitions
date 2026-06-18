@@ -804,13 +804,15 @@ private extension GoldenVerticalSliceRuntimeTests {
             consequenceRecord.runtimeCoreSegment.sourceRecordIDs +
             safetyRecord.receipt.sourceRecordIDs +
             completionProof.sourceRecordIDs
-        let receiptIDs = background.receiptIDs +
-            intake.receiptIDs +
-            [latticeRecord.selectionReceipt?.id].compactMap { $0 } +
-            (scheduleRecord.installReceipt?.receiptIDs ?? []) +
-            consequenceRecord.runtimeCoreSegment.receiptIDs +
-            [safetyRecord.receipt.id] +
-            completionProof.receiptIDs
+        var receiptIDs = background.receiptIDs
+        receiptIDs.append(contentsOf: intake.receiptIDs)
+        if let latticeReceiptID = latticeRecord.selectionReceipt?.id {
+            receiptIDs.append(latticeReceiptID)
+        }
+        receiptIDs.append(contentsOf: scheduleRecord.installReceipt?.receiptIDs ?? [])
+        receiptIDs.append(contentsOf: consequenceRecord.runtimeCoreSegment.receiptIDs)
+        receiptIDs.append(safetyRecord.receipt.id)
+        receiptIDs.append(contentsOf: completionProof.receiptIDs)
         let replayTraceIDs = [
             background.replayTraceID,
             intake.replayTraceID,

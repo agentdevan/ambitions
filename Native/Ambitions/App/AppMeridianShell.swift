@@ -128,6 +128,7 @@ struct AppMeridianDestinationRail: View {
         .accessibilityLabel(destination.title)
         .accessibilityValue(isSelected ? "Selected" : "Not selected")
         .accessibilityHint("Opens \(destination.title).")
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
         .accessibilityIdentifier(destination.accessibilityIdentifier)
     }
 }

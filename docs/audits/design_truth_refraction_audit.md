@@ -2,22 +2,21 @@
 
 Status: Yellow
 Branch: `main`
-Commit: `4eaec0e250332b30737a1b23dc7d0adcac5e05fe`
+Commit: `3b2e98bb09392b610c930723136eb1ea71c2f9aa`
 Scope: Train 0/1 only: canon readback, file inventory, classification, and audit artifacts. No product UI rebuild, file deletion, aesthetic replacement, Train 2 guard implementation, screenshot proof, accessibility proof, mutation proof, privacy proof, or release proof is claimed.
 
 ## Inventory Summary
 
-- Git-tracked files classified: 2309
-- Swift files classified: 836
-- Markdown files classified: 476
-- Status counts: Delete=5, Green=1680, Red=122, Split=114, Test-only=262, Yellow=126
+- Git-tracked files classified: 2314
+- Swift files classified: 837
+- Markdown files classified: 479
+- Status counts: Delete=5, Green=1685, Red=121, Split=115, Test-only=262, Yellow=126
 - Raw search logs over 25 MB are replaced with hit counts, samples, command lines, and top file summaries.
 
 ## Top 20 Red Files
 
 | File | Lines | Classification | Primary issue | Status |
 | --- | --- | --- | --- | --- |
-| Native/AmbitionsUITests/AmbitionsUITests.swift | 2435 | test-only | none | Red |
 | docs/truth/PRODUCT_DESIGN_TRUTH.md | 3462 | obsolete architecture | none | Red |
 | Native/Ambitions/Domain/ActionClosureReceiptModels.swift | 2421 | needs hardening | none | Red |
 | Native/Ambitions/Domain/SourceAtlasPackModels.swift | 3030 | oversized | none | Red |
@@ -30,6 +29,7 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 | Native/Ambitions/Features/You/YouScreen.swift | 3515 | preview-only | none | Red |
 | Native/Ambitions/Persistence/SwiftDataRepositories.swift | 3002 | needs hardening | none | Red |
 | Native/AmbitionsTests/You/YouFeatureServiceTests.swift | 2485 | test-only | none | Red |
+| Native/AmbitionsUITests/AmbitionsUITests.swift | 2344 | test-only | none | Red |
 | Native/Ambitions/Features/Time/TimeScreen.swift | 1992 | preview-only | none | Red |
 | Native/Ambitions/App/AppShellView.swift | 1944 | oversized | none | Red |
 | Native/Ambitions/Domain/GoalEngine/StepCandidateFieldModels.swift | 1836 | oversized | none | Red |
@@ -50,9 +50,9 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 | Native/Ambitions/Features/Today/TodayFeatureService.swift | 2495 | Surface file owned by Today. | replace | Red |
 | Native/AmbitionsTests/You/YouFeatureServiceTests.swift | 2485 | Tests for You / YouFeatureServiceTests.swift. | split | Red |
 | Native/Ambitions/Features/Time/TimeFeatureService.swift | 2450 | Surface file owned by Time. | split | Red |
-| Native/AmbitionsUITests/AmbitionsUITests.swift | 2435 | Tests for Broad repo / AmbitionsUITests.swift. | split | Red |
 | Native/Ambitions/Features/Goals/GoalComponents.swift | 2427 | Surface file owned by Goals. | split | Red |
 | Native/Ambitions/Domain/ActionClosureReceiptModels.swift | 2421 | Core Domain file owned by Trust / release proof. | split | Red |
+| Native/AmbitionsUITests/AmbitionsUITests.swift | 2344 | Tests for Broad repo / AmbitionsUITests.swift. | split | Red |
 | Native/Ambitions/Features/Goals/GoalsFeatureModels.swift | 2276 | Surface file owned by Goals. | split | Red |
 | Native/Ambitions/Features/Time/TimeScreen.swift | 1992 | Surface file owned by Time. | split | Red |
 | Native/Ambitions/App/AppShellView.swift | 1944 | App file owned by Stage shell. | split | Red |
@@ -98,7 +98,6 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 | docs/truth/HISTORICAL_POLICY.md | obsolete canon | Historical policy says active IA includes Motion; PRODUCT_DESIGN_TRUTH wins with Today / Goals / Time / You. | Delete |
 | Native/Ambitions/Features/Capture/CaptureScreen.swift | preview-only | CaptureScreen still exposes topLevelCapture shell mode for compatibility/previews. | Red |
 | Native/Ambitions/App/ShellCommandModels.swift | oversized | Motion-named shell command source remains as compatibility vocabulary for audit review. | Red |
-| Native/Ambitions/App/AmbitionsRootView.swift | needs split | Root shell still uses technical TabView; native tab chrome is hidden but StageRoot guard is not yet formalized. | Red |
 | Native/Ambitions/App/AppNavigation.swift | needs split | Capture inbox compatibility route remains and must be validated as overlay/global composer, not root destination. | Red |
 | Native/Ambitions/Features/Motion/MotionCurrentAction.swift | obsolete architecture | Motion feature file remains outside Stage/Motion behavior ownership. | Red |
 | docs/audits/obsolete_architecture_audit.md | obsolete architecture | none | Red |
@@ -118,9 +117,9 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 
 - `git ls-files` inventory for all tracked files.
 - `wc -l` line counts for all tracked files.
-- Targeted architecture scan: `obsolete architecture` with 257 hits in 63 files.
-- Targeted stub/adapter scan: `stub and adapter` with 2206 hits in 455 files.
-- Targeted forbidden-language scan: `forbidden language` with 544 hits in 149 files.
+- Targeted architecture scan: `obsolete architecture` with 260 hits in 64 files.
+- Targeted stub/adapter scan: `stub and adapter` with 2208 hits in 455 files.
+- Targeted forbidden-language scan: `forbidden language` with 541 hits in 148 files.
 
 ## Validation Not Run / Not Claimed In This Artifact
 

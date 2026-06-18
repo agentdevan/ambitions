@@ -37,20 +37,16 @@ final class ExternalRoutingTests: XCTestCase {
     }
 
     @MainActor
-    func testShellPresentationModesShareCanonicalRouteDispatch() {
-        let modes: [AppShellPresentationMode] = [.nativeFallback, .meridian]
+    func testStageShellSharesCanonicalRouteDispatch() {
+        for tab in AppTab.allCases {
+            let navigation = AppNavigationModel(selectedTab: .today)
+            let router = DefaultAppExternalRouter(navigation: navigation)
 
-        for mode in modes {
-            for tab in AppTab.allCases {
-                let navigation = AppNavigationModel(selectedTab: .today)
-                let router = DefaultAppExternalRouter(navigation: navigation)
+            router.dispatch(.openTab(tab), source: .deepLink)
 
-                router.dispatch(.openTab(tab), source: .deepLink)
-
-                XCTAssertEqual(navigation.selectedTab, tab, "Mode \(mode.rawValue) should dispatch \(tab.rawValue)")
-                XCTAssertEqual(navigation.lastExternalRoute, .openTab(tab))
-                XCTAssertEqual(navigation.lastExternalRouteSource, .deepLink)
-            }
+            XCTAssertEqual(navigation.selectedTab, tab, "Stage shell should dispatch \(tab.rawValue)")
+            XCTAssertEqual(navigation.lastExternalRoute, .openTab(tab))
+            XCTAssertEqual(navigation.lastExternalRouteSource, .deepLink)
         }
     }
 
@@ -69,20 +65,16 @@ final class ExternalRoutingTests: XCTestCase {
     }
 
     @MainActor
-    func testFallbackAndMeridianRouteCompatibilityForLegacyTabs() {
-        let modes: [AppShellPresentationMode] = [.nativeFallback, .meridian]
+    func testStageRouteCompatibilityForLegacyTabs() {
+        let habitsNavigation = AppNavigationModel(selectedTab: .today)
+        DefaultAppExternalRouter(navigation: habitsNavigation).dispatch(.openTimeRoute(.habits), source: .widgetAction)
+        XCTAssertEqual(habitsNavigation.selectedTab, .time, "Stage shell should keep habits under Time")
+        XCTAssertEqual(habitsNavigation.timePath, [.habits])
 
-        for mode in modes {
-            let habitsNavigation = AppNavigationModel(selectedTab: .today)
-            DefaultAppExternalRouter(navigation: habitsNavigation).dispatch(.openTimeRoute(.habits), source: .widgetAction)
-            XCTAssertEqual(habitsNavigation.selectedTab, .time, "Mode \(mode.rawValue) should keep habits under Time")
-            XCTAssertEqual(habitsNavigation.timePath, [.habits])
-
-            let insightsNavigation = AppNavigationModel(selectedTab: .today)
-            DefaultAppExternalRouter(navigation: insightsNavigation).dispatch(.openYouRoute(.history), source: .appIntent)
-            XCTAssertEqual(insightsNavigation.selectedTab, .you, "Mode \(mode.rawValue) should keep insights under You")
-            XCTAssertEqual(insightsNavigation.youPath, [.history])
-        }
+        let insightsNavigation = AppNavigationModel(selectedTab: .today)
+        DefaultAppExternalRouter(navigation: insightsNavigation).dispatch(.openYouRoute(.history), source: .appIntent)
+        XCTAssertEqual(insightsNavigation.selectedTab, .you, "Stage shell should keep insights under You")
+        XCTAssertEqual(insightsNavigation.youPath, [.history])
     }
 
     func testDeepLinkTranslatorParsesCanonicalTimeTabRoute() throws {

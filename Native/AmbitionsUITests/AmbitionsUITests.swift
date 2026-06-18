@@ -11,8 +11,8 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertFalse(app.descendants(matching: .any)["onboarding.screen"].waitForExistence(timeout: 2))
-        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["Goals"].tap()
+        XCTAssertTrue(waitForRootDestination("Goals", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("Goals", in: app))
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
@@ -118,8 +118,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["Goals"].tap()
+        XCTAssertTrue(waitForRootDestination("Goals", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("Goals", in: app))
 
         let createButton = goalCreateButton(in: app)
         XCTAssertTrue(createButton.waitForExistence(timeout: 10))
@@ -146,38 +146,31 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         for tab in ["Today", "Goals", "Time", "You"] {
-            XCTAssertTrue(app.tabBars.buttons[tab].waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
-            XCTAssertTrue(app.tabBars.buttons[tab].isHittable, "Top-level tab \(tab) is not hittable")
+            let destination = rootDestinationButton(tab, in: app)
+            XCTAssertTrue(destination.waitForExistence(timeout: 10), "Missing top-level surface \(tab)")
+            XCTAssertTrue(destination.isHittable, "Top-level surface \(tab) is not hittable")
         }
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Motion"].exists)
-        XCTAssertFalse(app.tabBars.buttons["More"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Insights"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Profile"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Habits"].exists)
-        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
-        XCTAssertTrue(app.descendants(matching: .any)["shell.header.rail"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["shell.header.context-crown"].waitForExistence(timeout: 10))
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
+        XCTAssertFalse(rootDestinationExists("Motion", in: app))
+        XCTAssertFalse(rootDestinationExists("More", in: app))
+        XCTAssertFalse(rootDestinationExists("Insights", in: app))
+        XCTAssertFalse(rootDestinationExists("Profile", in: app))
+        XCTAssertFalse(rootDestinationExists("Habits", in: app))
+        XCTAssertTrue(waitForSelectedSurface("Today", in: app, timeout: 10))
+        XCTAssertTrue(waitForShellReady(in: app))
         XCTAssertFalse(app.descendants(matching: .any)["shell.continuity-ribbon"].waitForExistence(timeout: 1))
         XCTAssertTrue(app.buttons["shell.today.capture-button"].waitForExistence(timeout: 10))
         XCTAssertFalse(app.buttons["shell.today.memory-lens-button"].waitForExistence(timeout: 1))
 
-        XCTAssertTrue(openCanonicalDestination("Time", screenIdentifier: "time.screen", in: app))
-        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.reflow-trust-seam"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["time.life-shape-field.reflow.decline"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["time.life-shape-field.reflow.edit"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.buttons["time.life-shape-field.reflow.accept"].waitForExistence(timeout: 10))
-
-        XCTAssertTrue(openCanonicalDestination("You", screenIdentifier: "you.screen", in: app))
-        XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
-        XCTAssertTrue(youRow(named: "Schedule & Availability", in: app).waitForExistence(timeout: 10))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "Receipts & History", in: app, maxAttempts: 6))
-        XCTAssertTrue(scrollUntilYouRowExists(named: "History", in: app, maxAttempts: 6))
-
-        XCTAssertTrue(openCanonicalDestination("Goals", screenIdentifier: "goals.screen", in: app))
-        XCTAssertFalse(app.buttons["shell.goals.create-button"].waitForExistence(timeout: 1))
-        XCTAssertTrue(app.buttons["shell.goals.capture-button"].waitForExistence(timeout: 10))
+        for tab in ["Time", "You", "Goals"] {
+            XCTAssertTrue(openCanonicalDestination(tab, screenIdentifier: screenIdentifier(forTab: tab), in: app))
+            XCTAssertTrue(waitForSelectedSurface(tab, in: app, timeout: 10))
+            for rootTab in ["Today", "Goals", "Time", "You"] {
+                XCTAssertTrue(rootDestinationExists(rootTab, in: app), "Root dock should stay visible on \(tab) root surface.")
+            }
+            XCTAssertFalse(rootDestinationExists("Capture", in: app))
+            XCTAssertFalse(rootDestinationExists("Motion", in: app))
+        }
     }
 
     func testUIQL002ShellGeometryKeepsChromeInsideSafeAreasAndDockHittable() throws {
@@ -188,57 +181,55 @@ final class AmbitionsUITests: XCTestCase {
         let window = app.windows.firstMatch
         XCTAssertTrue(window.waitForExistence(timeout: 10))
 
-        let header = app.descendants(matching: .any)["shell.header.rail"]
-        XCTAssertTrue(header.waitForExistence(timeout: 10))
-        XCTAssertLessThanOrEqual(header.frame.maxY, window.frame.maxY, "Shell header rail must not extend below the app window.")
-        let crown = app.descendants(matching: .any)["shell.header.context-crown"]
-        XCTAssertTrue(crown.waitForExistence(timeout: 10))
-        XCTAssertLessThanOrEqual(crown.frame.maxY, window.frame.maxY, "Shell header context crown must not extend below the app window.")
         var visibleDockFrame = CGRect.null
         for tab in ["Today", "Goals", "Time", "You"] {
-            let identifiedElement = app.descendants(matching: .any)["shell.meridian.destination.\(tab.lowercased())"]
-            let element = identifiedElement.waitForExistence(timeout: 2) ? identifiedElement : app.buttons[tab]
-            XCTAssertTrue(element.waitForExistence(timeout: 10), "Missing top-level tab \(tab)")
+            let element = rootDestinationButton(tab, in: app)
+            XCTAssertTrue(element.waitForExistence(timeout: 10), "Missing top-level surface \(tab)")
             assertFrame(element.frame, isInside: window.frame, named: "\(tab) dock button")
             visibleDockFrame = visibleDockFrame.isNull ? element.frame : visibleDockFrame.union(element.frame)
-            XCTAssertGreaterThanOrEqual(element.frame.width, 44, "\(tab) tab button is narrower than the minimum hit target.")
-            XCTAssertGreaterThanOrEqual(element.frame.height, 44, "\(tab) tab button is shorter than the minimum hit target.")
+            XCTAssertGreaterThanOrEqual(element.frame.width, 44, "\(tab) dock button is narrower than the minimum hit target.")
+            XCTAssertGreaterThanOrEqual(element.frame.height, 44, "\(tab) dock button is shorter than the minimum hit target.")
         }
         XCTAssertFalse(visibleDockFrame.isNull, "The visible shell dock must expose top-level destination buttons.")
-        XCTAssertGreaterThan(visibleDockFrame.minY, header.frame.maxY, "The visible shell dock must remain below the shell header.")
+        XCTAssertGreaterThan(visibleDockFrame.minY, window.frame.midY, "The visible shell dock must remain in the lower root chrome zone.")
         XCTAssertLessThanOrEqual(visibleDockFrame.maxY, window.frame.maxY, "The visible shell dock must remain inside the app window.")
 
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Plan"].exists)
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
+        XCTAssertFalse(rootDestinationExists("Pulse", in: app))
+        XCTAssertFalse(rootDestinationExists("Plan", in: app))
     }
 
-    func testUIQL002ActivatedCaptureSeamStaysAboveNativeDockAfterKeyboardDismissal() throws {
+    func testUIQL002GoalDetailDrilldownHidesRootDock() throws {
+        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://goal/goal-native")
+        app.launch()
+
+        XCTAssertTrue(app.descendants(matching: .any)["goal-detail.screen"].waitForExistence(timeout: 10))
+        for tab in ["Today", "Goals", "Time", "You"] {
+            XCTAssertFalse(rootDestinationExists(tab, in: app), "Focused drilldown should hide root dock destination \(tab).")
+        }
+    }
+
+    func testUIQL002ActivatedCaptureSeamUsesOverlayKeyboardClearanceWithoutRootDock() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
         let seam = app.descendants(matching: .any)["shell.activated-capture-seam"]
         XCTAssertTrue(seam.waitForExistence(timeout: 10))
         dismissKeyboardIfNeeded(in: app)
 
         let window = app.windows.firstMatch
         XCTAssertTrue(window.waitForExistence(timeout: 10))
-        var visibleDockFrame = CGRect.null
         for tab in ["Today", "Goals", "Time", "You"] {
-            let identifiedElement = app.descendants(matching: .any)["shell.meridian.destination.\(tab.lowercased())"]
-            let element = identifiedElement.waitForExistence(timeout: 2) ? identifiedElement : app.buttons[tab]
-            XCTAssertTrue(element.waitForExistence(timeout: 10), "Missing visible dock destination \(tab)")
-            visibleDockFrame = visibleDockFrame.isNull ? element.frame : visibleDockFrame.union(element.frame)
+            XCTAssertFalse(rootDestinationExists(tab, in: app), "Activated Capture should own foreground chrome instead of showing \(tab).")
         }
-        XCTAssertFalse(visibleDockFrame.isNull, "The visible shell dock must expose top-level destination buttons.")
 
         assertFrame(seam.frame, isInside: window.frame, named: "activated Capture seam")
         XCTAssertLessThanOrEqual(
             seam.frame.maxY,
-            visibleDockFrame.minY,
-            "Activated Capture seam must not cover the visible shell dock after keyboard dismissal."
+            window.frame.maxY - 18,
+            "Activated Capture seam must keep the shell policy's keyboard-safe lower clearance after keyboard dismissal."
         )
         XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
         XCTAssertTrue(app.buttons["shell.activated-capture.save-button"].waitForExistence(timeout: 10))
@@ -261,7 +252,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Appearance", in: app, maxAttempts: 8))
         let appearanceRow = youRow(named: "Appearance", in: app)
         XCTAssertTrue(appearanceRow.isHittable)
@@ -277,7 +268,7 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Session Defaults", in: app, maxAttempts: 8))
         let profileRow = youRow(named: "Session Defaults", in: app)
         profileRow.tap()
@@ -291,8 +282,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
 
@@ -314,8 +305,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts["Planning defaults"].waitForExistence(timeout: 10))
 
@@ -485,8 +476,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
         XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
 
@@ -512,8 +503,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
         XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
 
@@ -536,8 +527,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["You"].tap()
+        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("You", in: app))
         XCTAssertTrue(scrollUntilYouRowExists(named: "Local Context Controls", in: app, maxAttempts: 8))
         XCTAssertTrue(tapYouRow(named: "Local Context Controls", in: app, maxAttempts: 10))
 
@@ -560,8 +551,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/plan")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["Time"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["Time"].isSelected)
+        XCTAssertTrue(waitForRootDestination("Time", in: app, timeout: 10))
+        XCTAssertTrue(waitForSelectedSurface("Time", in: app, timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
@@ -571,16 +562,16 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(waitForShellReady(in: hiddenApp))
         XCTAssertFalse(hiddenApp.descendants(matching: .any)["shell.activated-capture-seam"].exists)
-        XCTAssertFalse(hiddenApp.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(rootDestinationExists("Capture", in: hiddenApp))
         hiddenApp.terminate()
 
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
-        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
+        XCTAssertFalse(rootDestinationExists("Pulse", in: app))
+        XCTAssertFalse(rootDestinationExists("Today", in: app))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture-seam"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.activated"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.keyboard"].waitForExistence(timeout: 10))
@@ -617,7 +608,7 @@ final class AmbitionsUITests: XCTestCase {
         save.tap()
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.state.captured-locally"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["shell.activated-capture.status"].waitForExistence(timeout: 10))
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
         app.terminate()
 
         let largeTextApp = makeApp(
@@ -628,9 +619,9 @@ final class AmbitionsUITests: XCTestCase {
         largeTextApp.launch()
 
         XCTAssertTrue(waitForShellReady(in: largeTextApp))
-        XCTAssertFalse(largeTextApp.tabBars.buttons["Capture"].exists)
-        XCTAssertFalse(largeTextApp.tabBars.buttons["Pulse"].exists)
-        XCTAssertTrue(largeTextApp.tabBars.buttons["Today"].isSelected)
+        XCTAssertFalse(rootDestinationExists("Capture", in: largeTextApp))
+        XCTAssertFalse(rootDestinationExists("Pulse", in: largeTextApp))
+        XCTAssertFalse(rootDestinationExists("Today", in: largeTextApp))
 
         XCTAssertTrue(largeTextApp.descendants(matching: .any)["shell.activated-capture-seam"].waitForExistence(timeout: 10))
         let largeInput = shellCaptureInput(in: largeTextApp)
@@ -649,7 +640,7 @@ final class AmbitionsUITests: XCTestCase {
         let activatedApp = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
         activatedApp.launch()
         XCTAssertTrue(waitForShellReady(in: activatedApp))
-        XCTAssertFalse(activatedApp.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(rootDestinationExists("Capture", in: activatedApp))
         XCTAssertTrue(activatedApp.descendants(matching: .any)["shell.activated-capture-seam"].waitForExistence(timeout: 10))
         XCTAssertFalse(activatedApp.descendants(matching: .any)["shell.activated-capture.route-reveal"].exists)
         captureAMB967Screenshot(named: "amb-967-capture-activated", in: activatedApp)
@@ -704,7 +695,7 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
         let commandButton = shellCommandButton(in: app)
         XCTAssertTrue(commandButton.waitForExistence(timeout: 10))
         commandButton.tap()
@@ -720,8 +711,8 @@ final class AmbitionsUITests: XCTestCase {
         dismissKeyboardIfNeeded(in: app)
 
         XCTAssertTrue(app.buttons["shell.command.submit-capture-button"].waitForExistence(timeout: 10))
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
+        XCTAssertFalse(rootDestinationExists("Pulse", in: app))
     }
 
     func testShellCommandSheetCanOpenAndNavigateToTime() throws {
@@ -736,8 +727,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.buttons["shell.command.action.open_week"].waitForExistence(timeout: 10))
         app.buttons["shell.command.action.open_week"].tap()
 
-        XCTAssertTrue(app.tabBars.buttons["Time"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["Time"].isSelected)
+        XCTAssertTrue(waitForRootDestination("Time", in: app, timeout: 10))
+        XCTAssertTrue(waitForSelectedSurface("Time", in: app, timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
@@ -765,8 +756,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(submit.waitForExistence(timeout: 10))
         submit.tap()
 
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
-        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
+        XCTAssertTrue(waitForSelectedSurface("Today", in: app, timeout: 10))
         XCTAssertTrue(app.staticTexts["Saved as Idea"].waitForExistence(timeout: 10))
     }
 
@@ -796,7 +787,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(submitButton.waitForExistence(timeout: 10))
         submitButton.tap()
 
-        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
+        XCTAssertTrue(waitForRootDestination("Goals", in: app, timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["goals.creation-message"].waitForExistence(timeout: 30) || scrollUntilStaticTextExists(shellGoalTitle, in: app, maxAttempts: 12))
     }
@@ -806,8 +797,8 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["Goals"].tap()
+        XCTAssertTrue(waitForRootDestination("Goals", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("Goals", in: app))
 
         XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 10))
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
@@ -905,8 +896,8 @@ final class AmbitionsUITests: XCTestCase {
 
             if item.bootstrap == "demo" {
                 XCTAssertTrue(waitForShellReady(in: app), "Shell should be ready for \(item.name).")
-                XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10), "Goals tab should exist for \(item.name).")
-                app.tabBars.buttons["Goals"].tap()
+                XCTAssertTrue(waitForRootDestination("Goals", in: app, timeout: 10), "Goals surface should exist for \(item.name).")
+                XCTAssertTrue(tapCanonicalDestination("Goals", in: app))
                 if item.contentSizeCategory.contains("Accessibility") {
                     XCTAssertTrue(app.descendants(matching: .any)["goals.screen"].waitForExistence(timeout: 20), "Goals screen should render for \(item.name).")
                 } else {
@@ -940,8 +931,8 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["Goals"].tap()
+        XCTAssertTrue(waitForRootDestination("Goals", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("Goals", in: app))
 
         XCTAssertTrue(waitForGoalsPrimaryObject(in: app))
         tapGoalsHeroPrimaryAction(in: app)
@@ -965,8 +956,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/insights")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["You"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["You"].isSelected)
+        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
+        XCTAssertTrue(waitForSelectedSurface("You", in: app, timeout: 10))
         XCTAssertTrue(app.descendants(matching: .any)["insights.history.screen"].waitForExistence(timeout: 10))
     }
 
@@ -1006,8 +997,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(result.waitForExistence(timeout: 10))
         result.tap()
 
-        XCTAssertTrue(app.tabBars.buttons["Time"].waitForExistence(timeout: 10))
-        XCTAssertTrue(app.tabBars.buttons["Time"].isSelected)
+        XCTAssertTrue(waitForRootDestination("Time", in: app, timeout: 10))
+        XCTAssertTrue(waitForSelectedSurface("Time", in: app, timeout: 10))
     }
 
     func testTodaySurfaceShowsDominantHeroAndPrimaryAction() throws {
@@ -1039,10 +1030,8 @@ final class AmbitionsUITests: XCTestCase {
         let window = app.windows.firstMatch
         XCTAssertTrue(window.waitForExistence(timeout: 10))
 
-        let tabBar = app.tabBars.firstMatch
-        _ = tabBar.waitForExistence(timeout: 2)
-
-        let firstViewportMaxY = tabBar.exists ? tabBar.frame.minY : window.frame.maxY
+        let dockFrame = rootDockFrame(in: app)
+        let firstViewportMaxY = dockFrame.isNull ? window.frame.maxY : dockFrame.minY
         let requiredVisibleObjects = [
             app.staticTexts["Start here"],
             app.staticTexts["On-device"],
@@ -1190,8 +1179,8 @@ final class AmbitionsUITests: XCTestCase {
         let app = makeApp(bootstrapMode: "preview")
         app.launch()
 
-        XCTAssertTrue(app.tabBars.buttons["Goals"].waitForExistence(timeout: 10))
-        app.tabBars.buttons["Goals"].tap()
+        XCTAssertTrue(waitForRootDestination("Goals", in: app, timeout: 10))
+        XCTAssertTrue(tapCanonicalDestination("Goals", in: app))
 
         let createButton = goalCreateButton(in: app)
         XCTAssertTrue(createButton.waitForExistence(timeout: 10))
@@ -1216,9 +1205,9 @@ final class AmbitionsUITests: XCTestCase {
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
-        XCTAssertFalse(app.tabBars.buttons["Capture"].exists)
-        XCTAssertFalse(app.tabBars.buttons["Pulse"].exists)
-        XCTAssertTrue(app.tabBars.buttons["Today"].isSelected)
+        XCTAssertFalse(rootDestinationExists("Capture", in: app))
+        XCTAssertFalse(rootDestinationExists("Pulse", in: app))
+        XCTAssertFalse(rootDestinationExists("Today", in: app))
         XCTAssertTrue(shellCaptureInput(in: app).waitForExistence(timeout: 10))
     }
 
@@ -1301,132 +1290,19 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
-    func testAMB965MotionReconstructionScreenshotMatrix() throws {
-        struct MotionMatrixItem {
-            let name: String
-            let renderState: String?
-            let contentSizeCategory: String
-            let requiredIdentifiers: [String]
-            let requiredTexts: [String]
-            let scrollTargetIdentifier: String?
-        }
+    func testLegacyMotionRouteDoesNotCreateRootDestination() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/motion",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
 
-        let matrix: [MotionMatrixItem] = [
-            MotionMatrixItem(
-                name: "default",
-                renderState: nil,
-                contentSizeCategory: "UICTContentSizeCategoryM",
-                requiredIdentifiers: [
-                    "motion.current.field",
-                    "motion.current.fact.source",
-                    "motion.current.fact.proof",
-                    "motion.current.fact.receipt",
-                    "motion.current.action.reenter-thread"
-                ],
-                requiredTexts: ["Motion Current", "Proof available", "Inspect proof", "Re-enter thread"],
-                scrollTargetIdentifier: nil
-            ),
-            MotionMatrixItem(
-                name: "empty",
-                renderState: "empty",
-                contentSizeCategory: "UICTContentSizeCategoryM",
-                requiredIdentifiers: [
-                    "motion.current.field",
-                    "motion.current.action.inspect-proof"
-                ],
-                requiredTexts: ["No proof yet", "Empty proof state", "Open receipt"],
-                scrollTargetIdentifier: nil
-            ),
-            MotionMatrixItem(
-                name: "proof-recovery-reentry",
-                renderState: "reentry",
-                contentSizeCategory: "UICTContentSizeCategoryM",
-                requiredIdentifiers: [
-                    "motion.current.action.reenter-thread",
-                    "motion.current.rhythm-spine"
-                ],
-                requiredTexts: ["Re-entry available", "Last honest point", "Start again"],
-                scrollTargetIdentifier: nil
-            ),
-            MotionMatrixItem(
-                name: "receipt-dock-clearance",
-                renderState: "recovery",
-                contentSizeCategory: "UICTContentSizeCategoryM",
-                requiredIdentifiers: [
-                    "motion.current.source-proof-receipt",
-                    "motion.current.continuity-dock"
-                ],
-                requiredTexts: ["Recovery active", "Why this?", "Open Trust"],
-                scrollTargetIdentifier: "motion.current.continuity-dock"
-            ),
-            MotionMatrixItem(
-                name: "large-dynamic-type",
-                renderState: "proof",
-                contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL",
-                requiredIdentifiers: [
-                    "motion.current.field",
-                    "motion.current.action-strip"
-                ],
-                requiredTexts: ["Proof available", "Closure source", "Re-enter thread"],
-                scrollTargetIdentifier: nil
-            )
-        ]
-
-        for item in matrix {
-            var environment = [
-                "AmbitionsScreenshotMode": "YES"
-            ]
-            if let renderState = item.renderState {
-                environment["AmbitionsMotionRenderState"] = renderState
-            }
-
-            let app = makeApp(
-                bootstrapMode: "demo",
-                launchURL: "ambitions://tab/motion",
-                extraEnvironment: environment,
-                contentSizeCategory: item.contentSizeCategory
-            )
-            app.launch()
-
-            XCTAssertTrue(waitForSelectedTab("Motion", in: app), "Motion should be selected for \(item.name).")
-            dismissContinuityReceiptIfPresent(in: app)
-            XCTAssertTrue(app.descendants(matching: .any)["motion.current.screen"].waitForExistence(timeout: 20), "Motion screen should exist for \(item.name).")
-            XCTAssertTrue(app.descendants(matching: .any)["motion.current.field"].waitForExistence(timeout: 10), "Motion Current field should exist for \(item.name).")
-
-            for identifier in item.requiredIdentifiers {
-                XCTAssertTrue(
-                    scrollUntilElementExists(identifier, in: app, maxAttempts: 10),
-                    "\(identifier) should exist for \(item.name)."
-                )
-            }
-
-            for text in item.requiredTexts {
-                XCTAssertTrue(
-                    scrollUntilStaticTextExists(text, in: app, maxAttempts: 10),
-                    "Missing required AMB-965 copy '\(text)' in \(item.name)."
-                )
-            }
-
-            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "analytics")).firstMatch.exists, "Motion must not read as analytics for \(item.name).")
-            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "dashboard")).firstMatch.exists, "Motion must not read as a dashboard for \(item.name).")
-            XCTAssertTrue(app.tabBars.element.waitForExistence(timeout: 5), "Motion bottom dock should remain visible for \(item.name).")
-
-            if let scrollTargetIdentifier = item.scrollTargetIdentifier {
-                XCTAssertTrue(
-                    scrollMotionContentToVisible(identifier: scrollTargetIdentifier, in: app),
-                    "\(scrollTargetIdentifier) should be visible for \(item.name)."
-                )
-            }
-            if item.name == "large-dynamic-type" {
-                XCTAssertTrue(
-                    scrollMotionContentToVisible(identifier: "motion.current.action-strip", in: app),
-                    "Motion action strip should be visible for large Dynamic Type."
-                )
-            }
-
-            captureMotionScreenshot(named: "amb-965-motion-\(item.name)", in: app)
-            app.terminate()
-        }
+        XCTAssertTrue(waitForShellReady(in: app))
+        XCTAssertFalse(rootDestinationExists("Motion", in: app))
+        XCTAssertFalse(app.descendants(matching: .any)["motion.current.screen"].waitForExistence(timeout: 2))
+        XCTAssertTrue(waitForSelectedSurface("Today", in: app))
+        XCTAssertTrue(app.descendants(matching: .any)["today.screen"].waitForExistence(timeout: 10) || app.staticTexts["Start here"].exists)
     }
 
     func testDemoTimeWorkspaceShowsBatch49CoreModules() throws {
@@ -1569,10 +1445,8 @@ final class AmbitionsUITests: XCTestCase {
     ) -> XCUIApplication {
         let app = XCUIApplication()
         app.launchEnvironment["AMBITIONS_BOOTSTRAP_MODE"] = bootstrapMode
-        app.launchEnvironment["AMBITIONS_SHELL_PRESENTATION"] = "native"
         app.launchArguments += ["-AMBITIONS_BOOTSTRAP_MODE", bootstrapMode]
         app.launchArguments += ["-UIPreferredContentSizeCategoryName", contentSizeCategory]
-        app.launchArguments += ["--ambitions-shell", "native"]
         if let launchURL {
             app.launchEnvironment["AMBITIONS_LAUNCH_URL"] = launchURL
             app.launchArguments += ["-AMBITIONS_LAUNCH_URL", launchURL]
@@ -1916,7 +1790,6 @@ final class AmbitionsUITests: XCTestCase {
         case "Today": "today.screen"
         case "Goals": "goals.screen"
         case "Time": "time.screen"
-        case "Motion": "motion.current.screen"
         case "You": "you.screen"
         default: "\(title.lowercased()).screen"
         }
@@ -1928,7 +1801,7 @@ final class AmbitionsUITests: XCTestCase {
         attachment.name = "afri-005-shell-\(tabName)"
         attachment.lifetime = .keepAlways
         add(attachment)
-        XCTAssertTrue(app.tabBars.element.waitForExistence(timeout: 5))
+        XCTAssertTrue(waitForShellReady(in: app, timeout: 5))
     }
 
     private func captureTodayScreenshot(named name: String, in app: XCUIApplication) {
@@ -2051,7 +1924,7 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func tapCanonicalDestination(_ title: String, in app: XCUIApplication) -> Bool {
-        let dockButton = app.descendants(matching: .any)["shell.meridian.destination.\(title.lowercased())"]
+        let dockButton = rootDestinationButton(title, in: app)
         if dockButton.waitForExistence(timeout: 5) {
             if dockButton.isHittable {
                 dockButton.tap()
@@ -2071,16 +1944,6 @@ final class AmbitionsUITests: XCTestCase {
             return true
         }
 
-        let tabButton = app.tabBars.buttons[title]
-        if tabButton.waitForExistence(timeout: 5) {
-            if tabButton.isHittable {
-                tabButton.tap()
-            } else {
-                tabButton.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
-            }
-            return true
-        }
-
         let meridianButton = app.buttons.matching(NSPredicate(format: "label == %@", title)).firstMatch
         guard meridianButton.waitForExistence(timeout: 5) else {
             return false
@@ -2089,12 +1952,12 @@ final class AmbitionsUITests: XCTestCase {
         return true
     }
 
-    private func assertShellFloatingButtonDoesNotCoverTabBar(in app: XCUIApplication, file: StaticString = #filePath, line: UInt = #line) {
-        let tabBar = app.tabBars.firstMatch
+    private func assertShellFloatingButtonDoesNotCoverRootDock(in app: XCUIApplication, file: StaticString = #filePath, line: UInt = #line) {
+        let dockFrame = rootDockFrame(in: app)
         let button = shellCommandButton(in: app)
-        XCTAssertTrue(tabBar.waitForExistence(timeout: 10), file: file, line: line)
+        XCTAssertFalse(dockFrame.isNull, file: file, line: line)
         XCTAssertTrue(button.waitForExistence(timeout: 10), file: file, line: line)
-        XCTAssertFalse(tabBar.frame.intersects(button.frame), "Global add button overlaps the tab bar.", file: file, line: line)
+        XCTAssertFalse(dockFrame.intersects(button.frame), "Global add button overlaps the root Stage dock.", file: file, line: line)
     }
 
     private func youRow(named title: String, in app: XCUIApplication) -> XCUIElement {
@@ -2248,20 +2111,66 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func waitForShellReady(in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
-        app.tabBars.firstMatch.waitForExistence(timeout: timeout)
-    }
-
-    private func waitForSelectedTab(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
-        let button = app.tabBars.buttons[title]
         let deadline = Date().addingTimeInterval(timeout)
+        let stageHost = app.descendants(matching: .any)["shell.stage.host"]
+        let overlayForegrounds = [
+            app.descendants(matching: .any)["shell.activated-capture-seam"],
+            app.descendants(matching: .any)["create-goal.hero-card"],
+            app.descendants(matching: .any)["shell.command.sheet"]
+        ]
 
         while Date() < deadline {
-            if button.waitForExistence(timeout: 1), button.isSelected {
+            let hasStage = stageHost.waitForExistence(timeout: 1)
+            let hasDock = ["Today", "Goals", "Time", "You"].allSatisfy { rootDestinationButton($0, in: app).exists }
+            let hasOverlay = overlayForegrounds.contains { $0.exists }
+            if hasDock || hasOverlay || hasStage {
                 return true
             }
         }
 
-        return button.exists && button.isSelected
+        return stageHost.exists
+            || ["Today", "Goals", "Time", "You"].allSatisfy { rootDestinationButton($0, in: app).exists }
+            || overlayForegrounds.contains { $0.exists }
+    }
+
+    private func waitForSelectedTab(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
+        waitForSelectedSurface(title, in: app, timeout: timeout)
+    }
+
+    private func waitForSelectedSurface(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 30) -> Bool {
+        let button = rootDestinationButton(title, in: app)
+        let deadline = Date().addingTimeInterval(timeout)
+
+        while Date() < deadline {
+            if button.waitForExistence(timeout: 1), button.isSelected || button.value as? String == "Selected" {
+                return true
+            }
+        }
+
+        return button.exists && (button.isSelected || button.value as? String == "Selected")
+    }
+
+    private func rootDestinationButton(_ title: String, in app: XCUIApplication) -> XCUIElement {
+        app.descendants(matching: .any)["shell.meridian.destination.\(title.lowercased())"]
+    }
+
+    private func waitForRootDestination(_ title: String, in app: XCUIApplication, timeout: TimeInterval = 10) -> Bool {
+        rootDestinationButton(title, in: app).waitForExistence(timeout: timeout)
+    }
+
+    private func rootDestinationExists(_ title: String, in app: XCUIApplication) -> Bool {
+        rootDestinationButton(title, in: app).exists
+    }
+
+    private func rootDockFrame(in app: XCUIApplication) -> CGRect {
+        var frame = CGRect.null
+        for title in ["Today", "Goals", "Time", "You"] {
+            let button = rootDestinationButton(title, in: app)
+            if button.waitForExistence(timeout: 1) {
+                frame = frame.isNull ? button.frame : frame.union(button.frame)
+            }
+        }
+        return frame
     }
 
     private func scrollUntilButtonHittable(_ identifier: String, fallbackLabel: String? = nil, in app: XCUIApplication, maxAttempts: Int = 8) -> XCUIElement {

@@ -1,29 +1,21 @@
 import AmbitionsDesignSystem
 import SwiftUI
-#if canImport(UIKit)
-import UIKit
-#endif
 
 struct AmbitionsRootView: View {
     @Environment(\.colorScheme) private var systemColorScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let container: AppContainer
-    private let shellPresentationMode: AppShellPresentationMode
     @State private var navigation: AppNavigationModel
-    @State private var stageOwner =  StageOwner()
+    @State private var stageOwner = StageOwner()
     @State private var creationMessage: GoalDetailInlineMessage?
     @State private var goalsRefreshID = 0
     @State private var isOnboardingPresented: Bool
     @State private var onboardingError: String?
     @State private var motionCurrentActionObserver: NSObjectProtocol?
 
-    init(
-        container: AppContainer,
-        shellPresentationMode: AppShellPresentationMode = .resolved()
-    ) {
+    init(container: AppContainer) {
         self.container = container
-        self.shellPresentationMode = shellPresentationMode
         _navigation = State(initialValue: container.navigation)
         _isOnboardingPresented = State(initialValue: container.session.shouldShowOnboarding)
     }
@@ -33,36 +25,30 @@ struct AmbitionsRootView: View {
             systemColorScheme: systemColorScheme,
             accentFamily: container.accentFamily
         )
+        let chromePolicy = navigation.stageChromePolicy(
+            dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+        )
 
-        ZStack(alignment: .bottom) {
-            shellTabView(theme: resolvedTheme)
-            if navigation.hasRootNavigationChrome {
-                shellDockBackdrop(theme: resolvedTheme)
-                    .zIndex(2)
-                shellVisibleDock(theme: resolvedTheme)
-                    .zIndex(3)
+        VStack(spacing: 0) {
+            ZStack(alignment: .bottom) {
+                stageSurfaceHost
+                shellActivatedCaptureComposerSeam(theme: resolvedTheme, policy: chromePolicy)
+                shellContinuityReceipt(theme: resolvedTheme, policy: chromePolicy)
             }
-            shellActivatedCaptureComposerSeam(theme: resolvedTheme)
-            shellContinuityReceipt(theme: resolvedTheme)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            if chromePolicy.showsRootDock {
+                shellRootDockLayer(theme: resolvedTheme, policy: chromePolicy)
+            }
         }
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
         .onAppear {
-            configureTabBarAppearance(with: resolvedTheme)
             validateExternalNavigationGraph()
             configureStageMotionBehavior()
             registerMotionCurrentActionObserver()
         }
         .onDisappear {
             unregisterMotionCurrentActionObserver()
-        }
-        .onChange(of: systemColorScheme) { _, _ in
-            configureTabBarAppearance(with: resolvedTheme)
-        }
-        .onChange(of: container.accentFamily) { _, _ in
-            configureTabBarAppearance(with: resolvedTheme)
-        }
-        .onChange(of: container.appearancePreference) { _, _ in
-            configureTabBarAppearance(with: resolvedTheme)
         }
         .onChange(of: reduceMotion) { _, isReduced in
             stageOwner.setReduceMotionEnabled(isReduced)
@@ -105,35 +91,20 @@ struct AmbitionsRootView: View {
     }
 
     @ViewBuilder
-    private func shellTabView(theme: AmbitionTheme) -> some View {
-        TabView(selection: $navigation.selectedTab) {
-            Tab(AppTab.today.title, systemImage: AppTab.today.systemImage, value: AppTab.today) {
+    private var stageSurfaceHost: some View {
+        Group {
+            switch navigation.selectedTab {
+            case .today:
                 todayNavigation()
-            }
-
-            Tab(AppTab.goals.title, systemImage: AppTab.goals.systemImage, value: AppTab.goals) {
+            case .goals:
                 goalsNavigation()
-            }
-
-            Tab(AppTab.time.title, systemImage: AppTab.time.systemImage, value: AppTab.time) {
+            case .time:
                 timeNavigation()
-            }
-
-            Tab(AppTab.you.title, systemImage: AppTab.you.systemImage, value: AppTab.you) {
+            case .you:
                 youNavigation()
             }
         }
-        .tint(theme.shell.activeTabForeground)
-        .toolbar(.hidden, for: .tabBar)
-        #if canImport(UIKit)
-        .background(
-            ShellTabReselectionObserver { _ in
-                navigation.handleCurrentTabReselection()
-            }
-            .frame(width: 0, height: 0)
-            .accessibilityHidden(true)
-        )
-        #endif
+        .accessibilityIdentifier("shell.stage.host")
     }
 
     private var activeSheetOverlayBinding: Binding<ShellOverlayState?> {
@@ -311,7 +282,7 @@ struct AmbitionsRootView: View {
     }
 
     @ViewBuilder
-    private func shellActivatedCaptureComposerSeam(theme: AmbitionTheme) -> some View {
+    private func shellActivatedCaptureComposerSeam(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
         if let overlay = navigation.activeOverlay, overlay.isActivatedCaptureComposer {
             AppShellActivatedCaptureSeam(
                 overlay: overlay,
@@ -323,7 +294,7 @@ struct AmbitionsRootView: View {
                 }
             )
             .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
-            .offset(y: -shellCaptureComposerClearance(theme: theme))
+            .offset(y: -policy.captureComposerClearance)
             .transition(.opacity)
             .zIndex(2)
         }
@@ -334,13 +305,23 @@ struct AmbitionsRootView: View {
             theme: theme,
             selectedTab: navigation.selectedTab
         ) { tab in
-            navigation.selectTab(tab)
+            navigation.selectRootSurfaceFromDock(tab)
         }
         .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xxs : theme.spacing.md)
-        .padding(.bottom, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xxs : theme.spacing.sm)
+        .padding(.bottom, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xxl)
     }
 
-    private func shellDockBackdrop(theme: AmbitionTheme) -> some View {
+    private func shellRootDockLayer(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
+        ZStack(alignment: .bottom) {
+            shellDockBackdrop(theme: theme, policy: policy)
+            shellVisibleDock(theme: theme)
+        }
+        .frame(height: policy.stageContentBottomClearance)
+        .frame(maxWidth: .infinity)
+        .clipped()
+    }
+
+    private func shellDockBackdrop(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
         LinearGradient(
             colors: [
                 theme.colors.canvas.opacity(0.0),
@@ -350,14 +331,14 @@ struct AmbitionsRootView: View {
             startPoint: .top,
             endPoint: .bottom
         )
-        .frame(height: shellDockClearance(theme: theme) + (dynamicTypeSize.isAccessibilitySize ? 48 : 72))
+        .frame(height: policy.dockBackdropHeight)
         .frame(maxWidth: .infinity)
         .ignoresSafeArea(edges: .bottom)
         .accessibilityHidden(true)
     }
 
     @ViewBuilder
-    private func shellContinuityReceipt(theme: AmbitionTheme) -> some View {
+    private func shellContinuityReceipt(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
         // Display-only shell receipt chrome; SourceRecord and ReplayTrace wiring stay in runtime/proof owners.
         if let receipt = navigation.continuityReceipt {
             AmbitionActionClosureTray(
@@ -369,18 +350,10 @@ struct AmbitionsRootView: View {
             }
             .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? 360 : 310, alignment: .leading)
             .padding(.trailing, 20)
-            .padding(.bottom, shellDockClearance(theme: theme) + theme.spacing.lg)
+            .padding(.bottom, policy.continuityReceiptBottomClearance + theme.spacing.lg)
             .accessibilityIdentifier("shell.continuity-receipt")
             .zIndex(4)
         }
-    }
-
-    private func shellDockClearance(theme: AmbitionTheme) -> CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 184 : 164
-    }
-
-    private func shellCaptureComposerClearance(theme: AmbitionTheme) -> CGFloat {
-        navigation.hasRootNavigationChrome ? shellDockClearance(theme: theme) : (dynamicTypeSize.isAccessibilitySize ? 36 : 18)
     }
 
     private func handleCreatedGoal(_ response: CreateGoalResponse, from overlay: ShellOverlayState) async {
@@ -551,27 +524,4 @@ struct AmbitionsRootView: View {
         }
     }
 
-    private func configureTabBarAppearance(with theme: AmbitionTheme) {
-        #if canImport(UIKit)
-        let appearance = UITabBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.backgroundColor = UIColor(theme.colors.canvasElevated)
-        appearance.shadowColor = UIColor(theme.shell.divider)
-
-        let selectedColor = UIColor(theme.shell.activeTabForeground)
-        let inactiveColor = UIColor(theme.shell.inactiveTabForeground)
-
-        [appearance.stackedLayoutAppearance, appearance.inlineLayoutAppearance, appearance.compactInlineLayoutAppearance].forEach { itemAppearance in
-            itemAppearance.selected.iconColor = selectedColor
-            itemAppearance.selected.titleTextAttributes = [.foregroundColor: selectedColor]
-            itemAppearance.normal.iconColor = inactiveColor
-            itemAppearance.normal.titleTextAttributes = [.foregroundColor: inactiveColor]
-        }
-
-        UITabBar.appearance().standardAppearance = appearance
-        UITabBar.appearance().scrollEdgeAppearance = appearance
-        UITabBar.appearance().tintColor = selectedColor
-        UITabBar.appearance().unselectedItemTintColor = inactiveColor
-        #endif
-    }
 }

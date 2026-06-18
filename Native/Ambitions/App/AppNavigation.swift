@@ -66,12 +66,27 @@ final class AppNavigationModel {
         activeOverlay?.isActivatedCaptureComposer == true
     }
 
+    var stageRouteDepth: StageRouteDepth {
+        StagePathStore.routeDepth(
+            goalsPath: goalsPath,
+            timePath: timePath,
+            youPath: youPath
+        )
+    }
+
+    var stageOverlayPresentation: StageOverlayPresentation {
+        StagePathStore.overlayPresentation(for: activeOverlay)
+    }
+
     var isInFocusedDrilldown: Bool {
-        goalsPath.isEmpty == false || timePath.isEmpty == false || youPath.isEmpty == false
+        stageRouteDepth == .drilldown
     }
 
     var hasRootNavigationChrome: Bool {
-        isInFocusedDrilldown == false && isActivatedCaptureComposerVisible == false
+        StagePathStore.rootDockIsVisible(
+            routeDepth: stageRouteDepth,
+            overlayPresentation: stageOverlayPresentation
+        )
     }
     private var lastReselectedTopLevelTab: AppTab?
     private var lastTopLevelTabReselectionDate: Date?
@@ -112,6 +127,36 @@ final class AppNavigationModel {
         if selectedTab != .today {
             todayEntryContext = .standard
         }
+    }
+
+    @discardableResult
+    func selectRootSurfaceFromDock(_ tab: AppTab, now: Date = .now) -> TopLevelTabReselectionAction? {
+        let canonicalTab = tab.canonicalTopLevelTab
+        let hadOverlay = activeOverlay != nil
+        if hadOverlay {
+            dismissOverlay()
+        }
+
+        guard selectedTab == canonicalTab else {
+            selectTab(canonicalTab)
+            return nil
+        }
+
+        guard hadOverlay == false else {
+            return nil
+        }
+
+        return handleCurrentTabReselection(now: now)
+    }
+
+    func stageChromePolicy(dynamicTypeIsAccessibilitySize: Bool) -> StageChromePolicy {
+        StagePathStore.chromePolicy(
+            goalsPath: goalsPath,
+            timePath: timePath,
+            youPath: youPath,
+            activeOverlay: activeOverlay,
+            dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize
+        )
     }
 
     func handleCurrentTabReselection(now: Date = .now) -> TopLevelTabReselectionAction {

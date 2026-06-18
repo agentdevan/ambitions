@@ -683,16 +683,16 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
         ],
         evidencePackets: [
             AFEP021AccessibilityEvidencePacket(
-                id: "today-source-backed",
-                command: "make xcode-focused-test BATCH=AFEP-021 TEST=AmbitionsTests/ShellPreviewMatrixTests",
-                artifactPath: "docs/audits/afep021-accessibility-certification-program-report.md",
+                id: "today-manual-voiceover-pending",
+                command: "manual VoiceOver traversal",
+                artifactPath: "docs/audits/afep021-accessibility-proof-claim-boundary.md",
                 surface: "Today",
                 fixtureState: "today-reality-meridian",
-                result: .pass,
-                knownLimitation: "Manual VoiceOver and device-band proof remain required before any public accessibility claim.",
+                result: .skipped,
+                knownLimitation: "Manual VoiceOver evidence is not recorded in this batch.",
                 owner: "Today",
-                followUpProofRequirement: "Manual VoiceOver traversal, Dynamic Type screenshots, Reduce Motion, and device proof remain required.",
-                proofKind: .sourceBackedSupport
+                followUpProofRequirement: "Manual VoiceOver traversal, Dynamic Type screenshots, Reduce Motion, and device proof remain required before public claim approval.",
+                proofKind: .manualVoiceOver
             ),
             AFEP021AccessibilityEvidencePacket(
                 id: "goals-automated-test",
@@ -705,18 +705,6 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
                 owner: "Goals",
                 followUpProofRequirement: "Manual semantic-grouping and device-band proof remain required.",
                 proofKind: .automatedTest
-            ),
-            AFEP021AccessibilityEvidencePacket(
-                id: "motion-manual-voiceover-pending",
-                command: "manual VoiceOver traversal",
-                artifactPath: "docs/audits/afep021-accessibility-proof-claim-boundary.md",
-                surface: "Motion",
-                fixtureState: "motion-motion-current",
-                result: .skipped,
-                knownLimitation: "Manual VoiceOver evidence is not recorded in this batch.",
-                owner: "Motion",
-                followUpProofRequirement: "Manual VoiceOver traversal must be collected before public claim approval.",
-                proofKind: .manualVoiceOver
             ),
             AFEP021AccessibilityEvidencePacket(
                 id: "time-rendered-proof-pending",

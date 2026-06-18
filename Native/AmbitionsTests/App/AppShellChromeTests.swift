@@ -42,7 +42,8 @@ final class AppShellChromeTests: XCTestCase {
                 "shell.meridian.destination.you"
             ]
         )
-        XCTAssertTrue(AppMeridianShellChromeState.launchDefault.rollbackLabel.contains("--ambitions-shell=meridian"))
+        XCTAssertTrue(AppMeridianShellChromeState.launchDefault.rollbackLabel.contains("Train 3 Stage shell commit"))
+        XCTAssertFalse(AppMeridianShellChromeState.launchDefault.rollbackLabel.contains("--ambitions-shell"))
     }
 
     func testTrustBadgeCopyDoesNotClaimGlobalSyncByDefault() {

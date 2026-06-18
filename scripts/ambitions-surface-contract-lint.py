@@ -51,8 +51,10 @@ def main() -> int:
     app_tab = read("Native/Ambitions/App/AppTab.swift")
     root_view = read("Native/Ambitions/App/AmbitionsRootView.swift")
     meridian_shell = read("Native/Ambitions/App/AppMeridianShell.swift")
-    shell_mode = read("Native/Ambitions/App/AppShellPresentationMode.swift")
+    shell_chrome = read("Native/Ambitions/App/AppStageShellChromeState.swift")
     navigation = read("Native/Ambitions/App/AppNavigation.swift")
+    surface_ownership = read("Native/Ambitions/Stage/SurfaceOwnershipRegistry.swift")
+    stage_path_store = read("Native/Ambitions/Stage/StagePathStore.swift")
     external_routing = read("Native/Ambitions/App/AppExternalRouting.swift")
     app_intent = read("Native/Ambitions/AppIntents/OpenAmbitionsDestinationIntent.swift")
     preview_matrix = read("Native/Ambitions/PreviewSupport/ShellPreviewMatrix.swift")
@@ -66,8 +68,8 @@ def main() -> int:
     for raw, title, primary in ROOT_SURFACES:
         contract_snippet = f'AmbitionsSurfaceContract(tab: .{raw}, title: "{title}", primaryObjectTitle: "{primary}")'
         require(contract_snippet in app_tab, errors, f"AppTab.swift missing surface contract {title} -> {primary}.")
-        require(f'Tab(AppTab.{raw}.title' in root_view, errors, f"AmbitionsRootView missing shell tab for {title}.")
-        require(f"AppTab.{raw}.systemImage" in root_view, errors, f"AmbitionsRootView missing tab icon source for {title}.")
+        require(f"case .{raw}:" in root_view, errors, f"AmbitionsRootView missing Stage host branch for {title}.")
+        require(f".{raw}" in surface_ownership, errors, f"SurfaceOwnershipRegistry missing {title} root ownership.")
 
     for term in REQUIRED_RUNTIME_TERMS:
         require(term in app_tab, errors, f"AppTab surface contract must preserve runtime term {term}.")
@@ -116,7 +118,7 @@ def main() -> int:
         "Motion compatibility must route to Today instead of a root Motion destination.",
     )
     require(
-        "shell.meridian.destination.\\(tab.rawValue)" in shell_mode,
+        "shell.meridian.destination.\\(tab.rawValue)" in shell_chrome,
         errors,
         "Meridian shell accessibility identifiers must derive from canonical tab raw values.",
     )
@@ -126,9 +128,25 @@ def main() -> int:
         "Meridian shell must use canonical destination accessibility identifiers.",
     )
     require(
-        ".toolbar(.hidden, for: .tabBar)" in root_view and "navigation.hasRootNavigationChrome" in root_view,
+        "stageSurfaceHost" in root_view
+        and "chromePolicy.showsRootDock" in root_view
+        and "TabView(selection: $navigation.selectedTab)" not in root_view,
         errors,
-        "Root shell chrome must hide native tab chrome and gate the custom dock by root-navigation state.",
+        "Root shell chrome must use the Stage host and gate the custom dock without a root TabView.",
+    )
+    require(
+        "rootDockIsVisible" in stage_path_store
+        and "overlayPresentation != .activatedCaptureComposer" in stage_path_store
+        and "routeDepth == .root" in stage_path_store,
+        errors,
+        "StagePathStore must own root dock visibility from route depth and overlay state.",
+    )
+    require(
+        "globalComposer" in surface_ownership
+        and "motionBehavior" in surface_ownership
+        and "canonicalTab: nil" in surface_ownership,
+        errors,
+        "Surface ownership must keep Capture and Motion out of persistent root ownership.",
     )
     require(
         "AppTab.allCases" in preview_matrix,
@@ -156,7 +174,7 @@ def main() -> int:
             print(f"- {error}")
         return 1
 
-    print("GREEN: Train 2 surface contract lint passed")
+    print("GREEN: Train 3 surface contract lint passed")
     print("- Root surfaces are Today, Goals, Time, You.")
     print("- Capture remains a global composer/overlay compatibility path, not a root surface.")
     print("- Motion remains a Stage/Motion behavior compatibility path, not a root surface.")
