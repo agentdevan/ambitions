@@ -1,14 +1,14 @@
 # Stub And Adapter Retirement Audit
 
-Status: Train 1 generated audit artifact  
+Status: Train 1 generated audit artifact
 Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-through/ad hoc adapters for later hardening, replacement, fixture movement, or deletion.
 
 ## Search Summary
 
 - Command used: `rg -n -i --glob !docs/audits/design_truth_readback.md --glob !docs/audits/design_truth_refraction_audit.md --glob !docs/audits/file_by_file_truth_ledger.md --glob !docs/audits/obsolete_architecture_audit.md --glob !docs/audits/large_swift_file_discipline_audit.md --glob !docs/audits/stub_adapter_retirement_audit.md --glob !docs/audits/forbidden_language_audit.md TODO|FIXME|stub|placeholder|mock|fake|sample|demo|noop|no\-op|fatalError|preconditionFailure|return\ \[\]|return\ nil|return\ \.empty|//\ temporary|//\ for\ now|preview\ only Native Sources AppUI docs prompts scripts tools Package.swift project.yml AGENTS.md README.md`
-- Hit count: 2204
-- File count: 454
-- Raw output bytes: 318898
+- Hit count: 2205
+- File count: 455
+- Raw output bytes: 319063
 - Raw log replaced with summary: False
 
 ## Sample Findings
@@ -69,6 +69,7 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | Native/Ambitions/Features/You/YouFeatureService.swift | stub | Surface file owned by You. | replace | build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Red |
 | Native/Ambitions/Persistence/SwiftDataRepositories.swift | needs hardening | Persistence file owned by Broad repo. | split | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Red |
 | scripts/ambitions-codex-train.sh | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
+| docs/audits/file_by_file_truth_ledger.md | stub | Audit/proof artifact. | replace | authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | artifacts/ambitions-master-build/validation/AMB-1058/focused-root-shell-tests.log | stub | Repo Support file owned by Source Atlas / R2. | replace | stub/adapter audit | Yellow |
 | artifacts/ambitions-master-build/validation/AMB-1061-focused-component-tests.log | stub | Repo Support file owned by Source Atlas / R2. | replace | stub/adapter audit | Yellow |
 | docs/codex/existing-code-champion-coverage.yml | stub | Codex Governance file owned by Codex governance. | replace | stub/adapter audit | Yellow |
@@ -91,6 +92,7 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | artifacts/codex-os-v2/script-output/final-make-scripts-doctor.log | needs hardening | Repo Support file owned by Broad repo. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | artifacts/codex-os-v2/script-output/001-initial-make-scripts-doctor.log | needs hardening | Repo Support file owned by Broad repo. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | artifacts/personal-life-os/step-quality/STEP_QUALITY_FIREWALL_FIXTURES.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
+| docs/audits/large_swift_file_discipline_audit.md | stub | Audit/proof artifact. | replace | authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | artifacts/ambitions-master-build/validation/AMB-1060/focused-design-token-tests.log | stub | Repo Support file owned by Source Atlas / R2. | replace | stub/adapter audit | Yellow |
 | Native/Ambitions/Persistence/StorageInvariantChecker.swift | needs hardening | Persistence file owned by Broad repo. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | Native/Ambitions/Services/AppServices.swift | stub | Runtime Services file owned by Broad repo. | replace | build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
@@ -105,8 +107,10 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | Native/Ambitions/Domain/SideEffectLedgerModels.swift | needs hardening | Core Domain file owned by Broad repo. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | scripts/ambitions_signature_visual_instruments.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | Native/Ambitions/App/AppBootstrapper.swift | needs hardening | App file owned by Stage shell. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
+| docs/audits/stub_adapter_retirement_audit.md | stub | Audit/proof artifact. | replace | authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | docs/codex-os/PROGRAM_REGISTRY.md | needs hardening | Codex Governance file owned by Source Atlas / R2. | harden | architecture conformance scan<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | docs/architecture/AMB_SWIFT6_MODERNIZATION_REPORT.md | needs hardening | Supporting Docs file owned by Codex governance. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
+| docs/audits/forbidden_language_audit.md | stub | Audit/proof artifact. | replace | authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | tools/source-atlas/lakehouse-workbench/publisher.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | docs/codex/ADHD_COGNITIVE_LOAD_UI_LAW.md | needs hardening | Codex Governance file owned by Codex governance. | harden | architecture conformance scan<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | Native/Ambitions/Support/CoreSurfaceIntegrationScenarios.swift | needs hardening | Repo Support file owned by Broad repo. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
@@ -116,6 +120,7 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | artifacts/ambitions-master-build/validation/AMB-1059/focused-search-routing-tests.log | stub | Repo Support file owned by Source Atlas / R2. | replace | stub/adapter audit | Yellow |
 | Native/Ambitions/App/AppContainerFactory.swift | stub | App file owned by Stage shell. | replace | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | tools/source-atlas/ambitions-pack-crypto.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
+| Native/Ambitions/Diagnostics/RepoTruthAuditLedger.swift | stub | Diagnostics file owned by Source Atlas / R2. | replace | build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | Native/AmbitionsShareExtension/ShareViewController.swift | needs hardening | Share Extension file owned by Share extension. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | artifacts/personal-life-os/any-goal/UNSUPPORTED_UNSAFE_ROUTING_CONTRACT.md | needs hardening | Supporting Docs file owned by Goals. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | scripts/ambitions-release-red-guard.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
@@ -136,6 +141,7 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | AGENTS.md | needs hardening | Supporting Docs file owned by Source Atlas / R2. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | Native/Ambitions/ExternalSnapshots/ExternalCreationContracts.swift | needs hardening | Repo Support file owned by Broad repo. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | artifacts/ambitions-master-build/reports/AMB-1058-root-navigation-five-surface-shell-proof.md | needs hardening | Supporting Docs file owned by Trust / release proof. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
+| docs/audits/design_truth_refraction_audit.md | stub | Audit/proof artifact. | replace | authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | tools/source-atlas/lakehouse-workbench/schema.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | tools/source-atlas/tests/test_ambitions_pack_crypto.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
 | artifacts/source-atlas-factory/SOURCE_ATLAS_REUSABLE_SEED_TAXONOMY.md | needs hardening | Supporting Docs file owned by Source Atlas / R2. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
@@ -145,6 +151,7 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift | needs hardening | Repo Support file owned by Broad repo. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | artifacts/release-recovery/IMPLEMENTATION_TRAIN_001.md | needs hardening | Supporting Docs file owned by Trust / release proof. | harden | architecture conformance scan<br>authority readback<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | tools/source-atlas/ambitions-official-adapter-contract.py | needs hardening | Repo automation or validation script. | harden | architecture conformance scan<br>stub/adapter audit | Yellow |
+| docs/validation/train_1_5_validation_unblock.md | stub | Validation Docs file owned by Codex governance. | replace | forbidden language scan<br>stub/adapter audit | Yellow |
 | fixtures/afep026/valid-policy.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
 | Native/Ambitions/Services/PolicyGuardedCommandExecutor.swift | needs hardening | Runtime Services file owned by Broad repo. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
 | Native/Ambitions/Domain/Planning/LivingPlanFreshnessBroker.swift | needs hardening | Core Domain file owned by Broad repo. | harden | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>stub/adapter audit | Yellow |
@@ -256,10 +263,3 @@ Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-thro
 | source-atlas/fixtures/recovery-003.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
 | source-atlas/fixtures/replay-001.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
 | source-atlas/fixtures/replay-002.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
-| source-atlas/fixtures/replay-003.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
-| source-atlas/fixtures/runtime-001.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
-| source-atlas/fixtures/runtime-002.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
-| source-atlas/fixtures/runtime-003.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
-| source-atlas/fixtures/runtime-004.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
-| source-atlas/fixtures/start-here-001.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |
-| source-atlas/fixtures/start-here-002.json | fixture | Project Config file owned by Broad repo. | keep | stub/adapter audit | Green |

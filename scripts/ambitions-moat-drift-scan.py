@@ -77,6 +77,7 @@ NEGATIVE_SECTION_MARKERS = (
 )
 
 SECTION_HEADER_MARKERS = (
+    "avoid",
     "forbidden",
     "banned",
     "anti-pattern",
@@ -110,6 +111,7 @@ SECTION_HEADER_MARKERS = (
     "stop and repair if",
     "never",
     "must never",
+    "is not",
 )
 
 

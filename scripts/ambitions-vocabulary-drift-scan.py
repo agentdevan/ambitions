@@ -35,6 +35,7 @@ NEGATIVE_SECTION_MARKERS = (
 )
 
 SECTION_HEADER_MARKERS = (
+    "avoid",
     "forbidden",
     "banned",
     "anti-pattern",
@@ -74,6 +75,7 @@ SECTION_HEADER_MARKERS = (
     "stop and repair if",
     "never",
     "must never",
+    "is not",
 )
 
 
@@ -104,8 +106,8 @@ REQUIRED_TERMS = [
     "Ambition",
     "Commitment",
     "Constraint",
-    "Recovery Thread",
-    "Recommendation Trace",
+    "Recovery",
+    "Recommendation Accountability",
     "Proof",
     "Reflection",
     "Personal Runtime",

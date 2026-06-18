@@ -1,6 +1,6 @@
 # Large Swift File Discipline Audit
 
-Status: Train 1 generated audit artifact  
+Status: Train 1 generated audit artifact
 Rules: 0-250 acceptable by default; 251-400 inspect; 401-650 justify or split; 651+ Red unless generated or explicitly excepted.
 
 | File | Lines | Rule result | Current responsibility | Classification | Split target recommendation | Proof required | Status |

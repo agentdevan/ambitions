@@ -1,16 +1,16 @@
 # Design Truth Refraction Audit
 
-Status: Yellow  
-Branch: `design-truth-refraction`  
-Commit: `0449794e22dc3219988d83189702d0d07fe1a321`  
+Status: Yellow
+Branch: `design-truth-refraction`
+Commit: `c0d1dc361b6b321900d28db5bbaa020b0cf3f2e0`
 Scope: Train 0/1 only: canon readback, file inventory, classification, and audit artifacts. No product UI rebuild, file deletion, aesthetic replacement, Train 2 guard implementation, screenshot proof, accessibility proof, mutation proof, privacy proof, or release proof is claimed.
 
 ## Inventory Summary
 
-- Git-tracked files classified: 2294
-- Swift files classified: 834
-- Markdown files classified: 464
-- Status counts: Delete=5, Green=1675, Red=121, Split=114, Test-only=261, Yellow=118
+- Git-tracked files classified: 2305
+- Swift files classified: 836
+- Markdown files classified: 472
+- Status counts: Delete=5, Green=1677, Red=122, Split=114, Test-only=262, Yellow=125
 - Raw search logs over 25 MB are replaced with hit counts, samples, command lines, and top file summaries.
 
 ## Top 20 Red Files
@@ -73,6 +73,7 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 | Native/Ambitions/Features/You/YouFeatureService.swift | stub | replace | Red |
 | Native/Ambitions/Persistence/SwiftDataRepositories.swift | needs hardening | split | Red |
 | scripts/ambitions-codex-train.sh | needs hardening | harden | Yellow |
+| docs/audits/file_by_file_truth_ledger.md | stub | replace | Yellow |
 | artifacts/ambitions-master-build/validation/AMB-1058/focused-root-shell-tests.log | stub | replace | Yellow |
 | artifacts/ambitions-master-build/validation/AMB-1061-focused-component-tests.log | stub | replace | Yellow |
 | docs/codex/existing-code-champion-coverage.yml | stub | replace | Yellow |
@@ -86,7 +87,6 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 | Native/Ambitions/Features/Time/TimeFeatureModels.swift | needs hardening | split | Red |
 | Native/Ambitions/Domain/SafeAutomationPolicyModels.swift | needs hardening | split | Red |
 | docs/audits/intelligence-consolidation/EXISTING_CODE_CHAMPION_COVERAGE.md | stub | replace | Yellow |
-| tools/source-atlas/lakehouse-workbench/app.py | needs hardening | harden | Yellow |
 
 ## Obsolete Motion/Capture/Root-Tab Architecture Found
 
@@ -101,6 +101,7 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 | Native/Ambitions/App/AmbitionsRootView.swift | needs split | Root shell still uses technical TabView; native tab chrome is hidden but StageRoot guard is not yet formalized. | Red |
 | Native/Ambitions/App/AppNavigation.swift | needs split | Capture inbox compatibility route remains and must be validated as overlay/global composer, not root destination. | Red |
 | Native/Ambitions/Features/Motion/MotionCurrentAction.swift | obsolete architecture | Motion feature file remains outside Stage/Motion behavior ownership. | Red |
+| docs/audits/obsolete_architecture_audit.md | obsolete architecture | none | Red |
 | scripts/ambitions-historical-baseline-train-guard.py | obsolete canon | none | Delete |
 | scripts/governance/ambitions-historical-registry-extract.py | obsolete canon | none | Delete |
 | PURGE_HISTORICAL_MANIFEST_20260616T230124.txt | obsolete canon | none | Delete |
@@ -118,8 +119,8 @@ Scope: Train 0/1 only: canon readback, file inventory, classification, and audit
 - `git ls-files` inventory for all tracked files.
 - `wc -l` line counts for all tracked files.
 - Targeted architecture scan: `obsolete architecture` with 257 hits in 63 files.
-- Targeted stub/adapter scan: `stub and adapter` with 2204 hits in 454 files.
-- Targeted forbidden-language scan: `forbidden language` with 542 hits in 147 files.
+- Targeted stub/adapter scan: `stub and adapter` with 2205 hits in 455 files.
+- Targeted forbidden-language scan: `forbidden language` with 544 hits in 149 files.
 
 ## Validation Not Run / Not Claimed In This Artifact
 

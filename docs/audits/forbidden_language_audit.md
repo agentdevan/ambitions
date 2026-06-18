@@ -1,14 +1,14 @@
 # Forbidden Language Audit
 
-Status: Train 1 generated audit artifact  
+Status: Train 1 generated audit artifact
 Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tests, prompts, and historical context are review triggers, not automatic product UI failures.
 
 ## Search Summary
 
 - Command used: `rg -n -i --glob !docs/audits/design_truth_readback.md --glob !docs/audits/design_truth_refraction_audit.md --glob !docs/audits/file_by_file_truth_ledger.md --glob !docs/audits/obsolete_architecture_audit.md --glob !docs/audits/large_swift_file_discipline_audit.md --glob !docs/audits/stub_adapter_retirement_audit.md --glob !docs/audits/forbidden_language_audit.md Source\ unavailable|receipt\ before\ save|route\ reveal|runtime\-backed|fixture\-only|proof\ seam|Close\ Today|Motion\ Current|Capture\ Anything|blocked\-pending\-model|local\ projection|receipt\ path|review\ before\ reflow|No\ silent\ changes|Open\ seam|Re\-enter\ thread|best\ next\ move|next\ best\ move|Begin\ Focus|productivity\ score|life\ score|habit\ score|streak\ broken Native Sources AppUI docs prompts scripts tools Package.swift project.yml AGENTS.md README.md`
-- Hit count: 542
-- File count: 147
-- Raw output bytes: 70678
+- Hit count: 544
+- File count: 149
+- Raw output bytes: 71264
 - Raw log replaced with summary: False
 
 ## Sample Findings
@@ -63,6 +63,7 @@ Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tes
 
 | File | Language risk | Layer | Owner | Status |
 | --- | --- | --- | --- | --- |
+| scripts/ambitions-design-truth-refraction-audit.py | Source unavailable<br>receipt before save<br>route reveal<br>runtime-backed<br>fixture-only<br>proof seam<br>Close Today<br>Motion Current | scripts | Source Atlas / R2 | Green |
 | scripts/release_recovery/apply_batch_15_report_surface_language.py | Source unavailable<br>runtime-backed<br>fixture-only<br>Close Today<br>blocked-pending-model<br>receipt path<br>review before reflow<br>No silent changes | scripts | Trust / release proof | Green |
 | scripts/release_recovery/apply_batch_29_native_interaction_sweep.py | Source unavailable<br>route reveal<br>runtime-backed<br>fixture-only<br>Close Today<br>blocked-pending-model<br>Open seam<br>next best move | scripts | Trust / release proof | Green |
 | scripts/ambitions-vocabulary-drift-scan.py | best next move<br>next best move<br>Begin Focus<br>productivity score<br>life score<br>habit score<br>streak broken | scripts | Codex governance | Green |
@@ -187,7 +188,11 @@ Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tes
 | docs/architecture/dependencies/PERSISTENCE_CLIENT.md | receipt path | supporting docs | Codex governance | Green |
 | docs/architecture/feature-services/CAPTURE_FEATURE_SERVICE.md | route reveal | supporting docs | Capture | Green |
 | docs/architecture/state-machines/CAPTURE_ROUTE_STATE_MACHINE.md | route reveal | supporting docs | Capture | Green |
+| docs/audits/design_truth_readback.md | restricted terms present in authority/audit context: best next move, next best move, Begin Focus | audit docs | Source Atlas / R2 | Green |
+| docs/audits/file_by_file_truth_ledger.md | restricted terms present in authority/audit context: Source unavailable, receipt before save, route reveal, runtime-backed, fixture-only | audit docs | Source Atlas / R2 | Yellow |
+| docs/audits/forbidden_language_audit.md | restricted terms present in authority/audit context: Source unavailable, receipt before save, route reveal, runtime-backed, fixture-only | audit docs | Source Atlas / R2 | Yellow |
 | docs/audits/intelligence-consolidation/CANONICAL_OWNER_MAP.md | restricted terms present in authority/audit context: Motion Current, productivity score | audit docs | Codex governance | Green |
+| docs/audits/large_swift_file_discipline_audit.md | restricted terms present in authority/audit context: Motion Current | audit docs | Source Atlas / R2 | Yellow |
 | docs/audits/screenshots/AMB-520/AMB-520-proof-matrix.md | restricted terms present in authority/audit context: Source unavailable, Motion Current | audit docs | Trust / release proof | Green |
 | docs/codex/LIFE_CONSEQUENCE_REFLOW_LAW.md | productivity score | codex governance | Codex governance | Green |
 | docs/codex/chatgpt-pro-ui-development-quick-brief.md | Motion Current | codex governance | Codex governance | Green |
@@ -199,6 +204,7 @@ Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tes
 | docs/truth/PRODUCT_DESIGN_TRUTH.format-backup-20260616T220228.md | restricted terms present in authority/audit context: Source unavailable, receipt before save, route reveal, runtime-backed, fixture-only | truth docs | Source Atlas / R2 | Delete |
 | docs/truth/PRODUCT_DESIGN_TRUTH.md | restricted terms present in authority/audit context: Source unavailable, receipt before save, route reveal, runtime-backed, fixture-only | truth docs | Source Atlas / R2 | Red |
 | docs/truth/PRODUCT_MOAT_TRUTH.md | restricted terms present in authority/audit context: receipt path, best next move, productivity score, life score, habit score | truth docs | Source Atlas / R2 | Green |
+| docs/validation/train_1_5_validation_unblock.md | streak broken | validation docs | Codex governance | Yellow |
 | frontend/visual-encyclopedia/trace/DESIGN_TOKEN_COMPLETENESS_MATRIX.yaml | route reveal | project config | Broad repo | Green |
 | frontend/visual-encyclopedia/trace/PREVIEW_MATRIX.md | route reveal | supporting docs | Broad repo | Green |
 | prompts/object-stage-mega-train/AMB-AOM-10.md | restricted terms present in authority/audit context: productivity score | codex governance | Codex governance | Green |

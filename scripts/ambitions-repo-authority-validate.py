@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate the repo authority portal cleanup."""
+"""Validate the active repo authority map."""
 
 from __future__ import annotations
 
@@ -12,36 +12,33 @@ ROOT = Path(__file__).resolve().parents[1]
 
 REQUIRED_PATHS = [
     ROOT / "README.md",
-    ROOT / "frontend" / "README.md",
-    ROOT / "frontend" / "installed-canon.md",
-    ROOT / "frontend" / "intended-canon.md",
-    ROOT / "frontend" / "visual-encyclopedia" / "README.md",
-    ROOT / "frontend" / "visual-encyclopedia" / "AMBITIONS_FRONT_END_ARCHITECTURE_ATLAS_AND_VISUAL_ENCYCLOPEDIA.md",
-    ROOT / "backend" / "README.md",
-    ROOT / "codex-os" / "README.md",
-    ROOT / "product-canon" / "README.md",
-    ROOT / "validation" / "README.md",
-    ROOT / "history" / "README.md",
-    ROOT / "docs" / "canon" / "README.md",
-    ROOT / "docs" / "status" / "repo-authority-cleanup-baseline.md",
-    ROOT / "docs" / "status" / "repo-authority-cleanup-active-path-allowlist.md",
-    ROOT / "docs" / "status" / "repo-authority-cleanup-final-report.md",
+    ROOT / "AGENTS.md",
+    ROOT / "docs" / "README.md",
+    ROOT / "docs" / "truth" / "README.md",
+    ROOT / "docs" / "truth" / "PRODUCT_DESIGN_TRUTH.md",
+    ROOT / "docs" / "truth" / "PRODUCT_MOAT_TRUTH.md",
+    ROOT / "docs" / "truth" / "IMPLEMENTATION_TRUTH.md",
+    ROOT / "docs" / "truth" / "RELEASE_TRUTH.md",
+    ROOT / "docs" / "truth" / "CODEX_PROCESS_TRUTH.md",
+    ROOT / "docs" / "truth" / "HISTORICAL_POLICY.md",
+    ROOT / "docs" / "validation",
+    ROOT / "docs" / "audits",
+    ROOT / "docs" / "architecture",
+    ROOT / "docs" / "codex",
+    ROOT / "project.yml",
+    ROOT / "Package.swift",
 ]
 
 SCAN_FILES = [
     ROOT / "README.md",
+    ROOT / "AGENTS.md",
     ROOT / "docs" / "README.md",
-    ROOT / "docs" / "AGENTS.md",
-    ROOT / "frontend" / "README.md",
-    ROOT / "frontend" / "installed-canon.md",
-    ROOT / "frontend" / "intended-canon.md",
-    ROOT / "frontend" / "visual-encyclopedia" / "README.md",
-    ROOT / "backend" / "README.md",
-    ROOT / "codex-os" / "README.md",
-    ROOT / "product-canon" / "README.md",
-    ROOT / "validation" / "README.md",
-    ROOT / "history" / "README.md",
-    ROOT / "docs" / "status" / "repo-authority-cleanup-final-report.md",
+    ROOT / "docs" / "truth" / "README.md",
+    ROOT / "docs" / "truth" / "PRODUCT_DESIGN_TRUTH.md",
+    ROOT / "docs" / "truth" / "PRODUCT_MOAT_TRUTH.md",
+    ROOT / "docs" / "truth" / "IMPLEMENTATION_TRUTH.md",
+    ROOT / "docs" / "truth" / "RELEASE_TRUTH.md",
+    ROOT / "docs" / "truth" / "CODEX_PROCESS_TRUTH.md",
     ROOT / ".env.example",
     ROOT / "skills-lock.json",
 ]
@@ -57,12 +54,28 @@ BAD_PHRASES = [
 ]
 
 REQUIRED_PORTAL_MARKERS = [
+    "docs/truth/README.md",
+    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    "docs/truth/PRODUCT_MOAT_TRUTH.md",
+    "docs/truth/IMPLEMENTATION_TRUTH.md",
+    "docs/truth/RELEASE_TRUTH.md",
+    "docs/truth/CODEX_PROCESS_TRUTH.md",
+    "docs/truth/HISTORICAL_POLICY.md",
+    "docs/validation",
+    "docs/audits",
+]
+
+OBSOLETE_PORTAL_MARKERS = [
     "frontend/README.md",
+    "frontend/installed-canon.md",
+    "frontend/intended-canon.md",
+    "frontend/visual-encyclopedia",
     "backend/README.md",
     "codex-os/README.md",
     "product-canon/README.md",
     "validation/README.md",
     "history/README.md",
+    "docs/canon/README.md",
 ]
 
 
@@ -89,23 +102,11 @@ def main() -> int:
         if marker not in docs:
             errors.append(f"README.md missing portal marker {marker!r}")
 
-    frontend_doc = (ROOT / "frontend" / "README.md").read_text(encoding="utf-8") if (ROOT / "frontend" / "README.md").exists() else ""
-    if "compatibility-only and not a top-level destination" not in frontend_doc:
-        errors.append("frontend/README.md must explicitly demote Plan to compatibility-only")
-
-    canon_doc = (ROOT / "docs" / "canon" / "README.md").read_text(encoding="utf-8") if (ROOT / "docs" / "canon" / "README.md").exists() else ""
-    required_canon_markers = [
-        "Status: Legacy canon index",
-        "must not present Ambitions 2.0, 3.0, or 4.0 as active truth",
-        "must not present `Plan` as a top-level destination",
-    ]
-    for marker in required_canon_markers:
-        if marker not in canon_doc:
-            errors.append(f"docs/canon/README.md missing legacy marker {marker!r}")
-    if "(../frontend/README.md)" in canon_doc:
-        errors.append("docs/canon/README.md contains stale relative link to docs/frontend")
-    if "../../frontend/README.md" not in canon_doc:
-        errors.append("docs/canon/README.md missing root frontend portal link")
+    docs_readme = (ROOT / "docs" / "README.md").read_text(encoding="utf-8") if (ROOT / "docs" / "README.md").exists() else ""
+    combined_front_doors = docs + "\n" + docs_readme
+    for marker in OBSOLETE_PORTAL_MARKERS:
+        if marker in combined_front_doors:
+            errors.append(f"front-door docs still reference obsolete authority portal {marker!r}")
 
     if (ROOT / "skills-lock.json").exists():
         text = (ROOT / "skills-lock.json").read_text(encoding="utf-8")
@@ -123,7 +124,7 @@ def main() -> int:
             print(f"RED: {error}", file=sys.stderr)
         return 1
 
-    print("GREEN: portal paths exist and active-language scans passed")
+    print("GREEN: active truth authority paths exist and front-door scans passed")
     return 0
 
 

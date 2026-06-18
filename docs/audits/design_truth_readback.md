@@ -1,8 +1,8 @@
 # Design Truth Readback
 
-Status: Train 0 readback artifact  
-Branch: `design-truth-refraction`  
-Commit: `0449794e22dc3219988d83189702d0d07fe1a321`  
+Status: Train 0 readback artifact
+Branch: `design-truth-refraction`
+Commit: `c0d1dc361b6b321900d28db5bbaa020b0cf3f2e0`
 Scope: Canon readback only; not implementation proof or release proof.
 
 ## Truth Files Inspected

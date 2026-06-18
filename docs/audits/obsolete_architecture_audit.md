@@ -1,6 +1,6 @@
 # Obsolete Architecture Audit
 
-Status: Train 1 generated audit artifact  
+Status: Train 1 generated audit artifact
 Scope: Findings are classification targets only; no files were deleted or migrated in Train 0/1.
 
 ## Search Summary
@@ -72,6 +72,7 @@ Scope: Findings are classification targets only; no files were deleted or migrat
 | Native/Ambitions/App/AmbitionsRootView.swift | needs split | Root shell still uses technical TabView; native tab chrome is hidden but StageRoot guard is not yet formalized. | split | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>large file audit | Red |
 | Native/Ambitions/App/AppNavigation.swift | needs split | Capture inbox compatibility route remains and must be validated as overlay/global composer, not root destination. | split | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan<br>large file audit | Red |
 | Native/Ambitions/Features/Motion/MotionCurrentAction.swift | obsolete architecture | Motion feature file remains outside Stage/Motion behavior ownership. | replace | architecture conformance scan<br>build<br>focused tests<br>forbidden language scan | Red |
+| docs/audits/obsolete_architecture_audit.md | obsolete architecture | none | replace | architecture conformance scan<br>authority readback<br>forbidden language scan | Red |
 | scripts/ambitions-historical-baseline-train-guard.py | obsolete canon | none | delete | not applicable | Delete |
 | scripts/governance/ambitions-historical-registry-extract.py | obsolete canon | none | delete | not applicable | Delete |
 | PURGE_HISTORICAL_MANIFEST_20260616T230124.txt | obsolete canon | none | delete | authority readback | Delete |

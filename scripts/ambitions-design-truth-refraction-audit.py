@@ -592,9 +592,9 @@ def render_readback(audits: list[FileAudit]) -> str:
     conflicts = contradiction.design_violations if contradiction else []
     return f"""# Design Truth Readback
 
-Status: Train 0 readback artifact  
-Branch: `{current_branch()}`  
-Commit: `{current_sha()}`  
+Status: Train 0 readback artifact
+Branch: `{current_branch()}`
+Commit: `{current_sha()}`
 Scope: Canon readback only; not implementation proof or release proof.
 
 ## Truth Files Inspected
@@ -665,8 +665,8 @@ def render_ledger(audits: list[FileAudit]) -> str:
     )
     return """# File-by-file Design Truth Ledger
 
-Status: Train 1 generated audit artifact  
-Generation: deterministic from `git ls-files`, `wc -l`, and targeted scans  
+Status: Train 1 generated audit artifact
+Generation: deterministic from `git ls-files`, `wc -l`, and targeted scans
 Scope: Classification only; this file does not prove implementation quality, build success, screenshots, accessibility, mutation, privacy, or release readiness.
 
 """ + table(
@@ -706,7 +706,7 @@ def render_large(audits: list[FileAudit]) -> str:
     )
     return """# Large Swift File Discipline Audit
 
-Status: Train 1 generated audit artifact  
+Status: Train 1 generated audit artifact
 Rules: 0-250 acceptable by default; 251-400 inspect; 401-650 justify or split; 651+ Red unless generated or explicitly excepted.
 
 """ + table(
@@ -730,7 +730,7 @@ def render_obsolete(audits: list[FileAudit], rg_architecture: dict[str, object])
     )
     return f"""# Obsolete Architecture Audit
 
-Status: Train 1 generated audit artifact  
+Status: Train 1 generated audit artifact
 Scope: Findings are classification targets only; no files were deleted or migrated in Train 0/1.
 
 ## Search Summary
@@ -769,7 +769,7 @@ def render_stub(audits: list[FileAudit], rg_stub: dict[str, object]) -> str:
     )
     return f"""# Stub And Adapter Retirement Audit
 
-Status: Train 1 generated audit artifact  
+Status: Train 1 generated audit artifact
 Rule: preserve real boundary adapters; classify fake/no-op/placeholder/pass-through/ad hoc adapters for later hardening, replacement, fixture movement, or deletion.
 
 ## Search Summary
@@ -808,7 +808,7 @@ def render_language(audits: list[FileAudit], rg_language: dict[str, object]) -> 
     )
     return f"""# Forbidden Language Audit
 
-Status: Train 1 generated audit artifact  
+Status: Train 1 generated audit artifact
 Scope: Classifies first-pass language risk. Terms in truth docs, audit docs, tests, prompts, and historical context are review triggers, not automatic product UI failures.
 
 ## Search Summary
@@ -849,9 +849,9 @@ def render_summary(audits: list[FileAudit], rg_architecture: dict[str, object], 
     ]
     return f"""# Design Truth Refraction Audit
 
-Status: Yellow  
-Branch: `{current_branch()}`  
-Commit: `{current_sha()}`  
+Status: Yellow
+Branch: `{current_branch()}`
+Commit: `{current_sha()}`
 Scope: Train 0/1 only: canon readback, file inventory, classification, and audit artifacts. No product UI rebuild, file deletion, aesthetic replacement, Train 2 guard implementation, screenshot proof, accessibility proof, mutation proof, privacy proof, or release proof is claimed.
 
 ## Inventory Summary

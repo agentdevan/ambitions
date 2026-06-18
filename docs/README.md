@@ -29,31 +29,13 @@ Generated reports and docs indexes do not prove implementation, validation, or r
 - Repo governance cleanup tracker: [`status/repo-governance-master-cleanup-plan.md`](status/repo-governance-master-cleanup-plan.md)
 - Old canon classification: [`status/old-canon-classification-index.md`](status/old-canon-classification-index.md)
 
-## Repository portals
-
-- `frontend/` and `frontend/visual-encyclopedia/` are the active visual canon portals.
-- `backend/` is the local backend-equivalent portal.
-- `codex-os/` is the human Codex OS portal.
-- `product-canon/` is supporting product canon.
-- `validation/` is the local proof and release-gate portal.
-- `history/` is the historical archive portal.
-- `codex/batch-trains/amb-fe-be/` is the installed AMB-FE-BE train package portal.
-
 ## Supporting areas
 
-- `AmbitionsCanon/` supports product/design truth where compatible.
-- `status/` supports implementation, cleanup, and release evidence status.
+- `architecture/` supports implementation structure and decisions where compatible.
+- `audits/` contains generated and manual audit artifacts.
+- `validation/` contains current validation checkpoint artifacts.
 - `codex/`, `.codex/`, and `.agents/` support AI/Codex operation where compatible.
-- `docs/canon/` is legacy/supporting canon only.
 - Historical docs do not override `docs/truth/*`.
 - Generated reports do not prove implementation, validation, or release readiness unless tied to current source and current logs.
-
-## Visual canon + moat control-plane
-
-- [`../frontend/README.md`](../frontend/README.md)
-- [`../frontend/visual-encyclopedia/README.md`](../frontend/visual-encyclopedia/README.md)
-- [`../docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md`](../docs/AmbitionsCanon/20_Visual_Canon_Moat_Implementation_Spec.md)
-- [`codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md`](codex/VISUAL_CANON_MOAT_IMPLEMENTATION_OVERLAY.md)
-- [`codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md`](codex/VISUAL_CANON_MOAT_BATCH_TRAIN.md)
 
 This file is navigation only. It is not implementation proof, validation proof, or release proof.
