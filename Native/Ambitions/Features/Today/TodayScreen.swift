@@ -32,7 +32,7 @@ struct TodayScreen: View {
 
     var body: some View {
         ZStack(alignment: .top) {
-            TodayBackgroundView()
+            TodayBackgroundView(clock: clock)
 
             todayContent
                 .padding(.horizontal, theme.spacing.lg)
@@ -76,6 +76,8 @@ struct TodayScreen: View {
                         outcome: outcome,
                         using: featureFactory.todayService,
                         userDisplayName: userSystem.session.userDisplayName,
+                        now: clock.now,
+                        calendar: clock.calendar,
                         entryContext: shell.navigation.takeTodayEntryContext()
                     )
                 }
@@ -123,6 +125,10 @@ struct TodayScreen: View {
             guard autoLoad else { return }
             await activate()
         }
+        .task {
+            guard autoLoad, clock.advancesAutomatically else { return }
+            await observeDayBoundary()
+        }
         #if DEBUG
         .task(id: viewModel.stateKey) {
             applyDebugScreenshotSheetIfNeeded()
@@ -131,10 +137,10 @@ struct TodayScreen: View {
     }
 
     private var bottomChromeClearance: CGFloat {
-        if showsNavigationChrome {
-            return theme.spacing.xxxl
-        }
-        return dynamicTypeSize.isAccessibilitySize ? 340 : 300
+        TodayViewportSafety.layout(
+            dynamicTypeSize: dynamicTypeSize,
+            showsNavigationChrome: showsNavigationChrome
+        ).rootBottomChromeClearance
     }
 
     @ViewBuilder
@@ -160,12 +166,14 @@ struct TodayScreen: View {
                     selectedStepReplacementSheet = TodayStepReplacementSheetState.make(
                         from: step,
                         privacy: displayRail.privacyProjection,
-                        contextLabel: displayRail.contextSummary
+                        contextLabel: displayRail.contextSummary,
+                        recordedAt: DomainTimestamp.string(from: clock.now)
                     )
                 },
                 onNotThis: { step in
                     selectedRejectionReasonSheet = rejectionReasonSheetState(for: step)
-                }
+                },
+                clock: clock
             )
             .transition(.opacity)
 
@@ -201,6 +209,8 @@ struct TodayScreen: View {
         await viewModel.activate(
             using: featureFactory.todayService,
             userDisplayName: userSystem.session.userDisplayName,
+            now: clock.now,
+            calendar: clock.calendar,
             entryContext: entryContext
         )
     }
@@ -214,8 +224,27 @@ struct TodayScreen: View {
         await viewModel.refresh(
             using: featureFactory.todayService,
             userDisplayName: userSystem.session.userDisplayName,
+            now: clock.now,
+            calendar: clock.calendar,
             entryContext: entryContext
         )
+    }
+
+    private func observeDayBoundary() async {
+        while Task.isCancelled == false {
+            do {
+                try await Task.sleep(for: .seconds(60))
+            } catch {
+                return
+            }
+            await refreshIfDayBoundaryChanged()
+        }
+    }
+
+    private func refreshIfDayBoundaryChanged() async {
+        let now = clock.now
+        guard viewModel.shouldRefreshForDayBoundary(now: now, calendar: clock.calendar) else { return }
+        await refresh()
     }
 
     private func handleAction(_ action: TodayInlineAction) {
@@ -264,6 +293,8 @@ struct TodayScreen: View {
                     action,
                     using: featureFactory.todayService,
                     userDisplayName: userSystem.session.userDisplayName,
+                    now: clock.now,
+                    calendar: clock.calendar,
                     entryContext: .standard
                 )
             }
@@ -317,7 +348,7 @@ struct TodayScreen: View {
             sourceCandidateID: step.id,
             sourceStepID: step.primaryAction.target.stepID ?? step.detailTarget.stepID ?? step.id,
             contextFingerprint: rejectionContextFingerprint(for: step),
-            recordedAt: DomainTimestamp.string(from: .now)
+            recordedAt: DomainTimestamp.string(from: clock.now)
         )
     }
 
@@ -429,6 +460,10 @@ struct TodayScreen: View {
             preconditionFailure("App feature factory capability must be injected.")
         }
         return appFeatureFactoryCapability
+    }
+
+    private var clock: any AmbitionsClock {
+        featureFactory.clock
     }
 
     private var userSystem: AppUserSystemCapability {

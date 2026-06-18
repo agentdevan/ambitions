@@ -46,7 +46,7 @@ struct TodayCommandHandler {
                     )
                 )
             }
-            return try await commandActionHandler(action, command(for: action), now)
+            return try await commandActionHandler(action, command(for: action, now: now), now)
         case .openDetail:
             return TodayActionResponse(
                 message: TodayInlineMessage(
@@ -57,13 +57,13 @@ struct TodayCommandHandler {
             )
         default:
             if Self.commandCapableKinds.contains(action.kind) {
-                return try await commandActionHandler(action, command(for: action), now)
+                return try await commandActionHandler(action, command(for: action, now: now), now)
             }
             return try await feedbackActionHandler(action, now)
         }
     }
 
-    private func command(for action: TodayInlineAction) -> AmbitionsCommand {
+    private func command(for action: TodayInlineAction, now: Date) -> AmbitionsCommand {
         let createdAt = DomainTimestamp.string(from: Date(timeIntervalSince1970: 0))
         if action.kind == .quickLog {
             return AmbitionsCommand(
@@ -101,7 +101,7 @@ struct TodayCommandHandler {
             kind: .openDestination,
             source: .today,
             target: AmbitionsCommandTarget(goalID: action.target.goalID, stepID: action.target.stepID, destination: nil),
-            createdAt: DomainTimestamp.string(from: Date())
+            createdAt: DomainTimestamp.string(from: now)
         )
     }
 }

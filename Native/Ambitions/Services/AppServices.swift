@@ -134,6 +134,17 @@ protocol AppActionRouting {
 struct DefaultStartupService: StartupServicing {
     let preferencesStore: any AppPreferencesStore
     let appStateRepository: (any AppStateRepository)?
+    let clock: any AmbitionsClock
+
+    init(
+        preferencesStore: any AppPreferencesStore,
+        appStateRepository: (any AppStateRepository)?,
+        clock: any AmbitionsClock = SystemClock()
+    ) {
+        self.preferencesStore = preferencesStore
+        self.appStateRepository = appStateRepository
+        self.clock = clock
+    }
 
     func prepareSession(source: AppSession.BootstrapSource) async throws -> AppSession {
         let preferences = try await preferencesStore.loadPreferences()
@@ -144,7 +155,7 @@ struct DefaultStartupService: StartupServicing {
             shouldShowOnboarding = forceOnboarding || (source == .live && state.hasCompletedOnboarding == false)
             state.hasCompletedBootstrap = true
             state.lastBootstrapSource = source
-            state.lastBootstrapAt = ISO8601DateFormatter().string(from: .now)
+            state.lastBootstrapAt = ISO8601DateFormatter().string(from: clock.now)
             try await appStateRepository.saveState(state)
         }
         return AppSession(
@@ -153,7 +164,7 @@ struct DefaultStartupService: StartupServicing {
             initialTab: preferences.preferredTab,
             appearancePreference: preferences.appearancePreference,
             accentFamily: preferences.accentFamily,
-            launchedAt: Date(),
+            launchedAt: clock.now,
             startupNote: startupNote(for: source),
             shouldShowOnboarding: shouldShowOnboarding
         )

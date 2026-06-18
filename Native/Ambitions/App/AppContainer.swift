@@ -21,6 +21,7 @@ final class AppContainer {
     let featureFactory: AppFeatureFactoryCapability
 
     let session: AppSession
+    let clock: any AmbitionsClock
     let runtime: AmbitionsRuntime
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
@@ -45,6 +46,7 @@ final class AppContainer {
     init(
         bootstrapConfiguration: AppBootstrapConfiguration,
         session: AppSession,
+        clock: any AmbitionsClock,
         runtime: AmbitionsRuntime,
         appearancePreference: AppAppearancePreference,
         accentFamily: AmbitionAccentFamily,
@@ -74,6 +76,7 @@ final class AppContainer {
         )
         self.runtimeCapability = AppRuntimeCapability(
             runtime: runtime,
+            clock: clock,
             todayService: todayService,
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
@@ -94,6 +97,7 @@ final class AppContainer {
             externalCreationImportService: externalCreationImportService
         )
         self.featureFactory = AppFeatureFactoryCapability(
+            clock: clock,
             todayService: todayService,
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
@@ -103,6 +107,7 @@ final class AppContainer {
             youService: runtime.youService
         )
         self.session = session
+        self.clock = clock
         self.runtime = runtime
         self.appearancePreference = appearancePreference
         self.accentFamily = accentFamily

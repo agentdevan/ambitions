@@ -10,6 +10,23 @@ struct TodayRealityMeridianFlagshipAdapter: View {
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
     let onShowAnother: (DayRailHeroStepState) -> Void
     let onNotThis: (DayRailHeroStepState) -> Void
+    let clock: any AmbitionsClock
+
+    init(
+        state: AmbitionsDayRailViewState,
+        onAction: @escaping (TodayInlineAction) -> Void,
+        onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void,
+        onShowAnother: @escaping (DayRailHeroStepState) -> Void,
+        onNotThis: @escaping (DayRailHeroStepState) -> Void,
+        clock: any AmbitionsClock = SystemClock()
+    ) {
+        self.state = state
+        self.onAction = onAction
+        self.onOpenStepDetail = onOpenStepDetail
+        self.onShowAnother = onShowAnother
+        self.onNotThis = onNotThis
+        self.clock = clock
+    }
 
     var body: some View {
         FlagshipRuntimeStage(
@@ -24,7 +41,8 @@ struct TodayRealityMeridianFlagshipAdapter: View {
                 onAction: onAction,
                 onOpenStepDetail: onOpenStepDetail,
                 onShowAnother: onShowAnother,
-                onNotThis: onNotThis
+                onNotThis: onNotThis,
+                clock: clock
             )
             .accessibilityIdentifier("today.flagship.reality-meridian.content")
         }
@@ -40,7 +58,14 @@ struct TodayRealityMeridianFlagshipAdapter: View {
     }
 
     private var metrics: [FlagshipRuntimeMetric] {
-        [
+        guard TodayViewportSafety.layout(
+            dynamicTypeSize: dynamicTypeSize,
+            showsNavigationChrome: false
+        ).showsStageMetrics else {
+            return []
+        }
+
+        return [
             FlagshipRuntimeMetric(id: "date", title: "Window", value: state.dateTitle, systemImage: "clock"),
             FlagshipRuntimeMetric(id: "mode", title: "State", value: state.mode.rawValue.capitalized, systemImage: "dial.low"),
             FlagshipRuntimeMetric(id: "duration", title: "Fit", value: state.heroStep?.duration.label ?? "Open", systemImage: "timer")

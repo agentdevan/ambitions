@@ -1122,7 +1122,7 @@ final class AmbitionsUITests: XCTestCase {
                 scenario: "stable",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: "receipt",
-                required: ["Start Here receipt seam", "Still counts", "Waiting", "Blocked", "Not needed"]
+                required: ["Start Here review history", "Still counts", "Waiting", "Blocked", "Not needed"]
             ),
             (
                 name: "reduce-motion-static-equivalent",
@@ -1143,6 +1143,7 @@ final class AmbitionsUITests: XCTestCase {
         for item in matrix {
             var environment = [
                 "AMBITIONS_PREVIEW_TODAY_SCENARIO": item.scenario,
+                "AMBITIONS_PREVIEW_CLOCK_ISO": "2026-04-15T12:00:00Z",
                 "AmbitionsInitialSurface": "today",
                 "AmbitionsScreenshotMode": "YES"
             ]

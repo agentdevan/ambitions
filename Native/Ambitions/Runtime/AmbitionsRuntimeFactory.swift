@@ -4,6 +4,7 @@ enum AmbitionsRuntimeFactory {
     @MainActor
     static func make(
         repositories: AppRepositories,
+        clock: any AmbitionsClock = SystemClock(),
         clientContext: AmbitionsRuntimeClientContext = .iphoneApp,
         capabilities: AmbitionsRuntimeCapabilities = .currentLocalRuntime,
         notificationService: any NotificationServicing,
@@ -53,7 +54,8 @@ enum AmbitionsRuntimeFactory {
                 energyFitService: energyFitService,
                 energyLearningService: energyLearningService,
                 selector: selector,
-                goalIntelligenceService: goalIntelligenceService
+                goalIntelligenceService: goalIntelligenceService,
+                clock: clock
             ),
             snapshotWriter: snapshotWriter
         )

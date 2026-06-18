@@ -8,6 +8,8 @@ final class TodayViewModel {
     var transientMessage: TodayInlineMessage?
 
     private var hasLoaded = false
+    private let dayBoundaryRefreshPolicy = TodayDayBoundaryRefreshPolicy()
+    private(set) var lastLoadedDayStart: Date?
 
     var stateKey: String {
         switch state {
@@ -31,35 +33,39 @@ final class TodayViewModel {
     func activate(
         using service: any TodayServicing,
         userDisplayName: String,
-        now: Date = .now,
+        now: Date,
+        calendar: Calendar,
         entryContext: TodayEntryContext = .standard
     ) async {
         if hasLoaded {
-            await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
+            await refresh(using: service, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext)
         } else {
-            await load(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
+            await load(using: service, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext)
         }
     }
 
     func load(
         using service: any TodayServicing,
         userDisplayName: String,
-        now: Date = .now,
+        now: Date,
+        calendar: Calendar,
         entryContext: TodayEntryContext = .standard
     ) async {
         guard hasLoaded == false else { return }
         hasLoaded = true
-        await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
+        await refresh(using: service, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext)
     }
 
     func refresh(
         using service: any TodayServicing,
         userDisplayName: String,
-        now: Date = .now,
+        now: Date,
+        calendar: Calendar,
         entryContext: TodayEntryContext = .standard
     ) async {
         do {
             state = .loaded(try await service.loadTodayExperience(userDisplayName: userDisplayName, now: now, entryContext: entryContext))
+            lastLoadedDayStart = dayBoundaryRefreshPolicy.loadedDayStart(for: now, calendar: calendar)
         } catch {
             state = .failed("Unable to load Today: \(error.localizedDescription)")
         }
@@ -69,13 +75,14 @@ final class TodayViewModel {
         _ action: TodayInlineAction,
         using service: any TodayServicing,
         userDisplayName: String,
-        now: Date = .now,
+        now: Date,
+        calendar: Calendar,
         entryContext: TodayEntryContext = .standard
     ) async {
         do {
             let response = try await service.performAction(action, now: now)
             transientMessage = response.message
-            await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
+            await refresh(using: service, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext)
         } catch {
             transientMessage = TodayInlineMessage(
                 title: "Action could not finish",
@@ -90,13 +97,14 @@ final class TodayViewModel {
         outcome: TodayActionClosureOutcomeState,
         using service: any TodayServicing,
         userDisplayName: String,
-        now: Date = .now,
+        now: Date,
+        calendar: Calendar,
         entryContext: TodayEntryContext = .standard
     ) async {
         do {
             let response = try await service.recordActionClosure(closure, outcome: outcome, now: now)
             transientMessage = response.message
-            await refresh(using: service, userDisplayName: userDisplayName, now: now, entryContext: entryContext)
+            await refresh(using: service, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext)
         } catch {
             transientMessage = TodayInlineMessage(
                 title: "Closure could not be saved",
@@ -104,5 +112,9 @@ final class TodayViewModel {
                 state: .warning
             )
         }
+    }
+
+    func shouldRefreshForDayBoundary(now: Date, calendar: Calendar) -> Bool {
+        dayBoundaryRefreshPolicy.shouldRefresh(lastLoadedDayStart: lastLoadedDayStart, now: now, calendar: calendar)
     }
 }

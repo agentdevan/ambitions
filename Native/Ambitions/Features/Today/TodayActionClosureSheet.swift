@@ -11,6 +11,7 @@ struct TodayActionClosureSheet: View {
     let onConfirm: (TodayActionClosureOutcomeState) -> Void
 
     @State private var selectedOutcome: TodayActionClosureOutcomeState?
+    @State private var areMoreOutcomesExpanded = true
 
     var body: some View {
         NavigationStack {
@@ -34,7 +35,7 @@ struct TodayActionClosureSheet: View {
                     closureOutcomeSection(title: "Likely outcomes", outcomes: state.primaryOutcomes)
 
                     if state.moreOutcomes.isEmpty == false {
-                        DisclosureGroup("More options") {
+                        DisclosureGroup("More options", isExpanded: $areMoreOutcomesExpanded) {
                             closureOutcomeSection(title: nil, outcomes: state.moreOutcomes)
                                 .padding(.top, theme.spacing.sm)
                         }

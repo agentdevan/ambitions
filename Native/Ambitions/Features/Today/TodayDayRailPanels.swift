@@ -27,19 +27,22 @@ struct RealityMeridianView: View {
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
     let onShowAnother: (DayRailHeroStepState) -> Void
     let onNotThis: (DayRailHeroStepState) -> Void
+    let clock: any AmbitionsClock
 
     init(
         state: AmbitionsDayRailViewState,
         onAction: @escaping (TodayInlineAction) -> Void,
         onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in },
         onShowAnother: @escaping (DayRailHeroStepState) -> Void = { _ in },
-        onNotThis: @escaping (DayRailHeroStepState) -> Void = { _ in }
+        onNotThis: @escaping (DayRailHeroStepState) -> Void = { _ in },
+        clock: any AmbitionsClock = SystemClock()
     ) {
         self.state = state
         self.onAction = onAction
         self.onOpenStepDetail = onOpenStepDetail
         self.onShowAnother = onShowAnother
         self.onNotThis = onNotThis
+        self.clock = clock
     }
 
     var body: some View {
@@ -48,7 +51,8 @@ struct RealityMeridianView: View {
             onAction: onAction,
             onOpenStepDetail: onOpenStepDetail,
             onShowAnother: onShowAnother,
-            onNotThis: onNotThis
+            onNotThis: onNotThis,
+            clock: clock
         )
     }
 }
@@ -64,70 +68,86 @@ struct AmbitionsDayRailView: View {
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
     let onShowAnother: (DayRailHeroStepState) -> Void
     let onNotThis: (DayRailHeroStepState) -> Void
+    let clock: any AmbitionsClock
 
     init(
         state: AmbitionsDayRailViewState,
         onAction: @escaping (TodayInlineAction) -> Void,
         onOpenStepDetail: @escaping (DayRailStepDetailState) -> Void = { _ in },
         onShowAnother: @escaping (DayRailHeroStepState) -> Void = { _ in },
-        onNotThis: @escaping (DayRailHeroStepState) -> Void = { _ in }
+        onNotThis: @escaping (DayRailHeroStepState) -> Void = { _ in },
+        clock: any AmbitionsClock = SystemClock()
     ) {
         self.state = state
         self.onAction = onAction
         self.onOpenStepDetail = onOpenStepDetail
         self.onShowAnother = onShowAnother
         self.onNotThis = onNotThis
+        self.clock = clock
     }
 
     var body: some View {
         let objectStageContract = TodayObjectStagePrimitiveContract.current
+        let viewport = viewportSafety
 
         ZStack(alignment: .bottom) {
             meridianAtmosphere
 
             GeometryReader { proxy in
-                let horizontalInset = dynamicTypeSize.isAccessibilitySize
+                let horizontalInset = usesExpandedViewport
                     ? theme.spacing.md
                     : max(theme.spacing.md, proxy.size.width * 0.055)
-                let railWidth = dynamicTypeSize.isAccessibilitySize ? 34.0 : max(68.0, proxy.size.width * 0.19)
+                let railWidth = usesExpandedViewport ? 34.0 : max(68.0, proxy.size.width * 0.19)
 
                 VStack(alignment: .leading, spacing: 0) {
-                    if dynamicTypeSize.isAccessibilitySize {
+                    if usesExpandedViewport {
                         accessibilityContextCrown
                     } else {
                         todayModeSelector
                             .padding(.bottom, theme.spacing.md)
                     }
 
-                    HStack(alignment: .top, spacing: theme.spacing.lg) {
-                        timeSpine
-                            .frame(width: railWidth)
-
-                        VStack(alignment: .leading, spacing: dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xl) {
+                    if viewport.usesStackedAccessibilityRail {
+                        VStack(alignment: .leading, spacing: theme.spacing.lg) {
                             if let heroStep = state.heroStep {
                                 currentMoment(heroStep)
-                                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xs : theme.spacing.sm)
+                                    .padding(.top, theme.spacing.xs)
                             } else {
                                 emptyMoment
-                                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xs : theme.spacing.sm)
-                            }
-
-                            if dynamicTypeSize.isAccessibilitySize == false {
-                                upNextList
+                                    .padding(.top, theme.spacing.xs)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, theme.spacing.lg)
+                    } else {
+                        HStack(alignment: .top, spacing: theme.spacing.lg) {
+                            timeSpine
+                                .frame(width: railWidth)
+
+                            VStack(alignment: .leading, spacing: theme.spacing.xl) {
+                                if let heroStep = state.heroStep {
+                                    currentMoment(heroStep)
+                                        .padding(.top, theme.spacing.sm)
+                                } else {
+                                    emptyMoment
+                                        .padding(.top, theme.spacing.sm)
+                                }
+
+                                upNextList
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .padding(.top, theme.spacing.xl)
                     }
-                    .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.xl)
 
                     Spacer(minLength: theme.spacing.lg)
                 }
                 .padding(.horizontal, horizontalInset)
-                .padding(.top, topChromeClearance)
-                .padding(.bottom, theme.spacing.lg)
+                .padding(.top, viewport.topChromeClearance)
+                .padding(.bottom, viewport.railBottomContentClearance)
             }
         }
-        .frame(maxWidth: .infinity, minHeight: dynamicTypeSize.isAccessibilitySize ? 700 : 760, alignment: .top)
+        .frame(maxWidth: .infinity, minHeight: viewport.railMinHeight, alignment: .top)
         .padding(.horizontal, -theme.spacing.lg)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(accessibilityLabel)
@@ -169,8 +189,12 @@ struct AmbitionsDayRailView: View {
         .ignoresSafeArea()
     }
 
-    private var topChromeClearance: CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 180 : 116
+    private var viewportSafety: TodayViewportSafety {
+        TodayViewportSafety.layout(dynamicTypeSize: dynamicTypeSize, showsNavigationChrome: false)
+    }
+
+    private var usesExpandedViewport: Bool {
+        viewportSafety.usesStackedAccessibilityRail
     }
 
     private var meridianOrientationField: some View {
@@ -308,13 +332,15 @@ struct AmbitionsDayRailView: View {
     }
 
     private var timeSpine: some View {
-        TimelineView(.periodic(from: .now, by: 60)) { timeline in
-            Group {
-                if dynamicTypeSize.isAccessibilitySize {
-                    compactTimeSpine
-                } else {
+        Group {
+            if usesExpandedViewport {
+                compactTimeSpine
+            } else if clock.advancesAutomatically {
+                TimelineView(.periodic(from: clock.now, by: 60)) { timeline in
                     liveTimeSpine(date: timeline.date)
                 }
+            } else {
+                liveTimeSpine(date: clock.now)
             }
         }
         .padding(.top, theme.spacing.xs)
@@ -343,7 +369,7 @@ struct AmbitionsDayRailView: View {
     }
 
     private func timeLabel(offsetHours: Int, from date: Date) -> String {
-        let adjusted = Calendar.current.date(byAdding: .hour, value: offsetHours, to: date) ?? date
+        let adjusted = clock.calendar.date(byAdding: .hour, value: offsetHours, to: date) ?? date
         return adjusted.formatted(.dateTime.hour())
     }
 
@@ -398,13 +424,6 @@ struct AmbitionsDayRailView: View {
             .offset(x: 25)
     }
 
-    private var currentTimeNode: some View {
-        TimelineView(.periodic(from: .now, by: 60)) { timeline in
-            currentTimeNode(date: timeline.date)
-        }
-        .accessibilityIdentifier("TodayRealityRailLiveNow")
-    }
-
     private func currentTimeNode(date: Date) -> some View {
         HStack(spacing: theme.spacing.xs) {
             VStack(alignment: .trailing, spacing: 1) {
@@ -434,6 +453,7 @@ struct AmbitionsDayRailView: View {
                     .frame(width: 30, height: 30)
             }
         }
+        .accessibilityIdentifier("TodayRealityRailLiveNow")
     }
 
     private func mappedRowNode(index: Int, fallbackSymbol: String, fallbackColor: Color) -> some View {
@@ -469,20 +489,20 @@ struct AmbitionsDayRailView: View {
 
             HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
                 Text(state.privacyProjection.detailTitle(heroStep.title))
-                    .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.section : theme.typography.title).weight(.semibold))
+                    .font((usesExpandedViewport ? theme.typography.section : theme.typography.title).weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
                     .fixedSize(horizontal: false, vertical: true)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 3)
+                    .lineLimit(usesExpandedViewport ? nil : 3)
                     .accessibilityIdentifier("TodayRealityRailStepTitle")
             }
 
-            Text(dynamicTypeSize.isAccessibilitySize ? "Recommended step" : liveMeridianMetaLine(for: heroStep))
-                .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.caption : theme.typography.body)
+            Text(usesExpandedViewport ? "Recommended step" : liveMeridianMetaLine(for: heroStep))
+                .font(usesExpandedViewport ? theme.typography.caption : theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(3)
 
-            if dynamicTypeSize.isAccessibilitySize {
+            if usesExpandedViewport {
                 primaryActionButton(for: heroStep)
                     .padding(.top, theme.spacing.xs)
             } else {
@@ -495,7 +515,7 @@ struct AmbitionsDayRailView: View {
                 Button {
                     onOpenStepDetail(heroStep.stepDetail(privacy: state.privacyProjection, contextLabel: state.contextSummary))
                 } label: {
-                    Text("Trust details")
+                    Text("Why this?")
                         .font(theme.typography.caption.weight(.semibold))
                         .foregroundStyle(theme.colors.textTertiary)
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -529,14 +549,14 @@ struct AmbitionsDayRailView: View {
         } label: {
             HStack(spacing: theme.spacing.sm) {
                 Text(primaryActionTitle(for: heroStep.primaryAction))
-                    .font((dynamicTypeSize.isAccessibilitySize ? theme.typography.body : theme.typography.section).weight(.semibold))
+                    .font((usesExpandedViewport ? theme.typography.body : theme.typography.section).weight(.semibold))
                 Spacer(minLength: theme.spacing.sm)
                 Image(systemName: "arrow.right")
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
             }
             .foregroundStyle(.black.opacity(0.92))
-            .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.md : theme.spacing.lg)
-            .padding(.vertical, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.md)
+            .padding(.horizontal, usesExpandedViewport ? theme.spacing.md : theme.spacing.lg)
+            .padding(.vertical, usesExpandedViewport ? theme.spacing.sm : theme.spacing.md)
             .frame(maxWidth: .infinity)
             .background(
                 Capsule(style: .continuous)
@@ -550,7 +570,7 @@ struct AmbitionsDayRailView: View {
                             endPoint: .bottomTrailing
                         )
                     )
-                    .shadow(color: theme.colors.accentWarm.opacity(dynamicTypeSize.isAccessibilitySize ? 0.16 : 0.34), radius: 16, x: 0, y: 9)
+                    .shadow(color: theme.colors.accentWarm.opacity(usesExpandedViewport ? 0.16 : 0.34), radius: 16, x: 0, y: 9)
             )
         }
         .buttonStyle(.plain)
@@ -562,23 +582,24 @@ struct AmbitionsDayRailView: View {
             HStack(spacing: theme.spacing.sm) {
                 startHereOriginMarker
 
-                Text("No clear step yet")
+                Text("Start here")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.accentWarm)
+                    .accessibilityIdentifier("TodayRealityRailStartHereTitle")
             }
             Text(emptySourceLine)
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.textTertiary)
-            Text("Start here is ready for your next intention.")
+            Text("No step is required right now")
                 .font(theme.typography.title.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4 : 2)
+                .lineLimit(usesExpandedViewport ? 4 : 2)
             Text(state.contextSummary)
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 5 : 3)
+                .lineLimit(usesExpandedViewport ? 5 : 3)
 
             emptyPathActions
                 .padding(.top, theme.spacing.xs)
@@ -586,49 +607,86 @@ struct AmbitionsDayRailView: View {
     }
 
     private var emptyPathActions: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            ForEach(emptyPathActionItems) { item in
-                Button {
-                    onAction(item.action)
-                } label: {
-                    HStack(spacing: theme.spacing.sm) {
-                        Image(systemName: item.systemImage)
-                            .font(.system(size: 13, weight: .semibold, design: .rounded))
-                            .frame(width: 16)
-                            .accessibilityHidden(true)
-                        Text(item.title)
-                            .font(theme.typography.caption.weight(.semibold))
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.78)
+        Group {
+            if usesExpandedViewport {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(emptyPathActionItems) { item in
+                        emptyPathActionButton(item, expands: true)
                     }
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .padding(.horizontal, theme.spacing.sm)
-                    .padding(.vertical, theme.spacing.xs)
-                    .frame(maxWidth: dynamicTypeSize.isAccessibilitySize ? .infinity : nil, alignment: .leading)
-                    .background(
-                        Capsule(style: .continuous)
-                            .fill(theme.colors.surfaceOverlay.opacity(0.34))
-                    )
-                    .overlay(
-                        Capsule(style: .continuous)
-                            .stroke(theme.colors.strokeSubtle.opacity(0.72), lineWidth: 1)
-                    )
                 }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("TodayEmptyPath.\(item.id)")
+            } else {
+                LazyVGrid(
+                    columns: [GridItem(.adaptive(minimum: 210), spacing: theme.spacing.sm, alignment: .leading)],
+                    alignment: .leading,
+                    spacing: theme.spacing.sm
+                ) {
+                    ForEach(emptyPathActionItems) { item in
+                        emptyPathActionButton(item, expands: true)
+                    }
+                }
             }
         }
+        .padding(.bottom, viewportSafety.emptyActionBottomClearance)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Today available actions")
+    }
+
+    private func emptyPathActionButton(_ item: TodayEmptyPathAction, expands: Bool) -> some View {
+        Button {
+            onAction(item.action)
+        } label: {
+            HStack(spacing: theme.spacing.sm) {
+                Image(systemName: item.systemImage)
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .frame(width: 16)
+                    .accessibilityHidden(true)
+                Text(item.title)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.78)
+            }
+            .foregroundStyle(theme.colors.textPrimary)
+            .padding(.horizontal, theme.spacing.sm)
+            .padding(.vertical, theme.spacing.xs)
+            .frame(maxWidth: expands ? .infinity : nil, alignment: .leading)
+            .background(
+                Capsule(style: .continuous)
+                    .fill(theme.colors.surfaceOverlay.opacity(0.34))
+            )
+            .overlay(
+                Capsule(style: .continuous)
+                    .stroke(theme.colors.strokeSubtle.opacity(0.72), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("TodayEmptyPath.\(item.id)")
     }
 
     private var emptyPathActionItems: [TodayEmptyPathAction] {
         [
             TodayEmptyPathAction(
                 id: "capture",
-                title: "Add what changed",
+                title: "Capture what changed",
                 systemImage: "plus.bubble",
-                action: TodayInlineAction(kind: .quickLog, title: "Add what changed", systemImage: "plus.bubble", state: .selected, target: TodayActionTarget())
+                action: TodayInlineAction(kind: .quickLog, title: "Capture what changed", systemImage: "plus.bubble", state: .selected, target: TodayActionTarget())
+            ),
+            TodayEmptyPathAction(
+                id: "shape-time",
+                title: "Shape Time",
+                systemImage: "calendar.badge.clock",
+                action: TodayInlineAction(kind: .openTime, title: "Shape Time", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget())
+            ),
+            TodayEmptyPathAction(
+                id: "review-context",
+                title: "Review context",
+                systemImage: "text.magnifyingglass",
+                action: TodayInlineAction(kind: .askWhyThisMatters, title: "Review context", systemImage: "text.magnifyingglass", state: .default, target: TodayActionTarget())
+            ),
+            TodayEmptyPathAction(
+                id: "record-outcome",
+                title: "Record outcome",
+                systemImage: "checkmark.seal",
+                action: TodayInlineAction(kind: .closeActionClosure, title: "Record outcome", systemImage: "checkmark.seal", state: .default, target: TodayActionTarget())
             ),
             TodayEmptyPathAction(
                 id: "protect-window",
@@ -643,7 +701,7 @@ struct AmbitionsDayRailView: View {
         HStack(spacing: 0) {
             Rectangle()
                 .fill(theme.colors.accentWarm.opacity(reduceMotion ? 0.72 : 0.46))
-                .frame(width: dynamicTypeSize.isAccessibilitySize ? 24 : 42, height: 2)
+                .frame(width: usesExpandedViewport ? 24 : 42, height: 2)
 
             Circle()
                 .strokeBorder(theme.colors.accentWarm.opacity(0.86), lineWidth: 2)
@@ -655,7 +713,7 @@ struct AmbitionsDayRailView: View {
 
             Rectangle()
                 .fill(theme.colors.accentWarm.opacity(reduceMotion ? 0.72 : 0.30))
-                .frame(width: dynamicTypeSize.isAccessibilitySize ? 10 : 16, height: 2)
+                .frame(width: usesExpandedViewport ? 10 : 16, height: 2)
         }
         .shadow(color: reduceMotion ? .clear : theme.colors.accentWarm.opacity(0.22), radius: 8, x: 0, y: 0)
         .accessibilityHidden(true)
@@ -811,7 +869,7 @@ struct AmbitionsDayRailView: View {
 
     private func heroCopy(for heroStep: DayRailHeroStepState) -> String {
         if heroStep.receiptItem.freshness == .unavailable {
-            return "Ambitions can hold the space until a step fits."
+            return "Needs context. Manual planning still works."
         }
         if heroStep.becauseLine.isEmpty == false {
             return heroStep.becauseLine
@@ -824,7 +882,7 @@ struct AmbitionsDayRailView: View {
 
     private var emptySourceLine: String {
         state.mode == .empty
-            ? "Ambitions can hold the space until a step fits."
+            ? "No source change yet."
             : "Choice stays open."
     }
 

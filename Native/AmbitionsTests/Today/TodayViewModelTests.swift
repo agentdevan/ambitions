@@ -1306,7 +1306,9 @@ final class TodayViewModelTests: XCTestCase {
                 target: TodayActionTarget(goalID: "goal-1", stepID: "step-1")
             ),
             using: service,
-            userDisplayName: ""
+            userDisplayName: "",
+            now: PreviewClock.default.now,
+            calendar: PreviewClock.default.calendar
         )
 
         let transientMessage = viewModel.transientMessage
@@ -1319,7 +1321,12 @@ final class TodayViewModelTests: XCTestCase {
     @MainActor
     func testRefreshFailureMovesStateToFailed() async {
         let viewModel = TodayViewModel()
-        await viewModel.refresh(using: FailingTodayService(), userDisplayName: "")
+        await viewModel.refresh(
+            using: FailingTodayService(),
+            userDisplayName: "",
+            now: PreviewClock.default.now,
+            calendar: PreviewClock.default.calendar
+        )
 
         let state = viewModel.state
         guard case let .failed(message) = state else {

@@ -109,7 +109,7 @@ struct TodayStepReplacementSheetState: Identifiable, Equatable {
         from hero: DayRailHeroStepState,
         privacy: DayRailPrivacyProjectionState,
         contextLabel: String,
-        recordedAt: String = DomainTimestamp.string(from: .now)
+        recordedAt: String = DomainTimestamp.string(from: SystemClock().now)
     ) -> TodayStepReplacementSheetState {
         let originalRecommendation = hero.stepDetail(privacy: privacy, contextLabel: contextLabel)
         let sourceStepID = hero.primaryAction.target.stepID ?? hero.detailTarget.stepID ?? hero.id

@@ -50,6 +50,7 @@ enum AppContainerFactory {
     @MainActor
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
         let repositories = try await prepareRepositories(for: configuration)
+        let clock = AmbitionsClockFactory.clock(for: configuration.sessionSource)
         let notificationService = LocalNotificationFoundation(sideEffectLedger: repositories.sideEffectLedger)
         let calendarRemindersService = EventKitIntegrationService(
             sideEffectLedger: repositories.sideEffectLedger,
@@ -57,12 +58,13 @@ enum AppContainerFactory {
         )
         let runtime = AmbitionsRuntimeFactory.make(
             repositories: repositories,
+            clock: clock,
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService
         )
 
         let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)
-        let startupService = DefaultStartupService(preferencesStore: preferencesStore, appStateRepository: repositories.appState)
+        let startupService = DefaultStartupService(preferencesStore: preferencesStore, appStateRepository: repositories.appState, clock: clock)
         let session = try await startupService.prepareSession(source: configuration.sessionSource)
         let navigation = AppNavigationModel(selectedTab: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
@@ -81,12 +83,13 @@ enum AppContainerFactory {
         let memoryLensService = DefaultMemoryLensService(repositories: repositories)
         let onboardingService = RepositoryBackedOnboardingService(appStateRepository: repositories.appState)
         await notificationService.registerCategories()
-        await runtime.snapshotWriter.refresh(now: .now)
-        await notificationService.refreshSchedule(now: .now)
+        await runtime.snapshotWriter.refresh(now: clock.now)
+        await notificationService.refreshSchedule(now: clock.now)
 
         return AppContainer(
             bootstrapConfiguration: configuration,
             session: session,
+            clock: clock,
             runtime: runtime,
             appearancePreference: session.appearancePreference,
             accentFamily: session.accentFamily,

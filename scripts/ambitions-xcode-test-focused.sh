@@ -11,6 +11,8 @@ SCHEME="Ambitions"
 RESULT_DIR=".codex/xcode-results"
 LOG_DIR=".codex/xcode-logs"
 SUMMARY_DIR=".codex/xcode-summaries"
+TIMEOUT_DURATION="15m"
+KILL_AFTER="60s"
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -21,8 +23,10 @@ while [[ "$#" -gt 0 ]]; do
     --results-dir) RESULT_DIR="${2:-$RESULT_DIR}"; shift 2 ;;
     --logs-dir) LOG_DIR="${2:-$LOG_DIR}"; shift 2 ;;
     --summaries-dir) SUMMARY_DIR="${2:-$SUMMARY_DIR}"; shift 2 ;;
+    --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
+    --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID>" >&2
+      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--timeout 15m] [--kill-after 60s]" >&2
       exit 0
       ;;
     *)
@@ -74,6 +78,7 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
 fi
 
 TEST_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -destination "$SIM_DEST" -derivedDataPath "$DERIVED_DATA" test-without-building -only-testing "$test_filter" CODE_SIGNING_ALLOWED=NO -resultBundlePath "$RESULT_BUNDLE")
+BOUNDED_TEST_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --log "$LOG_FILE" -- "${TEST_CMD[@]}")
 
 extract_executed_tests() {
   local log_file="$1"
@@ -94,10 +99,10 @@ PY
 run_once() {
   set +e
   if command -v xcbeautify >/dev/null 2>&1; then
-    "${TEST_CMD[@]}" 2>&1 | tee "$LOG_FILE" | xcbeautify
+    "${BOUNDED_TEST_CMD[@]}" 2>&1 | xcbeautify
     status=${PIPESTATUS[0]}
   else
-    "${TEST_CMD[@]}" 2>&1 | tee "$LOG_FILE"
+    "${BOUNDED_TEST_CMD[@]}"
     status=$?
   fi
   set -e
@@ -126,7 +131,11 @@ if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
   scripts/ambitions-xcode-result-extract.sh --result "$RESULT_BUNDLE" --output-dir "$SUMMARY_DIR/$BATCH/$RUN_ID/extract" || true
 fi
 
-classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification", ""))')"
+if [[ "$status" -eq 124 ]]; then
+  classification="timeout"
+else
+  classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification", ""))')"
+fi
 executed_tests="$(extract_executed_tests "$LOG_FILE")"
 if [[ "$status" -eq 0 ]]; then
   if [[ "$executed_tests" =~ ^[0-9]+$ && "$executed_tests" -gt 0 ]]; then

@@ -9,6 +9,8 @@ SCHEME="Ambitions"
 RESULT_DIR=".codex/xcode-results"
 LOG_DIR=".codex/xcode-logs"
 SUMMARY_DIR=".codex/xcode-summaries"
+TIMEOUT_DURATION="30m"
+KILL_AFTER="60s"
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -17,8 +19,10 @@ while [[ "$#" -gt 0 ]]; do
     --results-dir) RESULT_DIR="${2:-$RESULT_DIR}"; shift 2 ;;
     --logs-dir) LOG_DIR="${2:-$LOG_DIR}"; shift 2 ;;
     --summaries-dir) SUMMARY_DIR="${2:-$SUMMARY_DIR}"; shift 2 ;;
+    --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
+    --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH>" >&2
+      echo "Usage: scripts/ambitions-xcode-build-for-testing.sh --batch <BATCH> [--timeout 30m] [--kill-after 60s]" >&2
       exit 0
       ;;
     *)
@@ -92,13 +96,14 @@ PY
 fi
 
 BUILD_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -sdk iphonesimulator -destination "$SIM_DEST" -derivedDataPath "$DERIVED_DATA" build-for-testing CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO -resultBundlePath "$RESULT_BUNDLE")
+BOUNDED_BUILD_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --log "$LOG_FILE" -- "${BUILD_CMD[@]}")
 
 set +e
 if command -v xcbeautify >/dev/null 2>&1; then
-  "${BUILD_CMD[@]}" 2>&1 | tee "$LOG_FILE" | xcbeautify
+  "${BOUNDED_BUILD_CMD[@]}" 2>&1 | xcbeautify
   status=${PIPESTATUS[0]}
 else
-  "${BUILD_CMD[@]}" 2>&1 | tee "$LOG_FILE"
+  "${BOUNDED_BUILD_CMD[@]}"
   status=$?
 fi
 set -e
@@ -108,7 +113,9 @@ if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
 fi
 
 classification="unknown"
-if [[ -f "$LOG_FILE" ]]; then
+if [[ "$status" -eq 124 ]]; then
+  classification="timeout"
+elif [[ -f "$LOG_FILE" ]]; then
   classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification","unknown"))' )"
 fi
 

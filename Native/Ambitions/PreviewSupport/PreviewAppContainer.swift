@@ -15,11 +15,12 @@ enum PreviewAppContainerFactory {
         habitsDashboard: HabitsDashboard = PreviewHabitsScenarios.seeded
     ) -> AppContainer {
         let fixtures = PreviewFixtures.default
+        let clock = PreviewClock.environmentOverride() ?? .default
         let navigation = AppNavigationModel(selectedTab: fixtures.preferences.preferredTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
         let todayService = StubTodayService(experience: todayExperience)
         let captureService = StubCaptureService(captures: fixtures.captures)
-        let runtime = makePreviewRuntime()
+        let runtime = makePreviewRuntime(clock: clock)
         let goalsService = runtime.goalsService
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,
@@ -34,10 +35,11 @@ enum PreviewAppContainerFactory {
                 initialTab: fixtures.preferences.preferredTab,
                 appearancePreference: fixtures.preferences.appearancePreference,
                 accentFamily: fixtures.preferences.accentFamily,
-                launchedAt: .now,
+                launchedAt: clock.now,
                 startupNote: "Preview bootstrap uses isolated in-memory fixtures.",
                 shouldShowOnboarding: false
             ),
+            clock: clock,
             runtime: runtime,
             appearancePreference: fixtures.preferences.appearancePreference,
             accentFamily: fixtures.preferences.accentFamily,
@@ -73,7 +75,7 @@ enum PreviewAppContainerFactory {
     }
 
     @MainActor
-    private static func makePreviewRuntime() -> AmbitionsRuntime {
+    private static func makePreviewRuntime(clock: any AmbitionsClock) -> AmbitionsRuntime {
         let store = try! AmbitionsPersistenceStore(inMemory: true)
         let repositories = AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
@@ -88,6 +90,7 @@ enum PreviewAppContainerFactory {
         )
         return AmbitionsRuntimeFactory.make(
             repositories: repositories,
+            clock: clock,
             notificationService: StubNotificationService(),
             calendarRemindersService: StubCalendarRemindersService()
         )

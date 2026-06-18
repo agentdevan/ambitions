@@ -6,42 +6,57 @@ import SwiftUI
 
 struct TodayBackgroundView: View {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    let clock: any AmbitionsClock
+
+    init(clock: any AmbitionsClock = SystemClock()) {
+        self.clock = clock
+    }
 
     var body: some View {
-        TimelineView(.periodic(from: .now, by: reduceMotion ? 300 : 60)) { context in
-            let palette = TodaySkyPalette(date: context.date)
-
-            ZStack {
-                LinearGradient(
-                    colors: [palette.topColor, palette.midColor, palette.bottomColor],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
-
-                RadialGradient(
-                    colors: [palette.glowColor.opacity(palette.glowOpacity), .clear],
-                    center: UnitPoint(x: palette.glowX, y: palette.glowY),
-                    startRadius: 20,
-                    endRadius: 360
-                )
-                .ignoresSafeArea()
-                .blendMode(.screen)
-
-                TodayStarField(opacity: palette.starOpacity, date: context.date)
-                    .ignoresSafeArea()
-
-                LinearGradient(
-                    colors: [
-                        Color.black.opacity(0.34),
-                        Color.black.opacity(0.56),
-                        Color.black.opacity(0.76),
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                .ignoresSafeArea()
+        Group {
+            if clock.advancesAutomatically {
+                TimelineView(.periodic(from: clock.now, by: reduceMotion ? 300 : 60)) { context in
+                    sky(date: context.date)
+                }
+            } else {
+                sky(date: clock.now)
             }
+        }
+    }
+
+    private func sky(date: Date) -> some View {
+        let palette = TodaySkyPalette(date: date, calendar: clock.calendar)
+
+        return ZStack {
+            LinearGradient(
+                colors: [palette.topColor, palette.midColor, palette.bottomColor],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+
+            RadialGradient(
+                colors: [palette.glowColor.opacity(palette.glowOpacity), .clear],
+                center: UnitPoint(x: palette.glowX, y: palette.glowY),
+                startRadius: 20,
+                endRadius: 360
+            )
+            .ignoresSafeArea()
+            .blendMode(.screen)
+
+            TodayStarField(opacity: palette.starOpacity, date: date)
+                .ignoresSafeArea()
+
+            LinearGradient(
+                colors: [
+                    Color.black.opacity(0.34),
+                    Color.black.opacity(0.56),
+                    Color.black.opacity(0.76),
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
         }
     }
 }
@@ -83,8 +98,7 @@ private struct TodaySkyPalette {
     let glowY: CGFloat
     let starOpacity: Double
 
-    init(date: Date) {
-        let calendar = Calendar.current
+    init(date: Date, calendar: Calendar) {
         let seconds = calendar.dateComponents([.hour, .minute, .second], from: date)
         let hour = Double(seconds.hour ?? 0)
         let minute = Double(seconds.minute ?? 0)

@@ -14,6 +14,7 @@ struct RepositoryBackedTodayService: TodayServicing {
     let explainabilityProjector: any GoalExplainabilityProjecting
     let goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)?
     let derivedReadModelCache: TodayDerivedReadModelCache
+    let clock: any AmbitionsClock
 
     init(
         repositories: AppRepositories,
@@ -29,7 +30,8 @@ struct RepositoryBackedTodayService: TodayServicing {
         selector: PlanningNextStepSelector? = nil,
         explainabilityProjector: any GoalExplainabilityProjecting = DefaultGoalExplainabilityProjector(),
         goalIntelligenceService: (any RuntimeGoalIntelligenceServicing)? = nil,
-        derivedReadModelCache: TodayDerivedReadModelCache = TodayDerivedReadModelCache()
+        derivedReadModelCache: TodayDerivedReadModelCache = TodayDerivedReadModelCache(),
+        clock: any AmbitionsClock = SystemClock()
     ) {
         self.repositories = repositories
         self.adaptationService = adaptationService
@@ -48,6 +50,7 @@ struct RepositoryBackedTodayService: TodayServicing {
         self.explainabilityProjector = explainabilityProjector
         self.goalIntelligenceService = goalIntelligenceService
         self.derivedReadModelCache = derivedReadModelCache
+        self.clock = clock
     }
 
     func loadTodayExperience(userDisplayName: String, now: Date, entryContext: TodayEntryContext) async throws -> TodayExperience {
@@ -780,7 +783,7 @@ private extension RepositoryBackedTodayService {
         dailyTargets: TodayDailyTargetsState,
         freeTime: TodayFreeTimeState
     ) -> [TodayOpenWindowState] {
-        let calendar = Calendar.current
+        let calendar = clock.calendar
         let hour = calendar.component(.hour, from: now)
         let laneTitles: [(String, String)] = [
             ("Next 45 minutes", hour < 17 ? "A near-term block is still available if the next step stays bounded." : "A short closing block is still available if it stays gentle."),
@@ -1239,7 +1242,7 @@ private extension RepositoryBackedTodayService {
             ])
             if HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) {
                 let cadenceDays = HabitGoalSemantics.cadenceDays(goal: goal, step: selectedStep)
-                goal = update(goal: goal, stepID: stepID) { step in
+                goal = update(goal: goal, stepID: stepID, now: now) { step in
                     Step(
                         id: step.id,
                         sectionID: step.sectionID,
@@ -1258,7 +1261,7 @@ private extension RepositoryBackedTodayService {
                     )
                 }
             } else {
-                goal = update(goal: goal, stepID: stepID) { step in
+                goal = update(goal: goal, stepID: stepID, now: now) { step in
                     Step(
                         id: step.id,
                         sectionID: step.sectionID,
@@ -1302,7 +1305,7 @@ private extension RepositoryBackedTodayService {
                 )
             }
             try await repositories.feedback.saveEvents(events, goalID: goalID)
-            goal = update(goal: goal, stepID: stepID) { step in
+            goal = update(goal: goal, stepID: stepID, now: now) { step in
                 let shifted = shiftedTiming(for: step.timing, now: now, adjustment: adjustment)
                 return Step(
                     id: step.id,
@@ -1361,7 +1364,7 @@ private extension RepositoryBackedTodayService {
                 )
             }
             try await repositories.feedback.saveEvents(events, goalID: goalID)
-            goal = update(goal: goal, stepID: stepID) { step in
+            goal = update(goal: goal, stepID: stepID, now: now) { step in
                 let shifted = shiftedTiming(for: step.timing, now: now, adjustment: decision?.timingAdjustment ?? .laterThisWeek)
                 return Step(
                     id: step.id,
@@ -1393,7 +1396,7 @@ private extension RepositoryBackedTodayService {
         case .markNotRelevant:
             events.append(.notRelevant(base: base))
             try await repositories.feedback.saveEvents(events, goalID: goalID)
-            goal = update(goal: goal, stepID: stepID) { step in
+            goal = update(goal: goal, stepID: stepID, now: now) { step in
                 Step(
                     id: step.id,
                     sectionID: step.sectionID,
@@ -1496,7 +1499,7 @@ private extension RepositoryBackedTodayService {
                 ?? decision?.smallerStep?.summary
                 ?? selectedStep.actionability.fallbackMicroStep
             if replacement.isEmpty == false {
-                goal = update(goal: goal, stepID: stepID) { step in
+                goal = update(goal: goal, stepID: stepID, now: now) { step in
                     let timing = decision?.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
                     return Step(
                         id: step.id,
@@ -1561,7 +1564,7 @@ private extension RepositoryBackedTodayService {
             }
             try await repositories.feedback.saveEvents(events, goalID: goalID)
             if let decision {
-                goal = update(goal: goal, stepID: stepID) { step in
+                goal = update(goal: goal, stepID: stepID, now: now) { step in
                     let shifted = decision.timingAdjustment.map { shiftedTiming(for: step.timing, now: now, adjustment: $0) } ?? step.timing
                     return Step(
                         id: step.id,
@@ -1696,7 +1699,7 @@ private extension RepositoryBackedTodayService {
         clarificationCount: Int,
         blockedCount: Int
     ) -> TodayHeaderState {
-        let hour = Calendar.current.component(.hour, from: now)
+        let hour = clock.calendar.component(.hour, from: now)
         let trimmedName = userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines)
         let greeting: String
         switch hour {
@@ -2064,7 +2067,7 @@ private extension RepositoryBackedTodayService {
         activeGoals: [Goal],
         feedback: [GoalFeedbackEvent]
     ) -> TodayReflectionState {
-        let hour = Calendar.current.component(.hour, from: now)
+        let hour = clock.calendar.component(.hour, from: now)
         let prompt = hour >= 18
             ? "What helped today feel lighter than it could have?"
             : "When tonight arrives, what do you want to feel good about?"
@@ -2090,7 +2093,7 @@ private extension RepositoryBackedTodayService {
     }
 
     func todayCompletionTitles(snapshot: Snapshot, now: Date) -> [String] {
-        let dayStart = Calendar.current.startOfDay(for: now)
+        let dayStart = clock.calendar.startOfDay(for: now)
         return snapshot.feedback.compactMap { event -> String? in
             guard case .completed(let base, _, _, _) = event else { return nil }
             guard let occurredAt = parseDate(base.occurredAt), occurredAt >= dayStart else { return nil }
@@ -2321,11 +2324,11 @@ private extension RepositoryBackedTodayService {
         let shiftedDate: Date
         switch adjustment {
         case .laterToday:
-            shiftedDate = Calendar.current.date(byAdding: .hour, value: 3, to: now) ?? now
+            shiftedDate = clock.calendar.date(byAdding: .hour, value: 3, to: now) ?? now
         case .laterThisWeek:
-            shiftedDate = Calendar.current.date(byAdding: .day, value: 2, to: now) ?? now
+            shiftedDate = clock.calendar.date(byAdding: .day, value: 2, to: now) ?? now
         case .someday:
-            shiftedDate = Calendar.current.date(byAdding: .day, value: 14, to: now) ?? now
+            shiftedDate = clock.calendar.date(byAdding: .day, value: 14, to: now) ?? now
         case .removeDeadline:
             shiftedDate = now
         }
@@ -2360,7 +2363,7 @@ private extension RepositoryBackedTodayService {
         }
     }
 
-    func update(goal: Goal, stepID: String, transform: (Step) -> Step) -> Goal {
+    func update(goal: Goal, stepID: String, now: Date, transform: (Step) -> Step) -> Goal {
         let updatedSections = goal.plan?.sections.map { section in
             PlanSection(
                 id: section.id,
@@ -2392,7 +2395,7 @@ private extension RepositoryBackedTodayService {
             id: goal.id,
             revision: goal.revision + 1,
             createdAt: goal.createdAt,
-            updatedAt: Self.iso.string(from: .now),
+            updatedAt: Self.iso.string(from: now),
             state: goal.state,
             title: goal.title,
             summary: goal.summary,

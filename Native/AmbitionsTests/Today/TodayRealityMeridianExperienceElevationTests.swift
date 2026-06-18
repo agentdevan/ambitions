@@ -17,8 +17,12 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
     }
 
     func testAMB572PrimitiveRegistryIncludesTodayObjectStageEntry() throws {
+        let registryURL = repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
+        guard FileManager.default.fileExists(atPath: registryURL.path) else {
+            throw XCTSkip("Repo source tree is unavailable from this test runner sandbox.")
+        }
         let registry = try String(
-            contentsOf: repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md"),
+            contentsOf: registryURL,
             encoding: .utf8
         )
 
@@ -78,7 +82,6 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
         let missedRecoverable = PreviewTodayScenarios.missedRecoverable.execution.dayRail
         let blocked = PreviewTodayScenarios.blockedWaiting.execution.dayRail
         let recoveryExperience = PreviewTodayScenarios.recovery
-        let recovery = recoveryExperience.execution.dayRail
         let review = PreviewTodayScenarios.heroDisabled.execution.dayRail
         let sourceUnavailable = PreviewTodayScenarios.sourceUnavailable.execution.dayRail
 
@@ -118,15 +121,51 @@ final class TodayRealityMeridianExperienceElevationTests: XCTestCase {
         XCTAssertEqual(coverage?.isGreen, true)
     }
 
+    func testTrain5TodayLensWrapsRealityMeridianStates() {
+        let generatedAt = PreviewClock.default.now
+        let normal = TodayLens(experience: PreviewTodayScenarios.stable, generatedAt: generatedAt)
+        let protected = TodayLens(experience: PreviewTodayScenarios.protectedTime, generatedAt: generatedAt)
+        let blocked = TodayLens(experience: PreviewTodayScenarios.blockedWaiting, generatedAt: generatedAt)
+        let empty = TodayLens(experience: PreviewTodayScenarios.empty, generatedAt: generatedAt)
+        let sourceUnavailable = TodayLens(experience: PreviewTodayScenarios.sourceUnavailable, generatedAt: generatedAt)
+        let completedProof = TodayLens(experience: PreviewTodayScenarios.startHereReady, generatedAt: generatedAt)
+
+        XCTAssertEqual(normal.stageScene.meridian.primaryObjectTitle, "Reality Meridian")
+        XCTAssertEqual(normal.stageScene.startHere?.primaryActionTitle, "Start now")
+        XCTAssertTrue(normal.stageScene.meridian.voiceOverOrder.contains("Start here"))
+        XCTAssertTrue(normal.stageScene.meridian.dynamicTypeSummary.contains("Dynamic Type"))
+        XCTAssertTrue(normal.stageScene.meridian.reducedMotionSummary.contains("Reduced motion"))
+        XCTAssertEqual(protected.stageScene.meridian.mode, .protected)
+        XCTAssertTrue(blocked.stageScene.showsBlockedOrWaitingState)
+        XCTAssertNil(empty.stageScene.startHere)
+        XCTAssertEqual(empty.stageScene.meridian.noStepSummary, "No step is required right now.")
+        XCTAssertTrue(sourceUnavailable.stageScene.meridian.sourceUnavailable)
+        XCTAssertTrue(completedProof.stageScene.showsCompletedProofState)
+    }
+
     private func repoRoot() -> URL {
-        var url = URL(fileURLWithPath: #filePath)
-        while url.pathComponents.count > 1 {
-            let candidate = url.appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
-            if FileManager.default.fileExists(atPath: candidate.path) {
-                return url
+        let environment = ProcessInfo.processInfo.environment
+        let roots = [
+            environment["SRCROOT"],
+            environment["PROJECT_DIR"],
+            FileManager.default.currentDirectoryPath,
+            #filePath,
+        ].compactMap { $0 }
+
+        for root in roots {
+            var url = URL(fileURLWithPath: root)
+            if url.pathExtension.isEmpty == false {
+                url.deleteLastPathComponent()
             }
-            url.deleteLastPathComponent()
+            while url.pathComponents.count > 1 {
+                let candidate = url.appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
+                if FileManager.default.fileExists(atPath: candidate.path) {
+                    return url
+                }
+                url.deleteLastPathComponent()
+            }
         }
+
         return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
     }
 }

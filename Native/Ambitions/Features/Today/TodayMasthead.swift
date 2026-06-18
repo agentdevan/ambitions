@@ -7,7 +7,7 @@ struct TodayMasthead: View {
     let date: Date
     let contextSummary: String?
 
-    init(date: Date = .now, contextSummary: String? = nil) {
+    init(date: Date = SystemClock().now, contextSummary: String? = nil) {
         self.date = date
         self.contextSummary = contextSummary
     }

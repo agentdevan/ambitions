@@ -222,7 +222,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         let service = MutableTodayService(experience: first)
         let viewModel = TodayViewModel()
 
-        await viewModel.activate(using: service, userDisplayName: "Sample User", now: fixedNow)
+        await viewModel.activate(using: service, userDisplayName: "Sample User", now: fixedNow, calendar: PreviewClock.utcCalendar)
 
         guard case let .loaded(initialExperience) = viewModel.state else {
             return XCTFail("Expected Today to load on first activation.")
@@ -232,7 +232,7 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         }
 
         await service.setExperience(second)
-        await viewModel.activate(using: service, userDisplayName: "Sample User", now: fixedNow)
+        await viewModel.activate(using: service, userDisplayName: "Sample User", now: fixedNow, calendar: PreviewClock.utcCalendar)
 
         guard case let .loaded(refreshedExperience) = viewModel.state else {
             return XCTFail("Expected Today to refresh when activated again.")

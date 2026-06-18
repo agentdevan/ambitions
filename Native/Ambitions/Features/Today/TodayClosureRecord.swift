@@ -13,7 +13,7 @@ struct TodayClosureRecord: Equatable, Hashable, Sendable {
     let outcome: ClosureState
     let occurredAt: Date
 
-    init(stepID: String?, goalID: String?, outcome: ClosureState, occurredAt: Date = .now) {
+    init(stepID: String?, goalID: String?, outcome: ClosureState, occurredAt: Date = SystemClock().now) {
         self.stepID = stepID
         self.goalID = goalID
         self.outcome = outcome
