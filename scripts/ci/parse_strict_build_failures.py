@@ -30,7 +30,7 @@ def read_status(root: Path) -> list[dict]:
 
 
 def parse_log(path: Path) -> list[dict]:
-    failures: list[dict] = []
+    diagnostics: list[dict] = []
     seen: set[tuple] = set()
     for index, raw in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), start=1):
         line = raw.strip()
@@ -66,8 +66,8 @@ def parse_log(path: Path) -> list[dict]:
         if key in seen:
             continue
         seen.add(key)
-        failures.append(item)
-    return failures
+        diagnostics.append(item)
+    return diagnostics
 
 
 def main() -> int:
@@ -79,21 +79,26 @@ def main() -> int:
 
     root = Path(args.root)
     log_paths = sorted(root.rglob("*.log")) + sorted(root.rglob("*.txt"))
-    failures: list[dict] = []
+    diagnostics: list[dict] = []
     for path in log_paths:
         if path.name in {"strict-build-summary.md"}:
             continue
-        failures.extend(parse_log(path))
+        diagnostics.extend(parse_log(path))
 
     phase_status = read_status(root)
     failed_phases = [phase for phase in phase_status if phase.get("exit_code") not in (0, None)]
+    errors = [item for item in diagnostics if str(item.get("severity", "")).lower().endswith("error") or str(item.get("severity", "")).lower() == "error"]
+    warnings = [item for item in diagnostics if str(item.get("severity", "")).lower() == "warning"]
+    status = "GREEN_NO_FAILURES_PARSED" if not errors and not failed_phases else "RED_FAILURES_PARSED"
     report = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "root": root.as_posix(),
-        "status": "GREEN_NO_FAILURES_PARSED" if not failures and not failed_phases else "RED_FAILURES_PARSED",
+        "status": status,
         "failed_phases": failed_phases,
-        "failure_count": len(failures),
-        "failures": failures,
+        "failure_count": len(errors),
+        "warning_count": len(warnings),
+        "failures": errors,
+        "warnings": warnings,
     }
 
     json_path = Path(args.json) if args.json else root / "strict-build-failures.json"
@@ -106,7 +111,8 @@ def main() -> int:
         "# Ambitions Strict Build / Launch Summary",
         "",
         f"Status: `{report['status']}`",
-        f"Failure count: `{len(failures)}`",
+        f"Failure count: `{len(errors)}`",
+        f"Warning count: `{len(warnings)}`",
         "",
         "## Failed phases",
         "",
@@ -118,21 +124,32 @@ def main() -> int:
     else:
         lines.append("No failed phase recorded.")
     lines += ["", "## Parsed failures", ""]
-    if failures:
+    if errors:
         lines += ["| File | Line | Column | Severity | Message | Log |", "|---|---:|---:|---|---|---|"]
-        for item in failures[:200]:
+        for item in errors[:200]:
             file = item.get("file") or ""
             line = item.get("line") or ""
             column = item.get("column") or ""
             message = str(item.get("message") or "").replace("|", "\\|")
             lines.append(f"| `{file}` | `{line}` | `{column}` | `{item.get('severity')}` | {message} | `{item.get('log')}:{item.get('log_line')}` |")
     else:
-        lines.append("No compiler-style failures were parsed. Inspect raw logs for command/toolchain failures.")
+        lines.append("No compiler-style failures were parsed.")
+    lines += ["", "## Parsed warnings", ""]
+    if warnings:
+        lines += ["| File | Line | Column | Message | Log |", "|---|---:|---:|---|---|"]
+        for item in warnings[:200]:
+            file = item.get("file") or ""
+            line = item.get("line") or ""
+            column = item.get("column") or ""
+            message = str(item.get("message") or "").replace("|", "\\|")
+            lines.append(f"| `{file}` | `{line}` | `{column}` | {message} | `{item.get('log')}:{item.get('log_line')}` |")
+    else:
+        lines.append("No warnings parsed.")
     lines += [
         "",
         "## Non-claims",
         "",
-        "This parser does not fix source, infer release readiness, or replace the raw logs. It exists to make exact compiler/build/launch failures reviewable.",
+        "This parser does not fix source, infer release readiness, or replace the raw logs. Warnings are reported separately and do not mark the strict run red unless a phase fails.",
         "",
     ]
     md_path.write_text("\n".join(lines), encoding="utf-8")
