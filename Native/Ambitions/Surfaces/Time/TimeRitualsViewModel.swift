@@ -33,13 +33,13 @@ final class TimeRitualsViewModel {
         self.inlineMessage = inlineMessage
     }
 
-    func load(using service: any HabitsServicing, now: Date = .now) async {
+    func load(using service: any HabitsServicing, now: Date) async {
         guard hasLoaded == false else { return }
         hasLoaded = true
         await refresh(using: service, now: now)
     }
 
-    func refresh(using service: any HabitsServicing, now: Date = .now) async {
+    func refresh(using service: any HabitsServicing, now: Date) async {
         do {
             state = .loaded(try await service.loadDashboard(now: now))
         } catch {
@@ -47,7 +47,7 @@ final class TimeRitualsViewModel {
         }
     }
 
-    func perform(_ action: HabitActionState, using service: any HabitsServicing, now: Date = .now) async {
+    func perform(_ action: HabitActionState, using service: any HabitsServicing, now: Date) async {
         do {
             let response = try await service.performAction(
                 HabitActionRequest(kind: action.kind, target: action.target),

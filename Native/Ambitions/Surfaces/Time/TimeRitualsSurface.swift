@@ -32,7 +32,7 @@ struct TimeRitualsSurface: View {
                         state: DegradedStateOrchestrator.unavailable(surface: "Rituals"),
                         primaryAccessibilityIdentifier: "habits.retry-button",
                         onPrimaryAction: {
-                            Task { await viewModel.refresh(using: featureFactory.habitsService) }
+                            Task { await refresh() }
                         }
                     )
                 case let .loaded(dashboard):
@@ -117,7 +117,7 @@ struct TimeRitualsSurface: View {
         }
         .scrollIndicators(.hidden)
         .refreshable {
-            await viewModel.refresh(using: featureFactory.habitsService)
+            await refresh()
         }
         .navigationTitle("Rituals")
         .accessibilityIdentifier("time.rituals.surface")
@@ -128,7 +128,7 @@ struct TimeRitualsSurface: View {
             postMutationAccessibilityAnnouncement()
         }
         .task {
-            await viewModel.load(using: featureFactory.habitsService)
+            await viewModel.load(using: featureFactory.habitsService, now: clock.now)
         }
     }
 
@@ -157,7 +157,7 @@ struct TimeRitualsSurface: View {
         }
 
         Task {
-            await viewModel.perform(action, using: featureFactory.habitsService)
+            await viewModel.perform(action, using: featureFactory.habitsService, now: clock.now)
         }
     }
 
@@ -173,6 +173,14 @@ struct TimeRitualsSurface: View {
             preconditionFailure("App feature factory capability must be injected.")
         }
         return appFeatureFactoryCapability
+    }
+
+    private var clock: any AmbitionsClock {
+        featureFactory.clock
+    }
+
+    private func refresh() async {
+        await viewModel.refresh(using: featureFactory.habitsService, now: clock.now)
     }
 
     private func postMutationAccessibilityAnnouncement() {
