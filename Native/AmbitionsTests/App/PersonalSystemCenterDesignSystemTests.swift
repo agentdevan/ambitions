@@ -103,11 +103,11 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
     func testAMB576YouObjectStageControlPrimitiveReplacesGenericProfileSettingsContainers() throws {
         let contract = YouObjectStageControlPrimitiveContract.current
         let rootSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/You/YouRootSurface.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootSurface.swift"),
             encoding: .utf8
         )
         let screenSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/You/YouScreen.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouScreen.swift"),
             encoding: .utf8
         )
 
@@ -155,7 +155,7 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
         XCTAssertTrue(screenSource.contains("YouCrossSurfaceProofReviewSurface("))
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()

@@ -888,7 +888,7 @@ struct PreviewFixtures: Sendable {
                 id: "eb35-trust-memory-controls",
                 title: "Trust and memory controls",
                 surface: "You",
-                fixtureOwner: "Native/Ambitions/Features/You/YouFeatureService.swift",
+                fixtureOwner: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift",
                 sourceTruth: "Trust Center / What Ambitions Knows",
                 commandIntent: nil,
                 memoryQuery: nil,
@@ -914,7 +914,7 @@ struct PreviewFixtures: Sendable {
     )
 }
 
-private func makePreviewSourceAtlasKnowledgeState() -> YouSourceAtlasKnowledgeState {
+func makePreviewSourceAtlasKnowledgeState() -> YouSourceAtlasKnowledgeState {
     YouSourceAtlasKnowledgeState(
         title: "Source Atlas & Goal Knowledge",
         subtitle: "What Ambitions used, why it used it, and where review or correction stays supported.",
@@ -1172,7 +1172,7 @@ private func makePreviewSourceAtlasKnowledgeState() -> YouSourceAtlasKnowledgeSt
     )
 }
 
-private func makePreviewSourceAtlasKnowledgeRow(
+func makePreviewSourceAtlasKnowledgeRow(
     id: String,
     icon: String,
     title: String,
@@ -1210,7 +1210,7 @@ private func makePreviewSourceAtlasKnowledgeRow(
     )
 }
 
-private func sourceAtlasStateLabel(_ state: SourceAtlasRequirementSourceState) -> String {
+func sourceAtlasStateLabel(_ state: SourceAtlasRequirementSourceState) -> String {
     switch state {
     case .unknown:
         return "Unknown"
@@ -1233,7 +1233,7 @@ private func sourceAtlasStateLabel(_ state: SourceAtlasRequirementSourceState) -
     }
 }
 
-private func sourceAtlasFreshnessLabel(_ state: SourceAtlasRequirementFreshnessState) -> String {
+func sourceAtlasFreshnessLabel(_ state: SourceAtlasRequirementFreshnessState) -> String {
     switch state {
     case .current:
         return "Current"
@@ -1244,7 +1244,7 @@ private func sourceAtlasFreshnessLabel(_ state: SourceAtlasRequirementFreshnessS
     }
 }
 
-private func sourceAtlasRiskLabel(_ state: SourceAtlasRequirementRiskState) -> String {
+func sourceAtlasRiskLabel(_ state: SourceAtlasRequirementRiskState) -> String {
     switch state {
     case .low:
         return "Low risk"

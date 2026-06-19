@@ -51,7 +51,7 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
     }
 
     func testAMB582GoalReviewTrailAndReceiptsUseProofRelationshipTracePrimitiveFamily() throws {
-        let goalSource = try source("Native/Ambitions/Features/Goals/GoalDetailScreen.swift", root: repoRoot())
+        let goalSource = try source("Native/Ambitions/Surfaces/Goals/GoalDetailScreen.swift", root: repoRoot())
         let reviewTrailSource = try section(
             named: "private struct GoalDetailReviewTrailSurface",
             endingBefore: "private struct GoalDetailProofRailSurface",
@@ -86,7 +86,7 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/screenshots/proof-relationship-trace-family-amb-582.png"))
     }
 
-    private func section(named startMarker: String, endingBefore endMarker: String, in source: String) throws -> String {
+    func section(named startMarker: String, endingBefore endMarker: String, in source: String) throws -> String {
         guard let start = source.range(of: startMarker),
               let end = source.range(of: endMarker, range: start.lowerBound..<source.endIndex) else {
             throw XCTSkip("Source section could not be located for \(startMarker).")
@@ -94,11 +94,11 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
         return String(source[start.lowerBound..<end.lowerBound])
     }
 
-    private func source(_ relativePath: String, root: URL) throws -> String {
+    func source(_ relativePath: String, root: URL) throws -> String {
         try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()

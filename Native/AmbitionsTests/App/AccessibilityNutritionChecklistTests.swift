@@ -412,7 +412,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
 
         XCTAssertTrue(requirements.contains {
             $0.axis == .overloadedToday &&
-                $0.ownerFile == "Native/Ambitions/Features/Today/TodayScreen.swift" &&
+                $0.ownerFile == "Native/Ambitions/Surfaces/Today/TodayScreen.swift" &&
                 $0.requiredAdaptation.localizedCaseInsensitiveContains("one clear next action") &&
                 $0.forbiddenAdaptation.localizedCaseInsensitiveContains("shame")
         })
@@ -431,7 +431,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
     }
 
-    private static let d21ExpectedAuditOrder = [
+    static let d21ExpectedAuditOrder = [
         "today",
         "reviews-archive",
         "rich-panels",
@@ -447,7 +447,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         "external-surfaces"
     ]
 
-    private func assertAFI12Proof(
+    func assertAFI12Proof(
         _ proof: AFI12AccessibilitySurfaceProof?,
         surface: String,
         primaryObject: String,
@@ -475,7 +475,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         assertContains(proof.manualProofStillRequired, snippets: ["Manual VoiceOver", "Dynamic Type", "Reduce Motion"], file: file, line: line)
     }
 
-    private func assertContains(
+    func assertContains(
         _ text: String,
         snippets: [String],
         file: StaticString = #filePath,

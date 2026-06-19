@@ -157,7 +157,7 @@ final class CapturePlacementReviewStateTests: XCTestCase {
             encoding: .utf8
         )
         let createGoalSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Goals/CreateGoalScreen.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Surfaces/Goals/CreateGoalScreen.swift"),
             encoding: .utf8
         )
 
@@ -177,7 +177,7 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertFalse(routePreviewSource.contains("Thinks"))
     }
 
-    private func makeCapture(
+    func makeCapture(
         status: CaptureStatus,
         route: CaptureRoute,
         kind: CaptureKind = .raw,
@@ -197,7 +197,7 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         )
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()

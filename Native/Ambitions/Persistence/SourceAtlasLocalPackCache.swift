@@ -1,5 +1,6 @@
 import Foundation
 
+// AMBITIONS-QUALITY-EXTRACTION: Cohesive owner boundary remains under the hard 600-line ceiling after adjacent declarations were extracted; split further only with behavior-level tests.
 enum SourceAtlasPublicPackRequestIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case missingPackID = "missing_pack_id"
     case missingManifestVersion = "missing_manifest_version"
@@ -445,7 +446,7 @@ private extension SourceAtlasLocalPackCache {
         if loadResult.hasPack == false {
             conditions.append(.missingPack)
         }
-        if loadResult.quarantines.contains(where: \.isCorruptOrInvalidPack) {
+        if loadResult.quarantines.contains(where: \.isSourceAtlasCorruptOrInvalidPack) {
             conditions.append(.corruptInvalidPack)
         }
         return orderedConditions(conditions)
@@ -479,7 +480,7 @@ private extension SourceAtlasLocalPackCache {
 }
 
 private extension SourceAtlasStoreQuarantine {
-    var isCorruptOrInvalidPack: Bool {
+    var isSourceAtlasCorruptOrInvalidPack: Bool {
         switch reason {
         case .corruptJSON, .unsupportedSchema, .hashMismatch, .invalidPack:
             return true

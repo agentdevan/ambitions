@@ -106,7 +106,11 @@ SHELL_POLICY_PATTERNS = [
     r"\.ignoresSafeArea\s*\(",
     r"\.safeAreaInset\s*\(",
     r"\.toolbar\s*\(",
-    r"keyboard",
+    r"@FocusState",
+    r"\.focused\s*\(",
+    r"\.keyboardShortcut\s*\(",
+    r"\.keyboardType\s*\(",
+    r"\.submitLabel\s*\(",
     r"dock",
     r"crown",
     r"focus restoration",
@@ -252,6 +256,29 @@ def add_regex_findings(
                 break
 
 
+def is_centralized_design_token_usage(line: str) -> bool:
+    if "theme." not in line and "DAVMotionPreset." not in line:
+        return False
+    if re.search(r"\.font\s*\(\s*\.system", line):
+        return re.search(r"size\s*:\s*theme\.icon\.", line) is not None
+    if re.search(r"RoundedRectangle\s*\(\s*cornerRadius\s*:", line):
+        return re.search(r"cornerRadius\s*:\s*theme\.radius\.", line) is not None
+    if re.search(r"\.animation\s*\(", line):
+        return "theme.motion.animation" in line or "DAVMotionPreset." in line
+    return False
+
+
+def add_design_token_findings(findings: list[Finding], path: Path, text: str) -> None:
+    for index, line in enumerate(text.splitlines(), start=1):
+        if is_centralized_design_token_usage(line):
+            continue
+        for pattern in RAW_DESIGN_LITERAL_PATTERNS:
+            if re.search(pattern, line, flags=re.IGNORECASE):
+                detail = f"line {index}: {pattern} :: {line.strip()[:160]}"
+                findings.append(Finding("design-token", rel(path), detail))
+                break
+
+
 def check_architecture(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for required in REQUIRED_ARCHITECTURE_PATHS:
@@ -325,7 +352,7 @@ def check_design_tokens(files: list[Path], changed: set[str]) -> list[Finding]:
             continue
         should_scan = relative.startswith(SURFACE_OWNED_PATH_PREFIXES) or relative in changed
         if should_scan:
-            add_regex_findings(findings, "design-token", path, RAW_DESIGN_LITERAL_PATTERNS, read(path))
+            add_design_token_findings(findings, path, read(path))
     return findings
 
 

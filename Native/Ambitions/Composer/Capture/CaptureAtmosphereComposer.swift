@@ -156,7 +156,6 @@ struct CaptureAtmosphereComposer: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
-    @FocusState private var isFocused: Bool
 
     @Binding var text: String
 
@@ -230,19 +229,10 @@ struct CaptureAtmosphereComposer: View {
                 .frame(height: 1)
                 .accessibilityHidden(true)
         }
-        .animation(
+        .stageMotionAnimation(
             DAVMotionPreset.receiptConfirmation.animation(theme: theme, reduceMotion: reduceMotion),
             value: presentation.isRouteRevealVisible
         )
-        .animation(
-            DAVMotionPreset.receiptConfirmation.animation(theme: theme, reduceMotion: reduceMotion),
-            value: isFocused
-        )
-        .onAppear {
-            if shouldAutoFocus {
-                isFocused = true
-            }
-        }
         .accessibilityElement(children: .contain)
         .accessibilityValue(presentation.accessibilityValue)
     }
@@ -302,8 +292,6 @@ struct CaptureAtmosphereComposer: View {
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textPrimary)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2...5 : 1...3)
-                .submitLabel(.done)
-                .focused($isFocused)
                 .onSubmit {
                     if isSubmitEnabled {
                         onSubmit()
@@ -314,7 +302,6 @@ struct CaptureAtmosphereComposer: View {
                 .accessibilityHint("Type a thought. Route suggestions appear after input.")
 
             Button {
-                isFocused = true
                 onMicrophone()
             } label: {
                 Image(systemName: "mic.fill")
@@ -332,7 +319,7 @@ struct CaptureAtmosphereComposer: View {
         .background(fieldBackground)
         .overlay(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
-                .stroke(isFocused ? theme.colors.accentWarm : theme.colors.strokeSubtle, lineWidth: isFocused ? 1.5 : 1)
+                .stroke(text.isEmpty ? theme.colors.strokeSubtle : theme.colors.accentWarm, lineWidth: text.isEmpty ? 1 : 1.5)
         )
         .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -342,7 +329,7 @@ struct CaptureAtmosphereComposer: View {
             ContextAtmosphereLayer(
                 context: .capture,
                 state: composerState,
-                intensity: isFocused ? 0.5 : 0.38
+                intensity: text.isEmpty ? 0.38 : 0.5
             )
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
                 .fill(theme.colors.surfaceSecondary.opacity(0.92))

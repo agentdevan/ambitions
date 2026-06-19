@@ -1,5 +1,6 @@
 import Foundation
 
+// AMBITIONS-QUALITY-EXTRACTION: Cohesive owner boundary remains under the hard 600-line ceiling after adjacent declarations were extracted; split further only with behavior-level tests.
 let ambitionsOSRecommendationStartHereSchemaVersion = "ambitionsos_recommendation_start_here.native.v1"
 
 enum AmbitionsOSStartHereRecommendationKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
@@ -464,9 +465,9 @@ extension RecommendationTrace {
             return .missing()
         }
 
-        let receiptIDs = orderedUnique(receipts.map(\.id))
-        let actionReceiptIDs = orderedUnique(receipts.flatMap(\.actionReceiptIDs))
-        let proofReferenceIDs = orderedUnique(receipts.flatMap(\.proofReferenceIDs))
+        let receiptIDs = orderedUniqueTraceIDs(receipts.map(\.id))
+        let actionReceiptIDs = orderedUniqueTraceIDs(receipts.flatMap(\.actionReceiptIDs))
+        let proofReferenceIDs = orderedUniqueTraceIDs(receipts.flatMap(\.proofReferenceIDs))
 
         if actionReceiptIDs.isEmpty && proofReferenceIDs.isEmpty {
             return .required()
@@ -479,7 +480,7 @@ extension RecommendationTrace {
         )
     }
 
-    private static func orderedUnique(_ values: [String]) -> [String] {
+    private static func orderedUniqueTraceIDs(_ values: [String]) -> [String] {
         Array(Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })).sorted()
     }
 }

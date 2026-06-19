@@ -67,15 +67,9 @@ struct ProgressiveIntelligenceOnboardingView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                TabView(selection: $page) {
-                    orientationPage
-                        .tag(Page.orientation)
-                    startPage
-                        .tag(Page.start)
-                    trustPage
-                        .tag(Page.trust)
-                }
-                .tabViewStyle(.page(indexDisplayMode: .never))
+                currentPage
+                    .id(page)
+                    .transition(.opacity)
 
                 footer
             }
@@ -86,7 +80,19 @@ struct ProgressiveIntelligenceOnboardingView: View {
         .accessibilityIdentifier("onboarding.screen")
     }
 
-    private var orientationPage: some View {
+    @ViewBuilder
+    var currentPage: some View {
+        switch page {
+        case .orientation:
+            orientationPage
+        case .start:
+            startPage
+        case .trust:
+            trustPage
+        }
+    }
+
+    var orientationPage: some View {
         return onboardingPage(
             eyebrow: "Ambitions",
             title: ActivationContract.orientationTitle,
@@ -113,7 +119,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         }
     }
 
-    private var startPage: some View {
+    var startPage: some View {
         let goalPromise = ActivationContract.promise(for: .firstMeaningfulGoal)
         let capturePromise = ActivationContract.promise(for: .firstCapturedLifeObject)
         let todayPromise = ActivationContract.promise(for: .firstTodayContract)
@@ -145,7 +151,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         }
     }
 
-    private var trustPage: some View {
+    var trustPage: some View {
         let trustMessage = ActivationContract.trustMessage
 
         return onboardingPage(
@@ -157,7 +163,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
     }
 
     @ViewBuilder
-    private func onboardingPage(
+    func onboardingPage(
         eyebrow: String,
         title: String,
         subtitle: String,
@@ -214,7 +220,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         .scrollIndicators(.hidden)
     }
 
-    private func copySectionCard(title: String, subtitle: String, rows: [ActivationCopyRow]) -> some View {
+    func copySectionCard(title: String, subtitle: String, rows: [ActivationCopyRow]) -> some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
@@ -247,7 +253,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         }
     }
 
-    private func choiceRow(choice: OnboardingEntryChoice, title: String, subtitle: String, icon: String) -> some View {
+    func choiceRow(choice: OnboardingEntryChoice, title: String, subtitle: String, icon: String) -> some View {
         Button {
             selectedChoice = choice
         } label: {
@@ -283,7 +289,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         .accessibilityIdentifier("onboarding.choice.\(choice.rawValue)")
     }
 
-    private var footer: some View {
+    var footer: some View {
         HStack(spacing: theme.spacing.sm) {
             Button {
                 moveBackward()
@@ -309,7 +315,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         .background(theme.surfaces.overlayGradient.opacity(theme.surfaces.backgroundBlurOpacity))
     }
 
-    private var startButtonTitle: String {
+    var startButtonTitle: String {
         switch selectedChoice {
         case .createFirstGoal: "Create first goal"
         case .captureFirst: "Capture first"
@@ -317,7 +323,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         }
     }
 
-    private var startButtonIcon: String {
+    var startButtonIcon: String {
         switch selectedChoice {
         case .createFirstGoal: "target"
         case .captureFirst: "tray.and.arrow.down"
@@ -325,7 +331,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         }
     }
 
-    private func moveForward() {
+    func moveForward() {
         switch page {
         case .orientation:
             page = .start
@@ -336,7 +342,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         }
     }
 
-    private func moveBackward() {
+    func moveBackward() {
         switch page {
         case .orientation:
             return
@@ -348,7 +354,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
     }
 }
 
-private enum Page: Int, Hashable {
+enum Page: Int, Hashable {
     case orientation
     case start
     case trust

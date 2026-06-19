@@ -63,6 +63,7 @@ targets:
       - path: Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift
       - path: Native/Ambitions/ExternalSnapshots/SharedExternalSnapshotStore.swift
       - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
+      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift
       - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceControlContracts.swift
       - path: Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift
     settings:
@@ -85,6 +86,7 @@ targets:
           - "**/*.md"
       - path: Native/Ambitions/ExternalSnapshots/ExternalCreationContracts.swift
       - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
+      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift
       - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
       - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceContractModels.swift
       - path: Native/Ambitions/ExternalSnapshots/SharedExternalSnapshotStore.swift

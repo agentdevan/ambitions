@@ -29,7 +29,7 @@ struct CaptureComposerSurface: View {
     var body: some View {
         ZStack(alignment: .top) {
             LivingSurfaceBackground(context: .capture, state: captureLivingState, intensity: 0.68)
-                .ignoresSafeArea()
+                .stageOwnedIgnoresSafeArea()
 
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: theme.spacing.lg) {
@@ -88,7 +88,7 @@ struct CaptureComposerSurface: View {
             }
             .scrollIndicators(.hidden)
 
-            ContextCrownHeader(
+            StageContextHeader(
                 title: "Capture",
                 contextPhrase: promptSubtitle
             )

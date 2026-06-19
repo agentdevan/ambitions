@@ -13,11 +13,11 @@ final class FrontendRecoveryGateTests: XCTestCase {
 
     func testIR01VisibleRecoveryCopyAvoidsObsoleteRootLabelsAndConfidenceTheater() throws {
         let checkedFiles = [
-            "Native/Ambitions/Features/Today/TodayScreen.swift",
+            "Native/Ambitions/Surfaces/Today/TodayScreen.swift",
             "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
-            "Native/Ambitions/Features/Goals/GoalsScreen.swift",
+            "Native/Ambitions/Surfaces/Goals/GoalsScreen.swift",
             "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
-            "Native/Ambitions/Features/You/YouRootSurface.swift"
+            "Native/Ambitions/Surfaces/You/YouRootSurface.swift"
         ]
 
         for relativePath in checkedFiles {
@@ -40,13 +40,15 @@ final class FrontendRecoveryGateTests: XCTestCase {
 
     func testIR01RecoveredSurfacesExposeCanonObjectIdentifiers() throws {
         let expectations: [(String, String)] = [
-            ("Native/Ambitions/Features/Today/TodayScreen.swift", "RealityMeridianView"),
-            ("Native/Ambitions/Features/Today/TodayScreen.swift", "TodayExecutionDepthDisclosure"),
-            ("Native/Ambitions/Features/Goals/GoalsScreen.swift", "GoalsDirectionDepthDisclosure"),
+            ("Native/Ambitions/Surfaces/Today/TodayScreen.swift", "TodayRealityMeridianFlagshipAdapter"),
+            ("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels.swift", "RealityMeridianView"),
+            ("Native/Ambitions/Surfaces/Today/TodayScreen.swift", "TodayExecutionDepthDisclosure"),
+            ("Native/Ambitions/Surfaces/Goals/GoalsScreen.swift", "GoalsDirectionDepthDisclosure"),
             ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "AtmosphereComposerCanvas"),
             ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "CaptureDepthDisclosure"),
-            ("Native/Ambitions/Surfaces/Time/TimeSurface.swift", "LifeShapeFieldView"),
-            ("Native/Ambitions/Features/You/YouRootSurface.swift", "User System Profile")
+            ("Native/Ambitions/Surfaces/Time/TimeSurface.swift", "TimeObjectView"),
+            ("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", "LifeShapeFieldView"),
+            ("Native/Ambitions/Surfaces/You/YouRootSurface.swift", "User System Profile")
         ]
 
         for (relativePath, needle) in expectations {
@@ -57,9 +59,9 @@ final class FrontendRecoveryGateTests: XCTestCase {
 
     func testIR01TopLevelRecoveryCopyStaysOnActiveCanon() throws {
         let filePaths = [
-            "Native/Ambitions/Features/Goals/GoalsScreen.swift",
+            "Native/Ambitions/Surfaces/Goals/GoalsScreen.swift",
             "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
-            "Native/Ambitions/Features/You/YouRootSurface.swift",
+            "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
             "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift"
         ]
 
@@ -76,7 +78,7 @@ final class FrontendRecoveryGateTests: XCTestCase {
         XCTAssertFalse(contents.localizedCaseInsensitiveContains("AI " + "confidence"))
     }
 
-    private var repoRoot: URL {
+    var repoRoot: URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.lastPathComponent != "ambitions", url.path != "/" {
             url.deleteLastPathComponent()

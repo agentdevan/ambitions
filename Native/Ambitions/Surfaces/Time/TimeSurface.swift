@@ -19,7 +19,7 @@ struct TimeSurface: View {
     var body: some View {
         ZStack {
             LivingSurfaceBackground(context: .time, state: timeLivingState, intensity: 0.64)
-                .ignoresSafeArea()
+                .stageOwnedIgnoresSafeArea()
 
             ScrollView {
                 VStack(alignment: .leading, spacing: theme.spacing.lg) {
@@ -64,7 +64,7 @@ struct TimeSurface: View {
             }
             .accessibilityIdentifier("time.content-scroll")
             .scrollIndicators(.hidden)
-            .safeAreaInset(edge: .bottom, spacing: 0) {
+            .stageOwnedSafeAreaInset(edge: .bottom, spacing: 0) {
                 Color.clear
                     .frame(height: dynamicTypeSize.isAccessibilitySize ? 172 : theme.spacing.xxxl)
                     .allowsHitTesting(false)

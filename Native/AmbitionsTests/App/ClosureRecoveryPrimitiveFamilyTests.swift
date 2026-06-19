@@ -31,8 +31,8 @@ final class ClosureRecoveryPrimitiveFamilyTests: XCTestCase {
 
     func testAMB578ActiveClosureRecoverySurfacesUsePrimitiveFamily() throws {
         let root = repoRoot()
-        let todayClosureSource = try source("Native/Ambitions/Features/Today/TodayActionClosureSheet.swift", root: root)
-        let todayPanelsSource = try source("Native/Ambitions/Features/Today/TodayPanels.swift", root: root)
+        let todayClosureSource = try source("Native/Ambitions/Stage/Overlays/TodayActionClosureSheet.swift", root: root)
+        let todayPanelsSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayPanels.swift", root: root)
         let habitsSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TimeRitualViews.swift", root: root)
         let richPanelSource = try source("Sources/Components/RichPanelPrimitives.swift", root: root)
         let canonicalSource = try source("Sources/Components/AmbitionsV2CanonicalComponents.swift", root: root)
@@ -67,11 +67,11 @@ final class ClosureRecoveryPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/screenshots/closure-recovery-family-amb-578.png"))
     }
 
-    private func source(_ relativePath: String, root: URL) throws -> String {
+    func source(_ relativePath: String, root: URL) throws -> String {
         try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()

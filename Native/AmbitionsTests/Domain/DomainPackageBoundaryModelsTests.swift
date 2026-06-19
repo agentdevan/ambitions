@@ -41,7 +41,7 @@ final class DomainPackageBoundaryModelsTests: XCTestCase {
                 imports: ["Foundation", "SwiftUI"]
             ),
             DomainSourceFileBoundary(
-                path: "Native/Ambitions/Features/Today/TodayFeatureService.swift",
+                path: "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift",
                 imports: ["Foundation"]
             ),
             DomainSourceFileBoundary(
@@ -64,7 +64,7 @@ final class DomainPackageBoundaryModelsTests: XCTestCase {
             [
                 "Native/Ambitions/Domain/BadView.swift",
                 "Native/Ambitions/Domain/MissingFoundation.swift",
-                "Native/Ambitions/Features/Today/TodayFeatureService.swift"
+                "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift"
             ]
         )
         XCTAssertFalse(report.canMoveDomainToPackage)

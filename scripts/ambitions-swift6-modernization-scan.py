@@ -366,7 +366,7 @@ def run_self_test() -> int:
             print("SELF_TEST clean fixture unexpectedly blocked", file=sys.stderr)
             return 1
 
-        legacy = root / "Native/Ambitions/Features/Today/LegacyViewModel.swift"
+        legacy = root / "Native/Ambitions/Surfaces/Today/LegacyViewModel.swift"
         legacy.write_text(
             "import Combine\n\nfinal class LegacyViewModel: ObservableObject {\n    @Published var title = \"\"\n    var cancellables: Set<AnyCancellable> = []\n}\n",
             encoding="utf-8",

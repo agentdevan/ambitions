@@ -53,9 +53,9 @@ final class TodayViewportSafetyTests: XCTestCase {
     }
 
     func testTodayScreenAndRailRouteLayoutThroughViewportPolicy() throws {
-        let screenSource = try source("Native/Ambitions/Features/Today/TodayScreen.swift")
-        let railSource = try source("Native/Ambitions/Features/Today/TodayDayRailPanels.swift")
-        let adapterSource = try source("Native/Ambitions/Features/Today/TodayRealityMeridianFlagshipAdapter.swift")
+        let screenSource = try source("Native/Ambitions/Surfaces/Today/TodayScreen.swift")
+        let railSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels.swift")
+        let adapterSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayRealityMeridianFlagshipAdapter.swift")
 
         XCTAssertTrue(screenSource.contains("rootBottomChromeClearance"))
         XCTAssertTrue(railSource.contains("usesStackedAccessibilityRail"))
@@ -63,15 +63,15 @@ final class TodayViewportSafetyTests: XCTestCase {
         XCTAssertTrue(adapterSource.contains("showsStageMetrics"))
     }
 
-    private func source(_ relativePath: String) throws -> String {
+    func source(_ relativePath: String) throws -> String {
         let url = repoRoot().appendingPathComponent(relativePath)
         return try String(contentsOf: url, encoding: .utf8)
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.pathComponents.count > 1 {
-            let candidate = url.appendingPathComponent("Native/Ambitions/Features/Today/TodayViewportSafety.swift")
+            let candidate = url.appendingPathComponent("Native/Ambitions/Stage/Chrome/TodayViewportSafety.swift")
             if FileManager.default.fileExists(atPath: candidate.path) {
                 return url
             }

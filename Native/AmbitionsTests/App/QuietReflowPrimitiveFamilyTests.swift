@@ -34,7 +34,7 @@ final class QuietReflowPrimitiveFamilyTests: XCTestCase {
     func testAMB579ActiveQuietReflowSurfacesUsePrimitiveFamily() throws {
         let root = repoRoot()
         let timeFieldSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
-        let todayReplacementSource = try source("Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift", root: root)
+        let todayReplacementSource = try source("Native/Ambitions/Stage/Overlays/TodayStepReplacementSheet.swift", root: root)
 
         XCTAssertTrue(timeFieldSource.contains("QuietReflowPrimitiveStage("))
         XCTAssertTrue(timeFieldSource.contains("QuietReflowBeforeAfterPrimitive("))
@@ -56,7 +56,7 @@ final class QuietReflowPrimitiveFamilyTests: XCTestCase {
     func testAMB579PreviewBeforeCommitAndReceiptPathRemainInspectable() throws {
         let root = repoRoot()
         let timeFieldSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
-        let todayReplacementSource = try source("Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift", root: root)
+        let todayReplacementSource = try source("Native/Ambitions/Stage/Overlays/TodayStepReplacementSheet.swift", root: root)
 
         XCTAssertTrue(timeFieldSource.contains("beforeLabel: option.beforeAfterPreview.beforeLabel"))
         XCTAssertTrue(timeFieldSource.contains("receiptLabel: option.beforeAfterPreview.receiptPreviewLabel"))
@@ -75,11 +75,11 @@ final class QuietReflowPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/screenshots/quiet-reflow-family-amb-579.png"))
     }
 
-    private func source(_ relativePath: String, root: URL) throws -> String {
+    func source(_ relativePath: String, root: URL) throws -> String {
         try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()

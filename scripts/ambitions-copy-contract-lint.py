@@ -19,12 +19,12 @@ DEFAULT_ROOT = Path(__file__).resolve().parents[1]
 
 PRODUCTION_UI_PREFIXES = (
     "Native/Ambitions/App/",
-    "Native/Ambitions/Features/Capture/",
-    "Native/Ambitions/Features/Goals/",
-    "Native/Ambitions/Features/Motion/",
-    "Native/Ambitions/Features/Time/",
-    "Native/Ambitions/Features/Today/",
-    "Native/Ambitions/Features/You/",
+    "Native/Ambitions/Composer/Capture/",
+    "Native/Ambitions/Stage/Motion/",
+    "Native/Ambitions/Surfaces/Goals/",
+    "Native/Ambitions/Surfaces/Time/",
+    "Native/Ambitions/Surfaces/Today/",
+    "Native/Ambitions/Surfaces/You/",
 )
 
 PRODUCTION_COMPONENT_PREFIXES = (

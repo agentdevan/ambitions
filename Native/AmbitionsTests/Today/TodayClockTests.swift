@@ -86,7 +86,7 @@ final class TodayClockTests: XCTestCase {
     }
 
     func testTodaySourcesDoNotReadSystemTimeDirectlyOutsideSystemClock() throws {
-        let sourceRoot = repoRoot().appendingPathComponent("Native/Ambitions/Features/Today")
+        let sourceRoot = repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/Today")
         let fileURLs = try swiftFiles(under: sourceRoot)
         let disallowedPatterns = [
             #"Date\(\)"#,
@@ -108,7 +108,7 @@ final class TodayClockTests: XCTestCase {
         XCTAssertTrue(findings.isEmpty, "Today source still reads live time directly: \(findings.joined(separator: ", "))")
     }
 
-    private func swiftFiles(under root: URL) throws -> [URL] {
+    func swiftFiles(under root: URL) throws -> [URL] {
         guard let enumerator = FileManager.default.enumerator(
             at: root,
             includingPropertiesForKeys: [.isRegularFileKey],
@@ -126,10 +126,10 @@ final class TodayClockTests: XCTestCase {
         }
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         while url.pathComponents.count > 1 {
-            let candidate = url.appendingPathComponent("Native/Ambitions/Features/Today")
+            let candidate = url.appendingPathComponent("Native/Ambitions/Surfaces/Today")
             if FileManager.default.fileExists(atPath: candidate.path) {
                 return url
             }
@@ -141,7 +141,7 @@ final class TodayClockTests: XCTestCase {
 
 private actor ClockRecordingTodayService: TodayServicing {
     let experience: TodayExperience
-    private var nows: [Date] = []
+    var nows: [Date] = []
 
     init(experience: TodayExperience) {
         self.experience = experience

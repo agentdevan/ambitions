@@ -38,7 +38,7 @@ final class ProductMeaningCanvasEngineTests: XCTestCase {
 
     func testAMB583ActiveSurfacesUseSharedCanvasEngine() throws {
         let root = repoRoot()
-        let goalsSource = try source("Native/Ambitions/Features/Goals/GoalComponents.swift", root: root)
+        let goalsSource = try source("Native/Ambitions/DesignSystem/ProductObjects/GoalComponents.swift", root: root)
         let timeSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
         let motionSource = try source("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift", root: root)
 
@@ -68,11 +68,11 @@ final class ProductMeaningCanvasEngineTests: XCTestCase {
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/screenshots/canvas-engines-and-fallbacks-amb-583.png"))
     }
 
-    private func source(_ relativePath: String, root: URL) throws -> String {
+    func source(_ relativePath: String, root: URL) throws -> String {
         try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()

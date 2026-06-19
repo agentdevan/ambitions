@@ -45,7 +45,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
     func testAMB596GoalsFirstViewportTrustDepthUsesVisibleNonTruncatingSummary() throws {
         let stageSource = try goalsStageSource()
         let modelSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Goals/GoalsFeatureModels.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels.swift"),
             encoding: .utf8
         )
 
@@ -64,7 +64,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
 
     func testAMB575GoalsScreenReservesBottomChromeClearanceForObjectStageProof() throws {
         let source = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Goals/GoalsScreen.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/Goals/GoalsScreen.swift"),
             encoding: .utf8
         )
 
@@ -90,7 +90,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertTrue(stageSceneSource.contains("inspectionSummary.localizedCaseInsensitiveContains(\"proof\")"))
     }
 
-    private func goalsStageSource() throws -> String {
+    func goalsStageSource() throws -> String {
         let source = try String(
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView.swift"),
             encoding: .utf8
@@ -102,14 +102,14 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         return String(source[stageStart.lowerBound...])
     }
 
-    private func goalsLensSource() throws -> String {
+    func goalsLensSource() throws -> String {
         try String(
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses/GoalsLens.swift"),
             encoding: .utf8
         )
     }
 
-    private func repoRoot() -> URL {
+    func repoRoot() -> URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
             .deletingLastPathComponent()
