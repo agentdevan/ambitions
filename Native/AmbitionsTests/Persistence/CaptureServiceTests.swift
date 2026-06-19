@@ -7,6 +7,7 @@ final class CaptureServiceTests: XCTestCase {
             CaptureSourceType.allCases.map(\.rawValue),
             [
                 "today_quick_capture",
+                "shell_composer",
                 "notification",
                 "share_extension_text",
                 "share_extension_url",
@@ -14,6 +15,7 @@ final class CaptureServiceTests: XCTestCase {
             ]
         )
         XCTAssertEqual(CaptureSourceType.todayQuickCapture.title, "Today quick capture")
+        XCTAssertEqual(CaptureSourceType.shellComposer.title, "Global Capture")
         XCTAssertEqual(CaptureSourceType.notification.title, "Notification")
         XCTAssertEqual(CaptureSourceType.shareExtensionText.title, "Share extension text")
         XCTAssertEqual(CaptureSourceType.shareExtensionURL.title, "Share extension URL")

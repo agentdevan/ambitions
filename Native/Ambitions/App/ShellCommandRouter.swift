@@ -177,15 +177,16 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
             }
 
             do {
+                let sourceType = appShellCaptureSourceType(for: source)
                 let decision = smartAttachmentAdapter.decision(
                     rawText: trimmed,
-                    sourceType: captureSourceType(for: source),
+                    sourceType: sourceType,
                     sourceSurface: source.displayTitle
                 )
                 let capture = try await captureService.createCapture(
                     (decision ?? fallbackDecision(for: trimmed, source: source)).createCaptureRequest(
                         rawText: trimmed,
-                        sourceType: captureSourceType(for: source)
+                        sourceType: sourceType
                     ),
                     now: now
                 )
@@ -301,25 +302,10 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         )
     }
 
-    private func captureSourceType(for source: ShellCommandEntrySource) -> CaptureSourceType? {
-        switch source {
-        case .todayQuickCapture:
-            return .todayQuickCapture
-        case .appIntent:
-            return .appIntent
-        case .notification:
-            return .notification
-        case .shareExtension:
-            return .shareExtensionText
-        case .shellCompose, .shellUtility, .goalsCreate, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen, .deepLink, .widget, .external:
-            return nil
-        }
-    }
-
     private func fallbackDecision(for text: String, source: ShellCommandEntrySource) -> SmartAttachmentCaptureDecision {
         SmartAttachmentCaptureAdapter().decision(
             rawText: text,
-            sourceType: captureSourceType(for: source),
+            sourceType: appShellCaptureSourceType(for: source),
             sourceSurface: source.displayTitle,
             selectedRouteType: .idea
         )!

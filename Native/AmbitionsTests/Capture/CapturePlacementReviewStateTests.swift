@@ -144,8 +144,8 @@ final class CapturePlacementReviewStateTests: XCTestCase {
 
     func testAMB967CaptureAndCreateGoalStayObjectNativeWithoutSyntheticIssueDriftCopy() throws {
         let root = repoRoot()
-        let shellSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/App/AppShellView.swift"),
+        let seamSource = try String(
+            contentsOf: root.appendingPathComponent("Native/Ambitions/App/AppShellActivatedCaptureSeam.swift"),
             encoding: .utf8
         )
         let composerSource = try String(
@@ -161,19 +161,17 @@ final class CapturePlacementReviewStateTests: XCTestCase {
             encoding: .utf8
         )
 
-        XCTAssertTrue(shellSource.contains("activatedRouteReveal"))
-        XCTAssertTrue(shellSource.contains("shell.activated-capture.route-reveal"))
-        XCTAssertTrue(shellSource.contains("Needs a Place"))
-        XCTAssertTrue(shellSource.contains("Ready to Place"))
-        XCTAssertTrue(shellSource.contains("Grow into Goal"))
-        XCTAssertTrue(shellSource.contains("Held for Review"))
-        XCTAssertTrue(shellSource.contains("Local receipt. No cloud route."))
+        XCTAssertTrue(seamSource.contains("CaptureAtmosphereComposer("))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-reveal"))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-choice."))
+        XCTAssertTrue(seamSource.contains("Saved on this device. Source, receipt, and route stay inspectable."))
+        XCTAssertTrue(seamSource.contains("Keyboard dictation ready"))
         XCTAssertTrue(createGoalSource.contains("Let Ambitions shape it"))
         XCTAssertTrue(createGoalSource.contains("local save, and the receipt path"))
         XCTAssertFalse(createGoalSource.contains(["Auto", "detect"].joined(separator: "-")))
-        XCTAssertFalse(shellSource.contains(["Classifying", "locally"].joined(separator: " ")))
-        XCTAssertFalse(shellSource.contains(["Detected", "locally"].joined(separator: " ")))
-        XCTAssertFalse(shellSource.contains(["No", "cloud", "classifier"].joined(separator: " ")))
+        XCTAssertFalse(seamSource.contains(["Classifying", "locally"].joined(separator: " ")))
+        XCTAssertFalse(seamSource.contains(["Detected", "locally"].joined(separator: " ")))
+        XCTAssertFalse(seamSource.contains(["No", "cloud", "classifier"].joined(separator: " ")))
         XCTAssertFalse(composerSource.contains("Review before saving"))
         XCTAssertFalse(routePreviewSource.contains(["Input", "policies"].joined(separator: " ")))
         XCTAssertFalse(routePreviewSource.contains("Thinks"))

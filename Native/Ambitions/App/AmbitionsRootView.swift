@@ -294,7 +294,7 @@ struct AmbitionsRootView: View {
                 }
             )
             .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
-            .offset(y: -policy.captureComposerClearance)
+            .padding(.bottom, policy.captureComposerClearance)
             .transition(.opacity)
             .zIndex(2)
         }

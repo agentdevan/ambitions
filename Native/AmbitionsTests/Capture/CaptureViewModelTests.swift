@@ -312,7 +312,7 @@ final class CaptureViewModelTests: XCTestCase {
         let alternatives = presentation.inputAlternatives
 
         XCTAssertEqual(alternatives.title, "Input alternatives")
-        XCTAssertEqual(alternatives.voiceStatusLabel, "Voice capture is not connected yet")
+        XCTAssertEqual(alternatives.voiceStatusLabel, "Keyboard dictation only")
         XCTAssertTrue(alternatives.voiceStatusDetail.localizedCaseInsensitiveContains("system dictation"))
         XCTAssertTrue(alternatives.voiceStatusDetail.localizedCaseInsensitiveContains("does not record audio"))
         XCTAssertTrue(alternatives.motorStatusDetail.localizedCaseInsensitiveContains("buttons and menus"))
@@ -333,8 +333,8 @@ final class CaptureViewModelTests: XCTestCase {
             isSubmitEnabled: false
         )
 
-        XCTAssertEqual(presentation.inputAlternatives.reviewControlLabel, "Review before saving: type first; placement waits for Save.")
-        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("Voice capture is not connected yet"))
+        XCTAssertEqual(presentation.inputAlternatives.reviewControlLabel, "Type first; placement waits for Save.")
+        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("Keyboard dictation only"))
         XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("placement waits for Save"))
         XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
         XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("hidden learning"))

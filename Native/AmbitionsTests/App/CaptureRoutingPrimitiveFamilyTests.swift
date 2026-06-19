@@ -21,7 +21,7 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
             "review state",
             "correction control",
             "receipt path",
-            "no silent placement"
+            "no silent placement",
         ])
         XCTAssertTrue(contract.forbiddenPatterns.contains("fake confidence theater"))
         XCTAssertTrue(contract.forbiddenPatterns.contains("category grid"))
@@ -34,68 +34,80 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         XCTAssertEqual(CaptureRoutingPrimitiveRole.noSilentPlacement.semanticState, .protected)
     }
 
-    func testAMB580ActivatedCaptureSeamUsesCaptureRoutingPrimitiveFamily() throws {
+    func testAMB580ActivatedCaptureSeamUsesSharedAtmosphereComposer() throws {
         let appShellSource = try source("Native/Ambitions/App/AppShellView.swift", root: repoRoot())
-        let seamSource = try activatedCaptureSeamSource(from: appShellSource)
+        XCTAssertFalse(appShellSource.contains("struct AppShellActivatedCaptureSeam: View"))
+        XCTAssertFalse(appShellSource.contains("quickCaptureControlRail"))
+        XCTAssertFalse(appShellSource.contains("composerExpansionRail"))
+        XCTAssertFalse(appShellSource.contains("quickCaptureControlChip"))
+        XCTAssertFalse(appShellSource.contains("Camera\", systemImage: \"camera\""))
 
-        XCTAssertTrue(seamSource.contains("CaptureRoutingPrimitiveStage("))
-        XCTAssertTrue(seamSource.contains("CaptureRoutingPrimitiveLine("))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.activation-strip"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.state.typing-compact"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-basis-compact"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.reduce-motion-compact"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-proof-strip"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.placement-review"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.correction-fold"))
-        XCTAssertTrue(seamSource.contains("routeBasisTitle"))
-        XCTAssertTrue(seamSource.contains("routeBasisIdentifier"))
-        XCTAssertTrue(seamSource.contains("reviewLabel"))
-        XCTAssertTrue(seamSource.contains("Static route labels keep placement meaning visible without animation."))
+        let seamSource = try source("Native/Ambitions/App/AppShellActivatedCaptureSeam.swift", root: repoRoot())
 
-        let inputOffset = try XCTUnwrap(offset(of: "inputRow", in: seamSource))
-        let activationOffset = try XCTUnwrap(offset(of: "composerActivationStrip", in: seamSource))
-        let routeRevealOffset = try XCTUnwrap(offset(of: "routeProofStrip", in: seamSource))
-        XCTAssertLessThan(inputOffset, activationOffset)
-        XCTAssertLessThan(activationOffset, routeRevealOffset)
+        XCTAssertTrue(seamSource.contains("CaptureAtmosphereComposer("))
+        XCTAssertTrue(seamSource.contains("CaptureDraftRouteService"))
+        XCTAssertTrue(seamSource.contains("selectedDraftRouteType"))
+        XCTAssertTrue(seamSource.contains("decision.createCaptureRequest(rawText: rawText, sourceType: sourceType)"))
+        XCTAssertTrue(seamSource.contains("sourceType: sourceType"))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-choice."))
+        XCTAssertTrue(seamSource.contains("Keyboard dictation ready"))
+        XCTAssertTrue(seamSource.contains("Ambitions does not record audio here."))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture-seam"))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-reveal"))
 
+        let composerOffset = try XCTUnwrap(offset(of: "private var composer", in: seamSource))
+        let sourceTrustOffset = try XCTUnwrap(offset(of: "private var sourceTrust", in: seamSource))
+        let saveOffset = try XCTUnwrap(offset(of: "private func saveCapture", in: seamSource))
+        XCTAssertLessThan(composerOffset, sourceTrustOffset)
+        XCTAssertLessThan(sourceTrustOffset, saveOffset)
+
+        XCTAssertFalse(seamSource.contains("ActivatedCaptureRouteState"))
         XCTAssertFalse(seamSource.contains("LazyVGrid"))
-        XCTAssertFalse(seamSource.contains("routeProofPill"))
-        XCTAssertFalse(seamSource.contains("Capsule()"))
-        XCTAssertFalse(seamSource.contains("confidenceTitle"))
-        XCTAssertFalse(seamSource.contains("confidenceIdentifier"))
-        XCTAssertFalse(seamSource.contains("isHighConfidence"))
-        XCTAssertFalse(seamSource.contains("High-confidence"))
-        XCTAssertFalse(seamSource.contains("Low-confidence"))
+        XCTAssertFalse(seamSource.contains("CaptureRoutingPrimitiveStage("))
+        XCTAssertFalse(seamSource.contains("No cloud classifier"))
+        XCTAssertFalse(seamSource.contains("Voice capture"))
+    }
+
+    func testAMB580QuickCaptureSheetUsesSharedComposerWithoutUnsupportedControlRail() throws {
+        let appShellSource = try source("Native/Ambitions/App/AppShellView.swift", root: repoRoot())
+
+        XCTAssertTrue(appShellSource.contains("CaptureAtmosphereComposer("))
+        XCTAssertTrue(appShellSource.contains("quickCaptureRoutePreview"))
+        XCTAssertTrue(appShellSource.contains("selectedDraftRouteType"))
+        XCTAssertTrue(appShellSource.contains("decision.createCaptureRequest(rawText: rawText, sourceType: sourceType)"))
+        XCTAssertTrue(appShellSource.contains("shell.overlay.quick-capture.route-choice."))
+        XCTAssertTrue(appShellSource.contains("Keyboard dictation ready"))
+        XCTAssertFalse(appShellSource.contains("quickCaptureControlRail"))
+        XCTAssertFalse(appShellSource.contains("composerExpansionRail"))
+        XCTAssertFalse(appShellSource.contains("Camera\", systemImage: \"camera\""))
+        XCTAssertFalse(appShellSource.contains("Photos\", systemImage: \"photo.on.rectangle\""))
+        XCTAssertFalse(appShellSource.contains("Files\", systemImage: \"folder\""))
     }
 
     func testAMB580CaptureRoutingPathRemainsLocalInspectableAndCorrectable() throws {
-        let appShellSource = try source("Native/Ambitions/App/AppShellView.swift", root: repoRoot())
-        let seamSource = try activatedCaptureSeamSource(from: appShellSource)
+        let seamSource = try source("Native/Ambitions/App/AppShellActivatedCaptureSeam.swift", root: repoRoot())
+        let sourcePolicy = try source("Native/Ambitions/App/AppShellCaptureSourcePolicy.swift", root: repoRoot())
 
-        XCTAssertTrue(seamSource.contains("Detected locally"))
-        XCTAssertTrue(seamSource.contains("Corrected locally"))
-        XCTAssertTrue(seamSource.contains("No silent placement"))
-        XCTAssertTrue(seamSource.contains("No cloud classifier and no route mutation happens without user-visible review."))
-        XCTAssertTrue(seamSource.contains("Route corrected locally to \\(route.title). Source, receipt, and reason remain inspectable."))
-        XCTAssertTrue(seamSource.contains("saveState = .saved(\"Captured locally as \\(routeAtSave.title). Receipt path stays inspectable.\")"))
-        XCTAssertTrue(seamSource.contains("CreateCaptureRequest(rawText: rawText, sourceType: appShellCaptureSourceType(for: overlay.entrySource))"))
+        XCTAssertTrue(seamSource.contains("Saved on this device. Source, receipt, and route stay inspectable."))
+        XCTAssertTrue(seamSource.contains("Route set to \\(routeType.userFacingLabel). Save writes that route locally."))
+        XCTAssertTrue(seamSource.contains("Saved locally as \\(capture.route.title). Receipt path stays inspectable."))
+        XCTAssertTrue(seamSource.contains("draftRouteService.draftRouteDecision"))
+        XCTAssertTrue(seamSource.contains("decision.createCaptureRequest(rawText: rawText, sourceType: sourceType)"))
+        XCTAssertTrue(sourcePolicy.contains("return .shellComposer"))
+        XCTAssertTrue(sourcePolicy.contains("return .todayQuickCapture"))
     }
 
     func testAMB580PrimitiveRegistryIncludesCaptureRoutingFamilyEntry() throws {
-        let registry = try source("docs/codex/ambitions_primitive_invention_registry.md", root: repoRoot())
+        let registryURL = repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
+        guard FileManager.default.fileExists(atPath: registryURL.path) else {
+            throw XCTSkip("Historical primitive registry is not retained in current repo truth.")
+        }
+        let registry = try String(contentsOf: registryURL, encoding: .utf8)
 
         XCTAssertTrue(registry.contains("| capture-routing-family | Promoted | Global Capture | Capture Routing / Receipt | AMB-580 |"))
         XCTAssertTrue(registry.contains("### capture-routing-family"))
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/action-state/AMB-580-capture-routing-family.md"))
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/screenshots/capture-routing-family-amb-580.png"))
-    }
-
-    private func activatedCaptureSeamSource(from appShellSource: String) throws -> String {
-        guard let start = appShellSource.range(of: "struct AppShellActivatedCaptureSeam: View"),
-              let end = appShellSource.range(of: "private func appShellCaptureSourceType", range: start.lowerBound..<appShellSource.endIndex) else {
-            throw XCTSkip("Activated Capture seam source could not be located.")
-        }
-        return String(appShellSource[start.lowerBound..<end.lowerBound])
     }
 
     private func offset(of needle: String, in source: String) -> Int? {

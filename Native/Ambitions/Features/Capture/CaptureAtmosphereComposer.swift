@@ -79,7 +79,7 @@ struct CaptureInputAlternativesPresentation: Equatable {
 
     init(isRouteRevealVisible: Bool, isSubmitEnabled: Bool) {
         title = "Input alternatives"
-        voiceStatusLabel = "Voice capture is not connected yet"
+        voiceStatusLabel = "Keyboard dictation only"
         voiceStatusDetail = "Use typing or system dictation from the keyboard. Ambitions does not record audio here."
         motorStatusLabel = "Motor alternative"
         motorStatusDetail = "Use buttons and menus; no drag, swipe, or long press is required."
@@ -104,6 +104,31 @@ struct CaptureInputAlternativesPresentation: Equatable {
     }
 }
 
+
+struct CaptureAtmosphereComposerAccessibilityIDs: Equatable {
+    let root: String
+    let input: String
+    let dictationButton: String
+    let submitButton: String
+    let error: String
+    let inputAlternatives: String
+    let routeRevealStrip: String
+    let routeChoicePrefix: String
+    let routeInspectionSummary: String
+
+    static let quickCapture = CaptureAtmosphereComposerAccessibilityIDs(
+        root: "capture.composer",
+        input: "capture.quick-input",
+        dictationButton: "capture.quick-mic",
+        submitButton: "capture.quick-submit",
+        error: "capture.quick-error",
+        inputAlternatives: "capture.input-alternatives",
+        routeRevealStrip: "capture.route-reveal-strip",
+        routeChoicePrefix: "capture.route-choice.",
+        routeInspectionSummary: "capture.route-reveal.inspection-summary"
+    )
+}
+
 struct CaptureAtmosphereComposer: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -118,6 +143,8 @@ struct CaptureAtmosphereComposer: View {
     let onSubmit: () -> Void
     let onMicrophone: () -> Void
     let onRouteChoice: (SmartAttachmentRouteType) -> Void
+    var accessibilityIDs: CaptureAtmosphereComposerAccessibilityIDs = .quickCapture
+    var shouldAutoFocus = false
 
     private var presentation: CaptureAtmosphereComposerPresentation {
         CaptureAtmosphereComposerPresentation(
@@ -133,7 +160,8 @@ struct CaptureAtmosphereComposer: View {
             if presentation.isRouteRevealVisible, let routePreview {
                 CaptureRouteRevealStrip(
                     preview: routePreview,
-                    onRouteChoice: onRouteChoice
+                    onRouteChoice: onRouteChoice,
+                    accessibilityIDs: accessibilityIDs
                 )
                 .transition(routeRevealTransition)
             }
@@ -144,7 +172,7 @@ struct CaptureAtmosphereComposer: View {
                 Text(error)
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.warning)
-                    .accessibilityIdentifier("capture.quick-error")
+                    .accessibilityIdentifier(accessibilityIDs.error)
             }
 
             if let planInsertionTitle = presentation.planInsertionTitle,
@@ -186,7 +214,11 @@ struct CaptureAtmosphereComposer: View {
             DAVMotionPreset.receiptConfirmation.animation(theme: theme, reduceMotion: reduceMotion),
             value: isFocused
         )
-        .accessibilityIdentifier("capture.composer")
+        .onAppear {
+            if shouldAutoFocus {
+                isFocused = true
+            }
+        }
         .accessibilityElement(children: .contain)
         .accessibilityValue(presentation.accessibilityValue)
     }
@@ -219,7 +251,7 @@ struct CaptureAtmosphereComposer: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(presentation.inputAlternatives.title)
         .accessibilityValue(presentation.inputAlternatives.accessibilityValue)
-        .accessibilityIdentifier("capture.input-alternatives")
+        .accessibilityIdentifier(accessibilityIDs.inputAlternatives)
     }
 
     private var composerInput: some View {
@@ -253,20 +285,23 @@ struct CaptureAtmosphereComposer: View {
                         onSubmit()
                     }
                 }
-                .accessibilityIdentifier("capture.quick-input")
+                .accessibilityIdentifier(accessibilityIDs.input)
                 .accessibilityLabel("Where can this go?")
                 .accessibilityHint("Type a thought. Route suggestions appear after input.")
 
-            Button(action: onMicrophone) {
+            Button {
+                isFocused = true
+                onMicrophone()
+            } label: {
                 Image(systemName: "mic.fill")
                     .font(.system(size: theme.icon.smallSize, weight: .semibold))
                     .frame(width: 30, height: 30)
             }
             .buttonStyle(.plain)
             .foregroundStyle(theme.colors.textSecondary)
-            .accessibilityIdentifier("capture.quick-mic")
-            .accessibilityLabel("Voice capture")
-            .accessibilityHint("Voice capture is not connected yet.")
+            .accessibilityIdentifier(accessibilityIDs.dictationButton)
+            .accessibilityLabel("Keyboard dictation")
+            .accessibilityHint("Focuses the field so you can use the iOS keyboard microphone. Ambitions does not record audio here.")
         }
         .padding(.horizontal, theme.spacing.md)
         .padding(.vertical, theme.spacing.sm)
@@ -298,7 +333,7 @@ struct CaptureAtmosphereComposer: View {
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: isSubmitEnabled ? .selected : .disabled))
         .disabled(isSubmitEnabled == false)
-        .accessibilityIdentifier("capture.quick-submit")
+        .accessibilityIdentifier(accessibilityIDs.submitButton)
         .accessibilityLabel(presentation.submitLabel)
         .accessibilityHint(isSubmitEnabled ? "Saves the capture and keeps the route editable." : "Type a thought first.")
     }
@@ -323,15 +358,17 @@ private struct CaptureRouteRevealStrip: View {
 
     let preview: CaptureDraftRoutePreview
     let onRouteChoice: (SmartAttachmentRouteType) -> Void
+    let accessibilityIDs: CaptureAtmosphereComposerAccessibilityIDs
 
     var body: some View {
-        CaptureStageGroup(state: livingState, accessibilityIdentifier: "capture.route-reveal-strip") {
+        VStack(alignment: .leading, spacing: theme.spacing.md) {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
                     VStack(alignment: .leading, spacing: theme.spacing.xs) {
                         Text(preview.postInputStateTitle)
                             .font(theme.typography.bodyEmphasized)
                             .foregroundStyle(theme.colors.textPrimary)
+                            .accessibilityIdentifier(accessibilityIDs.routeRevealStrip)
                         Text(preview.consequenceLabel)
                             .font(theme.typography.caption)
                             .foregroundStyle(theme.colors.textSecondary)
@@ -358,8 +395,26 @@ private struct CaptureRouteRevealStrip: View {
                     state: livingState,
                     context: .capture
                 )
-                .accessibilityIdentifier("capture.route-reveal.inspection-summary")
+                .accessibilityIdentifier(accessibilityIDs.routeInspectionSummary)
             }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, theme.spacing.sm)
+        .padding(.leading, theme.spacing.sm)
+        .background(alignment: .leading) {
+            Rectangle()
+                .fill(routeAccent.opacity(0.32))
+                .frame(width: 2)
+        }
+        .overlay(alignment: .top) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.72))
+                .frame(height: 1)
+        }
+        .overlay(alignment: .bottom) {
+            Rectangle()
+                .fill(theme.colors.strokeSubtle.opacity(0.42))
+                .frame(height: 1)
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel(preview.accessibilityLabel)
@@ -394,7 +449,7 @@ private struct CaptureRouteRevealStrip: View {
             }
             .buttonStyle(.bordered)
             .controlSize(.small)
-            .accessibilityIdentifier("capture.route-choice.\(choice.routeType.rawValue)")
+            .accessibilityIdentifier("\(accessibilityIDs.routeChoicePrefix)\(choice.routeType.rawValue)")
             .accessibilityLabel(choice.title)
             .accessibilityValue(choice.isSelected ? "Selected route" : "Available route")
         }
@@ -409,6 +464,10 @@ private struct CaptureRouteRevealStrip: View {
         default:
             return .active
         }
+    }
+
+    private var routeAccent: Color {
+        livingState == .empty ? LivingTabContext.capture.accent(in: theme) : theme.stateStyle(for: livingState.ambitionState).accent
     }
 }
 
