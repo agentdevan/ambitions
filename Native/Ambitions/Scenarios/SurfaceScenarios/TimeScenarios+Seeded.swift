@@ -36,14 +36,14 @@ extension PreviewTimeScenarios {
             flexibleWork: "4 flexible items can bend around real life.",
             notTodayWork: "2 items should wait, clarify, or stay outside today's pressure.",
             recoveryAllowance: "2 open days keep recovery room visible.",
-            calendarBoundary: "Manual planning still works without calendar access.",
+            calendarBoundary: "Manual shaping still works without calendar access.",
             primaryActionTitle: "Use this room",
             primaryActionSubtitle: "Wednesday still has believable room for the retention loop.",
             visualState: .selected
         ),
         capacityEnvelope: TimeCapacityEnvelopeState(
             title: "Capacity envelope",
-            detail: "Manual availability is enough to keep shaping this plan. The envelope stays qualitative so it does not pretend to know more than the data shows.",
+            detail: "Manual availability is enough to keep shaping this week. The envelope stays qualitative so it does not pretend to know more than the data shows.",
             label: "Tight",
             availableCapacity: "2 open days",
             pressure: "Pressure is visible",
@@ -52,12 +52,12 @@ extension PreviewTimeScenarios {
             visualState: .warning
         ),
         lifecycleRail: TimeGoalLifecycleRailState(
-            title: "What this plan is carrying",
+            title: "What this week is carrying",
             subtitle: "Goals stay visible by lifecycle, including work that belongs outside this week's pressure.",
             segments: [
                 TimeGoalLifecycleRailSegment(lifecycleState: .previous, count: 1, subtitle: "Closed, parked, or transformed"),
                 TimeGoalLifecycleRailSegment(lifecycleState: .active, count: 2, subtitle: "Currently shaping attention"),
-                TimeGoalLifecycleRailSegment(lifecycleState: .future, count: 1, subtitle: "Planned, not active yet"),
+                TimeGoalLifecycleRailSegment(lifecycleState: .future, count: 1, subtitle: "Future, not active yet"),
                 TimeGoalLifecycleRailSegment(lifecycleState: .waiting, count: 1, subtitle: "Waiting on an answer"),
                 TimeGoalLifecycleRailSegment(lifecycleState: .blocked, count: 1, subtitle: "Needs unblock"),
                 TimeGoalLifecycleRailSegment(lifecycleState: .parked, count: 1, subtitle: "Intentionally outside pressure"),
@@ -71,8 +71,8 @@ extension PreviewTimeScenarios {
             subtitle: "A compact strip of previous, active, future, and outside pressure with local source labels.",
             items: [
                 TimeTimelineItemState(id: "preview-previous", title: "Launch audit", detail: "Kept outside current pressure.", timingLabel: "Previous", sourceLabel: "Created in Ambitions", kind: .previous, visualState: .default, target: nil),
-                TimeTimelineItemState(id: "preview-active", title: "Ship the native shell", detail: "Fix shell regressions", timingLabel: "Due Apr 21", sourceLabel: "Based on your plan", kind: .active, visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1")),
-                TimeTimelineItemState(id: "preview-future", title: "Retention loop", detail: "Planned later, not part of this week's load.", timingLabel: "Future", sourceLabel: "Based on your plan", kind: .future, visualState: .default, target: GoalRouteTarget(goalID: "preview-goal-2"))
+                TimeTimelineItemState(id: "preview-active", title: "Ship the native shell", detail: "Fix shell regressions", timingLabel: "Due Apr 21", sourceLabel: "Based on your Time shape", kind: .active, visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1")),
+                TimeTimelineItemState(id: "preview-future", title: "Retention loop", detail: "Future work, not part of this week's load.", timingLabel: "Future", sourceLabel: "Based on your Time shape", kind: .future, visualState: .default, target: GoalRouteTarget(goalID: "preview-goal-2"))
             ]
         ),
         opportunityWindows: TimeOpportunityWindowsState(
@@ -85,9 +85,9 @@ extension PreviewTimeScenarios {
         ),
         decisionDebt: TimeDecisionDebtState(
             title: "Needs a decision",
-            subtitle: "Small decisions prevent the plan from becoming a dense task manager.",
+            subtitle: "Small decisions prevent the week from becoming a dense task manager.",
             items: [
-                TimeDecisionItemState(id: "preview-decision", title: "Needs a decision", detail: "Retention loop is active but not represented in this plan window.", suggestion: "Give it one next step, park it, or leave it intentionally outside today.", visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-2"), timeRoute: nil)
+                TimeDecisionItemState(id: "preview-decision", title: "Needs a decision", detail: "Retention loop is active but not represented in this week window.", suggestion: "Give it one step, park it, or leave it intentionally outside today.", visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-2"), timeRoute: nil)
             ]
         ),
         conflictCourt: TimeConflictCourtState(
@@ -102,14 +102,14 @@ extension PreviewTimeScenarios {
             detail: "Time works without access. With your confirmation, it can read derived busy time locally to find real open windows.",
             permissionLabel: "Optional",
             sourceLabel: "Based on Time",
-            manualFallback: "Manual planning still works without calendar access.",
-            writeBoundary: "Plan never silently writes or reschedules calendar blocks.",
+            manualFallback: "Manual shaping still works without calendar access.",
+            writeBoundary: "Time never silently writes or reschedules calendar blocks.",
             visualState: .default,
             canRequestCalendarRead: true
         ),
         recoveryEntry: TimeRecoveryEntryState(
             title: "Recovery room",
-            detail: "Save the Day stays suggestion-only here. Broad reflow waits for confirmed recovery tools.",
+            detail: "Save the Day stays suggestion-only here. Broad reshaping waits for confirmed recovery tools.",
             suggestions: [
                 TimeDecisionItemState(id: "preview-recovery", title: "Shrink one step", detail: "Ship the native shell is the clearest place to reduce pressure.", suggestion: "Make the next step smaller before moving anything else.", visualState: .warning, target: GoalRouteTarget(goalID: "preview-goal-1"), timeRoute: nil)
             ],
@@ -119,12 +119,12 @@ extension PreviewTimeScenarios {
             title: "Reality changed",
             detail: "Adjust one thing, not everything. These are suggestions until you confirm a change.",
             reasonKind: .overloadedTimeShape,
-            reasonDetail: "Tuesday is carrying more than this plan can calmly explain.",
+            reasonDetail: "Tuesday is carrying more than this week can calmly explain.",
             recommendedAdjustment: "Keep this",
             noChangeCopy: "Nothing changed yet.",
             suggestions: [
                 TimeReflowSuggestionState(
-                    id: "preview-reflow-protect",
+                    id: "preview-shape-protect",
                     kind: .protectOneItem,
                     title: "Keep this",
                     detail: "Keep shell regression work defended before changing the rest.",
@@ -135,7 +135,7 @@ extension PreviewTimeScenarios {
                     timeRoute: nil
                 ),
                 TimeReflowSuggestionState(
-                    id: "preview-reflow-shrink",
+                    id: "preview-shape-shrink",
                     kind: .shrinkAction,
                     title: "Make it smaller",
                     detail: "Close only the top regression before moving anything else.",
@@ -146,10 +146,10 @@ extension PreviewTimeScenarios {
                     timeRoute: nil
                 ),
                 TimeReflowSuggestionState(
-                    id: "preview-reflow-confirm",
+                    id: "preview-shape-confirm",
                     kind: .askForConfirmation,
                     title: "Needs confirmation",
-                    detail: "Confirm before applying any broad reflow or calendar-impacting change.",
+                    detail: "Confirm before applying any broad reshaping or calendar-impacting change.",
                     impactLabel: "Nothing changes until confirmed",
                     boundary: TimeReflowBoundaryState(actionKind: .changeTimeWindow, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .notSupportedYet, safetyLabel: "Confirm first"),
                     visualState: .warning,
@@ -162,7 +162,7 @@ extension PreviewTimeScenarios {
         reflowDecision: seededReflowDecision,
         recoveryGradient: TimeRecoveryGradientState(
             title: "Recovery options",
-            detail: "Start with the least disruptive option that still makes the plan believable.",
+            detail: "Start with the least disruptive option that still makes the week believable.",
             options: [
                 TimeRecoveryGradientOptionState(id: "preview-gradient-protect", order: 0, kind: .protectOneItem, title: "Keep this", detail: "Keep one must-do visible.", boundary: TimeReflowBoundaryState(actionKind: .changeTimeWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
                 TimeRecoveryGradientOptionState(id: "preview-gradient-shrink", order: 1, kind: .shrinkAction, title: "Make it smaller", detail: "Reduce the ask before moving it.", boundary: TimeReflowBoundaryState(actionKind: .shrinkAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
@@ -170,7 +170,7 @@ extension PreviewTimeScenarios {
                 TimeRecoveryGradientOptionState(id: "preview-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Adjust shape", detail: "Move one local item after confirmation.", boundary: TimeReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
                 TimeRecoveryGradientOptionState(id: "preview-gradient-defer", order: 4, kind: .deferGoalOrItem, title: "Defer this", detail: "Leave lower-priority work outside this window.", boundary: TimeReflowBoundaryState(actionKind: .deferAction, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
                 TimeRecoveryGradientOptionState(id: "preview-gradient-drop", order: 5, kind: .dropOptionalWork, title: "Drop optional work", detail: "Remove optional work only with confirmation.", boundary: TimeReflowBoundaryState(actionKind: .dropAction, confirmationRequirement: .requiredForDestructiveChange, undoAvailability: .unsafe, safetyLabel: "Confirm drop"), visualState: .warning),
-                TimeRecoveryGradientOptionState(id: "preview-gradient-recover", order: 6, kind: .recoverRest, title: "Recover", detail: "Protect rest or recovery as real plan material.", boundary: TimeReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .success)
+                TimeRecoveryGradientOptionState(id: "preview-gradient-recover", order: 6, kind: .recoverRest, title: "Recover", detail: "Protect rest or recovery as real Time material.", boundary: TimeReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .success)
             ]
         ),
         saveTheDay: TimeSaveTheDayState(
@@ -185,9 +185,9 @@ extension PreviewTimeScenarios {
         ),
         reflowReceiptPreview: TimeReflowReceiptPreviewState(
             title: "Before anything changes",
-            detail: "A reflow review preview shows the tradeoff before action, not after a silent mutation.",
+            detail: "A shape review preview shows the tradeoff before action, not after a silent mutation.",
             whatChanged: ["Protect: Fix shell regressions", "Adjust: Make it smaller", "Receipt would show the suggested change before action."],
-            whatWouldNotChange: ["Calendar blocks are not written.", "The plan is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
+            whatWouldNotChange: ["Calendar blocks are not written.", "The week is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
             momentumReflowContract: [
                 "Original block link: Fix shell regressions (source confirmation path active).",
                 "Approved duration: user-approved duration selection is required before reassignment.",
@@ -197,22 +197,22 @@ extension PreviewTimeScenarios {
             ],
             confirmationRequired: "Safe local suggestion",
             undoAvailability: "Undo can be local",
-            safeFailureFallback: "If you decline confirmation, Ambitions keeps the plan as-is and leaves manual planning available.",
+            safeFailureFallback: "If you decline confirmation, Ambitions keeps the week shape as-is and leaves manual shaping available.",
             visualState: .warning
         ),
         recoveryMaturity: TimeRecoveryMaturityState(
             title: "Recovery maturity",
             detail: "Overloaded days become decisions with receipts, not silent reschedules.",
             timeFitLabel: "Needs relief",
-            confirmationBoundary: "Save the Day and Reality Reflow require confirmation before broad plan changes.",
-            calendarBoundary: "Manual planning works without calendar access.",
+            confirmationBoundary: "Save the Day and shape review require confirmation before broad Time changes.",
+            calendarBoundary: "Manual shaping works without calendar access.",
             socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
             receiptBoundary: "A review preview names what would change, what would not change, and the undo boundary.",
             signals: [
-                TimeRecoveryMaturitySignalState(id: "fit", title: "Plan fit", detail: "One day needs relief before the week widens.", statusLabel: "Needs relief", boundaryLabel: "Suggests one smaller step", visualState: .warning),
+                TimeRecoveryMaturitySignalState(id: "fit", title: "Shape fit", detail: "One day needs relief before the week widens.", statusLabel: "Needs relief", boundaryLabel: "Suggests one smaller step", visualState: .warning),
                 TimeRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "One waiting item should stay visible instead of becoming quiet pressure.", statusLabel: "Visible", boundaryLabel: "No silent routing", visualState: .warning),
                 TimeRecoveryMaturitySignalState(id: "social-load", title: "Social load", detail: "People-shaped pressure stays private and manual-first.", statusLabel: "Private", boundaryLabel: "No inference without you", visualState: .selected),
-                TimeRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the plan as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .warning)
+                TimeRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the week shape as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .warning)
             ]
         ),
         pressureScrubber: TimePressureScrubberState(
@@ -257,7 +257,7 @@ extension PreviewTimeScenarios {
             lanes: [
                 TimeExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "Retention loop still sits outside the week.", recommendation: "Give it one calmer lane instead of widening the whole week.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), timeRoute: nil),
                 TimeExecutionResilienceLane(id: "overload", title: "Overload", detail: "Tuesday is carrying more than the week can explain calmly.", recommendation: "Lighten shell work before adding anything new.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-1"), timeRoute: nil),
-                TimeExecutionResilienceLane(id: "habits", title: "Rituals", detail: "One routine should support the week shape without crowding it.", recommendation: "Use the rituals route to keep the loop lightweight.", state: .selected, goalTarget: nil, timeRoute: .habits),
+                TimeExecutionResilienceLane(id: "rituals", title: "Rituals", detail: "One routine should support the week shape without crowding it.", recommendation: "Use the rituals route to keep the loop lightweight.", state: .selected, goalTarget: nil, timeRoute: .habits),
                 TimeExecutionResilienceLane(id: "captures", title: "Captures", detail: "Two open captures still need to be absorbed or parked.", recommendation: "Attach or park capture pressure before polishing the schedule.", state: .warning, goalTarget: nil, timeRoute: nil, interactionIntent: .openGlobalCapture),
                 TimeExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Close the current week by shaping what should continue.", recommendation: "Review should feel like a continuation, not a detached ritual.", state: .warning, goalTarget: nil, timeRoute: .weeklyReview)
             ],

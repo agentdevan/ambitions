@@ -30,7 +30,7 @@ extension PreviewTimeScenarios {
             highlight: "Pressure is stacking here.",
             blocks: [
                 TimeWeekBlockState(id: "t1", target: GoalRouteTarget(goalID: "preview-goal-1"), title: "Fix shell regressions", detail: "Close the top 3 regressions only.", goalLabel: "Ship the native shell", timingLabel: "Due Apr 21", kind: .fixed, visualState: .warning),
-                TimeWeekBlockState(id: "t2", target: GoalRouteTarget(goalID: "preview-goal-3"), title: "Answer roadmap clarifications", detail: "Resolve the missing scope questions before planning more UI.", goalLabel: "Refine roadmap", timingLabel: "Due Apr 21", kind: .fixed, visualState: .warning),
+                TimeWeekBlockState(id: "t2", target: GoalRouteTarget(goalID: "preview-goal-3"), title: "Answer roadmap clarifications", detail: "Resolve the missing scope questions before shaping more UI.", goalLabel: "Refine roadmap", timingLabel: "Due Apr 21", kind: .fixed, visualState: .warning),
                 TimeWeekBlockState(id: "t3", target: GoalRouteTarget(goalID: "preview-goal-1"), title: "Update preview notes", detail: "Only document what really changed in the shell.", goalLabel: "Ship the native shell", timingLabel: "Flexible", kind: .flexible, visualState: .selected)
             ],
             overflowCount: 1,
@@ -113,7 +113,7 @@ extension PreviewTimeScenarios {
 
     static let seededGoalShapingItems: [TimeGoalShapingItem] = [
         TimeGoalShapingItem(
-            id: "plan-goal-native",
+            id: "shape-goal-native",
             target: GoalRouteTarget(goalID: "preview-goal-1"),
             goalTitle: "Ship the native shell",
             weekRelationship: "Visible and narrow",
@@ -123,7 +123,7 @@ extension PreviewTimeScenarios {
             visualState: .selected
         ),
         TimeGoalShapingItem(
-            id: "plan-goal-retention",
+            id: "shape-goal-retention",
             target: GoalRouteTarget(goalID: "preview-goal-2"),
             goalTitle: "Retention loop",
             weekRelationship: "Still outside the week",
@@ -133,13 +133,13 @@ extension PreviewTimeScenarios {
             visualState: .warning
         ),
         TimeGoalShapingItem(
-            id: "plan-goal-roadmap",
+            id: "shape-goal-roadmap",
             target: GoalRouteTarget(goalID: "preview-goal-3"),
             goalTitle: "Refine roadmap",
             weekRelationship: "Visible, but straining",
             pressureLabel: "Needs lighter ask",
             attentionReason: "Recent friction suggests the current step is heavier than the week can comfortably carry.",
-            nextMoveLabel: "Resolve the missing scope questions before planning more UI",
+            nextMoveLabel: "Resolve the missing scope questions before shaping more UI",
             visualState: .warning
         )
     ]
@@ -152,7 +152,7 @@ extension PreviewTimeScenarios {
     ]
 
     static let seededSecondaryDestinations: [TimeSecondaryDestination] = [
-        TimeSecondaryDestination(id: "time-rituals", title: "Routines and habits", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: "repeat", visualState: .selected, timeRoute: .habits),
+        TimeSecondaryDestination(id: "time-rituals", title: "Ritual loops", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: "repeat", visualState: .selected, timeRoute: .habits),
         TimeSecondaryDestination(id: "time-held-input", title: "Open Capture composer", detail: "2 captures can stay outside Time until you place, park, or archive them.", valueLabel: "2", icon: "square.and.pencil", visualState: .warning, timeRoute: nil, interactionIntent: .openGlobalCapture),
         TimeSecondaryDestination(id: "time-weekly-review", title: "Weekly review", detail: "Close the current week by shaping carry-forward and unresolved capture pressure without leaving Time.", valueLabel: "Tight", icon: "arrow.triangle.branch", visualState: .selected, timeRoute: .weeklyReview)
     ]

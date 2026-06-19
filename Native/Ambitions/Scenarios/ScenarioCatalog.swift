@@ -23,7 +23,7 @@ enum ScenarioCatalog {
     static let previewMatrix: [RuntimeScenario] = surfaces.flatMap { surface in
         requiredSurfaceStates.map { state in
             RuntimeScenario(
-                id: "\(surface.rawValue)-\(state.rawValue)-standard-large",
+                id: "\(surface.rawValue)-state-\(state.rawValue)-standard-large",
                 surface: surface,
                 state: state,
                 accessibilityMode: .standard,
@@ -34,7 +34,7 @@ enum ScenarioCatalog {
     } + surfaces.flatMap { surface in
         requiredAccessibilityModes.map { mode in
             RuntimeScenario(
-                id: "\(surface.rawValue)-normal-\(mode.rawValue)-large",
+                id: "\(surface.rawValue)-accessibility-normal-\(mode.rawValue)-large",
                 surface: surface,
                 state: .normal,
                 accessibilityMode: mode,
@@ -45,7 +45,7 @@ enum ScenarioCatalog {
     } + surfaces.flatMap { surface in
         requiredDeviceContexts.map { context in
             RuntimeScenario(
-                id: "\(surface.rawValue)-normal-standard-\(context.rawValue)",
+                id: "\(surface.rawValue)-device-normal-standard-\(context.rawValue)",
                 surface: surface,
                 state: .normal,
                 accessibilityMode: .standard,
