@@ -152,7 +152,7 @@ extension PreviewTimeScenarios {
     ]
 
     static let seededSecondaryDestinations: [TimeSecondaryDestination] = [
-        TimeSecondaryDestination(id: "time-rituals", title: "Ritual loops", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: "repeat", visualState: .selected, timeRoute: .habits),
+        TimeSecondaryDestination(id: "time-rituals", title: "Ritual loops", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: "repeat", visualState: .selected, timeRoute: .rituals),
         TimeSecondaryDestination(id: "time-held-input", title: "Open Capture composer", detail: "2 captures can stay outside Time until you place, park, or archive them.", valueLabel: "2", icon: "square.and.pencil", visualState: .warning, timeRoute: nil, interactionIntent: .openGlobalCapture),
         TimeSecondaryDestination(id: "time-weekly-review", title: "Weekly review", detail: "Close the current week by shaping carry-forward and unresolved capture pressure without leaving Time.", valueLabel: "Tight", icon: "arrow.triangle.branch", visualState: .selected, timeRoute: .weeklyReview)
     ]

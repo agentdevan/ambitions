@@ -66,10 +66,10 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testStageRouteDispatchesCurrentNestedRoutes() {
-        let habitsNavigation = AppNavigationModel(selectedTab: .today)
-        DefaultAppExternalRouter(navigation: habitsNavigation).dispatch(.openTimeRoute(.habits), source: .widgetAction)
-        XCTAssertEqual(habitsNavigation.selectedTab, .time, "Stage shell should keep habits under Time")
-        XCTAssertEqual(habitsNavigation.timePath, [.habits])
+        let ritualsNavigation = AppNavigationModel(selectedTab: .today)
+        DefaultAppExternalRouter(navigation: ritualsNavigation).dispatch(.openTimeRoute(.rituals), source: .widgetAction)
+        XCTAssertEqual(ritualsNavigation.selectedTab, .time, "Stage shell should keep rituals under Time")
+        XCTAssertEqual(ritualsNavigation.timePath, [.rituals])
 
         let historyNavigation = AppNavigationModel(selectedTab: .today)
         DefaultAppExternalRouter(navigation: historyNavigation).dispatch(.openYouRoute(.history), source: .appIntent)
@@ -98,11 +98,11 @@ final class ExternalRoutingTests: XCTestCase {
         }
     }
 
-    func testDeepLinkTranslatorParsesCurrentTimeHabitsRoute() throws {
+    func testDeepLinkTranslatorParsesCurrentTimeRitualsRoute() throws {
         let translator = AppExternalRouteTranslator()
-        let timeRouteURL = try XCTUnwrap(URL(string: "ambitions://time/habits"))
+        let timeRouteURL = try XCTUnwrap(URL(string: "ambitions://time/rituals"))
 
-        XCTAssertEqual(translator.route(fromDeepLink: timeRouteURL), .openTimeRoute(.habits))
+        XCTAssertEqual(translator.route(fromDeepLink: timeRouteURL), .openTimeRoute(.rituals))
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
     }
 
@@ -355,19 +355,19 @@ final class ExternalRoutingTests: XCTestCase {
     func testCurrentTimeRoutesAndPayloadsUseTimeSurface() throws {
         let translator = AppExternalRouteTranslator()
 
-        let routeURL = try XCTUnwrap(translator.deepLinkURL(for: .openTimeRoute(.habits)))
-        let routePayload = translator.routePayload(for: .openTimeRoute(.habits))
-        let notificationPayload = translator.notificationPayload(for: .openTimeRoute(.habits), action: "open")
-        let widgetPayload = translator.widgetPayload(for: .openTimeRoute(.habits), action: "open")
+        let routeURL = try XCTUnwrap(translator.deepLinkURL(for: .openTimeRoute(.rituals)))
+        let routePayload = translator.routePayload(for: .openTimeRoute(.rituals))
+        let notificationPayload = translator.notificationPayload(for: .openTimeRoute(.rituals), action: "open")
+        let widgetPayload = translator.widgetPayload(for: .openTimeRoute(.rituals), action: "open")
 
-        XCTAssertEqual(routeURL.absoluteString, "ambitions://time/habits")
-        XCTAssertEqual(translator.route(fromDeepLink: routeURL), .openTimeRoute(.habits))
+        XCTAssertEqual(routeURL.absoluteString, "ambitions://time/rituals")
+        XCTAssertEqual(translator.route(fromDeepLink: routeURL), .openTimeRoute(.rituals))
         XCTAssertEqual(routePayload[ExternalSurfaceActionPayload.Key.tab], AppTab.time.rawValue)
-        XCTAssertEqual(routePayload["subroute"], TimeRouteTarget.habits.rawValue)
+        XCTAssertEqual(routePayload["subroute"], TimeRouteTarget.rituals.rawValue)
         XCTAssertEqual(notificationPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.time.rawValue)
-        XCTAssertEqual(notificationPayload.values["subroute"], TimeRouteTarget.habits.rawValue)
+        XCTAssertEqual(notificationPayload.values["subroute"], TimeRouteTarget.rituals.rawValue)
         XCTAssertEqual(widgetPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.time.rawValue)
-        XCTAssertEqual(widgetPayload.values["subroute"], TimeRouteTarget.habits.rawValue)
+        XCTAssertEqual(widgetPayload.values["subroute"], TimeRouteTarget.rituals.rawValue)
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
     }
 
@@ -536,7 +536,7 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(navigation.lastExternalRoute, .openCaptureComposer)
         XCTAssertEqual(navigation.lastExternalRouteSource, .widgetAction)
-        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Capture")
     }
 
     @MainActor
@@ -549,11 +549,11 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Capture")
 
-        router.dispatch(.openTimeRoute(.habits), source: .deepLink)
+        router.dispatch(.openTimeRoute(.rituals), source: .deepLink)
         XCTAssertEqual(navigation.selectedTab, .time)
-        XCTAssertEqual(navigation.timePath, [.habits])
+        XCTAssertEqual(navigation.timePath, [.rituals])
     }
 
     @MainActor

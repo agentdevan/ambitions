@@ -242,7 +242,7 @@ extension PreviewTimeScenarios {
             lanes: [
                 TimeExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "No active goal is floating outside the week.", recommendation: "Carry only what the next week can explain calmly.", state: .success, goalTarget: nil, timeRoute: nil),
                 TimeExecutionResilienceLane(id: "overload", title: "Overload", detail: "No day is visibly overloaded right now.", recommendation: "Lighten only when something real becomes too loud.", state: .selected, goalTarget: nil, timeRoute: nil),
-                TimeExecutionResilienceLane(id: "rituals", title: "Rituals", detail: "No recurring loop is shaping the week yet.", recommendation: "Keep the week dominant until a routine is truly needed.", state: .default, goalTarget: nil, timeRoute: .habits),
+                TimeExecutionResilienceLane(id: "rituals", title: "Rituals", detail: "No recurring loop is shaping the week yet.", recommendation: "Keep the week dominant until a routine is truly needed.", state: .default, goalTarget: nil, timeRoute: .rituals),
                 TimeExecutionResilienceLane(id: "captures", title: "Captures", detail: "No open captures are pushing on this week.", recommendation: "Let the week stay quiet.", state: .default, goalTarget: nil, timeRoute: nil, interactionIntent: .openGlobalCapture),
                 TimeExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Review becomes useful once the week has something real to carry forward.", recommendation: "Use review only when the week has earned it.", state: .default, goalTarget: nil, timeRoute: .weeklyReview)
             ],
@@ -256,7 +256,7 @@ extension PreviewTimeScenarios {
             TimeShapingActionState(kind: .lighten, title: "Lighten", subtitle: "There is nothing to lighten yet.", recommendation: "No overload is visible right now.", systemImage: "sun.max", state: .default, goalTarget: nil, timeRoute: nil)
         ],
         secondaryDestinations: [
-            TimeSecondaryDestination(id: "time-empty-rituals", title: "Ritual loops", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "0", icon: "repeat", visualState: .default, timeRoute: .habits),
+            TimeSecondaryDestination(id: "time-empty-rituals", title: "Ritual loops", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "0", icon: "repeat", visualState: .default, timeRoute: .rituals),
             TimeSecondaryDestination(id: "time-held-input", title: "Open Capture composer", detail: "No open captures are pushing on the week right now.", valueLabel: "0", icon: "square.and.pencil", visualState: .default, timeRoute: nil, interactionIntent: .openGlobalCapture),
             TimeSecondaryDestination(id: "time-empty-weekly-review", title: "Weekly review", detail: "Review stays available as the eventual closeout path for a real week.", valueLabel: "Open", icon: "arrow.triangle.branch", visualState: .default, timeRoute: .weeklyReview)
         ],

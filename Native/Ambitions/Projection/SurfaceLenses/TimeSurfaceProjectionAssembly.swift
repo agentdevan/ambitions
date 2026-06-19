@@ -208,7 +208,7 @@ extension RepositoryBackedTimeService {
             ),
             secondaryDestinations: [
                 TimeSecondaryDestination(
-                    id: "time-habits",
+                    id: "time-rituals",
                     title: "Rituals",
                     detail: habitGoals.isEmpty
                         ? "No repeatable loops are shaping the week yet."
@@ -216,7 +216,7 @@ extension RepositoryBackedTimeService {
                     valueLabel: "\(habitGoals.count)",
                     icon: "repeat",
                     visualState: habitGoals.isEmpty ? .default : .selected,
-                    timeRoute: .habits
+                    timeRoute: .rituals
                 ),
                 TimeSecondaryDestination(
                     id: "time-held-input",

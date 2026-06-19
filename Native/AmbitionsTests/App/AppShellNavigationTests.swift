@@ -277,13 +277,13 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testHabitsRouteStaysUnderTimeWithoutDuplicateDestination() {
+    func testRitualsRouteStaysUnderTimeWithoutDuplicateDestination() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
-        navigation.openTimeRoute(.habits)
+        navigation.openTimeRoute(.rituals)
 
         XCTAssertEqual(navigation.selectedTab, .time)
-        XCTAssertEqual(navigation.timePath, [.habits])
+        XCTAssertEqual(navigation.timePath, [.rituals])
         XCTAssertTrue(navigation.youPath.isEmpty)
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
@@ -481,12 +481,12 @@ final class AppShellNavigationTests: XCTestCase {
     @MainActor
     func testCurrentTabReselectionFirstTapRequestsScrollThenSecondTapReturnsToRoot() {
         let navigation = AppNavigationModel(selectedTab: .time)
-        navigation.openHabits()
+        navigation.openRituals()
 
         let firstTap = navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100))
         XCTAssertEqual(firstTap, .scrollToTop)
         XCTAssertEqual(navigation.selectedTab, .time)
-        XCTAssertEqual(navigation.timePath, [.habits])
+        XCTAssertEqual(navigation.timePath, [.rituals])
 
         let secondTap = navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100.4))
         XCTAssertEqual(secondTap, .returnToRoot)

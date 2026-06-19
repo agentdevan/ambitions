@@ -368,7 +368,7 @@ struct DefaultAppActionRouter: AppActionRouting {
         case .profileSummary, .settingsGroup:
             navigation.selectTab(.you)
         case .habitSummary, .streak:
-            navigation.openHabits()
+            navigation.openRituals()
         case .dailyTargets, .focusNow, .freeTime, .milestonePrompt, .goalsList, .celebration:
             navigation.selectTab(.today)
         }

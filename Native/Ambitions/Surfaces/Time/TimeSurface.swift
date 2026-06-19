@@ -76,7 +76,7 @@ struct TimeSurface: View {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        shell.navigation.openHabits()
+                        shell.navigation.openRituals()
                     } label: {
                         Label("Rituals", systemImage: "repeat")
                     }

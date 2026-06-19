@@ -60,8 +60,8 @@ struct AppExternalRouteTranslator {
 
         if host == "time", let first = pathSegments.first {
             switch first.lowercased() {
-            case "habits":
-                return .openTimeRoute(.habits)
+            case "rituals":
+                return .openTimeRoute(.rituals)
             case "weekly-review":
                 return .openTimeRoute(.weeklyReview)
             default:
@@ -167,8 +167,8 @@ struct AppExternalRouteTranslator {
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: goalID)
         case let .openTimeRoute(target):
             switch target {
-            case .habits:
-                return URL(string: "ambitions://time/habits")
+            case .rituals:
+                return URL(string: "ambitions://time/rituals")
             case .weeklyReview:
                 return URL(string: "ambitions://time/weekly-review")
             }

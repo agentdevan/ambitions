@@ -73,7 +73,7 @@ struct AmbitionsRootStageSurfaceHost: View {
             }
             .navigationDestination(for: TimeRouteTarget.self) { target in
                 switch target {
-                case .habits:
+                case .rituals:
                     AppShellScaffold(
                         title: "Rituals",
                         subtitle: "LifeShape Field",

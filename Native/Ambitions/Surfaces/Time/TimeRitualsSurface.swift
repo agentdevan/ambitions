@@ -30,7 +30,7 @@ struct TimeRitualsSurface: View {
                 case .failed:
                     DegradedStateSurface(
                         state: DegradedStateOrchestrator.unavailable(surface: "Rituals"),
-                        primaryAccessibilityIdentifier: "habits.retry-button",
+                        primaryAccessibilityIdentifier: "rituals.retry-button",
                         onPrimaryAction: {
                             Task { await refresh() }
                         }
@@ -55,14 +55,14 @@ struct TimeRitualsSurface: View {
                                     shell.navigation.resetTimePath()
                                 }
                                 .buttonStyle(.bordered)
-                                .accessibilityIdentifier("habits.return-to-plan")
+                                .accessibilityIdentifier("rituals.return-to-time")
 
                                 Button("Weekly Review") {
                                     viewModel.recordStageRouteMutation(label: "Opening Weekly Review", routeID: "weekly-review")
                                     shell.navigation.openWeeklyReview()
                                 }
                                 .buttonStyle(.borderedProminent)
-                                .accessibilityIdentifier("habits.open-weekly-review")
+                                .accessibilityIdentifier("rituals.open-weekly-review")
                             }
                         }
                     }
@@ -79,8 +79,8 @@ struct TimeRitualsSurface: View {
 
                     if let emptyTitle = dashboard.emptyTitle, let emptyMessage = dashboard.emptyMessage {
                         DegradedStateSurface(
-                            state: DegradedStateOrchestrator.habitsEmpty(),
-                            primaryAccessibilityIdentifier: "habits.empty.return-time",
+                            state: DegradedStateOrchestrator.ritualsEmpty(),
+                            primaryAccessibilityIdentifier: "rituals.empty.return-time",
                             onPrimaryAction: {
                                 _ = emptyTitle
                                 _ = emptyMessage

@@ -74,9 +74,9 @@ enum DegradedStateOrchestrator {
         )
     }
 
-    static func habitsEmpty() -> DegradedStatePresentation {
+    static func ritualsEmpty() -> DegradedStatePresentation {
         DegradedStatePresentation(
-            id: "degraded.habits.empty",
+            id: "degraded.time.rituals.empty",
             kind: .empty,
             title: "No routines are shaping the week yet",
             explanation: "Rituals stay quiet until a repeatable loop is useful enough to support the week.",

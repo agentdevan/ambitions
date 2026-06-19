@@ -17,7 +17,7 @@ extension AppExternalRouteTranslator {
             )
         case let .openTimeRoute(target):
             switch target {
-            case .habits:
+            case .rituals:
                 return [
                     ExternalSurfaceActionPayload.Key.surface: ExternalSurfacePayloadSurface.tab.rawValue,
                     ExternalSurfaceActionPayload.Key.tab: AppTab.time.rawValue,
@@ -93,7 +93,7 @@ extension AppExternalRouteTranslator {
             )
         case let .openTimeRoute(target):
             switch target {
-            case .habits:
+            case .rituals:
                 var values = routePayload(for: route)
                 values[ExternalSurfaceActionPayload.Key.action] = actionName.rawValue
                 return values

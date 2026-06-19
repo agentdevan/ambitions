@@ -173,8 +173,8 @@ final class AppNavigationModel {
         timePath = []
     }
 
-    func openHabits() {
-        openTimeRoute(.habits)
+    func openRituals() {
+        openTimeRoute(.rituals)
     }
 
     func openWeeklyReview() {

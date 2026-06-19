@@ -8,6 +8,10 @@ final class TimeProjectionServiceTests: XCTestCase {
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift"),
             encoding: .utf8
         )
+        let canvasSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift"),
+            encoding: .utf8
+        )
         let lensSource = try String(
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift"),
             encoding: .utf8
@@ -28,10 +32,10 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
         XCTAssertFalse(fieldSource.contains("LazyVGrid("))
-        XCTAssertTrue(fieldSource.contains("semanticMarkRow(mark, compact: dynamicTypeSize.isAccessibilitySize == false)"))
-        XCTAssertTrue(fieldSource.contains("dynamicTypeSize.isAccessibilitySize"))
+        XCTAssertTrue(canvasSource.contains("semanticMarkRow(mark, compact: dynamicTypeSize.isAccessibilitySize == false)"))
+        XCTAssertTrue(canvasSource.contains("dynamicTypeSize.isAccessibilitySize"))
         XCTAssertTrue(lensSource.contains("Capture routes through the global composer"))
-        XCTAssertTrue(timeScreenSource.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(timeScreenSource.contains(".stageOwnedSafeAreaInset(edge: .bottom"))
         XCTAssertTrue(timeScreenSource.contains("Color.clear"))
         XCTAssertFalse(timeScreenSource.contains("theme.colors.canvasElevated.opacity(0.92)"))
         XCTAssertFalse(timeScreenSource.contains("theme.colors.canvas.opacity(0.96)"))
@@ -61,7 +65,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertEqual(timeState.primaryAction.kind, .useRoom)
         XCTAssertEqual(timeState.weekDays.count, 7)
         XCTAssertEqual(timeState.pressureScrubber.points.count, 7)
-        XCTAssertEqual(timeState.secondaryDestinations.map(\.id), ["time-habits", "time-held-input", "time-weekly-review"])
+        XCTAssertEqual(timeState.secondaryDestinations.map(\.id), ["time-rituals", "time-held-input", "time-weekly-review"])
         XCTAssertTrue(timeState.goalShapingItems.isEmpty)
         XCTAssertEqual(timeState.hero.title, "Shape Time")
         XCTAssertEqual(timeState.lifeSuite.title, "Shape Time")
@@ -170,16 +174,22 @@ final class TimeProjectionServiceTests: XCTestCase {
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift"),
             encoding: .utf8
         )
+        let capacitySource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCapacity.swift"),
+            encoding: .utf8
+        )
 
         XCTAssertEqual(timeState.lifeSuite.field.defaultHorizon, .week)
         XCTAssertTrue(weekReading.capacityStatement.contains("This week can hold"))
         XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("focused block"))
         XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("light step"))
         XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("protected recovery window"))
-        XCTAssertTrue(source.contains("time.life-shape-field.action.shape-week"))
-        XCTAssertTrue(source.contains("time.life-shape-field.action.review-pressure"))
-        XCTAssertTrue(source.contains("time.life-shape-field.action.protect-block"))
-        XCTAssertTrue(source.contains("time.life-shape-field.action.adjust-shape"))
+        XCTAssertTrue(source.contains("capacityStatement"))
+        XCTAssertTrue(capacitySource.contains("var capacityStatement"))
+        XCTAssertTrue(capacitySource.contains("time.life-shape-field.action.shape-week"))
+        XCTAssertTrue(capacitySource.contains("time.life-shape-field.action.review-pressure"))
+        XCTAssertTrue(capacitySource.contains("time.life-shape-field.action.protect-block"))
+        XCTAssertTrue(capacitySource.contains("time.life-shape-field.action.adjust-shape"))
         XCTAssertTrue(TimeObjectStagePrimitiveContract.current.replacesFirstViewportStructures.contains("metric-row stack"))
     }
 
@@ -543,8 +553,8 @@ final class TimeProjectionServiceTests: XCTestCase {
 
         let timeState = try await service.loadTimeSurfaceState(now: fixedDate)
 
-        XCTAssertEqual(timeState.secondaryDestinations.map(\.id), ["time-habits", "time-held-input", "time-weekly-review"])
-        XCTAssertTrue(timeState.secondaryDestinations.contains(where: { $0.id == "time-habits" && $0.valueLabel != "0" }))
+        XCTAssertEqual(timeState.secondaryDestinations.map(\.id), ["time-rituals", "time-held-input", "time-weekly-review"])
+        XCTAssertTrue(timeState.secondaryDestinations.contains(where: { $0.id == "time-rituals" && $0.valueLabel != "0" }))
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif
@@ -557,8 +567,8 @@ final class TimeProjectionServiceTests: XCTestCase {
         let service = RepositoryBackedTimeService(repositories: repositories)
 
         let timeState = try await service.loadTimeSurfaceState(now: fixedDate)
-        let ritualDestination = try XCTUnwrap(timeState.secondaryDestinations.first(where: { $0.timeRoute == .habits }))
-        let ritualLane = try XCTUnwrap(timeState.resilience.lanes.first(where: { $0.timeRoute == .habits }))
+        let ritualDestination = try XCTUnwrap(timeState.secondaryDestinations.first(where: { $0.timeRoute == .rituals }))
+        let ritualLane = try XCTUnwrap(timeState.resilience.lanes.first(where: { $0.timeRoute == .rituals }))
         let timeCopy = [
             ritualDestination.title,
             ritualDestination.detail,

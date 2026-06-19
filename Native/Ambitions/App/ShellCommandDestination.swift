@@ -84,7 +84,7 @@ enum ShellCommandDestination: Hashable, Sendable {
             "Goal Detail"
         case let .timeRoute(target):
             switch target {
-            case .habits: "Rituals"
+            case .rituals: "Rituals"
             case .weeklyReview: "Weekly Review"
             }
         case let .youRoute(target):

@@ -122,11 +122,11 @@ enum AppDeepLinkRegistry {
             privacyBoundary: "Root route only; opens LifeShape Field without schedule export."
         ),
         AppDeepLinkRegistryEntry(
-            id: "time.habits",
+            id: "time.rituals",
             objectKind: .timeRoute,
             owner: .tab(.time),
-            canonicalRoute: .openTimeRoute(.habits),
-            deepLinkTemplate: "ambitions://time/habits",
+            canonicalRoute: .openTimeRoute(.rituals),
+            deepLinkTemplate: "ambitions://time/rituals",
             allowedSources: externalObjectSources,
             privacyBoundary: "Time route only; no streak or score payload is supported."
         ),

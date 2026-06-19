@@ -26,7 +26,7 @@ struct GoalRouteTarget: Hashable, Identifiable, Sendable {
 }
 
 enum TimeRouteTarget: String, Hashable, Identifiable, Sendable {
-    case habits
+    case rituals
     case weeklyReview
 
     var id: String { rawValue }

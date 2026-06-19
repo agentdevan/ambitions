@@ -20,7 +20,7 @@ enum DegradedStateRoutingHint: String, Sendable, Equatable {
     case time
     case insights
     case profileTrust
-    case habits
+    case rituals
     case weeklyReview
     case createGoal
     case quickCapture

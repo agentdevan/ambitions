@@ -51,7 +51,7 @@ extension RepositoryBackedTimeService {
                     timeRoute: nil
                 ),
                 TimeExecutionResilienceLane(
-                    id: "habits",
+                    id: "rituals",
                     title: "Rituals",
                     detail: habitGoals.isEmpty
                         ? "No recurring loop is currently shaping the week."
@@ -61,7 +61,7 @@ extension RepositoryBackedTimeService {
                         : "Use the routines route to soften or trim loops that are crowding the week.",
                     state: habitGoals.isEmpty ? .default : .selected,
                     goalTarget: nil,
-                    timeRoute: .habits
+                    timeRoute: .rituals
                 ),
                 TimeExecutionResilienceLane(
                     id: "held-input",
