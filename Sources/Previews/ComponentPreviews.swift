@@ -1,30 +1,18 @@
 #if canImport(SwiftUI)
 import SwiftUI
 
-private enum PreviewFilter: String, CaseIterable {
-    case today = "Today"
-    case week = "Week"
-    case month = "Month"
-}
-
-private enum PreviewTab: String, CaseIterable {
-    case today = "Today"
-    case goals = "Goals"
-    case time = "Time"
-    case profile = "You"
-}
-
-private struct DesignSystemPreviewGallery: View {
-    @State private var filter: PreviewFilter = .week
-    @State private var tab: PreviewTab = .today
+struct DesignSystemPreviewGallery: View {
+    @Environment(\.ambitionTheme) var theme
+    @State private var filter: ComponentPreviewFilter = .week
+    @State private var selectedSurface: ComponentPreviewRootSurface = .today
     @State private var privateItems = true
     @State private var notifications = false
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: theme.spacing.lg) {
                 HeroCard(state: .celebration) {
-                    VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         AvatarHeader(title: "Ambitions", subtitle: "Design system foundation", initials: "A") {
                             TagPill("Premium", icon: "sparkles", state: .selected)
                         }
@@ -36,15 +24,15 @@ private struct DesignSystemPreviewGallery: View {
                 SectionHeader(eyebrow: "Cards", title: "Shared Surfaces", subtitle: "Base shells for screens and compact modules.")
 
                 AppCard {
-                    VStack(alignment: .leading, spacing: 16) {
+                    VStack(alignment: .leading, spacing: theme.spacing.sm) {
                         Text("AppCard")
-                            .font(.title3.weight(.semibold))
+                            .font(theme.typography.titleCompact)
                         Text("Primary grouped surface for richer modules and screen sections.")
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(theme.colors.textSecondary)
                     }
                 }
 
-                HStack(spacing: 16) {
+                HStack(spacing: theme.spacing.sm) {
                     WidgetCard {
                         Text("WidgetCard")
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -53,7 +41,7 @@ private struct DesignSystemPreviewGallery: View {
                 }
 
                 SectionHeader(eyebrow: "Controls", title: "Interactive Primitives")
-                SegmentedFilterBar(items: PreviewFilter.allCases, selection: $filter) { $0.rawValue }
+                SegmentedFilterBar(items: ComponentPreviewFilter.allCases, selection: $filter) { $0.rawValue }
                 HStack {
                     TagPill("Default")
                     StatusChip("Success", icon: "checkmark.circle.fill", state: .success)
@@ -61,7 +49,7 @@ private struct DesignSystemPreviewGallery: View {
                     TagPill("Selected", icon: "checkmark.circle.fill", state: .selected)
                 }
 
-                HStack(spacing: 12) {
+                HStack(spacing: theme.spacing.xs) {
                     Button("Primary action") {}
                         .buttonStyle(AmbitionButtonStyle(tier: .hero, state: .selected))
                     Button("Secondary") {}
@@ -93,7 +81,7 @@ private struct DesignSystemPreviewGallery: View {
                 AmbitionBand {
                     Image(systemName: "paintpalette")
                     Text("Band treatment carries lightweight continuity without turning every module into a heavy card.")
-                        .font(.caption)
+                        .font(theme.typography.caption)
                 }
 
                 SectionHeader(eyebrow: "D03", title: "Grouped Navigation List", subtitle: "Settings-style grouped rows for secondary navigation, preferences, status, and caller-confirmed destructive actions.")
@@ -175,9 +163,9 @@ private struct DesignSystemPreviewGallery: View {
                 SectionHeader(eyebrow: "D04", title: "Panel Size + Display Density", subtitle: "Shared comfort foundation. Required information stays visible while extra detail can collapse.")
 
                 LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 220), spacing: 12, alignment: .top)],
+                    columns: [GridItem(.adaptive(minimum: 220), spacing: theme.spacing.xs, alignment: .top)],
                     alignment: .leading,
-                    spacing: 12
+                    spacing: theme.spacing.xs
                 ) {
                     ForEach(AmbitionDisplayDensity.allCases) { density in
                         ForEach(AmbitionPanelSize.allCases) { size in
@@ -196,19 +184,19 @@ private struct DesignSystemPreviewGallery: View {
                     .init(
                         emphasis: .orientation,
                         title: "Start with the one thing that keeps the day together",
-                        subtitle: "A calm module shell for future Today, Goals, Time, Motion, and You surfaces with global Capture.",
+                        subtitle: "A calm module shell for Today, Goals, Time, and You surfaces, with Capture as the global composer.",
                         status: "Ready",
                         accessibilityHint: "Reviews the primary orientation module."
                     )
                 ) {
-                    VStack(alignment: .leading, spacing: 12) {
+                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
                         AmbitionBand {
                             Image(systemName: "checkmark.seal")
                             Text("State is carried by text, symbol, and structure, not color alone.")
-                                .font(.caption)
+                                .font(theme.typography.caption)
                         }
 
-                        HStack(spacing: 12) {
+                        HStack(spacing: theme.spacing.xs) {
                             AmbitionsActionButton("Start here", icon: "arrow.right.circle.fill", role: .primary) {}
                             QuietActionButton("Why this", icon: "questionmark.circle") {}
                         }
@@ -216,9 +204,9 @@ private struct DesignSystemPreviewGallery: View {
                 }
 
                 LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 220), spacing: 12, alignment: .top)],
+                    columns: [GridItem(.adaptive(minimum: 220), spacing: theme.spacing.xs, alignment: .top)],
                     alignment: .leading,
-                    spacing: 12
+                    spacing: theme.spacing.xs
                 ) {
                     AdaptivePanel(.init(emphasis: .proof, title: "Proof saved", status: "Proof")) {
                         AmbitionChip("Local receipt", role: .state, semanticState: .trust)
@@ -255,10 +243,19 @@ private struct DesignSystemPreviewGallery: View {
                 }
 
                 CompactChartShell(title: "CompactChartShell", subtitle: "Chart content drops into the shell later.") {
-                    HStack(alignment: .bottom, spacing: 10) {
+                    HStack(alignment: .bottom, spacing: theme.spacing.xxs) {
                         ForEach([0.35, 0.50, 0.44, 0.70, 0.58], id: \.self) { value in
-                            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .fill(LinearGradient(colors: [.mint.opacity(0.9), .orange.opacity(0.65)], startPoint: .top, endPoint: .bottom))
+                            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                                .fill(
+                                    LinearGradient(
+                                        colors: [
+                                            theme.colors.accentSecondary.opacity(0.9),
+                                            theme.colors.accentWarm.opacity(0.65)
+                                        ],
+                                        startPoint: .top,
+                                        endPoint: .bottom
+                                    )
+                                )
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 100 * value)
                         }
@@ -266,7 +263,7 @@ private struct DesignSystemPreviewGallery: View {
                     .frame(maxWidth: .infinity, alignment: .bottom)
                 }
 
-                VStack(spacing: 16) {
+                VStack(spacing: theme.spacing.sm) {
                     EmptyStateCard(
                         title: "No insights yet",
                         message: "Use this when a module has no data but still needs calm structure.",
@@ -277,237 +274,32 @@ private struct DesignSystemPreviewGallery: View {
                     CelebrationBanner(title: "Momentum is compounding", subtitle: "Use this after wins, completed steps, or rhythm milestones.")
                 }
 
-                VStack(spacing: 12) {
+                VStack(spacing: theme.spacing.xs) {
                     ListChevronRow(
                         title: "Drill-in row",
                         subtitle: "Consistent navigation affordance",
                         leading: {
                             Image(systemName: "figure.walk")
-                                .foregroundStyle(.mint)
+                                .foregroundStyle(theme.colors.accentSecondary)
                         },
                         trailing: {
                             Text("4 items")
-                                .foregroundStyle(.secondary)
+                                .foregroundStyle(theme.colors.textSecondary)
                         },
                         action: {}
                     )
 
-                    BottomNavShell(items: PreviewTab.allCases, selection: $tab, title: { $0.rawValue }, icon: { icon(for: $0) })
-                }
-            }
-            .padding(24)
-        }
-        .ambitionTheme(.dark)
-    }
-
-    private func icon(for tab: PreviewTab) -> String {
-        switch tab {
-        case .today: "sun.max.fill"
-        case .goals: "target"
-        case .time: "clock"
-        case .profile: "person.crop.circle"
-        }
-    }
-
-    private func panelConfiguration(for kind: AmbitionPanelKind) -> AmbitionRichPanelConfiguration {
-        AmbitionRichPanelConfiguration(
-            kind: kind,
-            title: panelTitle(for: kind),
-            subtitle: "Reusable foundation for later surface batches without changing app behavior today.",
-            semanticState: kind.defaultSemanticState,
-            confidenceLabel: kind == .progress ? "Useful signal" : nil,
-            progressValue: kind == .progress ? 0.64 : nil,
-            explanation: "State is paired with text, iconography, and accessibility values so color is never the only signal.",
-            primaryAction: .init(id: "\(kind.rawValue)-primary", title: "Primary", role: .primary),
-            secondaryAction: .init(id: "\(kind.rawValue)-why", title: "Why this", icon: "questionmark.circle", role: .tertiary)
-        )
-    }
-
-    private func panelTitle(for kind: AmbitionPanelKind) -> String {
-        switch kind {
-        case .heroDecision: "Choose the recommended step"
-        case .progress: "Pace is holding"
-        case .timeline: "Three recent changes"
-        case .schedule: "Open window later today"
-        case .insight: "Capacity is the constraint"
-        case .recovery: "Recover without rewriting the day"
-        case .trust: "Based on local plan evidence"
-        case .capture: "Triage this capture"
-        case .review: "What changed this week"
-        case .settingsPreference: "Calendar-aware planning"
-        }
-    }
-
-    @ViewBuilder
-    private func previewVisualSlot(for kind: AmbitionPanelKind) -> some View {
-        switch kind {
-        case .timeline:
-            VStack(alignment: .leading, spacing: 10) {
-            previewTimelineRow("Rescheduled", detail: "Draft session shifted to a calmer window.")
-                previewTimelineRow("Kept", detail: "Deep work stayed outside the busy block.")
-                previewTimelineRow("Recovered", detail: "Smaller version preserved momentum.")
-            }
-        case .schedule:
-            HStack(spacing: 8) {
-                ForEach(["9", "12", "3", "6"], id: \.self) { hour in
-                    VStack(spacing: 6) {
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .fill(hour == "3" ? Color.orange.opacity(0.55) : Color.teal.opacity(0.34))
-                            .frame(height: hour == "3" ? 76 : 46)
-                        Text(hour)
-                            .font(.caption2)
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-            }
-        case .progress:
-            ProgressRail(title: "Believable pace", progress: 0.64, trailingValue: "64%", state: .selected)
-        default:
-            EmptyView()
-        }
-    }
-
-    @ViewBuilder
-    private func previewContentSlot(for kind: AmbitionPanelKind) -> some View {
-        switch kind {
-        case .capture:
-            HStack {
-                AmbitionChip("Raw", role: .capture)
-                AmbitionChip("Schedule idea", role: .domain)
-                AmbitionChip("10 min", role: .time)
-            }
-        case .recovery:
-            HStack {
-                AmbitionChip("Smaller", role: .recovery)
-                AmbitionChip("Later", role: .waiting)
-                AmbitionChip("Keep", role: .protected)
-            }
-        case .trust:
-            HStack {
-                AmbitionChip("Local", role: .state, semanticState: .trust)
-                AmbitionChip("Not synced", role: .state, semanticState: .waiting)
-            }
-        default:
-            EmptyView()
-        }
-    }
-
-    private func previewTimelineRow(_ title: String, detail: String) -> some View {
-        HStack(alignment: .top, spacing: 10) {
-            Circle()
-                .fill(Color.orange.opacity(0.8))
-                .frame(width: 8, height: 8)
-                .padding(.top, 5)
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .font(.caption.weight(.semibold))
-                Text(detail)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
-
-    private func panelDensityMatrixTile(
-        configuration: AmbitionPanelDisplayConfiguration
-    ) -> some View {
-        let required = AmbitionTheme.dark.panelDisplayDecision(
-            for: .todayPlan,
-            configuration: configuration
-        )
-        let optional = AmbitionTheme.dark.panelDisplayDecision(
-            for: .optional,
-            configuration: configuration
-        )
-
-        return WidgetCard {
-            VStack(alignment: .leading, spacing: required.metrics.verticalSpacing) {
-                HStack(alignment: .firstTextBaseline) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(configuration.density.title)
-                            .font(.headline.weight(.semibold))
-                        Text(configuration.size.title)
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-
-                    Spacer()
-
-                    AmbitionChip(
-                        required.visibility.previewTitle,
-                        role: .state,
-                        semanticState: .trust
+                    BottomNavShell(
+                        items: ComponentPreviewRootSurface.allCases,
+                        selection: $selectedSurface,
+                        title: { $0.rawValue },
+                        icon: { $0.iconName }
                     )
                 }
-
-                Text("Required information stays visible.")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-
-                if required.showsSupportingDetail {
-                    Text("Looks doable.")
-                        .font(.caption.weight(.semibold))
-                }
-
-                if optional.visibility == .hidden {
-                    Text("Extra detail hidden.")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                } else {
-                    Text(optional.visibility == .full ? "More detail shown." : "Extra detail summarized.")
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                }
-
-                Button("Make today doable") {}
-                    .buttonStyle(AmbitionButtonStyle(tier: .compact, state: .selected))
-                    .frame(minHeight: required.metrics.minimumTapTarget)
             }
-            .padding(required.metrics.panelPadding)
-            .ambitionPanelDisplayConfiguration(configuration)
-            .accessibilityElement(children: .combine)
-            .accessibilityLabel("\(configuration.density.title), \(configuration.size.title)")
-            .accessibilityValue("Required information stays visible. \(optional.visibility.previewAccessibilityText)")
+            .padding(theme.spacing.lg)
         }
-    }
-}
-
-private extension AmbitionPanelVisibility {
-    var previewTitle: String {
-        switch self {
-        case .full: "Full"
-        case .summarized: "Summary"
-        case .collapsedSignal: "Signal"
-        case .hidden: "Hidden"
-        }
-    }
-
-    var previewAccessibilityText: String {
-        switch self {
-        case .full: "Extra detail is shown."
-        case .summarized: "Extra detail is summarized."
-        case .collapsedSignal: "Extra detail uses a signal."
-        case .hidden: "Extra detail is hidden."
-        }
-    }
-}
-
-struct DesignSystemPreviewGallery_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            DesignSystemPreviewGallery()
-                .previewDisplayName("Dark")
-
-            DesignSystemPreviewGallery()
-                .ambitionTheme(.light)
-                .preferredColorScheme(.light)
-                .previewDisplayName("Light Hook")
-
-            DesignSystemPreviewGallery()
-                .environment(\.dynamicTypeSize, .accessibility3)
-                .previewDisplayName("SI02 High Dynamic Type")
-        }
+        .ambitionTheme(.dark)
     }
 }
 #endif

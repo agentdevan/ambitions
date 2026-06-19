@@ -11,7 +11,7 @@ private struct SI03ShellNavigationPreview: View {
                 kind: .utilityHub,
                 title: "You",
                 subtitle: "Personal system center with grouped routes, trust controls, and calm return paths.",
-                statusMessage: "Top-level destinations stay Today, Goals, Time, Motion, and You with global Capture.",
+                statusMessage: "Top-level destinations stay Today, Goals, Time, and You. Capture stays global; Motion stays behavior.",
                 primaryAction: .init(
                     title: "Open command",
                     systemImage: "command",
@@ -25,12 +25,12 @@ private struct SI03ShellNavigationPreview: View {
             ) {
                 GroupedNavigationList {
                     GroupedNavigationSection(
-                        title: "Planning setup",
+                        title: "Time setup",
                         footer: "Rows open owned drill-downs. No route is created by the preview."
                     ) {
                         GroupedDisclosureNavigationRow(
-                            title: "Planning defaults",
-                            subtitle: "How Ambitions proposes the next plan.",
+                            title: "Time-fit defaults",
+                            subtitle: "How Ambitions proposes a step that fits.",
                             systemImage: "slider.horizontal.3",
                             badge: .init("Review", state: .review),
                             accessibilityHint: "Opens planning defaults.",
