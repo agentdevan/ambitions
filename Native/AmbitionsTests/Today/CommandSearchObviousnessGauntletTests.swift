@@ -10,7 +10,7 @@ final class CommandSearchObviousnessGauntletTests: XCTestCase {
             .shellUtility,
             .goalsCreate,
             .todayQuickCapture,
-            .capturesScreen,
+            .globalCaptureComposer,
             .deepLink,
             .appIntent,
             .notification,

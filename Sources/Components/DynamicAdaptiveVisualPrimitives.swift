@@ -5,6 +5,7 @@ public enum LivingTabContext: String, CaseIterable, Identifiable, Sendable {
     case today
     case goals
     case capture
+    case time
     case plan
     case motion
     case you
@@ -18,6 +19,7 @@ public enum LivingTabContext: String, CaseIterable, Identifiable, Sendable {
         case .today: "Today"
         case .goals: "Goals"
         case .capture: "Capture"
+        case .time: "Time"
         case .plan: "Time"
         case .motion: "Motion"
         case .you: "You"
@@ -31,6 +33,7 @@ public enum LivingTabContext: String, CaseIterable, Identifiable, Sendable {
         case .today: "sun.max"
         case .goals: "scope"
         case .capture: "plus.circle"
+        case .time: "clock.badge.checkmark"
         case .plan: "clock"
         case .motion: "point.topleft.down.curvedto.point.bottomright.up"
         case .you: "person.crop.circle"
@@ -44,6 +47,7 @@ public enum LivingTabContext: String, CaseIterable, Identifiable, Sendable {
         case .today: theme.semanticColors.focus
         case .goals: theme.colors.accentPrimary
         case .capture: theme.semanticColors.capture
+        case .time: theme.semanticColors.calendarDerived
         case .plan: theme.semanticColors.calendarDerived
         case .motion: theme.semanticColors.trust
         case .you: theme.semanticColors.review
@@ -246,6 +250,7 @@ public struct ContextAtmosphereLayer: View {
         case .today: 0.88
         case .goals: 0.82
         case .capture: 0.84
+        case .time: 0.90
         case .motion: 0.86
         case .plan: 0.90
         case .you: 0.80
@@ -259,6 +264,7 @@ public struct ContextAtmosphereLayer: View {
         case .today: 0.34
         case .goals: 0.28
         case .capture: 0.26
+        case .time: 0.30
         case .motion: 0.25
         case .plan: 0.30
         case .you: 0.24
@@ -282,6 +288,7 @@ public struct ContextAtmosphereLayer: View {
         case .today: CGPoint(x: 0.08, y: 0.24)
         case .goals: CGPoint(x: 0.62, y: 0.18)
         case .capture: CGPoint(x: 0.14, y: 0.30)
+        case .time: CGPoint(x: 0.66, y: 0.16)
         case .motion: CGPoint(x: 0.58, y: 0.20)
         case .plan: CGPoint(x: 0.66, y: 0.16)
         case .you: CGPoint(x: 0.50, y: 0.04)
@@ -295,6 +302,7 @@ public struct ContextAtmosphereLayer: View {
         case .today: CGPoint(x: 0.42, y: 0.02)
         case .goals: CGPoint(x: 0.24, y: 0.06)
         case .capture: CGPoint(x: 0.56, y: 0.03)
+        case .time: CGPoint(x: 0.34, y: 0.10)
         case .motion: CGPoint(x: 0.48, y: 0.06)
         case .plan: CGPoint(x: 0.34, y: 0.10)
         case .you: CGPoint(x: 0.46, y: 0.12)

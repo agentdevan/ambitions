@@ -38,7 +38,7 @@ struct ReleaseRepresentativeScenarioFixture: Identifiable, Sendable, Equatable {
     let id: String
     let domain: String
     let scenario: String
-    let surfaces: [CoreSurfaceScenarioSurface]
+    let surfaces: [RuntimeScenarioSurface]
     let guardrail: String
 }
 
@@ -47,7 +47,7 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseDeviceQACheck(
             id: "real-device-smoke",
             scope: .realDeviceSmoke,
-            requiredJourney: "Install and launch the app on a physical iPhone, then run the five-tab smoke and one create/capture/plan/review loop.",
+            requiredJourney: "Install and launch the app on a physical iPhone, then run the four-surface smoke and one create/capture/time/review loop.",
             evidence: "No physical iPhone execution was available in this environment; simulator build/test evidence is recorded instead.",
             evidenceState: .deviceRequired,
             blockerIfMissing: "Do not claim real-device validation or TestFlight readiness."
@@ -55,7 +55,7 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseDeviceQACheck(
             id: "fresh-install",
             scope: .freshInstall,
-            requiredJourney: "Start from no local app data and verify onboarding, first goal, Capture-first path, and local-first trust copy.",
+            requiredJourney: "Start from no local app data and verify onboarding, first goal, global Capture path, and local-first trust copy.",
             evidence: "Focused UI smoke can force onboarding in preview bootstrap and unit tests cover empty-state activation contracts.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "Fresh users may see a broken first-run path."
@@ -63,7 +63,7 @@ enum ReleaseDeviceQAReadinessReport {
         ReleaseDeviceQACheck(
             id: "returning-user",
             scope: .returningUser,
-            requiredJourney: "Launch with existing local data and verify Today, Goals, Time, Motion, You, Reviews, and receipts still orient the user.",
+            requiredJourney: "Launch with existing local data and verify Today, Goals, Time, You, Reviews, and receipts still orient the user.",
             evidence: "Preview bootstrap, core-surface scenario catalog, and repository-backed service tests cover returning-user local data paths.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "Returning users may lose context or trust."
@@ -72,15 +72,15 @@ enum ReleaseDeviceQAReadinessReport {
             id: "denied-permissions",
             scope: .deniedPermissions,
             requiredJourney: "Deny or restrict Calendar/notification-style permissions and verify user choice remains clear.",
-            evidence: "Plan, calendar reality, EventKit, activation, and external verification tests cover denied/unavailable permission fallback without silent writes.",
+            evidence: "Time, calendar reality, EventKit, activation, and external verification tests cover denied/unavailable permission fallback without silent writes.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "The app may imply unavailable integrations or break manual planning."
         ),
         ReleaseDeviceQACheck(
             id: "no-data",
             scope: .noData,
-            requiredJourney: "Open Today, Goals, Time, Motion, and You with no goals/captures, then invoke global Capture, and verify calm useful empty states.",
-            evidence: "Daily loop, activation, Today, Goals, Time, Motion, You, and global Capture tests cover no-data/empty-state behavior.",
+            requiredJourney: "Open Today, Goals, Time, and You with no goals or captures, then invoke global Capture and verify calm useful empty states.",
+            evidence: "Daily loop, activation, Today, Goals, Time, You, and global Capture tests cover no-data/empty-state behavior.",
             evidenceState: .simulatorAutomated,
             blockerIfMissing: "Empty states may feel blank or overclaim future systems."
         ),
@@ -96,7 +96,7 @@ enum ReleaseDeviceQAReadinessReport {
             id: "disrupted-week",
             scope: .missedWeek,
             requiredJourney: "Return after a week away and verify stale context, review needs, and one re-entry move.",
-            evidence: "M01 scenario catalog and Today/Plan/Reviews/What Ambitions Knows tests cover stale-context and recovery posture.",
+            evidence: "Scenario catalog and Today/Time/inspection tests cover stale-context and recovery posture.",
             evidenceState: .sourceFixture,
             blockerIfMissing: "Recovery after time away may be confusing or shame-prone."
         ),
@@ -131,35 +131,35 @@ enum ReleaseDeviceQAReadinessReport {
             id: "family-week",
             domain: "Family / shared life",
             scenario: "A packed family week needs one protected next step, a waiting item, and non-shaming recovery.",
-            surfaces: [.today, .plan, .reviews, .you],
+            surfaces: [.today, .time, .trustInspection, .you],
             guardrail: "Fixture only; do not infer family structure or social obligations."
         ),
         ReleaseRepresentativeScenarioFixture(
             id: "career-transition",
             domain: "Career",
-            scenario: "A career transition goal needs path phases, proof, risks, and Today/Plan handoff.",
-            surfaces: [.goals, .goalDetail, .today, .plan],
+            scenario: "A career transition goal needs path phases, proof, risks, and Today/Time handoff.",
+            surfaces: [.goals, .today, .time],
             guardrail: "No professional advice or best-path certainty."
         ),
         ReleaseRepresentativeScenarioFixture(
             id: "creative-project",
             domain: "Creative project",
             scenario: "A creative launch needs Capture intake, Goal Detail proof, and a reviewable receipt trail.",
-            surfaces: [.capture, .goals, .goalDetail, .reviews],
+            surfaces: [.captureComposer, .goals, .trustInspection],
             guardrail: "No dashboard or fake momentum score."
         ),
         ReleaseRepresentativeScenarioFixture(
             id: "finance-admin",
             domain: "Finance / life admin",
             scenario: "A financial admin goal needs privacy-safe wording, proof requirements, and manual confirmation boundaries.",
-            surfaces: [.goals, .plan, .you],
+            surfaces: [.goals, .time, .you],
             guardrail: "No financial advice claim or sensitive inference."
         ),
         ReleaseRepresentativeScenarioFixture(
             id: "home-maintenance",
             domain: "Home / life admin",
             scenario: "A home project needs waiting states, dependencies, and a clear next Step without becoming a project board.",
-            surfaces: [.goals, .goalDetail, .plan, .today],
+            surfaces: [.goals, .time, .today],
             guardrail: "No top-level Tasks or hidden project-management mode."
         )
     ]

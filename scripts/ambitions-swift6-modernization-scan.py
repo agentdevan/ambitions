@@ -52,7 +52,7 @@ EXCLUDED_DIR_NAMES = {
 EXPLICIT_ALLOWLISTS: tuple[tuple[str, str, str], ...] = (
     (
         "unchecked-sendable",
-        "Native/Ambitions/Features/Today/TodayReadModelProjector.swift",
+        "Native/Ambitions/Projection/SurfaceLenses/TodayReadModelProjector.swift",
         "final class TodayDerivedReadModelCache: @unchecked Sendable",
     ),
 )
@@ -337,7 +337,7 @@ def render(root: Path, findings: Sequence[Finding]) -> str:
 
 
 def write_fixture(root: Path, project_swift_version: str = "6.0", strict: str = "complete", package_tools: str = "6.0") -> None:
-    (root / "Native/Ambitions/Features/Today").mkdir(parents=True)
+    (root / "Native/Ambitions/Surfaces/Today").mkdir(parents=True)
     (root / "Native/Ambitions/Domain").mkdir(parents=True)
     (root / "Sources").mkdir(parents=True)
     (root / "project.yml").write_text(
@@ -345,7 +345,7 @@ def write_fixture(root: Path, project_swift_version: str = "6.0", strict: str = 
         encoding="utf-8",
     )
     (root / "Package.swift").write_text(f"// swift-tools-version: {package_tools}\n", encoding="utf-8")
-    (root / "Native/Ambitions/Features/Today/TodayViewModel.swift").write_text(
+    (root / "Native/Ambitions/Surfaces/Today/TodayViewModel.swift").write_text(
         "import Observation\n\n@MainActor @Observable final class TodayViewModel {}\n",
         encoding="utf-8",
     )

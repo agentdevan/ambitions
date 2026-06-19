@@ -17,7 +17,7 @@ final class SafeAutomationPolicyModelsTests: XCTestCase {
                 .moveActionLater,
                 .changePriority,
                 .changeDeadline,
-                .changePlanWindow,
+                .changeTimeWindow,
                 .shrinkAction,
                 .splitAction,
                 .dropAction,

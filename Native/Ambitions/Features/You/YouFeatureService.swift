@@ -5747,7 +5747,7 @@ private extension RepositoryBackedYouService {
                 YouAvailabilityCenterItem(
                     id: "protected-pocket-open-time",
                     title: "Open time is not auto-filled",
-                    summary: "Open windows can help Plan see possibility, but Ambitions must not pack them by default.",
+                    summary: "Open windows can help Time see possibility, but Ambitions must not pack them by default.",
                     statusLabel: AvailabilityState.doNotFill.displayLabel,
                     sourceLabel: "Source: Planning default",
                     state: .success
@@ -5793,7 +5793,7 @@ private extension RepositoryBackedYouService {
                     title: "Calendar writes require confirmation",
                     summary: safetySamples.calendarWrite.reasons.map(\.userFacingSummary).joined(separator: " "),
                     statusLabel: "Requires confirmation",
-                    sourceLabel: "Source: Plan safety policy",
+                    sourceLabel: "Source: Time safety policy",
                     state: .warning
                 )
             ],

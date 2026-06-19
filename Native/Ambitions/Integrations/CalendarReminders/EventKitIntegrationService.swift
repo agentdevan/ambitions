@@ -102,16 +102,16 @@ struct CreatedCalendarEventRecord: Sendable, Equatable {
 
 struct CalendarRealityReadRequest: Sendable, Equatable {
     let horizon: DateInterval
-    let userInitiatedPlanAction: String
+    let userInitiatedTimeAction: String
     let minimumWindowMinutes: Int
 
     init(
         horizon: DateInterval,
-        userInitiatedPlanAction: String,
+        userInitiatedTimeAction: String,
         minimumWindowMinutes: Int = 30
     ) {
         self.horizon = horizon
-        self.userInitiatedPlanAction = userInitiatedPlanAction
+        self.userInitiatedTimeAction = userInitiatedTimeAction
         self.minimumWindowMinutes = max(15, minimumWindowMinutes)
     }
 }
@@ -164,7 +164,7 @@ protocol CalendarRemindersServicing: Sendable {
 
 protocol CalendarPermissionServicing: Sendable {
     func calendarPermissionState() async -> CalendarPermissionState
-    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState
+    func requestCalendarReadAccessFromTime(actionName: String) async -> CalendarPermissionState
     func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState
 }
 
@@ -234,7 +234,7 @@ extension StubCalendarRemindersService: CalendarRealityServicing, CalendarBlockW
         CalendarPermissionState(calendarRemindersState: calendarAuthorizationState)
     }
 
-    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+    func requestCalendarReadAccessFromTime(actionName: String) async -> CalendarPermissionState {
         _ = actionName
         return await calendarPermissionState()
     }
@@ -268,7 +268,7 @@ extension StubCalendarRemindersService: CalendarRealityServicing, CalendarBlockW
             observedRangeStart: request.horizon.start,
             observedRangeEnd: request.horizon.end,
             derivedBusyWindowCount: busy.count,
-            userInitiatedPlanAction: request.userInitiatedPlanAction,
+            userInitiatedTimeAction: request.userInitiatedTimeAction,
             explanation: permission.canRead
                 ? "Plan used derived calendar busy time locally to find open windows."
                 : "Time still works without calendar access; no calendar busy time was read."
@@ -581,7 +581,7 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
         await CalendarPermissionState(calendarRemindersState: authorizationState(for: .calendarEvents))
     }
 
-    func requestCalendarReadAccessFromPlan(actionName: String) async -> CalendarPermissionState {
+    func requestCalendarReadAccessFromTime(actionName: String) async -> CalendarPermissionState {
         guard actionName.isEmpty == false else {
             return await calendarPermissionState()
         }
@@ -627,7 +627,7 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
     }
 
     func findOpenWindows(request: CalendarRealityReadRequest) async -> CalendarRealityReadResult {
-        let permission = await requestCalendarReadAccessFromPlan(actionName: request.userInitiatedPlanAction)
+        let permission = await requestCalendarReadAccessFromTime(actionName: request.userInitiatedTimeAction)
         let busy: [RealityWindow]
         if permission.canRead {
             busy = await fetchDerivedBusyWindows(for: request.horizon)
@@ -647,7 +647,7 @@ extension EventKitIntegrationService: CalendarRealityServicing, CalendarBlockWri
             observedRangeStart: request.horizon.start,
             observedRangeEnd: request.horizon.end,
             derivedBusyWindowCount: busy.count,
-            userInitiatedPlanAction: request.userInitiatedPlanAction,
+            userInitiatedTimeAction: request.userInitiatedTimeAction,
             explanation: permission.canRead
                 ? "Plan used derived calendar busy time locally to find open windows."
                 : "Time still works without calendar access; no calendar busy time was read."

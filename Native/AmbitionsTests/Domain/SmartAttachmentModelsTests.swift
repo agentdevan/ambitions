@@ -44,8 +44,8 @@ final class SmartAttachmentModelsTests: XCTestCase {
                 score: 1,
                 evidenceLabels: ["Standalone"]
             ),
-            receiptLine: "Saved as Task · Today",
-            explanation: "Saved as a standalone Task because no existing local destination was reliable enough.",
+            receiptLine: "Saved as Step · Today",
+            explanation: "Saved as a standalone Step because no existing local destination was reliable enough.",
             actions: [.change],
             privacyLevel: .privateItem
         )

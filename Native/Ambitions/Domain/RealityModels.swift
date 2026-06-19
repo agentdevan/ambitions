@@ -191,7 +191,7 @@ struct CalendarDerivedContext: Codable, Sendable, Equatable, Hashable {
     let observedRangeEnd: Date?
     let derivedBusyWindowCount: Int
     let hasCalendarReadAccess: Bool
-    let userInitiatedPlanAction: String?
+    let userInitiatedTimeAction: String?
     let explanation: String
     let eventLedgerEntryIDs: [String]
     let recommendationExplanationIDs: [String]
@@ -203,7 +203,7 @@ struct CalendarDerivedContext: Codable, Sendable, Equatable, Hashable {
         observedRangeStart: Date? = nil,
         observedRangeEnd: Date? = nil,
         derivedBusyWindowCount: Int = 0,
-        userInitiatedPlanAction: String? = nil,
+        userInitiatedTimeAction: String? = nil,
         explanation: String,
         eventLedgerEntryIDs: [String] = [],
         recommendationExplanationIDs: [String] = []
@@ -213,7 +213,7 @@ struct CalendarDerivedContext: Codable, Sendable, Equatable, Hashable {
         self.observedRangeEnd = observedRangeEnd
         self.derivedBusyWindowCount = max(0, derivedBusyWindowCount)
         self.hasCalendarReadAccess = permissionState.canRead
-        self.userInitiatedPlanAction = userInitiatedPlanAction
+        self.userInitiatedTimeAction = userInitiatedTimeAction
         self.explanation = explanation
         self.eventLedgerEntryIDs = Array(Set(eventLedgerEntryIDs.filter { $0.isEmpty == false })).sorted()
         self.recommendationExplanationIDs = Array(Set(recommendationExplanationIDs.filter { $0.isEmpty == false })).sorted()

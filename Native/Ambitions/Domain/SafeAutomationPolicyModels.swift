@@ -14,7 +14,7 @@ enum SafeAutomationActionKind: String, Codable, Sendable, Equatable, Hashable, C
     case moveActionLater = "move_action_later"
     case changePriority = "change_priority"
     case changeDeadline = "change_deadline"
-    case changePlanWindow = "change_plan_window"
+    case changeTimeWindow = "change_time_window"
     case shrinkAction = "shrink_action"
     case splitAction = "split_action"
     case dropAction = "drop_action"
@@ -414,7 +414,7 @@ struct SafeAutomationPolicyEvaluator: Sendable {
             return localDecision(action, hasTarget: hasTarget)
         case .markDone:
             return localDecision(action, hasTarget: hasTarget, undo: .confirmationRequiredUndo)
-        case .shrinkAction, .splitAction, .dropAction, .deferAction, .changePlanWindow:
+        case .shrinkAction, .splitAction, .dropAction, .deferAction, .changeTimeWindow:
             return decision(
                 action,
                 permission: .requiresConfirmation,

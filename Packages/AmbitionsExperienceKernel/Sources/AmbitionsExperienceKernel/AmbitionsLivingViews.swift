@@ -69,7 +69,6 @@ public struct LivingGraphiteField: View {
         switch surface {
         case .today: return AmbitionsTokens.color(.surfaceTodayBase)
         case .goals: return AmbitionsTokens.color(.surfaceGoalsBase)
-        case .capture: return AmbitionsTokens.color(.surfaceCaptureBase)
         case .time: return AmbitionsTokens.color(.surfaceTimeBase)
         case .you: return AmbitionsTokens.color(.surfaceYouBase)
         }

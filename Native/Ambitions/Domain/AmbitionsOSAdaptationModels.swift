@@ -420,10 +420,8 @@ struct AmbitionsOSAdaptationValidator: Sendable, Equatable, Hashable {
 
 private enum AmbitionsOSAdaptationForbiddenLanguage {
     static func containsBlockedTerm(in samples: [String]) -> Bool {
-        let blocked = [
-            "ai confidence",
+        let blocked = ForbiddenTopLevelTerms.terms.map { $0.lowercased() } + [
             "confidence percentage",
-            "productivity score",
             "streak",
             "trophy",
             "autopersonalized",

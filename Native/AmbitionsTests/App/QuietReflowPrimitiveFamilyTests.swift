@@ -33,25 +33,20 @@ final class QuietReflowPrimitiveFamilyTests: XCTestCase {
 
     func testAMB579ActiveQuietReflowSurfacesUsePrimitiveFamily() throws {
         let root = repoRoot()
-        let timeDecisionSource = try source("Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift", root: root)
-        let timeFieldSource = try source("Native/Ambitions/Features/Time/TimeLifeShapeField.swift", root: root)
+        let timeFieldSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
         let todayReplacementSource = try source("Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift", root: root)
 
-        XCTAssertTrue(timeDecisionSource.contains("QuietReflowPrimitiveStage("))
-        XCTAssertTrue(timeDecisionSource.contains("QuietReflowBeforeAfterPrimitive("))
-        XCTAssertTrue(timeDecisionSource.contains("time.reflow-decision.option."))
         XCTAssertTrue(timeFieldSource.contains("QuietReflowPrimitiveStage("))
         XCTAssertTrue(timeFieldSource.contains("QuietReflowBeforeAfterPrimitive("))
-        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.reflow-trust-seam"))
+        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.change-review-seam"))
+        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.change-review."))
         XCTAssertTrue(timeFieldSource.contains("-AmbitionsTimeFocus"))
         XCTAssertTrue(timeFieldSource.contains("screenshotFocusesQuietReflow()"))
         XCTAssertTrue(todayReplacementSource.contains("QuietReflowPrimitiveStage("))
         XCTAssertTrue(todayReplacementSource.contains("TodayStepReplacementReceiptPreview"))
         XCTAssertTrue(todayReplacementSource.contains("replacementOptionSystemImage"))
 
-        XCTAssertFalse(timeDecisionSource.contains("AppCard(state: decision.visualState)"))
-        XCTAssertFalse(timeDecisionSource.contains("RoundedRectangle(cornerRadius: theme.radius.lg"))
-        XCTAssertFalse(timeDecisionSource.contains("RoundedRectangle(cornerRadius: theme.radius.md"))
+        XCTAssertFalse(timeFieldSource.contains("AppCard(state: decision.visualState)"))
         XCTAssertFalse(todayReplacementSource.contains("replacementOptionBackground"))
         XCTAssertFalse(todayReplacementSource.contains("replacementOptionBorder"))
         XCTAssertFalse(todayReplacementSource.contains("surfaceSecondary.opacity(0.72)"))
@@ -60,12 +55,9 @@ final class QuietReflowPrimitiveFamilyTests: XCTestCase {
 
     func testAMB579PreviewBeforeCommitAndReceiptPathRemainInspectable() throws {
         let root = repoRoot()
-        let timeDecisionSource = try source("Native/Ambitions/Features/Time/TimeReflowDecisionCard.swift", root: root)
-        let timeFieldSource = try source("Native/Ambitions/Features/Time/TimeLifeShapeField.swift", root: root)
+        let timeFieldSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
         let todayReplacementSource = try source("Native/Ambitions/Features/Today/TodayStepReplacementSheet.swift", root: root)
 
-        XCTAssertTrue(timeDecisionSource.contains("beforeLabel: preview.beforeLabel"))
-        XCTAssertTrue(timeDecisionSource.contains("receiptLabel: preview.receiptPreviewLabel"))
         XCTAssertTrue(timeFieldSource.contains("beforeLabel: option.beforeAfterPreview.beforeLabel"))
         XCTAssertTrue(timeFieldSource.contains("receiptLabel: option.beforeAfterPreview.receiptPreviewLabel"))
         XCTAssertTrue(timeFieldSource.contains("receiptPreview.confirmationRequired"))

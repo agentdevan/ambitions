@@ -269,10 +269,10 @@ final class LocalNotificationFoundationTests: XCTestCase {
                     reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
                     prominence: .standard
                 ),
-                plan: ExternalSurfaceVariantState(
-                    kind: .plan,
-                    title: "Private plan",
-                    detail: "Sensitive plan",
+                timeShape: ExternalSurfaceVariantState(
+                    kind: .timeShape,
+                    title: "Private Time shape",
+                    detail: "Sensitive Time shape",
                     privacySummary: "Sensitive detail",
                     action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                     reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),

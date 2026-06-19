@@ -6,7 +6,7 @@ struct ShareIntakeView: View {
     let onCancel: () -> Void
 
     @State private var text: String
-    @State private var landing: ExternalCreationLanding = .captureInbox
+    @State private var landing: ExternalCreationLanding = .captureComposer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     init(
@@ -26,7 +26,7 @@ struct ShareIntakeView: View {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Capture for Ambitions")
                         .font(.title2.weight(.semibold))
-                    Text("Saved locally first. Ambitions opens the normal review path so this can become a plan or goal when you are ready.")
+                    Text("Saved locally first. Ambitions opens the normal review path so this can become a step or goal when you are ready.")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -44,7 +44,7 @@ struct ShareIntakeView: View {
                     .accessibilityLabel("Shared capture text")
 
                 Picker("Landing", selection: $landing) {
-                    Text("Review in Captures").tag(ExternalCreationLanding.captureInbox)
+                    Text("Open Capture").tag(ExternalCreationLanding.captureComposer)
                     Text("Start a Goal").tag(ExternalCreationLanding.createGoal)
                 }
                 .pickerStyle(.segmented)

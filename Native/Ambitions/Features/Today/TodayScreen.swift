@@ -49,9 +49,12 @@ struct TodayScreen: View {
             if showsNavigationChrome {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        shell.commandRouter.route(to: .timeRoute(.captureInbox), source: .shellUtility)
+                        shell.commandRouter.route(
+                            to: .overlay(.commandSheet(intent: .quickCapture, entrySource: .shellUtility, presentationContext: .quickCapture)),
+                            source: .shellUtility
+                        )
                     } label: {
-                        Label("Capture", systemImage: AppTab.capture.systemImage)
+                        Label("Capture", systemImage: AppShellCaptureAccessModel.systemImage)
                     }
                     .accessibilityIdentifier("today.open-captures-button")
                 }

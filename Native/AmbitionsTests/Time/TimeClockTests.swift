@@ -1,0 +1,117 @@
+@testable import Ambitions
+import Foundation
+import XCTest
+
+final class TimeClockTests: XCTestCase {
+    @MainActor
+    func testTimeViewModelRecordsLoadedDayFromInjectedClock() async throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T09:30:00Z"))
+        let clock = TestClock(now: now)
+        let service = ClockRecordingTimeService(timeState: PreviewTimeScenarios.seeded)
+        let viewModel = TimeViewModel()
+
+        await viewModel.load(using: service, now: clock.now, calendar: clock.calendar)
+
+        let loadedNows = await service.loadedNows()
+        XCTAssertEqual(loadedNows, [now])
+        XCTAssertEqual(viewModel.lastLoadedDayStart, clock.calendar.startOfDay(for: now))
+        XCTAssertFalse(viewModel.shouldRefreshForDayBoundary(now: now.addingTimeInterval(60 * 30), calendar: clock.calendar))
+        XCTAssertTrue(viewModel.shouldRefreshForDayBoundary(now: try XCTUnwrap(DomainTimestamp.date(from: "2026-04-16T00:01:00Z")), calendar: clock.calendar))
+    }
+
+    func testDayBoundarySchedulerOnlyRefreshesAcrossClockDay() throws {
+        let calendar = PreviewClock.utcCalendar
+        let scheduler = DayBoundaryScheduler()
+        let loaded = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T08:00:00Z"))
+        let sameDay = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T23:59:00Z"))
+        let nextDay = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-16T00:00:01Z"))
+        let dayStart = scheduler.loadedDayStart(for: loaded, calendar: calendar)
+
+        XCTAssertFalse(scheduler.shouldRefresh(lastLoadedDayStart: dayStart, now: sameDay, calendar: calendar))
+        XCTAssertTrue(scheduler.shouldRefresh(lastLoadedDayStart: dayStart, now: nextDay, calendar: calendar))
+    }
+
+    func testTimeSourcesDoNotUseNowDefaultsForViewModelLoads() throws {
+        let root = repoRoot()
+        let sourceRoots = [
+            "Native/Ambitions/Core/Time",
+            "Native/Ambitions/Projection/SurfaceLenses",
+            "Native/Ambitions/Surfaces/Time"
+        ].map { root.appendingPathComponent($0) }
+        let fileURLs = try sourceRoots.flatMap { try swiftFiles(under: $0) }
+        let disallowedPatterns = [
+            #"now:\s*Date\s*=\s*\.now"#,
+            #"Date\s*=\s*\.now"#,
+            #"Date\.now"#,
+            #"load\(using:\s*service:\s*any TimeServicing,\s*now:\s*Date\s*="#
+        ]
+
+        var findings: [String] = []
+        for fileURL in fileURLs {
+            let contents = try String(contentsOf: fileURL, encoding: .utf8)
+            for pattern in disallowedPatterns where contents.range(of: pattern, options: .regularExpression) != nil {
+                findings.append(fileURL.lastPathComponent + " :: " + pattern)
+            }
+        }
+
+        XCTAssertTrue(findings.isEmpty, "Time source still reads live time directly: \(findings.joined(separator: ", "))")
+    }
+
+    private func swiftFiles(under root: URL) throws -> [URL] {
+        guard let enumerator = FileManager.default.enumerator(
+            at: root,
+            includingPropertiesForKeys: [.isRegularFileKey],
+            options: [.skipsHiddenFiles]
+        ) else {
+            return []
+        }
+        return try enumerator.compactMap { item in
+            guard let url = item as? URL,
+                  url.pathExtension == "swift",
+                  try url.resourceValues(forKeys: [.isRegularFileKey]).isRegularFile == true else {
+                return nil
+            }
+            return url
+        }
+    }
+
+    private func repoRoot() -> URL {
+        var url = URL(fileURLWithPath: #filePath)
+        while url.pathComponents.count > 1 {
+            let candidate = url.appendingPathComponent("Native/Ambitions/Core/Time")
+            if FileManager.default.fileExists(atPath: candidate.path) {
+                return url
+            }
+            url.deleteLastPathComponent()
+        }
+        return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+    }
+}
+
+private actor ClockRecordingTimeService: TimeServicing {
+    let timeState: TimeSurfaceState
+    private var nows: [Date] = []
+
+    init(timeState: TimeSurfaceState) {
+        self.timeState = timeState
+    }
+
+    func loadTimeSurfaceState(now: Date) async throws -> TimeSurfaceState {
+        nows.append(now)
+        return timeState
+    }
+
+    func loadTimeWeeklyReviewState(now: Date) async throws -> TimeWeeklyReviewState {
+        _ = now
+        return PreviewTimeScenarios.weeklyReview
+    }
+
+    func makeTimeCalendarAware(now: Date) async throws -> TimeSurfaceState {
+        nows.append(now)
+        return timeState
+    }
+
+    func loadedNows() -> [Date] {
+        nows
+    }
+}

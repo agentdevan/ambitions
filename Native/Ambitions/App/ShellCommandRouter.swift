@@ -108,10 +108,6 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         case let .goal(goalID):
             navigation.openGoalDetail(goalID: goalID)
         case let .timeRoute(target):
-            if target == .captureInbox {
-                navigation.openCapturesInbox(source: source)
-                return
-            }
             navigation.openTimeRoute(target)
         case let .youRoute(target):
             navigation.openYouRoute(target)
@@ -191,7 +187,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     now: now
                 )
                 let destination = captureComposerDestination(source: source)
-                navigation.openCapturesInbox(source: source)
+                navigation.openCaptureComposer(source: source)
                 navigation.recordRoute(
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
                     source: source,
@@ -261,7 +257,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         case .openCapture:
             _ = captureID
             let destination = captureComposerDestination(source: source)
-            navigation.presentCaptureCompatibilityRoute(source: source)
+            navigation.presentGlobalCaptureComposer(source: source)
             navigation.recordRoute(
                 title: "Open Capture",
                 source: source,
@@ -287,7 +283,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         switch source {
         case .widget, .notification, .shareExtension, .appIntent, .external, .deepLink:
             return "Opened \(destination.displayLabel) from \(source.displayTitle) with source context preserved."
-        case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .goalsQuickCapture, .timeQuickCapture, .motionQuickCapture, .youQuickCapture, .capturesScreen:
+        case .shellCompose, .shellUtility, .goalsCreate, .todayQuickCapture, .goalsQuickCapture, .timeQuickCapture, .youQuickCapture, .globalCaptureComposer:
             return nil
         }
     }

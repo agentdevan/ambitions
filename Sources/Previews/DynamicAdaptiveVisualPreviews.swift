@@ -25,12 +25,12 @@ private struct DAVScenario: Identifiable, Sendable {
         DAVScenario(
             id: "overloaded-day",
             title: "Overloaded day",
-            subtitle: "Pressure is legible without shame, and the primary affordance is to lighten the plan.",
+            subtitle: "Pressure is legible without shame, and the primary affordance is to lighten Time.",
             context: .today,
             state: .pressured,
             evidence: "Overloaded day preview",
             pressure: 0.86,
-            labels: ["Adjust plan", "Pressure visible", "Recovery path"]
+            labels: ["Adjust shape", "Pressure visible", "Recovery path"]
         ),
         DAVScenario(
             id: "recovery-day",
@@ -50,7 +50,7 @@ private struct DAVScenario: Identifiable, Sendable {
             state: .empty,
             evidence: "Photo target 02 / Capture",
             pressure: nil,
-            labels: ["Capture Anything", "Needs a Place", "No fake routing"]
+            labels: ["Atmosphere Composer", "Needs a Place", "No fake routing"]
         ),
         DAVScenario(
             id: "routed-capture",

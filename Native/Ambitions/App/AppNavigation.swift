@@ -1,51 +1,6 @@
 import Foundation
 import Observation
 
-enum GoalDetailLaunchContext: String, Hashable, Sendable {
-    case standard
-    case help
-}
-
-struct GoalRouteTarget: Hashable, Identifiable, Sendable {
-    let goalID: String?
-    let draftID: String?
-    let launchContext: GoalDetailLaunchContext
-
-    init(goalID: String? = nil, draftID: String? = nil, launchContext: GoalDetailLaunchContext = .standard) {
-        self.goalID = goalID
-        self.draftID = draftID
-        self.launchContext = launchContext
-    }
-
-    var id: String {
-        "\(goalID ?? "goal:none")|\(draftID ?? "draft:none")|\(launchContext.rawValue)"
-    }
-
-    var canonicalGoalID: String? { goalID }
-
-    var hasAddressableContent: Bool { goalID != nil || draftID != nil }
-}
-
-enum TimeRouteTarget: String, Hashable, Identifiable, Sendable {
-    case captureInbox
-    case habits
-    case weeklyReview
-
-    var id: String { rawValue }
-}
-
-enum YouRouteTarget: String, Hashable, Identifiable, Sendable {
-    case monthlyReview
-    case history
-
-    var id: String { rawValue }
-}
-
-enum TopLevelTabReselectionAction: Equatable, Sendable {
-    case scrollToTop
-    case returnToRoot
-}
-
 @MainActor
 @Observable
 final class AppNavigationModel {
@@ -105,20 +60,6 @@ final class AppNavigationModel {
         continuityReceipt = nil
         lastReselectedTopLevelTab = nil
         lastTopLevelTabReselectionDate = nil
-    }
-
-    convenience init(legacyTabRawValue rawValue: String) {
-        guard let seed = LegacyIARouteCompatibility.navigationSeed(forRawTab: rawValue) else {
-            self.init(selectedTab: .today)
-            return
-        }
-        self.init(selectedTab: seed.selectedTab)
-        if let timeRoute = seed.timeRoute {
-            timePath = [timeRoute]
-        }
-        if let youRoute = seed.youRoute {
-            youPath = [youRoute]
-        }
     }
 
     func selectTab(_ tab: AppTab) {
@@ -204,11 +145,6 @@ final class AppNavigationModel {
     }
 
     func openTimeRoute(_ target: TimeRouteTarget) {
-        if target == .captureInbox {
-            presentCaptureCompatibilityRoute(source: .capturesScreen)
-            timePath = []
-            return
-        }
         dismissOverlay()
         selectedTab = .time
         timePath = [target]
@@ -228,12 +164,12 @@ final class AppNavigationModel {
         youPath = []
     }
 
-    func openCapturesInbox() {
-        openTimeRoute(.captureInbox)
+    func openCaptureComposer() {
+        presentGlobalCaptureComposer(source: .globalCaptureComposer)
     }
 
-    func openCapturesInbox(source: ShellCommandEntrySource) {
-        presentCaptureCompatibilityRoute(source: source)
+    func openCaptureComposer(source: ShellCommandEntrySource) {
+        presentGlobalCaptureComposer(source: source)
         timePath = []
     }
 
@@ -279,7 +215,7 @@ final class AppNavigationModel {
             subtitle: presentationContext.historySubtitle,
             source: source,
             presentationContext: presentationContext,
-            destinationLabel: "Add something"
+            destinationLabel: presentationContext == .quickCapture || intent == .quickCapture ? "Capture" : "Add something"
         )
     }
 
@@ -291,7 +227,7 @@ final class AppNavigationModel {
         )
     }
 
-    func presentCaptureCompatibilityRoute(source: ShellCommandEntrySource) {
+    func presentGlobalCaptureComposer(source: ShellCommandEntrySource) {
         presentCommandSheet(
             intent: .quickCapture,
             source: source,
@@ -428,20 +364,6 @@ final class AppNavigationModel {
             timePath = []
         case .you:
             youPath = []
-        }
-    }
-}
-
-private extension ShellCommandPresentationContext {
-    var historySubtitle: String {
-        switch self {
-        case .neutral: "Opened from Add something."
-        case .quickCapture: "Saved without leaving the global quick action surface."
-        case .createGoal: "Started from the goal setup path."
-        case .recall: "Opened what Ambitions knows without showing raw history."
-        case .recovery: "Returned to a calmer recovery posture."
-        case .focus: "Returned to the current step session posture."
-        case .time: "Opened the week-shaping context."
         }
     }
 }

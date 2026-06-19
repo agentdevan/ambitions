@@ -115,6 +115,12 @@ struct HabitInlineMessage: Identifiable, Sendable {
 
 struct HabitActionResponse: Sendable {
     let message: HabitInlineMessage?
+    let proofArtifactID: String?
+
+    init(message: HabitInlineMessage?, proofArtifactID: String? = nil) {
+        self.message = message
+        self.proofArtifactID = proofArtifactID
+    }
 }
 
 struct HabitSummary: Identifiable, Sendable {

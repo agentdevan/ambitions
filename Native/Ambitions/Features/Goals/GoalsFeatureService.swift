@@ -3548,7 +3548,7 @@ extension RepositoryBackedGoalsService {
         return StrategyComposerTrustState(
             title: "Trust framing",
             lines: lines,
-            badgeTitle: entrySource == .capturesScreen ? "Capture-led" : "Local first",
+            badgeTitle: entrySource == .globalCaptureComposer ? "Capture-led" : "Local first",
             state: .selected
         )
     }

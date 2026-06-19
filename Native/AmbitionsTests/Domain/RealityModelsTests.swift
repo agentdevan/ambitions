@@ -179,7 +179,7 @@ final class RealityModelsTests: XCTestCase {
             observedRangeStart: horizon.start,
             observedRangeEnd: horizon.end,
             derivedBusyWindowCount: 1,
-            userInitiatedPlanAction: "Find real open windows",
+            userInitiatedTimeAction: "Find real open windows",
             explanation: "Calendar-derived busy time stayed local."
         )
 

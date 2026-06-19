@@ -4,7 +4,7 @@ import XCTest
 
 final class AppShellChromeTests: XCTestCase {
     func testModeLensUsesPresentationLabelsOnly() {
-        XCTAssertEqual(AmbitionModeLens.allCases.map(\.title), ["Focus", "Sort", "Plan", "Recover", "Review"])
+        XCTAssertEqual(AmbitionModeLens.allCases.map(\.title), ["Focus", "Sort", "Time", "Recover", "Review"])
     }
 
     func testAmbientStatusOrbStatesStayQualitative() {
@@ -55,7 +55,7 @@ final class AppShellChromeTests: XCTestCase {
     func testHeaderPosturesResolveToSafeModeLensPresentation() {
         XCTAssertEqual(AppShellHeaderPosture.execution.modeLens, .focus)
         XCTAssertEqual(AppShellHeaderPosture.direction.modeLens, .focus)
-        XCTAssertEqual(AppShellHeaderPosture.shaping.modeLens, .plan)
+        XCTAssertEqual(AppShellHeaderPosture.shaping.modeLens, .time)
         XCTAssertEqual(AppShellHeaderPosture.reflection.modeLens, .review)
         XCTAssertEqual(AppShellHeaderPosture.utility.modeLens, .focus)
     }
@@ -93,7 +93,7 @@ final class AppShellChromeTests: XCTestCase {
     func testM12ContinuityMaturityReportCoversRequiredSurfacesAndLayer3Blockers() {
         XCTAssertEqual(
             CrossSurfaceContinuityMaturityReport.handoffs.map(\.surface),
-            [.today, .capture, .goals, .plan, .you, .reviews, .externalSurfaces, .goalDetail]
+            [.today, .captureComposer, .goals, .time, .you, .trustInspection, .externalSurface, .goals]
         )
         XCTAssertTrue(CrossSurfaceContinuityMaturityReport.handoffs.contains { $0.id == "path-builder" })
         XCTAssertTrue(CrossSurfaceContinuityMaturityReport.handoffs.allSatisfy { $0.owningRoute.isEmpty == false })

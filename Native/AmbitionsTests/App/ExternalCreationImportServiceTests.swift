@@ -33,7 +33,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         let captures = try await repository.listCaptures()
 
         XCTAssertEqual(result.importedCaptureIDs, ["capture-external"])
-        XCTAssertEqual(result.preferredLanding, .captureInbox)
+        XCTAssertEqual(result.preferredLanding, .captureComposer)
         XCTAssertEqual(result.source, .shareExtensionURL)
         XCTAssertEqual(captures.first?.rawText, "https://example.com/source")
         XCTAssertEqual(captures.first?.sourceType, .shareExtensionURL)
@@ -70,7 +70,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         source: ExternalCreationSource,
         sourceApplication: String? = nil,
         sourceURL: String? = nil,
-        landing: ExternalCreationLanding = .captureInbox
+        landing: ExternalCreationLanding = .captureComposer
     ) -> ExternalCreationRequest {
         ExternalCreationRequest(
             id: "external-request",

@@ -30,12 +30,12 @@ final class ActivationContractTests: XCTestCase {
     func testPrimarySurfaceEmptyStateRulesAreDefinedWithoutPromotingLegacyRoutesToTabs() {
         let rules = ActivationSurface.allCases.map { ActivationContract.emptyStateRule(for: $0) }
 
-        XCTAssertEqual(rules.map(\.surface), [.today, .goals, .capture, .plan, .you])
+        XCTAssertEqual(rules.map(\.surface), [.today, .goals, .time, .you])
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
         XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), AppTab.allCases.map(\.title))
-        XCTAssertEqual(ActivationContract.emptyStateRule(for: .capture).surface.title, "Capture")
-        XCTAssertEqual(ActivationContract.emptyStateRule(for: .plan).surface.title, "Time")
+        XCTAssertEqual(ActivationContract.emptyStateRule(for: .time).surface.title, "Time")
+        XCTAssertEqual(ActivationContract.emptyStateRule(for: .time).secondaryAction?.routingHint, .quickCapture)
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .you).primaryAction.routingHint, .profileTrust)
     }
 
@@ -47,12 +47,9 @@ final class ActivationContractTests: XCTestCase {
 
         XCTAssertTrue(copy.contains("without connecting anything"))
         XCTAssertTrue(copy.contains("without claiming sync or export is ready"))
-        XCTAssertTrue(copy.contains("Capture Anything"))
         XCTAssertTrue(copy.contains("Start here"))
         XCTAssertTrue(copy.contains("Create goal"))
-        XCTAssertTrue(copy.contains("Shape time"))
-        XCTAssertTrue(copy.contains("Close with proof"))
-        XCTAssertTrue(copy.contains("Inspect what Ambitions knows"))
+        XCTAssertTrue(copy.contains("Capture"))
         XCTAssertFalse(copy.contains("Apple-first sync"))
         XCTAssertFalse(copy.contains("export/import is ready"))
         XCTAssertFalse(copy.contains("Path Builder"))

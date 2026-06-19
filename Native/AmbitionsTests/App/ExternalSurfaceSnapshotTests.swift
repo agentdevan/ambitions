@@ -46,11 +46,11 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(snapshot.nowState?.openCaptureUrgency, ExternalSurfaceCaptureUrgency.none)
         XCTAssertEqual(snapshot.nowState?.ritualCue?.kind, .morningSetup)
         XCTAssertEqual(snapshot.nowState?.ritualCue?.templateKey, "ritual_morning_setup")
-        XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCapturesInbox, .openMemoryLens])
+        XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.complete, .snooze, .openGoal, .openToday, .openCaptureComposer, .openMemoryLens])
         XCTAssertEqual(snapshot.ambientState?.today.kind, .today)
         XCTAssertEqual(snapshot.ambientState?.focus.kind, .focus)
         XCTAssertEqual(snapshot.ambientState?.goal.privacySummary, "Goal names stay private here")
-        XCTAssertEqual(snapshot.ambientState?.plan.action.tab, "time")
+        XCTAssertEqual(snapshot.ambientState?.timeShape.action.tab, "time")
         XCTAssertEqual(snapshot.ambientState?.currentStep?.kind, .currentStep)
         XCTAssertEqual(snapshot.ambientState?.currentStep?.title, "Recommended step ready")
         XCTAssertEqual(snapshot.ambientState?.todayPressure?.kind, .todayPressure)
@@ -116,7 +116,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(decoded, snapshot)
     }
 
-    func testActiveFocusSnapshotFieldRemainsLegacyCompatible() throws {
+    func testActiveFocusSnapshotFieldDecodesCurrentFocusReference() throws {
         let snapshot = ExternalSurfaceSnapshot(
             generatedAt: "2026-04-15T12:00:00Z",
             nextAction: nil,
@@ -144,7 +144,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(decoded.nowState?.bestNextStep?.goalID, "goal-best")
     }
 
-    func testAFRI032OldAmbientSnapshotDecodesWithoutFlagshipVariants() throws {
+    func testAmbientSnapshotDecodesTimeShapeVariantWithoutOptionalFlagshipRows() throws {
         let json = """
         {
           "schemaVersion": "external_surface_snapshot.v1",
@@ -154,7 +154,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
             "today": { "kind": "today", "title": "Today has a next step", "detail": "Open Today.", "privacySummary": "Glance-safe", "action": { "title": "Open Today", "surface": "tab", "tab": "today" }, "reference": null, "prominence": "standard" },
             "focus": { "kind": "focus", "title": "Focus ready", "detail": "Open Today.", "privacySummary": "Private", "action": { "title": "Open Focus", "surface": "tab", "tab": "today" }, "reference": null, "prominence": "standard" },
             "goal": { "kind": "goal", "title": "1 active goal", "detail": "Open Goals.", "privacySummary": "Private", "action": { "title": "Open Goals", "surface": "tab", "tab": "goals" }, "reference": null, "prominence": "standard" },
-            "plan": { "kind": "plan", "title": "Week is holding", "detail": "Open Time.", "privacySummary": "Private", "action": { "title": "Open Time", "surface": "tab", "tab": "time" }, "reference": null, "prominence": "standard" }
+            "timeShape": { "kind": "time_shape", "title": "Week is holding", "detail": "Open Time.", "privacySummary": "Private", "action": { "title": "Open Time", "surface": "tab", "tab": "time" }, "reference": null, "prominence": "standard" }
           }
         }
         """
@@ -212,7 +212,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                 ExternalSurfaceSyncHealth(
                     state: .localFirst,
                     label: "Local-first and stable",
-                    detail: "Based on your last local plan"
+                    detail: "Based on your last local Time shape"
                 ),
                 .fresh
             ),
@@ -378,7 +378,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         )
 
         let state = try XCTUnwrap(NextStepActivityAttributes.ContentState(snapshot: snapshot, now: now))
-        let legacyState = try XCTUnwrap(
+        let fallbackState = try XCTUnwrap(
             NextStepActivityAttributes.ContentState(
                 snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nextAction),
                 now: now
@@ -395,9 +395,9 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(state.proofLabel, "Receipt-backed local snapshot")
         XCTAssertEqual(state.deepLinkURLString, "ambitions://goal/goal-now?origin=live_activity")
         XCTAssertEqual(state.endsAt, "2026-04-15T13:00:00Z")
-        XCTAssertEqual(legacyState.goalID, "goal-old")
-        XCTAssertEqual(legacyState.stepID, "step-old")
-        XCTAssertEqual(legacyState.pressureLevel, .steady)
+        XCTAssertEqual(fallbackState.goalID, "goal-old")
+        XCTAssertEqual(fallbackState.stepID, "step-old")
+        XCTAssertEqual(fallbackState.pressureLevel, .steady)
     }
 
     func testD24LiveActivityContentStateCarriesStalePrivacyAndBoundedWindow() throws {
@@ -489,10 +489,10 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
                 ),
-                plan: ExternalSurfaceVariantState(
-                    kind: .plan,
-                    title: "Private plan",
-                    detail: "Sensitive plan",
+                timeShape: ExternalSurfaceVariantState(
+                    kind: .timeShape,
+                    title: "Private Time shape",
+                    detail: "Sensitive Time shape",
                     privacySummary: "Sensitive detail",
                     action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),

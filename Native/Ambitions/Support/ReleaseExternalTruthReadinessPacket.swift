@@ -52,7 +52,7 @@ enum ReleaseExternalTruthReadinessPacket {
         ReleaseExternalTruthItem(
             id: "screenshots",
             area: .screenshots,
-            preparedStatement: "Screenshot plan: capture Today, Goals or Goal Detail, Time, Motion, You, the global Capture composer, What Ambitions Knows, and one recovery/review moment after the final release build is installed.",
+            preparedStatement: "Screenshot plan: capture Today, Goals or Goal Detail, Time, You, the global Capture composer, What Ambitions Knows, and one recovery/review moment after the final release build is installed.",
             evidence: "R03 completed simulator/source scenario coverage; no curated App Store screenshot set has been generated or human-approved in this environment.",
             state: .needsHumanAsset,
             limitation: "Do not submit screenshots until the signed build, device class, privacy-safe demo data, and human visual review are complete."

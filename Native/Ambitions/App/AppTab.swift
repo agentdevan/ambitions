@@ -12,10 +12,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         [.today, .goals, .time, .you]
     }
 
-    static var capture: AppShellCaptureCompatibilityMetadata.Type {
-        AppShellCaptureCompatibilityMetadata.self
-    }
-
     var id: String { rawValue }
 
     init?(rawValue: String) {
@@ -31,7 +27,7 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let rawValue = try container.decode(String.self)
-        if let tab = AppTab(rawValue: rawValue) ?? LegacyIARouteCompatibility.canonicalTab(forRawTab: rawValue) {
+        if let tab = AppTab(rawValue: rawValue) {
             self = tab
             return
         }
@@ -88,10 +84,6 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     var surfaceContract: AmbitionsSurfaceContract {
         AmbitionsSurfaceContractRegistry.contract(for: self)
     }
-}
-
-enum AppShellCaptureCompatibilityMetadata {
-    static let systemImage = AppShellCaptureAccessModel.systemImage
 }
 
 struct AmbitionsSurfaceContract: Hashable, Sendable {
@@ -175,72 +167,6 @@ enum AmbitionsSurfaceContractRegistry {
         case .goals: "Constellation Atlas"
         case .time: "LifeShape Field"
         case .you: "User System Profile"
-        }
-    }
-}
-
-enum LegacyIARouteCompatibility {
-    static func canonicalTab(forRawTab rawValue: String) -> AppTab? {
-        switch rawValue.lowercased() {
-        case "capture", "captures":
-            .today
-        case "motion", "pulse":
-            .today
-        case "plan", "habits":
-            .time
-        case "profile", "insights":
-            .you
-        default:
-            nil
-        }
-    }
-
-    static func navigationSeed(forRawTab rawValue: String) -> (selectedTab: AppTab, timeRoute: TimeRouteTarget?, youRoute: YouRouteTarget?)? {
-        switch rawValue.lowercased() {
-        case "today":
-            (.today, nil, nil)
-        case "capture", "captures":
-            (.today, nil, nil)
-        case "goals":
-            (.goals, nil, nil)
-        case "time", "plan":
-            (.time, nil, nil)
-        case "motion", "pulse":
-            (.today, nil, nil)
-        case "habits":
-            (.time, .habits, nil)
-        case "you", "profile":
-            (.you, nil, nil)
-        case "insights":
-            (.you, nil, .history)
-        default:
-            nil
-        }
-    }
-
-    static func externalRoute(forRawTab rawValue: String, todayContext: TodayEntryContext? = nil) -> AppExternalRoute? {
-        switch rawValue.lowercased() {
-        case "today":
-            if let todayContext, todayContext != .standard {
-                return .openToday(todayContext)
-            }
-            return .openTab(.today)
-        case "capture", "captures":
-            return .openCaptureComposer
-        case "goals":
-            return .openTab(.goals)
-        case "time", "plan":
-            return .openTab(.time)
-        case "motion", "pulse":
-            return .openTab(.today)
-        case "habits":
-            return .openTimeRoute(.habits)
-        case "you", "profile":
-            return .openTab(.you)
-        case "insights":
-            return .openYouRoute(.history)
-        default:
-            return nil
         }
     }
 }

@@ -66,8 +66,8 @@ struct NextStepProvider: TimelineProvider {
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
                         prominence: .standard
                     ),
-                    plan: ExternalSurfaceVariantState(
-                        kind: .plan,
+                    timeShape: ExternalSurfaceVariantState(
+                        kind: .timeShape,
                         title: "Week looks doable",
                         detail: "Open Time to adjust the week from your latest local state.",
                         privacySummary: "Time detail opens in app",
@@ -87,7 +87,7 @@ struct NextStepProvider: TimelineProvider {
                     todayPressure: ExternalSurfaceVariantState(
                         kind: .todayPressure,
                         title: "Today is steady",
-                        detail: "The current plan still looks believable.",
+                        detail: "The current Time shape still looks believable.",
                         privacySummary: "Pressure uses local counts only",
                         action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
                         reference: ExternalSurfaceActionReference(goalID: "goal-placeholder", stepID: "step-placeholder"),
@@ -322,7 +322,7 @@ private struct NextStepWidgetView: View {
             return "scope"
         case .goal:
             return "target"
-        case .plan:
+        case .timeShape:
             return "calendar"
         case .currentStep:
             return "checkmark.seal"

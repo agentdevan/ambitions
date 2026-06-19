@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import Foundation
 
 enum PreviewTimeScenarios {
-    static let seeded = TimeDashboard(
+    static let seeded = TimeSurfaceState(
         mode: .active,
         timeframeLabel: "Apr 20-Apr 26",
         hero: TimeRealityHeroState(
@@ -118,7 +118,7 @@ enum PreviewTimeScenarios {
         realityReflow: TimeRealityReflowState(
             title: "Reality changed",
             detail: "Adjust one thing, not everything. These are suggestions until you confirm a change.",
-            reasonKind: .overloadedPlan,
+            reasonKind: .overloadedTimeShape,
             reasonDetail: "Tuesday is carrying more than this plan can calmly explain.",
             recommendedAdjustment: "Keep this",
             noChangeCopy: "Nothing changed yet.",
@@ -129,7 +129,7 @@ enum PreviewTimeScenarios {
                     title: "Keep this",
                     detail: "Keep shell regression work defended before changing the rest.",
                     impactLabel: "Smallest useful adjustment",
-                    boundary: TimeReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"),
+                    boundary: TimeReflowBoundaryState(actionKind: .changeTimeWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"),
                     visualState: .selected,
                     target: GoalRouteTarget(goalID: "preview-goal-1"),
                     timeRoute: nil
@@ -151,7 +151,7 @@ enum PreviewTimeScenarios {
                     title: "Needs confirmation",
                     detail: "Confirm before applying any broad reflow or calendar-impacting change.",
                     impactLabel: "Nothing changes until confirmed",
-                    boundary: TimeReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .notSupportedYet, safetyLabel: "Confirm first"),
+                    boundary: TimeReflowBoundaryState(actionKind: .changeTimeWindow, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .notSupportedYet, safetyLabel: "Confirm first"),
                     visualState: .warning,
                     target: nil,
                     timeRoute: nil
@@ -164,10 +164,10 @@ enum PreviewTimeScenarios {
             title: "Recovery options",
             detail: "Start with the least disruptive option that still makes the plan believable.",
             options: [
-                TimeRecoveryGradientOptionState(id: "preview-gradient-protect", order: 0, kind: .protectOneItem, title: "Keep this", detail: "Keep one must-do visible.", boundary: TimeReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
+                TimeRecoveryGradientOptionState(id: "preview-gradient-protect", order: 0, kind: .protectOneItem, title: "Keep this", detail: "Keep one must-do visible.", boundary: TimeReflowBoundaryState(actionKind: .changeTimeWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
                 TimeRecoveryGradientOptionState(id: "preview-gradient-shrink", order: 1, kind: .shrinkAction, title: "Make it smaller", detail: "Reduce the ask before moving it.", boundary: TimeReflowBoundaryState(actionKind: .shrinkAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
                 TimeRecoveryGradientOptionState(id: "preview-gradient-split", order: 2, kind: .splitAction, title: "Split it", detail: "Carry only the first clear part.", boundary: TimeReflowBoundaryState(actionKind: .splitAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
-                TimeRecoveryGradientOptionState(id: "preview-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Adjust plan", detail: "Reschedule one local item after confirmation.", boundary: TimeReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
+                TimeRecoveryGradientOptionState(id: "preview-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Adjust shape", detail: "Move one local item after confirmation.", boundary: TimeReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
                 TimeRecoveryGradientOptionState(id: "preview-gradient-defer", order: 4, kind: .deferGoalOrItem, title: "Defer this", detail: "Leave lower-priority work outside this window.", boundary: TimeReflowBoundaryState(actionKind: .deferAction, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
                 TimeRecoveryGradientOptionState(id: "preview-gradient-drop", order: 5, kind: .dropOptionalWork, title: "Drop optional work", detail: "Remove optional work only with confirmation.", boundary: TimeReflowBoundaryState(actionKind: .dropAction, confirmationRequirement: .requiredForDestructiveChange, undoAvailability: .unsafe, safetyLabel: "Confirm drop"), visualState: .warning),
                 TimeRecoveryGradientOptionState(id: "preview-gradient-recover", order: 6, kind: .recoverRest, title: "Recover", detail: "Protect rest or recovery as real plan material.", boundary: TimeReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .success)
@@ -203,7 +203,7 @@ enum PreviewTimeScenarios {
         recoveryMaturity: TimeRecoveryMaturityState(
             title: "Recovery maturity",
             detail: "Overloaded days become decisions with receipts, not silent reschedules.",
-            planFitLabel: "Needs relief",
+            timeFitLabel: "Needs relief",
             confirmationBoundary: "Save the Day and Reality Reflow require confirmation before broad plan changes.",
             calendarBoundary: "Manual planning works without calendar access.",
             socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
@@ -365,7 +365,7 @@ enum PreviewTimeScenarios {
                 TimeExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "Retention loop still sits outside the week.", recommendation: "Give it one calmer lane instead of widening the whole week.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), timeRoute: nil),
                 TimeExecutionResilienceLane(id: "overload", title: "Overload", detail: "Tuesday is carrying more than the week can explain calmly.", recommendation: "Lighten shell work before adding anything new.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-1"), timeRoute: nil),
                 TimeExecutionResilienceLane(id: "habits", title: "Rituals", detail: "One routine should support the week shape without crowding it.", recommendation: "Use the rituals route to keep the loop lightweight.", state: .selected, goalTarget: nil, timeRoute: .habits),
-                TimeExecutionResilienceLane(id: "captures", title: "Captures", detail: "Two open captures still need to be absorbed or parked.", recommendation: "Attach or park capture pressure before polishing the schedule.", state: .warning, goalTarget: nil, timeRoute: .captureInbox),
+                TimeExecutionResilienceLane(id: "captures", title: "Captures", detail: "Two open captures still need to be absorbed or parked.", recommendation: "Attach or park capture pressure before polishing the schedule.", state: .warning, goalTarget: nil, timeRoute: nil, interactionIntent: .openGlobalCapture),
                 TimeExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Close the current week by shaping what should continue.", recommendation: "Review should feel like a continuation, not a detached ritual.", state: .warning, goalTarget: nil, timeRoute: .weeklyReview)
             ],
             windowMagnetism: TimeWindowMagnetismState(
@@ -414,18 +414,18 @@ enum PreviewTimeScenarios {
             TimeShapingActionState(kind: .edit, title: "Edit", subtitle: "Fix shell regressions", recommendation: "Start with the clearest existing block instead of redrawing the whole week.", systemImage: "square.and.pencil", state: .selected, goalTarget: GoalRouteTarget(goalID: "preview-goal-1"), timeRoute: nil),
             TimeShapingActionState(kind: .patch, title: "Patch", subtitle: "Give missing goals one believable lane instead of spreading them everywhere.", recommendation: "Use Wednesday or Friday to patch the retention loop into real room.", systemImage: "wand.and.stars", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), timeRoute: nil),
             TimeShapingActionState(kind: .protect, title: "Protect", subtitle: "Protect the calmest pocket before pressure spills into it.", recommendation: "The cleanest protection step is to keep Wednesday or Sunday from filling up reactively.", systemImage: "shield", state: .success, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), timeRoute: nil),
-            TimeShapingActionState(kind: .lighten, title: "Lighten", subtitle: "Pressure is stacking here.", recommendation: "Shrink or reschedule the heaviest ask before the week starts feeling performative.", systemImage: "sun.max", state: .warning, goalTarget: nil, timeRoute: .captureInbox)
+            TimeShapingActionState(kind: .lighten, title: "Lighten", subtitle: "Pressure is stacking here.", recommendation: "Shrink or reschedule the heaviest ask before the week starts feeling performative.", systemImage: "sun.max", state: .warning, goalTarget: nil, timeRoute: nil, interactionIntent: .openGlobalCapture)
         ],
         secondaryDestinations: [
-            TimeSecondaryDestination(id: "plan-habits", title: "Routines and habits", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: "repeat", visualState: .selected, timeRoute: .habits),
-            TimeSecondaryDestination(id: "plan-captures", title: "Captures into the week", detail: "2 captures still need to be absorbed, attached, or intentionally parked.", valueLabel: "2", icon: AppTab.capture.systemImage, visualState: .warning, timeRoute: .captureInbox),
-            TimeSecondaryDestination(id: "plan-weekly-review", title: "Weekly review", detail: "Close the current week by shaping carry-forward and unresolved capture pressure without leaving Time.", valueLabel: "Tight", icon: "arrow.triangle.branch", visualState: .selected, timeRoute: .weeklyReview)
+            TimeSecondaryDestination(id: "time-rituals", title: "Routines and habits", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "1", icon: "repeat", visualState: .selected, timeRoute: .habits),
+            TimeSecondaryDestination(id: "time-held-input", title: "Open Capture composer", detail: "2 captures can stay outside Time until you place, park, or archive them.", valueLabel: "2", icon: "square.and.pencil", visualState: .warning, timeRoute: nil, interactionIntent: .openGlobalCapture),
+            TimeSecondaryDestination(id: "time-weekly-review", title: "Weekly review", detail: "Close the current week by shaping carry-forward and unresolved capture pressure without leaving Time.", valueLabel: "Tight", icon: "arrow.triangle.branch", visualState: .selected, timeRoute: .weeklyReview)
         ],
         emptyTitle: nil,
         emptyMessage: nil
     )
 
-    static let empty = TimeDashboard(
+    static let empty = TimeSurfaceState(
         mode: .empty,
         timeframeLabel: "Apr 20-Apr 26",
         hero: TimeRealityHeroState(
@@ -531,7 +531,7 @@ enum PreviewTimeScenarios {
         ),
         realityReflow: TimeRealityReflowState(
             title: "Not enough plan data yet",
-            detail: "Create or choose one plan item before reflowing anything.",
+            detail: "Create or choose one Time item before reviewing a change.",
             reasonKind: .lowData,
             reasonDetail: "There is not enough plan pressure to reflow yet.",
             recommendedAdjustment: "Keep plan unchanged",
@@ -539,9 +539,9 @@ enum PreviewTimeScenarios {
             suggestions: [
                 TimeReflowSuggestionState(
                     id: "preview-empty-reflow-keep",
-                    kind: .keepPlanUnchanged,
+                    kind: .keepTimeUnchanged,
                     title: "Keep plan unchanged",
-                    detail: "Create or choose one plan item before reflowing anything.",
+                    detail: "Create or choose one Time item before reviewing a change.",
                     impactLabel: "No plan mutation",
                     boundary: TimeReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"),
                     visualState: .default,
@@ -556,10 +556,10 @@ enum PreviewTimeScenarios {
             title: "Recovery options",
             detail: "No recovery is needed, but the order stays ready if reality changes.",
             options: [
-                TimeRecoveryGradientOptionState(id: "preview-empty-gradient-protect", order: 0, kind: .protectOneItem, title: "Keep this", detail: "Keep one must-do visible.", boundary: TimeReflowBoundaryState(actionKind: .changePlanWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
+                TimeRecoveryGradientOptionState(id: "preview-empty-gradient-protect", order: 0, kind: .protectOneItem, title: "Keep this", detail: "Keep one must-do visible.", boundary: TimeReflowBoundaryState(actionKind: .changeTimeWindow, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .selected),
                 TimeRecoveryGradientOptionState(id: "preview-empty-gradient-shrink", order: 1, kind: .shrinkAction, title: "Make it smaller", detail: "Reduce the ask before moving it.", boundary: TimeReflowBoundaryState(actionKind: .shrinkAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
                 TimeRecoveryGradientOptionState(id: "preview-empty-gradient-split", order: 2, kind: .splitAction, title: "Split it", detail: "Carry only the first clear part.", boundary: TimeReflowBoundaryState(actionKind: .splitAction, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .default),
-                TimeRecoveryGradientOptionState(id: "preview-empty-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Adjust plan", detail: "Reschedule one local item after confirmation.", boundary: TimeReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
+                TimeRecoveryGradientOptionState(id: "preview-empty-gradient-move", order: 3, kind: .moveLocalActionLater, title: "Adjust shape", detail: "Move one local item after confirmation.", boundary: TimeReflowBoundaryState(actionKind: .moveActionLater, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
                 TimeRecoveryGradientOptionState(id: "preview-empty-gradient-defer", order: 4, kind: .deferGoalOrItem, title: "Defer this", detail: "Leave lower-priority work outside this window.", boundary: TimeReflowBoundaryState(actionKind: .deferAction, confirmationRequirement: .requiredForBroadReflow, undoAvailability: .requiresConfirmation, safetyLabel: "Confirm first"), visualState: .default),
                 TimeRecoveryGradientOptionState(id: "preview-empty-gradient-drop", order: 5, kind: .dropOptionalWork, title: "Drop optional work", detail: "Remove optional work only with confirmation.", boundary: TimeReflowBoundaryState(actionKind: .dropAction, confirmationRequirement: .requiredForDestructiveChange, undoAvailability: .unsafe, safetyLabel: "Confirm drop"), visualState: .warning),
                 TimeRecoveryGradientOptionState(id: "preview-empty-gradient-recover", order: 6, kind: .recoverRest, title: "Recover", detail: "Protect rest or recovery as real plan material.", boundary: TimeReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"), visualState: .success)
@@ -595,7 +595,7 @@ enum PreviewTimeScenarios {
         recoveryMaturity: TimeRecoveryMaturityState(
             title: "Recovery maturity",
             detail: "Overloaded days become decisions with receipts, not silent reschedules.",
-            planFitLabel: "Believable",
+            timeFitLabel: "Believable",
             confirmationBoundary: "Save the Day and Reality Reflow require confirmation before broad plan changes.",
             calendarBoundary: "Manual planning works without calendar access.",
             socialBoundary: "People-shaped pressure stays private, optional, and manually named.",
@@ -666,7 +666,7 @@ enum PreviewTimeScenarios {
                 TimeExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "No active goal is floating outside the week.", recommendation: "Carry only what the next week can explain calmly.", state: .success, goalTarget: nil, timeRoute: nil),
                 TimeExecutionResilienceLane(id: "overload", title: "Overload", detail: "No day is visibly overloaded right now.", recommendation: "Lighten only when something real becomes too loud.", state: .selected, goalTarget: nil, timeRoute: nil),
                 TimeExecutionResilienceLane(id: "habits", title: "Rituals", detail: "No recurring loop is shaping the week yet.", recommendation: "Keep the week dominant until a routine is truly needed.", state: .default, goalTarget: nil, timeRoute: .habits),
-                TimeExecutionResilienceLane(id: "captures", title: "Captures", detail: "No open captures are pushing on this week.", recommendation: "Let the week stay quiet.", state: .default, goalTarget: nil, timeRoute: .captureInbox),
+                TimeExecutionResilienceLane(id: "captures", title: "Captures", detail: "No open captures are pushing on this week.", recommendation: "Let the week stay quiet.", state: .default, goalTarget: nil, timeRoute: nil, interactionIntent: .openGlobalCapture),
                 TimeExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Review becomes useful once the week has something real to carry forward.", recommendation: "Use review only when the week has earned it.", state: .default, goalTarget: nil, timeRoute: .weeklyReview)
             ],
             windowMagnetism: nil
@@ -680,14 +680,14 @@ enum PreviewTimeScenarios {
         ],
         secondaryDestinations: [
             TimeSecondaryDestination(id: "plan-habits", title: "Routines and habits", detail: "Review the repeatable loops that can steady or crowd the week.", valueLabel: "0", icon: "repeat", visualState: .default, timeRoute: .habits),
-            TimeSecondaryDestination(id: "plan-captures", title: "Captures into the week", detail: "No open captures are pushing on the week right now.", valueLabel: "0", icon: AppTab.capture.systemImage, visualState: .default, timeRoute: .captureInbox),
+            TimeSecondaryDestination(id: "time-held-input", title: "Open Capture composer", detail: "No open captures are pushing on the week right now.", valueLabel: "0", icon: "square.and.pencil", visualState: .default, timeRoute: nil, interactionIntent: .openGlobalCapture),
             TimeSecondaryDestination(id: "plan-weekly-review", title: "Weekly review", detail: "Review stays available as the eventual closeout path for a real week.", valueLabel: "Open", icon: "arrow.triangle.branch", visualState: .default, timeRoute: .weeklyReview)
         ],
         emptyTitle: "No weekly pressure yet",
         emptyMessage: "As soon as goals, captures, or routines create real constraints, Time will show where the week still has room."
     )
 
-    static let weeklyReview = WeeklyReviewDashboard(
+    static let weeklyReview = TimeWeeklyReviewState(
         timeframeLabel: "Apr 20-Apr 26",
         hero: WeeklyReviewHeroState(
             eyebrow: "Weekly Review",
@@ -754,7 +754,7 @@ enum PreviewTimeScenarios {
         title: "Reflow decisions",
         subtitle: "Choose one path before anything changes.",
         sourceLabel: "Based on your plan",
-        trustLabel: "No silent changes",
+        trustLabel: "Changes stay reviewable",
         reasonLabel: "Tuesday is carrying more than this plan can calmly explain.",
         recoveryLabel: "No schedule changes happen from this card.",
         receiptLabel: "Safe local suggestion. No silent rescheduling. No calendar write. Nothing changed yet.",
@@ -766,7 +766,7 @@ enum PreviewTimeScenarios {
                 detail: "Keep shell regression work defended before changing the rest.",
                 impactLabel: "Smallest useful adjustment",
                 sourceLabel: "Based on your plan",
-                trustLabel: "No silent changes",
+                trustLabel: "Changes stay reviewable",
                 boundaryLabel: "Safe local suggestion. Undo can be local.",
                 visualState: .selected,
                 target: GoalRouteTarget(goalID: "preview-goal-1"),
@@ -779,7 +779,7 @@ enum PreviewTimeScenarios {
                 detail: "Close only the top regression before moving anything else.",
                 impactLabel: "Local suggestion only",
                 sourceLabel: "Based on your plan",
-                trustLabel: "No silent changes",
+                trustLabel: "Changes stay reviewable",
                 boundaryLabel: "Safe local suggestion. Undo can be local.",
                 visualState: .warning,
                 target: GoalRouteTarget(goalID: "preview-goal-1"),
@@ -787,12 +787,12 @@ enum PreviewTimeScenarios {
             ),
             TimeReflowDecisionOptionState(
                 id: "preview-decision-review",
-                kind: .reviewPlan,
+                kind: .reviewShape,
                 title: "Review plan",
                 detail: "Confirm before applying any broad reflow or calendar-impacting change.",
                 impactLabel: "Nothing changes until confirmed",
                 sourceLabel: "Based on your plan",
-                trustLabel: "No silent changes",
+                trustLabel: "Changes stay reviewable",
                 boundaryLabel: "Broad reflow needs confirmation. Undo not supported yet.",
                 visualState: .warning,
                 target: nil,
@@ -806,19 +806,19 @@ enum PreviewTimeScenarios {
         title: "Reflow decisions",
         subtitle: "Choose one path before anything changes.",
         sourceLabel: "Based on your plan",
-        trustLabel: "No silent changes",
+        trustLabel: "Changes stay reviewable",
         reasonLabel: "There is not enough plan pressure to reflow yet.",
         recoveryLabel: "No schedule changes happen from this card.",
         receiptLabel: "Safe local suggestion. No silent rescheduling. No calendar write. Nothing changed yet.",
         options: [
             TimeReflowDecisionOptionState(
                 id: "preview-decision-empty",
-                kind: .keepPlan,
+                kind: .keepTime,
                 title: "Keep plan",
                 detail: "Leave the plan unchanged until there is enough evidence to adjust it.",
                 impactLabel: "No plan mutation",
                 sourceLabel: "Based on your plan",
-                trustLabel: "No silent changes",
+                trustLabel: "Changes stay reviewable",
                 boundaryLabel: "Safe local suggestion. Undo can be local.",
                 visualState: .default,
                 target: nil,

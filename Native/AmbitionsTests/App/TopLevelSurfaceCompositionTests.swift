@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import XCTest
 
 final class TopLevelSurfaceCompositionTests: XCTestCase {
-    func testSI17CompositionKeepsFiveCanonicalSurfacesOnly() {
+    func testSI17CompositionKeepsFourCanonicalSurfacesOnly() {
         XCTAssertEqual(
             AmbitionsTopLevelSurfaceComposition.allCases,
             [.today, .goals, .time, .you]
@@ -96,6 +96,7 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
         XCTAssertTrue(handoffs.contains { $0.fromSurface == "Global Capture" && $0.toSurface == "Goals" })
         XCTAssertTrue(handoffs.contains { $0.fromSurface == "Time" && $0.toSurface == "Today" })
         XCTAssertTrue(handoffs.contains { $0.fromSurface == "Today" && $0.toSurface == "Goals" })
+        XCTAssertTrue(handoffs.contains { $0.fromSurface == "Today" && $0.toSurface == "You" })
         XCTAssertTrue(handoffs.contains { $0.fromSurface == "Any" && $0.toSurface == "You" })
 
         for handoff in handoffs {

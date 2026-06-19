@@ -29,7 +29,7 @@ final class ExternalSurfaceControlContractsTests: XCTestCase {
 
         XCTAssertEqual(capture.title, "Capture")
         XCTAssertEqual(capture.executionMode, .opensAppOnly)
-        XCTAssertEqual(capture.deepLinkURL(origin: .appIntent)?.absoluteString, "ambitions://captures/inbox?origin=app_intent")
+        XCTAssertEqual(capture.deepLinkURL(origin: .appIntent)?.absoluteString, "ambitions://overlay/quiet-command-sheet?intent=quick_capture&origin=app_intent")
     }
 
     func testMutationCapableControlsRequireInAppConfirmationAndReceipts() {

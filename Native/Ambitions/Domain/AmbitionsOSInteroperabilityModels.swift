@@ -192,10 +192,8 @@ struct AmbitionsOSInteroperabilityPlan: Codable, Sendable, Equatable, Hashable, 
             "platform ready",
             "device verified",
             "public accessibility compliant",
-            "ai confidence",
-            "productivity score",
             "automatic calendar write"
-        ]
+        ] + ForbiddenTopLevelTerms.terms.map { $0.lowercased() }
         let combined = surfaceLanguageSamples.joined(separator: " ").lowercased()
         return blocked.contains { combined.contains($0) }
     }

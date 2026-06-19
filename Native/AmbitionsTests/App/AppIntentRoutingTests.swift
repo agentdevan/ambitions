@@ -7,7 +7,7 @@ final class AppIntentRoutingTests: XCTestCase {
             .today,
             .goals,
             .time,
-            .captureInbox,
+            .capture,
             .you,
             .command,
             .memoryLens,
@@ -25,7 +25,7 @@ final class AppIntentRoutingTests: XCTestCase {
         XCTAssertEqual(AmbitionsAppShortcutDestination.today.routeURL?.absoluteString, "ambitions://tab/today?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.goals.routeURL?.absoluteString, "ambitions://tab/goals?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.time.routeURL?.absoluteString, "ambitions://tab/time?origin=app_intent")
-        XCTAssertEqual(AmbitionsAppShortcutDestination.captureInbox.routeURL?.absoluteString, "ambitions://captures/inbox?origin=app_intent")
+        XCTAssertEqual(AmbitionsAppShortcutDestination.capture.routeURL?.absoluteString, "ambitions://overlay/quiet-command-sheet?intent=quick_capture&origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.you.routeURL?.absoluteString, "ambitions://tab/you?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.command.routeURL?.absoluteString, "ambitions://overlay/quiet-command-sheet?origin=app_intent")
         XCTAssertEqual(AmbitionsAppShortcutDestination.memoryLens.routeURL?.absoluteString, "ambitions://overlay/memory-lens?intent=memory_lens&origin=app_intent")
@@ -87,7 +87,7 @@ final class AppIntentRoutingTests: XCTestCase {
         })
     }
 
-    func testPFC18PublicLaunchCandidatesExcludeCompatibilityDestinations() {
+    func testPFC18PublicLaunchCandidatesExcludeInternalQuickActions() {
         let publicCandidates = Set(
             AmbitionsAppShortcutDestination.allCases.filter(\.isPFC18PublicLaunchCandidate)
         )
@@ -98,7 +98,7 @@ final class AppIntentRoutingTests: XCTestCase {
                 .today,
                 .goals,
                 .time,
-                .captureInbox,
+                .capture,
                 .you,
                 .command,
                 .memoryLens,
@@ -126,7 +126,7 @@ final class AppIntentRoutingTests: XCTestCase {
         XCTAssertEqual(request.createdAt, "2026-04-15T12:00:00Z")
         XCTAssertEqual(request.text, "Private appointment note")
         XCTAssertEqual(request.source, .appIntent)
-        XCTAssertEqual(request.landing, .captureInbox)
+        XCTAssertEqual(request.landing, .captureComposer)
         XCTAssertThrowsError(
             try CreateAmbitionsCaptureIntent.makeCaptureRequest(text: "  ", now: now, id: "empty")
         )
@@ -248,7 +248,7 @@ final class AppIntentRoutingTests: XCTestCase {
     @MainActor
     func testIntentLaunchRouterQueuesAndConsumesOnePendingURL() throws {
         let router = AppIntentLaunchRouter.shared
-        let url = try XCTUnwrap(URL(string: "ambitions://tab/plan"))
+        let url = try XCTUnwrap(URL(string: "ambitions://tab/time"))
 
         router.queue(url)
 

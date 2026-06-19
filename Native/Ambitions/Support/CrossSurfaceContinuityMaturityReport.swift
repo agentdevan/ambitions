@@ -9,7 +9,7 @@ enum CrossSurfaceContinuityState: String, Sendable, Equatable {
 
 struct CrossSurfaceContinuityHandoff: Identifiable, Sendable, Equatable {
     let id: String
-    let surface: CoreSurfaceScenarioSurface
+    let surface: RuntimeScenarioSurface
     let modeLens: AmbitionModeLens
     let continuityBehavior: String
     let owningRoute: String
@@ -35,17 +35,17 @@ struct Layer3ReadinessBlocker: Identifiable, Sendable, Equatable {
 enum CrossSurfaceContinuityMaturityReport {
     static let handoffs: [CrossSurfaceContinuityHandoff] = [
         CrossSurfaceContinuityHandoff(
-            id: "today-next-move",
+            id: "today-recommended-step",
             surface: .today,
             modeLens: .focus,
-            continuityBehavior: "Today remains the protected next-move landing surface and can receive focus or recovery entry context.",
+            continuityBehavior: "Today remains the protected recommended Step landing surface and can receive focus or recovery entry context.",
             owningRoute: "Today tab",
             state: .verified,
             limitation: "Real-device returning-user proof remains R03."
         ),
         CrossSurfaceContinuityHandoff(
             id: "capture-routing",
-            surface: .capture,
+            surface: .captureComposer,
             modeLens: .triage,
             continuityBehavior: "Capture keeps intake singular and routes uncertain items through Needs a Place without widening top-level navigation.",
             owningRoute: "Global Capture action",
@@ -62,10 +62,10 @@ enum CrossSurfaceContinuityMaturityReport {
             limitation: "Confirmed path editing remains future maturity work."
         ),
         CrossSurfaceContinuityHandoff(
-            id: "plan-recovery",
-            surface: .plan,
-            modeLens: .plan,
-            continuityBehavior: "Time owns week shaping, calendar boundaries, Save the Day, waiting, commitments, and confirmation-first recovery through Plan compatibility services.",
+            id: "time-recovery",
+            surface: .time,
+            modeLens: .time,
+            continuityBehavior: "Time owns week shaping, calendar boundaries, Save the Day, waiting, commitments, and confirmation-first recovery through canonical Time projections.",
             owningRoute: "Time tab and Weekly Review",
             state: .verified,
             limitation: "No silent calendar writes are available or claimed."
@@ -81,16 +81,16 @@ enum CrossSurfaceContinuityMaturityReport {
         ),
         CrossSurfaceContinuityHandoff(
             id: "reviews-handoff",
-            surface: .reviews,
+            surface: .trustInspection,
             modeLens: .review,
-            continuityBehavior: "Reviews live under You and Time, summarizing proof, decisions, recovery, and carry-forward guidance without silent plan mutation.",
+            continuityBehavior: "Inspection lives under owning surfaces, summarizing proof, decisions, recovery, and carry-forward guidance without silent Time mutation.",
             owningRoute: "You / Time review routes",
             state: .verified,
             limitation: "Manual scenario review remains R03."
         ),
         CrossSurfaceContinuityHandoff(
             id: "external-surfaces",
-            surface: .externalSurfaces,
+            surface: .externalSurface,
             modeLens: .focus,
             continuityBehavior: "External surfaces use privacy snapshots, stale-state truth, open-route fallback, and receipt boundaries.",
             owningRoute: "Shared external snapshot and command contracts",
@@ -99,7 +99,7 @@ enum CrossSurfaceContinuityMaturityReport {
         ),
         CrossSurfaceContinuityHandoff(
             id: "path-builder",
-            surface: .goalDetail,
+            surface: .goals,
             modeLens: .focus,
             continuityBehavior: "Path Builder stays inside Goal Detail and hands phases, forks, proof, Today, and Time context back to owning surfaces.",
             owningRoute: "Goal Detail Path lane",

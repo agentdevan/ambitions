@@ -174,7 +174,7 @@ extension SideEffectLedgerEffectKind {
             self = .privacyMemory
         case .externalCommand:
             self = .commandBridge
-        case .createCapture, .routeCapture, .attachToGoal, .detachFromGoal, .archiveItem, .unarchiveItem, .markWaiting, .markDone, .moveActionLater, .changePriority, .changeDeadline, .changePlanWindow, .shrinkAction, .splitAction, .dropAction, .deferAction, .correctRecommendation, .editLocalNote, .dismissSuggestion, .noOp:
+        case .createCapture, .routeCapture, .attachToGoal, .detachFromGoal, .archiveItem, .unarchiveItem, .markWaiting, .markDone, .moveActionLater, .changePriority, .changeDeadline, .changeTimeWindow, .shrinkAction, .splitAction, .dropAction, .deferAction, .correctRecommendation, .editLocalNote, .dismissSuggestion, .noOp:
             self = .localOnly
         }
     }

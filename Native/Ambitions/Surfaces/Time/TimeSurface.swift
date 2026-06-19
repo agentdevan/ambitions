@@ -1,0 +1,210 @@
+import AmbitionsDesignSystem
+import SwiftUI
+
+struct TimeSurface: View {
+    @Environment(\.appShellCapability) private var appShellCapability
+    @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @State private var viewModel: TimeViewModel
+    private let showsNavigationChrome: Bool
+
+    @MainActor
+    init(viewModel: TimeViewModel? = nil, showsNavigationChrome: Bool = true) {
+        _viewModel = State(initialValue: viewModel ?? TimeViewModel())
+        self.showsNavigationChrome = showsNavigationChrome
+    }
+
+    var body: some View {
+        ZStack {
+            LivingSurfaceBackground(context: .time, state: timeLivingState, intensity: 0.64)
+                .ignoresSafeArea()
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    switch viewModel.state {
+                    case .loading:
+                        DegradedStateSurface(state: DegradedStateOrchestrator.objectLoading(.lifeShapeContourMap))
+                            .transition(.ambitionPanel)
+                    case .failed:
+                        DegradedStateSurface(
+                            state: DegradedStateOrchestrator.objectUnavailable(.lifeShapeContourMap),
+                            primaryAccessibilityIdentifier: "time.retry-button",
+                            onPrimaryAction: {
+                                Task { await refresh() }
+                            }
+                        )
+                        .transition(.ambitionPanel)
+                    case let .loaded(timeState):
+                        TimeObjectView(
+                            timeState: timeState,
+                            onReflowDecision: handleReflowDecision
+                        )
+
+                        if let emptyTitle = timeState.emptyTitle, let emptyMessage = timeState.emptyMessage {
+                            DegradedStateSurface(
+                                state: DegradedStateOrchestrator.timeEmpty(),
+                                primaryAccessibilityIdentifier: "time.empty.create-goal",
+                                secondaryAccessibilityIdentifier: "time.empty.open-captures",
+                                onPrimaryAction: {
+                                    _ = emptyTitle
+                                    _ = emptyMessage
+                                    shell.commandRouter.presentCreateGoal(source: .shellCompose)
+                                },
+                                onSecondaryAction: {
+                                    presentTimeCapture()
+                                }
+                            )
+                        }
+                    }
+                }
+                .padding(.horizontal, theme.spacing.lg)
+                .padding(.vertical, theme.spacing.md)
+            }
+            .accessibilityIdentifier("time.content-scroll")
+            .scrollIndicators(.hidden)
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                Color.clear
+                    .frame(height: dynamicTypeSize.isAccessibilitySize ? 172 : theme.spacing.xxxl)
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+            }
+        }
+        .navigationTitle(showsNavigationChrome ? "Time" : "")
+        .toolbar {
+            if showsNavigationChrome {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        shell.navigation.openHabits()
+                    } label: {
+                        Label("Rituals", systemImage: "repeat")
+                    }
+                    .accessibilityIdentifier("time.open-time-rituals-button")
+                }
+            }
+        }
+        .refreshable {
+            await refresh()
+        }
+        .accessibilityIdentifier("time.screen")
+        .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .task {
+            await viewModel.load(using: featureFactory.timeService, now: clock.now, calendar: clock.calendar)
+        }
+        .task {
+            await observeDayBoundary()
+        }
+    }
+
+    private var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
+        }
+        return appShellCapability
+    }
+
+    private var featureFactory: AppFeatureFactoryCapability {
+        guard let appFeatureFactoryCapability else {
+            preconditionFailure("App feature factory capability must be injected.")
+        }
+        return appFeatureFactoryCapability
+    }
+
+    private var clock: any AmbitionsClock {
+        featureFactory.clock
+    }
+
+    private var timeLivingState: LivingVisualState {
+        guard case let .loaded(timeState) = viewModel.state else {
+            return .calm
+        }
+
+        let label = timeState.capacityEnvelope.label.lowercased()
+        if label.contains("overloaded") || label.contains("tight") {
+            return .pressured
+        }
+        if timeState.calendarAwareness.status == .denied {
+            return .recovery
+        }
+        return .active
+    }
+
+    private func handleReflowDecision(
+        _ option: TimeReflowDecisionOptionState,
+        action: TimeReflowDecisionActionKind
+    ) {
+        guard action != .decline else { return }
+        if let target = option.target {
+            openGoal(target)
+            return
+        }
+        if let route = option.timeRoute {
+            shell.navigation.openTimeRoute(route)
+            return
+        }
+        if let interactionIntent = option.interactionIntent {
+            handleInteractionIntent(interactionIntent)
+        }
+    }
+
+    private func handleInteractionIntent(_ intent: TimeInteractionIntent) {
+        switch intent {
+        case .openGlobalCapture:
+            presentTimeCapture()
+        case .chooseDay, .chooseWeek, .chooseMonth, .chooseYear, .reviewPressure, .protectWindow:
+            break
+        }
+    }
+
+    private func openGoal(_ target: GoalRouteTarget) {
+        shell.navigation.openGoalDetail(target)
+    }
+
+    private func refresh() async {
+        await viewModel.refresh(using: featureFactory.timeService, now: clock.now, calendar: clock.calendar)
+    }
+
+    private func observeDayBoundary() async {
+        while Task.isCancelled == false {
+            do {
+                try await Task.sleep(for: .seconds(60))
+            } catch {
+                return
+            }
+            await refreshIfDayBoundaryChanged()
+        }
+    }
+
+    private func refreshIfDayBoundaryChanged() async {
+        let now = clock.now
+        guard viewModel.shouldRefreshForDayBoundary(now: now, calendar: clock.calendar) else { return }
+        await refresh()
+    }
+
+    private func presentTimeCapture() {
+        shell.commandRouter.presentCommandSheet(
+            intent: .quickCapture,
+            source: .timeQuickCapture,
+            presentationContext: .quickCapture
+        )
+    }
+}
+
+#if DEBUG
+#Preview("Time Seeded") {
+    NavigationStack {
+        TimeSurface(viewModel: TimeViewModel(state: .loaded(PreviewTimeScenarios.seeded)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+}
+
+#Preview("Time Empty") {
+    NavigationStack {
+        TimeSurface(viewModel: TimeViewModel(state: .loaded(PreviewTimeScenarios.empty)))
+    }
+    .appContainer(PreviewAppContainerFactory.preview)
+    .ambitionTheme(.dark)
+}
+#endif

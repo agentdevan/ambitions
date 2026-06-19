@@ -57,7 +57,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(stored?.kind, .oneTimeCommitment)
         XCTAssertEqual(stored?.route, .timeSeed)
         XCTAssertEqual(stored?.status, .scheduled)
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Task · Today")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Step · Today")
 
         await viewModel.markWaiting(id: "waiting", captureService: captureService, goalsService: goalsService, now: fixedNow)
         stored = await captureService.capture(id: "waiting")
@@ -101,7 +101,7 @@ final class CaptureViewModelTests: XCTestCase {
 
         viewModel.selectDraftRoute(.task)
 
-        XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved as Task · Today")
+        XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved as Step · Today")
         XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Ready to Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.first?.isSelected, true)
         XCTAssertEqual(viewModel.draftRoutePreview?.routeProofTitle, "Chosen by you")
@@ -285,7 +285,7 @@ final class CaptureViewModelTests: XCTestCase {
 
         XCTAssertTrue(presentation.isRouteRevealVisible)
         XCTAssertEqual(presentation.placementTitle, "Ready to Place")
-        XCTAssertEqual(presentation.destinationLabel, "Task · Today")
+        XCTAssertEqual(presentation.destinationLabel, "Step · Today")
         XCTAssertEqual(presentation.privacyLabel, "Private item")
         XCTAssertEqual(presentation.submitLabel, "Save capture")
         XCTAssertTrue(presentation.evidenceDetail.localizedCaseInsensitiveContains("after you confirm"))
@@ -373,8 +373,8 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(stored?.kind, .oneTimeCommitment)
         XCTAssertEqual(stored?.route, .timeSeed)
         XCTAssertEqual(stored?.status, .scheduled)
-        XCTAssertEqual(stored?.assumptionSummary, "Saved as a standalone Task because no existing local destination was reliable enough.")
-        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Task · Today")
+        XCTAssertEqual(stored?.assumptionSummary, "Saved as a standalone Step because no existing local destination was reliable enough.")
+        XCTAssertEqual(viewModel.actionMessage?.title, "Saved as Step · Today")
         XCTAssertNil(viewModel.draftRoutePreview)
     }
 

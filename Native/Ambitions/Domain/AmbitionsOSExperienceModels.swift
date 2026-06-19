@@ -450,10 +450,8 @@ struct AmbitionsOSExperienceContract: Codable, Sendable, Equatable, Hashable, Id
     }
 
     var containsForbiddenExperienceLanguage: Bool {
-        let forbiddenPhrases = [
-            "ai confidence",
+        let forbiddenPhrases = ForbiddenTopLevelTerms.terms.map { $0.lowercased() } + [
             "confidence percentage",
-            "productivity score",
             "streak",
             "trophy",
             "task dashboard",

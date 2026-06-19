@@ -1,0 +1,63 @@
+import Foundation
+
+enum QualityGateID: String, CaseIterable, Sendable, Hashable {
+    case architecture
+    case fileSize
+    case forbiddenLanguage
+    case designTokens
+    case shellChrome
+    case safeArea
+    case dynamicType
+    case motionReduction
+    case performanceBudget
+    case visualRegression
+    case scenarioMatrix
+    case actionMutationProof
+}
+
+struct QualityGateContract: Identifiable, Sendable, Hashable {
+    let id: QualityGateID
+    let owner: String
+    let executableCheck: String
+    let failureIsGreenBlocker: Bool
+}
+
+enum QualityGateChecklist {
+    static let executableScript = "scripts/ambitions-quality-gate.sh"
+
+    static let contracts: [QualityGateContract] = [
+        QualityGateContract(id: .architecture, owner: "Quality/Architecture", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .fileSize, owner: "Quality/FileSize", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .forbiddenLanguage, owner: "Language/ForbiddenTopLevelTerms", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .designTokens, owner: "DesignSystem/Foundations", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .shellChrome, owner: "Stage/Chrome", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .safeArea, owner: "Stage/StageSafeAreaPolicy", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .dynamicType, owner: "DesignSystem/Accessibility/DynamicTypePolicy", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .motionReduction, owner: "DesignSystem/Accessibility/ReduceMotionPolicy", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .performanceBudget, owner: "Quality/PerformanceBudgets", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .visualRegression, owner: "Quality/VisualRegressionHarness", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .scenarioMatrix, owner: "Scenarios/ScenarioMatrix", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .actionMutationProof, owner: "Projection/Mutations", executableCheck: executableScript, failureIsGreenBlocker: true)
+    ]
+
+    static func validationIssues(_ contracts: [QualityGateContract] = contracts) -> [String] {
+        var issues: [String] = []
+        let ids = contracts.map(\.id)
+
+        for required in QualityGateID.allCases where ids.contains(required) == false {
+            issues.append("Missing quality gate: \(required.rawValue).")
+        }
+        if Set(ids).count != ids.count {
+            issues.append("Quality gate ids must be unique.")
+        }
+        for contract in contracts where contract.failureIsGreenBlocker == false {
+            issues.append("\(contract.id.rawValue) must block Green when failing.")
+        }
+        for contract in contracts where contract.executableCheck != executableScript {
+            issues.append("\(contract.id.rawValue) must run through \(executableScript).")
+        }
+
+        return issues
+    }
+}
+

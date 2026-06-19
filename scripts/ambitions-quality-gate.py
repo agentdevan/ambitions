@@ -1,0 +1,468 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import re
+import subprocess
+import sys
+from dataclasses import dataclass, asdict
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+PRODUCTION_ROOTS = [
+    ROOT / "Native" / "Ambitions",
+    ROOT / "Native" / "AmbitionsWidgetExtension",
+    ROOT / "Native" / "AmbitionsShareExtension",
+    ROOT / "Sources",
+    ROOT / "AppUI" / "Sources",
+    ROOT / "Packages" / "AmbitionsExperienceKernel" / "Sources",
+]
+
+EXCLUDED_PATH_PARTS = {
+    ".build",
+    "DerivedData",
+    "Resources",
+    "PreviewSupport",
+    "Previews",
+}
+
+REQUIRED_ARCHITECTURE_PATHS = [
+    "Native/Ambitions/Language/ProductCopy.swift",
+    "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift",
+    "Native/Ambitions/Quality/QualityGateChecklist.swift",
+    "Native/Ambitions/Quality/SnapshotMatrix.swift",
+    "Native/Ambitions/Quality/AccessibilityAudit.swift",
+    "Native/Ambitions/Quality/PerformanceBudgets.swift",
+    "Native/Ambitions/Quality/VisualRegressionHarness.swift",
+    "Native/Ambitions/Quality/MotionReductionAudit.swift",
+    "Native/Ambitions/Quality/ShellChromeAudit.swift",
+    "Native/Ambitions/Quality/ForbiddenLanguageAudit.swift",
+    "Native/Ambitions/Quality/SafeAreaAudit.swift",
+    "Native/Ambitions/Quality/DynamicTypeAudit.swift",
+    "Native/Ambitions/Scenarios/RuntimeScenario.swift",
+    "Native/Ambitions/Scenarios/ScenarioCatalog.swift",
+    "Native/Ambitions/Scenarios/ScenarioMatrix.swift",
+    "scripts/ambitions-quality-gate.sh",
+]
+
+FORBIDDEN_PATHS = [
+    "Native/Ambitions/Surfaces/Capture",
+    "Native/Ambitions/Surfaces/Motion",
+    "Native/Ambitions/Projection/SurfaceLenses/MotionLens.swift",
+    "Native/Ambitions/Projection/StageScenes/MotionStageScene.swift",
+    "Native/Ambitions/RootTab.swift",
+]
+
+FORBIDDEN_ROUTE_PATTERNS = [
+    r"ambitions://tab/capture",
+    r"ambitions://tab/captures",
+    r"ambitions://tab/motion",
+    r"ambitions://tab/plan",
+    r"ambitions://captures",
+    r"ambitions://plan",
+    r"captures_inbox",
+    r"captures-inbox",
+    r"openCapturesInbox",
+    r"motionQuickCapture",
+    r"capturesScreen",
+    r"LegacyIARouteCompatibility",
+]
+
+FORBIDDEN_STRING_PATTERNS = [
+    r"\bPlan tab\b",
+    r"\bPlan screen\b",
+    r"\btop-level Plan\b",
+    r"\bProfile tab\b",
+    r"\bCapture tab\b",
+    r"\bMotion tab\b",
+    r"\bCaptures tab\b",
+    r"\bnext best move\b",
+    r"\bbest next move\b",
+    r"\bBegin Focus\b",
+    r"\bAI confidence\b",
+    r"\bproductivity score\b",
+    r"\bdebug console\b",
+]
+
+RAW_DESIGN_LITERAL_PATTERNS = [
+    r"\bColor\s*\(",
+    r"\.foregroundColor\s*\(",
+    r"\.font\s*\(\s*\.system",
+    r"\.cornerRadius\s*\(",
+    r"RoundedRectangle\s*\(\s*cornerRadius\s*:",
+    r"\.shadow\s*\(",
+    r"\.animation\s*\(",
+    r"\.spring\s*\(",
+    r"\.easeIn",
+    r"\.easeOut",
+    r"UIImpactFeedbackGenerator",
+    r"\.sensoryFeedback\s*\(",
+]
+
+SHELL_POLICY_PATTERNS = [
+    r"\.ignoresSafeArea\s*\(",
+    r"\.safeAreaInset\s*\(",
+    r"\.toolbar\s*\(",
+    r"keyboard",
+    r"dock",
+    r"crown",
+    r"focus restoration",
+]
+
+SURFACE_OWNED_PATH_PREFIXES = (
+    "Native/Ambitions/Surfaces/",
+    "Native/Ambitions/Composer/",
+    "Native/Ambitions/Features/",
+)
+
+STAGE_ALLOWED_PREFIXES = (
+    "Native/Ambitions/Stage/",
+    "Native/Ambitions/App/",
+    "Native/Ambitions/DesignSystem/",
+    "Sources/",
+)
+
+DESIGN_ALLOWED_PREFIXES = (
+    "Native/Ambitions/DesignSystem/",
+    "Native/Ambitions/Rendering/",
+    "Sources/Theme/",
+    "Sources/Components/",
+)
+
+
+@dataclass(frozen=True)
+class Finding:
+    gate: str
+    path: str
+    detail: str
+
+
+def rel(path: Path) -> str:
+    return path.relative_to(ROOT).as_posix()
+
+
+def run_git(args: list[str]) -> str:
+    result = subprocess.run(
+        ["git", *args],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode != 0:
+        return ""
+    return result.stdout
+
+
+def changed_paths() -> set[str]:
+    paths = set(run_git(["diff", "--name-only", "HEAD", "--"]).splitlines())
+    status = run_git(["status", "--porcelain"]).splitlines()
+    for line in status:
+        if not line:
+            continue
+        candidate = line[3:] if len(line) > 3 else line
+        if " -> " in candidate:
+            candidate = candidate.split(" -> ", 1)[1]
+        paths.add(candidate.strip())
+    return {path for path in paths if path}
+
+
+def is_excluded(path: Path) -> bool:
+    relative_parts = set(path.relative_to(ROOT).parts)
+    if relative_parts & EXCLUDED_PATH_PARTS:
+        return True
+    return any(part.endswith(".xcodeproj") for part in relative_parts)
+
+
+def production_swift_files() -> list[Path]:
+    files: list[Path] = []
+    for root in PRODUCTION_ROOTS:
+        if not root.exists():
+            continue
+        for path in root.rglob("*.swift"):
+            if not is_excluded(path):
+                files.append(path)
+    return sorted(files)
+
+
+def read(path: Path) -> str:
+    return path.read_text(encoding="utf-8", errors="replace")
+
+
+def swift_enum_case_names(text: str, enum_name: str) -> list[str]:
+    enum_match = re.search(rf"\benum\s+{re.escape(enum_name)}\b[^\{{]*\{{", text)
+    if enum_match is None:
+        return []
+
+    cases: list[str] = []
+    depth = 1
+    for line in text[enum_match.end():].splitlines():
+        stripped = line.split("//", 1)[0].strip()
+        if depth == 1:
+            case_match = re.match(r"case\s+(.+)$", stripped)
+            if case_match is not None:
+                for raw_case in case_match.group(1).split(","):
+                    name_match = re.match(r"\s*([A-Za-z_][A-Za-z0-9_]*)", raw_case)
+                    if name_match is not None:
+                        cases.append(name_match.group(1))
+        depth += line.count("{") - line.count("}")
+        if depth <= 0:
+            break
+    return cases
+
+
+def line_count(text: str) -> int:
+    return text.count("\n") + (0 if text.endswith("\n") else 1)
+
+
+def is_swiftui_rendering_source(text: str) -> bool:
+    return (
+        "import SwiftUI" in text
+        or re.search(r":\s*View\b", text) is not None
+        or "some View" in text
+    )
+
+
+def swift_string_literals(text: str) -> list[str]:
+    pattern = re.compile(r'"([^"\\]*(?:\\.[^"\\]*)*)"')
+    return [match.group(1) for match in pattern.finditer(text)]
+
+
+def add_regex_findings(
+    findings: list[Finding],
+    gate: str,
+    path: Path,
+    patterns: list[str],
+    text: str,
+    *,
+    string_literals_only: bool = False,
+) -> None:
+    haystacks = swift_string_literals(text) if string_literals_only else text.splitlines()
+    for index, haystack in enumerate(haystacks, start=1):
+        for pattern in patterns:
+            if re.search(pattern, haystack, flags=re.IGNORECASE):
+                detail = f"{pattern} :: {haystack.strip()[:160]}"
+                if not string_literals_only:
+                    detail = f"line {index}: {detail}"
+                findings.append(Finding(gate, rel(path), detail))
+                break
+
+
+def check_architecture(files: list[Path]) -> list[Finding]:
+    findings: list[Finding] = []
+    for required in REQUIRED_ARCHITECTURE_PATHS:
+        if not (ROOT / required).exists():
+            findings.append(Finding("architecture", required, "required quality/scenario/language contract is missing"))
+
+    for forbidden in FORBIDDEN_PATHS:
+        path = ROOT / forbidden
+        if path.exists():
+            findings.append(Finding("architecture", forbidden, "forbidden architecture path exists"))
+
+    feature_files = [path for path in files if rel(path).startswith("Native/Ambitions/Features/")]
+    for path in feature_files:
+        text = read(path)
+        if "AMBITION_FEATURE_SHIM" not in text:
+            findings.append(Finding("architecture", rel(path), "legacy Features implementation remains without shim marker"))
+
+    app_tab = ROOT / "Native" / "Ambitions" / "App" / "AppTab.swift"
+    if app_tab.exists():
+        cases = swift_enum_case_names(read(app_tab), "AppTab")
+        if cases != ["today", "goals", "time", "you"]:
+            findings.append(Finding("architecture", rel(app_tab), f"AppTab cases must be today/goals/time/you; found {cases}"))
+
+    for path in files:
+        relative = rel(path)
+        text = read(path)
+        if path.name == "RootTab.swift":
+            findings.append(Finding("architecture", relative, "RootTab.swift is removed architecture"))
+        if relative.startswith("Native/Ambitions/App/") and re.search(r"\bTabView\s*\(", text):
+            findings.append(Finding("architecture", relative, "TabView appears in App root shell"))
+        add_regex_findings(findings, "architecture", path, FORBIDDEN_ROUTE_PATTERNS, text)
+
+    return findings
+
+
+def check_file_sizes(files: list[Path], changed: set[str]) -> list[Finding]:
+    findings: list[Finding] = []
+    for path in files:
+        relative = rel(path)
+        text = read(path)
+        count = line_count(text)
+        if count > 600:
+            findings.append(Finding("file-size", relative, f"{count} lines exceeds production maximum 600"))
+        if relative in changed and count > 400 and "AMBITIONS-QUALITY-EXTRACTION:" not in text:
+            findings.append(Finding("file-size", relative, f"{count} touched lines exceeds 400 without extraction note"))
+    return findings
+
+
+def check_forbidden_language(files: list[Path]) -> list[Finding]:
+    findings: list[Finding] = []
+    for path in files:
+        relative = rel(path)
+        if relative == "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift":
+            continue
+        add_regex_findings(
+            findings,
+            "forbidden-language",
+            path,
+            FORBIDDEN_STRING_PATTERNS,
+            read(path),
+            string_literals_only=True,
+        )
+    return findings
+
+
+def check_design_tokens(files: list[Path], changed: set[str]) -> list[Finding]:
+    findings: list[Finding] = []
+    for path in files:
+        relative = rel(path)
+        if relative.startswith(DESIGN_ALLOWED_PREFIXES):
+            continue
+        should_scan = relative.startswith(SURFACE_OWNED_PATH_PREFIXES) or relative in changed
+        if should_scan:
+            add_regex_findings(findings, "design-token", path, RAW_DESIGN_LITERAL_PATTERNS, read(path))
+    return findings
+
+
+def check_shell_and_accessibility(files: list[Path], changed: set[str]) -> list[Finding]:
+    findings: list[Finding] = []
+    for path in files:
+        relative = rel(path)
+        text = read(path)
+        is_rendering_source = is_swiftui_rendering_source(text)
+        if relative.startswith(SURFACE_OWNED_PATH_PREFIXES) and is_rendering_source:
+            add_regex_findings(findings, "shell-chrome-safe-area", path, SHELL_POLICY_PATTERNS, text)
+        if relative in changed and re.search(r"\.animation\s*\(|withAnimation\s*\(", text) and "accessibilityReduceMotion" not in text:
+            findings.append(Finding("motion-reduction", relative, "changed animated file lacks local reduce-motion handling"))
+        if relative.startswith("Native/Ambitions/Surfaces/") and (
+            is_rendering_source
+            and
+            "accessibility" not in text.lower()
+            and not relative.endswith("Accessibility.swift")
+        ):
+            findings.append(Finding("accessibility", relative, "surface-owned file lacks accessibility semantics or companion reference"))
+
+    for surface in ["Today", "Goals", "Time", "You"]:
+        expected = ROOT / "Native" / "Ambitions" / "Surfaces" / surface / f"{surface}Accessibility.swift"
+        if not expected.exists():
+            findings.append(Finding("accessibility", rel(expected), "canonical surface accessibility mirror is missing"))
+
+    return findings
+
+
+def check_scenario_and_quality_contracts() -> list[Finding]:
+    findings: list[Finding] = []
+    required_snippets = {
+        "Native/Ambitions/Scenarios/RuntimeScenario.swift": [
+            "RuntimeScenarioState",
+            "dynamicTypeXXXL",
+            "reduceMotion",
+            "reduceTransparency",
+            "highContrast",
+            "keyboardVisible",
+            "runtimeMutation",
+            "visibleStageMutation",
+            "accessibilityAnnouncement",
+            "proofArtifact",
+        ],
+        "Native/Ambitions/Quality/QualityGateChecklist.swift": [
+            "architecture",
+            "fileSize",
+            "forbiddenLanguage",
+            "designTokens",
+            "shellChrome",
+            "safeArea",
+            "dynamicType",
+            "motionReduction",
+            "performanceBudget",
+            "visualRegression",
+        ],
+    }
+    for relative, snippets in required_snippets.items():
+        path = ROOT / relative
+        if not path.exists():
+            findings.append(Finding("scenario-quality-contract", relative, "required contract file is missing"))
+            continue
+        text = read(path)
+        for snippet in snippets:
+            if snippet not in text:
+                findings.append(Finding("scenario-quality-contract", relative, f"missing contract snippet {snippet}"))
+
+    screenshot_script = ROOT / "scripts" / "ambitions-run-ui-screenshot-matrix.sh"
+    if not screenshot_script.exists():
+        findings.append(Finding("visual-regression", rel(screenshot_script), "screenshot matrix command is missing"))
+
+    return findings
+
+
+def check_action_mutation_contract(files: list[Path]) -> list[Finding]:
+    findings: list[Finding] = []
+    for path in files:
+        relative = rel(path)
+        if not relative.startswith(("Native/Ambitions/Surfaces/", "Native/Ambitions/Composer/")):
+            continue
+        text = read(path)
+        if "Button(" in text or ".onTapGesture" in text:
+            lowered = text.lower()
+            missing = [
+                label
+                for label in ["mutation", "accessibility", "proof"]
+                if label not in lowered
+            ]
+            if missing:
+                findings.append(Finding("action-mutation-proof", relative, f"interactive surface lacks explicit {', '.join(missing)} contract"))
+    return findings
+
+
+def summarize(findings: list[Finding], *, max_per_gate: int) -> dict[str, list[Finding]]:
+    grouped: dict[str, list[Finding]] = {}
+    for finding in findings:
+        grouped.setdefault(finding.gate, []).append(finding)
+    return {gate: rows[:max_per_gate] for gate, rows in sorted(grouped.items())}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Strict Ambitions architecture and quality gate.")
+    parser.add_argument("--json", action="store_true", help="Emit machine-readable findings.")
+    parser.add_argument("--max-per-gate", type=int, default=80)
+    args = parser.parse_args()
+
+    files = production_swift_files()
+    changed = changed_paths()
+
+    findings: list[Finding] = []
+    findings.extend(check_architecture(files))
+    findings.extend(check_file_sizes(files, changed))
+    findings.extend(check_forbidden_language(files))
+    findings.extend(check_design_tokens(files, changed))
+    findings.extend(check_shell_and_accessibility(files, changed))
+    findings.extend(check_scenario_and_quality_contracts())
+    findings.extend(check_action_mutation_contract(files))
+
+    grouped = summarize(findings, max_per_gate=args.max_per_gate)
+    if args.json:
+        print(json.dumps({gate: [asdict(row) for row in rows] for gate, rows in grouped.items()}, indent=2))
+    else:
+        print("ambitions-quality-gate")
+        print(f"production_swift_files={len(files)}")
+        print(f"changed_paths={len(changed)}")
+        if not findings:
+            print("GREEN all strict quality gates passed")
+            return 0
+        print(f"RED {len(findings)} strict quality gate finding(s)")
+        for gate, rows in grouped.items():
+            total = sum(1 for finding in findings if finding.gate == gate)
+            print(f"\n[{gate}] showing {len(rows)} of {total}")
+            for row in rows:
+                print(f"{row.path}: {row.detail}")
+
+    return 1 if findings else 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

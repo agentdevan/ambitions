@@ -98,7 +98,7 @@ final class CreateGoalViewModelTests: XCTestCase {
         let viewModel = CreateGoalViewModel(
             title: "  Launch community workshop  ",
             selectedMode: .project,
-            entrySource: .capturesScreen,
+            entrySource: .globalCaptureComposer,
             captureID: "capture-workshop"
         )
 
@@ -114,7 +114,7 @@ final class CreateGoalViewModelTests: XCTestCase {
         let createRequest = await service.recordedCreateRequest
         XCTAssertEqual(previewRequest?.captureID, "capture-workshop")
         XCTAssertEqual(createRequest?.captureID, "capture-workshop")
-        XCTAssertEqual(createRequest?.entrySource, .capturesScreen)
+        XCTAssertEqual(createRequest?.entrySource, .globalCaptureComposer)
     }
 
     func testPD11GoalSeedReviewKeepsPromotionExplicitAndEditable() {

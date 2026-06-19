@@ -42,7 +42,7 @@ final class IOS26CalendarP0ContractHarnessTests: XCTestCase {
             observedRangeStart: horizon.start,
             observedRangeEnd: horizon.end,
             derivedBusyWindowCount: 1,
-            userInitiatedPlanAction: "Find real open windows",
+            userInitiatedTimeAction: "Find real open windows",
             explanation: "Calendar-derived busy time stayed local.",
             eventLedgerEntryIDs: ["ledger.calendar.1"],
             recommendationExplanationIDs: ["explanation.calendar.1"]
@@ -181,7 +181,7 @@ final class IOS26CalendarP0ContractHarnessTests: XCTestCase {
             observedRangeStart: horizon.start,
             observedRangeEnd: horizon.end,
             derivedBusyWindowCount: 0,
-            userInitiatedPlanAction: "Make Time calendar-aware",
+            userInitiatedTimeAction: "Make Time calendar-aware",
             explanation: "Time still works without calendar access."
         )
 
@@ -500,7 +500,7 @@ private struct CalendarP0ReplacementGauntletHarness {
             observedRangeStart: fixedNow,
             observedRangeEnd: fixedNow.addingTimeInterval(3_600),
             derivedBusyWindowCount: permission.canReadCalendarContext ? 1 : 0,
-            userInitiatedPlanAction: "Make Time calendar-aware",
+            userInitiatedTimeAction: "Make Time calendar-aware",
             explanation: permission.canReadCalendarContext
                 ? "Calendar-derived busy time stayed local."
                 : "Time still works without calendar access.",
@@ -524,7 +524,7 @@ private struct CalendarP0ReplacementGauntletHarness {
             observedRangeStart: fixedNow.addingTimeInterval(-86_400),
             observedRangeEnd: fixedNow,
             derivedBusyWindowCount: permission.canReadCalendarContext ? 2 : 0,
-            userInitiatedPlanAction: "Review stale calendar items",
+            userInitiatedTimeAction: "Review stale calendar items",
             explanation: "Stale items stay reviewable before Time uses them.",
             eventLedgerEntryIDs: ["stale.\(scenario.id)"],
             recommendationExplanationIDs: ["stale.explanation.\(scenario.id)"]
@@ -637,7 +637,7 @@ private struct CalendarP0ReplacementGauntletHarness {
                 observedRangeStart: fixedNow,
                 observedRangeEnd: fixedNow.addingTimeInterval(10_800),
                 derivedBusyWindowCount: permission.canReadCalendarContext ? 1 : 0,
-                userInitiatedPlanAction: "Find real open windows",
+                userInitiatedTimeAction: "Find real open windows",
                 explanation: "Calendar-aware protected time stays local."
             ),
             conflictSummary: RealityConflictSummary(

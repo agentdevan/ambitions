@@ -98,15 +98,15 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         let contract = CaptureObjectStagePrimitiveContract.current
         let root = repoRoot()
         let screenSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureScreen.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift"),
             encoding: .utf8
         )
         let routeSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Composer/Capture/CaptureRouteStagePrimitive.swift"),
             encoding: .utf8
         )
         let composerSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift"),
             encoding: .utf8
         )
 
@@ -149,11 +149,11 @@ final class CapturePlacementReviewStateTests: XCTestCase {
             encoding: .utf8
         )
         let composerSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureAtmosphereComposer.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift"),
             encoding: .utf8
         )
         let routePreviewSource = try String(
-            contentsOf: root.appendingPathComponent("Native/Ambitions/Features/Capture/CaptureDraftRoutePreviewCard.swift"),
+            contentsOf: root.appendingPathComponent("Native/Ambitions/Composer/Capture/CaptureRouteStagePrimitive.swift"),
             encoding: .utf8
         )
         let createGoalSource = try String(

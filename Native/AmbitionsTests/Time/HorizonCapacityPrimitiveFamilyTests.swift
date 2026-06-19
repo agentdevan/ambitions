@@ -36,7 +36,7 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
 
     func testAMB581ActiveTimeFieldUsesHorizonCapacityPrimitiveFamily() throws {
         let root = repoRoot()
-        let timeFieldSource = try source("Native/Ambitions/Features/Time/TimeLifeShapeField.swift", root: root)
+        let timeFieldSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
 
         XCTAssertTrue(timeFieldSource.contains("HorizonCapacityPrimitiveStage("))
         XCTAssertTrue(timeFieldSource.contains("HorizonCapacityPrimitiveLine("))
@@ -44,8 +44,9 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.capacity-statement"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.source-receipt"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.continuity-dock"))
-        XCTAssertTrue(timeFieldSource.contains("Day, Week, and Month shape capacity without becoming root navigation."))
-        XCTAssertTrue(timeFieldSource.contains("Review before reflow"))
+        XCTAssertTrue(timeFieldSource.contains("Field, day, week, month, and year stay in one LifeShape object."))
+        XCTAssertTrue(timeFieldSource.contains("Day, week, month, year, and later stay inside the same field."))
+        XCTAssertTrue(timeFieldSource.contains("Preview changes"))
 
         XCTAssertFalse(timeFieldSource.contains("Text(horizon.title)\n                .font(theme.typography.caption.weight(selected ? .semibold : .regular))"))
         XCTAssertFalse(timeFieldSource.contains("Text(reading.capacityStatement)\n                    .font(theme.typography.bodyEmphasized)"))
@@ -54,17 +55,36 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
     }
 
     func testAMB581OldHorizonCapacityCardsAreUnreachableFromActiveTimeBody() throws {
-        let timeScreenSource = try source("Native/Ambitions/Features/Time/TimeScreen.swift", root: repoRoot())
+        let timeScreenSource = try source("Native/Ambitions/Surfaces/Time/TimeSurface.swift", root: repoRoot())
         let activeBodySource = try activeTimeScreenBodySource(from: timeScreenSource)
 
-        XCTAssertTrue(activeBodySource.contains("TimeLifeShapeField("))
+        XCTAssertTrue(activeBodySource.contains("TimeObjectView("))
         XCTAssertFalse(activeBodySource.contains("TimeLifeSuiteCard("))
         XCTAssertFalse(activeBodySource.contains("TimeCapacityEnvelopeCard("))
         XCTAssertFalse(activeBodySource.contains("TimeShapeDepthDisclosure("))
     }
 
+    func testAMB581CanonicalTimeSurfaceOwnsLifeShapeFieldWrapper() throws {
+        let root = repoRoot()
+        let surfaceSource = try source("Native/Ambitions/Surfaces/Time/TimeSurface.swift", root: root)
+        let objectSource = try source("Native/Ambitions/Surfaces/Time/TimeObjectView.swift", root: root)
+        let productObjectSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let lensSource = try source("Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift", root: root)
+
+        XCTAssertTrue(surfaceSource.contains("TimeObjectView("))
+        XCTAssertTrue(objectSource.contains("TimeLens.makeStageScene"))
+        XCTAssertTrue(objectSource.contains("LifeShapeFieldView("))
+        XCTAssertTrue(productObjectSource.contains("LifeShapeFieldView("))
+        XCTAssertTrue(lensSource.contains("day/week/month/year horizons"))
+        XCTAssertTrue(lensSource.contains("global Capture support"))
+    }
+
     func testAMB581PrimitiveRegistryIncludesHorizonCapacityFamilyEntry() throws {
-        let registry = try source("docs/codex/ambitions_primitive_invention_registry.md", root: repoRoot())
+        let registryURL = repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
+        guard FileManager.default.fileExists(atPath: registryURL.path) else {
+            throw XCTSkip("Historical primitive registry is not retained in current repo truth.")
+        }
+        let registry = try String(contentsOf: registryURL, encoding: .utf8)
 
         XCTAssertTrue(registry.contains("| horizon-capacity-family | Promoted | Time | Horizon / Capacity | AMB-581 |"))
         XCTAssertTrue(registry.contains("### horizon-capacity-family"))
@@ -75,7 +95,7 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
     private func activeTimeScreenBodySource(from timeScreenSource: String) throws -> String {
         guard let start = timeScreenSource.range(of: "var body: some View"),
               let end = timeScreenSource.range(of: "private var shell:", range: start.lowerBound..<timeScreenSource.endIndex) else {
-            throw XCTSkip("Active TimeScreen body source could not be located.")
+            throw XCTSkip("Active TimeSurface body source could not be located.")
         }
         return String(timeScreenSource[start.lowerBound..<end.lowerBound])
     }

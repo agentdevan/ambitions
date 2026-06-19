@@ -4,7 +4,7 @@ import SwiftUI
 public enum AmbitionModeLens: String, CaseIterable, Sendable, Identifiable {
     case focus
     case triage
-    case plan
+    case time
     case recover
     case review
 
@@ -14,7 +14,7 @@ public enum AmbitionModeLens: String, CaseIterable, Sendable, Identifiable {
         switch self {
         case .focus: "Focus"
         case .triage: "Sort"
-        case .plan: "Plan"
+        case .time: "Time"
         case .recover: "Recover"
         case .review: "Review"
         }
@@ -24,7 +24,7 @@ public enum AmbitionModeLens: String, CaseIterable, Sendable, Identifiable {
         switch self {
         case .focus: "scope"
         case .triage: "tray.full"
-        case .plan: "calendar.badge.clock"
+        case .time: "clock.badge.checkmark"
         case .recover: "arrow.uturn.backward.circle"
         case .review: "doc.text.magnifyingglass"
         }

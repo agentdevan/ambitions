@@ -7,7 +7,7 @@ enum ExternalSurfaceActionName: String, Codable, Sendable, Equatable {
     case delay
     case askForSmallerStep = "ask-for-smaller-step"
     case openToday = "open-today"
-    case openCapturesInbox = "open-captures-inbox"
+    case openCaptureComposer = "open-capture-composer"
     case openMemoryLens = "open-memory-lens"
 
     init(rawAction: String) {
@@ -22,8 +22,8 @@ enum ExternalSurfaceActionName: String, Codable, Sendable, Equatable {
             self = .askForSmallerStep
         case "open-today":
             self = .openToday
-        case "open-captures-inbox":
-            self = .openCapturesInbox
+        case "open-capture-composer":
+            self = .openCaptureComposer
         case "open-memory-lens", "memory-lens":
             self = .openMemoryLens
         default:
@@ -35,7 +35,7 @@ enum ExternalSurfaceActionName: String, Codable, Sendable, Equatable {
 enum ExternalSurfacePayloadSurface: String, Codable, Sendable, Equatable {
     case tab
     case goalDetail = "goal-detail"
-    case captureInbox = "captures-inbox"
+    case captureComposer = "capture-composer"
 }
 
 enum ExternalSurfaceActionPayload {
@@ -117,13 +117,16 @@ enum ExternalSurfaceActionPayload {
             guard let goalID, goalID.isEmpty == false else { return nil }
             components.host = "goal"
             components.path = "/\(goalID)"
-        case .captureInbox:
-            components.host = "captures"
-            components.path = "/inbox"
+        case .captureComposer:
+            components.host = "overlay"
+            components.path = "/quiet-command-sheet"
+            components.queryItems = [URLQueryItem(name: "intent", value: "quick_capture")]
         }
 
         if let origin {
-            components.queryItems = [URLQueryItem(name: "origin", value: origin.rawValue)]
+            var queryItems = components.queryItems ?? []
+            queryItems.append(URLQueryItem(name: "origin", value: origin.rawValue))
+            components.queryItems = queryItems
         }
         return components.url
     }
@@ -153,7 +156,6 @@ enum ExternalObjectReopeningMetadataClass: String, Codable, Sendable, Equatable 
 enum ExternalObjectReopeningRoot: String, Codable, Sendable, Equatable, CaseIterable {
     case today
     case goals
-    case capture
     case time
     case you
 
@@ -163,12 +165,17 @@ enum ExternalObjectReopeningRoot: String, Codable, Sendable, Equatable, CaseIter
             return "Reality Meridian"
         case .goals:
             return "Direction Atlas"
-        case .capture:
-            return "Atmosphere Composer"
         case .time:
             return "LifeShape Field"
         case .you:
             return "Personal system"
+        }
+    }
+
+    var fallbackURL: URL? {
+        switch self {
+        case .today, .goals, .time, .you:
+            return ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .tab, tab: rawValue)
         }
     }
 }
@@ -310,7 +317,7 @@ struct ExternalObjectReopeningProjector: Sendable {
     ) -> [ExternalObjectReopeningCanonicalRecord] {
         guard gate.isEnabled else { return [] }
         return ExternalObjectReopeningRoot.allCases.compactMap { root in
-            guard let rootFallbackURL = ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .tab, tab: root.rawValue) else {
+            guard let rootFallbackURL = root.fallbackURL else {
                 return nil
             }
             return ExternalObjectReopeningCanonicalRecord(
@@ -408,7 +415,7 @@ private extension ExternalObjectReopeningProjector {
         case .receipt:
             return .today
         case .capture:
-            return .capture
+            return .today
         }
     }
 
@@ -506,7 +513,7 @@ extension ExternalObjectContinuationToken {
             }
             return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: root.rawValue, origin: origin)
         case .capture:
-            guard var components = ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox, origin: origin).flatMap({ URLComponents(url: $0, resolvingAgainstBaseURL: false) }) else {
+            guard var components = ExternalSurfaceActionPayload.deepLinkURL(surface: .captureComposer, origin: origin).flatMap({ URLComponents(url: $0, resolvingAgainstBaseURL: false) }) else {
                 return ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: root.rawValue, origin: origin)
             }
             if let captureID {

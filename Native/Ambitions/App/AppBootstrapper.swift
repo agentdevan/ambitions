@@ -218,9 +218,9 @@ final class AppBootstrapper {
                 .presentOverlay(.createGoal(entrySource: entrySource)),
                 source: routeSource
             )
-        case .captureInbox, .none:
+        case .captureComposer, .none:
             container.externalRouter.dispatch(
-                .openTimeRoute(.captureInbox),
+                .openCaptureComposer,
                 source: routeSource
             )
         }

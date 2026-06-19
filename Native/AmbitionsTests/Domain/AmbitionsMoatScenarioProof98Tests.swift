@@ -226,7 +226,7 @@ private extension AmbitionsMoatScenarioProof98Tests {
                     observedRangeStart: now,
                     observedRangeEnd: now.addingTimeInterval(3 * 3_600),
                     derivedBusyWindowCount: 0,
-                    userInitiatedPlanAction: "Use the fresh open window",
+                    userInitiatedTimeAction: "Use the fresh open window",
                     explanation: "Fresh schedule data is readable locally."
                 )
             case .contextB:
@@ -235,7 +235,7 @@ private extension AmbitionsMoatScenarioProof98Tests {
                     observedRangeStart: now,
                     observedRangeEnd: now.addingTimeInterval(3 * 3_600),
                     derivedBusyWindowCount: 0,
-                    userInitiatedPlanAction: "Protect the recovery block",
+                    userInitiatedTimeAction: "Protect the recovery block",
                     explanation: "Schedule access is constrained, so protected recovery time stays visible."
                 )
             }

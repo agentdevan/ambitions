@@ -3476,11 +3476,11 @@ private struct YouSettingRow: View {
                 id: "preview-undo",
                 title: "Time change can be undone",
                 summary: "A local reversible change exposes undo without implying silent automation.",
-                sourceLabel: "Source: Plan",
+                sourceLabel: "Source: Time",
                 freshnessLabel: "Freshness: current local receipt",
                 undoLabel: "Undo requires confirmation",
                 correctionLabel: "Correction unavailable",
-                nextActionLabel: "Review in Plan",
+                nextActionLabel: "Review in Time",
                 state: .undo
             )
         ])

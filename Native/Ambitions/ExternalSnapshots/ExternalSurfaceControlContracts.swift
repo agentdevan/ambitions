@@ -122,8 +122,8 @@ extension ExternalSurfaceControlContract {
             shortTitle: "Capture",
             systemImageName: "square.and.pencil",
             privacySummary: "Opens local Capture so the user can save text intentionally; no hidden capture is created from the control alone.",
-            actionName: .openCapturesInbox,
-            payloadSurface: .captureInbox,
+            actionName: .openCaptureComposer,
+            payloadSurface: .captureComposer,
             availability: .always,
             executionMode: .opensAppOnly,
             producesReceipt: false

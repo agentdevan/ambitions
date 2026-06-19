@@ -210,7 +210,7 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     func testUIQL002ActivatedCaptureSeamUsesOverlayKeyboardClearanceWithoutRootDock() throws {
-        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/quiet-command-sheet?intent=quick_capture")
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
@@ -560,7 +560,7 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     func testLaunchURLCanLandOnCanonicalTimeSurface() throws {
-        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/plan")
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/time")
         app.launch()
 
         XCTAssertTrue(waitForRootDestination("Time", in: app, timeout: 10))
@@ -577,7 +577,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(rootDestinationExists("Capture", in: hiddenApp))
         hiddenApp.terminate()
 
-        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/quiet-command-sheet?intent=quick_capture")
         app.launch()
 
         XCTAssertTrue(waitForShellReady(in: app))
@@ -621,7 +621,7 @@ final class AmbitionsUITests: XCTestCase {
 
         let largeTextApp = makeApp(
             bootstrapMode: "preview",
-            launchURL: "ambitions://captures/inbox",
+            launchURL: "ambitions://overlay/quiet-command-sheet?intent=quick_capture",
             contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL"
         )
         largeTextApp.launch()
@@ -646,7 +646,7 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     func testAMB967CaptureCreateGoalScreenshotMatrix() throws {
-        let activatedApp = makeApp(bootstrapMode: "preview", launchURL: "ambitions://captures/inbox")
+        let activatedApp = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/quiet-command-sheet?intent=quick_capture")
         activatedApp.launch()
         XCTAssertTrue(waitForShellReady(in: activatedApp))
         XCTAssertFalse(rootDestinationExists("Capture", in: activatedApp))
@@ -963,17 +963,18 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("goal-detail.tactics-region", in: app))
     }
 
-    func testPreviewLegacyInsightsTabRouteLandsUnderYouHistory() throws {
+    func testPreviewRetiredInsightsTabRouteFallsBackToToday() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://tab/insights")
         app.launch()
 
-        XCTAssertTrue(waitForRootDestination("You", in: app, timeout: 10))
-        XCTAssertTrue(waitForSelectedSurface("You", in: app, timeout: 10))
-        XCTAssertTrue(app.descendants(matching: .any)["insights.history.screen"].waitForExistence(timeout: 10))
+        XCTAssertTrue(waitForShellReady(in: app))
+        XCTAssertFalse(rootDestinationExists("Insights", in: app))
+        XCTAssertFalse(app.descendants(matching: .any)["insights.history.screen"].waitForExistence(timeout: 2))
+        XCTAssertTrue(waitForSelectedSurface("Today", in: app, timeout: 10))
     }
 
-    func testPreviewInsightsMonthlyReviewCanHandOffToTime() throws {
-        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://insights/monthly-review")
+    func testPreviewYouMonthlyReviewCanHandOffToTime() throws {
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://you/monthly-review")
         app.launch()
 
         XCTAssertTrue(app.descendants(matching: .any)["insights.monthly-review.screen"].waitForExistence(timeout: 10))
@@ -981,8 +982,8 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilStaticTextExists("Review shaping", in: app))
     }
 
-    func testPreviewInsightsHistoryRouteCanHandOffToTime() throws {
-        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://insights/history")
+    func testPreviewYouHistoryRouteCanHandOffToTime() throws {
+        let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://you/history")
         app.launch()
 
         XCTAssertTrue(app.descendants(matching: .any)["insights.history.screen"].waitForExistence(timeout: 10))
@@ -1112,7 +1113,7 @@ final class AmbitionsUITests: XCTestCase {
                 scenario: "source-unavailable",
                 contentSize: "UICTContentSizeCategoryM",
                 sheet: nil,
-                required: ["Needs context. Manual planning still works.", "Why this?"]
+                required: ["Needs context. Manual shaping still works.", "Why this?"]
             ),
             (
                 name: "active-recommended-step",
@@ -1208,10 +1209,10 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForClarificationCard(in: app))
     }
 
-    func testLegacyCapturesInboxLaunchKeepsGlobalCaptureComposerReachable() throws {
+    func testCaptureComposerLaunchKeepsGlobalCaptureComposerReachable() throws {
         let app = makeApp(
             bootstrapMode: "preview",
-            launchURL: "ambitions://captures/inbox",
+            launchURL: "ambitions://overlay/quiet-command-sheet?intent=quick_capture",
             extraEnvironment: ["AMBITIONS_UI_SEED_CAPTURES": "1"]
         )
         app.launch()
@@ -1302,7 +1303,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 10))
     }
 
-    func testLegacyMotionRouteDoesNotCreateRootDestination() throws {
+    func testRetiredMotionRouteDoesNotCreateRootDestination() throws {
         let app = makeApp(
             bootstrapMode: "demo",
             launchURL: "ambitions://tab/motion",
@@ -1318,7 +1319,7 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     func testDemoTimeWorkspaceShowsBatch49CoreModules() throws {
-        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
+        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/time")
         app.launch()
 
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
@@ -1365,9 +1366,9 @@ final class AmbitionsUITests: XCTestCase {
                 renderState: "manual-only",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "time.life-shape-field.action.adjust-plan"
+                    "time.life-shape-field.action.adjust-shape"
                 ],
-                requiredTexts: ["Manual Time source", "Adjust plan", "No external calendar source is required"]
+                requiredTexts: ["Manual Time source", "Adjust shape", "No external calendar source is required"]
             ),
             TimeMatrixItem(
                 name: "static-equivalent",
@@ -1393,7 +1394,7 @@ final class AmbitionsUITests: XCTestCase {
         for item in matrix {
             let app = makeApp(
                 bootstrapMode: "demo",
-                launchURL: "ambitions://tab/plan",
+                launchURL: "ambitions://tab/time",
                 extraEnvironment: [
                     "AmbitionsTimeRenderState": item.renderState,
                     "AmbitionsScreenshotMode": "YES"
@@ -1422,7 +1423,8 @@ final class AmbitionsUITests: XCTestCase {
             }
 
             XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "KPI")).firstMatch.exists, "Time must not read as KPI dashboard for \(item.name).")
-            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "capacity")).firstMatch.exists, "Time must not use capacity semantics for \(item.name).")
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "dashboard")).firstMatch.exists, "Time must not read as a dashboard for \(item.name).")
+            XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "calendar grid")).firstMatch.exists, "Time must not become a calendar grid for \(item.name).")
             if item.name == "large-dynamic-type" {
                 scrollTimeContentToCapacityProof(in: app)
             }
@@ -1431,22 +1433,23 @@ final class AmbitionsUITests: XCTestCase {
         }
     }
 
-    func testDemoTimePressureScrubberUpdatesSelectedDayAndReflowDecision() throws {
-        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/plan")
+    func testDemoTimeHorizonControlsAndChangeReviewSeamStayInteractive() throws {
+        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/time")
         app.launch()
 
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
-        XCTAssertTrue(openTimeShapeDepth(in: app))
-        XCTAssertTrue(scrollUntilElementExists("time.pressure-scrubber", in: app, maxAttempts: 40))
-        let scrubPoint = app.buttons["time.scrubber.point.day-2"]
-        XCTAssertTrue(scrubPoint.waitForExistence(timeout: 10))
-        scrubPoint.tap()
-        XCTAssertEqual(scrubPoint.value as? String, "selected")
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.horizon-control", in: app, maxAttempts: 20))
+        let month = app.descendants(matching: .any)["time.life-shape-field.horizon.month"]
+        XCTAssertTrue(month.waitForExistence(timeout: 10))
+        month.tap()
+        XCTAssertEqual(month.value as? String, "selected")
 
-        XCTAssertTrue(scrollUntilElementExists("time.reality-reflow", in: app, maxAttempts: 20))
-        XCTAssertTrue(scrollUntilElementExists("time.reflow-decision", in: app, maxAttempts: 20))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.action.review-pressure", in: app, maxAttempts: 10))
+        app.buttons["time.life-shape-field.action.review-pressure"].tap()
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.change-review-seam", in: app, maxAttempts: 20))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.change-review.accept", in: app, maxAttempts: 20))
     }
 
     private func makeApp(
@@ -2248,34 +2251,6 @@ final class AmbitionsUITests: XCTestCase {
         }
 
         return element.exists
-    }
-
-    private func openTimeShapeDepth(in app: XCUIApplication, timeout: TimeInterval = 10) -> Bool {
-        let expandedAnchor = app.descendants(matching: .any)["time.life-shape-field.drill-down"]
-        let legacyExpandedAnchor = app.descendants(matching: .any)["time.timeline-strip"]
-        if expandedAnchor.waitForExistence(timeout: 1) || legacyExpandedAnchor.waitForExistence(timeout: 1) {
-            return true
-        }
-
-        let disclosure = app.descendants(matching: .any)["time.lifeshape-depth"]
-        let title = app.staticTexts["LifeShape Field depth"]
-        let deadline = Date().addingTimeInterval(timeout)
-
-        while Date() < deadline {
-            if disclosure.waitForExistence(timeout: 1), disclosure.isHittable {
-                disclosure.tap()
-                return expandedAnchor.waitForExistence(timeout: 5) || legacyExpandedAnchor.waitForExistence(timeout: 1)
-            }
-
-            if title.waitForExistence(timeout: 1), title.isHittable {
-                title.tap()
-                return expandedAnchor.waitForExistence(timeout: 5) || legacyExpandedAnchor.waitForExistence(timeout: 1)
-            }
-
-            scrollPageUp(in: app)
-        }
-
-        return expandedAnchor.exists || legacyExpandedAnchor.exists
     }
 
     private func scrollUntilStaticTextExists(_ label: String, in app: XCUIApplication, maxAttempts: Int = 5) -> Bool {

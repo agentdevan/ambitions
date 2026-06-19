@@ -33,7 +33,7 @@ final class ClosureRecoveryPrimitiveFamilyTests: XCTestCase {
         let root = repoRoot()
         let todayClosureSource = try source("Native/Ambitions/Features/Today/TodayActionClosureSheet.swift", root: root)
         let todayPanelsSource = try source("Native/Ambitions/Features/Today/TodayPanels.swift", root: root)
-        let habitsSource = try source("Native/Ambitions/Features/Habits/HabitComponents.swift", root: root)
+        let habitsSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TimeRitualViews.swift", root: root)
         let richPanelSource = try source("Sources/Components/RichPanelPrimitives.swift", root: root)
         let canonicalSource = try source("Sources/Components/AmbitionsV2CanonicalComponents.swift", root: root)
         let tactileSource = try source("Sources/Components/AmbitionsExtendedTactileKit.swift", root: root)

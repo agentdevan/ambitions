@@ -4,7 +4,7 @@ import XCTest
 final class HabitsFeatureServiceTests: XCTestCase {
     func testLoadDashboardFromEmptyRepositoriesShowsEmptyMode() async throws {
         let repositories = try await makeRepositories()
-        let service = RepositoryBackedHabitsService(repositories: repositories)
+        let service = RepositoryBackedTimeRitualsService(repositories: repositories)
 
         let dashboard = try await service.loadDashboard(now: .now)
 
@@ -16,7 +16,7 @@ final class HabitsFeatureServiceTests: XCTestCase {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
-        let service = RepositoryBackedHabitsService(repositories: repositories)
+        let service = RepositoryBackedTimeRitualsService(repositories: repositories)
         let habitGoals = try await repositories.goals.listHabitGoals()
         let goal = try XCTUnwrap(habitGoals.first)
         let step = try XCTUnwrap(HabitGoalSemantics.preferredStep(in: goal))
@@ -47,7 +47,7 @@ final class HabitsFeatureServiceTests: XCTestCase {
         #if DEBUG
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
-        let service = RepositoryBackedHabitsService(repositories: repositories)
+        let service = RepositoryBackedTimeRitualsService(repositories: repositories)
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
         let now = try XCTUnwrap(formatter.date(from: GoalEngineFixtures.fixedNow))

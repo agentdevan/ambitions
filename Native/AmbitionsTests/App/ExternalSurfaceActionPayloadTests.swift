@@ -26,13 +26,13 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
     func testCanonicalURLsUseStableRoutesOnly() throws {
         let goalURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .goalDetail, goalID: "goal-123"))
         let todayURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today"))
-        let capturesURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .captureInbox))
+        let capturesURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .captureComposer))
         let widgetURL = try XCTUnwrap(ExternalSurfaceActionPayload.deepLinkURL(surface: .tab, tab: "today", origin: .widget))
         let fallbackURL = try XCTUnwrap(ExternalSurfaceActionPayload.safeDeepLinkURL(surface: .goalDetail, goalID: nil, origin: .widget))
 
         XCTAssertEqual(goalURL.absoluteString, "ambitions://goal/goal-123")
         XCTAssertEqual(todayURL.absoluteString, "ambitions://tab/today")
-        XCTAssertEqual(capturesURL.absoluteString, "ambitions://captures/inbox")
+        XCTAssertEqual(capturesURL.absoluteString, "ambitions://overlay/quiet-command-sheet?intent=quick_capture")
         XCTAssertEqual(widgetURL.absoluteString, "ambitions://tab/today?origin=widget")
         XCTAssertEqual(fallbackURL.absoluteString, "ambitions://tab/today?origin=widget")
         XCTAssertFalse(goalURL.absoluteString.contains("Private"))
@@ -176,8 +176,8 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         let safeCapture = ExternalObjectReopeningCandidate(
             kind: .capture,
             id: "capture-safe",
-            title: "Review inbox",
-            detail: "Capture waiting for review",
+            title: "Review held input",
+            detail: "Capture waiting for placement",
             captureID: "capture-safe",
             isSensitive: false
         )
@@ -195,9 +195,9 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertFalse(records[0].title.contains("Therapy"))
         XCTAssertFalse(records[0].contentDescription.contains("therapist"))
 
-        XCTAssertEqual(records[1].title, "Review inbox")
-        XCTAssertEqual(records[1].contentDescription, "Capture waiting for review")
-        XCTAssertEqual(records[1].routeURL.absoluteString, "ambitions://captures/inbox?origin=spotlight&captureID=capture-safe")
+        XCTAssertEqual(records[1].title, "Review held input")
+        XCTAssertEqual(records[1].contentDescription, "Capture waiting for placement")
+        XCTAssertEqual(records[1].routeURL.absoluteString, "ambitions://overlay/quiet-command-sheet?intent=quick_capture&origin=spotlight&captureID=capture-safe")
     }
 
     func testAFRI029IndexRecordsCoverGoalsStepsReceiptsAndCaptures() {
@@ -273,14 +273,12 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(records.map(\.title), [
             "Reality Meridian",
             "Direction Atlas",
-            "Atmosphere Composer",
             "LifeShape Field",
             "Personal system"
         ])
         XCTAssertEqual(records.map(\.rootFallbackURL.absoluteString), [
             "ambitions://tab/today",
             "ambitions://tab/goals",
-            "ambitions://tab/capture",
             "ambitions://tab/time",
             "ambitions://tab/you"
         ])
@@ -328,7 +326,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
             ),
             ExternalObjectContinuationToken(
                 kind: .capture,
-                root: .capture,
+                root: .today,
                 goalID: nil,
                 stepID: nil,
                 receiptID: nil,
@@ -373,7 +371,7 @@ final class ExternalSurfaceActionPayloadTests: XCTestCase {
         XCTAssertEqual(tokens[0].routeURL(origin: .spotlight)?.absoluteString, "ambitions://goal/goal-123?origin=spotlight")
         XCTAssertEqual(tokens[1].routeURL(origin: .spotlight)?.absoluteString, "ambitions://goal/goal-123?origin=spotlight&stepID=step-456")
         XCTAssertEqual(tokens[2].routeURL(origin: .spotlight)?.absoluteString, "ambitions://tab/today?origin=spotlight")
-        XCTAssertEqual(tokens[3].routeURL(origin: .spotlight)?.absoluteString, "ambitions://captures/inbox?origin=spotlight&captureID=capture-321")
+        XCTAssertEqual(tokens[3].routeURL(origin: .spotlight)?.absoluteString, "ambitions://overlay/quiet-command-sheet?intent=quick_capture&origin=spotlight&captureID=capture-321")
         XCTAssertEqual(fallbackGoalWithIDs.routeURL(origin: .spotlight)?.absoluteString, "ambitions://tab/goals?origin=spotlight")
         XCTAssertEqual(fallbackReceiptWithIDs.routeURL(origin: .spotlight)?.absoluteString, "ambitions://tab/today?origin=spotlight")
 

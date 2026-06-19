@@ -25,12 +25,6 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertNil(AppTab(rawValue: "profile"))
         XCTAssertNil(AppTab(rawValue: "habits"))
         XCTAssertNil(AppTab(rawValue: "insights"))
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "captures"), .today)
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "pulse"), .today)
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "plan"), .time)
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "profile"), .you)
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "habits"), .time)
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "insights"), .you)
         XCTAssertEqual(AppTab.time.canonicalTopLevelTab, .time)
         XCTAssertEqual(AppTab.you.canonicalTopLevelTab, .you)
         XCTAssertEqual(AppTab.time.rawValue, "time")
@@ -215,7 +209,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertTrue(chrome.safeAreaLabel.contains("safe areas"))
         XCTAssertTrue(chrome.rollbackLabel.contains("Train 3 Stage shell commit"))
         XCTAssertFalse(chrome.rollbackLabel.contains("--ambitions-shell"))
-        XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("timeState"))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("AI confidence"))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("sixth"))
     }
@@ -255,29 +249,10 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testLegacyCapturePreferenceLoadsIntoTodayCompatibilityFallback() {
-        let navigation = AppNavigationModel(legacyTabRawValue: "capture")
-
-        XCTAssertEqual(navigation.selectedTab, .today)
-        XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertTrue(navigation.youPath.isEmpty)
-    }
-
-    @MainActor
-    func testLegacyCapturesPreferenceLoadsIntoTodayCompatibilityFallback() {
-        let navigation = AppNavigationModel(legacyTabRawValue: "captures")
-
-        XCTAssertEqual(navigation.selectedTab, .today)
-        XCTAssertNil(navigation.activeOverlay)
-        XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
-    }
-
-    @MainActor
-    func testOpenCapturesInboxPresentsGlobalCaptureOverlayWithoutSelectingCapture() {
+    func testOpenCaptureComposerPresentsGlobalCaptureOverlayWithoutSelectingCapture() {
         let navigation = AppNavigationModel(selectedTab: .time)
 
-        navigation.openCapturesInbox()
+        navigation.openCaptureComposer()
 
         XCTAssertEqual(navigation.selectedTab, .time)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
@@ -289,10 +264,10 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testTimeRouteCaptureInboxIsCompatibilityOverlayOnly() {
+    func testCaptureComposerDoesNotCreateTimeRoute() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
-        navigation.openTimeRoute(.captureInbox)
+        navigation.openCaptureComposer()
 
         XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
@@ -302,16 +277,7 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
-    func testNavigationInitializesLegacyHabitsPreferenceIntoTimeHabitsRoute() {
-        let navigation = AppNavigationModel(legacyTabRawValue: "habits")
-
-        XCTAssertEqual(navigation.selectedTab, .time)
-        XCTAssertEqual(navigation.timePath, [.habits])
-        XCTAssertTrue(navigation.youPath.isEmpty)
-    }
-
-    @MainActor
-    func testLegacyHabitsSelectionPreservesRitualTimeSemanticsWithoutDuplicateDestination() {
+    func testHabitsRouteStaysUnderTimeWithoutDuplicateDestination() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
         navigation.openTimeRoute(.habits)
@@ -321,24 +287,12 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertTrue(navigation.youPath.isEmpty)
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "plan"), .time)
         XCTAssertEqual(AppTab.time.rawValue, "time")
         XCTAssertEqual(AppTab.time.title, "Time")
     }
 
     @MainActor
-    func testNavigationInitializesLegacyInsightsPreferenceIntoYouSupportRoute() {
-        let navigation = AppNavigationModel(legacyTabRawValue: "insights")
-
-        XCTAssertEqual(navigation.selectedTab, .you)
-        XCTAssertEqual(navigation.youPath, [.history])
-        XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "insights"), .you)
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
-    }
-
-    @MainActor
-    func testLegacyInsightsSelectionPreservesYouCanonWithoutDuplicateDestination() {
+    func testHistoryRouteStaysUnderYouWithoutDuplicateDestination() {
         let navigation = AppNavigationModel(selectedTab: .today)
 
         navigation.openYouRoute(.history)
@@ -349,26 +303,6 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
         XCTAssertEqual(AppTab.time.title, "Time")
-    }
-
-    @MainActor
-    func testLegacyPulsePreferenceLoadsIntoMotionCompatibilityOnly() {
-        let navigation = AppNavigationModel(legacyTabRawValue: "pulse")
-
-        XCTAssertEqual(navigation.selectedTab, .today)
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("pulse"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Pulse"))
-    }
-
-    @MainActor
-    func testLegacyMotionPreferenceLoadsIntoTodayCompatibilityFallback() {
-        let navigation = AppNavigationModel(legacyTabRawValue: "motion")
-
-        XCTAssertEqual(navigation.selectedTab, .today)
-        XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertTrue(navigation.youPath.isEmpty)
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("motion"))
-        XCTAssertEqual(LegacyIARouteCompatibility.canonicalTab(forRawTab: "motion"), .today)
     }
 
     @MainActor
@@ -581,49 +515,6 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.takeTodayEntryContext(), .standard)
     }
 
-    func testStoredLegacyPreferredTabsLoadIntoCanonicalPreferences() async throws {
-        let store = try AmbitionsPersistenceStore(inMemory: true)
-        let appState = SwiftDataAppStateRepository(store: store)
-        let state = try legacyAppStateSnapshot(preferredTabRawValue: "habits")
-        try await appState.saveState(state)
-
-        let preferences = try await RepositoryBackedAppPreferencesStore(appStateRepository: appState).loadPreferences()
-
-        XCTAssertEqual(preferences.preferredTab, .time)
-    }
-
-    func testStoredLegacyProfilePreferredTabLoadsIntoYouSurfaceCompatibility() async throws {
-        let store = try AmbitionsPersistenceStore(inMemory: true)
-        let appState = SwiftDataAppStateRepository(store: store)
-        let state = try legacyAppStateSnapshot(preferredTabRawValue: "profile")
-        try await appState.saveState(state)
-
-        let preferences = try await RepositoryBackedAppPreferencesStore(appStateRepository: appState).loadPreferences()
-
-        XCTAssertEqual(preferences.preferredTab, .you)
-        XCTAssertEqual(preferences.preferredTab.title, "You")
-        XCTAssertEqual(preferences.preferredTab.rawValue, "you")
-    }
-
-    private func legacyAppStateSnapshot(preferredTabRawValue: String) throws -> AppStateSnapshot {
-        let encoded = """
-        {
-          "id": "app_state.default",
-          "preferredTab": "\(preferredTabRawValue)",
-          "userDisplayName": "",
-          "appearancePreference": "system",
-          "accentFamily": "sage",
-          "reviewCadenceDays": 7,
-          "localOnlyModeEnabled": true,
-          "hasCompletedBootstrap": false,
-          "hasCompletedOnboarding": false,
-          "onboardingVersion": 1,
-          "goalPriorityOrder": []
-        }
-        """
-        return try JSONDecoder().decode(AppStateSnapshot.self, from: Data(encoded.utf8))
-    }
-
     @MainActor
     func testDemoTodaySurfaceProvidesGoalDetailRouteThatOpensInGoalsShell() async throws {
         let container = try await demoContainer()
@@ -656,8 +547,8 @@ final class AppShellNavigationTests: XCTestCase {
     @MainActor
     func testDemoTimeSurfaceProvidesGoalDetailRouteThatOpensInGoalsShell() async throws {
         let container = try await demoContainer()
-        let dashboard = try await container.timeService.loadTimeDashboard(now: .now)
-        let target = try XCTUnwrap(dashboard.goalShapingItems.first?.target)
+        let timeState = try await container.timeService.loadTimeSurfaceState(now: .now)
+        let target = try XCTUnwrap(timeState.goalShapingItems.first?.target)
 
         _ = try await container.goalsService.loadDetail(target: target)
         container.navigation.openGoalDetail(target)
@@ -669,8 +560,8 @@ final class AppShellNavigationTests: XCTestCase {
     @MainActor
     func testDemoInsightsSurfaceProvidesGoalDetailRouteThatOpensInGoalsShell() async throws {
         let container = try await demoContainer()
-        let dashboard = try await container.insightsService.loadInsightsDashboard()
-        let target = try XCTUnwrap(dashboard.goalStatuses.first?.target)
+        let timeState = try await container.insightsService.loadInsightsDashboard()
+        let target = try XCTUnwrap(timeState.goalStatuses.first?.target)
 
         _ = try await container.goalsService.loadDetail(target: target)
         container.navigation.openGoalDetail(target)

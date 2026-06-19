@@ -14,9 +14,9 @@ final class FrontendRecoveryGateTests: XCTestCase {
     func testIR01VisibleRecoveryCopyAvoidsObsoleteRootLabelsAndConfidenceTheater() throws {
         let checkedFiles = [
             "Native/Ambitions/Features/Today/TodayScreen.swift",
-            "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+            "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
             "Native/Ambitions/Features/Goals/GoalsScreen.swift",
-            "Native/Ambitions/Features/Time/TimeScreen.swift",
+            "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
             "Native/Ambitions/Features/You/YouRootSurface.swift"
         ]
 
@@ -43,9 +43,9 @@ final class FrontendRecoveryGateTests: XCTestCase {
             ("Native/Ambitions/Features/Today/TodayScreen.swift", "RealityMeridianView"),
             ("Native/Ambitions/Features/Today/TodayScreen.swift", "TodayExecutionDepthDisclosure"),
             ("Native/Ambitions/Features/Goals/GoalsScreen.swift", "GoalsDirectionDepthDisclosure"),
-            ("Native/Ambitions/Features/Capture/CaptureScreen.swift", "AtmosphereComposerCanvas"),
-            ("Native/Ambitions/Features/Capture/CaptureScreen.swift", "CaptureDepthDisclosure"),
-            ("Native/Ambitions/Features/Time/TimeScreen.swift", "TimeShapeDepthDisclosure"),
+            ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "AtmosphereComposerCanvas"),
+            ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "CaptureDepthDisclosure"),
+            ("Native/Ambitions/Surfaces/Time/TimeSurface.swift", "LifeShapeFieldView"),
             ("Native/Ambitions/Features/You/YouRootSurface.swift", "User System Profile")
         ]
 
@@ -58,7 +58,7 @@ final class FrontendRecoveryGateTests: XCTestCase {
     func testIR01TopLevelRecoveryCopyStaysOnActiveCanon() throws {
         let filePaths = [
             "Native/Ambitions/Features/Goals/GoalsScreen.swift",
-            "Native/Ambitions/Features/Time/TimeScreen.swift",
+            "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
             "Native/Ambitions/Features/You/YouRootSurface.swift",
             "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift"
         ]

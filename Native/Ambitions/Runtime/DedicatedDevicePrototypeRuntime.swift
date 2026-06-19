@@ -137,7 +137,7 @@ struct DedicatedDevicePrototypeRuntime {
                     descriptor: descriptor,
                     disposition: .deviceSafeQuickAction
                 )
-            case .openGoal, .openToday, .openCapturesInbox, .openMemoryLens:
+            case .openGoal, .openToday, .openCaptureComposer, .openMemoryLens:
                 return DedicatedDevicePrototypeCommandOption(
                     descriptor: descriptor,
                     disposition: .fallbackToPhone
@@ -155,8 +155,8 @@ struct DedicatedDevicePrototypeRuntime {
             return .openGoalDetail(goalID: goalID)
         case .openToday:
             return .openToday
-        case .openCapturesInbox:
-            return .openCapturesInbox
+        case .openCaptureComposer:
+            return .openCaptureComposer
         case .openMemoryLens:
             return .openMemoryLens
         case .complete, .delay, .snooze, .askForSmallerStep, .unsupported(_):
@@ -173,7 +173,7 @@ private extension DedicatedDevicePrototypeProjection {
                  (.snooze, .snooze),
                  (.openGoal, .openGoal),
                  (.openToday, .openToday),
-                 (.openCapturesInbox, .openCapturesInbox),
+                 (.openCaptureComposer, .openCaptureComposer),
                  (.openMemoryLens, .openMemoryLens):
                 return true
             case (.delay, _),
@@ -183,7 +183,7 @@ private extension DedicatedDevicePrototypeProjection {
                  (.snooze, _),
                  (.openGoal, _),
                  (.openToday, _),
-                 (.openCapturesInbox, _),
+                 (.openCaptureComposer, _),
                  (.openMemoryLens, _):
                 return false
             }

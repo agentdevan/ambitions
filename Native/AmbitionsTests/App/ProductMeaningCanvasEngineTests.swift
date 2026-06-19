@@ -39,8 +39,8 @@ final class ProductMeaningCanvasEngineTests: XCTestCase {
     func testAMB583ActiveSurfacesUseSharedCanvasEngine() throws {
         let root = repoRoot()
         let goalsSource = try source("Native/Ambitions/Features/Goals/GoalComponents.swift", root: root)
-        let timeSource = try source("Native/Ambitions/Features/Time/TimeLifeShapeField.swift", root: root)
-        let motionSource = try source("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift", root: root)
+        let timeSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let motionSource = try source("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift", root: root)
 
         XCTAssertTrue(goalsSource.contains("ProductMeaningCanvasEngine("))
         XCTAssertTrue(goalsSource.contains("role: .goalsRelationship"))

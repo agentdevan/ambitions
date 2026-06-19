@@ -265,9 +265,8 @@ struct AmbitionsOSLongevityArchivePlan: Codable, Sendable, Equatable, Hashable, 
             "cloud ready",
             "done forever",
             "failed goal",
-            "no longer matters",
-            "ai confidence"
-        ]
+            "no longer matters"
+        ] + ForbiddenTopLevelTerms.terms.map { $0.lowercased() }
         let combined = surfaceLanguageSamples.joined(separator: " ").lowercased()
         return blocked.contains { combined.contains($0) }
     }

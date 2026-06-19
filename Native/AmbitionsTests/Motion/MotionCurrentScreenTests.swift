@@ -6,16 +6,16 @@ final class MotionCurrentScreenTests: XCTestCase {
     func testAMB574MotionObjectStagePrimitiveContractReplacesLanePanels() throws {
         let contract = MotionObjectStagePrimitiveContract.current
         let source = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift"),
             encoding: .utf8
         )
 
-        XCTAssertEqual(contract.primitiveID, "motion-object-stage")
-        XCTAssertEqual(contract.ownerSurface, "Motion")
-        XCTAssertEqual(contract.productObject, "Motion Current")
-        XCTAssertEqual(contract.screenshotIdentifier, "MotionObjectStage")
+        XCTAssertEqual(contract.primitiveID, "stage-motion-current")
+        XCTAssertEqual(contract.ownerSurface, "Stage Motion")
+        XCTAssertEqual(contract.productObject, "Stage Motion")
+        XCTAssertEqual(contract.screenshotIdentifier, "StageMotionCurrent")
         XCTAssertTrue(contract.firstViewportAvoidsAnalyticsReportCardDashboardOutput)
-        XCTAssertTrue(contract.reservesTabBarClearance)
+        XCTAssertFalse(contract.reservesTabBarClearance)
         XCTAssertEqual(contract.sourceTrustLineOrder, ["source", "proof", "receipt", "re-entry action"])
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("lane cards"))
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("trace pills"))
@@ -25,7 +25,7 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(source.contains("fieldTexture"))
         XCTAssertTrue(source.contains("MotionFieldRhythmSpine("))
         XCTAssertTrue(source.contains("motion.current.rhythm-spine"))
-        XCTAssertTrue(source.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertFalse(source.contains(".safeAreaInset(edge: .bottom"))
         XCTAssertTrue(source.contains("Color.clear"))
         XCTAssertTrue(source.contains(".overlay(alignment: .leading)"))
         XCTAssertFalse(source.contains("theme.colors.canvasElevated.opacity(0.92)"))
@@ -181,7 +181,7 @@ final class MotionCurrentScreenTests: XCTestCase {
 
     func testAMB965MotionReconstructionExposesProofReceiptAndReentryActions() throws {
         let source = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift"),
             encoding: .utf8
         )
         let allCopy = MotionCurrentProjection.fixture.allUserFacingCopy

@@ -103,8 +103,8 @@ struct SmartAttachmentCaptureAdapter: Sendable {
                 resultState: .savedStandalone,
                 confidence: .medium,
                 selectedCandidate: standaloneCandidate(routeType: .task, placementLabel: "Today"),
-                receiptLine: "Saved as Task · Today",
-                explanation: "Saved as a standalone Task without creating a Goal or calendar event.",
+                receiptLine: "Saved as Step · Today",
+                explanation: "Saved as a standalone Step without creating a Goal or calendar event.",
                 actions: [.change, .goal, .idea],
                 privacyLevel: .privateItem
             )

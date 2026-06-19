@@ -114,7 +114,7 @@ struct RuntimeContextSnapshot: Sendable, Equatable {
 enum RuntimeRouteRequest: Codable, Sendable, Equatable {
     case openToday
     case openGoalDetail(goalID: String)
-    case openCapturesInbox
+    case openCaptureComposer
     case openMemoryLens
     case presentOverlay(ShellOverlayState)
 }

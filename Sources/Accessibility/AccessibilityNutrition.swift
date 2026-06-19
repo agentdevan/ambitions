@@ -62,7 +62,7 @@ public enum AccessibilityNutritionCategory: String, CaseIterable, Identifiable, 
         case .cognitiveLoad:
             "Verify top-level screens preserve one dominant decision and keep audit, history, and explanation density behind disclosure."
         case .oneHandedUsability:
-            "Verify frequent Today, Capture, Plan, and recovery actions remain reachable without precision stretching."
+            "Verify frequent Today, Capture, Time, and recovery actions remain reachable without precision stretching."
         case .plainLanguageLabels:
             "Verify user-visible and assistive labels avoid internal model terms and describe the useful outcome plainly."
         case .noShameOrGuiltStates:
@@ -351,7 +351,7 @@ public enum EB28PlainLanguageExplanationEvidence {
             axis: .plainLanguageCopy,
             ownerFile: "docs/canon/PXOS_Copy_Language_And_Explanation_System.md",
             automatedProofTarget: "Native/AmbitionsTests/App/AccessibilityNutritionChecklistTests.swift",
-            requiredPattern: "Use Start here, Recommended step, Adjust plan, Why this?, and Based on... labels.",
+            requiredPattern: "Use Start here, Recommended step, Adjust shape, Why this?, and Based on... labels.",
             forbiddenPattern: "No model jargon, confidence scores, generic dashboards, hustle copy, or fake certainty."
         ),
         AccessibilityPlainLanguageRequirement(
@@ -435,13 +435,13 @@ public enum EB29InputAlternativeEvidence {
         "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md",
         "docs/codex/batches/EB29_Voice_First_Operation_And_Motor_Accessibility_Prompt.md",
         "docs/canon/PXOS_Accessibility_Cognitive_Load_And_Emotional_Safety.md",
-        "Native/Ambitions/Features/Capture/CaptureScreen.swift"
+        "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift"
     ]
 
     public static let requirements: [AccessibilityInputAlternativeRequirement] = [
         AccessibilityInputAlternativeRequirement(
             axis: .voiceFirstCapture,
-            ownerFile: "Native/Ambitions/Features/Capture/CaptureScreen.swift",
+            ownerFile: "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
             automatedProofTarget: "Native/AmbitionsTests/Capture/CaptureViewModelTests.swift",
             requiredAlternative: "Voice capture must have visible review, edit, place, and cancel controls before any routing or memory effect.",
             privacyBoundary: "No transcript, recording, or sensitive capture is stored or routed without user-visible review."
@@ -473,7 +473,7 @@ public enum EB29InputAlternativeEvidence {
 
 public enum AccessibilityOverloadAdaptationAxis: String, CaseIterable, Identifiable, Sendable {
     case overloadedToday
-    case overloadedPlan
+    case overloadedTimeShape
     case lowLoadRecovery
 
     public var id: String { rawValue }
@@ -481,7 +481,7 @@ public enum AccessibilityOverloadAdaptationAxis: String, CaseIterable, Identifia
     public var title: String {
         switch self {
         case .overloadedToday: "Overloaded Today"
-        case .overloadedPlan: "Overloaded Plan"
+        case .overloadedTimeShape: "Overloaded Time"
         case .lowLoadRecovery: "Low-load recovery"
         }
     }
@@ -494,7 +494,7 @@ public struct AccessibilityOverloadAdaptationRequirement: Identifiable, Hashable
     public let requiredAdaptation: String
     public let forbiddenAdaptation: String
     public let requiresUserControl: Bool
-    public let changesTodayOrPlanBehavior: Bool
+    public let changesTodayOrTimeBehavior: Bool
     public let releaseClaimAllowed: Bool
 
     public var id: AccessibilityOverloadAdaptationAxis { axis }
@@ -506,7 +506,7 @@ public struct AccessibilityOverloadAdaptationRequirement: Identifiable, Hashable
         requiredAdaptation: String,
         forbiddenAdaptation: String,
         requiresUserControl: Bool = true,
-        changesTodayOrPlanBehavior: Bool = false,
+        changesTodayOrTimeBehavior: Bool = false,
         releaseClaimAllowed: Bool = false
     ) {
         self.axis = axis
@@ -515,7 +515,7 @@ public struct AccessibilityOverloadAdaptationRequirement: Identifiable, Hashable
         self.requiredAdaptation = requiredAdaptation
         self.forbiddenAdaptation = forbiddenAdaptation
         self.requiresUserControl = requiresUserControl
-        self.changesTodayOrPlanBehavior = changesTodayOrPlanBehavior
+        self.changesTodayOrTimeBehavior = changesTodayOrTimeBehavior
         self.releaseClaimAllowed = releaseClaimAllowed
     }
 }
@@ -528,7 +528,7 @@ public enum EB30OverloadAdaptationEvidence {
         "docs/codex/batches/EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt.md",
         "Sources/Theme/PanelDensitySize.swift",
         "Native/Ambitions/Features/Today/TodayScreen.swift",
-        "Native/Ambitions/Features/Plan/PlanScreen.swift"
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift"
     ]
 
     public static let requirements: [AccessibilityOverloadAdaptationRequirement] = [
@@ -540,10 +540,10 @@ public enum EB30OverloadAdaptationEvidence {
             forbiddenAdaptation: "No shame copy, red backlog pileup, hidden rescheduling, or dashboard-style overload stack."
         ),
         AccessibilityOverloadAdaptationRequirement(
-            axis: .overloadedPlan,
-            ownerFile: "Native/Ambitions/Features/Plan/PlanScreen.swift",
-            automatedProofTarget: "Native/AmbitionsTests/Plan/PlanFeatureServiceTests.swift",
-            requiredAdaptation: "Overloaded Plan must explain pressure in plain language and preserve user-approved adjustment paths.",
+            axis: .overloadedTimeShape,
+            ownerFile: "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+            automatedProofTarget: "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift",
+            requiredAdaptation: "Overloaded Time must explain pressure in plain language and preserve user-approved adjustment paths.",
             forbiddenAdaptation: "No automatic calendar mutation, impossible-week optimism, or guilt framing."
         ),
         AccessibilityOverloadAdaptationRequirement(
@@ -555,8 +555,8 @@ public enum EB30OverloadAdaptationEvidence {
         )
     ]
 
-    public static var changesTodayOrPlanBehavior: Bool {
-        requirements.contains(where: \.changesTodayOrPlanBehavior)
+    public static var changesTodayOrTimeBehavior: Bool {
+        requirements.contains(where: \.changesTodayOrTimeBehavior)
     }
 
     public static var releaseClaimsAllowed: Bool {
@@ -638,8 +638,8 @@ public enum AccessibilityNutritionChecklist {
             screenAudit("you", "You", "tab.you", "You", source: "Native/Ambitions/Features/You/YouScreen.swift", tests: "Native/AmbitionsTests/You"),
             screenAudit("grouped-navigation-list", "GroupedNavigationList", "component.grouped-navigation-list", "Design System", source: "Sources/Components/GroupedNavigationList.swift", tests: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"),
             screenAudit("goal-detail", "Goal Detail", "goals.detail", "Goals", source: "Native/Ambitions/Features/Goals/GoalDetailScreen.swift", tests: "Native/AmbitionsTests/Goals"),
-            screenAudit("capture", "Capture", "tab.capture", "Capture", source: "Native/Ambitions/Features/Capture/CaptureScreen.swift", tests: "Native/AmbitionsTests/Capture"),
-            screenAudit("time", "Time", "tab.time", "Time", source: "Native/Ambitions/Features/Time/TimeScreen.swift", tests: "Native/AmbitionsTests/Time"),
+            screenAudit("capture-composer", "Capture Composer", "overlay.capture-composer", "Composer / Capture", source: "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", tests: "Native/AmbitionsTests/Capture"),
+            screenAudit("time", "Time", "tab.time", "Time", source: "Native/Ambitions/Surfaces/Time/TimeSurface.swift", tests: "Native/AmbitionsTests/Time"),
             screenAudit("trust-center-what-ambitions-knows", "Trust Center / What Ambitions Knows", "you.trust.memory", "You", source: "Native/Ambitions/Features/You/YouScreen.swift", tests: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift"),
             screenAudit("quiet-command-sheet-smart-attachment", "Quiet Command Sheet / Smart Attachment", "shell.command-sheet", "Shell / Capture", source: "Native/Ambitions/App/AppShellView.swift", tests: "Native/AmbitionsUITests/AmbitionsUITests.swift"),
             screenAudit("goals", "Goals", "tab.goals", "Goals", source: "Native/Ambitions/Features/Goals/GoalsScreen.swift", tests: "Native/AmbitionsTests/Goals"),
@@ -738,7 +738,6 @@ public enum AFI12AccessibilityStateProof {
     public static let activeTopLevelSurfaces = [
         "Today",
         "Goals",
-        "Motion",
         "Time",
         "You"
     ]
@@ -773,17 +772,6 @@ public enum AFI12AccessibilityStateProof {
             manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, contrast, and motor review remain required."
         ),
         AFI12AccessibilitySurfaceProof(
-            id: "afi12-motion",
-            surface: "Motion",
-            primaryObject: "Motion Current",
-            voiceOverSummary: "Motion. Motion Current names activity path, source, proof density, trust links, and what to focus next.",
-            dynamicTypeFallback: "Large text keeps Motion Current path, trace summary, trust route, and primary action before detail.",
-            reduceMotionFallback: "Motion traces become static path and proof summary states with explicit next-action confirmation.",
-            nonColorStateSupport: "Active, blocked, stalled, pending, and recovery states require labels, symbols, and line-order cues.",
-            trustReceiptPath: "Motion Current routes to Goal and Time proofs before closure so source and receipt remain visible without motion.",
-            manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, contrast, and motor review remain required."
-        ),
-        AFI12AccessibilitySurfaceProof(
             id: "afi12-time",
             surface: "Time",
             primaryObject: "LifeShape Field",
@@ -809,9 +797,9 @@ public enum AFI12AccessibilityStateProof {
 
     public static let captureSurfaceProof: AFI12AccessibilitySurfaceProof = AFI12AccessibilitySurfaceProof(
         id: "afi12-capture",
-        surface: "Capture",
+        surface: "Capture Composer",
         primaryObject: "Atmosphere Composer",
-        voiceOverSummary: "Capture. Atmosphere Composer names input purpose, text or voice action, route result, uncertainty, and correction path.",
+        voiceOverSummary: "Capture Composer. Atmosphere Composer names input purpose, text or voice action, route result, uncertainty, and correction path.",
         dynamicTypeFallback: "The composer, add action, route result, and correction choices stay visible before ambient detail.",
         reduceMotionFallback: "Suggested path becomes static Needs a Place, Ready to Place, or Grow into Goal state text.",
         nonColorStateSupport: "Route confidence, private item, needs-place, and correction states require labels and visible controls.",
@@ -819,12 +807,24 @@ public enum AFI12AccessibilityStateProof {
         manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, keyboard, contrast, and motor review remain required."
     )
 
+    public static let motionBehaviorProof: AFI12AccessibilitySurfaceProof = AFI12AccessibilitySurfaceProof(
+        id: "afi12-stage-motion",
+        surface: "Stage Motion",
+        primaryObject: "Stage Motion",
+        voiceOverSummary: "Stage Motion behavior announces activity path, source, proof density, trust links, and focus recovery without becoming a destination.",
+        dynamicTypeFallback: "Large text keeps path, trace summary, trust route, and primary action before detail.",
+        reduceMotionFallback: "Motion traces become static path and proof summary states with explicit next-action confirmation.",
+        nonColorStateSupport: "Active, blocked, stalled, pending, and recovery states require labels, symbols, and line-order cues.",
+        trustReceiptPath: "Stage Motion routes to Goal and Time proofs before closure so source and receipt remain visible without a Motion surface.",
+        manualProofStillRequired: "Manual VoiceOver, Dynamic Type screenshot, Reduce Motion walkthrough, contrast, and motor review remain required."
+    )
+
     public static var missingActiveSurfaceProofs: [String] {
         let covered = Set(surfaceProofs.map(\.surface))
         return activeTopLevelSurfaces.filter { covered.contains($0) == false }
     }
 
-    public static var containsPlanTopLevelProof: Bool {
+    public static var containsRetiredPlanTopLevelProof: Bool {
         surfaceProofs.contains { $0.surface == "Plan" || $0.primaryObject == "Plan" }
     }
 }

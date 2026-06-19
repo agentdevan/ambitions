@@ -1844,7 +1844,7 @@ final class YouFeatureServiceTests: XCTestCase {
         }))
         XCTAssertTrue(history.items.contains(where: {
             $0.category == .changes &&
-            $0.sourceLabel == "Source: Plan" &&
+            $0.sourceLabel == "Source: Time" &&
             $0.privacyLabel == "Private detail hidden" &&
             $0.reviewLabel == "Review context"
         }))

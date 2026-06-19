@@ -64,8 +64,8 @@ struct ExternalWidgetProjection: Sendable, Equatable {
             ambientState.captureEntry,
             ambientState.recovery,
         ].compactMap(\.self)
-        let compatibilityRows = [ambientState.today, ambientState.focus, ambientState.goal, ambientState.plan]
-        return (flagshipRows + compatibilityRows)
+        let baselineRows = [ambientState.today, ambientState.focus, ambientState.goal, ambientState.timeShape]
+        return (flagshipRows + baselineRows)
             .sorted { prominenceRank($0.prominence) > prominenceRank($1.prominence) }
             .map {
                 VariantRow(
@@ -133,7 +133,7 @@ struct ExternalWidgetProjection: Sendable, Equatable {
         case .waiting:
             return "Open Ambitions for the next useful step."
         case .empty:
-            return "Open Ambitions to refresh your plan."
+            return "Open Ambitions to refresh your Time shape."
         case .active, .recovery:
             return urgencyLabel(glance.urgency)
         }

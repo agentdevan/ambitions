@@ -114,10 +114,11 @@ enum AmbitionsRuntimeFactory {
             todayService: todayService,
             goalsService: goalsService,
             captureService: captureService,
-            habitsService: RepositoryBackedHabitsService(repositories: repositories),
+            habitsService: RepositoryBackedTimeRitualsService(repositories: repositories),
             timeService: RepositoryBackedTimeService(
                 repositories: repositories,
-                calendarRealityService: calendarRemindersService as? any CalendarRealityServicing
+                calendarRealityService: calendarRemindersService as? any CalendarRealityServicing,
+                calendar: clock.calendar
             ),
             insightsService: RepositoryBackedInsightsService(repositories: repositories),
             youService: youService,

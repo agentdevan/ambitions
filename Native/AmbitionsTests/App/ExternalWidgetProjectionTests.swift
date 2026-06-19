@@ -50,14 +50,14 @@ final class ExternalWidgetProjectionTests: XCTestCase {
                 goal: ExternalSurfaceVariantState(
                     kind: .goal,
                     title: "1 active goal",
-                    detail: "Progress comes from your local plan.",
+                    detail: "Progress comes from local proof.",
                     privacySummary: "Goal names stay private here",
                     action: ExternalSurfaceVariantAction(title: "Open Goals", surface: .tab, tab: "goals"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .quiet
                 ),
-                plan: ExternalSurfaceVariantState(
-                    kind: .plan,
+                timeShape: ExternalSurfaceVariantState(
+                    kind: .timeShape,
                     title: "Week looks doable",
                     detail: "Open Time to adjust the week from your latest local state.",
                     privacySummary: "Time detail opens in app",
@@ -77,7 +77,7 @@ final class ExternalWidgetProjectionTests: XCTestCase {
                 todayPressure: ExternalSurfaceVariantState(
                     kind: .todayPressure,
                     title: "Today is steady",
-                    detail: "The current plan still looks believable.",
+                    detail: "The current Time shape still looks believable.",
                     privacySummary: "Pressure uses local counts only",
                     action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
@@ -97,7 +97,7 @@ final class ExternalWidgetProjectionTests: XCTestCase {
                     title: "Capture is clear",
                     detail: "Add a thought without exposing it here.",
                     privacySummary: "Capture text never appears here",
-                    action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .tab, tab: "capture"),
+                    action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .captureComposer, tab: nil),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
                 ),
@@ -122,7 +122,7 @@ final class ExternalWidgetProjectionTests: XCTestCase {
         XCTAssertEqual(projection.primaryURL?.absoluteString, "ambitions://goal/private-goal-id?origin=widget")
         XCTAssertEqual(
             projection.variants.map(\.kind.rawValue).sorted(),
-            ["capture_entry", "current_step", "focus", "goal", "plan", "protected_time", "recovery", "today", "today_pressure"]
+            ["capture_entry", "current_step", "focus", "goal", "protected_time", "recovery", "time_shape", "today", "today_pressure"]
         )
         XCTAssertTrue(projection.variants.contains { $0.kind == .currentStep && $0.actionTitle == "Open step" })
         XCTAssertTrue(projection.variants.contains { $0.kind == .captureEntry && $0.privacySummary == "Capture text never appears here" })
@@ -242,10 +242,10 @@ final class ExternalWidgetProjectionTests: XCTestCase {
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),
                     prominence: .standard
                 ),
-                plan: ExternalSurfaceVariantState(
-                    kind: .plan,
-                    title: "Private plan",
-                    detail: "Sensitive plan",
+                timeShape: ExternalSurfaceVariantState(
+                    kind: .timeShape,
+                    title: "Private Time shape",
+                    detail: "Sensitive Time shape",
                     privacySummary: "Sensitive detail",
                     action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
                     reference: ExternalSurfaceActionReference(goalID: "private-goal-id", stepID: "private-step-id"),

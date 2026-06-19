@@ -354,7 +354,9 @@ private extension DefaultMemoryLensService {
 
     func makeCaptureResults(_ captures: [Capture]) -> [MemoryLensResult] {
         captures.map { capture in
-            let destination: ShellCommandDestination = capture.linkedGoalID.map { .goal($0) } ?? .timeRoute(.captureInbox)
+            let destination: ShellCommandDestination = capture.linkedGoalID.map { .goal($0) } ?? .overlay(
+                .commandSheet(intent: .quickCapture, entrySource: .shellUtility, presentationContext: .quickCapture)
+            )
             return MemoryLensResult(
                 id: "capture-\(capture.id)",
                 title: capture.rawText,

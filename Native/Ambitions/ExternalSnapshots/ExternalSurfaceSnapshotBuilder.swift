@@ -110,7 +110,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
     private func supportedCommands(hasNextAction: Bool) -> [ExternalSurfaceCommandDescriptor] {
         var commands = [
             ExternalSurfaceCommandDescriptor(kind: .openToday, requiresGoalID: false, requiresStepID: false),
-            ExternalSurfaceCommandDescriptor(kind: .openCapturesInbox, requiresGoalID: false, requiresStepID: false),
+            ExternalSurfaceCommandDescriptor(kind: .openCaptureComposer, requiresGoalID: false, requiresStepID: false),
             ExternalSurfaceCommandDescriptor(kind: .openMemoryLens, requiresGoalID: false, requiresStepID: false),
         ]
 
@@ -159,15 +159,15 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
             goal: ExternalSurfaceVariantState(
                 kind: .goal,
                 title: activeGoalCount == 0 ? "No active goal pressure" : "\(activeGoalCount) active goals",
-                detail: blockedCount == 0 ? "Momentum is readable from your local plan." : "\(blockedCount) blocked steps need a calmer next pass.",
+                detail: blockedCount == 0 ? "Momentum is readable from the latest local state." : "\(blockedCount) blocked steps need a calmer next pass.",
                 privacySummary: "Goal names stay private here",
                 action: ExternalSurfaceVariantAction(title: "Open Goals", surface: .tab, tab: "goals"),
                 reference: primaryReference,
                 prominence: blockedCount > 0 ? .elevated : .standard
             ),
-            plan: ExternalSurfaceVariantState(
-                kind: .plan,
-                title: planVariantTitle(pressure: nowState.pressureLevel),
+            timeShape: ExternalSurfaceVariantState(
+                kind: .timeShape,
+                title: timeShapeVariantTitle(pressure: nowState.pressureLevel),
                 detail: openCaptureCount == 0 ? "The week can be shaped from the latest local state." : "\(openCaptureCount) captures are waiting for review.",
                 privacySummary: "Time detail opens in app",
                 action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
@@ -206,7 +206,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
                 title: openCaptureCount == 0 ? "Capture is clear" : "\(openCaptureCount) captures waiting",
                 detail: openCaptureCount == 0 ? "Add a thought without exposing it here." : "Review held items inside Ambitions.",
                 privacySummary: "Capture text never appears here",
-                action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .tab, tab: "capture"),
+                action: ExternalSurfaceVariantAction(title: "Open Capture", surface: .captureComposer, tab: nil),
                 reference: primaryReference,
                 prominence: nowState.openCaptureUrgency == .elevated ? .elevated : .standard
             ),
@@ -242,7 +242,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
         case .waiting:
             return "A blocker is visible; open Ambitions before committing."
         case .recovery:
-            return "Use the smallest safe step from your local plan."
+            return "Use the smallest safe step from local proof."
         case .active:
             switch pressure {
             case .open:
@@ -273,7 +273,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
         }
     }
 
-    private func planVariantTitle(pressure: ExternalSurfacePressureLevel) -> String {
+    private func timeShapeVariantTitle(pressure: ExternalSurfacePressureLevel) -> String {
         switch pressure {
         case .open:
             return "Week has room"
@@ -307,7 +307,7 @@ struct ExternalSurfaceSnapshotBuilder: Sendable {
         case .open:
             return "There is room for a calm next step."
         case .steady:
-            return "The current plan still looks believable."
+            return "The current Time shape still looks believable."
         case .elevated:
             return "Keep the next step narrow."
         case .overloaded:

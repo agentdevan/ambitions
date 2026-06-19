@@ -172,10 +172,10 @@ struct DefaultSmartAttachmentService: SmartAttachmentRouting {
                 suggestedCandidate: rankedCandidates.first.map { SmartAttachmentCandidate(id: $0.id, target: $0.target, score: $0.score, evidenceLabels: $0.evidenceLabels, isSuggestedAttachment: true) },
                 semanticExtraction: semanticExtraction,
                 goalRelevanceScan: goalRelevanceScan,
-                receiptLine: "Saved as Task · Today",
+                receiptLine: "Saved as Step · Today",
                 explanation: rankedCandidates.first == nil
-                    ? "Saved as a standalone Task because no existing local destination was reliable enough."
-                    : "Saved as a standalone Task with a suggested attachment available.",
+                    ? "Saved as a standalone Step because no existing local destination was reliable enough."
+                    : "Saved as a standalone Step with a suggested attachment available.",
                 actions: rankedCandidates.first == nil ? [.change] : [.change, .keepStandalone, .attach],
                 privacyLevel: .privateItem
             )

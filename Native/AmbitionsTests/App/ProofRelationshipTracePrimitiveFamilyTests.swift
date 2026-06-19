@@ -36,7 +36,7 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
     }
 
     func testAMB582MotionCurrentUsesProofRelationshipTracePrimitiveFamily() throws {
-        let motionSource = try source("Native/Ambitions/Features/Motion/MotionCurrentScreen.swift", root: repoRoot())
+        let motionSource = try source("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift", root: repoRoot())
 
         XCTAssertTrue(motionSource.contains("ProofRelationshipTracePrimitiveToken("))
         XCTAssertTrue(motionSource.contains("ProofRelationshipTracePrimitiveLine("))

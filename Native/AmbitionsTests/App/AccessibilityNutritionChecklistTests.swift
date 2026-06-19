@@ -193,7 +193,6 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         XCTAssertEqual(AFI12AccessibilityStateProof.activeTopLevelSurfaces, [
             "Today",
             "Goals",
-            "Motion",
             "Time",
             "You"
         ])
@@ -203,18 +202,23 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
             "Receipt Surface"
         ])
         XCTAssertTrue(AFI12AccessibilityStateProof.missingActiveSurfaceProofs.isEmpty)
-        XCTAssertFalse(AFI12AccessibilityStateProof.containsPlanTopLevelProof)
+        XCTAssertFalse(AFI12AccessibilityStateProof.containsRetiredPlanTopLevelProof)
         XCTAssertEqual(
             AFI12AccessibilityStateProof.surfaceProofs.map(\.surface),
             AFI12AccessibilityStateProof.activeTopLevelSurfaces
         )
 
         let captureProof = AFI12AccessibilityStateProof.captureSurfaceProof
-        XCTAssertEqual(captureProof.surface, "Capture")
+        XCTAssertEqual(captureProof.surface, "Capture Composer")
         XCTAssertEqual(captureProof.primaryObject, "Atmosphere Composer")
         XCTAssertTrue(captureProof.publicAccessibilityClaimAllowed == false)
         XCTAssertTrue(captureProof.voiceOverSummary.contains("Atmosphere Composer"))
         XCTAssertTrue(captureProof.manualProofStillRequired.localizedCaseInsensitiveContains("keyboard"))
+
+        let motionProof = AFI12AccessibilityStateProof.motionBehaviorProof
+        XCTAssertEqual(motionProof.surface, "Stage Motion")
+        XCTAssertFalse(AFI12AccessibilityStateProof.activeTopLevelSurfaces.contains("Motion"))
+        XCTAssertTrue(motionProof.voiceOverSummary.contains("without becoming a destination"))
     }
 
     func testAFI12SurfaceProofsPreserveMeaningWithoutPublicClaims() {
@@ -261,27 +265,27 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
             receiptSnippets: ["Goal thread proof", "decision receipts"]
         )
 
-        assertAFI12Proof(
-            proofsBySurface["Motion"],
-            surface: "Motion",
-            primaryObject: "Motion Current",
-            voiceOverSnippets: ["Motion Current", "activity path", "proof density", "trust links", "focus next"],
-            dynamicTypeSnippets: ["path", "trace summary", "trust route", "primary action"],
-            reduceMotionSnippets: ["static", "path", "proof summary", "next-action"],
-            nonColorSnippets: ["Active", "blocked", "stalled", "recovery", "line-order"],
-            receiptSnippets: ["Goal and Time proofs", "source", "receipt"]
-        )
-
         let captureProof = AFI12AccessibilityStateProof.captureSurfaceProof
         assertAFI12Proof(
             captureProof,
-            surface: "Capture",
+            surface: "Capture Composer",
             primaryObject: "Atmosphere Composer",
             voiceOverSnippets: ["Atmosphere Composer", "input purpose", "text or voice action", "route result", "correction path"],
             dynamicTypeSnippets: ["composer", "add action", "route result", "correction choices"],
             reduceMotionSnippets: ["static", "Needs a Place", "Ready to Place", "Grow into Goal"],
             nonColorSnippets: ["Route confidence", "private item", "needs-place", "correction"],
             receiptSnippets: ["placement", "correction receipts", "undo"]
+        )
+
+        assertAFI12Proof(
+            AFI12AccessibilityStateProof.motionBehaviorProof,
+            surface: "Stage Motion",
+            primaryObject: "Stage Motion",
+            voiceOverSnippets: ["activity path", "proof density", "trust links", "without becoming a destination"],
+            dynamicTypeSnippets: ["path", "trace summary", "trust route", "primary action"],
+            reduceMotionSnippets: ["static", "path", "proof summary", "next-action"],
+            nonColorSnippets: ["Active", "blocked", "stalled", "recovery", "line-order"],
+            receiptSnippets: ["Goal and Time proofs", "source", "receipt"]
         )
 
         assertAFI12Proof(
@@ -369,7 +373,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
 
         XCTAssertTrue(requirements.contains {
             $0.axis == .voiceFirstCapture &&
-                $0.ownerFile == "Native/Ambitions/Features/Capture/CaptureScreen.swift" &&
+                $0.ownerFile == "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift" &&
                 $0.requiredAlternative.localizedCaseInsensitiveContains("review") &&
                 $0.privacyBoundary.localizedCaseInsensitiveContains("without user-visible review")
         })
@@ -384,12 +388,12 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
         })
     }
 
-    func testEB30OverloadAdaptationEvidenceCoversTodayPlanAndRecovery() {
+    func testEB30OverloadAdaptationEvidenceCoversTodayTimeAndRecovery() {
         let requirements = EB30OverloadAdaptationEvidence.requirements
 
         XCTAssertEqual(Set(requirements.map(\.axis)), Set(AccessibilityOverloadAdaptationAxis.allCases))
         XCTAssertEqual(EB30OverloadAdaptationEvidence.ownerBatch, "EB30")
-        XCTAssertFalse(EB30OverloadAdaptationEvidence.changesTodayOrPlanBehavior)
+        XCTAssertFalse(EB30OverloadAdaptationEvidence.changesTodayOrTimeBehavior)
         XCTAssertFalse(EB30OverloadAdaptationEvidence.releaseClaimsAllowed)
 
         for requirement in requirements {
@@ -398,7 +402,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
             XCTAssertFalse(requirement.requiredAdaptation.isEmpty)
             XCTAssertFalse(requirement.forbiddenAdaptation.isEmpty)
             XCTAssertTrue(requirement.requiresUserControl)
-            XCTAssertFalse(requirement.changesTodayOrPlanBehavior)
+            XCTAssertFalse(requirement.changesTodayOrTimeBehavior)
             XCTAssertFalse(requirement.releaseClaimAllowed)
         }
     }
@@ -412,12 +416,13 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
                 $0.requiredAdaptation.localizedCaseInsensitiveContains("one clear next action") &&
                 $0.forbiddenAdaptation.localizedCaseInsensitiveContains("shame")
         })
-        XCTAssertTrue(requirements.contains {
-            $0.axis == .overloadedPlan &&
-                $0.ownerFile == "Native/Ambitions/Features/Plan/PlanScreen.swift" &&
-                $0.requiredAdaptation.localizedCaseInsensitiveContains("plain language") &&
-                $0.forbiddenAdaptation.localizedCaseInsensitiveContains("automatic calendar mutation")
-        })
+        let hasOverloadedTimeShapeRequirement = requirements.contains { requirement in
+            requirement.axis == .overloadedTimeShape &&
+                requirement.ownerFile == "Native/Ambitions/Surfaces/Time/TimeSurface.swift" &&
+                requirement.requiredAdaptation.localizedCaseInsensitiveContains("plain language") &&
+                requirement.forbiddenAdaptation.localizedCaseInsensitiveContains("automatic calendar mutation")
+        }
+        XCTAssertTrue(hasOverloadedTimeShapeRequirement)
         XCTAssertTrue(requirements.contains {
             $0.axis == .lowLoadRecovery &&
                 $0.ownerFile == "Sources/Theme/PanelDensitySize.swift" &&

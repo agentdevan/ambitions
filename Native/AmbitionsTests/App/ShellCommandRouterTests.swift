@@ -38,33 +38,39 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(result.title, "Saved as Idea")
         XCTAssertEqual(result.destination, expectedDestination)
         XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Saved as Idea")
-        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Quick action Sheet")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Capture")
     }
 
-    func testRouteToCaptureInboxUsesGlobalCaptureOverlay() {
+    func testRouteToGlobalCaptureComposerUsesGlobalCaptureOverlay() {
         let navigation = AppNavigationModel(selectedTab: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
-        router.route(to: .timeRoute(.captureInbox), source: .deepLink)
+        router.route(
+            to: .overlay(.commandSheet(intent: .quickCapture, entrySource: .deepLink, presentationContext: .quickCapture)),
+            source: .deepLink
+        )
 
         XCTAssertEqual(navigation.selectedTab, .time)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertEqual(navigation.activeOverlay?.entrySource, .deepLink)
-        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Capture")
     }
 
-    func testRouteToCaptureInboxUsesCompatibilityOverlay() {
+    func testRouteToGlobalCaptureComposerLeavesRootSurfaceInPlace() {
         let navigation = AppNavigationModel(selectedTab: .goals)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
-        router.route(to: .timeRoute(.captureInbox), source: .shellUtility)
+        router.route(
+            to: .overlay(.commandSheet(intent: .quickCapture, entrySource: .shellUtility, presentationContext: .quickCapture)),
+            source: .shellUtility
+        )
 
         XCTAssertEqual(navigation.selectedTab, .goals)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Add something")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Capture")
     }
 
     func testOpenCaptureCommandUsesGlobalCaptureOverlayDestination() async {
@@ -92,7 +98,7 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertEqual(navigation.activeOverlay?.entrySource, .appIntent)
         XCTAssertEqual(result.destination, expectedDestination)
-        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Quick action Sheet")
+        XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Capture")
     }
 
     func testOpenGoalWithoutIdentifierFallsBackToMemoryLensOverlay() async {
@@ -135,7 +141,7 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertTrue(navigation.continuityReceipt?.body.contains("source context preserved") == true)
     }
 
-    func testQuickFocusCommandPreservesFocusContextCompatibility() async {
+    func testQuickFocusCommandPreservesExplicitFocusContext() async {
         let navigation = AppNavigationModel(selectedTab: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
@@ -160,13 +166,13 @@ final class ShellCommandRouterTests: XCTestCase {
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         router.presentCreateGoal(
-            source: .capturesScreen,
+            source: .globalCaptureComposer,
             seedText: "Turn this capture into a believable goal",
             captureID: "capture-123"
         )
 
         XCTAssertEqual(navigation.activeOverlay?.kind, .createGoal)
-        XCTAssertEqual(navigation.activeOverlay?.entrySource, .capturesScreen)
+        XCTAssertEqual(navigation.activeOverlay?.entrySource, .globalCaptureComposer)
         XCTAssertEqual(navigation.activeOverlay?.query, "Turn this capture into a believable goal")
         XCTAssertEqual(navigation.activeOverlay?.captureID, "capture-123")
     }
@@ -183,7 +189,10 @@ final class ShellCommandRouterTests: XCTestCase {
 
         let quickCapture = ShellCommandIntent.quickCapture.externalBrainCommandContract
         XCTAssertEqual(quickCapture.commandKind, .quickCapture)
-        XCTAssertEqual(quickCapture.destination, .timeRoute(.captureInbox))
+        XCTAssertEqual(
+            quickCapture.destination,
+            .overlay(.commandSheet(intent: .quickCapture, entrySource: .shellCompose, presentationContext: .quickCapture))
+        )
         XCTAssertTrue(quickCapture.touchesUserText)
         XCTAssertTrue(quickCapture.safetySummary.contains("local capture"))
 
@@ -239,7 +248,7 @@ final class ShellCommandRouterTests: XCTestCase {
             kind: .capture,
             facet: .open,
             actionTitle: "Open Capture",
-            destination: .timeRoute(.captureInbox)
+            destination: .overlay(.commandSheet(intent: .quickCapture, entrySource: .shellUtility, presentationContext: .quickCapture))
         )
 
         let handoff = router.route(searchResult: result, source: .shellUtility)

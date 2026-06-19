@@ -92,19 +92,17 @@ struct AmbitionsRootView: View {
 
     @ViewBuilder
     private var stageSurfaceHost: some View {
-        Group {
-            switch navigation.selectedTab {
-            case .today:
-                todayNavigation()
-            case .goals:
-                goalsNavigation()
-            case .time:
-                timeNavigation()
-            case .you:
-                youNavigation()
+        AmbitionsRootStageSurfaceHost(
+            navigation: $navigation,
+            creationMessage: creationMessage,
+            goalsRefreshID: goalsRefreshID,
+            onCreateGoal: { source, seedText, captureID in
+                presentCreateGoal(from: source, seedText: seedText, captureID: captureID)
+            },
+            onToolbarAction: { action, tab in
+                handleContextualToolbarAction(action, for: tab)
             }
-        }
-        .accessibilityIdentifier("shell.stage.host")
+        )
     }
 
     private var activeSheetOverlayBinding: Binding<ShellOverlayState?> {
@@ -119,151 +117,6 @@ struct AmbitionsRootView: View {
                 navigation.activeOverlay = newValue
             }
         )
-    }
-
-    private func todayNavigation() -> some View {
-        NavigationStack {
-            AppShellScaffold(
-                title: "Today",
-                subtitle: "Start here",
-                posture: .execution,
-                trailingButtons: shellUtilityButtons(for: .today),
-                reservesPrimaryObjectTopClearance: true
-            ) {
-                TodayScreen(showsNavigationChrome: false)
-            }
-        }
-    }
-
-    private func goalsNavigation() -> some View {
-        NavigationStack(path: $navigation.goalsPath) {
-            AppShellScaffold(
-                title: "Goals",
-                subtitle: "Constellation Atlas",
-                posture: .direction,
-                trailingButtons: shellUtilityButtons(for: .goals)
-            ) {
-                GoalsScreen(
-                    externalCreationMessage: creationMessage,
-                    externalRefreshID: goalsRefreshID,
-                    showsNavigationChrome: false,
-                    onCreateGoal: {
-                        presentCreateGoal(from: .goalsCreate)
-                    }
-                )
-            }
-            .navigationDestination(for: GoalRouteTarget.self) { target in
-                GoalDetailScreen(target: target)
-            }
-        }
-    }
-
-    private func timeNavigation() -> some View {
-        NavigationStack(path: $navigation.timePath) {
-            AppShellScaffold(
-                title: "Time",
-                subtitle: "LifeShape Field",
-                posture: .shaping,
-                trailingButtons: shellUtilityButtons(for: .time)
-            ) {
-                TimeScreen(showsNavigationChrome: false)
-            }
-            .navigationDestination(for: TimeRouteTarget.self) { target in
-                switch target {
-                case .captureInbox:
-                    AppShellScaffold(
-                        title: "Capture",
-                        subtitle: "Composer",
-                        posture: .shaping,
-                        backButtonAccessibilityIdentifier: "shell.time.back-button",
-                        onBack: { navigation.resetTimePath() },
-                        trailingButtons: []
-                    ) {
-                        CaptureScreen()
-                    }
-                case .habits:
-                    AppShellScaffold(
-                        title: "Rituals",
-                        subtitle: "LifeShape Field",
-                        posture: .shaping,
-                        backButtonAccessibilityIdentifier: "shell.time.back-button",
-                        onBack: { navigation.resetTimePath() },
-                        trailingButtons: []
-                    ) {
-                        HabitsScreen()
-                    }
-                case .weeklyReview:
-                    AppShellScaffold(
-                        title: "Weekly Review",
-                        subtitle: "LifeShape Field",
-                        posture: .shaping,
-                        backButtonAccessibilityIdentifier: "shell.time.back-button",
-                        onBack: { navigation.resetTimePath() },
-                        trailingButtons: []
-                    ) {
-                        WeeklyReviewScreen()
-                    }
-                }
-            }
-            .navigationDestination(for: GoalRouteTarget.self) { target in
-                GoalDetailScreen(target: target)
-            }
-        }
-    }
-
-    private func youNavigation() -> some View {
-        NavigationStack(path: $navigation.youPath) {
-            AppShellScaffold(
-                title: "You",
-                subtitle: "Profile and settings",
-                posture: .utility,
-                trailingButtons: shellUtilityButtons(for: .you)
-            ) {
-                YouScreen(showsNavigationChrome: false)
-            }
-            .navigationDestination(for: YouRouteTarget.self) { target in
-                switch target {
-                case .monthlyReview:
-                    AppShellScaffold(
-                        title: "Monthly Review",
-                        subtitle: "Reflection",
-                        posture: .reflection,
-                        backButtonAccessibilityIdentifier: "shell.you.back-button",
-                        onBack: { navigation.resetYouPath() },
-                        trailingButtons: []
-                    ) {
-                        InsightsMonthlyReviewScreen()
-                    }
-                case .history:
-                    AppShellScaffold(
-                        title: "History",
-                        subtitle: "Reflection",
-                        posture: .reflection,
-                        backButtonAccessibilityIdentifier: "shell.you.back-button",
-                        onBack: { navigation.resetYouPath() },
-                        trailingButtons: []
-                    ) {
-                        InsightsHistoryScreen()
-                    }
-                }
-            }
-        }
-    }
-
-    private func shellUtilityButtons(for tab: AppTab) -> [AppShellHeaderButton] {
-        AppShellContextualToolbarCatalog.actions(for: tab).map { action in
-            AppShellHeaderButton(
-                kind: action.kind,
-                title: action.title,
-                systemImage: action.systemImage,
-                accessibilityIdentifier: action.accessibilityIdentifier,
-                accessibilityLabel: action.accessibilityLabel,
-                accessibilityHint: action.accessibilityHint,
-                keyboardShortcut: action.kind == .captureFallback ? AppShellHeaderKeyboardShortcut(key: "k", modifiers: [.command]) : nil
-            ) {
-                handleContextualToolbarAction(action, for: tab)
-            }
-        }
     }
 
     private func handleContextualToolbarAction(_ action: AppShellContextualToolbarAction, for tab: AppTab) {
@@ -485,7 +338,9 @@ struct AmbitionsRootView: View {
         ) { notification in
             guard let action = notification.ambitionsMotionCurrentAction else { return }
             let source = notification.userInfo?[MotionCurrentAction.notificationSourceKey] as? String ?? "motion.current"
-            routeStageMotionAction(action, source: source)
+            Task { @MainActor in
+                routeStageMotionAction(action, source: source)
+            }
         }
     }
 

@@ -10,7 +10,7 @@ final class ScreenContractRegistryTests: XCTestCase {
                 .goals,
                 .goalDetail,
                 .capture,
-                .plan,
+                .time,
                 .you,
                 .lifeAreasOverview,
                 .northStarDetail,
@@ -29,7 +29,7 @@ final class ScreenContractRegistryTests: XCTestCase {
                 "Today",
                 "Goals",
                 "Goal Detail",
-                "Capture",
+                "Capture Composer",
                 "Time",
                 "You",
                 "Life Areas Overview",
@@ -84,6 +84,7 @@ final class ScreenContractRegistryTests: XCTestCase {
         XCTAssertTrue(representedDependencies.isSuperset(of: Set(ScreenContractDependency.allCases)))
 
         XCTAssertTrue(ScreenContractRegistry.contract(for: .capture).dependencies.contains(.d06SmartAttachment))
+        XCTAssertEqual(ScreenContractRegistry.contract(for: .capture).implementationStatus, .composerOverlay)
         XCTAssertTrue(ScreenContractRegistry.contract(for: .goals).dependencies.contains(.d07LifeAreasAtlas))
         XCTAssertTrue(ScreenContractRegistry.contract(for: .goals).dependencies.contains(.d08NorthStars))
         XCTAssertTrue(ScreenContractRegistry.contract(for: .goals).dependencies.contains(.d09OneStepGoals))
@@ -225,8 +226,9 @@ final class ScreenContractRegistryTests: XCTestCase {
         }
 
         XCTAssertEqual(ScreenContractRegistry.contract(for: .goalDetail).requiredFirstScreenContent[1], "Goal detail lanes")
-        XCTAssertTrue(ScreenContractRegistry.contract(for: .plan).requiredFirstScreenContent.contains("LifeShape Field"))
+        XCTAssertTrue(ScreenContractRegistry.contract(for: .time).requiredFirstScreenContent.contains("LifeShape Field"))
         XCTAssertTrue(ScreenContractRegistry.contract(for: .capture).requiredFirstScreenContent.contains("Changeable route receipt"))
+        XCTAssertFalse(ScreenContractRegistry.contract(for: .capture).requiredFirstScreenContent.contains("Capture Anything"))
     }
 
     func testD10ExternalSurfacesRemainContractOnlyUntilD22() {
@@ -248,7 +250,7 @@ final class ScreenContractRegistryTests: XCTestCase {
         XCTAssertEqual(ownersByScreen[.capture], "D12")
         XCTAssertEqual(ownersByScreen[.goals], "D13")
         XCTAssertEqual(ownersByScreen[.goalDetail], "D14")
-        XCTAssertEqual(ownersByScreen[.plan], "D15")
+        XCTAssertEqual(ownersByScreen[.time], "D15")
         XCTAssertEqual(ownersByScreen[.you], "D17")
         XCTAssertEqual(ownersByScreen[.trustCenter], "D18")
         XCTAssertEqual(ownersByScreen[.whatAmbitionsKnows], "D19")

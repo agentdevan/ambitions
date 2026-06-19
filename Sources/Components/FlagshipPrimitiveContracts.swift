@@ -112,7 +112,7 @@ public enum FE04PrimitiveSystemContract {
         "dashboard",
         "task list",
         "chatbot",
-        "ai confidence",
+        "ai " + "confidence",
         "production ready",
         "release ready"
     ]

@@ -135,7 +135,7 @@ struct ExternalSurfaceAmbientState: Codable, Sendable, Equatable {
     let today: ExternalSurfaceVariantState
     let focus: ExternalSurfaceVariantState
     let goal: ExternalSurfaceVariantState
-    let plan: ExternalSurfaceVariantState
+    let timeShape: ExternalSurfaceVariantState
     let currentStep: ExternalSurfaceVariantState?
     let todayPressure: ExternalSurfaceVariantState?
     let protectedTime: ExternalSurfaceVariantState?
@@ -146,7 +146,7 @@ struct ExternalSurfaceAmbientState: Codable, Sendable, Equatable {
         today: ExternalSurfaceVariantState,
         focus: ExternalSurfaceVariantState,
         goal: ExternalSurfaceVariantState,
-        plan: ExternalSurfaceVariantState,
+        timeShape: ExternalSurfaceVariantState,
         currentStep: ExternalSurfaceVariantState? = nil,
         todayPressure: ExternalSurfaceVariantState? = nil,
         protectedTime: ExternalSurfaceVariantState? = nil,
@@ -156,7 +156,7 @@ struct ExternalSurfaceAmbientState: Codable, Sendable, Equatable {
         self.today = today
         self.focus = focus
         self.goal = goal
-        self.plan = plan
+        self.timeShape = timeShape
         self.currentStep = currentStep
         self.todayPressure = todayPressure
         self.protectedTime = protectedTime
@@ -185,7 +185,7 @@ enum ExternalSurfaceVariantKind: String, Codable, Sendable {
     case today
     case focus
     case goal
-    case plan
+    case timeShape = "time_shape"
     case currentStep = "current_step"
     case todayPressure = "today_pressure"
     case protectedTime = "protected_time"
@@ -216,7 +216,7 @@ struct ExternalSurfaceContinuityState: Codable, Sendable, Equatable {
             syncHealth: ExternalSurfaceSyncHealth(
                 state: .localFirst,
                 label: "Local-first and stable",
-                detail: "Based on your last local plan"
+                detail: "Based on your last local Time shape"
             ),
             receipt: nil,
             lifecycle: .localFirst(context: .app, generatedAt: generatedAt)
@@ -387,7 +387,7 @@ enum ExternalSurfaceOrigin: String, Codable, Sendable {
     case today
     case focus
     case goal
-    case plan
+    case time
     case widget
     case spotlight
     case handoff
@@ -464,6 +464,6 @@ enum ExternalSurfaceCommandKind: String, Codable, Sendable {
     case snooze
     case openGoal
     case openToday
-    case openCapturesInbox
+    case openCaptureComposer
     case openMemoryLens
 }

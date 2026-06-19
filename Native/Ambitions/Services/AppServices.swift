@@ -65,14 +65,14 @@ protocol HabitsServicing: Sendable {
 }
 
 protocol TimeServicing: Sendable {
-    func loadTimeDashboard(now: Date) async throws -> TimeDashboard
-    func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard
-    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard
+    func loadTimeSurfaceState(now: Date) async throws -> TimeSurfaceState
+    func loadTimeWeeklyReviewState(now: Date) async throws -> TimeWeeklyReviewState
+    func makeTimeCalendarAware(now: Date) async throws -> TimeSurfaceState
 }
 
 extension TimeServicing {
-    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
-        try await loadTimeDashboard(now: now)
+    func makeTimeCalendarAware(now: Date) async throws -> TimeSurfaceState {
+        try await loadTimeSurfaceState(now: now)
     }
 }
 
@@ -204,22 +204,22 @@ struct StubHabitsService: HabitsServicing {
 }
 
 struct StubTimeService: TimeServicing {
-    let dashboard: TimeDashboard
-    let weeklyReviewDashboard: WeeklyReviewDashboard
+    let timeState: TimeSurfaceState
+    let weeklyReviewState: TimeWeeklyReviewState
 
-    func loadTimeDashboard(now: Date) async throws -> TimeDashboard {
+    func loadTimeSurfaceState(now: Date) async throws -> TimeSurfaceState {
         _ = now
-        return dashboard
+        return timeState
     }
 
-    func loadWeeklyReviewDashboard(now: Date) async throws -> WeeklyReviewDashboard {
+    func loadTimeWeeklyReviewState(now: Date) async throws -> TimeWeeklyReviewState {
         _ = now
-        return weeklyReviewDashboard
+        return weeklyReviewState
     }
 
-    func makeTimeCalendarAware(now: Date) async throws -> TimeDashboard {
+    func makeTimeCalendarAware(now: Date) async throws -> TimeSurfaceState {
         _ = now
-        return dashboard
+        return timeState
     }
 }
 

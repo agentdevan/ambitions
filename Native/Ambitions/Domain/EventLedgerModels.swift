@@ -55,6 +55,7 @@ enum EventLedgerSource: String, Codable, Sendable, Equatable, Hashable, CaseIter
     case today
     case goals
     case capture
+    case time
     case plan
     case you
     case memoryLens = "memory_lens"

@@ -833,7 +833,7 @@ struct CreateGoalScreen: View {
         CreateGoalScreen(
             viewModel: CreateGoalViewModel(
                 title: "Review the notification handoff copy before the next hardening pass.",
-                entrySource: .capturesScreen,
+                entrySource: .globalCaptureComposer,
                 captureID: "preview-capture-2"
             )
         )

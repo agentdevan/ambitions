@@ -150,7 +150,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(result.confidence, .medium)
         XCTAssertEqual(result.selectedCandidate?.target.routeType, .task)
         XCTAssertEqual(result.suggestedCandidate?.target.destinationID, "goal-astronaut")
-        XCTAssertEqual(result.receiptLine, "Saved as Task · Today")
+        XCTAssertEqual(result.receiptLine, "Saved as Step · Today")
         XCTAssertTrue(result.actions.contains(.change))
         XCTAssertTrue(result.actions.contains(.keepStandalone))
         XCTAssertTrue(result.actions.contains(.attach))
@@ -229,7 +229,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
             sourceType: .todayQuickCapture
         )
 
-        XCTAssertEqual(decision?.receiptLine, "Saved as Task · Today")
+        XCTAssertEqual(decision?.receiptLine, "Saved as Step · Today")
         XCTAssertEqual(request?.kind, .oneTimeCommitment)
         XCTAssertEqual(request?.route, .timeSeed)
         XCTAssertEqual(request?.triageStatus, .assumedRoute)
@@ -301,7 +301,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
         let projection = result.reclassificationProjection
         let receipt = result.actionReceipt(captureID: "capture-1", occurredAt: "2026-05-03T23:20:00Z")
 
-        XCTAssertEqual(projection.receiptTitle, "Saved as Task · Today")
+        XCTAssertEqual(projection.receiptTitle, "Saved as Step · Today")
         XCTAssertEqual(projection.undoAvailability, .notSupportedYet)
         XCTAssertEqual(projection.correctionAvailability, .availableWithReason)
         XCTAssertEqual(projection.reclassificationActions, ["Attach", "Change", "Keep Standalone"])
@@ -394,7 +394,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
 
         XCTAssertEqual(preview.originalText, "Book dentist")
         XCTAssertEqual(preview.postInputStateTitle, "Ready to Place")
-        XCTAssertEqual(preview.suggestedDestination, "Task · Today")
+        XCTAssertEqual(preview.suggestedDestination, "Step · Today")
         XCTAssertEqual(preview.objectTypeLabel, "Task")
         XCTAssertEqual(preview.appearanceLabel, "Today")
         XCTAssertTrue(preview.affectsToday)
@@ -404,7 +404,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(preview.changeActionTitle, "Change")
         XCTAssertEqual(preview.safeActionTitle, "Decide later")
         XCTAssertEqual(preview.understoodLabel, "Looks like a capture that needs a place.")
-        XCTAssertEqual(preview.suggestedPlacementLabel, "Task · Today")
+        XCTAssertEqual(preview.suggestedPlacementLabel, "Step · Today")
         XCTAssertEqual(preview.mayAffectLabel, "May support: Local context only.")
         XCTAssertEqual(preview.approvalNeededLabel, "No approval needed yet.")
         XCTAssertEqual(preview.changeableLabels, ["Change", "Decide later"])
@@ -470,11 +470,11 @@ final class SmartAttachmentServiceTests: XCTestCase {
         )
         let request = decision?.createCaptureRequest(rawText: "Book dentist", sourceType: .todayQuickCapture)
 
-        XCTAssertEqual(decision?.receiptLine, "Saved as Task · Today")
+        XCTAssertEqual(decision?.receiptLine, "Saved as Step · Today")
         XCTAssertEqual(request?.kind, .oneTimeCommitment)
         XCTAssertEqual(request?.route, .timeSeed)
         XCTAssertEqual(request?.triageStatus, .assumedRoute)
-        XCTAssertEqual(request?.assumptionSummary, "Saved as a standalone Task because no existing local destination was reliable enough.")
+        XCTAssertEqual(request?.assumptionSummary, "Saved as a standalone Step because no existing local destination was reliable enough.")
     }
 
     func testEB03BRouteProofStaysLocalAndAccessible() {

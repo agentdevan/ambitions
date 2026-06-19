@@ -13,9 +13,8 @@ func appShellCaptureSourceType(for source: ShellCommandEntrySource) -> CaptureSo
          .goalsCreate,
          .goalsQuickCapture,
          .timeQuickCapture,
-         .motionQuickCapture,
          .youQuickCapture,
-         .capturesScreen,
+         .globalCaptureComposer,
          .deepLink,
          .widget,
          .external:

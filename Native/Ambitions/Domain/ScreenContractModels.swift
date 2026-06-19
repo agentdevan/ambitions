@@ -5,7 +5,7 @@ enum ScreenContractID: String, CaseIterable, Codable, Hashable, Sendable {
     case goals
     case goalDetail
     case capture
-    case plan
+    case time
     case you
     case lifeAreasOverview
     case northStarDetail
@@ -21,8 +21,8 @@ enum ScreenContractID: String, CaseIterable, Codable, Hashable, Sendable {
         case .today: "Today"
         case .goals: "Goals"
         case .goalDetail: "Goal Detail"
-        case .capture: "Capture"
-        case .plan: "Time"
+        case .capture: "Capture Composer"
+        case .time: "Time"
         case .you: "You"
         case .lifeAreasOverview: "Life Areas Overview"
         case .northStarDetail: "North Star Detail"
@@ -39,7 +39,7 @@ enum ScreenContractID: String, CaseIterable, Codable, Hashable, Sendable {
         switch self {
         case .today: "Today"
         case .goals: "Goals"
-        case .plan: "Time"
+        case .time: "Time"
         case .you: "You"
         case .capture,
              .goalDetail,
@@ -58,6 +58,7 @@ enum ScreenContractID: String, CaseIterable, Codable, Hashable, Sendable {
 
 enum ScreenContractImplementationStatus: String, Codable, Hashable, Sendable {
     case activeSurface
+    case composerOverlay
     case foundationReady
     case plannedSurface
     case contractOnly
@@ -90,7 +91,7 @@ enum ScreenContractPanel: String, CaseIterable, Codable, Hashable, Sendable {
     case timeline
     case todayPlan
     case trust
-    case weeklyPlanStrip
+    case weekShapeStrip
 }
 
 enum ScreenContractAction: String, CaseIterable, Codable, Hashable, Sendable {
@@ -147,7 +148,7 @@ enum ScreenContractGuardrail: String, CaseIterable, Codable, Hashable, Sendable 
     case noTopLevelInsightsTab
     case noTopLevelHabitsTab
     case noTopLevelCalendarTab
-    case noCalendarPromptOutsidePlan
+    case noCalendarPromptOutsideTime
     case noAIWrapperLanguage
     case noFakePrecision
     case noUnverifiedUserFacingClaims
@@ -161,6 +162,7 @@ enum ScreenContractGuardrail: String, CaseIterable, Codable, Hashable, Sendable 
 enum ScreenContractEvidenceKind: String, Codable, Hashable, Sendable {
     case designCanon
     case sourceSurface
+    case sourceComposer
     case sourceFoundation
     case sourceService
     case testCoverage
@@ -272,8 +274,7 @@ enum ScreenContractValidator {
         "Calendar"
     ]
 
-    static let forbiddenCopyFragments = [
-        "AI Confidence",
+    static let forbiddenCopyFragments = ForbiddenTopLevelTerms.terms + [
         "AI Explanation",
         "Model Reasoning",
         "Confidence score",
@@ -398,7 +399,7 @@ enum ScreenContractRegistry {
         goals,
         goalDetail,
         capture,
-        plan,
+        time,
         you,
         lifeAreasOverview,
         northStarDetail,
@@ -453,18 +454,18 @@ enum ScreenContractRegistry {
     private static let today = ScreenContract(
         id: .today,
         dominantQuestion: "What matters now?",
-        requiredFirstScreenContent: ["Reality Meridian", "Now Layer", "Today Plan Layer", "Compact timeline", "Relevant One-Step Goals", "Open-window awareness", "Recovery"],
+        requiredFirstScreenContent: ["Reality Meridian", "Now Layer", "Today Shape Layer", "Compact timeline", "Relevant One-Step Goals", "Open-window awareness", "Recovery"],
         requiredPanels: [.heroDecision, .nowLayer, .todayPlan, .compactTimeline, .oneStepGoals, .schedule, .recovery],
         optionalPanels: [.insight, .trust, .receipt],
         forbiddenFirstScreenContent: ["Full analytics", "Raw ledger", "Permission prompt", "Standalone Habits"],
         primaryActions: [.start, .move, .parkNotToday, .markDone, .saveTheDay],
-        drillDowns: ["Goal Detail", "Plan", "Receipt", "Review"],
+        drillDowns: ["Goal Detail", "Time", "Receipt", "Review"],
         densityBehavior: "Minimal shows now and day signal; Balanced shows day plan; Detailed adds evidence.",
         panelSizeBehavior: "Compact keeps one action visible; Large shows fewer larger sections.",
         accessibilityRequirements: ["Dynamic Type must not hide primary action.", "Gestures need buttons.", "VoiceOver summarizes status and next action."],
         trustPrivacyRequirements: ["Calendar labels distinguish source.", "Sensitive details stay compact."],
         dependencies: [.d04PanelDensitySize, .d05ReceiptsActionClosure, .d09OneStepGoals],
-        guardrails: commonTopLevelGuardrails + [.noCalendarPromptOutsidePlan, .receiptsForMeaningfulChanges],
+        guardrails: commonTopLevelGuardrails + [.noCalendarPromptOutsideTime, .receiptsForMeaningfulChanges],
         implementationStatus: .activeSurface,
         owningBatch: "D11",
         evidenceAnchors: [
@@ -531,7 +532,7 @@ enum ScreenContractRegistry {
     private static let capture = ScreenContract(
         id: .capture,
         dominantQuestion: "What needs a place?",
-        requiredFirstScreenContent: ["Capture Anything", "Atmosphere Composer", "Needs a Place", "Ready to Place", "Grow into Goal", "Changeable route receipt"],
+        requiredFirstScreenContent: ["Atmosphere Composer", "Needs a place", "Ready to place", "Grow into goal", "Changeable route receipt"],
         requiredPanels: [.capture, .smartAttachmentReceipt, .receipt, .trust],
         optionalPanels: [.groupedNavigationList],
         forbiddenFirstScreenContent: ["Chat-first AI surface", "Long inbox as primary"],
@@ -543,22 +544,22 @@ enum ScreenContractRegistry {
         trustPrivacyRequirements: ["Receipts reveal route and correction.", "Sensitive details hidden by default."],
         dependencies: [.d03GroupedNavigationList, .d04PanelDensitySize, .d05ReceiptsActionClosure, .d06SmartAttachment, .d09OneStepGoals],
         guardrails: commonTopLevelGuardrails + [.receiptsForMeaningfulChanges],
-        implementationStatus: .activeSurface,
+        implementationStatus: .composerOverlay,
         owningBatch: "D12",
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Capture/CaptureScreen.swift", note: "Current Capture surface"),
+            .init(kind: .sourceComposer, path: "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", note: "Legacy composer screen pending Composer/Capture migration"),
             .init(kind: .sourceService, path: "Native/Ambitions/Services/SmartAttachmentService.swift", note: "Smart Attachment foundation"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Capture", note: "Focused Capture tests")
         ]
     )
 
-    private static let plan = ScreenContract(
-        id: .plan,
+    private static let time = ScreenContract(
+        id: .time,
         dominantQuestion: "What can my life actually hold?",
         requiredFirstScreenContent: ["Shape Time", "LifeShape Field", "Open time", "Goal time", "Protected time", "Pressure", "Shape week", "Review pressure", "Manual mode"],
-        requiredPanels: [.heroDecision, .schedule, .timeline, .weeklyPlanStrip, .recovery, .trust],
+        requiredPanels: [.heroDecision, .schedule, .timeline, .weekShapeStrip, .recovery, .trust],
         optionalPanels: [.groupedNavigationList, .insight],
         forbiddenFirstScreenContent: ["Onboarding permission request", "Raw calendar list", "Calendar clone", "Agenda", "Analytics dashboard", "Red warning surface", "Silent scheduler"],
         primaryActions: [.makeCalendarAware, .findWindows, .move, .protect, .saveTheWeek],
@@ -568,15 +569,15 @@ enum ScreenContractRegistry {
         accessibilityRequirements: ["LifeShape Field summarizes open time, goal time, protected time, and pressure.", "Calendar controls have permission rationale.", "Timeline has non-gesture controls."],
         trustPrivacyRequirements: ["Calendar appears only as a Time source or detail.", "External writes require confirmation."],
         dependencies: [.d03GroupedNavigationList, .d04PanelDensitySize, .d05ReceiptsActionClosure],
-        guardrails: commonTopLevelGuardrails + [.noCalendarPromptOutsidePlan, .receiptsForMeaningfulChanges],
+        guardrails: commonTopLevelGuardrails + [.noCalendarPromptOutsideTime, .receiptsForMeaningfulChanges],
         implementationStatus: .activeSurface,
         owningBatch: "D15",
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Features/Time/TimeScreen.swift", note: "Current Time surface"),
-            .init(kind: .sourceService, path: "Native/Ambitions/Features/Time/TimeFeatureService.swift", note: "Time projection source"),
-            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Time/TimeFeatureServiceTests.swift", note: "Focused Time tests")
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Time/TimeSurface.swift", note: "Current Time surface"),
+            .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/TimeProjectionService.swift", note: "Time projection source"),
+            .init(kind: .testCoverage, path: "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift", note: "Focused Time tests")
         ]
     )
 

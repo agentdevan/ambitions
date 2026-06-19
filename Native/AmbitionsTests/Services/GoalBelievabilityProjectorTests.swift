@@ -482,7 +482,7 @@ private extension GoalBelievabilityProjectorTests {
                 observedRangeStart: horizon.start,
                 observedRangeEnd: horizon.end,
                 derivedBusyWindowCount: busyRanges.count,
-                userInitiatedPlanAction: "Find real open windows",
+                userInitiatedTimeAction: "Find real open windows",
                 explanation: "Calendar-derived busy windows stayed local."
             )
             : nil

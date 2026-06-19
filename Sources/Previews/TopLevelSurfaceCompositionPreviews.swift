@@ -10,13 +10,13 @@ struct TopLevelSurfaceCompositionPreviewGallery: View {
                 SectionHeader(
                     eyebrow: "SI17",
                     title: "Top-Level Surface Composition",
-                    subtitle: "Five root surfaces keep one primary Ambitions object with distinct supporting modules."
+                    subtitle: "Four root surfaces keep one primary Ambitions object with distinct supporting modules."
                 )
 
                 ForEach(AmbitionsTopLevelSurfaceComposition.allCases) { surface in
                     TopLevelSurfaceCompositionBar(
                         surface: surface,
-                        state: surface == .motion ? .selected : .default
+                        state: surface == .time ? .selected : .default
                     )
                 }
             }

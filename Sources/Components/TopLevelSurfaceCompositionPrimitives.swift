@@ -5,7 +5,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
     case today
     case goals
     case time
-    case motion
     case you
 
     public var id: String { rawValue }
@@ -15,7 +14,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "Today"
         case .goals: "Goals"
         case .time: "Time"
-        case .motion: "Motion"
         case .you: "You"
         }
     }
@@ -25,7 +23,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "Reality Meridian"
         case .goals: "Constellation Atlas"
         case .time: "LifeShape Field"
-        case .motion: "Motion Current"
         case .you: "User System Profile"
         }
     }
@@ -35,7 +32,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "Start here"
         case .goals: "Direction"
         case .time: "Shape Time"
-        case .motion: "Inspect"
         case .you: "Trust & Continuity"
         }
     }
@@ -45,7 +41,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "sun.max"
         case .goals: "scope"
         case .time: "clock"
-        case .motion: "point.topleft.down.curvedto.point.bottomright.up"
         case .you: "person.crop.circle"
         }
     }
@@ -55,7 +50,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "sun.max"
         case .goals: "scope"
         case .time: "clock"
-        case .motion: "checkmark.seal"
         case .you: "person.crop.circle"
         }
     }
@@ -65,7 +59,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: "One calm execution path with Start here, Now, Next, Later, closure, and proof."
         case .goals: "Strategic direction, path pressure, proof lanes, and goal drill-downs stay connected."
         case .time: "Capacity, pressure, protected time, and reflow stay visible without becoming a calendar clone."
-        case .motion: "Proof, recovery, and re-entry stay inspectable without becoming a feed, score, or report grid."
         case .you: "Trust, setup, data, preferences, and receipts stay user-controlled."
         }
     }
@@ -74,8 +67,7 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         switch self {
         case .today: .focus
         case .goals: .review
-        case .time: .plan
-        case .motion: .review
+        case .time: .time
         case .you: .review
         }
     }
@@ -85,7 +77,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
         case .today: .steady
         case .goals: .clear
         case .time: .tight
-        case .motion: .clear
         case .you: .protected
         }
     }
@@ -98,8 +89,6 @@ public enum AmbitionsTopLevelSurfaceComposition: String, CaseIterable, Sendable,
             ["Orbital Lens", "Life Path", "Proof"]
         case .time:
             ["Open time", "Goal time", "Protected time"]
-        case .motion:
-            ["Proof", "Recovery", "Re-entry"]
         case .you:
             ["Trust", "Data", "Setup"]
         }
@@ -128,7 +117,7 @@ public struct AFI14CrossSurfaceHandoff: Identifiable, Hashable, Sendable {
 
 public enum AFI14CrossSurfaceCoherenceCatalog {
     public static let ownerBatch = "AFI14"
-    public static let activeTopLevelSurfaces = ["Today", "Goals", "Time", "Motion", "You"]
+    public static let activeTopLevelSurfaces = ["Today", "Goals", "Time", "You"]
     public static let productGrammar = ["Capture", "Clarify", "Shape", "Start", "Inspect", "Close", "Remember"]
     public static let changesRuntimeBehavior = false
     public static let claimsRenderedProof = false
@@ -140,7 +129,7 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
         stage("Clarify", promise: "Give it a place.", surfaces: ["Global Capture", "Goals"], object: "Needs a Place / Grow into Goal"),
         stage("Shape", promise: "Shape your time around what matters.", surfaces: ["Time"], object: "LifeShape Field"),
         stage("Start", promise: "Start where reality allows.", surfaces: ["Today"], object: "Start Here / Reality Meridian"),
-        stage("Inspect", promise: "See what moved and what can re-enter.", surfaces: ["Motion"], object: "Motion Current"),
+        stage("Inspect", promise: "See what moved and what can re-enter.", surfaces: ["You", "Today"], object: "Proof / Source / Privacy / History / Receipts"),
         stage("Close", promise: "Close the loop without shame.", surfaces: ["Today"], object: "Receipt Surface"),
         stage("Remember", promise: "Trust what changed.", surfaces: ["You"], object: "Trust Seam / Receipts & History")
     ]
@@ -154,8 +143,8 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
         handoff("Time", "Today", thread: "capacity informs what fits now", trust: "pressure source and user choice"),
         handoff("Today", "Time", thread: "pressure or reflow sends user to Shape Time", trust: "Quiet Preview changes"),
         handoff("Today", "Goals", thread: "closed step updates goal thread proof", trust: "receipt and proof path"),
-        handoff("Today", "Motion", thread: "closure and recovery become inspectable movement", trust: "proof and recovery receipt"),
-        handoff("Motion", "Today", thread: "re-entry path returns to the current Recommended step", trust: "source and recovery context"),
+        handoff("Today", "You", thread: "closure and recovery become inspectable movement", trust: "proof and recovery receipt"),
+        handoff("You", "Today", thread: "re-entry path returns to the current Recommended step", trust: "source and recovery context"),
         handoff("Any", "You", thread: "Trust Seam routes to Privacy & automation / Privacy / Receipts & History", trust: "user-controlled review")
     ]
 
@@ -249,20 +238,6 @@ public struct TopLevelSurfaceCompositionBar: View {
                         supportingModuleChips
                     }
                 }
-            case .motion:
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    EvidenceLabel(
-                        surface.primaryObject,
-                        detail: surface.orientation,
-                        source: surface.title,
-                        state: state == .selected ? .active : .calm,
-                        context: .motion
-                    )
-
-                    HStack(spacing: theme.spacing.xs) {
-                        supportingModuleChips
-                    }
-                }
             case .time:
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     EvidenceLabel(
@@ -270,7 +245,7 @@ public struct TopLevelSurfaceCompositionBar: View {
                         detail: surface.orientation,
                         source: surface.title,
                         state: state == .warning ? .stale : .active,
-                        context: .plan
+                        context: .time
                     )
 
                     HStack(spacing: theme.spacing.xs) {
@@ -323,15 +298,6 @@ public struct TopLevelSurfaceCompositionBar: View {
                 HStack(spacing: theme.spacing.xs) {
                     surfaceLead
                     AmbitionModeLensPill(surface.lens)
-                }
-                primaryText
-                orientationText
-            }
-        case .motion:
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                HStack(spacing: theme.spacing.xs) {
-                    surfaceLead
-                    AmbitionAmbientStatusOrb(surface.ambientStatus)
                 }
                 primaryText
                 orientationText

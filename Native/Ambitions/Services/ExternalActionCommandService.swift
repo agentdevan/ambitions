@@ -7,7 +7,7 @@ enum ExternalActionKind: Equatable, Sendable {
     case askForSmallerStep
     case openGoal
     case openToday
-    case openCapturesInbox
+    case openCaptureComposer
     case openMemoryLens
     case unsupported(String)
 }
@@ -95,8 +95,8 @@ struct ExternalActionCommand: Equatable, Sendable {
             return .openGoal
         case "open-today":
             return .openToday
-        case "open-captures-inbox":
-            return .openCapturesInbox
+        case "open-capture-composer":
+            return .openCaptureComposer
         case "open-memory-lens", "memory-lens":
             return .openMemoryLens
         default:
@@ -113,7 +113,7 @@ struct ExternalActionCommand: Equatable, Sendable {
             return .openToday
         case .snooze, .delay, .askForSmallerStep:
             return .openToday
-        case .openGoal, .openToday, .openCapturesInbox, .openMemoryLens, .unsupported:
+        case .openGoal, .openToday, .openCaptureComposer, .openMemoryLens, .unsupported:
             return kind
         }
     }
@@ -204,8 +204,8 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
             return .openTab(.today)
         case let .openGoalDetail(goalID):
             return .openGoalDetail(goalID: goalID)
-        case .openCapturesInbox:
-            return .openTimeRoute(.captureInbox)
+        case .openCaptureComposer:
+            return .openCaptureComposer
         case .openMemoryLens:
             return .presentOverlay(.memoryLens(entrySource: entrySource(for: source)))
         case let .presentOverlay(overlay):

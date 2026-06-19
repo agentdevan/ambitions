@@ -21,7 +21,7 @@ final class CalendarRealityServiceTests: XCTestCase {
         let result = await service.findOpenWindows(
             request: CalendarRealityReadRequest(
                 horizon: DateInterval(start: now, end: now.addingTimeInterval(4 * 3_600)),
-                userInitiatedPlanAction: "Find real open windows"
+                userInitiatedTimeAction: "Find real open windows"
             )
         )
         let requestedScopes = await store.requestedScopes
@@ -54,7 +54,7 @@ final class CalendarRealityServiceTests: XCTestCase {
         let result = await service.findOpenWindows(
             request: CalendarRealityReadRequest(
                 horizon: DateInterval(start: now, end: now.addingTimeInterval(2 * 3_600)),
-                userInitiatedPlanAction: "Make Time calendar-aware"
+                userInitiatedTimeAction: "Make Time calendar-aware"
             )
         )
 
