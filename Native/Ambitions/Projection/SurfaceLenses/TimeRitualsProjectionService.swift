@@ -1,18 +1,18 @@
 import Foundation
 
-struct RepositoryBackedTimeRitualsService: HabitsServicing {
+struct RepositoryBackedTimeRitualsService: TimeRitualsServicing {
     let repositories: AppRepositories
 
-    func loadDashboard(now: Date) async throws -> HabitsDashboard {
+    func loadDashboard(now: Date) async throws -> TimeRitualsDashboard {
         let snapshot = try await loadSnapshot()
         return makeDashboard(snapshot: snapshot, now: now)
     }
 
-    func performAction(_ request: HabitActionRequest, now: Date) async throws -> HabitActionResponse {
+    func performAction(_ request: TimeRitualActionRequest, now: Date) async throws -> TimeRitualActionResponse {
         guard var goal = try await repositories.goals.goal(id: request.target.goalID),
               let step = goal.plan?.sections.flatMap(\.steps).first(where: { $0.id == request.target.stepID }) else {
-            return HabitActionResponse(
-                message: HabitInlineMessage(
+            return TimeRitualActionResponse(
+                message: TimeRitualInlineMessage(
                     title: "Ritual moved",
                     body: "That routine is no longer available in the current native snapshot.",
                     state: .warning
@@ -20,24 +20,24 @@ struct RepositoryBackedTimeRitualsService: HabitsServicing {
             )
         }
 
-        let cadenceDays = HabitGoalSemantics.cadenceDays(goal: goal, step: step)
+        let cadenceDays = TimeRitualGoalSemantics.cadenceDays(goal: goal, step: step)
         var feedback = try await repositories.feedback.listEvents(goalID: goal.id)
         let timestamp = Self.iso.string(from: now)
         let base = GoalFeedbackEventBase(
-            id: "habit-\(request.kind.rawValue)-\(UUID().uuidString)",
+            id: "ritual-\(request.kind.rawValue)-\(UUID().uuidString)",
             stepID: step.id,
             occurredAt: timestamp,
             note: note(for: request.kind, step: step)
         )
 
-        let message: HabitInlineMessage
+        let message: TimeRitualInlineMessage
         var proofArtifactID: String?
 
         switch request.kind {
         case .complete:
             feedback.append(.completed(base: base, actualDuration: stepMinutes(for: goal.mode), effortLevel: .low, confidenceDelta: 0.06))
             try await repositories.feedback.saveEvents(feedback, goalID: goal.id)
-            let evidenceID = "habit-evidence-\(UUID().uuidString)"
+            let evidenceID = "ritual-evidence-\(UUID().uuidString)"
             try await repositories.evidence.saveEvidence([
                 ProgressEvidence(
                     id: evidenceID,
@@ -55,13 +55,13 @@ struct RepositoryBackedTimeRitualsService: HabitsServicing {
             proofArtifactID = evidenceID
             goal = advance(goal: goal, step: step, now: now, cadenceDays: cadenceDays)
             try await repositories.goals.saveGoals([goal])
-            message = HabitInlineMessage(
+            message = TimeRitualInlineMessage(
                 title: "Ritual logged",
                 body: "Today's full version is recorded. The rhythm stays active without pretending the loop is finished forever.",
                 state: .success
             )
         case .minimumVersion:
-            let evidenceID = "habit-evidence-\(UUID().uuidString)"
+            let evidenceID = "ritual-evidence-\(UUID().uuidString)"
             try await repositories.evidence.saveEvidence([
                 ProgressEvidence(
                     id: evidenceID,
@@ -79,9 +79,9 @@ struct RepositoryBackedTimeRitualsService: HabitsServicing {
             proofArtifactID = evidenceID
             goal = advance(goal: goal, step: step, now: now, cadenceDays: cadenceDays)
             try await repositories.goals.saveGoals([goal])
-            message = HabitInlineMessage(title: "Minimum version counts", body: step.actionability.fallbackMicroStep, state: .success)
+            message = TimeRitualInlineMessage(title: "Minimum version counts", body: step.actionability.fallbackMicroStep, state: .success)
         case .quickLog:
-            let evidenceID = "habit-evidence-\(UUID().uuidString)"
+            let evidenceID = "ritual-evidence-\(UUID().uuidString)"
             try await repositories.evidence.saveEvidence([
                 ProgressEvidence(
                     id: evidenceID,
@@ -97,7 +97,7 @@ struct RepositoryBackedTimeRitualsService: HabitsServicing {
                 )
             ])
             proofArtifactID = evidenceID
-            message = HabitInlineMessage(title: "Signal captured", body: "Progress was logged without forcing a full completion label.", state: .selected)
+            message = TimeRitualInlineMessage(title: "Signal captured", body: "Progress was logged without forcing a full completion label.", state: .selected)
         case .delay:
             feedback.append(.delayed(base: base, timingAdjustment: .laterToday, date: nil))
             try await repositories.feedback.saveEvents(feedback, goalID: goal.id)
@@ -106,33 +106,33 @@ struct RepositoryBackedTimeRitualsService: HabitsServicing {
                 stepCopy(from: current, timing: shiftedTiming(current.timing, now: now, adjustment: .laterToday))
             }
             try await repositories.goals.saveGoals([goal])
-            message = HabitInlineMessage(title: "Delayed without drama", body: "The routine stays live, but the system is no longer treating it like it had to happen right now.", state: .selected)
+            message = TimeRitualInlineMessage(title: "Delayed without drama", body: "The routine stays live, but the system is no longer treating it like it had to happen right now.", state: .selected)
         case .skip:
             feedback.append(.skipped(base: base, reasonCode: .notNow))
             try await repositories.feedback.saveEvents(feedback, goalID: goal.id)
             proofArtifactID = base.id
             goal = update(goal: goal, stepID: step.id) { current in
-                stepCopy(from: current, timing: HabitGoalSemantics.advancedTiming(from: current.timing, now: now, cadenceDays: cadenceDays))
+                stepCopy(from: current, timing: TimeRitualGoalSemantics.advancedTiming(from: current.timing, now: now, cadenceDays: cadenceDays))
             }
             try await repositories.goals.saveGoals([goal])
-            message = HabitInlineMessage(title: "Skipped, still okay", body: "Today's window was intentionally let go. The next cadence point is already in place.", state: .warning)
+            message = TimeRitualInlineMessage(title: "Skipped, still okay", body: "Today's window was intentionally let go. The next cadence point is already in place.", state: .warning)
         case .needsEasierVersion:
             feedback.append(.askedForSmallerVersion(base: base))
             try await repositories.feedback.saveEvents(feedback, goalID: goal.id)
             proofArtifactID = base.id
-            message = HabitInlineMessage(title: "Easier version noted", body: "Use this minimum version next: \(step.actionability.fallbackMicroStep)", state: .selected)
+            message = TimeRitualInlineMessage(title: "Easier version noted", body: "Use this minimum version next: \(step.actionability.fallbackMicroStep)", state: .selected)
         case .markNotRelevant:
             feedback.append(.notRelevant(base: base))
             try await repositories.feedback.saveEvents(feedback, goalID: goal.id)
             proofArtifactID = base.id
             goal = Goal(schemaVersion: goal.schemaVersion, id: goal.id, revision: goal.revision + 1, createdAt: goal.createdAt, updatedAt: timestamp, state: .paused, title: goal.title, summary: goal.summary, mode: goal.mode, relationshipKind: goal.relationshipKind, actor: goal.actor, parentGoalID: goal.parentGoalID, childGoalIDs: goal.childGoalIDs, supportGoalIDs: goal.supportGoalIDs, tags: goal.tags, timing: goal.timing, planningStrategy: goal.planningStrategy, progressStrategy: goal.progressStrategy, plan: goal.plan, lifeGraph: goal.lifeGraph)
             try await repositories.goals.saveGoals([goal])
-            message = HabitInlineMessage(title: "Routine flagged for review", body: "This routine has been softened out of the active loop until the ritual plan is corrected.", state: .warning)
+            message = TimeRitualInlineMessage(title: "Routine flagged for review", body: "This routine has been softened out of the active loop until the ritual plan is corrected.", state: .warning)
         case .openDetail:
-            message = HabitInlineMessage(title: "Opening ritual context", body: "This ritual is linked back to the full goal context so cadence, support language, and replanning all stay aligned.", state: .selected)
+            message = TimeRitualInlineMessage(title: "Opening ritual context", body: "This ritual is linked back to the full goal context so cadence, support language, and replanning all stay aligned.", state: .selected)
         }
 
-        return HabitActionResponse(message: message, proofArtifactID: proofArtifactID)
+        return TimeRitualActionResponse(message: message, proofArtifactID: proofArtifactID)
     }
 
     func loadSnapshot() async throws -> Snapshot {

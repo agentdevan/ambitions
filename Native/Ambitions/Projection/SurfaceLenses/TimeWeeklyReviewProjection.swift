@@ -9,8 +9,8 @@ extension RepositoryBackedTimeService {
         let missingGoalSummaries = activeGoalSummaries.filter { $0.contexts.isEmpty }
         let pressuredGoalSummary = pressuredGoalSummary(from: activeGoalSummaries)
         let habitGoals = activeGoals.filter { goal in
-            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
-            return goal.mode == .habit || HabitGoalSemantics.isHabitLike(goal: goal, step: step)
+            guard let step = TimeRitualGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
+            return goal.mode == .habit || TimeRitualGoalSemantics.isRitualLike(goal: goal, step: step)
         }
         let weekDays = makeWeekDays(
             summaries: activeGoalSummaries,

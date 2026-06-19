@@ -167,7 +167,7 @@ final class AmbitionsRuntime {
     let todayService: any TodayServicing
     let goalsService: any GoalsServicing
     let captureService: any CaptureServicing
-    let habitsService: any HabitsServicing
+    let timeRitualsService: any TimeRitualsServicing
     let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing
@@ -190,7 +190,7 @@ final class AmbitionsRuntime {
         todayService: any TodayServicing,
         goalsService: any GoalsServicing,
         captureService: any CaptureServicing,
-        habitsService: any HabitsServicing,
+        timeRitualsService: any TimeRitualsServicing,
         timeService: any TimeServicing,
         insightsService: any InsightsServicing,
         youService: any YouServicing,
@@ -212,7 +212,7 @@ final class AmbitionsRuntime {
         self.todayService = todayService
         self.goalsService = goalsService
         self.captureService = captureService
-        self.habitsService = habitsService
+        self.timeRitualsService = timeRitualsService
         self.timeService = timeService
         self.insightsService = insightsService
         self.youService = youService

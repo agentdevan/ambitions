@@ -1,7 +1,7 @@
 import XCTest
 @testable import Ambitions
 
-final class HabitsFeatureServiceTests: XCTestCase {
+final class TimeRitualsProjectionServiceTests: XCTestCase {
     func testLoadDashboardFromEmptyRepositoriesShowsEmptyMode() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedTimeRitualsService(repositories: repositories)
@@ -19,22 +19,22 @@ final class HabitsFeatureServiceTests: XCTestCase {
         let service = RepositoryBackedTimeRitualsService(repositories: repositories)
         let habitGoals = try await repositories.goals.listHabitGoals()
         let goal = try XCTUnwrap(habitGoals.first)
-        let step = try XCTUnwrap(HabitGoalSemantics.preferredStep(in: goal))
+        let step = try XCTUnwrap(TimeRitualGoalSemantics.preferredStep(in: goal))
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime]
         let now = try XCTUnwrap(formatter.date(from: GoalEngineFixtures.fixedNow))
 
         _ = try await service.performAction(
-            HabitActionRequest(
+            TimeRitualActionRequest(
                 kind: .quickLog,
-                target: HabitActionTarget(goalID: goal.id, stepID: step.id, draftID: nil)
+                target: TimeRitualActionTarget(goalID: goal.id, stepID: step.id, draftID: nil)
             ),
             now: now
         )
 
         let evidence = try await repositories.evidence.listEvidence(goalID: goal.id)
         let dashboard = try await service.loadDashboard(now: now)
-        let loggedHabit = try XCTUnwrap((dashboard.habits + dashboard.recoveryHabits).first(where: { $0.id == goal.id }))
+        let loggedHabit = try XCTUnwrap((dashboard.rituals + dashboard.recoveryRituals).first(where: { $0.id == goal.id }))
 
         XCTAssertTrue(evidence.contains(where: { $0.evidenceKind == .habitQuickLog && $0.stepID == step.id }))
         XCTAssertEqual(loggedHabit.status, .partial)
@@ -58,10 +58,10 @@ final class HabitsFeatureServiceTests: XCTestCase {
         XCTAssertTrue(surfaceCopy.localizedCaseInsensitiveContains("ritual"))
         XCTAssertFalse(surfaceCopy.localizedCaseInsensitiveContains("habit"))
 
-        let firstRitual = try XCTUnwrap((dashboard.habits + dashboard.recoveryHabits).first)
+        let firstRitual = try XCTUnwrap((dashboard.rituals + dashboard.recoveryRituals).first)
         let openDetail = try XCTUnwrap(firstRitual.actions.first(where: { $0.kind == .openDetail }))
         let response = try await service.performAction(
-            HabitActionRequest(kind: openDetail.kind, target: openDetail.target),
+            TimeRitualActionRequest(kind: openDetail.kind, target: openDetail.target),
             now: now
         )
 
@@ -76,25 +76,25 @@ final class HabitsFeatureServiceTests: XCTestCase {
     }
 }
 
-private extension HabitsFeatureServiceTests {
-    func userFacingCopy(from dashboard: HabitsDashboard) -> [String] {
+private extension TimeRitualsProjectionServiceTests {
+    func userFacingCopy(from dashboard: TimeRitualsDashboard) -> [String] {
         var copy = [
             dashboard.title,
             dashboard.subtitle,
             dashboard.summaryLabel,
             dashboard.summaryDetail,
-            dashboard.streak.title,
-            dashboard.streak.subtitle,
-            dashboard.streak.recoveryNote,
+            dashboard.momentum.title,
+            dashboard.momentum.subtitle,
+            dashboard.momentum.recoveryNote,
             dashboard.guidanceTitle,
             dashboard.guidanceBody
         ]
         copy.append(contentsOf: dashboard.stats.flatMap { [$0.title, $0.value, $0.detail ?? ""] })
-        copy.append(contentsOf: dashboard.streak.stats.flatMap { [$0.title, $0.value, $0.detail ?? ""] })
-        copy.append(contentsOf: (dashboard.habits + dashboard.recoveryHabits).flatMap { summary in
+        copy.append(contentsOf: dashboard.momentum.stats.flatMap { [$0.title, $0.value, $0.detail ?? ""] })
+        copy.append(contentsOf: (dashboard.rituals + dashboard.recoveryRituals).flatMap { summary in
             [
                 summary.cadenceLabel,
-                summary.streakLabel,
+                summary.rhythmLabel,
                 summary.consistencyLabel,
                 summary.progressLabel,
                 summary.status.title,

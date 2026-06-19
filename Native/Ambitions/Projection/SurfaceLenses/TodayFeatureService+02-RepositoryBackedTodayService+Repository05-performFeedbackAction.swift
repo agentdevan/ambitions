@@ -48,7 +48,7 @@ extension RepositoryBackedTodayService {
                     id: "evidence-\(UUID().uuidString)",
                     goalID: goalID,
                     stepID: stepID,
-                    evidenceKind: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? .habitCompletion : .stepCompleted,
+                    evidenceKind: TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep) ? .habitCompletion : .stepCompleted,
                     source: .manual,
                     capturedAt: timestamp,
                     progressDelta: 0.18,
@@ -57,8 +57,8 @@ extension RepositoryBackedTodayService {
                     note: "Completed from Today."
                 )
             ])
-            if HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) {
-                let cadenceDays = HabitGoalSemantics.cadenceDays(goal: goal, step: selectedStep)
+            if TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep) {
+                let cadenceDays = TimeRitualGoalSemantics.cadenceDays(goal: goal, step: selectedStep)
                 goal = update(goal: goal, stepID: stepID, now: now) { step in
                     Step(
                         id: step.id,
@@ -68,7 +68,7 @@ extension RepositoryBackedTodayService {
                         type: step.type,
                         state: step.state,
                         owner: step.owner,
-                        timing: HabitGoalSemantics.advancedTiming(from: step.timing, now: now, cadenceDays: cadenceDays),
+                        timing: TimeRitualGoalSemantics.advancedTiming(from: step.timing, now: now, cadenceDays: cadenceDays),
                         dependencyStepIDs: step.dependencyStepIDs,
                         isOptional: step.isOptional,
                         isRepeatable: step.isRepeatable,
@@ -99,8 +99,8 @@ extension RepositoryBackedTodayService {
             }
             try await repositories.goals.saveGoals([goal])
             message = TodayInlineMessage(
-                title: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? "Ritual logged" : "Completion recorded",
-                body: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep)
+                title: TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep) ? "Ritual logged" : "Completion recorded",
+                body: TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep)
                     ? "\"\(selectedStep.title)\" was recorded for today and kept alive as an ongoing rhythm."
                     : "\"\(selectedStep.title)\" is now reflected in native evidence and feedback.",
                 state: .success

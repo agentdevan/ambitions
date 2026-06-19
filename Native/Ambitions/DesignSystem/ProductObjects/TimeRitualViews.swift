@@ -4,7 +4,7 @@ import SwiftUI
 struct TimeRitualsHeroView: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let dashboard: HabitsDashboard
+    let dashboard: TimeRitualsDashboard
 
     var body: some View {
         HeroCard(state: heroState) {
@@ -33,7 +33,7 @@ struct TimeRitualsHeroView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: theme.spacing.sm) {
                         ForEach(dashboard.stats) { metric in
-                            HabitMetricChip(metric: metric)
+                            TimeRitualMetricChip(metric: metric)
                         }
                     }
                 }
@@ -52,7 +52,7 @@ struct TimeRitualsHeroView: View {
     }
 }
 
-private struct HabitMetricChip: View {
+private struct TimeRitualMetricChip: View {
     @Environment(\.ambitionTheme) private var theme
 
     let metric: MetricSummary
@@ -81,23 +81,23 @@ private struct HabitMetricChip: View {
 struct TimeRitualRowView: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let habit: HabitSummary
-    let onAction: (HabitActionState) -> Void
+    let ritual: TimeRitualSummary
+    let onAction: (TimeRitualActionState) -> Void
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             HStack(alignment: .top, spacing: theme.spacing.sm) {
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
                     HStack(spacing: theme.spacing.xs) {
-                        TagPill(habit.status.title, state: habit.status.visualState)
-                        TagPill(habit.cadenceLabel, state: .default)
+                        TagPill(ritual.status.title, state: ritual.status.visualState)
+                        TagPill(ritual.cadenceLabel, state: .default)
                     }
 
-                    Text(habit.title)
+                    Text(ritual.title)
                         .font(theme.typography.section)
                         .foregroundStyle(theme.colors.textPrimary)
 
-                    Text(habit.subtitle)
+                    Text(ritual.subtitle)
                         .font(theme.typography.body)
                         .foregroundStyle(theme.colors.textSecondary)
                         .fixedSize(horizontal: false, vertical: true)
@@ -106,35 +106,35 @@ struct TimeRitualRowView: View {
                 Spacer(minLength: theme.spacing.sm)
                 Image(systemName: iconName)
                     .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                    .foregroundStyle(theme.stateStyle(for: habit.status.visualState).accent)
+                    .foregroundStyle(theme.stateStyle(for: ritual.status.visualState).accent)
             }
 
             ProgressRail(
-                title: habit.progressLabel,
-                progress: habit.progress,
-                trailingValue: habit.streakLabel,
-                state: habit.status.visualState
+                title: ritual.progressLabel,
+                progress: ritual.progress,
+                trailingValue: ritual.rhythmLabel,
+                state: ritual.status.visualState
             )
 
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(habit.note)
+                Text(ritual.note)
                     .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
-                Text(habit.consistencyLabel)
+                Text(ritual.consistencyLabel)
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
-                if let supportLabel = habit.supportLabel {
+                if let supportLabel = ritual.supportLabel {
                     Text(supportLabel)
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textTertiary)
                 }
             }
 
-            if let minimumVersionLabel = habit.minimumVersionLabel {
-                HabitMinimumVersionSurface(text: minimumVersionLabel, state: habit.status)
+            if let minimumVersionLabel = ritual.minimumVersionLabel {
+                TimeRitualMinimumVersionSurface(text: minimumVersionLabel, state: ritual.status)
             }
 
-            TimeRitualActionGrid(actions: habit.actions, onAction: onAction)
+            TimeRitualActionGrid(actions: ritual.actions, onAction: onAction)
         }
         .padding(theme.spacing.md)
         .background(RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous).fill(theme.colors.surfaceOverlay))
@@ -143,7 +143,7 @@ struct TimeRitualRowView: View {
     }
 
     private var iconName: String {
-        switch habit.status {
+        switch ritual.status {
         case .completed: "checkmark.circle.fill"
         case .minimumDone: "leaf.circle.fill"
         case .recovery: "arrow.uturn.backward.circle.fill"
@@ -158,11 +158,11 @@ struct TimeRitualRowView: View {
     }
 }
 
-private struct HabitMinimumVersionSurface: View {
+private struct TimeRitualMinimumVersionSurface: View {
     @Environment(\.ambitionTheme) private var theme
 
     let text: String
-    let state: HabitTodayState
+    let state: TimeRitualState
 
     var body: some View {
         let style = theme.stateStyle(for: state.visualState)
@@ -184,8 +184,8 @@ private struct HabitMinimumVersionSurface: View {
 struct TimeRitualActionGrid: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let actions: [HabitActionState]
-    let onAction: (HabitActionState) -> Void
+    let actions: [TimeRitualActionState]
+    let onAction: (TimeRitualActionState) -> Void
 
     var body: some View {
         LazyVGrid(columns: [GridItem(.adaptive(minimum: 136), spacing: theme.spacing.xs)], spacing: theme.spacing.xs) {
@@ -208,27 +208,27 @@ struct TimeRitualActionGrid: View {
 struct TimeRitualRecoveryView: View {
     @Environment(\.ambitionTheme) private var theme
 
-    let streak: StreakSummary
+    let momentum: TimeRitualMomentumSummary
 
     var body: some View {
         ClosureRecoveryPrimitiveStage(
             role: .recovery,
             title: "Recovery summary",
             subtitle: "Gentler ritual restart stays visible without a generic card shell.",
-            accessibilityIdentifier: "habits.recovery-summary"
+            accessibilityIdentifier: "rituals.recovery-summary"
         ) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
-                SectionHeader(title: streak.title, subtitle: streak.subtitle)
+                SectionHeader(title: momentum.title, subtitle: momentum.subtitle)
 
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: theme.spacing.sm) {
-                        ForEach(streak.stats) { metric in
-                            HabitMetricChip(metric: metric)
+                        ForEach(momentum.stats) { metric in
+                            TimeRitualMetricChip(metric: metric)
                         }
                     }
                 }
 
-                Text(streak.recoveryNote)
+                Text(momentum.recoveryNote)
                     .font(theme.typography.body)
                     .foregroundStyle(theme.colors.textSecondary)
             }

@@ -64,7 +64,7 @@ extension RepositoryBackedGoalsService {
                     id: "evidence-\(UUID().uuidString)",
                     goalID: goal.id,
                     stepID: selectedStep.id,
-                    evidenceKind: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? .habitCompletion : .stepCompleted,
+                    evidenceKind: TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep) ? .habitCompletion : .stepCompleted,
                     source: .manual,
                     capturedAt: timestamp,
                     progressDelta: 0.18,
@@ -73,13 +73,13 @@ extension RepositoryBackedGoalsService {
                     note: "Completed from Goal Detail."
                 )
             ])
-            if HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) {
-                let cadenceDays = HabitGoalSemantics.cadenceDays(goal: goal, step: selectedStep)
+            if TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep) {
+                let cadenceDays = TimeRitualGoalSemantics.cadenceDays(goal: goal, step: selectedStep)
                 goal = update(goal: goal, stepID: selectedStep.id) { step in
                     updatedStep(
                         step,
                         summary: step.summary ?? step.actionability.fallbackMicroStep,
-                        timing: HabitGoalSemantics.advancedTiming(from: step.timing, now: now, cadenceDays: cadenceDays)
+                        timing: TimeRitualGoalSemantics.advancedTiming(from: step.timing, now: now, cadenceDays: cadenceDays)
                     )
                 }
             } else {
@@ -105,8 +105,8 @@ extension RepositoryBackedGoalsService {
             try await repositories.goals.saveGoals([goal])
             return GoalDetailActionResponse(
                 message: GoalDetailInlineMessage(
-                    title: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep) ? "Ritual logged" : "Completion recorded",
-                    body: HabitGoalSemantics.isHabitLike(goal: goal, step: selectedStep)
+                    title: TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep) ? "Ritual logged" : "Completion recorded",
+                    body: TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep)
                         ? "\"\(selectedStep.title)\" now lands in native evidence while staying active as a recurring rhythm."
                         : "\"\(selectedStep.title)\" now lands in native evidence and plan history.",
                     state: .success

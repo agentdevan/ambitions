@@ -29,7 +29,7 @@ final class AppContainer {
     let todayService: any TodayServicing
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
-    let habitsService: any HabitsServicing
+    let timeRitualsService: any TimeRitualsServicing
     let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing
@@ -54,7 +54,7 @@ final class AppContainer {
         todayService: any TodayServicing,
         captureService: any CaptureServicing,
         goalsService: any GoalsServicing,
-        habitsService: any HabitsServicing,
+        timeRitualsService: any TimeRitualsServicing,
         timeService: any TimeServicing,
         insightsService: any InsightsServicing,
         youService: any YouServicing,
@@ -80,7 +80,7 @@ final class AppContainer {
             todayService: todayService,
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
-            habitsService: runtime.habitsService,
+            timeRitualsService: runtime.timeRitualsService,
             timeService: runtime.timeService,
             insightsService: runtime.insightsService,
             youService: runtime.youService
@@ -101,7 +101,7 @@ final class AppContainer {
             todayService: todayService,
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
-            habitsService: runtime.habitsService,
+            timeRitualsService: runtime.timeRitualsService,
             timeService: runtime.timeService,
             insightsService: runtime.insightsService,
             youService: runtime.youService
@@ -115,7 +115,7 @@ final class AppContainer {
         self.todayService = todayService
         self.captureService = captureService
         self.goalsService = goalsService
-        self.habitsService = habitsService
+        self.timeRitualsService = timeRitualsService
         self.timeService = timeService
         self.insightsService = insightsService
         self.youService = youService

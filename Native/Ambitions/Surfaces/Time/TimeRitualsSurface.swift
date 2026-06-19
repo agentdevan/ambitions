@@ -88,24 +88,24 @@ struct TimeRitualsSurface: View {
                             }
                         )
                     } else {
-                        if !dashboard.habits.isEmpty {
-                            habitsSection(
+                        if !dashboard.rituals.isEmpty {
+                            ritualsSection(
                                 title: "Today",
                                 subtitle: "Fast logging keeps recurring rituals lightweight enough to use every day.",
-                                habits: dashboard.habits
+                                rituals: dashboard.rituals
                             )
                         }
 
-                        if !dashboard.recoveryHabits.isEmpty {
-                            habitsSection(
+                        if !dashboard.recoveryRituals.isEmpty {
+                            ritualsSection(
                                 title: "Recovery",
                                 subtitle: "These loops need a gentler restart, a smaller version, or a ritual-plan correction.",
-                                habits: dashboard.recoveryHabits
+                                rituals: dashboard.recoveryRituals
                             )
                         }
                     }
 
-                    TimeRitualRecoveryView(streak: dashboard.streak)
+                    TimeRitualRecoveryView(momentum: dashboard.momentum)
 
                     AppCard {
                         SectionHeader(title: dashboard.guidanceTitle, subtitle: dashboard.guidanceBody)
@@ -128,24 +128,24 @@ struct TimeRitualsSurface: View {
             postMutationAccessibilityAnnouncement()
         }
         .task {
-            await viewModel.load(using: featureFactory.habitsService, now: clock.now)
+            await viewModel.load(using: featureFactory.timeRitualsService, now: clock.now)
         }
     }
 
-    private func habitsSection(title: String, subtitle: String, habits: [HabitSummary]) -> some View {
+    private func ritualsSection(title: String, subtitle: String, rituals: [TimeRitualSummary]) -> some View {
         AppCard {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(title: title, subtitle: subtitle)
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(habits) { habit in
-                        TimeRitualRowView(habit: habit, onAction: handleAction)
+                    ForEach(rituals) { ritual in
+                        TimeRitualRowView(ritual: ritual, onAction: handleAction)
                     }
                 }
             }
         }
     }
 
-    private func handleAction(_ action: HabitActionState) {
+    private func handleAction(_ action: TimeRitualActionState) {
         if action.kind == .openDetail {
             viewModel.recordStageRouteMutation(action: action)
             shell.navigation.openGoalDetail(
@@ -157,7 +157,7 @@ struct TimeRitualsSurface: View {
         }
 
         Task {
-            await viewModel.perform(action, using: featureFactory.habitsService, now: clock.now)
+            await viewModel.perform(action, using: featureFactory.timeRitualsService, now: clock.now)
         }
     }
 
@@ -180,7 +180,7 @@ struct TimeRitualsSurface: View {
     }
 
     private func refresh() async {
-        await viewModel.refresh(using: featureFactory.habitsService, now: clock.now)
+        await viewModel.refresh(using: featureFactory.timeRitualsService, now: clock.now)
     }
 
     private func postMutationAccessibilityAnnouncement() {
@@ -192,43 +192,43 @@ struct TimeRitualsSurface: View {
 #if DEBUG
 #Preview("Rituals Active Light") {
     NavigationStack {
-        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewHabitsScenarios.active)))
+        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewTimeRitualScenarios.active)))
     }
-    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
+    .appContainer(PreviewAppContainerFactory.preview(timeRitualsDashboard: PreviewTimeRitualScenarios.active))
     .ambitionTheme(.light)
     .preferredColorScheme(.light)
 }
 
 #Preview("Rituals Active Dark") {
     NavigationStack {
-        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewHabitsScenarios.active)))
+        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewTimeRitualScenarios.active)))
     }
-    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.active))
+    .appContainer(PreviewAppContainerFactory.preview(timeRitualsDashboard: PreviewTimeRitualScenarios.active))
     .ambitionTheme(.dark)
     .preferredColorScheme(.dark)
 }
 
 #Preview("Rituals Recovery") {
     NavigationStack {
-        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewHabitsScenarios.recovery)))
+        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewTimeRitualScenarios.recovery)))
     }
-    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.recovery))
+    .appContainer(PreviewAppContainerFactory.preview(timeRitualsDashboard: PreviewTimeRitualScenarios.recovery))
     .ambitionTheme(.dark)
 }
 
 #Preview("Rituals Empty") {
     NavigationStack {
-        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewHabitsScenarios.empty)))
+        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewTimeRitualScenarios.empty)))
     }
-    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.empty))
+    .appContainer(PreviewAppContainerFactory.preview(timeRitualsDashboard: PreviewTimeRitualScenarios.empty))
     .ambitionTheme(.dark)
 }
 
 #Preview("Rituals Seeded") {
     NavigationStack {
-        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewHabitsScenarios.seeded)))
+        TimeRitualsSurface(viewModel: TimeRitualsViewModel(state: .loaded(PreviewTimeRitualScenarios.seeded)))
     }
-    .appContainer(PreviewAppContainerFactory.preview(habitsDashboard: PreviewHabitsScenarios.seeded))
+    .appContainer(PreviewAppContainerFactory.preview(timeRitualsDashboard: PreviewTimeRitualScenarios.seeded))
     .ambitionTheme(.dark)
 }
 #endif

@@ -9,14 +9,14 @@ struct MetricSummary: Identifiable, Sendable, Equatable {
     let icon: String
 }
 
-enum HabitsExperienceMode: Sendable {
+enum TimeRitualsExperienceMode: Sendable {
     case empty
     case seeded
     case active
     case recovery
 }
 
-enum HabitTodayState: String, Sendable {
+enum TimeRitualState: String, Sendable {
     case ready
     case completed
     case minimumDone = "minimum_done"
@@ -67,7 +67,7 @@ enum HabitTodayState: String, Sendable {
     }
 }
 
-enum HabitActionKind: String, Sendable {
+enum TimeRitualActionKind: String, Sendable {
     case complete
     case skip
     case delay
@@ -78,28 +78,28 @@ enum HabitActionKind: String, Sendable {
     case markNotRelevant = "mark_not_relevant"
 }
 
-struct HabitActionTarget: Hashable, Sendable {
+struct TimeRitualActionTarget: Hashable, Sendable {
     let goalID: String
     let stepID: String
     let draftID: String?
 }
 
-struct HabitActionState: Identifiable, Sendable {
+struct TimeRitualActionState: Identifiable, Sendable {
     var id: String { "\(kind.rawValue)-\(target.goalID)-\(target.stepID)" }
 
-    let kind: HabitActionKind
+    let kind: TimeRitualActionKind
     let title: String
     let systemImage: String
     let state: AmbitionVisualState
-    let target: HabitActionTarget
+    let target: TimeRitualActionTarget
 }
 
-struct HabitActionRequest: Sendable {
-    let kind: HabitActionKind
-    let target: HabitActionTarget
+struct TimeRitualActionRequest: Sendable {
+    let kind: TimeRitualActionKind
+    let target: TimeRitualActionTarget
 }
 
-struct HabitInlineMessage: Identifiable, Sendable {
+struct TimeRitualInlineMessage: Identifiable, Sendable {
     let id: String
     let title: String
     let body: String
@@ -113,50 +113,50 @@ struct HabitInlineMessage: Identifiable, Sendable {
     }
 }
 
-struct HabitActionResponse: Sendable {
-    let message: HabitInlineMessage?
+struct TimeRitualActionResponse: Sendable {
+    let message: TimeRitualInlineMessage?
     let proofArtifactID: String?
 
-    init(message: HabitInlineMessage?, proofArtifactID: String? = nil) {
+    init(message: TimeRitualInlineMessage?, proofArtifactID: String? = nil) {
         self.message = message
         self.proofArtifactID = proofArtifactID
     }
 }
 
-struct HabitSummary: Identifiable, Sendable {
+struct TimeRitualSummary: Identifiable, Sendable {
     let id: String
-    let target: HabitActionTarget
+    let target: TimeRitualActionTarget
     let title: String
     let subtitle: String
     let cadenceLabel: String
-    let streakLabel: String
+    let rhythmLabel: String
     let consistencyLabel: String
     let progress: Double
     let progressLabel: String
-    let status: HabitTodayState
+    let status: TimeRitualState
     let note: String
     let minimumVersionLabel: String?
     let supportLabel: String?
-    let actions: [HabitActionState]
+    let actions: [TimeRitualActionState]
 }
 
-struct StreakSummary: Sendable {
+struct TimeRitualMomentumSummary: Sendable {
     let title: String
     let subtitle: String
     let stats: [MetricSummary]
     let recoveryNote: String
 }
 
-struct HabitsDashboard: Sendable {
-    let mode: HabitsExperienceMode
+struct TimeRitualsDashboard: Sendable {
+    let mode: TimeRitualsExperienceMode
     let title: String
     let subtitle: String
     let summaryLabel: String
     let summaryDetail: String
     let stats: [MetricSummary]
-    let habits: [HabitSummary]
-    let recoveryHabits: [HabitSummary]
-    let streak: StreakSummary
+    let rituals: [TimeRitualSummary]
+    let recoveryRituals: [TimeRitualSummary]
+    let momentum: TimeRitualMomentumSummary
     let guidanceTitle: String
     let guidanceBody: String
     let emptyTitle: String?

@@ -6,13 +6,13 @@ import Foundation
 enum PreviewAppContainerFactory {
     @MainActor
     static var preview: AppContainer {
-        preview(todayExperience: PreviewTodayScenarios.stable, habitsDashboard: PreviewHabitsScenarios.seeded)
+        preview(todayExperience: PreviewTodayScenarios.stable, timeRitualsDashboard: PreviewTimeRitualScenarios.seeded)
     }
 
     @MainActor
     static func preview(
         todayExperience: TodayExperience = PreviewTodayScenarios.stable,
-        habitsDashboard: HabitsDashboard = PreviewHabitsScenarios.seeded
+        timeRitualsDashboard: TimeRitualsDashboard = PreviewTimeRitualScenarios.seeded
     ) -> AppContainer {
         let fixtures = PreviewFixtures.default
         let clock = PreviewClock.environmentOverride() ?? .default
@@ -47,7 +47,7 @@ enum PreviewAppContainerFactory {
             todayService: todayService,
             captureService: captureService,
             goalsService: goalsService,
-            habitsService: StubHabitsService(dashboard: habitsDashboard),
+            timeRitualsService: PreviewTimeRitualsService(dashboard: timeRitualsDashboard),
             timeService: StubTimeService(
                 timeState: PreviewTimeScenarios.seeded,
                 weeklyReviewState: PreviewTimeScenarios.weeklyReview

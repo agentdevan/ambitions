@@ -1,7 +1,7 @@
 import Foundation
 
 enum TimeRitualsAccessibility {
-    static func summary(for state: AsyncViewState<HabitsDashboard>, inlineMessage: HabitInlineMessage?) -> String {
+    static func summary(for state: AsyncViewState<TimeRitualsDashboard>, inlineMessage: TimeRitualInlineMessage?) -> String {
         let base: [String]
         switch state {
         case .loading:
@@ -13,8 +13,8 @@ enum TimeRitualsAccessibility {
                 "Time",
                 "Rituals",
                 dashboard.title,
-                "\(dashboard.habits.count) active",
-                "\(dashboard.recoveryHabits.count) in recovery"
+                "\(dashboard.rituals.count) active",
+                "\(dashboard.recoveryRituals.count) in recovery"
             ]
         }
 
@@ -31,7 +31,7 @@ struct TimeRitualsMutationProof: Identifiable, Sendable, Equatable {
     let accessibilityAnnouncement: String
     let proofArtifactID: String
 
-    init(action: HabitActionState, response: HabitActionResponse) {
+    init(action: TimeRitualActionState, response: TimeRitualActionResponse) {
         let proofArtifactID = response.proofArtifactID ?? "time-rituals.unpersisted.\(action.id)"
         self.id = "\(action.id).\(proofArtifactID)"
         self.runtimeMutation = "time-rituals.\(action.kind.rawValue)"
@@ -40,7 +40,7 @@ struct TimeRitualsMutationProof: Identifiable, Sendable, Equatable {
         self.proofArtifactID = proofArtifactID
     }
 
-    static func failed(action: HabitActionState, message: String) -> TimeRitualsMutationProof {
+    static func failed(action: TimeRitualActionState, message: String) -> TimeRitualsMutationProof {
         TimeRitualsMutationProof(
             id: "\(action.id).failed",
             runtimeMutation: "time-rituals.\(action.kind.rawValue).failed",
@@ -50,7 +50,7 @@ struct TimeRitualsMutationProof: Identifiable, Sendable, Equatable {
         )
     }
 
-    static func route(action: HabitActionState) -> TimeRitualsMutationProof {
+    static func route(action: TimeRitualActionState) -> TimeRitualsMutationProof {
         TimeRitualsMutationProof(
             id: "\(action.id).route",
             runtimeMutation: "stage-route.open-goal-detail",

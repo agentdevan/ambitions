@@ -17,8 +17,8 @@ extension RepositoryBackedInsightsService {
 
         let activeGoals = snapshot.goals.filter { $0.state == .active }
         let habitGoals = snapshot.goals.filter { goal in
-            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
-            return goal.mode == .habit || HabitGoalSemantics.isHabitLike(goal: goal, step: step)
+            guard let step = TimeRitualGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
+            return goal.mode == .habit || TimeRitualGoalSemantics.isRitualLike(goal: goal, step: step)
         }
 
         let currentEvidence = evidence(in: currentWindow, from: snapshot.evidence)

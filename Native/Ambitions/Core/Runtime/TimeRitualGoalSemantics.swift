@@ -1,7 +1,7 @@
 import Foundation
 
-enum HabitGoalSemantics {
-    static func isHabitLike(goal: Goal, step: Step? = nil) -> Bool {
+enum TimeRitualGoalSemantics {
+    static func isRitualLike(goal: Goal, step: Step? = nil) -> Bool {
         if [.habit, .maintenance, .recovery].contains(goal.mode) {
             return true
         }

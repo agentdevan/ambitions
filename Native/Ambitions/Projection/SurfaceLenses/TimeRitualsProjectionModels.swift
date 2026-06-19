@@ -9,13 +9,13 @@ extension RepositoryBackedTimeRitualsService {
         let appState: AppStateSnapshot
     }
 
-    struct HabitContext {
+    struct TimeRitualContext {
         let goal: Goal
         let draftID: String?
         let step: Step
-        let status: HabitTodayState
-        let currentStreak: Int
-        let bestStreak: Int
+        let status: TimeRitualState
+        let currentRhythm: Int
+        let bestRhythm: Int
         let consistency: Double
         let recoveryCount: Int
     }

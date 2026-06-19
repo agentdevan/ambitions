@@ -15,7 +15,7 @@ struct AppRuntimeCapability {
     let todayService: any TodayServicing
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
-    let habitsService: any HabitsServicing
+    let timeRitualsService: any TimeRitualsServicing
     let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing
@@ -45,7 +45,7 @@ struct AppFeatureFactoryCapability {
     let todayService: any TodayServicing
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
-    let habitsService: any HabitsServicing
+    let timeRitualsService: any TimeRitualsServicing
     let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing

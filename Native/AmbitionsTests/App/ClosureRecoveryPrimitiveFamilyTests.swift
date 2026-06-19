@@ -44,7 +44,7 @@ final class ClosureRecoveryPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(todayPanelsSource.contains("TodayRecoveryBloomPrimitive"))
         XCTAssertTrue(todayPanelsSource.contains("ClosureRecoveryPrimitiveStage("))
         XCTAssertTrue(todayPanelsSource.contains("ClosureRecoveryPrimitiveLine("))
-        XCTAssertTrue(habitsSource.contains("habits.recovery-summary"))
+        XCTAssertTrue(habitsSource.contains("rituals.recovery-summary"))
         XCTAssertTrue(richPanelSource.contains("recovery-primitive-panel"))
         XCTAssertTrue(canonicalSource.contains("closure-check-in-panel"))
         XCTAssertTrue(tactileSource.contains("recovery-tide-strip"))

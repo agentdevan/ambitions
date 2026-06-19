@@ -11,8 +11,8 @@ extension RepositoryBackedTimeService {
         let weekContexts = activeGoalSummaries.flatMap(\.contexts)
         let evidenceByGoal = Dictionary(grouping: snapshot.evidence, by: \.goalID)
         let habitGoals = activeGoals.filter { goal in
-            guard let step = HabitGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
-            return goal.mode == .habit || HabitGoalSemantics.isHabitLike(goal: goal, step: step)
+            guard let step = TimeRitualGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
+            return goal.mode == .habit || TimeRitualGoalSemantics.isRitualLike(goal: goal, step: step)
         }
         let mode: TimeSurfaceMode = activeGoals.isEmpty && snapshot.drafts.isEmpty && openCaptures.isEmpty ? .empty : .active
         let missingGoalSummaries = activeGoalSummaries.filter { $0.contexts.isEmpty }

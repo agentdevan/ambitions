@@ -4,8 +4,8 @@ import Observation
 @MainActor
 @Observable
 final class TimeRitualsViewModel {
-    var state: AsyncViewState<HabitsDashboard>
-    var inlineMessage: HabitInlineMessage?
+    var state: AsyncViewState<TimeRitualsDashboard>
+    var inlineMessage: TimeRitualInlineMessage?
     var mutationProof: TimeRitualsMutationProof?
 
     private var hasLoaded = false
@@ -15,7 +15,7 @@ final class TimeRitualsViewModel {
         case .loading:
             return "loading"
         case let .loaded(dashboard):
-            return "loaded:\(dashboard.mode):\(dashboard.habits.count):\(dashboard.recoveryHabits.count)"
+            return "loaded:\(dashboard.mode):\(dashboard.rituals.count):\(dashboard.recoveryRituals.count)"
         case let .failed(message):
             return "failed:\(message)"
         }
@@ -26,20 +26,20 @@ final class TimeRitualsViewModel {
     }
 
     init(
-        state: AsyncViewState<HabitsDashboard> = .loading,
-        inlineMessage: HabitInlineMessage? = nil
+        state: AsyncViewState<TimeRitualsDashboard> = .loading,
+        inlineMessage: TimeRitualInlineMessage? = nil
     ) {
         self.state = state
         self.inlineMessage = inlineMessage
     }
 
-    func load(using service: any HabitsServicing, now: Date) async {
+    func load(using service: any TimeRitualsServicing, now: Date) async {
         guard hasLoaded == false else { return }
         hasLoaded = true
         await refresh(using: service, now: now)
     }
 
-    func refresh(using service: any HabitsServicing, now: Date) async {
+    func refresh(using service: any TimeRitualsServicing, now: Date) async {
         do {
             state = .loaded(try await service.loadDashboard(now: now))
         } catch {
@@ -47,17 +47,17 @@ final class TimeRitualsViewModel {
         }
     }
 
-    func perform(_ action: HabitActionState, using service: any HabitsServicing, now: Date) async {
+    func perform(_ action: TimeRitualActionState, using service: any TimeRitualsServicing, now: Date) async {
         do {
             let response = try await service.performAction(
-                HabitActionRequest(kind: action.kind, target: action.target),
+                TimeRitualActionRequest(kind: action.kind, target: action.target),
                 now: now
             )
             inlineMessage = response.message
             await refresh(using: service, now: now)
             mutationProof = TimeRitualsMutationProof(action: action, response: response)
         } catch {
-            inlineMessage = HabitInlineMessage(
+            inlineMessage = TimeRitualInlineMessage(
                 title: "Ritual action could not finish",
                 body: error.localizedDescription,
                 state: .warning
@@ -66,7 +66,7 @@ final class TimeRitualsViewModel {
         }
     }
 
-    func recordStageRouteMutation(action: HabitActionState) {
+    func recordStageRouteMutation(action: TimeRitualActionState) {
         mutationProof = TimeRitualsMutationProof.route(action: action)
     }
 

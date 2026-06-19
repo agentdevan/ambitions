@@ -59,9 +59,9 @@ extension GoalsServicing {
     }
 }
 
-protocol HabitsServicing: Sendable {
-    func loadDashboard(now: Date) async throws -> HabitsDashboard
-    func performAction(_ request: HabitActionRequest, now: Date) async throws -> HabitActionResponse
+protocol TimeRitualsServicing: Sendable {
+    func loadDashboard(now: Date) async throws -> TimeRitualsDashboard
+    func performAction(_ request: TimeRitualActionRequest, now: Date) async throws -> TimeRitualActionResponse
 }
 
 protocol TimeServicing: Sendable {
@@ -182,24 +182,24 @@ struct DefaultStartupService: StartupServicing {
     }
 }
 
-struct StubHabitsService: HabitsServicing {
-    let dashboard: HabitsDashboard
-    let actionResponse: HabitActionResponse?
+struct PreviewTimeRitualsService: TimeRitualsServicing {
+    let dashboard: TimeRitualsDashboard
+    let actionResponse: TimeRitualActionResponse?
 
-    init(dashboard: HabitsDashboard, actionResponse: HabitActionResponse? = nil) {
+    init(dashboard: TimeRitualsDashboard, actionResponse: TimeRitualActionResponse? = nil) {
         self.dashboard = dashboard
         self.actionResponse = actionResponse
     }
 
-    func loadDashboard(now: Date) async throws -> HabitsDashboard {
+    func loadDashboard(now: Date) async throws -> TimeRitualsDashboard {
         _ = now
         return dashboard
     }
 
-    func performAction(_ request: HabitActionRequest, now: Date) async throws -> HabitActionResponse {
+    func performAction(_ request: TimeRitualActionRequest, now: Date) async throws -> TimeRitualActionResponse {
         _ = request
         _ = now
-        return actionResponse ?? HabitActionResponse(message: nil)
+        return actionResponse ?? TimeRitualActionResponse(message: nil)
     }
 }
 

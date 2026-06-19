@@ -20,7 +20,7 @@ struct PreviewFixtures: Sendable {
     let todayDashboard: TodayDashboard
     let captures: [Capture]
     let goalsDashboard: GoalsDashboard
-    let habitsDashboard: HabitsDashboard
+    let timeRitualsDashboard: TimeRitualsDashboard
     let insightsDashboard: InsightsDashboard
     let youDashboard: YouDashboard
     let externalBrainScenarios: [ExternalBrainPreviewScenario]
@@ -100,7 +100,7 @@ struct PreviewFixtures: Sendable {
                 confidenceLabel: "Clear next step"
             )
         ),
-        habitsDashboard: PreviewHabitsScenarios.seeded,
+        timeRitualsDashboard: PreviewTimeRitualScenarios.seeded,
         insightsDashboard: InsightsDashboard(
             title: "Reflection OS",
             subtitle: "A calm narrative read on what your behavior is teaching the system right now.",

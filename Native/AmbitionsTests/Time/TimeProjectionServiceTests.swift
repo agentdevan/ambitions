@@ -582,7 +582,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertEqual(ritualLane.title, "Rituals")
         XCTAssertTrue(timeCopy.localizedCaseInsensitiveContains("ritual"))
         XCTAssertFalse(timeCopy.localizedCaseInsensitiveContains("habit"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+        XCTAssertFalse(AppTab.allCases.map(\.title).contains("TimeRituals"))
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif

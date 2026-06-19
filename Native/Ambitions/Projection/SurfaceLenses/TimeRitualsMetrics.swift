@@ -1,7 +1,7 @@
 import Foundation
 
 extension RepositoryBackedTimeRitualsService {
-    func todayState(goal: Goal, evidence: [ProgressEvidence], feedback: [GoalFeedbackEvent], cadenceDays: Int, now: Date) -> HabitTodayState {
+    func todayState(goal: Goal, evidence: [ProgressEvidence], feedback: [GoalFeedbackEvent], cadenceDays: Int, now: Date) -> TimeRitualState {
         let dayStart = Calendar.current.startOfDay(for: now)
         let todayEvidence = evidence.filter { isSameDay($0.capturedAt, as: dayStart) }
         let todayFeedback = feedback.filter { isSameDay($0.base.occurredAt, as: dayStart) }
@@ -34,7 +34,7 @@ extension RepositoryBackedTimeRitualsService {
         return Array(Set(evidenceDates + feedbackDates)).sorted()
     }
 
-    func streakLength(for dates: [Date], cadenceDays: Int, now: Date) -> Int {
+    func rhythmLength(for dates: [Date], cadenceDays: Int, now: Date) -> Int {
         guard !dates.isEmpty else { return 0 }
         let sorted = dates.sorted(by: >)
         let anchor = Calendar.current.startOfDay(for: now)
@@ -42,19 +42,19 @@ extension RepositoryBackedTimeRitualsService {
               let gap = Calendar.current.dateComponents([.day], from: first, to: anchor).day,
               gap <= cadenceDays else { return 0 }
 
-        var streak = 1
+        var rhythm = 1
         for pair in zip(sorted, sorted.dropFirst()) {
             let distance = Calendar.current.dateComponents([.day], from: pair.1, to: pair.0).day ?? cadenceDays + 1
             if distance <= cadenceDays {
-                streak += 1
+                rhythm += 1
             } else {
                 break
             }
         }
-        return streak
+        return rhythm
     }
 
-    func bestStreakLength(for dates: [Date], cadenceDays: Int) -> Int {
+    func bestRhythmLength(for dates: [Date], cadenceDays: Int) -> Int {
         guard !dates.isEmpty else { return 0 }
         let sorted = dates.sorted()
         var longest = 1
@@ -91,7 +91,7 @@ extension RepositoryBackedTimeRitualsService {
         }
     }
 
-    func heroTitle(for mode: HabitsExperienceMode) -> String {
+    func heroTitle(for mode: TimeRitualsExperienceMode) -> String {
         switch mode {
         case .empty: "Consistency, once it exists"
         case .seeded: "Consistency that already lives in native data"
@@ -100,16 +100,16 @@ extension RepositoryBackedTimeRitualsService {
         }
     }
 
-    func heroSubtitle(for mode: HabitsExperienceMode, totalHabits: Int, recoveryCount: Int) -> String {
+    func heroSubtitle(for mode: TimeRitualsExperienceMode, totalRituals: Int, recoveryCount: Int) -> String {
         switch mode {
         case .empty:
             return "Rituals become real as soon as a recurring goal or routine exists. There is no detached subsystem behind this screen."
         case .seeded:
             return "Rituals are already reading from the same native goal, evidence, and feedback records that power Today and Goal Detail."
         case .active:
-            return totalHabits == 1
+            return totalRituals == 1
                 ? "One ritual loop is active. The goal is clarity and repeatability, not pressure."
-                : "\(totalHabits) ritual loops are active. Fast logging keeps them lightweight enough to survive real days."
+                : "\(totalRituals) ritual loops are active. Fast logging keeps them lightweight enough to survive real days."
         case .recovery:
             return recoveryCount == 1
                 ? "One loop needs a gentler restart. Ambitions keeps that visible without turning it punitive."
@@ -117,7 +117,7 @@ extension RepositoryBackedTimeRitualsService {
         }
     }
 
-    func summaryDetail(mode: HabitsExperienceMode, completedToday: Int, minimumToday: Int, recoveryCount: Int) -> String {
+    func summaryDetail(mode: TimeRitualsExperienceMode, completedToday: Int, minimumToday: Int, recoveryCount: Int) -> String {
         _ = completedToday
         switch mode {
         case .empty:
@@ -134,7 +134,7 @@ extension RepositoryBackedTimeRitualsService {
         }
     }
 
-    func guidanceTitle(for mode: HabitsExperienceMode) -> String {
+    func guidanceTitle(for mode: TimeRitualsExperienceMode) -> String {
         switch mode {
         case .empty: "How Rituals will wake up"
         case .seeded: "Why this feels native"
@@ -143,7 +143,7 @@ extension RepositoryBackedTimeRitualsService {
         }
     }
 
-    func guidanceBody(for mode: HabitsExperienceMode) -> String {
+    func guidanceBody(for mode: TimeRitualsExperienceMode) -> String {
         switch mode {
         case .empty:
             "Rituals are waiting on recurring structure from the native planner and goal engine, not on a separate tracker."
@@ -156,7 +156,7 @@ extension RepositoryBackedTimeRitualsService {
         }
     }
 
-    func note(for status: HabitTodayState) -> String {
+    func note(for status: TimeRitualState) -> String {
         switch status {
         case .completed: "Today's full version is already in the log."
         case .minimumDone: "The minimum version counted today. That still keeps the rhythm alive."
@@ -171,7 +171,7 @@ extension RepositoryBackedTimeRitualsService {
         }
     }
 
-    func habitSortDescriptor(now: Date) -> (HabitContext, HabitContext) -> Bool {
+    func ritualSortDescriptor(now: Date) -> (TimeRitualContext, TimeRitualContext) -> Bool {
         { lhs, rhs in
             let lhsPriority = sortPriority(for: lhs.status)
             let rhsPriority = sortPriority(for: rhs.status)
@@ -183,7 +183,7 @@ extension RepositoryBackedTimeRitualsService {
         }
     }
 
-    func sortPriority(for status: HabitTodayState) -> Int {
+    func sortPriority(for status: TimeRitualState) -> Int {
         switch status {
         case .ready, .supportive: 0
         case .recovery, .needsEasierVersion: 1

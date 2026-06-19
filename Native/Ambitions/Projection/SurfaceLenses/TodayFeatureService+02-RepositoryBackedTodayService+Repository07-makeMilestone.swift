@@ -222,7 +222,7 @@ extension RepositoryBackedTodayService {
         if goal.mode == .delegatedSupport {
             return "This step supports \(goal.actor.displayName) without turning the relationship into compliance work."
         }
-        if HabitGoalSemantics.isHabitLike(goal: goal, step: step) {
+        if TimeRitualGoalSemantics.isRitualLike(goal: goal, step: step) {
             return "Consistency matters more than intensity here. A smaller clean repetition is better than a loud miss."
         }
         return step.summary ?? goal.summary ?? "This is the cleanest next step from the current native plan."
@@ -246,7 +246,7 @@ extension RepositoryBackedTodayService {
     func supportingText(for goal: Goal, step: Step) -> [String] {
         var items = [timingLabel(for: step.timing, goalMode: goal.mode)]
         items.append(contentsOf: step.actionability.evidenceOfCompletion.prefix(2))
-        if HabitGoalSemantics.isHabitLike(goal: goal, step: step) {
+        if TimeRitualGoalSemantics.isRitualLike(goal: goal, step: step) {
             items.append("Minimum version: \(step.actionability.fallbackMicroStep)")
         }
         if goal.mode == .delegatedSupport {

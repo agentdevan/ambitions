@@ -1,7 +1,7 @@
 import Foundation
 
 extension RepositoryBackedTimeRitualsService {
-    func note(for action: HabitActionKind, step: Step) -> String {
+    func note(for action: TimeRitualActionKind, step: Step) -> String {
         switch action {
         case .complete: "Completed from Rituals."
         case .skip: "Skipped from Rituals without punitive language."
@@ -16,7 +16,7 @@ extension RepositoryBackedTimeRitualsService {
 
     func advance(goal: Goal, step: Step, now: Date, cadenceDays: Int) -> Goal {
         update(goal: goal, stepID: step.id) { current in
-            stepCopy(from: current, timing: HabitGoalSemantics.advancedTiming(from: current.timing, now: now, cadenceDays: cadenceDays))
+            stepCopy(from: current, timing: TimeRitualGoalSemantics.advancedTiming(from: current.timing, now: now, cadenceDays: cadenceDays))
         }
     }
 

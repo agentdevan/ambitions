@@ -97,7 +97,7 @@ enum AppContainerFactory {
             todayService: todayService,
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
-            habitsService: runtime.habitsService,
+            timeRitualsService: runtime.timeRitualsService,
             timeService: runtime.timeService,
             insightsService: runtime.insightsService,
             youService: runtime.youService,
