@@ -82,7 +82,16 @@ Locked user-facing language:
 
 ---
 
-## 3. Account, R2, Source Atlas, and network law
+## 3. Apple Platform Source Atlas
+
+Before changing SwiftUI, UIKit interop, SwiftData, App Intents, WidgetKit, Live Activities, notifications, BackgroundTasks, LocalAuthentication, privacy, permissions, accessibility, HIG-aligned visual behavior, shell chrome, keyboard behavior, or iOS design-system primitives, read:
+
+- `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+- `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
+
+`PRODUCT_DESIGN_TRUTH.md` is product canon. The Apple Platform Source Atlas is an iOS implementation source map. If they conflict, product canon wins. If a specific Apple API is used, verify iOS 26 availability or provide an availability-gated fallback.
+
+## 4. Account, R2, Source Atlas, and network law
 
 Ambitions supports custom Ambitions Accounts at launch.
 
@@ -107,7 +116,7 @@ Hosted AI services, external/cloud LLMs, cloud model APIs, and server-side profi
 
 ---
 
-## 4. Active authority hierarchy
+## 5. Active authority hierarchy
 
 Start every non-trivial repo task from the truth files.
 
@@ -127,17 +136,17 @@ Mandatory read order:
 12. `Package.swift`
 13. relevant source, tests, retained scripts, build docs, and current local logs
 14. relevant retained `.agents/skills/*/SKILL.md` files only after truth files
+15. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
+
 
 Historical material is not retained in-repo unless it is current, canon-aligned, and materially useful for App Store readiness. It must not override active truth.
 
 ---
 
-## 5. Repo behavior rules
+## 6. Repo behavior rules
 
 - Work on `main` only unless the user explicitly requests a branch or PR.
 - Preserve XcodeGen.
 - Edit `project.yml` and regenerate locally; do not treat checked-in `.xcodeproj` as source truth.
 - Preserve native SwiftUI architecture.
-- Do not add runtime app dependencies during docs/tooling/governance passes.
-- Do not implement product features in docs-only or Codex OS passes unless explicitly scoped.
-- No release/accessibility/privacy/device/account/R2 claims without current proof.
+
