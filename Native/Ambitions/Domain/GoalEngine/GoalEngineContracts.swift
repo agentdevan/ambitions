@@ -121,7 +121,7 @@ enum PlanningStrategyKind: String, Codable, Sendable {
 enum ProgressMetricKind: String, Codable, Sendable {
     case stepCompletion = "step_completion"
     case evidenceCount = "evidence_count"
-    case streak
+    case ritualRhythm = "ritual_rhythm"
     case timeInvested = "time_invested"
     case confidenceGain = "confidence_gain"
     case observationLog = "observation_log"
@@ -132,7 +132,7 @@ enum ProgressRollupMethod: String, Codable, Sendable {
     case ratio
     case latest
     case weightedRatio = "weighted_ratio"
-    case streakLength = "streak_length"
+    case rhythmLength = "rhythm_length"
 }
 
 enum ProgressEvidenceKind: String, Codable, Sendable {

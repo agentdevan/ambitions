@@ -29,7 +29,7 @@ extension GoalEngineIntakeService {
         case .exploration:
             return ProgressStrategy(metricKind: .observationLog, rollupMethod: .sum, targetStepCount: 4, targetEvidenceCount: 5, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
         case .maintenance:
-            return ProgressStrategy(metricKind: .streak, rollupMethod: .streakLength, targetStepCount: nil, targetEvidenceCount: 5, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
+            return ProgressStrategy(metricKind: .ritualRhythm, rollupMethod: .rhythmLength, targetStepCount: nil, targetEvidenceCount: 5, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
         case .delegatedSupport:
             return ProgressStrategy(metricKind: .evidenceCount, rollupMethod: .latest, targetStepCount: 3, targetEvidenceCount: 4, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: true, countsSupportGoals: true)
         case .observationalProgress:

@@ -378,7 +378,7 @@ private extension LegacyImportService {
     func defaultProgressStrategy(for mode: GoalMode, tempo: GoalTempo) -> ProgressStrategy {
         switch mode {
         case .habit, .maintenance:
-            return ProgressStrategy(metricKind: .streak, rollupMethod: .streakLength, targetStepCount: nil, targetEvidenceCount: 5, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
+            return ProgressStrategy(metricKind: .ritualRhythm, rollupMethod: .rhythmLength, targetStepCount: nil, targetEvidenceCount: 5, targetMinutes: nil, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
         case .learning:
             return ProgressStrategy(metricKind: .evidenceCount, rollupMethod: .weightedRatio, targetStepCount: 4, targetEvidenceCount: 8, targetMinutes: 240, supportsUntimedProgress: true, countsChildGoals: false, countsSupportGoals: false)
         case .exploration:
