@@ -10,7 +10,7 @@ extension RepositoryBackedTimeService {
         let activeGoalSummaries = makeGoalSummaries(goals: activeGoals, feedback: snapshot.feedback, now: now)
         let weekContexts = activeGoalSummaries.flatMap(\.contexts)
         let evidenceByGoal = Dictionary(grouping: snapshot.evidence, by: \.goalID)
-        let habitGoals = activeGoals.filter { goal in
+        let ritualGoals = activeGoals.filter { goal in
             guard let step = TimeRitualGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
             return goal.mode == .habit || TimeRitualGoalSemantics.isRitualLike(goal: goal, step: step)
         }
@@ -62,7 +62,7 @@ extension RepositoryBackedTimeService {
             weekDays: weekDays,
             missingGoalSummaries: missingGoalSummaries,
             pressuredGoalSummary: mostPressuredGoal,
-            habitGoals: habitGoals,
+            ritualGoals: ritualGoals,
             openCaptures: openCaptures
         )
         let primaryAction = makePrimaryAction(
@@ -210,12 +210,12 @@ extension RepositoryBackedTimeService {
                 TimeSecondaryDestination(
                     id: "time-rituals",
                     title: "Rituals",
-                    detail: habitGoals.isEmpty
+                    detail: ritualGoals.isEmpty
                         ? "No repeatable loops are shaping the week yet."
                         : "Review the repeatable loops that can steady or crowd the week.",
-                    valueLabel: "\(habitGoals.count)",
+                    valueLabel: "\(ritualGoals.count)",
                     icon: "repeat",
-                    visualState: habitGoals.isEmpty ? .default : .selected,
+                    visualState: ritualGoals.isEmpty ? .default : .selected,
                     timeRoute: .rituals
                 ),
                 TimeSecondaryDestination(

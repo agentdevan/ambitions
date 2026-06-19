@@ -24,7 +24,7 @@ extension PreviewTimeScenarios {
             WeeklyReviewCarryForwardItem(id: "review-preview-captures", title: "Capture pressure", detail: "2 captures still need a calm decision before they become next-week clutter.", bridgeLabel: "Clear the inbox inside Time", state: .warning, goalTarget: nil)
         ],
         captureSummary: "2 captures still need to be absorbed, attached, or intentionally parked.",
-        habitSummary: "1 routine should support the next week without crowding it.",
+        ritualSupportSummary: "1 routine should support the next week without crowding it.",
         returnActionTitle: "Return to Time",
         returnActionSubtitle: "Use the reshaped week, then adjust one goal or support route only if it still needs help.",
         returnTimeRoute: nil,

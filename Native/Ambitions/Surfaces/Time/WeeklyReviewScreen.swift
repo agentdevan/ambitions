@@ -89,7 +89,7 @@ struct WeeklyReviewScreen: View {
                                 title: "Support systems inside the review",
                                 subtitle: "Rituals and captures should change the next week only when they improve how the week holds together."
                             )
-                            Text(timeState.habitSummary)
+                            Text(timeState.ritualSupportSummary)
                                 .font(theme.typography.body)
                                 .foregroundStyle(theme.colors.textPrimary)
                             Text(timeState.captureSummary)

@@ -7,7 +7,7 @@ extension RepositoryBackedTimeService {
         weekDays: [TimeElasticWeekDayState],
         missingGoalSummaries: [RepositoryBackedTimeService.GoalWeekSummary],
         pressuredGoalSummary: RepositoryBackedTimeService.GoalWeekSummary?,
-        habitGoals: [Goal],
+        ritualGoals: [Goal],
         openCaptures: [Capture]
     ) -> TimeExecutionResilienceState {
         let overloadedDays = weekDays.filter { $0.level == .overloaded }.count
@@ -53,13 +53,13 @@ extension RepositoryBackedTimeService {
                 TimeExecutionResilienceLane(
                     id: "rituals",
                     title: "Rituals",
-                    detail: habitGoals.isEmpty
+                    detail: ritualGoals.isEmpty
                         ? "No recurring loop is currently shaping the week."
-                        : "\(habitGoals.count) routine\(habitGoals.count == 1 ? "" : "s") should support the week shape instead of competing with it.",
-                    recommendation: habitGoals.isEmpty
+                        : "\(ritualGoals.count) routine\(ritualGoals.count == 1 ? "" : "s") should support the week shape instead of competing with it.",
+                    recommendation: ritualGoals.isEmpty
                         ? "Keep the week dominant until a repeatable loop is truly needed."
                         : "Use the routines route to soften or trim loops that are crowding the week.",
-                    state: habitGoals.isEmpty ? .default : .selected,
+                    state: ritualGoals.isEmpty ? .default : .selected,
                     goalTarget: nil,
                     timeRoute: .rituals
                 ),

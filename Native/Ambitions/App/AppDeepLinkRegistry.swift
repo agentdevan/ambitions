@@ -128,7 +128,7 @@ enum AppDeepLinkRegistry {
             canonicalRoute: .openTimeRoute(.rituals),
             deepLinkTemplate: "ambitions://time/rituals",
             allowedSources: externalObjectSources,
-            privacyBoundary: "Time route only; no streak or score payload is supported."
+            privacyBoundary: "Time route only; no rhythm metric or score payload is supported."
         ),
         AppDeepLinkRegistryEntry(
             id: "time.weeklyReview",

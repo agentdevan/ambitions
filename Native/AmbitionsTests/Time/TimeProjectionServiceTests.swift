@@ -602,6 +602,9 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertEqual(timeState.hero.eyebrow, "Weekly Review")
         XCTAssertFalse(timeState.carryForwardItems.isEmpty)
         XCTAssertTrue(timeState.captureSummary.contains("capture"))
+        XCTAssertTrue(timeState.ritualSupportSummary.localizedCaseInsensitiveContains("recurring"))
+        XCTAssertTrue(timeState.ritualSupportSummary.localizedCaseInsensitiveContains("loop"))
+        XCTAssertFalse(timeState.ritualSupportSummary.localizedCaseInsensitiveContains("habit"))
         XCTAssertEqual(timeState.returnActionTitle, "Return to Time")
     }
 

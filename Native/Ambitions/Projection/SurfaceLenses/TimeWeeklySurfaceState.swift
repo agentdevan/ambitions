@@ -26,7 +26,7 @@ struct TimeWeeklyReviewState: Sendable {
     let summaryDetail: String
     let carryForwardItems: [WeeklyReviewCarryForwardItem]
     let captureSummary: String
-    let habitSummary: String
+    let ritualSupportSummary: String
     let returnActionTitle: String
     let returnActionSubtitle: String
     let returnTimeRoute: TimeRouteTarget?

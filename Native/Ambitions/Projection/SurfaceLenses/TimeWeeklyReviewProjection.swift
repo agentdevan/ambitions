@@ -8,7 +8,7 @@ extension RepositoryBackedTimeService {
         let activeGoalSummaries = makeGoalSummaries(goals: activeGoals, feedback: snapshot.feedback, now: now)
         let missingGoalSummaries = activeGoalSummaries.filter { $0.contexts.isEmpty }
         let pressuredGoalSummary = pressuredGoalSummary(from: activeGoalSummaries)
-        let habitGoals = activeGoals.filter { goal in
+        let ritualGoals = activeGoals.filter { goal in
             guard let step = TimeRitualGoalSemantics.preferredStep(in: goal) else { return goal.mode == .habit }
             return goal.mode == .habit || TimeRitualGoalSemantics.isRitualLike(goal: goal, step: step)
         }
@@ -61,9 +61,9 @@ extension RepositoryBackedTimeService {
             captureSummary: openCaptures.isEmpty
                 ? "No open captures are demanding carry-forward attention."
                 : "\(openCaptures.count) capture\(openCaptures.count == 1 ? "" : "s") still need a calm decision before the next week starts.",
-            habitSummary: habitGoals.isEmpty
+            ritualSupportSummary: ritualGoals.isEmpty
                 ? "No recurring loops are currently shaping the review."
-                : "\(habitGoals.count) routine\(habitGoals.count == 1 ? "" : "s") should support the next week without crowding it.",
+                : "\(ritualGoals.count) routine\(ritualGoals.count == 1 ? "" : "s") should support the next week without crowding it.",
             returnActionTitle: "Return to Time",
             returnActionSubtitle: "Use the reshaped week, then adjust one goal or support route only if it still needs help.",
             returnTimeRoute: nil,
