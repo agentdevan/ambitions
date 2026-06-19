@@ -14,7 +14,7 @@ struct SignatureInterfaceVisualQAPreviewGallery: View {
                 SectionHeader(
                     eyebrow: "SI16",
                     title: "Preview Fixture And Visual QA",
-                    subtitle: "Deterministic preview states for the five top-level surfaces, accessibility notes, privacy states, and future LDI visual hooks."
+                    subtitle: "Deterministic preview states for Today, Goals, Time, and You, plus accessibility notes, privacy states, and future LDI visual hooks."
                 )
 
                 LazyVGrid(columns: columns, alignment: .leading, spacing: theme.spacing.sm) {
@@ -32,7 +32,7 @@ struct SignatureInterfaceVisualQAPreviewGallery: View {
                 SectionHeader(
                     eyebrow: "AFI13",
                     title: "Visual QA And Drift Gallery",
-                    subtitle: "Scorecard targets and pass/fail drift examples for Today, Goals, Time, Motion, and You with global Capture. Rendered proof remains Yellow until screenshots and human visual review exist."
+                    subtitle: "Scorecard targets and pass/fail drift examples for Today, Goals, Time, and You, with Motion treated as behavior and Capture as global composer. Rendered proof remains Yellow until screenshots and human visual review exist."
                 )
 
                 LazyVGrid(columns: columns, alignment: .leading, spacing: theme.spacing.sm) {

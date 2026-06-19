@@ -36,7 +36,7 @@ final class SignatureInterfaceVisualQAFixtureTests: XCTestCase {
         )
     }
 
-    func testSI16SurfaceCoverageRowsMapTheFiveTopLevelSurfaces() {
+    func testSI16SurfaceCoverageRowsMapTheFourTopLevelSurfaces() {
         XCTAssertEqual(SI16PreviewFixtureCatalog.canonicalTopLevelSurfaces, ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(
             SI16PreviewFixtureCatalog.surfaceCoverageRows.map(\.ownerSurface),
