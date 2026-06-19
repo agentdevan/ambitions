@@ -367,7 +367,7 @@ struct DefaultAppActionRouter: AppActionRouting {
             navigation.selectTab(.you) // Insights/History is now part of the You domain or a sibling, but usually You for profile/settings
         case .profileSummary, .settingsGroup:
             navigation.selectTab(.you)
-        case .habitSummary, .streak:
+        case .ritualSummary, .ritualRhythm:
             navigation.openRituals()
         case .dailyTargets, .focusNow, .freeTime, .milestonePrompt, .goalsList, .celebration:
             navigation.selectTab(.today)
