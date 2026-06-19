@@ -148,5 +148,47 @@ Historical material is not retained in-repo unless it is current, canon-aligned,
 - Work on `main` only unless the user explicitly requests a branch or PR.
 - Preserve XcodeGen.
 - Edit `project.yml` and regenerate locally; do not treat checked-in `.xcodeproj` as source truth.
-- Preserve native SwiftUI architecture.
+
+## 7. Strict Architecture Tree Enforcement
+
+Before creating, moving, refactoring, or reviewing Ambitions source, agents must load and follow:
+
+* `.agents/skills/ambitions-source-truth-authority/SKILL.md`
+* `.agents/skills/ambitions-architecture-tree-enforcement/SKILL.md`
+* `.agents/skills/ambitions-ios-quality-gate/SKILL.md`
+* `.agents/skills/ambitions-release-proof-honesty/SKILL.md` when validation, readiness, TestFlight, App Store, privacy/legal, accessibility, performance, CI, account, R2, or release claims are involved
+
+The `Final Architecture Tree` in `docs/truth/PRODUCT_DESIGN_TRUTH.md` is binding path ownership, not an approximate target.
+
+Agents must not use:
+
+* “equivalent”
+* “roughly equivalent”
+* “same concept under Features”
+* “keep it where it already is”
+* “temporary feature-owned implementation”
+* “compatibility location”
+* “parallel implementation”
+* “close enough for now”
+
+If product canon says an object belongs under `App/`, `Stage/`, `Core/`, `Projection/`, `Language/`, `Trust/`, `Interaction/`, `Rendering/`, `DesignSystem/`, `Surfaces/`, `Composer/`, `Scenarios/`, `Diagnostics/`, or `Quality/`, new or moved implementation must use that exact owner.
+
+`Features/` is not a canonical owner for new Ambitions architecture. Existing `Features/` code is legacy compatibility only. Any train touching `Features/` implementation must move ownership toward the final architecture tree or close Yellow with explicit architecture debt and a named repair train.
+
+Motion belongs under `Stage/Motion/` only. Motion must not become a root surface, tab, destination, activity feed, analytics surface, score, streak, XP layer, or dashboard.
+
+Capture belongs under `Composer/Capture/` only. Capture must not become `Surfaces/Capture/`, a tab, inbox, notes feed, generic plus surface, chatbot, or persistent root destination.
+
+A compatibility shim is allowed only when needed to preserve compilation during migration. A shim must contain no product policy, runtime authority, projection authority, trust authority, or motion authority. It must route to the canonical owner and include a removal target in closeout.
+
+Every source train closeout must include:
+
+* `Final Architecture Tree` inspected: yes/no
+* canonical owners touched
+* files moved or created
+* old/non-canonical paths removed
+* compatibility shims left behind, if any
+* why any Yellow architecture debt remains
+* next repair train if debt remains
+* confirmation that no “equivalent” folder/path interpretation was used
 
