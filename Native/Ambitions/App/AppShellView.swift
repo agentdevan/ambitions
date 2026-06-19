@@ -294,9 +294,10 @@ private struct AppShellHeaderRail: View {
             Text(rootCrownContext)
                 .font(theme.typography.micro.weight(.semibold))
                 .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(1)
+                .lineLimit(shouldWrapHeaderContext ? 2 : 1)
                 .minimumScaleFactor(0.74)
                 .truncationMode(.tail)
+                .fixedSize(horizontal: false, vertical: shouldWrapHeaderContext)
         }
         .layoutPriority(2)
         .accessibilityElement(children: .combine)
@@ -315,9 +316,10 @@ private struct AppShellHeaderRail: View {
             Text(headerSubtitle)
                 .font(theme.typography.micro.weight(.semibold))
                 .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(1)
+                .lineLimit(shouldWrapHeaderContext ? 2 : 1)
                 .minimumScaleFactor(0.78)
                 .truncationMode(.tail)
+                .fixedSize(horizontal: false, vertical: shouldWrapHeaderContext)
                 .accessibilityIdentifier("shell.header.subtitle")
         }
         .layoutPriority(2)
@@ -407,6 +409,10 @@ private struct AppShellHeaderRail: View {
             return posture.headerLensTitle
         }
         return "· \(subtitle ?? posture.title)"
+    }
+
+    private var shouldWrapHeaderContext: Bool {
+        dynamicTypeSize >= .xxLarge
     }
 
     private var rootCrownAccent: Color {

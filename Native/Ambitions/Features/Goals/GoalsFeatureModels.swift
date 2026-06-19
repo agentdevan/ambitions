@@ -296,7 +296,7 @@ struct GoalPortfolioMaturitySummary: Sendable, Hashable {
 
     static var empty: GoalPortfolioMaturitySummary {
         let scope = GoalPortfolioMaturitySignal(id: "scope", title: "Scope is quiet", detail: "No live ambitions are competing for attention yet.", state: .default)
-        let stuck = GoalPortfolioMaturitySignal(id: "stuck-work", title: "No stuck work is loud", detail: "No blockers, waiting states, or overloaded standalone Tasks are driving the atlas.", state: .selected)
+        let stuck = GoalPortfolioMaturitySignal(id: "stuck-work", title: "No stuck work is loud", detail: "No blockers, waiting states, or overloaded One-Step Goals are driving the atlas.", state: .selected)
         let proof = GoalPortfolioMaturitySignal(id: "proof", title: "Proof will appear here", detail: "Proof maturity starts after a goal has evidence or receipts.", state: .default)
         let next = GoalPortfolioMaturitySignal(id: "next-step", title: "Next steps will appear here", detail: "Create or shape a goal to make the next step visible.", state: .default)
         return GoalPortfolioMaturitySummary(
@@ -491,7 +491,7 @@ struct GoalsOneStepGoalsPanelState: Sendable, Hashable {
     static var empty: GoalsOneStepGoalsPanelState {
         GoalsOneStepGoalsPanelState(
             title: "One-Step Goals",
-            subtitle: "Standalone Tasks that do not need a full goal yet.",
+            subtitle: "One-Step Goals that do not need a fuller goal yet.",
             items: [],
             openCount: 0,
             parkedCount: 0,
@@ -499,7 +499,7 @@ struct GoalsOneStepGoalsPanelState: Sendable, Hashable {
             emptyMessage: "Small standalone work can stay here without becoming a full goal.",
             accessibilityLabel: "One-Step Goals",
             accessibilityValue: "No One-Step Goals yet.",
-            accessibilityHint: "Tasks are standalone One-Step Goals. Steps stay inside Goals, Paths, or Plans."
+            accessibilityHint: "One-Step Goals can stand alone. Steps stay inside Goals or Paths."
         )
     }
 }
@@ -889,7 +889,7 @@ struct GoalsOverview: Sendable {
         return "\(visibleLanes) explain why each goal is active, pressured, or quieter."
     }
 
-    private var constellationAtlasYouSummary: String {
+    var constellationAtlasYouSummaryForProjection: String {
         let activeArea = lifeAreas.items.first {
             $0.activeGoalCount > 0 || $0.parkedGoalCount > 0 || $0.goalThreadCount > 0 || $0.proofCount > 0 || $0.receiptCount > 0
         } ?? lifeAreas.items.first
@@ -899,6 +899,10 @@ struct GoalsOverview: Sendable {
         }
 
         return "Thread Focus keeps the clearest available thread connected to Today without adding another top-level destination."
+    }
+
+    private var constellationAtlasYouSummary: String {
+        constellationAtlasYouSummaryForProjection
     }
 }
 

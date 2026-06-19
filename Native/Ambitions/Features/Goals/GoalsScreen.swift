@@ -49,7 +49,7 @@ struct GoalsScreen: View {
                         }
                     )
                 case let .loaded(overview):
-                    GoalsConstellationAtlasStage(
+                    ConstellationAtlasView(
                         overview: overview,
                         onPrimaryAction: handlePrimaryAction,
                         screenshotProofState: screenshotProofState
@@ -161,7 +161,7 @@ struct GoalsScreen: View {
     private func handlePromoteOneStepGoal(_ item: GoalsOneStepGoalPanelItemState) {
         localCreationMessage = GoalDetailInlineMessage(
             title: "This can become a goal later",
-            body: "\(item.title) is still a standalone Task until you confirm a Goal.",
+            body: "\(item.title) can stay as a One-Step Goal until you confirm a fuller Goal.",
             state: .selected
         )
         if let onCreateGoal {

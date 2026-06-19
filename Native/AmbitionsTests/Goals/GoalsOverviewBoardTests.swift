@@ -275,7 +275,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         let captures = (0..<4).map { index in
             makeOneStepCapture(
                 id: "capture-m10-task-\(index)",
-                title: "Handle loose standalone task \(index + 1)",
+                title: "Handle loose One-Step Goal \(index + 1)",
                 status: .actionable,
                 deadlineText: "Today",
                 deadlineKind: .hard
@@ -559,7 +559,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertEqual(item.statusLabel, "Today")
         XCTAssertEqual(item.timingLabel, "Today")
         XCTAssertTrue(item.canPromoteToGoal)
-        XCTAssertTrue(item.accessibilityHint.contains("Standalone task"))
+        XCTAssertTrue(item.accessibilityHint.contains("One-Step Goal"))
 
         XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Time", "You"])
     }
@@ -866,7 +866,7 @@ private extension GoalsOverviewAtlasTests {
             sourceType: .todayQuickCapture,
             status: status,
             linkedGoalID: nil,
-            triage: CaptureTriageMetadata(destination: .timeSeed, hint: "Saved as Task · Today"),
+            triage: CaptureTriageMetadata(destination: .timeSeed, hint: "Saved as One-Step Goal · Today"),
             revisitAfter: nil,
             kind: .deadlineTask,
             route: .timeSeed,
@@ -880,7 +880,7 @@ private extension GoalsOverviewAtlasTests {
             deliverableHint: nil,
             scopeItemHint: nil,
             waitingMetadata: nil,
-            assumptionSummary: "Saved as a standalone Task because no existing local destination was reliable enough."
+            assumptionSummary: "Saved as a One-Step Goal because no existing local destination was reliable enough."
         )
     }
 

@@ -259,15 +259,15 @@ struct OneStepGoalProjector: Sendable {
             counts: counts,
             emptyTitle: "No One-Step Goals here yet",
             emptyMessage: lifeAreaID == nil
-                ? "Standalone tasks can wait here without becoming a full goal."
-                : "Small standalone tasks can live under this Life Area.",
+                ? "One-Step Goals can wait here without becoming a fuller goal."
+                : "Small One-Step Goals can live under this Life Area.",
             privacyLevel: areaPrivacy,
             accessibility: OneStepGoalAccessibilityProjection(
                 label: "One-Step Goals, \(displayName)",
                 value: areaPrivacy == .redacted
                     ? "\(counts.total) One-Step Goals. Detail hidden."
                     : "\(counts.total) One-Step Goals. \(counts.openCount) open. \(counts.parked) parked.",
-                hint: "Tasks are standalone One-Step Goals. They do not create Goals automatically."
+                hint: "One-Step Goals can stand alone. They do not create Goals automatically."
             )
         )
     }

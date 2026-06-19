@@ -243,7 +243,7 @@ private struct MissionControlSpineLane: View {
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(item.accessibilityLabel)
             .accessibilityValue(isSelected ? "Selected lane. \(item.detail)" : "Lane")
-            .accessibilityHint("Inspects this lane inside the MissionControlTimeSpine without opening another destination.")
+            .accessibilityHint("Inspects this lane inside this goal thread without opening another destination.")
             .accessibilityIdentifier("mission-control-time-spine.\(item.id)")
         }
     }
@@ -481,7 +481,7 @@ extension MissionControlLaneItem {
             visualState: lane.state,
             badgeTitle: lane.badgeTitle,
             accessibilityIdentifier: lane.kind.accessibilityIdentifier,
-            drillDownHint: "Keeps \(lane.title) inspectable inside the MissionControlTimeSpine without adding a new destination."
+            drillDownHint: "Keeps \(lane.title) inspectable inside this goal thread without adding a new destination."
         )
     }
 

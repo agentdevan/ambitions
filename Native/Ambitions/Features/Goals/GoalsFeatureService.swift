@@ -1331,7 +1331,7 @@ extension RepositoryBackedGoalsService {
         if openOneStepCount > 3 {
             parts.append("\(openOneStepCount) open One-Step Goals")
         }
-        return parts.isEmpty ? "No blockers, waiting states, or overloaded standalone Tasks are driving the atlas." : parts.joined(separator: " · ")
+        return parts.isEmpty ? "No blockers, waiting states, or overloaded One-Step Goals are driving the atlas." : parts.joined(separator: " · ")
     }
 
     func archiveLearningLines(cards: [GoalsAtlasSurfaceState]) -> [String] {

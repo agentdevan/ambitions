@@ -764,7 +764,7 @@ struct OneStepGoalSummary: Codable, Sendable, Equatable, Hashable, Identifiable 
         return OneStepGoalAccessibilityProjection(
             label: "One-Step Goal, \(oneStepGoal.title)",
             value: value,
-            hint: "Standalone task. It can become or attach to a Goal only after confirmation."
+            hint: "One-Step Goal. It can become or attach to a Goal only after confirmation."
         )
     }
 }
@@ -851,12 +851,12 @@ struct OneStepGoalsProjection: Codable, Sendable, Equatable, Hashable {
                     },
                     counts: area.counts,
                     emptyTitle: "No One-Step Goals here yet",
-                    emptyMessage: "Standalone tasks can live here without becoming full goals.",
+                    emptyMessage: "One-Step Goals can live here without becoming fuller goals.",
                     privacyLevel: .redacted,
                     accessibility: OneStepGoalAccessibilityProjection(
                         label: "One-Step Goals, \(area.displayName)",
                         value: "\(area.counts.total) One-Step Goals. Detail hidden.",
-                        hint: "Sensitive standalone task details are hidden."
+                        hint: "Sensitive One-Step Goal details are hidden."
                     )
                 )
             },
@@ -870,7 +870,7 @@ struct OneStepGoalsProjection: Codable, Sendable, Equatable, Hashable {
     init(
         schemaVersion: String = oneStepGoalSchemaVersion,
         title: String = "One-Step Goals",
-        subtitle: String = "Standalone tasks held without becoming full plans.",
+        subtitle: String = "One-Step Goals held without becoming full plans.",
         labels: [OneStepGoalLabelSummary] = [],
         filters: [OneStepGoalViewSummary] = [],
         savedViews: [OneStepGoalViewSummary] = [],
@@ -894,7 +894,7 @@ struct OneStepGoalsProjection: Codable, Sendable, Equatable, Hashable {
         self.accessibility = OneStepGoalAccessibilityProjection(
             label: title,
             value: "\(counts.total) One-Step Goals. \(counts.openCount) open. \(counts.parked) parked.",
-            hint: "One-Step Goals are standalone Tasks. Steps remain inside Goals, Paths, or Plans."
+            hint: "One-Step Goals can stand alone. Steps remain inside Goals or Paths."
         )
     }
 }

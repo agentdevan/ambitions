@@ -18,7 +18,8 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("rounded Orbital Lens container"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
-        XCTAssertTrue(stageSource.contains("GoalsObjectStagePrimitiveContract"))
+        XCTAssertTrue(stageSource.contains("GoalsLens.makeStageScene(for: overview)"))
+        XCTAssertTrue(try goalsLensSource().contains("static let objectStageContract"))
         XCTAssertTrue(stageSource.contains("atlasRelationshipField"))
         XCTAssertTrue(stageSource.contains("equalWeightLifeAreaGridColumns"))
         XCTAssertTrue(stageSource.contains("laneStates.prefix(2)"))
@@ -72,28 +73,40 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertTrue(source.contains(".allowsHitTesting(false)"))
     }
 
-    func testAMB575PrimitiveRegistryIncludesGoalsObjectStageEntry() throws {
-        let registry = try String(
-            contentsOf: repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md"),
+    func testAMB575ArchitectureTreeIncludesGoalsObjectStageEntry() throws {
+        let goalsLensSource = try goalsLensSource()
+        let stageSceneSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift"),
             encoding: .utf8
         )
 
-        XCTAssertTrue(registry.contains("| goals-object-stage | Promoted | Goals | Constellation Atlas + Orbital Lens | AMB-575 / AMB-963 |"))
-        XCTAssertTrue(registry.contains("### goals-object-stage"))
-        XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-575-goals-object-stage.md"))
+        XCTAssertTrue(goalsLensSource.contains("static let objectStageContract"))
+        XCTAssertTrue(goalsLensSource.contains("GoalsStageScene("))
+        XCTAssertTrue(stageSceneSource.contains("struct GoalsStageScene: Equatable, Sendable"))
+        XCTAssertTrue(stageSceneSource.contains("productObject.localizedCaseInsensitiveContains(\"Constellation Atlas\")"))
+        XCTAssertTrue(stageSceneSource.contains("firstViewportStructure.localizedCaseInsensitiveContains(\"life-area\")"))
+        XCTAssertTrue(stageSceneSource.contains("sourceTrustLineOrder == [\"life area\", \"source\", \"proof\", \"receipt\", \"Today link\"]"))
+        XCTAssertTrue(stageSceneSource.contains("todayRelationshipSummary.localizedCaseInsensitiveContains(\"Today\")"))
+        XCTAssertTrue(stageSceneSource.contains("inspectionSummary.localizedCaseInsensitiveContains(\"proof\")"))
     }
 
     private func goalsStageSource() throws -> String {
         let source = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Features/Goals/GoalComponents.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView.swift"),
             encoding: .utf8
         )
-        guard let stageStart = source.range(of: "struct GoalsConstellationAtlasStage: View"),
-              let stageEnd = source.range(of: "struct GoalMissionControlLanes: View") else {
-            XCTFail("Unable to locate GoalsConstellationAtlasStage source boundaries.")
+        guard let stageStart = source.range(of: "struct ConstellationAtlasView: View") else {
+            XCTFail("Unable to locate ConstellationAtlasView source boundary.")
             return source
         }
-        return String(source[stageStart.lowerBound..<stageEnd.lowerBound])
+        return String(source[stageStart.lowerBound...])
+    }
+
+    private func goalsLensSource() throws -> String {
+        try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses/GoalsLens.swift"),
+            encoding: .utf8
+        )
     }
 
     private func repoRoot() -> URL {

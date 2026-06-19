@@ -67,7 +67,8 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(laneItem.value, completedLane.headline)
         XCTAssertEqual(laneItem.badgeTitle, completedLane.badgeTitle)
         XCTAssertEqual(laneItem.accessibilityIdentifier, completedLane.kind.accessibilityIdentifier)
-        XCTAssertTrue(laneItem.accessibilityHint.contains("MissionControlTimeSpine"))
+        XCTAssertTrue(laneItem.accessibilityHint.contains("this goal thread"))
+        XCTAssertFalse(laneItem.accessibilityHint.contains("MissionControlTimeSpine"))
     }
 
     @MainActor
@@ -89,13 +90,15 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
 
         XCTAssertEqual(missionControl.lanes.map(\.title), ["Completed", "Now", "Friction", "Next", "Horizon"])
         XCTAssertEqual(items.map(\.id), ["proof", "overview", "risks", "steps", "path"])
-        XCTAssertTrue(items.first(where: { $0.id == "proof" })?.accessibilityHint.contains("MissionControlTimeSpine") == true)
+        XCTAssertTrue(items.first(where: { $0.id == "proof" })?.accessibilityHint.contains("this goal thread") == true)
+        XCTAssertFalse(items.first(where: { $0.id == "proof" })?.accessibilityHint.contains("MissionControlTimeSpine") == true)
         XCTAssertEqual(items.first(where: { $0.id == "risks" })?.title, "Friction")
         XCTAssertFalse(items.first(where: { $0.id == "risks" })?.detail.isEmpty == true)
         XCTAssertTrue(items.first(where: { $0.id == "steps" })?.detail.localizedCaseInsensitiveContains("Step") == true)
         XCTAssertTrue(items.first(where: { $0.id == "path" })?.detail.localizedCaseInsensitiveContains("Decisions") == true)
 
         let visibleCopy = items.flatMap { [$0.title, $0.value, $0.detail, $0.accessibilityHint] }.joined(separator: " ").lowercased()
+        XCTAssertFalse(visibleCopy.contains("goal mission control"))
         XCTAssertFalse(visibleCopy.contains("dashboard metrics grid"))
         XCTAssertFalse(visibleCopy.contains("kanban"))
         XCTAssertFalse(visibleCopy.contains("enterprise pm"))

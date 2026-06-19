@@ -308,7 +308,7 @@ private struct GoalDetailMissionControlSurface: View {
         AppCard(state: .selected) {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 MissionControlLaneHeader(
-                    eyebrow: "Goal Mission Control",
+                    eyebrow: "Goal Thread Focus",
                     title: state.currentTruth,
                     subtitle: state.primaryNextMove.title,
                     badges: [
