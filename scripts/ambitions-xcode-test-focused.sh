@@ -13,6 +13,7 @@ LOG_DIR=".codex/xcode-logs"
 SUMMARY_DIR=".codex/xcode-summaries"
 TIMEOUT_DURATION="15m"
 KILL_AFTER="60s"
+XCODEBUILD_ACTION="test"
 
 while [[ "$#" -gt 0 ]]; do
   case "$1" in
@@ -25,8 +26,9 @@ while [[ "$#" -gt 0 ]]; do
     --summaries-dir) SUMMARY_DIR="${2:-$SUMMARY_DIR}"; shift 2 ;;
     --timeout) TIMEOUT_DURATION="${2:-$TIMEOUT_DURATION}"; shift 2 ;;
     --kill-after) KILL_AFTER="${2:-$KILL_AFTER}"; shift 2 ;;
+    --without-building|--test-without-building) XCODEBUILD_ACTION="test-without-building"; shift ;;
     -h|--help)
-      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--timeout 15m] [--kill-after 60s]" >&2
+      echo "Usage: scripts/ambitions-xcode-test-focused.sh --batch <BATCH> --test <TEST_ID> [--timeout 15m] [--kill-after 60s] [--without-building]" >&2
       exit 0
       ;;
     *)
@@ -77,7 +79,7 @@ if [[ -n "${AMBITIONS_SIM_UDID:-}" || -n "$sim_udid" ]]; then
   [[ -n "$sim" ]] && SIM_DEST="platform=iOS Simulator,id=${sim}"
 fi
 
-TEST_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -destination "$SIM_DEST" -derivedDataPath "$DERIVED_DATA" test-without-building -only-testing "$test_filter" CODE_SIGNING_ALLOWED=NO -resultBundlePath "$RESULT_BUNDLE")
+TEST_CMD=(xcodebuild -project Ambitions.xcodeproj -scheme "$SCHEME" -destination "$SIM_DEST" -derivedDataPath "$DERIVED_DATA" "$XCODEBUILD_ACTION" -only-testing "$test_filter" CODE_SIGNING_ALLOWED=NO -resultBundlePath "$RESULT_BUNDLE")
 BOUNDED_TEST_CMD=(scripts/ambitions-bounded-xcodebuild.sh --timeout "$TIMEOUT_DURATION" --kill-after "$KILL_AFTER" --log "$LOG_FILE" -- "${TEST_CMD[@]}")
 
 extract_executed_tests() {
@@ -152,6 +154,7 @@ cat > "$SUMMARY_FILE" <<JSON
   "batch": "$BATCH",
   "lane": "focused-test",
   "test": "$test_filter",
+  "xcodebuild_action": "$XCODEBUILD_ACTION",
   "status": "$([ "$status" -eq 0 ] && echo passed || echo failed)",
   "failure_category": "$classification",
   "executed_tests": $executed_tests,
