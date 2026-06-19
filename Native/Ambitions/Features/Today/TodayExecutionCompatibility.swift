@@ -246,7 +246,16 @@ extension TodayExecutionViewState {
 
 extension TodayExecutionViewState {
     func replacingDayRail(_ dayRail: AmbitionsDayRailViewState) -> TodayExecutionViewState {
-        TodayExecutionViewState(
+        let updatedRealityMeridianContinuity = RealityMeridianContinuityProjectionState.make(
+            dayRail: dayRail,
+            heroStep: dayRail.heroStep,
+            recommendedStep: recommendedStep,
+            todayTimeLayer: todayTimeLayer,
+            dayState: dayState,
+            recoveryLabel: dayRail.continuity.pressureLabel
+        )
+
+        return TodayExecutionViewState(
             dayRail: dayRail,
             activeLens: activeLens,
             availableLenses: availableLenses,
@@ -269,7 +278,7 @@ extension TodayExecutionViewState {
             commandMappings: commandMappings,
             timeRequestsCalendarPermission: timeRequestsCalendarPermission,
             emptyGuidance: emptyGuidance,
-            realityMeridianContinuity: realityMeridianContinuity
+            realityMeridianContinuity: updatedRealityMeridianContinuity
         )
     }
 }

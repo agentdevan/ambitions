@@ -684,9 +684,9 @@ struct AmbitionsDayRailView: View {
             ),
             TodayEmptyPathAction(
                 id: "record-outcome",
-                title: "Record outcome",
+                title: "Close the loop",
                 systemImage: "checkmark.seal",
-                action: TodayInlineAction(kind: .closeActionClosure, title: "Record outcome", systemImage: "checkmark.seal", state: .default, target: TodayActionTarget())
+                action: TodayInlineAction(kind: .closeActionClosure, title: "Close the loop", systemImage: "checkmark.seal", state: .default, target: TodayActionTarget())
             ),
             TodayEmptyPathAction(
                 id: "protect-window",

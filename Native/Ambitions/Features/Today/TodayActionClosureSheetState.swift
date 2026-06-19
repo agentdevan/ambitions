@@ -13,7 +13,7 @@ struct TodayActionClosureOutcomeState: Identifiable, Equatable, Sendable {
     var consequenceLabel: String {
         switch closureState {
         case .completed:
-            "Records the step as complete and attaches proof."
+            "Closes the step and attaches proof."
         case .stillCounts:
             "Saves the real progress as proof without pretending the original ask happened."
         case .moved:
@@ -30,6 +30,15 @@ struct TodayActionClosureOutcomeState: Identifiable, Equatable, Sendable {
             "Keeps the step open for one more look."
         case .now, .next, .later:
             "Keeps the timing decision visible for review."
+        }
+    }
+
+    var undoPreviewLabel: String {
+        switch closureState {
+        case .completed, .stillCounts:
+            "Undo remains available from local receipt history."
+        case .moved, .notNeeded, .skippedIntentionally, .blocked, .waiting, .needsRecovery, .needsReview, .awaitingClosure, .now, .next, .later:
+            "Review remains available from local receipt history."
         }
     }
 
@@ -81,9 +90,9 @@ struct TodayActionClosureDiamondState: Equatable, Sendable {
     }
 
     static let todayDefault = TodayActionClosureDiamondState(
-        title: "Outcome check",
-        summary: "Choose the honest outcome, then Ambitions shows the consequence before anything changes.",
-        centerLabel: "Record outcome",
+        title: "What changes",
+        summary: "Choose the honest outcome, then Ambitions shows the consequence before saving.",
+        centerLabel: "Save outcome",
         noSilentChangeLabel: "Changes stay reviewable",
         facets: [
             TodayActionClosureDiamondFacetState(
@@ -168,18 +177,17 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             confirmTitle,
             softPriorStepPrompt,
             recoveryReceiptLabel,
-            diamond.visibleCopy,
         ] + outcomes.flatMap {
-            [$0.title, $0.meaning, $0.consequenceLabel, $0.recoveryPrompt, $0.receiptPreview]
+            [$0.title, $0.meaning, $0.consequenceLabel, $0.recoveryPrompt, $0.receiptPreview, $0.undoPreviewLabel]
         }).joined(separator: " ")
     }
 
     var softPriorStepPrompt: String {
-        "Choose the closest honest outcome."
+        "Choose the closest honest outcome. Ambitions shows what changes before saving."
     }
 
     var recoveryReceiptLabel: String {
-        "Saving the outcome updates Today and keeps the result inspectable."
+        "Saving the outcome updates Today, saves a local receipt when available, and does not rearrange the day silently."
     }
 
     private static let defaultOutcomes: [TodayActionClosureOutcomeState] = [
@@ -208,12 +216,12 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             isPrimary: true
         ),
         TodayActionClosureOutcomeState(
-            closureState: .notNeeded,
-            title: "Not needed",
-            meaning: "Intentionally removed.",
-            receiptPreview: "Not needed · receipt saved",
+            closureState: .waiting,
+            title: "Waiting",
+            meaning: "Dependent on a person, time, info, place, or tool.",
+            receiptPreview: "Waiting · dependency noted",
             createsProof: false,
-            isPrimary: false
+            isPrimary: true
         ),
         TodayActionClosureOutcomeState(
             closureState: .blocked,
@@ -224,12 +232,12 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             isPrimary: true
         ),
         TodayActionClosureOutcomeState(
-            closureState: .waiting,
-            title: "Waiting",
-            meaning: "Dependent on a person, time, info, place, or tool.",
-            receiptPreview: "Waiting · dependency noted",
+            closureState: .notNeeded,
+            title: "Not needed",
+            meaning: "Intentionally removed.",
+            receiptPreview: "Not needed · receipt saved",
             createsProof: false,
-            isPrimary: false
+            isPrimary: true
         ),
         TodayActionClosureOutcomeState(
             closureState: .needsRecovery,

@@ -110,6 +110,12 @@ struct TodayInlineMessage: Identifiable, Sendable {
 
 struct TodayActionResponse: Sendable {
     let message: TodayInlineMessage?
+    let stageMutation: TodayClosureStageMutation?
+
+    init(message: TodayInlineMessage?, stageMutation: TodayClosureStageMutation? = nil) {
+        self.message = message
+        self.stageMutation = stageMutation
+    }
 }
 
 struct TodayRejectionReasonSheetState: Identifiable, Sendable, Equatable {

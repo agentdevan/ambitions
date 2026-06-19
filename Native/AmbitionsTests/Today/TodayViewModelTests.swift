@@ -189,13 +189,13 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(heroStep.contextEdge.title, "Context edge")
         XCTAssertEqual(heroStep.timeFitProof.title, "Time fit")
         XCTAssertEqual(heroStep.goalThread.title, "Goal thread")
-        XCTAssertEqual(heroStep.receiptItem.title, "Start Here receipt seam")
-        XCTAssertEqual(heroStep.receiptLabel, "Start Here receipt seam")
+        XCTAssertEqual(heroStep.receiptItem.title, "Start Here review history")
+        XCTAssertEqual(heroStep.receiptLabel, "Start Here review history")
         XCTAssertEqual(heroStep.proofLabel, "No change has been made yet.")
         XCTAssertEqual(heroStep.sourceRecordLabel, "Source record stays local")
-        XCTAssertEqual(heroStep.replayTraceLabel, "Replay trace stays inspectable")
+        XCTAssertEqual(heroStep.replayTraceLabel, "Review path stays inspectable")
         XCTAssertTrue(heroStep.replayInspectionLabel.contains("Source record stays local"))
-        XCTAssertTrue(heroStep.replayInspectionLabel.contains("Replay trace stays inspectable"))
+        XCTAssertTrue(heroStep.replayInspectionLabel.contains("Review path stays inspectable"))
         XCTAssertTrue(heroStep.startHereReplayCoverage.isGreen)
         XCTAssertTrue(heroStep.startHereReplayCoverage.isInsideRealityMeridian)
         XCTAssertTrue(heroStep.startHereReplayCoverage.hasStartHereDecisionLayer)
@@ -295,7 +295,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Next"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Later"))
         XCTAssertTrue(f02VisibleRailCopy(rail).contains("Reality Meridian continuity"))
-        XCTAssertTrue(f02VisibleRailCopy(rail).contains("No silent changes"))
+        XCTAssertTrue(f02VisibleRailCopy(rail).contains("Changes stay reviewable"))
     }
 
     func testFCP05StartHereSurfaceCarriesSourceTimeGoalAndReceiptSeam() async throws {
@@ -318,10 +318,10 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(copy.contains("Context edge"))
         XCTAssertTrue(copy.contains("Time fit"))
         XCTAssertTrue(copy.contains("Goal thread"))
-        XCTAssertTrue(copy.contains("Start Here receipt seam"))
+        XCTAssertTrue(copy.contains("Start Here review history"))
         XCTAssertTrue(copy.contains("No change has been made yet."))
         XCTAssertTrue(copy.contains("Source record stays local"))
-        XCTAssertTrue(copy.contains("Replay trace stays inspectable"))
+        XCTAssertTrue(copy.contains("Review path stays inspectable"))
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertFalse(copy.localizedCaseInsensitiveContains(forbiddenCopyTerm("AI", "confidence")))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains(forbiddenCopyTerm("productivity", "score")))
@@ -354,7 +354,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(copy.contains("Proof marker"))
         XCTAssertTrue(copy.contains("Proof saved"))
         XCTAssertTrue(copy.contains("Pressure"))
-        XCTAssertTrue(copy.contains("No silent changes."))
+        XCTAssertTrue(copy.contains("Changes stay reviewable."))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("agenda"))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("task list"))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("dashboard"))
@@ -385,12 +385,12 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(hero.contextEdge.title, "Context edge")
         XCTAssertEqual(hero.timeFitProof.title, "Time fit")
         XCTAssertEqual(hero.goalThread.title, "Goal thread")
-        XCTAssertEqual(hero.receiptItem.title, "Start Here receipt seam")
+        XCTAssertEqual(hero.receiptItem.title, "Start Here review history")
         XCTAssertEqual(hero.receiptItem.summary, "No change has been made yet.")
-        XCTAssertEqual(hero.receiptLabel, "Start Here receipt seam")
+        XCTAssertEqual(hero.receiptLabel, "Start Here review history")
         XCTAssertEqual(hero.proofLabel, "No change has been made yet.")
         XCTAssertEqual(hero.sourceRecordLabel, "Source record stays local")
-        XCTAssertEqual(hero.replayTraceLabel, "Replay trace stays inspectable")
+        XCTAssertEqual(hero.replayTraceLabel, "Review path stays inspectable")
         XCTAssertTrue(try XCTUnwrap(hero.receiptItem.changeLabel).contains("closing writes the receipt later"))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("task list"))
         XCTAssertFalse(copy.localizedCaseInsensitiveContains("dashboard"))
@@ -546,7 +546,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertTrue(renderedReservationCopy.contains("Closure knot"))
         XCTAssertTrue(renderedReservationCopy.contains("Proof marker"))
-        XCTAssertTrue(renderedReservationCopy.contains("No silent changes."))
+        XCTAssertTrue(renderedReservationCopy.contains("Changes stay reviewable."))
         XCTAssertFalse(renderedReservationCopy.localizedCaseInsensitiveContains("auto-complete"))
         XCTAssertFalse(renderedReservationCopy.localizedCaseInsensitiveContains("rearrange"))
     }
@@ -584,7 +584,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(copy.contains("Adjust time"))
         XCTAssertTrue(copy.contains("Review later"))
         XCTAssertTrue(copy.contains("Proof and receipts stay attached to this step"))
-        XCTAssertTrue(copy.contains("No silent changes"))
+        XCTAssertTrue(copy.contains("Changes stay reviewable"))
         XCTAssertFalse(detail.whyBullets.isEmpty)
     }
 
@@ -605,7 +605,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(summary.contains(hero.contextEdge.title))
         XCTAssertTrue(summary.contains(hero.timeFitProof.title))
         XCTAssertTrue(summary.contains(hero.goalThread.title))
-        XCTAssertTrue(summary.contains("Start Here receipt seam"))
+        XCTAssertTrue(summary.contains("Start Here review history"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("recommendation card"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("dashboard"))
         XCTAssertFalse(summary.localizedCaseInsensitiveContains("task list"))
@@ -697,13 +697,13 @@ final class TodayViewModelTests: XCTestCase {
         )
 
         XCTAssertEqual(sheet.prompt, "What happened with this step?")
-        XCTAssertEqual(sheet.primaryOutcomes.map(\.closureState), [.completed, .stillCounts, .moved, .notNeeded, .blocked, .waiting])
+        XCTAssertEqual(sheet.primaryOutcomes.map(\.closureState), [.completed, .stillCounts, .moved, .blocked, .notNeeded])
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .blocked })
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .waiting })
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .needsRecovery })
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .needsReview })
         XCTAssertTrue(sheet.outcomes.contains { $0.title == "Review later" })
-        XCTAssertEqual(sheet.outcomes.first { $0.closureState == .stillCounts }?.receiptPreview, "Still Counts · saved as proof")
+        XCTAssertEqual(sheet.outcomes.first { $0.closureState == .stillCounts }?.receiptPreview, "Still counts · saved as proof")
         XCTAssertEqual(
             sheet.outcomes.first { $0.closureState == .stillCounts }?.consequenceLabel,
             "Saves the real progress as proof without pretending the original ask happened."
@@ -718,7 +718,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains(forbiddenCopyTerm("AI", "confidence")))
     }
 
-    func testFCP13AActionClosureDiamondExplainsOutcomeConsequenceProofAndRecoveryWithoutSilentMutation() throws {
+    func testTrain6ActionClosureSheetExplainsOutcomeConsequenceReceiptAndUndoWithoutSilentMutation() throws {
         let target = TodayActionTarget(goalID: "goal-fcp13a", stepID: "step-fcp13a")
         let sheet = TodayActionClosureSheetState.step(
             title: "Send the launch note",
@@ -726,13 +726,16 @@ final class TodayViewModelTests: XCTestCase {
             target: target
         )
 
-        XCTAssertEqual(sheet.diamond.title, "Outcome")
-        XCTAssertEqual(sheet.diamond.centerLabel, "Close the loop")
-        XCTAssertEqual(sheet.diamond.facets.map(\.title), ["Outcome", "Consequence", "Proof", "Recovery"])
-        XCTAssertTrue(sheet.diamond.visibleCopy.contains("Evidence only when it is true."))
-        XCTAssertTrue(sheet.diamond.visibleCopy.contains("No silent changes"))
-        XCTAssertTrue(sheet.diamond.accessibilityValue.contains("Recovery: A smaller path if reality changed."))
-        XCTAssertTrue(sheet.visibleCopy.contains("Choose the honest outcome"))
+        let stillCounts = try XCTUnwrap(sheet.outcomes.first { $0.closureState == .stillCounts })
+        let blocked = try XCTUnwrap(sheet.outcomes.first { $0.closureState == .blocked })
+
+        XCTAssertEqual(sheet.diamond.title, "What changes")
+        XCTAssertEqual(sheet.diamond.centerLabel, "Save outcome")
+        XCTAssertFalse(sheet.visibleCopy.contains("Outcome map"))
+        XCTAssertTrue(sheet.visibleCopy.contains("Choose the closest honest outcome"))
+        XCTAssertTrue(sheet.visibleCopy.contains("does not rearrange the day silently"))
+        XCTAssertTrue(stillCounts.undoPreviewLabel.contains("Undo remains available"))
+        XCTAssertTrue(blocked.recoveryPrompt.contains("Reduce the ask"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains(forbiddenCopyTerm("AI", "confidence")))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("score"))
         XCTAssertFalse(sheet.visibleCopy.localizedCaseInsensitiveContains("failed"))
@@ -780,7 +783,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(proofPeek.subtitle.contains("Still Counts"))
         XCTAssertEqual(proofPeek.proofLabel, "Added to proof")
         XCTAssertEqual(proofPeek.privacyLabel, "Stored on this device")
-        XCTAssertEqual(proofPeek.noSilentChangesLabel, "No silent changes")
+        XCTAssertEqual(proofPeek.noSilentChangesLabel, "Changes stay reviewable")
         XCTAssertEqual(reviewPeek.title, "Needs confirmation")
         XCTAssertEqual(reviewPeek.proofLabel, "Needs confirmation")
         XCTAssertEqual(waitingPeek.proofLabel, "Needs confirmation")
@@ -802,6 +805,14 @@ final class TodayViewModelTests: XCTestCase {
         let response = try await service.recordActionClosure(closure, outcome: stillCounts, now: now)
 
         XCTAssertEqual(response.message?.title, "Proof saved")
+        let mutation = try XCTUnwrap(response.stageMutation)
+        XCTAssertTrue(mutation.stageMutation.isCanonComplete)
+        XCTAssertTrue(mutation.userVisibleMutation.isCanonComplete)
+        XCTAssertEqual(mutation.stageMutation.targetSurface, .today)
+        XCTAssertEqual(mutation.stageMutation.motionEvent, "closure.still_counts")
+        XCTAssertEqual(mutation.stageMutation.proofArtifact.label, "Proof saved")
+        XCTAssertEqual(mutation.stageMutation.undoAvailability.isAvailable, true)
+        XCTAssertTrue(mutation.stageMutation.accessibilityAnnouncement.message.contains("Still counts"))
         XCTAssertTrue(response.message?.body.contains("Source record is receipt-backed") ?? false)
         XCTAssertTrue(response.message?.body.contains("Replay trace stays local and inspectable") ?? false)
         XCTAssertTrue(response.message?.body.contains("You inspection") ?? false)
@@ -827,6 +838,67 @@ final class TodayViewModelTests: XCTestCase {
         })
     }
 
+    @MainActor
+    func testTrain6ActionClosureStageMutationUpdatesLoadedTodayRail() async throws {
+        let baseExperience = PreviewTodayScenarios.stable
+        let heroStep = try XCTUnwrap(baseExperience.execution.dayRail.heroStep)
+        let target = heroStep.primaryAction.target
+        let closure = TodayActionClosureSheetState.step(
+            title: heroStep.title,
+            context: baseExperience.execution.dayRail.contextSummary,
+            target: target
+        )
+        let outcome = try XCTUnwrap(closure.outcomes.first { $0.closureState == .stillCounts })
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-05-02T09:30:00Z"))
+        let mutation = TodayClosureStageMutation(
+            record: TodayClosureRecord(
+                stepID: target.stepID,
+                goalID: target.goalID,
+                outcome: outcome.closureState,
+                occurredAt: now
+            ),
+            stepTitle: closure.objectTitle,
+            receiptSaved: true
+        )
+        let service = RecordingTodayService(
+            experience: baseExperience,
+            actionResponse: TodayActionResponse(
+                message: TodayInlineMessage(
+                    title: "Proof saved",
+                    body: "The closure receipt is saved locally.",
+                    state: .success
+                ),
+                stageMutation: mutation
+            )
+        )
+        let viewModel = TodayViewModel(state: .loaded(baseExperience))
+
+        await viewModel.confirmActionClosure(
+            closure,
+            outcome: outcome,
+            using: service,
+            userDisplayName: "",
+            now: now,
+            calendar: Calendar(identifier: .gregorian)
+        )
+
+        guard case let .loaded(updatedExperience) = viewModel.state else {
+            return XCTFail("Expected loaded Today experience after closure confirmation.")
+        }
+
+        XCTAssertEqual(updatedExperience.execution.dayRail.closureSlot.title, "Still counts")
+        XCTAssertTrue(updatedExperience.execution.dayRail.closureSlot.subtitle.contains("Progress is saved"))
+        XCTAssertEqual(updatedExperience.execution.dayRail.proofSlot.title, "Proof saved")
+        XCTAssertTrue(updatedExperience.execution.dayRail.proofSlot.subtitle.contains(heroStep.title))
+        XCTAssertTrue(mutation.stageMutation.isCanonComplete)
+        XCTAssertEqual(mutation.stageMutation.targetSurface, .today)
+        XCTAssertTrue(mutation.userVisibleMutation.detail.contains("Progress is saved"))
+        XCTAssertTrue(updatedExperience.execution.dayRail.continuity.markers.contains { marker in
+            marker.kind == .closure && marker.summary == "Still counts"
+        })
+        XCTAssertEqual(viewModel.transientMessage?.title, "Proof saved")
+    }
+
     func testF03StepDetailSupportsMissingDurationFallback() {
         let detail = PreviewTodayScenarios.missingDurationStepDetail
 
@@ -849,7 +921,7 @@ final class TodayViewModelTests: XCTestCase {
             "Ride momentum"
         ])
         XCTAssertTrue(sheet.visibleCopy.contains("Original recommendation"))
-        XCTAssertTrue(sheet.visibleCopy.contains("No silent changes"))
+        XCTAssertTrue(sheet.visibleCopy.contains("Changes stay reviewable"))
         XCTAssertTrue(sheet.visibleCopy.contains("Show impact"))
         XCTAssertTrue(sheet.visibleCopy.contains("Move original Step"))
         XCTAssertTrue(sheet.originalRecommendation.visibleCopy.contains(sheet.originalHero.title))
@@ -898,9 +970,9 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(rail.continuity.title, "Reality Meridian continuity")
         XCTAssertTrue(rail.continuity.markers.contains(where: { $0.title == "Closure knot" }))
         XCTAssertEqual(rail.continuity.markers.contains(where: { $0.title == "Proof marker" }), true)
-        XCTAssertEqual(hero.receiptItem.title, "Start Here receipt seam")
+        XCTAssertEqual(hero.receiptItem.title, "Start Here review history")
         XCTAssertEqual(rail.proofSlot.noSilentChanges, true)
-        XCTAssertEqual(rail.continuity.noSilentChangesLabel, "No silent changes.")
+        XCTAssertEqual(rail.continuity.noSilentChangesLabel, "Changes stay reviewable.")
     }
 
     func testPK17ReadModelProjectorPreservesStartHereProjection() async throws {
@@ -1466,6 +1538,7 @@ private actor RecordingTodayService: TodayServicing {
     let experience: TodayExperience
     let actionResponse: TodayActionResponse
     private(set) var performedActions: [TodayInlineAction] = []
+    private(set) var recordedClosures: [(TodayActionClosureSheetState, TodayActionClosureOutcomeState)] = []
 
     init(experience: TodayExperience, actionResponse: TodayActionResponse) {
         self.experience = experience
@@ -1482,6 +1555,12 @@ private actor RecordingTodayService: TodayServicing {
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
         _ = now
         performedActions.append(action)
+        return actionResponse
+    }
+
+    func recordActionClosure(_ closure: TodayActionClosureSheetState, outcome: TodayActionClosureOutcomeState, now: Date) async throws -> TodayActionResponse {
+        _ = now
+        recordedClosures.append((closure, outcome))
         return actionResponse
     }
 

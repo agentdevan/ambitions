@@ -4,14 +4,13 @@ import SwiftUI
 struct TodayActionClosureSheet: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.accessibilityReduceMotion) private var reduceMotion
-    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     let state: TodayActionClosureSheetState
     let onConfirm: (TodayActionClosureOutcomeState) -> Void
 
     @State private var selectedOutcome: TodayActionClosureOutcomeState?
-    @State private var areMoreOutcomesExpanded = true
+    @State private var areMoreOutcomesExpanded = false
+    @State private var isReceiptPreviewExpanded = false
 
     var body: some View {
         NavigationStack {
@@ -30,9 +29,9 @@ struct TodayActionClosureSheet: View {
                     }
 
                     closureContext
-                    closureDiamond
+                    selectedOutcomeSummary
                     softPriorStepPrompt
-                    closureOutcomeSection(title: "Likely outcomes", outcomes: state.primaryOutcomes)
+                    closureOutcomePicker
 
                     if state.moreOutcomes.isEmpty == false {
                         DisclosureGroup("More options", isExpanded: $areMoreOutcomesExpanded) {
@@ -43,7 +42,7 @@ struct TodayActionClosureSheet: View {
                         .foregroundStyle(theme.colors.textPrimary)
                     }
 
-                    receiptPreview
+                    receiptDisclosure
                     confirmButton
                 }
                 .padding(theme.spacing.lg)
@@ -97,94 +96,21 @@ struct TodayActionClosureSheet: View {
         .accessibilityIdentifier("TodayActionClosureContext")
     }
 
-    private var closureDiamond: some View {
-        ClosureRecoveryPrimitiveStage(
-            role: .closure,
-            eyebrow: "Outcome map",
-            title: state.diamond.title,
-            subtitle: state.diamond.summary,
-            accessibilityIdentifier: "TodayActionClosureDiamond"
+    private var selectedOutcomeSummary: some View {
+        let outcome = selectedOutcome ?? state.primaryOutcomes.first
+        return ClosureRecoveryPrimitiveStage(
+            role: outcome?.createsProof == true ? .receipt : .closure,
+            eyebrow: "What changes",
+            title: outcome?.title ?? "Choose outcome",
+            subtitle: outcome?.consequenceLabel ?? "Choose an outcome to see what Today will change.",
+            statusLabel: outcome?.undoPreviewLabel ?? "Changes stay reviewable",
+            accessibilityIdentifier: "TodayActionClosureConsequencePreview"
         ) {
-            if dynamicTypeSize.isAccessibilitySize {
-                closureDiamondList
-            } else {
-                closureDiamondVisual
-            }
+            Text(outcome?.recoveryPrompt ?? state.softPriorStepPrompt)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel(state.diamond.title)
-        .accessibilityValue("\(state.diamond.summary) \(state.diamond.accessibilityValue). \(state.diamond.noSilentChangeLabel).")
-    }
-
-    private var closureDiamondVisual: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                .fill(theme.colors.accentWarm.opacity(0.12))
-                .overlay(
-                    RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                        .stroke(theme.colors.accentWarm.opacity(0.52), lineWidth: 1)
-                )
-                .rotationEffect(reduceMotion ? .zero : .degrees(45))
-                .frame(width: 118, height: 118)
-
-            Text(state.diamond.centerLabel)
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textPrimary)
-                .multilineTextAlignment(.center)
-                .frame(width: 72)
-
-            closureDiamondFacet(state.diamond.facets[0])
-                .offset(y: -74)
-            closureDiamondFacet(state.diamond.facets[1])
-                .offset(x: 106)
-            closureDiamondFacet(state.diamond.facets[2])
-                .offset(y: 74)
-            closureDiamondFacet(state.diamond.facets[3])
-                .offset(x: -106)
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 192)
-        .accessibilityHidden(true)
-    }
-
-    private var closureDiamondList: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            ForEach(state.diamond.facets) { facet in
-                Label {
-                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                        Text(facet.title)
-                            .font(theme.typography.caption.weight(.semibold))
-                            .foregroundStyle(theme.colors.textPrimary)
-                        Text(facet.summary)
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                    }
-                } icon: {
-                    Image(systemName: facet.systemImage)
-                        .foregroundStyle(theme.colors.accentWarm)
-                }
-            }
-            Text(state.diamond.noSilentChangeLabel)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-        }
-    }
-
-    private func closureDiamondFacet(_ facet: TodayActionClosureDiamondFacetState) -> some View {
-        VStack(spacing: theme.spacing.xxxs) {
-            Image(systemName: facet.systemImage)
-                .font(.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.accentWarm)
-            Text(facet.title)
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textPrimary)
-        }
-        .padding(.horizontal, theme.spacing.xs)
-        .padding(.vertical, theme.spacing.xxxs)
-        .background(
-            Capsule(style: .continuous)
-                .fill(theme.colors.surfaceSecondary.opacity(0.86))
-        )
     }
 
     private var softPriorStepPrompt: some View {
@@ -196,6 +122,63 @@ struct TodayActionClosureSheet: View {
             accessibilityIdentifier: "TodayActionClosureRecoveryPrompt"
         )
         .accessibilityElement(children: .combine)
+    }
+
+    private var closureOutcomePicker: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text("Choose outcome")
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+
+            LazyVGrid(
+                columns: [GridItem(.adaptive(minimum: 142), spacing: theme.spacing.xs, alignment: .topLeading)],
+                alignment: .leading,
+                spacing: theme.spacing.xs
+            ) {
+                ForEach(state.primaryOutcomes) { outcome in
+                    closureOutcomeTile(outcome)
+                }
+            }
+        }
+        .accessibilityIdentifier("TodayActionClosureOutcomePicker")
+    }
+
+    private func closureOutcomeTile(_ outcome: TodayActionClosureOutcomeState) -> some View {
+        let isSelected = selectedOutcome?.id == outcome.id
+
+        return Button {
+            selectedOutcome = outcome
+        } label: {
+            HStack(spacing: theme.spacing.xs) {
+                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(isSelected ? theme.colors.success : theme.colors.textTertiary)
+
+                Text(outcome.title)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.82)
+
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity, minHeight: 46, alignment: .leading)
+            .padding(.horizontal, theme.spacing.sm)
+            .padding(.vertical, theme.spacing.xs)
+            .background(
+                RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                    .fill(isSelected ? theme.colors.surfaceOverlay : theme.colors.surfacePrimary.opacity(0.74))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
+                    .stroke(isSelected ? theme.colors.strokeStrong : theme.colors.strokeSubtle, lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(outcome.title)
+        .accessibilityValue("\(outcome.meaning) \(outcome.consequenceLabel)")
+        .accessibilityHint("\(outcome.recoveryPrompt) \(outcome.receiptPreview)")
+        .accessibilityIdentifier("TodayActionClosureOutcome.\(outcome.id)")
     }
 
     @ViewBuilder
@@ -237,10 +220,19 @@ struct TodayActionClosureSheet: View {
         }
     }
 
+    private var receiptDisclosure: some View {
+        DisclosureGroup("Receipt and review", isExpanded: $isReceiptPreviewExpanded) {
+            receiptPreview
+                .padding(.top, theme.spacing.sm)
+        }
+        .font(theme.typography.bodyEmphasized)
+        .foregroundStyle(theme.colors.textPrimary)
+    }
+
     private var receiptPreview: some View {
         ClosureRecoveryPrimitiveStage(
             role: .receipt,
-            eyebrow: "Review preview",
+            eyebrow: "Local receipt",
             title: state.receiptPreviewTitle,
             subtitle: receiptPreviewText,
             statusLabel: selectedOutcome.map { state.proofReceiptPeek(for: $0).noSilentChangesLabel } ?? "Changes stay reviewable",

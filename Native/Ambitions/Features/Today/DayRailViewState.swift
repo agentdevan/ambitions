@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import Foundation
 
-enum DayRailMode: String, CaseIterable, Equatable {
+enum DayRailMode: String, CaseIterable, Equatable, Sendable {
     case normal
     case recovery
     case protected

@@ -91,12 +91,24 @@ extension RepositoryBackedTodayService {
         }
 
         try await historyRepository.save([record])
+        let stageRecord = TodayClosureRecord(
+            stepID: closure.target.stepID,
+            goalID: closure.target.goalID,
+            outcome: outcome.closureState,
+            occurredAt: now
+        )
+        let stageMutation = TodayClosureStageMutation(
+            record: stageRecord,
+            stepTitle: closure.objectTitle,
+            receiptSaved: true
+        )
         return TodayActionResponse(
             message: TodayInlineMessage(
                 title: peek.title,
                 body: "\(peek.subtitle). \(peek.privacyLabel). \(record.sourceRecordLabel). \(record.replayTraceLabel). You inspection can find this through local receipt history.",
                 state: outcome.createsProof ? .success : .selected
-            )
+            ),
+            stageMutation: stageMutation
         )
     }
 }

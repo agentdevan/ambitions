@@ -105,6 +105,9 @@ final class TodayViewModel {
             let response = try await service.recordActionClosure(closure, outcome: outcome, now: now)
             transientMessage = response.message
             await refresh(using: service, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext)
+            if let stageMutation = response.stageMutation {
+                applyClosureStageMutation(stageMutation)
+            }
         } catch {
             transientMessage = TodayInlineMessage(
                 title: "Closure could not be saved",
@@ -116,5 +119,10 @@ final class TodayViewModel {
 
     func shouldRefreshForDayBoundary(now: Date, calendar: Calendar) -> Bool {
         dayBoundaryRefreshPolicy.shouldRefresh(lastLoadedDayStart: lastLoadedDayStart, now: now, calendar: calendar)
+    }
+
+    private func applyClosureStageMutation(_ mutation: TodayClosureStageMutation) {
+        guard case let .loaded(experience) = state else { return }
+        state = .loaded(experience.applyingClosure(mutation))
     }
 }
