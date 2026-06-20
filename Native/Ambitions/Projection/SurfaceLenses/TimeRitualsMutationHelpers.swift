@@ -15,12 +15,12 @@ extension RepositoryBackedTimeRitualsService {
     }
 
     func advance(goal: Goal, step: Step, now: Date, cadenceDays: Int) -> Goal {
-        update(goal: goal, stepID: step.id) { current in
+        update(goal: goal, stepID: step.id, updatedAt: Self.iso.string(from: now)) { current in
             stepCopy(from: current, timing: TimeRitualGoalSemantics.advancedTiming(from: current.timing, now: now, cadenceDays: cadenceDays))
         }
     }
 
-    func update(goal: Goal, stepID: String, transform: (Step) -> Step) -> Goal {
+    func update(goal: Goal, stepID: String, updatedAt: String, transform: (Step) -> Step) -> Goal {
         let updatedSections = goal.plan?.sections.map { section in
             PlanSection(
                 id: section.id,
@@ -52,7 +52,7 @@ extension RepositoryBackedTimeRitualsService {
             id: goal.id,
             revision: goal.revision + 1,
             createdAt: goal.createdAt,
-            updatedAt: Self.iso.string(from: .now),
+            updatedAt: updatedAt,
             state: goal.state,
             title: goal.title,
             summary: goal.summary,
@@ -91,7 +91,7 @@ extension RepositoryBackedTimeRitualsService {
     }
 
     func shiftedTiming(_ timing: GoalTiming, now: Date, adjustment: GoalTimingAdjustment) -> GoalTiming {
-        let shiftedDate = Calendar.current.date(byAdding: .hour, value: 4, to: now) ?? now
+        let shiftedDate = tickPolicy.date(byAdding: .hour, value: 4, to: now) ?? now
         let shiftedValue = adjustment == .removeDeadline ? nil : Self.iso.string(from: shiftedDate)
         return GoalTiming(
             tempo: adjustment == .removeDeadline ? .untimed : timing.tempo,
@@ -117,12 +117,12 @@ extension RepositoryBackedTimeRitualsService {
 
     func startOfDay(for value: String) -> Date? {
         guard let date = parseDate(value) else { return nil }
-        return Calendar.current.startOfDay(for: date)
+        return tickPolicy.startOfDay(for: date)
     }
 
     func isSameDay(_ value: String, as referenceDayStart: Date) -> Bool {
         guard let date = parseDate(value) else { return false }
-        return Calendar.current.isDate(date, inSameDayAs: referenceDayStart)
+        return tickPolicy.isSameDay(date, referenceDayStart)
     }
 
     func parseDate(_ value: String?) -> Date? {

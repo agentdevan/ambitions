@@ -2,7 +2,7 @@ import Foundation
 
 extension RepositoryBackedTimeRitualsService {
     func todayState(goal: Goal, evidence: [ProgressEvidence], feedback: [GoalFeedbackEvent], cadenceDays: Int, now: Date) -> TimeRitualState {
-        let dayStart = Calendar.current.startOfDay(for: now)
+        let dayStart = tickPolicy.startOfDay(for: now)
         let todayEvidence = evidence.filter { isSameDay($0.capturedAt, as: dayStart) }
         let todayFeedback = feedback.filter { isSameDay($0.base.occurredAt, as: dayStart) }
 
@@ -21,7 +21,7 @@ extension RepositoryBackedTimeRitualsService {
 
         let positive = positiveDates(from: evidence, feedback: feedback)
         guard let lastPositive = positive.sorted().last else { return .ready }
-        let daysSince = Calendar.current.dateComponents([.day], from: lastPositive, to: dayStart).day ?? 0
+        let daysSince = tickPolicy.dayDistance(from: lastPositive, to: dayStart) ?? 0
         return daysSince > cadenceDays ? .recovery : .ready
     }
 
@@ -37,14 +37,14 @@ extension RepositoryBackedTimeRitualsService {
     func rhythmLength(for dates: [Date], cadenceDays: Int, now: Date) -> Int {
         guard !dates.isEmpty else { return 0 }
         let sorted = dates.sorted(by: >)
-        let anchor = Calendar.current.startOfDay(for: now)
+        let anchor = tickPolicy.startOfDay(for: now)
         guard let first = sorted.first,
-              let gap = Calendar.current.dateComponents([.day], from: first, to: anchor).day,
+              let gap = tickPolicy.dayDistance(from: first, to: anchor),
               gap <= cadenceDays else { return 0 }
 
         var rhythm = 1
         for pair in zip(sorted, sorted.dropFirst()) {
-            let distance = Calendar.current.dateComponents([.day], from: pair.1, to: pair.0).day ?? cadenceDays + 1
+            let distance = tickPolicy.dayDistance(from: pair.1, to: pair.0) ?? cadenceDays + 1
             if distance <= cadenceDays {
                 rhythm += 1
             } else {
@@ -60,7 +60,7 @@ extension RepositoryBackedTimeRitualsService {
         var longest = 1
         var current = 1
         for pair in zip(sorted, sorted.dropFirst()) {
-            let distance = Calendar.current.dateComponents([.day], from: pair.0, to: pair.1).day ?? cadenceDays + 1
+            let distance = tickPolicy.dayDistance(from: pair.0, to: pair.1) ?? cadenceDays + 1
             if distance <= cadenceDays {
                 current += 1
                 longest = max(longest, current)
@@ -73,7 +73,7 @@ extension RepositoryBackedTimeRitualsService {
 
     func consistencyRatio(for dates: [Date], cadenceDays: Int, now: Date) -> Double {
         let expectedWindows = max(1, Int(ceil(14.0 / Double(cadenceDays))))
-        let cutoff = Calendar.current.date(byAdding: .day, value: -13, to: Calendar.current.startOfDay(for: now)) ?? now
+        let cutoff = tickPolicy.date(byAdding: .day, value: -13, to: tickPolicy.startOfDay(for: now)) ?? now
         let recentCount = dates.filter { $0 >= cutoff }.count
         return min(1, Double(recentCount) / Double(expectedWindows))
     }
@@ -83,7 +83,7 @@ extension RepositoryBackedTimeRitualsService {
         return feedback.reduce(into: 0) { count, event in
             guard case .skipped = event, let skipDate = startOfDay(for: event.base.occurredAt) else { return }
             if sortedPositive.contains(where: { logged in
-                let delta = Calendar.current.dateComponents([.day], from: skipDate, to: logged).day ?? cadenceDays + 2
+                let delta = tickPolicy.dayDistance(from: skipDate, to: logged) ?? cadenceDays + 2
                 return logged >= skipDate && delta <= cadenceDays + 1
             }) {
                 count += 1

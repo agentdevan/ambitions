@@ -3,6 +3,43 @@ import Foundation
 import XCTest
 
 final class TimeClockTests: XCTestCase {
+    func testCanonicalCoreTimeClockOwnersExistAndSharePolicy() throws {
+        let root = repoRoot()
+        for requiredPath in [
+            "Native/Ambitions/Core/Time/AmbitionsClock.swift",
+            "Native/Ambitions/Core/Time/SystemClock.swift",
+            "Native/Ambitions/Core/Time/PreviewClock.swift",
+            "Native/Ambitions/Core/Time/TimeZoneProvider.swift",
+            "Native/Ambitions/Core/Time/DayBoundaryScheduler.swift",
+            "Native/Ambitions/Core/Time/RuntimeTickPolicy.swift",
+        ] {
+            XCTAssertTrue(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
+                "Missing canonical Core/Time owner: \(requiredPath)"
+            )
+        }
+
+        let fixedSystem = SystemClock(timeZoneProvider: .utc)
+        XCTAssertTrue(fixedSystem.advancesAutomatically)
+        XCTAssertEqual(fixedSystem.timeZone.secondsFromGMT(), 0)
+        XCTAssertEqual(fixedSystem.calendar.timeZone.secondsFromGMT(), 0)
+    }
+
+    func testRuntimeTickPolicyOwnsCalendarAndFormattingBehavior() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T22:30:00Z"))
+        let policy = RuntimeTickPolicy.utc
+        let dayStart = policy.startOfDay(for: now)
+        let shifted = try XCTUnwrap(policy.date(byAdding: .day, value: 2, to: dayStart))
+
+        XCTAssertEqual(DomainTimestamp.string(from: dayStart), "2026-04-15T00:00:00.000Z")
+        XCTAssertEqual(policy.dayDistance(from: dayStart, to: shifted), 2)
+        XCTAssertTrue(policy.isSameDay(now, dayStart))
+        XCTAssertEqual(policy.shortMonthDayLabel(for: now), "Apr 15")
+        XCTAssertEqual(policy.shortWeekdayLabel(for: now), "Wed")
+        XCTAssertEqual(policy.dayOfMonthLabel(for: now), "15")
+        XCTAssertEqual(policy.parseDateOnly("2026-04-15"), dayStart)
+    }
+
     @MainActor
     func testTimeViewModelRecordsLoadedDayFromInjectedClock() async throws {
         let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T09:30:00Z"))
@@ -55,6 +92,28 @@ final class TimeClockTests: XCTestCase {
         }
 
         XCTAssertTrue(findings.isEmpty, "Time source still reads live time directly: \(findings.joined(separator: ", "))")
+    }
+
+    func testTodayAndTimeProjectionSourcesUseCoreTimePolicyForRendering() throws {
+        let root = repoRoot()
+        let surfaceLensRoot = root.appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses")
+        let sourceURLs = try swiftFiles(under: surfaceLensRoot).filter {
+            $0.lastPathComponent.hasPrefix("Today") || $0.lastPathComponent.hasPrefix("Time")
+        }
+        let disallowedPatterns = [
+            #"\bDateFormatter\s*\("#,
+            #"\bCalendar\.current\b"#,
+        ]
+
+        var findings: [String] = []
+        for fileURL in sourceURLs {
+            let contents = try String(contentsOf: fileURL, encoding: .utf8)
+            for pattern in disallowedPatterns where contents.range(of: pattern, options: .regularExpression) != nil {
+                findings.append(fileURL.lastPathComponent + " :: " + pattern)
+            }
+        }
+
+        XCTAssertTrue(findings.isEmpty, "Today/Time projection sources still render time directly: \(findings.joined(separator: ", "))")
     }
 
     private func swiftFiles(under root: URL) throws -> [URL] {

@@ -2,6 +2,7 @@ import Foundation
 
 struct RepositoryBackedTimeRitualsService: TimeRitualsServicing {
     let repositories: AppRepositories
+    let tickPolicy: RuntimeTickPolicy = .system
 
     func loadDashboard(now: Date) async throws -> TimeRitualsDashboard {
         let snapshot = try await loadSnapshot()
@@ -102,7 +103,7 @@ struct RepositoryBackedTimeRitualsService: TimeRitualsServicing {
             feedback.append(.delayed(base: base, timingAdjustment: .laterToday, date: nil))
             try await repositories.feedback.saveEvents(feedback, goalID: goal.id)
             proofArtifactID = base.id
-            goal = update(goal: goal, stepID: step.id) { current in
+            goal = update(goal: goal, stepID: step.id, updatedAt: timestamp) { current in
                 stepCopy(from: current, timing: shiftedTiming(current.timing, now: now, adjustment: .laterToday))
             }
             try await repositories.goals.saveGoals([goal])
@@ -111,7 +112,7 @@ struct RepositoryBackedTimeRitualsService: TimeRitualsServicing {
             feedback.append(.skipped(base: base, reasonCode: .notNow))
             try await repositories.feedback.saveEvents(feedback, goalID: goal.id)
             proofArtifactID = base.id
-            goal = update(goal: goal, stepID: step.id) { current in
+            goal = update(goal: goal, stepID: step.id, updatedAt: timestamp) { current in
                 stepCopy(from: current, timing: TimeRitualGoalSemantics.advancedTiming(from: current.timing, now: now, cadenceDays: cadenceDays))
             }
             try await repositories.goals.saveGoals([goal])

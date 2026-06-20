@@ -349,11 +349,6 @@ private extension TodayReadModelProjector {
         guard let value else { return nil }
         if let full = DomainTimestamp.date(from: value) { return full }
 
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .gregorian)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.date(from: value)
+        return RuntimeTickPolicy.utc.parseDateOnly(value)
     }
 }

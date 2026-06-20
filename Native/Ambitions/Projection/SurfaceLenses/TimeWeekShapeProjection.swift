@@ -58,18 +58,13 @@ extension RepositoryBackedTimeService {
         missingGoalSummaries: [RepositoryBackedTimeService.GoalWeekSummary],
         now: Date
     ) -> [TimeElasticWeekDayState] {
-        let start = calendar.startOfDay(for: now)
-        let dayFormatter = DateFormatter()
-        dayFormatter.locale = .current
-        dayFormatter.setLocalizedDateFormatFromTemplate("EEE")
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = .current
-        dateFormatter.setLocalizedDateFormatFromTemplate("d")
+        let ticks = RuntimeTickPolicy(calendar: calendar)
+        let start = ticks.startOfDay(for: now)
 
         let contextsByDay = Dictionary(grouping: summaries.flatMap(\.contexts), by: \.dayIndex)
 
         return (0..<7).map { dayIndex in
-            let date = calendar.date(byAdding: .day, value: dayIndex, to: start) ?? start
+            let date = ticks.date(byAdding: .day, value: dayIndex, to: start) ?? start
             let contexts = (contextsByDay[dayIndex] ?? []).sorted { lhs, rhs in
                 if lhs.visualState == rhs.visualState {
                     return lhs.date < rhs.date
@@ -116,8 +111,8 @@ extension RepositoryBackedTimeService {
 
             return TimeElasticWeekDayState(
                 id: "day-\(dayIndex)",
-                weekdayLabel: dayFormatter.string(from: date),
-                dateLabel: dateFormatter.string(from: date),
+                weekdayLabel: ticks.shortWeekdayLabel(for: date),
+                dateLabel: ticks.dayOfMonthLabel(for: date),
                 level: level,
                 intensity: dayIntensity(for: level, blockCount: contexts.count),
                 roomLabel: roomLabel,

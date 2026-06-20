@@ -125,23 +125,7 @@ extension RepositoryBackedTodayService {
     }
 
     func parseDate(_ value: String) -> Date? {
-        Self.iso.date(from: value) ?? Self.isoFallback.date(from: value) ?? Self.dateOnly.date(from: value)
-    }
-
-    static var dateOnly: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.calendar = Calendar(identifier: .gregorian)
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter
-    }
-
-    static var shortTime: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        formatter.dateStyle = .none
-        return formatter
+        Self.iso.date(from: value) ?? Self.isoFallback.date(from: value) ?? RuntimeTickPolicy.utc.parseDateOnly(value)
     }
 
     func calendarEventMessageBody(for title: String, report: CalendarConflictReport?) -> String {
@@ -151,7 +135,7 @@ extension RepositoryBackedTodayService {
         if report.hasConflicts {
             let count = report.conflicts.count
             if let nearby = report.nearbyAvailableWindow {
-                return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s"). A clearer opening starts around \(Self.shortTime.string(from: nearby.start))."
+                return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s"). A clearer opening starts around \(RuntimeTickPolicy.system.shortTimeLabel(for: nearby.start))."
             }
             return "\"\(title)\" was added to Calendar. It overlaps \(count) event\(count == 1 ? "" : "s")."
         }

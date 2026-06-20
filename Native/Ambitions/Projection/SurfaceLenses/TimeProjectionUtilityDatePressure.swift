@@ -83,12 +83,10 @@ extension RepositoryBackedTimeService {
     }
 
     func timeframeLabel(now: Date) -> String {
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        formatter.setLocalizedDateFormatFromTemplate("MMM d")
-        let start = calendar.startOfDay(for: now)
-        let end = calendar.date(byAdding: .day, value: 6, to: start) ?? start
-        return "\(formatter.string(from: start))-\(formatter.string(from: end))"
+        let ticks = RuntimeTickPolicy(calendar: calendar)
+        let start = ticks.startOfDay(for: now)
+        let end = ticks.date(byAdding: .day, value: 6, to: start) ?? start
+        return "\(ticks.shortMonthDayLabel(for: start))-\(ticks.shortMonthDayLabel(for: end))"
     }
 
     func timingLabel(for timing: GoalTiming) -> String {
@@ -229,21 +227,16 @@ extension RepositoryBackedTimeService {
 
     func shortDate(_ value: String) -> String {
         guard let date = parseDate(value) else { return value }
-        let formatter = DateFormatter()
-        formatter.locale = .current
-        formatter.setLocalizedDateFormatFromTemplate("MMM d")
-        return formatter.string(from: date)
+        return RuntimeTickPolicy(calendar: calendar).shortMonthDayLabel(for: date)
     }
 
     func parseDate(_ value: String?) -> Date? {
         guard let value else { return nil }
-        if let date = ISO8601DateFormatter().date(from: value) {
+        let ticks = RuntimeTickPolicy(calendar: calendar)
+        if let date = ticks.parseISODate(value) {
             return date
         }
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "en_US_POSIX")
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.date(from: value)
+        return ticks.parseDateOnly(value)
     }
 
     func isFriction(_ event: GoalFeedbackEvent) -> Bool {
