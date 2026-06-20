@@ -58,14 +58,14 @@ targets:
       - path: Native/AmbitionsWidgetExtension
         excludes:
           - "**/*.md"
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceContractModels.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalWidgetProjection.swift
-      - path: Native/Ambitions/ExternalSnapshots/SharedExternalSnapshotStore.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceControlContracts.swift
-      - path: Native/Ambitions/ExternalSnapshots/NextStepActivityAttributes.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalWidgetProjection.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceControlContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/NextStepActivityAttributes.swift
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.widgetextension
@@ -84,12 +84,12 @@ targets:
       - path: Native/AmbitionsShareExtension
         excludes:
           - "**/*.md"
-      - path: Native/Ambitions/ExternalSnapshots/ExternalCreationContracts.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
-      - path: Native/Ambitions/ExternalSnapshots/ExternalSurfaceContractModels.swift
-      - path: Native/Ambitions/ExternalSnapshots/SharedExternalSnapshotStore.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalCreationContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceActionPayloads+02-ExternalObjectReopeningProjector.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotContracts.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceContractModels.swift
+      - path: Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios.shareextension
