@@ -5,9 +5,9 @@ extension LifeShapeFieldView {
     var sourceReceiptRow: some View {
         return HorizonCapacityPrimitiveStage(
             role: .source,
-            title: "Why this fits",
-            subtitle: "Source and receipt inspection remains one tap away.",
-            statusLabel: suite.field.receipt.ageLabel,
+            title: displayedSourceTitle,
+            subtitle: displayedSourceDetail,
+            statusLabel: displayedSourceStatusLabel,
             accessibilityIdentifier: "time.life-shape-field.source-receipt"
         ) {
             Button {
@@ -16,7 +16,7 @@ extension LifeShapeFieldView {
                 HorizonCapacityPrimitiveLine(
                     role: .receipt,
                     title: "Why this?",
-                    subtitle: "Open context, reason, source, and privacy detail.",
+                    subtitle: displayedPrivacyLabel,
                     systemImage: "doc.text.magnifyingglass",
                     visualState: suite.field.receipt.visualState
                 )
@@ -35,6 +35,17 @@ extension LifeShapeFieldView {
             return "Calendar denied"
         default:
             return suite.field.sourceState.title
+        }
+    }
+
+    var displayedSourceStatusLabel: String {
+        switch displayedRenderState {
+        case .manualOnly:
+            return "Manual mode"
+        case .calendarDenied:
+            return "User choice"
+        default:
+            return suite.field.receipt.ageLabel
         }
     }
 

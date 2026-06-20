@@ -116,6 +116,9 @@ status=$?
 if [[ "$status" -eq 0 ]] && grep -Eq "Testing failed:|\\*\\* TEST EXECUTE FAILED \\*\\*" "$LOG_FILE"; then
   status=65
 fi
+if [[ "$status" -eq 0 ]] && grep -Eq "Test Case '.+' failed|Test Suite '.+' failed|XCTAssert.+ failed|: error: -\\[.+\\] : XCTAssert" "$LOG_FILE"; then
+  status=65
+fi
 
 if [[ "$status" -ne 0 ]]; then
   classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification",""))' )"
@@ -124,6 +127,9 @@ if [[ "$status" -ne 0 ]]; then
     run_once
     status=$?
     if [[ "$status" -eq 0 ]] && grep -Eq "Testing failed:|\\*\\* TEST EXECUTE FAILED \\*\\*" "$LOG_FILE"; then
+      status=65
+    fi
+    if [[ "$status" -eq 0 ]] && grep -Eq "Test Case '.+' failed|Test Suite '.+' failed|XCTAssert.+ failed|: error: -\\[.+\\] : XCTAssert" "$LOG_FILE"; then
       status=65
     fi
   fi

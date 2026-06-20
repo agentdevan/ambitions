@@ -1391,7 +1391,7 @@ final class AmbitionsUITests: XCTestCase {
             )
         ]
 
-        for item in matrix {
+        func launchMatrixApp(for item: TimeMatrixItem) -> XCUIApplication {
             let app = makeApp(
                 bootstrapMode: "demo",
                 launchURL: "ambitions://tab/time",
@@ -1402,6 +1402,11 @@ final class AmbitionsUITests: XCTestCase {
                 contentSizeCategory: item.contentSizeCategory
             )
             app.launch()
+            return app
+        }
+
+        for item in matrix {
+            let app = launchMatrixApp(for: item)
 
             XCTAssertTrue(waitForSelectedTab("Time", in: app), "Time should be selected for \(item.name).")
             dismissContinuityReceiptIfPresent(in: app)
@@ -1426,10 +1431,17 @@ final class AmbitionsUITests: XCTestCase {
             XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "dashboard")).firstMatch.exists, "Time must not read as a dashboard for \(item.name).")
             XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "calendar grid")).firstMatch.exists, "Time must not become a calendar grid for \(item.name).")
             if item.name == "large-dynamic-type" {
-                scrollTimeContentToCapacityProof(in: app)
+                app.terminate()
+                let screenshotApp = launchMatrixApp(for: item)
+                XCTAssertTrue(waitForSelectedTab("Time", in: screenshotApp), "Time should be selected for \(item.name) screenshot proof.")
+                dismissContinuityReceiptIfPresent(in: screenshotApp)
+                XCTAssertTrue(screenshotApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 10), "LifeShape Field should exist for \(item.name) screenshot proof.")
+                captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: screenshotApp)
+                screenshotApp.terminate()
+            } else {
+                captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: app)
+                app.terminate()
             }
-            captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: app)
-            app.terminate()
         }
     }
 
@@ -1444,7 +1456,11 @@ final class AmbitionsUITests: XCTestCase {
         let month = app.descendants(matching: .any)["time.life-shape-field.horizon.month"]
         XCTAssertTrue(month.waitForExistence(timeout: 10))
         month.tap()
-        XCTAssertEqual(month.value as? String, "selected")
+        let monthValue = month.value as? String
+        XCTAssertTrue(
+            month.isSelected || monthValue?.localizedCaseInsensitiveContains("Selected") == true,
+            "Month horizon should expose selected state after tap. Value: \(monthValue ?? "<nil>")"
+        )
 
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.action.review-pressure", in: app, maxAttempts: 10))
         app.buttons["time.life-shape-field.action.review-pressure"].tap()

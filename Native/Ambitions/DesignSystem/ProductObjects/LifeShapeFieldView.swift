@@ -173,38 +173,73 @@ struct LifeShapeFieldView: View {
         .accessibilityValue("\(accessibilityValue). \(TimeAccessibility.rootSummary(for: stageScene))")
     }
 
+    @ViewBuilder
     var contextCrown: some View {
-        HStack(alignment: .center, spacing: theme.spacing.sm) {
-            Image(systemName: "clock")
-                .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
-                .frame(width: 28, height: 28)
-                .accessibilityHidden(true)
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: theme.spacing.xs) {
+                HStack(alignment: .center, spacing: theme.spacing.sm) {
+                    Image(systemName: "clock")
+                        .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                        .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
+                        .frame(width: 28, height: 28)
+                        .accessibilityHidden(true)
 
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("Shape Time")
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.accentSecondary)
-                    .textCase(.uppercase)
+                    Text("Shape Time")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.accentSecondary)
+                        .textCase(.uppercase)
+
+                    Spacer(minLength: theme.spacing.sm)
+
+                    inlineObjectLabel(
+                        displayedRenderStateTitle,
+                        icon: "gauge.with.dots.needle.bottom.50percent",
+                        state: displayedRenderState.visualState
+                    )
+                    .fixedSize(horizontal: true, vertical: false)
+                }
+
                 Text("LifeShape Field")
-                    .font(dynamicTypeSize.isAccessibilitySize ? theme.typography.section : theme.typography.title)
+                    .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
-                    .minimumScaleFactor(dynamicTypeSize.isAccessibilitySize ? 0.72 : 1)
-	                Text(dynamicTypeSize.isAccessibilitySize ? "Capacity proof." : "Field, day, week, month, and year stay in one LifeShape object.")
+                    .lineLimit(2)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text("Capacity proof.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : nil)
+                    .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
             }
+        } else {
+            HStack(alignment: .center, spacing: theme.spacing.sm) {
+                Image(systemName: "clock")
+                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                    .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
+                    .frame(width: 28, height: 28)
+                    .accessibilityHidden(true)
 
-            Spacer(minLength: theme.spacing.sm)
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text("Shape Time")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.accentSecondary)
+                        .textCase(.uppercase)
+                    Text("LifeShape Field")
+                        .font(theme.typography.title)
+                        .foregroundStyle(theme.colors.textPrimary)
+                    Text("Field, day, week, month, and year stay in one LifeShape object.")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                }
 
-            inlineObjectLabel(
-                displayedRenderStateTitle,
-                icon: "gauge.with.dots.needle.bottom.50percent",
-                state: displayedRenderState.visualState
-            )
+                Spacer(minLength: theme.spacing.sm)
+
+                inlineObjectLabel(
+                    displayedRenderStateTitle,
+                    icon: "gauge.with.dots.needle.bottom.50percent",
+                    state: displayedRenderState.visualState
+                )
+            }
         }
     }
 
