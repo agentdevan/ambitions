@@ -249,6 +249,81 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     @MainActor
+    func testStageDispatchProducesCanonicalSurfaceMorphAndFocusPlan() {
+        let navigation = StageStore(selectedSurface: .today)
+
+        navigation.selectRootSurfaceFromDock(.goals, now: Date(timeIntervalSince1970: 20))
+
+        XCTAssertEqual(navigation.lastStageTransition.kind, .surfaceMorph)
+        XCTAssertEqual(navigation.lastStageTransition.motion, .objectContinuity)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .rootObject(.goals))
+        XCTAssertEqual(navigation.lastEffectRun.visibleMutationIDs, ["surface:goals"])
+        XCTAssertEqual(navigation.lastEffectRun.accessibilityAnnouncements, ["Goals selected"])
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.surface.goals"])
+        XCTAssertTrue(navigation.lastStageMutationAnimationPlan.provesActionFlow)
+    }
+
+    @MainActor
+    func testStageDrilldownPushHidesDockAndRestoresFocusToBackButton() {
+        let navigation = StageStore(selectedSurface: .today)
+
+        navigation.openGoalDetail(goalID: "goal-stage-focus")
+
+        XCTAssertEqual(navigation.selectedTab, .goals)
+        XCTAssertEqual(navigation.stageRouteDepth, .drilldown)
+        XCTAssertFalse(navigation.hasRootNavigationChrome)
+        XCTAssertEqual(navigation.lastStageTransition.kind, .drilldownPush)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .drilldownBackButton(.goals))
+        XCTAssertEqual(navigation.lastStageFocusPlan.proofArtifactID, "stage.focus.goals.drilldown-back")
+    }
+
+    @MainActor
+    func testStageOverlayPresentationAndDismissalUseCanonicalFocusCoordinator() {
+        let navigation = StageStore(selectedSurface: .today)
+
+        navigation.presentMemoryLens(source: .shellUtility)
+
+        XCTAssertEqual(navigation.lastStageTransition.kind, .overlayPresentation)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .overlay("memory-lens"))
+        XCTAssertEqual(navigation.lastStageFocusPlan.proofArtifactID, "stage.focus.overlay.memory-lens")
+
+        navigation.dismissOverlay()
+
+        XCTAssertEqual(navigation.lastStageTransition.kind, .overlayDismissal)
+        XCTAssertEqual(navigation.lastStageFocusPlan.target, .rootObject(.today))
+        XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.overlay.dismissed"])
+    }
+
+    func testStageMorphCoordinatorUsesRestrainedReduceMotionTransition() {
+        let previous = StageScene(
+            surface: .today,
+            routeDepth: .root,
+            overlay: StageOverlay.current(nil),
+            primaryObject: StageObject.primary(for: .today)
+        )
+        let next = StageScene(
+            surface: .time,
+            routeDepth: .root,
+            overlay: StageOverlay.current(nil),
+            primaryObject: StageObject.primary(for: .time)
+        )
+        let effectRun = StageEffectRunner().run(StageEffect.surfaceChanged(to: .time))
+
+        let result = StageMorphCoordinator().coordinate(
+            from: previous,
+            to: next,
+            effectRun: effectRun,
+            reduceMotionEnabled: true
+        )
+
+        XCTAssertEqual(result.transition.kind, .surfaceMorph)
+        XCTAssertEqual(result.transition.motion, .restrainedCrossfade)
+        XCTAssertFalse(result.transition.animated)
+        XCTAssertEqual(result.focusPlan.target, .rootObject(.time))
+        XCTAssertTrue(result.animationPlan.provesActionFlow)
+    }
+
+    @MainActor
     func testOpenCaptureComposerPresentsGlobalCaptureOverlayWithoutSelectingCapture() {
         let navigation = StageStore(selectedSurface: .time)
 

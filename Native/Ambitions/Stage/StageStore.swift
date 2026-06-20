@@ -6,11 +6,19 @@ import Observation
 final class StageStore {
     private var state: StageState
     private let effectRunner = StageEffectRunner()
+    private let morphCoordinator = StageMorphCoordinator()
     private(set) var lastEffects: [StageEffect]
     private(set) var lastEffectRun: StageEffectRun
+    private(set) var lastStageMorph: StageMorphResult
+    private(set) var lastStageTransition: StageTransitionSpec
+    private(set) var lastStageFocusPlan: StageFocusPlan
+    private(set) var lastStageMutationAnimationPlan: StageMutationAnimationPlan
 
     init(selectedSurface: AmbitionsSurface) {
-        state = StageState(selectedSurface: selectedSurface)
+        let initialState = StageState(selectedSurface: selectedSurface)
+        let initialScene = StageScene.current(state: initialState)
+        let initialMorph = StageMorphResult.initial(scene: initialScene)
+        state = initialState
         lastEffects = []
         lastEffectRun = StageEffectRun(
             effects: [],
@@ -18,6 +26,10 @@ final class StageStore {
             accessibilityAnnouncements: [],
             proofArtifactIDs: []
         )
+        lastStageMorph = initialMorph
+        lastStageTransition = .idle
+        lastStageFocusPlan = .idle
+        lastStageMutationAnimationPlan = initialMorph.animationPlan
     }
 
     var selectedTab: AmbitionsSurface {
@@ -109,10 +121,21 @@ final class StageStore {
 
     @discardableResult
     func dispatch(_ action: StageAction) -> StageReduction {
+        let previousScene = StageScene.current(state: state)
         let reduction = StageReducer.reduce(action, state: &state)
         let effectRun = effectRunner.run(reduction.effects)
+        let nextScene = StageScene.current(state: state)
+        let morphResult = morphCoordinator.coordinate(
+            from: previousScene,
+            to: nextScene,
+            effectRun: effectRun
+        )
         lastEffectRun = effectRun
         lastEffects = effectRun.effects
+        lastStageMorph = morphResult
+        lastStageTransition = morphResult.transition
+        lastStageFocusPlan = morphResult.focusPlan
+        lastStageMutationAnimationPlan = morphResult.animationPlan
         return reduction
     }
 
