@@ -66,7 +66,7 @@ enum AppContainerFactory {
         let preferencesStore = RepositoryBackedAppPreferencesStore(appStateRepository: repositories.appState)
         let startupService = DefaultStartupService(preferencesStore: preferencesStore, appStateRepository: repositories.appState, clock: clock)
         let session = try await startupService.prepareSession(source: configuration.sessionSource)
-        let navigation = AppNavigationModel(selectedTab: session.initialTab)
+        let navigation = StageStore(selectedSurface: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
         let todayService = previewTodayServiceOverride(for: configuration.sessionSource) ?? runtime.todayService
         let externalActionService = DefaultExternalActionCommandService(

@@ -11,11 +11,11 @@ struct AppDeepLinkPreviewRoute: Identifiable, Sendable, Equatable {
 
 @MainActor
 struct AppDeepLinkPreviewRouter {
-    let navigation: AppNavigationModel
+    let navigation: StageStore
     let router: DefaultAppExternalRouter
 
     init(initialTab: AmbitionsSurface = .today) {
-        let navigation = AppNavigationModel(selectedTab: initialTab)
+        let navigation = StageStore(selectedSurface: initialTab)
         self.navigation = navigation
         router = DefaultAppExternalRouter(navigation: navigation)
     }

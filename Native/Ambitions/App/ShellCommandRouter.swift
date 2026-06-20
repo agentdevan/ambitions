@@ -49,12 +49,12 @@ extension ShellCommandRouting {
 
 @MainActor
 final class DefaultShellCommandRouter: ShellCommandRouting {
-    private let navigation: AppNavigationModel
+    private let navigation: StageStore
     private let captureService: any CaptureServicing
     private let smartAttachmentAdapter: SmartAttachmentCaptureAdapter
 
     init(
-        navigation: AppNavigationModel,
+        navigation: StageStore,
         captureService: any CaptureServicing,
         smartAttachmentAdapter: SmartAttachmentCaptureAdapter = SmartAttachmentCaptureAdapter()
     ) {

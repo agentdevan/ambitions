@@ -217,7 +217,7 @@ final class AppShellNavigationTests: XCTestCase {
     @MainActor
     func testMeridianOneTapDestinationsUseCanonicalNavigationSelection() {
         for destination in AppMeridianDestination.all {
-            let navigation = AppNavigationModel(selectedTab: .today)
+            let navigation = StageStore(selectedSurface: .today)
             navigation.presentMemoryLens(source: .shellUtility)
 
             navigation.selectRootSurfaceFromDock(destination.tab)
@@ -232,7 +232,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testStageDockReselectionReturnsCurrentSurfaceToRoot() {
-        let navigation = AppNavigationModel(selectedTab: .goals)
+        let navigation = StageStore(selectedSurface: .goals)
         navigation.openGoalDetail(goalID: "goal-shell-rollback")
 
         XCTAssertEqual(navigation.stageRouteDepth, .drilldown)
@@ -250,7 +250,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testOpenCaptureComposerPresentsGlobalCaptureOverlayWithoutSelectingCapture() {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
 
         navigation.openCaptureComposer()
 
@@ -265,7 +265,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testCaptureComposerDoesNotCreateTimeRoute() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
 
         navigation.openCaptureComposer()
 
@@ -278,7 +278,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testRitualsRouteStaysUnderTimeWithoutDuplicateDestination() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
 
         navigation.openTimeRoute(.rituals)
 
@@ -293,7 +293,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testHistoryRouteStaysUnderYouWithoutDuplicateDestination() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
 
         navigation.openYouRoute(.history)
 
@@ -307,7 +307,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testShellOverlayRoutesStayOwnedByTheShellLayer() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
 
         navigation.presentMemoryLens(source: .shellUtility)
 
@@ -319,7 +319,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testNavigationCanPresentCommandSheetWithStructuredIntentContext() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
 
         navigation.presentCommandSheet(
             intent: .quickCapture,
@@ -345,7 +345,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(Set(expectedSources.keys), Set(AmbitionsSurface.allCases))
 
         for tab in AmbitionsSurface.allCases {
-            let navigation = AppNavigationModel(selectedTab: tab)
+            let navigation = StageStore(selectedSurface: tab)
 
             navigation.presentSurfaceCapture(for: tab)
 
@@ -376,7 +376,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testActivatedCaptureComposerSeamAppearsOnlyAfterCaptureActivation() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
 
         XCTAssertFalse(navigation.isActivatedCaptureComposerVisible)
 
@@ -480,7 +480,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testCurrentTabReselectionFirstTapRequestsScrollThenSecondTapReturnsToRoot() {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
         navigation.openRituals()
 
         let firstTap = navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100))
@@ -496,7 +496,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testCurrentTabReselectionThresholdKeepsLaterTapAsScrollOnly() {
-        let navigation = AppNavigationModel(selectedTab: .goals)
+        let navigation = StageStore(selectedSurface: .goals)
         navigation.openGoalDetail(goalID: "goal-shell")
 
         XCTAssertEqual(navigation.handleCurrentTabReselection(now: Date(timeIntervalSince1970: 100)), .scrollToTop)
@@ -506,7 +506,7 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testTodayReentryContextCanBeCarriedAndConsumed() {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
 
         navigation.selectToday(entryContext: .recovery)
 

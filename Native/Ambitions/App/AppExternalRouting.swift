@@ -10,11 +10,11 @@ protocol AppExternalRouting: AnyObject {
 
 @MainActor
 final class DefaultAppExternalRouter: AppExternalRouting {
-    private let navigation: AppNavigationModel
+    private let navigation: StageStore
     private let translator: AppExternalRouteTranslator
 
     init(
-        navigation: AppNavigationModel,
+        navigation: StageStore,
         translator: AppExternalRouteTranslator = AppExternalRouteTranslator()
     ) {
         self.navigation = navigation

@@ -25,7 +25,7 @@ final class AppContainer {
     let runtime: AmbitionsRuntime
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
-    let navigation: AppNavigationModel
+    let navigation: StageStore
     let todayService: any TodayServicing
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
@@ -50,7 +50,7 @@ final class AppContainer {
         runtime: AmbitionsRuntime,
         appearancePreference: AppAppearancePreference,
         accentFamily: AmbitionAccentFamily,
-        navigation: AppNavigationModel,
+        navigation: StageStore,
         todayService: any TodayServicing,
         captureService: any CaptureServicing,
         goalsService: any GoalsServicing,

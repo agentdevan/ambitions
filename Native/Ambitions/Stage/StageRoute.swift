@@ -39,7 +39,7 @@ enum YouRouteTarget: String, Hashable, Identifiable, Sendable {
     var id: String { rawValue }
 }
 
-enum TopLevelTabReselectionAction: Equatable, Sendable {
+enum StageSurfaceReselectionAction: Equatable, Sendable {
     case scrollToTop
     case returnToRoot
 }

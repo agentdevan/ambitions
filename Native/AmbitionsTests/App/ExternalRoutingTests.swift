@@ -39,7 +39,7 @@ final class ExternalRoutingTests: XCTestCase {
     @MainActor
     func testStageShellSharesCanonicalRouteDispatch() {
         for tab in AmbitionsSurface.allCases {
-            let navigation = AppNavigationModel(selectedTab: .today)
+            let navigation = StageStore(selectedSurface: .today)
             let router = DefaultAppExternalRouter(navigation: navigation)
 
             router.dispatch(.openTab(tab), source: .deepLink)
@@ -52,7 +52,7 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testBackgroundAndRelaunchRouteSourcesStayDeterministic() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openTab(.today), source: .background)
@@ -66,12 +66,12 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testStageRouteDispatchesCurrentNestedRoutes() {
-        let ritualsNavigation = AppNavigationModel(selectedTab: .today)
+        let ritualsNavigation = StageStore(selectedSurface: .today)
         DefaultAppExternalRouter(navigation: ritualsNavigation).dispatch(.openTimeRoute(.rituals), source: .widgetAction)
         XCTAssertEqual(ritualsNavigation.selectedTab, .time, "Stage shell should keep rituals under Time")
         XCTAssertEqual(ritualsNavigation.timePath, [.rituals])
 
-        let historyNavigation = AppNavigationModel(selectedTab: .today)
+        let historyNavigation = StageStore(selectedSurface: .today)
         DefaultAppExternalRouter(navigation: historyNavigation).dispatch(.openYouRoute(.history), source: .appIntent)
         XCTAssertEqual(historyNavigation.selectedTab, .you, "Stage shell should keep History under You")
         XCTAssertEqual(historyNavigation.youPath, [.history])
@@ -510,7 +510,7 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testRouterDispatchesGoalDetailToExistingNavigationModel() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openGoalDetail(goalID: "goal-789"), source: .deepLink)
@@ -524,7 +524,7 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testRouterDispatchesCaptureComposerToGlobalCaptureOverlay() {
-        let navigation = AppNavigationModel(selectedTab: .you)
+        let navigation = StageStore(selectedSurface: .you)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openCaptureComposer, source: .widgetAction)
@@ -541,7 +541,7 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testRouterDispatchesCaptureComposerAndTimeRouteIntoCanonicalDestinations() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openCaptureComposer, source: .deepLink)
@@ -558,7 +558,7 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testRouterDispatchesYouRootToYouSurface() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openTab(.you), source: .deepLink)
@@ -570,7 +570,7 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testRouterDispatchesYouRoutesToYouHistorySupport() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.openYouRoute(.history), source: .deepLink)
@@ -591,7 +591,7 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testRouterFallsBackToExplicitTodayLandingForUnknownExternalEntries() {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
         navigation.openCaptureComposer()
         let router = DefaultAppExternalRouter(navigation: navigation)
 
@@ -604,7 +604,7 @@ final class ExternalRoutingTests: XCTestCase {
 
     @MainActor
     func testRouterDispatchesOverlayIntoStructuredShellState() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultAppExternalRouter(navigation: navigation)
 
         router.dispatch(.presentOverlay(.memoryLens(entrySource: .appIntent)), source: .deepLink)

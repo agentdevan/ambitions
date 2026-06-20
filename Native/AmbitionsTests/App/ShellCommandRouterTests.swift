@@ -4,7 +4,7 @@ import XCTest
 @MainActor
 final class ShellCommandRouterTests: XCTestCase {
     func testQuickCaptureCreatesCaptureAndRoutesToGlobalCaptureOverlay() async throws {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let repository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-shell" })
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: captureService)
@@ -42,7 +42,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testRouteToGlobalCaptureComposerUsesGlobalCaptureOverlay() {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         router.route(
@@ -58,7 +58,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testRouteToGlobalCaptureComposerLeavesRootSurfaceInPlace() {
-        let navigation = AppNavigationModel(selectedTab: .goals)
+        let navigation = StageStore(selectedSurface: .goals)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         router.route(
@@ -74,7 +74,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testOpenCaptureCommandUsesGlobalCaptureOverlayDestination() async {
-        let navigation = AppNavigationModel(selectedTab: .you)
+        let navigation = StageStore(selectedSurface: .you)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         let result = await router.execute(
@@ -102,7 +102,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testOpenGoalWithoutIdentifierFallsBackToMemoryLensOverlay() async {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         let result = await router.execute(
@@ -120,7 +120,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testRouteToGoalUsesCanonicalGoalsDestination() {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         router.route(to: .goal("goal-123"), source: .shellCompose)
@@ -131,7 +131,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testExternalSourceRouteCreatesCalmContinuityReceipt() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         router.route(to: .goal("goal-123"), source: .widget)
@@ -142,7 +142,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testQuickFocusCommandPreservesExplicitFocusContext() async {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         let result = await router.execute(
@@ -162,7 +162,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testPresentCreateGoalCarriesSeedTextAndCaptureContext() {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
 
         router.presentCreateGoal(
@@ -208,7 +208,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testAMB1059RoutesMemoryLensGoalResultWithTrustedHandoffContext() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
         let result = MemoryLensResult(
             id: "goal-release",
@@ -236,7 +236,7 @@ final class ShellCommandRouterTests: XCTestCase {
     }
 
     func testAMB1059RoutesMemoryLensCaptureResultToGlobalCaptureHandoffNotCaptureTab() {
-        let navigation = AppNavigationModel(selectedTab: .today)
+        let navigation = StageStore(selectedSurface: .today)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
         let result = MemoryLensResult(
             id: "capture-unplaced",

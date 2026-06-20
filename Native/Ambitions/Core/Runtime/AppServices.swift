@@ -359,7 +359,7 @@ struct StubCaptureService: CaptureServicing {
 
 @MainActor
 struct DefaultAppActionRouter: AppActionRouting {
-    let navigation: AppNavigationModel
+    let navigation: StageStore
 
     func handle(_ action: WidgetAction) async {
         switch action.identity.family {

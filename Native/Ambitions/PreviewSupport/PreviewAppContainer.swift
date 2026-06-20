@@ -16,7 +16,7 @@ enum PreviewAppContainerFactory {
     ) -> AppContainer {
         let fixtures = PreviewFixtures.default
         let clock = PreviewClock.environmentOverride() ?? .default
-        let navigation = AppNavigationModel(selectedTab: fixtures.preferences.preferredTab)
+        let navigation = StageStore(selectedSurface: fixtures.preferences.preferredTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
         let todayService = StubTodayService(experience: todayExperience)
         let captureService = StubCaptureService(captures: fixtures.captures)

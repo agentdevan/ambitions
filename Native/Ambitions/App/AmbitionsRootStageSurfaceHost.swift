@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct AmbitionsRootStageSurfaceHost: View {
-    @Binding var navigation: AppNavigationModel
+    @Binding var navigation: StageStore
 
     let creationMessage: GoalDetailInlineMessage?
     let goalsRefreshID: Int

@@ -3,7 +3,7 @@ import Foundation
 
 // Capability slices are dependency seams only; SourceRecord, Receipt, and ReplayTrace behavior stays in runtime/proof owners.
 struct AppShellCapability {
-    let navigation: AppNavigationModel
+    let navigation: StageStore
     let actionRouter: any AppActionRouting
     let commandRouter: any ShellCommandRouting
     let memoryLensService: any MemoryLensServicing

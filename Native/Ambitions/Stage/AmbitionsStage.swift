@@ -7,7 +7,7 @@ struct AmbitionsStage: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let container: AppContainer
     private let appFeatureFlags: AppFeatureFlags
-    @State private var navigation: AppNavigationModel
+    @State private var navigation: StageStore
     @State private var stageOwner = StageOwner()
     @State private var creationMessage: GoalDetailInlineMessage?
     @State private var goalsRefreshID = 0

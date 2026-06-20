@@ -33,7 +33,7 @@ final class CommandSearchObviousnessGauntletTests: XCTestCase {
         for intent in intents {
             for source in sources {
                 for context in contexts {
-                    let navigation = AppNavigationModel(selectedTab: .today)
+                    let navigation = StageStore(selectedSurface: .today)
 
                     navigation.presentCommandSheet(
                         intent: intent,
@@ -63,7 +63,7 @@ final class CommandSearchObviousnessGauntletTests: XCTestCase {
     }
 
     func testMemoryLensAndSearchCopyStayLocalFirstAndInspectablyNamed() {
-        let navigation = AppNavigationModel(selectedTab: .time)
+        let navigation = StageStore(selectedSurface: .time)
 
         navigation.presentMemoryLens(
             intent: .memoryLens,
