@@ -165,14 +165,14 @@ struct CanonicalNowStateProjector: NowStateProjecting {
 
 struct RepositoryBackedNowStateProjectionService: Sendable {
     let repositories: AppRepositories
-    let projector: any NowStateProjecting
+    let runtime: PrivateLifeRuntime
 
     init(
         repositories: AppRepositories,
-        projector: any NowStateProjecting = CanonicalNowStateProjector()
+        runtime: PrivateLifeRuntime = PrivateLifeRuntime()
     ) {
         self.repositories = repositories
-        self.projector = projector
+        self.runtime = runtime
     }
 
     func loadNowState(
@@ -182,13 +182,30 @@ struct RepositoryBackedNowStateProjectionService: Sendable {
         availableContextLenses: [NowContextLens] = NowContextLens.allCases,
         isManualLensOverrideActive: Bool = false
     ) async throws -> CanonicalNowState {
+        let snapshot = try await loadRuntimeSnapshot(
+            now: now,
+            activeContextLens: activeContextLens,
+            lensSource: lensSource,
+            availableContextLenses: availableContextLenses,
+            isManualLensOverrideActive: isManualLensOverrideActive
+        )
+        return snapshot.nowState
+    }
+
+    func loadRuntimeSnapshot(
+        now: Date,
+        activeContextLens: NowContextLens = .all,
+        lensSource: NowContextLensSource = .systemDefault,
+        availableContextLenses: [NowContextLens] = NowContextLens.allCases,
+        isManualLensOverrideActive: Bool = false
+    ) async throws -> RuntimeSnapshot {
         async let goals = repositories.goals.listGoals()
         async let captures = repositories.captures.listCaptures()
         async let evidence = repositories.evidence.listEvidence(goalID: nil)
         async let feedback = repositories.feedback.listEvents(goalID: nil)
         async let eventLedger = repositories.eventLedger.fetchRecent(limit: 20)
 
-        return try await projector.project(
+        return try await runtime.snapshot(
             input: NowStateProjectionInput(
                 now: now,
                 activeContextLens: activeContextLens,

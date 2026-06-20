@@ -30,6 +30,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
     let smartAttachmentService: (any SmartAttachmentRouting)?
     let validator: AmbitionsCommandValidator
+    let runtimeValidator: RuntimeValidator
     let scheduleStoreFileURL: URL?
 
     init(
@@ -38,6 +39,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
         smartAttachmentService: (any SmartAttachmentRouting)? = DefaultSmartAttachmentService(),
         validator: AmbitionsCommandValidator = AmbitionsCommandValidator(),
+        runtimeValidator: RuntimeValidator? = nil,
         scheduleStoreFileURL: URL? = nil
     ) {
         self.captureService = captureService
@@ -45,11 +47,12 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         self.commandExecutionRecords = commandExecutionRecords
         self.smartAttachmentService = smartAttachmentService
         self.validator = validator
+        self.runtimeValidator = runtimeValidator ?? RuntimeValidator(commandValidator: validator)
         self.scheduleStoreFileURL = scheduleStoreFileURL
     }
 
     func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
-        validator.validate(command)
+        runtimeValidator.validate(command).validationState
     }
 
     func execute(
