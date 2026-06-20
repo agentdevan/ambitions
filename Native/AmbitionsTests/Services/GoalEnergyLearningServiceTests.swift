@@ -41,7 +41,7 @@ final class GoalEnergyLearningServiceTests: XCTestCase {
             evidence: [
                 makeEvidence(id: "e1", goalID: goal.id, stepID: step.id, kind: .stepCompleted, at: "2026-04-18T09:00:00Z", minutes: 20),
                 makeEvidence(id: "e2", goalID: goal.id, stepID: step.id, kind: .stepCompleted, at: "2026-04-19T09:00:00Z", minutes: 25),
-                makeEvidence(id: "e3", goalID: goal.id, stepID: step.id, kind: .habitMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
+                makeEvidence(id: "e3", goalID: goal.id, stepID: step.id, kind: .ritualMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
             ],
             feedback: [
                 .skipped(base: makeBase(id: "f1", stepID: step.id, at: "2026-04-18T19:00:00Z"), reasonCode: .notNow),
@@ -74,7 +74,7 @@ final class GoalEnergyLearningServiceTests: XCTestCase {
             evidence: [
                 makeEvidence(id: "e1", goalID: goal.id, stepID: step.id, kind: .stepCompleted, at: "2026-04-18T09:00:00Z", minutes: 20),
                 makeEvidence(id: "e2", goalID: goal.id, stepID: step.id, kind: .stepCompleted, at: "2026-04-19T09:00:00Z", minutes: 20),
-                makeEvidence(id: "e3", goalID: goal.id, stepID: step.id, kind: .habitMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
+                makeEvidence(id: "e3", goalID: goal.id, stepID: step.id, kind: .ritualMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
             ],
             feedback: [
                 .completed(base: makeBase(id: "f1", stepID: step.id, at: "2026-04-18T09:30:00Z"), actualDuration: 20, effortLevel: .low, confidenceDelta: 0.08)
@@ -106,7 +106,7 @@ final class GoalEnergyLearningServiceTests: XCTestCase {
             evidence: [
                 makeEvidence(id: "e1", goalID: goal.id, stepID: "step-b", kind: .stepCompleted, at: "2026-04-18T09:00:00Z", minutes: 20),
                 makeEvidence(id: "e2", goalID: goal.id, stepID: "step-b", kind: .stepCompleted, at: "2026-04-19T09:00:00Z", minutes: 20),
-                makeEvidence(id: "e3", goalID: goal.id, stepID: "step-b", kind: .habitMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
+                makeEvidence(id: "e3", goalID: goal.id, stepID: "step-b", kind: .ritualMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
             ],
             feedback: [
                 .completed(base: makeBase(id: "f1", stepID: "step-b", at: "2026-04-18T09:30:00Z"), actualDuration: 20, effortLevel: .low, confidenceDelta: 0.08)
@@ -136,7 +136,7 @@ final class GoalEnergyLearningServiceTests: XCTestCase {
             evidence: [
                 makeEvidence(id: "e1", goalID: goal.id, stepID: step.id, kind: .stepCompleted, at: "2026-04-18T09:00:00Z", minutes: 20),
                 makeEvidence(id: "e2", goalID: goal.id, stepID: step.id, kind: .stepCompleted, at: "2026-04-19T09:00:00Z", minutes: 20),
-                makeEvidence(id: "e3", goalID: goal.id, stepID: step.id, kind: .habitMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
+                makeEvidence(id: "e3", goalID: goal.id, stepID: step.id, kind: .ritualMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
             ],
             feedback: [],
             canonicalEnergyModel: nil,
@@ -160,7 +160,7 @@ final class GoalEnergyLearningServiceTests: XCTestCase {
         let evidence = [
             makeEvidence(id: "e1", goalID: goal.id, stepID: step.id, kind: .stepCompleted, at: "2026-04-18T09:00:00Z", minutes: 20),
             makeEvidence(id: "e2", goalID: goal.id, stepID: step.id, kind: .stepCompleted, at: "2026-04-19T09:00:00Z", minutes: 20),
-            makeEvidence(id: "e3", goalID: goal.id, stepID: step.id, kind: .habitMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
+            makeEvidence(id: "e3", goalID: goal.id, stepID: step.id, kind: .ritualMinimumVersion, at: "2026-04-20T09:00:00Z", minutes: 10)
         ]
         let feedback: [GoalFeedbackEvent] = [
             .completed(base: makeBase(id: "f1", stepID: step.id, at: "2026-04-18T09:30:00Z"), actualDuration: 20, effortLevel: .low, confidenceDelta: 0.08)

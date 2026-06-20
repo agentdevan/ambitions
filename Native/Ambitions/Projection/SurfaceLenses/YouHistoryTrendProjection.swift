@@ -3,7 +3,7 @@ import Foundation
 
 extension RepositoryBackedInsightsService {
     func dailyTrendPoints(from evidence: [ProgressEvidence], feedback: [GoalFeedbackEvent], start: Date) -> [TrendPoint] {
-        weightedPoints(from: evidence, feedback: feedback, start: start, positiveKinds: [.stepCompleted, .habitCompletion, .habitMinimumVersion], frictionWeight: 0.55)
+        weightedPoints(from: evidence, feedback: feedback, start: start, positiveKinds: [.stepCompleted, .ritualCompletion, .ritualMinimumVersion], frictionWeight: 0.55)
     }
 
     enum PointMode {
@@ -14,8 +14,8 @@ extension RepositoryBackedInsightsService {
 
     enum PositiveKind: Hashable {
         case stepCompleted
-        case habitCompletion
-        case habitMinimumVersion
+        case ritualCompletion
+        case ritualMinimumVersion
         case askedWhyThisMattersProxy
     }
 
@@ -65,11 +65,11 @@ extension RepositoryBackedInsightsService {
         switch kind {
         case .stepCompleted:
             return requested.contains(.stepCompleted) ? 1.0 : 0
-        case .habitCompletion:
-            return requested.contains(.habitCompletion) ? 0.95 : 0
-        case .habitMinimumVersion:
-            return requested.contains(.habitMinimumVersion) ? (mode == .adaptation ? 1.0 : 0.7) : 0
-        case .habitQuickLog, .sessionLogged:
+        case .ritualCompletion:
+            return requested.contains(.ritualCompletion) ? 0.95 : 0
+        case .ritualMinimumVersion:
+            return requested.contains(.ritualMinimumVersion) ? (mode == .adaptation ? 1.0 : 0.7) : 0
+        case .ritualQuickLog, .sessionLogged:
             return mode == .standard ? 0.35 : 0.15
         case .reflectionLogged, .delegatedUpdate, .observationLogged, .milestoneReached:
             return mode == .adaptation ? 0.35 : 0.2

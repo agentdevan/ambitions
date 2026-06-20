@@ -12,9 +12,9 @@ extension RepositoryBackedInsightsService {
 
     func metrics(evidence: [ProgressEvidence], feedback: [GoalFeedbackEvent]) -> PeriodMetrics {
         PeriodMetrics(
-            completionCount: evidence.filter { $0.evidenceKind == .stepCompleted || $0.evidenceKind == .habitCompletion }.count,
-            minimumCount: evidence.filter { $0.evidenceKind == .habitMinimumVersion }.count,
-            quickLogCount: evidence.filter { $0.evidenceKind == .habitQuickLog || $0.evidenceKind == .sessionLogged }.count,
+            completionCount: evidence.filter { $0.evidenceKind == .stepCompleted || $0.evidenceKind == .ritualCompletion }.count,
+            minimumCount: evidence.filter { $0.evidenceKind == .ritualMinimumVersion }.count,
+            quickLogCount: evidence.filter { $0.evidenceKind == .ritualQuickLog || $0.evidenceKind == .sessionLogged }.count,
             frictionCount: feedback.filter(isFriction).count,
             adaptationCount: feedback.filter(isAdaptationSignal).count
         )

@@ -190,11 +190,11 @@ private extension DefaultGoalEnergyLearningService {
                 switch item.evidenceKind {
                 case .stepCompleted:
                     return GoalEnergyLearningEvidenceReference(id: item.id, goalID: item.goalID, stepID: item.stepID, occurredAt: item.capturedAt, kind: .positiveCompletion)
-                case .habitCompletion:
+                case .ritualCompletion:
                     return GoalEnergyLearningEvidenceReference(id: item.id, goalID: item.goalID, stepID: item.stepID, occurredAt: item.capturedAt, kind: .positiveCompletion)
-                case .habitMinimumVersion:
+                case .ritualMinimumVersion:
                     return GoalEnergyLearningEvidenceReference(id: item.id, goalID: item.goalID, stepID: item.stepID, occurredAt: item.capturedAt, kind: .minimumVersionCompletion)
-                case .habitQuickLog, .sessionLogged, .reflectionLogged, .delegatedUpdate, .observationLogged, .milestoneReached:
+                case .ritualQuickLog, .sessionLogged, .reflectionLogged, .delegatedUpdate, .observationLogged, .milestoneReached:
                     return nil
                 }
             }

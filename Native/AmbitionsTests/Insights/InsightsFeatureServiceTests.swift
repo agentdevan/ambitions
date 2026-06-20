@@ -81,7 +81,7 @@ final class InsightsFeatureServiceTests: XCTestCase {
                 id: "evidence-older",
                 goalID: goal.id,
                 stepID: step.id,
-                evidenceKind: .habitQuickLog,
+                evidenceKind: .ritualQuickLog,
                 source: .manual,
                 capturedAt: recentISO(daysAgo: 1, hour: 12, minute: 0),
                 progressDelta: 0.05,

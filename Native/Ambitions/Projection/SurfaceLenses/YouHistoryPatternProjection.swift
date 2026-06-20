@@ -255,8 +255,8 @@ extension RepositoryBackedInsightsService {
             let goalFeedback = feedback.filter { event in goalStepIDs.contains(event.stepID) }
             let goalEvidence = evidence.filter { $0.goalID == goal.id }
             let frictionCount = goalFeedback.filter(isFriction).count
-            let completionCount = goalEvidence.filter { $0.evidenceKind == .stepCompleted || $0.evidenceKind == .habitCompletion }.count
-            let minimumCount = goalEvidence.filter { $0.evidenceKind == .habitMinimumVersion }.count
+            let completionCount = goalEvidence.filter { $0.evidenceKind == .stepCompleted || $0.evidenceKind == .ritualCompletion }.count
+            let minimumCount = goalEvidence.filter { $0.evidenceKind == .ritualMinimumVersion }.count
             let statusLabel: String
             let summary: String
             let state: AmbitionVisualState

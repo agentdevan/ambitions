@@ -36,7 +36,7 @@ final class TimeRitualsProjectionServiceTests: XCTestCase {
         let dashboard = try await service.loadDashboard(now: now)
         let loggedHabit = try XCTUnwrap((dashboard.rituals + dashboard.recoveryRituals).first(where: { $0.id == goal.id }))
 
-        XCTAssertTrue(evidence.contains(where: { $0.evidenceKind == .habitQuickLog && $0.stepID == step.id }))
+        XCTAssertTrue(evidence.contains(where: { $0.evidenceKind == .ritualQuickLog && $0.stepID == step.id }))
         XCTAssertEqual(loggedHabit.status, .partial)
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")

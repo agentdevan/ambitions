@@ -98,9 +98,9 @@ private extension RitualOrchestrationService {
             guard let date = DomainTimestamp.date(from: evidence.capturedAt) else { return false }
             guard calendar.isDate(date, inSameDayAs: input.now) else { return false }
             switch evidence.evidenceKind {
-            case .stepCompleted, .habitCompletion, .habitMinimumVersion:
+            case .stepCompleted, .ritualCompletion, .ritualMinimumVersion:
                 return true
-            case .habitQuickLog, .sessionLogged, .reflectionLogged, .delegatedUpdate, .observationLogged, .milestoneReached:
+            case .ritualQuickLog, .sessionLogged, .reflectionLogged, .delegatedUpdate, .observationLogged, .milestoneReached:
                 return false
             }
         }.count

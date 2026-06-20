@@ -31,9 +31,9 @@ extension RepositoryBackedInsightsService {
         let blockedCount = snapshot.drafts.filter { $0.latestResultKind == .blocked || $0.latestResultKind == .clarificationRequired }.count
 
         let trendPoints = dailyTrendPoints(from: snapshot.evidence, feedback: snapshot.feedback, start: currentWindow.start)
-        let momentumPoints = weightedPoints(from: currentEvidence, feedback: currentFeedback, start: currentWindow.start, positiveKinds: [.stepCompleted, .habitCompletion, .habitMinimumVersion], frictionWeight: 0.45)
+        let momentumPoints = weightedPoints(from: currentEvidence, feedback: currentFeedback, start: currentWindow.start, positiveKinds: [.stepCompleted, .ritualCompletion, .ritualMinimumVersion], frictionWeight: 0.45)
         let driftPoints = weightedPoints(from: currentEvidence, feedback: currentFeedback, start: currentWindow.start, positiveKinds: [.askedWhyThisMattersProxy], frictionWeight: 0.9, mode: .drift)
-        let adaptationPoints = weightedPoints(from: currentEvidence, feedback: currentFeedback, start: currentWindow.start, positiveKinds: [.habitMinimumVersion], frictionWeight: 0.2, mode: .adaptation)
+        let adaptationPoints = weightedPoints(from: currentEvidence, feedback: currentFeedback, start: currentWindow.start, positiveKinds: [.ritualMinimumVersion], frictionWeight: 0.2, mode: .adaptation)
 
         let goalStatuses = goalStatuses(goals: activeGoals, feedback: currentFeedback, evidence: currentEvidence)
         let timelineItems = timelineItems(snapshot: snapshot, now: now)

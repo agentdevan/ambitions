@@ -75,11 +75,11 @@ extension RepositoryBackedInsightsService {
 
     func evidenceTitle(for evidence: ProgressEvidence) -> String {
         switch evidence.evidenceKind {
-        case .stepCompleted, .habitCompletion:
+        case .stepCompleted, .ritualCompletion:
             return "Completed work"
-        case .habitMinimumVersion:
+        case .ritualMinimumVersion:
             return "Minimum version logged"
-        case .habitQuickLog:
+        case .ritualQuickLog:
             return "Ritual signal captured"
         case .sessionLogged:
             return "Session logged"
@@ -96,11 +96,11 @@ extension RepositoryBackedInsightsService {
 
     func evidenceIcon(for evidence: ProgressEvidence) -> String {
         switch evidence.evidenceKind {
-        case .stepCompleted, .habitCompletion:
+        case .stepCompleted, .ritualCompletion:
             return "checkmark.circle.fill"
-        case .habitMinimumVersion:
+        case .ritualMinimumVersion:
             return "leaf.fill"
-        case .habitQuickLog:
+        case .ritualQuickLog:
             return "plus.bubble.fill"
         default:
             return "sparkles"
@@ -109,11 +109,11 @@ extension RepositoryBackedInsightsService {
 
     func evidenceBadge(for evidence: ProgressEvidence) -> String? {
         switch evidence.evidenceKind {
-        case .habitMinimumVersion:
+        case .ritualMinimumVersion:
             return "Minimum"
-        case .habitQuickLog:
+        case .ritualQuickLog:
             return "Quick log"
-        case .stepCompleted, .habitCompletion:
+        case .stepCompleted, .ritualCompletion:
             return "Win"
         default:
             return nil
@@ -122,11 +122,11 @@ extension RepositoryBackedInsightsService {
 
     func evidenceState(for evidence: ProgressEvidence) -> AmbitionVisualState {
         switch evidence.evidenceKind {
-        case .stepCompleted, .habitCompletion:
+        case .stepCompleted, .ritualCompletion:
             return .success
-        case .habitMinimumVersion:
+        case .ritualMinimumVersion:
             return .selected
-        case .habitQuickLog, .sessionLogged:
+        case .ritualQuickLog, .sessionLogged:
             return .default
         default:
             return .default

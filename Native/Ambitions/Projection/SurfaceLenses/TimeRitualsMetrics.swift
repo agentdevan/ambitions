@@ -7,12 +7,12 @@ extension RepositoryBackedTimeRitualsService {
         let todayFeedback = feedback.filter { isSameDay($0.base.occurredAt, as: dayStart) }
 
         if goal.state == .paused { return .notRelevant }
-        if todayEvidence.contains(where: { $0.note == Self.completeNote || $0.evidenceKind == .stepCompleted || $0.evidenceKind == .habitCompletion }) ||
+        if todayEvidence.contains(where: { $0.note == Self.completeNote || $0.evidenceKind == .stepCompleted || $0.evidenceKind == .ritualCompletion }) ||
             todayFeedback.contains(where: { if case .completed = $0 { return true } else { return false } }) {
             return .completed
         }
-        if todayEvidence.contains(where: { $0.evidenceKind == .habitMinimumVersion || $0.note?.hasPrefix(Self.minimumNotePrefix) == true }) { return .minimumDone }
-        if todayEvidence.contains(where: { $0.evidenceKind == .habitQuickLog || $0.note == Self.quickLogNote }) { return .partial }
+        if todayEvidence.contains(where: { $0.evidenceKind == .ritualMinimumVersion || $0.note?.hasPrefix(Self.minimumNotePrefix) == true }) { return .minimumDone }
+        if todayEvidence.contains(where: { $0.evidenceKind == .ritualQuickLog || $0.note == Self.quickLogNote }) { return .partial }
         if todayFeedback.contains(where: { if case .notRelevant = $0 { return true } else { return false } }) { return .notRelevant }
         if todayFeedback.contains(where: { if case .askedForSmallerVersion = $0 { return true } else { return false } }) { return .needsEasierVersion }
         if todayFeedback.contains(where: { if case .skipped = $0 { return true } else { return false } }) { return .skipped }

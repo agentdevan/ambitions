@@ -217,7 +217,7 @@ final class PlanningDomainModelsTests: XCTestCase {
         let evidence = [
             ProgressEvidence(id: "e1", goalID: blocked.id, stepID: "step-blocked-energy", evidenceKind: .stepCompleted, source: .manual, capturedAt: "2026-04-18T09:00:00Z", progressDelta: 0.2, confidenceDelta: 0.05, minutesInvested: 20, note: nil),
             ProgressEvidence(id: "e2", goalID: blocked.id, stepID: "step-blocked-energy", evidenceKind: .stepCompleted, source: .manual, capturedAt: "2026-04-19T09:00:00Z", progressDelta: 0.2, confidenceDelta: 0.05, minutesInvested: 20, note: nil),
-            ProgressEvidence(id: "e3", goalID: blocked.id, stepID: "step-blocked-energy", evidenceKind: .habitMinimumVersion, source: .manual, capturedAt: "2026-04-20T09:00:00Z", progressDelta: 0.1, confidenceDelta: 0.02, minutesInvested: 10, note: nil)
+            ProgressEvidence(id: "e3", goalID: blocked.id, stepID: "step-blocked-energy", evidenceKind: .ritualMinimumVersion, source: .manual, capturedAt: "2026-04-20T09:00:00Z", progressDelta: 0.1, confidenceDelta: 0.02, minutesInvested: 10, note: nil)
         ]
         let canonical = makeCanonicalModel(for: blocked, score: 0.74)
 
@@ -239,7 +239,7 @@ final class PlanningDomainModelsTests: XCTestCase {
         let evidence = [
             ProgressEvidence(id: "e1", goalID: positive.id, stepID: "step-positive-energy", evidenceKind: .stepCompleted, source: .manual, capturedAt: "2026-04-18T09:00:00Z", progressDelta: 0.2, confidenceDelta: 0.05, minutesInvested: 20, note: nil),
             ProgressEvidence(id: "e2", goalID: positive.id, stepID: "step-positive-energy", evidenceKind: .stepCompleted, source: .manual, capturedAt: "2026-04-19T09:00:00Z", progressDelta: 0.2, confidenceDelta: 0.05, minutesInvested: 20, note: nil),
-            ProgressEvidence(id: "e3", goalID: positive.id, stepID: "step-positive-energy", evidenceKind: .habitMinimumVersion, source: .manual, capturedAt: "2026-04-20T09:00:00Z", progressDelta: 0.1, confidenceDelta: 0.02, minutesInvested: 10, note: nil)
+            ProgressEvidence(id: "e3", goalID: positive.id, stepID: "step-positive-energy", evidenceKind: .ritualMinimumVersion, source: .manual, capturedAt: "2026-04-20T09:00:00Z", progressDelta: 0.1, confidenceDelta: 0.02, minutesInvested: 10, note: nil)
         ]
         let feedback: [GoalFeedbackEvent] = [
             .completed(base: GoalFeedbackEventBase(id: "f1", stepID: "step-positive-energy", occurredAt: "2026-04-20T09:30:00Z", note: nil), actualDuration: 20, effortLevel: .low, confidenceDelta: 0.08)

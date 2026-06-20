@@ -64,7 +64,7 @@ extension RepositoryBackedGoalsService {
                     id: "evidence-\(UUID().uuidString)",
                     goalID: goal.id,
                     stepID: selectedStep.id,
-                    evidenceKind: TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep) ? .habitCompletion : .stepCompleted,
+                    evidenceKind: TimeRitualGoalSemantics.isRitualLike(goal: goal, step: selectedStep) ? .ritualCompletion : .stepCompleted,
                     source: .manual,
                     capturedAt: timestamp,
                     progressDelta: 0.18,

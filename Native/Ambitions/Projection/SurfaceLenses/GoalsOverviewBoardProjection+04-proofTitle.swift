@@ -11,9 +11,9 @@ extension RepositoryBackedGoalsService {
 
         return switch evidence.evidenceKind {
         case .stepCompleted: "Completed step"
-        case .habitCompletion: "Ritual completion"
-        case .habitMinimumVersion: "Minimum version"
-        case .habitQuickLog: "Quick log"
+        case .ritualCompletion: "Ritual completion"
+        case .ritualMinimumVersion: "Minimum version"
+        case .ritualQuickLog: "Quick log"
         case .sessionLogged: "Session logged"
         case .reflectionLogged: "Reflection"
         case .delegatedUpdate: "Delegated update"

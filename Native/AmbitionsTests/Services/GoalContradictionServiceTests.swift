@@ -160,7 +160,7 @@ final class GoalContradictionServiceTests: XCTestCase {
             evidence: [
                 makeEvidence(id: "e1", stepID: "step-1", kind: .stepCompleted),
                 makeEvidence(id: "e2", stepID: "step-1", kind: .stepCompleted),
-                makeEvidence(id: "e3", stepID: "step-1", kind: .habitMinimumVersion)
+                makeEvidence(id: "e3", stepID: "step-1", kind: .ritualMinimumVersion)
             ]
         )
 
@@ -690,7 +690,7 @@ private extension GoalContradictionServiceTests {
         let evidence = [
             makeEvidence(id: "e1", stepID: "step-1", kind: .stepCompleted),
             makeEvidence(id: "e2", stepID: "step-1", kind: .stepCompleted),
-            makeEvidence(id: "e3", stepID: "step-1", kind: .habitMinimumVersion)
+            makeEvidence(id: "e3", stepID: "step-1", kind: .ritualMinimumVersion)
         ]
         let feedback: [GoalFeedbackEvent] = [
             .notRelevant(base: makeFeedbackBase(id: "f1", stepID: "step-1")),

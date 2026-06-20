@@ -59,3 +59,40 @@ extension ProgressRollupMethod {
         try container.encode(rawValue)
     }
 }
+
+extension ProgressEvidenceKind {
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let rawValue = try container.decode(String.self)
+        switch rawValue {
+        case Self.stepCompleted.rawValue:
+            self = .stepCompleted
+        case Self.ritualCompletion.rawValue, "habit_completion":
+            self = .ritualCompletion
+        case Self.ritualMinimumVersion.rawValue, "habit_minimum_version":
+            self = .ritualMinimumVersion
+        case Self.ritualQuickLog.rawValue, "habit_quick_log":
+            self = .ritualQuickLog
+        case Self.sessionLogged.rawValue:
+            self = .sessionLogged
+        case Self.reflectionLogged.rawValue:
+            self = .reflectionLogged
+        case Self.delegatedUpdate.rawValue:
+            self = .delegatedUpdate
+        case Self.observationLogged.rawValue:
+            self = .observationLogged
+        case Self.milestoneReached.rawValue:
+            self = .milestoneReached
+        default:
+            throw DecodingError.dataCorruptedError(
+                in: container,
+                debugDescription: "Unknown progress evidence kind: \(rawValue)"
+            )
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(rawValue)
+    }
+}

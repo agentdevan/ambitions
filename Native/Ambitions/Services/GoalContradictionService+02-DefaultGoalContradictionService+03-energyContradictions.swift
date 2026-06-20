@@ -74,9 +74,9 @@ extension DefaultGoalContradictionService {
         (evidenceByStepID[stepID] ?? [])
             .filter { evidence in
                 switch evidence.evidenceKind {
-                case .stepCompleted, .habitCompletion, .habitMinimumVersion:
+                case .stepCompleted, .ritualCompletion, .ritualMinimumVersion:
                     return true
-                case .habitQuickLog, .sessionLogged, .reflectionLogged, .delegatedUpdate, .observationLogged, .milestoneReached:
+                case .ritualQuickLog, .sessionLogged, .reflectionLogged, .delegatedUpdate, .observationLogged, .milestoneReached:
                     return false
                 }
             }

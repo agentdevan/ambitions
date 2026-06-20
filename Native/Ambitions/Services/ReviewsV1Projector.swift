@@ -187,11 +187,11 @@ extension ProgressEvidenceKind {
         switch self {
         case .stepCompleted:
             return "Step completed"
-        case .habitCompletion:
+        case .ritualCompletion:
             return "Recurring work completed"
-        case .habitMinimumVersion:
+        case .ritualMinimumVersion:
             return "Minimum version completed"
-        case .habitQuickLog:
+        case .ritualQuickLog:
             return "Quick log recorded"
         case .sessionLogged:
             return "Session logged"
@@ -208,9 +208,9 @@ extension ProgressEvidenceKind {
 
     var reviewDetail: String {
         switch self {
-        case .stepCompleted, .habitCompletion, .milestoneReached:
+        case .stepCompleted, .ritualCompletion, .milestoneReached:
             return "This is proof of real progress you can use."
-        case .habitMinimumVersion, .habitQuickLog, .sessionLogged:
+        case .ritualMinimumVersion, .ritualQuickLog, .sessionLogged:
             return "This proof can help keep the next step believable."
         case .reflectionLogged, .delegatedUpdate, .observationLogged:
             return "This proof adds context for future review."
