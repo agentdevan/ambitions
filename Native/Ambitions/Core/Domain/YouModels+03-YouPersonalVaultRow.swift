@@ -233,30 +233,41 @@ struct YouDashboard: Sendable, Equatable {
     let notificationAuthorization: YouNotificationAuthorization
     let preferences: YouPreferencesState
 
-    var userSystemProfileInspectionSummary: String {
+    var userSystemProfile: UserSystemProfile {
         let profileRoutes = systemCenter.sections.flatMap(\.items)
-        let learningControls = memoryControls.localLearningControls.map(\.title).joined(separator: ", ")
-        let personalVaultRows = personalVault.sections.flatMap(\.rows)
+        let learningControls = memoryControls.localLearningControls.map(\.title)
+        let personalVaultRows = personalVault.sections.flatMap(\.rows).map(\.title)
         let resetRoutes = memoryControls.localLearningControls.filter {
             $0.title.localizedCaseInsensitiveContains("reset") ||
             $0.title.localizedCaseInsensitiveContains("disable") ||
             $0.title.localizedCaseInsensitiveContains("delete")
-        }
-        let resetSummary = resetRoutes.isEmpty
-            ? "Reset controls: review-gated"
-            : "Reset controls: \(resetRoutes.map(\.title).joined(separator: ", "))"
+        }.map(\.title)
 
-        return [
-            "User System Profile: \(hero.title)",
-            "Planning setup: \(profileRoutes.filter { $0.id == "schedule-availability" || $0.id == "plan-behavior" || $0.id == "vacation-away-time" }.map(\.title).joined(separator: ", "))",
-            "Trust controls: \(trustCenter.sections.flatMap(\.routes).map(\.title).prefix(4).joined(separator: ", "))",
-            "Local learning: \(learningControls.isEmpty ? "available when local signals exist" : learningControls)",
-            "Personal vault: \(personalVaultRows.isEmpty ? "summary only" : personalVaultRows.map(\.title).prefix(3).joined(separator: ", "))",
-            resetSummary,
-            "Privacy: \(trustCenter.dataMap.map(\.privacyLabel).prefix(3).joined(separator: ", "))",
-            "Automation: \(automationBoundary.title)",
-            "Source, receipt, and reason boundaries stay inspectable from What Ambitions Knows and Trust Center"
-        ].joined(separator: " · ")
+        return UserSystemProfile(
+            displayName: hero.title,
+            planningDefaults: profileRoutes
+                .filter { $0.id == "schedule-availability" || $0.id == "plan-behavior" || $0.id == "vacation-away-time" }
+                .map(\.title),
+            notificationPreferences: [notificationAuthorization.statusLabel],
+            appearancePreferences: [
+                preferences.appearancePreference.title,
+                preferences.accentFamily.title,
+                preferences.preferredTab.title
+            ],
+            privacyPreferences: trustCenter.dataMap.map(\.privacyLabel),
+            permissions: integrationsSection.items.map { "\($0.title): \($0.valueLabel ?? "Review")" },
+            connectedSources: personalVaultRows,
+            historyPreferences: learningControls,
+            exportSharePreferences: accountSection.items.map(\.title),
+            securityControls: trustCenter.sections.flatMap(\.routes).map(\.title),
+            localAuthenticationSettings: resetRoutes,
+            accountState: accountSection.items.first?.valueLabel ?? "Local-only",
+            referencePackState: sourceAtlasKnowledge.sections.isEmpty ? "Not connected" : sourceAtlasKnowledge.title
+        )
+    }
+
+    var userSystemProfileInspectionSummary: String {
+        userSystemProfile.inspectionSummary
     }
 
     init(

@@ -11,6 +11,11 @@ final class CoreDomainCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Domain/LifeArea.swift",
             "Native/Ambitions/Core/Domain/RealityWindow.swift",
             "Native/Ambitions/Core/Domain/CapacityShape.swift",
+            "Native/Ambitions/Core/Domain/CaptureIntake.swift",
+            "Native/Ambitions/Core/Domain/ClosureOutcome.swift",
+            "Native/Ambitions/Core/Domain/ProofEvent.swift",
+            "Native/Ambitions/Core/Domain/RecoveryState.swift",
+            "Native/Ambitions/Core/Domain/UserSystemProfile.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
@@ -126,6 +131,107 @@ final class CoreDomainCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(estimate.shape.openMinutes, 180)
         XCTAssertEqual(estimate.shape.pressureLevel, .moderate)
         XCTAssertTrue(estimate.shape.hasBreathingRoom)
+    }
+
+    func testCaptureIntakeOwnsRoutingReviewAndPrivacyContract() {
+        let capture = Capture(
+            id: "capture-proof",
+            createdAt: "2026-04-15T12:00:00.000Z",
+            updatedAt: "2026-04-15T12:00:00.000Z",
+            rawText: "Finished the draft",
+            sourceType: .shellComposer,
+            status: .actionable,
+            linkedGoalID: "goal-writing",
+            kind: .goalSupportingTask,
+            route: .proofItem,
+            triageStatus: .assumedRoute,
+            deadlineText: "Friday",
+            privacy: .privateUserText
+        )
+
+        let intake = capture.intake
+
+        XCTAssertEqual(intake.text, "Finished the draft")
+        XCTAssertEqual(intake.goalIntent, "goal-writing")
+        XCTAssertEqual(intake.proofIntent, "Finished the draft")
+        XCTAssertTrue(intake.needsReview)
+        XCTAssertEqual(intake.privacyClassification, .privateUserText)
+    }
+
+    func testClosureOutcomeOwnsDefaultAndAdvancedOptions() {
+        XCTAssertEqual(ClosureOutcome.defaultOptions.map(\.title), [
+            "Done",
+            "Still counts",
+            "Move it",
+            "Blocked",
+            "Not needed"
+        ])
+        XCTAssertTrue(ClosureOutcome.advancedOptions.map(\.title).contains("Needs recovery"))
+        XCTAssertEqual(ClosureOutcome.defaultOptions.first?.proofEventKind, .closure)
+        XCTAssertEqual(ClosureOutcome.defaultOptions.first?.osClosureOutcome, .completed)
+    }
+
+    func testProofEventOwnsProofProjectionContract() {
+        let proof = Proof(
+            id: "proof-1",
+            ambitionID: "ambition-1",
+            goalThreadID: "thread-1",
+            commitmentID: "commitment-1",
+            closureEventID: "closure-1",
+            proofType: .text,
+            text: "The smallest useful draft shipped.",
+            source: "User",
+            userConfirmed: true,
+            createdAt: "2026-04-15T12:00:00.000Z"
+        )
+
+        let event = proof.proofEvent
+
+        XCTAssertEqual(event.kind, .closure)
+        XCTAssertTrue(event.isUsableForRecommendation)
+        XCTAssertEqual(event.summary, "The smallest useful draft shipped.")
+    }
+
+    func testRecoveryStateOwnsThreadSummaryContract() {
+        let thread = RecoveryThread(
+            id: "recovery-1",
+            ambitionID: "ambition-1",
+            goalThreadID: "thread-1",
+            trigger: "Reality changed",
+            priorProofRefs: ["proof-b", "proof-a", "proof-b"],
+            whatChanged: "Calendar conflict",
+            status: .stalled,
+            createdAt: "2026-04-15T12:00:00.000Z",
+            updatedAt: "2026-04-15T12:00:00.000Z"
+        )
+
+        let recovery = thread.recoveryState
+
+        XCTAssertEqual(recovery.state, .needsRecovery)
+        XCTAssertEqual(recovery.proofEventIDs, ["proof-b", "proof-a"])
+        XCTAssertTrue(recovery.needsVisibleRecovery)
+    }
+
+    func testUserSystemProfileOwnsInspectableSummaryContract() {
+        let profile = UserSystemProfile(
+            displayName: "Devan's System",
+            planningDefaults: ["Schedule availability"],
+            notificationPreferences: ["Notifications allowed"],
+            appearancePreferences: ["System"],
+            privacyPreferences: ["Stored on this device"],
+            permissions: ["Calendar: Review"],
+            connectedSources: ["What Ambitions Knows"],
+            historyPreferences: ["Local learning"],
+            exportSharePreferences: ["Export"],
+            securityControls: ["Trust Center"],
+            localAuthenticationSettings: ["Reset controls"],
+            accountState: "Local-only",
+            referencePackState: "Not connected"
+        )
+
+        XCTAssertTrue(profile.inspectionSummary.contains("User System Profile"))
+        XCTAssertTrue(profile.inspectionSummary.contains("Schedule availability"))
+        XCTAssertTrue(profile.inspectionSummary.contains("Source, receipt, and reason"))
     }
 
     private func repoRoot() -> URL {

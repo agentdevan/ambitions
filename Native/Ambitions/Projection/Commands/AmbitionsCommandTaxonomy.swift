@@ -151,6 +151,7 @@ struct AmbitionsCommandPriorityHints: Codable, Sendable, Equatable, Hashable {
     let userPreference: NowPressureLevel?
     let capacityHint: NowPressureLevel?
     let recoveryState: NowRecoveryState?
+    let recovery: RecoveryState?
 
     init(
         importance: NowPressureLevel? = nil,
@@ -174,6 +175,7 @@ struct AmbitionsCommandPriorityHints: Codable, Sendable, Equatable, Hashable {
         self.userPreference = userPreference
         self.capacityHint = capacityHint
         self.recoveryState = recoveryState
+        self.recovery = recoveryState.map { RecoveryState(state: $0) }
     }
 
     var hasAnySignal: Bool {

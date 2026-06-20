@@ -13,7 +13,7 @@ extension TodayExecutionViewState {
                 "Now / Next / Later",
                 "Reality Meridian",
                 "Now Layer",
-                "Today Plan Layer",
+                "Today Shape Layer",
                 "Compact timeline",
                 "Relevant One-Step Goals",
                 "Open-window awareness",

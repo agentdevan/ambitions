@@ -10,6 +10,15 @@ struct TodayActionClosureOutcomeState: Identifiable, Equatable, Sendable {
 
     var id: String { closureState.rawValue }
 
+    init(domainOutcome: ClosureOutcome) {
+        closureState = domainOutcome.closureState
+        title = domainOutcome.title
+        meaning = domainOutcome.meaning
+        receiptPreview = domainOutcome.receiptPreview
+        createsProof = domainOutcome.createsProof
+        isPrimary = domainOutcome.isPrimary
+    }
+
     var consequenceLabel: String {
         switch closureState {
         case .completed:
@@ -190,78 +199,6 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
         "Saving the outcome updates Today, saves a local receipt when available, and does not rearrange the day silently."
     }
 
-    private static let defaultOutcomes: [TodayActionClosureOutcomeState] = [
-        TodayActionClosureOutcomeState(
-            closureState: .completed,
-            title: "Done",
-            meaning: "Finished as intended.",
-            receiptPreview: "Done · receipt saved",
-            createsProof: true,
-            isPrimary: true
-        ),
-        TodayActionClosureOutcomeState(
-            closureState: .stillCounts,
-            title: "Still counts",
-            meaning: "Meaningful progress happened differently.",
-            receiptPreview: "Still counts · saved as proof",
-            createsProof: true,
-            isPrimary: true
-        ),
-        TodayActionClosureOutcomeState(
-            closureState: .moved,
-            title: "Move it",
-            meaning: "Still matters, moved to another time.",
-            receiptPreview: "Move it · receipt saved",
-            createsProof: false,
-            isPrimary: true
-        ),
-        TodayActionClosureOutcomeState(
-            closureState: .waiting,
-            title: "Waiting",
-            meaning: "Dependent on a person, time, info, place, or tool.",
-            receiptPreview: "Waiting · dependency noted",
-            createsProof: false,
-            isPrimary: true
-        ),
-        TodayActionClosureOutcomeState(
-            closureState: .blocked,
-            title: "Blocked",
-            meaning: "Cannot progress because something is in the way.",
-            receiptPreview: "Blocked · recovery suggested",
-            createsProof: false,
-            isPrimary: true
-        ),
-        TodayActionClosureOutcomeState(
-            closureState: .notNeeded,
-            title: "Not needed",
-            meaning: "Intentionally removed.",
-            receiptPreview: "Not needed · receipt saved",
-            createsProof: false,
-            isPrimary: true
-        ),
-        TodayActionClosureOutcomeState(
-            closureState: .needsRecovery,
-            title: "Needs recovery",
-            meaning: "The plan or day needs repair.",
-            receiptPreview: "Needs recovery · review suggested",
-            createsProof: false,
-            isPrimary: false
-        ),
-        TodayActionClosureOutcomeState(
-            closureState: .needsReview,
-            title: "Needs review",
-            meaning: "You are not sure yet.",
-            receiptPreview: "Needs review · decision saved",
-            createsProof: false,
-            isPrimary: false
-        ),
-        TodayActionClosureOutcomeState(
-            closureState: .awaitingClosure,
-            title: "Review later",
-            meaning: "Decide after one more look.",
-            receiptPreview: "Review later · reminder kept visible",
-            createsProof: false,
-            isPrimary: false
-        ),
-    ]
+    private static let defaultOutcomes: [TodayActionClosureOutcomeState] =
+        ClosureOutcome.allOptions.map(TodayActionClosureOutcomeState.init(domainOutcome:))
 }
