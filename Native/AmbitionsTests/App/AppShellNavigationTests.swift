@@ -3,36 +3,36 @@ import XCTest
 
 final class AppShellNavigationTests: XCTestCase {
     func testCanonicalTopLevelTabsMatchProductSpec() {
-        XCTAssertEqual(AppTab.allCases, [.today, .goals, .time, .you])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "you"])
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("pulse"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Review"))
+        XCTAssertEqual(AmbitionsSurface.allCases, [.today, .goals, .time, .you])
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.rawValue), ["today", "goals", "time", "you"])
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("habits"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("insights"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("pulse"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Review"))
     }
 
     func testCanonicalRawValuesStayLimitedToActiveTopLevelTabs() {
-        XCTAssertNil(AppTab(rawValue: "capture"))
-        XCTAssertEqual(AppTab(rawValue: "time"), .time)
-        XCTAssertNil(AppTab(rawValue: "motion"))
-        XCTAssertEqual(AppTab(rawValue: "you"), .you)
-        XCTAssertNil(AppTab(rawValue: "captures"))
-        XCTAssertNil(AppTab(rawValue: "pulse"))
-        XCTAssertNil(AppTab(rawValue: "plan"))
-        XCTAssertNil(AppTab(rawValue: "profile"))
-        XCTAssertNil(AppTab(rawValue: "habits"))
-        XCTAssertNil(AppTab(rawValue: "insights"))
-        XCTAssertEqual(AppTab.time.canonicalTopLevelTab, .time)
-        XCTAssertEqual(AppTab.you.canonicalTopLevelTab, .you)
-        XCTAssertEqual(AppTab.time.rawValue, "time")
-        XCTAssertEqual(AppTab.time.title, "Time")
-        XCTAssertEqual(AppTab.you.rawValue, "you")
-        XCTAssertEqual(AppTab.you.title, "You")
-        XCTAssertTrue(AppTab.time.isCanonicalTopLevel)
-        XCTAssertTrue(AppTab.you.isCanonicalTopLevel)
+        XCTAssertNil(AmbitionsSurface(rawValue: "capture"))
+        XCTAssertEqual(AmbitionsSurface(rawValue: "time"), .time)
+        XCTAssertNil(AmbitionsSurface(rawValue: "motion"))
+        XCTAssertEqual(AmbitionsSurface(rawValue: "you"), .you)
+        XCTAssertNil(AmbitionsSurface(rawValue: "captures"))
+        XCTAssertNil(AmbitionsSurface(rawValue: "pulse"))
+        XCTAssertNil(AmbitionsSurface(rawValue: "plan"))
+        XCTAssertNil(AmbitionsSurface(rawValue: "profile"))
+        XCTAssertNil(AmbitionsSurface(rawValue: "habits"))
+        XCTAssertNil(AmbitionsSurface(rawValue: "insights"))
+        XCTAssertEqual(AmbitionsSurface.time.canonicalTopLevelTab, .time)
+        XCTAssertEqual(AmbitionsSurface.you.canonicalTopLevelTab, .you)
+        XCTAssertEqual(AmbitionsSurface.time.rawValue, "time")
+        XCTAssertEqual(AmbitionsSurface.time.title, "Time")
+        XCTAssertEqual(AmbitionsSurface.you.rawValue, "you")
+        XCTAssertEqual(AmbitionsSurface.you.title, "You")
+        XCTAssertTrue(AmbitionsSurface.time.isCanonicalTopLevel)
+        XCTAssertTrue(AmbitionsSurface.you.isCanonicalTopLevel)
     }
 
     func testRootShellTopInsetDoesNotPullSurfaceContentUnderHeader() {
@@ -86,7 +86,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testCanonicalSurfaceContractsBindEachTabToOnePrimaryObject() {
         XCTAssertEqual(AmbitionsSurfaceContractRegistry.validate(), [])
         XCTAssertEqual(
-            AppTab.allCases.map(\.primaryObjectTitle),
+            AmbitionsSurface.allCases.map(\.primaryObjectTitle),
             [
                 "Reality Meridian",
                 "Constellation Atlas",
@@ -94,10 +94,10 @@ final class AppShellNavigationTests: XCTestCase {
                 "User System Profile"
             ]
         )
-        XCTAssertEqual(AppTab.today.surfaceContract.title, "Today")
-        XCTAssertEqual(AppTab.goals.surfaceContract.primaryObjectTitle, "Constellation Atlas")
-        XCTAssertEqual(AppTab.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
-        XCTAssertEqual(AppTab.you.surfaceContract.primaryObjectTitle, "User System Profile")
+        XCTAssertEqual(AmbitionsSurface.today.surfaceContract.title, "Today")
+        XCTAssertEqual(AmbitionsSurface.goals.surfaceContract.primaryObjectTitle, "Constellation Atlas")
+        XCTAssertEqual(AmbitionsSurface.time.surfaceContract.primaryObjectTitle, "LifeShape Field")
+        XCTAssertEqual(AmbitionsSurface.you.surfaceContract.primaryObjectTitle, "User System Profile")
         XCTAssertFalse(AmbitionsSurfaceContractRegistry.canonicalContracts.map(\.tab.rawValue).contains("capture"))
     }
 
@@ -181,7 +181,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testMeridianDestinationsMirrorCanonicalTabsWithoutNewRouteOwnership() {
         let destinations = AppMeridianDestination.all
 
-        XCTAssertEqual(destinations.map(\.tab), AppTab.allCases)
+        XCTAssertEqual(destinations.map(\.tab), AmbitionsSurface.allCases)
         XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(
             destinations.map(\.accessibilityIdentifier),
@@ -273,7 +273,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
     }
 
     @MainActor
@@ -285,10 +285,10 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .time)
         XCTAssertEqual(navigation.timePath, [.rituals])
         XCTAssertTrue(navigation.youPath.isEmpty)
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
-        XCTAssertEqual(AppTab.time.rawValue, "time")
-        XCTAssertEqual(AppTab.time.title, "Time")
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("habits"))
+        XCTAssertEqual(AmbitionsSurface.time.rawValue, "time")
+        XCTAssertEqual(AmbitionsSurface.time.title, "Time")
     }
 
     @MainActor
@@ -300,9 +300,9 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.selectedTab, .you)
         XCTAssertEqual(navigation.youPath, [.history])
         XCTAssertTrue(navigation.timePath.isEmpty)
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
-        XCTAssertEqual(AppTab.time.title, "Time")
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("insights"))
+        XCTAssertEqual(AmbitionsSurface.time.title, "Time")
     }
 
     @MainActor
@@ -335,16 +335,16 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testContextualCaptureEntrySourcesExistForEveryCanonicalSurface() {
-        let expectedSources: [AppTab: ShellCommandEntrySource] = [
+        let expectedSources: [AmbitionsSurface: ShellCommandEntrySource] = [
             .today: .todayQuickCapture,
             .goals: .goalsQuickCapture,
             .time: .timeQuickCapture,
             .you: .youQuickCapture
         ]
 
-        XCTAssertEqual(Set(expectedSources.keys), Set(AppTab.allCases))
+        XCTAssertEqual(Set(expectedSources.keys), Set(AmbitionsSurface.allCases))
 
-        for tab in AppTab.allCases {
+        for tab in AmbitionsSurface.allCases {
             let navigation = AppNavigationModel(selectedTab: tab)
 
             navigation.presentSurfaceCapture(for: tab)
@@ -364,7 +364,7 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(AppShellCaptureAccessModel.toolbarAccessibilityHint, "Opens the Capture composer for this surface/context.")
 
         XCTAssertEqual(
-            AppTab.allCases.map { AppShellCaptureAccessModel.toolbarAccessibilityIdentifier(for: $0) },
+            AmbitionsSurface.allCases.map { AppShellCaptureAccessModel.toolbarAccessibilityIdentifier(for: $0) },
             [
                 "shell.today.capture-button",
                 "shell.goals.capture-button",
@@ -403,7 +403,7 @@ final class AppShellNavigationTests: XCTestCase {
     func testDebugLaunchConfigurationParsesAllowedInitialSurfaceArguments() {
         let bootstrapper = AppBootstrapper()
 
-        let expected: [(String, AppTab)] = [
+        let expected: [(String, AmbitionsSurface)] = [
             ("today", .today),
             ("goals", .goals),
             ("time", .time),

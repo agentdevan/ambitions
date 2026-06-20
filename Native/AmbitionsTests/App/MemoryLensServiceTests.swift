@@ -312,9 +312,9 @@ final class MemoryLensServiceTests: XCTestCase {
         XCTAssertTrue(results.contains { $0.kind == .goal && $0.trustedSearchHandoffOwner == .goals })
         XCTAssertTrue(results.contains { $0.kind == .week && $0.trustedSearchHandoffOwner == .time })
         XCTAssertTrue(results.contains { $0.kind == .capture && $0.trustedSearchHandoffOwner == .globalCapture })
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("pulse"))
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("plan"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("pulse"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("plan"))
     }
 }
 

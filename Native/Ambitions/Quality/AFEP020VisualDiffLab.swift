@@ -6,7 +6,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .today,
                 surfaceTitle: "Today",
-                primaryObjectTitle: AppTab.today.primaryObjectTitle,
+                primaryObjectTitle: AmbitionsSurface.today.primaryObjectTitle,
                 fixtureKey: "today-reality-meridian",
                 deterministicSeed: "afep020-surface-today",
                 projectionInputName: "today_projection_input",
@@ -16,7 +16,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .goals,
                 surfaceTitle: "Goals",
-                primaryObjectTitle: AppTab.goals.primaryObjectTitle,
+                primaryObjectTitle: AmbitionsSurface.goals.primaryObjectTitle,
                 fixtureKey: "goals-direction-atlas",
                 deterministicSeed: "afep020-surface-goals",
                 projectionInputName: "goals_projection_input",
@@ -26,7 +26,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .time,
                 surfaceTitle: "Time",
-                primaryObjectTitle: AppTab.time.primaryObjectTitle,
+                primaryObjectTitle: AmbitionsSurface.time.primaryObjectTitle,
                 fixtureKey: "time-lifeshape-field",
                 deterministicSeed: "afep020-surface-time",
                 projectionInputName: "time_projection_input",
@@ -36,7 +36,7 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
             AFEP020VisualDiffSurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
-                primaryObjectTitle: AppTab.you.primaryObjectTitle,
+                primaryObjectTitle: AmbitionsSurface.you.primaryObjectTitle,
                 fixtureKey: "you-personal-runtime",
                 deterministicSeed: "afep020-surface-you",
                 projectionInputName: "you_projection_input",
@@ -203,11 +203,11 @@ struct AFEP020VisualDiffLab: Sendable, Equatable {
     func validationFailures() -> [String] {
         var failures: [String] = []
 
-        if surfaceFixtures.map(\.tab) != AppTab.allCases {
+        if surfaceFixtures.map(\.tab) != AmbitionsSurface.allCases {
             failures.append("visual diff lab surface fixtures must cover all active top-level surfaces in order")
         }
 
-        for tab in AppTab.allCases {
+        for tab in AmbitionsSurface.allCases {
             guard let surface = surfaceFixtures.first(where: { $0.tab == tab }) else {
                 failures.append("visual diff lab is missing a surface fixture for \(tab.title)")
                 continue

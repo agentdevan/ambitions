@@ -3,14 +3,14 @@ import XCTest
 
 final class ShellPreviewMatrixTests: XCTestCase {
     func testAFRI005PreviewMatrixCoversCanonicalTabsAndRequiredVisualVariants() {
-        XCTAssertEqual(ShellPreviewMatrix.canonicalTabs, AppTab.allCases)
-        XCTAssertEqual(ShellPreviewMatrix.rows.count, AppTab.allCases.count * ShellPreviewMatrix.variants.count)
+        XCTAssertEqual(ShellPreviewMatrix.canonicalTabs, AmbitionsSurface.allCases)
+        XCTAssertEqual(ShellPreviewMatrix.rows.count, AmbitionsSurface.allCases.count * ShellPreviewMatrix.variants.count)
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.colorAppearance == .dark })
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.colorAppearance == .oled })
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.dynamicTypeCategory.contains("Accessibility") })
         XCTAssertTrue(ShellPreviewMatrix.variants.contains { $0.reduceMotion })
         XCTAssertTrue(ShellPreviewMatrix.validationFailures().isEmpty)
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
     }
 
     func testAFRI005PreviewMatrixCoversMajorShellStates() {
@@ -36,7 +36,7 @@ final class ShellPreviewMatrixTests: XCTestCase {
     func testAFEP020VisualDiffLabCoversAllCanonicalSurfaces() {
         let lab = ShellPreviewMatrix.visualDiffLab
 
-        XCTAssertEqual(lab.surfaceFixtures.map(\.tab), AppTab.allCases)
+        XCTAssertEqual(lab.surfaceFixtures.map(\.tab), AmbitionsSurface.allCases)
         XCTAssertEqual(lab.rows.count, lab.surfaceFixtures.count * lab.variantDimensions.count)
         XCTAssertEqual(Set(lab.surfaceFixtures.map(\.fixtureKey)).count, lab.surfaceFixtures.count)
         XCTAssertEqual(Set(lab.rows.map(\.id)).count, lab.rows.count)
@@ -109,9 +109,9 @@ final class ShellPreviewMatrixTests: XCTestCase {
     func testAFEP021AccessibilityCertificationProgramCoversCanonicalSurfacesAndPrimaryObjects() {
         let program = ShellPreviewMatrix.accessibilityCertificationProgram
 
-        XCTAssertEqual(program.surfaceFixtures.map(\.tab), AppTab.allCases)
-        XCTAssertEqual(program.surfaceFixtures.map(\.surfaceTitle), AppTab.allCases.map(\.title))
-        XCTAssertEqual(program.surfaceFixtures.map(\.primaryObjectTitle), AppTab.allCases.map(\.primaryObjectTitle))
+        XCTAssertEqual(program.surfaceFixtures.map(\.tab), AmbitionsSurface.allCases)
+        XCTAssertEqual(program.surfaceFixtures.map(\.surfaceTitle), AmbitionsSurface.allCases.map(\.title))
+        XCTAssertEqual(program.surfaceFixtures.map(\.primaryObjectTitle), AmbitionsSurface.allCases.map(\.primaryObjectTitle))
         XCTAssertEqual(program.rows.count, program.surfaceFixtures.count * program.gateMatrix.count)
         XCTAssertTrue(program.validationFailures().isEmpty)
     }
@@ -148,7 +148,7 @@ final class ShellPreviewMatrixTests: XCTestCase {
     func testAFEP021AccessibilityCertificationProgramEvidencePacketsRecordCommandsArtifactsStatesAndFollowUps() {
         let program = ShellPreviewMatrix.accessibilityCertificationProgram
 
-        XCTAssertEqual(Set(program.evidencePackets.map(\.surface)), Set(AppTab.allCases.map(\.title)))
+        XCTAssertEqual(Set(program.evidencePackets.map(\.surface)), Set(AmbitionsSurface.allCases.map(\.title)))
         XCTAssertEqual(Set(program.evidencePackets.map(\.fixtureState)), Set(program.surfaceFixtures.map(\.fixtureState)))
         XCTAssertTrue(program.evidencePackets.contains { $0.result == .pass })
         XCTAssertTrue(program.evidencePackets.contains { $0.result == .skipped })

@@ -1,7 +1,7 @@
 import Foundation
 
 enum AppExternalRoute: Equatable, Sendable {
-    case openTab(AppTab)
+    case openTab(AmbitionsSurface)
     case openCaptureComposer
     case openToday(TodayEntryContext)
     case openGoalDetail(goalID: String)

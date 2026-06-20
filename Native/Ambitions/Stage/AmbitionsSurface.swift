@@ -1,6 +1,6 @@
 import Foundation
 
-enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
+enum AmbitionsSurface: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     typealias RawValue = String
 
     case today
@@ -8,7 +8,7 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     case time
     case you
 
-    static var allCases: [AppTab] {
+    static var allCases: [AmbitionsSurface] {
         [.today, .goals, .time, .you]
     }
 
@@ -27,7 +27,7 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         let rawValue = try container.decode(String.self)
-        if let tab = AppTab(rawValue: rawValue) {
+        if let tab = AmbitionsSurface(rawValue: rawValue) {
             self = tab
             return
         }
@@ -51,12 +51,12 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
         }
     }
 
-    var canonicalTopLevelTab: AppTab {
+    var canonicalTopLevelTab: AmbitionsSurface {
         self
     }
 
     var isCanonicalTopLevel: Bool {
-        AppTab.allCases.contains(self) && self == canonicalTopLevelTab
+        AmbitionsSurface.allCases.contains(self) && self == canonicalTopLevelTab
     }
 
     var title: String {
@@ -87,13 +87,13 @@ enum AppTab: CaseIterable, Hashable, Identifiable, Codable, RawRepresentable {
 }
 
 struct AmbitionsSurfaceContract: Hashable, Sendable {
-    let tab: AppTab
+    let tab: AmbitionsSurface
     let title: String
     let primaryObjectTitle: String
     let runtimeInspectionRequirements: [String]
 
     init(
-        tab: AppTab,
+        tab: AmbitionsSurface,
         title: String,
         primaryObjectTitle: String,
         runtimeInspectionRequirements: [String] = AmbitionsSurfaceContractRegistry.runtimeInspectionRequirements
@@ -120,7 +120,7 @@ enum AmbitionsSurfaceContractRegistry {
         AmbitionsSurfaceContract(tab: .you, title: "You", primaryObjectTitle: "User System Profile")
     ]
 
-    static func contract(for tab: AppTab) -> AmbitionsSurfaceContract {
+    static func contract(for tab: AmbitionsSurface) -> AmbitionsSurfaceContract {
         guard let contract = canonicalContracts.first(where: { $0.tab == tab }) else {
             preconditionFailure("Missing Ambitions surface contract for \(tab.rawValue)")
         }
@@ -130,15 +130,15 @@ enum AmbitionsSurfaceContractRegistry {
     static func validate(_ contracts: [AmbitionsSurfaceContract] = canonicalContracts) -> [String] {
         var issues: [String] = []
 
-        if contracts.map(\.tab) != AppTab.allCases {
+        if contracts.map(\.tab) != AmbitionsSurface.allCases {
             issues.append("Surface contracts must follow Today, Goals, Time, You.")
         }
 
-        if contracts.map(\.title) != AppTab.allCases.map(\.title) {
+        if contracts.map(\.title) != AmbitionsSurface.allCases.map(\.title) {
             issues.append("Surface contract titles must match active app tab titles.")
         }
 
-        for tab in AppTab.allCases {
+        for tab in AmbitionsSurface.allCases {
             guard let contract = contracts.first(where: { $0.tab == tab }) else {
                 issues.append("Missing surface contract for \(tab.title).")
                 continue
@@ -161,7 +161,7 @@ enum AmbitionsSurfaceContractRegistry {
         return issues
     }
 
-    private static func canonicalPrimaryObjectTitle(for tab: AppTab) -> String {
+    private static func canonicalPrimaryObjectTitle(for tab: AmbitionsSurface) -> String {
         switch tab {
         case .today: "Reality Meridian"
         case .goals: "Constellation Atlas"

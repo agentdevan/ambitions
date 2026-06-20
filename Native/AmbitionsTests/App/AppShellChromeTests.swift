@@ -19,17 +19,17 @@ final class AppShellChromeTests: XCTestCase {
 
     func testMissionControlLaneLabelsDoNotCreateTopLevelTabs() {
         XCTAssertEqual(AmbitionMissionLane.allCases.map(\.title), ["Overview", "Path", "Steps", "Proof", "Decisions", "Risks", "Archive"])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("plan"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains { $0.localizedCaseInsensitiveContains("plan") })
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("plan"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Capture"))
     }
 
     func testAppTabSequenceMatchesCanonicalShellContract() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertEqual(AppTab.allCases.map(\.rawValue), ["today", "goals", "time", "you"])
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
-        XCTAssertEqual(Set(AppTab.allCases.map(\.title)).count, AppTab.allCases.count)
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.rawValue), ["today", "goals", "time", "you"])
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Capture"))
+        XCTAssertEqual(Set(AmbitionsSurface.allCases.map(\.title)).count, AmbitionsSurface.allCases.count)
     }
 
     func testShellIdentifiersStayStableForMeridianDestinations() {
@@ -121,7 +121,7 @@ final class AppShellChromeTests: XCTestCase {
             XCTAssertTrue(AmbitionAmbientStatus.allCases.contains(kind.defaultStatus))
         }
 
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(AppMeridianDestination.all.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(
             AppMeridianDestination.all.map(\.accessibilityIdentifier),

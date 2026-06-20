@@ -6,7 +6,7 @@ import Observation
 @Observable
 final class YouViewModel {
     var state: AsyncViewState<YouDashboard>
-    var preferredTab: AppTab
+    var preferredTab: AmbitionsSurface
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
     var reviewCadenceDays: Int

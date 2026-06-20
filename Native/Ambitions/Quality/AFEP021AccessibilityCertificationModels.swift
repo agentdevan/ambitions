@@ -11,7 +11,7 @@ struct AFEP021AccessibilityCertificationRow: Identifiable, Sendable, Equatable {
 }
 
 struct AFEP021AccessibilitySurfaceFixture: Identifiable, Sendable, Equatable {
-    let tab: AppTab
+    let tab: AmbitionsSurface
     let surfaceTitle: String
     let primaryObjectTitle: String
     let fixtureState: String

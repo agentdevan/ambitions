@@ -12,7 +12,7 @@ struct YouRootDetailSheet: View {
     let dashboard: YouDashboard?
     @Binding var appearancePreference: AppAppearancePreference
     @Binding var accentFamily: AmbitionAccentFamily
-    @Binding var preferredTab: AppTab
+    @Binding var preferredTab: AmbitionsSurface
     @Binding var reviewCadenceDays: Int
     let isSaving: Bool
     let hasUnsavedChanges: Bool

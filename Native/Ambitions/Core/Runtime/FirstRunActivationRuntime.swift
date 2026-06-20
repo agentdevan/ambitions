@@ -333,7 +333,7 @@ private extension FirstRunActivationRuntime {
             recommendedStepID: recommendedStep.id,
             recoveryOptionID: recoveryOption.id,
             continuitySummary: continuitySummary,
-            topLevelTabs: AppTab.allCases.map(\.title),
+            topLevelTabs: AmbitionsSurface.allCases.map(\.title),
             captureRole: "global action",
             sourceRecordIDs: normalizedIDs(
                 firstGoal.sourceRecordIDs +

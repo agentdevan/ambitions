@@ -10,7 +10,7 @@ struct LaunchGateView: View {
             case .idle, .launching:
                 loadingView
             case let .ready(container):
-                AmbitionsRootView(container: container)
+                AmbitionsStageHost(container: container)
             case let .failed(message):
                 failureView(message: message)
             }

@@ -226,7 +226,7 @@ private extension StorageInvariantCheckerTests {
     static func orphanAppStateRecord() -> AppStateRecord {
         AppStateRecord(
             id: "default",
-            preferredTabRaw: AppTab.today.rawValue,
+            preferredTabRaw: AmbitionsSurface.today.rawValue,
             userDisplayName: "Taylor",
             appearancePreferenceRaw: AppAppearancePreference.system.rawValue,
             accentFamilyRaw: AmbitionAccentFamily.sage.rawValue,

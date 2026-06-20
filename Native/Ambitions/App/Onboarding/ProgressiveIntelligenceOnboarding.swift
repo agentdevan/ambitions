@@ -3,7 +3,7 @@ import SwiftUI
 
 struct OnboardingRouteDecision: Sendable, Equatable {
     let choice: OnboardingEntryChoice
-    let selectedTab: AppTab
+    let selectedTab: AmbitionsSurface
     let overlayIntent: ShellCommandIntent?
     let overlaySource: ShellCommandEntrySource?
     let presentationContext: ShellCommandPresentationContext
@@ -146,7 +146,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
                 choice: .enterToday,
                 title: todayPromise.primaryActionTitle ?? todayPromise.title,
                 subtitle: todayPromise.explanation,
-                icon: AppTab.today.systemImage
+                icon: AmbitionsSurface.today.systemImage
             )
         }
     }
@@ -327,7 +327,7 @@ struct ProgressiveIntelligenceOnboardingView: View {
         switch selectedChoice {
         case .createFirstGoal: "target"
         case .captureFirst: "tray.and.arrow.down"
-        case .enterToday: AppTab.today.systemImage
+        case .enterToday: AmbitionsSurface.today.systemImage
         }
     }
 

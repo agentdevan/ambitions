@@ -40,7 +40,7 @@ struct AppShellContextualToolbarAction: Hashable, Identifiable, Sendable {
 enum AppShellContextualToolbarCatalog {
     static let maxOneViewportActions = 2
 
-    static func actions(for tab: AppTab) -> [AppShellContextualToolbarAction] {
+    static func actions(for tab: AmbitionsSurface) -> [AppShellContextualToolbarAction] {
         let canonicalTab = tab.canonicalTopLevelTab
         return [primaryAction(for: canonicalTab), captureAction(for: canonicalTab)]
     }
@@ -50,10 +50,10 @@ enum AppShellContextualToolbarCatalog {
     }
 
     static var canonicalSurfaceCoverage: [String] {
-        AppTab.allCases.map(\.title)
+        AmbitionsSurface.allCases.map(\.title)
     }
 
-    private static func primaryAction(for tab: AppTab) -> AppShellContextualToolbarAction {
+    private static func primaryAction(for tab: AmbitionsSurface) -> AppShellContextualToolbarAction {
         switch tab.canonicalTopLevelTab {
         case .today:
             return AppShellContextualToolbarAction(
@@ -94,7 +94,7 @@ enum AppShellContextualToolbarCatalog {
         }
     }
 
-    private static func captureAction(for tab: AppTab) -> AppShellContextualToolbarAction {
+    private static func captureAction(for tab: AmbitionsSurface) -> AppShellContextualToolbarAction {
         AppShellContextualToolbarAction(
             id: "\(tab.canonicalTopLevelTab.rawValue)-capture",
             kind: .captureFallback,
@@ -115,7 +115,7 @@ enum AppShellCaptureAccessModel {
     static let activatedSeamAccessibilityLabel = "Capture composer"
     static let activatedSeamAccessibilityHint = "Capture is active for this surface/context."
 
-    static func source(for tab: AppTab) -> ShellCommandEntrySource {
+    static func source(for tab: AmbitionsSurface) -> ShellCommandEntrySource {
         switch tab.canonicalTopLevelTab {
         case .today:
             .todayQuickCapture
@@ -128,7 +128,7 @@ enum AppShellCaptureAccessModel {
         }
     }
 
-    static func toolbarAccessibilityIdentifier(for tab: AppTab) -> String {
+    static func toolbarAccessibilityIdentifier(for tab: AmbitionsSurface) -> String {
         "shell.\(tab.canonicalTopLevelTab.rawValue).capture-button"
     }
 }

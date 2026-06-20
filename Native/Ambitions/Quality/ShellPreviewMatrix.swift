@@ -1,7 +1,7 @@
 import Foundation
 
 struct ShellPreviewMatrix: Sendable {
-    static let canonicalTabs: [AppTab] = AppTab.allCases
+    static let canonicalTabs: [AmbitionsSurface] = AmbitionsSurface.allCases
     static let visualDiffLab = AFEP020VisualDiffLab.default
     static let accessibilityCertificationProgram = AFEP021AccessibilityCertificationProgram.default
 
@@ -68,7 +68,7 @@ struct ShellPreviewMatrix: Sendable {
     static func validationFailures() -> [String] {
         var failures: [String] = []
         let tabs = Set(canonicalTabs)
-        if tabs != Set(AppTab.allCases) {
+        if tabs != Set(AmbitionsSurface.allCases) {
             failures.append("canonical tabs must match active top-level tabs")
         }
         if !variants.contains(where: { $0.colorAppearance == .dark }) {
@@ -96,7 +96,7 @@ struct ShellPreviewMatrix: Sendable {
 }
 
 struct ShellPreviewMatrixRow: Identifiable, Sendable, Equatable {
-    let tab: AppTab
+    let tab: AmbitionsSurface
     let variant: ShellPreviewVariant
 
     var id: String {

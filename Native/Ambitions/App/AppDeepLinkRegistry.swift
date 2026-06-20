@@ -11,7 +11,7 @@ struct AppDeepLinkRegistryEntry: Equatable, Identifiable, Sendable {
     }
 
     enum Owner: Equatable, Sendable {
-        case tab(AppTab)
+        case tab(AmbitionsSurface)
         case globalComposer
 
         var isCanonical: Bool {

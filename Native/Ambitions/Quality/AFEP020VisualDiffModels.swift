@@ -12,7 +12,7 @@ struct AFEP020VisualDiffLabRow: Identifiable, Sendable, Equatable {
 }
 
 struct AFEP020VisualDiffSurfaceFixture: Identifiable, Sendable, Equatable {
-    let tab: AppTab
+    let tab: AmbitionsSurface
     let surfaceTitle: String
     let primaryObjectTitle: String
     let fixtureKey: String

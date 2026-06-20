@@ -17,7 +17,7 @@ enum ToolbarPreviewCatalog {
     static let claimsScreenshotProof = false
     static let claimsAccessibilityApproval = false
 
-    static let fixtures: [ToolbarPreviewFixture] = AppTab.allCases.map { tab in
+    static let fixtures: [ToolbarPreviewFixture] = AmbitionsSurface.allCases.map { tab in
         let actions = AppShellContextualToolbarCatalog.actions(for: tab)
         return ToolbarPreviewFixture(
             id: "toolbar-\(tab.rawValue)",
@@ -50,7 +50,7 @@ enum ToolbarPreviewCatalog {
         fixtures.allSatisfy(\.noDestructiveActionWithoutConfirmation)
     }
 
-    private static func primaryObject(for tab: AppTab) -> String {
+    private static func primaryObject(for tab: AmbitionsSurface) -> String {
         switch tab {
         case .today: "Reality Meridian / Start here"
         case .goals: "Constellation Atlas"

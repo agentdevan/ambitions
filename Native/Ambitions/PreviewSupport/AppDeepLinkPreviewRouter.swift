@@ -5,7 +5,7 @@ struct AppDeepLinkPreviewRoute: Identifiable, Sendable, Equatable {
     let title: String
     let route: AppExternalRoute
     let source: AppExternalRouteSource
-    let expectedTab: AppTab
+    let expectedTab: AmbitionsSurface
     let privacyBoundary: String
 }
 
@@ -14,7 +14,7 @@ struct AppDeepLinkPreviewRouter {
     let navigation: AppNavigationModel
     let router: DefaultAppExternalRouter
 
-    init(initialTab: AppTab = .today) {
+    init(initialTab: AmbitionsSurface = .today) {
         let navigation = AppNavigationModel(selectedTab: initialTab)
         self.navigation = navigation
         router = DefaultAppExternalRouter(navigation: navigation)

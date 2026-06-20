@@ -113,7 +113,7 @@ extension RepositoryMapping {
 
         return AppStateSnapshot(
             id: record.id,
-            preferredTab: persisted(AppTab.self, rawValue: record.preferredTabRaw, fallback: .today, storedTypeName: "AppStateRecord", fieldName: "preferredTabRaw"),
+            preferredTab: persisted(AmbitionsSurface.self, rawValue: record.preferredTabRaw, fallback: .today, storedTypeName: "AppStateRecord", fieldName: "preferredTabRaw"),
             userDisplayName: record.userDisplayName,
             appearancePreference: persisted(AppAppearancePreference.self, rawValue: record.appearancePreferenceRaw, fallback: .system, storedTypeName: "AppStateRecord", fieldName: "appearancePreferenceRaw"),
             accentFamily: persistedOptional(AmbitionAccentFamily.self, rawValue: record.accentFamilyRaw, storedTypeName: "AppStateRecord", fieldName: "accentFamilyRaw") ?? .sage,

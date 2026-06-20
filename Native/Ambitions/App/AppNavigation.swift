@@ -6,7 +6,7 @@ import Observation
 final class AppNavigationModel {
     private static let tabReselectionRootThreshold: TimeInterval = 0.8
 
-    var selectedTab: AppTab
+    var selectedTab: AmbitionsSurface
     var goalsPath: [GoalRouteTarget]
     var timePath: [TimeRouteTarget]
     var youPath: [YouRouteTarget]
@@ -43,10 +43,10 @@ final class AppNavigationModel {
             overlayPresentation: stageOverlayPresentation
         )
     }
-    private var lastReselectedTopLevelTab: AppTab?
+    private var lastReselectedTopLevelTab: AmbitionsSurface?
     private var lastTopLevelTabReselectionDate: Date?
 
-    init(selectedTab: AppTab) {
+    init(selectedTab: AmbitionsSurface) {
         self.selectedTab = selectedTab.canonicalTopLevelTab
         goalsPath = []
         timePath = []
@@ -62,7 +62,7 @@ final class AppNavigationModel {
         lastTopLevelTabReselectionDate = nil
     }
 
-    func selectTab(_ tab: AppTab) {
+    func selectTab(_ tab: AmbitionsSurface) {
         dismissOverlay()
         selectedTab = tab.canonicalTopLevelTab
         if selectedTab != .today {
@@ -71,7 +71,7 @@ final class AppNavigationModel {
     }
 
     @discardableResult
-    func selectRootSurfaceFromDock(_ tab: AppTab, now: Date = .now) -> TopLevelTabReselectionAction? {
+    func selectRootSurfaceFromDock(_ tab: AmbitionsSurface, now: Date = .now) -> TopLevelTabReselectionAction? {
         let canonicalTab = tab.canonicalTopLevelTab
         let hadOverlay = activeOverlay != nil
         if hadOverlay {
@@ -219,7 +219,7 @@ final class AppNavigationModel {
         )
     }
 
-    func presentSurfaceCapture(for tab: AppTab) {
+    func presentSurfaceCapture(for tab: AmbitionsSurface) {
         presentCommandSheet(
             intent: .quickCapture,
             source: AppShellCaptureAccessModel.source(for: tab),
@@ -354,7 +354,7 @@ final class AppNavigationModel {
         recentCommandHistory = Array(recentCommandHistory.prefix(4))
     }
 
-    private func resetRoot(for tab: AppTab) {
+    private func resetRoot(for tab: AmbitionsSurface) {
         switch tab {
         case .today:
             todayEntryContext = .standard

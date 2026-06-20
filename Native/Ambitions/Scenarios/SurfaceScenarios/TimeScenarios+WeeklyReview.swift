@@ -12,7 +12,7 @@ extension PreviewTimeScenarios {
             continuityLabel: "Return to the week with a calmer shape, not a larger list.",
             contextPills: [
                 TimeHeroPillState(title: "Apr 20-Apr 26", icon: "calendar", state: .default),
-                TimeHeroPillState(title: "Tight", icon: AppTab.time.systemImage, state: .selected),
+                TimeHeroPillState(title: "Tight", icon: AmbitionsSurface.time.systemImage, state: .selected),
                 TimeHeroPillState(title: "3 carry-forward lanes", icon: "arrow.triangle.branch", state: .selected)
             ]
         ),

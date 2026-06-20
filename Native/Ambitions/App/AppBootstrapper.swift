@@ -150,7 +150,7 @@ final class AppBootstrapper {
         }
     }
 
-    private var validCanonicalInitialSurfaces: [String: AppTab] {
+    private var validCanonicalInitialSurfaces: [String: AmbitionsSurface] {
         [
             "today": .today,
             "goals": .goals,
@@ -160,7 +160,7 @@ final class AppBootstrapper {
 
     struct DebugLaunchConfiguration: Equatable {
         let screenshotModeEnabled: Bool
-        let initialSurface: AppTab?
+        let initialSurface: AmbitionsSurface?
     }
 
     private func launchConfiguration(

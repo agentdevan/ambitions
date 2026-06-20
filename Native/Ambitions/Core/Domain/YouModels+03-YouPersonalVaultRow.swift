@@ -191,7 +191,7 @@ struct YouSectionGroup: Sendable, Equatable {
 }
 
 struct YouPreferencesState: Sendable, Equatable {
-    let preferredTab: AppTab
+    let preferredTab: AmbitionsSurface
     let appearancePreference: AppAppearancePreference
     let accentFamily: AmbitionAccentFamily
     let reviewCadenceDays: Int
@@ -199,7 +199,7 @@ struct YouPreferencesState: Sendable, Equatable {
 }
 
 struct YouPreferencesUpdate: Sendable, Equatable {
-    let preferredTab: AppTab
+    let preferredTab: AmbitionsSurface
     let appearancePreference: AppAppearancePreference
     let accentFamily: AmbitionAccentFamily
     let reviewCadenceDays: Int

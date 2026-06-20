@@ -70,7 +70,7 @@ struct ShellTrustedSearchHandoff: Hashable, Identifiable, Sendable {
 }
 
 enum ShellCommandDestination: Hashable, Sendable {
-    case tab(AppTab)
+    case tab(AmbitionsSurface)
     case goal(String)
     case timeRoute(TimeRouteTarget)
     case youRoute(YouRouteTarget)

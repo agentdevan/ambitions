@@ -419,9 +419,9 @@ final class YouFeatureServiceTests: XCTestCase {
             $0.id == "vacation-away-time" &&
             $0.statusLabel == "Unavailable"
         }))
-        XCTAssertTrue(AppTab.allCases.map(\.title).contains("You"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+        XCTAssertTrue(AmbitionsSurface.allCases.map(\.title).contains("You"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Insights"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Habits"))
     }
 
     func testAFRI027YouProjectsInspectableUserSystemProfileControls() async throws {
@@ -615,7 +615,7 @@ final class YouFeatureServiceTests: XCTestCase {
         XCTAssertEqual(dashboard.reviews.projection.lifeOSReceipt.statusLabel, "Based on recent actions")
         XCTAssertTrue(dashboard.reviews.projection.lifeOSReceipt.meaningfulEvents.contains(where: { $0.valueLabel == "Completed" }))
         XCTAssertTrue(dashboard.reviews.footer.contains("does not restore Insights as a tab"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Insights"))
         XCTAssertTrue(dashboard.reviews.projection.period.trustWhisper.contains("No live sync"))
         XCTAssertFalse(dashboard.reviews.projection.period.trustWhisper.localizedCaseInsensitiveContains("synced everywhere"))
         XCTAssertFalse(dashboard.reviews.projection.period.trustWhisper.localizedCaseInsensitiveContains("verified accessible"))
@@ -2027,12 +2027,12 @@ final class YouFeatureServiceTests: XCTestCase {
     }
 
     func testTopLevelShellStillExcludesLegacyYouInsightsAndHabitsTabs() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertTrue(AppTab.allCases.map(\.title).contains("You"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Motion"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertTrue(AmbitionsSurface.allCases.map(\.title).contains("You"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Motion"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Profile"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Insights"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Habits"))
     }
 }
 

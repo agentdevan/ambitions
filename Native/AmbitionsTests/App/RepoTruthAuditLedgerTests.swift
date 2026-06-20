@@ -5,7 +5,7 @@ final class RepoTruthAuditLedgerTests: XCTestCase {
     func testAuditEntryRoundTripsThroughJSON() throws {
         let entry = RepoTruthAuditEntry(
             id: "native-ambitions-app-apptab-swift",
-            path: "Native/Ambitions/App/AppTab.swift",
+            path: "Native/Ambitions/App/AmbitionsSurface.swift",
             currentResponsibility: "Canonical four-surface shell registry plus legacy route compatibility.",
             canonicalLayer: .app,
             productOwner: .stageShell,
@@ -25,7 +25,7 @@ final class RepoTruthAuditLedgerTests: XCTestCase {
 
         XCTAssertEqual(decoded, entry)
         XCTAssertEqual(decoded.id, "native-ambitions-app-apptab-swift")
-        XCTAssertEqual(decoded.path, "Native/Ambitions/App/AppTab.swift")
+        XCTAssertEqual(decoded.path, "Native/Ambitions/App/AmbitionsSurface.swift")
     }
 
     func testAuditVocabulariesDoNotExposeUnknownCases() {

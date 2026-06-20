@@ -1,15 +1,15 @@
 import Foundation
 
 struct AppMeridianDestination: Equatable, Identifiable {
-    let tab: AppTab
+    let tab: AmbitionsSurface
     let title: String
     let systemImage: String
     let accessibilityIdentifier: String
 
-    var id: AppTab { tab }
+    var id: AmbitionsSurface { tab }
 
     static var all: [AppMeridianDestination] {
-        AppTab.allCases.map { tab in
+        AmbitionsSurface.allCases.map { tab in
             AppMeridianDestination(
                 tab: tab,
                 title: tab.title,

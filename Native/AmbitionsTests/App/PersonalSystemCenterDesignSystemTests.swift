@@ -73,9 +73,9 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
 
         XCTAssertEqual(sections.map(\.id), ["trust-memory"])
         XCTAssertEqual(sections.flatMap(\.items).map(\.title), ["Trust Center"])
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Habits"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Profile"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Insights"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Habits"))
     }
 
     func testFE04PrimitiveRolesBindYouAsThePersonalSystemCenter() {

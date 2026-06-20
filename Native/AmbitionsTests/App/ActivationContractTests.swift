@@ -31,9 +31,9 @@ final class ActivationContractTests: XCTestCase {
         let rules = ActivationSurface.allCases.map { ActivationContract.emptyStateRule(for: $0) }
 
         XCTAssertEqual(rules.map(\.surface), [.today, .goals, .time, .you])
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
-        XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), AppTab.allCases.map(\.title))
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertEqual(ActivationContract.onboardingSurfaceRows.map(\.title), AmbitionsSurface.allCases.map(\.title))
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .time).surface.title, "Time")
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .time).secondaryAction?.routingHint, .quickCapture)
         XCTAssertEqual(ActivationContract.emptyStateRule(for: .you).primaryAction.routingHint, .profileTrust)

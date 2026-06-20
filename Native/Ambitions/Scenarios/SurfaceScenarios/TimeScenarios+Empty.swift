@@ -14,7 +14,7 @@ extension PreviewTimeScenarios {
             pressureSummary: "There is no active outside pressure asking the week to harden yet.",
             contextPills: [
                 TimeHeroPillState(title: "Apr 20-Apr 26", icon: "calendar", state: .default),
-                TimeHeroPillState(title: "Open", icon: AppTab.time.systemImage, state: .default),
+                TimeHeroPillState(title: "Open", icon: AmbitionsSurface.time.systemImage, state: .default),
                 TimeHeroPillState(title: "0/1 goals visible", icon: "target", state: .default)
             ],
             trustWhisper: "This quiet week is real because nothing active is asking it to carry more."

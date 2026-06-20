@@ -45,7 +45,7 @@ final class ScreenContractRegistryTests: XCTestCase {
     }
 
     func testD10TopLevelContractsMatchCanonicalFourSurfaceShell() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ScreenContractValidator.canonicalTopLevelTabs)
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ScreenContractValidator.canonicalTopLevelTabs)
         XCTAssertEqual(
             ScreenContractRegistry.contracts.compactMap(\.canonicalTopLevelTitle),
             ScreenContractValidator.canonicalTopLevelTabs

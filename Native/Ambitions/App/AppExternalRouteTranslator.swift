@@ -43,7 +43,7 @@ struct AppExternalRouteTranslator {
 
         if host == "tab" || host == "tabs" {
             let rawTab = pathSegments.first ?? query["name"] ?? query["tab"]
-            if let rawTab, let tab = AppTab(rawValue: rawTab) {
+            if let rawTab, let tab = AmbitionsSurface(rawValue: rawTab) {
                 let context = query["context"].flatMap(TodayEntryContext.init(rawValue:))
                 if tab == .today, let context, context != .standard {
                     return .openToday(context)
@@ -107,7 +107,7 @@ struct AppExternalRouteTranslator {
         }
         if let tabRaw = payload.values["tab"]?.lowercased() {
             let context = payload.values["context"].flatMap(TodayEntryContext.init(rawValue:))
-            if let tab = AppTab(rawValue: tabRaw) {
+            if let tab = AmbitionsSurface(rawValue: tabRaw) {
                 if tab == .today, let context, context != .standard {
                     return .openToday(context)
                 }
@@ -129,7 +129,7 @@ struct AppExternalRouteTranslator {
         }
         if let tabRaw = payload.values["tab"]?.lowercased() {
             let context = payload.values["context"].flatMap(TodayEntryContext.init(rawValue:))
-            if let tab = AppTab(rawValue: tabRaw) {
+            if let tab = AmbitionsSurface(rawValue: tabRaw) {
                 if tab == .today, let context, context != .standard {
                     return .openToday(context)
                 }
@@ -213,7 +213,7 @@ struct AppExternalRouteTranslator {
     }
 
     func route(fromContinuation token: ExternalObjectContinuationToken) -> AppExternalRoute {
-        let fallbackTab = (AppTab(rawValue: token.root.rawValue) ?? .today).canonicalTopLevelTab
+        let fallbackTab = (AmbitionsSurface(rawValue: token.root.rawValue) ?? .today).canonicalTopLevelTab
         guard token.metadataClass == .exactReopen else {
             return .openTab(fallbackTab)
         }

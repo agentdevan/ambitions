@@ -6,7 +6,7 @@ final class ContextualToolbarStateTests: XCTestCase {
         XCTAssertEqual(AppShellContextualToolbarCatalog.canonicalSurfaceCoverage, ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(ToolbarPreviewCatalog.coveredSurfaces, AppShellContextualToolbarCatalog.canonicalSurfaceCoverage)
 
-        for tab in AppTab.allCases {
+        for tab in AmbitionsSurface.allCases {
             let actions = AppShellContextualToolbarCatalog.actions(for: tab)
             XCTAssertEqual(actions.count, 2)
             XCTAssertEqual(actions.last?.kind, .captureFallback)
@@ -49,7 +49,7 @@ final class ContextualToolbarStateTests: XCTestCase {
     func testNoDestructiveActionWithoutConfirmationBoundaryIsPreserved() {
         XCTAssertTrue(ToolbarPreviewCatalog.preservesNoDestructiveActionBoundary)
 
-        for tab in AppTab.allCases {
+        for tab in AmbitionsSurface.allCases {
             for action in AppShellContextualToolbarCatalog.actions(for: tab) {
                 XCTAssertFalse(action.requiresConfirmationBeforeDestructiveEffect)
             }

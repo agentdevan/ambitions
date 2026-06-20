@@ -6,7 +6,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .today,
                 surfaceTitle: "Today",
-                primaryObjectTitle: AppTab.today.primaryObjectTitle,
+                primaryObjectTitle: AmbitionsSurface.today.primaryObjectTitle,
                 fixtureState: "today-reality-meridian",
                 deterministicSeed: "afep021-surface-today",
                 projectionInputName: "today_accessibility_projection_input",
@@ -16,7 +16,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .goals,
                 surfaceTitle: "Goals",
-                primaryObjectTitle: AppTab.goals.primaryObjectTitle,
+                primaryObjectTitle: AmbitionsSurface.goals.primaryObjectTitle,
                 fixtureState: "goals-direction-atlas",
                 deterministicSeed: "afep021-surface-goals",
                 projectionInputName: "goals_accessibility_projection_input",
@@ -26,7 +26,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .time,
                 surfaceTitle: "Time",
-                primaryObjectTitle: AppTab.time.primaryObjectTitle,
+                primaryObjectTitle: AmbitionsSurface.time.primaryObjectTitle,
                 fixtureState: "time-lifeshape-field",
                 deterministicSeed: "afep021-surface-time",
                 projectionInputName: "time_accessibility_projection_input",
@@ -36,7 +36,7 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
             AFEP021AccessibilitySurfaceFixture(
                 tab: .you,
                 surfaceTitle: "You",
-                primaryObjectTitle: AppTab.you.primaryObjectTitle,
+                primaryObjectTitle: AmbitionsSurface.you.primaryObjectTitle,
                 fixtureState: "you-personal-runtime",
                 deterministicSeed: "afep021-surface-you",
                 projectionInputName: "you_accessibility_projection_input",
@@ -256,11 +256,11 @@ struct AFEP021AccessibilityCertificationProgram: Sendable, Equatable {
     func validationFailures() -> [String] {
         var failures: [String] = []
 
-        if surfaceFixtures.map(\.tab) != AppTab.allCases {
+        if surfaceFixtures.map(\.tab) != AmbitionsSurface.allCases {
             failures.append("accessibility certification surfaces must cover all active top-level surfaces in order")
         }
 
-        for tab in AppTab.allCases {
+        for tab in AmbitionsSurface.allCases {
             guard let surface = surfaceFixtures.first(where: { $0.tab == tab }) else {
                 failures.append("accessibility certification program is missing a surface fixture for \(tab.title)")
                 continue

@@ -582,7 +582,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertEqual(ritualLane.title, "Rituals")
         XCTAssertTrue(timeCopy.localizedCaseInsensitiveContains("ritual"))
         XCTAssertFalse(timeCopy.localizedCaseInsensitiveContains("habit"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("TimeRituals"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("TimeRituals"))
         #else
         throw XCTSkip("Demo bootstrap fixtures are only available in DEBUG builds.")
         #endif
@@ -1251,11 +1251,11 @@ final class TimeProjectionServiceTests: XCTestCase {
     }
 
     func testTopLevelIARemainsCanonicalFourTabShell() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Insights"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Captures"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Insights"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Profile"))
     }
 
     func testD15TimeSurfaceContractSnapshotSatisfiesImplementationGate() async throws {

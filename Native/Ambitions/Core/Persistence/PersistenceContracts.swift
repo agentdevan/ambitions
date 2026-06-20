@@ -18,7 +18,7 @@ struct PersistedGoalDraft: Identifiable, Codable, Sendable, Equatable {
 
 struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     let id: String
-    var preferredTab: AppTab
+    var preferredTab: AmbitionsSurface
     var userDisplayName: String
     var appearancePreference: AppAppearancePreference
     var accentFamily: AmbitionAccentFamily
@@ -92,7 +92,7 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
 
     init(
         id: String,
-        preferredTab: AppTab,
+        preferredTab: AmbitionsSurface,
         userDisplayName: String,
         appearancePreference: AppAppearancePreference,
         accentFamily: AmbitionAccentFamily,
@@ -135,7 +135,7 @@ struct AppStateSnapshot: Identifiable, Codable, Sendable, Equatable {
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(String.self, forKey: .id)
-        preferredTab = try container.decode(AppTab.self, forKey: .preferredTab)
+        preferredTab = try container.decode(AmbitionsSurface.self, forKey: .preferredTab)
         userDisplayName = try container.decode(String.self, forKey: .userDisplayName)
         appearancePreference = try container.decode(AppAppearancePreference.self, forKey: .appearancePreference)
         accentFamily = try container.decodeIfPresent(AmbitionAccentFamily.self, forKey: .accentFamily) ?? .sage

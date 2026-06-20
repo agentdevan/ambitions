@@ -81,10 +81,10 @@ enum ActivationContract {
     )
 
     static let onboardingSurfaceRows: [ActivationCopyRow] = [
-        ActivationCopyRow(title: "Today", detail: "Keep one doable step visible and grounded in current reality.", icon: AppTab.today.systemImage),
-        ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction before you build a plan.", icon: AppTab.goals.systemImage),
-        ActivationCopyRow(title: "Time", detail: "Shape the week only when something real asks for room.", icon: AppTab.time.systemImage),
-        ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AppTab.you.systemImage)
+        ActivationCopyRow(title: "Today", detail: "Keep one doable step visible and grounded in current reality.", icon: AmbitionsSurface.today.systemImage),
+        ActivationCopyRow(title: "Goals", detail: "Name one meaningful direction before you build a plan.", icon: AmbitionsSurface.goals.systemImage),
+        ActivationCopyRow(title: "Time", detail: "Shape the week only when something real asks for room.", icon: AmbitionsSurface.time.systemImage),
+        ActivationCopyRow(title: "You", detail: "Check local trust, preferences, and optional permissions.", icon: AmbitionsSurface.you.systemImage)
     ]
 
     static let onboardingKnownNowRows: [ActivationCopyRow] = [
@@ -187,7 +187,7 @@ enum ActivationContract {
                 explanation: "Time works without calendar access. Add a goal or capture first, then shape only the work that truly needs room this week.",
                 primaryAction: DegradedStateAction(title: "Create goal", systemImage: "target", routingHint: .createGoal),
                 secondaryAction: DegradedStateAction(title: "Capture", systemImage: "square.and.pencil", routingHint: .quickCapture),
-                icon: AppTab.time.systemImage
+                icon: AmbitionsSurface.time.systemImage
             )
         case .you:
             return ActivationSurfaceEmptyStateRule(
@@ -195,8 +195,8 @@ enum ActivationContract {
                 title: "Your system starts local",
                 explanation: "You can begin without connecting anything. Trust, preferences, and optional permissions live here without claiming sync or export is ready.",
                 primaryAction: DegradedStateAction(title: "Review trust", systemImage: "checkmark.shield", routingHint: .profileTrust),
-                secondaryAction: DegradedStateAction(title: "Open Today", systemImage: AppTab.today.systemImage, routingHint: .today),
-                icon: AppTab.you.systemImage
+                secondaryAction: DegradedStateAction(title: "Open Today", systemImage: AmbitionsSurface.today.systemImage, routingHint: .today),
+                icon: AmbitionsSurface.you.systemImage
             )
         }
     }

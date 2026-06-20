@@ -11,13 +11,13 @@ struct StageSurfaceOwnership: Equatable, Identifiable {
     let id: String
     let title: String
     let layer: StageSurfaceLayer
-    let canonicalTab: AppTab?
+    let canonicalTab: AmbitionsSurface?
     let primaryObjectTitle: String
     let routePolicy: String
 }
 
 enum SurfaceOwnershipRegistry {
-    static let persistentSurfaceTabs: [AppTab] = [.today, .goals, .time, .you]
+    static let persistentSurfaceTabs: [AmbitionsSurface] = [.today, .goals, .time, .you]
 
     static let persistentSurfaces: [StageSurfaceOwnership] = persistentSurfaceTabs.map { tab in
         StageSurfaceOwnership(
@@ -65,7 +65,7 @@ enum SurfaceOwnershipRegistry {
         persistentSurfaces.map(\.id)
     }
 
-    static func ownership(for tab: AppTab) -> StageSurfaceOwnership {
+    static func ownership(for tab: AmbitionsSurface) -> StageSurfaceOwnership {
         guard let surface = persistentSurfaces.first(where: { $0.canonicalTab == tab }) else {
             preconditionFailure("Missing Stage surface ownership for \(tab.rawValue).")
         }

@@ -49,7 +49,7 @@ extension RepositoryBackedTimeService {
                 continuityLabel: "Return to the week with a calmer shape, not a larger list.",
                 contextPills: [
                     TimeHeroPillState(title: timeframeLabel(now: now), icon: "calendar", state: .default),
-                    TimeHeroPillState(title: posture.label, icon: AppTab.time.systemImage, state: posture.visualState),
+                    TimeHeroPillState(title: posture.label, icon: AmbitionsSurface.time.systemImage, state: posture.visualState),
                     TimeHeroPillState(title: "\(carryForwardItems.count) carry-forward lanes", icon: "arrow.triangle.branch", state: carryForwardItems.isEmpty ? .default : .selected)
                 ]
             ),

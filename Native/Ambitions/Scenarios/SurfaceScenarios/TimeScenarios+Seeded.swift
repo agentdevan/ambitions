@@ -14,7 +14,7 @@ extension PreviewTimeScenarios {
             pressureSummary: "Open captures and one fragile goal are the loudest reasons the week still needs shaping.",
             contextPills: [
                 TimeHeroPillState(title: "Apr 20-Apr 26", icon: "calendar", state: .default),
-                TimeHeroPillState(title: "Tight", icon: AppTab.time.systemImage, state: .selected),
+                TimeHeroPillState(title: "Tight", icon: AmbitionsSurface.time.systemImage, state: .selected),
                 TimeHeroPillState(title: "2/3 goals visible", icon: "target", state: .selected)
             ],
             trustWhisper: "One active goal is still outside the week, so the current calm is real but incomplete."

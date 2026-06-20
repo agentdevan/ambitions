@@ -5,8 +5,8 @@ struct AppMeridianDestinationRail: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let theme: AmbitionTheme
-    let selectedTab: AppTab
-    let onSelect: (AppTab) -> Void
+    let selectedTab: AmbitionsSurface
+    let onSelect: (AmbitionsSurface) -> Void
     private let chromeState = AppMeridianShellChromeState.launchDefault
 
     var body: some View {
@@ -31,39 +31,33 @@ struct AppMeridianDestinationRail: View {
     }
 
     private var railMaterial: some View {
-        RoundedRectangle(cornerRadius: 34, style: .continuous)
+        Capsule(style: .continuous)
             .fill(AmbitionsIOS26SemanticTokens.LiquidGlass.darkDockCore.opacity(theme.mode == .dark ? 0.72 : 0.58))
             .overlay(
-                RoundedRectangle(cornerRadius: 34, style: .continuous)
+                Capsule(style: .continuous)
                     .fill(AmbitionsIOS26SemanticTokens.LiquidGlass.darkDockBase.opacity(theme.mode == .dark ? 0.38 : 0.24))
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 34, style: .continuous)
+                Capsule(style: .continuous)
                     .stroke(AmbitionsIOS26SemanticTokens.Separator.darkNonOpaque.opacity(0.42), lineWidth: 1)
             )
             .overlay(alignment: .top) {
-                RoundedRectangle(cornerRadius: 34, style: .continuous)
+                Capsule(style: .continuous)
                     .stroke(theme.colors.textPrimary.opacity(theme.mode == .dark ? 0.035 : 0.06), lineWidth: 1)
                     .blendMode(.screen)
                     .allowsHitTesting(false)
             }
-            .shadow(
-                color: theme.depth.resting.color.opacity(theme.mode == .dark ? 0.28 : 0.18),
-                radius: theme.depth.resting.radius,
-                x: theme.depth.resting.x,
-                y: theme.depth.resting.y
-            )
     }
 
     private func destinationButton(_ destination: AppMeridianDestination) -> some View {
         let isSelected = destination.tab == selectedTab
         let accessibilityCompact = dynamicTypeSize.isAccessibilitySize
-        let iconSize: CGFloat = accessibilityCompact ? (isSelected ? 14 : 13) : (isSelected ? 18 : 17)
         let iconFrame = CGSize(
             width: accessibilityCompact ? 24 : 30,
             height: accessibilityCompact ? 22 : 26
         )
-        let labelSize: CGFloat = accessibilityCompact ? 10.5 : 12
+        let iconTypography = isSelected ? theme.typography.bodyEmphasized : theme.typography.body
+        let labelTypography = accessibilityCompact ? theme.typography.micro : theme.typography.caption
 
         return Button {
             if destination.tab != selectedTab {
@@ -82,13 +76,13 @@ struct AppMeridianDestinationRail: View {
                     }
 
                     Image(systemName: destination.systemImage)
-                        .font(.system(size: iconSize, weight: isSelected ? .semibold : .medium, design: .rounded))
+                        .font(iconTypography.weight(isSelected ? .semibold : .medium))
                         .symbolRenderingMode(.hierarchical)
                 }
                 .frame(width: iconFrame.width, height: iconFrame.height)
 
                 Text(destination.title)
-                    .font(.system(size: labelSize, weight: isSelected ? .semibold : .medium, design: .rounded))
+                    .font(labelTypography.weight(isSelected ? .semibold : .medium))
                     .lineLimit(1)
                     .minimumScaleFactor(accessibilityCompact ? 0.64 : 0.86)
             }
@@ -101,7 +95,7 @@ struct AppMeridianDestinationRail: View {
             .padding(.horizontal, accessibilityCompact ? 0 : theme.spacing.xxxs)
             .background {
                 if isSelected {
-                    RoundedRectangle(cornerRadius: accessibilityCompact ? 18 : 24, style: .continuous)
+                    Capsule(style: .continuous)
                         .fill(
                             LinearGradient(
                                 colors: [
@@ -117,11 +111,11 @@ struct AppMeridianDestinationRail: View {
             }
             .overlay {
                 if isSelected {
-                    RoundedRectangle(cornerRadius: accessibilityCompact ? 18 : 24, style: .continuous)
+                    Capsule(style: .continuous)
                         .stroke(theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.14 : 0.10), lineWidth: 1)
                 }
             }
-            .contentShape(RoundedRectangle(cornerRadius: accessibilityCompact ? 18 : 24, style: .continuous))
+            .contentShape(Capsule(style: .continuous))
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)
@@ -135,7 +129,7 @@ struct AppMeridianDestinationRail: View {
 
 #if DEBUG
 private struct AppMeridianDestinationRailPreviewHost: View {
-    @State private var selectedTab: AppTab = .today
+    @State private var selectedTab: AmbitionsSurface = .today
     private let theme = AmbitionTheme.dark
 
     var body: some View {

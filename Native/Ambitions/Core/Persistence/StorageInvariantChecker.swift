@@ -214,7 +214,7 @@ struct StorageInvariantChecker: Sendable {
         }
 
         for record in appStates {
-            appendRaw(AppTab.self, record.preferredTabRaw, .today, "AppStateRecord", record.id, "preferredTabRaw", to: &issues)
+            appendRaw(AmbitionsSurface.self, record.preferredTabRaw, .today, "AppStateRecord", record.id, "preferredTabRaw", to: &issues)
             appendRaw(AppAppearancePreference.self, record.appearancePreferenceRaw, .system, "AppStateRecord", record.id, "appearancePreferenceRaw", to: &issues)
             appendOptionalRaw(AmbitionAccentFamily.self, record.accentFamilyRaw, "AppStateRecord", record.id, "accentFamilyRaw", to: &issues)
             appendOptionalRaw(AppSession.BootstrapSource.self, record.lastBootstrapSourceRaw, "AppStateRecord", record.id, "lastBootstrapSourceRaw", to: &issues)

@@ -3,12 +3,12 @@ import XCTest
 
 final class FrontendRecoveryGateTests: XCTestCase {
     func testIR01TopLevelTabsStayOnActiveCanon() {
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Plan"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Capture"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Pulse"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Profile"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Captures"))
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Plan"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Pulse"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Profile"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Captures"))
     }
 
     func testIR01VisibleRecoveryCopyAvoidsObsoleteRootLabelsAndConfidenceTheater() throws {

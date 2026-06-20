@@ -1,11 +1,12 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct AmbitionsRootView: View {
+struct AmbitionsStage: View {
     @Environment(\.colorScheme) private var systemColorScheme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     private let container: AppContainer
+    private let appFeatureFlags: AppFeatureFlags
     @State private var navigation: AppNavigationModel
     @State private var stageOwner = StageOwner()
     @State private var creationMessage: GoalDetailInlineMessage?
@@ -14,8 +15,9 @@ struct AmbitionsRootView: View {
     @State private var onboardingError: String?
     @State private var motionCurrentActionObserver: NSObjectProtocol?
 
-    init(container: AppContainer) {
+    init(container: AppContainer, appFeatureFlags: AppFeatureFlags = .current) {
         self.container = container
+        self.appFeatureFlags = appFeatureFlags
         _navigation = State(initialValue: container.navigation)
         _isOnboardingPresented = State(initialValue: container.session.shouldShowOnboarding)
     }
@@ -119,7 +121,7 @@ struct AmbitionsRootView: View {
         )
     }
 
-    private func handleContextualToolbarAction(_ action: AppShellContextualToolbarAction, for tab: AppTab) {
+    private func handleContextualToolbarAction(_ action: AppShellContextualToolbarAction, for tab: AmbitionsSurface) {
         switch action.id {
         case "today-start-here":
             navigation.selectToday(entryContext: .standard)
@@ -290,7 +292,7 @@ struct AmbitionsRootView: View {
         )
     }
 
-    private func presentSurfaceCapture(for tab: AppTab) {
+    private func presentSurfaceCapture(for tab: AmbitionsSurface) {
         container.commandRouter.presentCommandSheet(
             intent: .quickCapture,
             source: AppShellCaptureAccessModel.source(for: tab),
@@ -322,6 +324,7 @@ struct AmbitionsRootView: View {
     }
 
     private func validateExternalNavigationGraph() {
+        assert(appFeatureFlags.validationIssues.isEmpty, "App feature flags violate final-canon architecture.")
         assert(AppDeepLinkRegistry.validationIssues().isEmpty, "Deep-link registry contains unsupported routes.")
         assert(AppNavigationGraph.nodes.allSatisfy(\.canOpenFromExternalSurface), "Navigation graph contains a dead-end external route.")
     }

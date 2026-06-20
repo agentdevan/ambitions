@@ -51,7 +51,7 @@ extension RepositoryBackedTimeService {
             pressureSummary: pressureSummary,
             contextPills: [
                 TimeHeroPillState(title: timeframeLabel, icon: "calendar", state: .default),
-                TimeHeroPillState(title: posture.label, icon: AppTab.time.systemImage, state: posture.visualState),
+                TimeHeroPillState(title: posture.label, icon: AmbitionsSurface.time.systemImage, state: posture.visualState),
                 TimeHeroPillState(title: "\(representedGoalCount)/\(max(activeGoalCount, 1)) goals visible", icon: "target", state: representedGoalCount == activeGoalCount && activeGoalCount > 0 ? .success : .selected)
             ],
             trustWhisper: posture.supportLabel

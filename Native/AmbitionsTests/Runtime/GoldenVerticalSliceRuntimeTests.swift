@@ -37,7 +37,7 @@ final class GoldenVerticalSliceRuntimeTests: XCTestCase {
         XCTAssertEqual(activation.recoveryOption?.kind, .shrink)
         XCTAssertEqual(activation.receipt?.topLevelTabs, ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(activation.receipt?.captureRole, "global action")
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
         XCTAssertTrue(activation.receipt?.sourceRecordIDs.contains("SourceRecord.first-run-artist.background") == true)
         XCTAssertTrue(activation.receipt?.sourceRecordIDs.contains("SourceRecord.first-run-artist.intake") == true)
         XCTAssertTrue(activation.receipt?.receiptIDs.contains("Receipt.first-run-artist.completion") == true)

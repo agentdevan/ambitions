@@ -2,7 +2,7 @@ import Foundation
 
 struct AppNavigationGraphNode: Equatable, Identifiable, Sendable {
     let id: String
-    let owningTab: AppTab
+    let owningTab: AmbitionsSurface
     let route: AppExternalRoute
     let presentation: String
     let canOpenFromExternalSurface: Bool

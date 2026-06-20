@@ -262,6 +262,6 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.entrySource, .shellUtility)
         XCTAssertEqual(navigation.continuityReceipt?.destinationLabel, "Capture")
         XCTAssertTrue(navigation.continuityReceipt?.body.contains("Global Capture") == true)
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
     }
 }

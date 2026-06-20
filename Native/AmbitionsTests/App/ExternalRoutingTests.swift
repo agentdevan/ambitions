@@ -11,7 +11,7 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(route, .openTab(.goals))
     }
 
-    func testCanonicalRootTabPayloadsStayAlignedWithGoalsAndYou() {
+    func testCanonicalRootSurfacePayloadsStayAlignedWithGoalsAndYou() {
         let translator = AppExternalRouteTranslator()
 
         let goalsRoute = AppExternalRoute.openTab(.goals)
@@ -19,8 +19,8 @@ final class ExternalRoutingTests: XCTestCase {
 
         XCTAssertEqual(translator.deepLinkURL(for: goalsRoute)?.absoluteString, "ambitions://tab/goals")
         XCTAssertEqual(translator.deepLinkURL(for: youRoute)?.absoluteString, "ambitions://tab/you")
-        XCTAssertEqual(translator.routePayload(for: goalsRoute)[ExternalSurfaceActionPayload.Key.tab], AppTab.goals.rawValue)
-        XCTAssertEqual(translator.routePayload(for: youRoute)[ExternalSurfaceActionPayload.Key.tab], AppTab.you.rawValue)
+        XCTAssertEqual(translator.routePayload(for: goalsRoute)[ExternalSurfaceActionPayload.Key.tab], AmbitionsSurface.goals.rawValue)
+        XCTAssertEqual(translator.routePayload(for: youRoute)[ExternalSurfaceActionPayload.Key.tab], AmbitionsSurface.you.rawValue)
         XCTAssertEqual(translator.route(fromNotification: translator.notificationPayload(for: goalsRoute, action: "open")), goalsRoute)
         XCTAssertEqual(translator.route(fromWidget: translator.widgetPayload(for: youRoute, action: "open")), youRoute)
     }
@@ -32,13 +32,13 @@ final class ExternalRoutingTests: XCTestCase {
         let route = try XCTUnwrap(translator.route(fromDeepLink: url))
 
         assertGenericExternalEntry(route, expectedKind: "deeplink.tab")
-        XCTAssertEqual(AppTab.you.title, "You")
-        XCTAssertEqual(AppTab.you.rawValue, "you")
+        XCTAssertEqual(AmbitionsSurface.you.title, "You")
+        XCTAssertEqual(AmbitionsSurface.you.rawValue, "you")
     }
 
     @MainActor
     func testStageShellSharesCanonicalRouteDispatch() {
-        for tab in AppTab.allCases {
+        for tab in AmbitionsSurface.allCases {
             let navigation = AppNavigationModel(selectedTab: .today)
             let router = DefaultAppExternalRouter(navigation: navigation)
 
@@ -103,7 +103,7 @@ final class ExternalRoutingTests: XCTestCase {
         let timeRouteURL = try XCTUnwrap(URL(string: "ambitions://time/rituals"))
 
         XCTAssertEqual(translator.route(fromDeepLink: timeRouteURL), .openTimeRoute(.rituals))
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("habits"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("habits"))
     }
 
     func testDeepLinkTranslatorUsesComposerOverlayForCapture() throws {
@@ -117,9 +117,9 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(generatedPayload["surface"], "overlay")
         XCTAssertEqual(generatedPayload["overlay"], "quiet-command-sheet")
         XCTAssertEqual(generatedPayload["intent"], "quick_capture")
-        XCTAssertEqual(generatedPayload["tab"], AppTab.today.rawValue)
-        XCTAssertNil(AppTab(rawValue: "capture"))
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertEqual(generatedPayload["tab"], AmbitionsSurface.today.rawValue)
+        XCTAssertNil(AmbitionsSurface(rawValue: "capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
     }
 
     func testDeepLinkTranslatorParsesTodayEntryContextRoute() throws {
@@ -142,7 +142,7 @@ final class ExternalRoutingTests: XCTestCase {
 
         XCTAssertEqual(deepLink.absoluteString, "ambitions://tab/today?context=focus")
         XCTAssertEqual(translator.route(fromDeepLink: deepLink), .openToday(.focus))
-        XCTAssertEqual(routePayload[ExternalSurfaceActionPayload.Key.tab], AppTab.today.rawValue)
+        XCTAssertEqual(routePayload[ExternalSurfaceActionPayload.Key.tab], AmbitionsSurface.today.rawValue)
         XCTAssertEqual(routePayload["context"], TodayEntryContext.focus.rawValue)
         XCTAssertEqual(notificationPayload.values["context"], TodayEntryContext.focus.rawValue)
         XCTAssertEqual(widgetPayload.values["context"], TodayEntryContext.focus.rawValue)
@@ -330,7 +330,7 @@ final class ExternalRoutingTests: XCTestCase {
         let payload = translator.routePayload(for: .openYouRoute(.history))
 
         XCTAssertEqual(payload[ExternalSurfaceActionPayload.Key.tab], "you")
-        XCTAssertEqual(AppTab.you.title, "You")
+        XCTAssertEqual(AmbitionsSurface.you.title, "You")
     }
 
     func testYouRoutesAndPayloadsUseCurrentYouSurface() throws {
@@ -345,11 +345,11 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(monthlyDeepLink.absoluteString, "ambitions://you/monthly-review")
         XCTAssertEqual(translator.route(fromDeepLink: historyDeepLink), .openYouRoute(.history))
         XCTAssertEqual(translator.route(fromDeepLink: monthlyDeepLink), .openYouRoute(.monthlyReview))
-        XCTAssertEqual(historyPayload[ExternalSurfaceActionPayload.Key.tab], AppTab.you.rawValue)
+        XCTAssertEqual(historyPayload[ExternalSurfaceActionPayload.Key.tab], AmbitionsSurface.you.rawValue)
         XCTAssertEqual(historyPayload[ExternalSurfaceActionPayload.Key.surface], YouRouteTarget.history.rawValue)
-        XCTAssertEqual(monthlyPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.you.rawValue)
+        XCTAssertEqual(monthlyPayload.values[ExternalSurfaceActionPayload.Key.tab], AmbitionsSurface.you.rawValue)
         XCTAssertEqual(monthlyPayload.values["youRoute"], YouRouteTarget.monthlyReview.rawValue)
-        XCTAssertEqual(AppTab.time.title, "Time")
+        XCTAssertEqual(AmbitionsSurface.time.title, "Time")
     }
 
     func testCurrentTimeRoutesAndPayloadsUseTimeSurface() throws {
@@ -362,13 +362,13 @@ final class ExternalRoutingTests: XCTestCase {
 
         XCTAssertEqual(routeURL.absoluteString, "ambitions://time/rituals")
         XCTAssertEqual(translator.route(fromDeepLink: routeURL), .openTimeRoute(.rituals))
-        XCTAssertEqual(routePayload[ExternalSurfaceActionPayload.Key.tab], AppTab.time.rawValue)
+        XCTAssertEqual(routePayload[ExternalSurfaceActionPayload.Key.tab], AmbitionsSurface.time.rawValue)
         XCTAssertEqual(routePayload["subroute"], TimeRouteTarget.rituals.rawValue)
-        XCTAssertEqual(notificationPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.time.rawValue)
+        XCTAssertEqual(notificationPayload.values[ExternalSurfaceActionPayload.Key.tab], AmbitionsSurface.time.rawValue)
         XCTAssertEqual(notificationPayload.values["subroute"], TimeRouteTarget.rituals.rawValue)
-        XCTAssertEqual(widgetPayload.values[ExternalSurfaceActionPayload.Key.tab], AppTab.time.rawValue)
+        XCTAssertEqual(widgetPayload.values[ExternalSurfaceActionPayload.Key.tab], AmbitionsSurface.time.rawValue)
         XCTAssertEqual(widgetPayload.values["subroute"], TimeRouteTarget.rituals.rawValue)
-        XCTAssertEqual(AppTab.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
     }
 
     func testRetiredPulseRouteFallsBackInsteadOfMappingToToday() throws {
@@ -381,8 +381,8 @@ final class ExternalRoutingTests: XCTestCase {
             expectedKind: "widget.open",
             expectedPayloadValue: ("tab", "pulse")
         )
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("pulse"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Pulse"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("pulse"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Pulse"))
     }
 
     func testRetiredMotionRouteFallsBackInsteadOfMappingToToday() throws {
@@ -400,8 +400,8 @@ final class ExternalRoutingTests: XCTestCase {
             expectedKind: "notification.open",
             expectedPayloadValue: ("tab", "motion")
         )
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("motion"))
-        XCTAssertFalse(AppTab.allCases.map(\.title).contains("Motion"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("motion"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.title).contains("Motion"))
     }
 
     func testRouteTranslatorGeneratesDeterministicDeepLinks() throws {
@@ -447,7 +447,7 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(notification.values["action"], "complete")
         XCTAssertEqual(notification.values["surface"], "goal-detail")
         XCTAssertEqual(notification.values["goalID"], "goal-123")
-        XCTAssertEqual(notification.values["tab"], AppTab.goals.rawValue)
+        XCTAssertEqual(notification.values["tab"], AmbitionsSurface.goals.rawValue)
         XCTAssertEqual(translator.route(fromNotification: notification), .openToday(.recovery))
         XCTAssertEqual(translator.route(fromWidget: widget), route)
     }
@@ -491,12 +491,12 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(payload["surface"], "overlay")
         XCTAssertEqual(payload["overlay"], "quiet-command-sheet")
         XCTAssertEqual(payload["intent"], "quick_capture")
-        XCTAssertEqual(payload["tab"], AppTab.today.rawValue)
+        XCTAssertEqual(payload["tab"], AmbitionsSurface.today.rawValue)
         XCTAssertEqual(notificationPayload.values["surface"], "overlay")
         XCTAssertEqual(notificationPayload.values["overlay"], "quiet-command-sheet")
         XCTAssertEqual(notificationPayload.values["intent"], "quick_capture")
-        XCTAssertEqual(notificationPayload.values["tab"], AppTab.today.rawValue)
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertEqual(notificationPayload.values["tab"], AmbitionsSurface.today.rawValue)
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
     }
 
     func testOverlayPayloadCarriesIntentForCanonicalNormalization() {
@@ -565,7 +565,7 @@ final class ExternalRoutingTests: XCTestCase {
 
         XCTAssertEqual(navigation.selectedTab, .you)
         XCTAssertEqual(navigation.lastExternalRoute, .openTab(.you))
-        XCTAssertEqual(AppTab.you.title, "You")
+        XCTAssertEqual(AmbitionsSurface.you.title, "You")
     }
 
     @MainActor
@@ -579,8 +579,8 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(navigation.youPath, [.history])
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(navigation.lastExternalRoute, .openYouRoute(.history))
-        XCTAssertEqual(AppTab.time.title, "Time")
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("insights"))
+        XCTAssertEqual(AmbitionsSurface.time.title, "Time")
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("insights"))
 
         router.dispatch(.openYouRoute(.monthlyReview), source: .deepLink)
 
@@ -751,7 +751,7 @@ final class ExternalRoutingTests: XCTestCase {
         XCTAssertEqual(AppDeepLinkRegistry.validationIssues(translator: translator), [])
         XCTAssertEqual(AppNavigationGraph.nodes.map(\.id), AppDeepLinkRegistry.entries.map(\.id))
         XCTAssertFalse(AppDeepLinkRegistry.entries.contains { $0.objectKind == .rootTab && $0.deepLinkTemplate.localizedCaseInsensitiveContains("capture") })
-        XCTAssertFalse(AppTab.allCases.map(\.rawValue).contains("capture"))
+        XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
 
         for entry in AppDeepLinkRegistry.entries {
             let url = try XCTUnwrap(translator.deepLinkURL(for: entry.canonicalRoute), entry.id)

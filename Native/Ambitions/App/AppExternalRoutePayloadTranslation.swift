@@ -6,27 +6,27 @@ extension AppExternalRouteTranslator {
         case let .openTab(tab):
             return ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: tab.rawValue)
         case let .openToday(context):
-            var values = ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: AppTab.today.rawValue)
+            var values = ExternalSurfaceActionPayload.routePayload(surface: .tab, tab: AmbitionsSurface.today.rawValue)
             values["context"] = context.rawValue
             return values
         case let .openGoalDetail(goalID):
             return ExternalSurfaceActionPayload.routePayload(
                 surface: .goalDetail,
                 goalID: goalID,
-                tab: AppTab.goals.rawValue
+                tab: AmbitionsSurface.goals.rawValue
             )
         case let .openTimeRoute(target):
             switch target {
             case .rituals:
                 return [
                     ExternalSurfaceActionPayload.Key.surface: ExternalSurfacePayloadSurface.tab.rawValue,
-                    ExternalSurfaceActionPayload.Key.tab: AppTab.time.rawValue,
+                    ExternalSurfaceActionPayload.Key.tab: AmbitionsSurface.time.rawValue,
                     "subroute": target.rawValue
                 ]
             case .weeklyReview:
                 return [
                     ExternalSurfaceActionPayload.Key.surface: "weekly-review",
-                    ExternalSurfaceActionPayload.Key.tab: AppTab.time.rawValue
+                    ExternalSurfaceActionPayload.Key.tab: AmbitionsSurface.time.rawValue
                 ]
             }
         case .openCaptureComposer:
@@ -42,13 +42,13 @@ extension AppExternalRouteTranslator {
         case let .openYouRoute(target):
             return [
                 ExternalSurfaceActionPayload.Key.surface: target.rawValue,
-                ExternalSurfaceActionPayload.Key.tab: AppTab.you.rawValue
+                ExternalSurfaceActionPayload.Key.tab: AmbitionsSurface.you.rawValue
             ]
         case let .presentOverlay(route):
             var values: [String: String] = [
                 ExternalSurfaceActionPayload.Key.surface: "overlay",
                 "overlay": route.kind.rawValue,
-                ExternalSurfaceActionPayload.Key.tab: AppTab.today.rawValue
+                ExternalSurfaceActionPayload.Key.tab: AmbitionsSurface.today.rawValue
             ]
             if let intent = route.intent {
                 values["intent"] = intent.rawValue
@@ -89,7 +89,7 @@ extension AppExternalRouteTranslator {
                 action: actionName,
                 surface: .goalDetail,
                 goalID: goalID,
-                tab: AppTab.goals.rawValue
+                tab: AmbitionsSurface.goals.rawValue
             )
         case let .openTimeRoute(target):
             switch target {

@@ -27,7 +27,7 @@ struct AppSession: Sendable {
 
     let source: BootstrapSource
     let userDisplayName: String
-    let initialTab: AppTab
+    let initialTab: AmbitionsSurface
     let appearancePreference: AppAppearancePreference
     let accentFamily: AmbitionAccentFamily
     let launchedAt: Date
@@ -36,7 +36,7 @@ struct AppSession: Sendable {
 }
 
 struct AppPreferences: Sendable {
-    let preferredTab: AppTab
+    let preferredTab: AmbitionsSurface
     let userDisplayName: String
     let appearancePreference: AppAppearancePreference
     let accentFamily: AmbitionAccentFamily

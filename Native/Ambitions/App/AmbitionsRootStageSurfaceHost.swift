@@ -6,7 +6,7 @@ struct AmbitionsRootStageSurfaceHost: View {
     let creationMessage: GoalDetailInlineMessage?
     let goalsRefreshID: Int
     let onCreateGoal: (ShellCommandEntrySource, String, String?) -> Void
-    let onToolbarAction: (AppShellContextualToolbarAction, AppTab) -> Void
+    let onToolbarAction: (AppShellContextualToolbarAction, AmbitionsSurface) -> Void
 
     var body: some View {
         Group {
@@ -142,7 +142,7 @@ struct AmbitionsRootStageSurfaceHost: View {
         }
     }
 
-    private func shellUtilityButtons(for tab: AppTab) -> [AppShellHeaderButton] {
+    private func shellUtilityButtons(for tab: AmbitionsSurface) -> [AppShellHeaderButton] {
         AppShellContextualToolbarCatalog.actions(for: tab).map { action in
             AppShellHeaderButton(
                 kind: action.kind,
