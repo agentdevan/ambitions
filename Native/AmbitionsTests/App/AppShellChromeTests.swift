@@ -34,7 +34,7 @@ final class AppShellChromeTests: XCTestCase {
 
     func testShellIdentifiersStayStableForMeridianDestinations() {
         XCTAssertEqual(
-        AppMeridianDestination.all.map(\.accessibilityIdentifier),
+        StageDockDestination.all.map(\.accessibilityIdentifier),
             [
                 "shell.meridian.destination.today",
                 "shell.meridian.destination.goals",
@@ -42,8 +42,8 @@ final class AppShellChromeTests: XCTestCase {
                 "shell.meridian.destination.you"
             ]
         )
-        XCTAssertTrue(AppMeridianShellChromeState.launchDefault.rollbackLabel.contains("Train 3 Stage shell commit"))
-        XCTAssertFalse(AppMeridianShellChromeState.launchDefault.rollbackLabel.contains("--ambitions-shell"))
+        XCTAssertTrue(StageChromeContract.launchDefault.rollbackLabel.contains("Stage shell migration commit"))
+        XCTAssertFalse(StageChromeContract.launchDefault.rollbackLabel.contains("--ambitions-shell"))
     }
 
     func testTrustBadgeCopyDoesNotClaimGlobalSyncByDefault() {
@@ -122,9 +122,9 @@ final class AppShellChromeTests: XCTestCase {
         }
 
         XCTAssertEqual(AmbitionsSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
-        XCTAssertEqual(AppMeridianDestination.all.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(StageDockDestination.all.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(
-            AppMeridianDestination.all.map(\.accessibilityIdentifier),
+            StageDockDestination.all.map(\.accessibilityIdentifier),
             [
                 "shell.meridian.destination.today",
                 "shell.meridian.destination.goals",
@@ -132,7 +132,7 @@ final class AppShellChromeTests: XCTestCase {
                 "shell.meridian.destination.you"
             ]
         )
-        XCTAssertFalse(AppMeridianDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("capture") })
-        XCTAssertFalse(AppMeridianDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
+        XCTAssertFalse(StageDockDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("capture") })
+        XCTAssertFalse(StageDockDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
     }
 }

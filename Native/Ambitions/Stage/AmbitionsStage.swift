@@ -27,9 +27,10 @@ struct AmbitionsStage: View {
             systemColorScheme: systemColorScheme,
             accentFamily: container.accentFamily
         )
-        let chromePolicy = navigation.stageChromePolicy(
+        let stageModel = navigation.stageModel(
             dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
         )
+        let chromePolicy = stageModel.chromePolicy
 
         VStack(spacing: 0) {
             ZStack(alignment: .bottom) {
@@ -156,7 +157,7 @@ struct AmbitionsStage: View {
     }
 
     private func shellVisibleDock(theme: AmbitionTheme) -> some View {
-        AppMeridianDestinationRail(
+        StageDockRail(
             theme: theme,
             selectedTab: navigation.selectedTab
         ) { tab in

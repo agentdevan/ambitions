@@ -37,45 +37,45 @@ final class AppShellNavigationTests: XCTestCase {
 
     func testRootShellTopInsetDoesNotPullSurfaceContentUnderHeader() {
         XCTAssertGreaterThanOrEqual(
-            AppShellGeometry.topInsetSpacing(
+            StageSafeAreaPolicy.topInsetSpacing(
                 hasBackButton: false,
                 dynamicTypeIsAccessibilitySize: false
             ),
             0
         )
         XCTAssertGreaterThanOrEqual(
-            AppShellGeometry.topInsetSpacing(
+            StageSafeAreaPolicy.topInsetSpacing(
                 hasBackButton: false,
                 dynamicTypeIsAccessibilitySize: true
             ),
             0
         )
         XCTAssertEqual(
-            AppShellGeometry.topInsetSpacing(
+            StageSafeAreaPolicy.topInsetSpacing(
                 hasBackButton: true,
                 dynamicTypeIsAccessibilitySize: false
             ),
             0
         )
         XCTAssertGreaterThanOrEqual(
-            AppShellGeometry.topContentClearance(
+            StageSafeAreaPolicy.topContentClearance(
                 reservesPrimaryObjectTopClearance: true,
                 dynamicTypeIsAccessibilitySize: false
             ),
             80
         )
         XCTAssertGreaterThan(
-            AppShellGeometry.topContentClearance(
+            StageSafeAreaPolicy.topContentClearance(
                 reservesPrimaryObjectTopClearance: true,
                 dynamicTypeIsAccessibilitySize: true
             ),
-            AppShellGeometry.topContentClearance(
+            StageSafeAreaPolicy.topContentClearance(
                 reservesPrimaryObjectTopClearance: true,
                 dynamicTypeIsAccessibilitySize: false
             )
         )
         XCTAssertEqual(
-            AppShellGeometry.topContentClearance(
+            StageSafeAreaPolicy.topContentClearance(
                 reservesPrimaryObjectTopClearance: false,
                 dynamicTypeIsAccessibilitySize: true
             ),
@@ -179,9 +179,9 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     func testMeridianDestinationsMirrorCanonicalTabsWithoutNewRouteOwnership() {
-        let destinations = AppMeridianDestination.all
+        let destinations = StageDockDestination.all
 
-        XCTAssertEqual(destinations.map(\.tab), AmbitionsSurface.allCases)
+        XCTAssertEqual(destinations.map(\.surface), AmbitionsSurface.allCases)
         XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(
             destinations.map(\.accessibilityIdentifier),
@@ -197,17 +197,17 @@ final class AppShellNavigationTests: XCTestCase {
     }
 
     func testFCP08MeridianShellChromeContractPreservesFourRootSurfacesAndReceiptZone() {
-        let chrome = AppMeridianShellChromeState.launchDefault
+        let chrome = StageChromeContract.launchDefault
 
         XCTAssertEqual(chrome.title, "Ambition Meridian")
         XCTAssertEqual(chrome.destinations.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertTrue(chrome.destinationRailLabel.contains("Today, Goals, Time, You"))
         XCTAssertFalse(chrome.destinationRailLabel.localizedCaseInsensitiveContains("Pulse"))
         XCTAssertFalse(chrome.destinationRailLabel.contains("Today, Goals, Capture, Time, You"))
-        XCTAssertTrue(chrome.receiptOverlayZoneLabel.contains("temporary and dismissible"))
+        XCTAssertTrue(chrome.receiptOverlayZoneLabel.contains("bounded and dismissible"))
         XCTAssertTrue(chrome.globalActionLabel.contains("without changing tabs"))
         XCTAssertTrue(chrome.safeAreaLabel.contains("safe areas"))
-        XCTAssertTrue(chrome.rollbackLabel.contains("Train 3 Stage shell commit"))
+        XCTAssertTrue(chrome.rollbackLabel.contains("Stage shell migration commit"))
         XCTAssertFalse(chrome.rollbackLabel.contains("--ambitions-shell"))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("timeState"))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("AI confidence"))
@@ -216,13 +216,13 @@ final class AppShellNavigationTests: XCTestCase {
 
     @MainActor
     func testMeridianOneTapDestinationsUseCanonicalNavigationSelection() {
-        for destination in AppMeridianDestination.all {
+        for destination in StageDockDestination.all {
             let navigation = StageStore(selectedSurface: .today)
             navigation.presentMemoryLens(source: .shellUtility)
 
-            navigation.selectRootSurfaceFromDock(destination.tab)
+            navigation.selectRootSurfaceFromDock(destination.surface)
 
-            XCTAssertEqual(navigation.selectedTab, destination.tab)
+            XCTAssertEqual(navigation.selectedTab, destination.surface)
             XCTAssertNil(navigation.activeOverlay)
             XCTAssertTrue(navigation.goalsPath.isEmpty)
             XCTAssertTrue(navigation.timePath.isEmpty)

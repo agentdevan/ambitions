@@ -5,11 +5,19 @@ import Observation
 @Observable
 final class StageStore {
     private var state: StageState
+    private let effectRunner = StageEffectRunner()
     private(set) var lastEffects: [StageEffect]
+    private(set) var lastEffectRun: StageEffectRun
 
     init(selectedSurface: AmbitionsSurface) {
         state = StageState(selectedSurface: selectedSurface)
         lastEffects = []
+        lastEffectRun = StageEffectRun(
+            effects: [],
+            visibleMutationIDs: [],
+            accessibilityAnnouncements: [],
+            proofArtifactIDs: []
+        )
     }
 
     var selectedTab: AmbitionsSurface {
@@ -102,8 +110,17 @@ final class StageStore {
     @discardableResult
     func dispatch(_ action: StageAction) -> StageReduction {
         let reduction = StageReducer.reduce(action, state: &state)
-        lastEffects = reduction.effects
+        let effectRun = effectRunner.run(reduction.effects)
+        lastEffectRun = effectRun
+        lastEffects = effectRun.effects
         return reduction
+    }
+
+    func stageModel(dynamicTypeIsAccessibilitySize: Bool) -> AmbitionsStageModel {
+        AmbitionsStageModel.current(
+            state: state,
+            dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize
+        )
     }
 
     func selectTab(_ tab: AmbitionsSurface) {

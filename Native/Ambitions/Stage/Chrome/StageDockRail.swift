@@ -1,13 +1,13 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct AppMeridianDestinationRail: View {
+struct StageDockRail: View {
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     let theme: AmbitionTheme
     let selectedTab: AmbitionsSurface
     let onSelect: (AmbitionsSurface) -> Void
-    private let chromeState = AppMeridianShellChromeState.launchDefault
+    private let chromeState = StageChromeContract.launchDefault
 
     var body: some View {
         destinationRail
@@ -49,8 +49,8 @@ struct AppMeridianDestinationRail: View {
             }
     }
 
-    private func destinationButton(_ destination: AppMeridianDestination) -> some View {
-        let isSelected = destination.tab == selectedTab
+    private func destinationButton(_ destination: StageDockDestination) -> some View {
+        let isSelected = destination.surface == selectedTab
         let accessibilityCompact = dynamicTypeSize.isAccessibilitySize
         let iconFrame = CGSize(
             width: accessibilityCompact ? 24 : 30,
@@ -60,10 +60,10 @@ struct AppMeridianDestinationRail: View {
         let labelTypography = accessibilityCompact ? theme.typography.micro : theme.typography.caption
 
         return Button {
-            if destination.tab != selectedTab {
+            if destination.surface != selectedTab {
                 AppShellSensoryFeedbackPolicy.emit(.surfaceSelection, reduceMotionEnabled: reduceMotion)
             }
-            onSelect(destination.tab)
+            onSelect(destination.surface)
         } label: {
             VStack(spacing: accessibilityCompact ? 3 : 5) {
                 ZStack {
@@ -128,7 +128,7 @@ struct AppMeridianDestinationRail: View {
 }
 
 #if DEBUG
-private struct AppMeridianDestinationRailPreviewHost: View {
+private struct StageDockRailPreviewHost: View {
     @State private var selectedTab: AmbitionsSurface = .today
     private let theme = AmbitionTheme.dark
 
@@ -140,7 +140,7 @@ private struct AppMeridianDestinationRailPreviewHost: View {
             VStack(spacing: theme.spacing.md) {
                 Spacer()
 
-                AppMeridianDestinationRail(
+                StageDockRail(
                     theme: theme,
                     selectedTab: selectedTab
                 ) { tab in
@@ -156,12 +156,12 @@ private struct AppMeridianDestinationRailPreviewHost: View {
     }
 }
 
-#Preview("App Meridian Shell") {
-    AppMeridianDestinationRailPreviewHost()
+#Preview("Stage Dock Rail") {
+    StageDockRailPreviewHost()
 }
 
-#Preview("App Meridian Shell — Large Type") {
-    AppMeridianDestinationRailPreviewHost()
+#Preview("Stage Dock Rail Large Type") {
+    StageDockRailPreviewHost()
         .environment(\.dynamicTypeSize, .accessibility2)
 }
 #endif

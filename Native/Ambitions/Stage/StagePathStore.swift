@@ -1,32 +1,6 @@
 import CoreGraphics
 import Foundation
 
-enum StageRouteDepth: String, Equatable {
-    case root
-    case drilldown
-}
-
-enum StageOverlayPresentation: String, Equatable {
-    case none
-    case sheet
-    case activatedCaptureComposer
-    case memoryLens
-    case createGoal
-}
-
-struct StageChromePolicy: Equatable {
-    let routeDepth: StageRouteDepth
-    let overlayPresentation: StageOverlayPresentation
-    let dynamicTypeIsAccessibilitySize: Bool
-    let showsRootDock: Bool
-    let showsDockBackdrop: Bool
-    let dockClearance: CGFloat
-    let dockBackdropHeight: CGFloat
-    let stageContentBottomClearance: CGFloat
-    let captureComposerClearance: CGFloat
-    let continuityReceiptBottomClearance: CGFloat
-}
-
 enum StagePathStore {
     static func routeDepth(
         goalsPath: [GoalRouteTarget],
@@ -58,26 +32,35 @@ enum StagePathStore {
         overlayPresentation: StageOverlayPresentation,
         dynamicTypeIsAccessibilitySize: Bool
     ) -> StageChromePolicy {
-        let showsRootDock = rootDockIsVisible(
-            routeDepth: routeDepth,
-            overlayPresentation: overlayPresentation
-        )
-        let dockClearance: CGFloat = dynamicTypeIsAccessibilitySize ? 184 : 164
-        let nonDockCaptureClearance: CGFloat = dynamicTypeIsAccessibilitySize ? 36 : 18
-        let nonDockReceiptClearance: CGFloat = dynamicTypeIsAccessibilitySize ? 40 : 24
-        let backdropExtra: CGFloat = dynamicTypeIsAccessibilitySize ? 48 : 72
-
-        return StageChromePolicy(
+        StageChromePolicy(
             routeDepth: routeDepth,
             overlayPresentation: overlayPresentation,
             dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize,
-            showsRootDock: showsRootDock,
-            showsDockBackdrop: showsRootDock,
-            dockClearance: dockClearance,
-            dockBackdropHeight: dockClearance + backdropExtra,
-            stageContentBottomClearance: showsRootDock ? dockClearance : 0,
-            captureComposerClearance: showsRootDock ? dockClearance : nonDockCaptureClearance,
-            continuityReceiptBottomClearance: showsRootDock ? dockClearance : nonDockReceiptClearance
+            showsRootDock: DockBehaviorPolicy.showsRootDock(
+                routeDepth: routeDepth,
+                overlayPresentation: overlayPresentation
+            ),
+            showsDockBackdrop: DockBehaviorPolicy.showsDockBackdrop(
+                routeDepth: routeDepth,
+                overlayPresentation: overlayPresentation
+            ),
+            dockClearance: DockBehaviorPolicy.dockClearance(dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize),
+            dockBackdropHeight: LiquidGlassPolicy.dockBackdropHeight(dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize),
+            stageContentBottomClearance: StageSafeAreaPolicy.stageContentBottomClearance(
+                routeDepth: routeDepth,
+                overlayPresentation: overlayPresentation,
+                dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize
+            ),
+            captureComposerClearance: StageSafeAreaPolicy.captureComposerBottomClearance(
+                routeDepth: routeDepth,
+                overlayPresentation: overlayPresentation,
+                dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize
+            ),
+            continuityReceiptBottomClearance: StageSafeAreaPolicy.continuityReceiptBottomClearance(
+                routeDepth: routeDepth,
+                overlayPresentation: overlayPresentation,
+                dynamicTypeIsAccessibilitySize: dynamicTypeIsAccessibilitySize
+            )
         )
     }
 
@@ -99,6 +82,6 @@ enum StagePathStore {
         routeDepth: StageRouteDepth,
         overlayPresentation: StageOverlayPresentation
     ) -> Bool {
-        routeDepth == .root && overlayPresentation != .activatedCaptureComposer
+        DockBehaviorPolicy.showsRootDock(routeDepth: routeDepth, overlayPresentation: overlayPresentation)
     }
 }
