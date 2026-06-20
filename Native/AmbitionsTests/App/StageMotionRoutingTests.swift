@@ -74,6 +74,36 @@ final class StageMotionRoutingTests: XCTestCase {
         XCTAssertEqual(owner.lastMotionProjection?.sourceSurface, "stage-test")
         XCTAssertEqual(owner.lastMotionProjection?.reduceMotion, true)
         XCTAssertEqual(owner.lastMotionProjection?.displayStyle, .calm)
+        XCTAssertEqual(owner.lastMotionCoordination?.projection.action, .openTime)
+        XCTAssertEqual(owner.lastMotionCoordination?.reductionPolicy.displayStyle, .calm)
+        XCTAssertFalse(owner.lastMotionCoordination?.reductionPolicy.allowsAmbientMovement ?? true)
+    }
+
+    func testStageMotionCoordinatorOwnsCanonicalRoutingAndPolicy() {
+        let coordinator = StageMotionCoordinator(reduceMotionEnabled: false)
+        let coordination = coordinator.coordinate(
+            action: .inspectProof(nil),
+            source: "stage-motion-test"
+        )
+
+        XCTAssertEqual(coordination.projection.action, .inspectProof(nil))
+        XCTAssertEqual(coordination.projection.sourceSurface, "stage-motion-test")
+        XCTAssertEqual(coordination.projection.reduceMotion, false)
+        XCTAssertEqual(coordination.projection.displayStyle, .active)
+        XCTAssertEqual(coordination.reductionPolicy.displayStyle, .active)
+        XCTAssertTrue(coordination.reductionPolicy.allowsAmbientMovement)
+        assertMemoryLensOverlay(coordination.route, expectedQuery: "proof continuity")
+    }
+
+    func testStageMotionReductionPolicyKeepsReducedMotionSemanticQueriesStatic() {
+        let policy = StageMotionReductionPolicy.current(reduceMotionEnabled: true)
+
+        XCTAssertEqual(policy.displayStyle, .calm)
+        XCTAssertFalse(policy.allowsAmbientMovement)
+        XCTAssertEqual(policy.motionQuery(label: "proof", action: .inspectProof(nil)), "proof")
+        XCTAssertEqual(policy.motionQuery(label: "proof", action: .inspectProof("proof-id")), "proof:proof-id")
+        XCTAssertTrue(policy.proofThreadTextureDescription.contains("Static proof-thread marks"))
+        XCTAssertTrue(policy.rhythmSpacingDescription.contains("static"))
     }
 
     private func assertMemoryLensOverlay(_ route: StageMotionRoute, expectedQuery: String) {

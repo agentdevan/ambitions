@@ -1,5 +1,28 @@
 import AmbitionsDesignSystem
 
+struct StageMotionAccessibilityPlan {
+    let label: String
+    let value: String
+    let hint: String
+
+    static func current(
+        projection: MotionCurrentProjection,
+        reductionPolicy: StageMotionReductionPolicy
+    ) -> StageMotionAccessibilityPlan {
+        StageMotionAccessibilityPlan(
+            label: "\(projection.crown.title). \(projection.crown.summary)",
+            value: [
+                projection.field.title,
+                projection.field.source,
+                projection.field.proof,
+                projection.field.receipt,
+                reductionPolicy.proofThreadTextureDescription
+            ].joined(separator: ". "),
+            hint: "Motion is behavior, not a destination. \(reductionPolicy.rhythmSpacingDescription)"
+        )
+    }
+}
+
 func motionTraceRole(for label: String) -> ProofRelationshipTracePrimitiveRole {
     let value = label.lowercased()
     if value.contains("context") || value.contains("local") {

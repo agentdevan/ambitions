@@ -1,9 +1,7 @@
-import AmbitionsDesignSystem
 import Foundation
 import SwiftUI
 
 struct StageMotionCurrentView: View {
-    @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let projection: MotionCurrentProjection
@@ -25,25 +23,12 @@ struct StageMotionCurrentView: View {
 
     var body: some View {
         let objectStageContract = MotionObjectStagePrimitiveContract.current
+        let layer = StageMotionLayer.current(
+            projection: projection,
+            reduceMotionEnabled: reduceMotion
+        )
 
-        ScrollView {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                MotionContextCrown(state: projection.crown)
-                MotionCurrentField(
-                    state: projection.field,
-                    lanes: projection.lanes,
-                    reduceMotion: reduceMotion,
-                    onAction: onAction
-                )
-                MotionReentryPrompt()
-                MotionLaneCluster(lanes: projection.lanes)
-                MotionSourceReceiptAffordance(state: projection.affordance)
-                MotionContinuityDock(actions: projection.dockActions, onAction: onAction)
-            }
-            .padding(.horizontal, theme.spacing.lg)
-            .padding(.vertical, theme.spacing.md)
-        }
-        .scrollIndicators(.hidden)
+        StageMotionRenderer(layer: layer, onAction: onAction)
         .accessibilityIdentifier("motion.current.scroll")
         .accessibilityIdentifier("stage.motion.current.view")
         .accessibilityValue(objectStageContract.firstViewportStructure)

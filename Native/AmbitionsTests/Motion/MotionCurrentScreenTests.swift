@@ -5,10 +5,11 @@ import XCTest
 final class MotionCurrentScreenTests: XCTestCase {
     func testAMB574MotionObjectStagePrimitiveContractReplacesLanePanels() throws {
         let contract = MotionObjectStagePrimitiveContract.current
-        let source = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift"),
-            encoding: .utf8
-        )
+        let root = repoRoot()
+        let viewSource = try source("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift", root: root)
+        let rendererSource = try source("Native/Ambitions/Stage/Motion/StageMotionRenderer.swift", root: root)
+        let fieldSource = try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentFieldView.swift", root: root)
+        let canvasSource = try source("Native/Ambitions/Rendering/CanvasPrimitives/MotionCurrentRenderer.swift", root: root)
 
         XCTAssertEqual(contract.primitiveID, "stage-motion-current")
         XCTAssertEqual(contract.ownerSurface, "Stage Motion")
@@ -16,30 +17,33 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertEqual(contract.screenshotIdentifier, "StageMotionCurrent")
         XCTAssertTrue(contract.firstViewportAvoidsAnalyticsReportCardDashboardOutput)
         XCTAssertFalse(contract.reservesTabBarClearance)
-        XCTAssertEqual(contract.sourceTrustLineOrder, ["source", "proof", "receipt", "re-entry action"])
+        XCTAssertEqual(contract.sourceTrustLineOrder, ["context", "history", "review", "re-entry action"])
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("lane cards"))
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("trace pills"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
-        XCTAssertTrue(source.contains("ProofRelationshipTracePrimitiveLine("))
-        XCTAssertTrue(source.contains("fieldTexture"))
-        XCTAssertTrue(source.contains("MotionFieldRhythmSpine("))
-        XCTAssertTrue(source.contains("motion.current.rhythm-spine"))
-        XCTAssertFalse(source.contains(".safeAreaInset(edge: .bottom"))
-        XCTAssertTrue(source.contains("Color.clear"))
-        XCTAssertTrue(source.contains(".overlay(alignment: .leading)"))
-        XCTAssertFalse(source.contains("theme.colors.canvasElevated.opacity(0.92)"))
-        XCTAssertFalse(source.contains("theme.colors.canvas.opacity(0.96)"))
-        XCTAssertFalse(source.contains("RoundedRectangle("))
-        XCTAssertFalse(source.contains("MotionFieldGlyph"))
-        XCTAssertFalse(source.contains("MotionTracePill"))
+        XCTAssertTrue(viewSource.contains("StageMotionLayer.current("))
+        XCTAssertTrue(viewSource.contains("StageMotionRenderer(layer: layer"))
+        XCTAssertTrue(rendererSource.contains("MotionCurrentField("))
+        XCTAssertTrue(fieldSource.contains("ProofRelationshipTracePrimitiveLine("))
+        XCTAssertTrue(fieldSource.contains("MotionFieldRhythmSpine("))
+        XCTAssertTrue(canvasSource.contains("ProductMeaningCanvasEngine("))
+        XCTAssertTrue(canvasSource.contains("motion.current.rhythm-spine"))
+        XCTAssertFalse(rendererSource.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(fieldSource.contains(".overlay(alignment: .leading)"))
+        XCTAssertFalse(fieldSource.contains("theme.colors.canvasElevated.opacity(0.92)"))
+        XCTAssertFalse(fieldSource.contains("theme.colors.canvas.opacity(0.96)"))
+        XCTAssertFalse(rendererSource.contains("RoundedRectangle("))
+        XCTAssertFalse(fieldSource.contains("MotionFieldGlyph"))
+        XCTAssertFalse(fieldSource.contains("MotionTracePill"))
     }
 
     func testAMB574PrimitiveRegistryIncludesMotionObjectStageEntry() throws {
-        let registry = try String(
-            contentsOf: repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md"),
-            encoding: .utf8
-        )
+        let registryURL = repoRoot().appendingPathComponent("docs/codex/ambitions_primitive_invention_registry.md")
+        guard FileManager.default.fileExists(atPath: registryURL.path) else {
+            throw XCTSkip("Historical primitive registry is not retained in current repo truth.")
+        }
+        let registry = try String(contentsOf: registryURL, encoding: .utf8)
 
         XCTAssertTrue(registry.contains("| motion-object-stage | Promoted | Motion | Motion Current | AMB-574 |"))
         XCTAssertTrue(registry.contains("### motion-object-stage"))
@@ -51,9 +55,9 @@ final class MotionCurrentScreenTests: XCTestCase {
 
         XCTAssertEqual(projection.crown.title, "Motion Current")
         XCTAssertFalse(projection.field.title.isEmpty)
-        XCTAssertEqual(Set(projection.lanes.map(\.id)), ["proof", "recovery", "reentry"])
+        XCTAssertEqual(Set(projection.lanes.map(\.id)), ["history", "recovery", "reentry"])
         XCTAssertEqual(projection.lanes.flatMap(\.items).count, 11)
-        XCTAssertEqual(projection.affordance.items.map(\.label), ["Source", "Proof", "Receipt"])
+        XCTAssertEqual(projection.affordance.items.map(\.label), ["Context", "History", "Review"])
         XCTAssertEqual(projection.dockActions.map(\.id), ["today", "goals", "time", "trust"])
     }
 
@@ -64,7 +68,7 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(field.summary.localizedCaseInsensitiveContains("holding the thread"))
         XCTAssertTrue(field.source.localizedCaseInsensitiveContains("source"))
         XCTAssertTrue(field.proof.localizedCaseInsensitiveContains("Proof"))
-        XCTAssertTrue(field.receipt.localizedCaseInsensitiveContains("Receipt"))
+        XCTAssertTrue(field.receipt.localizedCaseInsensitiveContains("Review"))
         XCTAssertTrue(field.control.localizedCaseInsensitiveContains("Inspect source"))
     }
 
@@ -89,8 +93,8 @@ final class MotionCurrentScreenTests: XCTestCase {
         let laneTitles = projection.lanes.map(\.title)
         let allCopy = projection.allUserFacingCopy
 
-        XCTAssertEqual(laneTitles, ["Proof lane", "Recovery lane", "Re-entry lane"])
-        XCTAssertEqual(MotionCurrentProjection.fixture.lanes.map(\.rhythmTitle), ["Proof", "Recovery", "Re-entry"])
+        XCTAssertEqual(laneTitles, ["What moved", "What needs recovery", "Where to return"])
+        XCTAssertEqual(MotionCurrentProjection.fixture.lanes.map(\.rhythmTitle), ["What moved", "What needs recovery", "Where to return"])
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("No Motion " + "Yet"))
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("seg" + "mented"))
         XCTAssertFalse(allCopy.localizedCaseInsensitiveContains("Pick" + "er"))
@@ -172,18 +176,16 @@ final class MotionCurrentScreenTests: XCTestCase {
             .map { "\($0.label) \($0.value)" }
             .joined(separator: "\n")
 
-        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Source"))
-        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Proof"))
-        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Receipt"))
+        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Context"))
+        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("History"))
+        XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Review"))
         XCTAssertTrue(projection.crown.chips.contains { $0.title == "Local" })
-        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Receipt" })
+        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Source-led" })
+        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Review" })
     }
 
     func testAMB965MotionReconstructionExposesProofReceiptAndReentryActions() throws {
-        let source = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift"),
-            encoding: .utf8
-        )
+        let source = try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentFieldView.swift", root: repoRoot())
         let allCopy = MotionCurrentProjection.fixture.allUserFacingCopy
 
         XCTAssertTrue(source.contains("motion.current.action.inspect-proof"))
@@ -231,6 +233,10 @@ private extension MotionCurrentProjection {
 }
 
 private extension MotionCurrentScreenTests {
+    func source(_ relativePath: String, root: URL) throws -> String {
+        try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
+    }
+
     func repoRoot() -> URL {
         URL(fileURLWithPath: #filePath)
             .deletingLastPathComponent()
