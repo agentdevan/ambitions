@@ -20,6 +20,30 @@ enum PersistenceCoding {
 }
 
 actor AmbitionsPersistenceStore {
+    static let storedModelNames: Set<String> = [
+        "ActionReceiptHistoryRecordModel",
+        "AmbitionGraphOperationalRecordModel",
+        "AmbitionGraphProofRecordModel",
+        "AmbitionGraphProjectionRecordModel",
+        "AppStateRecord",
+        "CaptureRecord",
+        "CommandExecutionRecord",
+        "EntityRevisionTombstoneRecord",
+        "EventLedgerRecord",
+        "FeedbackEventRecord",
+        "GoalDraftRecord",
+        "GoalPlanRecord",
+        "GoalRecord",
+        "LifeContextBundleRecord",
+        "PlanSectionRecord",
+        "ProgressEvidenceRecord",
+        "ReminderRecord",
+        "RuntimeSnapshotLedgerRecord",
+        "SideEffectLedgerStorageRecord",
+        "StepRecord",
+        "TeachingSignalRecord"
+    ]
+
     static let schema = Schema([
         GoalRecord.self,
         GoalDraftRecord.self,
@@ -228,6 +252,14 @@ actor AmbitionsPersistenceStore {
         if context.hasChanges {
             try context.save()
         }
+    }
+}
+
+extension AmbitionsPersistenceStore {
+    nonisolated func healthReport(
+        checker: StoreHealthCheck = StoreHealthCheck()
+    ) async -> StoreHealthReport {
+        await checker.check(store: self)
     }
 }
 
