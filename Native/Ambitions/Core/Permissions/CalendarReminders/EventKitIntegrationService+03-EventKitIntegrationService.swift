@@ -7,18 +7,24 @@ extension EventKitIntegrationService {
     }
 
     func requestCalendarReadAccessFromTime(actionName: String) async -> CalendarPermissionState {
-        guard actionName.isEmpty == false else {
+        let authorization = await authorizationState(for: .calendarEvents)
+        let decision = CalendarPermission().readDecision(
+            current: authorization,
+            context: PermissionRequestContext(
+                surface: .time,
+                actionName: actionName
+            )
+        )
+        guard decision.shouldRequestSystemPermission else {
             return await calendarPermissionState()
         }
         return await CalendarPermissionState(calendarRemindersState: requestAuthorizationIfNeeded(for: .calendarEvents))
     }
 
     func requestCalendarWriteAccessForConfirmedBlock(intent: ScheduledBlockWriteIntent) async -> CalendarPermissionState {
-        guard intent.isExecutable else {
-            return await calendarPermissionState()
-        }
         let state = await authorizationState(for: .calendarEvents)
-        guard state == .notDetermined else {
+        let decision = CalendarPermission().writeDecision(current: state, intent: intent)
+        guard decision.shouldRequestSystemPermission else {
             return CalendarPermissionState(calendarRemindersState: state)
         }
         return await CalendarPermissionState(calendarRemindersState: storeClient.requestWriteOnlyAuthorizationForEvents())
