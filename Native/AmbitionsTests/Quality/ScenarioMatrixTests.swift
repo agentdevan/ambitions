@@ -26,6 +26,31 @@ final class ScenarioMatrixTests: XCTestCase {
         }
     }
 
+    func testCanonicalScenarioOwnersFeedPreviewMatrix() {
+        let ownerRows: [(String, [RuntimeScenario])] = [
+            ("YouScenarios", YouScenarios.all),
+            ("CaptureScenarios", CaptureScenarios.all),
+            ("SearchScenarios", SearchScenarios.all),
+            ("ClosureScenarios", ClosureScenarios.all),
+            ("InspectionScenarios", InspectionScenarios.all),
+            ("StageMotionScenarios", StageMotionScenarios.all),
+            ("CrossSurfaceMotionScenarios", CrossSurfaceMotionScenarios.all),
+            ("PostMutationMotionScenarios", PostMutationMotionScenarios.all),
+            ("RecoveryMotionScenarios", RecoveryMotionScenarios.all),
+            ("AccessibilityScenarios", AccessibilityScenarios.all),
+            ("BrokenSourceScenarios", BrokenSourceScenarios.all),
+            ("EmptyStateScenarios", EmptyStateScenarios.all),
+            ("DenseStateScenarios", DenseStateScenarios.all),
+            ("PostMutationScenarios", PostMutationScenarios.all)
+        ]
+        let previewIDs = Set(ScenarioCatalog.previewMatrix.map(\.id))
+
+        for (owner, rows) in ownerRows {
+            XCTAssertFalse(rows.isEmpty, "\(owner) must own at least one runtime scenario row.")
+            XCTAssertTrue(rows.allSatisfy { previewIDs.contains($0.id) }, "\(owner) rows must be consumed by the preview matrix.")
+        }
+    }
+
     func testQualityGateChecklistIsStrictAndExecutable() {
         XCTAssertEqual(QualityGateChecklist.validationIssues(), [])
         XCTAssertEqual(Set(QualityGateChecklist.contracts.map(\.id)), Set(QualityGateID.allCases))
