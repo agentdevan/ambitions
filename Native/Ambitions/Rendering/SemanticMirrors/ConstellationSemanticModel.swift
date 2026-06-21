@@ -5,6 +5,7 @@ struct ConstellationSemanticModel: Equatable, Sendable {
     let todayRelationshipSummary: String
     let inspectionSummary: String
     let accessibilityOrder: [String]
+    let renderPlan: CanvasPrimitiveRenderPlan
 
     init(
         stageName: String,
@@ -12,10 +13,7 @@ struct ConstellationSemanticModel: Equatable, Sendable {
         inspectionSummary: String,
         accessibilityFallbacks: [String]
     ) {
-        self.stageName = stageName
-        self.todayRelationshipSummary = todayRelationshipSummary
-        self.inspectionSummary = inspectionSummary
-        self.accessibilityOrder = [
+        let accessibilityOrder = [
             stageName,
             "life areas",
             "goal threads",
@@ -24,6 +22,17 @@ struct ConstellationSemanticModel: Equatable, Sendable {
             "proof",
             "receipt",
         ] + Array(accessibilityFallbacks.prefix(2))
+
+        self.stageName = stageName
+        self.todayRelationshipSummary = todayRelationshipSummary
+        self.inspectionSummary = inspectionSummary
+        self.accessibilityOrder = accessibilityOrder
+        self.renderPlan = ConstellationRenderer.plan(
+            stageName: stageName,
+            todayRelationshipSummary: todayRelationshipSummary,
+            inspectionSummary: inspectionSummary,
+            accessibilityOrder: accessibilityOrder
+        )
     }
 
     var provesInspectableRelationships: Bool {

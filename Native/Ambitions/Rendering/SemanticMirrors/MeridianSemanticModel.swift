@@ -10,21 +10,32 @@ struct MeridianSemanticModel: Equatable {
     let voiceOverOrder: [String]
     let noStepSummary: String?
     let sourceUnavailable: Bool
+    let renderPlan: CanvasPrimitiveRenderPlan
 
     init(
         dayRail: AmbitionsDayRailViewState,
         continuity: RealityMeridianContinuityProjectionState? = nil
     ) {
+        let voiceOverOrder = continuity?.voiceOverOrder ?? Self.voiceOverOrder(for: dayRail)
+        let sourceUnavailable = dayRail.heroStep?.receiptItem.freshness == .unavailable ||
+            dayRail.heroStep?.sourceRecordLabel == "Source record unavailable"
+
         self.primaryObjectTitle = continuity?.primaryObjectTitle ?? UserFacingLanguage.Object.realityMeridian
         self.dateTitle = dayRail.dateTitle
         self.mode = dayRail.mode
         self.contextSummary = dayRail.contextSummary
         self.reducedMotionSummary = continuity?.reducedMotionSummary ?? "Reduce Motion keeps Start here in a static current-time relationship."
         self.dynamicTypeSummary = continuity?.dynamicTypeSummary ?? "Dynamic Type keeps Start here before supporting day rows."
-        self.voiceOverOrder = continuity?.voiceOverOrder ?? Self.voiceOverOrder(for: dayRail)
+        self.voiceOverOrder = voiceOverOrder
         self.noStepSummary = dayRail.heroStep == nil ? "No step is required right now." : nil
-        self.sourceUnavailable = dayRail.heroStep?.receiptItem.freshness == .unavailable ||
-            dayRail.heroStep?.sourceRecordLabel == "Source record unavailable"
+        self.sourceUnavailable = sourceUnavailable
+        self.renderPlan = MeridianRenderer.plan(
+            mode: dayRail.mode,
+            contextSummary: dayRail.contextSummary,
+            hasHeroStep: dayRail.heroStep != nil,
+            sourceUnavailable: sourceUnavailable,
+            semanticElementCount: voiceOverOrder.count
+        )
     }
 
     private static func voiceOverOrder(for dayRail: AmbitionsDayRailViewState) -> [String] {

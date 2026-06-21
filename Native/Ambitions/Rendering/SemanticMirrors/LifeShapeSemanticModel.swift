@@ -8,6 +8,7 @@ struct LifeShapeSemanticModel: Equatable, Sendable {
     let pressureSummary: String
     let horizonSummary: String
     let accessibilityOrder: [String]
+    let renderPlan: CanvasPrimitiveRenderPlan
 
     init(
         stageName: String,
@@ -18,13 +19,7 @@ struct LifeShapeSemanticModel: Equatable, Sendable {
         horizonSummary: String,
         accessibilityFallbacks: [String]
     ) {
-        self.stageName = stageName
-        self.currentDateSummary = currentDateSummary
-        self.capacitySummary = capacitySummary
-        self.protectedWindowSummary = protectedWindowSummary
-        self.pressureSummary = pressureSummary
-        self.horizonSummary = horizonSummary
-        self.accessibilityOrder = [
+        let accessibilityOrder = [
             stageName,
             "current date",
             "capacity",
@@ -34,6 +29,23 @@ struct LifeShapeSemanticModel: Equatable, Sendable {
             "source",
             "receipt",
         ] + Array(accessibilityFallbacks.prefix(2))
+
+        self.stageName = stageName
+        self.currentDateSummary = currentDateSummary
+        self.capacitySummary = capacitySummary
+        self.protectedWindowSummary = protectedWindowSummary
+        self.pressureSummary = pressureSummary
+        self.horizonSummary = horizonSummary
+        self.accessibilityOrder = accessibilityOrder
+        self.renderPlan = LifeShapeRenderer.plan(
+            stageName: stageName,
+            currentDateSummary: currentDateSummary,
+            capacitySummary: capacitySummary,
+            protectedWindowSummary: protectedWindowSummary,
+            pressureSummary: pressureSummary,
+            horizonSummary: horizonSummary,
+            accessibilityOrder: accessibilityOrder
+        )
     }
 
     var provesTimeObjectSemantics: Bool {
