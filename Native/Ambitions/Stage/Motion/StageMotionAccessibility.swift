@@ -4,12 +4,14 @@ struct StageMotionAccessibilityPlan {
     let label: String
     let value: String
     let hint: String
+    let semanticMirror: MotionSemanticModel
 
     static func current(
         projection: MotionCurrentProjection,
         reductionPolicy: StageMotionReductionPolicy
     ) -> StageMotionAccessibilityPlan {
-        StageMotionAccessibilityPlan(
+        let mirror = MotionSemanticModel(projection: projection, reductionPolicy: reductionPolicy)
+        return StageMotionAccessibilityPlan(
             label: "\(projection.crown.title). \(projection.crown.summary)",
             value: [
                 projection.field.title,
@@ -18,7 +20,8 @@ struct StageMotionAccessibilityPlan {
                 projection.field.receipt,
                 reductionPolicy.proofThreadTextureDescription
             ].joined(separator: ". "),
-            hint: "Motion is behavior, not a destination. \(reductionPolicy.rhythmSpacingDescription)"
+            hint: "Motion is behavior, not a destination. \(reductionPolicy.rhythmSpacingDescription)",
+            semanticMirror: mirror
         )
     }
 }

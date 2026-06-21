@@ -9,6 +9,7 @@ struct GoalsStageScene: Equatable, Sendable {
     let todayRelationshipSummary: String
     let inspectionSummary: String
     let accessibilityFallbacks: [String]
+    let semanticMirror: ConstellationSemanticModel
 
     var satisfiesArchitectureTree: Bool {
         surface == .goals &&
@@ -18,5 +19,32 @@ struct GoalsStageScene: Equatable, Sendable {
             sourceTrustLineOrder == ["life area", "source", "proof", "receipt", "Today link"] &&
             todayRelationshipSummary.localizedCaseInsensitiveContains("Today") &&
             inspectionSummary.localizedCaseInsensitiveContains("proof")
+    }
+
+    init(
+        surface: StageMutationTargetSurface,
+        productObject: String,
+        stageName: String,
+        firstViewportStructure: String,
+        sourceTrustLineOrder: [String],
+        todayRelationshipSummary: String,
+        inspectionSummary: String,
+        accessibilityFallbacks: [String],
+        semanticMirror: ConstellationSemanticModel? = nil
+    ) {
+        self.surface = surface
+        self.productObject = productObject
+        self.stageName = stageName
+        self.firstViewportStructure = firstViewportStructure
+        self.sourceTrustLineOrder = sourceTrustLineOrder
+        self.todayRelationshipSummary = todayRelationshipSummary
+        self.inspectionSummary = inspectionSummary
+        self.accessibilityFallbacks = accessibilityFallbacks
+        self.semanticMirror = semanticMirror ?? ConstellationSemanticModel(
+            stageName: stageName,
+            todayRelationshipSummary: todayRelationshipSummary,
+            inspectionSummary: inspectionSummary,
+            accessibilityFallbacks: accessibilityFallbacks
+        )
     }
 }

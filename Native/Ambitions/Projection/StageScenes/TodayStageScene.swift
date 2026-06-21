@@ -21,46 +21,6 @@ struct TodayStageScene: Equatable {
     }
 }
 
-struct MeridianSemanticModel: Equatable {
-    let primaryObjectTitle: String
-    let dateTitle: String
-    let mode: DayRailMode
-    let contextSummary: String
-    let reducedMotionSummary: String
-    let dynamicTypeSummary: String
-    let voiceOverOrder: [String]
-    let noStepSummary: String?
-    let sourceUnavailable: Bool
-
-    init(
-        dayRail: AmbitionsDayRailViewState,
-        continuity: RealityMeridianContinuityProjectionState? = nil
-    ) {
-        self.primaryObjectTitle = continuity?.primaryObjectTitle ?? "Reality Meridian"
-        self.dateTitle = dayRail.dateTitle
-        self.mode = dayRail.mode
-        self.contextSummary = dayRail.contextSummary
-        self.reducedMotionSummary = continuity?.reducedMotionSummary ?? "Reduce Motion keeps Start here in a static current-time relationship."
-        self.dynamicTypeSummary = continuity?.dynamicTypeSummary ?? "Dynamic Type keeps Start here before supporting day rows."
-        self.voiceOverOrder = continuity?.voiceOverOrder ?? Self.voiceOverOrder(for: dayRail)
-        self.noStepSummary = dayRail.heroStep == nil ? "No step is required right now." : nil
-        self.sourceUnavailable = dayRail.heroStep?.receiptItem.freshness == .unavailable ||
-            dayRail.heroStep?.sourceRecordLabel == "Source record unavailable"
-    }
-
-    private static func voiceOverOrder(for dayRail: AmbitionsDayRailViewState) -> [String] {
-        var order = ["Reality Meridian", "Start here"]
-        if let hero = dayRail.heroStep {
-            order.append(hero.title)
-            order.append(hero.sourceRecordLabel)
-            order.append(hero.receiptLabel)
-        } else {
-            order.append("No step is required right now")
-        }
-        return order
-    }
-}
-
 struct StartHereToken: Equatable {
     let id: String
     let title: String
