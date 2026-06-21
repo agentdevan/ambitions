@@ -5,6 +5,8 @@ struct HistoryInspectionView: View {
     var body: some View {
         YouReflectionRouteSurface(accessibilityIdentifier: "insights.history.screen") { dashboard, actions in
             AnyView(VStack(alignment: .leading, spacing: actions.theme.spacing.lg) {
+                InspectionSurface(kind: .history)
+
                 InsightsRouteHeroSurface(
                     eyebrow: "History",
                     title: "Deep history",
