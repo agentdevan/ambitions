@@ -327,15 +327,15 @@ struct PreviewFixtures: Sendable {
                 footer: "You keeps settings, history, trust, and controls together."
             ),
             controlRoom: YouControlRoomState(
-                title: "Control room",
-                subtitle: "A short map of the trust areas you can inspect without turning You into a settings dump.",
+                title: "Profile map",
+                subtitle: "A short map of the trust areas you can inspect from the User System Profile.",
                 entries: [
                     YouControlRoomEntry(id: "you-control-constitution", title: "Personal Operating Constitution", subtitle: "Recommendation posture, recovery tone, planning strictness, and confirmation rules.", icon: "scroll", statusLabel: "Local defaults", state: .selected),
                     YouControlRoomEntry(id: "you-control-memory", title: "What Ambitions Knows", subtitle: "Local evidence, feedback, corrections, captures, and event history Ambitions can explain and let you correct.", icon: "brain.head.profile", statusLabel: "Stored on this device", state: .default),
                     YouControlRoomEntry(id: "you-control-corrections", title: "Corrections and assumptions", subtitle: "Assumptions can be corrected through existing teaching and explanation paths.", icon: "checkmark.bubble", statusLabel: "2 active", state: .success),
                     YouControlRoomEntry(id: "you-control-receipts", title: "Receipts and audit posture", subtitle: "Reviews turns local receipts, recovery, proof, and corrections into a calm receipt layer.", icon: "doc.text.magnifyingglass", statusLabel: "Ready to review", state: .default)
                 ],
-                footer: "Open detail from the owning surfaces for deep review. This page stays oriented around trust, control, and next-safe status."
+                footer: "Open details from their owning surfaces for deep review. You stays oriented around trust, control, and current status."
             ),
             constitution: YouConstitutionState(
                 title: "Personal Operating Constitution",
@@ -631,7 +631,7 @@ struct PreviewFixtures: Sendable {
                 title: "What Ambitions will not do silently",
                 subtitle: "The safe automation policy keeps external, broad, destructive, and unsupported changes confirmation-gated or blocked.",
                 rules: [
-                    YouConstitutionRule(id: "automation-calendar", title: "No silent calendar changes", detail: "Calendar changes must be confirmed from Plan.", statusLabel: "Requires confirmation", state: .warning),
+                    YouConstitutionRule(id: "automation-calendar", title: "No silent calendar changes", detail: "Calendar changes need explicit confirmation.", statusLabel: "Requires confirmation", state: .warning),
                     YouConstitutionRule(id: "automation-reflow", title: "No silent broad reflow", detail: "This would change more than one part of the plan.", statusLabel: "Requires confirmation", state: .warning),
                     YouConstitutionRule(id: "automation-memory", title: "No unsupported forgetting", detail: "No memory was forgotten.", statusLabel: "Blocked safely", state: .warning)
                 ],
@@ -802,7 +802,7 @@ struct PreviewFixtures: Sendable {
                     SettingsItem(id: "you-integration-shortcuts", title: "Navigation shortcuts", subtitle: "\(ExternalSurfaceTruth.availableButNeedsManualVerification). App Intents stay navigation-only and keep canonical routing ownership.", icon: "sparkles.rectangle.stack", valueLabel: ExternalSurfaceTruth.availableButNeedsManualVerification),
                     SettingsItem(id: "you-integration-share", title: "Share Extension", subtitle: "\(ExternalSurfaceTruth.notShippedInThisBuild). Share intake remains deferred until a dedicated extension target and handoff path exist.", icon: "square.and.arrow.up", valueLabel: ExternalSurfaceTruth.notShippedInThisBuild)
                 ],
-                footer: "Notification and integration status should answer whether anything important needs attention without turning You into an admin checklist."
+                footer: "Notification and integration status should answer whether anything important needs attention without becoming the first layer."
             ),
             defaultsSection: YouSectionGroup(
                 title: "Personal defaults",

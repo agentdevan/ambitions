@@ -88,10 +88,7 @@ enum ShellCommandDestination: Hashable, Sendable {
             case .weeklyReview: "Weekly Review"
             }
         case let .youRoute(target):
-            switch target {
-            case .monthlyReview: "Monthly Review"
-            case .history: "History"
-            }
+            target.title
         case let .overlay(overlay):
             switch overlay.kind {
             case .quietCommandSheet: overlay.isActivatedCaptureComposer ? "Capture" : "Add something"

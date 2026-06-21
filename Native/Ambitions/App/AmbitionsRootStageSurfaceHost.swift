@@ -137,8 +137,78 @@ struct AmbitionsRootStageSurfaceHost: View {
                     ) {
                         HistoryInspectionView()
                     }
+                case .personalSystem,
+                     .privacyAutomation,
+                     .receiptsHistory,
+                     .scheduleAvailability,
+                     .planningDefaults,
+                     .vacationAwayTime,
+                     .localContextControls,
+                     .notifications,
+                     .capturePreferences,
+                     .sessionDefaults,
+                     .appearance,
+                     .privacy,
+                     .sourceSettings,
+                     .localDataControls,
+                     .exportImport,
+                     .help,
+                     .about:
+                    AppShellScaffold(
+                        title: target.title,
+                        subtitle: "User System Profile",
+                        posture: .utility,
+                        backButtonAccessibilityIdentifier: "shell.you.back-button",
+                        onBack: { navigation.resetYouPath() },
+                        trailingButtons: []
+                    ) {
+                        YouRootDetailRouteSurface(detail: rootDetail(for: target))
+                    }
                 }
             }
+        }
+    }
+
+    private func rootDetail(for target: YouRouteTarget) -> YouRootDetail {
+        switch target {
+        case .monthlyReview:
+            .reviews
+        case .history:
+            .proof
+        case .personalSystem:
+            .personalRuntime
+        case .privacyAutomation:
+            .automationTrust
+        case .receiptsHistory:
+            .receiptsHistory
+        case .scheduleAvailability:
+            .scheduleAvailability
+        case .planningDefaults:
+            .planBehavior
+        case .vacationAwayTime:
+            .vacationAwayTime
+        case .localContextControls:
+            .whatAmbitionsKnows
+        case .notifications:
+            .notifications
+        case .capturePreferences:
+            .capturePreferences
+        case .sessionDefaults:
+            .sessionDefaults
+        case .appearance:
+            .appearance
+        case .privacy:
+            .trustCenter
+        case .sourceSettings:
+            .sourceSettings
+        case .localDataControls:
+            .localDataControls
+        case .exportImport:
+            .exportImport
+        case .help:
+            .support
+        case .about:
+            .about
         }
     }
 

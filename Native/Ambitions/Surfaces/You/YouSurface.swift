@@ -6,19 +6,20 @@ import UIKit
 #endif
 
 struct YouSurface: View {
+    @Environment(\.appShellCapability) private var appShellCapability
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.appPlatformCapability) private var appPlatformCapability
     @Environment(\.appUserSystemCapability) private var appUserSystemCapability
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: YouViewModel
-    @State private var activeDetail: YouRootDetail?
+    @State private var pendingScreenshotDetail: YouRootDetail?
     let showsNavigationChrome: Bool
 
     @MainActor
     init(viewModel: YouViewModel? = nil, showsNavigationChrome: Bool = true) {
         _viewModel = State(initialValue: viewModel ?? YouViewModel())
-        _activeDetail = State(initialValue: Self.screenshotProofDetail(from: ProcessInfo.processInfo.arguments))
+        _pendingScreenshotDetail = State(initialValue: Self.screenshotProofDetail(from: ProcessInfo.processInfo.arguments))
         self.showsNavigationChrome = showsNavigationChrome
     }
 
@@ -42,7 +43,7 @@ struct YouSurface: View {
                 case let .loaded(profileProjection):
                     YouObjectView(
                         profileProjection: profileProjection,
-                        onOpenDetail: { activeDetail = $0 }
+                        onOpenDetail: openDetail
                     )
                 }
             }
@@ -80,27 +81,10 @@ struct YouSurface: View {
         }
         .accessibilityIdentifier("you.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
-        .sheet(item: $activeDetail) { detail in
-            YouRootDetailSheet(
-                detail: detail,
-                dashboard: viewModel.loadedDashboard,
-                appearancePreference: $viewModel.appearancePreference,
-                accentFamily: $viewModel.accentFamily,
-                preferredTab: $viewModel.preferredTab,
-                reviewCadenceDays: $viewModel.reviewCadenceDays,
-                isSaving: viewModel.isSaving,
-                hasUnsavedChanges: viewModel.hasUnsavedChanges,
-                onSavePreferences: savePreferences,
-                onEnableNotifications: requestNotificationAuthorization,
-                notificationPermissionState: viewModel.loadedDashboard.flatMap(notificationPermissionState),
-                onOpenSystemSettings: openSystemSettingsIfAvailable
-            )
-            .presentationDetents([.large])
-            .presentationDragIndicator(.visible)
-        }
         .task {
             await viewModel.load(using: featureFactory.youService)
             syncAppearanceFromLoadedDashboard()
+            openPendingScreenshotDetailIfNeeded()
         }
     }
 
@@ -113,13 +97,14 @@ struct YouSurface: View {
         Task {
             await viewModel.save(using: featureFactory.youService)
             syncAppearanceFromLoadedDashboard()
+            announce(YouInteractions.accessibilityAnnouncement(for: .savePreferences))
         }
     }
 
     func requestNotificationAuthorization() {
         Task {
             let granted = await platform.notificationService.requestAuthorizationOptIn()
-            _ = YouInteractions.permissionAnnouncement(granted: granted)
+            announce(YouInteractions.permissionAnnouncement(granted: granted))
             if granted {
                 await platform.notificationService.refreshSchedule(now: .now)
             }
@@ -140,7 +125,27 @@ struct YouSurface: View {
     func openSystemSettingsIfAvailable() {
         #if canImport(UIKit)
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+        announce(YouInteractions.accessibilityAnnouncement(for: .openSystemSettings))
         UIApplication.shared.open(url)
+        #endif
+    }
+
+    func openDetail(_ detail: YouRootDetail) {
+        announce(YouInteractions.accessibilityAnnouncement(for: .openDetail(detail)))
+        shell.navigation.openYouRoute(detail.routeTarget)
+    }
+
+    func openPendingScreenshotDetailIfNeeded() {
+        guard let detail = pendingScreenshotDetail else { return }
+        pendingScreenshotDetail = nil
+        openDetail(detail)
+    }
+
+    func announce(_ message: String) {
+        #if canImport(UIKit)
+        UIAccessibility.post(notification: .announcement, argument: message)
+        #else
+        _ = message
         #endif
     }
 
@@ -153,7 +158,9 @@ struct YouSurface: View {
         }
 
         return [
+            "trust-automation": .automationTrust,
             "privacy-automation": .automationTrust,
+            "personal-runtime": .personalRuntime,
             "personal-system": .personalRuntime,
             "receipts-history": .receiptsHistory
         ][rawDetail.lowercased()]
@@ -180,6 +187,13 @@ struct YouSurface: View {
             preconditionFailure("App feature factory capability must be injected.")
         }
         return appFeatureFactoryCapability
+    }
+
+    var shell: AppShellCapability {
+        guard let appShellCapability else {
+            preconditionFailure("App shell capability must be injected.")
+        }
+        return appShellCapability
     }
 
     var platform: AppPlatformCapability {

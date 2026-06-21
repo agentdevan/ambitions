@@ -307,7 +307,7 @@ extension RepositoryBackedYouService {
                     state: .default
                 )
             ],
-            footer: "Availability Center explains how defaults affect Today and Plan. It does not request permissions, write calendars, auto-fill open time, or run broad reflow."
+            footer: "Availability Center explains how defaults affect Today and time-fit guidance. It does not request permissions, write calendars, auto-fill open time, or run broad reflow."
         )
     }
 

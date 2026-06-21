@@ -79,8 +79,8 @@ extension RepositoryBackedYouService {
                 appearanceSummary: appearanceSummary
             ),
             controlRoom: YouControlRoomState(
-                title: "Control room",
-                subtitle: "A short map of the trust areas you can inspect without turning You into a settings dump.",
+                title: "Profile map",
+                subtitle: "A short map of the trust areas you can inspect from the User System Profile.",
                 entries: [
                     YouControlRoomEntry(
                         id: "you-control-constitution",
@@ -115,7 +115,7 @@ extension RepositoryBackedYouService {
                     state: .default
                 )
                 ],
-                footer: "Open detail from the owning surfaces for deep review. This page stays oriented around trust, control, and next-safe status."
+                footer: "Open details from their owning surfaces for deep review. You stays oriented around trust, control, and current status."
             ),
             constitution: makeConstitution(
                 snapshot: snapshot,
@@ -363,7 +363,7 @@ extension RepositoryBackedYouService {
                         valueLabel: ExternalSurfaceTruth.productizedNeedsPlatformReview
                     )
                 ],
-                footer: "Notification and integration status should answer whether anything important needs attention without turning You into an admin checklist."
+                footer: "Notification and integration status should answer whether anything important needs attention without becoming the first layer."
             ),
             defaultsSection: YouSectionGroup(
                 title: "Personal defaults",

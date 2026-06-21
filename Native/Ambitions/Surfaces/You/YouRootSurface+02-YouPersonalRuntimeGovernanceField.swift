@@ -18,7 +18,7 @@ struct YouPersonalRuntimeGovernanceField: View {
                 Text("Trust, personal context, and receipts stay inspectable before deeper controls.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 3 : 2)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                     .fixedSize(horizontal: false, vertical: true)
             }
 

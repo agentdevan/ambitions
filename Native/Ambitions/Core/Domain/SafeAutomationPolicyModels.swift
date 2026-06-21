@@ -112,7 +112,7 @@ enum SafeAutomationPolicyReason: String, Codable, Sendable, Equatable, Hashable,
         case .externalSideEffect:
             return "This would affect something outside Ambitions."
         case .calendarIsPlanOwned:
-            return "Calendar changes must be confirmed from Plan."
+            return "Calendar changes need explicit confirmation."
         case .destructiveAction:
             return "This could permanently remove or damage information."
         case .privacySensitive:

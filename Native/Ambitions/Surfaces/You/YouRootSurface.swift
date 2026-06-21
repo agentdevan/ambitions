@@ -61,6 +61,53 @@ enum YouRootDetail: String, Identifiable {
         case .accessibility: "Accessibility"
         }
     }
+
+    var routeTarget: YouRouteTarget {
+        switch self {
+        case .personalization, .sessionDefaults:
+            .sessionDefaults
+        case .personalRuntime:
+            .personalSystem
+        case .appearance:
+            .appearance
+        case .whatAmbitionsKnows:
+            .localContextControls
+        case .trustCenter:
+            .privacy
+        case .receiptsHistory:
+            .receiptsHistory
+        case .corrections, .sourceSettings:
+            .sourceSettings
+        case .reviews:
+            .monthlyReview
+        case .proof:
+            .history
+        case .archive, .exportImport:
+            .exportImport
+        case .scheduleAvailability:
+            .scheduleAvailability
+        case .planBehavior, .durations:
+            .planningDefaults
+        case .automationTrust:
+            .privacyAutomation
+        case .vacationAwayTime:
+            .vacationAwayTime
+        case .notifications:
+            .notifications
+        case .integrations, .widgets:
+            .sourceSettings
+        case .capturePreferences:
+            .capturePreferences
+        case .localDataControls:
+            .localDataControls
+        case .support:
+            .help
+        case .about:
+            .about
+        case .accessibility:
+            .privacy
+        }
+    }
 }
 
 struct YouObjectStageControlPrimitiveContract: Equatable {
@@ -184,7 +231,7 @@ struct PersonalSystemCenterRootView: View {
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
 
-                Text("User System Profile")
+                Text("Personal system / User System Profile")
                     .font(AmbitionsIOS26SemanticTokens.Typography.caption1.weight(.semibold))
                     .foregroundStyle(LivingTabContext.you.accent(in: theme))
                     .lineLimit(1)

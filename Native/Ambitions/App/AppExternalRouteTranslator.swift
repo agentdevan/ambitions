@@ -70,13 +70,11 @@ struct AppExternalRouteTranslator {
         }
 
         if host == "you", let first = pathSegments.first {
-            switch first.lowercased() {
-            case "monthly-review":
-                return .openYouRoute(.monthlyReview)
-            case "history":
-                return .openYouRoute(.history)
-            default:
-                break
+            let normalized = first.lowercased()
+            if let target = YouRouteTarget.allCases.first(where: {
+                $0.deepLinkPath.lowercased() == normalized || $0.rawValue.lowercased() == normalized
+            }) {
+                return .openYouRoute(target)
             }
         }
 
@@ -173,12 +171,7 @@ struct AppExternalRouteTranslator {
                 return URL(string: "ambitions://time/weekly-review")
             }
         case let .openYouRoute(target):
-            switch target {
-            case .monthlyReview:
-                return URL(string: "ambitions://you/monthly-review")
-            case .history:
-                return URL(string: "ambitions://you/history")
-            }
+            return URL(string: "ambitions://you/\(target.deepLinkPath)")
         case let .presentOverlay(route):
             var components = URLComponents()
             components.scheme = "ambitions"
