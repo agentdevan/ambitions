@@ -106,7 +106,7 @@ extension AmbitionsDayRailView {
 
     func heroCopy(for heroStep: DayRailHeroStepState) -> String {
         if heroStep.receiptItem.freshness == .unavailable {
-            return "Needs context. Manual planning still works."
+            return "Needs context. Manual shaping still works."
         }
         if heroStep.becauseLine.isEmpty == false {
             return heroStep.becauseLine

@@ -5,6 +5,7 @@ struct ConstellationAtlasView: View {
     @Environment(\.ambitionTheme) var theme
     @Environment(\.accessibilityReduceMotion) var reduceMotion
     @Environment(\.colorSchemeContrast) var colorSchemeContrast
+    @Environment(\.dynamicTypeSize) var dynamicTypeSize
     @State var isOrbitalLensExpanded: Bool
     @State var selectedLifeAreaID: String?
     let overview: GoalsOverview

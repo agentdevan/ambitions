@@ -163,6 +163,7 @@ final class CoreDomainCanonicalOwnershipTests: XCTestCase {
             "Done",
             "Still counts",
             "Move it",
+            "Waiting",
             "Blocked",
             "Not needed"
         ])

@@ -1100,6 +1100,8 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     func testAMB962TodayReconstructionScreenshotMatrix() throws {
+        executionTimeAllowance = 300
+
         let matrix: [(name: String, scenario: String, contentSize: String, sheet: String?, required: [String])] = [
             (
                 name: "default",

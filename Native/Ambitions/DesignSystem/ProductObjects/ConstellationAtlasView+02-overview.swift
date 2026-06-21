@@ -232,30 +232,15 @@ extension ConstellationAtlasView {
 
     var atlasObject: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            HStack(alignment: .top, spacing: theme.spacing.md) {
-                atlasRelationshipField
-
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    Text(primaryGoal?.title ?? overview.hero.title)
-                        .font(theme.typography.section)
-                        .foregroundStyle(theme.colors.textPrimary)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.85)
-                        .allowsTightening(true)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(overview.hero.dominantTruth)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    Text(overview.constellationAtlasFirstViewportTrustSummary)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .lineLimit(2)
-                        .fixedSize(horizontal: false, vertical: true)
-
-                    atlasInlineTrustDepth
+            if usesStackedAtlasObject {
+                VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                    atlasRelationshipField
+                    atlasObjectDetails
+                }
+            } else {
+                HStack(alignment: .top, spacing: theme.spacing.md) {
+                    atlasRelationshipField
+                    atlasObjectDetails
                 }
             }
         }
@@ -282,13 +267,43 @@ extension ConstellationAtlasView {
     }
 
 
+    var atlasObjectDetails: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            Text(primaryGoal?.title ?? overview.hero.title)
+                .font(theme.typography.section)
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(usesStackedAtlasObject ? 3 : 2)
+                .minimumScaleFactor(0.85)
+                .allowsTightening(true)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(overview.hero.dominantTruth)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textSecondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Text(overview.constellationAtlasFirstViewportTrustSummary)
+                .font(theme.typography.caption)
+                .foregroundStyle(theme.colors.textTertiary)
+                .lineLimit(usesStackedAtlasObject ? 3 : 2)
+                .fixedSize(horizontal: false, vertical: true)
+
+            atlasInlineTrustDepth
+        }
+    }
+
+
+    var usesStackedAtlasObject: Bool {
+        dynamicTypeSize >= .xxLarge
+    }
+
+
     var equalWeightLifeAreaGridColumns: [GridItem] {
-        [
+        let columns = usesStackedAtlasObject ? 2 : 4
+        return Array(repeating:
             GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading),
-            GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading),
-            GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading),
-            GridItem(.flexible(), spacing: theme.spacing.xs, alignment: .topLeading)
-        ]
+            count: columns
+        )
     }
 
 

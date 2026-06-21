@@ -16,44 +16,68 @@ extension ConstellationAtlasView {
                 endPoint: .bottom
             )
 
-            VStack(spacing: theme.spacing.xs) {
-                ForEach(Array(atlasNodes.enumerated()), id: \.element.id) { index, item in
-                    HStack(spacing: theme.spacing.xs) {
-                        Circle()
-                            .fill(theme.stateStyle(for: item.state).accent)
-                            .frame(width: nodeSize, height: nodeSize)
-                            .overlay(Circle().stroke(theme.colors.textPrimary.opacity(0.28), lineWidth: 1))
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(atlasRelationshipTitleLabel(for: item))
-                                .font(theme.typography.caption.weight(.semibold))
-                                .foregroundStyle(theme.colors.textPrimary)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.70)
-                                .allowsTightening(true)
-                            Text(atlasRelationshipTraceLabel(for: item))
-                                .font(theme.typography.micro)
-                                .foregroundStyle(theme.colors.textTertiary)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.70)
-                                .allowsTightening(true)
-                        }
+            if usesStackedAtlasObject {
+                LazyVGrid(columns: stackedAtlasRelationshipColumns, alignment: .leading, spacing: theme.spacing.sm) {
+                    ForEach(Array(atlasNodes.enumerated()), id: \.element.id) { index, item in
+                        atlasRelationshipNode(index: index, item: item, alignsTrailing: false)
                     }
-                    .frame(maxWidth: .infinity, alignment: index.isMultiple(of: 2) ? .leading : .trailing)
                 }
+                .padding(theme.spacing.sm)
+            } else {
+                VStack(spacing: theme.spacing.xs) {
+                    ForEach(Array(atlasNodes.enumerated()), id: \.element.id) { index, item in
+                        atlasRelationshipNode(index: index, item: item, alignsTrailing: index.isMultiple(of: 2) == false)
+                    }
 
-                if atlasNodes.isEmpty {
-                    Text("No life areas yet")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
+                    if atlasNodes.isEmpty {
+                        Text("No life areas yet")
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textTertiary)
+                    }
                 }
+                .padding(theme.spacing.sm)
             }
-            .padding(theme.spacing.sm)
         }
-        .frame(width: 104)
+        .frame(width: usesStackedAtlasObject ? nil : 104)
+        .frame(maxWidth: usesStackedAtlasObject ? .infinity : nil, alignment: .leading)
         .frame(minHeight: 128)
         .accessibilityHidden(true)
     }
 
+
+    func atlasRelationshipNode(index: Int, item: GoalsLifeAreaItemState, alignsTrailing: Bool) -> some View {
+        HStack(spacing: theme.spacing.xs) {
+            Circle()
+                .fill(theme.stateStyle(for: item.state).accent)
+                .frame(width: nodeSize, height: nodeSize)
+                .overlay(Circle().stroke(theme.colors.textPrimary.opacity(0.28), lineWidth: 1))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(atlasRelationshipTitleLabel(for: item))
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.70)
+                    .allowsTightening(true)
+                if usesStackedAtlasObject == false {
+                    Text(atlasRelationshipTraceLabel(for: item))
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.70)
+                        .allowsTightening(true)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: alignsTrailing ? .trailing : .leading)
+    }
+
+
+    var stackedAtlasRelationshipColumns: [GridItem] {
+        [
+            GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .leading),
+            GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .leading)
+        ]
+    }
 
     var atlasInlineTrustDepth: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -93,6 +117,8 @@ extension ConstellationAtlasView {
             }
         }
         .padding(.vertical, theme.spacing.md)
+        .padding(.leading, theme.spacing.md)
+        .padding(.trailing, theme.spacing.xs)
         .overlay(alignment: .top) {
             Rectangle()
                 .fill(
@@ -293,6 +319,8 @@ extension ConstellationAtlasView {
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .topLeading)
+        .padding(.leading, theme.spacing.md)
+        .padding(.trailing, theme.spacing.xs)
         .padding(.vertical, isCompact ? theme.spacing.xs : theme.spacing.sm)
         .overlay(alignment: .top) {
             Rectangle()

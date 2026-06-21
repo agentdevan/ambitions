@@ -44,10 +44,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
 
     func testAMB596GoalsFirstViewportTrustDepthUsesVisibleNonTruncatingSummary() throws {
         let stageSource = try goalsStageSource()
-        let modelSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels.swift"),
-            encoding: .utf8
-        )
+        let modelSource = try goalsFeatureModelsSource()
 
         XCTAssertTrue(modelSource.contains("var constellationAtlasFirstViewportTrustSummary: String"))
         XCTAssertTrue(modelSource.contains("var constellationAtlasSourceFirstViewportSummary: String"))
@@ -58,6 +55,9 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertTrue(stageSource.contains("detail: overview.constellationAtlasSourceFirstViewportSummary"))
         XCTAssertTrue(stageSource.contains("? overview.constellationAtlasProofFirstViewportSummary"))
         XCTAssertTrue(stageSource.contains("Text(overview.constellationAtlasFirstViewportTrustSummary)"))
+        XCTAssertTrue(stageSource.contains("dynamicTypeSize >= .xxLarge"))
+        XCTAssertTrue(stageSource.contains("atlasObjectDetails"))
+        XCTAssertTrue(stageSource.contains(".padding(.leading, theme.spacing.md)"))
         XCTAssertFalse(stageSource.contains("detail: overview.constellationAtlasCompactInspectionSummary"))
         XCTAssertFalse(stageSource.contains("proof?.latestTitle ?? proof?.detail"))
     }
@@ -91,10 +91,16 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
     }
 
     func goalsStageSource() throws -> String {
-        let source = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView.swift"),
-            encoding: .utf8
-        )
+        let root = repoRoot()
+        let sourcePaths = [
+            "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView+02-overview.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView+03-atlasRelationshipField.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView+04-atlasRelationshipTraceLabel.swift"
+        ]
+        let source = try sourcePaths.map {
+            try String(contentsOf: root.appendingPathComponent($0), encoding: .utf8)
+        }.joined(separator: "\n")
         guard let stageStart = source.range(of: "struct ConstellationAtlasView: View") else {
             XCTFail("Unable to locate ConstellationAtlasView source boundary.")
             return source
@@ -107,6 +113,17 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Projection/SurfaceLenses/GoalsLens.swift"),
             encoding: .utf8
         )
+    }
+
+    func goalsFeatureModelsSource() throws -> String {
+        let root = repoRoot()
+        let sourcePaths = [
+            "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels.swift",
+            "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+03-GoalsOverview.swift"
+        ]
+        return try sourcePaths.map {
+            try String(contentsOf: root.appendingPathComponent($0), encoding: .utf8)
+        }.joined(separator: "\n")
     }
 
     func repoRoot() -> URL {
