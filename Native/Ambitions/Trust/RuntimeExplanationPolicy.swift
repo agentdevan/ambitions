@@ -25,7 +25,7 @@ struct RuntimeExplanationPolicy: Equatable, Sendable {
         privacyLevel: .sensitive,
         historyLevel: .summary,
         receiptLevel: .receipt,
-        localOnlySummary: "Inspection opens context without turning private data into a feed.",
+        localOnlySummary: "Review opens context without turning private data into a feed.",
         correctionSummary: "Review, undo, and correction stay attached to the owning surface."
     )
 

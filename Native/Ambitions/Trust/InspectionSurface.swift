@@ -49,6 +49,11 @@ struct InspectionSurfaceState: Equatable, Sendable {
     let kind: TrustInspectionKind
     let title: String
     let subtitle: String
+    let ownerSurface: String
+    let contextualRouteLabel: String
+    let visibleConsequenceSummary: String
+    let localBoundarySummary: String
+    let claimBoundarySummary: String
     let disclosureLevel: TrustDisclosureLevel
     let items: [TrustInspectionItem]
     let accessibilityIdentifier: String
@@ -62,13 +67,18 @@ struct InspectionSurfaceState: Equatable, Sendable {
             kind: kind,
             title: "\(kind.title) inspection",
             subtitle: policy.explanation(for: kind),
+            ownerSurface: "You",
+            contextualRouteLabel: kind.contextualRouteLabel,
+            visibleConsequenceSummary: kind.visibleConsequenceSummary,
+            localBoundarySummary: policy.localOnlySummary,
+            claimBoundarySummary: "This is local review context, not release readiness or public proof.",
             disclosureLevel: level,
             items: items,
             accessibilityIdentifier: "trust.\(kind.rawValue).inspection-surface",
-            accessibilityValue: "\(level.title). \(items.map(\.title).joined(separator: ", ")).",
+            accessibilityValue: "\(level.title). Opens from \(kind.contextualRouteLabel) in You. \(kind.visibleConsequenceSummary) \(items.map(\.title).joined(separator: ", ")).",
             accessibilityHint: level.requiresUserIntent
-                ? "Opens review detail only after the user asks."
-                : "Summarizes the current trust boundary."
+                ? "Opens review detail only after the user asks, then returns to the owning surface."
+                : "Summarizes the current trust boundary from the owning surface."
         )
     }
 
@@ -104,6 +114,38 @@ struct InspectionSurfaceState: Equatable, Sendable {
                 TrustInspectionItem(title: "Undo", detail: "Names whether the change can be reversed.", state: .default),
                 TrustInspectionItem(title: "Proof artifact", detail: "Keeps evidence reviewable without public claims.", state: .success),
             ]
+        }
+    }
+}
+
+extension TrustInspectionKind {
+    var contextualRouteLabel: String {
+        switch self {
+        case .proof:
+            "History"
+        case .source:
+            "Sources and permissions"
+        case .privacy:
+            "Privacy"
+        case .history:
+            "Receipts and history"
+        case .receipt:
+            "Receipts and history"
+        }
+    }
+
+    var visibleConsequenceSummary: String {
+        switch self {
+        case .proof:
+            "Completion and correction proof stays attached to the step, goal, or review that created it."
+        case .source:
+            "Source review changes the recommendation context only where the owning surface uses that source."
+        case .privacy:
+            "Privacy review changes what is summarized, hidden, or blocked before private detail appears."
+        case .history:
+            "History review opens recent continuity and routes back to Today, Goals, Time, or You."
+        case .receipt:
+            "Receipt review names what changed, why it changed, and whether undo is available."
         }
     }
 }

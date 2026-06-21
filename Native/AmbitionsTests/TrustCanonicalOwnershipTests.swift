@@ -31,6 +31,7 @@ final class TrustCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(policy.disclosureLevel(for: .receipt), .receipt)
         XCTAssertTrue(policy.explanation(for: .history).contains("not an activity feed"))
         XCTAssertTrue(policy.localOnlySummary.contains("private data"))
+        XCTAssertFalse(policy.localOnlySummary.localizedCaseInsensitiveContains("release ready"))
     }
 
     func testInspectionSurfaceStatesHaveAccessibleReviewItems() {
@@ -38,11 +39,59 @@ final class TrustCanonicalOwnershipTests: XCTestCase {
             let state = InspectionSurfaceState.make(kind: kind, policy: .detailInspection)
 
             XCTAssertEqual(state.kind, kind)
+            XCTAssertEqual(state.ownerSurface, "You")
+            XCTAssertFalse(state.contextualRouteLabel.isEmpty)
+            XCTAssertFalse(state.visibleConsequenceSummary.isEmpty)
+            XCTAssertTrue(state.localBoundarySummary.localizedCaseInsensitiveContains("private data"))
+            XCTAssertTrue(state.claimBoundarySummary.localizedCaseInsensitiveContains("not release readiness"))
             XCTAssertEqual(state.items.count, 3)
             XCTAssertTrue(state.accessibilityIdentifier.contains("trust.\(kind.rawValue).inspection-surface"))
-            XCTAssertFalse(state.accessibilityValue.isEmpty)
+            XCTAssertTrue(state.accessibilityValue.contains("Opens from \(state.contextualRouteLabel) in You"))
             XCTAssertTrue(state.items.allSatisfy { $0.detail.isEmpty == false })
         }
+    }
+
+    func testInspectionSurfaceStatesAvoidDiagnosticDashboardAndReadinessCopy() {
+        let forbiddenFragments = [
+            "dashboard",
+            "debug",
+            "diagnostic",
+            "admin",
+            "console",
+            "release ready",
+            "app store ready",
+            "testflight ready",
+        ]
+
+        for kind in TrustInspectionKind.allCases {
+            let state = InspectionSurfaceState.make(kind: kind, policy: .detailInspection)
+            let visibleCopy = [
+                state.title,
+                state.subtitle,
+                state.ownerSurface,
+                state.contextualRouteLabel,
+                state.visibleConsequenceSummary,
+                state.localBoundarySummary,
+                state.claimBoundarySummary,
+                state.accessibilityValue,
+                state.accessibilityHint,
+            ].joined(separator: " ")
+
+            for fragment in forbiddenFragments {
+                XCTAssertFalse(
+                    visibleCopy.localizedCaseInsensitiveContains(fragment),
+                    "\(kind.rawValue) leaked forbidden trust copy: \(fragment)"
+                )
+            }
+        }
+    }
+
+    func testTrustInspectionRoutesStayContextualUnderYou() {
+        XCTAssertEqual(YouRootDetail.trustCenter.routeTarget, .privacy)
+        XCTAssertEqual(YouRootDetail.receiptsHistory.routeTarget, .receiptsHistory)
+        XCTAssertEqual(YouRootDetail.sourceSettings.routeTarget, .sourceSettings)
+        XCTAssertEqual(YouRootDetail.localDataControls.routeTarget, .localDataControls)
+        XCTAssertEqual(YouRootDetail.proof.routeTarget, .history)
     }
 
     func testCanonicalDetailViewsRouteThroughInspectionSurface() throws {
@@ -59,6 +108,28 @@ final class TrustCanonicalOwnershipTests: XCTestCase {
         XCTAssertTrue(receipt.contains("InspectionSurface(kind: .receipt)"))
         XCTAssertTrue(history.contains("InspectionSurface(kind: .history)"))
         XCTAssertTrue(history.contains("actions.openTimeRoute(.weeklyReview)"))
+    }
+
+    func testCanonicalTrustSourceAvoidsRootSurfaceAndDiagnosticLanguage() throws {
+        let root = repoRoot()
+        let relativePaths = [
+            "Native/Ambitions/Trust/InspectionSurface.swift",
+            "Native/Ambitions/Trust/ProofInspectionView.swift",
+            "Native/Ambitions/Trust/SourceInspectionView.swift",
+            "Native/Ambitions/Trust/PrivacyInspectionView.swift",
+            "Native/Ambitions/Trust/HistoryInspectionView.swift",
+            "Native/Ambitions/Trust/ReceiptInspectionView.swift",
+            "Native/Ambitions/Trust/RuntimeExplanationPolicy.swift",
+        ]
+        let sourceCopy = try relativePaths.map { try source($0, root: root) }.joined(separator: "\n")
+
+        XCTAssertFalse(sourceCopy.contains("AppTab.trust"))
+        XCTAssertFalse(sourceCopy.contains("case trust"))
+        XCTAssertFalse(sourceCopy.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(sourceCopy.localizedCaseInsensitiveContains("debug"))
+        XCTAssertFalse(sourceCopy.localizedCaseInsensitiveContains("diagnostic"))
+        XCTAssertFalse(sourceCopy.localizedCaseInsensitiveContains("admin"))
+        XCTAssertFalse(sourceCopy.localizedCaseInsensitiveContains("console"))
     }
 }
 

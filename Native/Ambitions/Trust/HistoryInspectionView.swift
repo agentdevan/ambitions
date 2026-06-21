@@ -3,23 +3,23 @@ import SwiftUI
 
 struct HistoryInspectionView: View {
     var body: some View {
-        YouReflectionRouteSurface(accessibilityIdentifier: "insights.history.screen") { dashboard, actions in
+        YouReflectionRouteSurface(accessibilityIdentifier: "insights.history.screen") { historyProjection, actions in
             AnyView(VStack(alignment: .leading, spacing: actions.theme.spacing.lg) {
                 InspectionSurface(kind: .history)
 
                 InsightsRouteHeroSurface(
                     eyebrow: "History",
-                    title: "Deep history",
-                    subtitle: "The summary layer stays fast. This route makes the recent evidence and corrections feel alive and trustworthy.",
-                    dominantTruth: dashboard.historyLayer.summaryTitle,
-                    trustWhisper: dashboard.historyLayer.summaryDetail,
-                    state: dashboard.hero.visualState
+                    title: "Review history",
+                    subtitle: "Recent evidence and corrections stay inspectable from their owning routes.",
+                    dominantTruth: historyProjection.historyLayer.summaryTitle,
+                    trustWhisper: historyProjection.historyLayer.summaryDetail,
+                    state: historyProjection.hero.visualState
                 )
 
                 InsightsTimelineSurface(
-                    title: dashboard.historyLayer.title,
-                    subtitle: dashboard.historyLayer.subtitle,
-                    items: dashboard.historyLayer.timelineItems,
+                    title: historyProjection.historyLayer.title,
+                    subtitle: historyProjection.historyLayer.subtitle,
+                    items: historyProjection.historyLayer.timelineItems,
                     onOpenItem: actions.openTimelineItem
                 )
 
