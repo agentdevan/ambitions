@@ -120,7 +120,7 @@ struct StepReallocationEvent: Codable, Sendable, Equatable, Hashable, Identifiab
     }
 
     var sourceAdapterUseSummary: String {
-        "Step reallocation stays local and inspectable through source adapters."
+        "Step reallocation stays local and inspectable through source records."
     }
 
     var inspectionSurfaceTitle: String {
@@ -128,7 +128,7 @@ struct StepReallocationEvent: Codable, Sendable, Equatable, Hashable, Identifiab
     }
 
     var inspectionSummary: String {
-        "You / Search Ambitions can inspect this Step Reallocation source adapter, receipt, and reason."
+        "You / Search Ambitions can inspect this Step Reallocation source record, receipt, and reason."
     }
 
     var isInspectableBoundary: Bool {
@@ -184,7 +184,7 @@ struct StepReallocationRuntimeInput: Sendable {
     }
 
     var inspectionSummary: String {
-        "You / Search Ambitions can inspect this Step Reallocation source adapter, receipt, and reason."
+        "You / Search Ambitions can inspect this Step Reallocation source record, receipt, and reason."
     }
 
     var isInspectableBoundary: Bool {

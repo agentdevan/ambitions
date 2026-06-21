@@ -158,7 +158,7 @@ public struct AmbitionTheme: Sendable {
         public let bottomStrokeOpacity: Double
         public let backgroundBlurOpacity: Double
 
-        // Compatibility aliases for earlier shared consumers.
+        // Stable aliases for shared consumers.
         public var cardGradient: LinearGradient { elevatedGradient }
     }
 

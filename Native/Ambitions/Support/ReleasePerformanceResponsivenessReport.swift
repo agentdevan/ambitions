@@ -248,7 +248,7 @@ enum ReleasePerformanceResponsivenessReport {
             id: "app-launch",
             area: .appLaunch,
             budget: "Launch must compile cleanly, avoid permission prompts during startup, and keep first-run claims conservative.",
-            evidence: "R02 simulator build launches the native app target from generated Xcode project wiring; onboarding/calendar access remains Time-owned through the internal Plan compatibility seam and not startup-owned.",
+            evidence: "R02 simulator build launches the native app target from generated Xcode project wiring; onboarding/calendar access remains Time-owned through the internal planning bridge and not startup-owned.",
             evidenceLevel: .automatedSimulator,
             readiness: .boundedButDeviceProofRequired,
             limitation: "Cold-start timing and memory pressure still require R03 device/TestFlight proof."

@@ -142,7 +142,7 @@ enum DegradedStateOrchestrator {
             id: "degraded.\(surface.lowercased()).unavailable",
             kind: .unavailable,
             title: "\(surface) is unavailable",
-            explanation: "This looks temporary. Retry once, and Ambitions will keep the rest of the system usable.",
+            explanation: "This looks short-lived. Retry once, and Ambitions will keep the rest of the system usable.",
             primaryAction: DegradedStateAction(title: "Retry", systemImage: "arrow.clockwise", routingHint: retryHint),
             tone: .warning,
             icon: "exclamationmark.triangle"

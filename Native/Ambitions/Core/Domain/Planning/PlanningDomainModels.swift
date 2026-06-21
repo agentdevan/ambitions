@@ -116,7 +116,7 @@ struct GoalBlueprint: Codable, Sendable, Equatable {
         )
     }
 
-    // Compatibility note: current repositories persist GoalDraft and GoalPlan,
+// Persistence note: current repositories persist GoalDraft and GoalPlan,
     // so GoalBlueprint intentionally compiles into the existing draft contract.
     func makeDraft(
         schemaVersion: String = goalEngineSchemaVersion,
@@ -195,7 +195,7 @@ struct PlanStep: Codable, Sendable, Equatable, Identifiable {
         )
     }
 
-    // Compatibility note: repositories already round-trip Step snapshots, so
+// Persistence note: repositories already round-trip Step snapshots, so
     // PlanStep maps directly into Step instead of adding new persistence types.
     func makeStep(
         sectionID: String,

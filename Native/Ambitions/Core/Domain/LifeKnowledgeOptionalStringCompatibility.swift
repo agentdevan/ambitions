@@ -1,7 +1,7 @@
 import Foundation
 
-// Compatibility shim retired.
+// Duplicate helper retired.
 //
-// The Optional<String>.compactMap compatibility helper is owned by
+// The Optional<String>.compactMap helper is owned by
 // ActionReceiptProofLedgerModels.swift. Keeping a second identical extension here
 // caused an invalid redeclaration during the PROOFMODE-003 focused build.

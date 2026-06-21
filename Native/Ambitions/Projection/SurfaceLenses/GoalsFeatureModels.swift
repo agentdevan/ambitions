@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import Foundation
 
 enum GoalDetailLens: String, CaseIterable, Hashable, Sendable {
-    // Compatibility case name retained; this lens displays contained Goal/Path/Plan steps.
+    // This lens displays contained Goal/Path/Plan steps.
     case tasks
     case path
 

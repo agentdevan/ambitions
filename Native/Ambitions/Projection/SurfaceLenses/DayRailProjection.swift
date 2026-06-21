@@ -3,7 +3,7 @@ import Foundation
 
 // AMBITIONS-QUALITY-EXTRACTION: Cohesive owner boundary remains under the hard 600-line ceiling after adjacent declarations were extracted; split further only with behavior-level tests.
 extension AmbitionsDayRailViewState {
-    static func compatibility(
+    static func fromPreviewComposition(
         mode: TodayExperienceMode,
         hero: TodayExecutionHeroState,
         todayPlanLayer: TodayTimeLayerState,

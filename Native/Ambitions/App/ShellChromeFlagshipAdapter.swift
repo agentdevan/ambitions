@@ -26,7 +26,7 @@ struct ShellChromeFlagshipAdapter<Content: View>: View {
             proofHooks: proofHooks,
             screenshotIdentifier: "shell.flagship.chrome"
         ) { content }
-        .accessibilityIdentifier("shell.flagship.chrome.adapter")
+        .accessibilityIdentifier("shell.flagship.chrome.stage")
     }
 
     private var stageSummary: String {

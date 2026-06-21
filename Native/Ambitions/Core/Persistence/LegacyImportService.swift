@@ -67,17 +67,17 @@ struct LegacyImportService: LegacyImportServicing {
             importedPlanCount: importedGoals.filter { $0.plan != nil }.count,
             importedStepCount: importedGoals.flatMap { $0.plan?.sections ?? [] }.flatMap(\.steps).count,
             reusableData: [
-                "Legacy goals: title, summary, parent linkage, tags, dates, actor metadata, and goal type.",
-                "Legacy tasks and milestones: dates, status, recurrence hints, and sequencing hints.",
+                "Historical goals: title, summary, parent linkage, tags, dates, actor metadata, and goal type.",
+                "Historical tasks and milestones: dates, status, recurrence hints, and sequencing hints.",
             ],
             referenceOnlyData: [
-                "Legacy React navigation state and screen-local UI flags.",
+                "Historical React navigation state and screen-local UI flags.",
                 "Expo-specific account/session transport and notification plumbing.",
             ],
             lossyMappings: [
-                "Legacy recurrence templates collapse to weekly repeat cadence until native recurrence rules land.",
-                "Legacy milestones import as overview steps rather than a separate milestone entity graph.",
-                "Unstructured legacy metadata stays reference-only unless it maps to mode, ownership, relationship, or timing.",
+                "Historical recurrence templates collapse to weekly repeat cadence until native recurrence rules land.",
+                "Historical milestones import as overview steps rather than a separate milestone entity graph.",
+                "Unstructured historical metadata stays reference-only unless it maps to mode, ownership, relationship, or timing.",
             ]
         )
 
@@ -157,7 +157,7 @@ private extension LegacyImportService {
                     )
                 )
             }
-            sections.append(PlanSection(id: "plan-overview-\(goal.id)", goalID: goal.id, title: "Milestones", summary: "Imported from legacy milestone structure.", kind: .overview, orderIndex: 0, steps: steps))
+            sections.append(PlanSection(id: "plan-overview-\(goal.id)", goalID: goal.id, title: "Milestones", summary: "Imported from historical milestone structure.", kind: .overview, orderIndex: 0, steps: steps))
         }
 
         let activeTasks = goalTasks.filter { [.ready, .scheduled, .inProgress].contains($0.status) }
@@ -165,7 +165,7 @@ private extension LegacyImportService {
             let steps = activeTasks.enumerated().map { index, task in
                 migratedStep(task: task, goal: goal, draft: draft, sectionID: "plan-active-\(goal.id)")
             }
-            sections.append(PlanSection(id: "plan-active-\(goal.id)", goalID: goal.id, title: "Current Steps", summary: "Imported active work from the legacy task model.", kind: .activeSteps, orderIndex: sections.count, steps: steps))
+            sections.append(PlanSection(id: "plan-active-\(goal.id)", goalID: goal.id, title: "Current Steps", summary: "Imported active work from the historical task model.", kind: .activeSteps, orderIndex: sections.count, steps: steps))
         }
 
         let completedTasks = goalTasks.filter { $0.status == .completed }
@@ -180,7 +180,7 @@ private extension LegacyImportService {
             goalID: goal.id,
             version: goalEnginePlanVersion,
             generatedAt: goal.updatedAt,
-            summary: "Auto-generated from legacy goal, task, and milestone records.",
+            summary: "Auto-generated from historical goal, task, and milestone records.",
             strategy: draft.planningStrategy,
             sections: sections,
             assumptions: [],

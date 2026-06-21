@@ -41,7 +41,7 @@ public enum AmbitionsSurfaceShellKind: String, CaseIterable, Sendable, Identifia
         case .topLevelSurface: "Top level Ambitions surface"
         case .drillDown: "Owned drill-down surface"
         case .utilityHub: "Grouped navigation hub"
-        case .overlayHost: "Temporary overlay host"
+        case .overlayHost: "Contextual overlay host"
         }
     }
 }
@@ -278,7 +278,7 @@ public struct ShellOverlayZone<Overlay: View>: View {
                 .transition(reduceMotion ? .opacity : .move(edge: .bottom).combined(with: .opacity))
                 .accessibilityElement(children: .contain)
                 .accessibilityLabel(title)
-                .accessibilityHint("Temporary surface. Dismiss to return to the previous screen.")
+                .accessibilityHint("Contextual surface. Dismiss to return to the previous screen.")
                 .accessibilityIdentifier("si.shell-overlay-zone")
             }
         }

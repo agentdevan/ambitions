@@ -11,9 +11,8 @@ struct AppShellRouteMarker: Sendable, Equatable {
             .lowercased()
             .replacingOccurrences(of: " ", with: "-")
         identifier = "shell.route-marker.\(cleaned.isEmpty ? "untitled" : cleaned)"
-        statusText = "Temporary route marker"
+        statusText = "Route marker"
         isFinishedSurface = false
     }
 }
-
 

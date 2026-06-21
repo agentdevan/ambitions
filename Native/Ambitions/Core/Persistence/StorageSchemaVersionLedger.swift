@@ -113,14 +113,14 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             storedTypeName: "PlanSectionRecord",
             currentVersion: "plan_section_record.swiftdata.v1",
             versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
-            notes: "Section ordering for stored goal plans; Plan remains a compatibility seam."
+            notes: "Section ordering for stored goal plans; Plan remains a persistence bridge."
         ),
         .swiftData(
             id: "swiftdata.step_record",
             storedTypeName: "StepRecord",
             currentVersion: "step_record.swiftdata.v1",
             versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
-            notes: "Stored actions inside goal paths or Time-owned compatibility planning."
+            notes: "Stored actions inside goal paths or Time-owned planning continuity."
         ),
         .swiftData(
             id: "swiftdata.progress_evidence_record",

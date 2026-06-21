@@ -82,7 +82,7 @@ struct DefaultRecommendationExplanationAdapter: RecommendationExplanationAdaptin
             relations: RecommendationExplanationRelations(goalIDs: [goalID]),
             privacy: .standard,
             localOnly: true,
-            metadata: ["adapter": "goal_explainability_v1"]
+            metadata: ["projection": "goal_explainability_v1"]
         )
     }
 

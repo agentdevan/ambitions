@@ -334,7 +334,7 @@ struct TodayExperience: Sendable {
         self.mode = mode
         self.hero = hero
         self.support = support
-        self.execution = execution ?? TodayExecutionViewState.compatibility(
+        self.execution = execution ?? TodayExecutionViewState.fromPreviewComposition(
             mode: mode,
             hero: hero,
             support: support
@@ -342,7 +342,7 @@ struct TodayExperience: Sendable {
     }
 }
 
-// Legacy internal projection scaffolding retained to avoid widening this compatibility seam.
+// Internal projection scaffolding retained to avoid widening this preview composition path
 // into planner or service rewrites beyond Today presentation composition.
 
 struct TodayHeaderState: Sendable {

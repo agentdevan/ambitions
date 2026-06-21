@@ -214,7 +214,7 @@ public enum AmbitionFoundationDepthRole: String, CaseIterable, Codable, Sendable
         case .heroObject: "The hero object owns primary depth before controls and metadata."
         case .fieldBand: "Bands communicate capacity and protection without calendar-grid depth."
         case .elevatedObject: "Elevated objects stay scan-friendly and avoid nested card stacks."
-        case .overlayComposer: "Overlay depth is temporary, contextual, and safe-area aware."
+        case .overlayComposer: "Overlay depth is contextual and safe-area aware."
         case .receiptLayer: "Receipt depth stays attached to source and history inspection."
         }
     }

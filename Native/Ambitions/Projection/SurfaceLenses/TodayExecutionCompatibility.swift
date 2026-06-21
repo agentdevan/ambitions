@@ -2,8 +2,7 @@ import AmbitionsDesignSystem
 import Foundation
 
 extension TodayExecutionViewState {
-    // Compatibility seam. Keep until F15 legacy identifier migration verifies route/test/persistence safety.
-    static func compatibility(
+    static func fromPreviewComposition(
         mode: TodayExperienceMode,
         hero: TodayHeroState,
         support: TodaySupportLayerState
@@ -167,7 +166,7 @@ extension TodayExecutionViewState {
             accessibilityValue: "No loose step is pulling on Today.",
             accessibilityHint: "One-Step Goals stay intentionally small. Steps remain inside Goals, Paths, or Time."
         )
-        let dayRail = AmbitionsDayRailViewState.compatibility(
+        let dayRail = AmbitionsDayRailViewState.fromPreviewComposition(
             mode: mode,
             hero: executionHero,
             todayPlanLayer: todayTimeLayer,

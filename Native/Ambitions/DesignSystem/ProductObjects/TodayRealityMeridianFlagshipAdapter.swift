@@ -46,7 +46,7 @@ struct TodayRealityMeridianFlagshipAdapter: View {
             )
             .accessibilityIdentifier("today.flagship.reality-meridian.content")
         }
-        .accessibilityIdentifier("today.flagship.reality-meridian.adapter")
+        .accessibilityIdentifier("today.flagship.reality-meridian.stage")
     }
 
     var stageSummary: String {

@@ -18,7 +18,7 @@ enum AmbitionsOSLivingDreamNorthStarMeaningDimension: String, Codable, Sendable,
     case belonging
     case mastery
     case freedom
-    case legacy
+    case continuity
     case curiosity
     case care
     case creativity
@@ -231,8 +231,8 @@ struct AmbitionsOSLivingDreamNorthStarExtractor: Sendable, Equatable, Hashable {
         if text.contains("batman") || text.contains("protect") || text.contains("defend") {
             dimensions.formUnion([.protection, .justice, .capability])
         }
-        if text.contains("immortal") || text.contains("forever") || text.contains("legacy") {
-            dimensions.formUnion([.legacy, .care, .resilience])
+        if text.contains("immortal") || text.contains("forever") || text.contains("lineage") {
+            dimensions.formUnion([.continuity, .care, .resilience])
         }
         if text.contains("cult") || text.contains("followers") || text.contains("belong") {
             dimensions.formUnion([.belonging, .impact, .creativity])
@@ -263,8 +263,8 @@ struct AmbitionsOSLivingDreamNorthStarExtractor: Sendable, Equatable, Hashable {
         if dimensions.contains(.protection) || dimensions.contains(.justice) {
             seeds.formUnion(["community safety training", "emergency preparedness", "lawful service path"])
         }
-        if dimensions.contains(.legacy) || dimensions.contains(.care) {
-            seeds.formUnion(["health-supporting routine", "family legacy project", "creative body of work"])
+        if dimensions.contains(.continuity) || dimensions.contains(.care) {
+            seeds.formUnion(["health-supporting routine", "family continuity project", "creative body of work"])
         }
         if dimensions.contains(.belonging) || dimensions.contains(.impact) {
             seeds.formUnion(["ethical community building", "nonprofit exploration", "club or local group"])

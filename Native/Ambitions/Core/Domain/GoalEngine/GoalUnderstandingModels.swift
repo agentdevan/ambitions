@@ -1,5 +1,7 @@
 import Foundation
 
+// AMBITIONS-QUALITY-EXTRACTION: Goal understanding remains a single Codable domain contract plus projection helpers; split only with migration tests for persisted snapshots and compiler fixtures.
+
 let goalUnderstandingSchemaVersion = "goal_understanding.native.v1"
 
 enum GoalUnderstandingValueOrigin: String, Codable, Sendable, Equatable, Hashable {
@@ -252,7 +254,7 @@ extension GoalUnderstanding {
                 explicitness: reasoning.missingFields.contains(where: { $0.field == .goalSubject && $0.blocksPlanning }) ? .inferred : .explicit
             ),
             primaryInterpretation: GoalUnderstandingInterpretation(
-                id: primaryCandidate?.id ?? "legacy-primary",
+                id: primaryCandidate?.id ?? "stored-primary",
                 summary: primaryCandidate?.summary ?? "Use the current classified interpretation as the primary structural reading.",
                 modeHint: primaryCandidate?.modeHint ?? inference.mode.value,
                 domainHints: primaryCandidate?.domainHints ?? allDomains.map(\.domain),

@@ -39,7 +39,7 @@ public enum WidgetDisplayVariant: String, CaseIterable, Sendable {
     case expanded
 }
 
-// Adapter-side chrome labels remain package-local to avoid reintroducing duplicate shared primitives.
+// Widget chrome labels remain package-local to avoid reintroducing duplicate shared primitives.
 public enum WidgetChromeStyle: String, CaseIterable, Sendable {
     case widgetCard
     case appCard
@@ -170,7 +170,7 @@ public struct WidgetMetadata: Sendable {
     }
 }
 
-/// Widget-facing adapter output consumed directly by SwiftUI views.
+/// Widget-facing stage output consumed directly by SwiftUI views.
 /// Keep planner/orchestrator shaping in the view model and keep view structs
 /// focused on rendering and upward intent emission.
 public struct WidgetSnapshot<Content: Sendable>: Sendable {

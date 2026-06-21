@@ -49,7 +49,7 @@ enum CoverageNeedMissingSourceType: String, Codable, Sendable, Equatable, Hashab
     case jurisdiction
     case releaseReceipt = "release_receipt"
     case rollbackReceipt = "rollback_receipt"
-    case compatibility
+    case continuityBridge = "continuity_bridge"
     case highRiskReview = "high_risk_review"
 }
 
@@ -65,7 +65,7 @@ enum CoverageNeedSeedGapCategory: String, Codable, Sendable, Equatable, Hashable
     case highRiskReview = "high_risk_review"
     case sourceFreshness = "source_freshness"
     case sourceReview = "source_review"
-    case compatibility
+    case continuityBridge = "continuity_bridge"
     case rollback
     case releaseReceipt = "release_receipt"
 }

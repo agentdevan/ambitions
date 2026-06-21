@@ -157,7 +157,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceComposer, path: "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", note: "Legacy composer screen pending Composer/Capture migration"),
+            .init(kind: .sourceComposer, path: "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", note: "Composer screen pending Composer/Capture migration"),
             .init(kind: .sourceService, path: "Native/Ambitions/Services/SmartAttachmentService.swift", note: "Smart Attachment foundation"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Capture", note: "Focused Capture tests")
         ]

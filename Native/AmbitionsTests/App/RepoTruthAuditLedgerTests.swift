@@ -41,7 +41,7 @@ final class RepoTruthAuditLedgerTests: XCTestCase {
             RepoTruthAuditStatus.allCases.map(\.rawValue)
 
         XCTAssertFalse(allRawValues.contains("unknown"))
-        XCTAssertTrue(RepoTruthImplementationStatus.allCases.contains(.realBoundaryAdapter))
+        XCTAssertTrue(RepoTruthImplementationStatus.allCases.contains(.realBoundaryBridge))
         XCTAssertTrue(RepoTruthImplementationStatus.allCases.contains(.obsoleteArchitecture))
         XCTAssertTrue(RepoTruthProofArtifactRequirement.allCases.contains(.forbiddenLanguageScan))
     }

@@ -108,7 +108,7 @@ enum RepoTruthProductOwner: String, Codable, CaseIterable, Sendable {
 
 enum RepoTruthImplementationStatus: String, Codable, CaseIterable, Sendable {
     case realImplementation = "real implementation"
-    case realBoundaryAdapter = "real boundary adapter"
+    case realBoundaryBridge = "real boundary bridge"
     case stub
     case fixture
     case previewOnly = "preview-only"
@@ -174,7 +174,7 @@ enum RepoTruthProofArtifactRequirement: String, Codable, CaseIterable, Sendable 
     case forbiddenLanguageScan = "forbidden language scan"
     case architectureConformanceScan = "architecture conformance scan"
     case largeFileAudit = "large file audit"
-    case stubAdapterAudit = "stub/adapter audit"
+    case stubBridgeAudit = "stub bridge audit"
     case screenshotMatrix = "screenshot matrix"
     case accessibilityNotes = "accessibility notes"
     case mutationProof = "mutation proof"

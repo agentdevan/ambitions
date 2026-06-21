@@ -196,7 +196,7 @@ struct GoalsOverview: Sendable {
     }
 }
 
-// Compatibility aliases retained for older callers and previews that still import Board names.
+// Stable aliases retained for callers and previews that still import Board names.
 typealias GoalsBoardPosture = GoalsAtlasPosture
 typealias GoalsBoardBandKind = GoalsAtlasBandKind
 typealias GoalsBoardPrimaryActionKind = GoalsAtlasPrimaryActionKind

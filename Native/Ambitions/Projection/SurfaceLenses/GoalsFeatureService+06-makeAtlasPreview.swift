@@ -275,7 +275,7 @@ extension RepositoryBackedGoalsService {
             progress: GoalDetailProgress(
                 label: progressLabel,
                 detail: renderState == .starter
-                    ? "Starter-plan assumptions are being treated as temporary scaffolding."
+                    ? "Starter-plan assumptions are being treated as provisional scaffolding."
                     : "Progress is reading the real persisted plan and evidence history.",
                 value: progressValue,
                 evidenceLabel: evidenceLabel
