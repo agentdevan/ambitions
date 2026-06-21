@@ -63,17 +63,26 @@ final class LifeShapeAntiFakeAuditTests: XCTestCase {
         let good = LifeShapeSourceFile(
             path: "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeModels.swift",
             contents: """
-            struct LifeShapeFieldState {
+            struct LifeShapeProjection {}
+            struct LifeShapeBucket {}
+            enum LifeShapeReadingKind {}
+            enum LifeShapeLayer {}
+            enum LifeShapeHorizon {}
+            enum LifeShapeBucketBuilder {
                 let inputRefs: [String]
                 let ruleIDs: [String]
                 let clockDerivation: String
                 let fallbackState: String?
+                let LifeShapeConfidence: String
                 let accessibilitySummary: String
             }
             """
         )
 
-        XCTAssertEqual(LifeShapeDerivationAudit.auditModelContract([bad]).findings.count, 5)
+        XCTAssertEqual(
+            LifeShapeDerivationAudit.auditModelContract([bad]).findings.count,
+            LifeShapeDerivationAudit.requiredContractTokens.count
+        )
         XCTAssertTrue(LifeShapeDerivationAudit.auditModelContract([good]).passed)
     }
 
@@ -178,7 +187,7 @@ final class LifeShapeAntiFakeAuditTests: XCTestCase {
         XCTAssertFalse(LifeShapeFakePrecisionAudit.auditRootTimeCopy(baselineFiles).passed)
         XCTAssertFalse(LifeShapeMutationAudit.auditPrimaryActionSource(baselineFiles).passed)
         XCTAssertFalse(LifeShapeTodayCouplingAudit.auditMutationCouplingSource(baselineFiles).passed)
-        XCTAssertFalse(LifeShapeSemanticAudit.auditSemanticMarkContract(baselineFiles).passed)
+        XCTAssertTrue(LifeShapeSemanticAudit.auditSemanticMarkContract(baselineFiles).passed)
     }
 
     func testDynamicTypeLifeShapeAuditRequiresScenarioAndReadableProof() {

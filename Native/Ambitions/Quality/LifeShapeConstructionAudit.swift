@@ -6,7 +6,10 @@ enum LifeShapeConstructionAudit {
 
     private static let blockedConstructors = [
         "LifeShapeBucket(",
-        "LifeShapeProjection("
+        "LifeShapeProjection(",
+        "LifeShapeBucket.runtimeValidated",
+        "LifeShapeProjection.runtimeValidated",
+        "LifeShapeBucketBuilder."
     ]
 
     private static let approvedPathFragments = [

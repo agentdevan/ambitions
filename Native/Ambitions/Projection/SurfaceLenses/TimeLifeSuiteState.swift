@@ -73,16 +73,40 @@ struct TimeLifeSuiteState: Sendable {
     }
 
     private static func fallbackSemanticMarks(fit: LifeShapeCapacityFit) -> [LifeShapeSemanticMark] {
-        [
-            LifeShapeSemanticMark(kind: .pressure, valueLabel: fit.title, detail: "Pressure is represented as a compression ridge.", intensity: fit == .tight ? 0.70 : 0.34, visualState: fit.visualState),
-            LifeShapeSemanticMark(kind: .cognitiveLoad, valueLabel: "Reviewable", detail: "Mental load stays visible as text and mark.", intensity: 0.42, visualState: .default),
-            LifeShapeSemanticMark(kind: .physicalEnergy, valueLabel: "Unloaded", detail: "Energy state is quiet until local context changes.", intensity: 0.30, visualState: .default),
-            LifeShapeSemanticMark(kind: .transitionFriction, valueLabel: "Smooth", detail: "No narrowed bridge is active.", intensity: 0.26, visualState: .default),
-            LifeShapeSemanticMark(kind: .protectedTime, valueLabel: "Protected", detail: "Protected time uses a preserved boundary.", intensity: 0.38, visualState: .selected),
-            LifeShapeSemanticMark(kind: .recoveryNeed, valueLabel: "Reserve", detail: "Recovery need is a reserve pocket.", intensity: 0.34, visualState: .default),
-            LifeShapeSemanticMark(kind: .freeTimeQuality, valueLabel: "Available", detail: "Free-time quality appears as lane quality.", intensity: 0.52, visualState: .selected),
-            LifeShapeSemanticMark(kind: .executionLanes, valueLabel: "Open lanes", detail: "Execution lanes show where action can fit.", intensity: 0.48, visualState: .selected),
-            LifeShapeSemanticMark(kind: .goalLoad, valueLabel: "Anchored", detail: "Goal load is an anchored lane.", intensity: 0.44, visualState: .selected)
+        let localInput = LifeShapeInputRef(
+            id: "time.baseline.local-field",
+            kind: .localDefault,
+            label: "Local Time baseline field"
+        )
+        func mark(
+            kind: LifeShapeSemanticMarkKind,
+            valueLabel: String,
+            detail: String,
+            intensity: Double,
+            visualState: AmbitionVisualState
+        ) -> LifeShapeSemanticMark {
+            LifeShapeSemanticMark(
+                kind: kind,
+                valueLabel: valueLabel,
+                detail: detail,
+                intensity: intensity,
+                visualState: visualState,
+                inputRefs: [localInput],
+                ruleIDs: [LifeShapeRuleID(rawValue: "lifeshape.baseline.\(kind.rawValue)")],
+                accessibilitySummary: "\(kind.title). \(kind.semanticMeaning). \(valueLabel). \(detail)"
+            )
+        }
+
+        return [
+            mark(kind: .pressure, valueLabel: fit.title, detail: "Pressure is represented as a compression ridge.", intensity: fit == .tight ? 0.70 : 0.34, visualState: fit.visualState),
+            mark(kind: .cognitiveLoad, valueLabel: "Reviewable", detail: "Mental load stays visible as text and mark.", intensity: 0.42, visualState: .default),
+            mark(kind: .physicalEnergy, valueLabel: "Unloaded", detail: "Energy state is quiet until local context changes.", intensity: 0.30, visualState: .default),
+            mark(kind: .transitionFriction, valueLabel: "Smooth", detail: "No narrowed bridge is active.", intensity: 0.26, visualState: .default),
+            mark(kind: .protectedTime, valueLabel: "Protected", detail: "Protected time uses a preserved boundary.", intensity: 0.38, visualState: .selected),
+            mark(kind: .recoveryNeed, valueLabel: "Reserve", detail: "Recovery need is a reserve pocket.", intensity: 0.34, visualState: .default),
+            mark(kind: .freeTimeQuality, valueLabel: "Available", detail: "Free-time quality appears as lane quality.", intensity: 0.52, visualState: .selected),
+            mark(kind: .executionLanes, valueLabel: "Open lanes", detail: "Execution lanes show where action can fit.", intensity: 0.48, visualState: .selected),
+            mark(kind: .goalLoad, valueLabel: "Anchored", detail: "Goal load is an anchored lane.", intensity: 0.44, visualState: .selected)
         ]
     }
 }

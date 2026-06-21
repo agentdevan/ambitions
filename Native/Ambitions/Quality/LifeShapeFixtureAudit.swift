@@ -24,19 +24,23 @@ struct LifeShapeAuditReport: Equatable, Sendable {
 enum LifeShapeAuditSupport {
     static func releaseScopedContents(_ contents: String) -> String {
         var output: [String] = []
-        var debugDepth = 0
+        var debugStack: [Bool] = []
 
         for line in contents.components(separatedBy: .newlines) {
             let trimmed = line.trimmingCharacters(in: .whitespaces)
             if trimmed.hasPrefix("#if DEBUG") {
-                debugDepth += 1
+                debugStack.append(true)
                 continue
             }
-            if trimmed.hasPrefix("#endif"), debugDepth > 0 {
-                debugDepth -= 1
+            if trimmed.hasPrefix("#else"), debugStack.isEmpty == false {
+                debugStack[debugStack.count - 1].toggle()
                 continue
             }
-            guard debugDepth == 0 else { continue }
+            if trimmed.hasPrefix("#endif"), debugStack.isEmpty == false {
+                debugStack.removeLast()
+                continue
+            }
+            guard debugStack.contains(true) == false else { continue }
             output.append(line)
         }
 

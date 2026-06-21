@@ -7,23 +7,7 @@ enum TimeLifeSuiteShapeKind: String, Sendable, CaseIterable {
     case life = "life_shape"
 }
 
-enum TimeHorizon: String, Sendable, CaseIterable, Identifiable {
-    case day
-    case week
-    case month
-    case year
-
-    var id: String { rawValue }
-
-    var title: String {
-        switch self {
-        case .day: "Day"
-        case .week: "Week"
-        case .month: "Month"
-        case .year: "Year"
-        }
-    }
-}
+typealias TimeHorizon = LifeShapeHorizon
 
 enum LifeShapeSegmentKind: String, Sendable {
     case openTime
@@ -104,14 +88,6 @@ enum LifeShapeCapacityFit: String, Sendable {
         case .tight, .overloaded: .warning
         }
     }
-}
-
-struct LifeShapeReading: Sendable, Hashable {
-    let horizon: TimeHorizon
-    let title: String
-    let summary: String
-    let capacityStatement: String
-    let sourceDetail: String
 }
 
 struct LifeShapeSourceState: Sendable, Hashable {
@@ -235,13 +211,19 @@ struct LifeShapeSemanticMark: Identifiable, Sendable, Hashable {
     let detail: String
     let intensity: Double
     let visualState: AmbitionVisualState
+    let inputRefs: [LifeShapeInputRef]
+    let ruleIDs: [LifeShapeRuleID]
+    let accessibilitySummary: String
 
     init(
         kind: LifeShapeSemanticMarkKind,
         valueLabel: String,
         detail: String,
         intensity: Double,
-        visualState: AmbitionVisualState
+        visualState: AmbitionVisualState,
+        inputRefs: [LifeShapeInputRef],
+        ruleIDs: [LifeShapeRuleID],
+        accessibilitySummary: String
     ) {
         self.id = kind.rawValue
         self.kind = kind
@@ -249,6 +231,9 @@ struct LifeShapeSemanticMark: Identifiable, Sendable, Hashable {
         self.detail = detail
         self.intensity = min(max(intensity, 0), 1)
         self.visualState = visualState
+        self.inputRefs = inputRefs
+        self.ruleIDs = ruleIDs
+        self.accessibilitySummary = accessibilitySummary
     }
 }
 
@@ -325,4 +310,3 @@ struct TimeLifeSuiteShapeState: Identifiable, Sendable {
         self.visualState = visualState
     }
 }
-

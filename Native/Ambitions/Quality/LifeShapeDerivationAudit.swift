@@ -5,10 +5,17 @@ enum LifeShapeDerivationAudit {
     static let rule = "LifeShape buckets must carry derivation inputs, rules, clock source, fallback, and accessibility summary."
 
     static let requiredContractTokens = [
+        "LifeShapeProjection",
+        "LifeShapeBucket",
+        "LifeShapeBucketBuilder",
+        "LifeShapeReadingKind",
+        "LifeShapeLayer",
+        "LifeShapeHorizon",
         "inputRefs",
         "ruleIDs",
         "clockDerivation",
         "fallbackState",
+        "LifeShapeConfidence",
         "accessibilitySummary"
     ]
 
