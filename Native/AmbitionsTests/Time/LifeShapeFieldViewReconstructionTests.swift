@@ -26,4 +26,73 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         XCTAssertTrue(replaced.contains("free/busy grid"))
         XCTAssertTrue(replaced.contains("metric-row stack"))
     }
+
+    func testSwiftUIFirstLifeShapeRootUsesFirstClassComponents() throws {
+        let root = repoRoot()
+        let requiredPaths = [
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeHorizonRow.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeCorrectionMenu.swift"
+        ]
+
+        for path in requiredPaths {
+            XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent(path).path), path)
+        }
+
+        let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        XCTAssertTrue(rootView.contains("LifeShapeLayerSelector"))
+        XCTAssertTrue(rootView.contains("LifeShapeNowInstrument"))
+        XCTAssertTrue(rootView.contains("LifeShapeHorizonRowView"))
+        XCTAssertTrue(rootView.contains("LifeShapeBucketDetail"))
+        XCTAssertTrue(rootView.contains("LifeShapeCorrectionMenu"))
+        XCTAssertFalse(rootView.contains("sourceReceiptRow"))
+        XCTAssertFalse(rootView.contains("LifeShape zoom"))
+        XCTAssertFalse(rootView.contains("horizonControl"))
+    }
+
+    func testFirstGreenExposesOnlyOpenAndProtectedLayersWithMinimumHitTargets() throws {
+        let root = repoRoot()
+        let selector = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root)
+        let now = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift", root: root)
+        let correction = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeCorrectionMenu.swift", root: root)
+
+        XCTAssertTrue(selector.contains("private let layers: [LifeShapeLayer] = [.open, .protected]"))
+        XCTAssertFalse(selector.contains(".pressure"))
+        XCTAssertFalse(selector.contains(".buffer"))
+        XCTAssertTrue(selector.contains("minHeight: 44"))
+        XCTAssertTrue(now.contains("minHeight: 44"))
+        XCTAssertTrue(correction.contains("minHeight: 44"))
+    }
+
+    func testLifeShapeSemanticMirrorRootOrderDoesNotExposeSourceReceiptAsFirstViewport() {
+        let mirror = LifeShapeSemanticModel(
+            stageName: UserFacingLanguage.Object.lifeShapeField,
+            currentDateSummary: "Today",
+            capacitySummary: "Open capacity is visible.",
+            protectedWindowSummary: "Protected windows are visible.",
+            pressureSummary: "Pressure is reviewable.",
+            horizonSummary: "This week stays inside Time.",
+            accessibilityFallbacks: []
+        )
+
+        XCTAssertTrue(mirror.accessibilityOrder.contains("now instrument"))
+        XCTAssertTrue(mirror.accessibilityOrder.contains("Open layer"))
+        XCTAssertTrue(mirror.accessibilityOrder.contains("Protected layer"))
+        XCTAssertFalse(mirror.accessibilityOrder.contains("source"))
+        XCTAssertFalse(mirror.accessibilityOrder.contains("receipt"))
+    }
+
+    private func source(_ relativePath: String, root: URL) throws -> String {
+        try String(contentsOf: root.appendingPathComponent(relativePath), encoding: .utf8)
+    }
+
+    private func repoRoot() -> URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+    }
 }

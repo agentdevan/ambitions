@@ -31,6 +31,13 @@ extension LifeShapeFieldView {
             objectStageTextureBackdrop
 
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                if displayedRenderState == .pressureCluster {
+                    Text("Pressure")
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.stateStyle(for: .warning).accent)
+                        .lineLimit(1)
+                        .accessibilityIdentifier("time.life-shape-field.pressure-label")
+                }
                 Text(reading.title)
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)

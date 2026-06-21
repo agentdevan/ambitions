@@ -41,20 +41,28 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCapacity.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldContinuity.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldReflow.swift", root: root),
-            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift", root: root)
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeHorizonRow.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeCorrectionMenu.swift", root: root)
         ].joined(separator: "\n")
 
         XCTAssertTrue(timeFieldSource.contains("HorizonCapacityPrimitiveStage("))
         XCTAssertTrue(timeFieldSource.contains("HorizonCapacityPrimitiveLine("))
-        XCTAssertTrue(timeFieldSource.contains("compactShapingActionGrid"))
-        XCTAssertTrue(timeFieldSource.contains("LazyVGrid(columns: columns"))
-        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.horizon-control"))
-        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.capacity-statement"))
-        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.source-receipt"))
+        XCTAssertTrue(timeFieldSource.contains("LifeShapeLayerSelector"))
+        XCTAssertTrue(timeFieldSource.contains("LifeShapeNowInstrument"))
+        XCTAssertTrue(timeFieldSource.contains("LifeShapeHorizonRowView"))
+        XCTAssertTrue(timeFieldSource.contains("LifeShapeBucketDetail"))
+        XCTAssertTrue(timeFieldSource.contains("LifeShapeCorrectionMenu"))
+        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.layer-selector"))
+        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.now-instrument"))
+        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.horizon-rows"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.continuity-dock"))
-        XCTAssertTrue(timeFieldSource.contains("Field, day, week, month, and year stay in one LifeShape object."))
-        XCTAssertTrue(timeFieldSource.contains("Day, week, month, year, and later stay inside the same field."))
-        XCTAssertTrue(timeFieldSource.contains("Preview changes"))
+        XCTAssertFalse(timeFieldSource.contains("sourceReceiptRow"))
+        XCTAssertFalse(timeFieldSource.contains("LifeShape zoom"))
+        XCTAssertFalse(timeFieldSource.contains("Day, week, month, year, and later stay inside the same field."))
 
         XCTAssertFalse(timeFieldSource.contains("Text(horizon.title)\n                .font(theme.typography.caption.weight(selected ? .semibold : .regular))"))
         XCTAssertFalse(timeFieldSource.contains("Text(reading.capacityStatement)\n                    .font(theme.typography.bodyEmphasized)"))

@@ -6,7 +6,7 @@ extension LifeShapeFieldView {
         HorizonCapacityPrimitiveStage(
             role: .continuity,
             title: "Continuity",
-            subtitle: "Horizon changes keep source, protected pocket, and receipt review attached.",
+            subtitle: "The root dock keeps this Time shape reachable without covering it.",
             statusLabel: selectedHorizon.title,
             accessibilityIdentifier: "time.life-shape-field.continuity-dock"
         ) {
@@ -24,7 +24,7 @@ extension LifeShapeFieldView {
             HorizonCapacityPrimitiveLine(
                 role: .continuity,
 	                title: "Context stays together",
-	                subtitle: "Day, week, month, and year keep the current shape attached.",
+	                subtitle: "Open and protected layers stay in the same field.",
                 systemImage: "lock.shield",
                 visualState: .default,
                 accessibilityIdentifier: "time.life-shape-field.continuity-dock.context"
@@ -69,9 +69,9 @@ extension LifeShapeFieldView {
             reading.title,
             reading.summary,
             reading.capacityStatement,
-            displayedSourceDetail,
-            suite.field.receipt.detail
-        ].joined(separator: ". ")
+            selectedMark?.accessibilitySummary
+        ]
+        .compactMap { $0 }
+        .joined(separator: ". ")
     }
 }
-

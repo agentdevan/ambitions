@@ -40,7 +40,9 @@ struct TimeSurface: View {
                         TimeObjectView(
                             timeState: timeState,
                             clock: clock,
-                            onReflowDecision: handleReflowDecision
+                            onReflowDecision: handleReflowDecision,
+                            onSearch: presentTimeSearch,
+                            onCapture: presentTimeCapture
                         )
 
                         if let emptyTitle = timeState.emptyTitle, let emptyMessage = timeState.emptyMessage {
@@ -189,6 +191,17 @@ struct TimeSurface: View {
             intent: .quickCapture,
             source: .timeQuickCapture,
             presentationContext: .quickCapture
+        )
+    }
+
+    private func presentTimeSearch() {
+        shell.commandRouter.presentMemoryLens(
+            intent: .memoryLens,
+            source: .shellUtility,
+            presentationContext: .recall,
+            query: "",
+            goalID: nil,
+            captureID: nil
         )
     }
 }

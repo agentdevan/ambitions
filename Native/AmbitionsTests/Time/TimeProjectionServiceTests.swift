@@ -174,8 +174,12 @@ final class TimeProjectionServiceTests: XCTestCase {
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift"),
             encoding: .utf8
         )
-        let capacitySource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCapacity.swift"),
+        let nowInstrumentSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift"),
+            encoding: .utf8
+        )
+        let rootViewSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift"),
             encoding: .utf8
         )
 
@@ -185,11 +189,10 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("light step"))
         XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("protected recovery window"))
         XCTAssertTrue(source.contains("capacityStatement"))
-        XCTAssertTrue(capacitySource.contains("var capacityStatement"))
-        XCTAssertTrue(capacitySource.contains("time.life-shape-field.action.shape-week"))
-        XCTAssertTrue(capacitySource.contains("time.life-shape-field.action.review-pressure"))
-        XCTAssertTrue(capacitySource.contains("time.life-shape-field.action.protect-block"))
-        XCTAssertTrue(capacitySource.contains("time.life-shape-field.action.adjust-shape"))
+        XCTAssertTrue(nowInstrumentSource.contains("time.life-shape-field.primary-action"))
+        XCTAssertTrue(rootViewSource.contains("LifeShapeLayerSelector"))
+        XCTAssertTrue(rootViewSource.contains("LifeShapeHorizonRowView"))
+        XCTAssertTrue(rootViewSource.contains("LifeShapeCorrectionMenu"))
         XCTAssertTrue(TimeObjectStagePrimitiveContract.current.replacesFirstViewportStructures.contains("metric-row stack"))
     }
 

@@ -22,12 +22,13 @@ struct LifeShapeSemanticModel: Equatable, Sendable {
         let accessibilityOrder = [
             stageName,
             "current date",
+            "now instrument",
+            "Open layer",
+            "Protected layer",
             "capacity",
             "protected windows",
             "pressure",
-            "horizon",
-            "source",
-            "receipt",
+            "horizon rows",
         ] + Array(accessibilityFallbacks.prefix(2))
 
         self.stageName = stageName

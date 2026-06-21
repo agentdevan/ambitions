@@ -9,6 +9,8 @@ struct LifeShapeFieldView: View {
 
     @State var selectedHorizon: TimeHorizon
     @State var selectedZoomLevel: TimeLifeShapeZoomLevel = .field
+    @State var selectedLayer: LifeShapeLayer = .open
+    @State var selectedMarkID: String?
     @State var revealsPressure = false
     @State var selectedReflowOptionID: String?
     @State var confirmedReflowAction: TimeReflowDecisionActionKind?
@@ -18,20 +20,27 @@ struct LifeShapeFieldView: View {
     let reflowReceiptPreview: TimeReflowReceiptPreviewState?
     let calendarAwareness: TimeCalendarAwarenessState?
     let onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)?
+    let onSearch: (() -> Void)?
+    let onCapture: (() -> Void)?
 
     init(
         suite: TimeLifeSuiteState,
         reflowDecision: TimeReflowDecisionState? = nil,
         reflowReceiptPreview: TimeReflowReceiptPreviewState? = nil,
         calendarAwareness: TimeCalendarAwarenessState? = nil,
-        onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)? = nil
+        onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)? = nil,
+        onSearch: (() -> Void)? = nil,
+        onCapture: (() -> Void)? = nil
     ) {
         self.suite = suite
         self.reflowDecision = reflowDecision
         self.reflowReceiptPreview = reflowReceiptPreview
         self.calendarAwareness = calendarAwareness
         self.onReflowDecision = onReflowDecision
+        self.onSearch = onSearch
+        self.onCapture = onCapture
         _selectedHorizon = State(initialValue: suite.field.defaultHorizon)
+        _selectedLayer = State(initialValue: Self.initialScreenshotLayer())
         _confirmedReflowAction = State(initialValue: Self.initialScreenshotReflowAction())
     }
 
@@ -67,6 +76,31 @@ struct LifeShapeFieldView: View {
         Self.screenshotRenderStateOverride() ?? suite.field.renderState
     }
 
+    var selectedLayerMarks: [LifeShapeSemanticMark] {
+        let allowedKinds: Set<LifeShapeSemanticMarkKind> = switch selectedLayer {
+        case .open:
+            [.freeTimeQuality, .executionLanes, .goalLoad]
+        case .protected:
+            [.protectedTime, .recoveryNeed]
+        case .pressure, .buffer:
+            []
+        }
+        let marks = suite.field.semanticMarks.filter { allowedKinds.contains($0.kind) }
+        return marks.isEmpty ? Array(suite.field.semanticMarks.prefix(2)) : marks
+    }
+
+    var selectedMark: LifeShapeSemanticMark? {
+        if let selectedMarkID,
+           let mark = selectedLayerMarks.first(where: { $0.id == selectedMarkID }) {
+            return mark
+        }
+        return selectedLayerMarks.first
+    }
+
+    var primaryActionTitle: String {
+        selectedLayer == .open ? "Place Step" : "Protect window"
+    }
+
     var displayedRenderStateTitle: String {
         switch displayedRenderState {
         case .defaultWeek: "Default"
@@ -96,6 +130,10 @@ struct LifeShapeFieldView: View {
         default:
             return nil
         }
+    }
+
+    static func initialScreenshotLayer() -> LifeShapeLayer {
+        screenshotRenderStateOverride() == .pressureCluster ? .protected : .open
     }
 
     static func screenshotRenderStateOverride() -> LifeShapeRenderState? {
@@ -147,23 +185,48 @@ struct LifeShapeFieldView: View {
             capacitySummary: reading.capacityStatement,
             protectedWindowSummary: suite.field.segments.first(where: { $0.kind == .protectedTime })?.detail ?? "",
             pressureSummary: suite.field.segments.first(where: { $0.kind == .pressure })?.detail ?? "",
-            horizonSummary: "Day, week, month, and year stay inside Time.",
+            horizonSummary: "\(displayedHorizon.title) remains one Time field.",
             captureSupportSummary: "Capture routes through the global composer.",
             accessibilityFallbacks: TimeLens.objectStageContract.accessibilityFallbacks
         )
 
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             contextCrown
-            lifeShapeZoomControl
+            LifeShapeLayerSelector(selection: $selectedLayer)
             if Self.screenshotFocusesQuietReflow() {
                 reflowTrustSeam
             }
-            capacityStatement
-            sourceReceiptRow
+            LifeShapeNowInstrument(
+                title: reading.title,
+                caption: reading.capacityStatement,
+                detail: reading.summary,
+                primaryActionTitle: primaryActionTitle,
+                visualState: suite.field.capacityFit.visualState
+            ) {
+                if selectedLayer == .open {
+                    selectedMarkID = selectedLayerMarks.first?.id
+                } else {
+                    confirmedReflowAction = .decline
+                }
+            }
             objectCanvas
-            horizonControl
+            lifeShapeHorizonRows
+            LifeShapeBucketDetail(
+                layer: selectedLayer,
+                mark: selectedMark,
+                todayAnchor: "Today follows this Time shape when the window changes."
+            )
+            LifeShapeCorrectionMenu(
+                layer: selectedLayer,
+                onNotUsable: { selectedMarkID = selectedLayerMarks.first?.id },
+                onNeedsMoreTime: { selectedMarkID = selectedLayerMarks.dropFirst().first?.id ?? selectedLayerMarks.first?.id },
+                onKeepClear: {
+                    selectedLayer = .protected
+                    confirmedReflowAction = .decline
+                }
+            )
             if Self.screenshotFocusesQuietReflow() == false,
-               revealsPressure || confirmedReflowAction != nil || displayedRenderState == .reflowPreview {
+               revealsPressure || confirmedReflowAction != nil {
                 reflowTrustSeam
             }
             continuityDock
@@ -184,19 +247,13 @@ struct LifeShapeFieldView: View {
                         .frame(width: 28, height: 28)
                         .accessibilityHidden(true)
 
-                    Text("Shape Time")
-                        .font(theme.typography.caption)
+                    Text("Time")
+                        .font(theme.typography.caption.weight(.semibold))
                         .foregroundStyle(theme.colors.accentSecondary)
-                        .textCase(.uppercase)
 
                     Spacer(minLength: theme.spacing.sm)
 
-                    inlineObjectLabel(
-                        displayedRenderStateTitle,
-                        icon: "gauge.with.dots.needle.bottom.50percent",
-                        state: displayedRenderState.visualState
-                    )
-                    .fixedSize(horizontal: true, vertical: false)
+                    contextCrownActions
                 }
 
                 Text("LifeShape Field")
@@ -205,7 +262,7 @@ struct LifeShapeFieldView: View {
                     .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Text("Capacity proof.")
+                Text("This week")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
@@ -220,58 +277,63 @@ struct LifeShapeFieldView: View {
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text("Shape Time")
+                    Text("Time")
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.accentSecondary)
-                        .textCase(.uppercase)
                     Text("LifeShape Field")
                         .font(theme.typography.title)
                         .foregroundStyle(theme.colors.textPrimary)
-                    Text("Field, day, week, month, and year stay in one LifeShape object.")
+                    Text("This week")
                         .font(theme.typography.caption)
                         .foregroundStyle(theme.colors.textSecondary)
                 }
 
                 Spacer(minLength: theme.spacing.sm)
 
-                inlineObjectLabel(
-                    displayedRenderStateTitle,
-                    icon: "gauge.with.dots.needle.bottom.50percent",
-                    state: displayedRenderState.visualState
-                )
+                contextCrownActions
             }
         }
     }
 
-    var lifeShapeZoomControl: some View {
-        Picker("LifeShape zoom", selection: $selectedZoomLevel) {
-            ForEach(TimeLifeShapeZoomLevel.allCases, id: \.self) { level in
-                Text(level.title).tag(level)
+    var contextCrownActions: some View {
+        HStack(spacing: theme.spacing.xs) {
+            Button {
+                onSearch?()
+            } label: {
+                Label("Search", systemImage: "magnifyingglass")
+                    .labelStyle(.iconOnly)
+                    .frame(width: 44, height: 44)
             }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Search")
+            .accessibilityIdentifier("time.context-crown.search")
+
+            Button {
+                onCapture?()
+            } label: {
+                Label("Capture", systemImage: "plus")
+                    .labelStyle(.iconOnly)
+                    .frame(width: 44, height: 44)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Capture")
+            .accessibilityIdentifier("time.context-crown.capture")
         }
-	        .pickerStyle(.segmented)
-	        .accessibilityIdentifier("time.life-shape-field.zoom-control")
-	        .accessibilityLabel("LifeShape zoom")
-	        .accessibilityHint("Moves between field, day, week, month, and year views without leaving Time.")
     }
 
-    var horizonControl: some View {
-        HorizonCapacityPrimitiveStage(
-            role: .horizon,
-	            title: "Horizon",
-	            subtitle: "Day, week, month, year, and later stay inside the same field.",
-            statusLabel: selectedHorizon.title,
-            accessibilityIdentifier: "time.life-shape-field.horizon-control"
-        ) {
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                ForEach(TimeHorizon.allCases) { horizon in
-                    horizonTextButton(horizon)
+    var lifeShapeHorizonRows: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
+            ForEach(selectedLayerMarks) { mark in
+                LifeShapeHorizonRowView(
+                    mark: mark,
+                    selected: selectedMark?.id == mark.id
+                ) {
+                    selectedMarkID = mark.id
                 }
             }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Future pressure")
-        .accessibilityValue(selectedHorizon.title)
+        .accessibilityIdentifier("time.life-shape-field.horizon-rows")
     }
 
 }

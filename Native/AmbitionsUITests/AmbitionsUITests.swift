@@ -1358,39 +1358,43 @@ final class AmbitionsUITests: XCTestCase {
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
                     "time.life-shape-field",
-                    "time.life-shape-field.capacity-statement",
-                    "time.life-shape-field.action.shape-week"
+                    "time.life-shape-field.layer-selector",
+                    "time.life-shape-field.now-instrument",
+                    "time.life-shape-field.primary-action"
                 ],
-                requiredTexts: ["LifeShape Field", "This week can hold", "Shape week"]
+                requiredTexts: ["LifeShape Field", "This week", "Place Step"]
             ),
             TimeMatrixItem(
                 name: "pressure-protected",
                 renderState: "pressure-cluster",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "time.life-shape-field.action.review-pressure",
-                    "time.life-shape-field.action.protect-block",
+                    "time.life-shape-field.layer.protected",
+                    "time.life-shape-field.horizon-rows",
                     "time.life-shape-field.pressure-canvas-engine"
                 ],
-                requiredTexts: ["Review pressure", "Protect this block", "Pressure"]
+                requiredTexts: ["Protected", "Pressure"]
             ),
             TimeMatrixItem(
                 name: "source-unavailable-manual",
                 renderState: "manual-only",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "time.life-shape-field.action.adjust-shape"
+                    "time.context-crown.search",
+                    "time.context-crown.capture",
+                    "time.life-shape-field.correction-menu"
                 ],
-                requiredTexts: ["Manual Time source", "Adjust shape", "No external calendar source is required"]
+                requiredTexts: ["LifeShape Field", "This week"]
             ),
             TimeMatrixItem(
                 name: "static-equivalent",
                 renderState: "calendar-denied",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "time.life-shape-field.capacity-statement"
+                    "time.life-shape-field.bucket-detail",
+                    "time.life-shape-field.correction-menu"
                 ],
-                requiredTexts: ["This week can hold", "Calendar denied", "User choice"]
+                requiredTexts: ["This week can hold", "Open detail"]
             ),
             TimeMatrixItem(
                 name: "large-dynamic-type",
@@ -1398,7 +1402,8 @@ final class AmbitionsUITests: XCTestCase {
                 contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL",
                 requiredIdentifiers: [
                     "time.life-shape-field",
-                    "time.life-shape-field.capacity-statement"
+                    "time.life-shape-field.now-instrument",
+                    "time.life-shape-field.horizon-rows"
                 ],
                 requiredTexts: ["This week can hold", "focused block", "light step", "protected recovery window"]
             )
@@ -1452,33 +1457,37 @@ final class AmbitionsUITests: XCTestCase {
                 captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: screenshotApp)
                 screenshotApp.terminate()
             } else {
+                if item.name == "static-equivalent" {
+                    XCTAssertTrue(
+                        scrollLifeShapeBucketDetailIntoScreenshotBand(in: app),
+                        "Bucket detail should be visible for \(item.name) screenshot proof."
+                    )
+                }
                 captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: app)
                 app.terminate()
             }
         }
     }
 
-    func testDemoTimeHorizonControlsAndChangeReviewSeamStayInteractive() throws {
+    func testDemoTimeLifeShapeLayerAndCorrectionControlsStayInteractive() throws {
         let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://tab/time")
         app.launch()
 
         XCTAssertTrue(waitForSelectedTab("Time", in: app))
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
-        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.horizon-control", in: app, maxAttempts: 20))
-        let month = app.descendants(matching: .any)["time.life-shape-field.horizon.month"]
-        XCTAssertTrue(month.waitForExistence(timeout: 10))
-        month.tap()
-        let monthValue = month.value as? String
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.protected", in: app, maxAttempts: 20))
+        let protected = app.descendants(matching: .any)["time.life-shape-field.layer.protected"]
+        XCTAssertTrue(protected.waitForExistence(timeout: 10))
+        protected.tap()
+        let protectedValue = protected.value as? String
         XCTAssertTrue(
-            month.isSelected || monthValue?.localizedCaseInsensitiveContains("Selected") == true,
-            "Month horizon should expose selected state after tap. Value: \(monthValue ?? "<nil>")"
+            protected.isSelected || protectedValue?.localizedCaseInsensitiveContains("Selected") == true,
+            "Protected layer should expose selected state after tap. Value: \(protectedValue ?? "<nil>")"
         )
 
-        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.action.review-pressure", in: app, maxAttempts: 10))
-        app.buttons["time.life-shape-field.action.review-pressure"].tap()
-        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.change-review-seam", in: app, maxAttempts: 20))
-        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.change-review.accept", in: app, maxAttempts: 20))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.correction-menu", in: app, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: app, maxAttempts: 10))
     }
 
     private func makeApp(
@@ -1958,6 +1967,25 @@ final class AmbitionsUITests: XCTestCase {
                 app.swipeUp(velocity: .slow)
             }
         }
+    }
+
+    private func scrollLifeShapeBucketDetailIntoScreenshotBand(in app: XCUIApplication) -> Bool {
+        let scrollView = app.scrollViews["time.content-scroll"]
+        let target = app.descendants(matching: .any)["time.life-shape-field.bucket-detail"]
+        let screenshotBand = CGRect(x: 0, y: 180, width: 1_000, height: 560)
+
+        for _ in 0..<12 {
+            if target.exists, target.frame.intersects(screenshotBand), target.frame.maxY < 760 {
+                return true
+            }
+            if scrollView.exists {
+                scrollView.swipeUp(velocity: .slow)
+            } else {
+                app.swipeUp(velocity: .slow)
+            }
+        }
+
+        return target.exists && target.frame.intersects(screenshotBand)
     }
 
     private func assertFrame(_ frame: CGRect, isInside container: CGRect, named name: String, file: StaticString = #filePath, line: UInt = #line) {
