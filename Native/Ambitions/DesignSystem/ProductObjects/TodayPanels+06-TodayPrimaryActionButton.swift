@@ -2,19 +2,27 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct TodayPrimaryActionButton: View {
+    @Environment(\.ambitionTheme) private var theme
+    @State private var hapticTrigger = 0
+
     let action: TodayInlineAction
     let handler: (TodayInlineAction) -> Void
 
     var body: some View {
+        let haptics = AmbitionsHaptics(theme: theme)
+        let typography = AmbitionsTypography(theme: theme)
+
         Button {
+            hapticTrigger += 1
             handler(action)
         } label: {
             Label(action.title, systemImage: action.systemImage)
-                .font(.body.weight(.semibold))
+                .font(typography.body.weight(.semibold))
                 .frame(maxWidth: .infinity)
                 .frame(minHeight: 50)
         }
         .buttonStyle(AmbitionPressableButtonStyle(state: action.state))
+        .ambitionHaptic(haptics.primaryActionIntent, trigger: hapticTrigger)
         .accessibilityLabel(action.title)
         .accessibilityIdentifier(accessibilityIdentifier)
         .modifier(TodayActionAccessibilityHint(action: action))

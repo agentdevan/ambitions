@@ -16,32 +16,40 @@ struct StartHereSurface: View {
     let onNotThis: (DayRailHeroStepState) -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.lg) {
+        let colors = AmbitionsColor(theme: theme)
+        let typography = AmbitionsTypography(theme: theme)
+        let spacing = AmbitionsSpacing(theme: theme)
+        let material = AmbitionsMaterial(theme: theme)
+        let lighting = AmbitionsLighting(theme: theme)
+        let depth = AmbitionsDepth(theme: theme)
+        let motion = AmbitionsMotion(theme: theme)
+
+        VStack(alignment: .leading, spacing: spacing.sectionGap) {
             Button {
                 onOpenStepDetail(step.stepDetail(privacy: privacy, contextLabel: contextLabel))
             } label: {
-                HStack(alignment: .top, spacing: theme.spacing.md) {
+                HStack(alignment: .top, spacing: spacing.objectGap) {
                     DayRailNode(kind: .recommended, active: true)
                         .accessibilityHidden(true)
 
-                    VStack(alignment: .leading, spacing: theme.spacing.md) {
+                    VStack(alignment: .leading, spacing: spacing.objectGap) {
                         Text("Start here")
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textTertiary)
+                            .font(typography.caption)
+                            .foregroundStyle(colors.tertiaryText)
                             .accessibilityIdentifier("TodayRealityRailStartHereTitle")
 
                         Text(step.title)
-                            .font(theme.typography.titleCompact)
-                            .foregroundStyle(theme.colors.textPrimary)
+                            .font(typography.objectTitle)
+                            .foregroundStyle(colors.primaryText)
                             .fixedSize(horizontal: false, vertical: true)
                             .accessibilityIdentifier("TodayRealityRailStepTitle")
 
                         Text(step.subtitle)
-                            .font(theme.typography.body)
-                            .foregroundStyle(theme.colors.textSecondary)
+                            .font(typography.body)
+                            .foregroundStyle(colors.secondaryText)
                             .fixedSize(horizontal: false, vertical: true)
                     }
-                    Spacer(minLength: theme.spacing.sm)
+                    Spacer(minLength: spacing.standard)
                 }
             }
             .buttonStyle(.plain)
@@ -56,7 +64,7 @@ struct StartHereSurface: View {
 
             actionRow
         }
-        .padding(theme.spacing.md)
+        .padding(spacing.primaryObjectPadding)
         .background(
             ZStack {
                 UnevenRoundedRectangle(
@@ -66,30 +74,28 @@ struct StartHereSurface: View {
                     topTrailingRadius: theme.radius.lg,
                     style: .continuous
                 )
-                .fill(theme.colors.surfaceOverlay.opacity(0.76))
+                .fill(colors.primaryObjectFill)
 
-                LinearGradient(
-                    colors: [
-                        theme.colors.accentWarm.opacity(0.14),
-                        theme.colors.surfaceOverlay.opacity(0.02),
-                        .clear,
-                    ],
-                    startPoint: .topLeading,
-                    endPoint: .bottomTrailing
-                )
-                .blendMode(.screen)
+                material.startHereWash
+                    .blendMode(lighting.startHereWashBlendMode)
             }
         )
         .overlay(
             HStack(spacing: 0) {
                 Rectangle()
-                    .fill(theme.colors.accentWarm.opacity(0.86))
+                    .fill(colors.startHereAccent.opacity(lighting.startHereAccentOpacity))
                     .frame(width: 3)
                     .accessibilityHidden(true)
                 Spacer(minLength: 0)
             }
         )
-        .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
+        .shadow(
+            color: depth.primaryObjectShadow.color,
+            radius: depth.primaryObjectShadow.radius,
+            x: depth.primaryObjectShadow.x,
+            y: depth.primaryObjectShadow.y
+        )
+        .transition(motion.primaryObjectTransition(reduceMotion: reduceMotion))
     }
 
     @ViewBuilder
