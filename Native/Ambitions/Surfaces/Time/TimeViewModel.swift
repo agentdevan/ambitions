@@ -9,6 +9,7 @@ final class TimeViewModel {
     private var hasLoaded = false
     private let dayBoundaryScheduler = DayBoundaryScheduler()
     private(set) var lastLoadedDayStart: Date?
+    private(set) var lastLoadedClockContext: DayBoundaryScheduler.LoadedClockContext?
 
     var stateKey: String {
         switch state {
@@ -36,25 +37,35 @@ final class TimeViewModel {
         self.state = state
     }
 
-    func load(using service: any TimeServicing, now: Date, calendar: Calendar) async {
+    func load(using service: any TimeServicing, now: Date, calendar: Calendar, timeZone: TimeZone? = nil) async {
         guard hasLoaded == false else { return }
         hasLoaded = true
-        await refresh(using: service, now: now, calendar: calendar)
+        await refresh(using: service, now: now, calendar: calendar, timeZone: timeZone)
     }
 
-    func refresh(using service: any TimeServicing, now: Date, calendar: Calendar) async {
+    func refresh(using service: any TimeServicing, now: Date, calendar: Calendar, timeZone: TimeZone? = nil) async {
         do {
             state = .loaded(try await service.loadTimeSurfaceState(now: now))
             lastLoadedDayStart = dayBoundaryScheduler.loadedDayStart(for: now, calendar: calendar)
+            lastLoadedClockContext = dayBoundaryScheduler.loadedClockContext(
+                for: now,
+                calendar: calendar,
+                timeZone: timeZone ?? calendar.timeZone
+            )
         } catch {
             state = .failed("Unable to load Time: \(error.localizedDescription)")
         }
     }
 
-    func makeCalendarAware(using service: any TimeServicing, now: Date, calendar: Calendar) async {
+    func makeCalendarAware(using service: any TimeServicing, now: Date, calendar: Calendar, timeZone: TimeZone? = nil) async {
         do {
             state = .loaded(try await service.makeTimeCalendarAware(now: now))
             lastLoadedDayStart = dayBoundaryScheduler.loadedDayStart(for: now, calendar: calendar)
+            lastLoadedClockContext = dayBoundaryScheduler.loadedClockContext(
+                for: now,
+                calendar: calendar,
+                timeZone: timeZone ?? calendar.timeZone
+            )
         } catch {
             state = .failed("Unable to make Time calendar-aware: \(error.localizedDescription)")
         }
@@ -62,5 +73,14 @@ final class TimeViewModel {
 
     func shouldRefreshForDayBoundary(now: Date, calendar: Calendar) -> Bool {
         dayBoundaryScheduler.shouldRefresh(lastLoadedDayStart: lastLoadedDayStart, now: now, calendar: calendar)
+    }
+
+    func shouldRefreshForClockChange(now: Date, calendar: Calendar, timeZone: TimeZone) -> Bool {
+        dayBoundaryScheduler.shouldRefresh(
+            lastLoadedClockContext: lastLoadedClockContext,
+            now: now,
+            calendar: calendar,
+            timeZone: timeZone
+        )
     }
 }

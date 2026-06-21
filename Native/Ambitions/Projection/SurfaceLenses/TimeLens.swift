@@ -76,17 +76,23 @@ enum TimeLens: SurfaceLens {
     static let objectStageContract = TimeObjectStagePrimitiveContract.current
 
     static func project(_ timeState: TimeSurfaceState) -> TimeStageScene {
-        makeStageScene(for: timeState)
+        makeStageScene(for: timeState, clock: SystemClock())
     }
 
-    static func makeStageScene(for timeState: TimeSurfaceState) -> TimeStageScene {
-        TimeStageScene(
+    static func project(_ timeState: TimeSurfaceState, clock: any AmbitionsClock) -> TimeStageScene {
+        makeStageScene(for: timeState, clock: clock)
+    }
+
+    static func makeStageScene(for timeState: TimeSurfaceState, clock: any AmbitionsClock) -> TimeStageScene {
+        let currentDateSummary = RuntimeTickPolicy(calendar: clock.calendar).shortMonthDayLabel(for: clock.now)
+
+        return TimeStageScene(
             surface: .time,
             productObject: objectStageContract.productObject,
             stageName: objectStageContract.stageName,
             firstViewportStructure: objectStageContract.firstViewportStructure,
             sourceTrustLineOrder: objectStageContract.sourceTrustLineOrder,
-            currentDateSummary: timeState.timeframeLabel,
+            currentDateSummary: currentDateSummary,
             capacitySummary: timeState.capacityEnvelope.availableCapacity,
             protectedWindowSummary: timeState.capacityEnvelope.protectedFocus,
             pressureSummary: timeState.capacityEnvelope.pressure,

@@ -4,6 +4,7 @@ import SwiftUI
 
 // Accessibility contract: screenshot-state helper preserves TodaySurface root semantics and does not render standalone controls.
 extension TodaySurface {
+    #if DEBUG
     @MainActor
     func applyDebugScreenshotSheetIfNeeded() {
         guard debugScreenshotSheetApplied == false else { return }
@@ -47,6 +48,7 @@ extension TodaySurface {
         let value = arguments[index + 1].trimmingCharacters(in: .whitespacesAndNewlines)
         return value.isEmpty ? nil : value
     }
+    #endif
 
 
     var shell: AppShellCapability {

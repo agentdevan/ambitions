@@ -32,9 +32,17 @@ struct TodayLens: Equatable, SurfaceLens {
         self.stageScene = TodayStageScene(execution: experience.execution, generatedAt: generatedAt)
     }
 
+    init(experience: TodayExperience, clock: any AmbitionsClock) {
+        self.init(experience: experience, generatedAt: clock.now)
+    }
+
     init(execution: TodayExecutionViewState, generatedAt: Date) {
         self.generatedAt = generatedAt
         self.stageScene = TodayStageScene(execution: execution, generatedAt: generatedAt)
+    }
+
+    init(execution: TodayExecutionViewState, clock: any AmbitionsClock) {
+        self.init(execution: execution, generatedAt: clock.now)
     }
 
     static func project(_ lens: TodayLens) -> SurfaceLensReport {
@@ -43,6 +51,10 @@ struct TodayLens: Equatable, SurfaceLens {
 
     static func project(execution: TodayExecutionViewState, generatedAt: Date) -> SurfaceLensReport {
         makeReport(from: TodayStageScene(execution: execution, generatedAt: generatedAt))
+    }
+
+    static func project(execution: TodayExecutionViewState, clock: any AmbitionsClock) -> SurfaceLensReport {
+        project(execution: execution, generatedAt: clock.now)
     }
 
     private static func makeReport(from scene: TodayStageScene) -> SurfaceLensReport {

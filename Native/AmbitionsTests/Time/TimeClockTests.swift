@@ -25,6 +25,18 @@ final class TimeClockTests: XCTestCase {
         XCTAssertEqual(fixedSystem.calendar.timeZone.secondsFromGMT(), 0)
     }
 
+    func testProductionClockFactoryProvidesLiveSystemClock() {
+        let before = Date()
+        let clock = AmbitionsClockFactory.clock(for: .live, environment: [:])
+        let observedNow = clock.now
+        let after = Date()
+
+        XCTAssertTrue(clock is SystemClock)
+        XCTAssertTrue(clock.advancesAutomatically)
+        XCTAssertGreaterThanOrEqual(observedNow, before)
+        XCTAssertLessThanOrEqual(observedNow, after.addingTimeInterval(0.1))
+    }
+
     func testRuntimeTickPolicyOwnsCalendarAndFormattingBehavior() throws {
         let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T22:30:00Z"))
         let policy = RuntimeTickPolicy.utc
@@ -68,6 +80,28 @@ final class TimeClockTests: XCTestCase {
         XCTAssertTrue(scheduler.shouldRefresh(lastLoadedDayStart: dayStart, now: nextDay, calendar: calendar))
     }
 
+    func testClockRefreshContextRefreshesForTimeZoneChangeWithoutRelaunch() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-16T03:30:00Z"))
+        let scheduler = DayBoundaryScheduler()
+        let utcClock = TestClock(now: now)
+        let newYorkZone = try XCTUnwrap(TimeZone(identifier: "America/New_York"))
+        let newYorkClock = TestClock(now: now, timeZone: newYorkZone)
+        let loadedContext = scheduler.loadedClockContext(
+            for: utcClock.now,
+            calendar: utcClock.calendar,
+            timeZone: utcClock.timeZone
+        )
+
+        XCTAssertTrue(
+            scheduler.shouldRefresh(
+                lastLoadedClockContext: loadedContext,
+                now: newYorkClock.now,
+                calendar: newYorkClock.calendar,
+                timeZone: newYorkClock.timeZone
+            )
+        )
+    }
+
     func testTimeSourcesDoNotUseNowDefaultsForViewModelLoads() throws {
         let root = repoRoot()
         let sourceRoots = [
@@ -92,6 +126,77 @@ final class TimeClockTests: XCTestCase {
         }
 
         XCTAssertTrue(findings.isEmpty, "Time source still reads live time directly: \(findings.joined(separator: ", "))")
+    }
+
+    @MainActor
+    func testTimeViewModelRefreshesWhenInjectedClockTimeZoneChanges() async throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-16T03:30:00Z"))
+        let utcClock = TestClock(now: now)
+        let newYorkClock = TestClock(now: now, timeZone: try XCTUnwrap(TimeZone(identifier: "America/New_York")))
+        let service = ClockRecordingTimeService(timeState: PreviewTimeScenarios.seeded)
+        let viewModel = TimeViewModel()
+
+        await viewModel.load(
+            using: service,
+            now: utcClock.now,
+            calendar: utcClock.calendar,
+            timeZone: utcClock.timeZone
+        )
+
+        XCTAssertTrue(
+            viewModel.shouldRefreshForClockChange(
+                now: newYorkClock.now,
+                calendar: newYorkClock.calendar,
+                timeZone: newYorkClock.timeZone
+            )
+        )
+    }
+
+    func testRepositoryBackedTimeServiceUsesInjectedClockCalendarForProjectionLabels() async throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-16T03:30:00Z"))
+        let repositories = try await makeRepositories()
+        let utcService = RepositoryBackedTimeService(
+            repositories: repositories,
+            clock: TestClock(now: now)
+        )
+        let newYorkService = RepositoryBackedTimeService(
+            repositories: repositories,
+            clock: TestClock(now: now, timeZone: try XCTUnwrap(TimeZone(identifier: "America/New_York")))
+        )
+
+        XCTAssertEqual(utcService.timeframeLabel(now: now), "Apr 16-Apr 22")
+        XCTAssertEqual(newYorkService.timeframeLabel(now: now), "Apr 15-Apr 21")
+    }
+
+    func testTimeLensUsesInjectedClockForCurrentDateSummary() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-16T03:30:00Z"))
+        let scene = TimeLens.makeStageScene(
+            for: PreviewTimeScenarios.seeded,
+            clock: TestClock(now: now, timeZone: try XCTUnwrap(TimeZone(identifier: "America/New_York")))
+        )
+
+        XCTAssertEqual(scene.currentDateSummary, "Apr 15")
+    }
+
+    func testPreviewClockIsDebugOnlyInReleaseScopedTimeSource() throws {
+        let root = repoRoot()
+        let sourceRoots = [
+            "Native/Ambitions/Core/Time",
+            "Native/Ambitions/Surfaces/Time",
+            "Native/Ambitions/Surfaces/Today",
+            "Native/Ambitions/Projection/SurfaceLenses"
+        ].map { root.appendingPathComponent($0) }
+        let fileURLs = try sourceRoots.flatMap { try swiftFiles(under: $0) }
+        var findings: [String] = []
+
+        for fileURL in fileURLs {
+            let contents = try String(contentsOf: fileURL, encoding: .utf8)
+            let releaseContents = LifeShapeAuditSupport.releaseScopedContents(contents)
+            guard releaseContents.contains("PreviewClock") else { continue }
+            findings.append(fileURL.path.replacingOccurrences(of: root.path + "/", with: ""))
+        }
+
+        XCTAssertTrue(findings.isEmpty, "PreviewClock leaks into release-scoped Time/Today source: \(findings.joined(separator: ", "))")
     }
 
     func testTodayAndTimeProjectionSourcesUseCoreTimePolicyForRendering() throws {
@@ -144,6 +249,18 @@ final class TimeClockTests: XCTestCase {
             url.deleteLastPathComponent()
         }
         return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
+    }
+
+    private func makeRepositories() async throws -> AppRepositories {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        return AppRepositories(
+            goals: SwiftDataGoalRepository(store: store),
+            drafts: SwiftDataGoalDraftRepository(store: store),
+            evidence: SwiftDataProgressEvidenceRepository(store: store),
+            feedback: SwiftDataFeedbackEventRepository(store: store),
+            captures: SwiftDataCaptureRepository(store: store),
+            appState: SwiftDataAppStateRepository(store: store)
+        )
     }
 }
 

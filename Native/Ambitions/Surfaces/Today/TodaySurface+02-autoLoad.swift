@@ -79,7 +79,8 @@ extension TodaySurface {
             userDisplayName: userSystem.session.userDisplayName,
             now: clock.now,
             calendar: clock.calendar,
-            entryContext: entryContext
+            entryContext: entryContext,
+            timeZone: clock.timeZone
         )
     }
 
@@ -95,7 +96,8 @@ extension TodaySurface {
             userDisplayName: userSystem.session.userDisplayName,
             now: clock.now,
             calendar: clock.calendar,
-            entryContext: entryContext
+            entryContext: entryContext,
+            timeZone: clock.timeZone
         )
     }
 
@@ -114,7 +116,7 @@ extension TodaySurface {
 
     func refreshIfDayBoundaryChanged() async {
         let now = clock.now
-        guard viewModel.shouldRefreshForDayBoundary(now: now, calendar: clock.calendar) else { return }
+        guard viewModel.shouldRefreshForClockChange(now: now, calendar: clock.calendar, timeZone: clock.timeZone) else { return }
         await refresh()
     }
 
@@ -169,7 +171,8 @@ extension TodaySurface {
                     userDisplayName: userSystem.session.userDisplayName,
                     now: clock.now,
                     calendar: clock.calendar,
-                    entryContext: .standard
+                    entryContext: .standard,
+                    timeZone: clock.timeZone
                 )
             }
         }

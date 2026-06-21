@@ -6,20 +6,27 @@ struct RepositoryBackedTimeService: TimeServicing {
     let calendarRealityService: (any CalendarRealityServicing)?
     let timeProjectionService: TimeProjectionService
     let calendarAvailabilityHorizon: String
-    let calendar: Calendar
+    let clock: any AmbitionsClock
+    let fixedCalendar: Calendar?
+
+    var calendar: Calendar {
+        fixedCalendar ?? clock.calendar
+    }
 
     init(
         repositories: AppRepositories,
         calendarRealityService: (any CalendarRealityServicing)? = nil,
         timeProjectionService: TimeProjectionService = .init(),
         calendarAvailabilityHorizon: String = "week",
-        calendar: Calendar = SystemClock().calendar
+        clock: any AmbitionsClock = SystemClock(),
+        calendar: Calendar? = nil
     ) {
         self.repositories = repositories
         self.calendarRealityService = calendarRealityService
         self.timeProjectionService = timeProjectionService
         self.calendarAvailabilityHorizon = calendarAvailabilityHorizon
-        self.calendar = calendar
+        self.clock = clock
+        self.fixedCalendar = calendar
     }
 
     func loadTimeSurfaceState(now: Date) async throws -> TimeSurfaceState {
@@ -83,4 +90,3 @@ struct RepositoryBackedTimeService: TimeServicing {
 }
 
 extension RepositoryBackedTimeService: TimeProjectionSource {}
-

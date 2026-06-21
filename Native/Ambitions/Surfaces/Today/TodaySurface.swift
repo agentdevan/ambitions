@@ -82,7 +82,8 @@ struct TodaySurface: View {
                         userDisplayName: userSystem.session.userDisplayName,
                         now: clock.now,
                         calendar: clock.calendar,
-                        entryContext: shell.navigation.takeTodayEntryContext()
+                        entryContext: shell.navigation.takeTodayEntryContext(),
+                        timeZone: clock.timeZone
                     )
                 }
             }

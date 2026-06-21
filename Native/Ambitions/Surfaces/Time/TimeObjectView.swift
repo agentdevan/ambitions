@@ -2,10 +2,11 @@ import SwiftUI
 
 struct TimeObjectView: View {
     let timeState: TimeSurfaceState
+    let clock: any AmbitionsClock
     let onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)?
 
     var body: some View {
-        let scene = TimeLens.makeStageScene(for: timeState)
+        let scene = TimeLens.makeStageScene(for: timeState, clock: clock)
         LifeShapeFieldView(
             suite: timeState.lifeSuite,
             reflowDecision: timeState.reflowDecision,

@@ -68,6 +68,39 @@ final class TodayClockTests: XCTestCase {
         XCTAssertTrue(policy.shouldRefresh(lastLoadedDayStart: dayStart, now: nextDay, calendar: calendar))
     }
 
+    @MainActor
+    func testTodayViewModelRefreshesWhenInjectedClockTimeZoneChanges() async throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-16T03:30:00Z"))
+        let utcClock = TestClock(now: now)
+        let newYorkClock = TestClock(now: now, timeZone: try XCTUnwrap(TimeZone(identifier: "America/New_York")))
+        let service = ClockRecordingTodayService(experience: PreviewTodayScenarios.stable)
+        let viewModel = TodayViewModel()
+
+        await viewModel.activate(
+            using: service,
+            userDisplayName: "Devan",
+            now: utcClock.now,
+            calendar: utcClock.calendar,
+            timeZone: utcClock.timeZone
+        )
+
+        XCTAssertTrue(
+            viewModel.shouldRefreshForClockChange(
+                now: newYorkClock.now,
+                calendar: newYorkClock.calendar,
+                timeZone: newYorkClock.timeZone
+            )
+        )
+    }
+
+    func testTodayLensUsesInjectedClockForGeneratedAt() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z"))
+        let lens = TodayLens(experience: PreviewTodayScenarios.stable, clock: TestClock(now: now))
+
+        XCTAssertEqual(lens.generatedAt, now)
+        XCTAssertEqual(lens.stageScene.generatedAt, now)
+    }
+
     func testStepReplacementRecordedAtIsDeterministicWhenClockIsInjected() throws {
         let clock = PreviewClock(now: try XCTUnwrap(DomainTimestamp.date(from: "2026-04-15T12:00:00Z")))
         let rail = PreviewTodayScenarios.stable.execution.dayRail

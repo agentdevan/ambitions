@@ -39,6 +39,7 @@ struct TimeSurface: View {
                     case let .loaded(timeState):
                         TimeObjectView(
                             timeState: timeState,
+                            clock: clock,
                             onReflowDecision: handleReflowDecision
                         )
 
@@ -90,10 +91,11 @@ struct TimeSurface: View {
         .accessibilityIdentifier("time.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
-            await viewModel.load(using: featureFactory.timeService, now: clock.now, calendar: clock.calendar)
+            await viewModel.load(using: featureFactory.timeService, now: clock.now, calendar: clock.calendar, timeZone: clock.timeZone)
         }
         .task {
-            await observeDayBoundary()
+            guard clock.advancesAutomatically else { return }
+            await observeClockBoundary()
         }
     }
 
@@ -162,23 +164,23 @@ struct TimeSurface: View {
     }
 
     private func refresh() async {
-        await viewModel.refresh(using: featureFactory.timeService, now: clock.now, calendar: clock.calendar)
+        await viewModel.refresh(using: featureFactory.timeService, now: clock.now, calendar: clock.calendar, timeZone: clock.timeZone)
     }
 
-    private func observeDayBoundary() async {
+    private func observeClockBoundary() async {
         while Task.isCancelled == false {
             do {
                 try await Task.sleep(for: .seconds(60))
             } catch {
                 return
             }
-            await refreshIfDayBoundaryChanged()
+            await refreshIfClockChanged()
         }
     }
 
-    private func refreshIfDayBoundaryChanged() async {
+    private func refreshIfClockChanged() async {
         let now = clock.now
-        guard viewModel.shouldRefreshForDayBoundary(now: now, calendar: clock.calendar) else { return }
+        guard viewModel.shouldRefreshForClockChange(now: now, calendar: clock.calendar, timeZone: clock.timeZone) else { return }
         await refresh()
     }
 

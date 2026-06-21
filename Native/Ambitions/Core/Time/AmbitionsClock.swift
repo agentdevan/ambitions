@@ -7,6 +7,7 @@ protocol AmbitionsClock: Sendable {
     var advancesAutomatically: Bool { get }
 }
 
+#if DEBUG
 struct TestClock: AmbitionsClock, Equatable {
     let now: Date
     let calendar: Calendar
@@ -29,6 +30,7 @@ struct TestClock: AmbitionsClock, Equatable {
         TestClock(now: now.addingTimeInterval(interval), calendar: calendar, timeZone: timeZone)
     }
 }
+#endif
 
 enum AmbitionsClockFactory {
     static func clock(

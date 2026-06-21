@@ -1,5 +1,6 @@
 import Foundation
 
+#if DEBUG
 struct PreviewClock: AmbitionsClock, Equatable {
     static let environmentKey = "AMBITIONS_PREVIEW_CLOCK_ISO"
     static let defaultNow = Date(timeIntervalSince1970: 1_776_254_400)
@@ -39,3 +40,4 @@ struct PreviewClock: AmbitionsClock, Equatable {
         return PreviewClock(now: date)
     }
 }
+#endif
