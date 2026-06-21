@@ -31,6 +31,7 @@ EXCLUDED_PATH_PARTS = {
 
 REQUIRED_ARCHITECTURE_PATHS = [
     "scripts/ambitions-architecture-inventory.py",
+    "scripts/ambitions-master-sequencing-check.py",
     "Native/Ambitions/Language/ProductCopy.swift",
     "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift",
     "Native/Ambitions/Quality/QualityGateChecklist.swift",
@@ -46,6 +47,7 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "Native/Ambitions/Scenarios/RuntimeScenario.swift",
     "Native/Ambitions/Scenarios/ScenarioCatalog.swift",
     "Native/Ambitions/Scenarios/ScenarioMatrix.swift",
+    "docs/validation/master_lifeshape_foldin_ledger.md",
     "scripts/ambitions-quality-gate.sh",
 ]
 
@@ -588,6 +590,38 @@ def check_scenario_and_quality_contracts() -> list[Finding]:
     return findings
 
 
+def check_master_lifeshape_foldin_contract() -> list[Finding]:
+    script = ROOT / "scripts" / "ambitions-master-sequencing-check.py"
+    if not script.exists():
+        return [
+            Finding(
+                "master-lifeshape-foldin",
+                rel(script),
+                "master LifeShape sequencing check is missing",
+            )
+        ]
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "master-lifeshape-foldin",
+            rel(script),
+            output[:300] if output else "master LifeShape sequencing check failed",
+        )
+    ]
+
+
 def check_action_mutation_contract(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
@@ -685,6 +719,7 @@ def main() -> int:
     findings.extend(check_design_tokens(files, changed))
     findings.extend(check_shell_and_accessibility(files, changed))
     findings.extend(check_scenario_and_quality_contracts())
+    findings.extend(check_master_lifeshape_foldin_contract())
     findings.extend(check_action_mutation_contract(files))
 
     grouped = summarize(findings, max_per_gate=args.max_per_gate)
