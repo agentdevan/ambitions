@@ -69,6 +69,18 @@ struct CalendarPermission: Sendable {
         )
     }
 
+    func lifeShapeFallback(permissionState: CalendarPermissionState) -> LifeShapeFallback? {
+        switch permissionState {
+        case .denied, .restricted, .unavailable:
+            return LifeShapeFallback(
+                kind: permissionState == .denied ? .calendarUnavailable : .sourceUnavailable,
+                userVisibleSummary: "Calendar access is unavailable; Time still works from local manual planning."
+            )
+        case .notDetermined, .readWrite, .writeOnly:
+            return nil
+        }
+    }
+
     private func availability(for authorization: CalendarRemindersAuthorizationState) -> PermissionAvailability {
         switch authorization {
         case .notDetermined:
