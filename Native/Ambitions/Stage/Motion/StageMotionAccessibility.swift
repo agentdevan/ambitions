@@ -18,7 +18,8 @@ struct StageMotionAccessibilityPlan {
                 projection.field.source,
                 projection.field.proof,
                 projection.field.receipt,
-                reductionPolicy.proofThreadTextureDescription
+                reductionPolicy.proofThreadTextureDescription,
+                mirror.accessibleConsequenceSummary
             ].joined(separator: ". "),
             hint: "Motion is behavior, not a destination. \(reductionPolicy.rhythmSpacingDescription)",
             semanticMirror: mirror

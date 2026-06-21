@@ -132,6 +132,25 @@ final class MotionCurrentScreenTests: XCTestCase {
         }
     }
 
+    func testMotionSemanticMirrorCoversRequiredStageConsequences() {
+        let layer = StageMotionLayer.current(
+            projection: MotionCurrentProjection.fixture(renderState: .recoveryActive),
+            reduceMotionEnabled: true
+        )
+        let mirror = layer.accessibilityPlan.semanticMirror
+
+        XCTAssertEqual(Set(mirror.consequenceMirrors.map(\.kind)), Set(MotionConsequenceKind.allCases))
+        XCTAssertTrue(mirror.hasRequiredBehaviorConsequences)
+        XCTAssertTrue(mirror.accessibleConsequenceSummary.localizedCaseInsensitiveContains("Completion"))
+        XCTAssertTrue(mirror.accessibleConsequenceSummary.localizedCaseInsensitiveContains("Blocked"))
+        XCTAssertTrue(mirror.accessibleConsequenceSummary.localizedCaseInsensitiveContains("Recovery"))
+        XCTAssertTrue(mirror.accessibleConsequenceSummary.localizedCaseInsensitiveContains("Re-entry"))
+        XCTAssertTrue(mirror.accessibleConsequenceSummary.localizedCaseInsensitiveContains("Undo"))
+        XCTAssertTrue(mirror.accessibleConsequenceSummary.localizedCaseInsensitiveContains("Protected boundary"))
+        XCTAssertFalse(mirror.accessibleConsequenceSummary.localizedCaseInsensitiveContains("dashboard"))
+        XCTAssertFalse(mirror.accessibleConsequenceSummary.localizedCaseInsensitiveContains("destination"))
+    }
+
     func testRecoveryAndReentryAvoidFailureFraming() {
         let allCopy = MotionCurrentProjection.fixture.allUserFacingCopy.lowercased()
         let forbiddenTerms = [
