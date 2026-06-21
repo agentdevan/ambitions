@@ -209,6 +209,17 @@ final class AmbitionsUITests: XCTestCase {
         }
     }
 
+    func testUIQL002TimeDrilldownHidesRootDock() throws {
+        let app = makeApp(bootstrapMode: "demo", launchURL: "ambitions://time/weekly-review")
+        app.launch()
+
+        XCTAssertTrue(app.buttons["shell.time.back-button"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Weekly Review"].waitForExistence(timeout: 10))
+        for tab in ["Today", "Goals", "Time", "You"] {
+            XCTAssertFalse(rootDestinationExists(tab, in: app), "Time drilldown should hide root dock destination \(tab).")
+        }
+    }
+
     func testUIQL002ActivatedCaptureSeamUsesOverlayKeyboardClearanceWithoutRootDock() throws {
         let app = makeApp(bootstrapMode: "preview", launchURL: "ambitions://overlay/quiet-command-sheet?intent=quick_capture")
         app.launch()
@@ -2192,7 +2203,10 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func rootDestinationExists(_ title: String, in app: XCUIApplication) -> Bool {
-        rootDestinationButton(title, in: app).exists
+        let identifier = "shell.meridian.destination.\(title.lowercased())"
+        return app.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier == %@", identifier))
+            .count > 0
     }
 
     private func rootDockFrame(in app: XCUIApplication) -> CGRect {
@@ -2322,28 +2336,51 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func dismissContinuityReceiptIfPresent(in app: XCUIApplication, timeout: TimeInterval = 4) {
+        let receipt = app.descendants(matching: .any)["shell.continuity-receipt"]
+        guard receipt.waitForExistence(timeout: timeout) else { return }
+
         let shellDismissButton = app.buttons["action-closure-tray.dismiss-button"]
-        if shellDismissButton.waitForExistence(timeout: timeout), shellDismissButton.isHittable {
-            shellDismissButton.tap()
+        if shellDismissButton.waitForExistence(timeout: 0.5) {
+            tapIfPossible(shellDismissButton)
+            waitForContinuityReceiptToDisappear(receipt)
             return
         }
 
         let identifiedButton = app.buttons["trust.receipt-toast.dismiss-button"]
-        if identifiedButton.waitForExistence(timeout: 0.5), identifiedButton.isHittable {
-            identifiedButton.tap()
+        if identifiedButton.waitForExistence(timeout: 0.5) {
+            tapIfPossible(identifiedButton)
+            waitForContinuityReceiptToDisappear(receipt)
             return
         }
 
         let shellLabeledButton = app.buttons["Dismiss result"]
-        if shellLabeledButton.waitForExistence(timeout: 0.5), shellLabeledButton.isHittable {
-            shellLabeledButton.tap()
+        if shellLabeledButton.waitForExistence(timeout: 0.5) {
+            tapIfPossible(shellLabeledButton)
+            waitForContinuityReceiptToDisappear(receipt)
             return
         }
 
         let labeledButton = app.buttons["Dismiss receipt"]
-        if labeledButton.waitForExistence(timeout: 0.5), labeledButton.isHittable {
-            labeledButton.tap()
+        if labeledButton.waitForExistence(timeout: 0.5) {
+            tapIfPossible(labeledButton)
+            waitForContinuityReceiptToDisappear(receipt)
         }
+    }
+
+    private func tapIfPossible(_ element: XCUIElement) {
+        if element.isHittable {
+            element.tap()
+        } else {
+            element.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+        }
+    }
+
+    private func waitForContinuityReceiptToDisappear(_ receipt: XCUIElement) {
+        let expectation = XCTNSPredicateExpectation(
+            predicate: NSPredicate(format: "exists == false"),
+            object: receipt
+        )
+        _ = XCTWaiter.wait(for: [expectation], timeout: 2)
     }
 
 }

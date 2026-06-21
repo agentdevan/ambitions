@@ -36,10 +36,18 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
 
     func testAMB581ActiveTimeFieldUsesHorizonCapacityPrimitiveFamily() throws {
         let root = repoRoot()
-        let timeFieldSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let timeFieldSource = [
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCapacity.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldContinuity.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldReflow.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift", root: root)
+        ].joined(separator: "\n")
 
         XCTAssertTrue(timeFieldSource.contains("HorizonCapacityPrimitiveStage("))
         XCTAssertTrue(timeFieldSource.contains("HorizonCapacityPrimitiveLine("))
+        XCTAssertTrue(timeFieldSource.contains("compactShapingActionGrid"))
+        XCTAssertTrue(timeFieldSource.contains("LazyVGrid(columns: columns"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.horizon-control"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.capacity-statement"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.source-receipt"))
@@ -74,7 +82,7 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(surfaceSource.contains("TimeObjectView("))
         XCTAssertTrue(objectSource.contains("TimeLens.makeStageScene"))
         XCTAssertTrue(objectSource.contains("LifeShapeFieldView("))
-        XCTAssertTrue(productObjectSource.contains("LifeShapeFieldView("))
+        XCTAssertTrue(productObjectSource.contains("struct LifeShapeFieldView: View"))
         XCTAssertTrue(lensSource.contains("day/week/month/year horizons"))
         XCTAssertTrue(lensSource.contains("global Capture support"))
     }

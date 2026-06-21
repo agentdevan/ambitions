@@ -53,11 +53,6 @@ extension LifeShapeFieldView {
                         .lineLimit(7)
                         .minimumScaleFactor(0.64)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text(dynamicTypeSize.isAccessibilitySize ? "Keep shape." : suite.field.reflowProposal.title)
-                        .font(theme.typography.micro)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .lineLimit(2)
-                        .minimumScaleFactor(0.72)
                 }
 
                 Spacer(minLength: theme.spacing.sm)
@@ -100,15 +95,24 @@ extension LifeShapeFieldView {
         .accessibilityIdentifier("time.life-shape-field.capacity-statement")
     }
 
+    @ViewBuilder
     var shapingActionStrip: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            verticalShapingActionStrip
+        } else {
+            compactShapingActionGrid
+        }
+    }
+
+    var verticalShapingActionStrip: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             shapingActionButton(
                 title: "Shape week",
                 icon: "calendar.badge.clock",
                 identifier: "time.life-shape-field.action.shape-week"
             ) {
-	                selectedHorizon = .week
-	                selectedZoomLevel = .week
+                selectedHorizon = .week
+                selectedZoomLevel = .week
                 revealsPressure = false
             }
             shapingActionButton(
@@ -123,8 +127,51 @@ extension LifeShapeFieldView {
                 icon: "clock.badge.checkmark",
                 identifier: "time.life-shape-field.action.protect-block"
             ) {
-	                selectedHorizon = .week
-	                selectedZoomLevel = .week
+                selectedHorizon = .week
+                selectedZoomLevel = .week
+                confirmedReflowAction = .decline
+            }
+            shapingActionButton(
+                title: "Adjust shape",
+                icon: "slider.horizontal.3",
+                identifier: "time.life-shape-field.action.adjust-shape"
+            ) {
+                confirmedReflowAction = .edit
+            }
+        }
+        .accessibilityElement(children: .contain)
+    }
+
+    var compactShapingActionGrid: some View {
+        let columns = [
+            GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .leading),
+            GridItem(.flexible(), spacing: theme.spacing.sm, alignment: .leading)
+        ]
+
+        return LazyVGrid(columns: columns, alignment: .leading, spacing: theme.spacing.sm) {
+            shapingActionButton(
+                title: "Shape week",
+                icon: "calendar.badge.clock",
+                identifier: "time.life-shape-field.action.shape-week"
+            ) {
+                selectedHorizon = .week
+                selectedZoomLevel = .week
+                revealsPressure = false
+            }
+            shapingActionButton(
+                title: "Review pressure",
+                icon: "waveform.path.ecg.rectangle",
+                identifier: "time.life-shape-field.action.review-pressure"
+            ) {
+                revealsPressure = true
+            }
+            shapingActionButton(
+                title: "Protect this block",
+                icon: "clock.badge.checkmark",
+                identifier: "time.life-shape-field.action.protect-block"
+            ) {
+                selectedHorizon = .week
+                selectedZoomLevel = .week
                 confirmedReflowAction = .decline
             }
             shapingActionButton(
