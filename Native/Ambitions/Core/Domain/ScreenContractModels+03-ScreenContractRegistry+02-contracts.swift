@@ -79,7 +79,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Today/TodayScreen.swift", note: "Current Today surface"),
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Today/TodaySurface.swift", note: "Current Today surface"),
             .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService.swift", note: "Today projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Today", note: "Focused Today tests where present")
         ]
@@ -105,7 +105,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Goals/GoalsScreen.swift", note: "Current Goals surface"),
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift", note: "Current Goals surface"),
             .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureService.swift", note: "Goals projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/Goals", note: "Focused Goals tests")
         ]
@@ -209,7 +209,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/You/YouScreen.swift", note: "Current You surface"),
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/You/YouSurface.swift", note: "Current You surface"),
             .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift", note: "You projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", note: "Focused You tests")
         ]

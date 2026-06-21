@@ -13,9 +13,9 @@ final class FrontendRecoveryGateTests: XCTestCase {
 
     func testIR01VisibleRecoveryCopyAvoidsObsoleteRootLabelsAndConfidenceTheater() throws {
         let checkedFiles = [
-            "Native/Ambitions/Surfaces/Today/TodayScreen.swift",
+            "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
             "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
-            "Native/Ambitions/Surfaces/Goals/GoalsScreen.swift",
+            "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
             "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
             "Native/Ambitions/Surfaces/You/YouRootSurface.swift"
         ]
@@ -40,10 +40,10 @@ final class FrontendRecoveryGateTests: XCTestCase {
 
     func testIR01RecoveredSurfacesExposeCanonObjectIdentifiers() throws {
         let expectations: [(String, String)] = [
-            ("Native/Ambitions/Surfaces/Today/TodayScreen.swift", "TodayRealityMeridianFlagshipAdapter"),
+            ("Native/Ambitions/Surfaces/Today/TodaySurface.swift", "TodayRealityMeridianFlagshipAdapter"),
             ("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels.swift", "RealityMeridianView"),
-            ("Native/Ambitions/Surfaces/Today/TodayScreen.swift", "TodayExecutionDepthDisclosure"),
-            ("Native/Ambitions/Surfaces/Goals/GoalsScreen.swift", "GoalsDirectionDepthDisclosure"),
+            ("Native/Ambitions/Surfaces/Today/TodaySurface.swift", "TodayExecutionDepthDisclosure"),
+            ("Native/Ambitions/Surfaces/Goals/GoalsSurface.swift", "GoalsDirectionDepthDisclosure"),
             ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "AtmosphereComposerCanvas"),
             ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "CaptureDepthDisclosure"),
             ("Native/Ambitions/Surfaces/Time/TimeSurface.swift", "TimeObjectView"),
@@ -59,7 +59,7 @@ final class FrontendRecoveryGateTests: XCTestCase {
 
     func testIR01TopLevelRecoveryCopyStaysOnActiveCanon() throws {
         let filePaths = [
-            "Native/Ambitions/Surfaces/Goals/GoalsScreen.swift",
+            "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
             "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
             "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
             "Sources/Components/TopLevelSurfaceCompositionPrimitives.swift"

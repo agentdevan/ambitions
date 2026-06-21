@@ -3,7 +3,7 @@ import Foundation
 import SwiftUI
 
 // Mutation/accessibility/proof contract: Today actions route through TodayViewModel runtime mutations, visibly update the Meridian stage, announce closure/recovery results, and save proof artifacts.
-struct TodayScreen: View {
+struct TodaySurface: View {
     let autoLoad: Bool
     let showsNavigationChrome: Bool
 
@@ -178,7 +178,7 @@ struct TodayInlineFallbackState: View {
 #if DEBUG
 #Preview("Today MFP") {
     NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.stable)), autoLoad: false)
+        TodaySurface(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.stable)), autoLoad: false)
     }
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.stable))
     .ambitionTheme(.dark)
@@ -186,7 +186,7 @@ struct TodayInlineFallbackState: View {
 
 #Preview("Today MFP Dynamic Type") {
     NavigationStack {
-        TodayScreen(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.overloaded)), autoLoad: false)
+        TodaySurface(viewModel: TodayViewModel(state: .loaded(PreviewTodayScenarios.overloaded)), autoLoad: false)
     }
     .appContainer(PreviewAppContainerFactory.preview(todayExperience: PreviewTodayScenarios.overloaded))
     .ambitionTheme(.dark)

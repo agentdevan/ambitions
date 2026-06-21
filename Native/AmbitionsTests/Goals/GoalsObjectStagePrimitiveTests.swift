@@ -62,9 +62,9 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertFalse(stageSource.contains("proof?.latestTitle ?? proof?.detail"))
     }
 
-    func testAMB575GoalsScreenReservesBottomChromeClearanceForObjectStageProof() throws {
+    func testAMB575GoalsSurfaceReservesBottomChromeClearanceForObjectStageProof() throws {
         let source = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/Goals/GoalsScreen.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/Goals/GoalsSurface.swift"),
             encoding: .utf8
         )
 

@@ -10,7 +10,7 @@ struct CaptureAccessPoint: Equatable, Sendable {
         title: "Capture",
         systemImage: "square.and.pencil",
         accessibilityLabel: "Capture",
-        accessibilityHint: "Opens the Capture composer for this surface."
+        accessibilityHint: "Opens the Capture composer for this surface/context."
     )
 
     static let activeComposer = CaptureAccessPoint(

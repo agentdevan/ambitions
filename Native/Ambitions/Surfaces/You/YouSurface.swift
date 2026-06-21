@@ -5,7 +5,7 @@ import SwiftUI
 import UIKit
 #endif
 
-struct YouScreen: View {
+struct YouSurface: View {
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.appPlatformCapability) private var appPlatformCapability
     @Environment(\.appUserSystemCapability) private var appUserSystemCapability
@@ -40,7 +40,7 @@ struct YouScreen: View {
                     )
                     .transition(.ambitionPanel)
                 case let .loaded(profileProjection):
-                    PersonalSystemCenterRootView(
+                    YouObjectView(
                         profileProjection: profileProjection,
                         onOpenDetail: { activeDetail = $0 }
                     )
@@ -119,6 +119,7 @@ struct YouScreen: View {
     func requestNotificationAuthorization() {
         Task {
             let granted = await platform.notificationService.requestAuthorizationOptIn()
+            _ = YouInteractions.permissionAnnouncement(granted: granted)
             if granted {
                 await platform.notificationService.refreshSchedule(now: .now)
             }

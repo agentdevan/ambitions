@@ -107,7 +107,7 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
             encoding: .utf8
         )
         let screenSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouScreen.swift"),
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouSurface.swift"),
             encoding: .utf8
         )
 

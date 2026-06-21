@@ -412,7 +412,7 @@ final class AccessibilityNutritionChecklistTests: XCTestCase {
 
         XCTAssertTrue(requirements.contains {
             $0.axis == .overloadedToday &&
-                $0.ownerFile == "Native/Ambitions/Surfaces/Today/TodayScreen.swift" &&
+                $0.ownerFile == "Native/Ambitions/Surfaces/Today/TodaySurface.swift" &&
                 $0.requiredAdaptation.localizedCaseInsensitiveContains("one clear next action") &&
                 $0.forbiddenAdaptation.localizedCaseInsensitiveContains("shame")
         })

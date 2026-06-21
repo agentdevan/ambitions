@@ -564,7 +564,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertEqual(ScreenContractValidator.canonicalTopLevelTabs, ["Today", "Goals", "Time", "You"])
     }
 
-    func testD13GoalsScreenContractSnapshotSatisfiesImplementationGate() async throws {
+    func testD13GoalsSurfaceContractSnapshotSatisfiesImplementationGate() async throws {
         let repositories = try await makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let goal = makeGoal(

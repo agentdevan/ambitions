@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct GoalsScreen: View {
+struct GoalsSurface: View {
     @Environment(\.appShellCapability) private var appShellCapability
     @Environment(\.appFeatureFactoryCapability) private var appFeatureFactoryCapability
     @Environment(\.ambitionTheme) private var theme
@@ -49,10 +49,10 @@ struct GoalsScreen: View {
                         }
                     )
                 case let .loaded(overview):
-                    ConstellationAtlasView(
+                    GoalsObjectView(
                         overview: overview,
-                        onPrimaryAction: handlePrimaryAction,
-                        screenshotProofState: screenshotProofState
+                        screenshotProofState: screenshotProofState,
+                        onPrimaryAction: handlePrimaryAction
                     )
                     .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
 
@@ -144,7 +144,9 @@ struct GoalsScreen: View {
     }
 
     func handlePrimaryAction(_ action: GoalsAtlasPrimaryAction) {
-        switch action.kind {
+        let intent = GoalsInteractions.intent(for: action)
+        _ = GoalsInteractions.accessibilityAnnouncement(for: intent)
+        switch intent {
         case .createGoal:
             localCreationMessage = nil
             if let onCreateGoal {
@@ -300,7 +302,7 @@ struct GoalsDirectionDepthDisclosure: View {
 #if DEBUG
 #Preview("Goals Overview") {
     NavigationStack {
-        GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
+        GoalsSurface(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)
@@ -308,7 +310,7 @@ struct GoalsDirectionDepthDisclosure: View {
 
 #Preview("Goals After Create") {
     NavigationStack {
-        GoalsScreen(
+        GoalsSurface(
             viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.createdOverview)),
             creationMessage: GoalDetailInlineMessage(
                 title: "Goal created",
@@ -323,7 +325,7 @@ struct GoalsDirectionDepthDisclosure: View {
 
 #Preview("Goals Constellation Atlas Large Type") {
     NavigationStack {
-        GoalsScreen(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
+        GoalsSurface(viewModel: GoalsViewModel(state: .loaded(PreviewGoalsScenarios.overview)))
     }
     .appContainer(PreviewAppContainerFactory.preview)
     .ambitionTheme(.dark)

@@ -33,7 +33,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                 trailingButtons: shellUtilityButtons(for: .today),
                 reservesPrimaryObjectTopClearance: true
             ) {
-                TodayScreen(showsNavigationChrome: false)
+                TodaySurface(showsNavigationChrome: false)
             }
         }
     }
@@ -46,7 +46,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                 posture: .direction,
                 trailingButtons: shellUtilityButtons(for: .goals)
             ) {
-                GoalsScreen(
+                GoalsSurface(
                     externalCreationMessage: creationMessage,
                     externalRefreshID: goalsRefreshID,
                     showsNavigationChrome: false,
@@ -111,7 +111,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                 posture: .utility,
                 trailingButtons: shellUtilityButtons(for: .you)
             ) {
-                YouScreen(showsNavigationChrome: false)
+                YouSurface(showsNavigationChrome: false)
             }
             .navigationDestination(for: YouRouteTarget.self) { target in
                 switch target {

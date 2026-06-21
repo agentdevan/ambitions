@@ -2,7 +2,7 @@ import AmbitionsDesignSystem
 import Foundation
 import SwiftUI
 
-extension TodayScreen {
+extension TodaySurface {
     var bottomChromeClearance: CGFloat {
         TodayViewportSafety.layout(
             dynamicTypeSize: dynamicTypeSize,
@@ -22,15 +22,14 @@ extension TodayScreen {
             )
             .padding(.top, theme.spacing.lg)
         case let .loaded(experience):
-            let displayExecution = displayedExecution(from: experience)
-            let displayRail = displayExecution.dayRail
-            TodayRealityMeridianFlagshipAdapter(
-                state: displayRail,
+            TodayObjectView(
+                experience: experience,
+                approvedReplacementRail: approvedReplacementRail,
                 onAction: handleAction,
                 onOpenStepDetail: { detail in
                     selectedStepDetail = detail
                 },
-                onShowAnother: { step in
+                onShowAnother: { step, displayRail in
                     selectedStepReplacementSheet = TodayStepReplacementSheetState.make(
                         from: step,
                         privacy: displayRail.privacyProjection,
@@ -121,31 +120,33 @@ extension TodayScreen {
 
 
     func handleAction(_ action: TodayInlineAction) {
-        switch action.kind {
-        case .startStepSession:
+        let intent = TodayInteractions.intent(for: action)
+        _ = TodayInteractions.accessibilityAnnouncement(for: intent)
+        switch intent {
+        case .startStep:
             shell.navigation.selectToday(entryContext: .stepSession)
-        case .pauseStepSession:
+        case .pauseStep:
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Session paused",
                 body: "This step stays here until you choose an outcome.",
                 state: .selected
             )
-        case .stopStepSession:
+        case .stopStep:
             shell.navigation.selectToday(entryContext: .standard)
             viewModel.transientMessage = TodayInlineMessage(
                 title: "Back to Today",
                 body: "Step session ended. Today is ready for the next step.",
                 state: .selected
             )
-        case .closeActionClosure:
+        case .closeStep:
             selectedActionClosure = actionClosureState(for: action)
-        case .openDetail, .askForHelp:
+        case .openDetail:
             shell.navigation.openGoalDetail(
                 goalID: action.target.goalID,
                 draftID: action.target.draftID,
                 launchContext: action.kind == .askForHelp ? .help : .standard
             )
-        case .quickLog:
+        case .openCapture:
             shell.commandRouter.presentCommandSheet(
                 intent: .quickCapture,
                 source: .todayQuickCapture,
@@ -153,14 +154,14 @@ extension TodayScreen {
             )
         case .openTime:
             shell.commandRouter.route(to: .tab(.time), source: .shellUtility)
-        case .protectLater:
-            shell.commandRouter.route(to: .tab(.time), source: .shellUtility)
-            viewModel.transientMessage = TodayInlineMessage(
-                title: "Opened Time",
-                body: "Today handed this off to the canonical planning surface instead of creating a second recovery system here.",
-                state: .selected
-            )
-        default:
+            if action.kind == .protectLater {
+                viewModel.transientMessage = TodayInlineMessage(
+                    title: "Opened Time",
+                    body: "Today handed this off to the canonical planning surface instead of creating a second recovery system here.",
+                    state: .selected
+                )
+            }
+        case .runtimeMutation:
             Task {
                 await viewModel.handle(
                     action,

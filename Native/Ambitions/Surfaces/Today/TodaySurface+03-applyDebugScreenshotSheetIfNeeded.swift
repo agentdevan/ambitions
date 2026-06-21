@@ -2,8 +2,8 @@ import AmbitionsDesignSystem
 import Foundation
 import SwiftUI
 
-// Accessibility contract: screenshot-state helper preserves TodayScreen root semantics and does not render standalone controls.
-extension TodayScreen {
+// Accessibility contract: screenshot-state helper preserves TodaySurface root semantics and does not render standalone controls.
+extension TodaySurface {
     @MainActor
     func applyDebugScreenshotSheetIfNeeded() {
         guard debugScreenshotSheetApplied == false else { return }

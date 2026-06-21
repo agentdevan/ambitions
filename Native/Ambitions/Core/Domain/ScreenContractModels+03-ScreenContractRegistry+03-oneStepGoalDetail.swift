@@ -73,7 +73,7 @@ extension ScreenContractRegistry {
         evidenceAnchors: [
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/You/YouScreen.swift", note: "Current You-hosted trust entry"),
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/You/YouSurface.swift", note: "Current You-hosted trust entry"),
             .init(kind: .sourceService, path: "Native/Ambitions/Projection/SurfaceLenses/YouFeatureService.swift", note: "Trust projection source"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", note: "Trust and profile tests")
         ]
@@ -100,7 +100,7 @@ extension ScreenContractRegistry {
             screenMatrixAnchor,
             accessibilityMatrixAnchor,
             .init(kind: .sourceService, path: "Native/Ambitions/Services/MemoryLensService.swift", note: "Memory lens foundation"),
-            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/You/YouScreen.swift", note: "Current You-hosted memory entry"),
+            .init(kind: .sourceSurface, path: "Native/Ambitions/Surfaces/You/YouSurface.swift", note: "Current You-hosted memory entry"),
             .init(kind: .testCoverage, path: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift", note: "Memory and You tests")
         ]
     )

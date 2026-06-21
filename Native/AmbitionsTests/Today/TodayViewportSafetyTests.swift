@@ -52,8 +52,8 @@ final class TodayViewportSafetyTests: XCTestCase {
         XCTAssertGreaterThanOrEqual(accessibility.railBottomContentClearance, 260)
     }
 
-    func testTodayScreenAndRailRouteLayoutThroughViewportPolicy() throws {
-        let screenSource = try source("Native/Ambitions/Surfaces/Today/TodayScreen.swift")
+    func testTodaySurfaceAndRailRouteLayoutThroughViewportPolicy() throws {
+        let screenSource = try source("Native/Ambitions/Surfaces/Today/TodaySurface.swift")
         let railSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels.swift")
         let adapterSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayRealityMeridianFlagshipAdapter.swift")
 
