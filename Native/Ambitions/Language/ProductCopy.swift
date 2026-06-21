@@ -6,12 +6,12 @@ import Foundation
 /// in inspection, validation, and proof tooling, not in primary product UI.
 enum ProductCopy {
     enum Today {
-        static let surfaceTitle = "Today"
-        static let objectTitle = "Reality Meridian"
-        static let startHere = "Start here"
-        static let recommendedStep = "Recommended step"
-        static let startNow = "Start now"
-        static let openStep = "Open step"
+        static let surfaceTitle = UserFacingLanguage.Surface.today
+        static let objectTitle = UserFacingLanguage.Object.realityMeridian
+        static let startHere = UserFacingLanguage.Action.startHere
+        static let recommendedStep = UserFacingLanguage.Action.recommendedStep
+        static let startNow = UserFacingLanguage.Action.startNow
+        static let openStep = UserFacingLanguage.Action.openStep
         static let openWindow = "Open window"
         static let nothingFitsHeadline = "This window is open"
         static let nothingFitsDetail = "Ambitions can hold the space until a step fits."
@@ -27,7 +27,7 @@ enum ProductCopy {
 
     enum Capture {
         static let surfaceTitle = "Capture"
-        static let objectTitle = "Atmosphere Composer"
+        static let objectTitle = UserFacingLanguage.Object.atmosphereComposer
         static let prompt = "What should Ambitions hold?"
         static let placeholder = "Type one real thing…"
         static let save = "Save"
@@ -40,8 +40,8 @@ enum ProductCopy {
     }
 
     enum Goals {
-        static let surfaceTitle = "Goals"
-        static let objectTitle = "Constellation Atlas"
+        static let surfaceTitle = UserFacingLanguage.Surface.goals
+        static let objectTitle = UserFacingLanguage.Object.constellationAtlas
         static let whatYouAreBuilding = "What you’re building"
         static let lifeAreas = "Life areas"
         static let activeThread = "Active thread"
@@ -51,8 +51,8 @@ enum ProductCopy {
     }
 
     enum Time {
-        static let surfaceTitle = "Time"
-        static let objectTitle = "LifeShape Field"
+        static let surfaceTitle = UserFacingLanguage.Surface.time
+        static let objectTitle = UserFacingLanguage.Object.lifeShapeField
         static let shapeWeek = "Shape week"
         static let protectTime = "Protect time"
         static let reviewPressure = "Review pressure"
@@ -62,7 +62,7 @@ enum ProductCopy {
 
     enum Motion {
         static let behaviorTitle = "Motion"
-        static let objectTitle = "Stage Motion"
+        static let objectTitle = UserFacingLanguage.Object.stageMotion
         static let whatMoved = "What moved"
         static let hasProof = "Has proof"
         static let recovered = "Recovered"
@@ -72,8 +72,8 @@ enum ProductCopy {
     }
 
     enum You {
-        static let surfaceTitle = "You"
-        static let objectTitle = "User System Profile"
+        static let surfaceTitle = UserFacingLanguage.Surface.you
+        static let objectTitle = UserFacingLanguage.Object.userSystemProfile
         static let profile = "Profile"
         static let personalization = "Personalization"
         static let planning = "Planning"
