@@ -32,6 +32,17 @@ struct AmbitionsCommandValidator: Sendable {
             return command.target.captureID == nil && command.target.timeID == nil && command.payload.primaryText == nil
                 ? .needsMissingTarget
                 : .valid
+        case .placeStepInTime:
+            return command.target.stepID == nil || command.target.timeID == nil ? .needsMissingTarget : .valid
+        case .protectTimeWindow:
+            return command.target.timeID == nil ? .needsMissingTarget : .valid
+        case .correctTimeWindow:
+            guard let correctionKind = command.payload.metadata["correctionKind"],
+                  let timeCorrection = TimeMutationActionKind(rawValue: correctionKind),
+                  TimeMutationActionKind.correctionKinds.contains(timeCorrection) else {
+                return .invalid
+            }
+            return command.target.timeID == nil ? .needsMissingTarget : .valid
         case .startStepSession, .completeAction, .delayAction, .splitAction:
             return command.target.goalID == nil || command.target.stepID == nil ? .needsMissingTarget : .valid
         case .recoverAction:

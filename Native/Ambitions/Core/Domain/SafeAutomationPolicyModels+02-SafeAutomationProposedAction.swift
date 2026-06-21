@@ -296,6 +296,10 @@ extension SafeAutomationActionKind {
             self = .routeCapture
         case .scheduleItem:
             self = command.payload.metadata["calendarWriteIntent"] == "true" ? .writeCalendarBlock : .prepareCalendarBlock
+        case .placeStepInTime:
+            self = .prepareCalendarBlock
+        case .protectTimeWindow, .correctTimeWindow:
+            self = .correctRecommendation
         case .prepareExport:
             self = .prepareExport
         case .performExport:

@@ -49,7 +49,7 @@ struct LifeShapeBucketizer: Sendable {
             todayBuckets: buckets,
             horizonRows: [row],
             primaryCaption: input.openProjection.semanticSummary,
-            primaryAction: nil,
+            primaryAction: buckets.first(where: { $0.layer == .open && $0.primaryAction != nil })?.primaryAction,
             todayAnchor: anchor,
             semanticSummary: semanticSummary(open: input.openProjection, protected: input.protectionProjection)
         )
@@ -84,6 +84,13 @@ struct LifeShapeBucketizer: Sendable {
                 fallbackState: fallback,
                 accessibilitySummary: window.accessibilitySummary
             ),
+            primaryAction: window.canFitEstimatedStep
+                ? LifeShapePrimaryAction(
+                    id: "lifeshape.action.place-step.\(window.id)",
+                    title: "Place Step",
+                    actionKind: TimeMutationActionKind.placeStep.rawValue
+                )
+                : nil,
             derivation: derivation,
             confidence: LifeShapeConfidence(
                 level: fallback == nil ? .grounded : .partial,

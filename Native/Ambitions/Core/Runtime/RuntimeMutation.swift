@@ -6,17 +6,22 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
     let validation: RuntimeValidationReport
     let stageMutation: StageMutation
     let userVisibleMutation: UserVisibleMutation
+    let timeMutation: TimeMutation?
 
     init?(
         command: AmbitionsCommand,
         validation: RuntimeValidationReport,
         beforeSnapshot: String,
         afterSnapshot: String,
-        targetSurface: StageMutationTargetSurface
+        targetSurface: StageMutationTargetSurface,
+        timeMutation: TimeMutation? = nil
     ) {
         guard validation.canMutate else { return nil }
+        guard Self.requiresTimeTodayCoupling(command) == false || timeMutation?.todayRecompute.recomputedToday == true else {
+            return nil
+        }
 
-        let affectedIDs = Self.affectedObjectIDs(command)
+        let affectedIDs = Self.affectedObjectIDs(command, timeMutation: timeMutation)
         let proof = MutationProof(
             artifactID: "runtime.proof.\(command.id)",
             label: "Proof artifact",
@@ -54,8 +59,9 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
         self.userVisibleMutation = UserVisibleMutation(
             stageMutation: stageMutation,
             headline: stageMutation.visibleUserFacingChange,
-            detail: "Saved locally with proof available."
+            detail: timeMutation?.todayRecompute.summary ?? "Saved locally with proof available."
         )
+        self.timeMutation = timeMutation
     }
 
     var hasCompleteActionFlowProof: Bool {
@@ -64,14 +70,23 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
             userVisibleMutation.isCanonComplete
     }
 
-    private static func affectedObjectIDs(_ command: AmbitionsCommand) -> [String] {
+    private static func requiresTimeTodayCoupling(_ command: AmbitionsCommand) -> Bool {
+        switch command.kind {
+        case .placeStepInTime, .protectTimeWindow, .correctTimeWindow:
+            true
+        default:
+            false
+        }
+    }
+
+    private static func affectedObjectIDs(_ command: AmbitionsCommand, timeMutation: TimeMutation?) -> [String] {
         Array(Set([
             command.target.goalID,
             command.target.captureID,
             command.target.timeID,
             command.target.reviewID,
             command.target.stepID
-        ].compactMap { $0 })).sorted()
+        ].compactMap { $0 } + (timeMutation?.affectedBucketIDs ?? []))).sorted()
     }
 
     private static func visibleChange(_ command: AmbitionsCommand) -> String {
@@ -84,6 +99,12 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
             return "Step completed"
         case .scheduleItem, .createTimeItem:
             return "Time updated"
+        case .placeStepInTime:
+            return "Step placed"
+        case .protectTimeWindow:
+            return "Window protected"
+        case .correctTimeWindow:
+            return "Time corrected"
         case .recoverAction:
             return "Recovery updated"
         default:

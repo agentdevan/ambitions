@@ -21,6 +21,9 @@ final class AmbitionsCommandModelsTests: XCTestCase {
                 .attachToGoal,
                 .createTimeItem,
                 .scheduleItem,
+                .placeStepInTime,
+                .protectTimeWindow,
+                .correctTimeWindow,
                 .startStepSession,
                 .completeAction,
                 .delayAction,
@@ -220,6 +223,38 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         XCTAssertEqual(priority.payload.contextLens, .freeTime)
         XCTAssertEqual(validator.validate(context), .valid)
         XCTAssertEqual(validator.validate(deadline), .valid)
+    }
+
+    func testTimeMutationCommandsValidateOnlyWithTimeTargetsAndCorrectionKinds() {
+        let validator = AmbitionsCommandValidator()
+        let placeStep = command(
+            kind: .placeStepInTime,
+            target: AmbitionsCommandTarget(goalID: "goal-book", timeID: "bucket.open", stepID: "step-outline")
+        )
+        let protectWindow = command(
+            kind: .protectTimeWindow,
+            target: AmbitionsCommandTarget(timeID: "bucket.open")
+        )
+        let correction = command(
+            kind: .correctTimeWindow,
+            target: AmbitionsCommandTarget(timeID: "bucket.open"),
+            payload: AmbitionsCommandPayload(metadata: ["correctionKind": TimeMutationActionKind.keepClear.rawValue])
+        )
+        let missingStep = command(
+            kind: .placeStepInTime,
+            target: AmbitionsCommandTarget(timeID: "bucket.open")
+        )
+        let unsupportedCorrection = command(
+            kind: .correctTimeWindow,
+            target: AmbitionsCommandTarget(timeID: "bucket.open"),
+            payload: AmbitionsCommandPayload(metadata: ["correctionKind": TimeMutationActionKind.placeStep.rawValue])
+        )
+
+        XCTAssertEqual(validator.validate(placeStep), .valid)
+        XCTAssertEqual(validator.validate(protectWindow), .valid)
+        XCTAssertEqual(validator.validate(correction), .valid)
+        XCTAssertEqual(validator.validate(missingStep), .needsMissingTarget)
+        XCTAssertEqual(validator.validate(unsupportedCorrection), .invalid)
     }
 
     func testCommitmentDeliverableAndScopeCommandsAreRepresentable() {

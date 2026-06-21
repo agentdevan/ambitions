@@ -70,4 +70,49 @@ struct TodayLens: Equatable, SurfaceLens {
             failureStateSummary: scene.showsBlockedOrWaitingState ? "Blocked or waiting state is visible." : "Recovery fallback remains available."
         )
     }
+
+    static func recomputeAfterTimeMutation(
+        mutationID: String,
+        actionKind: TimeMutationActionKind,
+        before: LifeShapeProjection,
+        after: LifeShapeProjection,
+        affectedBucketIDs: [String]
+    ) -> TodayTimeCouplingRecompute {
+        let beforeRecommendation = startHereCandidate(in: before)
+        let afterRecommendation = startHereCandidate(in: after)
+        let beforeAvoided = avoidedBucketIDs(in: before)
+        let afterAvoided = avoidedBucketIDs(in: after)
+
+        return TodayTimeCouplingRecompute(
+            causeMutationID: mutationID,
+            actionKind: actionKind,
+            beforeStartHereBucketID: beforeRecommendation?.bucketID,
+            afterStartHereBucketID: afterRecommendation?.bucketID,
+            beforeStartHereStepID: beforeRecommendation?.stepID,
+            afterStartHereStepID: afterRecommendation?.stepID,
+            beforeAvoidedBucketIDs: beforeAvoided,
+            afterAvoidedBucketIDs: afterAvoided,
+            affectedBucketIDs: Array(Set(affectedBucketIDs.filter { $0.isEmpty == false })).sorted(),
+            proofLabel: "Today recompute caused by \(mutationID)",
+            summary: actionKind.todaySummary
+        )
+    }
+
+    private static func startHereCandidate(in projection: LifeShapeProjection) -> (bucketID: String, stepID: String?)? {
+        projection.todayBuckets.first { bucket in
+            bucket.layer == .open && bucket.reading.kind == .open && bucket.recommendedStepID != nil
+        }.map { ($0.id, $0.recommendedStepID) } ??
+            projection.todayBuckets.first { bucket in
+                bucket.layer == .open && bucket.reading.kind == .open && bucket.primaryAction != nil
+            }.map { ($0.id, $0.recommendedStepID) }
+    }
+
+    private static func avoidedBucketIDs(in projection: LifeShapeProjection) -> [String] {
+        projection.todayBuckets
+            .filter { bucket in
+                bucket.layer != .open || bucket.reading.kind == .unavailable || bucket.protectedBoundary != nil
+            }
+            .map(\.id)
+            .sorted()
+    }
 }

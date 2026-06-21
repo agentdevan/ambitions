@@ -30,14 +30,16 @@ struct PrivateLifeRuntime: Sendable {
         for command: AmbitionsCommand,
         beforeSnapshot: String,
         afterSnapshot: String,
-        targetSurface: StageMutationTargetSurface
+        targetSurface: StageMutationTargetSurface,
+        timeMutation: TimeMutation? = nil
     ) -> RuntimeMutation? {
         RuntimeMutation(
             command: command,
             validation: validate(command),
             beforeSnapshot: beforeSnapshot,
             afterSnapshot: afterSnapshot,
-            targetSurface: targetSurface
+            targetSurface: targetSurface,
+            timeMutation: timeMutation
         )
     }
 }
