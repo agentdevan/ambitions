@@ -108,12 +108,12 @@ enum AppShellContextualToolbarCatalog {
 }
 
 enum AppShellCaptureAccessModel {
-    static let toolbarTitle = "Capture"
-    static let systemImage = "square.and.pencil"
-    static let toolbarAccessibilityLabel = "Capture"
-    static let toolbarAccessibilityHint = "Opens the Capture composer for this surface/context."
-    static let activatedSeamAccessibilityLabel = "Capture composer"
-    static let activatedSeamAccessibilityHint = "Capture is active for this surface/context."
+    static let toolbarTitle = CaptureAccessPoint.toolbar.title
+    static let systemImage = CaptureAccessPoint.toolbar.systemImage
+    static let toolbarAccessibilityLabel = CaptureAccessPoint.toolbar.accessibilityLabel
+    static let toolbarAccessibilityHint = CaptureAccessPoint.toolbar.accessibilityHint
+    static let activatedSeamAccessibilityLabel = CaptureAccessPoint.activeComposer.accessibilityLabel
+    static let activatedSeamAccessibilityHint = CaptureAccessPoint.activeComposer.accessibilityHint
 
     static func source(for tab: AmbitionsSurface) -> ShellCommandEntrySource {
         switch tab.canonicalTopLevelTab {
@@ -129,6 +129,6 @@ enum AppShellCaptureAccessModel {
     }
 
     static func toolbarAccessibilityIdentifier(for tab: AmbitionsSurface) -> String {
-        "shell.\(tab.canonicalTopLevelTab.rawValue).capture-button"
+        CaptureAccessPoint.toolbar.accessibilityIdentifier(for: tab)
     }
 }

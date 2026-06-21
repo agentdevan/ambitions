@@ -20,7 +20,6 @@ struct AppShellHeaderRail: View {
         }
         .frame(maxWidth: .infinity)
         .background(headerMaterial)
-        .shadow(color: headerShadowColor, radius: headerShadowRadius, x: 0, y: 6)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(accessibilitySummary)
         .accessibilityIdentifier("shell.header.rail")
@@ -65,29 +64,12 @@ struct AppShellHeaderRail: View {
     }
 
     private var rootContextCrown: some View {
-        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-            Circle()
-                .fill(rootCrownAccent)
-                .frame(width: 5, height: 5)
-                .accessibilityHidden(true)
-
-            Text(title.uppercased())
-                .font(theme.typography.micro.weight(.bold))
-                .foregroundStyle(theme.colors.textPrimary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.78)
-
-            Text(rootCrownContext)
-                .font(theme.typography.micro.weight(.semibold))
-                .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(shouldWrapHeaderContext ? 2 : 1)
-                .minimumScaleFactor(0.74)
-                .truncationMode(.tail)
-                .fixedSize(horizontal: false, vertical: shouldWrapHeaderContext)
-        }
-        .layoutPriority(2)
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("shell.header.context-crown")
+        ContextCrown(
+            title: title,
+            contextPhrase: rootCrownContext,
+            accent: rootCrownAccent,
+            wraps: shouldWrapHeaderContext
+        )
     }
 
     private var titleBlock: some View {
@@ -218,14 +200,6 @@ struct AppShellHeaderRail: View {
             return AnyShapeStyle(theme.colors.canvas.opacity(theme.mode == .dark ? 0.28 : 0.22))
         }
         return AnyShapeStyle(theme.colors.canvas.opacity(theme.mode == .dark ? 0.46 : 0.34))
-    }
-
-    private var headerShadowColor: Color {
-        .clear
-    }
-
-    private var headerShadowRadius: CGFloat {
-        0
     }
 
     private var headerTopClearance: CGFloat {
