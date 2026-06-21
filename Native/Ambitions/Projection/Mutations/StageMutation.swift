@@ -7,28 +7,6 @@ enum StageMutationTargetSurface: String, Sendable, Equatable {
     case you = "You"
 }
 
-struct MutationProof: Equatable, Sendable {
-    let artifactID: String
-    let label: String
-    let localOnly: Bool
-}
-
-struct MutationReceipt: Equatable, Sendable {
-    let receiptID: String
-    let saved: Bool
-    let inspectionLabel: String
-}
-
-struct MutationUndo: Equatable, Sendable {
-    let isAvailable: Bool
-    let label: String
-}
-
-struct MutationAccessibilityAnnouncement: Equatable, Sendable {
-    let message: String
-    let reasonIfSilent: String?
-}
-
 struct StageMutation: Equatable, Sendable {
     let runtimeMutationID: String
     let beforeSnapshot: String
@@ -57,15 +35,5 @@ struct StageMutation: Equatable, Sendable {
             proofArtifact.artifactID.isEmpty == false &&
             receipt.receiptID.isEmpty == false &&
             safeFallback.isEmpty == false
-    }
-}
-
-struct UserVisibleMutation: Equatable, Sendable {
-    let stageMutation: StageMutation
-    let headline: String
-    let detail: String
-
-    var isCanonComplete: Bool {
-        stageMutation.isCanonComplete && headline.isEmpty == false && detail.isEmpty == false
     }
 }
