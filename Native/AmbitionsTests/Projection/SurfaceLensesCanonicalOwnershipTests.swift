@@ -42,12 +42,13 @@ final class SurfaceLensesCanonicalOwnershipTests: XCTestCase {
         }
 
         let todayLensSource = try source("Native/Ambitions/Projection/SurfaceLenses/TodayLens.swift", root: root)
-        let stageSceneSource = try source("Native/Ambitions/Projection/StageScenes/TodayStageProjection.swift", root: root)
+        let stageSceneSource = try source("Native/Ambitions/Projection/StageScenes/TodayStageScene.swift", root: root)
 
         XCTAssertTrue(todayLensSource.contains("struct TodayLens"))
         XCTAssertTrue(todayLensSource.contains("SurfaceLens"))
         XCTAssertFalse(stageSceneSource.contains("struct TodayLens"))
         XCTAssertTrue(stageSceneSource.contains("struct TodayStageScene"))
+        XCTAssertFalse(FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Projection/StageScenes/TodayStageProjection.swift").path))
     }
 
     func testRegistryRejectsFifthSurfaceAndIncompleteContract() {

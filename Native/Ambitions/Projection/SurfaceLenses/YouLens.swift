@@ -25,16 +25,21 @@ enum YouLens: SurfaceLens {
     )
 
     static func project(_ dashboard: YouDashboard) -> SurfaceLensReport {
-        SurfaceLensReport(
+        let scene = makeStageScene(for: dashboard)
+        return SurfaceLensReport(
             contract: contract,
-            primaryObjectSummary: dashboard.userSystemProfile.displayName,
+            primaryObjectSummary: scene.profileSummary,
             primaryActionSummary: dashboard.controlRoom.entries.first?.title ?? contract.primaryActionTitle,
-            visibleStateSummary: dashboard.hero.dominantTruth,
-            accessibilitySummary: dashboard.systemCenter.sections.flatMap(\.items).map(\.title).prefix(4).joined(separator: " -> "),
-            trustSummary: dashboard.userSystemProfileInspectionSummary,
+            visibleStateSummary: scene.trustSummary,
+            accessibilitySummary: scene.accessibilityFallbacks.joined(separator: " "),
+            trustSummary: scene.historySummary,
             failureStateSummary: dashboard.notificationAuthorization.canRequestAuthorization
                 ? "Permission review is available without changing the root surface."
                 : "Permission and local-only status remain visible without silent mutation."
         )
+    }
+
+    static func makeStageScene(for dashboard: YouDashboard) -> YouStageScene {
+        YouStageScene(dashboard: dashboard)
     }
 }
