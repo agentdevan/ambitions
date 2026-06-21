@@ -106,6 +106,7 @@ struct TodayCommandActionHandler {
             metadata: [
                 "commandSource": command.source.rawValue,
                 "todayAction": action.kind.rawValue,
+                "hapticIntent": HapticPolicy.intent(for: action.kind).rawValue,
                 "validation": validation.rawValue
             ]
         )

@@ -1,6 +1,6 @@
 import Foundation
 
-enum StageMutationTargetSurface: String, Sendable, Equatable {
+enum StageMutationTargetSurface: String, Sendable, Equatable, CaseIterable {
     case today = "Today"
     case goals = "Goals"
     case time = "Time"

@@ -22,15 +22,7 @@ struct TodayCommandHandler {
         self.commandActionHandler = commandActionHandler
     }
 
-    private static let commandCapableKinds: Set<TodayActionKind> = [
-        .complete,
-        .defer,
-        .reschedule,
-        .split,
-        .askForHelp,
-        .askWhyThisMatters,
-        .quickLog
-    ]
+    private static let commandCapableKinds = SurfaceGestureMap.todayCommandCapableKinds
 
     func performAction(_ action: TodayInlineAction, now: Date) async throws -> TodayActionResponse {
         switch action.kind {
