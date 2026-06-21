@@ -3,7 +3,7 @@ import Foundation
 struct TodayStageScene: Equatable {
     let generatedAt: Date
     let meridian: MeridianSemanticModel
-    let startHere: StartHereToken?
+    let startHere: StartHereSceneToken?
     let primaryActionTitle: String?
     let showsBlockedOrWaitingState: Bool
     let showsCompletedProofState: Bool
@@ -11,8 +11,8 @@ struct TodayStageScene: Equatable {
     init(execution: TodayExecutionViewState, generatedAt: Date) {
         self.generatedAt = generatedAt
         self.meridian = MeridianSemanticModel(dayRail: execution.dayRail, continuity: execution.realityMeridianContinuity)
-        self.startHere = execution.dayRail.heroStep.map { StartHereToken(heroStep: $0, privacy: execution.dayRail.privacyProjection) }
-        self.primaryActionTitle = execution.dayRail.heroStep.map { StartHereToken.primaryActionTitle(for: $0.primaryAction) }
+        self.startHere = execution.dayRail.heroStep.map { StartHereSceneToken(heroStep: $0, privacy: execution.dayRail.privacyProjection) }
+        self.primaryActionTitle = execution.dayRail.heroStep.map { StartHereSceneToken.primaryActionTitle(for: $0.primaryAction) }
         self.showsBlockedOrWaitingState = execution.dayRail.continuity.markers.contains { marker in
             marker.kind == .blocked || marker.kind == .waiting
         } || execution.dayRail.heroStep?.receiptItem.freshness == .blocked
@@ -21,7 +21,7 @@ struct TodayStageScene: Equatable {
     }
 }
 
-struct StartHereToken: Equatable {
+struct StartHereSceneToken: Equatable {
     let id: String
     let title: String
     let subtitle: String

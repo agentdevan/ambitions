@@ -48,7 +48,7 @@ enum RuntimeDiagnostics {
                 owner: "Core/Runtime",
                 severity: .pass,
                 summary: "Runtime diagnostics are local-only and do not require hosted services.",
-                proofRequirement: "Quality gate must continue blocking hosted AI, cloud LLM, and private-data backend paths."
+                proofRequirement: "Quality gate must continue blocking remote inference and private-data backend paths."
             )
         ]
     }

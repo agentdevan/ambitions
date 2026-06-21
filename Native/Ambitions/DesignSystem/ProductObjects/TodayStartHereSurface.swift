@@ -33,9 +33,7 @@ struct StartHereSurface: View {
                         .accessibilityHidden(true)
 
                     VStack(alignment: .leading, spacing: spacing.objectGap) {
-                        Text("Start here")
-                            .font(typography.caption)
-                            .foregroundStyle(colors.tertiaryText)
+                        StartHereToken()
                             .accessibilityIdentifier("TodayRealityRailStartHereTitle")
 
                         Text(step.title)
