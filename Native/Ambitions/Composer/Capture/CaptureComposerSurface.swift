@@ -38,19 +38,27 @@ struct CaptureComposerSurface: View {
 
                     capturePrompt
 
-                    AtmosphereComposerCanvas(
-                        inputText: Binding(
+                    CaptureObjectView(
+                        text: Binding(
                             get: { viewModel.draftText },
                             set: { viewModel.updateDraftText($0) }
-                        )
-                    ) { text in
-                        Task {
-                            await viewModel.createQuickCapture(
-                                captureService: featureFactory.captureService,
-                                goalsService: featureFactory.goalsService
-                            )
-                        }
-                    }
+                        ),
+                        input: captureInputModel,
+                        onSubmit: {
+                            Task {
+                                await viewModel.createQuickCapture(
+                                    captureService: featureFactory.captureService,
+                                    goalsService: featureFactory.goalsService
+                                )
+                            }
+                        },
+                        onMicrophone: {},
+                        onRouteChoice: { routeType in
+                            viewModel.selectDraftRoute(routeType)
+                        },
+                        accessibilityIDs: .quickCapture,
+                        shouldAutoFocus: false
+                    )
 
                     switch viewModel.state {
                     case .loading:
@@ -98,7 +106,8 @@ struct CaptureComposerSurface: View {
             await load()
         }
         .accessibilityIdentifier("capture.composer")
-        .accessibilityHint(mutationProofContract.submitHint)
+        .accessibilityValue(captureAccessibility.value)
+        .accessibilityHint(captureAccessibility.hint)
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .onChange(of: viewModel.actionMessage) { _, message in
             guard let message else { return }
@@ -111,20 +120,26 @@ struct CaptureComposerSurface: View {
     }
 
     private var captureLivingState: LivingVisualState {
-        if viewModel.actionMessage != nil {
-            return .proof
-        }
-        if viewModel.draftRoutePreview != nil {
-            return .active
-        }
-        if canSubmitDraft {
-            return .active
-        }
-        return .empty
+        CaptureInteractions.livingState(for: captureInputModel, hasActionReceipt: viewModel.actionMessage != nil)
     }
 
-    private var canSubmitDraft: Bool {
-        viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false
+    private var captureInputModel: CaptureInputModel {
+        CaptureInputModel(
+            text: viewModel.draftText,
+            routePreview: viewModel.draftRoutePreview,
+            error: viewModel.draftError,
+            presentationMode: shellMode,
+            saveStateLabel: viewModel.actionMessage?.title,
+            isSaving: false
+        )
+    }
+
+    private var captureAccessibility: CaptureAccessibility {
+        CaptureAccessibility.composer(
+            input: captureInputModel,
+            proofContract: mutationProofContract,
+            actionMessage: viewModel.actionMessage
+        )
     }
 
     private func load() async {
@@ -202,41 +217,6 @@ struct CaptureComposerSurface: View {
                     captureStageLine(capture, activeGoalOptions: viewState.activeGoalOptions)
                 }
             }
-        }
-    }
-
-    private struct CaptureDepthDisclosureStage<Content: View>: View {
-        @Environment(\.ambitionTheme) private var theme
-
-        @Binding var isExpanded: Bool
-        let content: Content
-
-        init(
-            isExpanded: Binding<Bool>,
-            @ViewBuilder content: () -> Content
-        ) {
-            _isExpanded = isExpanded
-            self.content = content()
-        }
-
-        var body: some View {
-            CaptureStageGroup(state: .calm, accessibilityIdentifier: "capture.depth-disclosure") {
-                DisclosureGroup(isExpanded: $isExpanded) {
-                    content
-                        .padding(.top, theme.spacing.md)
-                } label: {
-                    VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                        Text("Capture depth")
-                            .font(theme.typography.section)
-                            .foregroundStyle(theme.colors.textPrimary)
-                        Text("Open placed items, receipts, and parked capture only after the composer has taken input.")
-                            .font(theme.typography.caption)
-                            .foregroundStyle(theme.colors.textSecondary)
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                }
-            }
-            .accessibilityElement(children: .contain)
         }
     }
 

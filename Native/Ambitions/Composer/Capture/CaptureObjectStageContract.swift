@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-enum CaptureComposerPresentationMode: Equatable {
+enum CaptureComposerPresentationMode: Equatable, Sendable {
     case timeSupport
     case globalComposer
 }

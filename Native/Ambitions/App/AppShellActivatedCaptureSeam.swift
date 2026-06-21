@@ -24,6 +24,17 @@ struct AppShellActivatedCaptureSeam: View {
         case saving
         case saved(String)
         case error(String)
+
+        var accessibilityLabel: String? {
+            switch self {
+            case .idle:
+                nil
+            case .saving:
+                "Saving locally"
+            case let .saved(message), let .error(message):
+                message
+            }
+        }
     }
 
     var body: some View {
@@ -104,11 +115,9 @@ struct AppShellActivatedCaptureSeam: View {
     }
 
     private var composer: some View {
-        CaptureAtmosphereComposer(
+        CaptureObjectView(
             text: $captureText,
-            routePreview: routePreview,
-            error: errorText,
-            isSubmitEnabled: canSave,
+            input: captureInputModel,
             onSubmit: {
                 Task { await saveCapture() }
             },
@@ -131,6 +140,17 @@ struct AppShellActivatedCaptureSeam: View {
                 routeInspectionSummary: "shell.activated-capture.route-inspection"
             ),
             shouldAutoFocus: true
+        )
+    }
+
+    private var captureInputModel: CaptureInputModel {
+        CaptureInputModel(
+            text: captureText,
+            routePreview: routePreview,
+            error: errorText,
+            presentationMode: .globalComposer,
+            saveStateLabel: saveState.accessibilityLabel,
+            isSaving: saveState == .saving
         )
     }
 
@@ -263,10 +283,6 @@ struct AppShellActivatedCaptureSeam: View {
             return message
         }
         return nil
-    }
-
-    private var canSave: Bool {
-        captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && saveState != .saving
     }
 
     private var sourceType: CaptureSourceType {

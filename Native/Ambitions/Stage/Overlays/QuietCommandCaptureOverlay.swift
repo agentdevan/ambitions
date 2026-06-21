@@ -4,11 +4,9 @@ import SwiftUI
 extension QuietCommandSheetView {
     var quickCaptureComposer: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            CaptureAtmosphereComposer(
+            CaptureObjectView(
                 text: $captureText,
-                routePreview: quickCaptureRoutePreview,
-                error: quickCaptureErrorText,
-                isSubmitEnabled: canSaveQuickCapture,
+                input: quickCaptureInputModel,
                 onSubmit: {
                     Task { await saveCapture() }
                 },
@@ -91,8 +89,26 @@ extension QuietCommandSheetView {
         return nil
     }
 
-    var canSaveQuickCapture: Bool {
-        captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false && saveState != .saving
+    var quickCaptureInputModel: CaptureInputModel {
+        CaptureInputModel(
+            text: captureText,
+            routePreview: quickCaptureRoutePreview,
+            error: quickCaptureErrorText,
+            presentationMode: .globalComposer,
+            saveStateLabel: quickCaptureSaveStateLabel,
+            isSaving: saveState == .saving
+        )
+    }
+
+    var quickCaptureSaveStateLabel: String? {
+        switch saveState {
+        case .idle:
+            return nil
+        case .saving:
+            return "Saving locally"
+        case let .saved(message), let .error(message):
+            return message
+        }
     }
 
     @MainActor
