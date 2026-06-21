@@ -13,6 +13,13 @@ enum QualityGateID: String, CaseIterable, Sendable, Hashable {
     case visualRegression
     case scenarioMatrix
     case actionMutationProof
+    case lifeShapeFixture
+    case lifeShapeConstruction
+    case lifeShapeDerivation
+    case lifeShapeFakePrecision
+    case lifeShapeMutation
+    case lifeShapeTodayCoupling
+    case lifeShapeSemantic
 }
 
 struct QualityGateContract: Identifiable, Sendable, Hashable {
@@ -37,7 +44,14 @@ enum QualityGateChecklist {
         QualityGateContract(id: .performanceBudget, owner: "Quality/PerformanceBudgets", executableCheck: executableScript, failureIsGreenBlocker: true),
         QualityGateContract(id: .visualRegression, owner: "Quality/VisualRegressionHarness", executableCheck: executableScript, failureIsGreenBlocker: true),
         QualityGateContract(id: .scenarioMatrix, owner: "Scenarios/ScenarioMatrix", executableCheck: executableScript, failureIsGreenBlocker: true),
-        QualityGateContract(id: .actionMutationProof, owner: "Projection/Mutations", executableCheck: executableScript, failureIsGreenBlocker: true)
+        QualityGateContract(id: .actionMutationProof, owner: "Projection/Mutations", executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .lifeShapeFixture, owner: LifeShapeFixtureAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .lifeShapeConstruction, owner: LifeShapeConstructionAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .lifeShapeDerivation, owner: LifeShapeDerivationAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .lifeShapeFakePrecision, owner: LifeShapeFakePrecisionAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .lifeShapeMutation, owner: LifeShapeMutationAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .lifeShapeTodayCoupling, owner: LifeShapeTodayCouplingAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .lifeShapeSemantic, owner: LifeShapeSemanticAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true)
     ]
 
     static func validationIssues(_ contracts: [QualityGateContract] = contracts) -> [String] {
@@ -60,4 +74,3 @@ enum QualityGateChecklist {
         return issues
     }
 }
-
