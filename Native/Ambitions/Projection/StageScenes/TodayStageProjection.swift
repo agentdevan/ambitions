@@ -1,20 +1,5 @@
 import Foundation
 
-struct TodayLens: Equatable {
-    let generatedAt: Date
-    let stageScene: TodayStageScene
-
-    init(experience: TodayExperience, generatedAt: Date) {
-        self.generatedAt = generatedAt
-        self.stageScene = TodayStageScene(execution: experience.execution, generatedAt: generatedAt)
-    }
-
-    init(execution: TodayExecutionViewState, generatedAt: Date) {
-        self.generatedAt = generatedAt
-        self.stageScene = TodayStageScene(execution: execution, generatedAt: generatedAt)
-    }
-}
-
 struct TodayStageScene: Equatable {
     let generatedAt: Date
     let meridian: MeridianSemanticModel

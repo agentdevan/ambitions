@@ -48,8 +48,31 @@ struct GoalsObjectStagePrimitiveContract: Equatable, Sendable {
     )
 }
 
-enum GoalsLens {
+enum GoalsLens: SurfaceLens {
+    static let contract = SurfaceLensContract(
+        surface: .goals,
+        surfaceTitle: "Goals",
+        primaryObjectTitle: "Constellation Atlas",
+        primaryActionTitle: "Open step",
+        runtimeInputs: [
+            "life areas",
+            "goal threads",
+            "active step chains",
+            "pinned goals",
+            "milestones",
+            "Today relationships"
+        ],
+        firstViewportContract: "Constellation Atlas owns goal threads, life areas, Today links, and proof context as a native goal field.",
+        accessibilityContract: objectStageContract.accessibilityFallbacks,
+        trustInspectionRequirements: ["source", "proof", "receipt", "Today link"],
+        failureStateRequirements: ["empty goals", "broken source", "blocked thread", "recovery review"]
+    )
+
     static let objectStageContract = GoalsObjectStagePrimitiveContract.current
+
+    static func project(_ overview: GoalsOverview) -> GoalsStageScene {
+        makeStageScene(for: overview)
+    }
 
     static func makeStageScene(for overview: GoalsOverview) -> GoalsStageScene {
         GoalsStageScene(

@@ -52,8 +52,32 @@ struct TimeObjectStagePrimitiveContract: Equatable, Sendable {
     )
 }
 
-enum TimeLens {
+enum TimeLens: SurfaceLens {
+    static let contract = SurfaceLensContract(
+        surface: .time,
+        surfaceTitle: "Time",
+        primaryObjectTitle: "LifeShape Field",
+        primaryActionTitle: "Move it",
+        runtimeInputs: [
+            "current date",
+            "live now",
+            "fixed points",
+            "capacity",
+            "protected windows",
+            "pressure",
+            "horizon"
+        ],
+        firstViewportContract: "LifeShape Field owns current time shape, capacity, protected windows, pressure, and horizon changes as one native time field.",
+        accessibilityContract: objectStageContract.accessibilityFallbacks,
+        trustInspectionRequirements: ["source", "proof", "receipt", "privacy"],
+        failureStateRequirements: ["offline calendar", "permission denied", "broken source", "recovery reflow"]
+    )
+
     static let objectStageContract = TimeObjectStagePrimitiveContract.current
+
+    static func project(_ timeState: TimeSurfaceState) -> TimeStageScene {
+        makeStageScene(for: timeState)
+    }
 
     static func makeStageScene(for timeState: TimeSurfaceState) -> TimeStageScene {
         TimeStageScene(
