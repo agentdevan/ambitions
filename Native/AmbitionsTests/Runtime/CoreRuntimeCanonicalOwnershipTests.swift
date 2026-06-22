@@ -11,6 +11,7 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Runtime/RuntimeProjectionPipeline.swift",
             "Native/Ambitions/Core/Runtime/RecommendationEngine.swift",
             "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
+            "Native/Ambitions/Core/Runtime/PressureEngine.swift",
             "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
             "Native/Ambitions/Core/Runtime/ProofLedger.swift",
             "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift",
@@ -36,6 +37,8 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(snapshot.nowState.id, nowState.id)
         XCTAssertEqual(snapshot.recommendation.title, "Start here")
         XCTAssertTrue(snapshot.capacityShape.hasBreathingRoom)
+        XCTAssertEqual(snapshot.pressureReading.kind, .light)
+        XCTAssertTrue(snapshot.pressureReading.hiddenFromRootUI)
         XCTAssertEqual(snapshot.recoveryState.state, .stable)
         XCTAssertTrue(snapshot.privacyBoundary.isSatisfied)
         XCTAssertTrue(snapshot.localOnly)

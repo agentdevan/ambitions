@@ -8,6 +8,7 @@ struct RuntimeSnapshot: Codable, Sendable, Equatable, Identifiable {
     let nowState: CanonicalNowState
     let recommendation: RuntimeRecommendation
     let capacityShape: CapacityShape
+    let pressureReading: PressureReading
     let recoveryState: RecoveryState
     let proofLedger: ProofLedger
     let privacyBoundary: PrivacyBoundary
@@ -24,6 +25,7 @@ struct RuntimeSnapshot: Codable, Sendable, Equatable, Identifiable {
         nowState: CanonicalNowState,
         recommendation: RuntimeRecommendation,
         capacityShape: CapacityShape,
+        pressureReading: PressureReading? = nil,
         recoveryState: RecoveryState,
         proofLedger: ProofLedger,
         privacyBoundary: PrivacyBoundary,
@@ -36,6 +38,7 @@ struct RuntimeSnapshot: Codable, Sendable, Equatable, Identifiable {
         self.nowState = nowState
         self.recommendation = recommendation
         self.capacityShape = capacityShape
+        self.pressureReading = pressureReading ?? PressureEngine().reading(nowState: nowState, capacityShape: capacityShape)
         self.recoveryState = recoveryState
         self.proofLedger = proofLedger
         self.privacyBoundary = privacyBoundary
@@ -53,5 +56,48 @@ struct RuntimeSnapshot: Codable, Sendable, Equatable, Identifiable {
 
     var proofExists: Bool {
         proofLedger.hasInspectableProof
+    }
+}
+
+extension RuntimeSnapshot {
+    enum CodingKeys: String, CodingKey {
+        case id
+        case generatedAt
+        case nowState
+        case recommendation
+        case capacityShape
+        case pressureReading
+        case recoveryState
+        case proofLedger
+        case privacyBoundary
+        case changedObjectIDs
+        case canUndo
+        case requiresConfirmation
+        case needsReview
+        case localOnly
+        case schemaVersion
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let nowState = try container.decode(CanonicalNowState.self, forKey: .nowState)
+        let recommendation = try container.decode(RuntimeRecommendation.self, forKey: .recommendation)
+        let capacityShape = try container.decode(CapacityShape.self, forKey: .capacityShape)
+        let pressureReading = try container.decodeIfPresent(PressureReading.self, forKey: .pressureReading)
+
+        self.init(
+            id: try container.decode(String.self, forKey: .id),
+            generatedAt: try container.decode(String.self, forKey: .generatedAt),
+            nowState: nowState,
+            recommendation: recommendation,
+            capacityShape: capacityShape,
+            pressureReading: pressureReading,
+            recoveryState: try container.decode(RecoveryState.self, forKey: .recoveryState),
+            proofLedger: try container.decode(ProofLedger.self, forKey: .proofLedger),
+            privacyBoundary: try container.decode(PrivacyBoundary.self, forKey: .privacyBoundary),
+            changedObjectIDs: try container.decodeIfPresent([String].self, forKey: .changedObjectIDs) ?? [],
+            canUndo: try container.decodeIfPresent(Bool.self, forKey: .canUndo) ?? false,
+            schemaVersion: try container.decodeIfPresent(String.self, forKey: .schemaVersion) ?? runtimeSnapshotSchemaVersion
+        )
     }
 }
