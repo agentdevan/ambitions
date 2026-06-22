@@ -1490,6 +1490,40 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: app, maxAttempts: 10))
     }
 
+    func testAMB1168TimeLifeShapeMutationAndUndoScreenshotProof() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: app))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        captureTimeScreenshot(named: "amb-1168-time-before-place-step", in: app)
+
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
+        app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.staticTexts["Step placed"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Today recomputed")).firstMatch.exists)
+        captureTimeScreenshot(named: "amb-1168-time-after-place-step", in: app)
+
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.undo"].waitForExistence(timeout: 10))
+        app.descendants(matching: .any)["time.life-shape-field.undo"].tap()
+        XCTAssertTrue(app.staticTexts["Undo applied"].waitForExistence(timeout: 10))
+        captureTimeScreenshot(named: "amb-1168-time-after-undo", in: app)
+
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.protected", in: app, maxAttempts: 20))
+        app.descendants(matching: .any)["time.life-shape-field.layer.protected"].tap()
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
+        app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.staticTexts["Window protected"].waitForExistence(timeout: 10))
+        captureTimeScreenshot(named: "amb-1168-time-after-protect-window", in: app)
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,

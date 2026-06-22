@@ -1,5 +1,8 @@
 import AmbitionsDesignSystem
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 struct TimeSurface: View {
     @Environment(\.appShellCapability) private var appShellCapability
@@ -42,7 +45,10 @@ struct TimeSurface: View {
                             clock: clock,
                             onReflowDecision: handleReflowDecision,
                             onSearch: presentTimeSearch,
-                            onCapture: presentTimeCapture
+                            onCapture: presentTimeCapture,
+                            visibleMutation: viewModel.visibleTimeMutation,
+                            onMutationAction: performLifeShapeMutation,
+                            onUndoMutation: undoLifeShapeMutation
                         )
 
                         if let emptyTitle = timeState.emptyTitle, let emptyMessage = timeState.emptyMessage {
@@ -92,6 +98,9 @@ struct TimeSurface: View {
         }
         .accessibilityIdentifier("time.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
+        .onChange(of: viewModel.visibleTimeMutation?.stageMutation.accessibilityAnnouncement.message) { _, message in
+            announceMutation(message)
+        }
         .task {
             await viewModel.load(using: featureFactory.timeService, now: clock.now, calendar: clock.calendar, timeZone: clock.timeZone)
         }
@@ -159,6 +168,21 @@ struct TimeSurface: View {
         case .chooseDay, .chooseWeek, .chooseMonth, .chooseYear, .reviewPressure, .protectWindow:
             break
         }
+    }
+
+    private func performLifeShapeMutation(_ action: TimeFieldMutationAction, selectedMark: LifeShapeSemanticMark?) {
+        viewModel.performLifeShapeMutation(action, selectedMark: selectedMark, now: clock.now)
+    }
+
+    private func undoLifeShapeMutation() {
+        viewModel.undoLastLifeShapeMutation(now: clock.now)
+    }
+
+    private func announceMutation(_ message: String?) {
+        guard let message, message.isEmpty == false else { return }
+        #if canImport(UIKit)
+        UIAccessibility.post(notification: .announcement, argument: message)
+        #endif
     }
 
     private func openGoal(_ target: GoalRouteTarget) {

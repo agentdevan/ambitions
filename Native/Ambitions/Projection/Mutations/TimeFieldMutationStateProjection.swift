@@ -1,0 +1,203 @@
+import Foundation
+
+extension TimeLifeSuiteState {
+    func applying(timeMutation: TimeMutation, runtimeMutation: RuntimeMutation) -> TimeLifeSuiteState {
+        let field = field.applying(timeMutation: timeMutation, runtimeMutation: runtimeMutation)
+        return TimeLifeSuiteState(
+            title: title,
+            subtitle: subtitle,
+            shapes: shapes,
+            field: field,
+            drillDown: drillDown,
+            calendarBoundaryLabel: calendarBoundaryLabel,
+            manualFallbackLabel: manualFallbackLabel,
+            trustLabel: trustLabel
+        )
+    }
+}
+
+extension LifeShapeFieldState {
+    func applying(timeMutation: TimeMutation, runtimeMutation: RuntimeMutation) -> LifeShapeFieldState {
+        let after = timeMutation.afterProjection
+        let openBuckets = after.todayBuckets.filter { $0.layer == .open }
+        let protectedBuckets = after.todayBuckets.filter { $0.layer == .protected }
+        let fit: LifeShapeCapacityFit = openBuckets.isEmpty ? .tight : .steady
+        let weekReading = LifeShapeReading(
+            horizon: after.selectedHorizon,
+            title: timeMutation.actionKind.visibleChange,
+            summary: after.semanticSummary,
+            capacityStatement: after.primaryCaption,
+            sourceDetail: runtimeMutation.stageMutation.proofArtifact.label,
+            accessibilitySummary: runtimeMutation.stageMutation.accessibilityAnnouncement.message
+        )
+        let semanticMarks = Self.semanticMarks(from: after, runtimeMutation: runtimeMutation)
+        return LifeShapeFieldState(
+            defaultHorizon: after.selectedHorizon,
+            capacityFit: fit,
+            segments: [
+                LifeShapeSegment(
+                    kind: .openTime,
+                    detail: openBuckets.isEmpty ? "No open bucket remains after this Time change." : "\(openBuckets.count) open bucket\(openBuckets.count == 1 ? "" : "s") remain after this Time change.",
+                    valueLabel: "\(openBuckets.count) open",
+                    weight: Double(openBuckets.count) / Double(max(after.todayBuckets.count, 1)),
+                    visualState: openBuckets.isEmpty ? .warning : .selected
+                ),
+                LifeShapeSegment(
+                    kind: .protectedTime,
+                    detail: protectedBuckets.isEmpty ? "No protected boundary is active." : "\(protectedBuckets.count) protected boundary/bucket\(protectedBuckets.count == 1 ? "" : "s") now shape Time.",
+                    valueLabel: "\(protectedBuckets.count) protected",
+                    weight: Double(protectedBuckets.count) / Double(max(after.todayBuckets.count, 1)),
+                    visualState: protectedBuckets.isEmpty ? .default : .selected
+                ),
+                LifeShapeSegment(
+                    kind: .pressure,
+                    detail: timeMutation.todayRecompute.summary,
+                    valueLabel: fit.title,
+                    weight: fit == .tight ? 0.72 : 0.36,
+                    visualState: fit.visualState
+                ),
+                LifeShapeSegment(
+                    kind: .source,
+                    detail: runtimeMutation.stageMutation.receipt.inspectionLabel,
+                    valueLabel: "Proof",
+                    weight: 0.44,
+                    visualState: .selected
+                )
+            ],
+            semanticMarks: semanticMarks,
+            renderState: .receiptAttached,
+            readings: [
+                .day: weekReading,
+                .week: weekReading,
+                .month: reading(for: .month),
+                .year: reading(for: .year)
+            ],
+            sourceState: sourceState,
+            reflowProposal: LifeShapeReflowProposal(
+                title: runtimeMutation.stageMutation.visibleUserFacingChange,
+                detail: timeMutation.todayRecompute.summary,
+                actionTitle: runtimeMutation.stageMutation.undoAvailability.label,
+                visualState: .selected
+            ),
+            receipt: LifeShapeReceipt(
+                title: runtimeMutation.stageMutation.proofArtifact.label,
+                detail: runtimeMutation.stageMutation.receipt.inspectionLabel,
+                ageLabel: runtimeMutation.stageMutation.proofArtifact.artifactID,
+                visualState: .selected
+            ),
+            continuityDockItems: [
+                runtimeMutation.stageMutation.visibleUserFacingChange,
+                "Today recomputed",
+                runtimeMutation.stageMutation.undoAvailability.label
+            ]
+        )
+    }
+
+    static func semanticMarks(from projection: LifeShapeProjection, runtimeMutation: RuntimeMutation) -> [LifeShapeSemanticMark] {
+        var marks = projection.todayBuckets.map { bucket in
+            LifeShapeSemanticMark(
+                kind: bucket.layer == .protected ? .protectedTime : .executionLanes,
+                valueLabel: bucket.reading.capacityStatement,
+                detail: bucket.reading.summary,
+                intensity: bucket.layer == .protected ? 0.72 : 0.52,
+                visualState: bucket.layer == .protected ? .selected : .selected,
+                inputRefs: bucket.derivation.inputRefs,
+                ruleIDs: bucket.derivation.ruleIDs,
+                accessibilitySummary: bucket.accessibilitySummary
+            )
+        }
+        marks.append(
+            LifeShapeSemanticMark(
+                kind: .receiptReflow,
+                valueLabel: "Proof",
+                detail: runtimeMutation.stageMutation.proofArtifact.artifactID,
+                intensity: 0.82,
+                visualState: .selected,
+                inputRefs: [LifeShapeInputRef(id: runtimeMutation.command.id, kind: .userCorrection, label: runtimeMutation.command.payload.title ?? runtimeMutation.command.kind.rawValue)],
+                ruleIDs: ["lifeshape.mutation.proof-visible"],
+                accessibilitySummary: runtimeMutation.stageMutation.accessibilityAnnouncement.message
+            )
+        )
+        return marks
+    }
+}
+
+extension TimeSurfaceState {
+    func replacing(lifeSuite: TimeLifeSuiteState) -> TimeSurfaceState {
+        TimeSurfaceState(
+            mode: mode,
+            timeframeLabel: timeframeLabel,
+            hero: hero,
+            lifeSuite: lifeSuite,
+            primaryAction: primaryAction,
+            treaty: treaty,
+            capacityEnvelope: capacityEnvelope,
+            pressureRecoveryReview: pressureRecoveryReview,
+            lifecycleRail: lifecycleRail,
+            timelineStrip: timelineStrip,
+            opportunityWindows: opportunityWindows,
+            decisionDebt: decisionDebt,
+            conflictCourt: conflictCourt,
+            calendarBoundary: calendarBoundary,
+            recoveryEntry: recoveryEntry,
+            realityReflow: realityReflow,
+            reflowDecision: reflowDecision,
+            recoveryGradient: recoveryGradient,
+            saveTheDay: saveTheDay,
+            reflowReceiptPreview: reflowReceiptPreview,
+            recoveryMaturity: recoveryMaturity,
+            pressureScrubber: pressureScrubber,
+            weekDays: weekDays,
+            believability: believability,
+            calendarAwareness: calendarAwareness,
+            resilience: resilience,
+            goalShapingItems: goalShapingItems,
+            shapingActions: shapingActions,
+            secondaryDestinations: secondaryDestinations,
+            emptyTitle: emptyTitle,
+            emptyMessage: emptyMessage
+        )
+    }
+}
+
+extension RuntimeMutation {
+    static func undoVisibleMutation(
+        original: RuntimeMutation,
+        restoredSnapshot: String,
+        now: Date
+    ) -> UserVisibleMutation {
+        let proof = MutationProof(
+            artifactID: "runtime.proof.undo.\(original.command.id)",
+            label: "Undo proof artifact",
+            localOnly: original.validation.privacyBoundary.localOnly
+        )
+        let receipt = MutationReceipt(
+            receiptID: "runtime.receipt.undo.\(original.command.id)",
+            saved: true,
+            inspectionLabel: "Undo receipt"
+        )
+        let stageMutation = StageMutation(
+            runtimeMutationID: "runtime.mutation.undo.\(original.command.id).\(ISO8601DateFormatter().string(from: now))",
+            beforeSnapshot: original.stageMutation.afterSnapshot,
+            afterSnapshot: restoredSnapshot,
+            targetSurface: .time,
+            affectedObjectIDs: original.stageMutation.affectedObjectIDs,
+            visibleUserFacingChange: "Undo applied",
+            motionEvent: "stage.motion.time.mutation_undone",
+            accessibilityAnnouncement: MutationAccessibilityAnnouncement(
+                message: "Undo applied. Time and Today returned to the prior shape.",
+                reasonIfSilent: nil
+            ),
+            hapticIntent: "selection",
+            undoAvailability: MutationUndo(isAvailable: false, label: "Undo used"),
+            proofArtifact: proof,
+            receipt: receipt,
+            safeFallback: "Keep the restored Time shape and receipt visible."
+        )
+        return UserVisibleMutation(
+            stageMutation: stageMutation,
+            headline: "Undo applied",
+            detail: "Time and Today returned to the prior shape."
+        )
+    }
+}

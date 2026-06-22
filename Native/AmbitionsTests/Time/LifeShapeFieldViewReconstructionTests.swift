@@ -47,9 +47,37 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         XCTAssertTrue(rootView.contains("LifeShapeHorizonRowView"))
         XCTAssertTrue(rootView.contains("LifeShapeBucketDetail"))
         XCTAssertTrue(rootView.contains("LifeShapeCorrectionMenu"))
+        XCTAssertTrue(rootView.contains("LifeShapeMutationProofBanner"))
+        XCTAssertTrue(rootView.contains("onMutationAction?(.placeStep"))
+        XCTAssertTrue(rootView.contains("onMutationAction?(.protectWindow"))
+        XCTAssertTrue(rootView.contains("onMutationAction?(.notUsable"))
+        XCTAssertTrue(rootView.contains("onMutationAction?(.keepClear"))
         XCTAssertFalse(rootView.contains("sourceReceiptRow"))
         XCTAssertFalse(rootView.contains("LifeShape zoom"))
         XCTAssertFalse(rootView.contains("horizonControl"))
+    }
+
+    func testLifeShapeFieldDoesNotPerformLocalOnlyVisualMutation() throws {
+        let root = repoRoot()
+        let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let viewModel = try source("Native/Ambitions/Surfaces/Time/TimeViewModel.swift", root: root)
+        let coordinator = try source("Native/Ambitions/Projection/Mutations/TimeFieldMutationCoordinator.swift", root: root)
+        let stateProjection = try source("Native/Ambitions/Projection/Mutations/TimeFieldMutationStateProjection.swift", root: root)
+        let visibleProjection = try source("Native/Ambitions/Projection/Mutations/TimeFieldVisibleProjectionAdapter.swift", root: root)
+        let mutationChain = [coordinator, stateProjection, visibleProjection].joined(separator: "\n")
+
+        XCTAssertTrue(rootView.contains("onMutationAction?"))
+        XCTAssertFalse(rootView.contains("selectedMarkID = selectedLayerMarks.first?.id"))
+        XCTAssertTrue(rootView.contains("LifeShapeMutationHapticModifier"))
+        XCTAssertTrue(rootView.contains(".ambitionHaptic"))
+        XCTAssertTrue(rootView.contains("case \"confirmation\":"))
+        XCTAssertTrue(viewModel.contains("TimeFieldMutationCoordinator().perform"))
+        XCTAssertTrue(viewModel.contains("undoLastLifeShapeMutation"))
+        XCTAssertTrue(mutationChain.contains("TimeMutation.make"))
+        XCTAssertTrue(mutationChain.contains("runtime.mutation"))
+        XCTAssertTrue(mutationChain.contains("Today recomputed"))
+        XCTAssertTrue(mutationChain.contains("MutationProof"))
+        XCTAssertTrue(mutationChain.contains("MutationAccessibilityAnnouncement"))
     }
 
     func testFirstGreenExposesOnlyOpenAndProtectedLayersWithMinimumHitTargets() throws {

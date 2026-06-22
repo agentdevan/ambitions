@@ -22,6 +22,9 @@ struct LifeShapeFieldView: View {
     let onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)?
     let onSearch: (() -> Void)?
     let onCapture: (() -> Void)?
+    let visibleMutation: UserVisibleMutation?
+    let onMutationAction: ((TimeFieldMutationAction, LifeShapeSemanticMark?) -> Void)?
+    let onUndoMutation: (() -> Void)?
 
     init(
         suite: TimeLifeSuiteState,
@@ -30,7 +33,10 @@ struct LifeShapeFieldView: View {
         calendarAwareness: TimeCalendarAwarenessState? = nil,
         onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)? = nil,
         onSearch: (() -> Void)? = nil,
-        onCapture: (() -> Void)? = nil
+        onCapture: (() -> Void)? = nil,
+        visibleMutation: UserVisibleMutation? = nil,
+        onMutationAction: ((TimeFieldMutationAction, LifeShapeSemanticMark?) -> Void)? = nil,
+        onUndoMutation: (() -> Void)? = nil
     ) {
         self.suite = suite
         self.reflowDecision = reflowDecision
@@ -39,6 +45,9 @@ struct LifeShapeFieldView: View {
         self.onReflowDecision = onReflowDecision
         self.onSearch = onSearch
         self.onCapture = onCapture
+        self.visibleMutation = visibleMutation
+        self.onMutationAction = onMutationAction
+        self.onUndoMutation = onUndoMutation
         _selectedHorizon = State(initialValue: suite.field.defaultHorizon)
         _selectedLayer = State(initialValue: Self.initialScreenshotLayer())
         _confirmedReflowAction = State(initialValue: Self.initialScreenshotReflowAction())
@@ -204,10 +213,16 @@ struct LifeShapeFieldView: View {
                 visualState: suite.field.capacityFit.visualState
             ) {
                 if selectedLayer == .open {
-                    selectedMarkID = selectedLayerMarks.first?.id
+                    onMutationAction?(.placeStep, selectedMark)
                 } else {
-                    confirmedReflowAction = .decline
+                    onMutationAction?(.protectWindow, selectedMark)
                 }
+            }
+            if let visibleMutation {
+                LifeShapeMutationProofBanner(
+                    mutation: visibleMutation,
+                    onUndo: visibleMutation.stageMutation.undoAvailability.isAvailable ? onUndoMutation : nil
+                )
             }
             objectCanvas
             lifeShapeHorizonRows
@@ -218,11 +233,11 @@ struct LifeShapeFieldView: View {
             )
             LifeShapeCorrectionMenu(
                 layer: selectedLayer,
-                onNotUsable: { selectedMarkID = selectedLayerMarks.first?.id },
-                onNeedsMoreTime: { selectedMarkID = selectedLayerMarks.dropFirst().first?.id ?? selectedLayerMarks.first?.id },
+                onNotUsable: { onMutationAction?(.notUsable, selectedMark) },
+                onNeedsMoreTime: { onMutationAction?(.needsMoreTime, selectedMark) },
                 onKeepClear: {
                     selectedLayer = .protected
-                    confirmedReflowAction = .decline
+                    onMutationAction?(.keepClear, selectedMark)
                 }
             )
             if Self.screenshotFocusesQuietReflow() == false,
@@ -234,6 +249,7 @@ struct LifeShapeFieldView: View {
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("time.life-shape-field")
         .accessibilityValue("\(accessibilityValue). \(TimeAccessibility.rootSummary(for: stageScene))")
+        .modifier(LifeShapeMutationHapticModifier(mutation: visibleMutation))
     }
 
     @ViewBuilder
@@ -336,4 +352,36 @@ struct LifeShapeFieldView: View {
         .accessibilityIdentifier("time.life-shape-field.horizon-rows")
     }
 
+}
+
+private struct LifeShapeMutationHapticModifier: ViewModifier {
+    let mutation: UserVisibleMutation?
+
+    func body(content: Content) -> some View {
+        if let mutation,
+           let intent = Self.intent(from: mutation.stageMutation.hapticIntent) {
+            content.ambitionHaptic(intent, trigger: mutation.stageMutation.runtimeMutationID)
+        } else {
+            content
+        }
+    }
+
+    static func intent(from rawValue: String) -> AmbitionTheme.HapticIntent? {
+        switch rawValue {
+        case "confirmation":
+            .completion
+        case "selection":
+            .selection
+        case "correction":
+            .correction
+        case "reschedule":
+            .reschedule
+        case "warning":
+            .warning
+        case "routeChange":
+            .routeChange
+        default:
+            nil
+        }
+    }
 }

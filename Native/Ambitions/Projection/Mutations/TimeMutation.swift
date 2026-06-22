@@ -336,7 +336,7 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
             primaryCaption: actionKind.visibleChange,
             primaryAction: sortedBuckets.first(where: { $0.layer == .open && $0.primaryAction != nil })?.primaryAction,
             todayAnchor: anchor,
-            semanticSummary: "\(actionKind.visibleChange). Today recompute required for \(targetBucketID)."
+            semanticSummary: "\(actionKind.visibleChange). \(actionKind.todaySummary)"
         )
     }
 

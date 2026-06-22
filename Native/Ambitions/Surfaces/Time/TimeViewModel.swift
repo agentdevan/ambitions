@@ -5,8 +5,11 @@ import Observation
 @Observable
 final class TimeViewModel {
     var state: AsyncViewState<TimeSurfaceState>
+    var visibleTimeMutation: UserVisibleMutation?
+    var mutationErrorMessage: String?
 
     private var hasLoaded = false
+    private var lastTimeFieldMutation: TimeFieldMutationResult?
     private let dayBoundaryScheduler = DayBoundaryScheduler()
     private(set) var lastLoadedDayStart: Date?
     private(set) var lastLoadedClockContext: DayBoundaryScheduler.LoadedClockContext?
@@ -16,7 +19,8 @@ final class TimeViewModel {
         case .loading:
             return "loading"
         case let .loaded(timeState):
-            return "loaded:\(timeState.mode):\(timeState.weekDays.count):\(timeState.goalShapingItems.count):\(timeState.shapingActions.count)"
+            let mutationID = visibleTimeMutation?.stageMutation.runtimeMutationID ?? "none"
+            return "loaded:\(timeState.mode):\(timeState.weekDays.count):\(timeState.goalShapingItems.count):\(timeState.shapingActions.count):\(mutationID)"
         case let .failed(message):
             return "failed:\(message)"
         }
@@ -82,5 +86,36 @@ final class TimeViewModel {
             calendar: calendar,
             timeZone: timeZone
         )
+    }
+
+    func performLifeShapeMutation(
+        _ action: TimeFieldMutationAction,
+        selectedMark: LifeShapeSemanticMark?,
+        now: Date
+    ) {
+        guard case let .loaded(timeState) = state else { return }
+        do {
+            let result = try TimeFieldMutationCoordinator().perform(
+                action,
+                in: timeState,
+                selectedMark: selectedMark,
+                now: now
+            )
+            state = .loaded(result.updatedTimeState)
+            lastTimeFieldMutation = result
+            visibleTimeMutation = result.visibleMutation
+            mutationErrorMessage = nil
+        } catch {
+            mutationErrorMessage = "Time change was not applied: \(error)"
+        }
+    }
+
+    func undoLastLifeShapeMutation(now: Date) {
+        guard let lastTimeFieldMutation else { return }
+        let undo = TimeFieldMutationCoordinator().undo(lastTimeFieldMutation, now: now)
+        state = .loaded(undo.restoredTimeState)
+        self.lastTimeFieldMutation = nil
+        visibleTimeMutation = undo.visibleMutation
+        mutationErrorMessage = nil
     }
 }

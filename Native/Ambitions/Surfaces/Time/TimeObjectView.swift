@@ -6,19 +6,28 @@ struct TimeObjectView: View {
     let onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)?
     let onSearch: (() -> Void)?
     let onCapture: (() -> Void)?
+    let visibleMutation: UserVisibleMutation?
+    let onMutationAction: ((TimeFieldMutationAction, LifeShapeSemanticMark?) -> Void)?
+    let onUndoMutation: (() -> Void)?
 
     init(
         timeState: TimeSurfaceState,
         clock: any AmbitionsClock,
         onReflowDecision: ((TimeReflowDecisionOptionState, TimeReflowDecisionActionKind) -> Void)? = nil,
         onSearch: (() -> Void)? = nil,
-        onCapture: (() -> Void)? = nil
+        onCapture: (() -> Void)? = nil,
+        visibleMutation: UserVisibleMutation? = nil,
+        onMutationAction: ((TimeFieldMutationAction, LifeShapeSemanticMark?) -> Void)? = nil,
+        onUndoMutation: (() -> Void)? = nil
     ) {
         self.timeState = timeState
         self.clock = clock
         self.onReflowDecision = onReflowDecision
         self.onSearch = onSearch
         self.onCapture = onCapture
+        self.visibleMutation = visibleMutation
+        self.onMutationAction = onMutationAction
+        self.onUndoMutation = onUndoMutation
     }
 
     var body: some View {
@@ -30,7 +39,10 @@ struct TimeObjectView: View {
             calendarAwareness: timeState.calendarAwareness,
             onReflowDecision: onReflowDecision,
             onSearch: onSearch,
-            onCapture: onCapture
+            onCapture: onCapture,
+            visibleMutation: visibleMutation,
+            onMutationAction: onMutationAction,
+            onUndoMutation: onUndoMutation
         )
         .accessibilityHint(scene.satisfiesArchitectureTree
             ? "Current date, now, fixed points, open capacity, protected windows, pressure, horizons, and Capture support stay available."
