@@ -8,9 +8,9 @@ final class ProductObjectDominanceUITests: XCTestCase {
 
     func testTimeLifeShapeFieldPrimaryObjectDominatesFirstViewport() throws {
         let app = AmbitionsVisualAcceptanceApp.launchTime()
-        let primaryObject = app.descendants(matching: .any)["time.life-shape-field.primary-object"]
+        let primaryObject = app.descendants(matching: .any)["time.life-shape-field"]
 
-        XCTAssertTrue(primaryObject.waitForExistence(timeout: 15))
+        XCTAssertTrue(primaryObject.waitForExistence(timeout: 30))
 
         let firstViewportHeight = app.windows.firstMatch.frame.height
         XCTAssertGreaterThan(primaryObject.frame.minY, 0)

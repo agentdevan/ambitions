@@ -48,7 +48,7 @@ extension TimeLifeSuiteProjector {
             ? "Rhythm: pressure gathers on \(pressuredDays) day\((pressuredDays == 1) ? "" : "s")."
             : "Rhythm: the visible week has room to breathe."
         let milestoneLabel = milestoneTitles.isEmpty
-            ? "Milestones: no active milestone needs a wider lane yet."
+            ? "Milestones: no active milestone needs wider Time yet."
             : "Milestones: \(milestoneTitles.joined(separator: ", ")) shape the longer arc."
 
         return TimeLifeShapeDrillDownState(
@@ -63,7 +63,7 @@ extension TimeLifeSuiteProjector {
                 ? "Protected time: nothing protected is competing loudly."
                 : "Protected time: \(protectedBlocks.count) fixed or protected block\((protectedBlocks.count == 1) ? "" : "s") stay visible.",
             freeTimeLabel: openDays == 0
-                ? "Free-time bands: create one smaller pocket before widening the shape."
+                ? "Free-time bands: create one smaller opening before widening the shape."
                 : "Free-time bands: \(openDays) open day\((openDays == 1) ? "" : "s") can protect recovery.",
             recoverySpaceLabel: openDays > 0
                 ? "Recovery space: protect open room before filling it."
@@ -76,13 +76,13 @@ extension TimeLifeSuiteProjector {
                 : "Month horizon: active commitments remain within the month-level shape.",
             yearRangeLabel: activeGoalCount == 0
                 ? "Year horizon: no long-range pressure signal is active yet."
-                : "Year horizon: longer-view lanes are visible and still editable by local confirmation.",
+                : "Year horizon: longer-view openings are visible and still editable by local confirmation.",
             lifeRangeLabel: openCaptureCount == 0
                 ? "Life range: open capacity is currently broad."
                 : "Life range: \(openCaptureCount) capture\((openCaptureCount == 1) ? "" : "s") still needs placement.",
             cognitiveLoadLabel: isNoOpen
                 ? "Cognitive load: high visual density suggests review-first."
-                : "Cognitive load: stable enough for one-lane shaping.",
+                : "Cognitive load: stable enough for one focused shape.",
             physicalEnergyLabel: openCaptureCount > 0
                 ? "Physical energy: keep protected time before adding more capacity."
                 : "Physical energy: no immediate overload from visible commitments.",
@@ -93,11 +93,11 @@ extension TimeLifeSuiteProjector {
                 ? "Free-time quality: protected time is helping recovery."
                 : "Free-time quality: watch quality drift before opening bigger commitments.",
             executionLanesLabel: allBlocks.isEmpty
-                ? "Execution lanes: none currently active in this LifeShape slice."
-                : "Execution lanes: \(allBlocks.count) lane\((allBlocks.count == 1) ? "" : "s") stay reviewable before mutation.",
+                ? "Open time: none currently active in this LifeShape slice."
+                : "Open time: \(allBlocks.count) block\((allBlocks.count == 1) ? "" : "s") stay reviewable before mutation.",
             goalLoadLabel: activeGoalCount == 0
                 ? "Goal load: no active goals to stretch this shape."
-                : "Goal load: \(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the life-range contour.",
+                : "Goal load: \(activeGoalCount) active goal\((activeGoalCount == 1) ? "" : "s") shape the longer range.",
             items: [
                 TimeLifeShapeDrillDownItemState(
                     id: "life-areas",
@@ -182,7 +182,7 @@ extension TimeLifeSuiteProjector {
                     id: "physical-energy",
                     title: "Physical energy",
                     value: openDays == 0 ? "Tight" : "Steady",
-                    detail: "Protect recovery pockets before extending capacity.",
+                    detail: "Protect recovery room before extending capacity.",
                     visualState: openDays == 0 ? .warning : .selected
                 ),
                 TimeLifeShapeDrillDownItemState(
@@ -200,10 +200,10 @@ extension TimeLifeSuiteProjector {
                     visualState: openDays == 0 ? .warning : .success
                 ),
                 TimeLifeShapeDrillDownItemState(
-                    id: "execution-lanes",
-                    title: "Execution lanes",
-                    value: weekDays.count == 0 ? "None" : "\(weekDays.count) lanes",
-                    detail: "Execution lanes are reviewed before any schedule mutation.",
+                    id: "open-time",
+                    title: "Open time",
+                    value: weekDays.count == 0 ? "None" : "\(weekDays.count) blocks",
+                    detail: "Open time is reviewed before any schedule mutation.",
                     visualState: weekDays.count == 0 ? .default : .selected
                 ),
                 TimeLifeShapeDrillDownItemState(

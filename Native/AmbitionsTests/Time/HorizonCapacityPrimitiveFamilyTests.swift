@@ -41,8 +41,8 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCapacity.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldReflow.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root),
-            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeHorizonRow.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeWhyThisInspection.swift", root: root),
@@ -53,15 +53,13 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(timeFieldSource.contains("HorizonCapacityPrimitiveStage("))
         XCTAssertTrue(timeFieldSource.contains("HorizonCapacityPrimitiveLine("))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeLayerSelector"))
-        XCTAssertTrue(timeFieldSource.contains("LifeShapeNowInstrument"))
-        XCTAssertTrue(timeFieldSource.contains("LifeShapeHorizonRowView"))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeBucketDetail"))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeWhyThisInspection"))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeCorrectionMenu"))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeMutationProofBanner"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.layer-selector"))
-        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.now-instrument"))
-        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.horizon-rows"))
+        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.primary-object"))
+        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.horizon-strip"))
         XCTAssertFalse(timeFieldSource.contains("time.life-shape-field.continuity-dock"))
         XCTAssertFalse(timeFieldSource.contains("sourceReceiptRow"))
         XCTAssertFalse(timeFieldSource.contains("LifeShape zoom"))

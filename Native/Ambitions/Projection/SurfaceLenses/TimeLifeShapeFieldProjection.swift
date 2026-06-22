@@ -16,7 +16,7 @@ extension TimeLifeSuiteProjector {
         let pressuredDays = weekDays.filter { [.tight, .fragile, .overloaded].contains($0.level) }.count
         let openDays = weekDays.filter { $0.level == .open }.count
         let protectedBlocks = weekDays.flatMap(\.blocks).filter { $0.kind == .protected || $0.kind == .fixed }.count
-        let totalBlocks = max(weekDays.flatMap(\.blocks).count, 1)
+        let totalBlocks = weekDays.flatMap(\.blocks).count
         let capacityFit: LifeShapeCapacityFit
         if mode == .empty {
             capacityFit = .open
@@ -40,10 +40,11 @@ extension TimeLifeSuiteProjector {
         let sourceDetail = calendarAwareness.canRequestCalendarRead
             ? "Calendar can inform availability, but Time does not become an event grid."
             : "Time is shaped from local goals, captures, and manual defaults."
-        let focusedBlockCount = max(activeGoalCount, 1)
-        let lightStepCount = max(openDays, 1)
-        let protectedRecoveryWindowCount = max(protectedBlocks == 0 ? (pressuredDays > 0 ? 1 : 0) : protectedBlocks, 1)
-        let weekCapacityStatement = "This week can hold \(Self.countLabel(focusedBlockCount, singular: "focused block", plural: "focused blocks")), \(Self.countLabel(lightStepCount, singular: "light step", plural: "light steps")), and \(Self.countLabel(protectedRecoveryWindowCount, singular: "protected recovery window", plural: "protected recovery windows"))."
+        let weekCapacityStatement = Self.weekCapacityStatement(
+            activeGoalCount: activeGoalCount,
+            openDays: openDays,
+            protectedBlocks: protectedBlocks
+        )
         let renderState = lifeShapeRenderState(
             capacityFit: capacityFit,
             calendarAwareness: calendarAwareness,
@@ -60,7 +61,7 @@ extension TimeLifeSuiteProjector {
                     kind: .openTime,
                     detail: openDays == 1 ? "1 day still has room." : "\(openDays) days still have room.",
                     valueLabel: openDays == 1 ? "1 open day" : "\(openDays) open days",
-                    weight: Double(openDays) / Double(max(weekDays.count, 1)),
+                    weight: weekDays.isEmpty ? 0 : Double(openDays) / Double(weekDays.count),
                     visualState: openDays > 0 ? .selected : .default
                 ),
                 LifeShapeSegment(
@@ -72,9 +73,9 @@ extension TimeLifeSuiteProjector {
                 ),
                 LifeShapeSegment(
                     kind: .protectedTime,
-                    detail: protectedBlocks == 0 ? "No protected pocket is marked yet." : "\(protectedBlocks) fixed or protected block\(protectedBlocks == 1 ? "" : "s") stay visible.",
+                    detail: protectedBlocks == 0 ? "No protected time is marked yet." : "\(protectedBlocks) fixed or protected block\(protectedBlocks == 1 ? "" : "s") stay visible.",
                     valueLabel: protectedBlocks == 1 ? "1 protected" : "\(protectedBlocks) protected",
-                    weight: Double(protectedBlocks) / Double(totalBlocks),
+                    weight: totalBlocks == 0 ? 0 : Double(protectedBlocks) / Double(totalBlocks),
                     visualState: protectedBlocks > 0 ? .selected : .default
                 ),
                 LifeShapeSegment(
@@ -164,12 +165,35 @@ extension TimeLifeSuiteProjector {
                 ageLabel: "Current",
                 visualState: .selected
             ),
-            continuityDockItems: ["Open field", "Protect pocket", "Review receipt"]
+            continuityDockItems: ["Open field", "Protect time", "Review change"]
         )
     }
 
     static func countLabel(_ count: Int, singular: String, plural: String) -> String {
         "\(count) \(count == 1 ? singular : plural)"
+    }
+
+    static func weekCapacityStatement(
+        activeGoalCount: Int,
+        openDays: Int,
+        protectedBlocks: Int
+    ) -> String {
+        var parts: [String] = []
+        if activeGoalCount > 0 {
+            parts.append(countLabel(activeGoalCount, singular: "active goal", plural: "active goals"))
+        }
+        if openDays > 0 {
+            parts.append(countLabel(openDays, singular: "open day", plural: "open days"))
+        }
+        if protectedBlocks > 0 {
+            parts.append(countLabel(protectedBlocks, singular: "protected block", plural: "protected blocks"))
+        }
+
+        guard parts.isEmpty == false else {
+            return "This week is still taking shape from local context."
+        }
+
+        return "This week shows \(parts.joined(separator: ", "))."
     }
 
     static func pressureOrdinal(
@@ -192,7 +216,9 @@ extension TimeLifeSuiteProjector {
         case .crowded:
             "One part of the week is close enough to review first."
         case .tight:
-            "\(max(pressuredDays, 1)) day\(max(pressuredDays, 1) == 1 ? "" : "s") should stay narrow before adding more."
+            pressuredDays == 0
+                ? "Pressure is present qualitatively; no pressured day is claimed yet."
+                : "\(pressuredDays) day\(pressuredDays == 1 ? "" : "s") should stay narrow before adding more."
         case .needsBuffer:
             "Shorten one ask or protect one window before adding more."
         }

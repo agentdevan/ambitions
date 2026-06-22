@@ -167,7 +167,7 @@ enum LifeShapeSemanticMarkKind: String, Sendable, Hashable {
         case .protectedTime: "Protected time"
         case .recoveryNeed: "Recovery need"
         case .freeTimeQuality: "Free-time quality"
-        case .executionLanes: "Execution lanes"
+        case .executionLanes: "Open time"
         case .goalLoad: "Goal load"
         case .sourceConflict: "Source conflict"
         case .receiptReflow: "Receipt/review"
@@ -176,17 +176,17 @@ enum LifeShapeSemanticMarkKind: String, Sendable, Hashable {
 
     var semanticMeaning: String {
         switch self {
-        case .pressure: "Compression ridge"
-        case .cognitiveLoad: "Mental load contour"
-        case .physicalEnergy: "Energy basin"
-        case .transitionFriction: "Narrowed bridge"
-        case .protectedTime: "Preserved boundary"
-        case .recoveryNeed: "Reserve pocket"
-        case .freeTimeQuality: "Available lane quality"
-        case .executionLanes: "Execution lane"
-        case .goalLoad: "Anchored goal lane"
-        case .sourceConflict: "Split trace"
-        case .receiptReflow: "Proof mark"
+        case .pressure: "Pressure"
+        case .cognitiveLoad: "Mental load"
+        case .physicalEnergy: "Energy"
+        case .transitionFriction: "Transition friction"
+        case .protectedTime: "Protected time"
+        case .recoveryNeed: "Recovery need"
+        case .freeTimeQuality: "Open time quality"
+        case .executionLanes: "Open time"
+        case .goalLoad: "Goal load"
+        case .sourceConflict: "Source conflict"
+        case .receiptReflow: "Review mark"
         }
     }
 

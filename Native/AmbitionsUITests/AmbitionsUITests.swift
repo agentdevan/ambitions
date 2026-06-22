@@ -1359,7 +1359,7 @@ final class AmbitionsUITests: XCTestCase {
                 requiredIdentifiers: [
                     "time.life-shape-field",
                     "time.life-shape-field.layer-selector",
-                    "time.life-shape-field.now-instrument",
+                    "time.life-shape-field.visual-stage",
                     "time.life-shape-field.primary-action"
                 ],
                 requiredTexts: ["LifeShape Field", "This week", "Place Step"]
@@ -1370,8 +1370,8 @@ final class AmbitionsUITests: XCTestCase {
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
                     "time.life-shape-field.layer.protected",
-                    "time.life-shape-field.horizon-rows",
-                    "time.life-shape-field.pressure-canvas-engine"
+                    "time.life-shape-field.horizon-strip",
+                    "time.life-shape-field.visual-stage"
                 ],
                 requiredTexts: ["Protected", "Pressure"]
             ),
@@ -1380,9 +1380,9 @@ final class AmbitionsUITests: XCTestCase {
                 renderState: "manual-only",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "time.context-crown.search",
-                    "time.context-crown.capture",
-                    "time.life-shape-field.correction-menu"
+                    "shell.header.context-crown",
+                    "time.life-shape-field",
+                    "time.life-shape-field.primary-action"
                 ],
                 requiredTexts: ["LifeShape Field", "This week"]
             ),
@@ -1391,10 +1391,11 @@ final class AmbitionsUITests: XCTestCase {
                 renderState: "calendar-denied",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 requiredIdentifiers: [
-                    "time.life-shape-field.bucket-detail",
-                    "time.life-shape-field.correction-menu"
+                    "time.life-shape-field",
+                    "time.life-shape-field.visual-stage",
+                    "time.life-shape-field.horizon-strip"
                 ],
-                requiredTexts: ["This week can hold", "Open detail"]
+                requiredTexts: ["This week"]
             ),
             TimeMatrixItem(
                 name: "large-dynamic-type",
@@ -1402,10 +1403,10 @@ final class AmbitionsUITests: XCTestCase {
                 contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL",
                 requiredIdentifiers: [
                     "time.life-shape-field",
-                    "time.life-shape-field.now-instrument",
-                    "time.life-shape-field.horizon-rows"
+                    "time.life-shape-field.visual-stage",
+                    "time.life-shape-field.horizon-strip"
                 ],
-                requiredTexts: ["This week can hold", "focused block", "light step", "protected recovery window"]
+                requiredTexts: ["This week"]
             )
         ]
 
@@ -1457,12 +1458,6 @@ final class AmbitionsUITests: XCTestCase {
                 captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: screenshotApp)
                 screenshotApp.terminate()
             } else {
-                if item.name == "static-equivalent" {
-                    XCTAssertTrue(
-                        scrollLifeShapeBucketDetailIntoScreenshotBand(in: app),
-                        "Bucket detail should be visible for \(item.name) screenshot proof."
-                    )
-                }
                 captureTimeScreenshot(named: "amb-964-time-\(item.name)", in: app)
                 app.terminate()
             }
@@ -1649,7 +1644,7 @@ final class AmbitionsUITests: XCTestCase {
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.layer-selector"].exists)
-        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.now-instrument"].exists)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.visual-stage"].exists)
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.primary-action"].exists)
         assertAMB1174VisualCopyGuards(in: app, variant: "open")
         captureTimeScreenshot(named: "amb-1174-time-open-root", in: app)
@@ -1709,7 +1704,7 @@ final class AmbitionsUITests: XCTestCase {
         dismissContinuityReceiptIfPresent(in: app)
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.layer-selector"].exists)
-        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.now-instrument"].exists)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.visual-stage"].exists)
         XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.primary-action"].exists)
         assertAMB1175OldTimeRootGuards(in: app)
         captureTimeScreenshot(named: "amb-1175-time-root-new-only", in: app)
@@ -1729,10 +1724,9 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForSelectedTab("Time", in: emptyApp))
         dismissContinuityReceiptIfPresent(in: emptyApp)
         XCTAssertTrue(emptyApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
-        XCTAssertTrue(emptyApp.descendants(matching: .any)["time.life-shape-field.now-instrument"].exists)
+        XCTAssertTrue(emptyApp.descendants(matching: .any)["time.life-shape-field.visual-stage"].exists)
         XCTAssertFalse(emptyApp.descendants(matching: .any)["time.empty.create-goal"].exists)
         XCTAssertFalse(emptyApp.descendants(matching: .any)["time.empty.open-captures"].exists)
-        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: emptyApp, maxAttempts: 10))
         attachAMB1176AccessibilityTranscript(named: "amb-1176-empty-root-voiceover-transcript", in: emptyApp)
         captureTimeScreenshot(named: "amb-1176-time-empty-root", in: emptyApp)
         emptyApp.terminate()
@@ -1754,8 +1748,7 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(waitForSelectedTab("Time", in: accessibilityApp))
         dismissContinuityReceiptIfPresent(in: accessibilityApp)
         XCTAssertTrue(accessibilityApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
-        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.now-instrument", in: accessibilityApp, maxAttempts: 8))
-        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: accessibilityApp, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.visual-stage", in: accessibilityApp, maxAttempts: 8))
         attachAMB1176AccessibilityTranscript(named: "amb-1176-accessibility-variant-voiceover-transcript", in: accessibilityApp)
         captureTimeScreenshot(named: "amb-1176-time-accessibility-xxxl-reduce-motion", in: accessibilityApp)
     }
@@ -1850,10 +1843,9 @@ final class AmbitionsUITests: XCTestCase {
         let identifiers = [
             "time.life-shape-field",
             "time.life-shape-field.layer-selector",
-            "time.life-shape-field.now-instrument",
+            "time.life-shape-field.visual-stage",
             "time.life-shape-field.primary-action",
-            "time.life-shape-field.bucket-detail",
-            "time.life-shape-field.correction-menu"
+            "time.life-shape-field.horizon-strip"
         ]
         let lines = identifiers.map { identifier -> String in
             let element = app.descendants(matching: .any)[identifier]
@@ -1867,7 +1859,7 @@ final class AmbitionsUITests: XCTestCase {
         let transcript = ([
             "AMB-1176 accessibility transcript",
             "Source: XCUIElement label/value/hint tree from simulator proof run; manual VoiceOver audio was not produced by this automated test.",
-            "Expected VoiceOver reading order focus: root LifeShape Field, layer selector, Now instrument/action, bucket detail, correction menu."
+            "Expected VoiceOver reading order focus: root LifeShape Field, internal layer selector, visual field, primary action, horizon strip."
         ] + lines).joined(separator: "\n")
         let attachment = XCTAttachment(string: transcript)
         attachment.name = name

@@ -12,12 +12,12 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
     let visualState: AmbitionVisualState
     let pressureLevel: Double
     let capacityLabel: String
-    let capacityContourLabel: String
-    let protectedPocketLabel: String
+    let capacityShapeLabel: String
+    let protectedTimeLabel: String
     let pressureFieldLabel: String
-    let recoveryPocketLabel: String
-    let milestoneRidgeLabel: String
-    let commitmentLoadContourLabel: String
+    let recoveryRoomLabel: String
+    let milestoneAnchorLabel: String
+    let commitmentLoadLabel: String
     let schedulePressureLabel: String
     let proofOpportunityLabel: String
     let provenanceLabel: String
@@ -37,12 +37,12 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
         self.visualState = shape.visualState
         self.pressureLevel = Self.pressureLevel(for: shape)
         self.capacityLabel = Self.capacityLabel(for: shape)
-        self.capacityContourLabel = "Capacity contour: \(Self.capacityLabel(for: shape))."
-        self.protectedPocketLabel = Self.protectedPocketLabel(for: shape)
+        self.capacityShapeLabel = "Capacity: \(Self.capacityLabel(for: shape))."
+        self.protectedTimeLabel = Self.protectedTimeLabel(for: shape)
         self.pressureFieldLabel = Self.pressureFieldLabel(for: shape)
-        self.recoveryPocketLabel = Self.recoveryPocketLabel(for: shape)
-        self.milestoneRidgeLabel = Self.milestoneRidgeLabel(for: shape)
-        self.commitmentLoadContourLabel = Self.commitmentLoadContourLabel(for: shape)
+        self.recoveryRoomLabel = Self.recoveryRoomLabel(for: shape)
+        self.milestoneAnchorLabel = Self.milestoneAnchorLabel(for: shape)
+        self.commitmentLoadLabel = Self.commitmentLoadLabel(for: shape)
         self.schedulePressureLabel = shape.schedulePressureLabel
         self.proofOpportunityLabel = shape.proofOpportunityLabel
         self.provenanceLabel = shape.provenanceLabel
@@ -55,12 +55,12 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
     var accessibilityLabel: String {
         [
             title,
-            capacityContourLabel,
-            protectedPocketLabel,
+            capacityShapeLabel,
+            protectedTimeLabel,
             pressureFieldLabel,
-            recoveryPocketLabel,
-            milestoneRidgeLabel,
-            commitmentLoadContourLabel,
+            recoveryRoomLabel,
+            milestoneAnchorLabel,
+            commitmentLoadLabel,
             schedulePressureLabel,
             proofOpportunityLabel,
             provenanceLabel,
@@ -75,10 +75,10 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
     var lifeShapeInspectionSummary: String {
         [
             "Schedule reality: \(summary)",
-            "Free capacity: \(capacityContourLabel)",
-            "Protected time: \(protectedPocketLabel)",
+            "Free capacity: \(capacityShapeLabel)",
+            "Protected time: \(protectedTimeLabel)",
             "Pressure: \(pressureFieldLabel)",
-            "Milestones: \(milestoneRidgeLabel)",
+            "Milestones: \(milestoneAnchorLabel)",
             "Schedule pressure: \(schedulePressureLabel)",
             "Proof opportunity: \(proofOpportunityLabel)",
             "Provenance: \(provenanceLabel)",
@@ -92,7 +92,7 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
     }
 
     var accessibilityHint: String {
-        "Selects this LifeShape Field contour without changing Time or calendar."
+        "Selects this LifeShape Field shape without changing Time or calendar."
     }
 
     static func pressureLevel(for shape: TimeLifeSuiteShapeState) -> Double {
@@ -126,7 +126,7 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
     static func recoveryLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
-            return "Recovery: protect the clearest pocket."
+            return "Recovery: protect the clearest opening."
         case .week:
             return "Recovery: lighten the loudest pressure first."
         case .life:
@@ -134,14 +134,14 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    static func protectedPocketLabel(for shape: TimeLifeSuiteShapeState) -> String {
+    static func protectedTimeLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
-            return "Protected pocket: keep the clearest opening guarded."
+            return "Protected time: keep the clearest opening guarded."
         case .week:
-            return "Protected pocket: reserve one lighter lane before adding more."
+            return "Protected time: reserve one lighter opening before adding more."
         case .life:
-            return "Protected pocket: keep direction wider than today's slots."
+            return "Protected time: keep direction wider than today's slots."
         }
     }
 
@@ -156,36 +156,36 @@ struct LifeShapeFieldItem: Identifiable, Sendable, Hashable {
         }
     }
 
-    static func recoveryPocketLabel(for shape: TimeLifeSuiteShapeState) -> String {
+    static func recoveryRoomLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
-            return "Recovery pocket: space before the next ask."
+            return "Recovery room: space before the next ask."
         case .week:
-            return "Recovery pocket: lighten one pressured day first."
+            return "Recovery room: lighten one pressured day first."
         case .life:
-            return "Recovery pocket: preserve room for the next season."
+            return "Recovery room: preserve room for the next season."
         }
     }
 
-    static func milestoneRidgeLabel(for shape: TimeLifeSuiteShapeState) -> String {
+    static func milestoneAnchorLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.kind {
         case .day:
-            return "Milestone ridge: today's clearest Time edge."
+            return "Milestone anchor: today's clearest Time edge."
         case .week:
-            return "Milestone ridge: the week bends around active goals."
+            return "Milestone anchor: the week bends around active goals."
         case .life:
-            return "Milestone ridge: active goals anchor the longer arc."
+            return "Milestone anchor: active goals guide the longer arc."
         }
     }
 
-    static func commitmentLoadContourLabel(for shape: TimeLifeSuiteShapeState) -> String {
+    static func commitmentLoadLabel(for shape: TimeLifeSuiteShapeState) -> String {
         switch shape.visualState {
         case .warning:
-            return "Commitment load contour: tight, qualitative only."
+            return "Commitment load: tight, qualitative only."
         case .disabled:
-            return "Commitment load contour: unavailable."
+            return "Commitment load: unavailable."
         default:
-            return "Commitment load contour: reviewable, not measured as a number."
+            return "Commitment load: reviewable, not measured as a number."
         }
     }
 
@@ -218,4 +218,3 @@ enum TimeLifeShapeZoomLevel: String, CaseIterable {
         }
     }
 }
-

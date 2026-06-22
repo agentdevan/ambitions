@@ -30,7 +30,7 @@ extension LifeShapeFieldView {
         LifeShapeFieldVisualField(
             reading: reading,
             field: suite.field,
-            selectedLayer: selectedLayer,
+            selectedLayer: $selectedLayer,
             selectedMarks: Array(selectedLayerMarks),
             selectedMark: selectedMark,
             primaryActionTitle: primaryActionTitle,
@@ -106,7 +106,7 @@ extension LifeShapeFieldView {
             Image(systemName: mark.kind.systemImage)
                 .font(.system(size: 12, weight: .semibold))
                 .frame(width: 16)
-            Text("\(mark.kind.semanticMeaning): \(mark.valueLabel)")
+            Text("\(mark.kind.title): \(mark.valueLabel)")
                 .font(theme.typography.micro)
                 .lineLimit(compact ? 2 : 1)
                 .minimumScaleFactor(compact ? 0.64 : 0.68)

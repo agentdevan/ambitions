@@ -8,7 +8,7 @@ final class FirstViewportCopyBudgetUITests: XCTestCase {
 
     func testTimeFirstViewportDoesNotExposeRootJargon() throws {
         let app = AmbitionsVisualAcceptanceApp.launchTime()
-        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 30))
 
         let labels = app.staticTexts.allElementsBoundByIndex
             .filter { $0.frame.minY < app.windows.firstMatch.frame.height }

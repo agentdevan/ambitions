@@ -18,13 +18,18 @@ struct LifeShapeLayerSelector: View {
                     selection = layer
                 } label: {
                     layerContent(for: layer)
-                        .foregroundStyle(selection == layer ? theme.colors.canvas : theme.colors.textPrimary)
+                        .foregroundStyle(selection == layer ? theme.colors.textPrimary : theme.colors.textSecondary)
                         .frame(maxWidth: .infinity, minHeight: accessibilityCompact ? 56 : 44)
                         .padding(.horizontal, accessibilityCompact ? theme.spacing.xs : theme.spacing.sm)
-                        .background(layerFill(selected: selection == layer))
+                        .background(layerFill(for: layer, selected: selection == layer))
                         .overlay {
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .stroke(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.82 : 0.42), lineWidth: 1)
+                                .stroke(
+                                    selection == layer
+                                        ? layer.selectorTint.opacity(colorSchemeContrast == .increased ? 0.92 : 0.68)
+                                        : theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.82 : 0.42),
+                                    lineWidth: selection == layer ? 1.4 : 1
+                                )
                         }
                         .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
                 }
@@ -38,12 +43,12 @@ struct LifeShapeLayerSelector: View {
         .accessibilityIdentifier("time.life-shape-field.layer-selector")
     }
 
-    private func layerFill(selected: Bool) -> some ShapeStyle {
+    private func layerFill(for layer: LifeShapeLayer, selected: Bool) -> some ShapeStyle {
         LinearGradient(
             colors: selected
                 ? [
-                    theme.colors.textPrimary.opacity(0.98),
-                    theme.colors.textPrimary.opacity(colorSchemeContrast == .increased ? 0.94 : 0.82)
+                    layer.selectorTint.opacity(colorSchemeContrast == .increased ? 0.42 : 0.30),
+                    theme.colors.surfaceOverlay.opacity(reduceTransparency ? 0.92 : 0.62)
                 ]
                 : [
                     theme.colors.surfaceOverlay.opacity(reduceTransparency ? 0.88 : 0.54),
@@ -71,6 +76,19 @@ struct LifeShapeLayerSelector: View {
 }
 
 private extension LifeShapeLayer {
+    var selectorTint: Color {
+        switch self {
+        case .open:
+            Color(red: 0.48, green: 0.95, blue: 0.60)
+        case .protected:
+            Color(red: 0.28, green: 0.58, blue: 1.0)
+        case .pressure:
+            Color(red: 1.0, green: 0.55, blue: 0.20)
+        case .buffer:
+            Color(red: 0.68, green: 0.38, blue: 1.0)
+        }
+    }
+
     var selectorSymbolName: String {
         switch self {
         case .open:

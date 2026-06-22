@@ -58,9 +58,9 @@ extension LifeShapeLayer {
         case .open:
             "usable windows"
         case .protected:
-            "protected pockets"
+            "protected time"
         case .pressure:
-            mark?.kind.semanticMeaning ?? "pressure contour"
+            mark?.kind.title ?? "pressure visible"
         case .buffer:
             "transition room"
         }
@@ -71,11 +71,11 @@ extension LifeShapeLayer {
         case .open:
             "Usable light window"
         case .protected:
-            "Protected pocket"
+            "Protected time"
         case .pressure:
-            mark?.kind.semanticMeaning ?? "Pressure ridge"
+            mark?.kind.title ?? "Pressure"
         case .buffer:
-            "Buffer lane"
+            "Buffer"
         }
     }
 
@@ -132,7 +132,7 @@ extension LifeShapeSemanticMarkKind {
         case .physicalEnergy:
             "Energy"
         case .transitionFriction:
-            "Bridge"
+            "Transition"
         case .protectedTime:
             "Protected"
         case .recoveryNeed:
@@ -140,7 +140,7 @@ extension LifeShapeSemanticMarkKind {
         case .freeTimeQuality:
             "Open"
         case .executionLanes:
-            "Lane"
+            "Room"
         case .goalLoad:
             "Goal"
         case .sourceConflict:

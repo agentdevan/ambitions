@@ -31,7 +31,6 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         let root = repoRoot()
         let requiredPaths = [
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift",
-            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeHorizonRow.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeWhyThisInspection.swift",
@@ -43,18 +42,23 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         }
 
         let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let canvas = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift", root: root)
+        let visualField = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift", root: root)
+        let combinedRoot = [rootView, canvas, visualField].joined(separator: "\n")
         let bucketDetail = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift", root: root)
-        XCTAssertTrue(rootView.contains("LifeShapeLayerSelector"))
-        XCTAssertTrue(rootView.contains("LifeShapeNowInstrument"))
-        XCTAssertTrue(rootView.contains("LifeShapeHorizonRowView"))
-        XCTAssertTrue(rootView.contains("LifeShapeBucketDetail"))
+        XCTAssertFalse(rootView.contains("var contextCrown"))
+        XCTAssertFalse(rootView.contains("LifeShapeLayerSelector(selection:"))
+        XCTAssertFalse(rootView.contains("LifeShapeNowInstrument"))
+        XCTAssertTrue(visualField.contains("LifeShapeLayerSelector(selection: $selectedLayer)"))
+        XCTAssertTrue(visualField.contains("time.life-shape-field.primary-object"))
+        XCTAssertTrue(combinedRoot.contains("LifeShapeBucketDetail"))
         XCTAssertTrue(bucketDetail.contains("LifeShapeWhyThisInspection"))
         XCTAssertTrue(rootView.contains("LifeShapeCorrectionMenu"))
         XCTAssertTrue(rootView.contains("LifeShapeMutationProofBanner"))
-        XCTAssertTrue(rootView.contains("onMutationAction?(.placeStep"))
-        XCTAssertTrue(rootView.contains("onMutationAction?(.protectWindow"))
-        XCTAssertTrue(rootView.contains("onMutationAction?(.makeTodayLighter"))
-        XCTAssertTrue(rootView.contains("onMutationAction?(.addBuffer"))
+        XCTAssertTrue(combinedRoot.contains("onMutationAction?(.placeStep"))
+        XCTAssertTrue(combinedRoot.contains("onMutationAction?(.protectWindow"))
+        XCTAssertTrue(combinedRoot.contains("onMutationAction?(.makeTodayLighter"))
+        XCTAssertTrue(combinedRoot.contains("onMutationAction?(.addBuffer"))
         XCTAssertTrue(rootView.contains("onMutationAction?(.notUsable"))
         XCTAssertTrue(rootView.contains("onMutationAction?(.keepClear"))
         XCTAssertFalse(rootView.contains("sourceReceiptRow"))
@@ -88,7 +92,7 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
     func testAMB1171ExposesPressureLayerWithMinimumHitTargetsAndOrdinalCopy() throws {
         let root = repoRoot()
         let selector = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root)
-        let now = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift", root: root)
+        let visualField = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift", root: root)
         let correction = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeCorrectionMenu.swift", root: root)
         let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
         let pressurePresentation = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView+PressurePresentation.swift", root: root)
@@ -110,24 +114,24 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         XCTAssertFalse(bufferPresentation.localizedCaseInsensitiveContains("diagnosis"))
         XCTAssertFalse(pressurePresentation.localizedCaseInsensitiveContains("82% pressure"))
         XCTAssertFalse(pressurePresentation.localizedCaseInsensitiveContains("poor productivity"))
-        XCTAssertTrue(selector.contains("minHeight: 44"))
-        XCTAssertTrue(now.contains("minHeight: 52"))
+        XCTAssertTrue(selector.contains("minHeight: accessibilityCompact ? 56 : 44"))
+        XCTAssertTrue(visualField.contains("minHeight: 44"))
         XCTAssertTrue(correction.contains("minHeight: 44"))
     }
 
     func testAMB1174VisualFlagshipPassAvoidsWeatherCloneAndThinBars() throws {
         let root = repoRoot()
         let selector = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root)
-        let now = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift", root: root)
         let canvas = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift", root: root)
+        let visualField = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift", root: root)
         let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
-        let scanned = [selector, now, canvas, rootView].joined(separator: "\n")
+        let scanned = [selector, canvas, visualField, rootView].joined(separator: "\n")
 
         XCTAssertTrue(canvas.contains("graphiteRecess"))
         XCTAssertTrue(canvas.contains("suite.field.semanticMarks.prefix(2)"))
-        XCTAssertTrue(now.contains("frame(width: colorSchemeContrast == .increased ? 6 : 5)"))
-        XCTAssertFalse(now.contains(".buttonStyle(.borderedProminent)"))
-        XCTAssertTrue(now.contains("accessibilityReduceTransparency"))
+        XCTAssertTrue(visualField.contains("time.life-shape-field.primary-object"))
+        XCTAssertFalse(visualField.contains(".buttonStyle(.borderedProminent)"))
+        XCTAssertTrue(visualField.contains("accessibilityReduceTransparency"))
         XCTAssertTrue(selector.contains("accessibilityReduceTransparency"))
         XCTAssertFalse(scanned.localizedCaseInsensitiveContains("rain"))
         XCTAssertFalse(scanned.localizedCaseInsensitiveContains("droplet"))

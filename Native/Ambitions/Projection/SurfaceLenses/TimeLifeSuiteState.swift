@@ -69,7 +69,7 @@ struct TimeLifeSuiteState: Sendable {
             sourceState: LifeShapeSourceState(title: calendarBoundaryLabel, detail: manualFallbackLabel, whyThisLabel: trustLabel, privacyLabel: "Local Time state; no silent calendar write.", visualState: .selected),
             reflowProposal: LifeShapeReflowProposal(title: "Review stays optional", detail: "Time can suggest relief only after capacity is clear.", actionTitle: "Review shape", visualState: fit.visualState),
             receipt: LifeShapeReceipt(title: "Changes stay reviewable", detail: trustLabel, ageLabel: "Current", visualState: .selected),
-            continuityDockItems: ["Open field", "Protect pocket", "Review receipt"]
+            continuityDockItems: ["Open field", "Protect time", "Review change"]
         )
     }
 
@@ -94,7 +94,7 @@ struct TimeLifeSuiteState: Sendable {
                 visualState: visualState,
                 inputRefs: [localInput],
                 ruleIDs: [LifeShapeRuleID(rawValue: "lifeshape.baseline.\(kind.rawValue)")],
-                accessibilitySummary: "\(kind.title). \(kind.semanticMeaning). \(valueLabel). \(detail)"
+                accessibilitySummary: "\(kind.title). \(valueLabel). \(detail)"
             )
         }
 
@@ -102,12 +102,12 @@ struct TimeLifeSuiteState: Sendable {
             mark(kind: .pressure, valueLabel: pressureKind.title, detail: "Pressure is qualitative and text-labeled.", intensity: fit == .tight ? 0.70 : 0.34, visualState: fit.visualState),
             mark(kind: .cognitiveLoad, valueLabel: "Reviewable", detail: "Mental load stays visible as text and mark.", intensity: 0.42, visualState: .default),
             mark(kind: .physicalEnergy, valueLabel: "Unloaded", detail: "Energy state is quiet until local context changes.", intensity: 0.30, visualState: .default),
-            mark(kind: .transitionFriction, valueLabel: "Smooth", detail: "No narrowed bridge is active.", intensity: 0.26, visualState: .default),
-            mark(kind: .protectedTime, valueLabel: "Protected", detail: "Protected time uses a preserved boundary.", intensity: 0.38, visualState: .selected),
-            mark(kind: .recoveryNeed, valueLabel: "Reserve", detail: "Recovery need is a reserve pocket.", intensity: 0.34, visualState: .default),
-            mark(kind: .freeTimeQuality, valueLabel: "Available", detail: "Free-time quality appears as lane quality.", intensity: 0.52, visualState: .selected),
-            mark(kind: .executionLanes, valueLabel: "Open lanes", detail: "Execution lanes show where action can fit.", intensity: 0.48, visualState: .selected),
-            mark(kind: .goalLoad, valueLabel: "Anchored", detail: "Goal load is an anchored lane.", intensity: 0.44, visualState: .selected)
+            mark(kind: .transitionFriction, valueLabel: "Smooth", detail: "No transition pressure is active.", intensity: 0.26, visualState: .default),
+            mark(kind: .protectedTime, valueLabel: "Protected", detail: "Protected time stays visible.", intensity: 0.38, visualState: .selected),
+            mark(kind: .recoveryNeed, valueLabel: "Reserve", detail: "Recovery need keeps room available.", intensity: 0.34, visualState: .default),
+            mark(kind: .freeTimeQuality, valueLabel: "Available", detail: "Free-time quality shows available room.", intensity: 0.52, visualState: .selected),
+            mark(kind: .executionLanes, valueLabel: "Open time", detail: "Open time shows where action can fit.", intensity: 0.48, visualState: .selected),
+            mark(kind: .goalLoad, valueLabel: "Anchored", detail: "Goal load follows active goals.", intensity: 0.44, visualState: .selected)
         ]
     }
 }
@@ -157,7 +157,7 @@ struct TimeLifeShapeDrillDownState: Sendable {
         physicalEnergyLabel: "Physical energy: no physical-energy pressure loaded.",
         transitionFrictionLabel: "Transition friction: no transition pressure loaded.",
         freeTimeQualityLabel: "Free-time quality: not yet measured.",
-        executionLanesLabel: "Execution lanes: no active lane pressure loaded.",
+        executionLanesLabel: "Open time: no active time pressure loaded.",
         goalLoadLabel: "Goal load: no goal-load detail loaded.",
         items: []
     )

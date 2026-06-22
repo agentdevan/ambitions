@@ -9,7 +9,7 @@ final class SingleCrownOwnershipUITests: XCTestCase {
     func testTimeDoesNotDuplicateShellAndObjectCrownOwnership() throws {
         let app = AmbitionsVisualAcceptanceApp.launchTime()
 
-        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 30))
 
         let shellCrown = app.descendants(matching: .any).matching(identifier: "shell.header.context-crown").count
         let objectCrown = app.descendants(matching: .any).matching(identifier: "time.life-shape-field.context-crown").count

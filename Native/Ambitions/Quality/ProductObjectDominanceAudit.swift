@@ -30,8 +30,8 @@ enum ProductObjectDominanceAudit {
                     detail: "LifeShapeNowInstrument is reachable as root sibling anatomy."
                 ))
             }
-            if ordered(body, "lifeShapeHorizonRows", before: "LifeShapeBucketDetail") == false,
-               body.contains("LifeShapeBucketDetail") {
+            if body.contains("LifeShapeBucketDetail"),
+               body.contains("if selectedMarkID != nil") == false {
                 findings.append(LifeShapeAuditFinding(
                     id: "dominance.detail-root-sibling",
                     path: file.path,

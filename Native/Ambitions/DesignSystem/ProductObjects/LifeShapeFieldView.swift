@@ -198,8 +198,6 @@ struct LifeShapeFieldView: View {
         )
 
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            contextCrown
-            LifeShapeLayerSelector(selection: $selectedLayer)
             if Self.screenshotFocusesQuietReflow() {
                 reflowTrustSeam
             }
@@ -210,7 +208,23 @@ struct LifeShapeFieldView: View {
                 )
             }
             objectCanvas
-            lifeShapeHorizonRows
+            if selectedMarkID != nil {
+                selectedBucketInspection
+            }
+            if Self.screenshotFocusesQuietReflow() == false,
+               revealsPressure || confirmedReflowAction != nil {
+                reflowTrustSeam
+            }
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("time.life-shape-field")
+        .accessibilityValue("\(accessibilityValue). \(TimeAccessibility.rootSummary(for: stageScene))")
+        .modifier(LifeShapeMutationHapticModifier(mutation: visibleMutation))
+    }
+
+    @ViewBuilder
+    var selectedBucketInspection: some View {
+        VStack(alignment: .leading, spacing: theme.spacing.xs) {
             LifeShapeBucketDetail(
                 layer: selectedLayer,
                 mark: selectedMark,
@@ -225,97 +239,9 @@ struct LifeShapeFieldView: View {
                     onMutationAction?(.keepClear, selectedMark)
                 }
             )
-            if Self.screenshotFocusesQuietReflow() == false,
-               revealsPressure || confirmedReflowAction != nil {
-                reflowTrustSeam
-            }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("time.life-shape-field")
-        .accessibilityValue("\(accessibilityValue). \(TimeAccessibility.rootSummary(for: stageScene))")
-        .modifier(LifeShapeMutationHapticModifier(mutation: visibleMutation))
-    }
-
-    @ViewBuilder
-    var contextCrown: some View {
-        let accessibilityCompact = dynamicTypeSize.isAccessibilitySize
-        HStack(alignment: .center, spacing: theme.spacing.sm) {
-            HStack(spacing: theme.spacing.xs) {
-                Text("Time")
-                    .font(accessibilityCompact ? .system(size: 34, weight: .semibold) : theme.typography.section.weight(.semibold))
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.72)
-
-                if accessibilityCompact {
-                    HStack(spacing: 4) {
-                        Text("Week")
-                            .font(.system(size: 16, weight: .semibold))
-                        Image(systemName: "chevron.down")
-                            .font(.system(size: 16, weight: .semibold))
-                    }
-                    .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
-                    .accessibilityHidden(true)
-                } else {
-                    Label("This week", systemImage: "chevron.down")
-                        .font(theme.typography.caption.weight(.semibold))
-                        .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
-                        .labelStyle(.titleAndIcon)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.72)
-                }
-            }
-            .accessibilityElement(children: .ignore)
-            .accessibilityLabel("Time, This week")
-
-            Spacer(minLength: theme.spacing.sm)
-
-            contextCrownActions
-        }
-        .accessibilityIdentifier("time.life-shape-field.context-crown")
-    }
-
-    var contextCrownActions: some View {
-        HStack(spacing: theme.spacing.xs) {
-            Button {
-                onSearch?()
-            } label: {
-                Label("Search", systemImage: "magnifyingglass")
-                    .labelStyle(.iconOnly)
-                    .font(.system(size: dynamicTypeSize.isAccessibilitySize ? 30 : 24, weight: .regular))
-                    .frame(width: 44, height: 44)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Search")
-            .accessibilityIdentifier("time.context-crown.search")
-
-            Button {
-                onCapture?()
-            } label: {
-                Label("Capture", systemImage: "plus")
-                    .labelStyle(.iconOnly)
-                    .font(.system(size: dynamicTypeSize.isAccessibilitySize ? 32 : 25, weight: .regular))
-                    .frame(width: 44, height: 44)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Capture")
-            .accessibilityIdentifier("time.context-crown.capture")
-        }
-    }
-
-    var lifeShapeHorizonRows: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            ForEach(selectedLayerMarks) { mark in
-                LifeShapeHorizonRowView(
-                    mark: mark,
-                    selected: selectedMark?.id == mark.id
-                ) {
-                    selectedMarkID = mark.id
-                }
-            }
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("time.life-shape-field.horizon-rows")
+        .accessibilityIdentifier("time.life-shape-field.selected-inspection")
     }
 
     var accessibilityValue: String {

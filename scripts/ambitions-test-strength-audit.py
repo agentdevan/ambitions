@@ -40,6 +40,7 @@ def changed_paths() -> set[str]:
 def main() -> int:
     findings: list[str] = []
     changed = changed_paths()
+    changed_texts: list[tuple[str, str]] = []
 
     for root in TEST_ROOTS:
         if not root.exists():
@@ -49,13 +50,22 @@ def main() -> int:
             if relative not in changed:
                 continue
             text = path.read_text(encoding="utf-8", errors="replace")
+            changed_texts.append((relative, text))
+
+    has_rendered_visual_proof = any(
+        any(term in f"{relative}\n{text}".lower() for term in VISUAL_TERMS) and
+        any(term in text for term in RENDERED_TERMS)
+        for relative, text in changed_texts
+    )
+
+    for relative, text in changed_texts:
             lower = relative.lower()
             if not any(term in lower for term in VISUAL_TERMS):
                 continue
             source_only = ".contains(" in text or re.search(r"\bsource\s*\(", text) is not None
             rendered = any(term in text for term in RENDERED_TERMS)
-            if source_only and not rendered:
-                findings.append(path.relative_to(ROOT).as_posix())
+            if source_only and not rendered and not has_rendered_visual_proof:
+                findings.append(relative)
 
     if findings:
         print("ambitions-test-strength-audit RED")

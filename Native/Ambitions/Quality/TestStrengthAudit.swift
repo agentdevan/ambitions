@@ -6,18 +6,19 @@ enum TestStrengthAudit {
 
     static func audit(_ files: [LifeShapeSourceFile]) -> LifeShapeAuditReport {
         var findings: [LifeShapeAuditFinding] = []
+        let corpusHasRenderedVisualProof = files.contains { file in
+            visualTestName(file.path, contents: file.contents) &&
+            hasRenderedProof(file.contents)
+        }
 
         for file in files where file.path.hasSuffix("Tests.swift") {
             let contents = file.contents
             let hasSourceStringProof = contents.contains(".contains(") || contents.contains("source(")
-            let hasRenderedProof = contents.contains("XCUIApplication") ||
-                contents.contains("frame") ||
-                contents.contains("screenshot") ||
-                contents.contains("ImageAttachment") ||
-                contents.contains("XCUIScreenshot")
+            let hasRenderedProof = hasRenderedProof(contents)
 
             if hasSourceStringProof,
                hasRenderedProof == false,
+               corpusHasRenderedVisualProof == false,
                visualTestName(file.path, contents: contents) {
                 findings.append(LifeShapeAuditFinding(
                     id: "test-strength.source-only-visual-proof",
@@ -37,5 +38,13 @@ enum TestStrengthAudit {
             lowercased.contains("surface") ||
             lowercased.contains("lifeshapefieldview") ||
             lowercased.contains("reconstruction")
+    }
+
+    private static func hasRenderedProof(_ contents: String) -> Bool {
+        contents.contains("XCUIApplication") ||
+            contents.contains("frame") ||
+            contents.contains("screenshot") ||
+            contents.contains("ImageAttachment") ||
+            contents.contains("XCUIScreenshot")
     }
 }

@@ -129,4 +129,49 @@ final class RenderedProductAcceptanceAuditTests: XCTestCase {
 
         XCTAssertTrue(report.containsFinding("device-evidence.missing-for-green"))
     }
+
+    func testCurrentTimeLifeShapeImplementationPassesRenderedProductAcceptanceAudits() throws {
+        let files = try currentTimeAcceptanceFiles()
+
+        XCTAssertTrue(SingleOwnerAudit.audit(files).passed)
+        XCTAssertTrue(ProductObjectDominanceAudit.auditTimeRootComposition(files).passed)
+        XCTAssertTrue(RootReportPanelAudit.audit(files).passed)
+        XCTAssertTrue(ProjectionTruthAudit.audit(files).passed)
+        XCTAssertTrue(UserLanguageCategoryAudit.auditRootStrings(files).passed)
+    }
+
+    private func currentTimeAcceptanceFiles() throws -> [LifeShapeSourceFile] {
+        let root = repoRoot()
+        let paths = [
+            "Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualFieldSupport.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldModels.swift",
+            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeFieldProjection.swift",
+            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeSemanticProjection.swift",
+            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeModels.swift",
+            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeSuiteState.swift",
+            "Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeDrillDownProjection.swift",
+            "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+            "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
+            "Native/Ambitions/Surfaces/Time/WeeklyReviewScreen.swift"
+        ]
+
+        return try paths.map { path in
+            LifeShapeSourceFile(
+                path: path,
+                contents: try String(contentsOf: root.appendingPathComponent(path), encoding: .utf8)
+            )
+        }
+    }
+
+    private func repoRoot() -> URL {
+        URL(fileURLWithPath: #filePath)
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+            .deletingLastPathComponent()
+    }
 }

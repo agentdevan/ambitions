@@ -290,7 +290,7 @@ private struct WeeklyReviewContextSurface: View {
             VStack(alignment: .leading, spacing: theme.spacing.md) {
                 SectionHeader(
                     title: "Constrained split view",
-                    subtitle: "One dominant carry-forward lane plus one compact context pane keeps Weekly Review legible on iPhone."
+                    subtitle: "One dominant carry-forward path plus one compact context pane keeps Weekly Review legible on iPhone."
                 )
 
                 VStack(alignment: .leading, spacing: theme.spacing.sm) {

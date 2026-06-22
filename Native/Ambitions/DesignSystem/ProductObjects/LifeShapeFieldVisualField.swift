@@ -11,7 +11,7 @@ struct LifeShapeFieldVisualField: View {
 
     let reading: LifeShapeReading
     let field: LifeShapeFieldState
-    let selectedLayer: LifeShapeLayer
+    @Binding var selectedLayer: LifeShapeLayer
     let selectedMarks: [LifeShapeSemanticMark]
     let selectedMark: LifeShapeSemanticMark?
     let primaryActionTitle: String
@@ -33,7 +33,7 @@ struct LifeShapeFieldVisualField: View {
         .accessibilityElement(children: .contain)
         .accessibilityLabel("LifeShape Field")
         .accessibilityValue(accessibilityValue)
-        .accessibilityIdentifier("time.life-shape-field.now-instrument")
+        .accessibilityIdentifier("time.life-shape-field.primary-object")
     }
 
     private var fieldStage: some View {
@@ -47,6 +47,7 @@ struct LifeShapeFieldVisualField: View {
                 nowSweep(in: size)
                 fixedPoints(in: size)
                 centerReadout
+                fieldLayerSelector
                 bottomActionCard
             }
             .frame(width: size.width, height: size.height)
@@ -63,7 +64,7 @@ struct LifeShapeFieldVisualField: View {
         .accessibilityElement(children: .contain)
         .accessibilityLabel("LifeShape visual field")
         .accessibilityValue(accessibilityValue)
-        .accessibilityIdentifier("time.life-shape-field.primary-object")
+        .accessibilityIdentifier("time.life-shape-field.visual-stage")
     }
 
     private var fieldBackground: some View {
@@ -249,6 +250,15 @@ struct LifeShapeFieldVisualField: View {
         .accessibilityHidden(true)
     }
 
+    private var fieldLayerSelector: some View {
+        VStack {
+            LifeShapeLayerSelector(selection: $selectedLayer)
+                .padding(.horizontal, theme.spacing.sm)
+                .padding(.top, theme.spacing.sm)
+            Spacer()
+        }
+    }
+
     private var bottomActionCard: some View {
         VStack {
             Spacer()
@@ -347,6 +357,7 @@ struct LifeShapeFieldVisualField: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Time horizons")
         .accessibilityValue(horizonRows.map { "\($0.title), \($0.value)" }.joined(separator: ". "))
+        .accessibilityIdentifier("time.life-shape-field.horizon-strip")
     }
 
     private var accessibilityValue: String {

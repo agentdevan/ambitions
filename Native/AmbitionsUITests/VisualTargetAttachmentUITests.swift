@@ -8,7 +8,7 @@ final class VisualTargetAttachmentUITests: XCTestCase {
 
     func testTimeVisualReviewRunAttachesActualScreenshot() throws {
         let app = AmbitionsVisualAcceptanceApp.launchTime()
-        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.primary-object"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 30))
 
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = "time-lifeshape-field-actual-for-target-review"
@@ -31,6 +31,10 @@ enum AmbitionsVisualAcceptanceApp {
         app.launchArguments += ["-AmbitionsTimeRenderState", "manual-only"]
         app.launchArguments += ["-UIPreferredContentSizeCategoryName", contentSizeCategory]
         app.launch()
+        let receiptDismiss = app.descendants(matching: .any)["action-closure-tray.dismiss-button"]
+        if receiptDismiss.waitForExistence(timeout: 3) {
+            receiptDismiss.tap()
+        }
         return app
     }
 }

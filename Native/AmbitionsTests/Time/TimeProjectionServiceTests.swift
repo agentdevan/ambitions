@@ -153,12 +153,12 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertTrue(weekShape.privacyLabel.localizedCaseInsensitiveContains("user choice"))
         XCTAssertEqual(
             weekItem.accessibilityHint,
-            "Selects this LifeShape Field contour without changing Time or calendar."
+            "Selects this LifeShape Field shape without changing Time or calendar."
         )
-        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.capacityContourLabel))
-        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.protectedPocketLabel))
+        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.capacityShapeLabel))
+        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.protectedTimeLabel))
         XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.pressureFieldLabel))
-        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.recoveryPocketLabel))
+        XCTAssertTrue(weekItem.accessibilityLabel.contains(weekItem.recoveryRoomLabel))
     }
 
     func testAMB964LifeShapeFieldUsesRequiredWeekCapacityLanguageAndActions() async throws {
@@ -174,8 +174,8 @@ final class TimeProjectionServiceTests: XCTestCase {
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift"),
             encoding: .utf8
         )
-        let nowInstrumentSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift"),
+        let visualFieldSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift"),
             encoding: .utf8
         )
         let rootViewSource = try String(
@@ -184,14 +184,16 @@ final class TimeProjectionServiceTests: XCTestCase {
         )
 
         XCTAssertEqual(timeState.lifeSuite.field.defaultHorizon, .week)
-        XCTAssertTrue(weekReading.capacityStatement.contains("This week can hold"))
-        XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("focused block"))
-        XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("light step"))
-        XCTAssertTrue(weekReading.capacityStatement.localizedCaseInsensitiveContains("protected recovery window"))
+        XCTAssertTrue(
+            weekReading.capacityStatement.contains("This week shows") ||
+            weekReading.capacityStatement.contains("This week is still taking shape")
+        )
+        XCTAssertFalse(weekReading.capacityStatement.localizedCaseInsensitiveContains("focused block"))
+        XCTAssertFalse(weekReading.capacityStatement.localizedCaseInsensitiveContains("light step"))
+        XCTAssertFalse(weekReading.capacityStatement.localizedCaseInsensitiveContains("protected recovery window"))
         XCTAssertTrue(source.contains("capacityStatement"))
-        XCTAssertTrue(nowInstrumentSource.contains("time.life-shape-field.primary-action"))
-        XCTAssertTrue(rootViewSource.contains("LifeShapeLayerSelector"))
-        XCTAssertTrue(rootViewSource.contains("LifeShapeHorizonRowView"))
+        XCTAssertTrue(visualFieldSource.contains("time.life-shape-field.primary-action"))
+        XCTAssertFalse(rootViewSource.contains("LifeShapeLayerSelector(selection:"))
         XCTAssertTrue(rootViewSource.contains("LifeShapeCorrectionMenu"))
         XCTAssertTrue(TimeObjectStagePrimitiveContract.current.replacesFirstViewportStructures.contains("metric-row stack"))
     }
@@ -287,29 +289,29 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertGreaterThan(weekItem.pressureLevel, 0.45)
         XCTAssertTrue(weekItem.capacityLabel.localizedCaseInsensitiveContains("pressure"))
         XCTAssertTrue(weekItem.recoveryLabel.localizedCaseInsensitiveContains("lighten"))
-        XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("LifeShape Field contour"))
+        XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("LifeShape Field shape"))
         XCTAssertTrue(weekItem.accessibilityHint.localizedCaseInsensitiveContains("without changing"))
         XCTAssertFalse(items.map(\.summary).joined(separator: " ").localizedCaseInsensitiveContains("calendar grid"))
     }
 
-    func testFCP14LifeShapeFieldItemsExposeContourPocketFieldAndRidgePrimitives() async throws {
+    func testFCP14LifeShapeFieldItemsExposeShapeTimeFieldAndMilestonePrimitives() async throws {
         let repositories = try await makeRepositories()
         try await repositories.goals.saveGoals([
-            makeWeekVisibleGoal(id: "contour-tight-1", title: "Contour one"),
-            makeWeekVisibleGoal(id: "contour-tight-2", title: "Contour two"),
-            makeWeekVisibleGoal(id: "contour-tight-3", title: "Contour three")
+            makeWeekVisibleGoal(id: "shape-tight-1", title: "Shape one"),
+            makeWeekVisibleGoal(id: "shape-tight-2", title: "Shape two"),
+            makeWeekVisibleGoal(id: "shape-tight-3", title: "Shape three")
         ])
         let timeState = try await RepositoryBackedTimeService(repositories: repositories).loadTimeSurfaceState(now: fixedDate)
         let items = timeState.lifeSuite.shapes.map(LifeShapeFieldItem.init(shape:))
         let combined = items.map(\.accessibilityLabel).joined(separator: " ")
 
         XCTAssertEqual(items.count, 3)
-        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Capacity contour"))
-        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Protected pocket"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Capacity"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Protected time"))
         XCTAssertTrue(combined.localizedCaseInsensitiveContains("Pressure field"))
-        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Recovery pocket"))
-        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Milestone ridge"))
-        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Commitment load contour"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Recovery room"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Milestone anchor"))
+        XCTAssertTrue(combined.localizedCaseInsensitiveContains("Commitment load"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("bar chart"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("calendar grid"))
         XCTAssertFalse(combined.localizedCaseInsensitiveContains("event grid"))
@@ -440,7 +442,7 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertTrue(drillDown.physicalEnergyLabel.contains("Physical energy"))
         XCTAssertTrue(drillDown.transitionFrictionLabel.contains("Transition friction"))
         XCTAssertTrue(drillDown.freeTimeQualityLabel.contains("Free-time quality"))
-        XCTAssertTrue(drillDown.executionLanesLabel.contains("Execution lanes"))
+        XCTAssertTrue(drillDown.executionLanesLabel.contains("Open time"))
         XCTAssertTrue(drillDown.goalLoadLabel.contains("Goal load"))
         XCTAssertEqual(drillDown.items.map(\.id), [
             "life-areas",
@@ -456,7 +458,7 @@ final class TimeProjectionServiceTests: XCTestCase {
             "physical-energy",
             "transition-friction",
             "free-time-quality",
-            "execution-lanes",
+            "open-time",
             "goal-load"
         ])
         XCTAssertTrue(drillDown.items.contains(where: { $0.title == "Life areas" }))
