@@ -1634,6 +1634,66 @@ final class AmbitionsUITests: XCTestCase {
         captureTodayScreenshot(named: "amb-1173-today-after-buffer-mutation", in: app)
     }
 
+    func testAMB1174TimeVisualFlagshipLayerScreenshotProof() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsTimeRenderState": "default-week"
+            ]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: app))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.layer-selector"].exists)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.now-instrument"].exists)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.primary-action"].exists)
+        assertAMB1174VisualCopyGuards(in: app, variant: "open")
+        captureTimeScreenshot(named: "amb-1174-time-open-root", in: app)
+
+        let layers: [(identifier: String, title: String, screenshot: String)] = [
+            ("time.life-shape-field.layer.protected", "Protected", "amb-1174-time-protected-root"),
+            ("time.life-shape-field.layer.pressure", "Pressure", "amb-1174-time-pressure-root"),
+            ("time.life-shape-field.layer.buffer", "Buffer", "amb-1174-time-buffer-root")
+        ]
+
+        for layer in layers {
+            XCTAssertTrue(scrollUntilElementExists(layer.identifier, in: app, maxAttempts: 12))
+            app.descendants(matching: .any)[layer.identifier].tap()
+            XCTAssertTrue(scrollUntilStaticTextExists(layer.title, in: app, maxAttempts: 8))
+            XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.primary-action"].exists)
+            assertAMB1174VisualCopyGuards(in: app, variant: layer.title)
+            captureTimeScreenshot(named: layer.screenshot, in: app)
+        }
+    }
+
+    func testAMB1174TimeVisualFlagshipAccessibilityVariantScreenshotProof() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsTimeRenderState": "pressure-cluster",
+                "UIAccessibilityDarkerSystemColorsEnabled": "YES",
+                "UIAccessibilityReduceTransparencyEnabled": "YES"
+            ]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: app))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.pressure", in: app, maxAttempts: 12))
+        app.descendants(matching: .any)["time.life-shape-field.layer.pressure"].tap()
+        XCTAssertTrue(scrollUntilStaticTextExists("Pressure", in: app, maxAttempts: 8))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.primary-action"].exists)
+        assertAMB1174VisualCopyGuards(in: app, variant: "accessibility")
+        captureTimeScreenshot(named: "amb-1174-time-accessibility-variant", in: app)
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,
@@ -1650,9 +1710,25 @@ final class AmbitionsUITests: XCTestCase {
         }
         for (key, value) in extraEnvironment {
             app.launchEnvironment[key] = value
-            app.launchArguments += ["-\(key)", value]
+        app.launchArguments += ["-\(key)", value]
         }
         return app
+    }
+
+    private func assertAMB1174VisualCopyGuards(
+        in app: XCUIApplication,
+        variant: String,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        for forbidden in ["Weather", "weather", "rain", "droplet", "scenic sky", "wallpaper", "82% pressure", "poor productivity", "diagnosis", "wellness"] {
+            XCTAssertFalse(
+                app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", forbidden)).firstMatch.exists,
+                "AMB-1174 \(variant) must not expose forbidden copy: \(forbidden)",
+                file: file,
+                line: line
+            )
+        }
     }
 
     private func dismissKeyboardIfNeeded(in app: XCUIApplication) {

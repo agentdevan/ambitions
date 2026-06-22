@@ -111,8 +111,28 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         XCTAssertFalse(pressurePresentation.localizedCaseInsensitiveContains("82% pressure"))
         XCTAssertFalse(pressurePresentation.localizedCaseInsensitiveContains("poor productivity"))
         XCTAssertTrue(selector.contains("minHeight: 44"))
-        XCTAssertTrue(now.contains("minHeight: 44"))
+        XCTAssertTrue(now.contains("minHeight: 52"))
         XCTAssertTrue(correction.contains("minHeight: 44"))
+    }
+
+    func testAMB1174VisualFlagshipPassAvoidsWeatherCloneAndThinBars() throws {
+        let root = repoRoot()
+        let selector = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root)
+        let now = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift", root: root)
+        let canvas = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift", root: root)
+        let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let scanned = [selector, now, canvas, rootView].joined(separator: "\n")
+
+        XCTAssertTrue(canvas.contains("graphiteRecess"))
+        XCTAssertTrue(canvas.contains("suite.field.semanticMarks.prefix(2)"))
+        XCTAssertTrue(now.contains("frame(width: colorSchemeContrast == .increased ? 6 : 5)"))
+        XCTAssertFalse(now.contains(".buttonStyle(.borderedProminent)"))
+        XCTAssertTrue(now.contains("accessibilityReduceTransparency"))
+        XCTAssertTrue(selector.contains("accessibilityReduceTransparency"))
+        XCTAssertFalse(scanned.localizedCaseInsensitiveContains("rain"))
+        XCTAssertFalse(scanned.localizedCaseInsensitiveContains("droplet"))
+        XCTAssertFalse(scanned.localizedCaseInsensitiveContains("weather"))
+        XCTAssertFalse(scanned.contains(".stroke(theme.colors.strokeSubtle, lineWidth: 1)\n        .accessibilityIdentifier(\"time.life-shape-field\")"))
     }
 
     func testLifeShapeSemanticMirrorRootOrderDoesNotExposeSourceReceiptAsFirstViewport() {

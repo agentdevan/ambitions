@@ -28,6 +28,7 @@ extension LifeShapeFieldView {
 
     var objectCanvas: some View {
         ZStack(alignment: .topLeading) {
+            graphiteRecess
             objectStageTextureBackdrop
 
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
@@ -61,6 +62,27 @@ extension LifeShapeFieldView {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("LifeShape Field")
         .accessibilityValue("\(reading.title). \(reading.summary). \(reading.capacityStatement)")
+    }
+
+    var graphiteRecess: some View {
+        RoundedRectangle(cornerRadius: 8, style: .continuous)
+            .fill(
+                LinearGradient(
+                    colors: colorSchemeContrast == .increased
+                        ? [
+                            theme.colors.canvas.opacity(0.98),
+                            theme.colors.surfaceOverlay.opacity(0.44)
+                        ]
+                        : [
+                            theme.colors.canvas.opacity(0.92),
+                            theme.colors.canvas.opacity(0.58),
+                            theme.colors.surfaceOverlay.opacity(0.16)
+                        ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+            )
+            .accessibilityHidden(true)
     }
 
     var objectStageTextureBackdrop: some View {
@@ -98,10 +120,7 @@ extension LifeShapeFieldView {
     }
 
     var semanticMarksForFirstViewport: ArraySlice<LifeShapeSemanticMark> {
-        if dynamicTypeSize.isAccessibilitySize {
-            return suite.field.semanticMarks.prefix(suite.field.semanticMarks.count)
-        }
-        return suite.field.semanticMarks.prefix(6)
+        suite.field.semanticMarks.prefix(2)
     }
 
     func semanticMarkRow(_ mark: LifeShapeSemanticMark, compact: Bool) -> some View {
