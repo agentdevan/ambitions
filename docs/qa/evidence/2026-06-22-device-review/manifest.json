@@ -1,0 +1,49 @@
+{
+  "evidence_set": "2026-06-22-device-review",
+  "linear_project": "Ambitions Runtime QA Remediation — 2026-06-22 Device Review",
+  "linear_control_issue": "AMB-1181",
+  "linear_evidence_issue": "AMB-1282",
+  "binary_archive": {
+    "filename": "More issues.zip",
+    "location": "Attached to Linear issue AMB-1181",
+    "repo_policy": "Binary archive is indexed in repo and retained in Linear until a binary artifact policy is adopted."
+  },
+  "repo_documents": [
+    "docs/qa/KNOWN_ISSUES.md",
+    "docs/qa/device_review_20260622_more_issues.md",
+    "docs/qa/source_reconciliation_20260622.md"
+  ],
+  "evidence_index_files": [
+    "docs/qa/evidence/2026-06-22-device-review/README.md",
+    "docs/qa/evidence/2026-06-22-device-review/screenshot-index.md",
+    "docs/qa/evidence/2026-06-22-device-review/manifest.json"
+  ],
+  "screenshots": [
+    {"filename": "IMG_8475.PNG", "surface": "Today", "primary_evidence": "Today root controls, rail copy, CTA stack, dock"},
+    {"filename": "IMG_8476.PNG", "surface": "Today", "primary_evidence": "Meridian toggle state with no meaningful object change"},
+    {"filename": "IMG_8477.PNG", "surface": "Capture", "primary_evidence": "Half-screen composer, internal chips, dead mic, routing field dominance issue"},
+    {"filename": "IMG_8478.PNG", "surface": "Closure", "primary_evidence": "Closure top state opened from no-step context"},
+    {"filename": "IMG_8479.PNG", "surface": "Goals", "primary_evidence": "Goals root and internal Constellation Atlas copy"},
+    {"filename": "IMG_8480.PNG", "surface": "Goals", "primary_evidence": "Thread Focus diagnostic rows and duplicate creation affordance"},
+    {"filename": "IMG_8481.PNG", "surface": "Time", "primary_evidence": "Time root, unclear dots/bars/Now line, Place Step issue"},
+    {"filename": "IMG_8482.PNG", "surface": "Time", "primary_evidence": "Time lower rows and fallback card behavior"},
+    {"filename": "IMG_8483.PNG", "surface": "You", "primary_evidence": "You root, dividers, status-heavy rows, bottom glow"},
+    {"filename": "IMG_8484.PNG", "surface": "You", "primary_evidence": "You rows and divider/status pattern"},
+    {"filename": "IMG_8485.PNG", "surface": "You", "primary_evidence": "Capture/session/appearance/privacy row statuses"},
+    {"filename": "IMG_8486.PNG", "surface": "You", "primary_evidence": "Receipts/sources/local data/export status rows"},
+    {"filename": "IMG_8487.PNG", "surface": "You", "primary_evidence": "You lower rows and local/status posture"},
+    {"filename": "IMG_8488.PNG", "surface": "Appearance", "primary_evidence": "Light mode selection leaves dark/illegible detail"},
+    {"filename": "IMG_8489.PNG", "surface": "You Light Mode", "primary_evidence": "Low contrast and grey dock"},
+    {"filename": "IMG_8490.PNG", "surface": "Time Light Mode", "primary_evidence": "Low contrast Time and dock"},
+    {"filename": "IMG_8491.PNG", "surface": "Goals Light Mode", "primary_evidence": "Goals dark/card assumptions in Light mode"},
+    {"filename": "IMG_8492.PNG", "surface": "Today Light Mode", "primary_evidence": "Washed/dim Today Light mode"},
+    {"filename": "IMG_8493.PNG", "surface": "Closure", "primary_evidence": "Closure default options"},
+    {"filename": "IMG_8494.PNG", "surface": "Closure", "primary_evidence": "Closure advanced options"},
+    {"filename": "IMG_8495.PNG", "surface": "Closure", "primary_evidence": "Closure receipt/review state"},
+    {"filename": "IMG_8496.PNG", "surface": "Search / You", "primary_evidence": "Search over You, abstract results"},
+    {"filename": "IMG_8497.PNG", "surface": "Search", "primary_evidence": "Search full view, internal result labels"},
+    {"filename": "IMG_8498.PNG", "surface": "Goals", "primary_evidence": "Goals expanded Thread Focus diagnostic/internal rows"},
+    {"filename": "IMG_8499.PNG", "surface": "Goals", "primary_evidence": "Goals lower duplication and proof/context language"}
+  ],
+  "closure_rule": "This manifest indexes historical runtime evidence only. Fix closure requires fresh proof from the repaired build and docs/qa/KNOWN_ISSUES.md updates."
+}
