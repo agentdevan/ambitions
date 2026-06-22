@@ -21,11 +21,16 @@ extension LifeShapeFieldState {
         let after = timeMutation.afterProjection
         let openBuckets = after.todayBuckets.filter { $0.layer == .open }
         let protectedBuckets = after.todayBuckets.filter { $0.layer == .protected }
-        let fit: LifeShapeCapacityFit = timeMutation.actionKind == .makeTodayLighter ? .steady : (openBuckets.isEmpty ? .tight : .steady)
+        let bufferBuckets = after.todayBuckets.filter { $0.layer == .buffer }
+        let fit: LifeShapeCapacityFit = [.makeTodayLighter, .addBuffer].contains(timeMutation.actionKind) ? .steady : (openBuckets.isEmpty ? .tight : .steady)
         let pressureLabel = timeMutation.actionKind == .makeTodayLighter ? "Light" : (fit == .tight ? "Tight" : "Crowded")
         let pressureDetail = timeMutation.actionKind == .makeTodayLighter
             ? "Today is lighter after one ask was narrowed."
             : timeMutation.todayRecompute.summary
+        let bufferLabel = timeMutation.actionKind == .addBuffer ? "Add room" : (bufferBuckets.isEmpty ? "Room available" : "Keep light")
+        let bufferDetail = timeMutation.actionKind == .addBuffer
+            ? "Room was added around this fixed point."
+            : (bufferBuckets.isEmpty ? "Room available around the next block." : "\(bufferBuckets.count) buffer mark\(bufferBuckets.count == 1 ? "" : "s") shape schedule room.")
         let weekReading = LifeShapeReading(
             horizon: after.selectedHorizon,
             title: timeMutation.actionKind.visibleChange,
@@ -61,6 +66,13 @@ extension LifeShapeFieldState {
                     visualState: fit.visualState
                 ),
                 LifeShapeSegment(
+                    kind: .buffer,
+                    detail: bufferDetail,
+                    valueLabel: bufferLabel,
+                    weight: timeMutation.actionKind == .addBuffer ? 0.38 : 0.22,
+                    visualState: .selected
+                ),
+                LifeShapeSegment(
                     kind: .source,
                     detail: runtimeMutation.stageMutation.receipt.inspectionLabel,
                     valueLabel: "Proof",
@@ -93,6 +105,7 @@ extension LifeShapeFieldState {
                 runtimeMutation.stageMutation.visibleUserFacingChange,
                 "Today recomputed",
                 timeMutation.actionKind == .makeTodayLighter ? "Later Today updated" : nil,
+                timeMutation.actionKind == .addBuffer ? "Current window updated" : nil,
                 runtimeMutation.stageMutation.undoAvailability.label
             ].compactMap { $0 }
         )
@@ -104,7 +117,7 @@ extension LifeShapeFieldState {
                 kind: bucket.layer.semanticMarkKind,
                 valueLabel: bucket.reading.capacityStatement,
                 detail: bucket.reading.summary,
-                intensity: bucket.layer == .protected ? 0.72 : (bucket.layer == .pressure ? 0.30 : 0.52),
+                intensity: bucket.layer == .protected ? 0.72 : (bucket.layer == .pressure ? 0.30 : (bucket.layer == .buffer ? 0.38 : 0.52)),
                 visualState: bucket.layer == .protected ? .selected : .selected,
                 inputRefs: bucket.derivation.inputRefs,
                 ruleIDs: bucket.derivation.ruleIDs,

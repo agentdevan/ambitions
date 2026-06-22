@@ -107,6 +107,9 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
             if command.payload.metadata["correctionKind"] == TimeMutationActionKind.makeTodayLighter.rawValue {
                 return "Today made lighter"
             }
+            if command.payload.metadata["correctionKind"] == TimeMutationActionKind.addBuffer.rawValue {
+                return "Buffer added"
+            }
             return "Time corrected"
         case .recoverAction:
             return "Recovery updated"

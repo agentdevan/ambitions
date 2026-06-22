@@ -1596,6 +1596,44 @@ final class AmbitionsUITests: XCTestCase {
         captureTodayScreenshot(named: "amb-1171-today-after-pressure-mutation", in: app)
     }
 
+    func testAMB1173BufferLayerAddBufferMutationProof() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: app))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.buffer", in: app, maxAttempts: 12))
+        app.descendants(matching: .any)["time.life-shape-field.layer.buffer"].tap()
+        XCTAssertTrue(scrollUntilStaticTextExists("Buffer", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Add buffer", in: app, maxAttempts: 8))
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "diagnosis")).firstMatch.exists)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "wellness")).firstMatch.exists)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "low-energy")).firstMatch.exists)
+        captureTimeScreenshot(named: "amb-1173-buffer-root", in: app)
+
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
+        app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.staticTexts["Buffer added"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Today recomputed")).firstMatch.exists)
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Current window updated")).firstMatch.exists)
+        captureTimeScreenshot(named: "amb-1173-buffer-after-add-buffer", in: app)
+
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.undo"].waitForExistence(timeout: 10))
+        app.descendants(matching: .any)["time.life-shape-field.undo"].tap()
+        XCTAssertTrue(app.staticTexts["Undo applied"].waitForExistence(timeout: 10))
+        captureTimeScreenshot(named: "amb-1173-buffer-after-undo", in: app)
+
+        XCTAssertTrue(openCanonicalDestination("Today", screenIdentifier: "today.screen", in: app))
+        XCTAssertTrue(app.staticTexts["Start here"].waitForExistence(timeout: 10) || app.staticTexts["Start now"].waitForExistence(timeout: 10))
+        captureTodayScreenshot(named: "amb-1173-today-after-buffer-mutation", in: app)
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,

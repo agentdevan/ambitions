@@ -110,18 +110,19 @@ final class BufferEngineTests: XCTestCase {
         XCTAssertTrue(combined.contains("Add room after this fixed point."))
     }
 
-    func testAMB1172BufferReadingStaysHiddenFromRootTimeUI() throws {
+    func testAMB1172BufferReadingStaysRuntimeOwnedAfterRootExposureGate() throws {
         let root = repoRoot()
         let selector = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root)
         let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
         let pressurePresentation = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView+PressurePresentation.swift", root: root)
+        let bufferPresentation = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView+BufferPresentation.swift", root: root)
         let timeSurface = try source("Native/Ambitions/Surfaces/Time/TimeSurface.swift", root: root)
-        let scannedRoot = [selector, rootView, pressurePresentation, timeSurface].joined(separator: "\n")
+        let scannedRoot = [selector, rootView, pressurePresentation, bufferPresentation, timeSurface].joined(separator: "\n")
 
-        XCTAssertTrue(selector.contains("[.open, .protected, .pressure]"))
-        XCTAssertFalse(selector.contains(".buffer"))
+        XCTAssertTrue(selector.contains("[.open, .protected, .pressure, .buffer]"))
+        XCTAssertTrue(bufferPresentation.contains("Schedule room only"))
         XCTAssertFalse(scannedRoot.contains("BufferReading"))
-        XCTAssertFalse(scannedRoot.localizedCaseInsensitiveContains("Needs buffer after 5:00 PM."))
+        XCTAssertFalse(rootView.localizedCaseInsensitiveContains("Needs buffer after 5:00 PM."))
     }
 
     private func roomAvailableNowState() -> CanonicalNowState {

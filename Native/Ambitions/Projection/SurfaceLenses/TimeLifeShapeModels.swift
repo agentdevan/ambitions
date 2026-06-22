@@ -14,6 +14,7 @@ enum LifeShapeSegmentKind: String, Sendable {
     case goalTime
     case protectedTime
     case pressure
+    case buffer
     case recovery
     case source
 
@@ -23,6 +24,7 @@ enum LifeShapeSegmentKind: String, Sendable {
         case .goalTime: "Goal time"
         case .protectedTime: "Protected time"
         case .pressure: "Pressure"
+        case .buffer: "Buffer"
         case .recovery: "Recovery"
         case .source: "Source"
         }
@@ -34,6 +36,7 @@ enum LifeShapeSegmentKind: String, Sendable {
         case .goalTime: "scope"
         case .protectedTime: "lock"
         case .pressure: "waveform.path"
+        case .buffer: "rectangle.compress.vertical"
         case .recovery: "leaf"
         case .source: "checkmark.shield"
         }

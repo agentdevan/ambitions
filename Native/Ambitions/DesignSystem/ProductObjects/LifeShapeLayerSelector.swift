@@ -5,7 +5,7 @@ struct LifeShapeLayerSelector: View {
     @Environment(\.ambitionTheme) private var theme
     @Binding var selection: LifeShapeLayer
 
-    private let layers: [LifeShapeLayer] = [.open, .protected, .pressure]
+    private let layers: [LifeShapeLayer] = [.open, .protected, .pressure, .buffer]
 
     var body: some View {
         HStack(spacing: theme.spacing.xs) {

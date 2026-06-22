@@ -143,8 +143,10 @@ extension LifeShapeSemanticMarkKind {
         switch self {
         case .protectedTime, .recoveryNeed:
             .protected
-        case .pressure, .cognitiveLoad, .transitionFriction:
+        case .pressure, .cognitiveLoad:
             .pressure
+        case .transitionFriction:
+            .buffer
         default:
             .open
         }

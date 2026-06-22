@@ -14,8 +14,9 @@ enum TimeMutationActionKind: String, Codable, Sendable, Equatable, Hashable, Cas
     case needsMoreTime = "needs_more_time"
     case keepClear = "keep_clear"
     case makeTodayLighter = "make_today_lighter"
+    case addBuffer = "add_buffer"
 
-    static let correctionKinds: Set<TimeMutationActionKind> = [.notUsable, .needsMoreTime, .keepClear, .makeTodayLighter]
+    static let correctionKinds: Set<TimeMutationActionKind> = [.notUsable, .needsMoreTime, .keepClear, .makeTodayLighter, .addBuffer]
 
     var visibleChange: String {
         switch self {
@@ -31,6 +32,8 @@ enum TimeMutationActionKind: String, Codable, Sendable, Equatable, Hashable, Cas
             "Window kept clear"
         case .makeTodayLighter:
             "Today made lighter"
+        case .addBuffer:
+            "Buffer added"
         }
     }
 
@@ -48,6 +51,8 @@ enum TimeMutationActionKind: String, Codable, Sendable, Equatable, Hashable, Cas
             "Today recomputed recommendations to respect the clear window."
         case .makeTodayLighter:
             "Today recomputed Start here and Later Today after pressure was lightened."
+        case .addBuffer:
+            "Today recomputed the current window and next fixed-point context after buffer was added."
         }
     }
 }
@@ -185,6 +190,11 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
             updatedBuckets = try beforeProjection.todayBuckets.replacing(
                 targetBucket.id,
                 with: lighterPressureBucket(from: targetBucket, command: command)
+            )
+        case .addBuffer:
+            updatedBuckets = try beforeProjection.todayBuckets.replacing(
+                targetBucket.id,
+                with: bufferBucket(from: targetBucket, command: command)
             )
         }
 

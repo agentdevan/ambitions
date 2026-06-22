@@ -92,9 +92,9 @@ struct LifeShapeFieldView: View {
         case .protected:
             [.protectedTime, .recoveryNeed]
         case .pressure:
-            [.pressure, .cognitiveLoad, .transitionFriction, .goalLoad]
+            [.pressure, .cognitiveLoad, .goalLoad]
         case .buffer:
-            []
+            [.transitionFriction]
         }
         let marks = suite.field.semanticMarks.filter { allowedKinds.contains($0.kind) }
         return marks.isEmpty ? Array(suite.field.semanticMarks.prefix(2)) : marks
@@ -216,6 +216,8 @@ struct LifeShapeFieldView: View {
                     onMutationAction?(.protectWindow, selectedMark)
                 } else if selectedLayer == .pressure {
                     onMutationAction?(.makeTodayLighter, selectedMark)
+                } else if selectedLayer == .buffer {
+                    onMutationAction?(.addBuffer, selectedMark)
                 }
             }
             if let visibleMutation {

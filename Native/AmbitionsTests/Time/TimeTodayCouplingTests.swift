@@ -135,6 +135,46 @@ final class TimeTodayCouplingTests: XCTestCase {
         XCTAssertTrue(runtimeMutation?.stageMutation.accessibilityAnnouncement.message.contains("Today made lighter") == true)
     }
 
+    func testAMB1173AddBufferUpdatesTimeAndTodayCoupling() throws {
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2027-02-19T12:20:00Z"))
+        let field = PreviewTimeScenarios.seeded.lifeSuite.field
+        let bufferMark = try XCTUnwrap(field.semanticMarks.first { $0.kind == .transitionFriction })
+        let before = try LifeShapeProjection.fromVisibleTimeField(
+            field,
+            selectedMark: bufferMark,
+            preferredLayer: .buffer,
+            now: now
+        )
+        let target = try XCTUnwrap(before.todayBuckets.first { $0.layer == .buffer })
+        let command = timeCommand(
+            kind: .correctTimeWindow,
+            timeID: target.id,
+            title: "Add buffer",
+            metadata: ["correctionKind": TimeMutationActionKind.addBuffer.rawValue]
+        )
+
+        let mutation = try TimeMutation.make(command: command, beforeProjection: before)
+        let runtimeMutation = PrivateLifeRuntime().mutation(
+            for: command,
+            beforeSnapshot: before.semanticSummary,
+            afterSnapshot: mutation.afterProjection.semanticSummary,
+            targetSurface: .time,
+            timeMutation: mutation
+        )
+        let afterTarget = try XCTUnwrap(mutation.afterProjection.todayBuckets.first { $0.id == target.id })
+
+        XCTAssertEqual(mutation.actionKind, .addBuffer)
+        XCTAssertEqual(afterTarget.layer, .buffer)
+        XCTAssertEqual(afterTarget.reading.kind, .buffer)
+        XCTAssertEqual(afterTarget.reading.title, "Buffer added")
+        XCTAssertEqual(afterTarget.reading.capacityStatement, "Add room")
+        XCTAssertTrue(mutation.todayRecompute.recomputedToday)
+        XCTAssertTrue(mutation.todayRecompute.hasTimeCauseProof)
+        XCTAssertTrue(mutation.todayRecompute.affectedBucketIDs.contains(target.id))
+        XCTAssertEqual(runtimeMutation?.stageMutation.visibleUserFacingChange, "Buffer added")
+        XCTAssertTrue(runtimeMutation?.stageMutation.accessibilityAnnouncement.message.contains("Buffer added") == true)
+    }
+
     private func timeCommand(
         kind: AmbitionsCommandKind,
         timeID: String,

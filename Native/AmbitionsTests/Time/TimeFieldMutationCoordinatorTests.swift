@@ -112,4 +112,31 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         XCTAssertEqual(undo.visibleMutation.stageMutation.visibleUserFacingChange, "Undo applied")
         XCTAssertTrue(undo.visibleMutation.stageMutation.accessibilityAnnouncement.message.contains("Time and Today"))
     }
+
+    func testAMB1173AddBufferRunsScheduleRoomMutationTodayProofAndUndo() throws {
+        let state = PreviewTimeScenarios.seeded
+        let bufferMark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .transitionFriction })
+
+        let result = try TimeFieldMutationCoordinator().perform(
+            .addBuffer,
+            in: state,
+            selectedMark: bufferMark,
+            now: now
+        )
+
+        XCTAssertEqual(result.command.kind, .correctTimeWindow)
+        XCTAssertEqual(result.command.payload.metadata["correctionKind"], TimeMutationActionKind.addBuffer.rawValue)
+        XCTAssertEqual(result.timeMutation.actionKind, .addBuffer)
+        XCTAssertEqual(result.runtimeMutation.stageMutation.visibleUserFacingChange, "Buffer added")
+        XCTAssertTrue(result.runtimeMutation.hasCompleteActionFlowProof)
+        XCTAssertTrue(result.timeMutation.todayRecompute.recomputedToday)
+        XCTAssertTrue(result.updatedTimeState.lifeSuite.field.segments.contains { $0.kind == .buffer && $0.valueLabel == "Add room" })
+        XCTAssertTrue(result.updatedTimeState.lifeSuite.field.continuityDockItems.contains("Current window updated"))
+        XCTAssertFalse(result.visibleMutation.stageMutation.accessibilityAnnouncement.message.localizedCaseInsensitiveContains("wellness"))
+        XCTAssertFalse(result.visibleMutation.stageMutation.accessibilityAnnouncement.message.localizedCaseInsensitiveContains("diagnosis"))
+
+        let undo = TimeFieldMutationCoordinator().undo(result, now: now)
+        XCTAssertEqual(undo.visibleMutation.stageMutation.visibleUserFacingChange, "Undo applied")
+        XCTAssertTrue(undo.visibleMutation.stageMutation.accessibilityAnnouncement.message.contains("Time and Today"))
+    }
 }
