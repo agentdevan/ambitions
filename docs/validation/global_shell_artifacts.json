@@ -1,0 +1,20 @@
+{
+  "issue": "AMB-1180",
+  "status": "seeded-manifest",
+  "acceptance_rule": "Local .codex paths are working evidence only. Reviewable images must be committed under docs/validation/screenshots or attached to Linear or PR artifacts before Visual Accepted.",
+  "required_routes": [
+    "today.root",
+    "today.step_detail",
+    "goals.root",
+    "goals.goal_detail",
+    "time.root",
+    "time.bucket_detail",
+    "you.root",
+    "you.settings_detail",
+    "capture.keyboard",
+    "search.overlay",
+    "closure.overlay",
+    "inspection.proof"
+  ],
+  "artifacts": []
+}
