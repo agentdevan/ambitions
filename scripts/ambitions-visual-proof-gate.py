@@ -16,49 +16,22 @@ REQUIRED = [
     "docs/design/red_fixtures/time/current_failed_lifeshape_field.md",
     "docs/implementation/global_shell_full_bleed_manifest.yml",
     "docs/validation/global_shell_artifacts.json",
+    "scripts/ambitions-global-shell-completion-gate.py",
 ]
 
 REQUIRED_SNIPPETS = {
-    "docs/truth/README.md": [
-        "Global Shell Integration Law",
-        "Full-bleed means atmosphere bleeds",
-    ],
-    "docs/design/targets/time/lifeshape_field_visual_target.md": [
-        "full-bleed",
-        "LifeShape Field Band",
-        "not a radial dial",
-        "Integrated Continuity Dock",
-    ],
-    "docs/design/targets/time/lifeshape_field_acceptance_rubric.md": [
-        "Shell Integration",
-        "No hard header slab",
-        "No pasted dock pill",
-    ],
+    "docs/truth/README.md": ["Global Shell Integration Law", "Full-bleed means atmosphere bleeds"],
+    "docs/design/targets/time/lifeshape_field_visual_target.md": ["full-bleed", "LifeShape Field Band", "not a radial dial", "Integrated Continuity Dock"],
+    "docs/design/targets/time/lifeshape_field_acceptance_rubric.md": ["Shell Integration", "No hard header slab", "No pasted dock pill"],
 }
 
-FORBIDDEN_CLOSEOUT_PHRASES = [
-    "visual proof inspected",
-]
+FORBIDDEN_CLOSEOUT_PHRASES = ["visual proof inspected"]
 
 
 def changed_paths() -> set[str]:
-    result = subprocess.run(
-        ["git", "diff", "--name-only", "HEAD", "--"],
-        cwd=ROOT,
-        check=False,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+    result = subprocess.run(["git", "diff", "--name-only", "HEAD", "--"], cwd=ROOT, check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     paths = set(result.stdout.splitlines())
-    status = subprocess.run(
-        ["git", "status", "--porcelain"],
-        cwd=ROOT,
-        check=False,
-        text=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+    status = subprocess.run(["git", "status", "--porcelain"], cwd=ROOT, check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     for line in status.stdout.splitlines():
         if line:
             paths.add(line[3:].strip())
@@ -82,7 +55,7 @@ def main() -> int:
             if snippet not in text:
                 findings.append(f"{relative}: missing required snippet `{snippet}`")
 
-    artifact_manifest = ROOT / "docs/validation/global_shell_artifacts.json"
+    artifact_manifest = ROOT / "docs" / "validation" / "global_shell_artifacts.json"
     if artifact_manifest.exists():
         manifest_text = artifact_manifest.read_text(encoding="utf-8", errors="replace")
         for route in ["today.root", "goals.root", "time.root", "you.root", "capture.keyboard", "search.overlay", "closure.overlay", "inspection.proof"]:
