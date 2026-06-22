@@ -33,6 +33,11 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "scripts/ambitions-architecture-inventory.py",
     "scripts/ambitions-master-sequencing-check.py",
     "scripts/lifeshape-linear-control-plane-check.py",
+    "scripts/ambitions-visual-proof-gate.py",
+    "scripts/ambitions-test-strength-audit.py",
+    "scripts/ambitions-screenshot-artifact-audit.py",
+    "scripts/ambitions-linear-green-claim-audit.py",
+    "scripts/ambitions-device-proof-required.py",
     "Native/Ambitions/Language/ProductCopy.swift",
     "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift",
     "Native/Ambitions/Quality/QualityGateChecklist.swift",
@@ -52,6 +57,14 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "Native/Ambitions/Quality/LifeShapeMutationAudit.swift",
     "Native/Ambitions/Quality/LifeShapeTodayCouplingAudit.swift",
     "Native/Ambitions/Quality/LifeShapeSemanticAudit.swift",
+    "Native/Ambitions/Quality/SingleOwnerAudit.swift",
+    "Native/Ambitions/Quality/ProductObjectDominanceAudit.swift",
+    "Native/Ambitions/Quality/RootReportPanelAudit.swift",
+    "Native/Ambitions/Quality/ProjectionTruthAudit.swift",
+    "Native/Ambitions/Quality/UserLanguageCategoryAudit.swift",
+    "Native/Ambitions/Quality/TestStrengthAudit.swift",
+    "Native/Ambitions/Quality/VisualTargetArtifactAudit.swift",
+    "Native/Ambitions/Quality/DeviceEvidenceAudit.swift",
     "Native/Ambitions/Core/Domain/LifeShapeProjection.swift",
     "Native/Ambitions/Core/Domain/LifeShapeBucket.swift",
     "Native/Ambitions/Core/Domain/LifeShapeReading.swift",
@@ -76,6 +89,11 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "Native/Ambitions/Scenarios/ScenarioMatrix.swift",
     "docs/validation/master_lifeshape_foldin_ledger.md",
     "docs/validation/lifeshape_control_plane_ledger.md",
+    "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
+    "docs/design/targets/time/lifeshape_field_visual_target.md",
+    "docs/design/targets/time/lifeshape_field_acceptance_rubric.md",
+    "docs/design/red_fixtures/time/current_failed_lifeshape_field.png",
+    "docs/design/red_fixtures/time/current_failed_lifeshape_field.md",
     "scripts/ambitions-quality-gate.sh",
 ]
 
@@ -682,6 +700,38 @@ def check_lifeshape_linear_control_plane_contract() -> list[Finding]:
     ]
 
 
+def check_rendered_product_acceptance_contracts() -> list[Finding]:
+    findings: list[Finding] = []
+    scripts = [
+        "scripts/ambitions-visual-proof-gate.py",
+        "scripts/ambitions-test-strength-audit.py",
+        "scripts/ambitions-screenshot-artifact-audit.py",
+        "scripts/ambitions-linear-green-claim-audit.py",
+        "scripts/ambitions-device-proof-required.py",
+    ]
+    for relative in scripts:
+        script = ROOT / relative
+        if not script.exists():
+            findings.append(Finding("rendered-product-acceptance", relative, "required rendered-product gate is missing"))
+            continue
+        result = subprocess.run(
+            [sys.executable, str(script)],
+            cwd=ROOT,
+            check=False,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if result.returncode != 0:
+            output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+            findings.append(Finding(
+                "rendered-product-acceptance",
+                relative,
+                output[:500] if output else "rendered-product acceptance gate failed",
+            ))
+    return findings
+
+
 def check_action_mutation_contract(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
@@ -781,6 +831,7 @@ def main() -> int:
     findings.extend(check_scenario_and_quality_contracts())
     findings.extend(check_master_lifeshape_foldin_contract())
     findings.extend(check_lifeshape_linear_control_plane_contract())
+    findings.extend(check_rendered_product_acceptance_contracts())
     findings.extend(check_action_mutation_contract(files))
 
     grouped = summarize(findings, max_per_gate=args.max_per_gate)

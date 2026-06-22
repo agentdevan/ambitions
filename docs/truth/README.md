@@ -11,9 +11,10 @@ Applies to: Humans, Codex, and any AI agent working in the Ambitions repo
 1. `PRODUCT_DESIGN_TRUTH.md` - product/design authority.
 2. `PRODUCT_MOAT_TRUTH.md` - moat strategy and anti-commodity guardrails.
 3. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
-4. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
-5. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
-6. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
+4. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, and visual proof authority.
+5. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
+6. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
+7. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
 7. `AGENTS.md`.
 8. `README.md`.
 9. `docs/README.md`.
@@ -40,6 +41,7 @@ Motion is behavior, not a root destination. Capture is global composition, not a
 | Product/design direction | `PRODUCT_DESIGN_TRUTH.md` |
 | Moat strategy and anti-commodity claims | `PRODUCT_MOAT_TRUTH.md` |
 | Implementation/source status | Live source/project/test/script evidence, read through `IMPLEMENTATION_TRUTH.md` |
+| Rendered product acceptance | `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` plus current reviewable screenshots and target rubric |
 | Release/readiness/proof claim | Current proof/log evidence, read through `RELEASE_TRUTH.md` |
 | Codex process behavior | `CODEX_PROCESS_TRUTH.md` |
 | Historical/old-canon conflict | Active truth files and `HISTORICAL_POLICY.md` retention rules |

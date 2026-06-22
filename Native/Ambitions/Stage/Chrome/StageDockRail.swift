@@ -53,10 +53,13 @@ struct StageDockRail: View {
         let isSelected = destination.surface == selectedTab
         let accessibilityCompact = dynamicTypeSize.isAccessibilitySize
         let iconFrame = CGSize(
-            width: accessibilityCompact ? 24 : 30,
-            height: accessibilityCompact ? 22 : 26
+            width: accessibilityCompact ? 34 : 30,
+            height: accessibilityCompact ? 34 : 26
         )
         let iconTypography = isSelected ? theme.typography.bodyEmphasized : theme.typography.body
+        let iconFont: Font = accessibilityCompact
+            ? .system(size: 30, weight: isSelected ? .semibold : .medium)
+            : iconTypography.weight(isSelected ? .semibold : .medium)
         let labelTypography = accessibilityCompact ? theme.typography.micro : theme.typography.caption
 
         return Button {
@@ -71,26 +74,28 @@ struct StageDockRail: View {
                         Capsule(style: .continuous)
                             .fill(theme.shell.activeTabForeground.opacity(theme.mode == .dark ? 0.78 : 0.64))
                             .frame(width: accessibilityCompact ? 14 : 18, height: 2)
-                            .offset(y: accessibilityCompact ? 15 : 18)
+                            .offset(y: accessibilityCompact ? 18 : 18)
                             .accessibilityHidden(true)
                     }
 
                     Image(systemName: destination.systemImage)
-                        .font(iconTypography.weight(isSelected ? .semibold : .medium))
+                        .font(iconFont)
                         .symbolRenderingMode(.hierarchical)
                 }
                 .frame(width: iconFrame.width, height: iconFrame.height)
 
-                Text(destination.title)
-                    .font(labelTypography.weight(isSelected ? .semibold : .medium))
-                    .lineLimit(1)
-                    .minimumScaleFactor(accessibilityCompact ? 0.64 : 0.86)
+                if accessibilityCompact == false {
+                    Text(destination.title)
+                        .font(labelTypography.weight(isSelected ? .semibold : .medium))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.86)
+                }
             }
             .foregroundStyle(isSelected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground.opacity(0.86))
             .frame(
                 minWidth: 0,
                 maxWidth: .infinity,
-                minHeight: accessibilityCompact ? 50 : 58
+                minHeight: accessibilityCompact ? 64 : 58
             )
             .padding(.horizontal, accessibilityCompact ? 0 : theme.spacing.xxxs)
             .background {

@@ -20,6 +20,14 @@ enum QualityGateID: String, CaseIterable, Sendable, Hashable {
     case lifeShapeMutation
     case lifeShapeTodayCoupling
     case lifeShapeSemantic
+    case singleOwner
+    case productObjectDominance
+    case rootReportPanel
+    case projectionTruth
+    case userLanguageCategory
+    case testStrength
+    case visualTargetArtifact
+    case deviceEvidence
 }
 
 struct QualityGateContract: Identifiable, Sendable, Hashable {
@@ -51,7 +59,15 @@ enum QualityGateChecklist {
         QualityGateContract(id: .lifeShapeFakePrecision, owner: LifeShapeFakePrecisionAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
         QualityGateContract(id: .lifeShapeMutation, owner: LifeShapeMutationAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
         QualityGateContract(id: .lifeShapeTodayCoupling, owner: LifeShapeTodayCouplingAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
-        QualityGateContract(id: .lifeShapeSemantic, owner: LifeShapeSemanticAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true)
+        QualityGateContract(id: .lifeShapeSemantic, owner: LifeShapeSemanticAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .singleOwner, owner: SingleOwnerAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .productObjectDominance, owner: ProductObjectDominanceAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .rootReportPanel, owner: RootReportPanelAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .projectionTruth, owner: ProjectionTruthAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .userLanguageCategory, owner: UserLanguageCategoryAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .testStrength, owner: TestStrengthAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .visualTargetArtifact, owner: VisualTargetArtifactAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true),
+        QualityGateContract(id: .deviceEvidence, owner: DeviceEvidenceAudit.owner, executableCheck: executableScript, failureIsGreenBlocker: true)
     ]
 
     static func validationIssues(_ contracts: [QualityGateContract] = contracts) -> [String] {

@@ -1,0 +1,336 @@
+# Ambitions Implementation Acceptance Truth
+
+Status: Active acceptance authority
+Scope: rendered product quality, proof sufficiency, split status claims, visual acceptance, and Codex closeout limits
+Applies to: Ambitions source, SwiftUI surfaces, design-system components, proof packets, Linear closeouts, and release-facing status
+
+This file closes the gap between source correctness and product quality. It does not replace `PRODUCT_DESIGN_TRUTH.md`, `IMPLEMENTATION_TRUTH.md`, `RELEASE_TRUTH.md`, or live source evidence. If it conflicts with product canon, product canon wins. If it conflicts with release proof requirements, the stricter proof requirement wins.
+
+---
+
+## 1. Rendered Product Truth
+
+Ambitions implementation truth is not established by source names, file paths, component names, accessibility identifiers, string-presence tests, screenshot paths, or closeout claims.
+
+A surface is not Green until the rendered first viewport proves the product object.
+
+First-class means:
+
+- rendered dominance
+- single ownership
+- native interaction
+- accessible semantic mirror
+- visible mutation when mutation is in scope
+- visual target match
+- real-device proof when visual quality is claimed
+
+A named SwiftUI component is not sufficient.
+
+A screenshot path is not sufficient.
+
+A source `contains` test is not sufficient.
+
+A passing audit that checks absence of old bad strings is not sufficient.
+
+Proof artifacts that reveal product-quality failure make the issue Red until source is repaired or the limitation is explicitly accepted as Yellow with a named follow-up.
+
+---
+
+## 2. Split Status Model
+
+Do not use one unqualified `Green`.
+
+Use the scoped statuses below:
+
+- Source Green: compiles, architecture is canonical, no forbidden source paths, no fake fixtures.
+- Runtime Green: deterministic local behavior works; mutations, proof, undo, and cross-surface coupling work where scoped.
+- Interaction Green: tap, long press, drag/preview, VoiceOver actions, keyboard, safe areas, Reduce Motion, Reduce Transparency, High Contrast, and Dynamic Type behavior work where scoped.
+- Visual Green: rendered first viewport matches the approved product target, passes screenshot/frame gates, and passes independent visual review.
+- Release Green: Source, Runtime, Interaction, and Visual are Green, with current device proof, accessibility proof, rollback, and umbrella closeout proof.
+
+Codex may claim Source Green, Runtime Green, Interaction Green, or Ready for Visual Review when current evidence supports those exact claims.
+
+Codex may not self-certify Visual Green or Release Green.
+
+Visual Green requires independent review against attached screenshots and the approved visual rubric.
+
+Release Green requires the umbrella proof issue and current release evidence.
+
+---
+
+## 3. Product Object Law
+
+A component is not first-class because it has a file, type, test, accessibility identifier, or canon name.
+
+A component is first-class only when its rendered state proves:
+
+1. It is the dominant object or a clear child of the dominant object.
+2. It has a single owner in the hierarchy.
+3. It does not duplicate shell, crown, dock, composer, search, inspection, trust, or detail ownership.
+4. It performs its product job without explanatory paragraphs.
+5. It passes screenshot/frame hierarchy gates.
+6. It passes Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, and High Contrast.
+7. It is reviewed against an approved visual target.
+8. It can be removed or replaced without leaving old fallback UI reachable.
+
+Source existence is not product proof.
+
+Screenshot path existence is not visual proof.
+
+Self-attested visual review is not acceptance.
+
+---
+
+## 4. Single Owner Law
+
+Every visible shell/control concept has one owner:
+
+- Context Crown
+- Continuity Dock
+- Capture access
+- Search access
+- Inspection
+- Primary product object
+- Detail/correction layer
+
+Duplicate ownership is Red.
+
+Root shell owns the Context Crown unless the surface explicitly opts out.
+
+If `AppShellScaffold(title:subtitle:)` owns the crown, the root product object must not render its own root crown.
+
+If a root product object renders a crown, the shell must use a crownless mode.
+
+Capture access may appear once in the crown. Search access may appear once in the crown. They must not be duplicated as independent first-viewport controls inside the object.
+
+For Time, this pattern is Red:
+
+```text
+AppShellScaffold(title: "Time", subtitle: "LifeShape Field")
++
+LifeShapeFieldView.contextCrown
+```
+
+---
+
+## 5. Product Object Dominance Law
+
+A root surface must show one dominant object in the first viewport.
+
+A vertical stack of canonical components is Red.
+
+A report panel with title/body/detail/CTA as the primary object is Red.
+
+Detail, correction, inspection, proof, and receipt may not compete with the root object before user intent.
+
+Every root surface must prove:
+
+- primary object frame begins within the first viewport
+- primary object consumes at least 45 percent of first viewport height
+- primary object is visually above details, inspection, and correction controls
+- no more than one top-level material container appears before the primary object
+- no more than one primary CTA appears in the first viewport
+- copy outside object labels stays within the surface budget
+
+For Time:
+
+- `time.life-shape-field.primary-object` must be the dominant first-viewport element.
+- `LifeShapeNowInstrument` must not be a sibling report above the field.
+- Bucket detail and correction menu must not appear as first-viewport root anatomy unless selected by user intent.
+- Semantic mark meaning rows must not be the root product object.
+
+---
+
+## 6. Positive Visual Target Requirement
+
+Every flagship visual implementation requires:
+
+- approved target
+- actual screenshot
+- target-versus-actual critique
+- pass/fail rubric
+- real-device proof when the issue claims flagship visual quality
+
+Negative constraints alone do not define success.
+
+No visual train starts without a positive target.
+
+No closeout may say `visual flagship`, `Visual Green`, or `product Green` unless the actual screenshot is compared to the target and accepted by the required reviewer.
+
+`No Weather clone` is insufficient.
+
+`No card stack` is insufficient.
+
+The rendered screen must be in the same visual family as the target.
+
+---
+
+## 7. Visual Self-Certification Ban
+
+Codex may not self-certify Visual Green or Release Green.
+
+Codex may produce:
+
+- Source Green
+- Runtime Green
+- Interaction Green
+- Ready for Visual Review
+
+Visual Green requires independent review against attached screenshots and the target rubric.
+
+Release Green requires the umbrella proof issue.
+
+For visual/product-surface issues, Codex may move work to Ready for Visual Review only.
+
+---
+
+## 8. Screenshot Attachment Law
+
+Paths are not proof.
+
+Every visual closeout must include reviewable image artifacts:
+
+- target screenshot or target reference
+- actual screenshot
+- target-versus-actual critique
+- pass/fail per visual rubric
+
+Local `.codex` paths are useful working evidence, but they are insufficient unless the artifacts are uploaded or attached where the reviewer can see them.
+
+Codex may not write `visual proof inspected` without attaching or embedding the image in a reviewable location.
+
+---
+
+## 9. Lexical Test Insufficiency Law
+
+A test that only checks source strings cannot certify UI.
+
+For any issue labeled frontend, visual-qa, design-system, surface, SwiftUI, or flagship-quality:
+
+- at least one rendered UI test is required
+- at least one frame/hierarchy assertion is required
+- at least one screenshot artifact is required
+- source-only `contains` tests cannot be the highest proof
+
+Source string tests may support Source Green. They cannot establish Interaction Green, Visual Green, or Release Green.
+
+---
+
+## 10. Report Panel Ban
+
+Root product objects cannot be text reports.
+
+In the root first viewport:
+
+- no heading + paragraph + detail + CTA panel may be the primary object
+- no explanatory paragraph may appear before the visual object
+- no semantic-meaning rows may be the root object
+- no root copy sentence may claim capacity unless backed by explicit projection confidence and approved plain language
+
+For Time, a separate `LifeShapeNowInstrument` report above the field is Red. The current Time object must be one dominant LifeShape Field instrument with internal anatomy.
+
+---
+
+## 11. No Fabricated Intelligence Law
+
+No minimum-count smart copy.
+
+Projection code may not use fallback minimums like `max(value, 1)` to generate capacity claims.
+
+Empty or low-context states must say what is known, not fabricate useful counts.
+
+Capacity sentences must disclose low context through approved plain language.
+
+Known values may be shown as object state. Unknown or low-confidence values must not be promoted into confident planning intelligence.
+
+---
+
+## 12. Jargon Generation Law
+
+Forbidden language cannot be a static list only.
+
+Semantic category bans:
+
+- No invented terrain metaphor in root UI unless approved in user-language canon.
+- No `ridge`, `contour`, `basin`, `bridge`, `lane`, `seam`, `trace`, or `pocket` on root surfaces unless explicitly whitelisted for that surface and state.
+- No architecture metaphor may become root copy through `.semanticMeaning`.
+
+The root UI should communicate fit, protection, pressure, room, and timing through rendered state first, with plain user language second.
+
+---
+
+## 13. Device Evidence Law
+
+For visual-qa or flagship-quality work:
+
+- simulator screenshot is Yellow maximum
+- physical-device screenshot or video is required for Visual Green
+- no device proof means the issue cannot enter Done
+
+Device proof must include:
+
+- iPhone physical device
+- dark graphite/OLED rendering
+- default Dynamic Type
+- large Dynamic Type
+- Reduce Transparency
+- High Contrast
+- screenshot or screen recording with build SHA
+
+---
+
+## 14. Final Umbrella Gate
+
+No master fold-in, release branch, `implementation complete`, product Green, or handoff to the next surface may occur until the umbrella proof issue is complete and accepted.
+
+For the LifeShape/Time train, AMB-1176 blocks AMB-1177 and downstream master fold-in until T14 proof is accepted.
+
+Earlier trains may claim scoped Source Green, Runtime Green, Interaction Green, or Ready for Visual Review. They may not claim product Green.
+
+---
+
+## 15. Required Closeout Template
+
+Use this template for implementation closeout:
+
+```text
+Status:
+Source Green / Runtime Green / Interaction Green / Ready for Visual Review / Visual Green / Release Green / Yellow / Red
+Scope completed:
+Files changed:
+Rendered target:
+Rendered actual:
+Target-vs-actual critique:
+- what matches
+- what does not match
+- what is visually dominant
+- what still feels prototype
+Product object proof:
+- primary object:
+- owner:
+- first viewport hierarchy:
+- one primary action:
+- copy word count:
+- duplicate ownership check:
+- old UI reachability check:
+Validation run:
+Validation not run:
+Accessibility proof:
+Device proof:
+Known risks:
+Follow-up required:
+Rollback plan:
+Independent visual reviewer:
+```
+
+`Independent visual reviewer` is required for Visual Green.
+
+---
+
+## 16. Proof Escalation Law
+
+If a proof artifact reveals product-quality failure, the issue becomes Red or Yellow immediately.
+
+Proof artifacts alone cannot close implementation.
+
+The task is not to create proof-shaped files. The task is to make the rendered product object pass the proof.

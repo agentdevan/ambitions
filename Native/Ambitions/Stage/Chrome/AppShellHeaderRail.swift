@@ -63,13 +63,37 @@ struct AppShellHeaderRail: View {
         }
     }
 
+    @ViewBuilder
     private var rootContextCrown: some View {
-        ContextCrown(
-            title: title,
-            contextPhrase: rootCrownContext,
-            accent: rootCrownAccent,
-            wraps: shouldWrapHeaderContext
-        )
+        if dynamicTypeSize.isAccessibilitySize {
+            compactRootContextCrown
+        } else {
+            ContextCrown(
+                title: title,
+                contextPhrase: rootCrownContext,
+                accent: rootCrownAccent,
+                wraps: shouldWrapHeaderContext
+            )
+        }
+    }
+
+    private var compactRootContextCrown: some View {
+        HStack(spacing: theme.spacing.xs) {
+            Circle()
+                .fill(rootCrownAccent)
+                .frame(width: 7, height: 7)
+                .accessibilityHidden(true)
+
+            Image(systemName: posture.systemImage)
+                .font(theme.typography.body.weight(.semibold))
+                .symbolRenderingMode(.hierarchical)
+                .foregroundStyle(theme.colors.textPrimary)
+                .accessibilityHidden(true)
+        }
+        .frame(width: theme.panel.minimumTapTarget, height: theme.panel.minimumTapTarget)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(title), \(headerSubtitle)")
+        .accessibilityIdentifier("shell.header.context-crown")
     }
 
     private var titleBlock: some View {

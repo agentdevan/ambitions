@@ -1715,6 +1715,51 @@ final class AmbitionsUITests: XCTestCase {
         captureTimeScreenshot(named: "amb-1175-time-root-new-only", in: app)
     }
 
+    func testAMB1176TimeEmptyAndAccessibilityProofPacket() throws {
+        let emptyApp = makeApp(
+            bootstrapMode: "preview",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsTimeRenderState": "manual-only"
+            ]
+        )
+        emptyApp.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: emptyApp))
+        dismissContinuityReceiptIfPresent(in: emptyApp)
+        XCTAssertTrue(emptyApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(emptyApp.descendants(matching: .any)["time.life-shape-field.now-instrument"].exists)
+        XCTAssertFalse(emptyApp.descendants(matching: .any)["time.empty.create-goal"].exists)
+        XCTAssertFalse(emptyApp.descendants(matching: .any)["time.empty.open-captures"].exists)
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: emptyApp, maxAttempts: 10))
+        attachAMB1176AccessibilityTranscript(named: "amb-1176-empty-root-voiceover-transcript", in: emptyApp)
+        captureTimeScreenshot(named: "amb-1176-time-empty-root", in: emptyApp)
+        emptyApp.terminate()
+
+        let accessibilityApp = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsTimeRenderState": "pressure-cluster",
+                "UIAccessibilityReduceMotionEnabled": "YES",
+                "UIAccessibilityReduceTransparencyEnabled": "YES",
+                "UIAccessibilityDarkerSystemColorsEnabled": "YES"
+            ],
+            contentSizeCategory: "UICTContentSizeCategoryAccessibilityXXXL"
+        )
+        accessibilityApp.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: accessibilityApp))
+        dismissContinuityReceiptIfPresent(in: accessibilityApp)
+        XCTAssertTrue(accessibilityApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.now-instrument", in: accessibilityApp, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: accessibilityApp, maxAttempts: 12))
+        attachAMB1176AccessibilityTranscript(named: "amb-1176-accessibility-variant-voiceover-transcript", in: accessibilityApp)
+        captureTimeScreenshot(named: "amb-1176-time-accessibility-xxxl-reduce-motion", in: accessibilityApp)
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,
@@ -1799,6 +1844,35 @@ final class AmbitionsUITests: XCTestCase {
                 )
             }
         }
+    }
+
+    private func attachAMB1176AccessibilityTranscript(named name: String, in app: XCUIApplication) {
+        let identifiers = [
+            "time.life-shape-field",
+            "time.life-shape-field.layer-selector",
+            "time.life-shape-field.now-instrument",
+            "time.life-shape-field.primary-action",
+            "time.life-shape-field.bucket-detail",
+            "time.life-shape-field.correction-menu"
+        ]
+        let lines = identifiers.map { identifier -> String in
+            let element = app.descendants(matching: .any)[identifier]
+            let label = element.label.trimmingCharacters(in: .whitespacesAndNewlines)
+            let value = (element.value as? String)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+            let existence = element.exists ? "exists" : "missing"
+            return [identifier, existence, label, value]
+                .filter { $0.isEmpty == false }
+                .joined(separator: " | ")
+        }
+        let transcript = ([
+            "AMB-1176 accessibility transcript",
+            "Source: XCUIElement label/value/hint tree from simulator proof run; manual VoiceOver audio was not produced by this automated test.",
+            "Expected VoiceOver reading order focus: root LifeShape Field, layer selector, Now instrument/action, bucket detail, correction menu."
+        ] + lines).joined(separator: "\n")
+        let attachment = XCTAttachment(string: transcript)
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
     }
 
     private func dismissKeyboardIfNeeded(in app: XCUIApplication) {

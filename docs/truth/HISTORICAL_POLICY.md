@@ -35,7 +35,7 @@ Keep these categories when current:
 - source-adjacent docs that are accurate and required to build or validate source
 - source, tests, fixtures used by tests, resources, entitlements, privacy manifests, project config, package config, and CI/build config that still runs
 - small scripts that are current, dry-run/build useful, and free of stale IA/control-plane assumptions
-- at most three retained `.agents` skills: source-truth authority, iOS validation quality gate, and release proof honesty
+- retained `.agents` skills that are current repo operating law: source-truth authority, architecture-tree enforcement, iOS quality gate, release proof honesty, product-object enforcement, visual proof, canon closeout, anti-pattern detection, and visual red-team review
 
 ## Delete
 

@@ -316,6 +316,10 @@ No privacy/legal approval may be claimed without explicit evidence.
 
 ## 11. Release Green / Yellow / Red
 
+Release status uses the split acceptance model in `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`.
+
+Codex may not self-certify Release Green. Release Green requires Source Green, Runtime Green, Interaction Green, Visual Green, current device proof, accessibility proof, rollback proof, and umbrella closeout evidence.
+
 ### Green
 
 Release claim may be Green only when the exact claim has current proof.

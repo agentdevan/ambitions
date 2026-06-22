@@ -126,6 +126,12 @@ Codex must not broad-edit without scope, rewrite major canon unless explicitly a
 
 ## 6. Validation and Proof Discipline
 
+Codex must follow `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`.
+
+Do not write one unqualified `Green`. Use Source Green, Runtime Green, Interaction Green, Visual Green, Release Green, Ready for Visual Review, Yellow, or Red.
+
+Codex may not self-certify Visual Green or Release Green. For visual/product-surface work, Codex may prepare source, tests, screenshots, target comparison, and proof packets, then move the work to Ready for Visual Review at most.
+
 A Green claim requires proof appropriate to scope:
 
 - Docs/process: truth-file diff, authority scan, forbidden-claim scan when applicable.
@@ -153,6 +159,8 @@ Stop and report Red when:
 - source changes cannot be validated honestly
 - tests are updated to hide failures instead of validating truth
 - generated reports are treated as release proof
+- screenshot paths or source-string tests are treated as visual acceptance
+- Codex self-certifies Visual Green or Release Green
 
 ---
 

@@ -27,41 +27,17 @@ extension LifeShapeFieldView {
     }
 
     var objectCanvas: some View {
-        ZStack(alignment: .topLeading) {
-            graphiteRecess
-            objectStageTextureBackdrop
-
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                if displayedRenderState == .pressureCluster {
-                    Text("Pressure")
-                        .font(theme.typography.caption.weight(.semibold))
-                        .foregroundStyle(theme.stateStyle(for: .warning).accent)
-                        .lineLimit(1)
-                        .accessibilityIdentifier("time.life-shape-field.pressure-label")
-                }
-                Text(reading.title)
-                    .font(theme.typography.section)
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text(reading.summary)
-                    .font(theme.typography.body)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 3)
-                    .fixedSize(horizontal: false, vertical: true)
-                segmentTexture
-                if revealsPressure {
-                    Text(suite.field.reflowProposal.detail)
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textTertiary)
-                        .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 3)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
-            .padding(theme.spacing.lg)
-        }
-        .frame(minHeight: dynamicTypeSize.isAccessibilitySize ? 300 : 380)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("LifeShape Field")
-        .accessibilityValue("\(reading.title). \(reading.summary). \(reading.capacityStatement)")
+        LifeShapeFieldVisualField(
+            reading: reading,
+            field: suite.field,
+            selectedLayer: selectedLayer,
+            selectedMarks: Array(selectedLayerMarks),
+            selectedMark: selectedMark,
+            primaryActionTitle: primaryActionTitle,
+            displayedRenderState: displayedRenderState,
+            onSelectMark: { selectedMarkID = $0.id },
+            onPrimaryAction: performPrimaryLayerAction
+        )
     }
 
     var graphiteRecess: some View {
@@ -156,6 +132,18 @@ extension LifeShapeFieldView {
             Rectangle()
                 .fill(style.stroke.opacity(colorSchemeContrast == .increased ? 0.78 : 0.32))
                 .frame(height: lineWidth)
+        }
+    }
+
+    func performPrimaryLayerAction() {
+        if selectedLayer == .open {
+            onMutationAction?(.placeStep, selectedMark)
+        } else if selectedLayer == .protected {
+            onMutationAction?(.protectWindow, selectedMark)
+        } else if selectedLayer == .pressure {
+            onMutationAction?(.makeTodayLighter, selectedMark)
+        } else if selectedLayer == .buffer {
+            onMutationAction?(.addBuffer, selectedMark)
         }
     }
 }

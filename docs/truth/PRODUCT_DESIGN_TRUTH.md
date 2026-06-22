@@ -2747,6 +2747,26 @@ If proof artifacts cannot be produced, the train is Yellow or Red. Do not report
 ---
   
 ## 52. Green / Yellow / Red Acceptance Model  
+
+Status claims must follow `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`.
+
+Do not use one unqualified `Green` for implementation work.
+
+Use scoped statuses:
+
+- Source Green
+- Runtime Green
+- Interaction Green
+- Visual Green
+- Release Green
+
+Codex may not self-certify Visual Green or Release Green.
+
+Visual Green requires an approved positive target, reviewable actual screenshot, target-versus-actual critique, independent visual acceptance, and physical-device proof when visual quality is claimed.
+
+A named SwiftUI component, a source-string test, a screenshot path, or a self-attested visual review is not product proof.
+
+Root surfaces must prove one dominant product object in the first viewport. A vertical stack of canonical components is Red. A report panel as the primary object is Red. Duplicate shell/object ownership is Red.
   
 Green:  
   

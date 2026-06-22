@@ -203,23 +203,6 @@ struct LifeShapeFieldView: View {
             if Self.screenshotFocusesQuietReflow() {
                 reflowTrustSeam
             }
-            LifeShapeNowInstrument(
-                title: nowInstrumentTitle,
-                caption: nowInstrumentCaption,
-                detail: nowInstrumentDetail,
-                primaryActionTitle: primaryActionTitle,
-                visualState: nowInstrumentVisualState
-            ) {
-                if selectedLayer == .open {
-                    onMutationAction?(.placeStep, selectedMark)
-                } else if selectedLayer == .protected {
-                    onMutationAction?(.protectWindow, selectedMark)
-                } else if selectedLayer == .pressure {
-                    onMutationAction?(.makeTodayLighter, selectedMark)
-                } else if selectedLayer == .buffer {
-                    onMutationAction?(.addBuffer, selectedMark)
-                }
-            }
             if let visibleMutation {
                 LifeShapeMutationProofBanner(
                     mutation: visibleMutation,
@@ -255,61 +238,41 @@ struct LifeShapeFieldView: View {
 
     @ViewBuilder
     var contextCrown: some View {
-        if dynamicTypeSize.isAccessibilitySize {
-            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                HStack(alignment: .center, spacing: theme.spacing.sm) {
-                    Image(systemName: "clock")
-                        .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
-                        .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
-                        .frame(width: 28, height: 28)
-                        .accessibilityHidden(true)
-
-                    Text("Time")
-                        .font(theme.typography.caption.weight(.semibold))
-                        .foregroundStyle(theme.colors.accentSecondary)
-
-                    Spacer(minLength: theme.spacing.sm)
-
-                    contextCrownActions
-                }
-
-                Text("LifeShape Field")
-                    .font(theme.typography.section)
+        let accessibilityCompact = dynamicTypeSize.isAccessibilitySize
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
+            HStack(spacing: theme.spacing.xs) {
+                Text("Time")
+                    .font(accessibilityCompact ? .system(size: 34, weight: .semibold) : theme.typography.section.weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
 
-                Text("This week")
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        } else {
-            HStack(alignment: .center, spacing: theme.spacing.sm) {
-                Image(systemName: "clock")
-                    .font(.system(size: theme.icon.mediumSize, weight: theme.icon.symbolWeight))
+                if accessibilityCompact {
+                    HStack(spacing: 4) {
+                        Text("Week")
+                            .font(.system(size: 16, weight: .semibold))
+                        Image(systemName: "chevron.down")
+                            .font(.system(size: 16, weight: .semibold))
+                    }
                     .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
-                    .frame(width: 28, height: 28)
                     .accessibilityHidden(true)
-
-                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                    Text("Time")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.accentSecondary)
-                    Text("LifeShape Field")
-                        .font(theme.typography.title)
-                        .foregroundStyle(theme.colors.textPrimary)
-                    Text("This week")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
+                } else {
+                    Label("This week", systemImage: "chevron.down")
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.stateStyle(for: suite.field.capacityFit.visualState).accent)
+                        .labelStyle(.titleAndIcon)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.72)
                 }
-
-                Spacer(minLength: theme.spacing.sm)
-
-                contextCrownActions
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel("Time, This week")
+
+            Spacer(minLength: theme.spacing.sm)
+
+            contextCrownActions
         }
+        .accessibilityIdentifier("time.life-shape-field.context-crown")
     }
 
     var contextCrownActions: some View {
@@ -319,6 +282,7 @@ struct LifeShapeFieldView: View {
             } label: {
                 Label("Search", systemImage: "magnifyingglass")
                     .labelStyle(.iconOnly)
+                    .font(.system(size: dynamicTypeSize.isAccessibilitySize ? 30 : 24, weight: .regular))
                     .frame(width: 44, height: 44)
             }
             .buttonStyle(.plain)
@@ -330,6 +294,7 @@ struct LifeShapeFieldView: View {
             } label: {
                 Label("Capture", systemImage: "plus")
                     .labelStyle(.iconOnly)
+                    .font(.system(size: dynamicTypeSize.isAccessibilitySize ? 32 : 25, weight: .regular))
                     .frame(width: 44, height: 44)
             }
             .buttonStyle(.plain)

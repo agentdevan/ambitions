@@ -5,9 +5,11 @@ struct LifeShapeLayerSelector: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceTransparency) private var reduceTransparency
     @Environment(\.colorSchemeContrast) private var colorSchemeContrast
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Binding var selection: LifeShapeLayer
 
     private let layers: [LifeShapeLayer] = [.open, .protected, .pressure, .buffer]
+    private var accessibilityCompact: Bool { dynamicTypeSize.isAccessibilitySize }
 
     var body: some View {
         HStack(spacing: theme.spacing.xs) {
@@ -15,13 +17,10 @@ struct LifeShapeLayerSelector: View {
                 Button {
                     selection = layer
                 } label: {
-                    Text(layer.title)
-                        .font(theme.typography.caption.weight(.semibold))
+                    layerContent(for: layer)
                         .foregroundStyle(selection == layer ? theme.colors.canvas : theme.colors.textPrimary)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.78)
-                        .frame(maxWidth: .infinity, minHeight: 44)
-                        .padding(.horizontal, theme.spacing.sm)
+                        .frame(maxWidth: .infinity, minHeight: accessibilityCompact ? 56 : 44)
+                        .padding(.horizontal, accessibilityCompact ? theme.spacing.xs : theme.spacing.sm)
                         .background(layerFill(selected: selection == layer))
                         .overlay {
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
@@ -53,5 +52,35 @@ struct LifeShapeLayerSelector: View {
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
+    }
+
+    @ViewBuilder
+    private func layerContent(for layer: LifeShapeLayer) -> some View {
+        if accessibilityCompact {
+            Image(systemName: layer.selectorSymbolName)
+                .font(.system(size: 27, weight: .semibold))
+                .symbolVariant(selection == layer ? .fill : .none)
+                .accessibilityHidden(true)
+        } else {
+            Text(layer.title)
+                .font(theme.typography.caption.weight(.semibold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.78)
+        }
+    }
+}
+
+private extension LifeShapeLayer {
+    var selectorSymbolName: String {
+        switch self {
+        case .open:
+            "circle.dotted"
+        case .protected:
+            "lock.shield"
+        case .pressure:
+            "waveform.path.ecg"
+        case .buffer:
+            "rectangle.inset.filled.and.person.filled"
+        }
     }
 }
