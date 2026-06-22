@@ -32,6 +32,12 @@ struct LifeShapeBucketDetail: View {
                 .foregroundStyle(theme.colors.textTertiary)
                 .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
                 .fixedSize(horizontal: false, vertical: true)
+
+            LifeShapeWhyThisInspection(
+                layer: layer,
+                mark: mark,
+                todayAnchor: todayAnchor
+            )
         }
         .padding(.vertical, theme.spacing.sm)
         .overlay(alignment: .top) {

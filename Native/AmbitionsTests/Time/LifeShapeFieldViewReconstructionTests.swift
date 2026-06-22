@@ -34,6 +34,7 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeHorizonRow.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift",
+            "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeWhyThisInspection.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeCorrectionMenu.swift"
         ]
 
@@ -42,10 +43,12 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         }
 
         let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let bucketDetail = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift", root: root)
         XCTAssertTrue(rootView.contains("LifeShapeLayerSelector"))
         XCTAssertTrue(rootView.contains("LifeShapeNowInstrument"))
         XCTAssertTrue(rootView.contains("LifeShapeHorizonRowView"))
         XCTAssertTrue(rootView.contains("LifeShapeBucketDetail"))
+        XCTAssertTrue(bucketDetail.contains("LifeShapeWhyThisInspection"))
         XCTAssertTrue(rootView.contains("LifeShapeCorrectionMenu"))
         XCTAssertTrue(rootView.contains("LifeShapeMutationProofBanner"))
         XCTAssertTrue(rootView.contains("onMutationAction?(.placeStep"))
@@ -110,6 +113,32 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         XCTAssertTrue(mirror.accessibilityOrder.contains("Protected layer"))
         XCTAssertFalse(mirror.accessibilityOrder.contains("source"))
         XCTAssertFalse(mirror.accessibilityOrder.contains("receipt"))
+    }
+
+    func testAMB1169WhyThisInspectionStaysBehindDetailIntentAndAvoidsAuditConsoleCopy() throws {
+        let root = repoRoot()
+        let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let detail = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift", root: root)
+        let inspection = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeWhyThisInspection.swift", root: root)
+        let scanned = [rootView, detail, inspection].joined(separator: "\n")
+        let forbidden = [
+            "Source: Calendar",
+            "Receipt: Current",
+            "Privacy posture: Local",
+            "Runtime-backed projection",
+            "Based on local goals, captures, protected time, pressure, and user choice"
+        ]
+
+        XCTAssertTrue(detail.contains("LifeShapeWhyThisInspection"))
+        XCTAssertTrue(inspection.contains("Why this?"))
+        XCTAssertTrue(inspection.contains("Inspect proof"))
+        XCTAssertTrue(inspection.contains("This block is not protected."))
+        XCTAssertTrue(inspection.contains("Receipt is saved with this Time shape."))
+        XCTAssertTrue(inspection.contains("time.life-shape-field.why-this.button"))
+        XCTAssertTrue(inspection.contains("time.life-shape-field.proof-inspection"))
+        for phrase in forbidden {
+            XCTAssertFalse(scanned.contains(phrase), phrase)
+        }
     }
 
     private func source(_ relativePath: String, root: URL) throws -> String {

@@ -46,6 +46,7 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeHorizonRow.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeBucketDetail.swift", root: root),
+            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeWhyThisInspection.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeCorrectionMenu.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeMutationProofBanner.swift", root: root)
         ].joined(separator: "\n")
@@ -56,6 +57,7 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(timeFieldSource.contains("LifeShapeNowInstrument"))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeHorizonRowView"))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeBucketDetail"))
+        XCTAssertTrue(timeFieldSource.contains("LifeShapeWhyThisInspection"))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeCorrectionMenu"))
         XCTAssertTrue(timeFieldSource.contains("LifeShapeMutationProofBanner"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.layer-selector"))

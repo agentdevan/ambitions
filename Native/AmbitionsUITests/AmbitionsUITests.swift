@@ -1524,6 +1524,41 @@ final class AmbitionsUITests: XCTestCase {
         captureTimeScreenshot(named: "amb-1168-time-after-protect-window", in: app)
     }
 
+    func testAMB1169TimeWhyThisInspectionStaysBehindDetailIntent() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: app))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertFalse(app.staticTexts["Source: Calendar"].exists)
+        XCTAssertFalse(app.staticTexts["Receipt: Current"].exists)
+        XCTAssertFalse(app.staticTexts["Privacy posture: Local"].exists)
+        captureTimeScreenshot(named: "amb-1169-time-root-clean", in: app)
+
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.bucket-detail", in: app, maxAttempts: 12))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.why-this.button", in: app, maxAttempts: 8))
+        app.descendants(matching: .any)["time.life-shape-field.why-this.button"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.why-this.reasons"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["This block is not protected."].waitForExistence(timeout: 10))
+        captureTimeScreenshot(named: "amb-1169-time-bucket-detail-why-this", in: app)
+
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.inspect-proof.button", in: app, maxAttempts: 8))
+        app.descendants(matching: .any)["time.life-shape-field.inspect-proof.button"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.proof-inspection"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Receipt is saved with this Time shape."].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.staticTexts["Runtime-backed projection"].exists)
+        XCTAssertTrue(
+            scrollLifeShapeProofLineIntoScreenshotBand("Receipt is saved with this Time shape.", in: app),
+            "Proof receipt line should be visibly inside the screenshot proof band."
+        )
+        captureTimeScreenshot(named: "amb-1169-time-proof-inspection", in: app)
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,
@@ -2010,6 +2045,25 @@ final class AmbitionsUITests: XCTestCase {
 
         for _ in 0..<12 {
             if target.exists, target.frame.intersects(screenshotBand), target.frame.maxY < 760 {
+                return true
+            }
+            if scrollView.exists {
+                scrollView.swipeUp(velocity: .slow)
+            } else {
+                app.swipeUp(velocity: .slow)
+            }
+        }
+
+        return target.exists && target.frame.intersects(screenshotBand)
+    }
+
+    private func scrollLifeShapeProofLineIntoScreenshotBand(_ label: String, in app: XCUIApplication) -> Bool {
+        let scrollView = app.scrollViews["time.content-scroll"]
+        let target = app.staticTexts[label]
+        let screenshotBand = CGRect(x: 0, y: 220, width: 1_000, height: 460)
+
+        for _ in 0..<8 {
+            if target.exists, target.frame.intersects(screenshotBand), target.frame.maxY < 720 {
                 return true
             }
             if scrollView.exists {
