@@ -1,0 +1,142 @@
+version: 1
+status: active
+owner: Global Shell Integration Law
+scope: all Ambitions root surfaces, drilldowns, overlays, composer, inspection, and shell chrome
+
+status_model:
+  codex_allowed:
+    - Source Green
+    - Shell Green
+    - Accessibility Green
+    - Visual Review Ready
+  human_required:
+    - Visual Accepted
+    - Release Green
+    - Done
+
+completion_rule: >-
+  A global shell implementation is complete only when every required route below
+  has implementation, screenshot evidence, shell proof, accessibility proof,
+  and independent visual acceptance. One improved surface is not global completion.
+
+routes:
+  today.root:
+    surface: Today
+    route_depth: root
+    crown_mode: integrated_root
+    dock_mode: integrated_root
+    atmosphere_mode: today_reality
+    primary_object: Reality Meridian
+    screenshots_required: [default, dynamic_type_xxxl, reduce_transparency, high_contrast]
+    proof_required: [single_crown, dock_integrated, safe_area, voiceover_summary]
+    status: required
+  today.step_detail:
+    surface: Today
+    route_depth: detail
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: today_reality_detail
+    primary_object: Step Detail
+    screenshots_required: [default]
+    proof_required: [dock_hidden, native_back, safe_area]
+    status: required
+  goals.root:
+    surface: Goals
+    route_depth: root
+    crown_mode: integrated_root
+    dock_mode: integrated_root
+    atmosphere_mode: goals_direction
+    primary_object: Constellation Atlas
+    screenshots_required: [default, dynamic_type_xxxl, reduce_transparency]
+    proof_required: [single_crown, dock_integrated, safe_area, voiceover_summary]
+    status: required
+  goals.goal_detail:
+    surface: Goals
+    route_depth: detail
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: goals_direction_detail
+    primary_object: Goal Detail
+    screenshots_required: [default]
+    proof_required: [dock_hidden, native_back, safe_area]
+    status: required
+  time.root:
+    surface: Time
+    route_depth: root
+    crown_mode: integrated_root
+    dock_mode: integrated_root
+    atmosphere_mode: time_capacity
+    primary_object: LifeShape Field
+    screenshots_required: [open, protected, pressure, buffer, dynamic_type_xxxl, reduce_transparency, high_contrast]
+    proof_required: [single_crown, dock_integrated, safe_area, voiceover_summary, target_vs_actual]
+    status: required
+  time.bucket_detail:
+    surface: Time
+    route_depth: detail
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: time_capacity_detail
+    primary_object: LifeShape Bucket Detail
+    screenshots_required: [default, why_this]
+    proof_required: [dock_hidden, native_back, safe_area]
+    status: required
+  you.root:
+    surface: You
+    route_depth: root
+    crown_mode: integrated_root
+    dock_mode: integrated_root
+    atmosphere_mode: you_profile
+    primary_object: User System Profile
+    screenshots_required: [default, dynamic_type_xxxl, reduce_transparency]
+    proof_required: [single_crown, dock_integrated, safe_area, voiceover_summary]
+    status: required
+  you.settings_detail:
+    surface: You
+    route_depth: detail
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: you_profile_detail
+    primary_object: Native Settings Detail
+    screenshots_required: [default]
+    proof_required: [dock_hidden, native_back, safe_area]
+    status: required
+  capture.keyboard:
+    surface: Capture
+    route_depth: overlay
+    crown_mode: hidden_or_composer_owned
+    dock_mode: hidden
+    atmosphere_mode: capture_open_field
+    primary_object: Atmosphere Composer
+    screenshots_required: [keyboard, expanded]
+    proof_required: [keyboard_safe, dock_hidden, voiceover_summary]
+    status: required
+  search.overlay:
+    surface: Search
+    route_depth: overlay
+    crown_mode: reduced
+    dock_mode: hidden
+    atmosphere_mode: inspection
+    primary_object: Search Results
+    screenshots_required: [default]
+    proof_required: [dock_hidden, safe_area]
+    status: required
+  closure.overlay:
+    surface: Closure
+    route_depth: overlay
+    crown_mode: reduced
+    dock_mode: hidden
+    atmosphere_mode: closure
+    primary_object: Closure Outcome
+    screenshots_required: [default]
+    proof_required: [dock_hidden, visible_mutation]
+    status: required
+  inspection.proof:
+    surface: Inspection
+    route_depth: inspection
+    crown_mode: reduced_back
+    dock_mode: hidden
+    atmosphere_mode: inspection
+    primary_object: Proof Inspection
+    screenshots_required: [default]
+    proof_required: [dock_hidden, safe_area, readable_trust]
+    status: required
