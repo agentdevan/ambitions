@@ -87,4 +87,29 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         XCTAssertTrue(result.runtimeMutation.hasCompleteActionFlowProof)
         XCTAssertTrue(result.updatedTimeState.lifeSuite.field.segments.contains { $0.kind == .openTime })
     }
+
+    func testAMB1171MakeTodayLighterRunsPressureMutationTodayProofAndUndo() throws {
+        let state = PreviewTimeScenarios.seeded
+        let pressureMark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .pressure })
+
+        let result = try TimeFieldMutationCoordinator().perform(
+            .makeTodayLighter,
+            in: state,
+            selectedMark: pressureMark,
+            now: now
+        )
+
+        XCTAssertEqual(result.command.kind, .correctTimeWindow)
+        XCTAssertEqual(result.command.payload.metadata["correctionKind"], TimeMutationActionKind.makeTodayLighter.rawValue)
+        XCTAssertEqual(result.timeMutation.actionKind, .makeTodayLighter)
+        XCTAssertEqual(result.runtimeMutation.stageMutation.visibleUserFacingChange, "Today made lighter")
+        XCTAssertTrue(result.runtimeMutation.hasCompleteActionFlowProof)
+        XCTAssertTrue(result.timeMutation.todayRecompute.recomputedToday)
+        XCTAssertTrue(result.updatedTimeState.lifeSuite.field.segments.contains { $0.kind == .pressure && $0.valueLabel == "Light" })
+        XCTAssertTrue(result.updatedTimeState.lifeSuite.field.continuityDockItems.contains("Later Today updated"))
+
+        let undo = TimeFieldMutationCoordinator().undo(result, now: now)
+        XCTAssertEqual(undo.visibleMutation.stageMutation.visibleUserFacingChange, "Undo applied")
+        XCTAssertTrue(undo.visibleMutation.stageMutation.accessibilityAnnouncement.message.contains("Time and Today"))
+    }
 }

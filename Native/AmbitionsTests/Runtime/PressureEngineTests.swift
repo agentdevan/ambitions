@@ -125,18 +125,13 @@ final class PressureEngineTests: XCTestCase {
         XCTAssertTrue(combined.contains("Needs buffer"))
     }
 
-    func testAMB1170PressureStaysHiddenFromRootTimeUIUntilExposureGate() throws {
+    func testAMB1170PressureReadingStaysRuntimeOwnedAfterRootExposureGate() throws {
         let root = repoRoot()
-        let selector = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root)
         let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
         let timeSurface = try source("Native/Ambitions/Surfaces/Time/TimeSurface.swift", root: root)
-        let scannedRoot = [selector, rootView, timeSurface].joined(separator: "\n")
+        let scannedRoot = [rootView, timeSurface].joined(separator: "\n")
 
-        XCTAssertTrue(selector.contains("private let layers: [LifeShapeLayer] = [.open, .protected]"))
-        XCTAssertFalse(selector.contains(".pressure"))
         XCTAssertFalse(scannedRoot.contains("PressureReading"))
-        XCTAssertFalse(scannedRoot.contains("PressureKind"))
-        XCTAssertFalse(scannedRoot.contains("Needs buffer"))
         XCTAssertFalse(scannedRoot.contains("82% pressure"))
     }
 

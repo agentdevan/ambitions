@@ -104,6 +104,9 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
         case .protectTimeWindow:
             return "Window protected"
         case .correctTimeWindow:
+            if command.payload.metadata["correctionKind"] == TimeMutationActionKind.makeTodayLighter.rawValue {
+                return "Today made lighter"
+            }
             return "Time corrected"
         case .recoverAction:
             return "Recovery updated"

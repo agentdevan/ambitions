@@ -91,7 +91,9 @@ struct LifeShapeFieldView: View {
             [.freeTimeQuality, .executionLanes, .goalLoad]
         case .protected:
             [.protectedTime, .recoveryNeed]
-        case .pressure, .buffer:
+        case .pressure:
+            [.pressure, .cognitiveLoad, .transitionFriction, .goalLoad]
+        case .buffer:
             []
         }
         let marks = suite.field.semanticMarks.filter { allowedKinds.contains($0.kind) }
@@ -104,10 +106,6 @@ struct LifeShapeFieldView: View {
             return mark
         }
         return selectedLayerMarks.first
-    }
-
-    var primaryActionTitle: String {
-        selectedLayer == .open ? "Place Step" : "Protect window"
     }
 
     var displayedRenderStateTitle: String {
@@ -142,7 +140,7 @@ struct LifeShapeFieldView: View {
     }
 
     static func initialScreenshotLayer() -> LifeShapeLayer {
-        screenshotRenderStateOverride() == .pressureCluster ? .protected : .open
+        screenshotRenderStateOverride() == .pressureCluster ? .pressure : .open
     }
 
     static func screenshotRenderStateOverride() -> LifeShapeRenderState? {
@@ -206,16 +204,18 @@ struct LifeShapeFieldView: View {
                 reflowTrustSeam
             }
             LifeShapeNowInstrument(
-                title: reading.title,
-                caption: reading.capacityStatement,
-                detail: reading.summary,
+                title: nowInstrumentTitle,
+                caption: nowInstrumentCaption,
+                detail: nowInstrumentDetail,
                 primaryActionTitle: primaryActionTitle,
-                visualState: suite.field.capacityFit.visualState
+                visualState: nowInstrumentVisualState
             ) {
                 if selectedLayer == .open {
                     onMutationAction?(.placeStep, selectedMark)
-                } else {
+                } else if selectedLayer == .protected {
                     onMutationAction?(.protectWindow, selectedMark)
+                } else if selectedLayer == .pressure {
+                    onMutationAction?(.makeTodayLighter, selectedMark)
                 }
             }
             if let visibleMutation {

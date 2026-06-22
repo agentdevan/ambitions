@@ -11,7 +11,7 @@ struct LifeShapeBucketDetail: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
-            Text(layer == .open ? "Open detail" : "Protected detail")
+            Text(detailTitle)
                 .font(theme.typography.caption.weight(.semibold))
                 .foregroundStyle(theme.colors.accentSecondary)
 
@@ -54,5 +54,18 @@ struct LifeShapeBucketDetail: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("time.life-shape-field.bucket-detail")
+    }
+
+    private var detailTitle: String {
+        switch layer {
+        case .open:
+            "Open detail"
+        case .protected:
+            "Protected detail"
+        case .pressure:
+            "Pressure detail"
+        case .buffer:
+            "Buffer detail"
+        }
     }
 }

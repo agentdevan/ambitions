@@ -112,7 +112,7 @@ extension LifeShapeProjection {
             layer: layer,
             reading: LifeShapeReading(
                 horizon: field.defaultHorizon,
-                kind: layer == .protected ? .protected : .open,
+                kind: mark.kind.readingKind,
                 title: mark.kind.title,
                 summary: mark.detail,
                 capacityStatement: mark.valueLabel,
@@ -143,7 +143,22 @@ extension LifeShapeSemanticMarkKind {
         switch self {
         case .protectedTime, .recoveryNeed:
             .protected
+        case .pressure, .cognitiveLoad, .transitionFriction:
+            .pressure
         default:
+            .open
+        }
+    }
+
+    var readingKind: LifeShapeReadingKind {
+        switch layer {
+        case .protected:
+            .protected
+        case .pressure:
+            .pressure
+        case .buffer:
+            .buffer
+        case .open:
             .open
         }
     }

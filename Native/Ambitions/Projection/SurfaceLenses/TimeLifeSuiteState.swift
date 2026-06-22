@@ -46,6 +46,7 @@ struct TimeLifeSuiteState: Sendable {
         let day = shapes.first { $0.kind == .day } ?? week
         let life = shapes.first { $0.kind == .life } ?? week
         let fit: LifeShapeCapacityFit = week?.visualState == .warning ? .tight : .steady
+        let pressureKind = fit == .tight ? PressureKind.tight : .light
         return LifeShapeFieldState(
             defaultHorizon: .week,
             capacityFit: fit,
@@ -53,11 +54,11 @@ struct TimeLifeSuiteState: Sendable {
                 LifeShapeSegment(kind: .openTime, detail: day?.summary ?? "Manual shaping available.", valueLabel: day?.capacityLabel ?? "Manual", weight: 0.44, visualState: day?.visualState ?? .default),
                 LifeShapeSegment(kind: .goalTime, detail: life?.summary ?? "Goal load not loaded.", valueLabel: life?.sourceLabel ?? "Goals", weight: 0.50, visualState: life?.visualState ?? .default),
                 LifeShapeSegment(kind: .protectedTime, detail: day?.protectedTimeLabel ?? "Protected time is inspectable.", valueLabel: "Protected", weight: 0.38, visualState: .selected),
-                LifeShapeSegment(kind: .pressure, detail: week?.schedulePressureLabel ?? "Pressure is reviewable.", valueLabel: fit.title, weight: fit == .tight ? 0.78 : 0.44, visualState: fit.visualState),
+                LifeShapeSegment(kind: .pressure, detail: week?.schedulePressureLabel ?? "Capacity has room before another Step is added.", valueLabel: pressureKind.title, weight: fit == .tight ? 0.78 : 0.44, visualState: fit.visualState),
                 LifeShapeSegment(kind: .recovery, detail: "Recovery stays available without shame.", valueLabel: "Recovery", weight: 0.34, visualState: .default),
                 LifeShapeSegment(kind: .source, detail: trustLabel, valueLabel: "Local", weight: 0.30, visualState: .selected)
             ],
-            semanticMarks: Self.fallbackSemanticMarks(fit: fit),
+            semanticMarks: Self.fallbackSemanticMarks(fit: fit, pressureKind: pressureKind),
             renderState: .defaultWeek,
             readings: [
                 .day: LifeShapeReading(horizon: .day, title: day?.title ?? "Day shape", summary: day?.summary ?? "Manual shaping available.", capacityStatement: day?.capacityLabel ?? "Capacity is qualitative.", sourceDetail: day?.provenanceLabel ?? manualFallbackLabel),
@@ -72,7 +73,7 @@ struct TimeLifeSuiteState: Sendable {
         )
     }
 
-    private static func fallbackSemanticMarks(fit: LifeShapeCapacityFit) -> [LifeShapeSemanticMark] {
+    private static func fallbackSemanticMarks(fit: LifeShapeCapacityFit, pressureKind: PressureKind) -> [LifeShapeSemanticMark] {
         let localInput = LifeShapeInputRef(
             id: "time.baseline.local-field",
             kind: .localDefault,
@@ -98,7 +99,7 @@ struct TimeLifeSuiteState: Sendable {
         }
 
         return [
-            mark(kind: .pressure, valueLabel: fit.title, detail: "Pressure is represented as a compression ridge.", intensity: fit == .tight ? 0.70 : 0.34, visualState: fit.visualState),
+            mark(kind: .pressure, valueLabel: pressureKind.title, detail: "Pressure is qualitative and text-labeled.", intensity: fit == .tight ? 0.70 : 0.34, visualState: fit.visualState),
             mark(kind: .cognitiveLoad, valueLabel: "Reviewable", detail: "Mental load stays visible as text and mark.", intensity: 0.42, visualState: .default),
             mark(kind: .physicalEnergy, valueLabel: "Unloaded", detail: "Energy state is quiet until local context changes.", intensity: 0.30, visualState: .default),
             mark(kind: .transitionFriction, valueLabel: "Smooth", detail: "No narrowed bridge is active.", intensity: 0.26, visualState: .default),

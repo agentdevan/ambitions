@@ -21,7 +21,11 @@ extension LifeShapeFieldState {
         let after = timeMutation.afterProjection
         let openBuckets = after.todayBuckets.filter { $0.layer == .open }
         let protectedBuckets = after.todayBuckets.filter { $0.layer == .protected }
-        let fit: LifeShapeCapacityFit = openBuckets.isEmpty ? .tight : .steady
+        let fit: LifeShapeCapacityFit = timeMutation.actionKind == .makeTodayLighter ? .steady : (openBuckets.isEmpty ? .tight : .steady)
+        let pressureLabel = timeMutation.actionKind == .makeTodayLighter ? "Light" : (fit == .tight ? "Tight" : "Crowded")
+        let pressureDetail = timeMutation.actionKind == .makeTodayLighter
+            ? "Today is lighter after one ask was narrowed."
+            : timeMutation.todayRecompute.summary
         let weekReading = LifeShapeReading(
             horizon: after.selectedHorizon,
             title: timeMutation.actionKind.visibleChange,
@@ -51,9 +55,9 @@ extension LifeShapeFieldState {
                 ),
                 LifeShapeSegment(
                     kind: .pressure,
-                    detail: timeMutation.todayRecompute.summary,
-                    valueLabel: fit.title,
-                    weight: fit == .tight ? 0.72 : 0.36,
+                    detail: pressureDetail,
+                    valueLabel: pressureLabel,
+                    weight: timeMutation.actionKind == .makeTodayLighter ? 0.24 : (fit == .tight ? 0.72 : 0.48),
                     visualState: fit.visualState
                 ),
                 LifeShapeSegment(
@@ -88,18 +92,19 @@ extension LifeShapeFieldState {
             continuityDockItems: [
                 runtimeMutation.stageMutation.visibleUserFacingChange,
                 "Today recomputed",
+                timeMutation.actionKind == .makeTodayLighter ? "Later Today updated" : nil,
                 runtimeMutation.stageMutation.undoAvailability.label
-            ]
+            ].compactMap { $0 }
         )
     }
 
     static func semanticMarks(from projection: LifeShapeProjection, runtimeMutation: RuntimeMutation) -> [LifeShapeSemanticMark] {
         var marks = projection.todayBuckets.map { bucket in
             LifeShapeSemanticMark(
-                kind: bucket.layer == .protected ? .protectedTime : .executionLanes,
+                kind: bucket.layer.semanticMarkKind,
                 valueLabel: bucket.reading.capacityStatement,
                 detail: bucket.reading.summary,
-                intensity: bucket.layer == .protected ? 0.72 : 0.52,
+                intensity: bucket.layer == .protected ? 0.72 : (bucket.layer == .pressure ? 0.30 : 0.52),
                 visualState: bucket.layer == .protected ? .selected : .selected,
                 inputRefs: bucket.derivation.inputRefs,
                 ruleIDs: bucket.derivation.ruleIDs,
@@ -119,6 +124,21 @@ extension LifeShapeFieldState {
             )
         )
         return marks
+    }
+}
+
+private extension LifeShapeLayer {
+    var semanticMarkKind: LifeShapeSemanticMarkKind {
+        switch self {
+        case .open:
+            .executionLanes
+        case .protected:
+            .protectedTime
+        case .pressure:
+            .pressure
+        case .buffer:
+            .transitionFriction
+        }
     }
 }
 

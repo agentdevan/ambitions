@@ -13,8 +13,9 @@ enum TimeMutationActionKind: String, Codable, Sendable, Equatable, Hashable, Cas
     case notUsable = "not_usable"
     case needsMoreTime = "needs_more_time"
     case keepClear = "keep_clear"
+    case makeTodayLighter = "make_today_lighter"
 
-    static let correctionKinds: Set<TimeMutationActionKind> = [.notUsable, .needsMoreTime, .keepClear]
+    static let correctionKinds: Set<TimeMutationActionKind> = [.notUsable, .needsMoreTime, .keepClear, .makeTodayLighter]
 
     var visibleChange: String {
         switch self {
@@ -28,6 +29,8 @@ enum TimeMutationActionKind: String, Codable, Sendable, Equatable, Hashable, Cas
             "Fit updated"
         case .keepClear:
             "Window kept clear"
+        case .makeTodayLighter:
+            "Today made lighter"
         }
     }
 
@@ -43,6 +46,8 @@ enum TimeMutationActionKind: String, Codable, Sendable, Equatable, Hashable, Cas
             "Today recomputed the recommended Step after fit changed."
         case .keepClear:
             "Today recomputed recommendations to respect the clear window."
+        case .makeTodayLighter:
+            "Today recomputed Start here and Later Today after pressure was lightened."
         }
     }
 }
@@ -175,6 +180,11 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
             updatedBuckets = try beforeProjection.todayBuckets.replacing(
                 targetBucket.id,
                 with: protectedBucket(from: targetBucket, command: command, kind: .keepClearCorrection)
+            )
+        case .makeTodayLighter:
+            updatedBuckets = try beforeProjection.todayBuckets.replacing(
+                targetBucket.id,
+                with: lighterPressureBucket(from: targetBucket, command: command)
             )
         }
 
@@ -340,7 +350,7 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
         )
     }
 
-    private static func derivation(
+    static func derivation(
         from bucket: LifeShapeBucket,
         command: AmbitionsCommand,
         rule: LifeShapeRuleID

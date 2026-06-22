@@ -6,6 +6,7 @@ enum TimeFieldMutationAction: String, CaseIterable, Sendable, Equatable, Hashabl
     case notUsable
     case needsMoreTime
     case keepClear
+    case makeTodayLighter
 
     var commandKind: AmbitionsCommandKind {
         switch self {
@@ -13,7 +14,7 @@ enum TimeFieldMutationAction: String, CaseIterable, Sendable, Equatable, Hashabl
             .placeStepInTime
         case .protectWindow:
             .protectTimeWindow
-        case .notUsable, .needsMoreTime, .keepClear:
+        case .notUsable, .needsMoreTime, .keepClear, .makeTodayLighter:
             .correctTimeWindow
         }
     }
@@ -30,6 +31,8 @@ enum TimeFieldMutationAction: String, CaseIterable, Sendable, Equatable, Hashabl
             .needsMoreTime
         case .keepClear:
             .keepClear
+        case .makeTodayLighter:
+            .makeTodayLighter
         }
     }
 
@@ -45,6 +48,8 @@ enum TimeFieldMutationAction: String, CaseIterable, Sendable, Equatable, Hashabl
             "Needs more time"
         case .keepClear:
             "Keep this clear"
+        case .makeTodayLighter:
+            "Make today lighter"
         }
     }
 
@@ -52,6 +57,8 @@ enum TimeFieldMutationAction: String, CaseIterable, Sendable, Equatable, Hashabl
         switch self {
         case .protectWindow, .keepClear:
             .protected
+        case .makeTodayLighter:
+            .pressure
         case .placeStep, .notUsable, .needsMoreTime:
             .open
         }
@@ -59,7 +66,7 @@ enum TimeFieldMutationAction: String, CaseIterable, Sendable, Equatable, Hashabl
 
     var commandMetadata: [String: String] {
         switch self {
-        case .notUsable, .needsMoreTime, .keepClear:
+        case .notUsable, .needsMoreTime, .keepClear, .makeTodayLighter:
             ["correctionKind": timeMutationKind.rawValue]
         case .placeStep:
             ["durationMinutes": "15"]

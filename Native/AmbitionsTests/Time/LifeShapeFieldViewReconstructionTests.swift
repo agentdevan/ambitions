@@ -53,6 +53,7 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         XCTAssertTrue(rootView.contains("LifeShapeMutationProofBanner"))
         XCTAssertTrue(rootView.contains("onMutationAction?(.placeStep"))
         XCTAssertTrue(rootView.contains("onMutationAction?(.protectWindow"))
+        XCTAssertTrue(rootView.contains("onMutationAction?(.makeTodayLighter"))
         XCTAssertTrue(rootView.contains("onMutationAction?(.notUsable"))
         XCTAssertTrue(rootView.contains("onMutationAction?(.keepClear"))
         XCTAssertFalse(rootView.contains("sourceReceiptRow"))
@@ -83,15 +84,22 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
         XCTAssertTrue(mutationChain.contains("MutationAccessibilityAnnouncement"))
     }
 
-    func testFirstGreenExposesOnlyOpenAndProtectedLayersWithMinimumHitTargets() throws {
+    func testAMB1171ExposesPressureLayerWithMinimumHitTargetsAndOrdinalCopy() throws {
         let root = repoRoot()
         let selector = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root)
         let now = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift", root: root)
         let correction = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeCorrectionMenu.swift", root: root)
+        let rootView = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let pressurePresentation = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView+PressurePresentation.swift", root: root)
 
-        XCTAssertTrue(selector.contains("private let layers: [LifeShapeLayer] = [.open, .protected]"))
-        XCTAssertFalse(selector.contains(".pressure"))
+        XCTAssertTrue(selector.contains("private let layers: [LifeShapeLayer] = [.open, .protected, .pressure]"))
         XCTAssertFalse(selector.contains(".buffer"))
+        XCTAssertTrue(pressurePresentation.contains("Make today lighter"))
+        XCTAssertTrue(pressurePresentation.contains("\"Light\", \"Crowded\", \"Tight\", \"Needs buffer\""))
+        XCTAssertFalse(rootView.localizedCaseInsensitiveContains("82% pressure"))
+        XCTAssertFalse(rootView.localizedCaseInsensitiveContains("poor productivity"))
+        XCTAssertFalse(pressurePresentation.localizedCaseInsensitiveContains("82% pressure"))
+        XCTAssertFalse(pressurePresentation.localizedCaseInsensitiveContains("poor productivity"))
         XCTAssertTrue(selector.contains("minHeight: 44"))
         XCTAssertTrue(now.contains("minHeight: 44"))
         XCTAssertTrue(correction.contains("minHeight: 44"))

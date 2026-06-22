@@ -240,6 +240,11 @@ final class AmbitionsCommandModelsTests: XCTestCase {
             target: AmbitionsCommandTarget(timeID: "bucket.open"),
             payload: AmbitionsCommandPayload(metadata: ["correctionKind": TimeMutationActionKind.keepClear.rawValue])
         )
+        let makeTodayLighter = command(
+            kind: .correctTimeWindow,
+            target: AmbitionsCommandTarget(timeID: "bucket.pressure"),
+            payload: AmbitionsCommandPayload(metadata: ["correctionKind": TimeMutationActionKind.makeTodayLighter.rawValue])
+        )
         let missingStep = command(
             kind: .placeStepInTime,
             target: AmbitionsCommandTarget(timeID: "bucket.open")
@@ -253,6 +258,7 @@ final class AmbitionsCommandModelsTests: XCTestCase {
         XCTAssertEqual(validator.validate(placeStep), .valid)
         XCTAssertEqual(validator.validate(protectWindow), .valid)
         XCTAssertEqual(validator.validate(correction), .valid)
+        XCTAssertEqual(validator.validate(makeTodayLighter), .valid)
         XCTAssertEqual(validator.validate(missingStep), .needsMissingTarget)
         XCTAssertEqual(validator.validate(unsupportedCorrection), .invalid)
     }

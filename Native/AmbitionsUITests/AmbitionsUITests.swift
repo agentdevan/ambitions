@@ -1559,6 +1559,43 @@ final class AmbitionsUITests: XCTestCase {
         captureTimeScreenshot(named: "amb-1169-time-proof-inspection", in: app)
     }
 
+    func testAMB1171PressureLayerMakeTodayLighterMutationProof() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: app))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.layer.pressure", in: app, maxAttempts: 12))
+        app.descendants(matching: .any)["time.life-shape-field.layer.pressure"].tap()
+        XCTAssertTrue(scrollUntilStaticTextExists("Pressure", in: app, maxAttempts: 8))
+        XCTAssertTrue(scrollUntilStaticTextExists("Make today lighter", in: app, maxAttempts: 8))
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "82% pressure")).firstMatch.exists)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "poor productivity")).firstMatch.exists)
+        captureTimeScreenshot(named: "amb-1171-pressure-root", in: app)
+
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
+        app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.staticTexts["Today made lighter"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Today recomputed")).firstMatch.exists)
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Later Today updated")).firstMatch.exists)
+        captureTimeScreenshot(named: "amb-1171-pressure-after-make-today-lighter", in: app)
+
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.undo"].waitForExistence(timeout: 10))
+        app.descendants(matching: .any)["time.life-shape-field.undo"].tap()
+        XCTAssertTrue(app.staticTexts["Undo applied"].waitForExistence(timeout: 10))
+        captureTimeScreenshot(named: "amb-1171-pressure-after-undo", in: app)
+
+        XCTAssertTrue(openCanonicalDestination("Today", screenIdentifier: "today.screen", in: app))
+        XCTAssertTrue(app.staticTexts["Start here"].waitForExistence(timeout: 10) || app.staticTexts["Start now"].waitForExistence(timeout: 10))
+        captureTodayScreenshot(named: "amb-1171-today-after-pressure-mutation", in: app)
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,
@@ -1927,12 +1964,12 @@ final class AmbitionsUITests: XCTestCase {
     }
 
     private func captureTodayScreenshot(named name: String, in app: XCUIApplication) {
+        XCTAssertTrue(todayRealityMeridianAnchorExists(in: app))
         let screenshot = XCUIScreen.main.screenshot()
         let attachment = XCTAttachment(screenshot: screenshot)
         attachment.name = name
         attachment.lifetime = .keepAlways
         add(attachment)
-        XCTAssertTrue(todayRealityMeridianAnchorExists(in: app))
     }
 
     private func captureGoalsScreenshot(named name: String, in app: XCUIApplication) {

@@ -51,6 +51,14 @@ extension TimeLifeSuiteProjector {
         let protectedIntensity = min(Double(protectedBlocks) / Double(max(weekDays.flatMap(\.blocks).count, 1)), 1)
         let sourceConflictActive = renderState == .sourceConflict || calendarAwareness.status == .denied
         let receiptActive = renderState == .receiptAttached || renderState == .reflowPreview
+        let pressureKind = PressureEngine().kind(
+            for: Self.pressureOrdinal(
+                pressuredDays: pressuredDays,
+                openCaptureCount: openCaptureCount,
+                activeGoalCount: activeGoalCount,
+                protectedBlocks: protectedBlocks
+            )
+        )
         let weekInput = LifeShapeInputRef(
             id: "time.week-days.\(weekDays.count)",
             kind: .fixedPoint,
@@ -98,7 +106,7 @@ extension TimeLifeSuiteProjector {
         }
 
         var marks = [
-            makeMark(kind: .pressure, valueLabel: capacityFit.title, detail: "Pressure is a compression ridge with inspectable meaning.", intensity: pressureIntensity, visualState: capacityFit.visualState, inputRefs: [weekInput, calendarInput]),
+            makeMark(kind: .pressure, valueLabel: pressureKind.title, detail: Self.pressureDetail(kind: pressureKind, pressuredDays: pressuredDays), intensity: pressureIntensity, visualState: capacityFit.visualState, inputRefs: [weekInput, calendarInput]),
             makeMark(kind: .cognitiveLoad, valueLabel: pressuredDays == 0 ? "Light" : "Review", detail: "Cognitive load follows pressured days and remains text-labeled.", intensity: pressureIntensity * 0.78, visualState: pressuredDays == 0 ? .default : .warning, inputRefs: [weekInput]),
             makeMark(kind: .physicalEnergy, valueLabel: recoveryNeed > 0.55 ? "Reserve" : "Steady", detail: "Physical energy appears as a reserve basin when recovery is needed.", intensity: recoveryNeed * 0.62, visualState: recoveryNeed > 0.55 ? .warning : .default, inputRefs: [weekInput]),
             makeMark(kind: .transitionFriction, valueLabel: transitionFriction > 0.35 ? "Narrow" : "Smooth", detail: "Transition friction is a narrowed bridge when pressure exceeds open lanes.", intensity: transitionFriction, visualState: transitionFriction > 0.35 ? .warning : .default, inputRefs: [weekInput]),

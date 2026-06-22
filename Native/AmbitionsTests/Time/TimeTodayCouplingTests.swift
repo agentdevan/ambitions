@@ -96,6 +96,45 @@ final class TimeTodayCouplingTests: XCTestCase {
         XCTAssertTrue(keepClear.todayRecompute.todayRecommendationAvoidsAffectedWindow)
     }
 
+    func testAMB1171MakeTodayLighterUpdatesPressureAndTodayCoupling() throws {
+        let now = try XCTUnwrap(ISO8601DateFormatter().date(from: "2027-02-19T12:20:00Z"))
+        let field = PreviewTimeScenarios.seeded.lifeSuite.field
+        let pressureMark = try XCTUnwrap(field.semanticMarks.first { $0.kind == .pressure })
+        let before = try LifeShapeProjection.fromVisibleTimeField(
+            field,
+            selectedMark: pressureMark,
+            preferredLayer: .pressure,
+            now: now
+        )
+        let target = try XCTUnwrap(before.todayBuckets.first { $0.layer == .pressure })
+        let command = timeCommand(
+            kind: .correctTimeWindow,
+            timeID: target.id,
+            title: "Make today lighter",
+            metadata: ["correctionKind": TimeMutationActionKind.makeTodayLighter.rawValue]
+        )
+
+        let mutation = try TimeMutation.make(command: command, beforeProjection: before)
+        let runtimeMutation = PrivateLifeRuntime().mutation(
+            for: command,
+            beforeSnapshot: before.semanticSummary,
+            afterSnapshot: mutation.afterProjection.semanticSummary,
+            targetSurface: .time,
+            timeMutation: mutation
+        )
+        let afterTarget = try XCTUnwrap(mutation.afterProjection.todayBuckets.first { $0.id == target.id })
+
+        XCTAssertEqual(mutation.actionKind, .makeTodayLighter)
+        XCTAssertEqual(afterTarget.layer, .pressure)
+        XCTAssertEqual(afterTarget.reading.kind, .pressure)
+        XCTAssertEqual(afterTarget.reading.title, "Light")
+        XCTAssertTrue(mutation.todayRecompute.recomputedToday)
+        XCTAssertTrue(mutation.todayRecompute.hasTimeCauseProof)
+        XCTAssertTrue(mutation.todayRecompute.affectedBucketIDs.contains(target.id))
+        XCTAssertEqual(runtimeMutation?.stageMutation.visibleUserFacingChange, "Today made lighter")
+        XCTAssertTrue(runtimeMutation?.stageMutation.accessibilityAnnouncement.message.contains("Today made lighter") == true)
+    }
+
     private func timeCommand(
         kind: AmbitionsCommandKind,
         timeID: String,

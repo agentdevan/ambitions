@@ -15,7 +15,7 @@ struct LifeShapeCorrectionMenu: View {
             Button("Needs more time", systemImage: "clock.arrow.circlepath", action: onNeedsMoreTime)
             Button("Keep this clear", systemImage: "lock.shield", action: onKeepClear)
         } label: {
-            Label(layer == .open ? "Correct window" : "Update boundary", systemImage: "slider.horizontal.3")
+            Label(labelTitle, systemImage: "slider.horizontal.3")
                 .font(theme.typography.body.weight(.semibold))
                 .lineLimit(1)
                 .minimumScaleFactor(0.76)
@@ -23,5 +23,18 @@ struct LifeShapeCorrectionMenu: View {
         }
         .buttonStyle(.bordered)
         .accessibilityIdentifier("time.life-shape-field.correction-menu")
+    }
+
+    private var labelTitle: String {
+        switch layer {
+        case .open:
+            "Correct window"
+        case .protected:
+            "Update boundary"
+        case .pressure:
+            "Update pressure"
+        case .buffer:
+            "Update buffer"
+        }
     }
 }

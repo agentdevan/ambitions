@@ -27,6 +27,14 @@ extension TimeLifeSuiteProjector {
         } else {
             capacityFit = .steady
         }
+        let pressureKind = PressureEngine().kind(
+            for: Self.pressureOrdinal(
+                pressuredDays: pressuredDays,
+                openCaptureCount: openCaptureCount,
+                activeGoalCount: activeGoalCount,
+                protectedBlocks: protectedBlocks
+            )
+        )
 
         let sourceTitle = calendarAwareness.canRequestCalendarRead ? "Calendar optional" : "Manual Time source"
         let sourceDetail = calendarAwareness.canRequestCalendarRead
@@ -71,8 +79,8 @@ extension TimeLifeSuiteProjector {
                 ),
                 LifeShapeSegment(
                     kind: .pressure,
-                    detail: pressuredDays == 0 ? "No pressured day is asking for relief." : "\(pressuredDays) pressured day\(pressuredDays == 1 ? "" : "s") need review before adding more.",
-                    valueLabel: capacityFit.title,
+                    detail: Self.pressureDetail(kind: pressureKind, pressuredDays: pressuredDays),
+                    valueLabel: pressureKind.title,
                     weight: capacityFit == .overloaded ? 0.92 : (capacityFit == .tight ? 0.72 : 0.38),
                     visualState: capacityFit.visualState
                 ),
@@ -162,6 +170,32 @@ extension TimeLifeSuiteProjector {
 
     static func countLabel(_ count: Int, singular: String, plural: String) -> String {
         "\(count) \(count == 1 ? singular : plural)"
+    }
+
+    static func pressureOrdinal(
+        pressuredDays: Int,
+        openCaptureCount: Int,
+        activeGoalCount: Int,
+        protectedBlocks: Int
+    ) -> Int {
+        var ordinal = pressuredDays >= 3 ? 3 : pressuredDays
+        if openCaptureCount > 0 { ordinal += 1 }
+        if activeGoalCount >= 4 { ordinal += 1 }
+        if protectedBlocks > 0 && pressuredDays > 0 { ordinal += 1 }
+        return ordinal
+    }
+
+    static func pressureDetail(kind: PressureKind, pressuredDays: Int) -> String {
+        switch kind {
+        case .light:
+            "Capacity has room before another Step is added."
+        case .crowded:
+            "One part of the week is close enough to review first."
+        case .tight:
+            "\(max(pressuredDays, 1)) day\(max(pressuredDays, 1) == 1 ? "" : "s") should stay narrow before adding more."
+        case .needsBuffer:
+            "Shorten one ask or protect one window before adding more."
+        }
     }
 
 }
