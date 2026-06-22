@@ -5,6 +5,7 @@ struct RuntimeProjectionPipeline: Sendable {
     let recommendationEngine: RecommendationEngine
     let capacityEngine: CapacityEngine
     let pressureEngine: PressureEngine
+    let bufferEngine: BufferEngine
     let recoveryEngine: RecoveryEngine
 
     init(
@@ -12,12 +13,14 @@ struct RuntimeProjectionPipeline: Sendable {
         recommendationEngine: RecommendationEngine = RecommendationEngine(),
         capacityEngine: CapacityEngine = CapacityEngine(),
         pressureEngine: PressureEngine = PressureEngine(),
+        bufferEngine: BufferEngine = BufferEngine(),
         recoveryEngine: RecoveryEngine = RecoveryEngine()
     ) {
         self.projector = projector
         self.recommendationEngine = recommendationEngine
         self.capacityEngine = capacityEngine
         self.pressureEngine = pressureEngine
+        self.bufferEngine = bufferEngine
         self.recoveryEngine = recoveryEngine
     }
 
@@ -30,6 +33,7 @@ struct RuntimeProjectionPipeline: Sendable {
         let recommendation = recommendationEngine.recommendation(from: nowState)
         let capacity = capacityEngine.capacityShape(from: nowState)
         let pressure = pressureEngine.reading(nowState: nowState, capacityShape: capacity)
+        let buffer = bufferEngine.reading(nowState: nowState, capacityShape: capacity)
         let recovery = recoveryEngine.recoveryState(from: nowState)
         let proofLedger = ProofLedger(nowState: nowState, proofs: proofs)
         let privacyBoundary = PrivacyBoundary(boundary: boundary, privacy: nowState.privacy)
@@ -41,6 +45,7 @@ struct RuntimeProjectionPipeline: Sendable {
             recommendation: recommendation,
             capacityShape: capacity,
             pressureReading: pressure,
+            bufferReading: buffer,
             recoveryState: recovery,
             proofLedger: proofLedger,
             privacyBoundary: privacyBoundary,

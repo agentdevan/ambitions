@@ -9,6 +9,7 @@ struct RuntimeSnapshot: Codable, Sendable, Equatable, Identifiable {
     let recommendation: RuntimeRecommendation
     let capacityShape: CapacityShape
     let pressureReading: PressureReading
+    let bufferReading: BufferReading
     let recoveryState: RecoveryState
     let proofLedger: ProofLedger
     let privacyBoundary: PrivacyBoundary
@@ -26,6 +27,7 @@ struct RuntimeSnapshot: Codable, Sendable, Equatable, Identifiable {
         recommendation: RuntimeRecommendation,
         capacityShape: CapacityShape,
         pressureReading: PressureReading? = nil,
+        bufferReading: BufferReading? = nil,
         recoveryState: RecoveryState,
         proofLedger: ProofLedger,
         privacyBoundary: PrivacyBoundary,
@@ -39,6 +41,7 @@ struct RuntimeSnapshot: Codable, Sendable, Equatable, Identifiable {
         self.recommendation = recommendation
         self.capacityShape = capacityShape
         self.pressureReading = pressureReading ?? PressureEngine().reading(nowState: nowState, capacityShape: capacityShape)
+        self.bufferReading = bufferReading ?? BufferEngine().reading(nowState: nowState, capacityShape: capacityShape)
         self.recoveryState = recoveryState
         self.proofLedger = proofLedger
         self.privacyBoundary = privacyBoundary
@@ -67,6 +70,7 @@ extension RuntimeSnapshot {
         case recommendation
         case capacityShape
         case pressureReading
+        case bufferReading
         case recoveryState
         case proofLedger
         case privacyBoundary
@@ -84,6 +88,7 @@ extension RuntimeSnapshot {
         let recommendation = try container.decode(RuntimeRecommendation.self, forKey: .recommendation)
         let capacityShape = try container.decode(CapacityShape.self, forKey: .capacityShape)
         let pressureReading = try container.decodeIfPresent(PressureReading.self, forKey: .pressureReading)
+        let bufferReading = try container.decodeIfPresent(BufferReading.self, forKey: .bufferReading)
 
         self.init(
             id: try container.decode(String.self, forKey: .id),
@@ -92,6 +97,7 @@ extension RuntimeSnapshot {
             recommendation: recommendation,
             capacityShape: capacityShape,
             pressureReading: pressureReading,
+            bufferReading: bufferReading,
             recoveryState: try container.decode(RecoveryState.self, forKey: .recoveryState),
             proofLedger: try container.decode(ProofLedger.self, forKey: .proofLedger),
             privacyBoundary: try container.decode(PrivacyBoundary.self, forKey: .privacyBoundary),
