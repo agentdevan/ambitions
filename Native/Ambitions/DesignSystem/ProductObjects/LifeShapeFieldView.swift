@@ -246,7 +246,6 @@ struct LifeShapeFieldView: View {
                revealsPressure || confirmedReflowAction != nil {
                 reflowTrustSeam
             }
-            continuityDock
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("time.life-shape-field")
@@ -352,6 +351,17 @@ struct LifeShapeFieldView: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("time.life-shape-field.horizon-rows")
+    }
+
+    var accessibilityValue: String {
+        [
+            reading.title,
+            reading.summary,
+            reading.capacityStatement,
+            selectedMark?.accessibilitySummary
+        ]
+        .compactMap { $0 }
+        .joined(separator: ". ")
     }
 
 }

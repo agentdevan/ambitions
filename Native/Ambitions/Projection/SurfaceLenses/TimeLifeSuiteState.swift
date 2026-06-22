@@ -62,7 +62,7 @@ struct TimeLifeSuiteState: Sendable {
             renderState: .defaultWeek,
             readings: [
                 .day: LifeShapeReading(horizon: .day, title: day?.title ?? "Day shape", summary: day?.summary ?? "Manual shaping available.", capacityStatement: day?.capacityLabel ?? "Capacity is qualitative.", sourceDetail: day?.provenanceLabel ?? manualFallbackLabel),
-                .week: LifeShapeReading(horizon: .week, title: week?.title ?? "Week shape", summary: week?.summary ?? "Week shape is local and qualitative.", capacityStatement: week?.capacityLabel ?? "Capacity is qualitative.", sourceDetail: week?.provenanceLabel ?? manualFallbackLabel),
+                .week: LifeShapeReading(horizon: .week, title: week?.title ?? "Week fit", summary: week?.summary ?? "Current week fit is local and qualitative.", capacityStatement: week?.capacityLabel ?? "Capacity is qualitative.", sourceDetail: week?.provenanceLabel ?? manualFallbackLabel),
                 .month: LifeShapeReading(horizon: .month, title: "Month shape", summary: life?.summary ?? "Longer-range Time shape is quiet.", capacityStatement: life?.capacityLabel ?? "Longer-range capacity is qualitative.", sourceDetail: life?.provenanceLabel ?? manualFallbackLabel),
                 .year: LifeShapeReading(horizon: .year, title: "Year shape", summary: life?.summary ?? "Year shape stays directional until active goals create a longer arc.", capacityStatement: life?.capacityLabel ?? "Year capacity remains qualitative.", sourceDetail: life?.provenanceLabel ?? manualFallbackLabel)
             ],

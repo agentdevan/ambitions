@@ -197,7 +197,7 @@ extension PreviewTimeScenarios {
             ],
             confirmationRequired: "Safe local suggestion",
             undoAvailability: "Undo can be local",
-            safeFailureFallback: "If you decline confirmation, Ambitions keeps the week shape as-is and leaves manual shaping available.",
+            safeFailureFallback: "If you decline confirmation, Ambitions keeps the week fit as-is and leaves manual shaping available.",
             visualState: .warning
         ),
         recoveryMaturity: TimeRecoveryMaturityState(
@@ -212,7 +212,7 @@ extension PreviewTimeScenarios {
                 TimeRecoveryMaturitySignalState(id: "fit", title: "Shape fit", detail: "One day needs relief before the week widens.", statusLabel: "Needs relief", boundaryLabel: "Suggests one smaller step", visualState: .warning),
                 TimeRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "One waiting item should stay visible instead of becoming quiet pressure.", statusLabel: "Visible", boundaryLabel: "No silent routing", visualState: .warning),
                 TimeRecoveryMaturitySignalState(id: "social-load", title: "Social load", detail: "People-shaped pressure stays private and manual-first.", statusLabel: "Private", boundaryLabel: "No inference without you", visualState: .selected),
-                TimeRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the week shape as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .warning)
+                TimeRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the week fit as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .warning)
             ]
         ),
         pressureScrubber: TimePressureScrubberState(
@@ -257,7 +257,7 @@ extension PreviewTimeScenarios {
             lanes: [
                 TimeExecutionResilienceLane(id: "carryover", title: "Carryover", detail: "Retention loop still sits outside the week.", recommendation: "Give it one calmer lane instead of widening the whole week.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-2"), timeRoute: nil),
                 TimeExecutionResilienceLane(id: "overload", title: "Overload", detail: "Tuesday is carrying more than the week can explain calmly.", recommendation: "Lighten shell work before adding anything new.", state: .warning, goalTarget: GoalRouteTarget(goalID: "preview-goal-1"), timeRoute: nil),
-                TimeExecutionResilienceLane(id: "rituals", title: "Rituals", detail: "One routine should support the week shape without crowding it.", recommendation: "Use the rituals route to keep the loop lightweight.", state: .selected, goalTarget: nil, timeRoute: .rituals),
+                TimeExecutionResilienceLane(id: "rituals", title: "Rituals", detail: "One routine should support the week fit without crowding it.", recommendation: "Use the rituals route to keep the loop lightweight.", state: .selected, goalTarget: nil, timeRoute: .rituals),
                 TimeExecutionResilienceLane(id: "captures", title: "Captures", detail: "Two open captures still need to be absorbed or parked.", recommendation: "Attach or park capture pressure before polishing the schedule.", state: .warning, goalTarget: nil, timeRoute: nil, interactionIntent: .openGlobalCapture),
                 TimeExecutionResilienceLane(id: "review", title: "Weekly review", detail: "Close the current week by shaping what should continue.", recommendation: "Review should feel like a continuation, not a detached ritual.", state: .warning, goalTarget: nil, timeRoute: .weeklyReview)
             ],

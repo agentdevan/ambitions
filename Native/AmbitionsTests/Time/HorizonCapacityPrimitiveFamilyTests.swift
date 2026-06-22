@@ -39,7 +39,6 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
         let timeFieldSource = [
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCapacity.swift", root: root),
-            try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldContinuity.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldReflow.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldCanvas.swift", root: root),
             try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeLayerSelector.swift", root: root),
@@ -63,7 +62,7 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.layer-selector"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.now-instrument"))
         XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.horizon-rows"))
-        XCTAssertTrue(timeFieldSource.contains("time.life-shape-field.continuity-dock"))
+        XCTAssertFalse(timeFieldSource.contains("time.life-shape-field.continuity-dock"))
         XCTAssertFalse(timeFieldSource.contains("sourceReceiptRow"))
         XCTAssertFalse(timeFieldSource.contains("LifeShape zoom"))
         XCTAssertFalse(timeFieldSource.contains("Day, week, month, year, and later stay inside the same field."))
@@ -72,6 +71,26 @@ final class HorizonCapacityPrimitiveFamilyTests: XCTestCase {
         XCTAssertFalse(timeFieldSource.contains("Text(reading.capacityStatement)\n                    .font(theme.typography.bodyEmphasized)"))
         XCTAssertFalse(timeFieldSource.contains("TagPill(suite.calendarBoundaryLabel"))
         XCTAssertFalse(timeFieldSource.contains("Label(item, systemImage: continuityIcon(at: index))"))
+    }
+
+    func testAMB1175OldRootTimeReportAndFallbackClutterAreNotReachable() throws {
+        let root = repoRoot()
+        let surfaceSource = try source("Native/Ambitions/Surfaces/Time/TimeSurface.swift", root: root)
+        let fieldSource = try source("Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift", root: root)
+        let combined = [surfaceSource, fieldSource].joined(separator: "\n")
+
+        XCTAssertFalse(combined.contains("time.empty.create-goal"))
+        XCTAssertFalse(combined.contains("time.empty.open-captures"))
+        XCTAssertFalse(combined.contains("DegradedStateOrchestrator.timeEmpty()"))
+        XCTAssertFalse(combined.contains("time.life-shape-field.continuity-dock"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("source unavailable"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("receipt current"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("review before reflow"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("runtime-backed"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("proof seam"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("route reveal"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("ready before change"))
+        XCTAssertFalse(combined.localizedCaseInsensitiveContains("privacy posture"))
     }
 
     func testAMB581OldHorizonCapacityCardsAreUnreachableFromActiveTimeBody() throws {

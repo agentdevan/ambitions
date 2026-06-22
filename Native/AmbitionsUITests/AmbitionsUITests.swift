@@ -1694,6 +1694,27 @@ final class AmbitionsUITests: XCTestCase {
         captureTimeScreenshot(named: "amb-1174-time-accessibility-variant", in: app)
     }
 
+    func testAMB1175TimeRootDeletesOldReportAndFallbackClutter() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES",
+                "AmbitionsTimeRenderState": "default-week"
+            ]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: app))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.layer-selector"].exists)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.now-instrument"].exists)
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field.primary-action"].exists)
+        assertAMB1175OldTimeRootGuards(in: app)
+        captureTimeScreenshot(named: "amb-1175-time-root-new-only", in: app)
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,
@@ -1728,6 +1749,55 @@ final class AmbitionsUITests: XCTestCase {
                 file: file,
                 line: line
             )
+        }
+    }
+
+    private func assertAMB1175OldTimeRootGuards(
+        in app: XCUIApplication,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        for identifier in [
+            "time.empty.create-goal",
+            "time.empty.open-captures",
+            "time.life-shape-field.continuity-dock"
+        ] {
+            XCTAssertFalse(
+                app.descendants(matching: .any)[identifier].exists,
+                "AMB-1175 root Time must not expose old fallback identifier \(identifier)",
+                file: file,
+                line: line
+            )
+        }
+
+        let staticTextLabels = app.staticTexts.allElementsBoundByIndex
+            .map(\.label)
+            .filter { $0.isEmpty == false }
+
+        for forbidden in [
+            "source unavailable",
+            "receipt current",
+            "review before reflow",
+            "runtime-backed",
+            "proof seam",
+            "route reveal",
+            "ready before change",
+            "privacy posture",
+            "2x2",
+            "Week Shape",
+            "Reflow preview",
+            "Context stays together",
+            "Create goal",
+            "Open Capture"
+        ] {
+            let matchingLabels = staticTextLabels.filter { $0.localizedCaseInsensitiveContains(forbidden) }
+            if matchingLabels.isEmpty == false {
+                XCTFail(
+                    "AMB-1175 root Time must not expose old card/report/fallback copy: \(forbidden). Matching labels: \(matchingLabels)",
+                    file: file,
+                    line: line
+                )
+            }
         }
     }
 

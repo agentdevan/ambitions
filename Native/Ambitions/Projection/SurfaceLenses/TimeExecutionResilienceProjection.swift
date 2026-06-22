@@ -55,7 +55,7 @@ extension RepositoryBackedTimeService {
                     title: "Rituals",
                     detail: ritualGoals.isEmpty
                         ? "No recurring loop is currently shaping the week."
-                        : "\(ritualGoals.count) routine\(ritualGoals.count == 1 ? "" : "s") should support the week shape instead of competing with it.",
+                        : "\(ritualGoals.count) routine\(ritualGoals.count == 1 ? "" : "s") should support the week fit instead of competing with it.",
                     recommendation: ritualGoals.isEmpty
                         ? "Keep the week dominant until a repeatable loop is truly needed."
                         : "Use the routines route to soften or trim loops that are crowding the week.",

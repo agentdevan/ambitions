@@ -255,7 +255,7 @@ struct LifeShapeFieldState: Sendable, Hashable {
     func reading(for horizon: TimeHorizon) -> LifeShapeReading {
         readings[horizon] ?? readings[defaultHorizon] ?? LifeShapeReading(
             horizon: defaultHorizon,
-            title: "Week shape",
+            title: "Week fit",
             summary: "Time is waiting for enough local context to shape the field.",
             capacityStatement: "Capacity is qualitative until more local context is available.",
             sourceDetail: sourceState.detail

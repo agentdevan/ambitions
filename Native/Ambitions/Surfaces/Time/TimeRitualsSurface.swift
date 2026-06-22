@@ -42,7 +42,7 @@ struct TimeRitualsSurface: View {
                         VStack(alignment: .leading, spacing: theme.spacing.md) {
                             SectionHeader(
                                 title: "Rituals inside Time",
-                                subtitle: "Routines should support week shape, not compete with it."
+                                subtitle: "Routines should support week fit, not compete with it."
                             )
 
                             Text("Use this route to soften, keep, or trim repeatable loops based on what the current week can actually carry.")

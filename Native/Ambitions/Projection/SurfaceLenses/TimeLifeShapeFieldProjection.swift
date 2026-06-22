@@ -121,7 +121,7 @@ extension TimeLifeSuiteProjector {
                 ),
                 .week: LifeShapeReading(
                     horizon: .week,
-                    title: "Week shape",
+                    title: "Week fit",
                     summary: week?.summary ?? "The week has room until local goals or captures change it.",
                     capacityStatement: weekCapacityStatement,
                     sourceDetail: week?.provenanceLabel ?? sourceDetail
@@ -151,7 +151,7 @@ extension TimeLifeSuiteProjector {
                 visualState: calendarAwareness.canRequestCalendarRead ? .selected : .default
             ),
             reflowProposal: LifeShapeReflowProposal(
-                title: capacityFit == .tight || capacityFit == .overloaded ? "Review pressure before adding more" : "Keep the week shaped around what matters",
+                title: capacityFit == .tight || capacityFit == .overloaded ? "Review pressure before adding more" : "Keep the week fit around what matters",
                 detail: openCaptureCount == 0
                     ? "No unplaced capture is forcing a Time change."
                     : "\(openCaptureCount) capture\(openCaptureCount == 1 ? "" : "s") need placement before Time changes.",

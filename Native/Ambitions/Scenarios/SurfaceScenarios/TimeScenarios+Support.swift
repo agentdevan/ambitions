@@ -7,7 +7,7 @@ extension PreviewTimeScenarios {
         subtitle: "LifeShape Field shows what the week can hold.",
         shapes: [
             TimeLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "Today has tight room and three scheduled blocks.", facts: ["Tight room", "One open window", "3 scheduled blocks attached."], sourceLabel: "Based on Time", boundaryLabel: "No silent reshaping", visualState: .warning),
-            TimeLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "Two days may need shaping before the week feels believable.", facts: ["2 pressured days visible.", "2 captures need a place.", "7 days included in this week."], sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .warning),
+            TimeLifeSuiteShapeState(kind: .week, title: "Week fit", question: "Does the week still fit?", summary: "Two days may need shaping before the week feels believable.", facts: ["2 pressured days visible.", "2 captures need a place.", "7 days included in this week."], sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .warning),
             TimeLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time still pointed at the life you are building?", summary: "Three active goals shape the current LifeShape Field.", facts: ["3 active goals included.", "Life Shape stays inside Time."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .selected)
         ],
         calendarBoundaryLabel: "Calendar stays optional",
@@ -20,7 +20,7 @@ extension PreviewTimeScenarios {
         subtitle: "LifeShape Field shows what the week can hold.",
         shapes: [
             TimeLifeSuiteShapeState(kind: .day, title: "Day Shape", question: "What can this day honestly hold?", summary: "No day shape is loaded yet.", facts: ["Manual shaping is available.", "Nothing moves without review."], sourceLabel: "Based on Time", boundaryLabel: "No silent reshaping", visualState: .default),
-            TimeLifeSuiteShapeState(kind: .week, title: "Week Shape", question: "Does the week still fit?", summary: "The week has room until goals, captures, or routines create real constraints.", facts: ["0 pressured days visible.", "0 captures need a place.", "7 days included in this week."], sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .selected),
+            TimeLifeSuiteShapeState(kind: .week, title: "Week fit", question: "Does the week still fit?", summary: "The week has room until goals, captures, or routines create real constraints.", facts: ["0 pressured days visible.", "0 captures need a place.", "7 days included in this week."], sourceLabel: "Based on goals and captures", boundaryLabel: "Suggestions require confirmation", visualState: .selected),
             TimeLifeSuiteShapeState(kind: .life, title: "Life Shape", question: "Is Time still pointed at the life you are building?", summary: "Life Shape is quiet until active goals give Time something to shape.", facts: ["No active goals shaping life view yet.", "Life Shape stays inside Time."], sourceLabel: "Based on active goals", boundaryLabel: "Life view, broader than time slots", visualState: .default)
         ],
         calendarBoundaryLabel: "Manual shaping still works",
@@ -93,7 +93,7 @@ extension PreviewTimeScenarios {
                 id: "preview-decision-empty",
                 kind: .keepTime,
                 title: "Keep shape",
-                detail: "Leave the week shape unchanged until there is enough evidence to adjust it.",
+                detail: "Leave the week fit unchanged until there is enough evidence to adjust it.",
                 impactLabel: "No shape mutation",
                 sourceLabel: "Based on your Time shape",
                 trustLabel: "Changes stay reviewable",

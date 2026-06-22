@@ -51,21 +51,6 @@ struct TimeSurface: View {
                             onUndoMutation: undoLifeShapeMutation
                         )
 
-                        if let emptyTitle = timeState.emptyTitle, let emptyMessage = timeState.emptyMessage {
-                            DegradedStateSurface(
-                                state: DegradedStateOrchestrator.timeEmpty(),
-                                primaryAccessibilityIdentifier: "time.empty.create-goal",
-                                secondaryAccessibilityIdentifier: "time.empty.open-captures",
-                                onPrimaryAction: {
-                                    _ = emptyTitle
-                                    _ = emptyMessage
-                                    shell.commandRouter.presentCreateGoal(source: .shellCompose)
-                                },
-                                onSecondaryAction: {
-                                    presentTimeCapture()
-                                }
-                            )
-                        }
                     }
                 }
                 .padding(.horizontal, theme.spacing.lg)

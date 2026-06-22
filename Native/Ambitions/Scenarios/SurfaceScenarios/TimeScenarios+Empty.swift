@@ -102,7 +102,7 @@ extension PreviewTimeScenarios {
             title: "Recovery room",
             detail: "Save the Day stays suggestion-only here. Broad reshaping waits for confirmed recovery tools.",
             suggestions: [
-                TimeDecisionItemState(id: "preview-empty-recovery", title: "Protect recovery room", detail: "The safest choice is keeping an open pocket unfilled.", suggestion: "Recovery room is part of the week shape, not a failure to optimize.", visualState: .success, target: nil, timeRoute: nil)
+                TimeDecisionItemState(id: "preview-empty-recovery", title: "Protect recovery room", detail: "The safest choice is keeping an open pocket unfilled.", suggestion: "Recovery room is part of the week fit, not a failure to optimize.", visualState: .success, target: nil, timeRoute: nil)
             ],
             boundary: "No schedule changes happen from this card."
         ),
@@ -111,13 +111,13 @@ extension PreviewTimeScenarios {
             detail: "Create or choose one Time item before reviewing a change.",
             reasonKind: .lowData,
             reasonDetail: "There is not enough week pressure to reshape yet.",
-            recommendedAdjustment: "Keep week shape unchanged",
+            recommendedAdjustment: "Keep week fit unchanged",
             noChangeCopy: "Nothing changed yet.",
             suggestions: [
                 TimeReflowSuggestionState(
                     id: "preview-empty-shape-keep",
                     kind: .keepTimeUnchanged,
-                    title: "Keep week shape unchanged",
+                    title: "Keep week fit unchanged",
                     detail: "Create or choose one Time item before reviewing a change.",
                     impactLabel: "No shape mutation",
                     boundary: TimeReflowBoundaryState(actionKind: .noOp, confirmationRequirement: .notRequired, undoAvailability: .availableLocal, safetyLabel: "Safe/local"),
@@ -147,7 +147,7 @@ extension PreviewTimeScenarios {
             detail: "Time handles the deeper recovery shape without changing anything for you.",
             oneQuestion: nil,
             protectedItem: "One must-do",
-            adjustment: "Keep the week shape unchanged",
+            adjustment: "Keep the week fit unchanged",
             recoveryExplanation: "No rescue is needed; keep recovery room visible.",
             boundary: "No silent rescheduling. No calendar write. Nothing changed yet.",
             visualState: .default
@@ -155,7 +155,7 @@ extension PreviewTimeScenarios {
         reflowReceiptPreview: TimeReflowReceiptPreviewState(
             title: "Before anything changes",
             detail: "A shape review preview shows the tradeoff before action, not after a silent mutation.",
-            whatChanged: ["Protect: One must-do", "Adjust: Keep the week shape unchanged", "No reshaping would be applied."],
+            whatChanged: ["Protect: One must-do", "Adjust: Keep the week fit unchanged", "No reshaping would be applied."],
             whatWouldNotChange: ["Calendar blocks are not written.", "The week is not silently rescheduled.", "Sync, export, widgets, and future systems are not touched."],
             momentumReflowContract: [
                 "Original block link: One must-do (source confirmation path active).",
@@ -166,7 +166,7 @@ extension PreviewTimeScenarios {
             ],
             confirmationRequired: "Safe local suggestion",
             undoAvailability: "Undo can be local",
-            safeFailureFallback: "If you decline confirmation, Ambitions keeps the week shape as-is and leaves manual shaping available.",
+            safeFailureFallback: "If you decline confirmation, Ambitions keeps the week fit as-is and leaves manual shaping available.",
             visualState: .default
         ),
         recoveryMaturity: TimeRecoveryMaturityState(
@@ -181,7 +181,7 @@ extension PreviewTimeScenarios {
                 TimeRecoveryMaturitySignalState(id: "fit", title: "Shape fit", detail: "No rescue is needed; keep recovery room visible.", statusLabel: "Believable", boundaryLabel: "Suggests one smaller step", visualState: .success),
                 TimeRecoveryMaturitySignalState(id: "waiting-commitments", title: "Waiting and commitments", detail: "No waiting item or one-time commitment is currently pushing on the week.", statusLabel: "Quiet", boundaryLabel: "No silent routing", visualState: .default),
                 TimeRecoveryMaturitySignalState(id: "social-load", title: "Social load", detail: "No social-load assumption is inferred.", statusLabel: "Manual", boundaryLabel: "No inference without you", visualState: .default),
-                TimeRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the week shape as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .default)
+                TimeRecoveryMaturitySignalState(id: "receipt", title: "Receipt and undo", detail: "If you decline confirmation, Ambitions keeps the week fit as-is.", statusLabel: "Safe local suggestion", boundaryLabel: "Undo can be local", visualState: .default)
             ]
         ),
         pressureScrubber: TimePressureScrubberState(

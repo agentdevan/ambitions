@@ -55,7 +55,7 @@ extension TimeLifeSuiteProjector {
 
         return TimeLifeSuiteShapeState(
             kind: .week,
-            title: "Week Shape",
+            title: "Week fit",
             question: "Does the week still fit?",
             summary: openCaptureCount > 0
                 ? "\(summary) \(openCaptureCount) capture\((openCaptureCount == 1) ? "" : "s") still need a place."

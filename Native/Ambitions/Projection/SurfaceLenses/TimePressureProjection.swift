@@ -59,7 +59,7 @@ extension RepositoryBackedTimeService {
                 : "The week still has readable room, so recovery can stay protective instead of becoming extra arrangement.",
             pressureFieldLabel: overloadedDays > 0
                 ? "Pressure field: \(overloadedDays) \(dayNoun) should be lightened before new work lands."
-                : "Pressure field: keep the current week shape readable before widening it.",
+                : "Pressure field: keep the current week fit readable before widening it.",
             recoveryLoopLabel: pressureVisible
                 ? "Recovery loop: explain pressure, choose the smaller step, then preview the receipt."
                 : "Recovery loop: preserve room and keep Still Counts available.",

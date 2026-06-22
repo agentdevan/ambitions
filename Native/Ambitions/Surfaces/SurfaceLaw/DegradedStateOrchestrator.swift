@@ -34,19 +34,6 @@ enum DegradedStateOrchestrator {
         )
     }
 
-    static func timeEmpty() -> DegradedStatePresentation {
-        DegradedStatePresentation(
-            id: "degraded.time.empty",
-            kind: .empty,
-            title: "The LifeShape Field is open",
-            explanation: FlagshipObjectStateOwner.lifeShapeContourMap.emptyExplanation,
-            primaryAction: DegradedStateAction(title: "Create a goal", systemImage: AmbitionsSurface.goals.systemImage, routingHint: .createGoal),
-            secondaryAction: DegradedStateAction(title: "Capture", systemImage: AppShellCaptureAccessModel.systemImage, routingHint: .quickCapture),
-            tone: .selected,
-            icon: FlagshipObjectStateOwner.lifeShapeContourMap.icon
-        )
-    }
-
     static func captureComposerEmpty() -> DegradedStatePresentation {
         DegradedStatePresentation(
             id: "degraded.capture-composer.empty",

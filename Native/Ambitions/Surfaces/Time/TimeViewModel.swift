@@ -19,8 +19,8 @@ final class TimeViewModel {
         case .loading:
             return "loading"
         case let .loaded(timeState):
-            let mutationID = visibleTimeMutation?.stageMutation.runtimeMutationID ?? "none"
-            return "loaded:\(timeState.mode):\(timeState.weekDays.count):\(timeState.goalShapingItems.count):\(timeState.shapingActions.count):\(mutationID)"
+            let changeID = visibleTimeMutation?.stageMutation.runtimeMutationID ?? "none"
+            return "loaded:\(timeState.mode):\(timeState.weekDays.count):\(timeState.goalShapingItems.count):\(timeState.shapingActions.count):\(changeID)"
         case let .failed(message):
             return "failed:\(message)"
         }

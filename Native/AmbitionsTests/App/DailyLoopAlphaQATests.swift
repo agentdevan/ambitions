@@ -19,7 +19,6 @@ final class DailyLoopAlphaQATests: XCTestCase {
     func testDailyLoopEmptyAndReturnPathsRouteToOneRealAction() {
         let today = DegradedStateOrchestrator.todayEmpty()
         let capture = DegradedStateOrchestrator.captureComposerEmpty()
-        let time = DegradedStateOrchestrator.timeEmpty()
         let returnPath = ActivationContract.promise(for: .firstReturnPath)
 
         XCTAssertEqual(today.title, "Today is waiting for one real thing")
@@ -31,7 +30,6 @@ final class DailyLoopAlphaQATests: XCTestCase {
         XCTAssertTrue(capture.explanation.contains("Start here"))
         XCTAssertTrue(capture.explanation.contains("goal"))
         XCTAssertTrue(capture.explanation.contains("Time"))
-        XCTAssertEqual(time.secondaryAction?.routingHint, .quickCapture)
         XCTAssertEqual(ActivationSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(returnPath.primaryRoutingHint, .today)
         XCTAssertFalse(today.explanation.localizedCaseInsensitiveContains("sync"))

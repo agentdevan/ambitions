@@ -116,7 +116,7 @@ final class OnboardingAndDegradedStateTests: XCTestCase {
     func testRepresentativeEmptyStateProjectionsForTopSurfaces() {
         XCTAssertEqual(DegradedStateOrchestrator.todayEmpty().kind, .empty)
         XCTAssertEqual(DegradedStateOrchestrator.goalsEmpty().primaryAction.routingHint, .createGoal)
-        XCTAssertEqual(DegradedStateOrchestrator.timeEmpty().secondaryAction?.routingHint, .quickCapture)
+        XCTAssertEqual(ActivationSurface.allCases.map(\.title), ["Today", "Goals", "Time", "You"])
         XCTAssertEqual(DegradedStateOrchestrator.captureComposerEmpty().title, "Capture is ready")
         XCTAssertTrue(DegradedStateOrchestrator.captureComposerEmpty().explanation.contains("Start here"))
         XCTAssertTrue(DegradedStateOrchestrator.captureComposerEmpty().explanation.contains("goal"))
