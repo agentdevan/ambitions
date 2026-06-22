@@ -1,8 +1,8 @@
 # Ambitions Truth Files
 
 Status: Active repo authority index  
-Scope: Product/design, moat, implementation, release/proof, Codex process, and repo retention  
-Applies to: Humans, Codex, and any AI agent working in the Ambitions repo
+Scope: Product/design, moat, implementation, release/proof, Codex process, shell integration, and repo retention  
+Applies to: Humans, Codex, and implementation agents working in the Ambitions repo
 
 `docs/truth/` is the active authority layer for Ambitions. Start here before reading supporting docs, source-adjacent notes, retained skills, scripts, or historical references.
 
@@ -11,17 +11,17 @@ Applies to: Humans, Codex, and any AI agent working in the Ambitions repo
 1. `PRODUCT_DESIGN_TRUTH.md` - product/design authority.
 2. `PRODUCT_MOAT_TRUTH.md` - moat strategy and anti-commodity guardrails.
 3. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
-4. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, and visual proof authority.
+4. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, visual proof, and global shell acceptance authority.
 5. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
 6. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
 7. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
-7. `AGENTS.md`.
-8. `README.md`.
-9. `docs/README.md`.
-10. `project.yml`.
-11. `Package.swift`.
-12. Relevant source, tests, retained scripts, build docs, and current local logs.
-13. Relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
+8. `AGENTS.md`.
+9. `README.md`.
+10. `docs/README.md`.
+11. `project.yml`.
+12. `Package.swift`.
+13. Relevant source, tests, retained scripts, build docs, and current local logs.
+14. Relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
 
 ## Active Product Law
 
@@ -34,6 +34,16 @@ Trust layer: Proof / Source / Privacy / History / Receipts
 
 Motion is behavior, not a root destination. Capture is global composition, not a tab.
 
+## Global Shell Integration Law
+
+The Ambitions shell is a product layer, not a border around the product.
+
+The Context Crown, search, Capture access, route controls, continuity dock, overlays, and surface actions must be functional, modern, and seamlessly integrated into the active surface. Shell chrome may guide, anchor, and act, but it must never appear pasted on, visually boxed off, or detached from the object stage.
+
+Full-bleed means atmosphere bleeds, content remains safe, chrome integrates, and object hierarchy stays clear.
+
+This law applies globally to Today, Goals, Time, You, Capture, Search, Closure, Inspection, and major drilldowns. It is enforced through `IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, manifest evidence, reviewable screenshots, and independent visual acceptance.
+
 ## Conflict Resolution
 
 | Conflict Type | Winner |
@@ -41,7 +51,7 @@ Motion is behavior, not a root destination. Capture is global composition, not a
 | Product/design direction | `PRODUCT_DESIGN_TRUTH.md` |
 | Moat strategy and anti-commodity claims | `PRODUCT_MOAT_TRUTH.md` |
 | Implementation/source status | Live source/project/test/script evidence, read through `IMPLEMENTATION_TRUTH.md` |
-| Rendered product acceptance | `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` plus current reviewable screenshots and target rubric |
+| Global shell integration and rendered product acceptance | `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` plus current reviewable screenshots, manifest evidence, and target rubric |
 | Release/readiness/proof claim | Current proof/log evidence, read through `RELEASE_TRUTH.md` |
 | Codex process behavior | `CODEX_PROCESS_TRUTH.md` |
 | Historical/old-canon conflict | Active truth files and `HISTORICAL_POLICY.md` retention rules |
