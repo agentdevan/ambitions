@@ -41,6 +41,23 @@ final class RenderedProductAcceptanceAuditTests: XCTestCase {
         XCTAssertTrue(report.containsFinding("dominance.detail-root-sibling"))
     }
 
+    func testProductObjectDominanceAuditRejectsRadialGaugePrimaryObject() {
+        let radial = LifeShapeSourceFile(
+            path: "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift",
+            contents: """
+            struct LifeShapeFieldVisualField {
+                var body: some View { LifeShapeArcShape(start: .degrees(0), end: .degrees(90)) }
+                var orbitalRings: some View { Text("rings") }
+                var layerBandSpecs: [String] { [] }
+            }
+            """
+        )
+
+        let report = ProductObjectDominanceAudit.auditTimeRootComposition([radial])
+
+        XCTAssertTrue(report.containsFinding("dominance.radial-gauge-primary-object"))
+    }
+
     func testRootReportPanelAuditRejectsLifeShapeNowReportPanel() {
         let reportPanel = LifeShapeSourceFile(
             path: "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeNowInstrument.swift",
@@ -82,6 +99,9 @@ final class RenderedProductAcceptanceAuditTests: XCTestCase {
             Text("Compression ridge")
             Text("Execution lane")
             Text("Protected pocket")
+            Text("open layer")
+            Text("This week shows 7 open days.")
+            Text("Free time shows where action may fit.")
             """
         )
 
@@ -90,6 +110,9 @@ final class RenderedProductAcceptanceAuditTests: XCTestCase {
         XCTAssertTrue(report.containsFinding("user-language-category.ridge"))
         XCTAssertTrue(report.containsFinding("user-language-category.lane"))
         XCTAssertTrue(report.containsFinding("user-language-category.pocket"))
+        XCTAssertTrue(report.containsFinding("user-language-category.open-layer"))
+        XCTAssertTrue(report.containsFinding("user-language-category.this-week-shows"))
+        XCTAssertTrue(report.containsFinding("user-language-category.free-time-shows"))
     }
 
     func testTestStrengthAuditRejectsSourceOnlyVisualProof() {

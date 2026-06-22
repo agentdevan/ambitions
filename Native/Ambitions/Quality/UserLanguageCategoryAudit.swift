@@ -12,7 +12,15 @@ enum UserLanguageCategoryAudit {
         "lane",
         "seam",
         "trace",
-        "pocket"
+        "pocket",
+        "open layer",
+        "protected layer",
+        "pressure layer",
+        "buffer layer",
+        "this week shows",
+        "free time shows",
+        "context carried",
+        "source context preserved"
     ]
 
     static func auditRootStrings(_ files: [LifeShapeSourceFile]) -> LifeShapeAuditReport {
@@ -26,7 +34,7 @@ enum UserLanguageCategoryAudit {
                 let lowercased = literal.lowercased()
                 for term in forbiddenRootJargon where lowercased.contains(term) {
                     findings.append(LifeShapeAuditFinding(
-                        id: "user-language-category.\(term)",
+                        id: "user-language-category.\(term.replacingOccurrences(of: " ", with: "-"))",
                         path: file.path,
                         detail: "Root Time string exposes unapproved jargon '\(term)': \(literal)"
                     ))

@@ -37,30 +37,21 @@ struct LifeShapeFieldVisualField: View {
     }
 
     private var fieldStage: some View {
-        GeometryReader { proxy in
-            let size = proxy.size
-            ZStack {
-                fieldBackground
-                starDust
-                orbitalRings
-                layerBands(in: size)
-                nowSweep(in: size)
-                fixedPoints(in: size)
-                centerReadout
-                fieldLayerSelector
-                bottomActionCard
-            }
-            .frame(width: size.width, height: size.height)
-            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-            .overlay {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .stroke(
-                        selectedStyle.stroke.opacity(colorSchemeContrast == .increased ? 0.82 : 0.42),
-                        lineWidth: colorSchemeContrast == .increased ? 1.5 : 1
-                    )
-            }
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            LifeShapeLayerSelector(selection: $selectedLayer)
+            microField
         }
-        .frame(height: isAccessibilitySize ? 480 : 430)
+        .padding(theme.spacing.sm)
+        .frame(minHeight: isAccessibilitySize ? 600 : 520, alignment: .top)
+        .background(fieldBackground)
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .stroke(
+                    selectedStyle.stroke.opacity(colorSchemeContrast == .increased ? 0.82 : 0.42),
+                    lineWidth: colorSchemeContrast == .increased ? 1.5 : 1
+                )
+        }
         .accessibilityElement(children: .contain)
         .accessibilityLabel("LifeShape visual field")
         .accessibilityValue(accessibilityValue)
@@ -72,246 +63,277 @@ struct LifeShapeFieldVisualField: View {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .fill(theme.colors.canvas.opacity(reduceTransparency ? 0.98 : 0.92))
 
-            RadialGradient(
+            LinearGradient(
                 colors: [
-                    selectedLayer.tint.opacity(reduceTransparency ? 0.26 : 0.18),
-                    theme.colors.canvasElevated.opacity(reduceTransparency ? 0.44 : 0.24),
-                    .clear
+                    selectedLayer.tint.opacity(reduceTransparency ? 0.24 : 0.14),
+                    theme.colors.canvasElevated.opacity(reduceTransparency ? 0.48 : 0.30),
+                    theme.colors.canvas.opacity(reduceTransparency ? 0.98 : 0.84)
                 ],
-                center: .center,
-                startRadius: 24,
-                endRadius: isAccessibilitySize ? 280 : 260
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
             )
-        }
-        .accessibilityHidden(true)
-    }
 
-    private var starDust: some View {
-        GeometryReader { proxy in
-            ZStack {
-                ForEach(0..<18, id: \.self) { index in
-                    Circle()
-                        .fill(theme.colors.textTertiary.opacity(index % 3 == 0 ? 0.24 : 0.12))
-                        .frame(width: CGFloat(1 + index % 3), height: CGFloat(1 + index % 3))
-                        .position(starPosition(index: index, in: proxy.size))
+            VStack(spacing: 0) {
+                ForEach(0..<5, id: \.self) { index in
+                    Rectangle()
+                        .fill(theme.colors.strokeSubtle.opacity(index == 2 ? 0.16 : 0.08))
+                        .frame(height: 1)
+                    Spacer(minLength: 0)
                 }
             }
+            .padding(.vertical, theme.spacing.md)
         }
         .accessibilityHidden(true)
     }
 
-    private var orbitalRings: some View {
+    private var selectedLayerReading: some View {
+        HStack(alignment: .top, spacing: theme.spacing.sm) {
+            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
+                Text(selectedLayer.title)
+                    .font(.system(size: isAccessibilitySize ? 33 : 30, weight: .semibold))
+                    .foregroundStyle(selectedLayer.tint)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.70)
+
+                Text(selectedLayer.realitySentence(for: field, mark: selectedMark))
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(isAccessibilitySize ? 3 : 2)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Spacer(minLength: theme.spacing.sm)
+
+            VStack(alignment: .trailing, spacing: theme.spacing.xxxs) {
+                Text("Next fixed point")
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .textCase(.uppercase)
+                Text(nextFixedPointLabel)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.trailing)
+                    .minimumScaleFactor(0.74)
+            }
+        }
+    }
+
+    private var microField: some View {
         GeometryReader { proxy in
-            let diameter = min(proxy.size.width, proxy.size.height - 116)
-            ZStack {
-                ForEach(0..<4, id: \.self) { index in
-                    Circle()
-                        .stroke(
-                            selectedLayer.tint.opacity(index == 1 ? 0.22 : 0.10),
-                            style: StrokeStyle(
-                                lineWidth: index == 1 ? 1.2 : 0.8,
-                                lineCap: .round,
-                                dash: index == 3 ? [2, 7] : []
-                            )
-                        )
-                        .frame(
-                            width: diameter * CGFloat(0.46 + Double(index) * 0.15),
-                            height: diameter * CGFloat(0.46 + Double(index) * 0.15)
-                        )
+            let size = proxy.size
+            ZStack(alignment: .topLeading) {
+                fieldAtmosphere(size: size)
+
+                ForEach(Array(instrumentSegments.prefix(isAccessibilitySize ? 4 : 5).enumerated()), id: \.offset) { index, segment in
+                    fieldBand(segment: segment, index: index, size: size)
                 }
+
+                nowLine(size: size)
+
+                ForEach(Array(selectedMarks.prefix(isAccessibilitySize ? 3 : 5).enumerated()), id: \.offset) { index, mark in
+                    semanticPoint(mark: mark, index: index, size: size)
+                }
+
+                selectedLayerReading
+                    .padding(.horizontal, theme.spacing.md)
+                    .padding(.top, theme.spacing.md)
+
+                selectedBucket
+                    .padding(.horizontal, theme.spacing.md)
+                    .padding(.bottom, theme.spacing.md)
+                    .frame(maxHeight: .infinity, alignment: .bottom)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.bottom, 76)
+        }
+        .frame(minHeight: isAccessibilitySize ? 430 : 350)
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+        .overlay(instrumentStroke)
+        .accessibilityElement(children: .contain)
+        .accessibilityLabel("LifeShape time instrument")
+        .accessibilityIdentifier("time.life-shape-field.micro-field")
+    }
+
+    private func fieldAtmosphere(size: CGSize) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(theme.colors.surfaceOverlay.opacity(reduceTransparency ? 0.94 : 0.54))
+
+            LinearGradient(
+                colors: [
+                    selectedLayer.tint.opacity(reduceTransparency ? 0.20 : 0.10),
+                    theme.colors.canvasElevated.opacity(0.22),
+                    theme.colors.canvas.opacity(0.56)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+
+            ForEach(0..<7, id: \.self) { index in
+                Rectangle()
+                    .fill(theme.colors.strokeSubtle.opacity(index == 3 ? 0.24 : 0.11))
+                    .frame(width: size.width, height: 1)
+                    .position(x: size.width / 2, y: CGFloat(index + 1) * size.height / 8)
+            }
         }
         .accessibilityHidden(true)
     }
 
-    private func layerBands(in size: CGSize) -> some View {
-        let diameter = min(size.width, size.height - 116)
-        return ZStack {
-            ForEach(Array(layerBandSpecs.enumerated()), id: \.offset) { index, spec in
-                LifeShapeArcShape(start: spec.start, end: spec.end)
-                    .stroke(
-                        spec.color.opacity(selectedLayer == spec.layer ? 0.90 : 0.42),
-                        style: StrokeStyle(
-                            lineWidth: selectedLayer == spec.layer ? 22 : 16,
-                            lineCap: .round,
-                            lineJoin: .round
-                        )
-                    )
-                    .shadow(color: spec.color.opacity(selectedLayer == spec.layer ? 0.46 : 0.16), radius: selectedLayer == spec.layer ? 14 : 6)
-                    .frame(
-                        width: diameter * CGFloat(0.54 + Double(index % 2) * 0.13),
-                        height: diameter * CGFloat(0.54 + Double(index % 2) * 0.13)
-                    )
-            }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.bottom, 76)
-        .accessibilityHidden(true)
-    }
+    @ViewBuilder
+    private func fieldBand(segment: LifeShapeSegment, index: Int, size: CGSize) -> some View {
+        let tint = segment.kind.instrumentLayer.tint
+        let bandHeight = max(size.height * 0.075, 22)
+        let topOffset = size.height * 0.33
+        let verticalStep = bandHeight * 1.34
+        let y = topOffset + CGFloat(index) * verticalStep
+        let left = size.width * 0.19
+        let trackWidth = size.width * 0.66
+        let weight = min(max(CGFloat(segment.weight), segment.weight > 0 ? 0.12 : 0.04), 1)
+        let bandWidth = max(trackWidth * weight, segment.weight > 0 ? 34 : 12)
 
-    private func nowSweep(in size: CGSize) -> some View {
-        let diameter = min(size.width, size.height - 116)
-        return ZStack {
-            Rectangle()
+        ZStack(alignment: .leading) {
+            Text(segment.kind.instrumentTitle)
+                .font(theme.typography.micro.weight(.semibold))
+                .foregroundStyle(theme.colors.textSecondary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.62)
+                .frame(width: max(left - theme.spacing.sm, 54), alignment: .leading)
+                .position(x: left / 2, y: y)
+
+            RoundedRectangle(cornerRadius: bandHeight / 2, style: .continuous)
+                .fill(theme.colors.strokeSubtle.opacity(0.14))
+                .frame(width: trackWidth, height: bandHeight)
+                .position(x: left + trackWidth / 2, y: y)
+
+            RoundedRectangle(cornerRadius: bandHeight / 2, style: .continuous)
                 .fill(
                     LinearGradient(
                         colors: [
-                            selectedLayer.tint.opacity(0.82),
-                            selectedLayer.tint.opacity(0.28),
-                            .clear
+                            tint.opacity(colorSchemeContrast == .increased ? 0.84 : 0.62),
+                            tint.opacity(colorSchemeContrast == .increased ? 0.42 : 0.24)
                         ],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
                 )
-                .frame(width: diameter * 0.30, height: colorSchemeContrast == .increased ? 2 : 1.2)
-                .offset(x: -diameter * 0.31)
-                .rotationEffect(.degrees(selectedLayer.sweepDegrees))
+                .frame(width: bandWidth, height: bandHeight)
+                .shadow(color: tint.opacity(reduceTransparency ? 0 : 0.24), radius: 10, x: 0, y: 0)
+                .position(x: left + bandWidth / 2, y: y)
+
+            Text(segment.valueLabel.humanInstrumentValue)
+                .font(theme.typography.micro.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+                .lineLimit(1)
+                .minimumScaleFactor(0.62)
+                .frame(width: size.width * 0.22, alignment: .trailing)
+                .position(x: size.width * 0.88, y: y)
+        }
+        .accessibilityLabel("\(segment.title), \(segment.valueLabel), \(segment.detail)")
+    }
+
+    private func nowLine(size: CGSize) -> some View {
+        let x = size.width * 0.58
+        return ZStack {
+            Rectangle()
+                .fill(selectedLayer.tint.opacity(colorSchemeContrast == .increased ? 0.82 : 0.48))
+                .frame(width: colorSchemeContrast == .increased ? 2 : 1, height: size.height * 0.58)
+                .position(x: x, y: size.height * 0.53)
 
             Circle()
                 .fill(selectedLayer.tint)
                 .frame(width: 12, height: 12)
-                .shadow(color: selectedLayer.tint.opacity(0.7), radius: 10)
-                .offset(y: -diameter * 0.29)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .padding(.bottom, 76)
-        .accessibilityHidden(true)
-    }
-
-    private func fixedPoints(in size: CGSize) -> some View {
-        let diameter = min(size.width, size.height - 116)
-        return ZStack {
-            ForEach(Array(visualPoints.enumerated()), id: \.element.id) { index, point in
-                Button {
-                    if let mark = point.mark {
-                        onSelectMark(mark)
-                    }
-                } label: {
-                    VStack(spacing: theme.spacing.xxxs) {
-                        Circle()
-                            .fill(point.color)
-                            .frame(width: point.isSelected ? 13 : 9, height: point.isSelected ? 13 : 9)
-                            .overlay(Circle().stroke(theme.colors.textPrimary.opacity(0.84), lineWidth: 1))
-                            .shadow(color: point.color.opacity(point.isSelected ? 0.76 : 0.28), radius: point.isSelected ? 10 : 4)
-                        if isAccessibilitySize == false {
-                            Text(point.title)
-                                .font(theme.typography.micro.weight(point.isSelected ? .semibold : .regular))
-                                .foregroundStyle(point.isSelected ? theme.colors.textPrimary : theme.colors.textSecondary)
-                                .lineLimit(2)
-                                .multilineTextAlignment(.center)
-                                .frame(width: 86)
-                        }
-                    }
-                }
-                .buttonStyle(.plain)
-                .position(pointPosition(index: index, count: max(visualPoints.count, 1), radius: diameter * 0.39, size: size))
-                .accessibilityLabel(point.accessibilityLabel)
-                .accessibilityValue(point.accessibilityValue)
-            }
-        }
-        .padding(.bottom, 76)
-    }
-
-    private var centerReadout: some View {
-        let metric = selectedLayer.centerMetric(for: field, mark: selectedMark)
-        return VStack(spacing: theme.spacing.xxxs) {
-            Text("Now")
-                .font(.system(size: isAccessibilitySize ? 15 : 12, weight: .semibold))
-                .foregroundStyle(theme.colors.textTertiary)
-                .textCase(.uppercase)
-            Text(metric.primary)
-                .font(.system(size: isAccessibilitySize ? 42 : 40, weight: .semibold))
-                .foregroundStyle(selectedLayer.tint)
-                .lineLimit(1)
-                .minimumScaleFactor(0.72)
-            Text(metric.secondary)
-                .font(.system(size: isAccessibilitySize ? 19 : 18, weight: .semibold))
-                .foregroundStyle(theme.colors.textPrimary.opacity(0.92))
-                .lineLimit(1)
-                .minimumScaleFactor(0.72)
-            Text(metric.caption)
-                .font(.system(size: isAccessibilitySize ? 14 : 13, weight: .medium))
-                .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(1)
-                .multilineTextAlignment(.center)
-                .minimumScaleFactor(0.78)
-        }
-        .frame(width: isAccessibilitySize ? 220 : 200)
-        .padding(.vertical, isAccessibilitySize ? 18 : 16)
-        .background {
-            Circle()
-                .fill(theme.colors.canvas.opacity(reduceTransparency ? 0.96 : 0.72))
-                .shadow(color: selectedLayer.tint.opacity(0.22), radius: 24)
-        }
-        .padding(.bottom, isAccessibilitySize ? 86 : 74)
-        .accessibilityHidden(true)
-    }
-
-    private var fieldLayerSelector: some View {
-        VStack {
-            LifeShapeLayerSelector(selection: $selectedLayer)
-                .padding(.horizontal, theme.spacing.sm)
-                .padding(.top, theme.spacing.sm)
-            Spacer()
-        }
-    }
-
-    private var bottomActionCard: some View {
-        VStack {
-            Spacer()
-            HStack(spacing: theme.spacing.sm) {
-                HStack(spacing: theme.spacing.xs) {
+                .overlay {
                     Circle()
-                        .stroke(selectedLayer.tint, lineWidth: 1.2)
-                        .frame(width: 16, height: 16)
-                        .overlay {
-                            Circle()
-                                .fill(selectedLayer.tint.opacity(0.72))
-                                .frame(width: 6, height: 6)
-                        }
-                        .accessibilityHidden(true)
-
-                    VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                        Text(selectedLayer.cardTitle(mark: selectedMark))
-                            .font(theme.typography.caption.weight(.semibold))
-                            .foregroundStyle(theme.colors.textPrimary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.72)
-                        Text(selectedLayer.cardDetail(reading: reading, mark: selectedMark))
-                            .font(theme.typography.micro)
-                            .foregroundStyle(theme.colors.textTertiary)
-                            .lineLimit(1)
-                            .minimumScaleFactor(0.72)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                        .stroke(theme.colors.textPrimary.opacity(0.66), lineWidth: 1)
                 }
+                .shadow(color: selectedLayer.tint.opacity(reduceTransparency ? 0 : 0.46), radius: 14, x: 0, y: 0)
+                .position(x: x, y: size.height * 0.42)
 
-                Button(action: onPrimaryAction) {
-                    Label(primaryActionTitle, systemImage: selectedLayer.actionSymbol)
-                        .font(theme.typography.caption.weight(.semibold))
-                        .labelStyle(.titleAndIcon)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.68)
-                        .frame(minHeight: 44)
-                        .padding(.horizontal, theme.spacing.sm)
-                }
-                .buttonStyle(.plain)
+            Text("Now")
+                .font(theme.typography.micro.weight(.semibold))
                 .foregroundStyle(selectedLayer.tint)
-                .accessibilityIdentifier("time.life-shape-field.primary-action")
+                .textCase(.uppercase)
+                .position(x: x, y: size.height * 0.19)
+        }
+        .accessibilityHidden(true)
+    }
+
+    @ViewBuilder
+    private func semanticPoint(mark: LifeShapeSemanticMark, index: Int, size: CGSize) -> some View {
+        let tint = theme.stateStyle(for: mark.visualState).fill
+        let x = size.width * (0.28 + CGFloat(index % 5) * 0.13)
+        let y = size.height * (0.42 + CGFloat(index % 2) * 0.17)
+        Button {
+            onSelectMark(mark)
+        } label: {
+            Circle()
+                .fill(tint.opacity(0.74))
+                .frame(width: 14, height: 14)
+                .overlay {
+                    Circle()
+                        .stroke(theme.colors.textPrimary.opacity(0.66), lineWidth: 1)
+                }
+                .shadow(color: tint.opacity(reduceTransparency ? 0 : 0.34), radius: 9, x: 0, y: 0)
+        }
+        .buttonStyle(.plain)
+        .position(x: x, y: y)
+        .accessibilityLabel(mark.accessibilitySummary)
+    }
+
+    private var instrumentStroke: some View {
+        RoundedRectangle(cornerRadius: 8, style: .continuous)
+            .stroke(
+                selectedLayer.tint.opacity(colorSchemeContrast == .increased ? 0.74 : 0.36),
+                lineWidth: colorSchemeContrast == .increased ? 1.5 : 1
+            )
+    }
+
+    private var selectedBucket: some View {
+        HStack(alignment: .center, spacing: theme.spacing.sm) {
+            Circle()
+                .stroke(selectedLayer.tint, lineWidth: 1.3)
+                .frame(width: 18, height: 18)
+                .overlay {
+                    Circle()
+                        .fill(selectedLayer.tint.opacity(0.74))
+                        .frame(width: 7, height: 7)
+                }
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                Text(selectedWindowLabel)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
+                Text(selectedLayer.cardDetail(reading: reading, mark: selectedMark).humanRootCopy)
+                    .font(theme.typography.micro)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.70)
             }
-            .padding(theme.spacing.sm)
-            .background {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .fill(theme.colors.surfaceOverlay.opacity(reduceTransparency ? 0.92 : 0.64))
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Button(action: onPrimaryAction) {
+                Label(primaryActionTitle, systemImage: selectedLayer.actionSymbol)
+                    .font(theme.typography.caption.weight(.semibold))
+                    .labelStyle(.titleAndIcon)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.68)
+                    .frame(minHeight: 44)
+                    .padding(.horizontal, theme.spacing.sm)
             }
-            .overlay {
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .stroke(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.82 : 0.42), lineWidth: 1)
-            }
-            .padding(theme.spacing.sm)
+            .buttonStyle(.plain)
+            .foregroundStyle(selectedLayer.tint)
+            .accessibilityIdentifier("time.life-shape-field.primary-action")
+        }
+        .padding(theme.spacing.sm)
+        .background {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .fill(theme.colors.canvas.opacity(reduceTransparency ? 0.96 : 0.66))
+        }
+        .overlay {
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
+                .stroke(selectedLayer.tint.opacity(colorSchemeContrast == .increased ? 0.72 : 0.34), lineWidth: 1)
         }
     }
 
@@ -371,27 +393,29 @@ struct LifeShapeFieldVisualField: View {
             .joined(separator: ". ")
     }
 
-    private var layerBandSpecs: [LifeShapeLayerBandSpec] {
-        [
-            LifeShapeLayerBandSpec(layer: .open, start: .degrees(180), end: .degrees(352), color: LifeShapeLayer.open.tint),
-            LifeShapeLayerBandSpec(layer: .protected, start: .degrees(214), end: .degrees(264), color: LifeShapeLayer.protected.tint),
-            LifeShapeLayerBandSpec(layer: .pressure, start: .degrees(8), end: .degrees(64), color: LifeShapeLayer.pressure.tint),
-            LifeShapeLayerBandSpec(layer: .buffer, start: .degrees(70), end: .degrees(118), color: LifeShapeLayer.buffer.tint)
-        ]
+    private var instrumentSegments: [LifeShapeSegment] {
+        let order: [LifeShapeSegmentKind] = [.openTime, .protectedTime, .pressure, .buffer, .recovery, .goalTime]
+        var segments = order.compactMap { kind in
+            field.segments.first { $0.kind == kind } ?? fallbackSegment(for: kind)
+        }
+        if let source = field.segments.first(where: { $0.kind == .source }) {
+            segments.append(source)
+        }
+        return segments
     }
 
-    private var visualPoints: [LifeShapeVisualPoint] {
-        let marks = selectedMarks.isEmpty ? Array(field.semanticMarks.prefix(3)) : selectedMarks
-        return marks.prefix(4).map { mark in
-            LifeShapeVisualPoint(
-                id: mark.id,
-                title: mark.kind.pointTitle,
-                color: mark.kind.layer.tint,
-                accessibilityLabel: mark.kind.title,
-                accessibilityValue: mark.accessibilitySummary,
-                isSelected: mark.id == selectedMark?.id,
-                mark: mark
+    private func fallbackSegment(for kind: LifeShapeSegmentKind) -> LifeShapeSegment? {
+        switch kind {
+        case .buffer:
+            return LifeShapeSegment(
+                kind: .buffer,
+                detail: "No buffer has been added yet.",
+                valueLabel: "None yet",
+                weight: 0,
+                visualState: .default
             )
+        default:
+            return nil
         }
     }
 
@@ -400,47 +424,53 @@ struct LifeShapeFieldVisualField: View {
         let week = field.reading(for: .week)
         let month = field.reading(for: .month)
         return [
-            LifeShapeVisualHorizonRow(title: "Today", value: day.capacityStatement.shortVisualLabel, symbol: "sun.max", color: LifeShapeLayer.open.tint),
-            LifeShapeVisualHorizonRow(title: "This week", value: week.capacityStatement.shortVisualLabel, symbol: "calendar", color: LifeShapeLayer.protected.tint),
-            LifeShapeVisualHorizonRow(title: "Rest of month", value: month.capacityStatement.shortVisualLabel, symbol: "circle.dotted", color: LifeShapeLayer.buffer.tint)
+            LifeShapeVisualHorizonRow(title: "Today", value: day.capacityStatement.humanHorizonValue, symbol: "sun.max", color: LifeShapeLayer.open.tint),
+            LifeShapeVisualHorizonRow(title: "This week", value: week.capacityStatement.humanHorizonValue, symbol: "calendar", color: LifeShapeLayer.protected.tint),
+            LifeShapeVisualHorizonRow(title: "Rest of month", value: month.capacityStatement.humanHorizonValue, symbol: "circle.dotted", color: LifeShapeLayer.buffer.tint)
         ]
     }
 
-    private func pointPosition(index: Int, count: Int, radius: CGFloat, size: CGSize) -> CGPoint {
-        let angles = [-84.0, -8.0, 92.0, 188.0]
-        let angle = Angle.degrees(angles[index % angles.count])
-        let center = CGPoint(x: size.width * 0.5, y: (size.height - 76) * 0.48)
-        return CGPoint(
-            x: center.x + cos(angle.radians) * radius,
-            y: center.y + sin(angle.radians) * radius
-        )
+    private var nowAnchorLabel: String {
+        switch selectedLayer {
+        case .open:
+            "Open now"
+        case .protected:
+            protectedBoundaryLabel
+        case .pressure:
+            field.capacityFit.title
+        case .buffer:
+            "Room to adjust"
+        }
     }
 
-    private func starPosition(index: Int, in size: CGSize) -> CGPoint {
-        let xSeed = CGFloat((index * 37) % 100) / 100
-        let ySeed = CGFloat((index * 61) % 100) / 100
-        return CGPoint(
-            x: size.width * (0.08 + xSeed * 0.84),
-            y: size.height * (0.08 + ySeed * 0.64)
-        )
+    private var nextFixedPointLabel: String {
+        let protected = field.segments.first { $0.kind == .protectedTime }
+        if protected?.weight ?? 0 > 0 {
+            return "Fixed point visible"
+        }
+        return "No fixed blocks yet"
     }
-}
 
-private struct LifeShapeLayerBandSpec {
-    let layer: LifeShapeLayer
-    let start: Angle
-    let end: Angle
-    let color: Color
-}
+    private var protectedBoundaryLabel: String {
+        let protected = field.segments.first { $0.kind == .protectedTime }
+        guard let protected, protected.weight > 0 else {
+            return "None marked yet"
+        }
+        return protected.valueLabel.humanInstrumentValue
+    }
 
-private struct LifeShapeVisualPoint: Identifiable {
-    let id: String
-    let title: String
-    let color: Color
-    let accessibilityLabel: String
-    let accessibilityValue: String
-    let isSelected: Bool
-    let mark: LifeShapeSemanticMark?
+    private var selectedWindowLabel: String {
+        switch selectedLayer {
+        case .open:
+            return "Open time"
+        case .protected:
+            return protectedBoundaryLabel
+        case .pressure:
+            return "Review pressure"
+        case .buffer:
+            return "Add buffer"
+        }
+    }
 }
 
 private struct LifeShapeVisualHorizonRow: Identifiable {
@@ -449,22 +479,4 @@ private struct LifeShapeVisualHorizonRow: Identifiable {
     let value: String
     let symbol: String
     let color: Color
-}
-
-private struct LifeShapeArcShape: Shape {
-    let start: Angle
-    let end: Angle
-
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let radius = min(rect.width, rect.height) / 2
-        path.addArc(
-            center: CGPoint(x: rect.midX, y: rect.midY),
-            radius: radius,
-            startAngle: start,
-            endAngle: end,
-            clockwise: false
-        )
-        return path
-    }
 }

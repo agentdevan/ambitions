@@ -185,9 +185,11 @@ final class TimeProjectionServiceTests: XCTestCase {
 
         XCTAssertEqual(timeState.lifeSuite.field.defaultHorizon, .week)
         XCTAssertTrue(
-            weekReading.capacityStatement.contains("This week shows") ||
+            weekReading.capacityStatement.contains("still have room") ||
+            weekReading.capacityStatement.contains("This week is still mostly open") ||
             weekReading.capacityStatement.contains("This week is still taking shape")
         )
+        XCTAssertFalse(weekReading.capacityStatement.localizedCaseInsensitiveContains("This week shows"))
         XCTAssertFalse(weekReading.capacityStatement.localizedCaseInsensitiveContains("focused block"))
         XCTAssertFalse(weekReading.capacityStatement.localizedCaseInsensitiveContains("light step"))
         XCTAssertFalse(weekReading.capacityStatement.localizedCaseInsensitiveContains("protected recovery window"))

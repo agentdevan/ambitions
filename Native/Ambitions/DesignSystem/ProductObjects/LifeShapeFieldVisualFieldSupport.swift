@@ -105,13 +105,68 @@ extension LifeShapeLayer {
     var visualLayerCaption: String {
         switch self {
         case .open:
-            "open layer"
+            "Open time"
         case .protected:
-            "protected layer"
+            "Protected time"
         case .pressure:
-            "pressure layer"
+            "Pressure"
         case .buffer:
-            "buffer layer"
+            "Buffer"
+        }
+    }
+
+    func realitySentence(for field: LifeShapeFieldState, mark: LifeShapeSemanticMark?) -> String {
+        switch self {
+        case .open:
+            if let open = field.segments.first(where: { $0.kind == .openTime }),
+               open.weight > 0.65 {
+                return "This week is still mostly open."
+            }
+            return "Use the clearest opening before adding more."
+        case .protected:
+            if let protected = field.segments.first(where: { $0.kind == .protectedTime }),
+               protected.weight > 0 {
+                return "Protected time is already marked."
+            }
+            return "No protected time is marked yet."
+        case .pressure:
+            return mark?.detail.humanRootCopy ?? "Review the tightest part before adding more."
+        case .buffer:
+            return "Keep room around the next change."
+        }
+    }
+}
+
+extension LifeShapeSegmentKind {
+    var instrumentLayer: LifeShapeLayer {
+        switch self {
+        case .openTime, .goalTime:
+            .open
+        case .protectedTime:
+            .protected
+        case .pressure:
+            .pressure
+        case .buffer, .recovery, .source:
+            .buffer
+        }
+    }
+
+    var instrumentTitle: String {
+        switch self {
+        case .openTime:
+            "Open"
+        case .protectedTime:
+            "Protected"
+        case .pressure:
+            "Pressure"
+        case .buffer:
+            "Buffer"
+        case .recovery:
+            "Recovery"
+        case .goalTime:
+            "Goal"
+        case .source:
+            "Local"
         }
     }
 }
@@ -170,5 +225,25 @@ extension String {
             .prefix(3)
             .joined(separator: " ")
         return remainder.isEmpty ? fallback : remainder
+    }
+
+    var humanInstrumentValue: String {
+        replacingOccurrences(of: " protected", with: " fixed")
+            .replacingOccurrences(of: "Local", with: "Local only")
+    }
+
+    var humanHorizonValue: String {
+        let cleaned = trimmingCharacters(in: .whitespacesAndNewlines)
+        if cleaned.localizedCaseInsensitiveContains("Capacity: qualitative only") {
+            return "taking shape"
+        }
+        if cleaned.localizedCaseInsensitiveContains("No blocks yet") {
+            return "no fixed blocks yet"
+        }
+        return cleaned.shortVisualLabel
+    }
+
+    var humanRootCopy: String {
+        trimmingCharacters(in: .whitespacesAndNewlines).shortVisualLabel
     }
 }

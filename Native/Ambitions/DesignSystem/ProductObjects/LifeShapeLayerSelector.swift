@@ -12,15 +12,15 @@ struct LifeShapeLayerSelector: View {
     private var accessibilityCompact: Bool { dynamicTypeSize.isAccessibilitySize }
 
     var body: some View {
-        HStack(spacing: theme.spacing.xs) {
+        HStack(spacing: theme.spacing.xxxs) {
             ForEach(layers) { layer in
                 Button {
                     selection = layer
                 } label: {
                     layerContent(for: layer)
                         .foregroundStyle(selection == layer ? theme.colors.textPrimary : theme.colors.textSecondary)
-                        .frame(maxWidth: .infinity, minHeight: accessibilityCompact ? 56 : 44)
-                        .padding(.horizontal, accessibilityCompact ? theme.spacing.xs : theme.spacing.sm)
+                        .frame(maxWidth: .infinity, minHeight: accessibilityCompact ? 56 : 42)
+                        .padding(.horizontal, accessibilityCompact ? theme.spacing.xs : theme.spacing.xxs)
                         .background(layerFill(for: layer, selected: selection == layer))
                         .overlay {
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
@@ -68,9 +68,9 @@ struct LifeShapeLayerSelector: View {
                 .accessibilityHidden(true)
         } else {
             Text(layer.title)
-                .font(theme.typography.caption.weight(.semibold))
+                .font(theme.typography.micro.weight(.semibold))
                 .lineLimit(1)
-                .minimumScaleFactor(0.78)
+                .minimumScaleFactor(0.58)
         }
     }
 }

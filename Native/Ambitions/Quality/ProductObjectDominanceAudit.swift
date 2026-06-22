@@ -40,6 +40,18 @@ enum ProductObjectDominanceAudit {
             }
         }
 
+        for file in files where file.path.contains("LifeShapeFieldVisualField") {
+            if file.contents.contains("LifeShapeArcShape") ||
+                file.contents.contains("orbitalRings") ||
+                file.contents.contains("layerBandSpecs") {
+                findings.append(LifeShapeAuditFinding(
+                    id: "dominance.radial-gauge-primary-object",
+                    path: file.path,
+                    detail: "Root Time must not use a giant radial gauge as the LifeShape primary object."
+                ))
+            }
+        }
+
         return LifeShapeAuditReport(findings: findings)
     }
 

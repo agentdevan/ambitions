@@ -183,7 +183,7 @@ extension TimeLifeSuiteProjector {
             parts.append(countLabel(activeGoalCount, singular: "active goal", plural: "active goals"))
         }
         if openDays > 0 {
-            parts.append(countLabel(openDays, singular: "open day", plural: "open days"))
+            parts.append(openDays == 1 ? "one day still has room" : "\(openDays) days still have room")
         }
         if protectedBlocks > 0 {
             parts.append(countLabel(protectedBlocks, singular: "protected block", plural: "protected blocks"))
@@ -193,7 +193,11 @@ extension TimeLifeSuiteProjector {
             return "This week is still taking shape from local context."
         }
 
-        return "This week shows \(parts.joined(separator: ", "))."
+        if activeGoalCount == 0 && protectedBlocks == 0 && openDays >= 5 {
+            return "This week is still mostly open."
+        }
+
+        return parts.joined(separator: ", ").sentenceCasedWithPeriod
     }
 
     static func pressureOrdinal(
@@ -224,4 +228,12 @@ extension TimeLifeSuiteProjector {
         }
     }
 
+}
+
+private extension String {
+    var sentenceCasedWithPeriod: String {
+        guard let first else { return self }
+        let sentence = String(first).uppercased() + dropFirst()
+        return sentence.hasSuffix(".") ? sentence : "\(sentence)."
+    }
 }
