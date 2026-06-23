@@ -74,6 +74,12 @@ AMB-1200 reconciles that proof ceiling without implementing app fixes. The follo
 | Valid/no-step Today proof, Time placement variants proof, You Appearance before/after proof, and full drilldown proof missing. | Today, Time, You, Shell, and final-proof rows | Runtime proof pending. |
 | Privacy scan remains advisory Yellow for reviewed context/non-claim hits. | `AMB-ISSUE-0014`, final-proof packet | Advisory Yellow; no private-data upload claim. |
 
+## Build graph governance issues
+
+| Finding ID | Severity | Source | Area | Evidence | Existing Issue / Duplicate | Owner Train | Required Proof | Status |
+|---|---|---|---|---|---|---|---|---|
+| `SCG-BG-001` | Red / Build graph blocker | SCG-002 / BUILD_GRAPH_INVENTORY | Packages/AmbitionsExperienceKernel | Package.swift declares `Resources/Tokens`, `Resources/Manifests`, and `Resources/AmbitionsExperienceTokens.xcassets`. SCG-002 initially flagged those as absent at the package root. SCG-002A verified SwiftPM resolves those paths relative to target path `Sources/AmbitionsExperienceKernel`; `swift package describe --type json` lists `Resources/Tokens/tokens.json` and `Resources/Manifests/*.json` as processed resources, and filesystem inspection confirms `Sources/AmbitionsExperienceKernel/Resources/AmbitionsExperienceTokens.xcassets` exists and is excluded. | None | SCG-002A | package manifest/resource-path audit, build graph validation, JSON inventory refresh | Resolved by package-relative path audit; no `Package.swift` change required. |
+
 ## Verified improvements from this device review
 
 | Issue | Runtime status | Evidence |
