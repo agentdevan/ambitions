@@ -222,6 +222,13 @@ DESIGN_ALLOWED_PREFIXES = (
     "Sources/Components/",
 )
 
+POLICY_AUDIT_FILES = {
+    "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift",
+    "Native/Ambitions/Quality/ForbiddenLanguageAudit.swift",
+    "Native/Ambitions/Quality/LifeShapeFakePrecisionAudit.swift",
+    "Native/Ambitions/Quality/UserLanguageCategoryAudit.swift",
+}
+
 
 @dataclass(frozen=True)
 class Finding:
@@ -477,7 +484,7 @@ def check_forbidden_language(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
         relative = rel(path)
-        if relative == "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift":
+        if relative in POLICY_AUDIT_FILES:
             continue
         add_regex_findings(
             findings,
@@ -494,7 +501,7 @@ def check_transitional_ownership_terms(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
         relative = rel(path)
-        if relative.startswith("Native/Ambitions/Language/ForbiddenTopLevelTerms.swift"):
+        if relative in POLICY_AUDIT_FILES:
             continue
         add_regex_findings(
             findings,
@@ -540,7 +547,7 @@ def check_hosted_ai_backend_boundaries(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
         relative = rel(path)
-        if relative == "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift":
+        if relative in POLICY_AUDIT_FILES:
             continue
         add_regex_findings(
             findings,
