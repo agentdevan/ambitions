@@ -229,20 +229,20 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(handoff.owner, .goals)
         XCTAssertEqual(navigation.selectedTab, .goals)
         XCTAssertEqual(navigation.goalsPath.first?.goalID, "goal-release")
-        XCTAssertEqual(navigation.continuityReceipt?.title, "Search handoff")
+        XCTAssertEqual(navigation.continuityReceipt?.title, "Search opened")
         XCTAssertEqual(navigation.continuityReceipt?.destinationLabel, "Goal Detail")
-        XCTAssertTrue(navigation.continuityReceipt?.body.contains("Search Ambitions") == true)
+        XCTAssertTrue(navigation.continuityReceipt?.body.contains("Search") == true)
         XCTAssertTrue(navigation.continuityReceipt?.body.contains("Goals") == true)
     }
 
-    func testAMB1059RoutesMemoryLensCaptureResultToGlobalCaptureHandoffNotCaptureTab() {
+    func testAMB1196RoutesSearchCaptureResultToCaptureOverlayNotCaptureTab() {
         let navigation = StageStore(selectedSurface: .today)
         let router = DefaultShellCommandRouter(navigation: navigation, captureService: StubCaptureService(captures: []))
         let result = MemoryLensResult(
             id: "capture-unplaced",
             title: "Book the rehearsal room",
             subtitle: "Needs a Place",
-            explanation: "Open global Capture handoff.",
+            explanation: "Open Capture.",
             queryText: "book rehearsal room",
             timestamp: "2026-04-22T10:00:00Z",
             kind: .capture,
@@ -254,14 +254,15 @@ final class ShellCommandRouterTests: XCTestCase {
         let handoff = router.route(searchResult: result, source: .shellUtility)
 
         XCTAssertTrue(handoff.isTrusted)
-        XCTAssertEqual(handoff.owner, .globalCapture)
+        XCTAssertEqual(handoff.owner, .capture)
         XCTAssertEqual(navigation.selectedTab, .today)
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(navigation.activeOverlay?.kind, .quietCommandSheet)
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertEqual(navigation.activeOverlay?.entrySource, .shellUtility)
         XCTAssertEqual(navigation.continuityReceipt?.destinationLabel, "Capture")
-        XCTAssertTrue(navigation.continuityReceipt?.body.contains("Global Capture") == true)
+        XCTAssertTrue(navigation.continuityReceipt?.body.contains("Capture") == true)
+        XCTAssertFalse(navigation.continuityReceipt?.body.contains("Global Capture") == true)
         XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
     }
 }

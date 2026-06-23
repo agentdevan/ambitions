@@ -34,6 +34,29 @@ enum ShellCommandEntrySource: String, Hashable, Sendable, Codable {
         case .external: "External surface"
         }
     }
+
+    var originSurface: AmbitionsSurface? {
+        switch self {
+        case .todayQuickCapture:
+            .today
+        case .goalsCreate, .goalsQuickCapture:
+            .goals
+        case .timeQuickCapture:
+            .time
+        case .youQuickCapture:
+            .you
+        case .shellCompose,
+             .shellUtility,
+             .globalCaptureComposer,
+             .deepLink,
+             .appIntent,
+             .notification,
+             .widget,
+             .shareExtension,
+             .external:
+            nil
+        }
+    }
 }
 
 struct ShellCommandHistoryEntry: Hashable, Identifiable, Sendable, Codable {

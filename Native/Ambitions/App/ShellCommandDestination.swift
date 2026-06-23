@@ -5,7 +5,7 @@ enum ShellTrustedSearchHandoffOwner: String, Hashable, Sendable {
     case goals
     case time
     case you
-    case globalCapture
+    case capture
 
     var title: String {
         switch self {
@@ -13,17 +13,12 @@ enum ShellTrustedSearchHandoffOwner: String, Hashable, Sendable {
         case .goals: "Goals"
         case .time: "Time"
         case .you: "You"
-        case .globalCapture: "Global Capture"
+        case .capture: "Capture"
         }
     }
 
     var accessibilityLabel: String {
-        switch self {
-        case .globalCapture:
-            "Global Capture handoff"
-        default:
-            "\(title) handoff"
-        }
+        title
     }
 }
 
@@ -65,7 +60,7 @@ struct ShellTrustedSearchHandoff: Hashable, Identifiable, Sendable {
         guard isTrusted else {
             return "Search result was held because the destination is not an active Ambitions surface."
         }
-        return "Opened \(resultTitle) from Search Ambitions into \(owner.title). \(sourceEvidenceTitle); \(trustSummary)."
+        return "Opened \(resultTitle) from Search into \(owner.title). \(sourceEvidenceTitle); \(trustSummary)."
     }
 }
 
@@ -114,7 +109,7 @@ enum ShellCommandDestination: Hashable, Sendable {
         case .youRoute:
             .you
         case let .overlay(overlay):
-            overlay.isActivatedCaptureComposer ? .globalCapture : .today
+            overlay.isActivatedCaptureComposer ? .capture : .today
         }
     }
 
@@ -145,7 +140,7 @@ extension MemoryLensResult {
     func trustedSearchHandoff(source: ShellCommandEntrySource) -> ShellTrustedSearchHandoff {
         ShellTrustedSearchHandoff(
             resultID: id,
-            resultTitle: title,
+            resultTitle: userFacingTitle,
             source: source,
             destination: destination,
             owner: trustedSearchHandoffOwner,

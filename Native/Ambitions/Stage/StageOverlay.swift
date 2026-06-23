@@ -19,7 +19,7 @@ struct StageOverlay: Equatable {
         return StageOverlay(
             presentation: presentation,
             activeState: overlay,
-            hidesRootDock: presentation == .activatedCaptureComposer,
+            hidesRootDock: presentation == .activatedCaptureComposer || presentation == .memoryLens,
             restoresFocusAfterDismissal: presentation != .none
         )
     }

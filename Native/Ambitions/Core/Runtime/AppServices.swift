@@ -124,7 +124,13 @@ protocol CaptureServicing: Sendable {
 }
 
 protocol MemoryLensServicing: Sendable {
-    func search(query: String, seedIntent: ShellCommandIntent?) async -> [MemoryLensResult]
+    func search(query: String, seedIntent: ShellCommandIntent?, origin: AmbitionsSurface?) async -> [MemoryLensResult]
+}
+
+extension MemoryLensServicing {
+    func search(query: String, seedIntent: ShellCommandIntent?) async -> [MemoryLensResult] {
+        await search(query: query, seedIntent: seedIntent, origin: nil)
+    }
 }
 
 protocol AppActionRouting {

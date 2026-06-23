@@ -169,6 +169,14 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(capture.stageContentBottomClearance, 0)
         XCTAssertEqual(capture.captureComposerClearance, 18)
 
+        let search = StagePathStore.chromePolicy(
+            routeDepth: .root,
+            overlayPresentation: .memoryLens,
+            dynamicTypeIsAccessibilitySize: false
+        )
+        XCTAssertFalse(search.showsRootDock)
+        XCTAssertTrue(StageOverlay.current(.memoryLens(entrySource: .shellUtility)).hidesRootDock)
+
         let drilldown = StagePathStore.chromePolicy(
             routeDepth: .drilldown,
             overlayPresentation: .none,

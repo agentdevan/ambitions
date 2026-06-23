@@ -6,7 +6,7 @@ enum DockBehaviorPolicy {
         routeDepth: StageRouteDepth,
         overlayPresentation: StageOverlayPresentation
     ) -> Bool {
-        routeDepth == .root && overlayPresentation != .activatedCaptureComposer
+        routeDepth == .root && overlayPresentation == .none
     }
 
     static func showsDockBackdrop(

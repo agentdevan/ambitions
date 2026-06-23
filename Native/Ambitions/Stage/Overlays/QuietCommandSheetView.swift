@@ -17,16 +17,23 @@ struct QuietCommandSheetView: View {
     @State var memoryResults: [MemoryLensResult] = []
     @State var isMemorySearchLoading = false
     @State var memoryStatusMessage: String?
+    @FocusState var isMemoryFieldFocused: Bool
 
     let draftRouteService = CaptureDraftRouteService()
 
     var body: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.lg) {
-            dragHandle
-            header
-            commandContent
+        Group {
+            if overlay.kind == .memoryLens {
+                memoryLensBody
+            } else {
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                    dragHandle
+                    header
+                    commandContent
+                }
+                .padding(theme.spacing.xl)
+            }
         }
-        .padding(theme.spacing.xl)
         .presentationDetents(overlay.kind == .memoryLens ? [.height(560), .large] : [.large])
         .presentationDragIndicator(.hidden)
         .background(theme.colors.canvas)
@@ -35,6 +42,7 @@ struct QuietCommandSheetView: View {
             captureText = overlay.query
             memoryQuery = overlay.query
             if overlay.presentationContext == .recall {
+                isMemoryFieldFocused = true
                 Task { await refreshMemoryResults() }
             }
         }

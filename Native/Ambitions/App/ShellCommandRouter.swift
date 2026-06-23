@@ -138,7 +138,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         let handoff = result.trustedSearchHandoff(source: source)
         guard handoff.isTrusted else {
             navigation.recordRoute(
-                title: "Search handoff held",
+                title: "Search result held",
                 source: source,
                 presentationContext: .recall,
                 destination: .overlay(.memoryLens(entrySource: source)),
@@ -149,7 +149,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
 
         route(to: result.destination, source: source)
         navigation.continuityReceipt = ShellContinuityReceipt(
-            title: "Search handoff",
+            title: "Search opened",
             body: handoff.body,
             source: source,
             destinationLabel: result.destination.displayLabel

@@ -38,6 +38,7 @@ struct AmbitionsStage: View {
             if chromePolicy.showsRootDock {
                 shellRootDockLayer(theme: resolvedTheme, policy: chromePolicy)
             }
+            shellSearchSeam(theme: resolvedTheme)
             shellActivatedCaptureComposerSeam(theme: resolvedTheme, policy: chromePolicy)
             shellContinuityReceipt(theme: resolvedTheme, policy: chromePolicy)
         }
@@ -109,7 +110,8 @@ struct AmbitionsStage: View {
     private var activeSheetOverlayBinding: Binding<ShellOverlayState?> {
         Binding(
             get: {
-                guard navigation.activeOverlay?.isActivatedCaptureComposer != true else {
+                guard navigation.activeOverlay?.isActivatedCaptureComposer != true,
+                      navigation.activeOverlay?.kind != .memoryLens else {
                     return nil
                 }
                 return navigation.activeOverlay
@@ -118,6 +120,27 @@ struct AmbitionsStage: View {
                 navigation.activeOverlay = newValue
             }
         )
+    }
+
+    @ViewBuilder
+    private func shellSearchSeam(theme: AmbitionTheme) -> some View {
+        if let overlay = navigation.activeOverlay, overlay.kind == .memoryLens {
+            AppShellOverlayView(
+                overlay: overlay,
+                onDismiss: {
+                    navigation.dismissOverlay()
+                },
+                onGoalCreated: { overlayState, response in
+                    Task {
+                        await handleCreatedGoal(response, from: overlayState)
+                    }
+                }
+            )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(theme.colors.canvas.ignoresSafeArea())
+            .transition(.opacity)
+            .zIndex(3)
+        }
     }
 
     private func handleContextualToolbarAction(_ action: AppShellContextualToolbarAction, for tab: AmbitionsSurface) {

@@ -27,18 +27,18 @@ final class MemoryLensServiceTests: XCTestCase {
         XCTAssertTrue(results.contains(where: { $0.kind == .goal && $0.title == goal.title }))
     }
 
-    func testSearchPrioritizesWeekForOpenWeekIntent() async throws {
+    func testSearchPrioritizesTimeForOpenWeekIntent() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = makeRepositories(store: store)
         let service = DefaultMemoryLensService(repositories: repositories)
 
         let results = await service.search(query: "", seedIntent: .openWeek)
 
-        XCTAssertEqual(results.first?.kind, .week)
+        XCTAssertEqual(results.first?.kind, .timeWindow)
         XCTAssertEqual(results.first?.destination, .tab(.time))
     }
 
-    func testSearchSurfacesWhyNowLearningCorrectionAndHandoffRecall() async throws {
+    func testSearchSurfacesStepWhyNowLearningCorrectionAndProofRecords() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = makeRepositories(store: store)
         let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
@@ -78,17 +78,33 @@ final class MemoryLensServiceTests: XCTestCase {
                 userNote: "Use a lighter version"
             )
         ])
+        try await repositories.evidence.saveEvidence([
+            ProgressEvidence(
+                id: "proof-step",
+                goalID: goal.id,
+                stepID: step.id,
+                evidenceKind: .stepCompleted,
+                source: .manual,
+                capturedAt: "2026-04-22T12:00:00Z",
+                progressDelta: 0.2,
+                confidenceDelta: nil,
+                minutesInvested: 20,
+                note: "Sent the draft"
+            )
+        ])
         let service = DefaultMemoryLensService(repositories: repositories)
 
+        let stepResults = await service.search(query: step.title, seedIntent: .memoryLens)
         let whyNow = await service.search(query: "why now", seedIntent: .memoryLens)
         let learning = await service.search(query: "recent learning", seedIntent: .memoryLens)
         let correction = await service.search(query: "recent correction", seedIntent: .memoryLens)
-        let handoff = await service.search(query: "handoff", seedIntent: .memoryLens)
+        let proof = await service.search(query: "sent the draft", seedIntent: .memoryLens)
 
+        XCTAssertTrue(stepResults.contains(where: { $0.kind == .step && $0.destination == .goal(goal.id) }))
         XCTAssertTrue(whyNow.contains(where: { $0.kind == .whyNow && $0.facet == .whyNow && $0.destination == .goal(goal.id) }))
         XCTAssertTrue(learning.contains(where: { $0.kind == .learning && $0.facet == .recentLearning }))
         XCTAssertTrue(correction.contains(where: { $0.kind == .teaching && $0.facet == .recentCorrection }))
-        XCTAssertTrue(handoff.contains(where: { $0.kind == .handoff && $0.facet == .handoff }))
+        XCTAssertTrue(proof.contains(where: { $0.kind == .proof && $0.destination == .goal(goal.id) }))
     }
 
     func testSearchResultsCarrySourceConfidenceAndTrustDecayEvidence() async throws {
@@ -131,7 +147,7 @@ final class MemoryLensServiceTests: XCTestCase {
                 $0.trustDecayState == .current
         })
         XCTAssertTrue(results.contains {
-            $0.kind == .capture &&
+            $0.kind == .thought &&
                 $0.sourceEvidence == .capturedThought &&
                 $0.confidenceBand == .direct &&
                 $0.trustDecayState == .current
@@ -200,7 +216,7 @@ final class MemoryLensServiceTests: XCTestCase {
         let results = await service.search(query: "", seedIntent: .memoryLens)
 
         XCTAssertTrue(results.contains {
-            $0.kind == .week &&
+            $0.kind == .timeWindow &&
                 $0.contextRecallClass == .lifeEvent &&
                 !$0.requiresUserReviewBeforeDurableMemory
         })
@@ -269,9 +285,9 @@ final class MemoryLensServiceTests: XCTestCase {
         let safeRecall = await service.search(query: "safe context recall", seedIntent: .memoryLens)
 
         XCTAssertTrue(capturedContext.contains(where: {
-            $0.kind == .capture &&
+            $0.kind == .thought &&
                 $0.retrievalScope == .inboxContext &&
-                $0.contextRetrievalSummary.contains("Captured thought")
+                $0.sourceEvidence == .capturedThought
         }))
         XCTAssertTrue(correctionTrail.contains(where: {
             $0.kind == .teaching &&
@@ -286,7 +302,7 @@ final class MemoryLensServiceTests: XCTestCase {
         XCTAssertTrue(correctionTrail.allSatisfy { !$0.allowsMemoryClaim })
     }
 
-    func testAMB1059SearchResultsExposeTrustedHandoffOwnersWithoutStaleIADestinations() async throws {
+    func testAMB1196SearchResultsExposeValidDestinationsWithoutInternalLabels() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = makeRepositories(store: store)
         let goal = try XCTUnwrap(goalFromFixture(id: "clear-timed-self-goal"))
@@ -310,8 +326,22 @@ final class MemoryLensServiceTests: XCTestCase {
         XCTAssertTrue(results.allSatisfy { $0.staleIADestinationBlockers.isEmpty })
         XCTAssertTrue(results.allSatisfy { $0.trustedSearchHandoff(source: .shellUtility).isTrusted })
         XCTAssertTrue(results.contains { $0.kind == .goal && $0.trustedSearchHandoffOwner == .goals })
-        XCTAssertTrue(results.contains { $0.kind == .week && $0.trustedSearchHandoffOwner == .time })
-        XCTAssertTrue(results.contains { $0.kind == .capture && $0.trustedSearchHandoffOwner == .globalCapture })
+        XCTAssertTrue(results.contains { $0.kind == .timeWindow && $0.trustedSearchHandoffOwner == .time })
+        XCTAssertTrue(results.contains { $0.kind == .thought && $0.trustedSearchHandoffOwner == .capture })
+        let userFacingText = results.map {
+            [
+                $0.searchFamily.title,
+                $0.userFacingTitle,
+                $0.userFacingContext,
+                $0.sourceAreaTitle,
+                $0.stateTitle,
+                $0.actionTitle,
+                $0.inspectActionTitle ?? ""
+            ].joined(separator: " ")
+        }.joined(separator: "\n")
+        for forbidden in ["Handoff", "Global Capture", "owning surface", "route target", "implementation", "indexed object", "source adapter", "confidence"] {
+            XCTAssertFalse(userFacingText.localizedCaseInsensitiveContains(forbidden), forbidden)
+        }
         XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("capture"))
         XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("pulse"))
         XCTAssertFalse(AmbitionsSurface.allCases.map(\.rawValue).contains("plan"))
