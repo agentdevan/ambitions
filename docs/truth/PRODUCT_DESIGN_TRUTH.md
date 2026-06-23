@@ -312,4 +312,331 @@ Avoid weak first drafts. Do not provide a “good enough MVP” plan when the as
 - Hosted AI services and cloud LLMs are not core architecture.
 - No canon update is Green until readback proves the file is intact.
 
+## 17. Final Architecture Tree
+
+```
+Ambitions/
+  App/
+    AmbitionsApp.swift
+    AmbitionsRootScene.swift
+    AmbitionsStageHost.swift
+    AppEnvironment.swift
+    AppDependencies.swift
+    AppFeatureFlags.swift
+
+  Stage/
+    AmbitionsStage.swift
+    AmbitionsStageModel.swift
+    AmbitionsSurface.swift
+
+    StageState.swift
+    StageStore.swift
+    StageAction.swift
+    StageScene.swift
+    StageObject.swift
+    StageOverlay.swift
+    StageChrome.swift
+    StageContext.swift
+    StageRoute.swift
+    StagePathStore.swift
+
+    StageReducer.swift
+    StageEffect.swift
+    StageEffectRunner.swift
+
+    StageMorphCoordinator.swift
+    StageTransitionSpec.swift
+    StageMutationAnimator.swift
+    StageFocusCoordinator.swift
+    StageSafeAreaPolicy.swift
+
+    Chrome/
+      NativeChromePolicy.swift
+      LiquidGlassPolicy.swift
+      DockBehaviorPolicy.swift
+      CrownBehaviorPolicy.swift
+
+    Motion/
+      StageMotionState.swift
+      StageMotionEvent.swift
+      StageMotionLayer.swift
+      StageMotionCoordinator.swift
+      StageMotionRenderer.swift
+      StageMotionAccessibility.swift
+      StageMotionReductionPolicy.swift
+
+  Core/
+    Domain/
+      Step.swift
+      GoalThread.swift
+      LifeArea.swift
+      RealityWindow.swift
+      CapacityShape.swift
+      CaptureIntake.swift
+      ClosureOutcome.swift
+      ProofEvent.swift
+      RecoveryState.swift
+      UserSystemProfile.swift
+
+    Time/
+      AmbitionsClock.swift
+      SystemClock.swift
+      PreviewClock.swift
+      TimeZoneProvider.swift
+      DayBoundaryScheduler.swift
+      RuntimeTickPolicy.swift
+
+    Runtime/
+      PrivateLifeRuntime.swift
+      RuntimeSnapshot.swift
+      RuntimeProjectionPipeline.swift
+      RecommendationEngine.swift
+      CapacityEngine.swift
+      ClosureEngine.swift
+      RecoveryEngine.swift
+      ProofLedger.swift
+      PrivacyBoundary.swift
+      RuntimeMutation.swift
+      RuntimeValidator.swift
+
+    Persistence/
+      SwiftDataModels/
+      Repositories/
+      Migrations/
+      LocalStore.swift
+      StoreHealthCheck.swift
+
+    Permissions/
+      PermissionState.swift
+      PermissionCoordinator.swift
+      CalendarPermission.swift
+      SpeechPermission.swift
+      NotificationPermission.swift
+      LocalAuthenticationPolicy.swift
+
+  Projection/
+    SurfaceLenses/
+      SurfaceLens.swift
+      TodayLens.swift
+      GoalsLens.swift
+      TimeLens.swift
+      YouLens.swift
+
+    StageScenes/
+      TodayStageScene.swift
+      GoalsStageScene.swift
+      TimeStageScene.swift
+      YouStageScene.swift
+
+    OverlayLenses/
+      CaptureLens.swift
+      SearchLens.swift
+      ClosureLens.swift
+      InspectionLens.swift
+
+    OverlayScenes/
+      CaptureStageScene.swift
+      SearchStageScene.swift
+      ClosureStageScene.swift
+      InspectionStageScene.swift
+
+    Commands/
+      AmbitionsCommand.swift
+      CommandRouter.swift
+      CommandResult.swift
+      CommandValidation.swift
+
+    Mutations/
+      StageMutation.swift
+      UserVisibleMutation.swift
+      MutationProof.swift
+      MutationReceipt.swift
+      MutationUndo.swift
+      MutationAccessibilityAnnouncement.swift
+
+  Language/
+    UserFacingLanguage.swift
+    RuntimeVocabulary.swift
+    SurfaceCopyPolicy.swift
+    ForbiddenTopLevelTerms.swift
+    CopyBudget.swift
+
+  Trust/
+    InspectionSurface.swift
+    ProofInspectionView.swift
+    SourceInspectionView.swift
+    PrivacyInspectionView.swift
+    HistoryInspectionView.swift
+    ReceiptInspectionView.swift
+    RuntimeExplanationPolicy.swift
+    TrustDisclosureLevel.swift
+
+  Interaction/
+    GestureGrammar.swift
+    DirectManipulationPolicy.swift
+    SurfaceGestureMap.swift
+    KeyboardPolicy.swift
+    HapticPolicy.swift
+
+  Rendering/
+    CanvasPrimitives/
+      MeridianRenderer.swift
+      ConstellationRenderer.swift
+      LifeShapeRenderer.swift
+      MotionCurrentRenderer.swift
+      MorphGeometry.swift
+      RenderPerformanceProbe.swift
+
+    SemanticMirrors/
+      MeridianSemanticModel.swift
+      ConstellationSemanticModel.swift
+      LifeShapeSemanticModel.swift
+      MotionSemanticModel.swift
+
+  DesignSystem/
+    Foundations/
+      AmbitionsColor.swift
+      AmbitionsTypography.swift
+      AmbitionsSpacing.swift
+      AmbitionsMaterial.swift
+      AmbitionsLighting.swift
+      AmbitionsDepth.swift
+      AmbitionsMotion.swift
+      AmbitionsHaptics.swift
+
+    Accessibility/
+      AccessibilityLabelPolicy.swift
+      VoiceOverFocusPolicy.swift
+      DynamicTypePolicy.swift
+      ReduceMotionPolicy.swift
+      ReduceTransparencyPolicy.swift
+      ContrastPolicy.swift
+
+    StagePrimitives/
+      ObjectStage.swift
+      ContextCrown.swift
+      ContinuityDock.swift
+      CaptureAccessPoint.swift
+      SurfaceMorphBackdrop.swift
+      TrustSeam.swift
+      ReceiptSurface.swift
+
+    ProductObjects/
+      RealityMeridianView.swift
+      StartHereToken.swift
+      ConstellationAtlasView.swift
+      ConstellationNode.swift
+      AtmosphereComposerField.swift
+      LifeShapeFieldView.swift
+      MotionCurrentView.swift
+      ProofStitchView.swift
+      RecoveryBand.swift
+      UserSystemProfileView.swift
+      NativeSettingsGroup.swift
+      NativeSettingsRow.swift
+
+  Surfaces/
+    SurfaceContract.swift
+    SurfacePrimaryObject.swift
+    SurfaceActionContract.swift
+    SurfaceDisclosureContract.swift
+    SurfaceLaw.swift
+    SurfaceLawAudit.swift
+
+    Today/
+      TodaySurface.swift
+      TodayObjectView.swift
+      TodayInteractions.swift
+      TodayAccessibility.swift
+
+    Goals/
+      GoalsSurface.swift
+      GoalsObjectView.swift
+      GoalsInteractions.swift
+      GoalsAccessibility.swift
+
+    Time/
+      TimeSurface.swift
+      TimeObjectView.swift
+      TimeInteractions.swift
+      TimeAccessibility.swift
+
+    You/
+      YouSurface.swift
+      YouObjectView.swift
+      YouInteractions.swift
+      YouAccessibility.swift
+
+  Composer/
+    Capture/
+      CaptureSurface.swift
+      CaptureObjectView.swift
+      CaptureInteractions.swift
+      CaptureAccessibility.swift
+      CaptureInputModel.swift
+      CaptureRoutingPreview.swift
+
+  Scenarios/
+    RuntimeScenario.swift
+    ScenarioCatalog.swift
+    ScenarioMatrix.swift
+
+    SurfaceScenarios/
+      TodayScenarios.swift
+      GoalsScenarios.swift
+      TimeScenarios.swift
+      YouScenarios.swift
+
+    OverlayScenarios/
+      CaptureScenarios.swift
+      SearchScenarios.swift
+      ClosureScenarios.swift
+      InspectionScenarios.swift
+
+    MotionScenarios/
+      StageMotionScenarios.swift
+      CrossSurfaceMotionScenarios.swift
+      PostMutationMotionScenarios.swift
+      RecoveryMotionScenarios.swift
+
+    StressScenarios/
+      AccessibilityScenarios.swift
+      BrokenSourceScenarios.swift
+      EmptyStateScenarios.swift
+      DenseStateScenarios.swift
+      PostMutationScenarios.swift
+
+  Diagnostics/
+    RuntimeDiagnostics.swift
+    StageDiagnostics.swift
+    RenderDiagnostics.swift
+    StoreDiagnostics.swift
+    CrashTriageNotes.swift
+
+  Quality/
+    SnapshotMatrix.swift
+    AccessibilityAudit.swift
+    PerformanceBudgets.swift
+    VisualRegressionHarness.swift
+    MotionReductionAudit.swift
+    ShellChromeAudit.swift
+    ForbiddenLanguageAudit.swift
+    SafeAreaAudit.swift
+    DynamicTypeAudit.swift
+    RealDeviceRenderChecklist.swift
+```
+
+Explicitly removed architecture:
+
+- ==RootTab.swift== as root architecture
+- ==TabView== as the top-level product model
+- ==Surfaces/Motion/==
+- ==Surfaces/Capture/==
+- ==Projection/SurfaceLenses/MotionLens.swift==
+- ==Projection/StageScenes/MotionStageScene.swift==
+- ==Scenarios/MotionScenarios.swift== as a top-level surface scenario
+
+---
+
 This is the canon.
+
