@@ -13,10 +13,10 @@ enum DockBehaviorPolicy {
         routeDepth: StageRouteDepth,
         overlayPresentation: StageOverlayPresentation
     ) -> Bool {
-        showsRootDock(routeDepth: routeDepth, overlayPresentation: overlayPresentation)
+        false
     }
 
     static func dockClearance(dynamicTypeIsAccessibilitySize: Bool) -> CGFloat {
-        dynamicTypeIsAccessibilitySize ? 184 : 164
+        dynamicTypeIsAccessibilitySize ? 132 : 108
     }
 }

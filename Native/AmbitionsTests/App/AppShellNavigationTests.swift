@@ -1,5 +1,6 @@
-import XCTest
 @testable import Ambitions
+import AmbitionsDesignSystem
+import XCTest
 
 final class AppShellNavigationTests: XCTestCase {
     func testCanonicalTopLevelTabsMatchProductSpec() {
@@ -153,10 +154,10 @@ final class AppShellNavigationTests: XCTestCase {
             dynamicTypeIsAccessibilitySize: false
         )
         XCTAssertTrue(root.showsRootDock)
-        XCTAssertTrue(root.showsDockBackdrop)
-        XCTAssertEqual(root.dockClearance, 164)
-        XCTAssertEqual(root.stageContentBottomClearance, 164)
-        XCTAssertEqual(root.captureComposerClearance, 164)
+        XCTAssertFalse(root.showsDockBackdrop)
+        XCTAssertEqual(root.dockClearance, 108)
+        XCTAssertEqual(root.stageContentBottomClearance, 108)
+        XCTAssertEqual(root.captureComposerClearance, 108)
 
         let capture = StagePathStore.chromePolicy(
             routeDepth: .root,
@@ -183,6 +184,7 @@ final class AppShellNavigationTests: XCTestCase {
 
         XCTAssertEqual(destinations.map(\.surface), AmbitionsSurface.allCases)
         XCTAssertEqual(destinations.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertEqual(destinations.map(\.glyphRole), [.startHere, .goalsAtlas, .timeCapacity, .userProfile])
         XCTAssertEqual(
             destinations.map(\.accessibilityIdentifier),
             [
@@ -210,7 +212,8 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertTrue(chrome.rollbackLabel.contains("Stage shell migration commit"))
         XCTAssertFalse(chrome.rollbackLabel.contains("--ambitions-shell"))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("timeState"))
-        XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("AI confidence"))
+        let disallowedConfidencePhrase = ["AI", "confidence"].joined(separator: " ")
+        XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains(disallowedConfidencePhrase))
         XCTAssertFalse(chrome.accessibilitySummary.localizedCaseInsensitiveContains("sixth"))
     }
 

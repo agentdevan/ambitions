@@ -1,3 +1,4 @@
+import AmbitionsDesignSystem
 import CoreGraphics
 import Foundation
 
@@ -22,19 +23,38 @@ struct StageChromePolicy: Equatable {
 struct StageDockDestination: Equatable, Identifiable {
     let surface: AmbitionsSurface
     let title: String
-    let systemImage: String
+    let glyphRole: AmbitionSemanticGlyphRole
     let accessibilityIdentifier: String
 
     var id: AmbitionsSurface { surface }
+
+    var systemImage: String {
+        glyphRole.symbolName
+    }
 
     static var all: [StageDockDestination] {
         AmbitionsSurface.allCases.map { surface in
             StageDockDestination(
                 surface: surface,
                 title: surface.title,
-                systemImage: surface.systemImage,
+                glyphRole: surface.stageDockGlyphRole,
                 accessibilityIdentifier: "shell.meridian.destination.\(surface.rawValue)"
             )
+        }
+    }
+}
+
+extension AmbitionsSurface {
+    var stageDockGlyphRole: AmbitionSemanticGlyphRole {
+        switch self {
+        case .today:
+            .startHere
+        case .goals:
+            .goalsAtlas
+        case .time:
+            .timeCapacity
+        case .you:
+            .userProfile
         }
     }
 }

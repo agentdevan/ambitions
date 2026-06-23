@@ -14,6 +14,7 @@ final class ShellChromeAuditTests: XCTestCase {
         XCTAssertTrue(report.passed, report.findings.joined(separator: "\n"))
         XCTAssertEqual(StageDockDestination.all.map(\.surface), AmbitionsSurface.allCases)
         XCTAssertEqual(StageDockDestination.all.map(\.title), ["Today", "Goals", "Time", "You"])
+        XCTAssertFalse(policy.showsDockBackdrop)
     }
 
     func testShellChromeAuditRejectsDuplicateBottomNavigation() {

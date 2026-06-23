@@ -71,15 +71,22 @@ final class AppShellChromeTests: XCTestCase {
         }
     }
 
-    func testAMB1191DockRailUsesThemeMaterialInsteadOfDarkOnlyLiquidGlassTokens() throws {
+    func testAMB1194DockRailUsesSemanticThemeMaterialWithoutVisibleContainerChrome() throws {
         let source = try String(
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Stage/Chrome/StageDockRail.swift"),
             encoding: .utf8
         )
 
-        XCTAssertTrue(source.contains("theme.shell.bottomBarMaterial"))
-        XCTAssertTrue(source.contains("theme.colors.surfaceOverlay"))
-        XCTAssertTrue(source.contains("theme.shell.divider"))
+        XCTAssertTrue(source.contains("theme.shell.controlBackground"))
+        XCTAssertTrue(source.contains("theme.shell.activeTabForeground"))
+        XCTAssertTrue(source.contains("theme.shell.inactiveTabForeground"))
+        XCTAssertTrue(source.contains("shell.stage-os.invisible-rail"))
+        XCTAssertFalse(source.contains("Text(destination.title)"))
+        XCTAssertFalse(source.contains("theme.shell.bottomBarMaterial"))
+        XCTAssertFalse(source.contains("theme.colors.surfaceOverlay"))
+        XCTAssertFalse(source.contains("theme.shell.divider"))
+        XCTAssertFalse(source.contains(".stroke("))
+        XCTAssertFalse(source.contains("LinearGradient("))
         XCTAssertFalse(source.contains("LiquidGlass.darkDockCore"))
         XCTAssertFalse(source.contains("LiquidGlass.darkDockBase"))
         XCTAssertFalse(source.contains("Separator.darkNonOpaque"))
@@ -146,8 +153,23 @@ final class AppShellChromeTests: XCTestCase {
                 "shell.meridian.destination.you",
             ]
         )
+        XCTAssertEqual(StageDockDestination.all.map(\.glyphRole), [.startHere, .goalsAtlas, .timeCapacity, .userProfile])
         XCTAssertFalse(StageDockDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("capture") })
         XCTAssertFalse(StageDockDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
+    }
+
+    func testAMB1194RootStageHostDoesNotExposeInternalObjectNamesInRootShellSubtitles() throws {
+        let source = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertFalse(source.contains("subtitle: \"Constellation Atlas\""))
+        XCTAssertFalse(source.contains("subtitle: \"Profile and settings\""))
+        XCTAssertEqual(source.components(separatedBy: "subtitle: \"LifeShape Field\"").count - 1, 2)
+        XCTAssertTrue(source.contains("title: \"Time\""))
+        XCTAssertTrue(source.contains("title: \"Goals\""))
+        XCTAssertTrue(source.contains("title: \"You\""))
     }
 }
 

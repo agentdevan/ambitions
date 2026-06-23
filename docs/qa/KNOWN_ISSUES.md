@@ -52,7 +52,7 @@ The current build is materially improved in source architecture, Time foundation
 4. **Search exists visually but is not functionally useful and needs a complete rebuild.**
 5. **Today still contains confusing toggles, status phrases, and context actions that do not belong in the primary Today object.**
 6. **Time improved but still does not communicate a usable LifeShape Field. It can place a step when no real user-created step or goal exists.**
-7. **Shell chrome still feels prototype: bordered dock, words under icons, over-indicated active state, large root headers, internal object names, and excessive safe-area padding.**
+7. **Shell chrome has AMB-1194 source repairs for icon-only floating root buttons, root header subtitle cleanup, invisible rail coordination, and reduced root dock clearance, but current screenshot/device proof is still missing.**
 8. **The app is still shallow: most drilldowns are slide-up cards rather than mature full-screen surfaces.**
 
 ## Verified improvements from this device review
@@ -62,7 +62,7 @@ The current build is materially improved in source architecture, Time foundation
 | Old hardcoded Today time | **Improved / device observed** | Today now showed real current time in screenshots and tester notes. Keep a regression test requirement. |
 | Motion as root surface | **Resolved in source and not observed as root** | Dock shows Today / Goals / Time / You only. |
 | Capture as root tab | **Resolved in source and not observed as root** | Capture appears through shell/action overlay, but current overlay behavior is still poor. |
-| Duplicate native/custom bottom shelf | **Improved / not observed in same old form** | The old second tab shelf is not the dominant failure now; dock styling/safe area remain open. |
+| Duplicate native/custom bottom shelf | **Source-repaired candidate / runtime proof pending** | AMB-1194 removes the allocated bottom shelf/backdrop and renders the root dock as an overlayed invisible rail with separate icon buttons; current screenshot proof still required. |
 | Root dock in drilldowns | **Improved / device observed** | Tester notes: root dock hides on drilldowns. |
 | Old Time vertical-letter wrapping | **Improved / not observed in current Time screenshots** | Current Time no longer shows the severe source/receipt vertical wrap. |
 | Closure visual quality | **Acceptable for v1 / still needs state gating** | Tester notes: Closure looks good enough for v1; however Record Outcome appears when no step exists. |
@@ -79,7 +79,7 @@ The current build is materially improved in source architecture, Time foundation
 | `AMB-ISSUE-0012` | Capture | **Still present — runtime verified** | Capture is not yet a global full-screen Atmosphere Composer. | `IMG_8477`. | Full-screen composer device proof. |
 | `AMB-ISSUE-0014` | Quality | **Still open** | Proof artifacts remain insufficient for release-quality closure. | Device review did not include tests/audits. | ShellChrome, SafeArea, ForbiddenLanguage, DynamicType, MotionReduction, VisualRegression, RealDevice outputs. |
 | `AMB-ISSUE-0016` | Whole app | **Still present — runtime verified** | Frontend remains too shallow and confusing for reliable runtime validation. | Tester notes across Today, Goals, Time, You, Search. | Current scenario matrix plus before/after mutation proof. |
-| `AMB-ISSUE-0806` | Shell | **Still present — runtime verified** | Header/dock/safe-area composition remains prototype and not full-bleed. | `IMG_8475`–`IMG_8499`; shell notes. | Full-bleed shell screenshot matrix. |
+| `AMB-ISSUE-0806` | Shell | **Source-repaired candidate / runtime proof pending** | AMB-1194 removes the visible dock container/backdrop, overlays the root rail on the full-bleed Stage, reserves content clearance through `StageSafeAreaPolicy`, and removes root shell subtitles exposing internal object names. | Prior runtime evidence: `IMG_8475`–`IMG_8499`; AMB-1194 source/test proof. | Full-bleed shell screenshot matrix. |
 | `AMB-ISSUE-0913` | Time / Trust | **Still present — runtime verified** | Time mutation feedback may expose proof/receipt/haptic-style metadata or imply fake mutation success. | `IMG_8481`, `IMG_8482`, `IMG_8490`; tester clicked Place Step and got step placed without a real step. | Mutation source trace + UI copy audit + no-fake-step proof. |
 | `AMB-ISSUE-1001` | Today | **New — runtime verified** | `Start Here` / `Meridian` segmented toggles appear at top of Today and make no visible difference. They do not belong on Today. | `IMG_8475`, `IMG_8476`, `IMG_8492`. | Remove or replace with meaningful shell/state control; before/after screenshots. |
 | `AMB-ISSUE-1002` | Today | **New — runtime verified** | Rail/status copy `No source change yet` and `All from work context` is confusing and should not appear in the Today primary object. | `IMG_8475`, `IMG_8476`, `IMG_8492`. | Root Today screenshot with no internal rail copy. |
@@ -116,7 +116,7 @@ The current build is materially improved in source architecture, Time foundation
 | `AMB-ISSUE-1008` | New | Active dot next to the step is slightly misaligned with the timeline rail. | `IMG_8475`, `IMG_8476` |
 | `AMB-ISSUE-1009` | New | `Live now` copy under the current time is redundant and should be removed. | `IMG_8475`, `IMG_8476`, `IMG_8492` |
 | `AMB-ISSUE-1010` | New | Timeline icons appear decorative/random rather than tied to visible steps, fixed points, or proof. | `IMG_8475`, `IMG_8476`, `IMG_8492` |
-| `AMB-ISSUE-1011` | New | Today still lacks a mature full-bleed shell/crown relationship. | `IMG_8475`, `IMG_8476` |
+| `AMB-ISSUE-1011` | Source-repaired candidate / runtime proof pending | AMB-1194 moves the dock out of a bottom shelf, keeps the Stage background full-bleed, and preserves content clearance through the shell policy; Today-specific object/crown maturity still needs screenshot review. | `IMG_8475`, `IMG_8476`; AMB-1194 source/test proof |
 
 ### Capture
 
@@ -196,15 +196,15 @@ The current build is materially improved in source architecture, Time foundation
 
 | ID | Status | Issue | Evidence |
 |---|---|---|---|
-| `AMB-ISSUE-1701` | New | Dock still has a border/container; target is four floating buttons, no bordered dock. | All root screenshots |
-| `AMB-ISSUE-1702` | New | Dock still shows words under icons. Target is icon-only. | All root screenshots |
-| `AMB-ISSUE-1703` | New | Active tab is over-indicated with bordered circle, color change, and underline. Target is accent-highlighted icon only. | All root screenshots |
-| `AMB-ISSUE-1704` | New | Large root headers remain on Goals, Time, and You. | `IMG_8479`, `IMG_8481`, `IMG_8483` |
-| `AMB-ISSUE-1705` | New | User should not see internal object names in headers (`Constellation Atlas`, `LifeShape Field`, `Profile and settings`). | Goals/Time/You screenshots |
-| `AMB-ISSUE-1706` | New | Dock and header do not obey full-screen bleed; safe areas feel massive. | All screenshots |
-| `AMB-ISSUE-1707` | New | Header buttons remain large ambiguous circular controls. | Goals/Time/You screenshots |
-| `AMB-ISSUE-1708` | New | Today has no mature shell/header/crown treatment while other roots have large headers; shell rhythm is inconsistent. | `IMG_8475`, `IMG_8476` |
-| `AMB-ISSUE-1709` | New | The app lacks mature full-screen drilldowns; most non-root flows are slide-up cards. | Tester notes; Closure/Capture/Search screenshots |
+| `AMB-ISSUE-1701` | Source-repaired candidate / runtime proof pending | AMB-1194 replaces the bordered dock/container with four separate floating icon buttons coordinated by `shell.stage-os.invisible-rail`. | Prior root screenshots; AMB-1194 source/test proof |
+| `AMB-ISSUE-1702` | Source-repaired candidate / runtime proof pending | AMB-1194 removes visible dock words from the normal root rail while preserving VoiceOver labels and selected state. | Prior root screenshots; AMB-1194 source/test proof |
+| `AMB-ISSUE-1703` | Source-repaired candidate / runtime proof pending | AMB-1194 removes underline, selected capsule fill, active border, and active weight change; selected state is the accent icon plus accessibility selected trait. | Prior root screenshots; AMB-1194 source/test proof |
+| `AMB-ISSUE-1704` | Source-repaired candidate / runtime proof pending | AMB-1194 removes root shell subtitles from Goals, Time, and You so the root crown no longer expands into the prior large internal-name header treatment. | `IMG_8479`, `IMG_8481`, `IMG_8483`; AMB-1194 source/test proof |
+| `AMB-ISSUE-1705` | Source-repaired candidate / runtime proof pending | AMB-1194 removes root shell subtitle strings `Constellation Atlas`, `LifeShape Field`, and `Profile and settings` from Goals, Time, and You root hosts. | Goals/Time/You screenshots; AMB-1194 source/test proof |
+| `AMB-ISSUE-1706` | Source-repaired candidate / runtime proof pending | AMB-1194 removes the allocated bottom shelf/backdrop and reduces root dock clearance while keeping policy-owned content clearance. | Prior root screenshots; AMB-1194 source/test proof |
+| `AMB-ISSUE-1707` | Still open / proof pending | AMB-1194 did not rebuild contextual header action button anatomy beyond removing root internal subtitles; current screenshots must verify whether the remaining controls are acceptable or need a later shell action pass. | Goals/Time/You screenshots |
+| `AMB-ISSUE-1708` | Source-repaired candidate / runtime proof pending | AMB-1194 aligns root shell rhythm by using the same compact root crown posture and overlaid icon-only dock across Today, Goals, Time, and You; Today object maturity remains outside this bundle. | `IMG_8475`, `IMG_8476`; AMB-1194 source/test proof |
+| `AMB-ISSUE-1709` | Still open / outside AMB-1194 source repair | AMB-1194 preserves root dock hiding in drilldowns and global overlays, but full-screen drilldown maturity for Capture, Search, Closure, Goals detail, Area detail, and Time Fit belongs to later dossiers. | Tester notes; Closure/Capture/Search screenshots |
 
 ### Light mode / appearance
 

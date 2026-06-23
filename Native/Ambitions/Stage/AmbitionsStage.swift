@@ -32,18 +32,16 @@ struct AmbitionsStage: View {
         )
         let chromePolicy = stageModel.chromePolicy
 
-        VStack(spacing: 0) {
-            ZStack(alignment: .bottom) {
-                stageSurfaceHost
-                shellActivatedCaptureComposerSeam(theme: resolvedTheme, policy: chromePolicy)
-                shellContinuityReceipt(theme: resolvedTheme, policy: chromePolicy)
-            }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-
+        ZStack(alignment: .bottom) {
+            stageSurfaceHost
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             if chromePolicy.showsRootDock {
                 shellRootDockLayer(theme: resolvedTheme, policy: chromePolicy)
             }
+            shellActivatedCaptureComposerSeam(theme: resolvedTheme, policy: chromePolicy)
+            shellContinuityReceipt(theme: resolvedTheme, policy: chromePolicy)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(resolvedTheme.shell.canvasGradient.ignoresSafeArea())
         .onAppear {
             validateExternalNavigationGraph()
@@ -168,29 +166,8 @@ struct AmbitionsStage: View {
     }
 
     private func shellRootDockLayer(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
-        ZStack(alignment: .bottom) {
-            shellDockBackdrop(theme: theme, policy: policy)
-            shellVisibleDock(theme: theme)
-        }
-        .frame(height: policy.stageContentBottomClearance)
-        .frame(maxWidth: .infinity)
-        .clipped()
-    }
-
-    private func shellDockBackdrop(theme: AmbitionTheme, policy: StageChromePolicy) -> some View {
-        LinearGradient(
-            colors: [
-                theme.colors.canvas.opacity(0.0),
-                theme.colors.canvas.opacity(theme.mode == .dark ? 0.24 : 0.18),
-                theme.colors.canvas.opacity(theme.mode == .dark ? 0.44 : 0.36)
-            ],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        .frame(height: policy.dockBackdropHeight)
-        .frame(maxWidth: .infinity)
-        .ignoresSafeArea(edges: .bottom)
-        .accessibilityHidden(true)
+        shellVisibleDock(theme: theme)
+            .frame(maxWidth: .infinity)
     }
 
     @ViewBuilder

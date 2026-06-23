@@ -42,7 +42,7 @@ struct AmbitionsRootStageSurfaceHost: View {
         NavigationStack(path: $navigation.goalsPath) {
             AppShellScaffold(
                 title: "Goals",
-                subtitle: "Constellation Atlas",
+                subtitle: nil,
                 posture: .direction,
                 trailingButtons: shellUtilityButtons(for: .goals)
             ) {
@@ -65,7 +65,7 @@ struct AmbitionsRootStageSurfaceHost: View {
         NavigationStack(path: $navigation.timePath) {
             AppShellScaffold(
                 title: "Time",
-                subtitle: "LifeShape Field",
+                subtitle: nil,
                 posture: .shaping,
                 trailingButtons: shellUtilityButtons(for: .time)
             ) {
@@ -107,7 +107,7 @@ struct AmbitionsRootStageSurfaceHost: View {
         NavigationStack(path: $navigation.youPath) {
             AppShellScaffold(
                 title: "You",
-                subtitle: "Profile and settings",
+                subtitle: nil,
                 posture: .utility,
                 trailingButtons: shellUtilityButtons(for: .you)
             ) {

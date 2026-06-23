@@ -77,7 +77,11 @@ struct AppShellScaffold<Content: View>: View {
                 dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
             )
         }
-        return 0
+        return StageSafeAreaPolicy.stageContentBottomClearance(
+            routeDepth: .root,
+            overlayPresentation: .none,
+            dynamicTypeIsAccessibilitySize: dynamicTypeSize.isAccessibilitySize
+        )
     }
 
     private var topInsetSpacing: CGFloat {

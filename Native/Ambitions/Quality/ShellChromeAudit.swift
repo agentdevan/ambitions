@@ -37,8 +37,8 @@ enum ShellChromeAudit {
             findings.append("Root shell must not expose duplicate bottom navigation chrome.")
         }
 
-        if policy.showsRootDock != policy.showsDockBackdrop {
-            findings.append("Dock backdrop visibility must match root dock visibility.")
+        if policy.showsDockBackdrop {
+            findings.append("Root shell Stage OS rail must stay invisible and avoid a dock backdrop.")
         }
 
         switch policy.routeDepth {
