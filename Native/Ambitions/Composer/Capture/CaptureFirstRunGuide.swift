@@ -13,7 +13,7 @@ private enum CaptureFirstRunGuideItem: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .captureAnything: "Open field"
+        case .captureAnything: "Field first"
         case .startHere: "Start here"
         case .createGoal: "Create goal"
         case .shapeTime: "Shape time"
@@ -25,7 +25,7 @@ private enum CaptureFirstRunGuideItem: String, CaseIterable, Identifiable {
     var detail: String {
         switch self {
         case .captureAnything:
-            "Type one real thing in the composer."
+            "Type one real thing, then review before committing it."
         case .startHere:
             "Open Today when the thing needs one doable step."
         case .createGoal:

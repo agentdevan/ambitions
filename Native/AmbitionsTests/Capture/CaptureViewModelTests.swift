@@ -94,9 +94,9 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Needs a Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.receiptTitle, "Saved to Needs a Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.clarificationQuestion, "What should this become?")
-        XCTAssertEqual(viewModel.draftRoutePreview?.choices.map(\.title), ["Task", "Goal", "Needs a Place"])
+        XCTAssertEqual(viewModel.draftRoutePreview?.choices.map(\.title), ["Step", "Goal", "Needs a Place"])
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.count, 3)
-        XCTAssertEqual(viewModel.draftRoutePreview?.routeProofTitle, "Route needs your choice")
+        XCTAssertEqual(viewModel.draftRoutePreview?.routeProofTitle, "Needs your choice")
         XCTAssertEqual(viewModel.draftRoutePreview?.routeProofDetail, "No safe destination yet; the capture stays private and editable.")
 
         viewModel.selectDraftRoute(.task)
@@ -173,7 +173,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains(["ch", "at"].joined()))
     }
 
-    func testFCP28RoutePreviewShelfTitleMapsAtmosphereComposerToOpenField() async {
+    func testFCP28RoutePreviewShelfTitleMapsAtmosphereComposerToUnplacedItem() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -183,7 +183,7 @@ final class CaptureViewModelTests: XCTestCase {
 
         XCTAssertEqual(
             CaptureRouteStagePrimitive.placementShelfDisplayTitle(for: viewModel.draftRoutePreview?.placementShelfTitle ?? ""),
-            "Open Field"
+            "Unplaced item"
         )
         XCTAssertEqual(
             CaptureRouteStagePrimitive.placementShelfDisplayTitle(for: "Needs a Place"),
@@ -209,18 +209,18 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.primaryActionTitle, "Place it")
         XCTAssertEqual(preview.changeActionTitle, "Change")
         XCTAssertEqual(preview.safeActionTitle, "Decide later")
-        XCTAssertEqual(preview.objectTypeLabel, "Task")
+        XCTAssertEqual(preview.objectTypeLabel, "Step")
         XCTAssertEqual(preview.appearanceLabel, "Today")
-        XCTAssertEqual(preview.consequenceLabel, "Adds a visible Task to Today after you confirm.")
+        XCTAssertEqual(preview.consequenceLabel, "Adds a visible Step to Today after you confirm.")
         XCTAssertEqual(preview.privacyLabel, "Private item")
         XCTAssertEqual(preview.localSourceLabel, "Local source: typed in Capture")
         XCTAssertEqual(preview.correctionLabel, "Correction: change the route before saving")
         XCTAssertEqual(preview.receiptSeamLabel, "Receipt seam: save creates a local capture receipt")
         XCTAssertEqual(preview.resolverFoldTitle, "Resolver Fold")
-        XCTAssertEqual(preview.resolverWhyLabel, "What Ambitions thinks: Task based on local text only.")
+        XCTAssertEqual(preview.resolverWhyLabel, "Local resolver: Step based on local text only.")
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Source: Local source: typed in Capture"))
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Receipt: Receipt seam: save creates a local capture receipt"))
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Reason: What Ambitions thinks: Task based on local text only."))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Reason: Local resolver: Step based on local text only."))
         XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("You / Search Ambitions: route stays inspectable and correctable before saving."))
         XCTAssertEqual(
             preview.atmosphereComposerCompactInspectionSummary,
@@ -263,7 +263,7 @@ final class CaptureViewModelTests: XCTestCase {
 
         let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
         XCTAssertEqual(preview.correctionLabel, "Correction: route chosen by you")
-        XCTAssertEqual(preview.resolverWhyLabel, "What Ambitions thinks: use the route you chose.")
+        XCTAssertEqual(preview.resolverWhyLabel, "Local resolver: use the destination you chose.")
         XCTAssertTrue(preview.correctionControlLabels.contains("Not a goal: no Goal is created unless you choose Goal."))
         XCTAssertTrue(preview.correctionControlLabels.contains("Decide later: save to Needs a Place."))
     }
@@ -283,11 +283,11 @@ final class CaptureViewModelTests: XCTestCase {
             isSubmitEnabled: true
         )
 
-        XCTAssertTrue(presentation.isRouteRevealVisible)
+        XCTAssertFalse(presentation.isRouteRevealVisible)
         XCTAssertEqual(presentation.placementTitle, "Ready to Place")
         XCTAssertEqual(presentation.destinationLabel, "Step · Today")
         XCTAssertEqual(presentation.privacyLabel, "Private item")
-        XCTAssertEqual(presentation.submitLabel, "Save capture")
+        XCTAssertEqual(presentation.submitLabel, "Review capture")
         XCTAssertTrue(presentation.evidenceDetail.localizedCaseInsensitiveContains("after you confirm"))
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains("Plan"))
         XCTAssertFalse(presentation.accessibilityValue.localizedCaseInsensitiveContains(["ch", "at"].joined()))
@@ -333,9 +333,9 @@ final class CaptureViewModelTests: XCTestCase {
             isSubmitEnabled: false
         )
 
-        XCTAssertEqual(presentation.inputAlternatives.reviewControlLabel, "Type first; placement waits for Save.")
+        XCTAssertEqual(presentation.inputAlternatives.reviewControlLabel, "Type first; review waits for text.")
         XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("Keyboard dictation only"))
-        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("placement waits for Save"))
+        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("review waits for text"))
         XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
         XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("hidden learning"))
         XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("confidence percentage"))
@@ -386,14 +386,7 @@ final class CaptureViewModelTests: XCTestCase {
         let contract = try! XCTUnwrap(ScreenContractRegistry.contract(for: .capture))
         let issues = ScreenContractValidator.validate(snapshot: snapshot, against: contract)
 
-        let toleratedLockedRegistryIssues = issues.filter {
-            $0.kind == .missingFirstScreenContent && $0.requirement == "Atmosphere Composer"
-        }
-        XCTAssertEqual(toleratedLockedRegistryIssues.count, 1)
-        XCTAssertTrue(
-            issues.allSatisfy { toleratedLockedRegistryIssues.contains($0) },
-            issues.map(\.message).joined(separator: "\n")
-        )
+        XCTAssertTrue(issues.isEmpty, issues.map(\.message).joined(separator: "\n"))
         XCTAssertTrue(snapshot.copySamples.contains("Start here"))
         XCTAssertTrue(snapshot.copySamples.contains("Create goal"))
         XCTAssertTrue(snapshot.copySamples.contains("Shape time"))

@@ -25,10 +25,10 @@ struct CaptureObjectStagePrimitiveContract: Equatable {
         stageName: "Capture Object Stage",
         screenshotIdentifier: "CaptureObjectStage",
         sourceRouteOrder: [
-            "open field",
+            "field-first input",
             "suggested path",
             "placement shelf",
-            "review history",
+            "placement review",
             "continuity lines"
         ],
         replacesStructures: [
@@ -120,7 +120,7 @@ extension CaptureComposerPresentationMode {
         case .timeSupport:
             "Absorb raw inputs into the current week without turning Capture into a holding bin, raw activity stream, or classification board."
         case .globalComposer:
-            "Open Field stays calm until a thought is ready to place, grow into a goal, or stay in Needs placement."
+            "The field stays calm until a thought is ready to place, grow into a goal, or stay in Needs placement."
         }
     }
 }

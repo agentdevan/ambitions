@@ -146,7 +146,7 @@ struct CaptureRouteStagePrimitive: View {
 
     static func placementShelfDisplayTitle(for rawTitle: String) -> String {
         if rawTitle == "Atmosphere Composer" {
-            return "Open Field"
+            return "Unplaced item"
         }
         return rawTitle
     }

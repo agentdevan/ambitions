@@ -43,8 +43,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
         error: String?,
         isSubmitEnabled: Bool
     ) {
-        let trimmedText = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        isRouteRevealVisible = routePreview != nil && trimmedText.isEmpty == false
+        isRouteRevealVisible = false
         placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to Place" : "Needs placement")
         destinationLabel = routePreview?.destinationLabel ?? "Private intake"
         privacyLabel = routePreview?.privacyLabel ?? "Stored locally when saved"
@@ -56,11 +55,11 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             evidenceTitle = routePreview.receiptTitle
             evidenceDetail = routePreview.consequenceLabel
         } else if isSubmitEnabled {
-            evidenceTitle = "Ready to Place"
-            evidenceDetail = "Ambitions will suggest a route after you save."
+            evidenceTitle = "Ready to review"
+            evidenceDetail = "Review opens first."
         } else {
-            evidenceTitle = "Needs placement"
-            evidenceDetail = "Type one real thing; no routing pressure is added."
+            evidenceTitle = "Ready when you type"
+            evidenceDetail = "The field waits without placeholder text or route pressure."
         }
 
         planInsertionTitle = routePreview?.planInsertionCandidate?.receiptProjection.title
@@ -88,7 +87,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
         ]
         .compactMap { $0 }
         .joined(separator: ". ")
-        submitLabel = isSubmitEnabled ? "Save capture" : "Save unavailable"
+        submitLabel = isSubmitEnabled ? "Review capture" : "Review unavailable"
     }
 }
 
@@ -109,9 +108,9 @@ struct CaptureInputAlternativesPresentation: Equatable {
         if isRouteRevealVisible {
             reviewControlLabel = "After typing: route choices are visible buttons and stay editable."
         } else if isSubmitEnabled {
-            reviewControlLabel = "After typing: save stays separate from route review."
+            reviewControlLabel = "After typing: review opens with visible buttons first."
         } else {
-            reviewControlLabel = "Type first; placement waits for Save."
+            reviewControlLabel = "Type first; review waits for text."
         }
     }
 
@@ -180,15 +179,6 @@ struct CaptureAtmosphereComposer: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            if presentation.isRouteRevealVisible, let routePreview {
-                CaptureRouteRevealStrip(
-                    preview: routePreview,
-                    onRouteChoice: onRouteChoice,
-                    accessibilityIDs: accessibilityIDs
-                )
-                .transition(routeRevealTransition)
-            }
-
             composerInput
 
             if let error {
@@ -198,37 +188,11 @@ struct CaptureAtmosphereComposer: View {
                     .accessibilityIdentifier(accessibilityIDs.error)
             }
 
-            if let planInsertionTitle = presentation.planInsertionTitle,
-               let planInsertionDetail = presentation.planInsertionDetail {
-                EvidenceLabel(
-                    planInsertionTitle,
-                    detail: planInsertionDetail,
-                    source: "Time candidate",
-                    state: composerState,
-                    context: .capture
-                )
-            }
-
-            EvidenceLabel(
-                presentation.evidenceTitle,
-                detail: presentation.evidenceDetail,
-                source: "Capture composer",
-                state: composerState,
-                context: .capture
-            )
-
-            inputAlternatives
+            SpatialCaptureTeachingLine(isVisible: text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
         }
         .padding(.horizontal, theme.spacing.lg)
-        .padding(.top, theme.spacing.sm)
-        .padding(.bottom, theme.spacing.sm)
-        .background(.ultraThinMaterial)
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(theme.colors.strokeSubtle)
-                .frame(height: 1)
-                .accessibilityHidden(true)
-        }
+        .padding(.top, theme.spacing.md)
+        .padding(.bottom, theme.spacing.md)
         .stageMotionAnimation(
             DAVMotionPreset.receiptConfirmation.animation(theme: theme, reduceMotion: reduceMotion),
             value: presentation.isRouteRevealVisible
@@ -288,34 +252,26 @@ struct CaptureAtmosphereComposer: View {
 
     private var fieldCapsule: some View {
         HStack(spacing: theme.spacing.sm) {
-            TextField("Where can this go?", text: $text, axis: .vertical)
-                .font(theme.typography.body)
+            Image(systemName: "text.cursor")
+                .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                .foregroundStyle(text.isEmpty ? theme.colors.textTertiary : theme.colors.accentWarm)
+                .accessibilityHidden(true)
+
+            TextField("", text: $text, axis: .vertical)
+                .font(theme.typography.title)
                 .foregroundStyle(theme.colors.textPrimary)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2...5 : 1...3)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4...8 : 2...6)
                 .onSubmit {
                     if isSubmitEnabled {
                         onSubmit()
                     }
                 }
                 .accessibilityIdentifier(accessibilityIDs.input)
-                .accessibilityLabel("Where can this go?")
-                .accessibilityHint("Type a thought. Route suggestions appear after input.")
-
-            Button {
-                onMicrophone()
-            } label: {
-                Image(systemName: "mic.fill")
-                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
-                    .frame(width: 30, height: 30)
-            }
-            .buttonStyle(.plain)
-            .foregroundStyle(theme.colors.textSecondary)
-            .accessibilityIdentifier(accessibilityIDs.dictationButton)
-            .accessibilityLabel("Keyboard dictation")
-            .accessibilityHint("Focuses the field so you can use the iOS keyboard microphone. Ambitions does not record audio here.")
+                .accessibilityLabel("Capture field")
+                .accessibilityHint("Type or use iOS keyboard dictation. Review opens first.")
         }
         .padding(.horizontal, theme.spacing.md)
-        .padding(.vertical, theme.spacing.sm)
+        .padding(.vertical, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.md)
         .background(fieldBackground)
         .overlay(
             RoundedRectangle(cornerRadius: theme.radius.lg, style: .continuous)
@@ -338,7 +294,7 @@ struct CaptureAtmosphereComposer: View {
 
     private var submitButton: some View {
         Button(action: onSubmit) {
-            Image(systemName: "plus")
+            Image(systemName: "arrow.right")
                 .font(.system(size: theme.icon.smallSize, weight: .bold))
                 .frame(width: 42, height: 42)
         }
@@ -360,5 +316,29 @@ struct CaptureAtmosphereComposer: View {
             insertion: .move(edge: .bottom).combined(with: .opacity),
             removal: .opacity
         )
+    }
+}
+
+private struct SpatialCaptureTeachingLine: View {
+    @Environment(\.ambitionTheme) private var theme
+    let isVisible: Bool
+
+    var body: some View {
+        if isVisible {
+            HStack(spacing: theme.spacing.sm) {
+                Image(systemName: "sparkle.magnifyingglass")
+                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .accessibilityHidden(true)
+                Text("Type or dictate from the iOS keyboard. Review opens first.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .accessibilityIdentifier("capture.first-run.spatial-teaching")
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Capture teaching")
+            .accessibilityValue("Type or dictate from the iOS keyboard. Review opens first.")
+        }
     }
 }

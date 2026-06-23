@@ -148,7 +148,7 @@ struct AmbitionsStage: View {
                 }
             )
             .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.lg)
-            .padding(.bottom, policy.captureComposerClearance)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .transition(.opacity)
             .zIndex(2)
         }

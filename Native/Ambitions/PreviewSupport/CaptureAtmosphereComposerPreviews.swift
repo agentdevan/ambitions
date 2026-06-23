@@ -3,11 +3,11 @@
 import SwiftUI
 import AmbitionsDesignSystem
 
-#Preview("SI09 Capture Open Field") {
+#Preview("SI09 Capture Field") {
     @Previewable @State var text = "Book dentist before Friday"
     let preview = CaptureDraftRoutePreview(
         originalText: "Book dentist before Friday",
-        placementShelfTitle: "Open Field",
+        placementShelfTitle: "Field-first Capture",
         postInputStateTitle: "Ready to Place",
         receiptTitle: "Saved as Step · Today",
         summary: "Looks like a standalone step.",
@@ -28,7 +28,7 @@ import AmbitionsDesignSystem
         correctionLabel: "Correction: change the route before saving",
         receiptSeamLabel: "Review history: save creates a local capture receipt",
         resolverFoldTitle: "Resolver Fold",
-        resolverWhyLabel: "What Ambitions thinks: Step based on local text only.",
+        resolverWhyLabel: "Local resolver: Step based on local text only.",
         correctionReceiptLabel: "Correction receipt: saved route changes are recorded locally and stay reviewable.",
         correctionControlLabels: [
             "Place somewhere else: choose a route below.",

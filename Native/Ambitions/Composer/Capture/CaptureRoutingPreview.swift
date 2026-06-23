@@ -38,7 +38,7 @@ struct CaptureRouteRevealStrip: View {
                 )
 
                 EvidenceLabel(
-                    "Inspectable route",
+                    "Review path",
                     detail: preview.atmosphereComposerCompactInspectionSummary,
                     source: "You / Search Ambitions",
                     state: livingState,

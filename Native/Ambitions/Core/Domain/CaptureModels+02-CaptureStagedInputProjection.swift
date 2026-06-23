@@ -71,7 +71,7 @@ struct CaptureStagedInputProjection: Codable, Sendable, Equatable, Hashable, Ide
                     .init(
                         id: "capture-staged-input.text.task",
                         route: .timeSeed,
-                        title: "Task",
+                        title: "Step",
                         privacyLabel: "Stored on this device",
                         exportLabel: "Export can summarize the text",
                         redactionLabel: "Redact raw text when needed",
@@ -111,7 +111,7 @@ struct CaptureStagedInputProjection: Codable, Sendable, Equatable, Hashable, Ide
                     .init(
                         id: "capture-staged-input.voice.task",
                         route: .timeSeed,
-                        title: "Task",
+                        title: "Step",
                         privacyLabel: "Stored on this device",
                         exportLabel: "Export keeps transcript summary only",
                         redactionLabel: "Redact transcript detail",
@@ -191,7 +191,7 @@ struct CaptureStagedInputProjection: Codable, Sendable, Equatable, Hashable, Ide
                     .init(
                         id: "capture-staged-input.share.task",
                         route: .timeSeed,
-                        title: "Task",
+                        title: "Step",
                         privacyLabel: "Stored on this device",
                         exportLabel: "Export keeps shared references redacted",
                         redactionLabel: "Redact shared text and URLs",
@@ -325,9 +325,9 @@ enum CaptureKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
         switch self {
         case .raw: "Raw capture"
         case .oneTimeCommitment: "One-time commitment"
-        case .deadlineTask: "Deadline task"
+        case .deadlineTask: "Deadline step"
         case .goalSeed: "Goal seed"
-        case .goalSupportingTask: "Goal-supporting task"
+        case .goalSupportingTask: "Goal-supporting step"
         case .deliverableSeed: "Deliverable seed"
         case .waitingItem: "Waiting item"
         case .optionalSomeday: "Optional / Someday"

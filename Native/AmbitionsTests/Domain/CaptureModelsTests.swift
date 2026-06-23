@@ -38,7 +38,7 @@ final class CaptureModelsTests: XCTestCase {
         XCTAssertEqual(projections.count, 6)
         XCTAssertEqual(projections.first?.provenanceLabel, "Typed in Capture")
         XCTAssertEqual(projections.first?.privacyLabel, "Stored on this device")
-        XCTAssertEqual(projections.first?.routeCandidates.map(\.title), ["Task", "Goal", "Needs a Place"])
+        XCTAssertEqual(projections.first?.routeCandidates.map(\.title), ["Step", "Goal", "Needs a Place"])
         XCTAssertTrue(projections.first?.accessibilityReviewSummary.localizedCaseInsensitiveContains("local-first") == true)
         XCTAssertTrue(projections.last?.routeCandidateSummary.contains("Review later") == true)
         XCTAssertTrue(projections.allSatisfy { $0.visibleCopy.localizedCaseInsensitiveContains("AI confidence") == false })

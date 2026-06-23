@@ -126,7 +126,7 @@ extension Capture {
         case .captureInbox:
             "Needs a Place"
         case .timeSeed:
-            "Task / Time"
+            "Step / Time"
         case .goalSeed:
             "Goal seed"
         case .goalAttachment:
@@ -151,7 +151,7 @@ extension Capture {
         case .captureInbox:
             "Keeps this capture correctable until you choose a route."
         case .timeSeed:
-            "Creates Time work only after you choose Task."
+            "Creates Time work only after you choose Step."
         case .goalSeed:
             "Starts a goal seed only after you choose Grow into Goal."
         case .goalAttachment:
@@ -211,14 +211,14 @@ extension Capture {
         case .archived:
             "Archived captures stay out of active correction."
         default:
-            "Place somewhere else: choose Task, Goal, Waiting, Review later, or Archive."
+            "Place somewhere else: choose Step, Goal, Waiting, Review later, or Archive."
         }
     }
 
     private var notGoalLabel: String {
         switch route {
         case .goalSeed, .goalAttachment:
-            "Not a goal: keep it as Task, Idea, Waiting, or Review later."
+            "Not a goal: keep it as Step, Idea, Waiting, or Review later."
         default:
             "Not a goal: no Goal is created unless you choose Grow into Goal."
         }

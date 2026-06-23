@@ -274,7 +274,7 @@ final class SmartAttachmentServiceTests: XCTestCase {
         let bundle = result.reviewBundle
 
         XCTAssertEqual(bundle.title, "Route review")
-        XCTAssertEqual(bundle.clusters.map(\.title), ["Task"])
+        XCTAssertEqual(bundle.clusters.map(\.title), ["Step"])
         XCTAssertEqual(bundle.clusters.first?.evidenceLabels, ["contacts", "nasa"])
         XCTAssertEqual(bundle.openLoopSignals.map(\.title), ["Suggested attachment available"])
         XCTAssertEqual(bundle.actionTitles, ["Attach", "Change", "Keep Standalone"])
@@ -395,10 +395,10 @@ final class SmartAttachmentServiceTests: XCTestCase {
         XCTAssertEqual(preview.originalText, "Book dentist")
         XCTAssertEqual(preview.postInputStateTitle, "Ready to Place")
         XCTAssertEqual(preview.suggestedDestination, "Step · Today")
-        XCTAssertEqual(preview.objectTypeLabel, "Task")
+        XCTAssertEqual(preview.objectTypeLabel, "Step")
         XCTAssertEqual(preview.appearanceLabel, "Today")
         XCTAssertTrue(preview.affectsToday)
-        XCTAssertEqual(preview.consequenceLabel, "Adds a visible Task to Today after you confirm.")
+        XCTAssertEqual(preview.consequenceLabel, "Adds a visible Step to Today after you confirm.")
         XCTAssertEqual(preview.privacyLabel, "Private item")
         XCTAssertEqual(preview.primaryActionTitle, "Place it")
         XCTAssertEqual(preview.changeActionTitle, "Change")

@@ -140,7 +140,7 @@ extension ScreenContractRegistry {
     static let capture = ScreenContract(
         id: .capture,
         dominantQuestion: "What needs a place?",
-        requiredFirstScreenContent: ["Atmosphere Composer", "Needs a place", "Ready to place", "Grow into goal", "Changeable route receipt"],
+        requiredFirstScreenContent: ["Field-first Capture", "Needs a place", "Ready to place", "Grow into goal", "Changeable route receipt"],
         requiredPanels: [.capture, .smartAttachmentReceipt, .receipt, .trust],
         optionalPanels: [.groupedNavigationList],
         forbiddenFirstScreenContent: ["Chat-first AI surface", "Long inbox as primary"],

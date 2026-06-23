@@ -237,13 +237,13 @@ enum SmartAttachmentRouteType: String, Codable, Sendable, Equatable, Hashable, C
 
     var userFacingLabel: String {
         switch self {
-        case .task: "Task"
+        case .task: "Step"
         case .goal: "Goal"
         case .idea: "Idea"
         case .proofItem: "Proof"
         case .waitingItem: "Waiting"
-        case .plan: "Plan"
-        case .contextualNote: "Contextual Note"
+        case .plan: "Time proposal"
+        case .contextualNote: "Thought"
         case .reminder: "Reminder"
         case .ritual: "Ritual"
         case .archive: "Archive"

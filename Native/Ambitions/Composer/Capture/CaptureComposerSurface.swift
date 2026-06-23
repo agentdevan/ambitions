@@ -36,8 +36,6 @@ struct CaptureComposerSurface: View {
                     Spacer()
                         .frame(height: 60)
 
-                    capturePrompt
-
                     CaptureObjectView(
                         text: Binding(
                             get: { viewModel.draftText },
@@ -45,12 +43,7 @@ struct CaptureComposerSurface: View {
                         ),
                         input: captureInputModel,
                         onSubmit: {
-                            Task {
-                                await viewModel.createQuickCapture(
-                                    captureService: featureFactory.captureService,
-                                    goalsService: featureFactory.goalsService
-                                )
-                            }
+                            viewModel.presentProposal()
                         },
                         onMicrophone: {},
                         onRouteChoice: { routeType in
@@ -74,12 +67,10 @@ struct CaptureComposerSurface: View {
                         )
                         .transition(.ambitionPanel)
                     case let .loaded(viewState):
-                        if viewState.captures.isEmpty,
-                           viewModel.draftRoutePreview == nil,
-                           viewModel.actionMessage == nil {
+                        if shouldShowEmptyState(viewState) {
                             loadedContent(viewState)
                                 .transition(.ambitionPanel)
-                        } else {
+                        } else if shouldShowSecondaryCaptureContent(viewState) {
                             CaptureDepthDisclosureStage(
                                 isExpanded: $isCaptureDepthExpanded
                             ) {
@@ -126,7 +117,7 @@ struct CaptureComposerSurface: View {
     private var captureInputModel: CaptureInputModel {
         CaptureInputModel(
             text: viewModel.draftText,
-            routePreview: viewModel.draftRoutePreview,
+            routePreview: viewModel.isProposalPresented ? viewModel.draftRoutePreview : nil,
             error: viewModel.draftError,
             presentationMode: shellMode,
             saveStateLabel: viewModel.actionMessage?.title,
@@ -146,57 +137,36 @@ struct CaptureComposerSurface: View {
         await viewModel.load(captureService: featureFactory.captureService, goalsService: featureFactory.goalsService)
     }
 
-    private var capturePrompt: some View {
-        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            Text("Open Field")
-                .font(theme.typography.title)
-                .foregroundStyle(theme.colors.textPrimary)
-                .accessibilityAddTraits(.isHeader)
-
-            Text(promptSubtitle)
-                .font(theme.typography.body)
-                .foregroundStyle(theme.colors.textSecondary)
-                .fixedSize(horizontal: false, vertical: true)
-
-            EvidenceLabel(
-                "Open Field",
-                detail: "Capture stays text-first and route choices stay editable after input.",
-                source: "Capture",
-                state: captureLivingState,
-                context: .capture
-            )
-
-            if shellMode == .timeSupport {
-                Button {
-                    shell.navigation.resetTimePath()
-                } label: {
-                    Label("Time", systemImage: "calendar")
-                }
-                .buttonStyle(.bordered)
-                .accessibilityIdentifier("capture.return-to-time")
-            }
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityIdentifier("capture.prompt")
-    }
-
     private var promptSubtitle: String {
         let draftIsEmpty = viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         if draftIsEmpty {
-            switch shellMode {
-            case .timeSupport:
-                return "What needs placement? Type one real thing; placement appears only after input."
-            case .globalComposer:
-                return "Where does this belong? Open Field is the first stop. Move onward to Today, Goals, Time, or You when it is ready."
-            }
+            return "Private local field"
         }
-        return "Needs placement, Ready to Place, and Open as Goal stay editable. Nothing becomes planned work until you save it."
+        return "Review first, save when accepted"
     }
 
     @ViewBuilder
     private func loadedContent(_ viewState: CaptureViewState) -> some View {
-        if let routePreview = viewModel.draftRoutePreview {
-            draftRoutePreviewStage(routePreview)
+        if viewModel.isProposalPresented, let routePreview = viewModel.draftRoutePreview {
+            CaptureProposalStage(
+                preview: routePreview,
+                isSaving: false,
+                onAccept: {
+                    Task {
+                        await viewModel.createQuickCapture(
+                            captureService: featureFactory.captureService,
+                            goalsService: featureFactory.goalsService
+                        )
+                    }
+                },
+                onChangeDestination: { routeType in
+                    viewModel.selectDraftRoute(routeType)
+                },
+                onCancel: {
+                    viewModel.cancelProposal()
+                }
+            )
+            .transition(.ambitionPanel)
         }
 
         if let message = viewModel.actionMessage {
@@ -210,7 +180,7 @@ struct CaptureComposerSurface: View {
                 SectionHeader(
                     eyebrow: "Capture",
                     title: "Continuity lines",
-                    subtitle: "Placed, parked, and still-open captures stay in one Atmosphere Composer stage instead of separate buckets."
+                    subtitle: "Placed, parked, and still-open captures stay in one field-first stage instead of separate buckets."
                 )
 
                 ForEach(orderedCaptures(viewState.captures)) { capture in
@@ -271,6 +241,18 @@ struct CaptureComposerSurface: View {
         CaptureRouteStagePrimitive(preview: preview) { routeType in
             viewModel.selectDraftRoute(routeType)
         }
+    }
+
+    private func shouldShowEmptyState(_ viewState: CaptureViewState) -> Bool {
+        viewState.captures.isEmpty &&
+            viewModel.draftText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty &&
+            viewModel.actionMessage == nil
+    }
+
+    private func shouldShowSecondaryCaptureContent(_ viewState: CaptureViewState) -> Bool {
+        viewModel.isProposalPresented ||
+            viewModel.actionMessage != nil ||
+            viewState.captures.isEmpty == false
     }
 
     private func orderedCaptures(_ captures: [Capture]) -> [Capture] {

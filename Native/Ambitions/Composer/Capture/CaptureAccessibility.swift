@@ -28,7 +28,7 @@ struct CaptureAccessibility: Equatable, Sendable {
 
     static func objectView(input: CaptureInputModel) -> CaptureAccessibility {
         let policy = AccessibilityLabelPolicy.primaryObject(
-            label: "Open Field",
+            label: "Capture field",
             value: input.accessibilityValue,
             hint: input.hasInput ? "Save or review the suggested route." : "Type one real thing before saving."
         )

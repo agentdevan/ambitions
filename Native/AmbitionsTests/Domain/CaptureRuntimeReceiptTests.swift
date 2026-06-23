@@ -65,7 +65,7 @@ final class CaptureRuntimeReceiptTests: XCTestCase {
         XCTAssertTrue(trace.receipt.whatWasDetected.contains("receipt-kind=capture_replay_generated"))
         XCTAssertEqual(trace.receipt.stagedInputs.map(\.kind.title), ["Text", "Voice", "Image", "Share", "Proof", "Context"])
         XCTAssertEqual(trace.stagedInputs.map(\.kind.title), trace.receipt.stagedInputs.map(\.kind.title))
-        XCTAssertTrue(trace.receipt.stagedInputs.first?.routeCandidateSummary.contains("Task") == true)
+        XCTAssertTrue(trace.receipt.stagedInputs.first?.routeCandidateSummary.contains("Step") == true)
         XCTAssertTrue(trace.receipt.stagedInputs.last?.accessibilityReviewSummary.localizedCaseInsensitiveContains("future-use aware") == true)
         XCTAssertTrue(trace.receipt.whatItMayAffect.contains("future routing"))
         XCTAssertTrue(trace.receipt.whatItMayAffect.contains("goal routing"))

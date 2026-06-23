@@ -34,10 +34,10 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         let review = capture.placementReviewState
 
         XCTAssertEqual(review.placementStateTitle, "Ready to Place")
-        XCTAssertEqual(review.destinationLabel, "Task / Time")
+        XCTAssertEqual(review.destinationLabel, "Step / Time")
         XCTAssertEqual(review.objectTypeLabel, "One-time commitment")
         XCTAssertEqual(review.privacyLabel, "Stored on this device")
-        XCTAssertTrue(review.consequenceLabel.localizedCaseInsensitiveContains("after you choose Task"))
+        XCTAssertTrue(review.consequenceLabel.localizedCaseInsensitiveContains("after you choose Step"))
         XCTAssertTrue(review.consequenceLabel.localizedCaseInsensitiveContains("Time work"))
         XCTAssertTrue(review.confirmationLabel.localizedCaseInsensitiveContains("Today, Goals, or Time"))
         XCTAssertTrue(review.accessibilityValue.localizedCaseInsensitiveContains("Time"))
@@ -138,7 +138,9 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertFalse(routeSource.contains("CaptureDraftRoutePreviewCard"))
         XCTAssertFalse(routeSource.contains("StateDrivenMaterialPanel("))
         XCTAssertFalse(routeSource.contains("RoundedRectangle("))
-        XCTAssertTrue(composerSource.contains("CaptureStageGroup(state: livingState"))
+        XCTAssertTrue(composerSource.contains("SpatialCaptureTeachingLine"))
+        XCTAssertFalse(composerSource.contains("CaptureRouteRevealStrip("))
+        XCTAssertFalse(composerSource.contains("onMicrophone()"))
         XCTAssertFalse(composerSource.contains("StateDrivenMaterialPanel(context: .capture"))
     }
 
@@ -161,13 +163,15 @@ final class CapturePlacementReviewStateTests: XCTestCase {
             encoding: .utf8
         )
 
-        XCTAssertTrue(seamSource.contains("CaptureAtmosphereComposer("))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-reveal"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.route-choice."))
-        XCTAssertTrue(seamSource.contains("Saved on this device. Source, receipt, and route stay inspectable."))
-        XCTAssertTrue(seamSource.contains("Keyboard dictation ready"))
-        XCTAssertTrue(createGoalSource.contains("Let Ambitions shape it"))
-        XCTAssertTrue(createGoalSource.contains("local save, and the receipt path"))
+        XCTAssertTrue(seamSource.contains("CaptureObjectView("))
+        XCTAssertTrue(seamSource.contains("CaptureProposalStage("))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.receipt"))
+        XCTAssertTrue(seamSource.contains("shell.activated-capture.first-run-teaching"))
+        XCTAssertFalse(seamSource.contains("shell.activated-capture.state.activated"))
+        XCTAssertFalse(seamSource.contains("shell.activated-capture.state.keyboard"))
+        XCTAssertFalse(seamSource.contains("shell.activated-capture.state.local-classification"))
+        XCTAssertTrue(createGoalSource.contains("stores the local goal creation proof receipt"))
+        XCTAssertTrue(createGoalSource.contains("Goal preview paused"))
         XCTAssertFalse(createGoalSource.contains(["Auto", "detect"].joined(separator: "-")))
         XCTAssertFalse(seamSource.contains(["Classifying", "locally"].joined(separator: " ")))
         XCTAssertFalse(seamSource.contains(["Detected", "locally"].joined(separator: " ")))

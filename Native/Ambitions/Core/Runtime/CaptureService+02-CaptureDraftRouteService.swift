@@ -114,9 +114,9 @@ struct CaptureDraftRouteService: Sendable {
 
     func resolverWhyLabel(from decision: SmartAttachmentCaptureDecision) -> String {
         if decision.selectedRouteType != nil {
-            return "What Ambitions thinks: use the route you chose."
+            return "Local resolver: use the destination you chose."
         }
-        return "What Ambitions thinks: \(decision.routeType.userFacingLabel) based on local text only."
+        return "Local resolver: \(decision.routeType.userFacingLabel) based on local text only."
     }
 
     func routeProofTitle(from decision: SmartAttachmentCaptureDecision) -> String {
@@ -124,7 +124,7 @@ struct CaptureDraftRouteService: Sendable {
             return "Goal attachment needs approval"
         }
         if decision.result.selectedCandidate?.target.isNeedsPlace == true {
-            return "Route needs your choice"
+            return "Needs your choice"
         }
         if decision.result.selectedCandidate?.isSuggestedAttachment == true {
             return "Suggested attachment available"
@@ -172,7 +172,7 @@ struct CaptureDraftRouteService: Sendable {
 
     func correctionControlLabels(from decision: SmartAttachmentCaptureDecision) -> [String] {
         let notGoalLabel = decision.routeType == .goal
-            ? "Not a goal: choose Task or Needs a Place."
+            ? "Not a goal: choose Step or Needs a Place."
             : "Not a goal: no Goal is created unless you choose Goal."
         return [
             "Place somewhere else: choose a route below.",
@@ -187,7 +187,7 @@ struct CaptureDraftRouteService: Sendable {
     func routeChoiceTitle(for routeType: SmartAttachmentRouteType) -> String {
         switch routeType {
         case .task:
-            return "Task"
+            return "Step"
         case .goal:
             return "Goal"
         case .idea:

@@ -14,8 +14,8 @@ enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable 
 
     var title: String {
         switch self {
-        case .captureInbox: "Capture"
-        case .timeSeed: "Time idea"
+        case .captureInbox: "Open Field item"
+        case .timeSeed: "Step"
         case .goalSeed: "Goal seed"
         case .goalAttachment: "Attach to goal"
         case .deliverableSeed: "Deliverable seed"
@@ -41,6 +41,7 @@ enum CaptureRoute: String, Codable, Sendable, Equatable, Hashable, CaseIterable 
         }
     }
 }
+
 
 enum CaptureDeadlineKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case none

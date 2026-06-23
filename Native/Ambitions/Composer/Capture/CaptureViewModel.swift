@@ -9,8 +9,7 @@ struct CaptureViewState: Sendable {
         ScreenContractImplementationSnapshot(
             screenID: .capture,
             firstScreenContent: [
-                "Atmosphere Composer",
-                "Open Field",
+                "Field-first Capture",
                 "Needs a place",
                 "Ready to place",
                 "Grow into goal",
@@ -30,7 +29,6 @@ struct CaptureViewState: Sendable {
             ],
             drillDowns: ["Needs a Place", "Object details", "Route settings"],
             copySamples: [
-                "Atmosphere Composer",
                 "What needs a place?",
                 "Start here",
                 "Create goal",
@@ -80,6 +78,7 @@ final class CaptureViewModel {
     var draftText = ""
     var draftError: String?
     var draftRoutePreview: CaptureDraftRoutePreview?
+    var isProposalPresented = false
     private var selectedDraftRouteType: SmartAttachmentRouteType?
     private let draftRouteService: CaptureDraftRouteService
 
@@ -123,8 +122,10 @@ final class CaptureViewModel {
         if text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             selectedDraftRouteType = nil
             draftRoutePreview = nil
+            isProposalPresented = false
             return
         }
+        isProposalPresented = false
         refreshDraftRoutingPreview()
     }
 
@@ -133,10 +134,24 @@ final class CaptureViewModel {
         refreshDraftRoutingPreview()
     }
 
+    func presentProposal() {
+        let text = draftText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard text.isEmpty == false else {
+            draftError = "Write one real thing first."
+            return
+        }
+        refreshDraftRoutingPreview()
+        isProposalPresented = draftRoutePreview != nil
+    }
+
+    func cancelProposal() {
+        isProposalPresented = false
+    }
+
     func createQuickCapture(captureService: any CaptureServicing, goalsService: any GoalsServicing, now: Date = .now) async {
         let text = draftText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard text.isEmpty == false else {
-            draftError = "Write the thing first. It can be messy."
+            draftError = "Write one real thing first."
             return
         }
 
@@ -156,6 +171,7 @@ final class CaptureViewModel {
             draftError = nil
             selectedDraftRouteType = nil
             draftRoutePreview = nil
+            isProposalPresented = false
             actionMessage = CaptureActionMessage(title: receiptTitle(for: capture, fallback: decision.receiptLine), body: capture.assumptionSummary ?? decision.summary)
             await load(captureService: captureService, goalsService: goalsService)
         } catch {

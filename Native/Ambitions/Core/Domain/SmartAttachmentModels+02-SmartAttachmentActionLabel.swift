@@ -18,7 +18,7 @@ enum SmartAttachmentActionLabel: String, Codable, Sendable, Equatable, Hashable,
         case .change: "Change"
         case .keepStandalone: "Keep Standalone"
         case .attach: "Attach"
-        case .task: "Task"
+        case .task: "Step"
         case .goal: "Goal"
         case .idea: "Idea"
         case .proof: "Proof"

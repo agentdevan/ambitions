@@ -14,8 +14,9 @@ struct AppShellActivatedCaptureSeam: View {
     @State private var captureText: String = ""
     @State private var saveState: SaveState = .idle
     @State private var selectedDraftRouteType: SmartAttachmentRouteType?
-    @State private var routeReceiptMessage: String?
+    @State private var isProposalPresented = false
     @State private var dictationStatusMessage: String?
+    @State private var savedCapture: Capture?
 
     private let draftRouteService = CaptureDraftRouteService()
 
@@ -39,17 +40,31 @@ struct AppShellActivatedCaptureSeam: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
-            header
-
+            closeRow
             ScrollView {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    stateProofStrip
+                VStack(alignment: .leading, spacing: theme.spacing.lg) {
                     composer
-                    makeGoalButton
-                    sourceTrust
+                    if isProposalPresented, let routePreview {
+                        CaptureProposalStage(
+                            preview: routePreview,
+                            isSaving: saveState == .saving,
+                            onAccept: {
+                                Task { await saveCapture() }
+                            },
+                            onChangeDestination: { routeType in
+                                selectedDraftRouteType = routeType
+                            },
+                            onCancel: {
+                                isProposalPresented = false
+                            }
+                        )
+                    }
+                    firstRunTeaching
                     statusMessage
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, dynamicTypeSize.isAccessibilitySize ? theme.spacing.sm : theme.spacing.xl)
+                .padding(.bottom, theme.spacing.xxl)
             }
             .scrollDismissesKeyboard(.interactively)
         }
@@ -57,20 +72,8 @@ struct AppShellActivatedCaptureSeam: View {
         .padding(.top, theme.spacing.md)
         .padding(.bottom, theme.spacing.md)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .frame(maxHeight: seamMaxHeight)
+        .frame(maxHeight: .infinity, alignment: .top)
         .background(theme.colors.canvas)
-        .overlay(alignment: .top) {
-            Rectangle()
-                .fill(theme.shell.divider)
-                .frame(height: 1)
-                .accessibilityHidden(true)
-        }
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(theme.shell.divider.opacity(0.82))
-                .frame(height: 1)
-                .accessibilityHidden(true)
-        }
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: saveState)
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: routePreview)
         .onAppear {
@@ -79,29 +82,24 @@ struct AppShellActivatedCaptureSeam: View {
         .onChange(of: captureText) { _, newValue in
             if newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 selectedDraftRouteType = nil
-                routeReceiptMessage = nil
+                isProposalPresented = false
             }
             dictationStatusMessage = nil
+            saveState = .idle
+            savedCapture = nil
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel(AppShellCaptureAccessModel.activatedSeamAccessibilityLabel)
         .accessibilityHint(AppShellCaptureAccessModel.activatedSeamAccessibilityHint)
+        .accessibilityAction(named: "Dismiss Capture") {
+            onDismiss()
+        }
         .accessibilityIdentifier("shell.activated-capture-seam")
     }
 
-    private var header: some View {
-        HStack(alignment: .firstTextBaseline, spacing: theme.spacing.sm) {
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("Open Field")
-                    .font(theme.typography.section)
-                    .foregroundStyle(theme.colors.textPrimary)
-                Text("\(overlay.entrySource.displayTitle) - review before save")
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-            }
-
-            Spacer(minLength: theme.spacing.sm)
-
+    private var closeRow: some View {
+        HStack {
+            Spacer()
             Button(action: onDismiss) {
                 Image(systemName: "xmark")
                     .font(.system(size: theme.icon.smallSize, weight: .semibold))
@@ -119,14 +117,14 @@ struct AppShellActivatedCaptureSeam: View {
             text: $captureText,
             input: captureInputModel,
             onSubmit: {
-                Task { await saveCapture() }
+                presentProposal()
             },
             onMicrophone: {
                 dictationStatusMessage = "Keyboard dictation ready. Use the iOS keyboard microphone; Ambitions does not record audio here."
             },
             onRouteChoice: { routeType in
                 selectedDraftRouteType = routeType
-                routeReceiptMessage = "Route set to \(routeType.userFacingLabel). Save writes that route locally."
+                isProposalPresented = true
             },
             accessibilityIDs: CaptureAtmosphereComposerAccessibilityIDs(
                 root: "shell.activated-capture.composer",
@@ -146,7 +144,7 @@ struct AppShellActivatedCaptureSeam: View {
     private var captureInputModel: CaptureInputModel {
         CaptureInputModel(
             text: captureText,
-            routePreview: routePreview,
+            routePreview: isProposalPresented ? routePreview : nil,
             error: errorText,
             presentationMode: .globalComposer,
             saveStateLabel: saveState.accessibilityLabel,
@@ -154,84 +152,28 @@ struct AppShellActivatedCaptureSeam: View {
         )
     }
 
-    private var stateProofStrip: some View {
-        HStack(spacing: theme.spacing.xs) {
-            proofChip(
-                title: "Activated",
-                systemImage: "sparkles",
-                accessibilityIdentifier: "shell.activated-capture.state.activated"
-            )
-            proofChip(
-                title: "Keyboard",
-                systemImage: "keyboard",
-                accessibilityIdentifier: "shell.activated-capture.state.keyboard"
-            )
-            proofChip(
-                title: "Local read",
-                systemImage: "lock",
-                accessibilityIdentifier: "shell.activated-capture.state.local-classification"
-            )
-            if reduceMotion {
-                proofChip(
-                    title: "Static",
-                    systemImage: "figure.walk.motion.trianglebadge.exclamationmark",
-                    accessibilityIdentifier: "shell.activated-capture.state.reduce-motion"
-                )
-            }
-        }
-        .font(theme.typography.micro.weight(.semibold))
-        .foregroundStyle(theme.colors.textSecondary)
-        .accessibilityElement(children: .contain)
-    }
-
-    private func proofChip(title: String, systemImage: String, accessibilityIdentifier: String) -> some View {
-        Label(title, systemImage: systemImage)
-            .lineLimit(1)
-            .minimumScaleFactor(0.82)
-            .padding(.horizontal, theme.spacing.xs)
-            .padding(.vertical, theme.spacing.xxxs)
-            .background(
-                RoundedRectangle(cornerRadius: theme.radius.sm, style: .continuous)
-                    .fill(theme.colors.surfaceOverlay.opacity(0.72))
-            )
-            .accessibilityElement(children: .combine)
-            .accessibilityIdentifier(accessibilityIdentifier)
-    }
-
     @ViewBuilder
-    private var makeGoalButton: some View {
-        if captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false {
-            Button {
-                onCreateGoal(captureText, overlay.captureID)
-            } label: {
-                Label("Open as Goal", systemImage: "target")
-                    .frame(minHeight: 42)
+    private var firstRunTeaching: some View {
+        if captureText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            HStack(spacing: theme.spacing.sm) {
+                Image(systemName: "text.cursor")
+                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .accessibilityHidden(true)
+                Text("Start with the field. Review opens first.")
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-            .accessibilityLabel("Open as Goal")
-            .accessibilityHint("Opens a goal draft using this Capture text. No goal is created until you confirm.")
-            .accessibilityIdentifier("shell.activated-capture.make-goal-button")
+            .accessibilityIdentifier("shell.activated-capture.first-run-teaching")
+            .accessibilityElement(children: .combine)
+            .accessibilityLabel("Capture teaching")
+            .accessibilityValue("Start with the field. Review opens first.")
         }
-    }
-
-    private var sourceTrust: some View {
-        Text("Saved on this device. Source, receipt, and route stay inspectable.")
-            .font(theme.typography.micro)
-            .foregroundStyle(theme.colors.textTertiary)
-            .fixedSize(horizontal: false, vertical: true)
-            .accessibilityIdentifier("shell.activated-capture.source-trust")
     }
 
     @ViewBuilder
     private var statusMessage: some View {
-        if let routeReceiptMessage {
-            Text(routeReceiptMessage)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.semanticAccent(for: .success))
-                .fixedSize(horizontal: false, vertical: true)
-                .accessibilityIdentifier("shell.activated-capture.correction-receipt")
-        }
-
         switch saveState {
         case let .error(message):
             Text(message)
@@ -240,17 +182,7 @@ struct AppShellActivatedCaptureSeam: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityIdentifier("shell.activated-capture.status")
         case let .saved(message):
-            VStack(alignment: .leading, spacing: theme.spacing.xxs) {
-                Text(message)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.semanticAccent(for: .success))
-                    .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityIdentifier("shell.activated-capture.status")
-                Text("Captured locally")
-                    .font(theme.typography.micro.weight(.semibold))
-                    .foregroundStyle(theme.semanticAccent(for: .success))
-                    .accessibilityIdentifier("shell.activated-capture.state.captured-locally")
-            }
+            receiptView(message: message)
         case .saving:
             Text("Saving locally before the receipt is written.")
                 .font(theme.typography.caption)
@@ -289,8 +221,48 @@ struct AppShellActivatedCaptureSeam: View {
         appShellCaptureSourceType(for: overlay.entrySource)
     }
 
-    private var seamMaxHeight: CGFloat {
-        dynamicTypeSize.isAccessibilitySize ? 540 : 430
+    private func presentProposal() {
+        let rawText = captureText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard rawText.isEmpty == false else { return }
+        isProposalPresented = routePreview != nil
+    }
+
+    private func receiptView(message: String) -> some View {
+        CaptureStageGroup(state: .proof, accessibilityIdentifier: "shell.activated-capture.receipt") {
+            VStack(alignment: .leading, spacing: theme.spacing.sm) {
+                Text(message)
+                    .font(theme.typography.bodyEmphasized)
+                    .foregroundStyle(theme.semanticAccent(for: .success))
+                    .fixedSize(horizontal: false, vertical: true)
+                    .accessibilityIdentifier("shell.activated-capture.status")
+                if let savedCapture {
+                    Text("Destination: \(savedCapture.route.title)")
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .accessibilityIdentifier("shell.activated-capture.receipt.destination")
+                    HStack(spacing: theme.spacing.sm) {
+                        Button {
+                            captureText = savedCapture.rawText
+                            selectedDraftRouteType = nil
+                            isProposalPresented = true
+                            saveState = .idle
+                        } label: {
+                            Label("Change destination", systemImage: "arrow.triangle.branch")
+                        }
+                        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                        .accessibilityIdentifier("shell.activated-capture.receipt.change-destination")
+
+                        Button {
+                            dictationStatusMessage = "Inspect from Capture history after dismissing this composer."
+                        } label: {
+                            Label("Inspect", systemImage: "doc.text.magnifyingglass")
+                        }
+                        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
+                        .accessibilityIdentifier("shell.activated-capture.receipt.inspect")
+                    }
+                }
+            }
+        }
     }
 
     @MainActor
@@ -310,9 +282,10 @@ struct AppShellActivatedCaptureSeam: View {
                 decision.createCaptureRequest(rawText: rawText, sourceType: sourceType),
                 now: .now
             )
-            saveState = .saved("Saved locally as \(capture.route.title). Receipt path stays inspectable.")
-            captureText = ""
+            savedCapture = capture
+            saveState = .saved("Saved locally.")
             selectedDraftRouteType = nil
+            isProposalPresented = false
         } catch {
             saveState = .error(error.localizedDescription)
         }

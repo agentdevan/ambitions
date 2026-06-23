@@ -128,7 +128,7 @@ private extension SmartAttachmentResult {
     func objectTypeLabel(for routeType: SmartAttachmentRouteType) -> String {
         switch routeType {
         case .task:
-            return "Task"
+            return "Step"
         case .goal:
             return "Goal seed"
         case .idea, .contextualNote:
@@ -140,7 +140,7 @@ private extension SmartAttachmentResult {
         case .plan:
             return "Time item"
         case .reminder:
-            return "Task"
+            return "Step"
         case .ritual:
             return "Ritual idea"
         case .archive:
@@ -177,7 +177,7 @@ private extension SmartAttachmentResult {
         }
 
         if affectsToday {
-            return "Adds a visible Task to Today after you confirm."
+            return "Adds a visible Step to Today after you confirm."
         }
 
         switch routeType {
@@ -197,7 +197,7 @@ private extension SmartAttachmentResult {
         case .archive:
             return "Moves the capture out of the active list."
         case .task, .reminder:
-            return "Creates a Task after you confirm."
+            return "Creates a Step after you confirm."
         case .idea, .contextualNote, .ritual:
             return "Keeps the capture findable without scheduling it."
         }
