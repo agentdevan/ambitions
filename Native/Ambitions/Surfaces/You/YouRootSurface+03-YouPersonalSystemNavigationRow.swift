@@ -13,17 +13,7 @@ struct YouPersonalSystemNavigationRow: View {
         content(accent: accent)
         .padding(.vertical, theme.spacing.sm)
         .padding(.horizontal, theme.spacing.xs)
-        .background(alignment: .leading) {
-            Rectangle()
-                .fill(accent.opacity(0.16))
-                .frame(width: 2)
-        }
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(theme.colors.strokeSubtle.opacity(0.72))
-                .frame(height: 1)
-                .padding(.leading, 42)
-        }
+        .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
         .ambitionMinimumTapTarget()
         .accessibilityElement(children: .combine)
         .accessibilityLabel(accessibilitySummary)
@@ -105,11 +95,7 @@ struct YouPersonalSystemNavigationRow: View {
                 .multilineTextAlignment(.leading)
                 .padding(.horizontal, theme.spacing.xs)
                 .padding(.vertical, theme.spacing.xxxs)
-                .background(alignment: .bottom) {
-                    Rectangle()
-                        .fill(accent.opacity(0.28))
-                        .frame(height: 1)
-                }
+                .background(Capsule().fill(accent.opacity(0.12)))
                 .accessibilityHidden(true)
         }
     }

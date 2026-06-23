@@ -61,20 +61,6 @@ struct YouSurface: View {
             LivingSurfaceBackground(context: .you, state: .calm, intensity: 0.68)
                 .stageOwnedIgnoresSafeArea()
         }
-        .overlay(alignment: .bottom) {
-            LinearGradient(
-                colors: [
-                    theme.colors.surfacePrimary.opacity(0.0),
-                    theme.colors.surfacePrimary.opacity(0.74),
-                    theme.colors.surfacePrimary
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .frame(height: theme.spacing.xxxl + theme.spacing.xxl)
-            .allowsHitTesting(false)
-            .accessibilityHidden(true)
-        }
         .navigationTitle(showsNavigationChrome ? "You" : "")
         .refreshable {
             await refresh()
@@ -162,7 +148,16 @@ struct YouSurface: View {
             "privacy-automation": .automationTrust,
             "personal-runtime": .personalRuntime,
             "personal-system": .personalRuntime,
-            "receipts-history": .receiptsHistory
+            "receipts-history": .receiptsHistory,
+            "life-areas": .lifeAreas,
+            "appearance": .appearance,
+            "capture": .capturePreferences,
+            "capture-preferences": .capturePreferences,
+            "privacy": .trustCenter,
+            "local-data": .localDataControls,
+            "sources": .sourceSettings,
+            "accessibility": .accessibility,
+            "about": .about
         ][rawDetail.lowercased()]
     }
 

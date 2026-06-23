@@ -1,4 +1,5 @@
 import AmbitionsDesignSystem
+import Foundation
 import SwiftUI
 
 struct YouRootDetailContent: View {
@@ -102,6 +103,12 @@ struct YouRootDetailContent: View {
             if let section = profileProjection.planningDefaultsCenter.section(id: "planning-defaults") {
                 YouPlanningDefaultsSectionSurface(section: section, accessibilityIdentifier: "you.plan-behavior-card")
             }
+        case .lifeAreas:
+            YouControlGroup(
+                eyebrow: "Life Areas",
+                section: lifeAreasSection,
+                accessibilityIdentifier: "you.life-areas-control-group"
+            )
         case .automationTrust:
             if let section = profileProjection.planningDefaultsCenter.section(id: "automation-trust") {
                 YouPlanningDefaultsSectionSurface(section: section, accessibilityIdentifier: "you.automation-trust-card")
@@ -135,20 +142,16 @@ struct YouRootDetailContent: View {
             }
             YouControlGroup(eyebrow: "Notifications", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.notifications-control-group")
         case .capturePreferences:
-            YouControlGroup(eyebrow: "Capture Preferences", section: profileProjection.integrationsSection, accessibilityIdentifier: "you.capture-preferences-control-group")
+            YouControlGroup(eyebrow: "Capture", section: captureSettingsSection, accessibilityIdentifier: "you.capture-preferences-control-group")
         case .sourceSettings:
             YouControlGroup(
-                eyebrow: "Source Settings",
-                section: YouSectionGroup(
-                    title: profileProjection.assumptionCorrections.title,
-                    subtitle: profileProjection.assumptionCorrections.subtitle,
-                    items: profileProjection.assumptionCorrections.items,
-                    footer: profileProjection.assumptionCorrections.footer
-                ),
+                eyebrow: "Sources",
+                section: sourcesSection,
                 accessibilityIdentifier: "you.source-settings-control-group"
             )
         case .localDataControls, .integrations, .widgets, .exportImport:
             if detail == .localDataControls {
+                YouControlGroup(eyebrow: "Local Data", section: localDataStatusSection, accessibilityIdentifier: "you.local-data-status-control-group")
                 YouLocalDataControlsControlGroup(profileProjection: profileProjection)
                 YouPersonalVaultSurface(personalVault: profileProjection.personalVault)
                 YouMemoryControlsSurface(memoryControls: profileProjection.memoryControls)
@@ -159,19 +162,103 @@ struct YouRootDetailContent: View {
         case .accessibility:
             YouControlGroup(
                 eyebrow: "Accessibility",
-                section: YouSectionGroup(
-                    title: "Accessibility",
-                    subtitle: "Claims stay locked until manual verification is recorded.",
-                    items: profileProjection.trustCenter.items.filter { $0.title.localizedCaseInsensitiveContains("Accessibility") },
-                    footer: "This is an internal evidence status, not a public accessibility claim."
-                ),
+                section: accessibilitySettingsSection,
                 accessibilityIdentifier: "you.accessibility-control-group"
             )
         case .support:
             YouControlGroup(eyebrow: "Help", section: profileProjection.accountSection, accessibilityIdentifier: "you.support-control-group")
         case .about:
-            YouControlGroup(eyebrow: "About", section: profileProjection.accountSection, accessibilityIdentifier: "you.about-control-group")
+            YouControlGroup(eyebrow: "About", section: aboutSection, accessibilityIdentifier: "you.about-control-group")
         }
+    }
+
+    var captureSettingsSection: YouSectionGroup {
+        YouSectionGroup(
+            title: "Capture",
+            subtitle: "Capture settings reflect the current global composer path.",
+            items: [
+                SettingsItem(id: "capture-input", title: "Input behavior", subtitle: "Capture opens as a full-screen Stage composer.", icon: "keyboard", valueLabel: "Global"),
+                SettingsItem(id: "capture-dictation", title: "Keyboard dictation", subtitle: "Use the iOS keyboard dictation key when the system keyboard offers it. Ambitions does not request a separate microphone path here.", icon: "waveform", valueLabel: "System"),
+                SettingsItem(id: "capture-attachments", title: "Attachments", subtitle: "Local attachments stay in the Capture flow and are not uploaded from this setting.", icon: "paperclip", valueLabel: "Local"),
+                SettingsItem(id: "capture-teaching-reset", title: "Gesture teaching reset", subtitle: "Reset is not exposed in You yet.", icon: "hand.tap", valueLabel: "Unavailable"),
+                SettingsItem(id: "capture-permissions", title: "Permission state", subtitle: "No Capture-only cloud, analytics, or custom microphone permission is connected.", icon: "lock", valueLabel: "Local")
+            ],
+            footer: "This detail does not rebuild Capture or add a half-sheet path."
+        )
+    }
+
+    var lifeAreasSection: YouSectionGroup {
+        YouSectionGroup(
+            title: "Life Areas",
+            subtitle: "Life Area ownership remains with Goals.",
+            items: [
+                SettingsItem(id: "life-areas-defaults", title: "Default areas", subtitle: "Work, Body, Home, People, Self, Future, and Open Field are supplied by the Goals Life Area Atlas.", icon: "square.grid.2x2", valueLabel: "Available"),
+                SettingsItem(id: "life-areas-customization", title: "Customization", subtitle: "Rename, reorder, hide, and add controls are not exposed from You yet.", icon: "slider.horizontal.3", valueLabel: "Unavailable"),
+                SettingsItem(id: "life-areas-route-owner", title: "Where to manage", subtitle: "Open Goals to work with Life Area detail and contextual Capture creation.", icon: "target", valueLabel: "Goals")
+            ],
+            footer: "You shows the ownership boundary instead of duplicating Goals controls."
+        )
+    }
+
+    var localDataStatusSection: YouSectionGroup {
+        YouSectionGroup(
+            title: "Local Data",
+            subtitle: "Personal life data remains local unless a future approved sync architecture changes that.",
+            items: [
+                SettingsItem(id: "local-data-store", title: "Local store", subtitle: "Goals, captures, proof, receipts, preferences, and local context use on-device storage.", icon: "internaldrive", valueLabel: "On device"),
+                SettingsItem(id: "local-data-export", title: "Export", subtitle: "Export is status-only here unless an owning export path proves the action.", icon: "square.and.arrow.up", valueLabel: "Bounded"),
+                SettingsItem(id: "local-data-erase", title: "Erase", subtitle: "Broad destructive erase is not exposed from this detail.", icon: "trash.slash", valueLabel: "Unavailable")
+            ],
+            footer: "Any destructive local-data action must require confirmation before it becomes available."
+        )
+    }
+
+    var sourcesSection: YouSectionGroup {
+        YouSectionGroup(
+            title: "Sources",
+            subtitle: "Sources are local or permission-backed unless explicitly shown otherwise.",
+            items: [
+                SettingsItem(id: "sources-permissions", title: "Permissions", subtitle: "Calendar and notification boundaries are shown where the current app can inspect them.", icon: "checkmark.shield", valueLabel: "Review"),
+                SettingsItem(id: "sources-freshness", title: "Freshness", subtitle: "Freshness belongs in source detail and receipts, not on the You root.", icon: "clock.arrow.circlepath", valueLabel: "Detail"),
+                SettingsItem(id: "sources-add-remove", title: "Add or remove", subtitle: "No connected external source is faked from this setting.", icon: "minus.plus.batteryblock", valueLabel: "Unavailable")
+            ] + profileProjection.assumptionCorrections.items,
+            footer: profileProjection.assumptionCorrections.footer
+        )
+    }
+
+    var accessibilitySettingsSection: YouSectionGroup {
+        YouSectionGroup(
+            title: "Accessibility",
+            subtitle: "System accessibility settings are respected; release claims remain proof-gated.",
+            items: [
+                SettingsItem(id: "accessibility-dynamic-type", title: "Dynamic Type", subtitle: "Rows support larger text through native wrapping.", icon: "textformat.size", valueLabel: "System"),
+                SettingsItem(id: "accessibility-reduce-motion", title: "Reduce Motion", subtitle: "Stage animation uses the iOS Reduce Motion environment.", icon: "figure.walk.motion", valueLabel: "System"),
+                SettingsItem(id: "accessibility-increase-contrast", title: "Increase Contrast", subtitle: "Semantic tokens provide contrast-aware foreground and stroke states.", icon: "circle.lefthalf.filled", valueLabel: "System"),
+                SettingsItem(id: "accessibility-haptics", title: "Haptics", subtitle: "Route haptics use the design-system haptic policy.", icon: "iphone.radiowaves.left.and.right", valueLabel: "Policy"),
+                SettingsItem(id: "accessibility-icon-labels", title: "Icon labels", subtitle: "Root navigation labels remain VoiceOver-accessible and not visibly persistent.", icon: "character.cursor.ibeam", valueLabel: "VoiceOver"),
+                SettingsItem(id: "accessibility-proof-preview", title: "Proof preview", subtitle: "Manual accessibility proof is still pending.", icon: "checkmark.seal", valueLabel: "Pending")
+            ],
+            footer: "This is app support status, not public accessibility certification."
+        )
+    }
+
+    var aboutSection: YouSectionGroup {
+        let info = Bundle.main.infoDictionary
+        let version = info?["CFBundleShortVersionString"] as? String ?? "1.0"
+        let build = info?["CFBundleVersion"] as? String ?? "1"
+
+        return YouSectionGroup(
+            title: "About",
+            subtitle: "App and local-first status.",
+            items: [
+                SettingsItem(id: "about-version", title: "Version", subtitle: nil, icon: "number", valueLabel: version),
+                SettingsItem(id: "about-build", title: "Build", subtitle: nil, icon: "hammer", valueLabel: build),
+                SettingsItem(id: "about-local-first", title: "Local-first core", subtitle: "Core personal life data stays on device by default.", icon: "lock.iphone", valueLabel: "On device"),
+                SettingsItem(id: "about-privacy-legal", title: "Privacy & legal", subtitle: "Release privacy and legal approval are not claimed here.", icon: "doc.text", valueLabel: "Pending"),
+                SettingsItem(id: "about-diagnostics", title: "Diagnostics export", subtitle: "Diagnostics export is available only where an owning support path proves the action.", icon: "waveform.path.ecg", valueLabel: "Unavailable")
+            ],
+            footer: nil
+        )
     }
 
     func durationTitle(for source: DurationSource) -> String {

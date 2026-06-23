@@ -106,53 +106,77 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootSurface.swift"),
             encoding: .utf8
         )
+        let contractSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouObjectStageControlPrimitiveContract.swift"),
+            encoding: .utf8
+        )
         let screenSource = try String(
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouSurface.swift"),
+            encoding: .utf8
+        )
+        let detailSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootDetailContent.swift"),
+            encoding: .utf8
+        )
+        let navigationRowSource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootSurface+03-YouPersonalSystemNavigationRow.swift"),
             encoding: .utf8
         )
 
         XCTAssertEqual(contract.primitiveID, "personal-runtime-group")
         XCTAssertEqual(contract.ownerSurface, "You")
-        XCTAssertEqual(contract.productObject, "Personal system / User System Profile")
-        XCTAssertEqual(contract.stageName, "You Object Stage Control")
+        XCTAssertEqual(contract.productObject, "User System Profile")
+        XCTAssertEqual(contract.stageName, "You settings")
         XCTAssertEqual(contract.screenshotIdentifier, "YouObjectStageControl")
         XCTAssertTrue(contract.avoidsGenericProfileSettingsWall)
         XCTAssertTrue(contract.reservesTabBarClearance)
         XCTAssertEqual(contract.sourceControlOrder, [
-            "planning setup",
-            "runtime preferences",
-            "history and trust",
-            "support system"
+            "appearance",
+            "capture",
+            "life areas",
+            "privacy",
+            "local data",
+            "sources",
+            "receipts and history",
+            "accessibility",
+            "about"
         ])
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("generic settings wall"))
         XCTAssertTrue(contract.exemptedSemanticControls.contains("native grouped navigation rows"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
         XCTAssertTrue(rootSource.contains("YouObjectStageControlPrimitiveContract.current"))
-        XCTAssertTrue(rootSource.contains("YouPersonalRuntimeGovernanceControls"))
-        XCTAssertTrue(rootSource.contains("priorityGovernanceRows"))
-        XCTAssertTrue(rootSource.contains("How Ambitions works for me"))
-        XCTAssertTrue(rootSource.contains("\"trust-automation\""))
-        XCTAssertTrue(rootSource.contains("\"personal-runtime\""))
+        XCTAssertTrue(contractSource.contains("sourceControlOrder"))
+        XCTAssertTrue(contractSource.contains("\"appearance\""))
+        XCTAssertTrue(contractSource.contains("\"life areas\""))
+        XCTAssertFalse(rootSource.contains("priorityGovernanceRows"))
+        XCTAssertFalse(rootSource.contains("How Ambitions works for me"))
+        XCTAssertTrue(rootSource.contains("\"appearance\""))
+        XCTAssertTrue(rootSource.contains("\"capture-preferences\""))
+        XCTAssertTrue(rootSource.contains("\"life-areas\""))
+        XCTAssertTrue(rootSource.contains("\"local-data-controls\""))
+        XCTAssertTrue(rootSource.contains("\"source-settings\""))
         XCTAssertTrue(rootSource.contains("\"receipts-history\""))
-        XCTAssertTrue(rootSource.contains("you.priority-node.\\(item.id)"))
         XCTAssertFalse(rootSource.contains("Array(items.prefix(1))"))
         XCTAssertFalse(rootSource.contains("Runtime Governance"))
-        XCTAssertTrue(rootSource.contains("YouPersonalSystemNavigationRow"))
-        XCTAssertTrue(rootSource.contains("Runtime Preferences"))
+        XCTAssertTrue(rootSource.contains("RootSectionRow"))
+        XCTAssertTrue(navigationRowSource.contains("YouPersonalSystemNavigationRow"))
+        XCTAssertTrue(rootSource.contains("Preferences"))
         XCTAssertFalse(rootSource.contains("Account & Preferences"))
-        XCTAssertFalse(rootSource.contains("Capsule(style: .continuous)"))
-        XCTAssertFalse(rootSource.contains("RoundedRectangle("))
         XCTAssertFalse(rootSource.contains("HeroCard("))
         XCTAssertFalse(rootSource.contains("AppCard("))
         XCTAssertFalse(rootSource.contains("StateDrivenMaterialPanel("))
         XCTAssertTrue(screenSource.contains(".accessibilityIdentifier(\"you.scroll\")"))
-        XCTAssertTrue(screenSource.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(screenSource.contains(".stageOwnedSafeAreaInset(edge: .bottom"))
+        XCTAssertFalse(screenSource.contains("LinearGradient("))
         XCTAssertTrue(screenSource.contains("theme.spacing.xxxl + theme.spacing.xxl"))
-        XCTAssertTrue(screenSource.contains("YouConstitutionSurface("))
-        XCTAssertTrue(screenSource.contains("YouPersonalVaultSurface("))
-        XCTAssertTrue(screenSource.contains("YouTrustHistoryCenterSurface("))
-        XCTAssertTrue(screenSource.contains("YouCrossSurfaceProofReviewSurface("))
+        XCTAssertTrue(detailSource.contains("YouConstitutionSurface("))
+        XCTAssertTrue(detailSource.contains("YouPersonalVaultSurface("))
+        XCTAssertTrue(detailSource.contains("YouTrustHistoryCenterSurface("))
+        XCTAssertTrue(detailSource.contains("YouCrossSurfaceProofReviewSurface("))
+        XCTAssertTrue(detailSource.contains("captureSettingsSection"))
+        XCTAssertTrue(detailSource.contains("lifeAreasSection"))
+        XCTAssertTrue(detailSource.contains("accessibilitySettingsSection"))
     }
 
     func repoRoot() -> URL {

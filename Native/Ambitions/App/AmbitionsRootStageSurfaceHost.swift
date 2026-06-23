@@ -150,6 +150,7 @@ struct AmbitionsRootStageSurfaceHost: View {
                 case .personalSystem,
                      .privacyAutomation,
                      .receiptsHistory,
+                     .lifeAreas,
                      .scheduleAvailability,
                      .planningDefaults,
                      .vacationAwayTime,
@@ -161,12 +162,13 @@ struct AmbitionsRootStageSurfaceHost: View {
                      .privacy,
                      .sourceSettings,
                      .localDataControls,
+                     .accessibility,
                      .exportImport,
                      .help,
                      .about:
                     AppShellScaffold(
                         title: target.title,
-                        subtitle: "User System Profile",
+                        subtitle: nil,
                         posture: .utility,
                         backButtonAccessibilityIdentifier: "shell.you.back-button",
                         onBack: { navigation.resetYouPath() },
@@ -191,6 +193,8 @@ struct AmbitionsRootStageSurfaceHost: View {
             .automationTrust
         case .receiptsHistory:
             .receiptsHistory
+        case .lifeAreas:
+            .lifeAreas
         case .scheduleAvailability:
             .scheduleAvailability
         case .planningDefaults:
@@ -213,6 +217,8 @@ struct AmbitionsRootStageSurfaceHost: View {
             .sourceSettings
         case .localDataControls:
             .localDataControls
+        case .accessibility:
+            .accessibility
         case .exportImport:
             .exportImport
         case .help:

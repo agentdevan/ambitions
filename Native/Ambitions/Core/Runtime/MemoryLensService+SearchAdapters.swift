@@ -56,10 +56,15 @@ extension DefaultMemoryLensService {
 
     func makeSettingResults() -> [MemoryLensResult] {
         let settings: [(YouRouteTarget, String, String)] = [
+            (.appearance, "Appearance", "System, Light, Dark, and accent."),
+            (.capturePreferences, "Capture", "Input, dictation, attachments, and teaching state."),
+            (.lifeAreas, "Life Areas", "Defaults and customization ownership."),
             (.privacy, "Privacy", "Local data and privacy controls."),
-            (.receiptsHistory, "Receipts & History", "Saved receipts and history."),
-            (.appearance, "Appearance", "Theme and visual settings."),
-            (.localDataControls, "Local data", "On-device data controls.")
+            (.localDataControls, "Local Data", "On-device data controls."),
+            (.sourceSettings, "Sources", "Permissions, freshness, and source inspection."),
+            (.receiptsHistory, "Receipts", "Saved receipts and history."),
+            (.accessibility, "Accessibility", "System settings and app support status."),
+            (.about, "About", "Version, privacy, legal, and diagnostics status.")
         ]
         return settings.map { route, title, subtitle in
             MemoryLensResult(

@@ -11,7 +11,7 @@ struct YouPersonalRuntimeGovernanceField: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("How Ambitions works for me")
+                Text("Priority settings")
                     .font(theme.typography.bodyEmphasized)
                     .foregroundStyle(theme.colors.textPrimary)
 
@@ -38,14 +38,9 @@ struct YouPersonalRuntimeGovernanceField: View {
                     .fill(theme.colors.strokeSubtle.opacity(0.64))
                     .frame(height: 1)
             }
-            .overlay(alignment: .bottom) {
-                Rectangle()
-                    .fill(theme.colors.strokeSubtle.opacity(0.48))
-                    .frame(height: 1)
-            }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("How Ambitions works for me")
+        .accessibilityLabel("Priority settings")
         .accessibilityIdentifier("you.priority-governance")
     }
 
@@ -134,7 +129,7 @@ struct YouPersonalRuntimeGovernanceControls: View {
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("How Ambitions works for me")
+                Text("Priority settings")
                     .font(theme.typography.section)
                     .foregroundStyle(theme.colors.textPrimary)
 
@@ -159,14 +154,9 @@ struct YouPersonalRuntimeGovernanceControls: View {
                     .fill(theme.colors.strokeSubtle.opacity(0.72))
                     .frame(height: 1)
             }
-            .overlay(alignment: .bottom) {
-                Rectangle()
-                    .fill(theme.colors.strokeSubtle.opacity(0.72))
-                    .frame(height: 1)
-            }
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("How Ambitions works for me")
+        .accessibilityLabel("Priority settings")
         .accessibilityIdentifier("you.priority-governance")
     }
 }
@@ -224,12 +214,6 @@ struct YouPersonalRuntimeGovernanceRow: View {
             Rectangle()
                 .fill(accent.opacity(0.16))
                 .frame(width: 2)
-        }
-        .overlay(alignment: .bottom) {
-            Rectangle()
-                .fill(theme.colors.strokeSubtle.opacity(0.54))
-                .frame(height: 1)
-                .padding(.leading, 40)
         }
         .ambitionMinimumTapTarget()
         .accessibilityElement(children: .combine)

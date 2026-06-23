@@ -10,14 +10,14 @@ extension RepositoryBackedYouService {
         reviews: YouReviewsState,
         contextSignals: Int,
         appearanceSummary: String
-    ) -> YouSystemCenterState {
+        ) -> YouSystemCenterState {
         YouSystemCenterState(
-            title: "Your System",
-            subtitle: "User System Profile keeps Planning Setup, Privacy & automation, Privacy, Receipts & History, and Defaults visible.",
+            title: "Settings",
+            subtitle: "Local profile keeps appearance, capture, privacy, data, receipts, and defaults inspectable.",
             sections: [
                 YouSystemCenterSection(
                     id: "planning-behavior",
-                    title: "Planning Setup",
+                    title: "Planning Defaults",
                     footer: "Guided automation is the default. Ambitions does not fill open time just because it exists.",
                     items: [
                         YouSystemCenterItem(
@@ -151,12 +151,12 @@ extension RepositoryBackedYouService {
                     items: [
                         YouSystemCenterItem(
                             id: "you",
-                            title: "User System Profile",
+                            title: "Local profile",
                             subtitle: "Name and default landing tab.",
                             icon: "person.crop.circle",
                             statusLabel: snapshot.appState.userDisplayName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Optional" : "Local",
                             semanticState: .neutral,
-                            accessibilityHint: "Opens User System Profile settings."
+                            accessibilityHint: "Opens local profile settings."
                         ),
                         YouSystemCenterItem(
                             id: "personalization",

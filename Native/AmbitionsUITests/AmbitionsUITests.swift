@@ -388,7 +388,7 @@ final class AmbitionsUITests: XCTestCase {
 
         let matrix = [
             MatrixItem(
-                name: "amb-966-you-default",
+                name: "amb-1198-you-root-default",
                 detail: nil,
                 requiredIdentifier: nil,
                 contentSizeCategory: "UICTContentSizeCategoryM",
@@ -396,23 +396,55 @@ final class AmbitionsUITests: XCTestCase {
                 bottomInsetTarget: nil
             ),
             MatrixItem(
-                name: "amb-966-you-trust-automation",
-                detail: "trust-automation",
-                requiredIdentifier: "you.automation-trust-card",
+                name: "amb-1198-you-appearance",
+                detail: "appearance",
+                requiredIdentifier: "you.appearance-studio-card",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 extraEnvironment: [:],
                 bottomInsetTarget: nil
             ),
             MatrixItem(
-                name: "amb-966-you-personal-runtime",
-                detail: "personal-runtime",
-                requiredIdentifier: "you.personal-runtime-status-control-group",
+                name: "amb-1198-you-capture",
+                detail: "capture",
+                requiredIdentifier: "you.capture-preferences-control-group",
                 contentSizeCategory: "UICTContentSizeCategoryM",
                 extraEnvironment: [:],
                 bottomInsetTarget: nil
             ),
             MatrixItem(
-                name: "amb-966-you-receipts-history",
+                name: "amb-1198-you-life-areas",
+                detail: "life-areas",
+                requiredIdentifier: "you.life-areas-control-group",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-1198-you-privacy",
+                detail: "privacy",
+                requiredIdentifier: "you.trust-center-card",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-1198-you-local-data",
+                detail: "local-data",
+                requiredIdentifier: "you.local-data-status-control-group",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-1198-you-sources",
+                detail: "sources",
+                requiredIdentifier: "you.source-settings-control-group",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-1198-you-receipts-history",
                 detail: "receipts-history",
                 requiredIdentifier: "you.receipts-control-group",
                 contentSizeCategory: "UICTContentSizeCategoryM",
@@ -420,7 +452,23 @@ final class AmbitionsUITests: XCTestCase {
                 bottomInsetTarget: nil
             ),
             MatrixItem(
-                name: "amb-966-you-large-dynamic-type",
+                name: "amb-1198-you-accessibility",
+                detail: "accessibility",
+                requiredIdentifier: "you.accessibility-control-group",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-1198-you-about",
+                detail: "about",
+                requiredIdentifier: "you.about-control-group",
+                contentSizeCategory: "UICTContentSizeCategoryM",
+                extraEnvironment: [:],
+                bottomInsetTarget: nil
+            ),
+            MatrixItem(
+                name: "amb-1198-you-large-dynamic-type",
                 detail: nil,
                 requiredIdentifier: nil,
                 contentSizeCategory: "UICTContentSizeCategoryAccessibilityXL",
@@ -428,7 +476,7 @@ final class AmbitionsUITests: XCTestCase {
                 bottomInsetTarget: nil
             ),
             MatrixItem(
-                name: "amb-966-you-requested-increase-contrast",
+                name: "amb-1198-you-requested-increase-contrast",
                 detail: nil,
                 requiredIdentifier: nil,
                 contentSizeCategory: "UICTContentSizeCategoryM",
@@ -436,7 +484,7 @@ final class AmbitionsUITests: XCTestCase {
                 bottomInsetTarget: nil
             ),
             MatrixItem(
-                name: "amb-966-you-bottom-inset-local-data-controls",
+                name: "amb-1198-you-bottom-inset-local-data",
                 detail: nil,
                 requiredIdentifier: "you.row.local-data-controls",
                 contentSizeCategory: "UICTContentSizeCategoryM",
@@ -464,11 +512,11 @@ final class AmbitionsUITests: XCTestCase {
 
             XCTAssertTrue(app.descendants(matching: .any)["you.screen"].waitForExistence(timeout: 10))
             if item.detail == nil {
-                XCTAssertTrue(app.staticTexts["Personal system / User System Profile"].waitForExistence(timeout: 10))
-                XCTAssertTrue(app.staticTexts["How Ambitions works for me"].waitForExistence(timeout: 10))
-                XCTAssertTrue(app.descendants(matching: .any)["you.priority-node.trust-automation"].waitForExistence(timeout: 10))
-                XCTAssertTrue(app.descendants(matching: .any)["you.priority-node.personal-runtime"].waitForExistence(timeout: 10))
-                XCTAssertTrue(app.descendants(matching: .any)["you.priority-node.receipts-history"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.staticTexts["Local profile"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.row.appearance"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.row.capture-preferences"].waitForExistence(timeout: 10))
+                XCTAssertTrue(app.descendants(matching: .any)["you.row.life-areas"].waitForExistence(timeout: 10))
+                XCTAssertFalse(app.staticTexts["How Ambitions works for me"].exists)
             }
             if let target = item.bottomInsetTarget {
                 XCTAssertTrue(scrollYouContentToVisible(identifier: target, in: app))

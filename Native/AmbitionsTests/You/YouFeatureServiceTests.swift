@@ -8,7 +8,7 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
 
-        XCTAssertTrue(dashboard.hero.subtitle.contains("Your System"))
+        XCTAssertTrue(dashboard.hero.subtitle.contains("Local settings"))
         XCTAssertTrue(dashboard.trustCenter.pulse.subtitle.contains("Local-first"))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-sync" && $0.valueLabel == "Not currently connected" }))
         XCTAssertTrue(dashboard.trustCenter.items.contains(where: { $0.id == "you-trust-accessibility" && $0.valueLabel == "Claims locked" }))
@@ -56,7 +56,7 @@ final class YouFeatureServiceTests: XCTestCase {
 
         let dashboard = try await service.loadYouDashboard()
 
-        XCTAssertEqual(dashboard.hero.title, "Your System")
+        XCTAssertEqual(dashboard.hero.title, "Local profile")
         XCTAssertEqual(dashboard.preferences.appearancePreference, .system)
         XCTAssertEqual(dashboard.preferences.accentFamily, .sage)
         XCTAssertTrue(dashboard.defaultsSection.items.contains(where: { $0.id == "you-default-storage" && $0.valueLabel == "Local-only" }))
@@ -358,8 +358,8 @@ final class YouFeatureServiceTests: XCTestCase {
         let items = dashboard.systemCenter.sections.flatMap(\.items)
         let titles = items.map(\.title)
 
-        XCTAssertEqual(dashboard.systemCenter.title, "Your System")
-        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("User System Profile"))
+        XCTAssertEqual(dashboard.systemCenter.title, "Settings")
+        XCTAssertTrue(dashboard.systemCenter.subtitle.contains("Local profile"))
         XCTAssertEqual(titles, [
             "Schedule & Availability",
             "Time Behavior",
@@ -373,7 +373,7 @@ final class YouFeatureServiceTests: XCTestCase {
             "Reviews",
             "Proof",
             "Archive / Completed",
-            "User System Profile",
+            "Local profile",
             "Personalization",
             "Appearance",
             "Notifications",
@@ -392,7 +392,7 @@ final class YouFeatureServiceTests: XCTestCase {
             "system-edges",
             "accessibility-and-support"
         ])
-        XCTAssertEqual(dashboard.systemCenter.sections.first?.title, "Planning Setup")
+        XCTAssertEqual(dashboard.systemCenter.sections.first?.title, "Planning Defaults")
         XCTAssertTrue(dashboard.systemCenter.footer.contains("without changing anything silently"))
         XCTAssertTrue(items.allSatisfy { !$0.accessibilityHint.isEmpty })
         XCTAssertTrue(items.contains(where: {

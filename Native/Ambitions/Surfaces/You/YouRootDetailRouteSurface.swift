@@ -58,8 +58,8 @@ struct YouRootDetailRouteSurface: View {
             await refresh()
         }
         .accessibilityIdentifier("you.screen")
-        .accessibilityLabel("\(detail.title). User System Profile.")
-        .accessibilityHint("This drill-down uses stage route mutation, visible navigation, accessibility announcement, and local proof-status rows when scoped.")
+        .accessibilityLabel("\(detail.title). You settings.")
+        .accessibilityHint("Review this settings detail.")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .task {
             await viewModel.load(using: featureFactory.youService)

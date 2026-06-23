@@ -6,20 +6,22 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
         let contract = YouObjectStageControlPrimitiveContract.current
         XCTAssertEqual(contract.ownerSurface, "You")
         XCTAssertEqual(contract.productObject, "User System Profile")
-        XCTAssertEqual(contract.stageName, "User System Profile")
+        XCTAssertEqual(contract.stageName, "You settings")
         XCTAssertTrue(contract.avoidsGenericProfileSettingsWall)
     }
 
-    func testYouObjectStageContractCoversNativeSettingsMap() {
-        let order = Set(YouObjectStageControlPrimitiveContract.current.sourceControlOrder)
-        XCTAssertTrue(order.contains("account and profile"))
-        XCTAssertTrue(order.contains("privacy and automation"))
-        XCTAssertTrue(order.contains("appearance"))
-        XCTAssertTrue(order.contains("notifications"))
-        XCTAssertTrue(order.contains("learning"))
-        XCTAssertTrue(order.contains("receipts and history"))
-        XCTAssertTrue(order.contains("export"))
-        XCTAssertTrue(order.contains("support"))
+    func testAMB1198ObjectStageContractCoversRequiredNativeSettingsMap() {
+        XCTAssertEqual(YouObjectStageControlPrimitiveContract.current.sourceControlOrder, [
+            "appearance",
+            "capture",
+            "life areas",
+            "privacy",
+            "local data",
+            "sources",
+            "receipts and history",
+            "accessibility",
+            "about"
+        ])
     }
 
     func testYouObjectStageContractRejectsBadProfileShapes() {
@@ -37,6 +39,9 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
         XCTAssertEqual(YouRootDetail.personalRuntime.routeTarget, .personalSystem)
         XCTAssertEqual(YouRootDetail.receiptsHistory.routeTarget, .receiptsHistory)
         XCTAssertEqual(YouRootDetail.appearance.routeTarget, .appearance)
+        XCTAssertEqual(YouRootDetail.lifeAreas.routeTarget, .lifeAreas)
+        XCTAssertEqual(YouRootDetail.localDataControls.routeTarget, .localDataControls)
+        XCTAssertEqual(YouRootDetail.accessibility.routeTarget, .accessibility)
     }
 
     func testYouDetailRouteHidesRootDockThroughStagePolicy() {
@@ -59,5 +64,64 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
         XCTAssertEqual(YouRouteTarget.privacyAutomation.deepLinkPath, "privacy-automation")
         XCTAssertEqual(YouRouteTarget.receiptsHistory.deepLinkPath, "receipts-history")
         XCTAssertEqual(YouRouteTarget.monthlyReview.deepLinkPath, "monthly-review")
+        XCTAssertEqual(YouRouteTarget.lifeAreas.deepLinkPath, "life-areas")
+    }
+
+    func testAMB1198RootSourceRemovesInternalHeadersGovernanceWallDividerAndGlow() throws {
+        let rootSource = try source("Native/Ambitions/Surfaces/You/YouRootSurface.swift")
+        let rowSource = try source("Native/Ambitions/Surfaces/You/YouRootSurface+03-YouPersonalSystemNavigationRow.swift")
+        let surfaceSource = try source("Native/Ambitions/Surfaces/You/YouSurface.swift")
+
+        XCTAssertFalse(rootSource.contains("YOU · Profile and settings"))
+        XCTAssertFalse(rootSource.contains("Your System"))
+        XCTAssertFalse(rootSource.contains("How Ambitions works for me"))
+        XCTAssertFalse(rootSource.contains("Personal system / User System Profile"))
+        XCTAssertFalse(rowSource.contains(".overlay(alignment: .bottom)"))
+        XCTAssertFalse(surfaceSource.contains("LinearGradient("))
+        XCTAssertTrue(rootSource.contains("RootSectionRow("))
+        XCTAssertTrue(rootSource.contains("title: \"Appearance\""))
+        XCTAssertTrue(rootSource.contains("title: \"Capture\""))
+        XCTAssertTrue(rootSource.contains("title: \"Life Areas\""))
+        XCTAssertTrue(rootSource.contains("title: \"Privacy\""))
+        XCTAssertTrue(rootSource.contains("title: \"Local Data\""))
+        XCTAssertTrue(rootSource.contains("title: \"Sources\""))
+        XCTAssertTrue(rootSource.contains("title: \"Receipts\""))
+        XCTAssertTrue(rootSource.contains("title: \"Accessibility\""))
+        XCTAssertTrue(rootSource.contains("title: \"About\""))
+    }
+
+    func testAMB1198DetailsExposeHonestUnavailableAndConfirmationBoundaries() throws {
+        let detailSource = try source("Native/Ambitions/Surfaces/You/YouRootDetailContent.swift")
+
+        XCTAssertTrue(detailSource.contains("Gesture teaching reset"))
+        XCTAssertTrue(detailSource.contains("Unavailable"))
+        XCTAssertTrue(detailSource.contains("Broad destructive erase is not exposed from this detail."))
+        XCTAssertTrue(detailSource.contains("Any destructive local-data action must require confirmation"))
+        XCTAssertTrue(detailSource.contains("No connected external source is faked from this setting."))
+        XCTAssertTrue(detailSource.contains("Manual accessibility proof is still pending."))
+    }
+
+    func testAMB1198AppearanceLiveUpdateHookStillExists() throws {
+        let detailRouteSource = try source("Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift")
+
+        XCTAssertTrue(detailRouteSource.contains(".onChange(of: viewModel.appearancePreference)"))
+        XCTAssertTrue(detailRouteSource.contains(".onChange(of: viewModel.accentFamily)"))
+        XCTAssertTrue(detailRouteSource.contains("applyAppearancePreviewFromEditor()"))
+        XCTAssertTrue(detailRouteSource.contains("userSystem.applyAppearancePreference("))
+    }
+
+    private func source(_ relativePath: String) throws -> String {
+        try String(contentsOf: repoRoot().appendingPathComponent(relativePath), encoding: .utf8)
+    }
+
+    private func repoRoot() -> URL {
+        var url = URL(fileURLWithPath: #filePath)
+        while url.pathComponents.count > 1 {
+            if FileManager.default.fileExists(atPath: url.appendingPathComponent("project.yml").path) {
+                return url
+            }
+            url.deleteLastPathComponent()
+        }
+        return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
     }
 }

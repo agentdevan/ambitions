@@ -47,6 +47,7 @@ enum YouRouteTarget: String, CaseIterable, Hashable, Identifiable, Sendable {
     case personalSystem
     case privacyAutomation
     case receiptsHistory
+    case lifeAreas
     case scheduleAvailability
     case planningDefaults
     case vacationAwayTime
@@ -58,6 +59,7 @@ enum YouRouteTarget: String, CaseIterable, Hashable, Identifiable, Sendable {
     case privacy
     case sourceSettings
     case localDataControls
+    case accessibility
     case exportImport
     case help
     case about
@@ -71,6 +73,7 @@ enum YouRouteTarget: String, CaseIterable, Hashable, Identifiable, Sendable {
         case .personalSystem: "Personal system"
         case .privacyAutomation: "Privacy & automation"
         case .receiptsHistory: "Receipts & History"
+        case .lifeAreas: "Life Areas"
         case .scheduleAvailability: "Schedule & Availability"
         case .planningDefaults: "Planning Defaults"
         case .vacationAwayTime: "Vacation / Away Time"
@@ -82,6 +85,7 @@ enum YouRouteTarget: String, CaseIterable, Hashable, Identifiable, Sendable {
         case .privacy: "Privacy"
         case .sourceSettings: "Sources & permissions"
         case .localDataControls: "Local data"
+        case .accessibility: "Accessibility"
         case .exportImport: "Export / Import"
         case .help: "Help"
         case .about: "About"
@@ -94,6 +98,8 @@ enum YouRouteTarget: String, CaseIterable, Hashable, Identifiable, Sendable {
             "monthly-review"
         case .receiptsHistory:
             "receipts-history"
+        case .lifeAreas:
+            "life-areas"
         case .scheduleAvailability:
             "schedule-availability"
         case .planningDefaults:
@@ -110,6 +116,8 @@ enum YouRouteTarget: String, CaseIterable, Hashable, Identifiable, Sendable {
             "sources-permissions"
         case .localDataControls:
             "local-data"
+        case .accessibility:
+            "accessibility"
         case .exportImport:
             "export-import"
         case .privacyAutomation:
