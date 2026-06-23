@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/schemas/file-review.schema.json",
+  "title": "Ambitions SCG File Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "path",
+    "canonical_owner",
+    "classification",
+    "build_included",
+    "review_decision",
+    "evidence",
+    "reviewer",
+    "issue"
+  ],
+  "properties": {
+    "path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "canonical_owner": {
+      "type": "string",
+      "enum": [
+        "App",
+        "Stage",
+        "Core",
+        "Projection",
+        "Language",
+        "Trust",
+        "Interaction",
+        "Rendering",
+        "DesignSystem",
+        "Surfaces",
+        "Composer",
+        "Scenarios",
+        "Diagnostics",
+        "Quality",
+        "Governance",
+        "LegacyCompatibility"
+      ]
+    },
+    "classification": {
+      "type": "string",
+      "enum": ["production-source", "test", "script", "doc", "schema", "resource", "generated", "ignored-local-output"]
+    },
+    "build_included": {
+      "type": "boolean"
+    },
+    "review_decision": {
+      "type": "string",
+      "enum": ["accept", "accept-with-followup", "request-changes", "escalate"]
+    },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_proof": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "issue": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[0-9]+$"
+    },
+    "reviewed_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

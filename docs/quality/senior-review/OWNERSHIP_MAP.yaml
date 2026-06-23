@@ -1,0 +1,101 @@
+schema: docs/quality/senior-review/schemas/ownership-map.schema.json
+version: 1
+status: active
+issue: AMB-1284
+baseline_sha: bab9994a855ab84bb39c30da7a789fe11ead4305
+owners:
+  App:
+    canonical_path: Native/Ambitions/App
+    role: launch, environment, dependencies, feature flags, and stage host
+    review_owner: SCG architecture review
+    production_behavior_owner: app runtime owner
+    forbidden: product policy, persistence internals, duplicate shell ownership
+  Stage:
+    canonical_path: Native/Ambitions/Stage
+    role: root shell, route, overlays, chrome, safe areas, transitions, and Motion behavior
+    review_owner: SCG stage review
+    production_behavior_owner: Stage OS owner
+    forbidden: fifth root surface, Capture tab, Motion destination
+  Core:
+    canonical_path: Native/Ambitions/Core
+    role: domain, clock, runtime, persistence, permissions, and privacy boundary
+    review_owner: SCG runtime review
+    production_behavior_owner: local runtime owner
+    forbidden: SwiftUI root anatomy, cloud private-life backend, R2 private-context transport
+  Projection:
+    canonical_path: Native/Ambitions/Projection
+    role: lenses, scenes, commands, mutations, receipts, and undo
+    review_owner: SCG projection review
+    production_behavior_owner: projection owner
+    forbidden: persistence storage mechanics, fake mutation success
+  Language:
+    canonical_path: Native/Ambitions/Language
+    role: user-facing language, vocabulary, forbidden terms, and copy budgets
+    review_owner: SCG language review
+    production_behavior_owner: copy policy owner
+    forbidden: runtime state authority, visual layout ownership
+  Trust:
+    canonical_path: Native/Ambitions/Trust
+    role: Proof, Source, Privacy, History, Receipts, and explanation policy
+    review_owner: SCG trust review
+    production_behavior_owner: trust surface owner
+    forbidden: dashboard analytics, productivity score, release claims
+  Interaction:
+    canonical_path: Native/Ambitions/Interaction
+    role: gestures, keyboard, direct manipulation, and haptics
+    review_owner: SCG interaction review
+    production_behavior_owner: interaction owner
+    forbidden: domain persistence policy, copy authority
+  Rendering:
+    canonical_path: Native/Ambitions/Rendering
+    role: canvas renderers, geometry, performance probes, and semantic mirrors
+    review_owner: SCG rendering review
+    production_behavior_owner: rendering owner
+    forbidden: runtime learning policy, personal data transport
+  DesignSystem:
+    canonical_path: Native/Ambitions/DesignSystem
+    role: foundations, accessibility policies, Stage primitives, and product objects
+    review_owner: SCG design-system review
+    production_behavior_owner: design system owner
+    forbidden: route authority, persistence authority, product data mutation
+  Surfaces:
+    canonical_path: Native/Ambitions/Surfaces
+    role: Today, Goals, Time, and You root surface contracts and object views
+    review_owner: SCG surface review
+    production_behavior_owner: surface owner
+    forbidden: Surfaces/Capture, Surfaces/Motion, dashboard root anatomy
+  Composer:
+    canonical_path: Native/Ambitions/Composer/Capture
+    role: global Capture composer, routing preview, and Capture accessibility
+    review_owner: SCG composer review
+    production_behavior_owner: Capture owner
+    forbidden: Capture tab, inbox feed, chatbot shell
+  Scenarios:
+    canonical_path: Native/Ambitions/Scenarios
+    role: runtime, surface, overlay, motion, and stress scenarios
+    review_owner: SCG scenario review
+    production_behavior_owner: scenario owner
+    forbidden: production-only mutation hidden in scenario code
+  Diagnostics:
+    canonical_path: Native/Ambitions/Diagnostics
+    role: runtime, stage, render, store, and crash diagnostics
+    review_owner: SCG diagnostics review
+    production_behavior_owner: diagnostics owner
+    forbidden: user-facing readiness claims
+  Quality:
+    canonical_path: Native/Ambitions/Quality
+    role: audit harnesses, quality gates, review outputs, and proof validators
+    review_owner: SCG quality review
+    production_behavior_owner: quality owner
+    forbidden: production app behavior
+legacy_compatibility:
+  Features:
+    current_status: compatibility debt
+    rule: no new product implementation may be added here
+    migration_policy: move touched implementation toward the Final Architecture Tree or close Yellow with a named repair train
+  MotionRoot:
+    current_status: forbidden as root
+    canonical_owner: Native/Ambitions/Stage/Motion
+  CaptureRoot:
+    current_status: forbidden as root
+    canonical_owner: Native/Ambitions/Composer/Capture

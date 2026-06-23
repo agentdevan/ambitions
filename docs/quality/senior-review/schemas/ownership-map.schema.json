@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ambitions.local/schemas/ownership-map.schema.json",
+  "title": "Ambitions SCG Ownership Map",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "version", "status", "issue", "baseline_sha", "owners"],
+  "properties": {
+    "schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": ["active", "draft", "retired"]
+    },
+    "issue": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[0-9]+$"
+    },
+    "baseline_sha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "owners": {
+      "type": "object",
+      "minProperties": 14,
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["canonical_path", "role", "review_owner", "production_behavior_owner", "forbidden"],
+        "properties": {
+          "canonical_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "review_owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "production_behavior_owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "forbidden": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "legacy_compatibility": {
+      "type": "object"
+    }
+  }
+}
