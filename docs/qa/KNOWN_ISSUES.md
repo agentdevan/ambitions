@@ -16,6 +16,32 @@
 - Do not mark `Closed - verified` without proof artifacts in `docs/validation`, current screenshot/video evidence, audit output, or an explicit current testing report.
 - Visual Green, Runtime Green, and Release Green are impossible while this file has open P0 issues.
 
+## Codex remediation dossiers
+
+Runtime issue closure is governed by:
+
+- `docs/qa/remediation/2026-06-22-codex-remediation-law.md`
+- `docs/qa/remediation/dossiers/*.md`
+
+Execution bundles:
+
+| Linear bundle | Dossier | Scope |
+| -- | -- | -- |
+| AMB-1191 | `AMB-1191-theme-design-system.md` | Theme / design system |
+| AMB-1194 | `AMB-1194-shell-stage-os.md` | Shell / Stage OS |
+| AMB-1192 | `AMB-1192-capture-route-graph-composer.md` | Capture |
+| AMB-1193 | `AMB-1193-goals-root-detail.md` | Goals |
+| AMB-1195 | `AMB-1195-today-reality-window.md` | Today |
+| AMB-1196 | `AMB-1196-search-find-act-inspect.md` | Search |
+| AMB-1197 | `AMB-1197-time-native-life-calendar.md` | Time |
+| AMB-1198 | `AMB-1198-you-settings-privacy.md` | You |
+| AMB-1199 | `AMB-1199-final-proof-accessibility.md` | Final proof |
+| AMB-1200 | `AMB-1200-register-sync-control-closeout.md` | Register sync |
+
+Rule:
+
+Do not mark any issue `Closed - verified` unless the relevant dossier proof matrix is satisfied and owner acceptance is recorded.
+
 ## Current release verdict
 
 The current build is materially improved in source architecture, Time foundation, and some shell behavior, but the runtime device review still shows a shallow, prototype-feeling app. The app is not ready for TestFlight-quality dogfooding. The most severe remaining blockers are:
