@@ -7,7 +7,8 @@ enum TodayInteractionIntent: Sendable, Equatable {
     case closeStep
     case openDetail
     case openCapture
-    case openTime
+    case shapeTime
+    case protectWindow
     case runtimeMutation
 }
 
@@ -26,8 +27,10 @@ enum TodayInteractions {
             .openDetail
         case .quickLog:
             .openCapture
-        case .openTime, .protectLater:
-            .openTime
+        case .openTime:
+            .shapeTime
+        case .protectLater:
+            .protectWindow
         default:
             .runtimeMutation
         }
@@ -47,8 +50,10 @@ enum TodayInteractions {
             "Step detail opened."
         case .openCapture:
             "Capture composer opened."
-        case .openTime:
-            "Time opened."
+        case .shapeTime:
+            "Time shaping review opened."
+        case .protectWindow:
+            "Window protection review opened."
         case .runtimeMutation:
             "Today updated."
         }

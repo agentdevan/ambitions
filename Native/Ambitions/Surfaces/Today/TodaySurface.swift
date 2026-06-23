@@ -19,6 +19,8 @@ struct TodaySurface: View {
     @State var selectedActionClosure: TodayActionClosureSheetState?
     @State var selectedRejectionReasonSheet: TodayRejectionReasonSheetState?
     @State var selectedStepReplacementSheet: TodayStepReplacementSheetState?
+    @State var selectedWindowProtection: TodayWindowProtectionFlowState?
+    @State var selectedTimeShape: TodayTimeShapeFlowState?
     @State var approvedReplacementRail: AmbitionsDayRailViewState?
     #if DEBUG
     @State var debugScreenshotSheetApplied = false
@@ -46,21 +48,6 @@ struct TodaySurface: View {
         }
         .navigationTitle(showsNavigationChrome ? "Today" : "")
         .navigationBarTitleDisplayMode(dynamicTypeSize.isAccessibilitySize ? .inline : .large)
-        .toolbar {
-            if showsNavigationChrome {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        shell.commandRouter.route(
-                            to: .overlay(.commandSheet(intent: .quickCapture, entrySource: .shellUtility, presentationContext: .quickCapture)),
-                            source: .shellUtility
-                        )
-                    } label: {
-                        Label("Capture", systemImage: AppShellCaptureAccessModel.systemImage)
-                    }
-                    .accessibilityIdentifier("today.open-captures-button")
-                }
-            }
-        }
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .sheet(item: $selectedStepDetail) { detail in
             TodayStepDetailSheet(detail: detail) { action in
@@ -116,6 +103,18 @@ struct TodaySurface: View {
                     viewModel.transientMessage = sheetState.approvalReceiptMessage(for: option)
                 }
             )
+            .ambitionTheme(theme)
+        }
+        .sheet(item: $selectedWindowProtection) { flowState in
+            TodayWindowProtectionFlow(state: flowState) {
+                selectedWindowProtection = nil
+            }
+            .ambitionTheme(theme)
+        }
+        .sheet(item: $selectedTimeShape) { flowState in
+            TodayTimeShapeFlow(state: flowState) {
+                selectedTimeShape = nil
+            }
             .ambitionTheme(theme)
         }
         .onChange(of: shell.navigation.selectedTab) { _, selectedTab in

@@ -42,7 +42,7 @@ extension AmbitionsDayRailView {
     var continuityDock: some View {
         HStack(spacing: theme.spacing.sm) {
             Circle()
-                .fill(Color.green.opacity(0.82))
+                .fill(theme.colors.accentWarm.opacity(0.82))
                 .frame(width: 9, height: 9)
                 .accessibilityHidden(true)
 
@@ -87,9 +87,9 @@ extension AmbitionsDayRailView {
         case .now:
             return theme.colors.accentWarm
         case .next:
-            return Color.blue.opacity(0.78)
+            return theme.colors.accentPrimary.opacity(0.78)
         case .later:
-            return Color.purple.opacity(0.76)
+            return theme.colors.textSecondary.opacity(0.76)
         case nil:
             return nil
         }
@@ -115,13 +115,6 @@ extension AmbitionsDayRailView {
             return heroStep.subtitle
         }
         return heroStep.whySummary
-    }
-
-
-    var emptySourceLine: String {
-        state.mode == .empty
-            ? "No source change yet."
-            : "Choice stays open."
     }
 
 

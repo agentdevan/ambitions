@@ -1,11 +1,12 @@
 import AmbitionsDesignSystem
+import Foundation
 import SwiftUI
 
 extension AmbitionsDayRailView {
 
-    func mappedRowNode(index: Int, fallbackSymbol: String, fallbackColor: Color) -> some View {
+    func mappedRowNode(index: Int) -> some View {
         let row = state.rows.indices.contains(index) ? state.rows[index] : nil
-        let color = rowColor(for: row?.slot) ?? fallbackColor
+        let color = rowColor(for: row?.slot) ?? theme.colors.textSecondary.opacity(0.58)
         return HStack(spacing: theme.spacing.xs) {
             Text(row?.slot.mvpTimeLabel ?? "")
                 .font(theme.typography.caption)
@@ -13,11 +14,11 @@ extension AmbitionsDayRailView {
                 .frame(width: 42, alignment: .trailing)
             ZStack {
                 Circle()
-                    .fill(color.opacity(0.30))
+                    .fill(color.opacity(row == nil ? 0.18 : 0.30))
                     .frame(width: 32, height: 32)
-                Image(systemName: row?.slot.mvpSymbol ?? fallbackSymbol)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.90))
+                Circle()
+                    .fill(color.opacity(row == nil ? 0.46 : 0.86))
+                    .frame(width: row == nil ? 8 : 12, height: row == nil ? 8 : 12)
             }
         }
     }
@@ -81,10 +82,15 @@ extension AmbitionsDayRailView {
 
                 primaryActionButton(for: heroStep)
                     .padding(.top, theme.spacing.sm)
+
+                currentMomentActionRow(for: heroStep)
             }
 
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityAction(named: "Begin") {
+            onAction(heroStep.primaryAction)
+        }
     }
 
 
@@ -104,7 +110,7 @@ extension AmbitionsDayRailView {
                 Image(systemName: "arrow.right")
                     .font(.system(size: 18, weight: .semibold, design: .rounded))
             }
-            .foregroundStyle(.black.opacity(0.92))
+            .foregroundStyle(theme.colors.canvas)
             .padding(.horizontal, usesExpandedViewport ? theme.spacing.md : theme.spacing.lg)
             .padding(.vertical, usesExpandedViewport ? theme.spacing.sm : theme.spacing.md)
             .frame(maxWidth: .infinity)
@@ -114,7 +120,7 @@ extension AmbitionsDayRailView {
                         LinearGradient(
                             colors: [
                                 theme.colors.accentWarm.opacity(0.98),
-                                Color(red: 1.0, green: 0.72, blue: 0.24)
+                                theme.colors.accentWarm.opacity(0.72)
                             ],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
@@ -138,117 +144,68 @@ extension AmbitionsDayRailView {
                     .foregroundStyle(theme.colors.accentWarm)
                     .accessibilityIdentifier("TodayRealityRailStartHereTitle")
             }
-            Text(emptySourceLine)
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textTertiary)
             Text("No step is required right now")
                 .font(theme.typography.title.weight(.semibold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(usesExpandedViewport ? 4 : 2)
-            Text(state.contextSummary)
+            Text(noStepSummary)
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
                 .lineLimit(usesExpandedViewport ? 5 : 3)
-
-            emptyPathActions
-                .padding(.top, theme.spacing.xs)
         }
     }
 
 
-    var emptyPathActions: some View {
-        Group {
-            if usesExpandedViewport {
-                VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                    ForEach(emptyPathActionItems) { item in
-                        emptyPathActionButton(item, expands: true)
+    var noStepSummary: String {
+        let trimmed = state.contextSummary.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard trimmed.isEmpty == false else {
+            return "Open Field stays available from global Capture when something new needs a place."
+        }
+        return "\(trimmed) Open Field stays available from global Capture."
+    }
+
+
+    func currentMomentActionRow(for heroStep: DayRailHeroStepState) -> some View {
+        let availability = TodayRootActionGate.actions(for: heroStep)
+        let actions = [availability.shapeTime, availability.protectWindow, availability.recordOutcome].compactMap { $0 }
+
+        return Group {
+            if actions.isEmpty == false {
+                HStack(spacing: theme.spacing.sm) {
+                    ForEach(actions) { action in
+                        rootActionButton(action)
                     }
                 }
-            } else {
-                LazyVGrid(
-                    columns: [GridItem(.adaptive(minimum: 210), spacing: theme.spacing.sm, alignment: .leading)],
-                    alignment: .leading,
-                    spacing: theme.spacing.sm
-                ) {
-                    ForEach(emptyPathActionItems) { item in
-                        emptyPathActionButton(item, expands: true)
-                    }
-                }
+                .padding(.top, theme.spacing.sm)
+                .accessibilityElement(children: .contain)
+                .accessibilityLabel("Start here actions")
             }
         }
-        .padding(.bottom, viewportSafety.emptyActionBottomClearance)
-        .accessibilityElement(children: .contain)
-        .accessibilityLabel("Today available actions")
     }
 
 
-    func emptyPathActionButton(_ item: TodayEmptyPathAction, expands: Bool) -> some View {
+    func rootActionButton(_ action: TodayInlineAction) -> some View {
         Button {
-            onAction(item.action)
+            onAction(action)
         } label: {
-            HStack(spacing: theme.spacing.sm) {
-                Image(systemName: item.systemImage)
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-                    .frame(width: 16)
-                    .accessibilityHidden(true)
-                Text(item.title)
-                    .font(theme.typography.caption.weight(.semibold))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.78)
-            }
-            .foregroundStyle(theme.colors.textPrimary)
-            .padding(.horizontal, theme.spacing.sm)
-            .padding(.vertical, theme.spacing.xs)
-            .frame(maxWidth: expands ? .infinity : nil, alignment: .leading)
-            .background(
-                Capsule(style: .continuous)
-                    .fill(theme.colors.surfaceOverlay.opacity(0.34))
-            )
-            .overlay(
-                Capsule(style: .continuous)
-                    .stroke(theme.colors.strokeSubtle.opacity(0.72), lineWidth: 1)
-            )
+            Image(systemName: action.systemImage)
+                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .foregroundStyle(theme.colors.textPrimary)
+                .frame(width: 44, height: 44)
+                .background(
+                    Circle()
+                        .fill(theme.colors.surfaceOverlay.opacity(0.52))
+                )
+                .overlay(
+                    Circle()
+                        .stroke(theme.colors.strokeSubtle, lineWidth: 1)
+                )
         }
         .buttonStyle(.plain)
-        .accessibilityIdentifier("TodayEmptyPath.\(item.id)")
-    }
-
-
-    var emptyPathActionItems: [TodayEmptyPathAction] {
-        [
-            TodayEmptyPathAction(
-                id: "capture",
-                title: "Capture what changed",
-                systemImage: "plus.bubble",
-                action: TodayInlineAction(kind: .quickLog, title: "Capture what changed", systemImage: "plus.bubble", state: .selected, target: TodayActionTarget())
-            ),
-            TodayEmptyPathAction(
-                id: "shape-time",
-                title: "Shape Time",
-                systemImage: "calendar.badge.clock",
-                action: TodayInlineAction(kind: .openTime, title: "Shape Time", systemImage: "calendar.badge.clock", state: .default, target: TodayActionTarget())
-            ),
-            TodayEmptyPathAction(
-                id: "review-context",
-                title: "Review context",
-                systemImage: "text.magnifyingglass",
-                action: TodayInlineAction(kind: .askWhyThisMatters, title: "Review context", systemImage: "text.magnifyingglass", state: .default, target: TodayActionTarget())
-            ),
-            TodayEmptyPathAction(
-                id: "record-outcome",
-                title: "Record outcome",
-                systemImage: "checkmark.seal",
-                action: TodayInlineAction(kind: .closeActionClosure, title: "Record outcome", systemImage: "checkmark.seal", state: .default, target: TodayActionTarget())
-            ),
-            TodayEmptyPathAction(
-                id: "protect-window",
-                title: "Protect this window",
-                systemImage: "shield",
-                action: TodayInlineAction(kind: .protectLater, title: "Protect this window", systemImage: "shield", state: .default, target: TodayActionTarget())
-            )
-        ]
+        .accessibilityLabel(action.title)
+        .accessibilityIdentifier("TodayAction.\(action.kind.rawValue)")
     }
 
 
@@ -315,7 +272,7 @@ extension AmbitionsDayRailView {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
             Image(systemName: "checkmark.seal.fill")
                 .font(.system(size: 13, weight: .semibold, design: .rounded))
-                .foregroundStyle(Color.green.opacity(0.86))
+                .foregroundStyle(theme.colors.accentWarm.opacity(0.86))
                 .accessibilityHidden(true)
 
             Text(proofSummary)

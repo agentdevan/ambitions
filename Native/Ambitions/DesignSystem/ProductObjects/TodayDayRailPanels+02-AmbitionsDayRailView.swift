@@ -5,7 +5,6 @@ struct AmbitionsDayRailView: View {
     @Environment(\.ambitionTheme) var theme
     @Environment(\.dynamicTypeSize) var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) var reduceMotion
-    @State var meridianZoom: TodayMeridianZoom = .window
     let state: AmbitionsDayRailViewState
     let onAction: (TodayInlineAction) -> Void
     let onOpenStepDetail: (DayRailStepDetailState) -> Void
@@ -46,7 +45,7 @@ struct AmbitionsDayRailView: View {
                     if usesExpandedViewport {
                         accessibilityContextCrown
                     } else {
-                        todayModeSelector
+                        compactContextCrown
                             .padding(.bottom, theme.spacing.md)
                     }
 

@@ -6,9 +6,9 @@ extension AmbitionsDayRailView {
         ZStack {
             LinearGradient(
                 colors: [
-                    Color(red: 0.006, green: 0.014, blue: 0.027),
-                    Color(red: 0.010, green: 0.035, blue: 0.064),
-                    Color(red: 0.006, green: 0.010, blue: 0.018)
+                    theme.colors.canvas,
+                    theme.colors.canvasElevated.opacity(0.94),
+                    theme.colors.surfaceOverlay.opacity(0.42)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -80,7 +80,11 @@ extension AmbitionsDayRailView {
             VStack {
                 Spacer()
                 LinearGradient(
-                    colors: [.clear, theme.colors.accentWarm.opacity(0.12), .black.opacity(0.44)],
+                    colors: [
+                        .clear,
+                        theme.colors.accentWarm.opacity(0.12),
+                        theme.colors.canvas.opacity(0.52)
+                    ],
                     startPoint: .top,
                     endPoint: .bottom
                 )
@@ -98,7 +102,7 @@ extension AmbitionsDayRailView {
                 farRidge.addLine(to: CGPoint(x: size.width, y: size.height * 0.72))
                 farRidge.addLine(to: CGPoint(x: size.width, y: size.height))
                 farRidge.closeSubpath()
-                context.fill(farRidge, with: .color(.black.opacity(0.26)))
+                context.fill(farRidge, with: .color(theme.colors.surfaceOverlay.opacity(0.30)))
 
                 var nearRidge = Path()
                 nearRidge.move(to: CGPoint(x: 0, y: size.height))
@@ -109,7 +113,7 @@ extension AmbitionsDayRailView {
                 nearRidge.addLine(to: CGPoint(x: size.width, y: size.height * 0.88))
                 nearRidge.addLine(to: CGPoint(x: size.width, y: size.height))
                 nearRidge.closeSubpath()
-                context.fill(nearRidge, with: .color(.black.opacity(0.48)))
+                context.fill(nearRidge, with: .color(theme.colors.canvasElevated.opacity(0.54)))
             }
             .frame(height: 260)
             .allowsHitTesting(false)
@@ -162,7 +166,7 @@ extension AmbitionsDayRailView {
     func onDeviceSignal(font: Font, dotSize: CGFloat) -> some View {
         HStack(spacing: theme.spacing.xs) {
             Circle()
-                .fill(Color.green.opacity(0.90))
+                .fill(theme.colors.accentWarm.opacity(0.90))
                 .frame(width: dotSize, height: dotSize)
                 .accessibilityHidden(true)
             Text("On-device")
@@ -171,19 +175,6 @@ extension AmbitionsDayRailView {
                 .lineLimit(1)
         }
         .accessibilityLabel("On-device")
-    }
-
-
-    var todayModeSelector: some View {
-        Picker("Today mode", selection: $meridianZoom) {
-            ForEach(TodayMeridianZoom.allCases, id: \.self) { zoom in
-                Text(zoom.title).tag(zoom)
-            }
-        }
-        .pickerStyle(.segmented)
-        .accessibilityIdentifier("TodayRealityMeridianModeSelector")
-        .accessibilityLabel("Today mode")
-        .accessibilityHint("Switches between the recommended step and the day meridian.")
     }
 
 
@@ -213,13 +204,13 @@ extension AmbitionsDayRailView {
             verticalSegment(height: 58)
             timeTick(timeLabel(offsetHours: 2, from: date), prominent: false)
             verticalSegment(height: 72)
-            mappedRowNode(index: 0, fallbackSymbol: "person.2.fill", fallbackColor: Color.blue.opacity(0.75))
+            mappedRowNode(index: 0)
             verticalSegment(height: 56)
             timeTick(timeLabel(offsetHours: 5, from: date), prominent: false)
             verticalSegment(height: 46)
-            mappedRowNode(index: 1, fallbackSymbol: "person.2.fill", fallbackColor: Color.green.opacity(0.76))
+            mappedRowNode(index: 1)
             verticalSegment(height: 54)
-            mappedRowNode(index: 2, fallbackSymbol: "doc.text.fill", fallbackColor: Color.purple.opacity(0.76))
+            mappedRowNode(index: 2)
             verticalSegment(height: 34)
             timeTick(timeLabel(offsetHours: 8, from: date), prominent: false)
         }
@@ -238,11 +229,11 @@ extension AmbitionsDayRailView {
             verticalSegment(height: 38)
             compactRailNode(color: theme.colors.accentWarm, size: 18, halo: true)
             verticalSegment(height: 52)
-            compactRailNode(color: Color.blue.opacity(0.78), size: 14)
+            compactRailNode(color: theme.colors.textSecondary.opacity(0.72), size: 14)
             verticalSegment(height: 44)
-            compactRailNode(color: Color.green.opacity(0.76), size: 13)
+            compactRailNode(color: theme.colors.textSecondary.opacity(0.64), size: 13)
             verticalSegment(height: 42)
-            compactRailNode(color: Color.purple.opacity(0.76), size: 13)
+            compactRailNode(color: theme.colors.textSecondary.opacity(0.56), size: 13)
         }
         .frame(width: 28, alignment: .center)
     }
@@ -295,11 +286,6 @@ extension AmbitionsDayRailView {
                     .foregroundStyle(theme.colors.accentWarm)
                     .lineLimit(1)
                     .minimumScaleFactor(0.62)
-                Text("Live now")
-                    .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(theme.colors.accentWarm)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.72)
             }
             .frame(width: 64, alignment: .trailing)
 
@@ -317,5 +303,6 @@ extension AmbitionsDayRailView {
             }
         }
         .accessibilityIdentifier("TodayRealityRailLiveNow")
+        .accessibilityLabel("Current time \(date.formatted(.dateTime.hour().minute()))")
     }
 }

@@ -154,15 +154,10 @@ extension TodaySurface {
                 source: .todayQuickCapture,
                 presentationContext: .quickCapture
             )
-        case .openTime:
-            shell.commandRouter.route(to: .tab(.time), source: .shellUtility)
-            if action.kind == .protectLater {
-                viewModel.transientMessage = TodayInlineMessage(
-                    title: "Opened Time",
-                    body: "Today handed this off to the canonical planning surface instead of creating a second recovery system here.",
-                    state: .selected
-                )
-            }
+        case .shapeTime:
+            selectedTimeShape = timeShapeFlowState(for: action)
+        case .protectWindow:
+            selectedWindowProtection = windowProtectionFlowState(for: action)
         case .runtimeMutation:
             Task {
                 await viewModel.handle(
@@ -217,6 +212,38 @@ extension TodaySurface {
             )
         }
         return fallback
+    }
+
+
+    func windowProtectionFlowState(for action: TodayInlineAction) -> TodayWindowProtectionFlowState {
+        guard let rail = currentDisplayRail(), let hero = rail.heroStep else {
+            return TodayWindowProtectionFlowState.unavailable(
+                title: "No window to protect",
+                message: "Today does not have a current step and plausible window to protect right now.",
+                target: action.target
+            )
+        }
+        return TodayWindowProtectionFlowState.available(
+            stepTitle: rail.privacyProjection.detailTitle(hero.title),
+            windowSummary: rail.contextSummary,
+            target: action.target
+        )
+    }
+
+
+    func timeShapeFlowState(for action: TodayInlineAction) -> TodayTimeShapeFlowState {
+        guard let rail = currentDisplayRail(), let hero = rail.heroStep else {
+            return TodayTimeShapeFlowState.unavailable(
+                title: "Nothing to shape",
+                message: "Today has no current step to place or reshape right now.",
+                target: action.target
+            )
+        }
+        return TodayTimeShapeFlowState.contextual(
+            stepTitle: rail.privacyProjection.detailTitle(hero.title),
+            windowSummary: rail.contextSummary,
+            target: action.target
+        )
     }
 
 
