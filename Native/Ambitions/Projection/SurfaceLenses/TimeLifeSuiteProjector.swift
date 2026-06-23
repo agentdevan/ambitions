@@ -9,6 +9,7 @@ extension TimeLifeSuiteProjector {
         calendarAwareness: TimeCalendarAwarenessState,
         openCaptureCount: Int,
         activeGoalCount: Int,
+        placementCandidates: [TimePlacementCandidate] = [],
         mode: TimeSurfaceMode
     ) -> TimeLifeSuiteState {
         let shapes = [
@@ -32,6 +33,7 @@ extension TimeLifeSuiteProjector {
                 calendarAwareness: calendarAwareness,
                 openCaptureCount: openCaptureCount,
                 activeGoalCount: activeGoalCount,
+                placementCandidates: placementCandidates,
                 mode: mode
             ),
             drillDown: lifeShapeDrillDown(

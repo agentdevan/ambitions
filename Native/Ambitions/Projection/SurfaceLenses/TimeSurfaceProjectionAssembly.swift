@@ -22,6 +22,10 @@ extension RepositoryBackedTimeService {
             missingGoalSummaries: missingGoalSummaries,
             now: now
         )
+        let placementCandidates = makePlacementCandidates(
+            weekContexts: weekContexts,
+            openCaptures: openCaptures
+        )
         let posture = postureState(
             evaluations: activeGoalSummaries.compactMap(\.evaluation),
             blockedCount: blockedDrafts.count,
@@ -45,6 +49,7 @@ extension RepositoryBackedTimeService {
             calendarAwareness: calendarAwareness,
             openCaptureCount: openCaptures.count,
             activeGoalCount: activeGoals.count,
+            placementCandidates: placementCandidates,
             mode: mode
         )
         let hero = makeHero(

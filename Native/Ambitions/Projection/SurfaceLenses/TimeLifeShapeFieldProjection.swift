@@ -8,6 +8,7 @@ extension TimeLifeSuiteProjector {
         calendarAwareness: TimeCalendarAwarenessState,
         openCaptureCount: Int,
         activeGoalCount: Int,
+        placementCandidates: [TimePlacementCandidate] = [],
         mode: TimeSurfaceMode
     ) -> LifeShapeFieldState {
         let day = shapes.first { $0.kind == .day }
@@ -52,6 +53,10 @@ extension TimeLifeSuiteProjector {
             protectedBlocks: protectedBlocks,
             mode: mode
         )
+        let placementCandidate = placementCandidates.first
+        let placementUnavailableReason = placementCandidate == nil
+            ? "Create or select a Step before placing time."
+            : "Placement is available for \(placementCandidate?.title ?? "this Step")."
 
         return LifeShapeFieldState(
             defaultHorizon: .week,
@@ -59,7 +64,9 @@ extension TimeLifeSuiteProjector {
             segments: [
                 LifeShapeSegment(
                     kind: .openTime,
-                    detail: openDays == 1 ? "1 day still has room." : "\(openDays) days still have room.",
+                    detail: placementCandidate == nil
+                        ? "Open windows stay visible; no Step is selected for placement."
+                        : "Open windows can place \(placementCandidate?.title ?? "the selected Step").",
                     valueLabel: openDays == 1 ? "1 open day" : "\(openDays) open days",
                     weight: weekDays.isEmpty ? 0 : Double(openDays) / Double(weekDays.count),
                     visualState: openDays > 0 ? .selected : .default
@@ -142,6 +149,23 @@ extension TimeLifeSuiteProjector {
 	                    sourceDetail: life?.provenanceLabel ?? sourceDetail
 	                )
 	            ],
+            placementCandidate: placementCandidate,
+            placementUnavailableReason: placementUnavailableReason,
+            calendarRows: Self.calendarRows(
+                weekDays: weekDays,
+                readings: [
+                    .day: day,
+                    .week: week,
+                    .month: life,
+                    .year: life
+                ],
+                capacityFit: capacityFit,
+                pressureKind: pressureKind,
+                openDays: openDays,
+                protectedBlocks: protectedBlocks,
+                activeGoalCount: activeGoalCount,
+                placementCandidate: placementCandidate
+            ),
             sourceState: LifeShapeSourceState(
                 title: sourceTitle,
                 detail: sourceDetail,
@@ -171,6 +195,143 @@ extension TimeLifeSuiteProjector {
 
     static func countLabel(_ count: Int, singular: String, plural: String) -> String {
         "\(count) \(count == 1 ? singular : plural)"
+    }
+
+    static func calendarRows(
+        weekDays: [TimeElasticWeekDayState],
+        readings: [TimeHorizon: TimeLifeSuiteShapeState?],
+        capacityFit: LifeShapeCapacityFit,
+        pressureKind: PressureKind,
+        openDays: Int,
+        protectedBlocks: Int,
+        activeGoalCount: Int,
+        placementCandidate: TimePlacementCandidate?
+    ) -> [TimeCalendarRow] {
+        let dayShape = readings[.day] ?? nil
+        let weekShape = readings[.week] ?? nil
+        let monthShape = readings[.month] ?? nil
+        let fixedLabel = protectedBlocks == 0 ? "None marked" : countLabel(protectedBlocks, singular: "anchor", plural: "anchors")
+        let openLabel = openDays == 1 ? "1 open day" : "\(openDays) open days"
+        let placementDetail = placementCandidate.map { "Placement candidate: \($0.title)." } ?? "Placement waits for a real Step."
+        return [
+            TimeCalendarRow(
+                id: "time.calendar.now",
+                kind: .now,
+                title: "Now",
+                value: dayShape?.title ?? "Today",
+                detail: dayShape?.summary ?? "Current day stays first.",
+                visualState: .selected,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.fixed-point",
+                kind: .fixedPoint,
+                title: "Next fixed point",
+                value: fixedLabel,
+                detail: protectedBlocks == 0 ? "No fixed point is loaded locally." : "Fixed and protected anchors are visible before placement.",
+                visualState: protectedBlocks == 0 ? .default : .selected,
+                isOperational: protectedBlocks > 0
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.open-window",
+                kind: .openWindow,
+                title: "Open windows",
+                value: openLabel,
+                detail: placementDetail,
+                visualState: openDays > 0 ? .selected : .warning,
+                isOperational: openDays > 0 && placementCandidate != nil
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.protected-window",
+                kind: .protectedWindow,
+                title: "Protected windows",
+                value: protectedBlocks == 0 ? "None" : "\(protectedBlocks)",
+                detail: protectedBlocks == 0 ? "Protection can be added from an explicit Time action." : "Protected windows block fake placement.",
+                visualState: protectedBlocks == 0 ? .default : .selected,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.pressure",
+                kind: .pressure,
+                title: "Pressure",
+                value: pressureKind.title,
+                detail: capacityFit.title,
+                visualState: capacityFit.visualState,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.buffer",
+                kind: .buffer,
+                title: "Buffer",
+                value: capacityFit == .tight || capacityFit == .overloaded ? "Review" : "Room",
+                detail: "Transition room stays visible before broad reflow.",
+                visualState: capacityFit.visualState,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.recovery",
+                kind: .recovery,
+                title: "Recovery",
+                value: capacityFit == .open ? "Open" : "Guarded",
+                detail: "Recovery remains a labeled capacity signal.",
+                visualState: capacityFit == .open ? .selected : .default,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.goal-load",
+                kind: .goalLoad,
+                title: "Goal load",
+                value: activeGoalCount == 1 ? "1 goal" : "\(activeGoalCount) goals",
+                detail: activeGoalCount == 0 ? "No active goal is asking for Time." : "Goal-linked Steps can become placement candidates.",
+                visualState: activeGoalCount == 0 ? .default : .selected,
+                isOperational: activeGoalCount > 0
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.day",
+                kind: .day,
+                title: "Day",
+                value: dayShape?.capacityLabel ?? "Current",
+                detail: dayShape?.summary ?? "Day view is available.",
+                visualState: .selected,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.week",
+                kind: .week,
+                title: "Week",
+                value: weekShape?.capacityLabel ?? "Current",
+                detail: weekShape?.summary ?? "Week view is available.",
+                visualState: .selected,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.month",
+                kind: .month,
+                title: "Month",
+                value: monthShape?.capacityLabel ?? "Staged",
+                detail: monthShape?.summary ?? "Month remains directional from local state.",
+                visualState: .default,
+                isOperational: monthShape != nil
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.year",
+                kind: .year,
+                title: "Year",
+                value: monthShape?.capacityLabel ?? "Staged",
+                detail: monthShape?.summary ?? "Year remains directional from local state.",
+                visualState: .default,
+                isOperational: monthShape != nil
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.list",
+                kind: .list,
+                title: "List",
+                value: "Equivalent",
+                detail: "Rows expose the same calendar signals for VoiceOver and large text.",
+                visualState: .selected,
+                isOperational: true
+            )
+        ]
     }
 
     static func weekCapacityStatement(

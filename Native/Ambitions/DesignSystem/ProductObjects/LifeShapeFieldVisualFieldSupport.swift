@@ -1,19 +1,6 @@
 import SwiftUI
 
 extension LifeShapeLayer {
-    var tint: Color {
-        switch self {
-        case .open:
-            Color(red: 0.48, green: 0.95, blue: 0.60)
-        case .protected:
-            Color(red: 0.28, green: 0.58, blue: 1.0)
-        case .pressure:
-            Color(red: 1.0, green: 0.55, blue: 0.20)
-        case .buffer:
-            Color(red: 0.68, green: 0.38, blue: 1.0)
-        }
-    }
-
     var sweepDegrees: Double {
         switch self {
         case .open:

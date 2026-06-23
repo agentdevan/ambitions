@@ -5,11 +5,12 @@ extension LifeShapeProjection {
         _ field: LifeShapeFieldState,
         selectedMark: LifeShapeSemanticMark?,
         preferredLayer: LifeShapeLayer,
+        placementCandidate: TimePlacementCandidate? = nil,
         now: Date
     ) throws -> LifeShapeProjection {
         let marks = orderedMarks(field.semanticMarks, selectedMark: selectedMark, preferredLayer: preferredLayer)
         let buckets = try marks.enumerated().map { index, mark in
-            try bucket(from: mark, field: field, now: now, index: index)
+            try bucket(from: mark, field: field, placementCandidate: placementCandidate, now: now, index: index)
         }
         let nowBucketID = buckets.first?.id
         let row = LifeShapeHorizonRow(
@@ -79,6 +80,7 @@ extension LifeShapeProjection {
     private static func bucket(
         from mark: LifeShapeSemanticMark,
         field: LifeShapeFieldState,
+        placementCandidate: TimePlacementCandidate?,
         now: Date,
         index: Int
     ) throws -> LifeShapeBucket {
@@ -120,7 +122,8 @@ extension LifeShapeProjection {
                 accessibilitySummary: mark.accessibilitySummary
             ),
             protectedBoundary: protectedBoundary,
-            primaryAction: layer == .open
+            recommendedStepID: layer == .open ? placementCandidate?.stepID : nil,
+            primaryAction: layer == .open && placementCandidate?.isRealStep == true
                 ? LifeShapePrimaryAction(id: "lifeshape.action.place-step.\(mark.id)", title: "Place Step", actionKind: TimeMutationActionKind.placeStep.rawValue)
                 : nil,
             correctionOptions: [
@@ -129,7 +132,9 @@ extension LifeShapeProjection {
             ],
             derivation: derivation,
             confidence: LifeShapeConfidence(level: .grounded, explanation: "Mutation target came from a visible LifeShape Field mark."),
-            accessibilitySummary: mark.accessibilitySummary
+            accessibilitySummary: layer == .open && placementCandidate == nil
+                ? "\(mark.accessibilitySummary) Placement waits for a real Step."
+                : mark.accessibilitySummary
         )
     }
 

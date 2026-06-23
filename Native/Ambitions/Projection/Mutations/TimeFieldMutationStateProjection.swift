@@ -88,6 +88,16 @@ extension LifeShapeFieldState {
                 .month: reading(for: .month),
                 .year: reading(for: .year)
             ],
+            placementCandidate: timeMutation.actionKind == .placeStep ? nil : placementCandidate,
+            placementUnavailableReason: timeMutation.actionKind == .placeStep
+                ? "Step was placed in this local Time window."
+                : placementUnavailableReason,
+            calendarRows: Self.calendarRows(
+                after: after,
+                actionKind: timeMutation.actionKind,
+                fit: fit,
+                placementCandidate: timeMutation.actionKind == .placeStep ? nil : placementCandidate
+            ),
             sourceState: sourceState,
             reflowProposal: LifeShapeReflowProposal(
                 title: runtimeMutation.stageMutation.visibleUserFacingChange,
@@ -137,6 +147,64 @@ extension LifeShapeFieldState {
             )
         )
         return marks
+    }
+
+    static func calendarRows(
+        after projection: LifeShapeProjection,
+        actionKind: TimeMutationActionKind,
+        fit: LifeShapeCapacityFit,
+        placementCandidate: TimePlacementCandidate?
+    ) -> [TimeCalendarRow] {
+        let openCount = projection.todayBuckets.filter { $0.layer == .open }.count
+        let protectedCount = projection.todayBuckets.filter { $0.layer == .protected || $0.protectedBoundary != nil }.count
+        let placedStep = projection.todayBuckets.first { $0.recommendedStepID != nil }?.recommendedStepID
+        return [
+            TimeCalendarRow(
+                id: "time.calendar.now",
+                kind: .now,
+                title: "Now",
+                value: actionKind.visibleChange,
+                detail: projection.primaryCaption,
+                visualState: .selected,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.open-window",
+                kind: .openWindow,
+                title: "Open windows",
+                value: "\(openCount)",
+                detail: placedStep.map { "Placed Step \($0)." } ?? (placementCandidate.map { "Placement candidate: \($0.title)." } ?? "Placement waits for a real Step."),
+                visualState: openCount == 0 ? .warning : .selected,
+                isOperational: openCount > 0 && placementCandidate != nil
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.protected-window",
+                kind: .protectedWindow,
+                title: "Protected windows",
+                value: "\(protectedCount)",
+                detail: protectedCount == 0 ? "No protected window is active." : "Protected windows are part of the local Time state.",
+                visualState: protectedCount == 0 ? .default : .selected,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.pressure",
+                kind: .pressure,
+                title: "Pressure",
+                value: fit.title,
+                detail: projection.semanticSummary,
+                visualState: fit.visualState,
+                isOperational: true
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.list",
+                kind: .list,
+                title: "List",
+                value: "Equivalent",
+                detail: "Rows expose the current Time state for VoiceOver and large text.",
+                visualState: .selected,
+                isOperational: true
+            )
+        ]
     }
 }
 

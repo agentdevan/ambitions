@@ -247,10 +247,17 @@ struct LifeShapeFieldState: Sendable, Hashable {
     let semanticMarks: [LifeShapeSemanticMark]
     let renderState: LifeShapeRenderState
     let readings: [TimeHorizon: LifeShapeReading]
+    let placementCandidate: TimePlacementCandidate?
+    let placementUnavailableReason: String
+    let calendarRows: [TimeCalendarRow]
     let sourceState: LifeShapeSourceState
     let reflowProposal: LifeShapeReflowProposal
     let receipt: LifeShapeReceipt
     let continuityDockItems: [String]
+
+    var canPlaceStep: Bool {
+        placementCandidate?.isRealStep == true
+    }
 
     func reading(for horizon: TimeHorizon) -> LifeShapeReading {
         readings[horizon] ?? readings[defaultHorizon] ?? LifeShapeReading(

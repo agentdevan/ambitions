@@ -26,7 +26,7 @@ struct LifeShapeMutationProofBanner: View {
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Text("\(mutation.stageMutation.proofArtifact.label) · \(mutation.stageMutation.receipt.inspectionLabel) · \(mutation.stageMutation.hapticIntent)")
+                Text("Local change saved. Undo is available here.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textTertiary)
                     .fixedSize(horizontal: false, vertical: true)

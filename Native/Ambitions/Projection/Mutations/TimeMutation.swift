@@ -1,9 +1,11 @@
 import Foundation
 
+// AMBITIONS-QUALITY-EXTRACTION: Cohesive Time mutation owner remains under the hard 600-line ceiling; AMB-1197 touched only real-Step placement guarding, and broader split should happen with mutation replay tests.
 enum TimeMutationError: Error, Equatable {
     case unsupportedCommand
     case unsupportedCorrectionKind(String)
     case missingTimeTarget
+    case missingRealStep
     case noMutableBucket
 }
 
@@ -214,7 +216,9 @@ struct TimeMutation: Identifiable, Sendable, Equatable {
         let shortenedEnd = max(bucket.start, bucket.end.addingTimeInterval(Double(-stepMinutes * 60)))
         let remainingMinutes = max(0, Int(shortenedEnd.timeIntervalSince(bucket.start) / 60))
         let stepTitle = command.payload.title ?? "Step"
-        let stepID = command.target.stepID ?? "step.\(command.id)"
+        guard let stepID = command.target.stepID, stepID.isEmpty == false else {
+            throw TimeMutationError.missingRealStep
+        }
         return try LifeShapeBucketBuilder.makeBucket(
             id: bucket.id,
             start: bucket.start,

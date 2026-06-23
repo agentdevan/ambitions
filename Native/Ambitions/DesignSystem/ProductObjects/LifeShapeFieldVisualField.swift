@@ -15,6 +15,7 @@ struct LifeShapeFieldVisualField: View {
     let selectedMarks: [LifeShapeSemanticMark]
     let selectedMark: LifeShapeSemanticMark?
     let primaryActionTitle: String
+    let primaryActionEnabled: Bool
     let displayedRenderState: LifeShapeRenderState
     let onSelectMark: (LifeShapeSemanticMark) -> Void
     let onPrimaryAction: () -> Void
@@ -31,7 +32,7 @@ struct LifeShapeFieldVisualField: View {
             horizonStrip
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("LifeShape Field")
+        .accessibilityLabel("Life Calendar")
         .accessibilityValue(accessibilityValue)
         .accessibilityIdentifier("time.life-shape-field.primary-object")
     }
@@ -53,7 +54,7 @@ struct LifeShapeFieldVisualField: View {
                 )
         }
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("LifeShape visual field")
+        .accessibilityLabel("Calendar field")
         .accessibilityValue(accessibilityValue)
         .accessibilityIdentifier("time.life-shape-field.visual-stage")
     }
@@ -65,7 +66,7 @@ struct LifeShapeFieldVisualField: View {
 
             LinearGradient(
                 colors: [
-                    selectedLayer.tint.opacity(reduceTransparency ? 0.24 : 0.14),
+                    selectedLayerTint.opacity(reduceTransparency ? 0.24 : 0.14),
                     theme.colors.canvasElevated.opacity(reduceTransparency ? 0.48 : 0.30),
                     theme.colors.canvas.opacity(reduceTransparency ? 0.98 : 0.84)
                 ],
@@ -91,7 +92,7 @@ struct LifeShapeFieldVisualField: View {
             VStack(alignment: .leading, spacing: theme.spacing.xxs) {
                 Text(selectedLayer.title)
                     .font(.system(size: isAccessibilitySize ? 33 : 30, weight: .semibold))
-                    .foregroundStyle(selectedLayer.tint)
+                    .foregroundStyle(selectedLayerTint)
                     .lineLimit(1)
                     .minimumScaleFactor(0.70)
 
@@ -160,7 +161,7 @@ struct LifeShapeFieldVisualField: View {
 
             LinearGradient(
                 colors: [
-                    selectedLayer.tint.opacity(reduceTransparency ? 0.20 : 0.10),
+                    selectedLayerTint.opacity(reduceTransparency ? 0.20 : 0.10),
                     theme.colors.canvasElevated.opacity(0.22),
                     theme.colors.canvas.opacity(0.56)
                 ],
@@ -180,7 +181,7 @@ struct LifeShapeFieldVisualField: View {
 
     @ViewBuilder
     private func fieldBand(segment: LifeShapeSegment, index: Int, size: CGSize) -> some View {
-        let tint = segment.kind.instrumentLayer.tint
+        let tint = layerTint(segment.kind.instrumentLayer)
         let bandHeight = max(size.height * 0.075, 22)
         let topOffset = size.height * 0.33
         let verticalStep = bandHeight * 1.34
@@ -234,23 +235,23 @@ struct LifeShapeFieldVisualField: View {
         let x = size.width * 0.58
         return ZStack {
             Rectangle()
-                .fill(selectedLayer.tint.opacity(colorSchemeContrast == .increased ? 0.82 : 0.48))
+                .fill(selectedLayerTint.opacity(colorSchemeContrast == .increased ? 0.82 : 0.48))
                 .frame(width: colorSchemeContrast == .increased ? 2 : 1, height: size.height * 0.58)
                 .position(x: x, y: size.height * 0.53)
 
             Circle()
-                .fill(selectedLayer.tint)
+                .fill(selectedLayerTint)
                 .frame(width: 12, height: 12)
                 .overlay {
                     Circle()
                         .stroke(theme.colors.textPrimary.opacity(0.66), lineWidth: 1)
                 }
-                .shadow(color: selectedLayer.tint.opacity(reduceTransparency ? 0 : 0.46), radius: 14, x: 0, y: 0)
+                .shadow(color: selectedLayerTint.opacity(reduceTransparency ? 0 : 0.46), radius: 14, x: 0, y: 0)
                 .position(x: x, y: size.height * 0.42)
 
             Text("Now")
                 .font(theme.typography.micro.weight(.semibold))
-                .foregroundStyle(selectedLayer.tint)
+                .foregroundStyle(selectedLayerTint)
                 .textCase(.uppercase)
                 .position(x: x, y: size.height * 0.19)
         }
@@ -282,7 +283,7 @@ struct LifeShapeFieldVisualField: View {
     private var instrumentStroke: some View {
         RoundedRectangle(cornerRadius: 8, style: .continuous)
             .stroke(
-                selectedLayer.tint.opacity(colorSchemeContrast == .increased ? 0.74 : 0.36),
+                selectedLayerTint.opacity(colorSchemeContrast == .increased ? 0.74 : 0.36),
                 lineWidth: colorSchemeContrast == .increased ? 1.5 : 1
             )
     }
@@ -290,11 +291,11 @@ struct LifeShapeFieldVisualField: View {
     private var selectedBucket: some View {
         HStack(alignment: .center, spacing: theme.spacing.sm) {
             Circle()
-                .stroke(selectedLayer.tint, lineWidth: 1.3)
+                .stroke(selectedLayerTint, lineWidth: 1.3)
                 .frame(width: 18, height: 18)
                 .overlay {
                     Circle()
-                        .fill(selectedLayer.tint.opacity(0.74))
+                        .fill(selectedLayerTint.opacity(0.74))
                         .frame(width: 7, height: 7)
                 }
                 .accessibilityHidden(true)
@@ -305,7 +306,7 @@ struct LifeShapeFieldVisualField: View {
                     .foregroundStyle(theme.colors.textPrimary)
                     .lineLimit(1)
                     .minimumScaleFactor(0.72)
-                Text(selectedLayer.cardDetail(reading: reading, mark: selectedMark).humanRootCopy)
+                Text(selectedLayerDetail)
                     .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
@@ -323,8 +324,10 @@ struct LifeShapeFieldVisualField: View {
                     .padding(.horizontal, theme.spacing.sm)
             }
             .buttonStyle(.plain)
-            .foregroundStyle(selectedLayer.tint)
+            .foregroundStyle(primaryActionEnabled ? selectedLayerTint : theme.colors.textTertiary)
+            .disabled(primaryActionEnabled == false)
             .accessibilityIdentifier("time.life-shape-field.primary-action")
+            .accessibilityHint(primaryActionEnabled ? "Applies this local Time change." : field.placementUnavailableReason)
         }
         .padding(theme.spacing.sm)
         .background {
@@ -333,7 +336,7 @@ struct LifeShapeFieldVisualField: View {
         }
         .overlay {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
-                .stroke(selectedLayer.tint.opacity(colorSchemeContrast == .increased ? 0.72 : 0.34), lineWidth: 1)
+                .stroke(selectedLayerTint.opacity(colorSchemeContrast == .increased ? 0.72 : 0.34), lineWidth: 1)
         }
     }
 
@@ -341,9 +344,9 @@ struct LifeShapeFieldVisualField: View {
         VStack(spacing: 0) {
             ForEach(horizonRows) { row in
                 HStack(spacing: theme.spacing.sm) {
-                    Image(systemName: row.symbol)
+                    Image(systemName: row.kind.systemImage)
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(row.color)
+                        .foregroundStyle(theme.stateStyle(for: row.visualState).accent)
                         .frame(width: 24)
                     Text(row.title)
                         .font(theme.typography.caption.weight(.semibold))
@@ -378,7 +381,7 @@ struct LifeShapeFieldVisualField: View {
         }
         .accessibilityElement(children: .combine)
         .accessibilityLabel("Time horizons")
-        .accessibilityValue(horizonRows.map { "\($0.title), \($0.value)" }.joined(separator: ". "))
+        .accessibilityValue(horizonRows.map(\.accessibilitySummary).joined(separator: ". "))
         .accessibilityIdentifier("time.life-shape-field.horizon-strip")
     }
 
@@ -387,6 +390,7 @@ struct LifeShapeFieldVisualField: View {
             reading.accessibilitySummary,
             selectedMark?.accessibilitySummary,
             "\(selectedLayer.title) layer selected.",
+            selectedLayer == .open && field.canPlaceStep == false ? field.placementUnavailableReason : nil,
             field.sourceState.privacyLabel
         ]
             .compactMap { $0 }
@@ -419,15 +423,22 @@ struct LifeShapeFieldVisualField: View {
         }
     }
 
-    private var horizonRows: [LifeShapeVisualHorizonRow] {
-        let day = field.reading(for: .day)
-        let week = field.reading(for: .week)
-        let month = field.reading(for: .month)
-        return [
-            LifeShapeVisualHorizonRow(title: "Today", value: day.capacityStatement.humanHorizonValue, symbol: "sun.max", color: LifeShapeLayer.open.tint),
-            LifeShapeVisualHorizonRow(title: "This week", value: week.capacityStatement.humanHorizonValue, symbol: "calendar", color: LifeShapeLayer.protected.tint),
-            LifeShapeVisualHorizonRow(title: "Rest of month", value: month.capacityStatement.humanHorizonValue, symbol: "circle.dotted", color: LifeShapeLayer.buffer.tint)
+    private var horizonRows: [TimeCalendarRow] {
+        let preferredIDs = [
+            "time.calendar.now",
+            "time.calendar.fixed-point",
+            "time.calendar.open-window",
+            "time.calendar.protected-window",
+            "time.calendar.pressure",
+            "time.calendar.buffer",
+            "time.calendar.day",
+            "time.calendar.week",
+            "time.calendar.month",
+            "time.calendar.year",
+            "time.calendar.list"
         ]
+        let byID = Dictionary(uniqueKeysWithValues: field.calendarRows.map { ($0.id, $0) })
+        return preferredIDs.compactMap { byID[$0] }.prefix(isAccessibilitySize ? 11 : 6).map { $0 }
     }
 
     private var nowAnchorLabel: String {
@@ -462,7 +473,7 @@ struct LifeShapeFieldVisualField: View {
     private var selectedWindowLabel: String {
         switch selectedLayer {
         case .open:
-            return "Open time"
+            return field.placementCandidate?.title ?? "No Step selected"
         case .protected:
             return protectedBoundaryLabel
         case .pressure:
@@ -471,12 +482,28 @@ struct LifeShapeFieldVisualField: View {
             return "Add buffer"
         }
     }
-}
 
-private struct LifeShapeVisualHorizonRow: Identifiable {
-    let id = UUID()
-    let title: String
-    let value: String
-    let symbol: String
-    let color: Color
+    private var selectedLayerDetail: String {
+        if selectedLayer == .open, field.canPlaceStep == false {
+            return field.placementUnavailableReason
+        }
+        return selectedLayer.cardDetail(reading: reading, mark: selectedMark).humanRootCopy
+    }
+
+    private var selectedLayerTint: Color {
+        layerTint(selectedLayer)
+    }
+
+    private func layerTint(_ layer: LifeShapeLayer) -> Color {
+        switch layer {
+        case .open:
+            theme.stateStyle(for: .success).accent
+        case .protected:
+            theme.stateStyle(for: .selected).accent
+        case .pressure:
+            theme.stateStyle(for: .warning).accent
+        case .buffer:
+            theme.stateStyle(for: .default).accent
+        }
+    }
 }

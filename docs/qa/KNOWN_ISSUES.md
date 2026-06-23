@@ -51,7 +51,7 @@ The current build is materially improved in source architecture, Time foundation
 3. **Light mode has AMB-1191 source repairs for theme preference, semantic foundation tokens, dock material, and live appearance propagation, but current Light/System/Dark device proof is still missing.**
 4. **Search exists visually but is not functionally useful and needs a complete rebuild.**
 5. **Today still contains confusing toggles, status phrases, and context actions that do not belong in the primary Today object.**
-6. **Time improved but still does not communicate a usable LifeShape Field. It can place a step when no real user-created step or goal exists.**
+6. **Time has AMB-1197 source/test repairs for native Life Calendar semantics and real-step-only placement, but current device screenshot proof is still missing.**
 7. **Shell chrome has AMB-1194 source repairs for icon-only floating root buttons, root header subtitle cleanup, invisible rail coordination, and reduced root dock clearance, but current screenshot/device proof is still missing.**
 8. **The app is still shallow: most drilldowns are slide-up cards rather than mature full-screen surfaces.**
 
@@ -80,7 +80,7 @@ The current build is materially improved in source architecture, Time foundation
 | `AMB-ISSUE-0014` | Quality | **Still open** | Proof artifacts remain insufficient for release-quality closure. | Device review did not include tests/audits. | ShellChrome, SafeArea, ForbiddenLanguage, DynamicType, MotionReduction, VisualRegression, RealDevice outputs. |
 | `AMB-ISSUE-0016` | Whole app | **Source-repaired candidate for Today slice / runtime proof pending** | AMB-1195 repairs Today root action gating, removes no-step CTA menu behavior, and adds focused Today flow contracts; whole-app runtime proof remains pending. | Tester notes across Today, Goals, Time, You, Search; AMB-1195 source/action-gating proof. | Current scenario matrix plus before/after mutation proof. |
 | `AMB-ISSUE-0806` | Shell | **Source-repaired candidate / runtime proof pending** | AMB-1194 removes the visible dock container/backdrop, overlays the root rail on the full-bleed Stage, reserves content clearance through `StageSafeAreaPolicy`, and removes root shell subtitles exposing internal object names. | Prior runtime evidence: `IMG_8475`–`IMG_8499`; AMB-1194 source/test proof. | Full-bleed shell screenshot matrix. |
-| `AMB-ISSUE-0913` | Time / Trust | **Still present — runtime verified** | Time mutation feedback may expose proof/receipt/haptic-style metadata or imply fake mutation success. | `IMG_8481`, `IMG_8482`, `IMG_8490`; tester clicked Place Step and got step placed without a real step. | Mutation source trace + UI copy audit + no-fake-step proof. |
+| `AMB-ISSUE-0913` | Time / Trust | **Source-repaired candidate / runtime proof pending** | AMB-1197 removes raw proof/receipt/haptic metadata from root Time mutation feedback and blocks fake Place Step when no real eligible Step exists. | `IMG_8481`, `IMG_8482`, `IMG_8490`; AMB-1197 source/test proof. | Current device mutation proof and screenshot review showing no fake success or internal metadata. |
 | `AMB-ISSUE-1001` | Today | **Source-repaired candidate / runtime proof pending** | AMB-1195 removes the nonfunctional `Start Here` / `Meridian` segmented toggle from Today root. | `IMG_8475`, `IMG_8476`, `IMG_8492`; AMB-1195 source/action-gating proof. | Before/after screenshots. |
 | `AMB-ISSUE-1002` | Today | **Source-repaired candidate / runtime proof pending** | AMB-1195 removes the touched Today root rail/status copy including `No source change yet` and keeps no-step copy sparse and state-derived. | `IMG_8475`, `IMG_8476`, `IMG_8492`; AMB-1195 forbidden-copy source proof. | Root Today screenshot with no internal rail copy. |
 | `AMB-ISSUE-1003` | Today / Capture | **Source-repaired candidate / runtime proof pending** | AMB-1195 removes embedded Today root Capture CTAs and the Today navigation Capture button; global Capture remains outside Today root. | `IMG_8475`, `IMG_8476`; AMB-1195 source/action-gating proof. | Today root without embedded Capture CTA. |
@@ -157,15 +157,19 @@ The current build is materially improved in source architecture, Time foundation
 
 | ID | Status | Issue | Evidence |
 |---|---|---|---|
-| `AMB-ISSUE-0501` | Improved but still present | Time is much better than the prior build but remains alpha/prototype and not usable. | `IMG_8481`, `IMG_8482`, `IMG_8490`; notes |
-| `AMB-ISSUE-0502` | Still present | Time object does not explain what dots, bars, or the central Now line mean. | `IMG_8481`, `IMG_8482`, `IMG_8490` |
-| `AMB-ISSUE-0504` | Still present | Day/week/month/year/list orientation is not proven. | Current Time screenshots only show limited root state. |
-| `AMB-ISSUE-0505` | Still present | Fixed points/open capacity/protected windows remain abstract and not tied to obvious real constraints. | `IMG_8481`, `IMG_8482` |
-| `AMB-ISSUE-1401` | New | `Place Step` appears and succeeds without a real user-created step or goal. This is fake-action behavior. | Tester notes; `IMG_8481`, `IMG_8482` |
-| `AMB-ISSUE-1402` | New | `Open / Protected / Pressure / Buffer` segmented layers are not self-explanatory. | `IMG_8481`, `IMG_8482`, `IMG_8490` |
-| `AMB-ISSUE-1403` | New | User-facing header exposes `TIME · LifeShape Field`. | `IMG_8481`, `IMG_8482`, `IMG_8490` |
-| `AMB-ISSUE-1404` | New | Time rows below the object (`Today`, `This week`, `Rest of month`) still read like generic cards beneath an object. | `IMG_8481`, `IMG_8482`, `IMG_8490` |
-| `AMB-ISSUE-1405` | New | Light-mode Time is low-contrast and visually broken. | `IMG_8490` |
+| `AMB-ISSUE-0009` | Source-repaired candidate / runtime proof pending | AMB-1197 makes Time placement state-backed and local-only; no external calendar sync or cloud scheduling was added. | AMB-1197 source/test proof; device proof pending. |
+| `AMB-ISSUE-0501` | Source-repaired candidate / runtime proof pending | AMB-1197 rebuilds root Time toward a native Life Calendar object with Now/current day, fixed/open/protected/pressure/buffer/recovery/goal-load rows and real-step-only placement gating. | `IMG_8481`, `IMG_8482`, `IMG_8490`; AMB-1197 source/test proof. |
+| `AMB-ISSUE-0502` | Source-repaired candidate / runtime proof pending | AMB-1197 adds explicit row and accessibility semantics for Now, fixed points, open windows, protected windows, pressure, buffer, recovery, goal load, and list equivalent. | `IMG_8481`, `IMG_8482`, `IMG_8490`; AMB-1197 source/test proof. |
+| `AMB-ISSUE-0503` | Source-repaired candidate / runtime proof pending | AMB-1197 keeps Time calendar anchors local and deterministic, with external calendar behavior still optional and non-syncing. | AMB-1197 source/test proof; device proof pending. |
+| `AMB-ISSUE-0504` | Source-repaired candidate / runtime proof pending | AMB-1197 stages day/week/month/year/list as explicit calendar rows and keeps list as the accessibility/large-text equivalent instead of a gesture-only horizon. | Current Time screenshots only show limited root state; AMB-1197 source/test proof. |
+| `AMB-ISSUE-0505` | Source-repaired candidate / runtime proof pending | AMB-1197 ties fixed points, open windows, protected windows, pressure, buffer, recovery, and goal load to Time projection state instead of unexplained decoration. | `IMG_8481`, `IMG_8482`; AMB-1197 source/test proof. |
+| `AMB-ISSUE-0506` | Source-repaired candidate / runtime proof pending | AMB-1197 preserves protected-window representation and keeps protection actions state-backed or unavailable; no fake protection success is claimed. | AMB-1197 source/test proof; device proof pending. |
+| `AMB-ISSUE-0507` | Source-repaired candidate / runtime proof pending | AMB-1197 keeps Time placement/protection local and deterministic with before/action/after mutation tests for real Step placement. | AMB-1197 source/test proof; device proof pending. |
+| `AMB-ISSUE-1401` | Source-repaired candidate / runtime proof pending | AMB-1197 disables `Place Step` without a real eligible Goal Step or free-floating Capture-derived Step and removes invented Step IDs from the mutation path. | Tester notes; `IMG_8481`, `IMG_8482`; AMB-1197 source/test proof. |
+| `AMB-ISSUE-1402` | Source-repaired candidate / runtime proof pending | AMB-1197 adds compact native labels and VoiceOver values for Open, Protected, Pressure, Buffer, Recovery, and Goal load semantics. | `IMG_8481`, `IMG_8482`, `IMG_8490`; AMB-1197 source/test proof. |
+| `AMB-ISSUE-1403` | Source-repaired candidate / runtime proof pending | AMB-1197 removes root user-facing Time object labeling as `TIME · LifeShape Field` and relabels the primary accessibility object as Life Calendar. | `IMG_8481`, `IMG_8482`, `IMG_8490`; AMB-1197 source/test proof. |
+| `AMB-ISSUE-1404` | Source-repaired candidate / runtime proof pending | AMB-1197 replaces the generic three-row fallback with ordered calendar rows driven by Time state and keeps the object primary. | `IMG_8481`, `IMG_8482`, `IMG_8490`; AMB-1197 source/test proof. |
+| `AMB-ISSUE-1405` | Source-repaired candidate / runtime proof pending | AMB-1197 routes touched Time layer and action colors through semantic theme state styles instead of hard-coded Time RGB assumptions. | `IMG_8490`; AMB-1197 source/test proof; Light/Dark device proof pending. |
 
 ### You
 

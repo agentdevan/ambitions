@@ -2,6 +2,7 @@ import Foundation
 
 enum TimeFieldMutationError: Error, Equatable {
     case noVisibleMutationTarget
+    case missingEligibleStep
     case runtimeRejected(String)
 }
 
@@ -39,8 +40,12 @@ struct TimeFieldMutationCoordinator: Sendable {
             timeState.lifeSuite.field,
             selectedMark: selectedMark,
             preferredLayer: action.targetLayer,
+            placementCandidate: timeState.lifeSuite.field.placementCandidate,
             now: now
         )
+        if action == .placeStep, timeState.lifeSuite.field.canPlaceStep == false {
+            throw TimeFieldMutationError.missingEligibleStep
+        }
         guard let targetBucket = visibleProjection.targetBucket(for: selectedMark, preferredLayer: action.targetLayer) else {
             throw TimeFieldMutationError.noVisibleMutationTarget
         }
@@ -49,6 +54,7 @@ struct TimeFieldMutationCoordinator: Sendable {
             action,
             targetBucket: targetBucket,
             selectedMark: selectedMark,
+            placementCandidate: timeState.lifeSuite.field.placementCandidate,
             now: now
         )
         let timeMutation = try TimeMutation.make(command: command, beforeProjection: visibleProjection)
@@ -89,24 +95,35 @@ struct TimeFieldMutationCoordinator: Sendable {
         _ action: TimeFieldMutationAction,
         targetBucket: LifeShapeBucket,
         selectedMark: LifeShapeSemanticMark?,
+        placementCandidate: TimePlacementCandidate?,
         now: Date
     ) -> AmbitionsCommand {
         let timeID = targetBucket.id
-        let stepID = action == .placeStep ? "step.\(Self.idComponent(timeID))" : nil
+        let stepID = action == .placeStep ? placementCandidate?.stepID : nil
+        let goalID = action == .placeStep
+            ? placementCandidate?.goalID
+            : selectedMark?.inputRefs.first { $0.kind == .goal }?.id
         let createdAt = Self.isoString(from: now)
+        var metadata = action.commandMetadata
+        if let placementCandidate, action == .placeStep {
+            metadata["placementCandidateID"] = placementCandidate.id
+            metadata["placementCandidateKind"] = placementCandidate.kind.rawValue
+            metadata["durationMinutes"] = "\(placementCandidate.durationMinutes)"
+            metadata["placementSource"] = placementCandidate.sourceLabel
+        }
         let command = AmbitionsCommand(
             id: "command.time.\(action.rawValue).\(Self.idComponent(timeID)).\(Self.idComponent(createdAt))",
             kind: action.commandKind,
             source: .time,
             target: AmbitionsCommandTarget(
-                goalID: selectedMark?.inputRefs.first { $0.kind == .goal }?.id ?? "goal.time-field",
+                goalID: goalID,
                 timeID: timeID,
                 stepID: stepID
             ),
             payload: AmbitionsCommandPayload(
-                title: action.title,
-                notes: selectedMark?.accessibilitySummary ?? targetBucket.accessibilitySummary,
-                metadata: action.commandMetadata
+                title: placementCandidate?.title ?? action.title,
+                notes: placementCandidate?.accessibilitySummary ?? selectedMark?.accessibilitySummary ?? targetBucket.accessibilitySummary,
+                metadata: metadata
             ),
             createdAt: createdAt,
             sourceSurface: "Time"

@@ -4,8 +4,24 @@ import XCTest
 final class TimeFieldMutationCoordinatorTests: XCTestCase {
     private let now = ISO8601DateFormatter().date(from: "2027-02-19T12:20:00Z")!
 
-    func testPlaceStepRunsRuntimeMutationUpdatesTimeTodayProofAnnouncementHapticAndUndo() throws {
+    func testPlaceStepRequiresRealEligibleStep() throws {
         let state = PreviewTimeScenarios.seeded
+        let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
+
+        XCTAssertThrowsError(
+            try TimeFieldMutationCoordinator().perform(
+                .placeStep,
+                in: state,
+                selectedMark: mark,
+                now: now
+            )
+        ) { error in
+            XCTAssertEqual(error as? TimeFieldMutationError, .missingEligibleStep)
+        }
+    }
+
+    func testPlaceStepWithRealCandidateRunsRuntimeMutationUpdatesTimeTodayProofAnnouncementHapticAndUndo() throws {
+        let state = PreviewTimeScenarios.seeded.withPlacementCandidate(realPlacementCandidate())
         let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
 
         let result = try TimeFieldMutationCoordinator().perform(
@@ -16,6 +32,9 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         )
 
         XCTAssertEqual(result.command.kind, .placeStepInTime)
+        XCTAssertEqual(result.command.target.stepID, "step.real-visible")
+        XCTAssertEqual(result.command.target.goalID, "goal.real-visible")
+        XCTAssertEqual(result.command.payload.metadata["placementCandidateKind"], TimePlacementCandidateKind.goalLinked.rawValue)
         XCTAssertEqual(result.timeMutation.actionKind, .placeStep)
         XCTAssertTrue(result.runtimeMutation.hasCompleteActionFlowProof)
         XCTAssertTrue(result.timeMutation.todayRecompute.recomputedToday)
@@ -25,6 +44,7 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         XCTAssertEqual(result.runtimeMutation.stageMutation.undoAvailability.label, "Undo")
         XCTAssertTrue(result.runtimeMutation.stageMutation.accessibilityAnnouncement.message.contains("Step placed"))
         XCTAssertEqual(result.updatedTimeState.lifeSuite.field.renderState, .receiptAttached)
+        XCTAssertFalse(result.timeMutation.afterProjection.todayBuckets.compactMap(\.recommendedStepID).contains { $0.hasPrefix("step.command") })
         XCTAssertEqual(result.updatedTimeState.lifeSuite.field.receipt.ageLabel, result.runtimeMutation.stageMutation.proofArtifact.artifactID)
         XCTAssertNotEqual(
             result.updatedTimeState.lifeSuite.field.reading(for: .week).title,
@@ -138,5 +158,49 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         let undo = TimeFieldMutationCoordinator().undo(result, now: now)
         XCTAssertEqual(undo.visibleMutation.stageMutation.visibleUserFacingChange, "Undo applied")
         XCTAssertTrue(undo.visibleMutation.stageMutation.accessibilityAnnouncement.message.contains("Time and Today"))
+    }
+
+    private func realPlacementCandidate() -> TimePlacementCandidate {
+        TimePlacementCandidate(
+            id: "time.placement.goal.real-visible.step.real-visible",
+            stepID: "step.real-visible",
+            goalID: "goal.real-visible",
+            title: "Draft the real proposal section",
+            detail: "Goal-linked Step selected before placement.",
+            durationMinutes: 30,
+            sourceLabel: "Visible goal",
+            kind: .goalLinked
+        )
+    }
+}
+
+private extension TimeSurfaceState {
+    func withPlacementCandidate(_ candidate: TimePlacementCandidate) -> TimeSurfaceState {
+        let field = LifeShapeFieldState(
+            defaultHorizon: lifeSuite.field.defaultHorizon,
+            capacityFit: lifeSuite.field.capacityFit,
+            segments: lifeSuite.field.segments,
+            semanticMarks: lifeSuite.field.semanticMarks,
+            renderState: lifeSuite.field.renderState,
+            readings: lifeSuite.field.readings,
+            placementCandidate: candidate,
+            placementUnavailableReason: "Placement is available for \(candidate.title).",
+            calendarRows: lifeSuite.field.calendarRows,
+            sourceState: lifeSuite.field.sourceState,
+            reflowProposal: lifeSuite.field.reflowProposal,
+            receipt: lifeSuite.field.receipt,
+            continuityDockItems: lifeSuite.field.continuityDockItems
+        )
+        let suite = TimeLifeSuiteState(
+            title: lifeSuite.title,
+            subtitle: lifeSuite.subtitle,
+            shapes: lifeSuite.shapes,
+            field: field,
+            drillDown: lifeSuite.drillDown,
+            calendarBoundaryLabel: lifeSuite.calendarBoundaryLabel,
+            manualFallbackLabel: lifeSuite.manualFallbackLabel,
+            trustLabel: lifeSuite.trustLabel
+        )
+        return replacing(lifeSuite: suite)
     }
 }

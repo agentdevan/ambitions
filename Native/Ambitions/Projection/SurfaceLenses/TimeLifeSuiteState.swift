@@ -66,6 +66,18 @@ struct TimeLifeSuiteState: Sendable {
                 .month: LifeShapeReading(horizon: .month, title: "Month shape", summary: life?.summary ?? "Longer-range Time shape is quiet.", capacityStatement: life?.capacityLabel ?? "Longer-range capacity is qualitative.", sourceDetail: life?.provenanceLabel ?? manualFallbackLabel),
                 .year: LifeShapeReading(horizon: .year, title: "Year shape", summary: life?.summary ?? "Year shape stays directional until active goals create a longer arc.", capacityStatement: life?.capacityLabel ?? "Year capacity remains qualitative.", sourceDetail: life?.provenanceLabel ?? manualFallbackLabel)
             ],
+            placementCandidate: nil,
+            placementUnavailableReason: "Create or select a Step before placing time.",
+            calendarRows: [
+                TimeCalendarRow(id: "time.calendar.now", kind: .now, title: "Now", value: day?.title ?? "Today", detail: day?.summary ?? "Current day stays first.", visualState: .selected, isOperational: true),
+                TimeCalendarRow(id: "time.calendar.open-window", kind: .openWindow, title: "Open windows", value: day?.capacityLabel ?? "Manual", detail: "Placement waits for a real Step.", visualState: .default, isOperational: false),
+                TimeCalendarRow(id: "time.calendar.protected-window", kind: .protectedWindow, title: "Protected windows", value: "Visible", detail: day?.protectedTimeLabel ?? "Protected time is inspectable.", visualState: .selected, isOperational: true),
+                TimeCalendarRow(id: "time.calendar.day", kind: .day, title: "Day", value: day?.capacityLabel ?? "Current", detail: day?.summary ?? "Day view is available.", visualState: .selected, isOperational: true),
+                TimeCalendarRow(id: "time.calendar.week", kind: .week, title: "Week", value: week?.capacityLabel ?? "Current", detail: week?.summary ?? "Week view is available.", visualState: .selected, isOperational: true),
+                TimeCalendarRow(id: "time.calendar.month", kind: .month, title: "Month", value: life?.capacityLabel ?? "Staged", detail: life?.summary ?? "Month remains directional from local state.", visualState: .default, isOperational: life != nil),
+                TimeCalendarRow(id: "time.calendar.year", kind: .year, title: "Year", value: life?.capacityLabel ?? "Staged", detail: life?.summary ?? "Year remains directional from local state.", visualState: .default, isOperational: life != nil),
+                TimeCalendarRow(id: "time.calendar.list", kind: .list, title: "List", value: "Equivalent", detail: "Rows expose calendar signals for VoiceOver and large text.", visualState: .selected, isOperational: true)
+            ],
             sourceState: LifeShapeSourceState(title: calendarBoundaryLabel, detail: manualFallbackLabel, whyThisLabel: trustLabel, privacyLabel: "Local Time state; no silent calendar write.", visualState: .selected),
             reflowProposal: LifeShapeReflowProposal(title: "Review stays optional", detail: "Time can suggest relief only after capacity is clear.", actionTitle: "Review shape", visualState: fit.visualState),
             receipt: LifeShapeReceipt(title: "Changes stay reviewable", detail: trustLabel, ageLabel: "Current", visualState: .selected),

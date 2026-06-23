@@ -71,6 +71,12 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertEqual(timeState.lifeSuite.title, "Shape Time")
         XCTAssertEqual(timeState.lifeSuite.shapes.map(\.title), ["Day Shape", "Week fit", "Life Shape"])
         XCTAssertTrue(timeState.lifeSuite.shapes.allSatisfy { $0.facts.isEmpty == false })
+        XCTAssertNil(timeState.lifeSuite.field.placementCandidate)
+        XCTAssertFalse(timeState.lifeSuite.field.canPlaceStep)
+        XCTAssertEqual(timeState.lifeSuite.field.placementUnavailableReason, "Create or select a Step before placing time.")
+        XCTAssertTrue(timeState.lifeSuite.field.calendarRows.contains { $0.kind == .now && $0.isOperational })
+        XCTAssertTrue(timeState.lifeSuite.field.calendarRows.contains { $0.kind == .openWindow && $0.isOperational == false })
+        XCTAssertTrue(timeState.lifeSuite.field.calendarRows.contains { $0.kind == .list && $0.isOperational })
         XCTAssertEqual(timeState.lifeSuite.manualFallbackLabel, "User choice available")
         XCTAssertEqual(timeState.lifeSuite.trustLabel, "No silent calendar changes")
         XCTAssertEqual(timeState.treaty.title, "This week's agreement")
@@ -102,6 +108,29 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertFalse(timeState.opportunityWindows.windows.isEmpty)
         XCTAssertLessThanOrEqual(timeState.opportunityWindows.windows.count, 4)
         XCTAssertFalse(timeState.timelineStrip.items.isEmpty)
+        let placement = try XCTUnwrap(timeState.lifeSuite.field.placementCandidate)
+        XCTAssertEqual(placement.kind, .goalLinked)
+        XCTAssertEqual(placement.stepID, "step-goal-time-visible")
+        XCTAssertEqual(placement.goalID, "goal-time-visible")
+        XCTAssertTrue(timeState.lifeSuite.field.canPlaceStep)
+        XCTAssertTrue(timeState.lifeSuite.field.calendarRows.contains { $0.kind == .goalLoad && $0.isOperational })
+        XCTAssertTrue(timeState.lifeSuite.field.calendarRows.contains { $0.kind == .openWindow && $0.detail.contains(placement.title) })
+    }
+
+    func testFreeFloatingStepCaptureCanBecomeTimePlacementCandidateWithoutInventingStep() async throws {
+        let repositories = try await makeRepositories()
+        try await repositories.captures.saveCaptures([makeCommitmentCapture()])
+        let service = RepositoryBackedTimeService(repositories: repositories)
+
+        let timeState = try await service.loadTimeSurfaceState(now: fixedDate)
+        let placement = try XCTUnwrap(timeState.lifeSuite.field.placementCandidate)
+
+        XCTAssertEqual(placement.kind, .freeFloating)
+        XCTAssertEqual(placement.stepID, "capture.capture-commitment-time-change")
+        XCTAssertNil(placement.goalID)
+        XCTAssertTrue(timeState.lifeSuite.field.canPlaceStep)
+        XCTAssertFalse(placement.stepID.hasPrefix("step."))
+        XCTAssertTrue(timeState.lifeSuite.field.calendarRows.contains { $0.kind == .openWindow && $0.detail.contains(placement.title) })
     }
 
     func testF10TimeLifeSuiteProjectsDayWeekAndLifeShapeWithoutCalendarClone() async throws {

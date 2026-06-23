@@ -34,6 +34,7 @@ extension LifeShapeFieldView {
             selectedMarks: Array(selectedLayerMarks),
             selectedMark: selectedMark,
             primaryActionTitle: primaryActionTitle,
+            primaryActionEnabled: primaryActionEnabled,
             displayedRenderState: displayedRenderState,
             onSelectMark: { selectedMarkID = $0.id },
             onPrimaryAction: performPrimaryLayerAction
@@ -137,6 +138,7 @@ extension LifeShapeFieldView {
 
     func performPrimaryLayerAction() {
         if selectedLayer == .open {
+            guard suite.field.canPlaceStep else { return }
             onMutationAction?(.placeStep, selectedMark)
         } else if selectedLayer == .protected {
             onMutationAction?(.protectWindow, selectedMark)

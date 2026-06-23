@@ -26,7 +26,7 @@ struct LifeShapeLayerSelector: View {
                             RoundedRectangle(cornerRadius: 8, style: .continuous)
                                 .stroke(
                                     selection == layer
-                                        ? layer.selectorTint.opacity(colorSchemeContrast == .increased ? 0.92 : 0.68)
+                                        ? selectorTint(for: layer).opacity(colorSchemeContrast == .increased ? 0.92 : 0.68)
                                         : theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.82 : 0.42),
                                     lineWidth: selection == layer ? 1.4 : 1
                                 )
@@ -47,7 +47,7 @@ struct LifeShapeLayerSelector: View {
         LinearGradient(
             colors: selected
                 ? [
-                    layer.selectorTint.opacity(colorSchemeContrast == .increased ? 0.42 : 0.30),
+                    selectorTint(for: layer).opacity(colorSchemeContrast == .increased ? 0.42 : 0.30),
                     theme.colors.surfaceOverlay.opacity(reduceTransparency ? 0.92 : 0.62)
                 ]
                 : [
@@ -57,6 +57,10 @@ struct LifeShapeLayerSelector: View {
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
+    }
+
+    private func selectorTint(for layer: LifeShapeLayer) -> Color {
+        theme.stateStyle(for: layer.selectorVisualState).accent
     }
 
     @ViewBuilder
@@ -76,16 +80,16 @@ struct LifeShapeLayerSelector: View {
 }
 
 private extension LifeShapeLayer {
-    var selectorTint: Color {
+    var selectorVisualState: AmbitionVisualState {
         switch self {
         case .open:
-            Color(red: 0.48, green: 0.95, blue: 0.60)
+            .success
         case .protected:
-            Color(red: 0.28, green: 0.58, blue: 1.0)
+            .selected
         case .pressure:
-            Color(red: 1.0, green: 0.55, blue: 0.20)
+            .warning
         case .buffer:
-            Color(red: 0.68, green: 0.38, blue: 1.0)
+            .default
         }
     }
 
