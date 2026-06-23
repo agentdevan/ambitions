@@ -91,7 +91,7 @@ public enum AFI12AccessibilityStateProof {
             id: "afi12-you",
             surface: "You",
             primaryObject: "User System Profile",
-            voiceOverSummary: "You. User System Profile names Planning Setup, Trust & Automation, Privacy, Receipts & History, and Defaults.",
+            voiceOverSummary: "You. User System Profile names Planning Setup, Privacy & automation, Privacy, Receipts & History, and Defaults.",
             dynamicTypeFallback: "You follows grouped-navigation behavior at large text sizes and keeps trust, privacy, receipts, setup, and defaults findable.",
             reduceMotionFallback: "Grouped disclosure and trust routes use native disclosure state rather than motion-only meaning.",
             nonColorStateSupport: "Trust, private, unavailable, manual, review, and future-owned states require labels and symbols beyond color.",

@@ -191,14 +191,14 @@ public enum EB30OverloadAdaptationEvidence {
         "docs/canon/Ambitions_4_0_Accessibility_And_Cognitive_Load_Kernel.md",
         "docs/codex/batches/EB30_Overloaded_Day_Adaptation_And_Low_Cognitive_Load_Flows_Prompt.md",
         "Sources/Theme/PanelDensitySize.swift",
-        "Native/Ambitions/Surfaces/Today/TodayScreen.swift",
+        "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
         "Native/Ambitions/Surfaces/Time/TimeSurface.swift"
     ]
 
     public static let requirements: [AccessibilityOverloadAdaptationRequirement] = [
         AccessibilityOverloadAdaptationRequirement(
             axis: .overloadedToday,
-            ownerFile: "Native/Ambitions/Surfaces/Today/TodayScreen.swift",
+            ownerFile: "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
             automatedProofTarget: "Native/AmbitionsTests/Today/TodayViewModelTests.swift",
             requiredAdaptation: "Overloaded Today must reduce visible choices to one clear next action plus visible lighten, move, or recover controls.",
             forbiddenAdaptation: "No shame copy, red backlog pileup, hidden rescheduling, or dashboard-style overload stack."
@@ -296,13 +296,13 @@ public enum AccessibilityNutritionChecklist {
 
     public static func d21InternalEvidenceAudits() -> [AccessibilityNutritionScreenAudit] {
         [
-            screenAudit("today", "Today", "tab.today", "Today", source: "Native/Ambitions/Surfaces/Today/TodayScreen.swift", tests: "Native/AmbitionsTests/Today"),
+            screenAudit("today", "Today", "tab.today", "Today", source: "Native/Ambitions/Surfaces/Today/TodaySurface.swift", tests: "Native/AmbitionsTests/Today"),
             screenAudit("reviews-archive", "Reviews / Archive", "you.reviews", "You", source: "Native/Ambitions/Services/ReviewsV1Projector.swift", tests: "Native/AmbitionsTests/Services/ReviewsV1ProjectorTests.swift"),
             screenAudit("rich-panels", "Rich Panels", "component.rich-panels", "Design System", source: "Sources/Components/RichPanelPrimitives.swift", tests: "Native/AmbitionsTests/App/RichPanelDesignSystemTests.swift"),
             screenAudit("you", "You", "tab.you", "You", source: "Native/Ambitions/Surfaces/You/YouScreen.swift", tests: "Native/AmbitionsTests/You"),
             screenAudit("grouped-navigation-list", "GroupedNavigationList", "component.grouped-navigation-list", "Design System", source: "Sources/Components/GroupedNavigationList.swift", tests: "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift"),
             screenAudit("goal-detail", "Goal Detail", "goals.detail", "Goals", source: "Native/Ambitions/Surfaces/Goals/GoalDetailScreen.swift", tests: "Native/AmbitionsTests/Goals"),
-            screenAudit("capture-composer", "Capture Composer", "overlay.capture-composer", "Composer / Capture", source: "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", tests: "Native/AmbitionsTests/Capture"),
+            screenAudit("capture", "Capture Composer", "overlay.capture-composer", "Composer / Capture", source: "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", tests: "Native/AmbitionsTests/Capture"),
             screenAudit("time", "Time", "tab.time", "Time", source: "Native/Ambitions/Surfaces/Time/TimeSurface.swift", tests: "Native/AmbitionsTests/Time"),
             screenAudit("trust-center-what-ambitions-knows", "Trust Center / What Ambitions Knows", "you.trust.memory", "You", source: "Native/Ambitions/Surfaces/You/YouScreen.swift", tests: "Native/AmbitionsTests/You/YouFeatureServiceTests.swift"),
             screenAudit("quiet-command-sheet-smart-attachment", "Quiet Command Sheet / Smart Attachment", "shell.command-sheet", "Shell / Capture", source: "Native/Ambitions/App/AppShellView.swift", tests: "Native/AmbitionsUITests/AmbitionsUITests.swift"),

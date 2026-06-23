@@ -224,9 +224,11 @@ Core personal life data must live on-device by default. This includes goals, lif
 
 Private life data is local by default. Network access may enrich public/reference data, validate entitlements, support optional Ambitions Account capabilities, or support approved account recovery. Network access must not become the core runtime.
 
+Ambitions supports custom Ambitions Accounts at launch for optional identity, entitlement, Source Atlas/reference-pack freshness, account recovery/support, and future approved account capabilities. The app must remain fully usable without an account: no account means the offline core app remains available with no hosted Ambitions account, no personal backend, no network dependency for core value, and local goals, captures, closures, proof, preferences, and personalization.
+
 The Private Life Runtime must work without an account and without network access.
 
-R2 is first-class infrastructure for Source Atlas/reference freshness. R2 is not a personal-data backend and must not receive the private life graph.
+R2 is first-class infrastructure for Source Atlas/reference freshness. R2 is not a user-data backend, is not a personal-data backend, and must not receive the private life graph, private user context, goals, captures, schedule assumptions, closure history, receipts, proof, personalization data, behavior patterns, or inferred priorities.
 
 ---
 
@@ -639,4 +641,3 @@ Explicitly removed architecture:
 ---
 
 This is the canon.
-

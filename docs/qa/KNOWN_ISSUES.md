@@ -3,6 +3,7 @@
 **Status:** Runtime device review reconciled. Current app status is **Red**.
 
 **Last source reconciliation:** 2026-06-23
+**Last final-proof evidence pass:** 2026-06-23 (`docs/qa/evidence/2026-06-23-final-proof/`)
 **Last device/runtime review:** 2026-06-22  
 **Runtime evidence set:** `More issues.zip`, screenshots `IMG_8475.PNG` through `IMG_8499.PNG`, plus tester notes from the same review.  
 **Baseline source context:** `ce75bb77122350fcab9500806e5ff26f8ee02e58` (`AMB-1180 rebuild LifeShape field object`) plus current `main` docs commits.
@@ -54,6 +55,8 @@ The current build is materially improved in source architecture, Time foundation
 6. **Time has AMB-1197 source/test repairs for native Life Calendar semantics and real-step-only placement, but current device screenshot proof is still missing.**
 7. **Shell chrome has AMB-1194 source repairs for icon-only floating root buttons, root header subtitle cleanup, invisible rail coordination, and reduced root dock clearance, but current screenshot/device proof is still missing.**
 8. **The app is still shallow: most drilldowns are slide-up cards rather than mature full-screen surfaces.**
+
+AMB-1199 added a current simulator-only final-proof package on 2026-06-23. It produced dark-mode root screenshots for Today / Goals / Time / You, one passing Goal Detail route-depth UI test, passing automated accessibility evidence-contract tests, and Green local-first/privacy/release-claim scans. It does not close device, manual accessibility, Light/System screenshot, full drilldown, global shell completion, or owner-review gaps. Visual status remains Yellow/Red rather than Green because current screenshots still show dock/content overlap and clipped Goals text.
 
 ## Verified improvements from this device review
 
@@ -223,9 +226,9 @@ The current build is materially improved in source architecture, Time foundation
 
 | ID | Status | Issue | Evidence |
 |---|---|---|---|
-| `AMB-ISSUE-0807` | Still open | Accessibility was not tested; no accessibility readiness claim is allowed. | Tester notes |
-| `AMB-ISSUE-1801` | New | Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, High Contrast, Differentiate Without Color, and haptics remain unverified. | Tester notes |
-| `AMB-ISSUE-1802` | New | Retrofitting accessibility after normal-use perfection is a release risk; any rebuild must preserve semantic mirrors and accessible actions from implementation start. | Canon risk |
+| `AMB-ISSUE-0807` | Automated evidence candidate / manual proof pending | AMB-1199 aligned and passed the automated accessibility evidence-contract suite, but no manual VoiceOver walkthrough or physical-device accessibility review was performed. No accessibility readiness claim is allowed. | Tester notes; AMB-1199 `AccessibilityNutritionChecklistTests` run: 21 tests passed; `docs/qa/evidence/2026-06-23-final-proof/accessibility-checklist.md` |
+| `AMB-ISSUE-1801` | Automated evidence candidate / manual and device proof pending | Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, Differentiate Without Color, haptics, keyboard/focus, and non-gesture alternatives now have an explicit AMB-1199 checklist plus automated source-contract coverage where available; manual/device execution remains required. | Tester notes; AMB-1199 accessibility checklist and focused test summary |
+| `AMB-ISSUE-1802` | Open / contract evidence aligned | AMB-1199 preserved explicit manual-proof limitations and source-contract coverage; this does not replace runtime/device accessibility review. | Canon risk; AMB-1199 evidence package |
 
 ## Screenshot evidence map
 
