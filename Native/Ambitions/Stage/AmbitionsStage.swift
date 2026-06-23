@@ -125,7 +125,7 @@ struct AmbitionsStage: View {
         case "today-start-here":
             navigation.selectToday(entryContext: .standard)
         case "goals-create-goal":
-            presentCreateGoal(from: .goalsCreate)
+            navigation.presentTypedCaptureComposer(kind: .goalSeed, source: .goalsCreate)
         case "time-weekly-review":
             navigation.openWeeklyReview()
         case "you-history", "motion-memory-lens":

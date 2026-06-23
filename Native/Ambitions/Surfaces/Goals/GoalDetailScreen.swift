@@ -29,13 +29,7 @@ struct GoalDetailScreen: View {
                         }
                     )
                 case let .loaded(detail):
-                    GoalDetailHeroSurface(detail: detail)
-
-                    if let missionControl = detail.missionControl {
-                        GoalDetailMissionControlSurface(state: missionControl)
-                        GoalDetailBreadcrumbSurface(state: missionControl.breadcrumb)
-                        GoalDetailTimelineSurface(state: missionControl.timeline)
-                    }
+                    GoalDetailProfileSurface(detail: detail)
 
                     if let inlineMessage = viewModel.inlineMessage {
                         AppCard(state: inlineMessage.state) {
@@ -50,67 +44,11 @@ struct GoalDetailScreen: View {
                         }
                     }
 
-                    if detail.target.launchContext == .help {
-                        AppCard(state: .warning) {
-                            SectionHeader(
-                                title: "Help-first route",
-                                subtitle: "This detail view opened from a help or correction action, so the path view is leading with the smallest trustworthy next step."
-                            )
-                        }
+                    GoalDetailPathFieldSurface(detail: detail) { action in
+                        Task { await viewModel.perform(action, using: featureFactory.goalsService) }
                     }
 
-                    if detail.pathStages.isEmpty == false {
-                        LifePathThreadSurface(
-                            state: LifePathThreadState(
-                                stages: detail.pathStages,
-                                pathBuilder: detail.pathBuilder
-                            )
-                        )
-                    }
-
-                    if let movement = detail.nextMovement {
-                        GoalDetailNextMovementSurface(movement: movement)
-                    }
-
-                    GoalDetailTrajectorySurface(trajectory: detail.trajectory)
-
-                    if let explainability = detail.explainability {
-                        GoalTrustWhisperSurface(
-                            state: explainability,
-                            isExpanded: $viewModel.isTrustExpanded
-                        )
-                    }
-
-                    if detail.assumptions.isEmpty == false {
-                        GoalDetailSectionSurface(title: "Starter Assumptions", subtitle: "Visible assumptions keep provisional plans honest.") {
-                            VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                ForEach(detail.assumptions, id: \.self) { assumption in
-                                    Label(assumption, systemImage: "leaf.fill")
-                                        .font(theme.typography.caption)
-                                        .foregroundStyle(theme.colors.textSecondary)
-                                }
-                            }
-                        }
-                    }
-
-                    if let missionControl = detail.missionControl {
-                        GoalDetailReviewTrailSurface(state: missionControl.reviewTrail)
-                        GoalDetailAssumptionsSurface(assumptions: missionControl.assumptions)
-                        GoalDetailProofRailSurface(state: missionControl.proofRail)
-                        GoalAlternatePathDecisionSpine(
-                            state: GoalAlternatePathDecisionSpineState(
-                                decisions: missionControl.decisions,
-                                pathBuilder: detail.pathBuilder
-                            )
-                        )
-                        GoalDetailRisksSurface(state: missionControl.risks)
-                        GoalDetailArchiveSurface(state: missionControl.archive)
-                        GoalDetailReceiptsSurface(state: missionControl.receipts)
-                    }
-
-                    if let pathBuilder = detail.pathBuilder {
-                        GoalPathBuilderSurface(state: pathBuilder)
-                    }
+                    GoalDetailJournalSurface(detail: detail)
 
                     if let clarification = detail.clarification {
                         GoalDetailSectionSurface(title: clarification.title, subtitle: clarification.subtitle) {
@@ -161,96 +99,11 @@ struct GoalDetailScreen: View {
                         }
                     }
 
-                    GoalDetailSectionSurface(title: "Action rail", subtitle: "These controls write back to the real native plan and feedback history.") {
+                    GoalDetailSectionSurface(title: "Operations", subtitle: "Only available actions are shown. Unsupported path edits stay out of the control surface.") {
                         GoalActionGrid(actions: detail.actions) { action in
                             Task { await viewModel.perform(action, using: featureFactory.goalsService) }
                         }
                     }
-
-                    GoalMemoryNarrativeSurface(
-                        detail: detail,
-                        isExpanded: $viewModel.isMemoryExpanded
-                    )
-
-                    GoalDetailSectionSurface(
-                        title: "Tactics and detail",
-                        subtitle: viewModel.lens == .path ? "Inspect the path structure without displacing the first-screen strategy read." : "Open the underlying sections and steps when you need the tactical layer."
-                    ) {
-                        SegmentedFilterBar(items: GoalDetailLens.allCases, selection: $viewModel.lens) { $0.title }
-                            .padding(.bottom, theme.spacing.sm)
-
-                        if viewModel.lens == .path {
-                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                                ForEach(detail.pathStages) { stage in
-                                    WidgetCard(state: stage.state) {
-                                        VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                                            HStack {
-                                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                                    Text(stage.title)
-                                                        .font(theme.typography.section)
-                                                        .foregroundStyle(theme.colors.textPrimary)
-                                                    Text(stage.statusLabel)
-                                                        .font(theme.typography.micro)
-                                                        .foregroundStyle(theme.colors.textTertiary)
-                                                }
-                                                Spacer()
-                                                TagPill(stage.stepCountLabel, state: stage.state)
-                                            }
-                                            Text(stage.summary)
-                                                .font(theme.typography.body)
-                                                .foregroundStyle(theme.colors.textSecondary)
-                                            if let highlight = stage.highlight {
-                                                Text(highlight)
-                                                    .font(theme.typography.caption)
-                                                    .foregroundStyle(theme.colors.textTertiary)
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                                ForEach(detail.sections) { section in
-                                    AppCard {
-                                        VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                                            HStack {
-                                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                                    Text(section.title)
-                                                        .font(theme.typography.section)
-                                                        .foregroundStyle(theme.colors.textPrimary)
-                                                    Text(section.summary)
-                                                        .font(theme.typography.caption)
-                                                        .foregroundStyle(theme.colors.textSecondary)
-                                                }
-                                                Spacer()
-                                                TagPill(section.kindLabel, state: .default)
-                                            }
-                                            ForEach(section.steps) { step in
-                                                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                                                    HStack {
-                                                        Text(step.title)
-                                                            .font(theme.typography.bodyEmphasized)
-                                                            .foregroundStyle(theme.colors.textPrimary)
-                                                        Spacer()
-                                                        TagPill(step.statusLabel, state: step.state)
-                                                    }
-                                                    Text(step.summary)
-                                                        .font(theme.typography.caption)
-                                                        .foregroundStyle(theme.colors.textSecondary)
-                                                    Text(step.timingLabel)
-                                                        .font(theme.typography.caption)
-                                                        .foregroundStyle(theme.colors.textTertiary)
-                                                }
-                                                .padding(theme.spacing.sm)
-                                                .background(RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous).fill(theme.colors.surfaceOverlay))
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .accessibilityIdentifier("goal-detail.tactics-region")
 
                     if detail.suggestions.isEmpty == false {
                         GoalDetailSectionSurface(title: "Suggested Steps", subtitle: "The calmest contained steps that still create signal.") {
@@ -260,17 +113,6 @@ struct GoalDetailScreen: View {
                                 }
                             }
                         }
-                    }
-
-                    if let explainability = detail.explainability {
-                        GoalExplainabilitySection(
-                            state: explainability,
-                            isTrustExpanded: $viewModel.isTrustExpanded,
-                            isCorrectionsExpanded: $viewModel.isCorrectionsExpanded,
-                            onCorrection: { control in
-                                Task { await viewModel.submitExplainabilityCorrection(control, using: featureFactory.goalsService) }
-                            }
-                        )
                     }
                 }
             }
@@ -298,61 +140,4 @@ struct GoalDetailScreen: View {
         }
         return appFeatureFactoryCapability
     }
-}
-
-struct GoalDetailMissionControlSurface: View {
-    @Environment(\.ambitionTheme) private var theme
-
-    let state: GoalDetailMissionControlState
-
-    var body: some View {
-        AppCard(state: .selected) {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                MissionControlLaneHeader(
-                    eyebrow: "Goal Thread Focus",
-                    title: state.currentTruth,
-                    subtitle: state.primaryNextMove.title,
-                    badges: [
-                        MissionControlLaneHeaderBadge(id: "source", title: state.sourceLabel, symbolName: "scope", state: .default),
-                        MissionControlLaneHeaderBadge(id: "proof", title: state.proofBoundaryLabel, symbolName: "checkmark.seal", state: .selected),
-                        MissionControlLaneHeaderBadge(id: "owner", title: state.ownershipLabel, symbolName: "person.crop.circle", state: .default),
-                    ]
-                )
-
-                MissionControlTimeSpine(
-                    items: state.lanes.map(MissionControlLaneItem.init(detailLane:)),
-                    defaultSelectedID: GoalDetailMissionLaneKind.overview.rawValue
-                )
-
-                VStack(alignment: .leading, spacing: 1) {
-                    ForEach(GoalDetailMissionLaneKind.allCases, id: \.rawValue) { kind in
-                        Text(" ")
-                            .frame(width: 1, height: 1)
-                            .accessibilityLabel(kind.title)
-                            .accessibilityIdentifier(kind.accessibilityIdentifier)
-                    }
-                    ForEach(Self.compatibilityAnchors, id: \.identifier) { anchor in
-                        Text(" ")
-                            .frame(width: 1, height: 1)
-                            .accessibilityLabel(anchor.label)
-                            .accessibilityIdentifier(anchor.identifier)
-                    }
-                }
-            }
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("goal-detail.mission-control")
-        .ambitionPanelAccessibility()
-    }
-
-    static let compatibilityAnchors: [(identifier: String, label: String)] = [
-        ("goal-detail.decisions", "Decisions"),
-        ("goal-detail.risks", "Risks"),
-        ("goal-detail.archive", "Archive"),
-        ("goal-detail.path-filmstrip", "Path filmstrip"),
-        ("goal-detail.path-builder", "Path builder"),
-        ("goal-detail.tactics-region", "Tactics"),
-        ("goal-detail.trust-whisper", "Trust whisper"),
-        ("goal-detail.memory-narrative", "Memory narrative"),
-    ]
 }

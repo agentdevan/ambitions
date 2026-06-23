@@ -7,13 +7,10 @@ struct GoalsSurface: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var viewModel: GoalsViewModel
-    @State private var isCreateGoalPresented = false
     @State private var localCreationMessage: GoalDetailInlineMessage?
-    @State private var isDirectionDepthExpanded = false
     let externalCreationMessage: GoalDetailInlineMessage?
     let externalRefreshID: Int
     let showsNavigationChrome: Bool
-    let onCreateGoal: (() -> Void)?
     let screenshotProofState: GoalsScreenshotProofState
 
     @MainActor
@@ -22,15 +19,13 @@ struct GoalsSurface: View {
         creationMessage: GoalDetailInlineMessage? = nil,
         externalCreationMessage: GoalDetailInlineMessage? = nil,
         externalRefreshID: Int = 0,
-        showsNavigationChrome: Bool = true,
-        onCreateGoal: (() -> Void)? = nil
+        showsNavigationChrome: Bool = true
     ) {
         _viewModel = State(initialValue: viewModel ?? GoalsViewModel())
         _localCreationMessage = State(initialValue: creationMessage)
         self.externalCreationMessage = externalCreationMessage
         self.externalRefreshID = externalRefreshID
         self.showsNavigationChrome = showsNavigationChrome
-        self.onCreateGoal = onCreateGoal
         screenshotProofState = GoalsScreenshotProofState.fromLaunchArguments()
     }
 
@@ -52,7 +47,9 @@ struct GoalsSurface: View {
                     GoalsObjectView(
                         overview: overview,
                         screenshotProofState: screenshotProofState,
-                        onPrimaryAction: handlePrimaryAction
+                        onPrimaryAction: handlePrimaryAction,
+                        onOpenLifeArea: openLifeArea,
+                        onCreate: openCapture
                     )
                     .transition(DAVMotionPreset.heroExpansion.transition(reduceMotion: reduceMotion))
 
@@ -68,17 +65,6 @@ struct GoalsSurface: View {
                             }
                         }
                         .accessibilityIdentifier("goals.creation-message")
-                    }
-
-                    if hasVisibleAtlasContent(overview) {
-                        GoalsDirectionDepthDisclosure(
-                            overview: overview,
-                            isExpanded: $isDirectionDepthExpanded,
-                            zoomMode: viewModel.semanticZoomMode,
-                            onZoomModeChange: { viewModel.semanticZoomMode = $0 },
-                            onPromote: handlePromoteOneStepGoal
-                        )
-                        .transition(.ambitionPanel)
                     }
                 }
             }
@@ -106,24 +92,12 @@ struct GoalsSurface: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         localCreationMessage = nil
-                        if let onCreateGoal {
-                            onCreateGoal()
-                        } else {
-                            isCreateGoalPresented = true
-                        }
+                        openCapture(kind: .goalSeed, region: nil)
                     } label: {
-                        Label("Create Goal", systemImage: "plus")
+                        Label("Add in Goals", systemImage: "plus")
                     }
                     .accessibilityIdentifier("goals.create-button")
                 }
-            }
-        }
-        .sheet(isPresented: Binding(
-            get: { showsNavigationChrome && isCreateGoalPresented },
-            set: { isCreateGoalPresented = $0 }
-        )) {
-            NavigationStack {
-                createGoalScreen
             }
         }
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
@@ -139,25 +113,30 @@ struct GoalsSurface: View {
         }
     }
 
-    func hasVisibleAtlasContent(_ overview: GoalsOverview) -> Bool {
-        overview.bands.contains(where: { $0.cards.isEmpty == false }) || overview.lowerPriority.cards.isEmpty == false
-    }
-
     func handlePrimaryAction(_ action: GoalsAtlasPrimaryAction) {
         let intent = GoalsInteractions.intent(for: action)
         _ = GoalsInteractions.accessibilityAnnouncement(for: intent)
         switch intent {
         case .createGoal:
             localCreationMessage = nil
-            if let onCreateGoal {
-                onCreateGoal()
-            } else {
-                isCreateGoalPresented = true
-            }
+            openCapture(kind: .goalSeed, region: nil)
         case .openGoal, .recoverGoal, .refineStrategy:
             guard let target = action.target else { return }
             shell.navigation.openGoalDetail(target)
         }
+    }
+
+    func openLifeArea(_ region: GoalsLifeAreaAtlasRegion) {
+        shell.navigation.openGoalDetail(GoalRouteTarget(lifeAreaID: region.id))
+    }
+
+    func openCapture(kind: CaptureTypedRouteKind, region: GoalsLifeAreaAtlasRegion?) {
+        localCreationMessage = nil
+        shell.navigation.presentTypedCaptureComposer(
+            kind: kind,
+            source: .goalsCreate,
+            lifeAreaID: region?.isOpenField == true ? nil : region?.id
+        )
     }
 
     func handlePromoteOneStepGoal(_ item: GoalsOneStepGoalPanelItemState) {
@@ -166,11 +145,12 @@ struct GoalsSurface: View {
             body: "\(item.title) can stay as a One-Step Goal until you confirm a fuller Goal.",
             state: .selected
         )
-        if let onCreateGoal {
-            onCreateGoal()
-        } else {
-            isCreateGoalPresented = true
-        }
+        shell.navigation.presentTypedCaptureComposer(
+            kind: .goalSeed,
+            source: .goalsCreate,
+            lifeAreaID: nil,
+            seedText: item.title
+        )
     }
 
     var shell: AppShellCapability {
@@ -185,31 +165,6 @@ struct GoalsSurface: View {
             preconditionFailure("App feature factory capability must be injected.")
         }
         return appFeatureFactoryCapability
-    }
-
-    var createGoalScreen: some View {
-        CreateGoalScreen { response in
-            let body: String = {
-                switch response.resultKind {
-                case .planned:
-                    return "\(response.blueprint.title) is now in Your Direction with a canonical path."
-                case .starterPlanned:
-                    return "\(response.blueprint.title) is now in Your Direction with a starter path."
-                case .clarificationRequired:
-                    return "\(response.blueprint.title) needs one clarification before Ambitions treats it as a live goal."
-                case .blocked:
-                    return "\(response.blueprint.title) was saved as a blocked draft with the missing constraint visible."
-                }
-            }()
-            localCreationMessage = GoalDetailInlineMessage(
-                title: "Goal created",
-                body: body,
-                state: .success
-            )
-            Task {
-                await viewModel.refresh(using: featureFactory.goalsService)
-            }
-        }
     }
 
     var activeCreationMessage: GoalDetailInlineMessage? {

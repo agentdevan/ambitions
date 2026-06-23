@@ -78,6 +78,7 @@ struct AppShellActivatedCaptureSeam: View {
         .animation(theme.motion.animation(reduceMotion: reduceMotion), value: routePreview)
         .onAppear {
             captureText = overlay.query
+            selectedDraftRouteType = overlay.typedCaptureRoute?.kind.smartAttachmentRouteType
         }
         .onChange(of: captureText) { _, newValue in
             if newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -204,7 +205,7 @@ struct AppShellActivatedCaptureSeam: View {
         return draftRouteService.makeDraftRoutePreview(
             for: rawText,
             sourceType: sourceType,
-            sourceSurface: overlay.entrySource.displayTitle,
+            sourceSurface: sourceSurfaceLabel,
             selectedDraftRouteType: selectedDraftRouteType,
             localSourceLabel: "Local source: \(overlay.entrySource.displayTitle)"
         )
@@ -273,7 +274,7 @@ struct AppShellActivatedCaptureSeam: View {
         let decision = draftRouteService.draftRouteDecision(
             for: rawText,
             sourceType: sourceType,
-            sourceSurface: overlay.entrySource.displayTitle,
+            sourceSurface: sourceSurfaceLabel,
             selectedDraftRouteType: selectedDraftRouteType
         )
         saveState = .saving
@@ -289,5 +290,20 @@ struct AppShellActivatedCaptureSeam: View {
         } catch {
             saveState = .error(error.localizedDescription)
         }
+    }
+
+    private var sourceSurfaceLabel: String {
+        guard let typedRoute = overlay.typedCaptureRoute else {
+            return overlay.entrySource.displayTitle
+        }
+
+        var parts = [overlay.entrySource.displayTitle, typedRoute.kind.accessibleDestinationLabel]
+        if let lifeAreaID = typedRoute.context.lifeAreaID {
+            parts.append("area \(lifeAreaID)")
+        }
+        if let goalID = typedRoute.context.goalID {
+            parts.append("goal \(goalID)")
+        }
+        return parts.joined(separator: " / ")
     }
 }

@@ -8,21 +8,30 @@ enum GoalDetailLaunchContext: String, Hashable, Sendable {
 struct GoalRouteTarget: Hashable, Identifiable, Sendable {
     let goalID: String?
     let draftID: String?
+    let lifeAreaID: String?
     let launchContext: GoalDetailLaunchContext
 
-    init(goalID: String? = nil, draftID: String? = nil, launchContext: GoalDetailLaunchContext = .standard) {
+    init(
+        goalID: String? = nil,
+        draftID: String? = nil,
+        lifeAreaID: String? = nil,
+        launchContext: GoalDetailLaunchContext = .standard
+    ) {
         self.goalID = goalID
         self.draftID = draftID
+        self.lifeAreaID = lifeAreaID
         self.launchContext = launchContext
     }
 
     var id: String {
-        "\(goalID ?? "goal:none")|\(draftID ?? "draft:none")|\(launchContext.rawValue)"
+        "\(goalID ?? "goal:none")|\(draftID ?? "draft:none")|\(lifeAreaID ?? "area:none")|\(launchContext.rawValue)"
     }
 
     var canonicalGoalID: String? { goalID }
 
-    var hasAddressableContent: Bool { goalID != nil || draftID != nil }
+    var hasAddressableContent: Bool { goalID != nil || draftID != nil || lifeAreaID != nil }
+
+    var isLifeAreaRoute: Bool { lifeAreaID != nil && goalID == nil && draftID == nil }
 }
 
 enum TimeRouteTarget: String, Hashable, Identifiable, Sendable {

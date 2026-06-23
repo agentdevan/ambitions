@@ -18,6 +18,7 @@ struct ShellOverlayState: Hashable, Identifiable, Sendable, Codable {
     let query: String
     let goalID: String?
     let captureID: String?
+    let typedCaptureRoute: CaptureTypedRoute?
 
     init(
         kind: ShellOverlayKind,
@@ -26,7 +27,8 @@ struct ShellOverlayState: Hashable, Identifiable, Sendable, Codable {
         presentationContext: ShellCommandPresentationContext = .neutral,
         query: String = "",
         goalID: String? = nil,
-        captureID: String? = nil
+        captureID: String? = nil,
+        typedCaptureRoute: CaptureTypedRoute? = nil
     ) {
         self.kind = kind
         self.intent = intent
@@ -35,6 +37,7 @@ struct ShellOverlayState: Hashable, Identifiable, Sendable, Codable {
         self.query = query
         self.goalID = goalID
         self.captureID = captureID
+        self.typedCaptureRoute = typedCaptureRoute
     }
 
     var id: String {
@@ -45,24 +48,27 @@ struct ShellOverlayState: Hashable, Identifiable, Sendable, Codable {
             presentationContext.rawValue,
             query,
             goalID ?? "goal:none",
-            captureID ?? "capture:none"
+            captureID ?? "capture:none",
+            typedCaptureRoute?.id ?? "capture-route:none"
         ].joined(separator: "|")
     }
 
     var isActivatedCaptureComposer: Bool {
-        kind == .quietCommandSheet && (intent == .quickCapture || presentationContext == .quickCapture)
+        kind == .quietCommandSheet && (intent == .quickCapture || presentationContext == .quickCapture || typedCaptureRoute != nil)
     }
 
     static func commandSheet(
         intent: ShellCommandIntent? = nil,
         entrySource: ShellCommandEntrySource,
-        presentationContext: ShellCommandPresentationContext = .neutral
+        presentationContext: ShellCommandPresentationContext = .neutral,
+        typedCaptureRoute: CaptureTypedRoute? = nil
     ) -> ShellOverlayState {
         ShellOverlayState(
             kind: .quietCommandSheet,
             intent: intent,
             entrySource: entrySource,
-            presentationContext: presentationContext
+            presentationContext: presentationContext,
+            typedCaptureRoute: typedCaptureRoute
         )
     }
 

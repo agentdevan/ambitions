@@ -7,12 +7,13 @@ enum CaptureTypedRouteKind: String, Codable, Sendable, Equatable, Hashable, Case
     case proof
     case timeProtect = "time_protect"
     case noteThought = "note_thought"
+    case customLifeArea = "custom_life_area"
     case fixedPointConstraint = "fixed_point_constraint"
     case attachmentContext = "attachment_context"
 
     var persistenceRoute: CaptureRoute {
         switch self {
-        case .freeCapture, .noteThought:
+        case .freeCapture, .noteThought, .customLifeArea:
             return .captureInbox
         case .goalSeed:
             return .goalSeed
@@ -27,7 +28,7 @@ enum CaptureTypedRouteKind: String, Codable, Sendable, Equatable, Hashable, Case
 
     var captureKind: CaptureKind {
         switch self {
-        case .freeCapture, .noteThought:
+        case .freeCapture, .noteThought, .customLifeArea:
             return .raw
         case .goalSeed:
             return .goalSeed
@@ -54,10 +55,29 @@ enum CaptureTypedRouteKind: String, Codable, Sendable, Equatable, Hashable, Case
             return "Protected time"
         case .noteThought:
             return "Thought"
+        case .customLifeArea:
+            return "Life Area"
         case .fixedPointConstraint:
             return "Fixed point"
         case .attachmentContext:
             return "Attachment context"
+        }
+    }
+
+    var smartAttachmentRouteType: SmartAttachmentRouteType {
+        switch self {
+        case .freeCapture:
+            return .idea
+        case .goalSeed:
+            return .goal
+        case .stepSeed, .timeProtect:
+            return .task
+        case .proof, .attachmentContext:
+            return .proofItem
+        case .noteThought, .customLifeArea:
+            return .contextualNote
+        case .fixedPointConstraint:
+            return .decision
         }
     }
 }

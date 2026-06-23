@@ -261,6 +261,36 @@ final class StageStore {
         )
     }
 
+    func presentTypedCaptureComposer(
+        kind: CaptureTypedRouteKind,
+        source: ShellCommandEntrySource,
+        goalID: String? = nil,
+        lifeAreaID: String? = nil,
+        seedText: String = ""
+    ) {
+        let route = CaptureTypedRoute(
+            kind: kind,
+            context: CaptureRouteContext(
+                sourceSurface: source.displayTitle,
+                goalID: goalID,
+                lifeAreaID: lifeAreaID
+            )
+        )
+        dispatch(
+            .presentOverlay(
+                ShellOverlayState(
+                    kind: .quietCommandSheet,
+                    intent: .quickCapture,
+                    entrySource: source,
+                    presentationContext: .quickCapture,
+                    query: seedText,
+                    goalID: goalID,
+                    typedCaptureRoute: route
+                )
+            )
+        )
+    }
+
     func presentMemoryLens(
         intent: ShellCommandIntent? = .memoryLens,
         source: ShellCommandEntrySource,

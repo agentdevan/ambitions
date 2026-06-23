@@ -49,14 +49,24 @@ struct AmbitionsRootStageSurfaceHost: View {
                 GoalsSurface(
                     externalCreationMessage: creationMessage,
                     externalRefreshID: goalsRefreshID,
-                    showsNavigationChrome: false,
-                    onCreateGoal: {
-                        onCreateGoal(.goalsCreate, "", nil)
-                    }
+                    showsNavigationChrome: false
                 )
             }
             .navigationDestination(for: GoalRouteTarget.self) { target in
-                GoalDetailScreen(target: target)
+                if target.isLifeAreaRoute, let lifeAreaID = target.lifeAreaID {
+                    AppShellScaffold(
+                        title: GoalsLifeAreaTitle.title(for: lifeAreaID),
+                        subtitle: nil,
+                        posture: .direction,
+                        backButtonAccessibilityIdentifier: "shell.goals.back-button",
+                        onBack: { navigation.resetGoalsPath() },
+                        trailingButtons: []
+                    ) {
+                        AreaDetailScreen(lifeAreaID: lifeAreaID)
+                    }
+                } else {
+                    GoalDetailScreen(target: target)
+                }
             }
         }
     }
