@@ -49,7 +49,7 @@ echo ""
 
 echo "## 3. Apple Developer Apps / Resources"
 echo "\`\`\`text"
-echo "SF Symbols App: $(ls -ld "/Applications/SF Symbols.app" 2>/dev/null || echo "Missing")"
+echo "SF Symbols App: $(ls -ld "/Applications/SF Symbols.app" 2>/dev/null || ls -ld "/Applications/SF Symbols Beta.app" 2>/dev/null || echo "Missing")"
 echo "Icon Composer App: $(ls -ld "/Applications/Icon Composer.app" 2>/dev/null || echo "Missing")"
 echo "Xcode Stable: $(ls -ld "/Applications/Xcode.app" 2>/dev/null || echo "Missing")"
 echo "Xcode Beta: $(ls -ld "/Applications/Xcode-beta.app" 2>/dev/null || echo "Missing")"
