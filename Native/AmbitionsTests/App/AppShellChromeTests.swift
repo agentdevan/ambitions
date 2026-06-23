@@ -1,6 +1,6 @@
+@testable import Ambitions
 import AmbitionsDesignSystem
 import XCTest
-@testable import Ambitions
 
 final class AppShellChromeTests: XCTestCase {
     func testModeLensUsesPresentationLabelsOnly() {
@@ -11,9 +11,9 @@ final class AppShellChromeTests: XCTestCase {
         XCTAssertEqual(AmbitionAmbientStatus.allCases.map(\.title), ["Clear", "Steady", "Tight", "Too much planned", "Needs attention", "Recovered", "Private"])
         XCTAssertFalse(AmbitionAmbientStatus.allCases.map(\.title).contains { title in
             title.contains("%") ||
-            title.localizedCaseInsensitiveContains("score") ||
-            title.localizedCaseInsensitiveContains("confidence") ||
-            title.localizedCaseInsensitiveContains("protected")
+                title.localizedCaseInsensitiveContains("score") ||
+                title.localizedCaseInsensitiveContains("confidence") ||
+                title.localizedCaseInsensitiveContains("protected")
         })
     }
 
@@ -34,12 +34,12 @@ final class AppShellChromeTests: XCTestCase {
 
     func testShellIdentifiersStayStableForMeridianDestinations() {
         XCTAssertEqual(
-        StageDockDestination.all.map(\.accessibilityIdentifier),
+            StageDockDestination.all.map(\.accessibilityIdentifier),
             [
                 "shell.meridian.destination.today",
                 "shell.meridian.destination.goals",
                 "shell.meridian.destination.time",
-                "shell.meridian.destination.you"
+                "shell.meridian.destination.you",
             ]
         )
         XCTAssertTrue(StageChromeContract.launchDefault.rollbackLabel.contains("Stage shell migration commit"))
@@ -71,22 +71,36 @@ final class AppShellChromeTests: XCTestCase {
         }
     }
 
+    func testAMB1191DockRailUsesThemeMaterialInsteadOfDarkOnlyLiquidGlassTokens() throws {
+        let source = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Stage/Chrome/StageDockRail.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(source.contains("theme.shell.bottomBarMaterial"))
+        XCTAssertTrue(source.contains("theme.colors.surfaceOverlay"))
+        XCTAssertTrue(source.contains("theme.shell.divider"))
+        XCTAssertFalse(source.contains("LiquidGlass.darkDockCore"))
+        XCTAssertFalse(source.contains("LiquidGlass.darkDockBase"))
+        XCTAssertFalse(source.contains("Separator.darkNonOpaque"))
+    }
+
     func testM12HeaderPosturesExposeContinuityWithoutHiddenNavigation() {
         let messages = [
             AppShellHeaderPosture.execution.continuityMessage,
             AppShellHeaderPosture.direction.continuityMessage,
             AppShellHeaderPosture.shaping.continuityMessage,
             AppShellHeaderPosture.reflection.continuityMessage,
-            AppShellHeaderPosture.utility.continuityMessage
+            AppShellHeaderPosture.utility.continuityMessage,
         ]
 
         XCTAssertEqual(messages.count, Set(messages).count)
         XCTAssertTrue(messages.allSatisfy { $0.isEmpty == false })
         XCTAssertFalse(messages.contains { message in
             message.localizedCaseInsensitiveContains("dashboard") ||
-            message.localizedCaseInsensitiveContains("AI") ||
-            message.localizedCaseInsensitiveContains("sync") ||
-            message.localizedCaseInsensitiveContains("sixth tab")
+                message.localizedCaseInsensitiveContains("AI") ||
+                message.localizedCaseInsensitiveContains("sync") ||
+                message.localizedCaseInsensitiveContains("sixth tab")
         })
     }
 
@@ -129,10 +143,23 @@ final class AppShellChromeTests: XCTestCase {
                 "shell.meridian.destination.today",
                 "shell.meridian.destination.goals",
                 "shell.meridian.destination.time",
-                "shell.meridian.destination.you"
+                "shell.meridian.destination.you",
             ]
         )
         XCTAssertFalse(StageDockDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("capture") })
         XCTAssertFalse(StageDockDestination.all.map(\.accessibilityIdentifier).contains { $0.localizedCaseInsensitiveContains("plan") })
+    }
+}
+
+private extension AppShellChromeTests {
+    func repoRoot() -> URL {
+        var url = URL(fileURLWithPath: #filePath)
+        while url.pathComponents.count > 1 {
+            if FileManager.default.fileExists(atPath: url.appendingPathComponent("project.yml").path) {
+                return url
+            }
+            url.deleteLastPathComponent()
+        }
+        return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
     }
 }

@@ -2,7 +2,7 @@
 
 **Status:** Runtime device review reconciled. Current app status is **Red**.
 
-**Last source reconciliation:** 2026-06-22  
+**Last source reconciliation:** 2026-06-23
 **Last device/runtime review:** 2026-06-22  
 **Runtime evidence set:** `More issues.zip`, screenshots `IMG_8475.PNG` through `IMG_8499.PNG`, plus tester notes from the same review.  
 **Baseline source context:** `ce75bb77122350fcab9500806e5ff26f8ee02e58` (`AMB-1180 rebuild LifeShape field object`) plus current `main` docs commits.
@@ -48,7 +48,7 @@ The current build is materially improved in source architecture, Time foundation
 
 1. **Goals is Red / unusable and has a crash on the `+` button.**
 2. **Capture is not a full-screen global composer; it opens as a half-screen bottom sheet and has a dead microphone button.**
-3. **Light mode is effectively unusable because many objects remain hard-coded dark or low-contrast.**
+3. **Light mode has AMB-1191 source repairs for theme preference, semantic foundation tokens, dock material, and live appearance propagation, but current Light/System/Dark device proof is still missing.**
 4. **Search exists visually but is not functionally useful and needs a complete rebuild.**
 5. **Today still contains confusing toggles, status phrases, and context actions that do not belong in the primary Today object.**
 6. **Time improved but still does not communicate a usable LifeShape Field. It can place a step when no real user-created step or goal exists.**
@@ -100,8 +100,8 @@ The current build is materially improved in source architecture, Time foundation
 | `AMB-ISSUE-1301` | Goals | **New P0 — runtime verified** | Goals `+` button crashes. | Tester notes. | Crash log + no-crash device proof. |
 | `AMB-ISSUE-1302` | Goals | **New P0 — runtime verified** | Goals is currently unusable and needs full re-spec/rebuild. | `IMG_8479`, `IMG_8480`, `IMG_8491`, `IMG_8498`, `IMG_8499`; tester notes. | New Goals spec, target, implementation, screenshot proof. |
 | `AMB-ISSUE-1601` | Search | **New P0 — runtime verified** | Search exists visually but is nowhere near functional; needs re-spec and rebuild. | `IMG_8496`, `IMG_8497`; tester notes. | Search spec + actionable result flow proof. |
-| `AMB-ISSUE-1901` | Light mode | **New P0 — runtime verified** | Light mode is fully failed/unusable. | `IMG_8488`–`IMG_8492`. | Light-mode screenshot matrix. |
-| `AMB-ISSUE-1902` | Theme / Design system | **New P0 — runtime verified** | App contains hard-coded dark colors; objects remain dark or low-contrast in light mode. | `IMG_8488`–`IMG_8492`; tester notes. | Token audit + light-mode screenshot proof. |
+| `AMB-ISSUE-1901` | Light mode | **Source-repaired candidate / runtime proof pending** | AMB-1191 centralizes System/Light/Dark theme preference resolution and adds semantic foundation token coverage, but current Light/System/Dark screenshot proof is still required. | Prior runtime evidence: `IMG_8488`–`IMG_8492`; AMB-1191 source/test proof. | Light-mode screenshot matrix. |
+| `AMB-ISSUE-1902` | Theme / Design system | **Source-repaired candidate / runtime proof pending** | AMB-1191 adds semantic color/material/typography/spacing/motion/haptics/glyph audit coverage and routes the touched dock material through `AmbitionTheme`; full visual hard-coded-dark purge remains proof-gated. | Prior runtime evidence: `IMG_8488`–`IMG_8492`; tester notes; AMB-1191 token/source tests. | Token audit + light-mode screenshot proof. |
 
 ## Active P1/P2 issues by surface
 
@@ -178,7 +178,7 @@ The current build is materially improved in source architecture, Time foundation
 | `AMB-ISSUE-0606` | Improved but open | You has full-screen details, but many app drilldowns elsewhere are still slide-up cards. | `IMG_8488`; notes |
 | `AMB-ISSUE-1501` | New | Divider lines between every row should be removed. | `IMG_8483`–`IMG_8487` |
 | `AMB-ISSUE-1502` | New | Weird shadow/glow appears at the bottom of You border/container. | `IMG_8483`–`IMG_8487` |
-| `AMB-ISSUE-1503` | New | Theme changes do not apply live until app close/reopen. | Tester notes |
+| `AMB-ISSUE-1503` | Source-repaired candidate / runtime proof pending | Theme changes now apply through the app container as the You Appearance editor changes preference or accent; current device proof is still required. | Tester notes; AMB-1191 source/test proof |
 | `AMB-ISSUE-1504` | New | Header exposes `YOU · Profile and settings` and `Your System` system language. | `IMG_8483`, `IMG_8489`, `IMG_8496` |
 | `AMB-ISSUE-1505` | New | `How Ambitions works for me` is still explanatory trust copy on root You. | `IMG_8483`, `IMG_8489`, `IMG_8496` |
 
@@ -210,10 +210,10 @@ The current build is materially improved in source architecture, Time foundation
 
 | ID | Status | Issue | Evidence |
 |---|---|---|---|
-| `AMB-ISSUE-1903` | New | Appearance Studio remains dark/illegible even after selecting Light. | `IMG_8488` |
-| `AMB-ISSUE-1904` | New | Light-mode dock is a low-contrast grey pill and does not preserve flagship polish. | `IMG_8489`–`IMG_8492` |
-| `AMB-ISSUE-1905` | New | Light-mode Today appears dimmed/washed out and unusable. | `IMG_8492` |
-| `AMB-ISSUE-1906` | New | Light-mode Goals and Time retain dark-object assumptions and low-contrast treatment. | `IMG_8490`, `IMG_8491` |
+| `AMB-ISSUE-1903` | Source-repaired candidate / runtime proof pending | Appearance preference now resolves through the design-system theme bridge and live editor propagation; Appearance Studio still needs current Light-mode screenshot proof. | Prior runtime evidence: `IMG_8488`; AMB-1191 source/test proof |
+| `AMB-ISSUE-1904` | Source-repaired candidate / runtime proof pending | Touched Stage dock rail no longer uses dark-only Liquid Glass constants and now renders from theme material/divider tokens; current Light-mode dock screenshot proof is still required. | Prior runtime evidence: `IMG_8489`–`IMG_8492`; AMB-1191 source/test proof |
+| `AMB-ISSUE-1905` | Still open / AMB-1191 foundation repaired | Semantic theme foundations were added, but Today-specific light-mode visual quality was not redesigned in this bounded train. | `IMG_8492`; AMB-1191 did not produce current Today visual proof |
+| `AMB-ISSUE-1906` | Still open / AMB-1191 foundation repaired | Semantic theme foundations were added, but Goals and Time light-mode object redesigns were outside this bounded train. | `IMG_8490`, `IMG_8491`; AMB-1191 did not produce current Goals/Time visual proof |
 
 ### Accessibility and QA
 
@@ -247,13 +247,13 @@ The current build is materially improved in source architecture, Time foundation
 
 ## Next implementation order implied by this review
 
-1. **P0 Light mode / theme token purge.** No hard-coded dark objects; live theme propagation.
+1. **P0 Light mode / theme proof follow-through.** AMB-1191 repaired core theme propagation and semantic token coverage; current Light/System/Dark screenshots still need to prove no hard-coded dark objects remain in the rendered app.
 2. **P0 Capture full-screen composer rebuild.** Full-screen, no internal chips/copy, working mic/fallback, stable field dominance.
 3. **P0 Goals respec/rebuild and `+` crash fix.** Do not patch the current object; rebuild it.
 4. **P0 Shell full-bleed chrome rebuild.** Four floating icon-only dock buttons; no bordered dock; no root internal object names.
 5. **P0 Today action cleanup.** Remove no-op toggles, internal rail copy, unwanted CTAs; gate Record Outcome by actual step presence.
 6. **P0 Search respec/rebuild.** Do not polish current search sheet.
 7. **P1 Time second pass.** Remove fake `Place Step`, clarify dots/Now/bars, make actions require real user state.
-8. **P1 You polish.** Remove dividers/glow, make settings actionable, fix live theme update.
+8. **P1 You polish.** Remove dividers/glow, make settings actionable, and visually prove live theme update.
 9. **P1 Full-screen drilldown architecture.** Replace shallow slide-up cards where a real drilldown is required.
 10. **QA proof pass.** Build, device screenshots, UI tests, accessibility proof, and visual regression.

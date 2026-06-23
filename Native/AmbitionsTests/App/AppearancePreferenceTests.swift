@@ -1,7 +1,7 @@
+@testable import Ambitions
 import AmbitionsDesignSystem
 import SwiftUI
 import XCTest
-@testable import Ambitions
 
 final class AppearancePreferenceTests: XCTestCase {
     func testSystemAppearanceDoesNotForceColorScheme() {
@@ -26,6 +26,28 @@ final class AppearancePreferenceTests: XCTestCase {
         XCTAssertNotEqual(darkTheme.mode, lightTheme.mode)
     }
 
+    func testAppearancePreferenceUsesDesignSystemThemePreferenceBridge() {
+        XCTAssertEqual(AppAppearancePreference.system.themePreference, .system)
+        XCTAssertEqual(AppAppearancePreference.light.themePreference, .light)
+        XCTAssertEqual(AppAppearancePreference.dark.themePreference, .dark)
+        XCTAssertEqual(AmbitionThemePreference.system.resolvedMode(systemMode: .dark), .dark)
+        XCTAssertEqual(AmbitionThemePreference.system.resolvedMode(systemMode: .light), .light)
+        XCTAssertEqual(AmbitionThemePreference.light.resolvedMode(systemMode: .dark), .light)
+        XCTAssertEqual(AmbitionThemePreference.dark.resolvedMode(systemMode: .light), .dark)
+    }
+
+    func testYouAppearanceDetailAppliesEditorChangesLiveBeforePersistenceSave() throws {
+        let source = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootDetailRouteSurface.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertTrue(source.contains("applyAppearancePreviewFromEditor()"))
+        XCTAssertTrue(source.contains(".onChange(of: viewModel.appearancePreference)"))
+        XCTAssertTrue(source.contains(".onChange(of: viewModel.accentFamily)"))
+        XCTAssertTrue(source.contains("userSystem.applyAppearancePreference("))
+    }
+
     func testThemeChromeUsesOpaqueHeaderAndMeaningfulDarkLightModes() {
         let darkTheme = AmbitionTheme.theme(for: .dark, accentFamily: .sage)
         let lightTheme = AmbitionTheme.theme(for: .light, accentFamily: .sage)
@@ -44,7 +66,7 @@ final class AppearancePreferenceTests: XCTestCase {
             .privacyBoundary,
             .receipt,
             .accessibilityFallbackSurface,
-            .accessibilityContrastStroke
+            .accessibilityContrastStroke,
         ]
 
         XCTAssertEqual(Set(AmbitionPrimitiveSemanticToken.allCases), expectedTokens)
@@ -67,7 +89,7 @@ final class AppearancePreferenceTests: XCTestCase {
     func testAMB571PrimitiveSemanticTokensResolveInDarkAndLightThemes() {
         let themes = [
             AmbitionTheme.theme(for: .dark, accentFamily: .sage),
-            AmbitionTheme.theme(for: .light, accentFamily: .sage)
+            AmbitionTheme.theme(for: .light, accentFamily: .sage),
         ]
 
         for theme in themes {
@@ -75,5 +97,18 @@ final class AppearancePreferenceTests: XCTestCase {
                 XCTAssertFalse(String(describing: token.color(in: theme)).isEmpty)
             }
         }
+    }
+}
+
+private extension AppearancePreferenceTests {
+    func repoRoot() -> URL {
+        var url = URL(fileURLWithPath: #filePath)
+        while url.pathComponents.count > 1 {
+            if FileManager.default.fileExists(atPath: url.appendingPathComponent("project.yml").path) {
+                return url
+            }
+            url.deleteLastPathComponent()
+        }
+        return URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
     }
 }

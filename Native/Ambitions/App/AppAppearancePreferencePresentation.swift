@@ -2,8 +2,19 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 extension AppAppearancePreference {
-    var preferredColorScheme: ColorScheme? {
+    var themePreference: AmbitionThemePreference {
         switch self {
+        case .system:
+            return .system
+        case .light:
+            return .light
+        case .dark:
+            return .dark
+        }
+    }
+
+    var preferredColorScheme: ColorScheme? {
+        switch themePreference {
         case .system:
             return nil
         case .light:
@@ -17,13 +28,10 @@ extension AppAppearancePreference {
         systemColorScheme: ColorScheme,
         accentFamily: AmbitionAccentFamily
     ) -> AmbitionTheme {
-        switch self {
-        case .system:
-            return .theme(for: systemColorScheme == .dark ? .dark : .light, accentFamily: accentFamily)
-        case .light:
-            return .theme(for: .light, accentFamily: accentFamily)
-        case .dark:
-            return .theme(for: .dark, accentFamily: accentFamily)
-        }
+        let systemMode: AmbitionThemeMode = systemColorScheme == .dark ? .dark : .light
+        return .theme(
+            for: themePreference.resolvedMode(systemMode: systemMode),
+            accentFamily: accentFamily
+        )
     }
 }

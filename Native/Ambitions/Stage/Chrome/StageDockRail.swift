@@ -32,14 +32,14 @@ struct StageDockRail: View {
 
     private var railMaterial: some View {
         Capsule(style: .continuous)
-            .fill(AmbitionsIOS26SemanticTokens.LiquidGlass.darkDockCore.opacity(theme.mode == .dark ? 0.72 : 0.58))
+            .fill(theme.shell.bottomBarMaterial)
             .overlay(
                 Capsule(style: .continuous)
-                    .fill(AmbitionsIOS26SemanticTokens.LiquidGlass.darkDockBase.opacity(theme.mode == .dark ? 0.38 : 0.24))
+                    .fill(theme.colors.surfaceOverlay.opacity(theme.mode == .dark ? 0.70 : 0.62))
             )
             .overlay(
                 Capsule(style: .continuous)
-                    .stroke(AmbitionsIOS26SemanticTokens.Separator.darkNonOpaque.opacity(0.42), lineWidth: 1)
+                    .stroke(theme.shell.divider.opacity(theme.mode == .dark ? 0.72 : 0.62), lineWidth: 1)
             )
             .overlay(alignment: .top) {
                 Capsule(style: .continuous)
@@ -106,7 +106,7 @@ struct StageDockRail: View {
                                 colors: [
                                     theme.colors.accentWarm.opacity(theme.mode == .dark ? 0.070 : 0.055),
                                     theme.colors.accentPrimary.opacity(theme.mode == .dark ? 0.045 : 0.035),
-                                    theme.colors.canvasElevated.opacity(0.025)
+                                    theme.colors.canvasElevated.opacity(0.025),
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
@@ -133,40 +133,44 @@ struct StageDockRail: View {
 }
 
 #if DEBUG
-private struct StageDockRailPreviewHost: View {
-    @State private var selectedTab: AmbitionsSurface = .today
-    private let theme = AmbitionTheme.dark
+    private struct StageDockRailPreviewHost: View {
+        @State private var selectedTab: AmbitionsSurface = .today
+        let theme: AmbitionTheme
 
-    var body: some View {
-        ZStack(alignment: .bottom) {
-            theme.shell.canvasGradient
-                .ignoresSafeArea()
+        var body: some View {
+            ZStack(alignment: .bottom) {
+                theme.shell.canvasGradient
+                    .ignoresSafeArea()
 
-            VStack(spacing: theme.spacing.md) {
-                Spacer()
+                VStack(spacing: theme.spacing.md) {
+                    Spacer()
 
-                StageDockRail(
-                    theme: theme,
-                    selectedTab: selectedTab
-                ) { tab in
-                    selectedTab = tab
+                    StageDockRail(
+                        theme: theme,
+                        selectedTab: selectedTab
+                    ) { tab in
+                        selectedTab = tab
+                    }
+                    .padding(.bottom, theme.spacing.md)
                 }
-                .padding(.bottom, theme.spacing.md)
             }
+            .frame(width: 393, height: 240)
+            .background(theme.shell.canvasGradient)
+            .ambitionTheme(theme)
+            .preferredColorScheme(theme.mode == .dark ? .dark : .light)
         }
-        .frame(width: 393, height: 240)
-        .background(theme.shell.canvasGradient)
-        .ambitionTheme(theme)
-        .preferredColorScheme(.dark)
     }
-}
 
-#Preview("Stage Dock Rail") {
-    StageDockRailPreviewHost()
-}
+    #Preview("Stage Dock Rail") {
+        StageDockRailPreviewHost(theme: .dark)
+    }
 
-#Preview("Stage Dock Rail Large Type") {
-    StageDockRailPreviewHost()
-        .environment(\.dynamicTypeSize, .accessibility2)
-}
+    #Preview("Stage Dock Rail Light") {
+        StageDockRailPreviewHost(theme: .light)
+    }
+
+    #Preview("Stage Dock Rail Large Type") {
+        StageDockRailPreviewHost(theme: .dark)
+            .environment(\.dynamicTypeSize, .accessibility2)
+    }
 #endif

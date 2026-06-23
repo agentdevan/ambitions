@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 #if canImport(UIKit)
-import UIKit
+    import UIKit
 #endif
 
 struct YouRootDetailRouteSurface: View {
@@ -65,6 +65,12 @@ struct YouRootDetailRouteSurface: View {
             await viewModel.load(using: featureFactory.youService)
             syncAppearanceFromLoadedDashboard()
         }
+        .onChange(of: viewModel.appearancePreference) { _, _ in
+            applyAppearancePreviewFromEditor()
+        }
+        .onChange(of: viewModel.accentFamily) { _, _ in
+            applyAppearancePreviewFromEditor()
+        }
     }
 
     func refresh() async {
@@ -78,6 +84,13 @@ struct YouRootDetailRouteSurface: View {
             syncAppearanceFromLoadedDashboard()
             announce(YouInteractions.accessibilityAnnouncement(for: .savePreferences))
         }
+    }
+
+    func applyAppearancePreviewFromEditor() {
+        userSystem.applyAppearancePreference(
+            viewModel.appearancePreference,
+            viewModel.accentFamily
+        )
     }
 
     func requestNotificationAuthorization() {
@@ -103,9 +116,9 @@ struct YouRootDetailRouteSurface: View {
 
     func openSystemSettingsIfAvailable() {
         #if canImport(UIKit)
-        guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-        announce(YouInteractions.accessibilityAnnouncement(for: .openSystemSettings))
-        UIApplication.shared.open(url)
+            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+            announce(YouInteractions.accessibilityAnnouncement(for: .openSystemSettings))
+            UIApplication.shared.open(url)
         #endif
     }
 
@@ -119,9 +132,9 @@ struct YouRootDetailRouteSurface: View {
 
     func announce(_ message: String) {
         #if canImport(UIKit)
-        UIAccessibility.post(notification: .announcement, argument: message)
+            UIAccessibility.post(notification: .announcement, argument: message)
         #else
-        _ = message
+            _ = message
         #endif
     }
 
