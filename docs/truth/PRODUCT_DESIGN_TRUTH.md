@@ -39,6 +39,38 @@ Root product posture:
 
 ---
 
+## 0A. 2026-06-22 Runtime Remediation Canon Amendment
+
+The active runtime remediation decisions are canonicalized in:
+
+- `docs/truth/2026-06-22-runtime-remediation-decision-register.md`
+- `docs/qa/remediation/2026-06-22-codex-remediation-law.md`
+
+These decisions refine the remediation implementation path after the 2026-06-22 runtime device review and the QA project `Ambitions Runtime QA Remediation — 2026-06-22 Device Review`.
+
+Key laws:
+
+1. Codex must not be handed vague “fix this” issues. Every execution train requires a repo-backed implementation dossier.
+2. Runtime app paths must be real. Fake success, fake placement, dead controls, and source-only closure are forbidden.
+3. Ambitions may contain best-in-class task behavior as a feature. The user-facing object is Step. Free-floating Steps are valid when no Goal currently fits.
+4. Capture is the global typed route graph and full-screen Stage composer for goals, steps, thoughts, proof, protected time, constraints, and attachments.
+5. Goals root is a broad customizable Life Area Atlas. Goal Detail is an operational path timeline and historical journal.
+6. Today is a visually rich, actionable Reality Window with state-gated actions.
+7. Time is Ambitions’ native Life Calendar: calendar-grade, Apple-native, and enriched by capacity, protection, placement, proof, recovery, and goal-path intelligence.
+8. Search is a local-only Find / Act / Inspect surface.
+9. You is Apple iOS Settings structure + ChatGPT iOS settings clarity + Ambitions privacy/local-first cohesion.
+10. Shell is Stage OS: icon-only root navigation, global gestures, route depth, safe areas, motion, haptics, and accessibility.
+11. Copy must be minimal, icon-first, and progressively disclosed.
+12. Root surfaces must not expose internal architecture names.
+13. Proof and owner acceptance are required before Done.
+
+If this amendment conflicts with older wording that says Ambitions must not be a task app or calendar clone, interpret the older law as brand/IA law, not capability prohibition:
+
+- Ambitions is not framed as a task app, but it must support first-class Step/free-floating-step behavior.
+- Ambitions is not a calendar clone, but Time is a first-class native Life Calendar.
+
+---
+
 ## 1. Locked Product Law
 
 Ambitions has four persistent Stage surfaces:
@@ -230,35 +262,7 @@ Shell is Stage OS. It owns four icon-only root navigation buttons, route depth, 
 
 ---
 
-## 7. 2026-06-22 Runtime Remediation Canon Amendment
-
-The active runtime remediation decisions are canonicalized in:
-
-- `docs/truth/2026-06-22-runtime-remediation-decision-register.md`
-- `docs/adr/ADR-2026-06-22-runtime-remediation-canon.md`
-- `docs/qa/remediation/2026-06-22-codex-remediation-law.md`
-- `docs/qa/remediation/dossiers/`
-
-These files are subordinate to this root product truth file but binding for the active runtime QA remediation project. They translate this canon into executable Codex law.
-
-Key amendment laws:
-
-1. Ambitions may contain best-in-class task behavior as a contained feature. The user-facing object is `Step`; free-floating Steps are valid when no Goal currently fits.
-2. Capture is the global typed route graph and full-screen Stage composer for goals, steps, thoughts, proof, protected time, fixed points, constraints, and context.
-3. Goals root is a customizable Life Area Atlas. Goal Detail is a path operation surface and historical journal.
-4. Today is a visually rich, actionable Reality Window with state-gated actions.
-5. Time is Ambitions’ native Life Calendar: Apple Calendar obviousness, Weather richness, and Private Life Runtime intelligence.
-6. Search is a local-only Find / Act / Inspect surface.
-7. You is Apple iOS Settings structure plus ChatGPT iOS settings clarity plus Ambitions privacy/local-first cohesion.
-8. Shell is Stage OS: icon-only root navigation, global gestures, route depth, safe areas, motion, haptics, and accessibility.
-9. Runtime app paths must be real. Fake success, fake placement, dead controls, placeholder routes, and source-only closure are forbidden.
-10. Codex may decide low-level implementation mechanics, but may not decide product behavior, IA, copy density, route behavior, fake-state policy, proof standards, or what “fixed” means.
-
-Known issue closure is governed by the relevant remediation dossier and `docs/qa/KNOWN_ISSUES.md`. No remediation issue is `Closed - verified` without current proof and owner acceptance.
-
----
-
-## 8. ChatGPT Usage Guidance
+## 7. ChatGPT Usage Guidance
 
 When this file is used as ChatGPT Project Source:
 
@@ -285,7 +289,7 @@ Avoid weak first drafts. Do not provide a “good enough MVP” plan when the as
 
 ---
 
-## 9. Final Non-Negotiables
+## 8. Final Non-Negotiables
 
 - Ambitions is one adaptive object Stage.
 - Today / Goals / Time / You are the only persistent Stage surfaces.
