@@ -18,7 +18,7 @@ Use this file to route known issues to the correct Codex execution dossier. Do n
 | `AMB-1197` | `docs/qa/remediation/dossiers/AMB-1197-time-native-life-calendar.md` | Time rows: `AMB-ISSUE-0009`, `0501`–`0507`, `0913`, `1401`–`1405` |
 | `AMB-1198` | `docs/qa/remediation/dossiers/AMB-1198-you-settings-privacy.md` | You / settings rows: `AMB-ISSUE-0601`–`0607`, `1501`–`1505` |
 | `AMB-1199` | `docs/qa/remediation/dossiers/AMB-1199-final-proof-accessibility.md` | Accessibility / final proof / release-gate rows: `AMB-ISSUE-0013`–`0015`, `0801`–`0807`, `0903`–`0912`, `1801`, `1802` |
-| `AMB-1200` | `docs/qa/remediation/dossiers/AMB-1200-register-sync-control-closeout.md` | Register sync and project-control rows |
+| `AMB-1200` | `docs/qa/remediation/dossiers/AMB-1200-register-sync-control-closeout.md`; `docs/qa/evidence/2026-06-23-final-proof/source-train-ledger.md`; `docs/qa/evidence/2026-06-23-final-proof/post-proof-repair-queue.md`; `docs/qa/evidence/2026-06-23-final-proof/control-closeout.md` | Register sync, source-train ledger, final-proof repair queue, and project-control rows |
 
 ## Closure law
 
