@@ -1,96 +1,114 @@
-# AMB-1191 — Theme / Design System Tokens
+# AMB-1191 — Theme / Design System
 
 ## Objective
 
-Install the foundation design-system layer so Light/Dark/System rendering, semantic tokens, materials, motion, haptics, spacing, typography, and glyph semantics are real and reusable across every remediation train.
+Install the full design-system package layer so theme, materials, spacing, typography, motion, haptics, and semantic glyph rendering come from one coherent token model.
 
 ## Covered Linear issues
 
-- `AMB-1182` parent train
-- `AMB-1191` execution bundle
-- Light Mode/theme QA leaves under `AMB-1182`
+- `AMB-1182`
+- `AMB-1191`
+- the Light Mode / theme QA leaves attached to `AMB-1182`
+
+## Covered repo issue IDs
+
+- `AMB-ISSUE-1901`
+- `AMB-ISSUE-1902`
+- `AMB-ISSUE-1903`
+- `AMB-ISSUE-1905`
+- `AMB-ISSUE-1906`
+- `AMB-ISSUE-0802`
 
 ## Product law
 
-Ambitions must render from a full design-system package/layer. Light Mode is native Apple luminous graphite-on-mist. Dark and Light come from one semantic token model. No hard-coded dark colors in runtime UI.
+Ambitions must render from a full design-system package layer. Light Mode is luminous graphite-on-mist. Dark and Light come from one semantic token model. Theme changes must apply live.
 
 ## Architecture law
 
-Create or repair a real design-system layer for:
-
-- semantic colors,
-- materials,
-- typography,
-- spacing,
-- motion,
-- haptics,
-- semantic glyph registry,
-- preview matrices,
-- audits where feasible.
-
-Use environment or equivalent dependency injection so Light/Dark/System updates propagate live. Do not scatter direct color literals through surfaces.
+Build semantic color tokens, material tokens, spacing tokens, typography tokens, motion tokens, haptic semantics, and a semantic glyph registry. Do not scatter hard-coded colors or local theme overrides through surfaces.
 
 ## Runtime honesty law
 
-Theme switching must update live. If a surface cannot yet render correctly in Light Mode, it must be called out as unresolved in `docs/qa/KNOWN_ISSUES.md`; do not hide or fake it.
+If Light Mode is still broken anywhere after source changes, leave the issue open and document it in `docs/qa/KNOWN_ISSUES.md`. Do not claim visual closure from source-only work.
 
 ## Visual law
 
-Light Mode: mist, pearl, pale graphite, restrained celestial warmth, high contrast. No grey-on-grey. No washed-out dimming. Dark Mode must be rebuilt from the same semantic model.
+Light Mode must be high-contrast, restrained, and premium. No washed-out grey. No dark objects stranded in Light Mode. Dark and Light are rebuilt together from one semantic model.
 
 ## Copy and iconography law
 
-No copy changes should be used to cover visual/system token defects. Iconography must flow through semantic glyph mapping where touched.
+Do not use copy to explain theme defects away. Touched icons must route through semantic glyph mapping.
+
+## State model
+
+- Appearance mode = System / Light / Dark
+- Theme propagation = live
+- Surface state = semantic token driven, not literal-color driven
+- Visual proof state = simulator or device, with device required for Visual Green
 
 ## Required deletion / replacement
 
-- Remove scoped hard-coded dark colors encountered in primary UI paths.
-- Remove local theme hacks that bypass global tokens.
-- Remove theme state paths that require app relaunch to apply.
+- Delete hard-coded dark colors in touched runtime paths.
+- Replace local color hacks with semantic tokens.
+- Delete any close/reopen requirement for theme updates.
 
 ## Required implementation
 
-- Design-system token families.
-- Live Light/Dark/System propagation.
-- Preview matrix covering core surfaces.
-- Auditable references to no hard-coded dark colors in changed files.
-- Theme settings integration path for You/Appearance.
+- full design-system package layer
+- semantic tokens
+- Light Mode luminous graphite-on-mist
+- Dark/Light from one token model
+- no hard-coded dark colors
+- no close/reopen theme update
+- proof hooks for token audit, Dynamic Type, and route proof
 
 ## Files likely in scope
 
-- `Native/Ambitions/DesignSystem/**`
-- SwiftUI environment/token files
-- appearance/theme settings files
-- root surface token consumers
-- QA/audit scripts if existing
-- `docs/qa/KNOWN_ISSUES.md`
+Codex must inspect current source before editing. Likely areas include `Native/Ambitions/DesignSystem/**`, theme environment files, appearance settings files, root surface token consumers, and `docs/qa/KNOWN_ISSUES.md`. Unexpected files must be justified in closeout.
 
-## Files forbidden unless justified
+## Files forbidden unless explicitly justified
 
-- product truth canon files, unless only linking this dossier
 - unrelated runtime/domain model rewrites
-- network/account/R2 code
+- backend/network/R2 files
+- product canon files other than required cross-links
 
 ## Accessibility requirements
 
-Dynamic Type, Increase Contrast, Reduce Transparency, VoiceOver contrast, and color-not-alone state must be preserved where touched.
+Preserve contrast, Dynamic Type, semantic state, Reduce Transparency, and VoiceOver clarity wherever theme changes land.
 
 ## Testing / audit requirements
 
-Run available build/tests plus any token, hard-coded-color, Dynamic Type, and visual audit scripts. Document commands not run.
+Run available build/tests plus token audit, hard-coded-color audit, Dynamic Type checks, and route proof that navigation, Capture, and Search still work.
 
 ## Screenshot / device proof requirements
 
-Light/Dark/System screenshots for Today, Goals, Time, You, Capture, Search, Closure, Appearance. Simulator screenshots cap visual status at Yellow; device proof is needed for Visual Green.
+Provide Light, Dark, and System screenshots for Today, Goals, Time, You, Capture, Search, and Closure. Device proof is required for Visual Green.
 
-## Known issues update
+## docs/qa/KNOWN_ISSUES.md update requirements
 
-Update all Light Mode/theme rows, including `AMB-ISSUE-1901` through `AMB-ISSUE-1906`, `AMB-ISSUE-1503`, and `AMB-ISSUE-0802` coverage.
+Update all theme-related rows to reflect source status, runtime proof status, and remaining Light Mode risk after the train.
 
 ## Status ceiling
 
-No device proof = Visual Yellow max. Source/tests only = Runtime Yellow max.
+Source/test only = Source Green / Runtime Yellow max. Simulator-only visual proof = Visual Yellow max.
 
 ## Closeout template
 
-Use the global closeout template from `docs/qa/remediation/2026-06-22-codex-remediation-law.md`.
+```text
+Status:
+Bundle:
+Linear issues covered:
+Repo issue IDs covered:
+Files changed:
+Product law implemented:
+Architecture law implemented:
+Runtime honesty proof:
+Validation run:
+Validation not run:
+Screenshots/videos:
+Accessibility proof:
+docs/qa/KNOWN_ISSUES.md updates:
+Status ceiling:
+Known risks:
+Rollback plan:
+```

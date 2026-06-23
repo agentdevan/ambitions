@@ -2,93 +2,138 @@
 
 ## Objective
 
-Rebuild Time as Ambitions’ native Life Calendar: Apple Calendar obviousness, Weather richness, and Private Life Runtime intelligence through real calendar-grade orientations, placement, protection, conflict, proof, and capacity behavior.
+Make Time read as a real native Life Calendar and block fake step-placement behavior, while preserving equal placement rights for free-floating steps.
 
 ## Covered Linear issues
 
-- `AMB-1188` parent train
-- `AMB-1197` execution bundle
-- Time QA leaves under `AMB-1188`
+- `AMB-1188`
+- `AMB-1197`
+- Time QA leaves attached to `AMB-1188`
+
+## Covered repo issue IDs
+
+- `AMB-ISSUE-0009`
+- `AMB-ISSUE-0501`
+- `AMB-ISSUE-0502`
+- `AMB-ISSUE-0503`
+- `AMB-ISSUE-0504`
+- `AMB-ISSUE-0505`
+- `AMB-ISSUE-0506`
+- `AMB-ISSUE-0507`
+- `AMB-ISSUE-0913`
+- `AMB-ISSUE-1401`
+- `AMB-ISSUE-1402`
+- `AMB-ISSUE-1403`
+- `AMB-ISSUE-1404`
+- `AMB-ISSUE-1405`
 
 ## Product law
 
-Time is a first-class calendar-grade surface. It is not avoiding calendar behavior. It is richer than a calendar because it understands open capacity, protected time, pressure, recovery, goal load, transition, proof residue, and fit.
+Time is Ambitions’ native Life Calendar: calendar-grade, Apple-native, Weather-rich, and Private Life Runtime intelligent.
 
 ## Architecture law
 
-Today and Time share placement/protection truth. Time places only real Step objects. A Step can be goal-linked or free-floating but must have title, estimated size/duration, source, and state. Thoughts convert through Capture before placement.
+Day/week/month/year/list are real orientations. Open capacity, protected time, pressure, recovery, goal load, and transition are real lenses. Place Step exists only for a real Step object in a real window.
 
 ## Runtime honesty law
 
-No fake `Place Step`. No real Step means no Place Step. No real window means honest unavailable/recovery/shape options. No silent conflict resolution.
+No fake `Place Step`. If no eligible Step or no real window exists, show an honest unavailable, recovery, or shape option instead.
 
 ## Visual law
 
-Calendar-grade LifeShape Calendar Field. Day/week/month/year/list are real orientations. Now is native seam/line related to next fixed point and open window. Fixed points are event anchors with semantic glyphs. No unexplained dots.
+- native now seam
+- fixed point anchors
+- visible open windows
+- six lenses: Open Capacity, Protected Time, Pressure, Recovery, Goal Load, Transition
+- sparse native labels
+- no root `TIME · LifeShape Field`
 
 ## Copy and iconography law
 
-Sparse native labels and tap-to-explain. No root `TIME · LifeShape Field` or `LifeShape Field` marketing copy. Internal names are inspection/help only.
+Remove internal object-name headers and unexplained layer jargon. Dots, bars, seams, fixed points, and windows must be legible without manifesto copy.
 
 ## State model
 
-Lenses: Open Capacity, Protected Time, Pressure, Recovery, Goal Load, Transition. Protected time is a boundary object with start/end, reason, strength, recurrence, source, and conflict behavior. Conflicts produce local deterministic proposals with alternatives.
+- real Step required for placement
+- free-floating steps equal to goal-linked steps
+- protected boundary object with conflict behavior
+- shared Today/Time placement truth
+- proof residue on windows
+- list view is the operational/accessibility equivalent
 
 ## Required deletion / replacement
 
-- Remove fake `Place Step` behavior.
-- Remove unexplained dot/bar/Now semantics.
-- Remove root internal naming.
-- Remove generic fallback rows that substitute for calendar behavior.
-- Remove Light Mode grey-on-grey rendering in Time.
+- delete fake placement success without a real Step
+- remove internal root header copy
+- replace abstract lens labels with understandable calendar semantics where needed
+- remove any row/card fallback that dominates the root object
 
 ## Required implementation
 
-- Calendar-grade day view around now.
-- Native horizon access to week/month/year/list.
-- Day/week/list operational first; month/year real summary views.
-- Real Step placement flow.
-- Protect Window selection/protection flow.
-- Protected boundary persistence.
-- Conflict proposal flow.
-- Proof residue on windows and receipt detail.
-- Capture route support for fixed points, protected windows, step candidates, constraints, and time notes.
+- Time = native Life Calendar
+- calendar-grade, Apple-native, Weather-rich, Private Life Runtime intelligent
+- day/week/month/year/list real
+- native now seam
+- fixed point anchors
+- visible open windows
+- six lenses: Open Capacity, Protected Time, Pressure, Recovery, Goal Load, Transition
+- Place Step only for real Step object
+- free-floating steps equal
+- protected boundary object
+- deterministic conflict proposals
+- shared Today/Time placement truth
+- Goals feasibility checks
+- Capture creates time objects
+- proof residue on windows
+- list as operational/accessibility equivalent
 
 ## Files likely in scope
 
-- Time surface/views/models
-- placement/protection models and repositories
-- calendar orientation views
-- Capture/Today/Goals route contracts
-- design-system calendar tokens
-- tests and QA docs
+Codex must inspect current source before editing. Likely areas include Time root/orientations, placement gating, calendar rendering, lensing, conflict proposals, root-header copy, and `docs/qa/KNOWN_ISSUES.md`. Unexpected files must be justified in closeout.
 
-## Files forbidden unless justified
+## Files forbidden unless explicitly justified
 
-- unrelated Goals path algorithms beyond route contracts
-- cloud calendar services unless already approved/local-safe
-- product truth files except cross-links
+- unrelated shell/search/goals rewrites
+- backend/network/R2 files
+- product canon files other than required cross-links
 
 ## Accessibility requirements
 
-List orientation must be accessibility-equivalent to visual calendar field. VoiceOver labels for now, fixed points, open windows, protected boundaries, placed steps, conflicts. Dynamic Type and Reduce Motion required.
+List mode must be a real operational equivalent. Preserve Dynamic Type, VoiceOver clarity, reduced motion fallback, and honest mutation feedback.
 
 ## Testing / audit requirements
 
-Real Step placement, no-step no-action state, no-window unavailable state, protect-window persistence, conflict proposals, reload persistence, Today/Goals/Capture route proof, forbidden string audit.
+Run build/tests plus no-Step fake-mutation check, valid placement check, orientation proof, Dynamic Type proof, and light-mode checks.
 
 ## Screenshot / device proof requirements
 
-Day/week/month/year/list, real placement, no-step state, no-window state, protect window, conflict proposal, proof residue, Light/Dark, Dynamic Type, VoiceOver notes.
+Provide dark/light screenshots, fake-state proof with no eligible Step, valid-state placement proof, day-week-month-year evidence where implemented, and list/accessibility proof.
 
-## Known issues update
+## docs/qa/KNOWN_ISSUES.md update requirements
 
-Update Time rows including `AMB-ISSUE-0009`, `0501` through `0507`, `0913`, and `1401` through `1405`.
+Update Time rows for fake-placement status, readability, orientation proof, and Light Mode state.
 
 ## Status ceiling
 
-Any fake placement = Red. No persistence proof = Runtime Yellow max. No orientation screenshot matrix = Visual Yellow max.
+Without valid-state and no-Step proof, Time remains Yellow.
 
 ## Closeout template
 
-Use the global closeout template from `docs/qa/remediation/2026-06-22-codex-remediation-law.md`.
+```text
+Status:
+Bundle:
+Linear issues covered:
+Repo issue IDs covered:
+Files changed:
+Product law implemented:
+Architecture law implemented:
+Runtime honesty proof:
+Validation run:
+Validation not run:
+Screenshots/videos:
+Accessibility proof:
+docs/qa/KNOWN_ISSUES.md updates:
+Status ceiling:
+Known risks:
+Rollback plan:
+```

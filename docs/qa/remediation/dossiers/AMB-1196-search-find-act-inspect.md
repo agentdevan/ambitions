@@ -2,91 +2,124 @@
 
 ## Objective
 
-Rebuild Search as a local-only full-screen Find / Act / Inspect surface with deterministic indexing, origin-biased ranking, actionable results, and proof-safe mutations.
+Rebuild Search into a mature shell-scoped full-screen Find / Act / Inspect surface backed by deterministic local indexing.
 
 ## Covered Linear issues
 
-- `AMB-1187` parent train
-- `AMB-1196` execution bundle
-- Search QA leaves under `AMB-1187`
+- `AMB-1187`
+- `AMB-1196`
+- Search QA leaves attached to `AMB-1187`
+
+## Covered repo issue IDs
+
+- `AMB-ISSUE-0701`
+- `AMB-ISSUE-1601`
+- `AMB-ISSUE-1602`
+- `AMB-ISSUE-1603`
+- `AMB-ISSUE-1604`
+- `AMB-ISSUE-1605`
 
 ## Product law
 
-Search is not a shallow sheet, chatbot, generic command palette, or abstract result demo. It finds local Ambitions objects, navigates to them, exposes valid actions, and supports inspection without leaking internal route jargon.
+Search is a unified local-only Find / Act / Inspect surface. It is not a chatbot, shallow sheet, or cloud/LLM query path.
 
 ## Architecture law
 
-Build local deterministic SearchIndex first. Spotlight can mirror later. No cloud search and no hosted LLM query path. Search can pass query into Capture as prefilled input/context; Search does not create objects directly.
+Use a deterministic local SearchIndex. Search opens as a full-screen Stage takeover, ranks globally with origin bias, and passes creation intent into Capture rather than creating objects directly.
 
 ## Runtime honesty law
 
-No abstract fake results. Every result opens a real object/context or shows honest unavailable state. Mutations are state-gated and receipt-backed.
+Do not return abstract implementation labels as if they are user-meaningful results. Mutations must be state-gated and receipt-backed.
 
 ## Visual law
 
-Full-screen Stage takeover with soft origin context. Command field with optional tokens. Result rows are compact and object-specific, not cards.
+- full-screen Stage takeover
+- command field with optional tokens
+- mature overlay treatment
+- result rows with glyph/title/source/state/action/inspect
+- minimal empty state with one contextual action
 
 ## Copy and iconography law
 
-Row anatomy: object glyph, title, source/area, state, one valid action, optional inspect glyph. No `Inspectable route`, `Handoff`, `owning surfaces`, implementation labels, or source-freshness copy on primary rows.
+No internal result labels like `Handoff`, `Global Capture`, `owning surfaces`, or route implementation wording. Keep rows icon-first and human-readable.
 
 ## State model
 
-Search supports goals, steps, thoughts, proof, receipts, life areas, captures, time windows, settings/actions/system areas. Scope is global with origin-biased ranking. Empty state offers one contextual action.
+- origin-biased global scope
+- empty/no-result state
+- dense result state
+- open vs action vs inspect behavior
+- Search-to-Capture prefilling
+- receipt-backed mutations only
 
 ## Required deletion / replacement
 
-- Delete shallow sheet/card Search presentation.
-- Delete abstract implementation-description result rows.
-- Delete separate low-quality Search button if present.
-- Delete internal routing labels from results.
+- replace shallow search sheet/card
+- remove internal route/result labels
+- replace weak field/button treatment with native-quality search entry
+- remove any cloud/LLM dependency for query path
 
 ## Required implementation
 
-- Full-screen Search Stage takeover.
-- Local deterministic SearchIndex repository.
-- Origin-biased ranking.
-- Command field with optional tokens.
-- Real result families and navigation routes.
-- State-gated action exposure via secondary gesture/action glyph.
-- Capture handoff for query-to-capture.
-- Proof/receipt search with user-facing detail.
+- full-screen Stage takeover
+- Find / Act / Inspect
+- global gesture/keyboard/App Shortcut/VoiceOver path
+- command field with optional tokens
+- local deterministic SearchIndex
+- no cloud/LLM query path
+- result rows with glyph/title/source/state/action/inspect
+- global with origin-biased ranking
+- Search passes query to Capture
+- mutations state-gated and receipt-backed
+- persistence/reload proof
 
 ## Files likely in scope
 
-- Search overlay/surface files
-- local search index models/repositories
-- route registry
-- Capture handoff hooks
-- proof/receipt indexing adapters
-- tests and QA docs
+Codex must inspect current source before editing. Likely areas include Search presentation, local index/query models, result-row rendering, routing/actions, Search-to-Capture handoff, and `docs/qa/KNOWN_ISSUES.md`. Unexpected files must be justified in closeout.
 
-## Files forbidden unless justified
+## Files forbidden unless explicitly justified
 
-- cloud services / hosted LLM search
-- unrelated surface rebuilds
-- private life graph upload paths
+- cloud/LLM service code
+- unrelated capture/goal/time internals beyond routing/action connections
+- product canon files other than required cross-links
 
 ## Accessibility requirements
 
-Full keyboard navigation, VoiceOver labels/actions per result, Dynamic Type, Reduce Motion, no color-only state.
+Support VoiceOver invocation path, accessible result rows/actions, and list equivalence for visual states.
 
 ## Testing / audit requirements
 
-Index tests, query/ranking tests, navigation proof, action proof, no-cloud audit, persistence/reload proof, forbidden string audit.
+Run build/tests plus empty/dense/no-result cases, route proof, reload proof, and string audit for internal labels.
 
 ## Screenshot / device proof requirements
 
-Search from multiple origins, populated results, empty state, result open, action exposure, Capture handoff, proof result, Light/Dark, accessibility notes.
+Provide Search opened from multiple root surfaces, result tap route proof, empty/dense/no-result screenshots, and privacy/source boundary notes.
 
-## Known issues update
+## docs/qa/KNOWN_ISSUES.md update requirements
 
-Update Search rows including `AMB-ISSUE-0701` and `1601` through `1605`.
+Update Search rows to reflect overlay maturity, local index behavior, result actionability, and proof state.
 
 ## Status ceiling
 
-No local index proof = Runtime Yellow max. Any cloud query path = Red. No device screenshots = Visual Yellow max.
+Without device proof and routing proof, Search remains Yellow.
 
 ## Closeout template
 
-Use the global closeout template from `docs/qa/remediation/2026-06-22-codex-remediation-law.md`.
+```text
+Status:
+Bundle:
+Linear issues covered:
+Repo issue IDs covered:
+Files changed:
+Product law implemented:
+Architecture law implemented:
+Runtime honesty proof:
+Validation run:
+Validation not run:
+Screenshots/videos:
+Accessibility proof:
+docs/qa/KNOWN_ISSUES.md updates:
+Status ceiling:
+Known risks:
+Rollback plan:
+```

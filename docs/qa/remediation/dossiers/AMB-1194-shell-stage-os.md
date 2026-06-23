@@ -2,99 +2,136 @@
 
 ## Objective
 
-Replace prototype shell chrome with Stage OS: four icon-only root buttons, global Capture/Search gestures, safe-area law, route-depth policy, motion, haptics, accessibility actions, and semantic glyphs.
+Rebuild shell chrome into full-bleed Stage OS behavior with icon-only root navigation, honest global access patterns, mature safe-area behavior, and semantic haptics/glyphs.
 
 ## Covered Linear issues
 
-- `AMB-1185` parent train
-- `AMB-1194` execution bundle
-- Shell / dock / header / full-bleed QA leaves under `AMB-1185`
+- `AMB-1185`
+- `AMB-1194`
+- shell and full-bleed QA leaves attached to `AMB-1185`
+
+## Covered repo issue IDs
+
+- `AMB-ISSUE-0006`
+- `AMB-ISSUE-0007`
+- `AMB-ISSUE-0806`
+- `AMB-ISSUE-0901`
+- `AMB-ISSUE-0902`
+- `AMB-ISSUE-1011`
+- `AMB-ISSUE-1701`
+- `AMB-ISSUE-1702`
+- `AMB-ISSUE-1703`
+- `AMB-ISSUE-1704`
+- `AMB-ISSUE-1705`
+- `AMB-ISSUE-1706`
+- `AMB-ISSUE-1707`
+- `AMB-ISSUE-1708`
+- `AMB-ISSUE-1709`
 
 ## Product law
 
-Shell is not a tab bar wrapper. Shell is Stage OS.
-
-Visible root shell:
-
-- four separate floating icon-only buttons,
-- structurally coordinated by invisible rail,
-- active state = accent icon only,
-- no labels except onboarding / long press / accessibility,
-- no bordered dock,
-- no internal surface names,
-- no persistent Capture/Search buttons.
+Shell = Stage OS. It owns root navigation, route depth, Capture/Search access, global gestures, safe areas, motion, haptics, accessibility actions, and semantic glyphs.
 
 ## Architecture law
 
-Centralize route-depth, safe-area, gesture, glyph, haptic, and accessibility behavior. Avoid per-surface shell hacks.
+Use four coordinated icon-only root buttons with an invisible rail. Dock is root-only. Capture and Search are reached by gestures, accessibility actions, keyboard/App Shortcut paths, and teaching.
 
 ## Runtime honesty law
 
-Global Capture/Search must remain accessible through explicit gestures and accessibility/system alternatives. No hidden-only critical functions.
+No fake Capture/Search controls. No decorative dock affordances that imply behavior they do not own. If a gesture path is unavailable, hide it or expose an honest unavailable path.
 
 ## Visual law
 
-Full-bleed Stage background. Interactive chrome respects true status/gesture zones. No artificial shelves. No root headers. No `GOALS · Constellation Atlas`, `TIME · LifeShape Field`, or `YOU · Profile and settings` visible on root.
+- four icon-only buttons
+- invisible rail
+- active accent icon only
+- no dock labels
+- no dock border
+- full-bleed background
+- no oversized root headers with internal object names
 
 ## Copy and iconography law
 
-Root dock is icon-only. Labels exist only in teaching, long press, and accessibility. Use semantic glyph registry with SF Symbols now.
+No root internal architecture names. Labels appear only for teaching, long press, or accessibility. Glyphs are semantic, not decorative.
+
+## State model
+
+- root surface = dock visible
+- drilldown/global flow = dock hidden
+- gesture handling follows system > accessibility > active controls > route gestures > shell gestures
+- motion and haptics are semantic and state-aware
 
 ## Required deletion / replacement
 
-- Remove bordered dock container.
-- Remove dock labels.
-- Remove active rings/underlines/glows/capsules.
-- Remove large root headers and internal object subtitles.
-- Remove per-surface artificial safe-area shelves.
+- delete bordered dock chrome
+- delete visible root labels
+- delete persistent Capture/Search buttons
+- delete header treatments exposing internal object names
+- replace artificial safe-area shelves with true full-bleed layout
 
 ## Required implementation
 
-- Four icon-only root buttons.
-- Invisible structural rail for spacing, hit targets, focus order, and safe-area behavior.
-- Stage gesture coordinator / equivalent centralized gesture arbitration.
-- Long-press Stage Capture gesture.
-- Pull-down Stage Search gesture.
-- Keyboard/App Shortcut/VoiceOver action paths for Capture/Search.
-- Dock visible only on root surfaces.
-- Unified dismiss policy for non-root routes.
-- Reduce Motion path and semantic haptics.
+- Shell = Stage OS
+- four icon-only buttons
+- invisible rail
+- active accent icon only
+- no dock labels
+- no dock border
+- no persistent Capture/Search buttons
+- global Capture/Search gestures and accessibility alternatives
+- gesture arena
+- dock root-only
+- full-bleed safe area
+- semantic haptics
+- semantic glyph registry
 
 ## Files likely in scope
 
-- `Native/Ambitions/Stage/**`
-- `Native/Ambitions/Stage/Chrome/**`
-- root scene / navigation host files
-- design-system glyph/motion/haptic files
-- shell QA/audit scripts
-- `docs/qa/KNOWN_ISSUES.md`
+Codex must inspect current source before editing. Likely areas include shell/navigation containers, root headers, gesture handling, safe-area composition, haptics/glyph mappings, App Shortcut or keyboard command hooks where present, and `docs/qa/KNOWN_ISSUES.md`. Unexpected files must be justified in closeout.
 
-## Files forbidden unless justified
+## Files forbidden unless explicitly justified
 
-- runtime domain models unrelated to shell
-- Capture/Goals/Time feature logic except access hooks
-- product truth files except cross-links
+- unrelated domain-model rewrites
+- search/capture implementation internals beyond shell access paths
+- product canon files other than required cross-links
 
 ## Accessibility requirements
 
-VoiceOver labels for each root button, selected state, custom actions for Capture/Search, focus order, large hit targets, Reduce Motion alternatives, no color-only active state.
+Provide VoiceOver labels/actions for root navigation, Capture/Search access, and selected state. Preserve Reduce Motion fallback and honest focus order.
 
 ## Testing / audit requirements
 
-Build/tests plus ShellChrome/SafeArea/ForbiddenLanguage/ReduceMotion audits where available.
+Run build/tests plus shell chrome audit, safe-area audit, gesture-path checks, accessibility action checks, and any keyboard/App Shortcut checks that exist.
 
 ## Screenshot / device proof requirements
 
-Root screenshots for Today/Goals/Time/You in Light/Dark, dock hidden in drilldowns, Capture/Search route proof, safe-area proof, Dynamic Type proof, VoiceOver action notes.
+Provide root and drilldown screenshot matrix, gesture proof, accessibility-action proof, keyboard/App Shortcut proof if implemented, and safe-area audit output.
 
-## Known issues update
+## docs/qa/KNOWN_ISSUES.md update requirements
 
-Update Shell rows including `AMB-ISSUE-0006`, `0007`, `0806`, `0901`, `0902`, `1011`, `1701` through `1709`.
+Update shell, full-bleed, and root-header rows with proof status and remaining risk.
 
 ## Status ceiling
 
-No device screenshot matrix = Visual Yellow max. No accessibility action proof = Accessibility Yellow max.
+Without device proof and safe-area audit, shell status cannot exceed Yellow.
 
 ## Closeout template
 
-Use the global closeout template from `docs/qa/remediation/2026-06-22-codex-remediation-law.md`.
+```text
+Status:
+Bundle:
+Linear issues covered:
+Repo issue IDs covered:
+Files changed:
+Product law implemented:
+Architecture law implemented:
+Runtime honesty proof:
+Validation run:
+Validation not run:
+Screenshots/videos:
+Accessibility proof:
+docs/qa/KNOWN_ISSUES.md updates:
+Status ceiling:
+Known risks:
+Rollback plan:
+```

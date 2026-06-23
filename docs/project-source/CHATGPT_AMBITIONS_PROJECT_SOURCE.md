@@ -1,31 +1,26 @@
-# ChatGPT Ambitions Project Source
-
-**Status:** Active compact ChatGPT project source for Ambitions remediation and Codex-prep work.  
-**Last updated:** 2026-06-22
-
-Use this file as the compact source to paste into the ChatGPT Project source/instructions area. Repo truth remains authoritative.
+# Ambitions ChatGPT Project Source
 
 ## Source precedence
 
 1. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
 2. `docs/truth/2026-06-22-runtime-remediation-decision-register.md`
 3. `docs/qa/remediation/2026-06-22-codex-remediation-law.md`
-4. Matching dossier in `docs/qa/remediation/dossiers/`
+4. matching dossier in `docs/qa/remediation/dossiers/`
 5. `docs/qa/KNOWN_ISSUES.md`
 6. Linear project state
 
 ## Active execution queue
 
-1. `AMB-1191` Theme / Design System Tokens
-2. `AMB-1194` Shell / Stage OS
-3. `AMB-1192` Capture Route Graph + Composer
-4. `AMB-1193` Goals Root / Detail Rebuild
-5. `AMB-1195` Today Reality Window / Action Gating
-6. `AMB-1196` Search Find / Act / Inspect
-7. `AMB-1197` Time Native Life Calendar
-8. `AMB-1198` You Settings / Appearance / Privacy
-9. `AMB-1199` Final Proof / Accessibility / Release Gate
-10. `AMB-1200` Register Sync / Control Closeout
+1. AMB-1191 Theme / Design System Tokens
+2. AMB-1194 Shell / Stage OS
+3. AMB-1192 Capture Route Graph + Composer
+4. AMB-1193 Goals Root / Detail Rebuild
+5. AMB-1195 Today Reality Window / Action Gating
+6. AMB-1196 Search Find / Act / Inspect
+7. AMB-1197 Time Native Life Calendar
+8. AMB-1198 You Settings / Appearance / Privacy
+9. AMB-1199 Final Proof / Accessibility / Release Gate
+10. AMB-1200 Register Sync / Control Closeout
 
 ## Permanent operating laws
 
@@ -40,21 +35,37 @@ Use this file as the compact source to paste into the ChatGPT Project source/ins
 
 ## Surface laws
 
-Theme: full design-system package/layer; Light/Dark/System from one semantic token model.
+Theme:
 
-Shell: Stage OS; four icon-only root buttons; no persistent Capture/Search; global gestures and accessibility alternatives.
+Full design-system package layer; Light/Dark/System from one semantic token model.
 
-Capture: global typed route graph and full-screen Stage composer.
+Shell:
 
-Goals: customizable Life Area Atlas; Goal Detail is path operation + historical journal.
+Stage OS; four icon-only root buttons; no persistent Capture/Search; global gestures and accessibility alternatives.
 
-Today: visually rich, actionable Reality Window with state-gated actions.
+Capture:
 
-Search: local-only Find / Act / Inspect surface.
+Global typed route graph and full-screen Stage composer.
 
-Time: native Life Calendar: Apple Calendar obviousness + Weather richness + Private Life Runtime intelligence.
+Goals:
 
-You: Apple iOS Settings + ChatGPT iOS settings clarity + Ambitions cohesion.
+Customizable Life Area Atlas; detail is goal path operation + historical journal.
+
+Today:
+
+Visually rich, actionable Reality Window with state-gated actions.
+
+Search:
+
+Local-only Find / Act / Inspect surface.
+
+Time:
+
+Native Life Calendar: Apple Calendar obviousness + Weather richness + Private Life Runtime intelligence.
+
+You:
+
+Apple iOS Settings + ChatGPT iOS settings clarity + Ambitions cohesion.
 
 ## Anti-drift rules
 
@@ -66,8 +77,4 @@ You: Apple iOS Settings + ChatGPT iOS settings clarity + Ambitions cohesion.
 - Do not let Search call cloud/LLM services.
 - Do not make Time less calendar-capable.
 - Do not make You a dashboard or manifesto.
-- Do not treat screenshots as proof of a fix; fresh repaired-build proof is required.
-
-## Default response posture
-
-Act as a senior product architect, native iOS/SwiftUI engineer, design systems lead, local-first privacy architect, QA/release engineer, accessibility reviewer, and repo-governance operator. Avoid generic advice. Push Ambitions toward a polished, durable, private, local-first flagship iPhone experience.
+- Do not mark issues Done without proof and owner acceptance.

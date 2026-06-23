@@ -2,105 +2,128 @@
 
 ## Objective
 
-Rebuild You into Apple iOS Settings structure + ChatGPT iOS settings clarity/compactness + Ambitions privacy/local-first cohesion.
+Make You read as a native settings/profile surface with real controls, live theme propagation, and Ambitions privacy/local-first cohesion.
 
 ## Covered Linear issues
 
-- `AMB-1189` parent train
-- `AMB-1198` execution bundle
-- You QA leaves under `AMB-1189`
+- `AMB-1189`
+- `AMB-1198`
+- You QA leaves attached to `AMB-1189`
+
+## Covered repo issue IDs
+
+- `AMB-ISSUE-0601`
+- `AMB-ISSUE-0602`
+- `AMB-ISSUE-0603`
+- `AMB-ISSUE-0604`
+- `AMB-ISSUE-0605`
+- `AMB-ISSUE-0606`
+- `AMB-ISSUE-0607`
+- `AMB-ISSUE-1501`
+- `AMB-ISSUE-1502`
+- `AMB-ISSUE-1503`
+- `AMB-ISSUE-1504`
+- `AMB-ISSUE-1505`
 
 ## Product law
 
-You is a native Settings/Profile control surface backed by User System Profile. It is not a dashboard, product manifesto, diagnostic console, or status wall.
+You = Apple iOS Settings + ChatGPT iOS settings clarity + Ambitions privacy/local-first cohesion.
 
 ## Architecture law
 
-You must consume global design-system tokens. Appearance changes must propagate live app-wide. Life Areas management mirrors Goals/Capture contextual creation. Privacy/local data/source/receipt settings must control real app state or show honest unavailable state.
+Use grouped native settings rooted in Appearance, Capture, Life Areas, Privacy, Local Data, Sources, Receipts, Accessibility, and About. Every visible row opens real detail or an honest unavailable state.
 
 ## Runtime honesty law
 
-Every visible row opens a real detail surface or honest unavailable state. No dead settings. No theme changes requiring app relaunch. No hard-coded dark colors.
+Do not leave dead settings rows that pretend to be actionable. Appearance changes must propagate live or stay explicitly unresolved.
 
 ## Visual law
 
-Apple Settings grouping + ChatGPT compact clarity + Ambitions materials. No hard dividers, no bottom glow, no table-dashboard feel, no root paragraphs.
+- top profile/local-status capsule
+- grouped native settings rows
+- no table dividers
+- no bottom glow
+- no dashboard treatment
+- compact, premium native hierarchy
 
 ## Copy and iconography law
 
-Row anatomy: SF Symbol/Ambitions glyph, title, optional short secondary state only if useful, chevron/native control. Minimal copy.
+No root system-facing headers like `YOU · Profile and settings` or `Your System`. No explanatory trust-copy wall on root. Use compact, stateful row copy only when useful.
 
-## Root hierarchy
+## State model
 
-- Appearance
-- Capture
-- Life Areas
-- Privacy
-- Local Data
-- Sources
-- Receipts
-- Accessibility
-- About
-
-Small profile/local-status capsule may appear at top.
+- Appearance = System / Light / Dark, live propagation
+- settings rows are either real controls, drilldowns, or honest unavailable states
+- privacy/local data/source/receipts/accessibility all have real state surfaces
 
 ## Required deletion / replacement
 
-- Remove root explanatory trust copy.
-- Remove hard dividers and bottom glow artifact.
-- Remove dead setting rows.
-- Remove internal header language such as `YOU · Profile and settings` and `Your System`.
-- Remove local theme hacks.
+- delete divider-line stack
+- delete bottom glow artifact
+- delete root internal/system-facing headers
+- replace dead settings rows with real detail or honest unavailable state
+- remove relaunch requirement for theme propagation
 
 ## Required implementation
 
-- Native grouped settings root.
-- Appearance System/Light/Dark with live propagation and real-token preview.
-- Capture settings: input behavior, keyboard dictation, attachments, gesture teaching reset, permission state.
-- Life Areas management: rename/hide/reorder/icon/custom areas.
-- Privacy controls: local-only, permissions, data boundaries, export/delete, source access.
-- Local Data: export, erase, store/migration status, diagnostics deeper.
-- Sources: add/remove/disable/inspect.
-- Receipts: searchable proof ledger.
-- Accessibility: Dynamic Type, Reduce Motion, Increase Contrast, haptics, icon labels, VoiceOver actions.
-- About: version/build/local-first/privacy/legal/diagnostics export.
+- Apple iOS Settings + ChatGPT iOS settings clarity + Ambitions cohesion
+- grouped native settings
+- top profile/local-status capsule
+- rows: Appearance, Capture, Life Areas, Privacy, Local Data, Sources, Receipts, Accessibility, About
+- no table dividers
+- no bottom glow
+- no dashboard
+- every row opens real detail or honest unavailable state
+- Appearance live propagation
+- privacy/local data/source/receipt/accessibility surfaces
 
 ## Files likely in scope
 
-- You/settings views
-- Appearance/theme settings
-- Life Area settings
-- privacy/local data/source/receipt settings
-- accessibility settings
-- design-system token consumers
-- tests and QA docs
+Codex must inspect current source before editing. Likely areas include You root/detail settings flows, Appearance propagation, grouped row rendering, privacy/local data surfaces, and `docs/qa/KNOWN_ISSUES.md`. Unexpected files must be justified in closeout.
 
-## Files forbidden unless justified
+## Files forbidden unless explicitly justified
 
-- unrelated root surface rebuilds
-- network/account changes beyond displaying existing settings state
-- product truth files except cross-links
+- unrelated capture/time/goals implementation files
+- backend/network/R2 files
+- product canon files other than required cross-links
 
 ## Accessibility requirements
 
-Native control semantics, Dynamic Type, VoiceOver labels/actions, Reduce Motion, Increase Contrast, destructive action confirmation, export/delete safety.
+Preserve Dynamic Type, VoiceOver row labels/actions, contrast, haptic preferences, and honest unavailable states.
 
 ## Testing / audit requirements
 
-Every visible row opens real detail or honest unavailable state, Appearance live-switch, no hard-coded dark colors, no dead rows, export/delete safety, forbidden string audit.
+Run build/tests plus appearance live-propagation proof, settings-depth checks, and row-density/copy review.
 
 ## Screenshot / device proof requirements
 
-You root, every detail row, Appearance live-switch, Light/Dark/System, no dividers/glow, Dynamic Type, VoiceOver notes, Reduce Motion.
+Provide dark/light You root screenshots, theme change before/after without relaunch, settings detail screenshot set, and proof that rows open real detail or honest unavailable states.
 
-## Known issues update
+## docs/qa/KNOWN_ISSUES.md update requirements
 
-Update You rows including `AMB-ISSUE-0601` through `0607` and `1501` through `1505`.
+Update You rows for divider/glow removal, live theme behavior, settings actionability, and root-copy cleanup.
 
 ## Status ceiling
 
-Any dead row = Red. Theme relaunch requirement = Red. No device screenshots = Visual Yellow max.
+Without live-propagation proof and device screenshots, You remains Yellow.
 
 ## Closeout template
 
-Use the global closeout template from `docs/qa/remediation/2026-06-22-codex-remediation-law.md`.
+```text
+Status:
+Bundle:
+Linear issues covered:
+Repo issue IDs covered:
+Files changed:
+Product law implemented:
+Architecture law implemented:
+Runtime honesty proof:
+Validation run:
+Validation not run:
+Screenshots/videos:
+Accessibility proof:
+docs/qa/KNOWN_ISSUES.md updates:
+Status ceiling:
+Known risks:
+Rollback plan:
+```

@@ -1,96 +1,150 @@
-# AMB-1195 — Today Reality Window / Action Gating
+# AMB-1195 — Today Reality Window
 
 ## Objective
 
-Rebuild Today as a visually rich, actionable Reality Window with state-gated actions, real Step fit, proof-aware closure, and no CTA stack or internal rail copy.
+Rebuild Today into a visually rich, actionable Reality Window with state-gated actions, real step fit, and no menu-like CTA stack behavior.
 
 ## Covered Linear issues
 
-- `AMB-1186` parent train
-- `AMB-1195` execution bundle
-- Today QA leaves under `AMB-1186`
+- `AMB-1186`
+- `AMB-1195`
+- Today QA leaves attached to `AMB-1186`
+
+## Covered repo issue IDs
+
+- `AMB-ISSUE-0001`
+- `AMB-ISSUE-0004`
+- `AMB-ISSUE-0005`
+- `AMB-ISSUE-0016`
+- `AMB-ISSUE-0101`
+- `AMB-ISSUE-0102`
+- `AMB-ISSUE-0103`
+- `AMB-ISSUE-0104`
+- `AMB-ISSUE-0105`
+- `AMB-ISSUE-0106`
+- `AMB-ISSUE-0107`
+- `AMB-ISSUE-0108`
+- `AMB-ISSUE-1001`
+- `AMB-ISSUE-1002`
+- `AMB-ISSUE-1003`
+- `AMB-ISSUE-1004`
+- `AMB-ISSUE-1005`
+- `AMB-ISSUE-1006`
+- `AMB-ISSUE-1007`
+- `AMB-ISSUE-1008`
+- `AMB-ISSUE-1009`
+- `AMB-ISSUE-1010`
+- `AMB-ISSUE-1011`
+- `AMB-ISSUE-1201`
 
 ## Product law
 
-Today is the current day’s usable reality. It shows what can fit now and helps the user begin or recover truthfully. It is not a generic planner, task list, dashboard, CTA stack, or fake timeline.
+Today root is a visually rich, actionable Reality Window. The token itself is the primary action. Actions are state-gated. Free-floating steps are equal to goal-linked steps.
 
 ## Architecture law
 
-Today and Time share placement/protection truth. Today selects by fit across goal-linked and free-floating Steps equally. Capture/pathing/Time Fit resolve conflicts; Today does not hard-code fake priority rules.
+Today shares placement/protection truth with Time. Time Fit and Protect Window are focused subflows. Review/explanation behavior belongs behind inspection glyphs or long press, not dead buttons.
 
 ## Runtime honesty law
 
-No dead root actions. No Record Outcome without a started/proof-eligible Step. No Shape Time route to Time root. No Protect Window route to Time root. No fake current step. No nonsemantic icons.
+Do not show `Record outcome`, `Protect this window`, or other mutation affordances when there is no valid state behind them. No fake placement or fake closure path.
 
 ## Visual law
 
-Reality Window shows day context and token-in-window behavior for valid Start Here. No valid step shows recovery/calm Open Field state. Use semantic glyphs, protected boundary shading, current node behavior, and next fixed point anchor. Root is quiet and rich.
+- token-in-window behavior
+- recovery state when no valid step
+- no fixed CTA row
+- no menu-like root
+- no rail copy
+- no nonsemantic icons
+- subtle live/current-node behavior instead of `Live now`
 
 ## Copy and iconography law
 
-Almost no root copy: Step title, tiny state labels, accessible labels. Remove Start Here/Meridian toggle, `Live now` visible text, `No source change yet`, `All from work context`, and generic `Capture what changed`.
+Delete `Start Here` / `Meridian` toggle copy, `No source change yet`, `All from work context`, `Capture what changed`, and `Review context` as visible root copy. Use semantic glyphs and progressive disclosure.
 
 ## State model
 
-Required states: valid Step, no Step, too little time, low capacity, free-floating Step candidate, thought placement, protected window, proof-eligible Step, post-closure proof stitch, unavailable action.
+- valid-step state
+- no-valid-step recovery state
+- low-capacity state
+- too-little-time state
+- proof-eligible closure state
+- protected-window state
+- free-floating and goal-linked steps both participate in fit
 
 ## Required deletion / replacement
 
-- Remove Start Here/Meridian toggle.
-- Remove rail/status copy.
-- Remove generic Capture CTA.
-- Remove dead Review Context button.
-- Remove nonsemantic timeline icons.
-- Remove fixed CTA stack.
+- remove `Capture what changed`
+- remove `Review context` button
+- remove `Start Here` / `Meridian` toggle
+- replace root-Time jumps with focused Time Fit / Protect Window flows
+- remove decorative timeline icons and redundant helper text
 
 ## Required implementation
 
-- Reality Window root object.
-- Token-in-window Step action.
-- State-gated action cluster.
-- Scoped Time Fit flow.
-- Scoped Protect Window flow.
-- Inspection glyph/long press for why-this/why-now/source/capacity.
-- Closure affordance only when proof-eligible.
-- Proof stitch after closure.
-- Free-floating Step fit behavior.
-- Thought placement behavior.
+- visually rich actionable Reality Window
+- token-in-window behavior
+- recovery state when no valid step
+- state-gated actions only
+- token itself is primary action
+- closure only when started/proof-eligible
+- remove Capture what changed
+- Time Fit scoped flow
+- Protect Window scoped flow
+- no Review Context button
+- no Start Here/Meridian toggle
+- no rail copy
+- no nonsemantic icons
+- free-floating steps equal to goal-linked steps
 
 ## Files likely in scope
 
-- Today surface/views/models
-- placement/protection shared model access
-- closure/proof hooks
-- Time Fit / Protect Window route contracts
-- semantic glyph components
-- tests and QA docs
+Codex must inspect current source before editing. Likely areas include Today root/action cluster, closure access gating, Time Fit/Protect Window entry points, current-step rendering, inspection affordances, and `docs/qa/KNOWN_ISSUES.md`. Unexpected files must be justified in closeout.
 
-## Files forbidden unless justified
+## Files forbidden unless explicitly justified
 
-- unrelated Goals/Time feature rewrites beyond route contracts
-- capture composer internals except route hooks
-- product truth files except cross-links
+- unrelated Time root rebuild files
+- unrelated shell/nav rewrites outside Today entry behavior
+- product canon files other than required cross-links
 
 ## Accessibility requirements
 
-VoiceOver action for Begin, proof/closure, inspect, protect if available. Semantic labels for window, next fixed point, protected boundary, proof stitch. Dynamic Type and Reduce Motion support.
+Provide accessible `Begin` or equivalent primary action, semantic labels for current state and fixed points, and honest disabled/unavailable states.
 
 ## Testing / audit requirements
 
-State-gating tests, no dead action tests, route proof tests, closure mutation proof, persistence/reload proof, forbidden string audit.
+Run build/tests plus no-step and valid-step state checks, closure gating checks, focused protection flow checks, and mutation-before/action/after proof.
 
 ## Screenshot / device proof requirements
 
-Valid step, no-step recovery, too-little-time, low-capacity, free-floating step, thought placement, protect window, Time Fit route, closure proof, reload persistence, Light/Dark, accessibility notes.
+Provide Today root screenshots in dark and light, no-step state, valid-step state, protection flow proof, and closure before/action/after mutation proof.
 
-## Known issues update
+## docs/qa/KNOWN_ISSUES.md update requirements
 
-Update Today rows including `AMB-ISSUE-0001`, `0004`, `0005`, `0016`, `0101` through `0108`, `1001` through `1011`, and `1201`.
+Update Today rows for action gating, rail copy removal, protection routing, and proof state.
 
 ## Status ceiling
 
-No state-gating proof = Runtime Yellow max. Any dead action = Red. No device screenshots = Visual Yellow max.
+Without valid-state and no-step proof, Today cannot exceed Yellow.
 
 ## Closeout template
 
-Use the global closeout template from `docs/qa/remediation/2026-06-22-codex-remediation-law.md`.
+```text
+Status:
+Bundle:
+Linear issues covered:
+Repo issue IDs covered:
+Files changed:
+Product law implemented:
+Architecture law implemented:
+Runtime honesty proof:
+Validation run:
+Validation not run:
+Screenshots/videos:
+Accessibility proof:
+docs/qa/KNOWN_ISSUES.md updates:
+Status ceiling:
+Known risks:
+Rollback plan:
+```
