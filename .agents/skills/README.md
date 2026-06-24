@@ -53,7 +53,7 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 - Do not load all skills by default for a narrow docs or script edit.
 - Do not use skills to skip `docs/truth/CODEX_START_HERE.md` or required substantive truth files.
 - Do not use a skill as product canon, implementation proof, release proof, visual proof, or owner acceptance.
-- Do not use old non-retained skills as active routing unless a future approved train promotes them back into the retained list.
+- Do not use deleted, unregistered, or non-retained skill names as active routing unless a future truth-approved train promotes one into the retained list.
 
 ## Skill Count Policy
 
@@ -66,6 +66,8 @@ Retain four repo skills by default:
 
 A fifth retained skill requires explicit truth-file approval and must prove the need cannot be covered by the four retained skills or `docs/truth/CODEX_START_HERE.md`.
 
+Current inventory contains only the four retained skills. No non-retained, merge-candidate, delete-candidate, or experimental repo skills remain.
+
 ## How To Add, Change, Or Delete A Skill
 
 Before changing skill inventory:
@@ -77,21 +79,7 @@ Before changing skill inventory:
 5. Add or update the `## Skill digest`.
 6. Update this registry and run `python3 scripts/ambitions-skill-registry-check.py`.
 
-Deletion requires future approval unless the file is clearly stale, unreferenced, unsafe, and redundant. This registry may mark candidates, but marking a candidate is not deletion approval.
-
-## Merge Candidates
-
-| Skill | Path | Why not retained | Required future approval before removal |
-|---|---|---|---|
-| `ambitions-anti-pattern-detection` | `.agents/skills/ambitions-anti-pattern-detection/SKILL.md` | Duplicates `IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, `ambitions-ios-quality-gate`, and release-proof limits. | Approve merge into retained iOS/release skills, then delete. |
-| `ambitions-canon-closeout` | `.agents/skills/ambitions-canon-closeout/SKILL.md` | Duplicates `CODEX_START_HERE.md`, `IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, and `ambitions-release-proof-honesty`. | Approve merge into retained release skill, then delete. |
-| `ambitions-product-object` | `.agents/skills/ambitions-product-object/SKILL.md` | Duplicates rendered-product acceptance and iOS quality gates. | Approve merge into retained iOS skill, then delete. |
-| `ambitions-visual-proof` | `.agents/skills/ambitions-visual-proof/SKILL.md` | Duplicates visual proof law in acceptance truth and release-proof honesty. | Approve merge into retained iOS/release skills, then delete. |
-| `ambitions-visual-red-team` | `.agents/skills/ambitions-visual-red-team/SKILL.md` | Duplicates independent visual-review boundaries and is not a task-triggered retained checklist. | Approve merge into retained iOS/release skills, then delete. |
-
-## Delete Candidates
-
-No skill is approved for deletion in this train. The merge candidates above are present only to prevent unregistered skill sprawl and require future approval before removal.
+Deleted or non-retained skill names must not remain in this registry as nostalgia, searchability, or future speculation. Reintroducing any fifth skill requires explicit truth-file approval and a clear proof that the retained four plus `docs/truth/CODEX_START_HERE.md` cannot cover the operating need.
 
 ## Validation Expectations
 

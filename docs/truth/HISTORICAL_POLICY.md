@@ -43,7 +43,7 @@ Keep these categories when current:
 - source, tests, fixtures used by tests, resources, entitlements, privacy manifests, project config, package config, and CI/build config that still runs
 - small scripts that are current, dry-run/build useful, and free of stale IA/control-plane assumptions
 - the four retained `.agents` skills registered in `.agents/skills/README.md`: source-truth authority, architecture-tree enforcement, iOS quality gate, and release proof honesty
-- non-retained `.agents` skill files only when the registry explicitly marks them as merge, delete-candidate, or experimental pending future approval
+- no non-retained `.agents` skill files; any future fifth skill requires explicit truth-file approval and proof that the need cannot be covered by the retained four or `docs/truth/CODEX_START_HERE.md`
 
 ## Delete
 
