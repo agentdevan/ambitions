@@ -15,6 +15,7 @@ SCAN_FILES = [
     ROOT / "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
     ROOT / "docs/truth/PRODUCT_MOAT_TRUTH.md",
     ROOT / "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
+    ROOT / "docs/truth/CODEX_START_HERE.md",
     ROOT / "docs/truth/CODEX_PROCESS_TRUTH.md",
     ROOT / "AGENTS.md",
 ]

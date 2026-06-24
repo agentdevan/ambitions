@@ -6,6 +6,13 @@ Applies to: All non-source files in the Ambitions repo
 
 This file replaces the old historical archive policy. Ambitions does not retain historical junk in-repo.
 
+## Codex digest
+- Read when: work touches docs cleanup, retention, historical material, generated artifacts, prompts, trains, stale skills, stale scripts, or repo control-plane files.
+- Owns: what non-source material stays, is rewritten, or is deleted.
+- Does not own: active product canon, implementation proof, release proof, or source architecture.
+- Hard red: retaining stale Motion-root/Capture-tab canon, generated Codex state, old proof as current proof, or historical docs as active authority.
+- Proof/closeout impact: cleanup must preserve current useful authority and remove or update stale non-source material without moving canon into historical docs.
+
 ## Rule
 
 Non-source files stay only when they are accurate to current canon and directly help build, validate, ship, or govern Ambitions toward App Store readiness.

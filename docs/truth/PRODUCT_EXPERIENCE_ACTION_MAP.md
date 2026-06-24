@@ -3,8 +3,34 @@
 Status: Active actionability map for `PRODUCT_EXPERIENCE_CANON.md`  
 Scope: Product-experience canon operationalization, source support inventory, implementation sequencing, and future proof gates  
 Owner posture: Planning and QA bridge, not implementation proof
+Last audited commit: 28a0c9bad3821b93118f38c864643db89ddce619
+Last audited date: 2026-06-24
+Status owner: Product Experience Canon operationalization
+Update required when: scenario gate status changes, implementation train claims Green/Yellow, Life Capital/pathing/Future Steps/proof/review/onboarding/automation work lands, or evidence paths change
+
+This is an evidence snapshot and action bridge, not implementation proof.
 
 This file turns the official v1 Product Experience Canon into implementation and validation action. It does not prove that any canon behavior is complete in the app.
+
+## Audit Protocol
+
+Future Codex trains must update this map when scoped evidence changes. Treat status changes as evidence edits, not optimism edits.
+
+Use these status labels:
+
+- Existing: direct current source/test/runtime/UI evidence proves the user-visible behavior for the scoped claim.
+- Partial: related source/tests/projections exist, but the complete user-visible behavior is not proven.
+- Missing: inspection found no sufficient current source/test evidence.
+- Unknown: the train did not inspect enough evidence to classify confidently.
+
+For every status update:
+
+- attach current evidence paths, or use an empty evidence list when none are known
+- keep evidence paths specific to source, tests, scripts, proof artifacts, or current docs that were inspected
+- include the commit/date if updating a mutable snapshot or gate index
+- do not upgrade to Existing without direct evidence for the user-visible behavior
+- do not use product canon, planned work, source names, screenshots paths, or string-presence scans as complete implementation proof
+- preserve explicit future proof needed when behavior remains Partial, Missing, or Unknown
 
 ## Executive Action Summary
 

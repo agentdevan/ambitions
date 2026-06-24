@@ -40,6 +40,13 @@ This file defines that product experience.
 
 This file does not prove implementation exists, tests pass, the app is release-ready, the runtime is complete, or the current UI satisfies this canon. Proof requires code, tests, device validation, screenshots, accessibility validation, privacy validation, and owner acceptance.
 
+## Codex digest
+- Read when: work touches feature behavior, Life Capital, goal pathing, Future Steps, adjustment, conflict simulation, onboarding, reviews, notifications, automation, Source Atlas composition, or scenario gates.
+- Owns: product-experience behavior contracts, actionability, horizon labels, scenario gate names, and user-visible behavior doctrine.
+- Does not own: root IA/privacy/product identity when product design truth is stricter, moat guardrails when moat truth is stricter, current implementation proof, or release readiness.
+- Hard red: forcing user decisions, fake path success, silent protected near-term placement movement, Source Atlas marketplace browsing, cloud AI core planning, productivity scores, streak/XP pressure, social feed, or public profiles.
+- Proof/closeout impact: map behavior work to gate IDs and status; do not upgrade gates without current evidence.
+
 ⸻
 
 ## Layer 1 — Product Experience Law

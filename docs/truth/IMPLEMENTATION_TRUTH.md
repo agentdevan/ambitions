@@ -10,6 +10,13 @@ This file does not define what Ambitions should become. That authority belongs t
 
 This file does not define release readiness. That authority belongs to `docs/truth/RELEASE_TRUTH.md`.
 
+## Codex digest
+- Read when: work touches source, runtime wiring, project/package config, tests, source status, compatibility debt, account/R2/AI implementation claims, or implementation no-claim boundaries.
+- Owns: implementation/source evidence standard, current source posture, compatibility debt classification, and forbidden implementation claims.
+- Does not own: product vision, product-experience targets, visual acceptance, release readiness, or mutable proof beyond current evidence.
+- Hard red: claiming source migration/account/R2/offline/accessibility/release behavior without live source and current proof, or treating current compatibility debt as product truth.
+- Proof/closeout impact: implementation claims require live source/project/test/script evidence; source snapshot sections are evidence-bounded and must be refreshed when source architecture changes.
+
 ---
 
 ## 1. Source Evidence Standard
@@ -36,6 +43,10 @@ Implementation state labels:
 ---
 
 ## 2. Repository Snapshot
+
+### Mutable Snapshot Warning
+
+Implementation standards in this file are stable truth. Current source snapshot sections are evidence-bounded and must be refreshed when major source architecture changes. Live source, current project files, current tests, and current proof still win over stale snapshot wording.
 
 Current repo posture from inspected evidence:
 

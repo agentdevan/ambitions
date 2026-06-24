@@ -123,21 +123,24 @@ Start every non-trivial repo task from the truth files.
 Mandatory read order:
 
 1. `docs/truth/README.md`
-2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-3. `docs/truth/PRODUCT_MOAT_TRUTH.md`
-4. `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
-5. `docs/truth/IMPLEMENTATION_TRUTH.md`
-6. `docs/truth/RELEASE_TRUTH.md`
-7. `docs/truth/CODEX_PROCESS_TRUTH.md`
-8. `docs/truth/HISTORICAL_POLICY.md` (repo retention and stale-file deletion)
-9. `AGENTS.md`
-10. `README.md`
-11. `docs/README.md`
-12. `project.yml`
-13. `Package.swift`
-14. relevant source, tests, retained scripts, build docs, and current local logs
-15. relevant retained `.agents/skills/*/SKILL.md` files only after truth files
-16. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
+2. `docs/truth/CODEX_START_HERE.md` (routing/digest only; substantive truth files still win)
+3. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+4. `docs/truth/PRODUCT_ORIGIN_TRUTH.md`
+5. `docs/truth/PRODUCT_MOAT_TRUTH.md`
+6. `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
+7. `docs/truth/IMPLEMENTATION_TRUTH.md`
+8. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`
+9. `docs/truth/RELEASE_TRUTH.md`
+10. `docs/truth/CODEX_PROCESS_TRUTH.md`
+11. `docs/truth/HISTORICAL_POLICY.md` (repo retention and stale-file deletion)
+12. `AGENTS.md`
+13. `README.md`
+14. `docs/README.md`
+15. `project.yml`
+16. `Package.swift`
+17. relevant source, tests, retained scripts, build docs, and current local logs
+18. relevant retained `.agents/skills/*/SKILL.md` files only after truth files
+19. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
 
 
 Historical material is not retained in-repo unless it is current, canon-aligned, and materially useful for App Store readiness. It must not override active truth.

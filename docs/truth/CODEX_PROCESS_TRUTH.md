@@ -6,6 +6,13 @@ Applies to: All Codex/AI work in the Ambitions repo
 Owner posture: Operational authority, not product design and not implementation proof  
 Effective rule: Codex may be autonomous only inside evidence-bound, truth-file-bound, user-approved limits.
 
+## Codex digest
+- Read when: Codex is planning, editing, validating, reporting, cleaning docs, updating gates, or deciding claim/status language.
+- Owns: Codex operating behavior, evidence-bound autonomy, validation/reporting discipline, cleanup rules, and hard Red process stops.
+- Does not own: product/design doctrine, implementation proof, release proof, or retention policy when those files are stricter.
+- Hard red: skipping truth/source inspection, hiding failures, broad unscoped edits, stale-canon revival, tests that hide failures, proof overclaims, or Visual/Release Green self-certification.
+- Proof/closeout impact: reports must be scoped, evidence-backed, and explicit about validation not run.
+
 ---
 
 ## 1. Purpose and Authority
@@ -62,22 +69,28 @@ Codex must treat:
 
 Active truth hierarchy:
 
-1. `docs/truth/PRODUCT_DESIGN_TRUTH.md` — product/design authority.
-2. `docs/truth/PRODUCT_MOAT_TRUTH.md` — moat and anti-commodity authority.
-3. `docs/truth/PRODUCT_EXPERIENCE_CANON.md` — product-experience behavior, feature behavior, scenario gates, and actionability authority.
-4. `docs/truth/IMPLEMENTATION_TRUTH.md` — source implementation authority.
-5. `docs/truth/RELEASE_TRUTH.md` — validation/release/proof authority.
-6. `docs/truth/CODEX_PROCESS_TRUTH.md` — Codex operating authority.
-7. `docs/truth/HISTORICAL_POLICY.md` — repo retention and stale-file deletion authority.
-8. `AGENTS.md` — front-door agent contract.
-9. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Package.swift`.
+1. `docs/truth/CODEX_START_HERE.md` — routing/digest aid only, subordinate to substantive truth files.
+2. `docs/truth/PRODUCT_DESIGN_TRUTH.md` — product/design authority.
+3. `docs/truth/PRODUCT_ORIGIN_TRUTH.md` — origin/problem framing authority when present.
+4. `docs/truth/PRODUCT_MOAT_TRUTH.md` — moat and anti-commodity authority.
+5. `docs/truth/PRODUCT_EXPERIENCE_CANON.md` — product-experience behavior, feature behavior, scenario gates, and actionability authority.
+6. `docs/truth/IMPLEMENTATION_TRUTH.md` — source implementation authority.
+7. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md` — rendered-product acceptance and split-status authority.
+8. `docs/truth/RELEASE_TRUTH.md` — validation/release/proof authority.
+9. `docs/truth/CODEX_PROCESS_TRUTH.md` — Codex operating authority.
+10. `docs/truth/HISTORICAL_POLICY.md` — repo retention and stale-file deletion authority.
+11. `AGENTS.md` — front-door agent contract.
+12. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Package.swift`.
 
 Conflict rules:
 
 - Product/design conflict: `PRODUCT_DESIGN_TRUTH.md` wins.
+- Origin/problem framing conflict: `PRODUCT_ORIGIN_TRUTH.md` wins only for origin doctrine and remains subordinate to product/design, moat, and product-experience law.
 - Product-experience behavior conflict: `PRODUCT_EXPERIENCE_CANON.md` wins unless root IA/privacy/product identity or moat guardrails are at issue.
 - Implementation/source conflict: `IMPLEMENTATION_TRUTH.md` plus live source wins.
+- Rendered acceptance conflict: `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` wins for split status, visual proof limits, and product-object acceptance unless release proof is stricter.
 - Release/readiness conflict: `RELEASE_TRUTH.md` plus current proof wins.
+- Codex routing conflict: substantive truth files and current user/issue instructions win over `CODEX_START_HERE.md`.
 - Historical artifacts lose unless explicitly promoted by a truth file.
 - Docs-only plans never prove implementation.
 

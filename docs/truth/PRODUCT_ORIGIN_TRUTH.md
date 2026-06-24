@@ -6,6 +6,13 @@ Applies to: product strategy, product experience, onboarding, QA golden scenario
 Owner posture: Origin truth, not implementation proof
 Privacy posture: Sanitized. Do not include raw private founder details in public repo without explicit approval.
 
+## Codex digest
+- Read when: work touches origin/problem framing, onboarding, QA golden scenarios, feature priority, or copy posture.
+- Owns: sanitized reason Ambitions exists and the high-agency user problem.
+- Does not own: root IA/product law, implementation status, release proof, or private founder details.
+- Hard red: drifting into task/calendar/habit/chatbot/dashboard/productivity-score framing or exposing raw private origin details.
+- Proof/closeout impact: cite origin alignment as framing only; do not claim implementation from this file.
+
 ---
 
 ## 0. Why Ambitions exists

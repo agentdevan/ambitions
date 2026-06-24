@@ -3,6 +3,12 @@
 Status: Active QA index for `docs/truth/PRODUCT_EXPERIENCE_CANON.md`  
 Scope: Scenario gates from the official v1 Product Experience Canon  
 Owner posture: QA planning and evidence index, not implementation proof
+Last audited commit: 28a0c9bad3821b93118f38c864643db89ddce619
+Last audited date: 2026-06-24
+
+Machine-readable companion: `docs/qa/product-experience-scenario-gates.yaml`.
+
+The YAML companion is the machine-readable scenario gate index. Keep it aligned with this Markdown table whenever gate IDs, statuses, evidence paths, future proof, canon source, owner area, or tests change.
 
 Statuses mean:
 

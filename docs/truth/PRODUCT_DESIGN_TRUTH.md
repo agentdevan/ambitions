@@ -8,6 +8,13 @@
 
 This file is the compact canonical root. Detailed runtime-remediation canon for the 2026-06-22 device review is installed in the linked decision register, ADR, remediation law, and Codex dossiers.
 
+## Codex digest
+- Read when: work touches product identity, IA, surfaces, Capture, Motion, Trust, local-first law, account/R2 boundaries, SwiftUI, or architecture ownership.
+- Owns: root product/design canon, persistent surfaces, global composer, behavior/trust layers, local-first product law, and Final Architecture Tree.
+- Does not own: current implementation proof, release readiness, or mutable scenario gate status.
+- Hard red: adding a fifth surface, making Capture/Motion root destinations, weakening local-first/offline core, hosted private life graph, cloud AI core dependency, or R2 private-user context.
+- Proof/closeout impact: every train must preserve this law; source claims still require live source/tests/logs.
+
 ---
 
 ## 0. Canon Authority

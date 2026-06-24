@@ -8,22 +8,25 @@ Applies to: Humans, Codex, and implementation agents working in the Ambitions re
 
 ## Mandatory Read Order
 
-1. `PRODUCT_DESIGN_TRUTH.md` - product/design authority.
-2. `PRODUCT_ORIGIN_TRUTH.md` - sanitized origin/problem doctrine and user-problem authority.
-3. `PRODUCT_MOAT_TRUTH.md` - moat strategy and anti-commodity guardrails.
-4. `PRODUCT_EXPERIENCE_CANON.md` - product-experience behavior, feature behavior, scenario gates, and actionability authority.
-5. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
-6. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, visual proof, and global shell acceptance authority.
-7. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
-8. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
-9. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
-10. `AGENTS.md`.
-11. `README.md`.
-12. `docs/README.md`.
-13. `project.yml`.
-14. `Package.swift`.
-15. Relevant source, tests, retained scripts, build docs, and current local logs.
-16. Relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
+1. `CODEX_START_HERE.md` - Codex routing/digest aid only; subordinate to substantive truth files.
+2. `PRODUCT_DESIGN_TRUTH.md` - product/design authority.
+3. `PRODUCT_ORIGIN_TRUTH.md` - sanitized origin/problem doctrine and user-problem authority.
+4. `PRODUCT_MOAT_TRUTH.md` - moat strategy and anti-commodity guardrails.
+5. `PRODUCT_EXPERIENCE_CANON.md` - product-experience behavior, feature behavior, scenario gates, and actionability authority.
+6. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
+7. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, visual proof, and global shell acceptance authority.
+8. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
+9. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
+10. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
+11. `AGENTS.md`.
+12. `README.md`.
+13. `docs/README.md`.
+14. `project.yml`.
+15. `Package.swift`.
+16. Relevant source, tests, retained scripts, build docs, and current local logs.
+17. Relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
+
+`CODEX_START_HERE.md` reduces repeated reading burden by routing agents to the right authority files for the task type. It is not higher authority than product, origin, moat, experience, implementation, acceptance, release, process, or retention truth.
 
 ## Active Product Law
 
@@ -68,6 +71,7 @@ The origin doctrine prevents Ambitions from drifting into generic task, calendar
 | Global shell integration and rendered product acceptance | `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` plus current reviewable screenshots, manifest evidence, and target rubric |
 | Release/readiness/proof claim | Current proof/log evidence, read through `RELEASE_TRUTH.md` |
 | Codex process behavior | `CODEX_PROCESS_TRUTH.md` |
+| Codex routing/consumption behavior | `CODEX_START_HERE.md`, subordinate to all substantive truth files and current user/issue instructions |
 | Historical/old-canon conflict | Active truth files and `HISTORICAL_POLICY.md` retention rules |
 | README/docs index conflict | Active truth files |
 | Skill/script/support-material conflict | Active truth files |

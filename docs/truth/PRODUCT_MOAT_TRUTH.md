@@ -7,6 +7,13 @@ Owner posture: Subordinate to `PRODUCT_DESIGN_TRUTH.md` when conflicts exist.
 
 This file is not implementation proof, release proof, account proof, R2 proof, sync proof, accessibility proof, or readiness proof.
 
+## Codex digest
+- Read when: work touches moat strategy, anti-commodity review, Private Life Runtime, recommendations, account/R2/Source Atlas, recovery, proof, or local continuity.
+- Owns: moat thesis, anti-commodity guardrails, local continuity, recommendation accountability, and account/R2 moat boundaries.
+- Does not own: root IA when product design truth is stricter, current source status, or release readiness.
+- Hard red: productivity scoring, streak pressure, hidden recommendations, Motion/Capture as destinations, hosted AI/cloud LLM core dependency, hosted private life graph, R2 private data, or sign-in-required core value.
+- Proof/closeout impact: use for moat alignment questions; do not claim moat proof without source/runtime/release evidence.
+
 ---
 
 ## 0. Product Experience Canon Relationship

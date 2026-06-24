@@ -8,6 +8,13 @@ Effective rule: If proof is absent, readiness is absent.
 
 This file is intentionally conservative. Source code may exist without release proof. Tests may exist without passing. Scripts may exist without successful logs. A privacy manifest may exist without legal/privacy readiness. Product/design truth may exist without implementation or release proof.
 
+## Codex digest
+- Read when: work touches validation, build/test claims, release posture, account/R2/offline/privacy proof, accessibility/device/performance proof, TestFlight, App Store, or public readiness language.
+- Owns: proof standard, allowed/forbidden release claims, release status, and evidence requirements.
+- Does not own: product vision, implementation source status, or visual acceptance except through proof requirements.
+- Hard red: release/device/accessibility/privacy/account/R2/TestFlight/App Store claim without current evidence, private user data to R2, hosted AI/cloud LLM core dependency, or hosted private life graph.
+- Proof/closeout impact: if proof is absent, readiness is absent; closeout must list supported and unsupported claims.
+
 ---
 
 ## 1. Relationship to Other Truth Files

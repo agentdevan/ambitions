@@ -6,6 +6,13 @@ Applies to: Ambitions source, SwiftUI surfaces, design-system components, proof 
 
 This file closes the gap between source correctness and product quality. It does not replace `PRODUCT_DESIGN_TRUTH.md`, `IMPLEMENTATION_TRUTH.md`, `RELEASE_TRUTH.md`, or live source evidence. If it conflicts with product canon, product canon wins. If it conflicts with release proof requirements, the stricter proof requirement wins.
 
+## Codex digest
+- Read when: work touches rendered product quality, SwiftUI surfaces, visual acceptance, screenshot proof, split status, product object dominance, or global shell acceptance.
+- Owns: source-vs-rendered acceptance boundary, split status model, visual proof limits, product object dominance, and no self-certified Visual/Release Green.
+- Does not own: product canon, implementation source status, release approval, or independent visual acceptance.
+- Hard red: screenshot paths as proof, source-string tests as UI proof, duplicate shell/control ownership, report-panel root objects, fabricated intelligence, or Codex self-certified Visual/Release Green.
+- Proof/closeout impact: visual/product work can reach Ready for Visual Review at most unless independent review and release proof exist.
+
 ---
 
 ## 1. Rendered Product Truth
