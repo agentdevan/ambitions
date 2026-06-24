@@ -186,8 +186,8 @@ Final Architecture Tree inspected: yes. Canonical owners touched by this invento
 | Create reminder-like Step | Yes | Partial | Partial | Partial | Not proven | Not proven | Not proven | Partial |
 | Complete Step | Yes | Yes for Today path | Yes | Yes, focused | Partial source projection only | Partial source primitive | Not release-proven | Partial |
 | Reschedule Step/reminder | Yes | Partial | Partial | Partial helper/engine tests | Not proven | Not proven | Not proven | Partial |
-| Recurring Step repeats | Partial | Not proven | Metadata persisted | Partial metadata tests | Not proven | Not proven | Not proven | Unknown/Partial |
-| Recurring Step pause | Partial | Not proven | Not proven | Not proven | Not proven | Not proven | Not proven | Missing |
+| Recurring Step repeats | Yes | Yes for scoped runtime service | Yes | Yes, focused | Not proven | Not proven | Partial local-only runtime proof | Partial |
+| Recurring Step pause | Yes | Yes for scoped runtime service | Yes | Yes, focused | Not proven | Not proven | Partial local-only runtime proof | Partial |
 | Quick Capture saves locally | Yes | Yes for command/shell paths | Yes | Yes, focused | Partial | Partial source/test | Partial in local-only tests | Partial |
 | Calendar fixed points/open windows | Yes | Partial | Not proven for placement | Yes, projection tests | Not current proof | Partial source/test | Not relevant/partial | Partial |
 | Local search across required families | Yes | Partial | Uses repositories | Partial route tests | Not current proof | Partial source summary | Yes by design, not release-proven | Partial |
@@ -423,6 +423,52 @@ Remaining gaps:
 - The normal Start Here hero can still represent a recovery/protection recommendation that is not itself a Step mutation target; P1A.2 repairs the real visible Day Rail Step row path instead of forcing non-Step hero recommendations to mutate.
 
 Gate index updates: none. Current evidence materially improves normal rendered Step interaction proof, but the target gates stay Partial until full creation, accessibility sweep, device, and broader scenario proof are current.
+
+## P1B Recurring Steps and Persistence Addendum
+
+Date: 2026-06-24
+Baseline commit: `9a8a5e3ebb227d5e3cc63ad12be5c58a595e1155`
+Final commit: P1B final commit recorded in train closeout
+Gates targeted: `foundation_recurring_step_repeats_and_can_be_paused`, `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_offline_core_runs_without_account`, `origin_many_goals_many_obligations_today_remains_clear`
+
+Source changed:
+
+- `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`
+- `Native/AmbitionsTests/Runtime/RecurringStepLifecycleServiceTests.swift`
+
+Recurrence proof added:
+
+- The scoped runtime can create a recurring Step using existing `Goal`, `GoalPlan`, `PlanSection`, `Step`, `GoalTiming`, `StepType.recurringRoutine`, and SwiftData repository paths rather than introducing a parallel recurrence model.
+- The runtime generates deterministic scheduled occurrence projections from persisted Step/Goal cadence state.
+- Completing one generated occurrence records local feedback and progress evidence, advances the next suggested occurrence, and leaves the Step planned, repeatable, and recurring.
+- Pausing the recurrence persists `GoalLifecycleState.paused` and suppresses generated occurrences; service-level resume restores active state and occurrence generation.
+
+Persistence proof added:
+
+- Focused P1B runtime tests create recurring Steps through `SimpleStepLifecycleService`, reload through a second repository facade backed by the same in-memory SwiftData store, and verify recurrence cadence, repeatable state, completion evidence, pause state, and resumed generation survive repository reload.
+- The scoped recurrence path stores state in current local goal/step persistence mappings, including repeat cadence and repeatable Step metadata.
+
+Offline/account-free proof added:
+
+- Focused tests assert the current runtime boundary remains `localOnly` and has no remote intelligence backend.
+- The scoped recurrence path uses local repositories only and does not require account, network, R2, Source Atlas upload, hosted AI, or private-life-graph backend behavior.
+
+UI/accessibility proof status:
+
+- No UI files were changed in P1B.
+- No Interaction Green, Visual Green, Release Green, device validation, Dynamic Type sweep, Reduce Motion/Reduce Transparency/Increase Contrast sweep, or VoiceOver runtime proof is claimed.
+- P1A.2 normal rendered Step path tests were not rerun because P1B did not touch Today rendered UI.
+
+Remaining gaps:
+
+- The recurring Step scenario gate moves from Unknown to Partial only. Runtime/persistence proof is current, but rendered recurring Step creation/pause controls, broad accessibility proof, device proof, notification delivery proof, and release proof remain unproven.
+- P1B does not implement full Capture UI, full Time foundation, Life Capital, Future Steps, Make Room/Add with conflict, full goal pathing, reviews, notification delivery, visual redesign, or release/device validation.
+- Service-level resume is implemented because it is feasible in the current runtime, but no rendered resume control is claimed.
+
+Gate index updates:
+
+- `foundation_recurring_step_repeats_and_can_be_paused`: Unknown -> Partial.
+- No other scenario gate status changes. P1B adds supporting source/runtime evidence for reminder-like recurring Step behavior, offline/account-free runtime boundaries, and Today clarity by not changing Today UI, but it does not satisfy the full user-visible definitions for those broader gates.
 
 ## Recommended Immediate Next Prompt
 

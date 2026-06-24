@@ -86,14 +86,17 @@ gates:
   - id: "foundation_recurring_step_repeats_and_can_be_paused"
     group: "Foundation"
     user_visible_behavior: "Recurring Steps repeat and can be paused."
-    current_status: "Unknown"
+    current_status: "Partial"
     evidence_paths:
       - "Native/Ambitions/Core/Domain/Planning/PlanningDomainModels.swift"
-    required_future_proof: "Recurrence model, pause behavior, UI test, persistence/relaunch proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift"
+      - "Native/AmbitionsTests/Runtime/RecurringStepLifecycleServiceTests.swift"
+    required_future_proof: "Rendered recurring Step UI test, accessibility proof, device/release proof, notification delivery proof if claimed"
+    last_verified_commit: "9a8a5e3ebb227d5e3cc63ad12be5c58a595e1155"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
-    tests: []
+    tests:
+      - "RecurringStepLifecycleServiceTests"
   - id: "foundation_quick_capture_saves_without_network"
     group: "Foundation"
     user_visible_behavior: "Quick Capture saves locally without network."
