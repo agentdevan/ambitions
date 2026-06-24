@@ -1,101 +1,1014 @@
 schema: docs/quality/senior-review/schemas/ownership-map.schema.json
-version: 1
+version: 2
 status: active
-issue: AMB-1284
+issue: AMB-1286
 baseline_sha: bab9994a855ab84bb39c30da7a789fe11ead4305
+source_authority:
+  - 'docs/truth/PRODUCT_DESIGN_TRUTH.md Final Architecture Tree'
+  - 'docs/truth/IMPLEMENTATION_TRUTH.md'
+  - 'docs/quality/senior-review/BUILD_GRAPH_INVENTORY.json'
+  - 'docs/quality/senior-review/BUILD_GRAPH_INVENTORY.md'
+  - 'project.yml'
+  - 'Package.swift'
+  - 'Packages/AmbitionsExperienceKernel/Package.swift'
+layer_taxonomy:
+  - 'App'
+  - 'Stage'
+  - 'Stage/Chrome'
+  - 'Stage/Motion'
+  - 'Core/Domain'
+  - 'Core/Runtime'
+  - 'Core/Time'
+  - 'Core/Persistence'
+  - 'Core/Permissions'
+  - 'Projection'
+  - 'Language'
+  - 'Trust'
+  - 'Interaction'
+  - 'Rendering'
+  - 'DesignSystem'
+  - 'Surfaces/Today'
+  - 'Surfaces/Goals'
+  - 'Surfaces/Time'
+  - 'Surfaces/You'
+  - 'Composer/Capture'
+  - 'Scenarios'
+  - 'Diagnostics'
+  - 'Quality'
+  - 'Tests'
+  - 'Scripts'
+  - 'Docs'
+  - 'Legacy/Unknown'
+unknown_ownership_escalation_rule:
+  'Unknown active production owner is Red and must stop before SCG-004, file-by-file review, flow tracing, or repair. Unknown non-production/support owner is Yellow and must be explicitly carried forward.'
 owners:
   App:
-    canonical_path: Native/Ambitions/App
-    role: launch, environment, dependencies, feature flags, and stage host
-    review_owner: SCG architecture review
-    production_behavior_owner: app runtime owner
-    forbidden: product policy, persistence internals, duplicate shell ownership
+    layer_name: 'App'
+    canonical_path: 'Native/Ambitions/App'
+    owned_responsibilities:
+      - 'launch'
+      - 'scene/root app entry'
+      - 'environment'
+      - 'dependencies'
+      - 'feature flags'
+      - 'stage host integration'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Core'
+      - 'Stage'
+      - 'Projection'
+      - 'DesignSystem'
+      - 'Language'
+      - 'Trust'
+      - 'Interaction'
+      - 'Diagnostics'
+      - 'AmbitionsDesignSystem'
+      - 'AmbitionsWidgetUI'
+      - 'AmbitionsExperienceKernel'
+    forbidden_imports:
+      - 'test targets'
+      - 'preview-only fixtures as live dependencies'
+      - 'private-life backend SDKs'
+      - 'cloud LLM SDKs'
+    allowed_file_patterns:
+      - 'Native/Ambitions/App/**'
+      - 'Native/Ambitions/Support/Info.plist'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Features/** for new app policy'
+      - 'Native/Ambitions/Surfaces/Capture/**'
+      - 'Native/Ambitions/Surfaces/Motion/**'
+    production_code_change_posture: 'Allowed only for scoped app lifecycle, dependency, feature flag, or Stage host changes with focused validation.'
+    review_risk_notes:
+      - 'Do not duplicate shell ownership or embed product policy that belongs to Stage/Core/Projection.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'launch; scene/root app entry; environment; dependencies; feature flags; stage host integration'
+    review_owner: 'SCG App review'
+    production_behavior_owner: 'App owner'
+    forbidden: 'test targets; preview-only fixtures as live dependencies; private-life backend SDKs; cloud LLM SDKs; Native/Ambitions/Features/** for new app policy; Native/Ambitions/Surfaces/Capture/**; Native/Ambitions/Surfaces/Motion/**'
   Stage:
-    canonical_path: Native/Ambitions/Stage
-    role: root shell, route, overlays, chrome, safe areas, transitions, and Motion behavior
-    review_owner: SCG stage review
-    production_behavior_owner: Stage OS owner
-    forbidden: fifth root surface, Capture tab, Motion destination
+    layer_name: 'Stage'
+    canonical_path: 'Native/Ambitions/Stage'
+    owned_responsibilities:
+      - 'root Stage OS'
+      - 'surface routing'
+      - 'overlays'
+      - 'safe areas'
+      - 'focus'
+      - 'stage reducers/effects'
+      - 'transition coordination'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Core'
+      - 'Projection'
+      - 'Language'
+      - 'Trust'
+      - 'Interaction'
+      - 'Rendering'
+      - 'DesignSystem'
+      - 'Diagnostics'
+    forbidden_imports:
+      - 'SwiftData storage internals as shell policy'
+      - 'cloud LLM SDKs'
+      - 'server-side private graph dependencies'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Stage/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Stage/**/CaptureTab*'
+      - 'Native/Ambitions/Stage/**/MotionRoot*'
+      - 'Native/Ambitions/Features/** for new Stage ownership'
+    production_code_change_posture: 'High scrutiny; Stage changes affect global navigation, shell geometry, mutation visibility, and accessibility.'
+    review_risk_notes:
+      - 'Capture must remain a global composer, Motion must remain behavior, and root surfaces remain Today/Goals/Time/You.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'root Stage OS; surface routing; overlays; safe areas; focus; stage reducers/effects; transition coordination'
+    review_owner: 'SCG Stage review'
+    production_behavior_owner: 'Stage owner'
+    forbidden: 'SwiftData storage internals as shell policy; cloud LLM SDKs; server-side private graph dependencies; Native/Ambitions/Stage/**/CaptureTab*; Native/Ambitions/Stage/**/MotionRoot*; Native/Ambitions/Features/** for new Stage ownership'
+  Stage/Chrome:
+    layer_name: 'Stage/Chrome'
+    canonical_path: 'Native/Ambitions/Stage/Chrome'
+    owned_responsibilities:
+      - 'native chrome policy'
+      - 'dock behavior'
+      - 'crown behavior'
+      - 'safe root navigation affordances'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage'
+      - 'DesignSystem'
+      - 'Interaction'
+      - 'Language'
+    forbidden_imports:
+      - 'Core/Persistence storage internals'
+      - 'surface-owned duplicate crown/dock implementations'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Stage/Chrome/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Features/**/Chrome*'
+      - 'Native/Ambitions/Surfaces/**/RootDock*'
+    production_code_change_posture: 'Requires shell geometry, tap target, safe-area, VoiceOver, Dynamic Type, Reduce Motion, Reduce Transparency, and contrast evidence when behavior changes.'
+    review_risk_notes:
+      - 'Duplicate shell/chrome ownership is Red.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'native chrome policy; dock behavior; crown behavior; safe root navigation affordances'
+    review_owner: 'SCG Stage/Chrome review'
+    production_behavior_owner: 'Stage/Chrome owner'
+    forbidden: 'Core/Persistence storage internals; surface-owned duplicate crown/dock implementations; Native/Ambitions/Features/**/Chrome*; Native/Ambitions/Surfaces/**/RootDock*'
+  Stage/Motion:
+    layer_name: 'Stage/Motion'
+    canonical_path: 'Native/Ambitions/Stage/Motion'
+    owned_responsibilities:
+      - 'cross-surface motion state'
+      - 'motion events'
+      - 'motion renderer coordination'
+      - 'reduction/accessibility policy'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage'
+      - 'Interaction'
+      - 'Rendering'
+      - 'DesignSystem'
+      - 'Language'
+      - 'Trust'
+    forbidden_imports:
+      - 'root surface navigation ownership'
+      - 'analytics feed dependencies'
+      - 'score/streak systems'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Stage/Motion/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Surfaces/Motion/**'
+      - 'Native/Ambitions/Features/Motion/** for new behavior'
+      - '**/*MotionTab*'
+    production_code_change_posture: 'Allowed only as behavior infrastructure; never as a root destination or activity feed.'
+    review_risk_notes:
+      - 'Motion root/source compatibility is Yellow unless moved to Stage/Motion or proven as a shim.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'cross-surface motion state; motion events; motion renderer coordination; reduction/accessibility policy'
+    review_owner: 'SCG Stage/Motion review'
+    production_behavior_owner: 'Stage/Motion owner'
+    forbidden: 'root surface navigation ownership; analytics feed dependencies; score/streak systems; Native/Ambitions/Surfaces/Motion/**; Native/Ambitions/Features/Motion/** for new behavior; **/*MotionTab*'
   Core:
-    canonical_path: Native/Ambitions/Core
-    role: domain, clock, runtime, persistence, permissions, and privacy boundary
-    review_owner: SCG runtime review
-    production_behavior_owner: local runtime owner
-    forbidden: SwiftUI root anatomy, cloud private-life backend, R2 private-context transport
+    layer_name: 'Core'
+    canonical_path: 'Native/Ambitions/Core'
+    owned_responsibilities:
+      - 'aggregate owner for domain, runtime, time, persistence, permissions, and privacy boundary'
+    allowed_imports:
+      - 'Foundation'
+      - 'SwiftData when inside Core/Persistence'
+      - 'UserNotifications when inside Core/Permissions'
+      - 'EventKit when permission-scoped'
+    forbidden_imports:
+      - 'SwiftUI root surface anatomy'
+      - 'Stage shell ownership'
+      - 'cloud private-life graph backends'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Core/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Features/** for new Core policy'
+      - 'Native/Ambitions/Runtime/** for new runtime policy outside Core'
+    production_code_change_posture: 'Requires source ownership proof and targeted tests because Core owns local-first runtime truth.'
+    review_risk_notes:
+      - 'Legacy Domain/Persistence/Runtime folders should be carried as architecture debt when touched.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'aggregate owner for domain, runtime, time, persistence, permissions, and privacy boundary'
+    review_owner: 'SCG Core review'
+    production_behavior_owner: 'Core owner'
+    forbidden: 'SwiftUI root surface anatomy; Stage shell ownership; cloud private-life graph backends; Native/Ambitions/Features/** for new Core policy; Native/Ambitions/Runtime/** for new runtime policy outside Core'
+  Core/Domain:
+    layer_name: 'Core/Domain'
+    canonical_path: 'Native/Ambitions/Core/Domain'
+    owned_responsibilities:
+      - 'Step'
+      - 'GoalThread'
+      - 'LifeArea'
+      - 'RealityWindow'
+      - 'CapacityShape'
+      - 'CaptureIntake'
+      - 'ClosureOutcome'
+      - 'ProofEvent'
+      - 'RecoveryState'
+      - 'UserSystemProfile'
+    allowed_imports:
+      - 'Foundation'
+      - 'Core/Time vocabulary'
+      - 'Language value constants where pure'
+    forbidden_imports:
+      - 'SwiftUI'
+      - 'SwiftData persistence mechanics'
+      - 'Stage shell state'
+      - 'network SDKs'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Core/Domain/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Domain/** for new source'
+      - 'Native/Ambitions/Features/**/Domain*'
+    production_code_change_posture: 'Requires domain invariant tests and proof that UI or persistence policy did not leak into model authority.'
+    review_risk_notes:
+      - 'Fixture/domain preview files in production membership remain Yellow inventory risks from SCG-002.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'Step; GoalThread; LifeArea; RealityWindow; CapacityShape; CaptureIntake; ClosureOutcome; ProofEvent; RecoveryState; UserSystemProfile'
+    review_owner: 'SCG Core/Domain review'
+    production_behavior_owner: 'Core/Domain owner'
+    forbidden: 'SwiftUI; SwiftData persistence mechanics; Stage shell state; network SDKs; Native/Ambitions/Domain/** for new source; Native/Ambitions/Features/**/Domain*'
+  Core/Runtime:
+    layer_name: 'Core/Runtime'
+    canonical_path: 'Native/Ambitions/Core/Runtime'
+    owned_responsibilities:
+      - 'Private Life Runtime'
+      - 'runtime snapshots'
+      - 'recommendation/capacity/closure/recovery/proof engines'
+      - 'runtime mutation and validation'
+    allowed_imports:
+      - 'Foundation'
+      - 'Core/Domain'
+      - 'Core/Time'
+      - 'Core/Persistence repository protocols'
+      - 'Trust policy models'
+    forbidden_imports:
+      - 'SwiftUI rendering'
+      - 'root navigation'
+      - 'hosted/cloud LLM core dependencies'
+      - 'private life graph backend SDKs'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Core/Runtime/**'
+      - 'Packages/AmbitionsExperienceKernel/Sources/AmbitionsExperienceKernel/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Runtime/** for new runtime policy'
+      - 'Native/Ambitions/Features/**/Runtime*'
+    production_code_change_posture: 'High scrutiny; must preserve local-first inspectable mutation, receipts, and offline core boundaries.'
+    review_risk_notes:
+      - 'ExperienceKernel generated files without retained generator/source proof remain Yellow.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'Private Life Runtime; runtime snapshots; recommendation/capacity/closure/recovery/proof engines; runtime mutation and validation'
+    review_owner: 'SCG Core/Runtime review'
+    production_behavior_owner: 'Core/Runtime owner'
+    forbidden: 'SwiftUI rendering; root navigation; hosted/cloud LLM core dependencies; private life graph backend SDKs; Native/Ambitions/Runtime/** for new runtime policy; Native/Ambitions/Features/**/Runtime*'
+  Core/Time:
+    layer_name: 'Core/Time'
+    canonical_path: 'Native/Ambitions/Core/Time'
+    owned_responsibilities:
+      - 'AmbitionsClock'
+      - 'system/preview clocks'
+      - 'time zones'
+      - 'day boundary scheduling'
+      - 'runtime tick policy'
+    allowed_imports:
+      - 'Foundation'
+      - 'Core/Domain'
+    forbidden_imports:
+      - 'SwiftUI views'
+      - 'calendar clone root UI'
+      - 'persistence storage implementation unless through protocols'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Core/Time/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Features/Time/** for new clock policy'
+    production_code_change_posture: 'Requires deterministic clock tests and timezone/day-boundary validation when behavior changes.'
+    review_risk_notes:
+      - 'PreviewClock target membership remains Yellow until reviewed.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'AmbitionsClock; system/preview clocks; time zones; day boundary scheduling; runtime tick policy'
+    review_owner: 'SCG Core/Time review'
+    production_behavior_owner: 'Core/Time owner'
+    forbidden: 'SwiftUI views; calendar clone root UI; persistence storage implementation unless through protocols; Native/Ambitions/Features/Time/** for new clock policy'
+  Core/Persistence:
+    layer_name: 'Core/Persistence'
+    canonical_path: 'Native/Ambitions/Core/Persistence'
+    owned_responsibilities:
+      - 'SwiftData models'
+      - 'repositories'
+      - 'migrations'
+      - 'local store'
+      - 'store health checks'
+    allowed_imports:
+      - 'Foundation'
+      - 'SwiftData'
+      - 'Core/Domain'
+      - 'Core/Runtime protocols'
+    forbidden_imports:
+      - 'SwiftUI root surfaces'
+      - 'Stage shell state'
+      - 'network personal-data storage'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Core/Persistence/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Persistence/** for new persistence ownership'
+    production_code_change_posture: 'Requires migration/default-value, data integrity, local-only, and rollback evidence when behavior changes.'
+    review_risk_notes:
+      - 'Preview repositories in app target are Yellow until SCG review confirms they cannot own production behavior.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'SwiftData models; repositories; migrations; local store; store health checks'
+    review_owner: 'SCG Core/Persistence review'
+    production_behavior_owner: 'Core/Persistence owner'
+    forbidden: 'SwiftUI root surfaces; Stage shell state; network personal-data storage; Native/Ambitions/Persistence/** for new persistence ownership'
+  Core/Permissions:
+    layer_name: 'Core/Permissions'
+    canonical_path: 'Native/Ambitions/Core/Permissions'
+    owned_responsibilities:
+      - 'permission state'
+      - 'permission coordination'
+      - 'calendar/speech/notification/local authentication policy'
+    allowed_imports:
+      - 'Foundation'
+      - 'UserNotifications'
+      - 'EventKit'
+      - 'LocalAuthentication'
+      - 'Core/Domain'
+    forbidden_imports:
+      - 'surface layout ownership'
+      - 'account-required core use'
+      - 'R2 private-context transport'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Core/Permissions/**'
+    forbidden_file_patterns:
+      - 'permission prompts embedded directly in root product object code without Core policy'
+    production_code_change_posture: 'Requires privacy/permission disclosure review and no release/privacy claims without current proof.'
+    review_risk_notes:
+      - 'Permissions are release-sensitive and cannot be closed by source presence alone.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'permission state; permission coordination; calendar/speech/notification/local authentication policy'
+    review_owner: 'SCG Core/Permissions review'
+    production_behavior_owner: 'Core/Permissions owner'
+    forbidden: 'surface layout ownership; account-required core use; R2 private-context transport; permission prompts embedded directly in root product object code without Core policy'
   Projection:
-    canonical_path: Native/Ambitions/Projection
-    role: lenses, scenes, commands, mutations, receipts, and undo
-    review_owner: SCG projection review
-    production_behavior_owner: projection owner
-    forbidden: persistence storage mechanics, fake mutation success
+    layer_name: 'Projection'
+    canonical_path: 'Native/Ambitions/Projection'
+    owned_responsibilities:
+      - 'surface lenses'
+      - 'stage scenes'
+      - 'overlay lenses/scenes'
+      - 'commands'
+      - 'mutations'
+      - 'receipts'
+      - 'undo'
+      - 'external snapshots'
+    allowed_imports:
+      - 'Foundation'
+      - 'Core'
+      - 'Language'
+      - 'Trust'
+      - 'DesignSystem model-only contracts'
+    forbidden_imports:
+      - 'persistence storage mechanics'
+      - 'visual shell/chrome ownership'
+      - 'fake mutation success'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Projection/**'
+    forbidden_file_patterns:
+      - 'Projection/SurfaceLenses/MotionLens.swift'
+      - 'Projection/StageScenes/MotionStageScene.swift'
+    production_code_change_posture: 'Requires command/mutation receipt tests and explicit handling for failure, undo, and accessible state changes.'
+    review_risk_notes:
+      - 'Shared extension files require multi-target review.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'surface lenses; stage scenes; overlay lenses/scenes; commands; mutations; receipts; undo; external snapshots'
+    review_owner: 'SCG Projection review'
+    production_behavior_owner: 'Projection owner'
+    forbidden: 'persistence storage mechanics; visual shell/chrome ownership; fake mutation success; Projection/SurfaceLenses/MotionLens.swift; Projection/StageScenes/MotionStageScene.swift'
   Language:
-    canonical_path: Native/Ambitions/Language
-    role: user-facing language, vocabulary, forbidden terms, and copy budgets
-    review_owner: SCG language review
-    production_behavior_owner: copy policy owner
-    forbidden: runtime state authority, visual layout ownership
+    layer_name: 'Language'
+    canonical_path: 'Native/Ambitions/Language'
+    owned_responsibilities:
+      - 'user-facing vocabulary'
+      - 'runtime vocabulary'
+      - 'surface copy policy'
+      - 'forbidden terms'
+      - 'copy budgets'
+    allowed_imports:
+      - 'Foundation'
+    forbidden_imports:
+      - 'runtime state authority'
+      - 'visual layout ownership'
+      - 'mutation routing'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Language/**'
+      - 'Native/Ambitions/Copy/** for legacy classification only'
+    forbidden_file_patterns:
+      - 'hard-coded root IA copy in random surface files without Language policy'
+    production_code_change_posture: 'Requires forbidden-language scan and product canon alignment when copy policy changes.'
+    review_risk_notes:
+      - 'Canonical terms: Start here, Recommended step, Start now, Open step, Step.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'user-facing vocabulary; runtime vocabulary; surface copy policy; forbidden terms; copy budgets'
+    review_owner: 'SCG Language review'
+    production_behavior_owner: 'Language owner'
+    forbidden: 'runtime state authority; visual layout ownership; mutation routing; hard-coded root IA copy in random surface files without Language policy'
   Trust:
-    canonical_path: Native/Ambitions/Trust
-    role: Proof, Source, Privacy, History, Receipts, and explanation policy
-    review_owner: SCG trust review
-    production_behavior_owner: trust surface owner
-    forbidden: dashboard analytics, productivity score, release claims
+    layer_name: 'Trust'
+    canonical_path: 'Native/Ambitions/Trust'
+    owned_responsibilities:
+      - 'Proof'
+      - 'Source'
+      - 'Privacy'
+      - 'History'
+      - 'Receipts'
+      - 'runtime explanation policy'
+      - 'trust disclosure levels'
+    allowed_imports:
+      - 'SwiftUI when trust UI'
+      - 'Foundation'
+      - 'Core'
+      - 'Projection receipts'
+      - 'Language'
+      - 'DesignSystem'
+    forbidden_imports:
+      - 'productivity scores'
+      - 'dashboard analytics as root value'
+      - 'release/readiness claims'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Trust/**'
+    forbidden_file_patterns:
+      - 'trust copy hidden in diagnostics or debug surfaces as user-facing proof'
+    production_code_change_posture: 'Requires proof-honesty review and no privacy/legal/readiness claims without current evidence.'
+    review_risk_notes:
+      - 'Trust layer must remain inspectable and local-first.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'Proof; Source; Privacy; History; Receipts; runtime explanation policy; trust disclosure levels'
+    review_owner: 'SCG Trust review'
+    production_behavior_owner: 'Trust owner'
+    forbidden: 'productivity scores; dashboard analytics as root value; release/readiness claims; trust copy hidden in diagnostics or debug surfaces as user-facing proof'
   Interaction:
-    canonical_path: Native/Ambitions/Interaction
-    role: gestures, keyboard, direct manipulation, and haptics
-    review_owner: SCG interaction review
-    production_behavior_owner: interaction owner
-    forbidden: domain persistence policy, copy authority
+    layer_name: 'Interaction'
+    canonical_path: 'Native/Ambitions/Interaction'
+    owned_responsibilities:
+      - 'gesture grammar'
+      - 'direct manipulation'
+      - 'surface gesture map'
+      - 'keyboard policy'
+      - 'haptic policy'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'UIKit when scoped'
+      - 'Foundation'
+      - 'DesignSystem'
+      - 'Stage contracts'
+    forbidden_imports:
+      - 'domain persistence policy'
+      - 'copy authority'
+      - 'private data transport'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Interaction/**'
+    forbidden_file_patterns:
+      - 'hidden gestures with no non-gesture alternative'
+    production_code_change_posture: 'Requires tap target, keyboard, VoiceOver action, Reduce Motion, and haptics review when behavior changes.'
+    review_risk_notes:
+      - 'Gesture-only behavior is Yellow/Red unless accessible alternatives exist.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'gesture grammar; direct manipulation; surface gesture map; keyboard policy; haptic policy'
+    review_owner: 'SCG Interaction review'
+    production_behavior_owner: 'Interaction owner'
+    forbidden: 'domain persistence policy; copy authority; private data transport; hidden gestures with no non-gesture alternative'
   Rendering:
-    canonical_path: Native/Ambitions/Rendering
-    role: canvas renderers, geometry, performance probes, and semantic mirrors
-    review_owner: SCG rendering review
-    production_behavior_owner: rendering owner
-    forbidden: runtime learning policy, personal data transport
+    layer_name: 'Rendering'
+    canonical_path: 'Native/Ambitions/Rendering'
+    owned_responsibilities:
+      - 'canvas primitives'
+      - 'render geometry'
+      - 'performance probes'
+      - 'semantic mirrors'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Foundation'
+      - 'Core/Domain value types'
+      - 'DesignSystem tokens'
+    forbidden_imports:
+      - 'runtime learning policy'
+      - 'personal data transport'
+      - 'persistence write authority'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Rendering/**'
+    forbidden_file_patterns:
+      - 'semantic mirror copy becoming root architecture jargon'
+    production_code_change_posture: 'Requires visual/frame/performance proof when visible rendering changes.'
+    review_risk_notes:
+      - 'Rendered object dominance cannot be inferred from renderer source.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'canvas primitives; render geometry; performance probes; semantic mirrors'
+    review_owner: 'SCG Rendering review'
+    production_behavior_owner: 'Rendering owner'
+    forbidden: 'runtime learning policy; personal data transport; persistence write authority; semantic mirror copy becoming root architecture jargon'
   DesignSystem:
-    canonical_path: Native/Ambitions/DesignSystem
-    role: foundations, accessibility policies, Stage primitives, and product objects
-    review_owner: SCG design-system review
-    production_behavior_owner: design system owner
-    forbidden: route authority, persistence authority, product data mutation
+    layer_name: 'DesignSystem'
+    canonical_path: 'Native/Ambitions/DesignSystem'
+    owned_responsibilities:
+      - 'foundations'
+      - 'accessibility policies'
+      - 'Stage primitives'
+      - 'product objects'
+      - 'tokens'
+      - 'component library'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Foundation'
+      - 'UIKit when scoped'
+      - 'CoreGraphics'
+    forbidden_imports:
+      - 'route authority'
+      - 'persistence authority'
+      - 'product data mutation'
+    allowed_file_patterns:
+      - 'Native/Ambitions/DesignSystem/**'
+      - 'Sources/**'
+    forbidden_file_patterns:
+      - 'Sources/Previews/** as production proof'
+      - 'token generated files without generator/source proof'
+    production_code_change_posture: 'Requires component tests or visual/accessibility proof proportional to visible blast radius.'
+    review_risk_notes:
+      - 'Design token generated files without retained generator proof remain Yellow from SCG-002.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'foundations; accessibility policies; Stage primitives; product objects; tokens; component library'
+    review_owner: 'SCG DesignSystem review'
+    production_behavior_owner: 'DesignSystem owner'
+    forbidden: 'route authority; persistence authority; product data mutation; Sources/Previews/** as production proof; token generated files without generator/source proof'
   Surfaces:
-    canonical_path: Native/Ambitions/Surfaces
-    role: Today, Goals, Time, and You root surface contracts and object views
-    review_owner: SCG surface review
-    production_behavior_owner: surface owner
-    forbidden: Surfaces/Capture, Surfaces/Motion, dashboard root anatomy
+    layer_name: 'Surfaces'
+    canonical_path: 'Native/Ambitions/Surfaces/Today'
+    owned_responsibilities:
+      - 'aggregate owner for Today, Goals, Time, You root surface contracts and object views'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage contracts'
+      - 'Projection'
+      - 'DesignSystem'
+      - 'Interaction'
+      - 'Language'
+      - 'Trust'
+    forbidden_imports:
+      - 'Surfaces/Capture'
+      - 'Surfaces/Motion'
+      - 'dashboard root anatomy'
+      - 'direct persistence writes'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Surfaces/Today/**'
+      - 'Native/Ambitions/Surfaces/Goals/**'
+      - 'Native/Ambitions/Surfaces/Time/**'
+      - 'Native/Ambitions/Surfaces/You/**'
+      - 'Native/Ambitions/Surfaces/SurfaceLaw/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Surfaces/Capture/**'
+      - 'Native/Ambitions/Surfaces/Motion/**'
+    production_code_change_posture: 'Requires product-object dominance, shell ownership, accessibility, and mutation proof when visible behavior changes.'
+    review_risk_notes:
+      - 'Existing Features surface code is compatibility debt, not a canonical owner.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'aggregate owner for Today, Goals, Time, You root surface contracts and object views'
+    review_owner: 'SCG Surfaces review'
+    production_behavior_owner: 'Surfaces owner'
+    forbidden: 'Surfaces/Capture; Surfaces/Motion; dashboard root anatomy; direct persistence writes; Native/Ambitions/Surfaces/Capture/**; Native/Ambitions/Surfaces/Motion/**'
+  Surfaces/Today:
+    layer_name: 'Surfaces/Today'
+    canonical_path: 'Native/Ambitions/Surfaces/Today'
+    owned_responsibilities:
+      - 'Today root surface'
+      - 'Reality Meridian'
+      - 'Start here object'
+      - 'Today interactions/accessibility'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage'
+      - 'Projection'
+      - 'DesignSystem'
+      - 'Interaction'
+      - 'Language'
+      - 'Trust'
+    forbidden_imports:
+      - 'dashboard/task-list root anatomy'
+      - 'Capture/Motion root navigation'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Surfaces/Today/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Features/Today/** for new source'
+    production_code_change_posture: 'Requires first-viewport product-object and visible mutation evidence for behavioral changes.'
+    review_risk_notes:
+      - 'Today compatibility files map here as expected owner but remain Yellow when non-canonical.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'Today root surface; Reality Meridian; Start here object; Today interactions/accessibility'
+    review_owner: 'SCG Surfaces/Today review'
+    production_behavior_owner: 'Surfaces/Today owner'
+    forbidden: 'dashboard/task-list root anatomy; Capture/Motion root navigation; Native/Ambitions/Features/Today/** for new source'
+  Surfaces/Goals:
+    layer_name: 'Surfaces/Goals'
+    canonical_path: 'Native/Ambitions/Surfaces/Goals'
+    owned_responsibilities:
+      - 'Goals root surface'
+      - 'Constellation Atlas'
+      - 'Goals interactions/accessibility'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage'
+      - 'Projection'
+      - 'DesignSystem'
+      - 'Interaction'
+      - 'Language'
+      - 'Trust'
+    forbidden_imports:
+      - 'KPI dashboard root anatomy'
+      - 'ranked score product framing'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Surfaces/Goals/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Features/Goals/** for new source'
+    production_code_change_posture: 'Requires object dominance, route-depth, mutation, and accessibility proof when visible behavior changes.'
+    review_risk_notes:
+      - 'Goal preview/fixture target membership remains Yellow until reviewed.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'Goals root surface; Constellation Atlas; Goals interactions/accessibility'
+    review_owner: 'SCG Surfaces/Goals review'
+    production_behavior_owner: 'Surfaces/Goals owner'
+    forbidden: 'KPI dashboard root anatomy; ranked score product framing; Native/Ambitions/Features/Goals/** for new source'
+  Surfaces/Time:
+    layer_name: 'Surfaces/Time'
+    canonical_path: 'Native/Ambitions/Surfaces/Time'
+    owned_responsibilities:
+      - 'Time root surface'
+      - 'LifeShape Field'
+      - 'Time interactions/accessibility'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage'
+      - 'Projection'
+      - 'DesignSystem'
+      - 'Interaction'
+      - 'Language'
+      - 'Trust'
+      - 'Core/Time'
+    forbidden_imports:
+      - 'calendar clone root-only implementation'
+      - 'free/busy grid as product object'
+      - 'productivity score framing'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Surfaces/Time/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Features/Time/** for new source'
+    production_code_change_posture: 'Requires clock-backed behavior, object dominance, safe-area, and accessibility proof when visible behavior changes.'
+    review_risk_notes:
+      - 'Time source presence does not prove calendar-grade runtime behavior.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'Time root surface; LifeShape Field; Time interactions/accessibility'
+    review_owner: 'SCG Surfaces/Time review'
+    production_behavior_owner: 'Surfaces/Time owner'
+    forbidden: 'calendar clone root-only implementation; free/busy grid as product object; productivity score framing; Native/Ambitions/Features/Time/** for new source'
+  Surfaces/You:
+    layer_name: 'Surfaces/You'
+    canonical_path: 'Native/Ambitions/Surfaces/You'
+    owned_responsibilities:
+      - 'You root surface'
+      - 'User System Profile'
+      - 'settings-style detail surfaces'
+      - 'You interactions/accessibility'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage'
+      - 'Projection'
+      - 'DesignSystem'
+      - 'Interaction'
+      - 'Language'
+      - 'Trust'
+      - 'Core/Permissions'
+    forbidden_imports:
+      - 'admin dashboard framing'
+      - 'social profile framing'
+      - 'release/privacy approval claims'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Surfaces/You/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Features/You/** for new source'
+    production_code_change_posture: 'Requires row action truth, unavailable-state honesty, privacy boundary review, and accessibility proof when visible behavior changes.'
+    review_risk_notes:
+      - 'Preview swatch surface in target membership remains Yellow until reviewed.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'You root surface; User System Profile; settings-style detail surfaces; You interactions/accessibility'
+    review_owner: 'SCG Surfaces/You review'
+    production_behavior_owner: 'Surfaces/You owner'
+    forbidden: 'admin dashboard framing; social profile framing; release/privacy approval claims; Native/Ambitions/Features/You/** for new source'
   Composer:
-    canonical_path: Native/Ambitions/Composer/Capture
-    role: global Capture composer, routing preview, and Capture accessibility
-    review_owner: SCG composer review
-    production_behavior_owner: Capture owner
-    forbidden: Capture tab, inbox feed, chatbot shell
+    layer_name: 'Composer'
+    canonical_path: 'Native/Ambitions/Composer/Capture'
+    owned_responsibilities:
+      - 'aggregate owner for global Capture composer'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage overlays'
+      - 'Projection'
+      - 'Core/Domain'
+      - 'Language'
+      - 'DesignSystem'
+      - 'Interaction'
+      - 'Trust'
+    forbidden_imports:
+      - 'root tab ownership'
+      - 'inbox/feed ownership'
+      - 'chatbot shell ownership'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Composer/Capture/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Surfaces/Capture/**'
+      - 'Native/Ambitions/Features/Capture/** for new source'
+    production_code_change_posture: 'Requires route graph, save-first fallback, attachment/privacy, and accessibility proof when behavior changes.'
+    review_risk_notes:
+      - 'Capture must not be top-level persistent IA.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'aggregate owner for global Capture composer'
+    review_owner: 'SCG Composer review'
+    production_behavior_owner: 'Composer owner'
+    forbidden: 'root tab ownership; inbox/feed ownership; chatbot shell ownership; Native/Ambitions/Surfaces/Capture/**; Native/Ambitions/Features/Capture/** for new source'
+  Composer/Capture:
+    layer_name: 'Composer/Capture'
+    canonical_path: 'Native/Ambitions/Composer/Capture'
+    owned_responsibilities:
+      - 'Capture surface/object'
+      - 'capture input model'
+      - 'routing preview'
+      - 'Capture interactions/accessibility'
+    allowed_imports:
+      - 'SwiftUI'
+      - 'Stage'
+      - 'Projection'
+      - 'Core/Domain'
+      - 'Language'
+      - 'DesignSystem'
+      - 'Interaction'
+      - 'Trust'
+    forbidden_imports:
+      - 'Capture tab'
+      - 'generic inbox'
+      - 'chatbot wrapper'
+      - 'cloud LLM core dependency'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Composer/Capture/**'
+    forbidden_file_patterns:
+      - 'Native/Ambitions/Surfaces/Capture/**'
+      - 'Native/Ambitions/Features/Capture/** for new implementation'
+    production_code_change_posture: 'Requires proof that Capture remains global composer and that user input is locally persisted/route-gated as scoped.'
+    review_risk_notes:
+      - 'CaptureRoutingPreview target membership is Yellow until reviewed.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'Capture surface/object; capture input model; routing preview; Capture interactions/accessibility'
+    review_owner: 'SCG Composer/Capture review'
+    production_behavior_owner: 'Composer/Capture owner'
+    forbidden: 'Capture tab; generic inbox; chatbot wrapper; cloud LLM core dependency; Native/Ambitions/Surfaces/Capture/**; Native/Ambitions/Features/Capture/** for new implementation'
   Scenarios:
-    canonical_path: Native/Ambitions/Scenarios
-    role: runtime, surface, overlay, motion, and stress scenarios
-    review_owner: SCG scenario review
-    production_behavior_owner: scenario owner
-    forbidden: production-only mutation hidden in scenario code
+    layer_name: 'Scenarios'
+    canonical_path: 'Native/Ambitions/Scenarios'
+    owned_responsibilities:
+      - 'runtime scenarios'
+      - 'surface scenarios'
+      - 'overlay scenarios'
+      - 'motion scenarios'
+      - 'stress scenarios'
+    allowed_imports:
+      - 'Foundation'
+      - 'Core'
+      - 'Projection'
+      - 'Stage'
+      - 'DesignSystem'
+    forbidden_imports:
+      - 'production-only mutation hidden in scenario code'
+      - 'fake success state as runtime truth'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Scenarios/**'
+    forbidden_file_patterns:
+      - 'Scenarios/MotionScenarios.swift as top-level surface scenario'
+    production_code_change_posture: 'Scenario changes are support-only unless explicitly wired to runtime; target membership must be reviewed for fake data risk.'
+    review_risk_notes:
+      - 'Scenarios can support proof but do not prove product behavior alone.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'runtime scenarios; surface scenarios; overlay scenarios; motion scenarios; stress scenarios'
+    review_owner: 'SCG Scenarios review'
+    production_behavior_owner: 'Scenarios owner'
+    forbidden: 'production-only mutation hidden in scenario code; fake success state as runtime truth; Scenarios/MotionScenarios.swift as top-level surface scenario'
   Diagnostics:
-    canonical_path: Native/Ambitions/Diagnostics
-    role: runtime, stage, render, store, and crash diagnostics
-    review_owner: SCG diagnostics review
-    production_behavior_owner: diagnostics owner
-    forbidden: user-facing readiness claims
+    layer_name: 'Diagnostics'
+    canonical_path: 'Native/Ambitions/Diagnostics'
+    owned_responsibilities:
+      - 'runtime diagnostics'
+      - 'stage diagnostics'
+      - 'render diagnostics'
+      - 'store diagnostics'
+      - 'crash triage notes'
+    allowed_imports:
+      - 'Foundation'
+      - 'OSLog'
+      - 'Core'
+      - 'Stage'
+      - 'Rendering'
+    forbidden_imports:
+      - 'user-facing readiness claims'
+      - 'private user data logging'
+      - 'production behavior changes hidden in diagnostics'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Diagnostics/**'
+    forbidden_file_patterns:
+      - 'diagnostics used as root surface or release proof'
+    production_code_change_posture: 'Requires privacy-safe logging review and no release claim inflation.'
+    review_risk_notes:
+      - 'Diagnostics are evidence support, not readiness proof.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'runtime diagnostics; stage diagnostics; render diagnostics; store diagnostics; crash triage notes'
+    review_owner: 'SCG Diagnostics review'
+    production_behavior_owner: 'Diagnostics owner'
+    forbidden: 'user-facing readiness claims; private user data logging; production behavior changes hidden in diagnostics; diagnostics used as root surface or release proof'
   Quality:
-    canonical_path: Native/Ambitions/Quality
-    role: audit harnesses, quality gates, review outputs, and proof validators
-    review_owner: SCG quality review
-    production_behavior_owner: quality owner
-    forbidden: production app behavior
+    layer_name: 'Quality'
+    canonical_path: 'Native/Ambitions/Quality'
+    owned_responsibilities:
+      - 'snapshot matrix'
+      - 'accessibility audits'
+      - 'performance budgets'
+      - 'visual regression harness'
+      - 'motion/shell/language/safe-area/dynamic-type audits'
+      - 'SCG governance docs'
+    allowed_imports:
+      - 'Foundation'
+      - 'SwiftUI when audit UI'
+      - 'XCTest in tests'
+      - 'Core'
+      - 'Stage'
+      - 'DesignSystem'
+    forbidden_imports:
+      - 'production app behavior authority'
+      - 'quality files as product runtime dependencies unless explicitly scoped'
+    allowed_file_patterns:
+      - 'Native/Ambitions/Quality/**'
+      - 'docs/quality/**'
+      - 'docs/validation/**'
+      - 'scripts/ambitions-*audit*.py'
+    forbidden_file_patterns:
+      - 'quality artifacts used as release proof without current logs'
+    production_code_change_posture: 'Docs/scripts quality changes are allowed for SCG; production quality harness source changes require validation.'
+    review_risk_notes:
+      - 'SCG artifacts are inventory/review support and do not claim senior-readiness.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'snapshot matrix; accessibility audits; performance budgets; visual regression harness; motion/shell/language/safe-area/dynamic-type audits; SCG governance docs'
+    review_owner: 'SCG Quality review'
+    production_behavior_owner: 'Quality owner'
+    forbidden: 'production app behavior authority; quality files as product runtime dependencies unless explicitly scoped; quality artifacts used as release proof without current logs'
+  Tests:
+    layer_name: 'Tests'
+    canonical_path: 'Native/AmbitionsTests'
+    owned_responsibilities:
+      - 'unit tests'
+      - 'UI tests'
+      - 'package tests'
+      - 'test fixtures that are not app target production behavior'
+    allowed_imports:
+      - 'XCTest'
+      - 'Testing'
+      - 'app/product modules under test'
+      - 'Foundation'
+      - 'SwiftUI when UI-test support requires'
+    forbidden_imports:
+      - 'test-only behavior wired into production targets'
+      - 'source-string tests as visual proof'
+    allowed_file_patterns:
+      - 'Native/AmbitionsTests/**'
+      - 'Native/AmbitionsUITests/**'
+      - 'Packages/**/Tests/**'
+      - '**/*Tests.swift'
+    forbidden_file_patterns:
+      - 'tests requiring Motion/Capture as root tabs unless explicitly classified as stale/debt'
+    production_code_change_posture: 'Test changes must validate behavior, not hide failures or claim visual/accessibility proof by source strings alone.'
+    review_risk_notes:
+      - 'All active test files require expected owner Tests.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'unit tests; UI tests; package tests; test fixtures that are not app target production behavior'
+    review_owner: 'SCG Tests review'
+    production_behavior_owner: 'Tests owner'
+    forbidden: 'test-only behavior wired into production targets; source-string tests as visual proof; tests requiring Motion/Capture as root tabs unless explicitly classified as stale/debt'
+  Scripts:
+    layer_name: 'Scripts'
+    canonical_path: 'scripts'
+    owned_responsibilities:
+      - 'retained validation scripts'
+      - 'audit scripts'
+      - 'build/setup helper scripts'
+      - 'generator scripts when retained and current'
+    allowed_imports:
+      - 'standard library only unless documented'
+      - 'local repo files as read-only inputs unless scoped'
+    forbidden_imports:
+      - 'stale control-plane assumptions'
+      - 'network/private-data upload without explicit truth approval'
+    allowed_file_patterns:
+      - 'scripts/**'
+      - 'Packages/AmbitionsExperienceKernel/Scripts/**'
+      - '**/Makefile when classified'
+    forbidden_file_patterns:
+      - 'scripts that promote Motion/Capture as root IA'
+      - 'scripts that mutate production paths during inventory-only work'
+    production_code_change_posture: 'Scripts may support validation; any generator affecting production source requires explicit scope and proof.'
+    review_risk_notes:
+      - 'Missing retained generators for generated Swift remain Yellow inventory risk.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'retained validation scripts; audit scripts; build/setup helper scripts; generator scripts when retained and current'
+    review_owner: 'SCG Scripts review'
+    production_behavior_owner: 'Scripts owner'
+    forbidden: 'stale control-plane assumptions; network/private-data upload without explicit truth approval; scripts that promote Motion/Capture as root IA; scripts that mutate production paths during inventory-only work'
+  Docs:
+    layer_name: 'Docs'
+    canonical_path: 'docs'
+    owned_responsibilities:
+      - 'truth docs'
+      - 'quality docs'
+      - 'validation docs'
+      - 'build/release docs'
+      - 'README/AGENTS governance'
+    allowed_imports:
+      - 'links to active truth and current evidence'
+    forbidden_imports:
+      - 'stale proof as current proof'
+      - 'old canon overriding truth files'
+      - 'duplicate known-issues database'
+    allowed_file_patterns:
+      - 'docs/**'
+      - 'README.md'
+      - 'AGENTS.md'
+      - '.agents/skills/**/SKILL.md'
+      - 'Packages/**/Docs/**'
+    forbidden_file_patterns:
+      - 'historical prompts/trains retained as active truth'
+    production_code_change_posture: 'Docs-only changes must stay proof-bound and avoid implementation/readiness overclaims.'
+    review_risk_notes:
+      - 'SCG inventory docs are review inputs, not senior-readiness proof.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'truth docs; quality docs; validation docs; build/release docs; README/AGENTS governance'
+    review_owner: 'SCG Docs review'
+    production_behavior_owner: 'Docs owner'
+    forbidden: 'stale proof as current proof; old canon overriding truth files; duplicate known-issues database; historical prompts/trains retained as active truth'
+  Legacy/Unknown:
+    layer_name: 'Legacy/Unknown'
+    canonical_path: 'assets when not target-included'
+    owned_responsibilities:
+      - 'unclassified tracked files'
+      - 'legacy root assets'
+      - 'recognized compatibility debt until evidence assigns canonical owner'
+    allowed_imports:
+      - 'none by default'
+    forbidden_imports:
+      - 'any production behavior expansion without canonical owner assignment'
+    allowed_file_patterns:
+      - 'assets/** when not target-included'
+      - 'unrecognized support files pending classification'
+    forbidden_file_patterns:
+      - 'active production files without expected owner'
+      - 'new product implementation under legacy paths'
+    production_code_change_posture: 'Stop and classify before editing; unknown production owner is Red, unknown support owner is Yellow.'
+    review_risk_notes:
+      - 'Escalate unknown ownership to SCG architecture review before SCG-004 or repair trains.'
+    escalation_rule_for_unknown_ownership: 'Escalate to SCG architecture review; do not repair or claim Green until expected owner is assigned.'
+    role: 'unclassified tracked files; legacy root assets; recognized compatibility debt until evidence assigns canonical owner'
+    review_owner: 'SCG Legacy/Unknown review'
+    production_behavior_owner: 'Legacy/Unknown owner'
+    forbidden: 'any production behavior expansion without canonical owner assignment; active production files without expected owner; new product implementation under legacy paths'
 legacy_compatibility:
   Features:
-    current_status: compatibility debt
-    rule: no new product implementation may be added here
-    migration_policy: move touched implementation toward the Final Architecture Tree or close Yellow with a named repair train
+    current_status: 'compatibility debt'
+    rule: 'no new product implementation may be added here'
+    migration_policy: 'move touched implementation toward the Final Architecture Tree or close Yellow with a named repair train'
   MotionRoot:
-    current_status: forbidden as root
-    canonical_owner: Native/Ambitions/Stage/Motion
+    current_status: 'forbidden as root'
+    canonical_owner: 'Native/Ambitions/Stage/Motion'
   CaptureRoot:
-    current_status: forbidden as root
-    canonical_owner: Native/Ambitions/Composer/Capture
+    current_status: 'forbidden as root'
+    canonical_owner: 'Native/Ambitions/Composer/Capture'
