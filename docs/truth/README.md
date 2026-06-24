@@ -24,7 +24,7 @@ Applies to: Humans, Codex, and implementation agents working in the Ambitions re
 14. `project.yml`.
 15. `Package.swift`.
 16. Relevant source, tests, retained scripts, build docs, and current local logs.
-17. Relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
+17. `.agents/skills/README.md` skill registry, then relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
 
 `CODEX_START_HERE.md` reduces repeated reading burden by routing agents to the right authority files for the task type. It is not higher authority than product, origin, moat, experience, implementation, acceptance, release, process, or retention truth.
 
@@ -85,7 +85,9 @@ Retained non-source material is intentionally small:
 - root `AGENTS.md`
 - root `README.md`
 - retained build, validation, privacy, claim, copy, and canon-drift scripts
-- at most three repo skills under `.agents/skills/`
+- four retained repo skills under `.agents/skills/`, registered in `.agents/skills/README.md`
+
+The four retained repo skills are intentionally distinct: source/truth authority, architecture tree enforcement, iOS quality gate, and release proof honesty. A fifth retained skill requires explicit truth-file approval and proof that the need cannot be covered by those four skills or `CODEX_START_HERE.md`.
 
 Generated Codex state, old artifacts, prompts, trains, stale batch docs, backup truth files, and historical proof matrices are not retained in-repo.
 

@@ -139,8 +139,9 @@ Mandatory read order:
 15. `project.yml`
 16. `Package.swift`
 17. relevant source, tests, retained scripts, build docs, and current local logs
-18. relevant retained `.agents/skills/*/SKILL.md` files only after truth files
-19. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
+18. `.agents/skills/README.md` skill registry
+19. relevant retained `.agents/skills/*/SKILL.md` files only after truth files and registry routing
+20. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
 
 
 Historical material is not retained in-repo unless it is current, canon-aligned, and materially useful for App Store readiness. It must not override active truth.
@@ -157,6 +158,7 @@ Historical material is not retained in-repo unless it is current, canon-aligned,
 
 Before creating, moving, refactoring, or reviewing Ambitions source, agents must load and follow:
 
+* `.agents/skills/README.md` for skill routing and retained-skill status
 * `.agents/skills/ambitions-source-truth-authority/SKILL.md`
 * `.agents/skills/ambitions-architecture-tree-enforcement/SKILL.md`
 * `.agents/skills/ambitions-ios-quality-gate/SKILL.md`

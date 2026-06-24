@@ -5,7 +5,18 @@ description: Use before Ambitions source creation, movement, refactors, or revie
 
 # Ambitions Architecture Tree Enforcement
 
+## Skill digest
+- Use when: source creation, movement, refactor, architecture review, or touched `Features/` compatibility is in scope.
+- Do not use as: product canon, source proof, or a reason to invent equivalent paths.
+- Required first read: `docs/truth/CODEX_START_HERE.md`.
+- Owns: exact Final Architecture Tree enforcement and non-equivalent owner checks.
+- Does not own: product canon, implementation completeness, release proof, or migration approval beyond the scoped train.
+- Hard red: new product logic under non-canonical owners, Motion/Capture root destinations, or "equivalent" folder/path interpretation.
+- Required output: Final Architecture Tree inspected, canonical owners touched, non-canonical owners touched, shims left behind, architecture debt, next repair train.
+
 This skill is operating support only. The binding architecture tree lives in `docs/truth/PRODUCT_DESIGN_TRUTH.md` under `Final Architecture Tree`.
+
+`docs/truth/*`, live source, tests, current logs, current proof artifacts, and current user or issue instructions win over this skill.
 
 This skill exists to stop architecture drift, convenience folders, old feature ownership, and "equivalent" interpretations.
 
@@ -30,11 +41,15 @@ If product canon says an object belongs under `App/`, `Stage/`, `Core/`, `Projec
 
 Before creating, moving, reviewing, or refactoring source, read:
 
-1. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-2. the `Final Architecture Tree` section in full
-3. `docs/truth/IMPLEMENTATION_TRUTH.md`
-4. `AGENTS.md`
-5. relevant live source, tests, `project.yml`, scripts, and current logs
+1. `docs/truth/CODEX_START_HERE.md`
+2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+3. the `Final Architecture Tree` section in full
+4. `docs/truth/IMPLEMENTATION_TRUTH.md`
+5. `docs/truth/CODEX_PROCESS_TRUTH.md`
+6. `AGENTS.md`
+7. relevant live source, tests, `project.yml`, scripts, and current logs
+
+Also read `docs/truth/PRODUCT_EXPERIENCE_CANON.md` when architecture work touches Life Capital, full pathing, Future Steps, proof/progress transfer, Source Atlas, onboarding, reviews, automation, Capture, Time, Goals, Today, You, or Trust.
 
 If the current repo does not match the final tree, the mismatch is architecture debt. It is not permission to add new work to the wrong owner.
 
@@ -139,9 +154,10 @@ Every train using this skill must report:
 
 - `Final Architecture Tree` section inspected: yes/no
 - canonical owners touched
+- non-canonical owners touched
 - files moved or created
 - old/non-canonical paths removed
 - compatibility shims left behind, if any
-- why any Yellow architecture debt remains
+- architecture debt
 - next repair train if debt remains
 - confirmation that no "equivalent" folder/path interpretation was used

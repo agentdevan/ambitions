@@ -23,8 +23,8 @@ CLAIM_PATTERNS = [
     re.compile(r"runtime\s+ui.{0,40}(complete|installed)", re.I),
     re.compile(r"global\s+(train|queue).{0,40}complete", re.I),
     re.compile(r"all\s+batches.{0,40}complete", re.I),
-    re.compile(r"release.{0,20}ready", re.I),
-    re.compile(r"store.{0,20}ready", re.I),
+    re.compile(r"\brelease[- ]ready\b", re.I),
+    re.compile(r"\bstore[- ]ready\b", re.I),
     re.compile(r"public\s+accessibility.{0,40}(verified|complete|compliant)", re.I),
 ]
 
@@ -37,6 +37,8 @@ ALLOW_PATTERNS = [
     re.compile(r"deferred", re.I),
     re.compile(r"proof\s+required", re.I),
     re.compile(r"docs/control-plane\s+only", re.I),
+    re.compile(r"non[- ]release[- ]ready", re.I),
+    re.compile(r"no\s+public", re.I),
 ]
 
 EXTENSIONS = {".md", ".txt", ".json", ".yml", ".yaml"}

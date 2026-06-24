@@ -5,19 +5,36 @@ description: Use for Ambitions native iPhone source/UI changes that need Apple P
 
 # Ambitions iOS Quality Gate
 
+## Skill digest
+- Use when: SwiftUI, Apple-platform, iOS design system, accessibility, shell, keyboard, permissions, persistence, widgets, or visual/product surface work is in scope.
+- Do not use as: product canon, release proof, visual acceptance, or permission to skip Apple/source proof.
+- Required first read: `docs/truth/CODEX_START_HERE.md`.
+- Owns: Apple Platform Source Atlas routing, iOS 26 availability checks, native quality gates, accessibility/proof checklist.
+- Does not own: product canon, implementation status, Visual Green, Release Green, or App Store readiness.
+- Hard red: Apple API guesswork, unsafe shell geometry, missing accessibility semantics, screenshot paths as proof, or readiness overclaims.
+- Required output: Apple Platform sections consulted, Product Experience gates touched, iOS 26 availability, accessibility checks, screenshot/proof or not-run reason, validation commands/results.
+
 This skill is operating support only. Product truth lives in `docs/truth/*`. It does not override product canon, release truth, live source, current tests, current logs, or current Xcode evidence.
+
+`docs/truth/*`, live source, tests, current logs, current proof artifacts, and current user or issue instructions win over this skill.
 
 ## Required Source Map
 
 Before touching SwiftUI, UIKit interop, SwiftData or local persistence, App Intents, WidgetKit, Live Activities, notifications, BackgroundTasks, LocalAuthentication, privacy, permissions, accessibility, Human Interface Guidelines aligned behavior, iOS design resources, shell chrome, keyboard behavior, or design-system primitives, read:
 
-1. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
-2. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
-3. relevant live source, tests, `project.yml`, `Package.swift`, entitlements, Info.plist, scripts, and current logs
+1. `docs/truth/CODEX_START_HERE.md`
+2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
+3. `docs/truth/PRODUCT_EXPERIENCE_CANON.md` when the work touches scenario-gated behavior
+4. `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`
+5. `docs/truth/RELEASE_TRUTH.md` when proof/readiness wording is in scope
+6. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
+7. relevant live source, tests, `project.yml`, `Package.swift`, entitlements, Info.plist, scripts, and current logs
 
 `PRODUCT_DESIGN_TRUTH.md` is product canon. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md` is the iOS implementation source map. If they conflict, product canon wins.
 
 If `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md` is missing during Apple-platform work, stop and close Blocked or Yellow with the missing-source reason. Do not guess Apple API behavior from memory.
+
+Product Experience scenario gates are required when UI/source work touches Steps, reminders, Capture, Time, Goals, Life Capital, Future Steps, proof, reviews, onboarding, notifications, automation, conflict resolution, or Source Atlas inspection.
 
 ## Required Posture
 
@@ -67,10 +84,12 @@ Any source/UI train that changes visible behavior must check:
 
 - source paths touched
 - Apple Platform Source Atlas sections consulted
+- Product Experience gates touched
 - Apple APIs/frameworks/patterns used
 - iOS 26 availability notes
+- accessibility checks
 - focused build/test commands and exit codes
-- screenshot or explicit not-run reason for UI changes
+- screenshot/proof or explicit not-run reason for UI changes
 - accessibility/non-claim notes where relevant
 - privacy/permission notes where relevant
 - rollback path

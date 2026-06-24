@@ -42,7 +42,8 @@ Keep these categories when current:
 - source-adjacent docs that are accurate and required to build or validate source
 - source, tests, fixtures used by tests, resources, entitlements, privacy manifests, project config, package config, and CI/build config that still runs
 - small scripts that are current, dry-run/build useful, and free of stale IA/control-plane assumptions
-- retained `.agents` skills that are current repo operating law: source-truth authority, architecture-tree enforcement, iOS quality gate, release proof honesty, product-object enforcement, visual proof, canon closeout, anti-pattern detection, and visual red-team review
+- the four retained `.agents` skills registered in `.agents/skills/README.md`: source-truth authority, architecture-tree enforcement, iOS quality gate, and release proof honesty
+- non-retained `.agents` skill files only when the registry explicitly marks them as merge, delete-candidate, or experimental pending future approval
 
 ## Delete
 
