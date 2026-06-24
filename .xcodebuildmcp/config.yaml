@@ -1,6 +1,15 @@
 schemaVersion: 1
 enabledWorkflows:
+  - coverage
+  - debugging
+  - device
+  - project-discovery
   - simulator
+  - simulator-management
+  - swift-package
+  - ui-automation
+  - utilities
+  - xcode-ide
 sessionDefaults: {}
 sessionDefaultsProfiles:
   ambitions-ios:

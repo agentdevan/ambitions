@@ -163,6 +163,7 @@ Before creating, moving, refactoring, or reviewing Ambitions source, agents must
 * `.agents/skills/ambitions-architecture-tree-enforcement/SKILL.md`
 * `.agents/skills/ambitions-ios-quality-gate/SKILL.md`
 * `.agents/skills/ambitions-release-proof-honesty/SKILL.md` when validation, readiness, TestFlight, App Store, privacy/legal, accessibility, performance, CI, account, R2, or release claims are involved
+* `.agents/skills/ambitions-runtime-contract-engineering/SKILL.md` when implementing, reviewing, testing, or repairing Private Life Runtime behavior contracts, runtime mutations, receipts, undo/recovery, proof-ledger behavior, or runtime scenario gates
 
 The `Final Architecture Tree` in `docs/truth/PRODUCT_DESIGN_TRUTH.md` is binding path ownership, not an approximate target.
 

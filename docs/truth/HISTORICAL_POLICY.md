@@ -42,8 +42,8 @@ Keep these categories when current:
 - source-adjacent docs that are accurate and required to build or validate source
 - source, tests, fixtures used by tests, resources, entitlements, privacy manifests, project config, package config, and CI/build config that still runs
 - small scripts that are current, dry-run/build useful, and free of stale IA/control-plane assumptions
-- the four retained `.agents` skills registered in `.agents/skills/README.md`: source-truth authority, architecture-tree enforcement, iOS quality gate, and release proof honesty
-- no non-retained `.agents` skill files; any future fifth skill requires explicit truth-file approval and proof that the need cannot be covered by the retained four or `docs/truth/CODEX_START_HERE.md`
+- the five retained `.agents` skills registered in `.agents/skills/README.md`: source-truth authority, architecture-tree enforcement, iOS quality gate, release proof honesty, and runtime contract engineering
+- no non-retained `.agents` skill files; any further retained skill requires explicit truth-file approval and proof that the need cannot be covered by the retained skills or `docs/truth/CODEX_START_HERE.md`
 
 ## Delete
 

@@ -29,6 +29,7 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 | SwiftUI/frontend/Apple-platform work | `ambitions-source-truth-authority`, `ambitions-architecture-tree-enforcement`, `ambitions-ios-quality-gate` |
 | Build/test/release/readiness/proof claims | `ambitions-source-truth-authority`, `ambitions-release-proof-honesty` |
 | Visual/product-surface closeout | `ambitions-ios-quality-gate`, `ambitions-release-proof-honesty` |
+| Private Life Runtime contract implementation/review | `ambitions-source-truth-authority`, `ambitions-architecture-tree-enforcement`, `ambitions-runtime-contract-engineering`; add `ambitions-ios-quality-gate` for Apple-platform/UI behavior and `ambitions-release-proof-honesty` for proof/readiness wording |
 | Docs/governance only | `ambitions-source-truth-authority`; add `ambitions-release-proof-honesty` only if proof/release wording is touched |
 | Account/R2/Source Atlas work | `ambitions-source-truth-authority`, `ambitions-ios-quality-gate` if platform code changes, `ambitions-release-proof-honesty` if readiness/proof is claimed |
 
@@ -40,6 +41,7 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 | `ambitions-architecture-tree-enforcement` | `.agents/skills/ambitions-architecture-tree-enforcement/SKILL.md` | Enforces the exact Final Architecture Tree and non-equivalent owner law. |
 | `ambitions-ios-quality-gate` | `.agents/skills/ambitions-ios-quality-gate/SKILL.md` | Routes native iPhone, Apple-platform, UI, accessibility, and visual-proof checks. |
 | `ambitions-release-proof-honesty` | `.agents/skills/ambitions-release-proof-honesty/SKILL.md` | Separates verified proof from unsupported release/readiness claims. |
+| `ambitions-runtime-contract-engineering` | `.agents/skills/ambitions-runtime-contract-engineering/SKILL.md` | Routes Private Life Runtime behavior contracts from canon into deterministic Swift implementation, scenarios, tests, proof, receipt, undo, and degraded-state handling. |
 
 ## When To Load
 
@@ -47,6 +49,7 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 - Load `ambitions-architecture-tree-enforcement` before source creation, movement, refactor, architecture review, or any train touching `Features/` compatibility.
 - Load `ambitions-ios-quality-gate` before SwiftUI, UIKit, SwiftData, WidgetKit, App Intents, notification, permission, privacy, accessibility, shell, keyboard, or Apple-platform work.
 - Load `ambitions-release-proof-honesty` before build/test/release/readiness wording, proof packets, privacy/account/R2 proof, TestFlight/App Store wording, or any Green/Yellow/Red claim that depends on evidence.
+- Load `ambitions-runtime-contract-engineering` before implementing, reviewing, or testing Private Life Runtime behavior contracts, runtime mutations, receipts, undo/recovery, runtime scenario gates, or proof-ledger behavior.
 
 ## When Not To Load
 
@@ -57,16 +60,17 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 
 ## Skill Count Policy
 
-Retain four repo skills by default:
+Retain five repo skills:
 
 1. source/truth authority
 2. architecture tree enforcement
 3. iOS quality gate
 4. release proof honesty
+5. runtime contract engineering
 
-A fifth retained skill requires explicit truth-file approval and must prove the need cannot be covered by the four retained skills or `docs/truth/CODEX_START_HERE.md`.
+This fifth skill exists because runtime contract work is the core Private Life Runtime engineering path and needs a tighter operating checklist than the general source, architecture, iOS, and release-proof skills. It remains subordinate to `docs/truth/*` and should be revised or demoted if truth files later absorb the operating need.
 
-Current inventory contains only the four retained skills. No non-retained, merge-candidate, delete-candidate, or experimental repo skills remain.
+Current inventory contains only the five retained skills. No non-retained, merge-candidate, delete-candidate, or experimental repo skills remain.
 
 ## How To Add, Change, Or Delete A Skill
 
@@ -79,7 +83,7 @@ Before changing skill inventory:
 5. Add or update the `## Skill digest`.
 6. Update this registry and run `python3 scripts/ambitions-skill-registry-check.py`.
 
-Deleted or non-retained skill names must not remain in this registry as nostalgia, searchability, or future speculation. Reintroducing any fifth skill requires explicit truth-file approval and a clear proof that the retained four plus `docs/truth/CODEX_START_HERE.md` cannot cover the operating need.
+Deleted or non-retained skill names must not remain in this registry as nostalgia, searchability, or future speculation. Adding any further retained skill requires explicit truth-file approval and clear proof that the retained skills plus `docs/truth/CODEX_START_HERE.md` cannot cover the operating need.
 
 ## Validation Expectations
 

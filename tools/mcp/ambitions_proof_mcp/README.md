@@ -20,7 +20,7 @@ Core local proof validations:
 
 - `mcp01_self_test`
 - `repo_claim_scan`
-- `efc_applicability_scan`
+- `architecture_applicability_scan`
 - `doc_link_scan_basic`
 - `git_status_summary`
 - `xcodegen_check_dry_run`

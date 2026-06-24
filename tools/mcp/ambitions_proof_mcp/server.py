@@ -42,19 +42,19 @@ class Validation:
 VALIDATIONS: dict[str, Validation] = {
     "mcp01_self_test": Validation(
         "mcp01_self_test",
-        "Run the read-only Ambitions Repo MCP self-test.",
-        ("python3", "tools/mcp/ambitions_repo_mcp/server.py", "--self-test"),
-        requires=("tools/mcp/ambitions_repo_mcp/server.py",),
+        "Run the Swift SDK-backed Ambitions Native Repo MCP self-test.",
+        ("swift", "run", "--package-path", "tools/mcp/ambitions_native_mcp", "ambitions-native-mcp", "--toolset", "repo", "--self-test"),
+        requires=("tools/mcp/ambitions_native_mcp/Package.swift",),
     ),
     "repo_claim_scan": Validation(
         "repo_claim_scan",
         "Run a conservative forbidden-claim scan through the read-only MCP self-test path.",
         ("python3", "tools/mcp/ambitions_proof_mcp/server.py", "--claim-scan"),
     ),
-    "efc_applicability_scan": Validation(
-        "efc_applicability_scan",
-        "Run an EFC applicability smoke scan for a user-facing Swift path.",
-        ("python3", "tools/mcp/ambitions_proof_mcp/server.py", "--efc-scan"),
+    "architecture_applicability_scan": Validation(
+        "architecture_applicability_scan",
+        "Run a current architecture/proof applicability smoke scan for a user-facing Swift path.",
+        ("python3", "tools/mcp/ambitions_proof_mcp/server.py", "--architecture-scan"),
     ),
     "doc_link_scan_basic": Validation(
         "doc_link_scan_basic",
@@ -574,7 +574,7 @@ def tool_xctest_recovery_plan(args: JSON) -> JSON:
             "args": args_list,
         },
         "acceptance_gate": "Only a passing xcode_latest_summary for this batch verifies XCTest proof.",
-        "continuation_after_retry": "Call ambitionsProof.xcode_latest_summary, then ambitionsProof.xcode_failure_classification, then ambitionsRepo.continuation_oracle.",
+        "continuation_after_retry": "Call ambitionsProof.xcode_latest_summary, then ambitionsProof.xcode_failure_classification, then ambitionsRepo.repo_changed_file_impact and ambitionsRepo.repo_claim_scan for current routing/claim boundaries.",
     }
 
 
@@ -662,16 +662,18 @@ def run_stdio() -> int:
 
 def _claim_scan() -> int:
     risky = ["README.md", "docs/README.md", "AGENTS.md"]
-    result = {"paths": risky, "note": "basic MCP02 claim-scan placeholder; use ambitionsRepo detect_forbidden_claims for targeted scans"}
+    result = {"paths": risky, "note": "basic MCP02 claim-scan placeholder; use ambitionsRepo.repo_claim_scan for targeted scans"}
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
 
 
-def _efc_scan() -> int:
+def _architecture_scan() -> int:
     result = {
         "changed_files": ["Native/Ambitions/Features/Today/TodayView.swift"],
-        "efc_required": True,
-        "required_proof": ["product_proof", "trust_proof", "accessibility_proof", "degraded_state_proof", "test_proof", "release_claim_boundary"],
+        "owner": "legacy Features compatibility",
+        "architecture_debt": True,
+        "required_proof": ["architecture_owner_report", "focused_test_or_build", "visual_applicability", "accessibility_applicability", "release_claim_boundary"],
+        "required_route": "Move touched implementation toward the Final Architecture Tree owner or close Yellow with explicit architecture debt and a named repair train.",
     }
     print(json.dumps(result, indent=2, sort_keys=True))
     return 0
@@ -696,7 +698,7 @@ def run_self_test() -> int:
     required_validations = {
         "mcp01_self_test",
         "repo_claim_scan",
-        "efc_applicability_scan",
+        "architecture_applicability_scan",
         "doc_link_scan_basic",
         "git_status_summary",
         "xcodegen_check_dry_run",
@@ -748,15 +750,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Ambitions controlled proof MCP")
     parser.add_argument("--self-test", action="store_true")
     parser.add_argument("--claim-scan", action="store_true")
-    parser.add_argument("--efc-scan", action="store_true")
+    parser.add_argument("--architecture-scan", action="store_true")
     parser.add_argument("--doc-link-scan-basic", action="store_true")
     args = parser.parse_args()
     if args.self_test:
         return run_self_test()
     if args.claim_scan:
         return _claim_scan()
-    if args.efc_scan:
-        return _efc_scan()
+    if args.architecture_scan:
+        return _architecture_scan()
     if args.doc_link_scan_basic:
         return _doc_link_scan_basic()
     return run_stdio()

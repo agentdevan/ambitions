@@ -85,9 +85,9 @@ Retained non-source material is intentionally small:
 - root `AGENTS.md`
 - root `README.md`
 - retained build, validation, privacy, claim, copy, and canon-drift scripts
-- four retained repo skills under `.agents/skills/`, registered in `.agents/skills/README.md`
+- five retained repo skills under `.agents/skills/`, registered in `.agents/skills/README.md`
 
-The four retained repo skills are intentionally distinct: source/truth authority, architecture tree enforcement, iOS quality gate, and release proof honesty. A fifth retained skill requires explicit truth-file approval and proof that the need cannot be covered by those four skills or `CODEX_START_HERE.md`.
+The five retained repo skills are intentionally distinct: source/truth authority, architecture tree enforcement, iOS quality gate, release proof honesty, and runtime contract engineering. The fifth skill is approved for Private Life Runtime behavior-contract work because that path needs a focused operating checklist for deterministic runtime mutations, receipts, undo/recovery, proof-ledger behavior, scenario gates, and degraded/offline boundaries. Any further retained skill requires explicit truth-file approval and proof that the need cannot be covered by the retained skills or `CODEX_START_HERE.md`.
 
 Generated Codex state, old artifacts, prompts, trains, stale batch docs, backup truth files, and historical proof matrices are not retained in-repo.
 
