@@ -6,7 +6,7 @@ Applies to: Ambitions native iPhone repo
 Owner posture: Source truth, not product vision and not release proof  
 Effective rule: Live source, project files, scripts, tests, and current proof evidence win over plans, historical docs, old canon, handoffs, batch-train docs, prompts, and aspirational reports.
 
-This file does not define what Ambitions should become. That authority belongs to `docs/truth/PRODUCT_DESIGN_TRUTH.md`.
+This file does not define what Ambitions should become. That authority belongs to `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, and `docs/truth/PRODUCT_EXPERIENCE_CANON.md`.
 
 This file does not define release readiness. That authority belongs to `docs/truth/RELEASE_TRUTH.md`.
 
@@ -61,6 +61,7 @@ AGENTS.md
 project.yml
 Package.swift
 docs/truth/PRODUCT_DESIGN_TRUTH.md
+docs/truth/PRODUCT_EXPERIENCE_CANON.md
 Native/Ambitions/App/AmbitionsApp.swift
 Native/Ambitions/App/AmbitionsRootView.swift
 Native/Ambitions/App/AppTab.swift

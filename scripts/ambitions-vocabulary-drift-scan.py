@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SCAN_FILES = [
     ROOT / "docs/truth/PRODUCT_DESIGN_TRUTH.md",
     ROOT / "docs/truth/PRODUCT_MOAT_TRUTH.md",
+    ROOT / "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
     ROOT / "docs/truth/CODEX_PROCESS_TRUTH.md",
     ROOT / "AGENTS.md",
 ]
@@ -25,6 +26,7 @@ NEGATIVE_SECTION_MARKERS = (
     "anti-metrics",
     "antipattern",
     "hard red",
+    "regression",
     "compatibility",
     "archive",
     "historical",
@@ -45,6 +47,7 @@ SECTION_HEADER_MARKERS = (
     "hard rule",
     "hard rules",
     "hard constraints",
+    "regression",
     "compatibility",
     "compatibility seam",
     "compatibility table",
@@ -109,7 +112,7 @@ REQUIRED_TERMS = [
     "Recommendation Accountability",
     "Proof",
     "Reflection",
-    "Personal Runtime",
+    "Private Life Runtime",
     "Reality Meridian",
     "Start Here",
 ]
@@ -135,7 +138,7 @@ def _is_section_break(line: str) -> bool:
         if len(stripped) > 140:
             return False
         return any(token in stripped for token in SECTION_HEADER_MARKERS)
-    if stripped.startswith("forbidden") or stripped.startswith("banned") or stripped.startswith("hard red") or stripped.startswith("hard reds") or stripped.startswith("unapproved") or stripped.startswith("fails if") or stripped.startswith("stop and repair if") or stripped.startswith("may not") or stripped.startswith("must not") or stripped.startswith("should not") or stripped.startswith("does not") or stripped.startswith("it does not") or stripped.startswith("must never") or stripped.startswith("never") or stripped.startswith("codex must stop and repair if"):
+    if stripped.startswith("forbidden") or stripped.startswith("banned") or stripped.startswith("hard red") or stripped.startswith("hard reds") or stripped.startswith("regression") or stripped.startswith("unapproved") or stripped.startswith("fails if") or stripped.startswith("stop and repair if") or stripped.startswith("may not") or stripped.startswith("must not") or stripped.startswith("should not") or stripped.startswith("does not") or stripped.startswith("it does not") or stripped.startswith("must never") or stripped.startswith("never") or stripped.startswith("codex must stop and repair if"):
         if len(stripped) > 160 or stripped.startswith(("-", "*", "+", "|", ">")):
             return False
         return True

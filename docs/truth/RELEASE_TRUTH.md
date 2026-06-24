@@ -15,10 +15,11 @@ This file is intentionally conservative. Source code may exist without release p
 Truth hierarchy for release work:
 
 1. `docs/truth/PRODUCT_DESIGN_TRUTH.md` defines product/design expectations. It does not prove release readiness.
-2. `docs/truth/IMPLEMENTATION_TRUTH.md` defines current source implementation status. Source-present does not mean validated.
-3. `docs/truth/RELEASE_TRUTH.md` defines validation and release proof.
-4. `docs/truth/CODEX_PROCESS_TRUTH.md` defines Codex validation/reporting behavior.
-5. `docs/truth/HISTORICAL_POLICY.md` deletes or demotes stale non-source files and old release claims.
+2. `docs/truth/PRODUCT_EXPERIENCE_CANON.md` defines product-experience behavior and scenario gates. It does not prove implementation or release readiness.
+3. `docs/truth/IMPLEMENTATION_TRUTH.md` defines current source implementation status. Source-present does not mean validated.
+4. `docs/truth/RELEASE_TRUTH.md` defines validation and release proof.
+5. `docs/truth/CODEX_PROCESS_TRUTH.md` defines Codex validation/reporting behavior.
+6. `docs/truth/HISTORICAL_POLICY.md` deletes or demotes stale non-source files and old release claims.
 
 Conflict rules:
 

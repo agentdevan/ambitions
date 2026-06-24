@@ -1,0 +1,172 @@
+# PRODUCT_EXPERIENCE_ACTION_MAP.md
+
+Status: Active actionability map for `PRODUCT_EXPERIENCE_CANON.md`  
+Scope: Product-experience canon operationalization, source support inventory, implementation sequencing, and future proof gates  
+Owner posture: Planning and QA bridge, not implementation proof
+
+This file turns the official v1 Product Experience Canon into implementation and validation action. It does not prove that any canon behavior is complete in the app.
+
+## Executive Action Summary
+
+The Product Experience Canon adds product-experience authority for Life Capital, full scheduled goal paths, Future Steps, continuous future adjustment, proof/progress transfer, local learning, Source Atlas + local runtime composition, onboarding, reviews, notifications, automation, and scenario gates. The current repo has meaningful source-present scaffolding around goal orchestration, clarification, path compilation, Source Atlas models, proof/receipts, local search, Time placement/reflow projections, You learning controls, and review projections. It does not prove the full canon is implemented, visually accepted, device-validated, or release-ready.
+
+Future work must treat the canon as behavior law, then prove each claim through source, tests, rendered UI, accessibility, privacy, and release evidence where relevant.
+
+## Feature Horizon Matrix to Action Areas
+
+| Horizon | Action area | Product target | Current posture |
+|---|---|---|---|
+| Foundation Requirement | Reminders, Steps, recurring Steps, quick Capture, calendar-grade Time, search, notifications, completion, missed Step recovery, local persistence, offline core | Make Ambitions useful as a standalone personal planning product | Partial source support exists; runtime/device/release proof is not established |
+| Core Runtime Requirement | Full path generation, full-path scheduling, Future Steps, priority, capacity fit, protected seven-day placement, simulation, proof preservation, Life Capital, passive learning, Source Atlas inspection | Make Ambitions behave like a Personal Life OS rather than a task/calendar app | Several model/projection pieces exist; full integrated behavior is missing or unproven |
+| Moat Requirement | Personalized paths per user, Life Capital path shortening, proof/progress transfer, continuous Future Step adjustment, reviews updating future paths, Source Atlas + local runtime composition | Make every user’s Ambitions meaningfully different through local history and context | Mostly future implementation target; do not claim Green |
+| Future Expansion | Shared goals, LinkedIn import, third-party data, richer packs, collaborative proof, household planning, user-owned sync | Approved direction only | Not active scope; requires separate canon or boundary |
+| Reserved / Not Yet Approved | Hosted private life graph, cloud AI core planning, social feeds, public profiles, productivity scoring, XP/streak pressure, Source Atlas marketplace browsing, third-party behavioral analytics SDK | Must not be implemented under current canon | Guardrail only |
+
+## Runtime Behavior Contract Index
+
+| Contract | Acceptance gate | Future implementation owner area |
+|---|---|---|
+| Goal Creation Contract | `goal_creation_generates_scheduled_path_or_clarification` | Goal engine, Capture, Goals, Time, receipts |
+| Full Goal Path Contract | `full_goal_path_outputs_stages_steps_future_steps_and_fit_state` | Goal path compiler, Goals drilldown, Time fit state, Today slice |
+| Full-Path Scheduling Contract | `full_path_scheduling_places_future_steps_with_conflict_state` | Time placement, scheduling engine, conflict model |
+| Future Step Contract | `future_step_has_time_window_goal_relationship_and_edit_behavior` | Goal path nodes, Time windows, edit/impact preview |
+| Plan Adjustment Contract | `automatic_adjustment_never_silently_moves_protected_near_term_placement` | Time adjustment, automation, receipts, protected-window guards |
+| Conflict Resolution Contract | `new_goal_over_capacity_shows_make_room_and_add_with_conflict` | Capacity engine, simulation, Time/Goals conflict flows |
+| Life Capital Contract | `life_capital_edit_resimulates_affected_paths` | You, Life Capital store, path resimulation, receipts |
+| Proof Contract | `proof_attaches_to_goal_step_life_capital_without_required_grading` | Proof ledger, Goals, Today closure, Life Capital |
+| Progress Transfer Contract | `proof_transfers_as_context_not_false_completion` | Goal pivot, proof carry-forward, path compiler |
+| Onboarding Contract | `onboarding_saves_each_answer_and_supports_skipping_without_data_loss` | Setup & Personalization, persistence, first path preview |
+| Review Contract | `user_launched_review_exports_and_updates_future_paths_when_approved` | You reviews, export, path updates, receipts |
+| Source Atlas Contract | `source_atlas_enriches_path_without_exposing_pack_marketplace_or_uploading_private_context` | Source Atlas models, privacy boundary, local composition |
+
+## Scenario Gate Index
+
+The active gate list is maintained in `docs/qa/product-experience-scenario-gates.md`. Future implementation trains must add focused test/proof coverage against the relevant gates instead of relying on canon text or source names.
+
+## Existing Repo Support Found
+
+These are source-present or doc-present supports, not full product proof:
+
+| Area | Evidence paths |
+|---|---|
+| Four-surface product law, Capture global composer, Motion behavior, Trust inspection | `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `AGENTS.md`, `Native/Ambitions/Projection/StageScenes/`, `Native/Ambitions/Projection/OverlayScenes/` |
+| Goal orchestration with intake, clarification, understanding, path compilation, resource graph, planner output | `Native/Ambitions/Core/Domain/GoalEngine/GoalEngineOrchestrator.swift`, `Native/Ambitions/Core/Domain/GoalEngine/GoalPathCompilerModels+02-GoalCompiledPathCompilerCore+02-compile.swift`, `Native/AmbitionsTests/Services/GoalUnderstandingServiceTests.swift`, `Native/AmbitionsTests/Services/GoalPathCompilerServiceTests.swift` |
+| Source Atlas value models, pack validation, runtime boundary concepts, capability graphs | `Native/Ambitions/Core/Domain/SourceAtlasPackModels+06-SourceAtlasPack.swift`, `Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift`, `Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeReplayTests.swift` |
+| Proof/receipt model and UI affordances | `Native/Ambitions/Projection/Mutations/MutationProof.swift`, `Native/Ambitions/Projection/Mutations/MutationReceipt.swift`, `Native/Ambitions/DesignSystem/ProductObjects/ProofStitchView.swift`, `Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift` |
+| Time placement, Life Calendar rows, review-before-change posture | `Native/Ambitions/Projection/SurfaceLenses/TimePlacementCalendarContracts.swift`, `Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldReflow.swift` |
+| Local search over goals, captures, proof, feedback, teaching, event history, life context | `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift`, `Native/Ambitions/Projection/OverlayLenses/SearchLens.swift`, `docs/qa/remediation/dossiers/AMB-1196-search-find-act-inspect.md` |
+| You local learning, memory controls, source review, reviews | `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLearningControlsProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextRuntimeProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSourceAtlasPrimaryProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceReviewProjection.swift` |
+| Local persistence source and repository wiring are documented as source-present | `docs/truth/IMPLEMENTATION_TRUTH.md`, `Native/Ambitions/Core/Persistence/`, `Native/Ambitions/App/AppContainerFactory.swift` |
+| Lightweight canon/language validation hooks | `scripts/ambitions-vocabulary-drift-scan.py`, `scripts/canon-language-drift-scan.sh`, `scripts/release-claim-safety-scan.sh` |
+
+## Partial Support Found
+
+| Canon area | Partial evidence | Gap |
+|---|---|---|
+| Full goal path generation | Goal orchestrator and compiled path stages exist | Full path to accomplishment, Future Steps, scheduling, fit state, and rendered drilldown are not proven end-to-end |
+| Vague goal clarification | Clarification service/tests exist | Skip/partial-answer UX and provisional shell behavior are not proven |
+| Source Atlas composition | Pack/value models and bridge tests exist | R2 freshness, privacy boundary release proof, invisible-by-default UX, and local composition with private context are not release-proven |
+| Local learning | You learning controls and personalization factor rows exist | Broad Life Capital Patterns and passive learning shaping path/schedule behavior are not fully proven |
+| Proof and receipts | Proof/receipt types and UI affordances exist | Proof-to-Life-Capital, progress transfer, and no-false-completion pivots are not fully proven |
+| Time adjustment | Reflow decision projection asks for review before changes | Protected seven-day placement guard and automatic future-only adjustment are not fully proven |
+| Reviews | You reviews projection exists | Week/Month/Year user-launched review shell, export, and approved future path updates are not fully proven |
+| Search | Local search projection exists | Search across Life Capital and Future Steps specifically is not proven |
+| Notifications | Notification authorization copy exists in You | Private lock-screen copy and notification delivery behavior are not proven |
+| Automation | Confirmation-aware safety samples and review language exist | Global/per-life-area/per-goal automation levels are not proven |
+
+## Missing Support / Future Implementation Gaps
+
+- User-facing `Life Capital` as a first-class You section with capability, credential, resource, relationship, accomplishment, proof, and pattern records.
+- Manual Life Capital add/edit/archive/delete with affected-path preview, receipts, and path resimulation.
+- Full-path scheduling that places near-term Steps and flexible Future Steps across time windows.
+- Future Step visual model, edit behavior, far-future path-impact preview, and search support.
+- Capacity simulation with `This does not fit yet`, Make room, Lower pace, Change deadline, Pause another goal, and Add with conflict flows.
+- Protected seven-day placement rule as a deterministic runtime guard.
+- Progress transfer on goal pivot with `You are not starting from zero` and no false completion.
+- Onboarding chapters, immediate save behavior, weighted progress, Setup & Personalization persistence, and first path preview.
+- Week / Month / Year in Review with export to Markdown/PDF/share sheet and user-approved operational changes.
+- Private-by-default lock-screen notification behavior and pattern notices opening in-app context.
+- Automation controls globally, per life area, and per goal.
+- Source Atlas invisible-by-default user experience and no-marketplace behavior.
+- Release proof for account/R2/offline/privacy/accessibility/device behavior where future trains make those claims.
+
+## Recommended Implementation Train Sequence
+
+### P0 — Authority Installation
+
+- product canon file installed
+- truth README updated
+- product/design/moat cross-links added
+- action map created
+- scenario gates created
+
+### P1 — Foundation Reality
+
+- reminders/Steps/recurring Steps
+- quick Capture
+- calendar-grade Time foundation
+- local search
+- private notifications
+- local persistence/offline core
+- missed Step asks “what changed?”
+
+### P2 — Core Runtime Behavior
+
+- full goal path generation
+- full-path scheduling
+- Future Steps
+- “This does not fit yet”
+- Make room / Add with conflict
+- priority Low / Normal / High
+- no silent movement inside protected seven-day placement window
+
+### P3 — Life Capital and Learning
+
+- Life Capital visible in You
+- manual add/edit/archive/delete
+- broad Patterns
+- Life Capital path impact preview
+- passive learning shaping paths
+- proof/progress preservation
+
+### P4 — Moat Expansion
+
+- every user receives different paths
+- capability-aware path shortening
+- constant future adjustment
+- reviews update Life Capital and future paths
+- Source Atlas + local runtime composition
+
+### P5 — Future Expansion
+
+- shared goals
+- LinkedIn import
+- additional third-party data sources
+- richer Source Atlas packs
+- export expansion
+- user-owned sync only if separately approved
+
+## Non-Goals for This Train
+
+- No Swift source feature implementation.
+- No runtime wiring changes.
+- No new root surfaces.
+- No Motion or Capture root IA changes.
+- No hosted private life graph, cloud AI core planning, social feeds, public profiles, productivity scoring, XP, or streak systems.
+- No Source Atlas marketplace browsing.
+- No release, device, accessibility, privacy, account, R2, or offline Green claim.
+- No deletion of existing remediation canon or truth files.
+
+## Proof Required Before Any Future Train Can Claim Green
+
+- Source proof: canonical owner paths, compiled code, no forbidden IA drift, focused unit/UI tests for the behavior.
+- Runtime proof: deterministic local behavior, mutation/receipt paths, relaunch/persistence where scoped, failure states, and no fake success.
+- Scenario proof: relevant gate IDs from `docs/qa/product-experience-scenario-gates.md` exercised by tests or documented manual QA.
+- Privacy proof: local-first boundaries, no private life graph upload, no R2 private context, sensitive notification handling where relevant.
+- Accessibility proof: VoiceOver, Dynamic Type, Reduce Motion, Reduce Transparency, Increase Contrast, tap targets, semantic actions where UI changes.
+- Visual proof: reviewable screenshots and independent visual review for product-surface claims.
+- Release proof: current commit, branch, commands, logs, environment, exit codes, artifacts, and explicit not-run list.
+
+## Recommended Future Script
+
+Do not create a heavy validation framework from this train. A future P1/P2 validation train should add a compact `scripts/product-experience-scenario-gate-check.py` that reads `docs/qa/product-experience-scenario-gates.md`, verifies each gate has a status/evidence/proof row, and optionally maps gate IDs to tests as implementation coverage lands.

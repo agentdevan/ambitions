@@ -10,18 +10,19 @@ Applies to: Humans, Codex, and implementation agents working in the Ambitions re
 
 1. `PRODUCT_DESIGN_TRUTH.md` - product/design authority.
 2. `PRODUCT_MOAT_TRUTH.md` - moat strategy and anti-commodity guardrails.
-3. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
-4. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, visual proof, and global shell acceptance authority.
-5. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
-6. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
-7. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
-8. `AGENTS.md`.
-9. `README.md`.
-10. `docs/README.md`.
-11. `project.yml`.
-12. `Package.swift`.
-13. Relevant source, tests, retained scripts, build docs, and current local logs.
-14. Relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
+3. `PRODUCT_EXPERIENCE_CANON.md` - product-experience behavior, feature behavior, scenario gates, and actionability authority.
+4. `IMPLEMENTATION_TRUTH.md` - implementation/source authority.
+5. `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` - rendered-product acceptance, split status, visual proof, and global shell acceptance authority.
+6. `RELEASE_TRUTH.md` - validation, proof, release, and claim authority.
+7. `CODEX_PROCESS_TRUTH.md` - Codex operating authority.
+8. `HISTORICAL_POLICY.md` - repo retention and stale-file deletion authority.
+9. `AGENTS.md`.
+10. `README.md`.
+11. `docs/README.md`.
+12. `project.yml`.
+13. `Package.swift`.
+14. Relevant source, tests, retained scripts, build docs, and current local logs.
+15. Relevant retained `.agents/skills/*/SKILL.md` files only after truth files.
 
 ## Active Product Law
 
@@ -44,12 +45,17 @@ Full-bleed means atmosphere bleeds, content remains safe, chrome integrates, and
 
 This law applies globally to Today, Goals, Time, You, Capture, Search, Closure, Inspection, and major drilldowns. It is enforced through `IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, manifest evidence, reviewable screenshots, and independent visual acceptance.
 
+## Product Experience Canon
+
+`PRODUCT_EXPERIENCE_CANON.md` exists to bridge product identity, moat strategy, runtime behavior, user-facing feature behavior, QA scenario gates, and future implementation direction. It makes Life Capital, full scheduled goal paths, Future Steps, continuous adjustment, proof/progress transfer, Source Atlas composition, onboarding, reviews, notifications, automation, and actionability testable without claiming the current app has already implemented them.
+
 ## Conflict Resolution
 
 | Conflict Type | Winner |
 |---|---|
 | Product/design direction | `PRODUCT_DESIGN_TRUTH.md` |
 | Moat strategy and anti-commodity claims | `PRODUCT_MOAT_TRUTH.md` |
+| Product-experience behavior, feature behavior, Life Capital, full goal pathing, Future Steps, continuous adjustment, reviews, onboarding, proof/progress transfer, and actionability | `PRODUCT_EXPERIENCE_CANON.md`, subordinate to `PRODUCT_DESIGN_TRUTH.md` for root IA/privacy/product identity and `PRODUCT_MOAT_TRUTH.md` for moat/anti-commodity guardrails |
 | Implementation/source status | Live source/project/test/script evidence, read through `IMPLEMENTATION_TRUTH.md` |
 | Global shell integration and rendered product acceptance | `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` plus current reviewable screenshots, manifest evidence, and target rubric |
 | Release/readiness/proof claim | Current proof/log evidence, read through `RELEASE_TRUTH.md` |

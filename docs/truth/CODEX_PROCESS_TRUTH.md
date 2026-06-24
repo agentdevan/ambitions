@@ -63,16 +63,19 @@ Codex must treat:
 Active truth hierarchy:
 
 1. `docs/truth/PRODUCT_DESIGN_TRUTH.md` — product/design authority.
-2. `docs/truth/IMPLEMENTATION_TRUTH.md` — source implementation authority.
-3. `docs/truth/RELEASE_TRUTH.md` — validation/release/proof authority.
-4. `docs/truth/CODEX_PROCESS_TRUTH.md` — Codex operating authority.
-5. `docs/truth/HISTORICAL_POLICY.md` — repo retention and stale-file deletion authority.
-6. `AGENTS.md` — front-door agent contract.
-7. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Package.swift`.
+2. `docs/truth/PRODUCT_MOAT_TRUTH.md` — moat and anti-commodity authority.
+3. `docs/truth/PRODUCT_EXPERIENCE_CANON.md` — product-experience behavior, feature behavior, scenario gates, and actionability authority.
+4. `docs/truth/IMPLEMENTATION_TRUTH.md` — source implementation authority.
+5. `docs/truth/RELEASE_TRUTH.md` — validation/release/proof authority.
+6. `docs/truth/CODEX_PROCESS_TRUTH.md` — Codex operating authority.
+7. `docs/truth/HISTORICAL_POLICY.md` — repo retention and stale-file deletion authority.
+8. `AGENTS.md` — front-door agent contract.
+9. Current source, tests, scripts, logs, proof artifacts, `project.yml`, and `Package.swift`.
 
 Conflict rules:
 
 - Product/design conflict: `PRODUCT_DESIGN_TRUTH.md` wins.
+- Product-experience behavior conflict: `PRODUCT_EXPERIENCE_CANON.md` wins unless root IA/privacy/product identity or moat guardrails are at issue.
 - Implementation/source conflict: `IMPLEMENTATION_TRUTH.md` plus live source wins.
 - Release/readiness conflict: `RELEASE_TRUTH.md` plus current proof wins.
 - Historical artifacts lose unless explicitly promoted by a truth file.
@@ -118,7 +121,7 @@ Codex must not optimize for appearing done, broad diff volume, speculative imple
 
 ## 5. Planning and Patch Discipline
 
-Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, and identify hard-red risks.
+Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, and identify hard-red risks. For work touching Life Capital, goal pathing, Future Steps, continuous adjustment, onboarding, reviews, Source Atlas composition, proof/progress transfer, automation, notifications, or scenario gates, Codex must also map the intended behavior to `PRODUCT_EXPERIENCE_CANON.md` and report which scenario gates are Existing, Partial, Missing, or Unknown.
 
 Codex must not broad-edit without scope, rewrite major canon unless explicitly authorized, mutate app behavior during docs/governance tasks unless scoped, create new runtime dependencies without approval, silently accept stale tests/scripts as active truth, or bulk update snapshots/proof artifacts to hide failures.
 

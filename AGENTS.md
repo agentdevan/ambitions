@@ -125,18 +125,19 @@ Mandatory read order:
 1. `docs/truth/README.md`
 2. `docs/truth/PRODUCT_DESIGN_TRUTH.md`
 3. `docs/truth/PRODUCT_MOAT_TRUTH.md`
-4. `docs/truth/IMPLEMENTATION_TRUTH.md`
-5. `docs/truth/RELEASE_TRUTH.md`
-6. `docs/truth/CODEX_PROCESS_TRUTH.md`
-7. `docs/truth/HISTORICAL_POLICY.md` (repo retention and stale-file deletion)
-8. `AGENTS.md`
-9. `README.md`
-10. `docs/README.md`
-11. `project.yml`
-12. `Package.swift`
-13. relevant source, tests, retained scripts, build docs, and current local logs
-14. relevant retained `.agents/skills/*/SKILL.md` files only after truth files
-15. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
+4. `docs/truth/PRODUCT_EXPERIENCE_CANON.md`
+5. `docs/truth/IMPLEMENTATION_TRUTH.md`
+6. `docs/truth/RELEASE_TRUTH.md`
+7. `docs/truth/CODEX_PROCESS_TRUTH.md`
+8. `docs/truth/HISTORICAL_POLICY.md` (repo retention and stale-file deletion)
+9. `AGENTS.md`
+10. `README.md`
+11. `docs/README.md`
+12. `project.yml`
+13. `Package.swift`
+14. relevant source, tests, retained scripts, build docs, and current local logs
+15. relevant retained `.agents/skills/*/SKILL.md` files only after truth files
+16. `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`
 
 
 Historical material is not retained in-repo unless it is current, canon-aligned, and materially useful for App Store readiness. It must not override active truth.
@@ -191,4 +192,3 @@ Every source train closeout must include:
 * why any Yellow architecture debt remains
 * next repair train if debt remains
 * confirmation that no “equivalent” folder/path interpretation was used
-

@@ -69,6 +69,10 @@ If this amendment conflicts with older wording that says Ambitions must not be a
 - Ambitions is not framed as a task app, but it must support first-class Step/free-floating-step behavior.
 - Ambitions is not a calendar clone, but Time is a first-class native Life Calendar.
 
+## 0B. Product Experience Canon Relationship
+
+`PRODUCT_DESIGN_TRUTH.md` remains the root product/design/IA/privacy law for Ambitions. `PRODUCT_EXPERIENCE_CANON.md` defines user-facing feature behavior and runtime product behavior: Life Capital, full scheduled goal paths, Future Steps, continuous adjustment, proof/progress preservation, Source Atlas composition, onboarding, reviews, notifications, automation, scenario gates, and actionability. The Product Experience Canon introduces no top-level IA change: Today / Goals / Time / You remain the only persistent surfaces, Capture remains the global composer, Motion remains behavior, and Trust remains inspection.
+
 ---
 
 ## 1. Locked Product Law

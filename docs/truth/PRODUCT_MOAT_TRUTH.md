@@ -9,6 +9,12 @@ This file is not implementation proof, release proof, account proof, R2 proof, s
 
 ---
 
+## 0. Product Experience Canon Relationship
+
+`PRODUCT_EXPERIENCE_CANON.md` operationalizes this moat through Life Capital, full scheduled goal paths, Future Steps, proof/progress preservation, local learning, Source Atlas + local runtime composition, continuous future adjustment, onboarding, reviews, and scenario gates. It remains subordinate to `PRODUCT_DESIGN_TRUTH.md` for root IA/privacy/product identity and to this file for moat and anti-commodity guardrails.
+
+---
+
 ## 1. Moat Statement
 
 Ambitions’ moat is the Private Life Runtime: a local, inspectable, user-controlled life graph that turns intent into reality-fit action, then preserves what changed over time.
