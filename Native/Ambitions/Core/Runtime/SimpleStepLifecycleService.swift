@@ -12,6 +12,13 @@ struct SimpleStepLifecycleResult: Sendable, Equatable {
     let step: Step
 }
 
+struct CaptureStepRoutingResult: Sendable, Equatable {
+    let captureID: String
+    let goalID: String
+    let stepID: String
+    let stepTitle: String
+}
+
 struct MissedStepRecoveryResult: Sendable, Equatable {
     let goalID: String
     let stepID: String

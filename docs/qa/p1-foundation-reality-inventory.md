@@ -470,22 +470,72 @@ Gate index updates:
 - `foundation_recurring_step_repeats_and_can_be_paused`: Unknown -> Partial.
 - No other scenario gate status changes. P1B adds supporting source/runtime evidence for reminder-like recurring Step behavior, offline/account-free runtime boundaries, and Today clarity by not changing Today UI, but it does not satisfy the full user-visible definitions for those broader gates.
 
+## P1C Capture Saves Locally Addendum
+
+Date: 2026-06-24
+Baseline commit: `7730680cb21fbc556f6f079eefdd6dd19411f04d`
+Final commit: P1C final commit recorded in train closeout
+Gates targeted: `foundation_quick_capture_saves_without_network`, `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_offline_core_runs_without_account`, `origin_many_goals_many_obligations_today_remains_clear`, `origin_high_ambition_low_operating_structure_user_can_start`
+
+Source changed:
+
+- `Native/Ambitions/Core/Runtime/AmbitionsRuntimeFactory.swift`
+- `Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift`
+- `Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift`
+- `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`
+- `Native/AmbitionsTests/Persistence/CaptureServiceTests.swift`
+
+Capture local-save proof added:
+
+- The production runtime factory now gives `DefaultCaptureService` the existing `SimpleStepLifecycleService`, so Step-routed Capture saves use current local `Goal`, `GoalPlan`, `PlanSection`, `Step`, and SwiftData repository paths rather than a parallel Step model.
+- A `.timeSeed` Capture save creates a local simple Step immediately, saves a local Capture receipt, links the Capture to the Step's local goal, and keeps the Capture route as `Step`/Today rather than a detached draft pile.
+- Routing an already-saved Capture to Time/Step creates the same local Step path when the Capture is not already linked, preserving safe raw Capture storage for unclear input.
+
+Step routing proof added:
+
+- `testP1CCaptureStepSaveCreatesLocalStepAndFeedsTodayProjection` proves a shell/global Capture save with a Step route persists a Step through the existing goal repository and appears through the current Today projection target.
+- The proof asserts the persisted Today target uses the created local goal and Step IDs, preserving the P1A/P1A.2 Today path rather than adding Capture-specific rendering.
+
+Persistence proof added:
+
+- Focused tests use a shared in-memory SwiftData store plus a second repository facade to verify Capture and Step state reload from repository persistence.
+- The created Step remains planned, non-repeatable, and stored under the existing Step lifecycle model.
+
+Offline/account-free proof added:
+
+- The scoped tests assert `AmbitionsRuntimeCapabilities.currentLocalRuntime` remains local-only and has no remote intelligence backend.
+- The Capture-to-Step path uses local repositories only and does not require an account, network, R2, Source Atlas upload, hosted AI, or a private-life-graph backend.
+
+UI/accessibility proof status:
+
+- No SwiftUI files were changed in P1C.
+- Existing Capture composer controls already expose text-entry/save accessibility identifiers and labels; this train does not add new rendered UI proof.
+- Interaction Green is not claimed because no focused rendered Capture-to-Today UI test, VoiceOver runtime pass, Dynamic Type sweep, Reduce Motion/Reduce Transparency/Increase Contrast sweep, device proof, or screenshot review was completed in this train.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1C adds scoped Source/Runtime proof for local Capture-to-Step routing, but the full `foundation_quick_capture_saves_without_network` gate still needs rendered composer interaction proof, broader accessibility proof, device/simulator no-network workflow proof, and release-grade offline/no-account evidence before any status upgrade.
+- P1C does not implement full Capture intelligence, Life Capital, Future Steps, Make Room, Add with conflict, full goal pathing, reviews, notification delivery, visual redesign, recurring Step UI, account work, R2 work, or release/device validation.
+- Existing low-confidence Capture input can still save as a raw Capture/Open Field item until the user chooses a route; this is intentional and not a generic inbox/feed claim.
+
+Gate index updates: none. Current evidence strengthens scoped source/runtime support, but all targeted scenario gates remain Partial because full user-visible, accessibility, no-network, device, and release evidence is not current.
+
 ## Recommended Immediate Next Prompt
 
 ```text
-From /Users/devan/Documents/GitHub/ambitions on main, run P1A Step Core Reality.
+From /Users/devan/Documents/GitHub/ambitions on main, run P1D Time Foundation.
 
 Work only on main. Do not create branches or PRs.
 
-Scope: implement the smallest canonical Step foundation slice that proves one Step can be created from current local source, appears in Today as a real Step, can be completed with local feedback/evidence/command/event proof, can be rescheduled through the existing safe command/recovery path, and persists through SwiftData repository state.
+Scope: prove fixed points, open windows, protected windows, and real Step placement boundaries in Time without silent calendar writes.
 
 Use active truth files and retained skills first. Preserve Today / Goals / Time / You as the only persistent surfaces, Capture as global composer, Motion as behavior, Trust as Proof / Source / Privacy / History / Receipts, and local-first/offline core law.
 
-Do not implement recurring Steps, Life Capital, Future Steps, full goal pathing, Make Room/Add with conflict, Source Atlas expansion, visual redesign, account work, R2 work, or release claims.
+Do not implement Life Capital, Future Steps, full goal pathing, Make Room/Add with conflict, Source Atlas expansion, recurring Step UI, visual redesign, account work, R2 work, or release claims.
 
-Required gates: foundation_reminder_can_be_created_completed_and_rescheduled, foundation_completion_creates_visible_closure, and supporting evidence for foundation_offline_core_runs_without_account.
+Required gate: `foundation_calendar_planning_shows_fixed_points_and_open_windows`.
 
-Before edits, prove active runtime/source ownership. Keep new implementation under canonical owners only: Core/Domain, Core/Runtime, Core/Persistence, Projection/Commands, Projection/Mutations, Projection/SurfaceLenses, Surfaces/Today, Surfaces/Time, Trust, and tests.
+Before edits, prove active runtime/source ownership. Keep new implementation under canonical owners only: Core/Time, Core/Permissions, Core/Persistence, Projection/SurfaceLenses, Projection/Mutations, Surfaces/Time, Trust, and tests.
 
-Validation: focused unit tests for Step create/complete/reschedule/persist, product experience gate check, skill registry check, vocabulary/copy/claim/local-first scans, unsupported-claim scan on changed files, and git diff --check. Do not claim Runtime Green, Interaction Green, Visual Green, or Release Green without current proof.
+Validation: focused Time projection/runtime tests, product experience gate check, skill registry check, vocabulary/copy/claim/local-first scans, unsupported-claim scan on changed files, and git diff --check. Do not claim Interaction Green, Visual Green, or Release Green without current proof.
 ```

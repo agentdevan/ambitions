@@ -7,6 +7,7 @@ struct DefaultCaptureService: CaptureServicing {
     let goalCreationPreparer: (any GoalCreationPreparing)?
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
     let eventLedger: (any EventLedgerRepository)?
+    let simpleStepLifecycleService: SimpleStepLifecycleService?
     let idProvider: @Sendable () -> String
 
     init(
@@ -16,6 +17,7 @@ struct DefaultCaptureService: CaptureServicing {
         goalCreationPreparer: (any GoalCreationPreparing)? = nil,
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
+        simpleStepLifecycleService: SimpleStepLifecycleService? = nil,
         idProvider: @escaping @Sendable () -> String = { DomainIdentifier.prefixed("capture") }
     ) {
         self.repository = repository
@@ -24,6 +26,7 @@ struct DefaultCaptureService: CaptureServicing {
         self.goalCreationPreparer = goalCreationPreparer
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork
         self.eventLedger = eventLedger
+        self.simpleStepLifecycleService = simpleStepLifecycleService
         self.idProvider = idProvider
     }
 
@@ -42,14 +45,27 @@ struct DefaultCaptureService: CaptureServicing {
             contextLensHint: request.contextLensHint,
             priorityHints: request.priorityHints
         )
+        let captureID = idProvider()
+        let stepRouting: CaptureStepRoutingResult?
+        if request.linkedGoalID == nil, request.goalRelationship?.goalID == nil {
+            stepRouting = try await createStepIfNeeded(
+                captureID: captureID,
+                rawText: trimmed,
+                summary: request.assumptionSummary ?? classification.assumptionSummary,
+                route: classification.route,
+                now: now
+            )
+        } else {
+            stepRouting = nil
+        }
         let capture = Capture(
-            id: idProvider(),
+            id: captureID,
             createdAt: timestamp,
             updatedAt: timestamp,
             rawText: trimmed,
             sourceType: request.sourceType,
             status: status(for: classification.route, kind: classification.kind),
-            linkedGoalID: request.linkedGoalID,
+            linkedGoalID: request.linkedGoalID ?? stepRouting?.goalID,
             triage: request.triage ?? CaptureTriageMetadata(destination: classification.route.triageDestination, hint: classification.assumptionSummary),
             revisitAfter: request.revisitAfter,
             kind: classification.kind,
@@ -60,11 +76,11 @@ struct DefaultCaptureService: CaptureServicing {
             deadlineKind: request.deadlineKind == .none ? classification.deadlineKind : request.deadlineKind,
             contextLensHint: request.contextLensHint ?? classification.contextLensHint,
             priorityHints: classification.priorityHints,
-            goalRelationship: request.goalRelationship,
+            goalRelationship: request.goalRelationship ?? stepRouting.map { CaptureGoalRelationship(goalID: $0.goalID, relationshipKind: .nextAction, note: "Created local Step \($0.stepID).") },
             deliverableHint: request.deliverableHint,
             scopeItemHint: request.scopeItemHint,
             waitingMetadata: request.waitingMetadata,
-            assumptionSummary: request.assumptionSummary ?? classification.assumptionSummary,
+            assumptionSummary: stepRouting.map { "Saved locally as Step: \($0.stepTitle)." } ?? request.assumptionSummary ?? classification.assumptionSummary,
             recommendationExplanationIDs: request.recommendationExplanationIDs
         )
         try await repository.saveCaptures([capture])
@@ -192,7 +208,31 @@ struct DefaultCaptureService: CaptureServicing {
     }
 
     func routeToTimeSeed(id: String, now: Date) async throws -> Capture? {
-        try await updateCaptureRoute(CaptureRouteUpdateRequest(id: id, kind: .oneTimeCommitment, route: .timeSeed, assumptionSummary: "I routed this as a Time idea. Scheduling is still deferred to Time."), now: now)
+        guard let existing = try await repository.capture(id: id) else {
+            return nil
+        }
+        let stepRouting: CaptureStepRoutingResult?
+        if existing.linkedGoalID == nil {
+            stepRouting = try await createStepIfNeeded(
+                captureID: existing.id,
+                rawText: existing.rawText,
+                summary: "Created from Capture and saved as a local Step.",
+                route: .timeSeed,
+                now: now
+            )
+        } else {
+            stepRouting = nil
+        }
+        return try await updateCaptureRoute(
+            CaptureRouteUpdateRequest(
+                id: id,
+                kind: .oneTimeCommitment,
+                route: .timeSeed,
+                goalRelationship: stepRouting.map { CaptureGoalRelationship(goalID: $0.goalID, relationshipKind: .nextAction, note: "Created local Step \($0.stepID).") },
+                assumptionSummary: stepRouting.map { "Saved locally as Step: \($0.stepTitle)." } ?? "I routed this as a Time idea. Scheduling is still deferred to Time."
+            ),
+            now: now
+        )
     }
 
     func attachCaptureToGoal(_ request: AttachCaptureToGoalRequest, now: Date) async throws -> CaptureGoalBinding? {

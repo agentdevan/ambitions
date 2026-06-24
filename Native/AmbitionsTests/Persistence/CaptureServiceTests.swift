@@ -482,6 +482,108 @@ final class CaptureServiceTests: XCTestCase {
             .sorted()
         XCTAssertEqual(storedSources, sources.map(\.rawValue).sorted())
     }
+
+    func testP1CCaptureStepSaveCreatesLocalStepAndFeedsTodayProjection() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let reloadedRepositories = makeRepositories(store: store)
+        let service = DefaultCaptureService(
+            repository: repositories.captures,
+            eventLedger: repositories.eventLedger,
+            simpleStepLifecycleService: SimpleStepLifecycleService(repositories: repositories, idProvider: { "p1c-step" }),
+            idProvider: { "capture-p1c-step" }
+        )
+        let todayService = RepositoryBackedTodayService(repositories: reloadedRepositories)
+
+        let capture = try await service.createCapture(
+            CreateCaptureRequest(
+                rawText: "  Mail the library card form  ",
+                sourceType: .shellComposer,
+                kind: .oneTimeCommitment,
+                route: .timeSeed
+            ),
+            now: fixedNow
+        )
+
+        let goalID = try XCTUnwrap(capture.linkedGoalID)
+        let persistedCapture = try await reloadedRepositories.captures.capture(id: capture.id)
+        let persistedSteps = try await reloadedRepositories.goals.listSteps(goalID: goalID)
+        let persistedStep = try XCTUnwrap(persistedSteps.first)
+        let today = try await todayService.loadTodayExperience(userDisplayName: "Local User", now: fixedNow)
+
+        XCTAssertEqual(persistedCapture?.id, "capture-p1c-step")
+        XCTAssertEqual(persistedCapture?.rawText, "Mail the library card form")
+        XCTAssertEqual(persistedCapture?.route, .timeSeed)
+        XCTAssertEqual(persistedCapture?.status, .scheduled)
+        XCTAssertEqual(persistedCapture?.linkedGoalID, goalID)
+        XCTAssertEqual(persistedCapture?.goalRelationship?.goalID, goalID)
+        XCTAssertEqual(persistedCapture?.goalRelationship?.relationshipKind, .nextAction)
+        XCTAssertEqual(persistedStep.id, "simple-step-p1c-step")
+        XCTAssertEqual(persistedStep.title, "Mail the library card form")
+        XCTAssertEqual(persistedStep.state, .planned)
+        XCTAssertFalse(persistedStep.isRepeatable)
+        XCTAssertEqual(today.hero.primaryAction.action.target.goalID, goalID)
+        XCTAssertEqual(today.hero.primaryAction.action.target.stepID, persistedStep.id)
+        XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.privateLifeRuntimeBoundary, .localOnly)
+        XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
+    }
+
+    func testP1CRoutingExistingCaptureToTimeCreatesStepWithoutNetworkOrAccount() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let reloadedRepositories = makeRepositories(store: store)
+        let service = DefaultCaptureService(
+            repository: repositories.captures,
+            eventLedger: repositories.eventLedger,
+            simpleStepLifecycleService: SimpleStepLifecycleService(repositories: repositories, idProvider: { "p1c-routed-step" }),
+            idProvider: { "capture-p1c-routed" }
+        )
+
+        let rawCapture = try await service.createCapture(
+            CreateCaptureRequest(rawText: "Organize the tax folder", sourceType: .shellComposer),
+            now: fixedNow
+        )
+        let routed = try await service.routeToTimeSeed(id: rawCapture.id, now: fixedNow.addingTimeInterval(60))
+        let goalID = try XCTUnwrap(routed?.linkedGoalID)
+        let reloadedCapture = try await reloadedRepositories.captures.capture(id: rawCapture.id)
+        let reloadedSteps = try await reloadedRepositories.goals.listSteps(goalID: goalID)
+        let reloadedStep = try XCTUnwrap(reloadedSteps.first)
+
+        XCTAssertEqual(rawCapture.route, .captureInbox)
+        XCTAssertNil(rawCapture.linkedGoalID)
+        XCTAssertEqual(routed?.route, .timeSeed)
+        XCTAssertEqual(routed?.status, .scheduled)
+        XCTAssertEqual(reloadedCapture?.linkedGoalID, goalID)
+        XCTAssertEqual(reloadedStep.title, "Organize the tax folder")
+        XCTAssertEqual(reloadedStep.state, .planned)
+        XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.syncBackendKind, .localOnly)
+        XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
+    }
+
+    func testP1CCaptureWithExistingGoalLinkDoesNotCreateStandaloneStepGoal() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let service = DefaultCaptureService(
+            repository: repositories.captures,
+            simpleStepLifecycleService: SimpleStepLifecycleService(repositories: repositories, idProvider: { "should-not-create" }),
+            idProvider: { "capture-existing-goal-link" }
+        )
+
+        let capture = try await service.createCapture(
+            CreateCaptureRequest(
+                rawText: "Send the project note",
+                sourceType: .shellComposer,
+                linkedGoalID: "existing-goal",
+                kind: .oneTimeCommitment,
+                route: .timeSeed
+            ),
+            now: fixedNow
+        )
+        let goals = try await repositories.goals.listGoals()
+
+        XCTAssertEqual(capture.linkedGoalID, "existing-goal")
+        XCTAssertTrue(goals.isEmpty)
+    }
 }
 
 private extension CaptureServiceTests {
@@ -499,6 +601,8 @@ private extension CaptureServiceTests {
             evidence: SwiftDataProgressEvidenceRepository(store: store),
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
+            eventLedger: SwiftDataEventLedgerRepository(store: store),
+            commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store),
             goalCreationUnitOfWork: SwiftDataGoalCreationUnitOfWork(store: store),
             capturePromotionUnitOfWork: capturePromotionUnitOfWork ?? SwiftDataCapturePromotionUnitOfWork(store: store),
             appState: SwiftDataAppStateRepository(store: store)

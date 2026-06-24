@@ -1,6 +1,31 @@
 import Foundation
 
 extension DefaultCaptureService {
+    func createStepIfNeeded(
+        captureID: String,
+        rawText: String,
+        summary: String?,
+        route: CaptureRoute,
+        now: Date
+    ) async throws -> CaptureStepRoutingResult? {
+        guard route == .timeSeed,
+              let simpleStepLifecycleService else {
+            return nil
+        }
+
+        let result = try await simpleStepLifecycleService.createSimpleStep(
+            title: rawText,
+            summary: summary,
+            now: now
+        )
+        return CaptureStepRoutingResult(
+            captureID: captureID,
+            goalID: result.goalID,
+            stepID: result.stepID,
+            stepTitle: result.step.title
+        )
+    }
+
     func capture(
         from existing: Capture,
         status: CaptureStatus,
