@@ -19,7 +19,7 @@ extension RepositoryBackedYouService {
                 SettingsItem(
                     id: "you-correction-ledger",
                     title: "Correction events",
-                    subtitle: "Correction-shaped ledger entries can be used as evidence for why future recommendations changed.",
+                    subtitle: "Your correction history can explain why future recommendations changed.",
                     icon: "clock.arrow.circlepath",
                     valueLabel: correctionEvents.isEmpty ? "No recent entries" : "\(correctionEvents.count) recent"
                 ),

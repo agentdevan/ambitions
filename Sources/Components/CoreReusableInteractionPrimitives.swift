@@ -189,7 +189,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
         case .reviewTimeFit:
             return "LifeShape Field / Time Texture"
         case .inspectProof:
-            return "Motion Current"
+            return "Proof movement"
         case .recoveryOption:
             return "Recovery path"
         case .captureContext:

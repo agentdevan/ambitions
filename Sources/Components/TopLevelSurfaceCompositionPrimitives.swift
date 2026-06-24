@@ -125,7 +125,7 @@ public enum AFI14CrossSurfaceCoherenceCatalog {
     public static let claimsReleaseReadiness = false
 
     public static let stages: [AFI14ProductGrammarStage] = [
-        stage("Capture", promise: "Capture anything.", surfaces: ["Global Capture"], object: "Atmosphere Composer"),
+        stage("Capture", promise: "Capture what matters.", surfaces: ["Global Capture"], object: "Atmosphere Composer"),
         stage("Clarify", promise: "Give it a place.", surfaces: ["Global Capture", "Goals"], object: "Needs a Place / Grow into Goal"),
         stage("Shape", promise: "Shape your time around what matters.", surfaces: ["Time"], object: "LifeShape Field"),
         stage("Start", promise: "Start where reality allows.", surfaces: ["Today"], object: "Start Here / Reality Meridian"),

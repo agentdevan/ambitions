@@ -75,7 +75,7 @@ final class TopLevelSurfaceCompositionTests: XCTestCase {
         let stages = AFI14CrossSurfaceCoherenceCatalog.stages
         XCTAssertEqual(stages.map(\.verb), AFI14CrossSurfaceCoherenceCatalog.productGrammar)
         XCTAssertEqual(stages.map(\.promise), [
-            "Capture anything.",
+            "Capture what matters.",
             "Give it a place.",
             "Shape your time around what matters.",
             "Start where reality allows.",

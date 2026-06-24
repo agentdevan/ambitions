@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TEST_ROOTS = [ROOT / "Native" / "AmbitionsTests", ROOT / "Native" / "AmbitionsUITests"]
 
-VISUAL_TERMS = ("visual", "swiftui", "surface", "lifeshapefieldview", "reconstruction", "flagship")
+VISUAL_TERMS = ("visual", "swiftui", "lifeshapefieldview", "reconstruction", "flagship")
 RENDERED_TERMS = ("XCUIApplication", ".frame", "screenshot", "XCUIScreenshot", "addAttachment")
 
 

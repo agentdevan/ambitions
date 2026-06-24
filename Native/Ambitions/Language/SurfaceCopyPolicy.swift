@@ -8,20 +8,24 @@ enum SurfaceCopyPolicy {
         case unknownRootSurface(String)
     }
 
-    static func firstRootSurfaceViolation(in text: String) -> String? {
-        ForbiddenTopLevelTerms.firstViolation(in: text)
+    static func firstRootSurfaceViolation(
+        in text: String,
+        exposure: CopyExposureLevel = .primary
+    ) -> String? {
+        ForbiddenTopLevelTerms.firstViolation(in: text, exposure: exposure)
     }
 
     static func validateRootSurfaceCopy(
         surfaceName: String,
         title: String,
-        detail: String
+        detail: String,
+        exposure: CopyExposureLevel = .primary
     ) -> [Violation] {
         var violations: [Violation] = []
         if RuntimeVocabulary.canonicalRootSurfaceSet.contains(surfaceName) == false {
             violations.append(.unknownRootSurface(surfaceName))
         }
-        if let term = firstRootSurfaceViolation(in: [surfaceName, title, detail].joined(separator: " ")) {
+        if let term = firstRootSurfaceViolation(in: [surfaceName, title, detail].joined(separator: " "), exposure: exposure) {
             violations.append(.forbiddenTerm(term))
         }
         if CopyBudget.title.isExceeded(by: title) {

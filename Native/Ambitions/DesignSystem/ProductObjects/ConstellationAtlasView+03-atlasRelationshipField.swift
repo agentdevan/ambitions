@@ -257,7 +257,7 @@ extension ConstellationAtlasView {
     var sourceProofTrustAffordance: some View {
         HStack(alignment: .top, spacing: theme.spacing.sm) {
             affordance(title: "Context", value: overview.isSeeded ? "Preview data" : "Local Goals")
-            affordance(title: "Review", value: (proofSummary?.count ?? 0) > 0 ? "Proof attached" : "Ready before change")
+            affordance(title: "Review", value: (proofSummary?.count ?? 0) > 0 ? "Proof attached" : "Review first")
             affordance(title: "Today link", value: "Visible before start")
         }
         .accessibilityIdentifier("goals.source-proof-trust")

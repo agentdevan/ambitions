@@ -129,20 +129,43 @@ FORBIDDEN_ROUTE_PATTERNS = [
     r"LegacyIARouteCompatibility",
 ]
 
-FORBIDDEN_STRING_PATTERNS = [
-    r"\bPlan tab\b",
-    r"\bPlan screen\b",
-    r"\btop-level Plan\b",
-    r"\bProfile tab\b",
-    r"\bCapture tab\b",
-    r"\bMotion tab\b",
-    r"\bCaptures tab\b",
-    r"\bnext best move\b",
-    r"\bbest next move\b",
-    r"\bBegin Focus\b",
-    r"\bAI confidence\b",
-    r"\bproductivity score\b",
-    r"\bdebug console\b",
+COPY_EXPOSURE_ORDER = {
+    "primary": 0,
+    "contextual": 1,
+    "inspection-only": 2,
+    "internal": 3,
+}
+
+FORBIDDEN_COPY_RULES = [
+    (r"\bPlan tab\b", "internal"),
+    (r"\bPlan screen\b", "internal"),
+    (r"\btop-level Plan\b", "internal"),
+    (r"\bProfile tab\b", "internal"),
+    (r"\bCapture tab\b", "internal"),
+    (r"\bMotion tab\b", "internal"),
+    (r"\bCaptures tab\b", "internal"),
+    (r"\bnext best move\b", "internal"),
+    (r"\bbest next move\b", "internal"),
+    (r"\bBegin Focus\b", "internal"),
+    (r"\bAI confidence\b", "internal"),
+    (r"\bproductivity score\b", "internal"),
+    (r"\bdebug console\b", "internal"),
+    (r"\bruntime-backed\b", "internal"),
+    (r"\bfixture-only\b", "internal"),
+    (r"\broute reveal\b", "internal"),
+    (r"\breceipt before save\b", "internal"),
+    (r"\bproof seam\b", "internal"),
+    (r"\bopen seam\b", "internal"),
+    (r"\blocal projection\b", "internal"),
+    (r"\bmutation pipeline\b", "internal"),
+    (r"\bsource unavailable\b", "inspection-only"),
+    (r"\breview before reflow\b", "internal"),
+    (r"\bready before change\b", "internal"),
+    (r"\bblocked-pending-model\b", "internal"),
+    (r"\bcorrection-shaped ledger\b", "internal"),
+    (r"\bMotion Current\b", "internal"),
+    (r"\bCapture Anything\b", "internal"),
+    (r"\bClose Today\b", "internal"),
 ]
 
 TRANSITIONAL_OWNERSHIP_PATTERNS = [
@@ -329,6 +352,52 @@ def swift_string_literals(text: str) -> list[str]:
     return [match.group(1) for match in pattern.finditer(text)]
 
 
+def copy_exposure_for_path(relative: str) -> str:
+    if relative.startswith((
+        "Native/Ambitions/Core/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Quality/",
+        "Native/Ambitions/Scenarios/",
+        "Native/Ambitions/Stage/Motion/",
+        "Native/Ambitions/Support/",
+        "Sources/Theme/",
+    )):
+        return "internal"
+    if relative.startswith((
+        "Native/Ambitions/Projection/",
+        "Native/Ambitions/Trust/",
+    )):
+        return "inspection-only"
+    if relative.startswith((
+        "Native/Ambitions/App/",
+        "Native/Ambitions/Composer/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/Ambitions/Surfaces/",
+        "Sources/Components/",
+        "AppUI/Sources/",
+    )):
+        return "primary"
+    return "contextual"
+
+
+def add_copy_exposure_findings(findings: list[Finding], path: Path, text: str) -> None:
+    relative = rel(path)
+    exposure = copy_exposure_for_path(relative)
+    exposure_rank = COPY_EXPOSURE_ORDER[exposure]
+    for literal in swift_string_literals(text):
+        for pattern, minimum_allowed in FORBIDDEN_COPY_RULES:
+            if exposure_rank < COPY_EXPOSURE_ORDER[minimum_allowed] and re.search(pattern, literal, flags=re.IGNORECASE):
+                findings.append(
+                    Finding(
+                        "forbidden-language",
+                        relative,
+                        f"exposure={exposure}; requires={minimum_allowed}; {pattern} :: {literal.strip()[:160]}",
+                    )
+                )
+                break
+
+
 def add_regex_findings(
     findings: list[Finding],
     gate: str,
@@ -486,14 +555,7 @@ def check_forbidden_language(files: list[Path]) -> list[Finding]:
         relative = rel(path)
         if relative in POLICY_AUDIT_FILES:
             continue
-        add_regex_findings(
-            findings,
-            "forbidden-language",
-            path,
-            FORBIDDEN_STRING_PATTERNS,
-            read(path),
-            string_literals_only=True,
-        )
+        add_copy_exposure_findings(findings, path, read(path))
     return findings
 
 

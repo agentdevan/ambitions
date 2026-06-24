@@ -65,6 +65,9 @@ final class ScenarioMatrixTests: XCTestCase {
     func testForbiddenLanguageTermsRejectOldRootCanon() {
         XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "Open the Plan tab"), "Plan tab")
         XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "Show the Motion tab"), "Motion tab")
+        XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "runtime-backed local projection"), "runtime-backed")
+        XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "source unavailable"), "source unavailable")
+        XCTAssertNil(ForbiddenLanguageAudit.violation(in: "source unavailable", exposure: .inspectionOnly))
         XCTAssertNil(ForbiddenLanguageAudit.violation(in: "Open Time and review the LifeShape Field."))
     }
 

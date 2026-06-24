@@ -70,7 +70,7 @@ public enum AmbitionsPrimaryObjectSurface: String, CaseIterable, Identifiable, S
         case .today: "Today / Reality Meridian"
         case .goals: "Goals / Constellation Atlas"
         case .time: "Time / LifeShape Field"
-        case .motion: "Motion / Motion Current"
+        case .motion: "Motion / Progress proof"
         case .you: "You / User System Profile"
         case .capture: "Global Capture / Atmosphere Composer"
         }

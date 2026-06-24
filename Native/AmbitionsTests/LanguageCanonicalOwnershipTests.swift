@@ -51,6 +51,34 @@ final class LanguageCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(ForbiddenLanguageAudit.violation(in: "Show the Motion tab"), "Motion tab")
         XCTAssertNil(ForbiddenLanguageAudit.violation(in: "Open Time and review the LifeShape Field."))
     }
+
+    func testRootCopyExposureBlocksInternalRuntimeTerms() {
+        XCTAssertEqual(
+            ForbiddenLanguageAudit.violation(in: "runtime-backed local projection"),
+            "runtime-backed"
+        )
+        XCTAssertEqual(
+            SurfaceCopyPolicy.validateRootSurfaceCopy(
+                surfaceName: "Today",
+                title: "Start here",
+                detail: "runtime-backed route reveal"
+            ),
+            [.forbiddenTerm("runtime-backed")]
+        )
+    }
+
+    func testInspectionAndInternalExposureAreExplicitlyScoped() {
+        XCTAssertEqual(
+            ForbiddenLanguageAudit.violation(in: "source unavailable", exposure: .primary),
+            "source unavailable"
+        )
+        XCTAssertNil(
+            ForbiddenLanguageAudit.violation(in: "source unavailable", exposure: .inspectionOnly)
+        )
+        XCTAssertNil(
+            ForbiddenLanguageAudit.violation(in: "runtime-backed local projection", exposure: .internal)
+        )
+    }
 }
 
 private extension LanguageCanonicalOwnershipTests {
