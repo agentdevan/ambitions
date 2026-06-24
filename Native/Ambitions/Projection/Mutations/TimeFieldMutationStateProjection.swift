@@ -267,30 +267,63 @@ extension RuntimeMutation {
         restoredSnapshot: String,
         now: Date
     ) -> UserVisibleMutation {
+        let commandID = "undo.\(original.command.id)"
+        let affectedObjectIDs = original.stageMutation.affectedObjectIDs
+        let action = MutationActionReference(
+            commandID: commandID,
+            commandKind: original.command.kind,
+            source: original.command.source,
+            targetObjectIDs: affectedObjectIDs
+        )
+        let beforeReference = MutationSnapshotReference(
+            id: "snapshot.undo.before.\(original.command.id)",
+            surface: .time,
+            summary: original.stageMutation.afterSnapshot
+        )
+        let afterReference = MutationSnapshotReference(
+            id: "snapshot.undo.after.\(original.command.id)",
+            surface: .time,
+            summary: restoredSnapshot
+        )
         let proof = MutationProof(
             artifactID: "runtime.proof.undo.\(original.command.id)",
             label: "Undo proof artifact",
-            localOnly: original.validation.privacyBoundary.localOnly
+            localOnly: original.validation.privacyBoundary.localOnly,
+            beforeSnapshot: beforeReference,
+            action: action,
+            afterSnapshot: afterReference
         )
+        let receiptID = "runtime.receipt.undo.\(original.command.id)"
         let receipt = MutationReceipt(
-            receiptID: "runtime.receipt.undo.\(original.command.id)",
+            receiptID: receiptID,
             saved: true,
-            inspectionLabel: "Undo receipt"
+            inspectionLabel: "Undo receipt",
+            proofArtifactID: proof.artifactID,
+            action: action
         )
+        let runtimeMutationID = "runtime.mutation.undo.\(original.command.id).\(ISO8601DateFormatter().string(from: now))"
         let stageMutation = StageMutation(
-            runtimeMutationID: "runtime.mutation.undo.\(original.command.id).\(ISO8601DateFormatter().string(from: now))",
+            runtimeMutationID: runtimeMutationID,
             beforeSnapshot: original.stageMutation.afterSnapshot,
             afterSnapshot: restoredSnapshot,
             targetSurface: .time,
-            affectedObjectIDs: original.stageMutation.affectedObjectIDs,
+            affectedObjectIDs: affectedObjectIDs,
             visibleUserFacingChange: "Undo applied",
-            motionEvent: "stage.motion.time.mutation_undone",
+            typedMotionEvent: MutationMotionEvent(
+                id: "stage.motion.time.mutation_undone",
+                kind: .undo,
+                sourceMutationID: runtimeMutationID,
+                affectedObjectIDs: affectedObjectIDs
+            ),
             accessibilityAnnouncement: MutationAccessibilityAnnouncement(
                 message: "Undo applied. Time and Today returned to the prior shape.",
                 reasonIfSilent: nil
             ),
             hapticIntent: "selection",
-            undoAvailability: MutationUndo(isAvailable: false, label: "Undo used"),
+            undoAvailability: .unavailable(
+                label: "Undo used",
+                reason: "This mutation already restored the prior Time shape."
+            ),
             proofArtifact: proof,
             receipt: receipt,
             safeFallback: "Keep the restored Time shape and receipt visible."

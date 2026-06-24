@@ -39,8 +39,14 @@ final class MutationsCanonicalOwnershipTests: XCTestCase {
 
         XCTAssertTrue(mutation?.hasCompleteActionFlowProof == true)
         XCTAssertEqual(mutation?.stageMutation.proofArtifact.localOnly, true)
+        XCTAssertEqual(mutation?.stageMutation.proofArtifact.beforeSnapshot?.summary, "today.before")
+        XCTAssertEqual(mutation?.stageMutation.proofArtifact.action?.commandID, "command-visible-flow")
+        XCTAssertEqual(mutation?.stageMutation.proofArtifact.afterSnapshot?.summary, "today.after")
         XCTAssertEqual(mutation?.stageMutation.receipt.saved, true)
+        XCTAssertEqual(mutation?.stageMutation.receipt.proofArtifactID, "runtime.proof.command-visible-flow")
         XCTAssertEqual(mutation?.stageMutation.undoAvailability.label, "Undo")
+        XCTAssertEqual(mutation?.stageMutation.undoAvailability.restoresSnapshot?.summary, "today.before")
+        XCTAssertTrue(mutation?.stageMutation.typedMotionEvent.isTypedEvent == true)
         XCTAssertEqual(mutation?.stageMutation.accessibilityAnnouncement.message, "Step completed. Proof is available.")
         XCTAssertEqual(mutation?.userVisibleMutation.headline, "Step completed")
     }
@@ -63,7 +69,12 @@ final class MutationsCanonicalOwnershipTests: XCTestCase {
         XCTAssertTrue(mutation.userVisibleMutation.isCanonComplete)
         XCTAssertEqual(mutation.stageMutation.targetSurface, .today)
         XCTAssertEqual(mutation.stageMutation.proofArtifact.artifactID, "proof.closure.goal-1.step-1.completed.0")
+        XCTAssertEqual(mutation.stageMutation.proofArtifact.beforeSnapshot?.summary, "Today before closure goal-1.step-1.completed.0")
+        XCTAssertEqual(mutation.stageMutation.proofArtifact.action?.commandID, "closure.goal-1.step-1.completed.0")
+        XCTAssertEqual(mutation.stageMutation.proofArtifact.afterSnapshot?.summary, "Today after closure completed")
         XCTAssertEqual(mutation.stageMutation.receipt.inspectionLabel, "Local receipt history")
+        XCTAssertEqual(mutation.stageMutation.receipt.proofArtifactID, "proof.closure.goal-1.step-1.completed.0")
+        XCTAssertEqual(mutation.stageMutation.undoAvailability.restoresSnapshot?.summary, "Today before closure goal-1.step-1.completed.0")
         XCTAssertEqual(
             mutation.stageMutation.accessibilityAnnouncement.message,
             "Done. Write the draft is closed and proof is saved. Receipt saved locally."

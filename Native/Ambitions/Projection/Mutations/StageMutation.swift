@@ -7,6 +7,25 @@ enum StageMutationTargetSurface: String, Sendable, Equatable, CaseIterable {
     case you = "You"
 }
 
+enum MutationMotionKind: String, Sendable, Equatable {
+    case stageAction
+    case closure
+    case undo
+}
+
+struct MutationMotionEvent: Equatable, Sendable {
+    let id: String
+    let kind: MutationMotionKind
+    let sourceMutationID: String
+    let affectedObjectIDs: [String]
+
+    var isTypedEvent: Bool {
+        id.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false &&
+            sourceMutationID.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false &&
+            affectedObjectIDs.isEmpty == false
+    }
+}
+
 struct StageMutation: Equatable, Sendable {
     let runtimeMutationID: String
     let beforeSnapshot: String
@@ -14,7 +33,7 @@ struct StageMutation: Equatable, Sendable {
     let targetSurface: StageMutationTargetSurface
     let affectedObjectIDs: [String]
     let visibleUserFacingChange: String
-    let motionEvent: String
+    let typedMotionEvent: MutationMotionEvent
     let accessibilityAnnouncement: MutationAccessibilityAnnouncement
     let hapticIntent: String
     let undoAvailability: MutationUndo
@@ -28,12 +47,16 @@ struct StageMutation: Equatable, Sendable {
             afterSnapshot.isEmpty == false &&
             affectedObjectIDs.isEmpty == false &&
             visibleUserFacingChange.isEmpty == false &&
-            motionEvent.isEmpty == false &&
+            typedMotionEvent.isTypedEvent &&
             (accessibilityAnnouncement.message.isEmpty == false || accessibilityAnnouncement.reasonIfSilent?.isEmpty == false) &&
             hapticIntent.isEmpty == false &&
-            undoAvailability.label.isEmpty == false &&
-            proofArtifact.artifactID.isEmpty == false &&
-            receipt.receiptID.isEmpty == false &&
+            undoAvailability.isTypedContract &&
+            proofArtifact.isTypedAvailable &&
+            receipt.isTypedSaved &&
             safeFallback.isEmpty == false
+    }
+
+    var motionEvent: String {
+        typedMotionEvent.id
     }
 }

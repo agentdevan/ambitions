@@ -42,6 +42,12 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         XCTAssertEqual(result.runtimeMutation.stageMutation.visibleUserFacingChange, "Step placed")
         XCTAssertEqual(result.runtimeMutation.stageMutation.hapticIntent, "confirmation")
         XCTAssertEqual(result.runtimeMutation.stageMutation.undoAvailability.label, "Undo")
+        XCTAssertEqual(result.runtimeMutation.stageMutation.proofArtifact.beforeSnapshot?.summary, result.timeMutation.beforeProjection.semanticSummary)
+        XCTAssertEqual(result.runtimeMutation.stageMutation.proofArtifact.action?.commandID, result.command.id)
+        XCTAssertEqual(result.runtimeMutation.stageMutation.proofArtifact.afterSnapshot?.summary, result.timeMutation.afterProjection.semanticSummary)
+        XCTAssertEqual(result.runtimeMutation.stageMutation.receipt.proofArtifactID, result.runtimeMutation.stageMutation.proofArtifact.artifactID)
+        XCTAssertEqual(result.runtimeMutation.stageMutation.undoAvailability.restoresSnapshot?.summary, result.timeMutation.beforeProjection.semanticSummary)
+        XCTAssertTrue(result.runtimeMutation.stageMutation.typedMotionEvent.isTypedEvent)
         XCTAssertTrue(result.runtimeMutation.stageMutation.accessibilityAnnouncement.message.contains("Step placed"))
         XCTAssertEqual(result.updatedTimeState.lifeSuite.field.renderState, .receiptAttached)
         XCTAssertFalse(result.timeMutation.afterProjection.todayBuckets.compactMap(\.recommendedStepID).contains { $0.hasPrefix("step.command") })
@@ -59,6 +65,11 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         XCTAssertEqual(undo.visibleMutation.stageMutation.visibleUserFacingChange, "Undo applied")
         XCTAssertTrue(undo.visibleMutation.stageMutation.accessibilityAnnouncement.message.contains("Time and Today"))
         XCTAssertEqual(undo.visibleMutation.stageMutation.hapticIntent, "selection")
+        XCTAssertTrue(undo.visibleMutation.stageMutation.isCanonComplete)
+        XCTAssertEqual(undo.visibleMutation.stageMutation.proofArtifact.beforeSnapshot?.summary, result.timeMutation.afterProjection.semanticSummary)
+        XCTAssertEqual(undo.visibleMutation.stageMutation.proofArtifact.afterSnapshot?.summary, result.timeMutation.beforeProjection.semanticSummary)
+        XCTAssertFalse(undo.visibleMutation.stageMutation.undoAvailability.isAvailable)
+        XCTAssertEqual(undo.visibleMutation.stageMutation.undoAvailability.unavailableReason, "This mutation already restored the prior Time shape.")
     }
 
     func testProtectWindowAndKeepClearCreateProtectedBoundaryAndTodayAvoidanceProof() throws {
@@ -158,6 +169,85 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         let undo = TimeFieldMutationCoordinator().undo(result, now: now)
         XCTAssertEqual(undo.visibleMutation.stageMutation.visibleUserFacingChange, "Undo applied")
         XCTAssertTrue(undo.visibleMutation.stageMutation.accessibilityAnnouncement.message.contains("Time and Today"))
+    }
+
+    func testSCG008BStringOnlyProofAndMotionCannotSatisfyMutationContract() {
+        let before = MutationSnapshotReference(id: "", surface: .today, summary: "before")
+        let after = MutationSnapshotReference(id: "snapshot.after.invalid", surface: .today, summary: "after")
+        let action = MutationActionReference(
+            commandID: "command.invalid",
+            commandKind: .completeAction,
+            source: .today,
+            targetObjectIDs: []
+        )
+        let proof = MutationProof(
+            artifactID: "proof.string-only",
+            label: "Proof saved",
+            localOnly: true,
+            beforeSnapshot: before,
+            action: action,
+            afterSnapshot: after
+        )
+        let receipt = MutationReceipt(
+            receiptID: "receipt.string-only",
+            saved: true,
+            inspectionLabel: "Receipt",
+            proofArtifactID: proof.artifactID,
+            action: action
+        )
+        let mutation = StageMutation(
+            runtimeMutationID: "runtime.invalid.string-only",
+            beforeSnapshot: "before",
+            afterSnapshot: "after",
+            targetSurface: .today,
+            affectedObjectIDs: ["step-1"],
+            visibleUserFacingChange: "Step completed",
+            typedMotionEvent: MutationMotionEvent(
+                id: "stage.motion.string-only",
+                kind: .stageAction,
+                sourceMutationID: "",
+                affectedObjectIDs: ["step-1"]
+            ),
+            accessibilityAnnouncement: MutationAccessibilityAnnouncement(message: "Step completed.", reasonIfSilent: nil),
+            hapticIntent: "confirmation",
+            undoAvailability: .unavailable(label: "Undo unavailable", reason: "Invalid fixture has no restore snapshot."),
+            proofArtifact: proof,
+            receipt: receipt,
+            safeFallback: "Keep the previous visible state."
+        )
+
+        XCTAssertFalse(proof.isTypedAvailable)
+        XCTAssertFalse(receipt.isTypedSaved)
+        XCTAssertFalse(mutation.typedMotionEvent.isTypedEvent)
+        XCTAssertFalse(mutation.isCanonComplete)
+    }
+
+    func testSCG008BUnavailableProofFallbackIsTypedButDoesNotClaimMutationComplete() {
+        let before = MutationSnapshotReference(id: "snapshot.before.fallback", surface: .today, summary: "before")
+        let action = MutationActionReference(
+            commandID: "command.fallback",
+            commandKind: .completeAction,
+            source: .today,
+            targetObjectIDs: ["step-1"]
+        )
+
+        let proof = MutationProof.unavailable(
+            label: "Proof unavailable",
+            localOnly: true,
+            beforeSnapshot: before,
+            action: action,
+            fallbackReason: "Receipt storage was unavailable."
+        )
+        let receipt = MutationReceipt.unavailable(
+            inspectionLabel: "Receipt unavailable",
+            action: action,
+            fallbackReason: "Receipt storage was unavailable."
+        )
+
+        XCTAssertTrue(proof.isTypedUnavailableFallback)
+        XCTAssertTrue(receipt.isTypedUnavailableFallback)
+        XCTAssertFalse(proof.isTypedAvailable)
+        XCTAssertFalse(receipt.isTypedSaved)
     }
 
     private func realPlacementCandidate() -> TimePlacementCandidate {

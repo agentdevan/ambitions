@@ -22,31 +22,64 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
         }
 
         let affectedIDs = Self.affectedObjectIDs(command, timeMutation: timeMutation)
+        let actionReference = MutationActionReference(
+            commandID: command.id,
+            commandKind: command.kind,
+            source: command.source,
+            targetObjectIDs: affectedIDs
+        )
+        let beforeReference = MutationSnapshotReference(
+            id: "snapshot.before.\(command.id)",
+            surface: targetSurface,
+            summary: beforeSnapshot
+        )
+        let afterReference = MutationSnapshotReference(
+            id: "snapshot.after.\(command.id)",
+            surface: targetSurface,
+            summary: afterSnapshot
+        )
         let proof = MutationProof(
             artifactID: "runtime.proof.\(command.id)",
             label: "Proof artifact",
-            localOnly: validation.privacyBoundary.localOnly
+            localOnly: validation.privacyBoundary.localOnly,
+            beforeSnapshot: beforeReference,
+            action: actionReference,
+            afterSnapshot: afterReference
         )
+        let receiptID = "runtime.receipt.\(command.id)"
         let receipt = MutationReceipt(
-            receiptID: "runtime.receipt.\(command.id)",
+            receiptID: receiptID,
             saved: true,
-            inspectionLabel: "Receipt"
+            inspectionLabel: "Receipt",
+            proofArtifactID: proof.artifactID,
+            action: actionReference
         )
         let announcement = MutationAccessibilityAnnouncement(
             message: Self.accessibilityAnnouncement(command),
             reasonIfSilent: nil
         )
+        let runtimeMutationID = "runtime.mutation.\(command.id)"
         let stageMutation = StageMutation(
-            runtimeMutationID: "runtime.mutation.\(command.id)",
+            runtimeMutationID: runtimeMutationID,
             beforeSnapshot: beforeSnapshot,
             afterSnapshot: afterSnapshot,
             targetSurface: targetSurface,
             affectedObjectIDs: affectedIDs,
             visibleUserFacingChange: Self.visibleChange(command),
-            motionEvent: Self.motionEvent(command),
+            typedMotionEvent: MutationMotionEvent(
+                id: Self.motionEvent(command),
+                kind: .stageAction,
+                sourceMutationID: runtimeMutationID,
+                affectedObjectIDs: affectedIDs
+            ),
             accessibilityAnnouncement: announcement,
             hapticIntent: "confirmation",
-            undoAvailability: MutationUndo(isAvailable: true, label: "Undo"),
+            undoAvailability: MutationUndo(
+                isAvailable: true,
+                label: "Undo",
+                restoresSnapshot: beforeReference,
+                sourceReceiptID: receiptID
+            ),
             proofArtifact: proof,
             receipt: receipt,
             safeFallback: "Keep the previous visible state and show the receipt for inspection."

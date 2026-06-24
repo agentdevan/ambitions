@@ -19,33 +19,80 @@ struct ClosureStageMutation: Equatable, Sendable {
         let runtimeMutationID = "runtime.closure.\(record.id)"
         let receiptID = "receipt.closure.\(record.id)"
         let proofID = "proof.closure.\(record.id)"
+        let targetIDs = affectedObjectIDs.isEmpty ? [record.id] : affectedObjectIDs
+        let action = MutationActionReference(
+            commandID: "closure.\(record.id)",
+            commandKind: .completeAction,
+            source: .today,
+            targetObjectIDs: targetIDs
+        )
+        let beforeReference = MutationSnapshotReference(
+            id: "snapshot.closure.before.\(record.id)",
+            surface: .today,
+            summary: "Today before closure \(record.id)"
+        )
+        let afterReference = MutationSnapshotReference(
+            id: "snapshot.closure.after.\(record.id)",
+            surface: .today,
+            summary: "Today after closure \(record.outcome.rawValue)"
+        )
+        let proof = receiptSaved
+            ? MutationProof(
+                artifactID: proofID,
+                label: policy.proofArtifactLabel,
+                localOnly: true,
+                beforeSnapshot: beforeReference,
+                action: action,
+                afterSnapshot: afterReference
+            )
+            : MutationProof.unavailable(
+                label: policy.proofArtifactLabel,
+                localOnly: true,
+                beforeSnapshot: beforeReference,
+                action: action,
+                fallbackReason: "Closure receipt was not saved, so proof remains a local preview."
+            )
+        let receipt = receiptSaved
+            ? MutationReceipt(
+                receiptID: receiptID,
+                saved: true,
+                inspectionLabel: "Local receipt history",
+                proofArtifactID: proofID,
+                action: action
+            )
+            : MutationReceipt.unavailable(
+                inspectionLabel: "Local receipt preview",
+                action: action,
+                fallbackReason: "Receipt history was unavailable for this closure."
+            )
         let stageMutation = StageMutation(
             runtimeMutationID: runtimeMutationID,
-            beforeSnapshot: "Today before closure \(record.id)",
-            afterSnapshot: "Today after closure \(record.outcome.rawValue)",
+            beforeSnapshot: beforeReference.summary,
+            afterSnapshot: afterReference.summary,
             targetSurface: .today,
-            affectedObjectIDs: affectedObjectIDs.isEmpty ? [record.id] : affectedObjectIDs,
+            affectedObjectIDs: targetIDs,
             visibleUserFacingChange: policy.visibleChange,
-            motionEvent: "closure.\(record.outcome.rawValue)",
+            typedMotionEvent: MutationMotionEvent(
+                id: "closure.\(record.outcome.rawValue)",
+                kind: .closure,
+                sourceMutationID: runtimeMutationID,
+                affectedObjectIDs: targetIDs
+            ),
             accessibilityAnnouncement: MutationAccessibilityAnnouncement(
                 message: policy.accessibilityAnnouncement,
                 reasonIfSilent: nil
             ),
             hapticIntent: policy.hapticIntent,
-            undoAvailability: MutationUndo(
-                isAvailable: record.outcome.undoAvailability.isAvailable,
-                label: policy.undoLabel
-            ),
-            proofArtifact: MutationProof(
-                artifactID: proofID,
-                label: policy.proofArtifactLabel,
-                localOnly: true
-            ),
-            receipt: MutationReceipt(
-                receiptID: receiptID,
-                saved: receiptSaved,
-                inspectionLabel: receiptSaved ? "Local receipt history" : "Local receipt preview"
-            ),
+            undoAvailability: record.outcome.undoAvailability.isAvailable
+                ? MutationUndo(
+                    isAvailable: true,
+                    label: policy.undoLabel,
+                    restoresSnapshot: beforeReference,
+                    sourceReceiptID: receiptID
+                )
+                : .unavailable(label: policy.undoLabel, reason: "This closure outcome requires review instead of direct undo."),
+            proofArtifact: proof,
+            receipt: receipt,
             safeFallback: policy.safeFallback
         )
 
