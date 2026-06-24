@@ -73,6 +73,10 @@ ALLOWED_CHANGED_PREFIXES = (
     "scripts/ambitions-senior-code-audit.py",
 )
 
+ALLOWED_CHANGED_FILES = {
+    "docs/qa/KNOWN_ISSUES.md",
+}
+
 
 @dataclass(frozen=True)
 class Check:
@@ -188,6 +192,7 @@ def production_diff_check() -> Check:
         for path in changed
         if path
         and not path.startswith(ALLOWED_CHANGED_PREFIXES)
+        and path not in ALLOWED_CHANGED_FILES
         and path not in REQUIRED_FILES
     ]
     if unexpected:
