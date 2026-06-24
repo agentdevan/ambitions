@@ -13,6 +13,8 @@ This file is not implementation proof, release proof, account proof, R2 proof, s
 
 `PRODUCT_EXPERIENCE_CANON.md` operationalizes this moat through Life Capital, full scheduled goal paths, Future Steps, proof/progress preservation, local learning, Source Atlas + local runtime composition, continuous future adjustment, onboarding, reviews, and scenario gates. It remains subordinate to `PRODUCT_DESIGN_TRUTH.md` for root IA/privacy/product identity and to this file for moat and anti-commodity guardrails.
 
+`PRODUCT_ORIGIN_TRUTH.md` explains the user problem behind the moat: high-agency people with more ambition than operating structure need local, inspectable continuity between foundation planning and a compounding Private Life Runtime.
+
 ---
 
 ## 1. Moat Statement

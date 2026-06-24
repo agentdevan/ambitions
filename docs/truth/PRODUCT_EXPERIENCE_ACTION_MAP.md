@@ -43,6 +43,20 @@ Future work must treat the canon as behavior law, then prove each claim through 
 
 The active gate list is maintained in `docs/qa/product-experience-scenario-gates.md`. Future implementation trains must add focused test/proof coverage against the relevant gates instead of relying on canon text or source names.
 
+## Origin-to-Action
+
+`PRODUCT_ORIGIN_TRUTH.md` frames the core user problem as high ambition plus low operating structure. Implementation and QA trains should translate that problem into these action priorities without claiming they are already complete:
+
+| Origin problem | Implementation priority | Actionability target |
+|---|---|---|
+| The user forgets obligations or daily intentions. | Reminders, Steps, recurring Steps, and calendar-grade planning prevent daily failure. | Today and Time make required action visible, scheduled, recoverable, and private. |
+| The user has ambition but no visible route. | Full goal pathing creates direction. | Goals generate staged paths, clarifying questions, milestones, Steps, and proof points. |
+| The user cannot see the future shape of a goal. | Future Steps create future foresight. | Time and Goals show flexible future placement, edit impact, and schedule fit without vague someday items. |
+| The user has skills, resources, relationships, or proof but planning starts from zero. | Life Capital prevents starting from zero. | You and the runtime carry capabilities, resources, accomplishments, patterns, and proof into path generation. |
+| The user loses progress when life changes. | Reviews preserve proof and progress. | Reviews surface accomplishments, proof, Life Capital changes, and approved future-path updates without score or shame. |
+| The user overcommits across too many simultaneous goals and obligations. | Conflict simulation prevents overcommitment. | Capacity checks show what does not fit yet and offer Make room options before commitment. |
+| The user operates in personal patterns that generic planning cannot see. | Local learning adapts to how the user actually operates. | Local-only behavior, proof, schedule reality, recovery history, and user-approved patterns improve fit without cloud dependency. |
+
 ## Existing Repo Support Found
 
 These are source-present or doc-present supports, not full product proof:

@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 SCAN_FILES = [
     ROOT / "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    ROOT / "docs/truth/PRODUCT_ORIGIN_TRUTH.md",
     ROOT / "docs/truth/PRODUCT_MOAT_TRUTH.md",
     ROOT / "docs/truth/PRODUCT_EXPERIENCE_CANON.md",
     ROOT / "docs/truth/CODEX_PROCESS_TRUTH.md",

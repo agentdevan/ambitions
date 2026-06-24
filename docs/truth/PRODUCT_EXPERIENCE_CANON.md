@@ -36,6 +36,8 @@ Ambitions must become a native, local-first Personal Life OS that can:
 
 This file defines that product experience.
 
+`PRODUCT_ORIGIN_TRUTH.md` defines why Ambitions must serve high-agency users with more ambition than operating structure. This canon turns that origin problem into behavior contracts, actionability, scenario gates, and proof requirements.
+
 This file does not prove implementation exists, tests pass, the app is release-ready, the runtime is complete, or the current UI satisfies this canon. Proof requires code, tests, device validation, screenshots, accessibility validation, privacy validation, and owner acceptance.
 
 ⸻

@@ -11,6 +11,17 @@ Statuses mean:
 - Missing: inspection found no sufficient source/test evidence for the gate.
 - Unknown: not enough evidence was inspected in this docs train to classify confidently.
 
+## Origin Golden Scenario
+
+| Gate ID | User-visible behavior | Current status | Evidence path if found | Required future proof |
+|---|---|---|---|---|
+| `origin_high_ambition_low_operating_structure_user_can_start` | A high-agency user with more ambition than operating structure can see what matters and start with a fitting Step. | Partial | `docs/truth/PRODUCT_ORIGIN_TRUTH.md`, `Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector.swift`, `Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift` | End-to-end first-session scenario, rendered Today proof, accessibility proof |
+| `origin_many_goals_many_obligations_today_remains_clear` | Many simultaneous goals and obligations do not turn Today into a cluttered list or dashboard. | Partial | `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `Native/Ambitions/Projection/SurfaceLenses/TodayExecutionProjector.swift` | Overloaded-day scenario test, rendered first-viewport proof, visual review |
+| `origin_goal_without_known_path_generates_clarifying_path` | A goal without a known path generates clarifying questions or a provisional path instead of generic failure. | Partial | `Native/Ambitions/Core/Domain/GoalEngine/GoalClarificationModels.swift`, `Native/AmbitionsTests/Services/GoalClarificationServiceTests.swift` | Goal intake UI/runtime proof with clarification, provisional save, and path continuation |
+| `origin_user_not_starting_from_zero_when_life_capital_exists` | Existing Life Capital influences planning so the user is not treated like a beginner when relevant proof or capability exists. | Missing | None found for first-class Life Capital planning influence | Life Capital model, path-shortening test, You surface proof, receipt/proof trail |
+| `origin_missed_obligation_asks_what_changed_without_shame` | A missed obligation asks what changed and offers recovery without shame or productivity scoring. | Partial | `Native/Ambitions/Projection/SurfaceLenses/TimeRecoveryReceiptMaturityProjection.swift`, `Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift` | Missed-obligation interaction test, copy audit, rendered recovery options |
+| `origin_new_goal_conflict_shows_make_room_options` | Adding a conflicting new goal shows Make room options instead of silently overcommitting the schedule. | Missing | None found for full Make room flow | Capacity simulation test, Make room options UI, receipt and persistence proof |
+
 ## Foundation
 
 | Gate ID | User-visible behavior | Current status | Evidence path if found | Required future proof |
