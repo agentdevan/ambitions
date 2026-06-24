@@ -631,6 +631,57 @@ Remaining gaps:
 
 Gate index updates: none. The evidence is scoped rendered interaction/accessibility support for P1D Time foundation, not full gate completion.
 
+## P1E.1 Time Persistence / Relaunch / No-Account Workflow Proof Addendum
+
+Date: 2026-06-24
+Baseline commit: `a8ee7257c1633d9572df09b54c19f4ca3f6452bd`
+Final commit: P1E.1 final commit recorded in train closeout
+Gates targeted: `foundation_calendar_planning_shows_fixed_points_and_open_windows`, `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_quick_capture_saves_without_network`, `foundation_offline_core_runs_without_account`, `origin_many_goals_many_obligations_today_remains_clear`; `time_shows_whether_goal_fits` remains limited qualitative support only
+
+Source changed:
+
+- `Native/Ambitions/App/AppContainerFactory.swift`
+- `Native/Ambitions/Core/Persistence/DemoSeedPipeline.swift`
+- `Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift`
+- `Native/AmbitionsUITests/AmbitionsUITests.swift`
+
+Persisted/reload-backed Time proof added:
+
+- P1E depended on DEBUG demo/preview test seeding, and demo/preview bootstraps use in-memory stores. P1E.1 adds a DEBUG-only live persistent bootstrap seed path for UI proof.
+- The DEBUG seed still creates a local Step through `SimpleStepLifecycleService.createSimpleStep(...)`, schedules it through `SimpleStepLifecycleService.placeStepInTime(...)`, and writes the fixed point through the existing goal repository path.
+- `testP1E1PersistedScheduledStepSurvivesRepositoryAndTimeServiceReload` proves a scheduled local Step survives repository/service reconstruction and still projects fixed/open/scheduled Time semantics.
+- `testP1E1RenderedTimeFoundationPersistsAcrossLiveNoAccountRelaunch` seeds live persistent state once, terminates the app, relaunches live without the seed flag, and verifies the rendered Time path still exposes the scheduled local Step.
+
+No-account/offline proof added:
+
+- The live DEBUG seed marks local bootstrap/onboarding state complete in `AppStateSnapshot` so the UI test can open Time without sign-in or account setup.
+- The runtime test asserts the current runtime boundary remains `.localOnly`, sync backend remains `.localOnly`, and no remote intelligence backend is present.
+- The proof path uses local SwiftData repositories and does not require account, network, R2, Source Atlas upload, hosted AI, cloud LLM, or a private backend.
+
+Rendered Time proof status:
+
+- The relaunch-backed UI test opens Time through the normal shell route after live persistent relaunch and verifies `time.calendar.fixed-point`, `time.calendar.open-window`, and `time.calendar.scheduled-step`.
+- The scheduled row exposes `Mail the library card form` only after it was persisted through the local Step/Time path.
+
+Accessibility proof status:
+
+- The relaunch-backed UI test queries rendered accessibility identifiers and labels for fixed/open/scheduled Step semantics after relaunch.
+- Existing P1E row-level accessibility labels, values, hints, and identifiers remain the rendered accessibility proof surface.
+
+Screenshot/visual proof status:
+
+- The relaunch-backed UI test attaches screenshot `p1e1-reload-backed-time-foundation` in the result bundle.
+- This is Ready for Visual Review evidence only. No Visual Green, Release Green, device validation, manual visual approval, or release readiness is claimed.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1E.1 proves scoped local persistence/relaunch support for rendered Time foundation, but full gate completion still needs broader no-network/device proof, calendar permission proof, manual visual review, persistence/relaunch coverage beyond the seeded Step, and release evidence.
+- Reminder-like create/complete/reschedule remains Partial; P1E.1 proves scheduled Step persistence and rendering, not a full rendered create/complete/reschedule flow.
+- Quick Capture and offline/no-account gates receive supporting evidence only; this train does not prove rendered Capture save, full network-disabled workflow, account UX, or release-grade offline evidence.
+- `time_shows_whether_goal_fits` remains Partial qualitative support only; no full fit simulation, over-capacity warning, Future Steps, Make Room, Add with conflict, Life Capital, Source Atlas expansion, notification delivery, visual redesign, account work, R2 work, or release/device validation is claimed.
+
+Gate index updates: none. The evidence is scoped persistence/relaunch/rendered interaction support for P1D/P1E Time foundation, not full gate completion.
+
 ## Recommended Immediate Next Prompt
 
 ```text

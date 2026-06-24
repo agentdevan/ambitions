@@ -149,6 +149,7 @@ enum AppContainerFactory {
         case .never:
             #if DEBUG
             try await applyPreviewCaptureSeedIfNeeded(to: repositories)
+            try await DemoSeedPipeline(repositories: repositories).applyRenderedTimeFoundationSeedIfNeeded()
             #endif
             return
         case .whenExplicit:

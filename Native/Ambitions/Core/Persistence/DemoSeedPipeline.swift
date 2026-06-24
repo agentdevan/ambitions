@@ -42,7 +42,7 @@ struct DemoSeedPipeline {
     }
 }
 
-private extension DemoSeedPipeline {
+extension DemoSeedPipeline {
     func seededGoalFixtures() -> [Goal] {
         GoalEngineFixtures.orchestrationFixtures.compactMap { fixture in
             switch fixture.result {
@@ -166,6 +166,14 @@ private extension DemoSeedPipeline {
         try await repositories.goals.saveGoals([
             makeRenderedTimeFoundationFixedPointGoal(now: now)
         ])
+        var state = try await repositories.appState.loadState()
+        let seededAt = ISO8601DateFormatter().string(from: now)
+        state.hasCompletedBootstrap = true
+        state.hasCompletedOnboarding = true
+        state.onboardingCompletedAt = state.onboardingCompletedAt ?? seededAt
+        state.lastBootstrapSource = state.lastBootstrapSource ?? .live
+        state.lastSeededAt = seededAt
+        try await repositories.appState.saveState(state)
     }
 
     func makeRenderedTimeFoundationFixedPointGoal(now: Date) -> Goal {

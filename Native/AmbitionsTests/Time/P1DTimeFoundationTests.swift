@@ -193,6 +193,87 @@ final class P1DTimeFoundationTests: XCTestCase {
         XCTAssertTrue(copy.contains("local schedule context"))
         XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.privateLifeRuntimeBoundary, .localOnly)
     }
+
+    func testP1E1PersistedScheduledStepSurvivesRepositoryAndTimeServiceReload() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let firstRepositories = makeRepositories(store: store)
+        let lifecycle = SimpleStepLifecycleService(
+            repositories: firstRepositories,
+            idProvider: { "p1e1-persisted-step" }
+        )
+
+        let created = try await lifecycle.createSimpleStep(
+            title: "Mail the library card form",
+            summary: "Persisted local Step scheduled before Time reload.",
+            now: fixedNow
+        )
+        let windowStart = fixedNow.addingTimeInterval(90 * 60)
+        _ = try await lifecycle.placeStepInTime(
+            goalID: created.goalID,
+            stepID: created.stepID,
+            windowStart: windowStart,
+            windowEnd: windowStart.addingTimeInterval(30 * 60),
+            now: fixedNow.addingTimeInterval(30)
+        )
+        try await firstRepositories.goals.saveGoals([
+            makeFixedPointGoal(
+                id: "p1e1-fixed-school",
+                title: "School conference",
+                stepTitle: "Attend the school conference",
+                dueAt: iso.string(from: fixedNow.addingTimeInterval(24 * 60 * 60))
+            )
+        ])
+
+        let reloadedRepositories = makeRepositories(store: store)
+        let reloadedTimeService = RepositoryBackedTimeService(repositories: reloadedRepositories)
+        let timeState = try await reloadedTimeService.loadTimeSurfaceState(now: fixedNow)
+        let fixedRow = try XCTUnwrap(timeState.lifeSuite.field.calendarRows.first { $0.kind == .fixedPoint })
+        let openRow = try XCTUnwrap(timeState.lifeSuite.field.calendarRows.first { $0.kind == .openWindow })
+        let scheduledRow = try XCTUnwrap(timeState.lifeSuite.field.calendarRows.first { $0.kind == .scheduledStep })
+        let scheduledCopy = [
+            scheduledRow.title,
+            scheduledRow.value,
+            scheduledRow.detail,
+            scheduledRow.accessibilitySummary
+        ].joined(separator: " ")
+        let persistedSteps = try await reloadedRepositories.goals.listSteps(goalID: created.goalID)
+        let events = try await reloadedRepositories.eventLedger.fetchRecent(limit: 20)
+
+        XCTAssertTrue(persistedSteps.contains { $0.id == created.stepID && $0.timing.windowStart != nil && $0.timing.windowEnd != nil })
+        XCTAssertTrue(fixedRow.isOperational)
+        XCTAssertTrue(fixedRow.accessibilitySummary.localizedCaseInsensitiveContains("fixed"))
+        XCTAssertTrue(openRow.accessibilitySummary.localizedCaseInsensitiveContains("open"))
+        XCTAssertTrue(scheduledRow.isOperational)
+        XCTAssertTrue(scheduledCopy.localizedCaseInsensitiveContains("Scheduled"), scheduledCopy)
+        XCTAssertTrue(scheduledCopy.localizedCaseInsensitiveContains("Mail the library card form"), scheduledCopy)
+        XCTAssertFalse(scheduledCopy.localizedCaseInsensitiveContains("capture."))
+        XCTAssertTrue(events.contains { $0.kind == .itemScheduled && $0.goalID == created.goalID && $0.localOnly })
+        XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.privateLifeRuntimeBoundary, .localOnly)
+        XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.syncBackendKind, .localOnly)
+        XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
+
+        let emptyReloadedTimeState = try await RepositoryBackedTimeService(
+            repositories: makeRepositories(store: try AmbitionsPersistenceStore(inMemory: true))
+        )
+        .loadTimeSurfaceState(now: fixedNow)
+        let lowContextOpenRow = try XCTUnwrap(emptyReloadedTimeState.lifeSuite.field.calendarRows.first { $0.kind == .openWindow })
+        let lowContextScheduledRow = try XCTUnwrap(emptyReloadedTimeState.lifeSuite.field.calendarRows.first { $0.kind == .scheduledStep })
+        let lowContextCopy = [
+            lowContextOpenRow.value,
+            lowContextOpenRow.detail,
+            lowContextScheduledRow.value,
+            lowContextScheduledRow.detail,
+            emptyReloadedTimeState.lifeSuite.field.placementUnavailableReason
+        ].joined(separator: " ").lowercased()
+
+        XCTAssertEqual(lowContextOpenRow.value, "Low context")
+        XCTAssertFalse(lowContextOpenRow.isOperational)
+        XCTAssertFalse(lowContextScheduledRow.isOperational)
+        XCTAssertFalse(lowContextCopy.contains("7 open days"))
+        XCTAssertFalse(lowContextCopy.contains("optimized"))
+        XCTAssertFalse(lowContextCopy.contains("ai recommends"))
+        XCTAssertNil(emptyReloadedTimeState.lifeSuite.field.placementCandidate)
+    }
 }
 
 private extension P1DTimeFoundationTests {

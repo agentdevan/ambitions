@@ -1976,6 +1976,61 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertFalse(lowContextScheduledText.localizedCaseInsensitiveContains("Mail the library card form"))
     }
 
+    func testP1E1RenderedTimeFoundationPersistsAcrossLiveNoAccountRelaunch() throws {
+        let seededApp = makeApp(
+            bootstrapMode: "live",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AMBITIONS_UI_TIME_FOUNDATION_SEED": "1",
+                "AmbitionsScreenshotMode": "YES"
+            ]
+        )
+        seededApp.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: seededApp))
+        dismissContinuityReceiptIfPresent(in: seededApp)
+        XCTAssertFalse(seededApp.descendants(matching: .any)["onboarding.screen"].exists)
+        XCTAssertTrue(seededApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.scheduled-step", in: seededApp, maxAttempts: 10))
+        let seededScheduledText = accessibilityText(for: seededApp.descendants(matching: .any)["time.calendar.scheduled-step"])
+        XCTAssertTrue(seededScheduledText.localizedCaseInsensitiveContains("Scheduled"), seededScheduledText)
+        XCTAssertTrue(seededScheduledText.localizedCaseInsensitiveContains("Mail the library card form"), seededScheduledText)
+        seededApp.terminate()
+
+        let reloadedApp = makeApp(
+            bootstrapMode: "live",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES"
+            ]
+        )
+        reloadedApp.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: reloadedApp))
+        dismissContinuityReceiptIfPresent(in: reloadedApp)
+        XCTAssertFalse(reloadedApp.descendants(matching: .any)["onboarding.screen"].exists)
+        XCTAssertTrue(reloadedApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.now", in: reloadedApp, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.fixed-point", in: reloadedApp, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.open-window", in: reloadedApp, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.scheduled-step", in: reloadedApp, maxAttempts: 10))
+
+        let fixedText = accessibilityText(for: reloadedApp.descendants(matching: .any)["time.calendar.fixed-point"])
+        let openText = accessibilityText(for: reloadedApp.descendants(matching: .any)["time.calendar.open-window"])
+        let scheduledText = accessibilityText(for: reloadedApp.descendants(matching: .any)["time.calendar.scheduled-step"])
+        XCTAssertTrue(fixedText.localizedCaseInsensitiveContains("fixed"), fixedText)
+        XCTAssertTrue(openText.localizedCaseInsensitiveContains("open"), openText)
+        XCTAssertTrue(scheduledText.localizedCaseInsensitiveContains("Scheduled"), scheduledText)
+        XCTAssertTrue(scheduledText.localizedCaseInsensitiveContains("Mail the library card form"), scheduledText)
+        XCTAssertFalse(scheduledText.localizedCaseInsensitiveContains("capture."))
+        XCTAssertFalse(reloadedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Sign in")).firstMatch.exists)
+        XCTAssertFalse(reloadedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "7 open days")).firstMatch.exists)
+        XCTAssertFalse(reloadedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "AI recommends")).firstMatch.exists)
+        XCTAssertFalse(reloadedApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "optimized")).firstMatch.exists)
+
+        captureTimeScreenshot(named: "p1e1-reload-backed-time-foundation", in: reloadedApp)
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,
