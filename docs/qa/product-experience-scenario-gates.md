@@ -3,7 +3,7 @@
 Status: Active QA index for `docs/truth/PRODUCT_EXPERIENCE_CANON.md`  
 Scope: Scenario gates from the official v1 Product Experience Canon  
 Owner posture: QA planning and evidence index, not implementation proof
-Last audited commit: 28a0c9bad3821b93118f38c864643db89ddce619
+Last audited commit: 30da6e81c69146d68d6f1060320533c6d52a62c4
 Last audited date: 2026-06-24
 
 Machine-readable companion: `docs/qa/product-experience-scenario-gates.yaml`.
@@ -37,7 +37,7 @@ Statuses mean:
 | `foundation_quick_capture_saves_without_network` | Quick Capture saves locally without network. | Partial | `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, `Native/Ambitions/Core/Persistence/` | Offline capture test, relaunch proof, no-network proof |
 | `foundation_calendar_planning_shows_fixed_points_and_open_windows` | Time shows fixed points and open windows. | Partial | `Native/Ambitions/Projection/SurfaceLenses/TimePlacementCalendarContracts.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift` | Rendered Time proof with fixed/open windows and accessibility labels |
 | `foundation_search_finds_goals_steps_proof_life_capital_and_settings` | Search finds goals, Steps, proof, Life Capital, and settings. | Partial | `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift` | Search tests including Life Capital and Future Steps, route proof |
-| `foundation_notification_copy_is_private_by_default` | Notifications use private lock-screen copy by default. | Missing | None found for lock-screen copy | Notification content tests, screenshot/device settings proof |
+| `foundation_notification_copy_is_private_by_default` | Notifications use private lock-screen copy by default. | Partial | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`, `Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift` | Device lock-screen proof, permission settings proof, delivered notification screenshot, end-to-end action routing proof |
 | `foundation_offline_core_runs_without_account` | Core app runs without account or network. | Partial | `docs/truth/IMPLEMENTATION_TRUTH.md`, `Native/Ambitions/Core/Persistence/` | No-account launch test, offline workflow proof, release evidence |
 | `foundation_completion_creates_visible_closure` | Completing work creates visible closure. | Partial | `Native/Ambitions/Projection/Mutations/ClosureStageMutation.swift`, `Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift` | Completion UI test, receipt/proof assertion, accessibility proof |
 | `foundation_missed_step_asks_what_changed` | Missed Step asks what changed. | Partial | `Native/Ambitions/Projection/SurfaceLenses/TimeRecoveryReceiptMaturityProjection.swift`, `Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift` | Missed-step scenario test and rendered recovery options |
@@ -169,7 +169,7 @@ Statuses mean:
 
 | Gate ID | User-visible behavior | Current status | Evidence path if found | Required future proof |
 |---|---|---|---|---|
-| `lock_screen_notifications_private_by_default` | Lock-screen notifications are private by default. | Missing | None found | Notification content/device proof |
+| `lock_screen_notifications_private_by_default` | Lock-screen notifications are private by default. | Partial | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`, `Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift` | Device lock-screen proof, permission settings proof, delivered notification screenshot, end-to-end action routing proof |
 | `personal_learning_insights_not_shown_aggressively` | Personal learning insights are not aggressive notifications. | Missing | None found | Notification route/copy audit |
 | `notification_does_not_emotionally_label_user` | Notification avoids emotional labels. | Missing | None found | Notification copy test |
 | `pattern_notice_opens_in_app_context` | Pattern notice opens in-app context. | Missing | None found | Notification tap routing proof |

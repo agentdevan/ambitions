@@ -3,7 +3,7 @@
 Status: Active actionability map for `PRODUCT_EXPERIENCE_CANON.md`  
 Scope: Product-experience canon operationalization, source support inventory, implementation sequencing, and future proof gates  
 Owner posture: Planning and QA bridge, not implementation proof
-Last audited commit: 28a0c9bad3821b93118f38c864643db89ddce619
+Last audited commit: 30da6e81c69146d68d6f1060320533c6d52a62c4
 Last audited date: 2026-06-24
 Status owner: Product Experience Canon operationalization
 Update required when: scenario gate status changes, implementation train claims Green/Yellow, Life Capital/pathing/Future Steps/proof/review/onboarding/automation work lands, or evidence paths change
@@ -111,7 +111,7 @@ These are source-present or doc-present supports, not full product proof:
 | Time adjustment | Reflow decision projection asks for review before changes | Protected seven-day placement guard and automatic future-only adjustment are not fully proven |
 | Reviews | You reviews projection exists | Week/Month/Year user-launched review shell, export, and approved future path updates are not fully proven |
 | Search | Local search projection exists | Search across Life Capital and Future Steps specifically is not proven |
-| Notifications | Notification authorization copy exists in You | Private lock-screen copy and notification delivery behavior are not proven |
+| Notifications | Notification authorization copy exists in You; local notification planner and tests cover private generic copy | Device lock-screen delivery, permission/settings UX, tap routing, and release evidence are not proven |
 | Automation | Confirmation-aware safety samples and review language exist | Global/per-life-area/per-goal automation levels are not proven |
 
 ## Missing Support / Future Implementation Gaps

@@ -132,13 +132,16 @@ gates:
   - id: "foundation_notification_copy_is_private_by_default"
     group: "Foundation"
     user_visible_behavior: "Notifications use private lock-screen copy by default."
-    current_status: "Missing"
-    evidence_paths: []
-    required_future_proof: "Notification content tests, screenshot/device settings proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+    current_status: "Partial"
+    evidence_paths:
+      - "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift"
+      - "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift"
+    required_future_proof: "Device lock-screen proof, permission settings proof, delivered notification screenshot, end-to-end action routing proof"
+    last_verified_commit: "30da6e81c69146d68d6f1060320533c6d52a62c4"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift"
   - id: "foundation_offline_core_runs_without_account"
     group: "Foundation"
     user_visible_behavior: "Core app runs without account or network."
@@ -949,13 +952,16 @@ gates:
   - id: "lock_screen_notifications_private_by_default"
     group: "Notifications"
     user_visible_behavior: "Lock-screen notifications are private by default."
-    current_status: "Missing"
-    evidence_paths: []
-    required_future_proof: "Notification content/device proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+    current_status: "Partial"
+    evidence_paths:
+      - "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift"
+      - "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift"
+    required_future_proof: "Device lock-screen proof, permission settings proof, delivered notification screenshot, end-to-end action routing proof"
+    last_verified_commit: "30da6e81c69146d68d6f1060320533c6d52a62c4"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Notifications"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift"
   - id: "personal_learning_insights_not_shown_aggressively"
     group: "Notifications"
     user_visible_behavior: "Personal learning insights are not aggressive notifications."
