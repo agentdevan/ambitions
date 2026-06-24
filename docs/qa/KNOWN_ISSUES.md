@@ -4,6 +4,7 @@
 
 **Last source reconciliation:** 2026-06-23
 **Last final-proof evidence pass:** 2026-06-23 (`docs/qa/evidence/2026-06-23-final-proof/`)
+**Last risk-register import evidence:** 2026-06-24 (`docs/qa/risk-register-imports/2026-06-24-risk-register-synthesis.md`, `.json`)
 **Last device/runtime review:** 2026-06-22  
 **Runtime evidence set:** `More issues.zip`, screenshots `IMG_8475.PNG` through `IMG_8499.PNG`, plus tester notes from the same review.  
 **Baseline source context:** `ce75bb77122350fcab9500806e5ff26f8ee02e58` (`AMB-1180 rebuild LifeShape field object`) plus current `main` docs commits.
@@ -76,11 +77,66 @@ SCG-009B / AMB-1303 domain model repair mapping note: domain source/test repair 
 | Valid/no-step Today proof, Time placement variants proof, You Appearance before/after proof, and full drilldown proof missing. | Today, Time, You, Shell, and final-proof rows | Runtime proof pending. |
 | Privacy scan remains advisory Yellow for reviewed context/non-claim hits. | `AMB-ISSUE-0014`, final-proof packet | Advisory Yellow; no private-data upload claim. |
 
+## 2026-06-24 risk register import reconciliation
+
+`Ambitions_Synthesized_Risk_Register.md` was imported as evidence only. It is not source of truth, not a third project, and not a parallel risk database. Canonical status remains owned by this register, QA remediation dossiers, SCG artifacts, and `docs/truth/*`. The import itself is a planning register and does not certify runtime behavior, device behavior, App Store posture, CloudKit behavior, accessibility, privacy, account readiness, R2 readiness, release posture, or owner acceptance.
+
+The import reinforces existing product law and proof law:
+
+- Persistent surfaces remain Today / Goals / Time / You.
+- Capture remains the global composer, not a root tab.
+- Motion remains behavior, not a destination.
+- Core value remains local-first/offline with no account required.
+- R2/Source Atlas remain public/reference/freshness infrastructure only and must not receive the private life graph.
+- Every meaningful action requires runtime mutation, visible stage mutation, accessible state change, safe fallback, and proof artifact.
+
+The import also matches the prior device-review failure pattern already represented here: Capture crash and composer proof gaps, non-mutating closure and Today recompute gaps, internal runtime jargon, duplicate shell chrome and dock overlap, Time layout/mutation weakness, weak native quality, and frontend/runtime validation blockers.
+
+Existing row groups strengthened by this import:
+
+| Existing row group | Imported evidence | Required proof addition |
+|---|---|---|
+| `AMB-ISSUE-0014` | `IR-2026-06-24-001`, `002`, `003`, `018`, `040`, `055`, `056` | Exact-SHA live persistent runtime proof, device proof, archive/privacy proof, and owner acceptance. |
+| `AMB-ISSUE-0010` | `IR-2026-06-24-017`, `041`, `044`, `045`, `052` | Forbidden-language scan plus rendered screenshot review; string scan alone cannot close. |
+| Today / Closure rows | `IR-2026-06-24-005`, `028`, `033` | Restart-proof Today mutation, proof/undo artifact IDs, before/action/after evidence. |
+| Capture rows | `IR-2026-06-24-006`, `007`, `008`, `034`, `048` | Composer, keyboard, offline save, direct-ID lookup, external queue ack, proposal, and receipt proof. |
+| Time rows | `IR-2026-06-24-004`, `024`, `026`, `029`, `033`, `038`, `048` | Durable-vs-preview distinction, injected clock, restart proof, Today recompute, undo, and permission-denied fallback. |
+| Goals rows | `IR-2026-06-24-023`, `030` | Graph invariants, persistence reload, Today feed, Goal/Area detail, and step-chain proof. |
+| You rows | `IR-2026-06-24-031`, `044` | Account/R2/settings actionability proof and no unsupported account/sync claims. |
+| Search rows | `IR-2026-06-24-032`, `035` | Local-only bounded index, route/action proof, target validation, and no network proof. |
+| Shell rows | `IR-2026-06-24-014`, `016`, `042`, `047`, `053` | Root/drilldown/overlay matrix, no overlap, no stale external state, no Motion root. |
+| Accessibility/final-proof rows | `IR-2026-06-24-018`, `019`, `037`, `050`, `055` | Manual/device accessibility, privacy-trust, and archive/security proof; automated contracts are insufficient. |
+
 ## Build graph governance issues
 
 | Finding ID | Severity | Source | Area | Evidence | Existing Issue / Duplicate | Owner Train | Required Proof | Status |
 |---|---|---|---|---|---|---|---|---|
 | `SCG-BG-001` | Red / Build graph blocker | SCG-002 / BUILD_GRAPH_INVENTORY | Packages/AmbitionsExperienceKernel | Package.swift declares `Resources/Tokens`, `Resources/Manifests`, and `Resources/AmbitionsExperienceTokens.xcassets`. SCG-002 initially flagged those as absent at the package root. SCG-002A verified SwiftPM resolves those paths relative to target path `Sources/AmbitionsExperienceKernel`; `swift package describe --type json` lists `Resources/Tokens/tokens.json` and `Resources/Manifests/*.json` as processed resources, and filesystem inspection confirms `Sources/AmbitionsExperienceKernel/Resources/AmbitionsExperienceTokens.xcassets` exists and is excluded. | None | SCG-002A | package manifest/resource-path audit, build graph validation, JSON inventory refresh | Resolved by package-relative path audit; no `Package.swift` change required. |
+
+## Imported P0 launch-proof and control-plane rows
+
+These rows are live after the 2026-06-24 evidence import. They do not close or downgrade existing rows. They add missing canonical QA/proof rows for imported P0 risks that were not represented with enough specificity in this register.
+
+| ID | Surface | Status | Issue | Evidence | Required closure proof |
+|---|---|---|---|---|---|
+| `AMB-ISSUE-2001` | Runtime / Commands / Persistence | **Open / imported risk** | Canonical runtime command spine, validation, idempotency, and unit-of-work proof are missing. | `IR-2026-06-24-001`-`003`, `022`, `046`; `AMB-ISSUE-0014`; AMB-1301/1304; SCG-007C/L. | Canonical command path, validation-before-mutation, durable idempotency, duplicate replay, forced-failure rollback, visible mutation, accessibility, proof artifact. |
+| `AMB-ISSUE-2002` | External intake / Capture | **Open / imported risk** | External intake queue can lose user-submitted content before successful Capture creation. | `IR-2026-06-24-007`, `027`, `051`; AMB-1097/1034/1093/1100; Capture device-review gaps. | Append-only queue, ack-after-import, retry, failure UI, race tests, no-data-loss proof. |
+| `AMB-ISSUE-2003` | Capture / Persistence / Search | **Open / imported risk** | Capture direct-ID persistence lookup is not proven for older captures. | `IR-2026-06-24-008`; AMB-1192/1304; Capture proof remains missing after AMB-1199. | Direct ID fetch, more than 500 captures, restart, search/detail/open proof. |
+| `AMB-ISSUE-2004` | Account / Auth / Offline core | **Open / imported risk** | Optional Ambitions Account launch architecture is not proof-ready. | `IR-2026-06-24-009`, `043`, `056`; AMB-1178/1039; product truth requires offline no-account core. | Sign in with Apple/Google, Keychain, session recovery, deletion, logged-out/offline routing, offline Capture/Start flow. |
+| `AMB-ISSUE-2005` | Account / Storage / Erasure | **Open / imported risk** | Account-scoped storage, sign-out, delete-account, and erasure proof are missing. | `IR-2026-06-24-010`; AMB-1178/632; local-first/account boundary evidence. | Account-scope matrix, delete/export/reset/sign-out proof across local store, app group, widgets, notifications, and credentials. |
+| `AMB-ISSUE-2006` | CloudKit / Sync / Migration | **Open / imported risk** | CloudKit sync engine is not launch-proof. | `IR-2026-06-24-011`, `056`; AMB-632; implementation truth keeps CloudKit sync unproven. | Zones/schema, stable IDs, tombstones, conflict policy, retry/backoff, migration, multi-device proof. |
+| `AMB-ISSUE-2007` | Privacy / Account / R2 | **Open / imported risk** | Local-first privacy boundary with account/R2 is not proven. | `IR-2026-06-24-012`; AMB-1178/610; product/process truth forbids private graph egress. | Request-shape proof, no private graph egress, offline core, You/Privacy copy proof. |
+| `AMB-ISSUE-2008` | EventKit / Reminders / Notifications | **Open / imported risk** | External side-effect unit-of-work is not proven. | `IR-2026-06-24-013`, `025`, `026`; AMB-1033/1095/1096/1142. | Preflight, local transaction, external write, rollback/recovery, permission fallback, sign-out cleanup. |
+| `AMB-ISSUE-2009` | Widgets / App Intents / Deep links | **Open / imported risk** | Widgets, App Intents, and deep links may bypass command/runtime safety. | `IR-2026-06-24-014`, `027`, `035`, `047`; AMB-1092/1093/994/1028/1029. | External mutations normalize to AmbitionsCommand, target validation, stale/account-safe snapshots, parser safety, safe failure UI. |
+| `AMB-ISSUE-2010` | Persistence / Import-export / Store health | **Open / imported risk** | Persistence, import/export, reset, store health, and audit graph integrity are not proven. | `IR-2026-06-24-015`, `021`, `039`, `054`; AMB-1295/1178; SCG-012. | Transactional import/export, duplicate validation, corrupt quarantine, rollback, restart, replay consistency. |
+| `AMB-ISSUE-2011` | Security / Privacy / Local auth | **Open / imported risk** | Security, privacy manifest, local auth, and app-group protection proof are missing. | `IR-2026-06-24-019`, `050`, `056`; AMB-1294/1295/1178/634. | Archive privacy manifest audit, file protection, evaluatePolicy proof, least-privilege prompts, sensitive-scenario matrix. |
+| `AMB-ISSUE-2012` | Source Atlas / R2 | **Open / imported risk** | Source Atlas / R2 provider, cache, freshness, ranking, and public-only boundary are not proven. | `IR-2026-06-24-020`, `034`; AMB-1178/1036/658/668; R2/private graph boundary law. | Public-only request schema, cache/freshness/error/ranking tests, no private graph egress. |
+
+Proposal-only:
+
+| Proposed ID | Disposition | Reason |
+|---|---|---|
+| `AMB-ISSUE-2013` | Proposal-only / folded | App-group and multi-process storage race/corruption proof remains folded into `AMB-ISSUE-2002` and `AMB-ISSUE-2009` unless launch-scope app-group evidence proves a distinct row is required. |
 
 ## Verified improvements from this device review
 

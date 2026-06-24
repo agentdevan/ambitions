@@ -3,9 +3,12 @@
 **Status:** Active cross-link for the 2026-06-22 runtime QA remediation.  
 **Primary register:** `docs/qa/KNOWN_ISSUES.md`  
 **Runtime report:** `docs/qa/device_review_20260622_more_issues.md`  
+**Risk import evidence:** `docs/qa/risk-register-imports/2026-06-24-risk-register-synthesis.md` and `.json`
 **Global law:** `docs/qa/remediation/2026-06-22-codex-remediation-law.md`
 
 Use this file to route known issues to the correct Codex execution dossier. Do not mark any known issue `Closed - verified` unless the relevant dossier proof matrix is satisfied and owner acceptance is recorded.
+
+The 2026-06-24 risk-register import is evidence only. It does not create a third project, replace `docs/qa/KNOWN_ISSUES.md`, or certify runtime/device/accessibility/release status. It strengthens existing QA/SCG rows and adds live imported known-issue rows `AMB-ISSUE-2001` through `AMB-ISSUE-2012`; `AMB-ISSUE-2013` remains proposal-only/folded into external intake and external-surface rows.
 
 | Linear bundle | Dossier | Known issue coverage |
 |---|---|---|
@@ -19,6 +22,7 @@ Use this file to route known issues to the correct Codex execution dossier. Do n
 | `AMB-1198` | `docs/qa/remediation/dossiers/AMB-1198-you-settings-privacy.md` | You / settings rows: `AMB-ISSUE-0601`–`0607`, `1501`–`1505` |
 | `AMB-1199` | `docs/qa/remediation/dossiers/AMB-1199-final-proof-accessibility.md` | Accessibility / final proof / release-gate rows: `AMB-ISSUE-0013`–`0015`, `0801`–`0807`, `0903`–`0912`, `1801`, `1802` |
 | `AMB-1200` | `docs/qa/remediation/dossiers/AMB-1200-register-sync-control-closeout.md`; `docs/qa/evidence/2026-06-23-final-proof/source-train-ledger.md`; `docs/qa/evidence/2026-06-23-final-proof/post-proof-repair-queue.md`; `docs/qa/evidence/2026-06-23-final-proof/control-closeout.md` | Register sync, source-train ledger, final-proof repair queue, and project-control rows |
+| 2026-06-24 risk import | `docs/qa/risk-register-imports/2026-06-24-risk-register-synthesis.md`; `docs/quality/senior-review/risk-imports/2026-06-24-root-cause-risk-map.json` | Evidence mapping only. Strengthens existing Capture, Today/Closure, Time, Goals, Search, You, Shell, Language, Accessibility, and Final Proof rows; adds `AMB-ISSUE-2001`-`2012`; keeps `AMB-ISSUE-2013` proposal-only. |
 
 ## Closure law
 
