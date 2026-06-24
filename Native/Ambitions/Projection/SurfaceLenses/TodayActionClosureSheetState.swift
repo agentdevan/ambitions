@@ -157,7 +157,7 @@ struct TodayActionClosureSheetState: Identifiable, Equatable, Sendable {
             objectTitle: title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Today step" : title,
             startHereReceiptLabel: startHereReceiptLabel.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Start Here review history" : startHereReceiptLabel,
             originalContext: context.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "From Today" : context,
-            prompt: "What happened with this step?",
+            prompt: "What changed?",
             privacyLabel: privacyLabel,
             diamond: .todayDefault,
             outcomes: Self.defaultOutcomes,

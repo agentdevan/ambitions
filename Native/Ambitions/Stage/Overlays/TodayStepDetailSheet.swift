@@ -223,7 +223,9 @@ struct TodayStepDetailSheet: View {
                             .padding(.vertical, theme.spacing.sm)
                     }
                     .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-                    .accessibilityHint("Uses the existing Today action for this step.")
+                    .accessibilityLabel(action.title)
+                    .accessibilityIdentifier(action.accessibilityIdentifier)
+                    .modifier(TodayActionAccessibilityHint(action: action))
                 }
             }
         }

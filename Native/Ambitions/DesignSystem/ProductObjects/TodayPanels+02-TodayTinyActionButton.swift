@@ -28,6 +28,8 @@ struct TodayTinyActionButton: View {
         }
         .buttonStyle(.plain)
         .foregroundStyle(theme.colors.textPrimary)
+        .accessibilityLabel(action.title)
+        .accessibilityIdentifier(action.accessibilityIdentifier)
         .modifier(TodayActionAccessibilityHint(action: action))
     }
 }

@@ -71,6 +71,14 @@ struct TodayActionAccessibilityHint: ViewModifier {
             content.accessibilityHint("Returns to Today without changing proof or plan.")
         case .closeActionClosure:
             content.accessibilityHint("Opens closure options and review preview for this step.")
+        case .complete:
+            content.accessibilityHint("Completes this Step and saves local closure proof.")
+        case .reschedule:
+            content.accessibilityHint("Moves this Step without blame and keeps the change reviewable.")
+        case .defer:
+            content.accessibilityHint("Moves this Step out of the current pressure without treating it as a problem.")
+        case .openTime:
+            content.accessibilityHint("Opens Time context for this Step without changing it silently.")
         case .askWhyThisMatters:
             content.accessibilityHint("Explains why this step is worth doing now.")
         case .protectLater:

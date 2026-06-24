@@ -1314,6 +1314,59 @@ final class AmbitionsUITests: XCTestCase {
         XCTAssertTrue(primaryAction.label == "Start now" || app.staticTexts["Start now"].exists)
     }
 
+    func testP1A1RenderedStepLifecycleExposesCompleteMoveAndRecoveryControls() throws {
+        let detailApp = makeApp(
+            bootstrapMode: "demo",
+            extraEnvironment: ["AmbitionsTodaySheet": "trust"]
+        )
+        detailApp.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: detailApp, timeout: 90))
+        XCTAssertTrue(detailApp.descendants(matching: .any)["TodayStepDetail"].waitForExistence(timeout: 10))
+        XCTAssertTrue(detailApp.descendants(matching: .any)["TodayStepDetailTitle"].waitForExistence(timeout: 10))
+        XCTAssertTrue(detailApp.descendants(matching: .any)["TodayStepDetailClosureAction"].waitForExistence(timeout: 10))
+
+        let moveAction = scrollUntilButtonHittable("today.action.reschedule", fallbackLabel: "Move it", in: detailApp, maxAttempts: 8)
+        XCTAssertTrue(moveAction.waitForExistence(timeout: 10), "The Step detail sheet should expose Move it for non-shaming reschedule.")
+        XCTAssertTrue(moveAction.isHittable, "Move it should be tappable.")
+        let completeAction = scrollUntilButtonHittable("today.action.complete", fallbackLabel: "Mark Done", in: detailApp, maxAttempts: 8)
+        XCTAssertTrue(completeAction.waitForExistence(timeout: 10), "The Step detail sheet should expose a rendered complete action.")
+        XCTAssertTrue(completeAction.isHittable, "The rendered complete action should be tappable.")
+        detailApp.terminate()
+
+        let recoveryApp = makeApp(
+            bootstrapMode: "preview",
+            extraEnvironment: [
+                "AMBITIONS_PREVIEW_TODAY_SCENARIO": "stable",
+                "AmbitionsTodaySheet": "receipt",
+                "AmbitionsScreenshotMode": "YES"
+            ]
+        )
+        recoveryApp.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: recoveryApp, timeout: 90))
+        XCTAssertTrue(recoveryApp.descendants(matching: .any)["TodayActionClosureSheet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(recoveryApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "What changed?")).firstMatch.waitForExistence(timeout: 5))
+        for outcomeID in ["completed", "still_counts", "moved", "blocked", "not_needed"] {
+            XCTAssertTrue(
+                recoveryApp.buttons["TodayActionClosureOutcome.\(outcomeID)"].waitForExistence(timeout: 5),
+                "Closure recovery should expose \(outcomeID) as an accessible outcome."
+            )
+        }
+        recoveryApp.buttons["TodayActionClosureOutcome.moved"].tap()
+        XCTAssertTrue(recoveryApp.descendants(matching: .any)["TodayActionClosureConsequencePreview"].waitForExistence(timeout: 5))
+        let confirmOutcome = scrollUntilButtonHittable("TodayActionClosureConfirm", fallbackLabel: "Save outcome", in: recoveryApp, maxAttempts: 8)
+        XCTAssertTrue(confirmOutcome.waitForExistence(timeout: 5))
+        XCTAssertTrue(confirmOutcome.isHittable)
+        for forbidden in ["failed", "overdue", "lazy", "avoidance", "streak broken", "productivity dropped"] {
+            XCTAssertFalse(
+                recoveryApp.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", forbidden)).firstMatch.exists,
+                "Rendered Step recovery must not expose shame copy: \(forbidden)"
+            )
+        }
+        captureTodayScreenshot(named: "p1a1-rendered-step-recovery-controls", in: recoveryApp)
+    }
+
     func testTodayCanHandOffToGoalDetail() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
@@ -2535,6 +2588,38 @@ final class AmbitionsUITests: XCTestCase {
         let startHere = app.staticTexts["Start here"]
         if startHere.waitForExistence(timeout: 5) {
             startHere.tap()
+            if existingDetail.waitForExistence(timeout: 5) {
+                return true
+            }
+        }
+
+        let stepTitle = app.descendants(matching: .any)["TodayRealityRailStepTitle"]
+        if stepTitle.waitForExistence(timeout: 5) {
+            stepTitle.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).tap()
+            if existingDetail.waitForExistence(timeout: 5) {
+                return true
+            }
+        }
+
+        let whyThis = app.buttons["TodayStartHereSourceFreshness"]
+        if whyThis.waitForExistence(timeout: 5) {
+            whyThis.tap()
+            if existingDetail.waitForExistence(timeout: 5) {
+                return true
+            }
+        }
+
+        let startHereSurface = app.buttons["TodayStartHereSurface"]
+        if startHereSurface.waitForExistence(timeout: 5) {
+            startHereSurface.tap()
+            if existingDetail.waitForExistence(timeout: 5) {
+                return true
+            }
+        }
+
+        let startHereElement = app.descendants(matching: .any)["TodayStartHereSurface"]
+        if startHereElement.waitForExistence(timeout: 5) {
+            startHereElement.tap()
             if existingDetail.waitForExistence(timeout: 5) {
                 return true
             }

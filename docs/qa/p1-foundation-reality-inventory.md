@@ -337,6 +337,48 @@ Remaining gaps:
 
 Gate index updates: none. Current evidence improves scoped source/runtime proof but does not justify upgrading any target gate beyond Partial without rendered interaction/accessibility proof.
 
+## P1A.1 Step Interaction Proof Addendum
+
+Date: 2026-06-24
+Baseline commit: `e6d4d91363a571fa74d2e0e870da2867bd87276d`
+Final commit: P1A.1 final commit recorded in train closeout
+Gates targeted: `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_completion_creates_visible_closure`, `foundation_missed_step_asks_what_changed`, `origin_missed_obligation_asks_what_changed_without_shame`
+
+Source changed:
+
+- `Native/Ambitions/Projection/SurfaceLenses/DayRailStepDetailState.swift`
+- `Native/Ambitions/Projection/SurfaceLenses/TodayActionClosureSheetState.swift`
+- `Native/Ambitions/Stage/Overlays/TodayStepDetailSheet.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayPanels+02-TodayTinyActionButton.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayPanels+06-TodayPrimaryActionButton.swift`
+- `Native/AmbitionsUITests/AmbitionsUITests.swift`
+
+Interaction proof added:
+
+- Focused UI test proves the rendered Step detail sheet exposes a Step title, `Mark Done`, `Move it`, and `Close the loop` controls through the current Today sheet/rendering path.
+- The same UI test proves the rendered closure/recovery sheet shows `What changed?` and exposes `Done`, `Still counts`, `Move it`, `Blocked`, and `Not needed` as accessible outcome controls.
+- The closure UI proof selects `Move it`, verifies the consequence preview remains visible, verifies `Save outcome` can be reached as a hittable control, and captures screenshot attachment `p1a1-rendered-step-recovery-controls` in the focused UI test xcresult.
+- Focused P1A runtime test was rerun after the UI changes and still proves local create, Today projection, reschedule, missed recovery, completion, persistence/reload, and local-only capability flags.
+
+Accessibility proof added:
+
+- Rendered Step detail controls now expose stable accessibility identifiers and action-specific hints for complete, reschedule/move, defer, and Time handoff actions.
+- Today tiny action buttons now expose stable accessibility labels and identifiers, making the current rendered complete action testable.
+- The UI proof verifies the main Step detail actions and closure recovery outcomes are discoverable/hittable through XCTest accessibility queries.
+
+Screenshot/visual proof status:
+
+- Screenshot attachment produced by the focused UI test for the rendered closure/recovery sheet.
+- This is Ready for Visual Review evidence only. It is not Visual Green because manual visual review, full device matrix, Dynamic Type sweep, Reduce Motion/Reduce Transparency/Increase Contrast sweep, and VoiceOver runtime review were not completed.
+
+Remaining gaps:
+
+- Gate statuses remain unchanged. P1A.1 adds partial rendered interaction evidence but does not prove full end-to-end normal-user tap mutation from the Today Start Here/Day Rail card into persisted completion/reschedule.
+- The normal rendered Day Rail detail-open tap route did not produce reliable sheet presentation during this train and should be handled by a follow-up interaction repair before claiming Interaction Green.
+- VoiceOver runtime, Dynamic Type, Reduce Motion, Reduce Transparency, Increase Contrast, device, notification, recurring Step, and release proof remain unclaimed.
+
+Gate index updates: none. Current evidence adds partial rendered interaction proof, but the target gates stay Partial until the normal user path, accessibility sweeps, and full end-to-end interaction proof are current.
+
 ## Recommended Immediate Next Prompt
 
 ```text
