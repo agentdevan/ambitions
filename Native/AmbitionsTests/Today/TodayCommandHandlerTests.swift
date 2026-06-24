@@ -2,6 +2,109 @@ import XCTest
 @testable import Ambitions
 
 final class TodayCommandHandlerTests: XCTestCase {
+    func testP1ASimpleStepLifecycleCreatesRendersReschedulesCompletesAndRecoversLocally() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = try await makeRepositories(store: store)
+        let reloadedRepositories = try await makeRepositories(store: store)
+        let todayService = RepositoryBackedTodayService(repositories: repositories)
+        let lifecycleService = SimpleStepLifecycleService(repositories: repositories)
+
+        let created = try await lifecycleService.createSimpleStep(
+            title: "Mail the library card form",
+            now: fixedNow
+        )
+
+        let persistedSteps = try await reloadedRepositories.goals.listSteps(goalID: created.goalID)
+        let persistedStep = try XCTUnwrap(persistedSteps.first(where: { $0.id == created.stepID }))
+        XCTAssertEqual(persistedStep.title, "Mail the library card form")
+        XCTAssertEqual(persistedStep.state, .planned)
+        XCTAssertEqual(persistedStep.isRepeatable, false)
+        XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.privateLifeRuntimeBoundary, .localOnly)
+        XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
+
+        let renderedToday = try await todayService.loadTodayExperience(
+            userDisplayName: "Local User",
+            now: fixedNow
+        )
+        XCTAssertEqual(renderedToday.hero.primaryAction.action.target.goalID, created.goalID)
+        XCTAssertEqual(renderedToday.hero.primaryAction.action.target.stepID, created.stepID)
+        XCTAssertTrue(renderedToday.hero.primaryAction.title == "Start now" || renderedToday.hero.primaryAction.title == "Complete")
+
+        let rescheduleAction = TodayInlineAction(
+            kind: .reschedule,
+            title: "Move it",
+            systemImage: "arrow.right.circle",
+            state: .warning,
+            target: TodayActionTarget(goalID: created.goalID, stepID: created.stepID)
+        )
+        let rescheduleResponse = try await todayService.performAction(
+            rescheduleAction,
+            now: fixedNow.addingTimeInterval(60)
+        )
+        let rescheduledSteps = try await repositories.goals.listSteps(goalID: created.goalID)
+        let rescheduledStep = try XCTUnwrap(rescheduledSteps.first(where: { $0.id == created.stepID }))
+        let rescheduleFeedback = try await repositories.feedback.listEvents(goalID: created.goalID)
+        XCTAssertEqual(rescheduleResponse.message?.title, "What changed?")
+        XCTAssertTrue(rescheduleResponse.message?.body.contains("Move it") == true)
+        XCTAssertTrue(rescheduleResponse.message?.body.contains("without blame") == true)
+        XCTAssertEqual(rescheduledStep.state, .planned)
+        XCTAssertEqual(rescheduledStep.timing.timingType, .suggestedNext)
+        XCTAssertNotNil(rescheduledStep.timing.suggestedNextAt)
+        XCTAssertTrue(rescheduleFeedback.contains {
+            if case .delayed(let base, _, _) = $0, base.stepID == created.stepID { return true }
+            return false
+        })
+
+        let missedRecovery = try await lifecycleService.markMissedStepForRecovery(
+            goalID: created.goalID,
+            stepID: created.stepID,
+            now: fixedNow.addingTimeInterval(120)
+        )
+        let recoveryFeedback = try await repositories.feedback.listEvents(goalID: created.goalID)
+        XCTAssertTrue(missedRecovery.asksWhatChanged)
+        XCTAssertEqual(missedRecovery.primaryActionTitle, "Move it")
+        XCTAssertTrue(missedRecovery.secondaryActionTitles.contains("Still counts"))
+        XCTAssertTrue(missedRecovery.secondaryActionTitles.contains("Not needed"))
+        XCTAssertEqual(missedRecovery.updatedStep.state, .planned)
+        XCTAssertEqual(missedRecovery.feedbackEventCount, 2)
+        XCTAssertGreaterThan(recoveryFeedback.count, rescheduleFeedback.count)
+
+        let completeAction = TodayInlineAction(
+            kind: .complete,
+            title: "Complete",
+            systemImage: "checkmark.circle.fill",
+            state: .success,
+            target: TodayActionTarget(goalID: created.goalID, stepID: created.stepID)
+        )
+        let completionResponse = try await todayService.performAction(
+            completeAction,
+            now: fixedNow.addingTimeInterval(180)
+        )
+        let completedSteps = try await reloadedRepositories.goals.listSteps(goalID: created.goalID)
+        let completedStep = try XCTUnwrap(completedSteps.first(where: { $0.id == created.stepID }))
+        let completionEvidence = try await repositories.evidence.listEvidence(goalID: created.goalID)
+        let closureMutation = TodayClosureStageMutation(
+            record: TodayClosureRecord(
+                stepID: created.stepID,
+                goalID: created.goalID,
+                outcome: .completed,
+                occurredAt: fixedNow.addingTimeInterval(180)
+            ),
+            stepTitle: completedStep.title,
+            receiptSaved: true
+        )
+
+        XCTAssertEqual(completionResponse.message?.title, "Completion recorded")
+        XCTAssertEqual(completedStep.state, .completed)
+        XCTAssertTrue(completionEvidence.contains {
+            $0.goalID == created.goalID && $0.stepID == created.stepID && $0.evidenceKind == .stepCompleted
+        })
+        XCTAssertEqual(closureMutation.userVisibleMutation.headline, "Done")
+        XCTAssertTrue(closureMutation.stageMutation.receipt.saved)
+        XCTAssertTrue(closureMutation.stageMutation.proofArtifact.localOnly)
+        XCTAssertFalse(closureMutation.stageMutation.accessibilityAnnouncement.message.isEmpty)
+    }
+
     func testCompletedCommandWritesFeedbackAndCommandExecutionEvidence() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
@@ -360,7 +463,10 @@ private extension TodayCommandHandlerTests {
     }
 
     func makeRepositories() async throws -> AppRepositories {
-        let store = try AmbitionsPersistenceStore(inMemory: true)
+        try await makeRepositories(store: AmbitionsPersistenceStore(inMemory: true))
+    }
+
+    func makeRepositories(store: AmbitionsPersistenceStore) async throws -> AppRepositories {
         return AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
             drafts: SwiftDataGoalDraftRepository(store: store),

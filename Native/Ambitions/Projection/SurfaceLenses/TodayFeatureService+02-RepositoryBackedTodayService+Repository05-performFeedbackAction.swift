@@ -206,8 +206,8 @@ extension RepositoryBackedTodayService {
                 return " The next attempt was deferred to prevent churn."
             }()
             message = TodayInlineMessage(
-                title: "Rescheduled",
-                body: "The step was skipped without turning it into a failure state.\(deferLine)",
+                title: "What changed?",
+                body: "Move it without blame. The Step stays active for the next believable window.\(deferLine)",
                 state: .warning
             )
         case .markNotRelevant:

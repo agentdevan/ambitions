@@ -3,7 +3,7 @@
 Status: Active actionability map for `PRODUCT_EXPERIENCE_CANON.md`  
 Scope: Product-experience canon operationalization, source support inventory, implementation sequencing, and future proof gates  
 Owner posture: Planning and QA bridge, not implementation proof
-Last audited commit: 30da6e81c69146d68d6f1060320533c6d52a62c4
+Last audited commit: P1A final commit recorded in train closeout
 Last audited date: 2026-06-24
 Status owner: Product Experience Canon operationalization
 Update required when: scenario gate status changes, implementation train claims Green/Yellow, Life Capital/pathing/Future Steps/proof/review/onboarding/automation work lands, or evidence paths change
@@ -42,7 +42,7 @@ Future work must treat the canon as behavior law, then prove each claim through 
 
 | Horizon | Action area | Product target | Current posture |
 |---|---|---|---|
-| Foundation Requirement | Reminders, Steps, recurring Steps, quick Capture, calendar-grade Time, search, notifications, completion, missed Step recovery, local persistence, offline core | Make Ambitions useful as a standalone personal planning product | Partial source support exists; runtime/device/release proof is not established |
+| Foundation Requirement | Reminders, Steps, recurring Steps, quick Capture, calendar-grade Time, search, notifications, completion, missed Step recovery, local persistence, offline core | Make Ambitions useful as a standalone personal planning product | Partial source/runtime support exists; P1A adds focused local Step lifecycle proof, while full interaction/device/release proof is not established |
 | Core Runtime Requirement | Full path generation, full-path scheduling, Future Steps, priority, capacity fit, protected seven-day placement, simulation, proof preservation, Life Capital, passive learning, Source Atlas inspection | Make Ambitions behave like a Personal Life OS rather than a task/calendar app | Several model/projection pieces exist; full integrated behavior is missing or unproven |
 | Moat Requirement | Personalized paths per user, Life Capital path shortening, proof/progress transfer, continuous Future Step adjustment, reviews updating future paths, Source Atlas + local runtime composition | Make every user’s Ambitions meaningfully different through local history and context | Mostly future implementation target; do not claim Green |
 | Future Expansion | Shared goals, LinkedIn import, third-party data, richer packs, collaborative proof, household planning, user-owned sync | Approved direction only | Not active scope; requires separate canon or boundary |
@@ -97,6 +97,7 @@ These are source-present or doc-present supports, not full product proof:
 | Local search over goals, captures, proof, feedback, teaching, event history, life context | `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift`, `Native/Ambitions/Projection/OverlayLenses/SearchLens.swift`, `docs/qa/remediation/dossiers/AMB-1196-search-find-act-inspect.md` |
 | You local learning, memory controls, source review, reviews | `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLearningControlsProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextRuntimeProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSourceAtlasPrimaryProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceReviewProjection.swift` |
 | Local persistence source and repository wiring are documented as source-present | `docs/truth/IMPLEMENTATION_TRUTH.md`, `Native/Ambitions/Core/Persistence/`, `Native/Ambitions/App/AppContainerFactory.swift` |
+| Scoped P1A Step lifecycle source/runtime proof | `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`, `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift`, `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift` |
 | Lightweight canon/language validation hooks | `scripts/ambitions-vocabulary-drift-scan.py`, `scripts/canon-language-drift-scan.sh`, `scripts/release-claim-safety-scan.sh` |
 
 ## Partial Support Found
@@ -112,6 +113,7 @@ These are source-present or doc-present supports, not full product proof:
 | Reviews | You reviews projection exists | Week/Month/Year user-launched review shell, export, and approved future path updates are not fully proven |
 | Search | Local search projection exists | Search across Life Capital and Future Steps specifically is not proven |
 | Notifications | Notification authorization copy exists in You; local notification planner and tests cover private generic copy | Device lock-screen delivery, permission/settings UX, tap routing, and release evidence are not proven |
+| Foundation Step lifecycle | Focused P1A source/runtime test covers create, Today projection, reschedule, missed recovery, completion, local evidence, and SwiftData-backed reload | Rendered interaction, accessibility, device, recurrence, notification delivery, and release proof are not established |
 | Automation | Confirmation-aware safety samples and review language exist | Global/per-life-area/per-goal automation levels are not proven |
 
 ## Missing Support / Future Implementation Gaps

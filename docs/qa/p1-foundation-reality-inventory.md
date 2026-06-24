@@ -311,6 +311,32 @@ This inventory updates `docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md` only to ref
 
 No other gate statuses are upgraded because current source/tests do not establish complete user-visible behavior.
 
+## P1A Step Core Reality Addendum
+
+Date: 2026-06-24
+Commit: P1A final commit recorded in train closeout
+Gates targeted: `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_completion_creates_visible_closure`, `foundation_missed_step_asks_what_changed`, `foundation_offline_core_runs_without_account`, `origin_missed_obligation_asks_what_changed_without_shame`
+
+Source changed:
+
+- `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`
+- `Native/Ambitions/Projection/SurfaceLenses/TodayFeatureService+02-RepositoryBackedTodayService+Repository05-performFeedbackAction.swift`
+- `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift`
+
+Proof added:
+
+- Focused source/runtime test creates a simple canonical `Step`, persists it through the SwiftData-backed goal repository, reloads it through a second repository facade, renders it through the current Today service projection, reschedules it through the existing Today action path, records non-shaming missed-Step recovery with `What changed?`, completes it, persists completed state, records local completion evidence, and verifies local-only runtime capability flags.
+- The implementation routes through existing `Goal`, `GoalPlan`, `PlanSection`, `Step`, `AppRepositories`, `RepositoryBackedTodayService`, `RescheduleEngine`, feedback, evidence, and event-ledger primitives. It does not introduce a parallel Step model.
+- Missed/reschedule copy uses `What changed?`, `Move it`, `Still counts`, `Blocked`, and `Not needed`, with no shame/scoring/streak language in the scoped path.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged because the proof is focused source/runtime coverage, not full rendered interaction, device, notification, Dynamic Type, VoiceOver, or visual review proof.
+- P1A does not implement recurring Steps, full Capture, full Time foundation, Life Capital, Future Steps, Make Room/Add with conflict, notification delivery, full goal pathing, reviews, or release readiness.
+- Existing Step behavior still depends on broader `Goal` repository persistence rather than a dedicated final Step repository boundary; this is acceptable for P1A but should be revisited during P1B/P1D architecture hardening.
+
+Gate index updates: none. Current evidence improves scoped source/runtime proof but does not justify upgrading any target gate beyond Partial without rendered interaction/accessibility proof.
+
 ## Recommended Immediate Next Prompt
 
 ```text
