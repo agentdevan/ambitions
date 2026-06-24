@@ -6,6 +6,36 @@ struct ClosureOutcome: Codable, Sendable, Equatable, Hashable, Identifiable {
         case advanced
     }
 
+    enum ProofClassification: String, Codable, Sendable, Equatable, Hashable {
+        case createsClosureProofEvent = "creates_closure_proof_event"
+        case receiptOnlyMutationProof = "receipt_only_mutation_proof"
+    }
+
+    enum ReceiptClassification: String, Codable, Sendable, Equatable, Hashable {
+        case savesLocalReceipt = "saves_local_receipt"
+        case reviewOnlyLocalReceipt = "review_only_local_receipt"
+    }
+
+    enum UndoClassification: String, Codable, Sendable, Equatable, Hashable {
+        case availableFromLocalReceipt = "available_from_local_receipt"
+        case reviewFromLocalReceipt = "review_from_local_receipt"
+
+        var isAvailable: Bool {
+            self == .availableFromLocalReceipt
+        }
+    }
+
+    struct MutationClassification: Codable, Sendable, Equatable, Hashable {
+        let proof: ProofClassification
+        let receipt: ReceiptClassification
+        let undo: UndoClassification
+        let localOnly: Bool
+
+        var requiresSavedReceipt: Bool {
+            receipt == .savesLocalReceipt
+        }
+    }
+
     let closureState: ClosureState
     let title: String
     let meaning: String
@@ -34,8 +64,21 @@ struct ClosureOutcome: Codable, Sendable, Equatable, Hashable, Identifiable {
 
     static let allOptions: [ClosureOutcome] = defaultOptions + advancedOptions
 
+    static func option(for closureState: ClosureState) -> ClosureOutcome? {
+        allOptions.first { $0.closureState == closureState }
+    }
+
     var proofEventKind: ProofEvent.Kind? {
         createsProof ? .closure : nil
+    }
+
+    var mutationClassification: MutationClassification {
+        MutationClassification(
+            proof: createsProof ? .createsClosureProofEvent : .receiptOnlyMutationProof,
+            receipt: optionGroup == .defaultOption ? .savesLocalReceipt : .reviewOnlyLocalReceipt,
+            undo: closureState.undoAvailability.isAvailable ? .availableFromLocalReceipt : .reviewFromLocalReceipt,
+            localOnly: true
+        )
     }
 
     var osClosureOutcome: AmbitionsOSClosureOutcome? {

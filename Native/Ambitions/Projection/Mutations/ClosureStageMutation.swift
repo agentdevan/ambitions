@@ -10,6 +10,7 @@ struct ClosureStageMutation: Equatable, Sendable {
     let userVisibleMutation: UserVisibleMutation
 
     init(record: ClosureMutationRecord, stepTitle: String, receiptSaved: Bool) {
+        let mutationClassification = ClosureOutcome.option(for: record.outcome)?.mutationClassification
         let policy = ClosureEngine().consequence(
             for: record.outcome,
             stepTitle: stepTitle,
@@ -83,7 +84,7 @@ struct ClosureStageMutation: Equatable, Sendable {
                 reasonIfSilent: nil
             ),
             hapticIntent: policy.hapticIntent,
-            undoAvailability: record.outcome.undoAvailability.isAvailable
+            undoAvailability: mutationClassification?.undo.isAvailable == true
                 ? MutationUndo(
                     isAvailable: true,
                     label: policy.undoLabel,

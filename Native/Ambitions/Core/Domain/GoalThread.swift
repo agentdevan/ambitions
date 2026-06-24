@@ -1,6 +1,10 @@
 import Foundation
 
 struct GoalThread: Codable, Sendable, Equatable, Hashable, Identifiable {
+    enum PersistenceAuthority: String, Codable, Sendable, Equatable, Hashable {
+        case projectedFromPersistedGoals = "projected_from_persisted_goals"
+    }
+
     let id: String
     let ambitionID: String
     let lifeAreaID: String?
@@ -28,5 +32,13 @@ struct GoalThread: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.isActive = isActive
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+    }
+
+    var persistenceAuthority: PersistenceAuthority {
+        .projectedFromPersistedGoals
+    }
+
+    var requiresDedicatedThreadRecord: Bool {
+        false
     }
 }

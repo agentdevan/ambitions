@@ -60,6 +60,8 @@ AMB-1199 added a current simulator-only final-proof package on 2026-06-23. It pr
 
 AMB-1200 reconciles that proof ceiling without implementing app fixes. The following AMB-1199 findings remain open and mapped to existing rows:
 
+SCG-009B / AMB-1303 domain model repair mapping note: domain source/test repair is mapped to existing rows only and does not close runtime/device/visual/release evidence gaps. `GoalThread` authority remains explicitly projected from persisted Goals without adding a dedicated thread record, mapped to Goals rows `AMB-ISSUE-1301`-`AMB-ISSUE-1304`, `AMB-ISSUE-1309`, and Today coupling rows `AMB-ISSUE-0004`, `AMB-ISSUE-0005`. `UserSystemProfile` is Codable but classified as derived from local context/settings, with no dedicated profile record or private graph backend, mapped to `AMB-ISSUE-0014`, `AMB-ISSUE-0807`, `AMB-ISSUE-1801`, and `AMB-ISSUE-1802`. `ClosureOutcome` now exposes typed proof/receipt/undo classification consumed by closure stage mutation, mapped to Today/Closure rows `AMB-ISSUE-0004`, `AMB-ISSUE-0005`, `AMB-ISSUE-1001`-`AMB-ISSUE-1007`, plus proof rows `AMB-ISSUE-0014`, `AMB-ISSUE-0807`, `AMB-ISSUE-1801`, and `AMB-ISSUE-1802`. Runtime/device proof remains pending.
+
 | Finding | Register mapping | Current status |
 |---|---|---|
 | `python3 scripts/ambitions-global-shell-completion-gate.py` remains Red. | `AMB-ISSUE-0014`, `AMB-ISSUE-0806`, `AMB-ISSUE-1709` | Still present / visual and release proof blocked. |

@@ -77,6 +77,28 @@ final class CoreDomainCanonicalOwnershipTests: XCTestCase {
 
         XCTAssertEqual(thread.goalIDs, ["goal-b", "goal-a"])
         XCTAssertTrue(thread.isActive)
+        XCTAssertEqual(thread.persistenceAuthority, .projectedFromPersistedGoals)
+        XCTAssertFalse(thread.requiresDedicatedThreadRecord)
+    }
+
+    func testGoalThreadCodableKeepsComputedPersistenceAuthorityOutOfStoredShape() throws {
+        let thread = GoalThread(
+            id: "thread-career",
+            ambitionID: "ambition-1",
+            lifeAreaID: "career",
+            name: "Career thread",
+            goalIDs: ["goal-b", "goal-a", "goal-b"],
+            createdAt: "2026-04-15T12:00:00.000Z",
+            updatedAt: "2026-04-15T12:00:00.000Z"
+        )
+
+        let encoded = try JSONEncoder().encode(thread)
+        let decoded = try JSONDecoder().decode(GoalThread.self, from: encoded)
+        let json = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+
+        XCTAssertEqual(decoded, thread)
+        XCTAssertEqual(decoded.persistenceAuthority, .projectedFromPersistedGoals)
+        XCTAssertFalse(json.contains("persistenceAuthority"))
     }
 
     func testLifeAreaOwnsCanonicalIdentityAndDefinitionBridge() {
@@ -172,6 +194,64 @@ final class CoreDomainCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(ClosureOutcome.defaultOptions.first?.osClosureOutcome, .completed)
     }
 
+    func testClosureOutcomeClassifiesProofReceiptAndUndoForMutationAdapters() throws {
+        let stillCounts = try XCTUnwrap(ClosureOutcome.option(for: .stillCounts))
+        let blocked = try XCTUnwrap(ClosureOutcome.option(for: .blocked))
+
+        XCTAssertEqual(stillCounts.mutationClassification.proof, .createsClosureProofEvent)
+        XCTAssertEqual(stillCounts.mutationClassification.receipt, .savesLocalReceipt)
+        XCTAssertEqual(stillCounts.mutationClassification.undo, .availableFromLocalReceipt)
+        XCTAssertTrue(stillCounts.mutationClassification.localOnly)
+
+        XCTAssertEqual(blocked.mutationClassification.proof, .receiptOnlyMutationProof)
+        XCTAssertEqual(blocked.mutationClassification.receipt, .savesLocalReceipt)
+        XCTAssertEqual(blocked.mutationClassification.undo, .reviewFromLocalReceipt)
+        XCTAssertTrue(blocked.mutationClassification.requiresSavedReceipt)
+
+        let encoded = try JSONEncoder().encode(stillCounts)
+        let decoded = try JSONDecoder().decode(ClosureOutcome.self, from: encoded)
+
+        XCTAssertEqual(decoded, stillCounts)
+        XCTAssertEqual(decoded.mutationClassification, stillCounts.mutationClassification)
+    }
+
+    func testClosureOutcomeClassificationFeedsClosureStageMutationUndo() throws {
+        let now = try XCTUnwrap(DomainTimestamp.date(from: "2026-05-02T09:30:00Z"))
+        let stillCountsMutation = TodayClosureStageMutation(
+            record: ClosureMutationRecord(
+                stepID: "step-domain-classification",
+                goalID: "goal-domain-classification",
+                outcome: .stillCounts,
+                occurredAt: now
+            ),
+            stepTitle: "Write the launch notes",
+            receiptSaved: true
+        )
+        let blockedMutation = TodayClosureStageMutation(
+            record: ClosureMutationRecord(
+                stepID: "step-domain-classification",
+                goalID: "goal-domain-classification",
+                outcome: .blocked,
+                occurredAt: now
+            ),
+            stepTitle: "Write the launch notes",
+            receiptSaved: true
+        )
+
+        XCTAssertTrue(stillCountsMutation.stageMutation.isCanonComplete)
+        XCTAssertEqual(stillCountsMutation.stageMutation.proofArtifact.localOnly, true)
+        XCTAssertEqual(stillCountsMutation.stageMutation.receipt.state, .saved)
+        XCTAssertTrue(stillCountsMutation.stageMutation.undoAvailability.isAvailable)
+
+        XCTAssertFalse(blockedMutation.stageMutation.undoAvailability.isAvailable)
+        XCTAssertEqual(
+            blockedMutation.stageMutation.undoAvailability.unavailableReason,
+            "This closure outcome requires review instead of direct undo."
+        )
+        XCTAssertEqual(blockedMutation.stageMutation.proofArtifact.state, .available)
+        XCTAssertTrue(blockedMutation.stageMutation.receipt.saved)
+    }
+
     func testProofEventOwnsProofProjectionContract() {
         let proof = Proof(
             id: "proof-1",
@@ -233,6 +313,31 @@ final class CoreDomainCanonicalOwnershipTests: XCTestCase {
         XCTAssertTrue(profile.inspectionSummary.contains("User System Profile"))
         XCTAssertTrue(profile.inspectionSummary.contains("Schedule availability"))
         XCTAssertTrue(profile.inspectionSummary.contains("Source, receipt, and reason"))
+        XCTAssertEqual(profile.persistenceAuthority, .derivedFromLocalContextAndSettings)
+        XCTAssertFalse(profile.requiresDedicatedProfileRecord)
+        XCTAssertFalse(profile.privateGraphBackendAllowed)
+    }
+
+    func testUserSystemProfileCodableKeepsDerivedPersistenceClassificationComputed() throws {
+        let profile = UserSystemProfile(
+            displayName: "Devan's System",
+            planningDefaults: ["Schedule availability", "Schedule availability"],
+            privacyPreferences: ["Stored on this device"],
+            permissions: ["Calendar: Review"],
+            accountState: "Local-only",
+            referencePackState: "Not connected"
+        )
+
+        let encoded = try JSONEncoder().encode(profile)
+        let decoded = try JSONDecoder().decode(UserSystemProfile.self, from: encoded)
+        let json = try XCTUnwrap(String(data: encoded, encoding: .utf8))
+
+        XCTAssertEqual(decoded, profile)
+        XCTAssertEqual(decoded.planningDefaults, ["Schedule availability"])
+        XCTAssertEqual(decoded.persistenceAuthority, .derivedFromLocalContextAndSettings)
+        XCTAssertFalse(decoded.requiresDedicatedProfileRecord)
+        XCTAssertFalse(decoded.privateGraphBackendAllowed)
+        XCTAssertFalse(json.contains("privateGraphBackendAllowed"))
     }
 
     private func repoRoot() -> URL {

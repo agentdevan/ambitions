@@ -1,6 +1,10 @@
 import Foundation
 
-struct UserSystemProfile: Sendable, Equatable, Identifiable {
+struct UserSystemProfile: Codable, Sendable, Equatable, Identifiable {
+    enum PersistenceAuthority: String, Codable, Sendable, Equatable, Hashable {
+        case derivedFromLocalContextAndSettings = "derived_from_local_context_and_settings"
+    }
+
     let id: String
     let displayName: String
     let planningDefaults: [String]
@@ -15,6 +19,18 @@ struct UserSystemProfile: Sendable, Equatable, Identifiable {
     let localAuthenticationSettings: [String]
     let accountState: String
     let referencePackState: String
+
+    var persistenceAuthority: PersistenceAuthority {
+        .derivedFromLocalContextAndSettings
+    }
+
+    var requiresDedicatedProfileRecord: Bool {
+        false
+    }
+
+    var privateGraphBackendAllowed: Bool {
+        false
+    }
 
     init(
         id: String = "user-system-profile",
