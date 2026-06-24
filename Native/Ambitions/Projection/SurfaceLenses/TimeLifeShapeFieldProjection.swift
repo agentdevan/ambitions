@@ -219,6 +219,11 @@ extension TimeLifeSuiteProjector {
         let fixedLabel = protectedBlocks == 0 ? "None marked" : countLabel(protectedBlocks, singular: "anchor", plural: "anchors")
         let openLabel = hasScheduleContext ? (openDays == 1 ? "1 open day" : "\(openDays) open days") : "Low context"
         let placementDetail = placementCandidate.map { "Placement candidate: \($0.title)." } ?? "Placement waits for a real Step."
+        let scheduledBlock = weekDays
+            .flatMap(\.blocks)
+            .first { block in
+                block.timingLabel.localizedCaseInsensitiveContains("Scheduled")
+            }
         return [
             TimeCalendarRow(
                 id: "time.calendar.now",
@@ -246,6 +251,15 @@ extension TimeLifeSuiteProjector {
                 detail: hasScheduleContext ? placementDetail : "Open windows need local Steps, protected time, or calendar context before placement.",
                 visualState: hasScheduleContext && openDays > 0 ? .selected : .default,
                 isOperational: hasScheduleContext && openDays > 0 && placementCandidate != nil
+            ),
+            TimeCalendarRow(
+                id: "time.calendar.scheduled-step",
+                kind: .scheduledStep,
+                title: "Scheduled Step",
+                value: scheduledBlock?.timingLabel ?? "None",
+                detail: scheduledBlock.map { "\($0.title). \($0.detail)" } ?? "Local Steps appear here only after a real Step is scheduled.",
+                visualState: scheduledBlock == nil ? .default : .selected,
+                isOperational: scheduledBlock != nil
             ),
             TimeCalendarRow(
                 id: "time.calendar.protected-window",

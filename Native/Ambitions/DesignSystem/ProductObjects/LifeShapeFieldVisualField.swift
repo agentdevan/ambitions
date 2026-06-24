@@ -368,6 +368,11 @@ struct LifeShapeFieldVisualField: View {
                         .fill(theme.colors.strokeSubtle.opacity(0.28))
                         .frame(height: 1)
                 }
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("\(row.title). \(row.accessibilitySummary)")
+                .accessibilityValue(row.isOperational ? "Available" : "Staged")
+                .accessibilityHint(row.isOperational ? "Time foundation signal is available." : "Time foundation signal is staged until local context exists.")
+                .accessibilityIdentifier(row.id)
             }
         }
         .padding(.horizontal, theme.spacing.sm)
@@ -379,7 +384,7 @@ struct LifeShapeFieldVisualField: View {
             RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .stroke(theme.colors.strokeSubtle.opacity(colorSchemeContrast == .increased ? 0.78 : 0.34), lineWidth: 1)
         }
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .contain)
         .accessibilityLabel("Time horizons")
         .accessibilityValue(horizonRows.map(\.accessibilitySummary).joined(separator: ". "))
         .accessibilityIdentifier("time.life-shape-field.horizon-strip")
@@ -428,6 +433,7 @@ struct LifeShapeFieldVisualField: View {
             "time.calendar.now",
             "time.calendar.fixed-point",
             "time.calendar.open-window",
+            "time.calendar.scheduled-step",
             "time.calendar.protected-window",
             "time.calendar.pressure",
             "time.calendar.buffer",

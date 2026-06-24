@@ -10,6 +10,9 @@ struct DemoSeedPipeline {
         var state = try await repositories.appState.loadState()
 
         if !force, !existingGoals.isEmpty, state.lastSeedVersion == Self.seedVersion {
+            #if DEBUG
+            try await applyRenderedTimeFoundationSeedIfNeeded()
+            #endif
             return
         }
 
@@ -21,6 +24,9 @@ struct DemoSeedPipeline {
         try await repositories.goals.saveGoals(seededGoals)
         try await repositories.drafts.saveDrafts(seededDrafts)
         try await repositories.evidence.saveEvidence(seededEvidence)
+        #if DEBUG
+        try await applyRenderedTimeFoundationSeedIfNeeded()
+        #endif
 
         for (goalID, events) in Dictionary(grouping: seededFeedback, by: { $0.0 }) {
             try await repositories.feedback.saveEvents(events.map { $0.1 }, goalID: goalID)
@@ -132,4 +138,136 @@ private extension DemoSeedPipeline {
             return fixture.input.feedbackHistory.map { (goalID, $0) }
         }
     }
+
+    #if DEBUG
+    func applyRenderedTimeFoundationSeedIfNeeded() async throws {
+        guard ProcessInfo.processInfo.environment["AMBITIONS_UI_TIME_FOUNDATION_SEED"] == "1" else {
+            return
+        }
+
+        let now = Date()
+        let lifecycle = SimpleStepLifecycleService(
+            repositories: repositories,
+            idProvider: { "p1e-rendered-time-foundation" }
+        )
+        let step = try await lifecycle.createSimpleStep(
+            title: "Mail the library card form",
+            summary: "P1E local Step scheduled through the Time foundation path.",
+            now: now
+        )
+        let windowStart = now.addingTimeInterval(2 * 60 * 60)
+        _ = try await lifecycle.placeStepInTime(
+            goalID: step.goalID,
+            stepID: step.stepID,
+            windowStart: windowStart,
+            windowEnd: windowStart.addingTimeInterval(30 * 60),
+            now: now.addingTimeInterval(60)
+        )
+        try await repositories.goals.saveGoals([
+            makeRenderedTimeFoundationFixedPointGoal(now: now)
+        ])
+    }
+
+    func makeRenderedTimeFoundationFixedPointGoal(now: Date) -> Goal {
+        let iso = ISO8601DateFormatter()
+        iso.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let createdAt = iso.string(from: now)
+        let dueAt = iso.string(from: now.addingTimeInterval(24 * 60 * 60))
+        let actor = GoalActor.localOwner
+        let timing = GoalTiming(
+            tempo: .deadlineBased,
+            timingType: .dueAt,
+            startsOn: createdAt,
+            dueAt: dueAt,
+            targetBy: nil,
+            windowStart: nil,
+            windowEnd: nil,
+            suggestedNextAt: nil,
+            repeatEveryDays: nil,
+            progressReviewCadenceDays: nil
+        )
+        let step = Step(
+            id: "p1e-fixed-step",
+            sectionID: "p1e-fixed-section",
+            title: "Attend the school conference",
+            summary: "Fixed point used to prove rendered Time foundation semantics.",
+            type: .actionUnit,
+            state: .planned,
+            owner: actor,
+            timing: timing,
+            dependencyStepIDs: [],
+            isOptional: false,
+            isRepeatable: false,
+            evidenceRequired: false,
+            successSignals: ["Fixed point appears in Time"],
+            actionability: StepActionability(
+                action: "Attend the school conference",
+                completionDefinition: "The fixed point was attended or intentionally closed.",
+                evidenceOfCompletion: ["Local closure receipt"],
+                fallbackMicroStep: "Review the conference note",
+                contextRequirements: ["fixed time"]
+            )
+        )
+        let section = PlanSection(
+            id: "p1e-fixed-section",
+            goalID: "p1e-fixed-goal",
+            title: "Fixed point",
+            summary: "One fixed local commitment.",
+            kind: .activeSteps,
+            orderIndex: 0,
+            steps: [step]
+        )
+        let plan = GoalPlan(
+            id: "p1e-fixed-plan",
+            goalID: "p1e-fixed-goal",
+            version: goalEnginePlanVersion,
+            generatedAt: createdAt,
+            summary: "A local fixed point for rendered Time proof.",
+            strategy: PlanningStrategy(
+                strategyKind: .sequential,
+                allowParallelSteps: false,
+                maxActiveSteps: 1,
+                preferredSectionOrder: [.activeSteps],
+                defaultStepType: .actionUnit,
+                autoGenerateReviewSection: false,
+                preferShortSteps: true,
+                revisitCadenceDays: 7
+            ),
+            sections: [section],
+            assumptions: [],
+            lint: PlanLintResult(goalID: "p1e-fixed-goal", planVersion: goalEnginePlanVersion, isValid: true, issueCount: 0, issues: [])
+        )
+        return Goal(
+            schemaVersion: goalEngineSchemaVersion,
+            id: "p1e-fixed-goal",
+            revision: 1,
+            createdAt: createdAt,
+            updatedAt: createdAt,
+            state: .active,
+            title: "School conference",
+            summary: "A local fixed point in the Time foundation.",
+            mode: .project,
+            relationshipKind: .independent,
+            actor: actor,
+            parentGoalID: nil,
+            childGoalIDs: [],
+            supportGoalIDs: [],
+            tags: ["p1e-rendered-time-foundation"],
+            timing: timing,
+            planningStrategy: plan.strategy,
+            progressStrategy: ProgressStrategy(
+                metricKind: .stepCompletion,
+                rollupMethod: .ratio,
+                targetStepCount: 1,
+                targetEvidenceCount: nil,
+                targetMinutes: nil,
+                supportsUntimedProgress: true,
+                countsChildGoals: false,
+                countsSupportGoals: false
+            ),
+            plan: plan,
+            lifeGraph: nil
+        )
+    }
+    #endif
 }

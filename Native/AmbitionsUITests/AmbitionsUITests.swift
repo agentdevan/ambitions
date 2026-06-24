@@ -1910,6 +1910,72 @@ final class AmbitionsUITests: XCTestCase {
         captureTimeScreenshot(named: "amb-1176-time-accessibility-xxxl-reduce-motion", in: accessibilityApp)
     }
 
+    func testP1ERenderedTimeFoundationShowsProjectedFixedOpenAndScheduledStepSemantics() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AMBITIONS_UI_TIME_FOUNDATION_SEED": "1",
+                "AmbitionsScreenshotMode": "YES"
+            ]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: app))
+        dismissContinuityReceiptIfPresent(in: app)
+        XCTAssertTrue(app.descendants(matching: .any)["time.screen"].waitForExistence(timeout: 15))
+        XCTAssertTrue(app.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.now", in: app, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.fixed-point", in: app, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.open-window", in: app, maxAttempts: 10))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.scheduled-step", in: app, maxAttempts: 10))
+
+        let nowRow = app.descendants(matching: .any)["time.calendar.now"]
+        let fixedRow = app.descendants(matching: .any)["time.calendar.fixed-point"]
+        let openRow = app.descendants(matching: .any)["time.calendar.open-window"]
+        let scheduledRow = app.descendants(matching: .any)["time.calendar.scheduled-step"]
+        let nowText = accessibilityText(for: nowRow)
+        let fixedText = accessibilityText(for: fixedRow)
+        let openText = accessibilityText(for: openRow)
+        let scheduledText = accessibilityText(for: scheduledRow)
+
+        XCTAssertTrue(nowText.localizedCaseInsensitiveContains("Now"), nowText)
+        XCTAssertTrue(fixedText.localizedCaseInsensitiveContains("fixed"), fixedText)
+        XCTAssertTrue(openText.localizedCaseInsensitiveContains("open"), openText)
+        XCTAssertTrue(scheduledText.localizedCaseInsensitiveContains("Scheduled"), scheduledText)
+        XCTAssertTrue(scheduledText.localizedCaseInsensitiveContains("Mail the library card form"), scheduledText)
+        XCTAssertFalse(scheduledText.localizedCaseInsensitiveContains("capture."))
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "7 open days")).firstMatch.exists)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "AI recommends")).firstMatch.exists)
+        XCTAssertFalse(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "optimized")).firstMatch.exists)
+
+        captureTimeScreenshot(named: "p1e-rendered-time-foundation", in: app)
+        app.terminate()
+
+        let lowContextApp = makeApp(
+            bootstrapMode: "preview",
+            launchURL: "ambitions://tab/time",
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES"
+            ]
+        )
+        lowContextApp.launch()
+
+        XCTAssertTrue(waitForSelectedTab("Time", in: lowContextApp))
+        dismissContinuityReceiptIfPresent(in: lowContextApp)
+        XCTAssertTrue(lowContextApp.descendants(matching: .any)["time.life-shape-field"].waitForExistence(timeout: 15))
+        XCTAssertTrue(scrollUntilElementExists("time.calendar.open-window", in: lowContextApp, maxAttempts: 10))
+        let lowContextOpenRow = lowContextApp.descendants(matching: .any)["time.calendar.open-window"]
+        let lowContextOpenText = accessibilityText(for: lowContextOpenRow)
+        let lowContextScheduledText = accessibilityText(for: lowContextApp.descendants(matching: .any)["time.calendar.scheduled-step"])
+        XCTAssertTrue(lowContextOpenText.localizedCaseInsensitiveContains("Low context"))
+        XCTAssertTrue(lowContextOpenText.localizedCaseInsensitiveContains("local"))
+        XCTAssertFalse(lowContextOpenText.localizedCaseInsensitiveContains("7 open days"))
+        XCTAssertFalse(lowContextOpenText.localizedCaseInsensitiveContains("optimized"))
+        XCTAssertFalse(lowContextScheduledText.localizedCaseInsensitiveContains("Mail the library card form"))
+    }
+
     private func makeApp(
         bootstrapMode: String,
         launchURL: String? = nil,
@@ -1929,6 +1995,20 @@ final class AmbitionsUITests: XCTestCase {
         app.launchArguments += ["-\(key)", value]
         }
         return app
+    }
+
+    private func accessibilityText(for element: XCUIElement) -> String {
+        var parts = [element.label]
+        if let value = element.value as? String {
+            parts.append(value)
+        }
+        if let placeholderValue = element.placeholderValue, placeholderValue.isEmpty == false {
+            parts.append(placeholderValue)
+        }
+        return parts
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { $0.isEmpty == false }
+            .joined(separator: " ")
     }
 
     private func assertAMB1174VisualCopyGuards(

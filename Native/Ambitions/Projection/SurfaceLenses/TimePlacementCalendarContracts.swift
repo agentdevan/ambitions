@@ -43,6 +43,7 @@ enum TimeCalendarRowKind: String, Sendable, Hashable {
     case now
     case fixedPoint
     case openWindow
+    case scheduledStep
     case protectedWindow
     case pressure
     case buffer
@@ -62,6 +63,8 @@ enum TimeCalendarRowKind: String, Sendable, Hashable {
             "pin"
         case .openWindow:
             "sun.max"
+        case .scheduledStep:
+            "checkmark.circle"
         case .protectedWindow:
             "lock"
         case .pressure:

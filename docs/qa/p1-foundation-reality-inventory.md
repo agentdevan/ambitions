@@ -579,6 +579,58 @@ Remaining gaps:
 
 Gate index updates: none. Current evidence strengthens scoped source/runtime support for Time foundation, but all targeted scenario gates remain Partial because rendered interaction/accessibility, device, visual, no-network workflow, and release evidence are not current.
 
+## P1E Rendered Time Foundation Proof Addendum
+
+Date: 2026-06-24
+Baseline commit: `9f44d8c7849e21641b27e430168211702730ac90`
+Final commit: P1E final commit recorded in train closeout
+Gates targeted: `foundation_calendar_planning_shows_fixed_points_and_open_windows`, `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_quick_capture_saves_without_network`, `foundation_offline_core_runs_without_account`, `origin_many_goals_many_obligations_today_remains_clear`; `time_shows_whether_goal_fits` remains limited qualitative support only
+
+Source changed:
+
+- `Native/Ambitions/Core/Persistence/DemoSeedPipeline.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift`
+- `Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeFieldProjection.swift`
+- `Native/Ambitions/Projection/SurfaceLenses/TimePlacementCalendarContracts.swift`
+- `Native/AmbitionsUITests/AmbitionsUITests.swift`
+
+Rendered Time proof added:
+
+- The normal rendered Time route `TimeSurface -> TimeViewModel -> RepositoryBackedTimeService -> TimeProjectionService -> TimeLifeSuiteProjector -> LifeShapeFieldView` now has focused UI proof.
+- A DEBUG-only UI test seed creates a local Step through `SimpleStepLifecycleService.createSimpleStep(...)`, schedules it through `SimpleStepLifecycleService.placeStepInTime(...)`, and adds a local fixed-point goal through the existing goal repository path.
+- `testP1ERenderedTimeFoundationShowsProjectedFixedOpenAndScheduledStepSemantics` opens Time through the normal shell route and verifies rendered fixed point, open window, and scheduled local Step rows.
+
+Fixed/open/scheduled Step UI proof added:
+
+- Fixed point proof: the rendered row `time.calendar.fixed-point` is visible and exposes fixed-point summary semantics.
+- Open window proof: the rendered row `time.calendar.open-window` is visible and exposes open-window semantics without converting Time into a calendar clone.
+- Scheduled Step proof: the rendered row `time.calendar.scheduled-step` is visible and exposes the scheduled local Step title `Mail the library card form` after scheduling through the local Step/Time path.
+
+Low-context/no-fake-capacity proof added:
+
+- The focused UI test launches a low-context preview route and verifies the open-window row remains `Low context` and local.
+- The test asserts the low-context route does not fabricate `7 open days`, `optimized`, or AI recommendation claims.
+- The scheduled Step row remains staged in the low-context route and does not leak the seeded Step.
+
+Accessibility proof added:
+
+- LifeShape horizon rows now expose explicit row-level accessibility labels, values, hints, and identifiers for fixed point, open window, scheduled Step, and related Time rows.
+- The focused UI test queries rendered accessibility identifiers and labels for fixed/open/scheduled Step semantics.
+
+Screenshot/visual proof status:
+
+- The focused UI test attaches screenshot `p1e-rendered-time-foundation` in the result bundle.
+- This is Ready for Visual Review evidence only. No Visual Green, Release Green, device validation, manual visual approval, or release readiness is claimed.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1E proves scoped rendered Time interaction/accessibility for fixed/open/scheduled local Step semantics, but full calendar planning still needs broader permission/device, no-network workflow, persistence/relaunch, visual review, and release evidence.
+- Reminder-like create/complete/reschedule remains Partial; P1E proves scheduled Step rendering, not a full rendered create/complete/reschedule flow.
+- Quick Capture and offline/no-account gates receive supporting evidence only through the preserved local Step path and low-context/no-network-claim boundaries; this train does not prove full no-network device workflow or rendered Capture save.
+- `time_shows_whether_goal_fits` remains Partial qualitative support only; no full fit simulation, over-capacity warning, Future Steps, Make Room, Add with conflict, Life Capital, Source Atlas expansion, notification delivery, visual redesign, account work, R2 work, or release/device validation is claimed.
+
+Gate index updates: none. The evidence is scoped rendered interaction/accessibility support for P1D Time foundation, not full gate completion.
+
 ## Recommended Immediate Next Prompt
 
 ```text
