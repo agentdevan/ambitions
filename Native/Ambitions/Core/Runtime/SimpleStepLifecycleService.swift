@@ -19,6 +19,14 @@ struct CaptureStepRoutingResult: Sendable, Equatable {
     let stepTitle: String
 }
 
+struct ScheduledStepPlacementResult: Sendable, Equatable {
+    let goalID: String
+    let stepID: String
+    let windowStart: String
+    let windowEnd: String
+    let updatedStep: Step
+}
+
 struct MissedStepRecoveryResult: Sendable, Equatable {
     let goalID: String
     let stepID: String
@@ -450,6 +458,91 @@ struct SimpleStepLifecycleService: Sendable {
             stepID: stepID,
             isPaused: false,
             generatedOccurrences: step.map { Self.scheduledOccurrences(goal: resumed, step: $0, from: now, limit: 1) } ?? []
+        )
+    }
+
+    func placeStepInTime(
+        goalID: String,
+        stepID: String,
+        windowStart: Date,
+        windowEnd: Date,
+        now: Date
+    ) async throws -> ScheduledStepPlacementResult {
+        guard var goal = try await repositories.goals.goal(id: goalID),
+              let selectedStep = goal.plan?.sections.flatMap(\.steps).first(where: { $0.id == stepID }) else {
+            throw SimpleStepLifecycleServiceError.stepNotFound
+        }
+
+        let startValue = Self.iso.string(from: windowStart)
+        let endValue = Self.iso.string(from: max(windowEnd, windowStart))
+        goal = update(goal: goal, stepID: stepID, now: now) { step in
+            Step(
+                id: step.id,
+                sectionID: step.sectionID,
+                title: step.title,
+                summary: step.summary,
+                type: step.type,
+                state: step.state,
+                owner: step.owner,
+                timing: GoalTiming(
+                    tempo: .targetWindow,
+                    timingType: .suggestedNext,
+                    startsOn: step.timing.startsOn,
+                    dueAt: nil,
+                    targetBy: nil,
+                    windowStart: startValue,
+                    windowEnd: endValue,
+                    suggestedNextAt: startValue,
+                    repeatEveryDays: step.timing.repeatEveryDays,
+                    progressReviewCadenceDays: step.timing.progressReviewCadenceDays
+                ),
+                dependencyStepIDs: step.dependencyStepIDs,
+                isOptional: step.isOptional,
+                isRepeatable: step.isRepeatable,
+                evidenceRequired: step.evidenceRequired,
+                successSignals: step.successSignals,
+                actionability: step.actionability
+            )
+        }
+        try await repositories.goals.saveGoals([goal])
+
+        let updatedStep = try await repositories.goals.listSteps(goalID: goalID)
+            .first(where: { $0.id == stepID }) ?? selectedStep
+        try? await repositories.eventLedger.append(
+            EventLedgerEntry(
+                id: "ledger.time.step.placed.\(goalID).\(stepID).\(startValue)",
+                kind: .itemScheduled,
+                occurredAt: Self.iso.string(from: now),
+                source: .time,
+                goalID: goalID,
+                title: "Step placed in Time",
+                summary: "Local Step placement saved without calendar or network write.",
+                semanticState: "local_time_window",
+                tone: .neutral,
+                trust: EventLedgerTrustMetadata(isUserConfirmed: true),
+                evidenceReferences: [
+                    EventLedgerEvidenceReference(
+                        id: stepID,
+                        kind: .goal,
+                        occurredAt: startValue,
+                        summary: updatedStep.title
+                    )
+                ],
+                metadata: [
+                    "stepID": stepID,
+                    "windowStart": startValue,
+                    "windowEnd": endValue
+                ],
+                privacy: .standard
+            )
+        )
+
+        return ScheduledStepPlacementResult(
+            goalID: goalID,
+            stepID: stepID,
+            windowStart: startValue,
+            windowEnd: endValue,
+            updatedStep: updatedStep
         )
     }
 

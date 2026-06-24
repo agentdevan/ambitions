@@ -96,6 +96,9 @@ extension RepositoryBackedTimeService {
         if let targetBy = timing.targetBy {
             return "Protect \(shortDate(targetBy))"
         }
+        if let windowStart = timing.windowStart {
+            return "Scheduled \(shortDate(windowStart))"
+        }
         if let suggestedNextAt = timing.suggestedNextAt {
             return "Flex \(shortDate(suggestedNextAt))"
         }
@@ -106,7 +109,7 @@ extension RepositoryBackedTimeService {
     }
 
     func plannedDate(for timing: GoalTiming) -> Date? {
-        parseDate(timing.dueAt ?? timing.targetBy ?? timing.suggestedNextAt ?? timing.startsOn)
+        parseDate(timing.dueAt ?? timing.targetBy ?? timing.windowStart ?? timing.suggestedNextAt ?? timing.startsOn)
     }
 
     func blockKind(for timing: GoalTiming) -> TimeWeekBlockKind {

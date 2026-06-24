@@ -520,22 +520,81 @@ Remaining gaps:
 
 Gate index updates: none. Current evidence strengthens scoped source/runtime support, but all targeted scenario gates remain Partial because full user-visible, accessibility, no-network, device, and release evidence is not current.
 
+## P1D Time Foundation Addendum
+
+Date: 2026-06-24
+Baseline commit: `122c1f6f4d738332fbc052e86a630ab11b96c394`
+Final commit: P1D final commit recorded in train closeout
+Gates targeted: `foundation_calendar_planning_shows_fixed_points_and_open_windows`, `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_quick_capture_saves_without_network`, `foundation_offline_core_runs_without_account`, `origin_many_goals_many_obligations_today_remains_clear`, `time_shows_whether_goal_fits` as limited qualitative scaffolding only
+
+Source changed:
+
+- `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`
+- `Native/Ambitions/Projection/SurfaceLenses/TimeLifeShapeFieldProjection.swift`
+- `Native/Ambitions/Projection/SurfaceLenses/TimePlacementCandidateProjection.swift`
+- `Native/Ambitions/Projection/SurfaceLenses/TimeProjectionUtilityDatePressure.swift`
+- `Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift`
+- `Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift`
+
+Time foundation proof added:
+
+- Time now projects fixed points, open windows, and locally scheduled simple Steps through the existing `Goal`, `GoalPlan`, `PlanSection`, `Step`, `GoalTiming`, SwiftData repository, and Time projection paths.
+- The scoped runtime can place an existing local Step in Time by writing `windowStart`, `windowEnd`, and `suggestedNextAt` on the existing Step timing model instead of creating a parallel schedule model.
+- Time placement writes a local `itemScheduled` ledger event from Time with no calendar write and no network/account/R2/Source Atlas dependency.
+
+Fixed point and open window proof added:
+
+- `testP1DTimeProjectsFixedPointsOpenWindowsAndScheduledLocalSteps` proves a deadline-backed local Step appears as a fixed Time block and that open-window rows remain distinguishable from fixed time.
+- Low-context Time now labels open windows as `Low context` until local Steps, protected time, or calendar context exist, avoiding fake capacity/open-time claims.
+- Existing `TimeProjectionServiceTests` were rerun after replacing the obsolete raw-Capture placement assertion with the stricter local-Step-only placement contract.
+
+Scheduled Step placement proof added:
+
+- `SimpleStepLifecycleService.placeStepInTime(...)` persists scheduled local Step placement through the current local Step lifecycle and repository path.
+- Scheduled local Steps use the existing Time week context and placement candidate projection, with timing copy labeled `Scheduled` from the persisted window start.
+- Recurrence scaffolding is preserved: scheduled placement does not erase repeat cadence or repeatable Step metadata, and the P1B recurrence regression still passes.
+
+Capture-created Step in Time proof added:
+
+- `testP1DCaptureCreatedStepAppearsInTimeOnlyAfterLocalStepScheduling` proves a P1C Capture-created Step can appear in Time after it is scheduled through the current local Step path.
+- Raw Capture records no longer become synthetic Time placement candidates with `capture.<id>` step IDs; Time waits for a real local Step before placement.
+
+Persistence/offline proof added:
+
+- Focused P1D tests use in-memory SwiftData stores and repository reload paths to verify scheduled Step timing persists locally.
+- Tests assert `AmbitionsRuntimeCapabilities.currentLocalRuntime` remains local-only with no remote intelligence backend.
+- P1A runtime, P1B recurrence, and P1C Capture local-save regressions were rerun and passed.
+
+UI/accessibility proof status:
+
+- No SwiftUI files were changed in P1D.
+- No rendered Time interaction proof, screenshot proof, manual visual review, VoiceOver runtime pass, Dynamic Type sweep, Reduce Motion/Reduce Transparency/Increase Contrast sweep, device validation, Visual Green, Interaction Green, or Release Green is claimed.
+- Existing projection models retain accessibility summary strings for fixed point and open window rows, but this train does not claim rendered accessibility proof.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1D proves scoped source/runtime Time foundation, but `foundation_calendar_planning_shows_fixed_points_and_open_windows` still needs rendered Time proof with accessibility queries before Interaction Green.
+- Full capacity simulation, full goal fit, Future Steps, Make Room, Add with conflict, Life Capital, Source Atlas expansion, reviews, notification delivery, visual redesign, account work, R2 work, device proof, and release proof remain out of scope and unclaimed.
+- `time_shows_whether_goal_fits` remains Partial only as qualitative LifeShape/capacity scaffolding; no full fit simulation or over-capacity warning is claimed.
+
+Gate index updates: none. Current evidence strengthens scoped source/runtime support for Time foundation, but all targeted scenario gates remain Partial because rendered interaction/accessibility, device, visual, no-network workflow, and release evidence are not current.
+
 ## Recommended Immediate Next Prompt
 
 ```text
-From /Users/devan/Documents/GitHub/ambitions on main, run P1D Time Foundation.
+From /Users/devan/Documents/GitHub/ambitions on main, run P1E Rendered Time Foundation Proof.
 
 Work only on main. Do not create branches or PRs.
 
-Scope: prove fixed points, open windows, protected windows, and real Step placement boundaries in Time without silent calendar writes.
+Scope: produce focused rendered Time proof for the P1D Time foundation without broad redesign.
 
 Use active truth files and retained skills first. Preserve Today / Goals / Time / You as the only persistent surfaces, Capture as global composer, Motion as behavior, Trust as Proof / Source / Privacy / History / Receipts, and local-first/offline core law.
 
-Do not implement Life Capital, Future Steps, full goal pathing, Make Room/Add with conflict, Source Atlas expansion, recurring Step UI, visual redesign, account work, R2 work, or release claims.
+Do not implement Life Capital, Future Steps, full goal pathing, Make Room/Add with conflict, Source Atlas expansion, recurring Step UI, visual redesign, account work, R2 work, notification delivery, or release claims.
 
 Required gate: `foundation_calendar_planning_shows_fixed_points_and_open_windows`.
 
-Before edits, prove active runtime/source ownership. Keep new implementation under canonical owners only: Core/Time, Core/Permissions, Core/Persistence, Projection/SurfaceLenses, Projection/Mutations, Surfaces/Time, Trust, and tests.
+Before edits, prove active runtime/source ownership. Keep new implementation under canonical owners only: Projection/SurfaceLenses, Surfaces/Time, DesignSystem/ProductObjects, Trust, Quality, and tests.
 
-Validation: focused Time projection/runtime tests, product experience gate check, skill registry check, vocabulary/copy/claim/local-first scans, unsupported-claim scan on changed files, and git diff --check. Do not claim Interaction Green, Visual Green, or Release Green without current proof.
+Validation: focused Time UI/accessibility tests, P1D runtime regression, product experience gate check, skill registry check, vocabulary/copy/claim/local-first scans, unsupported-claim scan on changed files, and git diff --check. Do not claim Visual Green or Release Green without current proof.
 ```

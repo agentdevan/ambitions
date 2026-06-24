@@ -117,20 +117,21 @@ final class TimeProjectionServiceTests: XCTestCase {
         XCTAssertTrue(timeState.lifeSuite.field.calendarRows.contains { $0.kind == .openWindow && $0.detail.contains(placement.title) })
     }
 
-    func testFreeFloatingStepCaptureCanBecomeTimePlacementCandidateWithoutInventingStep() async throws {
+    func testFreeFloatingStepCaptureWaitsForLocalStepBeforeTimePlacementCandidate() async throws {
         let repositories = try await makeRepositories()
         try await repositories.captures.saveCaptures([makeCommitmentCapture()])
         let service = RepositoryBackedTimeService(repositories: repositories)
 
         let timeState = try await service.loadTimeSurfaceState(now: fixedDate)
-        let placement = try XCTUnwrap(timeState.lifeSuite.field.placementCandidate)
 
-        XCTAssertEqual(placement.kind, .freeFloating)
-        XCTAssertEqual(placement.stepID, "capture.capture-commitment-time-change")
-        XCTAssertNil(placement.goalID)
-        XCTAssertTrue(timeState.lifeSuite.field.canPlaceStep)
-        XCTAssertFalse(placement.stepID.hasPrefix("step."))
-        XCTAssertTrue(timeState.lifeSuite.field.calendarRows.contains { $0.kind == .openWindow && $0.detail.contains(placement.title) })
+        XCTAssertNil(timeState.lifeSuite.field.placementCandidate)
+        XCTAssertFalse(timeState.lifeSuite.field.canPlaceStep)
+        XCTAssertEqual(timeState.lifeSuite.field.placementUnavailableReason, "Create or select a Step before placing time.")
+        XCTAssertTrue(timeState.lifeSuite.shapes[1].facts.contains("1 capture needs a place."))
+        XCTAssertFalse(
+            timeState.lifeSuite.field.calendarRows
+                .contains { $0.detail.contains("capture.capture-commitment-time-change") }
+        )
     }
 
     func testF10TimeLifeSuiteProjectsDayWeekAndLifeShapeWithoutCalendarClone() async throws {

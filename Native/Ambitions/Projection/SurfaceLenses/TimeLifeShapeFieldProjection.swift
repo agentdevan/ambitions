@@ -18,6 +18,7 @@ extension TimeLifeSuiteProjector {
         let openDays = weekDays.filter { $0.level == .open }.count
         let protectedBlocks = weekDays.flatMap(\.blocks).filter { $0.kind == .protected || $0.kind == .fixed }.count
         let totalBlocks = weekDays.flatMap(\.blocks).count
+        let hasScheduleContext = mode != .empty || calendarAwareness.status == .calendarAware
         let capacityFit: LifeShapeCapacityFit
         if mode == .empty {
             capacityFit = .open
@@ -44,7 +45,8 @@ extension TimeLifeSuiteProjector {
         let weekCapacityStatement = Self.weekCapacityStatement(
             activeGoalCount: activeGoalCount,
             openDays: openDays,
-            protectedBlocks: protectedBlocks
+            protectedBlocks: protectedBlocks,
+            hasScheduleContext: hasScheduleContext
         )
         let renderState = lifeShapeRenderState(
             capacityFit: capacityFit,
@@ -65,11 +67,13 @@ extension TimeLifeSuiteProjector {
                 LifeShapeSegment(
                     kind: .openTime,
                     detail: placementCandidate == nil
-                        ? "Open windows stay visible; no Step is selected for placement."
+                        ? (hasScheduleContext
+                            ? "Open windows stay visible; no Step is selected for placement."
+                            : "Open windows need local schedule context before Time can place work.")
                         : "Open windows can place \(placementCandidate?.title ?? "the selected Step").",
-                    valueLabel: openDays == 1 ? "1 open day" : "\(openDays) open days",
-                    weight: weekDays.isEmpty ? 0 : Double(openDays) / Double(weekDays.count),
-                    visualState: openDays > 0 ? .selected : .default
+                    valueLabel: hasScheduleContext ? (openDays == 1 ? "1 open day" : "\(openDays) open days") : "Low context",
+                    weight: hasScheduleContext && weekDays.isEmpty == false ? Double(openDays) / Double(weekDays.count) : 0,
+                    visualState: hasScheduleContext && openDays > 0 ? .selected : .default
                 ),
                 LifeShapeSegment(
                     kind: .goalTime,
@@ -134,21 +138,21 @@ extension TimeLifeSuiteProjector {
                     capacityStatement: weekCapacityStatement,
                     sourceDetail: week?.provenanceLabel ?? sourceDetail
                 ),
-	                .month: LifeShapeReading(
-	                    horizon: .month,
-	                    title: "Month shape",
-	                    summary: life?.summary ?? "The longer Time arc is quiet until active goals shape it.",
-	                    capacityStatement: life?.capacityLabel ?? "Capacity: qualitative only.",
-	                    sourceDetail: life?.provenanceLabel ?? sourceDetail
-	                ),
-	                .year: LifeShapeReading(
-	                    horizon: .year,
-	                    title: "Year shape",
-	                    summary: life?.summary ?? "The year stays directional until active goals shape it.",
-	                    capacityStatement: life?.capacityLabel ?? "Capacity: qualitative only.",
-	                    sourceDetail: life?.provenanceLabel ?? sourceDetail
-	                )
-	            ],
+                .month: LifeShapeReading(
+                    horizon: .month,
+                    title: "Month shape",
+                    summary: life?.summary ?? "The longer Time arc is quiet until active goals shape it.",
+                    capacityStatement: life?.capacityLabel ?? "Capacity: qualitative only.",
+                    sourceDetail: life?.provenanceLabel ?? sourceDetail
+                ),
+                .year: LifeShapeReading(
+                    horizon: .year,
+                    title: "Year shape",
+                    summary: life?.summary ?? "The year stays directional until active goals shape it.",
+                    capacityStatement: life?.capacityLabel ?? "Capacity: qualitative only.",
+                    sourceDetail: life?.provenanceLabel ?? sourceDetail
+                )
+            ],
             placementCandidate: placementCandidate,
             placementUnavailableReason: placementUnavailableReason,
             calendarRows: Self.calendarRows(
@@ -164,7 +168,8 @@ extension TimeLifeSuiteProjector {
                 openDays: openDays,
                 protectedBlocks: protectedBlocks,
                 activeGoalCount: activeGoalCount,
-                placementCandidate: placementCandidate
+                placementCandidate: placementCandidate,
+                hasScheduleContext: hasScheduleContext
             ),
             sourceState: LifeShapeSourceState(
                 title: sourceTitle,
@@ -205,13 +210,14 @@ extension TimeLifeSuiteProjector {
         openDays: Int,
         protectedBlocks: Int,
         activeGoalCount: Int,
-        placementCandidate: TimePlacementCandidate?
+        placementCandidate: TimePlacementCandidate?,
+        hasScheduleContext: Bool
     ) -> [TimeCalendarRow] {
         let dayShape = readings[.day] ?? nil
         let weekShape = readings[.week] ?? nil
         let monthShape = readings[.month] ?? nil
         let fixedLabel = protectedBlocks == 0 ? "None marked" : countLabel(protectedBlocks, singular: "anchor", plural: "anchors")
-        let openLabel = openDays == 1 ? "1 open day" : "\(openDays) open days"
+        let openLabel = hasScheduleContext ? (openDays == 1 ? "1 open day" : "\(openDays) open days") : "Low context"
         let placementDetail = placementCandidate.map { "Placement candidate: \($0.title)." } ?? "Placement waits for a real Step."
         return [
             TimeCalendarRow(
@@ -237,9 +243,9 @@ extension TimeLifeSuiteProjector {
                 kind: .openWindow,
                 title: "Open windows",
                 value: openLabel,
-                detail: placementDetail,
-                visualState: openDays > 0 ? .selected : .warning,
-                isOperational: openDays > 0 && placementCandidate != nil
+                detail: hasScheduleContext ? placementDetail : "Open windows need local Steps, protected time, or calendar context before placement.",
+                visualState: hasScheduleContext && openDays > 0 ? .selected : .default,
+                isOperational: hasScheduleContext && openDays > 0 && placementCandidate != nil
             ),
             TimeCalendarRow(
                 id: "time.calendar.protected-window",
@@ -337,8 +343,13 @@ extension TimeLifeSuiteProjector {
     static func weekCapacityStatement(
         activeGoalCount: Int,
         openDays: Int,
-        protectedBlocks: Int
+        protectedBlocks: Int,
+        hasScheduleContext: Bool = true
     ) -> String {
+        guard hasScheduleContext else {
+            return "Capacity remains qualitative until local schedule context exists."
+        }
+
         var parts: [String] = []
         if activeGoalCount > 0 {
             parts.append(countLabel(activeGoalCount, singular: "active goal", plural: "active goals"))
