@@ -3,39 +3,49 @@ import SwiftUI
 
 extension AmbitionsDayRailView {
 
-    func upNextRow(time: String, title: String, subtitle: String, duration: String) -> some View {
-        HStack(alignment: .top, spacing: theme.spacing.sm) {
-            VStack(spacing: 0) {
-                Circle()
-                    .fill(theme.colors.textSecondary.opacity(0.54))
-                    .frame(width: 5, height: 5)
-                Rectangle()
-                    .fill(theme.colors.strokeSubtle.opacity(0.18))
-                    .frame(width: 1, height: 28)
-            }
-            .padding(.top, 7)
-            .accessibilityHidden(true)
+    func upNextRow(row: DayRailRowState, time: String) -> some View {
+        Button {
+            onOpenStepDetail(row.stepDetail(privacy: state.privacyProjection, contextLabel: state.contextSummary))
+        } label: {
+            HStack(alignment: .top, spacing: theme.spacing.sm) {
+                VStack(spacing: 0) {
+                    Circle()
+                        .fill(theme.colors.textSecondary.opacity(0.54))
+                        .frame(width: 5, height: 5)
+                    Rectangle()
+                        .fill(theme.colors.strokeSubtle.opacity(0.18))
+                        .frame(width: 1, height: 28)
+                }
+                .padding(.top, 7)
+                .accessibilityHidden(true)
 
-            Text(time)
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textSecondary)
-                .frame(width: 74, alignment: .leading)
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
-                .padding(.top, 1)
-
-            VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text(title)
+                Text(time)
                     .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .lineLimit(2)
-                    .fixedSize(horizontal: false, vertical: true)
-                Text([duration, subtitle].filter { $0.isEmpty == false }.joined(separator: " · "))
-                    .font(theme.typography.micro)
                     .foregroundStyle(theme.colors.textSecondary)
-                    .lineLimit(2)
+                    .frame(width: 74, alignment: .leading)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
+                    .padding(.top, 1)
+
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(state.privacyProjection.detailTitle(row.title))
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                    Text([row.duration.label, row.subtitle].filter { $0.isEmpty == false }.joined(separator: " · "))
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textSecondary)
+                        .lineLimit(2)
+                }
             }
         }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Open step")
+        .accessibilityValue("\(row.slot.title). \(state.privacyProjection.detailTitle(row.title)). \(row.duration.label).")
+        .accessibilityHint("Opens Step detail with completion, move, and recovery controls.")
+        .accessibilityIdentifier(state.privacyProjection.isSensitiveProjection ? "TodayRealityRailPrivateItem" : "TodayRealityRailRow")
     }
 
 

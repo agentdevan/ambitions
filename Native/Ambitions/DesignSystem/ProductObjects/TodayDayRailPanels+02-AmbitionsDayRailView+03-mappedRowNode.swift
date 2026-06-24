@@ -36,14 +36,25 @@ extension AmbitionsDayRailView {
             }
             .accessibilityIdentifier("TodayRealityRailStartHereTitle")
 
-            HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
-                Text(state.privacyProjection.detailTitle(heroStep.title))
-                    .font((usesExpandedViewport ? theme.typography.section : theme.typography.title).weight(.semibold))
-                    .foregroundStyle(theme.colors.textPrimary)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .lineLimit(usesExpandedViewport ? nil : 3)
-                    .accessibilityIdentifier("TodayRealityRailStepTitle")
+            Button {
+                openStepDetail(for: heroStep)
+            } label: {
+                HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                    Text(state.privacyProjection.detailTitle(heroStep.title))
+                        .font((usesExpandedViewport ? theme.typography.section : theme.typography.title).weight(.semibold))
+                        .foregroundStyle(theme.colors.textPrimary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .lineLimit(usesExpandedViewport ? nil : 3)
+                        .accessibilityIdentifier("TodayRealityRailStepTitle")
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .buttonStyle(.plain)
+            .contentShape(Rectangle())
+            .accessibilityLabel("Open step")
+            .accessibilityValue(state.privacyProjection.detailTitle(heroStep.title))
+            .accessibilityHint("Opens Step detail with completion, move, and recovery controls.")
+            .accessibilityIdentifier("TodayStartHereOpenStep")
 
             Text(usesExpandedViewport ? "Recommended step" : liveMeridianMetaLine(for: heroStep))
                 .font(usesExpandedViewport ? theme.typography.caption : theme.typography.body)
@@ -62,7 +73,7 @@ extension AmbitionsDayRailView {
                     .lineLimit(3)
 
                 Button {
-                    onOpenStepDetail(heroStep.stepDetail(privacy: state.privacyProjection, contextLabel: state.contextSummary))
+                    openStepDetail(for: heroStep)
                 } label: {
                     Text("Why this?")
                         .font(theme.typography.caption.weight(.semibold))
@@ -91,6 +102,14 @@ extension AmbitionsDayRailView {
         .accessibilityAction(named: "Begin") {
             onAction(heroStep.primaryAction)
         }
+        .accessibilityAction(named: "Open step") {
+            openStepDetail(for: heroStep)
+        }
+    }
+
+
+    func openStepDetail(for heroStep: DayRailHeroStepState) {
+        onOpenStepDetail(heroStep.stepDetail(privacy: state.privacyProjection, contextLabel: state.contextSummary))
     }
 
 
@@ -255,10 +274,8 @@ extension AmbitionsDayRailView {
             } else {
                 ForEach(Array(state.rows.enumerated()), id: \.element.id) { index, row in
                     upNextRow(
-                        time: row.slot.mvpTimeLabel(for: index),
-                        title: state.privacyProjection.detailTitle(row.title),
-                        subtitle: row.subtitle,
-                        duration: row.duration.label
+                        row: row,
+                        time: row.slot.mvpTimeLabel(for: index)
                     )
                 }
             }

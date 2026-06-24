@@ -183,8 +183,7 @@ struct TodayStepDetailSheet: View {
     var actions: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             Button {
-                dismiss()
-                onAction(detail.primaryAction)
+                perform(detail.primaryAction)
             } label: {
                 Label(detail.primaryAction.title, systemImage: detail.primaryAction.systemImage)
                     .font(.body.weight(.semibold))
@@ -198,8 +197,7 @@ struct TodayStepDetailSheet: View {
             .accessibilityIdentifier("TodayStepDetailPrimaryAction")
 
             Button {
-                dismiss()
-                onAction(detail.closureAction)
+                perform(detail.closureAction)
             } label: {
                 Label(detail.closureAction.title, systemImage: detail.closureAction.systemImage)
                     .font(theme.typography.bodyEmphasized)
@@ -213,8 +211,7 @@ struct TodayStepDetailSheet: View {
             HStack(spacing: theme.spacing.sm) {
                 ForEach(detail.secondaryActions) { action in
                     Button {
-                        dismiss()
-                        onAction(action)
+                        perform(action)
                     } label: {
                         Label(action.title, systemImage: action.systemImage)
                             .font(theme.typography.caption)
@@ -229,5 +226,10 @@ struct TodayStepDetailSheet: View {
                 }
             }
         }
+    }
+
+    private func perform(_ action: TodayInlineAction) {
+        onAction(action)
+        dismiss()
     }
 }

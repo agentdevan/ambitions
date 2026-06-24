@@ -51,6 +51,9 @@ extension TodaySurface {
                     systemImage: "checkmark.circle.fill"
                 )
                 .padding(.top, theme.spacing.md)
+                .accessibilityElement(children: .combine)
+                .accessibilityLabel(message.title)
+                .accessibilityValue(message.body)
                 .accessibilityIdentifier("today.post-closure-feedback")
             }
 

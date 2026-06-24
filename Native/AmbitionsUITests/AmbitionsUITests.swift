@@ -1367,6 +1367,73 @@ final class AmbitionsUITests: XCTestCase {
         captureTodayScreenshot(named: "p1a1-rendered-step-recovery-controls", in: recoveryApp)
     }
 
+    func testP1A2NormalRenderedStepCompletesFromTodayDetail() throws {
+        let app = makeApp(bootstrapMode: "demo")
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 90))
+        let stepRow = normalTodayStepRowControl(in: app)
+        XCTAssertTrue(stepRow.waitForExistence(timeout: 10), "The visible Today Day Rail should expose a normal Step row affordance.")
+        XCTAssertTrue(stepRow.isHittable, "The normal Today Step row should be tappable.")
+        stepRow.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepDetail"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepDetailTitle"].waitForExistence(timeout: 10))
+        let completeAction = scrollUntilButtonHittable("today.action.complete", fallbackLabel: "Mark Done", in: app, maxAttempts: 8)
+        XCTAssertTrue(completeAction.waitForExistence(timeout: 10), "The normal Step detail path should expose completion.")
+        XCTAssertTrue(completeAction.isHittable, "The normal Step detail completion control should be tappable.")
+        completeAction.tap()
+
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Completion recorded")).firstMatch.waitForExistence(timeout: 10))
+        XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 30))
+    }
+
+    func testP1A2NormalRenderedStepMovesAndExposesRecoveryFromTodayDetail() throws {
+        let app = makeApp(
+            bootstrapMode: "demo",
+            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+        )
+        app.launch()
+
+        XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 90))
+        let stepRow = normalTodayStepRowControl(in: app)
+        XCTAssertTrue(stepRow.waitForExistence(timeout: 10), "The visible Today Day Rail should expose a normal Step row affordance.")
+        XCTAssertTrue(stepRow.isHittable, "The normal Today Step row should be tappable.")
+        stepRow.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["TodayStepDetail"].waitForExistence(timeout: 10))
+        let closureAction = app.descendants(matching: .any)["TodayStepDetailClosureAction"]
+        XCTAssertTrue(closureAction.waitForExistence(timeout: 10), "The normal Step detail path should expose Close the loop.")
+        closureAction.tap()
+
+        XCTAssertTrue(app.descendants(matching: .any)["TodayActionClosureSheet"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "What changed?")).firstMatch.waitForExistence(timeout: 5))
+        for outcomeID in ["completed", "still_counts", "moved", "blocked", "not_needed"] {
+            XCTAssertTrue(
+                app.buttons["TodayActionClosureOutcome.\(outcomeID)"].waitForExistence(timeout: 5),
+                "Normal Step recovery should expose \(outcomeID) as an accessible outcome."
+            )
+        }
+        for forbidden in ["failed", "overdue", "lazy", "avoidance", "streak broken", "productivity dropped"] {
+            XCTAssertFalse(
+                app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", forbidden)).firstMatch.exists,
+                "Normal Step recovery must not expose shame copy: \(forbidden)"
+            )
+        }
+        captureTodayScreenshot(named: "p1a2-normal-step-recovery-controls", in: app)
+        app.buttons["TodayActionClosureDismiss"].tap()
+
+        XCTAssertTrue(openTodayStepRowDetail(in: app), "The Step should remain available through the normal Today Step row before a move is saved.")
+        let moveAction = scrollUntilButtonHittable("today.action.reschedule", fallbackLabel: "Move it", in: app, maxAttempts: 8)
+        XCTAssertTrue(moveAction.waitForExistence(timeout: 10), "The normal Step detail path should expose Move it.")
+        XCTAssertTrue(moveAction.isHittable, "The normal Step detail move control should be tappable.")
+        moveAction.tap()
+
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "What changed?")).firstMatch.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Move it")).firstMatch.exists)
+        XCTAssertTrue(waitForTodayScreenReady(in: app, timeout: 30))
+    }
+
     func testTodayCanHandOffToGoalDetail() throws {
         let app = makeApp(bootstrapMode: "demo")
         app.launch()
@@ -2585,6 +2652,14 @@ final class AmbitionsUITests: XCTestCase {
             return true
         }
 
+        let normalOpenStep = normalTodayStepOpenControl(in: app)
+        if normalOpenStep.waitForExistence(timeout: 5) {
+            normalOpenStep.tap()
+            if existingDetail.waitForExistence(timeout: 5) {
+                return true
+            }
+        }
+
         let startHere = app.staticTexts["Start here"]
         if startHere.waitForExistence(timeout: 5) {
             startHere.tap()
@@ -2631,6 +2706,47 @@ final class AmbitionsUITests: XCTestCase {
         }
         rail.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.24)).tap()
         return existingDetail.waitForExistence(timeout: 10)
+    }
+
+    private func normalTodayStepOpenControl(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.buttons["TodayStartHereOpenStep"],
+            app.descendants(matching: .any)["TodayStartHereOpenStep"]
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 2) {
+            return candidate
+        }
+
+        return app.descendants(matching: .any)["TodayStartHereOpenStep"]
+    }
+
+    private func normalTodayStepRowControl(in app: XCUIApplication) -> XCUIElement {
+        let candidates = [
+            app.buttons.matching(identifier: "TodayRealityRailRow").firstMatch,
+            app.descendants(matching: .any)["TodayRealityRailRow"]
+        ]
+
+        for candidate in candidates where candidate.waitForExistence(timeout: 2) {
+            return candidate
+        }
+
+        return app.descendants(matching: .any)["TodayRealityRailRow"]
+    }
+
+    private func openTodayStepRowDetail(in app: XCUIApplication) -> Bool {
+        let existingDetail = app.descendants(matching: .any)["TodayStepDetail"]
+        if existingDetail.waitForExistence(timeout: 1) {
+            return true
+        }
+
+        let stepRow = normalTodayStepRowControl(in: app)
+        if stepRow.waitForExistence(timeout: 5) {
+            stepRow.tap()
+            return existingDetail.waitForExistence(timeout: 5)
+        }
+
+        return false
     }
 
     private func todayPrimaryAction(in app: XCUIApplication) -> XCUIElement {

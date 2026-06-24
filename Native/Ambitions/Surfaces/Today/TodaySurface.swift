@@ -52,9 +52,7 @@ struct TodaySurface: View {
         .sheet(item: $selectedStepDetail) { detail in
             TodayStepDetailSheet(detail: detail) { action in
                 selectedStepDetail = nil
-                Task { @MainActor in
-                    handleAction(action)
-                }
+                handleAction(action)
             }
             .ambitionTheme(theme)
         }

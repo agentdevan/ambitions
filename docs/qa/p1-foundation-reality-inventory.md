@@ -379,6 +379,51 @@ Remaining gaps:
 
 Gate index updates: none. Current evidence adds partial rendered interaction proof, but the target gates stay Partial until the normal user path, accessibility sweeps, and full end-to-end interaction proof are current.
 
+## P1A.2 Normal Rendered Step Tap-to-Mutation Addendum
+
+Date: 2026-06-24
+Baseline commit: `1c7bc779506f739309f9d5423c2e6029212c9b0e`
+Final commit: P1A.2 final commit recorded in train closeout
+Gates targeted: `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_completion_creates_visible_closure`, `foundation_missed_step_asks_what_changed`, `foundation_offline_core_runs_without_account`, `origin_missed_obligation_asks_what_changed_without_shame`
+
+Source changed:
+
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+03-mappedRowNode.swift`
+- `Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels+02-AmbitionsDayRailView+04-upNextRow.swift`
+- `Native/Ambitions/Stage/Overlays/TodayStepDetailSheet.swift`
+- `Native/Ambitions/Surfaces/Today/TodaySurface.swift`
+- `Native/Ambitions/Surfaces/Today/TodaySurface+02-autoLoad.swift`
+- `Native/AmbitionsUITests/AmbitionsUITests.swift`
+
+Normal rendered path proof added:
+
+- The compact Day Rail `Up next` Step rows now use the existing `DayRailRowState.stepDetail` route instead of rendering as static text, so a user can tap a real visible Today Step row and open `TodayStepDetailSheet`.
+- Focused UI proof starts from `TodayRealityRailRow`, opens `TodayStepDetail`, and verifies the normal rendered path exposes Step title, `Mark Done`, `Move it`, `Close the loop`, and recovery controls.
+
+Mutation proof added:
+
+- `testP1A2NormalRenderedStepCompletesFromTodayDetail` taps a normal Day Rail Step row, taps `Mark Done`, and verifies visible `Completion recorded` feedback.
+- `testP1A2NormalRenderedStepMovesAndExposesRecoveryFromTodayDetail` taps a normal Day Rail Step row, verifies recovery controls, taps `Move it`, and verifies visible `What changed?` feedback.
+- The P1A runtime test was rerun and still proves create, Today projection, reschedule, missed recovery, completion, persistence/reload, and local-only capability flags.
+
+Accessibility proof added:
+
+- The visible Start Here title affordance and Day Rail Step rows expose `Open step` labels, values, hints, and stable accessibility identifiers.
+- Post-mutation feedback is exposed as a combined accessibility element with title and body values.
+- The focused UI tests verify normal Step row, completion, move, and recovery controls through XCTest accessibility queries.
+
+Screenshot/visual proof status:
+
+- Screenshot attachment `p1a2-normal-step-recovery-controls` is produced by the focused UI test.
+- This is Ready for Visual Review evidence only. It is not Visual Green because manual visual review, full device matrix, Dynamic Type sweep, Reduce Motion/Reduce Transparency/Increase Contrast sweep, and VoiceOver runtime review were not completed.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1A.2 proves the scoped normal rendered Step row interaction path, but it does not prove full reminder creation UI, recurring Steps, notification delivery, broad VoiceOver/manual accessibility sweeps, device proof, or release readiness.
+- The normal Start Here hero can still represent a recovery/protection recommendation that is not itself a Step mutation target; P1A.2 repairs the real visible Day Rail Step row path instead of forcing non-Step hero recommendations to mutate.
+
+Gate index updates: none. Current evidence materially improves normal rendered Step interaction proof, but the target gates stay Partial until full creation, accessibility sweep, device, and broader scenario proof are current.
+
 ## Recommended Immediate Next Prompt
 
 ```text
