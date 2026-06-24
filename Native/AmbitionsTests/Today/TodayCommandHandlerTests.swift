@@ -74,6 +74,67 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertTrue(ledgerEntries.contains(where: { $0.kind == .actionCompleted && $0.goalID == goalID }))
     }
 
+    func testSCG009CClosureMutatesTodayBeforeActionAfterWithProofReceipt() async throws {
+        let repositories = try await makeRepositories()
+        let goalsService = RepositoryBackedGoalsService(repositories: repositories)
+        let todayService = RepositoryBackedTodayService(repositories: repositories)
+        let commandRecordRepository = try XCTUnwrap(repositories.commandExecutionRecords as? InMemoryAmbitionsCommandExecutionRecordRepository)
+        let ledger = try XCTUnwrap(repositories.eventLedger as? InMemoryEventLedgerRepository)
+        let created = try await goalsService.createGoal(
+            CreateGoalRequest(title: "Close one real Today step"),
+            now: fixedNow
+        )
+        let goalID = try XCTUnwrap(created.target.goalID)
+        let beforeToday = try await todayService.loadTodayExperience(
+            userDisplayName: "Sample User",
+            now: fixedNow
+        )
+        let primaryStepID = try XCTUnwrap(beforeToday.hero.primaryAction.action.target.stepID)
+        let fetchedGoal = try await repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(fetchedGoal)
+        let step = try XCTUnwrap(goal.plan?.sections.flatMap(\.steps).first { $0.id == primaryStepID })
+        let beforeFeedback = try await repositories.feedback.listEvents(goalID: goalID)
+        let beforeEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
+
+        let action = TodayInlineAction(
+            kind: .complete,
+            title: "Complete",
+            systemImage: "checkmark.circle.fill",
+            state: .success,
+            target: TodayActionTarget(goalID: goalID, stepID: step.id)
+        )
+        let response = try await todayService.performAction(action, now: fixedNow.addingTimeInterval(30))
+
+        let afterToday = try await todayService.loadTodayExperience(
+            userDisplayName: "Sample User",
+            now: fixedNow.addingTimeInterval(60)
+        )
+        let fetchedAfterGoal = try await repositories.goals.goal(id: goalID)
+        let afterGoal = try XCTUnwrap(fetchedAfterGoal)
+        let afterStep = try XCTUnwrap(afterGoal.plan?.sections.flatMap(\.steps).first { $0.id == step.id })
+        let afterFeedback = try await repositories.feedback.listEvents(goalID: goalID)
+        let afterEvidence = try await repositories.evidence.listEvidence(goalID: goalID)
+        let fetchedRecord = try await commandRecordRepository.fetchRecord(commandID: "command.today2.\(action.id).complete_action")
+        let record = try XCTUnwrap(fetchedRecord)
+        let ledgerEntries = try await ledger.fetchRecent(limit: 30)
+
+        XCTAssertEqual(beforeToday.hero.primaryAction.action.target.goalID, goalID)
+        XCTAssertEqual(beforeToday.hero.primaryAction.action.target.stepID, step.id)
+        XCTAssertEqual(response.message?.title, "Completion recorded")
+        XCTAssertEqual(afterStep.state, .completed)
+        XCTAssertEqual(afterFeedback.count, beforeFeedback.count + 1)
+        XCTAssertEqual(afterEvidence.count, beforeEvidence.count + 1)
+        XCTAssertTrue(afterEvidence.contains { $0.evidenceKind == .stepCompleted && $0.stepID == step.id })
+        XCTAssertEqual(afterToday.hero.primaryAction.action.target.goalID, goalID)
+        XCTAssertNotNil(afterToday.hero.primaryAction.action.target.stepID)
+        XCTAssertEqual(record.result.status, .succeeded)
+        XCTAssertFalse(record.result.eventLedgerEntryIDs.isEmpty)
+        XCTAssertTrue(Set(record.result.eventLedgerEntryIDs).isSubset(of: Set(ledgerEntries.map(\.id))))
+        XCTAssertEqual(record.result.metadata["stageActionPipelineRuntimeMutation"], StageActionPipelineRequirementState.satisfied.rawValue)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineProofReceipt"], StageActionPipelineRequirementState.satisfied.rawValue)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineFallbackUndo"], StageActionPipelineRequirementState.satisfied.rawValue)
+    }
+
     func testQuickLogCommandWritesCaptureEvidenceAndCommandRecord() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)

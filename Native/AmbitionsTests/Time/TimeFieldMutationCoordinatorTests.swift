@@ -100,6 +100,55 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         XCTAssertTrue(keepClear.timeMutation.todayRecompute.todayRecommendationAvoidsAffectedWindow)
     }
 
+    func testSCG009CTimeProtectCorrectionUndoOnlyAppearsWithRestoreSnapshot() throws {
+        let state = PreviewTimeScenarios.seeded
+        let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .protectedTime })
+
+        let result = try TimeFieldMutationCoordinator().perform(
+            .protectWindow,
+            in: state,
+            selectedMark: mark,
+            now: now
+        )
+        let protectedBucket = try XCTUnwrap(result.timeMutation.afterProjection.todayBuckets.first { bucket in
+            result.timeMutation.affectedBucketIDs.contains(bucket.id)
+        })
+
+        XCTAssertEqual(result.command.kind, .protectTimeWindow)
+        XCTAssertEqual(protectedBucket.layer, .protected)
+        XCTAssertTrue(result.timeMutation.todayRecompute.recomputedToday)
+        XCTAssertTrue(result.timeMutation.todayRecompute.todayRecommendationAvoidsAffectedWindow)
+        XCTAssertTrue(result.runtimeMutation.hasCompleteActionFlowProof)
+        XCTAssertTrue(result.runtimeMutation.stageMutation.undoAvailability.isAvailable)
+        XCTAssertEqual(result.runtimeMutation.stageMutation.undoAvailability.label, "Undo")
+        XCTAssertEqual(
+            result.runtimeMutation.stageMutation.undoAvailability.restoresSnapshot?.summary,
+            result.timeMutation.beforeProjection.semanticSummary
+        )
+        XCTAssertEqual(
+            result.runtimeMutation.stageMutation.proofArtifact.beforeSnapshot?.summary,
+            result.timeMutation.beforeProjection.semanticSummary
+        )
+        XCTAssertEqual(
+            result.runtimeMutation.stageMutation.proofArtifact.afterSnapshot?.summary,
+            result.timeMutation.afterProjection.semanticSummary
+        )
+
+        let undo = TimeFieldMutationCoordinator().undo(result, now: now)
+
+        XCTAssertEqual(undo.visibleMutation.stageMutation.visibleUserFacingChange, "Undo applied")
+        XCTAssertFalse(undo.visibleMutation.stageMutation.undoAvailability.isAvailable)
+        XCTAssertNil(undo.visibleMutation.stageMutation.undoAvailability.restoresSnapshot)
+        XCTAssertEqual(
+            undo.visibleMutation.stageMutation.undoAvailability.unavailableReason,
+            "This mutation already restored the prior Time shape."
+        )
+        XCTAssertEqual(
+            undo.restoredTimeState.lifeSuite.field.reading(for: .day).title,
+            state.lifeSuite.field.reading(for: .day).title
+        )
+    }
+
     func testNotUsableCorrectionRemovesOpenCapacityThroughRuntimeMutation() throws {
         let state = PreviewTimeScenarios.seeded
         let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })

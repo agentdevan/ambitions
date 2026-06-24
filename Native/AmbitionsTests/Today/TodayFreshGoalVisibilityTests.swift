@@ -35,6 +35,39 @@ final class TodayFreshGoalVisibilityTests: XCTestCase {
         }))
     }
 
+    func testSCG009CPersistedGoalThreadFeedsTodayAfterRepositoryReload() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let writeRepositories = makeRepositories(store: store)
+        let readRepositories = makeRepositories(store: store)
+        let goalsService = RepositoryBackedGoalsService(repositories: writeRepositories)
+        let todayService = RepositoryBackedTodayService(repositories: readRepositories)
+
+        let created = try await goalsService.createGoal(
+            CreateGoalRequest(title: "Feed Today from a persisted goal thread"),
+            now: fixedNow
+        )
+        let goalID = try XCTUnwrap(created.target.goalID)
+        let fetchedGoal = try await readRepositories.goals.goal(id: goalID)
+        let persistedGoal = try XCTUnwrap(fetchedGoal)
+
+        let experience = try await todayService.loadTodayExperience(
+            userDisplayName: "Sample User",
+            now: fixedNow.addingTimeInterval(60)
+        )
+        let primaryStepID = try XCTUnwrap(experience.hero.primaryAction.action.target.stepID)
+        let persistedStep = try XCTUnwrap(persistedGoal.plan?.sections.flatMap(\.steps).first { $0.id == primaryStepID })
+
+        guard case .active = experience.mode else {
+            return XCTFail("Expected persisted goal thread state to make Today active.")
+        }
+        XCTAssertEqual(experience.hero.truth.nowSubtitle, "Feed Today from a persisted goal thread")
+        XCTAssertEqual(experience.hero.primaryAction.action.target.goalID, goalID)
+        XCTAssertEqual(experience.hero.primaryAction.action.target.stepID, persistedStep.id)
+        XCTAssertTrue(experience.support.fixedCommitments.items.contains {
+            $0.action?.target.goalID == goalID && $0.action?.target.stepID == persistedStep.id
+        })
+    }
+
     func testQuickLogActionCreatesPersistedCapture() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
@@ -253,6 +286,10 @@ private extension TodayFreshGoalVisibilityTests {
 
     func makeRepositories() async throws -> AppRepositories {
         let store = try AmbitionsPersistenceStore(inMemory: true)
+        return makeRepositories(store: store)
+    }
+
+    func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {
         return AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
             drafts: SwiftDataGoalDraftRepository(store: store),

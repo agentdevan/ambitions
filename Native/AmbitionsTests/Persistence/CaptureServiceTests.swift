@@ -86,6 +86,46 @@ final class CaptureServiceTests: XCTestCase {
         XCTAssertEqual(all.count, 1)
     }
 
+    func testSCG009CCaptureSavePersistsLocalCaptureAndLedgerReceipt() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let ledger = InMemoryEventLedgerRepository()
+        let service = DefaultCaptureService(
+            repository: repositories.captures,
+            eventLedger: ledger,
+            idProvider: { "capture-scg009c" }
+        )
+        let beforeCaptures = try await repositories.captures.listCaptures()
+        let beforeEvents = try await ledger.fetchRecent(limit: 10)
+
+        let created = try await service.createCapture(
+            CreateCaptureRequest(
+                rawText: "  Pick a real proof path  ",
+                sourceType: .shellComposer,
+                triage: CaptureTriageMetadata(destination: .doSoon)
+            ),
+            now: fixedNow
+        )
+
+        let persisted = try await repositories.captures.capture(id: created.id)
+        let afterCaptures = try await repositories.captures.listCaptures()
+        let afterEvents = try await ledger.fetchRecent(limit: 10)
+        let receipt = try XCTUnwrap(afterEvents.first { $0.kind == .captureCreated && $0.captureID == created.id })
+
+        XCTAssertTrue(beforeCaptures.isEmpty)
+        XCTAssertTrue(beforeEvents.isEmpty)
+        XCTAssertEqual(created.id, "capture-scg009c")
+        XCTAssertEqual(persisted?.id, created.id)
+        XCTAssertEqual(persisted?.rawText, "Pick a real proof path")
+        XCTAssertEqual(persisted?.sourceType, .shellComposer)
+        XCTAssertEqual(persisted?.status, .needsTriage)
+        XCTAssertEqual(persisted?.route, .captureInbox)
+        XCTAssertEqual(afterCaptures.map(\.id), [created.id])
+        XCTAssertEqual(receipt.captureID, created.id)
+        XCTAssertEqual(receipt.kind, .captureCreated)
+        XCTAssertFalse(receipt.id.isEmpty)
+    }
+
     func testCommitmentCaptureRepresentationIncludesDeadlineContextAndAssumption() async throws {
         let repository = PreviewCaptureRepository()
         let ledger = InMemoryEventLedgerRepository()

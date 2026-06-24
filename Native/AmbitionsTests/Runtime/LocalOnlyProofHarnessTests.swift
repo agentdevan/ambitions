@@ -144,6 +144,47 @@ final class LocalOnlyProofHarnessTests: XCTestCase {
         XCTAssertEqual(syncStatus.availability, SyncCapabilityAvailability.unavailable)
     }
 
+    func testSCG009CNoAccountCoreFlowPersistsLocallyAndFeedsToday() async throws {
+        let repositories = try makeRepositories()
+        let goalsService = RepositoryBackedGoalsService(repositories: repositories)
+        let captureService = DefaultCaptureService(
+            repository: repositories.captures,
+            eventLedger: repositories.eventLedger,
+            idProvider: { "local-only-capture-scg009c" }
+        )
+        let todayService = RepositoryBackedTodayService(
+            repositories: repositories,
+            captureService: captureService
+        )
+        let sync = LocalOnlySyncCapability()
+        let syncStatus = await sync.status()
+        let now = Date(timeIntervalSince1970: 1_712_692_800)
+
+        let createdGoal = try await goalsService.createGoal(
+            CreateGoalRequest(title: "Use Ambitions without an account"),
+            now: now
+        )
+        let capture = try await captureService.createCapture(
+            CreateCaptureRequest(rawText: "No account local capture", sourceType: .shellComposer),
+            now: now
+        )
+        let today = try await todayService.loadTodayExperience(
+            userDisplayName: "Local User",
+            now: now
+        )
+        let goalID = try XCTUnwrap(createdGoal.target.goalID)
+        let persistedGoal = try await repositories.goals.goal(id: goalID)
+        let persistedCapture = try await repositories.captures.capture(id: capture.id)
+
+        XCTAssertEqual(syncStatus.backendKind, .localOnly)
+        XCTAssertEqual(syncStatus.availability, .unavailable)
+        XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
+        XCTAssertNotNil(persistedGoal)
+        XCTAssertEqual(persistedCapture?.rawText, "No account local capture")
+        XCTAssertEqual(today.hero.primaryAction.action.target.goalID, createdGoal.target.goalID)
+        XCTAssertEqual(today.hero.truth.nowSubtitle, "Use Ambitions without an account")
+    }
+
     func testAppUnitOfWorkReceiptsExposeLocalSwiftDataSingleContextAndNoExternalSideEffects() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let unitOfWork = SwiftDataAppUnitOfWork(store: store)

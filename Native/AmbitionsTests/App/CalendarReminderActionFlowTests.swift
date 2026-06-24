@@ -61,6 +61,43 @@ final class CalendarReminderActionFlowTests: XCTestCase {
         XCTAssertEqual(selection?.suggestedDate, suggestedDate(for: scheduledStep))
     }
 
+    func testSCG009CPermissionDeniedCalendarFallbackDoesNotWriteSystemEvent() async throws {
+        let repositories = try await makeRepositories()
+        let calendarService = RecordingCalendarRemindersService()
+        let goalsService = RepositoryBackedGoalsService(
+            repositories: repositories,
+            calendarRemindersService: calendarService
+        )
+        let created = try await goalsService.createGoal(
+            CreateGoalRequest(title: "Respect denied Calendar access 2026-05-01"),
+            now: fixedNow
+        )
+        let goalID = try XCTUnwrap(created.target.goalID)
+        let fetchedGoal = try await repositories.goals.goal(id: goalID)
+        let goal = try XCTUnwrap(fetchedGoal)
+        let scheduledStep = try XCTUnwrap(goal.plan?.sections.first?.steps.last)
+        await calendarService.setCalendarAuthorizationResponse(.denied)
+
+        let response = try await goalsService.performAction(
+            GoalDetailActionRequest(
+                target: created.target,
+                kind: .createCalendarEvent,
+                stepID: scheduledStep.id
+            ),
+            now: fixedNow
+        )
+
+        let message = try XCTUnwrap(response.message)
+        let selection = await calendarService.lastCalendarSelection
+        let writeAttempts = await calendarService.calendarWriteAttemptCount
+
+        XCTAssertEqual(message.title, "Use Time for Calendar access")
+        XCTAssertEqual(message.state, .warning)
+        XCTAssertTrue(message.body.contains("Time works without Calendar"))
+        XCTAssertNil(selection)
+        XCTAssertEqual(writeAttempts, 0)
+    }
+
     func testTodayCreateCalendarEventUsesDateOnlyStepTiming() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
@@ -141,6 +178,7 @@ private actor RecordingCalendarRemindersService: CalendarRemindersServicing {
 
     private(set) var lastReminderSelection: NextStepSchedulingSelection?
     private(set) var lastCalendarSelection: NextStepSchedulingSelection?
+    private(set) var calendarWriteAttemptCount = 0
 
     func authorizationState(for scope: CalendarRemindersScope) async -> CalendarRemindersAuthorizationState {
         switch scope {
@@ -162,6 +200,7 @@ private actor RecordingCalendarRemindersService: CalendarRemindersServicing {
     }
 
     func createCalendarEvent(for selection: NextStepSchedulingSelection, durationMinutes: Int, now: Date) async throws -> CreatedCalendarEventRecord {
+        calendarWriteAttemptCount += 1
         _ = durationMinutes
         _ = now
         lastCalendarSelection = selection
