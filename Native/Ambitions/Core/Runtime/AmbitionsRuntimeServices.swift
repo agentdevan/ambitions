@@ -79,17 +79,41 @@ final class DefaultRuntimeActionCommandExecutor: RuntimeActionCommandExecuting {
             return await performTodayCommand(.split, command: command, now: now)
         case .openGoal:
             guard let goalID = command.target.goalID, goalID.isEmpty == false else {
-                return RuntimeActionResult(outcome: .missingTarget)
+                return RuntimeActionResult(
+                    outcome: .missingTarget,
+                    pipelineTrace: command.productRuntimePipelineTrace(
+                        commandValidation: .blocked("Open goal requires a concrete goal target."),
+                        runtimeMutation: .blocked("No runtime action runs without a target."),
+                        visibleMutation: .blocked("No product mutation is shown for a missing target."),
+                        proofReceipt: .unavailable("No proof or receipt is created for a blocked action."),
+                        accessibility: .satisfied("Missing target returns a safe fallback state."),
+                        fallbackUndo: .satisfied("The previous stage state remains unchanged.")
+                    )
+                )
             }
-            return RuntimeActionResult(outcome: .routed, routeRequest: .openGoalDetail(goalID: goalID))
+            return RuntimeActionResult(
+                outcome: .routed,
+                routeRequest: .openGoalDetail(goalID: goalID),
+                pipelineTrace: command.shellPipelineTrace()
+            )
         case .openToday:
-            return RuntimeActionResult(outcome: .routed, routeRequest: .openToday)
+            return RuntimeActionResult(outcome: .routed, routeRequest: .openToday, pipelineTrace: command.shellPipelineTrace())
         case .openCaptureComposer:
-            return RuntimeActionResult(outcome: .routed, routeRequest: .openCaptureComposer)
+            return RuntimeActionResult(outcome: .routed, routeRequest: .openCaptureComposer, pipelineTrace: command.shellPipelineTrace())
         case .openMemoryLens:
-            return RuntimeActionResult(outcome: .routed, routeRequest: .openMemoryLens)
+            return RuntimeActionResult(outcome: .routed, routeRequest: .openMemoryLens, pipelineTrace: command.shellPipelineTrace())
         case .unsupported:
-            return RuntimeActionResult(outcome: .unsupported)
+            return RuntimeActionResult(
+                outcome: .unsupported,
+                pipelineTrace: command.productRuntimePipelineTrace(
+                    commandValidation: .blocked("Unsupported external action is rejected at command validation."),
+                    runtimeMutation: .blocked("Unsupported action cannot mutate runtime."),
+                    visibleMutation: .blocked("No visible product mutation is claimed."),
+                    proofReceipt: .unavailable("No proof or receipt is created for unsupported action."),
+                    accessibility: .satisfied("Unsupported action returns a safe unavailable state."),
+                    fallbackUndo: .satisfied("The previous stage state remains unchanged.")
+                )
+            )
         }
     }
 
@@ -102,7 +126,17 @@ final class DefaultRuntimeActionCommandExecutor: RuntimeActionCommandExecuting {
               let stepID = command.target.stepID,
               goalID.isEmpty == false,
               stepID.isEmpty == false else {
-            return RuntimeActionResult(outcome: .missingTarget)
+            return RuntimeActionResult(
+                outcome: .missingTarget,
+                pipelineTrace: command.productRuntimePipelineTrace(
+                    commandValidation: .blocked("Step action requires goal and step targets."),
+                    runtimeMutation: .blocked("Today runtime action is not called without required targets."),
+                    visibleMutation: .blocked("No Step mutation is shown for a missing target."),
+                    proofReceipt: .unavailable("No proof or receipt is created for a blocked Step action."),
+                    accessibility: .satisfied("Missing target returns a safe fallback state."),
+                    fallbackUndo: .satisfied("The previous Step state remains unchanged.")
+                )
+            )
         }
 
         do {
@@ -120,9 +154,30 @@ final class DefaultRuntimeActionCommandExecutor: RuntimeActionCommandExecuting {
                 ),
                 now: now
             )
-            return RuntimeActionResult(outcome: .performed, messageTitle: response.message?.title)
+            return RuntimeActionResult(
+                outcome: .performed,
+                messageTitle: response.message?.title,
+                pipelineTrace: command.productRuntimePipelineTrace(
+                    commandValidation: .satisfied("Step action has goal and step targets."),
+                    runtimeMutation: .satisfied("Today service accepted the Step action."),
+                    visibleMutation: .satisfied("Today service returned after the Step action path."),
+                    proofReceipt: .unavailable("Generic TodayServicing does not expose typed proof or receipt IDs at this runtime boundary."),
+                    accessibility: .satisfied(TodayInteractions.accessibilityAnnouncement(for: TodayInteractions.intent(for: TodayInlineAction(kind: kind, title: title(for: kind), systemImage: systemImage(for: kind), state: visualState(for: kind), target: TodayActionTarget(goalID: goalID, stepID: stepID))))),
+                    fallbackUndo: .satisfied("Failure keeps previous Step state; undo proof is owned by the Today command handler where available.")
+                )
+            )
         } catch {
-            return RuntimeActionResult(outcome: .failed)
+            return RuntimeActionResult(
+                outcome: .failed,
+                pipelineTrace: command.productRuntimePipelineTrace(
+                    commandValidation: .satisfied("Step action has goal and step targets."),
+                    runtimeMutation: .blocked("Today service rejected the Step action."),
+                    visibleMutation: .blocked("No Step mutation is claimed after service failure."),
+                    proofReceipt: .unavailable("No proof or receipt is created when the runtime action fails."),
+                    accessibility: .satisfied("Failure returns a safe unavailable state."),
+                    fallbackUndo: .satisfied("The previous Step state remains unchanged.")
+                )
+            )
         }
     }
 

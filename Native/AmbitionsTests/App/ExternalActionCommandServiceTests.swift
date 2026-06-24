@@ -21,6 +21,13 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertEqual(today.performedActions.map(\.kind), [.complete])
         XCTAssertEqual(today.performedActions.first?.target.goalID, "goal-1")
         XCTAssertEqual(today.performedActions.first?.target.stepID, "step-1")
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
+        XCTAssertEqual(result.pipelineTrace?.commandKind, .completeAction)
+        XCTAssertEqual(result.pipelineTrace?.commandValidation.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.visibleMutation.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
+        XCTAssertEqual(result.pipelineTrace?.shellRouteChange.state, .notApplicable)
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }
 
@@ -56,6 +63,12 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         )
 
         XCTAssertEqual(result.outcome, .missingTarget)
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
+        XCTAssertEqual(result.pipelineTrace?.commandValidation.state, .blocked)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .blocked)
+        XCTAssertEqual(result.pipelineTrace?.visibleMutation.state, .blocked)
+        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
+        XCTAssertEqual(result.pipelineTrace?.fallbackUndo.state, .satisfied)
         XCTAssertTrue(today.performedActions.isEmpty)
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }
@@ -97,6 +110,16 @@ final class ExternalActionCommandServiceTests: XCTestCase {
             .widgetAction,
             .widgetAction,
         ])
+        XCTAssertEqual(router.dispatchedRoutes.count, 4)
+
+        let openToday = await service.execute(
+            ExternalActionCommand(kind: .openToday, source: .widget),
+            now: .now
+        )
+        XCTAssertEqual(openToday.pipelineTrace?.taxonomy, .shellNavigationOverlay)
+        XCTAssertTrue(openToday.pipelineTrace?.isHonestShellNonRuntime == true)
+        XCTAssertEqual(openToday.pipelineTrace?.runtimeMutation.state, .notApplicable)
+        XCTAssertEqual(openToday.pipelineTrace?.proofReceipt.state, .notApplicable)
     }
 
     func testAppAdapterDispatchesRuntimeRouteRequestsThroughExternalRouter() async {
@@ -116,6 +139,8 @@ final class ExternalActionCommandServiceTests: XCTestCase {
 
         XCTAssertEqual(result.outcome, .routed)
         XCTAssertEqual(result.route, .openTab(.today))
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .shellNavigationOverlay)
+        XCTAssertTrue(result.pipelineTrace?.isHonestShellNonRuntime == true)
         XCTAssertEqual(router.dispatchedRoutes.map(\.route), [.openTab(.today)])
         XCTAssertEqual(router.dispatchedRoutes.map(\.source), [.widgetAction])
     }
@@ -162,6 +187,9 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertEqual(result.outcome, .performed)
         XCTAssertEqual(result.messageTitle, "Recorded")
         XCTAssertNil(result.route)
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }
 
@@ -187,6 +215,8 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         XCTAssertEqual(result.outcome, .failed)
         XCTAssertEqual(result.messageTitle, "Action could not complete")
         XCTAssertNil(result.route)
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .blocked)
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }
 
@@ -205,6 +235,9 @@ final class ExternalActionCommandServiceTests: XCTestCase {
         )
 
         XCTAssertEqual(result.outcome, .unsupported)
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
+        XCTAssertEqual(result.pipelineTrace?.commandValidation.state, .blocked)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .blocked)
         XCTAssertTrue(today.performedActions.isEmpty)
         XCTAssertTrue(router.dispatchedRoutes.isEmpty)
     }

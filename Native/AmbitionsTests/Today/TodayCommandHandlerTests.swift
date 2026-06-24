@@ -59,6 +59,13 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertEqual(record.result.summary, "Today command completed.")
         XCTAssertEqual(record.result.target?.goalID, goalID)
         XCTAssertFalse(record.result.eventLedgerEntryIDs.isEmpty)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineTaxonomy"], StageActionTaxonomy.productRuntime.rawValue)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineCommandValidation"], StageActionPipelineRequirementState.satisfied.rawValue)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineRuntimeMutation"], StageActionPipelineRequirementState.satisfied.rawValue)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineVisibleMutation"], StageActionPipelineRequirementState.satisfied.rawValue)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineProofReceipt"], StageActionPipelineRequirementState.satisfied.rawValue)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineFallbackUndo"], StageActionPipelineRequirementState.satisfied.rawValue)
+        XCTAssertFalse(record.result.metadata["stageActionPipelineAccessibilityAnnouncement"]?.isEmpty ?? true)
         let ledgerEntries = try await ledger.fetchRecent(limit: 30)
         XCTAssertTrue(
             Set(record.result.eventLedgerEntryIDs).isSubset(of: Set(ledgerEntries.map(\.id)))
@@ -187,8 +194,51 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertEqual(blockedRecord.result.status, .blocked)
         XCTAssertEqual(blockedRecord.result.summary, "Command is missing the target needed for safe execution.")
         XCTAssertEqual(blockedRecord.result.target?.goalID, nil)
+        XCTAssertEqual(blockedRecord.result.metadata["stageActionPipelineTaxonomy"], StageActionTaxonomy.productRuntime.rawValue)
+        XCTAssertEqual(blockedRecord.result.metadata["stageActionPipelineCommandValidation"], StageActionPipelineRequirementState.blocked.rawValue)
+        XCTAssertEqual(blockedRecord.result.metadata["stageActionPipelineRuntimeMutation"], StageActionPipelineRequirementState.blocked.rawValue)
+        XCTAssertEqual(blockedRecord.result.metadata["stageActionPipelineVisibleMutation"], StageActionPipelineRequirementState.blocked.rawValue)
+        XCTAssertEqual(blockedRecord.result.metadata["stageActionPipelineProofReceipt"], StageActionPipelineRequirementState.unavailable.rawValue)
+        XCTAssertEqual(blockedRecord.result.metadata["stageActionPipelineFallbackUndo"], StageActionPipelineRequirementState.satisfied.rawValue)
         XCTAssertTrue(blockedRecord.result.eventLedgerEntryIDs.isEmpty)
         XCTAssertEqual(ledgerEntries.count, 0)
+    }
+
+    func testInvalidRuntimeCommandDoesNotBypassValidationIntoFeedbackHandler() async throws {
+        let repositories = try await makeRepositories()
+        let commandRecordRepository = try XCTUnwrap(repositories.commandExecutionRecords as? InMemoryAmbitionsCommandExecutionRecordRepository)
+        let handler = TodayCommandActionHandler(
+            repositories: repositories,
+            feedbackAction: { _, _ in
+                XCTFail("Invalid runtime command bypassed validation and reached feedback mutation handler.")
+                return TodayActionResponse(message: nil)
+            }
+        )
+        let action = TodayInlineAction(
+            kind: .complete,
+            title: "Complete",
+            systemImage: "checkmark.circle",
+            state: .warning,
+            target: TodayActionTarget()
+        )
+        let command = AmbitionsCommand(
+            id: "command.invalid-runtime-pipeline",
+            kind: .completeAction,
+            source: .today,
+            target: AmbitionsCommandTarget(),
+            createdAt: DomainTimestamp.string(from: fixedNow),
+            sourceSurface: "today"
+        )
+
+        let response = try await handler.performAction(action, command: command, now: fixedNow)
+
+        XCTAssertEqual(response.message?.title, "Action not available")
+        let fetchedRecord = try await commandRecordRepository.fetchRecord(commandID: command.id)
+        let record = try XCTUnwrap(fetchedRecord)
+        XCTAssertEqual(record.result.status, .blocked)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineCommandValidation"], StageActionPipelineRequirementState.blocked.rawValue)
+        XCTAssertEqual(record.result.metadata["stageActionPipelineRuntimeMutation"], StageActionPipelineRequirementState.blocked.rawValue)
+        XCTAssertTrue(record.result.eventLedgerEntryIDs.isEmpty)
     }
 
     func testAskWhyThisMattersCommandPreservesFeedbackShapeAndRecordsExecution() async throws {

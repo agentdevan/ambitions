@@ -4,11 +4,18 @@ struct ShellCommandExecutionResult: Sendable, Equatable {
     let title: String?
     let destination: ShellCommandDestination?
     let createdCaptureID: String?
+    let pipelineTrace: StageActionPipelineTrace?
 
-    init(title: String? = nil, destination: ShellCommandDestination? = nil, createdCaptureID: String? = nil) {
+    init(
+        title: String? = nil,
+        destination: ShellCommandDestination? = nil,
+        createdCaptureID: String? = nil,
+        pipelineTrace: StageActionPipelineTrace? = nil
+    ) {
         self.title = title
         self.destination = destination
         self.createdCaptureID = createdCaptureID
+        self.pipelineTrace = pipelineTrace
     }
 }
 
@@ -169,7 +176,17 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
         case .quickCapture:
             let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
             guard trimmed.isEmpty == false else {
-                return ShellCommandExecutionResult(title: "Capture needs text")
+                return ShellCommandExecutionResult(
+                    title: "Capture needs text",
+                    pipelineTrace: intent.productRuntimePipelineTrace(
+                        commandValidation: .blocked("Capture save requires non-empty user text."),
+                        runtimeMutation: .blocked("No capture is saved when command validation fails."),
+                        visibleMutation: .blocked("No visible product mutation is shown for an invalid save."),
+                        proofReceipt: .unavailable("No proof or receipt is created for a blocked capture save."),
+                        accessibility: .satisfied("Blocked command returns a user-facing fallback message."),
+                        fallbackUndo: .satisfied("The previous Capture state remains unchanged.")
+                    )
+                )
             }
 
             do {
@@ -198,14 +215,35 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 return ShellCommandExecutionResult(
                     title: decision?.receiptLine ?? "Saved to Needs a Place",
                     destination: destination,
-                    createdCaptureID: capture.id
+                    createdCaptureID: capture.id,
+                    pipelineTrace: intent.productRuntimePipelineTrace(
+                        commandValidation: .satisfied("Capture save command has non-empty user text."),
+                        runtimeMutation: .satisfied("Capture service created local capture \(capture.id)."),
+                        visibleMutation: .satisfied("Stage opened the global Capture composer after save."),
+                        proofReceipt: .unavailable("Shell router records continuity, but typed MutationProof/MutationReceipt is not attached at this boundary."),
+                        accessibility: .satisfied("Capture composer opens with an accessible route label."),
+                        fallbackUndo: .satisfied("Placement remains editable if the route proposal is wrong.")
+                    )
                 )
             } catch {
-                return ShellCommandExecutionResult(title: error.localizedDescription)
+                return ShellCommandExecutionResult(
+                    title: error.localizedDescription,
+                    pipelineTrace: intent.productRuntimePipelineTrace(
+                        commandValidation: .satisfied("Capture save command has non-empty user text."),
+                        runtimeMutation: .blocked("Capture service rejected the local save."),
+                        visibleMutation: .blocked("No saved Capture mutation is claimed after service failure."),
+                        proofReceipt: .unavailable("No proof or receipt is created when capture persistence fails."),
+                        accessibility: .satisfied("Failure returns a user-facing fallback message."),
+                        fallbackUndo: .satisfied("The previous Capture state remains unchanged.")
+                    )
+                )
             }
         case .newGoal:
             presentCreateGoal(source: source)
-            return ShellCommandExecutionResult(destination: .overlay(.createGoal(entrySource: source)))
+            return ShellCommandExecutionResult(
+                destination: .overlay(.createGoal(entrySource: source)),
+                pipelineTrace: intent.shellPipelineTrace()
+            )
         case .quickTimePatch, .openWeek:
             navigation.selectTab(.time)
             navigation.recordRoute(
@@ -215,7 +253,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 destination: .tab(.time),
                 receiptBody: "Returned to Time from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: .tab(.time))
+            return ShellCommandExecutionResult(destination: .tab(.time), pipelineTrace: intent.shellPipelineTrace())
         case .quickRecovery:
             navigation.selectToday(entryContext: .recovery)
             navigation.recordRoute(
@@ -225,7 +263,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 destination: .tab(.today),
                 receiptBody: "Recovery context opened from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: .tab(.today))
+            return ShellCommandExecutionResult(destination: .tab(.today), pipelineTrace: intent.shellPipelineTrace())
         case .quickFocus:
             navigation.selectToday(entryContext: .focus)
             navigation.recordRoute(
@@ -235,7 +273,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 destination: .tab(.today),
                 receiptBody: "Focus context opened from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: .tab(.today))
+            return ShellCommandExecutionResult(destination: .tab(.today), pipelineTrace: intent.shellPipelineTrace())
         case .openGoal:
             guard let goalID, goalID.isEmpty == false else {
                 presentMemoryLens(
@@ -243,7 +281,13 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                     source: source,
                     presentationContext: .recall
                 )
-                return ShellCommandExecutionResult(destination: .overlay(.memoryLens(intent: .openGoal, entrySource: source)))
+                return ShellCommandExecutionResult(
+                    destination: .overlay(.memoryLens(intent: .openGoal, entrySource: source)),
+                    pipelineTrace: intent.shellPipelineTrace(
+                        routeState: .satisfied("Missing goal target opens Search instead of pretending to mutate runtime."),
+                        fallback: .satisfied("Search fallback asks for a source-grounded target.")
+                    )
+                )
             }
             navigation.openGoalDetail(goalID: goalID)
             navigation.recordRoute(
@@ -253,7 +297,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 destination: .goal(goalID),
                 receiptBody: "Opened the canonical Goal Detail from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: .goal(goalID))
+            return ShellCommandExecutionResult(destination: .goal(goalID), pipelineTrace: intent.shellPipelineTrace())
         case .openCapture:
             _ = captureID
             let destination = captureComposerDestination(source: source)
@@ -265,7 +309,7 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 destination: destination,
                 receiptBody: "Opened the global Capture composer from \(source.displayTitle)."
             )
-            return ShellCommandExecutionResult(destination: destination)
+            return ShellCommandExecutionResult(destination: destination, pipelineTrace: intent.shellPipelineTrace())
         case .memoryLens:
             presentMemoryLens(
                 intent: .memoryLens,
@@ -275,7 +319,10 @@ final class DefaultShellCommandRouter: ShellCommandRouting {
                 goalID: goalID,
                 captureID: captureID
             )
-            return ShellCommandExecutionResult(destination: .overlay(.memoryLens(entrySource: source, query: text, goalID: goalID, captureID: captureID)))
+            return ShellCommandExecutionResult(
+                destination: .overlay(.memoryLens(entrySource: source, query: text, goalID: goalID, captureID: captureID)),
+                pipelineTrace: intent.shellPipelineTrace()
+            )
         }
     }
 

@@ -123,15 +123,18 @@ struct RuntimeActionResult: Sendable, Equatable {
     let outcome: ExternalActionOutcome
     let routeRequest: RuntimeRouteRequest?
     let messageTitle: String?
+    let pipelineTrace: StageActionPipelineTrace?
 
     init(
         outcome: ExternalActionOutcome,
         routeRequest: RuntimeRouteRequest? = nil,
-        messageTitle: String? = nil
+        messageTitle: String? = nil,
+        pipelineTrace: StageActionPipelineTrace? = nil
     ) {
         self.outcome = outcome
         self.routeRequest = routeRequest
         self.messageTitle = messageTitle
+        self.pipelineTrace = pipelineTrace
     }
 }
 

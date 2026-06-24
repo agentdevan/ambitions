@@ -144,6 +144,83 @@ enum ShellCommandIntent: String, CaseIterable, Hashable, Identifiable, Sendable,
             )
         }
     }
+
+    var stageActionTaxonomy: StageActionTaxonomy {
+        switch self {
+        case .quickCapture:
+            return .productRuntime
+        case .newGoal, .quickTimePatch, .quickRecovery, .quickFocus, .openGoal, .openWeek, .openCapture, .memoryLens:
+            return .shellNavigationOverlay
+        }
+    }
+
+    func shellPipelineTrace(
+        routeState: StageActionPipelineRequirement = .satisfied("Shell route or overlay state changed visibly."),
+        accessibility: StageActionPipelineRequirement = .satisfied("Shell action keeps an accessible route label."),
+        fallback: StageActionPipelineRequirement? = nil
+    ) -> StageActionPipelineTrace {
+        StageActionPipelineTrace.shellNavigationOverlay(
+            inventoryID: "shell.\(rawValue)",
+            commandKind: externalBrainCommandContract.commandKind,
+            shellRouteChange: routeState,
+            accessibilityAnnouncement: accessibility,
+            fallbackUndo: fallback ?? .satisfied(externalBrainCommandContract.fallbackSummary),
+            scopedFlowIDs: shellScopedFlowIDs,
+            knownIssueIDs: shellKnownIssueIDs
+        )
+    }
+
+    func productRuntimePipelineTrace(
+        commandValidation: StageActionPipelineRequirement,
+        runtimeMutation: StageActionPipelineRequirement,
+        visibleMutation: StageActionPipelineRequirement,
+        proofReceipt: StageActionPipelineRequirement,
+        accessibility: StageActionPipelineRequirement,
+        fallbackUndo: StageActionPipelineRequirement
+    ) -> StageActionPipelineTrace {
+        StageActionPipelineTrace.productRuntime(
+            inventoryID: "shell.\(rawValue)",
+            commandKind: externalBrainCommandContract.commandKind ?? .quickCapture,
+            commandValidation: commandValidation,
+            runtimeMutation: runtimeMutation,
+            visibleMutation: visibleMutation,
+            proofReceipt: proofReceipt,
+            accessibilityAnnouncement: accessibility,
+            fallbackUndo: fallbackUndo,
+            scopedFlowIDs: shellScopedFlowIDs,
+            knownIssueIDs: shellKnownIssueIDs
+        )
+    }
+
+    private var shellScopedFlowIDs: [String] {
+        switch self {
+        case .quickCapture:
+            return StageActionPipelineInventory.captureSaveFlowIDs
+        case .memoryLens, .openGoal, .openCapture:
+            return StageActionPipelineInventory.shellSearchInspectionFlowIDs
+        case .newGoal:
+            return ["SCG006-F05"]
+        case .quickTimePatch, .openWeek:
+            return StageActionPipelineInventory.timeHandoffFlowIDs
+        case .quickRecovery, .quickFocus:
+            return ["SCG006-F07"]
+        }
+    }
+
+    private var shellKnownIssueIDs: [String] {
+        switch self {
+        case .quickCapture:
+            return StageActionPipelineInventory.captureKnownIssueIDs
+        case .memoryLens, .openGoal, .openCapture:
+            return StageActionPipelineInventory.searchInspectionKnownIssueIDs
+        case .newGoal:
+            return ["AMB-ISSUE-0004", "AMB-ISSUE-0005"]
+        case .quickTimePatch, .openWeek:
+            return StageActionPipelineInventory.timeHandoffKnownIssueIDs
+        case .quickRecovery, .quickFocus:
+            return StageActionPipelineInventory.todayKnownIssueIDs
+        }
+    }
 }
 
 struct ShellExternalBrainCommandContract: Hashable, Sendable {

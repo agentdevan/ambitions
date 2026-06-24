@@ -119,6 +119,120 @@ struct ExternalActionCommand: Equatable, Sendable {
     }
 }
 
+extension ExternalActionCommand {
+    var stageActionTaxonomy: StageActionTaxonomy {
+        switch kind {
+        case .complete, .delay, .snooze, .askForSmallerStep, .unsupported:
+            return .productRuntime
+        case .openGoal, .openToday, .openCaptureComposer, .openMemoryLens:
+            return .shellNavigationOverlay
+        }
+    }
+
+    var commandKind: AmbitionsCommandKind? {
+        switch kind {
+        case .complete:
+            return .completeAction
+        case .delay, .snooze:
+            return .delayAction
+        case .askForSmallerStep:
+            return .splitAction
+        case .openGoal, .openToday, .openCaptureComposer, .openMemoryLens:
+            return .openDestination
+        case .unsupported:
+            return nil
+        }
+    }
+
+    func productRuntimePipelineTrace(
+        commandValidation: StageActionPipelineRequirement,
+        runtimeMutation: StageActionPipelineRequirement,
+        visibleMutation: StageActionPipelineRequirement,
+        proofReceipt: StageActionPipelineRequirement,
+        accessibility: StageActionPipelineRequirement,
+        fallbackUndo: StageActionPipelineRequirement
+    ) -> StageActionPipelineTrace {
+        StageActionPipelineTrace.productRuntime(
+            inventoryID: "external.\(kind.pipelineIDComponent)",
+            commandKind: commandKind ?? .completeAction,
+            commandValidation: commandValidation,
+            runtimeMutation: runtimeMutation,
+            visibleMutation: visibleMutation,
+            proofReceipt: proofReceipt,
+            accessibilityAnnouncement: accessibility,
+            fallbackUndo: fallbackUndo,
+            scopedFlowIDs: StageActionPipelineInventory.todayStepFlowIDs,
+            knownIssueIDs: StageActionPipelineInventory.todayKnownIssueIDs
+        )
+    }
+
+    func shellPipelineTrace(
+        routeState: StageActionPipelineRequirement = .satisfied("External action routed to shell navigation or overlay."),
+        fallback: StageActionPipelineRequirement = .satisfied("If the target is absent, the app opens a safe review route.")
+    ) -> StageActionPipelineTrace {
+        StageActionPipelineTrace.shellNavigationOverlay(
+            inventoryID: "external.\(kind.pipelineIDComponent)",
+            commandKind: commandKind,
+            shellRouteChange: routeState,
+            accessibilityAnnouncement: .satisfied("External route preserves an accessible destination label."),
+            fallbackUndo: fallback,
+            scopedFlowIDs: externalShellScopedFlowIDs,
+            knownIssueIDs: externalShellKnownIssueIDs
+        )
+    }
+
+    private var externalShellScopedFlowIDs: [String] {
+        switch kind {
+        case .openMemoryLens:
+            return StageActionPipelineInventory.shellSearchInspectionFlowIDs
+        case .openCaptureComposer:
+            return StageActionPipelineInventory.captureSaveFlowIDs
+        case .openGoal:
+            return ["SCG006-F05", "SCG006-F13"]
+        case .openToday:
+            return ["SCG006-F07"]
+        case .complete, .delay, .snooze, .askForSmallerStep, .unsupported:
+            return StageActionPipelineInventory.todayStepFlowIDs
+        }
+    }
+
+    private var externalShellKnownIssueIDs: [String] {
+        switch kind {
+        case .openMemoryLens:
+            return StageActionPipelineInventory.searchInspectionKnownIssueIDs
+        case .openCaptureComposer:
+            return StageActionPipelineInventory.captureKnownIssueIDs
+        default:
+            return StageActionPipelineInventory.todayKnownIssueIDs
+        }
+    }
+}
+
+private extension ExternalActionKind {
+    var pipelineIDComponent: String {
+        switch self {
+        case .complete:
+            return "complete"
+        case .delay:
+            return "delay"
+        case .snooze:
+            return "snooze"
+        case .askForSmallerStep:
+            return "ask-for-smaller-step"
+        case .openGoal:
+            return "open-goal"
+        case .openToday:
+            return "open-today"
+        case .openCaptureComposer:
+            return "open-capture-composer"
+        case .openMemoryLens:
+            return "open-memory-lens"
+        case let .unsupported(raw):
+            return "unsupported-\(raw)"
+        }
+    }
+}
+
 enum ExternalActionOutcome: Equatable, Sendable {
     case performed
     case routed
@@ -131,11 +245,18 @@ struct ExternalActionResult: Equatable, Sendable {
     let outcome: ExternalActionOutcome
     let route: AppExternalRoute?
     let messageTitle: String?
+    let pipelineTrace: StageActionPipelineTrace?
 
-    init(outcome: ExternalActionOutcome, route: AppExternalRoute? = nil, messageTitle: String? = nil) {
+    init(
+        outcome: ExternalActionOutcome,
+        route: AppExternalRoute? = nil,
+        messageTitle: String? = nil,
+        pipelineTrace: StageActionPipelineTrace? = nil
+    ) {
         self.outcome = outcome
         self.route = route
         self.messageTitle = messageTitle
+        self.pipelineTrace = pipelineTrace
     }
 }
 
@@ -171,18 +292,69 @@ final class DefaultExternalActionCommandService: ExternalActionCommandExecuting 
 
     func execute(_ command: ExternalActionCommand, now: Date) async -> ExternalActionResult {
         let result = await runtimeExecutor.execute(command, now: now)
+        let pipelineTrace = result.pipelineTrace ?? fallbackPipelineTrace(for: command, result: result)
         guard let routeRequest = result.routeRequest else {
             return ExternalActionResult(
                 outcome: result.outcome,
-                messageTitle: result.messageTitle
+                messageTitle: result.messageTitle,
+                pipelineTrace: pipelineTrace
             )
         }
-        return route(appRoute(for: routeRequest, source: command.source), source: command.source)
+        return route(
+            appRoute(for: routeRequest, source: command.source),
+            source: command.source,
+            pipelineTrace: pipelineTrace
+        )
     }
 
-    private func route(_ route: AppExternalRoute, source: ExternalActionSource) -> ExternalActionResult {
+    private func fallbackPipelineTrace(
+        for command: ExternalActionCommand,
+        result: RuntimeActionResult
+    ) -> StageActionPipelineTrace {
+        if result.routeRequest != nil || command.stageActionTaxonomy == .shellNavigationOverlay {
+            return command.shellPipelineTrace()
+        }
+
+        switch result.outcome {
+        case .performed:
+            return command.productRuntimePipelineTrace(
+                commandValidation: .satisfied("Runtime executor accepted the external action."),
+                runtimeMutation: .satisfied("Runtime executor reported performed."),
+                visibleMutation: .satisfied("Runtime executor returned a performed result to the app boundary."),
+                proofReceipt: .unavailable("Injected runtime executor did not provide typed proof or receipt IDs."),
+                accessibility: .satisfied("Runtime result preserves a user-facing message boundary."),
+                fallbackUndo: .satisfied("Failure keeps previous state; undo is provided only by scoped mutation handlers.")
+            )
+        case .missingTarget:
+            return command.productRuntimePipelineTrace(
+                commandValidation: .blocked("Runtime executor reported a missing target."),
+                runtimeMutation: .blocked("No runtime mutation is claimed without the target."),
+                visibleMutation: .blocked("No visible product mutation is claimed."),
+                proofReceipt: .unavailable("No proof or receipt is created for a blocked action."),
+                accessibility: .satisfied("Missing target preserves a safe unavailable state."),
+                fallbackUndo: .satisfied("The previous state remains unchanged.")
+            )
+        case .unsupported, .failed:
+            return command.productRuntimePipelineTrace(
+                commandValidation: .blocked("Runtime executor rejected the external action."),
+                runtimeMutation: .blocked("No runtime mutation is claimed."),
+                visibleMutation: .blocked("No visible product mutation is claimed."),
+                proofReceipt: .unavailable("No proof or receipt is created for rejected action."),
+                accessibility: .satisfied("Rejected action preserves a safe unavailable state."),
+                fallbackUndo: .satisfied("The previous state remains unchanged.")
+            )
+        case .routed:
+            return command.shellPipelineTrace()
+        }
+    }
+
+    private func route(
+        _ route: AppExternalRoute,
+        source: ExternalActionSource,
+        pipelineTrace: StageActionPipelineTrace?
+    ) -> ExternalActionResult {
         externalRouter.dispatch(route, source: routeSource(for: source))
-        return ExternalActionResult(outcome: .routed, route: route)
+        return ExternalActionResult(outcome: .routed, route: route, pipelineTrace: pipelineTrace)
     }
 
     private func routeSource(for source: ExternalActionSource) -> AppExternalRouteSource {

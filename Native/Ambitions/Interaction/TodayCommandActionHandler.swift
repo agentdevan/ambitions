@@ -19,13 +19,18 @@ struct TodayCommandActionHandler {
         command: AmbitionsCommand,
         now: Date
     ) async throws -> TodayActionResponse {
-        let validator = AmbitionsCommandValidator()
-        let validation = validator.validate(command)
+        let validation = effectiveValidation(command: command, action: action)
 
         let goalID = action.target.goalID
         let beforeFeedback = try await preFeedbackEvents(for: goalID)
         let beforeEvidence = try await preEvidenceRecords(goalID: goalID)
         let beforeCaptures = try await repositories.captures.listCaptures()
+
+        if validation != .valid {
+            let result = blockedCommandResult(for: validation, command: command)
+            await persistCommandExecution(command: command, result: result, at: now)
+            return blockedActionResponse(for: validation)
+        }
 
         let response = try await feedbackAction(action, now)
 
@@ -85,6 +90,25 @@ struct TodayCommandActionHandler {
         try? await commandExecutionRecords.append(record)
     }
 
+    private func effectiveValidation(
+        command: AmbitionsCommand,
+        action: TodayInlineAction
+    ) -> AmbitionsCommandValidationState {
+        let commandValidation = AmbitionsCommandValidator().validate(command)
+        guard commandValidation == .valid else { return commandValidation }
+        guard Self.requiresActionTarget(action.kind) else { return .valid }
+        return action.target.goalID == nil || action.target.stepID == nil ? .needsMissingTarget : .valid
+    }
+
+    private static func requiresActionTarget(_ kind: TodayActionKind) -> Bool {
+        switch kind {
+        case .complete, .defer, .reschedule, .split, .askForHelp, .askWhyThisMatters, .quickLog:
+            return true
+        default:
+            return false
+        }
+    }
+
     private func makeCommandExecutionResult(
         validation: AmbitionsCommandValidationState,
         command: AmbitionsCommand,
@@ -92,10 +116,6 @@ struct TodayCommandActionHandler {
         eventLedgerEntryIDs: [String],
         resultTarget: AmbitionsCommandTarget
     ) -> AmbitionsCommandExecutionResult {
-        if validation != .valid {
-            return blockedCommandResult(for: validation, command: command)
-        }
-
         let status: AmbitionsCommandExecutionStatus = eventLedgerEntryIDs.isEmpty ? .noOp : .succeeded
         return AmbitionsCommandExecutionResult(
             status: status,
@@ -107,7 +127,14 @@ struct TodayCommandActionHandler {
                 "commandSource": command.source.rawValue,
                 "todayAction": action.kind.rawValue,
                 "hapticIntent": HapticPolicy.intent(for: action.kind).rawValue,
-                "validation": validation.rawValue
+                "validation": validation.rawValue,
+                "stageActionPipelineTaxonomy": StageActionTaxonomy.productRuntime.rawValue,
+                "stageActionPipelineCommandValidation": StageActionPipelineRequirementState.satisfied.rawValue,
+                "stageActionPipelineRuntimeMutation": status == .succeeded ? StageActionPipelineRequirementState.satisfied.rawValue : StageActionPipelineRequirementState.unavailable.rawValue,
+                "stageActionPipelineVisibleMutation": status == .succeeded ? StageActionPipelineRequirementState.satisfied.rawValue : StageActionPipelineRequirementState.unavailable.rawValue,
+                "stageActionPipelineProofReceipt": eventLedgerEntryIDs.isEmpty ? StageActionPipelineRequirementState.unavailable.rawValue : StageActionPipelineRequirementState.satisfied.rawValue,
+                "stageActionPipelineAccessibilityAnnouncement": TodayInteractions.accessibilityAnnouncement(for: TodayInteractions.intent(for: action)),
+                "stageActionPipelineFallbackUndo": StageActionPipelineRequirementState.satisfied.rawValue
             ]
         )
     }
@@ -161,7 +188,41 @@ struct TodayCommandActionHandler {
             summary: summary,
             target: command.target,
             recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
-            metadata: ["validation": validation.rawValue]
+            metadata: [
+                "validation": validation.rawValue,
+                "stageActionPipelineTaxonomy": StageActionTaxonomy.productRuntime.rawValue,
+                "stageActionPipelineCommandValidation": StageActionPipelineRequirementState.blocked.rawValue,
+                "stageActionPipelineRuntimeMutation": StageActionPipelineRequirementState.blocked.rawValue,
+                "stageActionPipelineVisibleMutation": StageActionPipelineRequirementState.blocked.rawValue,
+                "stageActionPipelineProofReceipt": StageActionPipelineRequirementState.unavailable.rawValue,
+                "stageActionPipelineAccessibilityAnnouncement": "Action not available.",
+                "stageActionPipelineFallbackUndo": StageActionPipelineRequirementState.satisfied.rawValue
+            ]
+        )
+    }
+
+    private func blockedActionResponse(for validation: AmbitionsCommandValidationState) -> TodayActionResponse {
+        let body: String
+        switch validation {
+        case .valid:
+            body = "Command is valid."
+        case .invalid:
+            body = "This action needs a clearer command before Ambitions can change anything."
+        case .needsConfirmation:
+            body = "Review this action before Ambitions changes anything."
+        case .needsMissingTarget:
+            body = "This action needs a real Step or source object before Ambitions can change anything."
+        case .unsupportedInThisBuild:
+            body = "This action is not available in this build."
+        case .blockedByMissingFoundation:
+            body = "This action is waiting on foundation work before it can run."
+        }
+        return TodayActionResponse(
+            message: TodayInlineMessage(
+                title: "Action not available",
+                body: body,
+                state: .warning
+            )
         )
     }
 

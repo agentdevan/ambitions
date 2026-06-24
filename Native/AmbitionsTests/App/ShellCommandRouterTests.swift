@@ -37,8 +37,46 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertTrue(navigation.timePath.isEmpty)
         XCTAssertEqual(result.title, "Saved as Idea")
         XCTAssertEqual(result.destination, expectedDestination)
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
+        XCTAssertEqual(result.pipelineTrace?.commandKind, .quickCapture)
+        XCTAssertEqual(result.pipelineTrace?.commandValidation.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.visibleMutation.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
+        XCTAssertEqual(result.pipelineTrace?.accessibilityAnnouncement.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.fallbackUndo.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.shellRouteChange.state, .notApplicable)
+        XCTAssertEqual(result.pipelineTrace?.scopedFlowIDs, ["SCG006-F03"])
+        XCTAssertTrue(result.pipelineTrace?.knownIssueIDs.contains("AMB-ISSUE-0003") == true)
         XCTAssertEqual(navigation.recentCommandHistory.first?.title, "Saved as Idea")
         XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Capture")
+    }
+
+    func testQuickCaptureWithoutTextIsBlockedByProductRuntimePipeline() async throws {
+        let navigation = StageStore(selectedSurface: .today)
+        let repository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-shell" })
+        let router = DefaultShellCommandRouter(navigation: navigation, captureService: captureService)
+
+        let result = await router.execute(
+            intent: .quickCapture,
+            text: "   ",
+            goalID: nil,
+            captureID: nil,
+            source: .shellCompose,
+            now: Date(timeIntervalSince1970: 1_712_692_800)
+        )
+
+        let captures = try await repository.listCaptures()
+        XCTAssertEqual(result.title, "Capture needs text")
+        XCTAssertTrue(captures.isEmpty)
+        XCTAssertNil(result.destination)
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .productRuntime)
+        XCTAssertEqual(result.pipelineTrace?.commandValidation.state, .blocked)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .blocked)
+        XCTAssertEqual(result.pipelineTrace?.visibleMutation.state, .blocked)
+        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .unavailable)
+        XCTAssertEqual(result.pipelineTrace?.fallbackUndo.state, .satisfied)
     }
 
     func testRouteToGlobalCaptureComposerUsesGlobalCaptureOverlay() {
@@ -98,6 +136,11 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.activeOverlay?.intent, .quickCapture)
         XCTAssertEqual(navigation.activeOverlay?.entrySource, .appIntent)
         XCTAssertEqual(result.destination, expectedDestination)
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .shellNavigationOverlay)
+        XCTAssertTrue(result.pipelineTrace?.isHonestShellNonRuntime == true)
+        XCTAssertEqual(result.pipelineTrace?.shellRouteChange.state, .satisfied)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .notApplicable)
+        XCTAssertEqual(result.pipelineTrace?.proofReceipt.state, .notApplicable)
         XCTAssertEqual(navigation.recentCommandHistory.first?.destinationLabel, "Capture")
     }
 
@@ -159,6 +202,10 @@ final class ShellCommandRouterTests: XCTestCase {
         XCTAssertEqual(navigation.todayEntryContext, .focus)
         XCTAssertEqual(navigation.recentCommandHistory.first?.presentationContext, .focus)
         XCTAssertEqual(result.destination, ShellCommandDestination.tab(.today))
+        XCTAssertEqual(result.pipelineTrace?.taxonomy, .shellNavigationOverlay)
+        XCTAssertTrue(result.pipelineTrace?.isHonestShellNonRuntime == true)
+        XCTAssertEqual(result.pipelineTrace?.runtimeMutation.state, .notApplicable)
+        XCTAssertEqual(result.pipelineTrace?.visibleMutation.state, .notApplicable)
     }
 
     func testPresentCreateGoalCarriesSeedTextAndCaptureContext() {
