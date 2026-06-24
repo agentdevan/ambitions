@@ -1,0 +1,2174 @@
+{
+  "automated_findings_mapping": {
+    "fixture_findings_treatment": "fixture-only detector proof; not production repair inputs and not known-issues rows",
+    "real_repo_findings_mapped": [
+      "SCG-004-001",
+      "SCG-004-002",
+      "SCG-004-003",
+      "SCG-004-004",
+      "SCG-004-005",
+      "SCG-004-006",
+      "SCG-004-007",
+      "SCG-004-008",
+      "SCG-004-009",
+      "SCG-004-010",
+      "SCG-004-011",
+      "SCG-004-012",
+      "SCG-004-013"
+    ]
+  },
+  "branch": "main",
+  "carried_forward_evidence": {
+    "scg_003_unknown_ownership_layer_classifications": 117,
+    "scg_003_yellow_inventory_risks": 299,
+    "scg_004_fixture_only_findings": 16,
+    "scg_004_real_yellow_findings": 13,
+    "scg_005_b3_findings": 602,
+    "scg_005_b4_findings": 6,
+    "scg_005_missing_schema": [
+      "docs/quality/senior-review/schemas/review_ledger.schema.json"
+    ],
+    "scg_005_unknown_entries": 117,
+    "scg_005_yellow_file_review_entries": 361,
+    "scg_006_b3_root_causes": 9,
+    "scg_006_b4_root_causes": 1,
+    "scg_006_root_causes": 10,
+    "scg_006_yellow_flows": 16,
+    "scg_bg_001": "resolved; preserve as resolved"
+  },
+  "dependency_rules_applied": [
+    "Governance/control-plane gaps precede production repair trains.",
+    "Runtime/action/proof integrity precedes UI polish.",
+    "Canon/copy exposure gates precede root UI release-readiness.",
+    "Flow proof and mutation evidence precede visual Green claims.",
+    "Accessibility/static proof precedes device proof claims.",
+    "Known-issues sync must happen before SCG-008 production repair begins.",
+    "No later train depends on unresolved upstream Yellow unless explicitly accepted; this plan defines no accepted-risk bypass."
+  ],
+  "generated_at_utc": "2026-06-24T01:24:55+00:00",
+  "input_commits": {
+    "automated_findings_head_sha": "da113a78122394f0b6e0663e88ac3cc8920ca569",
+    "build_graph_inventory_head": "6e93e9cdb680334dca344326d179d9a44a8b5299",
+    "file_inventory_commit_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
+    "flow_trace_audit_head_sha": "da113a78122394f0b6e0663e88ac3cc8920ca569",
+    "root_cause_map_head_sha": "da113a78122394f0b6e0663e88ac3cc8920ca569",
+    "scg_006_commit_provided_by_user": "8f57a00fa0146d5e2d7ca8adc042c1b5ca696b43",
+    "senior_code_review_ledger_head_sha": "85b176e70988512988580697f0687802673b8ae0"
+  },
+  "issue": "AMB-1290 / SCG-007",
+  "known_issues_handling": {
+    "known_issues_rows_added": 0,
+    "known_issues_rows_updated": 0,
+    "new_red_b0_b1_b2_discovered_in_scg_007": false,
+    "scg_007a_required_before_scg_008": true,
+    "scg_bg_001": "preserved resolved"
+  },
+  "non_claims": [
+    "senior-readiness",
+    "production repair",
+    "SCG-007A started",
+    "SCG-008 started",
+    "runtime readiness",
+    "visual readiness",
+    "accessibility conformance",
+    "privacy/legal approval",
+    "release readiness",
+    "flow Green",
+    "file Green"
+  ],
+  "repair_train_count": 13,
+  "repair_trains": [
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Docs",
+        "Legacy/Unknown",
+        "Quality",
+        "SCG control plane"
+      ],
+      "affected_flow_names": [
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback"
+      ],
+      "affected_flows": [
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F15",
+        "SCG006-F16"
+      ],
+      "allowed_source_paths": [
+        "docs/quality/senior-review/schemas/",
+        "docs/quality/senior-review/",
+        "scripts/ambitions-senior-code-audit.py",
+        "docs/qa/KNOWN_ISSUES.md only if B0/B1/B2 or dedupe sync requires it"
+      ],
+      "blocked_by_trains": [],
+      "blocks_trains": [
+        "SCG-007B",
+        "SCG-007C",
+        "SCG-007D",
+        "SCG-007E",
+        "SCG-007F",
+        "SCG-007G",
+        "SCG-007H",
+        "SCG-007I",
+        "SCG-007J",
+        "SCG-007K",
+        "SCG-007L",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "missing docs/quality/senior-review/schemas/review_ledger.schema.json",
+        "SCG-004 stale inventory risk",
+        "known-issues sync required before SCG-008"
+      ],
+      "exact_scope_boundaries": [
+        "Control-plane schema/staleness and known-issues sync only.",
+        "Do not repair production behavior.",
+        "Do not start SCG-008."
+      ],
+      "forbidden_source_paths": [
+        "Native/",
+        "Sources/",
+        "Packages/",
+        "AppUI/",
+        "project.yml",
+        "Package.swift",
+        "Ambitions.xcodeproj/",
+        "Native/Ambitions/Resources/PrivacyInfo.xcprivacy"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Required before SCG-008; add known-issues rows only for real Red/B0/B1/B2, otherwise record no new rows.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Control-plane schema/staleness and known-issues sync only.\n\nRoot causes: RC-SCG006-008\nFinding IDs: SCG-004-012\nAffected flows: SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14, SCG006-F15, SCG006-F16\n\nBoundaries:\n- Control-plane schema/staleness and known-issues sync only.\n- Do not repair production behavior.\n- Do not start SCG-008.\n\nRequired outputs:\n- review_ledger.schema.json or explicit accepted-Yellow waiver\n- stale-review gate evidence\n- known-issues sync/dedupe report preserving SCG-BG-001 resolved\n\nValidation commands:\n- `python3 -m json.tool docs/quality/senior-review/REPAIR_TRAINS.json`\n- `python3 -m json.tool docs/quality/senior-review/ROOT_CAUSE_MAP.json`\n- `python3 -m json.tool docs/quality/senior-review/FLOW_TRACE_AUDIT.json`\n- `python3 -m json.tool docs/quality/senior-review/SENIOR_CODE_REVIEW_LEDGER.json`\n- `python3 -m json.tool docs/quality/senior-review/AUTOMATED_FINDINGS.json`\n- `python3 -m json.tool docs/quality/senior-review/FILE_INVENTORY.json`\n- `YAML parse validation for docs/quality/senior-review/OWNERSHIP_MAP.yaml if available`\n- `python3 scripts/ambitions-senior-code-audit.py`\n- `python3 scripts/ambitions-senior-code-audit.py --json`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007A - Control-plane schema and stale-review hardening gate",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "SCG inputs remain Yellow because the review-ledger schema is missing and stale-review hardening is not yet enforced before production repair.",
+      "related_finding_ids": [
+        "SCG-004-012"
+      ],
+      "required_implementation_outputs": [
+        "review_ledger.schema.json or explicit accepted-Yellow waiver",
+        "stale-review gate evidence",
+        "known-issues sync/dedupe report preserving SCG-BG-001 resolved"
+      ],
+      "required_proof_artifacts": [
+        "schema validation logs",
+        "sync/dedupe report",
+        "path guard output"
+      ],
+      "required_tests": [
+        "JSON/schema validation",
+        "senior audit rerun",
+        "production path diff guard"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "not applicable",
+        "device": "not applicable",
+        "privacy": "confirm no runtime privacy behavior changed",
+        "visual": "not applicable"
+      },
+      "rollback_requirement": "Revert schema/control-plane artifacts; no production rollback required.",
+      "root_cause_ids": [
+        "RC-SCG006-008"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 0
+        },
+        "highest": "B3"
+      },
+      "specific_validation_commands": [
+        "python3 -m json.tool docs/quality/senior-review/REPAIR_TRAINS.json",
+        "python3 -m json.tool docs/quality/senior-review/ROOT_CAUSE_MAP.json",
+        "python3 -m json.tool docs/quality/senior-review/FLOW_TRACE_AUDIT.json",
+        "python3 -m json.tool docs/quality/senior-review/SENIOR_CODE_REVIEW_LEDGER.json",
+        "python3 -m json.tool docs/quality/senior-review/AUTOMATED_FINDINGS.json",
+        "python3 -m json.tool docs/quality/senior-review/FILE_INVENTORY.json",
+        "YAML parse validation for docs/quality/senior-review/OWNERSHIP_MAP.yaml if available",
+        "python3 scripts/ambitions-senior-code-audit.py",
+        "python3 scripts/ambitions-senior-code-audit.py --json",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Control-plane schema and stale-review hardening gate",
+      "train_id": "SCG-007A"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Docs",
+        "Legacy/Unknown",
+        "Quality",
+        "SCG control plane"
+      ],
+      "affected_flow_names": [
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback"
+      ],
+      "affected_flows": [
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F15",
+        "SCG006-F16"
+      ],
+      "allowed_source_paths": [
+        "docs/quality/senior-review/FILE_INVENTORY.*",
+        "docs/quality/senior-review/OWNERSHIP_MAP.yaml",
+        "docs/quality/senior-review/SENIOR_CODE_REVIEW_*",
+        "retained inventory/audit scripts when scoped"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A"
+      ],
+      "blocks_trains": [
+        "SCG-007C",
+        "SCG-007D",
+        "SCG-007E",
+        "SCG-007F",
+        "SCG-007G",
+        "SCG-007H",
+        "SCG-007I",
+        "SCG-007J",
+        "SCG-007K",
+        "SCG-007L",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "117 Unknown ledger entries",
+        "361 Yellow ledger entries",
+        "66 unknown/flagged build memberships",
+        "8 generated files without confirmed generator/source",
+        "layer import boundary candidates"
+      ],
+      "exact_scope_boundaries": [
+        "Classify ownership and layer risks only.",
+        "Do not move or edit production source.",
+        "Do not mark file Green without current owner/proof evidence."
+      ],
+      "forbidden_source_paths": [
+        "Native/",
+        "Sources/",
+        "Packages/",
+        "AppUI/",
+        "project.yml",
+        "Package.swift",
+        "Ambitions.xcodeproj/",
+        "Native/Ambitions/Resources/PrivacyInfo.xcprivacy"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Update KNOWN_ISSUES only if ownership review discovers real Red/B0/B1/B2.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Classify ownership and layer risks only.\n\nRoot causes: RC-SCG006-008\nFinding IDs: SCG-004-001, SCG-004-002, SCG-004-003\nAffected flows: SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14, SCG006-F15, SCG006-F16\n\nBoundaries:\n- Classify ownership and layer risks only.\n- Do not move or edit production source.\n- Do not mark file Green without current owner/proof evidence.\n\nRequired outputs:\n- refreshed ownership map\n- unknown disposition table\n- inventory hygiene summary\n- ledger update preserving proof limits\n\nValidation commands:\n- `python3 -m json.tool docs/quality/senior-review/REPAIR_TRAINS.json`\n- `python3 -m json.tool docs/quality/senior-review/ROOT_CAUSE_MAP.json`\n- `python3 -m json.tool docs/quality/senior-review/FLOW_TRACE_AUDIT.json`\n- `python3 -m json.tool docs/quality/senior-review/SENIOR_CODE_REVIEW_LEDGER.json`\n- `python3 -m json.tool docs/quality/senior-review/AUTOMATED_FINDINGS.json`\n- `python3 -m json.tool docs/quality/senior-review/FILE_INVENTORY.json`\n- `YAML parse validation for docs/quality/senior-review/OWNERSHIP_MAP.yaml if available`\n- `python3 scripts/ambitions-senior-code-audit.py`\n- `python3 scripts/ambitions-senior-code-audit.py --json`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007B - Ownership/layer unknowns and inventory hygiene",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Unknown ownership/layer classifications and Yellow inventory risks make downstream production repair unsafe.",
+      "related_finding_ids": [
+        "SCG-004-001",
+        "SCG-004-002",
+        "SCG-004-003"
+      ],
+      "required_implementation_outputs": [
+        "refreshed ownership map",
+        "unknown disposition table",
+        "inventory hygiene summary",
+        "ledger update preserving proof limits"
+      ],
+      "required_proof_artifacts": [
+        "before/after Unknown and Yellow counts",
+        "sampled owner evidence",
+        "path guard output"
+      ],
+      "required_tests": [
+        "inventory JSON validation",
+        "OWNERSHIP_MAP YAML parse",
+        "senior audit rerun"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "not applicable",
+        "device": "not applicable",
+        "privacy": "confirm no runtime privacy behavior changed",
+        "visual": "not applicable"
+      },
+      "rollback_requirement": "Revert refreshed inventory/ownership files.",
+      "root_cause_ids": [
+        "RC-SCG006-008"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 0
+        },
+        "highest": "B3"
+      },
+      "specific_validation_commands": [
+        "python3 -m json.tool docs/quality/senior-review/REPAIR_TRAINS.json",
+        "python3 -m json.tool docs/quality/senior-review/ROOT_CAUSE_MAP.json",
+        "python3 -m json.tool docs/quality/senior-review/FLOW_TRACE_AUDIT.json",
+        "python3 -m json.tool docs/quality/senior-review/SENIOR_CODE_REVIEW_LEDGER.json",
+        "python3 -m json.tool docs/quality/senior-review/AUTOMATED_FINDINGS.json",
+        "python3 -m json.tool docs/quality/senior-review/FILE_INVENTORY.json",
+        "YAML parse validation for docs/quality/senior-review/OWNERSHIP_MAP.yaml if available",
+        "python3 scripts/ambitions-senior-code-audit.py",
+        "python3 scripts/ambitions-senior-code-audit.py --json",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Ownership/layer unknowns and inventory hygiene",
+      "train_id": "SCG-007B"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Stage",
+        "Composer/Capture",
+        "Surfaces/Today",
+        "Surfaces/Goals",
+        "Surfaces/Time",
+        "Trust",
+        "Core/Persistence",
+        "Core/Permissions",
+        "Interaction",
+        "Projection/SurfaceLenses",
+        "Core/Runtime ClosureEngine",
+        "EventLedger",
+        "Projection/Mutations",
+        "Trust/Receipt",
+        "You memory controls"
+      ],
+      "affected_flow_names": [
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback"
+      ],
+      "affected_flows": [
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F15",
+        "SCG006-F16"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/Core/Runtime/",
+        "Native/Ambitions/Projection/Mutations/",
+        "Native/Ambitions/Trust/",
+        "Native/Ambitions/Interaction/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/AmbitionsTests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B"
+      ],
+      "blocks_trains": [
+        "SCG-007D",
+        "SCG-007E",
+        "SCG-007F",
+        "SCG-007G",
+        "SCG-007L",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "32 mutation/action candidates without local proof/receipt/undo markers",
+        "undo not uniformly proven outside Time visible mutations"
+      ],
+      "exact_scope_boundaries": [
+        "Repair only typed mutation/proof/undo contracts for identified flows.",
+        "No visual restyling.",
+        "Flow Green waits for flow proof."
+      ],
+      "forbidden_source_paths": [
+        "AppUI/",
+        "Packages/ unless scoped",
+        "project.yml unless scoped",
+        "Package.swift",
+        "Ambitions.xcodeproj/",
+        "Native/Ambitions/Resources/PrivacyInfo.xcprivacy"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Update rows only for real B0/B1/B2; otherwise keep Yellow until flow proof.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Repair only typed mutation/proof/undo contracts for identified flows.\n\nRoot causes: RC-SCG006-001, RC-SCG006-004, RC-SCG006-007\nFinding IDs: SCG-004-004\nAffected flows: SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14, SCG006-F15, SCG006-F16\n\nBoundaries:\n- Repair only typed mutation/proof/undo contracts for identified flows.\n- No visual restyling.\n- Flow Green waits for flow proof.\n\nRequired outputs:\n- mutation path inventory\n- typed proof/receipt/undo contract repairs\n- safe fallback behavior\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TodayCommandHandlerTests CODE_SIGNING_ALLOWED=NO`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TimeFieldMutationCoordinatorTests CODE_SIGNING_ALLOWED=NO`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007C - Runtime action, proof, mutation, and undo contract hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Mutation, proof receipt, accessible state change, and undo are uneven across Today, closure, Time, Capture route changes, and destructive controls.",
+      "related_finding_ids": [
+        "SCG-004-004"
+      ],
+      "required_implementation_outputs": [
+        "mutation path inventory",
+        "typed proof/receipt/undo contract repairs",
+        "safe fallback behavior"
+      ],
+      "required_proof_artifacts": [
+        "receipt/proof IDs",
+        "before/action/after logs",
+        "rollback notes"
+      ],
+      "required_tests": [
+        "TodayCommandHandlerTests",
+        "TimeFieldMutationCoordinatorTests",
+        "ClosureRecoveryPrimitiveFamilyTests",
+        "new undo contract tests"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "accessible announcement/state tests required",
+        "device": "deferred to flow/visual proof unless scoped",
+        "privacy": "no private data leaves local runtime",
+        "visual": "screenshots only when needed to show visible mutation; no Visual Green"
+      },
+      "rollback_requirement": "Revert runtime contract files and tests together.",
+      "root_cause_ids": [
+        "RC-SCG006-001",
+        "RC-SCG006-004",
+        "RC-SCG006-007"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 3,
+          "B4": 0
+        },
+        "highest": "B3"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TodayCommandHandlerTests CODE_SIGNING_ALLOWED=NO",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TimeFieldMutationCoordinatorTests CODE_SIGNING_ALLOWED=NO",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Runtime action, proof, mutation, and undo contract hardening",
+      "train_id": "SCG-007C"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Composer/Capture",
+        "Stage overlay",
+        "AppShellActivatedCaptureSeam",
+        "Core/Runtime CaptureService",
+        "Stage",
+        "Surfaces/Today",
+        "Surfaces/Goals",
+        "Surfaces/Time",
+        "Trust",
+        "Core/Persistence",
+        "Core/Permissions",
+        "Surfaces/You",
+        "Stage/Chrome",
+        "DesignSystem"
+      ],
+      "affected_flow_names": [
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback"
+      ],
+      "affected_flows": [
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F12",
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F15",
+        "SCG006-F16"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/Composer/Capture/",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/App/Shell*",
+        "Native/Ambitions/Core/Runtime/*Capture*",
+        "Native/AmbitionsTests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B",
+        "SCG-007C"
+      ],
+      "blocks_trains": [
+        "SCG-007L",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "Capture full-screen proof missing",
+        "keyboard/focus screenshots missing",
+        "proposal/receipt screenshots missing"
+      ],
+      "exact_scope_boundaries": [
+        "Keep Capture global composer only.",
+        "Repair save/proposal/receipt/keyboard paths only.",
+        "Do not broaden into other surface repairs except handoff assertions."
+      ],
+      "forbidden_source_paths": [
+        "Surfaces/Capture/",
+        "root Capture tab/routing",
+        "Package.swift",
+        "Ambitions.xcodeproj/",
+        "PrivacyInfo.xcprivacy unless scoped"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Reconcile Capture rows; do not close without proof matrix.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Keep Capture global composer only.\n\nRoot causes: RC-SCG006-002, RC-SCG006-001, RC-SCG006-010\nFinding IDs: SCG-004-004, SCG-004-005, SCG-004-006, SCG-004-008, SCG-004-011, SCG-004-013\nAffected flows: SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F12, SCG006-F01, SCG006-F02, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F13, SCG006-F14, SCG006-F15, SCG006-F16\n\nBoundaries:\n- Keep Capture global composer only.\n- Repair save/proposal/receipt/keyboard paths only.\n- Do not broaden into other surface repairs except handoff assertions.\n\nRequired outputs:\n- full-screen composer state-machine proof\n- local save receipt path\n- route correction fallback\n- keyboard/focus accessibility behavior\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/CaptureViewModelTests CODE_SIGNING_ALLOWED=NO`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/CaptureRuntimeReceiptTests CODE_SIGNING_ALLOWED=NO`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007D - Capture global composer save, keyboard, proposal, and receipt hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Capture local save exists in source but remains Yellow for full-screen composer, keyboard focus, proposal/correction, receipt, and device proof.",
+      "related_finding_ids": [
+        "SCG-004-004",
+        "SCG-004-005",
+        "SCG-004-006",
+        "SCG-004-008",
+        "SCG-004-011",
+        "SCG-004-013"
+      ],
+      "required_implementation_outputs": [
+        "full-screen composer state-machine proof",
+        "local save receipt path",
+        "route correction fallback",
+        "keyboard/focus accessibility behavior"
+      ],
+      "required_proof_artifacts": [
+        "blank/focused/proposal/receipt/correction screenshots",
+        "test logs",
+        "known-issues reconciliation"
+      ],
+      "required_tests": [
+        "CaptureViewModelTests",
+        "CaptureRuntimeReceiptTests",
+        "ShellCommandRouterTests",
+        "UI test for blank/focused/proposal/receipt"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "VoiceOver labels/actions and keyboard fallback",
+        "device": "device or simulator screenshots tied to commit",
+        "privacy": "local-only/no account or network dependency",
+        "visual": "reviewable screenshots required; no self-certified Visual Green"
+      },
+      "rollback_requirement": "Revert Capture/Stage overlay/tests as one scoped set.",
+      "root_cause_ids": [
+        "RC-SCG006-002",
+        "RC-SCG006-001",
+        "RC-SCG006-010"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 2,
+          "B4": 1
+        },
+        "highest": "B4"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/CaptureViewModelTests CODE_SIGNING_ALLOWED=NO",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/CaptureRuntimeReceiptTests CODE_SIGNING_ALLOWED=NO",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Capture global composer save, keyboard, proposal, and receipt hardening",
+      "train_id": "SCG-007D"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Surfaces/Goals",
+        "Projection/SurfaceLenses",
+        "Surfaces/Today",
+        "Core/Persistence",
+        "Interaction",
+        "Core/Runtime ClosureEngine",
+        "EventLedger",
+        "Stage",
+        "Composer/Capture",
+        "Surfaces/Time",
+        "Trust",
+        "Core/Permissions"
+      ],
+      "affected_flow_names": [
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F14 - Undo",
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback"
+      ],
+      "affected_flows": [
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F13",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F14",
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F15",
+        "SCG006-F16"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/Today/",
+        "Native/Ambitions/Projection/SurfaceLenses/",
+        "Native/Ambitions/Core/Persistence/",
+        "Native/AmbitionsTests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B",
+        "SCG-007C"
+      ],
+      "blocks_trains": [
+        "SCG-007L",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "Goals plus/no-crash proof pending",
+        "Today feed/no-step proof pending",
+        "Goal detail route proof pending"
+      ],
+      "exact_scope_boundaries": [
+        "Repair Create Goal, Goal Detail route, Today feed, and Start here coupling only.",
+        "No broad Goals redesign.",
+        "No Green claim until current runtime proof."
+      ],
+      "forbidden_source_paths": [
+        "Surfaces/Capture as top-level",
+        "Motion root surface paths",
+        "project.yml unless needed",
+        "Ambitions.xcodeproj/"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Reconcile Goals/Today rows; keep Yellow if visual/device/accessibility proof remains missing.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Repair Create Goal, Goal Detail route, Today feed, and Start here coupling only.\n\nRoot causes: RC-SCG006-003, RC-SCG006-004, RC-SCG006-001\nFinding IDs: SCG-004-004, SCG-004-005, SCG-004-011, SCG-004-013\nAffected flows: SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F13, SCG006-F08, SCG006-F09, SCG006-F14, SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F15, SCG006-F16\n\nBoundaries:\n- Repair Create Goal, Goal Detail route, Today feed, and Start here coupling only.\n- No broad Goals redesign.\n- No Green claim until current runtime proof.\n\nRequired outputs:\n- create goal runtime path\n- Goal detail route evidence\n- Today feed recompute evidence\n- Goals plus no-crash proof\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/CreateGoalViewModelTests CODE_SIGNING_ALLOWED=NO`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TodayFreshGoalVisibilityTests CODE_SIGNING_ALLOWED=NO`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007E - Goals creation to Today Start here coupling hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Goal creation to Today feed has focused source/tests, but the runtime/device path from create goal to Recommended step/Start here remains Yellow.",
+      "related_finding_ids": [
+        "SCG-004-004",
+        "SCG-004-005",
+        "SCG-004-011",
+        "SCG-004-013"
+      ],
+      "required_implementation_outputs": [
+        "create goal runtime path",
+        "Goal detail route evidence",
+        "Today feed recompute evidence",
+        "Goals plus no-crash proof"
+      ],
+      "required_proof_artifacts": [
+        "current flow capture",
+        "focused logs",
+        "known-issues reconciliation"
+      ],
+      "required_tests": [
+        "CreateGoalViewModelTests",
+        "GoalsShellIntegrationTests",
+        "TodayFreshGoalVisibilityTests",
+        "focused UI route-depth test"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "Start here/Open step/Start now semantics",
+        "device": "current proof before closing device rows",
+        "privacy": "local persistence only",
+        "visual": "functional screenshots only unless paired with visual train"
+      },
+      "rollback_requirement": "Revert Goals/Today/runtime tests together.",
+      "root_cause_ids": [
+        "RC-SCG006-003",
+        "RC-SCG006-004",
+        "RC-SCG006-001"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 3,
+          "B4": 0
+        },
+        "highest": "B3"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/CreateGoalViewModelTests CODE_SIGNING_ALLOWED=NO",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TodayFreshGoalVisibilityTests CODE_SIGNING_ALLOWED=NO",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Goals creation to Today Start here coupling hardening",
+      "train_id": "SCG-007E"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Surfaces/Time",
+        "Projection/Mutations",
+        "Projection/SurfaceLenses/TodayLens",
+        "Core/Runtime ScheduleInstallKernel",
+        "Core/Permissions",
+        "Core/Runtime ClosureEngine",
+        "Trust/Receipt",
+        "You memory controls",
+        "AppContainerFactory",
+        "Core/Persistence",
+        "Core/Runtime",
+        "Privacy boundary",
+        "Stage",
+        "Composer/Capture",
+        "Surfaces/Today",
+        "Surfaces/Goals",
+        "Trust"
+      ],
+      "affected_flow_names": [
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F14 - Undo",
+        "SCG006-F16 - Permission denied fallback",
+        "SCG006-F08 - Close step",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?"
+      ],
+      "affected_flows": [
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F14",
+        "SCG006-F16",
+        "SCG006-F08",
+        "SCG006-F15",
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F12",
+        "SCG006-F13"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/Surfaces/Time/",
+        "Native/Ambitions/Projection/Mutations/",
+        "Native/Ambitions/Projection/SurfaceLenses/TodayLens*",
+        "Native/Ambitions/Core/Time/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/AmbitionsTests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B",
+        "SCG-007C"
+      ],
+      "blocks_trains": [
+        "SCG-007L",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "direct Date() candidates",
+        "permission-denied fallback proof missing",
+        "Time device proof missing"
+      ],
+      "exact_scope_boundaries": [
+        "Repair Time placement/protection/correction and Today recompute only.",
+        "No external calendar/cloud sync dependency.",
+        "Permission-denied fallback must be safe and honest."
+      ],
+      "forbidden_source_paths": [
+        "external calendar sync as required core behavior",
+        "cloud scheduling",
+        "Package.swift unless scoped",
+        "PrivacyInfo.xcprivacy unless scoped"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Reconcile Time rows; keep Yellow if proof is simulator-only or manual accessibility proof absent.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Repair Time placement/protection/correction and Today recompute only.\n\nRoot causes: RC-SCG006-005, RC-SCG006-007, RC-SCG006-009, RC-SCG006-001\nFinding IDs: SCG-004-004, SCG-004-007, SCG-004-010, SCG-004-011, SCG-004-013\nAffected flows: SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F14, SCG006-F16, SCG006-F08, SCG006-F15, SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F12, SCG006-F13\n\nBoundaries:\n- Repair Time placement/protection/correction and Today recompute only.\n- No external calendar/cloud sync dependency.\n- Permission-denied fallback must be safe and honest.\n\nRequired outputs:\n- injected-clock cleanup\n- real-step-only mutation proof\n- Today recompute evidence\n- permission-denied fallback evidence\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TimeTodayCouplingTests CODE_SIGNING_ALLOWED=NO`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TimeFieldMutationCoordinatorTests CODE_SIGNING_ALLOWED=NO`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007F - Time Life Calendar mutation, Today recompute, and permission fallback hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Time remains Yellow for visible placement/protection, injected-clock correctness, Today recompute, permission-denied fallback, and device proof.",
+      "related_finding_ids": [
+        "SCG-004-004",
+        "SCG-004-007",
+        "SCG-004-010",
+        "SCG-004-011",
+        "SCG-004-013"
+      ],
+      "required_implementation_outputs": [
+        "injected-clock cleanup",
+        "real-step-only mutation proof",
+        "Today recompute evidence",
+        "permission-denied fallback evidence"
+      ],
+      "required_proof_artifacts": [
+        "Time mutation screenshots/video",
+        "accessibility announcement evidence",
+        "focused logs"
+      ],
+      "required_tests": [
+        "TimeTodayCouplingTests",
+        "TimeFieldMutationCoordinatorTests",
+        "injected-clock regression tests",
+        "permission-denied fallback tests"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "VoiceOver values/actions and Reduce Motion fallback",
+        "device": "current proof before closing device rows",
+        "privacy": "no personal calendar upload or private graph path",
+        "visual": "Time mutation screenshots required; no Visual Green"
+      },
+      "rollback_requirement": "Revert Time/projection/tests together.",
+      "root_cause_ids": [
+        "RC-SCG006-005",
+        "RC-SCG006-007",
+        "RC-SCG006-009",
+        "RC-SCG006-001"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 4,
+          "B4": 0
+        },
+        "highest": "B3"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TimeTodayCouplingTests CODE_SIGNING_ALLOWED=NO",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/TimeFieldMutationCoordinatorTests CODE_SIGNING_ALLOWED=NO",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Time Life Calendar mutation, Today recompute, and permission fallback hardening",
+      "train_id": "SCG-007F"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Core/Runtime MemoryLensService",
+        "Stage overlays",
+        "ShellCommandRouter",
+        "Trust",
+        "Projection/Mutations",
+        "Core/Runtime ClosureEngine",
+        "Trust/Receipt",
+        "You memory controls",
+        "AppContainerFactory",
+        "Core/Persistence",
+        "Core/Runtime",
+        "Core/Permissions",
+        "Privacy boundary",
+        "Stage",
+        "Composer/Capture",
+        "Surfaces/Today",
+        "Surfaces/Goals",
+        "Surfaces/Time"
+      ],
+      "affected_flow_names": [
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F08 - Close step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F14 - Undo",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback",
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F09 - Move step"
+      ],
+      "affected_flows": [
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F08",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F14",
+        "SCG006-F15",
+        "SCG006-F16",
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F09"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/Core/Runtime/MemoryLensService*",
+        "Native/Ambitions/Stage/",
+        "Native/Ambitions/App/ShellCommandRouter*",
+        "Native/Ambitions/Trust/",
+        "Native/AmbitionsTests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B",
+        "SCG-007C"
+      ],
+      "blocks_trains": [
+        "SCG-007L",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "Search runtime/device proof pending",
+        "inspection handoff proof pending",
+        "local-index privacy proof pending"
+      ],
+      "exact_scope_boundaries": [
+        "Repair Search overlay route, result action, inspection handoff, and local-only proof only.",
+        "Do not add network search or chatbot behavior.",
+        "Do not turn Search into a root surface."
+      ],
+      "forbidden_source_paths": [
+        "cloud search",
+        "hosted LLM search",
+        "private graph upload",
+        "persistent Search root tab",
+        "Ambitions.xcodeproj/"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Reconcile Search rows; do not close without runtime/device evidence.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Repair Search overlay route, result action, inspection handoff, and local-only proof only.\n\nRoot causes: RC-SCG006-006, RC-SCG006-007, RC-SCG006-009, RC-SCG006-001\nFinding IDs: SCG-004-004, SCG-004-010, SCG-004-011, SCG-004-013\nAffected flows: SCG006-F12, SCG006-F13, SCG006-F08, SCG006-F10, SCG006-F11, SCG006-F14, SCG006-F15, SCG006-F16, SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F09\n\nBoundaries:\n- Repair Search overlay route, result action, inspection handoff, and local-only proof only.\n- Do not add network search or chatbot behavior.\n- Do not turn Search into a root surface.\n\nRequired outputs:\n- local index route proof\n- typed result action proof\n- inspection handoff proof\n- privacy/local-only assertion\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/MemoryLensServiceTests CODE_SIGNING_ALLOWED=NO`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/ShellCommandRouterTests CODE_SIGNING_ALLOWED=NO`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007G - Search and inspection local Find / Act / Inspect proof hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Search and inspection are local-source-backed but lack current route/device proof for finding, acting, inspecting, and local-only trust boundaries.",
+      "related_finding_ids": [
+        "SCG-004-004",
+        "SCG-004-010",
+        "SCG-004-011",
+        "SCG-004-013"
+      ],
+      "required_implementation_outputs": [
+        "local index route proof",
+        "typed result action proof",
+        "inspection handoff proof",
+        "privacy/local-only assertion"
+      ],
+      "required_proof_artifacts": [
+        "Search overlay screenshots/video",
+        "route-depth evidence",
+        "local-index/privacy evidence"
+      ],
+      "required_tests": [
+        "MemoryLensServiceTests",
+        "ShellCommandRouterTests",
+        "focused Search overlay UI tests"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "VoiceOver route/result semantics",
+        "device": "current overlay/result proof",
+        "privacy": "no network/LLM/private data upload",
+        "visual": "Search screenshots required; no Visual Green"
+      },
+      "rollback_requirement": "Revert Search/Trust/router changes and tests together.",
+      "root_cause_ids": [
+        "RC-SCG006-006",
+        "RC-SCG006-007",
+        "RC-SCG006-009",
+        "RC-SCG006-001"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 4,
+          "B4": 0
+        },
+        "highest": "B3"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/MemoryLensServiceTests CODE_SIGNING_ALLOWED=NO",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test -only-testing:AmbitionsTests/ShellCommandRouterTests CODE_SIGNING_ALLOWED=NO",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Search and inspection local Find / Act / Inspect proof hardening",
+      "train_id": "SCG-007G"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Composer/Capture",
+        "Surfaces/Goals",
+        "Surfaces/You",
+        "Stage/Chrome",
+        "DesignSystem",
+        "Stage",
+        "Surfaces/Today",
+        "Surfaces/Time",
+        "Trust",
+        "Core/Persistence",
+        "Core/Permissions"
+      ],
+      "affected_flow_names": [
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F16 - Permission denied fallback",
+        "SCG006-F15 - Offline / no account"
+      ],
+      "affected_flows": [
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F16",
+        "SCG006-F15"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/Language/",
+        "Native/Ambitions/Projection/SurfaceLenses/",
+        "Native/Ambitions/Surfaces/",
+        "Native/Ambitions/Stage/Motion/",
+        "Native/AmbitionsTests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B"
+      ],
+      "blocks_trains": [
+        "SCG-007I",
+        "SCG-007J",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "forbidden terms: Begin Focus, Motion Current, best next move, local projection, next best move",
+        "AMB-ISSUE-0010 root UI internal language"
+      ],
+      "exact_scope_boundaries": [
+        "Remove/gate only evidence-backed forbidden/internal user-facing copy.",
+        "Use locked language: Start here, Recommended step, Step, Start now, Open step.",
+        "Do not rewrite product canon."
+      ],
+      "forbidden_source_paths": [
+        "new root Motion surface",
+        "new Capture tab",
+        "broad copy rewrite outside flagged files",
+        "Package.swift",
+        "Ambitions.xcodeproj/"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Update AMB-ISSUE-0010 only with scan plus screenshot evidence.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Remove/gate only evidence-backed forbidden/internal user-facing copy.\n\nRoot causes: RC-SCG006-010, RC-SCG006-001\nFinding IDs: SCG-004-006\nAffected flows: SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14, SCG006-F16, SCG006-F15\n\nBoundaries:\n- Remove/gate only evidence-backed forbidden/internal user-facing copy.\n- Use locked language: Start here, Recommended step, Step, Start now, Open step.\n- Do not rewrite product canon.\n\nRequired outputs:\n- forbidden-language scan evidence\n- copy policy tests\n- known-issues reconciliation for AMB-ISSUE-0010\n\nValidation commands:\n- `python3 scripts/ambitions-senior-code-audit.py`\n- `python3 scripts/ambitions-senior-code-audit.py --json`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007H - Surface/root UI copy and forbidden-language exposure hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Forbidden/internal language candidates must be gated before root UI release-readiness or visual proof can be accepted.",
+      "related_finding_ids": [
+        "SCG-004-006"
+      ],
+      "required_implementation_outputs": [
+        "forbidden-language scan evidence",
+        "copy policy tests",
+        "known-issues reconciliation for AMB-ISSUE-0010"
+      ],
+      "required_proof_artifacts": [
+        "scan output",
+        "before/after string diff summary",
+        "screenshots if visible root copy changed"
+      ],
+      "required_tests": [
+        "ForbiddenLanguageAudit",
+        "surface copy policy tests",
+        "rendered UI assertions when visible"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "VoiceOver labels use locked language",
+        "device": "not sufficient alone; scan required",
+        "privacy": "not applicable unless privacy copy touched",
+        "visual": "required for visible copy changes"
+      },
+      "rollback_requirement": "Revert copy/language changes and tests.",
+      "root_cause_ids": [
+        "RC-SCG006-010",
+        "RC-SCG006-001"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 1
+        },
+        "highest": "B4"
+      },
+      "specific_validation_commands": [
+        "python3 scripts/ambitions-senior-code-audit.py",
+        "python3 scripts/ambitions-senior-code-audit.py --json",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Surface/root UI copy and forbidden-language exposure hardening",
+      "train_id": "SCG-007H"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Composer/Capture",
+        "Surfaces/Goals",
+        "Surfaces/You",
+        "Stage/Chrome",
+        "DesignSystem",
+        "Stage",
+        "Surfaces/Today",
+        "Surfaces/Time",
+        "Trust",
+        "Core/Persistence",
+        "Core/Permissions"
+      ],
+      "affected_flow_names": [
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F16 - Permission denied fallback",
+        "SCG006-F15 - Offline / no account"
+      ],
+      "affected_flows": [
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F16",
+        "SCG006-F15"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/Composer/Capture/CaptureContinuityLine.swift",
+        "Native/Ambitions/Surfaces/Goals/",
+        "Native/Ambitions/Surfaces/You/",
+        "Native/Ambitions/Stage/Chrome/",
+        "Native/Ambitions/DesignSystem/",
+        "Native/AmbitionsTests/",
+        "Native/AmbitionsUITests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B",
+        "SCG-007H"
+      ],
+      "blocks_trains": [
+        "SCG-007J",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "Capture/Goals/You composition candidates",
+        "shell ignoresSafeArea candidates",
+        "82 root UI visual gap rows"
+      ],
+      "exact_scope_boundaries": [
+        "Repair only flagged composition/shell geometry risks.",
+        "Do not create duplicate material systems/root shells/dashboard anatomy.",
+        "Do not claim Visual Green."
+      ],
+      "forbidden_source_paths": [
+        "new material system",
+        "new root shell",
+        "duplicated chrome owner",
+        "generated Xcode project/workspace",
+        "Package.swift unless scoped"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Reconcile shell/visual rows only with reviewable screenshots; keep Yellow without device/accessibility proof.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Repair only flagged composition/shell geometry risks.\n\nRoot causes: RC-SCG006-010, RC-SCG006-001\nFinding IDs: SCG-004-005, SCG-004-009\nAffected flows: SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14, SCG006-F16, SCG006-F15\n\nBoundaries:\n- Repair only flagged composition/shell geometry risks.\n- Do not create duplicate material systems/root shells/dashboard anatomy.\n- Do not claim Visual Green.\n\nRequired outputs:\n- composition refactor or accepted-Yellow disposition\n- StageSafeAreaPolicy shell proof\n- design-token hardening for touched visible files\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO`\n- `python3 scripts/ambitions-senior-code-audit.py`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007I - SwiftUI composition, shell geometry, and design-token hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Visible SwiftUI composition and shell/safe-area findings remain Yellow, including report/card/list/dashboard anatomy and chrome safe-area risks.",
+      "related_finding_ids": [
+        "SCG-004-005",
+        "SCG-004-009"
+      ],
+      "required_implementation_outputs": [
+        "composition refactor or accepted-Yellow disposition",
+        "StageSafeAreaPolicy shell proof",
+        "design-token hardening for touched visible files"
+      ],
+      "required_proof_artifacts": [
+        "reviewable screenshots",
+        "target-versus-actual critique",
+        "safe-area frame evidence",
+        "audit output"
+      ],
+      "required_tests": [
+        "rendered hierarchy/frame tests",
+        "safe-area/dock overlap tests",
+        "design token/static audit where available"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "semantic mirrors and tap target notes",
+        "device": "device proof before closing shell visual rows",
+        "privacy": "not applicable unless diagnostics/private content appears",
+        "visual": "screenshots and critique required; no self-certified Visual Green"
+      },
+      "rollback_requirement": "Revert SwiftUI composition and test changes as one slice.",
+      "root_cause_ids": [
+        "RC-SCG006-010",
+        "RC-SCG006-001"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 1
+        },
+        "highest": "B4"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO",
+        "python3 scripts/ambitions-senior-code-audit.py",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "SwiftUI composition, shell geometry, and design-token hardening",
+      "train_id": "SCG-007I"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Composer/Capture",
+        "Surfaces/Goals",
+        "Surfaces/You",
+        "Stage/Chrome",
+        "DesignSystem",
+        "Stage",
+        "Surfaces/Today",
+        "Surfaces/Time",
+        "Trust",
+        "Core/Persistence",
+        "Core/Permissions"
+      ],
+      "affected_flow_names": [
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F16 - Permission denied fallback",
+        "SCG006-F15 - Offline / no account"
+      ],
+      "affected_flows": [
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F16",
+        "SCG006-F15"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/DesignSystem/Accessibility/",
+        "Native/Ambitions/Surfaces/You/YouScreen+02-YouRootDetailSheet.swift",
+        "Native/Ambitions/Surfaces/",
+        "Native/Ambitions/Composer/Capture/",
+        "Native/AmbitionsUITests/",
+        "Native/AmbitionsTests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B",
+        "SCG-007H",
+        "SCG-007I"
+      ],
+      "blocks_trains": [
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "YouRootDetailSheet lacks local accessibility markers",
+        "manual VoiceOver/Dynamic Type/Reduce Motion proof missing"
+      ],
+      "exact_scope_boundaries": [
+        "Repair static accessibility semantics and interaction proof only.",
+        "Dynamic Type/VoiceOver/Reduce Motion/Reduce Transparency/Increase Contrast/tap target notes required where touched.",
+        "Do not claim full accessibility conformance without manual/current proof."
+      ],
+      "forbidden_source_paths": [
+        "cosmetic-only labels hiding behavior gaps",
+        "Visual Green without independent review",
+        "Ambitions.xcodeproj/"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Keep accessibility rows Yellow unless current manual/device evidence exists.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Repair static accessibility semantics and interaction proof only.\n\nRoot causes: RC-SCG006-010, RC-SCG006-001\nFinding IDs: SCG-004-008, SCG-004-011, SCG-004-013\nAffected flows: SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14, SCG006-F16, SCG006-F15\n\nBoundaries:\n- Repair static accessibility semantics and interaction proof only.\n- Dynamic Type/VoiceOver/Reduce Motion/Reduce Transparency/Increase Contrast/tap target notes required where touched.\n- Do not claim full accessibility conformance without manual/current proof.\n\nRequired outputs:\n- accessibility marker repairs\n- semantic mirror tests\n- Dynamic Type/Reduce Motion/Contrast checklist\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO`\n- `python3 scripts/ambitions-senior-code-audit.py`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007J - Accessibility and static interaction proof hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Accessibility/static proof must precede device-proof or readiness claims.",
+      "related_finding_ids": [
+        "SCG-004-008",
+        "SCG-004-011",
+        "SCG-004-013"
+      ],
+      "required_implementation_outputs": [
+        "accessibility marker repairs",
+        "semantic mirror tests",
+        "Dynamic Type/Reduce Motion/Contrast checklist"
+      ],
+      "required_proof_artifacts": [
+        "accessibility audit output",
+        "manual proof notes or not-run reasons",
+        "screenshots for text-fit/tap-target changes"
+      ],
+      "required_tests": [
+        "accessibility unit/UI tests",
+        "rendered hierarchy tests",
+        "senior audit accessibility rerun"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "core output",
+        "device": "manual/device proof before row closure",
+        "privacy": "not applicable unless labels expose private content",
+        "visual": "support screenshots for text-fit/tap-target risks"
+      },
+      "rollback_requirement": "Revert accessibility/source/test changes; do not leave fake labels on dead controls.",
+      "root_cause_ids": [
+        "RC-SCG006-010",
+        "RC-SCG006-001"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 1
+        },
+        "highest": "B4"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO",
+        "python3 scripts/ambitions-senior-code-audit.py",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Accessibility and static interaction proof hardening",
+      "train_id": "SCG-007J"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "AppContainerFactory",
+        "Core/Persistence",
+        "Core/Runtime",
+        "Core/Permissions",
+        "Privacy boundary",
+        "Stage",
+        "Composer/Capture",
+        "Surfaces/Today",
+        "Surfaces/Goals",
+        "Surfaces/Time",
+        "Trust"
+      ],
+      "affected_flow_names": [
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback",
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo"
+      ],
+      "affected_flows": [
+        "SCG006-F15",
+        "SCG006-F16",
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14"
+      ],
+      "allowed_source_paths": [
+        "Native/Ambitions/App/AppContainerFactory.swift",
+        "Native/Ambitions/Core/Persistence/",
+        "Native/Ambitions/Core/Runtime/",
+        "Native/Ambitions/Core/Permissions/",
+        "Native/Ambitions/Diagnostics/",
+        "Native/AmbitionsTests/"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B"
+      ],
+      "blocks_trains": [
+        "SCG-007L",
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "7 production Swift privacy/network candidates",
+        "offline with no account not release-proven",
+        "permission-denied fallback proof missing"
+      ],
+      "exact_scope_boundaries": [
+        "Prove offline/no-account/local-only behavior and diagnostics redaction only.",
+        "Do not implement account/sync/R2/cloud behavior unless future scoped issue authorizes it.",
+        "Do not claim privacy/legal approval."
+      ],
+      "forbidden_source_paths": [
+        "hosted private life graph backend",
+        "cloud LLM/core hosted AI dependency",
+        "R2/private user data upload",
+        "account-required core flow",
+        "PrivacyInfo.xcprivacy unless reviewed with privacy scope"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Update only if B0/B1/B2 discovered; otherwise record Yellow proof gaps.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Prove offline/no-account/local-only behavior and diagnostics redaction only.\n\nRoot causes: RC-SCG006-009, RC-SCG006-001\nFinding IDs: SCG-004-010\nAffected flows: SCG006-F15, SCG006-F16, SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14\n\nBoundaries:\n- Prove offline/no-account/local-only behavior and diagnostics redaction only.\n- Do not implement account/sync/R2/cloud behavior unless future scoped issue authorizes it.\n- Do not claim privacy/legal approval.\n\nRequired outputs:\n- offline launch/use proof\n- account-absent core flow proof\n- request-shape review\n- diagnostics redaction assertions\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO`\n- `python3 scripts/ambitions-senior-code-audit.py`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007K - Privacy, local-first, offline/no-account, and diagnostics proof hardening",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Offline/no-account and local-first posture is source-present but not release-proven; privacy/network/cloud markers need scoped proof.",
+      "related_finding_ids": [
+        "SCG-004-010"
+      ],
+      "required_implementation_outputs": [
+        "offline launch/use proof",
+        "account-absent core flow proof",
+        "request-shape review",
+        "diagnostics redaction assertions"
+      ],
+      "required_proof_artifacts": [
+        "network-disabled run evidence",
+        "account-absent proof",
+        "privacy boundary scan",
+        "permission-denied evidence"
+      ],
+      "required_tests": [
+        "offline/no-account tests",
+        "privacy boundary/request-shape tests",
+        "permission-denied fallback tests",
+        "diagnostics redaction tests"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "permission-denied fallback accessible state",
+        "device": "network/account disabled proof",
+        "privacy": "core output; legal approval not claimed",
+        "visual": "only permission fallback UI screenshots if relevant"
+      },
+      "rollback_requirement": "Revert privacy/local-first changes; confirm no persisted data side effects.",
+      "root_cause_ids": [
+        "RC-SCG006-009",
+        "RC-SCG006-001"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 2,
+          "B4": 0
+        },
+        "highest": "B3"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO",
+        "python3 scripts/ambitions-senior-code-audit.py",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Privacy, local-first, offline/no-account, and diagnostics proof hardening",
+      "train_id": "SCG-007K"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Stage",
+        "Composer/Capture",
+        "Surfaces/Today",
+        "Surfaces/Goals",
+        "Surfaces/Time",
+        "Trust",
+        "Core/Persistence",
+        "Core/Permissions",
+        "Stage overlay",
+        "AppShellActivatedCaptureSeam",
+        "Core/Runtime CaptureService",
+        "Projection/SurfaceLenses",
+        "Interaction",
+        "Core/Runtime ClosureEngine",
+        "EventLedger",
+        "Projection/Mutations",
+        "Projection/SurfaceLenses/TodayLens",
+        "Core/Runtime ScheduleInstallKernel",
+        "Core/Runtime MemoryLensService",
+        "Stage overlays",
+        "ShellCommandRouter",
+        "Trust/Receipt",
+        "You memory controls",
+        "Docs",
+        "Legacy/Unknown",
+        "Quality",
+        "SCG control plane",
+        "AppContainerFactory",
+        "Core/Runtime",
+        "Privacy boundary",
+        "Surfaces/You",
+        "Stage/Chrome",
+        "DesignSystem"
+      ],
+      "affected_flow_names": [
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback"
+      ],
+      "affected_flows": [
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F15",
+        "SCG006-F16"
+      ],
+      "allowed_source_paths": [
+        "Native/AmbitionsTests/",
+        "Native/AmbitionsUITests/",
+        "docs/quality/senior-review/FLOW_TRACE_AUDIT.*",
+        "docs/quality/senior-review/ROOT_CAUSE_MAP.*",
+        "docs/qa/KNOWN_ISSUES.md"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B",
+        "SCG-007C",
+        "SCG-007D",
+        "SCG-007E",
+        "SCG-007F",
+        "SCG-007G",
+        "SCG-007K"
+      ],
+      "blocks_trains": [
+        "SCG-007M"
+      ],
+      "carried_forward_risks": [
+        "34 weak test candidates",
+        "16 Yellow flows",
+        "no flow may be Green without behavior proof"
+      ],
+      "exact_scope_boundaries": [
+        "Replace weak proof with behavior proof for F01-F16 only.",
+        "Do not repair production behavior inside this proof train unless a minimal hook is explicitly scoped.",
+        "Flow Green requires behavior proof, not source-string tests."
+      ],
+      "forbidden_source_paths": [
+        "production source except separately scoped upstream repair",
+        "generated project/workspace",
+        "privacy manifests unless privacy scope opened"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Known-issues sync must happen before SCG-008; close rows only with row-specific proof.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Replace weak proof with behavior proof for F01-F16 only.\n\nRoot causes: RC-SCG006-001, RC-SCG006-002, RC-SCG006-003, RC-SCG006-004, RC-SCG006-005, RC-SCG006-006, RC-SCG006-007, RC-SCG006-008, RC-SCG006-009, RC-SCG006-010\nFinding IDs: SCG-004-011, SCG-004-013\nAffected flows: SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14, SCG006-F15, SCG006-F16\n\nBoundaries:\n- Replace weak proof with behavior proof for F01-F16 only.\n- Do not repair production behavior inside this proof train unless a minimal hook is explicitly scoped.\n- Flow Green requires behavior proof, not source-string tests.\n\nRequired outputs:\n- behavior-proof test matrix for F01-F16\n- updated flow audit/root cause map preserving Yellow where proof missing\n- known-issues reconciliation\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO`\n- `python3 scripts/ambitions-senior-code-audit.py`\n- `python3 scripts/ambitions-senior-code-audit.py --json`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007L - Test-strength and 16-flow behavior-proof closure",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "All 16 SCG-006 flows remain Yellow because behavior proof is incomplete and weak tests overuse file/string presence.",
+      "related_finding_ids": [
+        "SCG-004-011",
+        "SCG-004-013"
+      ],
+      "required_implementation_outputs": [
+        "behavior-proof test matrix for F01-F16",
+        "updated flow audit/root cause map preserving Yellow where proof missing",
+        "known-issues reconciliation"
+      ],
+      "required_proof_artifacts": [
+        "test logs tied to commit",
+        "flow matrix evidence paths",
+        "before/action/after mutation evidence"
+      ],
+      "required_tests": [
+        "flow-specific UI/runtime tests for all 16 flows",
+        "screenshot/frame assertions where visible behavior is asserted"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "state proof for every interactive flow",
+        "device": "device proof required before closing device rows",
+        "privacy": "offline/no-account proof for F15/F16",
+        "visual": "screenshots where visible behavior asserted; no Visual Green self-certification"
+      },
+      "rollback_requirement": "Revert tests/proof artifacts; production rollback only if separately scoped hooks touched.",
+      "root_cause_ids": [
+        "RC-SCG006-001",
+        "RC-SCG006-002",
+        "RC-SCG006-003",
+        "RC-SCG006-004",
+        "RC-SCG006-005",
+        "RC-SCG006-006",
+        "RC-SCG006-007",
+        "RC-SCG006-008",
+        "RC-SCG006-009",
+        "RC-SCG006-010"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 9,
+          "B4": 1
+        },
+        "highest": "B4"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO",
+        "python3 scripts/ambitions-senior-code-audit.py",
+        "python3 scripts/ambitions-senior-code-audit.py --json",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Test-strength and 16-flow behavior-proof closure",
+      "train_id": "SCG-007L"
+    },
+    {
+      "accepted_risk_dependencies": [],
+      "affected_files_layers": [
+        "Stage",
+        "Composer/Capture",
+        "Surfaces/Today",
+        "Surfaces/Goals",
+        "Surfaces/Time",
+        "Trust",
+        "Core/Persistence",
+        "Core/Permissions",
+        "Surfaces/You",
+        "Stage/Chrome",
+        "DesignSystem"
+      ],
+      "affected_flow_names": [
+        "SCG006-F01 - App launch",
+        "SCG006-F02 - Surface switch",
+        "SCG006-F03 - Capture save",
+        "SCG006-F04 - Capture expand with keyboard",
+        "SCG006-F05 - Create goal",
+        "SCG006-F06 - Goal thread feeds Today",
+        "SCG006-F07 - Start recommended step",
+        "SCG006-F08 - Close step",
+        "SCG006-F09 - Move step",
+        "SCG006-F10 - Protect window",
+        "SCG006-F11 - Time correction recomputes Today",
+        "SCG006-F12 - Search / Memory Lens",
+        "SCG006-F13 - Inspection / Why this?",
+        "SCG006-F14 - Undo",
+        "SCG006-F15 - Offline / no account",
+        "SCG006-F16 - Permission denied fallback"
+      ],
+      "affected_flows": [
+        "SCG006-F01",
+        "SCG006-F02",
+        "SCG006-F03",
+        "SCG006-F04",
+        "SCG006-F05",
+        "SCG006-F06",
+        "SCG006-F07",
+        "SCG006-F08",
+        "SCG006-F09",
+        "SCG006-F10",
+        "SCG006-F11",
+        "SCG006-F12",
+        "SCG006-F13",
+        "SCG006-F14",
+        "SCG006-F15",
+        "SCG006-F16"
+      ],
+      "allowed_source_paths": [
+        "docs/qa/evidence/",
+        "docs/quality/senior-review/",
+        "docs/qa/KNOWN_ISSUES.md",
+        "Native/AmbitionsUITests/ only if proof harness is scoped"
+      ],
+      "blocked_by_trains": [
+        "SCG-007A",
+        "SCG-007B",
+        "SCG-007C",
+        "SCG-007D",
+        "SCG-007E",
+        "SCG-007F",
+        "SCG-007G",
+        "SCG-007H",
+        "SCG-007I",
+        "SCG-007J",
+        "SCG-007K",
+        "SCG-007L"
+      ],
+      "blocks_trains": [
+        "SCG-008"
+      ],
+      "carried_forward_risks": [
+        "100 visual/device/runtime proof-gap markers",
+        "Light/System/Dark and device proof gaps",
+        "owner acceptance missing"
+      ],
+      "exact_scope_boundaries": [
+        "Collect/evaluate visual/device proof only after upstream runtime, copy, accessibility, privacy, and behavior-proof gates.",
+        "Do not self-certify Visual Green or Release Green.",
+        "Do not start SCG-008 until known-issues sync/dedupe is complete."
+      ],
+      "forbidden_source_paths": [
+        "production UI/source repairs unless a new scoped repair issue opens",
+        "Visual Green/Release Green claims by Codex alone",
+        "generated project/workspace"
+      ],
+      "green_yellow_red_closeout_criteria": {
+        "Green": "All train-scoped outputs, tests, proof artifacts, known-issues sync, rollback notes, and forbidden-path guards pass. Green is train-scoped only and does not claim senior-readiness, Visual Green, Release Green, Release readiness, app readiness, or unscoped flow/file Green.",
+        "Red": "Any real B0/B1/B2 appears, production behavior changes outside scope, Motion/Capture root drift is introduced, private-life/local-first law is violated, validation cannot run honestly, or status claims exceed proof.",
+        "Yellow": "Scope is bounded and evidence-backed, but current proof remains missing, manual/device/accessibility proof is absent, or accepted architecture/proof debt is explicitly carried forward with a named next train."
+      },
+      "known_issues_sync_requirement": "Final sync/dedupe before SCG-008. No row closure from screenshot paths alone.",
+      "linear_child_issue_recommendation": {
+        "create_now": false,
+        "proposed_description": "Scope: Collect/evaluate visual/device proof only after upstream runtime, copy, accessibility, privacy, and behavior-proof gates.\n\nRoot causes: RC-SCG006-001, RC-SCG006-010\nFinding IDs: SCG-004-013\nAffected flows: SCG006-F01, SCG006-F02, SCG006-F03, SCG006-F04, SCG006-F05, SCG006-F06, SCG006-F07, SCG006-F08, SCG006-F09, SCG006-F10, SCG006-F11, SCG006-F12, SCG006-F13, SCG006-F14, SCG006-F15, SCG006-F16\n\nBoundaries:\n- Collect/evaluate visual/device proof only after upstream runtime, copy, accessibility, privacy, and behavior-proof gates.\n- Do not self-certify Visual Green or Release Green.\n- Do not start SCG-008 until known-issues sync/dedupe is complete.\n\nRequired outputs:\n- visual/device proof matrix\n- target-versus-actual critiques\n- accessibility/device proof index\n- Ready for Visual Review or Yellow/Red closeout\n\nValidation commands:\n- `xcodegen generate`\n- `xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO`\n- `python3 scripts/ambitions-senior-code-audit.py`\n- `git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy`\n- `git status --short --branch`\n\nDo not claim senior-readiness, Visual Green, Release Green, app readiness, or flow/file Green without current proof.",
+        "proposed_title": "SCG-007M - Visual/device proof readiness gate",
+        "reason": "SCG-007 recommends child issues only; implementation issue creation was not authorized in this pass."
+      },
+      "problem_statement": "Visual/device proof remains Yellow/Red; screenshots alone are not proof and Codex cannot self-certify Visual Green or Release Green.",
+      "related_finding_ids": [
+        "SCG-004-013"
+      ],
+      "required_implementation_outputs": [
+        "visual/device proof matrix",
+        "target-versus-actual critiques",
+        "accessibility/device proof index",
+        "Ready for Visual Review or Yellow/Red closeout"
+      ],
+      "required_proof_artifacts": [
+        "reviewable screenshots/videos",
+        "manifest tied to commit",
+        "manual reviewer notes/owner acceptance if claiming Visual Green",
+        "known-issues reconciliation"
+      ],
+      "required_tests": [
+        "UI proof harness",
+        "screenshot/frame hierarchy assertions",
+        "Dynamic Type/Reduce Motion/Increase Contrast checks",
+        "real-device checklist where available"
+      ],
+      "required_visual_device_accessibility_privacy_proof": {
+        "accessibility": "must reference SCG-007J before device/readiness claims",
+        "device": "required for device claims",
+        "privacy": "must reference SCG-007K before local-first/offline claims",
+        "visual": "core output; must be reviewable and evaluated"
+      },
+      "rollback_requirement": "Revert proof harness changes and mark evidence invalid if target commit changes.",
+      "root_cause_ids": [
+        "RC-SCG006-001",
+        "RC-SCG006-010"
+      ],
+      "severity": {
+        "counts": {
+          "B0": 0,
+          "B1": 0,
+          "B2": 0,
+          "B3": 1,
+          "B4": 1
+        },
+        "highest": "B4"
+      },
+      "specific_validation_commands": [
+        "xcodegen generate",
+        "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination \"platform=iOS Simulator,name=iPhone 17\" test CODE_SIGNING_ALLOWED=NO",
+        "python3 scripts/ambitions-senior-code-audit.py",
+        "git diff --name-only -- Native Sources Packages AppUI project.yml Package.swift Ambitions.xcodeproj Native/Ambitions/Resources/PrivacyInfo.xcprivacy",
+        "git status --short --branch"
+      ],
+      "title": "Visual/device proof readiness gate",
+      "train_id": "SCG-007M"
+    }
+  ],
+  "required_inputs": [
+    "docs/quality/senior-review/BUILD_GRAPH_INVENTORY.json",
+    "docs/quality/senior-review/BUILD_GRAPH_INVENTORY.md",
+    "docs/quality/senior-review/FILE_INVENTORY.json",
+    "docs/quality/senior-review/FILE_INVENTORY.md",
+    "docs/quality/senior-review/OWNERSHIP_MAP.yaml",
+    "docs/quality/senior-review/AUTOMATED_FINDINGS.json",
+    "docs/quality/senior-review/AUTOMATED_FINDINGS.md",
+    "docs/quality/senior-review/SENIOR_CODE_REVIEW_LEDGER.json",
+    "docs/quality/senior-review/SENIOR_CODE_REVIEW_LEDGER.md",
+    "docs/quality/senior-review/SENIOR_CODE_REVIEW_SUMMARY.md",
+    "docs/quality/senior-review/FLOW_TRACE_AUDIT.json",
+    "docs/quality/senior-review/FLOW_TRACE_AUDIT.md",
+    "docs/quality/senior-review/ROOT_CAUSE_MAP.json",
+    "docs/quality/senior-review/ROOT_CAUSE_MAP.md",
+    "docs/qa/KNOWN_ISSUES.md"
+  ],
+  "rollback": "Revert docs/quality/senior-review/REPAIR_TRAINS.json, REPAIR_TRAINS.md, and SCG_007_REPAIR_TRAIN_PLAN.md; no production rollback is required.",
+  "root_cause_coverage": {
+    "mapped": [
+      "RC-SCG006-001",
+      "RC-SCG006-002",
+      "RC-SCG006-003",
+      "RC-SCG006-004",
+      "RC-SCG006-005",
+      "RC-SCG006-006",
+      "RC-SCG006-007",
+      "RC-SCG006-008",
+      "RC-SCG006-009",
+      "RC-SCG006-010"
+    ],
+    "unmapped": []
+  },
+  "scg": "SCG-007",
+  "scg_007a_reason": "SCG-007A must verify SCG findings are synced/deduped, resolve or explicitly accept schema/staleness gaps, and reconcile KNOWN_ISSUES before SCG-008 begins production repair.",
+  "scg_007a_required_before_scg_008": true,
+  "schema": "ambitions.scg007.repair-trains.v1",
+  "scope_boundaries": {
+    "allowed_current_pass_paths": [
+      "docs/quality/senior-review/REPAIR_TRAINS.json",
+      "docs/quality/senior-review/REPAIR_TRAINS.md",
+      "docs/quality/senior-review/SCG_007_REPAIR_TRAIN_PLAN.md"
+    ],
+    "forbidden_current_pass_paths": [
+      "Native/",
+      "Sources/",
+      "Packages/",
+      "AppUI/",
+      "project.yml",
+      "Package.swift",
+      "Ambitions.xcodeproj/",
+      "Native/Ambitions/Resources/PrivacyInfo.xcprivacy"
+    ],
+    "production_behavior_changed": false,
+    "scg_007a_started": false,
+    "scg_008_started": false
+  },
+  "status": "Green - planning artifacts generated only; no production behavior changed; senior-readiness not claimed",
+  "title": "Dependency-ordered repair train plan",
+  "train_dependency_order": [
+    "SCG-007A",
+    "SCG-007B",
+    "SCG-007C",
+    "SCG-007D",
+    "SCG-007E",
+    "SCG-007F",
+    "SCG-007G",
+    "SCG-007H",
+    "SCG-007I",
+    "SCG-007J",
+    "SCG-007K",
+    "SCG-007L",
+    "SCG-007M"
+  ],
+  "version": 1
+}
