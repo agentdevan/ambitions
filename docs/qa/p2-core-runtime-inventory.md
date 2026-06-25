@@ -143,3 +143,108 @@ P2B-A routes the rendered Time placement apply path through the existing protect
 - No second protected-placement policy or executor was introduced.
 - `SimpleStepLifecycleService.swift` was not touched by P2B-A.
 - `SimpleStepLifecycleService.swift` line count remained 469.
+
+## P2B-B Repair Rendered Protected Placement Approval Addendum
+
+Date: 2026-06-25
+Baseline SHA: `c2c0fc12814be75259ab172d407de0b0cea272d3`
+Source/UI proof commit: `ba70e59be`
+Phase status: Source Green, Runtime Green, Interaction Green scoped to the rendered Time protected-placement approval path, and Ready for Visual Review. Visual Green, Release Green, device readiness, and full accessibility conformance are not claimed.
+
+### Scope
+
+P2B-B repair routes the selected protected-placement Time service into the real rendered Time path and renders the approval UI through `TimeSurface -> TimeViewModel -> AppFeatureFactoryCapability.timeService`. It does not implement Make Room, Add with conflict, Future Steps, full goal pathing, Life Capital, Source Atlas app behavior, notification delivery, account/R2 behavior, visual redesign, or release/device validation.
+
+### Root Cause Confirmed
+
+The failed P2B-B attempt selected a protected-placement fixture service in `AppContainerFactory`, but `AppContainer` still constructed `AppRuntimeCapability` and `AppFeatureFactoryCapability` from `runtime.timeService`. `TimeSurface` loads through `featureFactory.timeService`, so the selected service never reached the rendered Time surface.
+
+### Injection Path Repaired
+
+- `AppContainer` now builds `AppRuntimeCapability` and `AppFeatureFactoryCapability` from the services passed into the container, including the selected `timeService`.
+- `AppContainerFactory` can provide a DEBUG-only protected-placement Time service when `AMBITIONS_UI_PROTECTED_PLACEMENT_REVIEW=1`.
+- `PreviewAppContainerFactory` uses the same protected-placement Time scenario when that DEBUG environment value is set.
+- No second protected-placement policy, executor, Time service architecture, root surface, or fixture-only UI path was introduced.
+
+### Source Changed
+
+- `Native/Ambitions/App/AppContainer.swift`
+- `Native/Ambitions/App/AppContainerFactory.swift`
+- `Native/Ambitions/PreviewSupport/PreviewAppContainer.swift`
+- `Native/Ambitions/Scenarios/SurfaceScenarios/TimeScenarios+Support.swift`
+- `Native/Ambitions/Surfaces/Time/ProtectedPlacementReviewCard.swift`
+- `Native/Ambitions/Surfaces/Time/ProtectedPlacementReviewState.swift`
+- `Native/Ambitions/Surfaces/Time/TimeSurface.swift`
+- `Native/Ambitions/Surfaces/Time/TimeViewModel.swift`
+- `Native/AmbitionsTests/Time/TimeProtectedPlacementReviewTests.swift`
+- `Native/AmbitionsUITests/AmbitionsUITests.swift`
+
+### Rendered Approval Proof
+
+- Focused UI test launched the app through the normal rendered Time path with `AMBITIONS_UI_PROTECTED_PLACEMENT_REVIEW=1`.
+- The UI test opened Time, tapped the rendered LifeShape placement action, found `protected-placement-review`, and verified the Step, current placement, proposed placement, approve action, and keep action identifiers.
+- The review copy remains plain and non-shaming:
+  - `Review change`
+  - `This moves a Step inside the next seven days. Ambitions will not move it without approval.`
+  - `Move it`
+  - `Keep as is`
+- Screenshot artifacts were produced under `.codex/xcode-summaries/P2B_B_REPAIR_UI/20260625T123801Z-AmbitionsUITests-AmbitionsUITests-testAMB1168TimeLifeShapeMutationAndUndoScreens-83198-10459/extract/screenshots/`.
+
+### Mutation and Keep Proof
+
+- Source/runtime unit proof verifies protected placement does not mutate before approval.
+- Tapping `Keep as is` clears the review, reports `Kept as is`, and leaves the Time state unchanged.
+- Tapping `Move it` reruns the same Time mutation with explicit protected-placement approval, applies the placement, reports `Step moved`, and preserves existing undo behavior.
+- The rendered UI test verified keep first, then reopened the review and approved the movement through the same Time path.
+
+### Accessibility Proof
+
+- The review card exposes `protected-placement-review`.
+- Rows expose `protected-placement-review.step`, `protected-placement-review.current-placement`, and `protected-placement-review.proposed-placement`.
+- Actions expose `protected-placement-review.move-it` and `protected-placement-review.keep-as-is`.
+- Outcome exposes `protected-placement-review.outcome`.
+- The card accessibility value includes the Step title, current placement, proposed placement, and approval reason in plain language.
+- Public accessibility conformance, VoiceOver sweep, Dynamic Type sweep, Reduce Motion sweep, and device accessibility readiness are not claimed.
+
+### Validation
+
+- `scripts/ambitions-xcode-test-focused.sh --batch P2B_B_REPAIR_REVIEW_UNIT --test AmbitionsTests/TimeProtectedPlacementReviewTests --timeout 15m --kill-after 60s` passed: 4 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2B_B_REPAIR_UI --test AmbitionsUITests/AmbitionsUITests/testAMB1168TimeLifeShapeMutationAndUndoScreenshotProof --timeout 20m --kill-after 60s` passed: 1 test, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2B_B_REPAIR_COORDINATOR --test AmbitionsTests/TimeFieldMutationCoordinatorTests --timeout 15m --kill-after 60s` passed: 11 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2B_B_REPAIR_POLICY --test AmbitionsTests/ProtectedStepPlacementPolicyTests --timeout 15m --kill-after 60s` passed: 7 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2B_B_REPAIR_EXECUTOR --test AmbitionsTests/PolicyGuardedCommandExecutorTests --timeout 15m --kill-after 60s` passed: 5 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2B_B_REPAIR_P1D_TIME --test AmbitionsTests/P1DTimeFoundationTests --timeout 15m --kill-after 60s` passed: 5 tests, 0 failures.
+- `python3 scripts/product-experience-gate-index-check.py` passed: 99 gates validated.
+- `python3 scripts/ambitions-skill-registry-check.py` passed.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py` passed.
+- `python3 scripts/ambitions-copy-contract-lint.py` passed.
+- `bash scripts/release-claim-safety-scan.sh` passed.
+- `python3 scripts/ambitions-local-first-boundary-scan.py` passed.
+- `python3 scripts/ambitions-unsupported-claim-scan.py $(git diff --name-only HEAD --)` passed before the docs addendum.
+- `python3 scripts/ambitions-architecture-inventory.py --json` passed with `green: true`.
+- `git diff --check` passed.
+
+### Gate Posture
+
+- `automatic_adjustment_does_not_move_next_seven_days_silently`: remains Partial. P2B-B repair adds rendered approval, approval mutation, keep/decline, accessibility identifier, and screenshot evidence; device/no-network proof and broader scheduling centralization remain missing.
+- `automation_respects_protected_near_term_placement`: remains Partial. P2B-B repair adds rendered review proof, but full automation settings, receipt persistence beyond the scoped visible mutation/undo path, and device/no-network proof remain missing.
+- No scenario gate Markdown/YAML status was upgraded by this repair.
+
+### Remaining Gaps
+
+- No Visual Green or Release Green claim.
+- No physical-device validation.
+- No network-disabled/no-account device workflow proof.
+- No full VoiceOver, Dynamic Type, Reduce Motion, Reduce Transparency, or High Contrast sweep.
+- No full scheduling architecture centralization beyond the scoped rendered Time path and existing command preflight.
+- No persistent approval receipt beyond the scoped visible mutation and existing undo proof.
+
+### Architecture Notes
+
+- Final Architecture Tree inspected: yes.
+- Canonical owners touched: `App`, `Surfaces/Time`, `Scenarios/SurfaceScenarios`, `Native/AmbitionsTests/Time`, and `Native/AmbitionsUITests`.
+- Non-canonical owners touched: none.
+- `Features/` was not expanded.
+- No compatibility shims were added.
+- `SimpleStepLifecycleService.swift` was not touched by P2B-B repair.
+- `SimpleStepLifecycleService.swift` line count remained 469.
