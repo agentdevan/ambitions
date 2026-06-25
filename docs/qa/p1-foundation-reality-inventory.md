@@ -785,6 +785,37 @@ Remaining gaps:
 
 Gate index updates: none. Evidence is recorded in this inventory addendum only; gate status remains Partial until rendered recovery and broader accessibility/device proof exists.
 
+## P1I Foundation End-to-End Scenario Addendum
+
+Date: 2026-06-24
+Baseline commit: `eb29b1f4af3ff4da044a4e12dd92b393ff1b3d21`
+Final commit: P1I final commit recorded in train closeout
+Gates targeted: P1 foundation gates touched by P1A-P1H, including local Capture, Step, Today, Time, Search, recovery, notification privacy, and offline/no-account boundaries
+
+Source changed:
+
+- `Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift`
+
+End-to-end proof added:
+
+- `testP1IFoundationEndToEndLocalWorkflowSurvivesReload` proves one no-account/local workflow across current services: Capture creates a local Step, Today projects it, Time schedules it, Search finds it, missed recovery asks `What changed?`, recovery persists through repository reload, Search finds the recovery feedback, and the notification planner prepares private generic copy.
+- The test uses real SwiftData-backed local repositories and current runtime services rather than UI-only fixtures.
+- The proof asserts local-only runtime capability flags and does not require account, network, R2, Source Atlas upload, hosted AI, cloud LLM, or private backend behavior.
+
+Validation status:
+
+- Focused P1I validation passed with `scripts/ambitions-xcode-test-focused.sh --batch P1I_FOUNDATION_E2E --test AmbitionsTests/P1FLocalSearchFoundationTests/testP1IFoundationEndToEndLocalWorkflowSurvivesReload --timeout 15m --kill-after 60s`.
+- P1F/P1I class regression passed with `scripts/ambitions-xcode-test-focused.sh --batch P1I_FOUNDATION_E2E_REGRESSION --test AmbitionsTests/P1FLocalSearchFoundationTests --timeout 15m --kill-after 60s`.
+- No production source changed in P1I.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1I proves a coherent source/runtime local workflow, but it does not prove rendered end-to-end UI, screenshot artifact, manual visual review, delivered notifications, permission settings UI, real device behavior, broad accessibility sweeps, network-disabled device workflow, release readiness, or App Store privacy approval.
+- Notification proof is request preparation only; no notification delivery, lock-screen screenshot, or tap-through app workflow is claimed.
+- This phase does not implement full goal pathing, Life Capital, Future Steps, Make Room, Add with conflict, Source Atlas expansion, notification delivery, visual redesign, account work, R2 user-data behavior, or release/device validation.
+
+Gate index updates: none. Evidence is recorded in this inventory addendum only; gate status remains Partial until rendered/device/accessibility and remaining missing-object proof exists.
+
 ## Recommended Immediate Next Prompt
 
 ```text

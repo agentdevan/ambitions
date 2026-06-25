@@ -125,6 +125,116 @@ final class P1FLocalSearchFoundationTests: XCTestCase {
         XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.privateLifeRuntimeBoundary, .localOnly)
         XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
     }
+
+    func testP1IFoundationEndToEndLocalWorkflowSurvivesReload() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = makeRepositories(store: store)
+        let lifecycle = SimpleStepLifecycleService(
+            repositories: repositories,
+            idProvider: { "p1i-step" }
+        )
+        let captureService = DefaultCaptureService(
+            repository: repositories.captures,
+            eventLedger: repositories.eventLedger,
+            simpleStepLifecycleService: lifecycle,
+            idProvider: { "capture-p1i-e2e" }
+        )
+
+        let capture = try await captureService.createCapture(
+            CreateCaptureRequest(
+                rawText: "Submit the renewal packet",
+                sourceType: .shellComposer,
+                kind: .oneTimeCommitment,
+                route: .timeSeed
+            ),
+            now: fixedNow
+        )
+        let goalID = try XCTUnwrap(capture.linkedGoalID)
+        let steps = try await repositories.goals.listSteps(goalID: goalID)
+        let step = try XCTUnwrap(steps.first)
+        let today = try await RepositoryBackedTodayService(repositories: makeRepositories(store: store))
+            .loadTodayExperience(userDisplayName: "Local User", now: fixedNow)
+
+        XCTAssertEqual(today.hero.primaryAction.action.target.goalID, goalID)
+        XCTAssertEqual(today.hero.primaryAction.action.target.stepID, step.id)
+
+        let windowStart = fixedNow.addingTimeInterval(90 * 60)
+        _ = try await lifecycle.placeStepInTime(
+            goalID: goalID,
+            stepID: step.id,
+            windowStart: windowStart,
+            windowEnd: windowStart.addingTimeInterval(30 * 60),
+            now: fixedNow.addingTimeInterval(60)
+        )
+        let timeState = try await RepositoryBackedTimeService(repositories: makeRepositories(store: store))
+            .loadTimeSurfaceState(now: fixedNow)
+        XCTAssertTrue(timeState.weekDays.flatMap(\.blocks).contains {
+            $0.title == "Submit the renewal packet" && $0.timingLabel.contains("Scheduled")
+        })
+
+        let searchBeforeRecovery = await DefaultMemoryLensService(repositories: makeRepositories(store: store))
+            .search(query: "renewal packet", seedIntent: .memoryLens, origin: .today)
+        XCTAssertTrue(searchBeforeRecovery.contains {
+            $0.kind == .step &&
+                $0.title == "Submit the renewal packet" &&
+                $0.destination == .goal(goalID)
+        })
+
+        let recovery = try await SimpleStepLifecycleService(repositories: repositories).markMissedStepForRecovery(
+            goalID: goalID,
+            stepID: step.id,
+            now: fixedNow.addingTimeInterval(2 * 60 * 60)
+        )
+        XCTAssertTrue(recovery.asksWhatChanged)
+        XCTAssertEqual(recovery.secondaryActionTitles, ["Still counts", "Blocked", "Waiting", "Not needed"])
+
+        let reloadedRepositories = makeRepositories(store: store)
+        let reloadedSteps = try await reloadedRepositories.goals.listSteps(goalID: goalID)
+        let reloadedStep = try XCTUnwrap(reloadedSteps.first { $0.id == step.id })
+        let reloadedFeedback = try await reloadedRepositories.feedback.listEvents(goalID: goalID)
+        let searchAfterRecovery = await DefaultMemoryLensService(repositories: reloadedRepositories)
+            .search(query: "without blame", seedIntent: .memoryLens, origin: .today)
+        let privateReminder = NextStepLocalNotificationPlanner().makeRequest(
+            snapshot: ExternalSurfaceSnapshot(
+                generatedAt: iso.string(from: fixedNow),
+                nextAction: ExternalSurfaceNextAction(
+                    goalID: goalID,
+                    stepID: step.id,
+                    display: ExternalSurfaceDisplayMetadata(
+                        templateKey: "next_tiny_step",
+                        goalMode: .project,
+                        stepState: .planned,
+                        urgency: .soon,
+                        timing: .deadline
+                    )
+                )
+            ),
+            now: fixedNow
+        )
+
+        XCTAssertEqual(reloadedStep.state, .planned)
+        XCTAssertNotNil(reloadedStep.timing.suggestedNextAt)
+        XCTAssertTrue(reloadedFeedback.contains {
+            if case .skipped(let base, _) = $0, base.stepID == step.id { return true }
+            return false
+        })
+        XCTAssertTrue(reloadedFeedback.contains {
+            if case .delayed(let base, _, _) = $0, base.stepID == step.id { return true }
+            return false
+        })
+        XCTAssertTrue(searchAfterRecovery.contains {
+            $0.kind == .recentChange &&
+                $0.facet == .whatChanged &&
+                $0.destination == .goal(goalID)
+        })
+        XCTAssertEqual(privateReminder?.title, "Next step ready")
+        XCTAssertEqual(privateReminder?.body, "Details stay private until you open Ambitions.")
+        XCTAssertFalse(privateReminder?.title.localizedCaseInsensitiveContains("renewal") == true)
+        XCTAssertFalse(privateReminder?.body.localizedCaseInsensitiveContains("renewal") == true)
+        XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.privateLifeRuntimeBoundary, .localOnly)
+        XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.syncBackendKind, .localOnly)
+        XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
+    }
 }
 
 private extension P1FLocalSearchFoundationTests {
