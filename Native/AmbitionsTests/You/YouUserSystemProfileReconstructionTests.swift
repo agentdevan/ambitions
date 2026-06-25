@@ -1,5 +1,5 @@
-import XCTest
 @testable import Ambitions
+import XCTest
 
 final class YouUserSystemProfileReconstructionTests: XCTestCase {
     func testYouObjectStageContractOwnsUserSystemProfile() {
@@ -20,7 +20,7 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
             "sources",
             "receipts and history",
             "accessibility",
-            "about"
+            "about",
         ])
     }
 
@@ -69,25 +69,27 @@ final class YouUserSystemProfileReconstructionTests: XCTestCase {
 
     func testAMB1198RootSourceRemovesInternalHeadersGovernanceWallDividerAndGlow() throws {
         let rootSource = try source("Native/Ambitions/Surfaces/You/YouRootSurface.swift")
-        let rowSource = try source("Native/Ambitions/Surfaces/You/YouRootSurface+03-YouPersonalSystemNavigationRow.swift")
         let surfaceSource = try source("Native/Ambitions/Surfaces/You/YouSurface.swift")
 
         XCTAssertFalse(rootSource.contains("YOU · Profile and settings"))
         XCTAssertFalse(rootSource.contains("Your System"))
         XCTAssertFalse(rootSource.contains("How Ambitions works for me"))
         XCTAssertFalse(rootSource.contains("Personal system / User System Profile"))
-        XCTAssertFalse(rowSource.contains(".overlay(alignment: .bottom)"))
         XCTAssertFalse(surfaceSource.contains("LinearGradient("))
-        XCTAssertTrue(rootSource.contains("RootSectionRow("))
+        XCTAssertTrue(rootSource.contains("UserSystemProfileRootView"))
+        XCTAssertTrue(rootSource.contains("RootSettingsRow("))
+        XCTAssertTrue(rootSource.contains("NativeSettingsGroup(title: group.title)"))
         XCTAssertTrue(rootSource.contains("title: \"Appearance\""))
-        XCTAssertTrue(rootSource.contains("title: \"Capture\""))
+        XCTAssertTrue(rootSource.contains("title: \"Open Field\""))
         XCTAssertTrue(rootSource.contains("title: \"Life Areas\""))
-        XCTAssertTrue(rootSource.contains("title: \"Privacy\""))
+        XCTAssertTrue(rootSource.contains("title: \"Permissions\""))
         XCTAssertTrue(rootSource.contains("title: \"Local Data\""))
-        XCTAssertTrue(rootSource.contains("title: \"Sources\""))
-        XCTAssertTrue(rootSource.contains("title: \"Receipts\""))
         XCTAssertTrue(rootSource.contains("title: \"Accessibility\""))
         XCTAssertTrue(rootSource.contains("title: \"About\""))
+        XCTAssertFalse(rootSource.contains("PersonalSystemCenterRootView"))
+        XCTAssertFalse(rootSource.contains("YouPersonalSystemNavigation("))
+        XCTAssertFalse(rootSource.contains("id: \"source-settings\""))
+        XCTAssertFalse(rootSource.contains("id: \"receipts-history\""))
     }
 
     func testAMB1198DetailsExposeHonestUnavailableAndConfirmationBoundaries() throws {

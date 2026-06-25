@@ -59,13 +59,10 @@ struct MotionContextCrown: View {
 
             HStack(alignment: .top, spacing: theme.spacing.xs) {
                 ForEach(state.chips) { chip in
-                    ProofRelationshipTracePrimitiveToken(
-                        role: motionTraceRole(for: chip.title),
-                        title: chip.title,
-                        systemImage: chip.icon,
-                        semanticState: chip.semanticState,
-                        accessibilityIdentifier: "motion.current.crown.trace.\(chip.id.motionSlug)"
-                    )
+                    Label(chip.title, systemImage: chip.icon)
+                        .font(theme.typography.caption.weight(.semibold))
+                        .foregroundStyle(theme.semanticAccent(for: chip.semanticState))
+                        .accessibilityIdentifier("motion.current.crown.marker.\(chip.id.motionSlug)")
                 }
             }
         }
@@ -80,25 +77,33 @@ struct MotionSourceReceiptAffordance: View {
     let state: MotionSourceReceiptAffordanceState
 
     var body: some View {
-        ProofRelationshipTracePrimitiveStage(
-            role: .inspection,
-            title: state.title,
-            subtitle: "History stays inspectable when you open detail.",
-            accessibilityIdentifier: "motion.current.history-review"
-        ) {
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            Text(state.title)
+                .font(theme.typography.caption.weight(.semibold))
+                .foregroundStyle(theme.colors.textPrimary)
+
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 ForEach(state.items) { item in
-                    ProofRelationshipTracePrimitiveLine(
-                        role: motionTraceRole(for: item.label),
-                        title: item.label,
-                        subtitle: item.value,
-                        systemImage: item.icon,
-                        semanticState: item.semanticState,
-                        accessibilityIdentifier: "motion.current.history-review.\(item.id)"
-                    )
+                    HStack(alignment: .firstTextBaseline, spacing: theme.spacing.xs) {
+                        Image(systemName: item.icon)
+                            .font(theme.typography.micro.weight(.semibold))
+                            .foregroundStyle(theme.semanticAccent(for: item.semanticState))
+                            .accessibilityHidden(true)
+                        Text(item.label)
+                            .font(theme.typography.caption)
+                            .foregroundStyle(theme.colors.textPrimary)
+                        Text(item.value)
+                            .font(theme.typography.micro)
+                            .foregroundStyle(theme.colors.textSecondary)
+                            .lineLimit(2)
+                    }
+                    .accessibilityElement(children: .combine)
+                    .accessibilityIdentifier("motion.current.history-review.\(item.id)")
                 }
             }
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("motion.current.history-review")
     }
 }
 

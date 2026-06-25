@@ -30,7 +30,9 @@ enum YouRootDetail: String, Identifiable {
     case localDataControls
     case accessibility
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 
     var title: String {
         switch self {
@@ -114,20 +116,24 @@ enum YouRootDetail: String, Identifiable {
     }
 }
 
-struct PersonalSystemCenterRootView: View {
+struct UserSystemProfileRootView: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var selectedRowHapticToken = ""
     let primitiveContract = YouObjectStageControlPrimitiveContract.current
 
-    struct RootSectionRow {
+    struct RootSettingsGroup: Identifiable {
         let id: String
-        let sourceItemID: String?
+        let title: String
+        let rows: [RootSettingsRow]
+    }
+
+    struct RootSettingsRow: Identifiable {
+        let id: String
         let title: String
         let detail: YouRootDetail
-        let subtitle: String
+        let value: String
         let symbolName: String
-        let statusLabel: String?
         let semanticState: AmbitionSemanticState
     }
 
@@ -136,24 +142,29 @@ struct PersonalSystemCenterRootView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            objectStageHeader
+            profileHeader
 
-            YouPersonalSystemNavigation(sections: groupedNavigationSections) { item in
-                selectedRowHapticToken = item.id
-                onOpenDetail(detail(for: item.id))
+            VStack(alignment: .leading, spacing: theme.spacing.lg) {
+                ForEach(settingsGroups) { group in
+                    NativeSettingsGroup(title: group.title) {
+                        VStack(spacing: 0) {
+                            ForEach(group.rows) { row in
+                                UserProfileSettingsRow(row: row) {
+                                    selectedRowHapticToken = row.id
+                                    onOpenDetail(row.detail)
+                                }
+                            }
+                        }
+                    }
+                }
             }
-
-            Text(profileProjection.systemCenter.footer)
-                .font(theme.typography.caption)
-                .foregroundStyle(theme.colors.textTertiary)
-                .fixedSize(horizontal: false, vertical: true)
         }
         .accessibilityIdentifier("you.root")
-        .accessibilityValue("Local-first settings. \(primitiveContract.stageName).")
+        .accessibilityValue("Local profile. \(localStatusSummary).")
         .ambitionHaptic(theme.haptics.routeChange, trigger: selectedRowHapticToken)
     }
 
-    var objectStageHeader: some View {
+    var profileHeader: some View {
         HStack(alignment: .center, spacing: theme.spacing.md) {
             ZStack {
                 Circle()
@@ -166,14 +177,14 @@ struct PersonalSystemCenterRootView: View {
             .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-                Text("Local profile")
+                Text("You")
                     .font(dynamicTypeSize.isAccessibilitySize ? AmbitionsIOS26SemanticTokens.Typography.title3 : AmbitionsIOS26SemanticTokens.Typography.title2)
                     .foregroundStyle(theme.colors.textPrimary)
                     .lineLimit(2)
                     .minimumScaleFactor(0.78)
                     .accessibilityIdentifier("you.root-title")
 
-                Text("On this device")
+                Text("Profile and settings")
                     .font(AmbitionsIOS26SemanticTokens.Typography.subheadline)
                     .foregroundStyle(theme.colors.textSecondary)
                     .lineLimit(2)
@@ -186,8 +197,8 @@ struct PersonalSystemCenterRootView: View {
         }
         .padding(.vertical, theme.spacing.sm)
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("you.object-stage-header")
-        .accessibilityLabel("Local profile")
+        .accessibilityIdentifier("you.profile-header")
+        .accessibilityLabel("You")
         .accessibilityValue(localStatusSummary)
     }
 
@@ -195,146 +206,72 @@ struct PersonalSystemCenterRootView: View {
         sourceSystemCenterItem(id: "export-import")?.statusLabel ?? "Local only"
     }
 
-    var groupedNavigationSections: [GroupedNavigationSystemSection] {
+    var settingsGroups: [RootSettingsGroup] {
         [
-            groupedSection(
-                id: "preferences",
-                title: "Preferences",
-                subtitle: nil,
+            RootSettingsGroup(
+                id: "profile",
+                title: "Profile",
                 rows: [
-                    RootSectionRow(
-                        id: "appearance",
-                        sourceItemID: "appearance",
-                        title: "Appearance",
-                        detail: .appearance,
-                        subtitle: "System, Light, Dark, and accent.",
-                        symbolName: "paintpalette",
-                        statusLabel: sourceSystemCenterItem(id: "appearance")?.statusLabel,
-                        semanticState: .success
-                    ),
-                    RootSectionRow(
-                        id: "capture-preferences",
-                        sourceItemID: nil,
-                        title: "Capture",
-                        detail: .capturePreferences,
-                        subtitle: "Input, dictation, attachments, and teaching state.",
-                        symbolName: "square.and.pencil",
-                        statusLabel: "Settings",
-                        semanticState: .capture
-                    ),
-                    RootSectionRow(
-                        id: "life-areas",
-                        sourceItemID: nil,
-                        title: "Life Areas",
-                        detail: .lifeAreas,
-                        subtitle: "Defaults and customization ownership.",
-                        symbolName: "square.grid.2x2",
-                        statusLabel: "Goals-owned",
-                        semanticState: .neutral
-                    )
+                    row(id: "personalization", title: "Personalization", detail: .personalization, value: "Local", symbolName: "person.crop.circle", semanticState: .neutral),
+                    row(id: "session-defaults", title: "Session defaults", detail: .sessionDefaults, value: "Ready", symbolName: "slider.horizontal.3", semanticState: .success),
+                    row(id: "appearance", title: "Appearance", detail: .appearance, value: sourceSystemCenterItem(id: "appearance")?.statusLabel ?? "System", symbolName: "paintpalette", semanticState: .success),
                 ]
             ),
-            groupedSection(
-                id: "privacy-data",
-                title: "Privacy & Data",
-                subtitle: nil,
+            RootSettingsGroup(
+                id: "planning",
+                title: "Planning",
                 rows: [
-                    RootSectionRow(
-                        id: "privacy",
-                        sourceItemID: "trust-center",
-                        title: "Privacy",
-                        detail: .trustCenter,
-                        subtitle: "Permissions and local boundaries.",
-                        symbolName: "hand.raised",
-                        statusLabel: "Review",
-                        semanticState: .trust
-                    ),
-                    RootSectionRow(
-                        id: "local-data-controls",
-                        sourceItemID: "export-import",
-                        title: "Local Data",
-                        detail: .localDataControls,
-                        subtitle: "Store status, export, and erase boundaries.",
-                        symbolName: "externaldrive",
-                        statusLabel: sourceSystemCenterItem(id: "export-import")?.statusLabel,
-                        semanticState: .caution
-                    ),
-                    RootSectionRow(
-                        id: "source-settings",
-                        sourceItemID: "corrections",
-                        title: "Sources",
-                        detail: .sourceSettings,
-                        subtitle: "Permissions, freshness, and source inspection.",
-                        symbolName: "doc.text.magnifyingglass",
-                        statusLabel: "Inspect",
-                        semanticState: .review
-                    ),
-                    RootSectionRow(
-                        id: "receipts-history",
-                        sourceItemID: "receipts-history",
-                        title: "Receipts",
-                        detail: .receiptsHistory,
-                        subtitle: "Proof and change ledger access.",
-                        symbolName: "checkmark.seal",
-                        statusLabel: sourceSystemCenterItem(id: "receipts-history")?.statusLabel,
-                        semanticState: .neutral
-                    )
+                    row(id: "life-areas", title: "Life Areas", detail: .lifeAreas, value: "Goals", symbolName: "square.grid.2x2", semanticState: .neutral),
+                    row(id: "schedule-availability", title: "Schedule & Availability", detail: .scheduleAvailability, value: "Time", symbolName: "calendar", semanticState: .calendarDerived),
+                    row(id: "planning-defaults", title: "Time Behavior", detail: .planBehavior, value: "Defaults", symbolName: "clock", semanticState: .focus),
+                    row(id: "durations", title: "Durations", detail: .durations, value: "Adjust", symbolName: "timer", semanticState: .neutral),
                 ]
             ),
-            groupedSection(
+            RootSettingsGroup(
+                id: "capture",
+                title: "Capture",
+                rows: [
+                    row(id: "capture-preferences", title: "Open Field", detail: .capturePreferences, value: "Composer", symbolName: "square.and.pencil", semanticState: .capture),
+                    row(id: "reviews", title: "Reviews", detail: .reviews, value: "Manual", symbolName: "checklist", semanticState: .review),
+                ]
+            ),
+            RootSettingsGroup(
+                id: "privacy",
+                title: "Privacy",
+                rows: [
+                    row(id: "privacy", title: "Permissions", detail: .trustCenter, value: "Local", symbolName: "hand.raised", semanticState: .trust),
+                    row(id: "local-data-controls", title: "Local Data", detail: .localDataControls, value: sourceSystemCenterItem(id: "export-import")?.statusLabel ?? "On device", symbolName: "externaldrive", semanticState: .caution),
+                    row(id: "export-import", title: "Export / Import", detail: .exportImport, value: "Files", symbolName: "square.and.arrow.up.on.square", semanticState: .neutral),
+                ]
+            ),
+            RootSettingsGroup(
                 id: "app",
                 title: "App",
-                subtitle: nil,
                 rows: [
-                    RootSectionRow(
-                        id: "accessibility",
-                        sourceItemID: "accessibility",
-                        title: "Accessibility",
-                        detail: .accessibility,
-                        subtitle: "System settings and app support status.",
-                        symbolName: "figure",
-                        statusLabel: sourceSystemCenterItem(id: "accessibility")?.statusLabel,
-                        semanticState: .accessibilityUnverified
-                    ),
-                    RootSectionRow(
-                        id: "about",
-                        sourceItemID: "about",
-                        title: "About",
-                        detail: .about,
-                        subtitle: "Version, privacy, legal, and diagnostics status.",
-                        symbolName: "info.circle",
-                        statusLabel: "Local",
-                        semanticState: .neutral
-                    )
+                    row(id: "notifications", title: "Notifications", detail: .notifications, value: "Off by default", symbolName: "bell", semanticState: .neutral),
+                    row(id: "accessibility", title: "Accessibility", detail: .accessibility, value: sourceSystemCenterItem(id: "accessibility")?.statusLabel ?? "System", symbolName: "figure", semanticState: .accessibilityUnverified),
+                    row(id: "help", title: "Help", detail: .support, value: "Guides", symbolName: "questionmark.circle", semanticState: .neutral),
+                    row(id: "about", title: "About", detail: .about, value: "Local", symbolName: "info.circle", semanticState: .neutral),
                 ]
-            )
+            ),
         ]
     }
 
-    func groupedSection(
+    func row(
         id: String,
         title: String,
-        subtitle: String?,
-        rows: [RootSectionRow]
-    ) -> GroupedNavigationSystemSection {
-        GroupedNavigationSystemSection(
+        detail: YouRootDetail,
+        value: String,
+        symbolName: String,
+        semanticState: AmbitionSemanticState
+    ) -> RootSettingsRow {
+        RootSettingsRow(
             id: id,
             title: title,
-            subtitle: subtitle,
-            items: rows.compactMap { makeNavigationItem(for: $0) }
-        )
-    }
-
-    func makeNavigationItem(for row: RootSectionRow) -> GroupedNavigationSystemItem? {
-        let item = row.sourceItemID.flatMap(sourceSystemCenterItem)
-
-        return GroupedNavigationSystemItem(
-            id: row.id,
-            title: row.title,
-            subtitle: row.subtitle,
-            symbolName: item?.icon ?? row.symbolName,
-            state: livingState(for: item?.semanticState ?? row.semanticState),
-            statusLabel: row.statusLabel ?? item?.statusLabel
+            detail: detail,
+            value: value,
+            symbolName: symbolName,
+            semanticState: semanticState
         )
     }
 
@@ -354,32 +291,49 @@ struct PersonalSystemCenterRootView: View {
         case .neutral: .calm
         }
     }
+}
 
-    func detail(for itemID: String) -> YouRootDetail {
-        switch itemID {
-        case "schedule-availability": .scheduleAvailability
-        case "planning-defaults": .planBehavior
-        case "life-areas": .lifeAreas
-        case "vacation-away-time": .vacationAwayTime
-        case "trust-automation": .automationTrust
-        case "personal-runtime": .personalRuntime
-        case "local-context-controls": .whatAmbitionsKnows
+private struct UserProfileSettingsRow: View {
+    @Environment(\.ambitionTheme) private var theme
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
-        case "notifications": .notifications
-        case "capture-preferences": .capturePreferences
-        case "session-defaults": .sessionDefaults
-        case "appearance": .appearance
-        case "privacy": .trustCenter
+    let row: UserSystemProfileRootView.RootSettingsRow
+    let action: () -> Void
 
-        case "receipts-history": .receiptsHistory
-        case "history": .proof
-        case "source-settings": .sourceSettings
-        case "local-data-controls": .localDataControls
+    var body: some View {
+        Button(action: action) {
+            HStack(alignment: .center, spacing: theme.spacing.sm) {
+                Image(systemName: row.symbolName)
+                    .font(.system(size: theme.icon.smallSize, weight: .semibold))
+                    .foregroundStyle(theme.semanticAccent(for: row.semanticState))
+                    .frame(width: 28, height: 28)
+                    .accessibilityHidden(true)
 
-        case "export-import": .exportImport
-        case "help": .support
-        case "about": .about
-        default: .scheduleAvailability
+                Text(row.title)
+                    .font(theme.typography.body)
+                    .foregroundStyle(theme.colors.textPrimary)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+
+                Spacer(minLength: theme.spacing.sm)
+
+                Text(row.value)
+                    .font(theme.typography.caption)
+                    .foregroundStyle(theme.colors.textSecondary)
+                    .multilineTextAlignment(.trailing)
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? 2 : 1)
+
+                Image(systemName: "chevron.right")
+                    .font(theme.typography.micro.weight(.semibold))
+                    .foregroundStyle(theme.colors.textTertiary)
+                    .accessibilityHidden(true)
+            }
+            .padding(.vertical, theme.spacing.sm)
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("you.settings.row.\(row.id)")
+        .accessibilityLabel(row.title)
+        .accessibilityValue(row.value)
     }
 }

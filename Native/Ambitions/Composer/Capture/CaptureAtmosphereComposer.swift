@@ -10,7 +10,7 @@ struct CaptureComposerMutationProofContract: Equatable {
     let undoTargetID: String
 
     var submitHint: String {
-        "Review after typing. Saving changes the local Capture object and keeps Undo available."
+        "Review or save after typing. Undo stays available for the local change."
     }
 
     static let localSave = CaptureComposerMutationProofContract(
@@ -24,7 +24,7 @@ struct CaptureComposerMutationProofContract: Equatable {
 }
 
 struct CaptureAtmosphereComposerPresentation: Equatable {
-    let isRouteRevealVisible: Bool
+    let isPlacementPreviewVisible: Bool
     let placementTitle: String
     let destinationLabel: String
     let privacyLabel: String
@@ -37,35 +37,35 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
     let submitLabel: String
 
     init(
-        text: String,
+        text _: String,
         routePreview: CaptureDraftRoutePreview?,
         error: String?,
         isSubmitEnabled: Bool
     ) {
-        isRouteRevealVisible = false
-        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to place" : "Needs placement")
-        destinationLabel = routePreview?.destinationLabel ?? "Private intake"
-        privacyLabel = routePreview?.privacyLabel ?? "Stored locally when saved"
+        isPlacementPreviewVisible = routePreview != nil
+        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to save" : "Ready when you type")
+        destinationLabel = routePreview?.destinationLabel ?? "Open Field"
+        privacyLabel = routePreview?.privacyLabel ?? "Stays on this device when saved"
 
         if let error {
             evidenceTitle = "Needs attention"
             evidenceDetail = error
         } else if let routePreview {
-            evidenceTitle = routePreview.destinationLabel
+            evidenceTitle = "Where this fits"
             evidenceDetail = routePreview.consequenceLabel
         } else if isSubmitEnabled {
-            evidenceTitle = "Ready to review"
-            evidenceDetail = "Review opens first."
+            evidenceTitle = "Ready to save"
+            evidenceDetail = "Choose Review when you want to adjust where it belongs."
         } else {
             evidenceTitle = "Ready when you type"
-            evidenceDetail = "The field waits without placeholder text or route pressure."
+            evidenceDetail = "The field waits without pressure."
         }
 
         planInsertionTitle = routePreview?.planInsertionCandidate?.receiptProjection.title
         planInsertionDetail = routePreview?.planInsertionCandidate?.receiptProjection.summary
 
         inputAlternatives = CaptureInputAlternativesPresentation(
-            isRouteRevealVisible: isRouteRevealVisible,
+            isPlacementPreviewVisible: isPlacementPreviewVisible,
             isSubmitEnabled: isSubmitEnabled
         )
         accessibilityValue = [
@@ -82,7 +82,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             planInsertionTitle,
             planInsertionDetail,
             error,
-            inputAlternatives.accessibilityValue
+            inputAlternatives.accessibilityValue,
         ]
         .compactMap { $0 }
         .joined(separator: ". ")
@@ -92,44 +92,42 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
 
 struct CaptureInputAlternativesPresentation: Equatable {
     let title: String
-    let voiceStatusLabel: String
-    let voiceStatusDetail: String
+    let typingStatusLabel: String
+    let typingStatusDetail: String
     let motorStatusLabel: String
     let motorStatusDetail: String
     let reviewControlLabel: String
 
-    init(isRouteRevealVisible: Bool, isSubmitEnabled: Bool) {
-        title = "Input alternatives"
-        voiceStatusLabel = "Keyboard dictation only"
-        voiceStatusDetail = "Use typing or system dictation from the keyboard. Ambitions does not record audio here."
+    init(isPlacementPreviewVisible: Bool, isSubmitEnabled: Bool) {
+        title = "Input support"
+        typingStatusLabel = "Typing"
+        typingStatusDetail = "Use the field and standard keyboard tools."
         motorStatusLabel = "Motor alternative"
         motorStatusDetail = "Use buttons and menus; no drag, swipe, or long press is required."
-        if isRouteRevealVisible {
-            reviewControlLabel = "After typing: route choices are visible buttons and stay editable."
+        if isPlacementPreviewVisible {
+            reviewControlLabel = "After typing: placement choices are visible buttons and stay editable."
         } else if isSubmitEnabled {
-            reviewControlLabel = "After typing: review opens with visible buttons first."
+            reviewControlLabel = "After typing: Review opens with visible buttons."
         } else {
-            reviewControlLabel = "Type first; review waits for text."
+            reviewControlLabel = "Type first; Review waits for text."
         }
     }
 
     var accessibilityValue: String {
         [
             title,
-            voiceStatusLabel,
-            voiceStatusDetail,
+            typingStatusLabel,
+            typingStatusDetail,
             motorStatusLabel,
             motorStatusDetail,
-            reviewControlLabel
+            reviewControlLabel,
         ].joined(separator: ". ")
     }
 }
 
-
 struct CaptureAtmosphereComposerAccessibilityIDs: Equatable {
     let root: String
     let input: String
-    let dictationButton: String
     let submitButton: String
     let error: String
     let inputAlternatives: String
@@ -140,7 +138,6 @@ struct CaptureAtmosphereComposerAccessibilityIDs: Equatable {
     static let quickCapture = CaptureAtmosphereComposerAccessibilityIDs(
         root: "capture.composer",
         input: "capture.quick-input",
-        dictationButton: "capture.quick-mic",
         submitButton: "capture.quick-submit",
         error: "capture.quick-error",
         inputAlternatives: "capture.input-alternatives",
@@ -161,7 +158,6 @@ struct CaptureAtmosphereComposer: View {
     let error: String?
     let isSubmitEnabled: Bool
     let onSubmit: () -> Void
-    let onMicrophone: () -> Void
     let onRouteChoice: (SmartAttachmentRouteType) -> Void
     var mutationProofContract: CaptureComposerMutationProofContract = .localSave
     var accessibilityIDs: CaptureAtmosphereComposerAccessibilityIDs = .quickCapture
@@ -194,7 +190,7 @@ struct CaptureAtmosphereComposer: View {
         .padding(.bottom, theme.spacing.md)
         .stageMotionAnimation(
             DAVMotionPreset.receiptConfirmation.animation(theme: theme, reduceMotion: reduceMotion),
-            value: presentation.isRouteRevealVisible
+            value: presentation.isPlacementPreviewVisible
         )
         .accessibilityElement(children: .contain)
         .accessibilityValue(presentation.accessibilityValue)
@@ -207,10 +203,10 @@ struct CaptureAtmosphereComposer: View {
                 .foregroundStyle(theme.colors.textPrimary)
 
             Label(
-                presentation.inputAlternatives.voiceStatusLabel,
-                systemImage: "mic.slash"
+                presentation.inputAlternatives.typingStatusLabel,
+                systemImage: "keyboard"
             )
-            Text(presentation.inputAlternatives.voiceStatusDetail)
+            Text(presentation.inputAlternatives.typingStatusDetail)
                 .padding(.leading, 20)
 
             Label(
@@ -259,7 +255,7 @@ struct CaptureAtmosphereComposer: View {
             TextField("", text: $text, axis: .vertical)
                 .font(theme.typography.title)
                 .foregroundStyle(theme.colors.textPrimary)
-                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4...8 : 2...6)
+                .lineLimit(dynamicTypeSize.isAccessibilitySize ? 4 ... 8 : 2 ... 6)
                 .onSubmit {
                     if isSubmitEnabled {
                         onSubmit()
@@ -267,7 +263,7 @@ struct CaptureAtmosphereComposer: View {
                 }
                 .accessibilityIdentifier(accessibilityIDs.input)
                 .accessibilityLabel("Capture field")
-                .accessibilityHint("Type or use iOS keyboard dictation. Review opens first.")
+                .accessibilityHint("Type one real thing. Review opens when you choose it.")
         }
         .padding(.horizontal, theme.spacing.md)
         .padding(.vertical, dynamicTypeSize.isAccessibilitySize ? theme.spacing.lg : theme.spacing.md)
@@ -310,7 +306,7 @@ struct CaptureAtmosphereComposer: View {
         return .empty
     }
 
-    private var routeRevealTransition: AnyTransition {
+    private var placementPreviewTransition: AnyTransition {
         reduceMotion ? .opacity : .asymmetric(
             insertion: .move(edge: .bottom).combined(with: .opacity),
             removal: .opacity
@@ -329,7 +325,7 @@ private struct SpatialCaptureTeachingLine: View {
                     .font(.system(size: theme.icon.smallSize, weight: .semibold))
                     .foregroundStyle(theme.colors.textSecondary)
                     .accessibilityHidden(true)
-                Text("Type or dictate from the iOS keyboard. Review opens first.")
+                Text("Type one real thing. Review opens when you choose it.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -337,7 +333,7 @@ private struct SpatialCaptureTeachingLine: View {
             .accessibilityIdentifier("capture.first-run.spatial-teaching")
             .accessibilityElement(children: .combine)
             .accessibilityLabel("Capture teaching")
-            .accessibilityValue("Type or dictate from the iOS keyboard. Review opens first.")
+            .accessibilityValue("Type one real thing. Review opens when you choose it.")
         }
     }
 }

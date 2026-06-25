@@ -1,9 +1,9 @@
+@testable import Ambitions
 import AmbitionsDesignSystem
 import XCTest
-@testable import Ambitions
 
 final class MotionCurrentScreenTests: XCTestCase {
-    func testAMB574MotionObjectStagePrimitiveContractReplacesLanePanels() throws {
+    func testAMB574MotionObjectStagePrimitiveContractReplacesPathPanels() throws {
         let contract = MotionObjectStagePrimitiveContract.current
         let root = repoRoot()
         let viewSource = try source("Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift", root: root)
@@ -17,20 +17,21 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertEqual(contract.screenshotIdentifier, "StageMotionCurrent")
         XCTAssertTrue(contract.firstViewportAvoidsAnalyticsReportCardDashboardOutput)
         XCTAssertFalse(contract.reservesTabBarClearance)
-        XCTAssertEqual(contract.sourceTrustLineOrder, ["context", "history", "review", "re-entry action"])
-        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("lane cards"))
-        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("trace pills"))
+        XCTAssertEqual(contract.sourceTrustLineOrder, ["changed object", "change state", "return point", "available action"])
+        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("path cards"))
+        XCTAssertTrue(contract.replacesFirstViewportStructures.contains("history pills"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
         XCTAssertTrue(viewSource.contains("StageMotionLayer.current("))
         XCTAssertTrue(viewSource.contains("StageMotionRenderer(layer: layer"))
         XCTAssertTrue(rendererSource.contains("MotionCurrentField("))
-        XCTAssertTrue(fieldSource.contains("ProofRelationshipTracePrimitiveLine("))
+        XCTAssertFalse(fieldSource.contains("ProofRelationshipTracePrimitiveLine("))
         XCTAssertTrue(fieldSource.contains("MotionFieldRhythmSpine("))
         XCTAssertTrue(canvasSource.contains("ProductMeaningCanvasEngine("))
         XCTAssertTrue(canvasSource.contains("motion.current.rhythm-spine"))
         XCTAssertFalse(rendererSource.contains(".safeAreaInset(edge: .bottom"))
-        XCTAssertTrue(fieldSource.contains(".overlay(alignment: .leading)"))
+        XCTAssertTrue(fieldSource.contains("ZStack(alignment: .leading)"))
+        XCTAssertTrue(fieldSource.contains("MotionCurrentProofThreadTexture()"))
         XCTAssertFalse(fieldSource.contains("theme.colors.canvasElevated.opacity(0.92)"))
         XCTAssertFalse(fieldSource.contains("theme.colors.canvas.opacity(0.96)"))
         XCTAssertFalse(rendererSource.contains("RoundedRectangle("))
@@ -66,9 +67,9 @@ final class MotionCurrentScreenTests: XCTestCase {
 
         XCTAssertTrue(field.title.localizedCaseInsensitiveContains("No change yet"))
         XCTAssertTrue(field.summary.localizedCaseInsensitiveContains("Step stays held"))
-        XCTAssertTrue(field.source.localizedCaseInsensitiveContains("device"))
-        XCTAssertTrue(field.proof.localizedCaseInsensitiveContains("history"))
-        XCTAssertTrue(field.receipt.localizedCaseInsensitiveContains("Review"))
+        XCTAssertTrue(field.changedObject.localizedCaseInsensitiveContains("Step"))
+        XCTAssertTrue(field.changeState.localizedCaseInsensitiveContains("history"))
+        XCTAssertTrue(field.returnPoint.localizedCaseInsensitiveContains("Review"))
         XCTAssertTrue(field.control.localizedCaseInsensitiveContains("Return"))
     }
 
@@ -81,9 +82,9 @@ final class MotionCurrentScreenTests: XCTestCase {
             let field = MotionCurrentProjection.fixture(renderState: state).field
             XCTAssertFalse(field.title.isEmpty, "Missing title for \(state.rawValue)")
             XCTAssertFalse(field.summary.isEmpty, "Missing summary for \(state.rawValue)")
-            XCTAssertFalse(field.source.isEmpty, "Missing source for \(state.rawValue)")
-            XCTAssertFalse(field.proof.isEmpty, "Missing proof for \(state.rawValue)")
-            XCTAssertFalse(field.receipt.isEmpty, "Missing receipt for \(state.rawValue)")
+            XCTAssertFalse(field.changedObject.isEmpty, "Missing changed object for \(state.rawValue)")
+            XCTAssertFalse(field.changeState.isEmpty, "Missing change state for \(state.rawValue)")
+            XCTAssertFalse(field.returnPoint.isEmpty, "Missing return point for \(state.rawValue)")
             XCTAssertFalse(field.control.isEmpty, "Missing control for \(state.rawValue)")
         }
     }
@@ -102,7 +103,7 @@ final class MotionCurrentScreenTests: XCTestCase {
 
     func testMotionLanesContainRequiredCurrentStates() {
         let states = Set(MotionCurrentProjection.fixture.lanes.flatMap(\.items).map(\.id))
-        let requiredStates: Set<String> = [
+        let requiredStates: Set = [
             "no-history-yet",
             "history-available",
             "history-carried",
@@ -113,22 +114,23 @@ final class MotionCurrentScreenTests: XCTestCase {
             "context-light",
             "history-linked",
             "life-area-development",
-            "changed-object"
+            "changed-object",
         ]
 
         XCTAssertEqual(states, requiredStates)
     }
 
-    func testEachMotionCurrentStateTracesSourceProofAndReceipt() {
+    func testEachMotionCurrentStateCarriesObjectConsequence() {
         let items = MotionCurrentProjection.fixture.lanes.flatMap(\.items)
 
         for item in items {
-            XCTAssertFalse(item.source.isEmpty, "Source trace missing for \(item.id)")
-            XCTAssertFalse(item.proof.isEmpty, "Proof trace missing for \(item.id)")
-            XCTAssertFalse(item.receipt.isEmpty, "Receipt trace missing for \(item.id)")
-            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Context"))
-            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("History"))
-            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Review"))
+            XCTAssertFalse(item.changedObject.isEmpty, "Changed object missing for \(item.id)")
+            XCTAssertFalse(item.changeState.isEmpty, "Change state missing for \(item.id)")
+            XCTAssertFalse(item.returnPoint.isEmpty, "Return point missing for \(item.id)")
+            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains(item.stateLabel))
+            XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("Context:"))
+            XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("History:"))
+            XCTAssertFalse(item.accessibilitySummary.localizedCaseInsensitiveContains("Review:"))
         }
     }
 
@@ -157,7 +159,7 @@ final class MotionCurrentScreenTests: XCTestCase {
             "fail" + "ure",
             "fail" + "ed",
             "sh" + "ame",
-            "over" + "due"
+            "over" + "due",
         ]
 
         for term in forbiddenTerms {
@@ -178,7 +180,7 @@ final class MotionCurrentScreenTests: XCTestCase {
             "activity" + " feed",
             "X" + "P",
             "product" + "ivity",
-            "progress" + " chart"
+            "progress" + " chart",
         ].map { $0.lowercased() }
 
         for term in forbiddenTerms {
@@ -228,11 +230,11 @@ private extension MotionCurrentProjection {
             crown.summary,
             field.title,
             field.summary,
-            field.source,
-            field.proof,
-            field.receipt,
+            field.changedObject,
+            field.changeState,
+            field.returnPoint,
             field.control,
-            affordance.title
+            affordance.title,
         ]
 
         parts.append(contentsOf: crown.chips.map(\.title))
@@ -240,7 +242,7 @@ private extension MotionCurrentProjection {
             parts.append(contentsOf: [lane.title, lane.status, lane.summary])
             parts.append(contentsOf: lane.markers.map(\.title))
             for item in lane.items {
-                parts.append(contentsOf: [item.title, item.stateLabel, item.source, item.proof, item.receipt])
+                parts.append(contentsOf: [item.title, item.stateLabel, item.changedObject, item.changeState, item.returnPoint])
             }
         }
         for item in affordance.items {

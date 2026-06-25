@@ -1,5 +1,5 @@
-import XCTest
 @testable import Ambitions
+import XCTest
 
 @MainActor
 final class CaptureViewModelTests: XCTestCase {
@@ -7,7 +7,7 @@ final class CaptureViewModelTests: XCTestCase {
         let captureService = MutableCaptureService(captures: [capture(id: "capture-1", rawText: "First")])
         let goalsService = StaticGoalsService(items: [
             goalItem(id: "goal-active", title: "Active goal", renderState: .active),
-            goalItem(id: "goal-on-hold", title: "On hold goal", renderState: .onHold)
+            goalItem(id: "goal-on-hold", title: "On hold goal", renderState: .onHold),
         ])
         let viewModel = CaptureViewModel()
 
@@ -18,7 +18,7 @@ final class CaptureViewModelTests: XCTestCase {
         }
         XCTAssertEqual(state.captures.map(\.id), ["capture-1"])
         XCTAssertEqual(state.activeGoalOptions, [
-            CaptureGoalOption(id: "goal-active", title: "Active goal", subtitle: "In motion")
+            CaptureGoalOption(id: "goal-active", title: "Active goal", subtitle: "In motion"),
         ])
     }
 
@@ -47,7 +47,7 @@ final class CaptureViewModelTests: XCTestCase {
             capture(id: "plan", rawText: "Create spreadsheet"),
             capture(id: "waiting", rawText: "Waiting on invoice"),
             capture(id: "someday", rawText: "Learn piano"),
-            capture(id: "deliverable", rawText: "Add another song")
+            capture(id: "deliverable", rawText: "Add another song"),
         ])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -84,7 +84,7 @@ final class CaptureViewModelTests: XCTestCase {
     func testD12DraftPreviewUsesSmartAttachmentAndCompactChoices() async {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [
-            goalItem(id: "goal-music", title: "Music Goal", renderState: .active)
+            goalItem(id: "goal-music", title: "Music Goal", renderState: .active),
         ])
         let viewModel = CaptureViewModel()
 
@@ -120,7 +120,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertTrue(viewModel.draftRoutePreview?.visibleCopy.localizedCaseInsensitiveContains("8 AM or 8 PM") == true)
     }
 
-    func testPlanInsertionCandidateSurfacesInDraftPreviewWithoutMutationCopy() async {
+    func testPlanInsertionCandidateSurfacesInDraftPreviewWithoutMutationCopy() async throws {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -128,8 +128,8 @@ final class CaptureViewModelTests: XCTestCase {
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("play pickleball at 8 next Tuesday")
 
-        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
-        let candidate = try! XCTUnwrap(preview.planInsertionCandidate)
+        let preview = try XCTUnwrap(viewModel.draftRoutePreview)
+        let candidate = try XCTUnwrap(preview.planInsertionCandidate)
 
         XCTAssertEqual(candidate.receiptProjection.title, "Add to Time")
         XCTAssertEqual(candidate.scheduleImpact, .timeChangeRecommended)
@@ -151,7 +151,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertFalse(preview.visibleCopy.localizedCaseInsensitiveContains("silent mutation"))
     }
 
-    func testAFI08DraftPreviewUsesApprovedCaptureRouteStates() async {
+    func testAFI08DraftPreviewUsesApprovedCaptureRouteStates() async throws {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -160,7 +160,7 @@ final class CaptureViewModelTests: XCTestCase {
         viewModel.updateDraftText("Maybe start a guitar goal")
         viewModel.selectDraftRoute(.goal)
 
-        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        let preview = try XCTUnwrap(viewModel.draftRoutePreview)
         XCTAssertEqual(preview.placementShelfTitle, "Atmosphere Composer")
         XCTAssertEqual(preview.postInputStateTitle, "Grow into Goal")
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Needs a Place"))
@@ -195,7 +195,7 @@ final class CaptureViewModelTests: XCTestCase {
         )
     }
 
-    func testF07ComposerPreviewUsesPlacementLanguageWithoutHoldingBinFraming() async {
+    func testF07ComposerPreviewUsesPlacementLanguageWithoutHoldingBinFraming() async throws {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -203,7 +203,7 @@ final class CaptureViewModelTests: XCTestCase {
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Book dentist")
 
-        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        let preview = try XCTUnwrap(viewModel.draftRoutePreview)
         XCTAssertEqual(preview.placementShelfTitle, "Atmosphere Composer")
         XCTAssertEqual(preview.postInputStateTitle, "Ready to Place")
         XCTAssertEqual(preview.primaryActionTitle, "Place it")
@@ -234,7 +234,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.routeProofDetail, "Standalone")
     }
 
-    func testDraftPreviewProjectsStagedInputPoliciesIntoReceiptAndAccessibilitySummaries() async {
+    func testDraftPreviewProjectsStagedInputPoliciesIntoReceiptAndAccessibilitySummaries() async throws {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -242,7 +242,7 @@ final class CaptureViewModelTests: XCTestCase {
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Draft something local")
 
-        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        let preview = try XCTUnwrap(viewModel.draftRoutePreview)
 
         XCTAssertEqual(preview.stagedInputs.count, 6)
         XCTAssertEqual(preview.stagedInputs.first?.kind.title, "Text")
@@ -252,7 +252,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertTrue(preview.visibleCopy.localizedCaseInsensitiveContains("Capture staging") == false)
     }
 
-    func testFCP19ManualRouteSelectionKeepsCorrectionFoldUserOwned() async {
+    func testFCP19ManualRouteSelectionKeepsCorrectionFoldUserOwned() async throws {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [])
         let viewModel = CaptureViewModel()
@@ -261,7 +261,7 @@ final class CaptureViewModelTests: XCTestCase {
         viewModel.updateDraftText("Maybe start a guitar goal")
         viewModel.selectDraftRoute(.idea)
 
-        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        let preview = try XCTUnwrap(viewModel.draftRoutePreview)
         XCTAssertEqual(preview.correctionLabel, "Correction: placement chosen by you")
         XCTAssertEqual(preview.resolverWhyLabel, "Local review: use the destination you chose.")
         XCTAssertTrue(preview.correctionControlLabels.contains("Not a goal: no Goal is created unless you choose Goal."))
@@ -283,7 +283,7 @@ final class CaptureViewModelTests: XCTestCase {
             isSubmitEnabled: true
         )
 
-        XCTAssertFalse(presentation.isRouteRevealVisible)
+        XCTAssertTrue(presentation.isPlacementPreviewVisible)
         XCTAssertEqual(presentation.placementTitle, "Ready to Place")
         XCTAssertEqual(presentation.destinationLabel, "Step · Today")
         XCTAssertEqual(presentation.privacyLabel, "Private item")
@@ -311,14 +311,15 @@ final class CaptureViewModelTests: XCTestCase {
         )
         let alternatives = presentation.inputAlternatives
 
-        XCTAssertEqual(alternatives.title, "Input alternatives")
-        XCTAssertEqual(alternatives.voiceStatusLabel, "Keyboard dictation only")
-        XCTAssertTrue(alternatives.voiceStatusDetail.localizedCaseInsensitiveContains("system dictation"))
-        XCTAssertTrue(alternatives.voiceStatusDetail.localizedCaseInsensitiveContains("does not record audio"))
+        XCTAssertEqual(alternatives.title, "Input support")
+        XCTAssertEqual(alternatives.typingStatusLabel, "Typing")
+        XCTAssertTrue(alternatives.typingStatusDetail.localizedCaseInsensitiveContains("standard keyboard tools"))
         XCTAssertTrue(alternatives.motorStatusDetail.localizedCaseInsensitiveContains("buttons and menus"))
         XCTAssertTrue(alternatives.motorStatusDetail.localizedCaseInsensitiveContains("no drag, swipe, or long press"))
         XCTAssertTrue(alternatives.reviewControlLabel.localizedCaseInsensitiveContains("visible buttons"))
-        XCTAssertTrue(presentation.accessibilityValue.localizedCaseInsensitiveContains("Input alternatives"))
+        XCTAssertTrue(presentation.accessibilityValue.localizedCaseInsensitiveContains("Input support"))
+        XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("dictation"))
+        XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("record audio"))
         XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("listening"))
         XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("transcript"))
         XCTAssertFalse(alternatives.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
@@ -333,25 +334,25 @@ final class CaptureViewModelTests: XCTestCase {
             isSubmitEnabled: false
         )
 
-        XCTAssertEqual(presentation.inputAlternatives.reviewControlLabel, "Type first; review waits for text.")
-        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("Keyboard dictation only"))
-        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("review waits for text"))
+        XCTAssertEqual(presentation.inputAlternatives.reviewControlLabel, "Type first; Review waits for text.")
+        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("Input support"))
+        XCTAssertTrue(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("Review waits for text"))
         XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("automatically"))
         XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("hidden learning"))
         XCTAssertFalse(presentation.inputAlternatives.accessibilityValue.localizedCaseInsensitiveContains("confidence percentage"))
     }
 
-    func testEB03BRouteProofUsesGoalEvidenceWhenAvailable() async {
+    func testEB03BRouteProofUsesGoalEvidenceWhenAvailable() async throws {
         let captureService = MutableCaptureService(captures: [])
         let goalsService = StaticGoalsService(items: [
-            goalItem(id: "goal-music", title: "Music Goal", renderState: .active)
+            goalItem(id: "goal-music", title: "Music Goal", renderState: .active),
         ])
         let viewModel = CaptureViewModel()
 
         await viewModel.load(captureService: captureService, goalsService: goalsService)
         viewModel.updateDraftText("Finished Music Goal proof")
 
-        let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
+        let preview = try XCTUnwrap(viewModel.draftRoutePreview)
         XCTAssertEqual(preview.receiptTitle, "Saved as Proof · Music Goal")
         XCTAssertEqual(preview.routeProofTitle, "Goal attachment needs approval")
         XCTAssertTrue(preview.consequenceLabel.localizedCaseInsensitiveContains("Keeps proof local"))
@@ -378,12 +379,12 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertNil(viewModel.draftRoutePreview)
     }
 
-    func testD12CaptureScreenContractSnapshotRemovesOrdinaryAtmosphereComposerCopy() {
+    func testD12CaptureScreenContractSnapshotRemovesOrdinaryAtmosphereComposerCopy() throws {
         let snapshot = CaptureViewState(
             captures: [],
             activeGoalOptions: []
         ).screenContractSnapshot()
-        let contract = try! XCTUnwrap(ScreenContractRegistry.contract(for: .capture))
+        let contract = try XCTUnwrap(ScreenContractRegistry.contract(for: .capture))
         let issues = ScreenContractValidator.validate(snapshot: snapshot, against: contract)
 
         XCTAssertTrue(issues.isEmpty, issues.map(\.message).joined(separator: "\n"))
@@ -394,8 +395,8 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertTrue(snapshot.copySamples.contains("Inspect what Ambitions knows"))
         let ordinaryCopy = (
             snapshot.firstScreenContent +
-            snapshot.drillDowns +
-            snapshot.copySamples
+                snapshot.drillDowns +
+                snapshot.copySamples
         ).joined(separator: " ")
         XCTAssertFalse(ordinaryCopy.localizedCaseInsensitiveContains("Placement Field"))
         XCTAssertFalse(ordinaryCopy.localizedCaseInsensitiveContains("Atmosphere Composer"))

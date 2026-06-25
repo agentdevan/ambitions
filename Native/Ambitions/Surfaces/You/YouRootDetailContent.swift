@@ -178,10 +178,10 @@ struct YouRootDetailContent: View {
             subtitle: "Capture settings reflect the current global composer path.",
             items: [
                 SettingsItem(id: "capture-input", title: "Input behavior", subtitle: "Capture opens as a full-screen Stage composer.", icon: "keyboard", valueLabel: "Global"),
-                SettingsItem(id: "capture-dictation", title: "Keyboard dictation", subtitle: "Use the iOS keyboard dictation key when the system keyboard offers it. Ambitions does not request a separate microphone path here.", icon: "waveform", valueLabel: "System"),
+                SettingsItem(id: "capture-keyboard-tools", title: "Keyboard tools", subtitle: "Use standard iOS keyboard tools in the Capture field.", icon: "keyboard.chevron.compact.down", valueLabel: "System"),
                 SettingsItem(id: "capture-attachments", title: "Attachments", subtitle: "Local attachments stay in the Capture flow and are not uploaded from this setting.", icon: "paperclip", valueLabel: "Local"),
                 SettingsItem(id: "capture-teaching-reset", title: "Gesture teaching reset", subtitle: "Reset is not exposed in You yet.", icon: "hand.tap", valueLabel: "Unavailable"),
-                SettingsItem(id: "capture-permissions", title: "Permission state", subtitle: "No Capture-only cloud, analytics, or custom microphone permission is connected.", icon: "lock", valueLabel: "Local")
+                SettingsItem(id: "capture-permissions", title: "Permission state", subtitle: "No Capture-only cloud or analytics permission is connected.", icon: "lock", valueLabel: "Local"),
             ],
             footer: "This detail does not rebuild Capture or add a half-sheet path."
         )
@@ -194,7 +194,7 @@ struct YouRootDetailContent: View {
             items: [
                 SettingsItem(id: "life-areas-defaults", title: "Default areas", subtitle: "Work, Body, Home, People, Self, Future, and Open Field are supplied by the Goals Life Area Atlas.", icon: "square.grid.2x2", valueLabel: "Available"),
                 SettingsItem(id: "life-areas-customization", title: "Customization", subtitle: "Rename, reorder, hide, and add controls are not exposed from You yet.", icon: "slider.horizontal.3", valueLabel: "Unavailable"),
-                SettingsItem(id: "life-areas-route-owner", title: "Where to manage", subtitle: "Open Goals to work with Life Area detail and contextual Capture creation.", icon: "target", valueLabel: "Goals")
+                SettingsItem(id: "life-areas-route-owner", title: "Where to manage", subtitle: "Open Goals to work with Life Area detail and contextual Capture creation.", icon: "target", valueLabel: "Goals"),
             ],
             footer: "You shows the ownership boundary instead of duplicating Goals controls."
         )
@@ -207,7 +207,7 @@ struct YouRootDetailContent: View {
             items: [
                 SettingsItem(id: "local-data-store", title: "Local store", subtitle: "Goals, captures, proof, receipts, preferences, and local context use on-device storage.", icon: "internaldrive", valueLabel: "On device"),
                 SettingsItem(id: "local-data-export", title: "Export", subtitle: "Export is status-only here unless an owning export path proves the action.", icon: "square.and.arrow.up", valueLabel: "Bounded"),
-                SettingsItem(id: "local-data-erase", title: "Erase", subtitle: "Broad destructive erase is not exposed from this detail.", icon: "trash.slash", valueLabel: "Unavailable")
+                SettingsItem(id: "local-data-erase", title: "Erase", subtitle: "Broad destructive erase is not exposed from this detail.", icon: "trash.slash", valueLabel: "Unavailable"),
             ],
             footer: "Any destructive local-data action must require confirmation before it becomes available."
         )
@@ -220,7 +220,7 @@ struct YouRootDetailContent: View {
             items: [
                 SettingsItem(id: "sources-permissions", title: "Permissions", subtitle: "Calendar and notification boundaries are shown where the current app can inspect them.", icon: "checkmark.shield", valueLabel: "Review"),
                 SettingsItem(id: "sources-freshness", title: "Freshness", subtitle: "Freshness belongs in source detail and receipts, not on the You root.", icon: "clock.arrow.circlepath", valueLabel: "Detail"),
-                SettingsItem(id: "sources-add-remove", title: "Add or remove", subtitle: "No connected external source is faked from this setting.", icon: "minus.plus.batteryblock", valueLabel: "Unavailable")
+                SettingsItem(id: "sources-add-remove", title: "Add or remove", subtitle: "No connected external source is faked from this setting.", icon: "minus.plus.batteryblock", valueLabel: "Unavailable"),
             ] + profileProjection.assumptionCorrections.items,
             footer: profileProjection.assumptionCorrections.footer
         )
@@ -236,7 +236,7 @@ struct YouRootDetailContent: View {
                 SettingsItem(id: "accessibility-increase-contrast", title: "Increase Contrast", subtitle: "Semantic tokens provide contrast-aware foreground and stroke states.", icon: "circle.lefthalf.filled", valueLabel: "System"),
                 SettingsItem(id: "accessibility-haptics", title: "Haptics", subtitle: "Route haptics use the design-system haptic policy.", icon: "iphone.radiowaves.left.and.right", valueLabel: "Policy"),
                 SettingsItem(id: "accessibility-icon-labels", title: "Icon labels", subtitle: "Root navigation labels remain VoiceOver-accessible and not visibly persistent.", icon: "character.cursor.ibeam", valueLabel: "VoiceOver"),
-                SettingsItem(id: "accessibility-proof-preview", title: "Proof preview", subtitle: "Manual accessibility proof is still pending.", icon: "checkmark.seal", valueLabel: "Pending")
+                SettingsItem(id: "accessibility-proof-preview", title: "Proof preview", subtitle: "Manual accessibility proof is still pending.", icon: "checkmark.seal", valueLabel: "Pending"),
             ],
             footer: "This is app support status, not public accessibility certification."
         )
@@ -255,7 +255,7 @@ struct YouRootDetailContent: View {
                 SettingsItem(id: "about-build", title: "Build", subtitle: nil, icon: "hammer", valueLabel: build),
                 SettingsItem(id: "about-local-first", title: "Local-first core", subtitle: "Core personal life data stays on device by default.", icon: "lock.iphone", valueLabel: "On device"),
                 SettingsItem(id: "about-privacy-legal", title: "Privacy & legal", subtitle: "Release privacy and legal approval are not claimed here.", icon: "doc.text", valueLabel: "Pending"),
-                SettingsItem(id: "about-diagnostics", title: "Diagnostics export", subtitle: "Diagnostics export is available only where an owning support path proves the action.", icon: "waveform.path.ecg", valueLabel: "Unavailable")
+                SettingsItem(id: "about-diagnostics", title: "Diagnostics export", subtitle: "Diagnostics export is available only where an owning support path proves the action.", icon: "waveform.path.ecg", valueLabel: "Unavailable"),
             ],
             footer: nil
         )

@@ -1,5 +1,5 @@
-import XCTest
 @testable import Ambitions
+import XCTest
 
 final class GoalsObjectStagePrimitiveTests: XCTestCase {
     func testAMB575GoalsObjectStagePrimitiveContractReplacesAtlasLensContainers() throws {
@@ -13,7 +13,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         XCTAssertEqual(contract.screenshotIdentifier, "GoalsObjectStage")
         XCTAssertTrue(contract.avoidsGenericGoalRootOutput)
         XCTAssertTrue(contract.reservesTabBarClearance)
-        XCTAssertEqual(contract.sourceTrustLineOrder, ["life area", "source", "proof", "receipt", "Today link"])
+        XCTAssertEqual(contract.sourceTrustLineOrder, ["life area", "goal thread", "step chain", "Today link"])
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("rounded Constellation Atlas container"))
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("rounded Orbital Lens container"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
@@ -68,7 +68,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
             encoding: .utf8
         )
 
-        XCTAssertTrue(source.contains(".safeAreaInset(edge: .bottom"))
+        XCTAssertTrue(source.contains(".stageOwnedSafeAreaInset(edge: .bottom"))
         XCTAssertTrue(source.contains("theme.spacing.xxxl"))
         XCTAssertTrue(source.contains(".allowsHitTesting(false)"))
     }
@@ -82,12 +82,12 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
 
         XCTAssertTrue(goalsLensSource.contains("static let objectStageContract"))
         XCTAssertTrue(goalsLensSource.contains("GoalsStageScene("))
-        XCTAssertTrue(stageSceneSource.contains("struct GoalsStageScene: Equatable, Sendable"))
+        XCTAssertTrue(stageSceneSource.contains("struct GoalsStageScene: Equatable"))
         XCTAssertTrue(stageSceneSource.contains("productObject.localizedCaseInsensitiveContains(\"Constellation Atlas\")"))
         XCTAssertTrue(stageSceneSource.contains("firstViewportStructure.localizedCaseInsensitiveContains(\"life-area\")"))
-        XCTAssertTrue(stageSceneSource.contains("sourceTrustLineOrder == [\"life area\", \"source\", \"proof\", \"receipt\", \"Today link\"]"))
+        XCTAssertTrue(stageSceneSource.contains("sourceTrustLineOrder == [\"life area\", \"goal thread\", \"step chain\", \"Today link\"]"))
         XCTAssertTrue(stageSceneSource.contains("todayRelationshipSummary.localizedCaseInsensitiveContains(\"Today\")"))
-        XCTAssertTrue(stageSceneSource.contains("inspectionSummary.localizedCaseInsensitiveContains(\"proof\")"))
+        XCTAssertTrue(stageSceneSource.contains("inspectionSummary.localizedCaseInsensitiveContains(\"reason\")"))
     }
 
     func goalsStageSource() throws -> String {
@@ -96,7 +96,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
             "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView+02-overview.swift",
             "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView+03-atlasRelationshipField.swift",
-            "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView+04-atlasRelationshipTraceLabel.swift"
+            "Native/Ambitions/DesignSystem/ProductObjects/ConstellationAtlasView+04-atlasRelationshipTraceLabel.swift",
         ]
         let source = try sourcePaths.map {
             try String(contentsOf: root.appendingPathComponent($0), encoding: .utf8)
@@ -119,7 +119,7 @@ final class GoalsObjectStagePrimitiveTests: XCTestCase {
         let root = repoRoot()
         let sourcePaths = [
             "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels.swift",
-            "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+03-GoalsOverview.swift"
+            "Native/Ambitions/Projection/SurfaceLenses/GoalsFeatureModels+03-GoalsOverview.swift",
         ]
         return try sourcePaths.map {
             try String(contentsOf: root.appendingPathComponent($0), encoding: .utf8)

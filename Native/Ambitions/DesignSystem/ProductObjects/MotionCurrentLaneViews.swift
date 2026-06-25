@@ -12,7 +12,7 @@ struct MotionLaneCluster: View {
                 MotionLaneBand(lane: lane)
             }
         }
-        .accessibilityIdentifier("motion.current.lanes")
+        .accessibilityIdentifier("motion.current.paths")
     }
 }
 
@@ -23,6 +23,10 @@ private struct MotionLaneBand: View {
     let lane: MotionLaneState
 
     var body: some View {
+        let pathID = lane.id
+        let pathTitle = lane.title
+        let pathStatus = lane.status
+        let pathSummary = lane.summary
         HStack(alignment: .top, spacing: theme.spacing.md) {
             ZStack {
                 Circle()
@@ -52,13 +56,10 @@ private struct MotionLaneBand: View {
 
                 MotionCurrentFlowLayout(spacing: theme.spacing.xs) {
                     ForEach(lane.markers) { marker in
-                        ProofRelationshipTracePrimitiveToken(
-                            role: motionTraceRole(for: marker.title),
-                            title: marker.title,
-                            systemImage: marker.icon,
-                            semanticState: marker.semanticState,
-                            accessibilityIdentifier: "motion.current.lane.\(lane.id).trace.\(marker.id.motionSlug)"
-                        )
+                        Label(marker.title, systemImage: marker.icon)
+                            .font(theme.typography.caption.weight(.semibold))
+                            .foregroundStyle(theme.semanticAccent(for: marker.semanticState))
+                            .accessibilityIdentifier("motion.current.path.\(pathID).marker.\(marker.id.motionSlug)")
                     }
                 }
 
@@ -89,8 +90,8 @@ private struct MotionLaneBand: View {
                 .padding(.vertical, theme.spacing.sm)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityIdentifier("motion.current.lane.\(lane.id)")
-        .accessibilityLabel("\(lane.title). \(lane.status). \(lane.summary)")
+        .accessibilityIdentifier("motion.current.path.\(pathID)")
+        .accessibilityLabel("\(pathTitle). \(pathStatus). \(pathSummary)")
         .accessibilityValue(lane.items.map(\.accessibilitySummary).joined(separator: ". "))
     }
 }
@@ -121,10 +122,16 @@ private struct MotionLaneStateRow: View {
                         .textCase(.uppercase)
                 }
 
-                VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    ProofRelationshipTracePrimitiveLine(role: .source, title: "Context", subtitle: item.source, systemImage: "link", semanticState: item.semanticState, accessibilityIdentifier: "motion.current.lane.\(item.id).source")
-                    ProofRelationshipTracePrimitiveLine(role: .proof, title: "History", subtitle: item.proof, systemImage: "seal", semanticState: item.semanticState, accessibilityIdentifier: "motion.current.lane.\(item.id).proof")
-                    ProofRelationshipTracePrimitiveLine(role: .receipt, title: "Review", subtitle: item.receipt, systemImage: "doc.text.magnifyingglass", semanticState: item.semanticState, accessibilityIdentifier: "motion.current.lane.\(item.id).receipt")
+                VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
+                    Text(item.changedObject)
+                        .font(theme.typography.caption)
+                        .foregroundStyle(theme.colors.textSecondary)
+                    Text(item.changeState)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
+                    Text(item.returnPoint)
+                        .font(theme.typography.micro)
+                        .foregroundStyle(theme.colors.textTertiary)
                 }
             }
         }

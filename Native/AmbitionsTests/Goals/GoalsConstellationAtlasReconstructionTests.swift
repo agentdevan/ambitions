@@ -1,5 +1,5 @@
-import XCTest
 @testable import Ambitions
+import XCTest
 
 final class GoalsConstellationAtlasReconstructionTests: XCTestCase {
     func testGoalsObjectStageContractOwnsConstellationAtlas() {
@@ -13,7 +13,7 @@ final class GoalsConstellationAtlasReconstructionTests: XCTestCase {
 
     func testGoalsContractKeepsInspectionProgressive() {
         let contract = GoalsObjectStagePrimitiveContract.current
-        XCTAssertTrue(contract.firstViewportStructure.contains("progressive trust inspection"))
+        XCTAssertTrue(contract.firstViewportStructure.contains("review held inside the object"))
         XCTAssertTrue(contract.sourceTrustLineOrder.contains("Today link"))
     }
 
@@ -22,6 +22,6 @@ final class GoalsConstellationAtlasReconstructionTests: XCTestCase {
         XCTAssertTrue(scene.satisfiesArchitectureTree)
         XCTAssertEqual(scene.productObject, "Constellation Atlas + Orbital Lens")
         XCTAssertTrue(scene.todayRelationshipSummary.contains("Today"))
-        XCTAssertTrue(scene.inspectionSummary.contains("proof"))
+        XCTAssertTrue(scene.inspectionSummary.contains("reason"))
     }
 }

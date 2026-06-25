@@ -1,7 +1,7 @@
+@testable import Ambitions
+import AmbitionsDesignSystem
 import Foundation
 import XCTest
-import AmbitionsDesignSystem
-@testable import Ambitions
 
 final class PersonalSystemCenterDesignSystemTests: XCTestCase {
     func testSI11PersonalSystemCenterSignalsStayTrustAndPrivacyBound() {
@@ -29,7 +29,7 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
                 source: "Human proof pending",
                 state: .stale,
                 context: .you
-            )
+            ),
         ]
 
         XCTAssertEqual(signals.map(\.id), ["trust", "memory", "accessibility"])
@@ -43,7 +43,7 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
             PersonalSystemCenterSetupItem(id: "trust", title: "Trust Center", statusLabel: "Review", state: .proof),
             PersonalSystemCenterSetupItem(id: "memory", title: "Memory", statusLabel: "Local", state: .calm),
             PersonalSystemCenterSetupItem(id: "schedule", title: "Schedule", statusLabel: "Denied", state: .stale),
-            PersonalSystemCenterSetupItem(id: "sync", title: "Sync / Archive", statusLabel: "Future", state: .stale)
+            PersonalSystemCenterSetupItem(id: "sync", title: "Sync / Archive", statusLabel: "Future", state: .stale),
         ]
 
         XCTAssertEqual(items.count, 4)
@@ -66,9 +66,9 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
                         symbolName: "checkmark.shield",
                         state: .proof,
                         statusLabel: "Review"
-                    )
+                    ),
                 ]
-            )
+            ),
         ]
 
         XCTAssertEqual(sections.map(\.id), ["trust-memory"])
@@ -118,10 +118,6 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
             contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootDetailContent.swift"),
             encoding: .utf8
         )
-        let navigationRowSource = try String(
-            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/Surfaces/You/YouRootSurface+03-YouPersonalSystemNavigationRow.swift"),
-            encoding: .utf8
-        )
 
         XCTAssertEqual(contract.primitiveID, "personal-runtime-group")
         XCTAssertEqual(contract.ownerSurface, "You")
@@ -139,7 +135,7 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
             "sources",
             "receipts and history",
             "accessibility",
-            "about"
+            "about",
         ])
         XCTAssertTrue(contract.replacesFirstViewportStructures.contains("generic settings wall"))
         XCTAssertTrue(contract.exemptedSemanticControls.contains("native grouped navigation rows"))
@@ -155,13 +151,14 @@ final class PersonalSystemCenterDesignSystemTests: XCTestCase {
         XCTAssertTrue(rootSource.contains("\"capture-preferences\""))
         XCTAssertTrue(rootSource.contains("\"life-areas\""))
         XCTAssertTrue(rootSource.contains("\"local-data-controls\""))
-        XCTAssertTrue(rootSource.contains("\"source-settings\""))
-        XCTAssertTrue(rootSource.contains("\"receipts-history\""))
+        XCTAssertFalse(rootSource.contains("id: \"source-settings\""))
+        XCTAssertFalse(rootSource.contains("id: \"receipts-history\""))
         XCTAssertFalse(rootSource.contains("Array(items.prefix(1))"))
         XCTAssertFalse(rootSource.contains("Runtime Governance"))
-        XCTAssertTrue(rootSource.contains("RootSectionRow"))
-        XCTAssertTrue(navigationRowSource.contains("YouPersonalSystemNavigationRow"))
-        XCTAssertTrue(rootSource.contains("Preferences"))
+        XCTAssertTrue(rootSource.contains("RootSettingsRow"))
+        XCTAssertTrue(rootSource.contains("UserProfileSettingsRow"))
+        XCTAssertTrue(rootSource.contains("Profile"))
+        XCTAssertTrue(rootSource.contains("Planning"))
         XCTAssertFalse(rootSource.contains("Account & Preferences"))
         XCTAssertFalse(rootSource.contains("HeroCard("))
         XCTAssertFalse(rootSource.contains("AppCard("))

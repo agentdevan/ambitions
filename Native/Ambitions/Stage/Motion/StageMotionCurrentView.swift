@@ -8,7 +8,7 @@ struct StageMotionCurrentView: View {
     private let onAction: (MotionCurrentAction) -> Void
 
     init(
-        projection: MotionCurrentProjection? = nil,
+        projection: MotionCurrentProjection,
         onAction: @escaping (MotionCurrentAction) -> Void = { action in
             NotificationCenter.default.post(
                 name: MotionCurrentAction.notificationName,
@@ -17,9 +17,24 @@ struct StageMotionCurrentView: View {
             )
         }
     ) {
-        self.projection = projection ?? .objectConsequence(renderState: .launchArgument)
+        self.projection = projection
         self.onAction = onAction
     }
+
+    #if DEBUG
+        init(
+            renderState: MotionCurrentRenderState = .launchArgument,
+            onAction: @escaping (MotionCurrentAction) -> Void = { action in
+                NotificationCenter.default.post(
+                    name: MotionCurrentAction.notificationName,
+                    object: nil,
+                    userInfo: action.toNotificationPayload()
+                )
+            }
+        ) {
+            self.init(projection: .debugFixture(renderState: renderState), onAction: onAction)
+        }
+    #endif
 
     var body: some View {
         let objectStageContract = MotionObjectStagePrimitiveContract.current
@@ -29,7 +44,7 @@ struct StageMotionCurrentView: View {
         )
 
         StageMotionRenderer(layer: layer, onAction: onAction)
-        .accessibilityIdentifier("stage.motion.current.view")
-        .accessibilityValue(objectStageContract.firstViewportStructure)
+            .accessibilityIdentifier("stage.motion.current.view")
+            .accessibilityValue(objectStageContract.firstViewportStructure)
     }
 }

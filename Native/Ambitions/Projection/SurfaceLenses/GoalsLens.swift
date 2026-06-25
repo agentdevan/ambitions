@@ -1,6 +1,6 @@
 import Foundation
 
-struct GoalsObjectStagePrimitiveContract: Equatable, Sendable {
+struct GoalsObjectStagePrimitiveContract: Equatable {
     let primitiveID: String
     let ownerSurface: String
     let productObject: String
@@ -18,7 +18,7 @@ struct GoalsObjectStagePrimitiveContract: Equatable, Sendable {
         ownerSurface: "Goals",
         productObject: "Constellation Atlas + Orbital Lens",
         stageName: "Constellation Atlas",
-        firstViewportStructure: "Full-bleed Constellation Atlas object stage with life-area nodes, Orbital Lens focus, Today connection, and progressive trust inspection.",
+        firstViewportStructure: "Full-bleed Constellation Atlas object stage with life-area nodes, thread focus, step chain, Today connection, and review held inside the object.",
         replacesFirstViewportStructures: [
             "rounded equal-weight area band",
             "rounded Direction Atlas container",
@@ -26,21 +26,20 @@ struct GoalsObjectStagePrimitiveContract: Equatable, Sendable {
             "rounded relationship field shell",
             "rounded Orbital Lens container",
             "rounded Atlas lane blocks",
-            "progressive trust disclosures"
+            "separate review disclosure strip",
         ],
         sourceTrustLineOrder: [
             "life area",
-            "source",
-            "proof",
-            "receipt",
-            "Today link"
+            "goal thread",
+            "step chain",
+            "Today link",
         ],
         accessibilityFallbacks: [
-            "VoiceOver names Your Direction before life area, Orbital Lens, life-area, thread, Today, and trust-disclosure relationships",
-            "Dynamic Type preserves Constellation Atlas title, life area order, Orbital Lens order, and relationship lane order",
+            "VoiceOver names Your Direction before life area, thread, step chain, Today, and review controls",
+            "Dynamic Type preserves Constellation Atlas title, life area order, thread order, and Today link order",
             "Reduce Motion keeps the Constellation Atlas relationship field static",
             "Increase Contrast strengthens object-stage rules and relationship markers",
-            "Differentiate Without Color exposes life area, source, proof, receipt, and Today link as text"
+            "Differentiate Without Color exposes life area, goal thread, step chain, Today link, and review as text",
         ],
         screenshotIdentifier: "GoalsObjectStage",
         avoidsGenericGoalRootOutput: true,
@@ -60,12 +59,12 @@ enum GoalsLens: SurfaceLens {
             "active step chains",
             "pinned goals",
             "milestones",
-            "Today relationships"
+            "Today relationships",
         ],
-        firstViewportContract: "Constellation Atlas owns goal threads, life areas, Today links, and proof context as a native goal field.",
+        firstViewportContract: "Constellation Atlas owns goal threads, life areas, Today links, reason, and history as a native goal field.",
         accessibilityContract: objectStageContract.accessibilityFallbacks,
         trustInspectionRequirements: ["source", "proof", "receipt", "Today link"],
-        failureStateRequirements: ["empty goals", "broken source", "blocked thread", "recovery review"]
+        failureStateRequirements: ["empty goals", "missing context", "blocked thread", "recovery review"]
     )
 
     static let objectStageContract = GoalsObjectStagePrimitiveContract.current

@@ -15,8 +15,6 @@ struct AppShellActivatedCaptureSeam: View {
     @State private var saveState: SaveState = .idle
     @State private var selectedDraftRouteType: SmartAttachmentRouteType?
     @State private var isProposalPresented = false
-    @State private var dictationStatusMessage: String?
-    @State private var savedCapture: Capture?
 
     private let draftRouteService = CaptureDraftRouteService()
 
@@ -85,9 +83,7 @@ struct AppShellActivatedCaptureSeam: View {
                 selectedDraftRouteType = nil
                 isProposalPresented = false
             }
-            dictationStatusMessage = nil
             saveState = .idle
-            savedCapture = nil
         }
         .accessibilityElement(children: .contain)
         .accessibilityLabel(AppShellCaptureAccessModel.activatedSeamAccessibilityLabel)
@@ -120,9 +116,6 @@ struct AppShellActivatedCaptureSeam: View {
             onSubmit: {
                 presentProposal()
             },
-            onMicrophone: {
-                dictationStatusMessage = "Keyboard dictation ready. Use the iOS keyboard microphone; Ambitions does not record audio here."
-            },
             onRouteChoice: { routeType in
                 selectedDraftRouteType = routeType
                 isProposalPresented = true
@@ -130,7 +123,6 @@ struct AppShellActivatedCaptureSeam: View {
             accessibilityIDs: CaptureAtmosphereComposerAccessibilityIDs(
                 root: "shell.activated-capture.composer",
                 input: "shell.activated-capture.input",
-                dictationButton: "shell.activated-capture.dictation-button",
                 submitButton: "shell.activated-capture.save-button",
                 error: "shell.activated-capture.error",
                 inputAlternatives: "shell.activated-capture.input-alternatives",
@@ -183,20 +175,18 @@ struct AppShellActivatedCaptureSeam: View {
                 .fixedSize(horizontal: false, vertical: true)
                 .accessibilityIdentifier("shell.activated-capture.status")
         case let .saved(message):
-            receiptView(message: message)
+            Text(message)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.semanticAccent(for: .success))
+                .fixedSize(horizontal: false, vertical: true)
+                .accessibilityIdentifier("shell.activated-capture.status")
         case .saving:
-            Text("Saving locally before the receipt is written.")
+            Text("Saving locally.")
                 .font(theme.typography.caption)
                 .foregroundStyle(theme.colors.textSecondary)
                 .accessibilityIdentifier("shell.activated-capture.status")
         case .idle:
-            if let dictationStatusMessage {
-                Text(dictationStatusMessage)
-                    .font(theme.typography.caption)
-                    .foregroundStyle(theme.colors.textSecondary)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityIdentifier("shell.activated-capture.dictation-status")
-            }
+            EmptyView()
         }
     }
 
@@ -228,44 +218,6 @@ struct AppShellActivatedCaptureSeam: View {
         isProposalPresented = routePreview != nil
     }
 
-    private func receiptView(message: String) -> some View {
-        CaptureStageGroup(state: .proof, accessibilityIdentifier: "shell.activated-capture.receipt") {
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                Text(message)
-                    .font(theme.typography.bodyEmphasized)
-                    .foregroundStyle(theme.semanticAccent(for: .success))
-                    .fixedSize(horizontal: false, vertical: true)
-                    .accessibilityIdentifier("shell.activated-capture.status")
-                if let savedCapture {
-                    Text("Destination: \(savedCapture.route.title)")
-                        .font(theme.typography.caption)
-                        .foregroundStyle(theme.colors.textSecondary)
-                        .accessibilityIdentifier("shell.activated-capture.receipt.destination")
-                    HStack(spacing: theme.spacing.sm) {
-                        Button {
-                            captureText = savedCapture.rawText
-                            selectedDraftRouteType = nil
-                            isProposalPresented = true
-                            saveState = .idle
-                        } label: {
-                            Label("Change destination", systemImage: "arrow.triangle.branch")
-                        }
-                        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-                        .accessibilityIdentifier("shell.activated-capture.receipt.change-destination")
-
-                        Button {
-                            dictationStatusMessage = "Inspect from Capture history after dismissing this composer."
-                        } label: {
-                            Label("Inspect", systemImage: "doc.text.magnifyingglass")
-                        }
-                        .buttonStyle(AmbitionPressableButtonStyle(state: .default))
-                        .accessibilityIdentifier("shell.activated-capture.receipt.inspect")
-                    }
-                }
-            }
-        }
-    }
-
     @MainActor
     private func saveCapture() async {
         guard let appContainer else { return }
@@ -279,11 +231,10 @@ struct AppShellActivatedCaptureSeam: View {
         )
         saveState = .saving
         do {
-            let capture = try await appContainer.captureService.createCapture(
+            _ = try await appContainer.captureService.createCapture(
                 decision.createCaptureRequest(rawText: rawText, sourceType: sourceType),
-                now: .now
+                now: appContainer.clock.now
             )
-            savedCapture = capture
             saveState = .saved("Saved locally.")
             selectedDraftRouteType = nil
             isProposalPresented = false

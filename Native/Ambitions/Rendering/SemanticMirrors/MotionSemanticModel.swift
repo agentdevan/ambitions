@@ -1,11 +1,11 @@
 import Foundation
 
-struct MotionSemanticModel: Equatable, Sendable {
+struct MotionSemanticModel: Equatable {
     let behaviorName: String
     let crownSummary: String
-    let sourceSummary: String
-    let proofSummary: String
-    let receiptSummary: String
+    let changedObjectSummary: String
+    let changeStateSummary: String
+    let returnPointSummary: String
     let reductionSummary: String
     let consequenceMirrors: [MotionConsequenceMirror]
 
@@ -13,13 +13,13 @@ struct MotionSemanticModel: Equatable, Sendable {
         projection: MotionCurrentProjection,
         reductionPolicy: StageMotionReductionPolicy
     ) {
-        self.behaviorName = UserFacingLanguage.Object.stageMotion
-        self.crownSummary = projection.crown.summary
-        self.sourceSummary = projection.field.source
-        self.proofSummary = projection.field.proof
-        self.receiptSummary = projection.field.receipt
-        self.reductionSummary = reductionPolicy.rhythmSpacingDescription
-        self.consequenceMirrors = MotionConsequenceMirror.current(
+        behaviorName = UserFacingLanguage.Object.stageMotion
+        crownSummary = projection.crown.summary
+        changedObjectSummary = projection.field.changedObject
+        changeStateSummary = projection.field.changeState
+        returnPointSummary = projection.field.returnPoint
+        reductionSummary = reductionPolicy.rhythmSpacingDescription
+        consequenceMirrors = MotionConsequenceMirror.current(
             projection: projection,
             reductionPolicy: reductionPolicy
         )
@@ -27,9 +27,9 @@ struct MotionSemanticModel: Equatable, Sendable {
 
     var provesBehaviorNotDestination: Bool {
         behaviorName == UserFacingLanguage.Object.stageMotion &&
-            sourceSummary.isEmpty == false &&
-            proofSummary.isEmpty == false &&
-            receiptSummary.isEmpty == false &&
+            changedObjectSummary.isEmpty == false &&
+            changeStateSummary.isEmpty == false &&
+            returnPointSummary.isEmpty == false &&
             reductionSummary.isEmpty == false &&
             hasRequiredBehaviorConsequences
     }
@@ -46,7 +46,7 @@ struct MotionSemanticModel: Equatable, Sendable {
     }
 }
 
-enum MotionConsequenceKind: String, CaseIterable, Sendable {
+enum MotionConsequenceKind: String, CaseIterable {
     case completion
     case blockage
     case review
@@ -56,7 +56,7 @@ enum MotionConsequenceKind: String, CaseIterable, Sendable {
     case protectedBoundary
 }
 
-struct MotionConsequenceMirror: Equatable, Sendable {
+struct MotionConsequenceMirror: Equatable {
     let kind: MotionConsequenceKind
     let label: String
     let visibleMutation: String
@@ -81,7 +81,7 @@ struct MotionConsequenceMirror: Equatable, Sendable {
                 kind: .completion,
                 label: "Completion",
                 visibleMutation: "Closed work stays attached to the current stage thread.",
-                proofRelationship: projection.field.proof,
+                proofRelationship: projection.field.changeState,
                 accessibilityPhrase: "Completion keeps saved history visible.",
                 reduceMotionEquivalent: reductionPolicy.motionQuery(label: "completion", action: .returnToThread(projection.field.control))
             ),
@@ -97,7 +97,7 @@ struct MotionConsequenceMirror: Equatable, Sendable {
                 kind: .review,
                 label: "Review",
                 visibleMutation: "Context, history, and review remain inspectable before change.",
-                proofRelationship: projection.field.receipt,
+                proofRelationship: projection.field.returnPoint,
                 accessibilityPhrase: "Review can be opened from the current object.",
                 reduceMotionEquivalent: reductionPolicy.movementTextureDescription
             ),
@@ -113,7 +113,7 @@ struct MotionConsequenceMirror: Equatable, Sendable {
                 kind: .reEntry,
                 label: "Re-entry",
                 visibleMutation: "A paused thread keeps one visible return point.",
-                proofRelationship: projection.field.source,
+                proofRelationship: projection.field.changedObject,
                 accessibilityPhrase: "Re-entry names the return point and owner.",
                 reduceMotionEquivalent: "Static re-entry marker"
             ),
@@ -132,7 +132,7 @@ struct MotionConsequenceMirror: Equatable, Sendable {
                 proofRelationship: "Consent and context stay attached to the protected edge.",
                 accessibilityPhrase: "Protected boundary names consent before cross-surface change.",
                 reduceMotionEquivalent: "Static protected-boundary marker"
-            )
+            ),
         ]
     }
 }

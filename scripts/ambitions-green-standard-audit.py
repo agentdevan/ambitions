@@ -45,6 +45,77 @@ DISALLOWED_ROOT_TERMS = {
     "Re-enter thread": "Return",
 }
 
+STRUCTURAL_GATES = [
+    (
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "LazyVGrid(",
+        "Goals root must be a connected Constellation Atlas object, not a card/grid surface.",
+    ),
+    (
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "LifeAreaRegionButton",
+        "Goals life areas must be object nodes inside the atlas, not card buttons.",
+    ),
+    (
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "CurrentStepLift",
+        "The current Step must live inside the atlas object, not below it as a separate card.",
+    ),
+    (
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "PersonalSystemCenterRootView",
+        "You root must be the User System Profile, not a governance/control-center surface.",
+    ),
+    (
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "YouPersonalSystemNavigation(",
+        "You root must use native profile/settings rows, not custom grouped navigation chrome.",
+    ),
+    (
+        "Native/Ambitions/Stage/Motion/StageMotionCurrentView.swift",
+        "projection ??",
+        "Stage Motion must not synthesize a production fallback projection.",
+    ),
+    (
+        "Native/Ambitions/Stage/Motion/StageMotionState.swift",
+        "objectConsequence(renderState:",
+        "Motion fixture projection must not be the production object-consequence path.",
+    ),
+    (
+        "Native/Ambitions/Stage/Overlays/QuietCommandCaptureOverlay.swift",
+        "CaptureObjectView(",
+        "Quick Capture overlay must route to the activated composer instead of rendering a second composer.",
+    ),
+    (
+        "Native/Ambitions/Stage/Overlays/QuietCommandCaptureOverlay.swift",
+        "saveCapture()",
+        "Quick Capture overlay must not save from a sheet fallback.",
+    ),
+    (
+        "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift",
+        "if Self.screenshotFocusesQuietReflow() {\n                reflowTrustSeam",
+        "LifeShape reflow must be embedded in the Time object, not rendered as a root sibling before the field.",
+    ),
+]
+
+REQUIRED_STRUCTURAL_MARKERS = [
+    (
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "LifeAreaAtlasField(",
+        "Goals root must render the connected LifeAreaAtlasField.",
+    ),
+    (
+        "Native/Ambitions/Surfaces/You/YouObjectView.swift",
+        "UserSystemProfileRootView(",
+        "You root adapter must render the native User System Profile root.",
+    ),
+    (
+        "Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift",
+        "objectCanvasWithEmbeddedConsequences",
+        "Time must embed mutation/reflow consequences in the LifeShape object.",
+    ),
+]
+
 PRIMARY_UI_FILES = (
     "Surface.swift",
     "ObjectView.swift",
@@ -88,8 +159,34 @@ def string_literals(line: str) -> list[str]:
     return re.findall(r'"([^"\\]*(?:\\.[^"\\]*)*)"', line)
 
 
+def line_number_for(contents: str, pattern: str) -> int:
+    index = contents.find(pattern)
+    if index < 0:
+        return 1
+    return contents.count("\n", 0, index) + 1
+
+
 def main() -> int:
     failures: list[str] = []
+    for relative, pattern, message in STRUCTURAL_GATES:
+        path = ROOT / relative
+        if not path.exists():
+            continue
+        text = path.read_text(encoding="utf-8")
+        if pattern in text:
+            failures.append(
+                f"{relative}:{line_number_for(text, pattern)}: `{pattern.splitlines()[0]}` is blocked; {message}"
+            )
+
+    for relative, marker, message in REQUIRED_STRUCTURAL_MARKERS:
+        path = ROOT / relative
+        if not path.exists():
+            failures.append(f"{relative}:1: required file is missing; {message}")
+            continue
+        text = path.read_text(encoding="utf-8")
+        if marker not in text:
+            failures.append(f"{relative}:1: `{marker}` missing; {message}")
+
     for root in ACTIVE_SOURCE_ROOTS:
         if not root.exists():
             continue

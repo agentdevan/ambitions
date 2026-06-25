@@ -14,26 +14,26 @@ struct MotionObjectStagePrimitiveContract: Equatable {
         primitiveID: "stage-motion-current",
         ownerSurface: "Stage Motion",
         productObject: "Stage Motion",
-        firstViewportStructure: "Stage Motion behavior with what changed, where to return, what needs recovery, and inspectable history.",
+        firstViewportStructure: "Stage Motion behavior with changed object, change state, return point, recovery, and undo.",
         replacesFirstViewportStructures: [
             "rounded standalone movement panel",
-            "lane cards",
-            "lane state row panels",
-            "trace pills",
-            "context/history/review panel"
+            "path cards",
+            "path state row panels",
+            "history pills",
+            "object review panel",
         ],
         sourceTrustLineOrder: [
-            "context",
-            "history",
-            "review",
-            "re-entry action"
+            "changed object",
+            "change state",
+            "return point",
+            "available action",
         ],
         accessibilityFallbacks: [
-            "VoiceOver names the changed object before recovery, return, history, and review relationships",
-            "Dynamic Type keeps lane title, state, and trace values in order",
+            "VoiceOver names the changed object before recovery, return, and available action",
+            "Dynamic Type keeps changed object, state, and return point in order",
             "Reduce Motion uses static movement marks",
             "Increase Contrast strengthens rules and left-thread markers rather than restoring panels",
-            "Differentiate Without Color exposes context, history, review, and return as text"
+            "Differentiate Without Color exposes changed object, change state, return point, and action as text",
         ],
         screenshotIdentifier: "StageMotionCurrent",
         firstViewportAvoidsAnalyticsReportCardDashboardOutput: true,

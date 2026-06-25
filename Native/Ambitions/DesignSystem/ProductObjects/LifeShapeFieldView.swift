@@ -75,7 +75,8 @@ struct LifeShapeFieldView: View {
     var selectedReflowOption: TimeReflowDecisionOptionState? {
         guard let decision = reflowDecision else { return nil }
         if let selectedReflowOptionID,
-           let selected = decision.options.first(where: { $0.id == selectedReflowOptionID }) {
+           let selected = decision.options.first(where: { $0.id == selectedReflowOptionID })
+        {
             return selected
         }
         return decision.options.first
@@ -102,7 +103,8 @@ struct LifeShapeFieldView: View {
 
     var selectedMark: LifeShapeSemanticMark? {
         if let selectedMarkID,
-           let mark = selectedLayerMarks.first(where: { $0.id == selectedMarkID }) {
+           let mark = selectedLayerMarks.first(where: { $0.id == selectedMarkID })
+        {
             return mark
         }
         return selectedLayerMarks.first
@@ -123,7 +125,8 @@ struct LifeShapeFieldView: View {
     static func initialScreenshotReflowAction() -> TimeReflowDecisionActionKind? {
         let arguments = ProcessInfo.processInfo.arguments
         guard let flagIndex = arguments.firstIndex(of: "-AmbitionsTimeChangeAction"),
-              arguments.indices.contains(arguments.index(after: flagIndex)) else {
+              arguments.indices.contains(arguments.index(after: flagIndex))
+        else {
             return nil
         }
 
@@ -146,7 +149,8 @@ struct LifeShapeFieldView: View {
     static func screenshotRenderStateOverride() -> LifeShapeRenderState? {
         let arguments = ProcessInfo.processInfo.arguments
         guard let flagIndex = arguments.firstIndex(of: "-AmbitionsTimeRenderState"),
-              arguments.indices.contains(arguments.index(after: flagIndex)) else {
+              arguments.indices.contains(arguments.index(after: flagIndex))
+        else {
             return nil
         }
 
@@ -173,7 +177,8 @@ struct LifeShapeFieldView: View {
     static func screenshotFocusesQuietReflow() -> Bool {
         let arguments = ProcessInfo.processInfo.arguments
         guard let flagIndex = arguments.firstIndex(of: "-AmbitionsTimeFocus"),
-              arguments.indices.contains(arguments.index(after: flagIndex)) else {
+              arguments.indices.contains(arguments.index(after: flagIndex))
+        else {
             return false
         }
 
@@ -198,22 +203,9 @@ struct LifeShapeFieldView: View {
         )
 
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            if Self.screenshotFocusesQuietReflow() {
-                reflowTrustSeam
-            }
-            if let visibleMutation {
-                LifeShapeMutationProofBanner(
-                    mutation: visibleMutation,
-                    onUndo: visibleMutation.stageMutation.undoAvailability.isAvailable ? onUndoMutation : nil
-                )
-            }
-            objectCanvas
+            objectCanvasWithEmbeddedConsequences
             if selectedMarkID != nil {
                 selectedBucketInspection
-            }
-            if Self.screenshotFocusesQuietReflow() == false,
-               revealsPressure || confirmedReflowAction != nil {
-                reflowTrustSeam
             }
         }
         .accessibilityElement(children: .contain)
@@ -222,7 +214,29 @@ struct LifeShapeFieldView: View {
         .modifier(LifeShapeMutationHapticModifier(mutation: visibleMutation))
     }
 
-    @ViewBuilder
+    var objectCanvasWithEmbeddedConsequences: some View {
+        objectCanvas
+            .overlay(alignment: .topLeading) {
+                if let visibleMutation {
+                    LifeShapeMutationProofBanner(
+                        mutation: visibleMutation,
+                        onUndo: visibleMutation.stageMutation.undoAvailability.isAvailable ? onUndoMutation : nil
+                    )
+                    .padding(theme.spacing.sm)
+                }
+            }
+            .overlay(alignment: .bottomLeading) {
+                if shouldShowEmbeddedReflow {
+                    reflowTrustSeam
+                        .padding(theme.spacing.sm)
+                }
+            }
+    }
+
+    var shouldShowEmbeddedReflow: Bool {
+        Self.screenshotFocusesQuietReflow() || revealsPressure || confirmedReflowAction != nil
+    }
+
     var selectedBucketInspection: some View {
         VStack(alignment: .leading, spacing: theme.spacing.xs) {
             LifeShapeBucketDetail(
@@ -249,12 +263,11 @@ struct LifeShapeFieldView: View {
             reading.title,
             reading.summary,
             reading.capacityStatement,
-            selectedMark?.accessibilitySummary
+            selectedMark?.accessibilitySummary,
         ]
         .compactMap { $0 }
         .joined(separator: ". ")
     }
-
 }
 
 private struct LifeShapeMutationHapticModifier: ViewModifier {
@@ -262,7 +275,8 @@ private struct LifeShapeMutationHapticModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         if let mutation,
-           let intent = Self.intent(from: mutation.stageMutation.hapticIntent) {
+           let intent = Self.intent(from: mutation.stageMutation.hapticIntent)
+        {
             content.ambitionHaptic(intent, trigger: mutation.stageMutation.runtimeMutationID)
         } else {
             content

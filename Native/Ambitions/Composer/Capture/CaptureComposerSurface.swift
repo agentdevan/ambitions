@@ -45,7 +45,6 @@ struct CaptureComposerSurface: View {
                         onSubmit: {
                             viewModel.presentProposal()
                         },
-                        onMicrophone: {},
                         onRouteChoice: { routeType in
                             viewModel.selectDraftRoute(routeType)
                         },

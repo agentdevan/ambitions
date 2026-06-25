@@ -1,7 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
-struct CaptureRouteRevealStrip: View {
+struct CapturePlacementPreviewStrip: View {
     @Environment(\.ambitionTheme) private var theme
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
@@ -87,7 +87,6 @@ struct CaptureRouteRevealStrip: View {
         }
     }
 
-    @ViewBuilder
     private var routeChoiceButtons: some View {
         ForEach(preview.choices) { choice in
             Button {

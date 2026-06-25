@@ -63,7 +63,7 @@ final class ComposerCaptureCanonicalOwnershipTests: XCTestCase {
 
         XCTAssertEqual(accessibility.label, "Capture")
         XCTAssertTrue(accessibility.value.contains("Ready to Place"))
-        XCTAssertTrue(accessibility.hint.contains("Saves the capture through the local Capture runtime"))
+        XCTAssertTrue(accessibility.hint.contains("Review or save after typing"))
         XCTAssertEqual(accessibility.announcement, "Saved locally. Receipt ready.")
         XCTAssertEqual(accessibility.proofArtifactID, "capture-proof-savedlocally")
     }
@@ -79,7 +79,9 @@ final class ComposerCaptureCanonicalOwnershipTests: XCTestCase {
         XCTAssertTrue(composer.contains("CaptureInteractions.livingState"))
         XCTAssertTrue(composer.contains("CaptureAccessibility.composer"))
         XCTAssertTrue(activated.contains("CaptureObjectView("))
-        XCTAssertTrue(quiet.contains("CaptureObjectView("))
+        XCTAssertTrue(quiet.contains("captureComposerRedirect"))
+        XCTAssertTrue(quiet.contains("presentGlobalCaptureComposer"))
+        XCTAssertFalse(quiet.contains("CaptureObjectView("))
         XCTAssertTrue(surface.contains("CaptureComposerSurface(shellMode: presentationMode)"))
         XCTAssertFalse(surface.contains("TabView"))
     }

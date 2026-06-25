@@ -5,7 +5,6 @@ struct CaptureObjectView: View {
 
     let input: CaptureInputModel
     let onSubmit: () -> Void
-    let onMicrophone: () -> Void
     let onRouteChoice: (SmartAttachmentRouteType) -> Void
     let accessibilityIDs: CaptureAtmosphereComposerAccessibilityIDs
     let shouldAutoFocus: Bool
@@ -21,7 +20,6 @@ struct CaptureObjectView: View {
             error: input.error,
             isSubmitEnabled: CaptureInteractions.canSubmit(input),
             onSubmit: onSubmit,
-            onMicrophone: onMicrophone,
             onRouteChoice: onRouteChoice,
             accessibilityIDs: accessibilityIDs,
             shouldAutoFocus: shouldAutoFocus

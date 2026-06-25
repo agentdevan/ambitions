@@ -1,6 +1,6 @@
 import Foundation
 
-struct GoalsStageScene: Equatable, Sendable {
+struct GoalsStageScene: Equatable {
     let surface: StageMutationTargetSurface
     let productObject: String
     let stageName: String
@@ -16,9 +16,9 @@ struct GoalsStageScene: Equatable, Sendable {
             productObject.localizedCaseInsensitiveContains("Constellation Atlas") &&
             firstViewportStructure.localizedCaseInsensitiveContains("life-area") &&
             firstViewportStructure.localizedCaseInsensitiveContains("Today") &&
-            sourceTrustLineOrder == ["life area", "source", "proof", "receipt", "Today link"] &&
+            sourceTrustLineOrder == ["life area", "goal thread", "step chain", "Today link"] &&
             todayRelationshipSummary.localizedCaseInsensitiveContains("Today") &&
-            inspectionSummary.localizedCaseInsensitiveContains("proof")
+            inspectionSummary.localizedCaseInsensitiveContains("reason")
     }
 
     init(

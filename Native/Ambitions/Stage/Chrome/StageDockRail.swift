@@ -16,7 +16,7 @@ struct StageDockRail: View {
             .frame(maxWidth: .infinity, alignment: .center)
             .padding(.horizontal, dynamicTypeSize.isAccessibilitySize ? theme.spacing.xxs : theme.spacing.xs)
             .accessibilityElement(children: .contain)
-            .accessibilityLabel("Root surfaces")
+            .accessibilityLabel("Main sections")
             .accessibilityIdentifier("shell.stage-os.invisible-rail")
     }
 
@@ -49,18 +49,18 @@ struct StageDockRail: View {
             Image(systemName: destination.systemImage)
                 .font(iconFont)
                 .symbolRenderingMode(.hierarchical)
-            .foregroundStyle(isSelected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground.opacity(0.86))
-            .frame(
-                width: accessibilityCompact ? 58 : 52,
-                height: accessibilityCompact ? 50 : 44
-            )
-            .background {
-                if isSelected {
-                    Capsule(style: .continuous)
-                        .fill(theme.shell.controlBackground.opacity(0.92))
+                .foregroundStyle(isSelected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground.opacity(0.86))
+                .frame(
+                    width: accessibilityCompact ? 58 : 52,
+                    height: accessibilityCompact ? 50 : 44
+                )
+                .background {
+                    if isSelected {
+                        Capsule(style: .continuous)
+                            .fill(theme.shell.controlBackground.opacity(0.92))
+                    }
                 }
-            }
-            .contentShape(Capsule(style: .continuous))
+                .contentShape(Capsule(style: .continuous))
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)

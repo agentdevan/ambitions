@@ -40,7 +40,7 @@ struct MotionCurrentField: View {
         .accessibilityElement(children: .combine)
         .accessibilityIdentifier("motion.current.field")
         .accessibilityLabel("\(state.title). \(state.summary)")
-        .accessibilityValue("\(state.source). \(state.proof). \(state.receipt). \(state.control)")
+        .accessibilityValue("\(state.changedObject). \(state.changeState). \(state.returnPoint). \(state.control)")
     }
 
     @ViewBuilder
@@ -54,8 +54,6 @@ struct MotionCurrentField: View {
                     .minimumScaleFactor(0.82)
 
                 motionActionStrip
-
-                traceFacts
 
                 Text(state.summary)
                     .font(theme.typography.body)
@@ -88,8 +86,6 @@ struct MotionCurrentField: View {
                     .fixedSize(horizontal: false, vertical: true)
 
                 motionActionStrip
-
-                traceFacts
             }
         }
     }
@@ -98,14 +94,14 @@ struct MotionCurrentField: View {
         Group {
             if dynamicTypeSize.isAccessibilitySize {
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    motionActionButton(title: "Review", systemImage: "checkmark.seal", accessibilityIdentifier: "motion.behavior.action.review", action: .reviewHistory(state.proof))
-                    motionActionButton(title: "History", systemImage: "clock.arrow.circlepath", accessibilityIdentifier: "motion.behavior.action.history", action: .openHistory(state.receipt))
+                    motionActionButton(title: "Review", systemImage: "checkmark.seal", accessibilityIdentifier: "motion.behavior.action.review", action: .reviewHistory(state.changeState))
+                    motionActionButton(title: "History", systemImage: "clock.arrow.circlepath", accessibilityIdentifier: "motion.behavior.action.history", action: .openHistory(state.returnPoint))
                     motionActionButton(title: "Return", systemImage: "arrowshape.turn.up.forward", accessibilityIdentifier: "motion.behavior.action.return", action: .returnToThread(state.control))
                 }
             } else {
                 MotionCurrentFlowLayout(spacing: theme.spacing.xs) {
-                    motionActionButton(title: "Review", systemImage: "checkmark.seal", accessibilityIdentifier: "motion.behavior.action.review", action: .reviewHistory(state.proof))
-                    motionActionButton(title: "History", systemImage: "clock.arrow.circlepath", accessibilityIdentifier: "motion.behavior.action.history", action: .openHistory(state.receipt))
+                    motionActionButton(title: "Review", systemImage: "checkmark.seal", accessibilityIdentifier: "motion.behavior.action.review", action: .reviewHistory(state.changeState))
+                    motionActionButton(title: "History", systemImage: "clock.arrow.circlepath", accessibilityIdentifier: "motion.behavior.action.history", action: .openHistory(state.returnPoint))
                     motionActionButton(title: "Return", systemImage: "arrowshape.turn.up.forward", accessibilityIdentifier: "motion.behavior.action.return", action: .returnToThread(state.control))
                 }
             }
@@ -133,71 +129,5 @@ struct MotionCurrentField: View {
         .buttonStyle(.bordered)
         .controlSize(.small)
         .accessibilityIdentifier(accessibilityIdentifier)
-    }
-
-    @ViewBuilder
-    private var traceFacts: some View {
-        if dynamicTypeSize.isAccessibilitySize {
-            VStack(alignment: .leading, spacing: theme.spacing.sm) {
-                sourceFact
-                proofFact
-                receiptFact
-            }
-        } else {
-            HStack(alignment: .top, spacing: theme.spacing.xs) {
-                compactTraceFact(title: "Context", subtitle: state.source, systemImage: "link", accessibilityIdentifier: "motion.current.fact.source")
-                compactTraceFact(title: "History", subtitle: state.proof, systemImage: "seal", accessibilityIdentifier: "motion.current.fact.proof")
-                compactTraceFact(title: "Review", subtitle: state.receipt, systemImage: "doc.text.magnifyingglass", accessibilityIdentifier: "motion.current.fact.receipt")
-            }
-        }
-    }
-
-    private func compactTraceFact(
-        title: String,
-        subtitle: String,
-        systemImage: String,
-        accessibilityIdentifier: String
-    ) -> some View {
-        VStack(alignment: .leading, spacing: theme.spacing.xxxs) {
-            Image(systemName: systemImage)
-                .font(theme.typography.caption.weight(theme.icon.symbolWeight))
-                .foregroundStyle(theme.colors.accentSecondary)
-                .accessibilityHidden(true)
-
-            Text(title)
-                .font(theme.typography.caption.weight(.semibold))
-                .foregroundStyle(theme.colors.textPrimary)
-                .lineLimit(1)
-                .minimumScaleFactor(0.74)
-
-            Text(subtitle)
-                .font(theme.typography.micro)
-                .foregroundStyle(theme.colors.textSecondary)
-                .lineLimit(3)
-                .minimumScaleFactor(0.70)
-        }
-        .frame(maxWidth: .infinity, minHeight: 104, alignment: .topLeading)
-        .padding(.vertical, theme.spacing.xs)
-        .overlay(alignment: .leading) {
-            Rectangle()
-                .fill(theme.colors.accentSecondary.opacity(0.42))
-                .frame(width: 1)
-        }
-        .accessibilityElement(children: .combine)
-        .accessibilityIdentifier(accessibilityIdentifier)
-        .accessibilityLabel(title)
-        .accessibilityValue(subtitle)
-    }
-
-    private var sourceFact: some View {
-        ProofRelationshipTracePrimitiveLine(role: .source, title: "Context", subtitle: state.source, systemImage: "link", accessibilityIdentifier: "motion.current.fact.source")
-    }
-
-    private var proofFact: some View {
-        ProofRelationshipTracePrimitiveLine(role: .proof, title: "History", subtitle: state.proof, systemImage: "seal", accessibilityIdentifier: "motion.current.fact.proof")
-    }
-
-    private var receiptFact: some View {
-        ProofRelationshipTracePrimitiveLine(role: .receipt, title: "Review", subtitle: state.receipt, systemImage: "doc.text.magnifyingglass", accessibilityIdentifier: "motion.current.fact.receipt")
     }
 }

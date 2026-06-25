@@ -20,7 +20,7 @@ enum UserLanguageCategoryAudit {
         "this week shows",
         "free time shows",
         "context carried",
-        "source context preserved"
+        "source context preserved",
     ]
 
     static func auditRootStrings(_ files: [LifeShapeSourceFile]) -> LifeShapeAuditReport {
@@ -28,7 +28,13 @@ enum UserLanguageCategoryAudit {
 
         for file in files {
             let isRootTimeFile = file.path.contains("LifeShape") || file.path.contains("Surfaces/Time")
-            guard isRootTimeFile else { continue }
+            let isRootObjectFile = isRootTimeFile ||
+                file.path.contains("GoalsObjectView") ||
+                file.path.contains("YouRootSurface") ||
+                file.path.contains("CaptureAtmosphereComposer") ||
+                file.path.contains("StageMotion") ||
+                file.path.contains("MotionCurrent")
+            guard isRootObjectFile else { continue }
 
             for literal in LifeShapeAuditSupport.swiftStringLiterals(in: file.contents) {
                 let lowercased = literal.lowercased()

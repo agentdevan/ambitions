@@ -1,6 +1,6 @@
+@testable import Ambitions
 import Foundation
 import XCTest
-@testable import Ambitions
 
 final class CapturePlacementReviewStateTests: XCTestCase {
     func testNeedsPlaceReviewKeepsCaptureCorrectableAndUserOwned() {
@@ -140,6 +140,7 @@ final class CapturePlacementReviewStateTests: XCTestCase {
         XCTAssertFalse(routeSource.contains("RoundedRectangle("))
         XCTAssertTrue(composerSource.contains("SpatialCaptureTeachingLine"))
         XCTAssertFalse(composerSource.contains("CaptureRouteRevealStrip("))
+        XCTAssertFalse(composerSource.contains("routeReveal"))
         XCTAssertFalse(composerSource.contains("onMicrophone()"))
         XCTAssertFalse(composerSource.contains("StateDrivenMaterialPanel(context: .capture"))
     }
@@ -165,7 +166,7 @@ final class CapturePlacementReviewStateTests: XCTestCase {
 
         XCTAssertTrue(seamSource.contains("CaptureObjectView("))
         XCTAssertTrue(seamSource.contains("CaptureProposalStage("))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.receipt"))
+        XCTAssertFalse(seamSource.contains("shell.activated-capture.receipt"))
         XCTAssertTrue(seamSource.contains("shell.activated-capture.first-run-teaching"))
         XCTAssertFalse(seamSource.contains("shell.activated-capture.state.activated"))
         XCTAssertFalse(seamSource.contains("shell.activated-capture.state.keyboard"))

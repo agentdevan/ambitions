@@ -9,17 +9,11 @@ struct QuietCommandSheetView: View {
     let onDismiss: () -> Void
 
     @State var selectedIntent: ShellCommandIntent?
-    @State var captureText: String = ""
-    @State var selectedDraftRouteType: SmartAttachmentRouteType?
-    @State var saveState: QuietCommandSaveState = .idle
-    @State var dictationStatusMessage: String?
     @State var memoryQuery: String = ""
     @State var memoryResults: [MemoryLensResult] = []
     @State var isMemorySearchLoading = false
     @State var memoryStatusMessage: String?
     @FocusState var isMemoryFieldFocused: Bool
-
-    let draftRouteService = CaptureDraftRouteService()
 
     var body: some View {
         Group {
@@ -39,18 +33,11 @@ struct QuietCommandSheetView: View {
         .background(theme.colors.canvas)
         .onAppear {
             selectedIntent = overlay.intent
-            captureText = overlay.query
             memoryQuery = overlay.query
             if overlay.presentationContext == .recall {
                 isMemoryFieldFocused = true
                 Task { await refreshMemoryResults() }
             }
-        }
-        .onChange(of: captureText) { _, newValue in
-            if newValue.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                selectedDraftRouteType = nil
-            }
-            dictationStatusMessage = nil
         }
         .onChange(of: memoryQuery) { _, _ in
             guard overlay.presentationContext == .recall else { return }
@@ -90,7 +77,7 @@ struct QuietCommandSheetView: View {
     var commandContent: some View {
         switch overlay.presentationContext {
         case .quickCapture:
-            quickCaptureComposer
+            captureComposerRedirect
         case .createGoal:
             createGoalPrompt
         case .recall:
@@ -136,7 +123,7 @@ struct QuietCommandSheetView: View {
 
     var focusPrompt: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            Text("Today will center the recommended step and keep proof visible.")
+            Text("Today will center the recommended step.")
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -150,7 +137,7 @@ struct QuietCommandSheetView: View {
 
     var timePrompt: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
-            Text("Open Time to inspect capacity, protected blocks, and schedule context.")
+            Text("Open Time to see what the day can hold.")
                 .font(theme.typography.body)
                 .foregroundStyle(theme.colors.textSecondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -165,8 +152,8 @@ struct QuietCommandSheetView: View {
     var neutralPrompt: some View {
         VStack(alignment: .leading, spacing: theme.spacing.md) {
             Button("Capture") {
-                selectedIntent = .quickCapture
-                captureText = ""
+                onDismiss()
+                appContainer?.navigation.presentGlobalCaptureComposer(source: overlay.entrySource)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: .default))
             Button("Create Goal") {
@@ -195,20 +182,13 @@ struct QuietCommandSheetView: View {
 
     var fallbackSubtitle: String {
         switch overlay.presentationContext {
-        case .quickCapture: "Write one thing. Save it here, place it when ready."
+        case .quickCapture: "Open the full-screen composer."
         case .createGoal: "Open a draft before anything becomes active."
-        case .recall: "Inspect source-grounded context locally."
-        case .neutral: "Choose a safe local action."
+        case .recall: "Search local context."
+        case .neutral: "Choose an action."
         case .recovery: "Return to Today without shame or silent changes."
         case .focus: "Center the recommended step."
-        case .time: "Open Time as the scheduling source of truth."
+        case .time: "Open Time."
         }
     }
-}
-
-enum QuietCommandSaveState: Equatable {
-    case idle
-    case saving
-    case saved(String)
-    case error(String)
 }

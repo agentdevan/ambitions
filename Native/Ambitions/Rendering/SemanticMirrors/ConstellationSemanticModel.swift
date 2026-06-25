@@ -1,6 +1,6 @@
 import Foundation
 
-struct ConstellationSemanticModel: Equatable, Sendable {
+struct ConstellationSemanticModel: Equatable {
     let stageName: String
     let todayRelationshipSummary: String
     let inspectionSummary: String
@@ -17,17 +17,16 @@ struct ConstellationSemanticModel: Equatable, Sendable {
             stageName,
             "life areas",
             "goal threads",
+            "step chain",
             "Today link",
-            "source",
-            "proof",
-            "receipt",
+            "Review",
         ] + Array(accessibilityFallbacks.prefix(2))
 
         self.stageName = stageName
         self.todayRelationshipSummary = todayRelationshipSummary
         self.inspectionSummary = inspectionSummary
         self.accessibilityOrder = accessibilityOrder
-        self.renderPlan = ConstellationRenderer.plan(
+        renderPlan = ConstellationRenderer.plan(
             stageName: stageName,
             todayRelationshipSummary: todayRelationshipSummary,
             inspectionSummary: inspectionSummary,
@@ -37,7 +36,8 @@ struct ConstellationSemanticModel: Equatable, Sendable {
 
     var provesInspectableRelationships: Bool {
         todayRelationshipSummary.localizedCaseInsensitiveContains("Today") &&
-            inspectionSummary.localizedCaseInsensitiveContains("proof") &&
-            accessibilityOrder.contains("receipt")
+            inspectionSummary.localizedCaseInsensitiveContains("reason") &&
+            accessibilityOrder.contains("goal threads") &&
+            accessibilityOrder.contains("Today link")
     }
 }

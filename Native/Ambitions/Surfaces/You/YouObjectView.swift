@@ -5,15 +5,11 @@ struct YouObjectView: View {
     let onOpenDetail: (YouRootDetail) -> Void
 
     var body: some View {
-        PersonalSystemCenterRootView(
+        UserSystemProfileRootView(
             profileProjection: profileProjection,
             onOpenDetail: onOpenDetail
         )
-        .accessibilityLabel(YouAccessibility.rootSummary(
-            profileState: profileProjection.constitution.title,
-            privacyState: profileProjection.trustCenter.title,
-            accountState: profileProjection.accountSection.title,
-            receiptState: profileProjection.trustHistoryCenter.title
-        ))
+        .accessibilityLabel("User profile")
+        .accessibilityValue("Local profile and settings.")
     }
 }

@@ -6,21 +6,21 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
     func testAMB580CaptureRoutingPrimitiveFamilyContract() {
         let contract = CaptureRoutingPrimitiveFamilyContract.current
 
-        XCTAssertEqual(contract.primitiveID, "capture-routing-family")
+        XCTAssertEqual(contract.primitiveID, "capture-placement-family")
         XCTAssertEqual(contract.ownerSurface, "Global Capture")
-        XCTAssertEqual(contract.productObjects, ["Capture Routing", "Atmosphere Composer", "Receipt"])
-        XCTAssertEqual(contract.stageName, "Capture Routing Primitive Family")
-        XCTAssertEqual(contract.screenshotIdentifier, "CaptureRoutingPrimitiveFamily")
-        XCTAssertTrue(contract.replacesStructures.contains("generic routing panels"))
-        XCTAssertTrue(contract.replacesStructures.contains("route category grids"))
-        XCTAssertTrue(contract.replacesStructures.contains("route proof pills"))
-        XCTAssertTrue(contract.replacesStructures.contains("rounded route option cards"))
+        XCTAssertEqual(contract.productObjects, ["Placement Preview", "Atmosphere Composer", "Saved Capture"])
+        XCTAssertEqual(contract.stageName, "Capture Placement Primitive Family")
+        XCTAssertEqual(contract.screenshotIdentifier, "CapturePlacementPrimitiveFamily")
+        XCTAssertTrue(contract.replacesStructures.contains("generic placement panels"))
+        XCTAssertTrue(contract.replacesStructures.contains("category grids"))
+        XCTAssertTrue(contract.replacesStructures.contains("proof pills"))
+        XCTAssertTrue(contract.replacesStructures.contains("rounded placement option cards"))
         XCTAssertEqual(contract.routingOrder, [
             "input source",
-            "deterministic route basis",
+            "deterministic placement basis",
             "review state",
             "correction control",
-            "receipt path",
+            "saved state",
             "no silent placement",
         ])
         XCTAssertTrue(contract.forbiddenPatterns.contains("fake confidence theater"))
@@ -28,8 +28,8 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(contract.forbiddenPatterns.contains("chat transcript"))
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Dynamic Type") })
         XCTAssertTrue(contract.accessibilityFallbacks.contains { $0.contains("Differentiate Without Color") })
-        XCTAssertEqual(CaptureRoutingPrimitiveRole.routeReveal.semanticState, .review)
-        XCTAssertEqual(CaptureRoutingPrimitiveRole.routeOption.semanticState, .focus)
+        XCTAssertEqual(CaptureRoutingPrimitiveRole.placementPreview.semanticState, .review)
+        XCTAssertEqual(CaptureRoutingPrimitiveRole.placementOption.semanticState, .focus)
         XCTAssertEqual(CaptureRoutingPrimitiveRole.receipt.semanticState, .trust)
         XCTAssertEqual(CaptureRoutingPrimitiveRole.noSilentPlacement.semanticState, .protected)
     }
@@ -51,9 +51,9 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(seamSource.contains("sourceType: sourceType"))
         XCTAssertTrue(seamSource.contains("CaptureProposalStage("))
         XCTAssertTrue(seamSource.contains("presentProposal()"))
-        XCTAssertTrue(seamSource.contains("Ambitions does not record audio here."))
+        XCTAssertTrue(seamSource.contains("appContainer.clock.now"))
         XCTAssertTrue(seamSource.contains("shell.activated-capture-seam"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.receipt"))
+        XCTAssertFalse(seamSource.contains("shell.activated-capture.receipt"))
 
         let composerOffset = try XCTUnwrap(offset(of: "private var composer", in: seamSource))
         let saveOffset = try XCTUnwrap(offset(of: "private func saveCapture", in: seamSource))
@@ -66,18 +66,23 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         XCTAssertFalse(seamSource.contains("Voice capture"))
     }
 
-    func testAMB580QuickCaptureSheetUsesSharedComposerWithoutUnsupportedControlRail() throws {
+    func testAMB580QuickCaptureSheetRoutesToActivatedComposerWithoutFallbackSave() throws {
         let stageSource = try source("Native/Ambitions/Stage/AmbitionsStage.swift", root: repoRoot())
         let seamSource = try source("Native/Ambitions/App/AppShellActivatedCaptureSeam.swift", root: repoRoot())
+        let quietSource = try source("Native/Ambitions/Stage/Overlays/QuietCommandCaptureOverlay.swift", root: repoRoot())
 
         XCTAssertTrue(stageSource.contains("shellActivatedCaptureComposerSeam"))
         XCTAssertTrue(stageSource.contains("activeSheetOverlayBinding"))
-        XCTAssertTrue(stageSource.contains("guard navigation.activeOverlay?.isActivatedCaptureComposer != true else"))
+        XCTAssertTrue(stageSource.contains("guard navigation.activeOverlay?.isActivatedCaptureComposer != true,"))
+        XCTAssertTrue(stageSource.contains("navigation.activeOverlay?.kind != .memoryLens else"))
         XCTAssertTrue(seamSource.contains("CaptureObjectView("))
         XCTAssertTrue(seamSource.contains("CaptureProposalStage("))
         XCTAssertTrue(seamSource.contains("selectedDraftRouteType"))
         XCTAssertTrue(seamSource.contains("decision.createCaptureRequest(rawText: rawText, sourceType: sourceType)"))
-        XCTAssertTrue(seamSource.contains("Keyboard dictation ready"))
+        XCTAssertTrue(quietSource.contains("captureComposerRedirect"))
+        XCTAssertTrue(quietSource.contains("presentGlobalCaptureComposer"))
+        XCTAssertFalse(quietSource.contains("CaptureObjectView("))
+        XCTAssertFalse(quietSource.contains("saveCapture()"))
         XCTAssertFalse(seamSource.contains("presentationDetents"))
         XCTAssertFalse(seamSource.contains("quickCaptureControlRail"))
         XCTAssertFalse(seamSource.contains("composerExpansionRail"))
@@ -90,11 +95,12 @@ final class CaptureRoutingPrimitiveFamilyTests: XCTestCase {
         let seamSource = try source("Native/Ambitions/App/AppShellActivatedCaptureSeam.swift", root: repoRoot())
         let sourcePolicy = try source("Native/Ambitions/App/AppShellCaptureSourcePolicy.swift", root: repoRoot())
 
-        XCTAssertTrue(seamSource.contains("Destination: \\(savedCapture.route.title)"))
-        XCTAssertTrue(seamSource.contains("shell.activated-capture.receipt.change-destination"))
+        XCTAssertFalse(seamSource.contains("Destination: \\(savedCapture.route.title)"))
+        XCTAssertFalse(seamSource.contains("shell.activated-capture.receipt.change-destination"))
         XCTAssertTrue(seamSource.contains("Saved locally."))
         XCTAssertTrue(seamSource.contains("draftRouteService.draftRouteDecision"))
         XCTAssertTrue(seamSource.contains("decision.createCaptureRequest(rawText: rawText, sourceType: sourceType)"))
+        XCTAssertTrue(seamSource.contains("appContainer.clock.now"))
         XCTAssertTrue(sourcePolicy.contains("return .shellComposer"))
         XCTAssertTrue(sourcePolicy.contains("return .todayQuickCapture"))
     }

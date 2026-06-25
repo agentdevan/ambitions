@@ -49,8 +49,8 @@ final class RenderingSemanticMirrorsCanonicalOwnershipTests: XCTestCase {
 
         XCTAssertTrue(layer.accessibilityPlan.semanticMirror.provesBehaviorNotDestination)
         XCTAssertTrue(layer.accessibilityPlan.semanticMirror.hasRequiredBehaviorConsequences)
-        XCTAssertTrue(layer.accessibilityPlan.value.contains(layer.accessibilityPlan.semanticMirror.proofSummary))
-        XCTAssertTrue(layer.accessibilityPlan.value.contains("Completion keeps saved proof visible."))
+        XCTAssertTrue(layer.accessibilityPlan.value.contains(layer.accessibilityPlan.semanticMirror.changeStateSummary))
+        XCTAssertTrue(layer.accessibilityPlan.value.contains("Completion keeps saved history visible."))
         XCTAssertTrue(layer.accessibilityPlan.value.contains("Protected boundary names consent before cross-surface change."))
     }
 }
