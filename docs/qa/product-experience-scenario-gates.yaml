@@ -529,8 +529,10 @@ gates:
     current_status: "Partial"
     evidence_paths:
       - "Native/Ambitions/Projection/Commands/AmbitionsCommandTaxonomy.swift"
-    required_future_proof: "User-facing priority model and UI proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift"
+      - "Native/AmbitionsTests/Runtime/PriorityPlacementPolicyTests.swift"
+    required_future_proof: "Rendered priority UI and accessibility proof"
+    last_verified_commit: "099e56781743621f4c3dfb4c80f713577008d4c8"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Priority / fit policy"
     tests: []
@@ -548,20 +550,25 @@ gates:
   - id: "priority_can_be_overridden_by_user"
     group: "Priority"
     user_visible_behavior: "User can override priority."
-    current_status: "Unknown"
-    evidence_paths: []
-    required_future_proof: "Override UI/runtime test"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+    current_status: "Partial"
+    evidence_paths:
+      - "Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift"
+      - "Native/AmbitionsTests/Runtime/PriorityPlacementPolicyTests.swift"
+    required_future_proof: "Rendered edit control, persistence/relaunch proof, and accessibility proof"
+    last_verified_commit: "099e56781743621f4c3dfb4c80f713577008d4c8"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Priority / fit policy"
     tests: []
   - id: "priority_does_not_include_must_fit_as_goal_type"
     group: "Priority"
     user_visible_behavior: "Must Fit is not a goal type."
-    current_status: "Unknown"
-    evidence_paths: []
-    required_future_proof: "Forbidden-language scan and model assertion"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+    current_status: "Partial"
+    evidence_paths:
+      - "Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift"
+      - "Native/AmbitionsTests/Runtime/PriorityPlacementPolicyTests.swift"
+      - "scripts/ambitions-vocabulary-drift-scan.py"
+    required_future_proof: "Broader goal-type audit and rendered priority proof"
+    last_verified_commit: "099e56781743621f4c3dfb4c80f713577008d4c8"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Priority / fit policy"
     tests: []

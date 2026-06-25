@@ -248,3 +248,76 @@ The failed P2B-B attempt selected a protected-placement fixture service in `AppC
 - No compatibility shims were added.
 - `SimpleStepLifecycleService.swift` was not touched by P2B-B repair.
 - `SimpleStepLifecycleService.swift` line count remained 469.
+
+## P2C-A Priority Runtime Model + Placement Policy Addendum
+
+Date: 2026-06-25
+Baseline SHA: `3514e0ec030611789aa476cf56bad7eb8b67ba4a`
+Phase status: Source Green and Runtime Green scoped to the deterministic local priority placement policy. Interaction Green, Visual Green, Release Green, device readiness, and full accessibility conformance are not claimed.
+
+### Scope
+
+P2C-A adds a small canonical runtime policy for placement priority. It supports exactly `Low`, `Normal`, and `High`, represents user override state where scoped, keeps low-context placement conservative, and confirms priority cannot bypass the protected seven-day placement guard. It does not render priority controls, persist a final priority setting, implement Make Room, Add with conflict, Future Steps, full goal pathing, Life Capital, Source Atlas app behavior, account/R2 behavior, visual redesign, or release/device validation.
+
+### Source Changed
+
+- `Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift`
+- `Native/AmbitionsTests/Runtime/PriorityPlacementPolicyTests.swift`
+
+### Runtime Proof
+
+- `PlacementPriority` exposes only `Low`, `Normal`, and `High`.
+- `Critical`, `Must Fit`, rank, score, and urgency-score language are rejected as user-facing priority values.
+- `PriorityPlacementInput` can be created from local command priority hints or explicit metadata override.
+- `PriorityPlacementDecision` preserves user override state, local-only posture, protected-placement decision kind, and explicit approval requirement.
+- High priority inside the protected seven-day window still requires explicit approval and cannot bypass protected approval.
+- Low-context priority returns `pending_review` with degraded facts instead of a confidence or optimization claim.
+- Low priority may return a defer/review suggestion, but it does not implement or invoke Make Room.
+- Non-local placement priority attempts return pending review and remain account-free.
+
+### Validation
+
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_A_PRIORITY_POLICY --test AmbitionsTests/PriorityPlacementPolicyTests --timeout 15m --kill-after 60s` passed: 8 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_A_PROTECTED_POLICY --test AmbitionsTests/ProtectedStepPlacementPolicyTests --timeout 15m --kill-after 60s` passed: 7 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_A_POLICY_EXECUTOR --test AmbitionsTests/PolicyGuardedCommandExecutorTests --timeout 15m --kill-after 60s` passed: 5 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_A_TIME_MUTATION --test AmbitionsTests/TimeFieldMutationCoordinatorTests --timeout 15m --kill-after 60s` passed: 11 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_A_TIME_REVIEW --test AmbitionsTests/TimeProtectedPlacementReviewTests --timeout 15m --kill-after 60s` passed: 4 tests, 0 failures.
+- `python3 scripts/product-experience-gate-index-check.py` passed: 99 gates validated.
+- `python3 scripts/ambitions-skill-registry-check.py` passed.
+- `python3 scripts/ambitions-vocabulary-drift-scan.py` passed.
+- `python3 scripts/ambitions-copy-contract-lint.py` passed.
+- `bash scripts/release-claim-safety-scan.sh` passed.
+- `python3 scripts/ambitions-local-first-boundary-scan.py` passed.
+- `python3 scripts/ambitions-unsupported-claim-scan.py` passed.
+- `python3 scripts/ambitions-architecture-inventory.py` passed: final-tree parity achieved.
+- `git diff --check` passed.
+
+### Gate Posture
+
+- `priority_supports_low_normal_high`: remains Partial. P2C-A adds scoped runtime model and test proof; rendered UI/accessibility proof remains P2C-B.
+- `priority_can_be_overridden_by_user`: moves from Unknown to Partial. P2C-A represents user override in the runtime decision; rendered edit control and persistence/relaunch proof remain missing.
+- `priority_does_not_include_must_fit_as_goal_type`: moves from Unknown to Partial. P2C-A rejects `Must Fit` as a priority value and the vocabulary drift scan passed; broader goal-type audit remains future proof.
+- `priority_can_be_inferred`: remains Partial. P2C-A can derive scoped priority context from existing command hints, but does not claim broad inference.
+- `make_room_is_action_not_priority`: remains Missing. P2C-A does not implement Make Room.
+
+### Remaining Gaps
+
+- No rendered priority controls or review copy yet.
+- No user-visible priority accessibility proof.
+- No screenshot or visual proof.
+- No physical-device validation.
+- No no-account/no-network device workflow proof.
+- No persistence/relaunch proof for final user priority override.
+- No Future Steps, full goal pathing, Make Room, Add with conflict, Life Capital, Source Atlas app-side composition, Visual Green, or Release Green proof.
+
+### Architecture Notes
+
+- Final Architecture Tree inspected: yes.
+- Canonical owner touched: `Core/Runtime`.
+- Test owner touched: `Native/AmbitionsTests/Runtime`.
+- Non-canonical owners touched: none.
+- `Features/` was not expanded.
+- No parallel Step, Time, Priority, Capacity, Conflict, or persistence model was introduced.
+- No compatibility shims were added.
+- `SimpleStepLifecycleService.swift` was not touched by P2C-A.
+- `SimpleStepLifecycleService.swift` line count remained 469.

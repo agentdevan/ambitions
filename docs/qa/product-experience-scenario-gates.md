@@ -95,10 +95,10 @@ Statuses mean:
 
 | Gate ID | User-visible behavior | Current status | Evidence path if found | Required future proof |
 |---|---|---|---|---|
-| `priority_supports_low_normal_high` | Priority supports Low, Normal, High. | Partial | `Native/Ambitions/Projection/Commands/AmbitionsCommandTaxonomy.swift` | User-facing priority model and UI proof |
+| `priority_supports_low_normal_high` | Priority supports Low, Normal, High. | Partial | `Native/Ambitions/Projection/Commands/AmbitionsCommandTaxonomy.swift`; `Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift`; `Native/AmbitionsTests/Runtime/PriorityPlacementPolicyTests.swift` | Rendered priority UI and accessibility proof |
 | `priority_can_be_inferred` | Priority can be inferred. | Partial | `Native/Ambitions/Core/Domain/GoalBelievabilityModels.swift` | Inference tests and explanation proof |
-| `priority_can_be_overridden_by_user` | User can override priority. | Unknown | Command/payload support not fully inspected | Override UI/runtime test |
-| `priority_does_not_include_must_fit_as_goal_type` | `Must Fit` is not a goal type. | Unknown | No direct source hit found in sampled paths | Forbidden-language scan and model assertion |
+| `priority_can_be_overridden_by_user` | User can override priority. | Partial | `Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift`; `Native/AmbitionsTests/Runtime/PriorityPlacementPolicyTests.swift` | Rendered edit control, persistence/relaunch proof, and accessibility proof |
+| `priority_does_not_include_must_fit_as_goal_type` | `Must Fit` is not a goal type. | Partial | `Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift`; `Native/AmbitionsTests/Runtime/PriorityPlacementPolicyTests.swift`; vocabulary drift scan | Broader goal-type audit and rendered priority proof |
 | `make_room_is_action_not_priority` | Make room is an action, not priority. | Missing | None found | Flow/model tests |
 | `lower_priority_goals_can_be_suggested_for_pause_or_move` | Lower-priority goals can be suggested for pause/move. | Missing | None found | Conflict-resolution simulation test |
 
