@@ -816,22 +816,69 @@ Remaining gaps:
 
 Gate index updates: none. Evidence is recorded in this inventory addendum only; gate status remains Partial until rendered/device/accessibility and remaining missing-object proof exists.
 
+## P1 Final Closeout / Evidence Update
+
+Date: 2026-06-24
+Baseline commit: `e978cf5aa463a926656d5b3b4e24ba5360bae7a1`
+P1 Finish Bundle source/runtime final commit before docs closeout: `f51576616f06c3127c2add5f3a94f284e178b6ba`
+P1J docs closeout commit: P1J final commit recorded in train closeout
+
+Phase commits:
+
+- P1F Local Search Foundation: `b6fd660c0da3135f3f39b3ce4ef99696f6f7a728`
+- P1G Private Notifications Foundation: `6a22e3b65f55b9bdc50e711dc2b428770779b1fd`
+- P1H Missed Step Recovery End-to-End: `eb29b1f4af3ff4da044a4e12dd92b393ff1b3d21`
+- P1I Foundation End-to-End Scenario: `f51576616f06c3127c2add5f3a94f284e178b6ba`
+- P1J Gate Closeout / Evidence Update: P1J final commit recorded in train closeout
+
+Closeout classification:
+
+- P1 closes Yellow, not bundled Green.
+- Source Green areas: scoped simple Step lifecycle, recurring Step runtime/persistence, Capture-to-Step local save, Time scheduling/projection/reload, local Search, private local notification request construction, missed Step recovery persistence/reload, and the P1I source/runtime E2E workflow.
+- Runtime Green areas: scoped P1A, P1B, P1C, P1D/P1E.1, P1F, P1G request construction, P1H recovery reload, and P1I local workflow tests passed.
+- Interaction Green areas: scoped P1A.2 normal Day Rail Step row path and scoped P1E/P1E.1 rendered Time foundation only. P1F/P1G/P1H/P1I did not add new rendered Interaction Green.
+- Ready for Visual Review artifacts: P1E `p1e-rendered-time-foundation` and P1E.1 `p1e1-reload-backed-time-foundation` screenshots remain Ready for Visual Review only.
+
+Remaining Yellow gaps:
+
+- Full rendered end-to-end P1 flow is not proven.
+- Search rendered route/accessibility proof is not current.
+- Missed recovery rendered choice flow and screenshot proof are not current.
+- Notification delivery, lock-screen screenshot, permission settings UX, and tap-through app routing are not proven.
+- Network-disabled device workflow, no-account launch matrix, broad VoiceOver/Dynamic Type/reduced-motion/manual accessibility sweep, real-device proof, manual visual approval, privacy approval, TestFlight, App Store, and release readiness remain unclaimed.
+- First-class Life Capital and Future Steps are intentionally not implemented in P1, so gates that mention them remain Partial.
+
+Unclaimed work:
+
+- No Visual Green, Release Green, device readiness, accessibility conformance, privacy approval, TestFlight readiness, App Store readiness, notification delivery, hosted sync, cloud AI, or account-required core behavior is claimed.
+- No Future Steps, full goal pathing, Life Capital, Make Room, Add with conflict, Source Atlas expansion, R2 user-data behavior, or hosted private life graph was implemented.
+
+Recommended P2 starting train:
+
+- Start with P2A Protected Seven-Day Placement Guard.
+- Rationale: P1 now has enough local Step/Time scheduling proof to justify protecting near-term placement before full path generation. This reduces the risk that P2 full path generation creates or moves work into protected windows without a guard/receipt contract.
+
+Gate update posture:
+
+- Scenario gate statuses remain Partial. Evidence paths were refreshed for P1F-P1I, but no gate was upgraded to Existing.
+- `docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md` was refreshed to include P1D-P1I evidence and current audit commit context.
+
 ## Recommended Immediate Next Prompt
 
 ```text
-From /Users/devan/Documents/GitHub/ambitions on main, run P1E Rendered Time Foundation Proof.
+From /Users/devan/Documents/GitHub/ambitions on main, run P2A Protected Seven-Day Placement Guard.
 
 Work only on main. Do not create branches or PRs.
 
-Scope: produce focused rendered Time proof for the P1D Time foundation without broad redesign.
+Scope: add the minimal source/runtime guard that prevents automatic movement or new placement inside the protected seven-day window without explicit review/receipt proof.
 
 Use active truth files and retained skills first. Preserve Today / Goals / Time / You as the only persistent surfaces, Capture as global composer, Motion as behavior, Trust as Proof / Source / Privacy / History / Receipts, and local-first/offline core law.
 
-Do not implement Life Capital, Future Steps, full goal pathing, Make Room/Add with conflict, Source Atlas expansion, recurring Step UI, visual redesign, account work, R2 work, notification delivery, or release claims.
+Do not implement full goal path generation, Future Steps, Life Capital, Make Room/Add with conflict, Source Atlas expansion, notification delivery, account work, R2 user-data behavior, visual redesign, or release claims.
 
-Required gate: `foundation_calendar_planning_shows_fixed_points_and_open_windows`.
+Required gates: `automatic_adjustment_never_silently_moves_protected_near_term_placement`, `full_path_scheduling_places_future_steps_with_conflict_state` only as a blocked/Partial guard context, and relevant P1 Time/Step regression gates.
 
-Before edits, prove active runtime/source ownership. Keep new implementation under canonical owners only: Projection/SurfaceLenses, Surfaces/Time, DesignSystem/ProductObjects, Trust, Quality, and tests.
+Before edits, prove active runtime/source ownership. Keep new implementation under canonical owners only: Core runtime/domain, Projection/SurfaceLenses, Time, Trust/receipts, Quality, and tests.
 
-Validation: focused Time UI/accessibility tests, P1D runtime regression, product experience gate check, skill registry check, vocabulary/copy/claim/local-first scans, unsupported-claim scan on changed files, and git diff --check. Do not claim Visual Green or Release Green without current proof.
+Validation: focused protected-window guard tests, P1D/P1E.1/P1I regression as affected, product experience gate check, skill registry check, vocabulary/copy/claim/local-first scans, unsupported-claim scan on changed files, architecture inventory, and git diff --check. Do not claim Visual Green or Release Green without current proof.
 ```

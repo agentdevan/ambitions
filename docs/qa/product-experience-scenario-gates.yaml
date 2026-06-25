@@ -54,13 +54,14 @@ gates:
     user_visible_behavior: "A missed obligation asks what changed and offers recovery without shame or productivity scoring."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TimeRecoveryReceiptMaturityProjection.swift"
-      - "Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift"
-    required_future_proof: "Missed-obligation interaction test, copy audit, rendered recovery options"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift"
+      - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
+    required_future_proof: "Rendered missed-obligation interaction, screenshot/manual review, accessibility and device proof"
+    last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
     canon_source: "docs/truth/PRODUCT_ORIGIN_TRUTH.md"
     owner_area: "Origin / cross-surface first-session behavior"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
   - id: "origin_new_goal_conflict_shows_make_room_options"
     group: "Origin Golden Scenario"
     user_visible_behavior: "Adding a conflicting new goal shows Make room options instead of silently overcommitting the schedule."
@@ -104,11 +105,13 @@ gates:
     evidence_paths:
       - "Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift"
       - "Native/Ambitions/Core/Persistence/"
-    required_future_proof: "Offline capture test, relaunch proof, no-network proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
+    required_future_proof: "Rendered Capture save proof, network-disabled device workflow, release evidence"
+    last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
   - id: "foundation_calendar_planning_shows_fixed_points_and_open_windows"
     group: "Foundation"
     user_visible_behavior: "Time shows fixed points and open windows."
@@ -126,12 +129,15 @@ gates:
     user_visible_behavior: "Search finds goals, Steps, proof, Life Capital, and settings."
     current_status: "Partial"
     evidence_paths:
+      - "Native/Ambitions/Core/Runtime/MemoryLensService.swift"
       - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift"
-    required_future_proof: "Search tests including Life Capital and Future Steps, route proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
+    required_future_proof: "First-class Life Capital and Future Steps search proof, rendered route/accessibility proof"
+    last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
   - id: "foundation_notification_copy_is_private_by_default"
     group: "Foundation"
     user_visible_behavior: "Notifications use private lock-screen copy by default."
@@ -139,12 +145,14 @@ gates:
     evidence_paths:
       - "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift"
       - "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift"
-    required_future_proof: "Device lock-screen proof, permission settings proof, delivered notification screenshot, end-to-end action routing proof"
-    last_verified_commit: "30da6e81c69146d68d6f1060320533c6d52a62c4"
+      - "Native/AmbitionsTests/App/NotificationResponsePayloadParserTests.swift"
+    required_future_proof: "Device lock-screen proof, permission settings proof, delivered notification screenshot, end-to-end app tap-routing proof"
+    last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
     tests:
       - "Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift"
+      - "Native/AmbitionsTests/App/NotificationResponsePayloadParserTests.swift"
   - id: "foundation_offline_core_runs_without_account"
     group: "Foundation"
     user_visible_behavior: "Core app runs without account or network."
@@ -152,11 +160,15 @@ gates:
     evidence_paths:
       - "docs/truth/IMPLEMENTATION_TRUTH.md"
       - "Native/Ambitions/Core/Persistence/"
-    required_future_proof: "No-account launch test, offline workflow proof, release evidence"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
+      - "Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift"
+    required_future_proof: "Network-disabled device workflow, no-account launch matrix, release evidence"
+    last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
+      - "Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift"
   - id: "foundation_completion_creates_visible_closure"
     group: "Foundation"
     user_visible_behavior: "Completing work creates visible closure."
@@ -164,23 +176,26 @@ gates:
     evidence_paths:
       - "Native/Ambitions/Projection/Mutations/ClosureStageMutation.swift"
       - "Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift"
-    required_future_proof: "Completion UI test, receipt/proof assertion, accessibility proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
+    required_future_proof: "Broader completion UI proof, receipt/proof assertion across rendered paths, accessibility proof"
+    last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
   - id: "foundation_missed_step_asks_what_changed"
     group: "Foundation"
     user_visible_behavior: "Missed Step asks what changed."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Projection/SurfaceLenses/TimeRecoveryReceiptMaturityProjection.swift"
-      - "Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift"
-    required_future_proof: "Missed-step scenario test and rendered recovery options"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift"
+      - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
+    required_future_proof: "Rendered missed-step recovery options, screenshot/manual review, accessibility and device proof"
+    last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
   - id: "goal_creation_generates_full_scheduled_path"
     group: "Goal Path"
     user_visible_behavior: "Goal creation produces a full scheduled path."
