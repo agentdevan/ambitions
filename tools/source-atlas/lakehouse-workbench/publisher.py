@@ -2,42 +2,76 @@ import os
 import subprocess
 import hashlib
 import tempfile
+import json
 from pathlib import Path
 from typing import Any, Dict, List
-from dotenv import load_dotenv
 
-def generate_wrangler_commands(run_dir: Path, bucket_name: str = "source-atlas-staged") -> List[Dict[str, str]]:
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    def load_dotenv(*_args: object, **_kwargs: object) -> bool:
+        return False
+
+
+FORBIDDEN_OBJECT_KEY_SEGMENTS = {"users", "user", "private", "captures", "capture", "life-graph", "life_graph", "receipts", "receipt", "personalization", "calendar"}
+
+
+def _validate_object_key(remote_key: str) -> None:
+    key_lower = remote_key.lower().replace("\\", "/")
+    if "current.json" in key_lower or "/packs/" in key_lower or "/seeds/" in key_lower:
+        raise ValueError(f"Guardrail violation: Wrangler remote key '{remote_key}' is forbidden.")
+    for segment in [part for part in key_lower.split("/") if part]:
+        if segment in FORBIDDEN_OBJECT_KEY_SEGMENTS:
+            raise ValueError(f"Guardrail violation: Wrangler remote key '{remote_key}' contains private segment '{segment}'.")
+
+
+def _content_type(path: Path) -> str:
+    if path.suffix == ".jsonl":
+        return "application/x-ndjson; charset=utf-8"
+    if path.suffix == ".json":
+        return "application/json; charset=utf-8"
+    return "application/octet-stream"
+
+def generate_wrangler_commands(run_dir: Path, bucket_name: str = "ambitions-source-atlas") -> List[Dict[str, Any]]:
     """
-    Generates a list of wrangler commands to run for staging files.
+    Generates validation-backed Wrangler command previews for candidate artifacts.
     """
-    publish_dir = run_dir / "publish" / "factory" / "v1"
     run_id = run_dir.name
+    publish_dir = run_dir / "publish" / "source-atlas" / "v1" / "candidates" / run_id
     
     files_to_upload = [
-        ("goal-intent-index.jsonl", f"factory/v1/goal-intent-index.jsonl"),
-        ("domain-index.json", f"factory/v1/domain-index.json"),
-        ("alias-index.json", f"factory/v1/alias-index.json"),
-        ("coverage-matrix.json", f"factory/v1/coverage-matrix.json"),
-        ("staged-manifest.json", f"factory/v1/staged-manifest.json"),
-        # Dev release pathing
-        ("goal-intent-index.jsonl", f"factory/v1/releases/dev/{run_id}/goal-intent-index.jsonl"),
-        ("staged-manifest.json", f"factory/v1/releases/dev/{run_id}/staged-manifest.json")
+        ("candidate-intent-index.jsonl", f"source-atlas/v1/candidates/{run_id}/candidate-intent-index.jsonl"),
+        ("candidate-domain-index.json", f"source-atlas/v1/candidates/{run_id}/candidate-domain-index.json"),
+        ("candidate-coverage-matrix.json", f"source-atlas/v1/candidates/{run_id}/candidate-coverage-matrix.json"),
+        ("foundry-handoff.json", f"source-atlas/v1/candidates/{run_id}/foundry-handoff.json"),
+        ("candidate-manifest.json", f"source-atlas/v1/candidates/{run_id}/candidate-manifest.json"),
+        ("candidate-manifest.json", f"source-atlas/v1/channels/candidate/manifest.json"),
     ]
     
     commands = []
     for local_name, remote_key in files_to_upload:
-        # Strict guardrail checks on keys and paths
-        key_lower = remote_key.lower()
-        if "current.json" in key_lower or "/packs/" in key_lower or "/seeds/" in key_lower:
-            raise ValueError(f"Guardrail violation: Wrangler remote key '{remote_key}' is forbidden.")
-            
+        _validate_object_key(remote_key)
         local_path = publish_dir / local_name
         if local_path.exists():
-            cmd = f"wrangler r2 object put {bucket_name}/{remote_key} --file {local_path}"
+            args = [
+                "wrangler",
+                "r2",
+                "object",
+                "put",
+                f"{bucket_name}/{remote_key}",
+                "--file",
+                str(local_path),
+                "--content-type",
+                _content_type(local_path),
+                "--cache-control",
+                "public, max-age=300",
+            ]
             commands.append({
                 "local_file": local_name,
+                "local_path": str(local_path),
                 "remote_key": remote_key,
-                "command": cmd
+                "command": " ".join(args),
+                "args": args,
             })
             
     # Save a dry-run commands markdown report
@@ -46,10 +80,13 @@ def generate_wrangler_commands(run_dir: Path, bucket_name: str = "source-atlas-s
     report_file = reports_dir / "r2_dry_run_commands.md"
     
     report_lines = [
-        "# R2 Wrangler Dry-Run Commands Preview",
+        "# R2 Wrangler Candidate Upload Preview",
         "",
         f"**Run ID**: `{run_id}`",
         f"**Target Bucket**: `{bucket_name}`",
+        "**Promotion State**: `candidate_only`",
+        "",
+        "These commands do not include credentials and do not promote stable Source Atlas packs.",
         "",
         "## Generated Wrangler CLI Commands",
         ""
@@ -65,7 +102,7 @@ def generate_wrangler_commands(run_dir: Path, bucket_name: str = "source-atlas-s
             
     return commands
 
-def execute_r2_upload_mock(commands: List[Dict[str, str]]) -> Dict[str, Any]:
+def execute_r2_upload_mock(commands: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
     Simulates Wrangler R2 upload execution for Mock Mode.
     """
@@ -82,12 +119,12 @@ def execute_r2_upload_mock(commands: List[Dict[str, str]]) -> Dict[str, Any]:
         "details": uploaded_files
     }
 
-def verify_integrity_mock(commands: List[Dict[str, str]], run_dir: Path) -> Dict[str, Any]:
+def verify_integrity_mock(commands: List[Dict[str, Any]], run_dir: Path) -> Dict[str, Any]:
     """
     Simulates verifying remote uploads by comparing hashes in mock mode.
     """
-    publish_dir = run_dir / "publish" / "factory" / "v1"
-    manifest_path = publish_dir / "staged-manifest.json"
+    publish_dir = run_dir / "publish" / "source-atlas" / "v1" / "candidates" / run_dir.name
+    manifest_path = publish_dir / "candidate-manifest.json"
     
     if not manifest_path.exists():
         return {"success": False, "error": "Manifest file not found."}
@@ -111,7 +148,7 @@ def verify_integrity_mock(commands: List[Dict[str, str]], run_dir: Path) -> Dict
 
 import json
 
-def execute_wrangler_upload(commands: List[Dict[str, str]], bucket_name: str, mock: bool = True, user_confirmed: bool = False) -> Dict[str, Any]:
+def execute_wrangler_upload(commands: List[Dict[str, Any]], bucket_name: str, mock: bool = True, user_confirmed: bool = False) -> Dict[str, Any]:
     """
     Executes actual wrangler commands if Wrangler is available on the path.
     Otherwise falls back to mock execution.
@@ -141,9 +178,8 @@ def execute_wrangler_upload(commands: List[Dict[str, str]], bucket_name: str, mo
     for cmd in commands:
         try:
             # Execute command
-            args = cmd["command"].split()
-            # Replace backslashes in path for Windows-friendliness
-            args = [a.replace("\\", "/") if "/" in a or "\\" in a else a for a in args]
+            args = cmd.get("args") or cmd["command"].split()
+            args = [a.replace("\\", "/") if isinstance(a, str) and ("/" in a or "\\" in a) else a for a in args]
             
             res = subprocess.run(args, capture_output=True, text=True, check=True)
             details.append({
@@ -166,19 +202,19 @@ def execute_wrangler_upload(commands: List[Dict[str, str]], bucket_name: str, mo
         "details": details
     }
 
-def verify_remote_integrity(commands: List[Dict[str, str]], run_dir: Path, bucket_name: str, mock: bool = True) -> Dict[str, Any]:
+def verify_remote_integrity(commands: List[Dict[str, Any]], run_dir: Path, bucket_name: str, mock: bool = True) -> Dict[str, Any]:
     """
-    Verification downloads staged objects back from Cloudflare R2 using wrangler,
-    calculates their SHA-256, and cross-references it with local staged manifest.
+    Verification downloads candidate objects back from Cloudflare R2 using wrangler,
+    calculates their SHA-256, and cross-references it with the local candidate manifest.
     """
     if mock:
         return verify_integrity_mock(commands, run_dir)
         
-    publish_dir = run_dir / "publish" / "factory" / "v1"
-    manifest_path = publish_dir / "staged-manifest.json"
+    publish_dir = run_dir / "publish" / "source-atlas" / "v1" / "candidates" / run_dir.name
+    manifest_path = publish_dir / "candidate-manifest.json"
     
     if not manifest_path.exists():
-        return {"success": False, "error": "Local staged manifest not found."}
+        return {"success": False, "error": "Local candidate manifest not found."}
         
     with manifest_path.open("r", encoding="utf-8") as f:
         manifest = json.load(f)
@@ -193,7 +229,7 @@ def verify_remote_integrity(commands: List[Dict[str, str]], run_dir: Path, bucke
             # Find the remote key in command templates
             remote_key = None
             for cmd in commands:
-                if cmd["local_file"] == local_name and "releases/dev" not in cmd["remote_key"]:
+                if cmd["local_file"] == local_name and "/channels/" not in cmd["remote_key"]:
                     remote_key = cmd["remote_key"]
                     break
             
@@ -238,4 +274,3 @@ def verify_remote_integrity(commands: List[Dict[str, str]], run_dir: Path, bucke
         "success": success,
         "results": verification_results
     }
-

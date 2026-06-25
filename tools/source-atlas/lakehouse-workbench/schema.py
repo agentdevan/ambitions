@@ -55,7 +55,7 @@ class GoalIntentRecord(BaseModel):
     domain: str = Field(..., description="Domain identifier")
     category: str = Field(..., description="Category identifier")
     intent_phrase: str = Field(..., description="The user goal intent expression")
-    runtime_eligible: bool = Field(..., description="If true, eligible for app-facing matching")
+    runtime_eligible: bool = Field(..., description="If true, eligible for candidate intent matching only")
     runtime_role: str = Field("intent_matching_only", description="Must be intent_matching_only")
     blocked_for_step_generation: bool = Field(True, description="Must be true to prevent raw step generation")
     evidence_quality: str = Field(..., description="generated_only, seed_archetype, peer_reviewed, professional_guidance_required")

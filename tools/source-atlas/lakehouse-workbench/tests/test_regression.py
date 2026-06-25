@@ -7,13 +7,14 @@ import sys
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 
 from schema import GoalIntentRecord
+from paths import RUNS_BASE_DIR
 
 # Banned values or combinations
 # - production_use true
 # - runtime_eligible true for non-intent matching (runtime_role != "intent_matching_only" or blocked_for_step_generation != True)
 # - stores_final_schedule true
 # - official/current source state
-# - app-facing manifest path
+# - stable/runtime manifest path
 
 def test_regression_schema_constraints():
     # 1. Check production_use is banned (even if True or False, field must not be specified / must be None)
@@ -121,8 +122,7 @@ def test_regression_schema_constraints():
         )
 
 def test_regression_staged_files_scan():
-    # Scan C:\Users\Devan\SourceAtlasFactory\runs\ for any violations in generated files
-    base_dir = Path("C:/Users/Devan/SourceAtlasFactory/runs")
+    base_dir = RUNS_BASE_DIR
     if not base_dir.exists():
         return  # No runs generated yet, skip scanning
 
@@ -135,9 +135,9 @@ def test_regression_staged_files_scan():
             continue
 
         # Check path guardrails
-        assert "current.json" not in file_path_str, f"Forbidden app-facing path: {file}"
-        assert "/packs/" not in file_path_str, f"Forbidden app-facing path: {file}"
-        assert "/seeds/" not in file_path_str, f"Forbidden app-facing path: {file}"
+        assert "current.json" not in file_path_str, f"Forbidden stable/runtime path: {file}"
+        assert "/packs/" not in file_path_str, f"Forbidden stable/runtime path: {file}"
+        assert "/seeds/" not in file_path_str, f"Forbidden stable/runtime path: {file}"
 
         # Check content
         with file.open("r", encoding="utf-8") as f:
@@ -154,7 +154,7 @@ def test_regression_staged_files_scan():
                 try:
                     content = json.load(f)
                     if isinstance(content, dict):
-                        # Could be domain-index or staged-manifest or a single record
+                        # Could be an index, candidate manifest, handoff, or a single record
                         validate_record_fields(content, str(file))
                     elif isinstance(content, list):
                         for idx, item in enumerate(content):

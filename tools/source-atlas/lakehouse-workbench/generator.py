@@ -4,10 +4,13 @@ import uuid
 import time
 from pathlib import Path
 from typing import Any, Dict, List
-from dotenv import load_dotenv
+from paths import RUNS_BASE_DIR
 
-# Default workspace storage
-RUNS_BASE_DIR = Path("C:/Users/Devan/SourceAtlasFactory/runs")
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    def load_dotenv(*_args: object, **_kwargs: object) -> bool:
+        return False
 
 def initialize_run_dir(run_id: str) -> Dict[str, Path]:
     run_dir = RUNS_BASE_DIR / run_id
@@ -338,4 +341,3 @@ def submit_gemini_batch_job(run_id: str, request_type: str, mock: bool = True) -
         generate_sports_art_10k_profile(run_id)
         return str(RUNS_BASE_DIR / run_id / "raw" / "results_sports_art_shard_1.jsonl")
     return run_gemini_batch_mock(run_id, request_type)
-

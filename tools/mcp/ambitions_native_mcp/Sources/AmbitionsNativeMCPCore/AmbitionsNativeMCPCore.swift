@@ -743,6 +743,8 @@ private func sourceAtlasTools(context: RepoContext) -> [NativeTool] {
             description: "Inspect Source Atlas pipeline scripts, local atlas docs, and public/reference-pack boundaries."
         ) { _ in
             let scripts = [
+                "tools/source-atlas/source-atlas-foundry.py",
+                "tools/source-atlas/foundry/README.md",
                 "tools/source-atlas/ambitions-pack-crypto.py",
                 "tools/source-atlas/ambitions-pack-diff.py",
                 "tools/source-atlas/ambitions-freshness-broker.py",
@@ -761,9 +763,84 @@ private func sourceAtlasTools(context: RepoContext) -> [NativeTool] {
                     "path": .string("docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md"),
                     "exists": .bool(context.exists("docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md")),
                 ]),
+                "foundryBlueprint": .object([
+                    "path": .string("docs/platform/SOURCE_ATLAS_FOUNDRY_BLUEPRINT.md"),
+                    "exists": .bool(context.exists("docs/platform/SOURCE_ATLAS_FOUNDRY_BLUEPRINT.md")),
+                ]),
                 "privacyBoundary": .string("R2 is public/reference/freshness infrastructure only; no goals, captures, receipts, personalization, calendar data, or private life graph payloads."),
                 "defaultOutputRoot": .string("output/source-atlas"),
             ]))
+        },
+        NativeTool(
+            name: "source_atlas_foundry_status",
+            description: "Run Source Atlas Foundry doctor and return source, pathway, privacy, and R2 posture."
+        ) { _ in
+            try runSourceAtlasFoundry(context: context, ["doctor"])
+        },
+        NativeTool(
+            name: "source_atlas_foundry_compile_demo",
+            description: "Compile the current official-source seed pathways into a local versioned Foundry bundle.",
+            inputSchema: ToolSchemas.object([
+                "versionID": ToolSchemas.string("Version identifier, e.g. source-atlas-foundry-demo."),
+                "outputRoot": ToolSchemas.string("Repo-relative output root. Defaults to output/source-atlas/foundry."),
+                "channel": ToolSchemas.string("Optional channel. Defaults to staging."),
+            ], required: ["versionID"]),
+            readOnly: false
+        ) { args in
+            let versionID = try requiredString(args, "versionID")
+            let outputRoot = args["outputRoot"]?.stringValue ?? "output/source-atlas/foundry"
+            let channel = args["channel"]?.stringValue ?? "staging"
+            let outputURL = try context.resolve(outputRoot)
+            return try runSourceAtlasFoundry(context: context, [
+                "compile-demo",
+                "--output-root", outputURL.path,
+                "--version-id", versionID,
+                "--channel", channel,
+            ])
+        },
+        NativeTool(
+            name: "source_atlas_foundry_validate_bundle",
+            description: "Validate a Source Atlas Foundry bundle for schema, hashes, provenance, runtime boundary, and privacy triggers.",
+            inputSchema: ToolSchemas.object([
+                "bundleRoot": ToolSchemas.string("Repo-relative bundle root containing manifest.json."),
+            ], required: ["bundleRoot"])
+        ) { args in
+            let bundleRoot = try requiredString(args, "bundleRoot")
+            let bundleURL = try context.resolve(bundleRoot)
+            return try runSourceAtlasFoundry(context: context, [
+                "validate",
+                "--bundle-root", bundleURL.path,
+            ])
+        },
+        NativeTool(
+            name: "source_atlas_foundry_r2_plan",
+            description: "Create or preview a validation-backed R2 staging plan for a public/reference Foundry bundle without reading credentials.",
+            inputSchema: ToolSchemas.object([
+                "bundleRoot": ToolSchemas.string("Repo-relative bundle root containing manifest.json."),
+                "bucket": ToolSchemas.string("R2 bucket name."),
+                "prefix": ToolSchemas.string("Object-key prefix. Defaults to source-atlas/v1."),
+                "channel": ToolSchemas.string("Channel manifest to write. Defaults to staging."),
+                "outputPath": ToolSchemas.string("Optional repo-relative plan JSON output path."),
+            ], required: ["bundleRoot", "bucket"]),
+            readOnly: false
+        ) { args in
+            let bundleRoot = try requiredString(args, "bundleRoot")
+            let bucket = try requiredString(args, "bucket")
+            let prefix = args["prefix"]?.stringValue ?? "source-atlas/v1"
+            let channel = args["channel"]?.stringValue ?? "staging"
+            let bundleURL = try context.resolve(bundleRoot)
+            var command = [
+                "r2-plan",
+                "--bundle-root", bundleURL.path,
+                "--bucket", bucket,
+                "--prefix", prefix,
+                "--channel", channel,
+            ]
+            if let outputPath = args["outputPath"]?.stringValue, !outputPath.isEmpty {
+                let outputURL = try context.resolve(outputPath)
+                command.append(contentsOf: ["--output", outputURL.path])
+            }
+            return try runSourceAtlasFoundry(context: context, command)
         },
         NativeTool(
             name: "source_atlas_versioned_manifest_create",
@@ -1201,6 +1278,19 @@ private func gitChangedPaths(context: RepoContext) -> [String] {
         }
         return value
     }.sorted()
+}
+
+private func runSourceAtlasFoundry(context: RepoContext, _ arguments: [String]) throws -> String {
+    let script = try context.resolve("tools/source-atlas/source-atlas-foundry.py")
+    guard FileManager.default.fileExists(atPath: script.path) else {
+        throw ToolFailure.notFound("tools/source-atlas/source-atlas-foundry.py")
+    }
+    let result = runProcess("/usr/bin/python3", [script.path] + arguments)
+    guard result.exitCode == 0 else {
+        let message = result.stderr.isEmpty ? result.stdout : result.stderr
+        throw ToolFailure.commandFailed(message.trimmingCharacters(in: .whitespacesAndNewlines))
+    }
+    return result.stdout.trimmingCharacters(in: .whitespacesAndNewlines)
 }
 
 private struct Finding {

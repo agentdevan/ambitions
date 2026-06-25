@@ -12,13 +12,13 @@ from schema import GoalDomain, GrammarBank, GoalIntentRecord
 from generator import initialize_run_dir, generate_batch_requests, submit_gemini_batch_job, RUNS_BASE_DIR
 from validator import parse_raw_gemini_jsonl, validate_domain_intents, process_grammar_expansion
 from duckdb_qa import run_qa_audits
-from catalog import compile_staged_artifacts
+from catalog import compile_foundry_candidate_artifacts
 from publisher import generate_wrangler_commands, execute_wrangler_upload, verify_remote_integrity
 
 # Setup page configuration
 st.set_page_config(
     page_title="Source Atlas Lakehouse Workbench",
-    page_icon="🌌",
+    page_icon="SA",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -128,7 +128,7 @@ BASE_DIR = Path(__file__).resolve().parent
 DOMAINS_FILE = BASE_DIR / "data" / "sample_domains.json"
 GRAMMAR_FILE = BASE_DIR / "data" / "sample_grammar.json"
 
-st.sidebar.title("🌌 Source Atlas")
+st.sidebar.title("Source Atlas")
 st.sidebar.subheader("Lakehouse Workbench")
 
 # Active Run Selector
@@ -156,17 +156,17 @@ st.sidebar.markdown("---")
 # Global Settings in Sidebar
 st.session_state.mock_mode = st.sidebar.checkbox("Force Mock Mode (No APIs/Keys)", value=st.session_state.mock_mode)
 
-st.title("Source Atlas Lakehouse Workbench 🪐")
+st.title("Source Atlas Lakehouse Workbench")
 if st.session_state.active_run_id:
-    st.info(f"Active Run Directory: `C:\\Users\\Devan\\SourceAtlasFactory\\runs\\{st.session_state.active_run_id}\\`")
+    st.info(f"Active Run Directory: `{RUNS_BASE_DIR / st.session_state.active_run_id}`")
 else:
     st.warning("Please select or initialize a run directory in the sidebar.")
 
 # App Tabs
 tab_names = [
     "Dashboard", "Settings", "Domains", "Gemini Batch", 
-    "Generate", "Validate", "DuckDB QA", "R2 Data Catalog", 
-    "Compile App Artifacts", "Publish", "Reports"
+    "Generate", "Validate", "DuckDB QA", "Lakehouse Catalog",
+    "Compile Candidate Artifacts", "Publish", "Reports"
 ]
 tabs = st.tabs(tab_names)
 
@@ -183,7 +183,7 @@ with tabs[0]:
         raw_files = list((run_dir / "raw").glob("*.jsonl"))
         clean_files = list((run_dir / "clean").glob("*.jsonl"))
         rejected_files = list((run_dir / "rejected").glob("*.jsonl"))
-        published_manifest = run_dir / "publish" / "staged-manifest.json"
+        published_manifest = run_dir / "publish" / "source-atlas" / "v1" / "candidates" / run_dir.name / "candidate-manifest.json"
         
         c1, c2, c3, c4 = st.columns(4)
         with c1:
@@ -223,18 +223,18 @@ with tabs[0]:
             if published_manifest.exists():
                 with published_manifest.open("r", encoding="utf-8") as pm:
                     manifest_data = json.load(pm)
-                    pub_status = f"Staged ({manifest_data.get('stats', {}).get('intent_count', 0)} items)"
+                    pub_status = f"Candidate ({manifest_data.get('stats', {}).get('candidateCount', 0)} items)"
             st.markdown(f"""
             <div class="metric-card">
                 <h3>Publish Status</h3>
                 <h2>{pub_status}</h2>
-                <p>staged-manifest.json</p>
+                <p>candidate-manifest.json</p>
             </div>
             """, unsafe_allow_html=True)
 
         st.subheader("Data Safety Compliance Seal")
         st.markdown("""
-        - **Intent Matching Only**: All eligible app runtime records are strictly isolated to matching roles (`runtime_role: intent_matching_only`, `blocked_for_step_generation: true`).
+        - **Intent Matching Only**: All eligible candidate records are strictly isolated to matching roles (`runtime_role: intent_matching_only`, `blocked_for_step_generation: true`).
         - **No Credentials**: PII, API keys, and schedules are filtered out deterministically.
         - **No Shaming**: Evaluates shaming-free validation rules on all ingested intent phrases.
         """)
@@ -253,7 +253,7 @@ with tabs[1]:
         
     st.subheader("Credential Status Inspector")
     st.markdown(f"**Mock Mode**: `{'ENABLED' if st.session_state.mock_mode else 'DISABLED'}`")
-    st.markdown(f"**Runs Base Folder**: `C:\\Users\\Devan\\SourceAtlasFactory\\runs\\`")
+    st.markdown(f"**Runs Base Folder**: `{RUNS_BASE_DIR}`")
     
     if st.button("Sync Credentials"):
         st.success("Configuration re-loaded.")
@@ -498,7 +498,7 @@ with tabs[6]:
                 st.warning("Coverage Gaps")
                 st.dataframe(pd.DataFrame(audits["coverage_gaps"]), use_container_width=True)
 
-# Tab 8: R2 Data Catalog
+# Tab 8: Lakehouse Catalog
 with tabs[7]:
     st.header("Lakehouse Data Catalog")
     st.markdown("Query the local Parquet data lakehouse tables using DuckDB.")
@@ -531,10 +531,10 @@ with tabs[7]:
         else:
             st.warning("No Parquet warehouse table found. Run QA Audits first to generate clean Parquet records.")
 
-# Tab 9: Compile App Artifacts
+# Tab 9: Compile Candidate Artifacts
 with tabs[8]:
-    st.header("Compile Staged App Artifacts")
-    st.markdown("Compile goal-intent and domain knowledge into local JSON/JSONL staging indexes.")
+    st.header("Compile Foundry Candidate Artifacts")
+    st.markdown("Compile review-bound candidate indexes and a Foundry handoff. These are not stable Source Atlas packs.")
     
     if not st.session_state.active_run_id:
         st.write("Please select an active run.")
@@ -544,32 +544,32 @@ with tabs[8]:
         
         compile_mode = st.selectbox("Compile Mode", ["factory snapshot"])
         
-        if st.button("Compile Staged Artifacts"):
-            manifest = compile_staged_artifacts(run_dir, DOMAINS_FILE)
-            st.success("Compilation complete! Staged files written to runs publish folder.")
+        if st.button("Compile Candidate Artifacts"):
+            manifest = compile_foundry_candidate_artifacts(run_dir, DOMAINS_FILE)
+            st.success("Compilation complete. Candidate files were written to the run publish folder.")
             st.json(manifest)
             
-        zip_path = run_dir / "publish_bundle.zip"
+        zip_path = run_dir / "publish" / "source-atlas" / "v1" / "candidates" / f"{run_id}.zip"
         if zip_path.exists():
             with zip_path.open("rb") as f:
                 st.download_button(
-                    label="Download Publish Bundle (ZIP)",
+                    label="Download Candidate Bundle (ZIP)",
                     data=f.read(),
-                    file_name=f"publish_bundle_{run_id}.zip",
+                    file_name=f"source_atlas_candidate_{run_id}.zip",
                     mime="application/zip"
                 )
 
 # Tab 10: Publish
 with tabs[9]:
-    st.header("Cloudflare R2 Wrangler Publisher")
-    st.markdown("Publish compiled staged artifacts to Cloudflare R2 bucket.")
+    st.header("Cloudflare R2 Candidate Publisher")
+    st.markdown("Preview or upload candidate artifacts to R2. This does not promote reviewed or stable Source Atlas packs.")
     
     if not st.session_state.active_run_id:
         st.write("Please select an active run.")
     else:
         run_id = st.session_state.active_run_id
         run_dir = RUNS_BASE_DIR / run_id
-        bucket_name = "source-atlas-staged"
+        bucket_name = "ambitions-source-atlas"
         
         # Upload Mode
         upload_mode = st.selectbox("Upload Mode", ["Dry-Run", "Live"], index=0)
@@ -588,7 +588,7 @@ with tabs[9]:
                 st.code(cmd["command"], language="bash")
                 
         # Block confirmation switch
-        user_confirmed = st.checkbox("Confirm: I verify that this dataset contains no personal user context and approve publishing.")
+        user_confirmed = st.checkbox("Confirm: I verify that this dataset contains no personal user context and approve candidate upload only.")
         
         is_mock = st.session_state.mock_mode or (upload_mode == "Dry-Run")
         
@@ -598,7 +598,7 @@ with tabs[9]:
             else:
                 res = execute_wrangler_upload(commands, bucket_name, mock=is_mock, user_confirmed=user_confirmed)
                 if res.get("success"):
-                    st.success("Publish completed successfully!")
+                    st.success("Candidate upload completed successfully.")
                 else:
                     st.error(f"Publish failed: {res.get('error', 'unknown error')}")
                 st.json(res)
@@ -642,16 +642,16 @@ with tabs[10]:
                     
                 c5, c6 = st.columns(2)
                 with c5:
-                    st.metric("Staged File Count", perf.get("staged_file_count", 0))
+                    st.metric("Candidate File Count", perf.get("candidate_file_count", 0))
                 with c6:
-                    bytes_val = perf.get("staged_total_size_bytes", 0)
+                    bytes_val = perf.get("candidate_total_size_bytes", 0)
                     if bytes_val >= 1024 * 1024:
                         size_str = f"{bytes_val / (1024 * 1024):.2f} MB"
                     elif bytes_val >= 1024:
                         size_str = f"{bytes_val / 1024:.2f} KB"
                     else:
                         size_str = f"{bytes_val} bytes"
-                    st.metric("Staged Total Size", size_str)
+                    st.metric("Candidate Total Size", size_str)
             except Exception as e:
                 st.error(f"Error loading performance report: {str(e)}")
         else:
@@ -717,4 +717,3 @@ with tabs[10]:
             st.table(pd.DataFrame(heatmap_data))
         else:
             st.warning("Please run DuckDB QA Audits in the QA tab first to build the quality scorecard reports.")
-

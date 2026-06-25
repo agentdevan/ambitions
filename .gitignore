@@ -73,6 +73,7 @@ trains/
 .linear-sync/
 output/logs/
 output/manual-audit/
+output/source-atlas/
 build/reports/
 
 # Build-lab artifacts
