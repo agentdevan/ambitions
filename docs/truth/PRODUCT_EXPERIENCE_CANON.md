@@ -970,9 +970,14 @@ Source Atlas may provide:
 
 * domain packs
 * public requirements
+* versioned reference packs
+* provenance and freshness receipts
 * skill ladders
+* skill-transfer surfaces
 * eligibility rules
 * deadlines
+* credential and education context
+* occupation and career-cluster context
 * templates
 * reference paths
 * examples
@@ -988,6 +993,8 @@ Users should not browse packs, install packs, or manage a template marketplace.
 Full-fledged built-in packs should be accessible and enabled for everyone at all times where available.
 
 R2 may support freshness and new packs as they are created.
+
+Source Atlas Foundry and any future pack factory are infrastructure, not product surfaces. They may create, validate, diff, and publish public/reference packs, but they must not become user-facing pack management, marketplace browsing, or private-user context collection.
 
 ### 53. Runtime Boundary
 
@@ -2356,7 +2363,9 @@ Output
 * requirement references
 * domain context
 * skill ladder
+* skill-transfer context
 * eligibility or deadline context
+* freshness and provenance context
 * source inspection state when needed
 
 User-visible result

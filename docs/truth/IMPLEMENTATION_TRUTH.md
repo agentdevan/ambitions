@@ -226,7 +226,10 @@ Product truth makes R2 first-class for Source Atlas/reference freshness.
 Current source truth:
 
 - Source Atlas model source exists in the repo.
-- No release proof currently validates R2 fetch, cache, entitlement gating, pack verification, or privacy boundary.
+- Source Atlas Foundry tooling exists under `tools/source-atlas/` for public/reference harvesting, bundle compilation, validation, R2 staging plans, and R2 staging upload support.
+- The Foundry and Ambitions-native MCP tooling can support versioned reference-pack manifests, provenance/freshness records, public/reference boundary checks, and staging upload plans.
+- Local developer/tooling proof may validate Foundry output shape or R2 staging access. That does not prove app runtime fetch, cache, entitlement gating, production promotion, pack verification, privacy boundary, or release readiness.
+- No release proof currently validates app-side R2 fetch, cache, entitlement gating, pack verification, production freshness, or privacy boundary.
 
 Hard boundary:
 
