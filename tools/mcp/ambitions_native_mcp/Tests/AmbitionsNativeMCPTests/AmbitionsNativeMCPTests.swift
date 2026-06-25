@@ -132,7 +132,7 @@ private func ambitionsRepoRootForTests() -> URL {
     #expect(status.contains("\"tool\": \"source-atlas-foundry\"") || status.contains("\"tool\" : \"source-atlas-foundry\""))
     #expect(status.contains("pathwaySeedCount"))
 
-    let compileOutput = try registry.call(name: "source_atlas_foundry_compile_demo", arguments: [
+    let compileOutput = try registry.call(name: "source_atlas_foundry_compile_bundle", arguments: [
         "versionID": .string(versionID),
         "outputRoot": .string(outputRoot),
         "channel": .string("staging"),
@@ -147,7 +147,7 @@ private func ambitionsRepoRootForTests() -> URL {
 
     let planOutput = try registry.call(name: "source_atlas_foundry_r2_plan", arguments: [
         "bundleRoot": .string(bundleRoot),
-        "bucket": .string("ambitions-source-atlas"),
+        "bucket": .string("ambitions-source-atlas-staging"),
         "prefix": .string("source-atlas/v1"),
         "channel": .string("staging"),
     ])

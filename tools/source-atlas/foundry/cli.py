@@ -8,15 +8,37 @@ from pathlib import Path
 from typing import Any
 
 from . import __version__
+from .adapters import ADAPTER_VERSION, harvest_sources
 from .compiler import compile_bundle
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, write_json
 from .publisher import build_r2_plan, execute_r2_plan, write_r2_plan
 from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
 from .validator import validate_bundle
 
+try:
+    from dotenv import load_dotenv
+except ModuleNotFoundError:
+    def load_dotenv(*_args: object, **_kwargs: object) -> bool:
+        return False
+
 
 def print_json(value: Any) -> None:
     print(json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False))
+
+
+def load_foundry_env() -> list[str]:
+    source_atlas_root = Path(__file__).resolve().parents[1]
+    repo_root = source_atlas_root.parents[1]
+    candidates = [
+        repo_root / ".env",
+        source_atlas_root / ".env",
+        Path(__file__).resolve().parent / ".env",
+    ]
+    loaded: list[str] = []
+    for candidate in candidates:
+        if candidate.exists() and load_dotenv(candidate, override=False):
+            loaded.append(str(candidate))
+    return loaded
 
 
 def doctor() -> dict[str, Any]:
@@ -25,6 +47,7 @@ def doctor() -> dict[str, Any]:
         "version": __version__,
         "sourceCount": len(SOURCE_REGISTRY),
         "pathwaySeedCount": len(PATHWAY_SEEDS),
+        "adapterVersion": ADAPTER_VERSION,
         "privacyBoundary": PRIVACY_BOUNDARY,
         "nonClaims": NON_CLAIMS,
         "r2Posture": {
@@ -32,22 +55,31 @@ def doctor() -> dict[str, Any]:
             "directUpload": "requires --execute and --confirm-public-reference-only",
             "credentialHandling": "no credentials are read, stored, or printed by the foundry",
         },
+        "envFiles": load_foundry_env(),
         "sourceLanes": sorted({source["adapter"] for source in SOURCE_REGISTRY}),
         "highImpactExamples": [pathway["id"] for pathway in PATHWAY_SEEDS],
     }
 
 
 def main(argv: list[str] | None = None) -> int:
+    load_foundry_env()
     parser = argparse.ArgumentParser(description="Source Atlas Foundry")
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("doctor")
     sub.add_parser("catalog")
 
-    compile_parser = sub.add_parser("compile-demo")
+    harvest_parser = sub.add_parser("harvest")
+    harvest_parser.add_argument("--output-root", required=True)
+    harvest_parser.add_argument("--run-id", required=True)
+    harvest_parser.add_argument("--source", action="append", dest="sources")
+    harvest_parser.add_argument("--limit", type=int, default=25)
+
+    compile_parser = sub.add_parser("compile")
     compile_parser.add_argument("--output-root", required=True)
     compile_parser.add_argument("--version-id", required=True)
     compile_parser.add_argument("--channel", default="staging")
+    compile_parser.add_argument("--harvest-root")
 
     validate_parser = sub.add_parser("validate")
     validate_parser.add_argument("--bundle-root", required=True)
@@ -74,8 +106,17 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "catalog":
         print_json({"sources": SOURCE_REGISTRY, "pathwaySeeds": PATHWAY_SEEDS, "privacyBoundary": PRIVACY_BOUNDARY})
         return 0
-    if args.command == "compile-demo":
-        result = compile_bundle(Path(args.output_root), args.version_id, args.channel)
+    if args.command == "harvest":
+        result = harvest_sources(Path(args.output_root), args.run_id, source_ids=args.sources, limit=args.limit)
+        print_json(result)
+        return 0 if result["privacyScan"]["passed"] else 1
+    if args.command == "compile":
+        result = compile_bundle(
+            Path(args.output_root),
+            args.version_id,
+            args.channel,
+            harvest_root=Path(args.harvest_root) if args.harvest_root else None,
+        )
         print_json(result)
         return 0
     if args.command == "validate":

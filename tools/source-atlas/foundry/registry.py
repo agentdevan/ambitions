@@ -12,7 +12,7 @@ SOURCE_REGISTRY = [
         "license": "U.S. federal public source; cite source URL",
         "freshnessCadence": "watch for constitutional amendment or authoritative transcript update",
         "domains": ["civic", "law", "public_service", "eligibility"],
-        "adapter": "static_claims",
+        "adapter": "official_static_page",
         "lastReviewed": "2026-06-25",
     },
     {
@@ -24,7 +24,7 @@ SOURCE_REGISTRY = [
         "license": "NASA public web source; cite source URL",
         "freshnessCadence": "before and during each astronaut selection cycle",
         "domains": ["space", "career", "stem", "public_service", "eligibility"],
-        "adapter": "static_claims",
+        "adapter": "official_static_page",
         "lastReviewed": "2026-06-25",
     },
     {
@@ -36,7 +36,7 @@ SOURCE_REGISTRY = [
         "license": "NASA public web source; cite source URL",
         "freshnessCadence": "before and during each selection cycle",
         "domains": ["space", "career", "training", "selection"],
-        "adapter": "static_claims",
+        "adapter": "official_static_page",
         "lastReviewed": "2026-06-25",
     },
     {
@@ -48,7 +48,7 @@ SOURCE_REGISTRY = [
         "license": "CC BY 4.0 with O*NET attribution requirements",
         "freshnessCadence": "track O*NET production releases and Database Services current version",
         "domains": ["occupation", "skills", "tasks", "knowledge", "abilities", "transfer"],
-        "adapter": "planned_api_or_download",
+        "adapter": "official_onet_text_database",
         "lastReviewed": "2026-06-25",
     },
     {
@@ -60,7 +60,7 @@ SOURCE_REGISTRY = [
         "license": "U.S. federal public source; cite source URL",
         "freshnessCadence": "series-specific BLS publication schedule",
         "domains": ["labor_market", "wages", "employment", "occupation", "trend"],
-        "adapter": "planned_api",
+        "adapter": "official_bls_public_api",
         "lastReviewed": "2026-06-25",
     },
     {
@@ -72,19 +72,19 @@ SOURCE_REGISTRY = [
         "license": "public job announcement API; API key required for search APIs",
         "freshnessCadence": "daily or per source modified date",
         "domains": ["career", "federal_jobs", "requirements", "qualifications"],
-        "adapter": "planned_authenticated_api",
+        "adapter": "official_usajobs_authenticated_search",
         "lastReviewed": "2026-06-25",
     },
     {
         "id": "data.gov.catalog",
-        "title": "Data.gov CKAN metadata catalog",
+        "title": "Data.gov API v4 metadata search",
         "publisher": "U.S. General Services Administration",
-        "url": "https://catalog.data.gov/api/3/",
+        "url": "https://api.gsa.gov/technology/datagov/v4/search",
         "authorityTier": "source_of_sources_metadata",
         "license": "dataset-specific; catalog metadata only",
         "freshnessCadence": "agency harvest cadence from Data.gov metadata",
         "domains": ["source_discovery", "government_data", "metadata"],
-        "adapter": "planned_ckan",
+        "adapter": "official_datagov_v4_search",
         "lastReviewed": "2026-06-25",
     },
     {
@@ -96,7 +96,7 @@ SOURCE_REGISTRY = [
         "license": "U.S. Department of Education public data; cite source URL",
         "freshnessCadence": "track Scorecard changelog and data release date",
         "domains": ["education", "programs", "costs", "outcomes", "institutions"],
-        "adapter": "planned_api_or_bulk_download",
+        "adapter": "official_college_scorecard_api",
         "lastReviewed": "2026-06-25",
     },
 ]

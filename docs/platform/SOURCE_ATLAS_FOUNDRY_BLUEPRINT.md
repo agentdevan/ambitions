@@ -122,17 +122,25 @@ Every pack must carry:
 
 ## High-Impact Source Lanes
 
-Initial official/public-reference lanes:
+Implemented official/public-reference lanes:
 
 - National Archives for constitutional eligibility.
 - NASA for astronaut requirements and selection cycles.
-- O*NET database and Web Services for occupations, tasks, skills, knowledge, abilities, work activities, job zones, and transfer mapping.
-- BLS APIs for labor-market freshness and trend context.
-- USAJOBS APIs for current and historic federal opportunity requirements.
-- Data.gov CKAN metadata as a source-of-sources discovery layer, not claim truth.
+- O*NET downloadable text database for occupations, tasks, skills, knowledge, abilities, related occupations, and job titles.
+- BLS Public Data API for labor-market freshness and trend context.
+- USAJOBS Search API for current federal opportunity requirements when registered API headers are present.
+- Data.gov API v4 search as a source-of-sources discovery layer, not claim truth.
 - College Scorecard for education/program/cost/outcome context.
 
 The foundry should prefer bulk official datasets and structured APIs over web scraping when available.
+
+Current CLI path:
+
+```text
+harvest -> compile -> validate -> r2-plan -> upload-r2
+```
+
+The harvest step stores raw official snapshots only in ignored local output. The compiled bundle carries bounded provenance summaries, record counts, hashes, freshness signals, source URLs, and blocked-source reasons. Raw snapshots, API keys, private user context, and the Private Life Runtime are not compiled into R2-ready bundles.
 
 ## R2 Architecture
 
@@ -159,6 +167,8 @@ Local foundry tooling may upload to staging after validation. Stable promotion s
 4. checks revocation and last-known-good posture
 5. writes a promotion receipt
 6. updates stable channel only if all gates pass
+
+Wrangler upload plans must force remote R2 operations. A local Wrangler storage upload is developer simulation, not Source Atlas staging proof.
 
 ## Automation North Star
 
@@ -212,9 +222,12 @@ This lets Ambitions become broad without becoming reckless. A goal like `become 
 
 Current foundry tooling can prove local compilation, schema validation, privacy scanning, hash verification, and R2 staging-plan shape.
 
+Current foundry adapter tooling can also prove that public/reference harvest records were produced or that an authenticated source was explicitly blocked with named missing environment variables.
+
 It does not prove:
 
 - R2 production freshness
+- Cloudflare Worker promotion
 - app runtime fetch/cache
 - entitlement gating
 - privacy/legal approval

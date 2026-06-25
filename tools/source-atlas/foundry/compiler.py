@@ -5,36 +5,69 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-from .model import NON_CLAIMS, PRIVACY_BOUNDARY, file_sha256, stable_id, utc_now, write_json
+from .model import NON_CLAIMS, PRIVACY_BOUNDARY, file_sha256, read_json, stable_id, utc_now, write_json
 from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
 
 
-def _source_records(source_ids: list[str]) -> list[dict[str, Any]]:
+def _source_records(source_ids: list[str], harvest_context: dict[str, Any] | None = None) -> list[dict[str, Any]]:
     lookup = {source["id"]: source for source in SOURCE_REGISTRY}
-    return [lookup[source_id] for source_id in source_ids if source_id in lookup]
+    records: list[dict[str, Any]] = []
+    harvest_records = harvest_context.get("records", {}) if harvest_context else {}
+    for source_id in source_ids:
+        if source_id not in lookup:
+            continue
+        source = dict(lookup[source_id])
+        harvest_record = harvest_records.get(source_id)
+        if harvest_record:
+            source["harvest"] = {
+                "status": harvest_record["status"],
+                "adapterID": harvest_record["adapterID"],
+                "adapterVersion": harvest_record["adapterVersion"],
+                "fetchedAt": harvest_record["fetchedAt"],
+                "recordCount": len(harvest_record.get("records", [])),
+                "claimCount": len(harvest_record.get("claims", [])),
+                "rawArtifactCount": len(harvest_record.get("rawArtifacts", [])),
+                "rawArtifactHashes": [
+                    {
+                        "url": artifact["url"],
+                        "sha256": artifact["sha256"],
+                        "bytes": artifact["bytes"],
+                        "contentType": artifact["contentType"],
+                    }
+                    for artifact in harvest_record.get("rawArtifacts", [])
+                ],
+                "blockedReasons": harvest_record.get("blockedReasons", []),
+                "missingEnv": harvest_record.get("missingEnv", []),
+                "freshnessSignals": harvest_record.get("freshnessSignals", {}),
+            }
+        records.append(source)
+    return records
 
 
-def _pack_for_pathway(pathway: dict[str, Any], version_id: str, created_at: str) -> dict[str, Any]:
+def _pack_for_pathway(pathway: dict[str, Any], version_id: str, created_at: str, harvest_context: dict[str, Any] | None = None) -> dict[str, Any]:
     source_ids = pathway["sourceIDs"]
+    sources = _source_records(source_ids, harvest_context)
+    freshness_state = _pack_freshness_state(source_ids, harvest_context)
     return {
         "schemaVersion": 1,
         "kind": "ambitions.sourceAtlas.foundryPack",
         "id": pathway["id"].replace("pathway.", "pack."),
         "versionID": version_id,
         "displayName": pathway["title"],
-        "domains": sorted({pathway["domain"], *[domain for source in _source_records(source_ids) for domain in source["domains"]]}),
+        "domains": sorted({pathway["domain"], *[domain for source in sources for domain in source["domains"]]}),
         "metadata": {
             "createdAt": created_at,
             "createdBy": "Source Atlas Foundry",
-            "freshnessState": "candidate",
+            "freshnessState": freshness_state,
             "privacyBoundary": PRIVACY_BOUNDARY,
             "runtimeRole": "reference_enrichment_only",
             "localPersonalizationRequired": True,
             "sourceAtlasInvisibleByDefault": True,
             "lastKnownGood": None,
             "signatureStatus": "unsigned-local-foundry-v0",
+            "harvestRunID": harvest_context["manifest"]["runID"] if harvest_context else None,
         },
-        "sources": _source_records(source_ids),
+        "sources": sources,
         "claims": pathway["claims"],
         "requirements": pathway["requirements"],
         "pathways": [
@@ -69,13 +102,14 @@ def _pack_for_pathway(pathway: dict[str, Any], version_id: str, created_at: str)
     }
 
 
-def source_catalog_manifest(version_id: str, created_at: str) -> dict[str, Any]:
+def source_catalog_manifest(version_id: str, created_at: str, harvest_context: dict[str, Any] | None = None) -> dict[str, Any]:
     return {
         "schemaVersion": 1,
         "kind": "ambitions.sourceAtlas.sourceRegistry",
         "versionID": version_id,
         "createdAt": created_at,
-        "sources": SOURCE_REGISTRY,
+        "sources": _source_records([source["id"] for source in SOURCE_REGISTRY], harvest_context),
+        "harvestRun": _harvest_manifest_summary(harvest_context),
         "automationLanes": [
             {
                 "id": "static-law-watch",
@@ -108,8 +142,9 @@ def source_catalog_manifest(version_id: str, created_at: str) -> dict[str, Any]:
     }
 
 
-def compile_bundle(output_root: Path, version_id: str, channel: str = "staging") -> dict[str, Any]:
+def compile_bundle(output_root: Path, version_id: str, channel: str = "staging", harvest_root: Path | None = None) -> dict[str, Any]:
     created_at = utc_now()
+    harvest_context = _load_harvest_context(harvest_root) if harvest_root else None
     bundle_root = output_root / version_id
     packs_dir = bundle_root / "packs"
     registries_dir = bundle_root / "registries"
@@ -118,7 +153,7 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging")
     packs: list[dict[str, Any]] = []
     pack_entries: list[dict[str, Any]] = []
     for pathway in PATHWAY_SEEDS:
-        pack = _pack_for_pathway(pathway, version_id, created_at)
+        pack = _pack_for_pathway(pathway, version_id, created_at, harvest_context)
         pack_path = packs_dir / f"{pack['id']}.json"
         write_json(pack_path, pack)
         pack_sha = file_sha256(pack_path)
@@ -135,9 +170,31 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging")
         packs.append(pack)
         pack_entries.append(pack_entry)
 
-    source_catalog = source_catalog_manifest(version_id, created_at)
+    source_catalog = source_catalog_manifest(version_id, created_at, harvest_context)
     source_catalog_path = registries_dir / "source-registry.json"
     write_json(source_catalog_path, source_catalog)
+    registry_entries = [
+        {
+            "id": "source-registry",
+            "path": str(source_catalog_path.relative_to(bundle_root)),
+            "sha256": file_sha256(source_catalog_path),
+            "bytes": source_catalog_path.stat().st_size,
+        }
+    ]
+
+    harvest_summary_path: Path | None = None
+    if harvest_context:
+        harvest_summary = _harvest_bundle_summary(harvest_context)
+        harvest_summary_path = registries_dir / "harvest-summary.json"
+        write_json(harvest_summary_path, harvest_summary)
+        registry_entries.append(
+            {
+                "id": "harvest-summary",
+                "path": str(harvest_summary_path.relative_to(bundle_root)),
+                "sha256": file_sha256(harvest_summary_path),
+                "bytes": harvest_summary_path.stat().st_size,
+            }
+        )
 
     freshness_manifest = {
         "schemaVersion": 1,
@@ -152,9 +209,11 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging")
                 "freshnessCadence": source["freshnessCadence"],
                 "lastReviewed": source["lastReviewed"],
                 "authorityTier": source["authorityTier"],
+                "harvest": source.get("harvest"),
             }
-            for source in SOURCE_REGISTRY
+            for source in _source_records([source["id"] for source in SOURCE_REGISTRY], harvest_context)
         ],
+        "harvestRun": _harvest_manifest_summary(harvest_context),
         "privacyBoundary": PRIVACY_BOUNDARY,
         "nonClaims": NON_CLAIMS,
     }
@@ -168,14 +227,7 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging")
         "channel": channel,
         "createdAt": created_at,
         "packIndex": pack_entries,
-        "registryIndex": [
-            {
-                "id": "source-registry",
-                "path": str(source_catalog_path.relative_to(bundle_root)),
-                "sha256": file_sha256(source_catalog_path),
-                "bytes": source_catalog_path.stat().st_size,
-            }
-        ],
+        "registryIndex": registry_entries,
         "freshnessManifest": {
             "path": str(freshness_path.relative_to(bundle_root)),
             "sha256": file_sha256(freshness_path),
@@ -206,6 +258,17 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging")
                 "count": len(PATHWAY_SEEDS),
                 "sha256": stable_id("pathway_seeds", PATHWAY_SEEDS).split(".", 1)[1],
             },
+            *(
+                [
+                    {
+                        "id": f"harvest.{harvest_context['manifest']['runID']}",
+                        "count": harvest_context["manifest"]["sourceCount"],
+                        "sha256": file_sha256(harvest_context["manifestPath"]),
+                    }
+                ]
+                if harvest_context
+                else []
+            ),
         ],
         "outputs": [
             *pack_entries,
@@ -237,6 +300,7 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging")
         "manifestPath": str(manifest_path),
         "manifestSHA256": file_sha256(manifest_path),
         "receiptPath": str(receipt_path),
+        "harvestRunID": harvest_context["manifest"]["runID"] if harvest_context else None,
     }
 
 
@@ -246,3 +310,92 @@ def _claim_state_buckets(packs: list[dict[str, Any]]) -> list[dict[str, Any]]:
         for claim in pack["claims"]:
             buckets.setdefault(claim["freshness"], []).append(claim["id"])
     return [{"state": state, "claimIDs": sorted(ids)} for state, ids in sorted(buckets.items())]
+
+
+def _load_harvest_context(harvest_root: Path) -> dict[str, Any]:
+    manifest_path = harvest_root / "manifest.json"
+    if not manifest_path.exists():
+        raise FileNotFoundError(f"missing harvest manifest: {manifest_path}")
+    manifest = read_json(manifest_path)
+    records: dict[str, Any] = {}
+    for entry in manifest.get("entries", []):
+        normalized_path = harvest_root / entry.get("normalizedPath", "")
+        if normalized_path.exists():
+            records[entry["sourceID"]] = read_json(normalized_path)
+    return {
+        "root": harvest_root,
+        "manifestPath": manifest_path,
+        "manifest": manifest,
+        "records": records,
+    }
+
+
+def _pack_freshness_state(source_ids: list[str], harvest_context: dict[str, Any] | None) -> str:
+    if not harvest_context:
+        return "candidate"
+    records = harvest_context.get("records", {})
+    statuses = [records.get(source_id, {}).get("status") for source_id in source_ids]
+    if statuses and all(status == "harvested" for status in statuses):
+        return "harvested_candidate"
+    if any(status == "harvested" for status in statuses) and any(status in {None, "blocked"} for status in statuses):
+        return "partial_harvest_candidate"
+    if any(status == "blocked" for status in statuses):
+        return "blocked_harvest_candidate"
+    return "candidate"
+
+
+def _harvest_manifest_summary(harvest_context: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not harvest_context:
+        return None
+    manifest = harvest_context["manifest"]
+    return {
+        "runID": manifest["runID"],
+        "createdAt": manifest["createdAt"],
+        "adapterVersion": manifest["adapterVersion"],
+        "sourceCount": manifest["sourceCount"],
+        "harvestedCount": manifest["harvestedCount"],
+        "blockedCount": manifest["blockedCount"],
+        "privacyScan": manifest.get("privacyScan"),
+    }
+
+
+def _harvest_bundle_summary(harvest_context: dict[str, Any]) -> dict[str, Any]:
+    manifest = harvest_context["manifest"]
+    records = harvest_context["records"]
+    entries: list[dict[str, Any]] = []
+    for entry in manifest.get("entries", []):
+        record = records.get(entry["sourceID"], {})
+        entries.append(
+            {
+                "sourceID": entry["sourceID"],
+                "status": entry["status"],
+                "adapterID": record.get("adapterID"),
+                "adapterVersion": record.get("adapterVersion"),
+                "fetchedAt": record.get("fetchedAt"),
+                "recordCount": entry.get("recordCount", 0),
+                "claimCount": entry.get("claimCount", 0),
+                "normalizedSHA256": entry.get("normalizedSHA256"),
+                "rawArtifactHashes": [
+                    {
+                        "url": artifact["url"],
+                        "sha256": artifact["sha256"],
+                        "bytes": artifact["bytes"],
+                        "contentType": artifact["contentType"],
+                    }
+                    for artifact in record.get("rawArtifacts", [])
+                ],
+                "blockedReasons": record.get("blockedReasons", []),
+                "missingEnv": record.get("missingEnv", []),
+                "freshnessSignals": record.get("freshnessSignals", {}),
+            }
+        )
+    return {
+        "schemaVersion": 1,
+        "kind": "ambitions.sourceAtlas.harvestSummary",
+        "runID": manifest["runID"],
+        "createdAt": manifest["createdAt"],
+        "adapterVersion": manifest["adapterVersion"],
+        "entries": entries,
+        "privacyBoundary": PRIVACY_BOUNDARY,
+        "nonClaims": NON_CLAIMS,
+    }

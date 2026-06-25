@@ -90,9 +90,9 @@ Run the Foundry after candidate review:
 
 ```bash
 python3 tools/source-atlas/source-atlas-foundry.py doctor
-python3 tools/source-atlas/source-atlas-foundry.py compile-demo \
+python3 tools/source-atlas/source-atlas-foundry.py compile \
   --output-root output/source-atlas/foundry \
-  --version-id source-atlas-foundry-demo \
+  --version-id source-atlas-2026-06-25 \
   --channel staging
 ```
 

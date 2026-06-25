@@ -569,7 +569,7 @@ with tabs[9]:
     else:
         run_id = st.session_state.active_run_id
         run_dir = RUNS_BASE_DIR / run_id
-        bucket_name = "ambitions-source-atlas"
+        bucket_name = "ambitions-source-atlas-staging"
         
         # Upload Mode
         upload_mode = st.selectbox("Upload Mode", ["Dry-Run", "Live"], index=0)

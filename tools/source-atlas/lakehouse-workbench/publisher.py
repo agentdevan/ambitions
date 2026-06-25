@@ -32,7 +32,7 @@ def _content_type(path: Path) -> str:
         return "application/json; charset=utf-8"
     return "application/octet-stream"
 
-def generate_wrangler_commands(run_dir: Path, bucket_name: str = "ambitions-source-atlas") -> List[Dict[str, Any]]:
+def generate_wrangler_commands(run_dir: Path, bucket_name: str = "ambitions-source-atlas-staging") -> List[Dict[str, Any]]:
     """
     Generates validation-backed Wrangler command previews for candidate artifacts.
     """
@@ -59,6 +59,7 @@ def generate_wrangler_commands(run_dir: Path, bucket_name: str = "ambitions-sour
                 "object",
                 "put",
                 f"{bucket_name}/{remote_key}",
+                "--remote",
                 "--file",
                 str(local_path),
                 "--content-type",

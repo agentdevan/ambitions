@@ -778,12 +778,39 @@ private func sourceAtlasTools(context: RepoContext) -> [NativeTool] {
             try runSourceAtlasFoundry(context: context, ["doctor"])
         },
         NativeTool(
-            name: "source_atlas_foundry_compile_demo",
-            description: "Compile the current official-source seed pathways into a local versioned Foundry bundle.",
+            name: "source_atlas_foundry_harvest",
+            description: "Harvest official public/reference Source Atlas adapters into local snapshots and normalized records.",
             inputSchema: ToolSchemas.object([
-                "versionID": ToolSchemas.string("Version identifier, e.g. source-atlas-foundry-demo."),
+                "runID": ToolSchemas.string("Harvest run identifier."),
+                "outputRoot": ToolSchemas.string("Repo-relative output root. Defaults to output/source-atlas/harvest."),
+                "sources": ToolSchemas.stringArray("Optional Source Atlas source IDs. If omitted, all registry sources are harvested."),
+                "limit": ToolSchemas.integer("Optional per-source normalized record limit. Defaults to 25."),
+            ], required: ["runID"]),
+            readOnly: false
+        ) { args in
+            let runID = try requiredString(args, "runID")
+            let outputRoot = args["outputRoot"]?.stringValue ?? "output/source-atlas/harvest"
+            let outputURL = try context.resolve(outputRoot)
+            let limit = args["limit"]?.intValue ?? 25
+            var command = [
+                "harvest",
+                "--output-root", outputURL.path,
+                "--run-id", runID,
+                "--limit", String(limit),
+            ]
+            for source in stringArray(args["sources"]) {
+                command.append(contentsOf: ["--source", source])
+            }
+            return try runSourceAtlasFoundry(context: context, command)
+        },
+        NativeTool(
+            name: "source_atlas_foundry_compile_bundle",
+            description: "Compile official-source pathways into a local versioned Foundry bundle with optional harvest provenance.",
+            inputSchema: ToolSchemas.object([
+                "versionID": ToolSchemas.string("Version identifier, e.g. source-atlas-2026-06-25."),
                 "outputRoot": ToolSchemas.string("Repo-relative output root. Defaults to output/source-atlas/foundry."),
                 "channel": ToolSchemas.string("Optional channel. Defaults to staging."),
+                "harvestRoot": ToolSchemas.string("Optional repo-relative harvest run root containing manifest.json."),
             ], required: ["versionID"]),
             readOnly: false
         ) { args in
@@ -791,12 +818,17 @@ private func sourceAtlasTools(context: RepoContext) -> [NativeTool] {
             let outputRoot = args["outputRoot"]?.stringValue ?? "output/source-atlas/foundry"
             let channel = args["channel"]?.stringValue ?? "staging"
             let outputURL = try context.resolve(outputRoot)
-            return try runSourceAtlasFoundry(context: context, [
-                "compile-demo",
+            var command = [
+                "compile",
                 "--output-root", outputURL.path,
                 "--version-id", versionID,
                 "--channel", channel,
-            ])
+            ]
+            if let harvestRoot = args["harvestRoot"]?.stringValue, !harvestRoot.isEmpty {
+                let harvestURL = try context.resolve(harvestRoot)
+                command.append(contentsOf: ["--harvest-root", harvestURL.path])
+            }
+            return try runSourceAtlasFoundry(context: context, command)
         },
         NativeTool(
             name: "source_atlas_foundry_validate_bundle",

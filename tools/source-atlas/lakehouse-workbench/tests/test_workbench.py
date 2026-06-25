@@ -198,11 +198,11 @@ def test_compile_foundry_candidate_artifacts_emits_first_class_handoff(tmp_path:
     assert "candidate_only" in foundry_handoff.read_text(encoding="utf-8")
     assert "Prepare for astronaut candidacy" in candidate_index.read_text(encoding="utf-8")
 
-    commands = generate_wrangler_commands(run_dir, "ambitions-source-atlas")
+    commands = generate_wrangler_commands(run_dir, "ambitions-source-atlas-staging")
     assert commands
     assert all(isinstance(item["args"], list) for item in commands)
     assert any("source-atlas/v1/candidates/run-foundry-candidate" in item["remote_key"] for item in commands)
     assert not json.dumps(commands).count("CLOUDFLARE_R2_SECRET_ACCESS_KEY")
 
-    verification = verify_remote_integrity(commands, run_dir, "ambitions-source-atlas", mock=True)
+    verification = verify_remote_integrity(commands, run_dir, "ambitions-source-atlas-staging", mock=True)
     assert verification["success"] is True

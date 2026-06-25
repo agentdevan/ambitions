@@ -18,7 +18,11 @@ CONTENT_TYPES = {
 
 
 def _artifact_entries(bundle_root: Path) -> list[Path]:
-    return sorted(path for path in bundle_root.rglob("*") if path.is_file() and path.suffix in CONTENT_TYPES)
+    return sorted(
+        path
+        for path in bundle_root.rglob("*")
+        if path.is_file() and path.suffix in CONTENT_TYPES and path.name not in {"r2-plan.json"}
+    )
 
 
 def build_r2_plan(bundle_root: Path, bucket: str, prefix: str, channel: str = "staging") -> dict[str, Any]:
@@ -48,6 +52,7 @@ def build_r2_plan(bundle_root: Path, bucket: str, prefix: str, channel: str = "s
                     "object",
                     "put",
                     f"{bucket}/{object_key}",
+                    "--remote",
                     "--file",
                     str(path),
                     "--content-type",
@@ -76,6 +81,7 @@ def build_r2_plan(bundle_root: Path, bucket: str, prefix: str, channel: str = "s
                 "object",
                 "put",
                 f"{bucket}/{channel_key}",
+                "--remote",
                 "--file",
                 str(channel_manifest),
                 "--content-type",
