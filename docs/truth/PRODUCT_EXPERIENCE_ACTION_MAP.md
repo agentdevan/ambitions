@@ -3,8 +3,8 @@
 Status: Active actionability map for `PRODUCT_EXPERIENCE_CANON.md`  
 Scope: Product-experience canon operationalization, source support inventory, implementation sequencing, and future proof gates  
 Owner posture: Planning and QA bridge, not implementation proof
-Last audited commit: f51576616f06c3127c2add5f3a94f284e178b6ba
-Last audited date: 2026-06-24
+Last audited commit: ac398ccdc175f65b70804dd47ae97803922d7a85
+Last audited date: 2026-06-25
 Status owner: Product Experience Canon operationalization
 Update required when: scenario gate status changes, implementation train claims Green/Yellow, Life Capital/pathing/Future Steps/proof/review/onboarding/automation work lands, or evidence paths change
 
@@ -43,7 +43,7 @@ Future work must treat the canon as behavior law, then prove each claim through 
 | Horizon | Action area | Product target | Current posture |
 |---|---|---|---|
 | Foundation Requirement | Reminders, Steps, recurring Steps, quick Capture, calendar-grade Time, search, notifications, completion, missed Step recovery, local persistence, offline core | Make Ambitions useful as a standalone personal planning product | Partial source/runtime support exists; P1A adds focused local Step lifecycle proof, P1A.1 adds rendered Step detail/recovery controls proof, P1A.2 adds normal Day Rail Step row tap-to-complete/move/recovery proof, P1B adds recurring Step runtime/persistence proof, P1C adds scoped Capture-to-Step local-save/runtime persistence proof, P1D/P1E/P1E.1 add scoped Time source/runtime/rendered/reload proof, and P1F-P1I add scoped local Search, private notification request, missed recovery reload, and source/runtime end-to-end proof; full rendered E2E, accessibility sweep, network-disabled device workflow, visual, and release proof are not established |
-| Core Runtime Requirement | Full path generation, full-path scheduling, Future Steps, priority, capacity fit, protected seven-day placement, simulation, proof preservation, Life Capital, passive learning, Source Atlas inspection | Make Ambitions behave like a Personal Life OS rather than a task/calendar app | Several model/projection pieces exist; full integrated behavior is missing or unproven |
+| Core Runtime Requirement | Full path generation, full-path scheduling, Future Steps, priority, capacity fit, protected seven-day placement, simulation, proof preservation, Life Capital, passive learning, Source Atlas inspection | Make Ambitions behave like a Personal Life OS rather than a task/calendar app | Several model/projection pieces exist; P2A adds scoped source/runtime proof for protected seven-day placement policy and command preflight; full integrated behavior is still missing or unproven |
 | Moat Requirement | Personalized paths per user, Life Capital path shortening, proof/progress transfer, continuous Future Step adjustment, reviews updating future paths, Source Atlas + local runtime composition | Make every user’s Ambitions meaningfully different through local history and context | Mostly future implementation target; do not claim Green |
 | Future Expansion | Shared goals, LinkedIn import, third-party data, richer packs, collaborative proof, household planning, user-owned sync | Approved direction only | Not active scope; requires separate canon or boundary |
 | Reserved / Not Yet Approved | Hosted private life graph, cloud AI core planning, social feeds, public profiles, productivity scoring, XP/streak pressure, Source Atlas marketplace browsing, third-party behavioral analytics SDK | Must not be implemented under current canon | Guardrail only |
@@ -94,6 +94,7 @@ These are source-present or doc-present supports, not full product proof:
 | Source Atlas value models, pack validation, runtime boundary concepts, capability graphs | `Native/Ambitions/Core/Domain/SourceAtlasPackModels+06-SourceAtlasPack.swift`, `Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift`, `Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeReplayTests.swift` |
 | Proof/receipt model and UI affordances | `Native/Ambitions/Projection/Mutations/MutationProof.swift`, `Native/Ambitions/Projection/Mutations/MutationReceipt.swift`, `Native/Ambitions/DesignSystem/ProductObjects/ProofStitchView.swift`, `Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift` |
 | Time placement, Life Calendar rows, review-before-change posture | `Native/Ambitions/Projection/SurfaceLenses/TimePlacementCalendarContracts.swift`, `Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldView.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldReflow.swift` |
+| Protected seven-day placement policy and command preflight | `Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift`, `Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift`, `Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift`, `Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift`, `docs/qa/p2-core-runtime-inventory.md` |
 | Local search over goals, captures, proof, feedback, teaching, event history, life context | `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift`, `Native/Ambitions/Projection/OverlayLenses/SearchLens.swift`, `docs/qa/remediation/dossiers/AMB-1196-search-find-act-inspect.md` |
 | You local learning, memory controls, source review, reviews | `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLearningControlsProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextRuntimeProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceSourceAtlasPrimaryProjection.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceReviewProjection.swift` |
 | Local persistence source and repository wiring are documented as source-present | `docs/truth/IMPLEMENTATION_TRUTH.md`, `Native/Ambitions/Core/Persistence/`, `Native/Ambitions/App/AppContainerFactory.swift` |
@@ -109,7 +110,7 @@ These are source-present or doc-present supports, not full product proof:
 | Source Atlas composition | Pack/value models and bridge tests exist | R2 freshness, privacy boundary release proof, invisible-by-default UX, and local composition with private context are not release-proven |
 | Local learning | You learning controls and personalization factor rows exist | Broad Life Capital Patterns and passive learning shaping path/schedule behavior are not fully proven |
 | Proof and receipts | Proof/receipt types and UI affordances exist | Proof-to-Life-Capital, progress transfer, and no-false-completion pivots are not fully proven |
-| Time adjustment | Reflow decision projection asks for review before changes | Protected seven-day placement guard and automatic future-only adjustment are not fully proven |
+| Time adjustment | Reflow decision projection asks for review before changes; P2A adds deterministic protected seven-day placement policy, command preflight, automatic near-term block, future automation review, Move it user-action handling, and local-only boundary tests | Rendered approval/review UI, receipt persistence, accessibility proof, device/no-network proof, and full scheduling architecture centralization are not proven |
 | Reviews | You reviews projection exists | Week/Month/Year user-launched review shell, export, and approved future path updates are not fully proven |
 | Search | Local search projection exists | Search across Life Capital and Future Steps specifically is not proven |
 | Notifications | Notification authorization copy exists in You; local notification planner and tests cover private generic copy | Device lock-screen delivery, permission/settings UX, tap routing, and release evidence are not proven |
@@ -123,7 +124,7 @@ These are source-present or doc-present supports, not full product proof:
 - Full-path scheduling that places near-term Steps and flexible Future Steps across time windows.
 - Future Step visual model, edit behavior, far-future path-impact preview, and search support.
 - Capacity simulation with `This does not fit yet`, Make room, Lower pace, Change deadline, Pause another goal, and Add with conflict flows.
-- Protected seven-day placement rule as a deterministic runtime guard.
+- Rendered approval/review UI and full scheduling centralization for protected seven-day placement beyond the P2A deterministic runtime guard.
 - Progress transfer on goal pivot with `You are not starting from zero` and no false completion.
 - Onboarding chapters, immediate save behavior, weighted progress, Setup & Personalization persistence, and first path preview.
 - Week / Month / Year in Review with export to Markdown/PDF/share sheet and user-approved operational changes.

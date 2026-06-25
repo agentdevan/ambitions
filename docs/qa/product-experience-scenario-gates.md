@@ -3,8 +3,8 @@
 Status: Active QA index for `docs/truth/PRODUCT_EXPERIENCE_CANON.md`  
 Scope: Scenario gates from the official v1 Product Experience Canon  
 Owner posture: QA planning and evidence index, not implementation proof
-Last audited commit: f51576616f06c3127c2add5f3a94f284e178b6ba
-Last audited date: 2026-06-24
+Last audited commit: ac398ccdc175f65b70804dd47ae97803922d7a85
+Last audited date: 2026-06-25
 
 Machine-readable companion: `docs/qa/product-experience-scenario-gates.yaml`.
 
@@ -32,13 +32,13 @@ Statuses mean:
 
 | Gate ID | User-visible behavior | Current status | Evidence path if found | Required future proof |
 |---|---|---|---|---|
-| `foundation_reminder_can_be_created_completed_and_rescheduled` | User can create, complete, and reschedule a reminder-like Step. | Partial | `Native/Ambitions/Core/Domain/Planning/`, `Native/Ambitions/Projection/Commands/CommandRouter.swift` | Focused create/complete/reschedule test, rendered UI proof, persistence proof |
+| `foundation_reminder_can_be_created_completed_and_rescheduled` | User can create, complete, and reschedule a reminder-like Step. | Partial | `Native/Ambitions/Core/Domain/Planning/`, `Native/Ambitions/Projection/Commands/CommandRouter.swift`, `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift`, `Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift` | Full rendered reminder UI proof, accessibility proof, broader persistence/relaunch matrix |
 | `foundation_recurring_step_repeats_and_can_be_paused` | Recurring Steps repeat and can be paused. | Partial | `Native/Ambitions/Core/Domain/Planning/PlanningDomainModels.swift`, `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`, `Native/AmbitionsTests/Runtime/RecurringStepLifecycleServiceTests.swift` | Rendered recurring Step UI test, accessibility proof, device/release proof, notification delivery proof if claimed |
 | `foundation_quick_capture_saves_without_network` | Quick Capture saves locally without network. | Partial | `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, `Native/Ambitions/Core/Persistence/`, `Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift` | Rendered Capture save proof, network-disabled device workflow, release evidence |
 | `foundation_calendar_planning_shows_fixed_points_and_open_windows` | Time shows fixed points and open windows. | Partial | `Native/Ambitions/Projection/SurfaceLenses/TimePlacementCalendarContracts.swift`, `Native/Ambitions/DesignSystem/ProductObjects/LifeShapeFieldVisualField.swift` | Rendered Time proof with fixed/open windows and accessibility labels |
 | `foundation_search_finds_goals_steps_proof_life_capital_and_settings` | Search finds goals, Steps, proof, Life Capital, and settings. | Partial | `Native/Ambitions/Core/Runtime/MemoryLensService.swift`, `Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceEverythingSearchProjection.swift`, `Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift` | First-class Life Capital and Future Steps search proof, rendered route/accessibility proof |
 | `foundation_notification_copy_is_private_by_default` | Notifications use private lock-screen copy by default. | Partial | `Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift`, `Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift`, `Native/AmbitionsTests/App/NotificationResponsePayloadParserTests.swift` | Device lock-screen proof, permission settings proof, delivered notification screenshot, end-to-end app tap-routing proof |
-| `foundation_offline_core_runs_without_account` | Core app runs without account or network. | Partial | `docs/truth/IMPLEMENTATION_TRUTH.md`, `Native/Ambitions/Core/Persistence/`, `Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift`, `Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift` | Network-disabled device workflow, no-account launch matrix, release evidence |
+| `foundation_offline_core_runs_without_account` | Core app runs without account or network. | Partial | `docs/truth/IMPLEMENTATION_TRUTH.md`, `Native/Ambitions/Core/Persistence/`, `Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift`, `Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift`, `Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift`, `Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift` | Network-disabled device workflow, no-account launch matrix, release evidence |
 | `foundation_completion_creates_visible_closure` | Completing work creates visible closure. | Partial | `Native/Ambitions/Projection/Mutations/ClosureStageMutation.swift`, `Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift`, `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift` | Broader completion UI proof, receipt/proof assertion across rendered paths, accessibility proof |
 | `foundation_missed_step_asks_what_changed` | Missed Step asks what changed. | Partial | `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`, `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift` | Rendered missed-step recovery options, screenshot/manual review, accessibility and device proof |
 
@@ -71,9 +71,9 @@ Statuses mean:
 
 | Gate ID | User-visible behavior | Current status | Evidence path if found | Required future proof |
 |---|---|---|---|---|
-| `automatic_future_adjustment_occurs_only_where_allowed` | Automatic adjustment follows automation permissions. | Missing | None found | Automation policy tests |
-| `automatic_adjustment_does_not_move_next_seven_days_silently` | Next seven days are not silently moved. | Missing | None found | Protected-window guard tests |
-| `user_caused_adjustment_shows_impact_summary` | User-caused adjustment shows impact summary. | Partial | `Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift` | User-caused change UI and receipt proof |
+| `automatic_future_adjustment_occurs_only_where_allowed` | Automatic adjustment follows automation permissions. | Partial | `Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift`, `Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift` | Full automation settings policy, rendered review UI, receipt/relaunch proof |
+| `automatic_adjustment_does_not_move_next_seven_days_silently` | Next seven days are not silently moved. | Partial | `Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift`, `Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift`, `Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift`, `Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift` | Rendered approval/review UI, accessibility proof, device/no-network proof |
+| `user_caused_adjustment_shows_impact_summary` | User-caused adjustment shows impact summary. | Partial | `Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift`, `Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift`, `Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift` | User-caused change UI, receipt proof, accessibility proof |
 | `life_capital_change_shows_affected_paths` | Life Capital edit shows affected paths. | Missing | None found for Life Capital | Life Capital edit/resimulation proof |
 | `deadline_change_resimulates_path` | Deadline change resimulates path. | Partial | `Native/AmbitionsTests/Runtime/StepReallocationRuntimeBridgeTests.swift` | End-to-end deadline change test |
 | `missed_step_asks_what_changed` | Missed Step asks what changed. | Partial | `Native/Ambitions/DesignSystem/ProductObjects/TodayStartHereSurface.swift` | Missed-step interaction proof |
@@ -183,5 +183,5 @@ Statuses mean:
 | `automation_configurable_per_life_area` | Automation is configurable per life area. | Missing | None found | Life-area setting proof |
 | `automation_configurable_per_goal` | Automation is configurable per goal. | Missing | None found | Goal-level setting proof |
 | `automation_never_forces` | Automation never forces. | Partial | `Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md` | Policy tests and destructive-action proof |
-| `automation_respects_protected_near_term_placement` | Automation respects protected near-term placement. | Missing | None found | Seven-day guard test |
+| `automation_respects_protected_near_term_placement` | Automation respects protected near-term placement. | Partial | `Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift`, `Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift`, `Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift`, `Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift` | Rendered review UI, receipt persistence, accessibility proof, device/no-network proof |
 | `automation_shows_user_caused_impact` | User-caused automation impact is visible. | Partial | `Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift` | User-caused impact UI proof |

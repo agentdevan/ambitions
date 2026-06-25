@@ -79,11 +79,15 @@ gates:
     evidence_paths:
       - "Native/Ambitions/Core/Domain/Planning/"
       - "Native/Ambitions/Projection/Commands/CommandRouter.swift"
-    required_future_proof: "Focused create/complete/reschedule test, rendered UI proof, persistence proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
+    required_future_proof: "Full rendered reminder UI proof, accessibility proof, broader persistence/relaunch matrix"
+    last_verified_commit: "ac398ccdc175f65b70804dd47ae97803922d7a85"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
   - id: "foundation_recurring_step_repeats_and_can_be_paused"
     group: "Foundation"
     user_visible_behavior: "Recurring Steps repeat and can be paused."
@@ -160,15 +164,18 @@ gates:
     evidence_paths:
       - "docs/truth/IMPLEMENTATION_TRUTH.md"
       - "Native/Ambitions/Core/Persistence/"
+      - "Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift"
       - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
       - "Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift"
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
     required_future_proof: "Network-disabled device workflow, no-account launch matrix, release evidence"
-    last_verified_commit: "f51576616f06c3127c2add5f3a94f284e178b6ba"
+    last_verified_commit: "ac398ccdc175f65b70804dd47ae97803922d7a85"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Foundation planning behavior"
     tests:
       - "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
       - "Native/AmbitionsTests/Time/P1DTimeFoundationTests.swift"
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
   - id: "foundation_completion_creates_visible_closure"
     group: "Foundation"
     user_visible_behavior: "Completing work creates visible closure."
@@ -360,34 +367,46 @@ gates:
   - id: "automatic_future_adjustment_occurs_only_where_allowed"
     group: "Adjustment"
     user_visible_behavior: "Automatic adjustment follows automation permissions."
-    current_status: "Missing"
-    evidence_paths: []
-    required_future_proof: "Automation policy tests"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+    current_status: "Partial"
+    evidence_paths:
+      - "Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift"
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
+    required_future_proof: "Full automation settings policy, rendered review UI, receipt/relaunch proof"
+    last_verified_commit: "ac398ccdc175f65b70804dd47ae97803922d7a85"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Time / adjustment / receipts"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
   - id: "automatic_adjustment_does_not_move_next_seven_days_silently"
     group: "Adjustment"
     user_visible_behavior: "Next seven days are not silently moved."
-    current_status: "Missing"
-    evidence_paths: []
-    required_future_proof: "Protected-window guard tests"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+    current_status: "Partial"
+    evidence_paths:
+      - "Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift"
+      - "Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift"
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
+      - "Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift"
+    required_future_proof: "Rendered approval/review UI, accessibility proof, device/no-network proof"
+    last_verified_commit: "ac398ccdc175f65b70804dd47ae97803922d7a85"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Time / adjustment / receipts"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
+      - "Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift"
   - id: "user_caused_adjustment_shows_impact_summary"
     group: "Adjustment"
     user_visible_behavior: "User-caused adjustment shows impact summary."
     current_status: "Partial"
     evidence_paths:
       - "Native/Ambitions/Projection/SurfaceLenses/TimeReflowDecisionProjector.swift"
-    required_future_proof: "User-caused change UI and receipt proof"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+      - "Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift"
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
+    required_future_proof: "User-caused change UI, receipt proof, accessibility proof"
+    last_verified_commit: "ac398ccdc175f65b70804dd47ae97803922d7a85"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Time / adjustment / receipts"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
   - id: "life_capital_change_shows_affected_paths"
     group: "Adjustment"
     user_visible_behavior: "Life Capital edit shows affected paths."
@@ -1065,13 +1084,19 @@ gates:
   - id: "automation_respects_protected_near_term_placement"
     group: "Automation"
     user_visible_behavior: "Automation respects protected near-term placement."
-    current_status: "Missing"
-    evidence_paths: []
-    required_future_proof: "Seven-day guard test"
-    last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
+    current_status: "Partial"
+    evidence_paths:
+      - "Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift"
+      - "Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift"
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
+      - "Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift"
+    required_future_proof: "Rendered review UI, receipt persistence, accessibility proof, device/no-network proof"
+    last_verified_commit: "ac398ccdc175f65b70804dd47ae97803922d7a85"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"
     owner_area: "Automation policy"
-    tests: []
+    tests:
+      - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
+      - "Native/AmbitionsTests/Services/PolicyGuardedCommandExecutorTests.swift"
   - id: "automation_shows_user_caused_impact"
     group: "Automation"
     user_visible_behavior: "User-caused automation impact is visible."
