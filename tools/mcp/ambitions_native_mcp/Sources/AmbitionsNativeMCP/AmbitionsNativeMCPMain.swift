@@ -18,6 +18,7 @@ struct AmbitionsNativeMCPMain {
             case .swiftSemantic: "swift_sourcekit_status"
             case .instruments: "instruments_xctrace_status"
             case .appleDocs: "apple_source_atlas_index"
+            case .sourceAtlas: "source_atlas_pipeline_status"
             }
             let output = try registry.call(name: selfTestTool, arguments: [:])
             print(output)

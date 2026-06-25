@@ -10,6 +10,7 @@ This package hosts Ambitions-native read-only MCP toolsets through the official 
 - `swift-semantic`
 - `instruments`
 - `apple-docs`
+- `source-atlas`
 
 Each Codex MCP server in `~/.codex/config.toml` points at the same executable with a different `--toolset` value.
 
@@ -17,7 +18,7 @@ Each Codex MCP server in `~/.codex/config.toml` points at the same executable wi
 
 ```bash
 swift test --package-path tools/mcp/ambitions_native_mcp
-for t in repo visual accessibility swift-semantic instruments apple-docs; do
+for t in repo visual accessibility swift-semantic instruments apple-docs source-atlas; do
   swift run --package-path tools/mcp/ambitions_native_mcp ambitions-native-mcp --toolset "$t" --self-test
 done
 ```

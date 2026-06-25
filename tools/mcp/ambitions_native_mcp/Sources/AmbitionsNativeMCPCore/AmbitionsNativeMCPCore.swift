@@ -1,4 +1,5 @@
 import Foundation
+import CryptoKit
 import MCP
 
 public enum Toolset: String, CaseIterable, Sendable {
@@ -9,6 +10,7 @@ public enum Toolset: String, CaseIterable, Sendable {
     case swiftSemantic = "swift-semantic"
     case instruments
     case appleDocs = "apple-docs"
+    case sourceAtlas = "source-atlas"
 
     public init(arguments: [String]) {
         if let index = arguments.firstIndex(of: "--toolset"),
@@ -95,7 +97,7 @@ public struct RepoContext: Sendable {
         return try String(contentsOf: url, encoding: .utf8)
     }
 
-    public func safeListFiles(roots: [String], extensions allowedExtensions: Set<String>) -> [String] {
+    public func safeListFiles(roots: [String], extensions allowedExtensions: Set<String>, skipGenerated: Bool = true) -> [String] {
         let fileManager = FileManager.default
         var files: [String] = []
         for root in roots {
@@ -110,7 +112,7 @@ public struct RepoContext: Sendable {
 
             for case let url as URL in enumerator {
                 let relative = relativePath(url)
-                if shouldSkip(relative) {
+                if skipGenerated && shouldSkip(relative) {
                     continue
                 }
                 guard allowedExtensions.contains(url.pathExtension.lowercased()) else {
@@ -266,6 +268,7 @@ public final class ToolRegistry: @unchecked Sendable {
         append(.swiftSemantic, swiftSemanticTools(context: context))
         append(.instruments, instrumentsTools(context: context))
         append(.appleDocs, appleDocsTools(context: context))
+        append(.sourceAtlas, sourceAtlasTools(context: context))
         return selected
     }
 }
@@ -733,6 +736,334 @@ private func appleDocsTools(context: RepoContext) -> [NativeTool] {
     ]
 }
 
+private func sourceAtlasTools(context: RepoContext) -> [NativeTool] {
+    [
+        NativeTool(
+            name: "source_atlas_pipeline_status",
+            description: "Inspect Source Atlas pipeline scripts, local atlas docs, and public/reference-pack boundaries."
+        ) { _ in
+            let scripts = [
+                "tools/source-atlas/ambitions-pack-crypto.py",
+                "tools/source-atlas/ambitions-pack-diff.py",
+                "tools/source-atlas/ambitions-freshness-broker.py",
+                "tools/source-atlas/coverage.py",
+                "tools/source-atlas/lakehouse-workbench/publisher.py",
+            ]
+            return jsonString(.object([
+                "toolset": .string("source-atlas"),
+                "scripts": .array(scripts.map { path in
+                    .object([
+                        "path": .string(path),
+                        "exists": .bool(context.exists(path)),
+                    ])
+                }),
+                "atlasDoc": .object([
+                    "path": .string("docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md"),
+                    "exists": .bool(context.exists("docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md")),
+                ]),
+                "privacyBoundary": .string("R2 is public/reference/freshness infrastructure only; no goals, captures, receipts, personalization, calendar data, or private life graph payloads."),
+                "defaultOutputRoot": .string("output/source-atlas"),
+            ]))
+        },
+        NativeTool(
+            name: "source_atlas_versioned_manifest_create",
+            description: "Create a versioned Source Atlas release manifest with pack entries, hashes, freshness metadata, and non-claim boundaries.",
+            inputSchema: ToolSchemas.object([
+                "versionID": ToolSchemas.string("Version identifier, e.g. source-atlas-2026-06-24."),
+                "outputPath": ToolSchemas.string("Repo-relative manifest JSON output path."),
+                "packPaths": ToolSchemas.stringArray("Repo-relative pack JSON paths to include."),
+                "channel": ToolSchemas.string("Optional channel, e.g. local, staging, public-r2."),
+            ], required: ["versionID", "outputPath", "packPaths"]),
+            readOnly: false
+        ) { args in
+            let versionID = try requiredString(args, "versionID")
+            let outputPath = try requiredString(args, "outputPath")
+            let channel = args["channel"]?.stringValue ?? "local"
+            let packPaths = stringArray(args["packPaths"])
+            guard !packPaths.isEmpty else {
+                throw ToolFailure.invalid("packPaths must include at least one pack")
+            }
+            let entries = try packPaths.map { packPath -> Value in
+                let url = try context.resolve(packPath)
+                let pack = try decodeJSONValue(at: url)
+                let id = pack.objectValue?["id"]?.stringValue ?? URL(fileURLWithPath: packPath).deletingPathExtension().lastPathComponent
+                return .object([
+                    "packID": .string(id),
+                    "path": .string(context.relativePath(url)),
+                    "sha256": .string(try sha256(url)),
+                    "bytes": .int(fileSize(url)),
+                    "claimCount": .int(pack.objectValue?["claims"]?.arrayValue?.count ?? 0),
+                    "sourceCount": .int(pack.objectValue?["sources"]?.arrayValue?.count ?? 0),
+                    "freshnessState": pack.objectValue?["metadata"]?.objectValue?["freshnessState"] ?? .string("unknown"),
+                ])
+            }
+            let manifest: Value = .object([
+                "schemaVersion": .int(1),
+                "kind": .string("ambitions.sourceAtlas.versionedManifest"),
+                "versionID": .string(versionID),
+                "channel": .string(channel),
+                "createdAt": .string(isoNow()),
+                "packIndex": .array(entries),
+                "privacyBoundary": .string("public/reference/freshness only; no private life graph or user data"),
+                "nonClaims": .array(sourceAtlasNonClaims.map { .string($0) }),
+            ])
+            let outputURL = try context.resolve(outputPath)
+            try writeJSONValue(manifest, to: outputURL)
+            return jsonString(.object([
+                "wrote": .string(context.relativePath(outputURL)),
+                "packCount": .int(entries.count),
+                "sha256": .string(try sha256(outputURL)),
+            ]))
+        },
+        NativeTool(
+            name: "source_atlas_pack_create",
+            description: "Create a candidate Source Atlas reference pack from public/reference source paths or URLs.",
+            inputSchema: ToolSchemas.object([
+                "packID": ToolSchemas.string("Stable pack ID."),
+                "versionID": ToolSchemas.string("Pack version ID."),
+                "displayName": ToolSchemas.string("Human-readable pack name."),
+                "outputPath": ToolSchemas.string("Repo-relative pack JSON output path."),
+                "sourcePaths": ToolSchemas.stringArray("Repo-relative public/reference input files."),
+                "sourceURLs": ToolSchemas.stringArray("Public/reference URLs."),
+                "domains": ToolSchemas.stringArray("Optional domains."),
+            ], required: ["packID", "versionID", "displayName", "outputPath"]),
+            readOnly: false,
+            openWorld: true
+        ) { args in
+            let packID = try requiredString(args, "packID")
+            let versionID = try requiredString(args, "versionID")
+            let displayName = try requiredString(args, "displayName")
+            let outputPath = try requiredString(args, "outputPath")
+            let sourcePaths = stringArray(args["sourcePaths"])
+            let sourceURLs = stringArray(args["sourceURLs"])
+            let domains = stringArray(args["domains"])
+            guard !sourcePaths.isEmpty || !sourceURLs.isEmpty else {
+                throw ToolFailure.invalid("sourcePaths or sourceURLs must include at least one public/reference source")
+            }
+            let sourceEntries = try sourceAtlasSourceEntries(context: context, sourcePaths: sourcePaths, sourceURLs: sourceURLs)
+            let claims = sourceEntries.enumerated().map { index, source -> Value in
+                let sourceID = source.objectValue?["id"]?.stringValue ?? "source-\(index + 1)"
+                return .object([
+                    "id": .string("\(packID).claim.\(index + 1)"),
+                    "text": .string("Candidate claim requires official review before runtime use."),
+                    "state": .string("source_needed"),
+                    "freshness": .string("unknown"),
+                    "sourceIDs": .array([.string(sourceID)]),
+                ])
+            }
+            let pack: Value = .object([
+                "schemaVersion": .int(1),
+                "kind": .string("ambitions.sourceAtlas.referencePack"),
+                "id": .string(packID),
+                "version": .string(versionID),
+                "displayName": .string(displayName),
+                "domains": .array(domains.map { .string($0) }),
+                "metadata": .object([
+                    "createdAt": .string(isoNow()),
+                    "createdBy": .string("ambitionsSourceAtlas MCP"),
+                    "freshnessState": .string("candidate"),
+                    "privacyBoundary": .string("public/reference/freshness only"),
+                    "last_known_good_pack": .string("none"),
+                    "last_known_good_hash": .string("none"),
+                ]),
+                "sources": .array(sourceEntries),
+                "claims": .array(claims),
+                "requirements": .array([]),
+                "nonClaims": .array(sourceAtlasNonClaims.map { .string($0) }),
+            ])
+            let outputURL = try context.resolve(outputPath)
+            try writeJSONValue(pack, to: outputURL)
+            return jsonString(.object([
+                "wrote": .string(context.relativePath(outputURL)),
+                "packID": .string(packID),
+                "sourceCount": .int(sourceEntries.count),
+                "claimCount": .int(claims.count),
+                "sha256": .string(try sha256(outputURL)),
+            ]))
+        },
+        NativeTool(
+            name: "source_atlas_pack_validate",
+            description: "Validate a candidate Source Atlas pack for schema, privacy boundary, hash, revocation, and last-known-good posture.",
+            inputSchema: ToolSchemas.object([
+                "packPath": ToolSchemas.string("Repo-relative pack JSON path."),
+                "expectedSHA256": ToolSchemas.string("Optional expected SHA-256."),
+                "revocationListPath": ToolSchemas.string("Optional repo-relative revocation JSON path."),
+            ], required: ["packPath"])
+        ) { args in
+            let packPath = try requiredString(args, "packPath")
+            let packURL = try context.resolve(packPath)
+            let pack = try decodeJSONValue(at: packURL)
+            let schemaFindings = sourceAtlasPackSchemaFindings(pack)
+            let privacyFindings = try sourceAtlasPrivacyFindings(context: context, paths: [packPath])
+            let actualHash = try sha256(packURL)
+            let expected = args["expectedSHA256"]?.stringValue
+            var revocationStatus = "not_checked"
+            if let revocationPath = args["revocationListPath"]?.stringValue, !revocationPath.isEmpty {
+                revocationStatus = try sourceAtlasRevocationStatus(context: context, pack: pack, revocationPath: revocationPath)
+            }
+            return jsonString(.object([
+                "packPath": .string(context.relativePath(packURL)),
+                "valid": .bool(schemaFindings.isEmpty && privacyFindings.isEmpty && (expected == nil || expected == actualHash) && revocationStatus != "revoked"),
+                "sha256": .string(actualHash),
+                "expectedHashMatches": .bool(expected == nil || expected == actualHash),
+                "schemaFindings": .array(schemaFindings.map { .string($0) }),
+                "privacyFindings": .array(privacyFindings.map { .string($0) }),
+                "revocationStatus": .string(revocationStatus),
+                "nonClaims": .array(sourceAtlasNonClaims.map { .string($0) }),
+            ]))
+        },
+        NativeTool(
+            name: "source_atlas_freshness_diff",
+            description: "Run the existing pack diff tool for old/new pack freshness and claim-impact changes.",
+            inputSchema: ToolSchemas.object([
+                "oldPackPath": ToolSchemas.string("Old pack JSON path."),
+                "newPackPath": ToolSchemas.string("New pack JSON path."),
+                "outputPath": ToolSchemas.string("Optional repo-relative diff JSON output path."),
+            ], required: ["oldPackPath", "newPackPath"]),
+            readOnly: false
+        ) { args in
+            let oldPackPath = try requiredString(args, "oldPackPath")
+            let newPackPath = try requiredString(args, "newPackPath")
+            let oldPackURL = try context.resolve(oldPackPath)
+            let newPackURL = try context.resolve(newPackPath)
+            let result = runProcess("/usr/bin/python3", [
+                context.repoRoot.appendingPathComponent("tools/source-atlas/ambitions-pack-diff.py").path,
+                oldPackURL.path,
+                newPackURL.path,
+            ])
+            guard result.exitCode == 0 else {
+                throw ToolFailure.commandFailed(result.stderr.isEmpty ? result.stdout : result.stderr)
+            }
+            let diffValue = try JSONDecoder().decode(Value.self, from: Data(result.stdout.utf8))
+            if let outputPath = args["outputPath"]?.stringValue, !outputPath.isEmpty {
+                let outputURL = try context.resolve(outputPath)
+                try writeJSONValue(diffValue, to: outputURL)
+                return jsonString(.object([
+                    "wrote": .string(context.relativePath(outputURL)),
+                    "sha256": .string(try sha256(outputURL)),
+                    "diff": diffValue,
+                ]))
+            }
+            return jsonString(diffValue)
+        },
+        NativeTool(
+            name: "source_atlas_freshness_manifest_create",
+            description: "Create a freshness broker manifest from one or more Source Atlas diff JSON files.",
+            inputSchema: ToolSchemas.object([
+                "versionID": ToolSchemas.string("Version ID for the freshness manifest."),
+                "diffPaths": ToolSchemas.stringArray("Diff JSON files."),
+                "outputPath": ToolSchemas.string("Repo-relative output JSON path."),
+            ], required: ["versionID", "diffPaths", "outputPath"]),
+            readOnly: false
+        ) { args in
+            let versionID = try requiredString(args, "versionID")
+            let diffPaths = stringArray(args["diffPaths"])
+            let outputPath = try requiredString(args, "outputPath")
+            guard !diffPaths.isEmpty else {
+                throw ToolFailure.invalid("diffPaths must include at least one diff")
+            }
+            let diffURLs = try diffPaths.map { try context.resolve($0) }
+            let outputURL = try context.resolve(outputPath)
+            try FileManager.default.createDirectory(at: outputURL.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+            let commandArgs = [
+                context.repoRoot.appendingPathComponent("tools/source-atlas/ambitions-freshness-broker.py").path,
+                "--version-id",
+                versionID,
+                "--diff-files",
+            ] + diffURLs.map(\.path) + [
+                "--output",
+                outputURL.path,
+            ]
+            let result = runProcess("/usr/bin/python3", commandArgs)
+            guard result.exitCode == 0 else {
+                throw ToolFailure.commandFailed(result.stderr.isEmpty ? result.stdout : result.stderr)
+            }
+            return jsonString(.object([
+                "wrote": .string(context.relativePath(outputURL)),
+                "sha256": .string(try sha256(outputURL)),
+                "stdout": .string(result.stdout.trimmingCharacters(in: .whitespacesAndNewlines)),
+            ]))
+        },
+        NativeTool(
+            name: "source_atlas_r2_public_bundle_validate",
+            description: "Validate a local R2-bound public/reference-pack bundle and return explicit upload commands without reading secrets.",
+            inputSchema: ToolSchemas.object([
+                "bundlePath": ToolSchemas.string("Repo-relative local bundle directory."),
+                "bucket": ToolSchemas.string("R2 bucket name."),
+                "prefix": ToolSchemas.string("Object key prefix."),
+            ], required: ["bundlePath", "bucket", "prefix"])
+        ) { args in
+            let bundlePath = try requiredString(args, "bundlePath")
+            let bucket = try requiredString(args, "bucket")
+            let prefix = try requiredString(args, "prefix").trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+            let bundleURL = try context.resolve(bundlePath)
+            let files = context.safeListFiles(roots: [context.relativePath(bundleURL)], extensions: ["json", "md"], skipGenerated: false)
+            let privacyFindings = try sourceAtlasPrivacyFindings(context: context, paths: files)
+            let manifestFiles = files.filter { $0.lowercased().contains("manifest") }
+            let uploadCommands = try files.map { path -> Value in
+                let fileURL = try context.resolve(path)
+                let rel = String(path.dropFirst(context.relativePath(bundleURL).count)).trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+                return .array([
+                    .string("wrangler"),
+                    .string("r2"),
+                    .string("object"),
+                    .string("put"),
+                    .string("\(bucket)/\(prefix)/\(rel)"),
+                    .string("--file"),
+                    .string(fileURL.path),
+                ])
+            }
+            return jsonString(.object([
+                "bundlePath": .string(context.relativePath(bundleURL)),
+                "fileCount": .int(files.count),
+                "manifestFiles": .array(manifestFiles.map { .string($0) }),
+                "privacyFindings": .array(privacyFindings.map { .string($0) }),
+                "validForPublicReferenceR2": .bool(!files.isEmpty && !manifestFiles.isEmpty && privacyFindings.isEmpty),
+                "uploadCommands": .array(uploadCommands),
+                "secretBoundary": .string("This MCP does not read or print R2 credentials. Run upload commands only in an approved shell with scoped R2 credentials."),
+            ]))
+        },
+        NativeTool(
+            name: "source_atlas_provenance_receipt_create",
+            description: "Write a provenance receipt tying inputs, outputs, hashes, tools, R2 target, and non-claims together.",
+            inputSchema: ToolSchemas.object([
+                "receiptPath": ToolSchemas.string("Repo-relative receipt JSON output path."),
+                "operation": ToolSchemas.string("Operation name."),
+                "inputPaths": ToolSchemas.stringArray("Repo-relative input files."),
+                "outputPaths": ToolSchemas.stringArray("Repo-relative output files."),
+                "r2Bucket": ToolSchemas.string("Optional R2 bucket."),
+                "r2Prefix": ToolSchemas.string("Optional R2 prefix."),
+            ], required: ["receiptPath", "operation"]),
+            readOnly: false
+        ) { args in
+            let receiptPath = try requiredString(args, "receiptPath")
+            let operation = try requiredString(args, "operation")
+            let inputPaths = stringArray(args["inputPaths"])
+            let outputPaths = stringArray(args["outputPaths"])
+            let receipt: Value = .object([
+                "schemaVersion": .int(1),
+                "kind": .string("ambitions.sourceAtlas.provenanceReceipt"),
+                "operation": .string(operation),
+                "createdAt": .string(isoNow()),
+                "inputs": .array(try inputPaths.map { try pathHashValue(context: context, path: $0) }),
+                "outputs": .array(try outputPaths.map { try pathHashValue(context: context, path: $0) }),
+                "r2": .object([
+                    "bucket": .string(args["r2Bucket"]?.stringValue ?? ""),
+                    "prefix": .string(args["r2Prefix"]?.stringValue ?? ""),
+                    "boundary": .string("public/reference/freshness only"),
+                ]),
+                "nonClaims": .array(sourceAtlasNonClaims.map { .string($0) }),
+            ])
+            let receiptURL = try context.resolve(receiptPath)
+            try writeJSONValue(receipt, to: receiptURL)
+            return jsonString(.object([
+                "wrote": .string(context.relativePath(receiptURL)),
+                "sha256": .string(try sha256(receiptURL)),
+            ]))
+        },
+    ]
+}
+
 private let truthStack = [
     "docs/truth/README.md",
     "docs/truth/CODEX_START_HERE.md",
@@ -760,6 +1091,15 @@ private let obsoleteScaffoldPaths = [
     "tools/mcp/ambitions_fixture_mcp/README.md",
     "tools/mcp/ambitions_source_atlas_mcp/README.md",
     "tools/mcp/ambitions_release_truth_mcp/README.md",
+]
+
+private let sourceAtlasNonClaims = [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not official Apple/API/legal approval",
+    "not runtime recommendation proof",
+    "not release readiness",
+    "not accessibility compliance",
 ]
 
 private let forbiddenClaimPatterns: [(id: String, pattern: String)] = [
@@ -1049,4 +1389,171 @@ private func stripHTML(_ html: String, limit: Int) -> String {
     }
     text = text.replacingOccurrences(of: #"\s+"#, with: " ", options: .regularExpression)
     return String(text.trimmingCharacters(in: .whitespacesAndNewlines).prefix(limit))
+}
+
+private func isoNow() -> String {
+    ISO8601DateFormatter().string(from: Date())
+}
+
+private func decodeJSONValue(at url: URL) throws -> Value {
+    let data = try Data(contentsOf: url)
+    return try JSONDecoder().decode(Value.self, from: data)
+}
+
+private func writeJSONValue(_ value: Value, to url: URL) throws {
+    try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted, .sortedKeys, .withoutEscapingSlashes]
+    let data = try encoder.encode(value)
+    try data.write(to: url, options: .atomic)
+}
+
+private func sha256(_ url: URL) throws -> String {
+    let data = try Data(contentsOf: url)
+    let digest = SHA256.hash(data: data)
+    return digest.map { String(format: "%02x", $0) }.joined()
+}
+
+private func fileSize(_ url: URL) -> Int {
+    let attributes = (try? FileManager.default.attributesOfItem(atPath: url.path)) ?? [:]
+    return (attributes[.size] as? NSNumber)?.intValue ?? 0
+}
+
+private func pathHashValue(context: RepoContext, path: String) throws -> Value {
+    let url = try context.resolve(path)
+    return .object([
+        "path": .string(context.relativePath(url)),
+        "sha256": .string(try sha256(url)),
+        "bytes": .int(fileSize(url)),
+    ])
+}
+
+private func sourceAtlasSourceEntries(context: RepoContext, sourcePaths: [String], sourceURLs: [String]) throws -> [Value] {
+    var entries: [Value] = []
+    for (index, path) in sourcePaths.enumerated() {
+        let url = try context.resolve(path)
+        entries.append(.object([
+            "id": .string("local-source-\(index + 1)"),
+            "kind": .string("local_reference_file"),
+            "path": .string(context.relativePath(url)),
+            "sha256": .string(try sha256(url)),
+            "bytes": .int(fileSize(url)),
+            "state": .string("candidate"),
+            "freshness": .string("unknown"),
+        ]))
+    }
+    for (index, urlString) in sourceURLs.enumerated() {
+        guard let url = URL(string: urlString), let scheme = url.scheme?.lowercased(), ["https", "http"].contains(scheme) else {
+            throw ToolFailure.invalid("sourceURLs[\(index)] is not a valid http(s) URL")
+        }
+        entries.append(.object([
+            "id": .string("url-source-\(index + 1)"),
+            "kind": .string("public_url"),
+            "url": .string(urlString),
+            "host": .string(url.host ?? ""),
+            "state": .string("candidate"),
+            "freshness": .string("unknown"),
+        ]))
+    }
+    return entries
+}
+
+private func sourceAtlasPackSchemaFindings(_ pack: Value) -> [String] {
+    guard let object = pack.objectValue else {
+        return ["pack root must be a JSON object"]
+    }
+    var findings: [String] = []
+    for required in ["id", "version", "metadata", "sources", "claims"] {
+        if object[required] == nil {
+            findings.append("missing required field: \(required)")
+        }
+    }
+    if object["id"]?.stringValue?.isEmpty != false {
+        findings.append("id must be a non-empty string")
+    }
+    if object["version"]?.stringValue?.isEmpty != false {
+        findings.append("version must be a non-empty string")
+    }
+    if object["metadata"]?.objectValue == nil {
+        findings.append("metadata must be an object")
+    }
+    if object["sources"]?.arrayValue == nil {
+        findings.append("sources must be an array")
+    }
+    if object["claims"]?.arrayValue == nil {
+        findings.append("claims must be an array")
+    }
+    if let claims = object["claims"]?.arrayValue {
+        for (index, claim) in claims.enumerated() {
+            guard let claimObject = claim.objectValue else {
+                findings.append("claims[\(index)] must be an object")
+                continue
+            }
+            if claimObject["id"]?.stringValue?.isEmpty != false {
+                findings.append("claims[\(index)].id must be a non-empty string")
+            }
+            let state = claimObject["state"]?.stringValue ?? "unknown"
+            let allowedStates = ["unknown", "source_needed", "stale", "contradicted", "revoked", "disputed", "verified_by_local_proof"]
+            if !allowedStates.contains(state) {
+                findings.append("claims[\(index)].state unsupported: \(state)")
+            }
+        }
+    }
+    return findings
+}
+
+private let sourceAtlasPrivateTerms = [
+    "private life graph",
+    "calendar data",
+    "capture text",
+    "personalization data",
+    "behavior pattern",
+    "inferred priority",
+    "goal title",
+    "receipt history",
+    "user profile payload",
+]
+
+private func sourceAtlasPrivacyFindings(context: RepoContext, paths: [String]) throws -> [String] {
+    var findings: [String] = []
+    for path in paths {
+        let text: String
+        do {
+            text = try context.readText(path, maxBytes: 3_000_000).lowercased()
+        } catch {
+            findings.append("\(path): unreadable")
+            continue
+        }
+        let lines = text.split(separator: "\n", omittingEmptySubsequences: false).map(String.init)
+        for (index, line) in lines.enumerated() {
+            for term in sourceAtlasPrivateTerms where line.contains(term) && !isSourceAtlasBoundaryLine(line) {
+                findings.append("\(path):\(index + 1): contains private-boundary trigger '\(term)'")
+            }
+        }
+    }
+    return findings
+}
+
+private func isSourceAtlasBoundaryLine(_ line: String) -> Bool {
+    let negationMarkers = [
+        "no ",
+        "not ",
+        "never ",
+        "without ",
+        "excludes ",
+        "exclude ",
+        "must not ",
+        "does not ",
+        " public/reference/freshness only",
+    ]
+    return negationMarkers.contains { line.contains($0) }
+}
+
+private func sourceAtlasRevocationStatus(context: RepoContext, pack: Value, revocationPath: String) throws -> String {
+    let packID = pack.objectValue?["id"]?.stringValue ?? ""
+    guard !packID.isEmpty else { return "pack_id_missing" }
+    let revocationURL = try context.resolve(revocationPath)
+    let revocation = try decodeJSONValue(at: revocationURL)
+    let revokedIDs = revocation.objectValue?["revoked_pack_ids"]?.arrayValue?.compactMap { $0.stringValue } ?? []
+    return revokedIDs.contains(packID) ? "revoked" : "not_revoked"
 }
