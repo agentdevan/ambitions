@@ -23,19 +23,19 @@ extension Capture {
     var searchPrimaryActionTitles: [String] {
         switch status {
         case .archived:
-            return ["Open capture", "Inspect receipt"]
+            return ["Open capture", "Open history"]
         case .needsTriage, .actionable, .seed:
-            return ["Open capture", "Change route", "Attach to goal"]
+            return ["Open capture", "Change placement", "Attach to goal"]
         case .goalBound:
-            return ["Open capture", "Open goal", "Inspect proof"]
+            return ["Open capture", "Open goal", "Review history"]
         case .scheduled:
-            return ["Open capture", "Move to Time", "Inspect receipt"]
+            return ["Open capture", "Move to Time", "Open history"]
         case .delegated:
-            return ["Open capture", "Review delegation", "Inspect receipt"]
+            return ["Open capture", "Review delegation", "Open history"]
         case .waiting:
-            return ["Open capture", "Mark waiting", "Inspect receipt"]
+            return ["Open capture", "Mark waiting", "Open history"]
         case .optionalSomeday:
-            return ["Open capture", "Review later", "Inspect receipt"]
+            return ["Open capture", "Review later", "Open history"]
         }
     }
 }

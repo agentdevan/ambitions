@@ -12,7 +12,7 @@ struct TodayObjectView: View {
     var body: some View {
         let displayExecution = approvedReplacementRail.map { experience.execution.replacingDayRail($0) } ?? experience.execution
         let displayRail = displayExecution.dayRail
-        TodayRealityMeridianFlagshipAdapter(
+        RealityMeridianView(
             state: displayRail,
             onAction: onAction,
             onOpenStepDetail: onOpenStepDetail,

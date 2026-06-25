@@ -200,7 +200,7 @@ struct AppShellHeaderRail: View {
         if dynamicTypeSize.isAccessibilitySize {
             return posture.headerLensTitle
         }
-        return "· \(subtitle ?? posture.title)"
+        return subtitle ?? posture.title
     }
 
     private var shouldWrapHeaderContext: Bool {
@@ -242,7 +242,6 @@ struct AppShellHeaderRail: View {
 
     private var accessibilitySummary: String {
         [
-            "Shell context crown",
             title,
             headerSubtitle,
             posture.continuityMessage

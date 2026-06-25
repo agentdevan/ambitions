@@ -51,7 +51,7 @@ public struct CoreReusableInteractionPrimitivePreviewGallery: View {
                     AmbitionCoreInteractionActionButton(role: .recoveryOption, state: .recovery, action: {})
 
                     AmbitionCoreInteractionDisclosureRow(
-                        role: .inspectProof,
+                        role: .reviewHistory,
                         state: .localOnly,
                         subtitle: "SourceRecord, Receipt, and ReplayTrace stay inspectable.",
                         action: {}

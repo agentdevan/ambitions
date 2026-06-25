@@ -23,9 +23,9 @@ extension QuietCommandSheetView {
                     submitButton: "shell.overlay.save-capture-button",
                     error: "shell.overlay.quick-capture.error",
                     inputAlternatives: "shell.overlay.quick-capture.input-alternatives",
-                    routeRevealStrip: "shell.overlay.quick-capture.route-reveal",
-                    routeChoicePrefix: "shell.overlay.quick-capture.route-choice.",
-                    routeInspectionSummary: "shell.overlay.quick-capture.route-inspection"
+                    placementPreviewStrip: "shell.overlay.quick-capture.placement-preview",
+                    placementChoicePrefix: "shell.overlay.quick-capture.placement-choice.",
+                    placementInspectionSummary: "shell.overlay.quick-capture.placement-inspection"
                 ),
                 shouldAutoFocus: overlay.kind == .quietCommandSheet && overlay.presentationContext == .quickCapture
             )
@@ -78,7 +78,7 @@ extension QuietCommandSheetView {
             sourceType: appShellCaptureSourceType(for: overlay.entrySource),
             sourceSurface: overlay.entrySource.displayTitle,
             selectedDraftRouteType: selectedDraftRouteType,
-            localSourceLabel: "Local source: \(overlay.entrySource.displayTitle)"
+            localSourceLabel: "Started from \(overlay.entrySource.displayTitle)"
         )
     }
 

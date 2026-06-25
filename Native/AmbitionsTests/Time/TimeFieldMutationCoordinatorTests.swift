@@ -35,6 +35,10 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         XCTAssertEqual(result.command.target.stepID, "step.real-visible")
         XCTAssertEqual(result.command.target.goalID, "goal.real-visible")
         XCTAssertEqual(result.command.payload.metadata["placementCandidateKind"], TimePlacementCandidateKind.goalLinked.rawValue)
+        XCTAssertEqual(result.command.payload.metadata["placementTrigger"], ProtectedStepPlacementTrigger.userInitiated.rawValue)
+        XCTAssertEqual(result.command.payload.metadata["explicitUserApproval"], "true")
+        XCTAssertNotNil(result.command.payload.metadata["proposedStartAt"])
+        XCTAssertNotNil(result.command.payload.metadata["proposedEndAt"])
         XCTAssertEqual(result.timeMutation.actionKind, .placeStep)
         XCTAssertTrue(result.runtimeMutation.hasCompleteActionFlowProof)
         XCTAssertTrue(result.timeMutation.todayRecompute.recomputedToday)
@@ -70,6 +74,56 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         XCTAssertEqual(undo.visibleMutation.stageMutation.proofArtifact.afterSnapshot?.summary, result.timeMutation.beforeProjection.semanticSummary)
         XCTAssertFalse(undo.visibleMutation.stageMutation.undoAvailability.isAvailable)
         XCTAssertEqual(undo.visibleMutation.stageMutation.undoAvailability.unavailableReason, "This mutation already restored the prior Time shape.")
+    }
+
+    func testP2BAAutomaticTimePlacementInsideSevenDaysStopsBeforeMutation() throws {
+        let state = PreviewTimeScenarios.seeded.withPlacementCandidate(realPlacementCandidate())
+        let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
+
+        XCTAssertThrowsError(
+            try TimeFieldMutationCoordinator().perform(
+                .placeStep,
+                in: state,
+                selectedMark: mark,
+                now: now,
+                actor: .system,
+                explicitProtectedPlacementApproval: false
+            )
+        ) { error in
+            guard case let .protectedPlacementRequiresApproval(decision) = error as? TimeFieldMutationError else {
+                return XCTFail("Expected protected placement decision, got \(error)")
+            }
+            XCTAssertEqual(decision.kind, .blockedFromSilentMovement)
+            XCTAssertEqual(decision.trigger, .automatic)
+            XCTAssertTrue(decision.affectsProtectedWindow)
+            XCTAssertFalse(decision.canApplySilently)
+            XCTAssertFalse(decision.canApplyWithExplicitAction)
+        }
+    }
+
+    func testP2BAUserTimePlacementInsideSevenDaysRequiresExplicitApprovalBeforeMutation() throws {
+        let state = PreviewTimeScenarios.seeded.withPlacementCandidate(realPlacementCandidate())
+        let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
+
+        XCTAssertThrowsError(
+            try TimeFieldMutationCoordinator().perform(
+                .placeStep,
+                in: state,
+                selectedMark: mark,
+                now: now,
+                actor: .user,
+                explicitProtectedPlacementApproval: false
+            )
+        ) { error in
+            guard case let .protectedPlacementRequiresApproval(decision) = error as? TimeFieldMutationError else {
+                return XCTFail("Expected protected placement decision, got \(error)")
+            }
+            XCTAssertEqual(decision.kind, .requiresExplicitApproval)
+            XCTAssertEqual(decision.trigger, .userInitiated)
+            XCTAssertTrue(decision.requiresExplicitApproval)
+            XCTAssertFalse(decision.canApplySilently)
+            XCTAssertFalse(decision.canApplyWithExplicitAction)
+        }
     }
 
     func testProtectWindowAndKeepClearCreateProtectedBoundaryAndTodayAvoidanceProof() throws {
@@ -246,8 +300,8 @@ final class TimeFieldMutationCoordinatorTests: XCTestCase {
         )
         let mutation = StageMutation(
             runtimeMutationID: "runtime.invalid.string-only",
-            beforeSnapshot: "before",
-            afterSnapshot: "after",
+            beforeSnapshot: before,
+            afterSnapshot: after,
             targetSurface: .today,
             affectedObjectIDs: ["step-1"],
             visibleUserFacingChange: "Step completed",

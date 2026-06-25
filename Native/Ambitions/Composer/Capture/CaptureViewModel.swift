@@ -336,7 +336,7 @@ final class CaptureViewModel {
             sourceSurface: "Capture",
             selectedDraftRouteType: selectedDraftRouteType,
             candidates: smartAttachmentCandidates(),
-            localSourceLabel: "Local source: typed in Capture"
+            localSourceLabel: "Typed in Capture"
         )
     }
 

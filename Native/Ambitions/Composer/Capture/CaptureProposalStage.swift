@@ -99,7 +99,7 @@ struct CaptureProposalStage: View {
                     .minimumScaleFactor(0.84)
             }
             .buttonStyle(AmbitionPressableButtonStyle(state: choice.isSelected ? .selected : .default))
-            .accessibilityIdentifier("capture.proposal.route-choice.\(choice.routeType.rawValue)")
+            .accessibilityIdentifier("capture.proposal.placement-choice.\(choice.routeType.rawValue)")
             .accessibilityLabel(choice.title)
             .accessibilityValue(choice.isSelected ? "Selected" : "Available")
         }

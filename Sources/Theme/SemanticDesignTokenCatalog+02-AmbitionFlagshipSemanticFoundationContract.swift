@@ -153,7 +153,7 @@ public enum AmbitionFlagshipSemanticFoundationCatalog {
         .init(
             id: "motion.motionCurrent.foundation",
             surface: "Motion",
-            primaryObject: "Motion Current",
+            primaryObject: "Stage Motion behavior",
             semanticTokenID: "motion.motionCurrent",
             isTopLevelSurface: false,
             materialRole: .elevated,
@@ -165,10 +165,10 @@ public enum AmbitionFlagshipSemanticFoundationCatalog {
             dynamicTypeSpacingRole: .groupProofBeforeHistory,
             hierarchyRole: .sourceTrust,
             minimumTapTarget: 44,
-            reduceTransparencyFallback: "Opaque proof rail with receipt labels and static re-entry states.",
+            reduceTransparencyFallback: "Opaque movement rail with history labels and static return states.",
             highContrastFallback: "High-contrast labels and outlines identify blocked, waiting, protected, and recovery states.",
-            accessibilityFallback: "Progress and receipt states are grouped by object with explicit labels and non-color status text.",
-            nativeConsistencyRule: "Motion stays Stage/Motion behavior: inspectable movement through object evidence and receipts, not a root destination."
+            accessibilityFallback: "Movement and history states are grouped by object with explicit labels and non-color status text.",
+            nativeConsistencyRule: "Motion stays Stage/Motion behavior: inspectable movement through object history, not a root destination."
         ),
         .init(
             id: "you.userSystemProfile.foundation",
@@ -205,9 +205,9 @@ public enum AmbitionFlagshipSemanticFoundationCatalog {
             dynamicTypeSpacingRole: .keepComposerActionsVisible,
             hierarchyRole: .globalActionLayer,
             minimumTapTarget: 48,
-            reduceTransparencyFallback: "Opaque composer sheet with route and correction controls visible.",
-            highContrastFallback: "High-contrast input, route label, correction action, and stroke remain visible.",
-            accessibilityFallback: "Composer entry, route reveal, correction, and held-state actions remain labeled when atmosphere is reduced.",
+            reduceTransparencyFallback: "Opaque composer sheet with placement and correction controls visible.",
+            highContrastFallback: "High-contrast input, placement label, correction action, and stroke remain visible.",
+            accessibilityFallback: "Composer entry, placement preview, correction, and held-state actions remain labeled when atmosphere is reduced.",
             nativeConsistencyRule: "Capture appears as a contextual global action layer with correction paths and no root-destination treatment."
         ),
         .init(

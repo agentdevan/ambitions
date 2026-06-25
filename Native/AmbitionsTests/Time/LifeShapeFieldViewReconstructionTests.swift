@@ -180,9 +180,9 @@ final class LifeShapeFieldViewReconstructionTests: XCTestCase {
 
         XCTAssertTrue(detail.contains("LifeShapeWhyThisInspection"))
         XCTAssertTrue(inspection.contains("Why this?"))
-        XCTAssertTrue(inspection.contains("Inspect proof"))
+        XCTAssertTrue(inspection.contains("Review history"))
         XCTAssertTrue(inspection.contains("This block is not protected."))
-        XCTAssertTrue(inspection.contains("Receipt is saved with this Time shape."))
+        XCTAssertTrue(inspection.contains("The saved change stays with this Time shape."))
         XCTAssertTrue(inspection.contains("time.life-shape-field.why-this.button"))
         XCTAssertTrue(inspection.contains("time.life-shape-field.proof-inspection"))
         for phrase in forbidden {

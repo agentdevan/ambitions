@@ -175,7 +175,7 @@ extension ConstellationAtlasView {
     var orbitalLensExpanded: some View {
         VStack(alignment: .leading, spacing: theme.spacing.sm) {
             if screenshotProofState.prioritizesOrbitalLens {
-                orbitalLensRow(title: "Proof available", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
+                orbitalLensRow(title: "Evidence visible", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
                     .accessibilityIdentifier("goals.orbital-lens.proof")
                 orbitalLensRow(title: "Context", value: overview.orbitalLens.sourceSummary, systemImage: "link")
                     .accessibilityIdentifier("goals.orbital-lens.source")
@@ -186,7 +186,7 @@ extension ConstellationAtlasView {
                 orbitalLensRow(title: "Active thread", value: overview.orbitalLens.activeThreadTitle, systemImage: "arrow.triangle.branch")
                 orbitalLensRow(title: "Recommended step", value: overview.orbitalLens.recommendedStepTitle, systemImage: "figure.walk")
                 orbitalLensRow(title: "Feeds Today", value: overview.orbitalLens.feedsTodaySummary, systemImage: "sun.max")
-                orbitalLensRow(title: "Proof available", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
+                orbitalLensRow(title: "Evidence visible", value: overview.orbitalLens.proofSummary, systemImage: "checkmark.seal")
                     .accessibilityIdentifier("goals.orbital-lens.proof")
                 orbitalLensRow(title: "Context", value: overview.orbitalLens.sourceSummary, systemImage: "link")
                     .accessibilityIdentifier("goals.orbital-lens.source")
@@ -221,7 +221,7 @@ extension ConstellationAtlasView {
 
 
     func orbitalLensRow(title: String, value: String, systemImage: String) -> some View {
-        let isProofEmphasized = screenshotProofState.highlightsProof && title == "Proof available"
+        let isProofEmphasized = screenshotProofState.highlightsProof && title == "Evidence visible"
         return HStack(alignment: .top, spacing: theme.spacing.xs) {
             Image(systemName: systemImage)
                 .font(.system(size: theme.icon.smallSize, weight: theme.icon.symbolWeight))

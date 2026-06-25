@@ -40,8 +40,8 @@ final class FrontendRecoveryGateTests: XCTestCase {
 
     func testIR01RecoveredSurfacesExposeCanonObjectIdentifiers() throws {
         let expectations: [(String, String)] = [
-            ("Native/Ambitions/Surfaces/Today/TodaySurface.swift", "TodayRealityMeridianFlagshipAdapter"),
-            ("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels.swift", "RealityMeridianView"),
+            ("Native/Ambitions/Surfaces/Today/TodayObjectView.swift", "RealityMeridianView"),
+            ("Native/Ambitions/Surfaces/Today/TodayObjectView.swift", "TodayAccessibility.rootSummary"),
             ("Native/Ambitions/Surfaces/Today/TodaySurface.swift", "TodayExecutionDepthDisclosure"),
             ("Native/Ambitions/Surfaces/Goals/GoalsSurface.swift", "GoalsDirectionDepthDisclosure"),
             ("Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift", "AtmosphereComposerCanvas"),
@@ -55,6 +55,10 @@ final class FrontendRecoveryGateTests: XCTestCase {
             let contents = try String(contentsOfFile: repoRoot.appendingPathComponent(relativePath).path)
             XCTAssertTrue(contents.contains(needle), "\(relativePath) should contain \(needle)")
         }
+
+        let todayObject = try String(contentsOfFile: repoRoot.appendingPathComponent("Native/Ambitions/Surfaces/Today/TodayObjectView.swift").path)
+        XCTAssertFalse(todayObject.contains("FlagshipRuntimeStage"))
+        XCTAssertFalse(todayObject.contains("TodayRealityMeridianFlagshipAdapter"))
     }
 
     func testIR01TopLevelRecoveryCopyStaysOnActiveCanon() throws {

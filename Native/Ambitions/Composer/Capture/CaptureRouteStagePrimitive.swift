@@ -12,7 +12,7 @@ struct CaptureRouteStagePrimitive: View {
     }
 
     var body: some View {
-        CaptureStageGroup(state: livingState, accessibilityIdentifier: "capture.route-preview") {
+        CaptureStageGroup(state: livingState, accessibilityIdentifier: "capture.placement-preview") {
             VStack(alignment: .leading, spacing: theme.spacing.sm) {
                 routeSummary
                 reviewOverview
@@ -28,7 +28,7 @@ struct CaptureRouteStagePrimitive: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel(preview.accessibilityLabel)
         .accessibilityValue(preview.accessibilityValue)
-        .accessibilityHint(preview.accessibilityHint ?? "Choose a different route if this is not right.")
+        .accessibilityHint(preview.accessibilityHint ?? "Choose a different placement if this is not right.")
     }
 
     private var livingState: LivingVisualState {
@@ -65,7 +65,7 @@ struct CaptureRouteStagePrimitive: View {
             SectionHeader(
                 eyebrow: "Capture",
                 title: "What Ambitions understood",
-                subtitle: "Suggested placement, likely impact, approval, change options, and fallback stay visible before anything is saved."
+                    subtitle: "Placement, likely impact, approval, change options, and fallback stay visible before anything is saved."
             )
 
             placementLine(icon: "sparkles", title: "Understood", value: preview.understoodLabel, state: visualState)
@@ -81,7 +81,7 @@ struct CaptureRouteStagePrimitive: View {
     private var stagingOverview: some View {
         CaptureStageGroup(state: .calm, accessibilityIdentifier: "capture.staging-overview") {
             SectionHeader(
-                eyebrow: "Stage",
+                eyebrow: "Capture",
                 title: "Local input paths",
                 subtitle: "Text, voice, image, share, proof, and context each keep a clear local boundary before anything is saved."
             )
@@ -89,7 +89,7 @@ struct CaptureRouteStagePrimitive: View {
             ForEach(preview.stagedInputs) { stagedInput in
                 CaptureStageGroup(state: .calm, accessibilityIdentifier: "capture.staged-input.\(stagedInput.id)") {
                     placementLine(icon: "square.grid.2x2", title: stagedInput.kind.title, value: stagedInput.provenanceLabel, state: .default)
-                    placementLine(icon: "target", title: "Routes", value: stagedInput.routeCandidateSummary, state: .selected)
+                    placementLine(icon: "target", title: "Placement", value: stagedInput.routeCandidateSummary, state: .selected)
                     placementLine(icon: "lock", title: "Privacy", value: stagedInput.privacyLabel, state: .default)
                     placementLine(icon: "arrow.up.doc", title: "Export", value: stagedInput.exportLabel, state: .default)
                     placementLine(icon: "scissors", title: "Redaction", value: stagedInput.redactionLabel, state: .default)
@@ -111,9 +111,9 @@ struct CaptureRouteStagePrimitive: View {
             placementLine(icon: "eye", title: "Appearance", value: preview.appearanceLabel, state: .default)
             placementLine(icon: "arrow.triangle.branch", title: "Consequence", value: preview.consequenceLabel, state: visualState)
             placementLine(icon: "lock", title: "Privacy", value: preview.privacyLabel, state: .default)
-            placementLine(icon: "doc.text.magnifyingglass", title: "Source", value: preview.localSourceLabel, state: .default)
+            placementLine(icon: "doc.text.magnifyingglass", title: "Started", value: preview.localSourceLabel, state: .default)
             placementLine(icon: "pencil", title: "Correction", value: preview.correctionLabel, state: .default)
-            placementLine(icon: "checkmark.seal", title: "Receipt", value: preview.receiptSeamLabel, state: visualState)
+            placementLine(icon: "checkmark.seal", title: "History", value: preview.receiptSeamLabel, state: visualState)
         }
         .accessibilityElement(children: .combine)
     }
@@ -123,7 +123,7 @@ struct CaptureRouteStagePrimitive: View {
             SectionHeader(
                 eyebrow: "Capture",
                 title: Self.placementShelfDisplayTitle(for: preview.placementShelfTitle),
-                subtitle: "Destination, consequence, privacy, source, correction, and receipt stay visible before saving."
+                subtitle: "Destination, consequence, privacy, correction, and history stay visible before saving."
             )
 
             EvidenceLabel(
@@ -134,12 +134,12 @@ struct CaptureRouteStagePrimitive: View {
                 context: .capture
             )
             EvidenceLabel(
-                preview.routeProofTitle,
-                detail: preview.routeProofDetail,
-                source: "Local route proof",
-                state: livingState,
-                context: .capture
-            )
+                    "Placement check",
+                    detail: preview.routeProofDetail,
+                    source: preview.destinationLabel,
+                    state: livingState,
+                    context: .capture
+                )
             placementDetails
         }
     }
@@ -156,7 +156,7 @@ struct CaptureRouteStagePrimitive: View {
             SectionHeader(
                 eyebrow: "Review",
                 title: preview.resolverFoldTitle,
-                subtitle: "Change the route, keep it out of Goals, decide later, or discard before saving."
+                subtitle: "Change placement, keep it out of Goals, decide later, or discard before saving."
             )
 
             placementLine(
@@ -167,7 +167,7 @@ struct CaptureRouteStagePrimitive: View {
             )
             placementLine(
                 icon: "doc.badge.clock",
-                title: "Receipt",
+                title: "History",
                 value: preview.correctionReceiptLabel,
                 state: .default
             )
@@ -283,7 +283,7 @@ struct CaptureRouteStagePrimitive: View {
                         .minimumScaleFactor(0.8)
                 }
                 .buttonStyle(AmbitionPressableButtonStyle(state: choice.isSelected ? .selected : .default))
-                .accessibilityIdentifier("capture.route-choice.\(choice.routeType.rawValue)")
+                .accessibilityIdentifier("capture.placement-choice.\(choice.routeType.rawValue)")
             }
         }
     }

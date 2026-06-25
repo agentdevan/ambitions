@@ -61,7 +61,7 @@ struct LifeShapeWhyThisInspection: View {
                             showsProof.toggle()
                         }
                     } label: {
-                        Label("Inspect proof", systemImage: "doc.text.magnifyingglass")
+                        Label("Review history", systemImage: "doc.text.magnifyingglass")
                             .font(theme.typography.caption.weight(.semibold))
                             .foregroundStyle(theme.colors.accentSecondary)
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -102,8 +102,8 @@ struct LifeShapeWhyThisInspection: View {
 
     private var proofLines: [String] {
         [
-            "Proof is attached to this Time window.",
-            "Receipt is saved with this Time shape.",
+            "History is attached to this Time window.",
+            "The saved change stays with this Time shape.",
             "History stays available after you ask."
         ]
     }

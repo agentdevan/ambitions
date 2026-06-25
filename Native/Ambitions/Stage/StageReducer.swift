@@ -21,7 +21,7 @@ struct StageReduction {
 enum StageReducer {
     private static let surfaceReselectionRootThreshold: TimeInterval = 0.8
 
-    static func reduce(_ action: StageAction, state: inout StageState) -> StageReduction {
+    static func reduce(_ action: StageAction, state: inout StageState, now: Date) -> StageReduction {
         switch action {
         case let .selectSurface(surface):
             selectSurface(surface, state: &state)
@@ -43,7 +43,13 @@ enum StageReducer {
             return .none(effects: StageEffect.surfaceChanged(to: .goals))
         case .resetGoalsPath:
             state.goalsPath = []
-            return .none(effects: [.visibleStageMutation("goals.root")])
+            return .none(effects: [
+                .visibleObjectMutation(
+                    id: "surface.goals.root-restored",
+                    affectedObjectIDs: ["surface.goals"],
+                    consequence: "Goals root restored"
+                )
+            ])
         case let .openTimeRoute(target):
             dismissOverlay(state: &state)
             state.selectedSurface = .time
@@ -51,7 +57,13 @@ enum StageReducer {
             return .none(effects: StageEffect.surfaceChanged(to: .time))
         case .resetTimePath:
             state.timePath = []
-            return .none(effects: [.visibleStageMutation("time.root")])
+            return .none(effects: [
+                .visibleObjectMutation(
+                    id: "surface.time.root-restored",
+                    affectedObjectIDs: ["surface.time"],
+                    consequence: "Time root restored"
+                )
+            ])
         case let .openYouRoute(target):
             dismissOverlay(state: &state)
             state.selectedSurface = .you
@@ -59,7 +71,13 @@ enum StageReducer {
             return .none(effects: StageEffect.surfaceChanged(to: .you))
         case .resetYouPath:
             state.youPath = []
-            return .none(effects: [.visibleStageMutation("you.root")])
+            return .none(effects: [
+                .visibleObjectMutation(
+                    id: "surface.you.root-restored",
+                    affectedObjectIDs: ["surface.you"],
+                    consequence: "You root restored"
+                )
+            ])
         case let .presentOverlay(overlay):
             state.activeOverlay = overlay
             recordCommandHistory(
@@ -68,6 +86,7 @@ enum StageReducer {
                 source: overlay.entrySource,
                 presentationContext: overlay.presentationContext,
                 destinationLabel: ShellCommandDestination.overlay(overlay).displayLabel,
+                recordedAt: now,
                 state: &state
             )
             return .none(effects: StageEffect.overlayChanged(overlay))
@@ -88,6 +107,7 @@ enum StageReducer {
                     source: source,
                     presentationContext: presentationContext
                 ),
+                recordedAt: now,
                 state: &state
             )
             return .none(effects: StageEffect.overlayChanged(overlay))
@@ -107,6 +127,7 @@ enum StageReducer {
                 source: source,
                 presentationContext: presentationContext,
                 destinationLabel: "Search Ambitions",
+                recordedAt: now,
                 state: &state
             )
             return .none(effects: StageEffect.overlayChanged(overlay))
@@ -119,12 +140,19 @@ enum StageReducer {
                 source: source,
                 presentationContext: .createGoal,
                 destinationLabel: "Create Goal",
+                recordedAt: now,
                 state: &state
             )
             return .none(effects: StageEffect.overlayChanged(overlay))
         case let .queueTodaySelectionAfterOverlayDismiss(entryContext):
             state.pendingTodayEntryContext = entryContext
-            return .none(effects: [.proofArtifact("stage.today.pending-entry-context")])
+            return .none(effects: [
+                .proofReference(
+                    id: "stage.today.pending-entry-context",
+                    affectedObjectIDs: ["surface.today"],
+                    inspectionTarget: "surface.today.pending-entry-context"
+                )
+            ])
         case .dismissOverlay:
             dismissOverlay(state: &state)
             return .none(effects: StageEffect.overlayChanged(nil))
@@ -135,6 +163,7 @@ enum StageReducer {
                 source: source,
                 presentationContext: presentationContext,
                 destinationLabel: destination.displayLabel,
+                recordedAt: now,
                 state: &state
             )
             if let receiptBody {
@@ -145,7 +174,13 @@ enum StageReducer {
                     destinationLabel: destination.displayLabel
                 )
             }
-            return .none(effects: [.proofArtifact("stage.route.recorded")])
+            return .none(effects: [
+                .proofReference(
+                    id: "stage.route.recorded",
+                    affectedObjectIDs: ["stage.route"],
+                    inspectionTarget: "stage.route.history"
+                )
+            ])
         case .fallbackExternalLanding:
             dismissOverlay(state: &state)
             state.selectedSurface = .today
@@ -154,7 +189,13 @@ enum StageReducer {
         case let .noteExternalRoute(route, source):
             state.lastExternalRoute = route
             state.lastExternalRouteSource = source
-            return .none(effects: [.proofArtifact("stage.external-route.\(String(describing: source))")])
+            return .none(effects: [
+                .proofReference(
+                    id: "stage.external-route.\(String(describing: source))",
+                    affectedObjectIDs: ["stage.external-route"],
+                    inspectionTarget: "stage.external-route.history"
+                )
+            ])
         case .clearContinuityReceipt:
             let receipt = state.continuityReceipt
             state.continuityReceipt = nil
@@ -163,7 +204,13 @@ enum StageReducer {
                 consumedTodayEntryContext: nil,
                 consumedPendingTodayEntryContext: nil,
                 consumedContinuityReceipt: receipt,
-                effects: [.visibleStageMutation("continuity-receipt.dismissed")]
+                effects: [
+                    .visibleObjectMutation(
+                        id: "continuity-receipt.dismissed",
+                        affectedObjectIDs: ["stage.continuity-receipt"],
+                        consequence: "Continuity receipt dismissed"
+                    )
+                ]
             )
         case .consumeTodayEntryContext:
             let context = state.todayEntryContext
@@ -173,7 +220,13 @@ enum StageReducer {
                 consumedTodayEntryContext: context,
                 consumedPendingTodayEntryContext: nil,
                 consumedContinuityReceipt: nil,
-                effects: [.proofArtifact("stage.today.entry-context.consumed")]
+                effects: [
+                    .proofReference(
+                        id: "stage.today.entry-context.consumed",
+                        affectedObjectIDs: ["surface.today"],
+                        inspectionTarget: "surface.today.entry-context"
+                    )
+                ]
             )
         case .consumePendingTodayEntryContext:
             let context = state.pendingTodayEntryContext
@@ -183,7 +236,13 @@ enum StageReducer {
                 consumedTodayEntryContext: nil,
                 consumedPendingTodayEntryContext: context,
                 consumedContinuityReceipt: nil,
-                effects: [.proofArtifact("stage.today.pending-entry-context.consumed")]
+                effects: [
+                    .proofReference(
+                        id: "stage.today.pending-entry-context.consumed",
+                        affectedObjectIDs: ["surface.today"],
+                        inspectionTarget: "surface.today.pending-entry-context"
+                    )
+                ]
             )
         }
     }
@@ -229,7 +288,13 @@ enum StageReducer {
                 consumedTodayEntryContext: nil,
                 consumedPendingTodayEntryContext: nil,
                 consumedContinuityReceipt: nil,
-                effects: [.visibleStageMutation("surface.\(surface.rawValue).scroll-to-top")]
+                effects: [
+                    .visibleObjectMutation(
+                        id: "surface.\(surface.rawValue).scroll-to-top",
+                        affectedObjectIDs: ["surface.\(surface.rawValue)"],
+                        consequence: "\(surface.title) moved to the top"
+                    )
+                ]
             )
         }
 
@@ -241,7 +306,13 @@ enum StageReducer {
             consumedTodayEntryContext: nil,
             consumedPendingTodayEntryContext: nil,
             consumedContinuityReceipt: nil,
-            effects: [.visibleStageMutation("surface.\(surface.rawValue).return-to-root")]
+            effects: [
+                .visibleObjectMutation(
+                    id: "surface.\(surface.rawValue).return-to-root",
+                    affectedObjectIDs: ["surface.\(surface.rawValue)"],
+                    consequence: "\(surface.title) root restored"
+                )
+            ]
         )
     }
 
@@ -276,6 +347,7 @@ enum StageReducer {
         source: ShellCommandEntrySource,
         presentationContext: ShellCommandPresentationContext,
         destinationLabel: String,
+        recordedAt: Date,
         state: inout StageState
     ) {
         let entry = ShellCommandHistoryEntry(
@@ -284,7 +356,7 @@ enum StageReducer {
             source: source,
             presentationContext: presentationContext,
             destinationLabel: destinationLabel,
-            recordedAt: ISO8601DateFormatter().string(from: Date())
+            recordedAt: ISO8601DateFormatter().string(from: recordedAt)
         )
         state.recentCommandHistory.removeAll {
             $0.title == entry.title && $0.source == entry.source && $0.destinationLabel == entry.destinationLabel

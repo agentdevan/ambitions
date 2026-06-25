@@ -83,16 +83,16 @@ extension RepositoryBackedGoalsService {
         let visualState: AmbitionVisualState
 
         if count == 0 {
-            title = "No proof yet"
+            title = "No evidence yet"
             detail = "Needs evidence"
             visualState = .default
         } else if let latest {
-            title = count == 1 ? "1 proof point" : "\(count) proof points"
-            detail = "Last proof: \(proofTitle(for: latest))"
+            title = count == 1 ? "1 evidence item" : "\(count) evidence items"
+            detail = "Latest evidence: \(proofTitle(for: latest))"
             visualState = .selected
         } else {
-            title = "Proof building"
-            detail = "Receipts available"
+            title = "Evidence building"
+            detail = "History available"
             visualState = .selected
         }
 
@@ -202,13 +202,13 @@ extension RepositoryBackedGoalsService {
             return GoalMomentumIntegrity(title: "Kept in view", detail: "Keep the next step visible.", visualState: .selected)
         }
         if proofSummary.count > 0 && nextVisibleStep.isAvailable {
-            return GoalMomentumIntegrity(title: "Building proof", detail: "Evidence and a next step both exist.", visualState: .selected)
+            return GoalMomentumIntegrity(title: "Evidence building", detail: "Evidence and a next step both exist.", visualState: .selected)
         }
         if proofSummary.count == 0 && nextVisibleStep.isAvailable {
-            return GoalMomentumIntegrity(title: "Needs proof", detail: "The next step is clear; evidence has not landed yet.", visualState: .default)
+            return GoalMomentumIntegrity(title: "Needs evidence", detail: "The next step is clear; evidence has not landed yet.", visualState: .default)
         }
         if posture == .stalled || evidence.isEmpty {
-            return GoalMomentumIntegrity(title: "Losing shape", detail: "Add one concrete next step or proof point.", visualState: .warning)
+            return GoalMomentumIntegrity(title: "Losing shape", detail: "Add one concrete next step or evidence item.", visualState: .warning)
         }
         return GoalMomentumIntegrity(title: "Clear next step", detail: "Momentum can stay simple.", visualState: .selected)
     }

@@ -66,7 +66,7 @@ public enum AmbitionTokens {
     public enum Semantic {
         public static let todayFocus: AmbitionTokenColor = .init(name: "todayFocus", hex: "#C8A96B", meaning: "today attention surface")
         public static let goalThread: AmbitionTokenColor = .init(name: "goalThread", hex: "#A9C0D6", meaning: "goal-thread linkage")
-        public static let captureSignal: AmbitionTokenColor = .init(name: "captureSignal", hex: "#D29D72", meaning: "capture entry and route reveal")
+        public static let captureSignal: AmbitionTokenColor = .init(name: "captureSignal", hex: "#D29D72", meaning: "capture entry and placement preview")
         public static let timeCapacity: AmbitionTokenColor = .init(name: "timeCapacity", hex: "#89A4C2", meaning: "capacity and pressure")
         public static let youTrust: AmbitionTokenColor = .init(name: "youTrust", hex: "#C6A3D4", meaning: "trust seam and local runtime")
         public static let sourceFreshness: AmbitionTokenColor = .init(name: "sourceFreshness", hex: "#8AC6B8", meaning: "freshness and staleness")

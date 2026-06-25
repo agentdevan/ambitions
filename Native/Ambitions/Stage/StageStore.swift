@@ -7,6 +7,7 @@ final class StageStore {
     private var state: StageState
     private let effectRunner = StageEffectRunner()
     private let morphCoordinator = StageMorphCoordinator()
+    private let clock: any AmbitionsClock
     private(set) var lastEffects: [StageEffect]
     private(set) var lastEffectRun: StageEffectRun
     private(set) var lastStageMorph: StageMorphResult
@@ -14,18 +15,14 @@ final class StageStore {
     private(set) var lastStageFocusPlan: StageFocusPlan
     private(set) var lastStageMutationAnimationPlan: StageMutationAnimationPlan
 
-    init(selectedSurface: AmbitionsSurface) {
+    init(selectedSurface: AmbitionsSurface, clock: any AmbitionsClock = SystemClock()) {
         let initialState = StageState(selectedSurface: selectedSurface)
         let initialScene = StageScene.current(state: initialState)
         let initialMorph = StageMorphResult.initial(scene: initialScene)
         state = initialState
+        self.clock = clock
         lastEffects = []
-        lastEffectRun = StageEffectRun(
-            effects: [],
-            visibleMutationIDs: [],
-            accessibilityAnnouncements: [],
-            proofArtifactIDs: []
-        )
+        lastEffectRun = StageEffectRun(effects: [])
         lastStageMorph = initialMorph
         lastStageTransition = .idle
         lastStageFocusPlan = .idle
@@ -122,7 +119,7 @@ final class StageStore {
     @discardableResult
     func dispatch(_ action: StageAction) -> StageReduction {
         let previousScene = StageScene.current(state: state)
-        let reduction = StageReducer.reduce(action, state: &state)
+        let reduction = StageReducer.reduce(action, state: &state, now: clock.now)
         let effectRun = effectRunner.run(reduction.effects)
         let nextScene = StageScene.current(state: state)
         let morphResult = morphCoordinator.coordinate(

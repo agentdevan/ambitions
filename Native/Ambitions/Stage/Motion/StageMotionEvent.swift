@@ -3,13 +3,13 @@ import Foundation
 
 /// Typed Motion action contract.
 ///
-/// Motion is proof/progress/inspection, not analytics and not a passive ledger.
-/// Root shell routing can map these actions to Today, Goals, Time, Trust, receipt,
-/// or proof-detail destinations without adding a sixth tab.
+/// Motion is object movement, recovery, review, and return, not analytics and not a passive ledger.
+/// Root shell routing can map these actions to Today, Goals, Time, Trust, or review
+/// destinations without adding a fifth tab.
 enum MotionCurrentAction: Equatable, Hashable, Sendable {
-    case inspectProof(String?)
-    case openReceipt(String?)
-    case openThread(String?)
+    case reviewHistory(String?)
+    case openHistory(String?)
+    case returnToThread(String?)
     case openToday
     case openGoals
     case openTime
@@ -23,11 +23,11 @@ extension MotionCurrentAction {
 
     var identifier: String? {
         switch self {
-        case let .inspectProof(value):
+        case let .reviewHistory(value):
             value
-        case let .openReceipt(value):
+        case let .openHistory(value):
             value
-        case let .openThread(value):
+        case let .returnToThread(value):
             value
         case .openToday, .openGoals, .openTime, .openTrust:
             nil
@@ -36,12 +36,12 @@ extension MotionCurrentAction {
 
     static func fromTitle(_ title: String) -> MotionCurrentAction? {
         switch title.lowercased() {
-        case "inspect proof":
-            return .inspectProof(nil)
-        case "open receipt":
-            return .openReceipt(nil)
-        case "re-enter thread":
-            return .openThread(nil)
+        case "review":
+            return .reviewHistory(nil)
+        case "history":
+            return .openHistory(nil)
+        case "return":
+            return .returnToThread(nil)
         case "open today", "start here":
             return .openToday
         case "open goals":

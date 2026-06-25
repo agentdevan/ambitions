@@ -278,7 +278,7 @@ extension RuntimeMutation {
         let beforeReference = MutationSnapshotReference(
             id: "snapshot.undo.before.\(original.command.id)",
             surface: .time,
-            summary: original.stageMutation.afterSnapshot
+            summary: original.stageMutation.afterSnapshot.summary
         )
         let afterReference = MutationSnapshotReference(
             id: "snapshot.undo.after.\(original.command.id)",
@@ -304,8 +304,8 @@ extension RuntimeMutation {
         let runtimeMutationID = "runtime.mutation.undo.\(original.command.id).\(ISO8601DateFormatter().string(from: now))"
         let stageMutation = StageMutation(
             runtimeMutationID: runtimeMutationID,
-            beforeSnapshot: original.stageMutation.afterSnapshot,
-            afterSnapshot: restoredSnapshot,
+            beforeSnapshot: beforeReference,
+            afterSnapshot: afterReference,
             targetSurface: .time,
             affectedObjectIDs: affectedObjectIDs,
             visibleUserFacingChange: "Undo applied",

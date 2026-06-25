@@ -68,8 +68,8 @@ struct ClosureStageMutation: Equatable, Sendable {
             )
         let stageMutation = StageMutation(
             runtimeMutationID: runtimeMutationID,
-            beforeSnapshot: beforeReference.summary,
-            afterSnapshot: afterReference.summary,
+            beforeSnapshot: beforeReference,
+            afterSnapshot: afterReference,
             targetSurface: .today,
             affectedObjectIDs: targetIDs,
             visibleUserFacingChange: policy.visibleChange,

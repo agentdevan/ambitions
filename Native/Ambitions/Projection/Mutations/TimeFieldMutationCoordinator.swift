@@ -4,6 +4,7 @@ enum TimeFieldMutationError: Error, Equatable {
     case noVisibleMutationTarget
     case missingEligibleStep
     case runtimeRejected(String)
+    case protectedPlacementRequiresApproval(ProtectedStepPlacementDecision)
 }
 
 struct TimeFieldMutationResult: Sendable {
@@ -25,16 +26,23 @@ struct TimeFieldUndoResult: Sendable {
 
 struct TimeFieldMutationCoordinator: Sendable {
     let runtime: PrivateLifeRuntime
+    let protectedPlacementPolicy: ProtectedStepPlacementPolicy
 
-    init(runtime: PrivateLifeRuntime = PrivateLifeRuntime()) {
+    init(
+        runtime: PrivateLifeRuntime = PrivateLifeRuntime(),
+        protectedPlacementPolicy: ProtectedStepPlacementPolicy = ProtectedStepPlacementPolicy()
+    ) {
         self.runtime = runtime
+        self.protectedPlacementPolicy = protectedPlacementPolicy
     }
 
     func perform(
         _ action: TimeFieldMutationAction,
         in timeState: TimeSurfaceState,
         selectedMark: LifeShapeSemanticMark?,
-        now: Date
+        now: Date,
+        actor: AmbitionsCommandActor = .user,
+        explicitProtectedPlacementApproval: Bool = true
     ) throws -> TimeFieldMutationResult {
         let visibleProjection = try LifeShapeProjection.fromVisibleTimeField(
             timeState.lifeSuite.field,
@@ -55,8 +63,16 @@ struct TimeFieldMutationCoordinator: Sendable {
             targetBucket: targetBucket,
             selectedMark: selectedMark,
             placementCandidate: timeState.lifeSuite.field.placementCandidate,
-            now: now
+            now: now,
+            actor: actor,
+            explicitProtectedPlacementApproval: explicitProtectedPlacementApproval
         )
+        if let decision = protectedPlacementPolicy.evaluate(
+            command: command,
+            context: CommandExecutionContext(now: now, actor: actor, sourceSurface: "Time")
+        ), decision.kind != .allowed {
+            throw TimeFieldMutationError.protectedPlacementRequiresApproval(decision)
+        }
         let timeMutation = try TimeMutation.make(command: command, beforeProjection: visibleProjection)
         guard let runtimeMutation = runtime.mutation(
             for: command,
@@ -96,7 +112,9 @@ struct TimeFieldMutationCoordinator: Sendable {
         targetBucket: LifeShapeBucket,
         selectedMark: LifeShapeSemanticMark?,
         placementCandidate: TimePlacementCandidate?,
-        now: Date
+        now: Date,
+        actor: AmbitionsCommandActor,
+        explicitProtectedPlacementApproval: Bool
     ) -> AmbitionsCommand {
         let timeID = targetBucket.id
         let stepID = action == .placeStep ? placementCandidate?.stepID : nil
@@ -110,6 +128,12 @@ struct TimeFieldMutationCoordinator: Sendable {
             metadata["placementCandidateKind"] = placementCandidate.kind.rawValue
             metadata["durationMinutes"] = "\(placementCandidate.durationMinutes)"
             metadata["placementSource"] = placementCandidate.sourceLabel
+            metadata["startAt"] = Self.isoString(from: targetBucket.start)
+            metadata["endAt"] = Self.isoString(from: targetBucket.end)
+            metadata["proposedStartAt"] = Self.isoString(from: targetBucket.start)
+            metadata["proposedEndAt"] = Self.isoString(from: targetBucket.end)
+            metadata["placementTrigger"] = protectedPlacementTrigger(for: actor).rawValue
+            metadata["explicitUserApproval"] = explicitProtectedPlacementApproval ? "true" : "false"
         }
         let command = AmbitionsCommand(
             id: "command.time.\(action.rawValue).\(Self.idComponent(timeID)).\(Self.idComponent(createdAt))",
@@ -126,9 +150,21 @@ struct TimeFieldMutationCoordinator: Sendable {
                 metadata: metadata
             ),
             createdAt: createdAt,
+            actor: actor,
             sourceSurface: "Time"
         )
         return command.validated(as: AmbitionsCommandValidator().validate(command))
+    }
+
+    private func protectedPlacementTrigger(for actor: AmbitionsCommandActor) -> ProtectedStepPlacementTrigger {
+        switch actor {
+        case .system:
+            .automatic
+        case .externalSurface:
+            .externalSurface
+        case .user:
+            .userInitiated
+        }
     }
 
     private static func isoString(from date: Date) -> String {

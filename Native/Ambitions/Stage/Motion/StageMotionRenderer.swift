@@ -8,24 +8,16 @@ struct StageMotionRenderer: View {
     let onAction: (MotionCurrentAction) -> Void
 
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: theme.spacing.md) {
-                MotionContextCrown(state: layer.projection.crown)
-                MotionCurrentField(
-                    state: layer.projection.field,
-                    lanes: layer.projection.lanes,
-                    reduceMotion: layer.reduceMotion,
-                    onAction: onAction
-                )
-                MotionReentryPrompt()
-                MotionLaneCluster(lanes: layer.projection.lanes)
-                MotionSourceReceiptAffordance(state: layer.projection.affordance)
-                MotionContinuityDock(actions: layer.projection.dockActions, onAction: onAction)
-            }
-            .padding(.horizontal, theme.spacing.lg)
-            .padding(.vertical, theme.spacing.md)
+        VStack(alignment: .leading, spacing: theme.spacing.sm) {
+            MotionCurrentField(
+                state: layer.projection.field,
+                lanes: layer.projection.lanes,
+                reduceMotion: layer.reduceMotion,
+                onAction: onAction
+            )
         }
-        .scrollIndicators(.hidden)
+        .padding(.horizontal, theme.spacing.lg)
+        .padding(.vertical, theme.spacing.md)
         .accessibilityElement(children: .contain)
         .accessibilityLabel(layer.accessibilityPlan.label)
         .accessibilityValue(layer.accessibilityPlan.value)

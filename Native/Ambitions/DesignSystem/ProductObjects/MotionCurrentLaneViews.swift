@@ -26,11 +26,11 @@ private struct MotionLaneBand: View {
         HStack(alignment: .top, spacing: theme.spacing.md) {
             ZStack {
                 Circle()
-                    .fill(lane.color(theme).opacity(0.2))
+                    .fill(lane.tint(theme).opacity(0.2))
                     .frame(width: 38, height: 38)
                 Image(systemName: lane.icon)
                     .font(theme.typography.caption.weight(.semibold))
-                    .foregroundStyle(lane.color(theme))
+                    .foregroundStyle(lane.tint(theme))
             }
             .accessibilityHidden(true)
 
@@ -64,7 +64,7 @@ private struct MotionLaneBand: View {
 
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
                     ForEach(lane.items) { item in
-                        MotionLaneStateRow(item: item, tint: lane.color(theme))
+                        MotionLaneStateRow(item: item, tint: lane.tint(theme))
                     }
                 }
                 .padding(.top, theme.spacing.xs)
@@ -74,7 +74,7 @@ private struct MotionLaneBand: View {
         .padding(.horizontal, theme.spacing.md)
         .overlay(alignment: .top) {
             Rectangle()
-                .fill(lane.color(theme).opacity(colorSchemeContrast == .increased ? 0.80 : 0.34))
+                .fill(lane.tint(theme).opacity(colorSchemeContrast == .increased ? 0.80 : 0.34))
                 .frame(height: colorSchemeContrast == .increased ? 1.5 : 1)
         }
         .overlay(alignment: .bottom) {
@@ -84,7 +84,7 @@ private struct MotionLaneBand: View {
         }
         .overlay(alignment: .leading) {
             Rectangle()
-                .fill(lane.color(theme))
+                .fill(lane.tint(theme))
                 .frame(width: colorSchemeContrast == .increased ? 5 : 3)
                 .padding(.vertical, theme.spacing.sm)
         }

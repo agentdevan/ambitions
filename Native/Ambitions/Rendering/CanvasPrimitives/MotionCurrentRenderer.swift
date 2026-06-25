@@ -88,7 +88,7 @@ private struct MotionRhythmNode: View {
     let index: Int
 
     var body: some View {
-        let tint = lane.color(theme)
+        let tint = lane.tint(theme)
 
         HStack(alignment: .center, spacing: theme.spacing.xs) {
             ZStack {

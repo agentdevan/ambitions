@@ -91,7 +91,7 @@ extension Capture {
             routeCorrectionLabel: routeCorrectionLabel,
             notGoalLabel: notGoalLabel,
             notNowLabel: "Not now: Review later keeps it out of Today.",
-            receiptLabel: "Correction receipt: the change you choose is reviewable.",
+            receiptLabel: "Correction history: the change you choose is reviewable.",
             learningBoundaryLabel: "Placement choices stay local and reviewable; no hidden memory changes."
         )
     }
@@ -101,10 +101,10 @@ extension Capture {
             id: "capture-goal-seed-incubator-\(id)",
             title: "Goal Seed Incubator",
             whyGoalLabel: "Why this may be a goal: the capture can be shaped, but it is not promoted yet.",
-            startingPositionProofLabel: "Starting position proof: \(sourceType?.title ?? "Capture") text stays editable.",
+            startingPositionProofLabel: "Starting point: \(sourceType?.title ?? "Capture") text stays editable.",
             firstMilestoneAnchorLabel: "First milestone anchor: Create Goal will show the first bounded milestone before saving.",
             firstStepLabel: "First step: review the seed setup in Goals before promotion.",
-            proofSourceSeedLabel: "Proof/source seed: the capture can stay attached after you confirm.",
+            proofSourceSeedLabel: "Context seed: the capture can stay attached after you confirm.",
             promotionConfirmationLabel: "Promotion confirmation: no Goal is created until you choose Grow into Goal and then Create Goal.",
             state: placementVisualState
         )
@@ -149,7 +149,7 @@ extension Capture {
     private var placementConsequenceLabel: String {
         switch route {
         case .captureInbox:
-            "Keeps this capture correctable until you choose a route."
+            "Keeps this capture correctable until you choose a placement."
         case .timeSeed:
             "Creates Time work only after you choose Step."
         case .goalSeed:

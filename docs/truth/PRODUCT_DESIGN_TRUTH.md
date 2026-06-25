@@ -329,6 +329,14 @@ Avoid weak first drafts. Do not provide a “good enough MVP” plan when the as
 
 Architecture tree entries are canonical owner names and planned/internal implementation paths, not user-facing UI language and not source-presence proof. Ambitions must not render its architecture to the user; the core objects carry the depth themselves.
 
+Green standard:
+
+- The user must see life objects, not Ambitions' implementation architecture.
+- State, action, mutation, recovery, proof, and inspection must be carried by the object that changed.
+- Root UI must not present Proof, Source, Receipts, Motion, route, runtime, seam, policy, or architecture labels as the primary product structure.
+- Shell, Capture, Motion, and Trust infrastructure may support the object, but they must not become the object.
+- Source names, file paths, screenshots, string-presence tests, and audit artifacts do not prove this standard; rendered object behavior does.
+
 Current user-facing surface/object language:
 
 ```text

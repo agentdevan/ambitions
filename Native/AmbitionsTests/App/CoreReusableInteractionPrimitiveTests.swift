@@ -14,7 +14,7 @@ final class CoreReusableInteractionPrimitiveTests: XCTestCase {
                 "Open step",
                 "Open goal thread",
                 "Review time fit",
-                "Inspect proof",
+                "Review history",
                 "Recovery option",
                 "Capture context",
                 "Private by default",
@@ -128,7 +128,7 @@ final class CoreReusableInteractionPrimitiveTests: XCTestCase {
         _ = AmbitionCoreInteractionActionButton(role: .recoveryOption, state: .recovery, action: {})
 
         _ = AmbitionCoreInteractionDisclosureRow(
-            role: .inspectProof,
+            role: .reviewHistory,
             state: .sourceNeeded,
             subtitle: "SourceRecord, Receipt, and ReplayTrace are available.",
             action: {}

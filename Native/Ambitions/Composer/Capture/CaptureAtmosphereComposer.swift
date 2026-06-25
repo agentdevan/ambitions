@@ -2,25 +2,24 @@ import AmbitionsDesignSystem
 import SwiftUI
 
 struct CaptureComposerMutationProofContract: Equatable {
-    let runtimeMutation: String
-    let visibleStageMutation: String
+    let runtimeMutationID: String
+    let visibleObjectMutationID: String
+    let affectedObjectIDs: [String]
     let accessibilityAnnouncement: String
-    let proofArtifact: String
+    let proofArtifactID: String
+    let undoTargetID: String
 
     var submitHint: String {
-        [
-            runtimeMutation,
-            visibleStageMutation,
-            accessibilityAnnouncement,
-            proofArtifact
-        ].joined(separator: ". ")
+        "Review after typing. Saving changes the local Capture object and keeps Undo available."
     }
 
     static let localSave = CaptureComposerMutationProofContract(
-        runtimeMutation: "Saves the capture through the local Capture runtime",
-        visibleStageMutation: "Updates the composer stage with the saved route",
-        accessibilityAnnouncement: "Announces the saved capture result",
-        proofArtifact: "Records a local capture proof artifact"
+        runtimeMutationID: "capture.local-save",
+        visibleObjectMutationID: "capture.object.saved",
+        affectedObjectIDs: ["capture.draft", "capture.placement"],
+        accessibilityAnnouncement: "Capture saved locally.",
+        proofArtifactID: "capture.local-save.proof",
+        undoTargetID: "capture.local-save.undo"
     )
 }
 
@@ -44,7 +43,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
         isSubmitEnabled: Bool
     ) {
         isRouteRevealVisible = false
-        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to Place" : "Needs placement")
+        placementTitle = routePreview?.postInputStateTitle ?? (isSubmitEnabled ? "Ready to place" : "Needs placement")
         destinationLabel = routePreview?.destinationLabel ?? "Private intake"
         privacyLabel = routePreview?.privacyLabel ?? "Stored locally when saved"
 
@@ -52,7 +51,7 @@ struct CaptureAtmosphereComposerPresentation: Equatable {
             evidenceTitle = "Needs attention"
             evidenceDetail = error
         } else if let routePreview {
-            evidenceTitle = routePreview.receiptTitle
+            evidenceTitle = routePreview.destinationLabel
             evidenceDetail = routePreview.consequenceLabel
         } else if isSubmitEnabled {
             evidenceTitle = "Ready to review"
@@ -134,9 +133,9 @@ struct CaptureAtmosphereComposerAccessibilityIDs: Equatable {
     let submitButton: String
     let error: String
     let inputAlternatives: String
-    let routeRevealStrip: String
-    let routeChoicePrefix: String
-    let routeInspectionSummary: String
+    let placementPreviewStrip: String
+    let placementChoicePrefix: String
+    let placementInspectionSummary: String
 
     static let quickCapture = CaptureAtmosphereComposerAccessibilityIDs(
         root: "capture.composer",
@@ -145,9 +144,9 @@ struct CaptureAtmosphereComposerAccessibilityIDs: Equatable {
         submitButton: "capture.quick-submit",
         error: "capture.quick-error",
         inputAlternatives: "capture.input-alternatives",
-        routeRevealStrip: "capture.route-reveal-strip",
-        routeChoicePrefix: "capture.route-choice.",
-        routeInspectionSummary: "capture.route-reveal.inspection-summary"
+        placementPreviewStrip: "capture.placement-preview",
+        placementChoicePrefix: "capture.placement-choice.",
+        placementInspectionSummary: "capture.placement.inspection-summary"
     )
 }
 

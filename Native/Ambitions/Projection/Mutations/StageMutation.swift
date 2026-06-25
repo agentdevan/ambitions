@@ -28,8 +28,8 @@ struct MutationMotionEvent: Equatable, Sendable {
 
 struct StageMutation: Equatable, Sendable {
     let runtimeMutationID: String
-    let beforeSnapshot: String
-    let afterSnapshot: String
+    let beforeSnapshot: MutationSnapshotReference
+    let afterSnapshot: MutationSnapshotReference
     let targetSurface: StageMutationTargetSurface
     let affectedObjectIDs: [String]
     let visibleUserFacingChange: String
@@ -43,8 +43,8 @@ struct StageMutation: Equatable, Sendable {
 
     var isCanonComplete: Bool {
         runtimeMutationID.isEmpty == false &&
-            beforeSnapshot.isEmpty == false &&
-            afterSnapshot.isEmpty == false &&
+            beforeSnapshot.isTypedReference &&
+            afterSnapshot.isTypedReference &&
             affectedObjectIDs.isEmpty == false &&
             visibleUserFacingChange.isEmpty == false &&
             typedMotionEvent.isTypedEvent &&
@@ -58,5 +58,13 @@ struct StageMutation: Equatable, Sendable {
 
     var motionEvent: String {
         typedMotionEvent.id
+    }
+
+    var beforeSnapshotSummary: String {
+        beforeSnapshot.summary
+    }
+
+    var afterSnapshotSummary: String {
+        afterSnapshot.summary
     }
 }

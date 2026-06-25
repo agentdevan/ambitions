@@ -17,7 +17,7 @@ struct StageMotionCurrentView: View {
             )
         }
     ) {
-        self.projection = projection ?? .fixture(renderState: .launchArgument)
+        self.projection = projection ?? .objectConsequence(renderState: .launchArgument)
         self.onAction = onAction
     }
 
@@ -29,7 +29,6 @@ struct StageMotionCurrentView: View {
         )
 
         StageMotionRenderer(layer: layer, onAction: onAction)
-        .accessibilityIdentifier("motion.current.scroll")
         .accessibilityIdentifier("stage.motion.current.view")
         .accessibilityValue(objectStageContract.firstViewportStructure)
     }

@@ -74,3 +74,58 @@ Ambitions must not silently move scheduled Step placement inside the next seven 
 - `Features/` was not expanded.
 - `SimpleStepLifecycleService.swift` was not edited and remains at 807 lines.
 - Compatibility debt: command preflight covers schedule/placement commands with step placement metadata; broader scheduling/projection centralization remains a future P2 repair train.
+
+## P2B-A Central Apply-Path Consolidation Addendum
+
+Date: 2026-06-25
+Baseline SHA: `dc25c6bad15de86dac5ad5da36aa7e1862488002`
+Current source baseline inspected: `6b24af43e0761415413565d930fba0198f11f503`
+Phase status: focused validation passed; broader apply-path consolidation remains scoped to the rendered Time placement path and existing P2A command preflight.
+
+### Scope
+
+P2B-A routes the rendered Time placement apply path through the existing protected-placement policy before any Time/Today mutation is produced. It does not add rendered approval UI, full Make Room, Add with conflict, Future Steps, Life Capital, account/R2 behavior, Source Atlas app behavior, Visual Green, Release Green, or device readiness.
+
+### Source Changed
+
+- `Native/Ambitions/Projection/Mutations/TimeFieldMutationCoordinator.swift`
+- `Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift`
+- `Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift`
+
+### Apply-Path Proof Added
+
+- `TimeFieldMutationCoordinator.perform(.placeStep)` now creates placement metadata for the selected Time bucket, including proposed start/end, duration, trigger, and explicit approval state.
+- The coordinator evaluates the command with `ProtectedStepPlacementPolicy` before constructing `TimeMutation` or `RuntimeMutation`.
+- Automatic Time placement inside the next seven days returns a protected-placement decision and does not mutate the Time surface.
+- User-initiated Time placement without explicit approval returns `requires_explicit_approval` and does not mutate the Time surface.
+- Normal rendered Time placement remains user-initiated and explicit by default, preserving the existing `Place Step` button behavior until P2B-B renders the review path.
+- Explicit approval metadata now overrides the prior user-actor fallback, so a user-initiated protected placement with `explicitUserApproval=false` returns review-required instead of silently applying.
+
+### Validation
+
+- `scripts/ambitions-xcode-test-focused.sh --batch P2B_A_TIME_COORDINATOR_RERUN --test AmbitionsTests/TimeFieldMutationCoordinatorTests --timeout 15m --kill-after 60s` passed: 11 tests, 0 failures.
+- Earlier `P2B_A_TIME_COORDINATOR` run failed once before the explicit-approval override was patched: `testP2BAUserTimePlacementInsideSevenDaysRequiresExplicitApprovalBeforeMutation`.
+
+### Gate Posture
+
+- `automatic_adjustment_does_not_move_next_seven_days_silently`: remains Partial. P2B-A adds source/runtime apply-path consolidation evidence, but rendered approval UI, accessibility proof, and device/no-network proof remain missing.
+- `automation_respects_protected_near_term_placement`: remains Partial. P2B-A adds Time coordinator preflight evidence, but rendered review UI, receipt persistence beyond scoped mutation proof, accessibility proof, and device/no-network proof remain missing.
+- `user_caused_adjustment_shows_impact_summary`: remains Partial. P2B-A does not render the user-caused impact summary.
+
+### Remaining Gaps
+
+- No rendered protected placement approval/review UI yet.
+- No approve/decline UI proof yet.
+- No screenshot or visual proof.
+- No accessibility proof for the approval UI.
+- No device/no-network proof.
+- Broader scheduling centralization outside the scoped rendered Time coordinator and existing command preflight remains future P2 work.
+
+### Architecture Notes
+
+- Final Architecture Tree inspected: yes.
+- Canonical owners touched: `Projection/Mutations`, `Core/Runtime`, and `Native/AmbitionsTests/Time`.
+- Non-canonical owners touched: none.
+- `Features/` was not expanded.
+- No second protected-placement policy or executor was introduced.
+- `SimpleStepLifecycleService.swift` was not touched by P2B-A.

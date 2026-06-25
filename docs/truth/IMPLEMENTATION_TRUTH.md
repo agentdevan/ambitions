@@ -158,6 +158,13 @@ If tests require Motion as a root tab, those tests are stale and must be migrate
 If scripts validate Motion as a root IA surface, those scripts are stale and must be migrated.
 ```
 
+Green implementation standard:
+
+- Source Green requires more than canonical paths: active root source must avoid architecture-as-UI copy and avoid generic wrapper ownership of the first viewport.
+- Runtime Green requires typed mutation, receipt, proof, undo, and accessibility consequences for scoped meaningful mutations.
+- Interaction Green requires object-owned mutation feedback, keyboard/safe-area behavior, and accessibility actions where user-facing changes occur.
+- Visual Green and Release Green remain unavailable to Codex without current independent visual, physical-device, accessibility, and release proof under `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` and `RELEASE_TRUTH.md`.
+
 ---
 
 ## 4. Native iPhone / Xcode / Project Structure
@@ -307,7 +314,7 @@ Implementation truth: You source exists. Profile compatibility symbols may remai
 
 ### Capture
 
-Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposerStage.swift`, `Native/Ambitions/Core/Domain/CaptureRouteGraph.swift`, `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, and `Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift`.
+Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`, `Native/Ambitions/Core/Domain/CaptureRouteGraph.swift`, `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, and `Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift`.
 
 Implementation truth: Capture source exists. Capture may still contain old route/screen assumptions. Product truth says Capture is the global typed route graph and full-screen Stage composer, not a root tab. Final global composer behavior remains unproven unless current proof exists.
 

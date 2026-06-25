@@ -23,7 +23,7 @@ struct ContextCrown: View {
                 .frame(width: 5, height: 5)
                 .accessibilityHidden(true)
 
-            Text(title.uppercased())
+            Text(title)
                 .font(theme.typography.micro.weight(.bold))
                 .foregroundStyle(theme.colors.textPrimary)
                 .lineLimit(1)

@@ -13,7 +13,7 @@ struct MotionReentryPrompt: View {
                 Text("Re-enter from here")
                     .font(theme.typography.caption.weight(.semibold))
                     .foregroundStyle(theme.colors.textPrimary)
-                Text("Motion shows what changed, where to return, and what needs recovery.")
+                Text("Return to the changed Step when it fits.")
                     .font(theme.typography.caption)
                     .foregroundStyle(theme.colors.textSecondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -83,8 +83,8 @@ struct MotionSourceReceiptAffordance: View {
         ProofRelationshipTracePrimitiveStage(
             role: .inspection,
             title: state.title,
-            subtitle: "Source, proof, and receipt stay inspectable when you open the history detail.",
-            accessibilityIdentifier: "motion.current.source-proof-receipt"
+            subtitle: "History stays inspectable when you open detail.",
+            accessibilityIdentifier: "motion.current.history-review"
         ) {
             VStack(alignment: .leading, spacing: theme.spacing.xs) {
                 ForEach(state.items) { item in
@@ -94,7 +94,7 @@ struct MotionSourceReceiptAffordance: View {
                         subtitle: item.value,
                         systemImage: item.icon,
                         semanticState: item.semanticState,
-                        accessibilityIdentifier: "motion.current.source-proof-receipt.\(item.id)"
+                        accessibilityIdentifier: "motion.current.history-review.\(item.id)"
                     )
                 }
             }

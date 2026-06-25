@@ -21,7 +21,7 @@ enum YouLens: SurfaceLens {
             "Reduce Transparency keeps status labels readable without glass reliance."
         ],
         trustInspectionRequirements: ["source", "proof", "receipt", "privacy", "history"],
-        failureStateRequirements: ["local-only state", "permission denied", "offline", "source unavailable", "recovery review"]
+        failureStateRequirements: ["local-only state", "permission denied", "offline", "context unavailable", "recovery review"]
     )
 
     static func project(_ dashboard: YouDashboard) -> SurfaceLensReport {

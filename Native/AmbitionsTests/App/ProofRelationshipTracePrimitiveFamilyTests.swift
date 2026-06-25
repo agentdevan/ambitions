@@ -47,8 +47,8 @@ final class ProofRelationshipTracePrimitiveFamilyTests: XCTestCase {
         XCTAssertTrue(motionSource.contains("ProofRelationshipTracePrimitiveToken("))
         XCTAssertTrue(motionSource.contains("ProofRelationshipTracePrimitiveLine("))
         XCTAssertTrue(motionSource.contains("ProofRelationshipTracePrimitiveStage("))
-        XCTAssertTrue(motionSource.contains("motion.current.source-proof-receipt"))
-        XCTAssertTrue(motionSource.contains("Source, proof, and receipt stay inspectable when you open the history detail."))
+        XCTAssertTrue(motionSource.contains("motion.current.history-review"))
+        XCTAssertTrue(motionSource.contains("History stays inspectable when you open detail."))
 
         XCTAssertFalse(motionSource.contains("AmbitionChip(chip.title"))
         XCTAssertFalse(motionSource.contains("AmbitionChip(marker.title"))

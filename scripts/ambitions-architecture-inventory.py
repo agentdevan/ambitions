@@ -104,7 +104,10 @@ def final_tree_block(truth_file: Path) -> str:
     fences = after_header.split("```")
     if len(fences) < 3:
         raise ValueError("Final Architecture Tree code fence not found")
-    return fences[1]
+    for block in fences[1::2]:
+        if block.strip().startswith("Ambitions/"):
+            return block
+    raise ValueError("Final Architecture Tree code fence beginning with Ambitions/ not found")
 
 
 def canonical_file_paths(truth_file: Path) -> list[str]:

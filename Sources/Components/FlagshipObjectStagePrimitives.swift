@@ -4,8 +4,7 @@ import SwiftUI
 /// Full-bleed signature-object composition for top-level Ambitions surfaces.
 ///
 /// This is the release-recovery alternative to leading every surface with a card.
-/// The owning screen supplies the product object: Reality Meridian, Constellation
-/// Atlas, Atmosphere Composer, LifeShape Field, Motion Current, or User System Profile.
+/// The owning screen supplies the product object; architecture names stay out of root UI.
 public struct FlagshipObjectStage<Header: View, Content: View>: View {
     @Environment(\.ambitionTheme) private var theme
 

@@ -21,7 +21,7 @@ struct TodayLens: Equatable, SurfaceLens {
             "Reduce Motion keeps the current-time relationship static."
         ],
         trustInspectionRequirements: ["source", "proof", "receipt", "privacy"],
-        failureStateRequirements: ["empty day", "blocked step", "waiting state", "source unavailable", "recovery fallback"]
+        failureStateRequirements: ["empty day", "blocked step", "waiting state", "context unavailable", "recovery fallback"]
     )
 
     let generatedAt: Date

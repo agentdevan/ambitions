@@ -134,9 +134,9 @@ struct AppShellActivatedCaptureSeam: View {
                 submitButton: "shell.activated-capture.save-button",
                 error: "shell.activated-capture.error",
                 inputAlternatives: "shell.activated-capture.input-alternatives",
-                routeRevealStrip: "shell.activated-capture.route-reveal",
-                routeChoicePrefix: "shell.activated-capture.route-choice.",
-                routeInspectionSummary: "shell.activated-capture.route-inspection"
+                placementPreviewStrip: "shell.activated-capture.placement-preview",
+                placementChoicePrefix: "shell.activated-capture.placement-choice.",
+                placementInspectionSummary: "shell.activated-capture.placement-inspection"
             ),
             shouldAutoFocus: true
         )
@@ -207,7 +207,7 @@ struct AppShellActivatedCaptureSeam: View {
             sourceType: sourceType,
             sourceSurface: sourceSurfaceLabel,
             selectedDraftRouteType: selectedDraftRouteType,
-            localSourceLabel: "Local source: \(overlay.entrySource.displayTitle)"
+            localSourceLabel: "Started from \(overlay.entrySource.displayTitle)"
         )
     }
 

@@ -51,11 +51,16 @@ struct StageDockRail: View {
                 .symbolRenderingMode(.hierarchical)
             .foregroundStyle(isSelected ? theme.shell.activeTabForeground : theme.shell.inactiveTabForeground.opacity(0.86))
             .frame(
-                width: accessibilityCompact ? 64 : 56,
-                height: accessibilityCompact ? 64 : 56
+                width: accessibilityCompact ? 58 : 52,
+                height: accessibilityCompact ? 50 : 44
             )
-            .background(Circle().fill(theme.shell.controlBackground))
-            .contentShape(Circle())
+            .background {
+                if isSelected {
+                    Capsule(style: .continuous)
+                        .fill(theme.shell.controlBackground.opacity(0.92))
+                }
+            }
+            .contentShape(Capsule(style: .continuous))
         }
         .buttonStyle(.plain)
         .accessibilityElement(children: .ignore)

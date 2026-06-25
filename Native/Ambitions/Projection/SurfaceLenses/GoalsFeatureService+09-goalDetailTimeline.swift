@@ -77,7 +77,7 @@ extension RepositoryBackedGoalsService {
             GoalDetailAssumptionState(
                 id: "proof",
                 title: "This goal has enough proof.",
-                status: evidenceItems.isEmpty ? "No proof yet" : "Proof visible",
+                status: evidenceItems.isEmpty ? "No evidence yet" : "Evidence visible",
                 whyItMatters: "Progress should be backed by something observable.",
                 correctionLabel: "Add proof later",
                 state: evidenceItems.isEmpty ? .default : .selected

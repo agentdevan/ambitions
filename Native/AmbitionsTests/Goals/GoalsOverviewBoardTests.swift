@@ -186,7 +186,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
 
         XCTAssertEqual(blockedCard.lifecycleState, .blocked)
         XCTAssertEqual(blockedCard.weather, .stormy)
-        XCTAssertEqual(blockedCard.proofSummary.title, "No proof yet")
+        XCTAssertEqual(blockedCard.proofSummary.title, "No evidence yet")
         XCTAssertTrue(overview.stateChips.contains(where: { $0.lifecycleState == .blocked && $0.count == 1 }))
         XCTAssertEqual(overview.lifecycleRail.first(where: { $0.id == "active" })?.count, 3)
     }
@@ -424,7 +424,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertEqual(threadFocus.accessibilityLabel, "Goals Thread Focus")
         XCTAssertTrue(threadFocus.accessibilityHint.contains("feed Today"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Feeds Today"))
-        XCTAssertTrue(snapshot.firstScreenContent.contains("Proof available"))
+        XCTAssertTrue(snapshot.firstScreenContent.contains("Evidence visible"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Recently moved"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Needs recovery"))
         XCTAssertTrue(snapshot.firstScreenContent.contains("Pinned area"))
@@ -489,18 +489,18 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         let contractSnapshot = overview.screenContractSnapshot()
         let primaryCard = try XCTUnwrap(overview.bands.flatMap(\.cards).first { $0.target.goalID == goal.id })
 
-        XCTAssertTrue(summary.contains("Source:"))
-        XCTAssertTrue(summary.contains("Receipt:"))
+        XCTAssertTrue(summary.contains("Context:"))
+        XCTAssertTrue(summary.contains("History:"))
         XCTAssertTrue(summary.contains("Reason:"))
         XCTAssertTrue(summary.contains("You / Search Ambitions:"))
         XCTAssertTrue(summary.contains("local Goals, drafts, evidence, and capture records"))
-        XCTAssertTrue(summary.contains("closure receipts"))
+        XCTAssertTrue(summary.contains("change record"))
         XCTAssertTrue(summary.contains("Active direction"))
         XCTAssertTrue(summary.contains("Thread Focus keeps one real thread connected to Today"))
         XCTAssertTrue(accessibilityValue.contains("Your Direction"))
         XCTAssertEqual(
             overview.constellationAtlasCompactInspectionSummary,
-            "Source, proof receipts, reason, and Today connection stay inspectable through You."
+            "Context, history, reason, and Today connection stay inspectable through You."
         )
         XCTAssertEqual(primaryCard.milestoneSummary, "0/1 milestones visible")
         XCTAssertEqual(primaryCard.proofSummary.latestTitle, "Reviewed launch proof")
@@ -512,7 +512,7 @@ final class GoalsOverviewAtlasTests: XCTestCase {
         XCTAssertEqual(overview.orbitalLens.target, primaryCard.target)
         XCTAssertTrue(overview.orbitalLens.collapsedSummary.contains("Career"))
         XCTAssertTrue(overview.orbitalLens.feedsTodaySummary.contains("Feeds Today"))
-        XCTAssertTrue(overview.orbitalLens.proofSummary.contains("Proof available"))
+        XCTAssertTrue(overview.orbitalLens.proofSummary.contains("Evidence visible"))
         XCTAssertTrue(overview.orbitalLens.sourceSummary.contains("local Goals"))
         XCTAssertTrue(overview.orbitalLens.whyThisSummary.contains(primaryCard.pressureSummary))
         XCTAssertEqual(overview.orbitalLens.openThreadLabel, "Open goal thread")
@@ -584,11 +584,11 @@ final class GoalsOverviewAtlasTests: XCTestCase {
             requiredFirstScreenContent: [
                 "Your Direction",
                 "Thread Focus",
-                "Source",
-                "Receipt",
+                "Context",
+                "History",
                 "Reason",
                 "Feeds Today",
-                "Proof available",
+                "Evidence visible",
                 "Recently moved",
                 "Needs recovery",
                 "Pinned area",

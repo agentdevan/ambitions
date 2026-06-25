@@ -105,7 +105,7 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(viewModel.draftRoutePreview?.postInputStateTitle, "Ready to Place")
         XCTAssertEqual(viewModel.draftRoutePreview?.choices.first?.isSelected, true)
         XCTAssertEqual(viewModel.draftRoutePreview?.routeProofTitle, "Chosen by you")
-        XCTAssertEqual(viewModel.draftRoutePreview?.routeProofDetail, "Chosen route")
+        XCTAssertEqual(viewModel.draftRoutePreview?.routeProofDetail, "Manual placement choice; you can still change it before saving.")
     }
 
     func testSemanticExtractionClarificationQuestionSurfacesInDraftPreview() async {
@@ -213,24 +213,24 @@ final class CaptureViewModelTests: XCTestCase {
         XCTAssertEqual(preview.appearanceLabel, "Today")
         XCTAssertEqual(preview.consequenceLabel, "Adds a visible Step to Today after you confirm.")
         XCTAssertEqual(preview.privacyLabel, "Private item")
-        XCTAssertEqual(preview.localSourceLabel, "Local source: typed in Capture")
-        XCTAssertEqual(preview.correctionLabel, "Correction: change the route before saving")
-        XCTAssertEqual(preview.receiptSeamLabel, "Receipt seam: save creates a local capture receipt")
-        XCTAssertEqual(preview.resolverFoldTitle, "Resolver Fold")
-        XCTAssertEqual(preview.resolverWhyLabel, "Local resolver: Step based on local text only.")
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Source: Local source: typed in Capture"))
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Receipt: Receipt seam: save creates a local capture receipt"))
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Reason: Local resolver: Step based on local text only."))
-        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("You / Search Ambitions: route stays inspectable and correctable before saving."))
+        XCTAssertEqual(preview.localSourceLabel, "Typed in Capture")
+        XCTAssertEqual(preview.correctionLabel, "Correction: change placement before saving")
+        XCTAssertEqual(preview.receiptSeamLabel, "History: save creates a local capture record")
+        XCTAssertEqual(preview.resolverFoldTitle, "Placement review")
+        XCTAssertEqual(preview.resolverWhyLabel, "Local review: Step based on local text only.")
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Started: Typed in Capture"))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("History: History: save creates a local capture record"))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Reason: Local review: Step based on local text only."))
+        XCTAssertTrue(preview.atmosphereComposerInspectionSummary.contains("Placement stays inspectable and correctable before saving."))
         XCTAssertEqual(
             preview.atmosphereComposerCompactInspectionSummary,
-            "Local source, receipt, draft state, and reason stay visible before saving."
+            "Placement, draft state, and reason stay visible before saving."
         )
         XCTAssertTrue(preview.correctionReceiptLabel.localizedCaseInsensitiveContains("recorded locally"))
-        XCTAssertTrue(preview.correctionControlLabels.contains("Place somewhere else: choose a route below."))
+        XCTAssertTrue(preview.correctionControlLabels.contains("Place somewhere else: choose a placement below."))
         XCTAssertTrue(preview.correctionControlLabels.contains("Not now: Decide later keeps it out of Today."))
         XCTAssertTrue(preview.correctionControlLabels.contains("Discard: clear the composer before saving."))
-        XCTAssertEqual(preview.routeProofTitle, "Route evidence")
+        XCTAssertEqual(preview.routeProofTitle, "Placement check")
         XCTAssertEqual(preview.routeProofDetail, "Standalone")
     }
 
@@ -262,8 +262,8 @@ final class CaptureViewModelTests: XCTestCase {
         viewModel.selectDraftRoute(.idea)
 
         let preview = try! XCTUnwrap(viewModel.draftRoutePreview)
-        XCTAssertEqual(preview.correctionLabel, "Correction: route chosen by you")
-        XCTAssertEqual(preview.resolverWhyLabel, "Local resolver: use the destination you chose.")
+        XCTAssertEqual(preview.correctionLabel, "Correction: placement chosen by you")
+        XCTAssertEqual(preview.resolverWhyLabel, "Local review: use the destination you chose.")
         XCTAssertTrue(preview.correctionControlLabels.contains("Not a goal: no Goal is created unless you choose Goal."))
         XCTAssertTrue(preview.correctionControlLabels.contains("Decide later: save to Needs a Place."))
     }

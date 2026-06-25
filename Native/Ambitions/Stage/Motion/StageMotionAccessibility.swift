@@ -18,10 +18,10 @@ struct StageMotionAccessibilityPlan {
                 projection.field.source,
                 projection.field.proof,
                 projection.field.receipt,
-                reductionPolicy.proofThreadTextureDescription,
+                reductionPolicy.movementTextureDescription,
                 mirror.accessibleConsequenceSummary
             ].joined(separator: ". "),
-            hint: "Motion is behavior, not a destination. \(reductionPolicy.rhythmSpacingDescription)",
+            hint: "Movement stays attached to the changed object. \(reductionPolicy.rhythmSpacingDescription)",
             semanticMirror: mirror
         )
     }
@@ -38,7 +38,7 @@ func motionTraceRole(for label: String) -> ProofRelationshipTracePrimitiveRole {
     if value.contains("review") {
         return .receipt
     }
-    if value.contains("trace") || value.contains("return") || value.contains("next seam") {
+    if value.contains("trace") || value.contains("return") || value.contains("next step") {
         return .replayTrace
     }
     if value.contains("owner") || value.contains("consent") {
@@ -49,7 +49,7 @@ func motionTraceRole(for label: String) -> ProofRelationshipTracePrimitiveRole {
 
 extension MotionLaneItemState {
     var accessibilitySummary: String {
-        "\(stateLabel). Source: \(source). Proof: \(proof). Receipt: \(receipt)"
+        "\(stateLabel). Context: \(source). History: \(proof). Review: \(receipt)"
     }
 }
 

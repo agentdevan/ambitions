@@ -68,7 +68,7 @@ extension RepositoryBackedGoalsService {
                     detail: archive.learning.isEmpty
                         ? "Completed work stays attached as evidence, not as celebration."
                         : archive.learning,
-                    badgeTitle: proofSummary.count == 0 ? "No proof yet" : "Evidence visible",
+                    badgeTitle: proofSummary.count == 0 ? "No evidence yet" : "Evidence visible",
                     systemImage: "checkmark.seal",
                     state: proofSummary.visualState
                 ),
@@ -135,12 +135,12 @@ extension RepositoryBackedGoalsService {
                 risks: riskItems
             ),
             proofRail: GoalDetailProofRailState(
-                title: "Proof",
-                subtitle: proofSummary.count == 0 ? "Evidence will appear here when it is recorded." : "Proof keeps source, freshness, privacy, correction, and review visible.",
+                title: "Evidence",
+                subtitle: proofSummary.count == 0 ? "Evidence will appear here when it is recorded." : "Evidence keeps context, freshness, privacy, correction, and review visible.",
                 items: evidenceItems,
                 spineBeads: proofBeads,
-                emptyTitle: "No proof yet",
-                emptyMessage: "Add proof later when there is something real to show."
+                emptyTitle: "No evidence yet",
+                emptyMessage: "Add evidence later when there is something real to show."
             ),
             decisions: decisions,
             risks: risks,
@@ -158,10 +158,10 @@ extension RepositoryBackedGoalsService {
 
     func goalDetailProofSummary(evidenceItems: [GoalEvidenceItem], evidenceLabel: String) -> GoalProofSummary {
         guard let latest = evidenceItems.first else {
-            return GoalProofSummary(title: "No proof yet", detail: "Needs evidence", count: 0, latestTitle: nil, visualState: .default)
+            return GoalProofSummary(title: "No evidence yet", detail: "Needs evidence", count: 0, latestTitle: nil, visualState: .default)
         }
         return GoalProofSummary(
-            title: evidenceItems.count == 1 ? "1 proof point" : "\(evidenceItems.count) proof points",
+            title: evidenceItems.count == 1 ? "1 evidence item" : "\(evidenceItems.count) evidence items",
             detail: evidenceLabel,
             count: evidenceItems.count,
             latestTitle: latest.title,

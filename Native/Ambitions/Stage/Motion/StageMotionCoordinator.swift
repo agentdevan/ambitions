@@ -44,11 +44,11 @@ struct StageMotionCoordinator {
         reductionPolicy: StageMotionReductionPolicy
     ) -> StageMotionRoute {
         switch action {
-        case .inspectProof:
-            return memoryLensRoute(label: "proof", action: action, reductionPolicy: reductionPolicy)
-        case .openReceipt:
-            return memoryLensRoute(label: "receipt", action: action, reductionPolicy: reductionPolicy)
-        case .openThread:
+        case .reviewHistory:
+            return memoryLensRoute(label: "review", action: action, reductionPolicy: reductionPolicy)
+        case .openHistory:
+            return memoryLensRoute(label: "history", action: action, reductionPolicy: reductionPolicy)
+        case .returnToThread:
             return memoryLensRoute(label: "thread", action: action, reductionPolicy: reductionPolicy)
         case .openToday:
             return .returnToToday(.standard)

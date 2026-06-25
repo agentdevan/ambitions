@@ -11,10 +11,10 @@ struct StageMotionReductionPolicy: Equatable, Sendable {
         reduceMotionEnabled == false
     }
 
-    var proofThreadTextureDescription: String {
+    var movementTextureDescription: String {
         reduceMotionEnabled
-            ? "Static proof-thread marks preserve source, proof, receipt, and re-entry meaning."
-            : "Subtle proof-thread motion may mark source, proof, receipt, and re-entry continuity."
+            ? "Static movement marks preserve context, history, review, and re-entry meaning."
+            : "Subtle movement may mark context, history, review, and re-entry continuity."
     }
 
     var rhythmSpacingDescription: String {

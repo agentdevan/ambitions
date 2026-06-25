@@ -136,7 +136,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
     case openStep
     case openGoalThread
     case reviewTimeFit
-    case inspectProof
+    case reviewHistory
     case recoveryOption
     case captureContext
     case trustPreference
@@ -151,7 +151,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
         case .openStep: "Open step"
         case .openGoalThread: "Open goal thread"
         case .reviewTimeFit: "Review time fit"
-        case .inspectProof: "Inspect proof"
+        case .reviewHistory: "Review history"
         case .recoveryOption: "Recovery option"
         case .captureContext: "Capture context"
         case .trustPreference: "Private by default"
@@ -167,7 +167,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
             return "Goals"
         case .reviewTimeFit:
             return "Time"
-        case .inspectProof:
+        case .reviewHistory:
             return "Motion"
         case .captureContext:
             return "Global Capture"
@@ -188,8 +188,8 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
             return "Constellation Atlas"
         case .reviewTimeFit:
             return "LifeShape Field / Time Texture"
-        case .inspectProof:
-            return "Proof movement"
+        case .reviewHistory:
+            return "Movement history"
         case .recoveryOption:
             return "Recovery path"
         case .captureContext:
@@ -205,7 +205,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
         switch self {
         case .startHere, .startNow:
             return .primaryAction
-        case .openStep, .openGoalThread, .reviewTimeFit, .inspectProof:
+        case .openStep, .openGoalThread, .reviewTimeFit, .reviewHistory:
             return .disclosureRow
         case .recoveryOption:
             return .recoveryAction
@@ -225,7 +225,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
         case .openStep: "checklist"
         case .openGoalThread: "sparkle.magnifyingglass"
         case .reviewTimeFit: "clock.badge.checkmark"
-        case .inspectProof: "waveform.path.ecg"
+        case .reviewHistory: "waveform.path.ecg"
         case .recoveryOption: "arrow.uturn.backward.circle"
         case .captureContext: "square.and.pencil"
         case .trustPreference: "lock.shield"
@@ -237,7 +237,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
         switch self {
         case .startHere, .startNow:
             return .primary
-        case .openStep, .openGoalThread, .reviewTimeFit, .inspectProof, .captureContext:
+        case .openStep, .openGoalThread, .reviewTimeFit, .reviewHistory, .captureContext:
             return .secondary
         case .recoveryOption:
             return .recovery
@@ -254,7 +254,7 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
         case .openStep: .confidenceMedium
         case .openGoalThread: .review
         case .reviewTimeFit: .calendarDerived
-        case .inspectProof: .trust
+        case .reviewHistory: .trust
         case .recoveryOption: .recovery
         case .captureContext: .capture
         case .trustPreference: .protected
@@ -278,8 +278,8 @@ public enum AmbitionCoreInteractionRole: String, CaseIterable, Identifiable, Sen
             return "Opens the related goal thread and proof context."
         case .reviewTimeFit:
             return "Shows time fit, capacity, and protected-time context."
-        case .inspectProof:
-            return "Shows proof, source, and receipt context."
+        case .reviewHistory:
+            return "Shows history, context, and return state."
         case .recoveryOption:
             return "Shows a smaller recovery option without shame."
         case .captureContext:

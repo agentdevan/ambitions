@@ -70,7 +70,7 @@ extension RepositoryBackedYouService {
                 freshness: goal.searchFreshness,
                 actions: searchActions(
                     baseID: goal.id,
-                    titles: ["Open goal", "Open step", "Inspect proof"],
+                    titles: ["Open goal", "Open step", "Review history"],
                     statusLabel: goal.state.rawValue.capitalized,
                     detail: "Open the canonical Goal Detail surface.",
                     state: goal.state == .active ? .success : .default
@@ -128,7 +128,7 @@ extension RepositoryBackedYouService {
                 freshness: .current,
                 actions: searchActions(
                     baseID: evidence.id,
-                    titles: ["Open proof", "Open goal", "Inspect receipt"],
+                    titles: ["Review history", "Open goal", "Open detail"],
                     statusLabel: evidence.source.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
                     detail: "Proof remains local and inspectable.",
                     state: .success
@@ -155,7 +155,7 @@ extension RepositoryBackedYouService {
                 freshness: event.searchFreshness,
                 actions: searchActions(
                     baseID: event.base.id,
-                    titles: ["Open review", "Correct assumption", "Inspect receipt"],
+                    titles: ["Open review", "Correct assumption", "Open history"],
                     statusLabel: event.kind.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
                     detail: "Feedback stays tied to the owning goal surface.",
                     state: .success
@@ -211,7 +211,7 @@ extension RepositoryBackedYouService {
                 freshness: event.localOnly ? .current : .mayNeedReview,
                 actions: searchActions(
                     baseID: event.id,
-                    titles: ["Inspect event", "Open source", "Open receipt"],
+                    titles: ["Open event", "Open context", "Open history"],
                     statusLabel: event.source.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
                     detail: "Recent local actions and changes stay inspectable.",
                     state: event.localOnly ? .success : .warning

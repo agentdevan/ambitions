@@ -9,9 +9,9 @@ final class StageMotionRoutingTests: XCTestCase {
             .openGoals,
             .openTime,
             .openTrust,
-            .inspectProof("proof-visible"),
-            .openReceipt("receipt-visible"),
-            .openThread("return-to-thread")
+            .reviewHistory("review-visible"),
+            .openHistory("history-visible"),
+            .returnToThread("return-to-thread")
         ]
 
         for action in actions {
@@ -49,19 +49,19 @@ final class StageMotionRoutingTests: XCTestCase {
         }
     }
 
-    func testStageOwnerRoutesProofReceiptAndThreadReentryThroughMemoryLensOverlay() {
+    func testStageOwnerRoutesReviewHistoryAndThreadReturnThroughMemoryLensOverlay() {
         let owner = StageOwner()
 
         assertMemoryLensOverlay(
-            owner.route(for: .inspectProof("proof"), source: "test"),
-            expectedQuery: "proof:proof"
+            owner.route(for: .reviewHistory("review"), source: "test"),
+            expectedQuery: "review:review"
         )
         assertMemoryLensOverlay(
-            owner.route(for: .openReceipt("receipt"), source: "test"),
-            expectedQuery: "receipt:receipt"
+            owner.route(for: .openHistory("history"), source: "test"),
+            expectedQuery: "history:history"
         )
         assertMemoryLensOverlay(
-            owner.route(for: .openThread("thread"), source: "test"),
+            owner.route(for: .returnToThread("thread"), source: "test"),
             expectedQuery: "thread:thread"
         )
     }
@@ -82,17 +82,17 @@ final class StageMotionRoutingTests: XCTestCase {
     func testStageMotionCoordinatorOwnsCanonicalRoutingAndPolicy() {
         let coordinator = StageMotionCoordinator(reduceMotionEnabled: false)
         let coordination = coordinator.coordinate(
-            action: .inspectProof(nil),
+            action: .reviewHistory(nil),
             source: "stage-motion-test"
         )
 
-        XCTAssertEqual(coordination.projection.action, .inspectProof(nil))
+        XCTAssertEqual(coordination.projection.action, .reviewHistory(nil))
         XCTAssertEqual(coordination.projection.sourceSurface, "stage-motion-test")
         XCTAssertEqual(coordination.projection.reduceMotion, false)
         XCTAssertEqual(coordination.projection.displayStyle, .active)
         XCTAssertEqual(coordination.reductionPolicy.displayStyle, .active)
         XCTAssertTrue(coordination.reductionPolicy.allowsAmbientMovement)
-        assertMemoryLensOverlay(coordination.route, expectedQuery: "proof continuity")
+        assertMemoryLensOverlay(coordination.route, expectedQuery: "review continuity")
     }
 
     func testStageMotionReductionPolicyKeepsReducedMotionSemanticQueriesStatic() {
@@ -100,9 +100,9 @@ final class StageMotionRoutingTests: XCTestCase {
 
         XCTAssertEqual(policy.displayStyle, .calm)
         XCTAssertFalse(policy.allowsAmbientMovement)
-        XCTAssertEqual(policy.motionQuery(label: "proof", action: .inspectProof(nil)), "proof")
-        XCTAssertEqual(policy.motionQuery(label: "proof", action: .inspectProof("proof-id")), "proof:proof-id")
-        XCTAssertTrue(policy.proofThreadTextureDescription.contains("Static proof-thread marks"))
+        XCTAssertEqual(policy.motionQuery(label: "review", action: .reviewHistory(nil)), "review")
+        XCTAssertEqual(policy.motionQuery(label: "review", action: .reviewHistory("review-id")), "review:review-id")
+        XCTAssertTrue(policy.movementTextureDescription.contains("Static movement marks"))
         XCTAssertTrue(policy.rhythmSpacingDescription.contains("static"))
     }
 

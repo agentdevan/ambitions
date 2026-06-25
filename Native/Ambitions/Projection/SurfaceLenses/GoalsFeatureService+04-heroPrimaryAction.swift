@@ -73,11 +73,11 @@ extension RepositoryBackedGoalsService {
         let proofCount = selectedArea?.proofCount ?? activeThread?.proofSummary.count ?? 0
         let receiptCount = selectedArea?.receiptCount ?? 0
         let proofSummary = proofCount > 0
-            ? "Proof available: \(proofCount) proof point\(proofCount == 1 ? "" : "s") and \(receiptCount) closure receipt\(receiptCount == 1 ? "" : "s") stay attached to this direction thread."
-            : "Proof available: still thin, so the lens keeps the source visible before asking for commitment."
+            ? "Evidence visible: \(proofCount) saved item\(proofCount == 1 ? "" : "s") and \(receiptCount) change record\(receiptCount == 1 ? "" : "s") stay attached to this direction thread."
+            : "Evidence light: the lens keeps context visible before asking for commitment."
         let sourceSummary = seeded
-            ? "Source: preview Goals, drafts, evidence, and capture records."
-            : "Source: local Goals, drafts, evidence, and capture records."
+            ? "Context: preview Goals, drafts, evidence, and capture records."
+            : "Context: local Goals, drafts, evidence, and capture records."
         let feedsToday = selectedArea?.todayTraceSummary ?? activeThread?.weekRelationship ?? "Feeds Today when this thread becomes the recommended step."
         let whyThis = activeThread?.pressureSummary ?? activeThread?.phaseSummary ?? "Thread Focus follows the clearest Life Area connection."
         let status = orbitalLensStatus(for: activeThread)
@@ -267,10 +267,10 @@ extension RepositoryBackedGoalsService {
         )
         let proofSignal = GoalPortfolioMaturitySignal(
             id: "proof",
-            title: prooflessLiveCount == 0 ? "Proof is visible" : "Proof is thin",
+            title: prooflessLiveCount == 0 ? "Evidence is visible" : "Evidence is thin",
             detail: prooflessLiveCount == 0
-                ? "Live ambitions have proof or receipts attached."
-                : "\(prooflessLiveCount) live ambitions need a proof point before momentum is easy to trust.",
+                ? "Live ambitions have evidence or history attached."
+                : "\(prooflessLiveCount) live ambitions need evidence before momentum is easy to trust.",
             state: prooflessLiveCount == 0 ? .selected : .default
         )
         let nextStepSignal = GoalPortfolioMaturitySignal(

@@ -38,6 +38,7 @@ REQUIRED_ARCHITECTURE_PATHS = [
     "scripts/ambitions-screenshot-artifact-audit.py",
     "scripts/ambitions-linear-green-claim-audit.py",
     "scripts/ambitions-device-proof-required.py",
+    "scripts/ambitions-green-standard-audit.py",
     "Native/Ambitions/Language/ProductCopy.swift",
     "Native/Ambitions/Language/ForbiddenTopLevelTerms.swift",
     "Native/Ambitions/Quality/QualityGateChecklist.swift",
@@ -801,6 +802,38 @@ def check_rendered_product_acceptance_contracts() -> list[Finding]:
     return findings
 
 
+def check_green_standard_contract() -> list[Finding]:
+    script = ROOT / "scripts" / "ambitions-green-standard-audit.py"
+    if not script.exists():
+        return [
+            Finding(
+                "green-standard",
+                rel(script),
+                "Green standard audit is missing",
+            )
+        ]
+
+    result = subprocess.run(
+        [sys.executable, str(script)],
+        cwd=ROOT,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    if result.returncode == 0:
+        return []
+
+    output = "\n".join(part for part in [result.stdout, result.stderr] if part).strip()
+    return [
+        Finding(
+            "green-standard",
+            rel(script),
+            output[:500] if output else "Green standard audit failed",
+        )
+    ]
+
+
 def check_action_mutation_contract(files: list[Path]) -> list[Finding]:
     findings: list[Finding] = []
     for path in files:
@@ -901,6 +934,7 @@ def main() -> int:
     findings.extend(check_master_lifeshape_foldin_contract())
     findings.extend(check_lifeshape_linear_control_plane_contract())
     findings.extend(check_rendered_product_acceptance_contracts())
+    findings.extend(check_green_standard_contract())
     findings.extend(check_action_mutation_contract(files))
 
     grouped = summarize(findings, max_per_gate=args.max_per_gate)

@@ -101,7 +101,7 @@ extension RepositoryBackedGoalsService {
             id: evidence.id,
             title: evidence.note ?? "Progress signal recorded",
             summary: evidence.evidenceKind.rawValue.replacingOccurrences(of: "_", with: " ").capitalized,
-            sourceLabel: "Source: \(proofSourceTitle(evidence.source))",
+            sourceLabel: "Context: \(proofSourceTitle(evidence.source))",
             freshness: freshness,
             privacyLabel: proofPrivacyLabel(evidence.source),
             timestampLabel: evidence.capturedAt,

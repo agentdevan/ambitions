@@ -127,8 +127,8 @@ extension DefaultMemoryLensService {
             return MemoryLensResult(
                 id: "proof-\(item.id)",
                 title: item.note?.isEmpty == false ? item.note! : item.evidenceKind.searchTitle,
-                subtitle: goal.map { "Proof for \($0.title)." } ?? "Saved proof.",
-                explanation: "Open the goal or receipts history for this saved proof.",
+                subtitle: goal.map { "History for \($0.title)." } ?? "Saved history.",
+                explanation: "Open the goal or local history for this saved change.",
                 queryText: [
                     item.note ?? "",
                     item.evidenceKind.searchTitle,
@@ -138,7 +138,7 @@ extension DefaultMemoryLensService {
                 timestamp: item.capturedAt,
                 kind: .proof,
                 facet: .open,
-                actionTitle: goal == nil ? "Open receipt" : "Open proof",
+                actionTitle: goal == nil ? "Open history" : "Review history",
                 destination: goal.map { .goal($0.id) } ?? .youRoute(.receiptsHistory)
             )
         }

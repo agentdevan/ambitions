@@ -92,11 +92,11 @@ struct CaptureDraftRouteService: Sendable {
             consequenceLabel: placementPreview.consequenceLabel,
             privacyLabel: placementPreview.privacyLabel,
             localSourceLabel: localSourceLabel,
-            correctionLabel: decision.selectedRouteType == nil ? "Correction: change the route before saving" : "Correction: route chosen by you",
-            receiptSeamLabel: "Receipt seam: save creates a local capture receipt",
-            resolverFoldTitle: "Resolver Fold",
+            correctionLabel: decision.selectedRouteType == nil ? "Correction: change placement before saving" : "Correction: placement chosen by you",
+            receiptSeamLabel: "History: save creates a local capture record",
+            resolverFoldTitle: "Placement review",
             resolverWhyLabel: resolverWhyLabel(from: decision),
-            correctionReceiptLabel: "Correction receipt: saved route changes are recorded locally and stay reviewable.",
+            correctionReceiptLabel: "History: saved placement changes are recorded locally and stay reviewable.",
             correctionControlLabels: correctionControlLabels(from: decision),
             primaryActionTitle: placementPreview.primaryActionTitle,
             changeActionTitle: placementPreview.changeActionTitle,
@@ -114,9 +114,9 @@ struct CaptureDraftRouteService: Sendable {
 
     func resolverWhyLabel(from decision: SmartAttachmentCaptureDecision) -> String {
         if decision.selectedRouteType != nil {
-            return "Local resolver: use the destination you chose."
+            return "Local review: use the destination you chose."
         }
-        return "Local resolver: \(decision.routeType.userFacingLabel) based on local text only."
+        return "Local review: \(decision.routeType.userFacingLabel) based on local text only."
     }
 
     func routeProofTitle(from decision: SmartAttachmentCaptureDecision) -> String {
@@ -132,28 +132,30 @@ struct CaptureDraftRouteService: Sendable {
         if decision.selectedRouteType != nil {
             return "Chosen by you"
         }
-        return "Route evidence"
+        return "Placement check"
     }
 
     func routeProofDetail(from decision: SmartAttachmentCaptureDecision) -> String {
         if decision.result.selectedCandidate?.target.isNeedsPlace == true {
             return "No safe destination yet; the capture stays private and editable."
         }
+        if decision.selectedRouteType != nil {
+            return "Manual placement choice; you can still change it before saving."
+        }
         if let labels = decision.result.selectedCandidate?.evidenceLabels,
            labels.isEmpty == false {
-            return labels.prefix(3).joined(separator: ", ")
+            return labels.prefix(3)
+                .map { $0.replacingOccurrences(of: "route", with: "placement") }
+                .joined(separator: ", ")
         }
-        if decision.selectedRouteType != nil {
-            return "Manual route choice; you can still change it before saving."
-        }
-        return "Local text only; no calendar, network, account, or cloud route."
+        return "Local text only; no calendar, network, account, or cloud placement."
     }
 
     func clarificationChoices(from decision: SmartAttachmentCaptureDecision) -> [CaptureDraftRouteChoice] {
         let sourceChoices = decision.clarification?.choices.map(\.routeType) ?? fallbackRouteChoices(for: decision)
         return Array(sourceChoices.prefix(3)).map { routeType in
             CaptureDraftRouteChoice(
-                id: "draft-route.\(routeType.rawValue)",
+                id: "draft-placement.\(routeType.rawValue)",
                 title: routeChoiceTitle(for: routeType),
                 routeType: routeType,
                 isSelected: routeType == decision.selectedRouteType
@@ -175,7 +177,7 @@ struct CaptureDraftRouteService: Sendable {
             ? "Not a goal: choose Step or Needs a Place."
             : "Not a goal: no Goal is created unless you choose Goal."
         return [
-            "Place somewhere else: choose a route below.",
+            "Place somewhere else: choose a placement below.",
             notGoalLabel,
             "Not now: Decide later keeps it out of Today.",
             "Decide later: save to Needs a Place.",

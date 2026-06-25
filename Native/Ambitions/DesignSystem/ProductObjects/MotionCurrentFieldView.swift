@@ -98,15 +98,15 @@ struct MotionCurrentField: View {
         Group {
             if dynamicTypeSize.isAccessibilitySize {
                 VStack(alignment: .leading, spacing: theme.spacing.xs) {
-                    motionActionButton(title: "Inspect proof", systemImage: "seal", accessibilityIdentifier: "motion.current.action.inspect-proof", action: .inspectProof(state.proof))
-                    motionActionButton(title: "Open receipt", systemImage: "doc.text.magnifyingglass", accessibilityIdentifier: "motion.current.action.open-receipt", action: .openReceipt(state.receipt))
-                    motionActionButton(title: "Re-enter thread", systemImage: "arrowshape.turn.up.forward", accessibilityIdentifier: "motion.current.action.reenter-thread", action: .openThread(state.control))
+                    motionActionButton(title: "Review", systemImage: "checkmark.seal", accessibilityIdentifier: "motion.behavior.action.review", action: .reviewHistory(state.proof))
+                    motionActionButton(title: "History", systemImage: "clock.arrow.circlepath", accessibilityIdentifier: "motion.behavior.action.history", action: .openHistory(state.receipt))
+                    motionActionButton(title: "Return", systemImage: "arrowshape.turn.up.forward", accessibilityIdentifier: "motion.behavior.action.return", action: .returnToThread(state.control))
                 }
             } else {
                 MotionCurrentFlowLayout(spacing: theme.spacing.xs) {
-                    motionActionButton(title: "Inspect proof", systemImage: "seal", accessibilityIdentifier: "motion.current.action.inspect-proof", action: .inspectProof(state.proof))
-                    motionActionButton(title: "Open receipt", systemImage: "doc.text.magnifyingglass", accessibilityIdentifier: "motion.current.action.open-receipt", action: .openReceipt(state.receipt))
-                    motionActionButton(title: "Re-enter thread", systemImage: "arrowshape.turn.up.forward", accessibilityIdentifier: "motion.current.action.reenter-thread", action: .openThread(state.control))
+                    motionActionButton(title: "Review", systemImage: "checkmark.seal", accessibilityIdentifier: "motion.behavior.action.review", action: .reviewHistory(state.proof))
+                    motionActionButton(title: "History", systemImage: "clock.arrow.circlepath", accessibilityIdentifier: "motion.behavior.action.history", action: .openHistory(state.receipt))
+                    motionActionButton(title: "Return", systemImage: "arrowshape.turn.up.forward", accessibilityIdentifier: "motion.behavior.action.return", action: .returnToThread(state.control))
                 }
             }
         }

@@ -49,7 +49,7 @@ struct MotionSemanticModel: Equatable, Sendable {
 enum MotionConsequenceKind: String, CaseIterable, Sendable {
     case completion
     case blockage
-    case proof
+    case review
     case recovery
     case reEntry
     case undo
@@ -82,31 +82,31 @@ struct MotionConsequenceMirror: Equatable, Sendable {
                 label: "Completion",
                 visibleMutation: "Closed work stays attached to the current stage thread.",
                 proofRelationship: projection.field.proof,
-                accessibilityPhrase: "Completion keeps saved proof visible.",
-                reduceMotionEquivalent: reductionPolicy.motionQuery(label: "completion", action: .openThread(projection.field.control))
+                accessibilityPhrase: "Completion keeps saved history visible.",
+                reduceMotionEquivalent: reductionPolicy.motionQuery(label: "completion", action: .returnToThread(projection.field.control))
             ),
             MotionConsequenceMirror(
                 kind: .blockage,
                 label: "Blocked",
                 visibleMutation: "Blocked or waiting work stays held instead of being silently moved.",
-                proofRelationship: "Source and receipt explain why the thread is held.",
-                accessibilityPhrase: "Blocked state stays visible with source and receipt context.",
+                proofRelationship: "Context and history explain why the thread is held.",
+                accessibilityPhrase: "Blocked state stays visible with context and history.",
                 reduceMotionEquivalent: "Static blocked marker"
             ),
             MotionConsequenceMirror(
-                kind: .proof,
-                label: "Proof",
-                visibleMutation: "Proof, source, and receipt remain inspectable before change.",
+                kind: .review,
+                label: "Review",
+                visibleMutation: "Context, history, and review remain inspectable before change.",
                 proofRelationship: projection.field.receipt,
-                accessibilityPhrase: "Proof route can be inspected from the current stage.",
-                reduceMotionEquivalent: reductionPolicy.proofThreadTextureDescription
+                accessibilityPhrase: "Review can be opened from the current object.",
+                reduceMotionEquivalent: reductionPolicy.movementTextureDescription
             ),
             MotionConsequenceMirror(
                 kind: .recovery,
                 label: "Recovery",
                 visibleMutation: "Recovery creates a lighter return path that still counts.",
-                proofRelationship: "Recovery keeps minimum proof and reason visible.",
-                accessibilityPhrase: "Recovery state names the lighter path and preserved proof.",
+                proofRelationship: "Recovery keeps minimum history and reason visible.",
+                accessibilityPhrase: "Recovery state names the lighter path and preserved history.",
                 reduceMotionEquivalent: "Static recovery marker"
             ),
             MotionConsequenceMirror(
@@ -121,7 +121,7 @@ struct MotionConsequenceMirror: Equatable, Sendable {
                 kind: .undo,
                 label: "Undo",
                 visibleMutation: "Undo remains explicit when a stage mutation can be reversed.",
-                proofRelationship: "Undo preserves the prior receipt path.",
+                proofRelationship: "Undo preserves the prior history path.",
                 accessibilityPhrase: "Undo state is announced only when reversal is supported.",
                 reduceMotionEquivalent: "Static undo marker"
             ),
@@ -129,7 +129,7 @@ struct MotionConsequenceMirror: Equatable, Sendable {
                 kind: .protectedBoundary,
                 label: "Protected",
                 visibleMutation: "Protected boundaries prevent silent widening across surfaces.",
-                proofRelationship: "Consent and source context stay attached to the protected edge.",
+                proofRelationship: "Consent and context stay attached to the protected edge.",
                 accessibilityPhrase: "Protected boundary names consent before cross-surface change.",
                 reduceMotionEquivalent: "Static protected-boundary marker"
             )

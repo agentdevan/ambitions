@@ -268,9 +268,11 @@ final class AppShellNavigationTests: XCTestCase {
         XCTAssertEqual(navigation.lastStageTransition.kind, .surfaceMorph)
         XCTAssertEqual(navigation.lastStageTransition.motion, .objectContinuity)
         XCTAssertEqual(navigation.lastStageFocusPlan.target, .rootObject(.goals))
-        XCTAssertEqual(navigation.lastEffectRun.visibleMutationIDs, ["surface:goals"])
+        XCTAssertEqual(navigation.lastEffectRun.visibleMutationIDs, ["surface.goals.selected"])
+        XCTAssertEqual(navigation.lastEffectRun.visibleMutations.first?.affectedObjectIDs, ["surface.goals"])
         XCTAssertEqual(navigation.lastEffectRun.accessibilityAnnouncements, ["Goals selected"])
         XCTAssertEqual(navigation.lastEffectRun.proofArtifactIDs, ["stage.surface.goals"])
+        XCTAssertTrue(navigation.lastEffectRun.provesTypedObjectEffects)
         XCTAssertTrue(navigation.lastStageMutationAnimationPlan.provesActionFlow)
     }
 

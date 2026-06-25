@@ -389,14 +389,14 @@ private extension AmbitionsCommand {
     }
 
     var hasExplicitProtectedPlacementApproval: Bool {
-        if ["true", "confirmed", "approved"].contains(payload.metadata["explicitUserApproval"] ?? "") {
-            return true
+        if let explicitUserApproval = payload.metadata["explicitUserApproval"]?.lowercased() {
+            return ["true", "confirmed", "approved"].contains(explicitUserApproval)
         }
-        if ["true", "confirmed", "approved"].contains(payload.metadata["userConfirmed"] ?? "") {
-            return true
+        if let userConfirmed = payload.metadata["userConfirmed"]?.lowercased() {
+            return ["true", "confirmed", "approved"].contains(userConfirmed)
         }
-        if ["confirmed", "approved"].contains(payload.metadata["approvalState"] ?? "") {
-            return true
+        if let approvalState = payload.metadata["approvalState"]?.lowercased() {
+            return ["confirmed", "approved"].contains(approvalState)
         }
         switch protectedPlacementTrigger {
         case .userInitiated, .missedRecoveryMoveIt:

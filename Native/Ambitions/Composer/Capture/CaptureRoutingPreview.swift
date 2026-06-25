@@ -17,7 +17,7 @@ struct CaptureRouteRevealStrip: View {
                         Text(preview.postInputStateTitle)
                             .font(theme.typography.bodyEmphasized)
                             .foregroundStyle(theme.colors.textPrimary)
-                            .accessibilityIdentifier(accessibilityIDs.routeRevealStrip)
+                            .accessibilityIdentifier(accessibilityIDs.placementPreviewStrip)
                         Text(preview.consequenceLabel)
                             .font(theme.typography.caption)
                             .foregroundStyle(theme.colors.textSecondary)
@@ -30,21 +30,21 @@ struct CaptureRouteRevealStrip: View {
                 routeChoiceRow
 
                 EvidenceLabel(
-                    preview.routeProofTitle,
+                    "Placement check",
                     detail: preview.routeProofDetail,
-                    source: "Local capture text",
+                    source: preview.destinationLabel,
                     state: livingState,
                     context: .capture
                 )
 
                 EvidenceLabel(
-                    "Review path",
+                    "Review",
                     detail: preview.atmosphereComposerCompactInspectionSummary,
-                    source: "You / Search Ambitions",
+                    source: "Placement can change before saving",
                     state: livingState,
                     context: .capture
                 )
-                .accessibilityIdentifier(accessibilityIDs.routeInspectionSummary)
+                .accessibilityIdentifier(accessibilityIDs.placementInspectionSummary)
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
@@ -98,9 +98,9 @@ struct CaptureRouteRevealStrip: View {
             }
             .buttonStyle(.bordered)
             .controlSize(.small)
-            .accessibilityIdentifier("\(accessibilityIDs.routeChoicePrefix)\(choice.routeType.rawValue)")
+            .accessibilityIdentifier("\(accessibilityIDs.placementChoicePrefix)\(choice.routeType.rawValue)")
             .accessibilityLabel(choice.title)
-            .accessibilityValue(choice.isSelected ? "Selected route" : "Available route")
+            .accessibilityValue(choice.isSelected ? "Selected placement" : "Available placement")
         }
     }
 

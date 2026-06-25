@@ -55,12 +55,13 @@ final class TodayViewportSafetyTests: XCTestCase {
     func testTodaySurfaceAndRailRouteLayoutThroughViewportPolicy() throws {
         let screenSource = try source("Native/Ambitions/Surfaces/Today/TodaySurface.swift")
         let railSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailPanels.swift")
-        let adapterSource = try source("Native/Ambitions/DesignSystem/ProductObjects/TodayRealityMeridianFlagshipAdapter.swift")
+        let objectSource = try source("Native/Ambitions/Surfaces/Today/TodayObjectView.swift")
 
         XCTAssertTrue(screenSource.contains("rootBottomChromeClearance"))
         XCTAssertTrue(railSource.contains("usesStackedAccessibilityRail"))
         XCTAssertTrue(railSource.contains("emptyActionBottomClearance"))
-        XCTAssertTrue(adapterSource.contains("showsStageMetrics"))
+        XCTAssertTrue(objectSource.contains("RealityMeridianView"))
+        XCTAssertFalse(objectSource.contains("FlagshipRuntimeStage"))
     }
 
     func source(_ relativePath: String) throws -> String {

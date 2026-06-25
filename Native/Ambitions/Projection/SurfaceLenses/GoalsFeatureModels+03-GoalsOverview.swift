@@ -72,12 +72,12 @@ struct GoalsOverview: Sendable {
             firstScreenContent: [
                 "Your Direction",
                 "Thread Focus",
-                "Source",
-                "Receipt",
+                "Context",
+                "History",
                 "Reason",
                 "Feeds Today",
-                "Proof available",
-                "Source",
+                "Evidence visible",
+                "Context",
                 "Why this?",
                 "Open thread",
                 "Recently moved",
@@ -113,8 +113,8 @@ struct GoalsOverview: Sendable {
 
     var constellationAtlasInspectionSummary: String {
         [
-            "Source: \(constellationAtlasSourceRecordSummary)",
-            "Receipt: \(constellationAtlasReceiptSummary)",
+            "Context: \(constellationAtlasSourceRecordSummary)",
+            "History: \(constellationAtlasReceiptSummary)",
             "Reason: \(constellationAtlasReplayTraceSummary)",
             "You / Search Ambitions: \(constellationAtlasYouSummary)"
         ].joined(separator: " · ")
@@ -131,11 +131,11 @@ struct GoalsOverview: Sendable {
     }
 
     var constellationAtlasCompactInspectionSummary: String {
-        "Source, proof receipts, reason, and Today connection stay inspectable through You."
+        "Context, history, reason, and Today connection stay inspectable through You."
     }
 
     var constellationAtlasFirstViewportTrustSummary: String {
-        "Source, proof, reason, Today link, and You stay visible."
+        "Context, evidence, reason, Today link, and You stay visible."
     }
 
     var constellationAtlasSourceFirstViewportSummary: String {
@@ -143,7 +143,7 @@ struct GoalsOverview: Sendable {
     }
 
     var constellationAtlasProofFirstViewportSummary: String {
-        "Proof receipt visible."
+        "Evidence history visible."
     }
 
     var constellationAtlasSourceRecordSummary: String {
@@ -162,10 +162,10 @@ struct GoalsOverview: Sendable {
         let receiptCount = lifeAreas.items.reduce(0) { $0 + $1.receiptCount }
 
         if proofCount == 0 && receiptCount == 0 {
-            return "proof and closure receipts are still thin, so the atlas avoids pretending certainty."
+            return "evidence and change history are still thin, so the atlas avoids pretending certainty."
         }
 
-        return "\(proofCount) proof points and \(receiptCount) closure receipts are visible before the atlas asks for more commitment."
+        return "\(proofCount) evidence item\(proofCount == 1 ? "" : "s") and \(receiptCount) change record\(receiptCount == 1 ? "" : "s") are visible before the atlas asks for more commitment."
     }
 
     var constellationAtlasReplayTraceSummary: String {

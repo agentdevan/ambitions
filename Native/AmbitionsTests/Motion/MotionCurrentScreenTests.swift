@@ -45,7 +45,7 @@ final class MotionCurrentScreenTests: XCTestCase {
         }
         let registry = try String(contentsOf: registryURL, encoding: .utf8)
 
-        XCTAssertTrue(registry.contains("| motion-object-stage | Promoted | Motion | Motion Current | AMB-574 |"))
+        XCTAssertTrue(registry.contains("| motion-object-stage | Promoted | Motion | Stage Motion behavior | AMB-574 |"))
         XCTAssertTrue(registry.contains("### motion-object-stage"))
         XCTAssertTrue(registry.contains("artifacts/ambitions-ui-reconstruction/object-stage/AMB-574-motion-object-stage.md"))
     }
@@ -53,29 +53,29 @@ final class MotionCurrentScreenTests: XCTestCase {
     func testMotionCurrentProjectionContainsRequiredRootChildren() {
         let projection = MotionCurrentProjection.fixture
 
-        XCTAssertEqual(projection.crown.title, "Motion Current")
+        XCTAssertEqual(projection.crown.title, "What changed")
         XCTAssertFalse(projection.field.title.isEmpty)
         XCTAssertEqual(Set(projection.lanes.map(\.id)), ["history", "recovery", "reentry"])
         XCTAssertEqual(projection.lanes.flatMap(\.items).count, 11)
         XCTAssertEqual(projection.affordance.items.map(\.label), ["Context", "History", "Review"])
-        XCTAssertEqual(projection.dockActions.map(\.id), ["today", "goals", "time", "trust"])
+        XCTAssertTrue(projection.dockActions.isEmpty)
     }
 
     func testMotionCurrentFieldKeepsEmptyStateStructured() {
         let field = MotionCurrentProjection.fixture.field
 
-        XCTAssertTrue(field.title.localizedCaseInsensitiveContains("No proof yet"))
-        XCTAssertTrue(field.summary.localizedCaseInsensitiveContains("holding the thread"))
-        XCTAssertTrue(field.source.localizedCaseInsensitiveContains("source"))
-        XCTAssertTrue(field.proof.localizedCaseInsensitiveContains("Proof"))
+        XCTAssertTrue(field.title.localizedCaseInsensitiveContains("No change yet"))
+        XCTAssertTrue(field.summary.localizedCaseInsensitiveContains("Step stays held"))
+        XCTAssertTrue(field.source.localizedCaseInsensitiveContains("device"))
+        XCTAssertTrue(field.proof.localizedCaseInsensitiveContains("history"))
         XCTAssertTrue(field.receipt.localizedCaseInsensitiveContains("Review"))
-        XCTAssertTrue(field.control.localizedCaseInsensitiveContains("Inspect source"))
+        XCTAssertTrue(field.control.localizedCaseInsensitiveContains("Return"))
     }
 
     func testMotionRenderStatesExposeScreenshotProofFields() {
         let states = Set(MotionCurrentRenderState.allCases)
 
-        XCTAssertEqual(states, [.emptyStructure, .proofAvailable, .recoveryActive, .reentryAvailable, .sourceUnavailable])
+        XCTAssertEqual(states, [.emptyStructure, .proofAvailable, .recoveryActive, .reentryAvailable, .contextLight])
 
         for state in MotionCurrentRenderState.allCases {
             let field = MotionCurrentProjection.fixture(renderState: state).field
@@ -103,15 +103,15 @@ final class MotionCurrentScreenTests: XCTestCase {
     func testMotionLanesContainRequiredCurrentStates() {
         let states = Set(MotionCurrentProjection.fixture.lanes.flatMap(\.items).map(\.id))
         let requiredStates: Set<String> = [
-            "no-proof-yet",
-            "proof-available",
-            "proof-transferred",
+            "no-history-yet",
+            "history-available",
+            "history-carried",
             "recovery-active",
             "recovery-complete",
             "stalled-returnable",
             "reentry-available",
-            "source-unavailable",
-            "receipt-linked",
+            "context-light",
+            "history-linked",
             "life-area-development",
             "changed-object"
         ]
@@ -126,9 +126,9 @@ final class MotionCurrentScreenTests: XCTestCase {
             XCTAssertFalse(item.source.isEmpty, "Source trace missing for \(item.id)")
             XCTAssertFalse(item.proof.isEmpty, "Proof trace missing for \(item.id)")
             XCTAssertFalse(item.receipt.isEmpty, "Receipt trace missing for \(item.id)")
-            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Source"))
-            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Proof"))
-            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Receipt"))
+            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Context"))
+            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("History"))
+            XCTAssertTrue(item.accessibilitySummary.localizedCaseInsensitiveContains("Review"))
         }
     }
 
@@ -199,24 +199,24 @@ final class MotionCurrentScreenTests: XCTestCase {
         XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("History"))
         XCTAssertTrue(affordanceCopy.localizedCaseInsensitiveContains("Review"))
         XCTAssertTrue(projection.crown.chips.contains { $0.title == "Local" })
-        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Source-led" })
+        XCTAssertTrue(projection.crown.chips.contains { $0.title == "Attached" })
         XCTAssertTrue(projection.crown.chips.contains { $0.title == "Review" })
     }
 
-    func testAMB965MotionReconstructionExposesProofReceiptAndReentryActions() throws {
+    func testAMB965MotionReconstructionExposesReviewHistoryAndReturnActions() throws {
         let source = try source("Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentFieldView.swift", root: repoRoot())
         let allCopy = MotionCurrentProjection.fixture.allUserFacingCopy
 
-        XCTAssertTrue(source.contains("motion.current.action.inspect-proof"))
-        XCTAssertTrue(source.contains("motion.current.action.open-receipt"))
-        XCTAssertTrue(source.contains("motion.current.action.reenter-thread"))
-        XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .emptyStructure).field.title.localizedCaseInsensitiveContains("No proof yet"))
-        XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .proofAvailable).field.title.localizedCaseInsensitiveContains("Proof available"))
+        XCTAssertTrue(source.contains("motion.behavior.action.review"))
+        XCTAssertTrue(source.contains("motion.behavior.action.history"))
+        XCTAssertTrue(source.contains("motion.behavior.action.return"))
+        XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .emptyStructure).field.title.localizedCaseInsensitiveContains("No change yet"))
+        XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .proofAvailable).field.title.localizedCaseInsensitiveContains("History available"))
         XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .recoveryActive).field.title.localizedCaseInsensitiveContains("Recovery active"))
         XCTAssertTrue(MotionCurrentProjection.fixture(renderState: .reentryAvailable).field.title.localizedCaseInsensitiveContains("Re-entry available"))
         XCTAssertTrue(allCopy.localizedCaseInsensitiveContains("Stalled but returnable"))
         XCTAssertTrue(allCopy.localizedCaseInsensitiveContains("Re-entry available"))
-        XCTAssertTrue(allCopy.localizedCaseInsensitiveContains("Receipt linked"))
+        XCTAssertTrue(allCopy.localizedCaseInsensitiveContains("History linked"))
     }
 }
 

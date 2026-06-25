@@ -10,18 +10,22 @@ struct MotionCurrentProjection {
     let dockActions: [MotionDockAction]
 
     static var fixture: MotionCurrentProjection {
-        fixture(renderState: .emptyStructure)
+        objectConsequence(renderState: .emptyStructure)
     }
 
     static func fixture(renderState: MotionCurrentRenderState) -> MotionCurrentProjection {
+        objectConsequence(renderState: renderState)
+    }
+
+    static func objectConsequence(renderState: MotionCurrentRenderState) -> MotionCurrentProjection {
         MotionCurrentProjection(
             crown: MotionContextCrownState(
-                eyebrow: "Motion",
-                title: "Motion Current",
-                summary: "What moved, what needs recovery, and where to return.",
+                eyebrow: "Today",
+                title: "What changed",
+                summary: "The changed Step keeps its return point and recovery state.",
                 chips: [
                     MotionChipState(title: "Local", icon: "iphone", semanticState: .protected),
-                    MotionChipState(title: "Source-led", icon: "link", semanticState: .trust),
+                    MotionChipState(title: "Attached", icon: "link", semanticState: .trust),
                     MotionChipState(title: "Review", icon: "checkmark.seal", semanticState: .success)
                 ]
             ),
@@ -36,13 +40,13 @@ struct MotionCurrentProjection {
                     colorRole: .proof,
                     markers: [
                         MotionChipState(title: "Origin", icon: "point.topleft.down.curvedto.point.bottomright.up", semanticState: .focus),
-                        MotionChipState(title: "Proof seam", icon: "seal", semanticState: .success),
-                        MotionChipState(title: "Review path", icon: "doc.text", semanticState: .trust)
+                        MotionChipState(title: "Saved", icon: "seal", semanticState: .success),
+                        MotionChipState(title: "Review", icon: "doc.text", semanticState: .trust)
                     ],
                     items: [
                         MotionLaneItemState(
-                            id: "no-proof-yet",
-                            title: "No proof yet",
+                            id: "no-history-yet",
+                            title: "No history yet",
                             stateLabel: "Seed",
                             source: "Today or Capture",
                             proof: "Open path",
@@ -50,8 +54,8 @@ struct MotionCurrentProjection {
                             semanticState: .neutral
                         ),
                         MotionLaneItemState(
-                            id: "proof-available",
-                            title: "Proof available",
+                            id: "history-available",
+                            title: "History available",
                             stateLabel: "Attached",
                             source: "Closure",
                             proof: "Visible",
@@ -59,8 +63,8 @@ struct MotionCurrentProjection {
                             semanticState: .success
                         ),
                         MotionLaneItemState(
-                            id: "proof-transferred",
-                            title: "Proof transferred",
+                            id: "history-carried",
+                            title: "History carried",
                             stateLabel: "Carried",
                             source: "Goals",
                             proof: "Preserved",
@@ -68,10 +72,10 @@ struct MotionCurrentProjection {
                             semanticState: .trust
                         ),
                         MotionLaneItemState(
-                            id: "source-unavailable",
+                            id: "context-light",
                             title: "Context is light",
                             stateLabel: "Held",
-                            source: "Needs local source",
+                            source: "Needs context",
                             proof: "Not widened",
                             receipt: "No change",
                             semanticState: .caution
@@ -81,8 +85,8 @@ struct MotionCurrentProjection {
                 MotionLaneState(
                     id: "recovery",
                     title: "What needs recovery",
-                    status: "Calm route",
-                    summary: "A lighter route can rejoin Today with source, reason, and consent visible.",
+                    status: "Calm path",
+                    summary: "A lighter path can rejoin Today with reason and consent visible.",
                     icon: "arrow.uturn.backward.circle",
                     colorRole: .recovery,
                     markers: [
@@ -113,14 +117,14 @@ struct MotionCurrentProjection {
                             id: "stalled-returnable",
                             title: "Stalled but returnable",
                             stateLabel: "Returnable",
-                            source: "Motion",
+                            source: "Today",
                             proof: "Held",
                             receipt: "Return",
                             semanticState: .focus
                         ),
                         MotionLaneItemState(
-                            id: "receipt-linked",
-                            title: "Receipt linked",
+                            id: "history-linked",
+                            title: "History linked",
                             stateLabel: "Traceable",
                             source: "Review",
                             proof: "Related",
@@ -139,7 +143,7 @@ struct MotionCurrentProjection {
                     markers: [
                         MotionChipState(title: "Owner", icon: "person.crop.circle", semanticState: .protected),
                         MotionChipState(title: "Return", icon: "arrow.forward.circle", semanticState: .focus),
-                        MotionChipState(title: "Next seam", icon: "line.3.horizontal.decrease", semanticState: .trust)
+                        MotionChipState(title: "Next step", icon: "line.3.horizontal.decrease", semanticState: .trust)
                     ],
                     items: [
                         MotionLaneItemState(
@@ -175,17 +179,12 @@ struct MotionCurrentProjection {
             affordance: MotionSourceReceiptAffordanceState(
                 title: "History available",
                 items: [
-                    MotionAffordanceItem(label: "Context", value: "Local record", icon: "link", semanticState: .trust),
+                    MotionAffordanceItem(label: "Context", value: "On this device", icon: "link", semanticState: .trust),
                     MotionAffordanceItem(label: "History", value: "Attached after closure", icon: "seal", semanticState: .success),
                     MotionAffordanceItem(label: "Review", value: "Visible before change", icon: "doc.text", semanticState: .trust)
                 ]
             ),
-            dockActions: [
-                MotionDockAction(id: "today", title: "Open Today"),
-                MotionDockAction(id: "goals", title: "Open Goals"),
-                MotionDockAction(id: "time", title: "Open Time"),
-                MotionDockAction(id: "trust", title: "Open Trust")
-            ]
+            dockActions: []
         )
     }
 }
@@ -195,7 +194,7 @@ enum MotionCurrentRenderState: String, CaseIterable {
     case proofAvailable = "history"
     case recoveryActive = "recovery"
     case reentryAvailable = "reentry"
-    case sourceUnavailable = "context"
+    case contextLight = "context"
 
     static var launchArgument: MotionCurrentRenderState {
         let arguments = ProcessInfo.processInfo.arguments
@@ -211,29 +210,29 @@ enum MotionCurrentRenderState: String, CaseIterable {
         switch self {
         case .emptyStructure:
             MotionCurrentFieldState(
-                title: "No proof yet",
-                summary: "Motion is holding the thread until closure creates proof.",
-                source: "Local source",
-                proof: "Empty proof state",
+                title: "No change yet",
+                summary: "The Step stays held until closure creates history.",
+                source: "On this device",
+                proof: "No history yet",
                 receipt: "Review path before change",
-                control: "Inspect source, open the future receipt path, or wait for closure."
+                control: "Return to the Step or wait for closure."
             )
         case .proofAvailable:
             MotionCurrentFieldState(
-                title: "Proof available",
-                summary: "Saved proof stays attached to its source, receipt, and return point.",
-                source: "Closure source",
-                proof: "Proof visible in lane",
-                receipt: "Linked receipt",
-                control: "Open the proof path or keep the current thread in place."
+                title: "History available",
+                summary: "Saved history stays attached to its return point.",
+                source: "Closure",
+                proof: "Visible",
+                receipt: "Linked history",
+                control: "Review history or keep the current thread in place."
             )
         case .recoveryActive:
             MotionCurrentFieldState(
                 title: "Recovery active",
-                summary: "A lighter route is active with source, reason, and consent visible.",
+                summary: "A lighter path is active with reason and consent visible.",
                 source: "Today closure",
-                proof: "Minimum proof kept",
-                receipt: "Calm route receipt",
+                proof: "Minimum kept",
+                receipt: "Calm path",
                 control: "Continue gently or inspect the recovery path first."
             )
         case .reentryAvailable:
@@ -242,17 +241,17 @@ enum MotionCurrentRenderState: String, CaseIterable {
                 summary: "A paused thread has one calm return point and a clear owner.",
                 source: "Today return point",
                 proof: "Last honest point",
-                receipt: "Open path receipt",
+                receipt: "Open path",
                 control: "Start again from the visible return point."
             )
-        case .sourceUnavailable:
+        case .contextLight:
             MotionCurrentFieldState(
                 title: "Context is light",
-                summary: "Motion holds the thread in place until the local source can be inspected.",
-                source: "Needs local source",
+                summary: "The changed Step stays held until there is enough local context.",
+                source: "Needs context",
                 proof: "Not widened",
                 receipt: "No change applied",
-                control: "Keep the thread held until source context is available."
+                control: "Keep the Step held until context is available."
             )
         }
     }
@@ -290,7 +289,7 @@ struct MotionLaneState: Identifiable {
     let markers: [MotionChipState]
     let items: [MotionLaneItemState]
 
-    func color(_ theme: AmbitionTheme) -> Color {
+    func tint(_ theme: AmbitionTheme) -> Color {
         switch colorRole {
         case .proof:
             theme.colors.accentSecondary

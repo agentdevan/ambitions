@@ -15,7 +15,7 @@ public enum AmbitionCoreInteractionPrimitiveCatalog {
         .openStep,
         .openGoalThread,
         .reviewTimeFit,
-        .inspectProof,
+        .reviewHistory,
         .recoveryOption,
         .captureContext,
         .trustPreference,

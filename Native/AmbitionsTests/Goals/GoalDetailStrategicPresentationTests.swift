@@ -283,9 +283,9 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
 
         var emptyDetail = try await service.loadDetail(target: created.target)
         var missionControl = try XCTUnwrap(emptyDetail.missionControl)
-        XCTAssertEqual(missionControl.proofRail.emptyTitle, "No proof yet")
+        XCTAssertEqual(missionControl.proofRail.emptyTitle, "No evidence yet")
         XCTAssertTrue(missionControl.proofRail.items.isEmpty)
-        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .proof })?.headline, "No proof yet")
+        XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .proof })?.headline, "No evidence yet")
 
         try await repositories.evidence.saveEvidence([
             ProgressEvidence(
@@ -308,7 +308,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertEqual(missionControl.lanes.first(where: { $0.kind == .proof })?.badgeTitle, "Evidence visible")
     }
 
-    func testFCP12ProofSpineCarriesSourceFreshnessPrivacyCorrectionAndStaleBoundary() async throws {
+    func testFCP12EvidenceRailCarriesContextFreshnessPrivacyCorrectionAndStaleBoundary() async throws {
         let repositories = try await Self.makeRepositories()
         let service = RepositoryBackedGoalsService(repositories: repositories)
         let created = try await service.createGoal(
@@ -356,7 +356,7 @@ final class GoalDetailStrategicPresentationTests: XCTestCase {
         XCTAssertTrue(staleBead.correctionLabel?.localizedCaseInsensitiveContains("Correction can be reviewed") == true)
         XCTAssertEqual(importedBead.freshness, .partial)
         XCTAssertTrue(importedBead.privacyLabel.localizedCaseInsensitiveContains("Imported proof stays local"))
-        XCTAssertTrue(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("source"))
+        XCTAssertTrue(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("context"))
         XCTAssertTrue(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("privacy"))
         XCTAssertFalse(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("trophy"))
         XCTAssertFalse(missionControl.proofRail.subtitle.localizedCaseInsensitiveContains("activity feed"))

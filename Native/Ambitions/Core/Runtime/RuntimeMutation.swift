@@ -61,8 +61,8 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
         let runtimeMutationID = "runtime.mutation.\(command.id)"
         let stageMutation = StageMutation(
             runtimeMutationID: runtimeMutationID,
-            beforeSnapshot: beforeSnapshot,
-            afterSnapshot: afterSnapshot,
+            beforeSnapshot: beforeReference,
+            afterSnapshot: afterReference,
             targetSurface: targetSurface,
             affectedObjectIDs: affectedIDs,
             visibleUserFacingChange: Self.visibleChange(command),

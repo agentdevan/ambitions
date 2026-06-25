@@ -48,7 +48,7 @@ struct CaptureObjectStagePrimitiveContract: Equatable {
         accessibilityFallbacks: [
             "VoiceOver reads input, suggested route, consequence, privacy, receipt, and correction choices in stage order.",
             "Dynamic Type stacks route controls before supporting route evidence.",
-            "Reduce Motion uses static route-reveal state rather than motion-only meaning.",
+            "Reduce Motion uses static placement-preview state rather than motion-only meaning.",
             "Increase Contrast and Differentiate Without Color use line, symbol, and text labels in addition to accent color."
         ],
         keepsCaptureGlobalAction: true
