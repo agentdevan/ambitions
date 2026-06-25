@@ -105,6 +105,60 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertFalse(closureMutation.stageMutation.accessibilityAnnouncement.message.isEmpty)
     }
 
+    func testP1HMissedStepRecoveryPersistsThroughReloadWithoutShameCopy() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+        let repositories = try await makeRepositories(store: store)
+        let lifecycleService = SimpleStepLifecycleService(repositories: repositories)
+        let created = try await lifecycleService.createSimpleStep(
+            title: "Send the insurance form",
+            now: fixedNow
+        )
+        let recoveryTime = fixedNow.addingTimeInterval(3_600)
+
+        let recovery = try await lifecycleService.markMissedStepForRecovery(
+            goalID: created.goalID,
+            stepID: created.stepID,
+            now: recoveryTime
+        )
+
+        XCTAssertTrue(recovery.asksWhatChanged)
+        XCTAssertEqual(recovery.primaryActionTitle, "Move it")
+        XCTAssertEqual(recovery.secondaryActionTitles, ["Still counts", "Blocked", "Waiting", "Not needed"])
+        XCTAssertEqual(recovery.updatedStep.state, .planned)
+        XCTAssertEqual(recovery.feedbackEventCount, 2)
+        assertNoShameOrPressureCopy(in: [
+            recovery.promptTitle,
+            recovery.promptBody,
+            recovery.primaryActionTitle,
+        ] + recovery.secondaryActionTitles)
+
+        let reloadedRepositories = try await makeRepositories(store: store)
+        let reloadedSteps = try await reloadedRepositories.goals.listSteps(goalID: created.goalID)
+        let reloadedStep = try XCTUnwrap(reloadedSteps.first(where: { $0.id == created.stepID }))
+        let reloadedFeedback = try await reloadedRepositories.feedback.listEvents(goalID: created.goalID)
+        let notes = reloadedFeedback.compactMap(feedbackNote)
+        let reloadedToday = try await RepositoryBackedTodayService(repositories: reloadedRepositories)
+            .loadTodayExperience(userDisplayName: "Local User", now: recoveryTime)
+
+        XCTAssertEqual(reloadedStep.state, .planned)
+        XCTAssertEqual(reloadedStep.summary, recovery.updatedStep.summary)
+        XCTAssertNotNil(reloadedStep.timing.suggestedNextAt)
+        XCTAssertTrue(reloadedFeedback.contains {
+            if case .skipped(let base, _) = $0, base.stepID == created.stepID { return true }
+            return false
+        })
+        XCTAssertTrue(reloadedFeedback.contains {
+            if case .delayed(let base, _, _) = $0, base.stepID == created.stepID { return true }
+            return false
+        })
+        assertNoShameOrPressureCopy(in: notes)
+        XCTAssertEqual(reloadedToday.hero.primaryAction.action.target.goalID, created.goalID)
+        XCTAssertEqual(reloadedToday.hero.primaryAction.action.target.stepID, created.stepID)
+        XCTAssertTrue(reloadedToday.hero.primaryAction.title == "Start now" || reloadedToday.hero.primaryAction.title == "Complete")
+        XCTAssertEqual(AmbitionsRuntimeCapabilities.currentLocalRuntime.privateLifeRuntimeBoundary, .localOnly)
+        XCTAssertFalse(AmbitionsRuntimeCapabilities.currentLocalRuntime.hasRemoteIntelligenceBackend)
+    }
+
     func testCompletedCommandWritesFeedbackAndCommandExecutionEvidence() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
@@ -477,5 +531,21 @@ private extension TodayCommandHandlerTests {
             commandExecutionRecords: InMemoryAmbitionsCommandExecutionRecordRepository(),
             appState: SwiftDataAppStateRepository(store: store)
         )
+    }
+
+    func feedbackNote(_ event: GoalFeedbackEvent) -> String? {
+        event.base.note
+    }
+
+    func assertNoShameOrPressureCopy(in values: [String], file: StaticString = #filePath, line: UInt = #line) {
+        let copy = values.joined(separator: " ")
+        for forbidden in ["shame", "overdue", "failed", "lazy", "streak", "score", "productivity"] {
+            XCTAssertFalse(
+                copy.localizedCaseInsensitiveContains(forbidden),
+                "Unexpected recovery pressure term: \(forbidden)",
+                file: file,
+                line: line
+            )
+        }
     }
 }

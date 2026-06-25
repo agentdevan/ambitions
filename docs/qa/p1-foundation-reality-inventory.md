@@ -754,6 +754,37 @@ Remaining gaps:
 
 Gate index updates: none. Evidence is recorded in this inventory addendum only; gate status remains Partial until delivered-device/permission/tap-routing proof exists.
 
+## P1H Missed Step Recovery End-to-End Addendum
+
+Date: 2026-06-24
+Baseline commit: `6a22e3b65f55b9bdc50e711dc2b428770779b1fd`
+Final commit: P1H final commit recorded in train closeout
+Gates targeted: `foundation_missed_step_asks_what_changed`, `origin_missed_obligation_asks_what_changed_without_shame`, `foundation_completion_creates_visible_closure`, `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_offline_core_runs_without_account`
+
+Source changed:
+
+- `Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift`
+- `Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift`
+
+Recovery proof added:
+
+- `testP1HMissedStepRecoveryPersistsThroughReloadWithoutShameCopy` creates a local Step, marks it missed through `SimpleStepLifecycleService.markMissedStepForRecovery(...)`, verifies the `What changed?` prompt, `Move it`, `Still counts`, `Blocked`, `Waiting`, and `Not needed` options, then reloads repository facades from the same SwiftData store.
+- The test proves skipped and delayed recovery feedback events persist through reload, the Step remains planned with a new suggested next time, and the normal Today projection still points to the recovered Step through the local runtime path.
+- Recovery persisted wording was repaired from `without shame` to `without blame`, and the test asserts recovery prompt/feedback copy does not contain shame, overdue, failed, lazy, streak, score, or productivity-pressure terms.
+
+Validation status:
+
+- Focused P1H validation passed with `scripts/ambitions-xcode-test-focused.sh --batch P1H_MISSED_RECOVERY --test AmbitionsTests/TodayCommandHandlerTests/testP1HMissedStepRecoveryPersistsThroughReloadWithoutShameCopy --timeout 15m --kill-after 60s`.
+- P1A regression passed with `scripts/ambitions-xcode-test-focused.sh --batch P1H_P1A_REGRESSION --test AmbitionsTests/TodayCommandHandlerTests/testP1ASimpleStepLifecycleCreatesRendersReschedulesCompletesAndRecoversLocally --timeout 15m --kill-after 60s`.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1H proves source/runtime persistence/reload and Today projection support, but it does not prove a fresh rendered UI recovery flow, screenshot artifact, manual visual review, VoiceOver/Dynamic Type sweep, device proof, notification interaction, or release readiness.
+- The normal Step detail surface already exposes `Close the loop`, `Move it`, and receipt copy, but this phase does not claim rendered Interaction Green because no new UI test or screenshot was produced for the missed-Step recovery choices.
+- This phase does not implement full coaching, behavior profiling, full goal pathing, Life Capital, Future Steps, Make Room, Add with conflict, Source Atlas expansion, notification delivery, visual redesign, account work, R2 work, or release/device validation.
+
+Gate index updates: none. Evidence is recorded in this inventory addendum only; gate status remains Partial until rendered recovery and broader accessibility/device proof exists.
+
 ## Recommended Immediate Next Prompt
 
 ```text

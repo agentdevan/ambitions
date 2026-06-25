@@ -574,7 +574,7 @@ struct SimpleStepLifecycleService: Sendable {
             id: "simple-step-missed-\(idProvider())",
             stepID: stepID,
             occurredAt: timestamp,
-            note: "What changed? Recovery asked without shame."
+            note: "What changed? Recovery asked without blame."
         )
         var updatedFeedback = existingFeedback
         updatedFeedback.append(.skipped(base: missedBase, reasonCode: .notNow))
@@ -624,7 +624,7 @@ struct SimpleStepLifecycleService: Sendable {
             promptTitle: "What changed?",
             promptBody: "Move it without blame. \(decision.recoverySummary ?? "Choose the next believable time before trying again.")",
             primaryActionTitle: "Move it",
-            secondaryActionTitles: ["Still counts", "Blocked", "Not needed"],
+            secondaryActionTitles: ["Still counts", "Blocked", "Waiting", "Not needed"],
             updatedStep: updatedStep,
             feedbackEventCount: updatedFeedback.count - existingFeedback.count
         )
