@@ -2,7 +2,7 @@
 
 Status: Active acceptance authority
 Scope: rendered product quality, proof sufficiency, split status claims, visual acceptance, and Codex closeout limits
-Applies to: Ambitions source, SwiftUI surfaces, design-system components, proof packets, Linear closeouts, and release-facing status
+Applies to: Ambitions source, SwiftUI surfaces, design-system components, proof packets, tracker closeouts, and release-facing status
 
 This file closes the gap between source correctness and product quality. It does not replace `PRODUCT_DESIGN_TRUTH.md`, `IMPLEMENTATION_TRUTH.md`, `RELEASE_TRUTH.md`, or live source evidence. If it conflicts with product canon, product canon wins. If it conflicts with release proof requirements, the stricter proof requirement wins.
 
@@ -288,9 +288,9 @@ Device proof must include:
 
 ## 14. Final Umbrella Gate
 
-No master fold-in, release branch, `implementation complete`, product Green, or handoff to the next surface may occur until the umbrella proof issue is complete and accepted.
+No master fold-in, release branch, `implementation complete`, product Green, or handoff to the next surface may occur until the active umbrella proof gate for that scope is complete and accepted.
 
-For the LifeShape/Time train, AMB-1176 blocks AMB-1177 and downstream master fold-in until T14 proof is accepted.
+The umbrella proof gate must be generic and evidence-bound: it names the scoped surface or runtime area, required current proof, owner acceptance requirement, validation that ran, validation not run, and claims still unsupported. Train-specific blocker IDs, historical status labels, and mutable tracker state do not belong in this truth file.
 
 Earlier trains may claim scoped Source Green, Runtime Green, Interaction Green, or Ready for Visual Review. They may not claim product Green.
 

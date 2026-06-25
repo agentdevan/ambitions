@@ -2,9 +2,7 @@
 
 **Status:** Canonical decision register for the 2026-06-22 runtime QA remediation.  
 **Owner posture:** Permanent product, architecture, implementation, QA, and proof truth for this remediation run.  
-**Linked Linear project:** `Ambitions Runtime QA Remediation — 2026-06-22 Device Review`  
-**Linked initiative:** `Ambitions Runtime Quality Lockdown`  
-**Evidence path:** `docs/qa/evidence/2026-06-22-device-review/` plus Linear issue `AMB-1181` attachment `More issues.zip`.
+**Evidence path:** `docs/qa/evidence/2026-06-22-device-review/`.
 
 This file is the comprehensive decision register from the runtime remediation planning. It is permanent product / architecture / implementation truth for this remediation run.
 
@@ -43,18 +41,18 @@ Execution bundle = what Codex implements.
 
 QA leaves = acceptance criteria / proof checklist.
 
-Execution order:
+Execution-bundle order:
 
-1. `AMB-1191` — Theme / Design System Tokens
-2. `AMB-1194` — Shell / Stage OS
-3. `AMB-1192` — Capture Route Graph + Composer
-4. `AMB-1193` — Goals Root / Detail Rebuild
-5. `AMB-1195` — Today Reality Window / Action Gating
-6. `AMB-1196` — Search Find / Act / Inspect
-7. `AMB-1197` — Time Native Life Calendar
-8. `AMB-1198` — You Settings / Appearance / Privacy
-9. `AMB-1199` — Final Proof / Accessibility / Release Gate
-10. `AMB-1200` — Register Sync / Control Closeout
+1. Theme / Design System Tokens
+2. Shell / Stage OS
+3. Capture Route Graph + Composer
+4. Goals Root / Detail Rebuild
+5. Today Reality Window / Action Gating
+6. Search Find / Act / Inspect
+7. Time Native Life Calendar
+8. You Settings / Appearance / Privacy
+9. Final Proof / Accessibility / Release Gate
+10. Register Sync / Control Closeout
 
 Runtime honesty:
 
@@ -315,7 +313,7 @@ Unresolved destination:
 - create custom life area
 - create thought
 - create free-floating step
-- create Open Field item
+- create held capture item
 - do not force one of four rigid categories
 - do not use junk drawer framing
 
@@ -409,7 +407,7 @@ Area drilldown owns depth:
 - area settings
 - accomplished goals/history
 
-Open Field:
+Held capture area:
 
 - valid modular holding area
 - not Inbox
@@ -685,7 +683,7 @@ Replace visible `Live now` text with subtle live/current-node behavior.
 
 No goal candidates:
 
-- calm Open Field / recovery-adjacent state
+- calm held-capture / recovery-adjacent state
 - no big CTA
 
 Too little time:
@@ -911,7 +909,7 @@ Free-floating steps:
 Thoughts:
 
 - convert through Capture/Proposal
-- Time may show unresolved thought pressure only in inspection/Open Field
+- Time may show unresolved thought pressure only in inspection or held-capture context
 
 Protect Window:
 
@@ -966,11 +964,11 @@ Copy:
 
 - sparse native labels
 - tap-to-explain
-- no root `LifeShape Field` marketing copy
+- no root native Life Calendar marketing copy
 
 Header:
 
-- no root `TIME · LifeShape Field`
+- no root `TIME - native Life Calendar`
 - internal name allowed only in inspection/help
 
 Light Mode:
@@ -987,7 +985,7 @@ You = Apple iOS Settings structure + ChatGPT iOS settings clarity/compactness + 
 
 Surface job:
 
-- native Settings/Profile control surface backed by User System Profile
+- native Settings/Profile control surface backed by local system profile state
 - not dashboard
 - not product manifesto
 - not diagnostic console
@@ -1095,21 +1093,18 @@ No dead settings.
 
 ---
 
-## 12. Linear / evidence control plane decisions
+## 12. Evidence control plane decisions
 
-Project remains Red / Off Track while P0 runtime issues remain open.
+Mutable tracker state, issue IDs, project health labels, and train-specific blocker relationships are not truth law. Keep them in active tracker or QA/remediation artifacts when needed. This truth register retains only the durable proof law:
 
-No Runtime Green, Visual Green, or Release Green while P0s remain.
-
-Active Linear/docs:
-
-- QA Operating System — Known Issues Index and Closure Rules
-- QA Issue Coverage Matrix — 2026-06-22
-- Codex Execution README — Start Here
+- no Runtime Green without current runtime proof
+- no Visual Green without current rendered proof and required independent review
+- no Release Green without current release evidence and required approvals
+- no historical evidence may prove a fresh fix
+- no proof artifact may close a defect if the artifact reveals the defect still exists
 
 Evidence:
 
-- `More issues.zip` attached to `AMB-1181`
 - repo stores evidence README, screenshot index, manifest
 - historical evidence does not prove a fix
 - fresh proof required for repaired builds
@@ -1118,15 +1113,9 @@ Evidence path:
 
 `docs/qa/evidence/2026-06-22-device-review/`
 
-AMB-1282:
-
-- In Review for owner acceptance
-- blocks `AMB-1181`
-- does not close runtime defects
-
 Known tradeoffs:
 
 - No persistent Capture/Search buttons increases discoverability burden; mitigated by first-run teaching, progressive hints, gesture map, VoiceOver, keyboard/App Shortcuts.
-- Large binary evidence is attached in Linear; repo indexes it.
+- Large binary evidence may live outside the repo; the repo should retain only stable indexes or manifests when they remain current and useful.
 - Time is calendar-grade.
 - Ambitions can contain task-app capability without being framed as a task app.

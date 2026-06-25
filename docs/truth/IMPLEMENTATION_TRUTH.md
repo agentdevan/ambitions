@@ -46,7 +46,14 @@ Implementation state labels:
 
 ### Mutable Snapshot Warning
 
-Implementation standards in this file are stable truth. Current source snapshot sections are evidence-bounded and must be refreshed when major source architecture changes. Live source, current project files, current tests, and current proof still win over stale snapshot wording.
+Implementation standards in this file are stable truth. Current source snapshot sections are mutable inventory, evidence-bounded, and must be refreshed when major source architecture changes. Live source, current project files, current tests, and current proof still win over stale snapshot wording.
+
+Mutable inventory quarantine:
+
+- Root-chain paths, source-present paths, and surface evidence paths below are current inventory only.
+- They are not stable implementation law, product completeness proof, runtime proof, visual proof, accessibility proof, or release proof.
+- If a path listed below disappears, moves, or becomes a compatibility shim, update this inventory instead of treating the old path as canon.
+- Stable implementation law is the evidence standard, no-claim boundary, local-first/account/R2 boundary, hard stops, and proof hierarchy in this file.
 
 Current repo posture from inspected evidence:
 
@@ -74,21 +81,37 @@ Package.swift
 docs/truth/PRODUCT_DESIGN_TRUTH.md
 docs/truth/PRODUCT_EXPERIENCE_CANON.md
 Native/Ambitions/App/AmbitionsApp.swift
-Native/Ambitions/App/AmbitionsRootView.swift
-Native/Ambitions/App/AppTab.swift
+Native/Ambitions/App/AmbitionsRootScene.swift
+Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift
+Native/Ambitions/App/AmbitionsStageHost.swift
+Native/Ambitions/Stage/AmbitionsStage.swift
 Native/Ambitions/App/AppContainerFactory.swift
-Native/Ambitions/Persistence/SwiftDataStore.swift
-Native/Ambitions/Persistence/SwiftDataModels.swift
-Native/Ambitions/Features/Today/TodayScreen.swift
-Native/Ambitions/Features/Goals/GoalsScreen.swift
-Native/Ambitions/Features/Capture/CaptureScreen.swift
-Native/Ambitions/Features/Time/TimeScreen.swift
-Native/Ambitions/Features/You/YouScreen.swift
-Native/Ambitions/Features/Motion/MotionCurrentScreen.swift
+Native/Ambitions/Core/Persistence/
+Native/Ambitions/Core/Domain/
+Native/Ambitions/Projection/StageScenes/TodayStageScene.swift
+Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift
+Native/Ambitions/Projection/StageScenes/TimeStageScene.swift
+Native/Ambitions/Projection/StageScenes/YouStageScene.swift
+Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift
+Native/Ambitions/Projection/OverlayScenes/SearchStageScene.swift
+Native/Ambitions/Surfaces/Today/TodaySurface.swift
+Native/Ambitions/Surfaces/Goals/GoalsSurface.swift
+Native/Ambitions/Surfaces/Time/TimeSurface.swift
+Native/Ambitions/Surfaces/You/YouSurface.swift
+Native/Ambitions/Composer/Capture/CaptureSurface.swift
+Native/Ambitions/Stage/Motion/
 Native/Ambitions/Support/Ambitions.entitlements
 Native/Ambitions/Resources/PrivacyInfo.xcprivacy
 Native/AmbitionsUITests/AmbitionsUITests.swift
 ```
+
+Current app root chain inventory:
+
+```text
+AmbitionsApp -> AmbitionsRootScene -> LaunchGateView -> AmbitionsStageHost -> AmbitionsStage
+```
+
+This chain is source inventory only. It does not claim implementation completeness, runtime completeness, rendered product quality, accessibility conformance, device proof, or release readiness.
 
 ---
 
@@ -112,9 +135,9 @@ Proof / Source / Privacy / History / Receipts
 
 Current source-state reality:
 
-- Source may still contain `AppTab.motion`, Motion feature files, Motion tests, Motion screenshots, and Motion proof artifacts.
-- Source may still contain `AppTab.capture`, Capture screen modes, capture navigation routes, capture inbox terms, or other compatibility paths.
-- Source may still contain `Plan`, `Profile`, `Captures`, `Pulse`, `DayTimelineRail`, `GoalMissionControl`, and other prior compatibility names.
+- Source may still contain Motion feature files, Motion tests, Motion screenshots, and Motion proof artifacts.
+- Source may still contain Capture screen modes, capture navigation routes, capture inbox terms, or other compatibility paths.
+- Source may still contain `Plan`, `Profile`, `Captures`, `Pulse`, `DayTimelineRail`, `GoalMissionControl`, `RealityMeridian`, `ConstellationAtlas`, `LifeShapeField`, `AtmosphereComposer`, `OpenField`, or other prior/internal names.
 - These source facts do not override current product truth.
 
 Implementation classification:
@@ -124,6 +147,7 @@ Implementation classification:
 - `Plan` may exist as compatibility code for Time behavior, but not as a root surface.
 - `Profile` may exist as compatibility code for You behavior, but not as a root surface.
 - `Pulse` may appear as historical/proof primitive naming only, not as a current tab or surface.
+- Reality Meridian, Constellation Atlas, LifeShape Field, Atmosphere Composer, Open Field, Motion Current, and User System Profile may remain as internal source/type names where they already exist, but they are not user-facing surface names and must not override current product language.
 
 Hard implementation truth:
 
@@ -259,39 +283,39 @@ Codex must not add external LLM dependency, cloud model calls, chatbot-first UI,
 
 ### Today
 
-Source-present evidence: `Native/Ambitions/Features/Today/TodayScreen.swift` and `Native/Ambitions/Features/Today/`.
+Source-present evidence: `Native/Ambitions/Surfaces/Today/TodaySurface.swift`, `Native/Ambitions/Surfaces/Today/TodayObjectView.swift`, `Native/Ambitions/Projection/StageScenes/TodayStageScene.swift`, and `Native/Ambitions/Projection/SurfaceLenses/TodayLens.swift`.
 
-Implementation truth: Today source exists and is wired in current app source. Product truth says Today is Reality Meridian + Start Here, not task list, calendar timeline, or detached card stack. Final live-time, mutation, accessibility, safe-area, and flagship visual behavior remain unproven unless current proof exists.
+Implementation truth: Today source exists and is wired in current app source. Product truth says Today is the Reality Window, not task list, calendar timeline, dashboard, or detached card stack. Final live-time, mutation, accessibility, safe-area, and flagship visual behavior remain unproven unless current proof exists.
 
 ### Goals
 
-Source-present evidence: `Native/Ambitions/Features/Goals/GoalsScreen.swift` and `Native/Ambitions/Features/Goals/`.
+Source-present evidence: `Native/Ambitions/Surfaces/Goals/GoalsSurface.swift`, `Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift`, `Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift`, and `Native/Ambitions/Projection/SurfaceLenses/GoalsLens.swift`.
 
-Implementation truth: Goals source exists. Product truth says Goals should be Constellation Atlas with Life Areas, Goal Threads, Step chains, proof history, and no KPI/ranked-score/dashboard drift. Final Constellation Atlas behavior remains unproven unless current proof exists.
+Implementation truth: Goals source exists. Product truth says Goals is the Life Area Atlas with Life Areas, Goal Threads, Step chains, proof history, and no KPI/ranked-score/dashboard drift. Final Life Area Atlas behavior remains unproven unless current proof exists.
 
 ### Time
 
-Source-present evidence: `Native/Ambitions/Features/Time/TimeScreen.swift` and `Native/Ambitions/Features/Time/`.
+Source-present evidence: `Native/Ambitions/Surfaces/Time/TimeSurface.swift`, `Native/Ambitions/Surfaces/Time/TimeObjectView.swift`, `Native/Ambitions/Projection/StageScenes/TimeStageScene.swift`, and `Native/Ambitions/Projection/SurfaceLenses/TimeLens.swift`.
 
-Implementation truth: Time source exists. Plan compatibility code may still exist. Product truth says Time is LifeShape Field, not calendar clone, agenda clone, free/busy grid, productivity score, or AI scheduling surface. Final LifeShape Field implementation remains unproven unless current proof exists.
+Implementation truth: Time source exists. Plan compatibility code may still exist. Product truth says Time is Ambitions' native Life Calendar, not calendar clone, agenda clone, free/busy grid, productivity score, or AI scheduling surface. Final native Life Calendar implementation remains unproven unless current proof exists.
 
 ### You
 
-Source-present evidence: `Native/Ambitions/Features/You/YouScreen.swift` and `Native/Ambitions/Features/You/`.
+Source-present evidence: `Native/Ambitions/Surfaces/You/YouSurface.swift`, `Native/Ambitions/Surfaces/You/YouObjectView.swift`, `Native/Ambitions/Projection/StageScenes/YouStageScene.swift`, and `Native/Ambitions/Projection/SurfaceLenses/YouLens.swift`.
 
-Implementation truth: You source exists. Profile compatibility symbols may remain. Product truth says You is User System Profile, not social profile/admin/AI settings wall/generic settings dump. Final native settings/profile quality remains unproven unless current proof exists.
+Implementation truth: You source exists. Profile compatibility symbols may remain. Product truth says You is the local settings, personalization, privacy, learning, Source, receipts, and account-control surface, not social profile/admin/AI settings wall/generic settings dump. Final native settings/profile quality remains unproven unless current proof exists.
 
 ### Capture
 
-Source-present evidence: `Native/Ambitions/Features/Capture/CaptureScreen.swift` and `Native/Ambitions/Features/Capture/`.
+Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposerStage.swift`, `Native/Ambitions/Core/Domain/CaptureRouteGraph.swift`, `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, and `Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift`.
 
-Implementation truth: Capture source exists. Capture may still be implemented through old route/screen assumptions. Product truth says Capture is global composer, not a root tab. Final global composer behavior remains unproven unless current proof exists.
+Implementation truth: Capture source exists. Capture may still contain old route/screen assumptions. Product truth says Capture is the global typed route graph and full-screen Stage composer, not a root tab. Final global composer behavior remains unproven unless current proof exists.
 
 ### Motion
 
-Source-present evidence: `Native/Ambitions/Features/Motion/MotionCurrentScreen.swift` and `Native/Ambitions/Features/Motion/`.
+Source-present evidence: `Native/Ambitions/Stage/Motion/`, `Native/Ambitions/Projection/StageMotionProjection.swift`, and `Native/Ambitions/DesignSystem/ProductObjects/MotionCurrentView.swift`.
 
-Implementation truth: Motion source exists. Product truth says Motion is cross-surface behavior, not a root destination. Motion root/screen source is compatibility debt unless migrated into Stage/Motion behavior infrastructure. Final Stage/Motion behavior remains unproven unless current proof exists.
+Implementation truth: Motion source exists. Product truth says Motion is Stage/Motion behavior, not a root destination, activity feed, analytics surface, score, streak, XP layer, or dashboard. Final Stage/Motion behavior remains unproven unless current proof exists.
 
 ---
 

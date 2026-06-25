@@ -172,41 +172,49 @@ Forbidden recommendation language:
 
 ## 5. Surface-by-Surface Moat Requirements
 
+Current surface language follows `PRODUCT_DESIGN_TRUTH.md`: Today is the Reality Window, Goals is the Life Area Atlas, Time is the native Life Calendar, Capture is the global typed route graph and full-screen Stage composer, Search is local Find / Act / Inspect, and Motion is Stage/Motion behavior. Older object names may appear only as internal/source names or historical comparison points; they do not override current design truth.
+
 ### Today
 
-- Reality Meridian over task list
-- Start Here over detached cards
+- Reality Window over task list or dashboard
+- Start here as the flagship decision object, carried by the Reality Window rather than detached cards
 - current reality over generic daily agenda
 - proof + recovery visibility
 - Still counts over shame
 
 ### Goals
 
-- Constellation Atlas over ranked score cards
+- Life Area Atlas over ranked score cards
 - Life areas and goal threads over KPI dashboards
 - proof trail and direction continuity over generic goals list
 
 ### Time
 
-- LifeShape Field over calendar clone
+- native Life Calendar over calendar clone
 - open capacity, protected time, pressure, recovery, and fixed points as core concepts
 - horizons as depth inside Time, not root surfaces
 
 ### You
 
-- User System Profile over social/admin/profile-account framing
+- local settings, personalization, privacy, learning, Source, receipts, and account-control surface over social/admin/profile-account framing
 - clear local trust, account, permissions, R2/reference, learning, reset, export, and privacy controls
 
 ### Capture
 
-- global composer over tab/inbox/note feed
-- Atmosphere Composer/Open Field over generic add sheet
+- global typed route graph and full-screen Stage composer over tab/inbox/note feed
+- typed save-first routing over generic add sheet
 - save first when confidence is low
 - route input only after user can inspect/correct
 
+### Search
+
+- local Find / Act / Inspect over chatbot search
+- deterministic local indexing over cloud/LLM query paths
+- precise navigation and state-gated actions over shallow text results
+
 ### Motion
 
-- cross-surface behavior over destination
+- Stage/Motion behavior over destination
 - consequence clarity over decoration
 - proof/recovery/re-entry signaling over progress dashboard
 

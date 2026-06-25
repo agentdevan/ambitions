@@ -327,6 +327,21 @@ Avoid weak first drafts. Do not provide a “good enough MVP” plan when the as
 
 ## 17. Final Architecture Tree
 
+Architecture tree entries are canonical owner names and planned/internal implementation paths, not user-facing UI language and not source-presence proof. Ambitions must not render its architecture to the user; the core objects carry the depth themselves.
+
+Current user-facing surface/object language:
+
+```text
+Today = Reality Window
+Goals = Life Area Atlas
+Time = native Life Calendar
+Capture = global typed route graph + full-screen Stage composer
+Search = local Find / Act / Inspect
+Motion = Stage/Motion behavior only
+```
+
+Legacy/internal names that still appear in source or architecture inventory, including Reality Meridian, Constellation Atlas, LifeShape Field, Atmosphere Composer, Open Field, Motion Current, and User System Profile, are internal-only or compatibility names unless a future product canon explicitly promotes them. They must not appear as root surface labels, marketing names, persistent destinations, or user-facing proof of product depth.
+
 ```
 Ambitions/
   App/
