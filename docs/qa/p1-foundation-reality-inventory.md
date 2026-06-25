@@ -682,6 +682,42 @@ Remaining gaps:
 
 Gate index updates: none. The evidence is scoped persistence/relaunch/rendered interaction support for P1D/P1E Time foundation, not full gate completion.
 
+## P1F Local Search Foundation Addendum
+
+Date: 2026-06-24
+Baseline commit: `26e5715d967b9a6c30428ed11e87404f1c8e3c8a`
+Final commit: P1F final commit recorded in train closeout
+Gates targeted: `foundation_search_finds_goals_steps_proof_life_capital_and_settings`, `foundation_quick_capture_saves_without_network`, `foundation_reminder_can_be_created_completed_and_rescheduled`, `foundation_offline_core_runs_without_account`, `origin_many_goals_many_obligations_today_remains_clear`
+
+Source changed:
+
+- `Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift`
+
+Local search proof added:
+
+- `testP1FLocalSearchFindsFoundationObjectsWithoutAccountOrNetwork` creates a Step through the local Capture service path, persists proof evidence and a `Move it` feedback event, reloads repository facades, and verifies `DefaultMemoryLensService` can find the Step, capture-created Step source, proof, recent change, Time route, and Privacy setting.
+- The Step search result preserves the canonical Step action language with `Open step`, routes to the existing goal context, and exposes planned Step context without introducing hosted AI, semantic cloud search, account state, R2, Source Atlas expansion, or a parallel search model.
+- The proof asserts current runtime capability flags remain local-only, with no remote intelligence backend and no sync backend.
+
+Life Context placeholder proof added:
+
+- `testP1FYouEverythingSearchKeepsLifeContextAsLocalPlaceholderOnly` verifies You Everything Search includes a local Life Context result and filter while preserving footer copy that no external service is used.
+- The test explicitly verifies no `Life Capital` filter is claimed. Life Capital remains a missing first-class implementation and must stay Partial until a future scoped train implements and proves it.
+
+Validation status:
+
+- Focused validation passed with `scripts/ambitions-xcode-test-focused.sh --batch P1F_LOCAL_SEARCH --test AmbitionsTests/P1FLocalSearchFoundationTests --timeout 15m --kill-after 60s`.
+- The first focused wrapper run built but discovered zero tests because the local generated Xcode project had not picked up the new file. `xcodegen generate` was run locally; `Ambitions.xcodeproj` remains generated and untracked.
+- A test-harness compile repair and a Life Context projection-expectation repair were made before the passing run. No production source changed.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1F proves scoped local source/runtime search coverage, not rendered search interaction, route UI, broad accessibility behavior, visual review, device proof, release readiness, or full no-network workflow proof.
+- `foundation_search_finds_goals_steps_proof_life_capital_and_settings` remains Partial because first-class Life Capital is not implemented and rendered search/accessibility proof is not current.
+- This phase does not implement semantic AI search, hosted search, Source Atlas expansion, Future Steps, Make Room, Add with conflict, full goal pathing, account behavior, R2 behavior, notification delivery, visual redesign, or release/device validation.
+
+Gate index updates: none. Evidence is recorded in this inventory addendum only; gate status remains Partial until broader rendered and missing-object proof exists.
+
 ## Recommended Immediate Next Prompt
 
 ```text
