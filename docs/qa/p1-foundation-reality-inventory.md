@@ -718,6 +718,42 @@ Remaining gaps:
 
 Gate index updates: none. Evidence is recorded in this inventory addendum only; gate status remains Partial until broader rendered and missing-object proof exists.
 
+## P1G Private Notifications Foundation Addendum
+
+Date: 2026-06-24
+Baseline commit: `b6fd660c0da3135f3f39b3ce4ef99696f6f7a728`
+Final commit: P1G final commit recorded in train closeout
+Gates targeted: `foundation_notification_copy_is_private_by_default`, `lock_screen_notifications_private_by_default`, `personal_learning_insights_not_shown_aggressively`, `notification_does_not_emotionally_label_user`, `reminder_notification_can_be_plain_and_calendar_like`, `foundation_offline_core_runs_without_account`
+
+Source changed:
+
+- `Native/AmbitionsTests/App/LocalNotificationFoundationTests.swift`
+
+Private notification proof added:
+
+- `testP1GPrivateNotificationCopyAndPayloadExcludeSensitiveLockScreenContext` verifies local notification title/body stay generic when the external snapshot contains sensitive therapy, diagnosis, account, tax, and private-goal context.
+- The same test verifies notification payload values do not include those sensitive terms and preserve only route/ID/local-first continuity fields needed to reopen in-app context.
+- Existing notification tests still prove generic ritual copy, stale-snapshot clearing, authorization-missing fallback, failed refresh fallback, local-only side-effect ledger records, request lifecycle state, and category registration.
+
+Permission/tap-routing proof added:
+
+- `testP1GPermissionOptInFailureRegistersCategoriesAndReturnsFalse` proves permission opt-in failure returns `false` after registering the local categories instead of claiming a granted workflow.
+- `NotificationResponsePayloadParserTests` were rerun and prove current parser mapping for default open, snooze, and complete actions while preserving canonical route payload values.
+
+Validation status:
+
+- Focused notification validation passed with `scripts/ambitions-xcode-test-focused.sh --batch P1G_PRIVATE_NOTIFICATIONS --test AmbitionsTests/LocalNotificationFoundationTests --timeout 15m --kill-after 60s` after clearing repo-local DerivedData to prove all 16 tests were discovered.
+- Focused payload validation passed with `scripts/ambitions-xcode-test-focused.sh --batch P1G_NOTIFICATION_PAYLOAD --test AmbitionsTests/NotificationResponsePayloadParserTests --timeout 15m --kill-after 60s`.
+- No production source changed.
+
+Remaining gaps:
+
+- Scenario gate statuses remain unchanged. P1G proves scoped source/runtime request construction, private copy, local side-effect logging, permission fallback, and parser mapping. It does not prove delivered device notifications, lock-screen screenshots, simulator/device delivery, permission settings UI, foreground/background tap routing through the running app, broad accessibility behavior, visual review, release readiness, or App Store privacy approval.
+- Notification implementation remains under current `Core/Permissions` ownership for this phase. `Core/Notifications` canonical ownership remains an architecture follow-up if the final architecture tree requires a future move; no new root notification surface, notification center, account/R2 behavior, or remote notification service was added.
+- This phase does not implement push notifications, hosted notification services, account-gated notification behavior, private life graph sync, notification delivery claims, visual redesign, or release/device validation.
+
+Gate index updates: none. Evidence is recorded in this inventory addendum only; gate status remains Partial until delivered-device/permission/tap-routing proof exists.
+
 ## Recommended Immediate Next Prompt
 
 ```text

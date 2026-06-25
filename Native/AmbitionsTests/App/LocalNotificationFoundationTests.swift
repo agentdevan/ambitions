@@ -295,6 +295,111 @@ final class LocalNotificationFoundationTests: XCTestCase {
         XCTAssertFalse(request?.body.contains("account") == true)
     }
 
+    func testP1GPrivateNotificationCopyAndPayloadExcludeSensitiveLockScreenContext() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setAuthorizationState(.authorized)
+        let sensitiveTerms = [
+            "therapy",
+            "diagnosis",
+            "account number",
+            "Private goal",
+            "Call advisor",
+            "tax",
+            "failed",
+            "overdue",
+            "lazy",
+            "streak",
+            "score",
+        ]
+        let snapshot = ExternalSurfaceSnapshot(
+            generatedAt: "2026-04-15T13:00:00Z",
+            nextAction: ExternalSurfaceNextAction(
+                goalID: "goal-private",
+                stepID: "step-private",
+                display: ExternalSurfaceDisplayMetadata(
+                    templateKey: "next_tiny_step",
+                    goalMode: .project,
+                    stepState: .planned,
+                    urgency: .soon,
+                    timing: .deadline
+                )
+            ),
+            ambientState: ExternalSurfaceAmbientState(
+                today: ExternalSurfaceVariantState(
+                    kind: .today,
+                    title: "Private therapy appointment",
+                    detail: "Call advisor with diagnosis and account number",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
+                    prominence: .elevated
+                ),
+                focus: ExternalSurfaceVariantState(
+                    kind: .focus,
+                    title: "Private goal",
+                    detail: "Call advisor with diagnosis and account number",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Today", surface: .tab, tab: "today"),
+                    reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
+                    prominence: .elevated
+                ),
+                goal: ExternalSurfaceVariantState(
+                    kind: .goal,
+                    title: "Private goal",
+                    detail: "Sensitive goal detail",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Goals", surface: .tab, tab: "goals"),
+                    reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
+                    prominence: .standard
+                ),
+                timeShape: ExternalSurfaceVariantState(
+                    kind: .timeShape,
+                    title: "Private time context",
+                    detail: "Sensitive time detail",
+                    privacySummary: "Sensitive detail",
+                    action: ExternalSurfaceVariantAction(title: "Open Time", surface: .tab, tab: "time"),
+                    reference: ExternalSurfaceActionReference(goalID: "goal-private", stepID: "step-private"),
+                    prominence: .standard
+                )
+            )
+        )
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: snapshot)
+        )
+
+        await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
+
+        let request = await center.replacedRequest
+        XCTAssertEqual(request?.title, "Next step ready")
+        XCTAssertEqual(request?.body, "Details stay private until you open Ambitions.")
+        let lockScreenCopy = [request?.title, request?.body]
+            .compactMap { $0 }
+            .joined(separator: " ")
+        let payloadValues = request?.userInfo.values.joined(separator: " ") ?? ""
+        for term in sensitiveTerms {
+            XCTAssertFalse(lockScreenCopy.localizedCaseInsensitiveContains(term))
+            XCTAssertFalse(payloadValues.localizedCaseInsensitiveContains(term))
+        }
+        XCTAssertEqual(request?.userInfo["origin"], "notification")
+        XCTAssertEqual(request?.userInfo["continuity"], "local_first")
+    }
+
+    func testP1GPermissionOptInFailureRegistersCategoriesAndReturnsFalse() async {
+        let center = RecordingNotificationCenterClient()
+        await center.setShouldFailAuthorization(true)
+        let foundation = LocalNotificationFoundation(
+            centerClient: center,
+            snapshotReader: StaticSnapshotReader(snapshot: nil)
+        )
+
+        let granted = await foundation.requestAuthorizationOptIn()
+
+        XCTAssertFalse(granted)
+        let categories = await center.registeredCategories
+        XCTAssertEqual(categories.first?.identifier, AppNotificationConstants.nextStepCategoryID)
+    }
+
     func testAuthorizedRefreshRecordsScheduledNotificationInSideEffectLedger() async {
         let center = RecordingNotificationCenterClient()
         await center.setAuthorizationState(.authorized)
@@ -494,6 +599,7 @@ private actor RecordingNotificationCenterClient: LocalNotificationCenterClient {
     private(set) var attemptedRequest: LocalNotificationScheduleRequest?
     private(set) var lifecycleStateByID: [String: LocalNotificationRequestLifecycleState] = [:]
     private var shouldFailOnAdd = false
+    private var shouldFailAuthorization = false
 
     func currentAuthorizationState() async -> NotificationAuthorizationState {
         authorizationState
@@ -504,6 +610,9 @@ private actor RecordingNotificationCenterClient: LocalNotificationCenterClient {
     }
 
     func requestAuthorization() async throws -> Bool {
+        if shouldFailAuthorization {
+            throw TestError.authorizationFailed
+        }
         authorizationState = .authorized
         return true
     }
@@ -541,8 +650,13 @@ private actor RecordingNotificationCenterClient: LocalNotificationCenterClient {
         shouldFailOnAdd = shouldFail
     }
 
+    func setShouldFailAuthorization(_ shouldFail: Bool) {
+        shouldFailAuthorization = shouldFail
+    }
+
     enum TestError: Error {
         case failedToSchedule
+        case authorizationFailed
     }
 }
 
