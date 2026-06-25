@@ -321,3 +321,75 @@ P2C-A adds a small canonical runtime policy for placement priority. It supports 
 - No compatibility shims were added.
 - `SimpleStepLifecycleService.swift` was not touched by P2C-A.
 - `SimpleStepLifecycleService.swift` line count remained 469.
+
+## P2C-B Rendered Priority Controls / Review Copy Addendum
+
+Date: 2026-06-25
+Baseline SHA: `99ec82c9fb2824516a69725de65b56f9187c4d97`
+Phase status: Honest Yellow. Source and runtime unit validation passed for scoped rendered priority controls in the existing Time protected-placement review path. Full Interaction Green is not claimed because the focused UI screenshot test repeatedly failed after reaching the priority control and screenshot point on XCUITest tap/hittability/action outcome behavior.
+
+### Scope
+
+P2C-B exposes `Priority` in the existing protected placement review card under Time. It keeps priority values to `Low`, `Normal`, and `High`, lets the pending review priority be changed locally, and keeps protected seven-day movement behind explicit approval even when priority is changed to High. It does not create a new surface, dashboard, score, rank, Critical value, Must Fit value, Make Room flow, Add with conflict flow, Future Steps, full goal pathing, Life Capital, account/R2 behavior, Source Atlas app behavior, visual redesign, or release/device validation.
+
+### Source Changed
+
+- `Native/Ambitions/Surfaces/Time/ProtectedPlacementReviewCard.swift`
+- `Native/Ambitions/Surfaces/Time/ProtectedPlacementReviewState.swift`
+- `Native/Ambitions/Surfaces/Time/TimeSurface.swift`
+- `Native/Ambitions/Surfaces/Time/TimeViewModel.swift`
+- `Native/AmbitionsTests/Time/TimeProtectedPlacementReviewTests.swift`
+- `Native/AmbitionsUITests/AmbitionsUITests.swift`
+
+### Rendered Priority Proof
+
+- The protected placement review card now renders a `Priority` segmented control with `Low`, `Normal`, and `High`.
+- The review card exposes `protected-placement-review.priority`.
+- The review card accessibility value includes the selected priority and available priority choices.
+- The review card includes the priority review note: priority can help Ambitions choose what to review first, but the move still needs approval when protected placement requires approval.
+- `TimeViewModel.updateProtectedPlacementPriority(_:)` updates only the pending review state and does not mutate Time placement.
+- Changing priority to High keeps `requiresExplicitApproval == true` and `canBypassProtectedApproval == false`.
+
+### Validation
+
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_B_TIME_REVIEW --test AmbitionsTests/TimeProtectedPlacementReviewTests --timeout 15m --kill-after 60s` passed: 5 tests, 0 failures.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_B_UI --test AmbitionsUITests/AmbitionsUITests/testAMB1168TimeLifeShapeMutationAndUndoScreenshotProof --timeout 20m --kill-after 60s` failed after proving the priority control and capturing the review screenshot; later failure: `time.life-shape-field.layer.protected` not hittable.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_B_UI_RERUN --test AmbitionsUITests/AmbitionsUITests/testAMB1168TimeLifeShapeMutationAndUndoScreenshotProof --timeout 20m --kill-after 60s` failed after proving the priority control and capturing the review screenshot; later failure: `protected-placement-review.keep-as-is` not hittable.
+- `scripts/ambitions-xcode-test-focused.sh --batch P2C_B_UI_FINAL --test AmbitionsUITests/AmbitionsUITests/testAMB1168TimeLifeShapeMutationAndUndoScreenshotProof --timeout 20m --kill-after 60s` failed after proving the priority control and capturing the review screenshot; later failure: review outcome did not appear after coordinate fallback tap.
+
+### Screenshot Evidence
+
+- `.codex/xcode-summaries/P2C_B_UI_FINAL/20260625T175016Z-AmbitionsUITests-AmbitionsUITests-testAMB1168TimeLifeShapeMutationAndUndoScreens-67292-1356/extract/screenshots/amb-1168-time-protected-placement-review_0_80D40484-9267-4060-9CAF-CD7362FC78E9.png`
+- Screenshot evidence is Ready for Visual Review only. Visual Green is not claimed.
+
+### Gate Posture
+
+- `priority_supports_low_normal_high`: remains Partial. P2C-B adds rendered control and screenshot evidence, but full UI interaction pass and broader accessibility sweep remain missing.
+- `priority_can_be_overridden_by_user`: remains Partial. P2C-B adds local pending-review priority change proof; persistence/relaunch proof and full rendered interaction pass remain missing.
+- `priority_does_not_include_must_fit_as_goal_type`: remains Partial. P2C-B does not add a Must Fit value.
+- No scenario gate Markdown/YAML status was upgraded by P2C-B.
+
+### Stop Reason
+
+The bundle stops after P2C-B because more than two attempts hit the same XCUITest interaction root around hittability/action completion in the rendered protected review path. P2D-A, P2D-B, P2E-A, P2E-B, and P2F were not implemented in this run.
+
+### Remaining Gaps
+
+- Full P2C-B UI interaction pass remains missing.
+- No Visual Green or Release Green claim.
+- No physical-device validation.
+- No network-disabled/no-account device workflow proof.
+- No full VoiceOver, Dynamic Type, Reduce Motion, Reduce Transparency, or High Contrast sweep.
+- No persistence/relaunch proof for user priority override.
+- Capacity fit, This does not fit yet, Make Room, Add with conflict, Future Steps, full goal pathing, Life Capital, Source Atlas app-side composition, account/R2, and P2F closeout remain future work.
+
+### Architecture Notes
+
+- Final Architecture Tree inspected: yes.
+- Canonical owners touched: `Surfaces/Time`, `Native/AmbitionsTests/Time`, and `Native/AmbitionsUITests`.
+- Non-canonical owners touched: none.
+- `Features/` was not expanded.
+- No parallel Step, Time, Priority, Capacity, Conflict, or persistence model was introduced.
+- No compatibility shims were added.
+- `SimpleStepLifecycleService.swift` was not touched by P2C-B.
+- `SimpleStepLifecycleService.swift` line count remained 469.

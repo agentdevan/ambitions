@@ -150,6 +150,22 @@ final class TimeViewModel {
         mutationErrorMessage = nil
     }
 
+    func updateProtectedPlacementPriority(_ priority: PlacementPriority) {
+        guard let review = protectedPlacementReview else { return }
+        let priorityDecision = PriorityPlacementPolicy().evaluate(
+            input: PriorityPlacementInput(
+                stepID: review.stepID,
+                priority: priority,
+                source: .userOverride,
+                userOverride: priority
+            ),
+            protectedPlacementDecision: review.decision
+        )
+        protectedPlacementReview = review.updatingPriorityDecision(priorityDecision)
+        protectedPlacementReviewOutcome = nil
+        mutationErrorMessage = nil
+    }
+
     func undoLastLifeShapeMutation(now: Date) {
         guard let lastTimeFieldMutation else { return }
         let undo = TimeFieldMutationCoordinator().undo(lastTimeFieldMutation, now: now)
@@ -215,7 +231,15 @@ final class TimeViewModel {
             currentPlacementLabel: "Current placement stays unchanged",
             proposedPlacementLabel: targetBucket.accessibilitySummary,
             reasonLabel: "This will move a Step inside the next seven days",
-            decision: decision
+            decision: decision,
+            priorityDecision: PriorityPlacementPolicy().evaluate(
+                input: PriorityPlacementInput(
+                    stepID: placementCandidate.stepID,
+                    priority: .normal,
+                    source: .defaulted
+                ),
+                protectedPlacementDecision: decision
+            )
         )
     }
 }

@@ -172,6 +172,7 @@ struct TimeSurface: View {
         if let review = viewModel.protectedPlacementReview {
             ProtectedPlacementReviewCard(
                 review: review,
+                onPriorityChange: updateProtectedPlacementPriority,
                 onApprove: approveProtectedPlacementReview,
                 onKeep: keepProtectedPlacementReview
             )
@@ -191,6 +192,10 @@ struct TimeSurface: View {
 
     private func approveProtectedPlacementReview() {
         viewModel.approveProtectedPlacementReview(now: clock.now)
+    }
+
+    private func updateProtectedPlacementPriority(_ priority: PlacementPriority) {
+        viewModel.updateProtectedPlacementPriority(priority)
     }
 
     private func keepProtectedPlacementReview() {

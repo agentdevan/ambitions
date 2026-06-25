@@ -18,6 +18,9 @@ final class TimeProtectedPlacementReviewTests: XCTestCase {
         XCTAssertTrue(review.proposedPlacementLabel.isEmpty == false)
         XCTAssertEqual(review.reasonLabel, "This will move a Step inside the next seven days")
         XCTAssertEqual(review.decision.kind, .requiresExplicitApproval)
+        XCTAssertEqual(review.priorityDecision.priority, .normal)
+        XCTAssertTrue(review.priorityDecision.requiresExplicitApproval)
+        XCTAssertFalse(review.priorityDecision.canBypassProtectedApproval)
         XCTAssertNil(viewModel.visibleTimeMutation)
         XCTAssertNil(viewModel.protectedPlacementReviewOutcome)
 
@@ -47,6 +50,35 @@ final class TimeProtectedPlacementReviewTests: XCTestCase {
             return XCTFail("Expected Time state to remain loaded.")
         }
         XCTAssertNotEqual(
+            updatedState.lifeSuite.field.reading(for: .week).title,
+            state.lifeSuite.field.reading(for: .week).title
+        )
+    }
+
+    func testP2CBPriorityChangeUpdatesReviewStateWithoutApprovingPlacement() throws {
+        let state = PreviewTimeScenarios.seeded.withProtectedPlacementReviewCandidate(realPlacementCandidate())
+        let mark = try XCTUnwrap(state.lifeSuite.field.semanticMarks.first { $0.kind == .freeTimeQuality })
+        let viewModel = TimeViewModel(state: .loaded(state))
+
+        viewModel.performLifeShapeMutation(.placeStep, selectedMark: mark, now: now)
+        XCTAssertEqual(viewModel.protectedPlacementReview?.priorityDecision.priority, .normal)
+
+        viewModel.updateProtectedPlacementPriority(.high)
+
+        let review = try XCTUnwrap(viewModel.protectedPlacementReview)
+        XCTAssertEqual(review.priorityDecision.priority, .high)
+        XCTAssertEqual(review.priorityDecision.userOverride, .high)
+        XCTAssertTrue(review.priorityDecision.isUserOverride)
+        XCTAssertTrue(review.priorityDecision.requiresExplicitApproval)
+        XCTAssertFalse(review.priorityDecision.canBypassProtectedApproval)
+        XCTAssertNil(viewModel.visibleTimeMutation)
+        XCTAssertNil(viewModel.protectedPlacementReviewOutcome)
+        XCTAssertTrue(review.priorityDecision.reviewNote.contains("still needs approval"))
+
+        guard case let .loaded(updatedState) = viewModel.state else {
+            return XCTFail("Expected Time state to remain loaded.")
+        }
+        XCTAssertEqual(
             updatedState.lifeSuite.field.reading(for: .week).title,
             state.lifeSuite.field.reading(for: .week).title
         )
@@ -85,6 +117,10 @@ final class TimeProtectedPlacementReviewTests: XCTestCase {
         let copy = [
             "Review change",
             "This moves a Step inside the next seven days. Ambitions will not move it without approval.",
+            "Priority",
+            "Low",
+            "Normal",
+            "High",
             "Move it",
             "Keep as is",
             review.accessibilityValue
@@ -93,6 +129,8 @@ final class TimeProtectedPlacementReviewTests: XCTestCase {
         XCTAssertTrue(copy.contains("Draft the real proposal section"))
         XCTAssertTrue(copy.contains("Current placement"))
         XCTAssertTrue(copy.contains("Proposed placement"))
+        XCTAssertTrue(copy.contains("Priority: Normal"))
+        XCTAssertTrue(copy.contains("Available priority choices: Low, Normal, High"))
         for forbidden in ["reflow", "runtime", "mutation", "pipeline", "policy", "source unavailable", "proof seam", "route reveal", "blocked-pending-model", "optimization", "AI recommends", "overdue", "failed", "streak", "productivity"] {
             XCTAssertFalse(copy.localizedCaseInsensitiveContains(forbidden), "Review copy should not expose \(forbidden).")
         }
