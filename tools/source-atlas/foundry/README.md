@@ -58,10 +58,13 @@ The harvest command runs official public/reference adapters:
 - NASA astronaut requirements.
 - NASA astronaut selection program.
 - O*NET downloadable text database.
+- O*NET Career Cluster crosswalk from O*NET OnLine.
 - BLS Public Data API.
 - Data.gov API v4 search.
 - College Scorecard API.
 - USAJOBS Search API when `USAJOBS_USER_AGENT` and `USAJOBS_AUTHORIZATION_KEY` are present.
+
+The O*NET adapter normalizes career-cluster adjacency, related occupations, skills, essential skills, transferable skills, work activities, interests, job zones, education, training/experience, work styles/context, and software skills. That gives Ambitions public/reference structure for skill transfer and alternate-path reasoning when a user pivots from one goal to another.
 
 Adapters write local raw snapshots under `output/source-atlas/harvest/<run>/snapshots/` and normalized harvest records under `output/source-atlas/harvest/<run>/normalized/`. The bundle compiler only carries bounded provenance summaries, record counts, hashes, freshness signals, and blocker reasons into R2-ready packs. It does not upload raw source dumps, user data, or credentials.
 

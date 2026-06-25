@@ -23,6 +23,7 @@ from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
 ADAPTER_VERSION = "source-atlas-foundry-adapters-v1"
 DEFAULT_USER_AGENT = "AmbitionsSourceAtlasFoundry/1.0 public-reference-only"
 DEFAULT_TIMEOUT_SECONDS = int(os.environ.get("SOURCE_ATLAS_FETCH_TIMEOUT_SECONDS", "120"))
+DEFAULT_FETCH_RETRIES = int(os.environ.get("SOURCE_ATLAS_FETCH_RETRIES", "3"))
 DEFAULT_MAX_BYTES = 8 * 1024 * 1024
 ONET_MAX_BYTES = 80 * 1024 * 1024
 
@@ -41,6 +42,22 @@ def default_fetch(url: str, headers: dict[str, str] | None = None, max_bytes: in
     request_headers = {"User-Agent": os.environ.get("SOURCE_ATLAS_USER_AGENT", DEFAULT_USER_AGENT)}
     if headers:
         request_headers.update(headers)
+    last_error: Exception | None = None
+    for _attempt in range(max(1, DEFAULT_FETCH_RETRIES)):
+        try:
+            return _fetch_once(url, request_headers, max_bytes)
+        except (TimeoutError, ValueError, urllib.error.URLError) as exc:
+            last_error = exc
+        except urllib.error.HTTPError as exc:
+            if exc.code not in {429, 500, 502, 503, 504}:
+                raise
+            last_error = exc
+    if last_error:
+        raise last_error
+    raise RuntimeError(f"fetch failed without error for {url}")
+
+
+def _fetch_once(url: str, request_headers: dict[str, str], max_bytes: int) -> FetchResult:
     request = urllib.request.Request(url, headers=request_headers)
     with urllib.request.urlopen(request, timeout=DEFAULT_TIMEOUT_SECONDS) as response:
         chunks: list[bytes] = []
@@ -293,14 +310,20 @@ def _harvest_onet(source: dict[str, Any], run_root: Path, raw_dir: Path, limit: 
         return _blocked_record(source, "onet_text_zip_not_found_on_database_page")
     zip_url = urllib.parse.urljoin(source["url"], href)
     archive = fetcher(zip_url, None, ONET_MAX_BYTES)
+    career_clusters = fetcher("https://www.onetonline.org/find/career?c=0", None, DEFAULT_MAX_BYTES)
 
     record = _base_record(source, "harvested", "official_onet_text_database")
     record["rawArtifacts"].append(_write_raw(run_root, raw_dir / source["id"] / "database.html", page))
     record["rawArtifacts"].append(_write_raw(run_root, raw_dir / source["id"] / "database-text.zip", archive))
-    record["records"] = _normalize_onet_zip(archive.body, limit)
+    record["rawArtifacts"].append(_write_raw(run_root, raw_dir / source["id"] / "career-clusters.html", career_clusters))
+    records = _normalize_onet_zip(archive.body, limit)
+    records.append(_normalize_onet_career_clusters(career_clusters.body.decode("utf-8", errors="replace"), limit))
+    records.append(_onet_transfer_surface_map())
+    record["records"] = records
     record["freshnessSignals"] = {
         "databasePageURL": page.url,
         "textZipURL": archive.url,
+        "careerClustersURL": career_clusters.url,
         "detectedRelease": _detect_onet_release(page_text),
         "cadence": source["freshnessCadence"],
         "license": source["license"],
@@ -321,13 +344,31 @@ def _detect_onet_release(page_text: str) -> str | None:
 def _normalize_onet_zip(body: bytes, limit: int) -> list[dict[str, Any]]:
     selected_files = [
         "Occupation Data.txt",
+        "Occupation Level Metadata.txt",
         "Skills.txt",
+        "Essential Skills.txt",
+        "Transferable Skills.txt",
         "Knowledge.txt",
         "Abilities.txt",
+        "Work Activities.txt",
+        "Work Styles.txt",
+        "Work Context.txt",
         "Task Statements.txt",
         "Tasks to DWAs.txt",
         "Related Occupations.txt",
         "Job Titles.txt",
+        "Sample of Reported Titles.txt",
+        "Job Zones.txt",
+        "Job Zone Reference.txt",
+        "Education.txt",
+        "Training and Experience.txt",
+        "Career Interest Types.txt",
+        "Specific Interest Areas.txt",
+        "Specific Interest Areas to Career Interest Types.txt",
+        "Interests Illustrative Occupations.txt",
+        "Software Skills.txt",
+        "Essential Skills to Work Activities.txt",
+        "Transferable Skills to Work Activities.txt",
     ]
     records: list[dict[str, Any]] = []
     with zipfile.ZipFile(io.BytesIO(body)) as archive:
@@ -351,6 +392,138 @@ def _normalize_onet_zip(body: bytes, limit: int) -> list[dict[str, Any]]:
                 }
             )
     return records
+
+
+def _normalize_onet_career_clusters(page_text: str, limit: int) -> dict[str, Any]:
+    rows: list[dict[str, str]] = []
+    for raw_row in re.findall(r"(?is)<tr>(.*?)</tr>", page_text):
+        cells = {
+            title: _html_to_text(cell)
+            for title, cell in re.findall(r'(?is)<td[^>]*data-title="([^"]+)"[^>]*>(.*?)</td>', raw_row)
+        }
+        if not {"Career Cluster", "Sub-Cluster", "Code", "Occupation"}.issubset(cells):
+            continue
+        cluster = _career_link(raw_row, "Career Cluster")
+        sub_cluster = _career_link(raw_row, "Sub-Cluster")
+        rows.append(
+            {
+                "careerClusterCode": cluster.get("code", ""),
+                "careerCluster": cluster.get("label") or cells["Career Cluster"],
+                "subClusterCode": sub_cluster.get("code", ""),
+                "subCluster": sub_cluster.get("label") or cells["Sub-Cluster"],
+                "onetSOCCode": cells["Code"],
+                "occupation": _clean_onet_occupation_label(cells["Occupation"]),
+            }
+        )
+
+    clusters = sorted(
+        {
+            (row["careerClusterCode"], row["careerCluster"])
+            for row in rows
+            if row["careerClusterCode"] and row["careerCluster"]
+        }
+    )
+    sub_clusters = sorted(
+        {
+            (row["subClusterCode"], row["subCluster"], row["careerClusterCode"], row["careerCluster"])
+            for row in rows
+            if row["subClusterCode"] and row["subCluster"]
+        }
+    )
+    matched = [row for row in rows if _row_matches_goal(row)]
+    sample_limit = max(1, min(limit, 12))
+    return {
+        "recordType": "onet_career_cluster_crosswalk",
+        "sourceURL": "https://www.onetonline.org/find/career?c=0",
+        "rowCount": len(rows),
+        "careerClusterCount": len(clusters),
+        "subClusterCount": len(sub_clusters),
+        "careerClusters": [
+            {"code": code, "name": name}
+            for code, name in clusters
+        ],
+        "subClusterSamples": [
+            {
+                "code": code,
+                "name": name,
+                "parentCode": parent_code,
+                "parentName": parent_name,
+            }
+            for code, name, parent_code, parent_name in sub_clusters[: max(sample_limit * 2, 16)]
+        ],
+        "occupationSamples": matched[:sample_limit] or rows[:sample_limit],
+        "runtimeUse": [
+            "map an occupation to adjacent occupations in the same career cluster",
+            "preserve progress when a user pivots between related careers",
+            "suggest alternate paths with shared skills without treating clusters as personal user data",
+        ],
+    }
+
+
+def _career_link(raw_row: str, data_title: str) -> dict[str, str]:
+    pattern = rf'(?is)<td[^>]*data-title="{re.escape(data_title)}"[^>]*>.*?<a[^>]*href="[^"]*find/career\?c=([0-9]+)[^"]*"[^>]*>(.*?)</a>'
+    match = re.search(pattern, raw_row)
+    if not match:
+        return {}
+    return {"code": match.group(1), "label": _html_to_text(match.group(2))}
+
+
+def _clean_onet_occupation_label(label: str) -> str:
+    return re.sub(r"\s+Bright Outlook\s*$", "", label).strip()
+
+
+def _onet_transfer_surface_map() -> dict[str, Any]:
+    return {
+        "recordType": "onet_transfer_surface_map",
+        "surfaces": [
+            {
+                "id": "career_cluster_adjacency",
+                "purpose": "Find alternate occupations in the same field of work requiring similar skills.",
+                "sourceTables": ["career-clusters.html"],
+            },
+            {
+                "id": "skill_atom_overlap",
+                "purpose": "Compare core, essential, and transferable skill requirements across occupations.",
+                "sourceTables": ["Skills.txt", "Essential Skills.txt", "Transferable Skills.txt"],
+            },
+            {
+                "id": "work_activity_overlap",
+                "purpose": "Map proof and practice from one occupation to another through shared work activities.",
+                "sourceTables": [
+                    "Work Activities.txt",
+                    "Essential Skills to Work Activities.txt",
+                    "Transferable Skills to Work Activities.txt",
+                    "Tasks to DWAs.txt",
+                ],
+            },
+            {
+                "id": "interest_fit",
+                "purpose": "Use interest areas as a public-reference lens for path fit and alternate exploration.",
+                "sourceTables": [
+                    "Career Interest Types.txt",
+                    "Specific Interest Areas.txt",
+                    "Specific Interest Areas to Career Interest Types.txt",
+                    "Interests Illustrative Occupations.txt",
+                ],
+            },
+            {
+                "id": "preparation_level",
+                "purpose": "Compare education, training, experience, and job-zone distance between paths.",
+                "sourceTables": ["Education.txt", "Training and Experience.txt", "Job Zones.txt", "Job Zone Reference.txt"],
+            },
+            {
+                "id": "work_style_context",
+                "purpose": "Preserve non-credential Life Capital such as reliability, leadership, collaboration, and working conditions.",
+                "sourceTables": ["Work Styles.txt", "Work Context.txt"],
+            },
+            {
+                "id": "technology_skill_bridge",
+                "purpose": "Use software and technology skills as transferable practical capability signals.",
+                "sourceTables": ["Software Skills.txt"],
+            },
+        ],
+        "privacyBoundary": PRIVACY_BOUNDARY,
+    }
 
 
 def _sample_onet_rows(reader: csv.DictReader[str], limit: int) -> tuple[int, list[dict[str, str]]]:

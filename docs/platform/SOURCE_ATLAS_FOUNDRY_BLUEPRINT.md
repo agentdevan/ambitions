@@ -126,7 +126,8 @@ Implemented official/public-reference lanes:
 
 - National Archives for constitutional eligibility.
 - NASA for astronaut requirements and selection cycles.
-- O*NET downloadable text database for occupations, tasks, skills, knowledge, abilities, related occupations, and job titles.
+- O*NET downloadable text database for occupations, tasks, skills, essential skills, transferable skills, knowledge, abilities, work activities, work styles/context, education, training/experience, job zones, interest areas, software skills, related occupations, and job titles.
+- O*NET OnLine Career Cluster crosswalk for occupation adjacency by field of work and similar-skill cluster/subcluster structure.
 - BLS Public Data API for labor-market freshness and trend context.
 - USAJOBS Search API for current federal opportunity requirements when registered API headers are present.
 - Data.gov API v4 search as a source-of-sources discovery layer, not claim truth.
@@ -141,6 +142,8 @@ harvest -> compile -> validate -> r2-plan -> upload-r2
 ```
 
 The harvest step stores raw official snapshots only in ignored local output. The compiled bundle carries bounded provenance summaries, record counts, hashes, freshness signals, source URLs, and blocked-source reasons. Raw snapshots, API keys, private user context, and the Private Life Runtime are not compiled into R2-ready bundles.
+
+O*NET is a transfer substrate, not just an occupation source. Career clusters, related occupations, transferable skills, work activities, interests, job zones, education, training, work styles, and software skills should feed alternate-path and Life Capital preservation logic so progress on one goal can remain useful when the user changes direction.
 
 ## R2 Architecture
 

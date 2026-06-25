@@ -148,6 +148,9 @@ def test_onet_adapter_normalizes_downloadable_text_database(tmp_path: Path):
     assert result["harvestedCount"] == 1
     assert onet["status"] == "harvested"
     assert any(record["recordType"] == "onet_table_summary" and record["file"] == "Occupation Data.txt" for record in onet["records"])
+    assert any(record["recordType"] == "onet_table_summary" and record["file"] == "Transferable Skills.txt" for record in onet["records"])
+    assert any(record["recordType"] == "onet_career_cluster_crosswalk" and record["careerClusterCount"] == 1 for record in onet["records"])
+    assert any(record["recordType"] == "onet_transfer_surface_map" and len(record["surfaces"]) >= 6 for record in onet["records"])
     assert any("Aerospace Engineers" in json.dumps(record) for record in onet["records"])
 
 
@@ -215,6 +218,16 @@ def fake_fetch(url: str, headers: dict[str, str] | None, max_bytes: int) -> Fetc
         return FetchResult(url, 200, "text/html", b'<html>O*NET 30.3 Database <a href="/dl_files/database/db_30_3_text.zip">Text</a></html>')
     if url.endswith("db_30_3_text.zip"):
         return FetchResult(url, 200, "application/zip", fake_onet_zip())
+    if "onetonline.org/find/career" in url:
+        return FetchResult(
+            url,
+            200,
+            "text/html",
+            b'''<html><table><tbody>
+<tr><td data-title="Career Cluster"><a href="/find/career?c=010100">Advanced Manufacturing</a></td><td data-title="Sub-Cluster"><a href="/find/career?c=010101">Engineering</a></td><td data-title="Code">17-2011.00</td><td data-title="Occupation"><a href="https://www.onetonline.org/link/summary/17-2011.00">Aerospace Engineers</a></td></tr>
+<tr><td data-title="Career Cluster"><a href="/find/career?c=010100">Advanced Manufacturing</a></td><td data-title="Sub-Cluster"><a href="/find/career?c=010104">Robotics</a></td><td data-title="Code">17-2199.08</td><td data-title="Occupation"><a href="https://www.onetonline.org/link/summary/17-2199.08">Robotics Engineers</a></td></tr>
+</tbody></table></html>''',
+        )
     raise AssertionError(f"unexpected fake fetch URL: {url}")
 
 
@@ -223,11 +236,29 @@ def fake_onet_zip() -> bytes:
     table = "O*NET-SOC Code\tTitle\tDescription\n17-2011.00\tAerospace Engineers\tPerform engineering duties in designing aircraft.\n"
     with zipfile.ZipFile(buffer, "w") as archive:
         archive.writestr("Occupation Data.txt", table)
+        archive.writestr("Occupation Level Metadata.txt", "O*NET-SOC Code\tItem\n17-2011.00\tData-level\n")
         archive.writestr("Skills.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tSystems Analysis\t4.5\n")
+        archive.writestr("Essential Skills.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tActive Learning\t4.1\n")
+        archive.writestr("Transferable Skills.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tCritical Thinking\t4.6\n")
         archive.writestr("Knowledge.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tEngineering and Technology\t4.7\n")
         archive.writestr("Abilities.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tDeductive Reasoning\t4.4\n")
+        archive.writestr("Work Activities.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tAnalyzing Data or Information\t4.6\n")
+        archive.writestr("Work Styles.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tDependability\t4.2\n")
+        archive.writestr("Work Context.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tTeamwork\t4.0\n")
         archive.writestr("Task Statements.txt", "Task ID\tTask\n1\tAnalyze aerospace systems.\n")
         archive.writestr("Tasks to DWAs.txt", "Task ID\tDWA ID\n1\tDWA:1\n")
         archive.writestr("Related Occupations.txt", "O*NET-SOC Code\tRelated O*NET-SOC Code\tTitle\n17-2011.00\t17-2199.00\tEngineers, All Other\n")
         archive.writestr("Job Titles.txt", "O*NET-SOC Code\tReported Job Title\n17-2011.00\tAerospace Engineer\n")
+        archive.writestr("Sample of Reported Titles.txt", "O*NET-SOC Code\tReported Job Title\n17-2011.00\tAerospace Engineer\n")
+        archive.writestr("Job Zones.txt", "O*NET-SOC Code\tJob Zone\n17-2011.00\t4\n")
+        archive.writestr("Job Zone Reference.txt", "Job Zone\tName\n4\tConsiderable Preparation Needed\n")
+        archive.writestr("Education.txt", "O*NET-SOC Code\tCategory\tData Value\n17-2011.00\tBachelor's degree\t70\n")
+        archive.writestr("Training and Experience.txt", "O*NET-SOC Code\tCategory\tData Value\n17-2011.00\tRelated work experience\t4\n")
+        archive.writestr("Career Interest Types.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tInvestigative\t5\n")
+        archive.writestr("Specific Interest Areas.txt", "O*NET-SOC Code\tElement Name\tData Value\n17-2011.00\tEngineering\t5\n")
+        archive.writestr("Specific Interest Areas to Career Interest Types.txt", "Specific Interest Area\tCareer Interest Type\nEngineering\tInvestigative\n")
+        archive.writestr("Interests Illustrative Occupations.txt", "Career Interest Type\tO*NET-SOC Code\tTitle\nInvestigative\t17-2011.00\tAerospace Engineers\n")
+        archive.writestr("Software Skills.txt", "O*NET-SOC Code\tExample\tCommodity Title\n17-2011.00\tCAD\tComputer aided design CAD software\n")
+        archive.writestr("Essential Skills to Work Activities.txt", "Element Name\tWork Activity\nActive Learning\tAnalyzing Data or Information\n")
+        archive.writestr("Transferable Skills to Work Activities.txt", "Element Name\tWork Activity\nCritical Thinking\tAnalyzing Data or Information\n")
     return buffer.getvalue()
