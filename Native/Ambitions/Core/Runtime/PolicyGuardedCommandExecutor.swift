@@ -4,15 +4,18 @@ struct PolicyGuardedCommandExecutor: CommandExecuting {
     private let base: any CommandExecuting
     private let sideEffectLedger: (any SideEffectLedgerRepository)?
     private let policyEvaluator: SafeAutomationPolicyEvaluator
+    private let protectedPlacementPolicy: ProtectedStepPlacementPolicy
 
     init(
         base: any CommandExecuting,
         sideEffectLedger: (any SideEffectLedgerRepository)? = nil,
-        policyEvaluator: SafeAutomationPolicyEvaluator = SafeAutomationPolicyEvaluator()
+        policyEvaluator: SafeAutomationPolicyEvaluator = SafeAutomationPolicyEvaluator(),
+        protectedPlacementPolicy: ProtectedStepPlacementPolicy = ProtectedStepPlacementPolicy()
     ) {
         self.base = base
         self.sideEffectLedger = sideEffectLedger
         self.policyEvaluator = policyEvaluator
+        self.protectedPlacementPolicy = protectedPlacementPolicy
     }
 
     func validate(_ command: AmbitionsCommand) -> AmbitionsCommandValidationState {
@@ -20,6 +23,11 @@ struct PolicyGuardedCommandExecutor: CommandExecuting {
     }
 
     func execute(_ command: AmbitionsCommand, context: CommandExecutionContext) async -> AmbitionsCommandExecutionResult {
+        if let protectedPlacementDecision = protectedPlacementPolicy.evaluate(command: command, context: context),
+           protectedPlacementDecision.kind != .allowed {
+            return protectedPlacementResult(command: command, decision: protectedPlacementDecision)
+        }
+
         let decision = policyEvaluator.evaluate(SafeAutomationProposedAction.fromCommand(command))
         let record = SideEffectLedgerRecord(
             decision: decision,
@@ -33,6 +41,43 @@ struct PolicyGuardedCommandExecutor: CommandExecuting {
         }
 
         return await base.execute(command, context: context)
+    }
+
+    private func protectedPlacementResult(
+        command: AmbitionsCommand,
+        decision: ProtectedStepPlacementDecision
+    ) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: protectedPlacementStatus(for: decision),
+            summary: decision.summary,
+            target: command.target,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: [
+                "guardedBy": "protected_step_placement_policy",
+                "protectedPlacementDecision": decision.kind.rawValue,
+                "protectedPlacementTrigger": decision.trigger.rawValue,
+                "affectsProtectedWindow": String(decision.affectsProtectedWindow),
+                "requiresExplicitApproval": String(decision.requiresExplicitApproval),
+                "canApplySilently": String(decision.canApplySilently),
+                "requiresAccount": String(decision.requiresAccount),
+                "localOnly": String(decision.localOnly),
+                "impactSummary": decision.userImpactSummary,
+                "blockedBy": decision.blockedFacts.first ?? decision.degradedFacts.first ?? decision.kind.rawValue
+            ]
+        )
+    }
+
+    private func protectedPlacementStatus(
+        for decision: ProtectedStepPlacementDecision
+    ) -> AmbitionsCommandExecutionStatus {
+        switch decision.kind {
+        case .allowed:
+            return .succeeded
+        case .requiresExplicitApproval, .pendingReview:
+            return .requiresConfirmation
+        case .blockedFromSilentMovement:
+            return .blocked
+        }
     }
 
     private func guardedResult(
