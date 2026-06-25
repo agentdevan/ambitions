@@ -50,6 +50,7 @@ struct TimeSurface: View {
                             onMutationAction: performLifeShapeMutation,
                             onUndoMutation: undoLifeShapeMutation
                         )
+                        protectedPlacementReviewSection
 
                     }
                 }
@@ -84,6 +85,9 @@ struct TimeSurface: View {
         .accessibilityIdentifier("time.screen")
         .animation(theme.motion.animation(reduceMotion: reduceMotion, emphasis: true), value: viewModel.stateKey)
         .onChange(of: viewModel.visibleTimeMutation?.stageMutation.accessibilityAnnouncement.message) { _, message in
+            announceMutation(message)
+        }
+        .onChange(of: viewModel.protectedPlacementReviewOutcome?.rawValue) { _, message in
             announceMutation(message)
         }
         .task {
@@ -161,6 +165,36 @@ struct TimeSurface: View {
 
     private func undoLifeShapeMutation() {
         viewModel.undoLastLifeShapeMutation(now: clock.now)
+    }
+
+    @ViewBuilder
+    private var protectedPlacementReviewSection: some View {
+        if let review = viewModel.protectedPlacementReview {
+            ProtectedPlacementReviewCard(
+                review: review,
+                onApprove: approveProtectedPlacementReview,
+                onKeep: keepProtectedPlacementReview
+            )
+        } else if let outcome = viewModel.protectedPlacementReviewOutcome {
+            Text(outcome.rawValue)
+                .font(theme.typography.bodyEmphasized)
+                .foregroundStyle(theme.colors.textPrimary)
+                .padding(theme.spacing.sm)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background {
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .fill(theme.colors.surfaceOverlay.opacity(0.72))
+                }
+                .accessibilityIdentifier("protected-placement-review.outcome")
+        }
+    }
+
+    private func approveProtectedPlacementReview() {
+        viewModel.approveProtectedPlacementReview(now: clock.now)
+    }
+
+    private func keepProtectedPlacementReview() {
+        viewModel.keepProtectedPlacementReview()
     }
 
     private func announceMutation(_ message: String?) {

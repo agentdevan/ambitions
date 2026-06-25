@@ -21,6 +21,9 @@ enum PreviewAppContainerFactory {
         let todayService = StubTodayService(experience: todayExperience)
         let captureService = StubCaptureService(captures: fixtures.captures)
         let runtime = makePreviewRuntime(clock: clock)
+        let timeState = ProcessInfo.processInfo.environment["AMBITIONS_UI_PROTECTED_PLACEMENT_REVIEW"] == "1"
+            ? PreviewTimeScenarios.protectedPlacementReviewSeeded
+            : PreviewTimeScenarios.seeded
         let goalsService = runtime.goalsService
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,
@@ -49,7 +52,7 @@ enum PreviewAppContainerFactory {
             goalsService: goalsService,
             timeRitualsService: PreviewTimeRitualsService(dashboard: timeRitualsDashboard),
             timeService: StubTimeService(
-                timeState: PreviewTimeScenarios.seeded,
+                timeState: timeState,
                 weeklyReviewState: PreviewTimeScenarios.weeklyReview
             ),
             insightsService: StubInsightsService(fixtures: fixtures),

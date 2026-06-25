@@ -7,6 +7,8 @@ final class TimeViewModel {
     var state: AsyncViewState<TimeSurfaceState>
     var visibleTimeMutation: UserVisibleMutation?
     var mutationErrorMessage: String?
+    var protectedPlacementReview: ProtectedPlacementReviewState?
+    var protectedPlacementReviewOutcome: ProtectedPlacementReviewOutcome?
 
     private var hasLoaded = false
     private var lastTimeFieldMutation: TimeFieldMutationResult?
@@ -50,6 +52,8 @@ final class TimeViewModel {
     func refresh(using service: any TimeServicing, now: Date, calendar: Calendar, timeZone: TimeZone? = nil) async {
         do {
             state = .loaded(try await service.loadTimeSurfaceState(now: now))
+            protectedPlacementReview = nil
+            protectedPlacementReviewOutcome = nil
             lastLoadedDayStart = dayBoundaryScheduler.loadedDayStart(for: now, calendar: calendar)
             lastLoadedClockContext = dayBoundaryScheduler.loadedClockContext(
                 for: now,
@@ -64,6 +68,8 @@ final class TimeViewModel {
     func makeCalendarAware(using service: any TimeServicing, now: Date, calendar: Calendar, timeZone: TimeZone? = nil) async {
         do {
             state = .loaded(try await service.makeTimeCalendarAware(now: now))
+            protectedPlacementReview = nil
+            protectedPlacementReviewOutcome = nil
             lastLoadedDayStart = dayBoundaryScheduler.loadedDayStart(for: now, calendar: calendar)
             lastLoadedClockContext = dayBoundaryScheduler.loadedClockContext(
                 for: now,
@@ -99,15 +105,49 @@ final class TimeViewModel {
                 action,
                 in: timeState,
                 selectedMark: selectedMark,
-                now: now
+                now: now,
+                explicitProtectedPlacementApproval: action != .placeStep
             )
             state = .loaded(result.updatedTimeState)
             lastTimeFieldMutation = result
             visibleTimeMutation = result.visibleMutation
             mutationErrorMessage = nil
+            protectedPlacementReview = nil
+            protectedPlacementReviewOutcome = nil
+        } catch let error as TimeFieldMutationError {
+            handleTimeFieldMutationError(error, action: action, selectedMark: selectedMark, timeState: timeState, now: now)
         } catch {
             mutationErrorMessage = "Time change was not applied: \(error)"
         }
+    }
+
+    func approveProtectedPlacementReview(now: Date) {
+        guard let review = protectedPlacementReview,
+              case let .loaded(timeState) = state else { return }
+        do {
+            let result = try TimeFieldMutationCoordinator().perform(
+                review.action,
+                in: timeState,
+                selectedMark: review.selectedMark,
+                now: now,
+                actor: .user,
+                explicitProtectedPlacementApproval: true
+            )
+            state = .loaded(result.updatedTimeState)
+            lastTimeFieldMutation = result
+            visibleTimeMutation = result.visibleMutation
+            mutationErrorMessage = nil
+            protectedPlacementReview = nil
+            protectedPlacementReviewOutcome = .moved
+        } catch {
+            mutationErrorMessage = "Time change was not applied: \(error)"
+        }
+    }
+
+    func keepProtectedPlacementReview() {
+        protectedPlacementReview = nil
+        protectedPlacementReviewOutcome = .kept
+        mutationErrorMessage = nil
     }
 
     func undoLastLifeShapeMutation(now: Date) {
@@ -117,5 +157,65 @@ final class TimeViewModel {
         self.lastTimeFieldMutation = nil
         visibleTimeMutation = undo.visibleMutation
         mutationErrorMessage = nil
+        protectedPlacementReview = nil
+        protectedPlacementReviewOutcome = nil
+    }
+
+    private func handleTimeFieldMutationError(
+        _ error: TimeFieldMutationError,
+        action: TimeFieldMutationAction,
+        selectedMark: LifeShapeSemanticMark?,
+        timeState: TimeSurfaceState,
+        now: Date
+    ) {
+        guard case let .protectedPlacementRequiresApproval(decision) = error,
+              let review = makeProtectedPlacementReview(
+                action: action,
+                selectedMark: selectedMark,
+                timeState: timeState,
+                decision: decision,
+                now: now
+              ) else {
+            mutationErrorMessage = "Time change was not applied: \(error)"
+            return
+        }
+
+        protectedPlacementReview = review
+        protectedPlacementReviewOutcome = nil
+        mutationErrorMessage = nil
+        visibleTimeMutation = nil
+    }
+
+    private func makeProtectedPlacementReview(
+        action: TimeFieldMutationAction,
+        selectedMark: LifeShapeSemanticMark?,
+        timeState: TimeSurfaceState,
+        decision: ProtectedStepPlacementDecision,
+        now: Date
+    ) -> ProtectedPlacementReviewState? {
+        guard action == .placeStep,
+              let placementCandidate = timeState.lifeSuite.field.placementCandidate,
+              let visibleProjection = try? LifeShapeProjection.fromVisibleTimeField(
+                timeState.lifeSuite.field,
+                selectedMark: selectedMark,
+                preferredLayer: action.targetLayer,
+                placementCandidate: placementCandidate,
+                now: now
+              ),
+              let targetBucket = visibleProjection.targetBucket(for: selectedMark, preferredLayer: action.targetLayer) else {
+            return nil
+        }
+
+        return ProtectedPlacementReviewState(
+            id: "protected-placement-review.\(placementCandidate.stepID).\(targetBucket.id)",
+            action: action,
+            selectedMark: selectedMark,
+            stepID: placementCandidate.stepID,
+            stepTitle: placementCandidate.title,
+            currentPlacementLabel: "Current placement stays unchanged",
+            proposedPlacementLabel: targetBucket.accessibilitySummary,
+            reasonLabel: "This will move a Step inside the next seven days",
+            decision: decision
+        )
     }
 }

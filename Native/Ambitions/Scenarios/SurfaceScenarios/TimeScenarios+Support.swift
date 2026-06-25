@@ -2,6 +2,20 @@ import AmbitionsDesignSystem
 import Foundation
 
 extension PreviewTimeScenarios {
+    static let protectedPlacementReviewCandidate = TimePlacementCandidate(
+        id: "time.placement.goal.protected-review.step.protected-review",
+        stepID: "step.protected-review",
+        goalID: "goal.protected-review",
+        title: "Draft the real proposal section",
+        detail: "Goal-linked Step selected before placement.",
+        durationMinutes: 30,
+        sourceLabel: "Visible goal",
+        kind: .goalLinked
+    )
+
+    static let protectedPlacementReviewSeeded = seeded
+        .withProtectedPlacementReviewCandidate(protectedPlacementReviewCandidate)
+
     static let seededLifeSuite = TimeLifeSuiteState(
         title: "Shape Time",
         subtitle: "LifeShape Field shows what the week can hold.",
@@ -105,4 +119,35 @@ extension PreviewTimeScenarios {
         ],
         visualState: .default
     )
+}
+
+extension TimeSurfaceState {
+    func withProtectedPlacementReviewCandidate(_ candidate: TimePlacementCandidate) -> TimeSurfaceState {
+        let field = LifeShapeFieldState(
+            defaultHorizon: lifeSuite.field.defaultHorizon,
+            capacityFit: lifeSuite.field.capacityFit,
+            segments: lifeSuite.field.segments,
+            semanticMarks: lifeSuite.field.semanticMarks,
+            renderState: lifeSuite.field.renderState,
+            readings: lifeSuite.field.readings,
+            placementCandidate: candidate,
+            placementUnavailableReason: "Placement is available for \(candidate.title).",
+            calendarRows: lifeSuite.field.calendarRows,
+            sourceState: lifeSuite.field.sourceState,
+            reflowProposal: lifeSuite.field.reflowProposal,
+            receipt: lifeSuite.field.receipt,
+            continuityDockItems: lifeSuite.field.continuityDockItems
+        )
+        let suite = TimeLifeSuiteState(
+            title: lifeSuite.title,
+            subtitle: lifeSuite.subtitle,
+            shapes: lifeSuite.shapes,
+            field: field,
+            drillDown: lifeSuite.drillDown,
+            calendarBoundaryLabel: lifeSuite.calendarBoundaryLabel,
+            manualFallbackLabel: lifeSuite.manualFallbackLabel,
+            trustLabel: lifeSuite.trustLabel
+        )
+        return replacing(lifeSuite: suite)
+    }
 }

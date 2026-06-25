@@ -78,12 +78,12 @@ final class AppContainer {
             runtime: runtime,
             clock: clock,
             todayService: todayService,
-            captureService: runtime.captureService,
-            goalsService: runtime.goalsService,
-            timeRitualsService: runtime.timeRitualsService,
-            timeService: runtime.timeService,
-            insightsService: runtime.insightsService,
-            youService: runtime.youService
+            captureService: captureService,
+            goalsService: goalsService,
+            timeRitualsService: timeRitualsService,
+            timeService: timeService,
+            insightsService: insightsService,
+            youService: youService
         )
         self.persistence = AppPersistenceCapability(
             bootstrapConfiguration: bootstrapConfiguration,
@@ -99,12 +99,12 @@ final class AppContainer {
         self.featureFactory = AppFeatureFactoryCapability(
             clock: clock,
             todayService: todayService,
-            captureService: runtime.captureService,
-            goalsService: runtime.goalsService,
-            timeRitualsService: runtime.timeRitualsService,
-            timeService: runtime.timeService,
-            insightsService: runtime.insightsService,
-            youService: runtime.youService
+            captureService: captureService,
+            goalsService: goalsService,
+            timeRitualsService: timeRitualsService,
+            timeService: timeService,
+            insightsService: insightsService,
+            youService: youService
         )
         self.session = session
         self.clock = clock

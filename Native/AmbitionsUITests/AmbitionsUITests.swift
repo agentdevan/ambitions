@@ -1644,9 +1644,12 @@ final class AmbitionsUITests: XCTestCase {
 
     func testAMB1168TimeLifeShapeMutationAndUndoScreenshotProof() throws {
         let app = makeApp(
-            bootstrapMode: "demo",
+            bootstrapMode: "preview",
             launchURL: "ambitions://tab/time",
-            extraEnvironment: ["AmbitionsScreenshotMode": "YES"]
+            extraEnvironment: [
+                "AmbitionsScreenshotMode": "YES",
+                "AMBITIONS_UI_PROTECTED_PLACEMENT_REVIEW": "1"
+            ]
         )
         app.launch()
 
@@ -1657,6 +1660,23 @@ final class AmbitionsUITests: XCTestCase {
 
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
         app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
+        XCTAssertTrue(scrollUntilElementExists("protected-placement-review", in: app, maxAttempts: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.step"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.current-placement"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.proposed-placement"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.move-it"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.keep-as-is"].waitForExistence(timeout: 10))
+        captureTimeScreenshot(named: "amb-1168-time-protected-placement-review", in: app)
+
+        app.descendants(matching: .any)["protected-placement-review.keep-as-is"].tap()
+        XCTAssertTrue(app.descendants(matching: .any)["protected-placement-review.outcome"].waitForExistence(timeout: 10))
+        XCTAssertTrue(app.staticTexts["Kept as is"].waitForExistence(timeout: 10))
+        XCTAssertFalse(app.staticTexts["Step placed"].exists)
+
+        XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.primary-action", in: app, maxAttempts: 10))
+        app.descendants(matching: .any)["time.life-shape-field.primary-action"].tap()
+        XCTAssertTrue(scrollUntilElementExists("protected-placement-review", in: app, maxAttempts: 10))
+        app.descendants(matching: .any)["protected-placement-review.move-it"].tap()
         XCTAssertTrue(scrollUntilElementExists("time.life-shape-field.mutation-proof", in: app, maxAttempts: 10))
         XCTAssertTrue(app.staticTexts["Step placed"].waitForExistence(timeout: 10))
         XCTAssertTrue(app.staticTexts.matching(NSPredicate(format: "label CONTAINS[c] %@", "Today recomputed")).firstMatch.exists)

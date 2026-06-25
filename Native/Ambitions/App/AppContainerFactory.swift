@@ -85,6 +85,11 @@ enum AppContainerFactory {
         await notificationService.registerCategories()
         await runtime.snapshotWriter.refresh(now: clock.now)
         await notificationService.refreshSchedule(now: clock.now)
+        #if DEBUG
+        let timeService = debugProtectedPlacementReviewTimeServiceOverride() ?? runtime.timeService
+        #else
+        let timeService = runtime.timeService
+        #endif
 
         return AppContainer(
             bootstrapConfiguration: configuration,
@@ -98,7 +103,7 @@ enum AppContainerFactory {
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
             timeRitualsService: runtime.timeRitualsService,
-            timeService: runtime.timeService,
+            timeService: timeService,
             insightsService: runtime.insightsService,
             youService: runtime.youService,
             notificationService: notificationService,
@@ -164,6 +169,17 @@ enum AppContainerFactory {
         }
 
         try await repositories.captures.saveCaptures(PreviewFixtures.default.captures)
+    }
+
+    private static func debugProtectedPlacementReviewTimeServiceOverride() -> (any TimeServicing)? {
+        guard ProcessInfo.processInfo.environment["AMBITIONS_UI_PROTECTED_PLACEMENT_REVIEW"] == "1" else {
+            return nil
+        }
+
+        return StubTimeService(
+            timeState: PreviewTimeScenarios.protectedPlacementReviewSeeded,
+            weeklyReviewState: PreviewTimeScenarios.weeklyReview
+        )
     }
     #endif
 
