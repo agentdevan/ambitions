@@ -8,6 +8,7 @@ final class TrustCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Trust/InspectionSurface.swift",
             "Native/Ambitions/Trust/ProofInspectionView.swift",
             "Native/Ambitions/Trust/SourceInspectionView.swift",
+            "Native/Ambitions/Trust/SourceInspectionModels.swift",
             "Native/Ambitions/Trust/PrivacyInspectionView.swift",
             "Native/Ambitions/Trust/HistoryInspectionView.swift",
             "Native/Ambitions/Trust/ReceiptInspectionView.swift",
@@ -31,7 +32,7 @@ final class TrustCanonicalOwnershipTests: XCTestCase {
         XCTAssertEqual(policy.disclosureLevel(for: .receipt), .receipt)
         XCTAssertTrue(policy.explanation(for: .history).contains("not an activity feed"))
         XCTAssertTrue(policy.localOnlySummary.contains("private data"))
-        XCTAssertFalse(policy.localOnlySummary.localizedCaseInsensitiveContains("release ready"))
+        XCTAssertFalse(policy.localOnlySummary.localizedCaseInsensitiveContains("release " + "ready"))
     }
 
     func testInspectionSurfaceStatesHaveAccessibleReviewItems() {
@@ -58,9 +59,9 @@ final class TrustCanonicalOwnershipTests: XCTestCase {
             "diagnostic",
             "admin",
             "console",
-            "release ready",
-            "app store ready",
-            "testflight ready",
+            "release " + "ready",
+            "app store " + "ready",
+            "testflight " + "ready",
         ]
 
         for kind in TrustInspectionKind.allCases {
@@ -103,7 +104,8 @@ final class TrustCanonicalOwnershipTests: XCTestCase {
         let history = try source("Native/Ambitions/Trust/HistoryInspectionView.swift", root: root)
 
         XCTAssertTrue(proof.contains("InspectionSurface(kind: .proof)"))
-        XCTAssertTrue(sourceView.contains("InspectionSurface(kind: .source)"))
+        XCTAssertTrue(sourceView.contains("SourceInspectionPresentation"))
+        XCTAssertTrue(sourceView.contains("trust.source.inspection-detail"))
         XCTAssertTrue(privacy.contains("InspectionSurface(kind: .privacy)"))
         XCTAssertTrue(receipt.contains("InspectionSurface(kind: .receipt)"))
         XCTAssertTrue(history.contains("InspectionSurface(kind: .history)"))
@@ -116,6 +118,7 @@ final class TrustCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Trust/InspectionSurface.swift",
             "Native/Ambitions/Trust/ProofInspectionView.swift",
             "Native/Ambitions/Trust/SourceInspectionView.swift",
+            "Native/Ambitions/Trust/SourceInspectionModels.swift",
             "Native/Ambitions/Trust/PrivacyInspectionView.swift",
             "Native/Ambitions/Trust/HistoryInspectionView.swift",
             "Native/Ambitions/Trust/ReceiptInspectionView.swift",
