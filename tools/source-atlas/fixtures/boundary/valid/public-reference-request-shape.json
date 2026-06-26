@@ -1,0 +1,20 @@
+{
+  "caseID": "valid.public_reference_request_shape",
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "payload": {
+    "dataClass": "official_public_source",
+    "kind": "ambitions.sourceAtlas.boundaryRequestFixture.v1",
+    "request": {
+      "headers": {
+        "Accept": "application/json"
+      },
+      "path": "/source-atlas/v1/channels/staging/manifest.json",
+      "query": {
+        "manifestVersion": "fixture-v1",
+        "packID": "pack.synthetic.public_reference"
+      }
+    },
+    "schemaVersion": 1
+  }
+}

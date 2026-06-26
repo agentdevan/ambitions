@@ -1,0 +1,17 @@
+{
+  "caseID": "valid.public_schema_shard",
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "payload": {
+    "claims": [],
+    "dataClass": "public_reference_claim",
+    "edges": [],
+    "kind": "ambitions.sourceAtlas.schemaShard.v1",
+    "lattices": [],
+    "provenance": [],
+    "recipes": [],
+    "requirements": [],
+    "schemaVersion": 1,
+    "versionID": "fixture-v1"
+  }
+}

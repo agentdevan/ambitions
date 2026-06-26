@@ -9,6 +9,7 @@ from typing import Any
 
 from . import __version__
 from .adapters import ADAPTER_VERSION, harvest_sources
+from .boundary_audit import audit_bundle, audit_fixture_root, audit_r2_plan, merge_results
 from .compiler import compile_bundle
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, write_json
 from .publisher import build_r2_plan, execute_r2_plan, write_r2_plan
@@ -84,6 +85,11 @@ def main(argv: list[str] | None = None) -> int:
     validate_parser = sub.add_parser("validate")
     validate_parser.add_argument("--bundle-root", required=True)
 
+    boundary_parser = sub.add_parser("boundary-audit")
+    boundary_parser.add_argument("--fixture-root", default="tools/source-atlas/fixtures/boundary")
+    boundary_parser.add_argument("--bundle-root", action="append", default=[])
+    boundary_parser.add_argument("--r2-plan", action="append", default=[])
+
     plan_parser = sub.add_parser("r2-plan")
     plan_parser.add_argument("--bundle-root", required=True)
     plan_parser.add_argument("--bucket", required=True)
@@ -121,6 +127,13 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.command == "validate":
         result = validate_bundle(Path(args.bundle_root))
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "boundary-audit":
+        results = [audit_fixture_root(Path(args.fixture_root))]
+        results.extend(audit_bundle(Path(bundle_root)) for bundle_root in args.bundle_root)
+        results.extend(audit_r2_plan(Path(plan_path)) for plan_path in args.r2_plan)
+        result = merge_results(results)
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "r2-plan":

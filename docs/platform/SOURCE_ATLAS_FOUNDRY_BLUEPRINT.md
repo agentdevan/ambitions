@@ -20,6 +20,8 @@ Source Atlas remains invisible by default. It is not a marketplace. It is not th
 
 Source Atlas knows public/reference structure.
 
+Operational data classification for Foundry artifacts, R2 object keys, request shapes, caches, logs, schemas, and fixtures lives in `docs/platform/SOURCE_ATLAS_DATA_CLASSIFICATION_MATRIX.md`.
+
 The Private Life Runtime knows:
 
 - the user's goals

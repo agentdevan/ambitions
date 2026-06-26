@@ -1,0 +1,15 @@
+{
+  "caseID": "invalid.private_graph_fields",
+  "expectedIssueCodes": [
+    "private_life_graph"
+  ],
+  "expectedValid": false,
+  "payload": {
+    "dataClass": "public_reference_claim",
+    "kind": "ambitions.sourceAtlas.foundryPack",
+    "privateLifeGraph": {
+      "nodes": []
+    },
+    "schemaVersion": 1
+  }
+}

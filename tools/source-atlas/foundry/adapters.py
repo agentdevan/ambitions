@@ -92,8 +92,7 @@ def harvest_sources(
     fetcher: Fetcher = default_fetch,
     env: dict[str, str] | None = None,
 ) -> dict[str, Any]:
-    if env is None:
-        env = os.environ
+    env = os.environ if env is None else env
     selected = _selected_sources(source_ids)
     created_at = utc_now()
     run_root = output_root / run_id
