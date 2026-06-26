@@ -112,8 +112,10 @@ if command -v scripts/ambitions-xcode-result-extract.sh >/dev/null 2>&1; then
   scripts/ambitions-xcode-result-extract.sh --result "$RESULT_BUNDLE" --output-dir "$SUMMARY_DIR/$BATCH/$TS/extract" || true
 fi
 
-classification="unknown"
-if [[ "$status" -eq 124 ]]; then
+classification="passed"
+if [[ "$status" -eq 0 ]]; then
+  classification="passed"
+elif [[ "$status" -eq 124 ]]; then
   classification="timeout"
 elif [[ -f "$LOG_FILE" ]]; then
   classification="$(python3 scripts/ambitions-xcode-failure-classifier.py --log "$LOG_FILE" --json | python3 -c 'import sys, json; print(json.load(sys.stdin).get("classification","unknown"))' )"

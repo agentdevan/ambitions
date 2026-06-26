@@ -1,0 +1,210 @@
+name: Ambitions PR Review
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ambitions-pr-review-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repo-hygiene:
+    name: repo-hygiene
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run repo hygiene
+        shell: bash
+        run: bash scripts/ci/ambitions-pr-hygiene.sh
+
+  ambitions-law-audit:
+    name: ambitions-law-audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Ambitions law audits
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/ambitions-green-standard-audit.py
+          bash scripts/privacy-boundary-scan.sh
+          bash scripts/release-claim-safety-scan.sh
+          python3 scripts/ci/ambitions-no-weak-implementation-scan.py
+
+  source-atlas-boundary-audit:
+    name: source-atlas-boundary-audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Source Atlas boundary audits
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/source-atlas-boundary-audit.py
+          python3 scripts/source-atlas-no-private-graph-egress-audit.py
+
+  swiftlint:
+    name: swiftlint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run SwiftLint in local container
+        shell: bash
+        run: docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/realm/swiftlint:latest swiftlint lint --strict --reporter github-actions-logging
+
+  semgrep-local:
+    name: semgrep-local
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Semgrep local CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --upgrade pip
+          python3 -m pip install semgrep
+      - name: Run repo-local Semgrep rules
+        shell: bash
+        run: semgrep scan --config .semgrep/ambitions-source-atlas.yml --error
+
+  shellcheck:
+    name: shellcheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install ShellCheck
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v shellcheck >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y shellcheck
+          fi
+      - name: Run ShellCheck
+        shell: bash
+        run: find scripts -name "*.sh" -print0 | xargs -0 shellcheck
+
+  workflow-lint:
+    name: workflow-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install actionlint
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v actionlint >/dev/null 2>&1; then
+            go install github.com/rhysd/actionlint/cmd/actionlint@latest
+            echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+          fi
+      - name: Run actionlint
+        shell: bash
+        run: actionlint
+
+  docs-lint:
+    name: docs-lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install docs linters
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install -g markdownlint-cli2
+          python3 -m pip install --upgrade pip
+          python3 -m pip install yamllint
+      - name: Run markdownlint
+        shell: bash
+        run: markdownlint-cli2 "**/*.md" "#Pods" "#DerivedData" "#.build"
+      - name: Run yamllint
+        shell: bash
+        run: yamllint .github .semgrep .yamllint.yml .markdownlint-cli2.yaml
+
+  secrets-scan:
+    name: secrets-scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install Gitleaks
+        shell: bash
+        run: |
+          set -euo pipefail
+          version="8.30.1"
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${version}/gitleaks_${version}_linux_x64.tar.gz" \
+            | sudo tar -xz -C /usr/local/bin gitleaks
+          gitleaks version
+      - name: Run Gitleaks locally
+        shell: bash
+        run: bash scripts/ci/ambitions-gitleaks-scan.sh
+
+  python-tests:
+    name: python-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Python CI dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --upgrade pip
+          python3 -m pip install -r requirements-ci.txt
+      - name: Run Source Atlas Python tests
+        shell: bash
+        run: python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests
+
+  xcode-build-for-testing:
+    name: xcode-build-for-testing
+    runs-on: [self-hosted, Ambitions-XCode26]
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Decide whether Xcode validation applies
+        id: xcode_paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          should_run=false
+          if [[ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]]; then
+            should_run=true
+          else
+            base_ref="${GITHUB_BASE_REF:-main}"
+            git fetch origin "${base_ref}" --depth=1
+            base="$(git merge-base HEAD "origin/${base_ref}")"
+            if git diff --name-only "${base}" HEAD -- \
+              Native Package.swift project.yml Ambitions.xcodeproj Native/Ambitions.xcodeproj \
+              | grep -E '^(Native/|Package\.swift|project\.yml|Ambitions\.xcodeproj/|Native/Ambitions\.xcodeproj/)'; then
+              should_run=true
+            fi
+          fi
+          echo "should_run=${should_run}" >> "$GITHUB_OUTPUT"
+          echo "xcode-build-for-testing should_run=${should_run}"
+      - name: Install XcodeGen if needed
+        if: steps.xcode_paths.outputs.should_run == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v xcodegen >/dev/null 2>&1; then
+            brew install xcodegen
+          fi
+      - name: Run build-for-testing
+        if: steps.xcode_paths.outputs.should_run == 'true'
+        shell: bash
+        run: scripts/ambitions-xcode-build-for-testing.sh --batch green-standard
+      - name: Skip build-for-testing
+        if: steps.xcode_paths.outputs.should_run != 'true'
+        shell: bash
+        run: echo "No Native/Package/project Swift paths changed; Xcode build-for-testing skipped for this PR."

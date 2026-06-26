@@ -1,0 +1,69 @@
+included:
+  - Native
+  - Sources
+  - Packages
+  - AppUI
+
+excluded:
+  - .build
+  - build
+  - DerivedData
+  - .codex
+  - Packages/AmbitionsExperienceKernel/.build
+  - tools/mcp/ambitions_native_mcp/.build
+  - "**/*.xcresult"
+
+analyzer_rules: []
+
+opt_in_rules:
+  - empty_count
+  - fatal_error_message
+  - first_where
+  - overridden_super_call
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - unavailable_function
+
+disabled_rules:
+  - comma
+  - closure_parameter_position
+  - cyclomatic_complexity
+  - duplicate_imports
+  - empty_count
+  - empty_enum_arguments
+  - empty_string
+  - file_length
+  - for_where
+  - force_try
+  - function_parameter_count
+  - function_body_length
+  - implicit_optional_initialization
+  - inclusive_language
+  - is_disjoint
+  - large_tuple
+  - leading_whitespace
+  - line_length
+  - multiple_closures_with_trailing_closure
+  - non_optional_string_data_conversion
+  - opening_brace
+  - optional_data_string_conversion
+  - redundant_string_enum_value
+  - redundant_nil_coalescing
+  - sorted_imports
+  - trailing_comma
+  - trailing_newline
+  - type_body_length
+  - type_name
+  - identifier_name
+  - nesting
+  - private_over_fileprivate
+  - trailing_whitespace
+  - todo
+  - unneeded_synthesized_initializer
+  - unavailable_function
+  - unused_closure_parameter
+  - void_return
+
+force_cast: warning
+vertical_whitespace:
+  max_empty_lines: 2

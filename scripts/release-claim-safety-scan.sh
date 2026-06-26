@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
+cd "$ROOT" || exit
 name="$(basename "$0")"
 echo "$name: Codex OS deterministic claim scan"
 files=$(git diff --name-only HEAD -- | tr "\n" " ")
@@ -23,6 +23,7 @@ case "$name" in
   fixture-coverage-scan.sh) pattern="fixture|preview|overloaded-day|recovery" ;;
   *) pattern="External Brain" ;;
 esac
+# shellcheck disable=SC2086
 hits="$(rg -n -i "$pattern" $files 2>/dev/null | rg -v 'scripts/release-claim-safety-scan.sh|scripts/no-unsupported-ai-claim-scan.sh|scripts/privacy-boundary-scan.sh' || true)"
 if [ -z "$hits" ]; then
   echo "GREEN no proof-sensitive release claims found"

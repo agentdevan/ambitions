@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
+cd "$ROOT" || exit
 name="$(basename "$0")"
 echo "$name: Codex OS deterministic advisory scan"
 files=$(git diff --name-only HEAD -- | tr "\n" " ")
@@ -23,5 +23,6 @@ case "$name" in
   fixture-coverage-scan.sh) pattern="fixture|preview|overloaded-day|recovery" ;;
   *) pattern="External Brain" ;;
 esac
+# shellcheck disable=SC2086
 rg -n -i "$pattern" $files 2>/dev/null | head -80 || true
 echo "YELLOW advisory scan complete; review hits for context and explicit non-claims"

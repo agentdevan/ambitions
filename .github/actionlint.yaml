@@ -1,0 +1,5 @@
+self-hosted-runner:
+  labels:
+    - Ambitions-XCode26
+
+config-variables: null
