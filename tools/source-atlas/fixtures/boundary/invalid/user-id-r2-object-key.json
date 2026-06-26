@@ -1,0 +1,11 @@
+{
+  "caseID": "invalid.user_id_r2_object_key",
+  "expectedIssueCodes": [
+    "private_r2_object_key_segment"
+  ],
+  "expectedValid": false,
+  "payload": {
+    "dataClass": "public_r2_object_key",
+    "objectKey": "source-atlas/v1/users/user-1234/manifest.json"
+  }
+}

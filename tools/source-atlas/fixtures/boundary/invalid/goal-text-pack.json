@@ -1,0 +1,13 @@
+{
+  "caseID": "invalid.goal_text_pack",
+  "expectedIssueCodes": [
+    "goal_text"
+  ],
+  "expectedValid": false,
+  "payload": {
+    "dataClass": "public_reference_claim",
+    "goalText": "Become an astronaut this year.",
+    "kind": "ambitions.sourceAtlas.foundryPack",
+    "schemaVersion": 1
+  }
+}

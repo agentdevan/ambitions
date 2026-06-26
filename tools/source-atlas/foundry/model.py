@@ -4,10 +4,19 @@ from __future__ import annotations
 
 import hashlib
 import json
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+from .boundary import (
+    BoundaryIssue,
+    ALLOWED_DATA_CLASSES,
+    FORBIDDEN_DATA_CLASSES,
+    boundary_issue_strings,
+    boundary_issues_for_value,
+    is_boundary_line,
+    object_key_issues,
+)
 
 
 NON_CLAIMS = [
@@ -23,32 +32,6 @@ PRIVACY_BOUNDARY = (
     "public/reference/freshness only; no private life graph, goals, captures, "
     "calendar data, proof, receipts, personalization, behavior history, or private user context"
 )
-
-PRIVATE_CONTENT_PATTERNS: list[tuple[re.Pattern[str], str]] = [
-    (re.compile(r"\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b", re.I), "email_address"),
-    (re.compile(r"\b\d{3}[-.]?\d{3}[-.]?\d{4}\b"), "phone_number"),
-    (re.compile(r"\bsk-[A-Za-z0-9_-]{12,}\b"), "api_key_or_secret"),
-    (re.compile(r"\bmy\s+(goal|calendar|capture|receipt|schedule|life graph)\b", re.I), "first_person_private_context"),
-    (re.compile(r"\bprivate life graph\b", re.I), "private_life_graph_reference"),
-    (re.compile(r"\buser profile payload\b", re.I), "user_profile_payload"),
-    (re.compile(r"\bpersonalization data\b", re.I), "personalization_data"),
-    (re.compile(r"\bbehavior history\b", re.I), "behavior_history"),
-]
-
-PRIVATE_KEY_SEGMENTS = {
-    "users",
-    "user",
-    "private",
-    "captures",
-    "capture",
-    "life-graph",
-    "life_graph",
-    "receipts",
-    "receipt",
-    "personalization",
-    "calendar",
-}
-
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -93,49 +76,17 @@ def relative_to_root(path: Path, root: Path) -> str:
         return str(path)
 
 
-def is_boundary_line(line: str) -> bool:
-    lowered = line.lower()
-    markers = [
-        "no private",
-        "not private",
-        "must not receive",
-        "never receive",
-        "public/reference/freshness only",
-        "not a private",
-        "not private life graph",
-    ]
-    return any(marker in lowered for marker in markers)
-
-
 def privacy_findings_for_text(text: str, label: str) -> list[str]:
-    findings: list[str] = []
-    for index, line in enumerate(text.splitlines(), start=1):
-        if is_boundary_line(line):
-            continue
-        for pattern, name in PRIVATE_CONTENT_PATTERNS:
-            if pattern.search(line):
-                findings.append(f"{label}:{index}: {name}")
-    return findings
+    return [
+        issue.format()
+        for issue in boundary_issues_for_value(text, label)
+        if not is_boundary_line(issue.detail)
+    ]
 
 
 def privacy_findings_for_value(value: Any, label: str) -> list[str]:
-    findings: list[str] = []
-
-    def walk(item: Any, path: str) -> None:
-        if isinstance(item, str):
-            findings.extend(privacy_findings_for_text(item, path))
-        elif isinstance(item, list):
-            for index, child in enumerate(item):
-                walk(child, f"{path}[{index}]")
-        elif isinstance(item, dict):
-            for key, child in item.items():
-                walk(child, f"{path}.{key}")
-
-    walk(value, label)
-    return findings
+    return boundary_issue_strings(boundary_issues_for_value(value, label))
 
 
 def object_key_findings(key: str) -> list[str]:
-    normalized = key.lower().replace("\\", "/")
-    segments = [segment for segment in normalized.split("/") if segment]
-    return [f"object key contains private segment '{segment}'" for segment in segments if segment in PRIVATE_KEY_SEGMENTS]
+    return [issue.format() for issue in object_key_issues(key)]

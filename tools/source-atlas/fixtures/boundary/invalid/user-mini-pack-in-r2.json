@@ -1,0 +1,13 @@
+{
+  "caseID": "invalid.user_mini_pack_in_r2",
+  "expectedIssueCodes": [
+    "user_mini_pack_forbidden_in_foundry"
+  ],
+  "expectedValid": false,
+  "payload": {
+    "dataClass": "public_reference_claim",
+    "kind": "ambitions.sourceAtlas.userMiniPack",
+    "privacyClass": "privateLife",
+    "schemaVersion": 1
+  }
+}

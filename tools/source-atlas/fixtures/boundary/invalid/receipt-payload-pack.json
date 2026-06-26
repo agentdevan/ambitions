@@ -1,0 +1,15 @@
+{
+  "caseID": "invalid.receipt_payload_pack",
+  "expectedIssueCodes": [
+    "proof_or_receipt_payload"
+  ],
+  "expectedValid": false,
+  "payload": {
+    "dataClass": "public_reference_claim",
+    "kind": "ambitions.sourceAtlas.foundryPack",
+    "receiptPayload": {
+      "closure": "private closure"
+    },
+    "schemaVersion": 1
+  }
+}

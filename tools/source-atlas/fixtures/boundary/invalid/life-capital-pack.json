@@ -1,0 +1,15 @@
+{
+  "caseID": "invalid.life_capital_pack",
+  "expectedIssueCodes": [
+    "life_capital"
+  ],
+  "expectedValid": false,
+  "payload": {
+    "dataClass": "public_reference_claim",
+    "kind": "ambitions.sourceAtlas.foundryPack",
+    "lifeCapital": {
+      "capability": "private credential"
+    },
+    "schemaVersion": 1
+  }
+}

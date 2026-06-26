@@ -1,0 +1,18 @@
+{
+  "caseID": "valid.public_reference_manifest",
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "payload": {
+    "appCacheAllowed": true,
+    "channel": "staging",
+    "dataClass": "public_freshness",
+    "fixtureAllowed": "public_synthetic_only",
+    "kind": "ambitions.sourceAtlas.releaseManifest",
+    "logAllowed": "metadata_only",
+    "packIndex": [],
+    "privacyBoundary": "public/reference/freshness only; no private life graph or private user context",
+    "r2Allowed": true,
+    "schemaVersion": 1,
+    "versionID": "fixture-v1"
+  }
+}

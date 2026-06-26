@@ -7,6 +7,7 @@ from typing import Any
 
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, file_sha256, read_json, stable_id, utc_now, write_json
 from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
+from .schemas import ontology_v1, schema_descriptors, shard_for_pathway
 
 
 def _source_records(source_ids: list[str], harvest_context: dict[str, Any] | None = None) -> list[dict[str, Any]]:
@@ -53,6 +54,11 @@ def _pack_for_pathway(pathway: dict[str, Any], version_id: str, created_at: str,
         "kind": "ambitions.sourceAtlas.foundryPack",
         "id": pathway["id"].replace("pathway.", "pack."),
         "versionID": version_id,
+        "dataClass": "public_reference_claim",
+        "r2Allowed": True,
+        "appCacheAllowed": True,
+        "logAllowed": "metadata_only",
+        "fixtureAllowed": "public_synthetic_only",
         "displayName": pathway["title"],
         "domains": sorted({pathway["domain"], *[domain for source in sources for domain in source["domains"]]}),
         "metadata": {
@@ -107,6 +113,11 @@ def source_catalog_manifest(version_id: str, created_at: str, harvest_context: d
         "schemaVersion": 1,
         "kind": "ambitions.sourceAtlas.sourceRegistry",
         "versionID": version_id,
+        "dataClass": "official_public_source",
+        "r2Allowed": True,
+        "appCacheAllowed": True,
+        "logAllowed": "metadata_only",
+        "fixtureAllowed": "public_synthetic_only",
         "createdAt": created_at,
         "sources": _source_records([source["id"] for source in SOURCE_REGISTRY], harvest_context),
         "harvestRun": _harvest_manifest_summary(harvest_context),
@@ -149,10 +160,14 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
     packs_dir = bundle_root / "packs"
     registries_dir = bundle_root / "registries"
     provenance_dir = bundle_root / "provenance"
+    schemas_dir = bundle_root / "schemas"
+    shards_dir = bundle_root / "shards"
 
     packs: list[dict[str, Any]] = []
     pack_entries: list[dict[str, Any]] = []
+    shard_entries: list[dict[str, Any]] = []
     for pathway in PATHWAY_SEEDS:
+        sources = _source_records(pathway["sourceIDs"], harvest_context)
         pack = _pack_for_pathway(pathway, version_id, created_at, harvest_context)
         pack_path = packs_dir / f"{pack['id']}.json"
         write_json(pack_path, pack)
@@ -169,6 +184,59 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
         }
         packs.append(pack)
         pack_entries.append(pack_entry)
+
+        shard = shard_for_pathway(pathway, sources, version_id, created_at)
+        shard_path = shards_dir / f"{shard['id']}.json"
+        write_json(shard_path, shard)
+        shard_entries.append(
+            {
+                "id": shard["id"],
+                "path": str(shard_path.relative_to(bundle_root)),
+                "sha256": file_sha256(shard_path),
+                "bytes": shard_path.stat().st_size,
+                "claimCount": len(shard["claims"]),
+                "requirementCount": len(shard["requirements"]),
+                "provenanceCount": len(shard["provenance"]),
+                "atomCount": len(shard["atoms"]),
+                "edgeCount": len(shard["edges"]),
+                "latticeCount": len(shard["lattices"]),
+                "recipeCount": len(shard["recipes"]),
+            }
+        )
+
+    ontology = ontology_v1(created_at)
+    ontology_path = schemas_dir / "ontology-v1.json"
+    write_json(ontology_path, ontology)
+    schema_descriptor_path = schemas_dir / "schema-descriptors-v1.json"
+    schema_descriptor_doc = {
+        "schemaVersion": 1,
+        "kind": "ambitions.sourceAtlas.schemaDescriptorIndex.v1",
+        "versionID": version_id,
+        "dataClass": "public_ontology",
+        "r2Allowed": True,
+        "appCacheAllowed": True,
+        "logAllowed": "metadata_only",
+        "fixtureAllowed": "public_synthetic_only",
+        "createdAt": created_at,
+        "schemas": schema_descriptors(created_at),
+        "privacyBoundary": PRIVACY_BOUNDARY,
+        "nonClaims": NON_CLAIMS,
+    }
+    write_json(schema_descriptor_path, schema_descriptor_doc)
+    schema_entries = [
+        {
+            "id": "ontology-v1",
+            "path": str(ontology_path.relative_to(bundle_root)),
+            "sha256": file_sha256(ontology_path),
+            "bytes": ontology_path.stat().st_size,
+        },
+        {
+            "id": "schema-descriptors-v1",
+            "path": str(schema_descriptor_path.relative_to(bundle_root)),
+            "sha256": file_sha256(schema_descriptor_path),
+            "bytes": schema_descriptor_path.stat().st_size,
+        },
+    ]
 
     source_catalog = source_catalog_manifest(version_id, created_at, harvest_context)
     source_catalog_path = registries_dir / "source-registry.json"
@@ -200,6 +268,11 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
         "schemaVersion": 1,
         "kind": "ambitions.sourceAtlas.freshnessManifest",
         "versionID": version_id,
+        "dataClass": "public_freshness",
+        "r2Allowed": True,
+        "appCacheAllowed": True,
+        "logAllowed": "metadata_only",
+        "fixtureAllowed": "public_synthetic_only",
         "publishedAt": created_at,
         "channel": channel,
         "claimStateBuckets": _claim_state_buckets(packs),
@@ -224,9 +297,16 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
         "schemaVersion": 1,
         "kind": "ambitions.sourceAtlas.releaseManifest",
         "versionID": version_id,
+        "dataClass": "public_freshness",
+        "r2Allowed": True,
+        "appCacheAllowed": True,
+        "logAllowed": "metadata_only",
+        "fixtureAllowed": "public_synthetic_only",
         "channel": channel,
         "createdAt": created_at,
         "packIndex": pack_entries,
+        "schemaIndex": schema_entries,
+        "shardIndex": shard_entries,
         "registryIndex": registry_entries,
         "freshnessManifest": {
             "path": str(freshness_path.relative_to(bundle_root)),
@@ -243,6 +323,11 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
         "schemaVersion": 1,
         "kind": "ambitions.sourceAtlas.foundryReceipt",
         "id": stable_id("receipt.source_atlas_foundry", {"versionID": version_id, "channel": channel, "packIndex": pack_entries}),
+        "dataClass": "public_provenance",
+        "r2Allowed": True,
+        "appCacheAllowed": True,
+        "logAllowed": "metadata_only",
+        "fixtureAllowed": "public_synthetic_only",
         "operation": "compile_bundle",
         "createdAt": created_at,
         "versionID": version_id,
@@ -272,6 +357,8 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
         ],
         "outputs": [
             *pack_entries,
+            *schema_entries,
+            *shard_entries,
             {
                 "id": "manifest",
                 "path": "manifest.json",
@@ -393,6 +480,11 @@ def _harvest_bundle_summary(harvest_context: dict[str, Any]) -> dict[str, Any]:
         "schemaVersion": 1,
         "kind": "ambitions.sourceAtlas.harvestSummary",
         "runID": manifest["runID"],
+        "dataClass": "public_provenance",
+        "r2Allowed": True,
+        "appCacheAllowed": True,
+        "logAllowed": "metadata_only",
+        "fixtureAllowed": "public_synthetic_only",
         "createdAt": manifest["createdAt"],
         "adapterVersion": manifest["adapterVersion"],
         "entries": entries,
