@@ -144,6 +144,7 @@ struct YouRootDetailContent: View {
         case .capturePreferences:
             YouControlGroup(eyebrow: "Capture", section: captureSettingsSection, accessibilityIdentifier: "you.capture-preferences-control-group")
         case .sourceSettings:
+            SourceInspectionView(presentation: sourceSettingsInspectionPresentation)
             YouControlGroup(
                 eyebrow: "Sources",
                 section: sourcesSection,
@@ -224,6 +225,126 @@ struct YouRootDetailContent: View {
             ] + profileProjection.assumptionCorrections.items,
             footer: profileProjection.assumptionCorrections.footer
         )
+    }
+
+    var sourceSettingsInspectionPresentation: SourceInspectionPresentation {
+        guard let row = profileProjection.sourceAtlasKnowledge.sections.flatMap(\.rows).first else {
+            return SourceInspectionPresentation.make(
+                id: "you-sources-unavailable",
+                state: .unavailable,
+                publicDetail: SourceInspectionPublicDetail(
+                    sourceName: "Public reference detail",
+                    sourceKind: "Public reference",
+                    referenceTitle: "No source detail loaded",
+                    retrievedLabel: "Not available right now",
+                    freshnessLabel: "No current source detail available",
+                    useLabel: "Blocked from current use"
+                ),
+                useContext: "Local planning remains available without this reference detail.",
+                reviewAction: "Open this detail again after a reference pack is available."
+            )
+        }
+
+        let state = sourceInspectionState(for: row)
+        return SourceInspectionPresentation.make(
+            id: "you-sources-\(row.id)",
+            state: state,
+            publicDetail: SourceInspectionPublicDetail(
+                sourceName: sourceInspectionPublicSourceName(for: row),
+                sourceKind: "Public reference",
+                referenceTitle: sourceInspectionPublicReferenceTitle(for: row),
+                retrievedLabel: row.sourceStateLabel,
+                freshnessLabel: row.freshnessStateLabel,
+                useLabel: row.runtimeUseState.label
+            ),
+            useContext: sourceInspectionUseContext(for: state),
+            reviewAction: sourceInspectionReviewAction(for: state)
+        )
+    }
+
+    func sourceInspectionPublicSourceName(for row: YouSourceAtlasKnowledgeRow) -> String {
+        if row.sourceName.localizedCaseInsensitiveContains("local") {
+            return "Local reference pack"
+        }
+
+        return "Public reference pack"
+    }
+
+    func sourceInspectionPublicReferenceTitle(for row: YouSourceAtlasKnowledgeRow) -> String {
+        if row.title.localizedCaseInsensitiveContains("goal") {
+            return "Goals reference"
+        }
+
+        return row.title
+    }
+
+    func sourceInspectionUseContext(for state: SourceInspectionState) -> String {
+        switch state {
+        case .current:
+            return "Can explain public source context for this detail without changing local planning on its own."
+        case .stale:
+            return "Can be shown as older context, but should not silently change what you do next."
+        case .staleCritical:
+            return "Too old to guide current recommendations."
+        case .unavailable:
+            return "Local planning remains available without this reference detail."
+        case .conflicted:
+            return "Needs a conflict check before it guides behavior."
+        case .revoked:
+            return "No longer usable for current recommendations."
+        case .unsupported:
+            return "Not supported by this inspection detail."
+        case .reviewRequired:
+            return "Needs review before it changes a recommendation."
+        }
+    }
+
+    func sourceInspectionReviewAction(for state: SourceInspectionState) -> String {
+        switch state {
+        case .current, .stale:
+            return "No review needed right now."
+        case .staleCritical:
+            return "Use a newer reference before relying on this detail."
+        case .unavailable:
+            return "Open this detail again after a reference pack is available."
+        case .conflicted:
+            return "Review the conflict before using this source."
+        case .revoked:
+            return "Do not use this withdrawn reference."
+        case .unsupported:
+            return "Use a supported reference type for this detail."
+        case .reviewRequired:
+            return "Review this reference before it changes a recommendation."
+        }
+    }
+
+    func sourceInspectionState(for row: YouSourceAtlasKnowledgeRow) -> SourceInspectionState {
+        let searchable = [
+            row.sourceStateLabel,
+            row.freshnessStateLabel,
+            row.reviewNeedLabel,
+            row.runtimeUseState.label,
+        ].joined(separator: " ").lowercased()
+
+        if searchable.contains("revoked") || searchable.contains("withdrawn") {
+            return .revoked
+        }
+        if searchable.contains("conflict") || searchable.contains("contradict") {
+            return .conflicted
+        }
+        if searchable.contains("unsupported") {
+            return .unsupported
+        }
+        if searchable.contains("too old") || searchable.contains("critical") {
+            return .staleCritical
+        }
+        if row.reviewNeedLabel == "Needs Review" || searchable.contains("review") {
+            return .reviewRequired
+        }
+        if searchable.contains("stale") || searchable.contains("older") {
+            return .stale
+        }
+        return .current
     }
 
     var accessibilitySettingsSection: YouSectionGroup {
