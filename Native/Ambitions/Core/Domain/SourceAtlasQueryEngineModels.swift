@@ -199,7 +199,7 @@ extension SourceAtlasStoreQuarantine {
         switch reason {
         case .corruptJSON, .unsupportedSchema, .hashMismatch, .invalidPack:
             return true
-        case .missingPayload, .contradicted, .revoked:
+        case .missingPayload, .staleCritical, .contradicted, .revoked:
             return false
         }
     }

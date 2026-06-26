@@ -66,12 +66,12 @@ FORBIDDEN_KEY_PATTERNS: list[tuple[re.Pattern[str], str]] = [
     (re.compile(r"(^|[_-])user(id|_id|-id)?($|[_-])", re.I), "user_identifier"),
     (re.compile(r"account(secret|token|key|credential|session)", re.I), "account_secret"),
     (re.compile(r"(api|access|secret|session|refresh)[_-]?(key|token|secret)", re.I), "account_secret"),
-    (re.compile(r"goal(text|title|description|intent|phrase|id)?$", re.I), "goal_text"),
-    (re.compile(r"capture(text|body|transcript|note)?$", re.I), "capture_text"),
+    (re.compile(r"goal([_-]?(text|title|description|intent|phrase|id))?$", re.I), "goal_text"),
+    (re.compile(r"capture([_-]?(text|body|transcript|note))?$", re.I), "capture_text"),
     (re.compile(r"(calendar|schedule|capacity|availability|protectedTime|fixedPoint)", re.I), "schedule_or_capacity"),
-    (re.compile(r"(lifeCapital|capabilityLedger|resourceGraph|relationshipGraph)", re.I), "life_capital"),
-    (re.compile(r"(proofPayload|proofBody|evidenceLedger|receiptPayload|receiptBody|closureHistory)", re.I), "proof_or_receipt_payload"),
-    (re.compile(r"(privateLifeGraph|lifeGraph|personalization|behaviorHistory|inferredPriorit)", re.I), "private_life_graph"),
+    (re.compile(r"(life[_-]?capital|lifeCapital|capabilityLedger|resourceGraph|relationshipGraph)", re.I), "life_capital"),
+    (re.compile(r"(proof[_-]?(payload|body)|proofPayload|proofBody|evidenceLedger|receipt[_-]?(payload|body)|receiptPayload|receiptBody|closureHistory)", re.I), "proof_or_receipt_payload"),
+    (re.compile(r"(private[_-]?life[_-]?graph|privateLifeGraph|life[_-]?graph|lifeGraph|personalization|behaviorHistory|inferred[_-]?priorit)", re.I), "private_life_graph"),
 ]
 
 FORBIDDEN_TEXT_PATTERNS: list[tuple[re.Pattern[str], str]] = [
@@ -244,6 +244,6 @@ def request_shape_issues(request: dict[str, Any], label: str = "request") -> lis
     query = request.get("query") if isinstance(request, dict) else None
     if isinstance(query, dict):
         for key in query:
-            if re.search(r"(user|account|goal|capture|schedule|calendar|proof|receipt)", key, re.I):
+            if re.search(r"(user|account|goal|capture|schedule|capacity|calendar|life[_-]?capital|proof|receipt|priority)", key, re.I):
                 issues.append(BoundaryIssue(label, f"$.query.{key}", "forbidden_request_query_field", key))
     return issues

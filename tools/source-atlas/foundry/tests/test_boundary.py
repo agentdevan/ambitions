@@ -82,6 +82,43 @@ def test_rejects_account_secret_user_id_private_graph_request_shape():
     assert "private_life_graph" in issues
 
 
+def test_accepts_m05_runtime_artifact_request_shape():
+    request = _fixture(FIXTURE_ROOT / "valid" / "public-reference-request-shape.json")["payload"]["request"]
+
+    assert request_shape_issues(request, "request") == []
+
+
+def test_rejects_m05_runtime_artifact_request_private_query_markers():
+    request = {
+        "headers": {
+            "Accept": "application/json"
+        },
+        "path": "/source-atlas/public/packs",
+        "query": {
+            "artifact_id": "pack.synthetic.public_reference",
+            "artifact_version": "2026-06-public-reference",
+            "capture_text": "private capture",
+            "goal_id": "goal.private",
+            "inferred_priority": "high",
+            "life_capital": "relationship",
+            "proof_payload": "proof",
+            "receipt_payload": "receipt",
+            "schedule_capacity": "tonight",
+            "user_id": "user-1234",
+        },
+    }
+
+    issues = [issue.code for issue in request_shape_issues(request, "request")]
+
+    assert "forbidden_request_query_field" in issues
+    assert "capture_text" in issues
+    assert "goal_text" in issues
+    assert "life_capital" in issues
+    assert "proof_or_receipt_payload" in issues
+    assert "schedule_or_capacity" in issues
+    assert "user_identifier" in issues
+
+
 def test_rejects_private_r2_object_key_segments_and_uuid_like_ids():
     issues = [issue.code for issue in object_key_issues("source-atlas/v1/users/0123456789abcdef01234567/goals/manifest.json")]
 

@@ -56,6 +56,25 @@ final class AnyGoalRuntimeCoverageTests: XCTestCase {
         XCTAssertTrue(record.recoveryReceipt.blockedOutputs.contains("visible_step"))
         XCTAssertFalse(rendered(record).localizedCaseInsensitiveContains("Maya"))
         XCTAssertFalse(rendered(record).localizedCaseInsensitiveContains("attic notebook"))
+        let privacySafeRequest = try XCTUnwrap(record.privacySafeRequest)
+        let encodedRequest = try rendered(privacySafeRequest)
+        XCTAssertTrue(encodedRequest.contains("remote_abstract_allowed") == false)
+        XCTAssertTrue(encodedRequest.contains("creative"))
+        XCTAssertTrue(encodedRequest.contains("public_source"))
+        for forbidden in [
+            "Maya",
+            "attic notebook",
+            "private piano single",
+            "Release the private piano single",
+            "rawGoalText",
+            "captureText",
+            "schedule",
+            "capacity",
+            "proofPayload",
+            "receiptPayload"
+        ] {
+            XCTAssertFalse(encodedRequest.localizedCaseInsensitiveContains(forbidden), forbidden)
+        }
     }
 
     func testUnsafeBlockedCreatesBlockedReceiptWithoutCoverageRequestOrStepOutput() throws {
@@ -268,5 +287,10 @@ private extension AnyGoalRuntimeCoverageTests {
     func rendered(_ record: AnyGoalCoverageRecord) -> String {
         let data = try! JSONEncoder().encode(record)
         return String(data: data, encoding: .utf8)!
+    }
+
+    func rendered(_ request: PrivacySafeCoverageRequest) throws -> String {
+        let data = try JSONEncoder().encode(request)
+        return String(data: data, encoding: .utf8) ?? ""
     }
 }

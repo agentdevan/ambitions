@@ -25,6 +25,7 @@ enum SourceAtlasStoreQuarantineReason: String, Codable, Sendable, Equatable, Has
     case unsupportedSchema = "unsupported_schema"
     case hashMismatch = "hash_mismatch"
     case invalidPack = "invalid_pack"
+    case staleCritical = "stale_critical"
     case contradicted
     case revoked
 }
@@ -180,6 +181,9 @@ struct SourceAtlasStore {
         }
 
         let blockingState = Self.blockingState(in: pack)
+        if blockingState == .stale {
+            return .quarantined(SourceAtlasStoreQuarantine(source: payload.source, reason: .staleCritical))
+        }
         if blockingState == .revoked {
             return .quarantined(SourceAtlasStoreQuarantine(source: payload.source, reason: .revoked))
         }
@@ -214,6 +218,9 @@ struct SourceAtlasStore {
 
     private static func blockingState(in pack: SourceAtlasPack) -> SourceAtlasStoreSourceState? {
         let requirementStates = pack.requirements.map(\.sourceState)
+        if pack.claims.contains(where: { $0.freshness == .staleCritical }) {
+            return .stale
+        }
         if pack.claims.contains(where: { $0.state == .revoked || $0.freshness == .revoked }) ||
             requirementStates.contains(.revoked) {
             return .revoked

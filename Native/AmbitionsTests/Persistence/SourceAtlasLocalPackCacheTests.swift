@@ -34,6 +34,64 @@ final class SourceAtlasLocalPackCacheTests: XCTestCase {
         XCTAssertFalse(result.updateRecord.fallbackTriggered)
     }
 
+    func testRuntimeArtifactRequestAllowsOnlyPublicReferenceFields() throws {
+        let pack = Self.pack()
+        let entry = try Self.entry(for: pack)
+        let request = SourceAtlasPublicPackRequest.runtimeArtifact(
+            manifestVersionID: "manifest.v1",
+            entry: entry,
+            channel: "stable",
+            artifactVersionID: "2026-06-public-reference",
+            sourceState: .officialCurrent,
+            freshnessState: .current,
+            publicJurisdiction: "US",
+            publicLocale: "en-US"
+        )
+
+        XCTAssertTrue(request.isPrivacySafe)
+        XCTAssertEqual(request.channel, "stable")
+        XCTAssertEqual(request.artifactVersionID, "2026-06-public-reference")
+        XCTAssertEqual(request.sourceState, .officialCurrent)
+        XCTAssertEqual(request.freshnessState, .current)
+        XCTAssertEqual(request.publicJurisdiction, "US")
+        XCTAssertEqual(request.publicLocale, "en-US")
+        XCTAssertEqual(
+            Set(request.queryItems.keys),
+            ["artifact_id", "artifact_version", "channel", "freshness_state", "manifest_version", "pack_id", "sha256", "source_state"]
+        )
+        let encoded = try Self.encodedJSONString(request)
+        for allowed in [
+            "artifact_id",
+            "artifact_version",
+            "channel",
+            "freshness_state",
+            "manifest_version",
+            "pack_id",
+            "publicJurisdiction",
+            "publicLocale",
+            "sha256",
+            "source_state"
+        ] {
+            XCTAssertTrue(encoded.contains(allowed), allowed)
+        }
+        for forbidden in [
+            "goalText",
+            "captureText",
+            "calendar",
+            "schedule",
+            "capacity",
+            "lifeCapital",
+            "proofPayload",
+            "receiptPayload",
+            "privateLifeGraph",
+            "accountSecret",
+            "userID",
+            "inferredPriority"
+        ] {
+            XCTAssertFalse(encoded.localizedCaseInsensitiveContains(forbidden), forbidden)
+        }
+    }
+
     func testManifestHashMismatchQuarantinesPayloadsAndFallsBackLocally() throws {
         let pack = Self.pack()
         let actualEntry = try Self.entry(for: pack)
@@ -95,7 +153,57 @@ final class SourceAtlasLocalPackCacheTests: XCTestCase {
         XCTAssertNil(result.selectedPack)
         XCTAssertTrue(result.cacheIssues.contains(.revokedByManifest))
         XCTAssertTrue(result.cacheIssues.contains(.noEligiblePack))
+        XCTAssertTrue(result.loadResult.quarantines.map(\.reason).contains(.revoked))
         XCTAssertEqual(result.queryResponse.fallbackReason, .noLoadedPacks)
+        XCTAssertFalse(result.canSupportCurrentUse)
+    }
+
+    func testManifestStaleCriticalQuarantinesCurrentAndLastKnownGoodArtifacts() throws {
+        let pack = Self.pack()
+        let entry = SourceAtlasFreshnessPackEntry(
+            packID: pack.id,
+            currentSHA256: try Self.entry(for: pack).currentSHA256,
+            currentSignature: "signature",
+            rollbackPointers: [
+                "previous": try Self.entry(for: pack).currentSHA256
+            ],
+            claimStateBuckets: [
+                SourceAtlasFreshnessBrokerClaimStateBucket(
+                    state: .stale,
+                    claimIDs: ["claim.current"]
+                )
+            ]
+        )
+        let result = SourceAtlasLocalPackCache().resolve(
+            SourceAtlasLocalPackCacheInput(
+                manifest: Self.manifest(entry: entry),
+                request: SourceAtlasPublicPackRequest.runtimeArtifact(
+                    manifestVersionID: "manifest.v1",
+                    entry: entry,
+                    channel: "stable",
+                    artifactVersionID: "2026-06-public-reference",
+                    sourceState: .officialCurrent,
+                    freshnessState: .current
+                ),
+                cachedPayload: try Self.payload(for: pack, source: .cached),
+                bundledPayload: try Self.payload(for: pack, source: .bundled),
+                lastKnownGoodPayload: try Self.payload(for: pack, source: .lastKnownGood),
+                query: SourceAtlasQuery(domainID: "sports"),
+                checkedAt: Self.checkedAt
+            )
+        )
+
+        XCTAssertNil(result.selectedPack)
+        XCTAssertTrue(result.cacheIssues.contains(.staleCriticalByManifest))
+        XCTAssertTrue(result.cacheIssues.contains(.noEligiblePack))
+        XCTAssertEqual(
+            Set(result.loadResult.quarantines),
+            [
+                SourceAtlasStoreQuarantine(source: .cached, reason: .staleCritical),
+                SourceAtlasStoreQuarantine(source: .bundled, reason: .staleCritical),
+                SourceAtlasStoreQuarantine(source: .lastKnownGood, reason: .staleCritical)
+            ]
+        )
         XCTAssertFalse(result.canSupportCurrentUse)
     }
 
@@ -132,6 +240,26 @@ final class SourceAtlasLocalPackCacheTests: XCTestCase {
         XCTAssertFalse(result.canSupportCurrentUse)
     }
 
+    func testRequestContractRejectsPrivateRuntimeEgressMarkers() throws {
+        let pack = Self.pack()
+        let entry = try Self.entry(for: pack)
+        let unsafeRequest = SourceAtlasPublicPackRequest(
+            packID: entry.packID,
+            manifestVersionID: "manifest.v1",
+            declaredSHA256: entry.currentSHA256,
+            queryItems: [
+                "capture_text": "private capture",
+                "life_capital": "relationship",
+                "proof_payload": "receipt",
+                "schedule_capacity": "tonight",
+                "inferred_priority": "high",
+                "user_id": "user-123"
+            ]
+        )
+
+        XCTAssertEqual(unsafeRequest.validationIssues, [.privatePlanningParameter])
+    }
+
     func testLastKnownGoodRollbackLoadsButBlocksCurrentUse() throws {
         let currentPack = Self.pack(manifestID: "pack.current")
         let lastKnownGood = Self.pack(manifestID: "pack.last-known-good")
@@ -166,6 +294,89 @@ final class SourceAtlasLocalPackCacheTests: XCTestCase {
         XCTAssertTrue(result.fallback.conditions.contains(.staleCache))
         XCTAssertTrue(result.cacheIssues.contains(.localFallbackUsed))
         XCTAssertFalse(result.cacheIssues.contains(.noEligiblePack))
+        XCTAssertFalse(result.canSupportCurrentUse)
+    }
+
+    func testDeniedEntitlementCanUseBundledPublicFallbackWithoutRemoteAccess() throws {
+        let pack = Self.pack()
+        let entry = try Self.entry(for: pack)
+        let access = SourceAtlasAccessBoundary().resolve(
+            SourceAtlasAccessRequest(
+                artifactTier: .entitlementReferencePack,
+                accountSessionState: .signedIn,
+                entitlementState: .denied,
+                networkReachability: .online,
+                bundledPublicArtifactAvailable: true
+            )
+        )
+        let result = SourceAtlasLocalPackCache().resolve(
+            SourceAtlasLocalPackCacheInput(
+                manifest: Self.manifest(entry: entry),
+                request: SourceAtlasPublicPackRequest.runtimeArtifact(
+                    manifestVersionID: "manifest.v1",
+                    entry: entry,
+                    channel: "stable",
+                    artifactVersionID: "2026-06-public-reference",
+                    sourceState: .officialCurrent,
+                    freshnessState: .current
+                ),
+                cachedPayload: try Self.payload(for: pack, source: .cached),
+                bundledPayload: try Self.payload(for: pack, source: .bundled),
+                query: SourceAtlasQuery(domainID: "sports"),
+                checkedAt: Self.checkedAt,
+                accessDecision: access
+            )
+        )
+
+        XCTAssertEqual(access.route, .bundledLocal)
+        XCTAssertFalse(access.permitsRemotePublicReference)
+        XCTAssertFalse(access.coreLocalPlanningBlocked)
+        XCTAssertEqual(result.loadResult.selectedSource, .bundled)
+        XCTAssertEqual(result.selectedPack?.id, pack.id)
+        XCTAssertFalse(result.cacheIssues.contains(.accessBoundaryUnavailable))
+    }
+
+    func testUnavailableAccessBoundaryFailsClosedForSourceAtlasButNotCorePlanning() throws {
+        let pack = Self.pack()
+        let entry = try Self.entry(for: pack)
+        let access = SourceAtlasAccessBoundary().resolve(
+            SourceAtlasAccessRequest(
+                artifactTier: .entitlementReferencePack,
+                accountSessionState: .noAccount,
+                entitlementState: .denied,
+                networkReachability: .offline,
+                cachedPublicArtifactAvailable: false,
+                lastKnownGoodAvailable: false,
+                bundledPublicArtifactAvailable: false
+            )
+        )
+        let result = SourceAtlasLocalPackCache().resolve(
+            SourceAtlasLocalPackCacheInput(
+                manifest: Self.manifest(entry: entry),
+                request: SourceAtlasPublicPackRequest.runtimeArtifact(
+                    manifestVersionID: "manifest.v1",
+                    entry: entry,
+                    channel: "stable",
+                    artifactVersionID: "2026-06-public-reference",
+                    sourceState: .officialCurrent,
+                    freshnessState: .current
+                ),
+                cachedPayload: try Self.payload(for: pack, source: .cached),
+                bundledPayload: try Self.payload(for: pack, source: .bundled),
+                query: SourceAtlasQuery(domainID: "sports"),
+                checkedAt: Self.checkedAt,
+                accessDecision: access
+            )
+        )
+
+        XCTAssertEqual(access.route, .unavailable)
+        XCTAssertTrue(access.issues.contains(.noAccount))
+        XCTAssertTrue(access.issues.contains(.entitlementDenied))
+        XCTAssertTrue(access.issues.contains(.offline))
+        XCTAssertFalse(access.coreLocalPlanningBlocked)
+        XCTAssertNil(result.selectedPack)
+        XCTAssertTrue(result.cacheIssues.contains(.accessBoundaryUnavailable))
+        XCTAssertTrue(result.cacheIssues.contains(.noEligiblePack))
         XCTAssertFalse(result.canSupportCurrentUse)
     }
 }
@@ -214,6 +425,13 @@ private extension SourceAtlasLocalPackCacheTests {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys]
         return try encoder.encode(pack)
+    }
+
+    static func encodedJSONString<T: Encodable>(_ value: T) throws -> String {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys]
+        let data = try encoder.encode(value)
+        return String(data: data, encoding: .utf8) ?? ""
     }
 
     static func pack(manifestID: String = "pack.current") -> SourceAtlasPack {

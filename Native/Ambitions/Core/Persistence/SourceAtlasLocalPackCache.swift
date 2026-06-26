@@ -16,18 +16,36 @@ struct SourceAtlasPublicPackRequest: Codable, Sendable, Equatable, Hashable {
     let declaredSHA256: String
     let routePath: String
     let queryItems: [String: String]
+    let channel: String?
+    let artifactVersionID: String?
+    let sourceState: SourceAtlasRequirementSourceState?
+    let freshnessState: SourceAtlasRequirementFreshnessState?
+    let publicJurisdiction: String?
+    let publicLocale: String?
 
     init(
         packID: String,
         manifestVersionID: String,
         declaredSHA256: String,
         routePath: String = "/source-atlas/public/packs",
-        queryItems: [String: String] = [:]
+        queryItems: [String: String] = [:],
+        channel: String? = nil,
+        artifactVersionID: String? = nil,
+        sourceState: SourceAtlasRequirementSourceState? = nil,
+        freshnessState: SourceAtlasRequirementFreshnessState? = nil,
+        publicJurisdiction: String? = nil,
+        publicLocale: String? = nil
     ) {
         self.packID = packID.trimmingCharacters(in: .whitespacesAndNewlines)
         self.manifestVersionID = manifestVersionID.trimmingCharacters(in: .whitespacesAndNewlines)
         self.declaredSHA256 = declaredSHA256.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         self.routePath = routePath.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.channel = Self.trimmed(channel)
+        self.artifactVersionID = Self.trimmed(artifactVersionID)
+        self.sourceState = sourceState
+        self.freshnessState = freshnessState
+        self.publicJurisdiction = Self.trimmed(publicJurisdiction)
+        self.publicLocale = Self.trimmed(publicLocale)
         self.queryItems = Dictionary(
             uniqueKeysWithValues: queryItems.map { key, value in
                 (
@@ -63,6 +81,47 @@ struct SourceAtlasPublicPackRequest: Codable, Sendable, Equatable, Hashable {
             ]
         )
     }
+
+    static func runtimeArtifact(
+        manifestVersionID: String,
+        entry: SourceAtlasFreshnessPackEntry,
+        channel: String,
+        artifactVersionID: String,
+        sourceState: SourceAtlasRequirementSourceState,
+        freshnessState: SourceAtlasRequirementFreshnessState,
+        publicJurisdiction: String? = nil,
+        publicLocale: String? = nil
+    ) -> SourceAtlasPublicPackRequest {
+        SourceAtlasPublicPackRequest(
+            packID: entry.packID,
+            manifestVersionID: manifestVersionID,
+            declaredSHA256: entry.currentSHA256,
+            queryItems: [
+                "artifact_id": entry.packID,
+                "artifact_version": artifactVersionID,
+                "channel": channel,
+                "freshness_state": freshnessState.rawValue,
+                "manifest_version": manifestVersionID,
+                "pack_id": entry.packID,
+                "sha256": entry.currentSHA256,
+                "source_state": sourceState.rawValue
+            ],
+            channel: channel,
+            artifactVersionID: artifactVersionID,
+            sourceState: sourceState,
+            freshnessState: freshnessState,
+            publicJurisdiction: publicJurisdiction,
+            publicLocale: publicLocale
+        )
+    }
+
+    private static func trimmed(_ value: String?) -> String? {
+        guard let value else {
+            return nil
+        }
+        let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? nil : trimmed
+    }
 }
 
 struct SourceAtlasPublicPackRequestValidator: Sendable, Equatable, Hashable {
@@ -83,6 +142,25 @@ struct SourceAtlasPublicPackRequestValidator: Sendable, Equatable, Hashable {
         inspectedPairs["route"] = request.routePath
         inspectedPairs["pack_id"] = request.packID
         inspectedPairs["manifest_version"] = request.manifestVersionID
+        inspectedPairs["declared_sha256"] = request.declaredSHA256
+        if let channel = request.channel {
+            inspectedPairs["channel"] = channel
+        }
+        if let artifactVersionID = request.artifactVersionID {
+            inspectedPairs["artifact_version"] = artifactVersionID
+        }
+        if let sourceState = request.sourceState {
+            inspectedPairs["source_state"] = sourceState.rawValue
+        }
+        if let freshnessState = request.freshnessState {
+            inspectedPairs["freshness_state"] = freshnessState.rawValue
+        }
+        if let publicJurisdiction = request.publicJurisdiction {
+            inspectedPairs["public_jurisdiction"] = publicJurisdiction
+        }
+        if let publicLocale = request.publicLocale {
+            inspectedPairs["public_locale"] = publicLocale
+        }
         for (key, value) in inspectedPairs {
             let lowered = "\(key)=\(value)".lowercased()
             if Self.containsPrivatePlanningToken(lowered) {
@@ -109,13 +187,21 @@ struct SourceAtlasPublicPackRequestValidator: Sendable, Equatable, Hashable {
         let tokens = [
             "user",
             "account",
+            "account_id",
             "email",
             "phone",
             "address",
             "location",
             "goal",
+            "capture",
             "calendar",
             "schedule",
+            "capacity",
+            "life_capital",
+            "lifecapital",
+            "proof",
+            "receipt",
+            "priority",
             "profile",
             "personal",
             "private",
@@ -155,8 +241,10 @@ enum SourceAtlasLocalPackCacheIssue: String, Codable, Sendable, Equatable, Hasha
     case manifestVersionMismatch = "manifest_version_mismatch"
     case manifestHashMismatch = "manifest_hash_mismatch"
     case staleManifest = "stale_manifest"
+    case staleCriticalByManifest = "stale_critical_by_manifest"
     case revokedByManifest = "revoked_by_manifest"
     case contradictedByManifest = "contradicted_by_manifest"
+    case accessBoundaryUnavailable = "access_boundary_unavailable"
     case noEligiblePack = "no_eligible_pack"
     case localFallbackUsed = "local_fallback_used"
 }
@@ -183,6 +271,7 @@ struct SourceAtlasLocalPackCacheInput: Sendable, Equatable, Hashable {
     let query: SourceAtlasQuery
     let checkedAt: Date
     let policy: SourceAtlasLocalPackCachePolicy
+    let accessDecision: SourceAtlasAccessDecision?
 
     init(
         manifest: SourceAtlasFreshnessManifest,
@@ -192,7 +281,8 @@ struct SourceAtlasLocalPackCacheInput: Sendable, Equatable, Hashable {
         lastKnownGoodPayload: SourceAtlasStorePayload? = nil,
         query: SourceAtlasQuery = SourceAtlasQuery(),
         checkedAt: Date,
-        policy: SourceAtlasLocalPackCachePolicy = SourceAtlasLocalPackCachePolicy()
+        policy: SourceAtlasLocalPackCachePolicy = SourceAtlasLocalPackCachePolicy(),
+        accessDecision: SourceAtlasAccessDecision? = nil
     ) {
         self.manifest = manifest
         self.request = request
@@ -202,6 +292,7 @@ struct SourceAtlasLocalPackCacheInput: Sendable, Equatable, Hashable {
         self.query = query
         self.checkedAt = checkedAt
         self.policy = policy
+        self.accessDecision = accessDecision
     }
 }
 
@@ -237,8 +328,10 @@ struct SourceAtlasLocalPackCacheResolution: Sendable, Equatable, Hashable {
     var canSupportCurrentUse: Bool {
         requestIssues.isEmpty &&
             cacheIssues.contains(.staleManifest) == false &&
+            cacheIssues.contains(.staleCriticalByManifest) == false &&
             cacheIssues.contains(.revokedByManifest) == false &&
             cacheIssues.contains(.contradictedByManifest) == false &&
+            cacheIssues.contains(.accessBoundaryUnavailable) == false &&
             cacheIssues.contains(.noEligiblePack) == false &&
             cacheIssues.contains(.localFallbackUsed) == false &&
             fallback.blocksCurrentUse == false &&
@@ -275,19 +368,30 @@ struct SourceAtlasLocalPackCache: Sendable {
             cacheIssues.append(.staleManifest)
         }
 
+        if manifestBlocksUse(input.manifest, entry: manifestEntry, blockedState: .stale) {
+            cacheIssues.append(.staleCriticalByManifest)
+            additionalQuarantines.append(contentsOf: manifestBlockQuarantines(input, reason: .staleCritical))
+        }
         if manifestBlocksUse(input.manifest, entry: manifestEntry, blockedState: .revoked) {
             cacheIssues.append(.revokedByManifest)
+            additionalQuarantines.append(contentsOf: manifestBlockQuarantines(input, reason: .revoked))
         }
         if manifestBlocksUse(input.manifest, entry: manifestEntry, blockedState: .contradicted) {
             cacheIssues.append(.contradictedByManifest)
+            additionalQuarantines.append(contentsOf: manifestBlockQuarantines(input, reason: .contradicted))
+        }
+        if input.accessDecision?.route == .unavailable {
+            cacheIssues.append(.accessBoundaryUnavailable)
         }
 
         let canAttemptLoad = requestIssues.isEmpty &&
             manifestEntry != nil &&
             cacheIssues.contains(.manifestVersionMismatch) == false &&
             cacheIssues.contains(.manifestHashMismatch) == false &&
+            cacheIssues.contains(.staleCriticalByManifest) == false &&
             cacheIssues.contains(.revokedByManifest) == false &&
-            cacheIssues.contains(.contradictedByManifest) == false
+            cacheIssues.contains(.contradictedByManifest) == false &&
+            cacheIssues.contains(.accessBoundaryUnavailable) == false
 
         let selectedPayloads = canAttemptLoad
             ? manifestFilteredPayloads(
@@ -363,21 +467,27 @@ private extension SourceAtlasLocalPackCache {
         }
         let currentHash = normalizedHash(entry.currentSHA256)
         let rollbackHashes = Set(entry.rollbackPointers.values.map(normalizedHash(_:)))
+        let accessRoute = input.accessDecision?.route
 
         return (
-            cached: payload(
-                input.cachedPayload,
-                expectedHash: currentHash,
-                source: .cached,
-                additionalQuarantines: &additionalQuarantines
-            ),
-            bundled: payload(
-                input.bundledPayload,
-                expectedHash: currentHash,
-                source: .bundled,
-                additionalQuarantines: &additionalQuarantines
-            ),
+            cached: accessRoute == nil || accessRoute == .remotePublicReference || accessRoute == .cachedPublic
+                ? payload(
+                    input.cachedPayload,
+                    expectedHash: currentHash,
+                    source: .cached,
+                    additionalQuarantines: &additionalQuarantines
+                )
+                : nil,
+            bundled: accessRoute == nil || accessRoute == .remotePublicReference || accessRoute == .bundledLocal
+                ? payload(
+                    input.bundledPayload,
+                    expectedHash: currentHash,
+                    source: .bundled,
+                    additionalQuarantines: &additionalQuarantines
+                )
+                : nil,
             lastKnownGood: input.policy.allowLastKnownGoodRollback
+                && (accessRoute == nil || accessRoute == .remotePublicReference || accessRoute == .lastKnownGood)
                 ? rollbackPayload(
                     input.lastKnownGoodPayload,
                     rollbackHashes: rollbackHashes,
@@ -427,6 +537,18 @@ private extension SourceAtlasLocalPackCache {
         return (manifest.globalClaimStateBuckets + entryBuckets).contains { bucket in
             bucket.state == blockedState && bucket.claimIDs.isEmpty == false
         }
+    }
+
+    func manifestBlockQuarantines(
+        _ input: SourceAtlasLocalPackCacheInput,
+        reason: SourceAtlasStoreQuarantineReason
+    ) -> [SourceAtlasStoreQuarantine] {
+        [
+            input.cachedPayload.map { _ in SourceAtlasStoreQuarantine(source: .cached, reason: reason) },
+            input.bundledPayload.map { _ in SourceAtlasStoreQuarantine(source: .bundled, reason: reason) },
+            input.lastKnownGoodPayload.map { _ in SourceAtlasStoreQuarantine(source: .lastKnownGood, reason: reason) }
+        ]
+        .compactMap { $0 }
     }
 
     func manifestIsStale(
@@ -484,7 +606,7 @@ private extension SourceAtlasStoreQuarantine {
         switch reason {
         case .corruptJSON, .unsupportedSchema, .hashMismatch, .invalidPack:
             return true
-        case .missingPayload, .contradicted, .revoked:
+        case .missingPayload, .staleCritical, .contradicted, .revoked:
             return false
         }
     }
