@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 import json
+import importlib.util
 import sys
+from contextlib import redirect_stdout
+from io import StringIO
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
@@ -11,6 +14,7 @@ from foundry.boundary_audit import audit_fixture_root
 
 
 FIXTURE_ROOT = Path(__file__).resolve().parents[2] / "fixtures" / "boundary"
+REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
 def _fixture(path: Path) -> dict:
@@ -125,3 +129,52 @@ def test_user_mini_pack_shape_is_rejected_for_foundry_or_r2():
     assert "user_mini_pack_forbidden_in_foundry" in issues
     assert "private_privacy_class_forbidden" in issues
     assert "user_provided_source_forbidden" in issues
+
+
+def _load_no_private_graph_audit():
+    script_path = REPO_ROOT / "scripts" / "source-atlas-no-private-graph-egress-audit.py"
+    spec = importlib.util.spec_from_file_location("source_atlas_no_private_graph_egress_audit", script_path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _run_no_private_graph_audit(args: list[str]) -> int:
+    audit = _load_no_private_graph_audit()
+    with redirect_stdout(StringIO()):
+        return audit.main(args)
+
+
+def test_no_private_graph_audit_uses_committed_contract_schema_target():
+    audit = _load_no_private_graph_audit()
+
+    assert "tools/source-atlas/foundry/contracts" in audit.DEFAULT_TARGETS
+    assert "tools/source-atlas/schemas" not in audit.DEFAULT_TARGETS
+    assert _run_no_private_graph_audit(["tools/source-atlas/foundry/contracts"]) == 0
+
+
+def test_no_private_graph_audit_missing_mandatory_target_fails(tmp_path: Path):
+    missing = tmp_path / "missing-contracts"
+
+    assert _run_no_private_graph_audit([str(missing)]) == 1
+
+
+def test_no_private_graph_audit_rejects_private_graph_fields_in_schema_target(tmp_path: Path):
+    schema_dir = tmp_path / "schemas"
+    schema_dir.mkdir()
+    (schema_dir / "bad-schema.json").write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "kind": "ambitions.sourceAtlas.testSchema",
+                "privateLifeGraph": {
+                    "goalText": "Private goal"
+                },
+            }
+        ),
+        encoding="utf-8",
+    )
+
+    assert _run_no_private_graph_audit([str(schema_dir)]) == 1

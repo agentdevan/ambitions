@@ -8,7 +8,11 @@ rules:
         - /tools/source-atlas/**
       exclude:
         - /tools/source-atlas/coverage.py
+        - /tools/source-atlas/fixtures/**/invalid/**
+        - /tools/source-atlas/foundry/boundary.py
         - /tools/source-atlas/foundry/model.py
+        - /tools/source-atlas/foundry/schemas.py
+        - /tools/source-atlas/foundry/validator.py
     pattern-regex: (?i)\b(userGoalId|user_goal_id|goalText|goal_text|privateStepText|private_step_text|stepText|step_text|captureText|capture_text|voiceTranscript|voice_transcript|protectedTime|protected_time|scheduleAssumption|schedule_assumption|timeAvailability|time_availability|cognitiveLoad|cognitive_load|physicalEnergy|physical_energy|transitionFriction|transition_friction|recoveryState|recovery_state|freeTimeQuality|free_time_quality|executionLane|execution_lane|goalLoad|goal_load|closureEvent|closure_event|proofPayload|proof_payload|privateHistory|private_history|behaviorHistory|behavior_history|inferredPriority|inferred_priority|personalizationSettings|personalization_settings|recommendationScore|recommendation_score|userCorrection|user_correction|privateLifeGraph|private_life_graph|accessToken|access_token|refreshToken|refresh_token)\b
 
   - id: ambitions.source-atlas.r2-key-private-segment
@@ -20,6 +24,7 @@ rules:
         - /tools/source-atlas/**
       exclude:
         - /tools/source-atlas/coverage.py
+        - /tools/source-atlas/fixtures/**/invalid/**
     pattern-regex: (?i)\b(objectKey|object_key|cacheKey|cache_key|r2Key|r2_key)\b.{0,120}\b(users?|private|captures?|goals?|steps?|life[-_]graph|receipts?|personalization|calendar|schedule|proof|behavior)\b
 
   - id: ambitions.source-atlas.request-private-context
@@ -31,6 +36,10 @@ rules:
         - /tools/source-atlas/**
       exclude:
         - /tools/source-atlas/coverage.py
+        - /tools/source-atlas/fixtures/**/invalid/**
+        - /tools/source-atlas/foundry/boundary.py
+        - /tools/source-atlas/foundry/schemas.py
+        - /tools/source-atlas/foundry/validator.py
     pattern-regex: (?i)\b(request|query|body|payload|upload|publish|staging)\b.{0,160}\b(goalText|goal_text|captureText|capture_text|scheduleAssumption|schedule_assumption|privateLifeGraph|private_life_graph|personalization|behaviorHistory|behavior_history|proofPayload|proof_payload|accessToken|access_token|refreshToken|refresh_token)\b
 
   - id: ambitions.source-atlas.private-life-graph-shape
@@ -42,6 +51,8 @@ rules:
         - /tools/source-atlas/**
       exclude:
         - /tools/source-atlas/coverage.py
+        - /tools/source-atlas/fixtures/**/invalid/**
+        - /tools/source-atlas/foundry/boundary.py
     pattern-regex: (?i)\b(private\s+life\s+graph|privateLifeGraph|private_life_graph)\b.{0,120}\b(node|edge|payload|record|artifact|fixture|schema)\b
 
   - id: ambitions.validator.noop-pass

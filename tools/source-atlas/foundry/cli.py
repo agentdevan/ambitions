@@ -10,11 +10,25 @@ from typing import Any
 from . import __version__
 from .adapters import ADAPTER_VERSION, harvest_sources
 from .boundary_audit import audit_bundle, audit_fixture_root, audit_r2_plan, merge_results
+from .certification import ADAPTER_CERTIFICATIONS, certify_registry, certified_source_records
 from .compiler import compile_bundle
+from .coverage_benchmark import coverage_diff, run_golden_benchmarks
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, write_json
 from .publisher import build_r2_plan, execute_r2_plan, write_r2_plan
 from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
+from .r2_contracts import (
+    build_last_known_good_manifest,
+    build_revocation_manifest,
+    freshness_manifest_schema,
+    last_known_good_schema,
+    release_manifest_schema,
+    object_layout,
+    revocation_manifest_schema,
+    validate_promotion_gate,
+    write_manifest_contracts,
+)
 from .validator import validate_bundle
+from .workbench import build_workbench
 
 try:
     from dotenv import load_dotenv
@@ -69,6 +83,9 @@ def main(argv: list[str] | None = None) -> int:
 
     sub.add_parser("doctor")
     sub.add_parser("catalog")
+    sub.add_parser("sources")
+    sub.add_parser("adapters")
+    sub.add_parser("certify")
 
     harvest_parser = sub.add_parser("harvest")
     harvest_parser.add_argument("--output-root", required=True)
@@ -85,6 +102,19 @@ def main(argv: list[str] | None = None) -> int:
     validate_parser = sub.add_parser("validate")
     validate_parser.add_argument("--bundle-root", required=True)
 
+    workbench_parser = sub.add_parser("workbench")
+    workbench_parser.add_argument("--bundle-root", required=True)
+    workbench_parser.add_argument("--output")
+
+    coverage_parser = sub.add_parser("coverage-diff")
+    coverage_parser.add_argument("--bundle-root", required=True)
+    coverage_parser.add_argument("--previous-bundle-root")
+    coverage_parser.add_argument("--output")
+
+    benchmark_parser = sub.add_parser("benchmark")
+    benchmark_parser.add_argument("--bundle-root", required=True)
+    benchmark_parser.add_argument("--output")
+
     boundary_parser = sub.add_parser("boundary-audit")
     boundary_parser.add_argument("--fixture-root", default="tools/source-atlas/fixtures/boundary")
     boundary_parser.add_argument("--bundle-root", action="append", default=[])
@@ -96,6 +126,28 @@ def main(argv: list[str] | None = None) -> int:
     plan_parser.add_argument("--prefix", default="source-atlas/v1")
     plan_parser.add_argument("--channel", default="staging")
     plan_parser.add_argument("--output")
+
+    contract_parser = sub.add_parser("r2-contracts")
+    contract_parser.add_argument("--output-root")
+    contract_parser.add_argument("--prefix", default="source-atlas/v1")
+
+    revocation_parser = sub.add_parser("revocation-manifest")
+    revocation_parser.add_argument("--bundle-root", required=True)
+    revocation_parser.add_argument("--revoked-artifact-id", action="append", default=[])
+    revocation_parser.add_argument("--reason", default="dry-run contract")
+    revocation_parser.add_argument("--output")
+
+    lkg_parser = sub.add_parser("last-known-good")
+    lkg_parser.add_argument("--bundle-root", required=True)
+    lkg_parser.add_argument("--channel", default="staging")
+    lkg_parser.add_argument("--output")
+
+    promotion_parser = sub.add_parser("promotion-gate")
+    promotion_parser.add_argument("--bundle-root", required=True)
+    promotion_parser.add_argument("--r2-plan", required=True)
+    promotion_parser.add_argument("--revocation")
+    promotion_parser.add_argument("--channel", default="staging")
+    promotion_parser.add_argument("--output")
 
     upload_parser = sub.add_parser("upload-r2")
     upload_parser.add_argument("--plan", required=True)
@@ -112,6 +164,16 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "catalog":
         print_json({"sources": SOURCE_REGISTRY, "pathwaySeeds": PATHWAY_SEEDS, "privacyBoundary": PRIVACY_BOUNDARY})
         return 0
+    if args.command == "sources":
+        print_json({"sources": certified_source_records(), "privacyBoundary": PRIVACY_BOUNDARY, "nonClaims": NON_CLAIMS})
+        return 0
+    if args.command == "adapters":
+        print_json({"adapterVersion": ADAPTER_VERSION, "adapters": ADAPTER_CERTIFICATIONS, "privacyBoundary": PRIVACY_BOUNDARY, "nonClaims": NON_CLAIMS})
+        return 0
+    if args.command == "certify":
+        result = certify_registry()
+        print_json(result)
+        return 0 if result["valid"] else 1
     if args.command == "harvest":
         result = harvest_sources(Path(args.output_root), args.run_id, source_ids=args.sources, limit=args.limit)
         print_json(result)
@@ -127,6 +189,22 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     if args.command == "validate":
         result = validate_bundle(Path(args.bundle_root))
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "workbench":
+        result = build_workbench(Path(args.bundle_root), output_path=Path(args.output) if args.output else None)
+        print_json(result)
+        return 0 if result["valid"] and result["conflictCount"] == 0 else 1
+    if args.command == "coverage-diff":
+        result = coverage_diff(
+            Path(args.bundle_root),
+            previous_bundle_root=Path(args.previous_bundle_root) if args.previous_bundle_root else None,
+            output_path=Path(args.output) if args.output else None,
+        )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "benchmark":
+        result = run_golden_benchmarks(Path(args.bundle_root), output_path=Path(args.output) if args.output else None)
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "boundary-audit":
@@ -145,6 +223,46 @@ def main(argv: list[str] | None = None) -> int:
             result = build_r2_plan(bundle_root, args.bucket, args.prefix, args.channel)
         print_json(result)
         return 0 if result["validForUpload"] else 1
+    if args.command == "r2-contracts":
+        if args.output_root:
+            result = write_manifest_contracts(Path(args.output_root), args.prefix)
+        else:
+            result = {
+                "layout": object_layout(args.prefix),
+                "releaseManifestSchema": release_manifest_schema(),
+                "freshnessManifestSchema": freshness_manifest_schema(),
+                "revocationManifestSchema": revocation_manifest_schema(),
+                "lastKnownGoodSchema": last_known_good_schema(),
+            }
+        print_json(result)
+        return 0
+    if args.command == "revocation-manifest":
+        result = build_revocation_manifest(
+            Path(args.bundle_root),
+            revoked_artifact_ids=args.revoked_artifact_id,
+            reason=args.reason,
+            output_path=Path(args.output) if args.output else None,
+        )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "last-known-good":
+        result = build_last_known_good_manifest(
+            Path(args.bundle_root),
+            args.channel,
+            output_path=Path(args.output) if args.output else None,
+        )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "promotion-gate":
+        result = validate_promotion_gate(
+            Path(args.bundle_root),
+            Path(args.r2_plan),
+            revocation_path=Path(args.revocation) if args.revocation else None,
+            channel=args.channel,
+            output_path=Path(args.output) if args.output else None,
+        )
+        print_json(result)
+        return 0 if result["validForPromotion"] else 1
     if args.command == "upload-r2":
         plan = read_json(Path(args.plan))
         result = execute_r2_plan(plan, execute=args.execute, confirm_public_reference_only=args.confirm_public_reference_only)
@@ -168,6 +286,14 @@ def explain(focus: str) -> dict[str, Any]:
                 "R2 staging plan uploads candidate bundles only after validation",
                 "promotion should be handled by a Cloudflare Worker gate before stable channel exposure",
             ],
+        }
+    if focus == "certification":
+        return {
+            "focus": focus,
+            "registry": "Every source must declare authority tier, license posture, source type, cadence, jurisdiction, fixture expectations, drift checks, unavailable-source behavior, and privacy expectations.",
+            "adapters": "Every adapter must declare source types, fixture expectations, drift checks, unavailable-source behavior, credential posture, and public/reference privacy expectations.",
+            "promotion": "Certification is a validation gate; unsupported sources, missing provenance, blocked authenticated sources, and metadata-only discovery used as claim truth block promotion.",
+            "nonClaims": NON_CLAIMS,
         }
     if focus == "runtime-boundary":
         return {

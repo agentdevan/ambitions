@@ -1,0 +1,28 @@
+{
+  "expectedValid": true,
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.r2StagingPlan",
+    "validForUpload": true,
+    "secretBoundary": "Plan contains no R2 credentials. Upload requires an approved shell with scoped R2 write credentials.",
+    "objects": [
+      {
+        "bucket": "ambitions-source-atlas-staging",
+        "objectKey": "source-atlas/v1/releases/source-atlas-2026-06-26/manifest.json",
+        "contentType": "application/json; charset=utf-8",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "bytes": 1234,
+        "wranglerArgs": [
+          "wrangler",
+          "r2",
+          "object",
+          "put",
+          "ambitions-source-atlas-staging/source-atlas/v1/releases/source-atlas-2026-06-26/manifest.json",
+          "--remote",
+          "--file",
+          "/tmp/source-atlas/manifest.json"
+        ]
+      }
+    ]
+  }
+}

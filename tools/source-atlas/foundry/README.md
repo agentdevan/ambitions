@@ -24,6 +24,9 @@ The Private Life Runtime stores the user and joins Source Atlas locally. The fou
 ```bash
 python3 tools/source-atlas/source-atlas-foundry.py doctor
 python3 tools/source-atlas/source-atlas-foundry.py catalog
+python3 tools/source-atlas/source-atlas-foundry.py sources
+python3 tools/source-atlas/source-atlas-foundry.py adapters
+python3 tools/source-atlas/source-atlas-foundry.py certify
 
 python3 tools/source-atlas/source-atlas-foundry.py harvest \
   --output-root output/source-atlas/harvest \
@@ -39,12 +42,41 @@ python3 tools/source-atlas/source-atlas-foundry.py compile \
 python3 tools/source-atlas/source-atlas-foundry.py validate \
   --bundle-root output/source-atlas/foundry/source-atlas-2026-06-25
 
+python3 tools/source-atlas/source-atlas-foundry.py workbench \
+  --bundle-root output/source-atlas/foundry/source-atlas-2026-06-25 \
+  --output output/source-atlas/foundry/source-atlas-2026-06-25/resolution-workbench.json
+
+python3 tools/source-atlas/source-atlas-foundry.py coverage-diff \
+  --bundle-root output/source-atlas/foundry/source-atlas-2026-06-25
+
+python3 tools/source-atlas/source-atlas-foundry.py benchmark \
+  --bundle-root output/source-atlas/foundry/source-atlas-2026-06-25
+
 python3 tools/source-atlas/source-atlas-foundry.py r2-plan \
   --bundle-root output/source-atlas/foundry/source-atlas-2026-06-25 \
   --bucket ambitions-source-atlas-staging \
   --prefix source-atlas/v1 \
   --channel staging \
   --output output/source-atlas/foundry/source-atlas-2026-06-25/r2-plan.json
+
+python3 tools/source-atlas/source-atlas-foundry.py r2-contracts \
+  --output-root tools/source-atlas/foundry/contracts \
+  --prefix source-atlas/v1
+
+python3 tools/source-atlas/source-atlas-foundry.py revocation-manifest \
+  --bundle-root output/source-atlas/foundry/source-atlas-2026-06-25 \
+  --output output/source-atlas/foundry/source-atlas-2026-06-25/revocation-manifest.json
+
+python3 tools/source-atlas/source-atlas-foundry.py last-known-good \
+  --bundle-root output/source-atlas/foundry/source-atlas-2026-06-25 \
+  --channel staging \
+  --output output/source-atlas/foundry/source-atlas-2026-06-25/last-known-good.json
+
+python3 tools/source-atlas/source-atlas-foundry.py promotion-gate \
+  --bundle-root output/source-atlas/foundry/source-atlas-2026-06-25 \
+  --r2-plan output/source-atlas/foundry/source-atlas-2026-06-25/r2-plan.json \
+  --channel staging \
+  --output output/source-atlas/foundry/source-atlas-2026-06-25/promotion-gate-dry-run.json
 ```
 
 The first compiled seed bundle covers:
@@ -88,9 +120,13 @@ official public/reference source
   -> skill transfer graph
   -> versioned pack
   -> release manifest
+  -> source certification
+  -> entity registry
+  -> coverage manifest
   -> freshness manifest
   -> provenance receipt
   -> R2 staging plan
+  -> dry-run promotion gate
 ```
 
 The existing Source Atlas scripts stay valuable as factory stages:
@@ -177,3 +213,14 @@ The Foundry loads `.env` files from repo root, `tools/source-atlas/.env`, and `t
 Add a Cloudflare Worker promotion gate that reads staging objects through an R2 binding, validates the bundle, verifies hashes and signatures, checks revocation/last-known-good posture, writes a promotion receipt, and copies only accepted artifacts to the public/reference channel.
 
 No current foundry output proves R2 freshness, entitlement gating, app runtime fetch/cache behavior, privacy/legal approval, or production readiness.
+
+## M03/M04 Command Boundaries
+
+The expanded command surface is local and deterministic:
+
+- `sources`, `adapters`, and `certify` expose source registry and adapter certification posture.
+- `workbench` emits entity resolution, claim extraction, provenance, ambiguity, and adjudication records.
+- `coverage-diff` and `benchmark` report candidate-only coverage and golden benchmark readiness. They do not claim production coverage.
+- `r2-contracts`, `revocation-manifest`, `last-known-good`, and `promotion-gate` validate manifest/freshness/R2 promotion shape locally.
+
+`promotion-gate` is dry-run only. It writes no remote object and must not be reported as R2 production readiness.

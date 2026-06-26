@@ -160,6 +160,70 @@ def validate_schema_shard(shard: dict[str, Any], label: str) -> list[str]:
     return issues
 
 
+def validate_registry_artifact(value: dict[str, Any], label: str) -> list[str]:
+    issues = validate_boundary_contract(value, label)
+    kind = value.get("kind")
+    if kind == "ambitions.sourceAtlas.sourceRegistry":
+        for source in value.get("sources", []):
+            source_label = f"{label}:{source.get('id', '<source>')}"
+            for field in ["id", "publisher", "url", "authorityTier", "license", "freshnessCadence", "adapter"]:
+                if not source.get(field):
+                    issues.append(f"{source_label}: missing {field}")
+        return issues
+    if kind == "ambitions.sourceAtlas.sourceRegistryCertification":
+        if value.get("valid") is not True:
+            issues.append(f"{label}: source certification must be valid")
+        for source in value.get("sources", []):
+            source_label = f"{label}:{source.get('id', '<source>')}"
+            for field in [
+                "sourceType",
+                "jurisdiction",
+                "licenseTermsPosture",
+                "authorityTier",
+                "freshnessCadence",
+                "fixtureExpectationIDs",
+                "driftCheckIDs",
+                "privacyExpectations",
+                "adapterCertification",
+                "unavailableSourceBehavior",
+            ]:
+                if not source.get(field):
+                    issues.append(f"{source_label}: missing certification field {field}")
+            privacy = source.get("privacyExpectations", {})
+            if privacy.get("publicReferenceOnly") is not True:
+                issues.append(f"{source_label}: publicReferenceOnly must be true")
+            if privacy.get("rejectsPrivateUserContext") is not True:
+                issues.append(f"{source_label}: rejectsPrivateUserContext must be true")
+        return issues
+    if kind == "ambitions.sourceAtlas.entityRegistry":
+        if value.get("valid") is not True:
+            issues.append(f"{label}: entity registry must be valid")
+        seen: set[str] = set()
+        for entity in value.get("entities", []):
+            entity_id = entity.get("id")
+            if not entity_id:
+                issues.append(f"{label}: entity missing id")
+            if entity_id in seen:
+                issues.append(f"{label}: duplicate entity {entity_id}")
+            seen.add(entity_id)
+            if not entity.get("sourceIDs") or not entity.get("provenanceIDs"):
+                issues.append(f"{label}:{entity_id}: entity requires sourceIDs and provenanceIDs")
+        return issues
+    if kind == "ambitions.sourceAtlas.coverageManifest":
+        if value.get("productionCoverageClaimed") is not False:
+            issues.append(f"{label}: productionCoverageClaimed must be false")
+        if value.get("benchmarkReadiness") != "candidate_only_not_production_coverage":
+            issues.append(f"{label}: benchmarkReadiness must preserve candidate-only proof ceiling")
+        for field in ["domains", "sourceIDs", "claimStateBuckets", "shardHealth"]:
+            if field not in value:
+                issues.append(f"{label}: missing {field}")
+        return issues
+    if kind == "ambitions.sourceAtlas.harvestSummary":
+        return issues
+    issues.append(f"{label}: unsupported registry artifact kind {kind}")
+    return issues
+
+
 def validate_bundle(bundle_root: Path) -> dict[str, Any]:
     issues: list[str] = []
     manifest_path = bundle_root / "manifest.json"
@@ -206,6 +270,8 @@ def validate_bundle(bundle_root: Path) -> dict[str, Any]:
             issues.append(f"manifest references missing registry {registry_entry.get('path')}")
         elif file_sha256(path) != registry_entry.get("sha256"):
             issues.append(f"{registry_entry.get('path')}: hash mismatch")
+        else:
+            issues.extend(validate_registry_artifact(read_json(path), registry_entry.get("path", "<registry>")))
 
     freshness = manifest.get("freshnessManifest", {})
     if freshness:

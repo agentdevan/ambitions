@@ -5,9 +5,12 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
+from .certification import certify_registry
+from .coverage_benchmark import coverage_manifest_from_records
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, file_sha256, read_json, stable_id, utc_now, write_json
 from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
 from .schemas import ontology_v1, schema_descriptors, shard_for_pathway
+from .workbench import entity_registry_from_shards
 
 
 def _source_records(source_ids: list[str], harvest_context: dict[str, Any] | None = None) -> list[dict[str, Any]]:
@@ -249,6 +252,45 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
             "bytes": source_catalog_path.stat().st_size,
         }
     ]
+
+    source_certification = certify_registry()
+    source_certification["versionID"] = version_id
+    source_certification["createdAt"] = created_at
+    source_certification_path = registries_dir / "source-certification.json"
+    write_json(source_certification_path, source_certification)
+    registry_entries.append(
+        {
+            "id": "source-certification",
+            "path": str(source_certification_path.relative_to(bundle_root)),
+            "sha256": file_sha256(source_certification_path),
+            "bytes": source_certification_path.stat().st_size,
+        }
+    )
+
+    shard_docs = [read_json(shards_dir / entry["path"].split("/", 1)[1]) if entry["path"].startswith("shards/") else read_json(bundle_root / entry["path"]) for entry in shard_entries]
+    entity_registry = entity_registry_from_shards(shard_docs, version_id)
+    entity_registry_path = registries_dir / "entity-registry.json"
+    write_json(entity_registry_path, entity_registry)
+    registry_entries.append(
+        {
+            "id": "entity-registry",
+            "path": str(entity_registry_path.relative_to(bundle_root)),
+            "sha256": file_sha256(entity_registry_path),
+            "bytes": entity_registry_path.stat().st_size,
+        }
+    )
+
+    coverage_manifest = coverage_manifest_from_records(packs, shard_docs, version_id)
+    coverage_manifest_path = registries_dir / "coverage-manifest.json"
+    write_json(coverage_manifest_path, coverage_manifest)
+    registry_entries.append(
+        {
+            "id": "coverage-manifest",
+            "path": str(coverage_manifest_path.relative_to(bundle_root)),
+            "sha256": file_sha256(coverage_manifest_path),
+            "bytes": coverage_manifest_path.stat().st_size,
+        }
+    )
 
     harvest_summary_path: Path | None = None
     if harvest_context:

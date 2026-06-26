@@ -1,0 +1,21 @@
+{
+  "expectedBoundaryResult": "reject",
+  "expectedIssueCodes": [
+    "private_r2_object_key_segment",
+    "possible_user_identifier_in_object_key"
+  ],
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.r2StagingPlan",
+    "validForUpload": false,
+    "objects": [
+      {
+        "bucket": "ambitions-source-atlas-staging",
+        "objectKey": "source-atlas/v1/users/user-1234/goals/manifest.json",
+        "contentType": "application/json; charset=utf-8",
+        "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "bytes": 1234
+      }
+    ]
+  }
+}

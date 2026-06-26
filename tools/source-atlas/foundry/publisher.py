@@ -6,7 +6,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
-from .model import file_sha256, utc_now, write_json
+from .model import file_sha256, read_json, utc_now, write_json
 from .validator import validate_bundle, validate_r2_object_keys
 
 
@@ -18,11 +18,16 @@ CONTENT_TYPES = {
 
 
 def _artifact_entries(bundle_root: Path) -> list[Path]:
-    return sorted(
-        path
-        for path in bundle_root.rglob("*")
-        if path.is_file() and path.suffix in CONTENT_TYPES and path.name not in {"r2-plan.json"}
-    )
+    manifest_path = bundle_root / "manifest.json"
+    manifest = read_json(manifest_path)
+    paths = {manifest_path}
+    for key in ["packIndex", "schemaIndex", "shardIndex", "registryIndex"]:
+        for entry in manifest.get(key, []):
+            paths.add(bundle_root / entry["path"])
+    for key in ["freshnessManifest", "receipt"]:
+        if manifest.get(key):
+            paths.add(bundle_root / manifest[key]["path"])
+    return sorted(path for path in paths if path.exists() and path.suffix in CONTENT_TYPES)
 
 
 def build_r2_plan(bundle_root: Path, bucket: str, prefix: str, channel: str = "staging") -> dict[str, Any]:
