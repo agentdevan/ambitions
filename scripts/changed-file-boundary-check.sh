@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
+cd "$ROOT" || exit
 name="$(basename "$0")"
 echo "$name: Codex OS deterministic advisory scan"
 

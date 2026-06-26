@@ -259,7 +259,6 @@ case "$LANE" in
   build)
     need_output="$(scripts/ambitions-xcodegen-needed.sh || true)"
     need_flag="$(awk -F= '/^XCODEGEN_NEEDED=/{print $2}' <<<"$need_output")"
-    need_reason="$(awk -F= '/^REASON=/{print $2}' <<<"$need_output")"
     if [[ "$need_flag" == "1" ]]; then
       if ! command -v xcodegen >/dev/null 2>&1; then
         status=24

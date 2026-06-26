@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -u
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-cd "$ROOT"
+cd "$ROOT" || exit
 
 echo "canon-language-drift-scan"
 
@@ -9,6 +9,7 @@ pattern='next best move|your best next move|generic AI dashboard|generic habit t
 changed="$(git diff --name-only HEAD -- Native Sources AppUI docs README.md AGENTS.md .agents 2>/dev/null | tr '\n' ' ')"
 
 if [ -n "$changed" ]; then
+  # shellcheck disable=SC2086
   new_hits="$(rg -n -i "$pattern" $changed 2>/dev/null || true)"
   if [ -n "$new_hits" ]; then
     echo "YELLOW changed-file language drift candidates"

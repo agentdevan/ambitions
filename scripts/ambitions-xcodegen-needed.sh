@@ -8,7 +8,6 @@ PROJECT_FILE="project.yml"
 SCHEME_FILE="Ambitions.xcodeproj/project.pbxproj"
 PACKAGE_FILE="Package.swift"
 STAMP_FILE=".xcode-version"
-XCTESTPLAN_DIR="Native/TestPlans"
 
 if [[ ! -f "$PROJECT_FILE" ]]; then
   echo "XCODEGEN_NEEDED=unknown"
@@ -47,11 +46,11 @@ if [[ "$need" -eq 0 ]]; then
         need=1
         reason="Package.swift changed"
         ;;
-      *.swift|*.storyboard|*.xib|*.xcassets|*.xcmappingmodel|*.xcdatamodel|*.xcassets/*|*.strings|*.stringsdict|*.entitlements)
+      *.swift|*.storyboard|*.xib|*.xcassets|*.xcmappingmodel|*.xcdatamodel|*.strings|*.stringsdict|*.entitlements)
         need=1
         reason="source/resource changed: $changed_path"
         ;;
-      Native/TestPlans/*.xctestplan|*.xctestplan|project.yml|Ambitions.xcodeproj/*|*.xctproj*|Packages.swift|Package.resolved)
+      Native/TestPlans/*.xctestplan|*.xctestplan|project.yml|Ambitions.xcodeproj/*|*.xctproj*|Package.resolved)
         need=1
         reason="project or test plan input changed"
         ;;
