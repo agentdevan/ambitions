@@ -22,6 +22,8 @@ Source Atlas knows public/reference structure.
 
 Operational data classification for Foundry artifacts, R2 object keys, request shapes, caches, logs, schemas, and fixtures lives in `docs/platform/SOURCE_ATLAS_DATA_CLASSIFICATION_MATRIX.md`.
 
+R2 promotion-gate shape, dry-run validation checks, and non-claim boundaries live in `docs/platform/SOURCE_ATLAS_R2_PROMOTION_GATE_SPEC.md`.
+
 The Private Life Runtime knows:
 
 - the user's goals

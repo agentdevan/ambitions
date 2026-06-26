@@ -9,11 +9,22 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from foundry.adapters import FetchResult, harvest_sources
+from foundry.boundary import boundary_issues_for_value, object_key_issues
+from foundry.certification import certify_registry
 from foundry.cli import doctor
 from foundry.compiler import compile_bundle
+from foundry.coverage_benchmark import coverage_diff, run_golden_benchmarks
 from foundry.model import privacy_findings_for_value, read_json
 from foundry.publisher import build_r2_plan
+from foundry.r2_contracts import (
+    build_last_known_good_manifest,
+    build_revocation_manifest,
+    object_layout,
+    release_manifest_schema,
+    validate_promotion_gate,
+)
 from foundry.validator import validate_bundle, validate_pack
+from foundry.workbench import build_workbench
 
 
 def test_doctor_reports_source_and_pathway_counts():
@@ -22,6 +33,17 @@ def test_doctor_reports_source_and_pathway_counts():
     assert result["sourceCount"] >= 7
     assert result["pathwaySeedCount"] == 2
     assert result["r2Posture"]["default"] == "staging plan only"
+
+
+def test_registry_certification_requires_public_reference_adapter_contracts():
+    result = certify_registry()
+
+    assert result["valid"], result["issues"]
+    assert result["sourceCount"] >= 8
+    assert result["adapterCount"] >= 6
+    assert all(source["privacyExpectations"]["rejectsPrivateUserContext"] for source in result["sources"])
+    assert all(source["fixtureExpectationIDs"] for source in result["sources"])
+    assert all(source["driftCheckIDs"] for source in result["sources"])
 
 
 def test_compile_bundle_validates_presidency_and_astronaut_packs(tmp_path: Path):
@@ -40,6 +62,95 @@ def test_compile_bundle_validates_presidency_and_astronaut_packs(tmp_path: Path)
     assert any(item["structuredRule"].get("type") == "education_or_equivalent" for item in astronaut["requirements"])
     assert any(path["id"] == "alternate.aerospace_engineer" for path in astronaut["pathways"][0]["alternatePaths"])
     assert "systems_engineering" in astronaut["transferGraph"]["skillAtoms"]
+    assert any(entry["id"] == "source-certification" for entry in manifest_registry_entries(bundle_root))
+    assert any(entry["id"] == "entity-registry" for entry in manifest_registry_entries(bundle_root))
+    assert any(entry["id"] == "coverage-manifest" for entry in manifest_registry_entries(bundle_root))
+
+
+def test_workbench_preserves_claim_provenance_and_blocks_silent_conflicts(tmp_path: Path):
+    result = compile_bundle(tmp_path, "test-foundry-workbench", "staging")
+    bundle_root = Path(result["bundleRoot"])
+
+    workbench = build_workbench(bundle_root)
+
+    assert workbench["valid"], workbench["issues"]
+    assert workbench["entityCount"] > 0
+    assert workbench["claimCount"] > 0
+    assert workbench["conflictCount"] == 0
+    assert all(claim["provenanceIDs"] for claim in workbench["extractedClaims"])
+    assert all(item["silentWinnerSelectionAllowed"] is False for item in workbench["adjudications"])
+
+
+def test_coverage_diff_and_golden_benchmarks_are_candidate_only(tmp_path: Path):
+    result = compile_bundle(tmp_path, "test-foundry-coverage", "staging")
+    bundle_root = Path(result["bundleRoot"])
+
+    diff = coverage_diff(bundle_root)
+    benchmarks = run_golden_benchmarks(bundle_root)
+
+    assert diff["valid"], diff
+    assert diff["productionCoverageClaimed"] is False
+    assert diff["benchmarkReadiness"] == "candidate_only_not_production_coverage"
+    assert benchmarks["valid"], benchmarks
+    assert benchmarks["criticalFailureCount"] == 0
+    assert benchmarks["productionCoverageClaimed"] is False
+
+
+def test_r2_manifest_freshness_lkg_and_promotion_gate_are_dry_run_only(tmp_path: Path):
+    result = compile_bundle(tmp_path, "test-foundry-r2-contracts", "staging")
+    bundle_root = Path(result["bundleRoot"])
+    plan_path = tmp_path / "r2-plan.json"
+    plan = build_r2_plan(bundle_root, "ambitions-source-atlas-staging", "source-atlas/v1", "staging")
+    plan_path.write_text(json.dumps(plan, indent=2, sort_keys=True), encoding="utf-8")
+
+    layout = object_layout()
+    manifest_schema = release_manifest_schema()
+    revocation = build_revocation_manifest(bundle_root)
+    lkg = build_last_known_good_manifest(bundle_root, "staging")
+    gate = validate_promotion_gate(bundle_root, plan_path, channel="staging")
+
+    assert layout["publicReferenceOnly"] is True
+    assert "checksums" in manifest_schema["promotionRequiredChecks"]
+    assert revocation["valid"], revocation["issues"]
+    assert lkg["valid"], lkg["issues"]
+    assert gate["dryRunOnly"] is True
+    assert gate["wouldUpload"] is False
+    assert gate["validForPromotion"], gate["issues"]
+
+
+def test_promotion_gate_fails_private_key_missing_checksum_and_revoked_use(tmp_path: Path):
+    result = compile_bundle(tmp_path, "test-foundry-r2-negative", "staging")
+    bundle_root = Path(result["bundleRoot"])
+    plan = build_r2_plan(bundle_root, "ambitions-source-atlas-staging", "source-atlas/v1", "staging")
+    plan["objects"][0]["objectKey"] = "source-atlas/v1/users/user-1234/goal/manifest.json"
+    plan["objects"][1].pop("sha256")
+    plan_path = tmp_path / "bad-r2-plan.json"
+    plan_path.write_text(json.dumps(plan, indent=2, sort_keys=True), encoding="utf-8")
+    revocation_path = tmp_path / "revocation.json"
+    first_pack_path = read_json(bundle_root / "manifest.json")["packIndex"][0]["path"]
+    revoked = build_revocation_manifest(bundle_root, revoked_artifact_ids=[first_pack_path])
+    revocation_path.write_text(json.dumps(revoked, indent=2, sort_keys=True), encoding="utf-8")
+
+    gate = validate_promotion_gate(bundle_root, plan_path, revocation_path=revocation_path, channel="staging")
+
+    assert gate["validForPromotion"] is False
+    encoded_issues = json.dumps(gate["issues"])
+    assert "private_r2_object_key_segment" in encoded_issues
+    assert "checksums" in encoded_issues
+    assert "revoked artifact referenced" in encoded_issues
+
+
+def test_r2_dry_run_privacy_fixtures_cover_positive_and_negative_shapes():
+    fixture_root = Path(__file__).resolve().parents[2] / "fixtures" / "r2"
+    valid = read_json(fixture_root / "valid" / "public-reference-r2-plan.json")
+    valid_codes = r2_plan_fixture_issue_codes(valid["payload"])
+    assert valid_codes == []
+
+    for path in sorted((fixture_root / "invalid").glob("*.json")):
+        fixture = read_json(path)
+        codes = r2_plan_fixture_issue_codes(fixture["payload"])
+        missing = [code for code in fixture["expectedIssueCodes"] if code not in codes]
+        assert not missing, (path, missing, codes)
 
 
 def test_pack_validator_rejects_private_context(tmp_path: Path):
@@ -152,6 +263,25 @@ def test_onet_adapter_normalizes_downloadable_text_database(tmp_path: Path):
     assert any(record["recordType"] == "onet_career_cluster_crosswalk" and record["careerClusterCount"] == 1 for record in onet["records"])
     assert any(record["recordType"] == "onet_transfer_surface_map" and len(record["surfaces"]) >= 6 for record in onet["records"])
     assert any("Aerospace Engineers" in json.dumps(record) for record in onet["records"])
+
+
+def manifest_registry_entries(bundle_root: Path) -> list[dict[str, object]]:
+    return read_json(bundle_root / "manifest.json")["registryIndex"]
+
+
+def r2_plan_fixture_issue_codes(plan: dict[str, object]) -> list[str]:
+    codes = [issue.code for issue in boundary_issues_for_value(plan, "r2-plan")]
+    for obj in plan.get("objects", []):
+        if isinstance(obj, dict):
+            codes.extend(issue.code for issue in object_key_issues(str(obj.get("objectKey", ""))))
+            if "sha256" not in obj:
+                codes.append("missing_sha256")
+            if "bytes" not in obj:
+                codes.append("missing_bytes")
+            args = obj.get("wranglerArgs", [])
+            if isinstance(args, list) and args and "--remote" not in args:
+                codes.append("missing_remote_flag")
+    return sorted(set(codes))
 
 
 def fake_fetch(url: str, headers: dict[str, str] | None, max_bytes: int) -> FetchResult:
