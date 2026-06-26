@@ -1,7 +1,7 @@
 # Source Atlas Data Classification Matrix
 
-Status: active operational boundary contract  
-Scope: Source Atlas Foundry, public/reference pack artifacts, R2 staging plans, request shapes, caches, logs, schemas, fixtures, and validation  
+Status: active operational boundary contract
+Scope: Source Atlas Foundry, public/reference pack artifacts, R2 staging plans, request shapes, caches, logs, schemas, fixtures, and validation
 Owner posture: platform implementation support, not product canon, release proof, privacy/legal approval, or R2 production readiness
 
 This matrix operationalizes the active product law: Source Atlas and R2 are public/reference/freshness infrastructure only. The Private Life Runtime stays local and owns private user context.
@@ -131,6 +131,7 @@ Recipes may provide composition hints only. They must not contain final user pat
 - `tools/source-atlas/foundry/boundary.py`
 - `tools/source-atlas/foundry/validator.py`
 - `tools/source-atlas/foundry/publisher.py`
+- `tools/source-atlas/foundry/contracts/`
 - `tools/source-atlas/foundry/tests/test_boundary.py`
 - `scripts/source-atlas-boundary-audit.py`
 - `scripts/source-atlas-no-private-graph-egress-audit.py`

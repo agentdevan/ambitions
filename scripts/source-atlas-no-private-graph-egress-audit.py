@@ -18,7 +18,7 @@ from foundry.model import read_json
 DEFAULT_TARGETS = [
     "tools/source-atlas/foundry",
     "tools/source-atlas/fixtures",
-    "tools/source-atlas/schemas",
+    "tools/source-atlas/foundry/contracts",
     "docs/platform/SOURCE_ATLAS_FOUNDRY_BLUEPRINT.md",
 ]
 
@@ -62,14 +62,15 @@ def audit_json(path: Path) -> list[str]:
     expected = value.get("expectedBoundaryResult") if isinstance(value, dict) else None
     if expected == "reject":
         return []
-    issues = boundary_issue_strings(boundary_issues_for_json_file(path, str(path.relative_to(REPO_ROOT))))
+    relative = display_path(path)
+    issues = boundary_issue_strings(boundary_issues_for_json_file(path, relative))
     if isinstance(value, dict) and isinstance(value.get("objectKey"), str):
-        issues.extend(issue.format() for issue in object_key_issues(value["objectKey"], str(path.relative_to(REPO_ROOT))))
+        issues.extend(issue.format() for issue in object_key_issues(value["objectKey"], relative))
     return issues
 
 
 def audit_text(path: Path) -> list[str]:
-    relative = str(path.relative_to(REPO_ROOT))
+    relative = display_path(path)
     findings: list[str] = []
     for index, line in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), start=1):
         lowered = line.lower()
@@ -81,6 +82,13 @@ def audit_text(path: Path) -> list[str]:
             if not any(marker in lowered for marker in ["must not", "never", "no private", "not a", "forbidden", "forbid", "reject", "not store", "not receive", "only", "public/reference", "private life graph in r2", "staging proof"]):
                 findings.append(f"{relative}:{index}: review Source Atlas private graph egress wording")
     return findings
+
+
+def display_path(path: Path) -> str:
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
 
 
 if __name__ == "__main__":
