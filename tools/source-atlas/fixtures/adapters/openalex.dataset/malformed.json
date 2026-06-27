@@ -1,0 +1,232 @@
+{
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "kind": "ambitions.sourceAtlas.adapterFixture.v1",
+  "payload": {
+    "adapterID": "openalex_research_context_adapter",
+    "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+    "atoms": [],
+    "claims": [],
+    "coverage": {
+      "adapter": "openalex_research_context_adapter",
+      "atomCount": 0,
+      "claimCount": 0,
+      "conflictedClaims": 0,
+      "crosswalkCount": 0,
+      "dataClass": "public_freshness",
+      "domain": "scholarly_reference",
+      "edgeCount": 0,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "malformed",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "reviewed",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "blocked",
+      "provenanceCompleteness": true,
+      "publicReferenceOnly": true,
+      "r2Readiness": "blocked",
+      "redistributionStatus": "redistributable",
+      "requirementCount": 0,
+      "reviewRequiredClaims": 0,
+      "scenarioCoverage": [
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "unsupported",
+          "doesNotCreateUserPath": true,
+          "reason": "source state malformed",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "official_dataset",
+      "sourceCount": 1,
+      "sourceLane": "openalex.dataset",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    },
+    "coverageRecords": [],
+    "createdAt": "2026-06-27T00:00:00Z",
+    "crosswalks": [],
+    "dataClass": "official_public_source",
+    "domain": "scholarly_reference",
+    "edges": [],
+    "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+    "lattices": [],
+    "nonClaims": [
+      "does not create final user paths",
+      "does not create final schedules",
+      "does not create Step lists",
+      "does not gather private user data",
+      "does not claim legal, privacy, release, or R2 production readiness"
+    ],
+    "packCandidates": [],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "provenance": [
+      {
+        "authorityTier": "official_dataset",
+        "contentHash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "dataClass": "public_provenance",
+        "freshnessCadence": "monthly snapshot or API freshness review",
+        "id": "provenance.a143ae71e3ba53df",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.provenance.v1",
+        "license": "Creative Commons CC0 public domain dedication",
+        "locator": "https://openalex.org/",
+        "publicReferenceOnly": true,
+        "publisher": "OpenAlex",
+        "retrievedAt": "2026-06-27T00:00:00Z",
+        "schemaVersion": 1,
+        "sourceID": "openalex.dataset",
+        "sourceState": "malformed",
+        "sourceURL": "https://openalex.org/",
+        "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "publicReferenceOnly": true,
+    "recipes": [],
+    "requirements": [],
+    "schemaVersion": 1,
+    "sourceID": "openalex.dataset",
+    "sourceState": {
+      "blockedReasons": [
+        "source_state_malformed_blocks_pack_output",
+        "malformed fixture payload"
+      ],
+      "dataClass": "public_freshness",
+      "packEligible": false,
+      "publicReferenceOnly": true,
+      "runtimeEligible": false,
+      "state": "malformed"
+    },
+    "sourceStates": [
+      {
+        "blockedReasons": [
+          "source_state_malformed_blocks_pack_output",
+          "malformed fixture payload"
+        ],
+        "dataClass": "public_freshness",
+        "packEligible": false,
+        "publicReferenceOnly": true,
+        "runtimeEligible": false,
+        "state": "malformed"
+      }
+    ],
+    "terms": {
+      "attributionRequired": false,
+      "authorityTier": "official_dataset",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "lastTermsReviewed": "2026-06-27",
+      "license": "Creative Commons CC0 public domain dedication",
+      "licenseVersion": "1.0",
+      "publisher": "OpenAlex",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewRequired": false,
+      "sourceID": "openalex.dataset",
+      "termsReviewStatus": "reviewed",
+      "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    },
+    "termsValidation": {
+      "issues": [],
+      "packable": true,
+      "r2PackPolicy": "r2_pack_allowed",
+      "r2Ready": true,
+      "redistributionPolicy": "redistributable",
+      "sourceID": "openalex.dataset"
+    }
+  },
+  "schemaVersion": 1
+}

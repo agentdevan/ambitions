@@ -1,0 +1,1268 @@
+{
+  "coverageRecords": [
+    {
+      "adapter": "onet_public_reference_adapter",
+      "atomCount": 77,
+      "claimCount": 10,
+      "conflictedClaims": 0,
+      "crosswalkCount": 0,
+      "dataClass": "public_freshness",
+      "domain": "occupation",
+      "edgeCount": 60,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "current",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "reviewed",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "candidate",
+      "provenanceCompleteness": true,
+      "publicReferenceOnly": true,
+      "r2Readiness": "candidate_local_only",
+      "redistributionStatus": "redistributable_with_attribution",
+      "requirementCount": 10,
+      "reviewRequiredClaims": 2,
+      "scenarioCoverage": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "official_dataset",
+      "sourceCount": 1,
+      "sourceLane": "onet.database",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    },
+    {
+      "adapter": "bls_public_labor_adapter",
+      "atomCount": 9,
+      "claimCount": 9,
+      "conflictedClaims": 0,
+      "crosswalkCount": 0,
+      "dataClass": "public_freshness",
+      "domain": "labor_market",
+      "edgeCount": 0,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "current",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "reviewed",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "candidate",
+      "provenanceCompleteness": true,
+      "publicReferenceOnly": true,
+      "r2Readiness": "candidate_local_only",
+      "redistributionStatus": "redistributable_with_attribution",
+      "requirementCount": 9,
+      "reviewRequiredClaims": 0,
+      "scenarioCoverage": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "official_government",
+      "sourceCount": 1,
+      "sourceLane": "bls.public.data.api",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    },
+    {
+      "adapter": "wikidata_crosswalk_adapter",
+      "atomCount": 0,
+      "claimCount": 10,
+      "conflictedClaims": 0,
+      "crosswalkCount": 10,
+      "dataClass": "public_freshness",
+      "domain": "entity_crosswalk",
+      "edgeCount": 0,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "current",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "reviewed",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "candidate",
+      "provenanceCompleteness": true,
+      "publicReferenceOnly": true,
+      "r2Readiness": "candidate_local_only",
+      "redistributionStatus": "redistributable",
+      "requirementCount": 0,
+      "reviewRequiredClaims": 2,
+      "scenarioCoverage": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "open_knowledge_graph",
+      "sourceCount": 1,
+      "sourceLane": "wikidata.crosswalk",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    },
+    {
+      "adapter": "openalex_research_context_adapter",
+      "atomCount": 9,
+      "claimCount": 9,
+      "conflictedClaims": 0,
+      "crosswalkCount": 0,
+      "dataClass": "public_freshness",
+      "domain": "scholarly_reference",
+      "edgeCount": 0,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "current",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "reviewed",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "candidate",
+      "provenanceCompleteness": true,
+      "publicReferenceOnly": true,
+      "r2Readiness": "candidate_local_only",
+      "redistributionStatus": "redistributable",
+      "requirementCount": 0,
+      "reviewRequiredClaims": 0,
+      "scenarioCoverage": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "official_dataset",
+      "sourceCount": 1,
+      "sourceLane": "openalex.dataset",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    }
+  ],
+  "dataClass": "public_freshness",
+  "kind": "ambitions.sourceAtlas.coverageLedger.v2.slice",
+  "publicReferenceOnly": true,
+  "scenarioOverlay": [
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "review_required",
+      "coverage": "review required",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": true,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "NASA astronaut candidate official selection/current requirements source lane not included in Train 01",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": true,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        }
+      ],
+      "scenario": "NASA astronaut",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "review_required",
+      "coverage": "review required",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": true,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "state nursing board/licensure source lane not included in Train 01",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": true,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        }
+      ],
+      "scenario": "nurse",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "review_required",
+      "coverage": "review required",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": true,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "FAA certificate and medical requirements source lane not included in Train 01",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": true,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        }
+      ],
+      "scenario": "pilot",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "review_required",
+      "coverage": "review required",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": true,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "state educator certification source lane not included in Train 01",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": true,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        }
+      ],
+      "scenario": "teacher",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "medium",
+      "coverage": "partially covered",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": false,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": true,
+      "requirementCount": 19,
+      "reviewRequired": false,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        }
+      ],
+      "scenario": "software engineer",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "medium",
+      "coverage": "partially covered",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": false,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": true,
+      "requirementCount": 19,
+      "reviewRequired": false,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        }
+      ],
+      "scenario": "small business owner",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "medium",
+      "coverage": "partially covered",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": false,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": true,
+      "requirementCount": 19,
+      "reviewRequired": false,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        }
+      ],
+      "scenario": "music artist",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "medium",
+      "coverage": "partially covered",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": false,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": true,
+      "requirementCount": 19,
+      "reviewRequired": false,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        }
+      ],
+      "scenario": "audio engineer",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "unsupported",
+      "coverage": "missing official source",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": true,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "athletic training/medical safety source lane not included in Train 01",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": false,
+      "rows": [
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        }
+      ],
+      "scenario": "marathon runner",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "review_required",
+      "coverage": "review required",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": true,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "state/local licensing and apprenticeship authority source lane not included in Train 01",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": true,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        }
+      ],
+      "scenario": "electrician/apprenticeship",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "review_required",
+      "coverage": "review required",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": true,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "state bar/admissions source lane not included in Train 01",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": true,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        }
+      ],
+      "scenario": "lawyer",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "review_required",
+      "coverage": "review required",
+      "covered": false,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": true,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "AAMC/medical school admissions and state medical board source lanes not included in Train 01",
+      "packReadiness": "not_completion_ready",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": true,
+      "rows": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        }
+      ],
+      "scenario": "medical school path",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "medium",
+      "coverage": "covered",
+      "covered": true,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": false,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "",
+      "packReadiness": "public_reference_only",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": false,
+      "rows": [
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "career pivot"
+        }
+      ],
+      "scenario": "career pivot",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    },
+    {
+      "atomCount": 95,
+      "claimCount": 38,
+      "completionReady": false,
+      "confidence": "medium",
+      "coverage": "covered",
+      "covered": true,
+      "crosswalkCount": 10,
+      "edgeCount": 60,
+      "missingOfficialSource": false,
+      "notPackableDueToTerms": false,
+      "officialSourceGap": "",
+      "packReadiness": "public_reference_only",
+      "partiallyCovered": false,
+      "requirementCount": 19,
+      "reviewRequired": false,
+      "rows": [
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "still-counts pivot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "still-counts pivot"
+        },
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "still-counts pivot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "scenario": "still-counts pivot",
+      "sourceLanesUsed": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "wikidata.crosswalk"
+      ],
+      "stale": false,
+      "staleCritical": false,
+      "unsupported": false
+    }
+  ],
+  "schemaVersion": 2
+}

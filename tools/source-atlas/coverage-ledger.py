@@ -21,6 +21,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 SOURCE_ATLAS_ROOT = REPO_ROOT / "tools" / "source-atlas"
 sys.path.insert(0, str(SOURCE_ATLAS_ROOT))
 
+from foundry.model import write_json  # noqa: E402
 from foundry.m09_validation import (  # noqa: E402
     KNOWN_ISSUE_IDS,
     REQUIRED_SOURCE_STATES,
@@ -30,15 +31,18 @@ from foundry.m09_validation import (  # noqa: E402
     validate_source_state_repair_fixtures,
 )
 from foundry.registry import PATHWAY_SEEDS, SOURCE_REGISTRY  # noqa: E402
+from foundry.terms_registry import SOURCE_TERMS_REGISTRY, validate_terms_registry  # noqa: E402
 
 
 DEFAULT_OUTPUT = REPO_ROOT / "docs" / "qa" / "source-atlas" / "SOURCE_ATLAS_COVERAGE_LEDGER.md"
+DEFAULT_JSON_OUTPUT = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-coverage-ledger.json"
 M09_MATRIX = REPO_ROOT / "docs" / "qa" / "source-atlas" / "2026-06-26-m09-validation-command-matrix.json"
 M09_GOLDEN = REPO_ROOT / "tools" / "source-atlas" / "fixtures" / "m09" / "golden-benchmark-matrix.json"
 M09_REPAIR = REPO_ROOT / "tools" / "source-atlas" / "fixtures" / "m09" / "source-state-repair-fixtures.json"
 PRODUCTION_R2_PROOF = REPO_ROOT / "docs" / "qa" / "source-atlas" / "production-r2-operations-proof.json"
 PRODUCTION_R2_PROOF_MD = REPO_ROOT / "docs" / "qa" / "source-atlas" / "production-r2-operations-proof.md"
 SCENARIO_GATES = REPO_ROOT / "docs" / "qa" / "product-experience-scenario-gates.yaml"
+BROAD_PACK_ROOT = REPO_ROOT / "tools" / "source-atlas" / "generated" / "broad-occupational-foundation"
 
 NON_CLAIMS = [
     "does not claim stable-channel R2 production freshness",
@@ -241,6 +245,102 @@ def production_r2_rollup() -> dict[str, Any]:
     }
 
 
+def broad_foundation_rollup() -> dict[str, Any]:
+    manifest_path = BROAD_PACK_ROOT / "manifest.json"
+    normalized_path = BROAD_PACK_ROOT / "normalized-records.json"
+    coverage_path = BROAD_PACK_ROOT / "coverage-report.json"
+    verdict_path = BROAD_PACK_ROOT / "pack-readiness-verdict.json"
+    if not manifest_path.exists() or not normalized_path.exists() or not coverage_path.exists() or not verdict_path.exists():
+        return {
+            "present": False,
+            "source_count": 0,
+            "claim_count": 0,
+            "requirement_count": 0,
+            "atom_count": 0,
+            "edge_count": 0,
+            "crosswalk_count": 0,
+            "provenance_completeness": False,
+            "license_status": "missing",
+            "redistribution_status": "missing",
+            "freshness_status": "missing",
+            "source_state_coverage": [],
+            "unsupported_claims": 0,
+            "conflicted_claims": 0,
+            "review_required_claims": 0,
+            "stale_critical_claims": 0,
+            "no_false_completion_coverage": False,
+            "pack_readiness": "missing",
+            "r2_readiness": "missing",
+            "evidence_artifact_paths": [],
+            "scenario_overlay": [],
+        }
+    manifest = read_json(manifest_path)
+    normalized = read_json(normalized_path)
+    coverage = read_json(coverage_path)
+    verdict = read_json(verdict_path)
+    claims = normalized.get("claims", [])
+    coverages = coverage.get("coverageRecords", [])
+    source_states = sorted({row.get("freshnessStatus", "unknown") for row in coverages})
+    return {
+        "present": True,
+        "domain": "occupation_foundation",
+        "source_lane": "broad_occupational_foundation",
+        "adapter": "source-atlas-adapter-sdk-v1",
+        "scenario_coverage": coverage.get("scenarioOverlay", []),
+        "source_authority": sorted({entry.get("authority_tier", "unknown") for entry in SOURCE_TERMS_REGISTRY}),
+        "jurisdiction": sorted({entry.get("jurisdiction", "unknown") for entry in SOURCE_TERMS_REGISTRY}),
+        "source_count": len({claim.get("sourceID") for claim in claims}),
+        "claim_count": len(claims),
+        "requirement_count": len(normalized.get("requirements", [])),
+        "atom_count": len(normalized.get("atoms", [])),
+        "edge_count": len(normalized.get("edges", [])),
+        "crosswalk_count": len(normalized.get("crosswalks", [])),
+        "provenance_completeness": bool(normalized.get("provenance")) and all(claim.get("provenanceIDs") for claim in claims),
+        "license_status": "valid" if validate_terms_registry()["valid"] else "invalid",
+        "redistribution_status": sorted({entry.get("redistribution_policy", "unknown") for entry in SOURCE_TERMS_REGISTRY}),
+        "freshness_status": source_states,
+        "source_state_coverage": sorted({state for row in coverages for state in row.get("sourceStateCoverage", [])}),
+        "unsupported_claims": sum(1 for claim in claims if claim.get("confidence") == "unsupported"),
+        "conflicted_claims": sum(1 for claim in claims if claim.get("confidence") == "conflicted"),
+        "review_required_claims": sum(1 for claim in claims if claim.get("reviewRequirement")),
+        "stale_critical_claims": sum(1 for claim in claims if claim.get("sourceState") == "stale-critical"),
+        "no_false_completion_coverage": all(row.get("noFalseCompletionCoverage") for row in coverages),
+        "pack_readiness": verdict.get("packReadiness"),
+        "r2_readiness": verdict.get("r2Readiness"),
+        "evidence_artifact_paths": [
+            rel(manifest_path),
+            rel(normalized_path),
+            rel(coverage_path),
+            rel(verdict_path),
+            "docs/qa/source-atlas/adapter-broad-coverage-train-01.json",
+            "docs/qa/source-atlas/source-atlas-review-queue.json",
+        ],
+        "manifest_checksum": manifest.get("checksum"),
+    }
+
+
+def coverage_v2_payload() -> dict[str, Any]:
+    registry = source_registry_rollup()
+    validations = validation_rollup()
+    coverage = coverage_universe_rollup()
+    broad = broad_foundation_rollup()
+    production_r2 = production_r2_rollup()
+    return {
+        "schemaVersion": 2,
+        "kind": "ambitions.sourceAtlas.coverageLedger.v2",
+        "status": status_for(validations, coverage),
+        "generated": date.today().isoformat(),
+        "inputCommit": git_sha(),
+        "nonClaims": NON_CLAIMS,
+        "registry": registry,
+        "broadOccupationalFoundation": broad,
+        "termsRegistry": validate_terms_registry(),
+        "validation": validations,
+        "coverageUniverse": coverage,
+        "productionR2": production_r2,
+    }
+
+
 def status_for(validations: dict[str, Any], coverage: dict[str, Any]) -> str:
     if not all([
         validations["command_result"].get("valid"),
@@ -265,6 +365,7 @@ def render(output: Path) -> str:
     validations = validation_rollup()
     contracts = foundry_contract_rollup()
     production_r2 = production_r2_rollup()
+    broad = broad_foundation_rollup()
     status = status_for(validations, coverage)
     known_keep_open = sum(1 for row in validations["known_issue_rows"] if not row["closeKnownIssue"])
     source_gate_rows = scenarios["gates"]
@@ -333,12 +434,60 @@ def render(output: Path) -> str:
             "`tools/source-atlas/foundry/contracts`, `docs/qa/source-atlas/production-r2-operations-proof.md`",
         ]),
         table_row([
+            "Broad occupational foundation",
+            f"{broad['source_count']} sources, {broad['claim_count']} claims, {broad['requirement_count']} requirements, {broad['atom_count']} atoms, {broad['edge_count']} edges, {broad['crosswalk_count']} crosswalks",
+            f"Pack {broad['pack_readiness']}; R2 {broad['r2_readiness']}",
+            "`tools/source-atlas/generated/broad-occupational-foundation`, `docs/qa/source-atlas/source-atlas-coverage-ledger.json`",
+        ]),
+        table_row([
             "Known issues",
             f"{len(validations['known_issue_rows'])} routed; {known_keep_open} keep-open recommendations",
             "Routing only; no closure",
             "`tools/source-atlas/foundry/m09_validation.py`",
         ]),
     ])
+
+    lines.extend([
+        "",
+        "## Coverage Ledger v2 Broad Foundation",
+        "",
+        table_row(["Field", "Current value"]),
+        table_row(["---", "---"]),
+        table_row(["Domain", broad.get("domain", "missing")]),
+        table_row(["Source lane", broad.get("source_lane", "missing")]),
+        table_row(["Adapter", broad.get("adapter", "missing")]),
+        table_row(["Source authority", ", ".join(broad.get("source_authority", [])) if broad.get("source_authority") else "missing"]),
+        table_row(["Jurisdiction", ", ".join(broad.get("jurisdiction", [])) if broad.get("jurisdiction") else "missing"]),
+        table_row(["Source count", str(broad["source_count"])]),
+        table_row(["Claim count", str(broad["claim_count"])]),
+        table_row(["Requirement count", str(broad["requirement_count"])]),
+        table_row(["Atom count", str(broad["atom_count"])]),
+        table_row(["Edge count", str(broad["edge_count"])]),
+        table_row(["Crosswalk count", str(broad["crosswalk_count"])]),
+        table_row(["Provenance completeness", str(broad["provenance_completeness"])]),
+        table_row(["License status", str(broad["license_status"])]),
+        table_row(["Redistribution status", ", ".join(broad.get("redistribution_status", [])) if broad.get("redistribution_status") else "missing"]),
+        table_row(["Freshness status", ", ".join(broad.get("freshness_status", [])) if broad.get("freshness_status") else "missing"]),
+        table_row(["Source-state coverage", f"{len(broad.get('source_state_coverage', []))} states"]),
+        table_row(["Unsupported claims", str(broad["unsupported_claims"])]),
+        table_row(["Conflicted claims", str(broad["conflicted_claims"])]),
+        table_row(["Review-required claims", str(broad["review_required_claims"])]),
+        table_row(["Stale-critical claims", str(broad["stale_critical_claims"])]),
+        table_row(["No-false-completion coverage", str(broad["no_false_completion_coverage"])]),
+        table_row(["Pack readiness", str(broad["pack_readiness"])]),
+        table_row(["R2 readiness", str(broad["r2_readiness"])]),
+    ])
+
+    if broad.get("scenario_coverage"):
+        lines.extend([
+            "",
+            "## Broad Foundation Scenario Overlay",
+            "",
+            table_row(["Scenario", "Coverage"]),
+            table_row(["---", "---"]),
+        ])
+        for row in broad["scenario_coverage"]:
+            lines.append(table_row([row["scenario"], row["coverage"]]))
 
     lines.extend([
         "",
@@ -483,12 +632,16 @@ def render(output: Path) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Generate Source Atlas Coverage Ledger")
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))
+    parser.add_argument("--json-output", default=str(DEFAULT_JSON_OUTPUT))
     args = parser.parse_args(argv)
     output = Path(args.output)
     markdown = render(output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(markdown, encoding="utf-8")
+    json_output = Path(args.json_output)
+    write_json(json_output, coverage_v2_payload())
     print(f"Wrote {rel(output)}")
+    print(f"Wrote {rel(json_output)}")
     return 0
 
 

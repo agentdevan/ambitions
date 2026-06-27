@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.amb1430GreenReconciliation.v1",
+  "issue": "AMB-1430",
+  "createdAt": "2026-06-27T15:46:00Z",
+  "status": "Green",
+  "statusReason": "Owner terms acceptance was recorded; Train 01 broad pack was promoted to production R2 validation prefix only after terms, privacy, checksum, revocation, LKG, readback, and rollback gates passed.",
+  "yellowBlockersAddressed": [
+    {
+      "blocker": "Owner/legal terms acceptance was not available.",
+      "result": "Green",
+      "evidence": "docs/qa/source-atlas/amb-1430-terms-acceptance.json",
+      "notes": "Founder/owner acceptance recorded. Outside legal approval remains a non-claim."
+    },
+    {
+      "blocker": "Production Train 01 broad-pack R2 upload was not run or approved.",
+      "result": "Green",
+      "evidence": "docs/qa/source-atlas/amb-1430-broad-pack-production-r2-proof.json",
+      "notes": "Uploaded only to production bucket validation prefix source-atlas/v1/validation/amb-1430; no main stable channel promotion."
+    }
+  ],
+  "ownerAcceptanceResult": {
+    "accepted": true,
+    "scope": "Adapter + Broad Coverage Train 01 only",
+    "artifact": "docs/qa/source-atlas/amb-1430-terms-acceptance.json"
+  },
+  "legalApprovalResult": {
+    "approved": false,
+    "claimed": false,
+    "result": "not_available_not_claimed"
+  },
+  "sourceLaneDecisions": {
+    "onet.database": "accepted_packable_with_attribution",
+    "bls.public.data.api": "accepted_packable_v1_no_key_with_attribution",
+    "wikidata.crosswalk": "accepted_crosswalk_only",
+    "openalex.dataset": "accepted_public_reference_with_rate_policy",
+    "usajobs.search": "blocked_not_packable_not_r2_ready"
+  },
+  "packPromotionDecision": {
+    "ownerApproved": true,
+    "productionBucket": "ambitions-source-atlas-prod",
+    "validationPrefix": "source-atlas/v1/validation/amb-1430",
+    "mainStableChannelPromoted": false,
+    "result": "production_validation_prefix_upload_passed"
+  },
+  "r2ProofResult": {
+    "dryRunArtifact": "docs/qa/source-atlas/amb-1430-broad-pack-promotion-dry-run.json",
+    "productionProofArtifact": "docs/qa/source-atlas/amb-1430-broad-pack-production-r2-proof.json",
+    "uploadedObjectCount": 12,
+    "readbackVerified": true,
+    "checksumVerified": true,
+    "revocationProof": true,
+    "lastKnownGoodProof": true,
+    "rollbackSelectProof": true
+  },
+  "packSafetyResult": {
+    "restrictedRecordsIncluded": false,
+    "reviewRequiredPackCandidatesIncluded": false,
+    "usajobsRecordsIncluded": false,
+    "allIncludedSourcesPackable": true,
+    "attributionPresent": true,
+    "objectKeysPublicReferenceSafe": true,
+    "payloadPrivacyPassed": true,
+    "manifestPrivacyPassed": true,
+    "checksumManifestExists": true,
+    "noPrivateUserData": true,
+    "noFinalPathsSchedulesOrStepLists": true
+  },
+  "validationCommands": [
+    "python3 tools/source-atlas/source-atlas-foundry.py broad-occupation-pack",
+    "python3 tools/source-atlas/source-atlas-foundry.py broad-occupation-pack promote-proof --dry-run --require-terms-green --require-privacy-green --require-checksums --require-revocation --require-lkg --emit-evidence docs/qa/source-atlas/amb-1430-broad-pack-promotion-dry-run.json",
+    "python3 tools/source-atlas/source-atlas-foundry.py broad-occupation-pack promote-proof --r2-validation-prefix source-atlas/v1/validation/amb-1430 --require-terms-green --require-privacy-green --require-checksums --require-revocation --require-lkg --emit-evidence docs/qa/source-atlas/amb-1430-broad-pack-production-r2-proof.json --execute --bucket ambitions-source-atlas-prod --channel validation --readback-root /tmp/ambitions-amb-1430-broad-pack-readback --confirm-public-reference-only"
+  ],
+  "evidencePaths": [
+    "docs/qa/source-atlas/amb-1430-terms-acceptance.json",
+    "docs/qa/source-atlas/amb-1430-terms-acceptance.md",
+    "docs/qa/source-atlas/amb-1430-broad-pack-promotion-dry-run.json",
+    "docs/qa/source-atlas/amb-1430-broad-pack-promotion-dry-run.md",
+    "docs/qa/source-atlas/amb-1430-broad-pack-production-r2-proof.json",
+    "docs/qa/source-atlas/amb-1430-broad-pack-production-r2-proof.md",
+    "tools/source-atlas/generated/broad-occupational-foundation/manifest.json"
+  ],
+  "nonClaims": [
+    "not outside legal approval",
+    "not privacy/legal approval",
+    "not full Source Atlas project Green",
+    "not release readiness",
+    "not App Store readiness",
+    "not account readiness",
+    "not known issue closure",
+    "not final user paths",
+    "not schedules",
+    "not Step lists",
+    "not personalized recommendations",
+    "not main stable-channel production release"
+  ],
+  "finalVerdict": "Green for Adapter + Broad Coverage Train 01 after AMB-1430 owner terms acceptance and production R2 validation-prefix promotion only.",
+  "publicReferenceOnly": true,
+  "dataClass": "public_provenance"
+}

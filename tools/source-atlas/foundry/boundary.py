@@ -60,6 +60,14 @@ BOUNDARY_CONTEXT_KEYS = {
     "mustNotUploadPrivateContext",
     "doesNotStoreFinalUserPath",
     "doesNotCreateFinalSchedule",
+    "forbidden_artifact_classes",
+    "forbiddenArtifactClasses",
+    "forbiddenPrivateClasses",
+    "allowed_artifact_classes",
+    "allowedArtifactClasses",
+    "terms",
+    "termsGate",
+    "privacyGate",
 }
 
 FORBIDDEN_KEY_PATTERNS: list[tuple[re.Pattern[str], str]] = [
