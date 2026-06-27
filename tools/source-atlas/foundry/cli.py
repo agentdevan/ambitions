@@ -16,6 +16,7 @@ from .coverage_benchmark import coverage_diff, run_golden_benchmarks
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, write_json
 from .publisher import build_r2_plan, execute_r2_plan, write_r2_plan
 from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
+from .r2_operations_proof import R2_OPERATION_MODES, run_r2_operations_proof
 from .r2_contracts import (
     build_last_known_good_manifest,
     build_revocation_manifest,
@@ -154,6 +155,21 @@ def main(argv: list[str] | None = None) -> int:
     upload_parser.add_argument("--execute", action="store_true")
     upload_parser.add_argument("--confirm-public-reference-only", action="store_true")
 
+    r2_ops_parser = sub.add_parser("r2-operations-proof")
+    r2_ops_parser.add_argument("--mode", choices=sorted(R2_OPERATION_MODES), required=True)
+    r2_ops_parser.add_argument("--environment", choices=["staging", "production"], required=True)
+    r2_ops_parser.add_argument("--bundle-root", required=True)
+    r2_ops_parser.add_argument("--bucket")
+    r2_ops_parser.add_argument("--prefix")
+    r2_ops_parser.add_argument("--channel", default="staging")
+    r2_ops_parser.add_argument("--output")
+    r2_ops_parser.add_argument("--readback-root")
+    r2_ops_parser.add_argument("--execute", action="store_true")
+    r2_ops_parser.add_argument("--confirm-public-reference-only", action="store_true")
+    r2_ops_parser.add_argument("--revoked-artifact-id", action="append", default=[])
+    r2_ops_parser.add_argument("--candidate-manifest")
+    r2_ops_parser.add_argument("--last-known-good")
+
     explain_parser = sub.add_parser("explain")
     explain_parser.add_argument("--focus", choices=["architecture", "automation", "runtime-boundary"], default="architecture")
 
@@ -268,6 +284,24 @@ def main(argv: list[str] | None = None) -> int:
         result = execute_r2_plan(plan, execute=args.execute, confirm_public_reference_only=args.confirm_public_reference_only)
         print_json(result)
         return 0 if result.get("success") else 1
+    if args.command == "r2-operations-proof":
+        result = run_r2_operations_proof(
+            mode=args.mode,
+            environment=args.environment,
+            bundle_root=Path(args.bundle_root),
+            bucket=args.bucket,
+            prefix=args.prefix,
+            channel=args.channel,
+            output_path=Path(args.output) if args.output else None,
+            readback_root=Path(args.readback_root) if args.readback_root else None,
+            execute=args.execute,
+            confirm_public_reference_only=args.confirm_public_reference_only,
+            revoked_artifact_ids=args.revoked_artifact_id,
+            candidate_manifest_path=Path(args.candidate_manifest) if args.candidate_manifest else None,
+            last_known_good_path=Path(args.last_known_good) if args.last_known_good else None,
+        )
+        print_json(result)
+        return 0 if result["status"] in {"Green", "Yellow"} else 1
     if args.command == "explain":
         print_json(explain(args.focus))
         return 0

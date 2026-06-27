@@ -1,0 +1,24 @@
+{
+  "expectedValid": true,
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.revocationManifest",
+    "id": "revocation.synthetic.public_reference",
+    "versionID": "source-atlas-public-reference-revoked",
+    "dataClass": "public_freshness",
+    "entries": [
+      {
+        "artifactID": "pack.synthetic.public_reference",
+        "path": "packs/pack.synthetic.public_reference.json",
+        "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "state": "revoked",
+        "reason": "synthetic public reference revocation fixture"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph or private user context",
+    "nonClaims": [
+      "not account readiness",
+      "not release readiness"
+    ]
+  }
+}

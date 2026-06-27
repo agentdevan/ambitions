@@ -16,6 +16,8 @@ from foundry.compiler import compile_bundle
 from foundry.coverage_benchmark import coverage_diff, run_golden_benchmarks
 from foundry.model import privacy_findings_for_value, read_json
 from foundry.publisher import build_r2_plan
+from foundry import r2_operations_proof
+from foundry.r2_operations_proof import R2_OPERATION_MODES, run_r2_operations_proof
 from foundry.r2_contracts import (
     build_last_known_good_manifest,
     build_revocation_manifest,
@@ -177,6 +179,101 @@ def test_r2_plan_is_validation_backed_and_contains_no_credentials(tmp_path: Path
     assert "Authorization-Key" not in encoded
     assert "CLOUDFLARE_R2_SECRET_ACCESS_KEY" not in encoded
     assert any(obj["objectKey"].endswith("/channels/staging/manifest.json") for obj in plan["objects"])
+
+
+def test_r2_operations_proof_dry_run_covers_required_modes_without_credentials(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(r2_operations_proof.shutil, "which", lambda _: None)
+    result = compile_bundle(tmp_path, "test-r2-ops-proof", "staging")
+    bundle_root = Path(result["bundleRoot"])
+
+    proof = run_r2_operations_proof(
+        mode="dry-run",
+        environment="production",
+        bundle_root=bundle_root,
+        env={},
+    )
+
+    operations = {item["operation"] for item in proof["operation"]["results"]}
+    assert proof["status"] == "Yellow"
+    assert proof["operation"]["dryRun"] is True
+    assert proof["logRedaction"]["passed"], proof["logRedaction"]
+    assert operations == R2_OPERATION_MODES - {"dry-run"}
+    assert proof["credentialHandling"]["secretValuesPrinted"] is False
+    assert "localPath" not in json.dumps(proof)
+
+
+def test_r2_operations_proof_blocks_real_upload_without_credentials(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(r2_operations_proof.shutil, "which", lambda _: None)
+    result = compile_bundle(tmp_path, "test-r2-ops-proof-blocked", "staging")
+    bundle_root = Path(result["bundleRoot"])
+
+    proof = run_r2_operations_proof(
+        mode="upload-public-reference-artifact",
+        environment="production",
+        bundle_root=bundle_root,
+        bucket="ambitions-source-atlas-production",
+        execute=True,
+        confirm_public_reference_only=True,
+        env={},
+    )
+
+    assert proof["status"] == "Yellow"
+    assert proof["operation"]["executed"] is False
+    assert any("credentials" in reason for reason in proof["blockedReasons"])
+    assert any("wrangler" in reason for reason in proof["blockedReasons"])
+
+
+def test_r2_operations_proof_rejects_private_manifest_payload(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(r2_operations_proof.shutil, "which", lambda _: None)
+    result = compile_bundle(tmp_path, "test-r2-ops-proof-private", "staging")
+    bundle_root = Path(result["bundleRoot"])
+    manifest_path = bundle_root / "manifest.json"
+    manifest = read_json(manifest_path)
+    manifest["privateLifeGraph"] = {"goalText": "Private synthetic goal"}
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True), encoding="utf-8")
+
+    proof = run_r2_operations_proof(
+        mode="verify-manifest",
+        environment="production",
+        bundle_root=bundle_root,
+        env={},
+    )
+
+    assert proof["status"] == "Red"
+    issues = json.dumps(proof["checks"])
+    assert "private_life_graph" in issues
+    assert "goal_text" in issues
+
+
+def test_r2_operations_proof_rollback_selects_lkg_for_stale_critical_manifest(tmp_path: Path, monkeypatch):
+    monkeypatch.setattr(r2_operations_proof.shutil, "which", lambda _: None)
+    result = compile_bundle(tmp_path, "test-r2-ops-proof-rollback", "staging")
+    bundle_root = Path(result["bundleRoot"])
+    stale = tmp_path / "stale-critical.json"
+    stale.write_text(
+        json.dumps(
+            {
+                "schemaVersion": 1,
+                "kind": "ambitions.sourceAtlas.freshnessManifest",
+                "dataClass": "public_freshness",
+                "claimStateBuckets": [{"state": "stale_critical", "claimIDs": ["claim.synthetic.public_requirement"]}],
+            },
+            indent=2,
+            sort_keys=True,
+        ),
+        encoding="utf-8",
+    )
+
+    proof = run_r2_operations_proof(
+        mode="rollback-select",
+        environment="production",
+        bundle_root=bundle_root,
+        candidate_manifest_path=stale,
+        env={},
+    )
+
+    assert proof["status"] == "Yellow"
+    assert proof["operation"]["results"][0]["selected"] == "last-known-good"
 
 
 def test_privacy_boundary_lines_are_not_false_positives():

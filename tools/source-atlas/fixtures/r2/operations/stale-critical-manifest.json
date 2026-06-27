@@ -1,0 +1,35 @@
+{
+  "expectedValid": true,
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.freshnessManifest",
+    "versionID": "source-atlas-public-reference-stale-critical",
+    "channel": "production",
+    "dataClass": "public_freshness",
+    "r2Allowed": true,
+    "appCacheAllowed": true,
+    "logAllowed": "metadata_only",
+    "fixtureAllowed": "public_synthetic_only",
+    "claimStateBuckets": [
+      {
+        "state": "stale_critical",
+        "claimIDs": [
+          "claim.synthetic.public_requirement"
+        ]
+      }
+    ],
+    "sourceFreshnessWatch": [
+      {
+        "sourceID": "source.synthetic.public_requirement",
+        "authorityTier": "official_public_source",
+        "freshnessCadence": "review before reuse",
+        "lastReviewed": "2026-06-26"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph or private user context",
+    "nonClaims": [
+      "not account readiness",
+      "not release readiness"
+    ]
+  }
+}

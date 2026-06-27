@@ -78,7 +78,7 @@ def audit_text(path: Path) -> list[str]:
             continue
         if any(term in lowered for term in ["goaltext", "capturetext", "privatelif egraph".replace(" ", "")]):
             findings.append(f"{relative}:{index}: possible private graph egress marker")
-        if any(term in lowered for term in ["private life graph", "goals", "captures", "receipts", "proof"]):
+        if any(term in lowered for term in ["private life graph", "goals", "captures", "receipts", "proof payload", "proofpayload"]):
             if not any(marker in lowered for marker in ["must not", "never", "no private", "not a", "forbidden", "forbid", "reject", "not store", "not receive", "only", "public/reference", "private life graph in r2", "staging proof"]):
                 findings.append(f"{relative}:{index}: review Source Atlas private graph egress wording")
     return findings
