@@ -1,0 +1,996 @@
+{
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "kind": "ambitions.sourceAtlas.adapterFixture.v1",
+  "payload": {
+    "adapterID": "wikidata_crosswalk_adapter",
+    "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+    "atoms": [],
+    "claims": [
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.e01c80f230e73d13",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "high",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.af1aabd26fc6babb",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "Software Developers has Wikidata entity crosswalk candidate Q80993.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.e90af3e20a85eaf9",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "high",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.a7f7656b3bfe18c4",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "Registered Nurses has Wikidata entity crosswalk candidate Q186360.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.3b3565fdd7ca52cd",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.019d21032aed4d92",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "Airline Pilots, Copilots, and Flight Engineers has Wikidata entity crosswalk candidate Q2095549.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.9543e80f23b0879b",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.5511cdef61ec6af3",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "Secondary School Teachers has Wikidata entity crosswalk candidate Q37226.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.6027b4405fd7ae16",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "high",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.50db4c68ff096cd4",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "Electricians has Wikidata entity crosswalk candidate Q175310.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.3a04655a12878d75",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.b74c274ba3778045",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "Lawyers has Wikidata entity crosswalk candidate Q40348.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.4ca3c8658dcb723a",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.39d1d2ce99c3277d",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "Sound Engineering Technicians has Wikidata entity crosswalk candidate Q946996.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.4146755a1584eec2",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "low",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.ef26ae4e7a2358a2",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": true,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "General and Operations Managers has Wikidata entity crosswalk candidate Q131512.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.81670fc8ad261bf6",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "medium",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.fcd7980a061c16ec",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": false,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "source_backed",
+        "text": "Musicians and Singers has Wikidata entity crosswalk candidate Q639669.",
+        "versionID": "adapter-broad-coverage-train-01"
+      },
+      {
+        "authorityTier": "open_knowledge_graph",
+        "checksum": "checksum.4aad6cce8d8c9db5",
+        "claimType": "entity_label_crosswalk",
+        "confidence": "review_required",
+        "dataClass": "public_reference_claim",
+        "freshness": "current",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "claim.6e59d1001a6afba0",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "reviewRequirement": true,
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "state": "candidate",
+        "text": "Physicists and Astronomers / Astronaut candidate context has Wikidata entity crosswalk candidate Q11631.",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "coverage": {
+      "adapter": "wikidata_crosswalk_adapter",
+      "atomCount": 0,
+      "claimCount": 10,
+      "conflictedClaims": 0,
+      "crosswalkCount": 10,
+      "dataClass": "public_freshness",
+      "domain": "entity_crosswalk",
+      "edgeCount": 0,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "current",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "reviewed",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "candidate",
+      "provenanceCompleteness": true,
+      "publicReferenceOnly": true,
+      "r2Readiness": "candidate_local_only",
+      "redistributionStatus": "redistributable",
+      "requirementCount": 0,
+      "reviewRequiredClaims": 2,
+      "scenarioCoverage": [
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "missing official source",
+          "doesNotCreateUserPath": true,
+          "reason": "athletic training source lane not included in Train 01",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "partially covered",
+          "doesNotCreateUserPath": true,
+          "reason": "public foundation references available, no user path generated",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "covered",
+          "doesNotCreateUserPath": true,
+          "reason": "transfer and crosswalk atoms can support local composition later",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "open_knowledge_graph",
+      "sourceCount": 1,
+      "sourceLane": "wikidata.crosswalk",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    },
+    "coverageRecords": [],
+    "createdAt": "2026-06-27T00:00:00Z",
+    "crosswalks": [
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "15-1252",
+        "candidates": [
+          {
+            "confidence": "high",
+            "id": "15-1252.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "high",
+            "id": "15-1252",
+            "source": "bls"
+          },
+          {
+            "confidence": "high",
+            "id": "Q80993",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "high",
+            "id": "T10860",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.software_engineer",
+        "confidence": "high",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.26364a26c9cb1f28",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Software Developers",
+        "onetOccupationCode": "15-1252.00",
+        "openAlexID": "T10860",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": false,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q80993"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "29-1141",
+        "candidates": [
+          {
+            "confidence": "high",
+            "id": "29-1141.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "high",
+            "id": "29-1141",
+            "source": "bls"
+          },
+          {
+            "confidence": "high",
+            "id": "Q186360",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "high",
+            "id": "T11191",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.registered_nurse",
+        "confidence": "high",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.aba933679d83d312",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Registered Nurses",
+        "onetOccupationCode": "29-1141.00",
+        "openAlexID": "T11191",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": false,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q186360"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "53-2011",
+        "candidates": [
+          {
+            "confidence": "medium",
+            "id": "53-2011.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "medium",
+            "id": "53-2011",
+            "source": "bls"
+          },
+          {
+            "confidence": "medium",
+            "id": "Q2095549",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "medium",
+            "id": "T12372",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.airline_pilot",
+        "confidence": "medium",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.2443464ed39f2425",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Airline Pilots, Copilots, and Flight Engineers",
+        "onetOccupationCode": "53-2011.00",
+        "openAlexID": "T12372",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": false,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q2095549"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "25-2031",
+        "candidates": [
+          {
+            "confidence": "medium",
+            "id": "25-2031.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "medium",
+            "id": "25-2031",
+            "source": "bls"
+          },
+          {
+            "confidence": "medium",
+            "id": "Q37226",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "medium",
+            "id": "T10236",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.teacher",
+        "confidence": "medium",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.c760d02be397af79",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Secondary School Teachers",
+        "onetOccupationCode": "25-2031.00",
+        "openAlexID": "T10236",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": false,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q37226"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "47-2111",
+        "candidates": [
+          {
+            "confidence": "high",
+            "id": "47-2111.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "high",
+            "id": "47-2111",
+            "source": "bls"
+          },
+          {
+            "confidence": "high",
+            "id": "Q175310",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "unsupported",
+            "id": null,
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.electrician",
+        "confidence": "high",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.0ee3b6e599d2198c",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Electricians",
+        "onetOccupationCode": "47-2111.00",
+        "openAlexID": null,
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": false,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q175310"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "23-1011",
+        "candidates": [
+          {
+            "confidence": "medium",
+            "id": "23-1011.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "medium",
+            "id": "23-1011",
+            "source": "bls"
+          },
+          {
+            "confidence": "medium",
+            "id": "Q40348",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "medium",
+            "id": "T10084",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.lawyer",
+        "confidence": "medium",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.88e14d9d24a76326",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Lawyers",
+        "onetOccupationCode": "23-1011.00",
+        "openAlexID": "T10084",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": false,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q40348"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "27-4014",
+        "candidates": [
+          {
+            "confidence": "medium",
+            "id": "27-4014.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "medium",
+            "id": "27-4014",
+            "source": "bls"
+          },
+          {
+            "confidence": "medium",
+            "id": "Q946996",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "medium",
+            "id": "T11419",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.audio_engineer",
+        "confidence": "medium",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.e1e5d5e4a2cc2690",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Sound Engineering Technicians",
+        "onetOccupationCode": "27-4014.00",
+        "openAlexID": "T11419",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": false,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q946996"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "11-1021",
+        "candidates": [
+          {
+            "confidence": "low",
+            "id": "11-1021.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "low",
+            "id": "11-1021",
+            "source": "bls"
+          },
+          {
+            "confidence": "low",
+            "id": "Q131512",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "low",
+            "id": "T10033",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.small_business_owner",
+        "confidence": "low",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.4fd7c721f8f028b5",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "General and Operations Managers",
+        "onetOccupationCode": "11-1021.00",
+        "openAlexID": "T10033",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": true,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q131512"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": "27-2042",
+        "candidates": [
+          {
+            "confidence": "medium",
+            "id": "27-2042.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "medium",
+            "id": "27-2042",
+            "source": "bls"
+          },
+          {
+            "confidence": "medium",
+            "id": "Q639669",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "medium",
+            "id": "T11176",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.music_artist",
+        "confidence": "medium",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.483c539da4100c13",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Musicians and Singers",
+        "onetOccupationCode": "27-2042.00",
+        "openAlexID": "T11176",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": false,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q639669"
+      },
+      {
+        "ambiguityPreserved": true,
+        "blsSocCode": null,
+        "candidates": [
+          {
+            "confidence": "review_required",
+            "id": "19-2012.00",
+            "source": "onet"
+          },
+          {
+            "confidence": "unsupported",
+            "id": null,
+            "source": "bls"
+          },
+          {
+            "confidence": "review_required",
+            "id": "Q11631",
+            "source": "wikidata"
+          },
+          {
+            "confidence": "review_required",
+            "id": "T10187",
+            "source": "openalex"
+          }
+        ],
+        "canonicalOccupationID": "occupation.astronaut",
+        "confidence": "review_required",
+        "dataClass": "public_ontology",
+        "id": "crosswalk.12a2b6d76a8c513b",
+        "kind": "ambitions.sourceAtlas.entityCrosswalk.v1",
+        "label": "Physicists and Astronomers / Astronaut candidate context",
+        "onetOccupationCode": "19-2012.00",
+        "openAlexID": "T10187",
+        "provenanceIDs": [
+          "provenance.a53f29510f8d79cf"
+        ],
+        "publicReferenceOnly": true,
+        "reviewRequired": true,
+        "schemaVersion": 1,
+        "silentWinnerSelectionAllowed": false,
+        "sourceIDs": [
+          "wikidata.crosswalk"
+        ],
+        "wikidataQID": "Q11631"
+      }
+    ],
+    "dataClass": "official_public_source",
+    "domain": "entity_crosswalk",
+    "edges": [],
+    "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+    "lattices": [],
+    "nonClaims": [
+      "does not create final user paths",
+      "does not create final schedules",
+      "does not create Step lists",
+      "does not gather private user data",
+      "does not claim legal, privacy, release, or R2 production readiness"
+    ],
+    "packCandidates": [
+      {
+        "adapterID": "wikidata_crosswalk_adapter",
+        "dataClass": "public_reference_claim",
+        "doesNotCreateFinalSchedule": true,
+        "doesNotStoreFinalUserPath": true,
+        "domain": "entity_crosswalk",
+        "id": "pack_candidate.c840bb7484af2034",
+        "kind": "ambitions.sourceAtlas.packCandidate.v1",
+        "publicReferenceOnly": true,
+        "recordCounts": {
+          "atoms": 0,
+          "claims": 10,
+          "crosswalks": 10,
+          "edges": 0,
+          "requirements": 0
+        },
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "termsGate": {
+          "issues": [],
+          "packable": true,
+          "r2PackPolicy": "r2_pack_allowed",
+          "r2Ready": true,
+          "redistributionPolicy": "redistributable",
+          "sourceID": "wikidata.crosswalk"
+        }
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "provenance": [
+      {
+        "authorityTier": "open_knowledge_graph",
+        "contentHash": "98b390889d1dd2b9c07bb23730cb89bb50f3bf340dd0edbff6f74e9b4c495113",
+        "dataClass": "public_provenance",
+        "freshnessCadence": "weekly crosswalk refresh and conflict review",
+        "id": "provenance.fde9040d22298b09",
+        "jurisdiction": "global",
+        "kind": "ambitions.sourceAtlas.provenance.v1",
+        "license": "Creative Commons CC0 public domain dedication",
+        "locator": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "publicReferenceOnly": true,
+        "publisher": "Wikimedia Foundation / Wikidata community",
+        "retrievedAt": "2026-06-27T00:00:00Z",
+        "schemaVersion": 1,
+        "sourceID": "wikidata.crosswalk",
+        "sourceState": "current",
+        "sourceURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+        "termsURL": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "publicReferenceOnly": true,
+    "recipes": [],
+    "requirements": [],
+    "schemaVersion": 1,
+    "sourceID": "wikidata.crosswalk",
+    "sourceState": {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    },
+    "sourceStates": [
+      {
+        "blockedReasons": [],
+        "dataClass": "public_freshness",
+        "packEligible": true,
+        "publicReferenceOnly": true,
+        "runtimeEligible": true,
+        "state": "current"
+      }
+    ],
+    "terms": {
+      "attributionRequired": false,
+      "authorityTier": "open_knowledge_graph",
+      "freshnessCadence": "weekly crosswalk refresh and conflict review",
+      "lastTermsReviewed": "2026-06-27",
+      "license": "Creative Commons CC0 public domain dedication",
+      "licenseVersion": "1.0",
+      "publisher": "Wikimedia Foundation / Wikidata community",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewRequired": false,
+      "sourceID": "wikidata.crosswalk",
+      "termsReviewStatus": "reviewed",
+      "termsURL": "https://www.wikidata.org/wiki/Wikidata:Licensing"
+    },
+    "termsValidation": {
+      "issues": [],
+      "packable": true,
+      "r2PackPolicy": "r2_pack_allowed",
+      "r2Ready": true,
+      "redistributionPolicy": "redistributable",
+      "sourceID": "wikidata.crosswalk"
+    }
+  },
+  "schemaVersion": 1
+}

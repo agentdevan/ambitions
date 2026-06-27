@@ -2,7 +2,7 @@
 
 Status: Yellow
 Generated: 2026-06-27
-Input commit: b26cbaf53
+Input commit: 568378aef
 Owner posture: Retained coverage/proof roll-up, not product canon, production coverage proof, R2 readiness proof, privacy/legal approval, release proof, or known-issue closure.
 
 This ledger rolls up the current Source Atlas registry, product-experience scenario gates, native source states, claim/provenance/freshness posture, validation commands, R2 readiness gates, and known-issue routing. It must stay conservative: source-present, locally validated, or generated coverage artifacts do not prove production freshness, app-side R2 behavior, entitlement gating, privacy/legal approval, device behavior, accessibility conformance, or release readiness.
@@ -27,7 +27,55 @@ This ledger rolls up the current Source Atlas registry, product-experience scena
 | Native source | 54 SourceAtlas source files and 32 SourceAtlas test files | Source/test presence; no release proof | `Native/Ambitions/**/SourceAtlas*.swift`, `Native/AmbitionsTests/**/SourceAtlas*.swift` |
 | Validation | 17 available M09 commands, 1 unavailable command, 14 areas | Local validation matrix proof only | `docs/qa/source-atlas/2026-06-26-m09-validation-command-matrix.json` |
 | R2 readiness | 5 contracts; production operations proof status Green for `source-atlas/v1/validation/amb-1429` | Green only for validation-prefix operations proof; Yellow for app/runtime/release readiness | `tools/source-atlas/foundry/contracts`, `docs/qa/source-atlas/production-r2-operations-proof.md` |
+| Broad occupational foundation | 4 sources, 38 claims, 19 requirements, 95 atoms, 60 edges, 10 crosswalks | Pack candidate_local_only; R2 candidate_local_only_not_uploaded | `tools/source-atlas/generated/broad-occupational-foundation`, `docs/qa/source-atlas/source-atlas-coverage-ledger.json` |
 | Known issues | 7 routed; 7 keep-open recommendations | Routing only; no closure | `tools/source-atlas/foundry/m09_validation.py` |
+
+## Coverage Ledger v2 Broad Foundation
+
+| Field | Current value |
+| --- | --- |
+| Domain | occupation_foundation |
+| Source lane | broad_occupational_foundation |
+| Adapter | source-atlas-adapter-sdk-v1 |
+| Source authority | official_dataset, official_government, open_knowledge_graph, restricted |
+| Jurisdiction | US, global |
+| Source count | 4 |
+| Claim count | 38 |
+| Requirement count | 19 |
+| Atom count | 95 |
+| Edge count | 60 |
+| Crosswalk count | 10 |
+| Provenance completeness | True |
+| License status | valid |
+| Redistribution status | lookup_only_not_packable, redistributable, redistributable_with_attribution |
+| Freshness status | current |
+| Source-state coverage | 12 states |
+| Unsupported claims | 0 |
+| Conflicted claims | 0 |
+| Review-required claims | 4 |
+| Stale-critical claims | 0 |
+| No-false-completion coverage | True |
+| Pack readiness | candidate_local_only |
+| R2 readiness | candidate_local_only_not_uploaded |
+
+## Broad Foundation Scenario Overlay
+
+| Scenario | Coverage |
+| --- | --- |
+| NASA astronaut | review required |
+| nurse | review required |
+| pilot | review required |
+| teacher | review required |
+| software engineer | partially covered |
+| small business owner | partially covered |
+| music artist | partially covered |
+| audio engineer | partially covered |
+| marathon runner | missing official source |
+| electrician/apprenticeship | review required |
+| lawyer | review required |
+| medical school path | review required |
+| career pivot | covered |
+| still-counts pivot | covered |
 
 ## Coverage Tooling Audit
 

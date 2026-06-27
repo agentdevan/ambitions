@@ -10,11 +10,15 @@ from typing import Any
 from . import __version__
 from .adapters import ADAPTER_VERSION, harvest_sources
 from .boundary_audit import audit_bundle, audit_fixture_root, audit_r2_plan, merge_results
+from .broad_occupational_foundation import build_broad_occupational_foundation, promote_broad_occupation_pack_proof
 from .certification import ADAPTER_CERTIFICATIONS, certify_registry, certified_source_records
 from .compiler import compile_bundle
 from .coverage_benchmark import coverage_diff, run_golden_benchmarks
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, write_json
 from .publisher import build_r2_plan, execute_r2_plan, write_r2_plan
+from .public_reference_adapters import emit_all_adapter_fixtures, run_all_adapters
+from .green_reconciliation import build_green_reconciliation
+from .live_adapter_validation import ADAPTER_ALIASES, LiveRunOptions, run_live_adapter_validation
 from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
 from .r2_operations_proof import R2_OPERATION_MODES, run_r2_operations_proof
 from .r2_contracts import (
@@ -30,6 +34,8 @@ from .r2_contracts import (
 )
 from .validator import validate_bundle
 from .workbench import build_workbench
+from .terms_registry import terms_registry_artifact, validate_terms_registry
+from .terms_review_packet import build_terms_distribution_review
 
 try:
     from dotenv import load_dotenv
@@ -62,6 +68,12 @@ def doctor() -> dict[str, Any]:
         "tool": "source-atlas-foundry",
         "version": __version__,
         "sourceCount": len(SOURCE_REGISTRY),
+        "adapterSDK": "source-atlas-adapter-sdk-v1",
+        "broadCoverageTrain01": {
+            "adapters": ["onet.database", "bls.public.data.api", "wikidata.crosswalk", "openalex.dataset", "usajobs.search"],
+            "fixtureMode": "deterministic",
+            "privateRuntimeBoundary": "Source Atlas gathers public/reference/freshness facts; Private Life Runtime composes locally later.",
+        },
         "pathwaySeedCount": len(PATHWAY_SEEDS),
         "adapterVersion": ADAPTER_VERSION,
         "privacyBoundary": PRIVACY_BOUNDARY,
@@ -87,6 +99,53 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("sources")
     sub.add_parser("adapters")
     sub.add_parser("certify")
+    sub.add_parser("terms-registry")
+    sub.add_parser("terms-review")
+
+    adapter_fixture_parser = sub.add_parser("adapter-fixtures")
+    adapter_fixture_parser.add_argument("--output-root", default="tools/source-atlas/fixtures/adapters")
+
+    adapter_run_parser = sub.add_parser("run-adapters")
+    adapter_run_parser.add_argument("--source-state", default="current")
+
+    live_parser = sub.add_parser("run-adapters-live")
+    live_parser.add_argument("--adapter", choices=sorted(ADAPTER_ALIASES), required=True)
+    live_parser.add_argument("--limit", type=int, default=5)
+    live_parser.add_argument("--fixture-fallback", choices=["forbidden", "allowed"], default="forbidden")
+    live_parser.add_argument("--emit-evidence", required=True)
+    live_parser.add_argument("--no-pack", action="store_true")
+    live_parser.add_argument("--pack-candidates", action="store_true")
+    live_parser.add_argument("--validate-terms", action="store_true")
+    live_parser.add_argument("--validate-privacy", action="store_true")
+    live_parser.add_argument("--rate-limit-safe", action="store_true")
+    live_parser.add_argument("--timeout", type=float, default=20.0)
+
+    broad_parser = sub.add_parser("broad-occupation-pack")
+    broad_parser.add_argument("action", nargs="?", choices=["generate", "promote-proof"], default="generate")
+    broad_parser.add_argument("--output-root", default="tools/source-atlas/generated")
+    broad_parser.add_argument("--docs-root", default="docs/qa/source-atlas")
+    broad_parser.add_argument("--pack-root", default="tools/source-atlas/generated/broad-occupational-foundation")
+    broad_parser.add_argument("--dry-run", action="store_true")
+    broad_parser.add_argument("--r2-validation-prefix", default="source-atlas/v1/validation/adapter-train-01")
+    broad_parser.add_argument("--require-terms-green", action="store_true")
+    broad_parser.add_argument("--require-privacy-green", action="store_true")
+    broad_parser.add_argument("--require-checksums", action="store_true")
+    broad_parser.add_argument("--require-revocation", action="store_true")
+    broad_parser.add_argument("--require-lkg", action="store_true")
+    broad_parser.add_argument("--emit-evidence")
+    broad_parser.add_argument("--execute", action="store_true")
+    broad_parser.add_argument("--bucket")
+    broad_parser.add_argument("--channel", default="validation")
+    broad_parser.add_argument("--readback-root")
+    broad_parser.add_argument("--confirm-public-reference-only", action="store_true")
+
+    reconcile_parser = sub.add_parser("green-reconciliation")
+    reconcile_parser.add_argument("--emit-evidence", default="docs/qa/source-atlas/adapter-broad-coverage-green-reconciliation.json")
+    reconcile_parser.add_argument("--live-evidence", default="docs/qa/source-atlas/live-adapter-validation.json")
+    reconcile_parser.add_argument("--terms-review", default="docs/qa/source-atlas/source-terms-distribution-review.json")
+    reconcile_parser.add_argument("--coverage-ledger", default="docs/qa/source-atlas/source-atlas-coverage-ledger.json")
+    reconcile_parser.add_argument("--promotion-proof", default="docs/qa/source-atlas/broad-occupation-pack-promotion-proof.json")
+    reconcile_parser.add_argument("--production-r2-proof", default="docs/qa/source-atlas/production-r2-operations-proof.json")
 
     harvest_parser = sub.add_parser("harvest")
     harvest_parser.add_argument("--output-root", required=True)
@@ -190,6 +249,75 @@ def main(argv: list[str] | None = None) -> int:
         result = certify_registry()
         print_json(result)
         return 0 if result["valid"] else 1
+    if args.command == "terms-registry":
+        result = terms_registry_artifact()
+        result["validation"] = validate_terms_registry()
+        print_json(result)
+        return 0 if result["validation"]["valid"] else 1
+    if args.command == "terms-review":
+        result = build_terms_distribution_review(Path("docs/qa/source-atlas/source-terms-distribution-review.json"))
+        print_json(result)
+        return 0 if result["registryValidation"]["valid"] else 1
+    if args.command == "adapter-fixtures":
+        result = emit_all_adapter_fixtures(Path(args.output_root))
+        print_json(result)
+        return 0
+    if args.command == "run-adapters":
+        result = {"outputs": run_all_adapters(args.source_state)}
+        print_json(result)
+        return 0
+    if args.command == "run-adapters-live":
+        result = run_live_adapter_validation(
+            LiveRunOptions(
+                adapter=args.adapter,
+                limit=args.limit,
+                fixture_fallback=args.fixture_fallback,
+                emit_evidence=Path(args.emit_evidence),
+                no_pack=args.no_pack,
+                pack_candidates=args.pack_candidates,
+                validate_terms=args.validate_terms,
+                validate_privacy=args.validate_privacy,
+                rate_limit_safe=args.rate_limit_safe,
+                timeout=args.timeout,
+            )
+        )
+        print_json(result)
+        return 0 if result["status"] == "Green" else 1
+    if args.command == "broad-occupation-pack":
+        if args.action == "promote-proof":
+            emit_evidence = Path(args.emit_evidence or "docs/qa/source-atlas/broad-occupation-pack-promotion-proof.json")
+            result = promote_broad_occupation_pack_proof(
+                Path(args.pack_root),
+                dry_run=args.dry_run,
+                r2_validation_prefix=args.r2_validation_prefix,
+                require_terms_green=args.require_terms_green,
+                require_privacy_green=args.require_privacy_green,
+                require_checksums=args.require_checksums,
+                require_revocation=args.require_revocation,
+                require_lkg=args.require_lkg,
+                emit_evidence=emit_evidence,
+                execute=args.execute,
+                bucket=args.bucket,
+                channel=args.channel,
+                readback_root=Path(args.readback_root) if args.readback_root else None,
+                confirm_public_reference_only=args.confirm_public_reference_only,
+            )
+            print_json(result)
+            return 0 if result["status"] == "Green" else 1
+        result = build_broad_occupational_foundation(Path(args.output_root), Path(args.docs_root))
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "green-reconciliation":
+        result = build_green_reconciliation(
+            Path(args.emit_evidence),
+            live_evidence_path=Path(args.live_evidence),
+            terms_review_path=Path(args.terms_review),
+            coverage_ledger_path=Path(args.coverage_ledger),
+            promotion_proof_path=Path(args.promotion_proof),
+            production_r2_proof_path=Path(args.production_r2_proof),
+        )
+        print_json(result)
+        return 0
     if args.command == "harvest":
         result = harvest_sources(Path(args.output_root), args.run_id, source_ids=args.sources, limit=args.limit)
         print_json(result)
