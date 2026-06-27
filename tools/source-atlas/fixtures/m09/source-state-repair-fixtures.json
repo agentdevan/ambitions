@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.m09.sourceStateRepairFixtures",
+  "status": "public-reference-repair-contract-fixture",
+  "productionSourceAtlasTruthClaimed": false,
+  "fixtures": [
+    {
+      "id": "repair.stale.public-reference",
+      "sourceState": "stale",
+      "inputArtifact": {
+        "artifactID": "pack.synthetic.public_reference.stale",
+        "claimID": "claim.synthetic.credential.requirement",
+        "freshnessState": "stale",
+        "dataClass": "public_reference_claim"
+      },
+      "expectedRepairRoute": "repair-required",
+      "artifactMayDriveRuntime": false,
+      "artifactQuarantined": false,
+      "completionAllowed": false,
+      "silentWinnerSelectionAllowed": false,
+      "repairRecommendation": "refresh public source snapshot, rerun validation, and keep local planning in fallback/reference-review state until freshness is current"
+    },
+    {
+      "id": "repair.stale-critical.public-reference",
+      "sourceState": "stale-critical",
+      "inputArtifact": {
+        "artifactID": "pack.synthetic.public_reference.stale_critical",
+        "claimID": "claim.synthetic.medical.requirement",
+        "freshnessState": "stale-critical",
+        "riskClass": "high",
+        "dataClass": "public_reference_claim"
+      },
+      "expectedRepairRoute": "quarantine-and-fallback",
+      "artifactMayDriveRuntime": false,
+      "artifactQuarantined": true,
+      "completionAllowed": false,
+      "silentWinnerSelectionAllowed": false,
+      "repairRecommendation": "quarantine artifact, route to high-risk review, use local fallback only, and do not let the artifact drive runtime behavior"
+    },
+    {
+      "id": "repair.unavailable.public-reference",
+      "sourceState": "unavailable",
+      "inputArtifact": {
+        "artifactID": "pack.synthetic.public_reference.unavailable",
+        "claimID": "claim.synthetic.pathway.requirement",
+        "sourceStatus": "unavailable",
+        "dataClass": "public_reference_claim"
+      },
+      "expectedRepairRoute": "fallback-local-only",
+      "artifactMayDriveRuntime": false,
+      "artifactQuarantined": false,
+      "completionAllowed": false,
+      "silentWinnerSelectionAllowed": false,
+      "repairRecommendation": "show unavailable source state, keep offline/no-account local core available, and retry public source lane later"
+    },
+    {
+      "id": "repair.conflicted.public-reference",
+      "sourceState": "conflicted",
+      "inputArtifact": {
+        "artifactID": "pack.synthetic.public_reference.conflicted",
+        "claimID": "claim.synthetic.conflicted.requirement",
+        "conflictingClaimIDs": [
+          "claim.synthetic.conflict.a",
+          "claim.synthetic.conflict.b"
+        ],
+        "dataClass": "public_reference_claim"
+      },
+      "expectedRepairRoute": "review-required",
+      "artifactMayDriveRuntime": false,
+      "artifactQuarantined": false,
+      "completionAllowed": false,
+      "silentWinnerSelectionAllowed": false,
+      "repairRecommendation": "route to adjudication review; do not silently select a winning claim"
+    },
+    {
+      "id": "repair.revoked.public-reference",
+      "sourceState": "revoked",
+      "inputArtifact": {
+        "artifactID": "pack.synthetic.public_reference.revoked",
+        "claimID": "claim.synthetic.revoked.requirement",
+        "revocationID": "revocation.synthetic.public_reference.revoked",
+        "dataClass": "public_reference_claim"
+      },
+      "expectedRepairRoute": "quarantine-and-fallback",
+      "artifactMayDriveRuntime": false,
+      "artifactQuarantined": true,
+      "completionAllowed": false,
+      "silentWinnerSelectionAllowed": false,
+      "repairRecommendation": "remove artifact from usable set, use last-known-good only if not revoked, and require replacement source proof"
+    },
+    {
+      "id": "repair.unsupported.public-reference",
+      "sourceState": "unsupported",
+      "inputArtifact": {
+        "artifactID": "pack.synthetic.public_reference.unsupported",
+        "claimID": "claim.synthetic.unsupported.requirement",
+        "supportState": "unsupported",
+        "dataClass": "public_reference_claim"
+      },
+      "expectedRepairRoute": "unsupported-source-fallback",
+      "artifactMayDriveRuntime": false,
+      "artifactQuarantined": false,
+      "completionAllowed": false,
+      "silentWinnerSelectionAllowed": false,
+      "repairRecommendation": "remove unsupported claim from promoted set, keep local fallback, and require approved public source backing"
+    },
+    {
+      "id": "repair.review-required.public-reference",
+      "sourceState": "review-required",
+      "inputArtifact": {
+        "artifactID": "pack.synthetic.public_reference.review_required",
+        "claimID": "claim.synthetic.review.requirement",
+        "reviewState": "required",
+        "dataClass": "public_reference_claim"
+      },
+      "expectedRepairRoute": "review-required",
+      "artifactMayDriveRuntime": false,
+      "artifactQuarantined": false,
+      "completionAllowed": false,
+      "silentWinnerSelectionAllowed": false,
+      "repairRecommendation": "hold artifact behind review queue and expose review-required state through Source inspection if referenced"
+    }
+  ]
+}
