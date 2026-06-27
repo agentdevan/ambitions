@@ -1,0 +1,197 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.productionR2OperationsProofSummary",
+  "issue": "AMB-1429",
+  "status": "Green",
+  "greenScope": "Source Atlas Production R2 Operations Proof only",
+  "createdAt": "2026-06-27T03:59:11Z",
+  "repositoryBranch": "validation/source-atlas-production-r2-ops-proof",
+  "parent": "AMB-1317",
+  "related": [
+    "AMB-1323",
+    "docs/qa/source-atlas/2026-06-26-source-atlas-final-closeout.md",
+    "docs/qa/source-atlas/2026-06-26-source-atlas-final-closeout.json",
+    "docs/qa/source-atlas/2026-06-26-m04-r2-evidence-note.md"
+  ],
+  "environmentInventory": {
+    "wranglerBucketsObserved": [
+      "ambitions-source-atlas-dev",
+      "ambitions-source-atlas-staging",
+      "ambitions-source-atlas-prod"
+    ],
+    "environmentNames": {
+      "staging": {
+        "bucket": "ambitions-source-atlas-staging",
+        "bucketEnv": "SOURCE_ATLAS_R2_STAGING_BUCKET",
+        "prefixEnv": "SOURCE_ATLAS_R2_STAGING_PREFIX"
+      },
+      "production": {
+        "bucket": "ambitions-source-atlas-prod",
+        "bucketEnv": "SOURCE_ATLAS_R2_PRODUCTION_BUCKET",
+        "prefixEnv": "SOURCE_ATLAS_R2_PRODUCTION_PREFIX"
+      }
+    },
+    "productionProofPrefix": "source-atlas/v1/validation/amb-1429",
+    "stagingVsProductionSeparation": "The command requires explicit --environment staging|production and the production proof used ambitions-source-atlas-prod with a validation-only prefix distinct from staging and stable public channel paths.",
+    "credentialHandling": {
+      "credentialValuesCommitted": false,
+      "credentialValuesPrinted": false,
+      "envNamesObservedOnly": [
+        "CLOUDFLARE_API_TOKEN",
+        "CLOUDFLARE_R2_ACCESS_KEY_ID",
+        "CLOUDFLARE_R2_SECRET_ACCESS_KEY"
+      ],
+      "wranglerWhoami": true
+    }
+  },
+  "allowedPrefixes": [
+    "source-atlas/v1/validation/amb-1429/releases/",
+    "source-atlas/v1/validation/amb-1429/channels/",
+    "source-atlas/v1/validation/amb-1429/revocations/",
+    "source-atlas/v1/validation/amb-1429/last-known-good/"
+  ],
+  "objectKeyShape": [
+    "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/manifest.json",
+    "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/packs/<pack>.json",
+    "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/schemas/<schema>.json",
+    "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/shards/<shard>.json",
+    "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/<registry>.json",
+    "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/provenance/<receipt>.json",
+    "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/freshness-manifest.json",
+    "source-atlas/v1/validation/amb-1429/channels/stable/manifest.json",
+    "source-atlas/v1/validation/amb-1429/revocations/source-atlas-r2-ops-proof-2026-06-27-stable.json",
+    "source-atlas/v1/validation/amb-1429/last-known-good/stable.json"
+  ],
+  "artifactClassesAllowed": [
+    "public release manifest",
+    "public foundry pack",
+    "public schema",
+    "public shard",
+    "public registry",
+    "public provenance receipt",
+    "public freshness manifest",
+    "public revocation manifest",
+    "public last-known-good manifest"
+  ],
+  "artifactClassesForbidden": [
+    "private life graph",
+    "goals",
+    "captures",
+    "schedules",
+    "capacity",
+    "Life Capital",
+    "proof payloads",
+    "receipt payloads",
+    "behavior history",
+    "inferred priorities",
+    "user IDs",
+    "access tokens",
+    "refresh tokens",
+    "account secrets"
+  ],
+  "testArtifacts": {
+    "fixtureRoot": "tools/source-atlas/fixtures/r2/operations",
+    "fixtures": [
+      "current-manifest.json",
+      "stale-manifest.json",
+      "stale-critical-manifest.json",
+      "revoked-manifest.json",
+      "last-known-good-manifest.json",
+      "checksum-fixture.json",
+      "invalid/invalid-private-key-fixture.json",
+      "invalid/invalid-private-payload-fixture.json"
+    ]
+  },
+  "operations": [
+    {
+      "mode": "dry-run",
+      "command": "python3 tools/source-atlas/source-atlas-foundry.py r2-operations-proof --mode dry-run --environment production --bundle-root /tmp/ambitions-source-atlas-r2-ops-proof/source-atlas-r2-ops-proof-2026-06-27-stable --bucket ambitions-source-atlas-prod --prefix source-atlas/v1/validation/amb-1429 --channel stable",
+      "status": "Yellow",
+      "result": "planned 16 uploads without executing"
+    },
+    {
+      "mode": "upload-public-reference-artifact",
+      "command": "python3 tools/source-atlas/source-atlas-foundry.py r2-operations-proof --mode upload-public-reference-artifact --environment production --bundle-root /tmp/ambitions-source-atlas-r2-ops-proof/source-atlas-r2-ops-proof-2026-06-27-stable --bucket ambitions-source-atlas-prod --prefix source-atlas/v1/validation/amb-1429 --channel stable --execute --confirm-public-reference-only",
+      "status": "Green",
+      "result": "16 remote uploads succeeded"
+    },
+    {
+      "mode": "readback",
+      "command": "python3 tools/source-atlas/source-atlas-foundry.py r2-operations-proof --mode readback --environment production --bundle-root /tmp/ambitions-source-atlas-r2-ops-proof/source-atlas-r2-ops-proof-2026-06-27-stable --bucket ambitions-source-atlas-prod --prefix source-atlas/v1/validation/amb-1429 --channel stable --execute --confirm-public-reference-only --readback-root /tmp/ambitions-source-atlas-r2-ops-proof-readback",
+      "status": "Green",
+      "result": "14 remote release/channel objects read back"
+    },
+    {
+      "mode": "verify-checksum",
+      "status": "Passed",
+      "result": "14 of 14 readback checksums matched"
+    },
+    {
+      "mode": "verify-object-key-privacy",
+      "status": "Passed",
+      "result": "object_key_privacy passed with no issues"
+    },
+    {
+      "mode": "verify-manifest",
+      "status": "Passed",
+      "result": "bundle_manifest, payload_privacy, and manifest_privacy passed"
+    },
+    {
+      "mode": "revoke",
+      "status": "Green",
+      "result": "revocation manifest uploaded to production proof prefix"
+    },
+    {
+      "mode": "read-last-known-good",
+      "status": "Green",
+      "result": "last-known-good manifest read back from production proof prefix"
+    },
+    {
+      "mode": "rollback-select",
+      "status": "Passed",
+      "result": "stale-critical candidate selected last-known-good"
+    }
+  ],
+  "privacyProof": {
+    "objectKeyPrivacyPassed": true,
+    "payloadPrivacyPassed": true,
+    "manifestPrivacyPassed": true,
+    "logRedactionPassed": true,
+    "checksumReadbackPassed": true,
+    "readbackChecksumCount": 14,
+    "revocationBehaviorPassed": true,
+    "lastKnownGoodBehaviorPassed": true,
+    "rollbackSelectBehaviorPassed": true,
+    "forbiddenPrivateFieldsRejectedByFixtures": true
+  },
+  "rollbackPlan": {
+    "remote": "Use the validation-only prefix as the rollback boundary; production stable channel paths were not changed. Remove or ignore source-atlas/v1/validation/amb-1429 objects if cleanup is required.",
+    "source": "Revert AMB-1429 branch changes to remove the command, fixtures, and evidence docs."
+  },
+    "validation": {
+        "requiredValidationStatus": "passed",
+        "commandsPassed": [
+            "git diff --check",
+            "bash scripts/ci/ambitions-pr-review-local.sh --continue",
+            "python3 scripts/ambitions-green-standard-audit.py",
+            "python3 scripts/source-atlas-boundary-audit.py",
+            "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+            "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+            "python3 -m pytest tools/source-atlas/foundry/tests/test_foundry.py tools/source-atlas/foundry/tests/test_boundary.py",
+            "semgrep scan --config .semgrep/ambitions-source-atlas.yml --error",
+            "python3 scripts/ci/ambitions-no-weak-implementation-scan.py",
+            "python3 tools/source-atlas/source-atlas-foundry.py r2-operations-proof --mode dry-run --environment production --bundle-root /tmp/ambitions-source-atlas-r2-ops-proof/source-atlas-r2-ops-proof-2026-06-27-stable --bucket ambitions-source-atlas-prod --prefix source-atlas/v1/validation/amb-1429 --channel stable --output /tmp/ambitions-source-atlas-r2-ops-proof-evidence/dry-run-final-validation.json"
+        ],
+        "validationNotRun": []
+    },
+  "nonClaims": [
+    "not account readiness",
+    "not release readiness",
+    "not privacy/legal approval",
+    "not known issue closure",
+    "not complete Source Atlas project Green",
+    "not complete app runtime Green",
+    "not TestFlight readiness",
+    "not App Store readiness"
+  ]
+}

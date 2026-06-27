@@ -1,0 +1,16 @@
+{
+  "expectedValid": true,
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.r2ChecksumFixture",
+    "dataClass": "public_provenance",
+    "objectKey": "source-atlas/v1/releases/source-atlas-public-reference-current/manifest.json",
+    "sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+    "bytes": 1024,
+    "privacyBoundary": "public/reference/freshness only; no private life graph or private user context",
+    "nonClaims": [
+      "not account readiness",
+      "not release readiness"
+    ]
+  }
+}

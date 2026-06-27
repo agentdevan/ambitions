@@ -1,0 +1,22 @@
+{
+  "expectedValid": true,
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.lastKnownGoodManifest",
+    "id": "lkg.synthetic.public_reference",
+    "channel": "production",
+    "versionID": "source-atlas-public-reference-current",
+    "dataClass": "public_freshness",
+    "state": "last_known_good_candidate",
+    "manifest": {
+      "path": "manifest.json",
+      "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "bytes": 512
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph or private user context",
+    "nonClaims": [
+      "not account readiness",
+      "not release readiness"
+    ]
+  }
+}
