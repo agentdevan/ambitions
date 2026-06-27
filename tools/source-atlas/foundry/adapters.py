@@ -36,6 +36,7 @@ class FetchResult:
     status: int
     content_type: str
     body: bytes
+    headers: dict[str, str] | None = None
 
 
 def default_fetch(url: str, headers: dict[str, str] | None = None, max_bytes: int = DEFAULT_MAX_BYTES) -> FetchResult:
@@ -81,6 +82,7 @@ def _fetch_once(url: str, request_headers: dict[str, str], max_bytes: int) -> Fe
             status=getattr(response, "status", 200),
             content_type=response.headers.get("content-type", "application/octet-stream"),
             body=body,
+            headers={key.lower(): value for key, value in response.headers.items()},
         )
 
 
@@ -185,7 +187,11 @@ def _harvest_source(
         if source_id == "onet.database":
             return _harvest_onet(source, run_root, raw_dir, limit, fetcher)
         if source_id == "bls.public.data.api":
-            return _harvest_bls(source, run_root, raw_dir, fetcher)
+            return _harvest_bls(source, run_root, raw_dir, fetcher, env)
+        if source_id == "wikidata.structured_crosswalk":
+            return _harvest_wikidata(source, run_root, raw_dir, limit, fetcher)
+        if source_id == "openalex.works":
+            return _harvest_openalex(source, run_root, raw_dir, limit, fetcher, env)
         if source_id == "usajobs.search":
             return _harvest_usajobs(source, run_root, raw_dir, limit, fetcher, env)
         if source_id == "data.gov.catalog":
@@ -241,7 +247,12 @@ def _write_raw(run_root: Path, path: Path, result: FetchResult) -> dict[str, Any
 def _redact_url(url: str) -> str:
     parsed = urllib.parse.urlsplit(url)
     query = [
-        (key, "[redacted]" if key.lower() in {"api_key", "key", "token"} else value)
+        (
+            key,
+            "[redacted]"
+            if key.lower() in {"api_key", "key", "token", "registrationkey", "registration_key", "authorization-key", "mailto", "email"}
+            else value,
+        )
         for key, value in urllib.parse.parse_qsl(parsed.query, keep_blank_values=True)
     ]
     return urllib.parse.urlunsplit((parsed.scheme, parsed.netloc, parsed.path, urllib.parse.urlencode(query), parsed.fragment))
@@ -558,7 +569,7 @@ def _sanitize_row(row: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
-def _harvest_bls(source: dict[str, Any], run_root: Path, raw_dir: Path, fetcher: Fetcher) -> dict[str, Any]:
+def _harvest_bls(source: dict[str, Any], run_root: Path, raw_dir: Path, fetcher: Fetcher, env: dict[str, str]) -> dict[str, Any]:
     series = [
         {
             "seriesID": "OEUN000000000000000000001",
@@ -567,8 +578,14 @@ def _harvest_bls(source: dict[str, Any], run_root: Path, raw_dir: Path, fetcher:
     ]
     record = _base_record(source, "harvested", "official_bls_public_api")
     normalized_records = []
+    key = env.get("BLS_API_KEY", "")
+    api_mode = "v2_key" if key else "v1_no_key"
     for item in series:
-        url = f"https://api.bls.gov/publicAPI/v2/timeseries/data/{urllib.parse.quote(item['seriesID'])}"
+        if key:
+            query = urllib.parse.urlencode({"registrationkey": key})
+            url = f"https://api.bls.gov/publicAPI/v2/timeseries/data/{urllib.parse.quote(item['seriesID'])}?{query}"
+        else:
+            url = f"https://api.bls.gov/publicAPI/v1/timeseries/data/{urllib.parse.quote(item['seriesID'])}"
         result = fetcher(url, None, DEFAULT_MAX_BYTES)
         record["rawArtifacts"].append(_write_raw(run_root, raw_dir / source["id"] / f"{item['seriesID']}.json", result))
         data = json.loads(result.body.decode("utf-8", errors="replace"))
@@ -586,10 +603,153 @@ def _harvest_bls(source: dict[str, Any], run_root: Path, raw_dir: Path, fetcher:
     record["records"] = normalized_records
     record["freshnessSignals"] = {
         "cadence": source["freshnessCadence"],
-        "api": "BLS Public Data API v2",
+        "api": "BLS Public Data API",
+        "mode": api_mode,
+        "keySource": "BLS_API_KEY" if key else None,
+        "missingKeyDoesNotBlockNoKeyMode": not bool(key),
         "seriesIDs": [item["seriesID"] for item in series],
     }
     return record
+
+
+def _harvest_wikidata(source: dict[str, Any], run_root: Path, raw_dir: Path, limit: int, fetcher: Fetcher) -> dict[str, Any]:
+    queries = ["occupation", "skill", "credential"]
+    record = _base_record(source, "harvested", "official_wikidata_entity_crosswalk")
+    records: list[dict[str, Any]] = []
+    entity_limit = max(1, min(limit, 5))
+    for query in queries:
+        params = urllib.parse.urlencode(
+            {
+                "action": "wbsearchentities",
+                "search": query,
+                "language": "en",
+                "format": "json",
+                "limit": str(entity_limit),
+                "type": "item",
+                "origin": "*",
+            }
+        )
+        url = f"https://www.wikidata.org/w/api.php?{params}"
+        result = fetcher(url, {"Accept": "application/json"}, DEFAULT_MAX_BYTES)
+        artifact_name = f"{re.sub(r'[^a-z0-9]+', '-', query.lower()).strip('-')}.json"
+        record["rawArtifacts"].append(_write_raw(run_root, raw_dir / source["id"] / artifact_name, result))
+        data = json.loads(result.body.decode("utf-8", errors="replace"))
+        records.extend(_normalize_wikidata_records(data, query, entity_limit))
+    record["records"] = records
+    record["freshnessSignals"] = {
+        "cadence": source["freshnessCadence"],
+        "api": "Wikidata Action API wbsearchentities",
+        "mode": "entity_lookup_crosswalk",
+        "queryCap": len(queries),
+        "perQueryLimit": entity_limit,
+        "timeoutSeconds": DEFAULT_TIMEOUT_SECONDS,
+        "regulatedAuthorityAllowed": False,
+        "useBoundary": "structured crosswalk only; not a regulated requirement authority",
+    }
+    return record
+
+
+def _normalize_wikidata_records(data: dict[str, Any], query: str, limit: int) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for item in data.get("search", [])[:limit]:
+        entity_id = item.get("id")
+        records.append(
+            {
+                "recordType": "wikidata_entity_crosswalk",
+                "query": query,
+                "entityID": entity_id,
+                "label": item.get("label"),
+                "description": item.get("description"),
+                "conceptURI": f"https://www.wikidata.org/entity/{entity_id}" if entity_id else item.get("concepturi"),
+                "repository": "wikidata",
+                "crosswalkOnly": True,
+                "regulatedAuthorityAllowed": False,
+            }
+        )
+    return records
+
+
+def _harvest_openalex(
+    source: dict[str, Any],
+    run_root: Path,
+    raw_dir: Path,
+    limit: int,
+    fetcher: Fetcher,
+    env: dict[str, str],
+) -> dict[str, Any]:
+    queries = ["occupational requirements", "skills training"]
+    api_key = env.get("OPENALEX_API_KEY", "")
+    high_volume_approved = env.get("SOURCE_ATLAS_OPENALEX_HIGH_VOLUME_APPROVED", "").lower() in {"1", "true", "yes"}
+    per_page = max(1, min(limit, 10 if api_key else 3))
+    if limit > per_page and not high_volume_approved:
+        return _blocked_record(source, "openalex_high_volume_run_requires_explicit_budget_approval", ["SOURCE_ATLAS_OPENALEX_HIGH_VOLUME_APPROVED"])
+
+    record = _base_record(source, "harvested", "official_openalex_api")
+    records: list[dict[str, Any]] = []
+    rate_headers: list[dict[str, Any]] = []
+    for query in queries:
+        params: dict[str, str] = {
+            "search": query,
+            "per-page": str(per_page),
+            "select": "id,display_name,publication_year,type,cited_by_count,ids,authorships,primary_location,open_access",
+        }
+        if api_key:
+            params["api_key"] = api_key
+        if env.get("OPENALEX_MAILTO"):
+            params["mailto"] = env["OPENALEX_MAILTO"]
+        url = f"https://api.openalex.org/works?{urllib.parse.urlencode(params)}"
+        result = fetcher(url, {"Accept": "application/json"}, DEFAULT_MAX_BYTES)
+        artifact_name = f"{re.sub(r'[^a-z0-9]+', '-', query.lower()).strip('-')}.json"
+        record["rawArtifacts"].append(_write_raw(run_root, raw_dir / source["id"] / artifact_name, result))
+        rate_headers.append(_openalex_rate_limit_headers(result.headers or {}))
+        data = json.loads(result.body.decode("utf-8", errors="replace"))
+        records.extend(_normalize_openalex_records(data, query, per_page))
+
+    record["records"] = records
+    record["freshnessSignals"] = {
+        "cadence": source["freshnessCadence"],
+        "api": "OpenAlex Works API",
+        "mode": "keyed_budget" if api_key else "no_key_low_budget",
+        "keySource": "OPENALEX_API_KEY" if api_key else None,
+        "queryCap": len(queries),
+        "perRunCap": len(queries) * per_page,
+        "rateLimitHeaders": rate_headers,
+        "highVolumeApproved": high_volume_approved,
+        "highVolumeRequiresExplicitApproval": True,
+    }
+    return record
+
+
+def _normalize_openalex_records(data: dict[str, Any], query: str, limit: int) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
+    for item in data.get("results", [])[:limit]:
+        location = item.get("primary_location") if isinstance(item.get("primary_location"), dict) else {}
+        source = location.get("source") if isinstance(location.get("source"), dict) else {}
+        ids = item.get("ids") if isinstance(item.get("ids"), dict) else {}
+        records.append(
+            {
+                "recordType": "openalex_work_metadata",
+                "query": query,
+                "openalexID": item.get("id"),
+                "title": item.get("display_name"),
+                "publicationYear": item.get("publication_year"),
+                "type": item.get("type"),
+                "citedByCount": item.get("cited_by_count"),
+                "doi": ids.get("doi"),
+                "sourceDisplayName": source.get("display_name"),
+            }
+        )
+    return records
+
+
+def _openalex_rate_limit_headers(headers: dict[str, str]) -> dict[str, str | None]:
+    lowered = {key.lower(): value for key, value in headers.items()}
+    return {
+        "ratelimit-limit": lowered.get("ratelimit-limit"),
+        "ratelimit-remaining": lowered.get("ratelimit-remaining"),
+        "ratelimit-reset": lowered.get("ratelimit-reset"),
+        "retry-after": lowered.get("retry-after"),
+    }
 
 
 def _harvest_usajobs(

@@ -9,11 +9,18 @@ from typing import Any
 
 from . import __version__
 from .adapters import ADAPTER_VERSION, harvest_sources
+from .api_governance import validate_api_governance, write_api_governance_report
 from .boundary_audit import audit_bundle, audit_fixture_root, audit_r2_plan, merge_results
-from .broad_occupational_foundation import build_broad_occupational_foundation, promote_broad_occupation_pack_proof
+from .broad_occupational_foundation import (
+    build_broad_occupational_foundation,
+    promote_broad_occupation_pack_proof,
+    run_stable_promote_proof,
+    write_stable_promotion_report,
+)
 from .certification import ADAPTER_CERTIFICATIONS, certify_registry, certified_source_records
 from .compiler import compile_bundle
 from .coverage_benchmark import coverage_diff, run_golden_benchmarks
+from .legal_readiness import build_terms_registry, write_legal_review_packet
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, write_json
 from .publisher import build_r2_plan, execute_r2_plan, write_r2_plan
 from .public_reference_adapters import emit_all_adapter_fixtures, run_all_adapters
@@ -121,23 +128,28 @@ def main(argv: list[str] | None = None) -> int:
     live_parser.add_argument("--timeout", type=float, default=20.0)
 
     broad_parser = sub.add_parser("broad-occupation-pack")
-    broad_parser.add_argument("action", nargs="?", choices=["generate", "promote-proof"], default="generate")
+    broad_parser.add_argument("action", nargs="?", choices=["generate", "promote-proof", "stable-promote-proof"], default="generate")
     broad_parser.add_argument("--output-root", default="tools/source-atlas/generated")
     broad_parser.add_argument("--docs-root", default="docs/qa/source-atlas")
     broad_parser.add_argument("--pack-root", default="tools/source-atlas/generated/broad-occupational-foundation")
     broad_parser.add_argument("--dry-run", action="store_true")
     broad_parser.add_argument("--r2-validation-prefix", default="source-atlas/v1/validation/adapter-train-01")
+    broad_parser.add_argument("--source-prefix")
+    broad_parser.add_argument("--stable-prefix")
+    broad_parser.add_argument("--require-owner-approval", action="store_true")
     broad_parser.add_argument("--require-terms-green", action="store_true")
     broad_parser.add_argument("--require-privacy-green", action="store_true")
     broad_parser.add_argument("--require-checksums", action="store_true")
     broad_parser.add_argument("--require-revocation", action="store_true")
     broad_parser.add_argument("--require-lkg", action="store_true")
+    broad_parser.add_argument("--require-rollback", action="store_true")
     broad_parser.add_argument("--emit-evidence")
     broad_parser.add_argument("--execute", action="store_true")
     broad_parser.add_argument("--bucket")
     broad_parser.add_argument("--channel", default="validation")
     broad_parser.add_argument("--readback-root")
     broad_parser.add_argument("--confirm-public-reference-only", action="store_true")
+    broad_parser.add_argument("--markdown")
 
     reconcile_parser = sub.add_parser("green-reconciliation")
     reconcile_parser.add_argument("--emit-evidence", default="docs/qa/source-atlas/adapter-broad-coverage-green-reconciliation.json")
@@ -146,6 +158,16 @@ def main(argv: list[str] | None = None) -> int:
     reconcile_parser.add_argument("--coverage-ledger", default="docs/qa/source-atlas/source-atlas-coverage-ledger.json")
     reconcile_parser.add_argument("--promotion-proof", default="docs/qa/source-atlas/broad-occupation-pack-promotion-proof.json")
     reconcile_parser.add_argument("--production-r2-proof", default="docs/qa/source-atlas/production-r2-operations-proof.json")
+
+
+    legal_review_parser = sub.add_parser("legal-review-readiness")
+    legal_review_parser.add_argument("--markdown", default="docs/qa/source-atlas/source-atlas-legal-review-readiness.md")
+    legal_review_parser.add_argument("--json", default="docs/qa/source-atlas/source-atlas-legal-review-readiness.json")
+
+    api_governance_parser = sub.add_parser("api-governance-check")
+    api_governance_parser.add_argument("--config", default="tools/source-atlas/config/source_api_governance.json")
+    api_governance_parser.add_argument("--emit-evidence")
+    api_governance_parser.add_argument("--markdown")
 
     harvest_parser = sub.add_parser("harvest")
     harvest_parser.add_argument("--output-root", required=True)
@@ -252,8 +274,23 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "terms-registry":
         result = terms_registry_artifact()
         result["validation"] = validate_terms_registry()
+        result["legalReadiness"] = build_terms_registry()
+        result["valid"] = result["validation"]["valid"] and result["legalReadiness"]["valid"]
         print_json(result)
-        return 0 if result["validation"]["valid"] else 1
+        return 0 if result["valid"] else 1
+    if args.command == "legal-review-readiness":
+        result = write_legal_review_packet(Path(args.markdown), Path(args.json))
+        print_json(result)
+        return 0 if result["termsRegistryStatus"] == "Green" else 1
+    if args.command == "api-governance-check":
+        config_path = Path(args.config)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/source-atlas-api-rate-governance.json")
+            result = write_api_governance_report(Path(args.markdown), json_path, config_path)
+        else:
+            result = validate_api_governance(config_path, output_path=Path(args.emit_evidence) if args.emit_evidence else None)
+        print_json(result)
+        return 0 if result["valid"] else 1
     if args.command == "terms-review":
         result = build_terms_distribution_review(Path("docs/qa/source-atlas/source-terms-distribution-review.json"))
         print_json(result)
@@ -284,6 +321,40 @@ def main(argv: list[str] | None = None) -> int:
         print_json(result)
         return 0 if result["status"] == "Green" else 1
     if args.command == "broad-occupation-pack":
+        if args.action == "stable-promote-proof":
+            if args.dry_run == args.execute:
+                parser.error("broad-occupation-pack stable-promote-proof requires exactly one of --dry-run or --execute")
+            missing = [
+                name
+                for name, value in {
+                    "--bucket": args.bucket,
+                    "--source-prefix": args.source_prefix,
+                    "--stable-prefix": args.stable_prefix,
+                    "--emit-evidence": args.emit_evidence,
+                }.items()
+                if not value
+            ]
+            if missing:
+                parser.error("broad-occupation-pack stable-promote-proof missing required flags: " + ", ".join(missing))
+            result = run_stable_promote_proof(
+                dry_run=args.dry_run,
+                execute=args.execute,
+                bucket=args.bucket,
+                source_prefix=args.source_prefix,
+                stable_prefix=args.stable_prefix,
+                require_owner_approval=args.require_owner_approval,
+                require_terms_green=args.require_terms_green,
+                require_privacy_green=args.require_privacy_green,
+                require_checksums=args.require_checksums,
+                require_revocation=args.require_revocation,
+                require_lkg=args.require_lkg,
+                require_rollback=args.require_rollback,
+                emit_evidence=Path(args.emit_evidence),
+            )
+            if args.markdown:
+                write_stable_promotion_report(Path(args.markdown), Path(args.emit_evidence), result)
+            print_json(result)
+            return 0 if result["status"] in {"Green", "Yellow"} else 1
         if args.action == "promote-proof":
             emit_evidence = Path(args.emit_evidence or "docs/qa/source-atlas/broad-occupation-pack-promotion-proof.json")
             result = promote_broad_occupation_pack_proof(

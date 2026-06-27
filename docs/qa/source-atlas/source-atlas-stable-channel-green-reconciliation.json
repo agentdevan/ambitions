@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.stableChannelGreenReconciliation",
+  "createdAt": "2026-06-27T16:39:17Z",
+  "status": "Green",
+  "finalVerdict": "Green for this train because owner-completed technical legal-readiness review is recorded, outside legal approval is not falsely claimed, stable promotion executed successfully, API governance is installed and tested, high-volume OpenAlex is gated, BLS v2 is optional/gated, USAJOBS remains blocked, and Source Atlas privacy validation passed.",
+  "legalReadiness": {
+    "status": "Owner-completed technical legal-readiness review; outside legal approval not claimed.",
+    "outsideLegalApprovalClaimed": false,
+    "outsideLegalApprovalStatus": "outside legal approval not claimed",
+    "ownerLegalReadinessReviewStatus": "completed_owner_acceptance",
+    "illegalFindingsFound": false,
+    "illegalFindingsReconciled": true,
+    "evidence": [
+      "docs/qa/source-atlas/source-atlas-legal-review-readiness.md",
+      "docs/qa/source-atlas/source-atlas-legal-review-readiness.json"
+    ]
+  },
+  "ownerLegalAcceptance": {
+    "ownerAcceptanceResult": "technical legal-readiness review completed for this train",
+    "externalLegalApprovalResult": "not available; not claimed"
+  },
+  "illegalFindingsReconciliation": {
+    "illegalFindings": [],
+    "illegalFindingsFound": false,
+    "illegalFindingsReconciled": true,
+    "reconciledRiskFindings": [
+      "USAJOBS remains blocked from redistributable and R2-ready pack output unless written OPM USAJOBS approval exists",
+      "Wikidata remains structured-data crosswalk only and cannot become regulated requirement authority",
+      "OpenAlex high-volume use is gated by explicit budget and approval controls",
+      "O*NET remains packable only with attribution, license, version, USDOL/ETA credit, and modification notice where applicable",
+      "BLS v1 no-key lane remains allowed; BLS v2 is optional and gated by BLS_API_KEY and API governance"
+    ]
+  },
+  "stableChannelPromotion": {
+    "status": "Green",
+    "dryRun": true,
+    "executeRun": true,
+    "ownerApprovalProvided": true,
+    "executedVersionID": "broad-occupational-foundation-20260627T163539Z",
+    "stablePrefix": "source-atlas/v1/stable/broad-occupational-foundation",
+    "sourcePrefix": "source-atlas/v1/validation/amb-1430",
+    "evidence": [
+      "docs/qa/source-atlas/source-atlas-stable-channel-promotion.md",
+      "docs/qa/source-atlas/source-atlas-stable-channel-promotion.json",
+      "docs/qa/source-atlas/source-atlas-stable-channel-promotion-execute.md",
+      "docs/qa/source-atlas/source-atlas-stable-channel-promotion-execute.json",
+      "docs/qa/source-atlas/source-atlas-stable-channel-promotion-dry-run.json"
+    ],
+    "checksPassed": [
+      "generated_from_broad_foundation",
+      "bundle_validation",
+      "usajobs_absent",
+      "restricted_review_required_absent",
+      "terms_green",
+      "source_plan_matches_stable_content",
+      "stable_plan_public_reference_safe",
+      "object_key_privacy",
+      "payload_manifest_privacy",
+      "checksums",
+      "revocation",
+      "last_known_good",
+      "rollback_select",
+      "stable_manifest_required_fields"
+    ]
+  },
+  "apiGovernance": {
+    "status": "Green",
+    "config": "tools/source-atlas/config/source_api_governance.json",
+    "evidence": [
+      "docs/qa/source-atlas/source-atlas-api-rate-governance.md",
+      "docs/qa/source-atlas/source-atlas-api-rate-governance.json"
+    ],
+    "openAlexHighVolumeGated": true,
+    "blsV2KeyModeOptional": true,
+    "blsV1NoKeyModeAllowed": true,
+    "wikidataCrosswalkOnly": true,
+    "usajobsPackAndR2Blocked": true
+  },
+  "sourceLaneDecisions": {
+    "onet": "packable only with CC BY attribution, license link, O*NET version, USDOL/ETA credit, and modification notice where applicable",
+    "bls": "v1 public/no-key lane allowed; v2 key mode optional and governed",
+    "wikidata": "structured data crosswalk only; not regulated requirement authority",
+    "openalex": "budgeted public/reference scholarly metadata only; high-volume requires explicit approval",
+    "usajobs_restricted": "blocked from redistributable and R2-ready output without written OPM USAJOBS approval"
+  },
+  "r2ProofOutput": {
+    "stableDryRunStatus": "Yellow",
+    "stableExecuteStatus": "Green",
+    "objectUploadReadbackChecksumRevocationLkgRollbackProofClaimedAsExecuted": true,
+    "dryRunEvidence": "docs/qa/source-atlas/source-atlas-stable-channel-promotion-dry-run.json",
+    "executeEvidence": "docs/qa/source-atlas/source-atlas-stable-channel-promotion-execute.json"
+  },
+  "validationCommands": [
+    {"command": "git diff --check", "status": "passed"},
+    {"command": "bash scripts/ci/ambitions-pr-review-local.sh --continue", "status": "passed"},
+    {"command": "python3 scripts/ambitions-green-standard-audit.py", "status": "passed"},
+    {"command": "python3 scripts/source-atlas-boundary-audit.py", "status": "passed"},
+    {"command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py", "status": "passed"},
+    {"command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests", "status": "passed", "testCount": 66},
+    {"command": "python3 tools/source-atlas/coverage-ledger.py", "status": "passed"},
+    {"command": "python3 tools/source-atlas/source-atlas-foundry.py terms-registry", "status": "passed"},
+    {"command": "python3 tools/source-atlas/source-atlas-foundry.py api-governance-check", "status": "passed"},
+    {"command": "python3 tools/source-atlas/source-atlas-foundry.py broad-occupation-pack stable-promote-proof --dry-run --bucket ambitions-source-atlas-prod --source-prefix source-atlas/v1/validation/amb-1430 --stable-prefix source-atlas/v1/stable/broad-occupational-foundation --require-owner-approval --require-terms-green --require-privacy-green --require-checksums --require-revocation --require-lkg --require-rollback --emit-evidence docs/qa/source-atlas/source-atlas-stable-channel-promotion-dry-run.json", "status": "passed_yellow_dry_run"},
+    {"command": "SOURCE_ATLAS_STABLE_PROMOTION_OWNER_APPROVED=approved python3 tools/source-atlas/source-atlas-foundry.py broad-occupation-pack stable-promote-proof --execute --bucket ambitions-source-atlas-prod --source-prefix source-atlas/v1/validation/amb-1430 --stable-prefix source-atlas/v1/stable/broad-occupational-foundation --require-owner-approval --require-terms-green --require-privacy-green --require-checksums --require-revocation --require-lkg --require-rollback --emit-evidence docs/qa/source-atlas/source-atlas-stable-channel-promotion-execute.json --markdown docs/qa/source-atlas/source-atlas-stable-channel-promotion-execute.md", "status": "passed_green_execute"}
+  ],
+  "validationNotRun": [
+    "outside legal review was not performed or claimed"
+  ],
+  "nonClaims": [
+    "not outside legal approval",
+    "not release readiness",
+    "not App Store readiness",
+    "not account readiness",
+    "not known issue closure",
+    "not complete app runtime Green",
+    "not full Source Atlas Green",
+    "not final user paths",
+    "not schedules",
+    "not Step lists",
+    "not personalized plans",
+    "not unbounded OpenAlex high-volume approval"
+  ],
+  "rollbackPlan": "Use last-known-good and rollback-select proof; do not overwrite stable channel when privacy, checksum, revocation, or stale-critical checks fail. Revert this train's code/docs/config changes if governance or adapter behavior must be removed."
+}
