@@ -3,14 +3,23 @@
 from __future__ import annotations
 
 import json
+import os
+import re
 import hashlib
 import shutil
 import subprocess
 import tempfile
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from .boundary import boundary_issue_strings, boundary_issues_for_value, object_key_issues
+from .compiler import compile_bundle
+from .legal_readiness import build_terms_registry
+from .publisher import build_r2_plan
+from .r2_contracts import build_last_known_good_manifest, build_revocation_manifest
+from .r2_operations_proof import run_r2_operations_proof
+from .registry import SOURCE_REGISTRY
+from .validator import validate_bundle
 from .adapter_sdk import output_checksum
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, file_sha256, read_json, stable_id, utc_now, write_json
 from .public_reference_adapters import SCENARIOS, emit_all_adapter_fixtures, review_queue_items, run_all_adapters
@@ -879,3 +888,701 @@ def _non_claims() -> list[str]:
         "does not create Step lists",
         *NON_CLAIMS,
     ]
+
+
+# Stable-channel promotion proof for the main Source Atlas channel.
+BROAD_OCCUPATIONAL_FOUNDATION_SOURCE_IDS = ["onet.database", "bls.public.data.api"]
+BROAD_OCCUPATIONAL_FOUNDATION_PATHWAY = {
+    "id": "pathway.occupation.broad_occupational_foundation",
+    "title": "Broad occupational foundation reference pack",
+    "domain": "occupation",
+    "sourceIDs": BROAD_OCCUPATIONAL_FOUNDATION_SOURCE_IDS,
+    "requirements": [
+        {
+            "id": "requirement.broad_occupation.onet_reference",
+            "claimID": "claim.broad_occupation.onet_public_reference",
+            "gateType": "public_reference_context",
+            "structuredRule": {
+                "type": "occupation_skill_task_context",
+                "source": "O*NET",
+                "runtimeUse": "reference_enrichment_only",
+            },
+        },
+        {
+            "id": "requirement.broad_occupation.bls_reference",
+            "claimID": "claim.broad_occupation.bls_public_reference",
+            "gateType": "public_reference_context",
+            "structuredRule": {
+                "type": "labor_market_context",
+                "source": "BLS",
+                "runtimeUse": "reference_enrichment_only",
+            },
+        },
+    ],
+    "claims": [
+        {
+            "id": "claim.broad_occupation.onet_public_reference",
+            "text": "O*NET provides public occupational reference data for occupations, skills, tasks, preparation, and transfer context.",
+            "claimType": "public_reference_source_scope",
+            "state": "source_backed",
+            "freshness": "release_watch",
+            "sourceIDs": ["onet.database"],
+        },
+        {
+            "id": "claim.broad_occupation.bls_public_reference",
+            "text": "BLS public data provides labor-market reference statistics for occupational context.",
+            "claimType": "public_reference_source_scope",
+            "state": "source_backed",
+            "freshness": "current",
+            "sourceIDs": ["bls.public.data.api"],
+        },
+    ],
+    "skillAtoms": [
+        "occupation_context",
+        "skill_transfer_context",
+        "task_context",
+        "training_context",
+        "labor_market_context",
+        "reference_source_inspection",
+    ],
+    "milestones": [
+        {
+            "id": "broad_occupation.reference_inspection",
+            "title": "Inspect public occupation sources",
+            "purpose": "Expose source-backed occupation context when useful.",
+            "output": "public reference source inspection state",
+        },
+        {
+            "id": "broad_occupation.transfer_context",
+            "title": "Compare transferable skill context",
+            "purpose": "Support local-only path comparison with public reference structure.",
+            "output": "public reference transfer context",
+        },
+    ],
+    "alternatePaths": [
+        {
+            "id": "alternate.related_occupation_context",
+            "title": "Related occupation context",
+            "sharedSkillAtoms": ["occupation_context", "skill_transfer_context", "labor_market_context"],
+        }
+    ],
+}
+
+
+def build_broad_occupational_foundation_bundle(
+    output_root: Path,
+    version_id: str | None = None,
+    *,
+    stable_prefix: str = "source-atlas/v1/stable/broad-occupational-foundation",
+    source_registry: list[dict[str, Any]] | None = None,
+    pathway: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    registry = source_registry or _registry_slice(BROAD_OCCUPATIONAL_FOUNDATION_SOURCE_IDS)
+    selected_pathway = pathway or BROAD_OCCUPATIONAL_FOUNDATION_PATHWAY
+    version = version_id or _default_version_id()
+    result = compile_bundle(
+        output_root,
+        version,
+        "stable",
+        source_registry=registry,
+        pathway_seeds=[selected_pathway],
+    )
+    bundle_root = Path(result["bundleRoot"])
+    _install_stable_manifest(bundle_root, registry, stable_prefix)
+    result["manifestSHA256"] = file_sha256(bundle_root / "manifest.json")
+    result["stableManifestInstalled"] = True
+    result["sourceIDs"] = [source["id"] for source in registry]
+    return result
+
+
+def run_stable_promote_proof(
+    *,
+    dry_run: bool,
+    execute: bool,
+    bucket: str,
+    source_prefix: str,
+    stable_prefix: str,
+    require_owner_approval: bool,
+    require_terms_green: bool,
+    require_privacy_green: bool,
+    require_checksums: bool,
+    require_revocation: bool,
+    require_lkg: bool,
+    require_rollback: bool,
+    emit_evidence: Path | None = None,
+    env: dict[str, str] | None = None,
+    source_registry: list[dict[str, Any]] | None = None,
+    pathway: dict[str, Any] | None = None,
+    post_build_mutator: Callable[[Path], None] | None = None,
+) -> dict[str, Any]:
+    runtime_env = os.environ if env is None else env
+    issues: list[str] = []
+    if dry_run == execute:
+        issues.append("exactly one of dry_run or execute must be true")
+    owner_approved = _owner_approved(runtime_env)
+    if execute and require_owner_approval and not owner_approved:
+        issues.append("stable promotion execution requires owner approval evidence")
+
+    with tempfile.TemporaryDirectory(prefix="ambitions-source-atlas-stable-") as tmp:
+        bundle_result = build_broad_occupational_foundation_bundle(
+            Path(tmp),
+            stable_prefix=stable_prefix,
+            source_registry=source_registry,
+            pathway=pathway,
+        )
+        bundle_root = Path(bundle_result["bundleRoot"])
+        if post_build_mutator:
+            post_build_mutator(bundle_root)
+
+        source_plan = build_r2_plan(bundle_root, bucket, source_prefix, "validation")
+        stable_plan = build_r2_plan(bundle_root, bucket, stable_prefix, "stable")
+        terms = build_terms_registry(included_source_ids=_source_ids_from_bundle(bundle_root))
+        validation = validate_bundle(bundle_root)
+        revocation = build_revocation_manifest(bundle_root)
+        lkg = build_last_known_good_manifest(bundle_root, "stable")
+
+        dry_run_proof = run_r2_operations_proof(
+            mode="dry-run",
+            environment="production",
+            bundle_root=bundle_root,
+            bucket=bucket,
+            prefix=stable_prefix,
+            channel="stable",
+            env=runtime_env,
+        )
+        object_key_proof = run_r2_operations_proof(
+            mode="verify-object-key-privacy",
+            environment="production",
+            bundle_root=bundle_root,
+            bucket=bucket,
+            prefix=stable_prefix,
+            channel="stable",
+            env=runtime_env,
+        )
+        manifest_proof = run_r2_operations_proof(
+            mode="verify-manifest",
+            environment="production",
+            bundle_root=bundle_root,
+            bucket=bucket,
+            prefix=stable_prefix,
+            channel="stable",
+            env=runtime_env,
+        )
+        checksum_proof = run_r2_operations_proof(
+            mode="verify-checksum",
+            environment="production",
+            bundle_root=bundle_root,
+            bucket=bucket,
+            prefix=stable_prefix,
+            channel="stable",
+            env=runtime_env,
+        )
+        stale_candidate = Path(tmp) / "stale-critical-candidate.json"
+        write_json(
+            stale_candidate,
+            {
+                "schemaVersion": 1,
+                "kind": "ambitions.sourceAtlas.freshnessManifest",
+                "dataClass": "public_freshness",
+                "claimStateBuckets": [{"state": "stale_critical", "claimIDs": ["claim.broad_occupation.synthetic"]}],
+            },
+        )
+        rollback_proof = run_r2_operations_proof(
+            mode="rollback-select",
+            environment="production",
+            bundle_root=bundle_root,
+            bucket=bucket,
+            prefix=stable_prefix,
+            channel="stable",
+            candidate_manifest_path=stale_candidate,
+            env=runtime_env,
+        )
+
+        checks = _promotion_checks(
+            bundle_root=bundle_root,
+            source_plan=source_plan,
+            stable_plan=stable_plan,
+            terms=terms,
+            validation=validation,
+            revocation=revocation,
+            lkg=lkg,
+            object_key_proof=object_key_proof,
+            manifest_proof=manifest_proof,
+            checksum_proof=checksum_proof,
+            rollback_proof=rollback_proof,
+            require_terms_green=require_terms_green,
+            require_privacy_green=require_privacy_green,
+            require_checksums=require_checksums,
+            require_revocation=require_revocation,
+            require_lkg=require_lkg,
+            require_rollback=require_rollback,
+        )
+        issues.extend(issue for check in checks if not check["passed"] for issue in check["issues"])
+
+        execution_proofs: list[dict[str, Any]] = []
+        if execute and not issues:
+            execution_proofs = _execute_stable_promotion(
+                bundle_root,
+                bucket,
+                stable_prefix,
+                runtime_env,
+                require_checksums=require_checksums,
+                require_revocation=require_revocation,
+                require_lkg=require_lkg,
+                require_rollback=require_rollback,
+            )
+            for proof in execution_proofs:
+                if not _execution_proof_passed(proof):
+                    issues.append(f"execute proof {proof.get('mode')} did not pass")
+
+        stable_manifest = read_json(bundle_root / "manifest.json").get("stableManifest", {})
+        result = {
+            "schemaVersion": 1,
+            "kind": "ambitions.sourceAtlas.stableChannelPromotion",
+            "createdAt": utc_now(),
+            "status": _status_for_promotion(issues, execute),
+            "dryRun": dry_run,
+            "executeRequested": execute,
+            "executed": bool(execution_proofs) and not issues,
+            "bucket": bucket,
+            "sourcePrefix": source_prefix.strip("/"),
+            "stablePrefix": stable_prefix.strip("/"),
+            "ownerApproval": {
+                "required": require_owner_approval,
+                "approved": owner_approved,
+                "executionAllowed": bool(execute and owner_approved),
+            },
+            "bundle": {
+                "versionID": bundle_result["versionID"],
+                "bundleRoot": "<ephemeral>",
+                "manifestSHA256": file_sha256(bundle_root / "manifest.json"),
+                "sourceIDs": _source_ids_from_bundle(bundle_root),
+                "packCount": validation.get("packCount"),
+            },
+            "stableManifest": stable_manifest,
+            "sourcePlan": _plan_summary(source_plan),
+            "stablePlan": _plan_summary(stable_plan),
+            "checks": checks,
+            "issues": sorted(set(issues)),
+            "dryRunProof": _proof_summary(dry_run_proof),
+            "objectKeyProof": _proof_summary(object_key_proof),
+            "manifestProof": _proof_summary(manifest_proof),
+            "checksumProof": _proof_summary(checksum_proof),
+            "revocationProof": _manifest_summary(revocation),
+            "lastKnownGoodProof": _manifest_summary(lkg),
+            "rollbackProof": _proof_summary(rollback_proof),
+            "executionProofs": [_proof_summary(proof) for proof in execution_proofs],
+            "existingStableChannelPolicy": {
+                "mustNotOverwriteWithoutRollbackEvidence": True,
+                "rollbackBoundaryPassed": _rollback_selected_lkg(rollback_proof),
+                "dryRunDoesNotOverwrite": dry_run,
+            },
+            "privacyBoundary": PRIVACY_BOUNDARY,
+            "nonClaims": NON_CLAIMS
+            + [
+                "not outside legal approval",
+                "not App Store readiness",
+                "not release readiness",
+                "not account readiness",
+                "not known issue closure",
+                "not complete app runtime Green",
+                "not full Source Atlas Green",
+                "does not create final user paths",
+                "does not create schedules",
+                "does not create Step lists",
+                "does not create personalized plans",
+            ],
+        }
+
+    if emit_evidence:
+        write_json(emit_evidence, result)
+    return result
+
+
+def stable_promotion_markdown(evidence: dict[str, Any]) -> str:
+    lines = [
+        "# Source Atlas Stable Channel Promotion",
+        "",
+        f"Status: {evidence['status']}",
+        "",
+        f"Dry run: {evidence['dryRun']}",
+        f"Executed: {evidence['executed']}",
+        f"Source prefix: `{evidence['sourcePrefix']}`",
+        f"Stable prefix: `{evidence['stablePrefix']}`",
+        "",
+        "## Checks",
+        "",
+        "| Check | Passed | Issues |",
+        "|---|---:|---|",
+    ]
+    for check in evidence.get("checks", []):
+        issue_text = "<br>".join(check.get("issues", []))
+        lines.append(f"| {check['name']} | {check['passed']} | {issue_text} |")
+    lines.extend(
+        [
+            "",
+            "## Non-Claims",
+            "",
+            *[f"- {claim}" for claim in evidence["nonClaims"]],
+            "",
+        ]
+    )
+    return "\n".join(lines)
+
+
+def write_stable_promotion_report(markdown_path: Path, evidence_path: Path, evidence: dict[str, Any]) -> None:
+    write_json(evidence_path, evidence)
+    markdown_path.parent.mkdir(parents=True, exist_ok=True)
+    markdown_path.write_text(stable_promotion_markdown(evidence), encoding="utf-8")
+
+
+def _execute_stable_promotion(
+    bundle_root: Path,
+    bucket: str,
+    stable_prefix: str,
+    env: dict[str, str],
+    *,
+    require_checksums: bool,
+    require_revocation: bool,
+    require_lkg: bool,
+    require_rollback: bool,
+) -> list[dict[str, Any]]:
+    readback_root = Path(tempfile.mkdtemp(prefix="ambitions-source-atlas-readback-"))
+    proofs = [
+        run_r2_operations_proof(
+            mode="upload-public-reference-artifact",
+            environment="production",
+            bundle_root=bundle_root,
+            bucket=bucket,
+            prefix=stable_prefix,
+            channel="stable",
+            execute=True,
+            confirm_public_reference_only=True,
+            env=env,
+        ),
+        run_r2_operations_proof(
+            mode="readback",
+            environment="production",
+            bundle_root=bundle_root,
+            bucket=bucket,
+            prefix=stable_prefix,
+            channel="stable",
+            readback_root=readback_root,
+            execute=True,
+            confirm_public_reference_only=True,
+            env=env,
+        ),
+    ]
+    if require_checksums:
+        proofs.append(
+            run_r2_operations_proof(
+                mode="verify-checksum",
+                environment="production",
+                bundle_root=bundle_root,
+                bucket=bucket,
+                prefix=stable_prefix,
+                channel="stable",
+                readback_root=readback_root,
+                execute=True,
+                confirm_public_reference_only=True,
+                env=env,
+            )
+        )
+    if require_revocation:
+        proofs.append(
+            run_r2_operations_proof(
+                mode="revoke",
+                environment="production",
+                bundle_root=bundle_root,
+                bucket=bucket,
+                prefix=stable_prefix,
+                channel="stable",
+                execute=True,
+                confirm_public_reference_only=True,
+                env=env,
+            )
+        )
+    if require_lkg:
+        proofs.append(
+            run_r2_operations_proof(
+                mode="read-last-known-good",
+                environment="production",
+                bundle_root=bundle_root,
+                bucket=bucket,
+                prefix=stable_prefix,
+                channel="stable",
+                execute=True,
+                confirm_public_reference_only=True,
+                env=env,
+            )
+        )
+    if require_rollback:
+        proofs.append(
+            run_r2_operations_proof(
+                mode="rollback-select",
+                environment="production",
+                bundle_root=bundle_root,
+                bucket=bucket,
+                prefix=stable_prefix,
+                channel="stable",
+                execute=True,
+                confirm_public_reference_only=True,
+                env=env,
+            )
+        )
+    return proofs
+
+
+def _promotion_checks(
+    *,
+    bundle_root: Path,
+    source_plan: dict[str, Any],
+    stable_plan: dict[str, Any],
+    terms: dict[str, Any],
+    validation: dict[str, Any],
+    revocation: dict[str, Any],
+    lkg: dict[str, Any],
+    object_key_proof: dict[str, Any],
+    manifest_proof: dict[str, Any],
+    checksum_proof: dict[str, Any],
+    rollback_proof: dict[str, Any],
+    require_terms_green: bool,
+    require_privacy_green: bool,
+    require_checksums: bool,
+    require_revocation: bool,
+    require_lkg: bool,
+    require_rollback: bool,
+) -> list[dict[str, Any]]:
+    source_ids = _source_ids_from_bundle(bundle_root)
+    return [
+        _check("generated_from_broad_foundation", set(source_ids) == set(BROAD_OCCUPATIONAL_FOUNDATION_SOURCE_IDS), [f"sourceIDs were {source_ids}"]),
+        _check("bundle_validation", validation.get("valid") is True, validation.get("issues", [])),
+        _check("usajobs_absent", "usajobs.search" not in source_ids and not _bundle_contains(bundle_root, "usajobs.search"), ["USAJOBS records are present"]),
+        _check("restricted_review_required_absent", not _restricted_or_review_required_markers(bundle_root), _restricted_or_review_required_markers(bundle_root)),
+        _check("terms_green", (not require_terms_green) or terms.get("valid") is True, terms.get("issues", [])),
+        _check("source_plan_matches_stable_content", _plan_checksums(source_plan) == _plan_checksums(stable_plan), ["source and stable plan checksums differ"]),
+        _check("stable_plan_public_reference_safe", stable_plan.get("validForUpload") is True, stable_plan.get("objectKeyIssues", []) + stable_plan.get("validation", {}).get("issues", [])),
+        _check("object_key_privacy", _proof_check_passed(object_key_proof, "object_key_privacy"), _proof_check_issues(object_key_proof, "object_key_privacy")),
+        _check("payload_manifest_privacy", (not require_privacy_green) or _privacy_checks_passed(manifest_proof), _privacy_check_issues(manifest_proof)),
+        _check("checksums", (not require_checksums) or _checksums_passed(checksum_proof), ["checksum verification failed"]),
+        _check("revocation", (not require_revocation) or revocation.get("valid") is True, revocation.get("issues", [])),
+        _check("last_known_good", (not require_lkg) or lkg.get("valid") is True, lkg.get("issues", [])),
+        _check("rollback_select", (not require_rollback) or _rollback_selected_lkg(rollback_proof), ["rollback proof did not select last-known-good for stale-critical candidate"]),
+        _check("stable_manifest_required_fields", _stable_manifest_has_required_fields(bundle_root), ["stable manifest missing required fields"]),
+    ]
+
+
+def _check(name: str, passed: bool, issues: list[str]) -> dict[str, Any]:
+    return {"name": name, "passed": bool(passed), "issues": [] if passed else issues}
+
+
+def _registry_slice(source_ids: list[str]) -> list[dict[str, Any]]:
+    lookup = {source["id"]: source for source in SOURCE_REGISTRY}
+    return [lookup[source_id] for source_id in source_ids]
+
+
+def _default_version_id() -> str:
+    safe_time = re.sub(r"[^0-9TZ]", "", utc_now())
+    return f"broad-occupational-foundation-{safe_time}"
+
+
+def _install_stable_manifest(bundle_root: Path, registry: list[dict[str, Any]], stable_prefix: str) -> None:
+    manifest_path = bundle_root / "manifest.json"
+    manifest = read_json(manifest_path)
+    content_basis = {
+        "versionID": manifest.get("versionID"),
+        "packIndex": manifest.get("packIndex", []),
+        "schemaIndex": manifest.get("schemaIndex", []),
+        "shardIndex": manifest.get("shardIndex", []),
+        "registryIndex": manifest.get("registryIndex", []),
+        "freshnessManifest": manifest.get("freshnessManifest"),
+        "receipt": manifest.get("receipt"),
+    }
+    manifest["stableManifest"] = {
+        "versionID": manifest.get("versionID"),
+        "channel": "stable",
+        "stablePrefix": stable_prefix.strip("/"),
+        "timestamp": utc_now(),
+        "checksum": stable_id("stable_manifest_content", content_basis).split(".", 1)[1],
+        "sourceRegistrySlice": [
+            {
+                "id": source["id"],
+                "title": source["title"],
+                "publisher": source["publisher"],
+                "url": source["url"],
+                "authorityTier": source["authorityTier"],
+                "freshnessCadence": source["freshnessCadence"],
+                "adapter": source["adapter"],
+                "lastReviewed": source["lastReviewed"],
+            }
+            for source in registry
+        ],
+        "licenseSlice": [
+            {"sourceID": source["id"], "license": source["license"]}
+            for source in registry
+        ],
+        "nonClaims": NON_CLAIMS
+        + [
+            "not outside legal approval",
+            "not release readiness",
+            "not account readiness",
+            "does not create final user paths",
+            "does not create schedules",
+            "does not create Step lists",
+            "does not create personalized plans",
+        ],
+    }
+    write_json(manifest_path, manifest)
+
+
+def _source_ids_from_bundle(bundle_root: Path) -> list[str]:
+    source_registry = read_json(bundle_root / "registries" / "source-registry.json")
+    return [source["id"] for source in source_registry.get("sources", [])]
+
+
+def _bundle_contains(bundle_root: Path, text: str) -> bool:
+    needle = text.lower()
+    for path in bundle_root.rglob("*.json"):
+        if needle in path.read_text(encoding="utf-8", errors="replace").lower():
+            return True
+    return False
+
+
+def _restricted_or_review_required_markers(bundle_root: Path) -> list[str]:
+    findings: list[str] = []
+    for path in bundle_root.rglob("*.json"):
+        value = read_json(path)
+        _collect_restricted_markers(value, path.relative_to(bundle_root).as_posix(), "$", findings)
+    return findings
+
+
+def _collect_restricted_markers(value: Any, label: str, path: str, findings: list[str]) -> None:
+    if isinstance(value, dict):
+        for key, child in value.items():
+            child_path = f"{path}.{key}"
+            if key in {"reviewStatus", "sourceState", "termsStatus", "approvalStatus"} and str(child).lower() in {"review-required", "review_required", "restricted"}:
+                findings.append(f"{label}:{child_path}: restricted or review-required marker {child}")
+            _collect_restricted_markers(child, label, child_path, findings)
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            _collect_restricted_markers(child, label, f"{path}[{index}]", findings)
+
+
+def _plan_checksums(plan: dict[str, Any]) -> list[str]:
+    return sorted(obj["sha256"] for obj in plan.get("objects", []) if obj.get("relativePath") != "manifest.json" or "/channels/" not in obj.get("objectKey", ""))
+
+
+def _proof_check_passed(proof: dict[str, Any], name: str) -> bool:
+    for check in proof.get("checks", []):
+        if check.get("name") == name:
+            return check.get("passed") is True
+    for result in proof.get("operation", {}).get("results", []):
+        if result.get("name") == name:
+            return result.get("passed") is True
+    return False
+
+
+def _proof_check_issues(proof: dict[str, Any], name: str) -> list[str]:
+    issues: list[str] = []
+    for check in proof.get("checks", []):
+        if check.get("name") == name:
+            issues.extend(check.get("issues", []))
+    for result in proof.get("operation", {}).get("results", []):
+        if result.get("name") == name:
+            issues.extend(result.get("issues", []))
+    return issues or [f"{name} did not pass"]
+
+
+def _privacy_checks_passed(proof: dict[str, Any]) -> bool:
+    return all(_proof_check_passed(proof, name) for name in ["bundle_manifest", "manifest_privacy", "payload_privacy"])
+
+
+def _privacy_check_issues(proof: dict[str, Any]) -> list[str]:
+    issues: list[str] = []
+    for name in ["bundle_manifest", "manifest_privacy", "payload_privacy"]:
+        if not _proof_check_passed(proof, name):
+            issues.extend(_proof_check_issues(proof, name))
+    return issues
+
+
+def _checksums_passed(proof: dict[str, Any]) -> bool:
+    results = proof.get("operation", {}).get("results", [])
+    return bool(results) and all(result.get("localChecksumPassed") is True for result in results)
+
+
+def _readback_checksums_passed(proof: dict[str, Any]) -> bool:
+    results = proof.get("operation", {}).get("results", [])
+    return bool(results) and all(result.get("readbackChecksumPassed") is True for result in results)
+
+
+def _rollback_selected_lkg(proof: dict[str, Any]) -> bool:
+    results = proof.get("operation", {}).get("results", [])
+    return bool(results) and results[0].get("selected") == "last-known-good" and results[0].get("passed") is True
+
+
+def _rollback_selection_passed(proof: dict[str, Any]) -> bool:
+    results = proof.get("operation", {}).get("results", [])
+    return bool(results) and results[0].get("selected") in {"candidate", "last-known-good"} and results[0].get("passed") is True
+
+
+def _execution_proof_passed(proof: dict[str, Any]) -> bool:
+    mode = proof.get("mode")
+    operation = proof.get("operation", {})
+    if mode in {"upload-public-reference-artifact", "readback", "revoke", "read-last-known-good"}:
+        return proof.get("status") == "Green" and operation.get("success") is True
+    if mode == "verify-checksum":
+        return _checksums_passed(proof) and _readback_checksums_passed(proof)
+    if mode == "rollback-select":
+        return _rollback_selection_passed(proof)
+    return proof.get("status") == "Green"
+
+
+def _stable_manifest_has_required_fields(bundle_root: Path) -> bool:
+    stable = read_json(bundle_root / "manifest.json").get("stableManifest", {})
+    required = ["versionID", "checksum", "timestamp", "sourceRegistrySlice", "licenseSlice", "nonClaims"]
+    return all(stable.get(field) for field in required)
+
+
+def _manifest_summary(value: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "kind": value.get("kind"),
+        "valid": value.get("valid"),
+        "issues": value.get("issues", []),
+        "versionID": value.get("versionID"),
+        "channel": value.get("channel"),
+    }
+
+
+def _proof_summary(proof: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "kind": proof.get("kind"),
+        "status": proof.get("status"),
+        "mode": proof.get("mode"),
+        "operation": proof.get("operation"),
+        "checks": proof.get("checks", []),
+        "blockedReasons": proof.get("blockedReasons", []),
+        "logRedaction": proof.get("logRedaction"),
+    }
+
+
+def _plan_summary(plan: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "prefix": plan.get("prefix"),
+        "channel": plan.get("channel"),
+        "validForUpload": plan.get("validForUpload"),
+        "objectCount": len(plan.get("objects", [])),
+        "objectKeyIssues": plan.get("objectKeyIssues", []),
+        "sha256": stable_id("r2_plan_checksums", _plan_checksums(plan)).split(".", 1)[1],
+    }
+
+
+def _status_for_promotion(issues: list[str], execute: bool) -> str:
+    if issues:
+        return "Red"
+    if execute:
+        return "Green"
+    return "Yellow"
+
+
+def _owner_approved(env: dict[str, str]) -> bool:
+    return env.get("SOURCE_ATLAS_STABLE_PROMOTION_OWNER_APPROVED", "").lower() in {"1", "true", "yes", "approved"}

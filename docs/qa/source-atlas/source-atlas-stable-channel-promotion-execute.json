@@ -1,0 +1,1378 @@
+{
+  "bucket": "ambitions-source-atlas-prod",
+  "bundle": {
+    "bundleRoot": "<ephemeral>",
+    "manifestSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+    "packCount": 1,
+    "sourceIDs": [
+      "onet.database",
+      "bls.public.data.api"
+    ],
+    "versionID": "broad-occupational-foundation-20260627T163539Z"
+  },
+  "checks": [
+    {
+      "issues": [],
+      "name": "generated_from_broad_foundation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "bundle_validation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "usajobs_absent",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "restricted_review_required_absent",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "terms_green",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_plan_matches_stable_content",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "stable_plan_public_reference_safe",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "object_key_privacy",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "payload_manifest_privacy",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "checksums",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "revocation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "last_known_good",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "rollback_select",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "stable_manifest_required_fields",
+      "passed": true
+    }
+  ],
+  "checksumProof": {
+    "blockedReasons": [],
+    "checks": [
+      {
+        "issues": [],
+        "name": "bundle_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "object_key_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "payload_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "manifest_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "promotion_gate",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "revocation_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "last_known_good_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      }
+    ],
+    "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+    "logRedaction": {
+      "issues": [],
+      "passed": true
+    },
+    "mode": "verify-checksum",
+    "operation": {
+      "dryRun": true,
+      "executeRequested": false,
+      "executed": false,
+      "mode": "verify-checksum",
+      "results": [
+        {
+          "actualLocalSHA256": "5a84b8a216cc6457a2697b6f3fbf4b6bc8facf0e0efb6b401d6e84f764438a20",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "5a84b8a216cc6457a2697b6f3fbf4b6bc8facf0e0efb6b401d6e84f764438a20",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "369e3b3a2865e18b7658528e777ddcc839865bb61ce55e8f11631a2703f0e466",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "369e3b3a2865e18b7658528e777ddcc839865bb61ce55e8f11631a2703f0e466",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "c90ebf391710b8659802b0d478045c7560466ba00e20c6253a276d535c0310a0",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "c90ebf391710b8659802b0d478045c7560466ba00e20c6253a276d535c0310a0",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "d0c25cfd9db62b1a794334e45a438c8d0e38f2bf3ec3b9152f2d0f27af68c613",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "d0c25cfd9db62b1a794334e45a438c8d0e38f2bf3ec3b9152f2d0f27af68c613",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "c69c5a24f0a753e25a97608658060b5341217612a5c2898fe5cba0ba64830709",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "c69c5a24f0a753e25a97608658060b5341217612a5c2898fe5cba0ba64830709",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "dc2a8f7bad6d6802346aa1c01e8bd9fe17fe56ab35a396bc4c8c0a329ec87f5d",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "dc2a8f7bad6d6802346aa1c01e8bd9fe17fe56ab35a396bc4c8c0a329ec87f5d",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json",
+          "readbackChecksumPassed": null
+        },
+        {
+          "actualLocalSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+          "actualReadbackSHA256": null,
+          "expectedSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+          "localChecksumPassed": true,
+          "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json",
+          "readbackChecksumPassed": null
+        }
+      ]
+    },
+    "status": "Yellow"
+  },
+  "createdAt": "2026-06-27T16:36:53Z",
+  "dryRun": false,
+  "dryRunProof": {
+    "blockedReasons": [],
+    "checks": [
+      {
+        "issues": [],
+        "name": "bundle_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "object_key_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "payload_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "manifest_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "promotion_gate",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "revocation_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "last_known_good_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      }
+    ],
+    "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+    "logRedaction": {
+      "issues": [],
+      "passed": true
+    },
+    "mode": "dry-run",
+    "operation": {
+      "dryRun": true,
+      "executeRequested": false,
+      "executed": false,
+      "mode": "dry-run",
+      "results": [
+        {
+          "bucket": "ambitions-source-atlas-prod",
+          "generatedManifestUploads": [
+            "revocation",
+            "last-known-good"
+          ],
+          "operation": "upload-public-reference-artifact",
+          "prefix": "source-atlas/v1/stable/broad-occupational-foundation",
+          "wouldUploadObjectCount": 14
+        },
+        {
+          "operation": "readback",
+          "wouldReadObjectCount": 12
+        },
+        {
+          "operation": "verify-checksum",
+          "wouldVerifyObjectCount": 12
+        },
+        {
+          "operation": "verify-object-key-privacy",
+          "passed": true
+        },
+        {
+          "operation": "verify-manifest",
+          "validForUpload": true
+        },
+        {
+          "operation": "revoke",
+          "revocationValid": true
+        },
+        {
+          "lastKnownGoodValid": true,
+          "operation": "read-last-known-good"
+        },
+        {
+          "operation": "rollback-select",
+          "wouldSelect": "candidate-unless-manifest-invalid-or-stale-critical"
+        }
+      ]
+    },
+    "status": "Yellow"
+  },
+  "executeRequested": true,
+  "executed": true,
+  "executionProofs": [
+    {
+      "blockedReasons": [],
+      "checks": [
+        {
+          "issues": [],
+          "name": "bundle_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "object_key_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "payload_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "manifest_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "promotion_gate",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "revocation_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "last_known_good_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        }
+      ],
+      "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+      "logRedaction": {
+        "issues": [],
+        "passed": true
+      },
+      "mode": "upload-public-reference-artifact",
+      "operation": {
+        "dryRun": false,
+        "executeRequested": true,
+        "executed": true,
+        "mode": "upload-public-reference-artifact",
+        "results": [
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0\n────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "generatedManifest": "revocation",
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163539Z.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163539Z.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          },
+          {
+            "generatedManifest": "last-known-good",
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/last-known-good/stable.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/last-known-good/stable.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          }
+        ],
+        "success": true
+      },
+      "status": "Green"
+    },
+    {
+      "blockedReasons": [],
+      "checks": [
+        {
+          "issues": [],
+          "name": "bundle_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "object_key_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "payload_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "manifest_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "promotion_gate",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "revocation_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "last_known_good_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        }
+      ],
+      "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+      "logRedaction": {
+        "issues": [],
+        "passed": true
+      },
+      "mode": "readback",
+      "operation": {
+        "dryRun": false,
+        "executeRequested": true,
+        "executed": true,
+        "mode": "readback",
+        "results": [
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json",
+            "readbackPath": "<readback-root>/freshness-manifest.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json",
+            "readbackPath": "<readback-root>/manifest.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json",
+            "readbackPath": "<readback-root>/pack.occupation.broad_occupational_foundation.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json",
+            "readbackPath": "<readback-root>/receipt.source_atlas_foundry.d00f519b9ffce479.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json",
+            "readbackPath": "<readback-root>/coverage-manifest.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json",
+            "readbackPath": "<readback-root>/entity-registry.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json",
+            "readbackPath": "<readback-root>/source-certification.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json",
+            "readbackPath": "<readback-root>/source-registry.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json",
+            "readbackPath": "<readback-root>/ontology-v1.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json",
+            "readbackPath": "<readback-root>/schema-descriptors-v1.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json",
+            "readbackPath": "<readback-root>/shard.source_atlas.7cc3e06975e7f067.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          },
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json",
+            "readbackPath": "<readback-root>/manifest.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          }
+        ],
+        "success": true
+      },
+      "status": "Green"
+    },
+    {
+      "blockedReasons": [],
+      "checks": [
+        {
+          "issues": [],
+          "name": "bundle_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "object_key_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "payload_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "manifest_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "promotion_gate",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "revocation_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "last_known_good_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        }
+      ],
+      "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+      "logRedaction": {
+        "issues": [],
+        "passed": true
+      },
+      "mode": "verify-checksum",
+      "operation": {
+        "dryRun": false,
+        "executeRequested": true,
+        "executed": false,
+        "mode": "verify-checksum",
+        "results": [
+          {
+            "actualLocalSHA256": "5a84b8a216cc6457a2697b6f3fbf4b6bc8facf0e0efb6b401d6e84f764438a20",
+            "actualReadbackSHA256": "5a84b8a216cc6457a2697b6f3fbf4b6bc8facf0e0efb6b401d6e84f764438a20",
+            "expectedSHA256": "5a84b8a216cc6457a2697b6f3fbf4b6bc8facf0e0efb6b401d6e84f764438a20",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+            "actualReadbackSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+            "expectedSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e",
+            "actualReadbackSHA256": "42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e",
+            "expectedSHA256": "42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "369e3b3a2865e18b7658528e777ddcc839865bb61ce55e8f11631a2703f0e466",
+            "actualReadbackSHA256": "369e3b3a2865e18b7658528e777ddcc839865bb61ce55e8f11631a2703f0e466",
+            "expectedSHA256": "369e3b3a2865e18b7658528e777ddcc839865bb61ce55e8f11631a2703f0e466",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "c90ebf391710b8659802b0d478045c7560466ba00e20c6253a276d535c0310a0",
+            "actualReadbackSHA256": "c90ebf391710b8659802b0d478045c7560466ba00e20c6253a276d535c0310a0",
+            "expectedSHA256": "c90ebf391710b8659802b0d478045c7560466ba00e20c6253a276d535c0310a0",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "d0c25cfd9db62b1a794334e45a438c8d0e38f2bf3ec3b9152f2d0f27af68c613",
+            "actualReadbackSHA256": "d0c25cfd9db62b1a794334e45a438c8d0e38f2bf3ec3b9152f2d0f27af68c613",
+            "expectedSHA256": "d0c25cfd9db62b1a794334e45a438c8d0e38f2bf3ec3b9152f2d0f27af68c613",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "c69c5a24f0a753e25a97608658060b5341217612a5c2898fe5cba0ba64830709",
+            "actualReadbackSHA256": "c69c5a24f0a753e25a97608658060b5341217612a5c2898fe5cba0ba64830709",
+            "expectedSHA256": "c69c5a24f0a753e25a97608658060b5341217612a5c2898fe5cba0ba64830709",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "dc2a8f7bad6d6802346aa1c01e8bd9fe17fe56ab35a396bc4c8c0a329ec87f5d",
+            "actualReadbackSHA256": "dc2a8f7bad6d6802346aa1c01e8bd9fe17fe56ab35a396bc4c8c0a329ec87f5d",
+            "expectedSHA256": "dc2a8f7bad6d6802346aa1c01e8bd9fe17fe56ab35a396bc4c8c0a329ec87f5d",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07",
+            "actualReadbackSHA256": "db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07",
+            "expectedSHA256": "db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15",
+            "actualReadbackSHA256": "eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15",
+            "expectedSHA256": "eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5",
+            "actualReadbackSHA256": "4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5",
+            "expectedSHA256": "4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json",
+            "readbackChecksumPassed": true
+          },
+          {
+            "actualLocalSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+            "actualReadbackSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+            "expectedSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+            "localChecksumPassed": true,
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json",
+            "readbackChecksumPassed": true
+          }
+        ]
+      },
+      "status": "Yellow"
+    },
+    {
+      "blockedReasons": [],
+      "checks": [
+        {
+          "issues": [],
+          "name": "bundle_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "object_key_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "payload_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "manifest_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "promotion_gate",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "revocation_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "last_known_good_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        }
+      ],
+      "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+      "logRedaction": {
+        "issues": [],
+        "passed": true
+      },
+      "mode": "revoke",
+      "operation": {
+        "dryRun": false,
+        "executeRequested": true,
+        "executed": true,
+        "mode": "revocation",
+        "results": [
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163539Z.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163539Z.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+            "success": true
+          }
+        ],
+        "success": true
+      },
+      "status": "Green"
+    },
+    {
+      "blockedReasons": [],
+      "checks": [
+        {
+          "issues": [],
+          "name": "bundle_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "object_key_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "payload_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "manifest_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "promotion_gate",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "revocation_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "last_known_good_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        }
+      ],
+      "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+      "logRedaction": {
+        "issues": [],
+        "passed": true
+      },
+      "mode": "read-last-known-good",
+      "operation": {
+        "dryRun": false,
+        "executeRequested": true,
+        "executed": true,
+        "mode": "last-known-good",
+        "results": [
+          {
+            "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/last-known-good/stable.json",
+            "readbackPath": "<readback-root>/last-known-good.json",
+            "returnCode": 0,
+            "stderr": "",
+            "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/stable/broad-occupational-foundation/last-known-good/stable.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+            "success": true
+          }
+        ],
+        "success": true
+      },
+      "status": "Green"
+    },
+    {
+      "blockedReasons": [],
+      "checks": [
+        {
+          "issues": [],
+          "name": "bundle_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "object_key_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "payload_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "manifest_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "promotion_gate",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "revocation_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "last_known_good_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        }
+      ],
+      "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+      "logRedaction": {
+        "issues": [],
+        "passed": true
+      },
+      "mode": "rollback-select",
+      "operation": {
+        "dryRun": false,
+        "executeRequested": true,
+        "executed": false,
+        "mode": "rollback-select",
+        "results": [
+          {
+            "candidateIssues": [],
+            "candidateStaleCritical": false,
+            "lastKnownGoodPath": "manifest.json",
+            "passed": true,
+            "reason": "candidate manifest passed privacy and stale-critical checks",
+            "selected": "candidate"
+          }
+        ]
+      },
+      "status": "Yellow"
+    }
+  ],
+  "existingStableChannelPolicy": {
+    "dryRunDoesNotOverwrite": false,
+    "mustNotOverwriteWithoutRollbackEvidence": true,
+    "rollbackBoundaryPassed": true
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.stableChannelPromotion",
+  "lastKnownGoodProof": {
+    "channel": "stable",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.lastKnownGoodManifest",
+    "valid": true,
+    "versionID": "broad-occupational-foundation-20260627T163539Z"
+  },
+  "manifestProof": {
+    "blockedReasons": [],
+    "checks": [
+      {
+        "issues": [],
+        "name": "bundle_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "object_key_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "payload_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "manifest_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "promotion_gate",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "revocation_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "last_known_good_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      }
+    ],
+    "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+    "logRedaction": {
+      "issues": [],
+      "passed": true
+    },
+    "mode": "verify-manifest",
+    "operation": {
+      "dryRun": true,
+      "executeRequested": false,
+      "executed": false,
+      "mode": "verify-manifest",
+      "results": [
+        {
+          "issues": [],
+          "name": "bundle_manifest",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "payload_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        },
+        {
+          "issues": [],
+          "name": "manifest_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        }
+      ]
+    },
+    "status": "Yellow"
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not outside legal approval",
+    "not App Store readiness",
+    "not release readiness",
+    "not account readiness",
+    "not known issue closure",
+    "not complete app runtime Green",
+    "not full Source Atlas Green",
+    "does not create final user paths",
+    "does not create schedules",
+    "does not create Step lists",
+    "does not create personalized plans"
+  ],
+  "objectKeyProof": {
+    "blockedReasons": [],
+    "checks": [
+      {
+        "issues": [],
+        "name": "bundle_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "object_key_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "payload_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "manifest_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "promotion_gate",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "revocation_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "last_known_good_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      }
+    ],
+    "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+    "logRedaction": {
+      "issues": [],
+      "passed": true
+    },
+    "mode": "verify-object-key-privacy",
+    "operation": {
+      "dryRun": true,
+      "executeRequested": false,
+      "executed": false,
+      "mode": "verify-object-key-privacy",
+      "results": [
+        {
+          "issues": [],
+          "name": "object_key_privacy",
+          "passed": true,
+          "requiredForRealOperation": true
+        }
+      ]
+    },
+    "status": "Yellow"
+  },
+  "ownerApproval": {
+    "approved": true,
+    "executionAllowed": true,
+    "required": true
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "revocationProof": {
+    "channel": null,
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.revocationManifest",
+    "valid": true,
+    "versionID": "broad-occupational-foundation-20260627T163539Z"
+  },
+  "rollbackProof": {
+    "blockedReasons": [],
+    "checks": [
+      {
+        "issues": [],
+        "name": "bundle_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "object_key_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "payload_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "manifest_privacy",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "promotion_gate",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "revocation_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      },
+      {
+        "issues": [],
+        "name": "last_known_good_manifest",
+        "passed": true,
+        "requiredForRealOperation": true
+      }
+    ],
+    "kind": "ambitions.sourceAtlas.productionR2OperationsProof",
+    "logRedaction": {
+      "issues": [],
+      "passed": true
+    },
+    "mode": "rollback-select",
+    "operation": {
+      "dryRun": true,
+      "executeRequested": false,
+      "executed": false,
+      "mode": "rollback-select",
+      "results": [
+        {
+          "candidateIssues": [],
+          "candidateStaleCritical": true,
+          "lastKnownGoodPath": "manifest.json",
+          "passed": true,
+          "reason": "candidate manifest failed privacy or stale-critical checks",
+          "selected": "last-known-good"
+        }
+      ]
+    },
+    "status": "Yellow"
+  },
+  "schemaVersion": 1,
+  "sourcePlan": {
+    "channel": "validation",
+    "objectCount": 12,
+    "objectKeyIssues": [],
+    "prefix": "source-atlas/v1/validation/amb-1430",
+    "sha256": "21fe9af230cedad6",
+    "validForUpload": true
+  },
+  "sourcePrefix": "source-atlas/v1/validation/amb-1430",
+  "stableManifest": {
+    "channel": "stable",
+    "checksum": "c09701a7302a2767",
+    "licenseSlice": [
+      {
+        "license": "CC BY 4.0 with O*NET attribution requirements",
+        "sourceID": "onet.database"
+      },
+      {
+        "license": "U.S. federal public source; cite source URL",
+        "sourceID": "bls.public.data.api"
+      }
+    ],
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not outside legal approval",
+      "not release readiness",
+      "not account readiness",
+      "does not create final user paths",
+      "does not create schedules",
+      "does not create Step lists",
+      "does not create personalized plans"
+    ],
+    "sourceRegistrySlice": [
+      {
+        "adapter": "official_onet_text_database",
+        "authorityTier": "official_occupational_database",
+        "freshnessCadence": "track O*NET production releases and Database Services current version",
+        "id": "onet.database",
+        "lastReviewed": "2026-06-25",
+        "publisher": "U.S. Department of Labor Employment and Training Administration",
+        "title": "O*NET database and Web Services",
+        "url": "https://www.onetcenter.org/database.html"
+      },
+      {
+        "adapter": "official_bls_public_api",
+        "authorityTier": "official_labor_statistics",
+        "freshnessCadence": "series-specific BLS publication schedule",
+        "id": "bls.public.data.api",
+        "lastReviewed": "2026-06-25",
+        "publisher": "U.S. Bureau of Labor Statistics",
+        "title": "BLS Public Data API",
+        "url": "https://www.bls.gov/developers/home.htm"
+      }
+    ],
+    "stablePrefix": "source-atlas/v1/stable/broad-occupational-foundation",
+    "timestamp": "2026-06-27T16:35:39Z",
+    "versionID": "broad-occupational-foundation-20260627T163539Z"
+  },
+  "stablePlan": {
+    "channel": "stable",
+    "objectCount": 12,
+    "objectKeyIssues": [],
+    "prefix": "source-atlas/v1/stable/broad-occupational-foundation",
+    "sha256": "21fe9af230cedad6",
+    "validForUpload": true
+  },
+  "stablePrefix": "source-atlas/v1/stable/broad-occupational-foundation",
+  "status": "Green"
+}

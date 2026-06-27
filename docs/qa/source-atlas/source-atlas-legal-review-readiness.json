@@ -1,0 +1,203 @@
+{
+  "createdAt": "2026-06-27T16:39:17Z",
+  "illegalFindings": [],
+  "illegalFindingsFound": false,
+  "illegalFindingsReconciled": true,
+  "kind": "ambitions.sourceAtlas.legalReviewReadiness",
+  "legalReconciliations": [
+    {
+      "finding": "USAJOBS redistribution and R2 pack approval is unproven.",
+      "id": "usajobs_restricted_block",
+      "resolution": "USAJOBS remains blocked from redistributable and R2-ready pack output unless written OPM USAJOBS approval exists.",
+      "status": "reconciled_by_blocking_pack_and_r2_modes"
+    },
+    {
+      "finding": "Wikidata authority misuse would be unsafe for regulated requirements.",
+      "id": "wikidata_authority_boundary",
+      "resolution": "Wikidata remains structured-data crosswalk only and cannot become regulated requirement authority.",
+      "status": "reconciled_by_crosswalk_only_policy"
+    },
+    {
+      "finding": "OpenAlex high-volume production use cannot be assumed unlimited.",
+      "id": "openalex_high_volume_boundary",
+      "resolution": "OpenAlex high-volume use is gated by explicit budget and approval controls.",
+      "status": "reconciled_by_api_governance_gate"
+    },
+    {
+      "finding": "O*NET redistribution requires attribution and version posture.",
+      "id": "onet_attribution_boundary",
+      "resolution": "O*NET is packable only with CC BY attribution, license link, O*NET version, USDOL/ETA credit, and modification notice where applicable.",
+      "status": "reconciled_by_required_pack_metadata"
+    },
+    {
+      "finding": "BLS v2 keyed use requires key/rate governance.",
+      "id": "bls_keyed_mode_boundary",
+      "resolution": "BLS v1 no-key lane remains allowed; BLS v2 remains optional and gated by BLS_API_KEY and API governance.",
+      "status": "reconciled_by_optional_key_mode"
+    }
+  ],
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not outside legal approval",
+    "not App Store readiness",
+    "not release readiness",
+    "not account readiness"
+  ],
+  "outsideLegalApprovalClaimed": false,
+  "outsideLegalApprovalStatus": "outside legal approval not claimed",
+  "ownerAcceptanceStatus": "owner-completed technical legal-readiness review for this train",
+  "ownerLegalReadinessReviewStatus": "completed_owner_acceptance",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "requiredLegalQuestions": [
+    "Confirm exact O*NET attribution placement for app inspection and R2 manifests.",
+    "Confirm whether modified normalized tables need per-artifact modification notices.",
+    "Confirm whether any BLS series-specific redistribution limits apply to cached pack artifacts.",
+    "Confirm attribution wording for public/reference pack manifests.",
+    "Confirm attribution expectations even when CC0 does not require attribution.",
+    "Confirm crosswalk-only boundary is sufficient for future entity matching.",
+    "Confirm high-volume metadata redistribution posture before production-scale snapshots.",
+    "Confirm required attribution fields for derived scholarly metadata packs.",
+    "Can Ambitions redistribute normalized USAJOBS announcement records in public/reference packs?",
+    "What written approval text or contract is required from OPM USAJOBS?"
+  ],
+  "riskSummary": [
+    "O*NET requires attribution, license link, version, and modification notice where applicable.",
+    "BLS v1 no-key public lane is allowed; BLS v2 is optional and key/rate governed.",
+    "Wikidata is crosswalk-only and cannot become regulated requirement authority.",
+    "OpenAlex high-volume production use is budget/rate gated.",
+    "USAJOBS remains blocked from redistributable and R2-ready pack output without written OPM USAJOBS approval."
+  ],
+  "schemaVersion": 1,
+  "sourceLanes": [
+    {
+      "allowedUse": "Packable public/reference occupation, task, skill, education, training, work-context, and transfer records.",
+      "attributionRequirements": [
+        "credit U.S. Department of Labor, Employment and Training Administration",
+        "include O*NET license link",
+        "include O*NET version or release label",
+        "include modification notice where applicable"
+      ],
+      "forbiddenUse": "No private user context, no uncredited redistribution, no final user path, no regulated decision authority.",
+      "includedInCurrentStableCandidate": false,
+      "laneID": "onet",
+      "licenseTermsPosture": "CC BY 4.0 with O*NET attribution requirements.",
+      "outsideLegalApprovalStatus": "outside legal approval not claimed",
+      "ownerAcceptanceStatus": "accepted_for_technical_terms_posture",
+      "r2PackDecision": "allowed_with_attribution_metadata",
+      "requiredLegalQuestions": [
+        "Confirm exact O*NET attribution placement for app inspection and R2 manifests.",
+        "Confirm whether modified normalized tables need per-artifact modification notices."
+      ],
+      "riskSummary": "Attribution and version labeling are mandatory before pack publication.",
+      "source": "O*NET",
+      "sourceAtlasRedistributionDecision": "packable_with_attribution",
+      "sourceIDs": [
+        "onet.database"
+      ],
+      "termsStatus": "Green"
+    },
+    {
+      "allowedUse": "BLS v1 public/no-key lane remains allowed for public/reference labor-market context.",
+      "attributionRequirements": [
+        "cite BLS source URL, series ID, and retrieval/publication context"
+      ],
+      "forbiddenUse": "No private user context, no final employment decision, no non-public data, no unstated v2 high-volume use.",
+      "includedInCurrentStableCandidate": false,
+      "laneID": "bls",
+      "licenseTermsPosture": "U.S. federal public labor statistics source; cite BLS source and series.",
+      "outsideLegalApprovalStatus": "outside legal approval not claimed",
+      "ownerAcceptanceStatus": "accepted_for_technical_terms_posture",
+      "r2PackDecision": "allowed_for_public_reference_statistics",
+      "requiredLegalQuestions": [
+        "Confirm whether any BLS series-specific redistribution limits apply to cached pack artifacts.",
+        "Confirm attribution wording for public/reference pack manifests."
+      ],
+      "riskSummary": "BLS v2 key mode is optional and requires explicit key/rate governance.",
+      "source": "BLS",
+      "sourceAtlasRedistributionDecision": "public_reference_allowed",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "termsStatus": "Green"
+    },
+    {
+      "allowedUse": "Structured data crosswalks and entity alignment only.",
+      "attributionRequirements": [
+        "record Wikidata entity IDs and retrieval timestamp when used"
+      ],
+      "forbiddenUse": "Do not use as regulated requirement authority or source of official eligibility requirements.",
+      "includedInCurrentStableCandidate": false,
+      "laneID": "wikidata",
+      "licenseTermsPosture": "CC0 structured-data posture.",
+      "outsideLegalApprovalStatus": "outside legal approval not claimed",
+      "ownerAcceptanceStatus": "accepted_for_technical_terms_posture",
+      "r2PackDecision": "allowed_only_for_cc0_structured_crosswalks",
+      "requiredLegalQuestions": [
+        "Confirm attribution expectations even when CC0 does not require attribution.",
+        "Confirm crosswalk-only boundary is sufficient for future entity matching."
+      ],
+      "riskSummary": "Authority misuse risk is the main concern; official sources must own regulated requirements.",
+      "source": "Wikidata",
+      "sourceAtlasRedistributionDecision": "crosswalk_only",
+      "sourceIDs": [
+        "wikidata.structured_crosswalk"
+      ],
+      "termsStatus": "Green"
+    },
+    {
+      "allowedUse": "Public/reference scholarly metadata discovery and citation context when budgets are explicit.",
+      "attributionRequirements": [
+        "record OpenAlex source URL, work IDs, retrieval timestamp, and API mode"
+      ],
+      "forbiddenUse": "Do not assume unlimited free high-volume production use; no private user context; no unbounded crawl.",
+      "includedInCurrentStableCandidate": false,
+      "laneID": "openalex",
+      "licenseTermsPosture": "Open scholarly metadata lane with explicit free-key, no-key, rate, and budget controls required.",
+      "outsideLegalApprovalStatus": "outside legal approval not claimed",
+      "ownerAcceptanceStatus": "accepted_for_technical_terms_posture",
+      "r2PackDecision": "allowed_only_for_budgeted_public_reference_snapshots",
+      "requiredLegalQuestions": [
+        "Confirm high-volume metadata redistribution posture before production-scale snapshots.",
+        "Confirm required attribution fields for derived scholarly metadata packs."
+      ],
+      "riskSummary": "High-volume production use requires budget, rate, retry, and failure posture approval.",
+      "source": "OpenAlex",
+      "sourceAtlasRedistributionDecision": "allowed_when_rate_budget_governed",
+      "sourceIDs": [
+        "openalex.works"
+      ],
+      "termsStatus": "Green"
+    },
+    {
+      "allowedUse": "Lookup-only, review-required source lane unless written OPM USAJOBS approval exists.",
+      "attributionRequirements": [
+        "retain OPM/USAJOBS source URL and approval evidence if approval is obtained later"
+      ],
+      "forbiddenUse": "No redistributable pack output, no R2-ready pack output, no compiled current announcement redistribution without written approval.",
+      "includedInCurrentStableCandidate": false,
+      "laneID": "usajobs_restricted",
+      "licenseTermsPosture": "Authenticated OPM USAJOBS API lane; written approval required before redistributable pack or R2 output.",
+      "outsideLegalApprovalStatus": "outside legal approval not claimed",
+      "ownerAcceptanceStatus": "accepted_blocked_posture",
+      "r2PackDecision": "blocked_without_written_opm_approval",
+      "requiredLegalQuestions": [
+        "Can Ambitions redistribute normalized USAJOBS announcement records in public/reference packs?",
+        "What written approval text or contract is required from OPM USAJOBS?"
+      ],
+      "riskSummary": "Redistribution approval is unproven; keep out of packs and R2 outputs.",
+      "source": "USAJOBS/restricted",
+      "sourceAtlasRedistributionDecision": "blocked_without_written_opm_approval",
+      "sourceIDs": [
+        "usajobs.search"
+      ],
+      "termsStatus": "Blocked"
+    }
+  ],
+  "status": "Owner-completed technical legal-readiness review; outside legal approval not claimed.",
+  "termsRegistryStatus": "Green"
+}

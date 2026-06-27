@@ -20,7 +20,7 @@ This ledger rolls up the current Source Atlas registry, product-experience scena
 
 | Layer | Current live coverage | Status ceiling | Primary evidence |
 | --- | --- | --- | --- |
-| Registry | 8 sources, 6 adapter lanes, 2 pathway seeds, 8 claims, 7 requirements | Source/tooling coverage only | `tools/source-atlas/foundry/registry.py` |
+| Registry | 10 sources, 8 adapter lanes, 2 pathway seeds, 8 claims, 7 requirements | Source/tooling coverage only | `tools/source-atlas/foundry/registry.py` |
 | Scenarios | 6 Source-related product gates; 17 M09 golden scenarios x 8 source-state variants | Scenario/contract coverage only | `docs/qa/product-experience-scenario-gates.yaml`, `tools/source-atlas/fixtures/m09/golden-benchmark-matrix.json` |
 | Source states | current, unavailable, stale, stale-critical, conflicted, revoked, unsupported, review-required | Local repair-routing proof only | `tools/source-atlas/foundry/m09_validation.py`, `tools/source-atlas/fixtures/m09/source-state-repair-fixtures.json` |
 | Claims, provenance, freshness | 8 seed claims; freshness values: selection_cycle_watch, stable_law_watch | Seed/source-record proof only | `tools/source-atlas/foundry/registry.py`, `tools/source-atlas/foundry/contracts/*` |

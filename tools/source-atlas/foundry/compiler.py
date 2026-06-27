@@ -13,8 +13,13 @@ from .schemas import ontology_v1, schema_descriptors, shard_for_pathway
 from .workbench import entity_registry_from_shards
 
 
-def _source_records(source_ids: list[str], harvest_context: dict[str, Any] | None = None) -> list[dict[str, Any]]:
-    lookup = {source["id"]: source for source in SOURCE_REGISTRY}
+def _source_records(
+    source_ids: list[str],
+    harvest_context: dict[str, Any] | None = None,
+    source_registry: list[dict[str, Any]] | None = None,
+) -> list[dict[str, Any]]:
+    registry = source_registry or SOURCE_REGISTRY
+    lookup = {source["id"]: source for source in registry}
     records: list[dict[str, Any]] = []
     harvest_records = harvest_context.get("records", {}) if harvest_context else {}
     for source_id in source_ids:
@@ -48,9 +53,15 @@ def _source_records(source_ids: list[str], harvest_context: dict[str, Any] | Non
     return records
 
 
-def _pack_for_pathway(pathway: dict[str, Any], version_id: str, created_at: str, harvest_context: dict[str, Any] | None = None) -> dict[str, Any]:
+def _pack_for_pathway(
+    pathway: dict[str, Any],
+    version_id: str,
+    created_at: str,
+    harvest_context: dict[str, Any] | None = None,
+    source_registry: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     source_ids = pathway["sourceIDs"]
-    sources = _source_records(source_ids, harvest_context)
+    sources = _source_records(source_ids, harvest_context, source_registry)
     freshness_state = _pack_freshness_state(source_ids, harvest_context)
     return {
         "schemaVersion": 1,
@@ -111,7 +122,13 @@ def _pack_for_pathway(pathway: dict[str, Any], version_id: str, created_at: str,
     }
 
 
-def source_catalog_manifest(version_id: str, created_at: str, harvest_context: dict[str, Any] | None = None) -> dict[str, Any]:
+def source_catalog_manifest(
+    version_id: str,
+    created_at: str,
+    harvest_context: dict[str, Any] | None = None,
+    source_registry: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
+    registry = source_registry or SOURCE_REGISTRY
     return {
         "schemaVersion": 1,
         "kind": "ambitions.sourceAtlas.sourceRegistry",
@@ -122,7 +139,7 @@ def source_catalog_manifest(version_id: str, created_at: str, harvest_context: d
         "logAllowed": "metadata_only",
         "fixtureAllowed": "public_synthetic_only",
         "createdAt": created_at,
-        "sources": _source_records([source["id"] for source in SOURCE_REGISTRY], harvest_context),
+        "sources": _source_records([source["id"] for source in registry], harvest_context, registry),
         "harvestRun": _harvest_manifest_summary(harvest_context),
         "automationLanes": [
             {
@@ -156,9 +173,18 @@ def source_catalog_manifest(version_id: str, created_at: str, harvest_context: d
     }
 
 
-def compile_bundle(output_root: Path, version_id: str, channel: str = "staging", harvest_root: Path | None = None) -> dict[str, Any]:
+def compile_bundle(
+    output_root: Path,
+    version_id: str,
+    channel: str = "staging",
+    harvest_root: Path | None = None,
+    source_registry: list[dict[str, Any]] | None = None,
+    pathway_seeds: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     created_at = utc_now()
     harvest_context = _load_harvest_context(harvest_root) if harvest_root else None
+    registry = source_registry or SOURCE_REGISTRY
+    pathways = pathway_seeds or PATHWAY_SEEDS
     bundle_root = output_root / version_id
     packs_dir = bundle_root / "packs"
     registries_dir = bundle_root / "registries"
@@ -169,9 +195,9 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
     packs: list[dict[str, Any]] = []
     pack_entries: list[dict[str, Any]] = []
     shard_entries: list[dict[str, Any]] = []
-    for pathway in PATHWAY_SEEDS:
-        sources = _source_records(pathway["sourceIDs"], harvest_context)
-        pack = _pack_for_pathway(pathway, version_id, created_at, harvest_context)
+    for pathway in pathways:
+        sources = _source_records(pathway["sourceIDs"], harvest_context, registry)
+        pack = _pack_for_pathway(pathway, version_id, created_at, harvest_context, registry)
         pack_path = packs_dir / f"{pack['id']}.json"
         write_json(pack_path, pack)
         pack_sha = file_sha256(pack_path)
@@ -241,7 +267,7 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
         },
     ]
 
-    source_catalog = source_catalog_manifest(version_id, created_at, harvest_context)
+    source_catalog = source_catalog_manifest(version_id, created_at, harvest_context, registry)
     source_catalog_path = registries_dir / "source-registry.json"
     write_json(source_catalog_path, source_catalog)
     registry_entries = [
@@ -253,7 +279,7 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
         }
     ]
 
-    source_certification = certify_registry()
+    source_certification = certify_registry(registry)
     source_certification["versionID"] = version_id
     source_certification["createdAt"] = created_at
     source_certification_path = registries_dir / "source-certification.json"
@@ -326,7 +352,7 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
                 "authorityTier": source["authorityTier"],
                 "harvest": source.get("harvest"),
             }
-            for source in _source_records([source["id"] for source in SOURCE_REGISTRY], harvest_context)
+            for source in _source_records([source["id"] for source in registry], harvest_context, registry)
         ],
         "harvestRun": _harvest_manifest_summary(harvest_context),
         "privacyBoundary": PRIVACY_BOUNDARY,
@@ -377,13 +403,13 @@ def compile_bundle(output_root: Path, version_id: str, channel: str = "staging",
         "inputs": [
             {
                 "id": "embedded.source_registry",
-                "count": len(SOURCE_REGISTRY),
-                "sha256": stable_id("source_registry", SOURCE_REGISTRY).split(".", 1)[1],
+                "count": len(registry),
+                "sha256": stable_id("source_registry", registry).split(".", 1)[1],
             },
             {
                 "id": "embedded.pathway_seeds",
-                "count": len(PATHWAY_SEEDS),
-                "sha256": stable_id("pathway_seeds", PATHWAY_SEEDS).split(".", 1)[1],
+                "count": len(pathways),
+                "sha256": stable_id("pathway_seeds", pathways).split(".", 1)[1],
             },
             *(
                 [
