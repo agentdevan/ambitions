@@ -373,6 +373,7 @@ def test_broad_pack_promotion_proof_upload_requires_explicit_confirmation_and_ve
         return {"success": False, "returnCode": 1, "stdout": "", "stderr": "unexpected command"}
 
     monkeypatch.setattr(broad_pack, "_run_wrangler", fake_run_wrangler)
+    monkeypatch.setattr(broad_pack.shutil, "which", lambda name: "/usr/bin/wrangler" if name == "wrangler" else None)
     proof = promote_broad_occupation_pack_proof(
         Path(result["packRoot"]),
         dry_run=False,
