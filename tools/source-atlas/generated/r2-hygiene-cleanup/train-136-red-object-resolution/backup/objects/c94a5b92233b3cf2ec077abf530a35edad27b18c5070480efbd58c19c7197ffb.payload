@@ -1,0 +1,9 @@
+{
+  "channel": "validation",
+  "dataClass": "public_freshness",
+  "manifestChecksum": "408c3981dafc545592deac1c6bef73ccf168504fdffb92d2dcbcbc5ff4806728",
+  "manifestVersionID": "source-atlas-broad-occupational-foundation-train-01",
+  "objectKey": "source-atlas/v1/validation/amb-1430/last-known-good/validation.json",
+  "present": true,
+  "publicReferenceOnly": true
+}

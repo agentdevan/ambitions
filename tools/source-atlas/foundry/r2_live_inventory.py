@@ -345,6 +345,9 @@ class R2S3Client:
     def get_object_bytes(self, object_key: str) -> bytes:
         return self._request("GET", f"/{self.bucket}/{_quote_path(object_key)}", query={})
 
+    def delete_object(self, object_key: str) -> None:
+        self._request("DELETE", f"/{self.bucket}/{_quote_path(object_key)}", query={})
+
     def _request(self, method: str, path: str, *, query: dict[str, str]) -> bytes:
         now = dt.datetime.now(dt.timezone.utc)
         amz_date = now.strftime("%Y%m%dT%H%M%SZ")

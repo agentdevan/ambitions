@@ -1,0 +1,508 @@
+{
+  "appCacheAllowed": true,
+  "dataClass": "public_ontology",
+  "entities": [
+    {
+      "ambiguity": [],
+      "atomID": "atom.c4a63f5b94614308",
+      "entityType": "skill",
+      "id": "entity.source_atlas.08904cbaeb3b4172",
+      "label": "teamwork",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.2e57d447ee54c2f8",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.0cab3d7ce418a108",
+      "label": "requirement.astronaut.stem_masters_or_equivalent",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.384067ebed794649",
+      "entityType": "skill",
+      "id": "entity.source_atlas.1d25d88d01316cf1",
+      "label": "risk_management",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.d20c9a07709cf399",
+      "entityType": "skill",
+      "id": "entity.source_atlas.23ea221ed92ee22f",
+      "label": "coalition_building",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.59b9c8052117f1c2",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.310a659e30335d81",
+      "label": "requirement.astronaut.long_duration_physical",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.e6ecc2d949a92fa1",
+      "entityType": "skill",
+      "id": "entity.source_atlas.3fec17618c117059",
+      "label": "public_speaking",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.7582139d6549c962",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.4d4e2fcfd48062d2",
+      "label": "requirement.president.natural_born_citizen",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.ecaa6ba5d9f9d116",
+      "entityType": "skill",
+      "id": "entity.source_atlas.5b69d67c97f7ae71",
+      "label": "ethical_decision_making",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.0e83c1cd106febd5",
+      "entityType": "skill",
+      "id": "entity.source_atlas.69a3ffa474a4c6b6",
+      "label": "executive_communication",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.994937136f64adea",
+      "entityType": "skill",
+      "id": "entity.source_atlas.6fd851ac13b2492d",
+      "label": "interview_readiness",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.d6a8b890848286af",
+      "entityType": "skill",
+      "id": "entity.source_atlas.7c3272267178e541",
+      "label": "systems_engineering",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.4dde84169bd7152a",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.a598beb74b8ad77f",
+      "label": "requirement.astronaut.experience_or_pic_hours",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.fa5156a3946ce651",
+      "entityType": "skill",
+      "id": "entity.source_atlas.ab526d99e490c1ce",
+      "label": "advanced_stem_reasoning",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.1e5f2e92d5ca9371",
+      "entityType": "skill",
+      "id": "entity.source_atlas.b04901cc664498d4",
+      "label": "constitutional_literacy",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.648e448768057076",
+      "entityType": "skill",
+      "id": "entity.source_atlas.b4c1f80557e6daf8",
+      "label": "campaign_operations",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.82ccb851c2437f5d",
+      "entityType": "skill",
+      "id": "entity.source_atlas.bb563124c7328076",
+      "label": "physical_readiness",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.fb20429779b29973",
+      "entityType": "skill",
+      "id": "entity.source_atlas.c11905f71fd60c17",
+      "label": "flight_or_field_operations",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.a91aeb69d3b4ca08",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.dbdfb8c686ab9c5f",
+      "label": "requirement.president.minimum_age",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.eed266794c63e384",
+      "entityType": "skill",
+      "id": "entity.source_atlas.dc8120a2f3d30738",
+      "label": "operational_discipline",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.5420c7232ee5d2a2",
+      "entityType": "skill",
+      "id": "entity.source_atlas.e8e4127a5316f293",
+      "label": "policy_reasoning",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.cdc1521852ef9b55",
+      "entityType": "skill",
+      "id": "entity.source_atlas.ee56c546df741e8c",
+      "label": "technical_communication",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.441f92735734fa23",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.ee8d12ecd8991380",
+      "label": "requirement.president.residency",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.8173e4088218a97d",
+      "entityType": "skill",
+      "id": "entity.source_atlas.f48e5406daf689fa",
+      "label": "civic_leadership",
+      "pathwayID": "pathway.civic.us_president",
+      "provenanceIDs": [
+        "provenance.62367d0828c7a8b7"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.101f65b960b13f5e",
+      "entityType": "skill",
+      "id": "entity.source_atlas.f63fac49e5f139b1",
+      "label": "leadership",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.524245e4c43a44b4",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.fa04f0ebf6817f00",
+      "label": "requirement.astronaut.us_citizen",
+      "pathwayID": "pathway.career.nasa_astronaut",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.893a34e6279b692a",
+        "provenance.c3a6d471f4d7d305",
+        "provenance.d0ed4acc3734ae3b"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection",
+        "onet.database",
+        "usajobs.search"
+      ],
+      "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+    }
+  ],
+  "entityCount": 25,
+  "fixtureAllowed": "public_synthetic_only",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.entityRegistry",
+  "logAllowed": "metadata_only",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "r2Allowed": true,
+  "schemaVersion": 1,
+  "valid": true,
+  "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+}

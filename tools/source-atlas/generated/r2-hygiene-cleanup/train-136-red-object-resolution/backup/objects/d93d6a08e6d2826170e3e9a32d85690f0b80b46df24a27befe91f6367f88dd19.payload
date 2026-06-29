@@ -1,0 +1,168 @@
+{
+  "appCacheAllowed": true,
+  "dataClass": "public_ontology",
+  "entities": [
+    {
+      "ambiguity": [],
+      "atomID": "atom.5a4cd85a1ea11c57",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.2ced76fbafb7d342",
+      "label": "requirement.broad_occupation.onet_reference",
+      "pathwayID": "pathway.occupation.broad_occupational_foundation",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.aa71212e32c8adfb"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database"
+      ],
+      "versionID": "broad-occupational-foundation-20260627T163338Z"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.838cc9ed3210ce3b",
+      "entityType": "skill",
+      "id": "entity.source_atlas.37d176a848684cb5",
+      "label": "task_context",
+      "pathwayID": "pathway.occupation.broad_occupational_foundation",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.aa71212e32c8adfb"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database"
+      ],
+      "versionID": "broad-occupational-foundation-20260627T163338Z"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.441b625d707d9d8c",
+      "entityType": "skill",
+      "id": "entity.source_atlas.39b2528df16740ee",
+      "label": "occupation_context",
+      "pathwayID": "pathway.occupation.broad_occupational_foundation",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.aa71212e32c8adfb"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database"
+      ],
+      "versionID": "broad-occupational-foundation-20260627T163338Z"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.d0e6be22a8f4f3b7",
+      "entityType": "skill",
+      "id": "entity.source_atlas.502ad540fd014391",
+      "label": "training_context",
+      "pathwayID": "pathway.occupation.broad_occupational_foundation",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.aa71212e32c8adfb"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database"
+      ],
+      "versionID": "broad-occupational-foundation-20260627T163338Z"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.2b784dff520c797d",
+      "entityType": "skill",
+      "id": "entity.source_atlas.54b0b6d8aac330d9",
+      "label": "labor_market_context",
+      "pathwayID": "pathway.occupation.broad_occupational_foundation",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.aa71212e32c8adfb"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database"
+      ],
+      "versionID": "broad-occupational-foundation-20260627T163338Z"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.ec7ae9e9e497e70b",
+      "entityType": "skill",
+      "id": "entity.source_atlas.d64f6f8eaac6572e",
+      "label": "reference_source_inspection",
+      "pathwayID": "pathway.occupation.broad_occupational_foundation",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.aa71212e32c8adfb"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database"
+      ],
+      "versionID": "broad-occupational-foundation-20260627T163338Z"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.32645271b802668d",
+      "entityType": "skill",
+      "id": "entity.source_atlas.e3c6ddcd59f58fc1",
+      "label": "skill_transfer_context",
+      "pathwayID": "pathway.occupation.broad_occupational_foundation",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.aa71212e32c8adfb"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database"
+      ],
+      "versionID": "broad-occupational-foundation-20260627T163338Z"
+    },
+    {
+      "ambiguity": [],
+      "atomID": "atom.0cdc504796bf3f37",
+      "entityType": "requirement",
+      "id": "entity.source_atlas.ed56b49fadd98dce",
+      "label": "requirement.broad_occupation.bls_reference",
+      "pathwayID": "pathway.occupation.broad_occupational_foundation",
+      "provenanceIDs": [
+        "provenance.61c0acefab93f592",
+        "provenance.aa71212e32c8adfb"
+      ],
+      "resolutionState": "resolved_public_reference_atom",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database"
+      ],
+      "versionID": "broad-occupational-foundation-20260627T163338Z"
+    }
+  ],
+  "entityCount": 8,
+  "fixtureAllowed": "public_synthetic_only",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.entityRegistry",
+  "logAllowed": "metadata_only",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "r2Allowed": true,
+  "schemaVersion": 1,
+  "valid": true,
+  "versionID": "broad-occupational-foundation-20260627T163338Z"
+}

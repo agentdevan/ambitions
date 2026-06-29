@@ -1,0 +1,101 @@
+{
+  "appCacheAllowed": true,
+  "channel": "stable",
+  "createdAt": "2026-06-27T03:55:45Z",
+  "dataClass": "public_provenance",
+  "fixtureAllowed": "public_synthetic_only",
+  "id": "receipt.source_atlas_foundry.c2222a48fbd6791b",
+  "inputs": [
+    {
+      "count": 8,
+      "id": "embedded.source_registry",
+      "sha256": "b47c3a8c3d83aea7"
+    },
+    {
+      "count": 2,
+      "id": "embedded.pathway_seeds",
+      "sha256": "e20c24ab6c702cb0"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.foundryReceipt",
+  "logAllowed": "metadata_only",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "operation": "compile_bundle",
+  "outputs": [
+    {
+      "bytes": 7298,
+      "claimCount": 3,
+      "freshnessState": "candidate",
+      "packID": "pack.civic.us_president",
+      "path": "packs/pack.civic.us_president.json",
+      "pathwayCount": 1,
+      "requirementCount": 3,
+      "sha256": "de891c5a1b1730ff56614d2efe59d0a14458345314b7c10067b4d4948c1b5de5"
+    },
+    {
+      "bytes": 12959,
+      "claimCount": 5,
+      "freshnessState": "candidate",
+      "packID": "pack.career.nasa_astronaut",
+      "path": "packs/pack.career.nasa_astronaut.json",
+      "pathwayCount": 1,
+      "requirementCount": 4,
+      "sha256": "ed1cc16042356180caa4e38b7328dca6be83be10477711c683364cd3988802fd"
+    },
+    {
+      "bytes": 1511,
+      "id": "ontology-v1",
+      "path": "schemas/ontology-v1.json",
+      "sha256": "c1d26542c6f94b75777f3ce5680adcaa2cbf8a4e06798d11b25f9c4d7a68e9c2"
+    },
+    {
+      "bytes": 8940,
+      "id": "schema-descriptors-v1",
+      "path": "schemas/schema-descriptors-v1.json",
+      "sha256": "810bcd4a33366fde05a9e0126d5561e8477f78bdb4da6daedc0e5c65976a4f41"
+    },
+    {
+      "atomCount": 11,
+      "bytes": 18079,
+      "claimCount": 3,
+      "edgeCount": 9,
+      "id": "shard.source_atlas.5de45d2342c252fc",
+      "latticeCount": 1,
+      "path": "shards/shard.source_atlas.5de45d2342c252fc.json",
+      "provenanceCount": 1,
+      "recipeCount": 1,
+      "requirementCount": 3,
+      "sha256": "fcab9952a5c36f2fe819f4f3980e07637c93b81c71253b7b8e107f6b37026160"
+    },
+    {
+      "atomCount": 14,
+      "bytes": 32868,
+      "claimCount": 5,
+      "edgeCount": 12,
+      "id": "shard.source_atlas.8da56078384ab0ca",
+      "latticeCount": 1,
+      "path": "shards/shard.source_atlas.8da56078384ab0ca.json",
+      "provenanceCount": 4,
+      "recipeCount": 1,
+      "requirementCount": 4,
+      "sha256": "6ada525631e47eec2029e9887c51dd32db7bb8bdae16c1303008783b3f77759a"
+    },
+    {
+      "bytes": 3787,
+      "id": "manifest",
+      "path": "manifest.json",
+      "sha256": "9b486fd13c72e0313fb930c3d0354dec77e86b01aa94a8e7b5353c55c1ad2529"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "r2Allowed": true,
+  "schemaVersion": 1,
+  "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+}
