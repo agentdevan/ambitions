@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -386,7 +385,7 @@ def write_report(failures: list[str], warnings: list[str], yellow_gaps: list[str
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
     lines = [
         "# VSP Provenance Audit Report\n\n",
-        f"Generated: `{datetime.now(timezone.utc).isoformat()}`\n\n",
+        "Generated: `deterministic-from-current-registry-inputs`\n\n",
         "Claim boundary: this audit checks provenance-system coherence only. It is not Code Connect, Visual Green, source implementation proof, device proof, accessibility conformance, or owner approval.\n\n",
         "## Summary\n\n",
         f"- Blocking failures: {len(failures)}\n",

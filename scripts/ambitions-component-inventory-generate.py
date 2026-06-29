@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -17,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_DIR = ROOT / "docs" / "design" / "provenance" / "generated"
 COMPONENT_OUTPUT = OUTPUT_DIR / "swift-component-inventory.generated.json"
 PATH_OUTPUT = OUTPUT_DIR / "source-path-inventory.generated.json"
+DETERMINISTIC_GENERATED_AT = "deterministic-from-current-source-inputs"
 
 SCAN_ROOTS = [
     ROOT / "Native" / "Ambitions",
@@ -142,7 +142,7 @@ def generate_component_inventory() -> dict[str, object]:
     entries = [entry for path in iter_swift_files() if (entry := inspect_swift_file(path)) is not None]
     return {
         "schema_version": 1,
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": DETERMINISTIC_GENERATED_AT,
         "generator": "scripts/ambitions-component-inventory-generate.py",
         "claim_boundary": "Candidate source inventory only; not render proof, visual proof, accessibility proof, device proof, or owner approval.",
         "scan_roots": [rel(root) for root in SCAN_ROOTS if root.exists()],
@@ -185,7 +185,7 @@ def generate_path_inventory() -> dict[str, object]:
     paths.sort(key=lambda item: item["path"])
     return {
         "schema_version": 1,
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "generated_at": DETERMINISTIC_GENERATED_AT,
         "generator": "scripts/ambitions-component-inventory-generate.py",
         "claim_boundary": "Source path inventory only; listed paths do not prove implementation, visual acceptance, accessibility conformance, or release readiness.",
         "entry_count": len(paths),

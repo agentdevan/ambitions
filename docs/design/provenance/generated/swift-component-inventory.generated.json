@@ -12478,7 +12478,7 @@
     }
   ],
   "entry_count": 587,
-  "generated_at": "2026-06-29T21:00:38.942809+00:00",
+  "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "scan_roots": [
     "Native/Ambitions",

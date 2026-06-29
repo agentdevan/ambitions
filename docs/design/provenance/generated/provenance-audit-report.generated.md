@@ -1,6 +1,6 @@
 # VSP Provenance Audit Report
 
-Generated: `2026-06-29T21:00:39.861707+00:00`
+Generated: `deterministic-from-current-registry-inputs`
 
 Claim boundary: this audit checks provenance-system coherence only. It is not Code Connect, Visual Green, source implementation proof, device proof, accessibility conformance, or owner approval.
 
