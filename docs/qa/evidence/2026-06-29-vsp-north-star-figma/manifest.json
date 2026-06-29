@@ -1,0 +1,206 @@
+{
+  "packet": "2026-06-29-vsp-north-star-figma",
+  "status": "Yellow",
+  "created_date": "2026-06-29",
+  "baseline_sha": "4073b8e0c",
+  "figma_prep_file": {
+    "name": "Ambitions iOS 26 Design System - North Star Production Kit",
+    "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+    "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv"
+  },
+  "non_claims": [
+    "Visual Green",
+    "Done",
+    "Release Green",
+    "implementation readiness",
+    "runtime proof",
+    "build proof",
+    "accessibility conformance",
+    "physical device proof",
+    "owner approval"
+  ],
+  "screenshots": [
+    {
+      "path": "images/design-system-cover-repaired.png",
+      "source_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "source_frame_id": "2:18",
+      "dimensions": "1920x1320",
+      "sha256": "176f733099ed2376a06ea364791222a71e6554f429ba727f751a6065f0386b57"
+    },
+    {
+      "path": "images/object-primitives.png",
+      "source_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "source_frame_id": "2:201",
+      "dimensions": "2200x1174",
+      "sha256": "1487923299be780fe47c6ccca2519b30bd2bc12e39e1d01fde90035b7ffb6ce0"
+    },
+    {
+      "path": "images/zero-skeleton-gate-addendum-6-2-repaired.png",
+      "source_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "source_frame_id": "6:2",
+      "dimensions": "1800x1240",
+      "sha256": "df6b700900272ff83568b610f483032e81805c6a9e6d18c864b0e4760febe9bc"
+    },
+    {
+      "path": "images/vsp-01-authority-1-2.png",
+      "source_file_key": "hnVi8KV2SAuWP3V5hV160W",
+      "source_frame_id": "1:2",
+      "dimensions": "2200x1100",
+      "sha256": "84f6143f9965f56f5d9df4934cc241b49b6d57dad3228ac47faed7e1dd2e3065"
+    },
+    {
+      "path": "images/vsp-02-current-15-2.png",
+      "source_file_key": "lDslntJK8Xtmap7paJz7f5",
+      "source_frame_id": "15:2",
+      "dimensions": "430x932",
+      "sha256": "1a4caac37a0ce1e7dbea99e7512d71c49dbff36be6e52b022f25ad11430c47ad"
+    },
+    {
+      "path": "images/vsp-02-intake-gate-6-124.png",
+      "source_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "source_frame_id": "6:124",
+      "dimensions": "1600x1000",
+      "sha256": "3bb68d3f951ab73c556a850f2aff315e5a9bec367e2ac90d2b864b7b545fd4e5"
+    },
+    {
+      "path": "images/vsp-03-current-5-2.png",
+      "source_file_key": "syAY6U5srUCifJgKq0wSSH",
+      "source_frame_id": "5:2",
+      "dimensions": "430x932",
+      "sha256": "255b7cce35e1f9fbe747785c87f16003f223aef3e7f16d40307723de5d02b06f"
+    },
+    {
+      "path": "images/vsp-04-current-14-2.png",
+      "source_file_key": "TgKZkoanB1hLaSYbthAIr3",
+      "source_frame_id": "14:2",
+      "dimensions": "430x932",
+      "sha256": "50e113ff9102601d8b5eb836542c9695c2ca52643b7dc35bf5c86e4855568dc5"
+    }
+  ],
+  "vsps": [
+    {
+      "vsp": "VSP-01",
+      "issue_id": "AMB-1480",
+      "name": "Root Shell / Stage / Chrome",
+      "figma_file_key": "hnVi8KV2SAuWP3V5hV160W",
+      "canonical_frame_id": "1:2",
+      "artifact_label": "AUTHORITY",
+      "screenshot_full": "images/vsp-01-authority-1-2.png",
+      "status_ceiling": "Authority preserved; no new Green claim",
+      "owner_approval_status": "not granted in this packet"
+    },
+    {
+      "vsp": "VSP-02",
+      "issue_id": "AMB-1481",
+      "name": "Today Reality Window",
+      "figma_file_key": "lDslntJK8Xtmap7paJz7f5",
+      "canonical_frame_id": "15:2",
+      "prep_frame_id": "6:124",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": "images/vsp-02-current-15-2.png",
+      "supporting_screenshot": "images/vsp-02-intake-gate-6-124.png",
+      "status_ceiling": "Needs Repair",
+      "owner_approval_status": "not granted"
+    },
+    {
+      "vsp": "VSP-03",
+      "issue_id": "AMB-1482",
+      "name": "Goals Life Area Atlas",
+      "figma_file_key": "syAY6U5srUCifJgKq0wSSH",
+      "canonical_frame_id": "5:2",
+      "prep_frame_id": "6:169",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": "images/vsp-03-current-5-2.png",
+      "status_ceiling": "Needs Repair",
+      "owner_approval_status": "not granted"
+    },
+    {
+      "vsp": "VSP-04",
+      "issue_id": "AMB-1483",
+      "name": "Time / LifeShape Field",
+      "figma_file_key": "TgKZkoanB1hLaSYbthAIr3",
+      "canonical_frame_id": "14:2",
+      "prep_frame_id": "6:214",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": "images/vsp-04-current-14-2.png",
+      "status_ceiling": "Needs Repair",
+      "owner_approval_status": "not granted"
+    },
+    {
+      "vsp": "VSP-05",
+      "issue_id": "AMB-1484",
+      "name": "Capture Open Field Composer",
+      "figma_file_key": null,
+      "canonical_frame_id": null,
+      "prep_frame_id": "6:261",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": null,
+      "status_ceiling": "Designing / Needs Repair ceiling",
+      "owner_approval_status": "not granted"
+    },
+    {
+      "vsp": "VSP-06",
+      "issue_id": "AMB-1485",
+      "name": "You Native Settings",
+      "figma_file_key": null,
+      "canonical_frame_id": null,
+      "prep_frame_id": "6:306",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": null,
+      "status_ceiling": "Designing / Needs Repair ceiling",
+      "owner_approval_status": "not granted"
+    },
+    {
+      "vsp": "VSP-07",
+      "issue_id": "AMB-1486",
+      "name": "Trust / Inspection / Proof / Receipts",
+      "figma_file_key": null,
+      "canonical_frame_id": null,
+      "prep_frame_id": "6:351",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": null,
+      "status_ceiling": "Designing / Needs Repair ceiling",
+      "owner_approval_status": "not granted"
+    },
+    {
+      "vsp": "VSP-08",
+      "issue_id": "AMB-1487",
+      "name": "External Boundaries",
+      "figma_file_key": null,
+      "canonical_frame_id": null,
+      "prep_frame_id": "6:396",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": null,
+      "status_ceiling": "Designing / Needs Repair ceiling",
+      "owner_approval_status": "not granted"
+    },
+    {
+      "vsp": "VSP-09",
+      "issue_id": "AMB-1488",
+      "name": "Motion / Haptics / Accessibility Visual Matrix",
+      "figma_file_key": null,
+      "canonical_frame_id": null,
+      "prep_frame_id": "6:441",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": null,
+      "status_ceiling": "Designing / Needs Repair ceiling",
+      "owner_approval_status": "not granted"
+    },
+    {
+      "vsp": "VSP-10",
+      "issue_id": "AMB-1489",
+      "name": "Codex Implementation Anatomy Board",
+      "figma_file_key": null,
+      "canonical_frame_id": null,
+      "prep_frame_id": "6:486",
+      "artifact_label": "CANDIDATE",
+      "screenshot_full": null,
+      "status_ceiling": "Designing / Needs Repair ceiling",
+      "owner_approval_status": "not granted"
+    }
+  ],
+  "validation": {
+    "proof_docs_forbidden_local_path_scan": "required before commit",
+    "git_staged_scope": "only .gitignore and this proof packet"
+  }
+}

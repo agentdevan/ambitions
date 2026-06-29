@@ -65,6 +65,8 @@ source-atlas/generated/proof/
 *.tmp
 
 # local generated state and historical control-plane output
+.codex-artifacts/
+.wrangler/
 .codex/
 artifacts/
 prompts/
