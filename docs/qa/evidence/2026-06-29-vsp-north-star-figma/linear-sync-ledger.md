@@ -1,21 +1,18 @@
-# Linear Sync Ledger - VSP North Star Figma Prep
+# Linear Sync Ledger
 
-Status: Yellow
+Status: Yellow. Do not mark Done. Do not claim Visual Green.
 
-Bounded Linear comments were added without status promotion.
-
-| Issue | VSP | Comment ID | Status note |
+| Issue | VSP | Intended Linear status | Comment payload summary |
 | --- | --- | --- | --- |
-| AMB-1480 | VSP-01 | `82fc4edb-9f12-4fef-9a47-0bc1dd984935` | Approved shell authority preserved; no new Green claim. |
-| AMB-1481 | VSP-02 | `c9d5821b-11d9-4ef4-b900-79a4446411e8` | Keep Needs Repair unless owner approves. |
-| AMB-1482 | VSP-03 | `37828887-7306-4896-ac3e-37280b2a55f9` | Keep Needs Repair; authority contradiction remains unresolved. |
-| AMB-1483 | VSP-04 | `b4e36f6e-6b89-4cd5-a0cc-b0352a954a3f` | Keep Needs Repair; known failure evidence remains non-authority. |
-| AMB-1484 | VSP-05 | `76d0aae2-09ed-4931-842e-130bc403ec4f` | Designing / Needs Repair ceiling; no hero proof. |
-| AMB-1485 | VSP-06 | `26687961-2946-4851-9b5f-5b22d6f22c8f` | Designing / Needs Repair ceiling; no hero proof. |
-| AMB-1486 | VSP-07 | `45578b1c-3415-48e0-8166-43d68993ee39` | Designing / Needs Repair ceiling; no hero proof. |
-| AMB-1487 | VSP-08 | `309b30d6-8f39-40c4-807f-cc7fd01d32e9` | Designing / Needs Repair ceiling; no hero proof. |
-| AMB-1488 | VSP-09 | `b88bbb51-c488-420e-a63f-4e72476bfb60` | Designing / Needs Repair ceiling; no motion/accessibility proof. |
-| AMB-1489 | VSP-10 | `4a865963-ad10-4cab-b143-ca75844e775a` | Designing / Needs Repair ceiling; no anatomy package proof. |
+| AMB-1480 | VSP-01 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 1:2; proof path images/vsp-01-authority-1-2.png; non-claims recorded. |
+| AMB-1481 | VSP-02 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:2; proof path images/vsp-02-today-hero-r1-repaired.png; non-claims recorded. |
+| AMB-1482 | VSP-03 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:171; proof path images/vsp-03-goals-hero-r1-repaired.png; non-claims recorded. |
+| AMB-1483 | VSP-04 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:354; proof path images/vsp-04-time-hero-r1-repaired.png; non-claims recorded. |
+| AMB-1484 | VSP-05 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:543; proof path images/vsp-05-capture-hero-r1.png; non-claims recorded. |
+| AMB-1485 | VSP-06 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:713; proof path images/vsp-06-you-hero-r1.png; non-claims recorded. |
+| AMB-1486 | VSP-07 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:882; proof path images/vsp-07-trust-hero-r1.png; non-claims recorded. |
+| AMB-1487 | VSP-08 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:1050; proof path images/vsp-08-boundaries-hero-r1.png; non-claims recorded. |
+| AMB-1488 | VSP-09 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:1215; proof path images/vsp-09-motion-hero-r1.png; non-claims recorded. |
+| AMB-1489 | VSP-10 | Needs Repair retained; owner approval missing. | Figma prep file SWtHm9ouHTPbEFfNrrtZwv; frame 14:1384; proof path images/vsp-10-anatomy-hero-r1.png; non-claims recorded. |
 
-No issue was marked Done. No Visual Green or implementation readiness was claimed.
-
+Live Linear comments should be posted only as status/proof comments. No Done, Visual Green, or milestone promotion is authorized by this packet.

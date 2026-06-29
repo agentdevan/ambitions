@@ -1,51 +1,46 @@
-# VSP North Star Figma Prep Proof - 2026-06-29
+# VSP North Star Figma Proof Package - 2026-06-29
 
 Status: Yellow
 
-This proof packet makes the VSP Figma preparation work durable in-repo. It records the current authority map, selected screenshots, audit notes, and Linear sync state for VSP-01 through VSP-10.
+This packet records the current Ambitions VSP-01 through VSP-10 Figma preparation proof. It does not claim Visual Green, Done, runtime/build implementation, device proof, accessibility conformance, Release Green, or owner approval.
 
-It does not claim Visual Green, Done, implementation readiness, runtime proof, accessibility conformance, device proof, or owner approval.
+## Scope completed
 
-## Figma Files
+- Preserved VSP-01 approved shell authority without mutation.
+- Expanded the Ambitions iOS 26 North Star prep file with object-first component sets, semantic tokens, text/effect styles, and content-only VSP candidate packages.
+- Built VSP-02 through VSP-10 hero, state matrix, accessibility matrix, implementation anatomy, crop, and launch-board frames in the prep file.
+- Exported durable full/crop/presentation screenshots for VSP-02 through VSP-10.
+- Repaired observed screenshot defects before final export: VSP-02 control wrapping, VSP-03 direction-field collision, VSP-04 placed-step word break, VSP-05 chip/button wrapping, VSP-10 bottom overlap, stale launch-board clones, low-contrast support pills, poor crop framing, and launch-board caption overlap.
 
-- Design-system prep kit: https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv
-- VSP-01 approved shell authority: https://www.figma.com/design/hnVi8KV2SAuWP3V5hV160W
-- VSP-02 current file: https://www.figma.com/design/lDslntJK8Xtmap7paJz7f5
-- VSP-03 current file: https://www.figma.com/design/syAY6U5srUCifJgKq0wSSH
-- VSP-04 current file: https://www.figma.com/design/TgKZkoanB1hLaSYbthAIr3
-- Failed retrofit evidence only: https://www.figma.com/design/XSpaP7NkB2efoTgSy0KpFq
+## Files and authorities
 
-## Contents
+- Prep file: https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv
+- VSP-01 approved shell authority: https://www.figma.com/design/hnVi8KV2SAuWP3V5hV160W?node-id=1-2
+- Manifest: [manifest.json](manifest.json)
+- Screenshot index: [screenshot-index.md](screenshot-index.md)
+- Authority map: [authority-map.md](authority-map.md)
+- Visual audit ledger: [visual-audit-ledger.md](visual-audit-ledger.md)
+- Linear sync ledger: [linear-sync-ledger.md](linear-sync-ledger.md)
 
-- `manifest.json` - machine-readable VSP proof inventory.
-- `screenshot-index.md` - durable screenshot list with frame references.
-- `authority-map.md` - shell authority, candidates, failure evidence, and missing artifacts.
-- `visual-audit-ledger.md` - visible pass/fail notes and status ceiling.
-- `linear-sync-ledger.md` - Linear comments added during the prep pass.
-- `images/` - selected screenshot exports used by this proof packet.
 
-## Status Ceiling
+## Validation run
 
-The correct program status remains Yellow because:
+- `python3 -m json.tool docs/qa/evidence/2026-06-29-vsp-north-star-figma/manifest.json`
+- Manifest required-field and screenshot-path existence check: passed for 10 VSP rows and 35 screenshots.
+- Forbidden local-path scan for ignored local-only artifact directories and temporary proof paths: passed.
+- `git diff --check -- docs/qa/evidence/2026-06-29-vsp-north-star-figma`: passed.
 
-- VSP-02 through VSP-10 do not all have final-app-grade hero packages.
-- VSP-specific Dynamic Type, Reduce Motion, Reduce Transparency, Increase Contrast, and VoiceOver proof is incomplete.
-- VSP-05 through VSP-10 do not yet have dedicated reviewable Figma hero artifacts.
-- VSP-03 has an unresolved authority contradiction.
-- Owner approval has not been granted.
+## Status ceiling
 
-## Allowed Claim
+The highest honest status remains Yellow. The current Figma package can support owner review of candidate visuals, but it cannot self-certify owner-approved Green.
 
-The repo now contains a durable proof packet for the Figma preparation pass.
+## Non-claims
 
-## Forbidden Claims
-
-- Visual Green
-- Done
-- Release Green
-- implementation readiness
-- runtime/build proof
-- accessibility conformance
-- physical device proof
-- owner approval
-
+- No Done.
+- No Visual Green.
+- No Release Green.
+- No runtime/build proof.
+- No physical-device proof.
+- No accessibility conformance proof.
+- No implementation readiness.
+- No owner approval.

@@ -1,62 +1,33 @@
-# VSP Authority Map - 2026-06-29
+# Authority Map
 
-Status: Yellow
+## Shell authority
 
-## Shell Authority
+- VSP-01 approved shell authority remains `https://www.figma.com/design/hnVi8KV2SAuWP3V5hV160W?node-id=1-2`.
+- VSP-01 was not rebuilt or mutated in this pass.
+- VSP-02 through VSP-10 are content-only in the prep file. No shell chrome, dock, Context Crown, Capture/search affordance, tab bar, status/nav approximation, or shell material was invented.
 
-VSP-01 approved shell authority remains `hnVi8KV2SAuWP3V5hV160W`, frame `1:2`.
+## Current candidates
 
-The authority file was inspected and screenshot-captured only. It was not rebuilt, replaced, or mutated.
+| VSP | Issue | Candidate source | Canonical candidate frame | Presentation frame | Status ceiling |
+| --- | --- | --- | --- | --- | --- |
+| VSP-01 | AMB-1480 | hnVi8KV2SAuWP3V5hV160W | 1:2 | n/a | Yellow authority audit ceiling; VSP-01 not rebuilt. |
+| VSP-02 | AMB-1481 | SWtHm9ouHTPbEFfNrrtZwv | 14:2 | 14:147 | Yellow candidate proof; not Visual Green. |
+| VSP-03 | AMB-1482 | SWtHm9ouHTPbEFfNrrtZwv | 14:171 | 14:330 | Yellow candidate proof; not Visual Green. |
+| VSP-04 | AMB-1483 | SWtHm9ouHTPbEFfNrrtZwv | 14:354 | 14:519 | Yellow candidate proof; not Visual Green. |
+| VSP-05 | AMB-1484 | SWtHm9ouHTPbEFfNrrtZwv | 14:543 | 14:689 | Yellow candidate proof; not Visual Green. |
+| VSP-06 | AMB-1485 | SWtHm9ouHTPbEFfNrrtZwv | 14:713 | 14:858 | Yellow candidate proof; not Visual Green. |
+| VSP-07 | AMB-1486 | SWtHm9ouHTPbEFfNrrtZwv | 14:882 | 14:1026 | Yellow candidate proof; not Visual Green. |
+| VSP-08 | AMB-1487 | SWtHm9ouHTPbEFfNrrtZwv | 14:1050 | 14:1191 | Yellow candidate proof; not Visual Green. |
+| VSP-09 | AMB-1488 | SWtHm9ouHTPbEFfNrrtZwv | 14:1215 | 14:1360 | Yellow candidate proof; not Visual Green. |
+| VSP-10 | AMB-1489 | SWtHm9ouHTPbEFfNrrtZwv | 14:1384 | 14:1541 | Yellow candidate proof; not Visual Green. |
 
-## Figma Preparation Kit
+## Failure evidence retained
 
-Created file: `SWtHm9ouHTPbEFfNrrtZwv`
+- Prior VSP-02, VSP-03, and VSP-04 screenshots remain in `images/` as current/prior evidence rows, not as authority.
+- The failed retrofit file remains failure evidence only and is not referenced as shell authority.
 
-Primary preparation frames:
+## Missing or unresolved authority
 
-- `2:18` - `CANDIDATE - Authority Map + Production Kit Cover`
-- `2:96` - `CANDIDATE - Semantic Tokens - Ambitions Native Roles`
-- `2:201` - `CANDIDATE - Object Primitives - Ambitions Product Objects`
-- `2:314` - `CANDIDATE - Preview Matrix - Screenshot Proof Requirements`
-- `6:2` - `CANDIDATE - Zero Skeleton Production Gate Addendum`
-- `6:79` - `CANDIDATE - VSP-01 Production Intake / Zero Skeleton Gate`
-- `6:124` - `CANDIDATE - VSP-02 Production Intake / Zero Skeleton Gate`
-- `6:169` - `CANDIDATE - VSP-03 Production Intake / Zero Skeleton Gate`
-- `6:214` - `CANDIDATE - VSP-04 Production Intake / Zero Skeleton Gate`
-- `6:261` - `CANDIDATE - VSP-05 Production Intake / Zero Skeleton Gate`
-- `6:306` - `CANDIDATE - VSP-06 Production Intake / Zero Skeleton Gate`
-- `6:351` - `CANDIDATE - VSP-07 Production Intake / Zero Skeleton Gate`
-- `6:396` - `CANDIDATE - VSP-08 Production Intake / Zero Skeleton Gate`
-- `6:441` - `CANDIDATE - VSP-09 Production Intake / Zero Skeleton Gate`
-- `6:486` - `CANDIDATE - VSP-10 Production Intake / Zero Skeleton Gate`
-- `6:531` - `EXPLORATION - Figma Motion Operating Model - Mapped Not Operationalized`
-- `6:568` - `EXPLORATION - Shader Material Operating Model - Mapped Not Operationalized`
-- `6:609` - `EXPLORATION - Marketing Render Lab Contract - Mapped Not Operationalized`
-- `6:646` - `FAILURE_EVIDENCE - Failure Evidence Archive Intake`
-- `6:679` - `CANDIDATE - Code Layers SwiftUI Parity Contract - Mapped Not Operationalized`
-- `6:718` - `CANDIDATE - Agent Skills Plugin Contracts - Mapped Not Operationalized`
-
-## Current VSP Evidence
-
-| VSP | Issue | Current evidence | Status ceiling |
-| --- | --- | --- | --- |
-| VSP-01 | AMB-1480 | Approved shell authority `hnVi8KV2SAuWP3V5hV160W`, frame `1:2` | Existing authority preserved; no new Green claim |
-| VSP-02 | AMB-1481 | Current Today candidate `lDslntJK8Xtmap7paJz7f5`, frame `15:2`; prior failure evidence frame `6:2` | Needs Repair |
-| VSP-03 | AMB-1482 | Current candidate `syAY6U5srUCifJgKq0wSSH`, frame `5:2`; contradictory prior frame `2:2` | Needs Repair |
-| VSP-04 | AMB-1483 | Current Time candidate `TgKZkoanB1hLaSYbthAIr3`, frame `14:2`; failure evidence frames `9:2` and `12:2` | Needs Repair |
-| VSP-05 | AMB-1484 | No dedicated reviewable Figma hero found | Designing / Needs Repair ceiling |
-| VSP-06 | AMB-1485 | No dedicated reviewable Figma hero found | Designing / Needs Repair ceiling |
-| VSP-07 | AMB-1486 | No dedicated reviewable Figma hero found | Designing / Needs Repair ceiling |
-| VSP-08 | AMB-1487 | No dedicated reviewable Figma hero found | Designing / Needs Repair ceiling |
-| VSP-09 | AMB-1488 | No dedicated reviewable Figma hero found | Designing / Needs Repair ceiling |
-| VSP-10 | AMB-1489 | No dedicated reviewable Figma hero found | Designing / Needs Repair ceiling |
-
-## Product Law Preserved
-
-- Today / Goals / Time / You remain the only persistent surfaces.
-- Capture remains the global composer, not a tab.
-- Motion remains cross-surface behavior, not a destination.
-- Proof / Source / Privacy / History / Receipts remain inspection details, not root surfaces.
-- Offline core value must remain available without account sign-in.
-- Source Atlas / R2 must not store the private life graph.
-
+- Owner approval is not present for any new candidate frame in this packet.
+- VSP-05 through VSP-10 have candidate packages derived from active product law and owner-supplied VSP definitions; no stronger repo-local canonical VSP documents were found in this pass.
+- VSP-10 is an implementation-anatomy candidate, not a product hero substitute.
