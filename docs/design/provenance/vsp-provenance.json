@@ -1,0 +1,1245 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "Git-owned Code-Connect-free VSP provenance. This registry is not Figma Code Connect, Visual Green, source implementation, device proof, accessibility conformance, release proof, or owner approval.",
+  "authority_basis": [
+    "docs/qa/vsp-review/VSP01-VSP10-review-analysis.md",
+    "docs/qa/evidence/2026-06-29-vsp-north-star-figma/manifest.json",
+    "docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md",
+    "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+    "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+    "docs/truth/PRODUCT_DESIGN_TRUTH.md",
+    "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md",
+    "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
+    "docs/truth/RELEASE_TRUTH.md"
+  ],
+  "vsp_packets": [
+    {
+      "vsp_id": "VSP-01",
+      "title": "Root Shell / Stage / Chrome",
+      "category": "shell_authority",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "hnVi8KV2SAuWP3V5hV160W",
+        "node_id": "1:2",
+        "frame_name": "AUTHORITY - VSP-01 - approved shell authority",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-01-authority-1-2.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/manifest.json"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": false,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "VSP-01 is the immutable shell authority. This provenance task records it and does not mutate it."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Stage/AmbitionsStage.swift",
+          "Native/Ambitions/Stage/AmbitionsSurface.swift",
+          "Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift",
+          "Native/Ambitions/Stage/Chrome/StageDockRail.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Stage",
+          "Native/Ambitions/App",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/RootTab.swift",
+          "Native/Ambitions/Surfaces/Capture",
+          "Native/Ambitions/Surfaces/Motion",
+          "new shell chrome outside VSP-01 authority"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/SurfaceShellPrimitives.swift",
+          "Sources/Components/NavigationPrimitives.swift",
+          "Sources/Components/AmbitionsFlagshipTactilePrimitives.swift",
+          "Sources/Components/ShellChromeTrustPrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/App/AppShellNavigationTests.swift",
+          "Native/AmbitionsTests/App/AppShellChromeTests.swift",
+          "Native/AmbitionsTests/App/ShellChromeAuditTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/SI03ShellNavigationPreviews.swift",
+          "Sources/Previews/RootDestinationIdentityPreviews.swift",
+          "Native/Ambitions/Quality/ShellChromeAudit.swift",
+          "Native/Ambitions/Quality/ShellPreviewMatrix.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1480",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "shell-authority",
+          "provenance",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": false,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Source shell may be product-law aligned but not visually parity-proven against the approved VSP-01 frame.",
+        "Later packets can accidentally invent shell chrome if they are not audited against this registry."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "live SwiftUI shell parity screenshot",
+        "device shell screenshot",
+        "manual accessibility and haptics proof"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No current rendered SwiftUI parity proof.",
+        "No device proof."
+      ],
+      "notes": [
+        "VSP-01 approved shell authority is immutable unless explicit owner evidence changes it."
+      ]
+    },
+    {
+      "vsp_id": "VSP-02",
+      "title": "Today Reality Window",
+      "category": "surface_content",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:2",
+        "frame_name": "CANDIDATE - VSP-02 - Today Reality Window hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-hero-r1-repaired.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Today candidate is content-only and must mount inside VSP-01 shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Surfaces/Today/TodaySurface.swift",
+          "Native/Ambitions/Surfaces/Today/TodayObjectView.swift",
+          "Native/Ambitions/Surfaces/Today/TodayAccessibility.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Surfaces/Today",
+          "Native/Ambitions/Projection/StageScenes",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Stage shell mutations",
+          "dashboard/card-feed root pattern",
+          "task-list-only root pattern",
+          "Capture root/tab ownership"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/StartHereProductPrimitives.swift",
+          "Sources/Components/FlagshipObjectStagePrimitives.swift",
+          "Sources/Components/LifeDirectionalIntegrationPrimitives.swift",
+          "Sources/Components/RealityMeridianTemporalPrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Today/TodayRealityWindowActionGatingTests.swift",
+          "Native/AmbitionsTests/Today/TodayShellIntegrationTests.swift",
+          "Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/RealityMeridianRichnessPreviews.swift",
+          "Sources/Previews/RealityMeridianTemporalPreviews.swift",
+          "Native/Ambitions/Quality/ProductObjectDominanceAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1481",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "today",
+          "surface-content",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Can drift into a dashboard, task list, timeline clone, or CTA stack.",
+        "Figma candidate proof is not runtime behavior proof."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "live SwiftUI Today parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "runtime mutation/proof receipt evidence"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No live SwiftUI parity screenshot.",
+        "No accessibility proof."
+      ],
+      "notes": [
+        "Use Start here, Recommended step, Step, Start now, and Open step language where applicable."
+      ]
+    },
+    {
+      "vsp_id": "VSP-03",
+      "title": "Goals Life Area Atlas",
+      "category": "surface_content",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:171",
+        "frame_name": "CANDIDATE - VSP-03 - Goals Life Area Atlas hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-hero-r1-repaired.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Goals candidate is content-only and must mount inside VSP-01 shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
+          "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+          "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Surfaces/Goals",
+          "Native/Ambitions/Projection/StageScenes",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Stage shell mutations",
+          "generic project-board root pattern",
+          "productivity-score or ranking root",
+          "stale top-level IA"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/FE09ComponentSystemPrimitives.swift",
+          "Sources/Components/GroupedNavigationList.swift",
+          "Sources/Components/FlagshipObjectStagePrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Goals/GoalsConstellationAtlasReconstructionTests.swift",
+          "Native/AmbitionsTests/Goals/GoalsObjectStagePrimitiveTests.swift",
+          "Native/AmbitionsTests/Goals/GoalsShellIntegrationTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/FE09ComponentSystemPreviewMatrix.swift",
+          "Sources/Previews/TopLevelSurfaceCompositionPreviews.swift",
+          "Native/Ambitions/Quality/ProductObjectDominanceAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1482",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "goals",
+          "surface-content",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Can drift into KPI dashboards, project boards, ranking layers, analytics, or scorecards.",
+        "Existing names must be treated as source/internal where canon says so."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "live SwiftUI Goals parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "goal action runtime proof"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No live SwiftUI parity screenshot.",
+        "No device/accessibility proof."
+      ],
+      "notes": [
+        "Goals implementation must remain a Life Area Atlas content object inside Goals, not a competing root model."
+      ]
+    },
+    {
+      "vsp_id": "VSP-04",
+      "title": "Time / LifeShape Week",
+      "category": "surface_content",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:354",
+        "frame_name": "CANDIDATE - VSP-04 - Time LifeShape Week hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md",
+          "docs/design/targets/time/lifeshape_field_visual_target.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Time candidate is content-only and must mount inside VSP-01 shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Surfaces/Time/TimeSurface.swift",
+          "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
+          "Native/Ambitions/Surfaces/Time/TimeAccessibility.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Surfaces/Time",
+          "Native/Ambitions/Core/Time",
+          "Native/Ambitions/Core/Runtime",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Stage shell mutations",
+          "calendar-clone-only root pattern",
+          "top-level stale planning IA",
+          "unproven external calendar dependency for core value"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/LifeDirectionalIntegrationPrimitives+02-LifeShapeField.swift",
+          "Sources/Components/RealityMeridianTimeBand.swift",
+          "Sources/Components/HorizonCapacityPrimitiveFamily.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Time/LifeShapeFieldViewReconstructionTests.swift",
+          "Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift",
+          "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/RealityMeridianTemporalPreviews.swift",
+          "Native/Ambitions/Quality/LifeShapeConstructionAudit.swift",
+          "Native/Ambitions/Quality/VisualTargetArtifactAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1483",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "time",
+          "surface-content",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Can drift into a generic calendar clone.",
+        "External calendar behavior cannot become required for offline core value."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "live SwiftUI Time parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "reflow/protection runtime proof"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No live SwiftUI parity screenshot.",
+        "No runtime/device/accessibility proof."
+      ],
+      "notes": [
+        "LifeShape-related source names are internal/source provenance and not top-level user IA."
+      ]
+    },
+    {
+      "vsp_id": "VSP-05",
+      "title": "Capture Open Field Composer",
+      "category": "global_composer",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:543",
+        "frame_name": "CANDIDATE - VSP-05 - Capture Open Field Composer hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Capture is global composer behavior and may not become a shell/root tab."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
+          "Native/Ambitions/Composer/Capture/CaptureSurface.swift",
+          "Native/Ambitions/Composer/Capture/CaptureObjectView.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Composer/Capture",
+          "Native/Ambitions/Stage/Overlays",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Surfaces/Capture",
+          "Capture root tab",
+          "Capture inbox/feed",
+          "chatbot composer as core architecture",
+          "persistent floating root affordance"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/AmbitionsFlagshipTactilePrimitives+02-AtmosphereComposerCanvas.swift",
+          "Sources/Components/CaptureRoutingPrimitiveFamily.swift",
+          "Sources/Components/AmbitionsFlagshipTactilePrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Capture/CaptureViewModelTests.swift",
+          "Native/AmbitionsTests/Capture/CapturePlacementReviewStateTests.swift",
+          "Native/AmbitionsTests/ComposerCaptureCanonicalOwnershipTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/CoreReusableInteractionPrimitivePreviews.swift",
+          "Native/Ambitions/Quality/ShellContentSafetyAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1484",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "capture",
+          "global-composer",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Highest IA drift risk after shell authority because Capture can become root-like if mounted incorrectly.",
+        "Keyboard, save, proposal, receipt, and offline proof are not established by Figma."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "live SwiftUI composer parity screenshot",
+        "device keyboard/composer screenshots",
+        "manual accessibility matrix",
+        "offline save/proposal/receipt runtime proof"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No global route/composer proof.",
+        "No device keyboard proof."
+      ],
+      "notes": [
+        "Capture remains the global composer and must not become a tab, inbox, chatbot, category wall, or root destination."
+      ]
+    },
+    {
+      "vsp_id": "VSP-06",
+      "title": "You Native Settings",
+      "category": "surface_content",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:713",
+        "frame_name": "CANDIDATE - VSP-06 - You Native Settings hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "You candidate is content-only and must mount inside VSP-01 shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Surfaces/You/YouSurface.swift",
+          "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+          "Native/Ambitions/Surfaces/You/YouObjectView.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Surfaces/You",
+          "Native/Ambitions/Trust",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "old profile IA as root",
+          "account-required core value",
+          "private runtime graph backend",
+          "generic settings dashboard without real controls"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/PersonalSystemCenterPrimitives.swift",
+          "Sources/Components/GroupedNavigationList.swift",
+          "Sources/Components/TrustReceiptLayerPrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/You/YouUserSystemProfileReconstructionTests.swift",
+          "Native/AmbitionsTests/You/YouFeatureServiceTests.swift",
+          "Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/PersonalSystemCenterPreviews.swift",
+          "Native/Ambitions/Quality/UserLanguageCategoryAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1485",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "you",
+          "surface-content",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": false,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": true
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Can drift into old Profile IA or account-gated core behavior.",
+        "Every visible row must open real controls or an honest unavailable state."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "live SwiftUI You parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "offline/account boundary proof"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No live SwiftUI parity screenshot.",
+        "No account/offline boundary proof."
+      ],
+      "notes": [
+        "You is a native settings/user system surface. Account support must stay optional and cannot gate offline core value."
+      ]
+    },
+    {
+      "vsp_id": "VSP-07",
+      "title": "Trust Inspection Details",
+      "category": "contextual_inspection",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:882",
+        "frame_name": "CANDIDATE - VSP-07 - Trust Inspection hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Trust must remain contextual inspection mounted from owning surfaces."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Trust/InspectionSurface.swift",
+          "Native/Ambitions/Trust/ProofInspectionView.swift",
+          "Native/Ambitions/Trust/SourceInspectionView.swift",
+          "Native/Ambitions/Trust/PrivacyInspectionView.swift",
+          "Native/Ambitions/Trust/ReceiptInspectionView.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Trust",
+          "Native/Ambitions/Projection/OverlayScenes",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Trust root surface",
+          "Proof root surface",
+          "Source root surface",
+          "Privacy root surface",
+          "History root surface",
+          "Receipts root surface"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/TrustReceiptLayerPrimitives+02-SourceTrustReceiptStrip.swift",
+          "Sources/Components/ObjectStageSurfaces.swift",
+          "Sources/Components/FlagshipObjectStagePrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Trust/SourceInspectionPresentationTests.swift",
+          "Native/AmbitionsTests/TrustCanonicalOwnershipTests.swift",
+          "Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/TrustReceiptLayerPreviews.swift",
+          "Native/Ambitions/Quality/SourceInspectionAccessibilityProof.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1486",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "trust",
+          "inspection",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": false,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": true
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Inspection details can accidentally become architecture-as-UI or root navigation.",
+        "Source/trust copy can overclaim proof or privacy readiness."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "live SwiftUI inspection parity screenshot",
+        "device screenshot",
+        "manual accessibility matrix",
+        "privacy/trust disclosure proof"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No live SwiftUI parity screenshot.",
+        "No contextual inspection proof."
+      ],
+      "notes": [
+        "Proof, Source, Privacy, History, and Receipts are contextual details only."
+      ]
+    },
+    {
+      "vsp_id": "VSP-08",
+      "title": "External Boundaries",
+      "category": "external_boundary",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:1050",
+        "frame_name": "CANDIDATE - VSP-08 - External Boundaries hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+          "docs/qa/KNOWN_ISSUES.md"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "External boundary UI must be a content/inspection layer, never shell or root IA."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+          "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift",
+          "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Core/Runtime",
+          "Native/Ambitions/Core/Persistence",
+          "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI",
+          "Native/Ambitions/Trust"
+        ],
+        "forbidden_implementation_areas": [
+          "R2 private life graph storage",
+          "account-required core value",
+          "external/cloud LLM core runtime",
+          "private user context in Source Atlas",
+          "network dependency for offline core value"
+        ],
+        "known_component_candidates": [
+          "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
+          "Native/Ambitions/Core/Runtime/SourceAtlasAccessBoundary.swift",
+          "Native/Ambitions/Core/Runtime/SourceAtlasLocalCompositionFallback.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/Runtime/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
+          "Native/AmbitionsTests/Runtime/SourceAtlasOfflineNoAccountScenarioTests.swift",
+          "Native/AmbitionsTests/Persistence/SourceAtlasPublicArtifactPrivacyBoundaryTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Native/Ambitions/Quality/ForbiddenLanguageAudit.swift",
+          "scripts/ambitions-local-first-boundary-scan.py"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1487",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "external-boundary",
+          "privacy",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": false,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": true
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Account, R2, Source Atlas, offline, and cloud AI boundaries carry privacy/product-law risk.",
+        "A Figma boundary object cannot prove request-shape or no-private-graph runtime behavior."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "VSP-08A policy readback owner approval",
+        "VSP-08B implementation proof packet",
+        "live SwiftUI boundary parity screenshot",
+        "R2/Source Atlas request-shape proof",
+        "offline no-account proof"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No privacy-boundary proof.",
+        "No offline no-account proof.",
+        "No R2 public/reference-only request proof."
+      ],
+      "notes": [
+        "Split into VSP-08A policy readback and VSP-08B implementation proof before any source implementation.",
+        "No private life graph, private user context, goals, captures, schedule, receipts, proof, behavior, or inferred priorities may go to R2 or Source Atlas.",
+        "External/cloud LLMs are not core runtime architecture."
+      ]
+    },
+    {
+      "vsp_id": "VSP-09",
+      "title": "Motion / Haptics / Accessibility Matrix",
+      "category": "motion_accessibility_haptics",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:1215",
+        "frame_name": "CANDIDATE - VSP-09 - Motion Accessibility Matrix hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Motion/accessibility is a behavior/proof layer and may not become shell or root navigation."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+          "Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift",
+          "Native/Ambitions/Interaction/HapticPolicy.swift",
+          "Native/Ambitions/DesignSystem/Accessibility/ReduceMotionPolicy.swift"
+        ],
+        "allowed_implementation_areas": [
+          "Native/Ambitions/Stage/Motion",
+          "Native/Ambitions/Interaction",
+          "Native/Ambitions/DesignSystem/Accessibility",
+          "Sources/Accessibility",
+          "Sources/Components"
+        ],
+        "forbidden_implementation_areas": [
+          "Native/Ambitions/Surfaces/Motion",
+          "Motion root destination",
+          "motion analytics dashboard",
+          "score/streak/XP layer"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/AccessibilityAdaptiveInterfacePrimitives.swift",
+          "Sources/Components/MotionPrimitives.swift",
+          "Sources/Components/CoreReusableInteractionPrimitives.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift",
+          "Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift",
+          "Native/AmbitionsTests/App/StageMotionRoutingTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift",
+          "Sources/Previews/InteractionMotionHapticsPreviews.swift",
+          "Native/Ambitions/Quality/MotionReductionAudit.swift",
+          "Native/Ambitions/Quality/AccessibilityAudit.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1488",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "accessibility",
+          "motion",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": true,
+        "device_screenshot": true,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": true,
+        "runtime_behavior": true,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Motion can become a destination if not kept under Stage/Motion behavior.",
+        "Haptic policy needs device proof, not source-only review."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "live SwiftUI accessibility/motion screenshots",
+        "device haptic note",
+        "manual VoiceOver order",
+        "Dynamic Type matrix",
+        "Reduce Motion and Reduce Transparency walkthroughs"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No manual accessibility proof.",
+        "No haptic device proof."
+      ],
+      "notes": [
+        "VSP-09 is the acceptance matrix for all later visual packets. Motion remains cross-surface behavior."
+      ]
+    },
+    {
+      "vsp_id": "VSP-10",
+      "title": "Implementation Anatomy",
+      "category": "implementation_anatomy",
+      "current_status_recommendation": "Needs Repair",
+      "proof_ceiling": "Yellow",
+      "figma": {
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "14:1384",
+        "frame_name": "CANDIDATE - VSP-10 - Implementation Anatomy hero - R1",
+        "screenshot_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-crop-r1.png",
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png"
+        ],
+        "evidence_paths": [
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+          "docs/design/provenance/component-registry.json"
+        ],
+        "node_id_status": "known",
+        "unknown_rationale": ""
+      },
+      "shell_authority": {
+        "requires_vsp_01_shell": true,
+        "may_mutate_shell": false,
+        "shell_mutation_rationale": "Implementation anatomy records handoff ownership and may not alter shell."
+      },
+      "swiftui": {
+        "canonical_source_owners": [
+          "docs/design/provenance/component-registry.json",
+          "docs/design/provenance/vsp-provenance.json",
+          "docs/design/provenance/generated/swift-component-inventory.generated.json"
+        ],
+        "allowed_implementation_areas": [
+          "docs/design/provenance",
+          "Sources/Components",
+          "Sources/Previews",
+          "Native/Ambitions/Quality"
+        ],
+        "forbidden_implementation_areas": [
+          "product UI implementation from anatomy board alone",
+          "shell mutation",
+          "Linear as source of truth",
+          "Code Connect completion claim"
+        ],
+        "known_component_candidates": [
+          "Sources/Components/FE09ComponentSystemPrimitives.swift",
+          "Sources/Components/SurfaceShellPrimitives.swift",
+          "Sources/Previews/FE09ComponentSystemPreviewMatrix.swift",
+          "Native/Ambitions/Quality/ShellPreviewMatrix.swift"
+        ],
+        "known_tests": [
+          "Native/AmbitionsTests/App/FE09ComponentSystemTests.swift",
+          "Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift",
+          "Native/AmbitionsTests/App/TopLevelSurfaceCompositionTests.swift"
+        ],
+        "known_preview_or_quality_files": [
+          "Sources/Previews/ComponentPreviews.swift",
+          "Sources/Previews/ComponentPreviewGallery+Density.swift",
+          "Native/Ambitions/Quality/VisualRegressionHarness.swift"
+        ]
+      },
+      "linear": {
+        "likely_parent_issue": "AMB-1489",
+        "recommended_status": "Needs Repair",
+        "recommended_labels": [
+          "VSP",
+          "implementation-anatomy",
+          "provenance",
+          "yellow-proof"
+        ],
+        "should_create_or_update_now": false
+      },
+      "proof_required": {
+        "owner_approval": true,
+        "live_swiftui_screenshot": false,
+        "device_screenshot": false,
+        "dynamic_type": true,
+        "voiceover": true,
+        "reduce_motion": true,
+        "increase_contrast": true,
+        "reduce_transparency": true,
+        "haptics": false,
+        "runtime_behavior": false,
+        "validation_commands": true,
+        "privacy_boundary": false
+      },
+      "proof_present": {
+        "owner_approval": [],
+        "live_swiftui_screenshot": [],
+        "device_screenshot": [],
+        "dynamic_type": [],
+        "voiceover": [],
+        "reduce_motion": [],
+        "increase_contrast": [],
+        "reduce_transparency": [],
+        "haptics": [],
+        "runtime_behavior": [],
+        "validation_commands": [
+          "docs/design/provenance/generated/provenance-audit-report.generated.md"
+        ],
+        "privacy_boundary": []
+      },
+      "known_risks": [
+        "Anatomy can be mistaken for implementation authority if not tied to source-owner paths and non-goals.",
+        "Generated inventory can contain stale/internal names that are not product IA."
+      ],
+      "missing_evidence": [
+        "owner approval",
+        "component preview matrix proof",
+        "accessibility acceptance matrix proof",
+        "explicit stale-vocabulary cleanup plan for source-level compatibility names"
+      ],
+      "green_blockers": [
+        "No owner approval.",
+        "No owner-approved source-owner handoff.",
+        "No component preview proof."
+      ],
+      "notes": [
+        "VSP-10 is implementation anatomy and provenance. It is not user-facing product UI and cannot substitute for product hero proof."
+      ]
+    }
+  ]
+}

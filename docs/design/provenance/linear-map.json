@@ -1,0 +1,465 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "Linear mirror/spec registry only. Do not create, update, close, or mark Linear objects from this file without explicit owner authorization.",
+  "linear_items": [
+    {
+      "vsp_id": "VSP-01",
+      "likely_parent_issue": "AMB-1480",
+      "recommended_parent_title": "VSP-01 Shell Authority Reconfirmation",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "shell-authority",
+        "figma-handoff",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Audit approved VSP-01 shell against current SwiftUI shell",
+          "scope": "analysis and screenshot parity only; no shell mutation",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "Attach owner-approved shell readback frames before implementation",
+          "scope": "Figma/owner review proof only",
+          "recommended_status": "Needs Repair"
+        }
+      ],
+      "blocked_by": [
+        "owner approval",
+        "live SwiftUI parity screenshot",
+        "device and accessibility proof"
+      ],
+      "acceptance_summary": [
+        "VSP-01 approved shell frame remains immutable.",
+        "No later VSP may mutate shell.",
+        "Codex implementation leaf can only repair shell after explicit owner approval."
+      ],
+      "validation_summary": [
+        "python3 scripts/ambitions-vsp-provenance-audit.py",
+        "git diff --check"
+      ],
+      "closeout_required": [
+        "exact frame ID and screenshot proof",
+        "no Visual Green unless owner approved",
+        "rollback plan for source leaf if later authorized"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-02",
+      "likely_parent_issue": "AMB-1481",
+      "recommended_parent_title": "VSP-02 Today Reality Window",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "today",
+        "surface-content",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Produce Today SwiftUI parity leaf from approved Figma frame",
+          "scope": "Today content only inside VSP-01 shell",
+          "recommended_status": "Spec Ready after owner approval"
+        },
+        {
+          "title": "Capture Today accessibility and state matrix proof",
+          "scope": "Dynamic Type, VoiceOver, Reduce Motion, contrast, screenshots",
+          "recommended_status": "Needs Repair"
+        }
+      ],
+      "blocked_by": [
+        "VSP-01 shell parity",
+        "VSP-10 source-owner map",
+        "VSP-09 accessibility matrix",
+        "owner approval"
+      ],
+      "acceptance_summary": [
+        "Today remains Reality Window / Start here content.",
+        "No dashboard, task list, card feed, Capture root, or shell mutation.",
+        "Implementation leaf must list exact source owners and non-goals."
+      ],
+      "validation_summary": [
+        "focused Today tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "approved frame ID",
+        "live SwiftUI screenshot matrix",
+        "owner review result"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-03",
+      "likely_parent_issue": "AMB-1482",
+      "recommended_parent_title": "VSP-03 Goals Life Area Atlas",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "goals",
+        "surface-content",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Produce Goals Life Area Atlas SwiftUI parity leaf",
+          "scope": "Goals content object only inside VSP-01 shell",
+          "recommended_status": "Spec Ready after owner approval"
+        },
+        {
+          "title": "Prove Goals object accessibility and no-dashboard shape",
+          "scope": "screenshot and accessibility matrix",
+          "recommended_status": "Needs Repair"
+        }
+      ],
+      "blocked_by": [
+        "VSP-01 shell parity",
+        "VSP-10 source-owner map",
+        "VSP-09 accessibility matrix",
+        "owner approval"
+      ],
+      "acceptance_summary": [
+        "Goals remains Life Area Atlas content.",
+        "No project board, scorecard, analytics root, or stale IA.",
+        "Life area rows must be product objects or native rows with real routes."
+      ],
+      "validation_summary": [
+        "focused Goals tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "approved frame ID",
+        "live SwiftUI screenshot matrix",
+        "owner review result"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-04",
+      "likely_parent_issue": "AMB-1483",
+      "recommended_parent_title": "VSP-04 Time / LifeShape Week",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "time",
+        "surface-content",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Produce Time LifeShape SwiftUI parity leaf",
+          "scope": "Time content object only inside VSP-01 shell",
+          "recommended_status": "Spec Ready after owner approval"
+        },
+        {
+          "title": "Prove Time reflow/protected-time accessibility matrix",
+          "scope": "state matrix, Reduce Motion, Dynamic Type, proof receipt",
+          "recommended_status": "Needs Repair"
+        }
+      ],
+      "blocked_by": [
+        "VSP-01 shell parity",
+        "VSP-10 source-owner map",
+        "VSP-09 accessibility matrix",
+        "owner approval"
+      ],
+      "acceptance_summary": [
+        "Time remains native Life Calendar / LifeShape content.",
+        "No calendar-clone-only implementation.",
+        "No external calendar dependency for offline core value."
+      ],
+      "validation_summary": [
+        "focused Time tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "approved frame ID",
+        "live SwiftUI screenshot matrix",
+        "runtime mutation proof when source changes"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-05",
+      "likely_parent_issue": "AMB-1484",
+      "recommended_parent_title": "VSP-05 Capture Open Field Composer",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "capture",
+        "global-composer",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Repair Capture Figma handoff before source implementation",
+          "scope": "prove global composer, keyboard, proposal, receipt states",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "Produce Capture SwiftUI parity leaf",
+          "scope": "Composer/Capture and Stage overlay routing only",
+          "recommended_status": "Spec Ready after owner approval"
+        }
+      ],
+      "blocked_by": [
+        "VSP-01 shell parity",
+        "VSP-10 source-owner map",
+        "VSP-09 accessibility matrix",
+        "owner approval",
+        "composer keyboard proof"
+      ],
+      "acceptance_summary": [
+        "Capture remains global composer.",
+        "No tab, root surface, inbox, notes feed, chatbot, or persistent competing affordance.",
+        "Offline save/proposal/receipt states must be proven before Green."
+      ],
+      "validation_summary": [
+        "focused Capture tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "approved frame ID",
+        "keyboard/device screenshot proof",
+        "runtime proof for save/proposal/receipt"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-06",
+      "likely_parent_issue": "AMB-1485",
+      "recommended_parent_title": "VSP-06 You Native Settings",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "you",
+        "settings",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Clarify You account/offline boundary before source leaf",
+          "scope": "Figma and policy readback, no source changes",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "Produce You SwiftUI parity leaf",
+          "scope": "Surfaces/You only, native settings rows with real targets",
+          "recommended_status": "Spec Ready after owner approval"
+        }
+      ],
+      "blocked_by": [
+        "VSP-01 shell parity",
+        "VSP-10 source-owner map",
+        "VSP-09 accessibility matrix",
+        "account/offline boundary clarity",
+        "owner approval"
+      ],
+      "acceptance_summary": [
+        "You remains native settings/user system.",
+        "No old profile IA and no account-gated core value.",
+        "Every visible row opens real detail or an honest unavailable state."
+      ],
+      "validation_summary": [
+        "focused You tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "approved frame ID",
+        "live SwiftUI screenshot matrix",
+        "offline/account boundary proof"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-07",
+      "likely_parent_issue": "AMB-1486",
+      "recommended_parent_title": "VSP-07 Trust Inspection Details",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "trust",
+        "inspection",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Define contextual inspection mounts for Trust details",
+          "scope": "Proof/Source/Privacy/History/Receipts as details only",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "Produce Trust inspection SwiftUI parity leaf",
+          "scope": "Trust and overlay inspection owners only",
+          "recommended_status": "Spec Ready after owner approval"
+        }
+      ],
+      "blocked_by": [
+        "surface object existence from VSP-02 through VSP-06",
+        "VSP-09 accessibility matrix",
+        "owner approval"
+      ],
+      "acceptance_summary": [
+        "Trust remains contextual inspection detail.",
+        "No Proof, Source, Privacy, History, or Receipts root surfaces.",
+        "Copy cannot overclaim proof or privacy readiness."
+      ],
+      "validation_summary": [
+        "focused Trust tests after source implementation",
+        "python3 scripts/ambitions-green-standard-audit.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "approved frame ID",
+        "contextual inspection screenshot proof",
+        "privacy/trust disclosure proof"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-08",
+      "likely_parent_issue": "AMB-1487",
+      "recommended_parent_title": "VSP-08 External Boundaries",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "external-boundary",
+        "privacy",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "VSP-08A policy readback for account, offline, R2, Source Atlas, AI boundary",
+          "scope": "docs/Figma/owner review only",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "VSP-08B implementation proof after policy approval",
+          "scope": "public/reference-only R2 and offline no-account proof",
+          "recommended_status": "Backlog"
+        }
+      ],
+      "blocked_by": [
+        "owner approval",
+        "privacy-boundary proof",
+        "offline no-account proof",
+        "R2 request-shape proof"
+      ],
+      "acceptance_summary": [
+        "Offline no-account core value remains usable.",
+        "R2/Source Atlas is public/reference/freshness only.",
+        "No private graph egress and no external/cloud LLM core runtime."
+      ],
+      "validation_summary": [
+        "privacy/request-shape proof after source implementation",
+        "python3 scripts/ambitions-local-first-boundary-scan.py when applicable",
+        "python3 scripts/ambitions-vsp-provenance-audit.py"
+      ],
+      "closeout_required": [
+        "approved policy readback",
+        "request-shape artifacts",
+        "offline no-account proof"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-09",
+      "likely_parent_issue": "AMB-1488",
+      "recommended_parent_title": "VSP-09 Motion / Haptics / Accessibility Matrix",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "accessibility",
+        "motion",
+        "haptics",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Define cross-VSP accessibility/motion/haptics acceptance matrix",
+          "scope": "Dynamic Type, VoiceOver, Reduce Motion, contrast, transparency, haptics",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "Attach manual/device proof for accessibility and haptics",
+          "scope": "proof only; no product UI Green without proof",
+          "recommended_status": "Needs Repair"
+        }
+      ],
+      "blocked_by": [
+        "owner approval",
+        "manual accessibility proof",
+        "device haptic note"
+      ],
+      "acceptance_summary": [
+        "Motion remains behavior, not destination.",
+        "Every major VSP has static/reduced-motion equivalent.",
+        "No visual Green without accessibility matrix proof."
+      ],
+      "validation_summary": [
+        "focused accessibility tests after source implementation",
+        "python3 scripts/ambitions-vsp-provenance-audit.py",
+        "git diff --check"
+      ],
+      "closeout_required": [
+        "accessibility matrix",
+        "Reduce Motion walkthrough",
+        "haptic device note"
+      ],
+      "do_not_create_now": true
+    },
+    {
+      "vsp_id": "VSP-10",
+      "likely_parent_issue": "AMB-1489",
+      "recommended_parent_title": "VSP-10 Implementation Anatomy",
+      "recommended_status": "Needs Repair",
+      "recommended_labels": [
+        "VSP",
+        "implementation-anatomy",
+        "provenance",
+        "yellow-proof"
+      ],
+      "recommended_sub_issues": [
+        {
+          "title": "Maintain Git-owned VSP SwiftUI source-owner registry",
+          "scope": "docs/design/provenance only",
+          "recommended_status": "Needs Repair"
+        },
+        {
+          "title": "Generate source inventory and provenance audit",
+          "scope": "scripts and generated docs only",
+          "recommended_status": "Needs Repair"
+        }
+      ],
+      "blocked_by": [
+        "owner approval",
+        "component preview proof",
+        "source-owner review"
+      ],
+      "acceptance_summary": [
+        "Git registry is canonical for Codex source ownership.",
+        "Linear is mirror only.",
+        "Figma annotations are generated/manual until Code Connect is available."
+      ],
+      "validation_summary": [
+        "python3 scripts/ambitions-component-inventory-generate.py",
+        "python3 scripts/ambitions-provenance-report-generate.py",
+        "python3 scripts/ambitions-vsp-provenance-audit.py",
+        "git diff --check"
+      ],
+      "closeout_required": [
+        "generated inventories",
+        "audit report",
+        "non-claims for Code Connect and Visual Green"
+      ],
+      "do_not_create_now": true
+    }
+  ]
+}

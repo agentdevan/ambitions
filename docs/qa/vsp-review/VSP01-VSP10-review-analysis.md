@@ -653,6 +653,18 @@ Validation commands: `git diff --check`; architecture inventory; green standard 
 
 Proof artifacts: VSP-to-source-owner map, component preview inventory, stale vocabulary list, proof gap matrix.
 
+## Code-Connect-free provenance system
+
+A Git-owned Code-Connect-free provenance system now lives at `docs/design/provenance/`.
+
+- Start at `docs/design/provenance/README.md`.
+- Use `docs/design/provenance/VSP-SwiftUI-Provenance-Map.md` for the VSP-to-source-owner handoff.
+- The Git provenance registry is canonical: `docs/design/provenance/vsp-provenance.json`, `component-registry.json`, `figma-node-index.json`, `proof-registry.json`, and `linear-map.json`.
+- Linear is a mirror/spec target, not the source of truth, and this review does not create or update Linear objects.
+- Figma annotations are generated/manual because Figma Code Connect is unavailable in the current workspace.
+- No VSP moves beyond Yellow without current proof artifacts, owner approval where required, and the applicable render/accessibility/privacy validation evidence.
+- This system does not implement VSP UI surfaces or change SwiftUI runtime behavior.
+
 ## Risk register additions
 
 The following issues should be added to known issues or risk register later, but this review does not edit those files:
@@ -672,20 +684,20 @@ The following issues should be added to known issues or risk register later, but
 
 Status: Yellow
 
-Scope completed: Read-only inventory, reconciliation, risk analysis, dependency analysis, and future execution shaping for VSP-01 through VSP-10.
+Scope completed: Read-only inventory, reconciliation, risk analysis, dependency analysis, future execution shaping for VSP-01 through VSP-10, and Code-Connect-free provenance-system addendum.
 
-Files changed: `docs/qa/vsp-review/VSP01-VSP10-review-analysis.md`
+Files changed: `docs/qa/vsp-review/VSP01-VSP10-review-analysis.md`; `docs/design/provenance/**`; `scripts/ambitions-component-inventory-generate.py`; `scripts/ambitions-provenance-report-generate.py`; `scripts/ambitions-vsp-provenance-audit.py`.
 
 Product law preserved: Yes. No source code, truth canon, Linear objects, completion status, shell authority, account/R2 law, Capture root law, or Motion root law was changed.
 
-Validation run: `git diff --check` passed; `python3 scripts/ambitions-green-standard-audit.py` passed with `GREEN: no disallowed architecture-as-UI strings found in active primary UI source`; `python3 scripts/ambitions-architecture-inventory.py` passed with `GREEN final-tree parity achieved`.
+Validation run: `python3 scripts/ambitions-component-inventory-generate.py` passed; `python3 scripts/ambitions-provenance-report-generate.py` passed; `python3 scripts/ambitions-vsp-provenance-audit.py` passed with 0 blocking failures, 0 warnings, and 95 Yellow proof gaps; `git diff --check` passed. Prior analysis validation also recorded `python3 scripts/ambitions-green-standard-audit.py` and `python3 scripts/ambitions-architecture-inventory.py`.
 
-Validation not run: Build, test, simulator, device, visual screenshot capture, Figma owner review, Linear mutation, and accessibility/device proof were intentionally not run for this docs-only review.
+Validation not run: Build, test, simulator, device, visual screenshot capture, Figma API mutation, Figma owner review, Linear mutation, and accessibility/device proof were intentionally not run for this docs/governance review.
 
-Proof artifacts: This report; existing Yellow evidence package at `docs/qa/evidence/2026-06-29-vsp-north-star-figma/**`.
+Proof artifacts: This report; existing Yellow evidence package at `docs/qa/evidence/2026-06-29-vsp-north-star-figma/**`; provenance registry and generated audit report at `docs/design/provenance/**`.
 
 Known risks: VSP package remains Yellow; owner approval absent; VSP-01 live SwiftUI parity unproven; VSP-08 underdefined; manual accessibility, haptics, screenshot, and device proof missing; stale naming remains in adjacent source contexts.
 
-Follow-up required: Run VSP-01 shell parity readback, VSP-10 source-owner map, and VSP-09 accessibility/motion/haptics acceptance matrix before implementation leaves.
+Follow-up required: Run VSP-01 shell parity readback, owner review, VSP-09 accessibility/motion/haptics proof, and live SwiftUI/device proof before any VSP moves beyond Yellow or into implementation Green.
 
-Rollback plan: Delete `docs/qa/vsp-review/VSP01-VSP10-review-analysis.md`.
+Rollback plan: Remove the `## Code-Connect-free provenance system` report section, delete `docs/design/provenance/**`, and delete the three provenance scripts.

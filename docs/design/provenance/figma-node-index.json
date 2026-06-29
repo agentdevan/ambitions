@@ -1,0 +1,232 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "Known Figma/VSP evidence index only. This file does not mutate Figma, does not claim Code Connect, and does not prove Visual Green.",
+  "nodes": [
+    {
+      "figma_file_key": "hnVi8KV2SAuWP3V5hV160W",
+      "node_id": "1:2",
+      "node_id_status": "known",
+      "frame_name": "AUTHORITY - VSP-01 - approved shell authority",
+      "vsp_id": "VSP-01",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-01-authority-1-2.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-01---root-shell--stage--chrome",
+      "notes": [
+        "Approved shell authority. Do not mutate without explicit owner evidence."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:2",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-02 - Today Reality Window hero - R1",
+      "vsp_id": "VSP-02",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-hero-r1-repaired.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-02---today-reality-window",
+      "notes": [
+        "Content-only candidate. Not Visual Green."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:171",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-03 - Goals Life Area Atlas hero - R1",
+      "vsp_id": "VSP-03",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-hero-r1-repaired.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-03---goals-life-area-atlas",
+      "notes": [
+        "Content-only candidate. Not Visual Green."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:354",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-04 - Time LifeShape Week hero - R1",
+      "vsp_id": "VSP-04",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-04---time--lifeshape-week",
+      "notes": [
+        "Content-only candidate. Not Visual Green."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:543",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-05 - Capture Open Field Composer hero - R1",
+      "vsp_id": "VSP-05",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-05---capture-open-field-composer",
+      "notes": [
+        "Global composer candidate. Not a tab/root/inbox/chatbot."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:713",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-06 - You Native Settings hero - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-06---you-native-settings",
+      "notes": [
+        "You native settings candidate. Not owner-approved."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:882",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-07 - Trust Inspection hero - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-07---trust-inspection-details",
+      "notes": [
+        "Contextual inspection candidate. Not a root surface."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:1050",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-08 - External Boundaries hero - R1",
+      "vsp_id": "VSP-08",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+        "docs/qa/KNOWN_ISSUES.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-08---external-boundaries",
+      "notes": [
+        "Boundary candidate. Needs VSP-08A policy readback and VSP-08B implementation proof."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:1215",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-09 - Motion Accessibility Matrix hero - R1",
+      "vsp_id": "VSP-09",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-09---motion--haptics--accessibility-matrix",
+      "notes": [
+        "Motion/accessibility candidate. Motion must remain behavior, not destination."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "14:1384",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-10 - Implementation Anatomy hero - R1",
+      "vsp_id": "VSP-10",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
+        "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+        "docs/design/provenance/component-registry.json"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-10---implementation-anatomy",
+      "notes": [
+        "Implementation anatomy candidate. Not a product hero substitute."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "29:45",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP Code Connect Readiness Ledger - R2",
+      "vsp_id": "VSP-10",
+      "evidence_screenshot_paths": [],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+        "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/README.md"
+      ],
+      "provenance_annotation_status": "generated_copy_available",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md",
+      "notes": [
+        "Readiness ledger says Code Connect publish is blocked by Figma account/seat capability."
+      ]
+    }
+  ]
+}

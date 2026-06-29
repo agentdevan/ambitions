@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "Curated source-owner/component registry only. Source presence is not SwiftUI render proof, Visual Green, accessibility conformance, device proof, release proof, or owner approval.",
+  "components": [
+    {
+      "component_id": "shell-stage-root",
+      "component_name": "AmbitionsStage / Stage root shell",
+      "source_path": "Native/Ambitions/Stage/AmbitionsStage.swift",
+      "component_kind": "shell",
+      "owning_vsp_ids": [
+        "VSP-01"
+      ],
+      "owning_surface_or_layer": "Stage shell authority",
+      "used_by_paths": [
+        "Native/Ambitions/App/AmbitionsStageHost.swift",
+        "Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/App/AppShellNavigationTests.swift",
+        "Native/AmbitionsTests/App/AppShellChromeTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/SI03ShellNavigationPreviews.swift",
+        "Sources/Previews/RootDestinationIdentityPreviews.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [
+        "Some source-level tab terminology remains internal compatibility language."
+      ],
+      "accessibility_risks": [
+        "Root dock VoiceOver order and Dynamic Type shell parity still need current proof."
+      ],
+      "motion_risks": [
+        "Shell transitions require Reduce Motion verification."
+      ],
+      "notes": [
+        "VSP-01 authority is the approved shell frame; source is candidate parity owner only."
+      ]
+    },
+    {
+      "component_id": "shell-stage-dock-rail",
+      "component_name": "StageDockRail",
+      "source_path": "Native/Ambitions/Stage/Chrome/StageDockRail.swift",
+      "component_kind": "shell",
+      "owning_vsp_ids": [
+        "VSP-01",
+        "VSP-09"
+      ],
+      "owning_surface_or_layer": "Stage chrome / root dock",
+      "used_by_paths": [
+        "Native/Ambitions/Stage/AmbitionsStage.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/App/AppShellNavigationTests.swift",
+        "Native/AmbitionsTests/App/SafeAreaAuditTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/SI03ShellNavigationPreviews.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [],
+      "accessibility_risks": [
+        "Icon-only dock requires VoiceOver labels and selected-state proof."
+      ],
+      "motion_risks": [
+        "Selection feedback needs Reduce Motion/haptic proof."
+      ],
+      "notes": [
+        "Root dock must expose only Today, Goals, Time, You."
+      ]
+    },
+    {
+      "component_id": "today-start-here-proof-stack",
+      "component_name": "StartHereProductProofStack",
+      "source_path": "Sources/Components/StartHereProductPrimitives.swift",
+      "component_kind": "surface",
+      "owning_vsp_ids": [
+        "VSP-02",
+        "VSP-10"
+      ],
+      "owning_surface_or_layer": "Today content object",
+      "used_by_paths": [
+        "Native/Ambitions/Surfaces/Today/TodayObjectView.swift",
+        "Native/Ambitions/Surfaces/Today/TodaySurface.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift",
+        "Native/AmbitionsTests/Today/TodayRealityWindowActionGatingTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/RealityMeridianRichnessPreviews.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [
+        "Do not promote internal Reality Meridian naming as root UI language."
+      ],
+      "accessibility_risks": [
+        "Start Here proof stack needs live VoiceOver order and large text proof."
+      ],
+      "motion_risks": [
+        "Today mutations need static equivalents when Reduce Motion is enabled."
+      ],
+      "notes": [
+        "Primary Today candidate owner for Start here / Recommended step content."
+      ]
+    },
+    {
+      "component_id": "today-reality-window-field",
+      "component_name": "Reality Window / temporal field primitives",
+      "source_path": "Sources/Components/RealityMeridianTemporalPrimitives.swift",
+      "component_kind": "surface",
+      "owning_vsp_ids": [
+        "VSP-02",
+        "VSP-04"
+      ],
+      "owning_surface_or_layer": "Today / Time temporal object support",
+      "used_by_paths": [
+        "Native/Ambitions/Surfaces/Today/TodayObjectView.swift",
+        "Native/Ambitions/Surfaces/Time/TimeObjectView.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/DesignSystem/RealityMeridianTemporalWindowTests.swift",
+        "Native/AmbitionsTests/Today/TodayRealityMeridianExperienceElevationTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/RealityMeridianTemporalPreviews.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [
+        "Internal meridian naming is source provenance, not root product IA."
+      ],
+      "accessibility_risks": [
+        "Temporal marks need semantic mirror proof."
+      ],
+      "motion_risks": [
+        "Temporal movement cannot carry required meaning without static fallback."
+      ],
+      "notes": [
+        "Maps VSP-02 field candidate and adjacent Time temporal primitives."
+      ]
+    },
+    {
+      "component_id": "goals-stage-scene",
+      "component_name": "GoalsStageScene / Goals object owner",
+      "source_path": "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift",
+      "component_kind": "surface",
+      "owning_vsp_ids": [
+        "VSP-03"
+      ],
+      "owning_surface_or_layer": "Goals content object",
+      "used_by_paths": [
+        "Native/Ambitions/Surfaces/Goals/GoalsSurface.swift",
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/Goals/GoalsConstellationAtlasReconstructionTests.swift",
+        "Native/AmbitionsTests/Goals/GoalsRootDetailRebuildTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/FE09ComponentSystemPreviewMatrix.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [
+        "Do not promote old top-level product-area names from generated inventory."
+      ],
+      "accessibility_risks": [
+        "Life area objects need VoiceOver and Dynamic Type proof."
+      ],
+      "motion_risks": [
+        "Atlas transitions need Reduce Motion fallback proof."
+      ],
+      "notes": [
+        "Current source owner for Goals object projection and atlas content."
+      ]
+    },
+    {
+      "component_id": "goals-life-area-row",
+      "component_name": "GroupedNavigationRow / Life area row candidate",
+      "source_path": "Sources/Components/GroupedNavigationList.swift",
+      "component_kind": "surface",
+      "owning_vsp_ids": [
+        "VSP-03",
+        "VSP-06",
+        "VSP-10"
+      ],
+      "owning_surface_or_layer": "Native row primitive",
+      "used_by_paths": [
+        "Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/App/GroupedNavigationListDesignSystemTests.swift",
+        "Native/AmbitionsTests/Goals/GoalsObjectStagePrimitiveTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/ComponentPreviewGallery+Density.swift"
+      ],
+      "proof_status": "source_only",
+      "stale_naming_risks": [
+        "Rows must not become generic task or project-board UI."
+      ],
+      "accessibility_risks": [
+        "Rows need actual opening behavior or honest unavailable state."
+      ],
+      "motion_risks": [],
+      "notes": [
+        "Shared row primitive needs surface-specific product ownership before implementation leaves."
+      ]
+    },
+    {
+      "component_id": "time-lifeshape-field",
+      "component_name": "LifeShapeField",
+      "source_path": "Sources/Components/LifeDirectionalIntegrationPrimitives+02-LifeShapeField.swift",
+      "component_kind": "surface",
+      "owning_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "owning_surface_or_layer": "Time content object",
+      "used_by_paths": [
+        "Native/Ambitions/Surfaces/Time/TimeObjectView.swift",
+        "Native/Ambitions/Surfaces/Time/TimeSurface.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/Time/LifeShapeFieldViewReconstructionTests.swift",
+        "Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/RealityMeridianTemporalPreviews.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [
+        "Plan-related internal naming may appear in generated source inventory but must not become root IA."
+      ],
+      "accessibility_risks": [
+        "Week/time field needs large text collapse and semantic mirror proof."
+      ],
+      "motion_risks": [
+        "Reflow animation needs Reduce Motion walkthrough proof."
+      ],
+      "notes": [
+        "Primary VSP-04 source-owner candidate."
+      ]
+    },
+    {
+      "component_id": "capture-composer-surface",
+      "component_name": "CaptureComposerSurface",
+      "source_path": "Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift",
+      "component_kind": "composer",
+      "owning_vsp_ids": [
+        "VSP-05"
+      ],
+      "owning_surface_or_layer": "Global Capture composer",
+      "used_by_paths": [
+        "Native/Ambitions/Composer/Capture/CaptureSurface.swift",
+        "Native/Ambitions/Stage/AmbitionsStage.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/Capture/CaptureViewModelTests.swift",
+        "Native/AmbitionsTests/ComposerCaptureCanonicalOwnershipTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/CoreReusableInteractionPrimitivePreviews.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [
+        "Capture must not become a tab, inbox, category wall, or chatbot."
+      ],
+      "accessibility_risks": [
+        "Composer text field, proposal, receipt, and keyboard state need VoiceOver proof."
+      ],
+      "motion_risks": [
+        "Composer presentation needs Reduce Motion and haptic proof."
+      ],
+      "notes": [
+        "Canonical source owner for VSP-05. Root shell access remains VSP-01-owned."
+      ]
+    },
+    {
+      "component_id": "you-native-system",
+      "component_name": "YouRootSurface / User system settings",
+      "source_path": "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+      "component_kind": "surface",
+      "owning_vsp_ids": [
+        "VSP-06"
+      ],
+      "owning_surface_or_layer": "You content object",
+      "used_by_paths": [
+        "Native/Ambitions/Surfaces/You/YouSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouObjectView.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/You/YouUserSystemProfileReconstructionTests.swift",
+        "Native/AmbitionsTests/App/PersonalSystemCenterDesignSystemTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/PersonalSystemCenterPreviews.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [
+        "Old Profile naming is rejected as root IA."
+      ],
+      "accessibility_risks": [
+        "Every settings row needs a real target or honest unavailable state."
+      ],
+      "motion_risks": [],
+      "notes": [
+        "You must preserve offline no-account value and optional account boundaries."
+      ]
+    },
+    {
+      "component_id": "trust-source-receipt-strip",
+      "component_name": "SourceTrustReceiptStrip / Trust seam",
+      "source_path": "Sources/Components/TrustReceiptLayerPrimitives+02-SourceTrustReceiptStrip.swift",
+      "component_kind": "trust_inspection",
+      "owning_vsp_ids": [
+        "VSP-07"
+      ],
+      "owning_surface_or_layer": "Contextual trust inspection",
+      "used_by_paths": [
+        "Native/Ambitions/Trust/SourceInspectionView.swift",
+        "Native/Ambitions/Trust/ProofInspectionView.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/App/TrustReceiptLayerDesignSystemTests.swift",
+        "Native/AmbitionsTests/Trust/SourceInspectionPresentationTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/TrustReceiptLayerPreviews.swift"
+      ],
+      "proof_status": "swiftui_render_missing",
+      "stale_naming_risks": [],
+      "accessibility_risks": [
+        "Inspection details must not appear before user intent and need reading-order proof."
+      ],
+      "motion_risks": [
+        "Trust reveal movement needs static equivalent."
+      ],
+      "notes": [
+        "Trust objects are details, not top-level surfaces."
+      ]
+    },
+    {
+      "component_id": "source-atlas-boundary",
+      "component_name": "SourceAtlas boundary primitives",
+      "source_path": "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift",
+      "component_kind": "external_boundary",
+      "owning_vsp_ids": [
+        "VSP-08"
+      ],
+      "owning_surface_or_layer": "Source Atlas / R2 / privacy boundary",
+      "used_by_paths": [
+        "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift",
+        "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/Runtime/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
+        "Native/AmbitionsTests/Runtime/SourceAtlasOfflineNoAccountScenarioTests.swift",
+        "Native/AmbitionsTests/Persistence/SourceAtlasPublicArtifactPrivacyBoundaryTests.swift"
+      ],
+      "known_previews": [],
+      "proof_status": "source_only",
+      "stale_naming_risks": [],
+      "accessibility_risks": [
+        "Boundary states need plain-language, non-jargon explanation in You/Trust."
+      ],
+      "motion_risks": [],
+      "notes": [
+        "Source evidence only; VSP-08 Green needs request-shape and offline no-account proof."
+      ]
+    },
+    {
+      "component_id": "motion-accessibility-policy",
+      "component_name": "StageMotionReductionPolicy / accessibility matrix",
+      "source_path": "Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift",
+      "component_kind": "motion_behavior",
+      "owning_vsp_ids": [
+        "VSP-09"
+      ],
+      "owning_surface_or_layer": "Stage/Motion behavior and accessibility policy",
+      "used_by_paths": [
+        "Native/Ambitions/Stage/AmbitionsStage.swift",
+        "Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/App/StageMotionRoutingTests.swift",
+        "Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/AccessibilityAdaptiveInterfacePreviews.swift",
+        "Sources/Previews/InteractionMotionHapticsPreviews.swift"
+      ],
+      "proof_status": "source_only",
+      "stale_naming_risks": [
+        "Motion Current can remain source/internal only, not destination language."
+      ],
+      "accessibility_risks": [
+        "Manual VoiceOver, Dynamic Type, Reduce Motion, contrast, transparency, and haptic proof is missing."
+      ],
+      "motion_risks": [
+        "Motion policy is source-present but not device-proven."
+      ],
+      "notes": [
+        "VSP-09 must become the cross-VSP acceptance rubric before visual polish proceeds."
+      ]
+    },
+    {
+      "component_id": "vsp-provenance-registry",
+      "component_name": "VSP Git provenance registry",
+      "source_path": "docs/design/provenance/vsp-provenance.json",
+      "component_kind": "quality_proof",
+      "owning_vsp_ids": [
+        "VSP-10"
+      ],
+      "owning_surface_or_layer": "Implementation anatomy / governance",
+      "used_by_paths": [
+        "docs/design/provenance/VSP-SwiftUI-Provenance-Map.md",
+        "docs/design/provenance/Linear-Issue-Pack.md",
+        "docs/design/provenance/Figma-Annotation-Pack.md"
+      ],
+      "known_tests": [],
+      "known_previews": [],
+      "proof_status": "source_only",
+      "stale_naming_risks": [
+        "Generated inventories can contain stale terms; audit must keep them out of canonical ownership fields."
+      ],
+      "accessibility_risks": [
+        "Governance docs do not replace accessibility proof."
+      ],
+      "motion_risks": [
+        "Governance docs do not replace Reduce Motion proof."
+      ],
+      "notes": [
+        "This is the Code-Connect-free canonical mapping layer."
+      ]
+    }
+  ]
+}

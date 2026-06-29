@@ -1,0 +1,1214 @@
+{
+  "schema_version": 1,
+  "claim_boundary": "Proof registry only. Missing proof is explicit. Figma candidate proof and validation command proof do not establish Visual Green, source implementation, device proof, accessibility conformance, release proof, or owner approval.",
+  "proofs": [
+    {
+      "proof_id": "vsp-01-figma-candidate",
+      "vsp_id": "VSP-01",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-01-authority-1-2.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Root Shell / Stage / Chrome."
+    },
+    {
+      "proof_id": "vsp-01-owner-approval",
+      "vsp_id": "VSP-01",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-01-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-01",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-01-swiftui-device-screenshot",
+      "vsp_id": "VSP-01",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-01-dynamic-type-screenshot",
+      "vsp_id": "VSP-01",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-01-voiceover-manual-note",
+      "vsp_id": "VSP-01",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-01-reduce-motion-walkthrough",
+      "vsp_id": "VSP-01",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-01-increase-contrast-check",
+      "vsp_id": "VSP-01",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-01-reduce-transparency-check",
+      "vsp_id": "VSP-01",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-01-haptic-device-note",
+      "vsp_id": "VSP-01",
+      "proof_type": "haptic_device_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing haptic device note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-01 can claim Green for haptic device note."
+    },
+    {
+      "proof_id": "vsp-01-validation-command",
+      "vsp_id": "VSP-01",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-02-figma-candidate",
+      "vsp_id": "VSP-02",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-hero-r1-repaired.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Today Reality Window."
+    },
+    {
+      "proof_id": "vsp-02-owner-approval",
+      "vsp_id": "VSP-02",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-02-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-02",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-02-swiftui-device-screenshot",
+      "vsp_id": "VSP-02",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-02-dynamic-type-screenshot",
+      "vsp_id": "VSP-02",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-02-voiceover-manual-note",
+      "vsp_id": "VSP-02",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-02-reduce-motion-walkthrough",
+      "vsp_id": "VSP-02",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-02-increase-contrast-check",
+      "vsp_id": "VSP-02",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-02-reduce-transparency-check",
+      "vsp_id": "VSP-02",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-02-haptic-device-note",
+      "vsp_id": "VSP-02",
+      "proof_type": "haptic_device_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing haptic device note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for haptic device note."
+    },
+    {
+      "proof_id": "vsp-02-runtime-behavior-test",
+      "vsp_id": "VSP-02",
+      "proof_type": "runtime_behavior_test",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing runtime behavior test evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-02 can claim Green for runtime behavior test."
+    },
+    {
+      "proof_id": "vsp-02-validation-command",
+      "vsp_id": "VSP-02",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-03-figma-candidate",
+      "vsp_id": "VSP-03",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-hero-r1-repaired.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Goals Life Area Atlas."
+    },
+    {
+      "proof_id": "vsp-03-owner-approval",
+      "vsp_id": "VSP-03",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-03-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-03",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-03-swiftui-device-screenshot",
+      "vsp_id": "VSP-03",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-03-dynamic-type-screenshot",
+      "vsp_id": "VSP-03",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-03-voiceover-manual-note",
+      "vsp_id": "VSP-03",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-03-reduce-motion-walkthrough",
+      "vsp_id": "VSP-03",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-03-increase-contrast-check",
+      "vsp_id": "VSP-03",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-03-reduce-transparency-check",
+      "vsp_id": "VSP-03",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-03-haptic-device-note",
+      "vsp_id": "VSP-03",
+      "proof_type": "haptic_device_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing haptic device note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for haptic device note."
+    },
+    {
+      "proof_id": "vsp-03-runtime-behavior-test",
+      "vsp_id": "VSP-03",
+      "proof_type": "runtime_behavior_test",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing runtime behavior test evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-03 can claim Green for runtime behavior test."
+    },
+    {
+      "proof_id": "vsp-03-validation-command",
+      "vsp_id": "VSP-03",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-04-figma-candidate",
+      "vsp_id": "VSP-04",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Time / LifeShape Week."
+    },
+    {
+      "proof_id": "vsp-04-owner-approval",
+      "vsp_id": "VSP-04",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-04-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-04",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-04-swiftui-device-screenshot",
+      "vsp_id": "VSP-04",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-04-dynamic-type-screenshot",
+      "vsp_id": "VSP-04",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-04-voiceover-manual-note",
+      "vsp_id": "VSP-04",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-04-reduce-motion-walkthrough",
+      "vsp_id": "VSP-04",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-04-increase-contrast-check",
+      "vsp_id": "VSP-04",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-04-reduce-transparency-check",
+      "vsp_id": "VSP-04",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-04-haptic-device-note",
+      "vsp_id": "VSP-04",
+      "proof_type": "haptic_device_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing haptic device note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for haptic device note."
+    },
+    {
+      "proof_id": "vsp-04-runtime-behavior-test",
+      "vsp_id": "VSP-04",
+      "proof_type": "runtime_behavior_test",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing runtime behavior test evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-04 can claim Green for runtime behavior test."
+    },
+    {
+      "proof_id": "vsp-04-validation-command",
+      "vsp_id": "VSP-04",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-05-figma-candidate",
+      "vsp_id": "VSP-05",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Capture Open Field Composer."
+    },
+    {
+      "proof_id": "vsp-05-owner-approval",
+      "vsp_id": "VSP-05",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-05-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-05",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-05-swiftui-device-screenshot",
+      "vsp_id": "VSP-05",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-05-dynamic-type-screenshot",
+      "vsp_id": "VSP-05",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-05-voiceover-manual-note",
+      "vsp_id": "VSP-05",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-05-reduce-motion-walkthrough",
+      "vsp_id": "VSP-05",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-05-increase-contrast-check",
+      "vsp_id": "VSP-05",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-05-reduce-transparency-check",
+      "vsp_id": "VSP-05",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-05-haptic-device-note",
+      "vsp_id": "VSP-05",
+      "proof_type": "haptic_device_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing haptic device note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for haptic device note."
+    },
+    {
+      "proof_id": "vsp-05-runtime-behavior-test",
+      "vsp_id": "VSP-05",
+      "proof_type": "runtime_behavior_test",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing runtime behavior test evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-05 can claim Green for runtime behavior test."
+    },
+    {
+      "proof_id": "vsp-05-validation-command",
+      "vsp_id": "VSP-05",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-06-figma-candidate",
+      "vsp_id": "VSP-06",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for You Native Settings."
+    },
+    {
+      "proof_id": "vsp-06-owner-approval",
+      "vsp_id": "VSP-06",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-06-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-06",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-06-swiftui-device-screenshot",
+      "vsp_id": "VSP-06",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-06-dynamic-type-screenshot",
+      "vsp_id": "VSP-06",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-06-voiceover-manual-note",
+      "vsp_id": "VSP-06",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-06-reduce-motion-walkthrough",
+      "vsp_id": "VSP-06",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-06-increase-contrast-check",
+      "vsp_id": "VSP-06",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-06-reduce-transparency-check",
+      "vsp_id": "VSP-06",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-06-runtime-behavior-test",
+      "vsp_id": "VSP-06",
+      "proof_type": "runtime_behavior_test",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing runtime behavior test evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for runtime behavior test."
+    },
+    {
+      "proof_id": "vsp-06-validation-command",
+      "vsp_id": "VSP-06",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-06-privacy-boundary-check",
+      "vsp_id": "VSP-06",
+      "proof_type": "privacy_boundary_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing privacy boundary check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-06 can claim Green for privacy boundary check."
+    },
+    {
+      "proof_id": "vsp-07-figma-candidate",
+      "vsp_id": "VSP-07",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Trust Inspection Details."
+    },
+    {
+      "proof_id": "vsp-07-owner-approval",
+      "vsp_id": "VSP-07",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-07-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-07",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-07-swiftui-device-screenshot",
+      "vsp_id": "VSP-07",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-07-dynamic-type-screenshot",
+      "vsp_id": "VSP-07",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-07-voiceover-manual-note",
+      "vsp_id": "VSP-07",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-07-reduce-motion-walkthrough",
+      "vsp_id": "VSP-07",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-07-increase-contrast-check",
+      "vsp_id": "VSP-07",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-07-reduce-transparency-check",
+      "vsp_id": "VSP-07",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-07-runtime-behavior-test",
+      "vsp_id": "VSP-07",
+      "proof_type": "runtime_behavior_test",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing runtime behavior test evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for runtime behavior test."
+    },
+    {
+      "proof_id": "vsp-07-validation-command",
+      "vsp_id": "VSP-07",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-07-privacy-boundary-check",
+      "vsp_id": "VSP-07",
+      "proof_type": "privacy_boundary_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing privacy boundary check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-07 can claim Green for privacy boundary check."
+    },
+    {
+      "proof_id": "vsp-08-figma-candidate",
+      "vsp_id": "VSP-08",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for External Boundaries."
+    },
+    {
+      "proof_id": "vsp-08-owner-approval",
+      "vsp_id": "VSP-08",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-08-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-08",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-08-swiftui-device-screenshot",
+      "vsp_id": "VSP-08",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-08-dynamic-type-screenshot",
+      "vsp_id": "VSP-08",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-08-voiceover-manual-note",
+      "vsp_id": "VSP-08",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-08-reduce-motion-walkthrough",
+      "vsp_id": "VSP-08",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-08-increase-contrast-check",
+      "vsp_id": "VSP-08",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-08-reduce-transparency-check",
+      "vsp_id": "VSP-08",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-08-runtime-behavior-test",
+      "vsp_id": "VSP-08",
+      "proof_type": "runtime_behavior_test",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing runtime behavior test evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for runtime behavior test."
+    },
+    {
+      "proof_id": "vsp-08-validation-command",
+      "vsp_id": "VSP-08",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-08-privacy-boundary-check",
+      "vsp_id": "VSP-08",
+      "proof_type": "privacy_boundary_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing privacy boundary check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-08 can claim Green for privacy boundary check."
+    },
+    {
+      "proof_id": "vsp-09-figma-candidate",
+      "vsp_id": "VSP-09",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Motion / Haptics / Accessibility Matrix."
+    },
+    {
+      "proof_id": "vsp-09-owner-approval",
+      "vsp_id": "VSP-09",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-09-swiftui-simulator-screenshot",
+      "vsp_id": "VSP-09",
+      "proof_type": "swiftui_simulator_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing live SwiftUI screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for live SwiftUI screenshot."
+    },
+    {
+      "proof_id": "vsp-09-swiftui-device-screenshot",
+      "vsp_id": "VSP-09",
+      "proof_type": "swiftui_device_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing device screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for device screenshot."
+    },
+    {
+      "proof_id": "vsp-09-dynamic-type-screenshot",
+      "vsp_id": "VSP-09",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-09-voiceover-manual-note",
+      "vsp_id": "VSP-09",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-09-reduce-motion-walkthrough",
+      "vsp_id": "VSP-09",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-09-increase-contrast-check",
+      "vsp_id": "VSP-09",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-09-reduce-transparency-check",
+      "vsp_id": "VSP-09",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-09-haptic-device-note",
+      "vsp_id": "VSP-09",
+      "proof_type": "haptic_device_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing haptic device note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for haptic device note."
+    },
+    {
+      "proof_id": "vsp-09-runtime-behavior-test",
+      "vsp_id": "VSP-09",
+      "proof_type": "runtime_behavior_test",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing runtime behavior test evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-09 can claim Green for runtime behavior test."
+    },
+    {
+      "proof_id": "vsp-09-validation-command",
+      "vsp_id": "VSP-09",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    },
+    {
+      "proof_id": "vsp-10-figma-candidate",
+      "vsp_id": "VSP-10",
+      "proof_type": "figma_candidate",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-crop-r1.png",
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Implementation Anatomy."
+    },
+    {
+      "proof_id": "vsp-10-owner-approval",
+      "vsp_id": "VSP-10",
+      "proof_type": "owner_approval",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-10 can claim Green for owner approval."
+    },
+    {
+      "proof_id": "vsp-10-dynamic-type-screenshot",
+      "vsp_id": "VSP-10",
+      "proof_type": "dynamic_type_screenshot",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Dynamic Type screenshot evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-10 can claim Green for Dynamic Type screenshot."
+    },
+    {
+      "proof_id": "vsp-10-voiceover-manual-note",
+      "vsp_id": "VSP-10",
+      "proof_type": "voiceover_manual_note",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing VoiceOver manual note evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-10 can claim Green for VoiceOver manual note."
+    },
+    {
+      "proof_id": "vsp-10-reduce-motion-walkthrough",
+      "vsp_id": "VSP-10",
+      "proof_type": "reduce_motion_walkthrough",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Motion walkthrough evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-10 can claim Green for Reduce Motion walkthrough."
+    },
+    {
+      "proof_id": "vsp-10-increase-contrast-check",
+      "vsp_id": "VSP-10",
+      "proof_type": "increase_contrast_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Increase Contrast check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-10 can claim Green for Increase Contrast check."
+    },
+    {
+      "proof_id": "vsp-10-reduce-transparency-check",
+      "vsp_id": "VSP-10",
+      "proof_type": "reduce_transparency_check",
+      "status": "missing",
+      "artifact_paths": [],
+      "blocking_reason": "Missing Reduce Transparency check evidence for current VSP scope.",
+      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
+      "notes": "Required before VSP-10 can claim Green for Reduce Transparency check."
+    },
+    {
+      "proof_id": "vsp-10-validation-command",
+      "vsp_id": "VSP-10",
+      "proof_type": "validation_command",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/generated/provenance-audit-report.generated.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports internal provenance-system coherence only. Does not lift the VSP beyond Yellow without owner/render/accessibility proof.",
+      "notes": "Produced by scripts/ambitions-vsp-provenance-audit.py when validation is run."
+    }
+  ]
+}
