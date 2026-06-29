@@ -29,6 +29,7 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 | SwiftUI/frontend/Apple-platform work | `ambitions-source-truth-authority`, `ambitions-architecture-tree-enforcement`, `ambitions-ios-quality-gate` |
 | Build/test/release/readiness/proof claims | `ambitions-source-truth-authority`, `ambitions-release-proof-honesty` |
 | Visual/product-surface closeout | `ambitions-ios-quality-gate`, `ambitions-release-proof-honesty` |
+| Figma/VSP/marketing render production gates | Use the retained proof/source skills as applicable, then load docs-local `docs/skills/figma-production-gate/SKILL.md`; add `docs/skills/ui-north-star-production-gate/SKILL.md` when SwiftUI plausibility, screenshots, accessibility, shell, or design-system implementation is in scope |
 | Private Life Runtime contract implementation/review | `ambitions-source-truth-authority`, `ambitions-architecture-tree-enforcement`, `ambitions-runtime-contract-engineering`; add `ambitions-ios-quality-gate` for Apple-platform/UI behavior and `ambitions-release-proof-honesty` for proof/readiness wording |
 | Docs/governance only | `ambitions-source-truth-authority`; add `ambitions-release-proof-honesty` only if proof/release wording is touched |
 | Account/R2/Source Atlas work | `ambitions-source-truth-authority`, `ambitions-ios-quality-gate` if platform code changes, `ambitions-release-proof-honesty` if readiness/proof is claimed |
@@ -57,6 +58,7 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 - Do not use skills to skip `docs/truth/CODEX_START_HERE.md` or required substantive truth files.
 - Do not use a skill as product canon, implementation proof, release proof, visual proof, or owner acceptance.
 - Do not use deleted, unregistered, or non-retained skill names as active routing unless a future truth-approved train promotes one into the retained list.
+- The docs-local production gate skills under `docs/skills/` are subordinate addendum checklists, not retained `.agents` skills, and do not change the five-skill retained inventory.
 
 ## Skill Count Policy
 

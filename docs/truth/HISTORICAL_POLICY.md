@@ -40,6 +40,7 @@ Keep these categories when current:
 - `docs/README.md`
 - `docs/native-build-and-release.md`
 - source-adjacent docs that are accurate and required to build or validate source
+- docs-local Figma/UI production gate skills under `docs/skills/`, when subordinate to `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md`
 - source, tests, fixtures used by tests, resources, entitlements, privacy manifests, project config, package config, and CI/build config that still runs
 - small scripts that are current, dry-run/build useful, and free of stale IA/control-plane assumptions
 - the five retained `.agents` skills registered in `.agents/skills/README.md`: source-truth authority, architecture-tree enforcement, iOS quality gate, release proof honesty, and runtime contract engineering

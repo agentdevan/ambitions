@@ -16,9 +16,10 @@ This directory is intentionally small. Keep docs only when they are current, can
 10. [truth/CODEX_PROCESS_TRUTH.md](truth/CODEX_PROCESS_TRUTH.md)
 11. [truth/HISTORICAL_POLICY.md](truth/HISTORICAL_POLICY.md)
 12. [native-build-and-release.md](native-build-and-release.md)
-13. [validation/README.md](validation/README.md)
-14. [../AGENTS.md](../AGENTS.md)
-15. [../README.md](../README.md)
+13. [skills/README.md](skills/README.md)
+14. [validation/README.md](validation/README.md)
+15. [../AGENTS.md](../AGENTS.md)
+16. [../README.md](../README.md)
 
 ## Retention Rule
 
