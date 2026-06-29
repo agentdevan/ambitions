@@ -39,6 +39,7 @@ SECRET_ENV_NAMES = {
 class R2LiveInventoryOptions:
     production_target_ledger_path: Path
     output_root: Path
+    hygiene_policy_path: Path | None = None
     bucket: str = "ambitions-source-atlas-prod"
     prefix: str = "source-atlas/"
     env_file_paths: tuple[Path, ...] | None = None
@@ -80,6 +81,9 @@ def run_r2_live_inventory(options: R2LiveInventoryOptions) -> dict[str, Any]:
     comparison = compare_live_to_expected(live, expected, checksum_results)
     issues.extend(comparison["issues"])
     privacy_issues = _privacy_issues_for_inventory(live, expected)
+    hygiene_policy = _hygiene_policy(options.hygiene_policy_path)
+    hygiene = _hygiene_classification(comparison["unexpectedLiveObjects"], hygiene_policy, options.created_at)
+    issues.extend(violation["issue"] for violation in hygiene["violations"])
     checks = [
         _check("r2_environment_resolved_without_secret_values", env_resolution["valid"], env_resolution["issues"]),
         _check("live_r2_inventory_listed", bool(live) and not any(issue.startswith("live R2 list failed") for issue in issues), [issue for issue in issues if issue.startswith("live R2 list failed")]),
@@ -87,6 +91,7 @@ def run_r2_live_inventory(options: R2LiveInventoryOptions) -> dict[str, Any]:
         _check("live_expected_object_sizes_match", not comparison["sizeMismatches"], [item["objectKey"] for item in comparison["sizeMismatches"]]),
         _check("known_checksums_match" if options.verify_known_checksums else "known_checksums_not_requested", not comparison["checksumMismatches"], [item["objectKey"] for item in comparison["checksumMismatches"]]),
         _check("object_keys_public_reference_only", not privacy_issues, privacy_issues),
+        _check("production_bucket_hygiene_policy", not hygiene["violations"], [item["issue"] for item in hygiene["violations"]]),
     ]
     valid = all(check["passed"] for check in checks)
     unexpected_count = len(comparison["unexpectedLiveObjects"])
@@ -130,8 +135,14 @@ def run_r2_live_inventory(options: R2LiveInventoryOptions) -> dict[str, Any]:
             "checksumReads": len(checksum_results),
             "checksumMismatches": len(comparison["checksumMismatches"]),
             "privacyIssues": len(privacy_issues),
+            "hygieneViolations": len(hygiene["violations"]),
+            "hygieneRedObjects": sum(1 for item in hygiene["classifiedUnexpectedObjects"] if item["severity"] == "Red"),
+            "hygieneYellowObjects": sum(1 for item in hygiene["classifiedUnexpectedObjects"] if item["severity"] == "Yellow"),
+            "approvedNonCurrentObjects": sum(1 for item in hygiene["classifiedUnexpectedObjects"] if item["classification"] == "approved_noncurrent_retained"),
         },
         "coverageByDomain": _coverage_by_domain(expected, live, comparison),
+        "hygienePolicy": hygiene_policy,
+        "hygiene": hygiene,
         "expectedObjects": expected,
         "liveObjects": live,
         "comparison": comparison,
@@ -261,6 +272,10 @@ def r2_live_inventory_markdown(report: dict[str, Any]) -> str:
         f"- Checksum reads: {counts['checksumReads']}",
         f"- Checksum mismatches: {counts['checksumMismatches']}",
         f"- Privacy issues: {counts['privacyIssues']}",
+        f"- Hygiene violations: {counts['hygieneViolations']}",
+        f"- Hygiene Red objects: {counts['hygieneRedObjects']}",
+        f"- Hygiene Yellow objects: {counts['hygieneYellowObjects']}",
+        f"- Approved non-current retained objects: {counts['approvedNonCurrentObjects']}",
         "",
         "Domain coverage:",
         "| Domain | Expected | Present | Missing | Unexpected under domain | Expected bytes | Live expected bytes |",
@@ -279,6 +294,21 @@ def r2_live_inventory_markdown(report: dict[str, Any]) -> str:
             "- No writes, deletes, current-pointer changes, harvests, or production promotions.",
             "- Secret values are not printed or stored in the report.",
             "- R2 remains public/reference/freshness infrastructure only.",
+            "",
+            "Hygiene semantics:",
+            "- Current configured production objects are the only Green production objects.",
+            "- Non-current production, staging, validation, and legacy stable objects in the production bucket are Red unless an explicit retention approval matches them.",
+            "- Retention approvals must be prefix-bound, reasoned, and dated in the hygiene policy.",
+            "",
+            "Hygiene findings:",
+            "| Classification | Severity | Count | Bytes |",
+            "| --- | --- | ---: | ---: |",
+        ]
+    )
+    for row in report.get("hygiene", {}).get("summaryByClassification", []):
+        lines.append(f"| {row['classification']} | {row['severity']} | {row['count']} | {row['bytes']} |")
+    lines.extend(
+        [
             "",
             "Non-claims:",
         ]
@@ -429,6 +459,132 @@ def _coverage_by_domain(expected: list[dict[str, Any]], live: list[dict[str, Any
             "liveExpectedBytes": sum(live_by_key[item["objectKey"]].get("size") or 0 for item in present),
         })
     return rows
+
+
+def _hygiene_policy(path: Path | None) -> dict[str, Any]:
+    if path and path.exists():
+        return read_json(path)
+    return {
+        "schemaVersion": 1,
+        "kind": "ambitions.sourceAtlas.r2ProductionHygienePolicy.v1",
+        "policyID": "source-atlas/r2-production-hygiene/default-strict",
+        "status": "strict_default",
+        "bucket": "ambitions-source-atlas-prod",
+        "inventoryPrefix": "source-atlas/",
+        "currentConfiguredProductionRule": "Only objects enumerated by the current production target ledger are Green production objects.",
+        "unexpectedObjectDefaultSeverity": "Red",
+        "retentionApprovals": [],
+        "classificationRules": [
+            {
+                "classification": "production_stable_noncurrent",
+                "prefix": "source-atlas/v1/production/stable/",
+                "severity": "Red",
+                "reason": "Production stable objects outside the current target ledger are non-current production objects.",
+            },
+            {
+                "classification": "staging_candidate_in_production_bucket",
+                "prefix": "source-atlas/v1/staging/",
+                "severity": "Red",
+                "reason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+            },
+            {
+                "classification": "validation_in_production_bucket",
+                "prefix": "source-atlas/v1/validation/",
+                "severity": "Red",
+                "reason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+            },
+            {
+                "classification": "legacy_stable_noncurrent",
+                "prefix": "source-atlas/v1/stable/",
+                "severity": "Red",
+                "reason": "Legacy stable namespace is not the current configured production namespace.",
+            },
+        ],
+    }
+
+
+def _hygiene_classification(unexpected: list[dict[str, Any]], policy: dict[str, Any], created_at: str) -> dict[str, Any]:
+    classified: list[dict[str, Any]] = []
+    for obj in unexpected:
+        approval = _matching_retention_approval(obj["objectKey"], policy, created_at)
+        if approval:
+            classified.append(
+                {
+                    **obj,
+                    "classification": "approved_noncurrent_retained",
+                    "severity": approval.get("severity", "Yellow"),
+                    "retentionApprovalID": approval.get("approvalID"),
+                    "retentionReason": approval.get("reason"),
+                }
+            )
+            continue
+        rule = _matching_classification_rule(obj["objectKey"], policy)
+        classification = rule.get("classification", "unexpected_unclassified_object")
+        severity = rule.get("severity", policy.get("unexpectedObjectDefaultSeverity", "Red"))
+        classified.append(
+            {
+                **obj,
+                "classification": classification,
+                "severity": severity,
+                "hygieneReason": rule.get("reason", "Unexpected live object is not in the current configured production set."),
+            }
+        )
+    violations = [
+        {
+            "objectKey": item["objectKey"],
+            "classification": item["classification"],
+            "severity": item["severity"],
+            "issue": f"{item['severity']} R2 hygiene object: {item['classification']}: {item['objectKey']}",
+        }
+        for item in classified
+        if item["severity"] == "Red"
+    ]
+    summary: dict[tuple[str, str], dict[str, Any]] = {}
+    for item in classified:
+        key = (item["classification"], item["severity"])
+        summary.setdefault(
+            key,
+            {
+                "classification": item["classification"],
+                "severity": item["severity"],
+                "count": 0,
+                "bytes": 0,
+            },
+        )
+        summary[key]["count"] += 1
+        summary[key]["bytes"] += item.get("size") or 0
+    return {
+        "schemaVersion": 1,
+        "kind": "ambitions.sourceAtlas.r2ProductionHygieneClassification.v1",
+        "classifiedUnexpectedObjects": classified,
+        "summaryByClassification": sorted(summary.values(), key=lambda item: (item["severity"], item["classification"])),
+        "violations": violations,
+    }
+
+
+def _matching_retention_approval(object_key: str, policy: dict[str, Any], created_at: str) -> dict[str, Any] | None:
+    for approval in policy.get("retentionApprovals", []):
+        prefix = approval.get("prefix")
+        if not prefix or not object_key.startswith(prefix):
+            continue
+        expires_at = approval.get("expiresAt")
+        if expires_at and expires_at < created_at:
+            continue
+        return approval
+    return None
+
+
+def _matching_classification_rule(object_key: str, policy: dict[str, Any]) -> dict[str, Any]:
+    rules = sorted(policy.get("classificationRules", []), key=lambda item: len(item.get("prefix", "")), reverse=True)
+    for rule in rules:
+        prefix = rule.get("prefix")
+        if prefix and object_key.startswith(prefix):
+            return rule
+    return {
+        "classification": "unexpected_unclassified_object",
+        "severity": policy.get("unexpectedObjectDefaultSeverity", "Red"),
+        "reason": "Unexpected live object is not in the current configured production set.",
+    }
 
 
 def _privacy_issues_for_inventory(live: list[dict[str, Any]], expected: list[dict[str, Any]]) -> list[str]:

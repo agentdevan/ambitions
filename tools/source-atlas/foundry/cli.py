@@ -514,6 +514,7 @@ def main(argv: list[str] | None = None) -> int:
     r2_live_inventory_parser = sub.add_parser("r2-live-inventory")
     r2_live_inventory_parser.add_argument("--production-target-ledger", required=True)
     r2_live_inventory_parser.add_argument("--output-root", required=True)
+    r2_live_inventory_parser.add_argument("--hygiene-policy", default="tools/source-atlas/governance/r2-production-hygiene-policy.json")
     r2_live_inventory_parser.add_argument("--bucket", default="ambitions-source-atlas-prod")
     r2_live_inventory_parser.add_argument("--prefix", default="source-atlas/")
     r2_live_inventory_parser.add_argument("--env-file", action="append", dest="env_files")
@@ -1631,6 +1632,7 @@ def main(argv: list[str] | None = None) -> int:
             R2LiveInventoryOptions(
                 production_target_ledger_path=Path(args.production_target_ledger),
                 output_root=Path(args.output_root),
+                hygiene_policy_path=Path(args.hygiene_policy) if args.hygiene_policy else None,
                 bucket=args.bucket,
                 prefix=args.prefix,
                 env_file_paths=tuple(Path(path) for path in args.env_files) if args.env_files else None,

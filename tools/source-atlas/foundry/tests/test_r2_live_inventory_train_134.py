@@ -54,19 +54,31 @@ def test_compare_live_to_expected_reports_missing_unexpected_and_size_mismatch(t
     assert len(comparison["sizeMismatches"]) == 1
 
 
+def test_run_live_inventory_marks_unapproved_unexpected_objects_red(tmp_path: Path, monkeypatch):
+    ledger = _fixture_ledger(tmp_path)
+    env_file = _remote_env_file(tmp_path)
+    monkeypatch.setattr(inventory_module, "R2S3Client", _FakeR2ClientWithUnexpected)
+
+    result = run_r2_live_inventory(
+        R2LiveInventoryOptions(
+            production_target_ledger_path=ledger,
+            output_root=tmp_path / "inventory",
+            bucket="fixture-bucket",
+            account_id="fixture-account-id",
+            env_file_paths=(env_file,),
+        )
+    )
+
+    assert not result["valid"]
+    assert result["status"] == "Red for live R2 inventory reconciliation"
+    assert result["recordCounts"]["hygieneViolations"] == 1
+    assert result["recordCounts"]["hygieneRedObjects"] == 1
+    assert result["hygiene"]["classifiedUnexpectedObjects"][0]["classification"] == "staging_candidate_in_production_bucket"
+
+
 def test_run_live_inventory_does_not_persist_secret_values(tmp_path: Path, monkeypatch):
     ledger = _fixture_ledger(tmp_path)
-    env_file = tmp_path / "r2.env"
-    env_file.write_text(
-        "\n".join(
-            [
-                "CLOUDFLARE_R2_ACCESS_KEY_ID=fixture-access-key",
-                "CLOUDFLARE_R2_SECRET_ACCESS_KEY=fixture-secret-key",
-                "CLOUDFLARE_API_TOKEN=fixture-token",
-            ]
-        ),
-        encoding="utf-8",
-    )
+    env_file = _remote_env_file(tmp_path)
     monkeypatch.setattr(inventory_module, "R2S3Client", _FakeR2Client)
 
     result = run_r2_live_inventory(
@@ -143,6 +155,21 @@ def _fixture_ledger(tmp_path: Path) -> Path:
     return ledger_path
 
 
+def _remote_env_file(tmp_path: Path) -> Path:
+    env_file = tmp_path / "r2.env"
+    env_file.write_text(
+        "\n".join(
+            [
+                "CLOUDFLARE_R2_ACCESS_KEY_ID=fixture-access-key",
+                "CLOUDFLARE_R2_SECRET_ACCESS_KEY=fixture-secret-key",
+                "CLOUDFLARE_API_TOKEN=fixture-token",
+            ]
+        ),
+        encoding="utf-8",
+    )
+    return env_file
+
+
 class _FakeR2Client:
     def __init__(self, **_: str) -> None:
         self.objects = {
@@ -160,3 +187,9 @@ class _FakeR2Client:
 
     def get_object_bytes(self, object_key: str) -> bytes:
         return self.objects[object_key]
+
+
+class _FakeR2ClientWithUnexpected(_FakeR2Client):
+    def __init__(self, **kwargs: str) -> None:
+        super().__init__(**kwargs)
+        self.objects["source-atlas/v1/staging/candidate/example_domain/orphan.json"] = b"{}\n"
