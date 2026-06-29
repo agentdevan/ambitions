@@ -1,0 +1,68 @@
+{
+  "createdAt": "2026-06-29T00:05:00Z",
+  "kind": "ambitions.sourceAtlas.proposedCoverageFrontiers.v1",
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.be724e186d7d922c",
+        "candidate_source.6e8c5e958d325a9c"
+      ],
+      "claim_classes": [
+        "official_benefit_program_reference",
+        "public_deadline_reference",
+        "public_eligibility_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "public_childcare_benefit_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "30d critical requirements",
+        "90d informational references"
+      ],
+      "frontier_id": "public_childcare_benefit_reference",
+      "goal_intent_classes": [
+        "public_childcare_benefit_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "candidate frontier work order only",
+        "not R2 readiness",
+        "human source-lane and legal/API review required"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "frontier_intake_proposal.42de815d07f124ee",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "public_catalog"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ]
+}

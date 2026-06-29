@@ -1,0 +1,161 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.legalTermsApprovalPacket.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not production R2 readiness",
+    "not release readiness",
+    "not universal coverage",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outsideLegalApprovalBoundary": "outside legal approval requires a current source-specific approval artifact",
+  "outsideLegalApprovalClaimed": false,
+  "packetID": "source-atlas/legal-terms-approval/51236d49c48ab3e9",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "reviewOwner": "Ambitions owner technical review",
+  "reviewType": "internal_source_atlas_legal_terms_review",
+  "schemaVersion": 1,
+  "sourceApprovals": [
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from MedlinePlus, National Library of Medicine.",
+      "datasetURL": "https://medlineplus.gov/",
+      "distributionURL": "https://medlineplus.gov/",
+      "evidenceHash": "c5f6677840819e001ac7c891abffe2085c10619b61cf42d57d3d4e7a4646b09b",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://medlineplus.gov/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://medlineplus.gov/about/using/usingcontent/"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "MedlinePlus health topic summaries are public-domain federal content with acknowledgement requested; copyrighted vendor drug, supplement, encyclopedia, image, and third-party content excluded",
+      "licenseURL": "https://medlineplus.gov/",
+      "licenseVersion": "current MedlinePlus content reuse posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "National Library of Medicine / National Institutes of Health",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Ambitions owner technical review",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://medlineplus.gov/about/using/usingcontent/",
+      "sourceID": "nih.medlineplus.wellness",
+      "sourceName": "MedlinePlus wellness and lifestyle health topic summaries",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://medlineplus.gov/about/using/usingcontent/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": false,
+      "attributionText": "Based on public scholarly metadata from OpenAlex.",
+      "datasetURL": "https://openalex.org/",
+      "distributionURL": "https://openalex.org/",
+      "evidenceHash": "946c8f326b83610b5bcec4086741bae3d47119006688be556ba014eb01f0d301",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://openalex.org/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "OpenAlex CC0 public scholarly metadata with high-volume API/snapshot governance retained",
+      "licenseURL": "https://openalex.org/",
+      "licenseVersion": "current OpenAlex CC0 metadata posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "OpenAlex",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewOwner": "Ambitions owner technical review",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "sourceID": "openalex.personal_growth_research",
+      "sourceName": "OpenAlex personal-growth scholarly metadata reference",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    }
+  ],
+  "status": "Green",
+  "statusReason": "internal source-specific terms review complete for approved lanes; blocked or review-required lanes remain excluded",
+  "userAuthorization": "User authorized extensive internal legal/terms review for bounded Source Atlas Green claims; this is not outside legal approval.",
+  "versionID": "source-atlas-legal-terms-approval-packet-v1"
+}

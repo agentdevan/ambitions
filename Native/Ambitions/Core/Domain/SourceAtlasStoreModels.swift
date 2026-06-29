@@ -101,13 +101,16 @@ struct SourceAtlasStoreLoadResult: Sendable, Equatable, Hashable {
 struct SourceAtlasStore {
     private let decoder: JSONDecoder
     private let validator: SourceAtlasPackValidator
+    private let publishedPackBridge: SourceAtlasPublishedDomainPackBridge
 
     init(
         decoder: JSONDecoder = JSONDecoder(),
-        validator: SourceAtlasPackValidator = SourceAtlasPackValidator()
+        validator: SourceAtlasPackValidator = SourceAtlasPackValidator(),
+        publishedPackBridge: SourceAtlasPublishedDomainPackBridge = SourceAtlasPublishedDomainPackBridge()
     ) {
         self.decoder = decoder
         self.validator = validator
+        self.publishedPackBridge = publishedPackBridge
     }
 
     func load(
@@ -173,7 +176,11 @@ struct SourceAtlasStore {
         do {
             pack = try decoder.decode(SourceAtlasPack.self, from: payload.data)
         } catch {
-            return .quarantined(SourceAtlasStoreQuarantine(source: payload.source, reason: .corruptJSON))
+            do {
+                pack = try publishedPackBridge.nativePack(from: payload.data)
+            } catch {
+                return .quarantined(SourceAtlasStoreQuarantine(source: payload.source, reason: .corruptJSON))
+            }
         }
 
         if pack.manifest.schemaVersion != sourceAtlasPackSchemaVersion {

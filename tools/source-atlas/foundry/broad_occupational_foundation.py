@@ -27,6 +27,12 @@ from .terms_registry import SOURCE_TERMS_REGISTRY, terms_registry_artifact, vali
 
 
 BROAD_PACK_VERSION = "source-atlas-broad-occupational-foundation-train-01"
+BROAD_OCCUPATIONAL_SOURCE_IDS = {
+    "onet.database",
+    "bls.public.data.api",
+    "wikidata.crosswalk",
+    "openalex.dataset",
+}
 
 
 def build_broad_occupational_foundation(output_root: Path, docs_root: Path | None = None) -> dict[str, Any]:
@@ -36,7 +42,11 @@ def build_broad_occupational_foundation(output_root: Path, docs_root: Path | Non
     fixtures_root = output_root.parent / "fixtures" / "adapters"
 
     fixture_manifest = emit_all_adapter_fixtures(fixtures_root)
-    outputs = run_all_adapters("current", created_at=created_at)
+    outputs = [
+        output
+        for output in run_all_adapters("current", created_at=created_at)
+        if output.get("sourceID") in BROAD_OCCUPATIONAL_SOURCE_IDS
+    ]
     pack_outputs = _packable_outputs(outputs)
     pack = _pack(pack_outputs, created_at)
     slices = {
@@ -269,7 +279,7 @@ def promote_broad_occupation_pack_proof(
 
 
 def _packable_outputs(outputs: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    return [output for output in outputs if output.get("sourceID") != "usajobs.search"]
+    return [output for output in outputs if output.get("sourceID") in BROAD_OCCUPATIONAL_SOURCE_IDS]
 
 
 def _pack(outputs: list[dict[str, Any]], created_at: str) -> dict[str, Any]:

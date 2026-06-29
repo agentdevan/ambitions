@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0.0",
+  "train": "37",
+  "linear_issue": "AMB-1523",
+  "title": "Source Atlas Train 37 dual-target live Worker gateway native transport and cache proof",
+  "created_at": "2026-06-28T04:48:00Z",
+  "status": "green_for_bounded_dual_target_worker_gateway_live_transport_yellow_overall_source_atlas",
+  "product_law_preserved": true,
+  "scope_completed": [
+    "Verified the deployed public Worker gateway can serve both production stable occupation_foundation and public_civic_requirements public/reference packs.",
+    "Added public_civic_requirements to the bundled active public refresh target registry.",
+    "Verified direct URLSession transport fetches the civic production stable pack through the Worker without private request context.",
+    "Verified lifecycle refresh fetches, verifies, journals, and persists the civic pack as a verified reference while keeping civic/legal planning use review-gated.",
+    "Preserved local-first behavior and no-account/offline core behavior in the app container test slice."
+  ],
+  "native_runtime_proofs": [
+    {
+      "active_target_id": "source-atlas-refresh-target.occupation_foundation.stable.20260628T000000Z",
+      "target_pack_id": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+      "target_domain": "occupation_foundation",
+      "target_channel": "stable",
+      "target_environment": "production",
+      "target_status": "active",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedPackWithURLSessionWhenEndpointIsProvided",
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesOccupationTargetWhenEndpointIsProvided",
+      "cache_commit_status": "persisted_current",
+      "planning_boundary": "accepted public reference; no final user plan, schedule, or Step generation",
+      "default_app_container_wired": true
+    },
+    {
+      "active_target_id": "source-atlas-refresh-target.public_civic_requirements.stable.20260628T041500Z",
+      "target_pack_id": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+      "target_domain": "public_civic_requirements",
+      "target_channel": "stable",
+      "target_environment": "production",
+      "target_status": "active",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedCivicPackWithURLSessionWhenEndpointIsProvided",
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesCivicTargetWhenEndpointIsProvided",
+      "cache_journal_status": "verified_reference",
+      "cache_commit_status": "persisted_current",
+      "query_boundary": "review_required",
+      "planning_boundary": "verified public reference cached for offline inspection; civic/legal current-use planning remains review-gated and cannot generate a final user plan, schedule, or Step list",
+      "default_app_container_wired": true
+    }
+  ],
+  "worker_gateway": {
+    "name": "ambitions-source-atlas-public-gateway",
+    "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "workers_dev": true,
+    "r2_bucket": "ambitions-source-atlas-prod",
+    "r2_binding": "SOURCE_ATLAS_BUCKET",
+    "deployed_version_id": "65a13c9d-0600-4799-89c5-34bc55d41862"
+  },
+  "validation_run": [
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRemoteTransportTests -only-testing:AmbitionsTests/SourceAtlasPublicPackLifecycleRefreshServiceTests -only-testing:AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests -only-testing:AmbitionsTests/AppContainerFactoryTests/testAppContainerFactoryLoadsDefaultServicesAndSourceAtlasLifecycleRefreshDoesNotBlockOfflineCoreUse",
+      "status": "passed",
+      "summary": "23 passed, 0 failed, 0 skipped, 0 warnings",
+      "endpoint_env": "TEST_RUNNER_SOURCE_ATLAS_LIVE_R2_ENDPOINT",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T04-44-01-590Z_pid24471_7e5bbdbe.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T04-44-01-590Z_pid24471_a69c38b6.xcresult"
+    }
+  ],
+  "public_request_shape_result": {
+    "status": "passed",
+    "summary": "Requests contain only public pack routing fields and public object keys."
+  },
+  "non_claims": [
+    "not full Source Atlas Green",
+    "not universal coverage",
+    "not Release Green",
+    "not App Store readiness",
+    "not outside legal approval",
+    "not a final user plan, schedule, or Step generator",
+    "not legal advice",
+    "not R2 private-data backend readiness"
+  ]
+}

@@ -1,5 +1,5 @@
-import XCTest
 @testable import Ambitions
+import XCTest
 
 final class AppContainerFactoryTests: XCTestCase {
     func testLiveBootstrapDoesNotSeedFreshRepositories() async throws {
@@ -41,21 +41,21 @@ final class AppContainerFactoryTests: XCTestCase {
         let store = try AmbitionsPersistenceStore(inMemory: true)
 
         #if DEBUG
-        let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
-        let goals = try await repositories.goals.listGoals()
-        let drafts = try await repositories.drafts.listDrafts()
-        let evidence = try await repositories.evidence.listEvidence(goalID: nil)
-        let feedback = try await repositories.feedback.listEvents(goalID: nil)
-        let state = try await repositories.appState.loadState()
+            let repositories = try await AppContainerFactory.prepareRepositories(for: .demo, store: store)
+            let goals = try await repositories.goals.listGoals()
+            let drafts = try await repositories.drafts.listDrafts()
+            let evidence = try await repositories.evidence.listEvidence(goalID: nil)
+            let feedback = try await repositories.feedback.listEvents(goalID: nil)
+            let state = try await repositories.appState.loadState()
 
-        XCTAssertFalse(goals.isEmpty)
-        XCTAssertFalse(drafts.isEmpty)
-        XCTAssertFalse(evidence.isEmpty)
-        XCTAssertFalse(feedback.isEmpty)
-        XCTAssertEqual(state.lastSeedVersion, DemoSeedPipeline.seedVersion)
+            XCTAssertFalse(goals.isEmpty)
+            XCTAssertFalse(drafts.isEmpty)
+            XCTAssertFalse(evidence.isEmpty)
+            XCTAssertFalse(feedback.isEmpty)
+            XCTAssertEqual(state.lastSeedVersion, DemoSeedPipeline.seedVersion)
         #else
-        _ = store
-        throw XCTSkip("Demo bootstrap is only available in DEBUG builds.")
+            _ = store
+            throw XCTSkip("Demo bootstrap is only available in DEBUG builds.")
         #endif
     }
 
@@ -129,6 +129,87 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertEqual(container.persistence.bootstrapConfiguration, .preview)
         XCTAssertTrue(container.persistence.usesInMemoryStore)
         XCTAssertTrue(container.platform.externalActionService is DefaultExternalActionCommandService)
+        XCTAssertTrue(container.sourceAtlasLifecycleRefreshService is SourceAtlasPublicPackLifecycleRefreshService)
+        XCTAssertTrue(container.platform.sourceAtlasLifecycleRefreshService is SourceAtlasPublicPackLifecycleRefreshService)
+        let sourceAtlasRefresh = await container.sourceAtlasLifecycleRefreshService.refreshPublicSourceAtlasPacks(
+            SourceAtlasPublicPackLifecycleRefreshInput(
+                mode: .startup,
+                networkReachability: .offline,
+                checkedAt: Date(timeIntervalSince1970: 1_780_100_000)
+            )
+        )
+        XCTAssertEqual(sourceAtlasRefresh.configuredTargetCount, 13)
+        XCTAssertEqual(sourceAtlasRefresh.registryResolution.configuredEntryCount, 13)
+        XCTAssertEqual(
+            sourceAtlasRefresh.registryResolution.selectedTargetIDs,
+            [
+                "source-atlas-refresh-target.business_entrepreneurship.stable.20260628T000000Z",
+                "source-atlas-refresh-target.creative_project_reference.stable.20260628T000000Z",
+                "source-atlas-refresh-target.education_credentialing.stable.20260628T000000Z",
+                "source-atlas-refresh-target.finance_public_reference.stable.20260628T000000Z",
+                "source-atlas-refresh-target.health_wellness_reference.stable.20260628T000000Z",
+                "source-atlas-refresh-target.health_wellness_reference_ca_statistics.stable.20260628T000000Z",
+                "source-atlas-refresh-target.hobbies_recreation.stable.20260628T000000Z",
+                "source-atlas-refresh-target.home_life_admin.stable.20260628T000000Z",
+                "source-atlas-refresh-target.occupation_foundation.stable.20260628T000000Z",
+                "source-atlas-refresh-target.personal_growth.stable.20260628T000000Z",
+                "source-atlas-refresh-target.public_civic_requirements.stable.20260628T041500Z",
+                "source-atlas-refresh-target.relationships_family.stable.20260628T000000Z",
+                "source-atlas-refresh-target.travel_relocation.stable.20260628T000000Z",
+            ]
+        )
+        XCTAssertEqual(
+            sourceAtlasRefresh.registryResolution.excludedTargetIDs,
+            []
+        )
+        XCTAssertEqual(sourceAtlasRefresh.registryResolution.findings, [])
+        XCTAssertEqual(sourceAtlasRefresh.registryResolution.egressFindings, [])
+        let registryLoad = SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.loadDefaultAppArtifact()
+        XCTAssertEqual(registryLoad.issues, [])
+        XCTAssertEqual(registryLoad.artifactID, "source_atlas_public_refresh_targets.train81_trideca_live_worker_gateway")
+        XCTAssertFalse(registryLoad.usedFallbackEmptyRegistry)
+        XCTAssertEqual(registryLoad.registry.entries.count, 13)
+        XCTAssertEqual(Set(registryLoad.registry.entries.map(\.status)), [.active])
+        XCTAssertEqual(
+            sourceAtlasRefresh.attemptedTargetIDs,
+            [
+                "source-atlas-refresh-target.business_entrepreneurship.stable.20260628T000000Z",
+                "source-atlas-refresh-target.creative_project_reference.stable.20260628T000000Z",
+                "source-atlas-refresh-target.education_credentialing.stable.20260628T000000Z",
+                "source-atlas-refresh-target.finance_public_reference.stable.20260628T000000Z",
+                "source-atlas-refresh-target.health_wellness_reference.stable.20260628T000000Z",
+                "source-atlas-refresh-target.health_wellness_reference_ca_statistics.stable.20260628T000000Z",
+                "source-atlas-refresh-target.hobbies_recreation.stable.20260628T000000Z",
+                "source-atlas-refresh-target.home_life_admin.stable.20260628T000000Z",
+                "source-atlas-refresh-target.occupation_foundation.stable.20260628T000000Z",
+                "source-atlas-refresh-target.personal_growth.stable.20260628T000000Z",
+                "source-atlas-refresh-target.public_civic_requirements.stable.20260628T041500Z",
+                "source-atlas-refresh-target.relationships_family.stable.20260628T000000Z",
+                "source-atlas-refresh-target.travel_relocation.stable.20260628T000000Z",
+            ]
+        )
+        XCTAssertEqual(sourceAtlasRefresh.targetResolutions.count, 13)
+        XCTAssertEqual(
+            sourceAtlasRefresh.targetResolutions.compactMap {
+                $0.appRefreshResolution?.refreshResolution.remoteResolution.transportIssues
+            },
+            [
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+                [.remoteFetchSkipped],
+            ]
+        )
+        XCTAssertFalse(sourceAtlasRefresh.coreLocalPlanningBlocked)
         container.userSystem.applyAppearancePreference(.dark, .sage)
         XCTAssertEqual(container.appearancePreference, .dark)
         XCTAssertEqual(container.accentFamily, .sage)

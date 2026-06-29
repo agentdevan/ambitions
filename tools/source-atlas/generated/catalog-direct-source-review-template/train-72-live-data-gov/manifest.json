@@ -1,0 +1,96 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "templates_are_blocked_not_completed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "templates_are_gate_compatible",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "templates_emit_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "compatibleGateVersionID": "source-atlas-catalog-direct-source-review-gate-train-71",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceReviewTemplateManifest.v1",
+  "nonClaims": [
+    "direct-source review packet templates only",
+    "not completed direct-source review packets",
+    "not source authority",
+    "not legal approval",
+    "not outside legal approval",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "catalogDirectSourceReviewTemplate": "de0211a3381e16ebc212c60b62f06155cbe9368d71068edc56a106ca6e06a1fa",
+    "directSourceReviewPackets": "d658166b1bffe5f1d3025680be770314a8052863697055a925154ae12329a24a",
+    "manifest": "4a8b9a83fbbe7510fe63a234606058dc7bb17d6f59410e897e9eb01ead8d7ff7"
+  },
+  "outputPaths": {
+    "catalogDirectSourceReviewTemplate": "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/catalog-direct-source-review-template.json",
+    "closeout": "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/closeout.md",
+    "directSourceReviewPackets": "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/direct-source-review-packet-templates.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "claims": 0,
+    "completedDirectSourceReviews": 0,
+    "completedSourceReviewCompletionPackets": 0,
+    "directSourceReviewPacketTemplates": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "resolutionCandidates": 4
+  },
+  "resolutionCandidatesPath": "tools/source-atlas/generated/catalog-direct-source-resolution/train-70-live-data-gov/direct-source-resolution-candidates.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; direct-source review templates only",
+  "status": "Source Green for catalog direct-source review template tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-direct-source-review-template-train-72"
+}

@@ -1,0 +1,34 @@
+{
+  "adjudications": [
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.2c35d339d198c305",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "nps.recreation-safety",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.317162c224e13c2f",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "nps.recreation-safety",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.bf7b33b627376331",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "nps.recreation-safety",
+      "status": "accepted_claim"
+    }
+  ]
+}

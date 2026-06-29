@@ -1,0 +1,44 @@
+{
+  "excludedClaims": [],
+  "sources": [
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "candidate_source_record",
+        "discovery_metadata",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "education_public_data_review",
+      "non_claims": [
+        "not admissions advice",
+        "not financial aid advice",
+        "not credentialing authority",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "college-scorecard.api",
+      "source_name": "College Scorecard data API"
+    }
+  ]
+}

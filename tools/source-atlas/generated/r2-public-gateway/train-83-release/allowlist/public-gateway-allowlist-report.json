@@ -1,0 +1,73 @@
+{
+  "allowedObjectKeyCount": 65,
+  "checks": [
+    {
+      "issues": [],
+      "name": "publisher_reports_validated",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "allowlist_not_empty",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "object_keys_public_reference_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "artifact_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "stable_sorted_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PublicGatewayAllowlistCompilerReport.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not a broad release readiness claim"
+  ],
+  "outputPaths": {
+    "artifact": "tools/source-atlas/generated/r2-public-gateway/train-83-release/allowlist/public-gateway-allowlist.json",
+    "closeout": "tools/source-atlas/generated/r2-public-gateway/train-83-release/allowlist/closeout.md",
+    "generatedWorkerAllowlist": "tools/source-atlas/r2-public-gateway/src/allowed-object-keys.generated.js",
+    "report": "tools/source-atlas/generated/r2-public-gateway/train-83-release/allowlist/public-gateway-allowlist-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionNonClaims": [
+    "no private graph egress",
+    "no final user plan, schedule, or Step generation",
+    "no legal approval upgrade",
+    "no native release Green",
+    "no App Store readiness",
+    "no universal coverage claim"
+  ],
+  "publisherReportCount": 13,
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; public gateway allowlist compiler only",
+  "status": "Source Green for public gateway allowlist compiler",
+  "valid": true,
+  "versionID": "source-atlas-r2-public-gateway-allowlist-train-82"
+}

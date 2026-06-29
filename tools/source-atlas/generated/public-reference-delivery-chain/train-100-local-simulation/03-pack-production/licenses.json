@@ -1,0 +1,67 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "license_name": "BLS public data terms with BLS source citation",
+      "license_url": "https://www.bls.gov/developers/termsOfService.htm",
+      "non_claims": [
+        "not employment guarantee",
+        "not labor-market forecast guarantee",
+        "not outside legal approval"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.bls.gov/developers/termsOfService.htm",
+      "terms_url": "https://www.bls.gov/developers/termsOfService.htm"
+    },
+    {
+      "approval_artifact_path": "",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "license_name": "Creative Commons Attribution 4.0 International for O*NET data",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "non_claims": [
+        "not U.S. Department of Labor endorsement",
+        "not final user path generation",
+        "not outside legal approval"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.onetcenter.org/overview.html#data",
+      "terms_url": "https://www.onetcenter.org/overview.html#data"
+    },
+    {
+      "approval_artifact_path": "",
+      "attribution_required": false,
+      "dataClass": "public_provenance",
+      "license_id": "openalex_cc0_metadata",
+      "license_name": "OpenAlex CC0 public scholarly metadata",
+      "license_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "non_claims": [
+        "not normative authority",
+        "not unbounded high-volume approval",
+        "not outside legal approval"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "terms_url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    }
+  ]
+}

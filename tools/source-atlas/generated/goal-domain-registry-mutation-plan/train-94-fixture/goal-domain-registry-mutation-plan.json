@@ -1,0 +1,99 @@
+{
+  "activeRegistryMutations": [],
+  "allowActiveRegistryWrite": false,
+  "blockedRegistryMutations": [
+    {
+      "activeRegistryWritten": false,
+      "blockedMutationID": "source_atlas_goal_domain_registry_mutation_block.2267cae4765df493",
+      "blockingReasons": [
+        "api_governance_review",
+        "completed_review_bundle_required",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.6df7d4db56f369d8",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "blocked registry mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "status": "blocked"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockedMutationID": "source_atlas_goal_domain_registry_mutation_block.ac80c3052def4509",
+      "blockingReasons": [
+        "api_governance_review",
+        "completed_review_bundle_required",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.26d48f973e5270f6",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked registry mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "status": "blocked"
+    }
+  ],
+  "compatibleReviewCompletionIntakeVersionID": "source-atlas-goal-domain-review-completion-intake-train-93",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.goalDomainRegistryMutationPlan.v1",
+  "nonClaims": [
+    "goal-domain registry mutation planning only",
+    "not active registry mutation",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "plannedRegistryMutations": [],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedRegistryMutations": 2,
+    "claims": 0,
+    "completedReviewPackets": 0,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "plannedApiPolicyEntries": 0,
+    "plannedLegalTermsEntries": 0,
+    "plannedRegistryMutations": 0,
+    "plannedSourceLaneEntries": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewBundles": 2
+  },
+  "reviewCompletionsPath": "tools/source-atlas/generated/goal-domain-review-completion-intake/train-93-fixture/goal-domain-review-completions.json",
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-registry-mutation-plan-train-94"
+}

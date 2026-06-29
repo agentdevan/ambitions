@@ -1,0 +1,457 @@
+{
+  "help": "https://open.canada.ca/data/api/3/action/help_show?name=package_search",
+  "result": {
+    "count": 7457,
+    "facet_ranges": {
+      "portal_release_date": {
+        "counts": [
+          "1926-06-28T00:00:00Z",
+          5476
+        ],
+        "end": "2126-06-28T00:00:00Z",
+        "gap": "+100YEARS",
+        "start": "1926-06-28T00:00:00Z"
+      }
+    },
+    "facets": {},
+    "results": [
+      {
+        "additional_notes": {
+          "en": "",
+          "fr": ""
+        },
+        "audience": [],
+        "author": null,
+        "author_email": null,
+        "collection": "publication",
+        "contributor": {
+          "en": "",
+          "fr": ""
+        },
+        "creator": "",
+        "data_series_issue_identification": {
+          "en": "",
+          "fr": ""
+        },
+        "data_series_name": {
+          "en": "",
+          "fr": ""
+        },
+        "date_modified": "2019-11-27 00:00:00",
+        "date_published": "2019-11-27 00:00:00",
+        "departmental_identification_number": "",
+        "digital_object_identifier": "",
+        "edition": "",
+        "frequency": "unknown",
+        "gc_catalogue_number": "",
+        "geographic_region": [],
+        "groups": [],
+        "id": "21d8ef00-a5e3-4e49-ae96-2b61b90a4dda",
+        "imso_approval": "true",
+        "isbn": "",
+        "isopen": false,
+        "issn": "",
+        "issuance": "",
+        "issuance_frequency": "",
+        "jurisdiction": "federal",
+        "keywords": {
+          "en": [
+            "Preconception health",
+            "Fertility",
+            "Pregnancy",
+            "Reproductive life plan"
+          ],
+          "fr": [
+            "La santé préconceptionnelle",
+            "Fertilité",
+            "La grossesse",
+            "Un plan de vie en matière de conception"
+          ]
+        },
+        "license_id": "ca-ogl-lgo",
+        "license_title": "Open Government Licence - Canada",
+        "license_url": "https://open.canada.ca/en/open-government-licence-canada",
+        "maintainer": null,
+        "metadata_created": "2019-12-20T14:44:20.203993",
+        "metadata_modified": "2019-12-20T14:44:20.203999",
+        "name": "21d8ef00-a5e3-4e49-ae96-2b61b90a4dda",
+        "notes": "Preconception health, or health before pregnancy, is the health of men and women during their reproductive years. Your health affects your fertility. It also influences the health of your children, during pregnancy, at birth and throughout their lives.",
+        "notes_translated": {
+          "en": "Preconception health, or health before pregnancy, is the health of men and women during their reproductive years. Your health affects your fertility. It also influences the health of your children, during pregnancy, at birth and throughout their lives.",
+          "fr": "La santé préconceptionnelle, ou la santé avant la grossesse, est la santé des hommes et des femmes en âge de procréer. Votre santé affecte votre fertilité. Elle influence également la santé de vos enfants, pendant la grossesse, à la naissance et tout au long de leur vie."
+        },
+        "num_resources": 2,
+        "num_tags": 0,
+        "org_section": {
+          "en": "",
+          "fr": ""
+        },
+        "org_title_at_publication": {
+          "en": "Public Health Agency of Canada",
+          "fr": "Agence de la santé publique du Canada"
+        },
+        "organization": {
+          "approval_status": "approved",
+          "created": "2016-09-23T17:25:57.068700",
+          "description": "",
+          "id": "1C71053B-AA64-4646-956B-41631C396018",
+          "image_url": "",
+          "is_organization": true,
+          "name": "phac-aspc",
+          "state": "active",
+          "title": "Public Health Agency of Canada | Agence de la santé publique du Canada",
+          "type": "organization"
+        },
+        "place_of_publication": [],
+        "portal_release_date": "2019-12-20",
+        "private": false,
+        "program_page_url": {
+          "en": "https://www.canada.ca/en/public-health/services/pregnancy/preconception-health-before.html",
+          "fr": "https://www.canada.ca/fr/sante-publique/services/grossesse/sante-preconceptionnelle-avant.html"
+        },
+        "pspc_identification_number": "",
+        "ready_to_publish": "true",
+        "redacted_public_catalog_identifier_1": "[redacted-public-catalog-identifier]",
+        "redacted_public_catalog_identifier_2": "[redacted-public-catalog-identifier]",
+        "relationships_as_object": [],
+        "relationships_as_subject": [],
+        "resources": [
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "character_set": "",
+            "created": "2019-12-20T14:44:22.371243",
+            "datastore_active": false,
+            "date_published": "",
+            "description": "",
+            "format": "HTML",
+            "hash": "",
+            "id": "1a672fed-b21b-4f6f-befe-a17efd7e5e84",
+            "language": [
+              "en"
+            ],
+            "last_modified": null,
+            "metadata_modified": "2019-12-20T14:44:22.371243",
+            "mimetype": null,
+            "mimetype_inner": null,
+            "name": "Preconception health: health before pregnancy",
+            "name_translated": {
+              "en": "Preconception health: health before pregnancy",
+              "fr": "Santé préconceptionnelle : santé avant la grossesse "
+            },
+            "package_id": "21d8ef00-a5e3-4e49-ae96-2b61b90a4dda",
+            "position": 0,
+            "related_relationship": null,
+            "related_type": null,
+            "resource_type": "website",
+            "state": "active",
+            "unique_identifier": "",
+            "url": "https://www.canada.ca/en/public-health/services/pregnancy/preconception-health-before.html",
+            "url_type": null
+          },
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "character_set": "",
+            "created": "2019-12-20T14:44:22.371252",
+            "datastore_active": false,
+            "date_published": "",
+            "description": "",
+            "format": "HTML",
+            "hash": "",
+            "id": "40f8f952-f601-4901-92bd-0b41204891c9",
+            "language": [
+              "fr"
+            ],
+            "last_modified": null,
+            "metadata_modified": "2019-12-20T14:44:22.371252",
+            "mimetype": null,
+            "mimetype_inner": null,
+            "name": "Preconception health: health before pregnancy",
+            "name_translated": {
+              "en": "Preconception health: health before pregnancy",
+              "fr": "Santé préconceptionnelle : santé avant la grossesse "
+            },
+            "package_id": "21d8ef00-a5e3-4e49-ae96-2b61b90a4dda",
+            "position": 1,
+            "related_relationship": null,
+            "related_type": null,
+            "resource_type": "website",
+            "state": "active",
+            "unique_identifier": "",
+            "url": "https://www.canada.ca/fr/sante-publique/services/grossesse/sante-preconceptionnelle-avant.html",
+            "url_type": null
+          }
+        ],
+        "restrictions": "unrestricted",
+        "series_publication_dates": {
+          "en": "",
+          "fr": ""
+        },
+        "spatial": "",
+        "state": "active",
+        "subject": [
+          "health_and_safety"
+        ],
+        "tags": [],
+        "title": "Preconception health: health before pregnancy",
+        "title_translated": {
+          "en": "Preconception health: health before pregnancy",
+          "fr": "Santé préconceptionnelle : santé avant la grossesse "
+        },
+        "type": "info",
+        "url": null,
+        "version": null
+      },
+      {
+        "association_type": [],
+        "audience": [],
+        "author": null,
+        "author_email": "[redacted-public-catalog-contact]",
+        "collection": "primary",
+        "contributor": {},
+        "data_series_issue_identification": {
+          "en": "Table 13100974",
+          "fr": "Tableau 13100974"
+        },
+        "data_series_name": {
+          "en": "Table",
+          "fr": "Tableau"
+        },
+        "date_published": "2026-03-23 08:30:00",
+        "display_flags": [],
+        "frequency": "P1Y",
+        "geographic_region": [],
+        "groups": [],
+        "id": "3c3a9740-17c4-4ab8-80e3-4d9ff9ebe6ed",
+        "imso_approval": "true",
+        "isopen": false,
+        "jurisdiction": "federal",
+        "keywords": {
+          "en": [
+            "health",
+            "health care providers",
+            "health care services",
+            "table"
+          ],
+          "fr": [
+            "fournisseurs de soins de santé",
+            "santé",
+            "services de soins de santé",
+            "tableau"
+          ]
+        },
+        "license_id": "ca-ogl-lgo",
+        "license_title": "Open Government Licence - Canada",
+        "license_url": "https://open.canada.ca/en/open-government-licence-canada",
+        "maintainer": null,
+        "maintainer_contact_form": {},
+        "maintainer_email": "[redacted-public-catalog-contact]",
+        "metadata_contact": {},
+        "metadata_created": "2026-03-23T12:46:39.192531",
+        "metadata_modified": "2026-03-23T12:46:39.248879",
+        "name": "3c3a9740-17c4-4ab8-80e3-4d9ff9ebe6ed",
+        "notes": "Data on five electronic health information (EHI) indicators for health care providers, including three Shared Health Priorities (SHP) indicators. Two additional EHI indicators are included to provide context on digital health literacy. Results are available for Canada and each province, disaggregated by age, gender, region, care setting, and occupation.\n<br>",
+        "notes_translated": {
+          "en": "Data on five electronic health information (EHI) indicators for health care providers, including three Shared Health Priorities (SHP) indicators. Two additional EHI indicators are included to provide context on digital health literacy. Results are available for Canada and each province, disaggregated by age, gender, region, care setting, and occupation.\n<br>",
+          "fr": "Cinq indicateurs liés à l'information électronique sur la santé (IES) pour les fournisseurs de soins de santé, dont trois indicateurs des Priorités partagées en santé (PPS). Deux autres indicateurs d'IES sont inclus afin de fournir un contexte supplémentaire sur la littératie numérique en santé. Les résultats sont offerts pour le Canada et chaque province, selon l'âge, le genre, la région, le milieu de soins et la profession.\n<br>"
+        },
+        "num_resources": 5,
+        "num_tags": 0,
+        "org_section": {},
+        "org_title_at_publication": {
+          "en": "Statistics Canada",
+          "fr": "Statistique Canada"
+        },
+        "organization": {
+          "approval_status": "approved",
+          "created": "2016-09-23T17:26:15.123077",
+          "description": "",
+          "id": "A0F0FCFC-BC3B-4696-8B6D-E7E411D55BAC",
+          "image_url": "",
+          "is_organization": true,
+          "name": "statcan",
+          "state": "active",
+          "title": "Statistics Canada | Statistique Canada",
+          "type": "organization"
+        },
+        "place_of_publication": [],
+        "position_name": {},
+        "private": false,
+        "program_page_url": {},
+        "ready_to_publish": "true",
+        "redacted_public_catalog_identifier_4": "[redacted-public-catalog-identifier]",
+        "redacted_public_catalog_identifier_6": "[redacted-public-catalog-identifier]",
+        "relationships_as_object": [],
+        "relationships_as_subject": [],
+        "resources": [
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2026-03-23T12:46:39.241027",
+            "data_quality": [],
+            "datastore_active": false,
+            "description": null,
+            "format": "CSV",
+            "hash": "",
+            "id": "1412b938-6e31-48af-ac76-55da6bbc8691",
+            "language": [
+              "fr"
+            ],
+            "last_modified": null,
+            "metadata_modified": "2026-03-23T12:46:39.189555",
+            "mimetype": null,
+            "mimetype_inner": null,
+            "name": "Dataset",
+            "name_translated": {
+              "en": "Dataset",
+              "fr": "Ensembles de données"
+            },
+            "package_id": "3c3a9740-17c4-4ab8-80e3-4d9ff9ebe6ed",
+            "position": 0,
+            "resource_type": "dataset",
+            "state": "active",
+            "url": "https://www150.statcan.gc.ca/n1/tbl/csv/13100974-fra.zip",
+            "url_type": null
+          },
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2026-03-23T12:46:39.241033",
+            "data_quality": [],
+            "datastore_active": false,
+            "description": null,
+            "format": "CSV",
+            "hash": "",
+            "id": "0ce1209c-896c-4169-9512-56f21d4bad72",
+            "language": [
+              "en"
+            ],
+            "last_modified": null,
+            "metadata_modified": "2026-03-23T12:46:39.189637",
+            "mimetype": null,
+            "mimetype_inner": null,
+            "name": "Dataset",
+            "name_translated": {
+              "en": "Dataset",
+              "fr": "Ensembles de données"
+            },
+            "package_id": "3c3a9740-17c4-4ab8-80e3-4d9ff9ebe6ed",
+            "position": 1,
+            "resource_type": "dataset",
+            "state": "active",
+            "url": "https://www150.statcan.gc.ca/n1/tbl/csv/13100974-eng.zip",
+            "url_type": null
+          },
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2026-03-23T12:46:39.241035",
+            "data_quality": [],
+            "datastore_active": false,
+            "description": null,
+            "format": "XML",
+            "hash": "",
+            "id": "ffaa881a-6bfa-4620-87ae-70807b9e9e04",
+            "language": [
+              "en",
+              "fr"
+            ],
+            "last_modified": null,
+            "metadata_modified": "2026-03-23T12:46:39.189711",
+            "mimetype": null,
+            "mimetype_inner": null,
+            "name": "Dataset",
+            "name_translated": {
+              "en": "Dataset",
+              "fr": "Ensembles de données"
+            },
+            "package_id": "3c3a9740-17c4-4ab8-80e3-4d9ff9ebe6ed",
+            "position": 2,
+            "resource_type": "dataset",
+            "state": "active",
+            "url": "https://www150.statcan.gc.ca/n1/tbl/sdmx/13100974-SDMX.zip",
+            "url_type": null
+          },
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2026-03-23T12:46:39.241037",
+            "data_quality": [],
+            "datastore_active": false,
+            "description": null,
+            "format": "HTML",
+            "hash": "",
+            "id": "dc587035-97e3-451c-8144-e90dc3d55b52",
+            "language": [
+              "fr"
+            ],
+            "last_modified": null,
+            "metadata_modified": "2026-03-23T12:46:39.189781",
+            "mimetype": null,
+            "mimetype_inner": null,
+            "name": "Supporting Document",
+            "name_translated": {
+              "en": "Supporting Document",
+              "fr": "Document connexe"
+            },
+            "package_id": "3c3a9740-17c4-4ab8-80e3-4d9ff9ebe6ed",
+            "position": 3,
+            "resource_type": "guide",
+            "state": "active",
+            "url": "https://www150.statcan.gc.ca/t1/tbl1/fr/tv.action?pid=redacted-public-id",
+            "url_type": null
+          },
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2026-03-23T12:46:39.241039",
+            "data_quality": [],
+            "datastore_active": false,
+            "description": null,
+            "format": "HTML",
+            "hash": "",
+            "id": "e88f644c-c897-4472-ba27-dbbe8c81014e",
+            "language": [
+              "en"
+            ],
+            "last_modified": null,
+            "metadata_modified": "2026-03-23T12:46:39.189850",
+            "mimetype": null,
+            "mimetype_inner": null,
+            "name": "Supporting Document",
+            "name_translated": {
+              "en": "Supporting Document",
+              "fr": "Document connexe"
+            },
+            "package_id": "3c3a9740-17c4-4ab8-80e3-4d9ff9ebe6ed",
+            "position": 4,
+            "resource_type": "guide",
+            "state": "active",
+            "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=redacted-public-id",
+            "url_type": null
+          }
+        ],
+        "restrictions": "unrestricted",
+        "spatial_representation_type": [],
+        "state": "active",
+        "subject": [
+          "health_and_safety"
+        ],
+        "tags": [],
+        "title": "Shared Health Priorities: Electronic health information for health care providers, 2025",
+        "title_translated": {
+          "en": "Shared Health Priorities: Electronic health information for health care providers, 2025",
+          "fr": "Indicateurs des Priorités partagées en santé : information électronique sur la santé pour les fournisseurs de soins de santé, 2025"
+        },
+        "topic_category": [],
+        "type": "dataset",
+        "url": "{u'fr': u'http://www5.statcan.gc.ca/cansim/home-accueil?lang=fra', u'en': u'http://www5.statcan.gc.ca/cansim/home-accueil?lang=eng'}",
+        "version": null
+      }
+    ],
+    "search_facets": {},
+    "sort": "score desc, metadata_modified desc"
+  },
+  "success": true
+}

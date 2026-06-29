@@ -1,0 +1,380 @@
+{
+  "adapterID": "nara_constitution_civic_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_public_reference_with_attribution"
+  },
+  "atoms": [],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.9a8628fa8bd9d54a",
+      "claimType": "eligibility_requirement",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "stable law watch with quarterly review",
+      "id": "claim.5e046e72e0ae2f7c",
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.usa.gov/government-works",
+      "provenanceIDs": [
+        "provenance.4cca3fcca617bf04"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "National Archives",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "nara.constitution.presidency",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.archives.gov/founding-docs/constitution-transcript",
+      "state": "source_backed",
+      "text": "U.S. presidential eligibility includes a minimum age requirement as a public constitutional reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.18672a4c4b624b8c",
+      "claimType": "constitutional_requirement",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "stable law watch with quarterly review",
+      "id": "claim.bce77e752a1b4452",
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.usa.gov/government-works",
+      "provenanceIDs": [
+        "provenance.4cca3fcca617bf04"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "National Archives",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "nara.constitution.presidency",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.archives.gov/founding-docs/constitution-transcript",
+      "state": "source_backed",
+      "text": "U.S. presidential eligibility includes citizenship and residence-duration requirements as public constitutional references.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "nara_constitution_civic_adapter",
+    "atomCount": 0,
+    "claimCount": 2,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "public_civic_requirements",
+    "edgeCount": 0,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US federal",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 2,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "nara.constitution.presidency",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "eligibility_requirement",
+      "dataClass": "public_freshness",
+      "doesNotCreateLegalAdvice": true,
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.civicRequirementCoverage.v1",
+      "label": "Presidential age eligibility reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "nara.constitution.presidency",
+      "subject": "presidential_eligibility.age"
+    },
+    {
+      "claimType": "constitutional_requirement",
+      "dataClass": "public_freshness",
+      "doesNotCreateLegalAdvice": true,
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.civicRequirementCoverage.v1",
+      "label": "Presidential citizenship and residency eligibility reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "nara.constitution.presidency",
+      "subject": "presidential_eligibility.citizenship_and_residency"
+    }
+  ],
+  "createdAt": "2026-06-27T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "public_civic_requirements",
+  "edges": [],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "nara_constitution_civic_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "public_civic_requirements",
+      "id": "pack_candidate.14dd145ff1fc9af8",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 0,
+        "claims": 2,
+        "crosswalks": 0,
+        "edges": 0,
+        "requirements": 2
+      },
+      "schemaVersion": 1,
+      "sourceID": "nara.constitution.presidency",
+      "termsGate": {
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "nara.constitution.presidency"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "908ce74214e334512b00ec0ce3b24d431ae966db01f279ee9e24abc1f3ac6fcd",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "stable law watch with quarterly review",
+      "id": "provenance.4cca3fcca617bf04",
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public source with citation required",
+      "locator": "https://www.archives.gov/founding-docs/constitution-transcript",
+      "publicReferenceOnly": true,
+      "publisher": "National Archives",
+      "retrievedAt": "2026-06-27T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "nara.constitution.presidency",
+      "sourceState": "current",
+      "sourceURL": "https://www.archives.gov/founding-docs/constitution-transcript",
+      "termsURL": "https://www.usa.gov/government-works",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.5e046e72e0ae2f7c",
+      "dataClass": "public_requirement",
+      "gateType": "public_civic_reference_only",
+      "id": "requirement.a01241cc6c18c182",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.4cca3fcca617bf04"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.bce77e752a1b4452",
+      "dataClass": "public_requirement",
+      "gateType": "public_constitutional_reference_only",
+      "id": "requirement.7f33b1fa3f2f8071",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.4cca3fcca617bf04"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "nara.constitution.presidency",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "stable law watch with quarterly review",
+    "lastTermsReviewed": "2026-06-27",
+    "license": "U.S. federal public source with citation required",
+    "licenseVersion": "current public government works posture",
+    "publisher": "National Archives",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "nara.constitution.presidency",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.usa.gov/government-works"
+  },
+  "termsValidation": {
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "nara.constitution.presidency"
+  }
+}

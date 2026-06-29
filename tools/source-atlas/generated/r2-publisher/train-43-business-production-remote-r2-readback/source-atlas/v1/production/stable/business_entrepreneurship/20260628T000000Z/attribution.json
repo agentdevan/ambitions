@@ -1,0 +1,28 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from SBA 10 steps to start your business guide.",
+      "claim_id": "canonical_claim.cf3e3097b74ee0ac",
+      "dataClass": "public_provenance",
+      "license_id": "sba_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "sba.business_guide.start_business"
+    },
+    {
+      "attribution_text": "Based on public reference data from SBA 10 steps to start your business guide.",
+      "claim_id": "canonical_claim.feaa75b9c5d8f6ad",
+      "dataClass": "public_provenance",
+      "license_id": "sba_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "sba.business_guide.start_business"
+    },
+    {
+      "attribution_text": "Based on public reference data from SBA 10 steps to start your business guide.",
+      "claim_id": "canonical_claim.171a517fbd6c8281",
+      "dataClass": "public_provenance",
+      "license_id": "sba_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "sba.business_guide.start_business"
+    }
+  ]
+}

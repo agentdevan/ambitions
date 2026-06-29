@@ -1,0 +1,58 @@
+{
+  "$id": "ambitions.sourceAtlas.legalTermsRegistry.schema.v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": true,
+  "properties": {
+    "kind": {
+      "const": "ambitions.sourceAtlas.legalTermsRegistry.v1"
+    },
+    "licenses": {
+      "items": {
+        "required": [
+          "license_id",
+          "license_name",
+          "license_url",
+          "terms_url",
+          "rights_url",
+          "redistribution_allowed",
+          "modification_allowed",
+          "commercial_use_allowed",
+          "attribution_required",
+          "share_alike_required",
+          "source_specific_restrictions",
+          "pack_output_allowed",
+          "lookup_output_allowed",
+          "review_required",
+          "outside_legal_required",
+          "outside_legal_status",
+          "approval_artifact_path",
+          "effective_date",
+          "reviewed_at",
+          "review_owner",
+          "expires_at",
+          "non_claims",
+          "schema_version"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "registries_version": {
+      "type": "string"
+    },
+    "schema_version": {
+      "type": "string"
+    },
+    "updated_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "kind",
+    "registries_version",
+    "updated_at",
+    "licenses"
+  ],
+  "type": "object"
+}

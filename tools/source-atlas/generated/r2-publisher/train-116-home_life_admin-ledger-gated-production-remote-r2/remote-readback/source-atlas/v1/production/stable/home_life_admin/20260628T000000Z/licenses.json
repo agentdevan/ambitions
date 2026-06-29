@@ -1,0 +1,76 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-home-life-admin-legal-review-train-48.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "doe_public_web",
+      "license_name": "DOE public website government information with acknowledgement requested and third-party/media caveats retained",
+      "license_url": "https://www.energy.gov/web-policies",
+      "non_claims": [
+        "not contractor recommendation",
+        "not unsafe repair instructions",
+        "not a utility guarantee",
+        "not a household schedule",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.energy.gov/web-policies",
+      "terms_url": "https://www.energy.gov/web-policies"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-home-life-admin-legal-review-train-48.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "ready_public_web",
+      "license_name": "Ready.gov public website text with terms, third-party, trademark, and media caveats retained",
+      "license_url": "https://www.ready.gov/terms-and-conditions",
+      "non_claims": [
+        "not emergency advice",
+        "not a safety guarantee",
+        "not unsafe repair instructions",
+        "not a personalized home plan",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.ready.gov/terms-and-conditions",
+      "terms_url": "https://www.ready.gov/terms-and-conditions"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-travel-legal-review-train-46.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "usagov_public_web",
+      "license_name": "USA.gov public government-works text with third-party, trademark, and media caveats retained",
+      "license_url": "https://www.usa.gov/government-works",
+      "non_claims": [
+        "not address submission",
+        "not legal advice",
+        "not a custom moving plan",
+        "not private location inference",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.usa.gov/government-works",
+      "terms_url": "https://www.usa.gov/government-works"
+    }
+  ]
+}

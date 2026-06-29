@@ -1,0 +1,293 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.legalTermsApprovalPacket.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not production R2 readiness",
+    "not release readiness",
+    "not universal coverage",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outsideLegalApprovalBoundary": "outside legal approval requires a current source-specific approval artifact",
+  "outsideLegalApprovalClaimed": false,
+  "packetID": "source-atlas/legal-terms-approval/5570cbea00a784a4",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+  "reviewType": "internal_source_atlas_legal_terms_review",
+  "schemaVersion": 1,
+  "sourceApprovals": [
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "O*NET data must retain O*NET attribution and license notice.",
+      "datasetURL": "https://www.onetcenter.org/database.html",
+      "distributionURL": "https://www.onetcenter.org/database.html",
+      "evidenceHash": "add58c158d4d7f3ac8fa2588d6ed846c0466b1c074a6d1011c19b9711260b89e",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.onetcenter.org/database.html"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.onetcenter.org/overview.html#data"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseURL": "https://www.onetcenter.org/database.html",
+      "licenseVersion": "4.0",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://www.onetcenter.org/overview.html#data",
+      "sourceID": "onet.database",
+      "sourceName": "O*NET Database and O*NET OnLine public occupational reference data",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.onetcenter.org/overview.html#data"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "",
+      "datasetURL": "https://www.bls.gov/developers/",
+      "distributionURL": "https://www.bls.gov/developers/",
+      "evidenceHash": "10a40524ff0273f7cfba5f1b7b85266e697af5f049550be8a367cb9714101da5",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.bls.gov/developers/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.bls.gov/developers/termsOfService.htm"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public data; cite BLS as source",
+      "licenseURL": "https://www.bls.gov/developers/",
+      "licenseVersion": "current public API terms",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://www.bls.gov/developers/termsOfService.htm",
+      "sourceID": "bls.public.data.api",
+      "sourceName": "BLS Public Data API",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.bls.gov/developers/termsOfService.htm"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": false,
+      "attributionText": "",
+      "datasetURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+      "distributionURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+      "evidenceHash": "3f78a867eedbd25dd686648c6e41c6df4a261d4a89a51abec283a9d9da3842e5",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.wikidata.org/wiki/Wikidata:Main_Page"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.wikidata.org/wiki/Wikidata:Licensing"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons CC0 public domain dedication",
+      "licenseURL": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+      "licenseVersion": "1.0",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Wikimedia Foundation / Wikidata community",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "sourceID": "wikidata.crosswalk",
+      "sourceName": "Wikidata entity data",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.wikidata.org/wiki/Wikidata:Licensing"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": false,
+      "attributionText": "",
+      "datasetURL": "https://openalex.org/",
+      "distributionURL": "https://openalex.org/",
+      "evidenceHash": "03a89d6e4550d951cce38e5108ceed7c8e78d630385a369d8d12157660ad5633",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://openalex.org/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons CC0 public domain dedication",
+      "licenseURL": "https://openalex.org/",
+      "licenseVersion": "1.0",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "OpenAlex",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "sourceID": "openalex.dataset",
+      "sourceName": "OpenAlex dataset and API",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    }
+  ],
+  "status": "Green",
+  "statusReason": "internal source-specific terms review complete for approved lanes; blocked or review-required lanes remain excluded",
+  "userAuthorization": "User authorized extensive internal legal/terms review for bounded Source Atlas Green claims; this is not outside legal approval.",
+  "versionID": "source-atlas-legal-terms-approval-packet-v1"
+}

@@ -1,0 +1,119 @@
+{
+  "excludedClaims": [],
+  "sources": [
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "authority_class": "official_institution",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "global",
+      "license_id": "creativecommons_site_cc_by_4_cc0_tools",
+      "non_claims": [
+        "not copyright permission",
+        "not license selection advice",
+        "not trademark permission",
+        "not a content reuse decision",
+        "not a final creative plan",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "creative-commons.licenses",
+      "source_name": "Creative Commons licenses and public-domain tools public reference page"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US federal",
+      "license_id": "loc_usgov_work",
+      "non_claims": [
+        "not copyright clearance",
+        "not source-use permission",
+        "not a content reuse decision",
+        "not legal advice",
+        "not a final creative plan",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "loc.primary_sources",
+      "source_name": "Library of Congress Getting Started with Primary Sources public learning reference page"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "authority_class": "standards_body",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "global",
+      "license_id": "w3c_document_license_public_web",
+      "non_claims": [
+        "not implementation advice",
+        "not patent advice",
+        "not trademark permission",
+        "not a content reuse decision",
+        "not a final creative plan",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "w3c.web-standards",
+      "source_name": "W3C web standards public reference page"
+    }
+  ]
+}

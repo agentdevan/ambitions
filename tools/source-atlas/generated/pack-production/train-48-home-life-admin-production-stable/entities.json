@@ -1,0 +1,48 @@
+{
+  "entities": [
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "home_life_admin",
+      "entity_id": "public_entity.47605fb30fd2b2d9",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "The Department of Energy Energy Saver page includes weatherization topics such as air sealing, insulation, moisture control, and ventilation as public reference context, not a diagnosis of a private home condition or a do-it-yourself repair plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "energy.gov.energy_saver"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "home_life_admin",
+      "entity_id": "public_entity.4afa1eb2ec18b66f",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "Ready.gov publishes Build A Kit as official public emergency-preparedness reference context for household readiness, not emergency response advice, a safety guarantee, unsafe repair instructions, a household schedule, or a personalized home plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "ready.gov.kit"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "home_life_admin",
+      "entity_id": "public_entity.6af618c18ad764c6",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "The Department of Energy Energy Saver page includes home energy audits as public home energy and maintenance context, not a contractor recommendation, unsafe repair instruction, utility guarantee, or personalized household schedule.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "energy.gov.energy_saver"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "home_life_admin",
+      "entity_id": "public_entity.cb2a736af232d258",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "USA.gov publishes government home repair assistance program reference context for finding official repair and improvement assistance information, not eligibility approval, a loan decision, legal advice, contractor advice, or a personalized household plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "usa.gov.home_repair"
+    }
+  ]
+}

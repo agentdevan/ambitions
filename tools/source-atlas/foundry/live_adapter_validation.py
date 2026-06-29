@@ -26,6 +26,7 @@ from .public_reference_adapters import (
     OnetAdapter,
     OpenAlexAdapter,
     RestrictedSourcePolicyAdapter,
+    StatCanTable13100974HealthProviderEHIAdapter,
     WikidataAdapter,
 )
 from .terms_registry import policy_gate_for_output, terms_entry
@@ -38,6 +39,7 @@ APPROVED_LIVE_ADAPTERS = {
     "bls": "bls.public.data.api",
     "wikidata": "wikidata.crosswalk",
     "openalex": "openalex.dataset",
+    "statcan_table_13100974": "official.statcan.table.13100974",
 }
 
 ADAPTER_ALIASES = {
@@ -50,6 +52,7 @@ LIVE_ADAPTER_CLASSES = {
     "bls.public.data.api": BlsAdapter,
     "wikidata.crosswalk": WikidataAdapter,
     "openalex.dataset": OpenAlexAdapter,
+    "official.statcan.table.13100974": StatCanTable13100974HealthProviderEHIAdapter,
 }
 
 FetchFn = Callable[[urllib.request.Request, float, int], dict[str, Any]]
@@ -266,6 +269,9 @@ def _request_for(source_id: str, limit: int) -> dict[str, Any]:
         if os.environ.get("OPENALEX_API_KEY"):
             separator = "&" if "?" in url else "?"
             url = f"{url}{separator}api_key={urllib.parse.quote(os.environ['OPENALEX_API_KEY'])}"
+    elif source_id == "official.statcan.table.13100974":
+        url = "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401"
+        endpoint_class = "Statistics Canada public table HTML validation; no raw payload persisted"
     else:
         raise ValueError(f"unsupported live source: {source_id}")
     request = urllib.request.Request(url, headers=headers)
@@ -290,6 +296,12 @@ def _parse_live_response(source_id: str, body: bytes) -> dict[str, Any]:
         if "O*NET" not in text:
             raise ValueError("missing O*NET marker")
         return {"records": [{"marker": "onet_database_page", "containsLicenseMarker": "Creative Commons" in text}]}
+    if source_id == "official.statcan.table.13100974":
+        text = body.decode("utf-8", errors="replace")
+        markers = ["13-10-0974-01", "Electronic health information", "Shared Health Priorities"]
+        if not any(marker in text for marker in markers):
+            raise ValueError("missing Statistics Canada table marker")
+        return {"records": [{"marker": "statcan_table_13_10_0974_01_page", "containsTableMarker": True}]}
     value = json.loads(body.decode("utf-8"))
     if source_id == "bls.public.data.api":
         series = value.get("Results", {}).get("series", [])
@@ -357,6 +369,13 @@ def _credential_posture(source_id: str) -> dict[str, Any]:
         return {
             "apiModeUsed": "free_no_key" if not os.environ.get("OPENALEX_API_KEY") else "free_key",
             "optionalEnv": ["OPENALEX_API_KEY"],
+            "blocker": None,
+        }
+    if source_id == "official.statcan.table.13100974":
+        return {
+            "apiModeUsed": "static_public_https_no_key",
+            "requiredForThisValidation": [],
+            "optionalEnv": [],
             "blocker": None,
         }
     return {"requiredForThisValidation": [], "blocker": None}

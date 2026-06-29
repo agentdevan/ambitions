@@ -1,0 +1,108 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "router_manifest_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "routing_artifact_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_ready_routes_require_ledger_ready_domain",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_routes_have_complete_gate_work_orders",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_orders_default_to_no_live_or_execute",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_orders_emit_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T21:40:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainProductionLanesManifest.v1",
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not production R2 upload or overwrite",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not approval for future domains without source/frontier/pack/R2/native evidence",
+    "candidate work orders are not source authority",
+    "candidate work orders are not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "manifest": "2b7509c73911d72345b212aa94a5e640b08ea7abaf7cd87f74d8ff12220d2fd7",
+    "productionLanes": "0168dc52bf9d36dfa8be43c8304bb7384b6052c857e2084b91a631844f68bd84",
+    "workOrders": "f73ba71917980312f6e2397ca611849f4d2d9e2d5a7116e3d24decdebc7e84b8"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/02-production-lanes/closeout.md",
+    "manifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/02-production-lanes/manifest.json",
+    "productionLanes": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/02-production-lanes/goal-domain-production-lanes.json",
+    "workOrders": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/02-production-lanes/domain-work-orders.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionTargetLedgerPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/generated/production-target-ledger/train-86/production-target-ledger.json",
+  "recordCounts": {
+    "blockedConfiguredWorkOrders": 0,
+    "candidateRoutes": 1,
+    "candidateWorkOrders": 13,
+    "claims": 0,
+    "configuredBlockedRoutes": 0,
+    "executeOperations": 0,
+    "finalOutputArtifacts": 0,
+    "liveOperations": 0,
+    "maintenanceWorkOrders": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "productionReadyRoutes": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "routes": 1,
+    "workOrders": 13
+  },
+  "routerManifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/manifest.json",
+  "routerOutputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/goal-domain-routing.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; autonomous production-lane work orders only",
+  "status": "Source Green for goal-domain production-lane work-order tooling",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-production-lanes-train-89"
+}

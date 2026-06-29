@@ -1,0 +1,311 @@
+{
+  "help": "https://data.gov.au/data/api/3/action/help_show?name=package_search",
+  "result": {
+    "count": 4740,
+    "facets": {},
+    "results": [
+      {
+        "author": "Department of Education, Employment and Workplace Relations",
+        "author_email": null,
+        "contact_point": "[redacted-public-catalog-contact]",
+        "duplicate_score": 2,
+        "extras": [
+          {
+            "key": "agency_program",
+            "value": "Higher Education"
+          },
+          {
+            "key": "contact_info",
+            "value": "false"
+          },
+          {
+            "key": "data_state",
+            "value": "active"
+          },
+          {
+            "key": "field_of_research",
+            "value": "[]"
+          },
+          {
+            "key": "granularity",
+            "value": "Unit record is sole/major course record (ie one record per student)."
+          },
+          {
+            "key": "harvest_url",
+            "value": "http://data.gov.au/dataset/3488af44-4cfe-4e88-bd6e-532d0d06ae72"
+          },
+          {
+            "key": "jurisdiction",
+            "value": "Commonwealth of Australia"
+          },
+          {
+            "key": "update_freq",
+            "value": "never"
+          }
+        ],
+        "geospatial_topic": [],
+        "groups": [],
+        "id": "3488af44-4cfe-4e88-bd6e-532d0d06ae72",
+        "isopen": false,
+        "license_id": "cc-by",
+        "license_title": "Creative Commons Attribution 3.0 Australia",
+        "license_url": "http://creativecommons.org/licenses/by/3.0/au/",
+        "maintainer": "Department of Education, Employment and Workplace Relations",
+        "maintainer_email": null,
+        "metadata_created": "2013-05-12T07:43:54.303246",
+        "metadata_modified": "2023-08-18T01:54:27.683501",
+        "name": "higher-education-enrolments",
+        "notes": "    \n\nDe-identified higher education student enrolments unit record file.\n\n",
+        "num_resources": 1,
+        "num_tags": 6,
+        "organization": {
+          "approval_status": "approved",
+          "created": "2013-05-12T07:43:52.581144",
+          "description": "Department of Education, Skills and Employment",
+          "id": "822e6b13-d551-4528-bfa3-11b76847d68d",
+          "image_url": "",
+          "is_organization": true,
+          "name": "departmentofeducationskillsemployment",
+          "state": "active",
+          "title": "Department of Education",
+          "type": "organization"
+        },
+        "original_harvest_source": {
+          "href": "https://data.gov.au/data/dataset/higher-education-enrolments",
+          "site_url": "https://data.gov.au/data/dataset/",
+          "title": "data.gov.au"
+        },
+        "private": false,
+        "redacted_public_catalog_identifier_2": "[redacted-public-catalog-identifier]",
+        "redacted_public_catalog_identifier_3": "[redacted-public-catalog-identifier]",
+        "relationships_as_object": [],
+        "relationships_as_subject": [],
+        "resources": [
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2013-05-12T07:44:09.189694",
+            "datastore_active": true,
+            "datastore_contains_all_records_of_source_file": false,
+            "description": "",
+            "format": "CSV",
+            "hash": "8b9105e9eec288cfdca736edec44c19c",
+            "id": "7be27d60-d3a4-45ea-8b7b-ea4cc0c04ab6",
+            "last_modified": "2023-08-18T00:00:00",
+            "metadata_modified": "2023-08-18T01:54:27.692371",
+            "mimetype": "application/zip",
+            "mimetype_inner": null,
+            "name": "enrol.zip",
+            "package_id": "3488af44-4cfe-4e88-bd6e-532d0d06ae72",
+            "position": 0,
+            "resource_type": null,
+            "size": 7369509,
+            "state": "active",
+            "url": "https://data.gov.au/data/dataset/3488af44-4cfe-4e88-bd6e-532d0d06ae72/resource/7be27d60-d3a4-45ea-8b7b-ea4cc0c04ab6/download/tmpzsp5wvenrol.zip",
+            "url_type": "upload",
+            "zip_extract": false
+          }
+        ],
+        "spatial_coverage": "Australia",
+        "state": "active",
+        "tags": [
+          {
+            "display_name": "graduates",
+            "id": "6312eef4-9edb-4774-a135-81fab51b8432",
+            "name": "graduates",
+            "state": "active",
+            "vocabulary_id": null
+          },
+          {
+            "display_name": "highereducation",
+            "id": "47bc4b08-c0be-4eb2-951e-9b87397ed6dd",
+            "name": "highereducation",
+            "state": "active",
+            "vocabulary_id": null
+          },
+          {
+            "display_name": "statisticalinformation",
+            "id": "a6c92d5e-a162-429c-b65f-048c5972948e",
+            "name": "statisticalinformation",
+            "state": "active",
+            "vocabulary_id": null
+          },
+          {
+            "display_name": "statistics",
+            "id": "2cf6f80d-b548-485f-8eef-19e81c1f8002",
+            "name": "statistics",
+            "state": "active",
+            "vocabulary_id": null
+          },
+          {
+            "display_name": "students",
+            "id": "bb1b582e-81bc-4124-946c-bccb24e57f3b",
+            "name": "students",
+            "state": "active",
+            "vocabulary_id": null
+          },
+          {
+            "display_name": "universitystudents",
+            "id": "d847859c-1695-46b2-8d95-c111e52a77f7",
+            "name": "universitystudents",
+            "state": "active",
+            "vocabulary_id": null
+          }
+        ],
+        "temporal_coverage_from": "2013-05-12 07:43:54",
+        "title": "Higher Education – Enrolments",
+        "type": "dataset",
+        "unpublished": false,
+        "url": "http://www.deewr.gov.au/HigherEducation/Pages/default.aspx",
+        "version": null
+      },
+      {
+        "archived": false,
+        "author": "ABS",
+        "author_email": "[redacted-public-catalog-contact]",
+        "contact_point": "[redacted-public-catalog-contact]",
+        "duplicate_score": 2,
+        "extras": [
+          {
+            "key": "harvest_object_id",
+            "value": "e58f8b0a-0efc-45ff-8423-09db7827810e"
+          },
+          {
+            "key": "harvest_source_id",
+            "value": "bb56156a-72e4-461b-bea4-aec9145d8b5c"
+          },
+          {
+            "key": "harvest_source_title",
+            "value": "South Australia Government"
+          }
+        ],
+        "geospatial_topic": [],
+        "groups": [],
+        "id": "7b08a3bb-8c35-4669-b753-ef4c0f4d657c",
+        "isopen": false,
+        "language": "English",
+        "license_id": "cc-by",
+        "license_title": "Creative Commons Attribution 3.0 Australia",
+        "license_url": "http://creativecommons.org/licenses/by/3.0/au/",
+        "maintainer": "alexa-olczyk-8368",
+        "maintainer_email": "[redacted-public-catalog-contact]",
+        "metadata_created": "2025-06-25T14:33:21.764421",
+        "metadata_modified": "2025-06-25T14:33:23.622167",
+        "name": "education-and-work",
+        "notes": "Provides selected information on participation in education, highest educational attainment, transition from education to work and current labour force and demographic characteristics for the civilian population aged 15-74 years. Characteristics reported on include: type of educational institution attended or attending; level and main field of education of current study and highest level and main field of educational attainment.\nInformation on unsuccessful enrolment, and deferment of study, is included for persons not studying in the survey year. Data on apprenticeships are also provided.",
+        "num_resources": 2,
+        "num_tags": 3,
+        "organization": {
+          "approval_status": "approved",
+          "created": "2025-06-25T23:35:36.495750",
+          "description": "Australian Bureau of Statistics - SA Data Released\r\n\r\n",
+          "id": "b9aa797f-4da0-49e9-b1c9-174cc9e6f642",
+          "image_url": "",
+          "is_organization": true,
+          "name": "abs-sa-data-south-australia-government",
+          "state": "active",
+          "title": "ABS (SA Data)",
+          "type": "organization"
+        },
+        "original_harvest_source": {
+          "href": "https://data.sa.gov.au/data/dataset/education-and-work",
+          "site_url": "https://data.sa.gov.au/data/",
+          "title": "South Australia Government"
+        },
+        "original_name": "education-and-work",
+        "private": false,
+        "promotion_level": "0",
+        "redacted_public_catalog_identifier_6": "[redacted-public-catalog-identifier]",
+        "redacted_public_catalog_identifier_8": "[redacted-public-catalog-identifier]",
+        "relationships_as_object": [],
+        "relationships_as_subject": [],
+        "remote_last_updated": "2017-01-23 03:29:43.985289",
+        "resources": [
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2013-05-09T00:54:19.059862",
+            "datastore_active": false,
+            "datastore_contains_all_records_of_source_file": false,
+            "description": "Education and Work presents data for states/territories and Australia. ",
+            "format": "XLS",
+            "hash": "{\"content\": \"a3b77f9f2592527e08e5326df497b300be6509c7\", \"header\": \"e45c9e12967a427190ae4f9954d1238230f5a9cf\"}",
+            "id": "87785d1b-22bd-4a8b-b1dc-f3009a001e1f",
+            "last_modified": "2016-08-29T03:28:53",
+            "metadata_modified": "2025-06-25T14:33:21.753494",
+            "mimetype": "text/html",
+            "mimetype_inner": null,
+            "name": "Education and Work",
+            "package_id": "7b08a3bb-8c35-4669-b753-ef4c0f4d657c",
+            "position": 0,
+            "resource_type": "file",
+            "size": 23963,
+            "state": "active",
+            "url": "https://www.abs.gov.au/AUSSTATS/abs@.nsf/mf/6227.0",
+            "url_type": null,
+            "zip_extract": false
+          },
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2013-05-09T00:57:42.430479",
+            "datastore_active": false,
+            "datastore_contains_all_records_of_source_file": false,
+            "description": "Education and Work presents data for states/territories and Australia. ",
+            "format": "HTML",
+            "hash": "",
+            "id": "fcb332fc-87b4-4757-afaf-9ac9c7976b6e",
+            "last_modified": "2025-06-21T15:00:30",
+            "metadata_modified": "2025-06-25T14:33:21.755453",
+            "mimetype": "text/html",
+            "mimetype_inner": null,
+            "name": "Education and Work - Explanatory Notes May 2016",
+            "package_id": "7b08a3bb-8c35-4669-b753-ef4c0f4d657c",
+            "position": 1,
+            "resource_type": "file",
+            "size": 45977,
+            "state": "active",
+            "url": "https://www.abs.gov.au/AUSSTATS/abs@.nsf/Lookup/6227.0Explanatory%20Notes1May%202016?OpenDocument",
+            "url_type": null,
+            "zip_extract": false
+          }
+        ],
+        "spatial": "{\"type\": \"Point\",\"coordinates\": [135.866666,-29.383333]}",
+        "spatial_coverage": "SA0062407: South Australia",
+        "state": "active",
+        "tags": [
+          {
+            "display_name": "education",
+            "id": "af215a17-5018-4074-8db1-ae56bd3c818d",
+            "name": "education",
+            "state": "active",
+            "vocabulary_id": null
+          },
+          {
+            "display_name": "labour",
+            "id": "69b552c3-7901-42ca-bd35-b5a99c7594bc",
+            "name": "labour",
+            "state": "active",
+            "vocabulary_id": null
+          },
+          {
+            "display_name": "statistics",
+            "id": "2cf6f80d-b548-485f-8eef-19e81c1f8002",
+            "name": "statistics",
+            "state": "active",
+            "vocabulary_id": null
+          }
+        ],
+        "temporal_coverage_from": "2013-05-09 00:00:00",
+        "title": "Education and Work",
+        "type": "dataset",
+        "unpublished": false,
+        "url": null,
+        "version": null
+      }
+    ],
+    "search_facets": {},
+    "sort": "extras_harvest_portal asc, score desc, metadata_modified desc"
+  },
+  "success": true
+}

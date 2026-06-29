@@ -1,0 +1,392 @@
+{
+  "adapterID": "openalex_personal_growth_research_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_openalex_personal_growth_metadata_reference",
+    "liveMode": "requires_live_flag_rate_budget_policy_and_high_volume_review_for_bulk_use",
+    "packOutput": "allowed_for_bounded_cc0_scholarly_metadata_reference"
+  },
+  "atoms": [
+    {
+      "atomType": "public_research_metadata_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.9ca6e0aa46bc2b6c",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "OpenAlex personal-growth scholarly metadata reference",
+      "provenanceIDs": [
+        "provenance.68cda88495b2e911"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.personal_growth_research"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "personal_growth_research_metadata_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.f822298dd06d1ffb",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "behavior change and habit formation research metadata",
+      "provenanceIDs": [
+        "provenance.68cda88495b2e911"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.personal_growth_research"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "scholarly_metadata",
+      "checksum": "checksum.0a1f0874f733bc26",
+      "claimType": "research_metadata_reference",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly OpenAlex metadata and API-governance review",
+      "id": "claim.8def1d37f1c9c29e",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.68cda88495b2e911"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.personal_growth_research",
+      "sourceIDs": [
+        "openalex.personal_growth_research"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "OpenAlex provides CC0 scholarly metadata that can identify research-topic context for behavior change and habit formation, as supporting research metadata only and not normative authority, medical treatment guidance, diagnosis, or a final personal-growth plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "openalex_personal_growth_research_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "personal_growth",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "global",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "scholarly_metadata",
+    "sourceCount": 1,
+    "sourceLane": "openalex.personal_growth_research",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "research_metadata_reference",
+      "dataClass": "public_provenance",
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateFinalPersonalGrowthPlan": true,
+      "doesNotCreateMedicalTreatmentGuidance": true,
+      "doesNotCreateNormativeAuthority": true,
+      "highVolumeUseRequiresApproval": true,
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.personalGrowthCoverage.v1",
+      "label": "OpenAlex behavior-change research metadata reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "openalex.personal_growth_research",
+      "subject": "personal_growth.openalex_behavior_change_metadata"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "personal_growth",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.9ca6e0aa46bc2b6c",
+      "id": "edge.7ba9153916164211",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.68cda88495b2e911"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_research_metadata_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.personal_growth_research"
+      ],
+      "toAtomID": "atom.f822298dd06d1ffb",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.9ca6e0aa46bc2b6c",
+        "atom.f822298dd06d1ffb"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.7ba9153916164211"
+      ],
+      "id": "lattice.a60820284f3fd6e2",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "openalex_personal_growth_research_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "personal_growth",
+      "id": "pack_candidate.20570e45a9c7e95c",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "openalex.personal_growth_research",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable",
+        "sourceID": "openalex.personal_growth_research"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "scholarly_metadata",
+      "contentHash": "9767899e48cd4b20254a651dfafbab36a28ce9227ba13af3d75f60602a77bb1b",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "monthly OpenAlex metadata and API-governance review",
+      "id": "provenance.68cda88495b2e911",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "OpenAlex CC0 public scholarly metadata with high-volume API/snapshot governance retained",
+      "locator": "https://openalex.org/",
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "openalex.personal_growth_research",
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.8def1d37f1c9c29e",
+      "dataClass": "public_requirement",
+      "gateType": "public_research_metadata_reference_only",
+      "id": "requirement.a929356909c7dbd6",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.68cda88495b2e911"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.personal_growth_research"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "openalex.personal_growth_research",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": false,
+    "authorityTier": "scholarly_metadata",
+    "freshnessCadence": "monthly OpenAlex metadata and API-governance review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "OpenAlex CC0 public scholarly metadata with high-volume API/snapshot governance retained",
+    "licenseVersion": "current OpenAlex CC0 metadata posture",
+    "publisher": "OpenAlex",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable",
+    "reviewRequired": false,
+    "sourceID": "openalex.personal_growth_research",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable",
+    "sourceID": "openalex.personal_growth_research"
+  }
+}

@@ -204,6 +204,7 @@ def test_live_adapter_validation_normalizes_mocked_public_sources(tmp_path: Path
         "api.bls.gov": json.dumps({"status": "REQUEST_SUCCEEDED", "Results": {"series": [{"seriesID": "LNS14000000"}]}}).encode(),
         "www.wikidata.org": json.dumps({"entities": {"Q80993": {"id": "Q80993", "labels": {"en": {"value": "software engineer"}}}}}).encode(),
         "api.openalex.org": json.dumps({"meta": {"count": 1}, "results": [{"id": "https://openalex.org/T10860", "display_name": "Software engineering"}]}).encode(),
+        "www150.statcan.gc.ca": b"<html>Statistics Canada Table 13-10-0974-01 Electronic health information</html>",
     }
 
     def fetcher(request, _timeout, _max_bytes):
@@ -236,7 +237,7 @@ def test_live_adapter_validation_normalizes_mocked_public_sources(tmp_path: Path
         fetcher=fetcher,
     )
     assert evidence["status"] == "Green", evidence
-    assert evidence["summary"]["recordsFetched"] >= 4
+    assert evidence["summary"]["recordsFetched"] >= 5
     assert all(not result["fixtureFallbackUsed"] for result in evidence["results"])
 
 

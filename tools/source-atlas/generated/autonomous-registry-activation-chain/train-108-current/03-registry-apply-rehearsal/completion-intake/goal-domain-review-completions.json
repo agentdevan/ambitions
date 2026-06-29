@@ -1,0 +1,302 @@
+{
+  "completedReviewPackets": [
+    {
+      "approvalArtifactEmitted": false,
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "claimOutputAllowed": false,
+      "completionID": "source_atlas_goal_domain_review_completion.f961723fb9d4b399",
+      "completionStatus": "completed",
+      "createdAt": "2026-06-28T22:20:00Z",
+      "executeAllowed": false,
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "goal-domain review completion only",
+        "not source authority by itself",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.4594db448db14d5b",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.48950138cdd652f9",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewDecision": "completed_fixture_review",
+      "reviewEvidencePath": "docs/qa/source-atlas/domain-expansion/train-96-fixture-review.md",
+      "reviewFields": {
+        "authority_limitations": [
+          "fixture rehearsal only"
+        ],
+        "jurisdiction": "US",
+        "official_locator": "https://example.gov/source-atlas/frontier_intake_proposal_2b62e995a7dfeaa9",
+        "publisher_authority_class": "official_government",
+        "publisher_identity": "Fixture Public Reference Publisher frontier_intake_proposal_2b62e995a7dfeaa9",
+        "review_decision": "direct_source_resolved_fixture",
+        "review_evidence_path": "docs/qa/source-atlas/domain-expansion/train-96-fixture-review.md",
+        "source_directness": "direct_official_publisher_fixture"
+      },
+      "reviewLane": "direct_source_authority_resolution",
+      "reviewOwner": "Ambitions owner technical rehearsal fixture",
+      "reviewedAt": "2026-06-28",
+      "stage": "direct_source_resolution",
+      "stageIndex": 3
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "claimOutputAllowed": false,
+      "completionID": "source_atlas_goal_domain_review_completion.b107255afab76b68",
+      "completionStatus": "completed",
+      "createdAt": "2026-06-28T22:20:00Z",
+      "executeAllowed": false,
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "goal-domain review completion only",
+        "not source authority by itself",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6ecddcacc172a148",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.6e1338bfad0ceaed",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewDecision": "completed_fixture_review",
+      "reviewEvidencePath": "docs/qa/source-atlas/domain-expansion/train-96-fixture-review.md",
+      "reviewFields": {
+        "allowed_artifact_classes": [
+          "official_public_source",
+          "public_reference_claim",
+          "public_requirement",
+          "public_provenance"
+        ],
+        "authority_class": "official_government",
+        "budget_policy_id": "budget.fixture_goal_domain_frontier_intake_proposal_2b62e995a7dfeaa9.v1",
+        "claim_classes_allowed": [
+          "public_reference_claim"
+        ],
+        "claim_classes_forbidden": [
+          "legal_advice",
+          "personalized_plan"
+        ],
+        "domain": "public_benefits_reference",
+        "forbidden_artifact_classes": [
+          "private_goal_graph",
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan"
+        ],
+        "jurisdiction": "US",
+        "next_review_due_at": "2026-12-28",
+        "r2_object_key_prefix": "source-atlas/v1/stable/goal-domain-rehearsal/frontier_intake_proposal_2b62e995a7dfeaa9",
+        "r2_pack_policy": "pack_allowed_with_attribution",
+        "rate_policy_id": "rate.fixture_goal_domain_frontier_intake_proposal_2b62e995a7dfeaa9.v1",
+        "redistribution_policy": "redistributable_with_attribution",
+        "review_evidence_path": "docs/qa/source-atlas/domain-expansion/train-96-fixture-review.md",
+        "review_status": "reviewed",
+        "secret_policy_id": "secret.no_secret_static_page.v1",
+        "source_class": "official_government",
+        "source_id": "fixture.goal_domain.frontier_intake_proposal_2b62e995a7dfeaa9"
+      },
+      "reviewLane": "source_lane_governance",
+      "reviewOwner": "Ambitions owner technical rehearsal fixture",
+      "reviewedAt": "2026-06-28",
+      "stage": "source_lane_review",
+      "stageIndex": 4
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "claimOutputAllowed": false,
+      "completionID": "source_atlas_goal_domain_review_completion.2f83f1430acce05d",
+      "completionStatus": "completed",
+      "createdAt": "2026-06-28T22:20:00Z",
+      "executeAllowed": false,
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "goal-domain review completion only",
+        "not source authority by itself",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.19c19add6d47c068",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.bcc6e1138b62b506",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewDecision": "completed_fixture_review",
+      "reviewEvidencePath": "docs/qa/source-atlas/domain-expansion/train-96-fixture-review.md",
+      "reviewFields": {
+        "approval_artifact_path": "",
+        "attribution_required": true,
+        "expires_at": "2026-12-28",
+        "license_id": "fixture.goal_domain.frontier_intake_proposal_2b62e995a7dfeaa9.terms",
+        "license_url": "https://example.gov/source-atlas/frontier_intake_proposal_2b62e995a7dfeaa9/license",
+        "outside_legal_required": false,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": true,
+        "redistribution_allowed": true,
+        "review_evidence_path": "docs/qa/source-atlas/domain-expansion/train-96-fixture-review.md",
+        "rights_url": "https://example.gov/source-atlas/frontier_intake_proposal_2b62e995a7dfeaa9/rights",
+        "terms_url": "https://example.gov/source-atlas/frontier_intake_proposal_2b62e995a7dfeaa9/terms"
+      },
+      "reviewLane": "legal_terms_review",
+      "reviewOwner": "Ambitions owner technical rehearsal fixture",
+      "reviewedAt": "2026-06-28",
+      "stage": "legal_terms_review",
+      "stageIndex": 5
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "candidateSourceIDs": [
+        "candidate_source.6fdef24bfb082cbc",
+        "candidate_source.fdf4da8412592b63"
+      ],
+      "claimOutputAllowed": false,
+      "completionID": "source_atlas_goal_domain_review_completion.880f48aed4a5b8a8",
+      "completionStatus": "completed",
+      "createdAt": "2026-06-28T22:20:00Z",
+      "executeAllowed": false,
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "goal-domain review completion only",
+        "not source authority by itself",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.fe96b0b860bbd33d",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.a7108c4e85c9d74f",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "reviewDecision": "completed_fixture_review",
+      "reviewEvidencePath": "docs/qa/source-atlas/domain-expansion/train-96-fixture-review.md",
+      "reviewFields": {
+        "api_mode": "static_https_fixture_first",
+        "api_policy_id": "api.fixture_goal_domain_frontier_intake_proposal_2b62e995a7dfeaa9.v1",
+        "backoff_policy": "exponential_jitter",
+        "budget_owner": "source-atlas-foundry",
+        "circuit_breaker_policy": "stop_after_retry_budget",
+        "daily_budget_limit": 10,
+        "env_var_name": "",
+        "execute_flag_required": true,
+        "high_volume_review_required": false,
+        "key_required": false,
+        "live_flag_required": true,
+        "max_pages_per_run": 5,
+        "max_records_per_run": 5,
+        "missing_key_behavior": "no_key_required",
+        "monthly_budget_limit": 300,
+        "rate_limit_per_minute": 30,
+        "rate_limit_per_second": 1,
+        "retry_policy": "retry_429_500_502_503_504_only",
+        "review_evidence_path": "docs/qa/source-atlas/domain-expansion/train-96-fixture-review.md",
+        "secret_redaction_required": true,
+        "timeout_seconds": 120
+      },
+      "reviewLane": "api_governance_review",
+      "reviewOwner": "Ambitions owner technical rehearsal fixture",
+      "reviewedAt": "2026-06-28",
+      "stage": "api_governance_review",
+      "stageIndex": 6
+    }
+  ],
+  "createdAt": "2026-06-28T22:20:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainReviewCompletions.v1",
+  "nonClaims": [
+    "goal-domain review completion records only",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 publish"
+  ],
+  "reviewBundles": [
+    {
+      "blockedReviewLanes": [],
+      "bundleID": "source_atlas_goal_domain_review_bundle.2eeba04fafcdccce",
+      "claimOutputAllowed": false,
+      "completedReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "completionStatus": "completed_review_ready_for_registry_mutation_planning",
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "missingReviewLanes": [],
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review bundle summary only",
+        "not registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "packOutputAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "registryMutationPlanningReady": true,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredReviewLanes": [
+        "api_governance_review",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ]
+    }
+  ]
+}

@@ -39,6 +39,7 @@ final class AppContainer {
     let externalRouter: any AppExternalRouting
     let externalActionService: any ExternalActionCommandExecuting
     let externalCreationImportService: any ExternalCreationImporting
+    let sourceAtlasLifecycleRefreshService: any SourceAtlasPublicPackLifecycleRefreshing
     let commandRouter: any ShellCommandRouting
     let memoryLensService: any MemoryLensServicing
     let onboardingService: any OnboardingServicing
@@ -64,6 +65,9 @@ final class AppContainer {
         externalRouter: any AppExternalRouting,
         externalActionService: any ExternalActionCommandExecuting,
         externalCreationImportService: any ExternalCreationImporting,
+        sourceAtlasLifecycleRefreshService: any SourceAtlasPublicPackLifecycleRefreshing = SourceAtlasPublicPackLifecycleRefreshService(
+            registry: SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.defaultAppRegistry()
+        ),
         commandRouter: any ShellCommandRouting,
         memoryLensService: any MemoryLensServicing,
         onboardingService: any OnboardingServicing
@@ -94,7 +98,8 @@ final class AppContainer {
             calendarRemindersService: calendarRemindersService,
             externalRouter: externalRouter,
             externalActionService: externalActionService,
-            externalCreationImportService: externalCreationImportService
+            externalCreationImportService: externalCreationImportService,
+            sourceAtlasLifecycleRefreshService: sourceAtlasLifecycleRefreshService
         )
         self.featureFactory = AppFeatureFactoryCapability(
             clock: clock,
@@ -125,6 +130,7 @@ final class AppContainer {
         self.externalRouter = externalRouter
         self.externalActionService = externalActionService
         self.externalCreationImportService = externalCreationImportService
+        self.sourceAtlasLifecycleRefreshService = sourceAtlasLifecycleRefreshService
         self.commandRouter = commandRouter
         self.memoryLensService = memoryLensService
         self.onboardingService = onboardingService

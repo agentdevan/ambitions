@@ -1,0 +1,210 @@
+{
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "claim_graph_written",
+      "passed": true
+    },
+    {
+      "name": "packable_claims_have_complete_provenance_tuple",
+      "passed": true
+    },
+    {
+      "name": "missing_provenance_blocks_pack_output",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_excluded_from_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "crosswalk_only_sources_excluded_from_regulated_authority",
+      "passed": true
+    },
+    {
+      "name": "candidate_only_frontiers_do_not_claim_pack_readiness",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "claimBlockers": [],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "freshnessCompliance": {
+    "claimCount": 2,
+    "complete": true,
+    "freshCount": 2,
+    "percent": 1.0
+  },
+  "frontierConfigPath": "tools/source-atlas/frontier/statcan-health-statistics-train-77.json",
+  "frontierReports": [
+    {
+      "authority_coverage": {
+        "complete": true,
+        "missing": [],
+        "present": [
+          "official_government"
+        ],
+        "required": [
+          "official_government"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "public_health_statistical_context",
+        "public_statistical_reference"
+      ],
+      "conflict_status": "no_conflict_detected",
+      "covered_claim_classes": [
+        "public_health_statistical_context",
+        "public_statistical_reference"
+      ],
+      "domain": "health_wellness_reference_ca_statistics",
+      "freshness_compliance": {
+        "claimCount": 2,
+        "complete": true,
+        "freshCount": 2,
+        "percent": 1.0
+      },
+      "frontier_id": "health_wellness_reference_ca_statistics",
+      "goal_intent_classes": [
+        "health_statistics_reference"
+      ],
+      "gold_set": {
+        "goldSetID": null,
+        "matchedCount": 0,
+        "matches": [],
+        "missing": [],
+        "nonClaims": [
+          "not universal coverage",
+          "not release readiness"
+        ],
+        "required": false,
+        "requiredCount": 0,
+        "schemaVersion": 1,
+        "status": "not_required",
+        "versionID": "source-atlas-gold-set-evaluator-train-40"
+      },
+      "gold_set_status": "not_required",
+      "jurisdictions": [
+        "CA"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": true,
+        "completeCount": 1,
+        "laneCount": 1,
+        "percent": 1.0
+      },
+      "missing_claim_classes": [],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a personal health recommendation",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not diagnosis",
+        "not full Source Atlas Green",
+        "not medical advice",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not release readiness",
+        "not runtime recommendation proof by itself",
+        "not treatment planning",
+        "not universal goal coverage",
+        "not universal health or wellness coverage"
+      ],
+      "packable_claim_count": 2,
+      "provenance_completeness": {
+        "claimCount": 2,
+        "complete": true,
+        "completeTupleCount": 2,
+        "packableClaimCount": 2,
+        "packableCompleteTupleCount": 2,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [
+        "official.statcan.table.13100974"
+      ],
+      "status": "claim_graph_ready",
+      "status_ceiling": "pack_staging_ready"
+    }
+  ],
+  "inputRoot": "tools/source-atlas/generated/governed-harvest/train-77-statcan-table-13100974-fixture",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.claimFrontierManifest.v1",
+  "legalPostureCompleteness": {
+    "claimCount": 2,
+    "complete": true,
+    "completeCount": 2,
+    "percent": 1.0
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputHashes": {
+    "citationGraph": "40c4ca5958918a8d56abfb976d2d0039b3be36b61915f3fff049ecc023f8de06",
+    "claimGraph": "b36d2776e8cda18d6fa1da5df85832ef5b07fa691a6ecb75e3c5e40fa1c1ae0c",
+    "coverageFrontierReport": "f6dc84cd821c791275407a2e965e2b0212e1f4e34c1113424e1b4c5a5c488110",
+    "manifest": "803fc0cd0abdf593adfc999e3324ff5ee2ccc3e96173433fe70c8c44427ba819"
+  },
+  "outputPaths": {
+    "citationGraph": "tools/source-atlas/generated/claim-frontier/train-77-statcan-table-13100974/citation-graph.json",
+    "claimGraph": "tools/source-atlas/generated/claim-frontier/train-77-statcan-table-13100974/claim-graph.json",
+    "closeout": "tools/source-atlas/generated/claim-frontier/train-77-statcan-table-13100974/closeout.md",
+    "coverageFrontierReport": "tools/source-atlas/generated/claim-frontier/train-77-statcan-table-13100974/coverage-frontier-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "provenanceCompleteness": {
+    "claimCount": 2,
+    "complete": true,
+    "completeTupleCount": 2,
+    "packableClaimCount": 2,
+    "packableCompleteTupleCount": 2,
+    "packablePercent": 1.0
+  },
+  "recordCounts": {
+    "blockedClaims": 0,
+    "citations": 2,
+    "claims": 2,
+    "entities": 2,
+    "frontiers": 1,
+    "packableClaims": 2
+  },
+  "restrictedExclusions": [],
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; claim graph and coverage frontier tooling only",
+  "status": "Source Green for claim/frontier tooling",
+  "valid": true,
+  "versionID": "source-atlas-claim-frontier-train-03"
+}

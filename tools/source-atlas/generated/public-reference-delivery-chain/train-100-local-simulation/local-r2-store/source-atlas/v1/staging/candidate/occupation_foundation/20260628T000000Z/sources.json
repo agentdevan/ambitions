@@ -1,0 +1,129 @@
+{
+  "excludedClaims": [
+    {
+      "blocked_reasons": [
+        "claim_review_required",
+        "confidence_review_required"
+      ],
+      "claim_id": "canonical_claim.af3582cf9402b37d",
+      "claim_type": "occupation_taxonomy",
+      "pack_eligibility": "blocked_review_required",
+      "source_id": "onet.database"
+    },
+    {
+      "blocked_reasons": [
+        "claim_review_required"
+      ],
+      "claim_id": "canonical_claim.da0b96875d35f737",
+      "claim_type": "occupation_taxonomy",
+      "pack_eligibility": "blocked_review_required",
+      "source_id": "onet.database"
+    }
+  ],
+  "sources": [
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "bls_public_terms",
+      "non_claims": [
+        "not employment guarantee",
+        "not financial advice",
+        "not final user planning"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "bls.public.data.api",
+      "source_name": "BLS Public Data API"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 2,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "onet_cc_by_4",
+      "non_claims": [
+        "not employment advice",
+        "not final user planning",
+        "not U.S. Department of Labor endorsement"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "onet.database",
+      "source_name": "O*NET Database and O*NET OnLine public occupational reference data"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "authority_class": "scholarly_metadata",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "global",
+      "license_id": "openalex_cc0_metadata",
+      "non_claims": [
+        "not normative authority",
+        "not high-volume approval",
+        "not final user planning"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed",
+      "redistribution_policy": "redistributable",
+      "review_status": "reviewed",
+      "source_id": "openalex.dataset",
+      "source_name": "OpenAlex public dataset snapshot lane"
+    }
+  ]
+}

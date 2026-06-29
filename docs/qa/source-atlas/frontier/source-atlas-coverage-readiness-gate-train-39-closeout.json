@@ -1,0 +1,188 @@
+{
+  "schema_version": "1.0.0",
+  "train": "39",
+  "linear_issue": "AMB-1525",
+  "title": "Source Atlas coverage readiness gate completeness hardening",
+  "created_at": "2026-06-28T05:18:34Z",
+  "status": "Green for coverage readiness gate hardening / Yellow overall Source Atlas",
+  "scope_completed": [
+    "Hardened the Source Atlas coverage readiness gate so production target, R2, native runtime, and universal-coverage claims cannot outrun coverage completeness.",
+    "Added explicit claim-class coverage completeness to the per-frontier gate output.",
+    "Added explicit authority coverage completeness to the per-frontier gate output.",
+    "Added required gold-set completeness/status gating.",
+    "Regenerated the Train 39 coverage readiness gate packet.",
+    "Downgraded public_civic_requirements from bounded production target-ready to claim_graph_ready until required gold-set proof exists.",
+    "Kept education_credentialing at adapter_ready with explicit authority, claim-class, and gold-set blockers.",
+    "Kept universal coverage, broad runtime Green, Release Green, outside legal approval, and production R2 readiness blocked."
+  ],
+  "files_changed": [
+    "tools/source-atlas/foundry/coverage_readiness_gate.py",
+    "tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39.json",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39.md",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39-closeout.json",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39-closeout.md"
+  ],
+  "frontier_readiness_summary": {
+    "configured_frontiers": 12,
+    "bounded_production_target_ready": [
+      "occupation_foundation"
+    ],
+    "claim_graph_ready_without_packability": [
+      "public_civic_requirements"
+    ],
+    "adapter_ready_without_packability": [
+      "education_credentialing"
+    ],
+    "candidate_or_not_started_frontiers": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "hobbies_recreation",
+      "home_life_admin",
+      "personal_growth",
+      "relationships_family",
+      "travel_relocation"
+    ],
+    "bounded_production_r2_ready": [],
+    "gateway_ready_frontiers": [
+      "public_civic_requirements"
+    ],
+    "runtime_ready_frontiers": [
+      "occupation_foundation",
+      "public_civic_requirements"
+    ],
+    "pack_ready_frontiers": [
+      "occupation_foundation"
+    ]
+  },
+  "allowed_claims": [
+    "bounded_production_target",
+    "frontier_adapter_ready",
+    "frontier_claim_graph_ready"
+  ],
+  "blocked_claims": [
+    "release_green",
+    "source_atlas_runtime_green",
+    "universal_coverage"
+  ],
+  "product_law_preserved": true,
+  "validation_run": [
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py -q",
+      "status": "passed",
+      "summary": "6 passed"
+    },
+    {
+      "command": "python3 -m py_compile tools/source-atlas/foundry/coverage_readiness_gate.py tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "summary": "158 passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas boundary audit: PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas no-private-graph egress audit: PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "summary": "GREEN: no disallowed architecture-as-UI strings found in active primary UI source"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "summary": "GREEN: local-first/account/R2/hosted-AI boundary checks passed in active authority files"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39.json",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "Swift/Xcode build was not run because Train 39 touched only Source Atlas Python tooling/tests and QA evidence.",
+    "No live network/API harvest was executed by Train 39.",
+    "No production or staging R2 write was executed by Train 39.",
+    "No outside legal review was performed or claimed.",
+    "No Release Green, Visual Green, App Store readiness, entitlement readiness, or universal coverage proof was attempted."
+  ],
+  "proof_artifacts": [
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39.json",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39.md",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39-closeout.json",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39-closeout.md"
+  ],
+  "known_risks": [
+    "Only occupation_foundation currently reaches bounded production target readiness under the stricter gate.",
+    "public_civic_requirements has claim graph, gateway, and native transport evidence, but remains blocked from bounded production target readiness by required gold-set proof.",
+    "education_credentialing remains adapter_ready only and is blocked by missing credential_requirement claim coverage, incomplete authority coverage, and missing required gold-set proof.",
+    "Nine configured frontiers remain candidate-only or not-started and lack reviewed source lanes, claim coverage, legal posture completeness, production R2 proof, and native transport proof.",
+    "No new legal approval, live transport, R2 write, or native runtime proof was created by Train 39."
+  ],
+  "follow_up_required": [
+    "Add required gold-set proof for public_civic_requirements before restoring any bounded production target claim.",
+    "Complete education_credentialing credential_requirement coverage and official-institution authority coverage before pack/runtime claims.",
+    "Add reviewed source lanes, legal posture, claim-frontier proof, and pack proof for remaining candidate-only frontiers.",
+    "Run production R2 and native transport gates per frontier only after coverage, legal, provenance, freshness, and gold-set gates pass.",
+    "Keep universal coverage, Release Green, and outside legal approval blocked until each required artifact exists."
+  ],
+  "rollback_plan": [
+    "Revert the Train 39 changes to tools/source-atlas/foundry/coverage_readiness_gate.py and its focused test file.",
+    "Remove Train 39 QA evidence artifacts.",
+    "No R2, native runtime, or production configuration rollback is required because Train 39 performed no write/publish/live transport operation."
+  ],
+  "source_atlas_status_ceiling": "Green for coverage readiness gate hardening only. Overall Source Atlas remains Yellow.",
+  "r2_request_privacy_proof": "Train 39 performed no R2 request or write. It consumed existing public/reference R2 evidence from prior trains only.",
+  "no_private_graph_egress_proof": "Source Atlas boundary audit and no-private-graph egress audit passed. Train 39 generated only public/reference readiness metadata and no private runtime request shape.",
+  "license_terms_proof": "Train 39 consumed existing legal/release and source-lane evidence only. It did not create new legal approval or outside legal approval.",
+  "restricted_source_exclusion_proof": "The gate continues to block candidate-only, review-required, lookup-only, crosswalk-only, unpacked, or incomplete frontiers from production pack/runtime readiness.",
+  "provenance_completeness_proof": "The gate still requires claim-frontier provenance completeness and now also blocks pack/readiness when required claim-class, authority, or gold-set coverage is incomplete.",
+  "freshness_revocation_proof": "Train 39 created no new freshness, revocation, LKG, or rollback behavior. Existing R2 proof is referenced only as input evidence and cannot override coverage blockers.",
+  "lkg_rollback_proof": "No new R2 publication occurred. Existing LKG/rollback evidence remains the only production proof for previously published packs.",
+  "native_offline_no_account_proof": "Train 39 touched no native runtime. Existing native proof is consumed as readiness evidence only and cannot override coverage blockers.",
+  "production_non_claims": [
+    "Not full Source Atlas Green.",
+    "Not universal coverage.",
+    "Not broad Source Atlas Runtime Green.",
+    "Not Release Green.",
+    "Not Visual Green.",
+    "Not App Store readiness.",
+    "Not outside legal approval.",
+    "Not entitlement readiness.",
+    "Not a private user-data backend.",
+    "Not private life graph storage.",
+    "Not a final user plan, schedule, or Step generator.",
+    "Not production R2 readiness for public_civic_requirements or education_credentialing."
+  ],
+  "architecture_tree": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "tools/source-atlas/foundry",
+      "docs/qa/source-atlas/frontier"
+    ],
+    "files_moved_or_created": [
+      "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39.json",
+      "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39.md",
+      "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39-closeout.json",
+      "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-39-closeout.md"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_architecture_debt": "None introduced by Train 39.",
+    "next_repair_train": "",
+    "equivalent_folder_interpretation_used": false
+  }
+}

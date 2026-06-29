@@ -1,0 +1,12 @@
+{
+  "approvalStatus": "approved_for_fixture_temp_registry_apply",
+  "approvedAt": "2026-06-28T00:00:00Z",
+  "approvedBy": "Ambitions owner technical rehearsal fixture",
+  "kind": "ambitions.sourceAtlas.goalDomainRegistryApplyApproval.v1",
+  "nonClaims": [
+    "fixture approval only",
+    "not active repo registry approval",
+    "not outside legal approval",
+    "not R2 publish"
+  ]
+}

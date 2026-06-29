@@ -1,0 +1,219 @@
+{
+  "schema_version": "1.0.0",
+  "train": "40",
+  "linear_issue": "AMB-1526",
+  "title": "Source Atlas civic gold-set proof and readiness gate restore",
+  "created_at": "2026-06-28T05:25:49Z",
+  "status": "Green for bounded civic gold-set proof and readiness gate update / Yellow overall Source Atlas",
+  "scope_completed": [
+    "Added a data-driven civic gold set to the public_civic_requirements coverage frontier.",
+    "Added deterministic gold-set evaluation to the claim-frontier compiler.",
+    "Regenerated civic claim-frontier evidence at tools/source-atlas/generated/claim-frontier/train-40-civic-goldset.",
+    "Regenerated the coverage readiness gate as Train 40.",
+    "Restored public_civic_requirements to bounded_production_target_ready using existing Train 37 production R2, gateway readback, and native transport proof.",
+    "Kept education_credentialing blocked by missing credential_requirement coverage, incomplete authority coverage, and missing gold-set proof.",
+    "Kept universal coverage, broad Runtime Green, Release Green, outside legal approval, and App Store readiness blocked."
+  ],
+  "files_changed": [
+    "tools/source-atlas/foundry/claim_frontier.py",
+    "tools/source-atlas/foundry/coverage_readiness_gate.py",
+    "tools/source-atlas/foundry/tests/test_civic_adapter_train_09.py",
+    "tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py",
+    "tools/source-atlas/frontier/coverage-frontiers.json",
+    "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/claim-graph.json",
+    "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/citation-graph.json",
+    "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/coverage-frontier-report.json",
+    "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/manifest.json",
+    "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/closeout.md",
+    "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40.md",
+    "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40-closeout.json",
+    "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40-closeout.md",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-40.json",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-40.md"
+  ],
+  "frontier_readiness_summary": {
+    "configured_frontiers": 12,
+    "bounded_production_target_ready": [
+      "occupation_foundation",
+      "public_civic_requirements"
+    ],
+    "adapter_ready_without_packability": [
+      "education_credentialing"
+    ],
+    "candidate_or_not_started_frontiers": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "hobbies_recreation",
+      "home_life_admin",
+      "personal_growth",
+      "relationships_family",
+      "travel_relocation"
+    ],
+    "bounded_production_r2_ready": [],
+    "gateway_ready_frontiers": [
+      "public_civic_requirements"
+    ],
+    "runtime_ready_frontiers": [
+      "occupation_foundation",
+      "public_civic_requirements"
+    ],
+    "pack_ready_frontiers": [
+      "occupation_foundation",
+      "public_civic_requirements"
+    ]
+  },
+  "gold_set_proof": {
+    "frontier_id": "public_civic_requirements",
+    "gold_set_id": "gold.public_civic_requirements.us_presidential_eligibility.v1",
+    "status": "passed",
+    "required_claims": 2,
+    "matched_claims": 2,
+    "missing_claims": 0,
+    "matched_gold_claim_ids": [
+      "gold.public_civic_requirements.presidential_eligibility.age",
+      "gold.public_civic_requirements.presidential_eligibility.citizenship_residency"
+    ]
+  },
+  "allowed_claims": [
+    "bounded_production_target",
+    "frontier_adapter_ready"
+  ],
+  "blocked_claims": [
+    "release_green",
+    "source_atlas_runtime_green",
+    "universal_coverage"
+  ],
+  "product_law_preserved": true,
+  "validation_run": [
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_civic_adapter_train_09.py tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py -q",
+      "status": "passed",
+      "summary": "11 passed"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "summary": "158 passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas boundary audit: PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas no-private-graph egress audit: PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "summary": "GREEN: no disallowed architecture-as-UI strings found in active primary UI source"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "summary": "GREEN: local-first/account/R2/hosted-AI boundary checks passed in active authority files"
+    },
+    {
+      "command": "python3 -m py_compile tools/source-atlas/foundry/claim_frontier.py tools/source-atlas/foundry/coverage_readiness_gate.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40-closeout.json",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-40.json",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "Swift/Xcode build was not run because Train 40 touched only Source Atlas Python tooling/tests, frontier config, and QA/generated evidence.",
+    "No live network/API harvest was executed by Train 40.",
+    "No new R2 write was executed by Train 40; civic production R2 proof is inherited from Train 37.",
+    "No new native runtime change or native XCTest was executed by Train 40; civic native transport proof is inherited from Train 37.",
+    "No outside legal review was performed or claimed.",
+    "No Release Green, Visual Green, App Store readiness, entitlement readiness, or universal coverage proof was attempted."
+  ],
+  "proof_artifacts": [
+    "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/coverage-frontier-report.json",
+    "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/manifest.json",
+    "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40.md",
+    "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40-closeout.json",
+    "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40-closeout.md",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-40.json",
+    "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-40.md"
+  ],
+  "known_risks": [
+    "Overall Source Atlas remains Yellow because 10 configured frontiers are below bounded production target readiness.",
+    "education_credentialing remains adapter_ready only and is blocked by missing credential_requirement coverage, official-institution authority coverage, and missing required gold set.",
+    "Nine configured frontiers remain candidate-only or not-started.",
+    "Train 40 does not create new R2, native, legal, release, or app-store proof."
+  ],
+  "follow_up_required": [
+    "Complete education_credentialing credential_requirement coverage, official-institution authority coverage, and gold-set proof.",
+    "Add reviewed source lanes, claim evidence, legal posture, packs, R2 proof, native transport proof, and gold sets for remaining required domains.",
+    "Run production R2 and native transport gates per frontier only after coverage, legal, provenance, freshness, and gold-set gates pass.",
+    "Keep universal coverage, Release Green, and outside legal approval blocked until each required artifact exists."
+  ],
+  "rollback_plan": [
+    "Revert the Train 40 changes to claim_frontier.py, coverage_readiness_gate.py, coverage-frontiers.json, and focused tests.",
+    "Remove Train 40 generated civic claim-frontier and QA evidence artifacts.",
+    "No R2 object, native runtime, or production configuration rollback is required because Train 40 performed no write/publish/live transport operation."
+  ],
+  "source_atlas_status_ceiling": "Green for bounded civic gold-set proof and coverage-readiness gate update only. Overall Source Atlas remains Yellow.",
+  "r2_request_privacy_proof": "Train 40 performed no R2 request or write. It consumed existing public/reference R2 evidence from Train 37 only.",
+  "no_private_graph_egress_proof": "Source Atlas boundary audit and no-private-graph egress audit passed. Train 40 generated only public/reference gold-set and readiness metadata.",
+  "license_terms_proof": "Train 40 consumed existing reviewed NARA source-lane/legal posture and did not create new legal approval or outside legal approval.",
+  "restricted_source_exclusion_proof": "The gate continues to block candidate-only, review-required, lookup-only, crosswalk-only, unpacked, or incomplete frontiers from production pack/runtime readiness.",
+  "provenance_completeness_proof": "Civic packable claims retain complete source lane, locator, retrieval time, evidence hash, and adjudication rule tuples; full Source Atlas tests and focused civic tests passed.",
+  "freshness_revocation_proof": "Train 40 created no new freshness, revocation, LKG, or rollback behavior. Existing R2 proof is referenced only as input evidence.",
+  "lkg_rollback_proof": "No new R2 publication occurred. Existing LKG/rollback evidence remains the only production proof for previously published packs.",
+  "native_offline_no_account_proof": "Train 40 touched no native runtime. Existing native proof is consumed as readiness evidence only.",
+  "production_non_claims": [
+    "Not full Source Atlas Green.",
+    "Not universal coverage.",
+    "Not broad Source Atlas Runtime Green.",
+    "Not Release Green.",
+    "Not Visual Green.",
+    "Not App Store readiness.",
+    "Not outside legal approval.",
+    "Not entitlement readiness.",
+    "Not a private user-data backend.",
+    "Not private life graph storage.",
+    "Not a final user plan, schedule, or Step generator.",
+    "Not production readiness for education_credentialing or the nine candidate/not-started frontiers."
+  ],
+  "architecture_tree": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "tools/source-atlas/foundry",
+      "tools/source-atlas/frontier",
+      "docs/qa/source-atlas/frontier"
+    ],
+    "files_moved_or_created": [
+      "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/claim-graph.json",
+      "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/citation-graph.json",
+      "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/coverage-frontier-report.json",
+      "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/manifest.json",
+      "tools/source-atlas/generated/claim-frontier/train-40-civic-goldset/closeout.md",
+      "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40.md",
+      "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40-closeout.json",
+      "docs/qa/source-atlas/frontier/source-atlas-civic-gold-set-train-40-closeout.md",
+      "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-40.json",
+      "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-train-40.md"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_architecture_debt": "None introduced by Train 40.",
+    "next_repair_train": "",
+    "equivalent_folder_interpretation_used": false
+  }
+}

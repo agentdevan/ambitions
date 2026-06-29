@@ -1,0 +1,1527 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainProductionLanes.v1",
+  "laneSummaries": [
+    {
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateIntakeRequired": true,
+      "candidateSourceCount": 1,
+      "lane": "candidate_domain_expansion_lane",
+      "ledgerEvidence": {
+        "claimGraphProofComplete": true,
+        "gatewayProofComplete": true,
+        "nativeUsabilityProofComplete": true,
+        "packProductionProofComplete": true,
+        "r2ProductionProofComplete": true
+      },
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work-order lane only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish"
+      ],
+      "productionTargetReady": false,
+      "readinessStatus": "candidate_only",
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "route": "candidate_frontier_intake_required",
+      "status": "candidate_only_work_ordered",
+      "workOrderCount": 13
+    },
+    {
+      "blockedBy": [],
+      "candidateIntakeRequired": false,
+      "candidateSourceCount": 0,
+      "lane": "ready_public_reference_runtime_lane",
+      "ledgerEvidence": {
+        "claimGraphProofComplete": true,
+        "gatewayProofComplete": true,
+        "nativeUsabilityProofComplete": true,
+        "packProductionProofComplete": true,
+        "r2ProductionProofComplete": true
+      },
+      "matchedDomainID": "education_credentialing",
+      "nonClaims": [
+        "work-order lane only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish"
+      ],
+      "productionTargetReady": true,
+      "readinessStatus": "bounded_production_target_ready",
+      "requestID": "known-education-credentialing",
+      "requestedDomain": "education_credentialing",
+      "route": "configured_production_target_ready",
+      "status": "maintenance_ready",
+      "workOrderCount": 4
+    },
+    {
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateIntakeRequired": true,
+      "candidateSourceCount": 2,
+      "lane": "candidate_domain_expansion_lane",
+      "ledgerEvidence": {
+        "claimGraphProofComplete": false,
+        "gatewayProofComplete": false,
+        "nativeUsabilityProofComplete": false,
+        "packProductionProofComplete": false,
+        "r2ProductionProofComplete": false
+      },
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work-order lane only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish"
+      ],
+      "productionTargetReady": false,
+      "readinessStatus": "candidate_only",
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "route": "candidate_frontier_intake_required",
+      "status": "candidate_only_work_ordered",
+      "workOrderCount": 13
+    }
+  ],
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not production R2 upload or overwrite",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not approval for future domains without source/frontier/pack/R2/native evidence",
+    "candidate work orders are not source authority",
+    "candidate work orders are not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionTargetLedgerPath": "tools/source-atlas/generated/production-target-ledger/train-86/production-target-ledger.json",
+  "recordCounts": {
+    "blockedConfiguredWorkOrders": 0,
+    "candidateRoutes": 2,
+    "candidateWorkOrders": 26,
+    "claims": 0,
+    "configuredBlockedRoutes": 0,
+    "executeOperations": 0,
+    "finalOutputArtifacts": 0,
+    "liveOperations": 0,
+    "maintenanceWorkOrders": 4,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "productionReadyRoutes": 1,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "routes": 3,
+    "workOrders": 30
+  },
+  "routerManifestPath": "tools/source-atlas/generated/goal-domain-router/train-88-fixture/manifest.json",
+  "routerOutputPath": "tools/source-atlas/generated/goal-domain-router/train-88-fixture/goal-domain-routing.json",
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-production-lanes-train-89",
+  "workOrders": [
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Review candidate-only frontier shape and domain boundaries.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6ab00c8ded83c93f",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "frontier_review",
+      "stageIndex": 1,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Discover direct public/reference sources and keep catalog metadata source-of-sources only.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.1b5c9b1123789e50",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "source_discovery",
+      "stageIndex": 2,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Resolve direct publisher authority before any claim authority is asserted.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6e875bf6d72cd2fa",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "direct_source_resolution",
+      "stageIndex": 3,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Create or update source lane governance only after review evidence exists.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.0328597888090db2",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "source_lane_review",
+      "stageIndex": 4,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Classify redistribution, attribution, rights, and outside-legal requirements.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.740b7396b3fc17c7",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "legal_terms_review",
+      "stageIndex": 5,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Define key, rate, budget, live, execute, retry, and redaction policy.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.1c1eb626d0c8af1e",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "api_governance_review",
+      "stageIndex": 6,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Add deterministic fixture-backed adapter contract before live harvest.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.dd5ebc7865dc6812",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "adapter_fixture_contract",
+      "stageIndex": 7,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Allow live harvest only with explicit live flags, governance, budgets, and source approval.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.aca7695d4f173798",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "live_harvest_gate",
+      "stageIndex": 8,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Emit claims only after source, legal, provenance, freshness, and conflict gates pass.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.9206ba7bca594522",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "claim_graph_gate",
+      "stageIndex": 9,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Build pack only after complete public claim graph and non-private scan evidence.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.05d34b65580d6364",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "pack_production_gate",
+      "stageIndex": 10,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Publish only with owner approval, execute flag, upload/readback hash proof, revocation, and rollback.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.1f1cad1df1d58651",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "r2_publish_gate",
+      "stageIndex": 11,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Activate native public refresh target only after ledger, gateway, privacy, quarantine, and offline proof.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.3cd1fa6e5091c710",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "native_activation_gate",
+      "stageIndex": 12,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "ambiguous_frontier_match",
+        "candidate_only_frontier_intake_required"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Use references inside Ambitions only as local public context, never as final plans or Steps.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.bd3f322474390b00",
+      "publicReferenceOnly": true,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "local_composition_gate",
+      "stageIndex": 13,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [],
+      "candidateSourceIDs": [],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Verify production target ledger evidence is still current.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "ready_public_reference_runtime_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "education_credentialing",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.251febe380af0041",
+      "publicReferenceOnly": true,
+      "requestID": "known-education-credentialing",
+      "requestedDomain": "education_credentialing",
+      "requiredEvidence": [
+        "production_target_ledger_ready_domain",
+        "r2_upload_readback_hash_evidence",
+        "public_gateway_readback_evidence",
+        "native_refresh_registry_evidence",
+        "native_runtime_quarantine_lkg_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "ledger_freshness_monitor",
+      "stageIndex": 1,
+      "status": "maintenance_ready",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [],
+      "candidateSourceIDs": [],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Verify public gateway, R2 object hash, revocation, and LKG evidence remain current.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "ready_public_reference_runtime_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "education_credentialing",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.862422af857e678f",
+      "publicReferenceOnly": true,
+      "requestID": "known-education-credentialing",
+      "requestedDomain": "education_credentialing",
+      "requiredEvidence": [
+        "production_target_ledger_ready_domain",
+        "r2_upload_readback_hash_evidence",
+        "public_gateway_readback_evidence",
+        "native_refresh_registry_evidence",
+        "native_runtime_quarantine_lkg_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "r2_gateway_readback_monitor",
+      "stageIndex": 2,
+      "status": "maintenance_ready",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [],
+      "candidateSourceIDs": [],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Verify native public refresh target remains ledger-gated and public-reference only.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "ready_public_reference_runtime_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "education_credentialing",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.d42856fb4ee06d60",
+      "publicReferenceOnly": true,
+      "requestID": "known-education-credentialing",
+      "requestedDomain": "education_credentialing",
+      "requiredEvidence": [
+        "production_target_ledger_ready_domain",
+        "r2_upload_readback_hash_evidence",
+        "public_gateway_readback_evidence",
+        "native_refresh_registry_evidence",
+        "native_runtime_quarantine_lkg_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "native_refresh_registry_monitor",
+      "stageIndex": 3,
+      "status": "maintenance_ready",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [],
+      "candidateSourceIDs": [],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Verify Ambitions continues to join public references with private context locally only.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "ready_public_reference_runtime_lane",
+      "liveAllowed": false,
+      "matchedDomainID": "education_credentialing",
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.62d6048126723ecc",
+      "publicReferenceOnly": true,
+      "requestID": "known-education-credentialing",
+      "requestedDomain": "education_credentialing",
+      "requiredEvidence": [
+        "production_target_ledger_ready_domain",
+        "r2_upload_readback_hash_evidence",
+        "public_gateway_readback_evidence",
+        "native_refresh_registry_evidence",
+        "native_runtime_quarantine_lkg_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "local_runtime_composition_monitor",
+      "stageIndex": 4,
+      "status": "maintenance_ready",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Review candidate-only frontier shape and domain boundaries.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.ca3a705384ccca98",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "frontier_review",
+      "stageIndex": 1,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Discover direct public/reference sources and keep catalog metadata source-of-sources only.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.36e30455d4b213c9",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "source_discovery",
+      "stageIndex": 2,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Resolve direct publisher authority before any claim authority is asserted.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.72fa5812590ce0e8",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "direct_source_resolution",
+      "stageIndex": 3,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Create or update source lane governance only after review evidence exists.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.9ece7bd3c3b31b0c",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "source_lane_review",
+      "stageIndex": 4,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Classify redistribution, attribution, rights, and outside-legal requirements.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6c65eea262d95ff6",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "legal_terms_review",
+      "stageIndex": 5,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Define key, rate, budget, live, execute, retry, and redaction policy.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.48ef5ba98771d7e6",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "api_governance_review",
+      "stageIndex": 6,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Add deterministic fixture-backed adapter contract before live harvest.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6e45f4b3e1d8161d",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "adapter_fixture_contract",
+      "stageIndex": 7,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Allow live harvest only with explicit live flags, governance, budgets, and source approval.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.09322ba92ef25c05",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "live_harvest_gate",
+      "stageIndex": 8,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Emit claims only after source, legal, provenance, freshness, and conflict gates pass.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.9e11de587d598191",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "claim_graph_gate",
+      "stageIndex": 9,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Build pack only after complete public claim graph and non-private scan evidence.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.5439c15ba9cab9c0",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "pack_production_gate",
+      "stageIndex": 10,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Publish only with owner approval, execute flag, upload/readback hash proof, revocation, and rollback.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.137ce1d5a1083d5c",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "r2_publish_gate",
+      "stageIndex": 11,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Activate native public refresh target only after ledger, gateway, privacy, quarantine, and offline proof.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6192eef45c4c6b62",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": true,
+      "stage": "native_activation_gate",
+      "stageIndex": 12,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    },
+    {
+      "activatesNativeRuntime": false,
+      "blockedBy": [
+        "candidate_only_frontier_intake_required",
+        "no_configured_frontier_match"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "createdAt": "2026-06-28T00:00:00Z",
+      "defaultMode": "fixture_or_dry_run",
+      "description": "Use references inside Ambitions only as local public context, never as final plans or Steps.",
+      "emitsClaims": false,
+      "emitsPackOutput": false,
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "matchedDomainID": null,
+      "nonClaims": [
+        "work order only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.8f01bf8426fc6259",
+      "publicReferenceOnly": true,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredEvidence": [
+        "frontier_review",
+        "direct_source_authority_review",
+        "legal_terms_review",
+        "api_governance_review",
+        "adapter_fixture_contract",
+        "claim_graph_provenance",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "native_privacy_quarantine_offline_evidence"
+      ],
+      "requiresApprovalArtifact": false,
+      "stage": "local_composition_gate",
+      "stageIndex": 13,
+      "status": "candidate_only_work_ordered",
+      "writesR2": false
+    }
+  ]
+}

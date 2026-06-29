@@ -1,0 +1,26 @@
+{
+  "entities": [
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "health_wellness_reference",
+      "entity_id": "public_entity.41419649a39d236e",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "Statistics Canada Table 13-10-0974-01 describes aggregate health care provider electronic health information context; Source Atlas must not use it for medical advice, diagnosis, treatment planning, or personal health recommendations.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "official.statcan.table.13100974"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "health_wellness_reference",
+      "entity_id": "public_entity.8820a7c8e061b6a4",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "Statistics Canada Table 13-10-0974-01 publishes annual public aggregate statistics for electronic health information indicators among health care providers, with Canada and provincial breakdown context for public statistical reference only.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "official.statcan.table.13100974"
+    }
+  ]
+}

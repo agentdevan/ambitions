@@ -1,0 +1,112 @@
+{
+  "architecture": {
+    "architectureDebt": "None introduced by this tooling-only train.",
+    "canonicalOwnersTouched": [
+      "tools/source-atlas/foundry"
+    ],
+    "compatibilityShimsLeftBehind": [],
+    "finalArchitectureTreeInspected": true,
+    "noEquivalentFolderPathInterpretationUsed": true,
+    "nonCanonicalOwnersTouched": [],
+    "oldNonCanonicalPathsRemoved": [],
+    "filesMovedOrCreated": [
+      "tools/source-atlas/foundry/catalog_direct_source_review_template.py",
+      "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_template_train_72.py",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72-closeout.md",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72-closeout.json"
+    ]
+  },
+  "baselineSha": "a370bd92bdf8f819e40afef7829d7c8a7adfc989",
+  "filesChanged": [
+    "tools/source-atlas/foundry/catalog_direct_source_review_template.py",
+    "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_template_train_72.py",
+    "tools/source-atlas/foundry/cli.py",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72-gate-integration.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72-gate-integration.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72-closeout.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72-closeout.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/catalog-direct-source-review-template.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/direct-source-review-packet-templates.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/closeout.md",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-gate-integration/catalog-direct-source-review-gate.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-gate-integration/source-review-completion-packets.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-gate-integration/blocked-direct-source-reviews.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-gate-integration/manifest.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-gate-integration/closeout.md"
+  ],
+  "gateIntegrationRecordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDirectSourceReviews": 4,
+    "blockedSourceReviewCompletionPackets": 4,
+    "claims": 0,
+    "completedSourceReviewCompletionPackets": 0,
+    "directSourceReviewPackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "resolutionCandidates": 4,
+    "sourceReviewCompletionPackets": 4
+  },
+  "knownRisks": [
+    "Templates still require real reviewer completion before any source can progress.",
+    "No source-specific legal/terms approval exists for the live catalog candidates.",
+    "Overall Source Atlas remains Yellow below production legal/R2/runtime/release proof."
+  ],
+  "productLawPreserved": true,
+  "proof": {
+    "freshnessRevocationProof": "No pack is emitted; freshness/revocation proof is out of scope for this train.",
+    "licenseTermsProof": "Templates include draft legal/terms sections only; no legal, outside legal, redistribution, or pack-output approval is emitted.",
+    "lkgRollbackProof": "No stable pointer, LKG pointer, R2 object, or rollback object is emitted.",
+    "nativeOfflineNoAccountProof": "Not touched in this tooling-only train.",
+    "noPrivateGraphEgressProof": "Input/output privacy scans, Source Atlas boundary audit, and no-private-graph egress audit passed.",
+    "provenanceCompletenessProof": "No claims are emitted; packable-claim provenance is out of scope for this train.",
+    "r2RequestPrivacyProof": "No R2 request, object key, upload plan, stable pointer, or R2 artifact is emitted.",
+    "restrictedSourceExclusionProof": "Template and gate integration counts show 0 active registry mutations, 0 claims, 0 packable claims, and 0 R2-packable artifacts."
+  },
+  "proofArtifacts": [
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72-gate-integration.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72-gate-integration.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/direct-source-review-packet-templates.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-gate-integration/manifest.json"
+  ],
+  "rollbackPlan": [
+    "Remove Train 72 CLI command wiring.",
+    "Remove Train 72 module and tests.",
+    "Remove generated Train 72 evidence and gate integration artifacts."
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; direct-source review templates only.",
+  "status": "Source Green for catalog direct-source review template tooling / Yellow overall Source Atlas",
+  "templateRecordCounts": {
+    "activeRegistryMutations": 0,
+    "claims": 0,
+    "completedDirectSourceReviews": 0,
+    "completedSourceReviewCompletionPackets": 0,
+    "directSourceReviewPacketTemplates": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "resolutionCandidates": 4
+  },
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Native XCTest/build-for-testing was not run; no Swift/native files were touched.",
+    "Outside legal review was not run or claimed.",
+    "Runtime, Visual, Release, App Store, entitlement, and production-readiness proof were not run or claimed."
+  ],
+  "validationRun": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_catalog_direct_source_review_template_train_72.py -> 4 passed",
+    "python3 -m tools.source-atlas.foundry.cli catalog-direct-source-review-template ... -> valid",
+    "python3 -m tools.source-atlas.foundry.cli catalog-direct-source-review-gate ... -> valid gate integration proof",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 310 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "Train 72 JSON parse checks -> PASS",
+    "git diff --check -> PASS"
+  ]
+}

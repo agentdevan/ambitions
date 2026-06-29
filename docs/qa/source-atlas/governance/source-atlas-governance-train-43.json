@@ -1,0 +1,86 @@
+{
+  "apiPolicyCount": 9,
+  "checks": [
+    {
+      "name": "source_lane_registry_schema_exists",
+      "passed": true
+    },
+    {
+      "name": "legal_terms_registry_schema_exists",
+      "passed": true
+    },
+    {
+      "name": "api_governance_registry_schema_exists",
+      "passed": true
+    },
+    {
+      "name": "source_lanes_have_required_posture",
+      "passed": true
+    },
+    {
+      "name": "legal_terms_have_required_posture",
+      "passed": true
+    },
+    {
+      "name": "api_policies_have_required_posture",
+      "passed": true
+    },
+    {
+      "name": "wikidata_crosswalk_only",
+      "passed": true
+    },
+    {
+      "name": "openalex_high_volume_gated",
+      "passed": true
+    },
+    {
+      "name": "bls_v1_v2_modes_represented",
+      "passed": true
+    },
+    {
+      "name": "usajobs_r2_pack_blocked",
+      "passed": true
+    },
+    {
+      "name": "legal_registry_present",
+      "passed": true
+    },
+    {
+      "name": "private_r2_key_validation",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T06:22:11Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governanceRegistryValidation.v1",
+  "legalEntryCount": 10,
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "schemaPaths": {
+    "apiGovernance": "tools/source-atlas/governance/schemas/api-governance-registry.schema.json",
+    "legalTerms": "tools/source-atlas/governance/schemas/legal-terms-registry.schema.json",
+    "sourceLane": "tools/source-atlas/governance/schemas/source-lane-registry.schema.json"
+  },
+  "schemaVersion": 1,
+  "sourceLaneCount": 14,
+  "status": "Source Green for governance tooling",
+  "statusCeiling": "Yellow overall Source Atlas; governance tooling only",
+  "valid": true
+}

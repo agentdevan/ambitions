@@ -1,0 +1,175 @@
+{
+  "channel": "candidate",
+  "checks": [
+    {
+      "issues": [],
+      "name": "pack_artifacts_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "object_keys_public",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "payloads_public_reference_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_license_slices_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "local_checksums_match_manifest",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_real_r2_credentials_or_requests",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-27T00:00:00Z",
+  "currentPointer": {
+    "channel": "candidate",
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_freshness",
+    "environment": "staging",
+    "kind": "ambitions.sourceAtlas.currentPackPointer.v1",
+    "lastKnownGoodKey": "source-atlas/v1/staging/candidate/public_civic_requirements/lkg.json",
+    "manifestKey": "source-atlas/v1/staging/candidate/public_civic_requirements/20260627T000000Z/manifest.json",
+    "manifestSHA256": "645df365fc9b28e66b5262bd938ef6568c77a59b7ac397bb60fdf80c727cbd13",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not real R2 credentials proof",
+      "not production R2 upload proof",
+      "not stable production promotion",
+      "not native app runtime readiness",
+      "not release readiness"
+    ],
+    "packID": "source-atlas/v1/domain/public_civic_requirements/20260627T000000Z",
+    "packSHA256": "e30621d03484e894596c8a2e4e56f5625d4367e8af980b2ef9ae1c2d477e3804",
+    "packVersion": "20260627T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "publishGate": "current pointer may update only after upload, readback, checksum, revocation, LKG, and rollback checks pass",
+    "revocationManifestKey": "source-atlas/v1/staging/candidate/public_civic_requirements/revocations.json",
+    "schemaVersion": 1
+  },
+  "environment": "staging",
+  "executeRequested": false,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PackPublisherReport.v1",
+  "mode": "dry_run",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not real R2 credentials proof",
+    "not production R2 upload proof",
+    "not stable production promotion",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "objectCount": 13,
+  "operation": {
+    "createdAt": "2026-06-27T00:00:00Z",
+    "currentPointer": {
+      "blockedUntilReadback": true,
+      "key": "source-atlas/v1/staging/candidate/public_civic_requirements/current.json",
+      "updated": false
+    },
+    "dataClass": "public_r2_object_key",
+    "dryRun": true,
+    "executeRequested": false,
+    "executed": false,
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+    "mode": "dry_run",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not real R2 credentials proof",
+      "not production R2 upload proof",
+      "not stable production promotion",
+      "not native app runtime readiness",
+      "not release readiness"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "schemaVersion": 1,
+    "success": true,
+    "wouldUpdateCurrentPointer": true,
+    "wouldUploadObjectCount": 13
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/r2-publisher/train-10-civic-dry-run/closeout.md",
+    "currentPointer": "tools/source-atlas/generated/r2-publisher/train-10-civic-dry-run/current-pointer.json",
+    "report": "tools/source-atlas/generated/r2-publisher/train-10-civic-dry-run/r2-publisher-report.json",
+    "requestPrivacy": "tools/source-atlas/generated/r2-publisher/train-10-civic-dry-run/r2-request-privacy-report.json",
+    "uploadReadback": "tools/source-atlas/generated/r2-publisher/train-10-civic-dry-run/r2-upload-readback-report.json"
+  },
+  "packID": "source-atlas/v1/domain/public_civic_requirements/20260627T000000Z",
+  "packVersion": "20260627T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionR2Uploaded": false,
+  "realR2CredentialsUsed": false,
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; R2 publisher tooling only",
+  "status": "Source Green for R2 publisher gate harness",
+  "valid": true,
+  "versionID": "source-atlas-r2-publisher-train-10"
+}

@@ -1,0 +1,412 @@
+{
+  "architectureCloseout": {
+    "canonicalOwnersTouched": [
+      "Core/Domain",
+      "Core/Persistence",
+      "Core/Runtime",
+      "Trust",
+      "App",
+      "Quality tests",
+      "Source Atlas tooling/docs"
+    ],
+    "compatibilityShimsLeftBehind": "SourceAtlasPublishedPackCompatibility and SourceAtlasPublishedPackMetadataCompatibility remain as compatibility wrappers only",
+    "filesMovedOrCreated": "New files were created under canonical Core/Persistence, Core/Runtime, Trust, AmbitionsTests, Source Atlas tooling, and QA evidence paths; no Features/ owner was created",
+    "finalArchitectureTreeInspected": true,
+    "nextRepairTrainIfDebtRemains": "Complete the four remaining candidate-only frontiers and backfill occupation Worker readback proof if gateway-completeness wording is required",
+    "noEquivalentFolderPathInterpretationUsed": true,
+    "oldNonCanonicalPathsRemoved": [],
+    "yellowArchitectureDebt": "Overall Source Atlas remains Yellow; no additional architecture debt introduced by Train 47 finance slice"
+  },
+  "coverageRecordCounts": {
+    "boundedProductionR2Ready": 0,
+    "boundedProductionTargetReady": 8,
+    "candidateOnlyOrNotStarted": 4,
+    "claimGraphReady": 0,
+    "configuredFrontiers": 12,
+    "gatewayReadyFrontiers": 7,
+    "packReadyFrontiers": 8,
+    "runtimeReadyFrontiers": 8
+  },
+  "createdAt": "2026-06-28T00:00:00Z",
+  "filesChanged": {
+    "trackedModified": [
+      "Native/Ambitions/App/AppBootstrapper.swift",
+      "Native/Ambitions/App/AppCapabilities.swift",
+      "Native/Ambitions/App/AppContainer.swift",
+      "Native/Ambitions/App/AppContainerFactory.swift",
+      "Native/Ambitions/Core/Domain/SourceAtlasQueryEngineModels+02-SourceAtlasQueryEngine+02-packs.swift",
+      "Native/Ambitions/Core/Domain/SourceAtlasStoreModels.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasLocalPackCache.swift",
+      "Native/AmbitionsTests/App/AppContainerFactoryTests.swift",
+      "Native/AmbitionsTests/Trust/SourceInspectionPresentationTests.swift",
+      "project.yml",
+      "tools/source-atlas/foundry/adapter_sdk.py",
+      "tools/source-atlas/foundry/broad_occupational_foundation.py",
+      "tools/source-atlas/foundry/cli.py",
+      "tools/source-atlas/foundry/public_reference_adapters.py",
+      "tools/source-atlas/foundry/terms_registry.py"
+    ],
+    "untrackedOrGenerated": [
+      ".wrangler/",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackAppRefreshCoordinator.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackBackgroundRefreshTask.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackCacheFileRepository.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackCacheJournal.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackFetchPipeline.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackLifecycleRefreshService.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRefreshTargetRegistry.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransport.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransportAdapters.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRepositoryBackedRemoteRefresh.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublishedPackCompatibility.swift",
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublishedPackMetadataCompatibility.swift",
+      "Native/Ambitions/Core/Runtime/SourceAtlasLocalReferenceCompositionProof.swift",
+      "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+      "Native/Ambitions/Trust/SourceInspectionLocalReferenceComposition.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackAppRefreshCoordinatorTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackBackgroundRefreshTaskTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackCacheFileRepositoryTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackCacheJournalTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackFetchPipelineTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteMetadataTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteTransportTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests.swift",
+      "Native/AmbitionsTests/Runtime/SourceAtlasLocalReferenceCompositionProofTests.swift",
+      "docs/qa/source-atlas/domain-expansion/",
+      "docs/qa/source-atlas/frontier/",
+      "docs/qa/source-atlas/governance/",
+      "docs/qa/source-atlas/legal/",
+      "docs/qa/source-atlas/native/",
+      "docs/qa/source-atlas/r2/",
+      "tools/source-atlas/foundry/broad_domain_discovery.py",
+      "tools/source-atlas/foundry/claim_frontier.py",
+      "tools/source-atlas/foundry/coverage_readiness_gate.py",
+      "tools/source-atlas/foundry/governance_registry.py",
+      "tools/source-atlas/foundry/harvest_runner.py",
+      "tools/source-atlas/foundry/legal_release_claim_gate.py",
+      "tools/source-atlas/foundry/native_refresh_registry.py",
+      "tools/source-atlas/foundry/pack_production.py",
+      "tools/source-atlas/foundry/r2_pack_publisher.py",
+      "tools/source-atlas/foundry/terms_approval_packet.py",
+      "tools/source-atlas/foundry/tests/test_broad_domain_discovery_train_07.py",
+      "tools/source-atlas/foundry/tests/test_business_entrepreneurship_adapter_train_43.py",
+      "tools/source-atlas/foundry/tests/test_civic_adapter_train_09.py",
+      "tools/source-atlas/foundry/tests/test_claim_frontier_train_03.py",
+      "tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py",
+      "tools/source-atlas/foundry/tests/test_education_adapter_train_08.py",
+      "tools/source-atlas/foundry/tests/test_finance_public_reference_adapter_train_47.py",
+      "tools/source-atlas/foundry/tests/test_governance_registry_train_01.py",
+      "tools/source-atlas/foundry/tests/test_governed_harvest_runner_train_02.py",
+      "tools/source-atlas/foundry/tests/test_health_wellness_adapter_train_45.py",
+      "tools/source-atlas/foundry/tests/test_hobbies_recreation_adapter_train_44.py",
+      "tools/source-atlas/foundry/tests/test_legal_release_claim_gate_train_35.py",
+      "tools/source-atlas/foundry/tests/test_native_refresh_registry_train_24.py",
+      "tools/source-atlas/foundry/tests/test_pack_production_train_04.py",
+      "tools/source-atlas/foundry/tests/test_r2_pack_publisher_train_10.py",
+      "tools/source-atlas/foundry/tests/test_terms_approval_packet_train_27.py",
+      "tools/source-atlas/foundry/tests/test_travel_relocation_adapter_train_46.py",
+      "tools/source-atlas/frontier/",
+      "tools/source-atlas/generated/broad-domain-discovery/",
+      "tools/source-atlas/generated/claim-frontier/",
+      "tools/source-atlas/generated/governance/",
+      "tools/source-atlas/generated/governed-harvest/",
+      "tools/source-atlas/generated/native-refresh-registry/",
+      "tools/source-atlas/generated/pack-production/",
+      "tools/source-atlas/generated/r2-publisher/",
+      "tools/source-atlas/governance/",
+      "tools/source-atlas/r2-public-gateway/"
+    ]
+  },
+  "financeFrontier": {
+    "allowedClaimScopes": [
+      "bounded_production_target"
+    ],
+    "authorityCoverageComplete": true,
+    "blockedClaimCount": 0,
+    "blockedReasons": [],
+    "candidateCount": 0,
+    "claimClassCoverageComplete": true,
+    "configuredStatusCeiling": "pack_staging_ready",
+    "domain": "finance_public_reference",
+    "frontierID": "finance_public_reference",
+    "gatewayTransportProofComplete": true,
+    "goldSetComplete": true,
+    "goldSetStatus": "passed",
+    "legalPostureComplete": true,
+    "missingClaimClasses": [],
+    "missingSourceIDs": [],
+    "nativeTransportProofComplete": true,
+    "nonClaims": [
+      "not universal coverage",
+      "not Release Green",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "observedStatus": "claim_graph_ready",
+    "packOutputAllowed": true,
+    "packableClaimCount": 3,
+    "productionR2ProofComplete": true,
+    "provenanceComplete": true,
+    "readinessStatus": "bounded_production_target_ready",
+    "sourceIDs": [
+      "cfpb.adult_financial_education",
+      "irs.when_to_file",
+      "usa.gov.benefits"
+    ],
+    "sourceLanePolicies": [
+      {
+        "authorityClass": "regulated_body",
+        "r2PackPolicy": "pack_allowed_with_attribution",
+        "redistributionPolicy": "redistributable_with_attribution",
+        "reviewStatus": "reviewed",
+        "sourceID": "cfpb.adult_financial_education"
+      },
+      {
+        "authorityClass": "regulated_body",
+        "r2PackPolicy": "pack_allowed_with_attribution",
+        "redistributionPolicy": "redistributable_with_attribution",
+        "reviewStatus": "reviewed",
+        "sourceID": "irs.when_to_file"
+      },
+      {
+        "authorityClass": "official_government",
+        "r2PackPolicy": "pack_allowed_with_attribution",
+        "redistributionPolicy": "redistributable_with_attribution",
+        "reviewStatus": "reviewed",
+        "sourceID": "usa.gov.benefits"
+      }
+    ]
+  },
+  "followUpRequired": [
+    "Build governed adapters, legal packets, packs, R2/Worker readback, and native proof for creative_project_reference",
+    "Build governed adapters, legal packets, packs, R2/Worker readback, and native proof for home_life_admin",
+    "Build governed adapters, legal packets, packs, R2/Worker readback, and native proof for relationships_family",
+    "Build governed adapters, legal packets, packs, R2/Worker readback, and native proof for personal_growth",
+    "Generate or backfill standalone Worker object-readback proof for occupation_foundation if gateway-completeness wording is needed",
+    "Obtain source-specific outside legal approval artifacts before any outside-legal approval claim",
+    "Run release-specific owner/device/accessibility/App Store proof before any release Green claim"
+  ],
+  "freshnessRevocationProof": "current, manifest, pack, lkg, and revocations keys are live and SHA-256 verified through Worker gateway",
+  "kind": "ambitions.sourceAtlas.train47FinanceProductionNativeCloseout.v1",
+  "knownRisks": [
+    "Overall Source Atlas remains Yellow; four configured frontiers are not bounded production target ready",
+    "Universal coverage remains blocked by the coverage readiness gate",
+    "Outside legal approval remains blocked because no external approval artifact exists",
+    "Runtime Green and Release Green remain blocked by the legal/release claim gate",
+    "Occupation has R2/native proof in the octa gate but no standalone public Worker object-readback packet in the evidence set used by the coverage gate",
+    "Finance terms review is internal technical review only and must not be described as outside legal approval"
+  ],
+  "legalReleaseClaimGate": {
+    "allowedClaims": [
+      "source_atlas_terms_gate_green",
+      "bounded_production_r2_write",
+      "bounded_live_native_transport",
+      "bounded_production_target"
+    ],
+    "blockedClaims": [
+      "unqualified_legal_approval",
+      "outside_legal_approval",
+      "source_atlas_runtime_green",
+      "release_green",
+      "universal_coverage"
+    ]
+  },
+  "licenseTermsProof": "docs/qa/source-atlas/legal/source-atlas-finance-legal-review-train-47.json; internal terms review only, no outside legal approval claimed",
+  "lkgRollbackProof": "lkg and revocations keys are allowlisted and hash verified; finance first publish had no previous pointer, rollback is revocation/remove active target/offline baseline",
+  "native": {
+    "activeDomains": [
+      "business_entrepreneurship",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "hobbies_recreation",
+      "occupation_foundation",
+      "public_civic_requirements",
+      "travel_relocation"
+    ],
+    "activeTargetCount": 8,
+    "artifactID": "source_atlas_public_refresh_targets.train47_octa_live_worker_gateway",
+    "workerVersionID": "2a81f5ae-b862-4299-a2f0-e65172814d4f"
+  },
+  "nativeOfflineNoAccountProof": "Focused native lifecycle/fetch/container tests passed with local fallback/offline-no-account behavior preserved; see native validation summaries",
+  "noPrivateGraphEgressProof": "requests contain only public Source Atlas object keys; no goal, capture, schedule, proof, account, device, private graph, personalization, behavior, or user identifiers are sent",
+  "notReadyFrontiers": [
+    {
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "legal_posture_incomplete",
+        "no_packable_claims",
+        "no_registered_source_lanes"
+      ],
+      "frontierID": "creative_project_reference",
+      "readinessStatus": "not_started"
+    },
+    {
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "legal_posture_incomplete",
+        "no_packable_claims",
+        "no_registered_source_lanes"
+      ],
+      "frontierID": "home_life_admin",
+      "readinessStatus": "not_started"
+    },
+    {
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "legal_posture_incomplete",
+        "no_packable_claims",
+        "no_registered_source_lanes"
+      ],
+      "frontierID": "personal_growth",
+      "readinessStatus": "not_started"
+    },
+    {
+      "blockedReasons": [
+        "authority_coverage_incomplete",
+        "claim_class_coverage_incomplete",
+        "frontier_below_pack_readiness",
+        "gold_set_required_not_present",
+        "legal_posture_incomplete",
+        "no_packable_claims",
+        "no_registered_source_lanes"
+      ],
+      "frontierID": "relationships_family",
+      "readinessStatus": "not_started"
+    }
+  ],
+  "productLawNotes": [
+    "R2 and Worker requests use fixed public Source Atlas object keys only",
+    "No goal, capture, schedule, proof, account, device, private graph, behavior, personalization, or user identifiers are sent to R2",
+    "Source Atlas output remains public/reference enrichment only and does not generate final user plans, schedules, Steps, or personalized paths"
+  ],
+  "productLawPreserved": true,
+  "productionNonClaims": [
+    "not outside legal approval",
+    "not release readiness",
+    "not App Store readiness",
+    "not full Source Atlas Green",
+    "not universal goal coverage",
+    "not investment, tax, legal, or debt advice",
+    "not benefit eligibility or approval",
+    "not personalized financial planning",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2"
+  ],
+  "proofArtifacts": {
+    "claimFrontierReport": "tools/source-atlas/generated/claim-frontier/train-47-finance/coverage-frontier-report.json",
+    "coverageReadinessGate": "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-octa-train-47.json",
+    "governedHarvestManifest": "tools/source-atlas/generated/governed-harvest/train-47-finance-fixture/train-47-finance-fixture/run-manifest.json",
+    "legalPacket": "docs/qa/source-atlas/legal/source-atlas-finance-legal-review-train-47.json",
+    "legalReleaseClaimGate": "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-finance-train-47.json",
+    "nativeOctaDomainProof": "docs/qa/source-atlas/native/source-atlas-native-octa-domain-live-worker-proof-train-47.json",
+    "nativeRefreshRegistryReport": "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-octa-domain-train-47.json",
+    "packProductionReport": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/pack-production-report.json",
+    "r2OwnerApprovalArtifact": "docs/qa/source-atlas/r2/source-atlas-production-finance-r2-owner-approval-train-47.json",
+    "r2PublisherReport": "tools/source-atlas/generated/r2-publisher/train-47-finance-production-remote-r2/r2-publisher-report.json",
+    "workerGatewayReadbackProof": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-finance-readback-train-47.json"
+  },
+  "provenanceCompletenessProof": "finance claim frontier produced 3/3 packable claims with complete source lane, locator, retrieval time, evidence hash, and adjudication rule",
+  "r2": {
+    "manifestSHA256": "f8ebd78107eb8ea24d6a39d8b96e5bfb6079b69d0fcd1be8c7a740124a57f405",
+    "packID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+    "packSHA256": "ca23807f8cae55bf052600a90ca205ff3436f987e5d97f8518e96cd300bd0c19",
+    "productionR2Uploaded": true,
+    "realR2CredentialsUsed": true,
+    "workerURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "workerVersionID": "2a81f5ae-b862-4299-a2f0-e65172814d4f"
+  },
+  "r2RequestPrivacyProof": "fixed public object-key GET/HEAD requests through exact allowlist; private query marker rejected; non-allowlisted slices rejected; POST rejected",
+  "restrictedSourceExclusionProof": "finance pack uses IRS, CFPB, and USA.gov public reference source lanes only; restricted/commercial/account/transaction sources are absent",
+  "rollbackPlan": [
+    "Remove finance_public_reference from the native public refresh target registry and redeploy the registry artifact",
+    "Remove finance keys from the Worker allowlist and redeploy Worker",
+    "Publish finance revocation manifest or remove current pointer from the production stable finance prefix if pack is unsafe",
+    "Use LKG/offline baseline fallback in native runtime; finance first publish has no prior finance LKG, so fallback is offline baseline or target removal"
+  ],
+  "schemaVersion": 1,
+  "scopeCompleted": [
+    "finance_public_reference source lanes for IRS When to File, CFPB Adult Financial Education, and USA.gov Benefits",
+    "finance governed fixture harvest, claim frontier, pack production, production R2 write/readback, Worker allowlist/readback, and native octa-domain registry integration",
+    "finance legal/release claim gate and octa coverage readiness gate with explicit blocked claims"
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded finance production target and octa-domain transport proof only",
+  "status": "Green for bounded finance production target, R2 write/readback, Worker gateway readback, and native octa-domain live transport; Yellow overall Source Atlas",
+  "validationNotRun": [
+    "No App Store/TestFlight release certification was attempted",
+    "No outside legal counsel approval artifact was provided or claimed",
+    "No literal universal coverage proof was attempted; coverage gate blocks universal coverage",
+    "No production custom-domain gateway proof beyond the deployed workers.dev URL was claimed",
+    "No independent visual/device release Green proof was claimed"
+  ],
+  "validationRun": [
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "summary": "187 passed in 20.36s"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas boundary audit PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas no-private-graph egress audit PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "summary": "GREEN: no disallowed architecture-as-UI strings found in active primary UI source"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "summary": "GREEN: local-first/account/R2/hosted-AI boundary checks passed in active authority files"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed",
+      "summary": "no whitespace errors"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch SOURCE_ATLAS_TRAIN_47_OCTA_LIVE_FULL --timeout 30m --kill-after 60s",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_47_OCTA_LIVE_FULL/20260628T094904Z-bft-83843-11573/build-for-testing-summary.json"
+    },
+    {
+      "command": "AmbitionsTests/SourceAtlasPublicPackRemoteTransportTests",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_47_OCTA_LIVE_FULL/20260628T094617Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-81998-15013/focused-test-summary.json"
+    },
+    {
+      "command": "AmbitionsTests/SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_47_OCTA_LIVE_FULL/20260628T095301Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-86321-16215/focused-test-summary.json"
+    },
+    {
+      "command": "AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_47_OCTA_LIVE_FULL/20260628T095346Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-87133-28724/focused-test-summary.json"
+    },
+    {
+      "command": "AmbitionsTests/AppContainerFactoryTests",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_47_OCTA_LIVE_FULL/20260628T095424Z-AmbitionsTests-AppContainerFactoryTests-87644-32378/focused-test-summary.json"
+    },
+    {
+      "command": "AmbitionsTests/SourceAtlasPublicPackFetchPipelineTests",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_47_OCTA_LIVE_FULL/20260628T095508Z-AmbitionsTests-SourceAtlasPublicPackFetchPipelineTests-88099-13317/focused-test-summary.json"
+    }
+  ]
+}

@@ -23,8 +23,12 @@ targets:
           - "**/*.md"
           - "Resources/**"
           - "Support/Info.plist"
-    resources:
-      - path: Native/Ambitions/Resources
+      - path: Native/Ambitions/Resources/Assets.xcassets
+        buildPhase: resources
+      - path: Native/Ambitions/Resources/PrivacyInfo.xcprivacy
+        buildPhase: resources
+      - path: Native/Ambitions/Resources/source-atlas-public-refresh-targets.json
+        buildPhase: resources
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ambitions.ios

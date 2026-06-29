@@ -1,0 +1,1833 @@
+{
+  "actionSummary": {
+    "candidate_frontier_review": 1,
+    "monitor_current_production": 13
+  },
+  "allowedClaims": [
+    "autonomous_freshness_review_work_planning_green",
+    "configured_domain_review_windows_computed",
+    "r2_publish_actions_remain_execute_gated",
+    "candidate_frontier_review_work_queued",
+    "current_production_domains_have_monitor_work_items"
+  ],
+  "blockedClaims": [
+    "active_registry_mutation_by_freshness_planner",
+    "app_store_readiness",
+    "automatic_r2_write_without_execute_budget_approval",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "independent_accessibility_green",
+    "literal_universal_coverage",
+    "native_device_green",
+    "new_remote_r2_write_executed_by_freshness_planner",
+    "outside_legal_approval",
+    "release_green",
+    "runtime_release_green",
+    "source_atlas_private_goal_text_processing",
+    "testflight_readiness",
+    "uncontrolled_live_harvest"
+  ],
+  "candidatePlans": [
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-123-current/03-operations-executor/frontier-intake/volunteering_public_reference/candidate-sources.json",
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-123-current/03-operations-executor/frontier-intake/volunteering_public_reference/frontier-intake-input.json",
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-123-current/03-operations-executor/frontier-intake/volunteering_public_reference/frontier-intake.json",
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-123-current/03-operations-executor/frontier-intake/volunteering_public_reference/manifest.json",
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-123-current/03-operations-executor/frontier-intake/volunteering_public_reference/proposed-frontiers.json"
+      ],
+      "domainID": "volunteering_public_reference",
+      "executedSafeLocalIntake": true,
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "candidate_frontier_review",
+      "nonClaims": [
+        "candidate-only frontier",
+        "not claim authority",
+        "not pack-ready",
+        "not production-ready"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "review",
+      "reasons": [
+        "coverage_frontier_missing"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review",
+      "sourceIDs": [],
+      "state": "candidate_only_review_required"
+    }
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "frontier_config_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_lane_registry_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_registry_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "api_governance_registry_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_evidence_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "domain_plans_emitted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_domains_remain_review_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "planner_is_non_executing",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "output_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T03:00:00Z",
+  "domainPlans": [
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "sba.business_guide.start_business"
+        }
+      ],
+      "claimClasses": [
+        "business_formation_reference",
+        "public_program_reference"
+      ],
+      "domainID": "business_entrepreneurship",
+      "freshnessSLAs": [
+        "quarterly_sba_guide_and_terms_recheck"
+      ],
+      "frontierID": "business_entrepreneurship",
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "sba_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "sba.business_guide.start_business",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_sba_guide_and_terms_recheck",
+          "licenseID": "sba_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "sba.business_guide.start_business",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "creative-commons.licenses"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "loc.primary_sources"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "w3c.web-standards"
+        }
+      ],
+      "claimClasses": [
+        "creative_metadata_reference",
+        "public_learning_resource",
+        "public_standard_reference"
+      ],
+      "domainID": "creative_project_reference",
+      "freshnessSLAs": [
+        "quarterly_creative_commons_licenses_terms_and_policies_recheck",
+        "quarterly_loc_primary_sources_page_and_legal_rights_recheck",
+        "quarterly_w3c_standards_copyright_and_policies_recheck"
+      ],
+      "frontierID": "creative_project_reference",
+      "jurisdictions": [
+        "US federal",
+        "global"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "creativecommons_site_cc_by_4_cc0_tools",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "creative-commons.licenses",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "loc_usgov_work",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "loc.primary_sources",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "w3c_document_license_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "w3c.web-standards",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_creative_commons_licenses_terms_and_policies_recheck",
+          "licenseID": "creativecommons_site_cc_by_4_cc0_tools",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "creative-commons.licenses",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_loc_primary_sources_page_and_legal_rights_recheck",
+          "licenseID": "loc_usgov_work",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "loc.primary_sources",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_w3c_standards_copyright_and_policies_recheck",
+          "licenseID": "w3c_document_license_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "w3c.web-standards",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.college_scorecard.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": true,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "college-scorecard.api"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "westpoint.redbook.computer_science_major"
+        }
+      ],
+      "claimClasses": [
+        "candidate_education_program_reference",
+        "candidate_institution_reference",
+        "credential_requirement"
+      ],
+      "domainID": "education_credentialing",
+      "freshnessSLAs": [
+        "college_scorecard_release_quarterly_review"
+      ],
+      "frontierID": "education_credentialing",
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "education_public_data_review",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "college-scorecard.api",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-12-27",
+          "licenseID": "us_federal_public_source",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "westpoint.redbook.computer_science_major",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.college_scorecard.v1",
+          "freshnessSLA": "college_scorecard_release_quarterly_review",
+          "licenseID": "education_public_data_review",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "college-scorecard.api",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "catalog_year_review_quarterly_institutional_recheck",
+          "licenseID": "us_federal_public_source",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "westpoint.redbook.computer_science_major",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "cfpb.adult_financial_education"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "irs.when_to_file"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "usa.gov.benefits"
+        }
+      ],
+      "claimClasses": [
+        "official_benefit_program_reference",
+        "public_financial_education",
+        "tax_deadline_reference"
+      ],
+      "domainID": "finance_public_reference",
+      "freshnessSLAs": [
+        "quarterly_cfpb_financial_education_recheck",
+        "quarterly_irs_deadline_recheck_stale_critical_before_tax_use",
+        "quarterly_usagov_benefits_recheck"
+      ],
+      "frontierID": "finance_public_reference",
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "cfpb_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "cfpb.adult_financial_education",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "irs_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "irs.when_to_file",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "usagov_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "usa.gov.benefits",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_cfpb_financial_education_recheck",
+          "licenseID": "cfpb_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "cfpb.adult_financial_education",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_irs_deadline_recheck_stale_critical_before_tax_use",
+          "licenseID": "irs_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "irs.when_to_file",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_usagov_benefits_recheck",
+          "licenseID": "usagov_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "usa.gov.benefits",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "cdc.physical-activity.basics"
+        }
+      ],
+      "claimClasses": [
+        "exercise_taxonomy",
+        "public_health_guideline",
+        "wellness_safety_reference"
+      ],
+      "domainID": "health_wellness_reference",
+      "freshnessSLAs": [
+        "quarterly_cdc_physical_activity_and_reuse_terms_recheck"
+      ],
+      "frontierID": "health_wellness_reference",
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "cdc_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "cdc.physical-activity.basics",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_cdc_physical_activity_and_reuse_terms_recheck",
+          "licenseID": "cdc_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "cdc.physical-activity.basics",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.official.statcan.table.13100974.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "official.statcan.table.13100974"
+        }
+      ],
+      "claimClasses": [
+        "public_health_statistical_context",
+        "public_statistical_reference"
+      ],
+      "domainID": "health_wellness_reference_ca_statistics",
+      "freshnessSLAs": [
+        "quarterly_source_and_terms_review"
+      ],
+      "frontierID": "health_wellness_reference_ca_statistics",
+      "jurisdictions": [
+        "CA"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "statcan.open-licence.2026-06-28",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "official.statcan.table.13100974",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.official.statcan.table.13100974.v1",
+          "freshnessSLA": "quarterly_source_and_terms_review",
+          "licenseID": "statcan.open-licence.2026-06-28",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "official.statcan.table.13100974",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "nps.recreation-safety"
+        }
+      ],
+      "claimClasses": [
+        "learning_resource_reference",
+        "public_rules_reference",
+        "safety_guidance_reference"
+      ],
+      "domainID": "hobbies_recreation",
+      "freshnessSLAs": [
+        "quarterly_nps_health_safety_and_disclaimer_recheck"
+      ],
+      "frontierID": "hobbies_recreation",
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "nps_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "nps.recreation-safety",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_nps_health_safety_and_disclaimer_recheck",
+          "licenseID": "nps_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "nps.recreation-safety",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "energy.gov.energy_saver"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "ready.gov.kit"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "usa.gov.home_repair"
+        }
+      ],
+      "claimClasses": [
+        "maintenance_guidance_reference",
+        "public_service_reference",
+        "safety_reference"
+      ],
+      "domainID": "home_life_admin",
+      "freshnessSLAs": [
+        "quarterly_doe_energy_saver_and_web_policies_recheck",
+        "quarterly_ready_gov_kit_and_terms_recheck",
+        "quarterly_usagov_home_repair_and_government_works_recheck"
+      ],
+      "frontierID": "home_life_admin",
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "doe_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "energy.gov.energy_saver",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "ready_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "ready.gov.kit",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "usagov_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "usa.gov.home_repair",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_doe_energy_saver_and_web_policies_recheck",
+          "licenseID": "doe_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "energy.gov.energy_saver",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_ready_gov_kit_and_terms_recheck",
+          "licenseID": "ready_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "ready.gov.kit",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_usagov_home_repair_and_government_works_recheck",
+          "licenseID": "usagov_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "usa.gov.home_repair",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.bls_public_data.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "bls.public.data.api"
+        },
+        {
+          "apiPolicyID": "api.onet_public_database.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "onet.database"
+        },
+        {
+          "apiPolicyID": "api.openalex_snapshot.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": true,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "openalex.dataset"
+        },
+        {
+          "apiPolicyID": "api.openalex_api.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": true,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "openalex.works"
+        }
+      ],
+      "claimClasses": [
+        "labor_market_context",
+        "occupation_taxonomy",
+        "research_topic_context"
+      ],
+      "domainID": "occupation_foundation",
+      "freshnessSLAs": [
+        "monthly_snapshot_or_api_review",
+        "series_publication_schedule",
+        "track_release_quarterly_review"
+      ],
+      "frontierID": "occupation_foundation",
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-12-27",
+          "licenseID": "bls_public_terms",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "bls.public.data.api",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-12-27",
+          "licenseID": "onet_cc_by_4",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "onet.database",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": false,
+          "expiresAt": "2026-12-27",
+          "licenseID": "openalex_cc0_metadata",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "openalex.dataset",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": false,
+          "expiresAt": "2026-12-27",
+          "licenseID": "openalex_cc0_metadata",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "openalex.works",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.bls_public_data.v1",
+          "freshnessSLA": "series_publication_schedule",
+          "licenseID": "bls_public_terms",
+          "nextReviewDueAt": "2026-12-27",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "bls.public.data.api",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.onet_public_database.v1",
+          "freshnessSLA": "track_release_quarterly_review",
+          "licenseID": "onet_cc_by_4",
+          "nextReviewDueAt": "2026-12-27",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "onet.database",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.openalex_snapshot.v1",
+          "freshnessSLA": "monthly_snapshot_or_api_review",
+          "licenseID": "openalex_cc0_metadata",
+          "nextReviewDueAt": "2026-12-27",
+          "r2PackPolicy": "pack_allowed",
+          "redistributionPolicy": "redistributable",
+          "reviewStatus": "reviewed",
+          "sourceID": "openalex.dataset",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.openalex_api.v1",
+          "freshnessSLA": "monthly_snapshot_or_api_review",
+          "licenseID": "openalex_cc0_metadata",
+          "nextReviewDueAt": "2026-12-27",
+          "r2PackPolicy": "pack_allowed",
+          "redistributionPolicy": "redistributable",
+          "reviewStatus": "reviewed",
+          "sourceID": "openalex.works",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "nih.medlineplus.wellness"
+        },
+        {
+          "apiPolicyID": "api.openalex_api.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": true,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "openalex.personal_growth_research"
+        }
+      ],
+      "claimClasses": [
+        "public_learning_reference",
+        "research_metadata_reference",
+        "sensitive_wellness_reference"
+      ],
+      "domainID": "personal_growth",
+      "freshnessSLAs": [
+        "monthly_openalex_personal_growth_metadata_and_api_governance_recheck",
+        "quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck"
+      ],
+      "frontierID": "personal_growth",
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "medlineplus_public_domain_topic_summary",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "nih.medlineplus.wellness",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": false,
+          "expiresAt": "2026-12-27",
+          "licenseID": "openalex_cc0_metadata",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "openalex.personal_growth_research",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck",
+          "licenseID": "medlineplus_public_domain_topic_summary",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "nih.medlineplus.wellness",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.openalex_api.v1",
+          "freshnessSLA": "monthly_openalex_personal_growth_metadata_and_api_governance_recheck",
+          "licenseID": "openalex_cc0_metadata",
+          "nextReviewDueAt": "2026-12-28",
+          "r2PackPolicy": "pack_allowed",
+          "redistributionPolicy": "redistributable",
+          "reviewStatus": "reviewed",
+          "sourceID": "openalex.personal_growth_research",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "nara.constitution.presidency"
+        }
+      ],
+      "claimClasses": [
+        "constitutional_requirement",
+        "eligibility_requirement"
+      ],
+      "domainID": "public_civic_requirements",
+      "freshnessSLAs": [
+        "stable_law_watch_quarterly_review"
+      ],
+      "frontierID": "public_civic_requirements",
+      "jurisdictions": [
+        "US federal"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-12-27",
+          "licenseID": "us_federal_public_source",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "nara.constitution.presidency",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "stable_law_watch_quarterly_review",
+          "licenseID": "us_federal_public_source",
+          "nextReviewDueAt": "2026-12-27",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "nara.constitution.presidency",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "acf.healthy_marriage_fatherhood"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "cdc.positive_parenting"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "childwelfare.family_support"
+        }
+      ],
+      "claimClasses": [
+        "public_education_reference",
+        "public_family_service_reference",
+        "sensitive_support_reference"
+      ],
+      "domainID": "relationships_family",
+      "freshnessSLAs": [
+        "quarterly_acf_hmrf_and_digital_policy_recheck",
+        "quarterly_cdc_positive_parenting_and_reuse_terms_recheck",
+        "quarterly_childwelfare_resources_and_policy_recheck"
+      ],
+      "frontierID": "relationships_family",
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "acf_hmrf_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "acf.healthy_marriage_fatherhood",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "cdc_positive_parenting_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "cdc.positive_parenting",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "childwelfare_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "childwelfare.family_support",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_acf_hmrf_and_digital_policy_recheck",
+          "licenseID": "acf_hmrf_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "acf.healthy_marriage_fatherhood",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_cdc_positive_parenting_and_reuse_terms_recheck",
+          "licenseID": "cdc_positive_parenting_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "cdc.positive_parenting",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_childwelfare_resources_and_policy_recheck",
+          "licenseID": "childwelfare_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "childwelfare.family_support",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    },
+    {
+      "apiWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "state.travel.public_travel"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "apiReady": true,
+          "executeFlagRequired": true,
+          "highVolumeReviewRequired": false,
+          "issues": [],
+          "liveFlagRequired": true,
+          "sourceID": "usa.gov.change_address"
+        }
+      ],
+      "claimClasses": [
+        "official_travel_requirement",
+        "public_safety_notice",
+        "relocation_admin_reference"
+      ],
+      "domainID": "travel_relocation",
+      "freshnessSLAs": [
+        "strict_official_requirement_review_required"
+      ],
+      "frontierID": "travel_relocation",
+      "jurisdictions": [
+        "US",
+        "destination_specific"
+      ],
+      "ledgerReady": true,
+      "legalWindows": [
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "state_travel_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "state.travel.public_travel",
+          "windowState": "current"
+        },
+        {
+          "attributionRequired": true,
+          "expiresAt": "2026-09-28",
+          "licenseID": "usagov_public_web",
+          "outsideLegalStatus": "not_claimed",
+          "packOutputAllowed": true,
+          "sourceID": "usa.gov.change_address",
+          "windowState": "current"
+        }
+      ],
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "queue": "monitor",
+      "r2UploadReadbackReady": true,
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "recertified": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ],
+      "sourceReviewWindows": [
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_state_travel_pages_and_terms_recheck_with_strict_advisory_review",
+          "licenseID": "state_travel_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "state.travel.public_travel",
+          "windowState": "current"
+        },
+        {
+          "apiPolicyID": "api.static_public_page.v1",
+          "freshnessSLA": "quarterly_usagov_change_address_and_government_works_terms_recheck",
+          "licenseID": "usagov_public_web",
+          "nextReviewDueAt": "2026-09-28",
+          "r2PackPolicy": "pack_allowed_with_attribution",
+          "redistributionPolicy": "redistributable_with_attribution",
+          "reviewStatus": "reviewed",
+          "sourceID": "usa.gov.change_address",
+          "windowState": "current"
+        }
+      ],
+      "state": "current",
+      "sweepReady": true
+    }
+  ],
+  "evidencePaths": {
+    "apiGovernanceRegistry": "tools/source-atlas/governance/api-governance-registry.json",
+    "autonomousProductionSupervisor": "docs/qa/source-atlas/source-atlas-autonomous-production-supervisor-train-123.json",
+    "frontierConfig": "tools/source-atlas/frontier/coverage-frontiers.json",
+    "legalTermsRegistry": "tools/source-atlas/governance/legal-terms-registry.json",
+    "productionRecertification": "docs/qa/source-atlas/source-atlas-production-recertification-train-104.json",
+    "productionSweep": "docs/qa/source-atlas/source-atlas-production-sweep-train-118.json",
+    "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-116.json",
+    "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "executionMode": "plan_only_no_live_harvest_no_r2_write",
+  "harvestQueue": [],
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousFreshnessPlanner.v1",
+  "lookaheadDays": 30,
+  "nativeRecertificationQueue": [],
+  "nonClaims": [
+    "freshness and review work planning only",
+    "not a live harvest runner",
+    "not an automatic production R2 writer",
+    "not a Worker deployer",
+    "not native runtime mutation",
+    "not outside legal approval",
+    "not full Source Atlas Green",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not native physical-device proof",
+    "not independent accessibility proof",
+    "not literal universal coverage",
+    "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "report": "2dc52564ca0db1a0ff5d260446e55277bb46e6a7834e0406c16324e91060b7d4",
+    "reportPayload": "5a66aa05e1ce69b01cb4e0b9d760e50a5fcb63fd0d03f91e2ac74a3703c6fbd1"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-freshness-scheduler/train-124-current/closeout.md",
+    "markdown": "tools/source-atlas/generated/autonomous-freshness-scheduler/train-124-current/autonomous-freshness-planner-report.md",
+    "report": "tools/source-atlas/generated/autonomous-freshness-scheduler/train-124-current/autonomous-freshness-planner-report.json"
+  },
+  "overallReadinessStatus": "freshness_review_workplan_ready",
+  "packQueue": [],
+  "planID": "source_atlas.autonomous_freshness_plan.72ae094dff232df0",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "queueCounts": {
+    "finalOutputsGenerated": 0,
+    "harvestItems": 0,
+    "items": 14,
+    "liveHarvestsExecuted": 0,
+    "monitorItems": 13,
+    "nativeRecertificationItems": 0,
+    "nativeRuntimeMutations": 0,
+    "packItems": 0,
+    "productionWritesExecuted": 0,
+    "r2PublishGateItems": 0,
+    "remoteMutations": 0,
+    "reviewItems": 1
+  },
+  "r2PublishQueue": [],
+  "recordCounts": {
+    "candidateDomains": 1,
+    "configuredDomains": 13,
+    "domainPlans": 13,
+    "finalOutputsGenerated": 0,
+    "harvestItems": 0,
+    "liveHarvestsExecuted": 0,
+    "monitorItems": 13,
+    "nativeRecertificationItems": 0,
+    "nativeRuntimeMutations": 0,
+    "packItems": 0,
+    "privacyIssues": 0,
+    "productionWritesExecuted": 0,
+    "r2PublishGateItems": 0,
+    "remoteMutations": 0,
+    "reviewItems": 1,
+    "workItems": 14
+  },
+  "reviewQueue": [
+    {
+      "domainID": "volunteering_public_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "candidate_frontier_review",
+      "productionWriteExecuted": false,
+      "queue": "review",
+      "reasons": [
+        "coverage_frontier_missing"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review",
+      "sourceIDs": [],
+      "state": "candidate_only_review_required"
+    }
+  ],
+  "runLabel": "train-124-current",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; autonomous freshness/review planning only",
+  "status": "Source Green for autonomous freshness and review work planning",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-freshness-planner-train-124",
+  "workItems": [
+    {
+      "domainID": "volunteering_public_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "candidate_frontier_review",
+      "productionWriteExecuted": false,
+      "queue": "review",
+      "reasons": [
+        "coverage_frontier_missing"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review",
+      "sourceIDs": [],
+      "state": "candidate_only_review_required"
+    },
+    {
+      "domainID": "business_entrepreneurship",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "creative_project_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "education_credentialing",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "finance_public_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "health_wellness_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "health_wellness_reference_ca_statistics",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "hobbies_recreation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "home_life_admin",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "occupation_foundation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "personal_growth",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "public_civic_requirements",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "relationships_family",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ],
+      "state": "current"
+    },
+    {
+      "domainID": "travel_relocation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "reasons": [
+        "current within review and terms windows"
+      ],
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ],
+      "state": "current"
+    }
+  ]
+}

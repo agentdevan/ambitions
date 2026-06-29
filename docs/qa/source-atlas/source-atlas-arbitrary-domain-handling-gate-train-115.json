@@ -1,0 +1,193 @@
+{
+  "allowedClaims": [
+    "governed_arbitrary_public_reference_domain_handling"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "literal_universal_coverage",
+    "outside_legal_approval",
+    "release_green",
+    "source_atlas_private_goal_text_processing"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "finish_line_gate_valid_when_supplied",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "configured_domains_route_to_current_or_bounded_action",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "unknown_public_domains_route_to_candidate_frontier_intake",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_intake_emits_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "private_context_rejected_without_persistent_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "frontier_aliases_are_unambiguous",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "output_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "configuredDomainPlan": {
+    "issues": [],
+    "outputPaths": {
+      "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/01-configured-domain-plan/closeout.md",
+      "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/01-configured-domain-plan/autonomous-operations-plan.md",
+      "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/01-configured-domain-plan/autonomous-operations-plan.json"
+    },
+    "recordCounts": {
+      "actionableDomains": 0,
+      "blockedDomains": 0,
+      "configuredFrontiers": 13,
+      "ledgerDomains": 13,
+      "monitorDomains": 13,
+      "plannedDomains": 13,
+      "privacyIssues": 0,
+      "recertifiedDomains": 13,
+      "requestedDomains": 0,
+      "resolvedRequestedDomainAliases": 0,
+      "unmatchedRequestedDomains": 0
+    },
+    "status": "Source Green for autonomous operations planning",
+    "valid": true
+  },
+  "createdAt": "2026-06-29T00:05:00Z",
+  "evidencePaths": {
+    "finishLineGate": "docs/qa/source-atlas/source-atlas-production-finish-line-gate-train-114.json",
+    "frontierConfig": "tools/source-atlas/frontier/coverage-frontiers.json",
+    "productionRecertification": "tools/source-atlas/generated/production-finish-line-gate/train-114-current/00-production-recertification/production-recertification-report.json",
+    "productionTargetLedger": "tools/source-atlas/generated/production-target-ledger/train-104-current-production-target/production-target-ledger.json",
+    "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "frontierAliasConflicts": {},
+  "gateID": "source_atlas.arbitrary_domain_handling_gate.468aaf3de502848f",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.arbitraryDomainHandlingGate.v1",
+  "nonClaims": [
+    "governed arbitrary public/reference domain handling only",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not private goal-text processing by Source Atlas",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "unknown domains remain candidate-only until source/legal/API/frontier review completes",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "configuredDomainPlan": "d937c171870dc0297764ad4c9a8cc18ef0e8f9e41db485bf7c8d05e618ebc19e",
+    "report": "cbc8d45a5271d0aa64ad5e4d87c08890e0279ca6ff7d0a84525c3b7a6a126298",
+    "unknownDomainExecution": "f4b6da53d8151bf2e3f8cd2cac8203aa26952c637a56c48f7872ba0d466cbe03",
+    "unknownDomainPlan": "348abaa94fc6ba9899d49731f85cfd7eb332bd69098c5f0e9376d8fdac2417d2"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/closeout.md",
+    "configuredDomainPlan": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/01-configured-domain-plan/autonomous-operations-plan.json",
+    "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/arbitrary-domain-handling-gate-report.md",
+    "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/arbitrary-domain-handling-gate-report.json",
+    "unknownDomainExecution": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/03-unknown-domain-execution/autonomous-operations-execution-report.json",
+    "unknownDomainPlan": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/02-unknown-domain-plan/autonomous-operations-plan.json"
+  },
+  "overallReadinessStatus": "governed_arbitrary_domain_handling_ready",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "privateContextProbe": {
+    "nonClaims": [
+      "private-context rejection proof only",
+      "raw private-looking sentinel is not persisted in repo evidence"
+    ],
+    "persistentArtifactWritten": false,
+    "privacyIssueCount": 2,
+    "rawProbePersisted": false,
+    "rejected": true
+  },
+  "recordCounts": {
+    "aliasConflicts": 0,
+    "candidateClaims": 0,
+    "candidateNativeActivationOperations": 0,
+    "candidateProductionWrites": 0,
+    "candidateR2PublishOperations": 0,
+    "configuredFrontiers": 13,
+    "configuredMonitorDomains": 13,
+    "configuredPlannedDomains": 13,
+    "unknownFrontierIntakeArtifacts": 15,
+    "unknownProbeDomains": 3,
+    "unknownUnmatchedDomains": 3
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; arbitrary public/reference domain handling only",
+  "status": "Source Green for governed arbitrary public/reference domain handling",
+  "unknownDomainExecution": {
+    "issues": [],
+    "outputPaths": {
+      "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/03-unknown-domain-execution/closeout.md",
+      "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/03-unknown-domain-execution/autonomous-operations-execution-report.md",
+      "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/03-unknown-domain-execution/autonomous-operations-execution-report.json"
+    },
+    "recordCounts": {
+      "blockedByGate": 0,
+      "deliveryChainArtifacts": 0,
+      "failedActions": 0,
+      "frontierIntakeArtifacts": 15,
+      "observedDomains": 13,
+      "plannedDomains": 16,
+      "plannedNotExecuted": 0,
+      "productionWritesExecuted": 0,
+      "safeActionsExecuted": 3,
+      "unsafeExecutionAttempts": 0
+    },
+    "status": "Source Green for gated autonomous operations execution",
+    "valid": true
+  },
+  "unknownDomainPlan": {
+    "issues": [],
+    "outputPaths": {
+      "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/02-unknown-domain-plan/closeout.md",
+      "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/02-unknown-domain-plan/autonomous-operations-plan.md",
+      "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-115-current/02-unknown-domain-plan/autonomous-operations-plan.json"
+    },
+    "recordCounts": {
+      "actionableDomains": 3,
+      "blockedDomains": 3,
+      "configuredFrontiers": 13,
+      "ledgerDomains": 13,
+      "monitorDomains": 13,
+      "plannedDomains": 16,
+      "privacyIssues": 0,
+      "recertifiedDomains": 13,
+      "requestedDomains": 3,
+      "resolvedRequestedDomainAliases": 0,
+      "unmatchedRequestedDomains": 3
+    },
+    "status": "Source Green for autonomous operations planning",
+    "valid": true
+  },
+  "valid": true,
+  "versionID": "source-atlas-arbitrary-domain-handling-gate-train-115"
+}

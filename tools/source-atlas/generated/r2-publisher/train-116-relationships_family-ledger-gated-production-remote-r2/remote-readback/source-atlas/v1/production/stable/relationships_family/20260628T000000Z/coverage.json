@@ -1,0 +1,140 @@
+{
+  "coverage": {
+    "authority_coverage": {
+      "complete": true,
+      "missing": [],
+      "present": [
+        "official_government",
+        "official_institution"
+      ],
+      "required": [
+        "official_government",
+        "official_institution"
+      ]
+    },
+    "blocked_claim_count": 0,
+    "candidate_only_count": 0,
+    "claim_classes": [
+      "public_education_reference",
+      "public_family_service_reference",
+      "sensitive_support_reference"
+    ],
+    "conflict_status": "no_conflict_detected",
+    "covered_claim_classes": [
+      "public_education_reference",
+      "public_family_service_reference",
+      "sensitive_support_reference"
+    ],
+    "domain": "relationships_family",
+    "freshness_compliance": {
+      "claimCount": 5,
+      "complete": true,
+      "freshCount": 5,
+      "percent": 1.0
+    },
+    "frontier_id": "relationships_family",
+    "goal_intent_classes": [
+      "family_admin_reference",
+      "relationship_education_reference"
+    ],
+    "gold_set": {
+      "goldSetID": "gold.relationships_family.cdc_acf_childwelfare_public_reference.v1",
+      "matchedCount": 3,
+      "matches": [
+        {
+          "claimID": "canonical_claim.1c54542bc0104733",
+          "claimType": "public_family_service_reference",
+          "goldClaimID": "gold.relationships_family.acf.hmrf",
+          "jurisdiction": "US",
+          "sourceID": "acf.healthy_marriage_fatherhood"
+        },
+        {
+          "claimID": "canonical_claim.9ee3706d2fcb51e9",
+          "claimType": "public_education_reference",
+          "goldClaimID": "gold.relationships_family.cdc.positive_parenting",
+          "jurisdiction": "US",
+          "sourceID": "cdc.positive_parenting"
+        },
+        {
+          "claimID": "canonical_claim.5df74652d4fe8141",
+          "claimType": "sensitive_support_reference",
+          "goldClaimID": "gold.relationships_family.childwelfare.support",
+          "jurisdiction": "US",
+          "sourceID": "childwelfare.family_support"
+        }
+      ],
+      "missing": [],
+      "nonClaims": [
+        "not Release Green",
+        "not a personalized family plan",
+        "not child protection advice",
+        "not diagnosis",
+        "not emergency intervention",
+        "not final user plans, schedules, or Steps",
+        "not legal advice",
+        "not legal custody advice",
+        "not personalized relationship judgment",
+        "not release readiness",
+        "not therapy",
+        "not universal coverage"
+      ],
+      "required": true,
+      "requiredCount": 3,
+      "schemaVersion": 1,
+      "status": "passed",
+      "versionID": "source-atlas-gold-set-evaluator-train-40"
+    },
+    "gold_set_status": "passed",
+    "jurisdictions": [
+      "US"
+    ],
+    "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+    "legal_posture_completeness": {
+      "complete": true,
+      "completeCount": 3,
+      "laneCount": 3,
+      "percent": 1.0
+    },
+    "missing_claim_classes": [],
+    "non_claims": [
+      "not R2 release readiness",
+      "not a final user plan, schedule, or Step generator",
+      "not a personalized family plan",
+      "not a private user-data backend",
+      "not accessibility, privacy, or legal approval",
+      "not an official legal, medical, financial, or admissions decision",
+      "not child protection advice",
+      "not diagnosis",
+      "not emergency intervention",
+      "not full Source Atlas Green",
+      "not legal custody advice",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not personalized relationship judgment",
+      "not private life graph storage",
+      "not private relationship data storage",
+      "not production R2 readiness",
+      "not runtime recommendation proof by itself",
+      "not therapy",
+      "not universal goal coverage"
+    ],
+    "packable_claim_count": 5,
+    "provenance_completeness": {
+      "claimCount": 5,
+      "complete": true,
+      "completeTupleCount": 5,
+      "packableClaimCount": 5,
+      "packableCompleteTupleCount": 5,
+      "packablePercent": 1.0
+    },
+    "restricted_exclusions": [],
+    "schemaVersion": 1,
+    "source_lanes": [
+      "acf.healthy_marriage_fatherhood",
+      "cdc.positive_parenting",
+      "childwelfare.family_support"
+    ],
+    "status": "claim_graph_ready",
+    "status_ceiling": "pack_staging_ready"
+  }
+}

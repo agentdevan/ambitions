@@ -1,0 +1,235 @@
+{
+  "canonicalOwnersTouched": [
+    "Core/Persistence tests/resources only for Source Atlas public pack refresh proof",
+    "App tests for container wiring proof",
+    "tools/source-atlas foundry/governance/frontier/R2 tooling",
+    "docs/qa/source-atlas proof artifacts"
+  ],
+  "compatibilityShimsLeftBehind": [],
+  "coverageSummary": {
+    "notReady": [
+      "creative_project_reference",
+      "finance_public_reference",
+      "home_life_admin",
+      "personal_growth",
+      "relationships_family",
+      "travel_relocation"
+    ],
+    "ready": [
+      "business_entrepreneurship",
+      "education_credentialing",
+      "health_wellness_reference",
+      "hobbies_recreation",
+      "occupation_foundation",
+      "public_civic_requirements"
+    ],
+    "universalCoverageClaimAllowed": false
+  },
+  "createdAt": "2026-06-28T00:00:00Z",
+  "filesChanged": {
+    "native": [
+      "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteTransportTests.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift",
+      "Native/AmbitionsTests/App/AppContainerFactoryTests.swift"
+    ],
+    "proofArtifacts": [
+      "docs/qa/source-atlas/legal/source-atlas-health-legal-review-train-45.json",
+      "docs/qa/source-atlas/r2/source-atlas-production-health-r2-owner-approval-train-45.json",
+      "docs/qa/source-atlas/r2/source-atlas-health-r2-publisher-remote-r2-train-45.json",
+      "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-health-readback-train-45.json",
+      "docs/qa/source-atlas/native/source-atlas-native-public-refresh-target-registry-hexa-domain-approval-train-45.json",
+      "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-hexa-domain-train-45.json",
+      "docs/qa/source-atlas/native/source-atlas-native-hexa-domain-live-worker-proof-train-45.json",
+      "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-health-train-45.json",
+      "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-hexa-train-45.json"
+    ],
+    "r2Worker": [
+      "tools/source-atlas/r2-public-gateway/src/worker.js"
+    ],
+    "sourceAtlasFoundryAndGovernance": [
+      "tools/source-atlas/foundry/public_reference_adapters.py",
+      "tools/source-atlas/foundry/terms_registry.py",
+      "tools/source-atlas/foundry/broad_domain_discovery.py",
+      "tools/source-atlas/governance/source-lane-registry.json",
+      "tools/source-atlas/governance/legal-terms-registry.json",
+      "tools/source-atlas/frontier/coverage-frontiers.json",
+      "tools/source-atlas/foundry/tests/test_health_wellness_adapter_train_45.py",
+      "tools/source-atlas/foundry/tests/test_broad_domain_discovery_train_07.py"
+    ]
+  },
+  "filesMovedOrCreated": [
+    "No new Features/ ownership; new QA/generated proof artifacts and Source Atlas foundry test only"
+  ],
+  "finalArchitectureTreeInspected": "yes",
+  "followUpRequired": [
+    "creative_project_reference",
+    "finance_public_reference",
+    "home_life_admin",
+    "personal_growth",
+    "relationships_family",
+    "travel_relocation"
+  ],
+  "freshnessRevocationProof": "Health pack includes freshness slice, revocations.json, LKG pointer, and current pointer readback hash proof",
+  "kind": "ambitions.sourceAtlas.trainCloseout.v1",
+  "knownRisks": [
+    "Overall Source Atlas remains Yellow with 6 not-ready configured frontiers.",
+    "CDC health pack is general public wellness reference only and must not be treated as medical advice, diagnosis, treatment, emergency guidance, or custom health planning.",
+    "Outside legal approval is not claimed.",
+    "Release Green/App Store readiness remains blocked by release umbrella proof requirements.",
+    "Worker gateway exposes only allowlisted public pack routes; future domains require explicit allowlist update and readback proof."
+  ],
+  "licenseTermsProof": [
+    "source_atlas_terms_gate_green",
+    "bounded_production_r2_write",
+    "bounded_live_native_transport",
+    "bounded_production_target"
+  ],
+  "lkgRollbackProof": "Health R2 publisher emitted lkg.json and rollback-plan.json; Worker readback verified lkg route",
+  "nativeOfflineNoAccountProof": "AppContainerFactoryTests startup offline path passed with 6 configured targets and remoteFetchSkipped for all targets",
+  "nextRepairTrain": "Next bounded frontier: finance_public_reference, home_life_admin, travel_relocation, creative_project_reference, relationships_family, or personal_growth.",
+  "noEquivalentFolderInterpretationUsed": true,
+  "noPrivateGraphEgressProof": "source-atlas-no-private-graph-egress-audit PASS; native proof request shape excludes private runtime fields",
+  "oldNonCanonicalPathsRemoved": [],
+  "productLawPreserved": true,
+  "productionNonClaims": [
+    "not full Source Atlas Green",
+    "not literal universal coverage",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store readiness",
+    "not medical advice",
+    "not diagnosis",
+    "not treatment advice",
+    "not emergency advice",
+    "not final user plan, timetable, or Step generation"
+  ],
+  "proofArtifacts": {
+    "coverageGate": "docs/qa/source-atlas/frontier/source-atlas-coverage-readiness-gate-hexa-train-45.json",
+    "legalGate": "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-health-train-45.json",
+    "nativeProof": "docs/qa/source-atlas/native/source-atlas-native-hexa-domain-live-worker-proof-train-45.json",
+    "r2Publisher": "tools/source-atlas/generated/r2-publisher/train-45-health-production-remote-r2/r2-publisher-report.json",
+    "workerReadback": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-health-readback-train-45.json"
+  },
+  "provenanceCompletenessProof": "health_wellness_reference has 3 packable claims and 3 complete provenance tuples",
+  "r2RequestPrivacyProof": [
+    {
+      "issues": [],
+      "name": "pack_artifacts_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "object_keys_public",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "payloads_public_reference_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_license_slices_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "local_checksums_match_manifest",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "remote_r2_public_reference_transport_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "upload_readback_checksums",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "current_pointer_after_readback_only",
+      "passed": true
+    }
+  ],
+  "restrictedSourceExclusionProof": "HHS candidate remains candidate/missing source lane; only cdc.physical-activity.basics is packable for health_wellness_reference",
+  "rollbackPlan": [
+    "Revoke source-atlas/v1/domain/health_wellness_reference/20260628T000000Z if a legal/source/runtime issue is discovered.",
+    "Remove health_wellness_reference keys from Worker allowlist and redeploy Worker.",
+    "Restore previous native penta registry artifact if health target must be disabled.",
+    "Use R2 LKG/current pointer rollback plan from train-45 health publisher proof."
+  ],
+  "schemaVersion": 1,
+  "scopeCompleted": [
+    "Added governed CDC Physical Activity Basics health_wellness_reference adapter/source lane/legal/API/frontier coverage",
+    "Compiled CDC health claims with 3 complete provenance tuples and passed gold set",
+    "Built staging and production stable health pack artifacts with non-private scan, revocation, LKG, rollback, manifest, and checksum slices",
+    "Executed production R2 upload/readback for health_wellness_reference and updated current pointer after hash verification",
+    "Updated and deployed public Worker allowlist for health current/LKG/revocations/manifest/pack only",
+    "Regenerated native public refresh target registry for six active startup domains",
+    "Updated native tests for health live transport/lifecycle and six-domain startup/offline registry behavior",
+    "Generated legal release claim gate and coverage readiness gate for hexa bounded production target scope"
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; 6 of 12 bounded frontiers are production-target ready, literal universal coverage and Release Green remain blocked",
+  "sourceAtlasStatusCeilingDetails": {
+    "boundedProductionR2Ready": 0,
+    "boundedProductionTargetReady": 6,
+    "candidateOnlyOrNotStarted": 6,
+    "claimGraphReady": 0,
+    "configuredFrontiers": 12,
+    "gatewayReadyFrontiers": 5,
+    "packReadyFrontiers": 6,
+    "runtimeReadyFrontiers": 6
+  },
+  "status": "Green for bounded health_wellness_reference production target, R2 write, Worker gateway readback, and native hexa-domain live transport; Yellow overall Source Atlas",
+  "train": "Train 45 - health wellness reference bounded production target and hexa native registry",
+  "valid": true,
+  "validationNotRun": [
+    "Full app test suite was not run; focused Source Atlas/native suites were run.",
+    "Device/offline hardware proof was not run; simulator build/test proof only.",
+    "Accessibility/visual proof was not run; no UI changed.",
+    "Outside legal review was not run or claimed."
+  ],
+  "validationRun": [
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 175 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "git diff --check -> passed",
+    "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard -> Test Build Succeeded",
+    "SourceAtlasPublicPackRemoteTransportTests -> 11 passed",
+    "SourceAtlasPublicPackLifecycleRefreshServiceTests -> 12 passed",
+    "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests -> 8 passed",
+    "AppContainerFactoryTests -> 4 passed"
+  ],
+  "yellowArchitectureDebt": "None introduced in Train 45; overall Source Atlas remains Yellow because six frontiers are not production-target ready and release/visual/outside-legal proof is out of scope."
+}

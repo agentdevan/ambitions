@@ -1,0 +1,68 @@
+{
+  "createdAt": "2026-06-29T00:05:00Z",
+  "kind": "ambitions.sourceAtlas.proposedCoverageFrontiers.v1",
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.d9f3228a25a58185"
+      ],
+      "claim_classes": [
+        "public_reference",
+        "public_requirement_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "local_permit_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "90d reference metadata",
+        "annual source-lane review"
+      ],
+      "frontier_id": "local_permit_reference",
+      "goal_intent_classes": [
+        "local_permit_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "candidate frontier work order only",
+        "not R2 readiness",
+        "human source-lane and legal/API review required"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "frontier_intake_proposal.c80255d54c24a86d",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "public_catalog",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ]
+}

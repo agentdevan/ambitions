@@ -1,0 +1,144 @@
+{
+  "coverage": {
+    "authority_coverage": {
+      "complete": true,
+      "missing": [],
+      "present": [
+        "official_government"
+      ],
+      "required": [
+        "official_government"
+      ]
+    },
+    "blocked_claim_count": 0,
+    "candidate_only_count": 0,
+    "claim_classes": [
+      "maintenance_guidance_reference",
+      "public_service_reference",
+      "safety_reference"
+    ],
+    "conflict_status": "no_conflict_detected",
+    "covered_claim_classes": [
+      "maintenance_guidance_reference",
+      "public_service_reference",
+      "safety_reference"
+    ],
+    "domain": "home_life_admin",
+    "freshness_compliance": {
+      "claimCount": 4,
+      "complete": true,
+      "freshCount": 4,
+      "percent": 1.0
+    },
+    "frontier_id": "home_life_admin",
+    "goal_intent_classes": [
+      "home_admin_reference",
+      "home_preparedness_reference",
+      "home_energy_reference",
+      "local_service_reference"
+    ],
+    "gold_set": {
+      "goldSetID": "gold.home_life_admin.ready_doe_usagov_public_reference.v1",
+      "matchedCount": 4,
+      "matches": [
+        {
+          "claimID": "canonical_claim.6af618c18ad764c6",
+          "claimType": "maintenance_guidance_reference",
+          "goldClaimID": "gold.home.doe.energy_audits",
+          "jurisdiction": "US",
+          "sourceID": "energy.gov.energy_saver"
+        },
+        {
+          "claimID": "canonical_claim.47605fb30fd2b2d9",
+          "claimType": "maintenance_guidance_reference",
+          "goldClaimID": "gold.home.doe.weatherization_topics",
+          "jurisdiction": "US",
+          "sourceID": "energy.gov.energy_saver"
+        },
+        {
+          "claimID": "canonical_claim.4afa1eb2ec18b66f",
+          "claimType": "safety_reference",
+          "goldClaimID": "gold.home.ready.kit",
+          "jurisdiction": "US",
+          "sourceID": "ready.gov.kit"
+        },
+        {
+          "claimID": "canonical_claim.cb2a736af232d258",
+          "claimType": "public_service_reference",
+          "goldClaimID": "gold.home.usagov.home_repair",
+          "jurisdiction": "US",
+          "sourceID": "usa.gov.home_repair"
+        }
+      ],
+      "missing": [],
+      "nonClaims": [
+        "not Release Green",
+        "not a household schedule",
+        "not a personalized home plan",
+        "not eligibility approval",
+        "not emergency advice",
+        "not final user plans, schedules, or Steps",
+        "not legal advice",
+        "not release readiness",
+        "not universal coverage",
+        "not unsafe repair instructions"
+      ],
+      "required": true,
+      "requiredCount": 4,
+      "schemaVersion": 1,
+      "status": "passed",
+      "versionID": "source-atlas-gold-set-evaluator-train-40"
+    },
+    "gold_set_status": "passed",
+    "jurisdictions": [
+      "US"
+    ],
+    "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+    "legal_posture_completeness": {
+      "complete": true,
+      "completeCount": 3,
+      "laneCount": 3,
+      "percent": 1.0
+    },
+    "missing_claim_classes": [],
+    "non_claims": [
+      "not R2 release readiness",
+      "not a final user plan, schedule, or Step generator",
+      "not a household schedule",
+      "not a personalized home plan",
+      "not a private user-data backend",
+      "not accessibility, privacy, or legal approval",
+      "not an official legal, medical, financial, or admissions decision",
+      "not contractor advice",
+      "not eligibility approval or loan decision",
+      "not emergency advice",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not private home data storage",
+      "not private life graph storage",
+      "not production R2 readiness",
+      "not runtime recommendation proof by itself",
+      "not universal goal coverage",
+      "not unsafe repair instructions"
+    ],
+    "packable_claim_count": 4,
+    "provenance_completeness": {
+      "claimCount": 4,
+      "complete": true,
+      "completeTupleCount": 4,
+      "packableClaimCount": 4,
+      "packableCompleteTupleCount": 4,
+      "packablePercent": 1.0
+    },
+    "restricted_exclusions": [],
+    "schemaVersion": 1,
+    "source_lanes": [
+      "energy.gov.energy_saver",
+      "ready.gov.kit",
+      "usa.gov.home_repair"
+    ],
+    "status": "claim_graph_ready",
+    "status_ceiling": "pack_staging_ready"
+  }
+}

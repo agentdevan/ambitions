@@ -1,0 +1,143 @@
+{
+  "api_registry_hash": "8d12c7bf47c67f0b7c4500d3d747020093780f2131a1408b631043e23ac5ac4c",
+  "attribution_slice_hash": "762c5f1a442493279cabc766d9713411b64a0506c53c77d74a98d11a19864a94",
+  "byte_size": 24573,
+  "cache_control": "public, max-age=3600",
+  "claim_frontier_manifest_hash": "ee628fb980d09cf9a1029a7b892f28e0eeacafd3878a8616c2421b0570932490",
+  "claim_graph_hash": "bcc963817d11be947593f073e1e580c0397aacc718e9eb08fbc50a22faf9be2b",
+  "coverage_frontier_hash": "6f067a4fe41b6fe993b80e38bb7bfa9761be6dae96a9484128a08255f563366f",
+  "created_at": "2026-06-28T00:00:00Z",
+  "dataClass": "public_freshness",
+  "expires_at": null,
+  "freshness_status": "current",
+  "kind": "ambitions.sourceAtlas.packManifest.v1",
+  "legal_registry_hash": "9f3be2f112ca8e863c26e280cb28bd5e408fab27b06ae5c353f4d9955d888ee8",
+  "license_slice_hash": "a5d3a6382da63e9de68ffeecd6b13239f5c13d1945216a47628e2451b6448391",
+  "lkg_pointer_key": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+  "manifest_id": "source_atlas_pack_manifest.07424ddff1ea148d",
+  "non_claims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "non_private_scan_hash": "5016900b000fbd676a561f8f1a7fff7c564a73efd7bd962884dd1ab332573d35",
+  "object_keys": {
+    "adjudications": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/adjudications.json",
+    "attribution": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/attribution.json",
+    "claims": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/claims.json",
+    "coverage": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/coverage.json",
+    "current": "source-atlas/v1/production/stable/home_life_admin/current.json",
+    "entities": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/entities.json",
+    "freshness": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/freshness.json",
+    "licenses": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/licenses.json",
+    "lkg": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+    "nonClaims": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/non_claims.json",
+    "pack": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/home_life_admin/revocations.json",
+    "sources": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/sources.json"
+  },
+  "objects": {
+    "adjudications": {
+      "byte_size": 1490,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/adjudications.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/adjudications.json",
+      "sha256": "23e0fc333ec7b71d66ce92d1dce46d2b59ec04c64f93202b7d606569d0a603c6"
+    },
+    "attribution": {
+      "byte_size": 1440,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/attribution.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/attribution.json",
+      "sha256": "4a6a347d87500890e4b39f0088e383aaed1babfd0d77d5bed9c3f981e7d12500"
+    },
+    "claims": {
+      "byte_size": 9685,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/claims.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/claims.json",
+      "sha256": "3e62230b2c9c3b2b83999290274e351f9a946735b04a28df89c027e176e96247"
+    },
+    "coverage": {
+      "byte_size": 4381,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/coverage.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/coverage.json",
+      "sha256": "b0a28ecf0ce38e909059cbf2733a377f23152f61ec6e25eaad675d879b7143b1"
+    },
+    "entities": {
+      "byte_size": 2472,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/entities.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/entities.json",
+      "sha256": "388081bc597ff9591aea686c3faf62cd320b2024f74f9f7cbdfd65f32ae5055a"
+    },
+    "freshness": {
+      "byte_size": 2168,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/freshness.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/freshness.json",
+      "sha256": "51eb7465776bfa323071896be212667ee3ac8b0cf2a47d464f1e3906e8dbe44d"
+    },
+    "licenses": {
+      "byte_size": 3105,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/licenses.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/licenses.json",
+      "sha256": "14625425b73c27fbe2037a8ec76f3e1aba343db544f49c8da195416976ab0d70"
+    },
+    "nonClaims": {
+      "byte_size": 1317,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/non_claims.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/non_claims.json",
+      "sha256": "27a222eb09ebe2a6b89730ddc04b980623f67a1a33db67aa25a08bfcb7876fe4"
+    },
+    "pack": {
+      "byte_size": 24573,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/pack.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/pack.json",
+      "sha256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee"
+    },
+    "revocations": {
+      "byte_size": 1393,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/revocations.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/revocations.json",
+      "sha256": "920ddbace8ccc6c7998fcbce731d0751fbc3a58d1d4d014325552923bbf7ddda"
+    },
+    "sources": {
+      "byte_size": 3773,
+      "content_type": "application/json; charset=utf-8",
+      "local_path": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/sources.json",
+      "object_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/sources.json",
+      "sha256": "77f14aaac5042eee1ba6627222887d6310dbdbeb190f02653431ff127d06b783"
+    }
+  },
+  "pack_id": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+  "pack_version": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "revocation_manifest_key": "source-atlas/v1/production/stable/home_life_admin/revocations.json",
+  "rollback_candidates": [
+    {
+      "lkg_key": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+      "manifest_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+      "reason": "dry_run_candidate"
+    }
+  ],
+  "schema_version": "1.0.0",
+  "sha256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+  "source_registry_hash": "73cdd9c40ffe3f16a082d6e3a03df0087a524ed1739949d7935cfbaad6bf28e1"
+}

@@ -1,0 +1,130 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completion_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "provided_completion_valid",
+      "passed": true
+    },
+    {
+      "issues": [
+        "review completion artifact not provided"
+      ],
+      "name": "completed_decision_artifacts_match_finalizer_contract",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_assembler_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "completionValidation": {
+    "approvedEntries": [],
+    "completionArtifactPath": "",
+    "completionArtifactProvided": false,
+    "decisionArtifact": {},
+    "decisionArtifactID": "",
+    "finalizerValidation": {
+      "issues": [
+        "review completion artifact not provided"
+      ],
+      "valid": false
+    },
+    "issues": [
+      "review completion artifact not provided; all decision inputs remain blocked"
+    ],
+    "nonClaims": [
+      "missing review completion is expected for blocked assembler dry-runs"
+    ],
+    "outsideLegalStatus": "not_claimed",
+    "reviewOwner": "",
+    "reviewedAt": "",
+    "selectedIntakeIDs": [],
+    "selectedProposalIDs": [],
+    "valid": false
+  },
+  "createdAt": "2026-06-28T00:00:00Z",
+  "decisionInputsPath": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogApprovalDecisionAssemblerManifest.v1",
+  "nonClaims": [
+    "not legal approval by itself",
+    "not outside legal approval without outside approval artifact",
+    "not source authority without completed reviewer fields",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedDecisionAssemblies": "bc3f06c0847805184a86c940242ccf7072c4be38e078f8a1ad4a895c73b3864a",
+    "catalogApprovalDecisionAssembler": "f250fcc8314677a6be24b9898de392d81da65e20e98867fae8fc9ea4433e447e",
+    "completedDecisionArtifacts": "76bf866a0723d1038c2e74eeec1f69a1488f1bf93d50772efecd277dd5a24989",
+    "finalizerDecisionArtifact": "79095fded9d290615244b754b1c24a23e9a44f9e0ca66384350dbe82a5c66f7a",
+    "manifest": "afa74d41f9746a88ae6aa31541be970fde80627ce55ae23adfcb4416704580a6"
+  },
+  "outputPaths": {
+    "blockedDecisionAssemblies": "tools/source-atlas/generated/catalog-approval-decision-assembler/train-65-live-data-gov/blocked-decision-assemblies.json",
+    "catalogApprovalDecisionAssembler": "tools/source-atlas/generated/catalog-approval-decision-assembler/train-65-live-data-gov/catalog-approval-decision-assembler.json",
+    "closeout": "tools/source-atlas/generated/catalog-approval-decision-assembler/train-65-live-data-gov/closeout.md",
+    "completedDecisionArtifacts": "tools/source-atlas/generated/catalog-approval-decision-assembler/train-65-live-data-gov/completed-decision-artifacts.json",
+    "finalizerDecisionArtifact": "tools/source-atlas/generated/catalog-approval-decision-assembler/train-65-live-data-gov/catalog-approval-finalizer-decision.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvedEntries": 0,
+    "blockedDecisionAssemblies": 4,
+    "claims": 0,
+    "completedDecisionArtifacts": 0,
+    "decisionInputPackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0
+  },
+  "reviewCompletionPath": "",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; decision assembler tooling only",
+  "status": "Source Green for catalog approval decision assembler tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-approval-decision-assembler-train-65"
+}

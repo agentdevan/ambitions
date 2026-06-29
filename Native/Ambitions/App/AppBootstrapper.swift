@@ -228,6 +228,13 @@ final class AppBootstrapper {
 
     private func reconcileMaintenance(using container: AppContainer, now: Date) async {
         await container.notificationService.reconcileBackgroundMaintenance(now: now)
+        _ = await container.sourceAtlasLifecycleRefreshService.refreshPublicSourceAtlasPacks(
+            SourceAtlasPublicPackLifecycleRefreshInput(
+                mode: .activeLifecycle,
+                networkReachability: .online,
+                checkedAt: now
+            )
+        )
     }
 
     private func queueConfiguredLaunchURLIfNeeded() {

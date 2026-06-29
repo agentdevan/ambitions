@@ -1,0 +1,37 @@
+{
+  "entities": [
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "health_wellness_reference",
+      "entity_id": "public_entity.0bda6845c1a287c2",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "CDC Physical Activity Basics provides general public wellness context about physical activity and health benefits; Source Atlas must not use it for diagnosis, treatment, emergency advice, or individualized health decisions.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "cdc.physical-activity.basics"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "health_wellness_reference",
+      "entity_id": "public_entity.2374ff14046fe006",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "CDC Physical Activity Basics describes physical activity concepts such as aerobic activity, muscle strengthening, and intensity as general public reference terms, not as a personalized training prescription.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "cdc.physical-activity.basics"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "health_wellness_reference",
+      "entity_id": "public_entity.699e43fcecbbb4c0",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "CDC Physical Activity Basics publishes general adult aerobic and muscle-strengthening activity guideline context for public health reference only, not medical advice, diagnosis, treatment, individualized clearance, or a personalized fitness plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "cdc.physical-activity.basics"
+    }
+  ]
+}

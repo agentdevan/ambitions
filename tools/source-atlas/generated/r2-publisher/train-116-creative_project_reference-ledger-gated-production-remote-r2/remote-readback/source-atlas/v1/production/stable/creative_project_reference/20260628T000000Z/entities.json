@@ -1,0 +1,37 @@
+{
+  "entities": [
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "creative_project_reference",
+      "entity_id": "public_entity.0e6204e9b9b2ab39",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "W3C publishes web standards and drafts as public standards-body reference context for web and creative-technical projects, not implementation advice, trademark permission, patent advice, or a final creative plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "w3c.web-standards"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "creative_project_reference",
+      "entity_id": "public_entity.49099b83a7471fcc",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "Creative Commons publishes a public list of CC licenses and public-domain tools as creative metadata reference context, not copyright permission, license-selection advice, trademark permission, or a final reuse decision.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "creative-commons.licenses"
+    },
+    {
+      "dataClass": "public_reference_claim",
+      "domain": "creative_project_reference",
+      "entity_id": "public_entity.4976b4128f0dc75a",
+      "entity_type": "public_claim_subject",
+      "kind": "ambitions.sourceAtlas.publicEntity.v1",
+      "label": "The Library of Congress publishes Getting Started with Primary Sources as public learning-reference context for creative research and teaching, not copyright clearance, source-use permission, or a final creative project plan.",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "source_id": "loc.primary_sources"
+    }
+  ]
+}

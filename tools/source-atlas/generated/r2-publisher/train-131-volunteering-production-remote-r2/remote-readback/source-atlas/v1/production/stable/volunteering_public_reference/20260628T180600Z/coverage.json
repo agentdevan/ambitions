@@ -1,0 +1,131 @@
+{
+  "coverage": {
+    "authority_coverage": {
+      "complete": true,
+      "missing": [],
+      "present": [
+        "official_government"
+      ],
+      "required": [
+        "official_government"
+      ]
+    },
+    "blocked_claim_count": 0,
+    "candidate_only_count": 0,
+    "claim_classes": [
+      "civic_engagement_reference",
+      "public_dataset_scope_reference",
+      "volunteer_rate_reference"
+    ],
+    "conflict_status": "no_conflict_detected",
+    "covered_claim_classes": [
+      "civic_engagement_reference",
+      "public_dataset_scope_reference",
+      "volunteer_rate_reference"
+    ],
+    "domain": "volunteering_public_reference",
+    "freshness_compliance": {
+      "claimCount": 3,
+      "complete": true,
+      "freshCount": 3,
+      "percent": 1.0
+    },
+    "frontier_id": "volunteering_public_reference",
+    "goal_intent_classes": [
+      "volunteering_public_reference",
+      "public_civic_life_reference"
+    ],
+    "gold_set": {
+      "goldSetID": "gold.volunteering_public_reference.americorps_state_volunteer_rate.v1",
+      "matchedCount": 3,
+      "matches": [
+        {
+          "claimID": "canonical_claim.e6c5f76a457b0f8f",
+          "claimType": "civic_engagement_reference",
+          "goldClaimID": "gold.volunteering.americorps.civic_engagement",
+          "jurisdiction": "US",
+          "sourceID": "americorps.volunteer_rate_state"
+        },
+        {
+          "claimID": "canonical_claim.e0aa8d9c591eb299",
+          "claimType": "public_dataset_scope_reference",
+          "goldClaimID": "gold.volunteering.americorps.dataset_scope",
+          "jurisdiction": "US",
+          "sourceID": "americorps.volunteer_rate_state"
+        },
+        {
+          "claimID": "canonical_claim.d30e2c747935abac",
+          "claimType": "volunteer_rate_reference",
+          "goldClaimID": "gold.volunteering.americorps.volunteer_rate",
+          "jurisdiction": "US",
+          "sourceID": "americorps.volunteer_rate_state"
+        }
+      ],
+      "missing": [],
+      "nonClaims": [
+        "not Release Green",
+        "not a personalized volunteering plan",
+        "not current volunteer opportunity availability",
+        "not eligibility advice",
+        "not final user plans, schedules, or Steps",
+        "not legal advice",
+        "not personalized placement recommendation",
+        "not release readiness",
+        "not universal coverage"
+      ],
+      "required": true,
+      "requiredCount": 3,
+      "schemaVersion": 1,
+      "status": "passed",
+      "versionID": "source-atlas-gold-set-evaluator-train-40"
+    },
+    "gold_set_status": "passed",
+    "jurisdictions": [
+      "US"
+    ],
+    "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+    "legal_posture_completeness": {
+      "complete": true,
+      "completeCount": 1,
+      "laneCount": 1,
+      "percent": 1.0
+    },
+    "missing_claim_classes": [],
+    "non_claims": [
+      "not R2 release readiness",
+      "not a final user plan, schedule, or Step generator",
+      "not a personalized placement recommendation",
+      "not a personalized volunteering plan",
+      "not a private user-data backend",
+      "not accessibility, privacy, or legal approval",
+      "not an official legal, medical, financial, or admissions decision",
+      "not current volunteer opportunity availability",
+      "not eligibility advice",
+      "not full Source Atlas Green",
+      "not legal advice",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not private life graph storage",
+      "not production R2 readiness",
+      "not runtime recommendation proof by itself",
+      "not universal goal coverage",
+      "not universal volunteering coverage"
+    ],
+    "packable_claim_count": 3,
+    "provenance_completeness": {
+      "claimCount": 3,
+      "complete": true,
+      "completeTupleCount": 3,
+      "packableClaimCount": 3,
+      "packableCompleteTupleCount": 3,
+      "packablePercent": 1.0
+    },
+    "restricted_exclusions": [],
+    "schemaVersion": 1,
+    "source_lanes": [
+      "americorps.volunteer_rate_state"
+    ],
+    "status": "claim_graph_ready",
+    "status_ceiling": "pack_staging_ready"
+  }
+}

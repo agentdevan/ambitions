@@ -1,0 +1,148 @@
+{
+  "train": "Source Atlas Production Finish-Line Train 24",
+  "linear_issue": "AMB-1510",
+  "date": "2026-06-28",
+  "status": "Green for Foundry native refresh registry artifact compiler / Yellow overall Source Atlas",
+  "scope_completed": [
+    "Added tools/source-atlas/foundry/native_refresh_registry.py",
+    "Added the native-refresh-registry Foundry CLI command",
+    "Compiled validated public R2 publisher reports into the Train 23 native artifact shape",
+    "Generated deterministic Train 24 fixture artifact and compiler report",
+    "Default generated targets are review_required, not active",
+    "Active targets require an explicit approval artifact",
+    "Blocked unsafe publisher reports, private object keys, invalid reports, and non-public pointer posture before native target emission",
+    "Made artifact-level non-claims native-loader-safe",
+    "Added Python tests for default generation, approval gating, active approval recording, private publisher report blocking, and invalid report blocking",
+    "Added Swift compatibility coverage proving the generated artifact decodes through the native loader and selects no refresh target while review-required"
+  ],
+  "files_changed": [
+    "tools/source-atlas/foundry/native_refresh_registry.py",
+    "tools/source-atlas/foundry/cli.py",
+    "tools/source-atlas/foundry/tests/test_native_refresh_registry_train_24.py",
+    "tools/source-atlas/generated/native-refresh-registry/train-24-fixture/source-atlas-public-refresh-targets.json",
+    "tools/source-atlas/generated/native-refresh-registry/train-24-fixture/native-refresh-registry-report.json",
+    "tools/source-atlas/generated/native-refresh-registry/train-24-fixture/closeout.md",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-compiler-train-24.md",
+    "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-compiler-train-24.json"
+  ],
+  "product_law_preserved": true,
+  "final_architecture_tree": {
+    "inspected": true,
+    "canonical_owners_touched": [],
+    "test_coverage_owner_exercised": "Core/Persistence",
+    "noncanonical_owners_touched": [],
+    "files_moved_or_created": [
+      "tools/source-atlas/foundry/native_refresh_registry.py",
+      "tools/source-atlas/foundry/tests/test_native_refresh_registry_train_24.py",
+      "tools/source-atlas/generated/native-refresh-registry/train-24-fixture/source-atlas-public-refresh-targets.json",
+      "tools/source-atlas/generated/native-refresh-registry/train-24-fixture/native-refresh-registry-report.json",
+      "tools/source-atlas/generated/native-refresh-registry/train-24-fixture/closeout.md",
+      "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-compiler-train-24.md",
+      "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-compiler-train-24.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_architecture_debt": "No owner-approved bundled active registry artifact; no real BGTaskScheduler registration, identifier, launch, or background execution proof.",
+    "next_repair_train": "Owner-approved public registry artifact population or real background registration proof under canonical ownership",
+    "no_equivalent_folder_interpretation_used": true
+  },
+  "apple_platform_source_atlas": {
+    "new_apple_api_introduced": false,
+    "ios_26_availability_claim": "No new iOS API availability claim",
+    "backgroundtasks_proof": "Not run and not claimed"
+  },
+  "validation_run": [
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_native_refresh_registry_train_24.py -q",
+      "status": "passed",
+      "passed": 5
+    },
+    {
+      "command": "python3 tools/source-atlas/source-atlas-foundry.py native-refresh-registry --publisher-report tools/source-atlas/generated/r2-publisher/train-10-civic-local-simulation/r2-publisher-report.json --output-root tools/source-atlas/generated/native-refresh-registry/train-24-fixture --created-at 2026-06-28T00:00:00Z --app-version 1.0 --public-locale en-US",
+      "status": "passed",
+      "artifact": "tools/source-atlas/generated/native-refresh-registry/train-24-fixture/source-atlas-public-refresh-targets.json"
+    },
+    {
+      "command": "xcodegen generate",
+      "status": "passed"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "status": "passed",
+      "passed": 7,
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T01-20-31-703Z_pid24471_153f8590.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T01-20-31-703Z_pid24471_f0de7dc1.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "passed": 130
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/green-standard/20260628T012255Z/extract/summary.json"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed_after_qa_evidence_write"
+    }
+  ],
+  "validation_not_run": [
+    "Owner-approved active public registry artifact population",
+    "Real BGTaskScheduler registration, identifier, launch, or background execution proof",
+    "Production R2 upload/readback",
+    "Physical-device/offline runtime proof",
+    "Visual or accessibility proof",
+    "TestFlight, App Store, or release readiness proof",
+    "New legal/terms approval"
+  ],
+  "source_atlas_status_ceiling": "Green for Train 24 Foundry native refresh registry artifact compiler only; Yellow overall Source Atlas",
+  "r2_request_privacy_proof": "Compiler emits only domain, channel, schema version, app version, optional public locale, target pack ID, and environment; object keys from publisher reports are checked before target emission.",
+  "no_private_graph_egress_proof": "No-private egress audit passed; private publisher report test proves private object keys emit no native targets.",
+  "license_terms_proof": "Inherited from validated publisher and pack artifacts; no new legal approval or source lane decision added.",
+  "restricted_source_exclusion_proof": "Inherited from upstream publisher/pack artifacts; this compiler does not re-admit excluded source data.",
+  "provenance_completeness_proof": "Inherited from upstream publisher and pack manifest; no new claim graph or packable claim path added.",
+  "freshness_revocation_proof": "Target routing points at current-pointer/freshness infrastructure from validated publisher output; no freshness claim is upgraded.",
+  "lkg_rollback_proof": "Inherited from publisher report; this compiler does not publish or roll back R2 objects.",
+  "native_offline_no_account_proof": "Generated fixture decodes through the native loader as review-required and selects no refresh target; local planning remains unblocked.",
+  "production_non_claims": [
+    "No production R2 readiness",
+    "No app runtime or release Green",
+    "No legal approval",
+    "No universal coverage",
+    "No real BackgroundTasks registration",
+    "No approved active registry artifact population"
+  ],
+  "known_risks": [
+    "Active native registry artifacts remain blocked without owner/legal/product approval",
+    "Real background scheduling remains unproven",
+    "Device/offline proof remains required before release claims",
+    "Broader worktree contains uncommitted Source Atlas trains outside Train 24"
+  ],
+  "rollback_plan": [
+    "Remove tools/source-atlas/foundry/native_refresh_registry.py",
+    "Remove the native-refresh-registry CLI command",
+    "Remove tools/source-atlas/foundry/tests/test_native_refresh_registry_train_24.py",
+    "Remove generated Train 24 native refresh registry artifacts",
+    "Remove the Train 24 Swift compatibility test case and QA evidence",
+    "Retain prior Train 23 loader behavior and prior public-pack cache/fetch/background task paths"
+  ]
+}

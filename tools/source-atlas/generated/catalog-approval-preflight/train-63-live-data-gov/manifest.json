@@ -1,0 +1,100 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "preflight_records_cover_all_proposals",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "draft_templates_are_not_approvals",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "preflight_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogApprovalPreflightManifest.v1",
+  "nonClaims": [
+    "not an approval artifact",
+    "not legal approval",
+    "not outside legal approval",
+    "not source authority",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "catalogApprovalPreflight": "c16ad642ebfded5ba1844430b198b5e898439824d848e2a50eb45eab467890b1",
+    "completedApprovalArtifacts": "2e289aa3ac9e3ec248775c436e66365d5722dd97035b717b449b02928ef78681",
+    "decisionDraftTemplates": "52ac94676cdb328dd45a252f14a365915728c572a1d698a88a822391854f6a13",
+    "decisionPreflightRecords": "59207044de8b934df6e250a40594430204d04186bcf1862d95e2e6e9b7cc95d1",
+    "manifest": "f53bdf1e32bcbc19d9b5c260b695ec34a71a6474a34c687b359b75b18d56048c"
+  },
+  "outputPaths": {
+    "catalogApprovalPreflight": "tools/source-atlas/generated/catalog-approval-preflight/train-63-live-data-gov/catalog-approval-preflight.json",
+    "closeout": "tools/source-atlas/generated/catalog-approval-preflight/train-63-live-data-gov/closeout.md",
+    "completedApprovalArtifacts": "tools/source-atlas/generated/catalog-approval-preflight/train-63-live-data-gov/completed-approval-artifacts.json",
+    "decisionDraftTemplates": "tools/source-atlas/generated/catalog-approval-preflight/train-63-live-data-gov/decision-draft-templates.json",
+    "decisionPreflightRecords": "tools/source-atlas/generated/catalog-approval-preflight/train-63-live-data-gov/decision-preflight-records.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDecisionRecords": 4,
+    "claims": 0,
+    "completedApprovalArtifacts": 0,
+    "decisionDraftTemplates": 4,
+    "decisionPreflightRecords": 4,
+    "decisionReadyRecords": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "termsResolutionProposals": 4
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; decision preflight tooling only",
+  "status": "Source Green for catalog approval decision preflight tooling",
+  "termsProposalsPath": "tools/source-atlas/generated/catalog-terms-resolution/train-61-live-data-gov/terms-resolution-proposals.json",
+  "valid": true,
+  "versionID": "source-atlas-catalog-approval-preflight-train-63"
+}

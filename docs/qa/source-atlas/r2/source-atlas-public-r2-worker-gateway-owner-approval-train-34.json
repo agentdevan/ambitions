@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0.0",
+  "train": "34",
+  "linear_issue": "AMB-1520",
+  "title": "Source Atlas public R2 Worker gateway owner approval",
+  "created_at": "2026-06-28T03:35:40Z",
+  "status": "approved_for_bounded_worker_gateway_live_transport_proof",
+  "approval_type": "owner_public_endpoint_exposure_approval",
+  "approval_scope": [
+    "Deploy a Cloudflare Worker gateway for Source Atlas public/reference packs.",
+    "Bind the gateway to R2 bucket ambitions-source-atlas-prod.",
+    "Expose only explicit allowlisted production stable occupation_foundation object keys.",
+    "Use the endpoint for live native URLSession fetch proof.",
+    "Preserve no-private-context request shape."
+  ],
+  "approved_bucket": "ambitions-source-atlas-prod",
+  "approved_gateway": {
+    "name": "ambitions-source-atlas-public-gateway",
+    "path": "tools/source-atlas/r2-public-gateway",
+    "workers_dev": true,
+    "binding": "SOURCE_ATLAS_BUCKET"
+  },
+  "approved_object_keys": [
+    "source-atlas/v1/production/stable/occupation_foundation/current.json",
+    "source-atlas/v1/production/stable/occupation_foundation/lkg.json",
+    "source-atlas/v1/production/stable/occupation_foundation/revocations.json",
+    "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/manifest.json",
+    "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/pack.json"
+  ],
+  "blocked_exposure_modes": [
+    "Do not enable bucket-wide r2.dev public access in this train.",
+    "Do not expose a bucket listing route.",
+    "Do not expose arbitrary source-atlas/* object keys.",
+    "Do not expose private user context, goals, captures, schedules, proof, receipts, account identifiers, device identifiers, or private graph data.",
+    "Do not claim production custom-domain readiness from workers.dev proof."
+  ],
+  "reason_for_worker_gateway_instead_of_r2_dev": "Bucket info reports 68 objects, while known generated proof artifacts identify 41 unique object keys. Bucket-wide r2.dev would expose unknown object keys if guessed. The Worker gateway allowlist exposes only the approved public/reference object keys needed for live native transport proof.",
+  "cloudflare_docs_review": [
+    {
+      "url": "https://developers.cloudflare.com/r2/buckets/public-buckets/",
+      "finding": "Cloudflare-managed r2.dev URLs are for development and expose public bucket access; production control should use a custom domain or a controlled gateway."
+    },
+    {
+      "url": "https://developers.cloudflare.com/r2/api/workers/workers-api-reference/",
+      "finding": "Workers can access R2 through a binding and fetch objects by key."
+    }
+  ],
+  "wrangler_cli_review": [
+    {
+      "command": "wrangler --version",
+      "summary": "4.104.0"
+    },
+    {
+      "command": "wrangler r2 bucket dev-url enable --help",
+      "summary": "Enable public access via r2.dev is a bucket-wide public access operation and supports --force."
+    }
+  ],
+  "non_claims": [
+    "not outside legal approval",
+    "not privacy/legal owner release signoff",
+    "not Release Green",
+    "not App Store readiness",
+    "not Visual Green",
+    "not universal goal coverage",
+    "not entitlement readiness",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "approval_source": "User authorized work needed to get Source Atlas green in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage areas. This artifact scopes that authorization to a bounded public/reference Worker gateway only and does not convert it into outside legal or release approval.",
+  "expires_at": "2026-07-28T03:35:40Z",
+  "rollback_plan": [
+    "Disable or delete the Cloudflare Worker gateway if public endpoint exposure must be revoked.",
+    "No bucket-wide r2.dev setting should be enabled by this train.",
+    "R2 objects remain managed by existing revocation/LKG/rollback proof."
+  ]
+}

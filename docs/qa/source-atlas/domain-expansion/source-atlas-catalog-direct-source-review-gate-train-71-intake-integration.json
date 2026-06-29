@@ -1,0 +1,112 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_packet_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_packet_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "missing_review_packets_block_without_approval",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_artifact_matches_decision_assembler_contract",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "reviewer_completion_intake_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "decisionInputsPath": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogReviewerCompletionIntakeManifest.v1",
+  "manifestPath": "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/manifest.json",
+  "nonClaims": [
+    "reviewer completion intake only",
+    "not legal approval by itself",
+    "not outside legal approval without outside approval artifact",
+    "not source authority without completed source-specific review packet",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedReviewCompletions": "834843d6c2ae26386e4f140c501d7c78423617e5cbc11997c1bb83125560c126",
+    "catalogReviewerCompletionIntake": "551db67b1c5378bd77024fb465c4f867d75e408c7b9ca12731ef28b89952c975",
+    "manifest": "4d621309ee6ba7e21ed93963cd4c66ea477f8b77c7295ce8777c3d57865af71a",
+    "reviewCompletionArtifact": "a8c82ef2416850134c940a9081a3bd99f03da74b367049952caf84d92b51d328"
+  },
+  "outputPaths": {
+    "blockedReviewCompletions": "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/blocked-review-completions.json",
+    "catalogReviewerCompletionIntake": "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/catalog-reviewer-completion-intake.json",
+    "closeout": "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/closeout.md",
+    "reviewCompletionArtifact": "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/catalog-approval-decision-completion.json"
+  },
+  "outputRoot": "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvedEntries": 0,
+    "blockedReviewCompletions": 4,
+    "claims": 0,
+    "completedDecisionArtifacts": 0,
+    "completedReviewCompletions": 0,
+    "decisionInputPackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "reviewPackets": 4
+  },
+  "reviewCompletionArtifactPath": "",
+  "reviewPacketsPath": "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-live-data-gov/source-review-completion-packets.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; reviewer completion intake tooling only",
+  "status": "Source Green for catalog reviewer completion intake tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-reviewer-completion-intake-train-67"
+}

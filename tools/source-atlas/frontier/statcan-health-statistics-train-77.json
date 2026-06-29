@@ -1,0 +1,46 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "frontiers": [
+    {
+      "claim_classes": [
+        "public_statistical_reference",
+        "public_health_statistical_context"
+      ],
+      "domain": "health_wellness_reference_ca_statistics",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_source_and_terms_review"
+      ],
+      "frontier_id": "health_wellness_reference_ca_statistics",
+      "goal_intent_classes": [
+        "health_statistics_reference"
+      ],
+      "gold_set_required": false,
+      "jurisdictions": [
+        "CA"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not medical advice",
+        "not diagnosis",
+        "not treatment planning",
+        "not a personal health recommendation",
+        "not universal health or wellness coverage",
+        "not release readiness",
+        "not outside legal approval"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "official.statcan.table.13100974"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.coverageFrontierConfig.v1"
+}

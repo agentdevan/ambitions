@@ -1,0 +1,193 @@
+{
+  "allowedClaims": [
+    "governed_arbitrary_public_reference_domain_handling"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "literal_universal_coverage",
+    "outside_legal_approval",
+    "release_green",
+    "source_atlas_private_goal_text_processing"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "finish_line_gate_valid_when_supplied",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "configured_domains_route_to_current_or_bounded_action",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "unknown_public_domains_route_to_candidate_frontier_intake",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_intake_emits_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "private_context_rejected_without_persistent_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "frontier_aliases_are_unambiguous",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "output_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "configuredDomainPlan": {
+    "issues": [],
+    "outputPaths": {
+      "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/01-configured-domain-plan/closeout.md",
+      "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/01-configured-domain-plan/autonomous-operations-plan.md",
+      "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/01-configured-domain-plan/autonomous-operations-plan.json"
+    },
+    "recordCounts": {
+      "actionableDomains": 0,
+      "blockedDomains": 0,
+      "configuredFrontiers": 14,
+      "ledgerDomains": 14,
+      "monitorDomains": 14,
+      "plannedDomains": 14,
+      "privacyIssues": 0,
+      "recertifiedDomains": 14,
+      "requestedDomains": 0,
+      "resolvedRequestedDomainAliases": 0,
+      "unmatchedRequestedDomains": 0
+    },
+    "status": "Source Green for autonomous operations planning",
+    "valid": true
+  },
+  "createdAt": "2026-06-29T00:27:00Z",
+  "evidencePaths": {
+    "finishLineGate": "tools/source-atlas/generated/production-finish-line-gate/train-131-tetradeca-final/production-finish-line-gate-report.json",
+    "frontierConfig": "tools/source-atlas/frontier/coverage-frontiers.json",
+    "productionRecertification": "tools/source-atlas/generated/production-recertification/train-131-tetradeca-final/production-recertification-report.json",
+    "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-131-final.json",
+    "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "frontierAliasConflicts": {},
+  "gateID": "source_atlas.arbitrary_domain_handling_gate.efc502e289e8e4aa",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.arbitraryDomainHandlingGate.v1",
+  "nonClaims": [
+    "governed arbitrary public/reference domain handling only",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not private goal-text processing by Source Atlas",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "unknown domains remain candidate-only until source/legal/API/frontier review completes",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "configuredDomainPlan": "bfffde5f9b2bac0f8d9c2d455097f988bd34d8c2c483e34e979bedcecb70496f",
+    "report": "de343b321f60f3cd393cbab89c4cd56a1e707ea33d01acbc2434b65e1c9e9d0c",
+    "unknownDomainExecution": "bb927aaa698890354d3c913b759f8fdc3b20acf96560187dca56eba45999842c",
+    "unknownDomainPlan": "c9ef44f26cef0360f3bd34e2642f5eb7b9ee968d2a4d30bb4b8505397ad5c0c5"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/closeout.md",
+    "configuredDomainPlan": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/01-configured-domain-plan/autonomous-operations-plan.json",
+    "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/arbitrary-domain-handling-gate-report.md",
+    "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/arbitrary-domain-handling-gate-report.json",
+    "unknownDomainExecution": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/autonomous-operations-execution-report.json",
+    "unknownDomainPlan": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/02-unknown-domain-plan/autonomous-operations-plan.json"
+  },
+  "overallReadinessStatus": "governed_arbitrary_domain_handling_ready",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "privateContextProbe": {
+    "nonClaims": [
+      "private-context rejection proof only",
+      "raw private-looking sentinel is not persisted in repo evidence"
+    ],
+    "persistentArtifactWritten": false,
+    "privacyIssueCount": 2,
+    "rawProbePersisted": false,
+    "rejected": true
+  },
+  "recordCounts": {
+    "aliasConflicts": 0,
+    "candidateClaims": 0,
+    "candidateNativeActivationOperations": 0,
+    "candidateProductionWrites": 0,
+    "candidateR2PublishOperations": 0,
+    "configuredFrontiers": 14,
+    "configuredMonitorDomains": 14,
+    "configuredPlannedDomains": 14,
+    "unknownFrontierIntakeArtifacts": 15,
+    "unknownProbeDomains": 3,
+    "unknownUnmatchedDomains": 3
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; arbitrary public/reference domain handling only",
+  "status": "Source Green for governed arbitrary public/reference domain handling",
+  "unknownDomainExecution": {
+    "issues": [],
+    "outputPaths": {
+      "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/closeout.md",
+      "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/autonomous-operations-execution-report.md",
+      "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/03-unknown-domain-execution/autonomous-operations-execution-report.json"
+    },
+    "recordCounts": {
+      "blockedByGate": 0,
+      "deliveryChainArtifacts": 0,
+      "failedActions": 0,
+      "frontierIntakeArtifacts": 15,
+      "observedDomains": 14,
+      "plannedDomains": 17,
+      "plannedNotExecuted": 0,
+      "productionWritesExecuted": 0,
+      "safeActionsExecuted": 3,
+      "unsafeExecutionAttempts": 0
+    },
+    "status": "Source Green for gated autonomous operations execution",
+    "valid": true
+  },
+  "unknownDomainPlan": {
+    "issues": [],
+    "outputPaths": {
+      "closeout": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/02-unknown-domain-plan/closeout.md",
+      "markdown": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/02-unknown-domain-plan/autonomous-operations-plan.md",
+      "report": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/02-unknown-domain-plan/autonomous-operations-plan.json"
+    },
+    "recordCounts": {
+      "actionableDomains": 3,
+      "blockedDomains": 3,
+      "configuredFrontiers": 14,
+      "ledgerDomains": 14,
+      "monitorDomains": 14,
+      "plannedDomains": 17,
+      "privacyIssues": 0,
+      "recertifiedDomains": 14,
+      "requestedDomains": 3,
+      "resolvedRequestedDomainAliases": 0,
+      "unmatchedRequestedDomains": 3
+    },
+    "status": "Source Green for autonomous operations planning",
+    "valid": true
+  },
+  "valid": true,
+  "versionID": "source-atlas-arbitrary-domain-handling-gate-train-115"
+}

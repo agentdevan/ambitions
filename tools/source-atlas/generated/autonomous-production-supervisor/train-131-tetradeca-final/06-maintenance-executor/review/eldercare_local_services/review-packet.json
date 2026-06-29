@@ -1,0 +1,34 @@
+{
+  "apiWindows": [],
+  "artifactInputs": {
+    "artifactPaths": [],
+    "executedSafeLocalIntake": false
+  },
+  "createdAt": "2026-06-29T00:36:00Z",
+  "domainID": "eldercare_local_services",
+  "kind": "ambitions.sourceAtlas.reviewPacket.v1",
+  "legalWindows": [],
+  "nextAction": "candidate_frontier_review",
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "coverage_frontier_missing"
+  ],
+  "requiredGate": "frontier_governance_review",
+  "reviewChecklist": [
+    "confirm the domain is public/reference only",
+    "define coverage frontier and non-claims before source authority",
+    "classify candidate sources as discovery-only until reviewed",
+    "block claims, pack output, and R2 output until source/legal/API governance passes"
+  ],
+  "sourceIDs": [],
+  "sourceReviewWindows": [],
+  "state": "candidate_only_review_required"
+}

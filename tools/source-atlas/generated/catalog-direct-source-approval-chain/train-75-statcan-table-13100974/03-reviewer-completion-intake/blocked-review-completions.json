@@ -1,0 +1,72 @@
+{
+  "blockedReviewCompletions": [
+    {
+      "blocked_review_completion_id": "catalog_reviewer_completion_block.34d5b4920148818e",
+      "blocking_reasons": [
+        "review_completion_status_blocked_direct_source_review_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "created_at": "2026-06-28T00:00:00Z",
+      "decision_input_id": "catalog_approval_decision_input.e44dd117f4fe0d45",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "non_claims": [
+        "blocked reviewer completion only",
+        "not approval",
+        "not finalizer decision",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.096325a6a5ca",
+      "source_name": "Department of Education",
+      "status": "blocked"
+    },
+    {
+      "blocked_review_completion_id": "catalog_reviewer_completion_block.b902b1078ff0c666",
+      "blocking_reasons": [
+        "review_completion_status_blocked_direct_source_review_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "created_at": "2026-06-28T00:00:00Z",
+      "decision_input_id": "catalog_approval_decision_input.534c298d4fe6c7bc",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "non_claims": [
+        "blocked reviewer completion only",
+        "not approval",
+        "not finalizer decision",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.1b56977db7b8",
+      "source_name": "ABS (SA Data)",
+      "status": "blocked"
+    },
+    {
+      "blocked_review_completion_id": "catalog_reviewer_completion_block.4ee32ebbf84c70c0",
+      "blocking_reasons": [
+        "review_completion_status_blocked_direct_source_review_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "created_at": "2026-06-28T00:00:00Z",
+      "decision_input_id": "catalog_approval_decision_input.86076c52c98bdfb7",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "non_claims": [
+        "blocked reviewer completion only",
+        "not approval",
+        "not finalizer decision",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.43ed3a73ccc5",
+      "source_name": "Public Health Agency of Canada | Agence de la santé publique du Canada",
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogBlockedReviewerCompletions.v1"
+}

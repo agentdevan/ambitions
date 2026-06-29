@@ -1,0 +1,206 @@
+{
+  "nextWorkQueue": [
+    {
+      "blockers": [
+        "umbrella Release Green is not proven",
+        "App Store/TestFlight readiness is not proven",
+        "physical-device proof is not proven",
+        "independent accessibility/visual proof is not proven"
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "priority": "high",
+      "recommendedCommand": "Run current release proof packet with build/test/device/accessibility/privacy/legal/owner approval evidence.; Keep focused native suite proof scoped.",
+      "sortOrder": 10,
+      "sourceRequirementID": "release_readiness",
+      "status": "yellow_needs_stronger_proof",
+      "title": "Resolve Runtime/release Green, device, accessibility, and App Store proof",
+      "workItemID": "source_atlas.completion_work.88f1b09b7e4a0681",
+      "workType": "requirement_gap"
+    },
+    {
+      "blockers": [
+        "outside legal approval remains unproven by Codex/internal review"
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "priority": "high",
+      "recommendedCommand": "attach current proof artifact and rerun source-atlas-completion-audit",
+      "sortOrder": 10,
+      "sourceRequirementID": "legal_terms_approval",
+      "status": "yellow_needs_stronger_proof",
+      "title": "Attach current source-specific outside legal approval artifact before outside legal approval claim",
+      "workItemID": "source_atlas.completion_work.outside_legal_approval_artifact",
+      "workType": "manual_or_external_proof_gate"
+    },
+    {
+      "blockers": [
+        "Release Green, TestFlight readiness, App Store readiness, device proof, and independent accessibility proof are not proven"
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "priority": "high",
+      "recommendedCommand": "attach current proof artifact and rerun source-atlas-completion-audit",
+      "sortOrder": 10,
+      "sourceRequirementID": "release_readiness",
+      "status": "yellow_needs_stronger_proof",
+      "title": "Produce current release/device/accessibility/App Store proof before Release Green",
+      "workItemID": "source_atlas.completion_work.release_green_packet",
+      "workType": "manual_or_external_proof_gate"
+    },
+    {
+      "blockers": [
+        "candidate/review-only work cannot emit claims, packs, R2 writes, or native activation"
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "priority": "medium",
+      "recommendedCommand": "run catalog/source/legal/API review chain before pack/R2/native activation",
+      "sortOrder": 40,
+      "sourceRequirementID": "autonomous_domain_expansion",
+      "status": "queued_review_only",
+      "title": "Review candidate/source lane for eldercare_local_services",
+      "workItemID": "source_atlas.completion_work.a1f6efec6ff8293a",
+      "workType": "candidate_review"
+    },
+    {
+      "blockers": [
+        "candidate/review-only work cannot emit claims, packs, R2 writes, or native activation"
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "priority": "medium",
+      "recommendedCommand": "run catalog/source/legal/API review chain before pack/R2/native activation",
+      "sortOrder": 40,
+      "sourceRequirementID": "autonomous_domain_expansion",
+      "status": "queued_review_only",
+      "title": "Review candidate/source lane for community_volunteering_opportunities",
+      "workItemID": "source_atlas.completion_work.aae45c54a3a32afd",
+      "workType": "candidate_review"
+    },
+    {
+      "blockers": [
+        "any-goal support means governed expansion, not literal universal coverage"
+      ],
+      "nonClaims": [
+        "goal-level completion audit and gap router only",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not outside legal approval",
+        "not literal universal coverage",
+        "not independent accessibility proof",
+        "not native physical-device proof",
+        "not an automatic production R2 writer",
+        "not uncontrolled live harvest",
+        "not a hosted planner, profile engine, or cloud personalization system",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "priority": "medium",
+      "recommendedCommand": "attach current proof artifact and rerun source-atlas-completion-audit",
+      "sortOrder": 40,
+      "sourceRequirementID": "universal_coverage_claim_control",
+      "status": "yellow_needs_stronger_proof",
+      "title": "Keep literal universal coverage blocked; expand through governed frontiers",
+      "workItemID": "source_atlas.completion_work.literal_universal_coverage_blocked",
+      "workType": "manual_or_external_proof_gate"
+    }
+  ],
+  "schemaVersion": 1
+}

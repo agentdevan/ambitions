@@ -1,0 +1,150 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "",
+      "authority_class_guess": "standards_body",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "candidate_source.702962ae5d7c1538",
+      "candidate_score": 75,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "language_standard_reference"
+      ],
+      "dataset_url": "https://www.coe.int/en/web/common-european-framework-reference-languages",
+      "declared_jurisdiction": "Europe",
+      "declared_license": "",
+      "declared_rights": "terms review required",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "manual_submission",
+      "distribution_urls": [
+        "https://www.coe.int/en/web/common-european-framework-reference-languages"
+      ],
+      "domain_guess": "public_language_learning_reference",
+      "evidence_hash": "5bbd7b7e1558ff2ff73365322e7b7919fd2fa0022a800a3f86a8d9e4ce27ba7c",
+      "frontier_id": "public_language_learning_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "new-language-learning-public-reference",
+      "publisher_name": "Council of Europe",
+      "publisher_url": "https://www.coe.int/",
+      "redistribution_guess": "terms_sensitive",
+      "review_required": true,
+      "rights_url": "https://www.coe.int/en/web/portal/terms-and-conditions",
+      "schema_version": "1.0.0",
+      "source_class_guess": "standards_body",
+      "terms_url": "https://www.coe.int/en/web/portal/terms-and-conditions"
+    },
+    {
+      "api_docs_url": "https://www.wikidata.org/wiki/Wikidata:Data_access",
+      "authority_class_guess": "open_knowledge_graph",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "crosswalk_only_not_regulated_authority",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate_source.85bb4e608bcf1482",
+      "candidate_score": 40,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "language_entity_crosswalk"
+      ],
+      "dataset_url": "https://www.wikidata.org/wiki/Wikidata:Main_Page",
+      "declared_jurisdiction": "global",
+      "declared_license": "CC0",
+      "declared_rights": "crosswalk metadata only",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "open_knowledge_graph_link",
+      "distribution_urls": [
+        "https://query.wikidata.org/"
+      ],
+      "domain_guess": "public_language_learning_reference",
+      "evidence_hash": "3ac22d8c06f239c3ba39097c0bc76bfe835edbae8a7ed4b77b32a27cd6d89942",
+      "frontier_id": "public_language_learning_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "new-language-learning-public-reference",
+      "publisher_name": "Wikidata",
+      "publisher_url": "https://www.wikidata.org/",
+      "redistribution_guess": "open_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "schema_version": "1.0.0",
+      "source_class_guess": "open_knowledge_graph",
+      "terms_url": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use"
+    },
+    {
+      "api_docs_url": "https://catalog.data.gov/api/3/action/package_search",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate_source.ed06d8886b87706c",
+      "candidate_score": 30,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "public_program_reference"
+      ],
+      "dataset_url": "https://catalog.data.gov/dataset",
+      "declared_jurisdiction": "US",
+      "declared_license": "catalog metadata only",
+      "declared_rights": "source-of-sources only",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "public_catalog",
+      "distribution_urls": [
+        "https://catalog.data.gov/dataset"
+      ],
+      "domain_guess": "public_program_reference",
+      "evidence_hash": "8000c8f6986600e40f45895d1cdecde38637a7ed8bc29428e3f290bda4735a37",
+      "frontier_id": "public_program_reference",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "ambiguous-public-program-reference",
+      "publisher_name": "Data.gov catalog",
+      "publisher_url": "https://catalog.data.gov/",
+      "redistribution_guess": "unclear",
+      "review_required": true,
+      "rights_url": "https://www.data.gov/privacy-policy/",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.data.gov/privacy-policy/"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.frontierCandidateSources.v1"
+}

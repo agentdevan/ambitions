@@ -1,0 +1,1231 @@
+{
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "claim_graph_written",
+      "passed": true
+    },
+    {
+      "name": "packable_claims_have_complete_provenance_tuple",
+      "passed": true
+    },
+    {
+      "name": "missing_provenance_blocks_pack_output",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_excluded_from_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "crosswalk_only_sources_excluded_from_regulated_authority",
+      "passed": true
+    },
+    {
+      "name": "candidate_only_frontiers_do_not_claim_pack_readiness",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "claimBlockers": [
+    {
+      "blocked_reasons": [
+        "claim_review_required",
+        "confidence_review_required",
+        "governance_pack_blocked",
+        "legal_pack_output_not_allowed",
+        "legal_review_required",
+        "redistribution_policy_review_required",
+        "review_status_review_required",
+        "source_policy_pack_blocked_unknown_terms"
+      ],
+      "claim_id": "canonical_claim.3e6d47fdb46bb784",
+      "claim_type": "candidate_education_program_reference",
+      "pack_eligibility": "blocked_legal_terms",
+      "source_id": "college-scorecard.api"
+    },
+    {
+      "blocked_reasons": [
+        "claim_review_required",
+        "confidence_review_required",
+        "governance_pack_blocked",
+        "legal_pack_output_not_allowed",
+        "legal_review_required",
+        "redistribution_policy_review_required",
+        "review_status_review_required",
+        "source_policy_pack_blocked_unknown_terms"
+      ],
+      "claim_id": "canonical_claim.97d0a7b2c25b3599",
+      "claim_type": "candidate_institution_reference",
+      "pack_eligibility": "blocked_legal_terms",
+      "source_id": "college-scorecard.api"
+    },
+    {
+      "blocked_reasons": [
+        "claim_review_required",
+        "confidence_review_required",
+        "governance_pack_blocked",
+        "legal_pack_output_not_allowed",
+        "legal_review_required",
+        "redistribution_policy_review_required",
+        "review_status_review_required",
+        "source_policy_pack_blocked_unknown_terms"
+      ],
+      "claim_id": "canonical_claim.cf953c8324624a8f",
+      "claim_type": "candidate_institution_reference",
+      "pack_eligibility": "blocked_legal_terms",
+      "source_id": "college-scorecard.api"
+    },
+    {
+      "blocked_reasons": [
+        "claim_review_required",
+        "confidence_review_required",
+        "governance_pack_blocked",
+        "legal_pack_output_not_allowed",
+        "legal_review_required",
+        "redistribution_policy_review_required",
+        "review_status_review_required",
+        "source_policy_pack_blocked_unknown_terms"
+      ],
+      "claim_id": "canonical_claim.770d0b7069f3df30",
+      "claim_type": "candidate_education_program_reference",
+      "pack_eligibility": "blocked_legal_terms",
+      "source_id": "college-scorecard.api"
+    },
+    {
+      "blocked_reasons": [
+        "claim_review_required",
+        "confidence_review_required",
+        "governance_pack_blocked",
+        "legal_pack_output_not_allowed",
+        "legal_review_required",
+        "redistribution_policy_review_required",
+        "review_status_review_required",
+        "source_policy_pack_blocked_unknown_terms"
+      ],
+      "claim_id": "canonical_claim.1e89cb825e1ec249",
+      "claim_type": "candidate_education_program_reference",
+      "pack_eligibility": "blocked_legal_terms",
+      "source_id": "college-scorecard.api"
+    },
+    {
+      "blocked_reasons": [
+        "claim_review_required",
+        "confidence_review_required",
+        "governance_pack_blocked",
+        "legal_pack_output_not_allowed",
+        "legal_review_required",
+        "redistribution_policy_review_required",
+        "review_status_review_required",
+        "source_policy_pack_blocked_unknown_terms"
+      ],
+      "claim_id": "canonical_claim.181e6edefbb63abd",
+      "claim_type": "candidate_institution_reference",
+      "pack_eligibility": "blocked_legal_terms",
+      "source_id": "college-scorecard.api"
+    }
+  ],
+  "createdAt": "2026-06-27T00:00:00Z",
+  "freshnessCompliance": {
+    "claimCount": 6,
+    "complete": true,
+    "freshCount": 6,
+    "percent": 1.0
+  },
+  "frontierConfigPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/coverage-frontiers.json",
+  "frontierReports": [
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_government",
+          "standards_body"
+        ],
+        "present": [],
+        "required": [
+          "official_government",
+          "standards_body"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "business_formation_reference",
+        "public_program_reference",
+        "public_standard_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "business_entrepreneurship",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "business_entrepreneurship",
+      "goal_intent_classes": [
+        "business_formation_reference",
+        "entrepreneurship_public_program_reference"
+      ],
+      "gold_set_status": "required_not_present",
+      "jurisdictions": [
+        "US",
+        "state_specific"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "business_formation_reference",
+        "public_program_reference",
+        "public_standard_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a personalized incorporation strategy",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not full Source Atlas Green",
+        "not legal advice",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not tax advice",
+        "not universal goal coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_institution",
+          "scholarly_metadata",
+          "standards_body"
+        ],
+        "present": [],
+        "required": [
+          "official_institution",
+          "scholarly_metadata",
+          "standards_body"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "creative_metadata_reference",
+        "public_learning_resource",
+        "public_standard_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "creative_project_reference",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "creative_project_reference",
+      "goal_intent_classes": [
+        "creative_learning_reference",
+        "tool_or_standard_reference"
+      ],
+      "gold_set_status": "not_required",
+      "jurisdictions": [
+        "global"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "creative_metadata_reference",
+        "public_learning_resource",
+        "public_standard_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final creative plan",
+        "not a final user plan, schedule, or Step generator",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not copyright permission",
+        "not full Source Atlas Green",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not redistribution approval beyond listed sources",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_institution"
+        ],
+        "present": [
+          "official_government"
+        ],
+        "required": [
+          "official_government",
+          "official_institution"
+        ]
+      },
+      "blocked_claim_count": 6,
+      "candidate_only_count": 1,
+      "claim_classes": [
+        "candidate_education_program_reference",
+        "candidate_institution_reference",
+        "credential_requirement"
+      ],
+      "conflict_status": "no_conflict_detected",
+      "covered_claim_classes": [],
+      "domain": "education_credentialing",
+      "freshness_compliance": {
+        "claimCount": 6,
+        "complete": true,
+        "freshCount": 6,
+        "percent": 1.0
+      },
+      "frontier_id": "education_credentialing",
+      "goal_intent_classes": [
+        "education_program_reference",
+        "credential_context_reference"
+      ],
+      "gold_set_status": "required_not_present",
+      "jurisdictions": [
+        "US"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 1,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "candidate_education_program_reference",
+        "candidate_institution_reference",
+        "credential_requirement"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a personalized degree plan",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not admissions advice",
+        "not an official legal, medical, financial, or admissions decision",
+        "not financial aid guidance",
+        "not full Source Atlas Green",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 6,
+        "complete": true,
+        "completeTupleCount": 6,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [
+        {
+          "r2PackPolicy": "pack_blocked_unknown_terms",
+          "reason": "source lane is not pack-allowed or has policy blockers",
+          "redistributionPolicy": "review_required",
+          "sourceID": "college-scorecard.api"
+        },
+        {
+          "r2PackPolicy": "blocked_legal_terms",
+          "reason": "blocked_legal_terms",
+          "sourceID": "college-scorecard.api"
+        }
+      ],
+      "schemaVersion": 1,
+      "source_lanes": [
+        "college-scorecard.api"
+      ],
+      "status": "adapter_ready",
+      "status_ceiling": "adapter_ready"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_government",
+          "regulated_body"
+        ],
+        "present": [],
+        "required": [
+          "official_government",
+          "regulated_body"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "official_benefit_program_reference",
+        "public_financial_education",
+        "tax_deadline_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "finance_public_reference",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "finance_public_reference",
+      "goal_intent_classes": [
+        "financial_education_reference",
+        "benefit_program_reference"
+      ],
+      "gold_set_status": "required_not_present",
+      "jurisdictions": [
+        "US"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "official_benefit_program_reference",
+        "public_financial_education",
+        "tax_deadline_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a personalized financial plan",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not full Source Atlas Green",
+        "not investment advice",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not tax advice",
+        "not universal goal coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_government",
+          "official_institution"
+        ],
+        "present": [],
+        "required": [
+          "official_government",
+          "official_institution"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "exercise_taxonomy",
+        "public_health_guideline",
+        "wellness_safety_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "health_wellness_reference",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "health_wellness_reference",
+      "goal_intent_classes": [
+        "wellness_reference",
+        "fitness_safety_reference"
+      ],
+      "gold_set_status": "required_not_present",
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "exercise_taxonomy",
+        "public_health_guideline",
+        "wellness_safety_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a private user-data backend",
+        "not a treatment plan",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not diagnosis",
+        "not full Source Atlas Green",
+        "not medical advice",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_government",
+          "standards_body"
+        ],
+        "present": [],
+        "required": [
+          "official_government",
+          "standards_body"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "learning_resource_reference",
+        "public_rules_reference",
+        "safety_guidance_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "hobbies_recreation",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "hobbies_recreation",
+      "goal_intent_classes": [
+        "hobby_learning_reference",
+        "recreation_safety_reference"
+      ],
+      "gold_set_status": "not_required",
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "learning_resource_reference",
+        "public_rules_reference",
+        "safety_guidance_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a personalized recreation plan",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not full Source Atlas Green",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not restricted membership data",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage",
+        "not unsafe instructions"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_government",
+          "standards_body"
+        ],
+        "present": [],
+        "required": [
+          "official_government",
+          "standards_body"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "maintenance_guidance_reference",
+        "public_service_reference",
+        "safety_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "home_life_admin",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "home_life_admin",
+      "goal_intent_classes": [
+        "home_admin_reference",
+        "local_service_reference"
+      ],
+      "gold_set_status": "not_required",
+      "jurisdictions": [
+        "US",
+        "local"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "maintenance_guidance_reference",
+        "public_service_reference",
+        "safety_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a household schedule",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not full Source Atlas Green",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private home data storage",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage",
+        "not unsafe repair instructions"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_coverage": {
+        "complete": true,
+        "missing": [],
+        "present": [
+          "official_government",
+          "scholarly_metadata"
+        ],
+        "required": [
+          "official_government",
+          "scholarly_metadata"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "labor_market_context",
+        "occupation_taxonomy",
+        "research_topic_context"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "occupation_foundation",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "occupation_foundation",
+      "goal_intent_classes": [
+        "career_occupation_reference",
+        "skill_context_reference"
+      ],
+      "gold_set_status": "not_required",
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": true,
+        "completeCount": 4,
+        "laneCount": 4,
+        "percent": 1.0
+      },
+      "missing_claim_classes": [
+        "labor_market_context",
+        "occupation_taxonomy",
+        "research_topic_context"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a personalized job ranking",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not career advice",
+        "not full Source Atlas Green",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage",
+        "not universal occupation coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "status": "source_review_ready",
+      "status_ceiling": "claim_graph_ready"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_institution",
+          "scholarly_metadata"
+        ],
+        "present": [],
+        "required": [
+          "official_institution",
+          "scholarly_metadata"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "public_learning_reference",
+        "research_metadata_reference",
+        "sensitive_wellness_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "personal_growth",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "personal_growth",
+      "goal_intent_classes": [
+        "personal_growth_learning_reference",
+        "general_habit_science_reference"
+      ],
+      "gold_set_status": "not_required",
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "public_learning_reference",
+        "research_metadata_reference",
+        "sensitive_wellness_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a cloud-personalized self-improvement plan",
+        "not a final user plan, schedule, or Step generator",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not diagnosis",
+        "not full Source Atlas Green",
+        "not mental health treatment",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_coverage": {
+        "complete": true,
+        "missing": [],
+        "present": [
+          "official_government"
+        ],
+        "required": [
+          "official_government"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "constitutional_requirement",
+        "eligibility_requirement"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "public_civic_requirements",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "public_civic_requirements",
+      "goal_intent_classes": [
+        "public_civic_reference",
+        "government_requirement_reference"
+      ],
+      "gold_set_status": "required_not_present",
+      "jurisdictions": [
+        "US federal"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": true,
+        "completeCount": 1,
+        "laneCount": 1,
+        "percent": 1.0
+      },
+      "missing_claim_classes": [
+        "constitutional_requirement",
+        "eligibility_requirement"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not full Source Atlas Green",
+        "not guaranteed eligibility",
+        "not legal advice",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage",
+        "not universal government coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [
+        "nara.constitution.presidency"
+      ],
+      "status": "source_review_ready",
+      "status_ceiling": "source_review_ready"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_government",
+          "official_institution"
+        ],
+        "present": [],
+        "required": [
+          "official_government",
+          "official_institution"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "public_education_reference",
+        "public_family_service_reference",
+        "sensitive_support_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "relationships_family",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "relationships_family",
+      "goal_intent_classes": [
+        "family_admin_reference",
+        "relationship_education_reference"
+      ],
+      "gold_set_status": "required_not_present",
+      "jurisdictions": [
+        "US"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "public_education_reference",
+        "public_family_service_reference",
+        "sensitive_support_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not full Source Atlas Green",
+        "not legal custody advice",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not personalized relationship judgment",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not therapy",
+        "not universal goal coverage"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_coverage": {
+        "complete": false,
+        "missing": [
+          "official_government"
+        ],
+        "present": [],
+        "required": [
+          "official_government"
+        ]
+      },
+      "blocked_claim_count": 0,
+      "candidate_only_count": 0,
+      "claim_classes": [
+        "official_travel_requirement",
+        "public_safety_notice",
+        "relocation_admin_reference"
+      ],
+      "conflict_status": "not_evaluated",
+      "covered_claim_classes": [],
+      "domain": "travel_relocation",
+      "freshness_compliance": {
+        "claimCount": 0,
+        "complete": false,
+        "freshCount": 0,
+        "percent": 0.0
+      },
+      "frontier_id": "travel_relocation",
+      "goal_intent_classes": [
+        "travel_requirement_reference",
+        "relocation_admin_reference"
+      ],
+      "gold_set_status": "required_not_present",
+      "jurisdictions": [
+        "US",
+        "destination_specific"
+      ],
+      "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+      "legal_posture_completeness": {
+        "complete": false,
+        "completeCount": 0,
+        "laneCount": 0,
+        "percent": 0.0
+      },
+      "missing_claim_classes": [
+        "official_travel_requirement",
+        "public_safety_notice",
+        "relocation_admin_reference"
+      ],
+      "non_claims": [
+        "not R2 release readiness",
+        "not a final user plan, schedule, or Step generator",
+        "not a personalized itinerary",
+        "not a private user-data backend",
+        "not accessibility, privacy, or legal approval",
+        "not an official legal, medical, financial, or admissions decision",
+        "not full Source Atlas Green",
+        "not legal advice",
+        "not native app runtime readiness",
+        "not outside legal approval",
+        "not private life graph storage",
+        "not production R2 readiness",
+        "not runtime recommendation proof by itself",
+        "not universal goal coverage",
+        "not visa advice"
+      ],
+      "packable_claim_count": 0,
+      "provenance_completeness": {
+        "claimCount": 0,
+        "complete": true,
+        "completeTupleCount": 0,
+        "packableClaimCount": 0,
+        "packableCompleteTupleCount": 0,
+        "packablePercent": 1.0
+      },
+      "restricted_exclusions": [],
+      "schemaVersion": 1,
+      "source_lanes": [],
+      "status": "not_started",
+      "status_ceiling": "candidate_only"
+    }
+  ],
+  "inputRoot": "tools/source-atlas/generated/governed-harvest/train-08-education-fixture",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.claimFrontierManifest.v1",
+  "legalPostureCompleteness": {
+    "claimCount": 6,
+    "complete": false,
+    "completeCount": 0,
+    "percent": 0.0
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputHashes": {
+    "citationGraph": "e78f7cab828544f87ee39df17715259884ee3cbdc7d535ef889f1d700ff050a8",
+    "claimGraph": "214a2b35c08435f7a6638267830d0b3791d2003acb23233bf0ca9ebb071fc370",
+    "coverageFrontierReport": "ba47495d3dda66b03c37456ed39ab7eed31d2017f646f92f72bdd0b1243821c8",
+    "manifest": "78b6f10669cd515a1803b35f65dc695329a485e09710861b00b5adb7d083a45a"
+  },
+  "outputPaths": {
+    "citationGraph": "tools/source-atlas/generated/claim-frontier/train-08-education-fixture/citation-graph.json",
+    "claimGraph": "tools/source-atlas/generated/claim-frontier/train-08-education-fixture/claim-graph.json",
+    "closeout": "tools/source-atlas/generated/claim-frontier/train-08-education-fixture/closeout.md",
+    "coverageFrontierReport": "tools/source-atlas/generated/claim-frontier/train-08-education-fixture/coverage-frontier-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "provenanceCompleteness": {
+    "claimCount": 6,
+    "complete": true,
+    "completeTupleCount": 6,
+    "packableClaimCount": 0,
+    "packableCompleteTupleCount": 0,
+    "packablePercent": 1.0
+  },
+  "recordCounts": {
+    "blockedClaims": 6,
+    "citations": 6,
+    "claims": 6,
+    "entities": 6,
+    "frontiers": 12,
+    "packableClaims": 0
+  },
+  "restrictedExclusions": [
+    {
+      "r2PackPolicy": "pack_blocked_unknown_terms",
+      "reason": "source lane is not pack-allowed or has policy blockers",
+      "redistributionPolicy": "review_required",
+      "sourceID": "college-scorecard.api"
+    },
+    {
+      "r2PackPolicy": "blocked_legal_terms",
+      "reason": "blocked_legal_terms",
+      "sourceID": "college-scorecard.api"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; claim graph and coverage frontier tooling only",
+  "status": "Source Green for claim/frontier tooling",
+  "valid": true,
+  "versionID": "source-atlas-claim-frontier-train-03"
+}

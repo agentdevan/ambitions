@@ -1,0 +1,16 @@
+{
+  "args": [
+    "wrangler",
+    "deploy",
+    "--config",
+    "tools/source-atlas/r2-public-gateway/wrangler.jsonc"
+  ],
+  "attempted": true,
+  "issues": [],
+  "outputRoot": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-deploy-live-verify",
+  "returnCode": 0,
+  "stderr": "",
+  "stdout": "\n ⛅️ wrangler 4.104.0\n────────────────────\nTotal Upload: 8.20 KiB / gzip: 1.55 KiB\nYour Worker has access to the following bindings:\nBinding                                                    Resource       \nenv.SOURCE_ATLAS_BUCKET (ambitions-source-atlas-prod)      R2 Bucket      \n\nUploaded ambitions-source-atlas-public-gateway (2.05 sec)\nDeployed ambitions-source-atlas-public-gateway triggers (0.61 sec)\n  https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev\nCurrent Version ID: 44eba82b-9232-46bb-a3ac-c9d2fbe98d24\n",
+  "success": true,
+  "workerVersionID": "44eba82b-9232-46bb-a3ac-c9d2fbe98d24"
+}

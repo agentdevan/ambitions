@@ -1,0 +1,60 @@
+{
+  "catalogRecords": [
+    {
+      "blocking_reasons": [
+        "catalog_metadata_not_claim_authority",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "candidate_score_cannot_override_review"
+      ],
+      "catalog_id": "catalog.01cb60b06d29df20",
+      "catalog_kind": "dcat_data_json",
+      "catalog_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/data-json-public-catalog.json",
+      "claim_authority_allowed": false,
+      "dataset_count": 2,
+      "evidence_hash": "495c3b75a78f619aac0316fd5d976b5016f9b1e68b2179a622890f49d9be1002",
+      "pack_output_allowed": false,
+      "parsed_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "schema_version": "1.0.0"
+    },
+    {
+      "blocking_reasons": [
+        "catalog_metadata_not_claim_authority",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "candidate_score_cannot_override_review"
+      ],
+      "catalog_id": "catalog.622fe5e781692dc7",
+      "catalog_kind": "ckan_package_search",
+      "catalog_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/ckan-package-search-public-catalog.json",
+      "claim_authority_allowed": false,
+      "dataset_count": 2,
+      "evidence_hash": "45a09983184d5c0109460933dd72ee65d4c97744231a657450a16a085d4ecb40",
+      "pack_output_allowed": false,
+      "parsed_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "schema_version": "1.0.0"
+    },
+    {
+      "blocking_reasons": [
+        "catalog_metadata_not_claim_authority",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "candidate_score_cannot_override_review"
+      ],
+      "catalog_id": "catalog.a8875ebfa1aababf",
+      "catalog_kind": "schema_org",
+      "catalog_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/schema-org-public-catalog.json",
+      "claim_authority_allowed": false,
+      "dataset_count": 2,
+      "evidence_hash": "a84f5b1ba1da2654c0236ffc140afbfe67a4a97623b6aa09b1d02fee2bfe3a9a",
+      "pack_output_allowed": false,
+      "parsed_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "schema_version": "1.0.0"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.discoveryCatalogs.v1"
+}

@@ -1,0 +1,341 @@
+{
+  "allowedTravelResponses": [
+    {
+      "byteCount": 1704,
+      "expectedSHA256": "05ee11efd369cb28554e59a6f607a48eeea0f2c51cab0e2d24eb2e54652e2fd9",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=120",
+        "cf-ray": "a12b62f84ef4818c-IAD",
+        "content-length": "1704",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 08:40:25 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=6bterGWyFtMOlunrhSbQ5hVpaOFpJRoldF1t8PePttk2t7cSFmZ90VQImUVw5B1wDTW5RU2XQhTqzhnUn65AAftKZJLYi9xps95vCRXiN%2FcFJ%2FPURfZi7eQkQE6AdBzjfuwce4EmE%2FusoZh%2BGod5LOcGBasOgvzy1WCokTtPbtBX1vKdnQvzsN9wLpqi%2Bey9WAgNhqPajy5fjnum\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/travel_relocation/current.json",
+      "publicGatewayHeader": "true",
+      "returnCode": 0,
+      "sha256": "05ee11efd369cb28554e59a6f607a48eeea0f2c51cab0e2d24eb2e54652e2fd9",
+      "status": 200,
+      "stderr": ""
+    },
+    {
+      "byteCount": 1244,
+      "expectedSHA256": "7478d1c7620b03efcfe088bce8d1f12e7d1688abe6be1e2cba5f364205deaccb",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=3600",
+        "cf-ray": "a12b62f97ef44f8b-IAD",
+        "content-length": "1244",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 08:40:25 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=sKWDAgCtYamiC3EupL2x1HWx8ldnAqt2Ed1V5DdnHis59sOOaYyFyCjJapBot2uYse3oDMhteXBBXfGYv%2BIQbpxH5zBZGPwbK6ZlsQQcMlhlOmoaEa2P6gcnFuJbkwipU1oStiwqaE7vOTNnI7GPxaySAH77eq4%2FgwYWiguQ0dZ7OVZ1tULgnwSPG6jDbLgYWYNf9UHx0%2FtaiP%2FO\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+      "publicGatewayHeader": "true",
+      "returnCode": 0,
+      "sha256": "7478d1c7620b03efcfe088bce8d1f12e7d1688abe6be1e2cba5f364205deaccb",
+      "status": 200,
+      "stderr": ""
+    },
+    {
+      "byteCount": 1397,
+      "expectedSHA256": "8fad0dcf13c5effee5a90b68927f214f920482a49d5b078348685d1ff8d1ffbd",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=3600",
+        "cf-ray": "a12b62fa8f86395b-IAD",
+        "content-length": "1397",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 08:40:26 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=qKQIvMd9mO%2Blu2Do9Lio9W40l3UmxnBzxB09rJzpwnT7EvDUw0vW0kYJuA9udPT%2FM%2BCBTca16Vj%2FNvGYmfqvZbsu90GI14nJPCmfq9H3SbwP6DK5X996HsHYfO7nUkuttKRbFd9zcarMSLK%2BZJfIkByAtbqfSCIpryqHPcHnTy0qg3bX%2BIuiR9eb9LLW0udKbXsf%2BpZrD6J5f1zy\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+      "publicGatewayHeader": "true",
+      "returnCode": 0,
+      "sha256": "8fad0dcf13c5effee5a90b68927f214f920482a49d5b078348685d1ff8d1ffbd",
+      "status": 200,
+      "stderr": ""
+    },
+    {
+      "byteCount": 8557,
+      "expectedSHA256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=3600",
+        "cf-ray": "a12b62fbb994082d-IAD",
+        "content-length": "8557",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 08:40:26 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=771X%2BYF0mn3rWh%2F3ksQKFmmI4HFHM%2BfqQqMZtJ6qXdAh1HclIcihUnVfEFl35NzIw1b0Pjsc%2BeCcIBQ7xJWtH548WDebOrLns8v2QTP8aSCEn25seqkcr9qoKTfjhdjcNeb8N7xT7WumhAryEMx2xh5zDV%2BLdyys7FEo0P1u%2BcXXD%2F%2FUrDnG8EwCkf8w4HjRF%2FEpXrIphT0Oirs8\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+      "publicGatewayHeader": "true",
+      "returnCode": 0,
+      "sha256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+      "status": 200,
+      "stderr": ""
+    },
+    {
+      "byteCount": 18773,
+      "expectedSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=3600",
+        "cf-ray": "a12b62fccec9e631-IAD",
+        "content-length": "18773",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 08:40:26 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=D1C%2B8kEBLYmEgnF%2FwaR%2FZg0hTo3mVqtDF2yIWKoCSPGwF5Y4PsTOeD7f5WE5f6TLkbwBT%2B8WHSd6uEvPl%2FRy%2B0lgAVgwJlffDMkvHM2aEBIkYydm14JwDHsHjhsmJoKn5hDfoyjAmp0rTvj2IYsWPBJuqOm69zh1gJFTgnt8dX8m4mJsrOIc8ItGUl7sREbcwCMETb0dETeUJCBo\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+      "publicGatewayHeader": "true",
+      "returnCode": 0,
+      "sha256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+      "status": 200,
+      "stderr": ""
+    }
+  ],
+  "blockedRouteResponses": [
+    {
+      "byteCount": 9,
+      "expectedStatus": 404,
+      "gatewayHeader": null,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "no-store",
+        "cf-ray": "a12b62fe5e73e8c5-IAD",
+        "content-length": "9",
+        "content-type": "text/plain;charset=UTF-8",
+        "date": "Sun, 28 Jun 2026 08:40:26 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=cJlvq0EqFSEfS3xYnge0b%2Bm6dyuFQUrnQrrPRzbd6JoWq14cosotE1uvfvVNEaXbH1FmsJ8pdWUAx0%2BEZJxfnbuX%2F%2Fvh%2FMpn8BBvq12nGTzMx2%2FlQRevcSW2%2FVqI2cg7NOckeKFu%2FOmVVW8MRzT5AO3VX0AKm%2FK9HsmK70XdMzQVVP3SOTF62GM6yhgJSoBHdpCsU2m7vWorCEcH\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "GET",
+      "passed": true,
+      "path": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/claims.json",
+      "publicGatewayHeader": null,
+      "returnCode": 0,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404,
+      "stderr": ""
+    },
+    {
+      "byteCount": 9,
+      "expectedStatus": 404,
+      "gatewayHeader": null,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "no-store",
+        "cf-ray": "a12b62ff3e4d4a55-IAD",
+        "content-length": "9",
+        "content-type": "text/plain;charset=UTF-8",
+        "date": "Sun, 28 Jun 2026 08:40:26 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=DNbmjZyqegc3AWXM11fvwdetjAOatydibYdErKJcQ5wOdaY%2BRvRMrn07kd7YIGxGL8%2BxH6%2BNjQS3jJoT2G%2FdNx980eRvw8v9nG8SeCCl05urI6eOXB5zoS3PnORsZl1%2FQZ%2FHVc6OJ31dZ6C3otnQKAGw5udujQZpzKJRenzhRl9GPFz3tRjkSVW6HyHctgYBv1Mc8sdatZKS4203\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "GET",
+      "passed": true,
+      "path": "source-atlas/v1/production/stable/travel_relocation/current.json?goal_text=private",
+      "publicGatewayHeader": null,
+      "returnCode": 0,
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404,
+      "stderr": ""
+    },
+    {
+      "byteCount": 18,
+      "expectedStatus": 405,
+      "gatewayHeader": null,
+      "headers": {
+        "allow": "GET, HEAD",
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "no-store",
+        "cf-ray": "a12b63001d48d6f5-IAD",
+        "content-length": "18",
+        "content-type": "text/plain;charset=UTF-8",
+        "date": "Sun, 28 Jun 2026 08:40:26 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=G0uXkXCh6OvtF0wTYhKREZStRjPhpD5FDoSi%2B3o%2BJ3CS%2B%2BnqGS6f2r18iUvtt%2Fr2EQkhe%2FchO6%2Bu6eU577PL2xvRgEfrZQ8duMSa1JVuDPBEneH%2FbdWQqKXLVntXTplPc2%2F5OUN9ooJ4OW2PPrVdfOjlN4yUKkO47niP5F9CF66MV9eJff7Jq2bhtjwqjwOMSV8by1nrstTjJgK%2B\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff"
+      },
+      "method": "POST",
+      "passed": true,
+      "path": "source-atlas/v1/production/stable/travel_relocation/current.json",
+      "publicGatewayHeader": null,
+      "returnCode": 0,
+      "sha256": "371b26886bee5e559d5016b17b1479cb7a9154865da5a0f11563580ea99ff033",
+      "status": 405,
+      "stderr": ""
+    }
+  ],
+  "checks": [
+    {
+      "name": "travel_allowed_routes_200",
+      "passed": true
+    },
+    {
+      "name": "travel_hashes_match_publisher",
+      "passed": true
+    },
+    {
+      "name": "public_gateway_headers_present_on_allowed_routes",
+      "passed": true
+    },
+    {
+      "name": "existing_domain_current_pointers_still_available",
+      "passed": true
+    },
+    {
+      "name": "private_or_unallowlisted_routes_blocked",
+      "passed": true
+    },
+    {
+      "name": "blocked_routes_do_not_return_public_reference_header",
+      "passed": true
+    },
+    {
+      "name": "pack_consistency",
+      "passed": true
+    },
+    {
+      "name": "no_private_graph_egress_shape",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "deployedVersionID": "e6349195-a7f0-4c37-99cd-8c528297a10b",
+  "domain": "travel_relocation",
+  "endpoint": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "existingCurrentPointers": [
+    {
+      "domain": "occupation_foundation",
+      "path": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "public_civic_requirements",
+      "path": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "education_credentialing",
+      "path": "source-atlas/v1/production/stable/education_credentialing/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "business_entrepreneurship",
+      "path": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "hobbies_recreation",
+      "path": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "health_wellness_reference",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "travel_relocation",
+      "path": "source-atlas/v1/production/stable/travel_relocation/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    }
+  ],
+  "gatewayURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "kind": "ambitions.sourceAtlas.publicR2WorkerGatewayReadbackProof.v1",
+  "manifestKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+  "nonClaims": [
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not release readiness",
+    "not universal coverage",
+    "not private graph storage",
+    "not final user plan, schedule, or Step generation",
+    "not visa advice",
+    "not legal advice",
+    "not emergency advice",
+    "not a safety guarantee",
+    "not a custom itinerary"
+  ],
+  "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+  "packKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+  "packVersion": "20260628T000000Z",
+  "pack_consistency": {
+    "currentPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+    "currentPackSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+    "currentPointerHashConsistent": true,
+    "expectedPackSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+    "manifestPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+    "manifestSHA256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+    "packBodyPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+    "packHashConsistent": true,
+    "packIDConsistent": true,
+    "packSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+    "status": "green_for_bounded_travel_relocation_gateway_https_readback_yellow_overall_source_atlas"
+  },
+  "publisherReport": "docs/qa/source-atlas/r2/source-atlas-travel-r2-publisher-remote-r2-train-46.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded Worker gateway HTTPS readback only",
+  "status": "green_for_bounded_travel_relocation_gateway_https_readback_yellow_overall_source_atlas",
+  "title": "Source Atlas public Worker gateway travel relocation HTTPS readback proof",
+  "valid": true
+}

@@ -1,0 +1,95 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.legalTermsApprovalPacket.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not production R2 readiness",
+    "not release readiness",
+    "not universal coverage",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outsideLegalApprovalBoundary": "outside legal approval requires a current source-specific approval artifact",
+  "outsideLegalApprovalClaimed": false,
+  "packetID": "source-atlas/legal-terms-approval/f74e23e8cf3d4d2a",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "reviewOwner": "Ambitions owner technical review",
+  "reviewType": "internal_source_atlas_legal_terms_review",
+  "schemaVersion": 1,
+  "sourceApprovals": [
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the Centers for Disease Control and Prevention.",
+      "datasetURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "distributionURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "evidenceHash": "74de148d0db9ccee4f926706ac3dfae5a88f058515cbba12730ee209afe123e2",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.cdc.gov/other/agencymaterials.html"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with CDC attribution, no-endorsement, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "licenseVersion": "current CDC.gov reuse posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Ambitions owner technical review",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://www.cdc.gov/other/agencymaterials.html",
+      "sourceID": "cdc.physical-activity.basics",
+      "sourceName": "CDC Physical Activity Basics public reference pages",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.cdc.gov/other/agencymaterials.html"
+    }
+  ],
+  "status": "Green",
+  "statusReason": "internal source-specific terms review complete for approved lanes; blocked or review-required lanes remain excluded",
+  "userAuthorization": "User authorized extensive internal legal/terms review for bounded Source Atlas Green claims; this is not outside legal approval.",
+  "versionID": "source-atlas-legal-terms-approval-packet-v1"
+}

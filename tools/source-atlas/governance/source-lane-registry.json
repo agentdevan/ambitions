@@ -1,0 +1,2362 @@
+{
+  "kind": "ambitions.sourceAtlas.sourceLaneRegistry.v1",
+  "registries_version": "source-atlas-governance-train-01",
+  "schema_version": "1.0.0",
+  "source_lanes": [
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "public_family_service_reference",
+        "public_education_reference"
+      ],
+      "claim_classes_forbidden": [
+        "therapy",
+        "legal_advice",
+        "legal_custody_advice",
+        "eligibility_approval",
+        "relationship_judgment",
+        "personalized_relationship_plan",
+        "private_family_profile",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "relationships_family",
+        "public_family_program_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_acf_hmrf_and_digital_policy_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "acf_hmrf_public_web",
+      "license_url": "https://acf.gov/digital-policies",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not therapy",
+        "not legal advice",
+        "not legal custody advice",
+        "not eligibility approval",
+        "not relationship judgment",
+        "not a personalized relationship plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/relationships-family-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://acf.gov/digital-policies",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "acf.healthy_marriage_fatherhood",
+      "source_name": "ACF Healthy Marriage and Responsible Fatherhood public reference pages",
+      "terms_url": "https://acf.gov/digital-policies"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "public_api_v1_no_key_v2_optional_key",
+      "api_policy_id": "api.bls_public_data.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.bls_public_data.v1",
+      "claim_classes_allowed": [
+        "labor_market_context",
+        "wage_reference",
+        "employment_reference"
+      ],
+      "claim_classes_forbidden": [
+        "employment_guarantee",
+        "financial_advice",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "occupation_foundation",
+        "labor_market",
+        "career"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "series_publication_schedule",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "bls_public_terms",
+      "license_url": "https://www.bls.gov/developers/termsOfService.htm",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not employment guarantee",
+        "not financial advice",
+        "not final user planning"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/labor-market-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.bls_public_data.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.bls.gov/developers/termsOfService.htm",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.bls_v2_optional.v1",
+      "source_class": "official_government",
+      "source_id": "bls.public.data.api",
+      "source_name": "BLS Public Data API",
+      "terms_url": "https://www.bls.gov/developers/termsOfService.htm"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "exercise_taxonomy",
+        "public_health_guideline",
+        "wellness_safety_reference"
+      ],
+      "claim_classes_forbidden": [
+        "medical_advice",
+        "diagnosis",
+        "treatment_plan",
+        "emergency_advice",
+        "personalized_fitness_plan",
+        "personalized_health_recommendation",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "health_wellness_reference",
+        "public_health_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_cdc_physical_activity_and_reuse_terms_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "cdc_public_web",
+      "license_url": "https://www.cdc.gov/other/agencymaterials.html",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not medical advice",
+        "not diagnosis",
+        "not a treatment plan",
+        "not emergency advice",
+        "not a personalized fitness plan",
+        "not universal health coverage",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/health-wellness-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.cdc.gov/other/agencymaterials.html",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "cdc.physical-activity.basics",
+      "source_name": "CDC Physical Activity Basics public reference pages",
+      "terms_url": "https://www.cdc.gov/other/agencymaterials.html"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "public_education_reference",
+        "sensitive_support_reference"
+      ],
+      "claim_classes_forbidden": [
+        "therapy",
+        "diagnosis",
+        "clinical_recommendation",
+        "medical_advice",
+        "emergency_advice",
+        "legal_custody_advice",
+        "child_protection_decision",
+        "personalized_parenting_plan",
+        "relationship_judgment",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "relationships_family",
+        "public_family_education_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_cdc_positive_parenting_and_reuse_terms_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "cdc_positive_parenting_public_web",
+      "license_url": "https://www.cdc.gov/other/agencymaterials.html",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not therapy",
+        "not diagnosis",
+        "not medical advice",
+        "not emergency advice",
+        "not legal custody advice",
+        "not a personalized parenting plan",
+        "not relationship judgment",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/relationships-family-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.cdc.gov/other/agencymaterials.html",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "cdc.positive_parenting",
+      "source_name": "CDC Positive Parenting Tips public reference pages",
+      "terms_url": "https://www.cdc.gov/other/agencymaterials.html"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "regulated_body",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "public_financial_education"
+      ],
+      "claim_classes_forbidden": [
+        "investment_advice",
+        "tax_advice",
+        "legal_advice",
+        "benefit_eligibility_guarantee",
+        "application_decision",
+        "personalized_financial_plan",
+        "account_data",
+        "transaction_profile",
+        "private_financial_profile",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "finance_public_reference",
+        "consumer_finance_public_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_cfpb_financial_education_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "cfpb_public_web",
+      "license_url": "https://www.consumerfinance.gov/privacy/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not investment advice",
+        "not tax advice",
+        "not debt advice",
+        "not a personalized financial plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/finance-public-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.consumerfinance.gov/privacy/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "cfpb.adult_financial_education",
+      "source_name": "CFPB adult financial education tools and resources",
+      "terms_url": "https://www.consumerfinance.gov/privacy/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_institution",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "public_family_service_reference",
+        "sensitive_support_reference"
+      ],
+      "claim_classes_forbidden": [
+        "child_protection_advice",
+        "legal_custody_advice",
+        "emergency_intervention",
+        "therapy",
+        "diagnosis",
+        "personalized_family_assessment",
+        "relationship_judgment",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "relationships_family",
+        "sensitive_family_support_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_childwelfare_resources_and_policy_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "childwelfare_public_web",
+      "license_url": "https://www.childwelfare.gov/information-gateway-policies/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not child protection advice",
+        "not legal custody advice",
+        "not emergency intervention",
+        "not therapy",
+        "not diagnosis",
+        "not a personalized family assessment",
+        "not relationship judgment",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/relationships-family-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.childwelfare.gov/information-gateway-policies/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_institution",
+      "source_id": "childwelfare.family_support",
+      "source_name": "Child Welfare Information Gateway family support public reference resources",
+      "terms_url": "https://www.childwelfare.gov/information-gateway-policies/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "candidate_source_record",
+        "discovery_metadata",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "official_public_api_fixture_first",
+      "api_policy_id": "api.college_scorecard.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.college_scorecard.v1",
+      "claim_classes_allowed": [
+        "candidate_education_program_reference",
+        "candidate_institution_reference"
+      ],
+      "claim_classes_forbidden": [
+        "admissions_advice",
+        "financial_aid_guarantee",
+        "regulated_credential_authority",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "education_credentialing",
+        "institution_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "college_scorecard_release_quarterly_review",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "education_public_data_review",
+      "license_url": "http://www.opendefinition.org/licenses/cc-by",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not admissions advice",
+        "not financial aid advice",
+        "not credentialing authority",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/education-credentialing-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.college_scorecard.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://data.ed.gov/data.json",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.college_scorecard_optional.v1",
+      "source_class": "official_government",
+      "source_id": "college-scorecard.api",
+      "source_name": "College Scorecard data API",
+      "terms_url": "https://collegescorecard.ed.gov/data/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_institution",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "creative_metadata_reference"
+      ],
+      "claim_classes_forbidden": [
+        "copyright_permission",
+        "license_selection_advice",
+        "trademark_permission",
+        "content_reuse_decision",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "creative_project_reference",
+        "public_creative_metadata_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_creative_commons_licenses_terms_and_policies_recheck",
+      "jurisdiction": "global",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "creativecommons_site_cc_by_4_cc0_tools",
+      "license_url": "https://creativecommons.org/policies/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not copyright permission",
+        "not license selection advice",
+        "not trademark permission",
+        "not a content reuse decision",
+        "not a final creative plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/creative-project-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://creativecommons.org/policies/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_institution",
+      "source_id": "creative-commons.licenses",
+      "source_name": "Creative Commons licenses and public-domain tools public reference page",
+      "terms_url": "https://creativecommons.org/terms/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata",
+        "public_provenance"
+      ],
+      "api_mode": "catalog_candidate_discovery",
+      "api_policy_id": "api.datagov_catalog.v1",
+      "attribution_required": true,
+      "authority_class": "public_catalog",
+      "budget_policy_id": "budget.datagov_catalog.v1",
+      "claim_classes_allowed": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "claim_classes_forbidden": [
+        "regulated_requirement_authority",
+        "public_requirement",
+        "legal_advice",
+        "medical_advice",
+        "financial_advice",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "source_discovery",
+        "public_catalog"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "catalog_harvest_cadence_only",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "catalog_dataset_specific_review",
+      "license_url": "https://resources.data.gov/open-licenses/",
+      "lookup_policy": "candidate_discovery_only",
+      "next_review_due_at": "2026-09-27",
+      "non_claims": [
+        "not claim authority",
+        "not source approval",
+        "not final user planning"
+      ],
+      "r2_pack_policy": "pack_blocked_unknown_terms",
+      "rate_policy_id": "rate.datagov_catalog.v1",
+      "redistribution_policy": "review_required",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": true,
+      "review_status": "candidate_only",
+      "rights_url": "https://resources.data.gov/open-licenses/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.datagov_optional.v1",
+      "source_class": "public_catalog",
+      "source_id": "data.gov.catalog",
+      "source_name": "Data.gov metadata catalog",
+      "terms_url": "https://resources.data.gov/open-licenses/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness",
+        "public_atom_edge_lattice"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "maintenance_guidance_reference"
+      ],
+      "claim_classes_forbidden": [
+        "contractor_recommendation",
+        "unsafe_repair_instructions",
+        "utility_guarantee",
+        "household_schedule",
+        "private_home_condition_diagnosis",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "home_life_admin",
+        "public_home_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_doe_energy_saver_and_web_policies_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "doe_public_web",
+      "license_url": "https://www.energy.gov/web-policies",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not contractor recommendation",
+        "not unsafe repair instructions",
+        "not a utility guarantee",
+        "not a household schedule",
+        "not private home diagnosis",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/home-life-admin-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.energy.gov/web-policies",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "energy.gov.energy_saver",
+      "source_name": "Department of Energy Energy Saver public home energy reference pages",
+      "terms_url": "https://www.energy.gov/web-policies"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "regulated_body",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "tax_deadline_reference"
+      ],
+      "claim_classes_forbidden": [
+        "investment_advice",
+        "tax_advice",
+        "legal_advice",
+        "benefit_eligibility_guarantee",
+        "application_decision",
+        "personalized_financial_plan",
+        "account_data",
+        "transaction_profile",
+        "private_financial_profile",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "finance_public_reference",
+        "tax_public_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_irs_deadline_recheck_stale_critical_before_tax_use",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "irs_public_web",
+      "license_url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not tax advice",
+        "not legal advice",
+        "not a personalized filing strategy",
+        "not investment advice",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/finance-public-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "irs.when_to_file",
+      "source_name": "IRS When to File individual return public reference page",
+      "terms_url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "public_learning_resource"
+      ],
+      "claim_classes_forbidden": [
+        "copyright_clearance",
+        "source_use_permission",
+        "content_reuse_decision",
+        "legal_advice",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "creative_project_reference",
+        "public_creative_learning_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_loc_primary_sources_page_and_legal_rights_recheck",
+      "jurisdiction": "US federal",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "loc_usgov_work",
+      "license_url": "https://www.loc.gov/legal/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not copyright clearance",
+        "not source-use permission",
+        "not a content reuse decision",
+        "not legal advice",
+        "not a final creative plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/creative-project-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "http://www.loc.gov/text-us-government-work",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "loc.primary_sources",
+      "source_name": "Library of Congress Getting Started with Primary Sources public learning reference page",
+      "terms_url": "https://www.loc.gov/legal/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "constitutional_requirement",
+        "eligibility_requirement"
+      ],
+      "claim_classes_forbidden": [
+        "legal_advice",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "public_civic_requirements"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "stable_law_watch_quarterly_review",
+      "jurisdiction": "US federal",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "us_federal_public_source",
+      "license_url": "https://www.usa.gov/government-works",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not legal advice",
+        "not universal civic coverage",
+        "not final user planning"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/civic-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.usa.gov/government-works",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "nara.constitution.presidency",
+      "source_name": "U.S. Constitution presidential eligibility",
+      "terms_url": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "program_requirement",
+        "credential_requirement",
+        "eligibility_requirement"
+      ],
+      "claim_classes_forbidden": [
+        "admissions_guarantee",
+        "employment_guarantee",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "career",
+        "space",
+        "public_service"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "selection_cycle_review",
+      "jurisdiction": "US federal",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "nasa_public_web",
+      "license_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not NASA endorsement",
+        "not selection guarantee",
+        "not final user planning"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/space-career-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "nasa.astronaut.requirements",
+      "source_name": "NASA astronaut candidate requirements",
+      "terms_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "program_requirement",
+        "selection_process_reference"
+      ],
+      "claim_classes_forbidden": [
+        "selection_guarantee",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "career",
+        "space",
+        "public_service"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "selection_cycle_review",
+      "jurisdiction": "US federal",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "nasa_public_web",
+      "license_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not NASA endorsement",
+        "not selection guarantee",
+        "not final user planning"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/space-career-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "nasa.astronaut.selection",
+      "source_name": "NASA astronaut selection program",
+      "terms_url": "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_institution",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "public_learning_reference",
+        "sensitive_wellness_reference"
+      ],
+      "claim_classes_forbidden": [
+        "mental_health_treatment",
+        "diagnosis",
+        "clinical_recommendation",
+        "therapy",
+        "emergency_advice",
+        "personalized_health_recommendation",
+        "cloud_personalized_self_improvement_plan",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "personal_growth",
+        "public_wellness_learning_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "medlineplus_public_domain_topic_summary",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not mental health treatment",
+        "not diagnosis",
+        "not clinical advice",
+        "not therapy",
+        "not emergency advice",
+        "not a personalized wellness plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/personal-growth",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_institution",
+      "source_id": "nih.medlineplus.wellness",
+      "source_name": "MedlinePlus wellness and lifestyle health topic summaries",
+      "terms_url": "https://medlineplus.gov/about/using/usingcontent/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "learning_resource_reference",
+        "public_rules_reference",
+        "safety_guidance_reference"
+      ],
+      "claim_classes_forbidden": [
+        "emergency_advice",
+        "medical_advice",
+        "unsafe_instructions",
+        "personalized_recreation_plan",
+        "restricted_membership_data",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "hobbies_recreation",
+        "public_recreation_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_nps_health_safety_and_disclaimer_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "nps_public_web",
+      "license_url": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not emergency advice",
+        "not medical advice",
+        "not unsafe instructions",
+        "not a personalized recreation plan",
+        "not universal recreation coverage",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/hobbies-recreation-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "nps.recreation-safety",
+      "source_name": "National Park Service Health & Safety public reference page",
+      "terms_url": "https://www.nps.gov/aboutus/disclaimer.htm"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "socrata_public_dataset_fixture_first",
+      "api_policy_id": "api.americorps.socrata_public_dataset.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.americorps_socrata_public_dataset.v1",
+      "claim_classes_allowed": [
+        "civic_engagement_reference",
+        "public_dataset_scope_reference",
+        "volunteer_rate_reference"
+      ],
+      "claim_classes_forbidden": [
+        "current_volunteer_opportunity_availability",
+        "eligibility_decision",
+        "legal_advice",
+        "personalized_placement_recommendation",
+        "personalized_volunteering_plan",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "volunteering_public_reference",
+        "public_civic_life_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "biennial_dataset_posting_context_quarterly_metadata_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "americorps_public_domain",
+      "license_url": "https://data.americorps.gov/National-Service/State-Ranking-by-Volunteer-Rate/qbmh-b8k5",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not current volunteer opportunity availability",
+        "not eligibility advice",
+        "not legal advice",
+        "not a personalized placement recommendation",
+        "not a personalized volunteering plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/volunteering-public-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.americorps_socrata_public_dataset.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://data.americorps.gov/National-Service/State-Ranking-by-Volunteer-Rate/qbmh-b8k5",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_socrata_public_dataset.v1",
+      "source_class": "official_government",
+      "source_id": "americorps.volunteer_rate_state",
+      "source_name": "AmeriCorps Open Data State Ranking by Volunteer Rate",
+      "terms_url": "https://data.americorps.gov/National-Service/State-Ranking-by-Volunteer-Rate/qbmh-b8k5"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_download",
+      "api_policy_id": "api.official.statcan.table.13100974.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.official.statcan.table.13100974.v1",
+      "claim_classes_allowed": [
+        "public_statistical_reference",
+        "public_health_statistical_context"
+      ],
+      "claim_classes_forbidden": [
+        "medical_advice",
+        "diagnosis",
+        "treatment_plan",
+        "personalized_health_recommendation",
+        "legal_advice",
+        "financial_advice"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "health_wellness_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "private_goal_graph",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "freshness_sla": "quarterly_source_and_terms_review",
+      "jurisdiction": "CA",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "statcan.open-licence.2026-06-28",
+      "license_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not medical advice",
+        "not diagnosis",
+        "not treatment planning",
+        "not legal approval",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/health-wellness-reference/statcan-table-13100974",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.official.statcan.table.13100974.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Codex internal Source Atlas source and terms reviewer",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_download.v1",
+      "source_class": "official_government",
+      "source_id": "official.statcan.table.13100974",
+      "source_name": "Statistics Canada Table 13-10-0974-01",
+      "terms_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "api_mode": "downloadable_public_snapshot_fixture_first",
+      "api_policy_id": "api.onet_public_database.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.onet_public_database.v1",
+      "claim_classes_allowed": [
+        "occupation_taxonomy",
+        "task_reference",
+        "skill_reference",
+        "education_training_reference"
+      ],
+      "claim_classes_forbidden": [
+        "employment_guarantee",
+        "regulated_credential_authority",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "crosswalk_allowed_as_supporting_metadata",
+      "domain_scope": [
+        "occupation_foundation",
+        "career",
+        "skills"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "track_release_quarterly_review",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "onet_cc_by_4",
+      "license_url": "https://creativecommons.org/licenses/by/4.0/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not employment advice",
+        "not final user planning",
+        "not U.S. Department of Labor endorsement"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/broad-occupational-foundation",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.onet_public_database.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.onetcenter.org/overview.html#data",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.onet_web_services_optional.v1",
+      "source_class": "official_government",
+      "source_id": "onet.database",
+      "source_name": "O*NET Database and O*NET OnLine public occupational reference data",
+      "terms_url": "https://www.onetcenter.org/overview.html#data"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "offline_public_snapshot_fixture_first",
+      "api_policy_id": "api.openalex_snapshot.v1",
+      "attribution_required": false,
+      "authority_class": "scholarly_metadata",
+      "budget_policy_id": "budget.openalex_snapshot.v1",
+      "claim_classes_allowed": [
+        "scholarly_metadata_context",
+        "research_topic_context"
+      ],
+      "claim_classes_forbidden": [
+        "regulated_requirement_authority",
+        "medical_treatment_recommendation",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "crosswalk_allowed_as_supporting_metadata",
+      "domain_scope": [
+        "scholarly_reference",
+        "education",
+        "research"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "monthly_snapshot_or_api_review",
+      "jurisdiction": "global",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "openalex_cc0_metadata",
+      "license_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not normative authority",
+        "not high-volume approval",
+        "not final user planning"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/scholarly-reference",
+      "r2_pack_policy": "pack_allowed",
+      "rate_policy_id": "rate.openalex_snapshot.v1",
+      "redistribution_policy": "redistributable",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.openalex_optional.v1",
+      "source_class": "official_institution",
+      "source_id": "openalex.dataset",
+      "source_name": "OpenAlex public dataset snapshot lane",
+      "terms_url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "public_scholarly_metadata_api_fixture_first",
+      "api_policy_id": "api.openalex_api.v1",
+      "attribution_required": false,
+      "authority_class": "scholarly_metadata",
+      "budget_policy_id": "budget.openalex_api.v1",
+      "claim_classes_allowed": [
+        "research_metadata_reference"
+      ],
+      "claim_classes_forbidden": [
+        "regulated_requirement_authority",
+        "medical_treatment_recommendation",
+        "diagnosis",
+        "therapy",
+        "normative_authority",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "crosswalk_allowed_as_supporting_metadata",
+      "domain_scope": [
+        "personal_growth",
+        "scholarly_reference",
+        "research"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "monthly_openalex_personal_growth_metadata_and_api_governance_recheck",
+      "jurisdiction": "global",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "openalex_cc0_metadata",
+      "license_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-12-28",
+      "non_claims": [
+        "not normative authority",
+        "not medical advice",
+        "not diagnosis",
+        "not treatment",
+        "not therapy",
+        "not high-volume approval",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/personal-growth",
+      "r2_pack_policy": "pack_allowed",
+      "rate_policy_id": "rate.openalex_api.v1",
+      "redistribution_policy": "redistributable",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.openalex_optional.v1",
+      "source_class": "official_institution",
+      "source_id": "openalex.personal_growth_research",
+      "source_name": "OpenAlex personal-growth scholarly metadata reference",
+      "terms_url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "public_scholarly_metadata_api",
+      "api_policy_id": "api.openalex_api.v1",
+      "attribution_required": false,
+      "authority_class": "scholarly_metadata",
+      "budget_policy_id": "budget.openalex_api.v1",
+      "claim_classes_allowed": [
+        "scholarly_metadata_context",
+        "research_topic_context"
+      ],
+      "claim_classes_forbidden": [
+        "regulated_requirement_authority",
+        "medical_treatment_recommendation",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "crosswalk_allowed_as_supporting_metadata",
+      "domain_scope": [
+        "scholarly_reference",
+        "education",
+        "research"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "monthly_snapshot_or_api_review",
+      "jurisdiction": "global",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "openalex_cc0_metadata",
+      "license_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not normative authority",
+        "not high-volume approval",
+        "not final user planning"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/scholarly-reference",
+      "r2_pack_policy": "pack_allowed",
+      "rate_policy_id": "rate.openalex_api.v1",
+      "redistribution_policy": "redistributable",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.openalex_optional.v1",
+      "source_class": "official_institution",
+      "source_id": "openalex.works",
+      "source_name": "OpenAlex scholarly metadata API",
+      "terms_url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness",
+        "public_atom_edge_lattice"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "safety_reference"
+      ],
+      "claim_classes_forbidden": [
+        "emergency_advice",
+        "safety_guarantee",
+        "unsafe_repair_instructions",
+        "household_schedule",
+        "personalized_home_plan",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "home_life_admin",
+        "public_home_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_ready_gov_kit_and_terms_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "ready_public_web",
+      "license_url": "https://www.ready.gov/terms-and-conditions",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not emergency advice",
+        "not a safety guarantee",
+        "not unsafe repair instructions",
+        "not a household schedule",
+        "not a personalized home plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/home-life-admin-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.ready.gov/terms-and-conditions",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "ready.gov.kit",
+      "source_name": "Ready.gov Build A Kit public preparedness reference page",
+      "terms_url": "https://www.ready.gov/terms-and-conditions"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "business_formation_reference",
+        "public_program_reference"
+      ],
+      "claim_classes_forbidden": [
+        "legal_advice",
+        "tax_advice",
+        "accounting_advice",
+        "formation_guarantee",
+        "financing_guarantee",
+        "state_specific_business_requirement",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "business_entrepreneurship",
+        "public_business_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_sba_guide_and_terms_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "sba_public_web",
+      "license_url": "https://www.sba.gov/about-sba/open-government/about-sbagov-website/linking-policy",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not legal advice",
+        "not tax advice",
+        "not accounting advice",
+        "not a personalized incorporation strategy",
+        "not universal business formation coverage",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/business-entrepreneurship-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.sba.gov/about-sba/open-government/about-sbagov-website/linking-policy",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "sba.business_guide.start_business",
+      "source_name": "SBA 10 steps to start your business guide",
+      "terms_url": "https://www.sba.gov/about-sba/open-government/about-sbagov-website/linking-policy"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "official_travel_requirement",
+        "public_safety_notice"
+      ],
+      "claim_classes_forbidden": [
+        "visa_advice",
+        "legal_advice",
+        "emergency_advice",
+        "safety_guarantee",
+        "custom_itinerary",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "travel_relocation",
+        "public_travel_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_state_travel_pages_and_terms_recheck_with_strict_advisory_review",
+      "jurisdiction": "US and destination-specific",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "state_travel_public_web",
+      "license_url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not visa advice",
+        "not legal advice",
+        "not emergency advice",
+        "not a safety guarantee",
+        "not a custom itinerary",
+        "not universal travel coverage",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/travel-relocation-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "state.travel.public_travel",
+      "source_name": "Travel.State.Gov passport and travel advisory public reference pages",
+      "terms_url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "official_benefit_program_reference"
+      ],
+      "claim_classes_forbidden": [
+        "investment_advice",
+        "tax_advice",
+        "legal_advice",
+        "benefit_eligibility_guarantee",
+        "application_decision",
+        "personalized_financial_plan",
+        "account_data",
+        "transaction_profile",
+        "private_financial_profile",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "finance_public_reference",
+        "public_benefit_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_usagov_benefits_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "usagov_public_web",
+      "license_url": "https://www.usa.gov/government-works",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not a benefits eligibility guarantee",
+        "not an application decision",
+        "not legal advice",
+        "not a personalized financial plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/finance-public-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.usa.gov/government-works",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "usa.gov.benefits",
+      "source_name": "USA.gov government benefits public reference page",
+      "terms_url": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "relocation_admin_reference"
+      ],
+      "claim_classes_forbidden": [
+        "address_submission",
+        "legal_advice",
+        "custom_moving_plan",
+        "private_location_context",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "travel_relocation",
+        "public_relocation_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_usagov_change_address_and_government_works_terms_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "usagov_public_web",
+      "license_url": "https://www.usa.gov/government-works",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not address submission",
+        "not legal advice",
+        "not a custom moving plan",
+        "not private location inference",
+        "not universal relocation coverage",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/travel-relocation-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.usa.gov/government-works",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "usa.gov.change_address",
+      "source_name": "USA.gov change-address public relocation reference page",
+      "terms_url": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness",
+        "public_atom_edge_lattice"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "public_service_reference"
+      ],
+      "claim_classes_forbidden": [
+        "eligibility_approval",
+        "loan_decision",
+        "legal_advice",
+        "contractor_advice",
+        "personalized_household_plan",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "home_life_admin",
+        "public_home_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_usagov_home_repair_and_government_works_recheck",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "usagov_public_web",
+      "license_url": "https://www.usa.gov/government-works",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not eligibility approval",
+        "not a loan decision",
+        "not legal advice",
+        "not contractor advice",
+        "not a personalized household plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/home-life-admin-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.usa.gov/government-works",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_government",
+      "source_id": "usa.gov.home_repair",
+      "source_name": "USA.gov government home repair assistance public reference page",
+      "terms_url": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_provenance",
+        "lookup_response_metadata"
+      ],
+      "api_mode": "authenticated_lookup_only",
+      "api_policy_id": "api.usajobs_lookup_only.v1",
+      "attribution_required": true,
+      "authority_class": "official_government",
+      "budget_policy_id": "budget.usajobs_lookup_only.v1",
+      "claim_classes_allowed": [
+        "lookup_metadata_only"
+      ],
+      "claim_classes_forbidden": [
+        "redistributable_job_record",
+        "r2_pack_claim",
+        "employment_guarantee",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "career",
+        "federal_job_lookup"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "lookup_time_only",
+      "jurisdiction": "US",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "usajobs_restricted_unverified",
+      "license_url": "https://developer.usajobs.gov/",
+      "lookup_policy": "lookup_only_requires_credentials",
+      "next_review_due_at": "2026-09-27",
+      "non_claims": [
+        "not redistributable",
+        "not R2-ready",
+        "not final user planning"
+      ],
+      "r2_pack_policy": "pack_blocked_restricted",
+      "rate_policy_id": "rate.usajobs_lookup_only.v1",
+      "redistribution_policy": "lookup_only",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": true,
+      "review_status": "review_required",
+      "rights_url": "https://developer.usajobs.gov/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.usajobs_required.v1",
+      "source_class": "official_government",
+      "source_id": "usajobs.search",
+      "source_name": "USAJOBS current and historic job opportunity APIs",
+      "terms_url": "https://developer.usajobs.gov/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "standards_body",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "public_standard_reference"
+      ],
+      "claim_classes_forbidden": [
+        "implementation_advice",
+        "patent_advice",
+        "trademark_permission",
+        "content_reuse_decision",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "creative_project_reference",
+        "public_web_standard_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "quarterly_w3c_standards_copyright_and_policies_recheck",
+      "jurisdiction": "global",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "w3c_document_license_public_web",
+      "license_url": "https://www.w3.org/copyright/",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not implementation advice",
+        "not patent advice",
+        "not trademark permission",
+        "not a content reuse decision",
+        "not a final creative plan",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/creative-project-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.w3.org/copyright/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "standards_body",
+      "source_id": "w3c.web-standards",
+      "source_name": "W3C web standards public reference page",
+      "terms_url": "https://www.w3.org/copyright/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "api_mode": "static_https_fixture_first",
+      "api_policy_id": "api.static_public_page.v1",
+      "attribution_required": true,
+      "authority_class": "official_institution",
+      "budget_policy_id": "budget.static_public_page.v1",
+      "claim_classes_allowed": [
+        "credential_requirement"
+      ],
+      "claim_classes_forbidden": [
+        "admissions_guarantee",
+        "financial_aid_advice",
+        "credentialing_authority",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "not_crosswalk_source",
+      "domain_scope": [
+        "education_credentialing",
+        "institution_reference"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "catalog_year_review_quarterly_institutional_recheck",
+      "jurisdiction": "US federal",
+      "last_reviewed_at": "2026-06-28",
+      "license_id": "us_federal_public_source",
+      "license_url": "https://www.usa.gov/government-works",
+      "lookup_policy": "lookup_allowed_public_reference_only",
+      "next_review_due_at": "2026-09-28",
+      "non_claims": [
+        "not admissions advice",
+        "not financial aid guidance",
+        "not a personalized degree plan",
+        "not universal credential coverage",
+        "not credentialing authority",
+        "not outside legal approval"
+      ],
+      "r2_object_key_prefix": "source-atlas/v1/stable/education-credentialing-reference",
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "rate_policy_id": "rate.static_public_page.v1",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://catalog.westpoint.edu/",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_static_page.v1",
+      "source_class": "official_institution",
+      "source_id": "westpoint.redbook.computer_science_major",
+      "source_name": "United States Military Academy Redbook Computer Science major curriculum",
+      "terms_url": "https://catalog.westpoint.edu/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "public_provenance",
+        "public_crosswalk"
+      ],
+      "api_mode": "bounded_entity_crosswalk_lookup",
+      "api_policy_id": "api.wikidata_crosswalk.v1",
+      "attribution_required": false,
+      "authority_class": "open_knowledge_graph",
+      "budget_policy_id": "budget.wikidata_crosswalk.v1",
+      "claim_classes_allowed": [
+        "entity_crosswalk",
+        "identifier_crosswalk",
+        "alias_crosswalk"
+      ],
+      "claim_classes_forbidden": [
+        "regulated_requirement_authority",
+        "legal_advice",
+        "medical_advice",
+        "financial_advice",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "crosswalk_only",
+      "domain_scope": [
+        "entity_crosswalk",
+        "source_alignment"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "weekly_crosswalk_refresh_when_enabled",
+      "jurisdiction": "global",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "wikidata_cc0_crosswalk",
+      "license_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "lookup_policy": "lookup_allowed_crosswalk_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not regulated authority",
+        "not legal or medical authority",
+        "not final user planning"
+      ],
+      "r2_pack_policy": "pack_blocked_crosswalk_only",
+      "rate_policy_id": "rate.wikidata_crosswalk.v1",
+      "redistribution_policy": "crosswalk_only",
+      "regulated_authority_allowed": false,
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_wikidata.v1",
+      "source_class": "open_knowledge_graph",
+      "source_id": "wikidata.crosswalk",
+      "source_name": "Wikidata structured entity crosswalk",
+      "terms_url": "https://www.wikidata.org/wiki/Wikidata:Licensing"
+    },
+    {
+      "allowed_artifact_classes": [
+        "public_provenance",
+        "public_crosswalk"
+      ],
+      "api_mode": "bounded_entity_crosswalk_lookup",
+      "api_policy_id": "api.wikidata_crosswalk.v1",
+      "attribution_required": false,
+      "authority_class": "open_knowledge_graph",
+      "budget_policy_id": "budget.wikidata_crosswalk.v1",
+      "claim_classes_allowed": [
+        "entity_crosswalk",
+        "identifier_crosswalk",
+        "alias_crosswalk"
+      ],
+      "claim_classes_forbidden": [
+        "regulated_requirement_authority",
+        "legal_advice",
+        "medical_advice",
+        "financial_advice",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "crosswalk_policy": "crosswalk_only",
+      "domain_scope": [
+        "entity_crosswalk",
+        "source_alignment"
+      ],
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "freshness_sla": "weekly_crosswalk_refresh_when_enabled",
+      "jurisdiction": "global",
+      "last_reviewed_at": "2026-06-27",
+      "license_id": "wikidata_cc0_crosswalk",
+      "license_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "lookup_policy": "lookup_allowed_crosswalk_only",
+      "next_review_due_at": "2026-12-27",
+      "non_claims": [
+        "not regulated authority",
+        "not legal or medical authority",
+        "not final user planning"
+      ],
+      "r2_pack_policy": "pack_blocked_crosswalk_only",
+      "rate_policy_id": "rate.wikidata_crosswalk.v1",
+      "redistribution_policy": "crosswalk_only",
+      "regulated_authority_allowed": false,
+      "review_owner": "Ambitions owner technical review",
+      "review_required": false,
+      "review_status": "reviewed",
+      "rights_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "schema_version": "1.0.0",
+      "secret_policy_id": "secret.no_secret_wikidata.v1",
+      "source_class": "open_knowledge_graph",
+      "source_id": "wikidata.structured_crosswalk",
+      "source_name": "Wikidata live structured entity crosswalk",
+      "terms_url": "https://www.wikidata.org/wiki/Wikidata:Licensing"
+    }
+  ],
+  "updated_at": "2026-06-28T00:00:00Z"
+}

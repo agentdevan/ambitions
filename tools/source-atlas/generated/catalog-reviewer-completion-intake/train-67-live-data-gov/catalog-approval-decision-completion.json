@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogApprovalDecisionCompletionUnavailable.v1",
+  "non_claims": [
+    "placeholder only",
+    "not a Train 65 review completion artifact",
+    "not approval"
+  ],
+  "reason": "completed source-specific reviewer packets required before completion artifact is available"
+}

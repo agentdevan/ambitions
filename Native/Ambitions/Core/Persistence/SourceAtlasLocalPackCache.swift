@@ -163,7 +163,8 @@ struct SourceAtlasPublicPackRequestValidator: Sendable, Equatable, Hashable {
         }
         for (key, value) in inspectedPairs {
             let lowered = "\(key)=\(value)".lowercased()
-            if Self.containsPrivatePlanningToken(lowered) {
+            if Self.containsPrivatePlanningToken(lowered),
+               Self.isReviewedPublicSourceAtlasLocator(key: key, value: value) == false {
                 issues.insert(.privatePlanningParameter)
             }
             if Self.containsSecretToken(lowered) {
@@ -232,6 +233,37 @@ struct SourceAtlasPublicPackRequestValidator: Sendable, Equatable, Hashable {
         value.contains("file://") ||
             value.contains("/users/") ||
             value.contains("/private/")
+    }
+
+    private static func isReviewedPublicSourceAtlasLocator(key: String, value: String) -> Bool {
+        let normalizedKey = key.lowercased()
+        guard ["artifact_id", "artifact_version", "manifest_version", "pack_id"].contains(normalizedKey) else {
+            return false
+        }
+        let normalizedValue = value.lowercased()
+        let publicPrefixes = [
+            "source-atlas/v1/domain/",
+            "source-atlas/v1/production/stable/",
+            "source-atlas/v1/staging/candidate/",
+        ]
+        guard publicPrefixes.contains(where: normalizedValue.hasPrefix) else {
+            return false
+        }
+        let blockedTokens = [
+            "account_id",
+            "account-secret",
+            "account_secret",
+            "capture_text",
+            "device_id",
+            "goal_text",
+            "private_graph",
+            "private-goal",
+            "private_goal",
+            "proof_payload",
+            "receipt_payload",
+            "user_id",
+        ]
+        return blockedTokens.contains { normalizedValue.contains($0) } == false
     }
 }
 

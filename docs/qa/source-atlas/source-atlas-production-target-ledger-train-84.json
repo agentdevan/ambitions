@@ -1,0 +1,484 @@
+{
+  "allowedClaims": [
+    "bounded_production_target_for_configured_frontiers",
+    "bounded_production_target_per_ready_frontier"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "full_source_atlas_green",
+    "literal_universal_coverage",
+    "outside_legal_approval",
+    "release_green"
+  ],
+  "configuredDomainsNotReady": [],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domains": [
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "business_entrepreneurship",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 3,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-43-business-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "creative_project_reference",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-49-creative-project-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 3,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-49-creative-project-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "education_credentialing",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-42-education-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 8,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "finance_public_reference",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 3,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-47-finance-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "health_wellness_reference",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-45-health-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 3,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-45-health-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "health_wellness_reference_ca_statistics",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 2,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-81-statcan-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "hobbies_recreation",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-44-hobbies-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 3,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-44-hobbies-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "home_life_admin",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 4,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-48-home-life-admin-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "claim_graph_ready",
+      "domainID": "occupation_foundation",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 26,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "personal_growth",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 3,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-50-personal-growth-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "claim_graph_ready",
+      "domainID": "public_civic_requirements",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-37-civic-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 2,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-37-civic-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "relationships_family",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 5,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-51-relationships-family-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ]
+    },
+    {
+      "allowedClaimScopes": [
+        "bounded_production_target"
+      ],
+      "blockedReasons": [],
+      "claimGraphProofComplete": true,
+      "claimGraphStatus": "claim_graph_ready",
+      "configuredStatusCeiling": "pack_staging_ready",
+      "domainID": "travel_relocation",
+      "frontierConfigured": true,
+      "gatewayProofComplete": true,
+      "nativeRegistryProofComplete": true,
+      "nativeRuntimeBoundaryProofComplete": true,
+      "nativeUsabilityProofComplete": true,
+      "nonClaims": [
+        "not universal coverage",
+        "not Release Green",
+        "not outside legal approval",
+        "not final user plans, schedules, or Steps"
+      ],
+      "packProductionPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/pack-production-report.json",
+      "packProductionProofComplete": true,
+      "packableClaimCount": 3,
+      "r2ProductionProofComplete": true,
+      "r2PublisherPath": "tools/source-atlas/generated/r2-publisher/train-46-travel-production-remote-r2/r2-publisher-report.json",
+      "readinessStatus": "bounded_production_target_ready",
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ]
+    }
+  ],
+  "evidencePaths": {
+    "claimFrontierReportRoot": "tools/source-atlas/generated/claim-frontier",
+    "frontierConfig": "tools/source-atlas/frontier/coverage-frontiers.json",
+    "gatewayReleaseReport": "docs/qa/source-atlas/r2/source-atlas-public-gateway-release-train-83.json",
+    "nativeRegistryArtifact": "tools/source-atlas/generated/native-refresh-registry/train-81-trideca-domain/source-atlas-public-refresh-targets.json",
+    "nativeRegistryReport": "tools/source-atlas/generated/native-refresh-registry/train-81-trideca-domain/native-refresh-registry-report.json",
+    "nativeRuntimeCloseout": "docs/qa/source-atlas/native/source-atlas-native-public-pack-runtime-train-80-closeout.json",
+    "packProductionReportRoot": "tools/source-atlas/generated/pack-production",
+    "r2PublisherReportRoot": "tools/source-atlas/generated/r2-publisher",
+    "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "globalBlockers": [
+    "literal universal coverage remains blocked by Source Atlas product law"
+  ],
+  "kind": "ambitions.sourceAtlas.productionTargetLedger.v1",
+  "ledgerID": "source-atlas/production-target-ledger/b1d690ce40302f3c",
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not approval for future domains without source/frontier/pack/R2/native evidence",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "orphanProductionDomains": [],
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/production-target-ledger/train-84/closeout.md",
+    "markdown": "tools/source-atlas/generated/production-target-ledger/train-84/production-target-ledger.md",
+    "report": "tools/source-atlas/generated/production-target-ledger/train-84/production-target-ledger.json"
+  },
+  "overallReadinessStatus": "configured_frontiers_bounded_production_target_ready",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "r2Discovery": {
+    "issues": [],
+    "selectedReportCount": 13,
+    "skippedReportCount": 7,
+    "supersededReportCount": 0,
+    "totalReportCount": 20
+  },
+  "recordCounts": {
+    "boundedProductionTargetReady": 13,
+    "configuredDomainsNotReady": 0,
+    "configuredFrontiers": 13,
+    "discoveredDomains": 13,
+    "gatewayReadyDomains": 13,
+    "nativeRegistryDomains": 13,
+    "orphanProductionDomains": 0,
+    "productionR2Domains": 13
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded configured-frontier production target ledger only",
+  "status": "Source Green for production target ledger",
+  "universalCoverageClaimAllowed": false,
+  "valid": true,
+  "versionID": "source-atlas-production-target-ledger-train-84"
+}

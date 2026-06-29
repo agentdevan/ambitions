@@ -1,0 +1,123 @@
+{
+  "train": "Source Atlas Production Finish-Line Train 20",
+  "linear_issue": "AMB-1506",
+  "date": "2026-06-28",
+  "status": "Green for native latest cached public pack lookup / Yellow overall Source Atlas",
+  "scope_completed": [
+    "Added public-safe latest cached manifest lookup to SourceAtlasPublicPackCacheFileRepository",
+    "Validated pack ID metadata against no-private-graph egress rules",
+    "Scanned only hashed public cache index artifacts",
+    "Filtered latest lookup to verified cached manifests",
+    "Added background refresh fallback to latest cached public manifest lookup",
+    "Proved offline no-account background refresh can recover latest cached public pack without explicit lookup or transport"
+  ],
+  "files_changed": [
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackCacheFileRepository.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackBackgroundRefreshTask.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackCacheFileRepositoryTests.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackBackgroundRefreshTaskTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-latest-cached-public-pack-lookup-train-20.md",
+    "docs/qa/source-atlas/native/source-atlas-native-latest-cached-public-pack-lookup-train-20.json"
+  ],
+  "product_law_preserved": true,
+  "final_architecture_tree": {
+    "inspected": true,
+    "canonical_owners_touched": [
+      "Core/Persistence"
+    ],
+    "files_moved_or_created": [
+      "docs/qa/source-atlas/native/source-atlas-native-latest-cached-public-pack-lookup-train-20.md",
+      "docs/qa/source-atlas/native/source-atlas-native-latest-cached-public-pack-lookup-train-20.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_architecture_debt": "Actual app lifecycle/BGTaskScheduler registration remains deferred; this train closes cache discovery prerequisite.",
+    "next_repair_train": "Architecture-approved app lifecycle/background scheduling integration using latest cached public lookup",
+    "no_equivalent_folder_interpretation_used": true
+  },
+  "validation_run": [
+    {
+      "command": "xcodegen generate",
+      "status": "passed"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackCacheFileRepositoryTests -only-testing:AmbitionsTests/SourceAtlasPublicPackBackgroundRefreshTaskTests",
+      "status": "passed",
+      "passed": 15,
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T00-02-53-094Z_pid24471_4fdc9691.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T00-02-53-094Z_pid24471_4e429bf8.xcresult"
+    },
+    {
+      "command": "XcodeBuildMCP adjacent Source Atlas public-pack persistence suites",
+      "status": "passed",
+      "passed": 42,
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T00-05-04-879Z_pid24471_2e7292ab.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T00-05-04-879Z_pid24471_1c732c57.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "passed": 125
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/green-standard/20260628T000720Z/extract/summary.json"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "Real BGTaskScheduler registration or launch lifecycle test",
+    "Production R2 upload/readback",
+    "Physical-device/offline runtime proof",
+    "Visual or accessibility proof",
+    "TestFlight, App Store, or release readiness proof",
+    "New legal/terms approval"
+  ],
+  "source_atlas_status_ceiling": "Green for Train 20 native latest cached public pack lookup only; Yellow overall Source Atlas",
+  "r2_request_privacy_proof": "Latest lookup uses public pack ID metadata only and rejects private-looking pack IDs before selecting cache metadata.",
+  "no_private_graph_egress_proof": "No-private egress audit passed; focused tests cover private pack ID rejection and zero-transport offline cache recovery.",
+  "license_terms_proof": "Unchanged; no new source lane or legal registry decision added.",
+  "restricted_source_exclusion_proof": "Unchanged; no restricted source path added.",
+  "provenance_completeness_proof": "Unchanged; no claim graph or packable claim path added.",
+  "freshness_revocation_proof": "Cached manifest selection still flows through existing manifest/hash/decode validation; adjacent suites passed.",
+  "lkg_rollback_proof": "Unchanged; this train does not add production LKG pointer behavior.",
+  "native_offline_no_account_proof": "Focused test proves background refresh can discover latest cached public pack without explicit manifest lookup or transport.",
+  "production_non_claims": [
+    "No production R2 readiness",
+    "No app runtime or release Green",
+    "No legal approval",
+    "No universal coverage",
+    "No real BackgroundTasks registration"
+  ],
+  "known_risks": [
+    "Actual app lifecycle/background scheduling remains separate and unproven",
+    "Device/offline proof remains required before release claims",
+    "Broader worktree contains uncommitted Source Atlas trains outside Train 20"
+  ],
+  "rollback_plan": [
+    "Remove latestManifestLookup(packID:) from SourceAtlasPublicPackCacheFileRepository",
+    "Remove implicit latest lookup fallback from SourceAtlasPublicPackBackgroundRefreshTask",
+    "Remove Train 20 test additions and QA evidence",
+    "Retain explicit cached-manifest lookup behavior from prior trains"
+  ]
+}

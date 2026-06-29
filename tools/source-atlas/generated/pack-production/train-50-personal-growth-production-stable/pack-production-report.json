@@ -1,0 +1,497 @@
+{
+  "artifactValidation": {
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.packProductionArtifactValidation.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "requiredArtifacts": [
+      "adjudications.json",
+      "attribution.json",
+      "claims.json",
+      "coverage.json",
+      "entities.json",
+      "freshness.json",
+      "licenses.json",
+      "lkg.json",
+      "manifest.json",
+      "non-private-scan-report.json",
+      "non_claims.json",
+      "pack.json",
+      "r2-dry-run-plan.json",
+      "revocations.json",
+      "rollback-plan.json",
+      "sources.json"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "channel": "stable",
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "pack_slices_written",
+      "passed": true
+    },
+    {
+      "name": "pack_contains_only_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "restricted_and_crosswalk_claims_excluded",
+      "passed": true
+    },
+    {
+      "name": "manifest_hashes_present",
+      "passed": true
+    },
+    {
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "name": "dry_run_plan_only",
+      "passed": true
+    },
+    {
+      "name": "private_object_keys_blocked",
+      "passed": true
+    },
+    {
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "required_artifacts_valid",
+      "passed": true
+    },
+    {
+      "name": "execute_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domain": "personal_growth",
+  "dryRunPlan": {
+    "channel": "stable",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_r2_object_key",
+    "dryRun": true,
+    "environment": "production",
+    "executeRequested": false,
+    "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "dry-run only; no R2 upload or production promotion was performed"
+    ],
+    "objects": [
+      {
+        "bytes": 1151,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "adjudications",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/adjudications.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/adjudications.json",
+        "sha256": "5b907b478bd4020e013f832a4e6406bd734822802c10193317f6dfc395f5bbad"
+      },
+      {
+        "bytes": 776,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "attribution",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/attribution.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/attribution.json",
+        "sha256": "7fde5cc1dcf5fa108774d4c4bcb62921e8d987db2b03d5f0e9a58b065c243d59"
+      },
+      {
+        "bytes": 7439,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "claims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/claims.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/claims.json",
+        "sha256": "ef2c3ecac67aa20519f94dad88f877cc0ce5a41e3e9be79715b1cf1eafce4520"
+      },
+      {
+        "bytes": 2976,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "coverage",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/coverage.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/coverage.json",
+        "sha256": "fa807fc105e648463d50ee03058f6ab3f249cb8a0db1b2859bcdd0fd733d5036"
+      },
+      {
+        "bytes": 1892,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "entities",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/entities.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/entities.json",
+        "sha256": "0254460fb4aec7e476c0b00bdb1d22a9a60bd6a85a0db560db31bfbe9d04d5f3"
+      },
+      {
+        "bytes": 1682,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "freshness",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/freshness.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/freshness.json",
+        "sha256": "f01b127f64039c8312aed8cf8df67caaf48feb91f45bb2f00433127461a1baf6"
+      },
+      {
+        "bytes": 1953,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "licenses",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/licenses.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/licenses.json",
+        "sha256": "828383d3062292c78f92e61ee9237078a946edec9db90212160ca86efd820b60"
+      },
+      {
+        "bytes": 1238,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "lkg",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/lkg.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+        "sha256": "d972073b53bfe1ec6f058a9214057d938db6dcd393a0cb4950ad3fdd488dcb6c"
+      },
+      {
+        "bytes": 8595,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "manifest",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/manifest.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+        "sha256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e"
+      },
+      {
+        "bytes": 1265,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "nonClaims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/non_claims.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/non_claims.json",
+        "sha256": "923f027c14eae38b1e1f4ead008b92e0ad73fb1d9e20be3052acc39005dc1a0a"
+      },
+      {
+        "bytes": 18517,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "pack",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/pack.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json",
+        "sha256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9"
+      },
+      {
+        "bytes": 1393,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "revocations",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/revocations.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/revocations.json",
+        "sha256": "67e17ee1f77674f60948c4b8f76a836d36600fc8e27d9911728536832edf8059"
+      },
+      {
+        "bytes": 2572,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "sources",
+        "localPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/sources.json",
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/sources.json",
+        "sha256": "15f70f0e4fda7ddfbcdfa004303e6c79f4e5000fa0f04aaf66dfa2ed642d78df"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/rollback-plan.json",
+    "schemaVersion": 1,
+    "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+    "wouldUpload": false
+  },
+  "environment": "production",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.packProductionManifest.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "docs/qa/source-atlas/legal/source-atlas-personal-growth-legal-review-train-50.json",
+    "packetSHA256": "eea42b4960de08f110e0007afd2a3eee910e36a70484ca0e45fb67660079863b",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "nih.medlineplus.wellness",
+      "openalex.personal_growth_research"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "nih.medlineplus.wellness",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "openalex.personal_growth_research",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "lkg": {
+    "channel": "stable",
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "domain": "personal_growth",
+    "manifest_key": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "pack_id": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "reason_selected": "dry_run_candidate",
+    "rollback_safe": true,
+    "sha256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e",
+    "valid_until": null
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "nonPrivateScan": {
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.nonPrivateScanReport.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "outputRoot": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable",
+    "passed": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "schemaVersion": 1
+  },
+  "objectKeys": {
+    "adjudications": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/adjudications.json",
+    "attribution": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/attribution.json",
+    "claims": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/claims.json",
+    "coverage": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/coverage.json",
+    "current": "source-atlas/v1/production/stable/personal_growth/current.json",
+    "entities": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/entities.json",
+    "freshness": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/freshness.json",
+    "licenses": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/licenses.json",
+    "lkg": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+    "nonClaims": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/non_claims.json",
+    "pack": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/personal_growth/revocations.json",
+    "sources": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/sources.json"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/closeout.md",
+    "lkg": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/lkg.json",
+    "manifest": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/manifest.json",
+    "nonPrivateScan": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/non-private-scan-report.json",
+    "pack": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/pack.json",
+    "r2DryRunPlan": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/r2-dry-run-plan.json",
+    "revocation": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/revocations.json",
+    "rollback": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/rollback-plan.json"
+  },
+  "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "blockedClaimsExcluded": 0,
+    "claims": 3,
+    "licenses": 2,
+    "objectCount": 13,
+    "sources": 2
+  },
+  "revocation": {
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "lkg_policy": "use_lkg_if_future_pack_is_revoked_and_lkg_hash_verifies",
+    "native_behavior": "not_claimed_in_train_04",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "object_keys": {
+      "lkg": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+      "manifest": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "proof_artifacts": [],
+    "publicReferenceOnly": true,
+    "reason": "dry_run_no_revocations",
+    "replacement_pack_id": null,
+    "revocation_id": "source_atlas_revocation.f190be4c93049d77",
+    "revoked_object_keys": [],
+    "revoked_pack_ids": [],
+    "severity": "none"
+  },
+  "rollback": {
+    "candidateManifestKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "dryRunOnly": true,
+    "kind": "ambitions.sourceAtlas.rollbackPlan.v1",
+    "lkgPointerKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackCandidates": [
+      {
+        "channel": "stable",
+        "created_at": "2026-06-28T00:00:00Z",
+        "dataClass": "public_freshness",
+        "domain": "personal_growth",
+        "manifest_key": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+        "nonClaims": [
+          "not a private user-data backend",
+          "not private life graph storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final user plan, schedule, or Step generator"
+        ],
+        "pack_id": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+        "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+        "publicReferenceOnly": true,
+        "reason_selected": "dry_run_candidate",
+        "rollback_safe": true,
+        "sha256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e",
+        "valid_until": null
+      }
+    ],
+    "schemaVersion": 1,
+    "stablePointerWillChange": false
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; pack compiler and R2 dry-run controls only",
+  "status": "Source Green for pack compiler/R2 dry-run controls",
+  "valid": true,
+  "versionID": "source-atlas-pack-production-train-04"
+}

@@ -1,0 +1,26 @@
+{
+  "current": {
+    "bytes": null,
+    "exists": false,
+    "get": {
+      "returnCode": 1,
+      "stderr": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mThe specified key does not exist.\u001b[0m\n\n\n🪵  Logs were written to \"/Users/devan/Library/Preferences/.wrangler/logs/wrangler-2026-06-28_04-27-05_307.log\"\n",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/public_civic_requirements/current.json\" from \"ambitions-source-atlas-prod\".\n\n",
+      "success": false
+    },
+    "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+    "sha256": null
+  },
+  "lastKnownGood": {
+    "bytes": null,
+    "exists": false,
+    "get": {
+      "returnCode": 1,
+      "stderr": "\u001b[31m✘ \u001b[41;31m[\u001b[41;97mERROR\u001b[41;31m]\u001b[0m \u001b[1mThe specified key does not exist.\u001b[0m\n\n\n🪵  Logs were written to \"/Users/devan/Library/Preferences/.wrangler/logs/wrangler-2026-06-28_04-27-07_154.log\"\n",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/public_civic_requirements/lkg.json\" from \"ambitions-source-atlas-prod\".\n\n",
+      "success": false
+    },
+    "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/lkg.json",
+    "sha256": null
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "coverage": {
+    "authority_coverage": {
+      "complete": true,
+      "missing": [],
+      "present": [
+        "official_government"
+      ],
+      "required": [
+        "official_government"
+      ]
+    },
+    "blocked_claim_count": 0,
+    "candidate_only_count": 0,
+    "claim_classes": [
+      "official_travel_requirement",
+      "public_safety_notice",
+      "relocation_admin_reference"
+    ],
+    "conflict_status": "no_conflict_detected",
+    "covered_claim_classes": [
+      "official_travel_requirement",
+      "public_safety_notice",
+      "relocation_admin_reference"
+    ],
+    "domain": "travel_relocation",
+    "freshness_compliance": {
+      "claimCount": 3,
+      "complete": true,
+      "freshCount": 3,
+      "percent": 1.0
+    },
+    "frontier_id": "travel_relocation",
+    "goal_intent_classes": [
+      "travel_requirement_reference",
+      "relocation_admin_reference"
+    ],
+    "gold_set": {
+      "goldSetID": "gold.travel_relocation.state_usagov_public_reference.v1",
+      "matchedCount": 3,
+      "matches": [
+        {
+          "claimID": "canonical_claim.da1775449f7f9e5e",
+          "claimType": "official_travel_requirement",
+          "goldClaimID": "gold.travel_relocation.state.passport_application_help",
+          "jurisdiction": "US and destination-specific",
+          "sourceID": "state.travel.public_travel"
+        },
+        {
+          "claimID": "canonical_claim.d952327697f76faf",
+          "claimType": "public_safety_notice",
+          "goldClaimID": "gold.travel_relocation.state.travel_advisories",
+          "jurisdiction": "US and destination-specific",
+          "sourceID": "state.travel.public_travel"
+        },
+        {
+          "claimID": "canonical_claim.15287c66d2e4cd56",
+          "claimType": "relocation_admin_reference",
+          "goldClaimID": "gold.travel_relocation.usagov.change_address",
+          "jurisdiction": "US",
+          "sourceID": "usa.gov.change_address"
+        }
+      ],
+      "missing": [],
+      "nonClaims": [
+        "not Release Green",
+        "not a custom itinerary",
+        "not a safety guarantee",
+        "not emergency advice",
+        "not final user plans, schedules, or Steps",
+        "not legal advice",
+        "not release readiness",
+        "not universal coverage",
+        "not universal travel coverage",
+        "not visa advice"
+      ],
+      "required": true,
+      "requiredCount": 3,
+      "schemaVersion": 1,
+      "status": "passed",
+      "versionID": "source-atlas-gold-set-evaluator-train-40"
+    },
+    "gold_set_status": "passed",
+    "jurisdictions": [
+      "US",
+      "destination_specific"
+    ],
+    "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+    "legal_posture_completeness": {
+      "complete": true,
+      "completeCount": 2,
+      "laneCount": 2,
+      "percent": 1.0
+    },
+    "missing_claim_classes": [],
+    "non_claims": [
+      "country-specific visa and entry requirements remain excluded until separately reviewed",
+      "not R2 release readiness",
+      "not a custom itinerary",
+      "not a final user plan, schedule, or Step generator",
+      "not a private user-data backend",
+      "not a safety guarantee",
+      "not accessibility, privacy, or legal approval",
+      "not an official legal, medical, financial, or admissions decision",
+      "not emergency advice",
+      "not full Source Atlas Green",
+      "not legal advice",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not private life graph storage",
+      "not production R2 readiness",
+      "not runtime recommendation proof by itself",
+      "not universal goal coverage",
+      "not universal travel or relocation coverage",
+      "not visa advice"
+    ],
+    "packable_claim_count": 3,
+    "provenance_completeness": {
+      "claimCount": 3,
+      "complete": true,
+      "completeTupleCount": 3,
+      "packableClaimCount": 3,
+      "packableCompleteTupleCount": 3,
+      "packablePercent": 1.0
+    },
+    "restricted_exclusions": [],
+    "schemaVersion": 1,
+    "source_lanes": [
+      "state.travel.public_travel",
+      "usa.gov.change_address"
+    ],
+    "status": "claim_graph_ready",
+    "status_ceiling": "pack_staging_ready"
+  }
+}

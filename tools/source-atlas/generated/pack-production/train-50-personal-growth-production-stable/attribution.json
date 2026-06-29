@@ -1,0 +1,20 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from MedlinePlus wellness and lifestyle health topic summaries.",
+      "claim_id": "canonical_claim.c5b7cb6b3e5307ca",
+      "dataClass": "public_provenance",
+      "license_id": "medlineplus_public_domain_topic_summary",
+      "publicReferenceOnly": true,
+      "source_id": "nih.medlineplus.wellness"
+    },
+    {
+      "attribution_text": "Based on public reference data from MedlinePlus wellness and lifestyle health topic summaries.",
+      "claim_id": "canonical_claim.4795642673cfd1e9",
+      "dataClass": "public_provenance",
+      "license_id": "medlineplus_public_domain_topic_summary",
+      "publicReferenceOnly": true,
+      "source_id": "nih.medlineplus.wellness"
+    }
+  ]
+}

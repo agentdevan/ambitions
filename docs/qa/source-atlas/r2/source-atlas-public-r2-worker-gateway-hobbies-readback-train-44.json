@@ -1,0 +1,470 @@
+{
+  "allowed_object_keys": [
+    "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+    "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+    "source-atlas/v1/production/stable/hobbies_recreation/revocations.json",
+    "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+    "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json"
+  ],
+  "approvalArtifact": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-hobbies-approval-train-44.json",
+  "artifactID": "source_atlas_public_r2_worker_gateway_hobbies_readback.train44",
+  "channel": "stable",
+  "checks": {
+    "hashes": {
+      "currentPointerSHA256MatchesLocalOutput": true,
+      "currentPointerSHA256MatchesPublisherReport": true,
+      "lkgPackIDMatchesCurrentPointer": true,
+      "manifestSHA256MatchesCurrentPointer": true,
+      "manifestSHA256MatchesLocalOutput": true,
+      "packIDMatchesCurrentPointer": true,
+      "packIDMatchesManifest": true,
+      "packIDMatchesPackBody": true,
+      "packSHA256MatchesCurrentPointer": true,
+      "packSHA256MatchesLocalOutput": true,
+      "revocationsHaveNoCurrentRevocations": true,
+      "revocationsLKGKeyIsHobbies": true,
+      "revocationsManifestKeyIsHobbies": true
+    },
+    "headers": {
+      "allowedResponsesCarryGatewayHeader": true,
+      "allowedResponsesCarryPublicReferenceHeader": true,
+      "blockedRoutesDoNotExposePublicReferenceHeader": true
+    },
+    "statuses": {
+      "blocked_hobbies_claims": true,
+      "blocked_post": true,
+      "blocked_private_query": true,
+      "business_current": true,
+      "civic_current": true,
+      "education_current": true,
+      "hobbies_current": true,
+      "hobbies_lkg": true,
+      "hobbies_manifest": true,
+      "hobbies_pack": true,
+      "hobbies_revocations": true,
+      "occupation_current": true
+    }
+  },
+  "createdAt": "2026-06-28T00:00:00Z",
+  "deployedVersionID": "82c05553-d3c3-46ba-ace1-e559cf715a83",
+  "domain": "hobbies_recreation",
+  "environment": "production",
+  "gatewayURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "generatedAt": "2026-06-28T07:15:00Z",
+  "https_readback": {
+    "blocked_hobbies_claims": {
+      "byteSize": 9,
+      "name": "blocked_hobbies_claims",
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    "blocked_post": {
+      "byteSize": 18,
+      "name": "blocked_post",
+      "sha256": "371b26886bee5e559d5016b17b1479cb7a9154865da5a0f11563580ea99ff033",
+      "status": 405
+    },
+    "blocked_private_query": {
+      "byteSize": 9,
+      "name": "blocked_private_query",
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    "business_current": {
+      "byteSize": 1736,
+      "name": "business_current",
+      "sha256": "619d5fb25138130f43985bbf18cfb2f7c3cb073aa962265fb9fc65fb4b7e9047",
+      "status": 200
+    },
+    "civic_current": {
+      "byteSize": 1736,
+      "name": "civic_current",
+      "sha256": "3c5d573292cc8b306a3563487ab095efba2f64c05a65ba6bfd04756a56c13b46",
+      "status": 200
+    },
+    "education_current": {
+      "byteSize": 1728,
+      "name": "education_current",
+      "sha256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+      "status": 200
+    },
+    "hobbies_current": {
+      "byteSize": 1708,
+      "name": "hobbies_current",
+      "sha256": "01e7995e725dced65cb32ee114959129a06ae4ff6a843038df71dac1cc970207",
+      "status": 200
+    },
+    "hobbies_lkg": {
+      "byteSize": 1247,
+      "name": "hobbies_lkg",
+      "sha256": "0a124001fe47852e730f104966762282b85ce5df20652f8a04528cb9d0a817e5",
+      "status": 200
+    },
+    "hobbies_manifest": {
+      "byteSize": 8598,
+      "name": "hobbies_manifest",
+      "sha256": "5a0ab1732e900c5b134e66458846f5b5f1efe4fae119f5049dcd89f82469946b",
+      "status": 200
+    },
+    "hobbies_pack": {
+      "byteSize": 16093,
+      "name": "hobbies_pack",
+      "sha256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+      "status": 200
+    },
+    "hobbies_revocations": {
+      "byteSize": 1399,
+      "name": "hobbies_revocations",
+      "sha256": "5ad5144d75edf01a70b99d40fa1abc6e691936142d8812200aa7ec0cb7748026",
+      "status": 200
+    },
+    "occupation_current": {
+      "byteSize": 1720,
+      "name": "occupation_current",
+      "sha256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+      "status": 200
+    }
+  },
+  "knownLimits": [
+    "Worker exposes only current, LKG, revocations, manifest, and pack objects for this bounded hobbies recreation domain.",
+    "Legal posture is an internal terms review under user authorization, not outside legal approval.",
+    "Native runtime proof must still validate hobbies target fetch/cache/quarantine/offline behavior before any bounded runtime claim for this domain."
+  ],
+  "manifestID": "source_atlas_pack_manifest.b7f8231b934f8c73",
+  "no_private_graph_egress_proof": "No goal, capture, schedule, proof, receipt, account, device, private graph, personalization, or behavior fields are present in gateway object keys or requests.",
+  "objectKeys": {
+    "current": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+    "lkg": "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+    "pack": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/hobbies_recreation/revocations.json"
+  },
+  "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "pack_consistency": {
+    "currentPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+    "currentPackSHA256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+    "currentPointerHashConsistent": true,
+    "manifestPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+    "packBodyPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+    "packBodySHA256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+    "packHashConsistent": true,
+    "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+    "packIDConsistent": true,
+    "r2PublisherCurrentPointerSHA256": "01e7995e725dced65cb32ee114959129a06ae4ff6a843038df71dac1cc970207",
+    "workerCurrentPointerSHA256": "01e7995e725dced65cb32ee114959129a06ae4ff6a843038df71dac1cc970207"
+  },
+  "product_law_preserved": true,
+  "productionNonClaims": [
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not full Source Atlas Green",
+    "not broad Runtime Green",
+    "not Release Green",
+    "not App Store readiness",
+    "not account or entitlement readiness",
+    "not a Source Atlas product center or pack browser",
+    "not a final user plan, schedule, Step list, or personalized path generator",
+    "not emergency advice",
+    "not medical advice",
+    "not unsafe instructions",
+    "not a personalized recreation plan"
+  ],
+  "r2Bucket": "ambitions-source-atlas-prod",
+  "r2PublisherEvidence": "docs/qa/source-atlas/r2/source-atlas-hobbies-r2-publisher-remote-r2-train-44.json",
+  "r2RequestPrivacyProof": {
+    "noPrivateContextObservedInAllowedURLs": true,
+    "nonAllowlistedPackSliceRejected": true,
+    "privateMarkersRejectedByWorker": [
+      "account_id",
+      "capture",
+      "device_id",
+      "goal_text",
+      "private_graph",
+      "proof_id",
+      "receipt",
+      "schedule",
+      "user_id"
+    ],
+    "privateQueryMarkerRejected": true,
+    "requestShape": "fixed public object-key GET/HEAD requests through exact allowlist",
+    "writeMethodRejected": true
+  },
+  "requests": [
+    {
+      "byteSize": 1708,
+      "headers": {
+        "CF-RAY": "a12ae7056fba318a-IAD",
+        "Cache-Control": "public, max-age=120",
+        "Connection": "close",
+        "Content-Length": "1708",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:48 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=5C49KHJmP42aLKJb8wj%2BguF5TcoCFr7prwziuvEU35Yp6aJqDOb9X%2BsRQgWRH9yGonrY4KK%2FTCvI0PN2SLDZ48HNKt1x%2FZNROb7Bw81K6y1%2F%2FcKxGpOaxLmX%2FCY%2FEXIMQjsEVwPhwhmEi0GXW9rya5NGPneA8Uv%2FZcpLUGUijlD32QWAc%2FPpCee3%2Bq49TPIp3UOyuHwsRJ4fVKcz\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "hobbies_current",
+      "sha256": "01e7995e725dced65cb32ee114959129a06ae4ff6a843038df71dac1cc970207",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/hobbies_recreation/current.json"
+    },
+    {
+      "byteSize": 1247,
+      "headers": {
+        "CF-RAY": "a12ae7068906311e-IAD",
+        "Cache-Control": "public, max-age=3600",
+        "Connection": "close",
+        "Content-Length": "1247",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:48 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=wA6D5dmEAJNH%2FouBo0yFBRXcU7T8zGO%2FOuRGUCVl4bKfIBmxVXunT2nC6LFF%2FLzMP1ZORqAUHqa4fj8MQGcd%2FnzW5Uy8tF3tdmAGOyK7IUvO%2FQlbt0F06bS8OsKfcWRwTwcwIciZufKkgYmeiTQlVvNA%2BfDuaimruvxw%2BlZnhivMePq%2BxyC9BFjCNBqiJjLS%2FvOQ8tsHTVJFuNL9\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "hobbies_lkg",
+      "sha256": "0a124001fe47852e730f104966762282b85ce5df20652f8a04528cb9d0a817e5",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/hobbies_recreation/lkg.json"
+    },
+    {
+      "byteSize": 1399,
+      "headers": {
+        "CF-RAY": "a12ae707abee0c9f-IAD",
+        "Cache-Control": "public, max-age=3600",
+        "Connection": "close",
+        "Content-Length": "1399",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:49 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=z9HbfllY2zFomyd59wOF2MjCB0YZ8ghc%2FkU0sKtKtAfgbzo60IKfQLpWeIpiJdyRcpv8cwzKEe0RPOsBPx2bASo%2FJkpKUyrp3yA9JJ%2FMY52dkGE6ihBP8HbJvQF4ccpjg%2FJ5ywC6ZsQ0PdsWoXDjb7F0DLkIfwZjovXRq6HjoP0QeR8I8kLgIFupFoKOeS%2FRDsYm9By6Drx%2Bh96g\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "hobbies_revocations",
+      "sha256": "5ad5144d75edf01a70b99d40fa1abc6e691936142d8812200aa7ec0cb7748026",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/hobbies_recreation/revocations.json"
+    },
+    {
+      "byteSize": 8598,
+      "headers": {
+        "CF-RAY": "a12ae7089af12539-IAD",
+        "Cache-Control": "public, max-age=3600",
+        "Connection": "close",
+        "Content-Length": "8598",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:49 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=2vBGpxIDQeoq%2F2bsVYx7EdhO%2B7LYGsVdDbBGEJ6IIMVha4fgULVTyuDI0Pm9qDd0k8ua7SRNMh6ezucvsB1xlQoJ2LoPigwu20qNI%2FcMgK9CwJdGpM4Jk%2BdGTnbPMvJzAzSv1s6a8b%2BCGFfkeJC1HxzF5E8F%2Bas5L5uWbsTFIrRkS%2BCyCWsDjNgvnIAnuu%2FP56TBsWoegIRJuUyF\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "hobbies_manifest",
+      "sha256": "5a0ab1732e900c5b134e66458846f5b5f1efe4fae119f5049dcd89f82469946b",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json"
+    },
+    {
+      "byteSize": 16093,
+      "headers": {
+        "CF-RAY": "a12ae709cc9bc96a-IAD",
+        "Cache-Control": "public, max-age=3600",
+        "Connection": "close",
+        "Content-Length": "16093",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:49 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=eZ%2FyshpPe3wXohMkFl6dpqxkZxn%2F6%2BkUAOF%2Bf4Ln1m8RNx7u9P28OkS2x%2BsaLb2kkaS9EjWIBBeglnNfGy3ChH4Rxt0skg16xhVTPs7wo9itAQun0v0%2FJhOzrRWieB47Cnbo%2BLoi4e4p96jVUL98VfQ5vLpkOX%2FIkbirMpBdjRx0RPKH4xgNmmhz4oFYzh2ToL9m2GtlLZnSLDgO\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "hobbies_pack",
+      "sha256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json"
+    },
+    {
+      "byteSize": 1720,
+      "headers": {
+        "CF-RAY": "a12ae70abe21f45a-IAD",
+        "Cache-Control": "public, max-age=120",
+        "Connection": "close",
+        "Content-Length": "1720",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:49 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=G7Lh2w7JPsTCBKmfMfJ3p%2FNa7tuwwD3olz3qfYEnruvzM1NYA18G866kekcRVHhqL9C2vNE83Gf8YFqCR%2B67imjiaILZLDxIT6xjs53%2BAnHUxqqyBlngIoStYyOa3FntFMI9oWimcVDzWArP6hRpljpu5BULyuzavebf8bQQ8ndOa2UcZwGVnUlZrm4l1AlwpOI8%2FOKnQiaxBgLW\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "occupation_current",
+      "sha256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/occupation_foundation/current.json"
+    },
+    {
+      "byteSize": 1736,
+      "headers": {
+        "CF-RAY": "a12ae70baf428970-IAD",
+        "Cache-Control": "public, max-age=120",
+        "Connection": "close",
+        "Content-Length": "1736",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:49 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=jNN%2FKyggMfaXpLqXt%2BtCL07I3TopAY%2BTzdwPrlxG8vnthFuyQ5SUVpRrXwsVp41apTRlgAzbYDb%2BVliL%2BoTPCu93VmaHr2Ma888fw6CPk%2B7NIT47ge6ZcUSH3cz6jXSLJok2bCQ5ea6kjxPHXZ9RpPrUl5WXwcmMqqOVcv6%2BFAlPW1BV7HKLA%2F0EwNN4nnAsJU2leOOObnY%2BlLI%2B\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "civic_current",
+      "sha256": "3c5d573292cc8b306a3563487ab095efba2f64c05a65ba6bfd04756a56c13b46",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/public_civic_requirements/current.json"
+    },
+    {
+      "byteSize": 1728,
+      "headers": {
+        "CF-RAY": "a12ae70cbb045f12-IAD",
+        "Cache-Control": "public, max-age=120",
+        "Connection": "close",
+        "Content-Length": "1728",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:49 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=qM%2FCbvlvhnJAM%2B5sw7ef7XExg6PB2ZZFttS4D4VvJhgf4R46eSky%2BsQa7JjCXNl21%2Fun2KGTOTBb8taFDNfeO2v515g%2Fn8QzEJ86qnpZzpyoq0%2FEeuauKOzw7%2BENYYnM3mzxQ6pAP1i%2BxAYUzGR643vjr9Jqz3YS4vVliLA8K4OesDG2LVMBT3Nr3%2FIkYnOeNnBty0sMd94W1dfZ\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "education_current",
+      "sha256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/current.json"
+    },
+    {
+      "byteSize": 1736,
+      "headers": {
+        "CF-RAY": "a12ae70dbf092337-IAD",
+        "Cache-Control": "public, max-age=120",
+        "Connection": "close",
+        "Content-Length": "1736",
+        "Content-Type": "application/json; charset=utf-8",
+        "Date": "Sun, 28 Jun 2026 07:15:50 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=c6NwJk%2FPtN4mZg5q4RJ4nKbovDJJZwUP7AXYHXNjZOYN%2BG%2FDLMCaYmIaGtosgITm8JUjmkFer8twJm1F%2B8rGsxLJa90n1T3kTsZr0U57i5FCju2hGMjDvutFe6xGQP9ZEbejcOxgU%2FDBOcfHV%2B1b2EUz0Kl%2FWO0kjanJPhz0i%2Bj6c5YMolShYkaWJabZfBKLiHcU%2FYUetNTrU95S\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "business_current",
+      "sha256": "619d5fb25138130f43985bbf18cfb2f7c3cb073aa962265fb9fc65fb4b7e9047",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/current.json"
+    },
+    {
+      "byteSize": 9,
+      "headers": {
+        "CF-RAY": "a12ae70e99926887-IAD",
+        "Cache-Control": "no-store",
+        "Connection": "close",
+        "Content-Length": "9",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Date": "Sun, 28 Jun 2026 07:15:50 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=0%2BcEn4JdzWH7DOZ4%2BGSCLHS0ionrN02uoEiWp33PYfyo5sOfa7WMtKWjZZvOE%2FziOLgNaxDcmcAbS5vj4oQ%2FYRpLlkv63doUYAqb5W5DdqNTAl34rviE%2FmXzXJzID40Wjxg4g92XgCA61SsvAbld0EjE8KY1%2B0S4L70rWSqb6LQzFfjcXlbAserNqi%2FeYd%2Fw60Xxl3r5%2BMr98hGP\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "blocked_hobbies_claims",
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/claims.json"
+    },
+    {
+      "byteSize": 9,
+      "headers": {
+        "CF-RAY": "a12ae70f692dca32-IAD",
+        "Cache-Control": "no-store",
+        "Connection": "close",
+        "Content-Length": "9",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Date": "Sun, 28 Jun 2026 07:15:50 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=ih5CCHhuep%2BZol0ePN9WwINNkMm21aSLlGeVOkthhep1F8xaLrLZwunlvODYDdMXUKPziihYSrwI13ydTDjQrnthqszJkWdtzw7UMMoAdzXrnrfj7Yn0fFBZFh1kKguIZrtmEP%2BEuDCDwTU0YnaGJZjZyC7vF%2BEuE3834Jx7VMgL4%2B4D03I94pKpk4zOIz7ViUGmHgucQzSw7s2p\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "GET",
+      "name": "blocked_private_query",
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/hobbies_recreation/current.json?goal_text=private"
+    },
+    {
+      "byteSize": 18,
+      "headers": {
+        "Allow": "GET, HEAD",
+        "CF-RAY": "a12ae7101bea88d0-IAD",
+        "Cache-Control": "no-store",
+        "Connection": "close",
+        "Content-Length": "18",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "Date": "Sun, 28 Jun 2026 07:15:50 GMT",
+        "Nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "Report-To": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=3%2FQwZGYUIoROeUo8%2BnBXHdTJqdM4XBZ9A7%2B2Ae%2BXV7jBF10E2bSBCQ4jy%2ByxhqHaWEkIwntB2NZ32kfL3kJIFSz95Z7SNz34EIoisEK88mRp%2FxF5HEJdA%2FSB11aAIGsHi4oVHVVMe5hVFTiY4yUZqwlVHPS6Bd6hntZEKgKGOqXTSxclHVaDPZOPNhcQB9HmfYM0vijzGyopp8EY\"}]}",
+        "Server": "cloudflare",
+        "X-Content-Type-Options": "nosniff",
+        "alt-svc": "h3=\":443\"; ma=86400"
+      },
+      "method": "POST",
+      "name": "blocked_post",
+      "sha256": "371b26886bee5e559d5016b17b1479cb7a9154865da5a0f11563580ea99ff033",
+      "status": 405,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/hobbies_recreation/current.json"
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "status": "green_for_bounded_hobbies_recreation_gateway_https_readback_yellow_overall_source_atlas",
+  "title": "Source Atlas public Worker gateway hobbies recreation HTTPS readback proof",
+  "valid": true
+}

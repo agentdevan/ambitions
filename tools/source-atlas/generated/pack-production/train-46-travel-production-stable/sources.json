@@ -1,0 +1,84 @@
+{
+  "excludedClaims": [],
+  "sources": [
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US and destination-specific",
+      "license_id": "state_travel_public_web",
+      "non_claims": [
+        "not visa advice",
+        "not legal advice",
+        "not emergency advice",
+        "not a safety guarantee",
+        "not a custom itinerary",
+        "not universal travel coverage",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "state.travel.public_travel",
+      "source_name": "Travel.State.Gov passport and travel advisory public reference pages"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_atom_edge_lattice",
+        "public_freshness",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "usagov_public_web",
+      "non_claims": [
+        "not address submission",
+        "not legal advice",
+        "not a custom moving plan",
+        "not private location inference",
+        "not universal relocation coverage",
+        "not final user planning",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "usa.gov.change_address",
+      "source_name": "USA.gov change-address public relocation reference page"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.legalTermsApprovalPacket.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not production R2 readiness",
+    "not release readiness",
+    "not universal coverage",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outsideLegalApprovalBoundary": "outside legal approval requires a current source-specific approval artifact",
+  "outsideLegalApprovalClaimed": false,
+  "packetID": "source-atlas/legal-terms-approval/d252bd64c9358b2a",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "reviewOwner": "Ambitions owner technical review",
+  "reviewType": "internal_source_atlas_legal_terms_review",
+  "schemaVersion": 1,
+  "sourceApprovals": [
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from Creative Commons.",
+      "datasetURL": "https://creativecommons.org/licenses/",
+      "distributionURL": "https://creativecommons.org/licenses/",
+      "evidenceHash": "174f0565ef4af966c7ef254cea709d5c93cbcf35096d915184d0bb49713ef66f",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://creativecommons.org/licenses/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://creativecommons.org/terms/"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons website content CC BY 4.0 unless otherwise marked; legal tools, deeds, and notices identified as CC0, with trademark and third-party caveats retained",
+      "licenseURL": "https://creativecommons.org/licenses/",
+      "licenseVersion": "current Creative Commons website terms and policies posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Creative Commons",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Ambitions owner technical review",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://creativecommons.org/terms/",
+      "sourceID": "creative-commons.licenses",
+      "sourceName": "Creative Commons licenses and public-domain tools public reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://creativecommons.org/terms/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the World Wide Web Consortium.",
+      "datasetURL": "https://www.w3.org/standards/",
+      "distributionURL": "https://www.w3.org/standards/",
+      "evidenceHash": "52f03b5d369b28d6c7dc7a62649beda0b14fc6a99f1aa03a5967d638a260ce4b",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.w3.org/standards/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.w3.org/copyright/"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "W3C public standards and website reference posture with document, software, test-suite, patent-policy, trademark, and permission caveats retained",
+      "licenseURL": "https://www.w3.org/standards/",
+      "licenseVersion": "current W3C copyright and policies posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "World Wide Web Consortium",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Ambitions owner technical review",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://www.w3.org/copyright/",
+      "sourceID": "w3c.web-standards",
+      "sourceName": "W3C web standards public reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.w3.org/copyright/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the Library of Congress.",
+      "datasetURL": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "distributionURL": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "evidenceHash": "3e1610ddef5b839fbd5e8503ec025ed0b997da70f7a8b1b5fdb6ad6da9cb815b",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://www.loc.gov/legal/"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Library of Congress page text marked U.S. Government Work; collection items, third-party material, media, and rights-restricted content excluded",
+      "licenseURL": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "licenseVersion": "current LOC legal and page-level rights posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Library of Congress",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Ambitions owner technical review",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://www.loc.gov/legal/",
+      "sourceID": "loc.primary_sources",
+      "sourceName": "Library of Congress Getting Started with Primary Sources public learning reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.loc.gov/legal/"
+    }
+  ],
+  "status": "Green",
+  "statusReason": "internal source-specific terms review complete for approved lanes; blocked or review-required lanes remain excluded",
+  "userAuthorization": "User authorized extensive internal legal/terms review for bounded Source Atlas Green claims; this is not outside legal approval.",
+  "versionID": "source-atlas-legal-terms-approval-packet-v1"
+}

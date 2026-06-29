@@ -1,0 +1,392 @@
+{
+  "adapterID": "w3c_web_standards_reference_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_w3c_web_standards_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_web_standards_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_web_standards_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.acf4761b98d7acc0",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "W3C web standards public reference page",
+      "provenanceIDs": [
+        "provenance.39d9922c61b76a75"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "w3c.web-standards"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "web_standard_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.9bfb4919db497b7c",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "web standards",
+      "provenanceIDs": [
+        "provenance.39d9922c61b76a75"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "w3c.web-standards"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "standards_body",
+      "checksum": "checksum.f7ef0a1f8250cd43",
+      "claimType": "public_standard_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly W3C standards page, copyright, and policy re-review",
+      "id": "claim.58130f9998c31fd7",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.w3.org/copyright/",
+      "provenanceIDs": [
+        "provenance.39d9922c61b76a75"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "World Wide Web Consortium",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "w3c.web-standards",
+      "sourceIDs": [
+        "w3c.web-standards"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.w3.org/standards/",
+      "state": "source_backed",
+      "text": "W3C publishes web standards and drafts as public standards-body reference context for web and creative-technical projects, not implementation advice, trademark permission, patent advice, or a final creative plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "w3c_web_standards_reference_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "creative_project_reference",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "global",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "standards_body",
+    "sourceCount": 1,
+    "sourceLane": "w3c.web-standards",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "public_standard_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateFinalCreativePlan": true,
+      "doesNotCreateImplementationAdvice": true,
+      "doesNotCreatePatentAdvice": true,
+      "doesNotGrantTrademarkPermission": true,
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.creativeProjectReferenceCoverage.v1",
+      "label": "W3C web standards public reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "w3c.web-standards",
+      "subject": "creative_standards.w3c_web_standards",
+      "thirdPartyContentExcluded": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "creative_project_reference",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.acf4761b98d7acc0",
+      "id": "edge.c8488b4d3ad88602",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.39d9922c61b76a75"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_web_standard_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "w3c.web-standards"
+      ],
+      "toAtomID": "atom.9bfb4919db497b7c",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.acf4761b98d7acc0",
+        "atom.9bfb4919db497b7c"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.c8488b4d3ad88602"
+      ],
+      "id": "lattice.5c51137d015d4f7f",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "w3c_web_standards_reference_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "creative_project_reference",
+      "id": "pack_candidate.9ec51682485ebe48",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "w3c.web-standards",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "w3c.web-standards"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "standards_body",
+      "contentHash": "f7e1a1ad96d62bd81ca1b25a0e2f2d05a2b5efae1208c9e279c9a4f4a4f3a509",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly W3C standards page, copyright, and policy re-review",
+      "id": "provenance.39d9922c61b76a75",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "W3C public standards and website reference posture with document, software, test-suite, patent-policy, trademark, and permission caveats retained",
+      "locator": "https://www.w3.org/standards/",
+      "publicReferenceOnly": true,
+      "publisher": "World Wide Web Consortium",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "w3c.web-standards",
+      "sourceState": "current",
+      "sourceURL": "https://www.w3.org/standards/",
+      "termsURL": "https://www.w3.org/copyright/",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.58130f9998c31fd7",
+      "dataClass": "public_requirement",
+      "gateType": "public_web_standard_reference_only",
+      "id": "requirement.2cc449c92a9bbb31",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.39d9922c61b76a75"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "w3c.web-standards"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "w3c.web-standards",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "standards_body",
+    "freshnessCadence": "quarterly W3C standards page, copyright, and policy re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "W3C public standards and website reference posture with document, software, test-suite, patent-policy, trademark, and permission caveats retained",
+    "licenseVersion": "current W3C copyright and policies posture",
+    "publisher": "World Wide Web Consortium",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "w3c.web-standards",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.w3.org/copyright/"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "w3c.web-standards"
+  }
+}

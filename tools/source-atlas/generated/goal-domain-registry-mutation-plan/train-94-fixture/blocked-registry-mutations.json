@@ -1,0 +1,52 @@
+{
+  "blockedRegistryMutations": [
+    {
+      "activeRegistryWritten": false,
+      "blockedMutationID": "source_atlas_goal_domain_registry_mutation_block.2267cae4765df493",
+      "blockingReasons": [
+        "api_governance_review",
+        "completed_review_bundle_required",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.6df7d4db56f369d8",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": "business_entrepreneurship",
+      "nonClaims": [
+        "blocked registry mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "status": "blocked"
+    },
+    {
+      "activeRegistryWritten": false,
+      "blockedMutationID": "source_atlas_goal_domain_registry_mutation_block.ac80c3052def4509",
+      "blockingReasons": [
+        "api_governance_review",
+        "completed_review_bundle_required",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.26d48f973e5270f6",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked registry mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainBlockedRegistryMutations.v1"
+}

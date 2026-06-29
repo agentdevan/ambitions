@@ -1,0 +1,60 @@
+{
+  "artifactID": "source_atlas_native_public_refresh_target_registry_tri_domain_approval.train42",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "status": "approved_for_bounded_native_public_refresh_registry_activation",
+  "scope": {
+    "registryArtifactID": "source_atlas_public_refresh_targets.train42_tri_live_worker_gateway",
+    "environment": "production",
+    "channel": "stable",
+    "targetDomains": [
+      "occupation_foundation",
+      "public_civic_requirements",
+      "education_credentialing"
+    ],
+    "allowedModes": [
+      "startup",
+      "active_lifecycle",
+      "background"
+    ],
+    "allowedRequestShape": "anonymous public object-key requests for current pointer, revocations, manifest, LKG pointer, and pack object only"
+  },
+  "proofInputs": [
+    "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-owner-approval-train-34.md",
+    "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-civic-approval-train-37.md",
+    "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-education-approval-train-42.json",
+    "docs/qa/source-atlas/r2/source-atlas-education-r2-publisher-remote-r2-train-42.json",
+    "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-education-readback-train-42.json"
+  ],
+  "requiredControls": [
+    "R2 and Worker requests remain public/reference/freshness only",
+    "No private user context, goals, captures, schedules, proof, receipts, account IDs, device IDs, or private life graph fields are included in native refresh target metadata",
+    "Refresh targets are fixed by domain, channel, schema version, app version, optional public locale, target pack ID, and production environment",
+    "Native registry loading must reject private-looking target metadata before use",
+    "Offline and no-account behavior must continue to use local fallback without blocking core planning",
+    "Pack download must verify manifest and pack checksums before cache replacement",
+    "Hash mismatch, revoked packs, unsupported schema, unsafe metadata, and stale-critical states must quarantine or fall back locally",
+    "Source Atlas must not generate final user plans, schedules, Step lists, or personalized paths"
+  ],
+  "reviewDecision": {
+    "reviewOwner": "Codex under explicit user authorization for Train 42",
+    "decision": "approved_for_bounded_active_registry_artifact",
+    "notes": [
+      "This approval activates public refresh target metadata for three bounded domains only.",
+      "This is not outside legal approval.",
+      "This is not Release Green, App Store readiness, account readiness, universal coverage, or broad Runtime Green."
+    ]
+  },
+  "nonClaims": [
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not full Source Atlas Green",
+    "not broad Runtime Green",
+    "not Release Green",
+    "not App Store readiness",
+    "not account or entitlement readiness",
+    "not a Source Atlas product center or pack browser",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not a final user plan, schedule, Step list, or personalized path generator"
+  ]
+}

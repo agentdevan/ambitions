@@ -1,0 +1,24 @@
+{
+  "adjudications": [
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.41419649a39d236e",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "official.statcan.table.13100974",
+      "status": "accepted_claim"
+    },
+    {
+      "adjudication_rule": "accepted_direct_authority_source",
+      "authority_class": "official_government",
+      "claim_id": "canonical_claim.8820a7c8e061b6a4",
+      "dataClass": "public_provenance",
+      "freshness_status": "current",
+      "publicReferenceOnly": true,
+      "source_id": "official.statcan.table.13100974",
+      "status": "accepted_claim"
+    }
+  ]
+}

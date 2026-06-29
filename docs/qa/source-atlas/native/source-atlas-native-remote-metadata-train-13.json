@@ -1,0 +1,172 @@
+{
+  "issue": "AMB-1499",
+  "train": "Source Atlas Production Finish-Line Train 13",
+  "title": "Native revocation and LKG remote metadata",
+  "status": "Green for focused native revocation/LKG remote metadata tooling / Yellow overall Source Atlas",
+  "createdAt": "2026-06-27T22:06:00Z",
+  "scopeCompleted": [
+    "Extended native public-pack remote transport to fetch publisher revocation metadata when the current pointer provides a public revocation key.",
+    "Applied revocation metadata before pack-object fetch, so a revoked current pack is quarantined instead of replacing local cache.",
+    "Extended native public-pack remote transport to fetch publisher LKG pointer metadata and the LKG manifest when public keys are present.",
+    "Used LKG manifest pack SHA-256 only as rollback guidance for an existing local last-known-good payload.",
+    "Rejected private-looking LKG manifest object keys before current pack fetch.",
+    "Preserved offline/no-account local planning behavior and Source Atlas reference-only semantics."
+  ],
+  "filesChanged": [
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransport.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransportAdapters.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublishedPackMetadataCompatibility.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackFetchPipeline.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteMetadataTests.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteTransportTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-remote-metadata-train-13.json",
+    "docs/qa/source-atlas/native/source-atlas-native-remote-metadata-train-13.md"
+  ],
+  "productLawPreserved": true,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas",
+  "r2RequestPrivacyProof": {
+    "status": "passed_focused",
+    "details": [
+      "Revocation and LKG pointer object keys come only from publisher current pointers and are scanned before fetch.",
+      "LKG manifest object keys are decoded from public LKG metadata and scanned before fetch.",
+      "A private-looking LKG manifest key fixture containing user_id is rejected before current pack fetch."
+    ]
+  },
+  "noPrivateGraphEgressProof": {
+    "status": "passed_focused",
+    "details": [
+      "Focused XCTest blocks private LKG metadata object keys before current pack fetch.",
+      "No account, device, goal, capture, schedule, proof, receipt, behavior, personalization, or private graph fields are represented in remote metadata input."
+    ]
+  },
+  "licenseTermsProof": {
+    "status": "not_claimed",
+    "details": [
+      "Native metadata handling consumes publisher-approved public metadata but does not create legal approval.",
+      "Outside legal approval is not claimed."
+    ]
+  },
+  "restrictedSourceExclusionProof": {
+    "status": "inherited_from_pack_production",
+    "details": [
+      "Native metadata handling does not re-admit restricted source lanes.",
+      "Restricted-source eligibility remains governed by upstream pack-production artifacts."
+    ]
+  },
+  "provenanceCompletenessProof": {
+    "status": "not_broadened",
+    "details": [
+      "This train affects freshness/revocation/LKG selection metadata only.",
+      "Claim provenance completeness is not broadened by Train 13."
+    ]
+  },
+  "freshnessRevocationProof": {
+    "status": "passed_focused",
+    "details": [
+      "Focused XCTest proves revoked current packs are blocked before pack-object fetch and quarantined through the existing cache pipeline.",
+      "Revocation metadata is public/reference-only and source-atlas object-key-scanned."
+    ]
+  },
+  "lkgRollbackProof": {
+    "status": "passed_focused",
+    "details": [
+      "Focused XCTest proves LKG pointer plus LKG manifest can add rollback hash guidance for an existing local LKG payload.",
+      "Focused XCTest proves private LKG manifest object keys stop before current pack fetch.",
+      "Train 13 does not claim production R2 rollback execution."
+    ]
+  },
+  "nativeOfflineNoAccountProof": {
+    "status": "passed_adjacent",
+    "details": [
+      "Existing offline/no-account transport and fetch pipeline tests remain green.",
+      "Core local planning remains unblocked when remote Source Atlas metadata is unavailable or local fallback is used."
+    ]
+  },
+  "validationRun": [
+    {
+      "command": "xcodegen generate",
+      "status": "passed"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRemoteMetadataTests",
+      "status": "passed",
+      "result": "3 passed, 0 failed",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-27T22-01-30-931Z_pid24471_4111744e.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-27T22-01-30-931Z_pid24471_acb20ae8.xcresult"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRemoteTransportTests -only-testing:AmbitionsTests/SourceAtlasPublicPackFetchPipelineTests",
+      "status": "passed",
+      "result": "13 passed, 0 failed",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-27T22-03-37-512Z_pid24471_f579194b.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-27T22-03-37-512Z_pid24471_0684aaad.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "result": "125 passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "result": "PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "result": "GREEN"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "result": "GREEN"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "result": "FAILURE_CLASS=passed",
+      "summary": ".codex/xcode-summaries/green-standard/20260627T220715Z/extract/summary.json"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Stable production promotion was not run.",
+    "Full native app runtime/release suite was not claimed.",
+    "Outside legal review was not run or claimed.",
+    "Rendered device/source inspection visual proof was not run."
+  ],
+  "knownRisks": [
+    "This proves deterministic native metadata handling with static public objects; it does not prove live R2 object availability, production credentials, CDN/cache behavior, or account entitlement policy.",
+    "LKG metadata is used only to authorize an existing local payload by hash; this train does not implement downloading or storing a replacement LKG pack.",
+    "Revocation/LKG artifacts remain governed by upstream R2 publisher and pack-production controls.",
+    "Legal/terms approval remains governed by upstream registry and pack-production artifacts."
+  ],
+  "rollbackPlan": [
+    "Revert SourceAtlasPublishedPackMetadataCompatibility.swift.",
+    "Revert Train 13 metadata additions in SourceAtlasPublicPackRemoteTransport.swift and SourceAtlasPublicPackFetchPipeline.swift.",
+    "Revert SourceAtlasPublicPackRemoteTransportAdapters.swift extraction only if needed to restore prior layout.",
+    "Revert focused metadata XCTest additions and Train 13 QA evidence.",
+    "Keep Train 12 basic public transport and Train 11 publisher compatibility behavior."
+  ],
+  "productionNonClaims": [
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not production R2 upload proof",
+    "not stable production promotion",
+    "not legal approval",
+    "not release readiness",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not a private user-data backend",
+    "not private life graph storage"
+  ]
+}

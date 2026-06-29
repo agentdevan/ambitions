@@ -1,0 +1,29 @@
+{
+  "blockedRegistryMutations": [
+    {
+      "activeRegistryWritten": false,
+      "blockedMutationID": "source_atlas_goal_domain_registry_mutation_block.e9bce2e272f52581",
+      "blockingReasons": [
+        "api_governance_review",
+        "completed_review_bundle_required",
+        "direct_source_authority_resolution",
+        "legal_terms_review",
+        "source_lane_governance"
+      ],
+      "bundleID": "source_atlas_goal_domain_review_bundle.2eeba04fafcdccce",
+      "createdAt": "2026-06-28T22:20:00Z",
+      "matchedDomainID": null,
+      "nonClaims": [
+        "blocked registry mutation only",
+        "not active registry mutation",
+        "not source authority",
+        "not claim output"
+      ],
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T22:20:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainBlockedRegistryMutations.v1"
+}

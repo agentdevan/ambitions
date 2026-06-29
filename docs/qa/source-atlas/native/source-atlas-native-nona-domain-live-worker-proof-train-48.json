@@ -1,0 +1,194 @@
+{
+  "activeDomains": [
+    "business_entrepreneurship",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "hobbies_recreation",
+    "home_life_admin",
+    "occupation_foundation",
+    "public_civic_requirements",
+    "travel_relocation"
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "endpoint": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "homeLifeAdminPack": {
+    "manifestSHA256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84",
+    "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+    "packSHA256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+    "packVersion": "20260628T000000Z"
+  },
+  "kind": "ambitions.sourceAtlas.nativeNonaDomainLiveWorkerProof.v1",
+  "nativeRegistryArtifact": "tools/source-atlas/generated/native-refresh-registry/train-48-nona-live-worker-gateway/source-atlas-public-refresh-targets.json",
+  "nativeRegistryProof": "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-nona-domain-train-48.json",
+  "native_runtime_proofs": [
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "business_entrepreneurship",
+      "target_pack_id": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "education_credentialing",
+      "target_pack_id": "source-atlas/v1/domain/education_credentialing/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "finance_public_reference",
+      "target_pack_id": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "health_wellness_reference",
+      "target_pack_id": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "hobbies_recreation",
+      "target_pack_id": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "home_life_admin",
+      "target_pack_id": "source-atlas/v1/domain/home_life_admin/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "occupation_foundation",
+      "target_pack_id": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "public_civic_requirements",
+      "target_pack_id": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "travel_relocation",
+      "target_pack_id": "source-atlas/v1/domain/travel_relocation/20260628T000000Z"
+    }
+  ],
+  "nonClaims": [
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store readiness",
+    "not universal coverage",
+    "not broad Runtime Green",
+    "not account or entitlement readiness",
+    "not final user plan, timetable, or Step generation",
+    "not emergency response advice",
+    "not unsafe repair guidance",
+    "not eligibility or loan approval",
+    "not contractor advice",
+    "not an individual household plan"
+  ],
+  "product_law_preserved": true,
+  "r2PublisherProof": "docs/qa/source-atlas/r2/source-atlas-home-life-admin-r2-publisher-remote-r2-train-48.json",
+  "r2WorkerReadbackProof": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-home-life-admin-readback-train-48.json",
+  "runtimeBoundaryProof": {
+    "coreOfflineNoAccountStillUsable": true,
+    "localMatchingOnly": true,
+    "noFinalPath": true,
+    "noFinalTimetable": true,
+    "noStepGeneration": true,
+    "remotePackIsPublicReferenceOnly": true
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; nine bounded production target domains only",
+  "status": "green_for_bounded_nona_domain_worker_gateway_live_transport_yellow_overall_source_atlas",
+  "transportPrivacyProof": {
+    "disallowedFieldsAbsent": [
+      "goal text",
+      "captures",
+      "proof records",
+      "receipts",
+      "account identifiers",
+      "device identifiers",
+      "local runtime graph"
+    ],
+    "noForbiddenRequestFields": true,
+    "requestShape": "app version, environment, channel, domain, schema version, public locale, and public pack id only"
+  },
+  "valid": true,
+  "validation_run": [
+    {
+      "name": "build_for_testing",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T102947Z-bft-4150-10936/build-for-testing-summary.json",
+      "proof_note": "Test Build Succeeded; FAILURE_CLASS=passed",
+      "result_bundle": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T102947Z-bft-4150-10936/build-for-testing.xcresult",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 14,
+      "name": "remote_transport",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103031Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-4579-12831/focused-test-summary.json",
+      "result_bundle": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103031Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-4579-12831/focused-test.xcresult",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 15,
+      "name": "lifecycle_refresh",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103114Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-5160-1406/focused-test-summary.json",
+      "result_bundle": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103114Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-5160-1406/focused-test.xcresult",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 8,
+      "name": "registry_loader",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103156Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-5759-14088/focused-test-summary.json",
+      "result_bundle": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103156Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-5759-14088/focused-test.xcresult",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 4,
+      "name": "app_container_offline_no_account",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103237Z-AmbitionsTests-AppContainerFactoryTests-6235-3205/focused-test-summary.json",
+      "result_bundle": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103237Z-AmbitionsTests-AppContainerFactoryTests-6235-3205/focused-test.xcresult",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 9,
+      "name": "fetch_pipeline",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103352Z-AmbitionsTests-SourceAtlasPublicPackFetchPipelineTests-6734-1832/focused-test-summary.json",
+      "result_bundle": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_48_NONA_LIVE_FULL/20260628T103352Z-AmbitionsTests-SourceAtlasPublicPackFetchPipelineTests-6734-1832/focused-test.xcresult",
+      "status": "passed"
+    }
+  ],
+  "workerVersionID": "07c47553-733f-45a7-9b26-6fe19a33d40a"
+}

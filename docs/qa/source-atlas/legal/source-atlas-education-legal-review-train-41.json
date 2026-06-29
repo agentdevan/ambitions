@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.internalTechnicalTermsReview.v1",
+  "reviewID": "source-atlas/education/legal-review/train-41",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "status": "green_for_internal_technical_terms_posture_yellow_overall_source_atlas",
+  "valid": true,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; internal technical terms posture only",
+  "reviewType": "Codex internal technical terms and redistribution review",
+  "outsideLegalApprovalClaimed": false,
+  "outsideLegalApprovalArtifact": "",
+  "sourceReviews": [
+    {
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "sourceName": "United States Military Academy Redbook Computer Science major curriculum",
+      "publisher": "United States Military Academy / West Point",
+      "sourceURL": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/",
+      "termsURL": "https://catalog.westpoint.edu/",
+      "rightsURL": "https://catalog.westpoint.edu/",
+      "authorityClass": "official_institution",
+      "jurisdiction": "US federal",
+      "licenseID": "us_federal_public_source",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "packOutputAllowedByInternalReview": true,
+      "reviewedFields": [
+        "official institutional publisher",
+        "public catalog source URL",
+        "catalog footer public-information reproduction/distribution posture",
+        "U.S. federal public-source posture",
+        "bounded claim class",
+        "attribution requirement",
+        "forbidden final plan/schedule/Step/private graph classes"
+      ],
+      "allowedClaimClasses": [
+        "credential_requirement"
+      ],
+      "forbiddenClaimClasses": [
+        "admissions_guarantee",
+        "financial_aid_advice",
+        "credentialing_authority",
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan"
+      ],
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness"
+      ],
+      "attributionText": "Based on public reference data from the United States Military Academy Redbook.",
+      "freshnessSLA": "catalog_year_review_quarterly_institutional_recheck",
+      "reviewConclusion": "Allowed for bounded staging-pack public/reference credential-requirement claims with attribution. This does not constitute outside legal approval, admissions advice, credentialing authority, or release readiness."
+    },
+    {
+      "sourceID": "college-scorecard.api",
+      "sourceName": "College Scorecard data API",
+      "publisher": "U.S. Department of Education",
+      "sourceURL": "https://collegescorecard.ed.gov/data/",
+      "termsURL": "https://collegescorecard.ed.gov/data/",
+      "authorityClass": "official_government",
+      "jurisdiction": "US",
+      "licenseID": "education_public_data_review",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "packOutputAllowedByInternalReview": true,
+      "reviewConclusion": "Existing Train 38 internal terms posture remains accepted for bounded candidate institution and program metadata with attribution."
+    }
+  ],
+  "checks": [
+    {
+      "name": "missing_terms_blocks_pack_output",
+      "passed": true
+    },
+    {
+      "name": "outside_legal_approval_not_claimed",
+      "passed": true
+    },
+    {
+      "name": "source_specific_artifact_classes_bounded",
+      "passed": true
+    },
+    {
+      "name": "no_private_or_final_runtime_artifact_classes_allowed",
+      "passed": true
+    },
+    {
+      "name": "restricted_or_lookup_only_source_not_added",
+      "passed": true
+    }
+  ],
+  "nonClaims": [
+    "not outside legal approval",
+    "not a legal opinion",
+    "not admissions advice",
+    "not a personalized degree plan",
+    "not universal credential coverage",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not Release Green",
+    "not universal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ]
+}

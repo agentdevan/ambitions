@@ -165,6 +165,11 @@ def is_boundary_line(line: str) -> bool:
     return any(marker in lowered for marker in markers)
 
 
+def is_url_like_line(line: str) -> bool:
+    stripped = line.strip().lower()
+    return stripped.startswith("https://") or stripped.startswith("http://")
+
+
 def _data_class_for_value(value: Any, path: str) -> str | None:
     if isinstance(value, dict):
         for key in ("dataClass", "dataClassification", "classification"):
@@ -190,6 +195,8 @@ def boundary_issues_for_value(value: Any, label: str) -> list[BoundaryIssue]:
                 if is_boundary_line(line):
                     continue
                 for pattern, code in FORBIDDEN_TEXT_PATTERNS:
+                    if code == "phone_number" and is_url_like_line(line):
+                        continue
                     if pattern.search(line):
                         issues.append(BoundaryIssue(label, f"{path}:{index}", code, line.strip()[:160]))
         elif isinstance(item, list):

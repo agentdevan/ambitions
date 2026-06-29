@@ -1,0 +1,142 @@
+{
+  "schema_version": "1.0.0",
+  "train": "35",
+  "linear_issue": "AMB-1521",
+  "title": "Source Atlas legal approval claim gate and release-proof ledger",
+  "created_at": "2026-06-28T04:08:00Z",
+  "status": "source_green_for_release_claim_gate_yellow_overall_source_atlas",
+  "scope_completed": [
+    "Added a reusable legal/release claim gate for Source Atlas proof wording.",
+    "Generated a Train 35 release-claim ledger from the current Train 27 terms packet, Train 29 production R2 proof, Train 34 live native transport proof, and current coverage frontier evidence.",
+    "Allowed bounded internal terms-review, bounded production R2 write, bounded live native transport, and the specific production stable occupation_foundation target claims.",
+    "Blocked unqualified legal approval, outside legal approval, broad Source Atlas Runtime Green, Release Green, and universal coverage claims.",
+    "Added tests proving internal terms review cannot be inflated into outside legal or Release Green claims."
+  ],
+  "files_changed": [
+    "tools/source-atlas/foundry/legal_release_claim_gate.py",
+    "tools/source-atlas/foundry/tests/test_legal_release_claim_gate_train_35.py",
+    "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-train-35.json",
+    "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-train-35.md",
+    "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-train-35-closeout.json",
+    "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-train-35-closeout.md"
+  ],
+  "claim_gate_result": {
+    "artifact": "docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-train-35.json",
+    "status": "Source Green for release-claim gate",
+    "allowed_claims": [
+      "source_atlas_terms_gate_green",
+      "bounded_production_r2_write",
+      "bounded_live_native_transport",
+      "bounded_production_target"
+    ],
+    "blocked_claims": [
+      "unqualified_legal_approval",
+      "outside_legal_approval",
+      "source_atlas_runtime_green",
+      "release_green",
+      "universal_coverage"
+    ]
+  },
+  "product_law_preserved": true,
+  "source_atlas_status_ceiling": "Source Green for the release-claim gate only; Yellow overall Source Atlas.",
+  "r2_request_privacy_proof": "The gate consumes Train 29/34 proof artifacts and validates that bounded R2/live claims remain public/reference only. It does not introduce new R2 requests.",
+  "no_private_graph_egress_proof": "The gate scans input proof artifacts through the Source Atlas boundary scanner and rejects private-looking evidence such as goal text.",
+  "license_terms_proof": "Train 35 validates the Train 27 internal legal/terms approval packet for listed source IDs and artifact classes, while blocking unqualified legal and outside legal approval claims.",
+  "restricted_source_exclusion_proof": "No pack contents changed. Existing pack/R2 proofs continue to exclude restricted sources; Train 35 prevents release wording from bypassing that proof.",
+  "provenance_completeness_proof": "No claims were created or modified. The gate references existing Train 29 pack/provenance proof only for bounded production target wording.",
+  "freshness_revocation_proof": "No R2 objects changed. Train 35 preserves Train 29/34 freshness, revocation, LKG, and live transport proof as scoped evidence.",
+  "lkg_rollback_proof": "No R2 pointer changed. LKG/rollback proof remains inherited from Train 29 and Train 34 for bounded target wording only.",
+  "native_offline_no_account_proof": "No Swift files changed in Train 35. Native runtime proof remains Train 30/34 scoped evidence and broad Runtime Green remains blocked.",
+  "validation_run": [
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_legal_release_claim_gate_train_35.py",
+      "status": "passed",
+      "summary": "7 passed"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "summary": "152 passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas boundary audit: PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas no-private-graph egress audit: PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "summary": "GREEN: no disallowed architecture-as-UI strings found in active primary UI source"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "summary": "GREEN: local-first/account/R2/hosted-AI boundary checks passed in active authority files"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/legal/source-atlas-legal-release-claim-gate-train-35.json >/dev/null",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m py_compile tools/source-atlas/foundry/legal_release_claim_gate.py tools/source-atlas/foundry/tests/test_legal_release_claim_gate_train_35.py",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "Native XCTest/build-for-testing, because Train 35 changed Python tooling and QA evidence only.",
+    "Outside legal counsel review.",
+    "Release umbrella proof.",
+    "Custom-domain production endpoint proof.",
+    "Universal coverage proof."
+  ],
+  "production_non_claims": [
+    "Not unqualified legal approval.",
+    "Not outside legal approval.",
+    "Not privacy/legal owner release signoff.",
+    "Not full Source Atlas Green.",
+    "Not broad Source Atlas Runtime Green.",
+    "Not Release Green.",
+    "Not Visual Green.",
+    "Not App Store readiness.",
+    "Not custom-domain production readiness.",
+    "Not universal coverage.",
+    "Not entitlement readiness.",
+    "Not a private user-data backend.",
+    "Not private life graph storage.",
+    "Not a final user plan, schedule, or Step generator."
+  ],
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "tools/source-atlas/foundry",
+      "docs/qa/source-atlas/legal"
+    ],
+    "non_canonical_owners_touched": [],
+    "files_moved_or_created": [
+      "legal release claim gate module, tests, and Train 35 legal evidence"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left_behind": [],
+    "architecture_debt": "No app architecture debt introduced; overall Source Atlas release/legal/runtime proof remains incomplete.",
+    "next_repair_train": "Release umbrella/device/accessibility/privacy/legal approval proof or domain/frontier expansion, depending on next selected blocker.",
+    "equivalent_path_interpretation_used": false
+  },
+  "known_risks": [
+    "The gate blocks unqualified legal approval because no outside legal artifact exists.",
+    "Release Green remains unavailable to Codex without independent release umbrella evidence and required approvals.",
+    "Universal coverage remains blocked; only governed frontier-specific claims can be proven."
+  ],
+  "rollback_plan": [
+    "Remove the Train 35 legal_release_claim_gate module, tests, and generated Train 35 QA artifacts.",
+    "Continue using Train 27/28 legal packets directly until the gate is repaired."
+  ]
+}

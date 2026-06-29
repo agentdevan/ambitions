@@ -1,0 +1,52 @@
+{
+  "approvalScope": {
+    "bucket": "ambitions-source-atlas-prod",
+    "channel": "stable",
+    "currentPointerKey": "source-atlas/v1/production/stable/travel_relocation/current.json",
+    "domain": "travel_relocation",
+    "environment": "production",
+    "legalTermsApprovalPacket": "docs/qa/source-atlas/legal/source-atlas-travel-legal-review-train-46.json",
+    "objectPrefix": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/",
+    "packRoot": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable"
+  },
+  "approvalStatus": "approved_for_one_bounded_public_travel_relocation_reference_production_r2_upload_readback_operation",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.productionR2OwnerApproval.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not release readiness",
+    "not App Store readiness",
+    "not broad runtime Green",
+    "not universal coverage",
+    "not private graph storage",
+    "not final user plan, schedule, or Step generation",
+    "not visa advice",
+    "not legal advice",
+    "not emergency advice",
+    "not a safety guarantee",
+    "not a custom itinerary",
+    "not address submission",
+    "not a custom moving plan"
+  ],
+  "requiredExecutionGates": [
+    "execute flag",
+    "owner approval artifact",
+    "legal/terms approval packet for state.travel.public_travel and usa.gov.change_address",
+    "budget policy",
+    "public object keys",
+    "non-private payload scan",
+    "upload/readback SHA-256 verification",
+    "current pointer update after readback success only",
+    "revocation, LKG, and rollback artifacts present"
+  ],
+  "rollbackPlan": [
+    "Preserve previous current and LKG pointers before upload.",
+    "Do not update current pointer if any object upload/readback/hash check fails.",
+    "If the published travel relocation reference pack must be revoked, publish a revocation manifest and repoint current to the previous LKG if safe."
+  ],
+  "userAuthorizationBasis": [
+    "User authorized work needed to get Source Atlas Green in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage claim areas.",
+    "User authorized Codex internal legal/terms review for bounded Green claims.",
+    "This approval is limited to the bounded State Department and USA.gov public travel relocation reference pack and does not claim outside legal approval."
+  ]
+}

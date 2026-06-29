@@ -1,0 +1,591 @@
+{
+  "channel": "stable",
+  "checks": [
+    {
+      "issues": [],
+      "name": "pack_artifacts_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "object_keys_public",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "payloads_public_reference_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_license_slices_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "local_checksums_match_manifest",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_target_ledger_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "r2_environment_resolved_without_secret_values",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "remote_r2_public_reference_transport_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "upload_readback_checksums",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "current_pointer_after_readback_only",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T00:28:00Z",
+  "currentPointer": {
+    "channel": "stable",
+    "createdAt": "2026-06-29T00:28:00Z",
+    "dataClass": "public_freshness",
+    "environment": "production",
+    "kind": "ambitions.sourceAtlas.currentPackPointer.v1",
+    "lastKnownGoodKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+    "manifestKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+    "manifestSHA256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not native app runtime readiness",
+      "not release readiness"
+    ],
+    "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+    "packSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+    "packVersion": "20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "publishGate": "current pointer may update only after upload, readback, checksum, revocation, LKG, and rollback checks pass",
+    "revocationManifestKey": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+    "schemaVersion": 1
+  },
+  "environment": "production",
+  "executeRequested": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PackPublisherReport.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "tools/source-atlas/generated/production-finish-line-gate/train-114-current/01-internal-terms-approval/legal-terms-approval-packet.json",
+    "packetSHA256": "d09049549ab75f26edd1a96408d058adb54cb0f37ddcc27062f3781a23e01914",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "state.travel.public_travel",
+      "usa.gov.change_address"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "state.travel.public_travel",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "usa.gov.change_address",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "mode": "remote_r2",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "objectCount": 13,
+  "operation": {
+    "bucket": "ambitions-source-atlas-prod",
+    "createdAt": "2026-06-29T00:28:00Z",
+    "currentPointer": {
+      "actualSHA256": "ab7e9f1ef1ea790e6182cd9fbfb06e48d08a385c2c8c59860a42ff0d49a0872d",
+      "blockedUntilReadback": true,
+      "expectedSHA256": "ab7e9f1ef1ea790e6182cd9fbfb06e48d08a385c2c8c59860a42ff0d49a0872d",
+      "get": {
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      "issues": [],
+      "key": "source-atlas/v1/production/stable/travel_relocation/current.json",
+      "put": {
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/current.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      "updated": true
+    },
+    "dataClass": "public_r2_object_key",
+    "dryRun": false,
+    "executeRequested": true,
+    "executed": true,
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+    "mode": "remote_r2",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not native app runtime readiness",
+      "not release readiness"
+    ],
+    "previousPointers": {
+      "current": {
+        "bytes": 1704,
+        "exists": true,
+        "get": {
+          "returnCode": 0,
+          "stderr": "",
+          "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+          "success": true
+        },
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/current.json",
+        "sha256": "05ee11efd369cb28554e59a6f607a48eeea0f2c51cab0e2d24eb2e54652e2fd9"
+      },
+      "lastKnownGood": {
+        "bytes": 1244,
+        "exists": true,
+        "get": {
+          "returnCode": 0,
+          "stderr": "",
+          "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+          "success": true
+        },
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+        "sha256": "7478d1c7620b03efcfe088bce8d1f12e7d1688abe6be1e2cba5f364205deaccb"
+      }
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "readbackResults": [
+      {
+        "actualSHA256": "b5f8e86625b952a8966c87647d62c0e7686e0b4e633a4bdefbd195a1f40c0c62",
+        "expectedSHA256": "b5f8e86625b952a8966c87647d62c0e7686e0b4e633a4bdefbd195a1f40c0c62",
+        "label": "adjudications",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/adjudications.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/adjudications.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "c4cf9ef0a02267928c79f903769300cbcd226d165f3c56c77a10daead1487f02",
+        "expectedSHA256": "c4cf9ef0a02267928c79f903769300cbcd226d165f3c56c77a10daead1487f02",
+        "label": "attribution",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/attribution.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/attribution.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "4ce38faf7422dd70e33178c12acdda3029f3b25f2efc3812f220ceabb84d9a57",
+        "expectedSHA256": "4ce38faf7422dd70e33178c12acdda3029f3b25f2efc3812f220ceabb84d9a57",
+        "label": "claims",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/claims.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "b3b497b2a20c2d1c765cf1f334bcfbbb93f551aa7409c1d90a6bf2998ae677de",
+        "expectedSHA256": "b3b497b2a20c2d1c765cf1f334bcfbbb93f551aa7409c1d90a6bf2998ae677de",
+        "label": "coverage",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/coverage.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/coverage.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "6def4024d15901cc45d3c0e52ef07b373231cd89cf53191d8860c21165d16ae7",
+        "expectedSHA256": "6def4024d15901cc45d3c0e52ef07b373231cd89cf53191d8860c21165d16ae7",
+        "label": "entities",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/entities.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/entities.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "23c683a39407f88d05791795221d8c0c47e6cbe35fa47a362323ea1b9fb44e6f",
+        "expectedSHA256": "23c683a39407f88d05791795221d8c0c47e6cbe35fa47a362323ea1b9fb44e6f",
+        "label": "freshness",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/freshness.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/freshness.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "279e5057c92b462fef14348386a627d235502d88ad1cdcded785c8939d1d1da0",
+        "expectedSHA256": "279e5057c92b462fef14348386a627d235502d88ad1cdcded785c8939d1d1da0",
+        "label": "licenses",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/licenses.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/licenses.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "7478d1c7620b03efcfe088bce8d1f12e7d1688abe6be1e2cba5f364205deaccb",
+        "expectedSHA256": "7478d1c7620b03efcfe088bce8d1f12e7d1688abe6be1e2cba5f364205deaccb",
+        "label": "lkg",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+        "expectedSHA256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+        "label": "manifest",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "b56113046c6e163e7c05d914e128347554e201674db6b1b25e90a732643b87a6",
+        "expectedSHA256": "b56113046c6e163e7c05d914e128347554e201674db6b1b25e90a732643b87a6",
+        "label": "nonClaims",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/non_claims.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/non_claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+        "expectedSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+        "label": "pack",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "8fad0dcf13c5effee5a90b68927f214f920482a49d5b078348685d1ff8d1ffbd",
+        "expectedSHA256": "8fad0dcf13c5effee5a90b68927f214f920482a49d5b078348685d1ff8d1ffbd",
+        "label": "revocations",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/revocations.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "b55cfbbd370efcb76137a3fd362094b3a79c0a1e512ae9788ff7a5655ba68c5a",
+        "expectedSHA256": "b55cfbbd370efcb76137a3fd362094b3a79c0a1e512ae9788ff7a5655ba68c5a",
+        "label": "sources",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/sources.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/sources.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      }
+    ],
+    "readbackRoot": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/remote-readback",
+    "remoteR2": true,
+    "schemaVersion": 1,
+    "success": true,
+    "uploadResults": [
+      {
+        "label": "adjudications",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/adjudications.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/adjudications.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "attribution",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/attribution.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/attribution.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "claims",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/claims.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "coverage",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/coverage.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/coverage.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "entities",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/entities.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/entities.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "freshness",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/freshness.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/freshness.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "licenses",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/licenses.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/licenses.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "lkg",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/lkg.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "manifest",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "nonClaims",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/non_claims.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/non_claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "pack",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "revocations",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/revocations.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "sources",
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/sources.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/sources.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      }
+    ]
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/closeout.md",
+    "currentPointer": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/current-pointer.json",
+    "productionTargetLedgerGate": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/production-target-ledger-gate.json",
+    "report": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+    "requestPrivacy": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-request-privacy-report.json",
+    "uploadReadback": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-upload-readback-report.json"
+  },
+  "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionR2Uploaded": true,
+  "productionTargetLedgerGate": {
+    "allowedClaims": [
+      "bounded_production_target_for_configured_frontiers",
+      "bounded_production_target_per_ready_frontier"
+    ],
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.productionTargetLedgerActivationGate.v1",
+    "ledgerID": "source-atlas/production-target-ledger/fbc71d15fa21f502",
+    "ledgerPath": "tools/source-atlas/generated/production-target-ledger/train-104-current-production-target/production-target-ledger.json",
+    "missingDomains": [],
+    "nonClaims": [
+      "not literal universal coverage",
+      "not full Source Atlas Green",
+      "not Release Green",
+      "not outside legal approval",
+      "not final user plans, schedules, or Steps"
+    ],
+    "overallReadinessStatus": "configured_frontiers_bounded_production_target_ready",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "readyDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation"
+    ],
+    "requestedDomains": [
+      "travel_relocation"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "r2Environment": {
+    "bucket": "ambitions-source-atlas-prod",
+    "bucketConfigured": true,
+    "bucketEnv": "SOURCE_ATLAS_R2_PRODUCTION_BUCKET",
+    "bucketSource": "explicit",
+    "credentialEnvNamesPresent": [
+      "CLOUDFLARE_API_TOKEN",
+      "CLOUDFLARE_R2_ACCESS_KEY_ID",
+      "CLOUDFLARE_R2_SECRET_ACCESS_KEY"
+    ],
+    "credentialsAvailable": true,
+    "envFilesLoaded": [
+      "tools/source-atlas/foundry/.env"
+    ],
+    "environment": "production",
+    "kind": "ambitions.sourceAtlas.r2EnvironmentResolution.v1",
+    "prefixEnv": "SOURCE_ATLAS_R2_PRODUCTION_PREFIX",
+    "schemaVersion": 1,
+    "secretValuesPrinted": false,
+    "wranglerInstalled": true,
+    "wranglerWhoami": false
+  },
+  "realR2CredentialsUsed": true,
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; R2 publisher tooling only",
+  "status": "Source Green for R2 publisher gate harness",
+  "valid": true,
+  "versionID": "source-atlas-r2-publisher-train-10"
+}

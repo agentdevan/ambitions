@@ -76,6 +76,12 @@ enum AppContainerFactory {
         let externalCreationImportService = DefaultExternalCreationImportService(
             captureService: runtime.captureService
         )
+        let sourceAtlasLifecycleRefreshService = SourceAtlasPublicPackLifecycleRefreshService(
+            registry: SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.defaultAppRegistry(),
+            transport: SourceAtlasURLSessionPublicPackRemoteTransport(
+                endpoint: .sourceAtlasPublicGateway
+            )
+        )
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,
             captureService: runtime.captureService
@@ -112,6 +118,7 @@ enum AppContainerFactory {
             externalRouter: externalRouter,
             externalActionService: externalActionService,
             externalCreationImportService: externalCreationImportService,
+            sourceAtlasLifecycleRefreshService: sourceAtlasLifecycleRefreshService,
             commandRouter: commandRouter,
             memoryLensService: memoryLensService,
             onboardingService: onboardingService

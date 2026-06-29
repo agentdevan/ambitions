@@ -1,0 +1,29 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "americorps_public_domain",
+      "license_name": "AmeriCorps Open Data State Ranking by Volunteer Rate public-domain dataset metadata and public statistical reference data",
+      "license_url": "https://data.americorps.gov/National-Service/State-Ranking-by-Volunteer-Rate/qbmh-b8k5",
+      "non_claims": [
+        "not current volunteer opportunity availability",
+        "not eligibility advice",
+        "not legal advice",
+        "not a personalized placement recommendation",
+        "not a personalized volunteering plan",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://data.americorps.gov/National-Service/State-Ranking-by-Volunteer-Rate/qbmh-b8k5",
+      "terms_url": "https://data.americorps.gov/National-Service/State-Ranking-by-Volunteer-Rate/qbmh-b8k5"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "cdc.physical-activity.basics"
+    }
+  ],
+  "createdAt": "2026-06-29T03:15:00Z",
+  "domainID": "health_wellness_reference",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "cdc_public_web",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "cdc.physical-activity.basics",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "cdc.physical-activity.basics"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_cdc_physical_activity_and_reuse_terms_recheck",
+      "licenseID": "cdc_public_web",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "cdc.physical-activity.basics",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

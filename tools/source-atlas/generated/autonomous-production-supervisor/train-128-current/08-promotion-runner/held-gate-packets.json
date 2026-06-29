@@ -1,0 +1,18 @@
+{
+  "heldGates": [
+    {
+      "blockers": [
+        "review-only action cannot emit claims, packs, or R2 writes"
+      ],
+      "domainID": "volunteering_public_reference",
+      "finalOutputGenerated": false,
+      "gateID": "source_atlas.promotion_gate.aa554d0235bddf6b",
+      "nativeRuntimeMutation": false,
+      "productionWriteExecuted": false,
+      "promotionState": "candidate_or_source_review_only",
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review"
+    }
+  ],
+  "schemaVersion": 1
+}

@@ -1,0 +1,132 @@
+{
+  "additional_required_fields": {
+    "freshness_revocation_proof": "Not claimed; templates carry review-required fields only and no pack freshness or revocation operation ran.",
+    "license_terms_proof": "Templates require legal/terms completion later; no legal approval or outside legal approval is claimed.",
+    "lkg_rollback_proof": "No stable pointer, LKG pointer, pack, registry, or R2 object changed; rollback is artifact removal.",
+    "native_offline_no_account_proof": "Not claimed in Train 68; no native files were touched by this tooling train.",
+    "no_private_graph_egress_proof": "Template input/output privacy scans passed; no-private-graph egress audit passed.",
+    "production_non_claims": [
+      "no legal approval",
+      "no outside legal approval",
+      "no source authority",
+      "no completed reviewer packets",
+      "no active registry mutation",
+      "no claim output",
+      "no pack output",
+      "no R2 readiness",
+      "no app runtime readiness",
+      "no release readiness",
+      "no universal coverage",
+      "no final plans, schedules, or Steps"
+    ],
+    "provenance_completeness_proof": "Not claimed in Train 68; templates do not create claims or provenance tuples.",
+    "r2_request_privacy_proof": "No R2 request path changed or executed; templates output only public/reference reviewer-work metadata.",
+    "restricted_source_exclusion_proof": "Templates remain blocked_review_required and cannot promote catalog/source-of-sources candidates.",
+    "source_atlas_status_ceiling": "Yellow overall Source Atlas; reviewer completion templates only"
+  },
+  "architecture_closeout": {
+    "architecture_debt": "None from this tooling train; native runtime and release proof remain separate.",
+    "canonical_owners_touched": [
+      "none in app source",
+      "tools/source-atlas",
+      "docs/qa/source-atlas"
+    ],
+    "compatibility_shims_left": [],
+    "files_moved_or_created": [
+      "tools/source-atlas/foundry/catalog_reviewer_completion_template.py",
+      "tools/source-atlas/foundry/tests/test_catalog_reviewer_completion_template_train_68.py",
+      "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-live-data-gov/",
+      "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-intake-integration/",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68.json",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68.md",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68-closeout.json",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68-closeout.md"
+    ],
+    "final_architecture_tree_inspected": true,
+    "next_repair_train": "Complete source-specific review packets outside this template generator, then rerun Train 67 intake and Train 66 approval chain with explicit temp registries.",
+    "non_canonical_owners_touched": [],
+    "old_non_canonical_paths_removed": [],
+    "used_equivalent_folder_interpretation": false
+  },
+  "files_changed": [
+    "tools/source-atlas/foundry/catalog_reviewer_completion_template.py",
+    "tools/source-atlas/foundry/cli.py",
+    "tools/source-atlas/foundry/tests/test_catalog_reviewer_completion_template_train_68.py",
+    "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-live-data-gov/",
+    "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-intake-integration/",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68-closeout.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68-closeout.md"
+  ],
+  "follow_up_required": [
+    "Have an authorized reviewer complete source-specific source-lane, legal/terms, and API governance packets outside this template generator.",
+    "Rerun Train 67 intake with completed packets.",
+    "Rerun Train 66 approval chain with explicit temp registry paths before approved-lane harvest, claim graph, pack, R2, or native gates."
+  ],
+  "integration_proof": {
+    "command": "python3 tools/source-atlas/source-atlas-foundry.py catalog-reviewer-completion-intake --decision-inputs tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json --review-packets tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-live-data-gov/source-review-completion-packets.json --output-root tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-intake-integration --created-at 2026-06-28T00:00:00Z",
+    "result": {
+      "blocked_review_completions": 4,
+      "completed_decision_artifacts": 0,
+      "completed_review_completions": 0,
+      "review_packets": 4,
+      "valid": true
+    }
+  },
+  "known_risks": [
+    "Live data.gov templates remain blocked because source-specific reviewer completion has not occurred.",
+    "The template collection is intentionally not an approval artifact.",
+    "No production R2 write, native runtime, release, or outside legal proof is produced by this train."
+  ],
+  "product_law_preserved": true,
+  "proof_artifacts": [
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68.md",
+    "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-live-data-gov/source-review-completion-packets.json",
+    "tools/source-atlas/generated/catalog-reviewer-completion-template/train-68-intake-integration/manifest.json"
+  ],
+  "record_counts": {
+    "active_registry_mutations": 0,
+    "claims": 0,
+    "completed_decision_artifacts": 0,
+    "completed_reviewer_completions": 0,
+    "decision_input_packets": 4,
+    "packable_claims": 0,
+    "r2_packable_artifacts": 0,
+    "source_review_completion_packet_templates": 4
+  },
+  "rollback_plan": [
+    "Remove the Train 68 generated output directories and retained Train 68 QA evidence files.",
+    "Remove the reviewer completion template module, CLI command, and focused tests.",
+    "No active registry, pack, stable pointer, native runtime, or R2 rollback is required because none changed."
+  ],
+  "scope_completed": [
+    "Added deterministic blocked reviewer completion packet templates from decision input packets.",
+    "Added catalog-reviewer-completion-template to the Foundry CLI.",
+    "Added focused Train 68 tests covering blocked templates, Train 67 intake integration, privacy rejection, and stable ordering.",
+    "Generated live data.gov blocked template evidence from Train 64 decision inputs.",
+    "Ran Train 67 intake integration against Train 68 templates and confirmed no completion artifact is emitted."
+  ],
+  "status": "Source Green for catalog reviewer completion template tooling / Yellow overall Source Atlas",
+  "validation_not_run": [
+    "Production R2 upload/readback was not run.",
+    "Native XCTest/build-for-testing was not required because no Swift/native files were touched in this train.",
+    "Outside legal approval was not run or claimed.",
+    "Live reviewer completion did not occur.",
+    "Runtime Green, Release Green, and universal coverage were not claimed."
+  ],
+  "validation_run": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_catalog_reviewer_completion_template_train_68.py -> 4 passed",
+    "python3 tools/source-atlas/source-atlas-foundry.py catalog-reviewer-completion-template ... -> valid true; 4 blocked templates; 0 completions; 0 claims; 0 R2 artifacts",
+    "python3 tools/source-atlas/source-atlas-foundry.py catalog-reviewer-completion-intake ... --review-packets train-68-live-data-gov/source-review-completion-packets.json -> valid true; 4 blocked reviewer completions; 0 completed decisions",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 292 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "JSON parse checks for Train 68 evidence and manifests -> PASS",
+    "git diff --check -> PASS"
+  ]
+}

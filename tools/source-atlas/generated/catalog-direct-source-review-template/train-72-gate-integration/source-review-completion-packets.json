@@ -1,0 +1,128 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogSourceReviewCompletionPackets.v1",
+  "nonClaims": [
+    "source review completion packets for Train 67 intake only",
+    "not approval by themselves",
+    "not claim output",
+    "not pack output"
+  ],
+  "sourceReviewCompletionPackets": [
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "status": "blocked"
+      },
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_required"
+      ],
+      "completion_packet_id": "catalog_source_review_completion_blocked.1c7a9bb80d59f738",
+      "completion_status": "blocked_direct_source_review_required",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "status": "blocked"
+      },
+      "non_claims": [
+        "blocked direct-source review completion packet only",
+        "not approval"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "review_owner": "",
+      "reviewed_at": "",
+      "source_lane_review": {
+        "source_lane_entry": {},
+        "status": "blocked"
+      }
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "status": "blocked"
+      },
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_required"
+      ],
+      "completion_packet_id": "catalog_source_review_completion_blocked.abba3d77d698e940",
+      "completion_status": "blocked_direct_source_review_required",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "status": "blocked"
+      },
+      "non_claims": [
+        "blocked direct-source review completion packet only",
+        "not approval"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "review_owner": "",
+      "reviewed_at": "",
+      "source_lane_review": {
+        "source_lane_entry": {},
+        "status": "blocked"
+      }
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "status": "blocked"
+      },
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_required"
+      ],
+      "completion_packet_id": "catalog_source_review_completion_blocked.a674b8ecfdc16c4d",
+      "completion_status": "blocked_direct_source_review_required",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "status": "blocked"
+      },
+      "non_claims": [
+        "blocked direct-source review completion packet only",
+        "not approval"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "review_owner": "",
+      "reviewed_at": "",
+      "source_lane_review": {
+        "source_lane_entry": {},
+        "status": "blocked"
+      }
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "status": "blocked"
+      },
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_required"
+      ],
+      "completion_packet_id": "catalog_source_review_completion_blocked.8e9f2fee129c490b",
+      "completion_status": "blocked_direct_source_review_required",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "status": "blocked"
+      },
+      "non_claims": [
+        "blocked direct-source review completion packet only",
+        "not approval"
+      ],
+      "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+      "review_owner": "",
+      "reviewed_at": "",
+      "source_lane_review": {
+        "source_lane_entry": {},
+        "status": "blocked"
+      }
+    }
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "adapterID": "library_of_congress_primary_sources_reference_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_loc_primary_sources_learning_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_creative_learning_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_creative_learning_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.321dd690c09711a6",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Library of Congress primary sources learning reference page",
+      "provenanceIDs": [
+        "provenance.aaad3c5b06448361"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "loc.primary_sources"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "creative_learning_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.4cc55abd1225c74d",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "primary sources learning reference",
+      "provenanceIDs": [
+        "provenance.aaad3c5b06448361"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "loc.primary_sources"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.07aadbdeb02f87da",
+      "claimType": "public_learning_resource",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly Library of Congress primary sources page and legal/rights re-review",
+      "id": "claim.fb43dc0ed4a2d2c2",
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.loc.gov/legal/",
+      "provenanceIDs": [
+        "provenance.aaad3c5b06448361"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Library of Congress",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "loc.primary_sources",
+      "sourceIDs": [
+        "loc.primary_sources"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "state": "source_backed",
+      "text": "The Library of Congress publishes Getting Started with Primary Sources as public learning-reference context for creative research and teaching, not copyright clearance, source-use permission, or a final creative project plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "library_of_congress_primary_sources_reference_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "creative_project_reference",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US federal",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "loc.primary_sources",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "public_learning_resource",
+      "dataClass": "public_freshness",
+      "doesNotCreateFinalCreativePlan": true,
+      "doesNotGrantCopyrightClearance": true,
+      "doesNotGrantSourceUsePermission": true,
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.creativeProjectReferenceCoverage.v1",
+      "label": "Library of Congress primary sources learning reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "loc.primary_sources",
+      "subject": "creative_learning.loc_primary_sources",
+      "thirdPartyCollectionItemsExcluded": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "creative_project_reference",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.321dd690c09711a6",
+      "id": "edge.b5a2eaf1c47ee5ae",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.aaad3c5b06448361"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_creative_learning_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "loc.primary_sources"
+      ],
+      "toAtomID": "atom.4cc55abd1225c74d",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.321dd690c09711a6",
+        "atom.4cc55abd1225c74d"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.b5a2eaf1c47ee5ae"
+      ],
+      "id": "lattice.cb0e9a9024b38c14",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "library_of_congress_primary_sources_reference_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "creative_project_reference",
+      "id": "pack_candidate.7dace814f38cf91f",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "loc.primary_sources",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "loc.primary_sources"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "d6fcb51d673b88184101610ccd2eb92cae0bcf59e3a4aee3918f06221d96f49e",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly Library of Congress primary sources page and legal/rights re-review",
+      "id": "provenance.aaad3c5b06448361",
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "Library of Congress page text marked U.S. Government Work; collection items, third-party material, media, and rights-restricted content excluded",
+      "locator": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "publicReferenceOnly": true,
+      "publisher": "Library of Congress",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "loc.primary_sources",
+      "sourceState": "current",
+      "sourceURL": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "termsURL": "https://www.loc.gov/legal/",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.fb43dc0ed4a2d2c2",
+      "dataClass": "public_requirement",
+      "gateType": "public_creative_learning_reference_only",
+      "id": "requirement.1f5fb405d3690c54",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.aaad3c5b06448361"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "loc.primary_sources"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "loc.primary_sources",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly Library of Congress primary sources page and legal/rights re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "Library of Congress page text marked U.S. Government Work; collection items, third-party material, media, and rights-restricted content excluded",
+    "licenseVersion": "current LOC legal and page-level rights posture",
+    "publisher": "Library of Congress",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "loc.primary_sources",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.loc.gov/legal/"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "loc.primary_sources"
+  }
+}

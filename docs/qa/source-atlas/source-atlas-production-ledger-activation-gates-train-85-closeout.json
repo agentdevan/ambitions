@@ -1,0 +1,118 @@
+{
+  "architecture_closeout": {
+    "architecture_debt": "Overall Source Atlas still needs release/legal/device approval and future autonomous source approval trains; this train only gates gateway and native activation against the production-target ledger.",
+    "canonical_owners_touched": [
+      "none in app source; tooling and evidence only under tools/source-atlas"
+    ],
+    "compatibility_shims_left": [],
+    "files_moved_or_created": [
+      "tools/source-atlas/foundry/production_target_gate.py",
+      "tools/source-atlas/foundry/tests/test_production_target_gate_train_85.py",
+      "tools/source-atlas/generated/native-refresh-registry/train-85-ledger-gated-active/",
+      "tools/source-atlas/generated/r2-public-gateway/train-85-ledger-gated-dry-run/",
+      "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-ledger-gate-train-85.*",
+      "docs/qa/source-atlas/r2/source-atlas-public-gateway-release-ledger-gate-train-85.*"
+    ],
+    "final_architecture_tree_inspected": true,
+    "next_repair_train_if_debt_remains": "Move the same production-target ledger gate into the production R2 publisher execute path so R2 writes cannot precede frontier/claim/pack readiness.",
+    "no_equivalent_folder_interpretation_used": true,
+    "non_canonical_owners_touched": [],
+    "old_non_canonical_paths_removed": []
+  },
+  "created_at": "2026-06-28T00:00:00Z",
+  "files_changed": [
+    "tools/source-atlas/foundry/production_target_gate.py",
+    "tools/source-atlas/foundry/r2_public_gateway_release.py",
+    "tools/source-atlas/foundry/native_refresh_registry.py",
+    "tools/source-atlas/foundry/cli.py",
+    "tools/source-atlas/foundry/tests/test_production_target_gate_train_85.py",
+    "tools/source-atlas/foundry/tests/test_native_refresh_registry_train_24.py",
+    "tools/source-atlas/generated/native-refresh-registry/train-85-ledger-gated-active/",
+    "tools/source-atlas/generated/r2-public-gateway/train-85-ledger-gated-dry-run/",
+    "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-ledger-gate-train-85.json",
+    "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-ledger-gate-train-85.md",
+    "docs/qa/source-atlas/r2/source-atlas-public-gateway-release-ledger-gate-train-85.json",
+    "docs/qa/source-atlas/r2/source-atlas-public-gateway-release-ledger-gate-train-85.md",
+    "docs/qa/source-atlas/r2/source-atlas-r2-credential-readiness-train-85.json",
+    "docs/qa/source-atlas/source-atlas-production-ledger-activation-gates-train-85-closeout.json",
+    "docs/qa/source-atlas/source-atlas-production-ledger-activation-gates-train-85-closeout.md"
+  ],
+  "freshness_revocation_proof": "The activation gates consume the Train 84 production-target ledger, which in turn requires per-domain production R2 current/LKG/revocation and gateway evidence.",
+  "known_risks": [
+    "Production R2 publisher execute is not yet ledger-gated by this train.",
+    "R2 credentials are available through the Foundry dotenv path and Wrangler authentication, but the current r2-operations-proof harness still returns Red for existing pack-production bundles because their manifests lack the legacy receipt index required by validate_promotion_gate.",
+    "No new Worker deploy or production R2 write was executed in Train 85.",
+    "Literal universal coverage, outside legal approval, App Store/TestFlight readiness, and physical-device proof remain unclaimed.",
+    "The repo worktree contains many pre-existing dirty/untracked Source Atlas and native files from earlier trains."
+  ],
+  "license_terms_proof": "Inherited through the Train 84 production-target ledger and the selected production pack/R2 publisher reports; no outside legal approval is claimed.",
+  "lkg_rollback_proof": "Inherited from the Train 84 production-target ledger and selected production R2 publisher reports.",
+  "native_offline_no_account_proof": "No new native runtime code changed; Train 85 gates native active refresh target generation using the Train 84 ledger and consumes prior Train 80 native boundary evidence through that ledger.",
+  "no_private_graph_egress_proof": "Gateway and native activation artifacts contain public domain/pack/object metadata only; Source Atlas no-private-graph egress audit passed.",
+  "product_law_preserved": [
+    "R2 remains public/reference/freshness infrastructure only.",
+    "Gateway allowlisting and native active refresh target generation now require ledger proof before activation paths can proceed.",
+    "No private user context is introduced into R2/gateway/native artifacts.",
+    "Source Atlas/R2 does not generate final user plans, schedules, Steps, or personalized paths."
+  ],
+  "production_non_claims": [
+    "Not literal universal coverage.",
+    "Not full Source Atlas Green.",
+    "Not outside legal approval.",
+    "Not App Store or TestFlight readiness.",
+    "Not physical-device proof.",
+    "Not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2.",
+    "Not a production R2 write in Train 85."
+  ],
+  "proof_artifacts": [
+    "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-ledger-gate-train-85.json",
+    "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-ledger-gate-train-85.md",
+    "docs/qa/source-atlas/r2/source-atlas-public-gateway-release-ledger-gate-train-85.json",
+    "docs/qa/source-atlas/r2/source-atlas-public-gateway-release-ledger-gate-train-85.md",
+    "docs/qa/source-atlas/r2/source-atlas-r2-credential-readiness-train-85.json",
+    "tools/source-atlas/generated/native-refresh-registry/train-85-ledger-gated-active/native-refresh-registry-report.json",
+    "tools/source-atlas/generated/native-refresh-registry/train-85-ledger-gated-active/source-atlas-public-refresh-targets.json",
+    "tools/source-atlas/generated/r2-public-gateway/train-85-ledger-gated-dry-run/public-gateway-release-report.json",
+    "tools/source-atlas/generated/r2-public-gateway/train-85-ledger-gated-dry-run/allowlist/public-gateway-allowlist.json"
+  ],
+  "provenance_completeness_proof": "The reusable activation gate requires requested domains to be bounded production target ready in the Train 84 ledger, which requires claim-frontier, pack, R2, gateway, and native evidence.",
+  "r2_request_privacy_proof": "Gateway release dry-run with ledger gate selected 13 production publisher reports and 65 public object keys; no live R2 write or private request was made in Train 85.",
+  "record_counts": {
+    "active_native_targets": 13,
+    "gateway_allowlisted_object_keys": 65,
+    "gateway_selected_publisher_reports": 13,
+    "ledger_requested_domains": 13,
+    "ledger_gate_failures": 0,
+    "tests_passed": 343
+  },
+  "restricted_source_exclusion_proof": "Inherited through the Train 84 ledger and selected production pack/R2 reports; activation gate blocks domains that are not ledger-ready.",
+  "rollback_plan": [
+    "Revert production_target_gate.py, the gateway/native/CLI wiring, focused tests, generated Train 85 artifacts, and QA evidence.",
+    "If a gateway deploy regression is found, redeploy the prior Worker version from Train 83; Train 85 itself did not deploy a Worker."
+  ],
+  "scope_completed": [
+    "Added reusable production target ledger activation gate.",
+    "Gateway release deploy+execute now requires a valid production-target ledger covering all selected publisher-report domains.",
+    "Native active refresh registry generation now requires a valid production-target ledger covering all requested active target domains.",
+    "Generated a Train 85 native active registry artifact with 13 active targets and a passing ledger gate.",
+    "Generated a Train 85 gateway release dry-run with 13 selected publisher reports, 65 object keys, and a passing ledger gate."
+  ],
+  "source_atlas_status_ceiling": "Yellow overall Source Atlas; Source Green only for production-target ledger activation gates.",
+  "status": "Source Green for production-target ledger activation gates / Yellow overall Source Atlas",
+  "validation_not_run": [
+    "Swift/Xcode build-for-testing was not run because Train 85 changed Source Atlas Python tooling, generated artifacts, and QA evidence only.",
+    "No production R2 write was run in Train 85.",
+    "No Worker deploy was run in Train 85.",
+    "No outside legal approval or release approval was run or claimed."
+  ],
+  "validation_run": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_production_target_gate_train_85.py tools/source-atlas/foundry/tests/test_native_refresh_registry_train_24.py tools/source-atlas/foundry/tests/test_r2_public_gateway_release_train_83.py -> 15 passed",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 343 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "python3 tools/source-atlas/source-atlas-foundry.py r2-operations-proof --mode dry-run --environment production --bundle-root tools/source-atlas/generated/pack-production/train-81-statcan-production-stable --channel stable --output docs/qa/source-atlas/r2/source-atlas-r2-credential-readiness-train-85.json -> Red dry-run proof; credentialHandling.available=true; failed check is promotion_gate: provenance:missing receipt index; no execute",
+    "Python compile, JSON validation, and git diff --check -> passed"
+  ]
+}

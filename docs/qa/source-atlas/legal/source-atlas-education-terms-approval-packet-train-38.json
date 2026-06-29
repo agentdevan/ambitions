@@ -1,0 +1,95 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.legalTermsApprovalPacket.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not production R2 readiness",
+    "not release readiness",
+    "not universal coverage",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outsideLegalApprovalBoundary": "outside legal approval requires a current source-specific approval artifact",
+  "outsideLegalApprovalClaimed": false,
+  "packetID": "source-atlas/legal-terms-approval/e9ba4703c4c18a6c",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+  "reviewType": "internal_source_atlas_legal_terms_review",
+  "schemaVersion": 1,
+  "sourceApprovals": [
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the U.S. Department of Education College Scorecard.",
+      "datasetURL": "https://collegescorecard.ed.gov/data/",
+      "distributionURL": "https://collegescorecard.ed.gov/data/",
+      "evidenceHash": "71df11c68cc0abfba7202a2afc307cd0398656bb85d5da887a4f7d2ce5ec4d62",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://collegescorecard.ed.gov/data/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-28T00:00:00Z",
+          "url": "https://collegescorecard.ed.gov/data/"
+        }
+      ],
+      "expiresAt": "2026-12-28",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons Attribution via current data.ed.gov/Data.gov catalog metadata",
+      "licenseURL": "https://collegescorecard.ed.gov/data/",
+      "licenseVersion": "Data.gov College Scorecard package extra license=http://www.opendefinition.org/licenses/cc-by",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Department of Education",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-28",
+      "rightsURL": "https://collegescorecard.ed.gov/data/",
+      "sourceID": "college-scorecard.api",
+      "sourceName": "College Scorecard data API",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://collegescorecard.ed.gov/data/"
+    }
+  ],
+  "status": "Green",
+  "statusReason": "internal source-specific terms review complete for approved lanes; blocked or review-required lanes remain excluded",
+  "userAuthorization": "User authorized extensive internal legal/terms review for bounded Source Atlas Green claims; this is not outside legal approval.",
+  "versionID": "source-atlas-legal-terms-approval-packet-v1"
+}

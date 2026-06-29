@@ -1,0 +1,244 @@
+{
+  "activeTargetCount": 10,
+  "artifactID": "source_atlas_native_deca_domain_live_worker_proof.train49",
+  "bundledNativeRegistryArtifact": "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+  "checks": [
+    {
+      "name": "native_registry_compiler_valid",
+      "passed": true
+    },
+    {
+      "name": "bundled_resource_updated_to_deca_artifact",
+      "passed": true
+    },
+    {
+      "name": "worker_gateway_readback_valid",
+      "passed": true
+    },
+    {
+      "executedTests": 15,
+      "name": "remote_transport_live_worker_suite_passed",
+      "passed": true
+    },
+    {
+      "executedTests": 16,
+      "name": "lifecycle_live_worker_suite_passed",
+      "passed": true
+    },
+    {
+      "executedTests": 8,
+      "name": "registry_loader_suite_passed",
+      "passed": true
+    },
+    {
+      "executedTests": 4,
+      "name": "app_container_suite_passed",
+      "passed": true
+    },
+    {
+      "executedTests": 9,
+      "name": "fetch_pipeline_suite_passed",
+      "passed": true
+    },
+    {
+      "name": "final_build_for_testing_passed",
+      "passed": true
+    },
+    {
+      "name": "no_private_context_in_registry_targets",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "creativeProjectReference": {
+    "manifestSHA256": "e374b2af91c53b469c8b69e3bedeabff6791481821e840ed64b1fd528a350cf2",
+    "packID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+    "packSHA256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+    "status": "accepted_current_public_reference_pack"
+  },
+  "domains": [
+    "business_entrepreneurship",
+    "creative_project_reference",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "hobbies_recreation",
+    "home_life_admin",
+    "occupation_foundation",
+    "public_civic_requirements",
+    "travel_relocation"
+  ],
+  "kind": "ambitions.sourceAtlas.nativeLiveWorkerGatewayProof.v1",
+  "native_runtime_proofs": [
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "business_entrepreneurship",
+      "target_pack_id": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "creative_project_reference",
+      "target_pack_id": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "education_credentialing",
+      "target_pack_id": "source-atlas/v1/domain/education_credentialing/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "finance_public_reference",
+      "target_pack_id": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "health_wellness_reference",
+      "target_pack_id": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "hobbies_recreation",
+      "target_pack_id": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "home_life_admin",
+      "target_pack_id": "source-atlas/v1/domain/home_life_admin/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "occupation_foundation",
+      "target_pack_id": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "public_civic_requirements",
+      "target_pack_id": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "travel_relocation",
+      "target_pack_id": "source-atlas/v1/domain/travel_relocation/20260628T000000Z"
+    }
+  ],
+  "knownToolingEvents": [
+    "One parallel SourceAtlasPublicPackRemoteTransportTests run exited before executing tests due to simulator/test-host bootstrap failure; serial rerun passed 15 tests.",
+    "Parallel registry-loader and app-container runs exited before executing tests due to simulator/test-host bootstrap failure; serial reruns passed.",
+    "One registry-loader rerun exposed an expectation mismatch and failed 1 of 8 tests; test expectation was corrected to the generated reviewArtifactID and rerun passed 8 tests."
+  ],
+  "nativeRegistryArtifact": "tools/source-atlas/generated/native-refresh-registry/train-49-deca-live-worker-gateway/source-atlas-public-refresh-targets.json",
+  "nativeRegistryArtifactID": "source_atlas_public_refresh_targets.train49_deca_live_worker_gateway",
+  "nonClaims": [
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store readiness",
+    "not universal coverage",
+    "not entitlement readiness",
+    "not background execution proof",
+    "not final user plans, schedules, Steps, or individualized paths from Source Atlas/R2",
+    "not private graph storage"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no goals, captures, schedules, proof, receipts, account IDs, device IDs, behavior history, personalization data, private creative project details, or private life graph context may be sent to R2",
+  "product_law_preserved": true,
+  "proofArtifacts": {
+    "appContainerSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T111422Z-AmbitionsTests-AppContainerFactoryTests-29086-21028/focused-test-summary.json",
+    "buildForTestingSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T111616Z-bft-30291-14050/build-for-testing-summary.json",
+    "fetchPipelineSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T110504Z-AmbitionsTests-SourceAtlasPublicPackFetchPipelineTests-24794-13099/focused-test-summary.json",
+    "lifecycleSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T110212Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-22697-14469/focused-test-summary.json",
+    "nativeRegistryApproval": "docs/qa/source-atlas/native/source-atlas-native-public-refresh-target-registry-deca-domain-approval-train-49.json",
+    "nativeRegistryReport": "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-deca-domain-train-49.json",
+    "r2PublisherProof": "docs/qa/source-atlas/r2/source-atlas-creative-project-r2-publisher-remote-r2-train-49.json",
+    "r2WorkerReadbackProof": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-creative-project-readback-train-49.json",
+    "registryLoaderSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T111323Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-28476-28393/focused-test-summary.json",
+    "remoteTransportSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T110417Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-24162-15921/focused-test-summary.json"
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Green for bounded deca-domain native public registry/live Worker transport proof; Yellow overall Source Atlas",
+  "status": "green_for_bounded_deca_domain_worker_gateway_live_transport_yellow_overall_source_atlas",
+  "targetCount": 10,
+  "valid": true,
+  "validation_run": [
+    {
+      "name": "build_for_testing",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T111616Z-bft-30291-14050/build-for-testing-summary.json",
+      "proof_note": "Test Build Succeeded; FAILURE_CLASS=passed",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 15,
+      "name": "remote_transport",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T110417Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-24162-15921/focused-test-summary.json",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 16,
+      "name": "lifecycle_refresh",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T110212Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-22697-14469/focused-test-summary.json",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 8,
+      "name": "registry_loader",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T111323Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-28476-28393/focused-test-summary.json",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 4,
+      "name": "app_container_offline_no_account",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T111422Z-AmbitionsTests-AppContainerFactoryTests-29086-21028/focused-test-summary.json",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 9,
+      "name": "fetch_pipeline",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_49_DECA_LIVE_FULL/20260628T110504Z-AmbitionsTests-SourceAtlasPublicPackFetchPipelineTests-24794-13099/focused-test-summary.json",
+      "status": "passed"
+    }
+  ],
+  "workerURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "workerVersionID": "183dab6c-bf2c-4940-b51a-724b071d54bb"
+}

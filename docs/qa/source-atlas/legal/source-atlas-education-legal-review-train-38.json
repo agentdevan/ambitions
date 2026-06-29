@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.educationLegalReview.v1",
+  "trainID": "source-atlas-education-legal-review-train-38",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "status": "Green for bounded internal College Scorecard terms review",
+  "sourceID": "college-scorecard.api",
+  "sourceName": "College Scorecard data API",
+  "publisher": "U.S. Department of Education",
+  "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+  "outsideLegalApprovalClaimed": false,
+  "outsideLegalApprovalStatus": "not_claimed",
+  "outsideLegalApprovalArtifact": "",
+  "reviewedEvidence": [
+    {
+      "url": "https://collegescorecard.ed.gov/data/",
+      "kind": "official_source_page",
+      "finding": "Official College Scorecard data/API source page for public higher-education reference data."
+    },
+    {
+      "url": "https://collegescorecard.ed.gov/data/documentation/",
+      "kind": "official_api_documentation",
+      "finding": "Official College Scorecard documentation source for field and API usage context."
+    },
+    {
+      "url": "https://api.gsa.gov/technology/datagov/v3/action/package_show?id=7463e789-0a7f-4878-b8b5-3d8822daf164",
+      "kind": "official_catalog_api_record",
+      "finding": "Current Data.gov API package record for College Scorecard reports Department of Education publisher, public access level, and a Project Open Data license extra pointing to CC-BY."
+    },
+    {
+      "url": "https://data.ed.gov/data.json",
+      "kind": "official_project_open_data_catalog",
+      "finding": "Department of Education Project Open Data catalog is the upstream catalog referenced by the current Data.gov package metadata."
+    }
+  ],
+  "licensePosture": {
+    "redistributionAllowed": true,
+    "modificationAllowed": true,
+    "commercialUseAllowed": true,
+    "attributionRequired": true,
+    "shareAlikeRequired": false,
+    "licenseURL": "http://www.opendefinition.org/licenses/cc-by",
+    "termsURL": "https://collegescorecard.ed.gov/data/",
+    "rightsURL": "https://data.ed.gov/data.json",
+    "reviewRequired": false,
+    "expiresAt": "2026-09-28"
+  },
+  "approvalScope": {
+    "allowedArtifactClasses": [
+      "official_public_source",
+      "public_reference_claim",
+      "public_requirement",
+      "public_provenance",
+      "public_atom_edge_lattice",
+      "public_freshness"
+    ],
+    "allowedClaimClasses": [
+      "candidate_institution_reference",
+      "candidate_education_program_reference"
+    ],
+    "allowedPackUse": "R2/offline public-reference pack slices with attribution",
+    "jurisdiction": "US"
+  },
+  "restrictions": [
+    "Top-level Data.gov license_id is other-license-specified and license_url is null; retain source-specific evidence and re-review quarterly.",
+    "Do not treat College Scorecard as credentialing authority.",
+    "Do not generate admissions advice, financial aid guidance, eligibility guarantees, final user plans, schedules, or Steps.",
+    "Do not send private goal, capture, account, schedule, proof, receipt, behavior, or life-graph context to R2 or Source Atlas."
+  ],
+  "nonClaims": [
+    "not outside legal approval",
+    "not unqualified legal approval",
+    "not admissions advice",
+    "not financial aid guidance",
+    "not credentialing authority",
+    "not release readiness",
+    "not full Source Atlas Green",
+    "not universal coverage",
+    "not a private user-data backend",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded internal terms review for College Scorecard only"
+}

@@ -1,0 +1,117 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "cfpb.adult_financial_education"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "irs.when_to_file"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "usa.gov.benefits"
+    }
+  ],
+  "createdAt": "2026-06-29T03:15:00Z",
+  "domainID": "finance_public_reference",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "cfpb_public_web",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "cfpb.adult_financial_education",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "irs_public_web",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "irs.when_to_file",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "usagov_public_web",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "usa.gov.benefits",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "cfpb.adult_financial_education",
+    "irs.when_to_file",
+    "usa.gov.benefits"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_cfpb_financial_education_recheck",
+      "licenseID": "cfpb_public_web",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "cfpb.adult_financial_education",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_irs_deadline_recheck_stale_critical_before_tax_use",
+      "licenseID": "irs_public_web",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "irs.when_to_file",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_usagov_benefits_recheck",
+      "licenseID": "usagov_public_web",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "usa.gov.benefits",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

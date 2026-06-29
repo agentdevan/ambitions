@@ -1,0 +1,1796 @@
+{
+  "allowedObjectKeyCount": 70,
+  "allowlistReport": {
+    "allowedObjectKeyCount": 70,
+    "checks": [
+      {
+        "issues": [],
+        "name": "publisher_reports_validated",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "allowlist_not_empty",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "object_keys_public_reference_only",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "artifact_privacy_scan_passed",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "no_final_plan_schedule_step_output",
+        "passed": true
+      },
+      {
+        "issues": [],
+        "name": "stable_sorted_output",
+        "passed": true
+      }
+    ],
+    "createdAt": "2026-06-28T18:14:00Z",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.r2PublicGatewayAllowlistCompilerReport.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not a broad release readiness claim"
+    ],
+    "outputPaths": {
+      "artifact": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/allowlist/public-gateway-allowlist.json",
+      "closeout": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/allowlist/closeout.md",
+      "generatedWorkerAllowlist": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/allowlist/allowed-object-keys.generated.js",
+      "report": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/allowlist/public-gateway-allowlist-report.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "productionNonClaims": [
+      "no private graph egress",
+      "no final user plan, schedule, or Step generation",
+      "no legal approval upgrade",
+      "no native release Green",
+      "no App Store readiness",
+      "no universal coverage claim"
+    ],
+    "publisherReportCount": 14,
+    "schemaVersion": 1,
+    "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; public gateway allowlist compiler only",
+    "status": "Source Green for public gateway allowlist compiler",
+    "valid": true,
+    "versionID": "source-atlas-r2-public-gateway-allowlist-train-82"
+  },
+  "checks": [
+    {
+      "issues": [],
+      "name": "publisher_report_discovery",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "eligible_reports_found",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_target_ledger_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "native_refresh_registry_coherence",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "deploy_execute_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "allowlist_compiler_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "worker_deploy",
+      "passed": true
+    },
+    {
+      "issues": [
+        "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json: status=404",
+        "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json: status=404",
+        "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/current.json: status=404",
+        "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/lkg.json: status=404",
+        "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/revocations.json: status=404",
+        "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/current.json: status=404",
+        "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json: status=404",
+        "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json: status=404"
+      ],
+      "name": "live_gateway_verification",
+      "passed": false
+    }
+  ],
+  "createdAt": "2026-06-28T18:14:00Z",
+  "deployReport": {
+    "attempted": false,
+    "deployRequested": false,
+    "executeRequested": false,
+    "issues": [],
+    "success": null,
+    "workerConfigPath": null
+  },
+  "deployRequested": false,
+  "discovery": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.r2PublicGatewayPublisherReportDiscovery.v1",
+    "publisherReportRoot": "tools/source-atlas/generated/r2-publisher",
+    "schemaVersion": 1,
+    "selectedPublisherReports": [
+      "tools/source-atlas/generated/r2-publisher/train-116-business_entrepreneurship-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-creative_project_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-education_credentialing-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-finance_public_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-health_wellness_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-home_life_admin-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-101-env-backed-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-public_civic_requirements-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-relationships_family-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+      "tools/source-atlas/generated/r2-publisher/train-131-volunteering-production-remote-r2/r2-publisher-report.json"
+    ],
+    "selectedReportCount": 14,
+    "selectedReports": [
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "business_entrepreneurship",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-business_entrepreneurship-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "creative_project_reference",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-creative_project_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "education_credentialing",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-education_credentialing-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "finance_public_reference",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-finance_public_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "health_wellness_reference",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-health_wellness_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "health_wellness_reference_ca_statistics",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "hobbies_recreation",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "home_life_admin",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-home_life_admin-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "occupation_foundation",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-101-env-backed-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "personal_growth",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "public_civic_requirements",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+        "packVersion": "20260628T041500Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-public_civic_requirements-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "relationships_family",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-relationships_family-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-29T00:28:00Z",
+        "domainID": "travel_relocation",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T18:10:00Z",
+        "domainID": "volunteering_public_reference",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+        "packVersion": "20260628T180600Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-131-volunteering-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "valid": true
+      }
+    ],
+    "skippedReports": [
+      {
+        "channel": "candidate",
+        "createdAt": "2026-06-27T00:00:00Z",
+        "domainID": null,
+        "environment": "staging",
+        "mode": "dry_run",
+        "packID": "source-atlas/v1/domain/public_civic_requirements/20260627T000000Z",
+        "packVersion": "20260627T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-10-civic-dry-run/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": true
+      },
+      {
+        "channel": "candidate",
+        "createdAt": "2026-06-27T00:00:00Z",
+        "domainID": null,
+        "environment": "staging",
+        "mode": "local_simulation",
+        "packID": "source-atlas/v1/domain/public_civic_requirements/20260627T000000Z",
+        "packVersion": "20260627T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-10-civic-local-simulation/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "occupation_foundation",
+        "environment": "production",
+        "mode": "dry_run",
+        "packID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-28-stable-approval-gate/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T04:25:00Z",
+        "domainID": "public_civic_requirements",
+        "environment": "production",
+        "mode": "local_simulation",
+        "packID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+        "packVersion": "20260628T041500Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-37-civic-production-local-simulation/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": true
+      },
+      {
+        "channel": "candidate",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": null,
+        "environment": "staging",
+        "mode": "local_simulation",
+        "packID": "source-atlas/v1/domain/education_credentialing/2026-06-28T000000Z",
+        "packVersion": "2026-06-28T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-38-education-staging-local-simulation/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": true
+      },
+      {
+        "channel": "candidate",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": null,
+        "environment": "staging",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/education_credentialing/2026-06-28T000000Z",
+        "packVersion": "2026-06-28T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-38-education-staging-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": true
+      },
+      {
+        "channel": "candidate",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": null,
+        "environment": "staging",
+        "mode": "local_simulation",
+        "packID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-79-statcan-local-simulation/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "health_wellness_reference_ca_statistics",
+        "environment": "production",
+        "mode": "local_simulation",
+        "packID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-local-simulation/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "health_wellness_reference_ca_statistics",
+        "environment": "production",
+        "mode": "local_simulation",
+        "packID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-86-statcan-missing-ledger-block/r2-publisher-report.json",
+        "productionR2Uploaded": false,
+        "reason": "not production/stable remote R2 upload proof",
+        "valid": false
+      }
+    ],
+    "supersededReports": [
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "occupation_foundation",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T04:25:00Z",
+        "domainID": "public_civic_requirements",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+        "packVersion": "20260628T041500Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-37-civic-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "education_credentialing",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "business_entrepreneurship",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-43-business-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "hobbies_recreation",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-44-hobbies-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "health_wellness_reference",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-45-health-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "travel_relocation",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-46-travel-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "finance_public_reference",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-47-finance-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "home_life_admin",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-48-home-life-admin-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "creative_project_reference",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-49-creative-project-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "personal_growth",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-50-personal-growth-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "relationships_family",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-51-relationships-family-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      },
+      {
+        "channel": "stable",
+        "createdAt": "2026-06-28T00:00:00Z",
+        "domainID": "health_wellness_reference_ca_statistics",
+        "environment": "production",
+        "mode": "remote_r2",
+        "packID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "packVersion": "20260628T000000Z",
+        "path": "tools/source-atlas/generated/r2-publisher/train-81-statcan-production-remote-r2/r2-publisher-report.json",
+        "productionR2Uploaded": true,
+        "reason": "older report superseded for domain",
+        "valid": true
+      }
+    ],
+    "totalReportCount": 36,
+    "valid": true
+  },
+  "executeRequested": false,
+  "issues": [
+    "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json: status=404",
+    "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json: status=404",
+    "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/current.json: status=404",
+    "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/lkg.json: status=404",
+    "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/revocations.json: status=404",
+    "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/current.json: status=404",
+    "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json: status=404",
+    "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json: status=404"
+  ],
+  "kind": "ambitions.sourceAtlas.r2PublicGatewayReleaseReport.v1",
+  "liveVerification": {
+    "allowlistPath": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/allowlist/public-gateway-allowlist.json",
+    "baseURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "blockedChecks": [
+      {
+        "blocked": true,
+        "path": "source-atlas/v1/production/stable/users/current.json",
+        "status": 404
+      },
+      {
+        "blocked": true,
+        "path": "source-atlas/v1/production/stable/business_entrepreneurship/current.json?goal_text=private",
+        "status": 404
+      }
+    ],
+    "blockedChecksPassed": true,
+    "createdAt": "2026-06-28T18:14:00Z",
+    "headCheckCount": 70,
+    "headChecks": [
+      {
+        "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/creative_project_reference/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/creative_project_reference/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/creative_project_reference/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/finance_public_reference/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/finance_public_reference/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/finance_public_reference/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/occupation_foundation/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/occupation_foundation/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/current.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/lkg.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/revocations.json",
+        "passed": true,
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json",
+        "passed": false,
+        "publicReferenceHeader": null,
+        "status": 404
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json",
+        "passed": false,
+        "publicReferenceHeader": null,
+        "status": 404
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/current.json",
+        "passed": false,
+        "publicReferenceHeader": null,
+        "status": 404
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/lkg.json",
+        "passed": false,
+        "publicReferenceHeader": null,
+        "status": 404
+      },
+      {
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/revocations.json",
+        "passed": false,
+        "publicReferenceHeader": null,
+        "status": 404
+      }
+    ],
+    "headChecksPassed": false,
+    "issues": [
+      "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json: status=404",
+      "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json: status=404",
+      "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/current.json: status=404",
+      "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/lkg.json: status=404",
+      "HEAD failed for source-atlas/v1/production/stable/volunteering_public_reference/revocations.json: status=404",
+      "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/current.json: status=404",
+      "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json: status=404",
+      "GET SHA mismatch for source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json: status=404"
+    ],
+    "kind": "ambitions.sourceAtlas.r2PublicGatewayLiveVerification.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not a broad release readiness claim"
+    ],
+    "publicCheckCount": 42,
+    "publicChecks": [
+      {
+        "actualSHA256": "de67d51ad289f5d5df276de1387698a1ccbd5c45b563ba71f3a9ab6320b63f6f",
+        "domain": "business_entrepreneurship",
+        "expectedSHA256": "de67d51ad289f5d5df276de1387698a1ccbd5c45b563ba71f3a9ab6320b63f6f",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "1b68d185137aad5fa89a23f9fcb94d85b2c9dcbe3975d445157a47eeda23f9fb",
+        "domain": "business_entrepreneurship",
+        "expectedSHA256": "1b68d185137aad5fa89a23f9fcb94d85b2c9dcbe3975d445157a47eeda23f9fb",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "04d9eaf6f96b1271982a356664a570c74ed946e3145be96bcf636e7f1e561af6",
+        "domain": "business_entrepreneurship",
+        "expectedSHA256": "04d9eaf6f96b1271982a356664a570c74ed946e3145be96bcf636e7f1e561af6",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "d806a6e00da3c901a0b1155024a3a901a876534fb019118bd97132ff795163e4",
+        "domain": "creative_project_reference",
+        "expectedSHA256": "d806a6e00da3c901a0b1155024a3a901a876534fb019118bd97132ff795163e4",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/creative_project_reference/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "e374b2af91c53b469c8b69e3bedeabff6791481821e840ed64b1fd528a350cf2",
+        "domain": "creative_project_reference",
+        "expectedSHA256": "e374b2af91c53b469c8b69e3bedeabff6791481821e840ed64b1fd528a350cf2",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+        "domain": "creative_project_reference",
+        "expectedSHA256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "35077547e7d50fb45e16941328950200993a075962ba8d581be5dbfc7037e498",
+        "domain": "education_credentialing",
+        "expectedSHA256": "35077547e7d50fb45e16941328950200993a075962ba8d581be5dbfc7037e498",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "7443bc2846c6ba6700bffe4f2361a7d1c6eb0305cd7261aee9d797574627543b",
+        "domain": "education_credentialing",
+        "expectedSHA256": "7443bc2846c6ba6700bffe4f2361a7d1c6eb0305cd7261aee9d797574627543b",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+        "domain": "education_credentialing",
+        "expectedSHA256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "33e79d434423e836dacd030398567b7dc50d885e9b61b73a137caf7a87ba9242",
+        "domain": "finance_public_reference",
+        "expectedSHA256": "33e79d434423e836dacd030398567b7dc50d885e9b61b73a137caf7a87ba9242",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/finance_public_reference/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "f8ebd78107eb8ea24d6a39d8b96e5bfb6079b69d0fcd1be8c7a740124a57f405",
+        "domain": "finance_public_reference",
+        "expectedSHA256": "f8ebd78107eb8ea24d6a39d8b96e5bfb6079b69d0fcd1be8c7a740124a57f405",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "ca23807f8cae55bf052600a90ca205ff3436f987e5d97f8518e96cd300bd0c19",
+        "domain": "finance_public_reference",
+        "expectedSHA256": "ca23807f8cae55bf052600a90ca205ff3436f987e5d97f8518e96cd300bd0c19",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "cd84ca11050ad94aee7a8364d5337c13e1ab8bb34997d23b1a292b89d1d2d4d6",
+        "domain": "health_wellness_reference",
+        "expectedSHA256": "cd84ca11050ad94aee7a8364d5337c13e1ab8bb34997d23b1a292b89d1d2d4d6",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "1d12454d24289694019ef7490463812113bb0b92f7f696135dbf8898b0ab1b0a",
+        "domain": "health_wellness_reference",
+        "expectedSHA256": "1d12454d24289694019ef7490463812113bb0b92f7f696135dbf8898b0ab1b0a",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "b84001256a9bbb06c26e1656bb04a04217078ce77d7790aaab41656dd67ea301",
+        "domain": "health_wellness_reference",
+        "expectedSHA256": "b84001256a9bbb06c26e1656bb04a04217078ce77d7790aaab41656dd67ea301",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "4a98eea26b6955749b6eb7b81a6fa826b92f8c51e813e656a1176b61584df415",
+        "domain": "health_wellness_reference_ca_statistics",
+        "expectedSHA256": "4a98eea26b6955749b6eb7b81a6fa826b92f8c51e813e656a1176b61584df415",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "f30bd907661126409596686b9402ed00b13743696e09d6804cf8aeb56ff3befa",
+        "domain": "health_wellness_reference_ca_statistics",
+        "expectedSHA256": "f30bd907661126409596686b9402ed00b13743696e09d6804cf8aeb56ff3befa",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "30c129cc7cbd0ff1027cc57a6f611579a5c1562a91fe929440857e01bc6981ee",
+        "domain": "health_wellness_reference_ca_statistics",
+        "expectedSHA256": "30c129cc7cbd0ff1027cc57a6f611579a5c1562a91fe929440857e01bc6981ee",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "43faab85ad785b54cc5b05bba23e85702b9673a8f8328b3686c9753bef771628",
+        "domain": "hobbies_recreation",
+        "expectedSHA256": "43faab85ad785b54cc5b05bba23e85702b9673a8f8328b3686c9753bef771628",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "5a0ab1732e900c5b134e66458846f5b5f1efe4fae119f5049dcd89f82469946b",
+        "domain": "hobbies_recreation",
+        "expectedSHA256": "5a0ab1732e900c5b134e66458846f5b5f1efe4fae119f5049dcd89f82469946b",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+        "domain": "hobbies_recreation",
+        "expectedSHA256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "fafc146e1d5c9ea31c322d6368c3ece03e83ea26886ffe5b6bfa0c4398462cf7",
+        "domain": "home_life_admin",
+        "expectedSHA256": "fafc146e1d5c9ea31c322d6368c3ece03e83ea26886ffe5b6bfa0c4398462cf7",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84",
+        "domain": "home_life_admin",
+        "expectedSHA256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+        "domain": "home_life_admin",
+        "expectedSHA256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+        "domain": "occupation_foundation",
+        "expectedSHA256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "6f8f394a912b4983c4b19512c776b21844834fd1df5713cf435816c0864ffe06",
+        "domain": "occupation_foundation",
+        "expectedSHA256": "6f8f394a912b4983c4b19512c776b21844834fd1df5713cf435816c0864ffe06",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "55f2ae4593e40e30fe9aa48d0dab4988f186bc889cf225b3db2676b77e1d1ea3",
+        "domain": "occupation_foundation",
+        "expectedSHA256": "55f2ae4593e40e30fe9aa48d0dab4988f186bc889cf225b3db2676b77e1d1ea3",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "58016adbec60332d8fa690197f9b2e6a3647fb8c8dff214314e80ded6234eb49",
+        "domain": "personal_growth",
+        "expectedSHA256": "58016adbec60332d8fa690197f9b2e6a3647fb8c8dff214314e80ded6234eb49",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e",
+        "domain": "personal_growth",
+        "expectedSHA256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9",
+        "domain": "personal_growth",
+        "expectedSHA256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "496c1d90f4de4e112540a2fb56ea6a57db4f6b48dc779fbaf8456e71af8c2a72",
+        "domain": "public_civic_requirements",
+        "expectedSHA256": "496c1d90f4de4e112540a2fb56ea6a57db4f6b48dc779fbaf8456e71af8c2a72",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "9f0910dbee38eb5a36e37eb74de2bc04ce01ff065ef59307d61e8820d0eaaa25",
+        "domain": "public_civic_requirements",
+        "expectedSHA256": "9f0910dbee38eb5a36e37eb74de2bc04ce01ff065ef59307d61e8820d0eaaa25",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6",
+        "domain": "public_civic_requirements",
+        "expectedSHA256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "fd8d7f205abb00dddbe00bf71e6e1c31e7492d10dad7ba096c14bf804ae98b46",
+        "domain": "relationships_family",
+        "expectedSHA256": "fd8d7f205abb00dddbe00bf71e6e1c31e7492d10dad7ba096c14bf804ae98b46",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "79612ee9d46b0349ff4eb032094686cc338cc7f08b1bfcdbcc5d8a13da58bfb3",
+        "domain": "relationships_family",
+        "expectedSHA256": "79612ee9d46b0349ff4eb032094686cc338cc7f08b1bfcdbcc5d8a13da58bfb3",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "de4db9e6778d23d16725951c88d6254355203a544b70246ade18f373447539c1",
+        "domain": "relationships_family",
+        "expectedSHA256": "de4db9e6778d23d16725951c88d6254355203a544b70246ade18f373447539c1",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "ab7e9f1ef1ea790e6182cd9fbfb06e48d08a385c2c8c59860a42ff0d49a0872d",
+        "domain": "travel_relocation",
+        "expectedSHA256": "ab7e9f1ef1ea790e6182cd9fbfb06e48d08a385c2c8c59860a42ff0d49a0872d",
+        "label": "current",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/current.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+        "domain": "travel_relocation",
+        "expectedSHA256": "ae3ccd608f5b6e1ae3284d92254d24d016445b5a35f29f6ed208556decf546be",
+        "label": "manifest",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+        "domain": "travel_relocation",
+        "expectedSHA256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f",
+        "label": "pack",
+        "matched": true,
+        "objectKey": "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/pack.json",
+        "publicReferenceHeader": "true",
+        "status": 200
+      },
+      {
+        "actualSHA256": null,
+        "domain": "volunteering_public_reference",
+        "expectedSHA256": "7c4e3388531e221a748d0414047b8ea440354f963b829b653b845524d9ddb494",
+        "label": "current",
+        "matched": false,
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/current.json",
+        "publicReferenceHeader": null,
+        "status": 404
+      },
+      {
+        "actualSHA256": null,
+        "domain": "volunteering_public_reference",
+        "expectedSHA256": "6605933ec3fa134e0d8e675512300b34eab8bf3d64c8035f72e97c03626d5dc4",
+        "label": "manifest",
+        "matched": false,
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json",
+        "publicReferenceHeader": null,
+        "status": 404
+      },
+      {
+        "actualSHA256": null,
+        "domain": "volunteering_public_reference",
+        "expectedSHA256": "7483b6e19f2ae712bd0936c0855f8072ce3fd0e650baf6bee5f7fcf1a433dd45",
+        "label": "pack",
+        "matched": false,
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json",
+        "publicReferenceHeader": null,
+        "status": 404
+      }
+    ],
+    "publicChecksPassed": false,
+    "schemaVersion": 1,
+    "valid": false,
+    "workerVersionID": null
+  },
+  "liveVerificationRequested": true,
+  "nativeRegistryCoherenceGate": {
+    "activeDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation",
+      "volunteering_public_reference"
+    ],
+    "activeTargetCount": 14,
+    "artifactID": "source_atlas_public_refresh_targets.7f4a346042b16d44",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.nativeRegistryCoherenceGate.v1",
+    "matchedTargetCount": 14,
+    "matches": [
+      {
+        "domainID": "business_entrepreneurship",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-business_entrepreneurship-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.business_entrepreneurship.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z"
+      },
+      {
+        "domainID": "creative_project_reference",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-creative_project_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.creative_project_reference.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z"
+      },
+      {
+        "domainID": "education_credentialing",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-education_credentialing-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.education_credentialing.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z"
+      },
+      {
+        "domainID": "finance_public_reference",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-finance_public_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.finance_public_reference.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z"
+      },
+      {
+        "domainID": "health_wellness_reference",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-health_wellness_reference-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.health_wellness_reference.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z"
+      },
+      {
+        "domainID": "health_wellness_reference_ca_statistics",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.health_wellness_reference_ca_statistics.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/health_wellness_reference_ca_statistics/20260628T000000Z"
+      },
+      {
+        "domainID": "hobbies_recreation",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.hobbies_recreation.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z"
+      },
+      {
+        "domainID": "home_life_admin",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-home_life_admin-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.home_life_admin.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z"
+      },
+      {
+        "domainID": "occupation_foundation",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-101-env-backed-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.occupation_foundation.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z"
+      },
+      {
+        "domainID": "personal_growth",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.personal_growth.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/personal_growth/20260628T000000Z"
+      },
+      {
+        "domainID": "public_civic_requirements",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-public_civic_requirements-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+        "targetID": "source-atlas-refresh-target.public_civic_requirements.stable.20260628T041500Z",
+        "targetPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z"
+      },
+      {
+        "domainID": "relationships_family",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-relationships_family-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.relationships_family.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/relationships_family/20260628T000000Z"
+      },
+      {
+        "domainID": "travel_relocation",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+        "targetID": "source-atlas-refresh-target.travel_relocation.stable.20260628T000000Z",
+        "targetPackID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z"
+      },
+      {
+        "domainID": "volunteering_public_reference",
+        "matched": true,
+        "publisherReport": "tools/source-atlas/generated/r2-publisher/train-131-volunteering-production-remote-r2/r2-publisher-report.json",
+        "selectedPackID": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+        "targetID": "source-atlas-refresh-target.volunteering_public_reference.stable.20260628T180600Z",
+        "targetPackID": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z"
+      }
+    ],
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not a broad release readiness claim"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "registryPath": "tools/source-atlas/generated/native-refresh-registry/train-131-tetradeca-domain-active/source-atlas-public-refresh-targets.json",
+    "required": true,
+    "schemaVersion": 1,
+    "selectedDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation",
+      "volunteering_public_reference"
+    ],
+    "selectedReportCount": 14,
+    "valid": true
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not a broad release readiness claim"
+  ],
+  "outputPaths": {
+    "allowlistArtifact": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/allowlist/public-gateway-allowlist.json",
+    "allowlistReport": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/allowlist/public-gateway-allowlist-report.json",
+    "closeout": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/closeout.md",
+    "deployReport": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/worker-deploy-report.json",
+    "discovery": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/publisher-report-discovery.json",
+    "generatedWorkerAllowlist": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/allowlist/allowed-object-keys.generated.js",
+    "liveVerification": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/public-gateway-live-verification.json",
+    "nativeRegistryArtifact": "tools/source-atlas/generated/native-refresh-registry/train-131-tetradeca-domain-active/source-atlas-public-refresh-targets.json",
+    "productionTargetLedger": null,
+    "report": "tools/source-atlas/generated/r2-public-gateway/train-131-tetradeca-live-verify/public-gateway-release-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionNonClaims": [
+    "no private graph egress",
+    "no final user plan, schedule, or Step generation",
+    "no legal approval upgrade",
+    "no native release Green",
+    "no App Store readiness",
+    "no universal coverage claim"
+  ],
+  "productionTargetLedgerGate": {
+    "allowedClaims": [],
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.productionTargetLedgerActivationGate.v1",
+    "ledgerID": null,
+    "ledgerPath": null,
+    "missingDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation",
+      "volunteering_public_reference"
+    ],
+    "nonClaims": [
+      "not literal universal coverage",
+      "not full Source Atlas Green",
+      "not Release Green",
+      "not outside legal approval",
+      "not final user plans, schedules, or Steps"
+    ],
+    "overallReadinessStatus": null,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "readyDomains": [],
+    "requestedDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation",
+      "volunteering_public_reference"
+    ],
+    "required": false,
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "publisherReportRoot": "tools/source-atlas/generated/r2-publisher",
+  "schemaVersion": 1,
+  "selectedPublisherReportCount": 14,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; public gateway release orchestration only",
+  "status": "Red",
+  "valid": false,
+  "versionID": "source-atlas-r2-public-gateway-release-train-83"
+}

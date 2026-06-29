@@ -1,0 +1,29 @@
+{
+  "adapterID": "onet_public_reference_adapter",
+  "apiPolicyID": "api.onet_public_database.v1",
+  "budgetPolicyID": "budget.onet_public_database.v1",
+  "claimCount": 10,
+  "dataClass": "public_provenance",
+  "evidenceHash": "80d2c73e814a83799c7bcf6a1c8dd11fc2441853487d111f8ec121d35958655e",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "onet_cc_by_4",
+  "normalizedPath": "normalized/onet.database.json",
+  "normalizedSHA256": "09a39f3ef9033e1cd08bdf54f3bfe61a6c15d575fed7560095afbdcec29b0a6a",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.onet_public_database.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-27T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.onet_web_services_optional.v1",
+  "sourceID": "onet.database",
+  "sourceLane": "onet.database"
+}

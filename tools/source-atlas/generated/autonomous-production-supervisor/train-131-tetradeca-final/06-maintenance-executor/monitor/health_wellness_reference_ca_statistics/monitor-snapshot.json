@@ -1,0 +1,57 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.official.statcan.table.13100974.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "official.statcan.table.13100974"
+    }
+  ],
+  "createdAt": "2026-06-29T00:36:00Z",
+  "domainID": "health_wellness_reference_ca_statistics",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "statcan.open-licence.2026-06-28",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "official.statcan.table.13100974",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "official.statcan.table.13100974"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.official.statcan.table.13100974.v1",
+      "freshnessSLA": "quarterly_source_and_terms_review",
+      "licenseID": "statcan.open-licence.2026-06-28",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "official.statcan.table.13100974",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

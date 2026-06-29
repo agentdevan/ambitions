@@ -1,0 +1,446 @@
+{
+  "artifactValidation": {
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.packProductionArtifactValidation.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "requiredArtifacts": [
+      "adjudications.json",
+      "attribution.json",
+      "claims.json",
+      "coverage.json",
+      "entities.json",
+      "freshness.json",
+      "licenses.json",
+      "lkg.json",
+      "manifest.json",
+      "non-private-scan-report.json",
+      "non_claims.json",
+      "pack.json",
+      "r2-dry-run-plan.json",
+      "revocations.json",
+      "rollback-plan.json",
+      "sources.json"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "channel": "candidate",
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "pack_slices_written",
+      "passed": true
+    },
+    {
+      "name": "pack_contains_only_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "restricted_and_crosswalk_claims_excluded",
+      "passed": true
+    },
+    {
+      "name": "manifest_hashes_present",
+      "passed": true
+    },
+    {
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "name": "dry_run_plan_only",
+      "passed": true
+    },
+    {
+      "name": "private_object_keys_blocked",
+      "passed": true
+    },
+    {
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "required_artifacts_valid",
+      "passed": true
+    },
+    {
+      "name": "execute_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-27T00:00:00Z",
+  "domain": "occupation_foundation",
+  "dryRunPlan": {
+    "channel": "candidate",
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_r2_object_key",
+    "dryRun": true,
+    "environment": "staging",
+    "executeRequested": false,
+    "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "dry-run only; no R2 upload or production promotion was performed"
+    ],
+    "objects": [
+      {
+        "bytes": 9461,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "adjudications",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/adjudications.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/adjudications.json",
+        "sha256": "4c117d54f213982672a7fe21a37f783c9405d824904f9da70169b3c00a1162b2"
+      },
+      {
+        "bytes": 5575,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "attribution",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/attribution.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/attribution.json",
+        "sha256": "3210c24f0cff7e64790e984634a9531378e55ff9e51728d70c41c215539cef3a"
+      },
+      {
+        "bytes": 55599,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "claims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/claims.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/claims.json",
+        "sha256": "7766f9be78c91656a9f0ae48daf599d7406685654983d2bf8983bec6ebc0ff29"
+      },
+      {
+        "bytes": 2481,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "coverage",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/coverage.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/coverage.json",
+        "sha256": "105e5768e1797748fb2d067b7c4012b373697b4aac99cf36bcc8c91185845599"
+      },
+      {
+        "bytes": 11676,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "entities",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/entities.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/entities.json",
+        "sha256": "c03a4a1f62b21ba6c57295f14425f27f79cbcd8c3b83f505440f1f05fa6138d6"
+      },
+      {
+        "bytes": 13413,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "freshness",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/freshness.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/freshness.json",
+        "sha256": "f89a68c2f94da63b727b4a30c84652d567d36bb1a0c27334c656d112346d2724"
+      },
+      {
+        "bytes": 2563,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "licenses",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/licenses.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/licenses.json",
+        "sha256": "d2ec80ded087fc9244320ef3e3c2999d2af4667945a5e7bcea5689cb5abbae90"
+      },
+      {
+        "bytes": 1259,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "lkg",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/lkg.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/lkg.json",
+        "sha256": "7e1e741b1efe1ce9502bff07a2096042ffe81774bcf7f85ddf63023ccdcf7f69"
+      },
+      {
+        "bytes": 8492,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "manifest",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/manifest.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/manifest.json",
+        "sha256": "b50a58f4f19e848142c6bbe86c7973b380aedb6ee5639ec17429ce231898234c"
+      },
+      {
+        "bytes": 1172,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "nonClaims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/non_claims.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/non_claims.json",
+        "sha256": "8ea2cd75c0b28ca05ad514bf4b9598a8335de89d24173685a54991969e5da5d8"
+      },
+      {
+        "bytes": 97747,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "pack",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/pack.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/pack.json",
+        "sha256": "3511ab8411b5cac01128317ebc2fcb3e07afb5bf11f3c47d6d7fd921bc32d087"
+      },
+      {
+        "bytes": 1405,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "revocations",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/revocations.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/revocations.json",
+        "sha256": "5d30dad0c3d2f9a16d7137e672700f5f3b6c7be428d9056b4caf3def8407ead8"
+      },
+      {
+        "bytes": 3860,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "sources",
+        "localPath": "tools/source-atlas/generated/pack-production/train-04-fixture/sources.json",
+        "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/sources.json",
+        "sha256": "556410785f1fe6dee1ef6f5acb8b1fff13ccbc04920f9f51d421305ba17182c5"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-04-fixture/rollback-plan.json",
+    "schemaVersion": 1,
+    "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+    "wouldUpload": false
+  },
+  "environment": "staging",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.packProductionManifest.v1",
+  "lkg": {
+    "channel": "candidate",
+    "created_at": "2026-06-27T00:00:00Z",
+    "dataClass": "public_freshness",
+    "domain": "occupation_foundation",
+    "manifest_key": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/manifest.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "pack_id": "source-atlas/v1/domain/occupation_foundation/20260627T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "reason_selected": "dry_run_candidate",
+    "rollback_safe": true,
+    "sha256": "b50a58f4f19e848142c6bbe86c7973b380aedb6ee5639ec17429ce231898234c",
+    "valid_until": null
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "nonPrivateScan": {
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.nonPrivateScanReport.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "outputRoot": "tools/source-atlas/generated/pack-production/train-04-fixture",
+    "passed": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "schemaVersion": 1
+  },
+  "objectKeys": {
+    "adjudications": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/adjudications.json",
+    "attribution": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/attribution.json",
+    "claims": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/claims.json",
+    "coverage": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/coverage.json",
+    "current": "source-atlas/v1/staging/candidate/occupation_foundation/current.json",
+    "entities": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/entities.json",
+    "freshness": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/freshness.json",
+    "licenses": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/licenses.json",
+    "lkg": "source-atlas/v1/staging/candidate/occupation_foundation/lkg.json",
+    "manifest": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/manifest.json",
+    "nonClaims": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/non_claims.json",
+    "pack": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/pack.json",
+    "revocations": "source-atlas/v1/staging/candidate/occupation_foundation/revocations.json",
+    "sources": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/sources.json"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/pack-production/train-04-fixture/closeout.md",
+    "lkg": "tools/source-atlas/generated/pack-production/train-04-fixture/lkg.json",
+    "manifest": "tools/source-atlas/generated/pack-production/train-04-fixture/manifest.json",
+    "nonPrivateScan": "tools/source-atlas/generated/pack-production/train-04-fixture/non-private-scan-report.json",
+    "pack": "tools/source-atlas/generated/pack-production/train-04-fixture/pack.json",
+    "r2DryRunPlan": "tools/source-atlas/generated/pack-production/train-04-fixture/r2-dry-run-plan.json",
+    "revocation": "tools/source-atlas/generated/pack-production/train-04-fixture/revocations.json",
+    "rollback": "tools/source-atlas/generated/pack-production/train-04-fixture/rollback-plan.json"
+  },
+  "packID": "source-atlas/v1/domain/occupation_foundation/20260627T000000Z",
+  "packVersion": "20260627T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "blockedClaimsExcluded": 2,
+    "claims": 26,
+    "licenses": 3,
+    "objectCount": 13,
+    "sources": 3
+  },
+  "revocation": {
+    "created_at": "2026-06-27T00:00:00Z",
+    "dataClass": "public_freshness",
+    "lkg_policy": "use_lkg_if_future_pack_is_revoked_and_lkg_hash_verifies",
+    "native_behavior": "not_claimed_in_train_04",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "object_keys": {
+      "lkg": "source-atlas/v1/staging/candidate/occupation_foundation/lkg.json",
+      "manifest": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/manifest.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "proof_artifacts": [],
+    "publicReferenceOnly": true,
+    "reason": "dry_run_no_revocations",
+    "replacement_pack_id": null,
+    "revocation_id": "source_atlas_revocation.332f54c4bde98ab0",
+    "revoked_object_keys": [],
+    "revoked_pack_ids": [],
+    "severity": "none"
+  },
+  "rollback": {
+    "candidateManifestKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/manifest.json",
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_freshness",
+    "dryRunOnly": true,
+    "kind": "ambitions.sourceAtlas.rollbackPlan.v1",
+    "lkgPointerKey": "source-atlas/v1/staging/candidate/occupation_foundation/lkg.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "packID": "source-atlas/v1/domain/occupation_foundation/20260627T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackCandidates": [
+      {
+        "channel": "candidate",
+        "created_at": "2026-06-27T00:00:00Z",
+        "dataClass": "public_freshness",
+        "domain": "occupation_foundation",
+        "manifest_key": "source-atlas/v1/staging/candidate/occupation_foundation/20260627T000000Z/manifest.json",
+        "nonClaims": [
+          "not a private user-data backend",
+          "not private life graph storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final user plan, schedule, or Step generator"
+        ],
+        "pack_id": "source-atlas/v1/domain/occupation_foundation/20260627T000000Z",
+        "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+        "publicReferenceOnly": true,
+        "reason_selected": "dry_run_candidate",
+        "rollback_safe": true,
+        "sha256": "b50a58f4f19e848142c6bbe86c7973b380aedb6ee5639ec17429ce231898234c",
+        "valid_until": null
+      }
+    ],
+    "schemaVersion": 1,
+    "stablePointerWillChange": false
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; pack compiler and R2 dry-run controls only",
+  "status": "Source Green for pack compiler/R2 dry-run controls",
+  "valid": true,
+  "versionID": "source-atlas-pack-production-train-04"
+}

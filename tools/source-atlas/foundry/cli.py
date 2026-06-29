@@ -10,22 +10,271 @@ from typing import Any
 from . import __version__
 from .adapters import ADAPTER_VERSION, harvest_sources
 from .api_governance import validate_api_governance, write_api_governance_report
+from .arbitrary_goal_domain_gate import (
+    ArbitraryDomainHandlingGateOptions,
+    arbitrary_domain_handling_gate_markdown,
+    run_arbitrary_domain_handling_gate,
+)
+from .autonomous_operations_planner import (
+    AutonomousOperationsPlannerOptions,
+    autonomous_operations_plan_markdown,
+    compile_autonomous_operations_plan,
+)
+from .autonomous_operations_executor import (
+    AutonomousOperationsExecutorOptions,
+    autonomous_operations_execution_markdown,
+    run_autonomous_operations_executor,
+)
+from .autonomous_domain_expansion_chain import (
+    AutonomousDomainExpansionChainOptions,
+    autonomous_domain_expansion_chain_markdown,
+    run_autonomous_domain_expansion_chain,
+)
+from .autonomous_registry_activation_chain import (
+    AutonomousRegistryActivationChainOptions,
+    autonomous_registry_activation_chain_markdown,
+    run_autonomous_registry_activation_chain,
+)
+from .autonomous_end_to_end_chain import (
+    AutonomousEndToEndChainOptions,
+    autonomous_end_to_end_chain_markdown,
+    run_autonomous_end_to_end_chain,
+)
+from .autonomous_control_loop import (
+    AutonomousControlLoopOptions,
+    autonomous_control_loop_markdown,
+    run_autonomous_control_loop,
+)
+from .autonomous_cycle_runner import (
+    AutonomousCycleRunnerOptions,
+    autonomous_cycle_runner_markdown,
+    run_autonomous_cycle_runner,
+)
+from .autonomous_cycle_executor import (
+    AutonomousCycleExecutorOptions,
+    autonomous_cycle_executor_markdown,
+    run_autonomous_cycle_executor,
+)
+from .autonomous_production_orchestrator import (
+    AutonomousProductionOrchestratorOptions,
+    autonomous_production_orchestrator_markdown,
+    run_autonomous_production_orchestrator,
+)
+from .autonomous_production_supervisor import (
+    AutonomousProductionSupervisorOptions,
+    autonomous_production_supervisor_markdown,
+    run_autonomous_production_supervisor,
+)
+from .autonomous_freshness_scheduler import (
+    AutonomousFreshnessPlannerOptions,
+    autonomous_freshness_planner_markdown,
+    run_autonomous_freshness_planner,
+)
+from .autonomous_maintenance_executor import (
+    AutonomousMaintenanceExecutorOptions,
+    autonomous_maintenance_executor_markdown,
+    run_autonomous_maintenance_executor,
+)
+from .autonomous_promotion_runner import (
+    AutonomousPromotionRunnerOptions,
+    autonomous_promotion_runner_markdown,
+    run_autonomous_promotion_runner,
+)
+from .source_atlas_completion_audit import (
+    SourceAtlasCompletionAuditOptions,
+    run_source_atlas_completion_audit,
+    source_atlas_completion_audit_markdown,
+)
+from .release_proof_packet import (
+    SourceAtlasReleaseProofPacketOptions,
+    run_source_atlas_release_proof_packet,
+    source_atlas_release_proof_packet_markdown,
+)
+from .volunteering_public_reference_activation import (
+    VolunteeringPublicReferenceActivationOptions,
+    run_volunteering_public_reference_activation,
+    volunteering_public_reference_activation_markdown,
+)
 from .boundary_audit import audit_bundle, audit_fixture_root, audit_r2_plan, merge_results
+from .broad_domain_discovery import BroadDomainDiscoveryOptions, build_broad_domain_discovery, write_broad_domain_discovery_report
 from .broad_occupational_foundation import (
     build_broad_occupational_foundation,
     promote_broad_occupation_pack_proof,
     run_stable_promote_proof,
     write_stable_promotion_report,
 )
+from .catalog_candidate_review import CatalogCandidateReviewOptions, compile_catalog_candidate_review, write_catalog_candidate_review_report
+from .catalog_discovery import CatalogDiscoveryOptions, run_catalog_discovery, write_catalog_discovery_report
+from .catalog_governance_intake import CatalogGovernanceIntakeOptions, compile_catalog_governance_intake, write_catalog_governance_intake_report
+from .catalog_approval_finalizer import CatalogApprovalFinalizerOptions, compile_catalog_approval_finalizer, write_catalog_approval_finalizer_report
+from .catalog_approval_preflight import CatalogApprovalPreflightOptions, compile_catalog_approval_preflight, write_catalog_approval_preflight_report
+from .catalog_approval_decision_inputs import (
+    CatalogApprovalDecisionInputsOptions,
+    compile_catalog_approval_decision_inputs,
+    write_catalog_approval_decision_inputs_report,
+)
+from .catalog_approval_decision_assembler import (
+    CatalogApprovalDecisionAssemblerOptions,
+    compile_catalog_approval_decision_assembler,
+    write_catalog_approval_decision_assembler_report,
+)
+from .catalog_approval_chain import CatalogApprovalChainOptions, run_catalog_approval_chain, write_catalog_approval_chain_report
+from .catalog_reviewer_completion_intake import (
+    CatalogReviewerCompletionIntakeOptions,
+    compile_catalog_reviewer_completion_intake,
+    write_catalog_reviewer_completion_intake_report,
+)
+from .catalog_reviewer_completion_template import (
+    CatalogReviewerCompletionTemplateOptions,
+    compile_catalog_reviewer_completion_template,
+    write_catalog_reviewer_completion_template_report,
+)
+from .catalog_review_work_queue import (
+    CatalogReviewWorkQueueOptions,
+    compile_catalog_review_work_queue,
+    write_catalog_review_work_queue_report,
+)
+from .catalog_direct_source_resolution import (
+    CatalogDirectSourceResolutionOptions,
+    compile_catalog_direct_source_resolution,
+    write_catalog_direct_source_resolution_report,
+)
+from .catalog_direct_source_review_gate import (
+    CatalogDirectSourceReviewGateOptions,
+    compile_catalog_direct_source_review_gate,
+    write_catalog_direct_source_review_gate_report,
+)
+from .catalog_direct_source_review_template import (
+    CatalogDirectSourceReviewTemplateOptions,
+    compile_catalog_direct_source_review_template,
+    write_catalog_direct_source_review_template_report,
+)
+from .catalog_direct_source_review_completion import (
+    CatalogDirectSourceReviewCompletionOptions,
+    compile_catalog_direct_source_review_completion,
+    write_catalog_direct_source_review_completion_report,
+)
+from .catalog_direct_source_approval_chain import (
+    CatalogDirectSourceApprovalChainOptions,
+    run_catalog_direct_source_approval_chain,
+    write_catalog_direct_source_approval_chain_report,
+)
+from .catalog_registry_approval_request import CatalogRegistryApprovalRequestOptions, compile_catalog_registry_approval_request, write_catalog_registry_approval_request_report
+from .catalog_registry_applier import CatalogRegistryApplierOptions, compile_catalog_registry_applier, write_catalog_registry_applier_report
+from .catalog_registry_mutation_plan import CatalogRegistryMutationPlanOptions, compile_catalog_registry_mutation_plan, write_catalog_registry_mutation_plan_report
+from .catalog_terms_resolution import CatalogTermsResolutionOptions, compile_catalog_terms_resolution, write_catalog_terms_resolution_report
+from .catalog_transport import CatalogTransportOptions, run_catalog_transport, write_catalog_transport_report
 from .certification import ADAPTER_CERTIFICATIONS, certify_registry, certified_source_records
 from .compiler import compile_bundle
 from .coverage_benchmark import coverage_diff, run_golden_benchmarks
+from .claim_frontier import ClaimFrontierOptions, compile_claim_frontier
+from .frontier_intake import FrontierIntakeOptions, compile_frontier_intake, write_frontier_intake_report
+from .goal_domain_production_lanes import GoalDomainProductionLaneOptions, compile_goal_domain_production_lanes, write_goal_domain_production_lanes_report
+from .goal_domain_active_registry_apply_gate import (
+    GoalDomainActiveRegistryApplyGateOptions,
+    compile_goal_domain_active_registry_apply_gate,
+    write_goal_domain_active_registry_apply_gate_report,
+)
+from .goal_domain_production_activation import (
+    GoalDomainProductionActivationOptions,
+    compile_goal_domain_production_activation,
+    write_goal_domain_production_activation_report,
+)
+from .goal_domain_registry_apply_rehearsal import (
+    GoalDomainRegistryApplyRehearsalOptions,
+    run_goal_domain_registry_apply_rehearsal,
+    write_goal_domain_registry_apply_rehearsal_report,
+)
+from .goal_domain_registry_applier import (
+    GoalDomainRegistryApplierOptions,
+    compile_goal_domain_registry_applier,
+    write_goal_domain_registry_applier_report,
+)
+from .goal_domain_registry_mutation_plan import (
+    GoalDomainRegistryMutationPlanOptions,
+    compile_goal_domain_registry_mutation_plan,
+    write_goal_domain_registry_mutation_plan_report,
+)
+from .goal_domain_review_completion_intake import (
+    GoalDomainReviewCompletionIntakeOptions,
+    compile_goal_domain_review_completion_intake,
+    write_goal_domain_review_completion_intake_report,
+)
+from .goal_domain_review_packets import GoalDomainReviewPacketOptions, compile_goal_domain_review_packets, write_goal_domain_review_packets_report
+from .goal_domain_router import GoalDomainRouterOptions, compile_goal_domain_router, write_goal_domain_router_report
+from .goal_domain_source_specific_apply_packet import (
+    GoalDomainSourceSpecificApplyPacketOptions,
+    compile_goal_domain_source_specific_apply_packet,
+    write_goal_domain_source_specific_apply_packet_report,
+)
+from .goal_domain_work_order_executor import EXECUTOR_MODES, GoalDomainWorkOrderExecutorOptions, run_goal_domain_work_order_executor, write_goal_domain_work_order_executor_report
+from .goal_domain_gauntlet import DEFAULT_UNKNOWN_PROBES, GoalDomainGauntletOptions, goal_domain_gauntlet_markdown, run_goal_domain_gauntlet
 from .legal_readiness import build_terms_registry, write_legal_review_packet
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, write_json
+from .native_refresh_registry import (
+    MODE_ORDER,
+    NATIVE_REGISTRY_MODES,
+    NATIVE_REGISTRY_STATUSES,
+    NativeRefreshRegistryOptions,
+    compile_native_refresh_registry,
+    native_refresh_registry_markdown,
+)
+from .native_runtime_current_proof import (
+    NativeRuntimeCurrentProofOptions,
+    native_runtime_current_proof_markdown,
+    run_native_runtime_current_proof,
+)
+from .pack_production import PackProductionOptions, build_pack_production
+from .production_domain_admission import (
+    ProductionDomainAdmissionOptions,
+    build_production_domain_admission,
+    production_domain_admission_markdown,
+)
 from .publisher import build_r2_plan, execute_r2_plan, write_r2_plan
+from .public_reference_delivery_chain import (
+    DEFAULT_SOURCE_IDS,
+    PublicReferenceDeliveryChainOptions,
+    public_reference_delivery_chain_markdown,
+    run_public_reference_delivery_chain,
+)
 from .public_reference_adapters import emit_all_adapter_fixtures, run_all_adapters
 from .green_reconciliation import build_green_reconciliation
+from .governance_registry import validate_governance_registries, write_governance_registry_report
+from .harvest_runner import RUN_MODES, GovernedHarvestOptions, run_governed_harvest
 from .live_adapter_validation import ADAPTER_ALIASES, LiveRunOptions, run_live_adapter_validation
+from .r2_pack_publisher import PUBLISHER_MODES, PackR2PublisherOptions, r2_pack_publisher_markdown, run_pack_r2_publisher
+from .r2_owner_approval import R2OwnerApprovalOptions, build_r2_owner_approval, r2_owner_approval_markdown
+from .r2_public_gateway_allowlist import (
+    PublicGatewayAllowlistOptions,
+    compile_public_gateway_allowlist,
+    public_gateway_allowlist_markdown,
+)
+from .r2_public_gateway_release import (
+    DEFAULT_GATEWAY_BASE_URL,
+    PublicGatewayReleaseOptions,
+    public_gateway_release_markdown,
+    run_public_gateway_release,
+)
+from .production_target_ledger import (
+    ProductionTargetLedgerOptions,
+    build_production_target_ledger,
+    production_target_ledger_markdown,
+)
+from .production_recertification_gate import (
+    ProductionRecertificationOptions,
+    production_recertification_markdown,
+    run_production_recertification_gate,
+)
+from .production_finish_line_gate import (
+    ProductionFinishLineGateOptions,
+    production_finish_line_gate_markdown,
+    run_production_finish_line_gate,
+)
+from .production_sweep import (
+    ProductionSweepOptions,
+    production_sweep_markdown,
+    run_production_sweep,
+)
 from .registry import PATHWAY_SEEDS, SOURCE_REGISTRY
 from .r2_operations_proof import R2_OPERATION_MODES, run_r2_operations_proof
 from .r2_contracts import (
@@ -43,6 +292,7 @@ from .validator import validate_bundle
 from .workbench import build_workbench
 from .terms_registry import terms_registry_artifact, validate_terms_registry
 from .terms_review_packet import build_terms_distribution_review
+from .terms_approval_packet import build_terms_approval_packet
 
 try:
     from dotenv import load_dotenv
@@ -108,6 +358,11 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("certify")
     sub.add_parser("terms-registry")
     sub.add_parser("terms-review")
+    terms_approval_parser = sub.add_parser("terms-approval-packet")
+    terms_approval_parser.add_argument("--source", action="append", dest="sources")
+    terms_approval_parser.add_argument("--json", default="docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.json")
+    terms_approval_parser.add_argument("--created-at")
+    terms_approval_parser.add_argument("--reviewer")
 
     adapter_fixture_parser = sub.add_parser("adapter-fixtures")
     adapter_fixture_parser.add_argument("--output-root", default="tools/source-atlas/fixtures/adapters")
@@ -169,11 +424,823 @@ def main(argv: list[str] | None = None) -> int:
     api_governance_parser.add_argument("--emit-evidence")
     api_governance_parser.add_argument("--markdown")
 
+    governance_parser = sub.add_parser("governance-registry-check")
+    governance_parser.add_argument("--source-lanes")
+    governance_parser.add_argument("--legal-terms")
+    governance_parser.add_argument("--api-governance")
+    governance_parser.add_argument("--emit-evidence")
+    governance_parser.add_argument("--markdown")
+
     harvest_parser = sub.add_parser("harvest")
     harvest_parser.add_argument("--output-root", required=True)
     harvest_parser.add_argument("--run-id", required=True)
     harvest_parser.add_argument("--source", action="append", dest="sources")
     harvest_parser.add_argument("--limit", type=int, default=25)
+
+    governed_harvest_parser = sub.add_parser("governed-harvest")
+    governed_harvest_parser.add_argument("--output-root", required=True)
+    governed_harvest_parser.add_argument("--run-id", required=True)
+    governed_harvest_parser.add_argument("--mode", choices=sorted(RUN_MODES), default="fixture")
+    governed_harvest_parser.add_argument("--source", action="append", dest="sources")
+    governed_harvest_parser.add_argument("--limit", type=int, default=25)
+    governed_harvest_parser.add_argument("--live", action="store_true")
+    governed_harvest_parser.add_argument("--execute", action="store_true")
+    governed_harvest_parser.add_argument("--created-at")
+
+    claim_frontier_parser = sub.add_parser("claim-frontier")
+    claim_frontier_parser.add_argument("--input-root", required=True)
+    claim_frontier_parser.add_argument("--output-root", required=True)
+    claim_frontier_parser.add_argument("--frontier-config")
+    claim_frontier_parser.add_argument("--created-at")
+
+    pack_production_parser = sub.add_parser("pack-production")
+    pack_production_parser.add_argument("--input-root", required=True)
+    pack_production_parser.add_argument("--output-root", required=True)
+    pack_production_parser.add_argument("--domain", default="occupation_foundation")
+    pack_production_parser.add_argument("--environment", choices=["staging", "production"], default="staging")
+    pack_production_parser.add_argument("--channel", default="candidate")
+    pack_production_parser.add_argument("--pack-version")
+    pack_production_parser.add_argument("--created-at", default="2026-06-27T00:00:00Z")
+    pack_production_parser.add_argument("--execute", action="store_true")
+    pack_production_parser.add_argument("--approval-artifact")
+    pack_production_parser.add_argument("--legal-approval-packet")
+    pack_production_parser.add_argument("--budget-policy")
+
+    production_domain_admission_parser = sub.add_parser("production-domain-admission")
+    production_domain_admission_parser.add_argument("--domain", required=True)
+    production_domain_admission_parser.add_argument("--pack-root", required=True)
+    production_domain_admission_parser.add_argument("--output-root", required=True)
+    production_domain_admission_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    production_domain_admission_parser.add_argument("--production-target-ledger")
+    production_domain_admission_parser.add_argument("--legal-approval-packet")
+    production_domain_admission_parser.add_argument("--created-at", default="2026-06-29T06:30:00Z")
+    production_domain_admission_parser.add_argument("--environment", default="production")
+    production_domain_admission_parser.add_argument("--channel", default="stable")
+    production_domain_admission_parser.add_argument("--bucket", default="ambitions-source-atlas-prod")
+    production_domain_admission_parser.add_argument("--owner")
+    production_domain_admission_parser.add_argument("--emit-evidence")
+    production_domain_admission_parser.add_argument("--markdown")
+
+    volunteering_public_reference_activation_parser = sub.add_parser("volunteering-public-reference-activation")
+    volunteering_public_reference_activation_parser.add_argument("--output-root", required=True)
+    volunteering_public_reference_activation_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    volunteering_public_reference_activation_parser.add_argument("--created-at", default="2026-06-29T05:30:00Z")
+    volunteering_public_reference_activation_parser.add_argument("--run-label", default="current")
+    volunteering_public_reference_activation_parser.add_argument("--emit-evidence")
+    volunteering_public_reference_activation_parser.add_argument("--markdown")
+
+    r2_pack_publisher_parser = sub.add_parser("pack-r2-publisher")
+    r2_pack_publisher_parser.add_argument("--pack-root", required=True)
+    r2_pack_publisher_parser.add_argument("--output-root", required=True)
+    r2_pack_publisher_parser.add_argument("--environment", choices=["staging", "production"], default="staging")
+    r2_pack_publisher_parser.add_argument("--channel", default="candidate")
+    r2_pack_publisher_parser.add_argument("--mode", choices=sorted(PUBLISHER_MODES), default="dry_run")
+    r2_pack_publisher_parser.add_argument("--created-at", default="2026-06-27T00:00:00Z")
+    r2_pack_publisher_parser.add_argument("--execute", action="store_true")
+    r2_pack_publisher_parser.add_argument("--approval-artifact")
+    r2_pack_publisher_parser.add_argument("--legal-approval-packet")
+    r2_pack_publisher_parser.add_argument("--budget-policy")
+    r2_pack_publisher_parser.add_argument("--bucket")
+    r2_pack_publisher_parser.add_argument("--local-store-root")
+    r2_pack_publisher_parser.add_argument("--readback-root")
+    r2_pack_publisher_parser.add_argument("--corrupt-readback-label")
+    r2_pack_publisher_parser.add_argument("--production-target-ledger")
+    r2_pack_publisher_parser.add_argument("--production-domain-admission")
+    r2_pack_publisher_parser.add_argument("--env-file", action="append", dest="env_files")
+    r2_pack_publisher_parser.add_argument("--emit-evidence")
+    r2_pack_publisher_parser.add_argument("--markdown")
+
+    r2_owner_approval_parser = sub.add_parser("r2-owner-approval")
+    r2_owner_approval_parser.add_argument("--production-target-ledger", required=True)
+    r2_owner_approval_parser.add_argument("--production-finish-line-gate", required=True)
+    r2_owner_approval_parser.add_argument("--output-root", required=True)
+    r2_owner_approval_parser.add_argument("--created-at", default="2026-06-29T01:20:00Z")
+    r2_owner_approval_parser.add_argument("--environment", default="production")
+    r2_owner_approval_parser.add_argument("--channel", default="stable")
+    r2_owner_approval_parser.add_argument("--bucket", default="ambitions-source-atlas-prod")
+    r2_owner_approval_parser.add_argument("--owner")
+    r2_owner_approval_parser.add_argument("--emit-evidence")
+    r2_owner_approval_parser.add_argument("--markdown")
+
+    native_refresh_parser = sub.add_parser("native-refresh-registry")
+    native_refresh_parser.add_argument("--publisher-report", action="append", required=True)
+    native_refresh_parser.add_argument("--output-root", required=True)
+    native_refresh_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    native_refresh_parser.add_argument("--app-version", default="1.0")
+    native_refresh_parser.add_argument("--pack-schema-version", default="1.0.0")
+    native_refresh_parser.add_argument("--status", choices=sorted(NATIVE_REGISTRY_STATUSES), default="review_required")
+    native_refresh_parser.add_argument("--allowed-mode", action="append", choices=sorted(NATIVE_REGISTRY_MODES))
+    native_refresh_parser.add_argument("--public-locale")
+    native_refresh_parser.add_argument("--approval-artifact")
+    native_refresh_parser.add_argument("--review-artifact-id")
+    native_refresh_parser.add_argument("--artifact-id")
+    native_refresh_parser.add_argument("--production-target-ledger")
+    native_refresh_parser.add_argument("--production-domain-admission")
+    native_refresh_parser.add_argument("--emit-evidence")
+    native_refresh_parser.add_argument("--markdown")
+
+    native_runtime_current_parser = sub.add_parser("native-runtime-current-proof")
+    native_runtime_current_parser.add_argument("--production-target-ledger", required=True)
+    native_runtime_current_parser.add_argument("--gateway-release-report", required=True)
+    native_runtime_current_parser.add_argument("--native-registry-artifact", required=True)
+    native_runtime_current_parser.add_argument("--output-root", required=True)
+    native_runtime_current_parser.add_argument("--created-at", default="2026-06-29T01:00:00Z")
+    native_runtime_current_parser.add_argument("--xcode-result", default="NOT_RUN")
+    native_runtime_current_parser.add_argument("--xcode-passed", type=int, default=0)
+    native_runtime_current_parser.add_argument("--xcode-failed", type=int, default=0)
+    native_runtime_current_parser.add_argument("--xcode-skipped", type=int, default=0)
+    native_runtime_current_parser.add_argument("--xcode-duration-ms", type=int)
+    native_runtime_current_parser.add_argument("--xcode-log-path")
+    native_runtime_current_parser.add_argument("--xcresult-path")
+    native_runtime_current_parser.add_argument("--xcode-profile")
+    native_runtime_current_parser.add_argument("--test-suite", action="append", dest="test_suites")
+    native_runtime_current_parser.add_argument("--endpoint")
+    native_runtime_current_parser.add_argument("--branch")
+    native_runtime_current_parser.add_argument("--commit-sha")
+    native_runtime_current_parser.add_argument("--worktree-dirty-entry-count", type=int)
+    native_runtime_current_parser.add_argument("--emit-evidence")
+    native_runtime_current_parser.add_argument("--markdown")
+
+    release_proof_packet_parser = sub.add_parser("source-atlas-release-proof-packet")
+    release_proof_packet_parser.add_argument("--native-runtime-report", required=True)
+    release_proof_packet_parser.add_argument("--output-root", required=True)
+    release_proof_packet_parser.add_argument("--build-summary")
+    release_proof_packet_parser.add_argument("--source-atlas-pytest-result", default="NOT_RUN")
+    release_proof_packet_parser.add_argument("--source-atlas-pytest-passed", type=int, default=0)
+    release_proof_packet_parser.add_argument("--source-atlas-pytest-failed", type=int, default=0)
+    release_proof_packet_parser.add_argument("--boundary-audit-result", default="NOT_RUN")
+    release_proof_packet_parser.add_argument("--no-private-egress-result", default="NOT_RUN")
+    release_proof_packet_parser.add_argument("--green-standard-result", default="NOT_RUN")
+    release_proof_packet_parser.add_argument("--local-first-result", default="NOT_RUN")
+    release_proof_packet_parser.add_argument("--git-diff-check-result", default="NOT_RUN")
+    release_proof_packet_parser.add_argument("--build-for-testing-result", default="NOT_RUN")
+    release_proof_packet_parser.add_argument("--focused-native-result", default="NOT_RUN")
+    release_proof_packet_parser.add_argument("--focused-native-passed", type=int, default=0)
+    release_proof_packet_parser.add_argument("--focused-native-failed", type=int, default=0)
+    release_proof_packet_parser.add_argument("--focused-native-skipped", type=int, default=0)
+    release_proof_packet_parser.add_argument("--physical-device-proof")
+    release_proof_packet_parser.add_argument("--accessibility-proof")
+    release_proof_packet_parser.add_argument("--visual-review-proof")
+    release_proof_packet_parser.add_argument("--app-store-connect-proof")
+    release_proof_packet_parser.add_argument("--testflight-proof")
+    release_proof_packet_parser.add_argument("--privacy-legal-release-signoff")
+    release_proof_packet_parser.add_argument("--owner-release-approval")
+    release_proof_packet_parser.add_argument("--created-at", default="2026-06-29T05:15:00Z")
+    release_proof_packet_parser.add_argument("--run-label", default="current")
+    release_proof_packet_parser.add_argument("--branch")
+    release_proof_packet_parser.add_argument("--commit-sha")
+    release_proof_packet_parser.add_argument("--environment")
+    release_proof_packet_parser.add_argument("--emit-evidence")
+    release_proof_packet_parser.add_argument("--markdown")
+
+    goal_domain_gauntlet_parser = sub.add_parser("goal-domain-gauntlet")
+    goal_domain_gauntlet_parser.add_argument("--frontier-config", required=True)
+    goal_domain_gauntlet_parser.add_argument("--production-target-ledger", required=True)
+    goal_domain_gauntlet_parser.add_argument("--arbitrary-domain-gate", required=True)
+    goal_domain_gauntlet_parser.add_argument("--native-runtime-report")
+    goal_domain_gauntlet_parser.add_argument("--output-root", required=True)
+    goal_domain_gauntlet_parser.add_argument("--created-at", default="2026-06-29T01:30:00Z")
+    goal_domain_gauntlet_parser.add_argument("--unknown-probe-domain", action="append", dest="unknown_probe_domains")
+    goal_domain_gauntlet_parser.add_argument("--emit-evidence")
+    goal_domain_gauntlet_parser.add_argument("--markdown")
+
+    public_reference_delivery_chain_parser = sub.add_parser("public-reference-delivery-chain")
+    public_reference_delivery_chain_parser.add_argument("--output-root", required=True)
+    public_reference_delivery_chain_parser.add_argument("--domain", default="occupation_foundation")
+    public_reference_delivery_chain_parser.add_argument("--source", action="append", dest="sources")
+    public_reference_delivery_chain_parser.add_argument("--harvest-mode", choices=sorted(RUN_MODES), default="fixture")
+    public_reference_delivery_chain_parser.add_argument("--limit", type=int, default=25)
+    public_reference_delivery_chain_parser.add_argument("--live", action="store_true")
+    public_reference_delivery_chain_parser.add_argument("--execute-harvest", action="store_true")
+    public_reference_delivery_chain_parser.add_argument("--environment", choices=["staging", "production"], default="staging")
+    public_reference_delivery_chain_parser.add_argument("--channel", default="candidate")
+    public_reference_delivery_chain_parser.add_argument("--pack-version")
+    public_reference_delivery_chain_parser.add_argument("--r2-mode", choices=sorted(PUBLISHER_MODES), default="dry_run")
+    public_reference_delivery_chain_parser.add_argument("--execute-r2", action="store_true")
+    public_reference_delivery_chain_parser.add_argument("--r2-bucket")
+    public_reference_delivery_chain_parser.add_argument("--r2-local-store-root")
+    public_reference_delivery_chain_parser.add_argument("--r2-readback-root")
+    public_reference_delivery_chain_parser.add_argument("--r2-budget-policy")
+    public_reference_delivery_chain_parser.add_argument("--r2-approval-artifact")
+    public_reference_delivery_chain_parser.add_argument("--r2-env-file", action="append", dest="r2_env_files")
+    public_reference_delivery_chain_parser.add_argument("--legal-approval-packet")
+    public_reference_delivery_chain_parser.add_argument("--production-target-ledger")
+    public_reference_delivery_chain_parser.add_argument("--native-status", choices=sorted(NATIVE_REGISTRY_STATUSES), default="review_required")
+    public_reference_delivery_chain_parser.add_argument("--native-allowed-mode", action="append", choices=sorted(NATIVE_REGISTRY_MODES))
+    public_reference_delivery_chain_parser.add_argument("--native-public-locale")
+    public_reference_delivery_chain_parser.add_argument("--native-approval-artifact")
+    public_reference_delivery_chain_parser.add_argument("--app-version", default="1.0")
+    public_reference_delivery_chain_parser.add_argument("--pack-schema-version", default="1.0.0")
+    public_reference_delivery_chain_parser.add_argument("--created-at")
+    public_reference_delivery_chain_parser.add_argument("--emit-evidence")
+    public_reference_delivery_chain_parser.add_argument("--markdown")
+
+    public_gateway_allowlist_parser = sub.add_parser("r2-public-gateway-allowlist")
+    public_gateway_allowlist_parser.add_argument("--publisher-report", action="append", required=True)
+    public_gateway_allowlist_parser.add_argument("--output-root", required=True)
+    public_gateway_allowlist_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    public_gateway_allowlist_parser.add_argument("--worker-allowlist-path")
+    public_gateway_allowlist_parser.add_argument("--emit-evidence")
+    public_gateway_allowlist_parser.add_argument("--markdown")
+
+    public_gateway_release_parser = sub.add_parser("r2-public-gateway-release")
+    public_gateway_release_parser.add_argument("--publisher-report-root", default="tools/source-atlas/generated/r2-publisher")
+    public_gateway_release_parser.add_argument("--output-root", required=True)
+    public_gateway_release_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    public_gateway_release_parser.add_argument("--worker-allowlist-path")
+    public_gateway_release_parser.add_argument("--worker-config")
+    public_gateway_release_parser.add_argument("--base-url", default=DEFAULT_GATEWAY_BASE_URL)
+    public_gateway_release_parser.add_argument("--deploy", action="store_true")
+    public_gateway_release_parser.add_argument("--execute", action="store_true")
+    public_gateway_release_parser.add_argument("--verify-live", action="store_true")
+    public_gateway_release_parser.add_argument("--production-target-ledger")
+    public_gateway_release_parser.add_argument("--production-domain-admission")
+    public_gateway_release_parser.add_argument("--native-registry-artifact")
+    public_gateway_release_parser.add_argument("--emit-evidence")
+    public_gateway_release_parser.add_argument("--markdown")
+
+    production_target_ledger_parser = sub.add_parser("production-target-ledger")
+    production_target_ledger_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    production_target_ledger_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    production_target_ledger_parser.add_argument("--claim-frontier-report-root", default="tools/source-atlas/generated/claim-frontier")
+    production_target_ledger_parser.add_argument("--pack-production-report-root", default="tools/source-atlas/generated/pack-production")
+    production_target_ledger_parser.add_argument("--r2-publisher-report-root", default="tools/source-atlas/generated/r2-publisher")
+    production_target_ledger_parser.add_argument("--gateway-release-report")
+    production_target_ledger_parser.add_argument("--native-registry-report")
+    production_target_ledger_parser.add_argument("--native-registry-artifact")
+    production_target_ledger_parser.add_argument("--native-runtime-closeout")
+    production_target_ledger_parser.add_argument("--output-root", required=True)
+    production_target_ledger_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    production_target_ledger_parser.add_argument("--emit-evidence")
+    production_target_ledger_parser.add_argument("--markdown")
+
+    production_recertification_parser = sub.add_parser("production-recertification")
+    production_recertification_parser.add_argument("--production-target-ledger", required=True)
+    production_recertification_parser.add_argument("--gateway-release-report", required=True)
+    production_recertification_parser.add_argument("--native-runtime-report", required=True)
+    production_recertification_parser.add_argument("--native-registry-artifact")
+    production_recertification_parser.add_argument("--output-root", required=True)
+    production_recertification_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    production_recertification_parser.add_argument("--emit-evidence")
+    production_recertification_parser.add_argument("--markdown")
+
+    production_finish_line_parser = sub.add_parser("production-finish-line-gate")
+    production_finish_line_parser.add_argument("--production-target-ledger", required=True)
+    production_finish_line_parser.add_argument("--gateway-release-report", required=True)
+    production_finish_line_parser.add_argument("--native-runtime-report", required=True)
+    production_finish_line_parser.add_argument("--native-registry-artifact")
+    production_finish_line_parser.add_argument("--legal-terms-approval-packet")
+    production_finish_line_parser.add_argument("--coverage-report")
+    production_finish_line_parser.add_argument("--release-approval-artifact")
+    production_finish_line_parser.add_argument("--output-root", required=True)
+    production_finish_line_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    production_finish_line_parser.add_argument("--no-compile-internal-terms-approval", action="store_true")
+    production_finish_line_parser.add_argument("--emit-evidence")
+    production_finish_line_parser.add_argument("--markdown")
+
+    production_sweep_parser = sub.add_parser("production-sweep")
+    production_sweep_parser.add_argument("--production-target-ledger", required=True)
+    production_sweep_parser.add_argument("--production-finish-line-gate", required=True)
+    production_sweep_parser.add_argument("--arbitrary-domain-gate", required=True)
+    production_sweep_parser.add_argument("--goal-domain-gauntlet")
+    production_sweep_parser.add_argument("--output-root", required=True)
+    production_sweep_parser.add_argument("--created-at", default="2026-06-29T00:20:00Z")
+    production_sweep_parser.add_argument("--environment", choices=["staging", "production"], default="production")
+    production_sweep_parser.add_argument("--r2-bucket")
+    production_sweep_parser.add_argument("--env-file", action="append", dest="env_files")
+    production_sweep_parser.add_argument("--approval-artifact")
+    production_sweep_parser.add_argument("--legal-approval-packet")
+    production_sweep_parser.add_argument("--require-new-remote-write-ready", action="store_true")
+    production_sweep_parser.add_argument("--emit-evidence")
+    production_sweep_parser.add_argument("--markdown")
+
+    autonomous_control_loop_parser = sub.add_parser("autonomous-control-loop")
+    autonomous_control_loop_parser.add_argument("--production-sweep", required=True)
+    autonomous_control_loop_parser.add_argument("--goal-domain-gauntlet", required=True)
+    autonomous_control_loop_parser.add_argument("--owner-approval", required=True)
+    autonomous_control_loop_parser.add_argument("--native-runtime-report", required=True)
+    autonomous_control_loop_parser.add_argument("--production-finish-line-gate", required=True)
+    autonomous_control_loop_parser.add_argument("--arbitrary-domain-gate", required=True)
+    autonomous_control_loop_parser.add_argument("--autonomous-end-to-end-chain")
+    autonomous_control_loop_parser.add_argument("--output-root", required=True)
+    autonomous_control_loop_parser.add_argument("--created-at", default="2026-06-29T01:45:00Z")
+    autonomous_control_loop_parser.add_argument("--environment", choices=["staging", "production"], default="production")
+    autonomous_control_loop_parser.add_argument("--channel", default="stable")
+    autonomous_control_loop_parser.add_argument("--bucket")
+    autonomous_control_loop_parser.add_argument("--emit-evidence")
+    autonomous_control_loop_parser.add_argument("--markdown")
+
+    autonomous_cycle_runner_parser = sub.add_parser("autonomous-cycle-runner")
+    autonomous_cycle_runner_parser.add_argument("--control-loop", required=True)
+    autonomous_cycle_runner_parser.add_argument("--output-root", required=True)
+    autonomous_cycle_runner_parser.add_argument("--previous-cycle")
+    autonomous_cycle_runner_parser.add_argument("--created-at", default="2026-06-29T02:00:00Z")
+    autonomous_cycle_runner_parser.add_argument("--cycle-label", default="current")
+    autonomous_cycle_runner_parser.add_argument("--emit-evidence")
+    autonomous_cycle_runner_parser.add_argument("--markdown")
+
+    autonomous_cycle_executor_parser = sub.add_parser("autonomous-cycle-executor")
+    autonomous_cycle_executor_parser.add_argument("--cycle", required=True)
+    autonomous_cycle_executor_parser.add_argument("--output-root", required=True)
+    autonomous_cycle_executor_parser.add_argument("--created-at", default="2026-06-29T02:15:00Z")
+    autonomous_cycle_executor_parser.add_argument("--run-label", default="current")
+    autonomous_cycle_executor_parser.add_argument("--emit-evidence")
+    autonomous_cycle_executor_parser.add_argument("--markdown")
+
+    autonomous_production_orchestrator_parser = sub.add_parser("autonomous-production-orchestrator")
+    autonomous_production_orchestrator_parser.add_argument("--production-target-ledger", required=True)
+    autonomous_production_orchestrator_parser.add_argument("--production-finish-line-gate", required=True)
+    autonomous_production_orchestrator_parser.add_argument("--production-sweep", required=True)
+    autonomous_production_orchestrator_parser.add_argument("--arbitrary-domain-gate", required=True)
+    autonomous_production_orchestrator_parser.add_argument("--goal-domain-gauntlet", required=True)
+    autonomous_production_orchestrator_parser.add_argument("--autonomous-control-loop", required=True)
+    autonomous_production_orchestrator_parser.add_argument("--autonomous-cycle", required=True)
+    autonomous_production_orchestrator_parser.add_argument("--output-root", required=True)
+    autonomous_production_orchestrator_parser.add_argument("--created-at", default="2026-06-29T02:30:00Z")
+    autonomous_production_orchestrator_parser.add_argument("--run-label", default="current")
+    autonomous_production_orchestrator_parser.add_argument("--emit-evidence")
+    autonomous_production_orchestrator_parser.add_argument("--markdown")
+
+    autonomous_production_supervisor_parser = sub.add_parser("autonomous-production-supervisor")
+    autonomous_production_supervisor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    autonomous_production_supervisor_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    autonomous_production_supervisor_parser.add_argument("--legal-terms-registry", default="tools/source-atlas/governance/legal-terms-registry.json")
+    autonomous_production_supervisor_parser.add_argument("--api-governance-registry", default="tools/source-atlas/governance/api-governance-registry.json")
+    autonomous_production_supervisor_parser.add_argument("--owner-approval")
+    autonomous_production_supervisor_parser.add_argument("--legal-approval-packet")
+    autonomous_production_supervisor_parser.add_argument("--promotion-bucket")
+    autonomous_production_supervisor_parser.add_argument("--production-target-ledger", required=True)
+    autonomous_production_supervisor_parser.add_argument("--production-recertification", required=True)
+    autonomous_production_supervisor_parser.add_argument("--production-finish-line-gate", required=True)
+    autonomous_production_supervisor_parser.add_argument("--production-sweep", required=True)
+    autonomous_production_supervisor_parser.add_argument("--arbitrary-domain-gate", required=True)
+    autonomous_production_supervisor_parser.add_argument("--goal-domain-gauntlet", required=True)
+    autonomous_production_supervisor_parser.add_argument("--autonomous-control-loop", required=True)
+    autonomous_production_supervisor_parser.add_argument("--autonomous-cycle", required=True)
+    autonomous_production_supervisor_parser.add_argument("--requested-domain", action="append", dest="requested_domains")
+    autonomous_production_supervisor_parser.add_argument("--output-root", required=True)
+    autonomous_production_supervisor_parser.add_argument("--created-at", default="2026-06-29T02:45:00Z")
+    autonomous_production_supervisor_parser.add_argument("--run-label", default="current")
+    autonomous_production_supervisor_parser.add_argument("--execute-safe-actions", action="store_true")
+    autonomous_production_supervisor_parser.add_argument("--execute-r2", action="store_true")
+    autonomous_production_supervisor_parser.add_argument("--allow-fixture-delivery-chain", action="store_true")
+    autonomous_production_supervisor_parser.add_argument("--delivery-chain-limit", type=int, default=5)
+    autonomous_production_supervisor_parser.add_argument("--lookahead-days", type=int, default=30)
+    autonomous_production_supervisor_parser.add_argument("--emit-evidence")
+    autonomous_production_supervisor_parser.add_argument("--markdown")
+
+    autonomous_freshness_parser = sub.add_parser("autonomous-freshness-scheduler")
+    autonomous_freshness_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    autonomous_freshness_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    autonomous_freshness_parser.add_argument("--legal-terms-registry", default="tools/source-atlas/governance/legal-terms-registry.json")
+    autonomous_freshness_parser.add_argument("--api-governance-registry", default="tools/source-atlas/governance/api-governance-registry.json")
+    autonomous_freshness_parser.add_argument("--production-target-ledger", required=True)
+    autonomous_freshness_parser.add_argument("--production-recertification", required=True)
+    autonomous_freshness_parser.add_argument("--production-sweep", required=True)
+    autonomous_freshness_parser.add_argument("--autonomous-production-supervisor")
+    autonomous_freshness_parser.add_argument("--output-root", required=True)
+    autonomous_freshness_parser.add_argument("--created-at", default="2026-06-29T03:00:00Z")
+    autonomous_freshness_parser.add_argument("--run-label", default="current")
+    autonomous_freshness_parser.add_argument("--lookahead-days", type=int, default=30)
+    autonomous_freshness_parser.add_argument("--emit-evidence")
+    autonomous_freshness_parser.add_argument("--markdown")
+
+    autonomous_maintenance_parser = sub.add_parser("autonomous-maintenance-executor")
+    autonomous_maintenance_parser.add_argument("--freshness-plan", required=True)
+    autonomous_maintenance_parser.add_argument("--output-root", required=True)
+    autonomous_maintenance_parser.add_argument("--created-at", default="2026-06-29T03:15:00Z")
+    autonomous_maintenance_parser.add_argument("--run-label", default="current")
+    autonomous_maintenance_parser.add_argument("--execute-safe-actions", action="store_true")
+    autonomous_maintenance_parser.add_argument("--emit-evidence")
+    autonomous_maintenance_parser.add_argument("--markdown")
+
+    autonomous_promotion_parser = sub.add_parser("autonomous-promotion-runner")
+    autonomous_promotion_parser.add_argument("--supervisor-report", required=True)
+    autonomous_promotion_parser.add_argument("--production-sweep", required=True)
+    autonomous_promotion_parser.add_argument("--owner-approval")
+    autonomous_promotion_parser.add_argument("--legal-terms-registry", default="tools/source-atlas/governance/legal-terms-registry.json")
+    autonomous_promotion_parser.add_argument("--api-governance-registry", default="tools/source-atlas/governance/api-governance-registry.json")
+    autonomous_promotion_parser.add_argument("--legal-approval-packet")
+    autonomous_promotion_parser.add_argument("--output-root", required=True)
+    autonomous_promotion_parser.add_argument("--created-at", default="2026-06-29T03:45:00Z")
+    autonomous_promotion_parser.add_argument("--run-label", default="current")
+    autonomous_promotion_parser.add_argument("--environment", choices=["staging", "production"], default="production")
+    autonomous_promotion_parser.add_argument("--channel", default="stable")
+    autonomous_promotion_parser.add_argument("--bucket")
+    autonomous_promotion_parser.add_argument("--execute-r2", action="store_true")
+    autonomous_promotion_parser.add_argument("--emit-evidence")
+    autonomous_promotion_parser.add_argument("--markdown")
+
+    completion_audit_parser = sub.add_parser("source-atlas-completion-audit")
+    completion_audit_parser.add_argument("--production-supervisor", required=True)
+    completion_audit_parser.add_argument("--production-sweep", required=True)
+    completion_audit_parser.add_argument("--production-finish-line-gate", required=True)
+    completion_audit_parser.add_argument("--production-recertification", required=True)
+    completion_audit_parser.add_argument("--production-target-ledger", required=True)
+    completion_audit_parser.add_argument("--arbitrary-domain-gate", required=True)
+    completion_audit_parser.add_argument("--goal-domain-gauntlet", required=True)
+    completion_audit_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    completion_audit_parser.add_argument("--legal-terms-registry", default="tools/source-atlas/governance/legal-terms-registry.json")
+    completion_audit_parser.add_argument("--api-governance-registry", default="tools/source-atlas/governance/api-governance-registry.json")
+    completion_audit_parser.add_argument("--native-runtime-report")
+    completion_audit_parser.add_argument("--release-proof-packet")
+    completion_audit_parser.add_argument("--legal-approval-packet")
+    completion_audit_parser.add_argument("--owner-approval")
+    completion_audit_parser.add_argument("--output-root", required=True)
+    completion_audit_parser.add_argument("--created-at", default="2026-06-29T04:45:00Z")
+    completion_audit_parser.add_argument("--run-label", default="current")
+    completion_audit_parser.add_argument("--emit-evidence")
+    completion_audit_parser.add_argument("--markdown")
+
+    arbitrary_domain_gate_parser = sub.add_parser("arbitrary-domain-handling-gate")
+    arbitrary_domain_gate_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    arbitrary_domain_gate_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    arbitrary_domain_gate_parser.add_argument("--production-target-ledger", required=True)
+    arbitrary_domain_gate_parser.add_argument("--production-recertification", required=True)
+    arbitrary_domain_gate_parser.add_argument("--finish-line-gate")
+    arbitrary_domain_gate_parser.add_argument("--unknown-probe-domain", action="append", dest="unknown_probe_domains")
+    arbitrary_domain_gate_parser.add_argument("--output-root", required=True)
+    arbitrary_domain_gate_parser.add_argument("--created-at", default="2026-06-29T00:00:00Z")
+    arbitrary_domain_gate_parser.add_argument("--emit-evidence")
+    arbitrary_domain_gate_parser.add_argument("--markdown")
+
+    autonomous_operations_parser = sub.add_parser("autonomous-operations-plan")
+    autonomous_operations_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    autonomous_operations_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    autonomous_operations_parser.add_argument("--production-target-ledger")
+    autonomous_operations_parser.add_argument("--production-recertification")
+    autonomous_operations_parser.add_argument("--requested-domain", action="append", dest="requested_domains")
+    autonomous_operations_parser.add_argument("--output-root", required=True)
+    autonomous_operations_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    autonomous_operations_parser.add_argument("--emit-evidence")
+    autonomous_operations_parser.add_argument("--markdown")
+
+    autonomous_operations_executor_parser = sub.add_parser("autonomous-operations-execute")
+    autonomous_operations_executor_parser.add_argument("--operations-plan", required=True)
+    autonomous_operations_executor_parser.add_argument("--output-root", required=True)
+    autonomous_operations_executor_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    autonomous_operations_executor_parser.add_argument("--execute-safe-actions", action="store_true")
+    autonomous_operations_executor_parser.add_argument("--allow-fixture-delivery-chain", action="store_true")
+    autonomous_operations_executor_parser.add_argument("--frontier-config")
+    autonomous_operations_executor_parser.add_argument("--delivery-chain-limit", type=int, default=5)
+    autonomous_operations_executor_parser.add_argument("--emit-evidence")
+    autonomous_operations_executor_parser.add_argument("--markdown")
+
+    autonomous_domain_expansion_chain_parser = sub.add_parser("autonomous-domain-expansion-chain")
+    autonomous_domain_expansion_chain_parser.add_argument("--executor-report", required=True)
+    autonomous_domain_expansion_chain_parser.add_argument("--output-root", required=True)
+    autonomous_domain_expansion_chain_parser.add_argument("--frontier-config")
+    autonomous_domain_expansion_chain_parser.add_argument("--production-target-ledger")
+    autonomous_domain_expansion_chain_parser.add_argument("--mode", choices=sorted(EXECUTOR_MODES), default="fixture")
+    autonomous_domain_expansion_chain_parser.add_argument("--reviewer", default="")
+    autonomous_domain_expansion_chain_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    autonomous_domain_expansion_chain_parser.add_argument("--emit-evidence")
+    autonomous_domain_expansion_chain_parser.add_argument("--markdown")
+
+    autonomous_registry_activation_chain_parser = sub.add_parser("autonomous-registry-activation-chain")
+    autonomous_registry_activation_chain_parser.add_argument("--expansion-chain-report", required=True)
+    autonomous_registry_activation_chain_parser.add_argument("--output-root", required=True)
+    autonomous_registry_activation_chain_parser.add_argument("--completion-evidence")
+    autonomous_registry_activation_chain_parser.add_argument("--source-specific-apply-input")
+    autonomous_registry_activation_chain_parser.add_argument("--source-lane-registry")
+    autonomous_registry_activation_chain_parser.add_argument("--legal-terms-registry")
+    autonomous_registry_activation_chain_parser.add_argument("--api-governance-registry")
+    autonomous_registry_activation_chain_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    autonomous_registry_activation_chain_parser.add_argument("--emit-evidence")
+    autonomous_registry_activation_chain_parser.add_argument("--markdown")
+
+    autonomous_end_to_end_chain_parser = sub.add_parser("autonomous-end-to-end-chain")
+    autonomous_end_to_end_chain_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
+    autonomous_end_to_end_chain_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    autonomous_end_to_end_chain_parser.add_argument("--legal-terms-registry")
+    autonomous_end_to_end_chain_parser.add_argument("--api-governance-registry")
+    autonomous_end_to_end_chain_parser.add_argument("--production-target-ledger")
+    autonomous_end_to_end_chain_parser.add_argument("--production-recertification")
+    autonomous_end_to_end_chain_parser.add_argument("--refresh-production-recertification", action="store_true")
+    autonomous_end_to_end_chain_parser.add_argument("--gateway-release-report")
+    autonomous_end_to_end_chain_parser.add_argument("--native-runtime-report")
+    autonomous_end_to_end_chain_parser.add_argument("--native-registry-artifact")
+    autonomous_end_to_end_chain_parser.add_argument("--requested-domain", action="append", dest="requested_domains")
+    autonomous_end_to_end_chain_parser.add_argument("--output-root", required=True)
+    autonomous_end_to_end_chain_parser.add_argument("--created-at", default="2026-06-28T00:00:00Z")
+    autonomous_end_to_end_chain_parser.add_argument("--execute-safe-actions", action="store_true")
+    autonomous_end_to_end_chain_parser.add_argument("--allow-fixture-delivery-chain", action="store_true")
+    autonomous_end_to_end_chain_parser.add_argument("--delivery-chain-limit", type=int, default=5)
+    autonomous_end_to_end_chain_parser.add_argument("--domain-expansion-mode", choices=sorted(EXECUTOR_MODES), default="fixture")
+    autonomous_end_to_end_chain_parser.add_argument("--reviewer", default="")
+    autonomous_end_to_end_chain_parser.add_argument("--emit-evidence")
+    autonomous_end_to_end_chain_parser.add_argument("--markdown")
+
+    broad_domain_parser = sub.add_parser("broad-domain-discovery")
+    broad_domain_parser.add_argument("--output-root", required=True)
+    broad_domain_parser.add_argument("--frontier-config")
+    broad_domain_parser.add_argument("--created-at")
+    broad_domain_parser.add_argument("--emit-evidence")
+    broad_domain_parser.add_argument("--markdown")
+
+    frontier_intake_parser = sub.add_parser("frontier-intake")
+    frontier_intake_parser.add_argument("--input", required=True)
+    frontier_intake_parser.add_argument("--output-root", required=True)
+    frontier_intake_parser.add_argument("--frontier-config")
+    frontier_intake_parser.add_argument("--created-at")
+    frontier_intake_parser.add_argument("--emit-evidence")
+    frontier_intake_parser.add_argument("--markdown")
+
+    goal_domain_router_parser = sub.add_parser("goal-domain-router")
+    goal_domain_router_parser.add_argument("--input", required=True)
+    goal_domain_router_parser.add_argument("--output-root", required=True)
+    goal_domain_router_parser.add_argument("--frontier-config")
+    goal_domain_router_parser.add_argument("--production-target-ledger")
+    goal_domain_router_parser.add_argument("--created-at")
+    goal_domain_router_parser.add_argument("--emit-evidence")
+    goal_domain_router_parser.add_argument("--markdown")
+
+    goal_domain_production_lanes_parser = sub.add_parser("goal-domain-production-lanes")
+    goal_domain_production_lanes_parser.add_argument("--router-manifest", required=True)
+    goal_domain_production_lanes_parser.add_argument("--output-root", required=True)
+    goal_domain_production_lanes_parser.add_argument("--production-target-ledger")
+    goal_domain_production_lanes_parser.add_argument("--created-at")
+    goal_domain_production_lanes_parser.add_argument("--emit-evidence")
+    goal_domain_production_lanes_parser.add_argument("--markdown")
+
+    goal_domain_work_order_executor_parser = sub.add_parser("goal-domain-work-order-executor")
+    goal_domain_work_order_executor_parser.add_argument("--production-lanes-manifest", required=True)
+    goal_domain_work_order_executor_parser.add_argument("--output-root", required=True)
+    goal_domain_work_order_executor_parser.add_argument("--mode", choices=sorted(EXECUTOR_MODES), default="fixture")
+    goal_domain_work_order_executor_parser.add_argument("--created-at")
+    goal_domain_work_order_executor_parser.add_argument("--emit-evidence")
+    goal_domain_work_order_executor_parser.add_argument("--markdown")
+
+    goal_domain_review_packets_parser = sub.add_parser("goal-domain-review-packets")
+    goal_domain_review_packets_parser.add_argument("--executor-manifest", required=True)
+    goal_domain_review_packets_parser.add_argument("--output-root", required=True)
+    goal_domain_review_packets_parser.add_argument("--reviewer", default="")
+    goal_domain_review_packets_parser.add_argument("--created-at")
+    goal_domain_review_packets_parser.add_argument("--emit-evidence")
+    goal_domain_review_packets_parser.add_argument("--markdown")
+
+    goal_domain_review_completion_intake_parser = sub.add_parser("goal-domain-review-completion-intake")
+    goal_domain_review_completion_intake_parser.add_argument("--review-templates", required=True)
+    goal_domain_review_completion_intake_parser.add_argument("--output-root", required=True)
+    goal_domain_review_completion_intake_parser.add_argument("--completion-evidence")
+    goal_domain_review_completion_intake_parser.add_argument("--created-at")
+    goal_domain_review_completion_intake_parser.add_argument("--emit-evidence")
+    goal_domain_review_completion_intake_parser.add_argument("--markdown")
+
+    goal_domain_registry_mutation_plan_parser = sub.add_parser("goal-domain-registry-mutation-plan")
+    goal_domain_registry_mutation_plan_parser.add_argument("--review-completions", required=True)
+    goal_domain_registry_mutation_plan_parser.add_argument("--output-root", required=True)
+    goal_domain_registry_mutation_plan_parser.add_argument("--execute", action="store_true")
+    goal_domain_registry_mutation_plan_parser.add_argument("--allow-active-registry-write", action="store_true")
+    goal_domain_registry_mutation_plan_parser.add_argument("--created-at")
+    goal_domain_registry_mutation_plan_parser.add_argument("--emit-evidence")
+    goal_domain_registry_mutation_plan_parser.add_argument("--markdown")
+
+    goal_domain_registry_applier_parser = sub.add_parser("goal-domain-registry-applier")
+    goal_domain_registry_applier_parser.add_argument("--plan", required=True)
+    goal_domain_registry_applier_parser.add_argument("--output-root", required=True)
+    goal_domain_registry_applier_parser.add_argument("--source-lane-registry")
+    goal_domain_registry_applier_parser.add_argument("--legal-terms-registry")
+    goal_domain_registry_applier_parser.add_argument("--api-governance-registry")
+    goal_domain_registry_applier_parser.add_argument("--approval-artifact")
+    goal_domain_registry_applier_parser.add_argument("--execute", action="store_true")
+    goal_domain_registry_applier_parser.add_argument("--allow-active-registry-write", action="store_true")
+    goal_domain_registry_applier_parser.add_argument("--created-at")
+    goal_domain_registry_applier_parser.add_argument("--emit-evidence")
+    goal_domain_registry_applier_parser.add_argument("--markdown")
+
+    goal_domain_registry_apply_rehearsal_parser = sub.add_parser("goal-domain-registry-apply-rehearsal")
+    goal_domain_registry_apply_rehearsal_parser.add_argument("--review-templates", required=True)
+    goal_domain_registry_apply_rehearsal_parser.add_argument("--output-root", required=True)
+    goal_domain_registry_apply_rehearsal_parser.add_argument("--source-lane-registry")
+    goal_domain_registry_apply_rehearsal_parser.add_argument("--legal-terms-registry")
+    goal_domain_registry_apply_rehearsal_parser.add_argument("--api-governance-registry")
+    goal_domain_registry_apply_rehearsal_parser.add_argument("--created-at")
+    goal_domain_registry_apply_rehearsal_parser.add_argument("--emit-evidence")
+    goal_domain_registry_apply_rehearsal_parser.add_argument("--markdown")
+
+    goal_domain_active_registry_apply_gate_parser = sub.add_parser("goal-domain-active-registry-apply-gate")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--plan", required=True)
+    goal_domain_active_registry_apply_gate_parser.add_argument("--output-root", required=True)
+    goal_domain_active_registry_apply_gate_parser.add_argument("--review-evidence")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--source-lane-registry")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--legal-terms-registry")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--api-governance-registry")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--approval-artifact")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--execute", action="store_true")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--allow-active-registry-write", action="store_true")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--created-at")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--emit-evidence")
+    goal_domain_active_registry_apply_gate_parser.add_argument("--markdown")
+
+    goal_domain_source_specific_apply_packet_parser = sub.add_parser("goal-domain-source-specific-apply-packet")
+    goal_domain_source_specific_apply_packet_parser.add_argument("--input", required=True)
+    goal_domain_source_specific_apply_packet_parser.add_argument("--output-root", required=True)
+    goal_domain_source_specific_apply_packet_parser.add_argument("--source-lane-registry")
+    goal_domain_source_specific_apply_packet_parser.add_argument("--legal-terms-registry")
+    goal_domain_source_specific_apply_packet_parser.add_argument("--api-governance-registry")
+    goal_domain_source_specific_apply_packet_parser.add_argument("--created-at")
+    goal_domain_source_specific_apply_packet_parser.add_argument("--emit-evidence")
+    goal_domain_source_specific_apply_packet_parser.add_argument("--markdown")
+
+    goal_domain_production_activation_parser = sub.add_parser("goal-domain-production-activation")
+    goal_domain_production_activation_parser.add_argument("--input", required=True)
+    goal_domain_production_activation_parser.add_argument("--output-root", required=True)
+    goal_domain_production_activation_parser.add_argument("--target-source-lane-registry")
+    goal_domain_production_activation_parser.add_argument("--target-legal-terms-registry")
+    goal_domain_production_activation_parser.add_argument("--target-api-governance-registry")
+    goal_domain_production_activation_parser.add_argument("--execute-active-registry", action="store_true")
+    goal_domain_production_activation_parser.add_argument("--allow-active-registry-write", action="store_true")
+    goal_domain_production_activation_parser.add_argument("--created-at")
+    goal_domain_production_activation_parser.add_argument("--emit-evidence")
+    goal_domain_production_activation_parser.add_argument("--markdown")
+
+    catalog_discovery_parser = sub.add_parser("catalog-discovery")
+    catalog_discovery_parser.add_argument("--input-root", required=True)
+    catalog_discovery_parser.add_argument("--output-root", required=True)
+    catalog_discovery_parser.add_argument("--created-at")
+    catalog_discovery_parser.add_argument("--emit-evidence")
+    catalog_discovery_parser.add_argument("--markdown")
+
+    catalog_transport_parser = sub.add_parser("catalog-transport")
+    catalog_transport_parser.add_argument("--plan", required=True)
+    catalog_transport_parser.add_argument("--output-root", required=True)
+    catalog_transport_parser.add_argument("--mode", choices=["fixture", "dry_run", "live"], default="fixture")
+    catalog_transport_parser.add_argument("--live", action="store_true")
+    catalog_transport_parser.add_argument("--execute", action="store_true")
+    catalog_transport_parser.add_argument("--created-at")
+    catalog_transport_parser.add_argument("--emit-evidence")
+    catalog_transport_parser.add_argument("--markdown")
+
+    catalog_candidate_review_parser = sub.add_parser("catalog-candidate-review")
+    catalog_candidate_review_parser.add_argument("--input", required=True)
+    catalog_candidate_review_parser.add_argument("--output-root", required=True)
+    catalog_candidate_review_parser.add_argument("--created-at")
+    catalog_candidate_review_parser.add_argument("--emit-evidence")
+    catalog_candidate_review_parser.add_argument("--markdown")
+
+    catalog_governance_intake_parser = sub.add_parser("catalog-governance-intake")
+    catalog_governance_intake_parser.add_argument("--input", required=True)
+    catalog_governance_intake_parser.add_argument("--output-root", required=True)
+    catalog_governance_intake_parser.add_argument("--created-at")
+    catalog_governance_intake_parser.add_argument("--emit-evidence")
+    catalog_governance_intake_parser.add_argument("--markdown")
+
+    catalog_registry_mutation_plan_parser = sub.add_parser("catalog-registry-mutation-plan")
+    catalog_registry_mutation_plan_parser.add_argument("--input", required=True)
+    catalog_registry_mutation_plan_parser.add_argument("--output-root", required=True)
+    catalog_registry_mutation_plan_parser.add_argument("--approval-artifact")
+    catalog_registry_mutation_plan_parser.add_argument("--execute", action="store_true")
+    catalog_registry_mutation_plan_parser.add_argument("--created-at")
+    catalog_registry_mutation_plan_parser.add_argument("--emit-evidence")
+    catalog_registry_mutation_plan_parser.add_argument("--markdown")
+
+    catalog_registry_applier_parser = sub.add_parser("catalog-registry-applier")
+    catalog_registry_applier_parser.add_argument("--plan", required=True)
+    catalog_registry_applier_parser.add_argument("--output-root", required=True)
+    catalog_registry_applier_parser.add_argument("--source-lane-registry")
+    catalog_registry_applier_parser.add_argument("--legal-terms-registry")
+    catalog_registry_applier_parser.add_argument("--api-governance-registry")
+    catalog_registry_applier_parser.add_argument("--execute", action="store_true")
+    catalog_registry_applier_parser.add_argument("--allow-active-registry-write", action="store_true")
+    catalog_registry_applier_parser.add_argument("--created-at")
+    catalog_registry_applier_parser.add_argument("--emit-evidence")
+    catalog_registry_applier_parser.add_argument("--markdown")
+
+    catalog_registry_approval_request_parser = sub.add_parser("catalog-registry-approval-request")
+    catalog_registry_approval_request_parser.add_argument("--input", required=True)
+    catalog_registry_approval_request_parser.add_argument("--output-root", required=True)
+    catalog_registry_approval_request_parser.add_argument("--intake-id", action="append", dest="intake_ids")
+    catalog_registry_approval_request_parser.add_argument("--created-at")
+    catalog_registry_approval_request_parser.add_argument("--emit-evidence")
+    catalog_registry_approval_request_parser.add_argument("--markdown")
+
+    catalog_terms_resolution_parser = sub.add_parser("catalog-terms-resolution")
+    catalog_terms_resolution_parser.add_argument("--input", required=True)
+    catalog_terms_resolution_parser.add_argument("--output-root", required=True)
+    catalog_terms_resolution_parser.add_argument("--created-at")
+    catalog_terms_resolution_parser.add_argument("--emit-evidence")
+    catalog_terms_resolution_parser.add_argument("--markdown")
+
+    catalog_approval_finalizer_parser = sub.add_parser("catalog-approval-finalizer")
+    catalog_approval_finalizer_parser.add_argument("--terms-proposals", required=True)
+    catalog_approval_finalizer_parser.add_argument("--output-root", required=True)
+    catalog_approval_finalizer_parser.add_argument("--decision-artifact")
+    catalog_approval_finalizer_parser.add_argument("--created-at")
+    catalog_approval_finalizer_parser.add_argument("--emit-evidence")
+    catalog_approval_finalizer_parser.add_argument("--markdown")
+
+    catalog_approval_preflight_parser = sub.add_parser("catalog-approval-preflight")
+    catalog_approval_preflight_parser.add_argument("--terms-proposals", required=True)
+    catalog_approval_preflight_parser.add_argument("--output-root", required=True)
+    catalog_approval_preflight_parser.add_argument("--created-at")
+    catalog_approval_preflight_parser.add_argument("--emit-evidence")
+    catalog_approval_preflight_parser.add_argument("--markdown")
+
+    catalog_approval_decision_inputs_parser = sub.add_parser("catalog-approval-decision-inputs")
+    catalog_approval_decision_inputs_parser.add_argument("--preflight-records", required=True)
+    catalog_approval_decision_inputs_parser.add_argument("--output-root", required=True)
+    catalog_approval_decision_inputs_parser.add_argument("--created-at")
+    catalog_approval_decision_inputs_parser.add_argument("--decision-owner", default="")
+    catalog_approval_decision_inputs_parser.add_argument("--emit-evidence")
+    catalog_approval_decision_inputs_parser.add_argument("--markdown")
+
+    catalog_approval_decision_assembler_parser = sub.add_parser("catalog-approval-decision-assembler")
+    catalog_approval_decision_assembler_parser.add_argument("--decision-inputs", required=True)
+    catalog_approval_decision_assembler_parser.add_argument("--output-root", required=True)
+    catalog_approval_decision_assembler_parser.add_argument("--review-completion")
+    catalog_approval_decision_assembler_parser.add_argument("--created-at")
+    catalog_approval_decision_assembler_parser.add_argument("--emit-evidence")
+    catalog_approval_decision_assembler_parser.add_argument("--markdown")
+
+    catalog_approval_chain_parser = sub.add_parser("catalog-approval-chain")
+    catalog_approval_chain_parser.add_argument("--decision-inputs", required=True)
+    catalog_approval_chain_parser.add_argument("--terms-proposals", required=True)
+    catalog_approval_chain_parser.add_argument("--draft-governance-packets", required=True)
+    catalog_approval_chain_parser.add_argument("--output-root", required=True)
+    catalog_approval_chain_parser.add_argument("--review-completion")
+    catalog_approval_chain_parser.add_argument("--source-lane-registry")
+    catalog_approval_chain_parser.add_argument("--legal-terms-registry")
+    catalog_approval_chain_parser.add_argument("--api-governance-registry")
+    catalog_approval_chain_parser.add_argument("--execute-registry-apply", action="store_true")
+    catalog_approval_chain_parser.add_argument("--allow-active-registry-write", action="store_true")
+    catalog_approval_chain_parser.add_argument("--created-at")
+    catalog_approval_chain_parser.add_argument("--emit-evidence")
+    catalog_approval_chain_parser.add_argument("--markdown")
+
+    catalog_reviewer_completion_intake_parser = sub.add_parser("catalog-reviewer-completion-intake")
+    catalog_reviewer_completion_intake_parser.add_argument("--decision-inputs", required=True)
+    catalog_reviewer_completion_intake_parser.add_argument("--output-root", required=True)
+    catalog_reviewer_completion_intake_parser.add_argument("--review-packets")
+    catalog_reviewer_completion_intake_parser.add_argument("--created-at")
+    catalog_reviewer_completion_intake_parser.add_argument("--emit-evidence")
+    catalog_reviewer_completion_intake_parser.add_argument("--markdown")
+
+    catalog_reviewer_completion_template_parser = sub.add_parser("catalog-reviewer-completion-template")
+    catalog_reviewer_completion_template_parser.add_argument("--decision-inputs", required=True)
+    catalog_reviewer_completion_template_parser.add_argument("--output-root", required=True)
+    catalog_reviewer_completion_template_parser.add_argument("--reviewer", default="")
+    catalog_reviewer_completion_template_parser.add_argument("--created-at")
+    catalog_reviewer_completion_template_parser.add_argument("--emit-evidence")
+    catalog_reviewer_completion_template_parser.add_argument("--markdown")
+
+    catalog_review_work_queue_parser = sub.add_parser("catalog-review-work-queue")
+    catalog_review_work_queue_parser.add_argument("--decision-inputs", required=True)
+    catalog_review_work_queue_parser.add_argument("--output-root", required=True)
+    catalog_review_work_queue_parser.add_argument("--review-packets")
+    catalog_review_work_queue_parser.add_argument("--created-at")
+    catalog_review_work_queue_parser.add_argument("--emit-evidence")
+    catalog_review_work_queue_parser.add_argument("--markdown")
+
+    catalog_direct_source_resolution_parser = sub.add_parser("catalog-direct-source-resolution")
+    catalog_direct_source_resolution_parser.add_argument("--work-items", required=True)
+    catalog_direct_source_resolution_parser.add_argument("--output-root", required=True)
+    catalog_direct_source_resolution_parser.add_argument("--candidate-review")
+    catalog_direct_source_resolution_parser.add_argument("--decision-inputs")
+    catalog_direct_source_resolution_parser.add_argument("--created-at")
+    catalog_direct_source_resolution_parser.add_argument("--emit-evidence")
+    catalog_direct_source_resolution_parser.add_argument("--markdown")
+
+    catalog_direct_source_review_gate_parser = sub.add_parser("catalog-direct-source-review-gate")
+    catalog_direct_source_review_gate_parser.add_argument("--resolution-candidates", required=True)
+    catalog_direct_source_review_gate_parser.add_argument("--output-root", required=True)
+    catalog_direct_source_review_gate_parser.add_argument("--direct-source-reviews")
+    catalog_direct_source_review_gate_parser.add_argument("--created-at")
+    catalog_direct_source_review_gate_parser.add_argument("--emit-evidence")
+    catalog_direct_source_review_gate_parser.add_argument("--markdown")
+
+    catalog_direct_source_review_template_parser = sub.add_parser("catalog-direct-source-review-template")
+    catalog_direct_source_review_template_parser.add_argument("--resolution-candidates", required=True)
+    catalog_direct_source_review_template_parser.add_argument("--output-root", required=True)
+    catalog_direct_source_review_template_parser.add_argument("--reviewer", default="")
+    catalog_direct_source_review_template_parser.add_argument("--created-at")
+    catalog_direct_source_review_template_parser.add_argument("--emit-evidence")
+    catalog_direct_source_review_template_parser.add_argument("--markdown")
+
+    catalog_direct_source_review_completion_parser = sub.add_parser("catalog-direct-source-review-completion")
+    catalog_direct_source_review_completion_parser.add_argument("--templates", required=True)
+    catalog_direct_source_review_completion_parser.add_argument("--output-root", required=True)
+    catalog_direct_source_review_completion_parser.add_argument("--review-evidence")
+    catalog_direct_source_review_completion_parser.add_argument("--created-at")
+    catalog_direct_source_review_completion_parser.add_argument("--emit-evidence")
+    catalog_direct_source_review_completion_parser.add_argument("--markdown")
+
+    catalog_direct_source_approval_chain_parser = sub.add_parser("catalog-direct-source-approval-chain")
+    catalog_direct_source_approval_chain_parser.add_argument("--templates", required=True)
+    catalog_direct_source_approval_chain_parser.add_argument("--resolution-candidates", required=True)
+    catalog_direct_source_approval_chain_parser.add_argument("--decision-inputs", required=True)
+    catalog_direct_source_approval_chain_parser.add_argument("--terms-proposals", required=True)
+    catalog_direct_source_approval_chain_parser.add_argument("--draft-governance-packets", required=True)
+    catalog_direct_source_approval_chain_parser.add_argument("--output-root", required=True)
+    catalog_direct_source_approval_chain_parser.add_argument("--review-evidence")
+    catalog_direct_source_approval_chain_parser.add_argument("--source-lane-registry")
+    catalog_direct_source_approval_chain_parser.add_argument("--legal-terms-registry")
+    catalog_direct_source_approval_chain_parser.add_argument("--api-governance-registry")
+    catalog_direct_source_approval_chain_parser.add_argument("--execute-registry-apply", action="store_true")
+    catalog_direct_source_approval_chain_parser.add_argument("--allow-active-registry-write", action="store_true")
+    catalog_direct_source_approval_chain_parser.add_argument("--created-at")
+    catalog_direct_source_approval_chain_parser.add_argument("--emit-evidence")
+    catalog_direct_source_approval_chain_parser.add_argument("--markdown")
 
     compile_parser = sub.add_parser("compile")
     compile_parser.add_argument("--output-root", required=True)
@@ -250,6 +1317,7 @@ def main(argv: list[str] | None = None) -> int:
     r2_ops_parser.add_argument("--revoked-artifact-id", action="append", default=[])
     r2_ops_parser.add_argument("--candidate-manifest")
     r2_ops_parser.add_argument("--last-known-good")
+    r2_ops_parser.add_argument("--env-file", action="append", default=[])
 
     explain_parser = sub.add_parser("explain")
     explain_parser.add_argument("--focus", choices=["architecture", "automation", "runtime-boundary"], default="architecture")
@@ -291,10 +1359,49 @@ def main(argv: list[str] | None = None) -> int:
             result = validate_api_governance(config_path, output_path=Path(args.emit_evidence) if args.emit_evidence else None)
         print_json(result)
         return 0 if result["valid"] else 1
+    if args.command == "governance-registry-check":
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/governance/source-atlas-governance-train-01.json")
+            result = write_governance_registry_report(
+                Path(args.markdown),
+                json_path,
+                source_lane_path=Path(args.source_lanes) if args.source_lanes else None,
+                legal_terms_path=Path(args.legal_terms) if args.legal_terms else None,
+                api_governance_path=Path(args.api_governance) if args.api_governance else None,
+            )
+        else:
+            result = validate_governance_registries(
+                source_lane_path=Path(args.source_lanes) if args.source_lanes else None,
+                legal_terms_path=Path(args.legal_terms) if args.legal_terms else None,
+                api_governance_path=Path(args.api_governance) if args.api_governance else None,
+                output_path=Path(args.emit_evidence) if args.emit_evidence else None,
+            )
+        print_json(result)
+        return 0 if result["valid"] else 1
     if args.command == "terms-review":
         result = build_terms_distribution_review(Path("docs/qa/source-atlas/source-terms-distribution-review.json"))
         print_json(result)
         return 0 if result["registryValidation"]["valid"] else 1
+    if args.command == "terms-approval-packet":
+        from .terms_registry import SOURCE_TERMS_REGISTRY
+
+        requested = set(args.sources or [])
+        entries = [
+            entry
+            for entry in SOURCE_TERMS_REGISTRY
+            if not requested or entry["source_id"] in requested
+        ]
+        missing = sorted(requested - {entry["source_id"] for entry in entries})
+        if missing:
+            parser.error("terms-approval-packet unknown source ids: " + ", ".join(missing))
+        result = build_terms_approval_packet(
+            entries,
+            output_path=Path(args.json),
+            created_at=args.created_at,
+            reviewer=args.reviewer or "Codex internal Source Atlas legal/terms review under explicit user authorization",
+        )
+        print_json(result)
+        return 0 if result["status"] in {"Green", "Yellow"} else 1
     if args.command == "adapter-fixtures":
         result = emit_all_adapter_fixtures(Path(args.output_root))
         print_json(result)
@@ -393,6 +1500,1717 @@ def main(argv: list[str] | None = None) -> int:
         result = harvest_sources(Path(args.output_root), args.run_id, source_ids=args.sources, limit=args.limit)
         print_json(result)
         return 0 if result["privacyScan"]["passed"] else 1
+    if args.command == "governed-harvest":
+        result = run_governed_harvest(
+            GovernedHarvestOptions(
+                output_root=Path(args.output_root),
+                run_id=args.run_id,
+                mode=args.mode,
+                source_ids=args.sources,
+                limit=args.limit,
+                live=args.live,
+                execute=args.execute,
+                created_at=args.created_at,
+            )
+        )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "claim-frontier":
+        result = compile_claim_frontier(
+            ClaimFrontierOptions(
+                input_root=Path(args.input_root),
+                output_root=Path(args.output_root),
+                frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                created_at=args.created_at,
+            )
+        )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "pack-production":
+        result = build_pack_production(
+            PackProductionOptions(
+                input_root=Path(args.input_root),
+                output_root=Path(args.output_root),
+                domain=args.domain,
+                environment=args.environment,
+                channel=args.channel,
+                pack_version=args.pack_version,
+                created_at=args.created_at,
+                execute=args.execute,
+                approval_artifact=Path(args.approval_artifact) if args.approval_artifact else None,
+                legal_approval_packet=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
+                budget_policy=args.budget_policy,
+            )
+        )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "volunteering-public-reference-activation":
+        result = run_volunteering_public_reference_activation(
+            VolunteeringPublicReferenceActivationOptions(
+                output_root=Path(args.output_root),
+                frontier_config_path=Path(args.frontier_config),
+                created_at=args.created_at,
+                run_label=args.run_label,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(volunteering_public_reference_activation_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "production-domain-admission":
+        result = build_production_domain_admission(
+            ProductionDomainAdmissionOptions(
+                domain=args.domain,
+                pack_root=Path(args.pack_root),
+                output_root=Path(args.output_root),
+                frontier_config_path=Path(args.frontier_config),
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                legal_approval_packet=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
+                created_at=args.created_at,
+                environment=args.environment,
+                channel=args.channel,
+                bucket=args.bucket,
+                owner=args.owner or "Ambitions owner technical authorization captured in current Source Atlas goal thread",
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(production_domain_admission_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "pack-r2-publisher":
+        result = run_pack_r2_publisher(
+            PackR2PublisherOptions(
+                pack_root=Path(args.pack_root),
+                output_root=Path(args.output_root),
+                environment=args.environment,
+                channel=args.channel,
+                mode=args.mode,
+                created_at=args.created_at,
+                execute=args.execute,
+                approval_artifact=Path(args.approval_artifact) if args.approval_artifact else None,
+                legal_approval_packet=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
+                budget_policy=args.budget_policy,
+                bucket=args.bucket,
+                local_store_root=Path(args.local_store_root) if args.local_store_root else None,
+                readback_root=Path(args.readback_root) if args.readback_root else None,
+                corrupt_readback_label=args.corrupt_readback_label,
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                production_domain_admission_path=Path(args.production_domain_admission) if args.production_domain_admission else None,
+                env_file_paths=tuple(Path(path) for path in args.env_files) if args.env_files else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(r2_pack_publisher_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "r2-owner-approval":
+        result = build_r2_owner_approval(
+            R2OwnerApprovalOptions(
+                production_target_ledger_path=Path(args.production_target_ledger),
+                production_finish_line_gate_path=Path(args.production_finish_line_gate),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                environment=args.environment,
+                channel=args.channel,
+                bucket=args.bucket,
+                owner=args.owner or "Ambitions owner technical authorization captured in current Source Atlas goal thread",
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(r2_owner_approval_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "native-refresh-registry":
+        result = compile_native_refresh_registry(
+            NativeRefreshRegistryOptions(
+                publisher_reports=tuple(Path(path) for path in args.publisher_report),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                app_version=args.app_version,
+                pack_schema_version=args.pack_schema_version,
+                status=args.status,
+                allowed_modes=tuple(args.allowed_mode or MODE_ORDER),
+                public_locale=args.public_locale,
+                approval_artifact=Path(args.approval_artifact) if args.approval_artifact else None,
+                review_artifact_id=args.review_artifact_id,
+                artifact_id=args.artifact_id,
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                production_domain_admission_path=Path(args.production_domain_admission) if args.production_domain_admission else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(native_refresh_registry_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "native-runtime-current-proof":
+        result = run_native_runtime_current_proof(
+            NativeRuntimeCurrentProofOptions(
+                production_target_ledger_path=Path(args.production_target_ledger),
+                gateway_release_report_path=Path(args.gateway_release_report),
+                native_registry_artifact_path=Path(args.native_registry_artifact),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                xcode_result=args.xcode_result,
+                xcode_passed=args.xcode_passed,
+                xcode_failed=args.xcode_failed,
+                xcode_skipped=args.xcode_skipped,
+                xcode_duration_ms=args.xcode_duration_ms,
+                xcode_log_path=args.xcode_log_path,
+                xcresult_path=args.xcresult_path,
+                xcode_profile=args.xcode_profile,
+                test_suites=tuple(args.test_suites or ()),
+                endpoint=args.endpoint,
+                branch=args.branch,
+                commit_sha=args.commit_sha,
+                worktree_dirty_entry_count=args.worktree_dirty_entry_count,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(native_runtime_current_proof_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "source-atlas-release-proof-packet":
+        result = run_source_atlas_release_proof_packet(
+            SourceAtlasReleaseProofPacketOptions(
+                native_runtime_report_path=Path(args.native_runtime_report),
+                output_root=Path(args.output_root),
+                build_summary_path=Path(args.build_summary) if args.build_summary else None,
+                source_atlas_pytest_result=args.source_atlas_pytest_result,
+                source_atlas_pytest_passed=args.source_atlas_pytest_passed,
+                source_atlas_pytest_failed=args.source_atlas_pytest_failed,
+                boundary_audit_result=args.boundary_audit_result,
+                no_private_egress_result=args.no_private_egress_result,
+                green_standard_result=args.green_standard_result,
+                local_first_result=args.local_first_result,
+                git_diff_check_result=args.git_diff_check_result,
+                build_for_testing_result=args.build_for_testing_result,
+                focused_native_result=args.focused_native_result,
+                focused_native_passed=args.focused_native_passed,
+                focused_native_failed=args.focused_native_failed,
+                focused_native_skipped=args.focused_native_skipped,
+                physical_device_proof_path=Path(args.physical_device_proof) if args.physical_device_proof else None,
+                accessibility_proof_path=Path(args.accessibility_proof) if args.accessibility_proof else None,
+                visual_review_proof_path=Path(args.visual_review_proof) if args.visual_review_proof else None,
+                app_store_connect_proof_path=Path(args.app_store_connect_proof) if args.app_store_connect_proof else None,
+                testflight_proof_path=Path(args.testflight_proof) if args.testflight_proof else None,
+                privacy_legal_release_signoff_path=Path(args.privacy_legal_release_signoff) if args.privacy_legal_release_signoff else None,
+                owner_release_approval_path=Path(args.owner_release_approval) if args.owner_release_approval else None,
+                created_at=args.created_at,
+                run_label=args.run_label,
+                branch=args.branch,
+                commit_sha=args.commit_sha,
+                environment=args.environment,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(source_atlas_release_proof_packet_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-gauntlet":
+        result = run_goal_domain_gauntlet(
+            GoalDomainGauntletOptions(
+                frontier_config_path=Path(args.frontier_config),
+                production_target_ledger_path=Path(args.production_target_ledger),
+                arbitrary_domain_gate_path=Path(args.arbitrary_domain_gate),
+                native_runtime_report_path=Path(args.native_runtime_report) if args.native_runtime_report else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                unknown_probe_domains=tuple(args.unknown_probe_domains) if args.unknown_probe_domains else DEFAULT_UNKNOWN_PROBES,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(goal_domain_gauntlet_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "public-reference-delivery-chain":
+        result = run_public_reference_delivery_chain(
+            PublicReferenceDeliveryChainOptions(
+                output_root=Path(args.output_root),
+                domain=args.domain,
+                source_ids=tuple(args.sources) if args.sources else DEFAULT_SOURCE_IDS,
+                harvest_mode=args.harvest_mode,
+                limit=args.limit,
+                live=args.live,
+                execute_harvest=args.execute_harvest,
+                environment=args.environment,
+                channel=args.channel,
+                pack_version=args.pack_version,
+                r2_mode=args.r2_mode,
+                execute_r2=args.execute_r2,
+                r2_bucket=args.r2_bucket,
+                r2_local_store_root=Path(args.r2_local_store_root) if args.r2_local_store_root else None,
+                r2_readback_root=Path(args.r2_readback_root) if args.r2_readback_root else None,
+                r2_budget_policy=args.r2_budget_policy,
+                r2_approval_artifact=Path(args.r2_approval_artifact) if args.r2_approval_artifact else None,
+                r2_env_file_paths=tuple(Path(path) for path in args.r2_env_files) if args.r2_env_files else None,
+                legal_approval_packet=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                native_status=args.native_status,
+                native_allowed_modes=tuple(args.native_allowed_mode or MODE_ORDER),
+                native_public_locale=args.native_public_locale,
+                native_approval_artifact=Path(args.native_approval_artifact) if args.native_approval_artifact else None,
+                app_version=args.app_version,
+                pack_schema_version=args.pack_schema_version,
+                created_at=args.created_at,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(public_reference_delivery_chain_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "r2-public-gateway-allowlist":
+        result = compile_public_gateway_allowlist(
+            PublicGatewayAllowlistOptions(
+                publisher_reports=tuple(Path(path) for path in args.publisher_report),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                worker_allowlist_path=Path(args.worker_allowlist_path) if args.worker_allowlist_path else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(public_gateway_allowlist_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "r2-public-gateway-release":
+        result = run_public_gateway_release(
+            PublicGatewayReleaseOptions(
+                publisher_report_root=Path(args.publisher_report_root),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                worker_allowlist_path=Path(args.worker_allowlist_path) if args.worker_allowlist_path else None,
+                worker_config_path=Path(args.worker_config) if args.worker_config else None,
+                base_url=args.base_url,
+                deploy=args.deploy,
+                execute=args.execute,
+                verify_live=args.verify_live,
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                production_domain_admission_path=Path(args.production_domain_admission) if args.production_domain_admission else None,
+                native_registry_artifact_path=Path(args.native_registry_artifact) if args.native_registry_artifact else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(public_gateway_release_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "production-target-ledger":
+        result = build_production_target_ledger(
+            ProductionTargetLedgerOptions(
+                frontier_config_path=Path(args.frontier_config),
+                source_lane_registry_path=Path(args.source_lane_registry),
+                claim_frontier_report_root=Path(args.claim_frontier_report_root),
+                pack_production_report_root=Path(args.pack_production_report_root),
+                r2_publisher_report_root=Path(args.r2_publisher_report_root),
+                gateway_release_report_path=Path(args.gateway_release_report) if args.gateway_release_report else None,
+                native_registry_report_path=Path(args.native_registry_report) if args.native_registry_report else None,
+                native_registry_artifact_path=Path(args.native_registry_artifact) if args.native_registry_artifact else None,
+                native_runtime_closeout_path=Path(args.native_runtime_closeout) if args.native_runtime_closeout else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(production_target_ledger_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "production-recertification":
+        result = run_production_recertification_gate(
+            ProductionRecertificationOptions(
+                production_target_ledger_path=Path(args.production_target_ledger),
+                gateway_release_report_path=Path(args.gateway_release_report),
+                native_runtime_report_path=Path(args.native_runtime_report),
+                native_registry_artifact_path=Path(args.native_registry_artifact) if args.native_registry_artifact else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(production_recertification_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "production-finish-line-gate":
+        result = run_production_finish_line_gate(
+            ProductionFinishLineGateOptions(
+                production_target_ledger_path=Path(args.production_target_ledger),
+                gateway_release_report_path=Path(args.gateway_release_report),
+                native_runtime_report_path=Path(args.native_runtime_report),
+                native_registry_artifact_path=Path(args.native_registry_artifact) if args.native_registry_artifact else None,
+                legal_terms_approval_packet_path=Path(args.legal_terms_approval_packet) if args.legal_terms_approval_packet else None,
+                coverage_report_path=Path(args.coverage_report) if args.coverage_report else None,
+                release_approval_artifact_path=Path(args.release_approval_artifact) if args.release_approval_artifact else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                compile_internal_terms_approval=not args.no_compile_internal_terms_approval,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(production_finish_line_gate_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "production-sweep":
+        result = run_production_sweep(
+            ProductionSweepOptions(
+                production_target_ledger_path=Path(args.production_target_ledger),
+                production_finish_line_gate_path=Path(args.production_finish_line_gate),
+                arbitrary_domain_gate_path=Path(args.arbitrary_domain_gate),
+                goal_domain_gauntlet_path=Path(args.goal_domain_gauntlet) if args.goal_domain_gauntlet else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                environment=args.environment,
+                r2_bucket=args.r2_bucket,
+                env_file_paths=tuple(Path(path) for path in args.env_files) if args.env_files else None,
+                approval_artifact_path=Path(args.approval_artifact) if args.approval_artifact else None,
+                legal_approval_packet_path=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
+                require_new_remote_write_ready=args.require_new_remote_write_ready,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(production_sweep_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-control-loop":
+        result = run_autonomous_control_loop(
+            AutonomousControlLoopOptions(
+                production_sweep_path=Path(args.production_sweep),
+                goal_domain_gauntlet_path=Path(args.goal_domain_gauntlet),
+                owner_approval_path=Path(args.owner_approval),
+                native_runtime_report_path=Path(args.native_runtime_report),
+                production_finish_line_gate_path=Path(args.production_finish_line_gate),
+                arbitrary_domain_gate_path=Path(args.arbitrary_domain_gate),
+                autonomous_end_to_end_chain_path=Path(args.autonomous_end_to_end_chain) if args.autonomous_end_to_end_chain else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                environment=args.environment,
+                channel=args.channel,
+                bucket=args.bucket,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_control_loop_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-cycle-runner":
+        result = run_autonomous_cycle_runner(
+            AutonomousCycleRunnerOptions(
+                control_loop_path=Path(args.control_loop),
+                output_root=Path(args.output_root),
+                previous_cycle_path=Path(args.previous_cycle) if args.previous_cycle else None,
+                created_at=args.created_at,
+                cycle_label=args.cycle_label,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_cycle_runner_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-cycle-executor":
+        result = run_autonomous_cycle_executor(
+            AutonomousCycleExecutorOptions(
+                cycle_path=Path(args.cycle),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_cycle_executor_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-production-orchestrator":
+        result = run_autonomous_production_orchestrator(
+            AutonomousProductionOrchestratorOptions(
+                production_target_ledger_path=Path(args.production_target_ledger),
+                production_finish_line_gate_path=Path(args.production_finish_line_gate),
+                production_sweep_path=Path(args.production_sweep),
+                arbitrary_domain_gate_path=Path(args.arbitrary_domain_gate),
+                goal_domain_gauntlet_path=Path(args.goal_domain_gauntlet),
+                autonomous_control_loop_path=Path(args.autonomous_control_loop),
+                autonomous_cycle_path=Path(args.autonomous_cycle),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_production_orchestrator_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-production-supervisor":
+        result = run_autonomous_production_supervisor(
+            AutonomousProductionSupervisorOptions(
+                frontier_config_path=Path(args.frontier_config),
+                source_lane_registry_path=Path(args.source_lane_registry),
+                legal_terms_registry_path=Path(args.legal_terms_registry),
+                api_governance_registry_path=Path(args.api_governance_registry),
+                owner_approval_path=Path(args.owner_approval) if args.owner_approval else None,
+                legal_approval_packet_path=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
+                promotion_bucket=args.promotion_bucket,
+                production_target_ledger_path=Path(args.production_target_ledger),
+                production_recertification_path=Path(args.production_recertification),
+                production_finish_line_gate_path=Path(args.production_finish_line_gate),
+                production_sweep_path=Path(args.production_sweep),
+                arbitrary_domain_gate_path=Path(args.arbitrary_domain_gate),
+                goal_domain_gauntlet_path=Path(args.goal_domain_gauntlet),
+                autonomous_control_loop_path=Path(args.autonomous_control_loop),
+                autonomous_cycle_path=Path(args.autonomous_cycle),
+                requested_domains=tuple(args.requested_domains or ()),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                execute_safe_actions=args.execute_safe_actions,
+                execute_r2=args.execute_r2,
+                allow_fixture_delivery_chain=args.allow_fixture_delivery_chain,
+                delivery_chain_limit=args.delivery_chain_limit,
+                lookahead_days=args.lookahead_days,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_production_supervisor_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-freshness-scheduler":
+        result = run_autonomous_freshness_planner(
+            AutonomousFreshnessPlannerOptions(
+                frontier_config_path=Path(args.frontier_config),
+                source_lane_registry_path=Path(args.source_lane_registry),
+                legal_terms_registry_path=Path(args.legal_terms_registry),
+                api_governance_registry_path=Path(args.api_governance_registry),
+                production_target_ledger_path=Path(args.production_target_ledger),
+                production_recertification_path=Path(args.production_recertification),
+                production_sweep_path=Path(args.production_sweep),
+                autonomous_production_supervisor_path=Path(args.autonomous_production_supervisor) if args.autonomous_production_supervisor else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                lookahead_days=args.lookahead_days,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_freshness_planner_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-maintenance-executor":
+        result = run_autonomous_maintenance_executor(
+            AutonomousMaintenanceExecutorOptions(
+                freshness_plan_path=Path(args.freshness_plan),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                execute_safe_actions=args.execute_safe_actions,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_maintenance_executor_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-promotion-runner":
+        result = run_autonomous_promotion_runner(
+            AutonomousPromotionRunnerOptions(
+                supervisor_report_path=Path(args.supervisor_report),
+                production_sweep_path=Path(args.production_sweep),
+                owner_approval_path=Path(args.owner_approval) if args.owner_approval else None,
+                legal_terms_registry_path=Path(args.legal_terms_registry),
+                api_governance_registry_path=Path(args.api_governance_registry),
+                legal_approval_packet_path=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                environment=args.environment,
+                channel=args.channel,
+                bucket=args.bucket,
+                execute_r2=args.execute_r2,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_promotion_runner_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "source-atlas-completion-audit":
+        result = run_source_atlas_completion_audit(
+            SourceAtlasCompletionAuditOptions(
+                production_supervisor_path=Path(args.production_supervisor),
+                production_sweep_path=Path(args.production_sweep),
+                production_finish_line_gate_path=Path(args.production_finish_line_gate),
+                production_recertification_path=Path(args.production_recertification),
+                production_target_ledger_path=Path(args.production_target_ledger),
+                arbitrary_domain_gate_path=Path(args.arbitrary_domain_gate),
+                goal_domain_gauntlet_path=Path(args.goal_domain_gauntlet),
+                source_lane_registry_path=Path(args.source_lane_registry) if args.source_lane_registry else None,
+                legal_terms_registry_path=Path(args.legal_terms_registry) if args.legal_terms_registry else None,
+                api_governance_registry_path=Path(args.api_governance_registry) if args.api_governance_registry else None,
+                native_runtime_report_path=Path(args.native_runtime_report) if args.native_runtime_report else None,
+                release_proof_packet_path=Path(args.release_proof_packet) if args.release_proof_packet else None,
+                legal_approval_packet_path=Path(args.legal_approval_packet) if args.legal_approval_packet else None,
+                owner_approval_path=Path(args.owner_approval) if args.owner_approval else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(source_atlas_completion_audit_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "arbitrary-domain-handling-gate":
+        result = run_arbitrary_domain_handling_gate(
+            ArbitraryDomainHandlingGateOptions(
+                frontier_config_path=Path(args.frontier_config),
+                source_lane_registry_path=Path(args.source_lane_registry),
+                production_target_ledger_path=Path(args.production_target_ledger),
+                production_recertification_path=Path(args.production_recertification),
+                finish_line_gate_path=Path(args.finish_line_gate) if args.finish_line_gate else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                unknown_probe_domains=tuple(args.unknown_probe_domains or DEFAULT_UNKNOWN_PROBES),
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(arbitrary_domain_handling_gate_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-operations-plan":
+        result = compile_autonomous_operations_plan(
+            AutonomousOperationsPlannerOptions(
+                frontier_config_path=Path(args.frontier_config),
+                source_lane_registry_path=Path(args.source_lane_registry),
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                production_recertification_path=Path(args.production_recertification) if args.production_recertification else None,
+                requested_domains=tuple(args.requested_domains or ()),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_operations_plan_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-operations-execute":
+        result = run_autonomous_operations_executor(
+            AutonomousOperationsExecutorOptions(
+                operations_plan_path=Path(args.operations_plan),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                execute_safe_actions=args.execute_safe_actions,
+                allow_fixture_delivery_chain=args.allow_fixture_delivery_chain,
+                frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                delivery_chain_limit=args.delivery_chain_limit,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_operations_execution_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-domain-expansion-chain":
+        result = run_autonomous_domain_expansion_chain(
+            AutonomousDomainExpansionChainOptions(
+                executor_report_path=Path(args.executor_report),
+                output_root=Path(args.output_root),
+                frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                mode=args.mode,
+                reviewer=args.reviewer,
+                created_at=args.created_at,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_domain_expansion_chain_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-registry-activation-chain":
+        result = run_autonomous_registry_activation_chain(
+            AutonomousRegistryActivationChainOptions(
+                expansion_chain_report_path=Path(args.expansion_chain_report),
+                output_root=Path(args.output_root),
+                completion_evidence_path=Path(args.completion_evidence) if args.completion_evidence else None,
+                source_specific_apply_input_path=Path(args.source_specific_apply_input) if args.source_specific_apply_input else None,
+                source_lane_registry_path=Path(args.source_lane_registry) if args.source_lane_registry else None,
+                legal_terms_registry_path=Path(args.legal_terms_registry) if args.legal_terms_registry else None,
+                api_governance_registry_path=Path(args.api_governance_registry) if args.api_governance_registry else None,
+                created_at=args.created_at,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_registry_activation_chain_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "autonomous-end-to-end-chain":
+        result = run_autonomous_end_to_end_chain(
+            AutonomousEndToEndChainOptions(
+                frontier_config_path=Path(args.frontier_config),
+                source_lane_registry_path=Path(args.source_lane_registry),
+                legal_terms_registry_path=Path(args.legal_terms_registry) if args.legal_terms_registry else None,
+                api_governance_registry_path=Path(args.api_governance_registry) if args.api_governance_registry else None,
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                production_recertification_path=Path(args.production_recertification) if args.production_recertification else None,
+                gateway_release_report_path=Path(args.gateway_release_report) if args.gateway_release_report else None,
+                native_runtime_report_path=Path(args.native_runtime_report) if args.native_runtime_report else None,
+                native_registry_artifact_path=Path(args.native_registry_artifact) if args.native_registry_artifact else None,
+                requested_domains=tuple(args.requested_domains or ()),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                refresh_production_recertification=args.refresh_production_recertification,
+                execute_safe_actions=args.execute_safe_actions,
+                allow_fixture_delivery_chain=args.allow_fixture_delivery_chain,
+                delivery_chain_limit=args.delivery_chain_limit,
+                domain_expansion_mode=args.domain_expansion_mode,
+                reviewer=args.reviewer,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(autonomous_end_to_end_chain_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "broad-domain-discovery":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-broad-domain-discovery-train-07.json")
+            result = write_broad_domain_discovery_report(
+                Path(args.markdown),
+                json_path,
+                output_root=output_root,
+                frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                created_at=args.created_at,
+            )
+        else:
+            result = build_broad_domain_discovery(
+                BroadDomainDiscoveryOptions(
+                    output_root=output_root,
+                    frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                    created_at=args.created_at,
+                )
+            )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "frontier-intake":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-frontier-intake-train-52.json")
+            result = write_frontier_intake_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_frontier_intake(
+                FrontierIntakeOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                    created_at=args.created_at,
+                )
+            )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-router":
+        output_root = Path(args.output_root)
+        production_target_ledger_path = Path(args.production_target_ledger) if args.production_target_ledger else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-router-train-88.json")
+            result = write_goal_domain_router_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                production_target_ledger_path=production_target_ledger_path,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_router(
+                GoalDomainRouterOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                    production_target_ledger_path=production_target_ledger_path,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-production-lanes":
+        output_root = Path(args.output_root)
+        production_target_ledger_path = Path(args.production_target_ledger) if args.production_target_ledger else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-production-lanes-train-89.json")
+            result = write_goal_domain_production_lanes_report(
+                Path(args.markdown),
+                json_path,
+                router_manifest_path=Path(args.router_manifest),
+                output_root=output_root,
+                production_target_ledger_path=production_target_ledger_path,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_production_lanes(
+                GoalDomainProductionLaneOptions(
+                    router_manifest_path=Path(args.router_manifest),
+                    output_root=output_root,
+                    production_target_ledger_path=production_target_ledger_path,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-work-order-executor":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-work-order-executor-train-90.json")
+            result = write_goal_domain_work_order_executor_report(
+                Path(args.markdown),
+                json_path,
+                production_lanes_manifest_path=Path(args.production_lanes_manifest),
+                output_root=output_root,
+                mode=args.mode,
+                created_at=args.created_at,
+            )
+        else:
+            result = run_goal_domain_work_order_executor(
+                GoalDomainWorkOrderExecutorOptions(
+                    production_lanes_manifest_path=Path(args.production_lanes_manifest),
+                    output_root=output_root,
+                    mode=args.mode,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-review-packets":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-review-packets-train-92.json")
+            result = write_goal_domain_review_packets_report(
+                Path(args.markdown),
+                json_path,
+                executor_manifest_path=Path(args.executor_manifest),
+                output_root=output_root,
+                reviewer=args.reviewer,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_review_packets(
+                GoalDomainReviewPacketOptions(
+                    executor_manifest_path=Path(args.executor_manifest),
+                    output_root=output_root,
+                    reviewer=args.reviewer,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-review-completion-intake":
+        output_root = Path(args.output_root)
+        completion_evidence = Path(args.completion_evidence) if args.completion_evidence else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-review-completion-intake-train-93.json")
+            result = write_goal_domain_review_completion_intake_report(
+                Path(args.markdown),
+                json_path,
+                review_templates_path=Path(args.review_templates),
+                output_root=output_root,
+                completion_evidence_path=completion_evidence,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_review_completion_intake(
+                GoalDomainReviewCompletionIntakeOptions(
+                    review_templates_path=Path(args.review_templates),
+                    output_root=output_root,
+                    completion_evidence_path=completion_evidence,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-registry-mutation-plan":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-registry-mutation-plan-train-94.json")
+            result = write_goal_domain_registry_mutation_plan_report(
+                Path(args.markdown),
+                json_path,
+                review_completions_path=Path(args.review_completions),
+                output_root=output_root,
+                execute=args.execute,
+                allow_active_registry_write=args.allow_active_registry_write,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_registry_mutation_plan(
+                GoalDomainRegistryMutationPlanOptions(
+                    review_completions_path=Path(args.review_completions),
+                    output_root=output_root,
+                    execute=args.execute,
+                    allow_active_registry_write=args.allow_active_registry_write,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-registry-applier":
+        output_root = Path(args.output_root)
+        source_lane_registry = Path(args.source_lane_registry) if args.source_lane_registry else None
+        legal_terms_registry = Path(args.legal_terms_registry) if args.legal_terms_registry else None
+        api_governance_registry = Path(args.api_governance_registry) if args.api_governance_registry else None
+        approval_artifact = Path(args.approval_artifact) if args.approval_artifact else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-registry-applier-train-95.json")
+            result = write_goal_domain_registry_applier_report(
+                Path(args.markdown),
+                json_path,
+                plan_path=Path(args.plan),
+                output_root=output_root,
+                source_lane_registry_path=source_lane_registry,
+                legal_terms_registry_path=legal_terms_registry,
+                api_governance_registry_path=api_governance_registry,
+                approval_artifact=approval_artifact,
+                execute=args.execute,
+                allow_active_registry_write=args.allow_active_registry_write,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_registry_applier(
+                GoalDomainRegistryApplierOptions(
+                    plan_path=Path(args.plan),
+                    output_root=output_root,
+                    source_lane_registry_path=source_lane_registry,
+                    legal_terms_registry_path=legal_terms_registry,
+                    api_governance_registry_path=api_governance_registry,
+                    approval_artifact=approval_artifact,
+                    execute=args.execute,
+                    allow_active_registry_write=args.allow_active_registry_write,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-registry-apply-rehearsal":
+        output_root = Path(args.output_root)
+        source_lane_registry = Path(args.source_lane_registry) if args.source_lane_registry else None
+        legal_terms_registry = Path(args.legal_terms_registry) if args.legal_terms_registry else None
+        api_governance_registry = Path(args.api_governance_registry) if args.api_governance_registry else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-registry-apply-rehearsal-train-96.json")
+            result = write_goal_domain_registry_apply_rehearsal_report(
+                Path(args.markdown),
+                json_path,
+                review_templates_path=Path(args.review_templates),
+                output_root=output_root,
+                source_lane_registry_path=source_lane_registry,
+                legal_terms_registry_path=legal_terms_registry,
+                api_governance_registry_path=api_governance_registry,
+                created_at=args.created_at,
+            )
+        else:
+            result = run_goal_domain_registry_apply_rehearsal(
+                GoalDomainRegistryApplyRehearsalOptions(
+                    review_templates_path=Path(args.review_templates),
+                    output_root=output_root,
+                    source_lane_registry_path=source_lane_registry,
+                    legal_terms_registry_path=legal_terms_registry,
+                    api_governance_registry_path=api_governance_registry,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-active-registry-apply-gate":
+        output_root = Path(args.output_root)
+        review_evidence = Path(args.review_evidence) if args.review_evidence else None
+        source_lane_registry = Path(args.source_lane_registry) if args.source_lane_registry else None
+        legal_terms_registry = Path(args.legal_terms_registry) if args.legal_terms_registry else None
+        api_governance_registry = Path(args.api_governance_registry) if args.api_governance_registry else None
+        approval_artifact = Path(args.approval_artifact) if args.approval_artifact else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-active-registry-apply-gate-train-97.json")
+            result = write_goal_domain_active_registry_apply_gate_report(
+                Path(args.markdown),
+                json_path,
+                plan_path=Path(args.plan),
+                output_root=output_root,
+                review_evidence_path=review_evidence,
+                source_lane_registry_path=source_lane_registry,
+                legal_terms_registry_path=legal_terms_registry,
+                api_governance_registry_path=api_governance_registry,
+                approval_artifact=approval_artifact,
+                execute=args.execute,
+                allow_active_registry_write=args.allow_active_registry_write,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_active_registry_apply_gate(
+                GoalDomainActiveRegistryApplyGateOptions(
+                    plan_path=Path(args.plan),
+                    output_root=output_root,
+                    review_evidence_path=review_evidence,
+                    source_lane_registry_path=source_lane_registry,
+                    legal_terms_registry_path=legal_terms_registry,
+                    api_governance_registry_path=api_governance_registry,
+                    approval_artifact=approval_artifact,
+                    execute=args.execute,
+                    allow_active_registry_write=args.allow_active_registry_write,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-source-specific-apply-packet":
+        output_root = Path(args.output_root)
+        source_lane_registry = Path(args.source_lane_registry) if args.source_lane_registry else None
+        legal_terms_registry = Path(args.legal_terms_registry) if args.legal_terms_registry else None
+        api_governance_registry = Path(args.api_governance_registry) if args.api_governance_registry else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-source-specific-apply-packet-train-98.json")
+            result = write_goal_domain_source_specific_apply_packet_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                source_lane_registry_path=source_lane_registry,
+                legal_terms_registry_path=legal_terms_registry,
+                api_governance_registry_path=api_governance_registry,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_source_specific_apply_packet(
+                GoalDomainSourceSpecificApplyPacketOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    source_lane_registry_path=source_lane_registry,
+                    legal_terms_registry_path=legal_terms_registry,
+                    api_governance_registry_path=api_governance_registry,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "goal-domain-production-activation":
+        output_root = Path(args.output_root)
+        target_source_lane_registry = Path(args.target_source_lane_registry) if args.target_source_lane_registry else None
+        target_legal_terms_registry = Path(args.target_legal_terms_registry) if args.target_legal_terms_registry else None
+        target_api_governance_registry = Path(args.target_api_governance_registry) if args.target_api_governance_registry else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-goal-domain-production-activation-train-99.json")
+            result = write_goal_domain_production_activation_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                target_source_lane_registry_path=target_source_lane_registry,
+                target_legal_terms_registry_path=target_legal_terms_registry,
+                target_api_governance_registry_path=target_api_governance_registry,
+                execute_active_registry=args.execute_active_registry,
+                allow_active_registry_write=args.allow_active_registry_write,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_goal_domain_production_activation(
+                GoalDomainProductionActivationOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    target_source_lane_registry_path=target_source_lane_registry,
+                    target_legal_terms_registry_path=target_legal_terms_registry,
+                    target_api_governance_registry_path=target_api_governance_registry,
+                    execute_active_registry=args.execute_active_registry,
+                    allow_active_registry_write=args.allow_active_registry_write,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-discovery":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-discovery-train-53.json")
+            result = write_catalog_discovery_report(
+                Path(args.markdown),
+                json_path,
+                input_root=Path(args.input_root),
+                output_root=output_root,
+                created_at=args.created_at,
+            )
+        else:
+            result = run_catalog_discovery(
+                CatalogDiscoveryOptions(
+                    input_root=Path(args.input_root),
+                    output_root=output_root,
+                    created_at=args.created_at,
+                )
+            )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-transport":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-transport-train-54.json")
+            result = write_catalog_transport_report(
+                Path(args.markdown),
+                json_path,
+                plan_path=Path(args.plan),
+                output_root=output_root,
+                mode=args.mode,
+                live=args.live,
+                execute=args.execute,
+                created_at=args.created_at,
+            )
+        else:
+            result = run_catalog_transport(
+                CatalogTransportOptions(
+                    plan_path=Path(args.plan),
+                    output_root=output_root,
+                    mode=args.mode,
+                    live=args.live,
+                    execute=args.execute,
+                    created_at=args.created_at,
+                )
+            )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-candidate-review":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-candidate-review-train-56.json")
+            result = write_catalog_candidate_review_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_candidate_review(
+                CatalogCandidateReviewOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-governance-intake":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-governance-intake-train-57.json")
+            result = write_catalog_governance_intake_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_governance_intake(
+                CatalogGovernanceIntakeOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-registry-mutation-plan":
+        output_root = Path(args.output_root)
+        approval_artifact = Path(args.approval_artifact) if args.approval_artifact else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58.json")
+            result = write_catalog_registry_mutation_plan_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                approval_artifact=approval_artifact,
+                execute=args.execute,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_registry_mutation_plan(
+                CatalogRegistryMutationPlanOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    approval_artifact=approval_artifact,
+                    execute=args.execute,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-registry-applier":
+        output_root = Path(args.output_root)
+        source_lane_registry = Path(args.source_lane_registry) if args.source_lane_registry else None
+        legal_terms_registry = Path(args.legal_terms_registry) if args.legal_terms_registry else None
+        api_governance_registry = Path(args.api_governance_registry) if args.api_governance_registry else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-applier-train-60.json")
+            result = write_catalog_registry_applier_report(
+                Path(args.markdown),
+                json_path,
+                plan_path=Path(args.plan),
+                output_root=output_root,
+                source_lane_registry_path=source_lane_registry,
+                legal_terms_registry_path=legal_terms_registry,
+                api_governance_registry_path=api_governance_registry,
+                execute=args.execute,
+                allow_active_registry_write=args.allow_active_registry_write,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_registry_applier(
+                CatalogRegistryApplierOptions(
+                    plan_path=Path(args.plan),
+                    output_root=output_root,
+                    source_lane_registry_path=source_lane_registry,
+                    legal_terms_registry_path=legal_terms_registry,
+                    api_governance_registry_path=api_governance_registry,
+                    execute=args.execute,
+                    allow_active_registry_write=args.allow_active_registry_write,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-registry-approval-request":
+        output_root = Path(args.output_root)
+        intake_ids = tuple(args.intake_ids or ())
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-approval-request-train-59.json")
+            result = write_catalog_registry_approval_request_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                intake_ids=intake_ids,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_registry_approval_request(
+                CatalogRegistryApprovalRequestOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    intake_ids=intake_ids,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-terms-resolution":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-terms-resolution-train-61.json")
+            result = write_catalog_terms_resolution_report(
+                Path(args.markdown),
+                json_path,
+                input_path=Path(args.input),
+                output_root=output_root,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_terms_resolution(
+                CatalogTermsResolutionOptions(
+                    input_path=Path(args.input),
+                    output_root=output_root,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-approval-finalizer":
+        output_root = Path(args.output_root)
+        decision_artifact = Path(args.decision_artifact) if args.decision_artifact else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-approval-finalizer-train-62.json")
+            result = write_catalog_approval_finalizer_report(
+                Path(args.markdown),
+                json_path,
+                terms_proposals_path=Path(args.terms_proposals),
+                output_root=output_root,
+                decision_artifact=decision_artifact,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_approval_finalizer(
+                CatalogApprovalFinalizerOptions(
+                    terms_proposals_path=Path(args.terms_proposals),
+                    output_root=output_root,
+                    decision_artifact=decision_artifact,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-approval-preflight":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-approval-preflight-train-63.json")
+            result = write_catalog_approval_preflight_report(
+                Path(args.markdown),
+                json_path,
+                terms_proposals_path=Path(args.terms_proposals),
+                output_root=output_root,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_approval_preflight(
+                CatalogApprovalPreflightOptions(
+                    terms_proposals_path=Path(args.terms_proposals),
+                    output_root=output_root,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-approval-decision-inputs":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-approval-decision-inputs-train-64.json")
+            result = write_catalog_approval_decision_inputs_report(
+                Path(args.markdown),
+                json_path,
+                preflight_records_path=Path(args.preflight_records),
+                output_root=output_root,
+                created_at=args.created_at,
+                decision_owner=args.decision_owner,
+            )
+        else:
+            result = compile_catalog_approval_decision_inputs(
+                CatalogApprovalDecisionInputsOptions(
+                    preflight_records_path=Path(args.preflight_records),
+                    output_root=output_root,
+                    created_at=args.created_at,
+                    decision_owner=args.decision_owner,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-approval-decision-assembler":
+        output_root = Path(args.output_root)
+        review_completion = Path(args.review_completion) if args.review_completion else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-approval-decision-assembler-train-65.json")
+            result = write_catalog_approval_decision_assembler_report(
+                Path(args.markdown),
+                json_path,
+                decision_inputs_path=Path(args.decision_inputs),
+                output_root=output_root,
+                review_completion_path=review_completion,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_approval_decision_assembler(
+                CatalogApprovalDecisionAssemblerOptions(
+                    decision_inputs_path=Path(args.decision_inputs),
+                    output_root=output_root,
+                    review_completion_path=review_completion,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-approval-chain":
+        output_root = Path(args.output_root)
+        review_completion = Path(args.review_completion) if args.review_completion else None
+        source_lane_registry = Path(args.source_lane_registry) if args.source_lane_registry else None
+        legal_terms_registry = Path(args.legal_terms_registry) if args.legal_terms_registry else None
+        api_governance_registry = Path(args.api_governance_registry) if args.api_governance_registry else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-approval-chain-train-66.json")
+            result = write_catalog_approval_chain_report(
+                Path(args.markdown),
+                json_path,
+                decision_inputs_path=Path(args.decision_inputs),
+                terms_proposals_path=Path(args.terms_proposals),
+                draft_governance_packets_path=Path(args.draft_governance_packets),
+                output_root=output_root,
+                review_completion_path=review_completion,
+                source_lane_registry_path=source_lane_registry,
+                legal_terms_registry_path=legal_terms_registry,
+                api_governance_registry_path=api_governance_registry,
+                execute_registry_apply=args.execute_registry_apply,
+                allow_active_registry_write=args.allow_active_registry_write,
+                created_at=args.created_at,
+            )
+        else:
+            result = run_catalog_approval_chain(
+                CatalogApprovalChainOptions(
+                    decision_inputs_path=Path(args.decision_inputs),
+                    terms_proposals_path=Path(args.terms_proposals),
+                    draft_governance_packets_path=Path(args.draft_governance_packets),
+                    output_root=output_root,
+                    review_completion_path=review_completion,
+                    source_lane_registry_path=source_lane_registry,
+                    legal_terms_registry_path=legal_terms_registry,
+                    api_governance_registry_path=api_governance_registry,
+                    execute_registry_apply=args.execute_registry_apply,
+                    allow_active_registry_write=args.allow_active_registry_write,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-reviewer-completion-intake":
+        output_root = Path(args.output_root)
+        review_packets = Path(args.review_packets) if args.review_packets else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-intake-train-67.json")
+            result = write_catalog_reviewer_completion_intake_report(
+                Path(args.markdown),
+                json_path,
+                decision_inputs_path=Path(args.decision_inputs),
+                output_root=output_root,
+                review_packets_path=review_packets,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_reviewer_completion_intake(
+                CatalogReviewerCompletionIntakeOptions(
+                    decision_inputs_path=Path(args.decision_inputs),
+                    output_root=output_root,
+                    review_packets_path=review_packets,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-reviewer-completion-template":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-reviewer-completion-template-train-68.json")
+            result = write_catalog_reviewer_completion_template_report(
+                Path(args.markdown),
+                json_path,
+                decision_inputs_path=Path(args.decision_inputs),
+                output_root=output_root,
+                reviewer=args.reviewer,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_reviewer_completion_template(
+                CatalogReviewerCompletionTemplateOptions(
+                    decision_inputs_path=Path(args.decision_inputs),
+                    output_root=output_root,
+                    reviewer=args.reviewer,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-review-work-queue":
+        output_root = Path(args.output_root)
+        review_packets = Path(args.review_packets) if args.review_packets else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-review-work-queue-train-69.json")
+            result = write_catalog_review_work_queue_report(
+                Path(args.markdown),
+                json_path,
+                decision_inputs_path=Path(args.decision_inputs),
+                output_root=output_root,
+                review_packets_path=review_packets,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_review_work_queue(
+                CatalogReviewWorkQueueOptions(
+                    decision_inputs_path=Path(args.decision_inputs),
+                    output_root=output_root,
+                    review_packets_path=review_packets,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-direct-source-resolution":
+        output_root = Path(args.output_root)
+        candidate_review = Path(args.candidate_review) if args.candidate_review else None
+        decision_inputs = Path(args.decision_inputs) if args.decision_inputs else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-resolution-train-70.json")
+            result = write_catalog_direct_source_resolution_report(
+                Path(args.markdown),
+                json_path,
+                work_items_path=Path(args.work_items),
+                output_root=output_root,
+                candidate_review_path=candidate_review,
+                decision_inputs_path=decision_inputs,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_direct_source_resolution(
+                CatalogDirectSourceResolutionOptions(
+                    work_items_path=Path(args.work_items),
+                    output_root=output_root,
+                    candidate_review_path=candidate_review,
+                    decision_inputs_path=decision_inputs,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-direct-source-review-gate":
+        output_root = Path(args.output_root)
+        direct_source_reviews = Path(args.direct_source_reviews) if args.direct_source_reviews else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71.json")
+            result = write_catalog_direct_source_review_gate_report(
+                Path(args.markdown),
+                json_path,
+                resolution_candidates_path=Path(args.resolution_candidates),
+                output_root=output_root,
+                direct_source_reviews_path=direct_source_reviews,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_direct_source_review_gate(
+                CatalogDirectSourceReviewGateOptions(
+                    resolution_candidates_path=Path(args.resolution_candidates),
+                    output_root=output_root,
+                    direct_source_reviews_path=direct_source_reviews,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-direct-source-review-template":
+        output_root = Path(args.output_root)
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-template-train-72.json")
+            result = write_catalog_direct_source_review_template_report(
+                Path(args.markdown),
+                json_path,
+                resolution_candidates_path=Path(args.resolution_candidates),
+                output_root=output_root,
+                reviewer=args.reviewer,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_direct_source_review_template(
+                CatalogDirectSourceReviewTemplateOptions(
+                    resolution_candidates_path=Path(args.resolution_candidates),
+                    output_root=output_root,
+                    reviewer=args.reviewer,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-direct-source-review-completion":
+        output_root = Path(args.output_root)
+        review_evidence = Path(args.review_evidence) if args.review_evidence else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73.json")
+            result = write_catalog_direct_source_review_completion_report(
+                Path(args.markdown),
+                json_path,
+                templates_path=Path(args.templates),
+                output_root=output_root,
+                review_evidence_path=review_evidence,
+                created_at=args.created_at,
+            )
+        else:
+            result = compile_catalog_direct_source_review_completion(
+                CatalogDirectSourceReviewCompletionOptions(
+                    templates_path=Path(args.templates),
+                    output_root=output_root,
+                    review_evidence_path=review_evidence,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "catalog-direct-source-approval-chain":
+        output_root = Path(args.output_root)
+        review_evidence = Path(args.review_evidence) if args.review_evidence else None
+        source_lane_registry = Path(args.source_lane_registry) if args.source_lane_registry else None
+        legal_terms_registry = Path(args.legal_terms_registry) if args.legal_terms_registry else None
+        api_governance_registry = Path(args.api_governance_registry) if args.api_governance_registry else None
+        if args.markdown:
+            json_path = Path(args.emit_evidence) if args.emit_evidence else Path("docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-approval-chain-train-74.json")
+            result = write_catalog_direct_source_approval_chain_report(
+                Path(args.markdown),
+                json_path,
+                templates_path=Path(args.templates),
+                resolution_candidates_path=Path(args.resolution_candidates),
+                decision_inputs_path=Path(args.decision_inputs),
+                terms_proposals_path=Path(args.terms_proposals),
+                draft_governance_packets_path=Path(args.draft_governance_packets),
+                output_root=output_root,
+                review_evidence_path=review_evidence,
+                source_lane_registry_path=source_lane_registry,
+                legal_terms_registry_path=legal_terms_registry,
+                api_governance_registry_path=api_governance_registry,
+                execute_registry_apply=args.execute_registry_apply,
+                allow_active_registry_write=args.allow_active_registry_write,
+                created_at=args.created_at,
+            )
+        else:
+            result = run_catalog_direct_source_approval_chain(
+                CatalogDirectSourceApprovalChainOptions(
+                    templates_path=Path(args.templates),
+                    resolution_candidates_path=Path(args.resolution_candidates),
+                    decision_inputs_path=Path(args.decision_inputs),
+                    terms_proposals_path=Path(args.terms_proposals),
+                    draft_governance_packets_path=Path(args.draft_governance_packets),
+                    output_root=output_root,
+                    review_evidence_path=review_evidence,
+                    source_lane_registry_path=source_lane_registry,
+                    legal_terms_registry_path=legal_terms_registry,
+                    api_governance_registry_path=api_governance_registry,
+                    execute_registry_apply=args.execute_registry_apply,
+                    allow_active_registry_write=args.allow_active_registry_write,
+                    created_at=args.created_at,
+                )
+            )
+            if args.emit_evidence:
+                write_json(Path(args.emit_evidence), result)
+        print_json(result)
+        return 0 if result["valid"] else 1
     if args.command == "compile":
         result = compile_bundle(
             Path(args.output_root),
@@ -498,6 +3316,7 @@ def main(argv: list[str] | None = None) -> int:
             revoked_artifact_ids=args.revoked_artifact_id,
             candidate_manifest_path=Path(args.candidate_manifest) if args.candidate_manifest else None,
             last_known_good_path=Path(args.last_known_good) if args.last_known_good else None,
+            env_file_paths=[Path(path) for path in args.env_file] if args.env_file else None,
         )
         print_json(result)
         return 0 if result["status"] in {"Green", "Yellow"} else 1

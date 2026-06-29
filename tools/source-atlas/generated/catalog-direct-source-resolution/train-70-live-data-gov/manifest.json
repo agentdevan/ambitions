@@ -1,0 +1,124 @@
+{
+  "candidateReviewPath": "tools/source-atlas/generated/catalog-candidate-review/train-56-live-data-gov/review-packets.json",
+  "checks": [
+    {
+      "issues": [],
+      "name": "work_items_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_items_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_review_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_review_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_inputs_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_inputs_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_resolution_candidates_remain_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "catalog_metadata_remains_discovery_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "locator_candidates_do_not_approve_authority",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "direct_source_resolution_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "decisionInputsPath": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceResolutionManifest.v1",
+  "nonClaims": [
+    "direct-source resolution candidates only",
+    "not source authority",
+    "not legal approval",
+    "not outside legal approval",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "catalogDirectSourceResolution": "8dabd1d46770ffc4566157c5615fb8e9d3f82d14d5fb86c5036a8d5003e316a4",
+    "directSourceResolutionCandidates": "1792e53bf95fc9c2af5d4970dbe4bd21d93ee21846ac8b843be84d1f96990de7",
+    "manifest": "c8398a4159f827cb7509b0db23c40068fb6f0643298eeba5bcc1ced98a33c541"
+  },
+  "outputPaths": {
+    "catalogDirectSourceResolution": "tools/source-atlas/generated/catalog-direct-source-resolution/train-70-live-data-gov/catalog-direct-source-resolution.json",
+    "closeout": "tools/source-atlas/generated/catalog-direct-source-resolution/train-70-live-data-gov/closeout.md",
+    "directSourceResolutionCandidates": "tools/source-atlas/generated/catalog-direct-source-resolution/train-70-live-data-gov/direct-source-resolution-candidates.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedFromAuthorityResolution": 4,
+    "candidateReviewPackets": 4,
+    "candidatesWithLocatorCandidates": 4,
+    "claims": 0,
+    "decisionInputPackets": 4,
+    "directSourceResolutionCandidates": 4,
+    "missingDirectSourceLocator": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "reviewWorkItems": 4
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; direct-source resolution candidates only",
+  "status": "Source Green for catalog direct-source resolution candidate tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-direct-source-resolution-train-70",
+  "workItemsPath": "tools/source-atlas/generated/catalog-review-work-queue/train-69-live-data-gov/review-work-items.json"
+}

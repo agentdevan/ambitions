@@ -1,0 +1,128 @@
+{
+  "apiPolicies": [
+    "api.static_public_page.v1"
+  ],
+  "blockedCounts": {
+    "restrictedExclusions": 0
+  },
+  "budgetLimits": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "sba.business_guide.start_business"
+    }
+  ],
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "fixture_first_default",
+      "passed": true
+    },
+    {
+      "name": "live_modes_require_live_flag",
+      "passed": true
+    },
+    {
+      "name": "execute_modes_require_execute_flag",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_emit_exclusion_proof",
+      "passed": true
+    },
+    {
+      "name": "evidence_hashes_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "entries": [
+    {
+      "adapterID": "sba_business_guide_adapter",
+      "blockedReasons": [],
+      "claimCount": 3,
+      "evidencePath": "evidence/sba.business_guide.start_business.json",
+      "evidenceSHA256": "a84357a2927b6511a6ee64b31bdc1844a886a4cc4928b83dcb81f3b9123a2083",
+      "normalizedPath": "normalized/sba.business_guide.start_business.json",
+      "normalizedSHA256": "f3e89427c12157c3d34fd4b389fa88cb06851d72cceeec8667aad2af34462e44",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "sba.business_guide.start_business",
+      "status": "harvested"
+    }
+  ],
+  "errorCounts": {
+    "issues": 0,
+    "privacyIssues": 0
+  },
+  "evidenceHashes": [
+    {
+      "evidenceHash": "c950d0277210ad30961a017229a52861d7a5a9de1d4ae9edfd9a69cc84ca56cc",
+      "sha256": "a84357a2927b6511a6ee64b31bdc1844a886a4cc4928b83dcb81f3b9123a2083",
+      "sourceID": "sba.business_guide.start_business"
+    }
+  ],
+  "executeRequested": false,
+  "finishedAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governedHarvestRunManifest.v1",
+  "liveRequested": false,
+  "manifestInputHash": "e334c76214dc42add5e529208c04cf4bbab6bf78c7fb588ba32454a2b39e6520",
+  "manifestPath": "tools/source-atlas/generated/governed-harvest/train-43-business-sba-fixture/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not live production harvest proof unless --live evidence is separately reviewed",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputPaths": [
+    "normalized/sba.business_guide.start_business.json",
+    "evidence/sba.business_guide.start_business.json"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "claims": 3,
+    "packCandidates": 1,
+    "records": 0,
+    "sourcesBlocked": 0,
+    "sourcesHarvested": 1,
+    "sourcesSelected": 1
+  },
+  "restrictedExclusions": [],
+  "runID": "train-43-business-sba-fixture",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governed harvest runner only",
+  "sourceLanes": [
+    "sba.business_guide.start_business"
+  ],
+  "status": "Source Green for governed harvest runner",
+  "valid": true,
+  "versionID": "source-atlas-governed-harvest-runner-v1"
+}

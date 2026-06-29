@@ -1,0 +1,83 @@
+{
+  "domainProposals": [
+    {
+      "candidate_sources": [
+        {
+          "api_docs_url": "",
+          "authority_class_guess": "official_government",
+          "claim_class_guess": [
+            "official_benefit_program_reference",
+            "public_eligibility_reference"
+          ],
+          "dataset_url": "https://www.usa.gov/benefits",
+          "declared_jurisdiction": "US",
+          "declared_license": "",
+          "declared_rights": "",
+          "discovery_method": "executor_seed",
+          "distribution_urls": [],
+          "publisher_name": "USA.gov",
+          "publisher_url": "https://www.usa.gov/benefits",
+          "redistribution_guess": "terms_sensitive",
+          "rights_url": "",
+          "source_class_guess": "official_government",
+          "terms_url": "https://www.usa.gov/about"
+        },
+        {
+          "api_docs_url": "https://catalog.data.gov/api/3/",
+          "authority_class_guess": "public_catalog",
+          "claim_class_guess": [
+            "official_benefit_program_reference",
+            "public_eligibility_reference",
+            "public_deadline_reference"
+          ],
+          "dataset_url": "https://catalog.data.gov/dataset",
+          "declared_jurisdiction": "US",
+          "declared_license": "",
+          "declared_rights": "",
+          "discovery_method": "executor_seed",
+          "distribution_urls": [],
+          "publisher_name": "Data.gov Catalog",
+          "publisher_url": "https://catalog.data.gov/",
+          "redistribution_guess": "terms_sensitive",
+          "rights_url": "",
+          "source_class_guess": "public_catalog",
+          "terms_url": "https://www.data.gov/privacy-policy/"
+        }
+      ],
+      "claim_classes": [
+        "official_benefit_program_reference",
+        "public_eligibility_reference",
+        "public_deadline_reference"
+      ],
+      "domain": "public_benefits_reference",
+      "freshness_slas": [
+        "30d critical requirements",
+        "90d informational references"
+      ],
+      "frontier_id": "public_benefits_reference",
+      "goal_intent_classes": [
+        "public_benefits_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "non_claims": [
+        "candidate frontier work order only",
+        "not claim output",
+        "not pack output",
+        "not R2 readiness",
+        "human source-lane and legal/API review required"
+      ],
+      "proposal_id": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "public_catalog"
+      ]
+    }
+  ]
+}

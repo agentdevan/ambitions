@@ -1,0 +1,109 @@
+{
+  "architectureCloseout": {
+    "canonicalOwnersTouched": [
+      "tools/source-atlas",
+      "docs/qa/source-atlas"
+    ],
+    "compatibilityShimsLeftBehind": [],
+    "filesMovedOrCreated": [
+      "tools/source-atlas/foundry/catalog_registry_mutation_plan.py",
+      "tools/source-atlas/foundry/tests/test_catalog_registry_mutation_plan_train_58.py",
+      "tools/source-atlas/generated/catalog-registry-mutation-plan/train-58-live-data-gov",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58.json",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58.md",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58-closeout.json",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58-closeout.md"
+    ],
+    "finalArchitectureTreeInspected": true,
+    "noEquivalentFolderInterpretationUsed": true,
+    "oldNonCanonicalPathsRemoved": [],
+    "remainingYellowArchitectureDebt": "The mutation planner validates approval-gated mutation planning but intentionally does not write active governance registries. A separate registry applier with current approval artifacts is still required before any catalog-discovered source can affect claims or packs."
+  },
+  "filesChanged": [
+    "tools/source-atlas/foundry/catalog_registry_mutation_plan.py",
+    "tools/source-atlas/foundry/cli.py",
+    "tools/source-atlas/foundry/tests/test_catalog_registry_mutation_plan_train_58.py",
+    "tools/source-atlas/generated/catalog-registry-mutation-plan/train-58-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-registry-mutation-plan/train-58-live-data-gov/catalog-registry-mutation-plan.json",
+    "tools/source-atlas/generated/catalog-registry-mutation-plan/train-58-live-data-gov/planned-registry-mutations.json",
+    "tools/source-atlas/generated/catalog-registry-mutation-plan/train-58-live-data-gov/blocked-registry-mutations.json",
+    "tools/source-atlas/generated/catalog-registry-mutation-plan/train-58-live-data-gov/active-registry-mutations.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58-closeout.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58-closeout.md"
+  ],
+  "followUpRequired": [
+    "Add approval-artifact authoring workflow for selected draft governance packets.",
+    "Add a separate registry applier that writes active registries only with valid approval artifacts and explicit execute gates.",
+    "Re-run governance registry validation after any future active registry mutation.",
+    "Keep unapproved catalog candidates blocked from claims, packs, R2 output, and live harvest."
+  ],
+  "freshnessRevocationProof": "Not claimed. No pack, freshness metadata, revocation manifest, or LKG pointer changed.",
+  "knownRisks": [
+    "Current Train 58 live-data-gov evidence has no approval artifact, so all four draft registry mutations remain blocked.",
+    "The planner proves gating and dry-run mutation planning, not active registry mutation.",
+    "A future registry applier must revalidate current approval artifacts and registries before writes."
+  ],
+  "licenseTermsProof": "Missing approval artifacts block registry mutation planning for current live catalog candidates. Focused tests prove malformed legal approval artifacts are rejected.",
+  "lkgRollbackProof": "Not claimed. No R2 or native pack lifecycle changed.",
+  "nativeOfflineNoAccountProof": "Not claimed. No native files changed.",
+  "noPrivateGraphEgressProof": "Input privacy scan, approval privacy scan, emitted artifact privacy scan, Source Atlas boundary audit, and no-private-graph egress audit pass.",
+  "productLawPreserved": true,
+  "productionNonClaims": [
+    "No active source registry mutation.",
+    "No source authority.",
+    "No legal or outside legal approval.",
+    "No API approval for current candidates.",
+    "No claim graph readiness.",
+    "No pack or production R2 readiness.",
+    "No app runtime Green.",
+    "No release Green.",
+    "No universal coverage.",
+    "No final user plans, schedules, or Steps."
+  ],
+  "provenanceCompletenessProof": "Not claimed for claims. The train emits zero claims and zero packable claims.",
+  "r2RequestPrivacyProof": "No R2 request path, object key, upload, readback, or pack publication is emitted.",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvedApiPolicies": 0,
+    "approvedLegalEntries": 0,
+    "approvedSourceLanes": 0,
+    "blockedRegistryMutations": 4,
+    "claims": 0,
+    "draftGovernancePackets": 4,
+    "packableClaims": 0,
+    "plannedRegistryMutations": 0,
+    "r2PackableArtifacts": 0
+  },
+  "restrictedSourceExclusionProof": "All current live catalog governance drafts remain blocked by missing source-specific approval artifacts. The planner writes no active registry mutations.",
+  "rollbackPlan": [
+    "Remove Train 58 registry mutation plan outputs and QA evidence.",
+    "Revert CLI wiring, catalog_registry_mutation_plan.py, and focused tests.",
+    "Keep Train 57 draft governance intake evidence as the previous blocked state."
+  ],
+  "scopeCompleted": [
+    "Added approval-gated registry mutation planner for catalog governance drafts.",
+    "Added Foundry CLI command catalog-registry-mutation-plan.",
+    "Added focused tests for blocked dry-run behavior, execute gating, valid approval dry-run planning, malformed approval rejection, and private approval rejection.",
+    "Generated Train 58 evidence from Train 57 live-data-gov draft governance packets with no approval artifact, proving all mutations remain blocked."
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; Green only for approval-gated catalog registry mutation planning.",
+  "status": "Green for Source Atlas catalog registry mutation planning tooling / Yellow overall Source Atlas",
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Native XCTest/build-for-testing was not run because this train changed Python tooling and QA/generated evidence only.",
+    "Outside legal approval was not run or claimed.",
+    "Active registry mutation was not run; no approval artifact was provided for current live catalog candidates."
+  ],
+  "validationRun": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_catalog_registry_mutation_plan_train_58.py -q -> 5 passed",
+    "python3 tools/source-atlas/source-atlas-foundry.py catalog-registry-mutation-plan --input tools/source-atlas/generated/catalog-governance-intake/train-57-live-data-gov/draft-governance-packets.json --output-root tools/source-atlas/generated/catalog-registry-mutation-plan/train-58-live-data-gov --created-at 2026-06-28T00:00:00Z --emit-evidence docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58.json --markdown docs/qa/source-atlas/domain-expansion/source-atlas-catalog-registry-mutation-plan-train-58.md -> valid true",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 242 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "git diff --check -> pass"
+  ]
+}

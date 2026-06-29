@@ -1,0 +1,158 @@
+{
+  "createdAt": "2026-06-28T22:55:00Z",
+  "executionRecords": [
+    {
+      "blockedBy": [],
+      "claimOutputEmitted": false,
+      "completed": true,
+      "executeOperationPerformed": false,
+      "executedAt": "2026-06-28T22:55:00Z",
+      "executionStatus": "completed_fixture_check",
+      "lane": "ready_public_reference_runtime_lane",
+      "liveOperationPerformed": false,
+      "matchedDomainID": "finance_public_reference",
+      "mode": "fixture",
+      "nativeActivationPerformed": false,
+      "nonClaims": [
+        "execution record only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.966cf4b2516964ba",
+      "packOutputEmitted": false,
+      "r2PublishPerformed": false,
+      "registryWritePerformed": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "production_target_ledger_ready_domain",
+        "r2_upload_readback_hash_evidence",
+        "public_gateway_readback_evidence",
+        "native_refresh_registry_evidence",
+        "native_runtime_quarantine_lkg_offline_evidence"
+      ],
+      "stage": "ledger_freshness_monitor",
+      "stageIndex": 1
+    },
+    {
+      "blockedBy": [],
+      "claimOutputEmitted": false,
+      "completed": true,
+      "executeOperationPerformed": false,
+      "executedAt": "2026-06-28T22:55:00Z",
+      "executionStatus": "completed_fixture_check",
+      "lane": "ready_public_reference_runtime_lane",
+      "liveOperationPerformed": false,
+      "matchedDomainID": "finance_public_reference",
+      "mode": "fixture",
+      "nativeActivationPerformed": false,
+      "nonClaims": [
+        "execution record only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.91e7c128ca5f4afa",
+      "packOutputEmitted": false,
+      "r2PublishPerformed": false,
+      "registryWritePerformed": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "production_target_ledger_ready_domain",
+        "r2_upload_readback_hash_evidence",
+        "public_gateway_readback_evidence",
+        "native_refresh_registry_evidence",
+        "native_runtime_quarantine_lkg_offline_evidence"
+      ],
+      "stage": "r2_gateway_readback_monitor",
+      "stageIndex": 2
+    },
+    {
+      "blockedBy": [],
+      "claimOutputEmitted": false,
+      "completed": true,
+      "executeOperationPerformed": false,
+      "executedAt": "2026-06-28T22:55:00Z",
+      "executionStatus": "completed_fixture_check",
+      "lane": "ready_public_reference_runtime_lane",
+      "liveOperationPerformed": false,
+      "matchedDomainID": "finance_public_reference",
+      "mode": "fixture",
+      "nativeActivationPerformed": false,
+      "nonClaims": [
+        "execution record only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.88b4419754d2d8b1",
+      "packOutputEmitted": false,
+      "r2PublishPerformed": false,
+      "registryWritePerformed": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "production_target_ledger_ready_domain",
+        "r2_upload_readback_hash_evidence",
+        "public_gateway_readback_evidence",
+        "native_refresh_registry_evidence",
+        "native_runtime_quarantine_lkg_offline_evidence"
+      ],
+      "stage": "native_refresh_registry_monitor",
+      "stageIndex": 3
+    },
+    {
+      "blockedBy": [],
+      "claimOutputEmitted": false,
+      "completed": true,
+      "executeOperationPerformed": false,
+      "executedAt": "2026-06-28T22:55:00Z",
+      "executionStatus": "completed_fixture_check",
+      "lane": "ready_public_reference_runtime_lane",
+      "liveOperationPerformed": false,
+      "matchedDomainID": "finance_public_reference",
+      "mode": "fixture",
+      "nativeActivationPerformed": false,
+      "nonClaims": [
+        "execution record only",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.d1a398e6652e6d44",
+      "packOutputEmitted": false,
+      "r2PublishPerformed": false,
+      "registryWritePerformed": false,
+      "requestID": "frontier_intake_proposal.2b62e995a7dfeaa9",
+      "requestedDomain": "public_benefits_reference",
+      "requiredEvidence": [
+        "production_target_ledger_ready_domain",
+        "r2_upload_readback_hash_evidence",
+        "public_gateway_readback_evidence",
+        "native_refresh_registry_evidence",
+        "native_runtime_quarantine_lkg_offline_evidence"
+      ],
+      "stage": "local_runtime_composition_monitor",
+      "stageIndex": 4
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.goalDomainExecutionRecords.v1",
+  "nonClaims": [
+    "execution records only",
+    "not source authority",
+    "not claim output",
+    "not R2 publish"
+  ],
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-work-order-executor-train-90"
+}

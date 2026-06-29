@@ -1,0 +1,1117 @@
+{
+  "frontiers": [
+    {
+      "claim_classes": [
+        "business_formation_reference",
+        "public_program_reference"
+      ],
+      "domain": "business_entrepreneurship",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_sba_guide_and_terms_recheck"
+      ],
+      "frontier_id": "business_entrepreneurship",
+      "goal_intent_classes": [
+        "business_formation_reference",
+        "entrepreneurship_public_program_reference"
+      ],
+      "gold_set": {
+        "gold_set_id": "gold.business_entrepreneurship.sba_start_business_public_reference.v1",
+        "non_claims": [
+          "not legal advice",
+          "not tax advice",
+          "not accounting advice",
+          "not personalized incorporation strategy",
+          "not universal business formation coverage",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "business_formation_reference",
+            "gold_claim_id": "gold.business_entrepreneurship.sba.business_plan",
+            "jurisdiction": "US",
+            "object_contains": [
+              "writing a business plan",
+              "public business-startup reference"
+            ],
+            "source_id": "sba.business_guide.start_business"
+          },
+          {
+            "claim_type": "business_formation_reference",
+            "gold_claim_id": "gold.business_entrepreneurship.sba.business_structure",
+            "jurisdiction": "US",
+            "object_contains": [
+              "choosing a business structure",
+              "separate legal, tax, or professional confirmation"
+            ],
+            "source_id": "sba.business_guide.start_business"
+          },
+          {
+            "claim_type": "public_program_reference",
+            "gold_claim_id": "gold.business_entrepreneurship.sba.funding_reference",
+            "jurisdiction": "US",
+            "object_contains": [
+              "public funding-reference context",
+              "not a financing guarantee"
+            ],
+            "source_id": "sba.business_guide.start_business"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not legal advice",
+        "not tax advice",
+        "not accounting advice",
+        "not a personalized incorporation strategy",
+        "not universal business formation coverage",
+        "state-specific requirements are excluded until separately reviewed"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "sba.business_guide.start_business"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "public_learning_resource",
+        "public_standard_reference",
+        "creative_metadata_reference"
+      ],
+      "domain": "creative_project_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_creative_commons_licenses_terms_and_policies_recheck",
+        "quarterly_w3c_standards_copyright_and_policies_recheck",
+        "quarterly_loc_primary_sources_page_and_legal_rights_recheck"
+      ],
+      "frontier_id": "creative_project_reference",
+      "goal_intent_classes": [
+        "creative_learning_reference",
+        "tool_or_standard_reference"
+      ],
+      "gold_set": {
+        "description": "Bounded creative-project public-reference gold set for Creative Commons license metadata, W3C standards-body references, and Library of Congress primary-sources learning reference coverage.",
+        "gold_set_id": "gold.creative_project_reference.cc_w3c_loc_public_reference.v1",
+        "non_claims": [
+          "not copyright permission",
+          "not license selection advice",
+          "not implementation advice",
+          "not source-use permission",
+          "not a final creative plan",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "creative_metadata_reference",
+            "gold_claim_id": "gold.creative.cc.license_list",
+            "jurisdiction": "global",
+            "object_contains": [
+              "Creative Commons publishes a public list of CC licenses",
+              "not copyright permission"
+            ],
+            "source_id": "creative-commons.licenses"
+          },
+          {
+            "claim_type": "public_standard_reference",
+            "gold_claim_id": "gold.creative.w3c.web_standards",
+            "jurisdiction": "global",
+            "object_contains": [
+              "W3C publishes web standards and drafts",
+              "not implementation advice"
+            ],
+            "source_id": "w3c.web-standards"
+          },
+          {
+            "claim_type": "public_learning_resource",
+            "gold_claim_id": "gold.creative.loc.primary_sources",
+            "jurisdiction": "US federal",
+            "object_contains": [
+              "Library of Congress publishes Getting Started with Primary Sources",
+              "not copyright clearance"
+            ],
+            "source_id": "loc.primary_sources"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "global",
+        "US federal"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "standards_body",
+        "official_institution"
+      ],
+      "non_claims": [
+        "not copyright permission",
+        "not license selection advice",
+        "not implementation advice",
+        "not patent advice",
+        "not source-use permission",
+        "not a final creative plan",
+        "not redistribution approval beyond listed sources",
+        "not outside legal approval"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "standards_body",
+        "official_institution"
+      ],
+      "source_ids": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "candidate_education_program_reference",
+        "candidate_institution_reference",
+        "credential_requirement"
+      ],
+      "domain": "education_credentialing",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "college_scorecard_release_quarterly_review"
+      ],
+      "frontier_id": "education_credentialing",
+      "goal_intent_classes": [
+        "education_program_reference",
+        "credential_context_reference"
+      ],
+      "gold_set": {
+        "gold_set_id": "gold.education_credentialing.public_institution_program_requirement.v1",
+        "non_claims": [
+          "not admissions advice",
+          "not a personalized degree plan",
+          "not universal credential coverage",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "candidate_institution_reference",
+            "gold_claim_id": "gold.education_credentialing.college_scorecard.berkeley.institution_reference",
+            "jurisdiction": "US",
+            "object_contains": [
+              "University of California, Berkeley",
+              "candidate public institution reference"
+            ],
+            "source_id": "college-scorecard.api"
+          },
+          {
+            "claim_type": "candidate_education_program_reference",
+            "gold_claim_id": "gold.education_credentialing.college_scorecard.berkeley.program_reference",
+            "jurisdiction": "US",
+            "object_contains": [
+              "Computer and Information Sciences, General",
+              "candidate public program reference"
+            ],
+            "source_id": "college-scorecard.api"
+          },
+          {
+            "claim_type": "credential_requirement",
+            "gold_claim_id": "gold.education_credentialing.west_point.computer_science.curriculum_reference",
+            "jurisdiction": "US federal",
+            "object_contains": [
+              "Computer Science major curriculum requirements",
+              "public institutional credential reference"
+            ],
+            "source_id": "westpoint.redbook.computer_science_major"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "internal_terms_review_approved",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "non_claims": [
+        "not admissions advice",
+        "not a personalized degree plan",
+        "not financial aid guidance",
+        "not credentialing authority"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution"
+      ],
+      "source_ids": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "public_financial_education",
+        "official_benefit_program_reference",
+        "tax_deadline_reference"
+      ],
+      "domain": "finance_public_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_irs_deadline_recheck_stale_critical_before_tax_use",
+        "quarterly_cfpb_financial_education_recheck",
+        "quarterly_usagov_benefits_recheck"
+      ],
+      "frontier_id": "finance_public_reference",
+      "goal_intent_classes": [
+        "financial_education_reference",
+        "benefit_program_reference",
+        "public_benefit_reference",
+        "public_benefits_reference"
+      ],
+      "gold_set": {
+        "description": "Bounded US finance public-reference gold set for tax deadline, public financial education, and benefits reference coverage.",
+        "gold_set_id": "gold.finance_public_reference.irs_cfpb_usagov_public_reference.v1",
+        "non_claims": [
+          "not investment advice",
+          "not tax advice",
+          "not legal advice",
+          "not a personalized financial plan",
+          "not benefit eligibility or approval",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "tax_deadline_reference",
+            "gold_claim_id": "gold.finance.irs.when_to_file",
+            "jurisdiction": "US",
+            "object_contains": [
+              "IRS When to File",
+              "not as tax advice"
+            ],
+            "source_id": "irs.when_to_file"
+          },
+          {
+            "claim_type": "public_financial_education",
+            "gold_claim_id": "gold.finance.cfpb.financial_education",
+            "jurisdiction": "US",
+            "object_contains": [
+              "Consumer Financial Protection Bureau",
+              "not as investment"
+            ],
+            "source_id": "cfpb.adult_financial_education"
+          },
+          {
+            "claim_type": "official_benefit_program_reference",
+            "gold_claim_id": "gold.finance.usagov.benefits",
+            "jurisdiction": "US",
+            "object_contains": [
+              "USA.gov",
+              "not a benefits eligibility guarantee"
+            ],
+            "source_id": "usa.gov.benefits"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government",
+        "regulated_body"
+      ],
+      "non_claims": [
+        "not investment advice",
+        "not tax advice",
+        "not legal advice",
+        "not a personalized financial plan",
+        "not benefit eligibility or approval",
+        "not account data storage",
+        "not transaction profiling"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "regulated_body"
+      ],
+      "source_ids": [
+        "irs.when_to_file",
+        "cfpb.adult_financial_education",
+        "usa.gov.benefits"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "public_health_guideline",
+        "exercise_taxonomy",
+        "wellness_safety_reference"
+      ],
+      "domain": "health_wellness_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_cdc_physical_activity_and_reuse_terms_recheck"
+      ],
+      "frontier_id": "health_wellness_reference",
+      "goal_intent_classes": [
+        "wellness_reference",
+        "fitness_safety_reference"
+      ],
+      "gold_set": {
+        "gold_set_id": "gold.health_wellness_reference.cdc_physical_activity_public_reference.v1",
+        "non_claims": [
+          "not medical advice",
+          "not diagnosis",
+          "not treatment",
+          "not emergency advice",
+          "not a personalized fitness plan",
+          "not universal health coverage",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "public_health_guideline",
+            "gold_claim_id": "gold.health_wellness_reference.cdc.adult_guideline_context",
+            "jurisdiction": "US",
+            "object_contains": [
+              "general adult aerobic and muscle-strengthening activity guideline context",
+              "not medical advice"
+            ],
+            "source_id": "cdc.physical-activity.basics"
+          },
+          {
+            "claim_type": "exercise_taxonomy",
+            "gold_claim_id": "gold.health_wellness_reference.cdc.activity_types",
+            "jurisdiction": "US",
+            "object_contains": [
+              "aerobic activity, muscle strengthening, and intensity",
+              "not as a personalized training prescription"
+            ],
+            "source_id": "cdc.physical-activity.basics"
+          },
+          {
+            "claim_type": "wellness_safety_reference",
+            "gold_claim_id": "gold.health_wellness_reference.cdc.health_benefits_context",
+            "jurisdiction": "US",
+            "object_contains": [
+              "general public wellness context",
+              "must not use it for diagnosis"
+            ],
+            "source_id": "cdc.physical-activity.basics"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not medical advice",
+        "not diagnosis",
+        "not a treatment plan",
+        "not emergency advice",
+        "not a personalized fitness plan",
+        "not universal health coverage",
+        "general CDC physical activity references only; condition-specific medical guidance remains excluded until separately reviewed"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "cdc.physical-activity.basics"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "public_health_statistical_context",
+        "public_statistical_reference"
+      ],
+      "domain": "health_wellness_reference_ca_statistics",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_source_and_terms_review"
+      ],
+      "frontier_id": "health_wellness_reference_ca_statistics",
+      "goal_intent_classes": [
+        "health_statistics_reference"
+      ],
+      "gold_set": {
+        "gold_set_id": "gold.health_wellness_reference_ca_statistics.statcan_table_13100974.v1",
+        "non_claims": [
+          "not medical advice",
+          "not diagnosis",
+          "not treatment planning",
+          "not a personalized health recommendation",
+          "not universal health statistics coverage",
+          "not release readiness"
+        ],
+        "required_claims": []
+      },
+      "gold_set_required": false,
+      "jurisdictions": [
+        "CA"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not medical advice",
+        "not diagnosis",
+        "not treatment planning",
+        "not a personalized health recommendation",
+        "not universal health statistics coverage",
+        "Statistics Canada table coverage is bounded to reviewed public statistical reference claims"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "official.statcan.table.13100974"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "public_rules_reference",
+        "safety_guidance_reference",
+        "learning_resource_reference"
+      ],
+      "domain": "hobbies_recreation",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_nps_health_safety_and_disclaimer_recheck"
+      ],
+      "frontier_id": "hobbies_recreation",
+      "goal_intent_classes": [
+        "hobby_learning_reference",
+        "recreation_safety_reference"
+      ],
+      "gold_set": {
+        "gold_set_id": "gold.hobbies_recreation.nps_health_safety_public_reference.v1",
+        "non_claims": [
+          "not emergency advice",
+          "not medical advice",
+          "not unsafe instructions",
+          "not a personalized recreation plan",
+          "not universal recreation coverage",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "safety_guidance_reference",
+            "gold_claim_id": "gold.hobbies_recreation.nps.trip_planning",
+            "jurisdiction": "US",
+            "object_contains": [
+              "trip planning and preparedness",
+              "not emergency advice"
+            ],
+            "source_id": "nps.recreation-safety"
+          },
+          {
+            "claim_type": "public_rules_reference",
+            "gold_claim_id": "gold.hobbies_recreation.nps.recreate_responsibly",
+            "jurisdiction": "US",
+            "object_contains": [
+              "recreating responsibly",
+              "not unsafe instructions"
+            ],
+            "source_id": "nps.recreation-safety"
+          },
+          {
+            "claim_type": "learning_resource_reference",
+            "gold_claim_id": "gold.hobbies_recreation.nps.health_safety_topics",
+            "jurisdiction": "US",
+            "object_contains": [
+              "public learning topics",
+              "general reference only"
+            ],
+            "source_id": "nps.recreation-safety"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not emergency advice",
+        "not medical advice",
+        "not unsafe instructions",
+        "not a personalized recreation plan",
+        "not restricted membership data",
+        "not universal recreation coverage",
+        "federal park recreation references only; sport-specific association rules remain excluded until separately reviewed"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "nps.recreation-safety"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "public_service_reference",
+        "maintenance_guidance_reference",
+        "safety_reference"
+      ],
+      "domain": "home_life_admin",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_ready_gov_kit_and_terms_recheck",
+        "quarterly_doe_energy_saver_and_web_policies_recheck",
+        "quarterly_usagov_home_repair_and_government_works_recheck"
+      ],
+      "frontier_id": "home_life_admin",
+      "goal_intent_classes": [
+        "home_admin_reference",
+        "home_preparedness_reference",
+        "home_energy_reference",
+        "local_service_reference"
+      ],
+      "gold_set": {
+        "description": "Bounded US home/life-admin public-reference gold set for preparedness, home energy guidance, and home repair public-service reference coverage.",
+        "gold_set_id": "gold.home_life_admin.ready_doe_usagov_public_reference.v1",
+        "non_claims": [
+          "not emergency advice",
+          "not unsafe repair instructions",
+          "not a household schedule",
+          "not a personalized home plan",
+          "not eligibility approval",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "safety_reference",
+            "gold_claim_id": "gold.home.ready.kit",
+            "jurisdiction": "US",
+            "object_contains": [
+              "Ready.gov publishes Build A Kit",
+              "not emergency response advice"
+            ],
+            "source_id": "ready.gov.kit"
+          },
+          {
+            "claim_type": "maintenance_guidance_reference",
+            "gold_claim_id": "gold.home.doe.energy_audits",
+            "jurisdiction": "US",
+            "object_contains": [
+              "home energy audits",
+              "not a contractor recommendation"
+            ],
+            "source_id": "energy.gov.energy_saver"
+          },
+          {
+            "claim_type": "maintenance_guidance_reference",
+            "gold_claim_id": "gold.home.doe.weatherization_topics",
+            "jurisdiction": "US",
+            "object_contains": [
+              "weatherization topics",
+              "not a diagnosis of a private home condition"
+            ],
+            "source_id": "energy.gov.energy_saver"
+          },
+          {
+            "claim_type": "public_service_reference",
+            "gold_claim_id": "gold.home.usagov.home_repair",
+            "jurisdiction": "US",
+            "object_contains": [
+              "government home repair assistance",
+              "not eligibility approval"
+            ],
+            "source_id": "usa.gov.home_repair"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not emergency advice",
+        "not unsafe repair instructions",
+        "not a household schedule",
+        "not private home data storage",
+        "not a personalized home plan",
+        "not eligibility approval or loan decision",
+        "not contractor advice"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "ready.gov.kit",
+        "energy.gov.energy_saver",
+        "usa.gov.home_repair"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "occupation_taxonomy",
+        "labor_market_context",
+        "research_topic_context"
+      ],
+      "domain": "occupation_foundation",
+      "excluded_sources": [
+        "usajobs.search"
+      ],
+      "freshness_slas": [
+        "track_release_quarterly_review",
+        "series_publication_schedule",
+        "monthly_snapshot_or_api_review"
+      ],
+      "frontier_id": "occupation_foundation",
+      "goal_intent_classes": [
+        "career_occupation_reference",
+        "skill_context_reference"
+      ],
+      "gold_set_required": false,
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government",
+        "scholarly_metadata"
+      ],
+      "non_claims": [
+        "not career advice",
+        "not a personalized job ranking",
+        "not universal occupation coverage"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "scholarly_metadata"
+      ],
+      "source_ids": [
+        "onet.database",
+        "bls.public.data.api",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "status_ceiling": "claim_graph_ready"
+    },
+    {
+      "claim_classes": [
+        "public_learning_reference",
+        "sensitive_wellness_reference",
+        "research_metadata_reference"
+      ],
+      "domain": "personal_growth",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck",
+        "monthly_openalex_personal_growth_metadata_and_api_governance_recheck"
+      ],
+      "frontier_id": "personal_growth",
+      "goal_intent_classes": [
+        "personal_growth_learning_reference",
+        "general_habit_science_reference"
+      ],
+      "gold_set_required": false,
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "legal_posture_required": "approved_internal_terms_review_for_pack_output",
+      "minimum_authority_classes": [
+        "official_institution",
+        "scholarly_metadata"
+      ],
+      "non_claims": [
+        "not mental health treatment",
+        "not diagnosis",
+        "not therapy",
+        "not emergency advice",
+        "not a cloud-personalized self-improvement plan",
+        "not a final personal-growth plan",
+        "not outside legal approval"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_institution",
+        "scholarly_metadata"
+      ],
+      "source_ids": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "constitutional_requirement",
+        "eligibility_requirement"
+      ],
+      "domain": "public_civic_requirements",
+      "excluded_sources": [
+        "wikidata.crosswalk"
+      ],
+      "freshness_slas": [
+        "stable_law_watch_quarterly_review"
+      ],
+      "frontier_id": "public_civic_requirements",
+      "goal_intent_classes": [
+        "public_civic_reference",
+        "government_requirement_reference"
+      ],
+      "gold_set": {
+        "gold_set_id": "gold.public_civic_requirements.us_presidential_eligibility.v1",
+        "non_claims": [
+          "not legal advice",
+          "not guaranteed eligibility",
+          "not universal government coverage",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "eligibility_requirement",
+            "gold_claim_id": "gold.public_civic_requirements.presidential_eligibility.age",
+            "jurisdiction": "US federal",
+            "object_contains": [
+              "minimum age requirement"
+            ],
+            "source_id": "nara.constitution.presidency"
+          },
+          {
+            "claim_type": "constitutional_requirement",
+            "gold_claim_id": "gold.public_civic_requirements.presidential_eligibility.citizenship_residency",
+            "jurisdiction": "US federal",
+            "object_contains": [
+              "citizenship",
+              "residence-duration"
+            ],
+            "source_id": "nara.constitution.presidency"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US federal"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not legal advice",
+        "not guaranteed eligibility",
+        "not universal government coverage"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "nara.constitution.presidency"
+      ],
+      "status_ceiling": "claim_graph_ready"
+    },
+    {
+      "claim_classes": [
+        "public_family_service_reference",
+        "public_education_reference",
+        "sensitive_support_reference"
+      ],
+      "domain": "relationships_family",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "quarterly_cdc_positive_parenting_and_reuse_terms_recheck",
+        "quarterly_acf_hmrf_and_digital_policy_recheck",
+        "quarterly_childwelfare_resources_and_policy_recheck"
+      ],
+      "frontier_id": "relationships_family",
+      "goal_intent_classes": [
+        "family_admin_reference",
+        "relationship_education_reference"
+      ],
+      "gold_set": {
+        "description": "Bounded US relationships/family public-reference gold set for family-service, family-education, and sensitive-support references.",
+        "gold_set_id": "gold.relationships_family.cdc_acf_childwelfare_public_reference.v1",
+        "non_claims": [
+          "not therapy",
+          "not diagnosis",
+          "not legal custody advice",
+          "not child protection advice",
+          "not emergency intervention",
+          "not personalized relationship judgment",
+          "not a personalized family plan",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "public_education_reference",
+            "gold_claim_id": "gold.relationships_family.cdc.positive_parenting",
+            "jurisdiction": "US",
+            "object_contains": [
+              "CDC Positive Parenting Tips",
+              "not therapy"
+            ],
+            "source_id": "cdc.positive_parenting"
+          },
+          {
+            "claim_type": "public_family_service_reference",
+            "gold_claim_id": "gold.relationships_family.acf.hmrf",
+            "jurisdiction": "US",
+            "object_contains": [
+              "Healthy Marriage public program reference",
+              "not therapy"
+            ],
+            "source_id": "acf.healthy_marriage_fatherhood"
+          },
+          {
+            "claim_type": "sensitive_support_reference",
+            "gold_claim_id": "gold.relationships_family.childwelfare.support",
+            "jurisdiction": "US",
+            "object_contains": [
+              "Child Welfare Information Gateway",
+              "not legal custody advice"
+            ],
+            "source_id": "childwelfare.family_support"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "non_claims": [
+        "not therapy",
+        "not diagnosis",
+        "not legal custody advice",
+        "not child protection advice",
+        "not emergency intervention",
+        "not personalized relationship judgment",
+        "not a personalized family plan",
+        "not private relationship data storage"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution"
+      ],
+      "source_ids": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "official_travel_requirement",
+        "public_safety_notice",
+        "relocation_admin_reference"
+      ],
+      "domain": "travel_relocation",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "strict_official_requirement_review_required"
+      ],
+      "frontier_id": "travel_relocation",
+      "goal_intent_classes": [
+        "travel_requirement_reference",
+        "relocation_admin_reference"
+      ],
+      "gold_set": {
+        "gold_set_id": "gold.travel_relocation.state_usagov_public_reference.v1",
+        "non_claims": [
+          "not visa advice",
+          "not legal advice",
+          "not emergency advice",
+          "not a safety guarantee",
+          "not a custom itinerary",
+          "not universal travel coverage",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "official_travel_requirement",
+            "gold_claim_id": "gold.travel_relocation.state.passport_application_help",
+            "jurisdiction": "US and destination-specific",
+            "object_contains": [
+              "U.S. passport application help",
+              "not visa advice"
+            ],
+            "source_id": "state.travel.public_travel"
+          },
+          {
+            "claim_type": "public_safety_notice",
+            "gold_claim_id": "gold.travel_relocation.state.travel_advisories",
+            "jurisdiction": "US and destination-specific",
+            "object_contains": [
+              "Travel Advisories",
+              "not emergency advice"
+            ],
+            "source_id": "state.travel.public_travel"
+          },
+          {
+            "claim_type": "relocation_admin_reference",
+            "gold_claim_id": "gold.travel_relocation.usagov.change_address",
+            "jurisdiction": "US",
+            "object_contains": [
+              "USPS mail forwarding",
+              "not address submission"
+            ],
+            "source_id": "usa.gov.change_address"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US",
+        "destination_specific"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not visa advice",
+        "not legal advice",
+        "not emergency advice",
+        "not a safety guarantee",
+        "not a custom itinerary",
+        "not universal travel or relocation coverage",
+        "country-specific visa and entry requirements remain excluded until separately reviewed"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "claim_classes": [
+        "civic_engagement_reference",
+        "public_dataset_scope_reference",
+        "volunteer_rate_reference"
+      ],
+      "domain": "volunteering_public_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "biennial_dataset_posting_context_quarterly_metadata_recheck"
+      ],
+      "frontier_id": "volunteering_public_reference",
+      "goal_intent_classes": [
+        "volunteering_public_reference",
+        "public_civic_life_reference"
+      ],
+      "gold_set": {
+        "gold_set_id": "gold.volunteering_public_reference.americorps_state_volunteer_rate.v1",
+        "non_claims": [
+          "not current volunteer opportunity availability",
+          "not eligibility advice",
+          "not legal advice",
+          "not personalized placement recommendation",
+          "not a personalized volunteering plan",
+          "not release readiness"
+        ],
+        "required_claims": [
+          {
+            "claim_type": "volunteer_rate_reference",
+            "gold_claim_id": "gold.volunteering.americorps.volunteer_rate",
+            "jurisdiction": "US",
+            "object_contains": [
+              "State Ranking by Volunteer Rate",
+              "not as a current opportunity listing"
+            ],
+            "source_id": "americorps.volunteer_rate_state"
+          },
+          {
+            "claim_type": "civic_engagement_reference",
+            "gold_claim_id": "gold.volunteering.americorps.civic_engagement",
+            "jurisdiction": "US",
+            "object_contains": [
+              "civic engagement trends",
+              "not as service-program legal advice"
+            ],
+            "source_id": "americorps.volunteer_rate_state"
+          },
+          {
+            "claim_type": "public_dataset_scope_reference",
+            "gold_claim_id": "gold.volunteering.americorps.dataset_scope",
+            "jurisdiction": "US",
+            "object_contains": [
+              "biennial posting context",
+              "not treat it as real-time volunteer opportunity availability"
+            ],
+            "source_id": "americorps.volunteer_rate_state"
+          }
+        ]
+      },
+      "gold_set_required": true,
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "pack_output_allowed",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not current volunteer opportunity availability",
+        "not eligibility advice",
+        "not legal advice",
+        "not a personalized placement recommendation",
+        "not a personalized volunteering plan",
+        "not universal volunteering coverage",
+        "not outside legal approval"
+      ],
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [
+        "americorps.volunteer_rate_state"
+      ],
+      "status_ceiling": "pack_staging_ready"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.coverageFrontierConfig.v1",
+  "schema_version": "1.0.0",
+  "updated_at": "2026-06-28T00:00:00Z"
+}

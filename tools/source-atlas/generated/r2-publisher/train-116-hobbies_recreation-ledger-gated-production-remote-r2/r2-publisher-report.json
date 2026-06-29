@@ -1,0 +1,581 @@
+{
+  "channel": "stable",
+  "checks": [
+    {
+      "issues": [],
+      "name": "pack_artifacts_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "object_keys_public",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "payloads_public_reference_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_license_slices_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "local_checksums_match_manifest",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_target_ledger_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "r2_environment_resolved_without_secret_values",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "remote_r2_public_reference_transport_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "upload_readback_checksums",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "current_pointer_after_readback_only",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T00:28:00Z",
+  "currentPointer": {
+    "channel": "stable",
+    "createdAt": "2026-06-29T00:28:00Z",
+    "dataClass": "public_freshness",
+    "environment": "production",
+    "kind": "ambitions.sourceAtlas.currentPackPointer.v1",
+    "lastKnownGoodKey": "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+    "manifestKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+    "manifestSHA256": "5a0ab1732e900c5b134e66458846f5b5f1efe4fae119f5049dcd89f82469946b",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not native app runtime readiness",
+      "not release readiness"
+    ],
+    "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+    "packSHA256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+    "packVersion": "20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "publishGate": "current pointer may update only after upload, readback, checksum, revocation, LKG, and rollback checks pass",
+    "revocationManifestKey": "source-atlas/v1/production/stable/hobbies_recreation/revocations.json",
+    "schemaVersion": 1
+  },
+  "environment": "production",
+  "executeRequested": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PackPublisherReport.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "tools/source-atlas/generated/production-finish-line-gate/train-114-current/01-internal-terms-approval/legal-terms-approval-packet.json",
+    "packetSHA256": "d09049549ab75f26edd1a96408d058adb54cb0f37ddcc27062f3781a23e01914",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "nps.recreation-safety"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "nps.recreation-safety",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "mode": "remote_r2",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "objectCount": 13,
+  "operation": {
+    "bucket": "ambitions-source-atlas-prod",
+    "createdAt": "2026-06-29T00:28:00Z",
+    "currentPointer": {
+      "actualSHA256": "43faab85ad785b54cc5b05bba23e85702b9673a8f8328b3686c9753bef771628",
+      "blockedUntilReadback": true,
+      "expectedSHA256": "43faab85ad785b54cc5b05bba23e85702b9673a8f8328b3686c9753bef771628",
+      "get": {
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      "issues": [],
+      "key": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+      "put": {
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/current.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      "updated": true
+    },
+    "dataClass": "public_r2_object_key",
+    "dryRun": false,
+    "executeRequested": true,
+    "executed": true,
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+    "mode": "remote_r2",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "not native app runtime readiness",
+      "not release readiness"
+    ],
+    "previousPointers": {
+      "current": {
+        "bytes": 1708,
+        "exists": true,
+        "get": {
+          "returnCode": 0,
+          "stderr": "",
+          "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+          "success": true
+        },
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+        "sha256": "01e7995e725dced65cb32ee114959129a06ae4ff6a843038df71dac1cc970207"
+      },
+      "lastKnownGood": {
+        "bytes": 1247,
+        "exists": true,
+        "get": {
+          "returnCode": 0,
+          "stderr": "",
+          "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+          "success": true
+        },
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+        "sha256": "0a124001fe47852e730f104966762282b85ce5df20652f8a04528cb9d0a817e5"
+      }
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "readbackResults": [
+      {
+        "actualSHA256": "c9cba5e51f01bc3b83e1a78907ae62ba80bbc3662b99685961be3952282f70e2",
+        "expectedSHA256": "c9cba5e51f01bc3b83e1a78907ae62ba80bbc3662b99685961be3952282f70e2",
+        "label": "adjudications",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/adjudications.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/adjudications.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "0082d93a5b0efa835a7f7d26ba2cea9127083866e23d4593a6d59962efb7b602",
+        "expectedSHA256": "0082d93a5b0efa835a7f7d26ba2cea9127083866e23d4593a6d59962efb7b602",
+        "label": "attribution",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/attribution.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/attribution.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "f63c630378e8a3c6fa2c62c0a3b077dcb315b1eae86bd1d8bf4a5d9e51e5b0d0",
+        "expectedSHA256": "f63c630378e8a3c6fa2c62c0a3b077dcb315b1eae86bd1d8bf4a5d9e51e5b0d0",
+        "label": "claims",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/claims.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "af0a6f0ccec1920bebdb1faa42b1944a4dd65d304d6aa23f67d539600c7e6cdf",
+        "expectedSHA256": "af0a6f0ccec1920bebdb1faa42b1944a4dd65d304d6aa23f67d539600c7e6cdf",
+        "label": "coverage",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/coverage.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/coverage.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "3e968c151a72e9f7e85013d1636eea2f1518cc72dcc8722f993b88aa641d5c48",
+        "expectedSHA256": "3e968c151a72e9f7e85013d1636eea2f1518cc72dcc8722f993b88aa641d5c48",
+        "label": "entities",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/entities.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/entities.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "53e2e825d8a43266450762d6c4bdc820bab4ff15624ef08fbdd0e6bc00ee665c",
+        "expectedSHA256": "53e2e825d8a43266450762d6c4bdc820bab4ff15624ef08fbdd0e6bc00ee665c",
+        "label": "freshness",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/freshness.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/freshness.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "fb6127cbb6762282ae433a5deb419c0ee69c102544005b3a6751998b392e06f7",
+        "expectedSHA256": "fb6127cbb6762282ae433a5deb419c0ee69c102544005b3a6751998b392e06f7",
+        "label": "licenses",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/licenses.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/licenses.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "0a124001fe47852e730f104966762282b85ce5df20652f8a04528cb9d0a817e5",
+        "expectedSHA256": "0a124001fe47852e730f104966762282b85ce5df20652f8a04528cb9d0a817e5",
+        "label": "lkg",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "5a0ab1732e900c5b134e66458846f5b5f1efe4fae119f5049dcd89f82469946b",
+        "expectedSHA256": "5a0ab1732e900c5b134e66458846f5b5f1efe4fae119f5049dcd89f82469946b",
+        "label": "manifest",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "bb2b9e174bc37e2e733d4f10cb335658c87ba92e5d50f6238151aa542715925d",
+        "expectedSHA256": "bb2b9e174bc37e2e733d4f10cb335658c87ba92e5d50f6238151aa542715925d",
+        "label": "nonClaims",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/non_claims.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/non_claims.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+        "expectedSHA256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+        "label": "pack",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "5ad5144d75edf01a70b99d40fa1abc6e691936142d8812200aa7ec0cb7748026",
+        "expectedSHA256": "5ad5144d75edf01a70b99d40fa1abc6e691936142d8812200aa7ec0cb7748026",
+        "label": "revocations",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/revocations.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/revocations.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      },
+      {
+        "actualSHA256": "170c5ba1464c29454399bbec143913b640bda1a3005087ada3a0ee64ea6b173b",
+        "expectedSHA256": "170c5ba1464c29454399bbec143913b640bda1a3005087ada3a0ee64ea6b173b",
+        "label": "sources",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/sources.json",
+        "passed": true,
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/sources.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+        "success": true
+      }
+    ],
+    "readbackRoot": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/remote-readback",
+    "remoteR2": true,
+    "schemaVersion": 1,
+    "success": true,
+    "uploadResults": [
+      {
+        "label": "adjudications",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/adjudications.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/adjudications.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "attribution",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/attribution.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/attribution.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "claims",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/claims.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "coverage",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/coverage.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/coverage.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "entities",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/entities.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/entities.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "freshness",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/freshness.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/freshness.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "licenses",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/licenses.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/licenses.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "lkg",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/lkg.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/lkg.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "manifest",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "nonClaims",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/non_claims.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/non_claims.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "pack",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/pack.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "revocations",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/revocations.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/revocations.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      },
+      {
+        "label": "sources",
+        "objectKey": "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/sources.json",
+        "returnCode": 0,
+        "stderr": "",
+        "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nCreating object \"source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/sources.json\" in bucket \"ambitions-source-atlas-prod\".\nUpload complete.\n",
+        "success": true
+      }
+    ]
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/closeout.md",
+    "currentPointer": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/current-pointer.json",
+    "productionTargetLedgerGate": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/production-target-ledger-gate.json",
+    "report": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json",
+    "requestPrivacy": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-request-privacy-report.json",
+    "uploadReadback": "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-upload-readback-report.json"
+  },
+  "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionR2Uploaded": true,
+  "productionTargetLedgerGate": {
+    "allowedClaims": [
+      "bounded_production_target_for_configured_frontiers",
+      "bounded_production_target_per_ready_frontier"
+    ],
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.productionTargetLedgerActivationGate.v1",
+    "ledgerID": "source-atlas/production-target-ledger/fbc71d15fa21f502",
+    "ledgerPath": "tools/source-atlas/generated/production-target-ledger/train-104-current-production-target/production-target-ledger.json",
+    "missingDomains": [],
+    "nonClaims": [
+      "not literal universal coverage",
+      "not full Source Atlas Green",
+      "not Release Green",
+      "not outside legal approval",
+      "not final user plans, schedules, or Steps"
+    ],
+    "overallReadinessStatus": "configured_frontiers_bounded_production_target_ready",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "readyDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation"
+    ],
+    "requestedDomains": [
+      "hobbies_recreation"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "r2Environment": {
+    "bucket": "ambitions-source-atlas-prod",
+    "bucketConfigured": true,
+    "bucketEnv": "SOURCE_ATLAS_R2_PRODUCTION_BUCKET",
+    "bucketSource": "explicit",
+    "credentialEnvNamesPresent": [
+      "CLOUDFLARE_API_TOKEN",
+      "CLOUDFLARE_R2_ACCESS_KEY_ID",
+      "CLOUDFLARE_R2_SECRET_ACCESS_KEY"
+    ],
+    "credentialsAvailable": true,
+    "envFilesLoaded": [
+      "tools/source-atlas/foundry/.env"
+    ],
+    "environment": "production",
+    "kind": "ambitions.sourceAtlas.r2EnvironmentResolution.v1",
+    "prefixEnv": "SOURCE_ATLAS_R2_PRODUCTION_PREFIX",
+    "schemaVersion": 1,
+    "secretValuesPrinted": false,
+    "wranglerInstalled": true,
+    "wranglerWhoami": false
+  },
+  "realR2CredentialsUsed": true,
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; R2 publisher tooling only",
+  "status": "Source Green for R2 publisher gate harness",
+  "valid": true,
+  "versionID": "source-atlas-r2-publisher-train-10"
+}

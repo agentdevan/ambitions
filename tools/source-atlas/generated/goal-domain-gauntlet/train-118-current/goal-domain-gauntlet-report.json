@@ -1,0 +1,731 @@
+{
+  "allowedClaims": [
+    "representative_goal_domain_gauntlet_green",
+    "configured_frontier_goal_domain_runtime_routing",
+    "unknown_public_reference_domains_candidate_only"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "independent_accessibility_green",
+    "literal_universal_coverage",
+    "native_device_green",
+    "outside_legal_approval",
+    "release_green",
+    "source_atlas_private_goal_text_processing"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "frontier_catalog_nonempty",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "every_configured_frontier_has_representative_case",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "configured_cases_route_to_current_public_reference_runtime",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "unknown_cases_remain_candidate_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "private_context_rejected_without_persistent_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_boundary",
+      "passed": true
+    }
+  ],
+  "configuredCases": [
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.e6c09bedbdb1761b",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "business_formation_reference",
+        "public_program_reference"
+      ],
+      "domainID": "business_entrepreneurship",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "business_formation_reference",
+        "entrepreneurship_public_program_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 3,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.3464e987476f86fb",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "creative_metadata_reference",
+        "public_learning_resource",
+        "public_standard_reference"
+      ],
+      "domainID": "creative_project_reference",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "creative_learning_reference",
+        "tool_or_standard_reference"
+      ],
+      "jurisdictions": [
+        "US federal",
+        "global"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_institution",
+        "standards_body"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 3,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.fe7633c03e24b723",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "candidate_education_program_reference",
+        "candidate_institution_reference",
+        "credential_requirement"
+      ],
+      "domainID": "education_credentialing",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "credential_context_reference",
+        "education_program_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government",
+        "official_institution"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 8,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.8a1ae8328e1e1eca",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "official_benefit_program_reference",
+        "public_financial_education",
+        "tax_deadline_reference"
+      ],
+      "domainID": "finance_public_reference",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "benefit_program_reference",
+        "financial_education_reference",
+        "public_benefit_reference",
+        "public_benefits_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government",
+        "regulated_body"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 3,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.cefcfde934d63ee6",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "exercise_taxonomy",
+        "public_health_guideline",
+        "wellness_safety_reference"
+      ],
+      "domainID": "health_wellness_reference",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "fitness_safety_reference",
+        "wellness_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 3,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.23650cbc43819b96",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "public_health_statistical_context",
+        "public_statistical_reference"
+      ],
+      "domainID": "health_wellness_reference_ca_statistics",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "health_statistics_reference"
+      ],
+      "jurisdictions": [
+        "CA"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 2,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.db7538234576ff0d",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "learning_resource_reference",
+        "public_rules_reference",
+        "safety_guidance_reference"
+      ],
+      "domainID": "hobbies_recreation",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "hobby_learning_reference",
+        "recreation_safety_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 3,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.bf3318709d2393e8",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "maintenance_guidance_reference",
+        "public_service_reference",
+        "safety_reference"
+      ],
+      "domainID": "home_life_admin",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "home_admin_reference",
+        "home_energy_reference",
+        "home_preparedness_reference",
+        "local_service_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 4,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.de365242e8d3a3cf",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "labor_market_context",
+        "occupation_taxonomy",
+        "research_topic_context"
+      ],
+      "domainID": "occupation_foundation",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "career_occupation_reference",
+        "skill_context_reference"
+      ],
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government",
+        "scholarly_metadata"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 26,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.7159bae66717febb",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "public_learning_reference",
+        "research_metadata_reference",
+        "sensitive_wellness_reference"
+      ],
+      "domainID": "personal_growth",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "general_habit_science_reference",
+        "personal_growth_learning_reference"
+      ],
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_institution",
+        "scholarly_metadata"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 3,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.14c906939af7a7da",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "constitutional_requirement",
+        "eligibility_requirement"
+      ],
+      "domainID": "public_civic_requirements",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "government_requirement_reference",
+        "public_civic_reference"
+      ],
+      "jurisdictions": [
+        "US federal"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 2,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.4556c17cd9e9fe8c",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "public_education_reference",
+        "public_family_service_reference",
+        "sensitive_support_reference"
+      ],
+      "domainID": "relationships_family",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "family_admin_reference",
+        "relationship_education_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government",
+        "official_institution"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 5,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ]
+    },
+    {
+      "blockers": [],
+      "candidateOnly": false,
+      "caseID": "source_atlas.goal_domain_case.0e44996e128f9059",
+      "caseType": "configured_public_reference_frontier",
+      "claimClasses": [
+        "official_travel_requirement",
+        "public_safety_notice",
+        "relocation_admin_reference"
+      ],
+      "domainID": "travel_relocation",
+      "expectedRoute": "current_configured_public_reference_runtime",
+      "finalOutputGenerated": false,
+      "intentClasses": [
+        "relocation_admin_reference",
+        "travel_requirement_reference"
+      ],
+      "jurisdictions": [
+        "US",
+        "destination_specific"
+      ],
+      "ledgerReady": true,
+      "localOnlyCompositionRequired": true,
+      "minimumAuthorityClasses": [
+        "official_government"
+      ],
+      "nativeRuntimeProofSupplied": true,
+      "nativeRuntimeReady": true,
+      "nonClaims": [
+        "not a final plan",
+        "not a final schedule",
+        "not a Step generator",
+        "not private-context processing by Source Atlas"
+      ],
+      "packableClaimCount": 3,
+      "passed": true,
+      "sourceAtlasReceivesPrivateContext": false,
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ]
+    }
+  ],
+  "createdAt": "2026-06-28T22:06:12Z",
+  "evidencePaths": {
+    "arbitraryDomainGate": "docs/qa/source-atlas/source-atlas-arbitrary-domain-handling-gate-train-115.json",
+    "frontierConfig": "tools/source-atlas/frontier/coverage-frontiers.json",
+    "nativeRuntimeReport": "docs/qa/source-atlas/native/source-atlas-native-runtime-current-proof-train-117.json",
+    "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-116.json"
+  },
+  "gauntletID": "source_atlas.goal_domain_gauntlet.a3d0b5b3a17add5f",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainGauntlet.v1",
+  "nonClaims": [
+    "representative configured-frontier gauntlet only",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not native physical-device proof",
+    "not independent accessibility proof",
+    "not private goal-text processing by Source Atlas",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "report": "991e658bd71b49c82041d30b42fa9e217445e828e458e552d3972f1f3b89d187",
+    "reportPayload": "a4b04cc20b400dc290a2e31fcef35acff7fa1bc52d03c40d4b363053a103649a"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/goal-domain-gauntlet/train-118-current/closeout.md",
+    "markdown": "tools/source-atlas/generated/goal-domain-gauntlet/train-118-current/goal-domain-gauntlet-report.md",
+    "report": "tools/source-atlas/generated/goal-domain-gauntlet/train-118-current/goal-domain-gauntlet-report.json"
+  },
+  "overallReadinessStatus": "representative_goal_domain_gauntlet_green",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "privateContextProbe": {
+    "persistentArtifactWritten": false,
+    "privacyIssueCount": 2,
+    "rawProbePersisted": false,
+    "rejectedWithoutPersistentArtifact": true
+  },
+  "recordCounts": {
+    "configuredCasesBlocked": 0,
+    "configuredCasesPassed": 13,
+    "configuredFrontiers": 13,
+    "configuredGauntletCases": 13,
+    "finalOutputsGenerated": 0,
+    "privacyIssues": 0,
+    "unknownCasesBlocked": 0,
+    "unknownCasesCandidateOnly": 3,
+    "unknownProbeCases": 3
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; representative configured-frontier goal-domain gauntlet only",
+  "status": "Source Green for representative configured goal-domain gauntlet",
+  "unknownCases": [
+    {
+      "blockers": [],
+      "candidateOnly": true,
+      "caseID": "source_atlas.unknown_goal_domain_case.f827a418091390d1",
+      "caseType": "unknown_public_reference_candidate",
+      "claimsEmitted": 0,
+      "domainID": "new_public_reference_domain",
+      "expectedRoute": "candidate_frontier_intake_only",
+      "finalOutputGenerated": false,
+      "localOnlyCompositionRequired": true,
+      "nativeActivationOperations": 0,
+      "nonClaims": [
+        "not source authority",
+        "not pack ready",
+        "not R2 publish ready",
+        "not native activation ready"
+      ],
+      "passed": true,
+      "productionWrites": 0,
+      "r2PublishOperations": 0,
+      "sourceAtlasReceivesPrivateContext": false
+    },
+    {
+      "blockers": [],
+      "candidateOnly": true,
+      "caseID": "source_atlas.unknown_goal_domain_case.04dafc93b8c24498",
+      "caseType": "unknown_public_reference_candidate",
+      "claimsEmitted": 0,
+      "domainID": "public_reference_domain_not_yet_reviewed",
+      "expectedRoute": "candidate_frontier_intake_only",
+      "finalOutputGenerated": false,
+      "localOnlyCompositionRequired": true,
+      "nativeActivationOperations": 0,
+      "nonClaims": [
+        "not source authority",
+        "not pack ready",
+        "not R2 publish ready",
+        "not native activation ready"
+      ],
+      "passed": true,
+      "productionWrites": 0,
+      "r2PublishOperations": 0,
+      "sourceAtlasReceivesPrivateContext": false
+    },
+    {
+      "blockers": [],
+      "candidateOnly": true,
+      "caseID": "source_atlas.unknown_goal_domain_case.4d49661955d79feb",
+      "caseType": "unknown_public_reference_candidate",
+      "claimsEmitted": 0,
+      "domainID": "unrepresented_public_reference_domain",
+      "expectedRoute": "candidate_frontier_intake_only",
+      "finalOutputGenerated": false,
+      "localOnlyCompositionRequired": true,
+      "nativeActivationOperations": 0,
+      "nonClaims": [
+        "not source authority",
+        "not pack ready",
+        "not R2 publish ready",
+        "not native activation ready"
+      ],
+      "passed": true,
+      "productionWrites": 0,
+      "r2PublishOperations": 0,
+      "sourceAtlasReceivesPrivateContext": false
+    }
+  ],
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-gauntlet-train-118"
+}

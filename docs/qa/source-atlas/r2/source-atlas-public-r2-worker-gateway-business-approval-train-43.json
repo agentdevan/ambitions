@@ -1,0 +1,45 @@
+{
+  "allowed_object_keys": [
+    "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+    "source-atlas/v1/production/stable/business_entrepreneurship/lkg.json",
+    "source-atlas/v1/production/stable/business_entrepreneurship/revocations.json",
+    "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json",
+    "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/pack.json"
+  ],
+  "created_at": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.publicR2WorkerGatewayApproval.v1",
+  "non_claims": [
+    "not outside legal approval",
+    "not release readiness",
+    "not App Store readiness",
+    "not broad runtime Green",
+    "not universal coverage",
+    "not private graph storage",
+    "not final user plan, schedule, or Step generation",
+    "not a public browsing surface",
+    "not legal advice",
+    "not tax advice"
+  ],
+  "required_controls": [
+    "GET and HEAD only",
+    "no query string or URL fragment",
+    "exact object-key allowlist",
+    "private marker rejection",
+    "public/reference response headers",
+    "no claims, sources, or auxiliary slices exposed through Worker allowlist"
+  ],
+  "schema_version": "1.0.0",
+  "status": "approved_for_bounded_public_business_gateway_allowlist",
+  "train": "43",
+  "userAuthorizationBasis": [
+    "User authorized work needed to get Source Atlas Green in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage claim areas.",
+    "User asked to continue fast mode toward Source Atlas completion.",
+    "This approval is limited to the bounded SBA public business guide reference pack."
+  ],
+  "worker": {
+    "name": "ambitions-source-atlas-public-gateway",
+    "r2_binding": "SOURCE_ATLAS_BUCKET",
+    "r2_bucket": "ambitions-source-atlas-prod",
+    "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev"
+  }
+}

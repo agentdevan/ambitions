@@ -1,0 +1,149 @@
+{
+  "channel": "stable",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "dataClass": "public_r2_object_key",
+  "dryRun": true,
+  "environment": "production",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "dry-run only; no R2 upload or production promotion was performed"
+  ],
+  "objects": [
+    {
+      "bytes": 1165,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "adjudications",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/adjudications.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/adjudications.json",
+      "sha256": "5d896daec7e0a39e8bd99fe95d5caa5826ebad6dc771b39e0b3788fe1acc500f"
+    },
+    {
+      "bytes": 1055,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "attribution",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/attribution.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/attribution.json",
+      "sha256": "89a1b83e03821c68db3e746034d688370350439a1bd90f63f1876883eb0fe5a7"
+    },
+    {
+      "bytes": 7367,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "claims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/claims.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/claims.json",
+      "sha256": "bd2ecbb35aec98173b5f4785ae426de9dab188a3dd00bb3c17b97aa7934127e1"
+    },
+    {
+      "bytes": 4100,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "coverage",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/coverage.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/coverage.json",
+      "sha256": "ef408777ad802c07f11bd061dad758c44b4c619c895a63968008c84fea183942"
+    },
+    {
+      "bytes": 1752,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "entities",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/entities.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/entities.json",
+      "sha256": "865585dff2a51967978086f23979346229e285838a43a686127a9488a55b0d6b"
+    },
+    {
+      "bytes": 1593,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "freshness",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/freshness.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/freshness.json",
+      "sha256": "ce0d85406696ef7544c7e3a3c6199981a3b3c007a4f71b186a0949d1a9f19825"
+    },
+    {
+      "bytes": 1156,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "licenses",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/licenses.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/licenses.json",
+      "sha256": "0c35f946db5ad17f9b85df0e865e6bfef7250867168653c8625d945d75608bbe"
+    },
+    {
+      "bytes": 1268,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "lkg",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/lkg.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/lkg.json",
+      "sha256": "5e29adade31c1c83454640af3ccc6b068b663aa906f95f92746a91fd0193b431"
+    },
+    {
+      "bytes": 8819,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "manifest",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/manifest.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json",
+      "sha256": "1b68d185137aad5fa89a23f9fcb94d85b2c9dcbe3975d445157a47eeda23f9fb"
+    },
+    {
+      "bytes": 1315,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "nonClaims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/non_claims.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/non_claims.json",
+      "sha256": "1302b1db39b5cc39a748f2ffd6a1f521cba1d5416d70feda4b594bdd59d7149e"
+    },
+    {
+      "bytes": 16256,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "pack",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/pack.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/pack.json",
+      "sha256": "04d9eaf6f96b1271982a356664a570c74ed946e3145be96bcf636e7f1e561af6"
+    },
+    {
+      "bytes": 1413,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "revocations",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/revocations.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/revocations.json",
+      "sha256": "bdb2d5daae988b2ac8dc66fd514f56c44c543aa0a2c26706c3da6aed49749fec"
+    },
+    {
+      "bytes": 1325,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "sources",
+      "localPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/sources.json",
+      "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/sources.json",
+      "sha256": "fdf5eee5ca270b3836855220b2b1783b835cdc4ebe6cb24e5efc3fee3475b837"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/rollback-plan.json",
+  "schemaVersion": 1,
+  "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+  "wouldUpload": false
+}

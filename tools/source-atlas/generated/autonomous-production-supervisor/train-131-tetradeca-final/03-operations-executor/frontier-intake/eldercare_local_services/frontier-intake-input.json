@@ -1,0 +1,63 @@
+{
+  "domainProposals": [
+    {
+      "candidate_sources": [
+        {
+          "api_docs_url": "https://catalog.data.gov/api/3/",
+          "authority_class_guess": "public_catalog",
+          "claim_class_guess": [
+            "public_reference",
+            "public_requirement_reference"
+          ],
+          "dataset_url": "https://catalog.data.gov/dataset",
+          "declared_jurisdiction": "US",
+          "declared_license": "",
+          "declared_rights": "",
+          "discovery_method": "executor_seed",
+          "distribution_urls": [],
+          "publisher_name": "Data.gov Catalog",
+          "publisher_url": "https://catalog.data.gov/",
+          "redistribution_guess": "terms_sensitive",
+          "rights_url": "",
+          "source_class_guess": "public_catalog",
+          "terms_url": "https://www.data.gov/privacy-policy/"
+        }
+      ],
+      "claim_classes": [
+        "public_reference",
+        "public_requirement_reference"
+      ],
+      "domain": "eldercare_local_services",
+      "freshness_slas": [
+        "90d reference metadata",
+        "annual source-lane review"
+      ],
+      "frontier_id": "eldercare_local_services",
+      "goal_intent_classes": [
+        "eldercare_local_services"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "non_claims": [
+        "candidate frontier work order only",
+        "not claim output",
+        "not pack output",
+        "not R2 readiness",
+        "human source-lane and legal/API review required"
+      ],
+      "proposal_id": "frontier_intake_proposal.be296ff57442ff4f",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "standards_body",
+        "public_catalog"
+      ]
+    }
+  ]
+}

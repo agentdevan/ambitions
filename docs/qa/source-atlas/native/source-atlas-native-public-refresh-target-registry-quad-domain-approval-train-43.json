@@ -1,0 +1,36 @@
+{
+  "approvedDomains": [
+    "business_entrepreneurship",
+    "education_credentialing",
+    "occupation_foundation",
+    "public_civic_requirements"
+  ],
+  "approvalStatus": "approved_for_active_public_refresh_target_metadata_for_four_bounded_domains",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.nativePublicRefreshTargetRegistryApproval.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store readiness",
+    "not broad Runtime Green",
+    "not universal coverage",
+    "not background execution proof",
+    "not account or entitlement readiness",
+    "not final user plan, schedule, or Step generation"
+  ],
+  "privacyBoundary": {
+    "proof": "No private user context, goals, captures, schedules, proof, receipts, account IDs, device IDs, or private life graph fields are included in native refresh target metadata.",
+    "requestShape": "Native targets identify only app version, environment, channel, domain, schema version, public locale, and target public pack ID."
+  },
+  "publisherEvidence": [
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-publisher-report.json",
+    "tools/source-atlas/generated/r2-publisher/train-37-civic-production-remote-r2/r2-publisher-report.json",
+    "tools/source-atlas/generated/r2-publisher/train-42-education-production-remote-r2/r2-publisher-report.json",
+    "tools/source-atlas/generated/r2-publisher/train-43-business-production-remote-r2/r2-publisher-report.json"
+  ],
+  "schemaVersion": 1,
+  "userAuthorizationBasis": [
+    "User authorized work needed to get Source Atlas Green in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage claim areas.",
+    "This approval activates public refresh target metadata for four bounded domains only."
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "coverage": {
+    "authority_coverage": {
+      "complete": true,
+      "missing": [],
+      "present": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "required": [
+        "official_institution",
+        "standards_body"
+      ]
+    },
+    "blocked_claim_count": 0,
+    "candidate_only_count": 0,
+    "claim_classes": [
+      "creative_metadata_reference",
+      "public_learning_resource",
+      "public_standard_reference"
+    ],
+    "conflict_status": "no_conflict_detected",
+    "covered_claim_classes": [
+      "creative_metadata_reference",
+      "public_learning_resource",
+      "public_standard_reference"
+    ],
+    "domain": "creative_project_reference",
+    "freshness_compliance": {
+      "claimCount": 3,
+      "complete": true,
+      "freshCount": 3,
+      "percent": 1.0
+    },
+    "frontier_id": "creative_project_reference",
+    "goal_intent_classes": [
+      "creative_learning_reference",
+      "tool_or_standard_reference"
+    ],
+    "gold_set": {
+      "goldSetID": "gold.creative_project_reference.cc_w3c_loc_public_reference.v1",
+      "matchedCount": 3,
+      "matches": [
+        {
+          "claimID": "canonical_claim.49099b83a7471fcc",
+          "claimType": "creative_metadata_reference",
+          "goldClaimID": "gold.creative.cc.license_list",
+          "jurisdiction": "global",
+          "sourceID": "creative-commons.licenses"
+        },
+        {
+          "claimID": "canonical_claim.4976b4128f0dc75a",
+          "claimType": "public_learning_resource",
+          "goldClaimID": "gold.creative.loc.primary_sources",
+          "jurisdiction": "US federal",
+          "sourceID": "loc.primary_sources"
+        },
+        {
+          "claimID": "canonical_claim.0e6204e9b9b2ab39",
+          "claimType": "public_standard_reference",
+          "goldClaimID": "gold.creative.w3c.web_standards",
+          "jurisdiction": "global",
+          "sourceID": "w3c.web-standards"
+        }
+      ],
+      "missing": [],
+      "nonClaims": [
+        "not Release Green",
+        "not a final creative plan",
+        "not copyright permission",
+        "not final user plans, schedules, or Steps",
+        "not implementation advice",
+        "not legal advice",
+        "not license selection advice",
+        "not release readiness",
+        "not source-use permission",
+        "not universal coverage"
+      ],
+      "required": true,
+      "requiredCount": 3,
+      "schemaVersion": 1,
+      "status": "passed",
+      "versionID": "source-atlas-gold-set-evaluator-train-40"
+    },
+    "gold_set_status": "passed",
+    "jurisdictions": [
+      "global",
+      "US federal"
+    ],
+    "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+    "legal_posture_completeness": {
+      "complete": true,
+      "completeCount": 3,
+      "laneCount": 3,
+      "percent": 1.0
+    },
+    "missing_claim_classes": [],
+    "non_claims": [
+      "not R2 release readiness",
+      "not a final creative plan",
+      "not a final user plan, schedule, or Step generator",
+      "not a private user-data backend",
+      "not accessibility, privacy, or legal approval",
+      "not an official legal, medical, financial, or admissions decision",
+      "not copyright permission",
+      "not full Source Atlas Green",
+      "not implementation advice",
+      "not license selection advice",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not patent advice",
+      "not private life graph storage",
+      "not production R2 readiness",
+      "not redistribution approval beyond listed sources",
+      "not runtime recommendation proof by itself",
+      "not source-use permission",
+      "not universal goal coverage"
+    ],
+    "packable_claim_count": 3,
+    "provenance_completeness": {
+      "claimCount": 3,
+      "complete": true,
+      "completeTupleCount": 3,
+      "packableClaimCount": 3,
+      "packableCompleteTupleCount": 3,
+      "packablePercent": 1.0
+    },
+    "restricted_exclusions": [],
+    "schemaVersion": 1,
+    "source_lanes": [
+      "creative-commons.licenses",
+      "loc.primary_sources",
+      "w3c.web-standards"
+    ],
+    "status": "claim_graph_ready",
+    "status_ceiling": "pack_staging_ready"
+  }
+}

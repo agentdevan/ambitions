@@ -1,0 +1,495 @@
+{
+  "adapterID": "cdc_positive_parenting_reference_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_cdc_positive_parenting_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_parenting_education_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_family_education_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.e8fc5123a09f1439",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "CDC Positive Parenting Tips public reference pages",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "relationships_family_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.41babdecdd4148b7",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "positive parenting tips",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "relationships_family_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.dcdc5a47ff05414b",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "child development family context",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.4d4fcb4dfd38ff4f",
+      "claimType": "public_education_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly CDC positive parenting page and reuse terms re-review",
+      "id": "claim.eca9eccaa792a46a",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.cdc.gov/other/agencymaterials.html",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "cdc.positive_parenting",
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.cdc.gov/child-development/positive-parenting-tips/index.html",
+      "state": "source_backed",
+      "text": "CDC Positive Parenting Tips publishes age-based public parenting education context for general family reference only, not therapy, diagnosis, legal custody advice, a personalized parenting plan, or a judgment about a private relationship.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.263d9a5dec1c680a",
+      "claimType": "sensitive_support_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly CDC positive parenting page and reuse terms re-review",
+      "id": "claim.b2255bcfed66aec2",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.cdc.gov/other/agencymaterials.html",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "cdc.positive_parenting",
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.cdc.gov/child-development/positive-parenting-tips/index.html",
+      "state": "source_backed",
+      "text": "CDC child development and positive parenting reference material can support local source inspection for general family context, not clinical treatment, emergency advice, child protection decisions, custody advice, or a personalized family assessment.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "cdc_positive_parenting_reference_adapter",
+    "atomCount": 3,
+    "claimCount": 2,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "relationships_family",
+    "edgeCount": 2,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 2,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "cdc.positive_parenting",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "public_education_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateEmergencyAdvice": true,
+      "doesNotCreateLegalCustodyAdvice": true,
+      "doesNotCreatePersonalizedParentingPlan": true,
+      "doesNotCreateRelationshipJudgment": true,
+      "doesNotCreateTherapy": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.relationshipsFamilyCoverage.v1",
+      "label": "CDC positive parenting public education reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "cdc.positive_parenting",
+      "subject": "relationships_family.cdc_positive_parenting_tips"
+    },
+    {
+      "claimType": "sensitive_support_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateEmergencyAdvice": true,
+      "doesNotCreateLegalCustodyAdvice": true,
+      "doesNotCreatePersonalizedParentingPlan": true,
+      "doesNotCreateRelationshipJudgment": true,
+      "doesNotCreateTherapy": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.relationshipsFamilyCoverage.v1",
+      "label": "CDC child development family support reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "cdc.positive_parenting",
+      "subject": "relationships_family.cdc_child_development_context"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "relationships_family",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.e8fc5123a09f1439",
+      "id": "edge.df70d7a617aff1fe",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_family_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "toAtomID": "atom.41babdecdd4148b7",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.e8fc5123a09f1439",
+      "id": "edge.d82f3bd1ff126a31",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_family_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "toAtomID": "atom.dcdc5a47ff05414b",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.e8fc5123a09f1439",
+        "atom.41babdecdd4148b7",
+        "atom.dcdc5a47ff05414b"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.df70d7a617aff1fe",
+        "edge.d82f3bd1ff126a31"
+      ],
+      "id": "lattice.d72b6a66774e9cb0",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "cdc_positive_parenting_reference_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "relationships_family",
+      "id": "pack_candidate.d4ac7890af9b8e9e",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 3,
+        "claims": 2,
+        "crosswalks": 0,
+        "edges": 2,
+        "requirements": 2
+      },
+      "schemaVersion": 1,
+      "sourceID": "cdc.positive_parenting",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "cdc.positive_parenting"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "55107e32a063545807149558d961aceb819ed0a82450c1125b60de6ed2bf24c1",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly CDC positive parenting page and reuse terms re-review",
+      "id": "provenance.0bc4556381da6b87",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with CDC attribution, no-endorsement, third-party, trademark, and media caveats retained",
+      "locator": "https://www.cdc.gov/child-development/positive-parenting-tips/index.html",
+      "publicReferenceOnly": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "cdc.positive_parenting",
+      "sourceState": "current",
+      "sourceURL": "https://www.cdc.gov/child-development/positive-parenting-tips/index.html",
+      "termsURL": "https://www.cdc.gov/other/agencymaterials.html",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.eca9eccaa792a46a",
+      "dataClass": "public_requirement",
+      "gateType": "public_family_education_reference_only",
+      "id": "requirement.427626cce56d6b7b",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.b2255bcfed66aec2",
+      "dataClass": "public_requirement",
+      "gateType": "sensitive_family_support_reference_only",
+      "id": "requirement.3618ff44a38a1836",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0bc4556381da6b87"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.positive_parenting"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "cdc.positive_parenting",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly CDC positive parenting page and reuse terms re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with CDC attribution, no-endorsement, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current CDC.gov reuse posture",
+    "publisher": "Centers for Disease Control and Prevention",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "cdc.positive_parenting",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.cdc.gov/other/agencymaterials.html"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "cdc.positive_parenting"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "adapterID": "wikidata_crosswalk_adapter",
+  "apiPolicyID": "api.wikidata_crosswalk.v1",
+  "budgetPolicyID": "budget.wikidata_crosswalk.v1",
+  "claimCount": 10,
+  "dataClass": "public_provenance",
+  "evidenceHash": "3c7e734b2f9ef62af6c84949d6bdc142f58b70f7d5d59e18d6741515048c47d6",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "wikidata_cc0_crosswalk",
+  "normalizedPath": "normalized/wikidata.crosswalk.json",
+  "normalizedSHA256": "aa77dda42be82c6cb68a6af2f70c6dd02178d6a1fec57195046ebccc61be46ad",
+  "packCandidateCount": 0,
+  "packEligibleByGovernance": false,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_blocked_crosswalk_only",
+  "ratePolicyID": "rate.wikidata_crosswalk.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_wikidata.v1",
+  "sourceID": "wikidata.crosswalk",
+  "sourceLane": "wikidata.crosswalk"
+}

@@ -1,0 +1,142 @@
+{
+  "blockedDecisionAssemblies": [
+    {
+      "blocked_assembly_id": "catalog_approval_decision_assembly_block.7cecbb4bc00b340a",
+      "blocking_reasons": [
+        "api_governance_fields_incomplete",
+        "api_governance_review_required",
+        "approval_artifact_still_required",
+        "legal_terms_fields_incomplete",
+        "legal_terms_not_pack_approved",
+        "legal_terms_review_required",
+        "pack_policy_not_approved",
+        "review_completion_artifact_required",
+        "source_lane_fields_incomplete",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "completion_issues": [
+        "review completion artifact not provided; all decision inputs remain blocked"
+      ],
+      "created_at": "2026-06-28T00:00:00Z",
+      "decision_input_id": "catalog_approval_decision_input.e44dd117f4fe0d45",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "non_claims": [
+        "blocked assembly only",
+        "not approval",
+        "not finalizer decision",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.096325a6a5ca",
+      "source_name": "Department of Education",
+      "status": "blocked"
+    },
+    {
+      "blocked_assembly_id": "catalog_approval_decision_assembly_block.5a11171f7d482ec0",
+      "blocking_reasons": [
+        "api_governance_fields_incomplete",
+        "api_governance_review_required",
+        "approval_artifact_still_required",
+        "legal_terms_fields_incomplete",
+        "legal_terms_not_pack_approved",
+        "legal_terms_review_required",
+        "pack_policy_not_approved",
+        "review_completion_artifact_required",
+        "source_lane_fields_incomplete",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "completion_issues": [
+        "review completion artifact not provided; all decision inputs remain blocked"
+      ],
+      "created_at": "2026-06-28T00:00:00Z",
+      "decision_input_id": "catalog_approval_decision_input.534c298d4fe6c7bc",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "non_claims": [
+        "blocked assembly only",
+        "not approval",
+        "not finalizer decision",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.1b56977db7b8",
+      "source_name": "ABS (SA Data)",
+      "status": "blocked"
+    },
+    {
+      "blocked_assembly_id": "catalog_approval_decision_assembly_block.5a99a18e9466cbde",
+      "blocking_reasons": [
+        "api_governance_fields_incomplete",
+        "api_governance_review_required",
+        "approval_artifact_still_required",
+        "legal_terms_fields_incomplete",
+        "legal_terms_not_pack_approved",
+        "legal_terms_review_required",
+        "pack_policy_not_approved",
+        "review_completion_artifact_required",
+        "source_lane_fields_incomplete",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "completion_issues": [
+        "review completion artifact not provided; all decision inputs remain blocked"
+      ],
+      "created_at": "2026-06-28T00:00:00Z",
+      "decision_input_id": "catalog_approval_decision_input.86076c52c98bdfb7",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "non_claims": [
+        "blocked assembly only",
+        "not approval",
+        "not finalizer decision",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.43ed3a73ccc5",
+      "source_name": "Public Health Agency of Canada | Agence de la santé publique du Canada",
+      "status": "blocked"
+    },
+    {
+      "blocked_assembly_id": "catalog_approval_decision_assembly_block.629aee6a710f936c",
+      "blocking_reasons": [
+        "api_governance_fields_incomplete",
+        "api_governance_review_required",
+        "approval_artifact_still_required",
+        "legal_terms_fields_incomplete",
+        "legal_terms_not_pack_approved",
+        "legal_terms_review_required",
+        "pack_policy_not_approved",
+        "review_completion_artifact_required",
+        "source_lane_fields_incomplete",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "completion_issues": [
+        "review completion artifact not provided; all decision inputs remain blocked"
+      ],
+      "created_at": "2026-06-28T00:00:00Z",
+      "decision_input_id": "catalog_approval_decision_input.f98a52c6d7d6d18e",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "non_claims": [
+        "blocked assembly only",
+        "not approval",
+        "not finalizer decision",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.b73f9f0ebbed",
+      "source_name": "Statistics Canada | Statistique Canada",
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogBlockedDecisionAssemblies.v1"
+}

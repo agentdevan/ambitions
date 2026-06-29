@@ -1,0 +1,128 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "directSourceReviewPackets": [
+    {
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "jurisdiction_evidence_missing",
+        "publisher_url_missing",
+        "review_evidence_required",
+        "source_class_evidence_missing",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "completion_status": "blocked_review_evidence_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "direct_source_review_packet_id": "catalog_direct_source_review_blocked.064b168b14192b56",
+      "non_claims": [
+        "blocked direct-source review packet only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "outside_legal_approval_artifact": "",
+      "outside_legal_status": "not_claimed",
+      "resolution_id": "catalog_direct_source_resolution.869c97443588283f",
+      "review_owner": "",
+      "reviewed_at": "",
+      "schema_version": "1.0.0"
+    },
+    {
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "authority_class_evidence_missing",
+        "jurisdiction_evidence_missing",
+        "publisher_url_missing",
+        "review_evidence_required",
+        "source_class_evidence_missing",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "completion_status": "blocked_review_evidence_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "direct_source_review_packet_id": "catalog_direct_source_review_blocked.0a3aa07ffec0681f",
+      "non_claims": [
+        "blocked direct-source review packet only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "outside_legal_approval_artifact": "",
+      "outside_legal_status": "not_claimed",
+      "resolution_id": "catalog_direct_source_resolution.1c0251ba96c44307",
+      "review_owner": "",
+      "reviewed_at": "",
+      "schema_version": "1.0.0"
+    },
+    {
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "jurisdiction_evidence_missing",
+        "publisher_url_missing",
+        "review_evidence_required",
+        "source_class_evidence_missing",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "completion_status": "blocked_review_evidence_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "direct_source_review_packet_id": "catalog_direct_source_review_blocked.3e243840a50f8000",
+      "non_claims": [
+        "blocked direct-source review packet only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "outside_legal_approval_artifact": "",
+      "outside_legal_status": "not_claimed",
+      "resolution_id": "catalog_direct_source_resolution.b1675472d6807d33",
+      "review_owner": "",
+      "reviewed_at": "",
+      "schema_version": "1.0.0"
+    },
+    {
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "jurisdiction_evidence_missing",
+        "publisher_url_missing",
+        "review_evidence_required",
+        "source_class_evidence_missing",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "completion_status": "blocked_review_evidence_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "direct_source_review_packet_id": "catalog_direct_source_review_blocked.d0d25c82e59519be",
+      "non_claims": [
+        "blocked direct-source review packet only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "outside_legal_approval_artifact": "",
+      "outside_legal_status": "not_claimed",
+      "resolution_id": "catalog_direct_source_resolution.b4f2d14840e3d73b",
+      "review_owner": "",
+      "reviewed_at": "",
+      "schema_version": "1.0.0"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceReviewPackets.v1",
+  "nonClaims": [
+    "direct-source review packets for Train 71 gate only",
+    "not source authority by themselves",
+    "not legal approval",
+    "not claim output",
+    "not pack output"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from National Park Service Health & Safety public reference page.",
+      "claim_id": "canonical_claim.2c35d339d198c305",
+      "dataClass": "public_provenance",
+      "license_id": "nps_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "nps.recreation-safety"
+    },
+    {
+      "attribution_text": "Based on public reference data from National Park Service Health & Safety public reference page.",
+      "claim_id": "canonical_claim.bf7b33b627376331",
+      "dataClass": "public_provenance",
+      "license_id": "nps_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "nps.recreation-safety"
+    },
+    {
+      "attribution_text": "Based on public reference data from National Park Service Health & Safety public reference page.",
+      "claim_id": "canonical_claim.317162c224e13c2f",
+      "dataClass": "public_provenance",
+      "license_id": "nps_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "nps.recreation-safety"
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "admissionDecision": "ready_for_initial_production_r2_upload",
+  "admissionID": "source_atlas.production_domain_admission.1da712f29c0b9c74",
+  "approvalID": "source_atlas.production_domain_initial_r2_approval.ad46fdb8e654c411",
+  "approvalScope": {
+    "channel": "stable",
+    "currentPointerKey": "source-atlas/v1/production/stable/volunteering_public_reference/current.json",
+    "domain": "volunteering_public_reference",
+    "environment": "production",
+    "lkgPointerKey": "source-atlas/v1/production/stable/volunteering_public_reference/lkg.json",
+    "objectPrefix": "source-atlas/v1/production/stable/volunteering_public_reference/",
+    "revocationKey": "source-atlas/v1/production/stable/volunteering_public_reference/revocations.json"
+  },
+  "approvalStatus": "approved_for_initial_production_r2_upload",
+  "approvalType": "initial_domain_public_reference_production_r2_write",
+  "approved": true,
+  "artifactValidation": {
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.packProductionArtifactValidation.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "requiredArtifacts": [
+      "adjudications.json",
+      "attribution.json",
+      "claims.json",
+      "coverage.json",
+      "entities.json",
+      "freshness.json",
+      "licenses.json",
+      "lkg.json",
+      "manifest.json",
+      "non-private-scan-report.json",
+      "non_claims.json",
+      "pack.json",
+      "r2-dry-run-plan.json",
+      "revocations.json",
+      "rollback-plan.json",
+      "sources.json"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "bucket": "ambitions-source-atlas-prod",
+  "channel": "stable",
+  "checks": [
+    {
+      "issues": [],
+      "name": "frontier_configured_for_domain",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "pack_artifacts_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "pack_scope_matches_requested_domain",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "previous_ledger_valid_and_domain_not_ready",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T18:08:00Z",
+  "domain": "volunteering_public_reference",
+  "environment": "production",
+  "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+  "frontierValidation": {
+    "frontierID": "volunteering_public_reference",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.productionDomainFrontierValidation.v1",
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "americorps.volunteer_rate_state"
+    ],
+    "valid": true
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.productionDomainAdmission.v1",
+  "legalApprovalPacket": "docs/qa/source-atlas/legal/source-atlas-volunteering-legal-terms-approval-train-131.json",
+  "legalApprovalPacketSHA256": "20189f2c1dadaec9edfa5d97fec74ea90e1f42e50d978dc2485a1dc390713319",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "docs/qa/source-atlas/legal/source-atlas-volunteering-legal-terms-approval-train-131.json",
+    "packetSHA256": "20189f2c1dadaec9edfa5d97fec74ea90e1f42e50d978dc2485a1dc390713319",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "americorps.volunteer_rate_state"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "americorps.volunteer_rate_state",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "literalUniversalCoverageClaimed": false,
+  "nonClaims": [
+    "not production target ledger Green",
+    "not gateway release proof",
+    "not native runtime proof",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not outside legal approval",
+    "not literal universal coverage",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "admissionPayload": "75deffdbc4f4fab53de8d386d7b0c4b2b037c65f573731cad496f3064430fa6a",
+    "report": "00d6cbea580d3de0c2dca8e1eb6d041bc4095d277539ff53fa272028819d4546"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/production-domain-admission/train-131-volunteering-production/closeout.md",
+    "report": "tools/source-atlas/generated/production-domain-admission/train-131-volunteering-production/production-domain-admission-report.json"
+  },
+  "outsideLegalApprovalClaimed": false,
+  "owner": "Ambitions owner technical authorization captured in current Source Atlas goal thread",
+  "packID": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+  "packManifestPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/manifest.json",
+  "packManifestSHA256": "6605933ec3fa134e0d8e675512300b34eab8bf3d64c8035f72e97c03626d5dc4",
+  "packRoot": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable",
+  "previousProductionTargetLedgerValidation": {
+    "domainAlreadyReady": false,
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.previousProductionTargetLedgerValidation.v1",
+    "ledgerID": "source-atlas/production-target-ledger/c4a7286daa308aac",
+    "ledgerPath": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-116.json",
+    "readyDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionTargetLedgerPath": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-116.json",
+  "releaseGreenClaimed": false,
+  "requiredExecutionGates": [
+    "budget policy",
+    "current pointer after readback only",
+    "execute flag",
+    "legal/terms approval packet",
+    "non-private payload scan",
+    "owner approval artifact",
+    "public object keys",
+    "rollback/LKG/revocation plan",
+    "upload/readback SHA-256 verification"
+  ],
+  "schemaVersion": 1,
+  "scopeValidation": {
+    "issues": [],
+    "valid": true
+  },
+  "status": "Source Green for initial production domain admission gate",
+  "valid": true,
+  "versionID": "source-atlas-production-domain-admission-train-131"
+}

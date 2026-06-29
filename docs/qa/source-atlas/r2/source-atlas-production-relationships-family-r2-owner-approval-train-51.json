@@ -1,0 +1,37 @@
+{
+  "approvalID": "source-atlas/r2-owner-approval/relationships-family/train-51",
+  "approvalType": "bounded_public_reference_production_r2_write",
+  "approved": true,
+  "approvedChannelPointerKey": "source-atlas/v1/production/stable/relationships_family/current.json",
+  "approvedLKGPointerKey": "source-atlas/v1/production/stable/relationships_family/lkg.json",
+  "approvedObjectKeyPrefix": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/",
+  "approvedRevocationKey": "source-atlas/v1/production/stable/relationships_family/revocations.json",
+  "channel": "stable",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domain": "relationships_family",
+  "environment": "production",
+  "kind": "ambitions.sourceAtlas.r2OwnerApproval.v1",
+  "legalApprovalPacket": "docs/qa/source-atlas/legal/source-atlas-relationships-family-legal-review-train-51.json",
+  "nonClaims": [
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store readiness",
+    "not universal coverage",
+    "not therapy",
+    "not diagnosis",
+    "not legal custody advice",
+    "not child protection advice",
+    "not emergency intervention",
+    "not personalized relationship judgment",
+    "not final user plans, schedules, Steps, or individualized paths from Source Atlas/R2"
+  ],
+  "owner": "Ambitions owner technical approval",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, schedules, proof, receipts, account IDs, device IDs, behavior history, personalization data, private family or relationship context, or private user context may be sent to R2",
+  "schemaVersion": 1,
+  "sourceIDs": [
+    "acf.healthy_marriage_fatherhood",
+    "cdc.positive_parenting",
+    "childwelfare.family_support"
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "template_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "template_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_evidence_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_evidence_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "missing_evidence_blocks_without_completion",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_packets_require_direct_source_not_catalog",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completion_assembler_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceReviewCompletionManifest.v1",
+  "nonClaims": [
+    "direct-source review completion assembler only",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedDirectSourceReviewCompletions": "8603a6d42e4c7b05784538c2ca752a055fd00ab047ea8c58150f48a2fa68f31a",
+    "catalogDirectSourceReviewCompletion": "59fdcd48fb1495ce236631f995b1cbf9d0c580534328389b5da3f9f9b47c985b",
+    "directSourceReviewPackets": "71819b462ff11cf21ad2567962fbfd2b0f66eb221e2b30fe83693c52cff59ef0",
+    "manifest": "8338461b4aabaab11ca56607775db95fe6255e77a50a0cab0feb9fa0ffcd6da6"
+  },
+  "outputPaths": {
+    "blockedDirectSourceReviewCompletions": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/blocked-direct-source-review-completions.json",
+    "catalogDirectSourceReviewCompletion": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/catalog-direct-source-review-completion.json",
+    "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/closeout.md",
+    "directSourceReviewPackets": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/direct-source-review-packets.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDirectSourceReviewCompletions": 3,
+    "blockedDirectSourceReviews": 3,
+    "claims": 0,
+    "completedDirectSourceReviews": 1,
+    "directSourceReviewPackets": 4,
+    "directSourceReviewTemplates": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "reviewEvidenceRecords": 1
+  },
+  "reviewEvidencePath": "tools/source-atlas/generated/catalog-direct-source-review-evidence/train-75-statcan-table-13100974/direct-source-review-evidence.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; direct-source review completion assembler tooling only",
+  "status": "Source Green for catalog direct-source review completion assembler tooling",
+  "templatesPath": "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/direct-source-review-packet-templates.json",
+  "valid": true,
+  "versionID": "source-atlas-catalog-direct-source-review-completion-train-73"
+}

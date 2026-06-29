@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0.0",
+  "train": "32",
+  "linear_issue": "AMB-1518",
+  "title": "Source Atlas Train 32 source inspection rendered accessibility proof",
+  "created_at": "2026-06-28T03:22:01Z",
+  "status": "green_for_automated_source_inspection_render_accessibility_contract_yellow_overall_source_atlas",
+  "scope_completed": [
+    "Added an automated simulator render proof for Trust-owned SourceInspectionView.",
+    "Rendered the production R2 Train 29 occupation_foundation reference inspection presentation at regular and accessibility Dynamic Type sizes.",
+    "Asserted the source inspection presentation includes source, freshness/use/review rows, public-reference privacy copy, local-only matching boundary, and no final-plan or private graph markers.",
+    "Preserved Source Atlas as public/reference-only infrastructure and kept Ambitions runtime ownership of fit, timing, priority, Steps, and schedules."
+  ],
+  "files_changed": [
+    "Native/AmbitionsTests/Trust/SourceInspectionPresentationTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-source-inspection-rendered-accessibility-train-32.json",
+    "docs/qa/source-atlas/native/source-atlas-source-inspection-rendered-accessibility-train-32.md"
+  ],
+  "canonical_owner": "Trust/SourceInspectionView.swift",
+  "final_architecture_tree_inspected": true,
+  "canonical_owners_touched": [
+    "Trust",
+    "Native/AmbitionsTests/Trust"
+  ],
+  "files_moved_or_created": [
+    "docs/qa/source-atlas/native/source-atlas-source-inspection-rendered-accessibility-train-32.json",
+    "docs/qa/source-atlas/native/source-atlas-source-inspection-rendered-accessibility-train-32.md"
+  ],
+  "old_noncanonical_paths_removed": [],
+  "compatibility_shims_left": [],
+  "yellow_architecture_debt": "None introduced. The proof targets the canonical Trust inspection detail owner.",
+  "source_atlas_status_ceiling": "Yellow overall. Train 32 supports automated SourceInspection render/accessibility contract proof only. It does not establish Visual Green, Release Green, App Store readiness, outside legal approval, or universal coverage.",
+  "render_proof": {
+    "test": "AmbitionsTests/SourceInspectionPresentationTests/testProductionSourceInspectionViewRendersAccessiblePublicReferenceDetail",
+    "viewport_points": {
+      "width": 390,
+      "height": 844
+    },
+    "dynamic_type_sizes": [
+      "large",
+      "accessibility3"
+    ],
+    "pixel_assertions": [
+      "regular render non-transparent pixel count > 24000",
+      "accessibility render non-transparent pixel count > 24000",
+      "regular render color bucket count > 8",
+      "accessibility render color bucket count > 8"
+    ],
+    "accessibility_contract_assertions": [
+      "accessibility label is Source detail, Current",
+      "accessibility value includes O*NET public reference",
+      "accessibility hint describes public source context",
+      "privacy summary names personal goals and account secrets as excluded",
+      "rows are Reference, Freshness, Use, Review"
+    ]
+  },
+  "validation_run": [
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceInspectionPresentationTests/testProductionSourceInspectionViewRendersAccessiblePublicReferenceDetail",
+      "status": "passed",
+      "test_count": 1,
+      "warnings": 0,
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T03-18-17-425Z_pid24471_5c7f5d13.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T03-18-17-425Z_pid24471_bf864ef8.xcresult"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceInspectionPresentationTests",
+      "status": "passed",
+      "test_count": 5,
+      "warnings": 0,
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T03-20-26-532Z_pid24471_951282a8.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T03-20-26-533Z_pid24471_d1efa59e.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "test_count": 145
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas boundary audit: PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas no-private-graph egress audit: PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "summary": "GREEN: no disallowed architecture-as-UI strings found in active primary UI source"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "summary": "GREEN: local-first/account/R2/hosted-AI boundary checks passed in active authority files"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/native/source-atlas-source-inspection-rendered-accessibility-train-32.json >/dev/null",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "Independent visual review for Visual Green.",
+    "Physical-device accessibility review.",
+    "Full build-for-testing.",
+    "Full native XCTest suite.",
+    "Live native URLSession fetch against public R2 endpoint.",
+    "Release umbrella proof."
+  ],
+  "product_law_preserved": true,
+  "r2_request_privacy_proof": "This train performs no R2 request. It consumes a production-pack-derived local reference proof and asserts the visible contract excludes goal_text/private_graph/final user plan/final schedule/step generator markers. Train 29 and Train 30 retain the remote R2/no-account request-shape proof.",
+  "no_private_graph_egress_proof": "The new XCTest validates no private graph marker or private goal marker appears in the rendered presentation contract. The standard no-private-egress audit passed.",
+  "license_terms_proof": "No new source, license, or R2 pack was introduced. License/terms posture remains bounded to the already produced occupation_foundation production pack evidence.",
+  "restricted_source_exclusion_proof": "No source registry or pack output changed in this train. Restricted-source exclusion remains inherited from prior pack/governance proof.",
+  "provenance_completeness_proof": "No new claims were created. The source inspection presentation is tied to the Train 29 production pack id source-atlas/v1/domain/occupation_foundation/20260628T000000Z.",
+  "freshness_revocation_proof": "This train renders the current source-inspection state. It does not add revocation or stale-critical behavior beyond existing SourceInspection state coverage.",
+  "lkg_rollback_proof": "No R2 object, pointer, rollback, or LKG state changed in this train.",
+  "native_offline_no_account_proof": "No native fetch/cache behavior changed. Train 30 remains the current offline/no-account repository-cache proof.",
+  "production_non_claims": [
+    "Not full Source Atlas Green.",
+    "Not Visual Green.",
+    "Not Release Green.",
+    "Not App Store readiness.",
+    "Not outside legal approval.",
+    "Not universal coverage.",
+    "Not entitlement readiness.",
+    "Not a production R2 write.",
+    "Not a final user plan, schedule, or Step generator."
+  ],
+  "known_risks": [
+    "Automated rendering and pixel checks are not independent visual acceptance.",
+    "Physical-device accessibility behavior remains unproven in this train.",
+    "Live native URLSession endpoint behavior remains unproven in this train."
+  ],
+  "follow_up_required": [
+    "Add independent visual/device accessibility review before any Visual Green claim.",
+    "Run full build-for-testing and broader native suite outside fast mode before release claims.",
+    "Finalize live native endpoint policy and test URLSession fetch if product wants release-facing R2 freshness claims."
+  ],
+  "rollback_plan": [
+    "Remove testProductionSourceInspectionViewRendersAccessiblePublicReferenceDetail and its helpers from SourceInspectionPresentationTests.swift.",
+    "Remove Train 32 evidence docs.",
+    "No production R2 or app runtime behavior rollback is required because this train changes test/evidence only."
+  ]
+}

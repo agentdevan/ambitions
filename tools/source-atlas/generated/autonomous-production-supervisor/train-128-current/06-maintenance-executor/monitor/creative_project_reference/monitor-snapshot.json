@@ -1,0 +1,117 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "creative-commons.licenses"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "loc.primary_sources"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "w3c.web-standards"
+    }
+  ],
+  "createdAt": "2026-06-29T04:15:00Z",
+  "domainID": "creative_project_reference",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "creativecommons_site_cc_by_4_cc0_tools",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "creative-commons.licenses",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "loc_usgov_work",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "loc.primary_sources",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "w3c_document_license_public_web",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "w3c.web-standards",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "creative-commons.licenses",
+    "loc.primary_sources",
+    "w3c.web-standards"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_creative_commons_licenses_terms_and_policies_recheck",
+      "licenseID": "creativecommons_site_cc_by_4_cc0_tools",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "creative-commons.licenses",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_loc_primary_sources_page_and_legal_rights_recheck",
+      "licenseID": "loc_usgov_work",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "loc.primary_sources",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_w3c_standards_copyright_and_policies_recheck",
+      "licenseID": "w3c_document_license_public_web",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "w3c.web-standards",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

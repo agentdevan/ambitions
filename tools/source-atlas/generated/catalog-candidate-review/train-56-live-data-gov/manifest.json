@@ -1,0 +1,109 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_review_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_source_lanes_emitted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_packets_review_required",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_packets_claim_authority_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_packets_pack_output_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_packets_source_of_sources_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_packets_require_legal_terms_review",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "inputPath": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/candidate-sources.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogCandidateReviewManifest.v1",
+  "nonClaims": [
+    "not source authority",
+    "not active source lane",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedPromotions": "a6a2b031b9f76efa93ae14aae6b963bf937e7aca5766a5dea75c5c321e3477da",
+    "catalogCandidateReview": "51b30b221d53782c6ee97388807f8943e08d41eb6c3728f5544d23ace2232e9a",
+    "manifest": "78403d17435a134a747d806752d12e39a5f372b405bb14d434b150d8aa6d8ac1",
+    "reviewPackets": "5df0df8770a157f5c22f866730cf62fa91eac134fc88503a63f4e8fee204e592"
+  },
+  "outputPaths": {
+    "blockedPromotions": "tools/source-atlas/generated/catalog-candidate-review/train-56-live-data-gov/blocked-promotions.json",
+    "catalogCandidateReview": "tools/source-atlas/generated/catalog-candidate-review/train-56-live-data-gov/catalog-candidate-review.json",
+    "closeout": "tools/source-atlas/generated/catalog-candidate-review/train-56-live-data-gov/closeout.md",
+    "reviewPackets": "tools/source-atlas/generated/catalog-candidate-review/train-56-live-data-gov/review-packets.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeSourceLanes": 0,
+    "blockedPromotions": 4,
+    "candidateSources": 4,
+    "claims": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "reviewPackets": 4
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; catalog candidates remain review-required and pack-blocked",
+  "status": "Source Green for governed catalog candidate review-packet tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-candidate-review-train-56"
+}

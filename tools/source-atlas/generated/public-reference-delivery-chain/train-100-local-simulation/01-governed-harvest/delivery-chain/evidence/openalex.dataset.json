@@ -1,0 +1,29 @@
+{
+  "adapterID": "openalex_research_context_adapter",
+  "apiPolicyID": "api.openalex_snapshot.v1",
+  "budgetPolicyID": "budget.openalex_snapshot.v1",
+  "claimCount": 9,
+  "dataClass": "public_provenance",
+  "evidenceHash": "99966a594684e479d0ae932f9236b99ca06f1c70eaef4163c413e38d533f56fc",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "openalex_cc0_metadata",
+  "normalizedPath": "normalized/openalex.dataset.json",
+  "normalizedSHA256": "d1d1e867d580b8a9aafde0382986d7f14cd4bce100e1d77491dac34e890e4657",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed",
+  "ratePolicyID": "rate.openalex_snapshot.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.openalex_optional.v1",
+  "sourceID": "openalex.dataset",
+  "sourceLane": "openalex.dataset"
+}

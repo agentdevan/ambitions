@@ -1,0 +1,93 @@
+{
+  "artifactID": "source_atlas_native_ambitions_usability_train_87_closeout",
+  "createdAt": "2026-06-28T17:46:52Z",
+  "status": "Native Runtime Green for configured Source Atlas public-pack live gateway consumption / Yellow overall Source Atlas",
+  "scopeCompleted": [
+    "Corrected bundled native registry proof lineage from Train 81 metadata to Train 85 ledger-gated active metadata.",
+    "Verified bundled resource matches the generated Train 85 artifact byte-for-byte.",
+    "Verified live public gateway consumption, pack verification, cache persistence, LKG/offline fallback, quarantine, and local source inspection with focused simulator tests."
+  ],
+  "filesChanged": [
+    "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-live-runtime-train-87.json",
+    "docs/qa/source-atlas/native/source-atlas-native-live-runtime-train-87.md",
+    "docs/qa/source-atlas/source-atlas-native-ambitions-usability-train-87-closeout.json",
+    "docs/qa/source-atlas/source-atlas-native-ambitions-usability-train-87-closeout.md"
+  ],
+  "productLawPreserved": true,
+  "validationRun": [
+    "cmp -s Native/Ambitions/Resources/source-atlas-public-refresh-targets.json tools/source-atlas/generated/native-refresh-registry/train-85-ledger-gated-active/source-atlas-public-refresh-targets.json",
+    "python3 -m json.tool Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "XcodeBuildMCP test_sim: 70 passed, 0 failed, 0 skipped",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests - 345 passed",
+    "python3 scripts/source-atlas-boundary-audit.py - PASS",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py - PASS",
+    "python3 scripts/ambitions-green-standard-audit.py - GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py - GREEN",
+    "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard - passed",
+    "git diff --check - passed for tracked diff",
+    "rg -n \"[ \\\\t]$\" on Train 87 changed/untracked files - no trailing whitespace"
+  ],
+  "validationNotRun": [
+    "Physical device testing",
+    "Independent visual/accessibility acceptance",
+    "App Store/TestFlight release process"
+  ],
+  "proofArtifacts": [
+    "docs/qa/source-atlas/native/source-atlas-native-live-runtime-train-87.json",
+    "docs/qa/source-atlas/native/source-atlas-native-live-runtime-train-87.md",
+    "docs/qa/source-atlas/source-atlas-native-ambitions-usability-train-87-closeout.json",
+    "docs/qa/source-atlas/source-atlas-native-ambitions-usability-train-87-closeout.md",
+    "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T17-43-43-681Z_pid24471_c90aadec.xcresult",
+    ".codex/xcode-results/green-standard/20260628T174842Z-bft-72731-9189/build-for-testing.xcresult",
+    ".codex/xcode-summaries/green-standard/20260628T174842Z/extract/summary.json"
+  ],
+  "knownRisks": [
+    "This is configured-frontier native usability proof, not literal universal goal-domain coverage.",
+    "Release Green remains blocked by release-process proof and independent device/accessibility/visual evidence.",
+    "Outside legal approval is not claimed."
+  ],
+  "followUpRequired": [
+    "Continue governed frontier expansion for future domains through the production-target ledger.",
+    "Keep literal universal coverage, outside legal approval, and Release Green blocked until their separate proof gates exist."
+  ],
+  "rollbackPlan": [
+    "Revert the bundled registry metadata to the previous artifact if Train 85 registry activation regresses.",
+    "Disable live public refresh and continue using bundled/offline Source Atlas references if gateway behavior regresses."
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; Native Runtime Green only for configured production-target frontiers",
+  "r2RequestPrivacyProof": "Passed focused native live gateway suites with no egress findings.",
+  "noPrivateGraphEgressProof": "Passed private request rejection and no-private-egress assertions in native suites.",
+  "licenseTermsProof": "Inherited from Train 86 production-target ledger and selected per-domain publisher proof; no outside legal approval claim.",
+  "restrictedSourceExclusionProof": "Inherited from production-target ledger/pack/publisher gates and verified no private target metadata in native registry.",
+  "provenanceCompletenessProof": "Native fetch pipeline validates published manifest and pack SHA-256 before cache use.",
+  "freshnessRevocationProof": "Native live transport and fetch tests cover current pointer, revocations, manifest, LKG, and pack objects.",
+  "lkgRollbackProof": "Offline/no-account and repository-backed cache tests passed.",
+  "nativeOfflineNoAccountProof": "Offline no-account scenario tests passed and core local planning remains unblocked.",
+  "productionNonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store readiness",
+    "not physical-device proof"
+  ],
+  "finalArchitectureTreeInspected": true,
+  "canonicalOwnersTouched": [
+    "Core/Persistence tests",
+    "Resources"
+  ],
+  "nonCanonicalOwnersTouched": [],
+  "filesMovedOrCreated": [
+    "docs/qa/source-atlas/native/source-atlas-native-live-runtime-train-87.json",
+    "docs/qa/source-atlas/native/source-atlas-native-live-runtime-train-87.md",
+    "docs/qa/source-atlas/source-atlas-native-ambitions-usability-train-87-closeout.json",
+    "docs/qa/source-atlas/source-atlas-native-ambitions-usability-train-87-closeout.md"
+  ],
+  "oldNonCanonicalPathsRemoved": [],
+  "compatibilityShimsLeftBehind": [],
+  "architectureDebt": "None introduced in Train 87.",
+  "nextRepairTrainIfDebtRemains": "Continue governed frontier expansion and release-process proof without moving Source Atlas into a user-facing product center.",
+  "noEquivalentFolderInterpretationUsed": true
+}

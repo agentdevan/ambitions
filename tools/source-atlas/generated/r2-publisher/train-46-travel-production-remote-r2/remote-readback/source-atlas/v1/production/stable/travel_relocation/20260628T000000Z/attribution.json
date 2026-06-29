@@ -1,0 +1,28 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from Travel.State.Gov passport and travel advisory public reference pages.",
+      "claim_id": "canonical_claim.da1775449f7f9e5e",
+      "dataClass": "public_provenance",
+      "license_id": "state_travel_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "state.travel.public_travel"
+    },
+    {
+      "attribution_text": "Based on public reference data from Travel.State.Gov passport and travel advisory public reference pages.",
+      "claim_id": "canonical_claim.d952327697f76faf",
+      "dataClass": "public_provenance",
+      "license_id": "state_travel_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "state.travel.public_travel"
+    },
+    {
+      "attribution_text": "Based on public reference data from USA.gov change-address public relocation reference page.",
+      "claim_id": "canonical_claim.15287c66d2e4cd56",
+      "dataClass": "public_provenance",
+      "license_id": "usagov_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "usa.gov.change_address"
+    }
+  ]
+}

@@ -1,0 +1,393 @@
+{
+  "adapterID": "ready_gov_emergency_kit_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_ready_gov_emergency_kit_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_home_preparedness_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_home_preparedness_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.fc3fe3457356a984",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Ready.gov Build A Kit public reference page",
+      "provenanceIDs": [
+        "provenance.2613e330462028a1"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "ready.gov.kit"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "home_preparedness_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.c1466008f80ae172",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "emergency kit",
+      "provenanceIDs": [
+        "provenance.2613e330462028a1"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "ready.gov.kit"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.6c288325699056d8",
+      "claimType": "safety_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly Ready.gov kit page and terms re-review",
+      "id": "claim.8281073df71f1e81",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.ready.gov/terms-and-conditions",
+      "provenanceIDs": [
+        "provenance.2613e330462028a1"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Ready.gov / Federal Emergency Management Agency",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "ready.gov.kit",
+      "sourceIDs": [
+        "ready.gov.kit"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.ready.gov/kit",
+      "state": "source_backed",
+      "text": "Ready.gov publishes Build A Kit as official public emergency-preparedness reference context for household readiness, not emergency response advice, a safety guarantee, unsafe repair instructions, a household schedule, or a personalized home plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "ready_gov_emergency_kit_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "home_life_admin",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "ready.gov.kit",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "safety_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateEmergencyAdvice": true,
+      "doesNotCreateHouseholdPlanningOutput": true,
+      "doesNotCreatePersonalizedHomePlan": true,
+      "doesNotCreateSafetyGuarantee": true,
+      "doesNotCreateUnsafeRepairInstructions": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.homeLifeAdminCoverage.v1",
+      "label": "Ready.gov emergency kit public preparedness reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "ready.gov.kit",
+      "subject": "home_preparedness.emergency_kit"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "home_life_admin",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.fc3fe3457356a984",
+      "id": "edge.3961330f48253b56",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.2613e330462028a1"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_home_preparedness_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "ready.gov.kit"
+      ],
+      "toAtomID": "atom.c1466008f80ae172",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.fc3fe3457356a984",
+        "atom.c1466008f80ae172"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.3961330f48253b56"
+      ],
+      "id": "lattice.2ced66068ed36841",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "ready_gov_emergency_kit_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "home_life_admin",
+      "id": "pack_candidate.c8dd214069dc633c",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "ready.gov.kit",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "ready.gov.kit"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "597725dae33ca46d40a92b0fad6ed32334e097145cbe73105e8fb6f193cd921c",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly Ready.gov kit page and terms re-review",
+      "id": "provenance.2613e330462028a1",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with Ready.gov terms, third-party, trademark, and media caveats retained",
+      "locator": "https://www.ready.gov/kit",
+      "publicReferenceOnly": true,
+      "publisher": "Ready.gov / Federal Emergency Management Agency",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "ready.gov.kit",
+      "sourceState": "current",
+      "sourceURL": "https://www.ready.gov/kit",
+      "termsURL": "https://www.ready.gov/terms-and-conditions",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.8281073df71f1e81",
+      "dataClass": "public_requirement",
+      "gateType": "public_home_preparedness_reference_only",
+      "id": "requirement.a2f3f3d4f7cb2fb1",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.2613e330462028a1"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "ready.gov.kit"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "ready.gov.kit",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly Ready.gov kit page and terms re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with Ready.gov terms, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current Ready.gov terms and conditions posture",
+    "publisher": "Ready.gov / Federal Emergency Management Agency",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "ready.gov.kit",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.ready.gov/terms-and-conditions"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "ready.gov.kit"
+  }
+}

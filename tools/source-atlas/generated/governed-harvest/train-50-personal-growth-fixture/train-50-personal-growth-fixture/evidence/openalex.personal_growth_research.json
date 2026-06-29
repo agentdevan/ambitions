@@ -1,0 +1,29 @@
+{
+  "adapterID": "openalex_personal_growth_research_adapter",
+  "apiPolicyID": "api.openalex_api.v1",
+  "budgetPolicyID": "budget.openalex_api.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "9a37fd6ff551b2153c14147ec29b8ba299fa2a334bbddfd7a409454c045c3afd",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "openalex_cc0_metadata",
+  "normalizedPath": "normalized/openalex.personal_growth_research.json",
+  "normalizedSHA256": "4f85831ef98e1bc398973f61c9062370138cff62789e981a683401ac0562722b",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed",
+  "ratePolicyID": "rate.openalex_api.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.openalex_optional.v1",
+  "sourceID": "openalex.personal_growth_research",
+  "sourceLane": "openalex.personal_growth_research"
+}

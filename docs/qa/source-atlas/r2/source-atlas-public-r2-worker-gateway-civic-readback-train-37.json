@@ -1,0 +1,107 @@
+{
+  "allowed_object_keys": [
+    "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+    "source-atlas/v1/production/stable/public_civic_requirements/lkg.json",
+    "source-atlas/v1/production/stable/public_civic_requirements/revocations.json",
+    "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/manifest.json",
+    "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/pack.json"
+  ],
+  "blocked_route_proof": [
+    {
+      "probe": "non-allowlisted claims slice",
+      "status": 404
+    },
+    {
+      "probe": "allowlisted object with private query marker",
+      "status": 404
+    },
+    {
+      "probe": "POST allowlisted civic object",
+      "status": 405
+    }
+  ],
+  "created_at": "2026-06-28T04:31:00Z",
+  "https_readback": {
+    "blocked_civic_claims": {
+      "status": 404
+    },
+    "blocked_post": {
+      "status": 405
+    },
+    "blocked_private_query": {
+      "status": 404
+    },
+    "civic_current": {
+      "byteSize": 1736,
+      "sha256": "3c5d573292cc8b306a3563487ab095efba2f64c05a65ba6bfd04756a56c13b46",
+      "status": 200
+    },
+    "civic_lkg": {
+      "byteSize": 1268,
+      "sha256": "e9acd783151de03b2abdb47bb19a2e5b8270fca699d87c9349e04995c94ac9f4",
+      "status": 200
+    },
+    "civic_manifest": {
+      "byteSize": 8783,
+      "sha256": "9f0910dbee38eb5a36e37eb74de2bc04ce01ff065ef59307d61e8820d0eaaa25",
+      "status": 200
+    },
+    "civic_pack": {
+      "byteSize": 11098,
+      "sha256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6",
+      "status": 200
+    },
+    "civic_revocations": {
+      "byteSize": 1413,
+      "sha256": "c89d21078cd0d6f7c7ed6a5d11631500bf304e0562bbd2e986df0457a93f52dc",
+      "status": 200
+    },
+    "occupation_current": {
+      "byteSize": 1720,
+      "sha256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+      "status": 200
+    }
+  },
+  "linear_issue": "AMB-1523",
+  "no_private_graph_egress_proof": "No goal, capture, schedule, proof, receipt, account, device, private graph, personalization, or behavior fields are present in gateway object keys or requests.",
+  "pack_consistency": {
+    "currentPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+    "currentPackSHA256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6",
+    "currentPointerHashConsistent": true,
+    "manifestPackID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+    "packBodySHA256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6",
+    "packHashConsistent": true,
+    "packID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+    "packIDConsistent": true,
+    "r2PublisherCurrentPointerSHA256": "3c5d573292cc8b306a3563487ab095efba2f64c05a65ba6bfd04756a56c13b46",
+    "workerCurrentPointerSHA256": "3c5d573292cc8b306a3563487ab095efba2f64c05a65ba6bfd04756a56c13b46"
+  },
+  "product_law_preserved": true,
+  "production_non_claims": [
+    "Not full Source Atlas Green.",
+    "Not universal coverage.",
+    "Not broad Runtime Green.",
+    "Not Release Green.",
+    "Not Visual Green.",
+    "Not App Store readiness.",
+    "Not outside legal approval.",
+    "Not entitlement readiness.",
+    "Not a private user-data backend.",
+    "Not private life graph storage.",
+    "Not a final user plan, schedule, or Step generator."
+  ],
+  "r2_request_privacy_proof": "Worker requests use public object keys only and no query strings. Private-looking query markers are rejected with 404; POST is rejected with 405.",
+  "schema_version": "1.0.0",
+  "source_atlas_status_ceiling": "Green for bounded public civic Worker HTTPS readback only. Overall Source Atlas remains Yellow.",
+  "status": "green_for_bounded_public_civic_gateway_https_readback_yellow_overall_source_atlas",
+  "title": "Source Atlas public Worker gateway civic HTTPS readback proof",
+  "train": "37",
+  "worker_gateway": {
+    "approval_artifact": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-civic-approval-train-37.md",
+    "deployed_version_id": "65a13c9d-0600-4799-89c5-34bc55d41862",
+    "name": "ambitions-source-atlas-public-gateway",
+    "r2_bucket": "ambitions-source-atlas-prod",
+    "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "workers_dev": true
+  }
+}

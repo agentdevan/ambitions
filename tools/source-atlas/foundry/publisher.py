@@ -21,6 +21,20 @@ def _artifact_entries(bundle_root: Path) -> list[Path]:
     manifest_path = bundle_root / "manifest.json"
     manifest = read_json(manifest_path)
     paths = {manifest_path}
+    if manifest.get("kind") == "ambitions.sourceAtlas.packManifest.v1":
+        for entry in manifest.get("objects", {}).values():
+            if not isinstance(entry, dict):
+                continue
+            local_path = Path(str(entry.get("local_path") or entry.get("localPath") or ""))
+            if not local_path.is_absolute() and not local_path.exists():
+                local_path = bundle_root / local_path
+            if local_path.exists():
+                paths.add(local_path)
+        for filename in ["lkg.json", "revocations.json"]:
+            path = bundle_root / filename
+            if path.exists():
+                paths.add(path)
+        return sorted(path for path in paths if path.exists() and path.suffix in CONTENT_TYPES)
     for key in ["packIndex", "schemaIndex", "shardIndex", "registryIndex"]:
         for entry in manifest.get(key, []):
             paths.add(bundle_root / entry["path"])

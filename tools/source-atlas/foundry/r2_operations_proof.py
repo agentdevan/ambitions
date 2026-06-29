@@ -77,8 +77,9 @@ def run_r2_operations_proof(
     candidate_manifest_path: Path | None = None,
     last_known_good_path: Path | None = None,
     env: dict[str, str] | None = None,
+    env_file_paths: list[Path] | None = None,
 ) -> dict[str, Any]:
-    runtime_env = env if env is not None else os.environ
+    runtime_env, loaded_env_files = _runtime_env(env, env_file_paths)
     if mode not in R2_OPERATION_MODES:
         result = _blocked_result(mode, environment, [f"unsupported mode: {mode}"], execute)
         if output_path:
@@ -171,6 +172,7 @@ def run_r2_operations_proof(
         credential_state=credential_state,
         operation=operation,
         blocked=blocked,
+        loaded_env_files=loaded_env_files,
     )
     evidence["logRedaction"] = _log_redaction_check(evidence, runtime_env)
     evidence["status"] = _status_for_evidence(evidence)
@@ -178,6 +180,60 @@ def run_r2_operations_proof(
     if output_path:
         write_json(output_path, evidence)
     return evidence
+
+
+def _runtime_env(env: dict[str, str] | None, env_file_paths: list[Path] | None) -> tuple[dict[str, str], list[str]]:
+    if env is not None:
+        return env, []
+    runtime_env = dict(os.environ)
+    loaded: list[str] = []
+    for env_file in _default_env_files() if env_file_paths is None else env_file_paths:
+        if _load_env_file(env_file, runtime_env):
+            loaded.append(_safe_env_file_path(env_file))
+    return runtime_env, loaded
+
+
+def _default_env_files() -> list[Path]:
+    foundry_root = Path(__file__).resolve().parent
+    source_atlas_root = foundry_root.parents[0]
+    repo_root = foundry_root.parents[2]
+    return [
+        repo_root / ".env",
+        source_atlas_root / ".env",
+        foundry_root / ".env",
+    ]
+
+
+def _load_env_file(path: Path, target: dict[str, str]) -> bool:
+    if not path.exists():
+        return False
+    parsed = False
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        name, value = line.split("=", 1)
+        name = name.strip()
+        if not name:
+            continue
+        parsed = True
+        if name in target:
+            continue
+        target[name] = _clean_env_value(value.strip())
+    return parsed
+
+
+def _clean_env_value(value: str) -> str:
+    if len(value) >= 2 and value[0] == value[-1] and value[0] in {"'", '"'}:
+        return value[1:-1]
+    return value
+
+
+def _safe_env_file_path(path: Path) -> str:
+    try:
+        return str(path.resolve().relative_to(Path.cwd().resolve()))
+    except ValueError:
+        return path.name
 
 
 def _resolve_environment(environment: str, bucket: str | None, prefix: str | None, env: dict[str, str]) -> dict[str, Any]:
@@ -466,6 +522,7 @@ def _evidence_payload(
     credential_state: dict[str, Any],
     operation: dict[str, Any],
     blocked: list[str],
+    loaded_env_files: list[str],
 ) -> dict[str, Any]:
     return {
         "schemaVersion": 1,
@@ -516,6 +573,7 @@ def _evidence_payload(
             "explicitCredentialsRequiredForRealOperations": True,
             "available": credential_state["available"],
             "envNamesPresent": credential_state["envNamesPresent"],
+            "envFilesLoaded": loaded_env_files,
             "wranglerInstalled": credential_state["wranglerInstalled"],
             "wranglerWhoami": credential_state["wranglerWhoami"],
             "secretValuesPrinted": False,

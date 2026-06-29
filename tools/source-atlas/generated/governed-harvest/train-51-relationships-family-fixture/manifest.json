@@ -1,0 +1,192 @@
+{
+  "apiPolicies": [
+    "api.static_public_page.v1"
+  ],
+  "blockedCounts": {
+    "restrictedExclusions": 0
+  },
+  "budgetLimits": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "cdc.positive_parenting"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "acf.healthy_marriage_fatherhood"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "childwelfare.family_support"
+    }
+  ],
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "fixture_first_default",
+      "passed": true
+    },
+    {
+      "name": "live_modes_require_live_flag",
+      "passed": true
+    },
+    {
+      "name": "execute_modes_require_execute_flag",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_emit_exclusion_proof",
+      "passed": true
+    },
+    {
+      "name": "evidence_hashes_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "entries": [
+    {
+      "adapterID": "cdc_positive_parenting_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 2,
+      "evidencePath": "evidence/cdc.positive_parenting.json",
+      "evidenceSHA256": "b79e14d2791444ba3864ebb5deb4a72d33b92e351f9220c9fd7a5c4acae4903e",
+      "normalizedPath": "normalized/cdc.positive_parenting.json",
+      "normalizedSHA256": "866dc6a3d6b955bc1d5013e5848eb64f80d5726b7ac16ad71f2a0829173ada42",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "cdc.positive_parenting",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "acf_healthy_marriage_fatherhood_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 2,
+      "evidencePath": "evidence/acf.healthy_marriage_fatherhood.json",
+      "evidenceSHA256": "5489bdfeeb88b0bd7f06cc9590e9891af7a3660e3ccdd7cf568a4d5a411e2153",
+      "normalizedPath": "normalized/acf.healthy_marriage_fatherhood.json",
+      "normalizedSHA256": "04abaef58cd3c07571bb0373d6923325bfd962c5ee3ed458ce9cec1cedb1e3a8",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "acf.healthy_marriage_fatherhood",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "childwelfare_family_support_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/childwelfare.family_support.json",
+      "evidenceSHA256": "55aea012e7b36701fdcc423a2ad88102c1883e61d40f8ecb74dc618921e21965",
+      "normalizedPath": "normalized/childwelfare.family_support.json",
+      "normalizedSHA256": "8251b3b416656234bbcdc8af13292e9ee3b224bc2692fe8d5689a5d8a98f6cfc",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "childwelfare.family_support",
+      "status": "harvested"
+    }
+  ],
+  "errorCounts": {
+    "issues": 0,
+    "privacyIssues": 0
+  },
+  "evidenceHashes": [
+    {
+      "evidenceHash": "d7e9597dc68461286cc2a3779b08c365d6729bec388d6e66935c2a7385386b66",
+      "sha256": "b79e14d2791444ba3864ebb5deb4a72d33b92e351f9220c9fd7a5c4acae4903e",
+      "sourceID": "cdc.positive_parenting"
+    },
+    {
+      "evidenceHash": "3c72ceac9cb89acff53e4cce721cb0d03595fe099e7cfc6177932a6465ae9825",
+      "sha256": "5489bdfeeb88b0bd7f06cc9590e9891af7a3660e3ccdd7cf568a4d5a411e2153",
+      "sourceID": "acf.healthy_marriage_fatherhood"
+    },
+    {
+      "evidenceHash": "ad4c0489f8fb68a9a2a9c0fdb1b0920abbb31d7afca2e275de48f88c7dc210db",
+      "sha256": "55aea012e7b36701fdcc423a2ad88102c1883e61d40f8ecb74dc618921e21965",
+      "sourceID": "childwelfare.family_support"
+    }
+  ],
+  "executeRequested": false,
+  "finishedAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governedHarvestRunManifest.v1",
+  "liveRequested": false,
+  "manifestInputHash": "d73d17f1fa2d6ab83bcc254ede6182782edff5576a1dd3a11537ada3c3a2ec20",
+  "manifestPath": "tools/source-atlas/generated/governed-harvest/train-51-relationships-family-fixture/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not live production harvest proof unless --live evidence is separately reviewed",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputPaths": [
+    "normalized/cdc.positive_parenting.json",
+    "evidence/cdc.positive_parenting.json",
+    "normalized/acf.healthy_marriage_fatherhood.json",
+    "evidence/acf.healthy_marriage_fatherhood.json",
+    "normalized/childwelfare.family_support.json",
+    "evidence/childwelfare.family_support.json"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "claims": 5,
+    "packCandidates": 3,
+    "records": 0,
+    "sourcesBlocked": 0,
+    "sourcesHarvested": 3,
+    "sourcesSelected": 3
+  },
+  "restrictedExclusions": [],
+  "runID": "train-51-relationships-family-fixture",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governed harvest runner only",
+  "sourceLanes": [
+    "cdc.positive_parenting",
+    "acf.healthy_marriage_fatherhood",
+    "childwelfare.family_support"
+  ],
+  "status": "Source Green for governed harvest runner",
+  "valid": true,
+  "versionID": "source-atlas-governed-harvest-runner-v1"
+}

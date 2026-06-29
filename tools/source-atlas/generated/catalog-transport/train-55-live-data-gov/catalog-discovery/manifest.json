@@ -1,0 +1,95 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_catalogs_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "catalog_discovery_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_candidates_review_required",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_candidate_claim_authority",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "pack_output_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "catalogs_are_source_of_sources_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "inputRoot": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/snapshots",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogDiscoveryManifest.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not live network discovery",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "candidateSources": "653f3d71fe730d749e96b2e00ccc3fe6760e4d6057f9fa4c092c2068d2818e1d",
+    "catalogDiscovery": "8782c4efadb9230f3d0bc18c59660b81116b3049f7adecc8779eae144836299f",
+    "catalogs": "936431bfa99c227b745508decd97037ed1400880d378f876303604e621a21823",
+    "manifest": "3598106c947bbf86f94ac4abd14cc0a73e3940310176f0f6a2c5c3ee61d25821"
+  },
+  "outputPaths": {
+    "candidateSources": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/candidate-sources.json",
+    "catalogDiscovery": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/catalog-discovery.json",
+    "catalogs": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/catalogs.json",
+    "closeout": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/catalog-discovery/closeout.md"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateSources": 4,
+    "catalogs": 2,
+    "claims": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; catalog/source discovery candidates only",
+  "status": "Source Green for fixture-backed catalog discovery tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-discovery-train-53"
+}

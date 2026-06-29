@@ -149,7 +149,13 @@ class SourceAdapter(ABC):
         return normalized
 
 
-def validate_distribution_policy(entry: dict[str, Any], output: dict[str, Any], review_evidence: dict[str, Any] | None = None) -> dict[str, Any]:
+def validate_distribution_policy(
+    entry: dict[str, Any],
+    output: dict[str, Any],
+    review_evidence: dict[str, Any] | None = None,
+    *,
+    require_approval_packet: bool = False,
+) -> dict[str, Any]:
     """Hard gate before normalized data can enter a Source Atlas pack."""
 
     issues: list[str] = []
@@ -165,6 +171,17 @@ def validate_distribution_policy(entry: dict[str, Any], output: dict[str, Any], 
         issues.append(f"{entry.get('source_id')}: lookup_only_not_packable blocks pack output")
     if redistribution == DistributionPolicy.BLOCKED.value:
         issues.append(f"{entry.get('source_id')}: blocked redistribution policy")
+    approval_validation: dict[str, Any] | None = None
+    if review_evidence or require_approval_packet:
+        from .terms_approval_packet import validate_terms_approval_packet
+
+        approval_validation = validate_terms_approval_packet(
+            review_evidence,
+            terms_entry=entry,
+            requested_artifact_classes=artifact_classes(output) or {"public_reference_claim"},
+        )
+        if not approval_validation["valid"]:
+            issues.extend(approval_validation["issues"])
     if redistribution == DistributionPolicy.REVIEW_REQUIRED.value and not review_evidence:
         issues.append(f"{entry.get('source_id')}: review_required without review evidence")
     if r2_policy in {R2PackPolicy.R2_BLOCKED.value, R2PackPolicy.R2_REVIEW_REQUIRED.value}:
@@ -192,6 +209,7 @@ def validate_distribution_policy(entry: dict[str, Any], output: dict[str, Any], 
         "issues": issues,
         "redistributionPolicy": redistribution,
         "r2PackPolicy": r2_policy,
+        "approvalPacketValidation": approval_validation,
     }
 
 

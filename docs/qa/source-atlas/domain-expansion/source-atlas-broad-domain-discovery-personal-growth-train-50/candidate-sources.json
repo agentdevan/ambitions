@@ -1,0 +1,1800 @@
+{
+  "candidateRecords": [
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.9009fcd5c96556b2",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "business_formation_reference",
+        "public_program_reference"
+      ],
+      "dataset_url": "https://www.sba.gov/business-guide/10-steps-start-your-business",
+      "declared_jurisdiction": "US",
+      "declared_license": "sba_public_web",
+      "declared_rights": "SBA.gov acknowledgement/disclaimer posture reviewed for bounded public-reference pack output",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "business_entrepreneurship",
+      "evidence_hash": "1df90a423d771ead57547f5c1849113a0995aade4a1e7267304444b07e798249",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "U.S. Small Business Administration",
+      "publisher_url": "https://www.sba.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.sba.gov/about-sba/open-government/about-sbagov-website/linking-policy",
+      "source_class_guess": "official_government",
+      "source_id_guess": "sba.business_guide.start_business",
+      "terms_url": "https://www.sba.gov/about-sba/open-government/about-sbagov-website/linking-policy"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.76b4276a2f0839e1",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "public_learning_resource"
+      ],
+      "dataset_url": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "declared_jurisdiction": "US federal",
+      "declared_license": "loc_usgov_work",
+      "declared_rights": "page text marked U.S. Government Work; collection items, third-party material, media, and rights-restricted content excluded",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "creative_project_reference",
+      "evidence_hash": "1cf9ea981f806bd3860206eaf4a44604bbc13597b6979f6e66ce83c2ca7fc706",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Library of Congress",
+      "publisher_url": "https://www.loc.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "http://www.loc.gov/text-us-government-work",
+      "source_class_guess": "official_government",
+      "source_id_guess": "loc.primary_sources",
+      "terms_url": "https://www.loc.gov/legal/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "standards_body",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.d3061b2fc3065584",
+      "candidate_score": 86,
+      "claim_class_guess": [
+        "public_standard_reference"
+      ],
+      "dataset_url": "https://www.w3.org/standards/",
+      "declared_jurisdiction": "global",
+      "declared_license": "w3c_document_license_public_web",
+      "declared_rights": "bounded W3C standards reference with document, software, test-suite, patent-policy, trademark, and permission caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "creative_project_reference",
+      "evidence_hash": "f71bd7c891590b6bd381f04738de37262ee70841abdb9137b6bd68ec3967fe6f",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "World Wide Web Consortium",
+      "publisher_url": "https://www.w3.org/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.w3.org/copyright/",
+      "source_class_guess": "standards_body",
+      "source_id_guess": "w3c.web-standards",
+      "terms_url": "https://www.w3.org/policies/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_institution",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.aa46667896174937",
+      "candidate_score": 84,
+      "claim_class_guess": [
+        "creative_metadata_reference",
+        "public_standard_reference"
+      ],
+      "dataset_url": "https://creativecommons.org/licenses/",
+      "declared_jurisdiction": "global",
+      "declared_license": "creativecommons_site_cc_by_4_cc0_tools",
+      "declared_rights": "bounded CC license metadata reference with CC BY/CC0 posture, attribution, trademark, third-party, and source-specific reuse caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "creative_project_reference",
+      "evidence_hash": "15351a84b12d40a2341cfd3e28ae7b38b1c7ae58430745a6e14f3df6356a7984",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Creative Commons",
+      "publisher_url": "https://creativecommons.org/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://creativecommons.org/policies/",
+      "source_class_guess": "official_institution",
+      "source_id_guess": "creative-commons.licenses",
+      "terms_url": "https://creativecommons.org/terms/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "https://collegescorecard.ed.gov/data/documentation/",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_id": "candidate.32ffd0f9d72cc916",
+      "candidate_score": 98,
+      "claim_class_guess": [
+        "candidate_education_program_reference",
+        "candidate_institution_reference"
+      ],
+      "dataset_url": "https://collegescorecard.ed.gov/data/",
+      "declared_jurisdiction": "US",
+      "declared_license": "review_required",
+      "declared_rights": "public government source terms require review",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [
+        "https://api.data.gov/ed/collegescorecard/v1/schools"
+      ],
+      "domain_guess": "education_credentialing",
+      "evidence_hash": "ed0593ff99ff41cfc6b6d79bcb1452ee2d3c08a27f6ab24edb066aa348de86bc",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "U.S. Department of Education",
+      "publisher_url": "https://www.ed.gov/",
+      "redistribution_guess": "review_required",
+      "review_required": true,
+      "rights_url": "https://www.ed.gov/notices",
+      "source_class_guess": "official_government",
+      "source_id_guess": "college-scorecard.api",
+      "terms_url": "https://www.ed.gov/notices"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "missing_license_posture",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_id": "candidate.d6ca6b1a4581b3fe",
+      "candidate_score": 56,
+      "claim_class_guess": [
+        "credential_requirement"
+      ],
+      "dataset_url": "https://www.ed.gov/accreditation",
+      "declared_jurisdiction": "US",
+      "declared_license": "unclear",
+      "declared_rights": "unclear",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "education_credentialing",
+      "evidence_hash": "5ca6f69d9e45c178efaafabd390c93d163a5f4cd042d47e730351e8f36bfc7b7",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Accreditation public records",
+      "publisher_url": "https://www.ed.gov/",
+      "redistribution_guess": "review_required",
+      "review_required": true,
+      "rights_url": "",
+      "source_class_guess": "official_government",
+      "source_id_guess": "accreditation.public-records",
+      "terms_url": "https://www.ed.gov/notices"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.17b07a27c976b704",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "official_benefit_program_reference"
+      ],
+      "dataset_url": "https://www.usa.gov/benefits",
+      "declared_jurisdiction": "US",
+      "declared_license": "usagov_public_web",
+      "declared_rights": "bounded public government website reuse with attribution, third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "finance_public_reference",
+      "evidence_hash": "5313aeef7ff628e097ef495f493c6c78bc55d1e8777bc2cae64e491697248b6a",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "USA.gov / General Services Administration",
+      "publisher_url": "https://www.usa.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.usa.gov/government-works",
+      "source_class_guess": "official_government",
+      "source_id_guess": "usa.gov.benefits",
+      "terms_url": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "regulated_body",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.8d4af3f80cf856be",
+      "candidate_score": 90,
+      "claim_class_guess": [
+        "tax_deadline_reference"
+      ],
+      "dataset_url": "https://www.irs.gov/filing/individuals/when-to-file",
+      "declared_jurisdiction": "US",
+      "declared_license": "irs_public_web",
+      "declared_rights": "bounded public government website reuse with attribution, third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "finance_public_reference",
+      "evidence_hash": "bfa7bd8b645855f0c8edc4acc46c7c88dbdb03b3da69ec8495a9878d21061379",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Internal Revenue Service",
+      "publisher_url": "https://www.irs.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy",
+      "source_class_guess": "official_government",
+      "source_id_guess": "irs.when_to_file",
+      "terms_url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "regulated_body",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.e989b0163f4c561c",
+      "candidate_score": 90,
+      "claim_class_guess": [
+        "public_financial_education"
+      ],
+      "dataset_url": "https://www.consumerfinance.gov/consumer-tools/educator-tools/adult-financial-education/tools-and-resources/",
+      "declared_jurisdiction": "US",
+      "declared_license": "cfpb_public_web",
+      "declared_rights": "bounded public government website reuse with attribution, third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "finance_public_reference",
+      "evidence_hash": "4f67b8c18b3151705efc77e0ebd0faed1d7e05a4cc22cc9702f70fc0439bd2da",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Consumer Financial Protection Bureau",
+      "publisher_url": "https://www.consumerfinance.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.consumerfinance.gov/privacy/",
+      "source_class_guess": "official_government",
+      "source_id_guess": "cfpb.adult_financial_education",
+      "terms_url": "https://www.consumerfinance.gov/privacy/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.f629cdf14bd508de",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "exercise_taxonomy",
+        "public_health_guideline",
+        "wellness_safety_reference"
+      ],
+      "dataset_url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "declared_jurisdiction": "US",
+      "declared_license": "cdc_public_web",
+      "declared_rights": "bounded public government website reuse with attribution, no-endorsement, third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "health_wellness_reference",
+      "evidence_hash": "6b386581f8c0f9d2345c430570559f9433dfd535cb9faf92ab2991192ab9f3f1",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Centers for Disease Control and Prevention",
+      "publisher_url": "https://www.cdc.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.cdc.gov/other/agencymaterials.html",
+      "source_class_guess": "official_government",
+      "source_id_guess": "cdc.physical-activity.basics",
+      "terms_url": "https://www.cdc.gov/other/agencymaterials.html"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_id": "candidate.f09f65c3ad007f35",
+      "candidate_score": 80,
+      "claim_class_guess": [
+        "exercise_taxonomy",
+        "public_health_guideline"
+      ],
+      "dataset_url": "https://health.gov/our-work/nutrition-physical-activity/physical-activity-guidelines",
+      "declared_jurisdiction": "US",
+      "declared_license": "review_required",
+      "declared_rights": "public government source terms require review",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "health_wellness_reference",
+      "evidence_hash": "945fbcaffdb90707ef0d2831704b33b2b954d62e9488731c59e6effe28de375c",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "U.S. Department of Health and Human Services",
+      "publisher_url": "https://health.gov/",
+      "redistribution_guess": "review_required",
+      "review_required": true,
+      "rights_url": "https://health.gov/privacy-policy",
+      "source_class_guess": "official_government",
+      "source_id_guess": "hhs.physical-activity-guidelines",
+      "terms_url": "https://health.gov/privacy-policy"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.b2e98358f1babda6",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "learning_resource_reference",
+        "public_rules_reference",
+        "safety_guidance_reference"
+      ],
+      "dataset_url": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "declared_jurisdiction": "US",
+      "declared_license": "nps_public_web",
+      "declared_rights": "NPS.gov disclaimer posture reviewed for bounded public-reference text pack output; media and third-party material excluded",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "hobbies_recreation",
+      "evidence_hash": "fedcb5c84fc925ca2086b59fd3bf76aa0d40b303fdc66eed0eaa0528a1862e95",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "National Park Service",
+      "publisher_url": "https://www.nps.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "source_class_guess": "official_government",
+      "source_id_guess": "nps.recreation-safety",
+      "terms_url": "https://www.nps.gov/aboutus/disclaimer.htm"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.08747fef01d702d0",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "safety_reference"
+      ],
+      "dataset_url": "https://www.ready.gov/kit",
+      "declared_jurisdiction": "US",
+      "declared_license": "ready_public_web",
+      "declared_rights": "bounded Ready.gov public government website text with third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "home_life_admin",
+      "evidence_hash": "e073cb77e6ff047bdef992323cef27d0abc8afd7017e1338254580af00516d04",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Ready.gov / Federal Emergency Management Agency",
+      "publisher_url": "https://www.ready.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.ready.gov/terms-and-conditions",
+      "source_class_guess": "official_government",
+      "source_id_guess": "ready.gov.kit",
+      "terms_url": "https://www.ready.gov/terms-and-conditions"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.953099020950050c",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "public_service_reference"
+      ],
+      "dataset_url": "https://www.usa.gov/home-repair-programs",
+      "declared_jurisdiction": "US",
+      "declared_license": "usagov_public_web",
+      "declared_rights": "bounded public government website reuse with attribution, third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "home_life_admin",
+      "evidence_hash": "2bee5cad53f9e47948251a353f6d544e9c8aec114316e8a1aa49426dff618938",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "USA.gov / General Services Administration",
+      "publisher_url": "https://www.usa.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.usa.gov/government-works",
+      "source_class_guess": "official_government",
+      "source_id_guess": "usa.gov.home_repair",
+      "terms_url": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.fe983642c4c3c1b9",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "maintenance_guidance_reference"
+      ],
+      "dataset_url": "https://www.energy.gov/energysaver/energy-saver",
+      "declared_jurisdiction": "US",
+      "declared_license": "doe_public_web",
+      "declared_rights": "bounded DOE public government information with acknowledgement requested and third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "home_life_admin",
+      "evidence_hash": "6729f408195f81b41752443b328feacd1440172dc21642adc4bfcbaa3af669f0",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "U.S. Department of Energy",
+      "publisher_url": "https://www.energy.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.energy.gov/web-policies",
+      "source_class_guess": "official_government",
+      "source_id_guess": "energy.gov.energy_saver",
+      "terms_url": "https://www.energy.gov/web-policies"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "https://docs.openalex.org/",
+      "authority_class_guess": "scholarly_metadata",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.52ae6436b12c35aa",
+      "candidate_score": 90,
+      "claim_class_guess": [
+        "research_metadata_reference"
+      ],
+      "dataset_url": "https://openalex.org/",
+      "declared_jurisdiction": "global",
+      "declared_license": "openalex_cc0_metadata",
+      "declared_rights": "CC0 scholarly metadata with high-volume API and snapshot use gated by Source Atlas API governance",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "personal_growth",
+      "evidence_hash": "c687f58d0866c8bf99385b604ee5658ba3afa881ba04a7f0ed9c3b13e2c7156f",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "OpenAlex",
+      "publisher_url": "https://openalex.org/",
+      "redistribution_guess": "redistributable",
+      "review_required": true,
+      "rights_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "source_class_guess": "official_institution",
+      "source_id_guess": "openalex.personal_growth_research",
+      "terms_url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_institution",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.19a79c5a9db5761b",
+      "candidate_score": 84,
+      "claim_class_guess": [
+        "public_learning_reference",
+        "sensitive_wellness_reference"
+      ],
+      "dataset_url": "https://medlineplus.gov/",
+      "declared_jurisdiction": "US",
+      "declared_license": "medlineplus_public_domain_topic_summary",
+      "declared_rights": "bounded MedlinePlus public-domain health topic summary content with NLM acknowledgement requested and vendor, image, media, encyclopedia, drug, supplement, lab-test, genetic, and third-party content excluded",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "personal_growth",
+      "evidence_hash": "7f005abbabfcc907a6eac38d118367303da91339cfe7f662f8fc430630bffc68",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "National Library of Medicine",
+      "publisher_url": "https://medlineplus.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "source_class_guess": "official_institution",
+      "source_id_guess": "nih.medlineplus.wellness",
+      "terms_url": "https://medlineplus.gov/about/using/usingcontent/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "https://www.mediawiki.org/wiki/API:Main_page",
+      "authority_class_guess": "open_knowledge_graph",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "crosswalk_only",
+        "crosswalk_only_not_regulated_authority",
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_id": "candidate.5ca9ad0b25687942",
+      "candidate_score": 76,
+      "claim_class_guess": [
+        "alias_crosswalk",
+        "identifier_crosswalk"
+      ],
+      "dataset_url": "https://www.wikidata.org/wiki/Wikidata:Data_access",
+      "declared_jurisdiction": "global",
+      "declared_license": "CC0-1.0",
+      "declared_rights": "structured data crosswalk only",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [
+        "https://query.wikidata.org/"
+      ],
+      "domain_guess": "personal_growth",
+      "evidence_hash": "ab641120284f07b117ce5ecb757776db721e6d0a35375d6b0f586fbc35ba8025",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Wikidata",
+      "publisher_url": "https://www.wikidata.org/",
+      "redistribution_guess": "crosswalk_only",
+      "review_required": true,
+      "rights_url": "https://www.wikidata.org/wiki/Wikidata:Licensing",
+      "source_class_guess": "open_knowledge_graph",
+      "source_id_guess": "wikidata.structured_crosswalk",
+      "terms_url": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_id": "candidate.0e82190ef4b95b91",
+      "candidate_score": 88,
+      "claim_class_guess": [
+        "constitutional_requirement",
+        "eligibility_requirement"
+      ],
+      "dataset_url": "https://www.archives.gov/founding-docs/constitution-transcript",
+      "declared_jurisdiction": "US federal",
+      "declared_license": "review_required",
+      "declared_rights": "public government source terms require review",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "public_civic_requirements",
+      "evidence_hash": "c1be50be2a10f79d7f0d89755d03c692c1b98d5cf0cb18745963158ea9ce3c72",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "National Archives",
+      "publisher_url": "https://www.archives.gov/",
+      "redistribution_guess": "review_required",
+      "review_required": true,
+      "rights_url": "https://www.archives.gov/global-pages/privacy",
+      "source_class_guess": "official_government",
+      "source_id_guess": "nara.constitution.presidency",
+      "terms_url": "https://www.archives.gov/global-pages/privacy"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "https://catalog.data.gov/api/3/",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved",
+        "review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate.16a450d69b83f229",
+      "candidate_score": 76,
+      "claim_class_guess": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "dataset_url": "https://catalog.data.gov/dataset",
+      "declared_jurisdiction": "US",
+      "declared_license": "review_required",
+      "declared_rights": "catalog metadata only; underlying publisher review required",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "public_civic_requirements",
+      "evidence_hash": "a48a1ef9ae1a061c727233897c01df6a9119d7866eea03c5573fd8fe79a847da",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Data.gov",
+      "publisher_url": "https://data.gov/",
+      "redistribution_guess": "review_required",
+      "review_required": true,
+      "rights_url": "https://www.data.gov/privacy-policy/",
+      "source_class_guess": "public_catalog",
+      "source_id_guess": "data.gov.catalog",
+      "terms_url": "https://www.data.gov/privacy-policy/"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_id": "candidate.a56362b1f1a3c08c",
+      "candidate_score": 80,
+      "claim_class_guess": [
+        "public_education_reference",
+        "public_family_service_reference"
+      ],
+      "dataset_url": "https://www.acf.hhs.gov/",
+      "declared_jurisdiction": "US",
+      "declared_license": "review_required",
+      "declared_rights": "public government source terms require review",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "relationships_family",
+      "evidence_hash": "98d11f8b29feecbbd2da85b8abab6e47bca40c416d25b3fc19523b0cce511ae0",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "Administration for Children and Families",
+      "publisher_url": "https://www.acf.hhs.gov/",
+      "redistribution_guess": "review_required",
+      "review_required": true,
+      "rights_url": "https://www.acf.hhs.gov/privacy",
+      "source_class_guess": "official_government",
+      "source_id_guess": "acf.family-services",
+      "terms_url": "https://www.acf.hhs.gov/privacy"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.7ef896d08092fea1",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "relocation_admin_reference"
+      ],
+      "dataset_url": "https://www.usa.gov/change-address",
+      "declared_jurisdiction": "US",
+      "declared_license": "usagov_public_web",
+      "declared_rights": "bounded public government website text reuse with attribution, third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "travel_relocation",
+      "evidence_hash": "41d0844875e46d6d36e1724a2947ccbf4ec7cdb7cf595ba342e915fa1595a85e",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "USA.gov / General Services Administration",
+      "publisher_url": "https://www.usa.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://www.usa.gov/government-works",
+      "source_class_guess": "official_government",
+      "source_id_guess": "usa.gov.change_address",
+      "terms_url": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowed_artifact_classes": [
+        "candidate_source_record",
+        "discovery_metadata"
+      ],
+      "api_docs_url": "",
+      "authority_class_guess": "official_government",
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_id": "candidate.ec5422e840927d07",
+      "candidate_score": 92,
+      "claim_class_guess": [
+        "official_travel_requirement",
+        "public_safety_notice"
+      ],
+      "dataset_url": "https://travel.state.gov/content/travel/en/passports/how-apply.html",
+      "declared_jurisdiction": "US and destination-specific",
+      "declared_license": "state_travel_public_web",
+      "declared_rights": "bounded public government website text reuse with attribution, third-party, trademark, and media caveats retained",
+      "discovered_at": "2026-06-28T00:00:00Z",
+      "discovery_method": "curated_seed",
+      "distribution_urls": [],
+      "domain_guess": "travel_relocation",
+      "evidence_hash": "7c3e41dbeb3cc878604cb04bad6994c731851fca6ec4d3f6c2f664281b4d28bb",
+      "forbidden_artifact_classes": [
+        "claim_graph",
+        "final_schedule",
+        "final_user_path",
+        "personalized_plan",
+        "private_goal_graph",
+        "r2_pack",
+        "stable_channel_pointer",
+        "step_list"
+      ],
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistributable pack approval"
+      ],
+      "pack_eligibility": "blocked_candidate_only",
+      "publisher_name": "U.S. Department of State",
+      "publisher_url": "https://travel.state.gov/",
+      "redistribution_guess": "redistributable_with_attribution",
+      "review_required": true,
+      "rights_url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html",
+      "source_class_guess": "official_government",
+      "source_id_guess": "state.travel.public_travel",
+      "terms_url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html"
+    }
+  ],
+  "checks": [],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "frontierConfigPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/coverage-frontiers.json",
+  "governanceValidation": {
+    "issues": [],
+    "status": "Source Green for governance tooling",
+    "valid": true
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.broadDomainCandidateDiscovery.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not live source discovery",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateRecords": 23,
+    "claims": 0,
+    "frontiers": 12,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "scorecards": [
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_count": 1,
+      "candidate_only_count": 1,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "business_entrepreneurship",
+      "freshness_policy_gaps": [],
+      "frontier_id": "business_entrepreneurship",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized incorporation strategy",
+        "not accounting advice",
+        "not legal advice",
+        "not pack ready",
+        "not tax advice",
+        "not universal business formation coverage",
+        "state-specific requirements are excluded until separately reviewed"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "sba.business_guide.start_business"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_count": 3,
+      "candidate_only_count": 3,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "creative_project_reference",
+      "freshness_policy_gaps": [],
+      "frontier_id": "creative_project_reference",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output"
+      ],
+      "minimum_authority_classes": [
+        "official_institution",
+        "standards_body"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a final creative plan",
+        "not copyright permission",
+        "not implementation advice",
+        "not license selection advice",
+        "not outside legal approval",
+        "not pack ready",
+        "not patent advice",
+        "not redistribution approval beyond listed sources",
+        "not source-use permission"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "missing_license_posture",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [
+        "accreditation.public-records"
+      ],
+      "claim_count": 0,
+      "domain": "education_credentialing",
+      "freshness_policy_gaps": [],
+      "frontier_id": "education_credentialing",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_license_posture",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "missing_authority_classes": [
+        "official_institution"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized degree plan",
+        "not admissions advice",
+        "not credentialing authority",
+        "not financial aid guidance",
+        "not pack ready"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government",
+        "regulated_body"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_count": 3,
+      "candidate_only_count": 3,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "finance_public_reference",
+      "freshness_policy_gaps": [],
+      "frontier_id": "finance_public_reference",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "regulated_body"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized financial plan",
+        "not account data storage",
+        "not benefit eligibility or approval",
+        "not investment advice",
+        "not legal advice",
+        "not pack ready",
+        "not tax advice",
+        "not transaction profiling"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [
+        "hhs.physical-activity-guidelines"
+      ],
+      "claim_count": 0,
+      "domain": "health_wellness_reference",
+      "freshness_policy_gaps": [],
+      "frontier_id": "health_wellness_reference",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "general CDC physical activity references only; condition-specific medical guidance remains excluded until separately reviewed",
+        "not a personalized fitness plan",
+        "not a treatment plan",
+        "not diagnosis",
+        "not emergency advice",
+        "not medical advice",
+        "not pack ready",
+        "not universal health coverage"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "cdc.physical-activity.basics"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_count": 1,
+      "candidate_only_count": 1,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "hobbies_recreation",
+      "freshness_policy_gaps": [],
+      "frontier_id": "hobbies_recreation",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "federal park recreation references only; sport-specific association rules remain excluded until separately reviewed",
+        "not a personalized recreation plan",
+        "not emergency advice",
+        "not medical advice",
+        "not pack ready",
+        "not restricted membership data",
+        "not universal recreation coverage",
+        "not unsafe instructions"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "nps.recreation-safety"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_count": 3,
+      "candidate_only_count": 3,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "home_life_admin",
+      "freshness_policy_gaps": [],
+      "frontier_id": "home_life_admin",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a household schedule",
+        "not a personalized home plan",
+        "not contractor advice",
+        "not eligibility approval or loan decision",
+        "not emergency advice",
+        "not pack ready",
+        "not private home data storage",
+        "not unsafe repair instructions"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [],
+      "blocking_reasons": [],
+      "candidate_count": 0,
+      "candidate_only_count": 0,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "occupation_foundation",
+      "freshness_policy_gaps": [],
+      "frontier_id": "occupation_foundation",
+      "legal_posture_gaps": [],
+      "minimum_authority_classes": [
+        "official_government",
+        "scholarly_metadata"
+      ],
+      "missing_authority_classes": [
+        "official_government",
+        "scholarly_metadata"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a personalized job ranking",
+        "not career advice",
+        "not pack ready",
+        "not universal occupation coverage"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "status": "not_started",
+      "status_ceiling": "claim_graph_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_institution",
+        "open_knowledge_graph",
+        "scholarly_metadata"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "crosswalk_only",
+        "crosswalk_only_not_regulated_authority",
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 3,
+      "candidate_only_count": 3,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "personal_growth",
+      "freshness_policy_gaps": [],
+      "frontier_id": "personal_growth",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_institution",
+        "scholarly_metadata"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not a cloud-personalized self-improvement plan",
+        "not a final personal-growth plan",
+        "not diagnosis",
+        "not emergency advice",
+        "not mental health treatment",
+        "not outside legal approval",
+        "not pack ready",
+        "not therapy"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government",
+        "public_catalog"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved",
+        "review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "public_civic_requirements",
+      "freshness_policy_gaps": [],
+      "frontier_id": "public_civic_requirements",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not guaranteed eligibility",
+        "not legal advice",
+        "not pack ready",
+        "not universal government coverage"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "nara.constitution.presidency"
+      ],
+      "status": "source_review_ready",
+      "status_ceiling": "claim_graph_ready"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "frontier_below_pack_readiness",
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved",
+        "review_required"
+      ],
+      "candidate_count": 1,
+      "candidate_only_count": 1,
+      "candidate_source_lanes_missing": [
+        "acf.family-services"
+      ],
+      "claim_count": 0,
+      "domain": "relationships_family",
+      "freshness_policy_gaps": [],
+      "frontier_id": "relationships_family",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output",
+        "missing_source_lane",
+        "redistribution_not_approved"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "missing_authority_classes": [
+        "official_institution"
+      ],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "not legal custody advice",
+        "not pack ready",
+        "not personalized relationship judgment",
+        "not therapy"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [],
+      "status": "candidate_only",
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "authority_classes_seen": [
+        "official_government"
+      ],
+      "blocking_reasons": [
+        "candidate_only_not_claim_authority",
+        "legal_review_required_before_pack_output",
+        "review_required"
+      ],
+      "candidate_count": 2,
+      "candidate_only_count": 2,
+      "candidate_source_lanes_missing": [],
+      "claim_count": 0,
+      "domain": "travel_relocation",
+      "freshness_policy_gaps": [],
+      "frontier_id": "travel_relocation",
+      "legal_posture_gaps": [
+        "legal_review_required_before_pack_output"
+      ],
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "missing_authority_classes": [],
+      "missing_required_source_lanes": [],
+      "non_claims": [
+        "candidate discovery only",
+        "country-specific visa and entry requirements remain excluded until separately reviewed",
+        "not a custom itinerary",
+        "not a safety guarantee",
+        "not emergency advice",
+        "not legal advice",
+        "not pack ready",
+        "not universal travel or relocation coverage",
+        "not visa advice"
+      ],
+      "packable_claim_count": 0,
+      "r2_packable_artifact_count": 0,
+      "registered_required_source_lanes": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ],
+      "status": "candidate_only",
+      "status_ceiling": "pack_staging_ready"
+    }
+  ],
+  "versionID": "source-atlas-broad-domain-discovery-train-07"
+}

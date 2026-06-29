@@ -1,0 +1,29 @@
+{
+  "adapterID": "usagov_change_address_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "8662b9527387e949270ad353f5265625dfc6f087fc9d45b07d86f25a7a158e4c",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "usagov_public_web",
+  "normalizedPath": "normalized/usa.gov.change_address.json",
+  "normalizedSHA256": "6f7e35db79a01cdcf0c2fa37ea4c10a2bfb8e4c8022c5004cb993004345e1fd6",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "usa.gov.change_address",
+  "sourceLane": "usa.gov.change_address"
+}
