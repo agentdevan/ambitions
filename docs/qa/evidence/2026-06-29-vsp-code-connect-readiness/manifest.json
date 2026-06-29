@@ -1,7 +1,7 @@
 {
   "packet": "2026-06-29-vsp-code-connect-readiness",
   "status": "Yellow",
-  "status_reason": "Existing Ambitions Figma component sets were reconciled to current SwiftUI source owners and a readiness ledger was added, but Figma Code Connect publish is blocked by Figma account/seat capability and owner approval is not claimed.",
+  "status_reason": "Existing Ambitions Figma component sets were reconciled to current SwiftUI source owners, missing VSP-01 shell and VSP-06 You component sets were added, and a readiness ledger was added, but Figma Code Connect publish is blocked by Figma account/seat capability and owner approval is not claimed.",
   "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
   "figma_file_url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv",
   "component_library_page": {
@@ -9,9 +9,14 @@
     "name": "CANDIDATE — 00 Ambitions Design System Library"
   },
   "readiness_ledger_frame": {
-    "node_id": "28:2",
-    "name": "CANDIDATE — VSP Code Connect Readiness Ledger — R1",
-    "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=28-2"
+    "node_id": "29:45",
+    "name": "CANDIDATE — VSP Code Connect Readiness Ledger — R2",
+    "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=29-45"
+  },
+  "supplemental_component_frame": {
+    "node_id": "29:2",
+    "name": "CANDIDATE — Component Library - Shell and You Source Primitives R1",
+    "url": "https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=29-2"
   },
   "owner_review_strengthening_page": {
     "node_id": "22:2",
@@ -59,6 +64,21 @@
     "language": "Swift"
   },
   "component_mappings": [
+    {
+      "vsp": "VSP-01 Shell Authority",
+      "figma_node_id": "29:25",
+      "figma_component": "CANDIDATE — ApprovedShellObject",
+      "code_connect_target": "AmbitionsSurfaceShell / RootDestinationIdentityRail / ContextCrownHeader / SourceTrustChrome",
+      "source_owners": [
+        "Sources/Components/SurfaceShellPrimitives.swift",
+        "Sources/Components/NavigationPrimitives.swift",
+        "Sources/Components/AmbitionsFlagshipTactilePrimitives.swift",
+        "Sources/Components/ShellChromeTrustPrimitives.swift"
+      ],
+      "provenance": "Existing SwiftUI primitives; VSP-01 approved frame remains visual authority",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "Reference shell mapping only. Must not mutate or reinterpret the approved VSP-01 shell."
+    },
     {
       "vsp": "VSP-02 Today Reality Window",
       "figma_node_id": "11:25",
@@ -154,6 +174,20 @@
       "product_law": "Global composer only. Never a tab, inbox, chatbot, or root destination."
     },
     {
+      "vsp": "VSP-06 You Native User System",
+      "figma_node_id": "29:44",
+      "figma_component": "CANDIDATE — UserSystemProfileObject",
+      "code_connect_target": "PersonalSystemCenterHeader / PersonalSystemCenterSetupCompleteness / YouRootSurface",
+      "source_owners": [
+        "Sources/Components/PersonalSystemCenterPrimitives.swift",
+        "Native/Ambitions/Surfaces/You/YouRootSurface.swift",
+        "Native/Ambitions/Surfaces/You/YouSurface.swift"
+      ],
+      "provenance": "Existing SwiftUI primitives and canonical Surfaces/You owner",
+      "status": "Code Connect-ready; Figma plan seat blocks publish",
+      "product_law": "You is native user system/settings clarity, not old Profile IA or account-gated core."
+    },
+    {
       "vsp": "VSP-08 External Boundaries",
       "figma_node_id": "11:154",
       "figma_component": "CANDIDATE — BoundaryStateObject",
@@ -183,8 +217,8 @@
     }
   ],
   "validation": {
-    "figma_metadata_validation": "Passed for all nine repaired component sets.",
-    "figma_readiness_ledger_validation": "Passed. Ledger text count 58; collapsed text count 0.",
+    "figma_metadata_validation": "Passed for all eleven repaired or newly added component sets.",
+    "figma_readiness_ledger_validation": "Passed. Ledger text count 64; collapsed text count 0.",
     "code_connect_validation": "Blocked before mapping publish by Figma account/seat capability."
   },
   "non_claims": [

@@ -18,7 +18,12 @@ This packet records the VSP Figma component/source-owner repair performed after 
   - `11:137` - `CANDIDATE — CaptureComposerObject`
   - `11:154` - `CANDIDATE — BoundaryStateObject`
   - `11:166` - `CANDIDATE — MotionAccessibilityObject`
-- Added readiness ledger frame: `28:2` - `CANDIDATE — VSP Code Connect Readiness Ledger — R1`
+- Added missing source-mapped component sets:
+  - `29:25` - `CANDIDATE — ApprovedShellObject`
+  - `29:44` - `CANDIDATE — UserSystemProfileObject`
+- Added supplemental component frame:
+  - `29:2` - `CANDIDATE — Component Library - Shell and You Source Primitives R1`
+- Added readiness ledger frame: `29:45` - `CANDIDATE — VSP Code Connect Readiness Ledger — R2`
 - Added owner-review strengthening page earlier in the same Figma file:
   - Page `22:2` - `CANDIDATE — 18 VSP Owner Review Strengthening R1`
   - Frame `22:3` - package cover
@@ -52,7 +57,7 @@ Because of that account/plan blocker, no Code Connect mapping was published to F
 
 ## Validation performed
 
-- Figma metadata validation: passed for all nine repaired component sets.
+- Figma metadata validation: passed for all eleven repaired or newly added component sets.
 - Figma readiness ledger validation: passed; no collapsed text was found in the ledger.
 - Code Connect tool validation: blocked by Figma account/seat capability before mapping publish.
 
