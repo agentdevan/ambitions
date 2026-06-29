@@ -1,0 +1,888 @@
+{
+  "createdAt": "2026-06-29T12:00:00Z",
+  "kind": "ambitions.sourceAtlas.proposedCoverageFrontiers.v1",
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.4ea9dadbc2d0d20c"
+      ],
+      "claim_classes": [
+        "consumer_product_recall_fact",
+        "recall_remedy_type",
+        "vehicle_recall_or_defect_reference",
+        "vin_decode_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "consumer_and_vehicle_recalls",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "daily_to_weekly"
+      ],
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "dispose",
+        "monitor",
+        "repair",
+        "verify"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "buy/don't buy recommendations",
+        "mechanic advice",
+        "explicit exclusion: repair eligibility promises",
+        "explicit exclusion: warranty advice",
+        "explicit exclusion: marketplace seller authenticity",
+        "forbidden claim: product is safe because not found",
+        "forbidden claim: repair completed or remedy available without source",
+        "forbidden claim: counterfeit detection from listing text",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "consumer_product_and_vehicle_safety",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.428f14633cca001f",
+        "candidate_source.93fe617c50ea25d4",
+        "candidate_source.b891ed4e483eca45"
+      ],
+      "claim_classes": [
+        "county_disaster_status",
+        "disaster_declaration_presence",
+        "earthquake_event_fact",
+        "flood_zone_lookup",
+        "map_effective_date"
+      ],
+      "claim_output_allowed": false,
+      "domain": "hazard_disaster_resilience",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "declarations_daily",
+        "earthquakes_near_real_time",
+        "flood_maps_as_posted"
+      ],
+      "frontier_id": "disaster_flood_seismic",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "document",
+        "insure",
+        "prepare",
+        "relocate"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "repair advice",
+        "engineering advice",
+        "insurance underwriting outcomes",
+        "explicit exclusion: insured loss estimates",
+        "explicit exclusion: parcel-specific engineering conclusions",
+        "explicit exclusion: structural safety certifications",
+        "forbidden claim: property is safe",
+        "forbidden claim: claim is covered by insurance",
+        "forbidden claim: evacuation order unless directly sourced",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "disaster_flood_seismic",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.50df28ca830a9d78",
+        "candidate_source.564b244b7a4eeffc",
+        "candidate_source.e31698be695f9759"
+      ],
+      "claim_classes": [
+        "field_of_study_metric",
+        "occupation_crosswalk",
+        "occupation_task_skill_knowledge",
+        "published_labor_series_value",
+        "school_outcome_metric"
+      ],
+      "claim_output_allowed": false,
+      "domain": "education_workforce_labor_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "bls_as_series_release",
+        "onet_by_database_release",
+        "scorecard_as_released"
+      ],
+      "frontier_id": "education_career_labor",
+      "goal_intent_classes": [
+        "budget",
+        "compare",
+        "learn",
+        "plan",
+        "reskill"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "subjective rankings",
+        "personality-based job prescriptions",
+        "explicit exclusion: admissions probability",
+        "explicit exclusion: career fit diagnosis",
+        "explicit exclusion: salary promises",
+        "explicit exclusion: employer reviews",
+        "forbidden claim: best school for you",
+        "forbidden claim: guaranteed job placement",
+        "forbidden claim: guaranteed salary outcome",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "education_career_labor",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.0f09b992d8e46639",
+        "candidate_source.9719d11cf7492848"
+      ],
+      "claim_classes": [
+        "current_aqi_category",
+        "current_aqi_value",
+        "historical_monitor_value",
+        "regulatory_quality_series",
+        "reporting_area_mapping"
+      ],
+      "claim_output_allowed": false,
+      "domain": "air_quality_exposure",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "certified_history_as_published",
+        "current_hourly",
+        "forecasts_daily"
+      ],
+      "frontier_id": "environmental_exposure",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "caregiving",
+        "exercise",
+        "plan"
+      ],
+      "jurisdictions": [
+        "North_America_partial",
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "individual health prognosis",
+        "best air purifier recommendation",
+        "explicit exclusion: medical diagnosis",
+        "explicit exclusion: worker-safety compliance",
+        "explicit exclusion: regulatory enforcement determinations from preliminary data",
+        "forbidden claim: safe_for_everyone statements",
+        "forbidden claim: clinical advice",
+        "forbidden claim: regulatory exceedance from preliminary feeds",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "environmental_exposure",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.01cc73560b6c7b1f"
+      ],
+      "claim_classes": [
+        "bank_identity",
+        "branch_location",
+        "fdic_insured_status_reference",
+        "institution_history"
+      ],
+      "claim_output_allowed": false,
+      "domain": "bank_and_institution_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "as_posted_by_fdic"
+      ],
+      "frontier_id": "financial_institution_verification",
+      "goal_intent_classes": [
+        "choose",
+        "de-risk",
+        "document",
+        "verify"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best bank",
+        "yield recommendations",
+        "explicit exclusion: investment advice",
+        "explicit exclusion: fraud certainty",
+        "explicit exclusion: account coverage calculation without user balances",
+        "explicit exclusion: creditworthiness scoring",
+        "forbidden claim: bank is safe",
+        "forbidden claim: deposits are fully covered for the user",
+        "forbidden claim: scam determination as certainty",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "financial_institution_verification",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.fada70800a432ba1"
+      ],
+      "claim_classes": [
+        "branded_food_label_reference",
+        "food_component_reference",
+        "food_identity",
+        "nutrient_value"
+      ],
+      "claim_output_allowed": false,
+      "domain": "food_nutrition_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "monthly_to_biannually_by_data_type"
+      ],
+      "frontier_id": "food_nutrition_reference",
+      "goal_intent_classes": [
+        "compare",
+        "cook",
+        "document",
+        "shop",
+        "track"
+      ],
+      "jurisdictions": [
+        "US_primary",
+        "global_branded_partial"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "personalized meal plans",
+        "clinical nutrition advice",
+        "explicit exclusion: dietary advice",
+        "explicit exclusion: allergy-safe guarantees",
+        "explicit exclusion: restaurant-specific menu truth absent source linkage",
+        "forbidden claim: healthy for user",
+        "forbidden claim: weight-loss effect",
+        "forbidden claim: medical nutrition therapy",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "food_nutrition_reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.795de8900ca160f0",
+        "candidate_source.9522d809d8983cc4",
+        "candidate_source.a6ac12427c831c8d"
+      ],
+      "claim_classes": [
+        "admin_hierarchy_mapping",
+        "latlon_to_jurisdiction",
+        "place_canonicalization",
+        "timezone_assignment",
+        "zip_to_geo_crosswalk"
+      ],
+      "claim_output_allowed": false,
+      "domain": "place_time_identity",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "boundaries_annual",
+        "crosswalks_monthly_to_annual",
+        "timezone_changes_within_7d_of_upstream_release"
+      ],
+      "frontier_id": "geo_temporal_reference",
+      "goal_intent_classes": [
+        "archive",
+        "locate",
+        "normalize",
+        "orient",
+        "schedule"
+      ],
+      "jurisdictions": [
+        "US_enhanced",
+        "global_baseline"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best route",
+        "best neighborhood",
+        "business hours",
+        "door-level access instructions",
+        "explicit exclusion: parcel ownership or title",
+        "explicit exclusion: USPS-certified deliverability",
+        "explicit exclusion: exact rooftop or entrance certainty",
+        "explicit exclusion: routing correctness",
+        "explicit exclusion: tax domicile or legal residency determinations",
+        "forbidden claim: mail deliverability guarantee",
+        "forbidden claim: legal address entitlement",
+        "forbidden claim: property ownership",
+        "forbidden claim: identity verification",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "geo_temporal_reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.3f11d6d913f16d43",
+        "candidate_source.be7fdde59e645f76"
+      ],
+      "claim_classes": [
+        "drug_recall_fact",
+        "drug_shortage_presence",
+        "npi_status",
+        "provider_identity",
+        "provider_taxonomy"
+      ],
+      "claim_output_allowed": false,
+      "domain": "healthcare_reference_and_drug_safety",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "provider_directory_near_real_time_to_batch",
+        "recalls_weekly",
+        "shortages_daily"
+      ],
+      "frontier_id": "health_provider_medication",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "document",
+        "find_care",
+        "refill",
+        "verify"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best doctor",
+        "safe alternative medication",
+        "coverage approval",
+        "explicit exclusion: diagnosis",
+        "explicit exclusion: treatment recommendation",
+        "explicit exclusion: insurance network status unless explicitly sourced",
+        "explicit exclusion: prescribing advice",
+        "forbidden claim: provider quality ranking as fact",
+        "forbidden claim: medical care advice",
+        "forbidden claim: medication substitution advice",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "health_provider_medication",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.3a77f6765040a3ff",
+        "candidate_source.b8cc31124e900bee"
+      ],
+      "claim_classes": [
+        "fair_market_rent",
+        "housing_counselor_presence",
+        "income_limit_reference",
+        "zip_to_tract_or_cbsa_crosswalk"
+      ],
+      "claim_output_allowed": false,
+      "domain": "housing_reference_assistance",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "annual_with_in-year_dataset_updates",
+        "counselor_directory_as_posted"
+      ],
+      "frontier_id": "housing_costs_and_local_help",
+      "goal_intent_classes": [
+        "budget",
+        "compare",
+        "document",
+        "relocate",
+        "seek_help"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "move recommendation",
+        "fair housing legal determination",
+        "explicit exclusion: property valuations",
+        "explicit exclusion: tenant legal advice",
+        "explicit exclusion: landlord quality ratings",
+        "explicit exclusion: lease interpretation",
+        "forbidden claim: affordable for user",
+        "forbidden claim: eligibility approved",
+        "forbidden claim: housing counselor quality ranking",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "housing_costs_and_local_help",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.0694e80c56a388e8",
+        "candidate_source.5ebbd3b60dfdc500",
+        "candidate_source.9bbc05b1a931e503",
+        "candidate_source.b42938ebc2cfa0b8",
+        "candidate_source.fbe21c8f6d7ae281"
+      ],
+      "claim_classes": [
+        "bill_status_or_text_reference",
+        "current_reg_text_reference",
+        "federal_register_notice_presence",
+        "official_pdf_reference",
+        "tax_threshold_or_instruction_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "public_law_regulation_tax_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "ecfr_continuous",
+        "federal_register_daily",
+        "legislative_daily",
+        "tax_publications_as_issued"
+      ],
+      "frontier_id": "law_regulation_and_tax",
+      "goal_intent_classes": [
+        "calculate_reference",
+        "comply",
+        "document",
+        "monitor_change",
+        "research"
+      ],
+      "jurisdictions": [
+        "US_federal_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "interpretive legal conclusions",
+        "case-specific tax advice",
+        "explicit exclusion: state and local law completeness",
+        "explicit exclusion: legal advice",
+        "explicit exclusion: tax preparation outcomes",
+        "explicit exclusion: personalized eligibility for deductions or credits",
+        "forbidden claim: this is legal advice",
+        "forbidden claim: this is the official legal edition when not",
+        "forbidden claim: tax filing recommendation as certainty",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "law_regulation_and_tax",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.be280adc6dad6373",
+        "candidate_source.d3c1a9dfe9589457",
+        "candidate_source.8a8ef3a1137954ae"
+      ],
+      "claim_classes": [
+        "feed_discovery",
+        "scheduled_departure_arrival",
+        "service_alert_or_delay",
+        "vehicle_position_or_eta",
+        "vehicle_vin_decode"
+      ],
+      "claim_output_allowed": false,
+      "domain": "movement_schedule_vehicle",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "VIN_reference_as_posted",
+        "realtime_subminute_to_minutes",
+        "static_schedule_daily_or_better"
+      ],
+      "frontier_id": "mobility_transit_travel",
+      "goal_intent_classes": [
+        "commute",
+        "coordinate",
+        "plan",
+        "travel",
+        "verify"
+      ],
+      "jurisdictions": [
+        "US_feed_discovery_enhanced",
+        "global_pattern"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best route preference",
+        "ride-booking availability",
+        "fare optimization",
+        "explicit exclusion: fare payment accounts",
+        "explicit exclusion: ticketing/booking",
+        "explicit exclusion: ETA guarantees",
+        "explicit exclusion: crowding predictions unless operator-sourced",
+        "forbidden claim: guaranteed trip arrival",
+        "forbidden claim: unlicensed redistribution of agency data",
+        "forbidden claim: vehicle safety certification from VIN alone",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "mobility_transit_travel",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.113f160dd0e6c7d8"
+      ],
+      "claim_classes": [
+        "active_alert_presence",
+        "affected_area",
+        "hourly_forecast",
+        "observation_station_value",
+        "seven_day_forecast"
+      ],
+      "claim_output_allowed": false,
+      "domain": "weather_alerts",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "alerts_subhourly",
+        "forecasts_hourly_to_daily",
+        "observations_near_real_time"
+      ],
+      "frontier_id": "weather_and_public_alerts",
+      "goal_intent_classes": [
+        "avoid_risk",
+        "commute",
+        "notify",
+        "plan",
+        "travel"
+      ],
+      "jurisdictions": [
+        "US_primary"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "best outing recommendation",
+        "crop advice",
+        "medical heat-risk diagnosis",
+        "explicit exclusion: insurance-loss estimates",
+        "explicit exclusion: building-level hazard modeling",
+        "explicit exclusion: medical interpretation of exposure",
+        "forbidden claim: guaranteed future weather",
+        "forbidden claim: shelter-in-place or evacuation advice beyond official wording",
+        "forbidden claim: property safety certification",
+        "not production coverage",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "weather_and_public_alerts",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ]
+}

@@ -123,6 +123,51 @@ def test_private_boundary_issue_fails_before_candidate_use(tmp_path: Path):
     assert any("goal_text" in issue or "first_person_private_context" in issue for issue in result["issues"])
 
 
+def test_safe_api_credential_metadata_alias_is_preserved_for_review_queue(tmp_path: Path):
+    input_path = tmp_path / "safe-alias.json"
+    write_json(
+        input_path,
+        {
+            "frontiers": [
+                {
+                    "frontier_id": "F09_EDUCATION_CAREER_LABOR",
+                    "domain": "education_workforce_labor_reference",
+                    "goal_intent_classes": ["learn"],
+                    "claim_classes": ["published_labor_series_value"],
+                    "jurisdictions": ["US_primary"],
+                    "minimum_authority_classes": ["federal_primary"],
+                    "freshness_sla": "bls_as_series_release",
+                }
+            ],
+            "source_candidates": [
+                {
+                    "source_id": "SRC_BLS_API",
+                    "source_name": "BLS Public Data API",
+                    "publisher": "U.S. Bureau of Labor Statistics",
+                    "source_class": "federal_api",
+                    "authority_class": "federal_primary",
+                    "homepage_url": "https://www.bls.gov/developers/",
+                    "data_url/api_url": "https://api.bls.gov/publicAPI/v2/",
+                    "documentation_url": "https://www.bls.gov/bls/api_features.htm",
+                    "terms_url": "https://www.bls.gov/developers/termsOfService.htm",
+                    "apiCredentialRequirementMetadata": "registration_key_for_version_2_0_features",
+                    "claim_classes_supported": ["published_labor_series_value"],
+                    "jurisdictions_covered": ["US"],
+                }
+            ],
+            "gold_claims": [],
+        },
+    )
+
+    result = _run(input_path, tmp_path)
+
+    assert result["valid"], result["issues"]
+    sources = read_json(Path(result["outputRoot"]) / "normalized-source-candidates.json")["sourceCandidates"]
+    assert sources[0]["api_key_required"] == "registration_key_for_version_2_0_features"
+    workflow = read_json(Path(result["outputRoot"]) / "workflow-queue.json")["workflowItems"]
+    assert any("api_credentials_or_budget_review_required" in item["blocking_reasons"] for item in workflow)
+
+
 def _run(input_path: Path, tmp_path: Path) -> dict[str, object]:
     return run_deep_research_frontier_intake(
         DeepResearchFrontierIntakeOptions(

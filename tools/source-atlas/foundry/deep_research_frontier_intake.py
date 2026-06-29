@@ -432,6 +432,7 @@ def _normalize_sources(payload: Any) -> list[dict[str, Any]]:
             "claim_class_guess": _string_list(source, "claim_classes_supported"),
             "redistribution_guess": _redistribution_guess(source),
         }
+        api_credential_requirement = _api_credential_requirement(source)
         records.append(
             {
                 "submitted_source_id": submitted_id,
@@ -442,7 +443,7 @@ def _normalize_sources(payload: Any) -> list[dict[str, Any]]:
                 "claim_authority_allowed": False,
                 "pack_output_allowed": False,
                 "r2_output_allowed": False,
-                "api_key_required": source.get("api_key_required", ""),
+                "api_key_required": api_credential_requirement,
                 "rate_limits": source.get("rate_limits", ""),
                 "update_cadence": source.get("update_cadence", ""),
                 "coverage_gaps": _string_list(source, "coverage_gaps"),
@@ -686,6 +687,10 @@ def _redistribution_guess(source: dict[str, Any]) -> str:
     if "yes" in raw:
         return "clearly_open"
     return "unclear"
+
+
+def _api_credential_requirement(source: dict[str, Any]) -> Any:
+    return source.get("api_key_required", source.get("apiCredentialRequirementMetadata", ""))
 
 
 def _ordered_unique(values: list[str]) -> list[str]:

@@ -1,0 +1,1047 @@
+{
+  "createdAt": "2026-06-29T12:00:00Z",
+  "goldClaimReviewMarkers": [
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "consumer_product_recall_fact",
+      "evidence_hash": "a52ef071ce0c574f389d557bd0023a21e8254027bb852cb47df38669cdc71f02",
+      "exclusions": [
+        "marketplace_authenticity"
+      ],
+      "frontier_id": "consumer_product_and_vehicle_safety",
+      "gold_claim_review_marker_id": "gold.consumer_product_and_vehicle_safety.cpsc_recalls.consumer_product_recall_fact",
+      "jurisdiction": "US",
+      "non_claims": [
+        "buy_dont_buy_recommendation"
+      ],
+      "object_contains_markers": [
+        "recall_title",
+        "hazard",
+        "units",
+        "remedy",
+        "announcement_date"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "cpsc.recalls",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F07_CONSUMER_PRODUCT_AND_VEHICLE_SAFETY",
+      "submitted_gold_claim_id": "GC017",
+      "submitted_source_id": "SRC_CPSC_RECALLS"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "official_flood_map_reference",
+      "evidence_hash": "01b4abf2f6a9aeefce7e287ae2d2c504bbdc07f70a42a8216dec4482075eb667",
+      "exclusions": [
+        "engineering_certification"
+      ],
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_id": "gold.disaster_flood_seismic.fema_fmsc.official_flood_map_reference",
+      "jurisdiction": "US",
+      "non_claims": [
+        "insurance_premium_outcome"
+      ],
+      "object_contains_markers": [
+        "panel_id",
+        "effective_date",
+        "zone",
+        "map_product_reference"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "fema.fmsc",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F04_DISASTER_FLOOD_SEISMIC",
+      "submitted_gold_claim_id": "GC010",
+      "submitted_source_id": "SRC_FEMA_FMSC"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "disaster_declaration_presence",
+      "evidence_hash": "c2e75114689afb44baa3b04223e9e0b07a28800c9b9f370e8ec4a8b5d348ac0f",
+      "exclusions": [
+        "individual_eligibility_award"
+      ],
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_id": "gold.disaster_flood_seismic.openfema.disaster_declaration_presence",
+      "jurisdiction": "US",
+      "non_claims": [
+        "coverage_of_losses"
+      ],
+      "object_contains_markers": [
+        "declaration_number",
+        "incident_type",
+        "state",
+        "county",
+        "declaration_date"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "openfema",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F04_DISASTER_FLOOD_SEISMIC",
+      "submitted_gold_claim_id": "GC009",
+      "submitted_source_id": "SRC_OPENFEMA"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "earthquake_event_fact",
+      "evidence_hash": "631deb33ff6a22016c461609649f260aa55294941ecb9aa9c29e518071d522de",
+      "exclusions": [
+        "damage_estimate"
+      ],
+      "frontier_id": "disaster_flood_seismic",
+      "gold_claim_review_marker_id": "gold.disaster_flood_seismic.usgs_eq.earthquake_event_fact",
+      "jurisdiction": "global",
+      "non_claims": [
+        "building_safety"
+      ],
+      "object_contains_markers": [
+        "event_id",
+        "magnitude",
+        "time_utc",
+        "place",
+        "review_status"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "usgs.eq",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F04_DISASTER_FLOOD_SEISMIC",
+      "submitted_gold_claim_id": "GC008",
+      "submitted_source_id": "SRC_USGS_EQ"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "published_labor_series_value",
+      "evidence_hash": "5a08af6d62ef198d6afd1b1b44506cb0f32c8b5af64948f2808b041f4245bc96",
+      "exclusions": [
+        "forecast_not_in_series"
+      ],
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_id": "gold.education_career_labor.bls_api.published_labor_series_value",
+      "jurisdiction": "US",
+      "non_claims": [
+        "macro_prediction"
+      ],
+      "object_contains_markers": [
+        "series_id",
+        "period",
+        "value",
+        "survey"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "bls.api",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F09_EDUCATION_CAREER_LABOR",
+      "submitted_gold_claim_id": "GC025",
+      "submitted_source_id": "SRC_BLS_API"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "school_or_field_metric",
+      "evidence_hash": "50e69c3e8ec9ac506ad4397c2ac8ce60b8033d0dbea4c0bc25aa3208e1b1e01c",
+      "exclusions": [
+        "admissions_prediction"
+      ],
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_id": "gold.education_career_labor.college_scorecard.school_or_field_metric",
+      "jurisdiction": "US",
+      "non_claims": [
+        "best_school_for_user"
+      ],
+      "object_contains_markers": [
+        "school_id",
+        "field_of_study",
+        "metric_name",
+        "value",
+        "cohort_or_year"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "college.scorecard",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F09_EDUCATION_CAREER_LABOR",
+      "submitted_gold_claim_id": "GC023",
+      "submitted_source_id": "SRC_COLLEGE_SCORECARD"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "occupation_knowledge_skill_task_reference",
+      "evidence_hash": "fc66c5f5c1992342b291a8ef148297309699dba3039d3b41e1c03bb71470e1ab",
+      "exclusions": [
+        "job_openings",
+        "salary_guarantee"
+      ],
+      "frontier_id": "education_career_labor",
+      "gold_claim_review_marker_id": "gold.education_career_labor.onet_ws.occupation_knowledge_skill_task_reference",
+      "jurisdiction": "US",
+      "non_claims": [
+        "career_fit_diagnosis"
+      ],
+      "object_contains_markers": [
+        "onet_soc_code",
+        "occupation_title",
+        "tasks",
+        "skills",
+        "knowledge"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "onet.ws",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F09_EDUCATION_CAREER_LABOR",
+      "submitted_gold_claim_id": "GC024",
+      "submitted_source_id": "SRC_ONET_WS"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "current_aqi_value",
+      "evidence_hash": "ec48d7084e7d67d6306984b46c5afcf98964241da12c34e5a4767848a84e7f63",
+      "exclusions": [
+        "regulatory_enforcement_use"
+      ],
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_id": "gold.environmental_exposure.airnow.current_aqi_value",
+      "jurisdiction": "US",
+      "non_claims": [
+        "medical_clearance"
+      ],
+      "object_contains_markers": [
+        "reporting_area",
+        "aqi",
+        "category",
+        "pollutant",
+        "observation_time"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "airnow",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F03_ENVIRONMENTAL_EXPOSURE",
+      "submitted_gold_claim_id": "GC006",
+      "submitted_source_id": "SRC_AIRNOW"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "certified_historical_air_series",
+      "evidence_hash": "cd0ccfbea0a2f1b62207d9b13d735dd5508de0ef844722d48c31ed363e0bd164",
+      "exclusions": [
+        "live_nowcast_aqi"
+      ],
+      "frontier_id": "environmental_exposure",
+      "gold_claim_review_marker_id": "gold.environmental_exposure.aqs.certified_historical_air_series",
+      "jurisdiction": "US",
+      "non_claims": [
+        "personal_health_impact"
+      ],
+      "object_contains_markers": [
+        "monitor_id",
+        "pollutant",
+        "date_range",
+        "value",
+        "units"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "aqs",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F03_ENVIRONMENTAL_EXPOSURE",
+      "submitted_gold_claim_id": "GC007",
+      "submitted_source_id": "SRC_AQS"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "fdic_insured_bank_reference",
+      "evidence_hash": "59b498547ac7add7fd9b0765c362ad6ef929cdaa7cdac98cbe39ac37fcd17df6",
+      "exclusions": [
+        "user_specific_insurance_coverage_amount"
+      ],
+      "frontier_id": "financial_institution_verification",
+      "gold_claim_review_marker_id": "gold.financial_institution_verification.fdic_bankfind.fdic_insured_bank_reference",
+      "jurisdiction": "US",
+      "non_claims": [
+        "bank_safety_guarantee"
+      ],
+      "object_contains_markers": [
+        "fdic_cert",
+        "institution_name",
+        "insured_status",
+        "branch_or_location"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "fdic.bankfind",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F11_FINANCIAL_INSTITUTION_VERIFICATION",
+      "submitted_gold_claim_id": "GC028",
+      "submitted_source_id": "SRC_FDIC_BANKFIND"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "food_nutrient_reference",
+      "evidence_hash": "013d84d4b282c5cabe08b80f23d169b3cd8c3afd0a0be733dba2a50adf18d17a",
+      "exclusions": [
+        "restaurant_actual_portion_truth",
+        "health_claim_personalization"
+      ],
+      "frontier_id": "food_nutrition_reference",
+      "gold_claim_review_marker_id": "gold.food_nutrition_reference.usda_fdc.food_nutrient_reference",
+      "jurisdiction": "US_primary",
+      "non_claims": [
+        "healthy_for_user"
+      ],
+      "object_contains_markers": [
+        "fdc_id",
+        "food_description",
+        "serving_basis",
+        "nutrient_name",
+        "amount",
+        "unit"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "usda.fdc",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F12_FOOD_NUTRITION_REFERENCE",
+      "submitted_gold_claim_id": "GC029",
+      "submitted_source_id": "SRC_USDA_FDC"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "admin_boundary_reference",
+      "evidence_hash": "3e4d10d6f7d25484b54611ad7d92d611b0a307c9de929230460eeddd963700af",
+      "exclusions": [
+        "parcel_line_truth"
+      ],
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_id": "gold.geo_temporal_reference.census_tiger.admin_boundary_reference",
+      "jurisdiction": "US",
+      "non_claims": [
+        "demographic_metric_without_join"
+      ],
+      "object_contains_markers": [
+        "geoid",
+        "boundary_type",
+        "name",
+        "vintage"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "census.tiger",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F01_GEO_TEMPORAL_REFERENCE",
+      "submitted_gold_claim_id": "GC003",
+      "submitted_source_id": "SRC_CENSUS_TIGER"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "zip_to_geo_crosswalk",
+      "evidence_hash": "cd442550a64026548d02249dd7c88335553fcc22dadaae76a79dcd64f37e0d89",
+      "exclusions": [
+        "usps_deliverability",
+        "exact_address_validation"
+      ],
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_id": "gold.geo_temporal_reference.hud_usps_crosswalk.zip_to_geo_crosswalk",
+      "jurisdiction": "US",
+      "non_claims": [
+        "legal_service_area"
+      ],
+      "object_contains_markers": [
+        "zip_code",
+        "tract_geoid",
+        "county_geoid",
+        "cbsa_code"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "hud.usps.crosswalk",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F01_GEO_TEMPORAL_REFERENCE",
+      "submitted_gold_claim_id": "GC002",
+      "submitted_source_id": "SRC_HUD_USPS_CROSSWALK"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "timezone_assignment",
+      "evidence_hash": "ac2353cfe26664850ae98d574641a442fc4e16c4106327b11f451cd5cca1ea2c",
+      "exclusions": [
+        "mailing_address_validity",
+        "property_title"
+      ],
+      "frontier_id": "geo_temporal_reference",
+      "gold_claim_review_marker_id": "gold.geo_temporal_reference.iana_tzdb.timezone_assignment",
+      "jurisdiction": "global",
+      "non_claims": [
+        "best_time_to_contact",
+        "travel_time"
+      ],
+      "object_contains_markers": [
+        "latlon_or_place_id",
+        "timezone_id",
+        "utc_offset_now",
+        "dst_observed"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "iana.tzdb",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F01_GEO_TEMPORAL_REFERENCE",
+      "submitted_gold_claim_id": "GC001",
+      "submitted_source_id": "SRC_IANA_TZDB"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "provider_identity_and_taxonomy",
+      "evidence_hash": "638d46d247be83bdcb3633ac726c0a83bacd77deff8e6f547dcb8a69b4f62c15",
+      "exclusions": [
+        "quality_scores",
+        "insurance_network_status"
+      ],
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_id": "gold.health_provider_medication.nppes.provider_identity_and_taxonomy",
+      "jurisdiction": "US",
+      "non_claims": [
+        "best_provider"
+      ],
+      "object_contains_markers": [
+        "npi",
+        "provider_name",
+        "taxonomy",
+        "address",
+        "enumeration_type"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "nppes",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F06_HEALTH_PROVIDER_MEDICATION",
+      "submitted_gold_claim_id": "GC014",
+      "submitted_source_id": "SRC_NPPES"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "drug_recall_fact",
+      "evidence_hash": "a078f68bb5beead13629cdd0f68e066b19950f71a212403848e3c8e497b50992",
+      "exclusions": [
+        "medical_decision_support"
+      ],
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_id": "gold.health_provider_medication.openfda.drug_recall_fact",
+      "jurisdiction": "US",
+      "non_claims": [
+        "take_or_stop_medication_advice"
+      ],
+      "object_contains_markers": [
+        "product_description",
+        "recall_class",
+        "reason",
+        "status",
+        "report_date"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "openfda",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F06_HEALTH_PROVIDER_MEDICATION",
+      "submitted_gold_claim_id": "GC015",
+      "submitted_source_id": "SRC_OPENFDA"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "drug_shortage_presence",
+      "evidence_hash": "410450a4507711a6817d4c0d3ac6b0f9483655e8fb8432f35c671f94fd683fe8",
+      "exclusions": [
+        "substitution_advice"
+      ],
+      "frontier_id": "health_provider_medication",
+      "gold_claim_review_marker_id": "gold.health_provider_medication.openfda.drug_shortage_presence",
+      "jurisdiction": "US",
+      "non_claims": [
+        "clinical_recommendation"
+      ],
+      "object_contains_markers": [
+        "generic_name",
+        "status",
+        "revision_date",
+        "therapeutic_category"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "openfda",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F06_HEALTH_PROVIDER_MEDICATION",
+      "submitted_gold_claim_id": "GC016",
+      "submitted_source_id": "SRC_OPENFDA"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "housing_counselor_directory_fact",
+      "evidence_hash": "186490fbde31e6850acd17faae95b9c7107731299ade85235c3ee1dfe1e9e321",
+      "exclusions": [
+        "quality_ranking"
+      ],
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_id": "gold.housing_costs_and_local_help.hud_counselor.housing_counselor_directory_fact",
+      "jurisdiction": "US",
+      "non_claims": [
+        "best_counselor"
+      ],
+      "object_contains_markers": [
+        "agency_name",
+        "address",
+        "distance",
+        "contact_info"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "hud.counselor",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F10_HOUSING_COSTS_AND_LOCAL_HELP",
+      "submitted_gold_claim_id": "GC027",
+      "submitted_source_id": "SRC_HUD_COUNSELOR"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "fair_market_rent_or_income_limit_reference",
+      "evidence_hash": "c9f01c1feddf0e4464ac2803f353dd0d275509a987dedab256f02fb0f653d9d6",
+      "exclusions": [
+        "tenant_eligibility_approval"
+      ],
+      "frontier_id": "housing_costs_and_local_help",
+      "gold_claim_review_marker_id": "gold.housing_costs_and_local_help.hud_fmr_il.fair_market_rent_or_income_limit_reference",
+      "jurisdiction": "US",
+      "non_claims": [
+        "this_home_is_affordable_for_user"
+      ],
+      "object_contains_markers": [
+        "entity_id",
+        "year",
+        "fmr_or_il",
+        "bedroom_or_household_threshold"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "hud.fmr.il",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F10_HOUSING_COSTS_AND_LOCAL_HELP",
+      "submitted_gold_claim_id": "GC026",
+      "submitted_source_id": "SRC_HUD_FMR_IL"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "bill_status_reference",
+      "evidence_hash": "1df4fa88980dd9d4aa809a36dfcbe8816e0f8e0183c98f938e429764fe8b6f4f",
+      "exclusions": [
+        "outcome_prediction"
+      ],
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_id": "gold.law_regulation_and_tax.congress_api.bill_status_reference",
+      "jurisdiction": "US_federal",
+      "non_claims": [
+        "policy_advice"
+      ],
+      "object_contains_markers": [
+        "congress",
+        "bill_type",
+        "bill_number",
+        "latest_action",
+        "status"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "congress.api",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F08_LAW_REGULATION_AND_TAX",
+      "submitted_gold_claim_id": "GC021",
+      "submitted_source_id": "SRC_CONGRESS_API"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "current_reg_text_reference",
+      "evidence_hash": "38c8229ecc33d46a161ac8d2876a31feace071abb8f0873bef7bdc9c15c6ab45",
+      "exclusions": [
+        "official_legal_edition_claim"
+      ],
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_id": "gold.law_regulation_and_tax.ecfr.current_reg_text_reference",
+      "jurisdiction": "US_federal",
+      "non_claims": [
+        "interpretive_legal_conclusion"
+      ],
+      "object_contains_markers": [
+        "title",
+        "part",
+        "section",
+        "last_amended",
+        "current_text"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "ecfr",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F08_LAW_REGULATION_AND_TAX",
+      "submitted_gold_claim_id": "GC019",
+      "submitted_source_id": "SRC_ECFR"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "federal_register_notice_reference",
+      "evidence_hash": "fec082620373e8fbb8bfc209c70189b0a35a5cefb36c004c01287fffff5dbecc",
+      "exclusions": [
+        "official_legal_status_claim_without_backstop"
+      ],
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_id": "gold.law_regulation_and_tax.federal_register_api.federal_register_notice_reference",
+      "jurisdiction": "US_federal",
+      "non_claims": [
+        "legal_advice"
+      ],
+      "object_contains_markers": [
+        "document_number",
+        "agency",
+        "type",
+        "publication_date",
+        "title"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "federal.register.api",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F08_LAW_REGULATION_AND_TAX",
+      "submitted_gold_claim_id": "GC018",
+      "submitted_source_id": "SRC_FEDERAL_REGISTER_API"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "official_pdf_or_package_reference",
+      "evidence_hash": "4908f672be979d8126311ba58f506cb8e74dd3b3f72a683159b1731054e5688c",
+      "exclusions": [
+        "continuous_currentness"
+      ],
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_id": "gold.law_regulation_and_tax.govinfo_api.official_pdf_or_package_reference",
+      "jurisdiction": "US_federal",
+      "non_claims": [
+        "legal_summary"
+      ],
+      "object_contains_markers": [
+        "package_id",
+        "collection",
+        "pdf_link",
+        "metadata"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "govinfo.api",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F08_LAW_REGULATION_AND_TAX",
+      "submitted_gold_claim_id": "GC020",
+      "submitted_source_id": "SRC_GOVINFO_API"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "tax_threshold_reference",
+      "evidence_hash": "c6ef8e2084e613f47626622e7a7b55dfa58198a8dce6949ba81944f52604948e",
+      "exclusions": [
+        "user_specific_filing_outcome"
+      ],
+      "frontier_id": "law_regulation_and_tax",
+      "gold_claim_review_marker_id": "gold.law_regulation_and_tax.irs_pubs.tax_threshold_reference",
+      "jurisdiction": "US_federal_tax",
+      "non_claims": [
+        "tax_advice"
+      ],
+      "object_contains_markers": [
+        "tax_year",
+        "threshold_name",
+        "amount",
+        "publication_or_topic"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "irs.pubs",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F08_LAW_REGULATION_AND_TAX",
+      "submitted_gold_claim_id": "GC022",
+      "submitted_source_id": "SRC_IRS_PUBS"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "official_transit_feed_discovery",
+      "evidence_hash": "e9a4c79283d0c71078c9915785221aa0683f42cad753e1c283cb01aecedc5397",
+      "exclusions": [
+        "license_uniformity",
+        "fare_truth"
+      ],
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_id": "gold.mobility_transit_travel.dot_ntd_gtfs_catalog.official_transit_feed_discovery",
+      "jurisdiction": "US",
+      "non_claims": [
+        "trip_guarantee"
+      ],
+      "object_contains_markers": [
+        "agency_name",
+        "feed_url",
+        "city",
+        "state"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "dot.ntd.gtfs.catalog",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F05_MOBILITY_TRANSIT_TRAVEL",
+      "submitted_gold_claim_id": "GC011",
+      "submitted_source_id": "SRC_DOT_NTD_GTFS_CATALOG"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "scheduled_stop_or_trip_fact",
+      "evidence_hash": "0f4bdbaedd45e31ea3776543df91b7cb3faf25a9eacc3aee1c2e2788309457d5",
+      "exclusions": [
+        "agency_license_terms"
+      ],
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_id": "gold.mobility_transit_travel.gtfs_standards.scheduled_stop_or_trip_fact",
+      "jurisdiction": "global_pattern",
+      "non_claims": [
+        "eta_certainty"
+      ],
+      "object_contains_markers": [
+        "route_id",
+        "trip_id",
+        "stop_id",
+        "arrival_time",
+        "departure_time"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "gtfs.standards",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F05_MOBILITY_TRANSIT_TRAVEL",
+      "submitted_gold_claim_id": "GC012",
+      "submitted_source_id": "SRC_GTFS_STANDARDS"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "vin_decode_reference",
+      "evidence_hash": "93229c08dde3e22ac60f7f8a9c26ddb88d4c9d8a798037479e34f42174b6b88b",
+      "exclusions": [
+        "recall_completion",
+        "roadworthiness"
+      ],
+      "frontier_id": "mobility_transit_travel",
+      "gold_claim_review_marker_id": "gold.mobility_transit_travel.nhtsa_vpic.vin_decode_reference",
+      "jurisdiction": "US_market_vehicles",
+      "non_claims": [
+        "safe_to_buy"
+      ],
+      "object_contains_markers": [
+        "vin",
+        "make",
+        "model",
+        "model_year",
+        "plant",
+        "vehicle_type"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "nhtsa.vpic",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F05_MOBILITY_TRANSIT_TRAVEL",
+      "submitted_gold_claim_id": "GC013",
+      "submitted_source_id": "SRC_NHTSA_VPIC"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "active_alert_presence",
+      "evidence_hash": "b48b849afb8d057ef56e253418258ea0f8b9959d777e29842f76bd0ca3abc4b8",
+      "exclusions": [
+        "local_unofficial_social_reports"
+      ],
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_id": "gold.weather_and_public_alerts.nws_api.active_alert_presence",
+      "jurisdiction": "US",
+      "non_claims": [
+        "evacuation_advice_beyond_official_text"
+      ],
+      "object_contains_markers": [
+        "alert_type",
+        "severity",
+        "effective",
+        "expires",
+        "affected_area"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "nws.api",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F02_WEATHER_AND_PUBLIC_ALERTS",
+      "submitted_gold_claim_id": "GC004",
+      "submitted_source_id": "SRC_NWS_API"
+    },
+    {
+      "blocking_reasons": [
+        "claim_frontier_review_required",
+        "provenance_evidence_required",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "pack_output_blocked_until_review"
+      ],
+      "claim_output_allowed": false,
+      "claim_type": "hourly_forecast",
+      "evidence_hash": "7c60327110e7903c50ac9a11c57cf757f1793a31b85885cdc9f0890bbc2c227a",
+      "exclusions": [
+        "guaranteed_conditions"
+      ],
+      "frontier_id": "weather_and_public_alerts",
+      "gold_claim_review_marker_id": "gold.weather_and_public_alerts.nws_api.hourly_forecast",
+      "jurisdiction": "US",
+      "non_claims": [
+        "go_outside_recommendation"
+      ],
+      "object_contains_markers": [
+        "forecast_hour",
+        "temp",
+        "wind",
+        "precip_probability",
+        "office_grid"
+      ],
+      "pack_output_allowed": false,
+      "r2_output_allowed": false,
+      "review_required": true,
+      "source_id": "nws.api",
+      "status_ceiling": "review_marker_only",
+      "submitted_frontier_id": "F02_WEATHER_AND_PUBLIC_ALERTS",
+      "submitted_gold_claim_id": "GC005",
+      "submitted_source_id": "SRC_NWS_API"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "coverageFreedomLanes": [
+    {
+      "freedom": "accept broad public/reference frontier definitions as review-bound candidates",
+      "gate": "frontier governance review before registry mutation",
+      "lane": "frontier_candidate_intake"
+    },
+    {
+      "freedom": "queue official, standards-body, open-license, catalog, and source-of-sources candidates together",
+      "gate": "source-lane, legal/terms, API, and owner review before claim use",
+      "lane": "source_candidate_review"
+    },
+    {
+      "freedom": "capture desired gold-claim coverage markers without emitting claims",
+      "gate": "claim frontier review, provenance, exclusions, non-claims, and adapter evidence",
+      "lane": "gold_claim_review_markers"
+    },
+    {
+      "freedom": "preserve jurisdiction, freshness, exclusion, and fragmentation notes as work-order inputs",
+      "gate": "no pack production until authority, rights, schema, and privacy reviews pass",
+      "lane": "coverage_gap_expansion"
+    },
+    {
+      "freedom": "prepare later promotion queues from reviewed packs",
+      "gate": "owner approval, legal/terms approval, production-target readiness, credentials, rollback evidence, and readback checksum",
+      "lane": "gated_r2_promotion"
+    }
+  ],
+  "createdAt": "2026-06-29T12:00:00Z",
+  "kind": "ambitions.sourceAtlas.coverageFreedomMap.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production target readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not owner approval",
+    "not credential proof",
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "overlap": {
+    "configuredFrontierIDs": [],
+    "configuredSourceLaneIDs": [],
+    "configuredSourceLaneNameMatches": [
+      "bls public data api"
+    ],
+    "newCandidateFrontierIDs": [
+      "consumer_product_and_vehicle_safety",
+      "disaster_flood_seismic",
+      "education_career_labor",
+      "environmental_exposure",
+      "financial_institution_verification",
+      "food_nutrition_reference",
+      "geo_temporal_reference",
+      "health_provider_medication",
+      "housing_costs_and_local_help",
+      "law_regulation_and_tax",
+      "mobility_transit_travel",
+      "weather_and_public_alerts"
+    ],
+    "overlapPolicy": "informational_review_required_not_registry_mutation"
+  },
+  "recordCounts": {
+    "frontierCandidates": 12,
+    "goldClaimReviewMarkers": 29,
+    "productionRegistryMutations": 0,
+    "r2Objects": 0,
+    "sourceCandidates": 31,
+    "workflowItems": 108
+  },
+  "schemaVersion": 1,
+  "statusCeiling": "candidate_only",
+  "versionID": "source-atlas-deep-research-frontier-intake-train-137"
+}
