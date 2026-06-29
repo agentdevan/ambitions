@@ -169,6 +169,11 @@ from .compiler import compile_bundle
 from .coverage_benchmark import coverage_diff, run_golden_benchmarks
 from .claim_frontier import ClaimFrontierOptions, compile_claim_frontier
 from .frontier_intake import FrontierIntakeOptions, compile_frontier_intake, write_frontier_intake_report
+from .deep_research_frontier_intake import (
+    DeepResearchFrontierIntakeOptions,
+    deep_research_frontier_intake_markdown,
+    run_deep_research_frontier_intake,
+)
 from .goal_domain_production_lanes import GoalDomainProductionLaneOptions, compile_goal_domain_production_lanes, write_goal_domain_production_lanes_report
 from .goal_domain_active_registry_apply_gate import (
     GoalDomainActiveRegistryApplyGateOptions,
@@ -973,6 +978,15 @@ def main(argv: list[str] | None = None) -> int:
     frontier_intake_parser.add_argument("--created-at")
     frontier_intake_parser.add_argument("--emit-evidence")
     frontier_intake_parser.add_argument("--markdown")
+
+    deep_research_frontier_intake_parser = sub.add_parser("deep-research-frontier-intake")
+    deep_research_frontier_intake_parser.add_argument("--input", required=True)
+    deep_research_frontier_intake_parser.add_argument("--output-root", required=True)
+    deep_research_frontier_intake_parser.add_argument("--frontier-config")
+    deep_research_frontier_intake_parser.add_argument("--source-lane-registry")
+    deep_research_frontier_intake_parser.add_argument("--created-at")
+    deep_research_frontier_intake_parser.add_argument("--emit-evidence")
+    deep_research_frontier_intake_parser.add_argument("--markdown")
 
     goal_domain_router_parser = sub.add_parser("goal-domain-router")
     goal_domain_router_parser.add_argument("--input", required=True)
@@ -2361,6 +2375,23 @@ def main(argv: list[str] | None = None) -> int:
                     created_at=args.created_at,
                 )
             )
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "deep-research-frontier-intake":
+        result = run_deep_research_frontier_intake(
+            DeepResearchFrontierIntakeOptions(
+                input_path=Path(args.input),
+                output_root=Path(args.output_root),
+                frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
+                source_lane_registry_path=Path(args.source_lane_registry) if args.source_lane_registry else None,
+                created_at=args.created_at,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(deep_research_frontier_intake_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "goal-domain-router":
