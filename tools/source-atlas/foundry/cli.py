@@ -243,6 +243,7 @@ from .governance_registry import validate_governance_registries, write_governanc
 from .harvest_runner import RUN_MODES, GovernedHarvestOptions, run_governed_harvest
 from .live_adapter_validation import ADAPTER_ALIASES, LiveRunOptions, run_live_adapter_validation
 from .r2_pack_publisher import PUBLISHER_MODES, PackR2PublisherOptions, r2_pack_publisher_markdown, run_pack_r2_publisher
+from .r2_live_inventory import R2LiveInventoryOptions, r2_live_inventory_markdown, run_r2_live_inventory
 from .r2_owner_approval import R2OwnerApprovalOptions, build_r2_owner_approval, r2_owner_approval_markdown
 from .r2_public_gateway_allowlist import (
     PublicGatewayAllowlistOptions,
@@ -509,6 +510,19 @@ def main(argv: list[str] | None = None) -> int:
     r2_pack_publisher_parser.add_argument("--env-file", action="append", dest="env_files")
     r2_pack_publisher_parser.add_argument("--emit-evidence")
     r2_pack_publisher_parser.add_argument("--markdown")
+
+    r2_live_inventory_parser = sub.add_parser("r2-live-inventory")
+    r2_live_inventory_parser.add_argument("--production-target-ledger", required=True)
+    r2_live_inventory_parser.add_argument("--output-root", required=True)
+    r2_live_inventory_parser.add_argument("--bucket", default="ambitions-source-atlas-prod")
+    r2_live_inventory_parser.add_argument("--prefix", default="source-atlas/")
+    r2_live_inventory_parser.add_argument("--env-file", action="append", dest="env_files")
+    r2_live_inventory_parser.add_argument("--account-id")
+    r2_live_inventory_parser.add_argument("--created-at", default="2026-06-29T00:00:00Z")
+    r2_live_inventory_parser.add_argument("--verify-known-checksums", action="store_true")
+    r2_live_inventory_parser.add_argument("--max-checksum-reads", type=int)
+    r2_live_inventory_parser.add_argument("--emit-evidence")
+    r2_live_inventory_parser.add_argument("--markdown")
 
     r2_owner_approval_parser = sub.add_parser("r2-owner-approval")
     r2_owner_approval_parser.add_argument("--production-target-ledger", required=True)
@@ -1610,6 +1624,27 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(r2_pack_publisher_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "r2-live-inventory":
+        result = run_r2_live_inventory(
+            R2LiveInventoryOptions(
+                production_target_ledger_path=Path(args.production_target_ledger),
+                output_root=Path(args.output_root),
+                bucket=args.bucket,
+                prefix=args.prefix,
+                env_file_paths=tuple(Path(path) for path in args.env_files) if args.env_files else None,
+                account_id=args.account_id,
+                created_at=args.created_at,
+                verify_known_checksums=args.verify_known_checksums,
+                max_checksum_reads=args.max_checksum_reads,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(r2_live_inventory_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "r2-owner-approval":
