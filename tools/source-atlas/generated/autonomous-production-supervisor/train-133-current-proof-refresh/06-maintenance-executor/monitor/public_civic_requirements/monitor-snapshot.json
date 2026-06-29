@@ -1,0 +1,57 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "nara.constitution.presidency"
+    }
+  ],
+  "createdAt": "2026-06-29T00:00:00Z",
+  "domainID": "public_civic_requirements",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-12-27",
+      "licenseID": "us_federal_public_source",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "nara.constitution.presidency",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "nara.constitution.presidency"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "stable_law_watch_quarterly_review",
+      "licenseID": "us_federal_public_source",
+      "nextReviewDueAt": "2026-12-27",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "nara.constitution.presidency",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

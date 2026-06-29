@@ -1,8 +1,8 @@
 # Source Atlas Coverage Ledger
 
 Status: Yellow
-Generated: 2026-06-27
-Input commit: 568378aef
+Generated: 2026-06-28
+Input commit: 0013594d1
 Owner posture: Retained coverage/proof roll-up, not product canon, production coverage proof, R2 readiness proof, privacy/legal approval, release proof, or known-issue closure.
 
 This ledger rolls up the current Source Atlas registry, product-experience scenario gates, native source states, claim/provenance/freshness posture, validation commands, R2 readiness gates, and known-issue routing. It must stay conservative: source-present, locally validated, or generated coverage artifacts do not prove production freshness, app-side R2 behavior, entitlement gating, privacy/legal approval, device behavior, accessibility conformance, or release readiness.
@@ -24,7 +24,7 @@ This ledger rolls up the current Source Atlas registry, product-experience scena
 | Scenarios | 6 Source-related product gates; 17 M09 golden scenarios x 8 source-state variants | Scenario/contract coverage only | `docs/qa/product-experience-scenario-gates.yaml`, `tools/source-atlas/fixtures/m09/golden-benchmark-matrix.json` |
 | Source states | current, unavailable, stale, stale-critical, conflicted, revoked, unsupported, review-required | Local repair-routing proof only | `tools/source-atlas/foundry/m09_validation.py`, `tools/source-atlas/fixtures/m09/source-state-repair-fixtures.json` |
 | Claims, provenance, freshness | 8 seed claims; freshness values: selection_cycle_watch, stable_law_watch | Seed/source-record proof only | `tools/source-atlas/foundry/registry.py`, `tools/source-atlas/foundry/contracts/*` |
-| Native source | 54 SourceAtlas source files and 32 SourceAtlas test files | Source/test presence; no release proof | `Native/Ambitions/**/SourceAtlas*.swift`, `Native/AmbitionsTests/**/SourceAtlas*.swift` |
+| Native source | 68 SourceAtlas source files and 44 SourceAtlas test files | Source/test presence; no release proof | `Native/Ambitions/**/SourceAtlas*.swift`, `Native/AmbitionsTests/**/SourceAtlas*.swift` |
 | Validation | 17 available M09 commands, 1 unavailable command, 14 areas | Local validation matrix proof only | `docs/qa/source-atlas/2026-06-26-m09-validation-command-matrix.json` |
 | R2 readiness | 5 contracts; production operations proof status Green for `source-atlas/v1/validation/amb-1429` | Green only for validation-prefix operations proof; Yellow for app/runtime/release readiness | `tools/source-atlas/foundry/contracts`, `docs/qa/source-atlas/production-r2-operations-proof.md` |
 | Broad occupational foundation | 4 sources, 38 claims, 19 requirements, 95 atoms, 60 edges, 10 crosswalks | Pack candidate_local_only; R2 candidate_local_only_not_uploaded | `tools/source-atlas/generated/broad-occupational-foundation`, `docs/qa/source-atlas/source-atlas-coverage-ledger.json` |
@@ -37,8 +37,8 @@ This ledger rolls up the current Source Atlas registry, product-experience scena
 | Domain | occupation_foundation |
 | Source lane | broad_occupational_foundation |
 | Adapter | source-atlas-adapter-sdk-v1 |
-| Source authority | official_dataset, official_government, open_knowledge_graph, restricted |
-| Jurisdiction | US, global |
+| Source authority | official_dataset, official_government, official_institution, open_knowledge_graph, regulated_body, restricted, scholarly_metadata, standards_body |
+| Jurisdiction | CA, US, US and destination-specific, US federal, global |
 | Source count | 4 |
 | Claim count | 38 |
 | Requirement count | 19 |
@@ -139,11 +139,11 @@ Unavailable validation entries are explicit non-claims:
 | Canonical owner | SourceAtlas file count |
 | --- | --- |
 | Core/Domain | 39 |
-| Core/Persistence | 4 |
-| Core/Runtime | 7 |
+| Core/Persistence | 17 |
+| Core/Runtime | 8 |
 | Projection | 3 |
 | DesignSystem | 1 |
-| Tests | 32 |
+| Tests | 44 |
 
 Sample native source evidence:
 

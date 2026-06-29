@@ -19,7 +19,10 @@
       "current"
     ],
     "jurisdiction": [
+      "CA",
       "US",
+      "US and destination-specific",
+      "US federal",
       "global"
     ],
     "license_status": "valid",
@@ -783,8 +786,12 @@
     "source_authority": [
       "official_dataset",
       "official_government",
+      "official_institution",
       "open_knowledge_graph",
-      "restricted"
+      "regulated_body",
+      "restricted",
+      "scholarly_metadata",
+      "standards_body"
     ],
     "source_count": 4,
     "source_lane": "broad_occupational_foundation",
@@ -828,8 +835,8 @@
       "tools/source-atlas/coverage.py"
     ]
   },
-  "generated": "2026-06-27",
-  "inputCommit": "568378aef",
+  "generated": "2026-06-28",
+  "inputCommit": "0013594d1",
   "kind": "ambitions.sourceAtlas.coverageLedger.v2",
   "nonClaims": [
     "does not claim stable-channel R2 production freshness",
@@ -860,18 +867,20 @@
     "status": "Green"
   },
   "registry": {
-    "adapter_count": 6,
+    "adapter_count": 8,
     "adapters": [
       "official_bls_public_api",
       "official_college_scorecard_api",
       "official_datagov_v4_search",
       "official_onet_text_database",
+      "official_openalex_api",
       "official_static_page",
-      "official_usajobs_authenticated_search"
+      "official_usajobs_authenticated_search",
+      "official_wikidata_entity_crosswalk"
     ],
-    "authority_tier_count": 7,
+    "authority_tier_count": 9,
     "claim_count": 8,
-    "domain_count": 38,
+    "domain_count": 42,
     "freshness_values": [
       "selection_cycle_watch",
       "stable_law_watch"
@@ -879,14 +888,14 @@
     "pathway_seed_count": 2,
     "pathway_source_link_count": 5,
     "requirement_count": 7,
-    "source_count": 8
+    "source_count": 10
   },
   "schemaVersion": 2,
   "status": "Yellow",
   "termsRegistry": {
     "issueCount": 0,
     "issues": [],
-    "sourceCount": 5,
+    "sourceCount": 30,
     "valid": true
   },
   "validation": {

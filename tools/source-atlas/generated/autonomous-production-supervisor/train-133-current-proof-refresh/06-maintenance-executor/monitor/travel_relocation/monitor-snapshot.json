@@ -1,0 +1,87 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "state.travel.public_travel"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "usa.gov.change_address"
+    }
+  ],
+  "createdAt": "2026-06-29T00:00:00Z",
+  "domainID": "travel_relocation",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "state_travel_public_web",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "state.travel.public_travel",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "usagov_public_web",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "usa.gov.change_address",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "state.travel.public_travel",
+    "usa.gov.change_address"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_state_travel_pages_and_terms_recheck_with_strict_advisory_review",
+      "licenseID": "state_travel_public_web",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "state.travel.public_travel",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_usagov_change_address_and_government_works_terms_recheck",
+      "licenseID": "usagov_public_web",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "usa.gov.change_address",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

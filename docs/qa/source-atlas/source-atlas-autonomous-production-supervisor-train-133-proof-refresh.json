@@ -1,0 +1,1059 @@
+{
+  "allowFixtureDeliveryChainRequested": false,
+  "allowedClaims": [
+    "supervised_autonomous_source_atlas_work_loop_green",
+    "current_production_orchestrator_refreshed",
+    "operations_plan_and_safe_execution_supervised",
+    "production_writes_remain_execute_gated",
+    "freshness_planning_and_local_maintenance_integrated",
+    "maintenance_artifacts_written_without_unsafe_mutation",
+    "configured_production_domains_observed_without_mutation",
+    "promotion_control_integrated",
+    "promotion_decisions_emitted_without_remote_or_native_mutation"
+  ],
+  "blockedClaims": [
+    "active_registry_mutation_by_supervisor",
+    "app_store_readiness",
+    "automatic_r2_write_without_execute_budget_approval",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "independent_accessibility_green",
+    "literal_universal_coverage",
+    "native_device_green",
+    "new_remote_r2_write_executed_by_supervisor",
+    "outside_legal_approval",
+    "release_green",
+    "runtime_release_green",
+    "source_atlas_private_goal_text_processing",
+    "testflight_readiness",
+    "uncontrolled_live_harvest"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_orchestrator_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "operations_plan_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "operations_executor_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "freshness_planner_valid_when_configured",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "maintenance_executor_valid_when_configured",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "promotion_runner_valid_when_configured",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_queue_emitted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "unsafe_remote_native_and_final_outputs_absent",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "maintenance_unsafe_outputs_absent",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "promotion_unsafe_outputs_absent",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_writes_remain_gated",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "promotion_writes_remain_gated",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "safe_actions_respect_execute_flag",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "output_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T00:00:00Z",
+  "evidencePaths": {
+    "apiGovernanceRegistry": "tools/source-atlas/governance/api-governance-registry.json",
+    "arbitraryDomainGate": "tools/source-atlas/generated/arbitrary-domain-handling-gate/train-131-tetradeca-final/arbitrary-domain-handling-gate-report.json",
+    "autonomousControlLoop": "tools/source-atlas/generated/autonomous-control-loop/train-131-tetradeca-final/autonomous-control-loop-report.json",
+    "autonomousCycle": "tools/source-atlas/generated/autonomous-cycle-runner/train-131-tetradeca-final/autonomous-cycle-runner-report.json",
+    "freshnessPlanner": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/05-freshness-planner/autonomous-freshness-planner-report.json",
+    "frontierConfig": "tools/source-atlas/frontier/coverage-frontiers.json",
+    "goalDomainGauntlet": "tools/source-atlas/generated/goal-domain-gauntlet/train-131-tetradeca-final/goal-domain-gauntlet-report.json",
+    "legalApprovalPacket": "tools/source-atlas/generated/production-finish-line-gate/train-131-tetradeca-final/01-internal-terms-approval/legal-terms-approval-packet.json",
+    "legalTermsRegistry": "tools/source-atlas/governance/legal-terms-registry.json",
+    "maintenanceExecutor": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/autonomous-maintenance-executor-report.json",
+    "operationsExecutor": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/03-operations-executor/autonomous-operations-execution-report.json",
+    "operationsPlan": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/02-operations-plan/autonomous-operations-plan.json",
+    "ownerApproval": "docs/qa/source-atlas/r2/source-atlas-r2-owner-approval-train-131.json",
+    "productionFinishLineGate": "docs/qa/source-atlas/source-atlas-production-finish-line-gate-train-133-proof-refresh.json",
+    "productionOrchestrator": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/01-production-orchestrator/autonomous-production-orchestrator-report.json",
+    "productionRecertification": "docs/qa/source-atlas/source-atlas-production-recertification-train-133-proof-refresh.json",
+    "productionSweep": "docs/qa/source-atlas/source-atlas-production-sweep-train-133-proof-refresh.json",
+    "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-133-proof-refresh.json",
+    "promotionRunner": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/08-promotion-runner/autonomous-promotion-runner-report.json",
+    "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "executeR2Requested": true,
+  "executeSafeActionsRequested": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousProductionSupervisor.v1",
+  "maintenanceCounts": {
+    "finalOutputsGenerated": 0,
+    "heldGatePacketsWritten": 0,
+    "items": 14,
+    "liveHarvestsExecuted": 0,
+    "monitorSnapshotsWritten": 14,
+    "nativeRuntimeMutations": 0,
+    "plannedNotExecuted": 0,
+    "productionWritesExecuted": 0,
+    "remoteMutations": 0,
+    "reviewPacketsWritten": 0
+  },
+  "maintenanceQueue": [
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/business_entrepreneurship/monitor-snapshot.json"
+      ],
+      "domainID": "business_entrepreneurship",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 1,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/creative_project_reference/monitor-snapshot.json"
+      ],
+      "domainID": "creative_project_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 2,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/education_credentialing/monitor-snapshot.json"
+      ],
+      "domainID": "education_credentialing",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 3,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/finance_public_reference/monitor-snapshot.json"
+      ],
+      "domainID": "finance_public_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 4,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/health_wellness_reference/monitor-snapshot.json"
+      ],
+      "domainID": "health_wellness_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 5,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/health_wellness_reference_ca_statistics/monitor-snapshot.json"
+      ],
+      "domainID": "health_wellness_reference_ca_statistics",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 6,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/hobbies_recreation/monitor-snapshot.json"
+      ],
+      "domainID": "hobbies_recreation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 7,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/home_life_admin/monitor-snapshot.json"
+      ],
+      "domainID": "home_life_admin",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 8,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/occupation_foundation/monitor-snapshot.json"
+      ],
+      "domainID": "occupation_foundation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 9,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/personal_growth/monitor-snapshot.json"
+      ],
+      "domainID": "personal_growth",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 10,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/public_civic_requirements/monitor-snapshot.json"
+      ],
+      "domainID": "public_civic_requirements",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 11,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/relationships_family/monitor-snapshot.json"
+      ],
+      "domainID": "relationships_family",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 12,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/travel_relocation/monitor-snapshot.json"
+      ],
+      "domainID": "travel_relocation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 13,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/06-maintenance-executor/monitor/volunteering_public_reference/monitor-snapshot.json"
+      ],
+      "domainID": "volunteering_public_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "order": 14,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    }
+  ],
+  "nonClaims": [
+    "supervised autonomous Source Atlas operating loop only",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not native physical-device proof",
+    "not independent accessibility proof",
+    "not literal universal coverage",
+    "not automatic production R2 write",
+    "not uncontrolled live harvest",
+    "not Worker deploy",
+    "not native runtime mutation",
+    "not active registry mutation",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "report": "5da0deb48223db3aad5c92f4ccbef82064f33477e3ed094b2575de82da35d3af",
+    "reportPayload": "def3217ff8ed47af582e9b7ccf3c55c948860e772a761b81e766be48cf50633e"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/closeout.md",
+    "markdown": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/autonomous-production-supervisor-report.md",
+    "report": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/autonomous-production-supervisor-report.json"
+  },
+  "overallReadinessStatus": "supervised_autonomous_work_loop_ready",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "promotionCounts": {
+    "candidateReviewOnlyDecisions": 0,
+    "finalOutputsGenerated": 0,
+    "heldGateDecisions": 0,
+    "monitorOnlyDecisions": 14,
+    "nativeRuntimeMutations": 0,
+    "promotionCommands": 0,
+    "promotionDecisions": 14,
+    "r2WritesExecuted": 0,
+    "remoteMutations": 0
+  },
+  "queueCounts": {
+    "blockedByGate": 0,
+    "executedSafe": 0,
+    "failed": 0,
+    "finalOutputsGenerated": 0,
+    "items": 14,
+    "nativeRuntimeMutations": 0,
+    "observed": 14,
+    "plannedNotExecuted": 0,
+    "productionWritesExecuted": 0,
+    "remoteMutations": 0,
+    "unsafeExecutionAttempts": 0
+  },
+  "recordCounts": {
+    "actionableDomains": 0,
+    "configuredDomains": 14,
+    "deliveryChainArtifacts": 0,
+    "finalOutputsGenerated": 0,
+    "freshnessWorkItems": 14,
+    "frontierIntakeArtifacts": 0,
+    "maintenanceHeldGatePackets": 0,
+    "maintenanceMonitorSnapshots": 14,
+    "maintenanceReviewPackets": 0,
+    "maintenanceWorkItems": 14,
+    "monitorDomains": 14,
+    "nativeRuntimeMutations": 0,
+    "observedDomains": 14,
+    "plannedDomains": 14,
+    "productionWritesExecuted": 0,
+    "promotionCommands": 0,
+    "promotionDecisions": 14,
+    "promotionMonitorOnlyDecisions": 14,
+    "promotionR2WritesExecuted": 0,
+    "promotionReviewOnlyDecisions": 0,
+    "remoteMutations": 0,
+    "safeActionsExecuted": 0,
+    "workQueueItems": 14
+  },
+  "requestedDomains": [],
+  "runLabel": "train-133-current-proof-refresh",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; supervised bounded public/reference work loop only",
+  "stageSummaries": {
+    "freshnessPlanner": {
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.autonomousFreshnessPlanner.v1",
+      "overallReadinessStatus": "freshness_review_workplan_ready",
+      "recordCounts": {
+        "candidateDomains": 0,
+        "configuredDomains": 14,
+        "domainPlans": 14,
+        "finalOutputsGenerated": 0,
+        "harvestItems": 0,
+        "liveHarvestsExecuted": 0,
+        "monitorItems": 14,
+        "nativeRecertificationItems": 0,
+        "nativeRuntimeMutations": 0,
+        "packItems": 0,
+        "privacyIssues": 0,
+        "productionWritesExecuted": 0,
+        "r2PublishGateItems": 0,
+        "remoteMutations": 0,
+        "reviewItems": 0,
+        "workItems": 14
+      },
+      "status": "Source Green for autonomous freshness and review work planning",
+      "valid": true
+    },
+    "maintenanceExecutor": {
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.autonomousMaintenanceExecutor.v1",
+      "overallReadinessStatus": "autonomous_maintenance_execution_ready",
+      "recordCounts": {
+        "blockedByGate": 0,
+        "finalOutputsGenerated": 0,
+        "heldGatePacketsWritten": 0,
+        "liveHarvestsExecuted": 0,
+        "monitorSnapshotsWritten": 14,
+        "nativeRuntimeMutations": 0,
+        "plannedNotExecuted": 0,
+        "productionWritesExecuted": 0,
+        "remoteMutations": 0,
+        "reviewPacketsWritten": 0,
+        "workItemsProcessed": 14
+      },
+      "status": "Source Green for autonomous Source Atlas maintenance execution",
+      "valid": true
+    },
+    "operationsExecutor": {
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.autonomousOperationsExecutor.v1",
+      "overallReadinessStatus": null,
+      "recordCounts": {
+        "blockedByGate": 0,
+        "deliveryChainArtifacts": 0,
+        "failedActions": 0,
+        "frontierIntakeArtifacts": 0,
+        "observedDomains": 14,
+        "plannedDomains": 14,
+        "plannedNotExecuted": 0,
+        "productionWritesExecuted": 0,
+        "safeActionsExecuted": 0,
+        "unsafeExecutionAttempts": 0
+      },
+      "status": "Source Green for gated autonomous operations execution",
+      "valid": true
+    },
+    "operationsPlan": {
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.autonomousOperationsPlanner.v1",
+      "overallReadinessStatus": null,
+      "recordCounts": {
+        "actionableDomains": 0,
+        "blockedDomains": 0,
+        "configuredFrontiers": 14,
+        "ledgerDomains": 14,
+        "monitorDomains": 14,
+        "plannedDomains": 14,
+        "privacyIssues": 0,
+        "recertifiedDomains": 14,
+        "requestedDomains": 0,
+        "resolvedRequestedDomainAliases": 0,
+        "unmatchedRequestedDomains": 0
+      },
+      "status": "Source Green for autonomous operations planning",
+      "valid": true
+    },
+    "productionOrchestrator": {
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.autonomousProductionOrchestrator.v1",
+      "overallReadinessStatus": "bounded_autonomous_production_operational",
+      "recordCounts": {
+        "autonomousCycleActions": 19,
+        "configuredDomains": 14,
+        "finalOutputsGenerated": 0,
+        "goalDomainGauntletCases": 14,
+        "localCycleActionsExecuted": 19,
+        "localMonitorChecksExecuted": 14,
+        "nativeRuntimeMutations": 0,
+        "privacyIssues": 0,
+        "productionDomainsReady": 14,
+        "remoteMutations": 0,
+        "remoteR2UploadsReconciled": 14,
+        "unknownProbeCasesCandidateOnly": 3
+      },
+      "status": "Source Green for bounded autonomous Source Atlas production orchestrator",
+      "valid": true
+    },
+    "promotionRunner": {
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.autonomousPromotionRunner.v1",
+      "overallReadinessStatus": "autonomous_promotion_control_ready",
+      "recordCounts": {
+        "candidateReviewOnlyDecisions": 0,
+        "configuredDomains": 14,
+        "finalOutputsGenerated": 0,
+        "heldGateDecisions": 0,
+        "heldGatePackets": 0,
+        "liveHarvestsExecuted": 0,
+        "monitorOnlyDecisions": 14,
+        "nativeRuntimeMutations": 0,
+        "privacyIssues": 0,
+        "promotionCommands": 0,
+        "promotionDecisions": 14,
+        "r2ExecutePreflightCommands": 0,
+        "r2HeldCommands": 0,
+        "r2WritesExecuted": 0,
+        "remoteMutations": 0
+      },
+      "status": "Source Green for autonomous Source Atlas promotion control",
+      "valid": true
+    }
+  },
+  "status": "Source Green for supervised autonomous Source Atlas work loop",
+  "supervisorID": "source_atlas.autonomous_production_supervisor.701f9f058e92be29",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-production-supervisor-train-128",
+  "workQueue": [
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "business_entrepreneurship",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 1,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "creative_project_reference",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 2,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "education_credentialing",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 3,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "finance_public_reference",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 4,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "health_wellness_reference",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 5,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "health_wellness_reference_ca_statistics",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 6,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "hobbies_recreation",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 7,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "home_life_admin",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 8,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "occupation_foundation",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 9,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "personal_growth",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 10,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "public_civic_requirements",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 11,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "relationships_family",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 12,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "travel_relocation",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 13,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "domainID": "volunteering_public_reference",
+      "executed": false,
+      "finalOutputGenerated": false,
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "observed": true,
+      "order": 14,
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "state": "observed_current_production",
+      "unsafeExecutionAttempted": false
+    }
+  ]
+}

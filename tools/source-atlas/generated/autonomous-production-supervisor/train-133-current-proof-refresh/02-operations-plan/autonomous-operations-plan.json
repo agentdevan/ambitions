@@ -1,0 +1,512 @@
+{
+  "actionSummary": {
+    "monitor_current_production_runtime": 14
+  },
+  "allowedClaims": [
+    "deterministic_autonomous_operations_planning"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "automatic_r2_write_without_execute_budget_approval",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "literal_universal_coverage",
+    "outside_legal_approval",
+    "release_green",
+    "uncontrolled_live_harvest"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "frontier_config_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_lane_registry_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "domain_plan_emitted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_boundary",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "planner_is_non_executing",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T00:00:00Z",
+  "domainPlans": [
+    {
+      "allowedArtifactClasses": [
+        "business_formation_reference",
+        "public_program_reference"
+      ],
+      "blockers": [],
+      "domainID": "business_entrepreneurship",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 3,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "creative_metadata_reference",
+        "public_learning_resource",
+        "public_standard_reference"
+      ],
+      "blockers": [],
+      "domainID": "creative_project_reference",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 3,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "candidate_education_program_reference",
+        "candidate_institution_reference",
+        "credential_requirement"
+      ],
+      "blockers": [],
+      "domainID": "education_credentialing",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 8,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_benefit_program_reference",
+        "public_financial_education",
+        "tax_deadline_reference"
+      ],
+      "blockers": [],
+      "domainID": "finance_public_reference",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 3,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "exercise_taxonomy",
+        "public_health_guideline",
+        "wellness_safety_reference"
+      ],
+      "blockers": [],
+      "domainID": "health_wellness_reference",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 3,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "public_health_statistical_context",
+        "public_statistical_reference"
+      ],
+      "blockers": [],
+      "domainID": "health_wellness_reference_ca_statistics",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 2,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "learning_resource_reference",
+        "public_rules_reference",
+        "safety_guidance_reference"
+      ],
+      "blockers": [],
+      "domainID": "hobbies_recreation",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 3,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "maintenance_guidance_reference",
+        "public_service_reference",
+        "safety_reference"
+      ],
+      "blockers": [],
+      "domainID": "home_life_admin",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 4,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "labor_market_context",
+        "occupation_taxonomy",
+        "research_topic_context"
+      ],
+      "blockers": [],
+      "domainID": "occupation_foundation",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 26,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "public_learning_reference",
+        "research_metadata_reference",
+        "sensitive_wellness_reference"
+      ],
+      "blockers": [],
+      "domainID": "personal_growth",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 3,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "constitutional_requirement",
+        "eligibility_requirement"
+      ],
+      "blockers": [],
+      "domainID": "public_civic_requirements",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 2,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "public_education_reference",
+        "public_family_service_reference",
+        "sensitive_support_reference"
+      ],
+      "blockers": [],
+      "domainID": "relationships_family",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 5,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_travel_requirement",
+        "public_safety_notice",
+        "relocation_admin_reference"
+      ],
+      "blockers": [],
+      "domainID": "travel_relocation",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 3,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ],
+      "sourceReviewDue": []
+    },
+    {
+      "allowedArtifactClasses": [
+        "civic_engagement_reference",
+        "public_dataset_scope_reference",
+        "volunteer_rate_reference"
+      ],
+      "blockers": [],
+      "domainID": "volunteering_public_reference",
+      "frontierConfigured": true,
+      "ledgerReady": true,
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "packableClaimCount": 3,
+      "plannedCommand": "none",
+      "readiness": "current_production_runtime_recertified",
+      "recertified": true,
+      "requested": false,
+      "requestedAliases": [],
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "americorps.volunteer_rate_state"
+      ],
+      "sourceReviewDue": []
+    }
+  ],
+  "evidencePaths": {
+    "frontierConfig": "tools/source-atlas/frontier/coverage-frontiers.json",
+    "productionRecertification": "docs/qa/source-atlas/source-atlas-production-recertification-train-133-proof-refresh.json",
+    "productionTargetLedger": "docs/qa/source-atlas/source-atlas-production-target-ledger-current-train-133-proof-refresh.json",
+    "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "executionMode": "plan_only",
+  "globalBlockers": [
+    "literal_universal_coverage_remains_blocked"
+  ],
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousOperationsPlanner.v1",
+  "nonClaims": [
+    "operations planner only",
+    "not an uncontrolled live harvester",
+    "not an automatic production R2 writer",
+    "not a Worker deployer by itself",
+    "not native runtime proof by itself",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/02-operations-plan/closeout.md",
+    "markdown": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/02-operations-plan/autonomous-operations-plan.md",
+    "report": "tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/02-operations-plan/autonomous-operations-plan.json"
+  },
+  "planID": "source_atlas.autonomous_operations_plan.7f68414c6951e9a7",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "recordCounts": {
+    "actionableDomains": 0,
+    "blockedDomains": 0,
+    "configuredFrontiers": 14,
+    "ledgerDomains": 14,
+    "monitorDomains": 14,
+    "plannedDomains": 14,
+    "privacyIssues": 0,
+    "recertifiedDomains": 14,
+    "requestedDomains": 0,
+    "resolvedRequestedDomainAliases": 0,
+    "unmatchedRequestedDomains": 0
+  },
+  "requestedDomainResolution": {
+    "aliasesByDomain": {},
+    "ambiguousRequestedDomains": {},
+    "unmatchedRequestedDomains": []
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; autonomous operations planning only",
+  "status": "Source Green for autonomous operations planning",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-operations-planner-train-105"
+}
