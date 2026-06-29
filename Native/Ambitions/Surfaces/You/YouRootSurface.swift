@@ -1,6 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Mutation/accessibility/proof contract: root rows route to local User System Profile detail surfaces, preserve visible profile context, and rely on detail screens to save or show proof-backed preference changes.
 enum YouRootDetail: String, Identifiable {
     case personalization
     case personalRuntime

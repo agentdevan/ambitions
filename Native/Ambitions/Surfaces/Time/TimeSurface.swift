@@ -183,7 +183,7 @@ struct TimeSurface: View {
                 .padding(theme.spacing.sm)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .background {
-                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                         .fill(theme.colors.surfaceOverlay.opacity(0.72))
                 }
                 .accessibilityIdentifier("protected-placement-review.outcome")

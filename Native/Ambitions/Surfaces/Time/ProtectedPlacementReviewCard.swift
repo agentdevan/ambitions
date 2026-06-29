@@ -1,6 +1,7 @@
 import AmbitionsDesignSystem
 import SwiftUI
 
+// Mutation/accessibility/proof contract: protected-placement actions either approve a local Time placement mutation with visible review state or keep the existing Step placement without fabricating proof.
 struct ProtectedPlacementReviewCard: View {
     @Environment(\.ambitionTheme) private var theme
 
@@ -57,11 +58,11 @@ struct ProtectedPlacementReviewCard: View {
         }
         .padding(theme.spacing.md)
         .background {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                 .fill(theme.colors.surfaceOverlay.opacity(0.94))
         }
         .overlay {
-            RoundedRectangle(cornerRadius: 8, style: .continuous)
+            RoundedRectangle(cornerRadius: theme.radius.md, style: .continuous)
                 .stroke(theme.colors.strokeSubtle.opacity(0.72), lineWidth: 1)
         }
         .accessibilityElement(children: .contain)

@@ -234,9 +234,9 @@ A VSP hero must be built around Ambitions-native objects, not generic UI.
 
 Required object truth:
 
-- Today uses Reality Meridian / Today Step / Recovery / Proof-after-action logic.
+- Today uses Reality Window / Today Step / Recovery / Proof-after-action logic.
 - Goals uses Direction Field / Life Area Row / completed-total relationship.
-- Time uses LifeShape Field / Protected Time / Fixed Commitment / Open Window / Reflow Trace.
+- Time uses native Life Calendar / Protected Time / Fixed Commitment / Open Window / Reflow Trace.
 - Shell uses approved VSP-01 authority only.
 - Inspection surfaces remain details, not root surfaces.
 

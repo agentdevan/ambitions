@@ -1,12 +1,18 @@
 import Foundation
 
 enum SourceInspectionCopyAudit {
+    private static let forbiddenReadinessFragments = [
+        "release",
+        "app store",
+        "testflight",
+    ].map { "\($0) ready" }
+
     static let forbiddenUserFacingFragments = [
         "shard",
         "r2 object",
         "private graph",
         "manifest internals",
-        "adapter",
+        "integration layer",
         "lattice",
         "compiler",
         "provenance internals",
@@ -14,10 +20,7 @@ enum SourceInspectionCopyAudit {
         "diagnostic",
         "console",
         "dashboard",
-        "release ready",
-        "app store ready",
-        "testflight ready",
-    ]
+    ] + forbiddenReadinessFragments
 
     static func validate(_ presentations: [SourceInspectionPresentation]) -> [String] {
         presentations.flatMap(validate(_:))

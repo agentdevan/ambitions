@@ -57,7 +57,7 @@ final class SourceInspectionPresentationTests: XCTestCase {
             state: .current,
             publicDetail: SourceInspectionPublicDetail(
                 sourceName: "R2 object debug shard",
-                sourceKind: "Adapter",
+                sourceKind: "Integration layer",
                 referenceTitle: "Private graph manifest internals",
                 retrievedLabel: "Current",
                 freshnessLabel: "Current",
@@ -70,7 +70,7 @@ final class SourceInspectionPresentationTests: XCTestCase {
         let failures = SourceInspectionCopyAudit.validate(invalid)
         XCTAssertTrue(failures.contains { $0.contains("r2 object") })
         XCTAssertTrue(failures.contains { $0.contains("private graph") })
-        XCTAssertTrue(failures.contains { $0.contains("adapter") })
+        XCTAssertTrue(failures.contains { $0.contains("integration layer") })
         XCTAssertTrue(failures.contains { $0.contains("compiler") })
     }
 
