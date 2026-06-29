@@ -1,0 +1,187 @@
+{
+  "artifactID": "source_atlas_native_penta_domain_live_worker_proof.train44",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "status": "green_for_bounded_penta_domain_worker_gateway_live_transport_yellow_overall_source_atlas",
+  "humanStatus": "Runtime Green for bounded penta-domain Source Atlas public refresh transport and offline fallback / Yellow overall Source Atlas",
+  "valid": true,
+  "product_law_preserved": true,
+  "scope": {
+    "environment": "production",
+    "channel": "stable",
+    "endpoint": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "registryArtifactID": "source_atlas_public_refresh_targets.train44_penta_live_worker_gateway",
+    "domains": [
+      "occupation_foundation",
+      "public_civic_requirements",
+      "education_credentialing",
+      "business_entrepreneurship",
+      "hobbies_recreation"
+    ]
+  },
+  "native_runtime_proofs": [
+    {
+      "target_domain": "occupation_foundation",
+      "target_environment": "production",
+      "target_channel": "stable",
+      "target_pack_id": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+      "target_status": "active",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedPackWithURLSessionWhenEndpointIsProvided",
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesOccupationTargetWhenEndpointIsProvided",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "planning_boundary": "accepted public reference; no final user plan, schedule, or Step generation",
+      "default_app_container_wired": true
+    },
+    {
+      "target_domain": "public_civic_requirements",
+      "target_environment": "production",
+      "target_channel": "stable",
+      "target_pack_id": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+      "target_status": "active",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedCivicPackWithURLSessionWhenEndpointIsProvided",
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesCivicTargetWhenEndpointIsProvided",
+      "query_boundary": "review_required",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "planning_boundary": "verified public reference cached for offline inspection; civic/legal current-use planning remains review-gated and cannot generate a final user plan, schedule, or Step list",
+      "default_app_container_wired": true
+    },
+    {
+      "target_domain": "education_credentialing",
+      "target_environment": "production",
+      "target_channel": "stable",
+      "target_pack_id": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+      "target_status": "active",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedEducationPackWithURLSessionWhenEndpointIsProvided",
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesEducationTargetWhenEndpointIsProvided",
+      "query_boundary": "review_required",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "planning_boundary": "verified public reference cached for offline inspection; education/admissions current-use planning remains review-gated and cannot generate a final user plan, schedule, or Step list",
+      "default_app_container_wired": true
+    },
+    {
+      "target_domain": "business_entrepreneurship",
+      "target_environment": "production",
+      "target_channel": "stable",
+      "target_pack_id": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+      "target_status": "active",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedBusinessPackWithURLSessionWhenEndpointIsProvided",
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesBusinessTargetWhenEndpointIsProvided",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "planning_boundary": "accepted public SBA reference cached for offline inspection; legal/tax/accounting and personalized incorporation planning remain local/review-gated and cannot generate a final user plan, schedule, or Step list",
+      "default_app_container_wired": true
+    },
+    {
+      "target_domain": "hobbies_recreation",
+      "target_environment": "production",
+      "target_channel": "stable",
+      "target_pack_id": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+      "target_status": "active",
+      "target_pack_sha256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedHobbiesRecreationPackWithURLSessionWhenEndpointIsProvided",
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesHobbiesRecreationTargetWhenEndpointIsProvided",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "planning_boundary": "accepted public NPS recreation safety reference cached for offline inspection; emergency, medical, unsafe-instruction, and personalized recreation planning remain blocked and cannot generate a final user plan, schedule, or Step list",
+      "default_app_container_wired": true
+    }
+  ],
+  "proof": {
+    "pentaDomainTargetsActive": true,
+    "registryArtifactLoads": true,
+    "liveWorkerTransport": true,
+    "occupationWorkerTransport": true,
+    "civicWorkerTransport": true,
+    "educationWorkerTransport": true,
+    "businessWorkerTransport": true,
+    "hobbiesWorkerTransport": true,
+    "occupationLifecycleRefresh": true,
+    "civicLifecycleRefresh": true,
+    "educationLifecycleRefresh": true,
+    "businessLifecycleRefresh": true,
+    "hobbiesLifecycleRefresh": true,
+    "hashVerificationCovered": true,
+    "cachePersistenceCovered": true,
+    "offlineNoAccountFallback": true,
+    "coreLocalPlanningBlocked": false,
+    "privateManifestRequestRejected": true,
+    "privateManifestObjectKeyRejected": true,
+    "privateTargetMetadataRejected": true,
+    "reviewRequiredLocalFallbackCovered": true,
+    "noPrivateRuntimeContextSent": true,
+    "noFinalPlanGenerated": true,
+    "noTimedPlanOutputGenerated": true,
+    "noStepListGenerated": true
+  },
+  "r2RequestPrivacyProof": {
+    "requestShape": "domain/channel/schema/app-version/public-locale/environment public object-key requests only",
+    "goalTextIncluded": false,
+    "captureTextIncluded": false,
+    "timedPlanContextIncluded": false,
+    "proofOrReceiptIncluded": false,
+    "accountOrDeviceIdentifierIncluded": false,
+    "privateUserContextIncluded": false,
+    "runtimeGraphContextIncluded": false
+  },
+  "worker_gateway": {
+    "name": "ambitions-source-atlas-public-gateway",
+    "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "workers_dev": true,
+    "r2_bucket": "ambitions-source-atlas-prod",
+    "r2_binding": "SOURCE_ATLAS_BUCKET",
+    "deployed_version_id": "82c05553-d3c3-46ba-ace1-e559cf715a83"
+  },
+  "validation_run": [
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard --timeout 30m --kill-after 60s",
+      "status": "passed",
+      "summary": "Test Build Succeeded",
+      "summary_json": ".codex/xcode-summaries/green-standard/20260628T071901Z-bft-6160-16709/build-for-testing-summary.json",
+      "extract_summary_json": ".codex/xcode-summaries/green-standard/20260628T071901Z/extract/summary.json",
+      "xcresult": ".codex/xcode-results/green-standard/20260628T071901Z-bft-6160-16709/build-for-testing.xcresult"
+    },
+    {
+      "command": "scripts/ambitions-xcode-test-focused.sh --batch SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL --only-testing AmbitionsTests/SourceAtlasPublicPackRemoteTransportTests --without-building --timeout 20m --kill-after 60s",
+      "status": "passed",
+      "executed_tests": 10,
+      "summary_json": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL/20260628T072748Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-11512-16984/focused-test-summary.json",
+      "xcresult": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL/20260628T072748Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-11512-16984/focused-test.xcresult"
+    },
+    {
+      "command": "scripts/ambitions-xcode-test-focused.sh --batch SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL --only-testing AmbitionsTests/SourceAtlasPublicPackLifecycleRefreshServiceTests --without-building --timeout 20m --kill-after 60s",
+      "status": "passed",
+      "executed_tests": 11,
+      "summary_json": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL/20260628T072827Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-11956-23422/focused-test-summary.json",
+      "xcresult": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL/20260628T072827Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-11956-23422/focused-test.xcresult"
+    },
+    {
+      "command": "scripts/ambitions-xcode-test-focused.sh --batch SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL --only-testing AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests --without-building --timeout 20m --kill-after 60s",
+      "status": "passed",
+      "executed_tests": 8,
+      "summary_json": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL/20260628T072903Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-12376-1210/focused-test-summary.json",
+      "xcresult": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL/20260628T072903Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-12376-1210/focused-test.xcresult"
+    },
+    {
+      "command": "scripts/ambitions-xcode-test-focused.sh --batch SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL --only-testing AmbitionsTests/AppContainerFactoryTests --without-building --timeout 20m --kill-after 60s",
+      "status": "passed",
+      "executed_tests": 4,
+      "summary_json": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL/20260628T072935Z-AmbitionsTests-AppContainerFactoryTests-11511-32372/focused-test-summary.json",
+      "xcresult": ".codex/xcode-results/SOURCE_ATLAS_TRAIN_44_PENTA_LIVE_FULL/20260628T072935Z-AmbitionsTests-AppContainerFactoryTests-11511-32372/focused-test.xcresult"
+    }
+  ],
+  "knownLimits": [
+    "Simulator proof is bounded to focused Source Atlas transport, registry, lifecycle, app container, and offline fallback tests.",
+    "This does not prove physical-device readiness, visual readiness, account entitlement readiness, App Store readiness, or broad Release Green.",
+    "Education and civic high-stakes references intentionally use local review-required fallback behavior.",
+    "Business references are bounded SBA public-reference enrichment and do not provide legal, tax, accounting, financing, incorporation, or personalized planning advice.",
+    "Hobbies recreation references are bounded NPS public-reference enrichment and do not provide emergency advice, medical advice, unsafe instructions, guaranteed safety, sport-specific rules, or personalized recreation planning."
+  ],
+  "nonClaims": [
+    "not broad Runtime Green",
+    "not Release Green",
+    "not App Store readiness",
+    "not account or entitlement readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not full Source Atlas Green",
+    "not a Source Atlas product center or pack browser",
+    "not a final user plan, schedule, Step list, or personalized path generator"
+  ]
+}

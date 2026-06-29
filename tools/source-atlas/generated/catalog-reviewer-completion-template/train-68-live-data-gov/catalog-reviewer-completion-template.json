@@ -1,0 +1,392 @@
+{
+  "activeRegistryMutations": [],
+  "completedReviewCompletions": [],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "decisionInputsPath": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json",
+  "kind": "ambitions.sourceAtlas.catalogReviewerCompletionTemplate.v1",
+  "nonClaims": [
+    "reviewer completion packet templates only",
+    "not completed reviewer packets",
+    "not legal approval",
+    "not outside legal approval",
+    "not source authority",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "claims": 0,
+    "completedDecisionArtifacts": 0,
+    "completedReviewCompletions": 0,
+    "decisionInputPackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "sourceReviewCompletionPacketTemplates": 4
+  },
+  "reviewer": "source-atlas-review-queue",
+  "schemaVersion": 1,
+  "sourceReviewCompletionPacketTemplates": [
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "non_claims": [
+          "API governance template only",
+          "not live API approval"
+        ],
+        "required_fields": [
+          "api_policy_id",
+          "api_mode",
+          "key_required",
+          "rate_limit_per_second",
+          "daily_budget_limit",
+          "max_records_per_run",
+          "live_flag_required",
+          "execute_flag_required",
+          "secret_redaction_required"
+        ],
+        "status": "review_required"
+      },
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "completion_packet_id": "catalog_source_review_completion_template.4c98bd0abe8e2be5",
+      "completion_status": "blocked_review_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "non_claims": [
+          "legal terms template only",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "required_fields": [
+          "license_id",
+          "license_url",
+          "terms_url",
+          "rights_url",
+          "redistribution_allowed",
+          "pack_output_allowed",
+          "review_required",
+          "expires_at"
+        ],
+        "status": "review_required"
+      },
+      "non_claims": [
+        "reviewer completion template only",
+        "not a completed review packet",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "required_reviewer_actions": [
+        "choose a pack-allowed or blocked pack policy based on completed terms review",
+        "complete API governance key, budget, rate, retry, timeout, live/execute, and evidence policy fields",
+        "complete legal/terms redistribution, pack-output, restrictions, review, and expiry fields",
+        "complete source lane authority, jurisdiction, review, freshness, and artifact policy fields",
+        "do not allow pack output until redistribution and pack-output posture are approved"
+      ],
+      "review_owner": "source-atlas-review-queue",
+      "reviewed_at": "",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.096325a6a5ca",
+      "source_lane_review": {
+        "non_claims": [
+          "source lane template only",
+          "not source authority"
+        ],
+        "required_fields": [
+          "source_id",
+          "source_name",
+          "source_class",
+          "authority_class",
+          "jurisdiction",
+          "review_status",
+          "freshness_sla",
+          "allowed_artifact_classes",
+          "forbidden_artifact_classes"
+        ],
+        "source_lane_entry": {},
+        "status": "review_required"
+      },
+      "source_name": "Department of Education"
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "non_claims": [
+          "API governance template only",
+          "not live API approval"
+        ],
+        "required_fields": [
+          "api_policy_id",
+          "api_mode",
+          "key_required",
+          "rate_limit_per_second",
+          "daily_budget_limit",
+          "max_records_per_run",
+          "live_flag_required",
+          "execute_flag_required",
+          "secret_redaction_required"
+        ],
+        "status": "review_required"
+      },
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "completion_packet_id": "catalog_source_review_completion_template.748b8e46ca4c2faf",
+      "completion_status": "blocked_review_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "non_claims": [
+          "legal terms template only",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "required_fields": [
+          "license_id",
+          "license_url",
+          "terms_url",
+          "rights_url",
+          "redistribution_allowed",
+          "pack_output_allowed",
+          "review_required",
+          "expires_at"
+        ],
+        "status": "review_required"
+      },
+      "non_claims": [
+        "reviewer completion template only",
+        "not a completed review packet",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "required_reviewer_actions": [
+        "choose a pack-allowed or blocked pack policy based on completed terms review",
+        "complete API governance key, budget, rate, retry, timeout, live/execute, and evidence policy fields",
+        "complete legal/terms redistribution, pack-output, restrictions, review, and expiry fields",
+        "complete source lane authority, jurisdiction, review, freshness, and artifact policy fields",
+        "do not allow pack output until redistribution and pack-output posture are approved"
+      ],
+      "review_owner": "source-atlas-review-queue",
+      "reviewed_at": "",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.1b56977db7b8",
+      "source_lane_review": {
+        "non_claims": [
+          "source lane template only",
+          "not source authority"
+        ],
+        "required_fields": [
+          "source_id",
+          "source_name",
+          "source_class",
+          "authority_class",
+          "jurisdiction",
+          "review_status",
+          "freshness_sla",
+          "allowed_artifact_classes",
+          "forbidden_artifact_classes"
+        ],
+        "source_lane_entry": {},
+        "status": "review_required"
+      },
+      "source_name": "ABS (SA Data)"
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "non_claims": [
+          "API governance template only",
+          "not live API approval"
+        ],
+        "required_fields": [
+          "api_policy_id",
+          "api_mode",
+          "key_required",
+          "rate_limit_per_second",
+          "daily_budget_limit",
+          "max_records_per_run",
+          "live_flag_required",
+          "execute_flag_required",
+          "secret_redaction_required"
+        ],
+        "status": "review_required"
+      },
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "completion_packet_id": "catalog_source_review_completion_template.104372b52045f778",
+      "completion_status": "blocked_review_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "non_claims": [
+          "legal terms template only",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "required_fields": [
+          "license_id",
+          "license_url",
+          "terms_url",
+          "rights_url",
+          "redistribution_allowed",
+          "pack_output_allowed",
+          "review_required",
+          "expires_at"
+        ],
+        "status": "review_required"
+      },
+      "non_claims": [
+        "reviewer completion template only",
+        "not a completed review packet",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "required_reviewer_actions": [
+        "choose a pack-allowed or blocked pack policy based on completed terms review",
+        "complete API governance key, budget, rate, retry, timeout, live/execute, and evidence policy fields",
+        "complete legal/terms redistribution, pack-output, restrictions, review, and expiry fields",
+        "complete source lane authority, jurisdiction, review, freshness, and artifact policy fields",
+        "do not allow pack output until redistribution and pack-output posture are approved"
+      ],
+      "review_owner": "source-atlas-review-queue",
+      "reviewed_at": "",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.43ed3a73ccc5",
+      "source_lane_review": {
+        "non_claims": [
+          "source lane template only",
+          "not source authority"
+        ],
+        "required_fields": [
+          "source_id",
+          "source_name",
+          "source_class",
+          "authority_class",
+          "jurisdiction",
+          "review_status",
+          "freshness_sla",
+          "allowed_artifact_classes",
+          "forbidden_artifact_classes"
+        ],
+        "source_lane_entry": {},
+        "status": "review_required"
+      },
+      "source_name": "Public Health Agency of Canada | Agence de la santé publique du Canada"
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "non_claims": [
+          "API governance template only",
+          "not live API approval"
+        ],
+        "required_fields": [
+          "api_policy_id",
+          "api_mode",
+          "key_required",
+          "rate_limit_per_second",
+          "daily_budget_limit",
+          "max_records_per_run",
+          "live_flag_required",
+          "execute_flag_required",
+          "secret_redaction_required"
+        ],
+        "status": "review_required"
+      },
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "completion_packet_id": "catalog_source_review_completion_template.960d774280146fb7",
+      "completion_status": "blocked_review_required",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "non_claims": [
+          "legal terms template only",
+          "not legal approval",
+          "not outside legal approval"
+        ],
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "required_fields": [
+          "license_id",
+          "license_url",
+          "terms_url",
+          "rights_url",
+          "redistribution_allowed",
+          "pack_output_allowed",
+          "review_required",
+          "expires_at"
+        ],
+        "status": "review_required"
+      },
+      "non_claims": [
+        "reviewer completion template only",
+        "not a completed review packet",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+      "required_reviewer_actions": [
+        "choose a pack-allowed or blocked pack policy based on completed terms review",
+        "complete API governance key, budget, rate, retry, timeout, live/execute, and evidence policy fields",
+        "complete legal/terms redistribution, pack-output, restrictions, review, and expiry fields",
+        "complete source lane authority, jurisdiction, review, freshness, and artifact policy fields",
+        "do not allow pack output until redistribution and pack-output posture are approved"
+      ],
+      "review_owner": "source-atlas-review-queue",
+      "reviewed_at": "",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.b73f9f0ebbed",
+      "source_lane_review": {
+        "non_claims": [
+          "source lane template only",
+          "not source authority"
+        ],
+        "required_fields": [
+          "source_id",
+          "source_name",
+          "source_class",
+          "authority_class",
+          "jurisdiction",
+          "review_status",
+          "freshness_sla",
+          "allowed_artifact_classes",
+          "forbidden_artifact_classes"
+        ],
+        "source_lane_entry": {},
+        "status": "review_required"
+      },
+      "source_name": "Statistics Canada | Statistique Canada"
+    }
+  ],
+  "versionID": "source-atlas-catalog-reviewer-completion-template-train-68"
+}

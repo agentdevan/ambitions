@@ -1,0 +1,149 @@
+{
+  "channel": "stable",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "dataClass": "public_r2_object_key",
+  "dryRun": true,
+  "environment": "production",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "dry-run only; no R2 upload or production promotion was performed"
+  ],
+  "objects": [
+    {
+      "bytes": 9461,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "adjudications",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/adjudications.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/adjudications.json",
+      "sha256": "4c117d54f213982672a7fe21a37f783c9405d824904f9da70169b3c00a1162b2"
+    },
+    {
+      "bytes": 5575,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "attribution",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/attribution.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/attribution.json",
+      "sha256": "3210c24f0cff7e64790e984634a9531378e55ff9e51728d70c41c215539cef3a"
+    },
+    {
+      "bytes": 55599,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "claims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/claims.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/claims.json",
+      "sha256": "7766f9be78c91656a9f0ae48daf599d7406685654983d2bf8983bec6ebc0ff29"
+    },
+    {
+      "bytes": 2481,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "coverage",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/coverage.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/coverage.json",
+      "sha256": "105e5768e1797748fb2d067b7c4012b373697b4aac99cf36bcc8c91185845599"
+    },
+    {
+      "bytes": 11676,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "entities",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/entities.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/entities.json",
+      "sha256": "c03a4a1f62b21ba6c57295f14425f27f79cbcd8c3b83f505440f1f05fa6138d6"
+    },
+    {
+      "bytes": 13413,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "freshness",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/freshness.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/freshness.json",
+      "sha256": "f89a68c2f94da63b727b4a30c84652d567d36bb1a0c27334c656d112346d2724"
+    },
+    {
+      "bytes": 2563,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "licenses",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/licenses.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/licenses.json",
+      "sha256": "d2ec80ded087fc9244320ef3e3c2999d2af4667945a5e7bcea5689cb5abbae90"
+    },
+    {
+      "bytes": 1256,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "lkg",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/lkg.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/lkg.json",
+      "sha256": "0bdce7b2eb6406f2234bd62f24101a44795d5d0a689fc88d28bb1ae930e4f12a"
+    },
+    {
+      "bytes": 8636,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "manifest",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/manifest.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/manifest.json",
+      "sha256": "6f8f394a912b4983c4b19512c776b21844834fd1df5713cf435816c0864ffe06"
+    },
+    {
+      "bytes": 1172,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "nonClaims",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/non_claims.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/non_claims.json",
+      "sha256": "8ea2cd75c0b28ca05ad514bf4b9598a8335de89d24173685a54991969e5da5d8"
+    },
+    {
+      "bytes": 97747,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "pack",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/pack.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/pack.json",
+      "sha256": "55f2ae4593e40e30fe9aa48d0dab4988f186bc889cf225b3db2676b77e1d1ea3"
+    },
+    {
+      "bytes": 1405,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "revocations",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/revocations.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/revocations.json",
+      "sha256": "0fb96e65856b9f53bf32d10e07cadc164618c3c9f6909aca069fafedbfd0db03"
+    },
+    {
+      "bytes": 3860,
+      "cacheControl": "public, max-age=3600",
+      "contentType": "application/json; charset=utf-8",
+      "label": "sources",
+      "localPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/sources.json",
+      "objectKey": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/sources.json",
+      "sha256": "556410785f1fe6dee1ef6f5acb8b1fff13ccbc04920f9f51d421305ba17182c5"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/rollback-plan.json",
+  "schemaVersion": 1,
+  "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+  "wouldUpload": false
+}

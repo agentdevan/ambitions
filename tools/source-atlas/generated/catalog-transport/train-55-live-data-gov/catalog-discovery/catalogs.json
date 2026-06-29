@@ -1,0 +1,42 @@
+{
+  "catalogRecords": [
+    {
+      "blocking_reasons": [
+        "catalog_metadata_not_claim_authority",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "candidate_score_cannot_override_review"
+      ],
+      "catalog_id": "catalog.5282df60b71fcaf6",
+      "catalog_kind": "ckan_package_search",
+      "catalog_path": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/snapshots/australia-data-education-package-search.json",
+      "claim_authority_allowed": false,
+      "dataset_count": 2,
+      "evidence_hash": "abb0aeafed8fc8795b8a33f7c5549d376ec92312ccd042b72793b83b2d1a4b80",
+      "pack_output_allowed": false,
+      "parsed_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "schema_version": "1.0.0"
+    },
+    {
+      "blocking_reasons": [
+        "catalog_metadata_not_claim_authority",
+        "source_lane_review_required",
+        "legal_terms_review_required",
+        "candidate_score_cannot_override_review"
+      ],
+      "catalog_id": "catalog.d4ba816f3ad83419",
+      "catalog_kind": "ckan_package_search",
+      "catalog_path": "tools/source-atlas/generated/catalog-transport/train-55-live-data-gov/snapshots/canada-open-data-health-package-search.json",
+      "claim_authority_allowed": false,
+      "dataset_count": 2,
+      "evidence_hash": "9f996974e6216a5d0fc76e49557672046a8189256ef55ecf8f014f29ba1a74ea",
+      "pack_output_allowed": false,
+      "parsed_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "schema_version": "1.0.0"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.discoveryCatalogs.v1"
+}

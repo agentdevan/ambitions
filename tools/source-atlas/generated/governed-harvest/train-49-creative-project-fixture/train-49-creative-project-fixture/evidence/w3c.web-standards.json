@@ -1,0 +1,29 @@
+{
+  "adapterID": "w3c_web_standards_reference_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "1b9e2c5ec63bfb896cff491273549f1a1958a17582fabd8051fe2ae0023b75a9",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "w3c_document_license_public_web",
+  "normalizedPath": "normalized/w3c.web-standards.json",
+  "normalizedSHA256": "4f011b21d3183f6a0dcae246cd161d48440c4adf9b975d2685efb8cf0edb664a",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "w3c.web-standards",
+  "sourceLane": "w3c.web-standards"
+}

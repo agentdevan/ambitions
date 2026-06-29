@@ -1,0 +1,115 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "template_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "template_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completion_evidence_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completion_evidence_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "missing_completion_evidence_blocks_without_approval",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_review_packets_require_required_fields",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_review_bundles_do_not_mutate_registries",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_completion_intake_emits_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "completionEvidencePath": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/fixture-completion-evidence.json",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainReviewCompletionIntakeManifest.v1",
+  "nonClaims": [
+    "goal-domain review completion intake only",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedGoalDomainReviewCompletions": "8915f4089b441f99aeea760a31eb22587e39fb0571456c01dcee6ba2bad88f20",
+    "goalDomainReviewCompletionIntake": "29eff8c90f9c42f62bfdf44959a99c3d0854d2f71f782b6a889450ddacff2dcd",
+    "goalDomainReviewCompletions": "10f69148159e418d0b8112c454339c92f0a1bd9463cee048965de2d81c9086a1",
+    "manifest": "9b36db133c002c42dccc2bb05888cefcad8437ca22b22049bdd8fc796b5f3ac9"
+  },
+  "outputPaths": {
+    "blockedGoalDomainReviewCompletions": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/completion-intake/blocked-goal-domain-review-completions.json",
+    "closeout": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/completion-intake/closeout.md",
+    "goalDomainReviewCompletionIntake": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/completion-intake/goal-domain-review-completion-intake.json",
+    "goalDomainReviewCompletions": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/completion-intake/goal-domain-review-completions.json",
+    "manifest": "tools/source-atlas/generated/goal-domain-registry-apply-rehearsal/train-96-fixture/completion-intake/manifest.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvalArtifactsEmitted": 0,
+    "blockedReviewCompletions": 0,
+    "claims": 0,
+    "completedReviewBundles": 2,
+    "completedReviewPackets": 8,
+    "completionEvidenceRecords": 8,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewPacketTemplates": 8
+  },
+  "reviewTemplatesPath": "tools/source-atlas/generated/goal-domain-review-packets/train-92-fixture/review-packet-templates.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; review completion intake tooling only",
+  "status": "Source Green for goal-domain review completion intake tooling",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-review-completion-intake-train-93"
+}

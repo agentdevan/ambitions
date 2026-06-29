@@ -1,0 +1,29 @@
+{
+  "adapterID": "energy_gov_energy_saver_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 2,
+  "dataClass": "public_provenance",
+  "evidenceHash": "4053ad4166fee6689670c721ca3f4bd673cb2d6183e65af8163f5311a5fc8e4c",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "doe_public_web",
+  "normalizedPath": "normalized/energy.gov.energy_saver.json",
+  "normalizedSHA256": "bd6aae29c1bcaf5d732512528f510d5563fc3acf7b12743b7e25c09dc8a82437",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "energy.gov.energy_saver",
+  "sourceLane": "energy.gov.energy_saver"
+}

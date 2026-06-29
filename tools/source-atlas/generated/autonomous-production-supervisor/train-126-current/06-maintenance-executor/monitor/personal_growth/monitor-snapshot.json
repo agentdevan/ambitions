@@ -1,0 +1,87 @@
+{
+  "apiWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": false,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "nih.medlineplus.wellness"
+    },
+    {
+      "apiPolicyID": "api.openalex_api.v1",
+      "apiReady": true,
+      "executeFlagRequired": true,
+      "highVolumeReviewRequired": true,
+      "issues": [],
+      "liveFlagRequired": true,
+      "sourceID": "openalex.personal_growth_research"
+    }
+  ],
+  "createdAt": "2026-06-29T03:30:00Z",
+  "domainID": "personal_growth",
+  "kind": "ambitions.sourceAtlas.monitorSnapshot.v1",
+  "legalWindows": [
+    {
+      "attributionRequired": true,
+      "expiresAt": "2026-09-28",
+      "licenseID": "medlineplus_public_domain_topic_summary",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "nih.medlineplus.wellness",
+      "windowState": "current"
+    },
+    {
+      "attributionRequired": false,
+      "expiresAt": "2026-12-27",
+      "licenseID": "openalex_cc0_metadata",
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "sourceID": "openalex.personal_growth_research",
+      "windowState": "current"
+    }
+  ],
+  "nonClaims": [
+    "not universal coverage",
+    "not outside legal approval",
+    "not release readiness",
+    "not claim authority by itself",
+    "not pack output by itself",
+    "not R2 write readiness by itself",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "reasons": [
+    "current within review and terms windows"
+  ],
+  "requiredGate": "next_due_review_or_freshness_window",
+  "sourceIDs": [
+    "nih.medlineplus.wellness",
+    "openalex.personal_growth_research"
+  ],
+  "sourceReviewWindows": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "freshnessSLA": "quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck",
+      "licenseID": "medlineplus_public_domain_topic_summary",
+      "nextReviewDueAt": "2026-09-28",
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewStatus": "reviewed",
+      "sourceID": "nih.medlineplus.wellness",
+      "windowState": "current"
+    },
+    {
+      "apiPolicyID": "api.openalex_api.v1",
+      "freshnessSLA": "monthly_openalex_personal_growth_metadata_and_api_governance_recheck",
+      "licenseID": "openalex_cc0_metadata",
+      "nextReviewDueAt": "2026-12-28",
+      "r2PackPolicy": "pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewStatus": "reviewed",
+      "sourceID": "openalex.personal_growth_research",
+      "windowState": "current"
+    }
+  ],
+  "state": "current"
+}

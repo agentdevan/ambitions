@@ -1,0 +1,159 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogSourceReviewCompletionPackets.v1",
+  "nonClaims": [
+    "source review completion packets for Train 67 intake only",
+    "not approval by themselves",
+    "not claim output",
+    "not pack output"
+  ],
+  "sourceReviewCompletionPackets": [
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "status": "blocked"
+      },
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "direct_source_review_packet_required",
+        "jurisdiction_evidence_missing",
+        "publisher_url_missing",
+        "source_class_evidence_missing",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "completion_packet_id": "catalog_source_review_completion_blocked.2718b63191218674",
+      "completion_status": "blocked_direct_source_review_required",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "status": "blocked"
+      },
+      "non_claims": [
+        "blocked direct-source review completion packet only",
+        "not approval"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "review_owner": "",
+      "reviewed_at": "",
+      "source_lane_review": {
+        "source_lane_entry": {},
+        "status": "blocked"
+      }
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "status": "blocked"
+      },
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "direct_source_review_packet_required",
+        "jurisdiction_evidence_missing",
+        "publisher_url_missing",
+        "source_class_evidence_missing",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "completion_packet_id": "catalog_source_review_completion_blocked.96762e4711199c76",
+      "completion_status": "blocked_direct_source_review_required",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "status": "blocked"
+      },
+      "non_claims": [
+        "blocked direct-source review completion packet only",
+        "not approval"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "review_owner": "",
+      "reviewed_at": "",
+      "source_lane_review": {
+        "source_lane_entry": {},
+        "status": "blocked"
+      }
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "status": "blocked"
+      },
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "authority_class_evidence_missing",
+        "direct_source_review_packet_required",
+        "jurisdiction_evidence_missing",
+        "publisher_url_missing",
+        "source_class_evidence_missing",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "completion_packet_id": "catalog_source_review_completion_blocked.01e1947a2c8e4a96",
+      "completion_status": "blocked_direct_source_review_required",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "status": "blocked"
+      },
+      "non_claims": [
+        "blocked direct-source review completion packet only",
+        "not approval"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "review_owner": "",
+      "reviewed_at": "",
+      "source_lane_review": {
+        "source_lane_entry": {},
+        "status": "blocked"
+      }
+    },
+    {
+      "api_governance_review": {
+        "api_policy_entry": {},
+        "status": "blocked"
+      },
+      "blocking_reasons": [
+        "api_docs_url_or_no_api_evidence_missing",
+        "authority_class_evidence_missing",
+        "dataset_url_missing",
+        "direct_source_review_packet_required",
+        "jurisdiction_evidence_missing",
+        "publisher_url_missing",
+        "source_class_evidence_missing",
+        "source_specific_rights_url_missing",
+        "source_specific_terms_url_missing"
+      ],
+      "completion_packet_id": "catalog_source_review_completion_blocked.45b762188c5bd9a4",
+      "completion_status": "blocked_direct_source_review_required",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "legal_terms_review": {
+        "legal_terms_entry": {},
+        "outside_legal_approval_artifact": "",
+        "outside_legal_status": "not_claimed",
+        "status": "blocked"
+      },
+      "non_claims": [
+        "blocked direct-source review completion packet only",
+        "not approval"
+      ],
+      "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+      "review_owner": "",
+      "reviewed_at": "",
+      "source_lane_review": {
+        "source_lane_entry": {},
+        "status": "blocked"
+      }
+    }
+  ]
+}

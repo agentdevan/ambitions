@@ -1,0 +1,85 @@
+{
+  "activeRegistryMutations": 0,
+  "baselineSha": "a370bd92bdf8f819e40afef7829d7c8a7adfc989",
+  "branch": "main",
+  "candidateRegistryMutations": 1,
+  "claims": 0,
+  "completedApprovalArtifacts": 1,
+  "completedDecisionArtifacts": 1,
+  "createdAt": "2026-06-28T00:00:00Z",
+  "finalSha": "a370bd92bdf8f819e40afef7829d7c8a7adfc989",
+  "kind": "ambitions.sourceAtlas.train75Closeout.v1",
+  "packableClaims": 0,
+  "productLawPreserved": true,
+  "r2PackableArtifacts": 0,
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDirectSourceReviews": 3,
+    "blockedSourceReviewCompletionPackets": 3,
+    "candidateRegistryMutations": 1,
+    "claims": 0,
+    "completedApprovalArtifacts": 1,
+    "completedDecisionArtifacts": 1,
+    "completedDirectSourceReviews": 1,
+    "completedReviewCompletions": 1,
+    "completedSourceReviewCompletionPackets": 1,
+    "directSourceReviewPackets": 4,
+    "directSourceReviewTemplates": 4,
+    "packableClaims": 0,
+    "plannedRegistryMutations": 1,
+    "r2PackableArtifacts": 0,
+    "reviewEvidenceRecords": 1,
+    "sourceReviewCompletionPackets": 4
+  },
+  "reportHash": "5d8a5aae20d3ecdefc99a9ce47b1c308a0709a7d30e56ceac86467214c09e402",
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; one source-specific direct-source review handoff and candidate registry dry run only",
+  "status": "Source Green for Statistics Canada Table 13-10-0974-01 direct-source review evidence and approval-chain dry run / Yellow overall Source Atlas",
+  "validationRun": [
+    {
+      "command": "python3 -m json.tool tools/source-atlas/generated/catalog-direct-source-review-evidence/train-75-statcan-table-13100974/direct-source-review-evidence.json >/dev/null",
+      "result": "pass"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/legal/source-atlas-statcan-table-13100974-review-train-75.json >/dev/null",
+      "result": "pass"
+    },
+    {
+      "command": "PYTHONPATH=tools/source-atlas python3 -m foundry.cli catalog-direct-source-approval-chain ... --review-evidence tools/source-atlas/generated/catalog-direct-source-review-evidence/train-75-statcan-table-13100974/direct-source-review-evidence.json ...",
+      "result": "pass"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_catalog_direct_source_approval_chain_train_74.py",
+      "result": "3 passed"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "result": "319 passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "result": "PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "result": "GREEN"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "result": "GREEN"
+    },
+    {
+      "command": "git diff --check",
+      "result": "pass"
+    }
+  ],
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Active registry apply was not run.",
+    "Native XCTest/build-for-testing was not run because Train 75 did not edit native files.",
+    "Outside legal approval was not run or claimed."
+  ]
+}

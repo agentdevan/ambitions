@@ -1,0 +1,142 @@
+{
+  "artifact": "source-atlas-local-composition-train-06",
+  "date": "2026-06-27",
+  "linear_issue": "AMB-1492",
+  "linear_project_status_update": "04288da4-525b-4caf-ac80-45da96f155df",
+  "status": "green_for_deterministic_local_composition_source_inspection_proof_boundary_yellow_overall_source_atlas",
+  "scope_completed": [
+    "local_reference_composition_proof_model",
+    "source_inspection_presentation_mapping",
+    "private_label_redaction_before_inspection",
+    "lkg_stale_context_mapping",
+    "revoked_reference_blocking",
+    "review_required_inspection_state"
+  ],
+  "files_changed": [
+    "Native/Ambitions/Core/Runtime/SourceAtlasLocalReferenceCompositionProof.swift",
+    "Native/Ambitions/Trust/SourceInspectionLocalReferenceComposition.swift",
+    "Native/AmbitionsTests/Runtime/SourceAtlasLocalReferenceCompositionProofTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-local-composition-train-06.md",
+    "docs/qa/source-atlas/native/source-atlas-local-composition-train-06.json"
+  ],
+  "product_law_preserved": true,
+  "validation_run": [
+    {
+      "command": "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath output/DerivedData-XcodeBuildMCP -only-testing:AmbitionsTests/SourceAtlasLocalReferenceCompositionProofTests test CODE_SIGNING_ALLOWED=NO",
+      "result": "passed",
+      "tests": 5,
+      "failures": 0,
+      "result_bundle": "output/DerivedData-XcodeBuildMCP/Logs/Test/Test-Ambitions-2026.06.27_15-55-14--0400.xcresult"
+    },
+    {
+      "command": "xcodebuild -project Ambitions.xcodeproj -scheme Ambitions -destination 'platform=iOS Simulator,id=8ACCD665-4807-4102-B526-5A1AE20686A8' -derivedDataPath output/DerivedData-XcodeBuildMCP -only-testing:AmbitionsTests/SourceAtlasLocalReferenceCompositionProofTests -only-testing:AmbitionsTests/SourceInspectionPresentationTests -only-testing:AmbitionsTests/SourceInspectionAccessibilityProofTests -only-testing:AmbitionsTests/SourceAtlasLocalCompositionFallbackTests -only-testing:AmbitionsTests/SourceAtlasLocalPackCacheTests -only-testing:AmbitionsTests/SourceAtlasPublicPackFetchPipelineTests -only-testing:AmbitionsTests/SourceAtlasNoPrivateGraphEgressAuditTests test-without-building CODE_SIGNING_ALLOWED=NO",
+      "result": "passed",
+      "tests": 31,
+      "failures": 0,
+      "result_bundle": "output/DerivedData-XcodeBuildMCP/Logs/Test/Test-Ambitions-2026.06.27_15-58-12--0400.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "result": "passed",
+      "tests": 106
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "result": "PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "result": "GREEN"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "result": "GREEN"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "result": "Test Build Succeeded",
+      "summary": ".codex/xcode-summaries/green-standard/20260627T200015Z/extract/summary.json",
+      "result_bundle": ".codex/xcode-results/green-standard/20260627T200015Z-bft-95579-3464/build-for-testing.xcresult"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "live_r2_fetch",
+    "production_r2_upload_readback",
+    "stable_pointer_update",
+    "revocation_publish",
+    "rollback_drill",
+    "physical_device_proof",
+    "rendered_source_inspection_ui_proof",
+    "app_store_or_testflight_readiness",
+    "entitlement_or_account_readiness",
+    "outside_legal_review",
+    "universal_coverage_or_broad_domain_production_proof"
+  ],
+  "proofs": {
+    "local_only_composition": "proof records Matched locally on this device and keeps runtimeOwnsFitTimingPriorityProof true",
+    "no_final_user_path_schedule_or_steps": "sourceAtlasOwnsFinalUserSteps false and createsFinalSchedule false",
+    "no_private_graph_egress": "private-looking local match and public entity labels are redacted before proof or inspection output",
+    "source_inspection": "Trust presentation maps local reference state to inspection state, public detail, use context, and review action",
+    "freshness_revocation": "cache and fetch issues map to stale, stale_critical, conflicted, revoked, unsupported, unavailable, and review_required states",
+    "lkg_rollback": "last-known-good maps to stale inspection and no current-use claim",
+    "offline_no_account": "core local planning remains unblocked and no account or network path was introduced"
+  },
+  "required_closeout_fields": {
+    "source_atlas_status_ceiling": "Yellow overall",
+    "r2_request_privacy_proof": "no_new_r2_request_path_consumes_local_cache_fetch_resolution_only",
+    "no_private_graph_egress_proof": "passed",
+    "license_terms_proof": "not_expanded_this_train",
+    "restricted_source_exclusion_proof": "not_expanded_this_train",
+    "provenance_completeness_proof": "consumes_selected_provenance_source_ids_no_new_claim_creation",
+    "freshness_revocation_proof": "passed_for_local_composition_state_mapping",
+    "lkg_rollback_proof": "passed_for_lkg_stale_inspection_boundary",
+    "native_offline_no_account_proof": "passed",
+    "production_non_claims": [
+      "no_production_r2_readiness",
+      "no_live_fetch_readiness",
+      "no_legal_approval",
+      "no_release_readiness",
+      "no_universal_coverage",
+      "no_hosted_personalization",
+      "no_final_plan_schedule_or_step_generation"
+    ]
+  },
+  "architecture_closeout": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "Core/Runtime",
+      "Trust"
+    ],
+    "files_moved_or_created": [
+      "Native/Ambitions/Core/Runtime/SourceAtlasLocalReferenceCompositionProof.swift",
+      "Native/Ambitions/Trust/SourceInspectionLocalReferenceComposition.swift",
+      "Native/AmbitionsTests/Runtime/SourceAtlasLocalReferenceCompositionProofTests.swift"
+    ],
+    "old_non_canonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_architecture_debt": "none_introduced_rendered_ui_wiring_unscoped",
+    "next_repair_train": "separate_rendered_source_inspection_train_after_ui_owner_accessibility_and_visual_device_proof_gates",
+    "equivalent_folder_interpretation_used": false
+  },
+  "known_risks": [
+    "deterministic_local_composition_boundary_only",
+    "no_rendered_ui_proof",
+    "no_live_http_client_or_production_downloader",
+    "r2_operation_proof_remains_separate",
+    "license_terms_approval_not_created",
+    "full_build_for_testing_has_unrelated_pre_existing_warnings"
+  ],
+  "rollback_plan": [
+    "remove_new_local_composition_proof_trust_bridge_and_tests",
+    "regenerate_xcode_project_with_xcodegen",
+    "continue_existing_source_atlas_cache_access_fetch_pipeline_inspection_presentation_and_offline_fallback_behavior"
+  ]
+}

@@ -315,6 +315,21 @@ def _record(checks: list[dict[str, Any]], name: str, passed: bool, issues: list[
 
 
 def _artifact_entries(manifest: dict[str, Any]) -> list[dict[str, Any]]:
+    if manifest.get("kind") == "ambitions.sourceAtlas.packManifest.v1":
+        entries: list[dict[str, Any]] = []
+        for label, item in sorted((manifest.get("objects") or {}).items()):
+            if not isinstance(item, dict):
+                continue
+            path = Path(str(item.get("local_path") or item.get("localPath") or item.get("path") or "")).name
+            entries.append(
+                {
+                    "id": label,
+                    "path": path,
+                    "sha256": item.get("sha256"),
+                    "object_key": item.get("object_key") or item.get("objectKey"),
+                }
+            )
+        return entries
     entries: list[dict[str, Any]] = []
     for key in ["packIndex", "schemaIndex", "shardIndex", "registryIndex"]:
         entries.extend(manifest.get(key, []))
@@ -350,6 +365,8 @@ def _checksum_issues(plan: dict[str, Any]) -> list[str]:
 
 
 def _provenance_issues(bundle_root: Path, manifest: dict[str, Any]) -> list[str]:
+    if manifest.get("kind") == "ambitions.sourceAtlas.packManifest.v1":
+        return _pack_manifest_provenance_issues(bundle_root, manifest)
     issues: list[str] = []
     receipt = manifest.get("receipt")
     if not receipt:
@@ -364,9 +381,47 @@ def _provenance_issues(bundle_root: Path, manifest: dict[str, Any]) -> list[str]
     return issues
 
 
+def _pack_manifest_provenance_issues(bundle_root: Path, manifest: dict[str, Any]) -> list[str]:
+    issues: list[str] = []
+    if not manifest.get("claim_graph_hash"):
+        issues.append("missing claim_graph_hash")
+    if not manifest.get("source_registry_hash"):
+        issues.append("missing source_registry_hash")
+    if not manifest.get("legal_registry_hash"):
+        issues.append("missing legal_registry_hash")
+    claims_path = _pack_manifest_local_path(bundle_root, manifest, "claims", fallback="claims.json")
+    if not claims_path.exists():
+        issues.append("missing claims slice")
+        return issues
+    claims_entry = (manifest.get("objects") or {}).get("claims", {})
+    if isinstance(claims_entry, dict) and claims_entry.get("sha256") and file_sha256(claims_path) != claims_entry.get("sha256"):
+        issues.append("claims slice hash mismatch")
+    claims = read_json(claims_path).get("claims", [])
+    if not claims:
+        issues.append("claims slice is empty")
+    required_fields = ["source_lane", "locator", "retrieval_time", "evidence_hash", "adjudication_rule", "license_id"]
+    for claim in claims:
+        if claim.get("pack_eligibility") != "packable":
+            issues.append(f"{claim.get('claim_id')}: non-packable claim present in pack claims slice")
+        if claim.get("provenance_tuple_complete") is not True:
+            issues.append(f"{claim.get('claim_id')}: provenance tuple not marked complete")
+        for field in required_fields:
+            if not claim.get(field):
+                issues.append(f"{claim.get('claim_id')}: missing provenance field {field}")
+    return issues
+
+
 def _stale_critical_issues(bundle_root: Path, manifest: dict[str, Any]) -> list[str]:
     issues: list[str] = []
     critical_types = {"eligibility_rule", "credential_rule", "medical_physical_rule", "experience_rule"}
+    if manifest.get("kind") == "ambitions.sourceAtlas.packManifest.v1":
+        claims_path = _pack_manifest_local_path(bundle_root, manifest, "claims", fallback="claims.json")
+        if not claims_path.exists():
+            return ["missing claims slice for stale-critical check"]
+        for claim in read_json(claims_path).get("claims", []):
+            if claim.get("claim_type") in critical_types and (claim.get("freshness_status") == "stale-critical" or claim.get("state") == "stale"):
+                issues.append(f"{claim.get('claim_id')}: stale critical claim")
+        return issues
     for pack_entry in manifest.get("packIndex", []):
         pack = read_json(bundle_root / pack_entry["path"])
         for claim in pack.get("claims", []):
@@ -388,6 +443,26 @@ def _revoked_use_issues(manifest: dict[str, Any], revocations: dict[str, Any] | 
 
 def _unsupported_source_issues(bundle_root: Path, manifest: dict[str, Any]) -> list[str]:
     issues: list[str] = []
+    if manifest.get("kind") == "ambitions.sourceAtlas.packManifest.v1":
+        sources_path = _pack_manifest_local_path(bundle_root, manifest, "sources", fallback="sources.json")
+        if not sources_path.exists():
+            return ["missing sources slice for unsupported-source check"]
+        blocked_policies = {
+            "r2_blocked",
+            "r2_review_required",
+            "pack_blocked_lookup_only",
+            "pack_blocked_crosswalk_only",
+            "pack_blocked_restricted",
+            "pack_blocked_unknown_terms",
+        }
+        for source in read_json(sources_path).get("sources", []):
+            if source.get("included") is not True:
+                continue
+            if source.get("r2_pack_policy") in blocked_policies:
+                issues.append(f"{source.get('source_id')}: blocked source cannot promote")
+            if source.get("review_status") not in {"reviewed", "approved"}:
+                issues.append(f"{source.get('source_id')}: source review status is not approved for promotion")
+        return issues
     for pack_entry in manifest.get("packIndex", []):
         pack = read_json(bundle_root / pack_entry["path"])
         for source in pack.get("sources", []):
@@ -399,3 +474,21 @@ def _unsupported_source_issues(bundle_root: Path, manifest: dict[str, Any]) -> l
                 if claim_ids:
                     issues.append(f"{source.get('id')}: source-discovery metadata used as claim truth {claim_ids}")
     return issues
+
+
+def _pack_manifest_local_path(bundle_root: Path, manifest: dict[str, Any], label: str, *, fallback: str) -> Path:
+    entry = (manifest.get("objects") or {}).get(label, {})
+    if isinstance(entry, dict):
+        raw_path = str(entry.get("local_path") or entry.get("localPath") or "")
+        if raw_path:
+            path = Path(raw_path)
+            if path.exists():
+                return path
+            if not path.is_absolute():
+                candidate = bundle_root / path
+                if candidate.exists():
+                    return candidate
+                candidate = bundle_root / path.name
+                if candidate.exists():
+                    return candidate
+    return bundle_root / fallback

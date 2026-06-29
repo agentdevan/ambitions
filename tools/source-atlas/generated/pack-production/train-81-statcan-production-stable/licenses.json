@@ -1,0 +1,25 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "statcan.open-licence.2026-06-28",
+      "license_name": "Statistics Canada Open Licence",
+      "license_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "non_claims": [
+        "source-specific internal terms posture only",
+        "not legal advice",
+        "not outside legal approval"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "terms_url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence"
+    }
+  ]
+}

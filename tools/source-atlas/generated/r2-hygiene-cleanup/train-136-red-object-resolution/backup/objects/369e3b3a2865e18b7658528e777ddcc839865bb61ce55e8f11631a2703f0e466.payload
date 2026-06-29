@@ -1,0 +1,78 @@
+{
+  "appCacheAllowed": true,
+  "channel": "stable",
+  "createdAt": "2026-06-27T16:35:39Z",
+  "dataClass": "public_provenance",
+  "fixtureAllowed": "public_synthetic_only",
+  "id": "receipt.source_atlas_foundry.d00f519b9ffce479",
+  "inputs": [
+    {
+      "count": 2,
+      "id": "embedded.source_registry",
+      "sha256": "105cb51b7878f6e9"
+    },
+    {
+      "count": 1,
+      "id": "embedded.pathway_seeds",
+      "sha256": "6a2cdf0294ddd2b7"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.foundryReceipt",
+  "logAllowed": "metadata_only",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "operation": "compile_bundle",
+  "outputs": [
+    {
+      "bytes": 7277,
+      "claimCount": 2,
+      "freshnessState": "candidate",
+      "packID": "pack.occupation.broad_occupational_foundation",
+      "path": "packs/pack.occupation.broad_occupational_foundation.json",
+      "pathwayCount": 1,
+      "requirementCount": 2,
+      "sha256": "42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e"
+    },
+    {
+      "bytes": 1511,
+      "id": "ontology-v1",
+      "path": "schemas/ontology-v1.json",
+      "sha256": "db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07"
+    },
+    {
+      "bytes": 8943,
+      "id": "schema-descriptors-v1",
+      "path": "schemas/schema-descriptors-v1.json",
+      "sha256": "eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15"
+    },
+    {
+      "atomCount": 8,
+      "bytes": 15516,
+      "claimCount": 2,
+      "edgeCount": 6,
+      "id": "shard.source_atlas.7cc3e06975e7f067",
+      "latticeCount": 1,
+      "path": "shards/shard.source_atlas.7cc3e06975e7f067.json",
+      "provenanceCount": 2,
+      "recipeCount": 1,
+      "requirementCount": 2,
+      "sha256": "4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5"
+    },
+    {
+      "bytes": 3089,
+      "id": "manifest",
+      "path": "manifest.json",
+      "sha256": "39a706542980a06663743a0fe530c6150d9153188de4844750ebcffa8f17a3f5"
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "r2Allowed": true,
+  "schemaVersion": 1,
+  "versionID": "broad-occupational-foundation-20260627T163539Z"
+}

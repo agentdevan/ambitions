@@ -1,0 +1,38 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.sourceSpecificInternalReviewNote.v1",
+  "review": {
+    "candidateId": "catalog_candidate.2a8955ec3f4ab9de",
+    "domain": "health_wellness_reference",
+    "licensePosture": "redistributable_with_attribution_for_public_reference_pack_output",
+    "outsideLegalApprovalClaimed": false,
+    "packPolicy": "pack_allowed_with_attribution",
+    "resolutionId": "catalog_direct_source_resolution.869c97443588283f",
+    "reviewOwner": "Codex internal Source Atlas source and terms reviewer",
+    "reviewedAt": "2026-06-28",
+    "sourceId": "official.statcan.table.13100974",
+    "sourceName": "Statistics Canada Table 13-10-0974-01",
+    "sourcePosture": "official_government_public_statistical_reference",
+    "sourceUrls": [
+      "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "https://www150.statcan.gc.ca/n1/tbl/csv/13100974-eng.zip",
+      "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "https://open.canada.ca/en/open-government-licence-canada"
+    ],
+    "termsPosture": "Statistics Canada Open Licence reviewed from current official terms page; redistribution and adaptation allowed with required source acknowledgment and no endorsement or misrepresentation.",
+    "validUntil": "2026-09-28"
+  },
+  "nonClaims": [
+    "not outside legal approval",
+    "not medical advice",
+    "not diagnosis",
+    "not treatment planning",
+    "not production R2 write",
+    "not active registry mutation",
+    "not universal coverage",
+    "not release readiness"
+  ],
+  "proofArtifacts": [
+    "tools/source-atlas/generated/catalog-direct-source-review-evidence/train-75-statcan-table-13100974/direct-source-review-evidence.json"
+  ]
+}

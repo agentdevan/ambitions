@@ -1,0 +1,67 @@
+{
+  "conformsTo": "https://project-open-data.cio.gov/v1.1/schema",
+  "dataset": [
+    {
+      "bureauCode": [
+        "018:00"
+      ],
+      "contactPoint": {
+        "fn": "Public information office"
+      },
+      "description": "Public metadata for adult education program listings.",
+      "distribution": [
+        {
+          "downloadURL": "https://example.gov/adult-education-program-directory.csv",
+          "mediaType": "text/csv",
+          "title": "Program directory CSV"
+        }
+      ],
+      "keyword": [
+        "education",
+        "training",
+        "program"
+      ],
+      "landingPage": "https://www.ed.gov/",
+      "license": "public domain",
+      "programCode": [
+        "018:001"
+      ],
+      "publisher": {
+        "name": "U.S. Department of Education",
+        "url": "https://www.ed.gov/"
+      },
+      "rights": "https://www.usa.gov/government-works",
+      "terms_url": "https://www.ed.gov/notices",
+      "title": "Adult Education Program Directory"
+    },
+    {
+      "bureauCode": [
+        "009:20"
+      ],
+      "description": "Public metadata for physical activity resource references.",
+      "distribution": [
+        {
+          "accessURL": "https://www.cdc.gov/physicalactivity/basics/",
+          "title": "Public web resource"
+        }
+      ],
+      "keyword": [
+        "health",
+        "exercise",
+        "wellness"
+      ],
+      "landingPage": "https://www.cdc.gov/physicalactivity/",
+      "license": "",
+      "programCode": [
+        "009:020"
+      ],
+      "publisher": {
+        "name": "Centers for Disease Control and Prevention",
+        "url": "https://www.cdc.gov/"
+      },
+      "rights": "https://www.cdc.gov/Other/policies.html",
+      "terms_url": "https://www.cdc.gov/Other/policies.html",
+      "title": "Public Physical Activity Resources"
+    }
+  ]
+}

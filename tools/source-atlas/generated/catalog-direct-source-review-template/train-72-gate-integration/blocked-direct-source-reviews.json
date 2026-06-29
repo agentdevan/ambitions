@@ -1,0 +1,94 @@
+{
+  "blockedDirectSourceReviews": [
+    {
+      "blocked_direct_source_review_id": "catalog_direct_source_review_block.1c7a9bb80d59f738",
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "non_claims": [
+        "blocked direct-source review only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "resolution_id": "catalog_direct_source_resolution.b1675472d6807d33",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.43ed3a73ccc5",
+      "source_name": "Public Health Agency of Canada | Agence de la santé publique du Canada",
+      "status": "blocked"
+    },
+    {
+      "blocked_direct_source_review_id": "catalog_direct_source_review_block.abba3d77d698e940",
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "non_claims": [
+        "blocked direct-source review only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "resolution_id": "catalog_direct_source_resolution.b4f2d14840e3d73b",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.1b56977db7b8",
+      "source_name": "ABS (SA Data)",
+      "status": "blocked"
+    },
+    {
+      "blocked_direct_source_review_id": "catalog_direct_source_review_block.a674b8ecfdc16c4d",
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "non_claims": [
+        "blocked direct-source review only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "resolution_id": "catalog_direct_source_resolution.1c0251ba96c44307",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.096325a6a5ca",
+      "source_name": "Department of Education",
+      "status": "blocked"
+    },
+    {
+      "blocked_direct_source_review_id": "catalog_direct_source_review_block.8e9f2fee129c490b",
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_required"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "non_claims": [
+        "blocked direct-source review only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+      "resolution_id": "catalog_direct_source_resolution.869c97443588283f",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.b73f9f0ebbed",
+      "source_name": "Statistics Canada | Statistique Canada",
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogBlockedDirectSourceReviews.v1"
+}

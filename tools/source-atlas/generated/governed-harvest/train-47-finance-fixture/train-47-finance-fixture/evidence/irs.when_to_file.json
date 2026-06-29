@@ -1,0 +1,29 @@
+{
+  "adapterID": "irs_when_to_file_tax_deadline_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 1,
+  "dataClass": "public_provenance",
+  "evidenceHash": "a717cd4de8c890abd676993ccf184eb83140b3796e710924f76431a5f4208ee2",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "irs_public_web",
+  "normalizedPath": "normalized/irs.when_to_file.json",
+  "normalizedSHA256": "39c05ff224665203c0e53c97995c4b2c46efc3b3f7d269e56e66b54e2c207dc7",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "irs.when_to_file",
+  "sourceLane": "irs.when_to_file"
+}

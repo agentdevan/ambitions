@@ -1,0 +1,181 @@
+{
+  "activeTargetCount": 10,
+  "artifactID": "source_atlas_public_refresh_targets.train49_deca_live_worker_gateway",
+  "artifactSchemaVersion": "1.0.0",
+  "checks": [
+    {
+      "issues": [],
+      "name": "allowed_modes_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "status_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "active_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "artifact_public_reference_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "artifact_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "invalid_reports_emit_no_targets",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "default_review_required_unless_approved",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.nativeRefreshRegistryCompilerReport.v1",
+  "nonClaims": [
+    "not an R2 private-data backend",
+    "not runtime profile storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final path or timetable generator",
+    "not a bundled production refresh target approval",
+    "not real background execution proof"
+  ],
+  "outputPaths": {
+    "artifact": "tools/source-atlas/generated/native-refresh-registry/train-49-deca-live-worker-gateway/source-atlas-public-refresh-targets.json",
+    "closeout": "tools/source-atlas/generated/native-refresh-registry/train-49-deca-live-worker-gateway/closeout.md",
+    "report": "tools/source-atlas/generated/native-refresh-registry/train-49-deca-live-worker-gateway/native-refresh-registry-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionNonClaims": [
+    "no production R2 upload",
+    "no bundled production refresh target approval",
+    "no legal approval",
+    "no universal coverage",
+    "no final user plan, schedule, or Step generation",
+    "no private graph egress",
+    "no app runtime or release Green"
+  ],
+  "publisherReports": [
+    {
+      "channel": "stable",
+      "domainID": "occupation_foundation",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-production-r2-upload-readback-train-29.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "public_civic_requirements",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-civic-r2-publisher-remote-r2-train-37.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "education_credentialing",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-education-r2-publisher-remote-r2-train-42.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "business_entrepreneurship",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-business-r2-publisher-remote-r2-train-43.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "hobbies_recreation",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-hobbies-r2-publisher-remote-r2-train-44.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "health_wellness_reference",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-health-r2-publisher-remote-r2-train-45.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "travel_relocation",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-travel-r2-publisher-remote-r2-train-46.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "finance_public_reference",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-finance-r2-publisher-remote-r2-train-47.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "home_life_admin",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-home-life-admin-r2-publisher-remote-r2-train-48.json",
+      "valid": true
+    },
+    {
+      "channel": "stable",
+      "domainID": "creative_project_reference",
+      "environment": "production",
+      "loaded": true,
+      "packID": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+      "path": "docs/qa/source-atlas/r2/source-atlas-creative-project-r2-publisher-remote-r2-train-49.json",
+      "valid": true
+    }
+  ],
+  "reviewRequiredTargetCount": 0,
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; native refresh registry artifact compiler only",
+  "status": "Source Green for native refresh registry artifact compiler",
+  "targetCount": 10,
+  "targetStatus": "active",
+  "valid": true,
+  "versionID": "source-atlas-native-refresh-registry-train-24"
+}

@@ -1,0 +1,94 @@
+{
+  "approvalPacket": {
+    "path": "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.json",
+    "sourceIDs": [
+      "onet.database",
+      "bls.public.data.api",
+      "wikidata.crosswalk",
+      "openalex.dataset"
+    ],
+    "status": "Green"
+  },
+  "architectureCloseout": {
+    "canonicalOwnersTouched": [],
+    "compatibilityShimsLeftBehind": [],
+    "finalArchitectureTreeInspected": true,
+    "filesCreatedOrMoved": [
+      "tools/source-atlas/foundry/terms_approval_packet.py",
+      "tools/source-atlas/foundry/tests/test_terms_approval_packet_train_27.py",
+      "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.json",
+      "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.md",
+      "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-train-27.json",
+      "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-train-27.md"
+    ],
+    "noEquivalentFolderInterpretationUsed": true,
+    "oldNonCanonicalPathsRemoved": [],
+    "yellowArchitectureDebtRemaining": "none from Train 27; production R2 and native release proof remain separate trains"
+  },
+  "createdAt": "2026-06-28T00:00:00Z",
+  "followUpRequired": [
+    "Wire approval packet requirement into production/stable pack and R2 promotion gates.",
+    "Create production owner approval artifact before stable-channel write.",
+    "Run approved production R2 upload/readback only with current credentials.",
+    "Run native device/offline/no-account proof before runtime/release Green.",
+    "Continue governed coverage-frontier expansion without literal universal coverage claims."
+  ],
+  "kind": "ambitions.sourceAtlas.legalTermsApprovalTrain27Evidence.v1",
+  "knownRisks": [
+    "Internal legal/terms review is not outside legal approval.",
+    "Source terms can change and packet approvals expire on 2026-12-28.",
+    "Review-required and restricted lanes remain blocked until future source-specific review."
+  ],
+  "licenseTermsProof": {
+    "outsideLegalApprovalClaimed": false,
+    "sourceSpecificInternalReviewGreen": [
+      "onet.database",
+      "bls.public.data.api",
+      "wikidata.crosswalk",
+      "openalex.dataset"
+    ],
+    "sourceSpecificTermsStillControl": true
+  },
+  "nativeOfflineNoAccountProof": "not run in Train 27; no native files changed in this train",
+  "noPrivateGraphEgressProof": {
+    "audit": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+    "status": "passed"
+  },
+  "nonClaims": [
+    "not outside legal approval",
+    "not production R2 readiness",
+    "not release readiness",
+    "not App Store readiness",
+    "not full Source Atlas Green",
+    "not universal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "productLawPreserved": true,
+  "provenanceCompletenessProof": "not expanded in Train 27",
+  "r2RequestPrivacyProof": "No R2 request path changed; approval packets are private-data scanned before pack gates can rely on them.",
+  "restrictedSourceExclusionProof": {
+    "reviewRequiredLanesBlocked": true,
+    "usajobsPackOutputBlocked": true
+  },
+  "rollbackPlan": [
+    "Revert the Train 27 approval packet module, gate wiring, CLI command, tests, and QA evidence.",
+    "Default fixture packability remains available without require_approval_packet until production gates are tightened in the next train."
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas",
+  "status": "Green for bounded internal legal/terms approval packet workflow / Yellow overall Source Atlas",
+  "validationNotRun": [
+    "production R2 upload/readback",
+    "native XCTest/build-for-testing for Train 27",
+    "outside legal counsel review",
+    "device/offline/release proof"
+  ],
+  "validationRun": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_terms_approval_packet_train_27.py tools/source-atlas/foundry/tests/test_adapter_broad_coverage_train_01.py::test_terms_registry_validation_and_distribution_policy_gate tools/source-atlas/foundry/tests/test_stable_channel_api_governance_train.py::test_legal_review_packet_marks_outside_legal_approval_as_non_claim",
+    "python3 tools/source-atlas/source-atlas-foundry.py terms-approval-packet --source onet.database --source bls.public.data.api --source wikidata.crosswalk --source openalex.dataset --json docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.json --created-at 2026-06-28T00:00:00Z",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+    "python3 scripts/source-atlas-boundary-audit.py",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+    "python3 scripts/ambitions-green-standard-audit.py",
+    "python3 scripts/ambitions-local-first-boundary-scan.py"
+  ]
+}

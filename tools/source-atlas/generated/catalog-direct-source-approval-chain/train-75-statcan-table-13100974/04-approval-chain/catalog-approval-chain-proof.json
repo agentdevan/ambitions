@@ -1,0 +1,220 @@
+{
+  "allowActiveRegistryWrite": false,
+  "checks": [
+    {
+      "issues": [],
+      "name": "decision_assembler_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "approval_finalizer_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "mutation_plan_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "registry_applier_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "missing_completion_blocks_without_red",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "provided_completion_must_be_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "chain_emits_no_claims_or_packs",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "stage_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "report_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "executeRegistryApply": false,
+  "inputs": {
+    "decisionInputsPath": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json",
+    "draftGovernancePacketsPath": "tools/source-atlas/generated/catalog-governance-intake/train-57-live-data-gov/draft-governance-packets.json",
+    "reviewCompletionPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake/catalog-approval-decision-completion.json",
+    "termsProposalsPath": "tools/source-atlas/generated/catalog-terms-resolution/train-61-live-data-gov/terms-resolution-proposals.json"
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogApprovalChainProof.v1",
+  "nonClaims": [
+    "chain proof only",
+    "not legal approval by itself",
+    "not outside legal approval without outside approval artifact",
+    "not source authority without completed reviewer fields",
+    "not production registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "report": "fcdb82c734920298db6cd563c7eb12c234439580646b995c1b6577f710ab9858"
+  },
+  "outputPaths": {
+    "approvalFinalizer": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer",
+    "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/closeout.md",
+    "decisionAssembler": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler",
+    "mutationPlan": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan",
+    "registryApplier": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier",
+    "report": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/catalog-approval-chain-proof.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedApprovalFinalizations": 3,
+    "blockedDecisionAssemblies": 3,
+    "blockedRegistryMutations": 3,
+    "candidateRegistryMutations": 1,
+    "claims": 0,
+    "completedApprovalArtifacts": 1,
+    "completedDecisionArtifacts": 1,
+    "decisionInputPackets": 4,
+    "packableClaims": 0,
+    "plannedRegistryMutations": 1,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; approval chain proof tooling only",
+  "stageResults": {
+    "approvalFinalizer": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer/manifest.json",
+      "outputPaths": {
+        "blockedApprovalFinalizations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer/blocked-approval-finalizations.json",
+        "catalogApprovalFinalizer": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer/catalog-approval-finalizer.json",
+        "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer/closeout.md",
+        "completedApprovalArtifacts": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer/completed-approval-artifacts.json",
+        "plannerApprovalArtifact": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer/catalog-registry-mutation-approval.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "approvedApiPolicies": 1,
+        "approvedEntries": 1,
+        "approvedLegalEntries": 1,
+        "approvedSourceLanes": 1,
+        "blockedApprovalFinalizations": 3,
+        "claims": 0,
+        "completedApprovalArtifacts": 1,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0,
+        "termsResolutionProposals": 4
+      },
+      "status": "Source Green for catalog approval finalizer tooling",
+      "valid": true
+    },
+    "decisionAssembler": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler/manifest.json",
+      "outputPaths": {
+        "blockedDecisionAssemblies": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler/blocked-decision-assemblies.json",
+        "catalogApprovalDecisionAssembler": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler/catalog-approval-decision-assembler.json",
+        "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler/closeout.md",
+        "completedDecisionArtifacts": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler/completed-decision-artifacts.json",
+        "finalizerDecisionArtifact": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler/catalog-approval-finalizer-decision.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "approvedEntries": 1,
+        "blockedDecisionAssemblies": 3,
+        "claims": 0,
+        "completedDecisionArtifacts": 1,
+        "decisionInputPackets": 4,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0
+      },
+      "status": "Source Green for catalog approval decision assembler tooling",
+      "valid": true
+    },
+    "mutationPlan": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan/manifest.json",
+      "outputPaths": {
+        "activeRegistryMutations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan/active-registry-mutations.json",
+        "blockedRegistryMutations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan/blocked-registry-mutations.json",
+        "catalogRegistryMutationPlan": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan/catalog-registry-mutation-plan.json",
+        "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan/closeout.md",
+        "plannedRegistryMutations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan/planned-registry-mutations.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "approvedApiPolicies": 1,
+        "approvedLegalEntries": 1,
+        "approvedSourceLanes": 1,
+        "blockedRegistryMutations": 3,
+        "claims": 0,
+        "draftGovernancePackets": 4,
+        "packableClaims": 0,
+        "plannedRegistryMutations": 1,
+        "r2PackableArtifacts": 0
+      },
+      "status": "Source Green for approval-gated catalog registry mutation planning",
+      "valid": true
+    },
+    "registryApplier": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier/catalog-registry-applier-report.json",
+      "outputPaths": {
+        "activeRegistryMutations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier/active-registry-mutations.json",
+        "blockedRegistryMutations": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier/blocked-registry-mutations.json",
+        "candidateApiGovernanceRegistry": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier/candidate-api-governance-registry.json",
+        "candidateLegalTermsRegistry": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier/candidate-legal-terms-registry.json",
+        "candidateSourceLaneRegistry": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier/candidate-source-lane-registry.json",
+        "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier/closeout.md",
+        "report": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier/catalog-registry-applier-report.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "blockedRegistryMutations": 0,
+        "candidateRegistryMutations": 1,
+        "claims": 0,
+        "packableClaims": 0,
+        "plannedRegistryMutations": 1,
+        "r2PackableArtifacts": 0
+      },
+      "status": "Source Green for approval-gated catalog registry applier tooling",
+      "valid": true
+    }
+  },
+  "status": "Source Green for catalog approval chain proof tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-approval-chain-train-66"
+}

@@ -1,0 +1,15 @@
+{
+  "approvalScope": "active source lane, legal terms, and API governance registry metadata",
+  "approvalStatus": "approved_for_active_registry_apply",
+  "approvedAt": "2026-06-28T00:00:00Z",
+  "approvedBy": "Ambitions owner source registry approval",
+  "kind": "ambitions.sourceAtlas.goalDomainActiveRegistryApplyApproval.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not claim output",
+    "not R2 publish"
+  ],
+  "sourceIDs": [
+    "approved.source_specific.train99_evidence"
+  ]
+}

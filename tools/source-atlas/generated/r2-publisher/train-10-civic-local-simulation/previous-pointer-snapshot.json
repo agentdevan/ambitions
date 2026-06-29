@@ -1,0 +1,14 @@
+{
+  "current": {
+    "bytes": 1885,
+    "exists": true,
+    "objectKey": "source-atlas/v1/staging/candidate/public_civic_requirements/current.json",
+    "sha256": "692b6091d0fbeb999b7269eb63ac836bc774e63a8093769df46fd4cfd7b19964"
+  },
+  "lastKnownGood": {
+    "bytes": 1271,
+    "exists": true,
+    "objectKey": "source-atlas/v1/staging/candidate/public_civic_requirements/lkg.json",
+    "sha256": "db1474e6bec35066c3bd5dd400103d7c4e23d726380d91cc6268d607f62efece"
+  }
+}

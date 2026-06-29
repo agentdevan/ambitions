@@ -1,0 +1,29 @@
+{
+  "adapterID": "sba_business_guide_adapter",
+  "apiPolicyID": "api.static_public_page.v1",
+  "budgetPolicyID": "budget.static_public_page.v1",
+  "claimCount": 3,
+  "dataClass": "public_provenance",
+  "evidenceHash": "c950d0277210ad30961a017229a52861d7a5a9de1d4ae9edfd9a69cc84ca56cc",
+  "kind": "ambitions.sourceAtlas.governedHarvestEvidence.v1",
+  "licenseID": "sba_public_web",
+  "normalizedPath": "normalized/sba.business_guide.start_business.json",
+  "normalizedSHA256": "f3e89427c12157c3d34fd4b389fa88cb06851d72cceeec8667aad2af34462e44",
+  "packCandidateCount": 1,
+  "packEligibleByGovernance": true,
+  "privateDataScan": {
+    "issues": [],
+    "passed": true
+  },
+  "publicReferenceOnly": true,
+  "r2PackPolicy": "pack_allowed_with_attribution",
+  "ratePolicyID": "rate.static_public_page.v1",
+  "recordCount": 0,
+  "retrievalMethod": "deterministic_fixture",
+  "retrievedAt": "2026-06-28T00:00:00Z",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "secretPolicyID": "secret.no_secret_static_page.v1",
+  "sourceID": "sba.business_guide.start_business",
+  "sourceLane": "sba.business_guide.start_business"
+}

@@ -1,0 +1,115 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "template_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "template_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completion_evidence_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completion_evidence_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "missing_completion_evidence_blocks_without_approval",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_review_packets_require_required_fields",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_review_bundles_do_not_mutate_registries",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_completion_intake_emits_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "completionEvidencePath": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/fixture-completion-evidence.json",
+  "createdAt": "2026-06-28T22:20:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainReviewCompletionIntakeManifest.v1",
+  "nonClaims": [
+    "goal-domain review completion intake only",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedGoalDomainReviewCompletions": "3305d0029e980172e4a5da9ba85c8b44bdced2c74f6ba9730fe035938bdbcee5",
+    "goalDomainReviewCompletionIntake": "a84f296a4c43058cf30f45f3a4019949caa5acfc9f297736cd53933ae1904c4f",
+    "goalDomainReviewCompletions": "b8b73e55b31d3f647a04db2f2d7ec50b98f3ca4dbbe9abc3086d373c65adca8d",
+    "manifest": "2e34c85b2401a908e0150a9413aedf0806bc8944e236c9827a2305ac380ba5da"
+  },
+  "outputPaths": {
+    "blockedGoalDomainReviewCompletions": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/completion-intake/blocked-goal-domain-review-completions.json",
+    "closeout": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/completion-intake/closeout.md",
+    "goalDomainReviewCompletionIntake": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/completion-intake/goal-domain-review-completion-intake.json",
+    "goalDomainReviewCompletions": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/completion-intake/goal-domain-review-completions.json",
+    "manifest": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/03-registry-apply-rehearsal/completion-intake/manifest.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvalArtifactsEmitted": 0,
+    "blockedReviewCompletions": 0,
+    "claims": 0,
+    "completedReviewBundles": 1,
+    "completedReviewPackets": 4,
+    "completionEvidenceRecords": 4,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewPacketTemplates": 4
+  },
+  "reviewTemplatesPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/04-review-packets/review-packet-templates.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; review completion intake tooling only",
+  "status": "Source Green for goal-domain review completion intake tooling",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-review-completion-intake-train-93"
+}

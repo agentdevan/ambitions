@@ -1,0 +1,105 @@
+{
+  "coverage": {
+    "authority_coverage": {
+      "complete": true,
+      "missing": [],
+      "present": [
+        "official_government",
+        "scholarly_metadata"
+      ],
+      "required": [
+        "official_government",
+        "scholarly_metadata"
+      ]
+    },
+    "blocked_claim_count": 2,
+    "candidate_only_count": 0,
+    "claim_classes": [
+      "labor_market_context",
+      "occupation_taxonomy",
+      "research_topic_context"
+    ],
+    "conflict_status": "no_conflict_detected",
+    "covered_claim_classes": [
+      "labor_market_context",
+      "occupation_taxonomy",
+      "research_topic_context"
+    ],
+    "domain": "occupation_foundation",
+    "freshness_compliance": {
+      "claimCount": 28,
+      "complete": true,
+      "freshCount": 28,
+      "percent": 1.0
+    },
+    "frontier_id": "occupation_foundation",
+    "goal_intent_classes": [
+      "career_occupation_reference",
+      "skill_context_reference"
+    ],
+    "gold_set": {
+      "goldSetID": null,
+      "matchedCount": 0,
+      "matches": [],
+      "missing": [],
+      "nonClaims": [
+        "not universal coverage",
+        "not release readiness"
+      ],
+      "required": false,
+      "requiredCount": 0,
+      "schemaVersion": 1,
+      "status": "not_required",
+      "versionID": "source-atlas-gold-set-evaluator-train-40"
+    },
+    "gold_set_status": "not_required",
+    "jurisdictions": [
+      "US",
+      "global"
+    ],
+    "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+    "legal_posture_completeness": {
+      "complete": true,
+      "completeCount": 4,
+      "laneCount": 4,
+      "percent": 1.0
+    },
+    "missing_claim_classes": [],
+    "non_claims": [
+      "not R2 release readiness",
+      "not a final user plan, schedule, or Step generator",
+      "not a personalized job ranking",
+      "not a private user-data backend",
+      "not accessibility, privacy, or legal approval",
+      "not an official legal, medical, financial, or admissions decision",
+      "not career advice",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not private life graph storage",
+      "not production R2 readiness",
+      "not runtime recommendation proof by itself",
+      "not universal goal coverage",
+      "not universal occupation coverage"
+    ],
+    "packable_claim_count": 26,
+    "provenance_completeness": {
+      "claimCount": 28,
+      "complete": true,
+      "completeTupleCount": 28,
+      "packableClaimCount": 26,
+      "packableCompleteTupleCount": 26,
+      "packablePercent": 1.0
+    },
+    "restricted_exclusions": [],
+    "schemaVersion": 1,
+    "source_lanes": [
+      "bls.public.data.api",
+      "onet.database",
+      "openalex.dataset",
+      "openalex.works"
+    ],
+    "status": "claim_graph_ready",
+    "status_ceiling": "claim_graph_ready"
+  }
+}

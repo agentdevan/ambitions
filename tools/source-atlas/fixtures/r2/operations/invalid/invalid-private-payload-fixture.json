@@ -1,0 +1,22 @@
+{
+  "expectedValid": false,
+  "expectedIssueCodes": [
+    "goal_text",
+    "capture_text",
+    "private_life_graph",
+    "user_identifier",
+    "account_secret"
+  ],
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.invalidPrivatePayloadFixture",
+    "dataClass": "synthetic_fixture",
+    "goalText": "Private synthetic goal text must be rejected.",
+    "captureText": "Private synthetic capture text must be rejected.",
+    "privateLifeGraph": {
+      "node": "synthetic-private-node"
+    },
+    "userID": "user-1234",
+    "accountSecret": "sk-syntheticnotreal12345"
+  }
+}

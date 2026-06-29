@@ -1,0 +1,202 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "executor_manifest_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "executor_report_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_orders_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "only_blocked_review_required_records_selected",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "every_review_packet_requires_manual_review",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_packets_emit_no_approval_or_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_packets_emit_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T21:40:00Z",
+  "executorManifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/03-work-order-executor/manifest.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainReviewPacketsManifest.v1",
+  "nonClaims": [
+    "review packet templates only",
+    "not completed review",
+    "not source authority",
+    "not legal approval",
+    "not outside legal approval",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "manifest": "48d22f7b6d5d025f68e7fd9a56e81c71d3411eb84a73cf8736d8486d8b66e9ea",
+    "reviewPacketReport": "041afd8de5682cfa26bb90588458cbe06de3bbdcd9b76d079967cf9c9963ac56",
+    "reviewPacketTemplates": "b4f62f77e4cc2eae75759640783205709b56291a74a3eba1592916188efcd2d7"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/04-review-packets/closeout.md",
+    "manifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/04-review-packets/manifest.json",
+    "reviewPacketReport": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/04-review-packets/goal-domain-review-packets.json",
+    "reviewPacketTemplates": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/04-review-packets/review-packet-templates.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvalArtifactsEmitted": 0,
+    "claims": 0,
+    "completedReviewPackets": 0,
+    "finalOutputArtifacts": 0,
+    "inputExecutionRecords": 13,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewPackets": 4,
+    "selectedBlockedReviewRecords": 4
+  },
+  "reviewSummary": [
+    {
+      "activeRegistryMutations": 0,
+      "approvalArtifactsEmitted": 0,
+      "completedReviewPackets": 0,
+      "domainCounts": [
+        {
+          "domain": "public_benefits_reference",
+          "packetCount": 1
+        }
+      ],
+      "nonClaims": [
+        "review summary only",
+        "not approval",
+        "not source authority",
+        "not claim output"
+      ],
+      "packetCount": 1,
+      "requestIDs": [
+        "frontier_intake_proposal.2b62e995a7dfeaa9"
+      ],
+      "reviewLane": "api_governance_review"
+    },
+    {
+      "activeRegistryMutations": 0,
+      "approvalArtifactsEmitted": 0,
+      "completedReviewPackets": 0,
+      "domainCounts": [
+        {
+          "domain": "public_benefits_reference",
+          "packetCount": 1
+        }
+      ],
+      "nonClaims": [
+        "review summary only",
+        "not approval",
+        "not source authority",
+        "not claim output"
+      ],
+      "packetCount": 1,
+      "requestIDs": [
+        "frontier_intake_proposal.2b62e995a7dfeaa9"
+      ],
+      "reviewLane": "direct_source_authority_resolution"
+    },
+    {
+      "activeRegistryMutations": 0,
+      "approvalArtifactsEmitted": 0,
+      "completedReviewPackets": 0,
+      "domainCounts": [
+        {
+          "domain": "public_benefits_reference",
+          "packetCount": 1
+        }
+      ],
+      "nonClaims": [
+        "review summary only",
+        "not approval",
+        "not source authority",
+        "not claim output"
+      ],
+      "packetCount": 1,
+      "requestIDs": [
+        "frontier_intake_proposal.2b62e995a7dfeaa9"
+      ],
+      "reviewLane": "legal_terms_review"
+    },
+    {
+      "activeRegistryMutations": 0,
+      "approvalArtifactsEmitted": 0,
+      "completedReviewPackets": 0,
+      "domainCounts": [
+        {
+          "domain": "public_benefits_reference",
+          "packetCount": 1
+        }
+      ],
+      "nonClaims": [
+        "review summary only",
+        "not approval",
+        "not source authority",
+        "not claim output"
+      ],
+      "packetCount": 1,
+      "requestIDs": [
+        "frontier_intake_proposal.2b62e995a7dfeaa9"
+      ],
+      "reviewLane": "source_lane_governance"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; review packet templates only",
+  "status": "Source Green for goal-domain review packet template tooling",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-review-packets-train-92"
+}

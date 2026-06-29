@@ -1,0 +1,15 @@
+{
+  "expectedValid": false,
+  "expectedIssueCodes": [
+    "private_r2_object_key_segment",
+    "possible_user_identifier_in_object_key"
+  ],
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.r2ChecksumFixture",
+    "dataClass": "public_r2_object_key",
+    "objectKey": "source-atlas/v1/users/user-1234/goals/manifest.json",
+    "sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "bytes": 1024
+  }
+}

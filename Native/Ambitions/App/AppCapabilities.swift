@@ -32,6 +32,7 @@ struct AppPlatformCapability {
     let externalRouter: any AppExternalRouting
     let externalActionService: any ExternalActionCommandExecuting
     let externalCreationImportService: any ExternalCreationImporting
+    let sourceAtlasLifecycleRefreshService: any SourceAtlasPublicPackLifecycleRefreshing
 }
 
 struct AppUserSystemCapability {

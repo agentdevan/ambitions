@@ -1,0 +1,170 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "https://catalog.data.gov/api/3/",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate_source.40b078cea4b162e7",
+      "candidate_score": 20,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "public_reference",
+        "public_requirement_reference"
+      ],
+      "dataset_url": "https://catalog.data.gov/dataset",
+      "declared_jurisdiction": "US",
+      "declared_license": "",
+      "declared_rights": "",
+      "discovered_at": "2026-06-29T00:36:00Z",
+      "discovery_method": "executor_seed",
+      "distribution_urls": [],
+      "domain_guess": "community_volunteering_opportunities",
+      "evidence_hash": "a2b507a7ced223542ce5173236af00c40fb0e37bd52aad703c0043a14ea10cfb",
+      "frontier_id": "community_volunteering_opportunities",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "frontier_intake_proposal.7e7418a0ce5cfebf",
+      "publisher_name": "Data.gov Catalog",
+      "publisher_url": "https://catalog.data.gov/",
+      "redistribution_guess": "terms_sensitive",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.data.gov/privacy-policy/"
+    }
+  ],
+  "createdAt": "2026-06-29T00:36:00Z",
+  "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/03-operations-executor/frontier-intake/community_volunteering_opportunities/frontier-intake-input.json",
+  "kind": "ambitions.sourceAtlas.frontierIntake.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "proposalSummaries": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_count": 1,
+      "frontier_id": "community_volunteering_opportunities",
+      "issues": [],
+      "pack_output_allowed": false,
+      "proposal_id": "frontier_intake_proposal.7e7418a0ce5cfebf",
+      "review_required": true,
+      "status": "candidate_only"
+    }
+  ],
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.40b078cea4b162e7"
+      ],
+      "claim_classes": [
+        "public_reference",
+        "public_requirement_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "community_volunteering_opportunities",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "90d reference metadata",
+        "annual source-lane review"
+      ],
+      "frontier_id": "community_volunteering_opportunities",
+      "goal_intent_classes": [
+        "community_volunteering_opportunities"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "candidate frontier work order only",
+        "not R2 readiness",
+        "human source-lane and legal/API review required"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "frontier_intake_proposal.7e7418a0ce5cfebf",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "public_catalog",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ],
+  "recordCounts": {
+    "candidateSources": 1,
+    "claims": 0,
+    "packableClaims": 0,
+    "proposals": 1,
+    "proposedFrontiers": 1,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "versionID": "source-atlas-frontier-intake-train-52"
+}

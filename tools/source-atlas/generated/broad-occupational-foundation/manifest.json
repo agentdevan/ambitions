@@ -1,0 +1,99 @@
+{
+  "artifacts": {
+    "coverageReport": {
+      "bytes": 42567,
+      "path": "coverage-report.json",
+      "sha256": "3f77b3bb70c6b67179f92ce8fc143f3490b25ae59d22bfebeeff3222d9998d7d"
+    },
+    "freshnessStates": {
+      "bytes": 735,
+      "path": "freshness-states.json",
+      "sha256": "642f369593342183458325e4d4eb559252f3bc28ebdc48611a99efdc52e61506"
+    },
+    "licenseTermsSlice": {
+      "bytes": 6957,
+      "path": "license-terms-slice.json",
+      "sha256": "4ec358314eb6038c63779ca822c12b482f828b51951cbf20c43a0d81a10e7b38"
+    },
+    "nonClaims": {
+      "bytes": 649,
+      "path": "non-claims.json",
+      "sha256": "683773f62dd20c6eeb411cfaa523f75f8dad3c4e356aad65c427a09daadb79ea"
+    },
+    "normalized": {
+      "bytes": 155984,
+      "path": "normalized-records.json",
+      "sha256": "578c490c70b8872e2fc274d7a82611ad80da777f785cf94811ac868390c1e39c"
+    },
+    "packReadinessVerdict": {
+      "bytes": 1006,
+      "path": "pack-readiness-verdict.json",
+      "sha256": "a10e4bc3c3d27c7d729f0b7e2033617736d4813674a7c8f15bd1d4c531eac0c2"
+    },
+    "provenanceReceipts": {
+      "bytes": 3931,
+      "path": "provenance-receipts.json",
+      "sha256": "ba2e0ffcc5187856b480179881580768b1a8a31a0411ce5a1dbf5e13d221957f"
+    },
+    "sourceRegistrySlice": {
+      "bytes": 6718,
+      "path": "source-registry-slice.json",
+      "sha256": "d057f166c2a6d41449c5959c2ea99e542aac7ef3b2044c8b80c8c88530eb765d"
+    }
+  },
+  "checksum": "408c3981dafc545592deac1c6bef73ccf168504fdffb92d2dcbcbc5ff4806728",
+  "coverageReportChecksum": "ede59eec3e1d84dc817d756cbbf2fc3bcc0d73c82d2638ac28df1d97326e190a",
+  "createdAt": "2026-06-27T15:40:29Z",
+  "dataClass": "official_public_source",
+  "id": "manifest.broad_occupational_foundation.train_01",
+  "kind": "ambitions.sourceAtlas.broadOccupationalFoundationManifest.v1",
+  "licenseTermsSliceChecksum": "8466bca4415092acb25c5e39c635c032a1da08630dcf0441f8aecbb9f3a4a8b0",
+  "nonClaims": [
+    "does not claim full Source Atlas project Green",
+    "does not claim release readiness, App Store readiness, account readiness, legal/privacy approval, or complete runtime Green",
+    "does not claim known issue closure",
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "packReadinessVerdict": {
+    "blockedSources": [],
+    "freshnessThresholdPasses": true,
+    "licenseGatePasses": true,
+    "noPrivateGraphAuditPasses": true,
+    "nonClaims": [
+      "does not claim full Source Atlas project Green",
+      "does not claim release readiness, App Store readiness, account readiness, legal/privacy approval, or complete runtime Green",
+      "does not claim known issue closure",
+      "does not create final user paths",
+      "does not create final schedules",
+      "does not create Step lists",
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval"
+    ],
+    "packReadiness": "candidate_local_only",
+    "packReadinessPasses": true,
+    "privacyGatePasses": true,
+    "productionR2UploadRun": false,
+    "provenanceCompletenessPasses": true,
+    "r2Readiness": "candidate_local_only_not_uploaded"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionR2Uploaded": false,
+  "provenanceReceiptChecksum": "75a014c840a87eb3928a94576b0f5540b812c976c583c793546cd1438fb38611",
+  "publicReferenceOnly": true,
+  "r2Ready": true,
+  "schemaVersion": 1,
+  "sourceRegistrySliceChecksum": "23c9c6742efdff656b82d6e664ff2898192aa66319b6f8cd91847c9b60743593",
+  "versionID": "source-atlas-broad-occupational-foundation-train-01"
+}

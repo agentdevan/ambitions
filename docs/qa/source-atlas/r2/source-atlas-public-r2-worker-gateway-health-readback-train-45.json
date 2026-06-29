@@ -1,0 +1,286 @@
+{
+  "allowedHealthResponses": [
+    {
+      "byteCount": 1736,
+      "expectedSHA256": "4ab7f97d013c0247fff8650864a70dd5bba002976ec84682041b57ad3b178e30",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=120",
+        "cf-ray": "a12b1c420e770db7-IAD",
+        "connection": "close",
+        "content-length": "1736",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 07:52:09 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=0wsFlp6uh8cWzooAq94YqLkBg9vPO7e3zltSY6cMpSJwQTxg7pA7QXnrNPaOlhKWknYvQ%2Fe6kbLfYGYOjFfZoidYnG4WSqsYIO%2BgYTdtg8D3QbWKjDBgwwKzBSTo4x5I6H4SWiVHhYyRzoAQZ85yTdxfa5q3BVQPEQgCkr1zX2BFKjxSon%2FG2tluk%2F2gDXI%2Fez12VL8%2BP6wwsSco\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+      "publicGatewayHeader": "true",
+      "sha256": "4ab7f97d013c0247fff8650864a70dd5bba002976ec84682041b57ad3b178e30",
+      "status": 200
+    },
+    {
+      "byteCount": 1268,
+      "expectedSHA256": "78a9e818a08b35562441f79f8955f832dc09fa83a74495bcfd905de2e09a897e",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=3600",
+        "cf-ray": "a12b1c431b1bbb25-IAD",
+        "connection": "close",
+        "content-length": "1268",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 07:52:09 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=H9bVnDAl%2FRDe%2BJTkfVx0bUWKS%2BbAoOxRDaUjrsIwJVTEi4ia5zk2CvtoZs3TxWPrpNja7hRpHNgeVEB%2BFFszB%2Fcj9m%2FqblgLkGZUj%2FPYcJKh3GvsS4X8d5OKgtV5YlqItZwYtlu%2FwVJW3HOkKb2G%2BmN1OdJRIgPFE5bKYSzUjyBVSgJZwiXDkoojaVwYhWPFkOdtuJDf%2FVkSpaK3\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/lkg.json",
+      "publicGatewayHeader": "true",
+      "sha256": "78a9e818a08b35562441f79f8955f832dc09fa83a74495bcfd905de2e09a897e",
+      "status": 200
+    },
+    {
+      "byteCount": 1413,
+      "expectedSHA256": "dbde7bc538efd2c54c04e3c7ef09b97eea935093eebeb0637aceab9aa58a0f2a",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=3600",
+        "cf-ray": "a12b1c4419fe56cd-IAD",
+        "connection": "close",
+        "content-length": "1413",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 07:52:09 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=m2Zbpuzqx7wVjgIs3WO07R6zg3kqx4xpyrpZPkjFwLWMR9RIu0hOAQCjYh2IYdO8yU52RwsxddhbfSCDfHtRUhxeCtR5eeCznSF5XRS6ZAYbFLdkLPgyDIRBzt8GbawYpxoLx7g%2BVbr6Y2JeG%2FxAYc24fdH95iVHKPyhjtDQOaA%2FcQEYqL1JvJ2XXTsKs%2FE6Q6%2FswO1xLFXIU9XQ\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/revocations.json",
+      "publicGatewayHeader": "true",
+      "sha256": "dbde7bc538efd2c54c04e3c7ef09b97eea935093eebeb0637aceab9aa58a0f2a",
+      "status": 200
+    },
+    {
+      "byteCount": 8797,
+      "expectedSHA256": "1d12454d24289694019ef7490463812113bb0b92f7f696135dbf8898b0ab1b0a",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=3600",
+        "cf-ray": "a12b1c452a410831-IAD",
+        "connection": "close",
+        "content-length": "8797",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 07:52:09 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=h1WUXJaOhYVIVjSLPCXSoJ9OrUPCskEkBGwhr4O2NVDA7wBcedWbve14yC2eFElxc2d0ZVuTB4Gdn1b10PEUnqmugbXQBMzU27U%2F1Xe82kBjkdmC7K2xKuQax7g14m28LDh%2FY71pAy%2BalaW9arW1ThQdI8KamplFCM7XhcleEMo22eGhA1u%2BVOVMVIf1OLH0Hdc9%2Feuc01927ObL\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/manifest.json",
+      "publicGatewayHeader": "true",
+      "sha256": "1d12454d24289694019ef7490463812113bb0b92f7f696135dbf8898b0ab1b0a",
+      "status": 200
+    },
+    {
+      "byteCount": 16569,
+      "expectedSHA256": "b84001256a9bbb06c26e1656bb04a04217078ce77d7790aaab41656dd67ea301",
+      "gatewayHeader": "production-stable-public-reference",
+      "hashMatchesExpected": true,
+      "headers": {
+        "alt-svc": "h3=\":443\"; ma=86400",
+        "cache-control": "public, max-age=3600",
+        "cf-ray": "a12b1c466eb21d4c-IAD",
+        "connection": "close",
+        "content-length": "16569",
+        "content-type": "application/json; charset=utf-8",
+        "date": "Sun, 28 Jun 2026 07:52:10 GMT",
+        "nel": "{\"report_to\":\"cf-nel\",\"success_fraction\":0.0,\"max_age\":604800}",
+        "report-to": "{\"group\":\"cf-nel\",\"max_age\":604800,\"endpoints\":[{\"url\":\"https://a.nel.cloudflare.com/report/v4?s=2OpGatvSCaQ4prWSny2oiAwjvm4DMd4r9guuLn8opTS4oUAnbixiw%2Bc3sQQhL5i6Ci5TpfolxcW5UHAo20r%2F%2F4J0VDWYv%2FnbVRk8gYERVGDrb9DRLY4RWPC3dJtmfVNT0MTT2GloUEYgAiIlUi3wy7bcOXaWsI0MxsKD1a1ZQoBIpvVQiIVZdSYabNFoe5BhSUeBi24vMxwRYRNZ\"}]}",
+        "server": "cloudflare",
+        "x-content-type-options": "nosniff",
+        "x-source-atlas-gateway": "production-stable-public-reference",
+        "x-source-atlas-public-reference": "true"
+      },
+      "method": "GET",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/pack.json",
+      "publicGatewayHeader": "true",
+      "sha256": "b84001256a9bbb06c26e1656bb04a04217078ce77d7790aaab41656dd67ea301",
+      "status": 200
+    }
+  ],
+  "blockedRouteResponses": [
+    {
+      "expectedStatus": 404,
+      "method": "GET",
+      "passed": true,
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/claims.json",
+      "publicGatewayHeader": null,
+      "status": 404
+    },
+    {
+      "expectedStatus": 404,
+      "method": "GET",
+      "passed": true,
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/current.json?goal_text=private",
+      "publicGatewayHeader": null,
+      "status": 404
+    },
+    {
+      "expectedStatus": 405,
+      "method": "POST",
+      "passed": true,
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+      "publicGatewayHeader": null,
+      "status": 405
+    }
+  ],
+  "checks": [
+    {
+      "name": "health_allowed_routes_200",
+      "passed": true
+    },
+    {
+      "name": "health_hashes_match_publisher",
+      "passed": true
+    },
+    {
+      "name": "public_gateway_headers_present_on_allowed_routes",
+      "passed": true
+    },
+    {
+      "name": "existing_domain_current_pointers_still_available",
+      "passed": true
+    },
+    {
+      "name": "private_or_unallowlisted_routes_blocked",
+      "passed": true
+    },
+    {
+      "name": "blocked_routes_do_not_return_public_reference_header",
+      "passed": true
+    },
+    {
+      "name": "no_private_graph_egress_shape",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "deployedVersionID": "fa768012-360e-496a-a6b9-a6d0ec16e61f",
+  "domain": "health_wellness_reference",
+  "endpoint": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "existingCurrentPointers": [
+    {
+      "domain": "occupation_foundation",
+      "path": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "public_civic_requirements",
+      "path": "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "education_credentialing",
+      "path": "source-atlas/v1/production/stable/education_credentialing/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "business_entrepreneurship",
+      "path": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "hobbies_recreation",
+      "path": "source-atlas/v1/production/stable/hobbies_recreation/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    },
+    {
+      "domain": "health_wellness_reference",
+      "path": "source-atlas/v1/production/stable/health_wellness_reference/current.json",
+      "publicGatewayHeader": "true",
+      "status": 200
+    }
+  ],
+  "gatewayURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "kind": "ambitions.sourceAtlas.publicR2WorkerGatewayReadbackProof.v1",
+  "manifestKey": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/manifest.json",
+  "nonClaims": [
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not release readiness",
+    "not universal coverage",
+    "not private graph storage",
+    "not final user plan, schedule, or Step generation",
+    "not medical advice",
+    "not diagnosis",
+    "not treatment advice",
+    "not emergency advice",
+    "not a personalized fitness or health plan"
+  ],
+  "packID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+  "packKey": "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/pack.json",
+  "packVersion": "20260628T000000Z",
+  "pack_consistency": {
+    "currentPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+    "currentPackSHA256": "b84001256a9bbb06c26e1656bb04a04217078ce77d7790aaab41656dd67ea301",
+    "currentPointerHashConsistent": true,
+    "manifestPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+    "packBodyPackID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+    "packBodySHA256": "b84001256a9bbb06c26e1656bb04a04217078ce77d7790aaab41656dd67ea301",
+    "packHashConsistent": true,
+    "packID": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+    "packIDConsistent": true,
+    "r2PublisherCurrentPointerSHA256": "4ab7f97d013c0247fff8650864a70dd5bba002976ec84682041b57ad3b178e30",
+    "workerCurrentPointerSHA256": "4ab7f97d013c0247fff8650864a70dd5bba002976ec84682041b57ad3b178e30"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "product_law_preserved": true,
+  "productionNonClaims": [
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not release readiness",
+    "not universal coverage",
+    "not local runtime graph storage",
+    "not final user plan, timetable, or Step generation",
+    "not medical advice",
+    "not diagnosis",
+    "not treatment advice",
+    "not emergency advice"
+  ],
+  "schemaVersion": 1,
+  "status": "green_for_bounded_health_wellness_reference_gateway_https_readback_yellow_overall_source_atlas",
+  "valid": true,
+  "workerVersionID": "fa768012-360e-496a-a6b9-a6d0ec16e61f"
+}

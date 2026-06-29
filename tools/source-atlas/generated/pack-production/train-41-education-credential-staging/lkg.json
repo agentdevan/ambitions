@@ -1,0 +1,28 @@
+{
+  "channel": "candidate",
+  "created_at": "2026-06-28T00:00:00Z",
+  "dataClass": "public_freshness",
+  "domain": "education_credentialing",
+  "manifest_key": "source-atlas/v1/staging/candidate/education_credentialing/20260628T000000Z/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "pack_id": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "reason_selected": "dry_run_candidate",
+  "rollback_safe": true,
+  "sha256": "6f4cca11acaef44fa136c743643b5cdcdb3fab0147bedd5d2ef7db5bef946848",
+  "valid_until": null
+}

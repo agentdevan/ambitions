@@ -1,0 +1,54 @@
+{
+  "candidateSourceRecords": [
+    {
+      "api_docs_url": "https://catalog.data.gov/api/3/",
+      "authority_class_guess": "public_catalog",
+      "blocking_reasons": [
+        "candidate_score_cannot_override_review",
+        "legal_terms_review_required",
+        "missing_declared_license",
+        "pack_output_blocked_until_review",
+        "redistribution_not_approved",
+        "review_required",
+        "source_lane_review_required",
+        "source_of_sources_not_claim_authority"
+      ],
+      "candidate_id": "candidate_source.40b078cea4b162e7",
+      "candidate_score": 20,
+      "claim_authority_allowed": false,
+      "claim_class_guess": [
+        "public_reference",
+        "public_requirement_reference"
+      ],
+      "dataset_url": "https://catalog.data.gov/dataset",
+      "declared_jurisdiction": "US",
+      "declared_license": "",
+      "declared_rights": "",
+      "discovered_at": "2026-06-29T00:36:00Z",
+      "discovery_method": "executor_seed",
+      "distribution_urls": [],
+      "domain_guess": "community_volunteering_opportunities",
+      "evidence_hash": "a2b507a7ced223542ce5173236af00c40fb0e37bd52aad703c0043a14ea10cfb",
+      "frontier_id": "community_volunteering_opportunities",
+      "non_claims": [
+        "candidate source record only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output",
+        "human source-lane and terms review required before use"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "frontier_intake_proposal.7e7418a0ce5cfebf",
+      "publisher_name": "Data.gov Catalog",
+      "publisher_url": "https://catalog.data.gov/",
+      "redistribution_guess": "terms_sensitive",
+      "review_required": true,
+      "rights_url": "",
+      "schema_version": "1.0.0",
+      "source_class_guess": "public_catalog",
+      "terms_url": "https://www.data.gov/privacy-policy/"
+    }
+  ],
+  "createdAt": "2026-06-29T00:36:00Z",
+  "kind": "ambitions.sourceAtlas.frontierCandidateSources.v1"
+}

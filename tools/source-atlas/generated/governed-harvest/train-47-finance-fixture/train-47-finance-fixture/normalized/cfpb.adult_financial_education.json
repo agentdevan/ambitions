@@ -1,0 +1,392 @@
+{
+  "adapterID": "cfpb_adult_financial_education_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_cfpb_financial_education_public_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_financial_education_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_financial_education_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.2b04e8885adf59ab",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "CFPB adult financial education tools and resources",
+      "provenanceIDs": [
+        "provenance.ac0f4d14ccf6aa07"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cfpb.adult_financial_education"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "public_financial_education_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.b3ebb4344d76dc21",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "budgeting and money-management tools",
+      "provenanceIDs": [
+        "provenance.ac0f4d14ccf6aa07"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cfpb.adult_financial_education"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "regulated_body",
+      "checksum": "checksum.8dd3b91513bf9c1b",
+      "claimType": "public_financial_education",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly CFPB education page and privacy/terms re-review",
+      "id": "claim.459465575938658c",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.consumerfinance.gov/privacy/",
+      "provenanceIDs": [
+        "provenance.ac0f4d14ccf6aa07"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Consumer Financial Protection Bureau",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "cfpb.adult_financial_education",
+      "sourceIDs": [
+        "cfpb.adult_financial_education"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.consumerfinance.gov/consumer-tools/educator-tools/adult-financial-education/tools-and-resources/",
+      "state": "source_backed",
+      "text": "The Consumer Financial Protection Bureau publishes adult financial education tools and resources, including budgeting and money-management education context, as public reference only and not as investment, tax, debt, or personalized financial advice.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "cfpb_adult_financial_education_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "finance_public_reference",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "regulated_body",
+    "sourceCount": 1,
+    "sourceLane": "cfpb.adult_financial_education",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "public_financial_education",
+      "dataClass": "public_freshness",
+      "doesNotCreateDebtAdvice": true,
+      "doesNotCreateInvestmentAdvice": true,
+      "doesNotCreatePersonalizedFinancialPlan": true,
+      "doesNotCreateTaxAdvice": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.financePublicReferenceCoverage.v1",
+      "label": "CFPB adult financial education budgeting tools public reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "cfpb.adult_financial_education",
+      "subject": "financial_education.budgeting_tools"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "finance_public_reference",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.2b04e8885adf59ab",
+      "id": "edge.d2bc4dd5995b9dd1",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.ac0f4d14ccf6aa07"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_financial_education_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cfpb.adult_financial_education"
+      ],
+      "toAtomID": "atom.b3ebb4344d76dc21",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.2b04e8885adf59ab",
+        "atom.b3ebb4344d76dc21"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.d2bc4dd5995b9dd1"
+      ],
+      "id": "lattice.919485dcf2da9d8a",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "cfpb_adult_financial_education_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "finance_public_reference",
+      "id": "pack_candidate.7679e114c877319e",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "cfpb.adult_financial_education",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "cfpb.adult_financial_education"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "regulated_body",
+      "contentHash": "431c69b46bcee219e607e11c135baccd1dcfd587e18634a83ce5ca1f97d746aa",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly CFPB education page and privacy/terms re-review",
+      "id": "provenance.ac0f4d14ccf6aa07",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with CFPB privacy, third-party, trademark, and media caveats retained",
+      "locator": "https://www.consumerfinance.gov/consumer-tools/educator-tools/adult-financial-education/tools-and-resources/",
+      "publicReferenceOnly": true,
+      "publisher": "Consumer Financial Protection Bureau",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "cfpb.adult_financial_education",
+      "sourceState": "current",
+      "sourceURL": "https://www.consumerfinance.gov/consumer-tools/educator-tools/adult-financial-education/tools-and-resources/",
+      "termsURL": "https://www.consumerfinance.gov/privacy/",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.459465575938658c",
+      "dataClass": "public_requirement",
+      "gateType": "public_financial_education_reference_only",
+      "id": "requirement.9eeca9841adeffd8",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.ac0f4d14ccf6aa07"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cfpb.adult_financial_education"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "cfpb.adult_financial_education",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "regulated_body",
+    "freshnessCadence": "quarterly CFPB education page and privacy/terms re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with CFPB privacy, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current ConsumerFinance.gov public website posture",
+    "publisher": "Consumer Financial Protection Bureau",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "cfpb.adult_financial_education",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.consumerfinance.gov/privacy/"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "cfpb.adult_financial_education"
+  }
+}

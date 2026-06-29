@@ -1,0 +1,39 @@
+{
+  "approvalScope": {
+    "bucket": "ambitions-source-atlas-prod",
+    "channel": "stable",
+    "currentPointerKey": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+    "domain": "occupation_foundation",
+    "environment": "production",
+    "legalTermsApprovalPacket": "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.json",
+    "objectPrefix": "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/",
+    "packRoot": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate"
+  },
+  "approvalStatus": "approved_for_one_bounded_production_r2_upload_readback_operation_with_immediate_train_29_corrective_rerun_if_evidence_wording_fix_is_required",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.productionR2OwnerApproval.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not release readiness",
+    "not App Store readiness",
+    "not runtime Green",
+    "not universal coverage",
+    "not private graph storage",
+    "not final user plan, schedule, or Step generation"
+  ],
+  "requiredExecutionGates": [
+    "execute flag",
+    "owner approval artifact",
+    "legal/terms approval packet",
+    "budget policy",
+    "public object keys",
+    "non-private payload scan",
+    "upload/readback SHA-256 verification",
+    "current pointer update after readback success only",
+    "corrective rerun may only re-upload the same scoped pack/pointer after code fixes proof wording and must rerun upload/readback/checksum gates"
+  ],
+  "userAuthorizationBasis": [
+    "User authorized work needed to get Source Atlas Green in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage claim areas.",
+    "User authorized Codex internal legal/terms review for bounded Green claims."
+  ]
+}

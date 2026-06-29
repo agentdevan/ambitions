@@ -1,0 +1,32 @@
+{
+  "expectedValid": true,
+  "payload": {
+    "schemaVersion": 1,
+    "kind": "ambitions.sourceAtlas.releaseManifest",
+    "versionID": "source-atlas-public-reference-current",
+    "channel": "production",
+    "dataClass": "public_freshness",
+    "r2Allowed": true,
+    "appCacheAllowed": true,
+    "logAllowed": "metadata_only",
+    "fixtureAllowed": "public_synthetic_only",
+    "packIndex": [
+      {
+        "packID": "pack.synthetic.public_reference",
+        "path": "packs/pack.synthetic.public_reference.json",
+        "sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "bytes": 256
+      }
+    ],
+    "freshnessManifest": {
+      "path": "freshness-manifest.json",
+      "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "bytes": 128
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph or private user context",
+    "nonClaims": [
+      "not account readiness",
+      "not release readiness"
+    ]
+  }
+}

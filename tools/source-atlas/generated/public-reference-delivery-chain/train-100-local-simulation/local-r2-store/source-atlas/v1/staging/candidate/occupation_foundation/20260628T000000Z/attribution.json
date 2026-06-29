@@ -1,0 +1,140 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from O*NET Database and O*NET OnLine public occupational reference data.",
+      "claim_id": "canonical_claim.cdc5c4a0e4c29126",
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "publicReferenceOnly": true,
+      "source_id": "onet.database"
+    },
+    {
+      "attribution_text": "Based on public reference data from O*NET Database and O*NET OnLine public occupational reference data.",
+      "claim_id": "canonical_claim.05860f0e253a4932",
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "publicReferenceOnly": true,
+      "source_id": "onet.database"
+    },
+    {
+      "attribution_text": "Based on public reference data from O*NET Database and O*NET OnLine public occupational reference data.",
+      "claim_id": "canonical_claim.bd3e39eb532b7268",
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "publicReferenceOnly": true,
+      "source_id": "onet.database"
+    },
+    {
+      "attribution_text": "Based on public reference data from O*NET Database and O*NET OnLine public occupational reference data.",
+      "claim_id": "canonical_claim.f566ed512636717c",
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "publicReferenceOnly": true,
+      "source_id": "onet.database"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.c9c46dc16c663d46",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.39f61efbb7c849f5",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from O*NET Database and O*NET OnLine public occupational reference data.",
+      "claim_id": "canonical_claim.b8119093b5aef95d",
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "publicReferenceOnly": true,
+      "source_id": "onet.database"
+    },
+    {
+      "attribution_text": "Based on public reference data from O*NET Database and O*NET OnLine public occupational reference data.",
+      "claim_id": "canonical_claim.e9fe876581d6b59f",
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "publicReferenceOnly": true,
+      "source_id": "onet.database"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.9f4cbc4c68a52c6c",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.943b54d86184e59a",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.f3b1b44e6fb10157",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.1d0c921906678b64",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from O*NET Database and O*NET OnLine public occupational reference data.",
+      "claim_id": "canonical_claim.d44943165de27bc1",
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "publicReferenceOnly": true,
+      "source_id": "onet.database"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.0b98d69ffd7d0176",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.156de1997e968920",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from BLS Public Data API.",
+      "claim_id": "canonical_claim.17bbdb4351258308",
+      "dataClass": "public_provenance",
+      "license_id": "bls_public_terms",
+      "publicReferenceOnly": true,
+      "source_id": "bls.public.data.api"
+    },
+    {
+      "attribution_text": "Based on public reference data from O*NET Database and O*NET OnLine public occupational reference data.",
+      "claim_id": "canonical_claim.8b275020ecde2df5",
+      "dataClass": "public_provenance",
+      "license_id": "onet_cc_by_4",
+      "publicReferenceOnly": true,
+      "source_id": "onet.database"
+    }
+  ]
+}

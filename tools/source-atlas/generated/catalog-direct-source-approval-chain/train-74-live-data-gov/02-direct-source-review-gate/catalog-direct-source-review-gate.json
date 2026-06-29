@@ -1,0 +1,260 @@
+{
+  "activeRegistryMutations": [],
+  "blockedDirectSourceReviews": [
+    {
+      "blocked_direct_source_review_id": "catalog_direct_source_review_block.da27be3b8d335018",
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_evidence_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "non_claims": [
+        "blocked direct-source review only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "resolution_id": "catalog_direct_source_resolution.b1675472d6807d33",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.43ed3a73ccc5",
+      "source_name": "Public Health Agency of Canada | Agence de la santé publique du Canada",
+      "status": "blocked"
+    },
+    {
+      "blocked_direct_source_review_id": "catalog_direct_source_review_block.7a757f0b1af468a5",
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_evidence_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "non_claims": [
+        "blocked direct-source review only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "resolution_id": "catalog_direct_source_resolution.b4f2d14840e3d73b",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.1b56977db7b8",
+      "source_name": "ABS (SA Data)",
+      "status": "blocked"
+    },
+    {
+      "blocked_direct_source_review_id": "catalog_direct_source_review_block.47ef21b07bc35ad2",
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_evidence_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "non_claims": [
+        "blocked direct-source review only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "resolution_id": "catalog_direct_source_resolution.1c0251ba96c44307",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.096325a6a5ca",
+      "source_name": "Department of Education",
+      "status": "blocked"
+    },
+    {
+      "blocked_direct_source_review_id": "catalog_direct_source_review_block.5c2ed88efdbca965",
+      "blocking_reasons": [
+        "direct_source_review_status_blocked_review_evidence_required"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "non_claims": [
+        "blocked direct-source review only",
+        "not approval",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+      "resolution_id": "catalog_direct_source_resolution.869c97443588283f",
+      "schema_version": "1.0.0",
+      "source_id": "catalog.candidate.b73f9f0ebbed",
+      "source_name": "Statistics Canada | Statistique Canada",
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "directSourceReviewsPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-74-live-data-gov/01-direct-source-review-completion/direct-source-review-packets.json",
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceReviewGate.v1",
+  "nonClaims": [
+    "direct-source review gate only",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDirectSourceReviews": 4,
+    "blockedSourceReviewCompletionPackets": 4,
+    "claims": 0,
+    "completedSourceReviewCompletionPackets": 0,
+    "directSourceReviewPackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "resolutionCandidates": 4,
+    "sourceReviewCompletionPackets": 4
+  },
+  "resolutionCandidatesPath": "tools/source-atlas/generated/catalog-direct-source-resolution/train-70-live-data-gov/direct-source-resolution-candidates.json",
+  "schemaVersion": 1,
+  "sourceReviewCompletionPacketCollection": {
+    "createdAt": "2026-06-28T00:00:00Z",
+    "kind": "ambitions.sourceAtlas.catalogSourceReviewCompletionPackets.v1",
+    "nonClaims": [
+      "source review completion packets for Train 67 intake only",
+      "not approval by themselves",
+      "not claim output",
+      "not pack output"
+    ],
+    "sourceReviewCompletionPackets": [
+      {
+        "api_governance_review": {
+          "api_policy_entry": {},
+          "status": "blocked"
+        },
+        "blocking_reasons": [
+          "direct_source_review_status_blocked_review_evidence_required"
+        ],
+        "completion_packet_id": "catalog_source_review_completion_blocked.da27be3b8d335018",
+        "completion_status": "blocked_direct_source_review_required",
+        "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+        "legal_terms_review": {
+          "legal_terms_entry": {},
+          "outside_legal_approval_artifact": "",
+          "outside_legal_status": "not_claimed",
+          "status": "blocked"
+        },
+        "non_claims": [
+          "blocked direct-source review completion packet only",
+          "not approval"
+        ],
+        "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+        "review_owner": "",
+        "reviewed_at": "",
+        "source_lane_review": {
+          "source_lane_entry": {},
+          "status": "blocked"
+        }
+      },
+      {
+        "api_governance_review": {
+          "api_policy_entry": {},
+          "status": "blocked"
+        },
+        "blocking_reasons": [
+          "direct_source_review_status_blocked_review_evidence_required"
+        ],
+        "completion_packet_id": "catalog_source_review_completion_blocked.7a757f0b1af468a5",
+        "completion_status": "blocked_direct_source_review_required",
+        "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+        "legal_terms_review": {
+          "legal_terms_entry": {},
+          "outside_legal_approval_artifact": "",
+          "outside_legal_status": "not_claimed",
+          "status": "blocked"
+        },
+        "non_claims": [
+          "blocked direct-source review completion packet only",
+          "not approval"
+        ],
+        "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+        "review_owner": "",
+        "reviewed_at": "",
+        "source_lane_review": {
+          "source_lane_entry": {},
+          "status": "blocked"
+        }
+      },
+      {
+        "api_governance_review": {
+          "api_policy_entry": {},
+          "status": "blocked"
+        },
+        "blocking_reasons": [
+          "direct_source_review_status_blocked_review_evidence_required"
+        ],
+        "completion_packet_id": "catalog_source_review_completion_blocked.47ef21b07bc35ad2",
+        "completion_status": "blocked_direct_source_review_required",
+        "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+        "legal_terms_review": {
+          "legal_terms_entry": {},
+          "outside_legal_approval_artifact": "",
+          "outside_legal_status": "not_claimed",
+          "status": "blocked"
+        },
+        "non_claims": [
+          "blocked direct-source review completion packet only",
+          "not approval"
+        ],
+        "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+        "review_owner": "",
+        "reviewed_at": "",
+        "source_lane_review": {
+          "source_lane_entry": {},
+          "status": "blocked"
+        }
+      },
+      {
+        "api_governance_review": {
+          "api_policy_entry": {},
+          "status": "blocked"
+        },
+        "blocking_reasons": [
+          "direct_source_review_status_blocked_review_evidence_required"
+        ],
+        "completion_packet_id": "catalog_source_review_completion_blocked.5c2ed88efdbca965",
+        "completion_status": "blocked_direct_source_review_required",
+        "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+        "legal_terms_review": {
+          "legal_terms_entry": {},
+          "outside_legal_approval_artifact": "",
+          "outside_legal_status": "not_claimed",
+          "status": "blocked"
+        },
+        "non_claims": [
+          "blocked direct-source review completion packet only",
+          "not approval"
+        ],
+        "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+        "review_owner": "",
+        "reviewed_at": "",
+        "source_lane_review": {
+          "source_lane_entry": {},
+          "status": "blocked"
+        }
+      }
+    ]
+  },
+  "versionID": "source-atlas-catalog-direct-source-review-gate-train-71"
+}

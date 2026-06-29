@@ -1,0 +1,99 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_intake_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_frontiers_candidate_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "all_sources_review_required",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_source_claim_authority_asserted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "pack_output_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T21:20:00Z",
+  "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/generated/autonomous-operations-execution/train-106-current/frontier-intake/public_benefits_reference/frontier-intake-input.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.frontierIntakeManifest.v1",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not full Source Atlas Green",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "candidateSources": "0951667fc31bcff44068fe3c93febbaab50f53f1e24a036ab2dbafcc61410ff2",
+    "frontierIntake": "354c8d02cdadd82f23825517c624c7114a43b1750a871c835ef04729534df97b",
+    "manifest": "8c8aed02fe20c225b16f16c59f6e4b7284b3e683a8566c4864dcd972fbec8d8b",
+    "proposedFrontiers": "c9ab70c7bfb092b0ce18be6b8de0c835d1c29ed8eb46823b68e5d402483338d3"
+  },
+  "outputPaths": {
+    "candidateSources": "tools/source-atlas/generated/autonomous-operations-execution/train-106-current/frontier-intake/public_benefits_reference/candidate-sources.json",
+    "closeout": "tools/source-atlas/generated/autonomous-operations-execution/train-106-current/frontier-intake/public_benefits_reference/closeout.md",
+    "frontierIntake": "tools/source-atlas/generated/autonomous-operations-execution/train-106-current/frontier-intake/public_benefits_reference/frontier-intake.json",
+    "proposedFrontiers": "tools/source-atlas/generated/autonomous-operations-execution/train-106-current/frontier-intake/public_benefits_reference/proposed-frontiers.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateSources": 2,
+    "claims": 0,
+    "packableClaims": 0,
+    "proposals": 1,
+    "proposedFrontiers": 1,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; candidate-only arbitrary-domain frontier intake only",
+  "status": "Source Green for governed frontier intake tooling",
+  "valid": true,
+  "versionID": "source-atlas-frontier-intake-train-52"
+}

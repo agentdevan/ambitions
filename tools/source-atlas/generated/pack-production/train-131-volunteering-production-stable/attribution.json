@@ -1,0 +1,28 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from AmeriCorps Open Data State Ranking by Volunteer Rate.",
+      "claim_id": "canonical_claim.e0aa8d9c591eb299",
+      "dataClass": "public_provenance",
+      "license_id": "americorps_public_domain",
+      "publicReferenceOnly": true,
+      "source_id": "americorps.volunteer_rate_state"
+    },
+    {
+      "attribution_text": "Based on public reference data from AmeriCorps Open Data State Ranking by Volunteer Rate.",
+      "claim_id": "canonical_claim.e6c5f76a457b0f8f",
+      "dataClass": "public_provenance",
+      "license_id": "americorps_public_domain",
+      "publicReferenceOnly": true,
+      "source_id": "americorps.volunteer_rate_state"
+    },
+    {
+      "attribution_text": "Based on public reference data from AmeriCorps Open Data State Ranking by Volunteer Rate.",
+      "claim_id": "canonical_claim.d30e2c747935abac",
+      "dataClass": "public_provenance",
+      "license_id": "americorps_public_domain",
+      "publicReferenceOnly": true,
+      "source_id": "americorps.volunteer_rate_state"
+    }
+  ]
+}

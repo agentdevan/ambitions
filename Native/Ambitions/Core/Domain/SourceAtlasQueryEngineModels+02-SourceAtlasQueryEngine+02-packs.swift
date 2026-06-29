@@ -261,6 +261,9 @@ extension SourceAtlasQueryEngine {
         case .unknown:
             return .unknown
         case .official:
+            if reviewState.blocksCurrentProjection || riskState.blocksCurrentProjection {
+                return .reviewRequired
+            }
             return provenanceSourceIDs.isEmpty ? .provenanceMissing : .noCurrentCandidate
         case .officialCurrent, .current, .locallyProven:
             break

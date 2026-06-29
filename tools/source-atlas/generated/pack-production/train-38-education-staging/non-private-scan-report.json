@@ -1,0 +1,25 @@
+{
+  "createdAt": "2026-06-27T00:00:00Z",
+  "dataClass": "public_provenance",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.nonPrivateScanReport.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputRoot": "tools/source-atlas/generated/pack-production/train-38-education-staging",
+  "passed": true,
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "schemaVersion": 1
+}

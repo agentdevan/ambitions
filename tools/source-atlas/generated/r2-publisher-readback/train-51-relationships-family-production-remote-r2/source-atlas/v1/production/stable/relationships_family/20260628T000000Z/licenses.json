@@ -1,0 +1,82 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-relationships-family-legal-review-train-51.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "acf_hmrf_public_web",
+      "license_name": "ACF Healthy Marriage and Responsible Fatherhood public website text with HHS/ACF digital-policy, third-party, trademark, and media caveats retained",
+      "license_url": "https://acf.gov/digital-policies",
+      "non_claims": [
+        "not therapy",
+        "not legal advice",
+        "not legal custody advice",
+        "not eligibility approval",
+        "not relationship judgment",
+        "not a personalized relationship plan",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://acf.gov/digital-policies",
+      "terms_url": "https://acf.gov/digital-policies"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-relationships-family-legal-review-train-51.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "cdc_positive_parenting_public_web",
+      "license_name": "CDC Positive Parenting public website text with attribution, no-endorsement, third-party, trademark, and media caveats retained",
+      "license_url": "https://www.cdc.gov/other/agencymaterials.html",
+      "non_claims": [
+        "not therapy",
+        "not diagnosis",
+        "not medical advice",
+        "not emergency advice",
+        "not legal custody advice",
+        "not a personalized parenting plan",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.cdc.gov/other/agencymaterials.html",
+      "terms_url": "https://www.cdc.gov/other/agencymaterials.html"
+    },
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-relationships-family-legal-review-train-51.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "childwelfare_public_web",
+      "license_name": "Child Welfare Information Gateway public website/publication posture with ACF/HHS attribution, third-party, trademark, and media caveats retained",
+      "license_url": "https://www.childwelfare.gov/information-gateway-policies/",
+      "non_claims": [
+        "not child protection advice",
+        "not legal custody advice",
+        "not emergency intervention",
+        "not therapy",
+        "not diagnosis",
+        "not a personalized family assessment",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.childwelfare.gov/information-gateway-policies/",
+      "terms_url": "https://www.childwelfare.gov/information-gateway-policies/"
+    }
+  ]
+}

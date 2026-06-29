@@ -1,0 +1,167 @@
+{
+  "issue": "AMB-1497",
+  "train": "Source Atlas Production Finish-Line Train 11",
+  "title": "Native pack fetch/cache/verify publisher compatibility",
+  "status": "Green for focused native publisher compatibility tooling / Yellow overall Source Atlas",
+  "createdAt": "2026-06-27T21:30:00Z",
+  "scopeCompleted": [
+    "Added native current-pointer compatibility for Train 10 publisher artifacts.",
+    "Verified publisher manifest bytes against current-pointer manifestSHA256 before deriving a native freshness manifest.",
+    "Kept raw published pack SHA-256 verification before cache replacement.",
+    "Added a conservative bridge from ambitions.sourceAtlas.domainPack.v1 to native SourceAtlasPack inspection models.",
+    "Marked strict-review public domains as review-required local references rather than current-use authority.",
+    "Rejected private-looking publisher object keys before pack request/cache replacement.",
+    "Kept local planning unblocked and Source Atlas reference-only."
+  ],
+  "filesChanged": [
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublishedPackCompatibility.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackFetchPipeline.swift",
+    "Native/Ambitions/Core/Domain/SourceAtlasStoreModels.swift",
+    "Native/Ambitions/Core/Domain/SourceAtlasQueryEngineModels+02-SourceAtlasQueryEngine+02-packs.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackFetchPipelineTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-publisher-compat-train-11.json",
+    "docs/qa/source-atlas/native/source-atlas-native-publisher-compat-train-11.md"
+  ],
+  "productLawPreserved": true,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas",
+  "r2RequestPrivacyProof": {
+    "status": "passed",
+    "details": [
+      "Manifest request shape remains domain/channel/schema/app-version/public-locale only.",
+      "Current pointer object keys are scanned through SourceAtlasNoPrivateGraphEgressAudit.",
+      "Private-looking current pointer object key fixture is rejected with unsafe_current_pointer.",
+      "No goal, capture, schedule, proof, account, user, receipt, or private graph fields are accepted."
+    ]
+  },
+  "noPrivateGraphEgressProof": {
+    "status": "passed",
+    "commands": [
+      "python3 scripts/source-atlas-no-private-graph-egress-audit.py"
+    ]
+  },
+  "licenseTermsProof": {
+    "status": "not_claimed",
+    "details": [
+      "Native bridge consumes publisher-approved metadata but does not create legal approval.",
+      "Outside legal approval is not claimed."
+    ]
+  },
+  "restrictedSourceExclusionProof": {
+    "status": "inherited_from_pack_production",
+    "details": [
+      "Native compatibility bridge does not re-admit restricted source lanes.",
+      "Pack eligibility remains governed by pack-production artifacts."
+    ]
+  },
+  "provenanceCompletenessProof": {
+    "status": "focused_native_bridge",
+    "details": [
+      "Published claim source IDs map to native source records for inspection.",
+      "Strict-review claims remain review-required and cannot become current-use authority."
+    ]
+  },
+  "freshnessRevocationProof": {
+    "status": "passed_focused",
+    "details": [
+      "Publisher manifest freshness status maps into native freshness manifest state buckets.",
+      "Existing revoked manifest quarantine test remains green."
+    ]
+  },
+  "lkgRollbackProof": {
+    "status": "passed_focused",
+    "details": [
+      "Existing offline no-account LKG fallback test remains green.",
+      "Train 11 does not claim production R2 rollback execution."
+    ]
+  },
+  "nativeOfflineNoAccountProof": {
+    "status": "passed_focused",
+    "details": [
+      "Focused XCTest keeps no-account public freshness route and offline LKG fallback green.",
+      "Core local planning remains unblocked when Source Atlas references are unavailable or review-required."
+    ]
+  },
+  "validationRun": [
+    {
+      "command": "xcodegen generate",
+      "status": "passed"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackFetchPipelineTests",
+      "status": "passed",
+      "result": "8 passed, 0 failed",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-27T21-19-33-308Z_pid24471_6a542592.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-27T21-19-33-308Z_pid24471_d95a7917.xcresult"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasQueryEngineModelsTests -only-testing:AmbitionsTests/SourceAtlasLocalReferenceCompositionProofTests -only-testing:AmbitionsTests/SourceAtlasStoreModelsTests",
+      "status": "passed",
+      "result": "23 passed, 0 failed",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-27T21-22-15-222Z_pid24471_99ac9088.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-27T21-22-15-222Z_pid24471_3028be50.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "result": "125 passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "result": "PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "result": "PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "result": "GREEN"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "result": "GREEN"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "result": "FAILURE_CLASS=passed",
+      "summary": ".codex/xcode-summaries/green-standard/20260627T212441Z/extract/summary.json"
+    }
+  ],
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Stable production promotion was not run.",
+    "Full native app runtime/release test suite was not claimed.",
+    "Outside legal review was not run or claimed.",
+    "Rendered device/source inspection visual proof was not run."
+  ],
+  "knownRisks": [
+    "The bridge proves focused native compatibility with publisher artifact shapes; it is not production R2 credentials proof.",
+    "Published strict-review public packs load as review-required references, not current-use authority.",
+    "Real network transport and entitlement policy remain outside this train.",
+    "Legal/terms approval remains governed by upstream registry/pack-production artifacts."
+  ],
+  "rollbackPlan": [
+    "Revert SourceAtlasPublishedPackCompatibility.swift.",
+    "Revert the SourceAtlasStore bridge fallback.",
+    "Revert current-pointer handling in SourceAtlasPublicPackFetchPipeline.swift.",
+    "Revert focused XCTest additions and Train 11 QA evidence.",
+    "Keep bundled/offline Source Atlas baseline behavior."
+  ],
+  "productionNonClaims": [
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not production R2 upload proof",
+    "not stable production promotion",
+    "not legal approval",
+    "not release readiness",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not a private user-data backend",
+    "not private life graph storage"
+  ]
+}

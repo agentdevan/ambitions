@@ -1,0 +1,850 @@
+{
+  "adapterID": "bls_public_labor_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureTestsRequireCredentials": false,
+    "v1": "no_key_public_requests",
+    "v2": "registration_key_required_for_higher_limits"
+  },
+  "atoms": [
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.3e12103a81e14b06",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 15-1252",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.3f2df07a7043ffeb",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 29-1141",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.cf65a8a6bc1f40b5",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 53-2011",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.2659a772744ab016",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 25-2031",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.76985732110f195e",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 47-2111",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.d1dd17a2cef65edd",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 23-1011",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.827af4e4df34d6aa",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 27-4014",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.0ea37759f2a801e5",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 11-1021",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "occupation_code",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.ce9a819395535c69",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "SOC 27-2042",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.f825293fe7349982",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.5dc131dfd22c9d9d",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "Software Developers has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.9284036e2913ef96",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.1117cece4400bc20",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "Registered Nurses has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.e3714eec3e1bdf2e",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.d14b4316b3ed6048",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "Airline Pilots, Copilots, and Flight Engineers has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.c70d2d4a2bddd161",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.d079588bc963082d",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "Secondary School Teachers has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.ecf3d5e018106c7f",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.703f25409d68bbc6",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "Electricians has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.4a9a72a7435b60eb",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.ffcd9a166c7ded12",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "Lawyers has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.5c4096744135df86",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.60b315111c404322",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "Sound Engineering Technicians has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.4e517acf928ad579",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.caed5b3bb0baf637",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "General and Operations Managers has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.100ad2c239c9032e",
+      "claimType": "labor_market_context",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "claim.2af07c5def27dc0b",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.bls.gov/developers/termsOfService.htm",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "state": "source_backed",
+      "text": "Musicians and Singers has BLS/SOC labor-market context available for public reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "bls_public_labor_adapter",
+    "atomCount": 9,
+    "claimCount": 9,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "labor_market",
+    "edgeCount": 0,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 9,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "bls.public.data.api",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [],
+  "createdAt": "2026-06-27T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "labor_market",
+  "edges": [],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "bls_public_labor_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "labor_market",
+      "id": "pack_candidate.bc00a9802fb59915",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 9,
+        "claims": 9,
+        "crosswalks": 0,
+        "edges": 0,
+        "requirements": 9
+      },
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "termsGate": {
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "bls.public.data.api"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "c440587edb7b26f41a6c3f3ef44c40b34c9f8502f932b7cc75fbab76cd8f6c8c",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "series-specific publication schedule",
+      "id": "provenance.0e2d69aa1fc85bb8",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public data; cite BLS as source",
+      "locator": "https://www.bls.gov/developers/",
+      "publicReferenceOnly": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "retrievedAt": "2026-06-27T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "bls.public.data.api",
+      "sourceState": "current",
+      "sourceURL": "https://www.bls.gov/developers/",
+      "termsURL": "https://www.bls.gov/developers/termsOfService.htm",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.5dc131dfd22c9d9d",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.b9075112d7766c7f",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.1117cece4400bc20",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.48f90d5013a66f69",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.d14b4316b3ed6048",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.d9d86026ecd82a8b",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.d079588bc963082d",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.e12cb352a97f00af",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.703f25409d68bbc6",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.5516971ca50a4a8a",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.ffcd9a166c7ded12",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.9f9fe4496f9a7559",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.60b315111c404322",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.7205e973e7099045",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.caed5b3bb0baf637",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.3e0b900cccfef766",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.2af07c5def27dc0b",
+      "dataClass": "public_requirement",
+      "gateType": "labor_context_reference",
+      "id": "requirement.8c8b91171d6862a9",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.0e2d69aa1fc85bb8"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "bls.public.data.api",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "series-specific publication schedule",
+    "lastTermsReviewed": "2026-06-27",
+    "license": "U.S. federal public data; cite BLS as source",
+    "licenseVersion": "current public API terms",
+    "publisher": "U.S. Bureau of Labor Statistics",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "bls.public.data.api",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.bls.gov/developers/termsOfService.htm"
+  },
+  "termsValidation": {
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "bls.public.data.api"
+  }
+}

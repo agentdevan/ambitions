@@ -1,0 +1,26 @@
+{
+  "current": {
+    "bytes": 1736,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0\n────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/business_entrepreneurship/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+    "sha256": "619d5fb25138130f43985bbf18cfb2f7c3cb073aa962265fb9fc65fb4b7e9047"
+  },
+  "lastKnownGood": {
+    "bytes": 1268,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/business_entrepreneurship/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/business_entrepreneurship/lkg.json",
+    "sha256": "5e29adade31c1c83454640af3ccc6b068b663aa906f95f92746a91fd0193b431"
+  }
+}

@@ -1,0 +1,507 @@
+{
+  "artifactValidation": {
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.packProductionArtifactValidation.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "requiredArtifacts": [
+      "adjudications.json",
+      "attribution.json",
+      "claims.json",
+      "coverage.json",
+      "entities.json",
+      "freshness.json",
+      "licenses.json",
+      "lkg.json",
+      "manifest.json",
+      "non-private-scan-report.json",
+      "non_claims.json",
+      "pack.json",
+      "r2-dry-run-plan.json",
+      "revocations.json",
+      "rollback-plan.json",
+      "sources.json"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "channel": "stable",
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "pack_slices_written",
+      "passed": true
+    },
+    {
+      "name": "pack_contains_only_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "restricted_and_crosswalk_claims_excluded",
+      "passed": true
+    },
+    {
+      "name": "manifest_hashes_present",
+      "passed": true
+    },
+    {
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "name": "dry_run_plan_only",
+      "passed": true
+    },
+    {
+      "name": "private_object_keys_blocked",
+      "passed": true
+    },
+    {
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "required_artifacts_valid",
+      "passed": true
+    },
+    {
+      "name": "execute_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domain": "relationships_family",
+  "dryRunPlan": {
+    "channel": "stable",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_r2_object_key",
+    "dryRun": true,
+    "environment": "production",
+    "executeRequested": false,
+    "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "dry-run only; no R2 upload or production promotion was performed"
+    ],
+    "objects": [
+      {
+        "bytes": 1892,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "adjudications",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/adjudications.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/adjudications.json",
+        "sha256": "ee05c0f251ba286be7a6e28b1068ef06c3466a428fad8439b02ca3c6e5137c45"
+      },
+      {
+        "bytes": 1876,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "attribution",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/attribution.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/attribution.json",
+        "sha256": "72497d4047356371f465ff23be48ed7636788dc5a20924cf9fa4ad1829fe5394"
+      },
+      {
+        "bytes": 12589,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "claims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/claims.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/claims.json",
+        "sha256": "afa31ca9a8a7e0c163daab47dacad9b374b9f26cb5ec8db888cf1f1d61fc8861"
+      },
+      {
+        "bytes": 4364,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "coverage",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/coverage.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/coverage.json",
+        "sha256": "e5cce2cd28d7b4bc19c52b8fdbcee33c49753f9acdc6946f51caaf387db0dae7"
+      },
+      {
+        "bytes": 3182,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "entities",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/entities.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/entities.json",
+        "sha256": "db4c6a3e1839ea9b83674f606e784a94dea5e8a7817fef94a0d931f1c1ef077f"
+      },
+      {
+        "bytes": 2707,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "freshness",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/freshness.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/freshness.json",
+        "sha256": "e8e375d96ba907af698cd6d05723c4f0fc8450a1e72fa6d47b7ac1c40222700b"
+      },
+      {
+        "bytes": 3516,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "licenses",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/licenses.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/licenses.json",
+        "sha256": "0f71f33c8402aa3df767a04d2431454abb279a0acc89aafd12921e75f0c42184"
+      },
+      {
+        "bytes": 1253,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "lkg",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/lkg.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/lkg.json",
+        "sha256": "91325fdc8b027dddd9e9b92bafcdcaccef594647c5113018eed5d4bc594add66"
+      },
+      {
+        "bytes": 8802,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "manifest",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/manifest.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+        "sha256": "79612ee9d46b0349ff4eb032094686cc338cc7f08b1bfcdbcc5d8a13da58bfb3"
+      },
+      {
+        "bytes": 1338,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "nonClaims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/non_claims.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/non_claims.json",
+        "sha256": "7cbaa8af96c5e62aab856b94a497969ac77632448638cd7135430011d7db2d8f"
+      },
+      {
+        "bytes": 29765,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "pack",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/pack.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/pack.json",
+        "sha256": "de4db9e6778d23d16725951c88d6254355203a544b70246ade18f373447539c1"
+      },
+      {
+        "bytes": 1403,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "revocations",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/revocations.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/revocations.json",
+        "sha256": "e891e01728a2a04e75ecf1c929dfbc51cee5ad0ff497bef7ef5abeddc897559f"
+      },
+      {
+        "bytes": 3968,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "sources",
+        "localPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/sources.json",
+        "objectKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/sources.json",
+        "sha256": "362fa2793e5fb384c15443165451ce4584fd2535274cb09961345b4ab10a716c"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/rollback-plan.json",
+    "schemaVersion": 1,
+    "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+    "wouldUpload": false
+  },
+  "environment": "production",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.packProductionManifest.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "docs/qa/source-atlas/legal/source-atlas-relationships-family-legal-review-train-51.json",
+    "packetSHA256": "5927f01fe4a80bd095596f1c5e1ca9f2014c795ee5b8071f0c7c888e1c0dfbc1",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "acf.healthy_marriage_fatherhood",
+      "cdc.positive_parenting",
+      "childwelfare.family_support"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "acf.healthy_marriage_fatherhood",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "cdc.positive_parenting",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "childwelfare.family_support",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "lkg": {
+    "channel": "stable",
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "domain": "relationships_family",
+    "manifest_key": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "pack_id": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "reason_selected": "dry_run_candidate",
+    "rollback_safe": true,
+    "sha256": "79612ee9d46b0349ff4eb032094686cc338cc7f08b1bfcdbcc5d8a13da58bfb3",
+    "valid_until": null
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "nonPrivateScan": {
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.nonPrivateScanReport.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "outputRoot": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable",
+    "passed": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "schemaVersion": 1
+  },
+  "objectKeys": {
+    "adjudications": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/adjudications.json",
+    "attribution": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/attribution.json",
+    "claims": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/claims.json",
+    "coverage": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/coverage.json",
+    "current": "source-atlas/v1/production/stable/relationships_family/current.json",
+    "entities": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/entities.json",
+    "freshness": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/freshness.json",
+    "licenses": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/licenses.json",
+    "lkg": "source-atlas/v1/production/stable/relationships_family/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+    "nonClaims": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/non_claims.json",
+    "pack": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/relationships_family/revocations.json",
+    "sources": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/sources.json"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/closeout.md",
+    "lkg": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/lkg.json",
+    "manifest": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/manifest.json",
+    "nonPrivateScan": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/non-private-scan-report.json",
+    "pack": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/pack.json",
+    "r2DryRunPlan": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/r2-dry-run-plan.json",
+    "revocation": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/revocations.json",
+    "rollback": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/rollback-plan.json"
+  },
+  "packID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "blockedClaimsExcluded": 0,
+    "claims": 5,
+    "licenses": 3,
+    "objectCount": 13,
+    "sources": 3
+  },
+  "revocation": {
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "lkg_policy": "use_lkg_if_future_pack_is_revoked_and_lkg_hash_verifies",
+    "native_behavior": "not_claimed_in_train_04",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "object_keys": {
+      "lkg": "source-atlas/v1/production/stable/relationships_family/lkg.json",
+      "manifest": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "proof_artifacts": [],
+    "publicReferenceOnly": true,
+    "reason": "dry_run_no_revocations",
+    "replacement_pack_id": null,
+    "revocation_id": "source_atlas_revocation.50ef23e9af975ae7",
+    "revoked_object_keys": [],
+    "revoked_pack_ids": [],
+    "severity": "none"
+  },
+  "rollback": {
+    "candidateManifestKey": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "dryRunOnly": true,
+    "kind": "ambitions.sourceAtlas.rollbackPlan.v1",
+    "lkgPointerKey": "source-atlas/v1/production/stable/relationships_family/lkg.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "packID": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackCandidates": [
+      {
+        "channel": "stable",
+        "created_at": "2026-06-28T00:00:00Z",
+        "dataClass": "public_freshness",
+        "domain": "relationships_family",
+        "manifest_key": "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+        "nonClaims": [
+          "not a private user-data backend",
+          "not private life graph storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final user plan, schedule, or Step generator"
+        ],
+        "pack_id": "source-atlas/v1/domain/relationships_family/20260628T000000Z",
+        "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+        "publicReferenceOnly": true,
+        "reason_selected": "dry_run_candidate",
+        "rollback_safe": true,
+        "sha256": "79612ee9d46b0349ff4eb032094686cc338cc7f08b1bfcdbcc5d8a13da58bfb3",
+        "valid_until": null
+      }
+    ],
+    "schemaVersion": 1,
+    "stablePointerWillChange": false
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; pack compiler and R2 dry-run controls only",
+  "status": "Source Green for pack compiler/R2 dry-run controls",
+  "valid": true,
+  "versionID": "source-atlas-pack-production-train-04"
+}

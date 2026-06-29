@@ -1,0 +1,1811 @@
+{
+  "createdAt": "2026-06-29T00:50:00Z",
+  "kind": "ambitions.sourceAtlas.legalTermsApprovalPacket.v1",
+  "nonClaims": [
+    "not outside legal approval",
+    "not production R2 readiness",
+    "not release readiness",
+    "not universal coverage",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outsideLegalApprovalBoundary": "outside legal approval requires a current source-specific approval artifact",
+  "outsideLegalApprovalClaimed": false,
+  "packetID": "source-atlas/legal-terms-approval/368e73a548787e8a",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+  "reviewType": "internal_source_atlas_legal_terms_review",
+  "schemaVersion": 1,
+  "sourceApprovals": [
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the Administration for Children and Families.",
+      "datasetURL": "https://acf.gov/ofa/programs/healthy-marriage",
+      "distributionURL": "https://acf.gov/ofa/programs/healthy-marriage",
+      "evidenceHash": "353823a67c6fe9b4b0ca9999f0195d4b76724d8131bcb9a4fe8940918e499b3f",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://acf.gov/ofa/programs/healthy-marriage"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://acf.gov/digital-policies"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with ACF/HHS digital policy, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://acf.gov/ofa/programs/healthy-marriage",
+      "licenseVersion": "current ACF.gov digital policy posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Administration for Children and Families",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://acf.gov/digital-policies",
+      "sourceID": "acf.healthy_marriage_fatherhood",
+      "sourceName": "ACF Healthy Marriage and Responsible Fatherhood public reference pages",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://acf.gov/digital-policies"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "",
+      "datasetURL": "https://www.bls.gov/developers/",
+      "distributionURL": "https://www.bls.gov/developers/",
+      "evidenceHash": "bd0f2837f77f4b8f8f69855e6dfda9d356a00968cc558f0f33b5f03a4ca2c873",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.bls.gov/developers/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.bls.gov/developers/termsOfService.htm"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public data; cite BLS as source",
+      "licenseURL": "https://www.bls.gov/developers/",
+      "licenseVersion": "current public API terms",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.bls.gov/developers/termsOfService.htm",
+      "sourceID": "bls.public.data.api",
+      "sourceName": "BLS Public Data API",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.bls.gov/developers/termsOfService.htm"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the Centers for Disease Control and Prevention.",
+      "datasetURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "distributionURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "evidenceHash": "659c031fa4ed1f7b17915e6639f7a699e33c87e9a32a14cab1b45af67fb4d340",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.cdc.gov/other/agencymaterials.html"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with CDC attribution, no-endorsement, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "licenseVersion": "current CDC.gov reuse posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.cdc.gov/other/agencymaterials.html",
+      "sourceID": "cdc.physical-activity.basics",
+      "sourceName": "CDC Physical Activity Basics public reference pages",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.cdc.gov/other/agencymaterials.html"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the Centers for Disease Control and Prevention.",
+      "datasetURL": "https://www.cdc.gov/child-development/positive-parenting-tips/index.html",
+      "distributionURL": "https://www.cdc.gov/child-development/positive-parenting-tips/index.html",
+      "evidenceHash": "d2bd3977e156ccbfb5d66f6e524a449bd0d3cb2d78688a29a1ad9bd36dfc09cb",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.cdc.gov/child-development/positive-parenting-tips/index.html"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.cdc.gov/other/agencymaterials.html"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with CDC attribution, no-endorsement, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.cdc.gov/child-development/positive-parenting-tips/index.html",
+      "licenseVersion": "current CDC.gov reuse posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.cdc.gov/other/agencymaterials.html",
+      "sourceID": "cdc.positive_parenting",
+      "sourceName": "CDC Positive Parenting Tips public reference pages",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.cdc.gov/other/agencymaterials.html"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the Consumer Financial Protection Bureau.",
+      "datasetURL": "https://www.consumerfinance.gov/consumer-tools/educator-tools/adult-financial-education/tools-and-resources/",
+      "distributionURL": "https://www.consumerfinance.gov/consumer-tools/educator-tools/adult-financial-education/tools-and-resources/",
+      "evidenceHash": "e109bfaae66263ae1cdcc38dd78360620e254eff8e859005ac04dc7239ff4f71",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.consumerfinance.gov/consumer-tools/educator-tools/adult-financial-education/tools-and-resources/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.consumerfinance.gov/privacy/"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with CFPB privacy, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.consumerfinance.gov/consumer-tools/educator-tools/adult-financial-education/tools-and-resources/",
+      "licenseVersion": "current ConsumerFinance.gov public website posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Consumer Financial Protection Bureau",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.consumerfinance.gov/privacy/",
+      "sourceID": "cfpb.adult_financial_education",
+      "sourceName": "CFPB adult financial education tools and resources",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.consumerfinance.gov/privacy/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from Child Welfare Information Gateway.",
+      "datasetURL": "https://www.childwelfare.gov/resources/",
+      "distributionURL": "https://www.childwelfare.gov/resources/",
+      "evidenceHash": "b96af1f49b5b6a8402f36aff018a35e16c0125611d250e0f630c94ccb094b9e0",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.childwelfare.gov/resources/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.childwelfare.gov/information-gateway-policies/"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Official Child Welfare Information Gateway public website/publication posture with ACF/HHS attribution, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.childwelfare.gov/resources/",
+      "licenseVersion": "current ChildWelfare.gov information gateway policies posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Child Welfare Information Gateway / Children's Bureau / Administration for Children and Families",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.childwelfare.gov/information-gateway-policies/",
+      "sourceID": "childwelfare.family_support",
+      "sourceName": "Child Welfare Information Gateway family support public reference resources",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.childwelfare.gov/information-gateway-policies/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the U.S. Department of Education College Scorecard.",
+      "datasetURL": "https://collegescorecard.ed.gov/data/",
+      "distributionURL": "https://collegescorecard.ed.gov/data/",
+      "evidenceHash": "3351b2b1c6ac961edf6ad1ab73647ac391e6195ed7b219fee539826837ae9b0b",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://collegescorecard.ed.gov/data/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://collegescorecard.ed.gov/data/"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons Attribution via current data.ed.gov/Data.gov catalog metadata",
+      "licenseURL": "https://collegescorecard.ed.gov/data/",
+      "licenseVersion": "Data.gov College Scorecard package extra license=http://www.opendefinition.org/licenses/cc-by",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Department of Education",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://collegescorecard.ed.gov/data/",
+      "sourceID": "college-scorecard.api",
+      "sourceName": "College Scorecard data API",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://collegescorecard.ed.gov/data/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from Creative Commons.",
+      "datasetURL": "https://creativecommons.org/licenses/",
+      "distributionURL": "https://creativecommons.org/licenses/",
+      "evidenceHash": "e8aa2a7a7ff9f271e560b28ace22a4760c805d55f66334bc0a391f5c899a38a5",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://creativecommons.org/licenses/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://creativecommons.org/terms/"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons website content CC BY 4.0 unless otherwise marked; legal tools, deeds, and notices identified as CC0, with trademark and third-party caveats retained",
+      "licenseURL": "https://creativecommons.org/licenses/",
+      "licenseVersion": "current Creative Commons website terms and policies posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Creative Commons",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://creativecommons.org/terms/",
+      "sourceID": "creative-commons.licenses",
+      "sourceName": "Creative Commons licenses and public-domain tools public reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://creativecommons.org/terms/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the U.S. Department of Energy.",
+      "datasetURL": "https://www.energy.gov/energysaver/energy-saver",
+      "distributionURL": "https://www.energy.gov/energysaver/energy-saver",
+      "evidenceHash": "140ba1d73c83cf86cbc87df71f547ad767540de619c7dc4b1e6a0092053d63b7",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.energy.gov/energysaver/energy-saver"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.energy.gov/web-policies"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website government information with DOE acknowledgement requested and third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.energy.gov/energysaver/energy-saver",
+      "licenseVersion": "current Energy.gov web-policies posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Department of Energy",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.energy.gov/web-policies",
+      "sourceID": "energy.gov.energy_saver",
+      "sourceName": "Department of Energy Energy Saver public home energy reference pages",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.energy.gov/web-policies"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the Internal Revenue Service.",
+      "datasetURL": "https://www.irs.gov/filing/individuals/when-to-file",
+      "distributionURL": "https://www.irs.gov/filing/individuals/when-to-file",
+      "evidenceHash": "ebc2ef6c00e5eb5db21f7467af962d2bbe288538cb9d5e9fc145362baf8281b6",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.irs.gov/filing/individuals/when-to-file"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with IRS privacy, disclosure, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.irs.gov/filing/individuals/when-to-file",
+      "licenseVersion": "current IRS.gov public website posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Internal Revenue Service",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy",
+      "sourceID": "irs.when_to_file",
+      "sourceName": "IRS When to File individual return public reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the Library of Congress.",
+      "datasetURL": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "distributionURL": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "evidenceHash": "0a3265ff0c4ef57063d4b3b4961009ba7162c99fc36918bd4cdce8428bc070d3",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.loc.gov/legal/"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Library of Congress page text marked U.S. Government Work; collection items, third-party material, media, and rights-restricted content excluded",
+      "licenseURL": "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/",
+      "licenseVersion": "current LOC legal and page-level rights posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Library of Congress",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.loc.gov/legal/",
+      "sourceID": "loc.primary_sources",
+      "sourceName": "Library of Congress Getting Started with Primary Sources public learning reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.loc.gov/legal/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the National Archives.",
+      "datasetURL": "https://www.archives.gov/founding-docs/constitution-transcript",
+      "distributionURL": "https://www.archives.gov/founding-docs/constitution-transcript",
+      "evidenceHash": "0c276ff5a115ff40c5569fb6468d03e65cf61719c94b4c025e6fda5347466412",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.archives.gov/founding-docs/constitution-transcript"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.usa.gov/government-works"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public source with citation required",
+      "licenseURL": "https://www.archives.gov/founding-docs/constitution-transcript",
+      "licenseVersion": "current public government works posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "National Archives",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.usa.gov/government-works",
+      "sourceID": "nara.constitution.presidency",
+      "sourceName": "U.S. Constitution presidential eligibility",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from MedlinePlus, National Library of Medicine.",
+      "datasetURL": "https://medlineplus.gov/",
+      "distributionURL": "https://medlineplus.gov/",
+      "evidenceHash": "fefddaff0cea28fb7beb8e117ea744f26ec323aee7de99fcb7c6f9ef84dc3536",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://medlineplus.gov/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://medlineplus.gov/about/using/usingcontent/"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "MedlinePlus health topic summaries are public-domain federal content with acknowledgement requested; copyrighted vendor drug, supplement, encyclopedia, image, and third-party content excluded",
+      "licenseURL": "https://medlineplus.gov/",
+      "licenseVersion": "current MedlinePlus content reuse posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "National Library of Medicine / National Institutes of Health",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://medlineplus.gov/about/using/usingcontent/",
+      "sourceID": "nih.medlineplus.wellness",
+      "sourceName": "MedlinePlus wellness and lifestyle health topic summaries",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://medlineplus.gov/about/using/usingcontent/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the National Park Service.",
+      "datasetURL": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "distributionURL": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "evidenceHash": "8242a8874fe2a4c4f49bdc41a0b4a35b6fd4f340393e30166cc82eb3af64e0e4",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.nps.gov/subjects/healthandsafety/index.htm"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.nps.gov/aboutus/disclaimer.htm"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with NPS disclaimer, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.nps.gov/subjects/healthandsafety/index.htm",
+      "licenseVersion": "current NPS.gov disclaimer posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "National Park Service",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.nps.gov/aboutus/disclaimer.htm",
+      "sourceID": "nps.recreation-safety",
+      "sourceName": "National Park Service Health & Safety public reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.nps.gov/aboutus/disclaimer.htm"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from Statistics Canada Table 13-10-0974-01.",
+      "datasetURL": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "distributionURL": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "evidenceHash": "b63ec7992054713b41e02db4da83b809a5bea413e944ce62e0caebdb47817a57",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.statcan.gc.ca/en/terms-conditions/open-licence"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Statistics Canada Open Licence with source acknowledgement, no-endorsement, no-misrepresentation, no-reidentification, and third-party rights caveats retained",
+      "licenseURL": "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=1310097401",
+      "licenseVersion": "current Statistics Canada open licence posture reviewed 2026-06-28",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Government of Canada, Statistics Canada",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.statcan.gc.ca/en/terms-conditions/open-licence",
+      "sourceID": "official.statcan.table.13100974",
+      "sourceName": "Statistics Canada Table 13-10-0974-01",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.statcan.gc.ca/en/terms-conditions/open-licence"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "O*NET data must retain O*NET attribution and license notice.",
+      "datasetURL": "https://www.onetcenter.org/database.html",
+      "distributionURL": "https://www.onetcenter.org/database.html",
+      "evidenceHash": "cfbb9984398414998d6ff0e996c8df0e07ad91fe2e71d1b01db0d0e4d867cb51",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.onetcenter.org/database.html"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.onetcenter.org/overview.html#data"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseURL": "https://www.onetcenter.org/database.html",
+      "licenseVersion": "4.0",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Department of Labor Employment and Training Administration / National Center for O*NET Development",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.onetcenter.org/overview.html#data",
+      "sourceID": "onet.database",
+      "sourceName": "O*NET Database and O*NET OnLine public occupational reference data",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.onetcenter.org/overview.html#data"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": false,
+      "attributionText": "",
+      "datasetURL": "https://openalex.org/",
+      "distributionURL": "https://openalex.org/",
+      "evidenceHash": "cd3ab504095b58a080dec8d44166c0a354aa807e279c6db10f2652897ffeae65",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://openalex.org/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons CC0 public domain dedication",
+      "licenseURL": "https://openalex.org/",
+      "licenseVersion": "1.0",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "OpenAlex",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "sourceID": "openalex.dataset",
+      "sourceName": "OpenAlex dataset and API",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": false,
+      "attributionText": "Based on public scholarly metadata from OpenAlex.",
+      "datasetURL": "https://openalex.org/",
+      "distributionURL": "https://openalex.org/",
+      "evidenceHash": "b965d57c6fcdb0d0159f604e8c1a1c2e370455e37402855c025c24016e39c562",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://openalex.org/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "OpenAlex CC0 public scholarly metadata with high-volume API/snapshot governance retained",
+      "licenseURL": "https://openalex.org/",
+      "licenseVersion": "current OpenAlex CC0 metadata posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "OpenAlex",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "sourceID": "openalex.personal_growth_research",
+      "sourceName": "OpenAlex personal-growth scholarly metadata reference",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": false,
+      "attributionText": "OpenAlex metadata is represented as public scholarly reference metadata.",
+      "datasetURL": "https://openalex.org/",
+      "distributionURL": "https://openalex.org/",
+      "evidenceHash": "aff6c2f74253c277b45db60a5bba3d75ffe24bbfd36a0c874031665a80b44552",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://openalex.org/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "Creative Commons CC0 public domain dedication for OpenAlex metadata",
+      "licenseURL": "https://openalex.org/",
+      "licenseVersion": "1.0",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "OpenAlex",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "sourceID": "openalex.works",
+      "sourceName": "OpenAlex Works API public scholarly metadata",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from Ready.gov.",
+      "datasetURL": "https://www.ready.gov/kit",
+      "distributionURL": "https://www.ready.gov/kit",
+      "evidenceHash": "8591ae21feb28c76e47676484ca70d3d8c34a9a0fef4761f663a84c48770047a",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.ready.gov/kit"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.ready.gov/terms-and-conditions"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with Ready.gov terms, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.ready.gov/kit",
+      "licenseVersion": "current Ready.gov terms and conditions posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "Ready.gov / Federal Emergency Management Agency",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.ready.gov/terms-and-conditions",
+      "sourceID": "ready.gov.kit",
+      "sourceName": "Ready.gov Build A Kit public preparedness reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.ready.gov/terms-and-conditions"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the U.S. Small Business Administration.",
+      "datasetURL": "https://www.sba.gov/business-guide/10-steps-start-your-business",
+      "distributionURL": "https://www.sba.gov/business-guide/10-steps-start-your-business",
+      "evidenceHash": "1f36ffd6f82d6e599375ed500e6927226d9100a59301b944adea4b523c12e11e",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.sba.gov/business-guide/10-steps-start-your-business"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.sba.gov/about-sba/open-government/about-sbagov-website/linking-policy"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public source with SBA acknowledgement requested; SBA website disclaimer and linking policy apply",
+      "licenseURL": "https://www.sba.gov/business-guide/10-steps-start-your-business",
+      "licenseVersion": "current SBA.gov website posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Small Business Administration",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.sba.gov/about-sba/open-government/about-sbagov-website/linking-policy",
+      "sourceID": "sba.business_guide.start_business",
+      "sourceName": "SBA 10 steps to start your business guide",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.sba.gov/about-sba/open-government/about-sbagov-website/linking-policy"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from Travel.State.Gov, U.S. Department of State.",
+      "datasetURL": "https://travel.state.gov/content/travel/en/passports/how-apply.html",
+      "distributionURL": "https://travel.state.gov/content/travel/en/passports/how-apply.html",
+      "evidenceHash": "41c136c993773685eb8bbdd174d7b18cdfe40ea45c5574caf3f4b126ee28a437",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://travel.state.gov/content/travel/en/passports/how-apply.html"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with State Department copyright, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://travel.state.gov/content/travel/en/passports/how-apply.html",
+      "licenseVersion": "current Travel.State.Gov copyright and disclaimer posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "U.S. Department of State",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html",
+      "sourceID": "state.travel.public_travel",
+      "sourceName": "Travel.State.Gov passport and travel advisory public reference pages",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://travel.state.gov/content/travel/en/copyright-disclaimer.html"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from USA.gov.",
+      "datasetURL": "https://www.usa.gov/benefits",
+      "distributionURL": "https://www.usa.gov/benefits",
+      "evidenceHash": "daca5be0b1584180edc181bf87fc61ad8d02f9da21c8a00981777c489724b4c5",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.usa.gov/benefits"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.usa.gov/government-works"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with USA.gov government-works, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.usa.gov/benefits",
+      "licenseVersion": "current USA.gov government works posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "USA.gov / General Services Administration",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.usa.gov/government-works",
+      "sourceID": "usa.gov.benefits",
+      "sourceName": "USA.gov government benefits public reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from USA.gov.",
+      "datasetURL": "https://www.usa.gov/change-address",
+      "distributionURL": "https://www.usa.gov/change-address",
+      "evidenceHash": "de15e687b06188d045143ce1d769c09a2bd6a139e600479f9fa8716e15aecd8b",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.usa.gov/change-address"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.usa.gov/government-works"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with USA.gov government-works, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.usa.gov/change-address",
+      "licenseVersion": "current USA.gov government works posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "USA.gov / General Services Administration",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.usa.gov/government-works",
+      "sourceID": "usa.gov.change_address",
+      "sourceName": "USA.gov change-address public relocation reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from USA.gov.",
+      "datasetURL": "https://www.usa.gov/home-repair-programs",
+      "distributionURL": "https://www.usa.gov/home-repair-programs",
+      "evidenceHash": "cb8f6ed3ecd5214cfdd0c9adba7125ebc33952c7a2a5154516aae899bd626490",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.usa.gov/home-repair-programs"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.usa.gov/government-works"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public website text with USA.gov government-works, third-party, trademark, and media caveats retained",
+      "licenseURL": "https://www.usa.gov/home-repair-programs",
+      "licenseVersion": "current USA.gov government works posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "USA.gov / General Services Administration",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.usa.gov/government-works",
+      "sourceID": "usa.gov.home_repair",
+      "sourceName": "USA.gov government home repair assistance public reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.usa.gov/government-works"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the World Wide Web Consortium.",
+      "datasetURL": "https://www.w3.org/standards/",
+      "distributionURL": "https://www.w3.org/standards/",
+      "evidenceHash": "4a833251aefe938706383b6e87dc01467d60318ef35270c28e93fba46d694bec",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.w3.org/standards/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://www.w3.org/copyright/"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "W3C public standards and website reference posture with document, software, test-suite, patent-policy, trademark, and permission caveats retained",
+      "licenseURL": "https://www.w3.org/standards/",
+      "licenseVersion": "current W3C copyright and policies posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "World Wide Web Consortium",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://www.w3.org/copyright/",
+      "sourceID": "w3c.web-standards",
+      "sourceName": "W3C web standards public reference page",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://www.w3.org/copyright/"
+    },
+    {
+      "allowedArtifactClasses": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_ontology",
+        "public_atom_edge_lattice",
+        "public_recipe",
+        "public_freshness"
+      ],
+      "attributionRequired": true,
+      "attributionText": "Based on public reference data from the United States Military Academy Redbook.",
+      "datasetURL": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/",
+      "distributionURL": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/",
+      "evidenceHash": "2de5356092924773b2193f16c986d871f23341cc0f8201b371bccc93498d8f61",
+      "evidenceSources": [
+        {
+          "kind": "source_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/"
+        },
+        {
+          "kind": "terms_url",
+          "retrievedAt": "2026-06-29T00:50:00Z",
+          "url": "https://catalog.westpoint.edu/"
+        }
+      ],
+      "expiresAt": "2026-12-29",
+      "forbiddenArtifactClasses": [
+        "non_public_runtime_field",
+        "user_supplied_content",
+        "account_or_credential_material",
+        "personal_behavior_or_history",
+        "non_reference_artifact"
+      ],
+      "license": "U.S. federal public source with citation required; West Point catalog footer permits reproduction/distribution of posted public information",
+      "licenseURL": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/",
+      "licenseVersion": "current public catalog posture",
+      "lookupOutputAllowed": true,
+      "nonClaims": [
+        "not outside legal approval",
+        "not source endorsement",
+        "not legal, medical, financial, admissions, or employment advice"
+      ],
+      "outsideLegalApprovalArtifact": "",
+      "outsideLegalApprovalArtifactHash": "",
+      "outsideLegalRequired": false,
+      "outsideLegalStatus": "not_claimed",
+      "packOutputAllowed": true,
+      "publisher": "United States Military Academy / West Point",
+      "r2PackPolicy": "r2_pack_allowed",
+      "redistributionPolicy": "redistributable_with_attribution",
+      "reviewOwner": "Codex internal Source Atlas legal/terms review under explicit user authorization",
+      "reviewStatus": "approved_internal_terms_review",
+      "reviewedAt": "2026-06-29",
+      "rightsURL": "https://catalog.westpoint.edu/",
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "sourceName": "United States Military Academy Redbook Computer Science major curriculum",
+      "sourceSpecificRestrictions": [
+        "source-specific terms still control",
+        "R2/offline pack output is public/reference only",
+        "do not use as a final personal plan, schedule, or Step generator"
+      ],
+      "termsURL": "https://catalog.westpoint.edu/"
+    }
+  ],
+  "status": "Green",
+  "statusReason": "internal source-specific terms review complete for approved lanes; blocked or review-required lanes remain excluded",
+  "userAuthorization": "User authorized extensive internal legal/terms review for bounded Source Atlas Green claims; this is not outside legal approval.",
+  "versionID": "source-atlas-legal-terms-approval-packet-v1"
+}

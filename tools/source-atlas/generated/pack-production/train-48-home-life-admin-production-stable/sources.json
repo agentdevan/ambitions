@@ -1,0 +1,119 @@
+{
+  "excludedClaims": [],
+  "sources": [
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness",
+        "public_atom_edge_lattice"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "doe_public_web",
+      "non_claims": [
+        "not contractor recommendation",
+        "not unsafe repair instructions",
+        "not a utility guarantee",
+        "not a household schedule",
+        "not private home diagnosis",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "energy.gov.energy_saver",
+      "source_name": "Department of Energy Energy Saver public home energy reference pages"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness",
+        "public_atom_edge_lattice"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "ready_public_web",
+      "non_claims": [
+        "not emergency advice",
+        "not a safety guarantee",
+        "not unsafe repair instructions",
+        "not a household schedule",
+        "not a personalized home plan",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "ready.gov.kit",
+      "source_name": "Ready.gov Build A Kit public preparedness reference page"
+    },
+    {
+      "allowed_artifact_classes": [
+        "official_public_source",
+        "public_reference_claim",
+        "public_requirement",
+        "public_provenance",
+        "public_freshness",
+        "public_atom_edge_lattice"
+      ],
+      "authority_class": "official_government",
+      "dataClass": "official_public_source",
+      "excluded": false,
+      "excluded_claim_count": 0,
+      "forbidden_artifact_classes": [
+        "final_user_path",
+        "final_schedule",
+        "step_list",
+        "personalized_plan",
+        "private_goal_graph"
+      ],
+      "included": true,
+      "jurisdiction": "US",
+      "license_id": "usagov_public_web",
+      "non_claims": [
+        "not eligibility approval",
+        "not a loan decision",
+        "not legal advice",
+        "not contractor advice",
+        "not a personalized household plan",
+        "not outside legal approval"
+      ],
+      "publicReferenceOnly": true,
+      "r2_pack_policy": "pack_allowed_with_attribution",
+      "redistribution_policy": "redistributable_with_attribution",
+      "review_status": "reviewed",
+      "source_id": "usa.gov.home_repair",
+      "source_name": "USA.gov government home repair assistance public reference page"
+    }
+  ]
+}

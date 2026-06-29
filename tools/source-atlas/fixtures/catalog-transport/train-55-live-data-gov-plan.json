@@ -1,0 +1,27 @@
+{
+  "catalogEndpoints": [
+    {
+      "endpoint_id": "australia-data-education-package-search",
+      "url": "https://data.gov.au/data/api/3/action/package_search?q=education&rows=2",
+      "catalog_kind": "ckan_package_search",
+      "enabled": true,
+      "timeout_seconds": 20,
+      "max_bytes": 1000000
+    },
+    {
+      "endpoint_id": "canada-open-data-health-package-search",
+      "url": "https://open.canada.ca/data/api/3/action/package_search?q=health&rows=2",
+      "catalog_kind": "ckan_package_search",
+      "enabled": true,
+      "timeout_seconds": 20,
+      "max_bytes": 1000000
+    }
+  ],
+  "non_claims": [
+    "live catalog metadata transport only",
+    "not source authority",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage"
+  ]
+}

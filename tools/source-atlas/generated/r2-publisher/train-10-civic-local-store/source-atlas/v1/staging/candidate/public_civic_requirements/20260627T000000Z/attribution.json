@@ -1,0 +1,20 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from U.S. Constitution presidential eligibility.",
+      "claim_id": "canonical_claim.d34a20f0f0d5a238",
+      "dataClass": "public_provenance",
+      "license_id": "us_federal_public_source",
+      "publicReferenceOnly": true,
+      "source_id": "nara.constitution.presidency"
+    },
+    {
+      "attribution_text": "Based on public reference data from U.S. Constitution presidential eligibility.",
+      "claim_id": "canonical_claim.cffd5fbc91dc3ce9",
+      "dataClass": "public_provenance",
+      "license_id": "us_federal_public_source",
+      "publicReferenceOnly": true,
+      "source_id": "nara.constitution.presidency"
+    }
+  ]
+}

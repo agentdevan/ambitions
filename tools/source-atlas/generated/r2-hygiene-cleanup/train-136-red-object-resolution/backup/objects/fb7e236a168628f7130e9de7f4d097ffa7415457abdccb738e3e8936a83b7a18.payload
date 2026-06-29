@@ -1,0 +1,234 @@
+{
+  "appCacheAllowed": true,
+  "claims": [
+    {
+      "claimType": "public_reference_source_scope",
+      "freshness": "release_watch",
+      "id": "claim.broad_occupation.onet_public_reference",
+      "sourceIDs": [
+        "onet.database"
+      ],
+      "state": "source_backed",
+      "text": "O*NET provides public occupational reference data for occupations, skills, tasks, preparation, and transfer context."
+    },
+    {
+      "claimType": "public_reference_source_scope",
+      "freshness": "current",
+      "id": "claim.broad_occupation.bls_public_reference",
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "state": "source_backed",
+      "text": "BLS public data provides labor-market reference statistics for occupational context."
+    }
+  ],
+  "dataClass": "public_reference_claim",
+  "displayName": "Broad occupational foundation reference pack",
+  "domains": [
+    "abilities",
+    "career_clusters",
+    "education",
+    "employment",
+    "essential_skills",
+    "interests",
+    "job_zones",
+    "knowledge",
+    "labor_market",
+    "occupation",
+    "skills",
+    "software_skills",
+    "tasks",
+    "training",
+    "transfer",
+    "transferable_skills",
+    "trend",
+    "wages",
+    "work_activities",
+    "work_styles"
+  ],
+  "fixtureAllowed": "public_synthetic_only",
+  "id": "pack.occupation.broad_occupational_foundation",
+  "inspectionContract": {
+    "defaultVisibility": "hidden",
+    "mustInclude": [
+      "source",
+      "claim",
+      "freshness",
+      "uncertainty",
+      "user_control"
+    ],
+    "showWhen": [
+      "user_asks_why",
+      "source_freshness_changes_path_behavior"
+    ]
+  },
+  "kind": "ambitions.sourceAtlas.foundryPack",
+  "logAllowed": "metadata_only",
+  "metadata": {
+    "createdAt": "2026-06-27T16:33:38Z",
+    "createdBy": "Source Atlas Foundry",
+    "freshnessState": "candidate",
+    "harvestRunID": null,
+    "lastKnownGood": null,
+    "localPersonalizationRequired": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "runtimeRole": "reference_enrichment_only",
+    "signatureStatus": "unsigned-local-foundry-v0",
+    "sourceAtlasInvisibleByDefault": true
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "pathways": [
+    {
+      "alternatePaths": [
+        {
+          "id": "alternate.related_occupation_context",
+          "sharedSkillAtoms": [
+            "occupation_context",
+            "skill_transfer_context",
+            "labor_market_context"
+          ],
+          "title": "Related occupation context"
+        }
+      ],
+      "domain": "occupation",
+      "id": "pathway.occupation.broad_occupational_foundation",
+      "milestones": [
+        {
+          "id": "broad_occupation.reference_inspection",
+          "output": "public reference source inspection state",
+          "purpose": "Expose source-backed occupation context when useful.",
+          "title": "Inspect public occupation sources"
+        },
+        {
+          "id": "broad_occupation.transfer_context",
+          "output": "public reference transfer context",
+          "purpose": "Support local-only path comparison with public reference structure.",
+          "title": "Compare transferable skill context"
+        }
+      ],
+      "runtimeBehavior": {
+        "canEnrichLocalPath": true,
+        "freshnessChangeMayTriggerReview": true,
+        "inspectionVisibleOnlyWhenUseful": true,
+        "mustJoinWithPrivateRuntimeLocally": true,
+        "mustNotUploadPrivateContext": true
+      },
+      "skillAtoms": [
+        "occupation_context",
+        "skill_transfer_context",
+        "task_context",
+        "training_context",
+        "labor_market_context",
+        "reference_source_inspection"
+      ],
+      "sourceRequirementIDs": [
+        "requirement.broad_occupation.onet_reference",
+        "requirement.broad_occupation.bls_reference"
+      ],
+      "title": "Broad occupational foundation reference pack"
+    }
+  ],
+  "r2Allowed": true,
+  "requirements": [
+    {
+      "claimID": "claim.broad_occupation.onet_public_reference",
+      "gateType": "public_reference_context",
+      "id": "requirement.broad_occupation.onet_reference",
+      "structuredRule": {
+        "runtimeUse": "reference_enrichment_only",
+        "source": "O*NET",
+        "type": "occupation_skill_task_context"
+      }
+    },
+    {
+      "claimID": "claim.broad_occupation.bls_public_reference",
+      "gateType": "public_reference_context",
+      "id": "requirement.broad_occupation.bls_reference",
+      "structuredRule": {
+        "runtimeUse": "reference_enrichment_only",
+        "source": "BLS",
+        "type": "labor_market_context"
+      }
+    }
+  ],
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "adapter": "official_onet_text_database",
+      "authorityTier": "official_occupational_database",
+      "domains": [
+        "occupation",
+        "career_clusters",
+        "skills",
+        "essential_skills",
+        "transferable_skills",
+        "tasks",
+        "work_activities",
+        "interests",
+        "job_zones",
+        "education",
+        "training",
+        "knowledge",
+        "abilities",
+        "work_styles",
+        "software_skills",
+        "transfer"
+      ],
+      "freshnessCadence": "track O*NET production releases and Database Services current version",
+      "id": "onet.database",
+      "lastReviewed": "2026-06-25",
+      "license": "CC BY 4.0 with O*NET attribution requirements",
+      "publisher": "U.S. Department of Labor Employment and Training Administration",
+      "title": "O*NET database and Web Services",
+      "url": "https://www.onetcenter.org/database.html"
+    },
+    {
+      "adapter": "official_bls_public_api",
+      "authorityTier": "official_labor_statistics",
+      "domains": [
+        "labor_market",
+        "wages",
+        "employment",
+        "occupation",
+        "trend"
+      ],
+      "freshnessCadence": "series-specific BLS publication schedule",
+      "id": "bls.public.data.api",
+      "lastReviewed": "2026-06-25",
+      "license": "U.S. federal public source; cite source URL",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "title": "BLS Public Data API",
+      "url": "https://www.bls.gov/developers/home.htm"
+    }
+  ],
+  "transferGraph": {
+    "alternatePaths": [
+      {
+        "id": "alternate.related_occupation_context",
+        "sharedSkillAtoms": [
+          "occupation_context",
+          "skill_transfer_context",
+          "labor_market_context"
+        ],
+        "title": "Related occupation context"
+      }
+    ],
+    "note": "Shared skill atoms let Ambitions preserve useful progress when a user changes direction.",
+    "skillAtoms": [
+      "occupation_context",
+      "skill_transfer_context",
+      "task_context",
+      "training_context",
+      "labor_market_context",
+      "reference_source_inspection"
+    ]
+  },
+  "versionID": "broad-occupational-foundation-20260627T163338Z"
+}

@@ -1,0 +1,150 @@
+{
+  "artifactID": "source_atlas_native_tri_domain_live_worker_proof.train42",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "humanStatus": "Runtime Green for bounded tri-domain Source Atlas public refresh transport and offline fallback / Yellow overall Source Atlas",
+  "knownLimits": [
+    "Simulator proof is bounded to focused Source Atlas transport, registry, lifecycle, and offline fallback tests.",
+    "This does not prove physical-device readiness, visual readiness, account entitlement readiness, or App Store readiness.",
+    "Education/civic high-stakes references intentionally use local review-required fallback behavior."
+  ],
+  "native_runtime_proofs": [
+    {
+      "active_target_id": "source-atlas-refresh-target.occupation_foundation.stable.20260628T000000Z",
+      "cache_commit_status": "persisted_current",
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesOccupationTargetWhenEndpointIsProvided",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedPackWithURLSessionWhenEndpointIsProvided",
+      "planning_boundary": "accepted public reference; no final user plan, schedule, or Step generation",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "target_channel": "stable",
+      "target_domain": "occupation_foundation",
+      "target_environment": "production",
+      "target_pack_id": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+      "target_status": "active"
+    },
+    {
+      "active_target_id": "source-atlas-refresh-target.public_civic_requirements.stable.20260628T041500Z",
+      "cache_commit_status": "persisted_current",
+      "cache_journal_status": "verified_reference",
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesCivicTargetWhenEndpointIsProvided",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedCivicPackWithURLSessionWhenEndpointIsProvided",
+      "planning_boundary": "verified public reference cached for offline inspection; civic/legal current-use planning remains review-gated and cannot generate a final user plan, schedule, or Step list",
+      "query_boundary": "review_required",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "target_channel": "stable",
+      "target_domain": "public_civic_requirements",
+      "target_environment": "production",
+      "target_pack_id": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+      "target_status": "active"
+    },
+    {
+      "active_target_id": "source-atlas-refresh-target.education_credentialing.stable.20260628T000000Z",
+      "cache_commit_status": "persisted_current",
+      "cache_journal_status": "verified_reference",
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesEducationTargetWhenEndpointIsProvided",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedEducationPackWithURLSessionWhenEndpointIsProvided",
+      "planning_boundary": "verified public reference cached for offline inspection; education/admissions current-use planning remains review-gated and cannot generate a final user plan, schedule, or Step list",
+      "query_boundary": "review_required",
+      "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+      "target_channel": "stable",
+      "target_domain": "education_credentialing",
+      "target_environment": "production",
+      "target_pack_id": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+      "target_status": "active"
+    }
+  ],
+  "nonClaims": [
+    "not broad Runtime Green",
+    "not Release Green",
+    "not App Store readiness",
+    "not account or entitlement readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not full Source Atlas Green",
+    "not a Source Atlas product center or pack browser",
+    "not a final user plan, schedule, Step list, or personalized path generator"
+  ],
+  "product_law_preserved": true,
+  "proof": {
+    "cachePersistenceCovered": true,
+    "coreLocalPlanningBlocked": false,
+    "educationLifecycleRefresh": true,
+    "educationWorkerTransport": true,
+    "hashVerificationCovered": true,
+    "liveWorkerTransport": true,
+    "noFinalPlanGenerated": true,
+    "noPrivateRuntimeContextSent": true,
+    "noStepListGenerated": true,
+    "noTimedPlanOutputGenerated": true,
+    "offlineNoAccountFallback": true,
+    "privateManifestObjectKeyRejected": true,
+    "privateManifestRequestRejected": true,
+    "privateTargetMetadataRejected": true,
+    "registryArtifactLoads": true,
+    "reviewRequiredLocalFallbackCovered": true,
+    "triDomainTargetsActive": true
+  },
+  "r2RequestPrivacyProof": {
+    "accountOrDeviceIdentifierIncluded": false,
+    "captureTextIncluded": false,
+    "goalTextIncluded": false,
+    "privateUserContextIncluded": false,
+    "proofOrReceiptIncluded": false,
+    "requestShape": "domain/channel/schema/app-version/public-locale/environment public object-key requests only",
+    "runtimeGraphContextIncluded": false,
+    "timedPlanContextIncluded": false
+  },
+  "scope": {
+    "channel": "stable",
+    "domains": [
+      "occupation_foundation",
+      "public_civic_requirements",
+      "education_credentialing"
+    ],
+    "endpoint": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "environment": "production",
+    "registryArtifactID": "source_atlas_public_refresh_targets.train42_tri_live_worker_gateway"
+  },
+  "status": "green_for_bounded_tri_domain_worker_gateway_live_transport_yellow_overall_source_atlas",
+  "tests": [
+    "AppContainerFactoryTests/testAppContainerExposesRuntimeWhilePreservingIPhoneServiceFacade",
+    "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+    "SourceAtlasPublicPackRemoteTransportTests",
+    "SourceAtlasPublicPackLifecycleRefreshServiceTests"
+  ],
+  "valid": true,
+  "validation_run": [
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests -only-testing:AmbitionsTests/SourceAtlasPublicPackRemoteTransportTests -only-testing:AmbitionsTests/SourceAtlasPublicPackLifecycleRefreshServiceTests -only-testing:AmbitionsTests/AppContainerFactoryTests/testAppContainerExposesRuntimeWhilePreservingIPhoneServiceFacade",
+      "endpoint_env": "TEST_RUNNER_SOURCE_ATLAS_LIVE_R2_ENDPOINT",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T06-00-53-717Z_pid24471_1bbaa768.log",
+      "status": "passed",
+      "summary": "26 passed, 0 failed, 0 skipped, 0 warnings",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T06-00-53-717Z_pid24471_61405a89.xcresult"
+    }
+  ],
+  "worker_gateway": {
+    "deployed_version_id": "c6d98458-d8fa-415c-949c-b3bf0a568026",
+    "name": "ambitions-source-atlas-public-gateway",
+    "r2_binding": "SOURCE_ATLAS_BUCKET",
+    "r2_bucket": "ambitions-source-atlas-prod",
+    "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "workers_dev": true
+  },
+  "xcodebuildMCP": {
+    "buildLogPath": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T06-00-53-717Z_pid24471_1bbaa768.log",
+    "configuration": "Debug",
+    "durationMs": 134753,
+    "failed": 0,
+    "passed": 26,
+    "projectPath": "/Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj",
+    "scheme": "Ambitions",
+    "simulatorID": "8ACCD665-4807-4102-B526-5A1AE20686A8",
+    "simulatorName": "iPhone 17",
+    "skipped": 0,
+    "status": "SUCCEEDED",
+    "xcresultPath": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T06-00-53-717Z_pid24471_61405a89.xcresult"
+  }
+}

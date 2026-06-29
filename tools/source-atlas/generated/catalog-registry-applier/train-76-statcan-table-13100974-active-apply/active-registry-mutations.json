@@ -1,0 +1,40 @@
+{
+  "activeRegistryMutations": [
+    {
+      "active_registry_written": true,
+      "api_policy_id": "api.official.statcan.table.13100974.v1",
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "license_id": "statcan.open-licence.2026-06-28",
+      "mutation_id": "catalog_registry_mutation.f0d21a2a7777d3d6",
+      "non_claims": [
+        "registry metadata activation only",
+        "not claim output",
+        "not pack output",
+        "not R2 publish"
+      ],
+      "registry_hashes_after": {
+        "apiGovernanceRegistry": "12dfaacdbf2bde99581da104ec93bebbdd4ce43c654f971631f43d8a3f10dbe9",
+        "legalTermsRegistry": "77eb8c5ab28efdc9dd53e514459d5bd9e1055645b1add33d9106bdeaa4b9a59b",
+        "sourceLaneRegistry": "e125d2f2df679cc0454e0de922cc7eb68a9c3d0c85182cd6b0b15e955755e787"
+      },
+      "registry_hashes_before": {
+        "apiGovernanceRegistry": "8d12c7bf47c67f0b7c4500d3d747020093780f2131a1408b631043e23ac5ac4c",
+        "legalTermsRegistry": "f3c0a58a023459e118fbbf06e2392174ae352b40b187feb66625e916b2cafe4c",
+        "sourceLaneRegistry": "043518da3973d13f5135aba853977ce3722d9efacd33155e7da11ecac8da8105"
+      },
+      "schema_version": "1.0.0",
+      "source_id": "official.statcan.table.13100974",
+      "status": "active_registry_written",
+      "target_registry_paths": {
+        "apiGovernanceRegistry": "tools/source-atlas/governance/api-governance-registry.json",
+        "legalTermsRegistry": "tools/source-atlas/governance/legal-terms-registry.json",
+        "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json"
+      }
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogActiveRegistryMutations.v1"
+}

@@ -1,0 +1,487 @@
+{
+  "artifactValidation": {
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.packProductionArtifactValidation.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "requiredArtifacts": [
+      "adjudications.json",
+      "attribution.json",
+      "claims.json",
+      "coverage.json",
+      "entities.json",
+      "freshness.json",
+      "licenses.json",
+      "lkg.json",
+      "manifest.json",
+      "non-private-scan-report.json",
+      "non_claims.json",
+      "pack.json",
+      "r2-dry-run-plan.json",
+      "revocations.json",
+      "rollback-plan.json",
+      "sources.json"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "channel": "stable",
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "pack_slices_written",
+      "passed": true
+    },
+    {
+      "name": "pack_contains_only_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "restricted_and_crosswalk_claims_excluded",
+      "passed": true
+    },
+    {
+      "name": "manifest_hashes_present",
+      "passed": true
+    },
+    {
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "name": "dry_run_plan_only",
+      "passed": true
+    },
+    {
+      "name": "private_object_keys_blocked",
+      "passed": true
+    },
+    {
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "required_artifacts_valid",
+      "passed": true
+    },
+    {
+      "name": "execute_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T18:06:00Z",
+  "domain": "volunteering_public_reference",
+  "dryRunPlan": {
+    "channel": "stable",
+    "createdAt": "2026-06-28T18:06:00Z",
+    "dataClass": "public_r2_object_key",
+    "dryRun": true,
+    "environment": "production",
+    "executeRequested": false,
+    "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "dry-run only; no R2 upload or production promotion was performed"
+    ],
+    "objects": [
+      {
+        "bytes": 1159,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "adjudications",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/adjudications.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/adjudications.json",
+        "sha256": "08d339e3c7ebcdb2bd659394aa5fe61a757bb0d6c57d53f89a56e8d3917b64fe"
+      },
+      {
+        "bytes": 1112,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "attribution",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/attribution.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/attribution.json",
+        "sha256": "d25f84e1b67513162d43a7806f24e596f7daa5ce5639c50d2dd217ee8714039e"
+      },
+      {
+        "bytes": 7699,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "claims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/claims.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/claims.json",
+        "sha256": "a1499cd71f907cc16fe4770143b2f9ba539d075fcbaf81e5de586dda2111de35"
+      },
+      {
+        "bytes": 4169,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "coverage",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/coverage.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/coverage.json",
+        "sha256": "b37e58fe394e7efe25781dc0288d45591ea4312db2e63616f7b6ab575f322129"
+      },
+      {
+        "bytes": 1940,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "entities",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/entities.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/entities.json",
+        "sha256": "ab406a03a03158ca3f1edc8c2461fb3797f0c7678dfd0842e960512f2e68b6fa"
+      },
+      {
+        "bytes": 1659,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "freshness",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/freshness.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/freshness.json",
+        "sha256": "1ac154d4c1f7c1dd82b86604f6144d9fe4ac1aabc1e9ab1941ae3eb5342f1b92"
+      },
+      {
+        "bytes": 1223,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "licenses",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/licenses.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/licenses.json",
+        "sha256": "4b5e316026b1df3a6193ff00a29ed80a5ebdce223e49f9a226bfad67da4021d4"
+      },
+      {
+        "bytes": 1280,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "lkg",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/lkg.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/lkg.json",
+        "sha256": "1311d3455c3379f10d670389c3fe6053d21f0d8a56ccc9ce74d0ab6762c481e2"
+      },
+      {
+        "bytes": 8994,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "manifest",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/manifest.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json",
+        "sha256": "6605933ec3fa134e0d8e675512300b34eab8bf3d64c8035f72e97c03626d5dc4"
+      },
+      {
+        "bytes": 1314,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "nonClaims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/non_claims.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/non_claims.json",
+        "sha256": "03b6c1ff66358a8c27921b3b02a9b23550b3f5d43f9106b4564b4ed09a539401"
+      },
+      {
+        "bytes": 16924,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "pack",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/pack.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json",
+        "sha256": "7483b6e19f2ae712bd0936c0855f8072ce3fd0e650baf6bee5f7fcf1a433dd45"
+      },
+      {
+        "bytes": 1421,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "revocations",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/revocations.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/revocations.json",
+        "sha256": "ba176db11630d5c84edd269dd4271a316b0f7d653cc8907789e86e154ce5c852"
+      },
+      {
+        "bytes": 1339,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "sources",
+        "localPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/sources.json",
+        "objectKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/sources.json",
+        "sha256": "270a99e3254f17af97a2bcae1d4cd950da0d771f96620a04507c88b054686f23"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/rollback-plan.json",
+    "schemaVersion": 1,
+    "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+    "wouldUpload": false
+  },
+  "environment": "production",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.packProductionManifest.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "docs/qa/source-atlas/legal/source-atlas-volunteering-legal-terms-approval-train-131.json",
+    "packetSHA256": "20189f2c1dadaec9edfa5d97fec74ea90e1f42e50d978dc2485a1dc390713319",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "americorps.volunteer_rate_state"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "americorps.volunteer_rate_state",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "lkg": {
+    "channel": "stable",
+    "created_at": "2026-06-28T18:06:00Z",
+    "dataClass": "public_freshness",
+    "domain": "volunteering_public_reference",
+    "manifest_key": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "pack_id": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "reason_selected": "dry_run_candidate",
+    "rollback_safe": true,
+    "sha256": "6605933ec3fa134e0d8e675512300b34eab8bf3d64c8035f72e97c03626d5dc4",
+    "valid_until": null
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "nonPrivateScan": {
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.nonPrivateScanReport.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "outputRoot": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable",
+    "passed": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "schemaVersion": 1
+  },
+  "objectKeys": {
+    "adjudications": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/adjudications.json",
+    "attribution": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/attribution.json",
+    "claims": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/claims.json",
+    "coverage": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/coverage.json",
+    "current": "source-atlas/v1/production/stable/volunteering_public_reference/current.json",
+    "entities": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/entities.json",
+    "freshness": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/freshness.json",
+    "licenses": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/licenses.json",
+    "lkg": "source-atlas/v1/production/stable/volunteering_public_reference/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json",
+    "nonClaims": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/non_claims.json",
+    "pack": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/volunteering_public_reference/revocations.json",
+    "sources": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/sources.json"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/closeout.md",
+    "lkg": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/lkg.json",
+    "manifest": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/manifest.json",
+    "nonPrivateScan": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/non-private-scan-report.json",
+    "pack": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/pack.json",
+    "r2DryRunPlan": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/r2-dry-run-plan.json",
+    "revocation": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/revocations.json",
+    "rollback": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/rollback-plan.json"
+  },
+  "packID": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+  "packVersion": "20260628T180600Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "blockedClaimsExcluded": 0,
+    "claims": 3,
+    "licenses": 1,
+    "objectCount": 13,
+    "sources": 1
+  },
+  "revocation": {
+    "created_at": "2026-06-28T18:06:00Z",
+    "dataClass": "public_freshness",
+    "lkg_policy": "use_lkg_if_future_pack_is_revoked_and_lkg_hash_verifies",
+    "native_behavior": "not_claimed_in_train_04",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "object_keys": {
+      "lkg": "source-atlas/v1/production/stable/volunteering_public_reference/lkg.json",
+      "manifest": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "proof_artifacts": [],
+    "publicReferenceOnly": true,
+    "reason": "dry_run_no_revocations",
+    "replacement_pack_id": null,
+    "revocation_id": "source_atlas_revocation.9fc37a591edd2c20",
+    "revoked_object_keys": [],
+    "revoked_pack_ids": [],
+    "severity": "none"
+  },
+  "rollback": {
+    "candidateManifestKey": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json",
+    "createdAt": "2026-06-28T18:06:00Z",
+    "dataClass": "public_freshness",
+    "dryRunOnly": true,
+    "kind": "ambitions.sourceAtlas.rollbackPlan.v1",
+    "lkgPointerKey": "source-atlas/v1/production/stable/volunteering_public_reference/lkg.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "packID": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackCandidates": [
+      {
+        "channel": "stable",
+        "created_at": "2026-06-28T18:06:00Z",
+        "dataClass": "public_freshness",
+        "domain": "volunteering_public_reference",
+        "manifest_key": "source-atlas/v1/production/stable/volunteering_public_reference/20260628T180600Z/manifest.json",
+        "nonClaims": [
+          "not a private user-data backend",
+          "not private life graph storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final user plan, schedule, or Step generator"
+        ],
+        "pack_id": "source-atlas/v1/domain/volunteering_public_reference/20260628T180600Z",
+        "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+        "publicReferenceOnly": true,
+        "reason_selected": "dry_run_candidate",
+        "rollback_safe": true,
+        "sha256": "6605933ec3fa134e0d8e675512300b34eab8bf3d64c8035f72e97c03626d5dc4",
+        "valid_until": null
+      }
+    ],
+    "schemaVersion": 1,
+    "stablePointerWillChange": false
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; pack compiler and R2 dry-run controls only",
+  "status": "Source Green for pack compiler/R2 dry-run controls",
+  "valid": true,
+  "versionID": "source-atlas-pack-production-train-04"
+}

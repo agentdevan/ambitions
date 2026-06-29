@@ -1,0 +1,149 @@
+{
+  "train": "Source Atlas Production Finish-Line Train 26",
+  "linear_issue": "AMB-1512",
+  "date": "2026-06-28",
+  "status": "Green for native active-target approval gating / Yellow overall Source Atlas",
+  "scope_completed": [
+    "Added missing_approval_artifact as a native registry and lifecycle refresh issue",
+    "Required active registry entries to carry a non-empty public-safe review/approval artifact pointer before target selection",
+    "Normalized empty review artifact IDs to nil",
+    "Added registry metadata egress scanning for review artifact IDs and non-claims",
+    "Blocked private-looking approval artifact metadata before target selection",
+    "Changed the convenience targets initializer so direct target injection stays review_required instead of silently active",
+    "Preserved explicit registry-based active selection for approved public targets only",
+    "Added focused native tests for approved active selection, missing approval blocking, private approval metadata blocking, direct-target review-required behavior, lifecycle no-transport behavior, and bundled app defaults"
+  ],
+  "files_changed": [
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRefreshTargetRegistry.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackLifecycleRefreshService.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryTests.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-active-target-approval-gate-train-26.md",
+    "docs/qa/source-atlas/native/source-atlas-native-active-target-approval-gate-train-26.json"
+  ],
+  "product_law_preserved": true,
+  "final_architecture_tree": {
+    "inspected": true,
+    "canonical_owners_touched": [
+      "Core/Persistence"
+    ],
+    "noncanonical_owners_touched": [],
+    "files_moved_or_created": [
+      "docs/qa/source-atlas/native/source-atlas-native-active-target-approval-gate-train-26.md",
+      "docs/qa/source-atlas/native/source-atlas-native-active-target-approval-gate-train-26.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_architecture_debt": "No owner-approved active production target artifact, no production R2 promotion proof, no real background scheduler execution proof, and no device/offline release proof.",
+    "next_repair_train": "Approved active target artifact plus live/staging transport proof under canonical ownership",
+    "no_equivalent_folder_interpretation_used": true
+  },
+  "apple_platform_source_atlas": {
+    "new_apple_api_introduced": false,
+    "ios_26_availability_claim": "No new iOS API availability claim",
+    "backgroundtasks_proof": "Not run and not claimed"
+  },
+  "validation_run": [
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryTests -only-testing:AmbitionsTests/SourceAtlasPublicPackLifecycleRefreshServiceTests -only-testing:AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests -only-testing:AmbitionsTests/AppContainerFactoryTests/testAppContainerExposesRuntimeWhilePreservingIPhoneServiceFacade",
+      "status": "passed",
+      "passed": 21,
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T02-07-04-795Z_pid24471_392a2ba5.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T02-07-04-795Z_pid24471_95655c7e.xcresult"
+    },
+    {
+      "command": "xcodegen generate",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "passed": 130
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/green-standard/20260628T021000Z/extract/summary.json"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "Owner-approved active production registry artifact population",
+    "Live public pack transport from an active target",
+    "Production R2 upload/readback",
+    "Stable-channel write",
+    "Physical-device/offline runtime proof",
+    "Visual or accessibility proof",
+    "TestFlight, App Store, or release readiness proof",
+    "Source-specific legal/terms approval"
+  ],
+  "source_atlas_status_ceiling": "Green for Train 26 native active-target approval gating only; Yellow overall Source Atlas",
+  "r2_request_privacy_proof": "No R2 request is emitted by the new missing-approval path; approved active target tests use public-safe request metadata only.",
+  "no_private_graph_egress_proof": "No-private egress audit passed; registry tests prove private approval artifact metadata is rejected before selection.",
+  "license_terms_proof": "No new legal approval or source lane decision added.",
+  "restricted_source_exclusion_proof": "No restricted source is admitted by this train.",
+  "provenance_completeness_proof": "No claim graph or packable claim path changed.",
+  "freshness_revocation_proof": "No freshness or revocation claim is upgraded.",
+  "lkg_rollback_proof": "No R2 object, stable pointer, LKG pointer, or rollback operation is changed.",
+  "native_offline_no_account_proof": "Focused lifecycle and app-container tests prove missing approval and review-required targets select no transport and keep local planning unblocked.",
+  "authorization_boundary": {
+    "user_authorized_continued_work": true,
+    "authorized_areas": [
+      "production target",
+      "legal approval",
+      "live transport",
+      "R2 write",
+      "runtime/release Green",
+      "governed coverage claims"
+    ],
+    "not_proven_by_authorization": [
+      "source-specific legal/terms approval",
+      "outside legal approval",
+      "production R2 credentials or successful production write/readback",
+      "device/offline release proof",
+      "Visual Green or Release Green",
+      "literal universal coverage"
+    ]
+  },
+  "production_non_claims": [
+    "No production R2 readiness",
+    "No app runtime or release Green",
+    "No legal approval",
+    "No universal coverage",
+    "No active production registry target",
+    "No real BackgroundTasks execution proof"
+  ],
+  "known_risks": [
+    "This train gates active target selection but does not create an approved active production target",
+    "Approval artifact pointers prove deterministic gating only and are not legal approval",
+    "Real background scheduling, live/staging transport, R2 stable promotion, and device/offline proof remain unproven",
+    "Broader worktree contains uncommitted Source Atlas trains outside Train 26"
+  ],
+  "rollback_plan": [
+    "Remove missing_approval_artifact issue cases",
+    "Revert active-target approval artifact gating",
+    "Revert direct-target initializer back to prior behavior if needed",
+    "Revert Train 26 native tests",
+    "Remove Train 26 QA evidence",
+    "Retain Train 25 bundled review-required artifact behavior"
+  ]
+}

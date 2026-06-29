@@ -1,0 +1,491 @@
+{
+  "adapterID": "west_point_redbook_computer_science_credential_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_institution_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_institutional_requirement_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "institution",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.4aafc504dbcaa92d",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "United States Military Academy",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "education_program",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.a61b9d2bc00ac1dc",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Computer Science major",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "credential_level",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.fbde311848bd662d",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Bachelor of Science",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_institution",
+      "checksum": "checksum.548efa28557bed50",
+      "claimType": "credential_requirement",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "catalog year review and quarterly institutional source re-check",
+      "id": "claim.c32aa8717e0184d8",
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://catalog.westpoint.edu/",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "United States Military Academy / West Point",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/",
+      "state": "source_backed",
+      "text": "The United States Military Academy Redbook publishes official Computer Science major curriculum requirements as a bounded public institutional credential reference.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_institution",
+      "checksum": "checksum.7d5d9a18ea1de324",
+      "claimType": "credential_requirement",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "catalog year review and quarterly institutional source re-check",
+      "id": "claim.2b998c171ff3241d",
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://catalog.westpoint.edu/",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "United States Military Academy / West Point",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/",
+      "state": "source_backed",
+      "text": "The United States Military Academy Redbook represents the Computer Science major as an institutional curriculum path with listed depth-sequence and program requirement context.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "west_point_redbook_computer_science_credential_adapter",
+    "atomCount": 3,
+    "claimCount": 2,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "education_credentialing",
+    "edgeCount": 2,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US federal",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 2,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_institution",
+    "sourceCount": 1,
+    "sourceLane": "westpoint.redbook.computer_science_major",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "credential_requirement",
+      "credential": "Bachelor of Science",
+      "dataClass": "public_freshness",
+      "doesNotCreateAdmissionsAdvice": true,
+      "doesNotCreateDegreePlan": true,
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.educationCredentialRequirementCoverage.v1",
+      "label": "West Point Computer Science major curriculum reference",
+      "program": "Computer Science major",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "subject": "institution.west_point.computer_science_major.curriculum"
+    },
+    {
+      "claimType": "credential_requirement",
+      "credential": "Bachelor of Science",
+      "dataClass": "public_freshness",
+      "doesNotCreateAdmissionsAdvice": true,
+      "doesNotCreateDegreePlan": true,
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.educationCredentialRequirementCoverage.v1",
+      "label": "West Point Computer Science depth sequence reference",
+      "program": "Computer Science major",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "subject": "institution.west_point.computer_science_major.depth_sequence"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "education_credentialing",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.4aafc504dbcaa92d",
+      "id": "edge.650c160c4246351d",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "offers_public_curriculum_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "toAtomID": "atom.a61b9d2bc00ac1dc",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.a61b9d2bc00ac1dc",
+      "id": "edge.d9f45dc32c6b45ee",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "has_public_credential_level_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "toAtomID": "atom.fbde311848bd662d",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.4aafc504dbcaa92d",
+        "atom.a61b9d2bc00ac1dc",
+        "atom.fbde311848bd662d"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.650c160c4246351d",
+        "edge.d9f45dc32c6b45ee"
+      ],
+      "id": "lattice.e0960761780fe577",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "west_point_redbook_computer_science_credential_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "education_credentialing",
+      "id": "pack_candidate.694bd4d70e9b3d74",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 3,
+        "claims": 2,
+        "crosswalks": 0,
+        "edges": 2,
+        "requirements": 2
+      },
+      "schemaVersion": 1,
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "westpoint.redbook.computer_science_major"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_institution",
+      "contentHash": "0d8cda19ea134dc2d0dfc8a106a4ba208e8f61132b5ef5667f15f90b78e8d388",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "catalog year review and quarterly institutional source re-check",
+      "id": "provenance.686d724c14ba0255",
+      "jurisdiction": "US federal",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public source with citation required; West Point catalog footer permits reproduction/distribution of posted public information",
+      "locator": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/",
+      "publicReferenceOnly": true,
+      "publisher": "United States Military Academy / West Point",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "westpoint.redbook.computer_science_major",
+      "sourceState": "current",
+      "sourceURL": "https://catalog.westpoint.edu/academics/academic-programs/majors-minors/computer-science-major/",
+      "termsURL": "https://catalog.westpoint.edu/",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.c32aa8717e0184d8",
+      "dataClass": "public_requirement",
+      "gateType": "institutional_credential_requirement_reference_only",
+      "id": "requirement.6a0f1c9099905da9",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.2b998c171ff3241d",
+      "dataClass": "public_requirement",
+      "gateType": "institutional_curriculum_reference_only",
+      "id": "requirement.4ea3fbac8a5ddd6a",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.686d724c14ba0255"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "westpoint.redbook.computer_science_major"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "westpoint.redbook.computer_science_major",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_institution",
+    "freshnessCadence": "catalog year review and quarterly institutional source re-check",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public source with citation required; West Point catalog footer permits reproduction/distribution of posted public information",
+    "licenseVersion": "current public catalog posture",
+    "publisher": "United States Military Academy / West Point",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "westpoint.redbook.computer_science_major",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://catalog.westpoint.edu/"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "westpoint.redbook.computer_science_major"
+  }
+}

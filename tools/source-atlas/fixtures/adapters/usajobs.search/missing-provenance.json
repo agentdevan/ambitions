@@ -1,0 +1,243 @@
+{
+  "expectedIssueCodes": [],
+  "expectedValid": true,
+  "kind": "ambitions.sourceAtlas.adapterFixture.v1",
+  "payload": {
+    "adapterID": "restricted_source_policy_adapter",
+    "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+    "atoms": [],
+    "claims": [
+      {
+        "authorityTier": "restricted",
+        "checksum": "checksum.f556d3a3afda17a1",
+        "claimType": "restricted_source_policy",
+        "confidence": "review_required",
+        "dataClass": "public_reference_claim",
+        "freshness": "terms-blocked",
+        "freshnessCadence": "lookup-time only",
+        "id": "claim.a9bf2d6a74bcfb01",
+        "jurisdiction": "US",
+        "kind": "ambitions.sourceAtlas.claim.v1",
+        "licenseTermsReference": "https://developer.usajobs.gov/",
+        "provenanceIDs": [],
+        "publicReferenceOnly": true,
+        "publisher": "U.S. Office of Personnel Management",
+        "reviewRequirement": true,
+        "schemaVersion": 1,
+        "sourceID": "usajobs.search",
+        "sourceIDs": [
+          "usajobs.search"
+        ],
+        "sourceState": "terms-blocked",
+        "sourceURL": "https://developer.usajobs.gov/api-reference/",
+        "state": "candidate",
+        "text": "USAJOBS is represented as lookup-only until redistributable terms are explicitly reviewed.",
+        "versionID": "adapter-broad-coverage-train-01"
+      }
+    ],
+    "coverage": {
+      "adapter": "restricted_source_policy_adapter",
+      "atomCount": 0,
+      "claimCount": 1,
+      "conflictedClaims": 0,
+      "crosswalkCount": 0,
+      "dataClass": "public_freshness",
+      "domain": "restricted_policy",
+      "edgeCount": 0,
+      "evidenceArtifactPaths": [],
+      "freshnessStatus": "missing-provenance",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+      "licenseStatus": "restricted_unverified",
+      "noFalseCompletionCoverage": true,
+      "packReadiness": "blocked",
+      "provenanceCompleteness": false,
+      "publicReferenceOnly": true,
+      "r2Readiness": "blocked",
+      "redistributionStatus": "lookup_only_not_packable",
+      "requirementCount": 0,
+      "reviewRequiredClaims": 1,
+      "scenarioCoverage": [
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "NASA astronaut"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "nurse"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "pilot"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "teacher"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "software engineer"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "small business owner"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "music artist"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "audio engineer"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "marathon runner"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "electrician/apprenticeship"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "lawyer"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "medical school path"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "career pivot"
+        },
+        {
+          "coverage": "not packable due to terms",
+          "doesNotCreateUserPath": true,
+          "reason": "terms registry blocks redistribution",
+          "scenario": "still-counts pivot"
+        }
+      ],
+      "schemaVersion": 1,
+      "sourceAuthority": "restricted",
+      "sourceCount": 1,
+      "sourceLane": "usajobs.search",
+      "sourceStateCoverage": [
+        "current",
+        "unavailable",
+        "stale",
+        "stale-critical",
+        "conflicted",
+        "revoked",
+        "unsupported",
+        "malformed",
+        "rate-limited",
+        "terms-blocked",
+        "missing-provenance",
+        "private-field-injected"
+      ],
+      "staleCriticalClaims": 0,
+      "unsupportedClaims": 0
+    },
+    "coverageRecords": [],
+    "createdAt": "2026-06-27T00:00:00Z",
+    "crosswalks": [],
+    "dataClass": "official_public_source",
+    "domain": "restricted_policy",
+    "edges": [],
+    "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+    "lattices": [],
+    "nonClaims": [
+      "does not create final user paths",
+      "does not create final schedules",
+      "does not create Step lists",
+      "does not gather private user data",
+      "does not claim legal, privacy, release, or R2 production readiness"
+    ],
+    "packCandidates": [],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "provenance": [],
+    "publicReferenceOnly": true,
+    "recipes": [],
+    "requirements": [],
+    "schemaVersion": 1,
+    "sourceID": "usajobs.search",
+    "sourceState": {
+      "blockedReasons": [
+        "source_state_missing-provenance_blocks_pack_output",
+        "restricted_terms_not_redistributable"
+      ],
+      "dataClass": "public_freshness",
+      "packEligible": false,
+      "publicReferenceOnly": true,
+      "runtimeEligible": false,
+      "state": "missing-provenance"
+    },
+    "sourceStates": [
+      {
+        "blockedReasons": [
+          "source_state_missing-provenance_blocks_pack_output",
+          "restricted_terms_not_redistributable"
+        ],
+        "dataClass": "public_freshness",
+        "packEligible": false,
+        "publicReferenceOnly": true,
+        "runtimeEligible": false,
+        "state": "missing-provenance"
+      }
+    ],
+    "terms": {
+      "attributionRequired": true,
+      "authorityTier": "restricted",
+      "freshnessCadence": "lookup-time only",
+      "lastTermsReviewed": "2026-06-27",
+      "license": "terms not verified for redistributable Source Atlas pack inclusion",
+      "licenseVersion": "unverified",
+      "publisher": "U.S. Office of Personnel Management",
+      "r2PackPolicy": "r2_blocked",
+      "redistributionPolicy": "lookup_only_not_packable",
+      "reviewRequired": true,
+      "sourceID": "usajobs.search",
+      "termsReviewStatus": "restricted_unverified",
+      "termsURL": "https://developer.usajobs.gov/"
+    },
+    "termsValidation": {
+      "issues": [
+        "usajobs.search: lookup_only_not_packable blocks pack output",
+        "usajobs.search: r2_blocked blocks R2-ready pack output",
+        "usajobs.search: artifact classes not allowed by terms registry: public_freshness, public_reference_claim"
+      ],
+      "packable": false,
+      "r2PackPolicy": "r2_blocked",
+      "r2Ready": false,
+      "redistributionPolicy": "lookup_only_not_packable",
+      "sourceID": "usajobs.search"
+    }
+  },
+  "schemaVersion": 1
+}

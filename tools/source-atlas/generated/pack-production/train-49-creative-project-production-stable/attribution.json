@@ -1,0 +1,28 @@
+{
+  "attribution": [
+    {
+      "attribution_text": "Based on public reference data from Library of Congress Getting Started with Primary Sources public learning reference page.",
+      "claim_id": "canonical_claim.4976b4128f0dc75a",
+      "dataClass": "public_provenance",
+      "license_id": "loc_usgov_work",
+      "publicReferenceOnly": true,
+      "source_id": "loc.primary_sources"
+    },
+    {
+      "attribution_text": "Based on public reference data from Creative Commons licenses and public-domain tools public reference page.",
+      "claim_id": "canonical_claim.49099b83a7471fcc",
+      "dataClass": "public_provenance",
+      "license_id": "creativecommons_site_cc_by_4_cc0_tools",
+      "publicReferenceOnly": true,
+      "source_id": "creative-commons.licenses"
+    },
+    {
+      "attribution_text": "Based on public reference data from W3C web standards public reference page.",
+      "claim_id": "canonical_claim.0e6204e9b9b2ab39",
+      "dataClass": "public_provenance",
+      "license_id": "w3c_document_license_public_web",
+      "publicReferenceOnly": true,
+      "source_id": "w3c.web-standards"
+    }
+  ]
+}

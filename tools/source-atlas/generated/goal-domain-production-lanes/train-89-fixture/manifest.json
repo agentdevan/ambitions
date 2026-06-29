@@ -1,0 +1,108 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "router_manifest_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "routing_artifact_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_ready_routes_require_ledger_ready_domain",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_routes_have_complete_gate_work_orders",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_orders_default_to_no_live_or_execute",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_orders_emit_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainProductionLanesManifest.v1",
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not production R2 upload or overwrite",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not approval for future domains without source/frontier/pack/R2/native evidence",
+    "candidate work orders are not source authority",
+    "candidate work orders are not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "manifest": "c7f1dd65e1220707ce1eb311b8607546d3e07eef5d424ad556a2368845876a9b",
+    "productionLanes": "d502cb7a6fe6dc1c5f25754457fb5934f66be176990c00805129903f5032df30",
+    "workOrders": "53ed1b72f38ea124b8b1f934e992c21248558aac72108cab82f07afee8ef3006"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/goal-domain-production-lanes/train-89-fixture/closeout.md",
+    "manifest": "tools/source-atlas/generated/goal-domain-production-lanes/train-89-fixture/manifest.json",
+    "productionLanes": "tools/source-atlas/generated/goal-domain-production-lanes/train-89-fixture/goal-domain-production-lanes.json",
+    "workOrders": "tools/source-atlas/generated/goal-domain-production-lanes/train-89-fixture/domain-work-orders.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionTargetLedgerPath": "tools/source-atlas/generated/production-target-ledger/train-86/production-target-ledger.json",
+  "recordCounts": {
+    "blockedConfiguredWorkOrders": 0,
+    "candidateRoutes": 2,
+    "candidateWorkOrders": 26,
+    "claims": 0,
+    "configuredBlockedRoutes": 0,
+    "executeOperations": 0,
+    "finalOutputArtifacts": 0,
+    "liveOperations": 0,
+    "maintenanceWorkOrders": 4,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "productionReadyRoutes": 1,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "routes": 3,
+    "workOrders": 30
+  },
+  "routerManifestPath": "tools/source-atlas/generated/goal-domain-router/train-88-fixture/manifest.json",
+  "routerOutputPath": "tools/source-atlas/generated/goal-domain-router/train-88-fixture/goal-domain-routing.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; autonomous production-lane work orders only",
+  "status": "Source Green for goal-domain production-lane work-order tooling",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-production-lanes-train-89"
+}

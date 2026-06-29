@@ -1,0 +1,192 @@
+{
+  "apiPolicies": [
+    "api.static_public_page.v1"
+  ],
+  "blockedCounts": {
+    "restrictedExclusions": 0
+  },
+  "budgetLimits": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "irs.when_to_file"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "cfpb.adult_financial_education"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "usa.gov.benefits"
+    }
+  ],
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "fixture_first_default",
+      "passed": true
+    },
+    {
+      "name": "live_modes_require_live_flag",
+      "passed": true
+    },
+    {
+      "name": "execute_modes_require_execute_flag",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_emit_exclusion_proof",
+      "passed": true
+    },
+    {
+      "name": "evidence_hashes_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "entries": [
+    {
+      "adapterID": "irs_when_to_file_tax_deadline_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/irs.when_to_file.json",
+      "evidenceSHA256": "ff168e904ccfe775bdb71e3e0ac3447ae73a522a6c32c7f78fb1206a9c7413bd",
+      "normalizedPath": "normalized/irs.when_to_file.json",
+      "normalizedSHA256": "39c05ff224665203c0e53c97995c4b2c46efc3b3f7d269e56e66b54e2c207dc7",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "irs.when_to_file",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "cfpb_adult_financial_education_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/cfpb.adult_financial_education.json",
+      "evidenceSHA256": "07c90eedb7bee823e729d748a9f7a341783f6c5a9b4a66080548259fc64e52d3",
+      "normalizedPath": "normalized/cfpb.adult_financial_education.json",
+      "normalizedSHA256": "c7ae9fb6439430c2fb1abbd0bca86a6520054885db255a5685dc45d8df763ae2",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "cfpb.adult_financial_education",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "usagov_benefits_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/usa.gov.benefits.json",
+      "evidenceSHA256": "6f08754633aa7184549095b4906e2de0ac57f9fe5bd8fd4bf9fd9a9f87183705",
+      "normalizedPath": "normalized/usa.gov.benefits.json",
+      "normalizedSHA256": "ce838c4313015079ae2ee3f1f6d2817eefbd262af659d497c0086db0511552d8",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "usa.gov.benefits",
+      "status": "harvested"
+    }
+  ],
+  "errorCounts": {
+    "issues": 0,
+    "privacyIssues": 0
+  },
+  "evidenceHashes": [
+    {
+      "evidenceHash": "a717cd4de8c890abd676993ccf184eb83140b3796e710924f76431a5f4208ee2",
+      "sha256": "ff168e904ccfe775bdb71e3e0ac3447ae73a522a6c32c7f78fb1206a9c7413bd",
+      "sourceID": "irs.when_to_file"
+    },
+    {
+      "evidenceHash": "5f595e36b17485dfc18e86304b006b335f5bb31740c3ddbfbe490236a0261ce1",
+      "sha256": "07c90eedb7bee823e729d748a9f7a341783f6c5a9b4a66080548259fc64e52d3",
+      "sourceID": "cfpb.adult_financial_education"
+    },
+    {
+      "evidenceHash": "2ad7bf0b50f3dcd511c4c737ce4acddc868394bc59be4c67f01d756ec4d29c56",
+      "sha256": "6f08754633aa7184549095b4906e2de0ac57f9fe5bd8fd4bf9fd9a9f87183705",
+      "sourceID": "usa.gov.benefits"
+    }
+  ],
+  "executeRequested": false,
+  "finishedAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governedHarvestRunManifest.v1",
+  "liveRequested": false,
+  "manifestInputHash": "3dce6b77853de34213713068809ea26312da9a4903a96db03483a62d75fdb3a8",
+  "manifestPath": "tools/source-atlas/generated/governed-harvest/train-47-finance-fixture/train-47-finance-fixture/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not live production harvest proof unless --live evidence is separately reviewed",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputPaths": [
+    "normalized/irs.when_to_file.json",
+    "evidence/irs.when_to_file.json",
+    "normalized/cfpb.adult_financial_education.json",
+    "evidence/cfpb.adult_financial_education.json",
+    "normalized/usa.gov.benefits.json",
+    "evidence/usa.gov.benefits.json"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "claims": 3,
+    "packCandidates": 3,
+    "records": 0,
+    "sourcesBlocked": 0,
+    "sourcesHarvested": 3,
+    "sourcesSelected": 3
+  },
+  "restrictedExclusions": [],
+  "runID": "train-47-finance-fixture",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governed harvest runner only",
+  "sourceLanes": [
+    "irs.when_to_file",
+    "cfpb.adult_financial_education",
+    "usa.gov.benefits"
+  ],
+  "status": "Source Green for governed harvest runner",
+  "valid": true,
+  "versionID": "source-atlas-governed-harvest-runner-v1"
+}

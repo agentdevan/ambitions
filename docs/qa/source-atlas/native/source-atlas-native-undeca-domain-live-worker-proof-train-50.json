@@ -1,0 +1,261 @@
+{
+  "activeTargetCount": 11,
+  "artifactID": "source_atlas_native_undeca_domain_live_worker_proof.train50",
+  "bundledNativeRegistryArtifact": "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+  "checks": [
+    {
+      "name": "native_registry_compiler_valid",
+      "passed": true
+    },
+    {
+      "name": "bundled_resource_updated_to_undeca_artifact",
+      "passed": true
+    },
+    {
+      "name": "personal_growth_worker_gateway_readback_valid",
+      "passed": true
+    },
+    {
+      "executedTests": 16,
+      "name": "remote_transport_live_worker_suite_passed",
+      "passed": true
+    },
+    {
+      "executedTests": 17,
+      "name": "lifecycle_live_worker_suite_passed",
+      "passed": true
+    },
+    {
+      "executedTests": 9,
+      "name": "fetch_pipeline_suite_passed",
+      "passed": true
+    },
+    {
+      "executedTests": 8,
+      "name": "registry_loader_suite_passed",
+      "passed": true
+    },
+    {
+      "executedTests": 4,
+      "name": "app_container_suite_passed",
+      "passed": true
+    },
+    {
+      "name": "final_build_for_testing_passed",
+      "passed": true
+    },
+    {
+      "name": "no_private_context_in_registry_targets",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domains": [
+    "business_entrepreneurship",
+    "creative_project_reference",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "hobbies_recreation",
+    "home_life_admin",
+    "occupation_foundation",
+    "personal_growth",
+    "public_civic_requirements",
+    "travel_relocation"
+  ],
+  "kind": "ambitions.sourceAtlas.nativeLiveWorkerGatewayProof.v1",
+  "nativeRegistryArtifact": "tools/source-atlas/generated/native-refresh-registry/train-50-undeca-live-worker-gateway/source-atlas-public-refresh-targets.json",
+  "nativeRegistryArtifactID": "source_atlas_public_refresh_targets.train50_undeca_live_worker_gateway",
+  "native_runtime_proofs": [
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "business_entrepreneurship",
+      "target_pack_id": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+      "target_pack_sha256": "04d9eaf6f96b1271982a356664a570c74ed946e3145be96bcf636e7f1e561af6"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "creative_project_reference",
+      "target_pack_id": "source-atlas/v1/domain/creative_project_reference/20260628T000000Z",
+      "target_pack_sha256": "32d55d50f4a8e3f69055cbf4eceddc0f316020449f274b040c1d64b77faba3d4"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "education_credentialing",
+      "target_pack_id": "source-atlas/v1/domain/education_credentialing/20260628T000000Z",
+      "target_pack_sha256": "95e7809997ba010db59cee5925bf9f713d85b70bf7e9e84eae961bd615919b3e"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "finance_public_reference",
+      "target_pack_id": "source-atlas/v1/domain/finance_public_reference/20260628T000000Z",
+      "target_pack_sha256": "ca23807f8cae55bf052600a90ca205ff3436f987e5d97f8518e96cd300bd0c19"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "health_wellness_reference",
+      "target_pack_id": "source-atlas/v1/domain/health_wellness_reference/20260628T000000Z",
+      "target_pack_sha256": "b84001256a9bbb06c26e1656bb04a04217078ce77d7790aaab41656dd67ea301"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "hobbies_recreation",
+      "target_pack_id": "source-atlas/v1/domain/hobbies_recreation/20260628T000000Z",
+      "target_pack_sha256": "7768a3f7867ddb9f184c16989ebd7444c31c7053bfbd4375198a0f6199eb7638"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "home_life_admin",
+      "target_pack_id": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+      "target_pack_sha256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "occupation_foundation",
+      "target_pack_id": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+      "target_pack_sha256": "55f2ae4593e40e30fe9aa48d0dab4988f186bc889cf225b3db2676b77e1d1ea3"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "personal_growth",
+      "target_pack_id": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+      "target_pack_sha256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "public_civic_requirements",
+      "target_pack_id": "source-atlas/v1/domain/public_civic_requirements/20260628T041500Z",
+      "target_pack_sha256": "bd6cb0923a4d438ad0a146c83908abf4c9be6301a51af92ccc32e037848115a6"
+    },
+    {
+      "default_app_container_wired": true,
+      "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests",
+      "offline_app_container_test": "AppContainerFactoryTests",
+      "startup_registry_test": "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "target_domain": "travel_relocation",
+      "target_pack_id": "source-atlas/v1/domain/travel_relocation/20260628T000000Z",
+      "target_pack_sha256": "ab6f77b1c8ba9c4c7667334b01f16080c0412c621f2055d473468a6625a7483f"
+    }
+  ],
+  "nonClaims": [
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store readiness",
+    "not universal coverage",
+    "not entitlement readiness",
+    "not background execution proof",
+    "not mental health treatment, diagnosis, therapy, or emergency advice",
+    "not final user plans, schedules, Steps, or individualized paths from Source Atlas/R2",
+    "not private graph storage"
+  ],
+  "personalGrowth": {
+    "manifestSHA256": "f14ed920bd66269924e80a3ebe1304380b0e04557a4c8dd9545563227d340e0e",
+    "packID": "source-atlas/v1/domain/personal_growth/20260628T000000Z",
+    "packSHA256": "01e67a2f783214af26713fac95c1864e9c8050dc5436096f9ca4c49e4f65e7d9",
+    "status": "accepted_current_public_reference_pack"
+  },
+  "privacyBoundary": "public/reference/freshness only; no goals, captures, schedules, proof, receipts, account IDs, device IDs, behavior history, personalization data, private personal-growth reflections, or private life graph context may be sent to R2",
+  "product_law_preserved": true,
+  "proofArtifacts": {
+    "appContainerSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115555Z-AmbitionsTests-AppContainerFactoryTests-50795-6103/focused-test-summary.json",
+    "buildForTestingSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115245Z-bft-48171-5637/build-for-testing-summary.json",
+    "fetchPipelineSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115453Z-AmbitionsTests-SourceAtlasPublicPackFetchPipelineTests-49841-3279/focused-test-summary.json",
+    "lifecycleSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115410Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-49211-8827/focused-test-summary.json",
+    "nativeRegistryApproval": "docs/qa/source-atlas/native/source-atlas-native-public-refresh-target-registry-undeca-domain-approval-train-50.json",
+    "nativeRegistryReport": "docs/qa/source-atlas/native/source-atlas-native-refresh-registry-undeca-domain-train-50.json",
+    "r2PublisherProof": "docs/qa/source-atlas/r2/source-atlas-personal-growth-r2-publisher-remote-r2-train-50.json",
+    "r2WorkerReadbackProof": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-personal-growth-readback-train-50.json",
+    "registryLoaderSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115522Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-50307-15169/focused-test-summary.json",
+    "remoteTransportSummary": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115329Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-48593-20735/focused-test-summary.json"
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Green for bounded undeca-domain native public registry/live Worker transport proof; Yellow overall Source Atlas",
+  "status": "green_for_bounded_undeca_domain_worker_gateway_live_transport_yellow_overall_source_atlas",
+  "targetCount": 11,
+  "valid": true,
+  "validation_run": [
+    {
+      "name": "build_for_testing",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115245Z-bft-48171-5637/build-for-testing-summary.json",
+      "proof_note": "Test Build Succeeded; FAILURE_CLASS=passed",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 16,
+      "name": "remote_transport",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115329Z-AmbitionsTests-SourceAtlasPublicPackRemoteTransportTests-48593-20735/focused-test-summary.json",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 17,
+      "name": "lifecycle_refresh",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115410Z-AmbitionsTests-SourceAtlasPublicPackLifecycleRefreshServiceTests-49211-8827/focused-test-summary.json",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 9,
+      "name": "fetch_pipeline",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115453Z-AmbitionsTests-SourceAtlasPublicPackFetchPipelineTests-49841-3279/focused-test-summary.json",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 8,
+      "name": "registry_loader",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115522Z-AmbitionsTests-SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests-50307-15169/focused-test-summary.json",
+      "status": "passed"
+    },
+    {
+      "executed_tests": 4,
+      "name": "app_container_offline_no_account",
+      "path": ".codex/xcode-summaries/SOURCE_ATLAS_TRAIN_50_UNDECA_LIVE_FULL/20260628T115555Z-AmbitionsTests-AppContainerFactoryTests-50795-6103/focused-test-summary.json",
+      "status": "passed"
+    }
+  ],
+  "workerURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "workerVersionID": "9f1c93a9-2c31-494c-9087-e05af5cddc60"
+}

@@ -1,0 +1,50 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "DataCatalog",
+      "name": "Public Learning Resource Catalog",
+      "url": "https://example.edu/public-learning-resources"
+    },
+    {
+      "@type": "Dataset",
+      "name": "Open Language Learning Resource Index",
+      "description": "Public metadata for language learning reference resources.",
+      "keywords": "language, education, learning",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Example Public University",
+        "url": "https://example.edu/"
+      },
+      "url": "https://example.edu/public-learning-resources/language-index",
+      "license": "CC-BY-4.0",
+      "terms_url": "https://example.edu/terms",
+      "rights": "https://example.edu/terms",
+      "distribution": {
+        "@type": "DataDownload",
+        "contentUrl": "https://example.edu/public-learning-resources/language-index.json",
+        "encodingFormat": "application/json"
+      }
+    },
+    {
+      "@type": "Dataset",
+      "name": "Public Civic Form Reference Metadata",
+      "description": "Public metadata for civic form references.",
+      "keywords": "civic, form, government",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Example City Government",
+        "url": "https://example.gov/"
+      },
+      "url": "https://example.gov/public-civic-form-reference",
+      "license": "",
+      "terms_url": "",
+      "rights": "",
+      "distribution": {
+        "@type": "DataDownload",
+        "contentUrl": "https://example.gov/public-civic-form-reference.json",
+        "encodingFormat": "application/json"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "us_federal_public_source",
+      "license_name": "U.S. federal public source with citation required",
+      "license_url": "https://www.usa.gov/government-works",
+      "non_claims": [
+        "not outside legal approval",
+        "not a legal interpretation",
+        "source-specific terms still control"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://www.usa.gov/government-works",
+      "terms_url": "https://www.usa.gov/government-works"
+    }
+  ]
+}

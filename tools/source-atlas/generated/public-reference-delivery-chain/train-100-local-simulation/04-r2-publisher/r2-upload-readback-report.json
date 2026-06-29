@@ -1,0 +1,264 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "currentPointer": {
+    "blockedUntilReadback": true,
+    "bytes": 1869,
+    "issues": [],
+    "key": "source-atlas/v1/staging/candidate/occupation_foundation/current.json",
+    "sha256": "f08f4df9a3efd5ac163a810455b6db48dc8ae602e9f66ea44ed5bc76206fa778",
+    "updated": true
+  },
+  "dataClass": "public_r2_object_key",
+  "dryRun": false,
+  "executeRequested": true,
+  "executed": true,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2PublisherOperation.v1",
+  "localStoreRoot": "tools/source-atlas/generated/public-reference-delivery-chain/train-100-local-simulation/local-r2-store",
+  "mode": "local_simulation",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator",
+    "not real R2 credentials proof",
+    "not production R2 upload proof",
+    "not stable production promotion",
+    "not native app runtime readiness",
+    "not release readiness"
+  ],
+  "previousPointers": {
+    "current": {
+      "exists": false,
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/current.json"
+    },
+    "lastKnownGood": {
+      "exists": false,
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/lkg.json"
+    }
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "publicReferenceOnly": true,
+  "readbackResults": [
+    {
+      "actualSHA256": "4c117d54f213982672a7fe21a37f783c9405d824904f9da70169b3c00a1162b2",
+      "bytes": 9461,
+      "expectedSHA256": "4c117d54f213982672a7fe21a37f783c9405d824904f9da70169b3c00a1162b2",
+      "label": "adjudications",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/adjudications.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "3210c24f0cff7e64790e984634a9531378e55ff9e51728d70c41c215539cef3a",
+      "bytes": 5575,
+      "expectedSHA256": "3210c24f0cff7e64790e984634a9531378e55ff9e51728d70c41c215539cef3a",
+      "label": "attribution",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/attribution.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "bc18e2569b4f177788a5fde9a9d618a7e46750b61b8d50a1f4c16f34fca5490b",
+      "bytes": 55599,
+      "expectedSHA256": "bc18e2569b4f177788a5fde9a9d618a7e46750b61b8d50a1f4c16f34fca5490b",
+      "label": "claims",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/claims.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "af55b53a194773048709cafe562a3ad54edcd8114623e6ccdaf0304c8fd4a907",
+      "bytes": 2865,
+      "expectedSHA256": "af55b53a194773048709cafe562a3ad54edcd8114623e6ccdaf0304c8fd4a907",
+      "label": "coverage",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/coverage.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "c03a4a1f62b21ba6c57295f14425f27f79cbcd8c3b83f505440f1f05fa6138d6",
+      "bytes": 11676,
+      "expectedSHA256": "c03a4a1f62b21ba6c57295f14425f27f79cbcd8c3b83f505440f1f05fa6138d6",
+      "label": "entities",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/entities.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "c61c37ae0e24cfdd4950812b9d9b5219092486a8ff2ff8bee7ce37f6684a966c",
+      "bytes": 13413,
+      "expectedSHA256": "c61c37ae0e24cfdd4950812b9d9b5219092486a8ff2ff8bee7ce37f6684a966c",
+      "label": "freshness",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/freshness.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "d2ec80ded087fc9244320ef3e3c2999d2af4667945a5e7bcea5689cb5abbae90",
+      "bytes": 2563,
+      "expectedSHA256": "d2ec80ded087fc9244320ef3e3c2999d2af4667945a5e7bcea5689cb5abbae90",
+      "label": "licenses",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/licenses.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "7de4c8dc9936ed7b4ca28a0fe98ee5af153599187a6e7196825efe214f3697f7",
+      "bytes": 1259,
+      "expectedSHA256": "7de4c8dc9936ed7b4ca28a0fe98ee5af153599187a6e7196825efe214f3697f7",
+      "label": "lkg",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/lkg.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "1c8ec834a6471031d728273705c88015ffa1f3c14bbb945236baef42a869f97e",
+      "bytes": 8987,
+      "expectedSHA256": "1c8ec834a6471031d728273705c88015ffa1f3c14bbb945236baef42a869f97e",
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/manifest.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "8ea2cd75c0b28ca05ad514bf4b9598a8335de89d24173685a54991969e5da5d8",
+      "bytes": 1172,
+      "expectedSHA256": "8ea2cd75c0b28ca05ad514bf4b9598a8335de89d24173685a54991969e5da5d8",
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/non_claims.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "6d7a41ae347de67406300f0165df87d62249956c2c0dd7ddc0c3c03dc7056d52",
+      "bytes": 97747,
+      "expectedSHA256": "6d7a41ae347de67406300f0165df87d62249956c2c0dd7ddc0c3c03dc7056d52",
+      "label": "pack",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/pack.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "10feb39e0f33c1dcfd317cccd76c428683d726acf96b2b70f1c9d423fb20caee",
+      "bytes": 1405,
+      "expectedSHA256": "10feb39e0f33c1dcfd317cccd76c428683d726acf96b2b70f1c9d423fb20caee",
+      "label": "revocations",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/revocations.json",
+      "passed": true,
+      "status": "readback"
+    },
+    {
+      "actualSHA256": "556410785f1fe6dee1ef6f5acb8b1fff13ccbc04920f9f51d421305ba17182c5",
+      "bytes": 3860,
+      "expectedSHA256": "556410785f1fe6dee1ef6f5acb8b1fff13ccbc04920f9f51d421305ba17182c5",
+      "label": "sources",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/sources.json",
+      "passed": true,
+      "status": "readback"
+    }
+  ],
+  "schemaVersion": 1,
+  "success": true,
+  "uploadResults": [
+    {
+      "bytes": 9461,
+      "expectedSHA256": "4c117d54f213982672a7fe21a37f783c9405d824904f9da70169b3c00a1162b2",
+      "label": "adjudications",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/adjudications.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 5575,
+      "expectedSHA256": "3210c24f0cff7e64790e984634a9531378e55ff9e51728d70c41c215539cef3a",
+      "label": "attribution",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/attribution.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 55599,
+      "expectedSHA256": "bc18e2569b4f177788a5fde9a9d618a7e46750b61b8d50a1f4c16f34fca5490b",
+      "label": "claims",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/claims.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 2865,
+      "expectedSHA256": "af55b53a194773048709cafe562a3ad54edcd8114623e6ccdaf0304c8fd4a907",
+      "label": "coverage",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/coverage.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 11676,
+      "expectedSHA256": "c03a4a1f62b21ba6c57295f14425f27f79cbcd8c3b83f505440f1f05fa6138d6",
+      "label": "entities",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/entities.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 13413,
+      "expectedSHA256": "c61c37ae0e24cfdd4950812b9d9b5219092486a8ff2ff8bee7ce37f6684a966c",
+      "label": "freshness",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/freshness.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 2563,
+      "expectedSHA256": "d2ec80ded087fc9244320ef3e3c2999d2af4667945a5e7bcea5689cb5abbae90",
+      "label": "licenses",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/licenses.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1259,
+      "expectedSHA256": "7de4c8dc9936ed7b4ca28a0fe98ee5af153599187a6e7196825efe214f3697f7",
+      "label": "lkg",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/lkg.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 8987,
+      "expectedSHA256": "1c8ec834a6471031d728273705c88015ffa1f3c14bbb945236baef42a869f97e",
+      "label": "manifest",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/manifest.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1172,
+      "expectedSHA256": "8ea2cd75c0b28ca05ad514bf4b9598a8335de89d24173685a54991969e5da5d8",
+      "label": "nonClaims",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/non_claims.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 97747,
+      "expectedSHA256": "6d7a41ae347de67406300f0165df87d62249956c2c0dd7ddc0c3c03dc7056d52",
+      "label": "pack",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/pack.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 1405,
+      "expectedSHA256": "10feb39e0f33c1dcfd317cccd76c428683d726acf96b2b70f1c9d423fb20caee",
+      "label": "revocations",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/revocations.json",
+      "status": "uploaded"
+    },
+    {
+      "bytes": 3860,
+      "expectedSHA256": "556410785f1fe6dee1ef6f5acb8b1fff13ccbc04920f9f51d421305ba17182c5",
+      "label": "sources",
+      "objectKey": "source-atlas/v1/staging/candidate/occupation_foundation/20260628T000000Z/sources.json",
+      "status": "uploaded"
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "activeRegistryMutations": [],
+  "allowActiveRegistryWrite": false,
+  "blockedRegistryMutations": [],
+  "checks": [
+    {
+      "issues": [],
+      "name": "plan_shape_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "plan_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "target_registries_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "planned_mutations_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "duplicate_ids_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_gate",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_governance_registry_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "dry_run_writes_no_active_registries",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "execute_writes_only_after_validation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "applier_emits_no_claims_or_packs",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T22:20:00Z",
+  "executeRequested": false,
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogRegistryApplier.v1",
+  "nonClaims": [
+    "not source authority without completed approval artifact",
+    "not outside legal approval",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "candidateApiGovernanceRegistry": "c656190697aede2688200c4b1970b78a429b1736f39f0a77828ea6c7d3fc5aa5",
+    "candidateLegalTermsRegistry": "db4c0bee2de86a89d4cf268ef9ead2a829740f1bb5523efb91610fb6aad9df66",
+    "candidateSourceLaneRegistry": "4ec7523fcab5a7ab22e5a9381a74c1070aae98e5216dc7ff3c6826c1ba50c6cb",
+    "report": "211de74b13d92a824d8165881585d686e47509169e981adca7cae5575c1c40b3"
+  },
+  "outputPaths": {
+    "activeRegistryMutations": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/04-rehearsal-active-apply-gate/applier-dry-run/catalog-applier/active-registry-mutations.json",
+    "blockedRegistryMutations": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/04-rehearsal-active-apply-gate/applier-dry-run/catalog-applier/blocked-registry-mutations.json",
+    "candidateApiGovernanceRegistry": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/04-rehearsal-active-apply-gate/applier-dry-run/catalog-applier/candidate-api-governance-registry.json",
+    "candidateLegalTermsRegistry": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/04-rehearsal-active-apply-gate/applier-dry-run/catalog-applier/candidate-legal-terms-registry.json",
+    "candidateSourceLaneRegistry": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/04-rehearsal-active-apply-gate/applier-dry-run/catalog-applier/candidate-source-lane-registry.json",
+    "closeout": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/04-rehearsal-active-apply-gate/applier-dry-run/catalog-applier/closeout.md",
+    "report": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/04-rehearsal-active-apply-gate/applier-dry-run/catalog-applier/catalog-registry-applier-report.json"
+  },
+  "planPath": "tools/source-atlas/generated/autonomous-registry-activation-chain/train-108-current/04-rehearsal-active-apply-gate/applier-dry-run/normalized-planned-registry-mutations.json",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionNonClaims": [
+    "no production R2 upload",
+    "no app runtime Green",
+    "no release Green",
+    "no universal coverage",
+    "no outside legal approval",
+    "no final user plan, schedule, or Step generation"
+  ],
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedRegistryMutations": 0,
+    "candidateRegistryMutations": 1,
+    "claims": 0,
+    "packableClaims": 0,
+    "plannedRegistryMutations": 1,
+    "r2PackableArtifacts": 0
+  },
+  "registryValidation": {
+    "apiPolicyCount": 11,
+    "checks": [
+      {
+        "name": "source_lane_registry_schema_exists",
+        "passed": true
+      },
+      {
+        "name": "legal_terms_registry_schema_exists",
+        "passed": true
+      },
+      {
+        "name": "api_governance_registry_schema_exists",
+        "passed": true
+      },
+      {
+        "name": "source_lanes_have_required_posture",
+        "passed": true
+      },
+      {
+        "name": "legal_terms_have_required_posture",
+        "passed": true
+      },
+      {
+        "name": "api_policies_have_required_posture",
+        "passed": true
+      },
+      {
+        "name": "wikidata_crosswalk_only",
+        "passed": true
+      },
+      {
+        "name": "openalex_high_volume_gated",
+        "passed": true
+      },
+      {
+        "name": "bls_v1_v2_modes_represented",
+        "passed": true
+      },
+      {
+        "name": "usajobs_r2_pack_blocked",
+        "passed": true
+      },
+      {
+        "name": "legal_registry_present",
+        "passed": true
+      },
+      {
+        "name": "private_r2_key_validation",
+        "passed": true
+      },
+      {
+        "name": "no_final_plan_schedule_step_output",
+        "passed": true
+      }
+    ],
+    "createdAt": "2026-06-28T20:33:47Z",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.governanceRegistryValidation.v1",
+    "legalEntryCount": 27,
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "schemaPaths": {
+      "apiGovernance": "tools/source-atlas/governance/schemas/api-governance-registry.schema.json",
+      "legalTerms": "tools/source-atlas/governance/schemas/legal-terms-registry.schema.json",
+      "sourceLane": "tools/source-atlas/governance/schemas/source-lane-registry.schema.json"
+    },
+    "schemaVersion": 1,
+    "sourceLaneCount": 34,
+    "status": "Source Green for governance tooling",
+    "statusCeiling": "Yellow overall Source Atlas; governance tooling only",
+    "valid": true
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; registry applier tooling only",
+  "status": "Source Green for approval-gated catalog registry applier tooling",
+  "targetRegistryPaths": {
+    "apiGovernanceRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/api-governance-registry.json",
+    "legalTermsRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/legal-terms-registry.json",
+    "sourceLaneRegistry": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/governance/source-lane-registry.json"
+  },
+  "valid": true,
+  "versionID": "source-atlas-catalog-registry-applier-train-60"
+}

@@ -1,0 +1,111 @@
+{
+  "baselineHead": "a370bd92b",
+  "status": "Source Green for catalog direct-source review completion assembler tooling / Yellow overall Source Atlas",
+  "scopeCompleted": [
+    "Added Train 73 direct-source review completion assembler.",
+    "Added CLI command catalog-direct-source-review-completion.",
+    "Added focused Train 73 tests for blocked evidence, completed fixture handoff through Train 71 and Train 67, legal artifact blocking, catalog-candidate rejection, private-context rejection, and stable ordering.",
+    "Generated Train 73 live data.gov evidence from Train 72 templates with no review evidence, preserving blocked status.",
+    "Generated Train 73 to Train 71 gate integration evidence, preserving blocked status."
+  ],
+  "filesChanged": [
+    "tools/source-atlas/foundry/catalog_direct_source_review_completion.py",
+    "tools/source-atlas/foundry/cli.py",
+    "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_completion_train_73.py",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73-gate-integration.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73-gate-integration.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73-closeout.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73-closeout.md",
+    "tools/source-atlas/generated/catalog-direct-source-review-completion/train-73-live-data-gov/",
+    "tools/source-atlas/generated/catalog-direct-source-review-completion/train-73-gate-integration/"
+  ],
+  "productLawPreserved": [
+    "No private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context are accepted or emitted.",
+    "No active registry mutations are emitted.",
+    "No claim output, pack output, R2 object, final user path, final schedule, Step list, or personalized plan is emitted.",
+    "Source Atlas remains public/reference tooling only."
+  ],
+  "validationRun": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_catalog_direct_source_review_completion_train_73.py -> 6 passed",
+    "PYTHONPATH=tools/source-atlas python3 -m foundry.cli catalog-direct-source-review-completion ... -> valid true, 4 templates, 0 evidence records, 4 blocked, 0 completed, 0 claims, 0 R2 artifacts",
+    "PYTHONPATH=tools/source-atlas python3 -m foundry.cli catalog-direct-source-review-gate ... -> valid true, 4 blocked source-review completion packets, 0 completed, 0 claims, 0 R2 artifacts",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 316 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "python3 -m json.tool on Train 73 report, gate integration report, and manifest -> PASS",
+    "git diff --check -> PASS"
+  ],
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Native XCTest/build-for-testing was not run because this train touched Source Atlas foundry tooling only.",
+    "Outside legal approval was not run or claimed.",
+    "Native device/offline proof was not run."
+  ],
+  "proofArtifacts": [
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73-gate-integration.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73-gate-integration.md",
+    "tools/source-atlas/generated/catalog-direct-source-review-completion/train-73-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-completion/train-73-gate-integration/manifest.json"
+  ],
+  "knownRisks": [
+    "Live data.gov direct-source candidates remain blocked because no source-specific reviewer evidence was supplied.",
+    "This train proves an assembler lane, not source authority, legal approval, pack production, production R2, or app runtime behavior.",
+    "The broader worktree contains many unrelated local changes that were not reverted or validated as part of this train."
+  ],
+  "followUpRequired": [
+    "Supply source-specific reviewer evidence artifacts only for sources with reviewed authority, legal/terms, API, attribution, and packability posture.",
+    "Run completed evidence through Train 73, Train 71, Train 67, and downstream approval-chain gates before any registry mutation plan.",
+    "Keep production R2 writes gated on owner approval, legal artifacts, no-private scans, checksum/readback, revocation, LKG, and rollback proof."
+  ],
+  "rollbackPlan": [
+    "Remove Train 73 module and CLI command.",
+    "Remove Train 73 focused tests.",
+    "Remove Train 73 generated evidence and QA closeout artifacts.",
+    "No active registry, R2, pack, or native runtime rollback is required because this train did not mutate those systems."
+  ],
+  "finalArchitectureTreeInspected": true,
+  "canonicalOwnersTouched": [
+    "tools/source-atlas/foundry",
+    "tools/source-atlas/generated",
+    "docs/qa/source-atlas/domain-expansion"
+  ],
+  "nonCanonicalOwnersTouched": [],
+  "filesMovedOrCreated": [
+    "tools/source-atlas/foundry/catalog_direct_source_review_completion.py",
+    "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_completion_train_73.py",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73-closeout.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-completion-train-73-closeout.md"
+  ],
+  "oldNonCanonicalPathsRemoved": [],
+  "compatibilityShimsLeftBehind": [],
+  "architectureDebt": "No new architecture tree debt; tooling-only train outside native Final Architecture Tree.",
+  "nextRepairTrainIfDebtRemains": "",
+  "noEquivalentFolderInterpretationUsed": true,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; Train 73 direct-source review completion assembler tooling only.",
+  "r2RequestPrivacyProof": "No R2 requests or object keys emitted by Train 73. Boundary audit and no-private-egress audit passed.",
+  "noPrivateGraphEgressProof": "Train 73 privacy scans passed; source-atlas-no-private-graph-egress-audit.py passed.",
+  "licenseTermsProof": "Completed packets require legal_terms_entry and outside legal artifact when required; no live legal approval was supplied or claimed.",
+  "restrictedSourceExclusionProof": "Catalog/direct-source candidates without completed review evidence remain blocked and cannot become claim/pack output.",
+  "provenanceCompletenessProof": "Not applicable to packable claims; Train 73 emitted zero claims and zero packable claims.",
+  "freshnessRevocationProof": "Not applicable; no pack, revocation manifest, or R2 object emitted.",
+  "lkgRollbackProof": "Not applicable; no stable pointer, LKG pointer, or R2 object emitted.",
+  "nativeOfflineNoAccountProof": "Not run; no native files touched by Train 73.",
+  "productionNonClaims": [
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness"
+  ]
+}

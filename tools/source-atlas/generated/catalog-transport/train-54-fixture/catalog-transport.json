@@ -1,0 +1,112 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "discoveryManifestPath": "tools/source-atlas/generated/catalog-transport/train-54-fixture/catalog-discovery/manifest.json",
+  "executeRequested": false,
+  "kind": "ambitions.sourceAtlas.catalogTransport.v1",
+  "liveRequested": false,
+  "mode": "fixture",
+  "nonClaims": [
+    "not source authority",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not legal approval",
+    "not outside legal approval",
+    "not universal coverage",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "planPath": "tools/source-atlas/fixtures/catalog-transport/train-54-catalog-transport-plan.json",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "candidateSources": 6,
+    "catalogs": 3,
+    "claims": 0,
+    "endpoints": 3,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "snapshots": 3
+  },
+  "schemaVersion": 1,
+  "snapshotRoot": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots",
+  "transportEntries": [
+    {
+      "blocking_reasons": [],
+      "claim_authority_allowed": false,
+      "content_type": "application/json",
+      "endpoint_id": "data-json-public-catalog",
+      "evidence_hash": "495c3b75a78f619aac0316fd5d976b5016f9b1e68b2179a622890f49d9be1002",
+      "http_status": 200,
+      "mode": "transport",
+      "non_claims": [
+        "catalog transport metadata only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output"
+      ],
+      "pack_output_allowed": false,
+      "retrieval_method": "fixture_snapshot",
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "sha256": "99691d75836abc96bbffc98c8e8cb3f8ad4b0143b341b3030e7b2335fd947e43",
+      "snapshot_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/data-json-public-catalog.json",
+      "status": "fetched",
+      "truncated": false,
+      "url": "https://catalog.example.gov/data.json"
+    },
+    {
+      "blocking_reasons": [],
+      "claim_authority_allowed": false,
+      "content_type": "application/json",
+      "endpoint_id": "ckan-package-search-public-catalog",
+      "evidence_hash": "45a09983184d5c0109460933dd72ee65d4c97744231a657450a16a085d4ecb40",
+      "http_status": 200,
+      "mode": "transport",
+      "non_claims": [
+        "catalog transport metadata only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output"
+      ],
+      "pack_output_allowed": false,
+      "retrieval_method": "fixture_snapshot",
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "sha256": "ffb82f9e8c3dcde2d8b414de89ff698cbac2e3b00d946a1b95a016ef5750b9ef",
+      "snapshot_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/ckan-package-search-public-catalog.json",
+      "status": "fetched",
+      "truncated": false,
+      "url": "https://catalog.example.gov/api/3/action/package_search?q=public_reference"
+    },
+    {
+      "blocking_reasons": [],
+      "claim_authority_allowed": false,
+      "content_type": "application/json",
+      "endpoint_id": "schema-org-public-catalog",
+      "evidence_hash": "a84f5b1ba1da2654c0236ffc140afbfe67a4a97623b6aa09b1d02fee2bfe3a9a",
+      "http_status": 200,
+      "mode": "transport",
+      "non_claims": [
+        "catalog transport metadata only",
+        "not claim authority",
+        "not redistribution approval",
+        "not pack output"
+      ],
+      "pack_output_allowed": false,
+      "retrieval_method": "fixture_snapshot",
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "review_required": true,
+      "sha256": "9352edbd8a8966b3e993c2206ca11329804343bc72f1059fa4f1e2c8e142aa0f",
+      "snapshot_path": "tools/source-atlas/generated/catalog-transport/train-54-fixture/snapshots/schema-org-public-catalog.json",
+      "status": "fetched",
+      "truncated": false,
+      "url": "https://example.edu/public-learning-resources/catalog.jsonld"
+    }
+  ],
+  "versionID": "source-atlas-catalog-transport-train-54"
+}

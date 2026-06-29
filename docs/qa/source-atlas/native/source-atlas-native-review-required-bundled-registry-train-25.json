@@ -1,0 +1,155 @@
+{
+  "train": "Source Atlas Production Finish-Line Train 25",
+  "linear_issue": "AMB-1511",
+  "date": "2026-06-28",
+  "status": "Green for native bundled review-required refresh registry artifact path / Yellow overall Source Atlas",
+  "scope_completed": [
+    "Bundled the Train 24 generated review-required registry artifact into the Ambitions app resources",
+    "Updated project.yml so XcodeGen emits explicit resources build-phase entries",
+    "Regenerated Ambitions.xcodeproj with PBXResourcesBuildPhase containing source-atlas-public-refresh-targets.json",
+    "Kept the default native loader pointed at source-atlas-public-refresh-targets.json",
+    "Added bundle lookup robustness for the default artifact resource",
+    "Proved the bundled artifact exactly matches the generated Train 24 fixture artifact",
+    "Proved the built simulator app contains source-atlas-public-refresh-targets.json",
+    "Added focused native tests proving the bundled artifact is review-required and selects no target",
+    "Updated the app-container lifecycle test so offline startup sees the review-required entry without activating transport"
+  ],
+  "files_changed": [
+    "project.yml",
+    "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift",
+    "Native/AmbitionsTests/App/AppContainerFactoryTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-review-required-bundled-registry-train-25.md",
+    "docs/qa/source-atlas/native/source-atlas-native-review-required-bundled-registry-train-25.json"
+  ],
+  "product_law_preserved": true,
+  "final_architecture_tree": {
+    "inspected": true,
+    "canonical_owners_touched": [
+      "Core/Persistence",
+      "project.yml app resource wiring"
+    ],
+    "noncanonical_owners_touched": [],
+    "files_moved_or_created": [
+      "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+      "docs/qa/source-atlas/native/source-atlas-native-review-required-bundled-registry-train-25.md",
+      "docs/qa/source-atlas/native/source-atlas-native-review-required-bundled-registry-train-25.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_architecture_debt": "No owner-approved active registry target, no production R2 promotion proof, no real background scheduler execution proof, and no device/offline release proof.",
+    "next_repair_train": "Owner-approved active target gating or native scheduling/device proof under canonical ownership",
+    "no_equivalent_folder_interpretation_used": true
+  },
+  "apple_platform_source_atlas": {
+    "new_apple_api_introduced": false,
+    "ios_26_availability_claim": "No new iOS API availability claim",
+    "backgroundtasks_proof": "Not run and not claimed"
+  },
+  "validation_run": [
+    {
+      "command": "xcodegen generate",
+      "status": "passed"
+    },
+    {
+      "command": "generated project resource proof",
+      "status": "passed",
+      "assertions": [
+        "PBXResourcesBuildPhase present",
+        "source-atlas-public-refresh-targets present in generated project"
+      ]
+    },
+    {
+      "command": "cmp -s Native/Ambitions/Resources/source-atlas-public-refresh-targets.json tools/source-atlas/generated/native-refresh-registry/train-24-fixture/source-atlas-public-refresh-targets.json",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m json.tool Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+      "status": "passed"
+    },
+    {
+      "command": "built app resource presence check",
+      "status": "passed",
+      "artifact": "output/DerivedData-XcodeBuildMCP/Build/Products/Debug-iphonesimulator/Ambitions.app/source-atlas-public-refresh-targets.json"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests -only-testing:AmbitionsTests/AppContainerFactoryTests/testAppContainerExposesRuntimeWhilePreservingIPhoneServiceFacade",
+      "status": "passed_after_mcp_timeout_poll",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T01-45-12-348Z_pid24471_6fec78a5.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T01-45-12-348Z_pid24471_8a728c80.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "passed": 130
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/green-standard/20260628T015522Z/extract/summary.json",
+      "result_bundle": ".codex/xcode-results/green-standard/20260628T015522Z-bft-74413-18369/build-for-testing.xcresult"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "validation_not_run": [
+    "Owner-approved active public registry target population",
+    "Live public pack transport from the bundled target",
+    "Production R2 upload/readback",
+    "Stable-channel write",
+    "Physical-device/offline runtime proof",
+    "Visual or accessibility proof",
+    "TestFlight, App Store, or release readiness proof",
+    "New legal/terms approval"
+  ],
+  "source_atlas_status_ceiling": "Green for Train 25 native bundled review-required registry artifact path only; Yellow overall Source Atlas",
+  "r2_request_privacy_proof": "No R2 request is emitted by this train; the bundled review-required artifact selects no target and carries public routing metadata only.",
+  "no_private_graph_egress_proof": "No-private egress audit passed; loader and lifecycle tests prove no private runtime context, final plan, final schedule, or Step list generation.",
+  "license_terms_proof": "Inherited from the Train 24 generated artifact and upstream publisher/pack artifacts; no new legal approval or source lane decision added.",
+  "restricted_source_exclusion_proof": "Inherited from upstream publisher/pack artifacts; this train does not re-admit excluded source data.",
+  "provenance_completeness_proof": "Inherited from upstream publisher and pack manifest; no new claim graph or packable claim path added.",
+  "freshness_revocation_proof": "No freshness or revocation claim is upgraded; review-required target remains inactive.",
+  "lkg_rollback_proof": "No R2 object, stable pointer, LKG pointer, or rollback operation is changed.",
+  "native_offline_no_account_proof": "Focused app-container offline startup sees one review-required entry, selects no targets, and reports coreLocalPlanningBlocked == false.",
+  "production_non_claims": [
+    "No production R2 readiness",
+    "No app runtime or release Green",
+    "No legal approval",
+    "No universal coverage",
+    "No active registry target approval",
+    "No real BackgroundTasks execution proof"
+  ],
+  "known_risks": [
+    "The bundled artifact is review-required only and does not prove active remote refresh",
+    "Real background scheduling and device/offline runtime proof remain unproven",
+    "Production R2 promotion, legal/terms approval, and app release readiness remain out of scope",
+    "Broader worktree contains uncommitted Source Atlas trains outside Train 25"
+  ],
+  "rollback_plan": [
+    "Remove Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "Revert the project.yml explicit resource build-phase entries if needed",
+    "Revert the default loader bundle lookup robustness change",
+    "Revert Train 25 test expectation updates",
+    "Remove Train 25 QA evidence",
+    "Retain prior Train 24 generated artifact and prior default fallback behavior"
+  ]
+}

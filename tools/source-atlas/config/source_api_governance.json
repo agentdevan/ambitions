@@ -1,0 +1,432 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.apiRateGovernance",
+  "createdAt": "2026-06-27T00:00:00Z",
+  "adapters": {
+    "official_static_page": {
+      "sourceIDs": [
+        "nara.constitution.presidency",
+        "nasa.astronaut.requirements",
+        "nasa.astronaut.selection"
+      ],
+      "routes": [
+        "official HTTPS source pages"
+      ],
+      "envVars": [],
+      "requestBudget": {
+        "daily": 50,
+        "perRun": 6
+      },
+      "timeoutSeconds": 120,
+      "retry": {
+        "maxAttempts": 3,
+        "backoff": "exponential_jitter",
+        "retryOnStatus": [
+          429,
+          500,
+          502,
+          503,
+          504
+        ]
+      },
+      "rateLimitHandling": {
+        "captureHeaders": false,
+        "backoffOn429": true,
+        "respectRetryAfter": true
+      },
+      "secretPolicy": {
+        "noSecretLogging": true,
+        "redactEnvVars": []
+      },
+      "missingKeyBehavior": "no_key_required"
+    },
+    "official_onet_text_database": {
+      "sourceIDs": [
+        "onet.database"
+      ],
+      "publicDatabaseRoute": {
+        "url": "https://www.onetcenter.org/database.html",
+        "allowed": true,
+        "purpose": "downloadable public database snapshots"
+      },
+      "credentialedWebServicesRoute": {
+        "allowed": true,
+        "requiresEnvVars": [
+          "ONET_WEB_SERVICES_USERNAME",
+          "ONET_WEB_SERVICES_PASSWORD"
+        ],
+        "packRouteDefault": false
+      },
+      "envVars": [
+        {
+          "name": "ONET_WEB_SERVICES_USERNAME",
+          "requiredFor": "credentialed web-services route only",
+          "loggedAs": "env_var_name_only"
+        },
+        {
+          "name": "ONET_WEB_SERVICES_PASSWORD",
+          "requiredFor": "credentialed web-services route only",
+          "loggedAs": "env_var_name_only"
+        }
+      ],
+      "requestBudget": {
+        "daily": 20,
+        "perRun": 3
+      },
+      "timeoutSeconds": 120,
+      "retry": {
+        "maxAttempts": 3,
+        "backoff": "exponential_jitter",
+        "retryOnStatus": [
+          429,
+          500,
+          502,
+          503,
+          504
+        ]
+      },
+      "rateLimitHandling": {
+        "captureHeaders": false,
+        "backoffOn429": true,
+        "respectRetryAfter": true
+      },
+      "secretPolicy": {
+        "noSecretLogging": true,
+        "redactEnvVars": [
+          "ONET_WEB_SERVICES_USERNAME",
+          "ONET_WEB_SERVICES_PASSWORD"
+        ]
+      },
+      "missingKeyBehavior": "use_public_database_route",
+      "attributionRequirement": "credit USDOL/ETA O*NET, include license link, release/version, and modification notice where applicable",
+      "fallbackBehavior": "block credentialed web-services route and keep public database route available"
+    },
+    "official_bls_public_api": {
+      "sourceIDs": [
+        "bls.public.data.api"
+      ],
+      "v1NoKeyMode": {
+        "allowed": true,
+        "route": "https://api.bls.gov/publicAPI/v1/timeseries/data/{seriesID}",
+        "doesNotRequireKey": true
+      },
+      "v2KeyMode": {
+        "optional": true,
+        "envVar": "BLS_API_KEY",
+        "route": "https://api.bls.gov/publicAPI/v2/timeseries/data/{seriesID}",
+        "evidenceField": "mode"
+      },
+      "envVars": [
+        {
+          "name": "BLS_API_KEY",
+          "requiredFor": "optional BLS v2 key mode only",
+          "loggedAs": "env_var_name_only"
+        }
+      ],
+      "requestBudget": {
+        "daily": 200,
+        "perRun": 10
+      },
+      "timeoutSeconds": 120,
+      "retry": {
+        "maxAttempts": 3,
+        "backoff": "exponential_jitter",
+        "retryOnStatus": [
+          429,
+          500,
+          502,
+          503,
+          504
+        ]
+      },
+      "rateLimitHandling": {
+        "captureHeaders": true,
+        "backoffOn429": true,
+        "respectRetryAfter": true
+      },
+      "secretPolicy": {
+        "noSecretLogging": true,
+        "redactEnvVars": [
+          "BLS_API_KEY"
+        ]
+      },
+      "missingKeyBehavior": "fallback_to_v1_no_key",
+      "evidenceOfModeUsed": [
+        "mode",
+        "keySource",
+        "missingKeyDoesNotBlockNoKeyMode"
+      ]
+    },
+    "official_wikidata_entity_crosswalk": {
+      "sourceIDs": [
+        "wikidata.structured_crosswalk"
+      ],
+      "routes": [
+        "Wikidata Action API wbsearchentities",
+        "bounded SPARQL/entity lookup route for future crosswalk refresh"
+      ],
+      "envVars": [],
+      "requestBudget": {
+        "daily": 100,
+        "perRun": 9
+      },
+      "queryCap": {
+        "daily": 100,
+        "perRun": 9
+      },
+      "timeoutSeconds": 60,
+      "retry": {
+        "maxAttempts": 3,
+        "backoff": "exponential_jitter",
+        "retryOnStatus": [
+          429,
+          500,
+          502,
+          503,
+          504
+        ]
+      },
+      "rateLimitHandling": {
+        "captureHeaders": true,
+        "backoffOn429": true,
+        "respectRetryAfter": true
+      },
+      "secretPolicy": {
+        "noSecretLogging": true,
+        "redactEnvVars": []
+      },
+      "missingKeyBehavior": "no_key_required",
+      "mode": "SPARQL_or_entity_lookup",
+      "use": "structured_crosswalk_only",
+      "regulatedAuthorityAllowed": false,
+      "authorityClaimBoundary": "no regulated requirement claims"
+    },
+    "official_openalex_api": {
+      "sourceIDs": [
+        "openalex.works"
+      ],
+      "routes": [
+        "https://api.openalex.org/works"
+      ],
+      "envVars": [
+        {
+          "name": "OPENALEX_API_KEY",
+          "requiredFor": "optional free-key budget lane",
+          "loggedAs": "env_var_name_only"
+        },
+        {
+          "name": "OPENALEX_MAILTO",
+          "requiredFor": "optional polite-pool contact parameter",
+          "loggedAs": "env_var_name_only"
+        },
+        {
+          "name": "SOURCE_ATLAS_OPENALEX_HIGH_VOLUME_APPROVED",
+          "requiredFor": "high-volume run approval gate",
+          "loggedAs": "env_var_name_only"
+        }
+      ],
+      "optionalApiKeyEnvVar": "OPENALEX_API_KEY",
+      "requestBudget": {
+        "daily": 100,
+        "perRun": 6
+      },
+      "budgets": {
+        "noKey": {
+          "daily": 100,
+          "perRun": 6
+        },
+        "freeKey": {
+          "daily": 1000,
+          "perRun": 20
+        }
+      },
+      "timeoutSeconds": 60,
+      "retry": {
+        "maxAttempts": 3,
+        "backoff": "exponential_jitter",
+        "retryOnStatus": [
+          429,
+          500,
+          502,
+          503,
+          504
+        ]
+      },
+      "rateLimitHandling": {
+        "captureHeaders": true,
+        "headerNames": [
+          "ratelimit-limit",
+          "ratelimit-remaining",
+          "ratelimit-reset",
+          "retry-after"
+        ],
+        "backoffOn429": true,
+        "respectRetryAfter": true
+      },
+      "secretPolicy": {
+        "noSecretLogging": true,
+        "redactEnvVars": [
+          "OPENALEX_API_KEY",
+          "OPENALEX_MAILTO",
+          "SOURCE_ATLAS_OPENALEX_HIGH_VOLUME_APPROVED"
+        ]
+      },
+      "missingKeyBehavior": "use_no_key_low_budget_lane",
+      "highVolume": {
+        "requiresExplicitApproval": true,
+        "approvalEnvVar": "SOURCE_ATLAS_OPENALEX_HIGH_VOLUME_APPROVED",
+        "approved": false,
+        "productionRunPlanned": false,
+        "sourceSnapshotRouteFutureOption": true,
+        "failurePosture": "block before requests when approval is absent"
+      },
+      "failurePosture": "back off on 429; block high-volume runs without explicit approval"
+    },
+    "official_usajobs_authenticated_search": {
+      "sourceIDs": [
+        "usajobs.search"
+      ],
+      "routes": [
+        "https://data.usajobs.gov/api/search"
+      ],
+      "envVars": [
+        {
+          "name": "USAJOBS_USER_AGENT",
+          "requiredFor": "lookup-only authenticated API route",
+          "loggedAs": "env_var_name_only"
+        },
+        {
+          "name": "USAJOBS_AUTHORIZATION_KEY",
+          "requiredFor": "lookup-only authenticated API route",
+          "loggedAs": "env_var_name_only"
+        }
+      ],
+      "requestBudget": {
+        "daily": 50,
+        "perRun": 5
+      },
+      "timeoutSeconds": 60,
+      "retry": {
+        "maxAttempts": 3,
+        "backoff": "exponential_jitter",
+        "retryOnStatus": [
+          429,
+          500,
+          502,
+          503,
+          504
+        ]
+      },
+      "rateLimitHandling": {
+        "captureHeaders": true,
+        "backoffOn429": true,
+        "respectRetryAfter": true
+      },
+      "secretPolicy": {
+        "noSecretLogging": true,
+        "redactEnvVars": [
+          "USAJOBS_USER_AGENT",
+          "USAJOBS_AUTHORIZATION_KEY"
+        ]
+      },
+      "missingKeyBehavior": "block_lookup_only_route",
+      "packModeAllowed": false,
+      "r2ModeAllowed": false,
+      "blockedWithoutWrittenApproval": true,
+      "writtenApprovalRequiredFrom": "OPM USAJOBS"
+    },
+    "official_datagov_v4_search": {
+      "sourceIDs": [
+        "data.gov.catalog"
+      ],
+      "routes": [
+        "https://api.gsa.gov/technology/datagov/v4/search",
+        "https://api.gsa.gov/technology/datagov/v3/action/package_search"
+      ],
+      "envVars": [
+        {
+          "name": "DATAGOV_API_KEY",
+          "requiredFor": "optional higher-budget data.gov lane",
+          "loggedAs": "env_var_name_only"
+        }
+      ],
+      "requestBudget": {
+        "daily": 100,
+        "perRun": 9
+      },
+      "timeoutSeconds": 120,
+      "retry": {
+        "maxAttempts": 3,
+        "backoff": "exponential_jitter",
+        "retryOnStatus": [
+          429,
+          500,
+          502,
+          503,
+          504
+        ]
+      },
+      "rateLimitHandling": {
+        "captureHeaders": true,
+        "backoffOn429": true,
+        "respectRetryAfter": true
+      },
+      "secretPolicy": {
+        "noSecretLogging": true,
+        "redactEnvVars": [
+          "DATAGOV_API_KEY"
+        ]
+      },
+      "missingKeyBehavior": "use_demo_key_until_rate_limited_then_block_with_env_name"
+    },
+    "official_college_scorecard_api": {
+      "sourceIDs": [
+        "college-scorecard.api"
+      ],
+      "routes": [
+        "https://api.data.gov/ed/collegescorecard/v1/schools"
+      ],
+      "envVars": [
+        {
+          "name": "COLLEGE_SCORECARD_API_KEY",
+          "requiredFor": "optional higher-budget scorecard lane",
+          "loggedAs": "env_var_name_only"
+        },
+        {
+          "name": "DATAGOV_API_KEY",
+          "requiredFor": "optional fallback key lane",
+          "loggedAs": "env_var_name_only"
+        }
+      ],
+      "requestBudget": {
+        "daily": 100,
+        "perRun": 9
+      },
+      "timeoutSeconds": 120,
+      "retry": {
+        "maxAttempts": 3,
+        "backoff": "exponential_jitter",
+        "retryOnStatus": [
+          429,
+          500,
+          502,
+          503,
+          504
+        ]
+      },
+      "rateLimitHandling": {
+        "captureHeaders": true,
+        "backoffOn429": true,
+        "respectRetryAfter": true
+      },
+      "secretPolicy": {
+        "noSecretLogging": true,
+        "redactEnvVars": [
+          "COLLEGE_SCORECARD_API_KEY",
+          "DATAGOV_API_KEY"
+        ]
+      },
+      "missingKeyBehavior": "use_demo_key_until_rate_limited_then_block_with_env_name"
+    }
+  }
+}

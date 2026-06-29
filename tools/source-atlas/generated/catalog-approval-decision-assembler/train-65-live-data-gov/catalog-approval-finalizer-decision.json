@@ -1,0 +1,10 @@
+{
+  "created_at": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogApprovalFinalizerDecisionUnavailable.v1",
+  "non_claims": [
+    "placeholder only",
+    "not a finalizer decision artifact",
+    "not approval"
+  ],
+  "reason": "review completion artifact required before finalizer decision is available"
+}

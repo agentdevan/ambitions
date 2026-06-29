@@ -1,0 +1,660 @@
+{
+  "adapterID": "openalex_research_context_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "atoms": [
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.893ebc8dfee8d46a",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T10860",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.ecc826efdb730eec",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T11191",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.d9beb299baae52c0",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T12372",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.a06bf1d90b88ac5e",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T10236",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.1d421d962e43b563",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T10084",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.6de5f8095c97117f",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T11419",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.9ac814191854ce82",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T10033",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.6fb8aca66d1ab3de",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T11176",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "research_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.11fc0da02c878029",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "T10187",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.3735e2313e87cccd",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.891ad6f5984e3244",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "Software Developers has OpenAlex research topic context candidate T10860.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.faf043c22d2b0ce8",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.16573fefbffcb36c",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "Registered Nurses has OpenAlex research topic context candidate T11191.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.80713dde15edcb6a",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.52f107dcfd5f9089",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "Airline Pilots, Copilots, and Flight Engineers has OpenAlex research topic context candidate T12372.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.cb0c73c0df2bc9a3",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.5a638b62127ab320",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "Secondary School Teachers has OpenAlex research topic context candidate T10236.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.f2c2830c98c61f5e",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.331ae3e578029e87",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "Lawyers has OpenAlex research topic context candidate T10084.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.f95e53d0a0b7a094",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.7695825820610a11",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "Sound Engineering Technicians has OpenAlex research topic context candidate T11419.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.483fed184fc08bc4",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.e49706d09c8db132",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "General and Operations Managers has OpenAlex research topic context candidate T10033.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.cf44072a0f644cd0",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.100dd40beba43ddb",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "Musicians and Singers has OpenAlex research topic context candidate T11176.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_dataset",
+      "checksum": "checksum.77abcd6502decab3",
+      "claimType": "research_topic_context",
+      "confidence": "medium",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "claim.d2253b861ddf7cdf",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "provenanceIDs": [
+        "provenance.be293baad4cb9797"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceIDs": [
+        "openalex.dataset"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "state": "source_backed",
+      "text": "Physicists and Astronomers / Astronaut candidate context has OpenAlex research topic context candidate T10187.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "openalex_research_context_adapter",
+    "atomCount": 9,
+    "claimCount": 9,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "scholarly_reference",
+    "edgeCount": 0,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "global",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable",
+    "requirementCount": 0,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_dataset",
+    "sourceCount": 1,
+    "sourceLane": "openalex.dataset",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [],
+  "createdAt": "2026-06-27T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "scholarly_reference",
+  "edges": [],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "offlineBulkOption": {
+    "fixtureTestsRequireCredentials": false,
+    "represented": true,
+    "route": "OpenAlex snapshot"
+  },
+  "packCandidates": [
+    {
+      "adapterID": "openalex_research_context_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "scholarly_reference",
+      "id": "pack_candidate.4e362468cad68e87",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 9,
+        "claims": 9,
+        "crosswalks": 0,
+        "edges": 0,
+        "requirements": 0
+      },
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "termsGate": {
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable",
+        "sourceID": "openalex.dataset"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_dataset",
+      "contentHash": "0b7399c0a1e5fe2b623a6e8671b0ce8fad05c691dd87d8859b5571e8906aebe5",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "monthly snapshot or API freshness review",
+      "id": "provenance.be293baad4cb9797",
+      "jurisdiction": "global",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "Creative Commons CC0 public domain dedication",
+      "locator": "https://openalex.org/",
+      "publicReferenceOnly": true,
+      "publisher": "OpenAlex",
+      "retrievedAt": "2026-06-27T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "openalex.dataset",
+      "sourceState": "current",
+      "sourceURL": "https://openalex.org/",
+      "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [],
+  "schemaVersion": 1,
+  "sourceID": "openalex.dataset",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": false,
+    "authorityTier": "official_dataset",
+    "freshnessCadence": "monthly snapshot or API freshness review",
+    "lastTermsReviewed": "2026-06-27",
+    "license": "Creative Commons CC0 public domain dedication",
+    "licenseVersion": "1.0",
+    "publisher": "OpenAlex",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable",
+    "reviewRequired": false,
+    "sourceID": "openalex.dataset",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+  },
+  "termsValidation": {
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable",
+    "sourceID": "openalex.dataset"
+  }
+}

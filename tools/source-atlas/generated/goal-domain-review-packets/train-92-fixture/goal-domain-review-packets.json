@@ -1,0 +1,871 @@
+{
+  "activeRegistryMutations": [],
+  "completedReviews": [],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "executionRecordsPath": "tools/source-atlas/generated/goal-domain-work-order-executor/train-90-fixture/execution-records.json",
+  "executorManifestPath": "tools/source-atlas/generated/goal-domain-work-order-executor/train-90-fixture/manifest.json",
+  "executorReportPath": "tools/source-atlas/generated/goal-domain-work-order-executor/train-90-fixture/work-order-executor-report.json",
+  "kind": "ambitions.sourceAtlas.goalDomainReviewPackets.v1",
+  "nonClaims": [
+    "review packet templates only",
+    "not completed review",
+    "not source authority",
+    "not legal approval",
+    "not outside legal approval",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not production R2 upload",
+    "not native activation proof",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvalArtifactsEmitted": 0,
+    "claims": 0,
+    "completedReviewPackets": 0,
+    "finalOutputArtifacts": 0,
+    "inputExecutionRecords": 30,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewPackets": 8,
+    "selectedBlockedReviewRecords": 8
+  },
+  "reviewPackets": [
+    {
+      "approvalArtifactEmitted": false,
+      "blockedUntil": [
+        "adapter_fixture_contract",
+        "api_governance_review",
+        "authority_classification",
+        "claim_graph_provenance",
+        "completed_manual_review_packet",
+        "direct_publisher_locator",
+        "direct_source_authority_review",
+        "frontier_review",
+        "legal_terms_review",
+        "native_privacy_quarantine_offline_evidence",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "review_evidence_artifact"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "claimOutputAllowed": false,
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "manualReviewRequired": true,
+      "matchedDomainID": "business_entrepreneurship",
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review packet template only",
+        "not completed review",
+        "not source authority",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6e875bf6d72cd2fa",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.b0585ad33e6a87d7",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredReviewerFields": [
+        "publisher_identity",
+        "source_directness",
+        "publisher_authority_class",
+        "jurisdiction",
+        "official_locator",
+        "authority_limitations",
+        "review_decision",
+        "review_evidence_path"
+      ],
+      "reviewLane": "direct_source_authority_resolution",
+      "reviewer": "source-atlas-reviewer",
+      "sourceWorkOrder": {
+        "blockedBy": [
+          "ambiguous_frontier_match",
+          "candidate_only_frontier_intake_required",
+          "review_artifact_required"
+        ],
+        "description": "Resolve direct publisher authority before any claim authority is asserted.",
+        "requiredEvidence": [
+          "frontier_review",
+          "direct_source_authority_review",
+          "legal_terms_review",
+          "api_governance_review",
+          "adapter_fixture_contract",
+          "claim_graph_provenance",
+          "pack_production",
+          "r2_publish_owner_approval",
+          "native_privacy_quarantine_offline_evidence"
+        ],
+        "status": "candidate_only_work_ordered"
+      },
+      "stage": "direct_source_resolution",
+      "stageIndex": 3
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "blockedUntil": [
+        "adapter_fixture_contract",
+        "allowed_and_forbidden_artifact_classes",
+        "api_governance_review",
+        "claim_graph_provenance",
+        "completed_manual_review_packet",
+        "direct_source_authority_review",
+        "frontier_review",
+        "legal_terms_review",
+        "native_privacy_quarantine_offline_evidence",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "review_evidence_artifact",
+        "source_lane_registry_decision"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "claimOutputAllowed": false,
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "manualReviewRequired": true,
+      "matchedDomainID": "business_entrepreneurship",
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review packet template only",
+        "not completed review",
+        "not source authority",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.0328597888090db2",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.a1c27b68bd6e2ac3",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredReviewerFields": [
+        "source_id",
+        "source_class",
+        "authority_class",
+        "jurisdiction",
+        "claim_classes_allowed",
+        "claim_classes_forbidden",
+        "redistribution_policy",
+        "r2_pack_policy",
+        "allowed_artifact_classes",
+        "forbidden_artifact_classes",
+        "review_status",
+        "review_evidence_path"
+      ],
+      "reviewLane": "source_lane_governance",
+      "reviewer": "source-atlas-reviewer",
+      "sourceWorkOrder": {
+        "blockedBy": [
+          "ambiguous_frontier_match",
+          "candidate_only_frontier_intake_required",
+          "review_artifact_required"
+        ],
+        "description": "Create or update source lane governance only after review evidence exists.",
+        "requiredEvidence": [
+          "frontier_review",
+          "direct_source_authority_review",
+          "legal_terms_review",
+          "api_governance_review",
+          "adapter_fixture_contract",
+          "claim_graph_provenance",
+          "pack_production",
+          "r2_publish_owner_approval",
+          "native_privacy_quarantine_offline_evidence"
+        ],
+        "status": "candidate_only_work_ordered"
+      },
+      "stage": "source_lane_review",
+      "stageIndex": 4
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "blockedUntil": [
+        "adapter_fixture_contract",
+        "api_governance_review",
+        "claim_graph_provenance",
+        "completed_manual_review_packet",
+        "direct_source_authority_review",
+        "frontier_review",
+        "legal_terms_review",
+        "license_terms_rights_decision",
+        "native_privacy_quarantine_offline_evidence",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "redistribution_packability_decision",
+        "review_evidence_artifact"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "claimOutputAllowed": false,
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "manualReviewRequired": true,
+      "matchedDomainID": "business_entrepreneurship",
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review packet template only",
+        "not completed review",
+        "not source authority",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.740b7396b3fc17c7",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.329409f8dc9fd3b1",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredReviewerFields": [
+        "license_id",
+        "license_url",
+        "terms_url",
+        "rights_url",
+        "redistribution_allowed",
+        "attribution_required",
+        "pack_output_allowed",
+        "outside_legal_required",
+        "outside_legal_status",
+        "approval_artifact_path",
+        "review_evidence_path"
+      ],
+      "reviewLane": "legal_terms_review",
+      "reviewer": "source-atlas-reviewer",
+      "sourceWorkOrder": {
+        "blockedBy": [
+          "ambiguous_frontier_match",
+          "candidate_only_frontier_intake_required",
+          "review_artifact_required"
+        ],
+        "description": "Classify redistribution, attribution, rights, and outside-legal requirements.",
+        "requiredEvidence": [
+          "frontier_review",
+          "direct_source_authority_review",
+          "legal_terms_review",
+          "api_governance_review",
+          "adapter_fixture_contract",
+          "claim_graph_provenance",
+          "pack_production",
+          "r2_publish_owner_approval",
+          "native_privacy_quarantine_offline_evidence"
+        ],
+        "status": "candidate_only_work_ordered"
+      },
+      "stage": "legal_terms_review",
+      "stageIndex": 5
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "blockedUntil": [
+        "adapter_fixture_contract",
+        "api_governance_review",
+        "api_key_rate_budget_policy",
+        "claim_graph_provenance",
+        "completed_manual_review_packet",
+        "direct_source_authority_review",
+        "frontier_review",
+        "legal_terms_review",
+        "live_execute_secret_redaction_policy",
+        "native_privacy_quarantine_offline_evidence",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "review_evidence_artifact"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.ed06d8886b87706c"
+      ],
+      "claimOutputAllowed": false,
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "manualReviewRequired": true,
+      "matchedDomainID": "business_entrepreneurship",
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review packet template only",
+        "not completed review",
+        "not source authority",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.1c1eb626d0c8af1e",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.438ae70e1dd81b6e",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "ambiguous-public-program-reference",
+      "requestedDomain": "public_program_reference",
+      "requiredReviewerFields": [
+        "api_policy_id",
+        "api_mode",
+        "key_required",
+        "env_var_name",
+        "missing_key_behavior",
+        "rate_limit_per_second",
+        "daily_budget_limit",
+        "max_records_per_run",
+        "live_flag_required",
+        "execute_flag_required",
+        "secret_redaction_required",
+        "budget_owner",
+        "review_evidence_path"
+      ],
+      "reviewLane": "api_governance_review",
+      "reviewer": "source-atlas-reviewer",
+      "sourceWorkOrder": {
+        "blockedBy": [
+          "ambiguous_frontier_match",
+          "candidate_only_frontier_intake_required",
+          "review_artifact_required"
+        ],
+        "description": "Define key, rate, budget, live, execute, retry, and redaction policy.",
+        "requiredEvidence": [
+          "frontier_review",
+          "direct_source_authority_review",
+          "legal_terms_review",
+          "api_governance_review",
+          "adapter_fixture_contract",
+          "claim_graph_provenance",
+          "pack_production",
+          "r2_publish_owner_approval",
+          "native_privacy_quarantine_offline_evidence"
+        ],
+        "status": "candidate_only_work_ordered"
+      },
+      "stage": "api_governance_review",
+      "stageIndex": 6
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "blockedUntil": [
+        "adapter_fixture_contract",
+        "api_governance_review",
+        "authority_classification",
+        "claim_graph_provenance",
+        "completed_manual_review_packet",
+        "direct_publisher_locator",
+        "direct_source_authority_review",
+        "frontier_review",
+        "legal_terms_review",
+        "native_privacy_quarantine_offline_evidence",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "review_evidence_artifact"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "claimOutputAllowed": false,
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "manualReviewRequired": true,
+      "matchedDomainID": null,
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review packet template only",
+        "not completed review",
+        "not source authority",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.72fa5812590ce0e8",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.86bdd75c21d4e8de",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredReviewerFields": [
+        "publisher_identity",
+        "source_directness",
+        "publisher_authority_class",
+        "jurisdiction",
+        "official_locator",
+        "authority_limitations",
+        "review_decision",
+        "review_evidence_path"
+      ],
+      "reviewLane": "direct_source_authority_resolution",
+      "reviewer": "source-atlas-reviewer",
+      "sourceWorkOrder": {
+        "blockedBy": [
+          "candidate_only_frontier_intake_required",
+          "no_configured_frontier_match",
+          "review_artifact_required"
+        ],
+        "description": "Resolve direct publisher authority before any claim authority is asserted.",
+        "requiredEvidence": [
+          "frontier_review",
+          "direct_source_authority_review",
+          "legal_terms_review",
+          "api_governance_review",
+          "adapter_fixture_contract",
+          "claim_graph_provenance",
+          "pack_production",
+          "r2_publish_owner_approval",
+          "native_privacy_quarantine_offline_evidence"
+        ],
+        "status": "candidate_only_work_ordered"
+      },
+      "stage": "direct_source_resolution",
+      "stageIndex": 3
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "blockedUntil": [
+        "adapter_fixture_contract",
+        "allowed_and_forbidden_artifact_classes",
+        "api_governance_review",
+        "claim_graph_provenance",
+        "completed_manual_review_packet",
+        "direct_source_authority_review",
+        "frontier_review",
+        "legal_terms_review",
+        "native_privacy_quarantine_offline_evidence",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "review_evidence_artifact",
+        "source_lane_registry_decision"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "claimOutputAllowed": false,
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "manualReviewRequired": true,
+      "matchedDomainID": null,
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review packet template only",
+        "not completed review",
+        "not source authority",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.9ece7bd3c3b31b0c",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.7282a16c7b364eb7",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredReviewerFields": [
+        "source_id",
+        "source_class",
+        "authority_class",
+        "jurisdiction",
+        "claim_classes_allowed",
+        "claim_classes_forbidden",
+        "redistribution_policy",
+        "r2_pack_policy",
+        "allowed_artifact_classes",
+        "forbidden_artifact_classes",
+        "review_status",
+        "review_evidence_path"
+      ],
+      "reviewLane": "source_lane_governance",
+      "reviewer": "source-atlas-reviewer",
+      "sourceWorkOrder": {
+        "blockedBy": [
+          "candidate_only_frontier_intake_required",
+          "no_configured_frontier_match",
+          "review_artifact_required"
+        ],
+        "description": "Create or update source lane governance only after review evidence exists.",
+        "requiredEvidence": [
+          "frontier_review",
+          "direct_source_authority_review",
+          "legal_terms_review",
+          "api_governance_review",
+          "adapter_fixture_contract",
+          "claim_graph_provenance",
+          "pack_production",
+          "r2_publish_owner_approval",
+          "native_privacy_quarantine_offline_evidence"
+        ],
+        "status": "candidate_only_work_ordered"
+      },
+      "stage": "source_lane_review",
+      "stageIndex": 4
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "blockedUntil": [
+        "adapter_fixture_contract",
+        "api_governance_review",
+        "claim_graph_provenance",
+        "completed_manual_review_packet",
+        "direct_source_authority_review",
+        "frontier_review",
+        "legal_terms_review",
+        "license_terms_rights_decision",
+        "native_privacy_quarantine_offline_evidence",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "redistribution_packability_decision",
+        "review_evidence_artifact"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "claimOutputAllowed": false,
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "manualReviewRequired": true,
+      "matchedDomainID": null,
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review packet template only",
+        "not completed review",
+        "not source authority",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.6c65eea262d95ff6",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.f08927486345d24b",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredReviewerFields": [
+        "license_id",
+        "license_url",
+        "terms_url",
+        "rights_url",
+        "redistribution_allowed",
+        "attribution_required",
+        "pack_output_allowed",
+        "outside_legal_required",
+        "outside_legal_status",
+        "approval_artifact_path",
+        "review_evidence_path"
+      ],
+      "reviewLane": "legal_terms_review",
+      "reviewer": "source-atlas-reviewer",
+      "sourceWorkOrder": {
+        "blockedBy": [
+          "candidate_only_frontier_intake_required",
+          "no_configured_frontier_match",
+          "review_artifact_required"
+        ],
+        "description": "Classify redistribution, attribution, rights, and outside-legal requirements.",
+        "requiredEvidence": [
+          "frontier_review",
+          "direct_source_authority_review",
+          "legal_terms_review",
+          "api_governance_review",
+          "adapter_fixture_contract",
+          "claim_graph_provenance",
+          "pack_production",
+          "r2_publish_owner_approval",
+          "native_privacy_quarantine_offline_evidence"
+        ],
+        "status": "candidate_only_work_ordered"
+      },
+      "stage": "legal_terms_review",
+      "stageIndex": 5
+    },
+    {
+      "approvalArtifactEmitted": false,
+      "blockedUntil": [
+        "adapter_fixture_contract",
+        "api_governance_review",
+        "api_key_rate_budget_policy",
+        "claim_graph_provenance",
+        "completed_manual_review_packet",
+        "direct_source_authority_review",
+        "frontier_review",
+        "legal_terms_review",
+        "live_execute_secret_redaction_policy",
+        "native_privacy_quarantine_offline_evidence",
+        "pack_production",
+        "r2_publish_owner_approval",
+        "review_evidence_artifact"
+      ],
+      "candidateSourceIDs": [
+        "candidate_source.702962ae5d7c1538",
+        "candidate_source.85bb4e608bcf1482"
+      ],
+      "claimOutputAllowed": false,
+      "completionStatus": "blocked_review_required",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "executeAllowed": false,
+      "lane": "candidate_domain_expansion_lane",
+      "liveAllowed": false,
+      "manualReviewRequired": true,
+      "matchedDomainID": null,
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "review packet template only",
+        "not completed review",
+        "not source authority",
+        "not legal approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not final user plans, schedules, or Steps"
+      ],
+      "orderID": "source_atlas_domain_work_order.48ef5ba98771d7e6",
+      "packOutputAllowed": false,
+      "packetID": "source_atlas_goal_domain_review_packet.073c28f82a28d9f5",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "publicReferenceOnly": true,
+      "r2PackableArtifactAllowed": false,
+      "r2PublishAllowed": false,
+      "registryMutationAllowed": false,
+      "requestID": "new-language-learning-public-reference",
+      "requestedDomain": "public_language_learning_reference",
+      "requiredReviewerFields": [
+        "api_policy_id",
+        "api_mode",
+        "key_required",
+        "env_var_name",
+        "missing_key_behavior",
+        "rate_limit_per_second",
+        "daily_budget_limit",
+        "max_records_per_run",
+        "live_flag_required",
+        "execute_flag_required",
+        "secret_redaction_required",
+        "budget_owner",
+        "review_evidence_path"
+      ],
+      "reviewLane": "api_governance_review",
+      "reviewer": "source-atlas-reviewer",
+      "sourceWorkOrder": {
+        "blockedBy": [
+          "candidate_only_frontier_intake_required",
+          "no_configured_frontier_match",
+          "review_artifact_required"
+        ],
+        "description": "Define key, rate, budget, live, execute, retry, and redaction policy.",
+        "requiredEvidence": [
+          "frontier_review",
+          "direct_source_authority_review",
+          "legal_terms_review",
+          "api_governance_review",
+          "adapter_fixture_contract",
+          "claim_graph_provenance",
+          "pack_production",
+          "r2_publish_owner_approval",
+          "native_privacy_quarantine_offline_evidence"
+        ],
+        "status": "candidate_only_work_ordered"
+      },
+      "stage": "api_governance_review",
+      "stageIndex": 6
+    }
+  ],
+  "reviewSummary": [
+    {
+      "activeRegistryMutations": 0,
+      "approvalArtifactsEmitted": 0,
+      "completedReviewPackets": 0,
+      "domainCounts": [
+        {
+          "domain": "business_entrepreneurship",
+          "packetCount": 1
+        },
+        {
+          "domain": "public_language_learning_reference",
+          "packetCount": 1
+        }
+      ],
+      "nonClaims": [
+        "review summary only",
+        "not approval",
+        "not source authority",
+        "not claim output"
+      ],
+      "packetCount": 2,
+      "requestIDs": [
+        "ambiguous-public-program-reference",
+        "new-language-learning-public-reference"
+      ],
+      "reviewLane": "api_governance_review"
+    },
+    {
+      "activeRegistryMutations": 0,
+      "approvalArtifactsEmitted": 0,
+      "completedReviewPackets": 0,
+      "domainCounts": [
+        {
+          "domain": "business_entrepreneurship",
+          "packetCount": 1
+        },
+        {
+          "domain": "public_language_learning_reference",
+          "packetCount": 1
+        }
+      ],
+      "nonClaims": [
+        "review summary only",
+        "not approval",
+        "not source authority",
+        "not claim output"
+      ],
+      "packetCount": 2,
+      "requestIDs": [
+        "ambiguous-public-program-reference",
+        "new-language-learning-public-reference"
+      ],
+      "reviewLane": "direct_source_authority_resolution"
+    },
+    {
+      "activeRegistryMutations": 0,
+      "approvalArtifactsEmitted": 0,
+      "completedReviewPackets": 0,
+      "domainCounts": [
+        {
+          "domain": "business_entrepreneurship",
+          "packetCount": 1
+        },
+        {
+          "domain": "public_language_learning_reference",
+          "packetCount": 1
+        }
+      ],
+      "nonClaims": [
+        "review summary only",
+        "not approval",
+        "not source authority",
+        "not claim output"
+      ],
+      "packetCount": 2,
+      "requestIDs": [
+        "ambiguous-public-program-reference",
+        "new-language-learning-public-reference"
+      ],
+      "reviewLane": "legal_terms_review"
+    },
+    {
+      "activeRegistryMutations": 0,
+      "approvalArtifactsEmitted": 0,
+      "completedReviewPackets": 0,
+      "domainCounts": [
+        {
+          "domain": "business_entrepreneurship",
+          "packetCount": 1
+        },
+        {
+          "domain": "public_language_learning_reference",
+          "packetCount": 1
+        }
+      ],
+      "nonClaims": [
+        "review summary only",
+        "not approval",
+        "not source authority",
+        "not claim output"
+      ],
+      "packetCount": 2,
+      "requestIDs": [
+        "ambiguous-public-program-reference",
+        "new-language-learning-public-reference"
+      ],
+      "reviewLane": "source_lane_governance"
+    }
+  ],
+  "reviewer": "source-atlas-reviewer",
+  "schemaVersion": 1,
+  "versionID": "source-atlas-goal-domain-review-packets-train-92",
+  "workOrdersPath": "tools/source-atlas/generated/goal-domain-production-lanes/train-89-fixture/domain-work-orders.json"
+}

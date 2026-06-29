@@ -1,0 +1,233 @@
+{
+  "appCacheAllowed": true,
+  "claims": [
+    {
+      "claimType": "eligibility_rule",
+      "freshness": "stable_law_watch",
+      "id": "claim.president.age_35",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "state": "source_backed",
+      "text": "The presidency has a minimum age eligibility gate of 35 years."
+    },
+    {
+      "claimType": "eligibility_rule",
+      "freshness": "stable_law_watch",
+      "id": "claim.president.natural_born_citizen",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "state": "source_backed",
+      "text": "The presidency requires natural-born U.S. citizenship."
+    },
+    {
+      "claimType": "eligibility_rule",
+      "freshness": "stable_law_watch",
+      "id": "claim.president.residency_14_years",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ],
+      "state": "source_backed",
+      "text": "The presidency requires at least 14 years of U.S. residency."
+    }
+  ],
+  "dataClass": "public_reference_claim",
+  "displayName": "Become eligible to serve as President of the United States",
+  "domains": [
+    "civic",
+    "eligibility",
+    "law",
+    "public_service"
+  ],
+  "fixtureAllowed": "public_synthetic_only",
+  "id": "pack.civic.us_president",
+  "inspectionContract": {
+    "defaultVisibility": "hidden",
+    "mustInclude": [
+      "source",
+      "claim",
+      "freshness",
+      "uncertainty",
+      "user_control"
+    ],
+    "showWhen": [
+      "user_asks_why",
+      "source_freshness_changes_path_behavior"
+    ]
+  },
+  "kind": "ambitions.sourceAtlas.foundryPack",
+  "logAllowed": "metadata_only",
+  "metadata": {
+    "createdAt": "2026-06-27T03:55:45Z",
+    "createdBy": "Source Atlas Foundry",
+    "freshnessState": "candidate",
+    "harvestRunID": null,
+    "lastKnownGood": null,
+    "localPersonalizationRequired": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "runtimeRole": "reference_enrichment_only",
+    "signatureStatus": "unsigned-local-foundry-v0",
+    "sourceAtlasInvisibleByDefault": true
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "pathways": [
+    {
+      "alternatePaths": [
+        {
+          "id": "alternate.governor",
+          "sharedSkillAtoms": [
+            "public_speaking",
+            "coalition_building",
+            "policy_reasoning",
+            "executive_communication"
+          ],
+          "title": "Governor or state executive leadership"
+        },
+        {
+          "id": "alternate.public_policy_leader",
+          "sharedSkillAtoms": [
+            "constitutional_literacy",
+            "policy_reasoning",
+            "ethical_decision_making"
+          ],
+          "title": "Public policy or civic institution leader"
+        }
+      ],
+      "domain": "civic",
+      "id": "pathway.civic.us_president",
+      "milestones": [
+        {
+          "id": "president.age_waiting_path",
+          "output": "age-gated path state with review date and skill-building lanes",
+          "purpose": "Keep progress real while eligibility is time-locked.",
+          "title": "Build civic capital before legal age eligibility",
+          "whenBlockedBy": "requirement.president.minimum_age"
+        },
+        {
+          "id": "president.local_service_ladder",
+          "output": "portfolio of civic leadership receipts and public communication practice",
+          "purpose": "Convert ambition into public trust, operations, and service proof.",
+          "title": "Start with local public-service leadership"
+        }
+      ],
+      "runtimeBehavior": {
+        "canEnrichLocalPath": true,
+        "freshnessChangeMayTriggerReview": true,
+        "inspectionVisibleOnlyWhenUseful": true,
+        "mustJoinWithPrivateRuntimeLocally": true,
+        "mustNotUploadPrivateContext": true
+      },
+      "skillAtoms": [
+        "constitutional_literacy",
+        "public_speaking",
+        "coalition_building",
+        "civic_leadership",
+        "policy_reasoning",
+        "campaign_operations",
+        "ethical_decision_making",
+        "executive_communication"
+      ],
+      "sourceRequirementIDs": [
+        "requirement.president.minimum_age",
+        "requirement.president.natural_born_citizen",
+        "requirement.president.residency"
+      ],
+      "title": "Become eligible to serve as President of the United States"
+    }
+  ],
+  "r2Allowed": true,
+  "requirements": [
+    {
+      "claimID": "claim.president.age_35",
+      "gateType": "eligibility",
+      "id": "requirement.president.minimum_age",
+      "structuredRule": {
+        "evaluation": "when_elected",
+        "type": "minimum_age",
+        "years": 35
+      }
+    },
+    {
+      "claimID": "claim.president.natural_born_citizen",
+      "gateType": "eligibility",
+      "id": "requirement.president.natural_born_citizen",
+      "structuredRule": {
+        "required": "natural_born_us_citizen",
+        "type": "citizenship_status"
+      }
+    },
+    {
+      "claimID": "claim.president.residency_14_years",
+      "gateType": "eligibility",
+      "id": "requirement.president.residency",
+      "structuredRule": {
+        "country": "US",
+        "type": "residency_duration",
+        "years": 14
+      }
+    }
+  ],
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "adapter": "official_static_page",
+      "authorityTier": "constitutional_primary",
+      "domains": [
+        "civic",
+        "law",
+        "public_service",
+        "eligibility"
+      ],
+      "freshnessCadence": "watch for constitutional amendment or authoritative transcript update",
+      "id": "nara.constitution.presidency",
+      "lastReviewed": "2026-06-25",
+      "license": "U.S. federal public source; cite source URL",
+      "publisher": "National Archives",
+      "title": "U.S. Constitution presidential eligibility",
+      "url": "https://www.archives.gov/founding-docs/constitution-transcript"
+    }
+  ],
+  "transferGraph": {
+    "alternatePaths": [
+      {
+        "id": "alternate.governor",
+        "sharedSkillAtoms": [
+          "public_speaking",
+          "coalition_building",
+          "policy_reasoning",
+          "executive_communication"
+        ],
+        "title": "Governor or state executive leadership"
+      },
+      {
+        "id": "alternate.public_policy_leader",
+        "sharedSkillAtoms": [
+          "constitutional_literacy",
+          "policy_reasoning",
+          "ethical_decision_making"
+        ],
+        "title": "Public policy or civic institution leader"
+      }
+    ],
+    "note": "Shared skill atoms let Ambitions preserve useful progress when a user changes direction.",
+    "skillAtoms": [
+      "constitutional_literacy",
+      "public_speaking",
+      "coalition_building",
+      "civic_leadership",
+      "policy_reasoning",
+      "campaign_operations",
+      "ethical_decision_making",
+      "executive_communication"
+    ]
+  },
+  "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+}

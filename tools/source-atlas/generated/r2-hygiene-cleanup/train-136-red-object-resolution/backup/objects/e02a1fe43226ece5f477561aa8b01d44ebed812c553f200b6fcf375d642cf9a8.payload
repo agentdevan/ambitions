@@ -1,0 +1,26 @@
+{
+  "channel": "stable",
+  "createdAt": "2026-06-27T03:56:03Z",
+  "dataClass": "public_freshness",
+  "id": "lkg.source_atlas.dda07753c4e72f63",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.lastKnownGoodManifest",
+  "manifest": {
+    "bytes": 3984,
+    "path": "manifest.json",
+    "sha256": "4df1cb012a4f50344352d75665b2496c80d3e60ecbb705bef79e2c9be2f33da5"
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "schemaVersion": 1,
+  "state": "last_known_good_candidate",
+  "valid": true,
+  "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+}

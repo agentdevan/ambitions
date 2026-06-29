@@ -1,0 +1,192 @@
+{
+  "apiPolicies": [
+    "api.static_public_page.v1"
+  ],
+  "blockedCounts": {
+    "restrictedExclusions": 0
+  },
+  "budgetLimits": [
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "creative-commons.licenses"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "w3c.web-standards"
+    },
+    {
+      "apiPolicyID": "api.static_public_page.v1",
+      "dailyBudgetLimit": 50,
+      "maxPagesPerRun": 6,
+      "maxRecordsPerRun": 6,
+      "monthlyBudgetLimit": 500,
+      "rateLimitPerMinute": 30,
+      "rateLimitPerSecond": 1,
+      "sourceID": "loc.primary_sources"
+    }
+  ],
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "fixture_first_default",
+      "passed": true
+    },
+    {
+      "name": "live_modes_require_live_flag",
+      "passed": true
+    },
+    {
+      "name": "execute_modes_require_execute_flag",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "restricted_sources_emit_exclusion_proof",
+      "passed": true
+    },
+    {
+      "name": "evidence_hashes_emitted",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "entries": [
+    {
+      "adapterID": "creative_commons_licenses_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/creative-commons.licenses.json",
+      "evidenceSHA256": "da34f6a91f3164411f474185be433df175035b16809aa444fa28d9ee86ca2e53",
+      "normalizedPath": "normalized/creative-commons.licenses.json",
+      "normalizedSHA256": "4c9ed9bfe008d6c2e28ac8b9c64ebf480e8dd85e8765fec65c83b1e79e5c7a10",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "creative-commons.licenses",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "w3c_web_standards_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/w3c.web-standards.json",
+      "evidenceSHA256": "ddad546c6effaa139b2de5becb5a1b7040f62f172680d1f1d2f746760af18f41",
+      "normalizedPath": "normalized/w3c.web-standards.json",
+      "normalizedSHA256": "4f011b21d3183f6a0dcae246cd161d48440c4adf9b975d2685efb8cf0edb664a",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "w3c.web-standards",
+      "status": "harvested"
+    },
+    {
+      "adapterID": "library_of_congress_primary_sources_reference_adapter",
+      "blockedReasons": [],
+      "claimCount": 1,
+      "evidencePath": "evidence/loc.primary_sources.json",
+      "evidenceSHA256": "17a1465f8370bb52abb3c6acbe15d175fc3c94eaf6905ffca6117c93d8d50e14",
+      "normalizedPath": "normalized/loc.primary_sources.json",
+      "normalizedSHA256": "c720476c649ee15090dcc94070b03c808d1659e51c9f303234e6d74ed2abc372",
+      "packCandidateCount": 1,
+      "r2PackPolicy": "pack_allowed_with_attribution",
+      "recordCount": 0,
+      "sourceID": "loc.primary_sources",
+      "status": "harvested"
+    }
+  ],
+  "errorCounts": {
+    "issues": 0,
+    "privacyIssues": 0
+  },
+  "evidenceHashes": [
+    {
+      "evidenceHash": "c5809add3810acd7e93b8ce2c0403b5e2b810a16fff80dc8c3c9a0df38fc4816",
+      "sha256": "da34f6a91f3164411f474185be433df175035b16809aa444fa28d9ee86ca2e53",
+      "sourceID": "creative-commons.licenses"
+    },
+    {
+      "evidenceHash": "1b9e2c5ec63bfb896cff491273549f1a1958a17582fabd8051fe2ae0023b75a9",
+      "sha256": "ddad546c6effaa139b2de5becb5a1b7040f62f172680d1f1d2f746760af18f41",
+      "sourceID": "w3c.web-standards"
+    },
+    {
+      "evidenceHash": "55f92111defd54649ce93188646d78d2397ab1214f595155a6de0b6181cf1e0e",
+      "sha256": "17a1465f8370bb52abb3c6acbe15d175fc3c94eaf6905ffca6117c93d8d50e14",
+      "sourceID": "loc.primary_sources"
+    }
+  ],
+  "executeRequested": false,
+  "finishedAt": "2026-06-28T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.governedHarvestRunManifest.v1",
+  "liveRequested": false,
+  "manifestInputHash": "8ccfca5cbf78dc6e76c8ce4ce76b8425af887df1576d4a9915da5cd2e0b0d258",
+  "manifestPath": "tools/source-atlas/generated/governed-harvest/train-49-creative-project-fixture/train-49-creative-project-fixture/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not live production harvest proof unless --live evidence is separately reviewed",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputPaths": [
+    "normalized/creative-commons.licenses.json",
+    "evidence/creative-commons.licenses.json",
+    "normalized/w3c.web-standards.json",
+    "evidence/w3c.web-standards.json",
+    "normalized/loc.primary_sources.json",
+    "evidence/loc.primary_sources.json"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "claims": 3,
+    "packCandidates": 3,
+    "records": 0,
+    "sourcesBlocked": 0,
+    "sourcesHarvested": 3,
+    "sourcesSelected": 3
+  },
+  "restrictedExclusions": [],
+  "runID": "train-49-creative-project-fixture",
+  "runMode": "fixture",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; governed harvest runner only",
+  "sourceLanes": [
+    "creative-commons.licenses",
+    "w3c.web-standards",
+    "loc.primary_sources"
+  ],
+  "status": "Source Green for governed harvest runner",
+  "valid": true,
+  "versionID": "source-atlas-governed-harvest-runner-v1"
+}

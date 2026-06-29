@@ -1,0 +1,46 @@
+{
+  "freshness": [
+    {
+      "claim_id": "canonical_claim.d30e2c747935abac",
+      "dataClass": "public_freshness",
+      "freshness_sla": "biennial_dataset_posting_context_quarterly_metadata_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T18:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T18:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T18:00:00Z",
+      "valid_until": null
+    },
+    {
+      "claim_id": "canonical_claim.e0aa8d9c591eb299",
+      "dataClass": "public_freshness",
+      "freshness_sla": "biennial_dataset_posting_context_quarterly_metadata_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T18:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T18:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T18:00:00Z",
+      "valid_until": null
+    },
+    {
+      "claim_id": "canonical_claim.e6c5f76a457b0f8f",
+      "dataClass": "public_freshness",
+      "freshness_sla": "biennial_dataset_posting_context_quarterly_metadata_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T18:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T18:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T18:00:00Z",
+      "valid_until": null
+    }
+  ]
+}

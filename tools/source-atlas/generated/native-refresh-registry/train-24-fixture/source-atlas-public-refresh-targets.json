@@ -1,0 +1,61 @@
+{
+  "artifactID": "source_atlas_public_refresh_targets.078b393fe1c2f8c0",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "nonClaims": [
+    "not an R2 private-data backend",
+    "not runtime profile storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final path or timetable generator",
+    "not a bundled production refresh target approval",
+    "not real background execution proof"
+  ],
+  "publicReferenceOnly": true,
+  "registry": {
+    "entries": [
+      {
+        "allowedModes": [
+          "startup",
+          "active_lifecycle",
+          "background"
+        ],
+        "nonClaims": [
+          "not an R2 private-data backend",
+          "not runtime profile storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final path or timetable generator",
+          "not a bundled production refresh target approval",
+          "not real background execution proof"
+        ],
+        "reviewArtifactID": "tools/source-atlas/generated/r2-publisher/train-10-civic-local-simulation/r2-publisher-report.json",
+        "status": "review_required",
+        "target": {
+          "appVersion": "1.0",
+          "channel": "candidate",
+          "domainID": "public_civic_requirements",
+          "environment": "staging",
+          "id": "source-atlas-refresh-target.public_civic_requirements.candidate.20260627T000000Z",
+          "publicLocale": "en-US",
+          "schemaVersion": "1.0.0",
+          "targetPackID": "source-atlas/v1/domain/public_civic_requirements/20260627T000000Z"
+        }
+      }
+    ]
+  },
+  "schemaVersion": "1.0.0"
+}

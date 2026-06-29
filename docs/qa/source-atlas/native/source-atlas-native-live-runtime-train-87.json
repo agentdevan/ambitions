@@ -1,0 +1,113 @@
+{
+  "artifactID": "source_atlas_native_live_runtime_train_87",
+  "createdAt": "2026-06-28T17:46:52Z",
+  "status": "Native Runtime Green for configured Source Atlas public-pack live gateway consumption",
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; bounded Ambitions-usable proof for configured production-target frontiers only",
+  "scopeCompleted": [
+    "Bundled native refresh target registry now matches the Train 85 ledger-gated active registry artifact byte-for-byte.",
+    "Focused simulator tests exercised live public gateway fetches for all configured production registry domains.",
+    "Focused simulator tests exercised hash verification, manifest/pointer handling, quarantine, LKG/offline fallback, repository cache, and local source inspection behavior.",
+    "Focused simulator tests preserved no-private-context request and local-only composition boundaries."
+  ],
+  "configuredFrontierCount": 13,
+  "configuredFrontiers": [
+    "business_entrepreneurship",
+    "creative_project_reference",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "health_wellness_reference_ca_statistics",
+    "hobbies_recreation",
+    "home_life_admin",
+    "occupation_foundation",
+    "personal_growth",
+    "public_civic_requirements",
+    "relationships_family",
+    "travel_relocation"
+  ],
+  "nativeRegistryArtifact": {
+    "bundledPath": "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "generatedPath": "tools/source-atlas/generated/native-refresh-registry/train-85-ledger-gated-active/source-atlas-public-refresh-targets.json",
+    "sha256": "83f8d6521e281739121d12281d12b1df6c867f97e4831ebfc885e3f1c8a5089d",
+    "byteForByteMatch": true,
+    "artifactID": "source_atlas_public_refresh_targets.train85_ledger_gated_active",
+    "entryCount": 13
+  },
+  "liveGateway": {
+    "endpoint": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "privacyBoundary": "public/reference/freshness only",
+    "requestShape": "public pack domain/channel/schema/appVersion/locale only; no private goal, capture, schedule, proof, account, device, or private graph context"
+  },
+  "xcodeBuildMCP": {
+    "projectPath": "/Users/devan/Documents/GitHub/ambitions/Ambitions.xcodeproj",
+    "scheme": "Ambitions",
+    "simulator": "iPhone 17",
+    "result": "SUCCEEDED",
+    "passed": 70,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 168601,
+    "buildLogPath": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T17-43-43-680Z_pid24471_70fe792a.log",
+    "xcresultPath": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T17-43-43-681Z_pid24471_c90aadec.xcresult",
+    "testSuites": [
+      "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests",
+      "SourceAtlasPublicPackRemoteTransportTests",
+      "SourceAtlasPublicPackLifecycleRefreshServiceTests",
+      "SourceAtlasPublicPackFetchPipelineTests",
+      "SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests",
+      "SourceAtlasPublicPackAppRefreshCoordinatorTests",
+      "SourceAtlasOfflineNoAccountScenarioTests",
+      "SourceAtlasLocalReferenceCompositionProofTests"
+    ]
+  },
+  "proofSummary": {
+    "r2RequestPrivacyProof": "Focused live gateway tests returned no egress findings and only requested public Source Atlas object keys.",
+    "noPrivateGraphEgressProof": "Private manifest/domain/object-key tests reject before transport; local source-inspection proof redacts private-looking local match text.",
+    "licenseTermsProof": "Inherited from Train 86 production-target ledger and selected per-domain pack/R2 publisher proof; no outside legal approval claim is made.",
+    "restrictedSourceExclusionProof": "Inherited from production-target ledger and pack/publisher gates; no restricted/private source enters the bundled native registry.",
+    "provenanceCompletenessProof": "Native tests verify published pack manifests and declared pack SHA-256s before cache use.",
+    "freshnessRevocationProof": "Fetch pipeline and live transport tests include current pointer, revocation manifest, manifest, LKG pointer, and pack fetch behavior.",
+    "lkgRollbackProof": "Offline/no-account and repository-backed tests prove cached/LKG fallback without blocking core local planning.",
+    "nativeOfflineNoAccountProof": "Offline no-account tests passed and confirmed core local planning is not blocked.",
+    "runtimeCompositionProof": "Local source inspection proof passed and confirmed Source Atlas does not own final user Steps or schedules."
+  },
+  "productLawPreserved": true,
+  "productionNonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not Codex-certified Release Green",
+    "not App Store readiness",
+    "not device/physical runtime proof",
+    "not a private user-data backend",
+    "not final personalized plan, schedule, or Step generation"
+  ],
+  "validationRun": [
+    "cmp -s Native/Ambitions/Resources/source-atlas-public-refresh-targets.json tools/source-atlas/generated/native-refresh-registry/train-85-ledger-gated-active/source-atlas-public-refresh-targets.json",
+    "python3 -m json.tool Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "XcodeBuildMCP test_sim with live gateway endpoint and 8 focused Source Atlas native suites",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests - 345 passed",
+    "python3 scripts/source-atlas-boundary-audit.py - PASS",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py - PASS",
+    "python3 scripts/ambitions-green-standard-audit.py - GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py - GREEN",
+    "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard - passed",
+    "git diff --check - passed for tracked diff",
+    "rg -n \"[ \\\\t]$\" on Train 87 changed/untracked files - no trailing whitespace"
+  ],
+  "validationNotRun": [
+    "Physical device validation",
+    "Independent accessibility/visual proof",
+    "App Store/TestFlight release process"
+  ],
+  "knownRisks": [
+    "Overall Source Atlas remains bounded to configured production-target frontiers; literal arbitrary-domain coverage still depends on future governed frontier expansion.",
+    "Release Green still requires umbrella release evidence and approvals outside this train.",
+    "Outside legal approval is not claimed by this train."
+  ],
+  "rollbackPlan": [
+    "Restore Native/Ambitions/Resources/source-atlas-public-refresh-targets.json to the prior Train 81 metadata if Train 85 registry activation regresses.",
+    "Disable remote public refresh and use bundled/local Source Atlas baseline if live gateway behavior regresses.",
+    "Keep core Ambitions local planning available with no account and no network."
+  ]
+}

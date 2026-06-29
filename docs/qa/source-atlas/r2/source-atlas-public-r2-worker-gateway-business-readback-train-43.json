@@ -1,0 +1,327 @@
+{
+  "allowed_object_keys": [
+    "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+    "source-atlas/v1/production/stable/business_entrepreneurship/lkg.json",
+    "source-atlas/v1/production/stable/business_entrepreneurship/revocations.json",
+    "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json",
+    "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/pack.json"
+  ],
+  "approvalArtifact": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-business-approval-train-43.json",
+  "artifactID": "source_atlas_public_r2_worker_gateway_business_readback.train43",
+  "channel": "stable",
+  "checks": {
+    "hashes": {
+      "currentPointerSHA256MatchesLocalOutput": true,
+      "currentPointerSHA256MatchesPublisherReport": true,
+      "lkgPackIDMatchesCurrentPointer": true,
+      "manifestSHA256MatchesCurrentPointer": true,
+      "manifestSHA256MatchesLocalOutput": true,
+      "packIDMatchesCurrentPointer": true,
+      "packIDMatchesManifest": true,
+      "packIDMatchesPackBody": true,
+      "packSHA256MatchesCurrentPointer": true,
+      "packSHA256MatchesLocalOutput": true,
+      "revocationsHaveNoCurrentRevocations": true,
+      "revocationsLKGKeyIsBusiness": true,
+      "revocationsManifestKeyIsBusiness": true
+    },
+    "headers": {
+      "allowedResponsesCarryGatewayHeader": true,
+      "allowedResponsesCarryPublicReferenceHeader": true,
+      "blockedRoutesDoNotExposePublicReferenceHeader": true
+    },
+    "statuses": {
+      "blocked_business_claims": true,
+      "blocked_post": true,
+      "blocked_private_query": true,
+      "business_current": true,
+      "business_lkg": true,
+      "business_manifest": true,
+      "business_pack": true,
+      "business_revocations": true,
+      "civic_current": true,
+      "education_current": true,
+      "occupation_current": true
+    }
+  },
+  "createdAt": "2026-06-28T00:00:00Z",
+  "deployedVersionID": "4bb3453e-4df4-4c02-ba65-1401faa807d3",
+  "domain": "business_entrepreneurship",
+  "environment": "production",
+  "gatewayURL": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+  "generatedAt": "2026-06-28T06:29:04Z",
+  "https_readback": {
+    "blocked_business_claims": {
+      "byteSize": 9,
+      "name": "blocked_business_claims",
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    "blocked_post": {
+      "byteSize": 18,
+      "name": "blocked_post",
+      "sha256": "371b26886bee5e559d5016b17b1479cb7a9154865da5a0f11563580ea99ff033",
+      "status": 405
+    },
+    "blocked_private_query": {
+      "byteSize": 9,
+      "name": "blocked_private_query",
+      "sha256": "e3ebaa16dd9d9b9fc107c42183fb6cf9d22927e1af03dbbdfa0ccc38e4e4ac31",
+      "status": 404
+    },
+    "business_current": {
+      "byteSize": 1736,
+      "name": "business_current",
+      "sha256": "619d5fb25138130f43985bbf18cfb2f7c3cb073aa962265fb9fc65fb4b7e9047",
+      "status": 200
+    },
+    "business_lkg": {
+      "byteSize": 1268,
+      "name": "business_lkg",
+      "sha256": "5e29adade31c1c83454640af3ccc6b068b663aa906f95f92746a91fd0193b431",
+      "status": 200
+    },
+    "business_manifest": {
+      "byteSize": 8819,
+      "name": "business_manifest",
+      "sha256": "1b68d185137aad5fa89a23f9fcb94d85b2c9dcbe3975d445157a47eeda23f9fb",
+      "status": 200
+    },
+    "business_pack": {
+      "byteSize": 16256,
+      "name": "business_pack",
+      "sha256": "04d9eaf6f96b1271982a356664a570c74ed946e3145be96bcf636e7f1e561af6",
+      "status": 200
+    },
+    "business_revocations": {
+      "byteSize": 1413,
+      "name": "business_revocations",
+      "sha256": "bdb2d5daae988b2ac8dc66fd514f56c44c543aa0a2c26706c3da6aed49749fec",
+      "status": 200
+    },
+    "civic_current": {
+      "byteSize": 1736,
+      "name": "civic_current",
+      "sha256": "3c5d573292cc8b306a3563487ab095efba2f64c05a65ba6bfd04756a56c13b46",
+      "status": 200
+    },
+    "education_current": {
+      "byteSize": 1728,
+      "name": "education_current",
+      "sha256": "ead323b660476ea2d5156cbde38705e41db7183be6628c3ca8e17deaa175b448",
+      "status": 200
+    },
+    "occupation_current": {
+      "byteSize": 1720,
+      "name": "occupation_current",
+      "sha256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+      "status": 200
+    }
+  },
+  "knownLimits": [
+    "Worker exposes only current, LKG, revocations, manifest, and pack objects for this bounded business domain.",
+    "Legal posture is an internal terms review under user authorization, not outside legal approval.",
+    "Native runtime proof must still validate business target fetch/cache/quarantine/offline behavior before any bounded runtime claim for this domain."
+  ],
+  "manifestID": "source_atlas_pack_manifest.f7858eff16b7da47",
+  "no_private_graph_egress_proof": "No goal, capture, schedule, proof, receipt, account, device, private graph, personalization, or behavior fields are present in gateway object keys or requests.",
+  "objectKeys": {
+    "current": "source-atlas/v1/production/stable/business_entrepreneurship/current.json",
+    "lkg": "source-atlas/v1/production/stable/business_entrepreneurship/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json",
+    "pack": "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/business_entrepreneurship/revocations.json"
+  },
+  "packID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "pack_consistency": {
+    "currentPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+    "currentPackSHA256": "04d9eaf6f96b1271982a356664a570c74ed946e3145be96bcf636e7f1e561af6",
+    "currentPointerHashConsistent": true,
+    "manifestPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+    "packBodyPackID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+    "packBodySHA256": "04d9eaf6f96b1271982a356664a570c74ed946e3145be96bcf636e7f1e561af6",
+    "packHashConsistent": true,
+    "packID": "source-atlas/v1/domain/business_entrepreneurship/20260628T000000Z",
+    "packIDConsistent": true,
+    "r2PublisherCurrentPointerSHA256": "619d5fb25138130f43985bbf18cfb2f7c3cb073aa962265fb9fc65fb4b7e9047",
+    "workerCurrentPointerSHA256": "619d5fb25138130f43985bbf18cfb2f7c3cb073aa962265fb9fc65fb4b7e9047"
+  },
+  "product_law_preserved": true,
+  "productionNonClaims": [
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not full Source Atlas Green",
+    "not broad Runtime Green",
+    "not Release Green",
+    "not App Store readiness",
+    "not account or entitlement readiness",
+    "not a Source Atlas product center or pack browser",
+    "not a final user plan, schedule, Step list, or personalized path generator",
+    "not legal advice",
+    "not tax advice"
+  ],
+  "r2Bucket": "ambitions-source-atlas-prod",
+  "r2PublisherEvidence": "docs/qa/source-atlas/r2/source-atlas-business-r2-publisher-remote-r2-train-43.json",
+  "r2RequestPrivacyProof": {
+    "noPrivateContextObservedInAllowedURLs": true,
+    "nonAllowlistedPackSliceRejected": true,
+    "privateMarkersRejectedByWorker": [
+      "account_id",
+      "capture",
+      "device_id",
+      "goal_text",
+      "private_graph",
+      "proof_id",
+      "receipt",
+      "schedule",
+      "user_id"
+    ],
+    "privateQueryMarkerRejected": true,
+    "requestShape": "fixed public object-key GET/HEAD requests through exact allowlist",
+    "writeMethodRejected": true
+  },
+  "requests": [
+    {
+      "headers": {
+        "Cache-Control": "public, max-age=120",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true"
+      },
+      "method": "GET",
+      "name": "business_current",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/current.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "public, max-age=3600",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true"
+      },
+      "method": "GET",
+      "name": "business_lkg",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/lkg.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "public, max-age=3600",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true"
+      },
+      "method": "GET",
+      "name": "business_revocations",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/revocations.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "public, max-age=3600",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true"
+      },
+      "method": "GET",
+      "name": "business_manifest",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "public, max-age=3600",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true"
+      },
+      "method": "GET",
+      "name": "business_pack",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/pack.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "public, max-age=120",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true"
+      },
+      "method": "GET",
+      "name": "occupation_current",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/occupation_foundation/current.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "public, max-age=120",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true"
+      },
+      "method": "GET",
+      "name": "civic_current",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/public_civic_requirements/current.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "public, max-age=120",
+        "Content-Type": "application/json; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "X-Source-Atlas-Gateway": "production-stable-public-reference",
+        "X-Source-Atlas-Public-Reference": "true"
+      },
+      "method": "GET",
+      "name": "education_current",
+      "status": 200,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/education_credentialing/current.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "no-store",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "method": "GET",
+      "name": "blocked_business_claims",
+      "status": 404,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/claims.json"
+    },
+    {
+      "headers": {
+        "Cache-Control": "no-store",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "method": "GET",
+      "name": "blocked_private_query",
+      "status": 404,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/current.json?goal_text=private"
+    },
+    {
+      "headers": {
+        "Allow": "GET, HEAD",
+        "Cache-Control": "no-store",
+        "Content-Type": "text/plain;charset=UTF-8",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "method": "POST",
+      "name": "blocked_post",
+      "status": 405,
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/business_entrepreneurship/current.json"
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "status": "green_for_bounded_business_gateway_https_readback_yellow_overall_source_atlas",
+  "valid": true
+}

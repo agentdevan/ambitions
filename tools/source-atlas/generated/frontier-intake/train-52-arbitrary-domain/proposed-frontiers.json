@@ -1,0 +1,133 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.proposedCoverageFrontiers.v1",
+  "proposedFrontiers": [
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.7bdce56cbd446b47",
+        "candidate_source.ef49fe9acf29aaa6",
+        "candidate_source.ba879a0dccf4a2af"
+      ],
+      "claim_classes": [
+        "language_standard_reference",
+        "learning_resource_reference",
+        "public_program_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "public_language_learning_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "resource_reference_180d",
+        "standard_reference_365d"
+      ],
+      "frontier_id": "public_language_learning_reference",
+      "goal_intent_classes": [
+        "compare_language_learning_resources",
+        "learn_language_public_reference"
+      ],
+      "jurisdictions": [
+        "US",
+        "global"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_institution",
+        "standards_body"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "not language proficiency assessment",
+        "not admission or credentialing advice"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "language-learning-public-reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_institution",
+        "open_knowledge_graph",
+        "public_catalog",
+        "standards_body"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    },
+    {
+      "blocking_reasons": [
+        "adapter_contract_required",
+        "candidate_only_not_claim_authority",
+        "claim_graph_required",
+        "high_stakes_authority_review_required",
+        "legal_terms_review_required",
+        "r2_pack_blocked_until_all_gates_pass",
+        "source_lane_review_required"
+      ],
+      "candidate_source_ids": [
+        "candidate_source.8c6b61fbb287e43e",
+        "candidate_source.a88cf8f6bed0bf4b",
+        "candidate_source.305889470b734e30"
+      ],
+      "claim_classes": [
+        "eligibility_reference",
+        "public_service_opportunity_reference",
+        "training_reference"
+      ],
+      "claim_output_allowed": false,
+      "domain": "volunteering_public_reference",
+      "excluded_sources": [],
+      "freshness_slas": [
+        "eligibility_reference_60d",
+        "program_reference_90d"
+      ],
+      "frontier_id": "volunteering_public_reference",
+      "goal_intent_classes": [
+        "compare_volunteering_requirements",
+        "find_public_service_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "legal_posture_required": "human_review_required_before_pack_output",
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "non_claims": [
+        "not universal coverage",
+        "not source authority",
+        "not legal approval",
+        "not claim output",
+        "not pack output",
+        "not final user plans, schedules, or Steps",
+        "not a volunteer placement service",
+        "not guaranteed eligibility"
+      ],
+      "pack_output_allowed": false,
+      "proposal_id": "volunteering-public-reference",
+      "r2_pack_policy": "pack_blocked_review_required",
+      "review_required": true,
+      "schema_version": "1.0.0",
+      "source_classes_required": [
+        "official_government",
+        "official_institution",
+        "public_catalog"
+      ],
+      "source_ids": [],
+      "status_ceiling": "candidate_only"
+    }
+  ]
+}

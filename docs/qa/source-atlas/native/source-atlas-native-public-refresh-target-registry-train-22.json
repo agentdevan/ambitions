@@ -1,0 +1,143 @@
+{
+  "train": "Source Atlas Production Finish-Line Train 22",
+  "linear_issue": "AMB-1508",
+  "date": "2026-06-28",
+  "status": "Green for native public refresh target registry / Yellow overall Source Atlas",
+  "scope_completed": [
+    "Added SourceAtlasPublicPackRefreshTargetRegistry under Core/Persistence",
+    "Added registry entry, status, issue, finding, and resolution models",
+    "Declared public lifecycle refresh target metadata fields",
+    "Implemented deterministic stable-ordered active target selection",
+    "Excluded disabled, review-required, blocked, and mode-disallowed targets",
+    "Rejected duplicate target IDs",
+    "Rejected private-looking target metadata and unsafe manifest request shapes before transport",
+    "Updated SourceAtlasPublicPackLifecycleRefreshService to consume registry resolution at refresh time",
+    "Updated AppContainer and AppContainerFactory to build lifecycle refresh from SourceAtlasPublicPackRefreshTargetRegistry.defaultAppRegistry()",
+    "Preserved empty default app registry and no-network-by-default behavior",
+    "Added focused registry, lifecycle, and app-factory tests"
+  ],
+  "files_changed": [
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRefreshTargetRegistry.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackLifecycleRefreshService.swift",
+    "Native/Ambitions/App/AppContainer.swift",
+    "Native/Ambitions/App/AppContainerFactory.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryTests.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift",
+    "Native/AmbitionsTests/App/AppContainerFactoryTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-native-public-refresh-target-registry-train-22.md",
+    "docs/qa/source-atlas/native/source-atlas-native-public-refresh-target-registry-train-22.json"
+  ],
+  "product_law_preserved": true,
+  "final_architecture_tree": {
+    "inspected": true,
+    "canonical_owners_touched": [
+      "App",
+      "Core/Persistence"
+    ],
+    "files_moved_or_created": [
+      "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRefreshTargetRegistry.swift",
+      "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryTests.swift",
+      "docs/qa/source-atlas/native/source-atlas-native-public-refresh-target-registry-train-22.md",
+      "docs/qa/source-atlas/native/source-atlas-native-public-refresh-target-registry-train-22.json"
+    ],
+    "old_noncanonical_paths_removed": [],
+    "compatibility_shims_left": [],
+    "yellow_architecture_debt": "Default app registry contains no approved production target entries yet; real BGTaskScheduler registration and identifier proof remain deferred.",
+    "next_repair_train": "Add owner-approved public target entries and/or real background task registration/identifier proof under canonical ownership",
+    "no_equivalent_folder_interpretation_used": true
+  },
+  "apple_platform_source_atlas": {
+    "new_apple_api_introduced": false,
+    "ios_26_availability_claim": "No new iOS API availability claim",
+    "backgroundtasks_proof": "Not run and not claimed"
+  },
+  "validation_run": [
+    {
+      "command": "xcodegen generate",
+      "status": "passed"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRefreshTargetRegistryTests -only-testing:AmbitionsTests/SourceAtlasPublicPackLifecycleRefreshServiceTests -only-testing:AmbitionsTests/AppContainerFactoryTests/testAppContainerExposesRuntimeWhilePreservingIPhoneServiceFacade",
+      "status": "passed",
+      "passed": 9,
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T00-41-21-729Z_pid24471_72dbadb1.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T00-41-21-729Z_pid24471_f9d3d8b3.xcresult"
+    },
+    {
+      "command": "XcodeBuildMCP adjacent Source Atlas public-pack persistence suites",
+      "status": "passed",
+      "passed": 50,
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T00-45-41-396Z_pid24471_a11ed9e6.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T00-45-41-396Z_pid24471_0d615176.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "passed": 125
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "summary": ".codex/xcode-summaries/green-standard/20260628T004800Z/extract/summary.json"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed_before_qa_evidence_write"
+    }
+  ],
+  "validation_not_run": [
+    "Owner-approved production target registry population",
+    "Real BGTaskScheduler registration, identifier, launch, or background execution proof",
+    "Production R2 upload/readback",
+    "Physical-device/offline runtime proof",
+    "Visual or accessibility proof",
+    "TestFlight, App Store, or release readiness proof",
+    "New legal/terms approval"
+  ],
+  "source_atlas_status_ceiling": "Green for Train 22 native public refresh target registry only; Yellow overall Source Atlas",
+  "r2_request_privacy_proof": "Registry resolution validates target metadata and manifest request shape before lifecycle refresh transport.",
+  "no_private_graph_egress_proof": "No-private egress audit passed; focused tests prove private-looking registry targets are excluded before selection and transport.",
+  "license_terms_proof": "Unchanged; no new source lane, legal registry, source claim, or pack eligibility decision added.",
+  "restricted_source_exclusion_proof": "Unchanged; registry can block unapproved targets but this train does not add a restricted-source source lane.",
+  "provenance_completeness_proof": "Unchanged; no claim graph or packable claim path added.",
+  "freshness_revocation_proof": "Selected targets still delegate to existing public pack refresh/fetch/cache validation paths; adjacent public-pack persistence suites passed.",
+  "lkg_rollback_proof": "Unchanged; this train does not add production LKG pointer or rollback behavior.",
+  "native_offline_no_account_proof": "Focused tests prove the default app registry is empty, zero-transport, and non-blocking; registry-backed lifecycle refresh can also use offline public-pack paths without private context.",
+  "production_non_claims": [
+    "No production R2 readiness",
+    "No app runtime or release Green",
+    "No legal approval",
+    "No universal coverage",
+    "No real BackgroundTasks registration",
+    "No approved production target population"
+  ],
+  "known_risks": [
+    "Public target population remains a separate owner/legal/product approval step",
+    "Real background scheduling remains unproven",
+    "Device/offline proof remains required before release claims",
+    "Broader worktree contains uncommitted Source Atlas trains outside Train 22"
+  ],
+  "rollback_plan": [
+    "Remove SourceAtlasPublicPackRefreshTargetRegistry.swift",
+    "Restore SourceAtlasPublicPackLifecycleRefreshService to direct target-list storage only",
+    "Restore AppContainer and AppContainerFactory lifecycle service defaults to direct empty target initialization",
+    "Remove Train 22 XCTest additions and QA evidence",
+    "Retain prior Train 21 lifecycle runner behavior and prior public-pack cache/fetch/background task paths"
+  ]
+}

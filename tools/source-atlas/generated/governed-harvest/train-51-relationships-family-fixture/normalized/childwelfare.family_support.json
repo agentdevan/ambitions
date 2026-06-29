@@ -1,0 +1,392 @@
+{
+  "adapterID": "childwelfare_family_support_reference_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_childwelfare_family_support_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_family_support_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "sensitive_family_support_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.712c4a9c66776814",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "Child Welfare Information Gateway public family support reference",
+      "provenanceIDs": [
+        "provenance.fa2d6a05f0f29923"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "childwelfare.family_support"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "sensitive_family_support_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.f60b43bddd1c0616",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "family support public resources",
+      "provenanceIDs": [
+        "provenance.fa2d6a05f0f29923"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "childwelfare.family_support"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_institution",
+      "checksum": "checksum.b4ba8c1f40debbb3",
+      "claimType": "sensitive_support_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly ChildWelfare.gov resources and information gateway policies re-review",
+      "id": "claim.45c7363e9b79893a",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.childwelfare.gov/information-gateway-policies/",
+      "provenanceIDs": [
+        "provenance.fa2d6a05f0f29923"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Child Welfare Information Gateway / Children's Bureau / Administration for Children and Families",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "childwelfare.family_support",
+      "sourceIDs": [
+        "childwelfare.family_support"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.childwelfare.gov/resources/",
+      "state": "source_backed",
+      "text": "Child Welfare Information Gateway publishes official public family-support and child-welfare information resources as sensitive support reference context, not legal custody advice, child protection advice, emergency intervention, therapy, or personalized family assessment.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "childwelfare_family_support_reference_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "relationships_family",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_institution",
+    "sourceCount": 1,
+    "sourceLane": "childwelfare.family_support",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "sensitive_support_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateChildProtectionAdvice": true,
+      "doesNotCreateEmergencyIntervention": true,
+      "doesNotCreateLegalCustodyAdvice": true,
+      "doesNotCreatePersonalizedFamilyAssessment": true,
+      "doesNotCreateTherapy": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.relationshipsFamilyCoverage.v1",
+      "label": "Child Welfare Information Gateway family support reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "childwelfare.family_support",
+      "subject": "relationships_family.childwelfare_information_gateway"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "relationships_family",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.712c4a9c66776814",
+      "id": "edge.93f8f9030b149710",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.fa2d6a05f0f29923"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_sensitive_family_support_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "childwelfare.family_support"
+      ],
+      "toAtomID": "atom.f60b43bddd1c0616",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.712c4a9c66776814",
+        "atom.f60b43bddd1c0616"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.93f8f9030b149710"
+      ],
+      "id": "lattice.adf15664791658c1",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "childwelfare_family_support_reference_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "relationships_family",
+      "id": "pack_candidate.9626097941a86557",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "childwelfare.family_support",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "childwelfare.family_support"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_institution",
+      "contentHash": "4a04605751d1b9f61cff445e1dda0af2ccae74f729334380439f7e5dda86a9c0",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly ChildWelfare.gov resources and information gateway policies re-review",
+      "id": "provenance.fa2d6a05f0f29923",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "Official Child Welfare Information Gateway public website/publication posture with ACF/HHS attribution, third-party, trademark, and media caveats retained",
+      "locator": "https://www.childwelfare.gov/resources/",
+      "publicReferenceOnly": true,
+      "publisher": "Child Welfare Information Gateway / Children's Bureau / Administration for Children and Families",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "childwelfare.family_support",
+      "sourceState": "current",
+      "sourceURL": "https://www.childwelfare.gov/resources/",
+      "termsURL": "https://www.childwelfare.gov/information-gateway-policies/",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.45c7363e9b79893a",
+      "dataClass": "public_requirement",
+      "gateType": "sensitive_family_support_reference_only",
+      "id": "requirement.4f011355c542310f",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.fa2d6a05f0f29923"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "childwelfare.family_support"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "childwelfare.family_support",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_institution",
+    "freshnessCadence": "quarterly ChildWelfare.gov resources and information gateway policies re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "Official Child Welfare Information Gateway public website/publication posture with ACF/HHS attribution, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current ChildWelfare.gov information gateway policies posture",
+    "publisher": "Child Welfare Information Gateway / Children's Bureau / Administration for Children and Families",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "childwelfare.family_support",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.childwelfare.gov/information-gateway-policies/"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "childwelfare.family_support"
+  }
+}

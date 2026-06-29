@@ -1,0 +1,45 @@
+{
+  "kind": "ambitions.sourceAtlas.productionR2OwnerApproval.v1",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "approvalStatus": "approved_for_one_bounded_public_education_production_r2_upload_readback_operation",
+  "approvalScope": {
+    "bucket": "ambitions-source-atlas-prod",
+    "environment": "production",
+    "channel": "stable",
+    "domain": "education_credentialing",
+    "packRoot": "tools/source-atlas/generated/pack-production/train-42-education-production-stable",
+    "objectPrefix": "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/",
+    "currentPointerKey": "source-atlas/v1/production/stable/education_credentialing/current.json",
+    "legalTermsApprovalPacket": "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-education-train-42.json"
+  },
+  "userAuthorizationBasis": [
+    "User authorized work needed to get Source Atlas Green in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage claim areas.",
+    "User authorized Codex internal legal/terms review for bounded Green claims.",
+    "User asked to continue fast mode toward Source Atlas completion."
+  ],
+  "requiredExecutionGates": [
+    "execute flag",
+    "owner approval artifact",
+    "legal/terms approval packet for college-scorecard.api and westpoint.redbook.computer_science_major",
+    "budget policy",
+    "public object keys",
+    "non-private payload scan",
+    "upload/readback SHA-256 verification",
+    "current pointer update after readback success only",
+    "revocation, LKG, and rollback artifacts present"
+  ],
+  "rollbackPlan": [
+    "Preserve previous current and LKG pointers before upload.",
+    "Do not update current pointer if any object upload/readback/hash check fails.",
+    "If the published education pack must be revoked, publish a revocation manifest and repoint current to the previous LKG if safe."
+  ],
+  "nonClaims": [
+    "not outside legal approval",
+    "not release readiness",
+    "not App Store readiness",
+    "not broad runtime Green",
+    "not universal coverage",
+    "not private graph storage",
+    "not final user plan, schedule, or Step generation"
+  ]
+}

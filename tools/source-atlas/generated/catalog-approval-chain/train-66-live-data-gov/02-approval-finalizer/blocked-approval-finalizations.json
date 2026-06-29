@@ -1,0 +1,110 @@
+{
+  "blockedApprovalFinalizations": [
+    {
+      "active_registry_written": false,
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_governance_review_required",
+        "approval_artifact_still_required",
+        "decision_artifact_required",
+        "legal_terms_review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.53425d7713a9f8c9",
+      "non_claims": [
+        "blocked finalization only",
+        "not an approval artifact",
+        "not source authority",
+        "not legal approval",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.4b820f8d120a15fa",
+      "request_id": "catalog_registry_approval_request.2cd3cf24f48fb565",
+      "schema_version": "1.0.0",
+      "status": "blocked"
+    },
+    {
+      "active_registry_written": false,
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_governance_review_required",
+        "approval_artifact_still_required",
+        "decision_artifact_required",
+        "legal_terms_review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "intake_id": "catalog_governance_intake.fcc114ebdee4f57f",
+      "non_claims": [
+        "blocked finalization only",
+        "not an approval artifact",
+        "not source authority",
+        "not legal approval",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.1dc74bf380dbf8b4",
+      "request_id": "catalog_registry_approval_request.c70c65b8e3e76407",
+      "schema_version": "1.0.0",
+      "status": "blocked"
+    },
+    {
+      "active_registry_written": false,
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_governance_review_required",
+        "approval_artifact_still_required",
+        "decision_artifact_required",
+        "legal_terms_review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5795c5dc5b5c2b4b",
+      "non_claims": [
+        "blocked finalization only",
+        "not an approval artifact",
+        "not source authority",
+        "not legal approval",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.05013ff8d608e374",
+      "request_id": "catalog_registry_approval_request.241022519e5281b5",
+      "schema_version": "1.0.0",
+      "status": "blocked"
+    },
+    {
+      "active_registry_written": false,
+      "blocking_reasons": [
+        "active_registry_mutation_blocked",
+        "api_governance_review_required",
+        "approval_artifact_still_required",
+        "decision_artifact_required",
+        "legal_terms_review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "intake_id": "catalog_governance_intake.5a956f95cfc9488d",
+      "non_claims": [
+        "blocked finalization only",
+        "not an approval artifact",
+        "not source authority",
+        "not legal approval",
+        "not active registry mutation"
+      ],
+      "proposal_id": "catalog_terms_resolution.8bfc192e433f4b12",
+      "request_id": "catalog_registry_approval_request.2a6955dffe559003",
+      "schema_version": "1.0.0",
+      "status": "blocked"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogBlockedApprovalFinalizations.v1"
+}

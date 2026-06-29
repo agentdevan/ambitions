@@ -1,0 +1,665 @@
+{
+  "actionResults": [
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/review/community_volunteering_opportunities/review-packet.json",
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/review/community_volunteering_opportunities/review-packet.md"
+      ],
+      "domainID": "community_volunteering_opportunities",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "local review packet written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "candidate_frontier_review",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "review",
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review",
+      "state": "candidate_only_review_required",
+      "status": "executed_safe"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/review/eldercare_local_services/review-packet.json",
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/review/eldercare_local_services/review-packet.md"
+      ],
+      "domainID": "eldercare_local_services",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "local review packet written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "candidate_frontier_review",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "review",
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review",
+      "state": "candidate_only_review_required",
+      "status": "executed_safe"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/business_entrepreneurship/monitor-snapshot.json"
+      ],
+      "domainID": "business_entrepreneurship",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/creative_project_reference/monitor-snapshot.json"
+      ],
+      "domainID": "creative_project_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/education_credentialing/monitor-snapshot.json"
+      ],
+      "domainID": "education_credentialing",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/finance_public_reference/monitor-snapshot.json"
+      ],
+      "domainID": "finance_public_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/health_wellness_reference/monitor-snapshot.json"
+      ],
+      "domainID": "health_wellness_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/health_wellness_reference_ca_statistics/monitor-snapshot.json"
+      ],
+      "domainID": "health_wellness_reference_ca_statistics",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/hobbies_recreation/monitor-snapshot.json"
+      ],
+      "domainID": "hobbies_recreation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/home_life_admin/monitor-snapshot.json"
+      ],
+      "domainID": "home_life_admin",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/occupation_foundation/monitor-snapshot.json"
+      ],
+      "domainID": "occupation_foundation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/personal_growth/monitor-snapshot.json"
+      ],
+      "domainID": "personal_growth",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/public_civic_requirements/monitor-snapshot.json"
+      ],
+      "domainID": "public_civic_requirements",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/relationships_family/monitor-snapshot.json"
+      ],
+      "domainID": "relationships_family",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/travel_relocation/monitor-snapshot.json"
+      ],
+      "domainID": "travel_relocation",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/volunteering_public_reference/monitor-snapshot.json"
+      ],
+      "domainID": "volunteering_public_reference",
+      "finalOutputGenerated": false,
+      "liveHarvestExecuted": false,
+      "message": "current production monitor snapshot written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not claim authority by itself",
+        "not pack output by itself",
+        "not R2 write readiness by itself",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionWriteExecuted": false,
+      "queue": "monitor",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "state": "current",
+      "status": "observed_snapshot_written"
+    }
+  ],
+  "allowedClaims": [
+    "autonomous_maintenance_executor_green",
+    "configured_domain_monitor_snapshots_written",
+    "unsafe_mutations_remain_blocked",
+    "candidate_and_review_work_packets_written"
+  ],
+  "artifacts": [
+    {
+      "domainID": "business_entrepreneurship",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/business_entrepreneurship/monitor-snapshot.json"
+    },
+    {
+      "domainID": "community_volunteering_opportunities",
+      "kind": "review_packet",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/review/community_volunteering_opportunities/review-packet.json"
+    },
+    {
+      "domainID": "community_volunteering_opportunities",
+      "kind": "review_packet",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/review/community_volunteering_opportunities/review-packet.md"
+    },
+    {
+      "domainID": "creative_project_reference",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/creative_project_reference/monitor-snapshot.json"
+    },
+    {
+      "domainID": "education_credentialing",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/education_credentialing/monitor-snapshot.json"
+    },
+    {
+      "domainID": "eldercare_local_services",
+      "kind": "review_packet",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/review/eldercare_local_services/review-packet.json"
+    },
+    {
+      "domainID": "eldercare_local_services",
+      "kind": "review_packet",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/review/eldercare_local_services/review-packet.md"
+    },
+    {
+      "domainID": "finance_public_reference",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/finance_public_reference/monitor-snapshot.json"
+    },
+    {
+      "domainID": "health_wellness_reference",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/health_wellness_reference/monitor-snapshot.json"
+    },
+    {
+      "domainID": "health_wellness_reference_ca_statistics",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/health_wellness_reference_ca_statistics/monitor-snapshot.json"
+    },
+    {
+      "domainID": "hobbies_recreation",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/hobbies_recreation/monitor-snapshot.json"
+    },
+    {
+      "domainID": "home_life_admin",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/home_life_admin/monitor-snapshot.json"
+    },
+    {
+      "domainID": "occupation_foundation",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/occupation_foundation/monitor-snapshot.json"
+    },
+    {
+      "domainID": "personal_growth",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/personal_growth/monitor-snapshot.json"
+    },
+    {
+      "domainID": "public_civic_requirements",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/public_civic_requirements/monitor-snapshot.json"
+    },
+    {
+      "domainID": "relationships_family",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/relationships_family/monitor-snapshot.json"
+    },
+    {
+      "domainID": "travel_relocation",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/travel_relocation/monitor-snapshot.json"
+    },
+    {
+      "domainID": "volunteering_public_reference",
+      "kind": "monitor_snapshot",
+      "path": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/monitor/volunteering_public_reference/monitor-snapshot.json"
+    }
+  ],
+  "blockedClaims": [
+    "active_registry_mutation_by_maintenance_executor",
+    "app_store_readiness",
+    "automatic_r2_write_without_execute_budget_approval",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "independent_accessibility_green",
+    "literal_universal_coverage",
+    "native_device_green",
+    "new_remote_r2_write_executed_by_maintenance_executor",
+    "outside_legal_approval",
+    "release_green",
+    "runtime_release_green",
+    "source_atlas_private_goal_text_processing",
+    "testflight_readiness",
+    "uncontrolled_live_harvest"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "freshness_plan_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "freshness_plan_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_items_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "safe_actions_respect_execute_flag",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_unsafe_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "output_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T00:36:00Z",
+  "evidencePaths": {
+    "freshnessPlan": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/05-freshness-planner/autonomous-freshness-planner-report.json"
+  },
+  "executeSafeActionsRequested": true,
+  "executionID": "source_atlas.autonomous_maintenance_execution.386a15e4a561e782",
+  "executionMode": "execute_safe_local_actions",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousMaintenanceExecutor.v1",
+  "nonClaims": [
+    "safe local maintenance executor only",
+    "not a live harvest runner",
+    "not an automatic production R2 writer",
+    "not a Worker deployer",
+    "not native runtime mutation",
+    "not active registry mutation",
+    "not outside legal approval",
+    "not full Source Atlas Green",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not native physical-device proof",
+    "not independent accessibility proof",
+    "not literal universal coverage",
+    "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+    "freshness and review work planning only",
+    "not a live harvest runner",
+    "not an automatic production R2 writer",
+    "not a Worker deployer",
+    "not native runtime mutation",
+    "not outside legal approval",
+    "not full Source Atlas Green",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not native physical-device proof",
+    "not independent accessibility proof",
+    "not literal universal coverage",
+    "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "business_entrepreneurship:monitor_snapshot:monitor-snapshot.json": "e3a7fe66e95182e45d833a6a6b30f71a3f818ceb25ab9b618f1a3cbc0962d0b4",
+    "community_volunteering_opportunities:review_packet:review-packet.json": "76dedf41e972033073b70907f146d60c14274c430341698473334ab094e42bcc",
+    "creative_project_reference:monitor_snapshot:monitor-snapshot.json": "5740334c0573a76aa96ea7737f2d6c274766a444fdc2d8151ed8aeb1d1f6c66a",
+    "education_credentialing:monitor_snapshot:monitor-snapshot.json": "88cba75549dd847be450c0c8c5d35118c155a1897f7cb05db954bcf39843af61",
+    "eldercare_local_services:review_packet:review-packet.json": "f3512356d6d07f25c7af7b82d45c832ec1d595c6ae38e84f711aa75f908aa56e",
+    "finance_public_reference:monitor_snapshot:monitor-snapshot.json": "be7e547e623b3688b1581d23fb0a0c194cb21fc732128029dd2ee9324a47306a",
+    "health_wellness_reference:monitor_snapshot:monitor-snapshot.json": "66518a3340469640b2c99f624ebae0448c4996d43e60ab656c9bc5eb8e2139d0",
+    "health_wellness_reference_ca_statistics:monitor_snapshot:monitor-snapshot.json": "c668005d136c7144c3874fb1d7ca5b020a1f8596aadca20e3d8fbcbbc5ac879e",
+    "hobbies_recreation:monitor_snapshot:monitor-snapshot.json": "f39570793d5ad2d03924b0eb6bf38c1a6b0f4b593555cbba5906284b1cdbd337",
+    "home_life_admin:monitor_snapshot:monitor-snapshot.json": "0fa3d1e71b76ff91512dce5b9b43b73a39a2936464ae9884e124b163f1f5bc24",
+    "occupation_foundation:monitor_snapshot:monitor-snapshot.json": "336ad71d3acf55f93fcf9076b4ee75c553a6ea93ac427173026abffbb6a5b5c6",
+    "personal_growth:monitor_snapshot:monitor-snapshot.json": "61eed18fadb4473d571922cdbcb22173fd616eb8e8b33a9ea20044a7f142c355",
+    "public_civic_requirements:monitor_snapshot:monitor-snapshot.json": "38fbcd8fab063bf51030c49571714b00384d55a0d1ddd943bc4742a4cb421ed0",
+    "relationships_family:monitor_snapshot:monitor-snapshot.json": "303c31c210d87c25ce4f6fd8412fe3b5000480054306cbc0c2ede56662aa8edc",
+    "report": "712bfef7faea80812659e47d6b041a81c075adda53f6f6d70fead954612dfa07",
+    "reportPayload": "eb1450ff407a920722098ed645ff04033f58d319c9e684f5118d7fc7362a304b",
+    "travel_relocation:monitor_snapshot:monitor-snapshot.json": "d004d51b624d4fbc635518707992c5801dc2b5b9e2e4724a1f1e82993c56233f",
+    "volunteering_public_reference:monitor_snapshot:monitor-snapshot.json": "857b95d200dc11c0c76e2f76d4bd7ccfef4708249532ee64fc2e3c1050c4e278"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/closeout.md",
+    "markdown": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/autonomous-maintenance-executor-report.md",
+    "report": "tools/source-atlas/generated/autonomous-production-supervisor/train-131-tetradeca-final/06-maintenance-executor/autonomous-maintenance-executor-report.json"
+  },
+  "overallReadinessStatus": "autonomous_maintenance_execution_ready",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "recordCounts": {
+    "blockedByGate": 0,
+    "finalOutputsGenerated": 0,
+    "heldGatePacketsWritten": 0,
+    "liveHarvestsExecuted": 0,
+    "monitorSnapshotsWritten": 14,
+    "nativeRuntimeMutations": 0,
+    "plannedNotExecuted": 0,
+    "productionWritesExecuted": 0,
+    "remoteMutations": 0,
+    "reviewPacketsWritten": 2,
+    "workItemsProcessed": 16
+  },
+  "runLabel": "train-131-tetradeca-final",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; safe local maintenance execution only",
+  "status": "Source Green for autonomous Source Atlas maintenance execution",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-maintenance-executor-train-125"
+}

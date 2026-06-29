@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0.0",
+  "train": "34",
+  "linear_issue": "AMB-1520",
+  "title": "Source Atlas Train 34 public Worker gateway and live native URLSession proof",
+  "created_at": "2026-06-28T03:54:54Z",
+  "status": "green_for_bounded_worker_gateway_live_transport_yellow_overall_source_atlas",
+  "scope_completed": [
+    "Created a bounded Cloudflare Worker gateway for production stable occupation_foundation Source Atlas public/reference objects.",
+    "Bound the Worker to R2 bucket ambitions-source-atlas-prod without enabling bucket-wide r2.dev public access.",
+    "Recorded owner approval scoped to a bounded Worker gateway live transport proof.",
+    "Deployed ambitions-source-atlas-public-gateway to workers.dev.",
+    "Verified public HTTPS readback for current pointer, revocations, LKG, manifest, and pack objects.",
+    "Verified Worker blocked root, non-allowlisted object, query-bearing request, and POST request probes.",
+    "Added live env-gated URLSession XCTest coverage for the production Worker endpoint.",
+    "Wired the default app container to the public Worker gateway endpoint and active production stable occupation_foundation refresh target.",
+    "Added live lifecycle-service proof using the same service type wired by the app container."
+  ],
+  "files_changed": [
+    "Native/Ambitions/App/AppContainerFactory.swift",
+    "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransportAdapters.swift",
+    "Native/Ambitions/Resources/source-atlas-public-refresh-targets.json",
+    "Native/AmbitionsTests/App/AppContainerFactoryTests.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift",
+    "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteTransportTests.swift",
+    "docs/qa/source-atlas/native/source-atlas-live-worker-gateway-urlsession-train-34.json",
+    "docs/qa/source-atlas/native/source-atlas-live-worker-gateway-urlsession-train-34.md",
+    "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-owner-approval-train-34.json",
+    "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-owner-approval-train-34.md",
+    "tools/source-atlas/r2-public-gateway/src/worker.js",
+    "tools/source-atlas/r2-public-gateway/wrangler.jsonc"
+  ],
+  "worker_gateway": {
+    "name": "ambitions-source-atlas-public-gateway",
+    "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev",
+    "workers_dev": true,
+    "r2_bucket": "ambitions-source-atlas-prod",
+    "r2_binding": "SOURCE_ATLAS_BUCKET",
+    "deployed_version_id": "302c92c0-cba8-4837-be7e-36acd0f14732",
+    "approval_artifact": "docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-owner-approval-train-34.md"
+  },
+  "allowed_object_keys": [
+    "source-atlas/v1/production/stable/occupation_foundation/current.json",
+    "source-atlas/v1/production/stable/occupation_foundation/lkg.json",
+    "source-atlas/v1/production/stable/occupation_foundation/revocations.json",
+    "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/manifest.json",
+    "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/pack.json"
+  ],
+  "public_https_readback_hashes": {
+    "current": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+    "lkg": "0bdce7b2eb6406f2234bd62f24101a44795d5d0a689fc88d28bb1ae930e4f12a",
+    "manifest": "6f8f394a912b4983c4b19512c776b21844834fd1df5713cf435816c0864ffe06",
+    "pack": "55f2ae4593e40e30fe9aa48d0dab4988f186bc889cf225b3db2676b77e1d1ea3",
+    "revocations": "0fb96e65856b9f53bf32d10e07cadc164618c3c9f6909aca069fafedbfd0db03"
+  },
+  "endpoint_control_proof": [
+    {
+      "probe": "GET current pointer",
+      "url": "https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev/source-atlas/v1/production/stable/occupation_foundation/current.json",
+      "status": 200,
+      "headers_observed": [
+        "content-type: application/json; charset=utf-8",
+        "x-source-atlas-public-reference: true",
+        "x-source-atlas-gateway: production-stable-occupation-foundation"
+      ]
+    },
+    {
+      "probe": "GET root",
+      "status": 404
+    },
+    {
+      "probe": "GET non-allowlisted claims.json",
+      "status": 404
+    },
+    {
+      "probe": "GET allowlisted object with private query marker",
+      "status": 404
+    },
+    {
+      "probe": "POST allowlisted object",
+      "status": 405
+    }
+  ],
+  "native_runtime_proof": {
+    "active_target_id": "source-atlas-refresh-target.occupation_foundation.stable.20260628T000000Z",
+    "target_pack_id": "source-atlas/v1/domain/occupation_foundation/20260628T000000Z",
+    "target_domain": "occupation_foundation",
+    "target_channel": "stable",
+    "target_environment": "production",
+    "target_status": "active",
+    "request_shape": "domain, channel, schema version, app version, public locale, environment, and public object keys only",
+    "live_urlsession_test": "SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedPackWithURLSessionWhenEndpointIsProvided",
+    "live_lifecycle_test": "SourceAtlasPublicPackLifecycleRefreshServiceTests/testLiveProductionWorkerGatewayRefreshesOccupationTargetWhenEndpointIsProvided",
+    "default_app_container_wired": true
+  },
+  "validation_run": [
+    {
+      "command": "node --check tools/source-atlas/r2-public-gateway/src/worker.js",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m json.tool tools/source-atlas/r2-public-gateway/wrangler.jsonc >/dev/null",
+      "status": "passed"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/r2/source-atlas-public-r2-worker-gateway-owner-approval-train-34.json >/dev/null",
+      "status": "passed"
+    },
+    {
+      "command": "wrangler deploy --config tools/source-atlas/r2-public-gateway/wrangler.jsonc --dry-run",
+      "status": "passed"
+    },
+    {
+      "command": "wrangler deploy --config tools/source-atlas/r2-public-gateway/wrangler.jsonc",
+      "status": "passed",
+      "summary": "Worker URL https://ambitions-source-atlas-public-gateway.devanwarner.workers.dev; version 302c92c0-cba8-4837-be7e-36acd0f14732"
+    },
+    {
+      "command": "curl HTTPS readback plus sha256 for current, lkg, manifest, pack, revocations",
+      "status": "passed"
+    },
+    {
+      "command": "curl blocked route probes for root, claims.json, private query, and POST",
+      "status": "passed"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRemoteTransportTests/testLiveProductionWorkerGatewayFetchesPublishedPackWithURLSessionWhenEndpointIsProvided",
+      "status": "passed",
+      "summary": "1 passed, 0 failed, 0 skipped, 0 warnings",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T03-38-21-727Z_pid24471_3881d6fb.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T03-38-21-727Z_pid24471_66063b31.xcresult"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim -only-testing:AmbitionsTests/SourceAtlasPublicPackRemoteTransportTests",
+      "status": "passed",
+      "summary": "6 passed, 0 failed, 0 skipped, 0 warnings",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T03-40-38-697Z_pid24471_74563e0e.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T03-40-38-697Z_pid24471_9d98946d.xcresult"
+    },
+    {
+      "command": "XcodeBuildMCP test_sim affected app factory, registry loader, transport, lifecycle service set",
+      "status": "passed",
+      "summary": "22 passed, 0 failed, 0 skipped, 0 warnings",
+      "log": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-06-28T03-53-02-672Z_pid24471_ff283403.log",
+      "xcresult": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/result-bundles/test_sim_2026-06-28T03-53-02-672Z_pid24471_a9cadefe.xcresult"
+    },
+    {
+      "command": "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests",
+      "status": "passed",
+      "summary": "145 passed"
+    },
+    {
+      "command": "python3 scripts/source-atlas-boundary-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas boundary audit: PASS (40 targets)"
+    },
+    {
+      "command": "python3 scripts/source-atlas-no-private-graph-egress-audit.py",
+      "status": "passed",
+      "summary": "Source Atlas no-private-graph egress audit: PASS"
+    },
+    {
+      "command": "python3 scripts/ambitions-green-standard-audit.py",
+      "status": "passed",
+      "summary": "GREEN: no disallowed architecture-as-UI strings found in active primary UI source"
+    },
+    {
+      "command": "python3 scripts/ambitions-local-first-boundary-scan.py",
+      "status": "passed",
+      "summary": "GREEN: local-first/account/R2/hosted-AI boundary checks passed in active authority files"
+    },
+    {
+      "command": "python3 -m json.tool docs/qa/source-atlas/native/source-atlas-live-worker-gateway-urlsession-train-34.json >/dev/null",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "scripts/ambitions-xcode-build-for-testing.sh --batch green-standard",
+      "status": "passed",
+      "summary": "Test Build Succeeded; FAILURE_CLASS=passed",
+      "summary_json": ".codex/xcode-summaries/green-standard/20260628T035744Z/extract/summary.json"
+    }
+  ],
+  "validation_not_run": [
+    "Full native XCTest suite.",
+    "Custom-domain production endpoint proof.",
+    "Outside legal review.",
+    "Release umbrella proof.",
+    "Universal domain coverage proof."
+  ],
+  "source_atlas_status_ceiling": "Green for bounded public Worker gateway and live native URLSession/lifecycle refresh proof. Overall Source Atlas remains Yellow.",
+  "product_law_preserved": true,
+  "r2_request_privacy_proof": "The live native URLSession request used only the public gateway base URL plus public Source Atlas object keys derived from domain, channel, environment, schema version, app version, and public locale. The lifecycle service resolution reported no egress findings and no private runtime context.",
+  "no_private_graph_egress_proof": "No user goals, captures, schedules, proof, receipts, account identifiers, device identifiers, private graph data, personalization, or final user paths were sent in native requests, Worker paths, object keys, query strings, or test inputs.",
+  "license_terms_proof": "Train 34 records owner approval for bounded public endpoint exposure only. It is not outside legal approval and does not change source licenses or terms.",
+  "restricted_source_exclusion_proof": "The Worker exposes only approved production stable occupation_foundation pack objects. It exposes no bucket listing, no arbitrary source-atlas object keys, and no restricted source lane output.",
+  "provenance_completeness_proof": "No new claims were produced. The downloaded production pack hash matched the existing R2-published pack SHA-256.",
+  "freshness_revocation_proof": "The live native path fetched current pointer, revocations, manifest, LKG manifest, and pack objects through the Worker gateway, then accepted the pack only after the existing manifest/hash pipeline passed.",
+  "lkg_rollback_proof": "The live native object request sequence includes the LKG pointer path and LKG manifest fetch. R2 object contents were not modified by this train.",
+  "native_offline_no_account_proof": "The app factory remains usable without account and the affected tests include offline cached/LKG behavior. Train 34 specifically proves the active live public refresh target path when online.",
+  "production_non_claims": [
+    "Not full Source Atlas Green.",
+    "Not Release Green.",
+    "Not Visual Green.",
+    "Not App Store readiness.",
+    "Not outside legal approval.",
+    "Not privacy/legal owner release signoff.",
+    "Not production custom-domain readiness.",
+    "Not universal goal coverage.",
+    "Not entitlement readiness.",
+    "Not a private user-data backend.",
+    "Not private life graph storage.",
+    "Not a final user plan, schedule, or Step generator."
+  ],
+  "architecture_tree": {
+    "final_architecture_tree_inspected": true,
+    "canonical_owners_touched": [
+      "App",
+      "Core/Persistence",
+      "Resources",
+      "AmbitionsTests",
+      "tools/source-atlas",
+      "docs/qa/source-atlas"
+    ],
+    "features_touched": false,
+    "compatibility_shims_left": []
+  },
+  "known_risks": [
+    "workers.dev proof is not custom-domain production endpoint proof.",
+    "Outside legal approval remains unproven.",
+    "Release-wide proof and full native build-for-testing remain outside this train.",
+    "Overall Source Atlas remains Yellow until all production, legal, coverage, native, release, and runtime gates pass."
+  ],
+  "rollback_plan": [
+    "Disable or delete the Cloudflare Worker gateway if public endpoint exposure must be revoked.",
+    "Revert the native default endpoint/refresh target wiring to disable live remote pack refresh.",
+    "Keep the app on bundled/offline baseline or safe LKG pack.",
+    "No bucket-wide r2.dev setting was enabled by this train.",
+    "R2 object revocation/LKG/rollback artifacts remain governed by prior R2 proof."
+  ]
+}

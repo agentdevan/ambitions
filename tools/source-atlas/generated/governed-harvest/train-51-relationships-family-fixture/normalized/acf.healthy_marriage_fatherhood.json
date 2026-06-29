@@ -1,0 +1,495 @@
+{
+  "adapterID": "acf_healthy_marriage_fatherhood_reference_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_acf_hmrf_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget; current environment may receive ACF WAF challenge",
+    "packOutput": "allowed_for_bounded_public_family_program_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_family_program_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.79914fcddd3f1869",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "ACF Healthy Marriage and Responsible Fatherhood public reference pages",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "relationships_family_program_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.43ae4ddb17a318fe",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "healthy marriage program reference",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "relationships_family_program_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.cc0269a703bd0076",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "responsible fatherhood program reference",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.b3366d1524e5a814",
+      "claimType": "public_family_service_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly ACF HMRF page and digital policy re-review",
+      "id": "claim.7778c1c2aeb54adb",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://acf.gov/digital-policies",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Administration for Children and Families",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "acf.healthy_marriage_fatherhood",
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://acf.gov/ofa/programs/healthy-marriage",
+      "state": "source_backed",
+      "text": "The Administration for Children and Families publishes Healthy Marriage public program reference context for family and relationship education services, not therapy, legal advice, eligibility approval, relationship judgment, or a personalized relationship plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.31ac7779d3b4100e",
+      "claimType": "public_family_service_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly ACF HMRF page and digital policy re-review",
+      "id": "claim.b10bad1be8b69c8c",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://acf.gov/digital-policies",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Administration for Children and Families",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "acf.healthy_marriage_fatherhood",
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://acf.gov/ofa/programs/healthy-marriage",
+      "state": "source_backed",
+      "text": "The Administration for Children and Families publishes Responsible Fatherhood public program reference context for family services and education, not custody advice, legal advice, therapy, eligibility approval, or a private family profile.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "acf_healthy_marriage_fatherhood_reference_adapter",
+    "atomCount": 3,
+    "claimCount": 2,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "relationships_family",
+    "edgeCount": 2,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 2,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "acf.healthy_marriage_fatherhood",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "public_family_service_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateEligibilityGuarantee": true,
+      "doesNotCreateLegalAdvice": true,
+      "doesNotCreateLegalCustodyAdvice": true,
+      "doesNotCreatePersonalizedRelationshipPlan": true,
+      "doesNotCreateRelationshipJudgment": true,
+      "doesNotCreateTherapy": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.relationshipsFamilyCoverage.v1",
+      "label": "ACF Healthy Marriage public program reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "acf.healthy_marriage_fatherhood",
+      "subject": "relationships_family.acf_healthy_marriage_program"
+    },
+    {
+      "claimType": "public_family_service_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateEligibilityGuarantee": true,
+      "doesNotCreateLegalAdvice": true,
+      "doesNotCreateLegalCustodyAdvice": true,
+      "doesNotCreatePersonalizedRelationshipPlan": true,
+      "doesNotCreateRelationshipJudgment": true,
+      "doesNotCreateTherapy": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.relationshipsFamilyCoverage.v1",
+      "label": "ACF Responsible Fatherhood public program reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "acf.healthy_marriage_fatherhood",
+      "subject": "relationships_family.acf_responsible_fatherhood_program"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "relationships_family",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.79914fcddd3f1869",
+      "id": "edge.a073d388b9dc7d43",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_family_program_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "toAtomID": "atom.43ae4ddb17a318fe",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.79914fcddd3f1869",
+      "id": "edge.936c5551d1433fb6",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_family_program_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "toAtomID": "atom.cc0269a703bd0076",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.79914fcddd3f1869",
+        "atom.43ae4ddb17a318fe",
+        "atom.cc0269a703bd0076"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.a073d388b9dc7d43",
+        "edge.936c5551d1433fb6"
+      ],
+      "id": "lattice.3a24126a7d07020d",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "acf_healthy_marriage_fatherhood_reference_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "relationships_family",
+      "id": "pack_candidate.2a3c5711aef6e67a",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 3,
+        "claims": 2,
+        "crosswalks": 0,
+        "edges": 2,
+        "requirements": 2
+      },
+      "schemaVersion": 1,
+      "sourceID": "acf.healthy_marriage_fatherhood",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "acf.healthy_marriage_fatherhood"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "d0d19d9b9557db134e48315b1103be41985f160532afd03753525414b00db506",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly ACF HMRF page and digital policy re-review",
+      "id": "provenance.8de33837693f9201",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with ACF/HHS digital policy, third-party, trademark, and media caveats retained",
+      "locator": "https://acf.gov/ofa/programs/healthy-marriage",
+      "publicReferenceOnly": true,
+      "publisher": "Administration for Children and Families",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "acf.healthy_marriage_fatherhood",
+      "sourceState": "current",
+      "sourceURL": "https://acf.gov/ofa/programs/healthy-marriage",
+      "termsURL": "https://acf.gov/digital-policies",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.7778c1c2aeb54adb",
+      "dataClass": "public_requirement",
+      "gateType": "public_family_program_reference_only",
+      "id": "requirement.94533c50c78cfe78",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.b10bad1be8b69c8c",
+      "dataClass": "public_requirement",
+      "gateType": "public_family_program_reference_only",
+      "id": "requirement.d855fdc2b80b101a",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.8de33837693f9201"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "acf.healthy_marriage_fatherhood",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly ACF HMRF page and digital policy re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with ACF/HHS digital policy, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current ACF.gov digital policy posture",
+    "publisher": "Administration for Children and Families",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "acf.healthy_marriage_fatherhood",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://acf.gov/digital-policies"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "acf.healthy_marriage_fatherhood"
+  }
+}

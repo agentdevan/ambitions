@@ -1,0 +1,105 @@
+{
+  "candidateOnlyDomains": [
+    "business_entrepreneurship",
+    "creative_project_reference",
+    "education_credentialing",
+    "finance_public_reference",
+    "health_wellness_reference",
+    "hobbies_recreation",
+    "home_life_admin",
+    "personal_growth",
+    "relationships_family",
+    "travel_relocation"
+  ],
+  "checks": [
+    {
+      "name": "candidate_discovery_emits_no_claims",
+      "passed": true
+    },
+    {
+      "name": "all_candidates_review_required",
+      "passed": true
+    },
+    {
+      "name": "candidate_statuses_below_pack_readiness",
+      "passed": true
+    },
+    {
+      "name": "source_of_sources_not_authority",
+      "passed": true
+    },
+    {
+      "name": "crosswalks_not_regulated_authority",
+      "passed": true
+    },
+    {
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "r2_object_key_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domainStatusCounts": {
+    "candidate_only": 10,
+    "not_started": 1,
+    "source_review_ready": 1
+  },
+  "frontierConfigPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/coverage-frontiers.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.broadDomainDiscoveryManifest.v1",
+  "manifestPath": "tools/source-atlas/generated/broad-domain-discovery/train-49-creative-project/manifest.json",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not live source discovery",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "outputHashes": {
+    "candidateRecords": "b75f2e669a64881f5bc4df8a6cf162ad130fc2b23e4884ed33f78f289031c5c0",
+    "manifest": "270446cfc52cb67f2425e84dbe8b7cb480f880445c8549dbd1794f72efe04a61",
+    "scorecards": "5f86e5665f76e0c096fe239fe7e77dbf3cbe153e20c5a423aab7d72114f2c3b7"
+  },
+  "outputPaths": {
+    "candidateRecords": "tools/source-atlas/generated/broad-domain-discovery/train-49-creative-project/candidate-sources.json",
+    "closeout": "tools/source-atlas/generated/broad-domain-discovery/train-49-creative-project/closeout.md",
+    "scorecards": "tools/source-atlas/generated/broad-domain-discovery/train-49-creative-project/domain-scorecards.json"
+  },
+  "outputRoot": "tools/source-atlas/generated/broad-domain-discovery/train-49-creative-project",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "r2ObjectKeyScan": {
+    "issues": [],
+    "passed": true
+  },
+  "recordCounts": {
+    "candidateRecords": 22,
+    "claims": 0,
+    "frontiers": 12,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; deterministic candidate discovery/scorecards only",
+  "status": "Source Green for broad-domain candidate discovery tooling",
+  "valid": true,
+  "versionID": "source-atlas-broad-domain-discovery-train-07"
+}

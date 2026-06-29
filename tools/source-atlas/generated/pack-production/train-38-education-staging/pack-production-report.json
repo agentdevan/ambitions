@@ -1,0 +1,462 @@
+{
+  "artifactValidation": {
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.packProductionArtifactValidation.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "requiredArtifacts": [
+      "adjudications.json",
+      "attribution.json",
+      "claims.json",
+      "coverage.json",
+      "entities.json",
+      "freshness.json",
+      "licenses.json",
+      "lkg.json",
+      "manifest.json",
+      "non-private-scan-report.json",
+      "non_claims.json",
+      "pack.json",
+      "r2-dry-run-plan.json",
+      "revocations.json",
+      "rollback-plan.json",
+      "sources.json"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "channel": "candidate",
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "pack_slices_written",
+      "passed": true
+    },
+    {
+      "name": "pack_contains_only_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "restricted_and_crosswalk_claims_excluded",
+      "passed": true
+    },
+    {
+      "name": "manifest_hashes_present",
+      "passed": true
+    },
+    {
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "name": "dry_run_plan_only",
+      "passed": true
+    },
+    {
+      "name": "private_object_keys_blocked",
+      "passed": true
+    },
+    {
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "required_artifacts_valid",
+      "passed": true
+    },
+    {
+      "name": "execute_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domain": "education_credentialing",
+  "dryRunPlan": {
+    "channel": "candidate",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_r2_object_key",
+    "dryRun": true,
+    "environment": "staging",
+    "executeRequested": false,
+    "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "dry-run only; no R2 upload or production promotion was performed"
+    ],
+    "objects": [
+      {
+        "bytes": 2230,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "adjudications",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/adjudications.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/adjudications.json",
+        "sha256": "f9be073f3f20182737de3cfab54f8d50f3011ede948379b1474a085ab3ebb4f9"
+      },
+      {
+        "bytes": 2006,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "attribution",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/attribution.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/attribution.json",
+        "sha256": "662515e691b613233f9108bd4c83c1cac865b6b7e1586cafde4ed265c6e879fb"
+      },
+      {
+        "bytes": 13830,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "claims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/claims.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/claims.json",
+        "sha256": "1df2e50ac0416958f95e7b9e86b14bbcf52fd7ebb6503f8c2eb2efe4bfda8ba3"
+      },
+      {
+        "bytes": 2508,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "coverage",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/coverage.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/coverage.json",
+        "sha256": "a8ee4d96e698ccd12100e9fc4574835805c985517b04ec513468516d3eda1147"
+      },
+      {
+        "bytes": 3122,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "entities",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/entities.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/entities.json",
+        "sha256": "8bc74c75f1e4a1aadc06b937c1b49a1e8747b5ebb0cbdb8799df9fa4ffc8ee06"
+      },
+      {
+        "bytes": 3192,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "freshness",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/freshness.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/freshness.json",
+        "sha256": "34b5382157890e75e451a0ccae7bc52941e32791b1e8e02ada8e73f5a0ecd7e8"
+      },
+      {
+        "bytes": 1023,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "licenses",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/licenses.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/licenses.json",
+        "sha256": "d9a585d67a69fce7a9a6bc013253ffff3651b0ecdbca259269b75060caae4f63"
+      },
+      {
+        "bytes": 1269,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "lkg",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/lkg.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/lkg.json",
+        "sha256": "abb4533cd49ddbfec55988894384f05c4504c2cfb570dd762ac62f0093631252"
+      },
+      {
+        "bytes": 8708,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "manifest",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/manifest.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json",
+        "sha256": "b56fe0c797c651611abb52504d0f573028f5060b06d495480f3140c1449f22fe"
+      },
+      {
+        "bytes": 1204,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "nonClaims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/non_claims.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/non_claims.json",
+        "sha256": "f3717d2a04969f99ce697438e9b6bfc2a62cc6f2d625833ea34c2ffcddb39387"
+      },
+      {
+        "bytes": 26476,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "pack",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/pack.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/pack.json",
+        "sha256": "9fae76991b5f4d565f40c534db984ecc47ac03633e9b8130c393ce0042192fc3"
+      },
+      {
+        "bytes": 1411,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "revocations",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/revocations.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/revocations.json",
+        "sha256": "a496dbb2508d8a403ccef18e567199e65eb29d139c91634d09cb300a40bae488"
+      },
+      {
+        "bytes": 1292,
+        "cacheControl": "public, max-age=300",
+        "contentType": "application/json; charset=utf-8",
+        "label": "sources",
+        "localPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/sources.json",
+        "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/sources.json",
+        "sha256": "a43d11c7b284efb504c0b3bdfc57b8dfe8d6f6ccdb96227fffd763d804731a7f"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-38-education-staging/rollback-plan.json",
+    "schemaVersion": 1,
+    "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+    "wouldUpload": false
+  },
+  "environment": "staging",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.packProductionManifest.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "required": false,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "college-scorecard.api"
+    ],
+    "status": "not_required_for_staging_candidate",
+    "valid": true
+  },
+  "lkg": {
+    "channel": "candidate",
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "domain": "education_credentialing",
+    "manifest_key": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "pack_id": "source-atlas/v1/domain/education_credentialing/2026-06-28T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "reason_selected": "dry_run_candidate",
+    "rollback_safe": true,
+    "sha256": "b56fe0c797c651611abb52504d0f573028f5060b06d495480f3140c1449f22fe",
+    "valid_until": null
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "nonPrivateScan": {
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.nonPrivateScanReport.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "outputRoot": "tools/source-atlas/generated/pack-production/train-38-education-staging",
+    "passed": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "schemaVersion": 1
+  },
+  "objectKeys": {
+    "adjudications": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/adjudications.json",
+    "attribution": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/attribution.json",
+    "claims": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/claims.json",
+    "coverage": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/coverage.json",
+    "current": "source-atlas/v1/staging/candidate/education_credentialing/current.json",
+    "entities": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/entities.json",
+    "freshness": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/freshness.json",
+    "licenses": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/licenses.json",
+    "lkg": "source-atlas/v1/staging/candidate/education_credentialing/lkg.json",
+    "manifest": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json",
+    "nonClaims": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/non_claims.json",
+    "pack": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/pack.json",
+    "revocations": "source-atlas/v1/staging/candidate/education_credentialing/revocations.json",
+    "sources": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/sources.json"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/pack-production/train-38-education-staging/closeout.md",
+    "lkg": "tools/source-atlas/generated/pack-production/train-38-education-staging/lkg.json",
+    "manifest": "tools/source-atlas/generated/pack-production/train-38-education-staging/manifest.json",
+    "nonPrivateScan": "tools/source-atlas/generated/pack-production/train-38-education-staging/non-private-scan-report.json",
+    "pack": "tools/source-atlas/generated/pack-production/train-38-education-staging/pack.json",
+    "r2DryRunPlan": "tools/source-atlas/generated/pack-production/train-38-education-staging/r2-dry-run-plan.json",
+    "revocation": "tools/source-atlas/generated/pack-production/train-38-education-staging/revocations.json",
+    "rollback": "tools/source-atlas/generated/pack-production/train-38-education-staging/rollback-plan.json"
+  },
+  "packID": "source-atlas/v1/domain/education_credentialing/2026-06-28T000000Z",
+  "packVersion": "2026-06-28T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "blockedClaimsExcluded": 0,
+    "claims": 6,
+    "licenses": 1,
+    "objectCount": 13,
+    "sources": 1
+  },
+  "revocation": {
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "lkg_policy": "use_lkg_if_future_pack_is_revoked_and_lkg_hash_verifies",
+    "native_behavior": "not_claimed_in_train_04",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "object_keys": {
+      "lkg": "source-atlas/v1/staging/candidate/education_credentialing/lkg.json",
+      "manifest": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "proof_artifacts": [],
+    "publicReferenceOnly": true,
+    "reason": "dry_run_no_revocations",
+    "replacement_pack_id": null,
+    "revocation_id": "source_atlas_revocation.8d7a8d6e9c9d74e0",
+    "revoked_object_keys": [],
+    "revoked_pack_ids": [],
+    "severity": "none"
+  },
+  "rollback": {
+    "candidateManifestKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "dryRunOnly": true,
+    "kind": "ambitions.sourceAtlas.rollbackPlan.v1",
+    "lkgPointerKey": "source-atlas/v1/staging/candidate/education_credentialing/lkg.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "packID": "source-atlas/v1/domain/education_credentialing/2026-06-28T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackCandidates": [
+      {
+        "channel": "candidate",
+        "created_at": "2026-06-28T00:00:00Z",
+        "dataClass": "public_freshness",
+        "domain": "education_credentialing",
+        "manifest_key": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json",
+        "nonClaims": [
+          "not a private user-data backend",
+          "not private life graph storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final user plan, schedule, or Step generator"
+        ],
+        "pack_id": "source-atlas/v1/domain/education_credentialing/2026-06-28T000000Z",
+        "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+        "publicReferenceOnly": true,
+        "reason_selected": "dry_run_candidate",
+        "rollback_safe": true,
+        "sha256": "b56fe0c797c651611abb52504d0f573028f5060b06d495480f3140c1449f22fe",
+        "valid_until": null
+      }
+    ],
+    "schemaVersion": 1,
+    "stablePointerWillChange": false
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; pack compiler and R2 dry-run controls only",
+  "status": "Source Green for pack compiler/R2 dry-run controls",
+  "valid": true,
+  "versionID": "source-atlas-pack-production-train-04"
+}

@@ -1,0 +1,1016 @@
+{
+  "allowedClaims": [
+    "autonomous_promotion_control_green",
+    "supervisor_sweep_owner_legal_api_inputs_reconciled",
+    "production_r2_writes_remain_execute_gated",
+    "promotion_decisions_emit_no_remote_or_native_mutation",
+    "configured_domain_monitor_decisions_emitted",
+    "candidate_and_review_domains_remain_non_packable",
+    "future_remote_r2_write_preflight_reconciled"
+  ],
+  "blockedClaims": [
+    "active_registry_mutation_by_promotion_runner",
+    "app_store_readiness",
+    "automatic_r2_write_without_execute_budget_approval",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "independent_accessibility_green",
+    "literal_universal_coverage",
+    "native_device_green",
+    "new_remote_r2_write_executed_by_promotion_runner",
+    "outside_legal_approval",
+    "release_green",
+    "runtime_release_green",
+    "source_atlas_private_goal_text_processing",
+    "testflight_readiness",
+    "uncontrolled_live_harvest"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "supervisor_report_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_sweep_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "owner_approval_valid_for_configured_domains",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_registry_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "api_governance_registry_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_packet_present_when_execute_requested",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "future_remote_write_preflight_ready_when_execute_requested",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "r2_execute_requests_emit_commands_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_user_outputs",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "object_key_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "output_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-29T03:45:00Z",
+  "evidencePaths": {
+    "apiGovernanceRegistry": "tools/source-atlas/governance/api-governance-registry.json",
+    "legalApprovalPacket": "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.json",
+    "legalTermsRegistry": "tools/source-atlas/governance/legal-terms-registry.json",
+    "ownerApproval": "docs/qa/source-atlas/r2/source-atlas-production-r2-owner-approval-train-118.json",
+    "productionSweep": "docs/qa/source-atlas/source-atlas-production-sweep-train-118.json",
+    "supervisorReport": "docs/qa/source-atlas/source-atlas-autonomous-production-supervisor-train-126.json"
+  },
+  "executeR2Requested": false,
+  "executionMode": "decision_only_hold_remote_writes",
+  "futureRemoteWritePreflight": {
+    "approvalArtifactPresent": true,
+    "blockedReasons": [],
+    "bucketConfigured": true,
+    "bucketSource": "explicit",
+    "credentialEnvNameCount": 3,
+    "credentialGroupsPresent": [
+      "cloudflare_control",
+      "cloudflare_r2_access_pair"
+    ],
+    "credentialsAvailable": true,
+    "currentProductionBucketsObserved": [
+      "ambitions-source-atlas-prod"
+    ],
+    "environment": "production",
+    "kind": "ambitions.sourceAtlas.futureRemoteWritePreflight.v1",
+    "legalApprovalPacketPresent": true,
+    "readyForNewRemoteWrite": true,
+    "secretValuesPrinted": false,
+    "wranglerInstalled": true
+  },
+  "heldGatePackets": [
+    {
+      "blockers": [
+        "review-only action cannot emit claims, packs, or R2 writes"
+      ],
+      "domainID": "volunteering_public_reference",
+      "finalOutputGenerated": false,
+      "gateID": "source_atlas.promotion_gate.aa554d0235bddf6b",
+      "nativeRuntimeMutation": false,
+      "productionWriteExecuted": false,
+      "promotionState": "candidate_or_source_review_only",
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review"
+    }
+  ],
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousPromotionRunner.v1",
+  "legalPacketSummary": {
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacket.v1",
+    "outsideLegalApprovalClaimed": false,
+    "present": true,
+    "privacyIssues": [],
+    "status": "Green"
+  },
+  "nonClaims": [
+    "autonomous promotion control only",
+    "not a live harvest runner",
+    "not an automatic production R2 writer",
+    "not a Worker deployer",
+    "not native runtime mutation",
+    "not active registry mutation",
+    "not outside legal approval",
+    "not full Source Atlas Green",
+    "not Release Green",
+    "not App Store or TestFlight readiness",
+    "not native physical-device proof",
+    "not independent accessibility proof",
+    "not literal universal coverage",
+    "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "commandQueue": "63f3793d91c1315282712aa62d03300a72386d8611aa3f3412b024b22b247bf2",
+    "decisions": "c4dd6498b997352586be3f54f097f0c683cdc90cf440a3eb71e5e465ed270395",
+    "heldGatePackets": "f7e3419058012c606729c3ec90399d2ab063e168f158b7d0cb44abb7ab84f89f",
+    "report": "d9c44fff6ff8a807f9b72848993b3a96360ce4fc1d3396e5163a6e57b8e89e95",
+    "reportPayload": "178f95aa90df3640c6e922b574f98a82b60dd75df1dd83bdedd27d031747b6ba"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-promotion-runner/train-127-current/closeout.md",
+    "commandQueue": "tools/source-atlas/generated/autonomous-promotion-runner/train-127-current/promotion-command-queue.json",
+    "decisions": "tools/source-atlas/generated/autonomous-promotion-runner/train-127-current/promotion-decisions.json",
+    "heldGatePackets": "tools/source-atlas/generated/autonomous-promotion-runner/train-127-current/held-gate-packets.json",
+    "markdown": "tools/source-atlas/generated/autonomous-promotion-runner/train-127-current/autonomous-promotion-runner-report.md",
+    "report": "tools/source-atlas/generated/autonomous-promotion-runner/train-127-current/autonomous-promotion-runner-report.json"
+  },
+  "overallReadinessStatus": "autonomous_promotion_control_ready",
+  "ownerApprovalValidation": {
+    "approvalID": "source_atlas.r2_owner_approval.0ba97d2ecccf06ac",
+    "approvedDomains": [
+      "business_entrepreneurship",
+      "creative_project_reference",
+      "education_credentialing",
+      "finance_public_reference",
+      "health_wellness_reference",
+      "health_wellness_reference_ca_statistics",
+      "hobbies_recreation",
+      "home_life_admin",
+      "occupation_foundation",
+      "personal_growth",
+      "public_civic_requirements",
+      "relationships_family",
+      "travel_relocation"
+    ],
+    "artifactSHA256": "072cc22b7516359ee50d302a01035fa8dbfab28137363e4bc4171b085bf127f4",
+    "domainCount": 13,
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.productionR2OwnerApproval.v1",
+    "path": "docs/qa/source-atlas/r2/source-atlas-production-r2-owner-approval-train-118.json",
+    "privacyIssues": [],
+    "schemaVersion": 1,
+    "status": "Green",
+    "valid": true
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "promotionCommandQueue": [],
+  "promotionDecisions": [
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/review/volunteering_public_reference/review-packet.json",
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/review/volunteering_public_reference/review-packet.md"
+      ],
+      "blockers": [
+        "review-only action cannot emit claims, packs, or R2 writes"
+      ],
+      "commandID": null,
+      "currentProductionReady": false,
+      "decisionID": "source_atlas.promotion_decision.0d8507c95bb34da1",
+      "domainID": "volunteering_public_reference",
+      "existingRemoteUploadReadbackReady": false,
+      "finalOutputGenerated": false,
+      "inputStatus": "executed_safe",
+      "nativeRuntimeMutation": false,
+      "nextAction": "candidate_frontier_review",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 1,
+      "packableClaimCount": 0,
+      "productionWriteExecuted": false,
+      "promotionAllowed": false,
+      "promotionState": "candidate_or_source_review_only",
+      "publicObjectKeys": [],
+      "r2State": "not_r2_write_action",
+      "remoteMutation": false,
+      "requiredGate": "frontier_governance_review",
+      "sourceIDs": []
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/business_entrepreneurship/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-43-business-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-business_entrepreneurship-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.d05990e07ff56dc7",
+      "domainID": "business_entrepreneurship",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 2,
+      "packableClaimCount": 3,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/business_entrepreneurship/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/business_entrepreneurship/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "sba.business_guide.start_business"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/creative_project_reference/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-49-creative-project-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-creative_project_reference-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.31d554e560694809",
+      "domainID": "creative_project_reference",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 3,
+      "packableClaimCount": 3,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/creative_project_reference/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "creative-commons.licenses",
+        "loc.primary_sources",
+        "w3c.web-standards"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/education_credentialing/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-42-education-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-education_credentialing-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.fa1fbbcd3f2de360",
+      "domainID": "education_credentialing",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 4,
+      "packableClaimCount": 8,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/education_credentialing/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/education_credentialing/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "college-scorecard.api",
+        "westpoint.redbook.computer_science_major"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/finance_public_reference/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-finance_public_reference-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.19de8153f524d1ed",
+      "domainID": "finance_public_reference",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 5,
+      "packableClaimCount": 3,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/finance_public_reference/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/finance_public_reference/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "cfpb.adult_financial_education",
+        "irs.when_to_file",
+        "usa.gov.benefits"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/health_wellness_reference/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-45-health-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-health_wellness_reference-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.df956607dc7b93a7",
+      "domainID": "health_wellness_reference",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 6,
+      "packableClaimCount": 3,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/health_wellness_reference/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/health_wellness_reference/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/health_wellness_reference_ca_statistics/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-86-statcan-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.1ee75718a68cfbcc",
+      "domainID": "health_wellness_reference_ca_statistics",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 7,
+      "packableClaimCount": 2,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/health_wellness_reference_ca_statistics/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "official.statcan.table.13100974"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/hobbies_recreation/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-44-hobbies-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-hobbies_recreation-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.1f5f9323659c5391",
+      "domainID": "hobbies_recreation",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 8,
+      "packableClaimCount": 3,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/hobbies_recreation/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/hobbies_recreation/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nps.recreation-safety"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/home_life_admin/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-home_life_admin-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.3cc4805211904d3b",
+      "domainID": "home_life_admin",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 9,
+      "packableClaimCount": 4,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/home_life_admin/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "energy.gov.energy_saver",
+        "ready.gov.kit",
+        "usa.gov.home_repair"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/occupation_foundation/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-101-env-backed-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.89e816e6f09e4dff",
+      "domainID": "occupation_foundation",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 10,
+      "packableClaimCount": 26,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/occupation_foundation/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/occupation_foundation/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "bls.public.data.api",
+        "onet.database",
+        "openalex.dataset",
+        "openalex.works"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/personal_growth/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-personal_growth-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.77253855405480f2",
+      "domainID": "personal_growth",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 11,
+      "packableClaimCount": 3,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/personal_growth/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/personal_growth/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nih.medlineplus.wellness",
+        "openalex.personal_growth_research"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/public_civic_requirements/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-37-civic-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-public_civic_requirements-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.7a1ec2ff546e91a8",
+      "domainID": "public_civic_requirements",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 12,
+      "packableClaimCount": 2,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/manifest.json",
+        "source-atlas/v1/production/stable/public_civic_requirements/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "nara.constitution.presidency"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/relationships_family/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-relationships_family-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.e54b407ede7d919e",
+      "domainID": "relationships_family",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 13,
+      "packableClaimCount": 5,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/relationships_family/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/relationships_family/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "acf.healthy_marriage_fatherhood",
+        "cdc.positive_parenting",
+        "childwelfare.family_support"
+      ]
+    },
+    {
+      "artifactPaths": [
+        "tools/source-atlas/generated/autonomous-production-supervisor/train-126-current/06-maintenance-executor/monitor/travel_relocation/monitor-snapshot.json",
+        "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/pack-production-report.json",
+        "tools/source-atlas/generated/r2-publisher/train-116-travel_relocation-ledger-gated-production-remote-r2/r2-publisher-report.json"
+      ],
+      "blockers": [],
+      "commandID": null,
+      "currentProductionReady": true,
+      "decisionID": "source_atlas.promotion_decision.6f492ba1b5df1403",
+      "domainID": "travel_relocation",
+      "existingRemoteUploadReadbackReady": true,
+      "finalOutputGenerated": false,
+      "inputStatus": "observed_snapshot_written",
+      "nativeRuntimeMutation": false,
+      "nextAction": "monitor_current_production",
+      "nonClaims": [
+        "autonomous promotion control only",
+        "not a live harvest runner",
+        "not an automatic production R2 writer",
+        "not a Worker deployer",
+        "not native runtime mutation",
+        "not active registry mutation",
+        "not outside legal approval",
+        "not full Source Atlas Green",
+        "not Release Green",
+        "not App Store or TestFlight readiness",
+        "not native physical-device proof",
+        "not independent accessibility proof",
+        "not literal universal coverage",
+        "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "order": 14,
+      "packableClaimCount": 3,
+      "productionWriteExecuted": false,
+      "promotionAllowed": true,
+      "promotionState": "monitor_only_current",
+      "publicObjectKeys": [
+        "source-atlas/v1/production/stable/travel_relocation/20260628T000000Z/manifest.json",
+        "source-atlas/v1/production/stable/travel_relocation/current.json"
+      ],
+      "r2State": "existing_remote_upload_readback_reconciled",
+      "remoteMutation": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "sourceIDs": [
+        "state.travel.public_travel",
+        "usa.gov.change_address"
+      ]
+    }
+  ],
+  "promotionRunID": "source_atlas.autonomous_promotion_runner.6518ae00204f7926",
+  "recordCounts": {
+    "candidateReviewOnlyDecisions": 1,
+    "configuredDomains": 13,
+    "finalOutputsGenerated": 0,
+    "heldGateDecisions": 0,
+    "heldGatePackets": 1,
+    "liveHarvestsExecuted": 0,
+    "monitorOnlyDecisions": 13,
+    "nativeRuntimeMutations": 0,
+    "privacyIssues": 0,
+    "promotionCommands": 0,
+    "promotionDecisions": 14,
+    "r2ExecutePreflightCommands": 0,
+    "r2HeldCommands": 0,
+    "r2WritesExecuted": 0,
+    "remoteMutations": 0
+  },
+  "registrySummary": {
+    "apiIssues": [],
+    "apiPolicyCount": 10,
+    "apiRegistryKind": "ambitions.sourceAtlas.apiGovernanceRegistry.v1",
+    "apiRegistryLoaded": true,
+    "legalIssues": [],
+    "legalRegistryKind": "ambitions.sourceAtlas.legalTermsRegistry.v1",
+    "legalRegistryLoaded": true,
+    "licenseCount": 26
+  },
+  "runLabel": "train-127-current",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; promotion-control tooling only",
+  "status": "Source Green for autonomous Source Atlas promotion control",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-promotion-runner-train-127"
+}

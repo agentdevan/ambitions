@@ -1,0 +1,26 @@
+{
+  "current": {
+    "bytes": 1740,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/creative_project_reference/current.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/creative_project_reference/current.json",
+    "sha256": "10ae14040308a843aeeab459dd29a2d0f3f24532e06472abd67c69cc9097f4db"
+  },
+  "lastKnownGood": {
+    "bytes": 1271,
+    "exists": true,
+    "get": {
+      "returnCode": 0,
+      "stderr": "",
+      "stdout": "\n ⛅️ wrangler 4.104.0 (update available 4.105.0)\n───────────────────────────────────────────────\nResource location: remote \n\nDownloading \"source-atlas/v1/production/stable/creative_project_reference/lkg.json\" from \"ambitions-source-atlas-prod\".\nDownload complete.\n",
+      "success": true
+    },
+    "objectKey": "source-atlas/v1/production/stable/creative_project_reference/lkg.json",
+    "sha256": "aeafe952f2f4b4c8c562f48c10938a2e2ad4ae66521a3027a9bdfadaddf5f71b"
+  }
+}

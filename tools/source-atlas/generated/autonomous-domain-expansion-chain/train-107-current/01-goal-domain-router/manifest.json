@@ -1,0 +1,113 @@
+{
+  "candidateIntake": {
+    "inputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/candidate-intake-input.json",
+    "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/frontier-intake/manifest.json",
+    "recordCounts": {
+      "candidateSources": 2,
+      "claims": 0,
+      "packableClaims": 0,
+      "proposals": 1,
+      "proposedFrontiers": 1,
+      "r2PackableArtifacts": 0
+    },
+    "required": true,
+    "status": "Source Green for governed frontier intake tooling",
+    "valid": true
+  },
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_ready_routes_require_ledger_ready_domain",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_routes_emit_candidate_intake_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_intake_valid_when_required",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "router_emits_no_claims_packs_or_r2_operations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T21:40:00Z",
+  "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+  "inputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/goal-domain-router-input.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.goalDomainRouterManifest.v1",
+  "nonClaims": [
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not physical-device proof",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not approval for future domains without source/frontier/pack/R2/native evidence",
+    "candidate routes are not claim authority",
+    "candidate routes are not pack output",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "candidateIntakeInput": "47e8d92212aaa55f288304fcfd525ef795add6ce4f00e6e8fa8a0e3e97184871",
+    "goalDomainRouting": "43119f29a79e82d4be531087cb7dd06fc7b6b1a0a558c6c813453d9e83820625",
+    "manifest": "eeeed3f72d4b2247914016d962951b74c1bdc24637dc2c0f208c18597f940b60"
+  },
+  "outputPaths": {
+    "candidateIntakeInput": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/candidate-intake-input.json",
+    "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/closeout.md",
+    "frontierIntakeManifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/frontier-intake/manifest.json",
+    "goalDomainRouting": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/goal-domain-routing.json",
+    "manifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/01-goal-domain-router/manifest.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "productionTargetLedgerPath": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/generated/production-target-ledger/train-86/production-target-ledger.json",
+  "recordCounts": {
+    "blockedPrivateRoutes": 0,
+    "candidateIntakeRoutes": 1,
+    "claims": 0,
+    "configuredNotReadyRoutes": 0,
+    "finalOutputArtifacts": 0,
+    "packableClaims": 0,
+    "productionTargetReadyRoutes": 0,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "requests": 1,
+    "routes": 1
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; configured-frontier production target routing plus candidate-only intake for new domains",
+  "status": "Source Green for goal-domain routing tooling",
+  "valid": true,
+  "versionID": "source-atlas-goal-domain-router-train-88"
+}

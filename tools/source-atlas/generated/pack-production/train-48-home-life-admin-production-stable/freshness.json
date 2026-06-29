@@ -1,0 +1,60 @@
+{
+  "freshness": [
+    {
+      "claim_id": "canonical_claim.47605fb30fd2b2d9",
+      "dataClass": "public_freshness",
+      "freshness_sla": "quarterly_doe_energy_saver_and_web_policies_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T00:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T00:00:00Z",
+      "valid_until": null
+    },
+    {
+      "claim_id": "canonical_claim.4afa1eb2ec18b66f",
+      "dataClass": "public_freshness",
+      "freshness_sla": "quarterly_ready_gov_kit_and_terms_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T00:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T00:00:00Z",
+      "valid_until": null
+    },
+    {
+      "claim_id": "canonical_claim.6af618c18ad764c6",
+      "dataClass": "public_freshness",
+      "freshness_sla": "quarterly_doe_energy_saver_and_web_policies_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T00:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T00:00:00Z",
+      "valid_until": null
+    },
+    {
+      "claim_id": "canonical_claim.cb2a736af232d258",
+      "dataClass": "public_freshness",
+      "freshness_sla": "quarterly_usagov_home_repair_and_government_works_recheck",
+      "freshness_status": "current",
+      "last_verified_at": "2026-06-28T00:00:00Z",
+      "next_refresh_due_at": null,
+      "publicReferenceOnly": true,
+      "retrieved_at": "2026-06-28T00:00:00Z",
+      "stale_after": null,
+      "stale_behavior": "exclude_if_stale_critical",
+      "valid_from": "2026-06-28T00:00:00Z",
+      "valid_until": null
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "approval": {
+    "productionWriteAllowed": true,
+    "requiresLKGPointer": true,
+    "requiresNonPrivateScan": true,
+    "requiresRevocationManifest": true,
+    "requiresRollbackPlan": true,
+    "requiresUploadReadbackSHA256": true,
+    "stablePointerUpdateAllowed": true
+  },
+  "approvalID": "source-atlas/creative-project-reference/production-r2-owner-approval/train-49",
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.r2StableOwnerApproval.v1",
+  "legalPacket": "docs/qa/source-atlas/legal/source-atlas-creative-project-legal-review-train-49.json",
+  "nonClaims": [
+    "not outside legal approval",
+    "not Release Green",
+    "not App Store readiness",
+    "not universal coverage",
+    "not copyright permission",
+    "not license selection advice",
+    "not implementation advice",
+    "not patent advice",
+    "not trademark permission",
+    "not source-use permission",
+    "not final user plans, schedules, or Steps",
+    "not private graph storage"
+  ],
+  "owner": "Ambitions owner technical approval",
+  "privacyBoundary": "public/reference/freshness only; no goals, captures, schedules, proof, receipts, account IDs, device IDs, behavior history, personalization data, private creative project details, or private life graph context may be sent to R2",
+  "schemaVersion": 1,
+  "scope": {
+    "channel": "stable",
+    "domain": "creative_project_reference",
+    "environment": "production",
+    "objectKeyPrefix": "source-atlas/v1/production/stable/creative_project_reference/20260628T000000Z/",
+    "packVersion": "20260628T000000Z",
+    "sourceIDs": [
+      "creative-commons.licenses",
+      "loc.primary_sources",
+      "w3c.web-standards"
+    ]
+  }
+}

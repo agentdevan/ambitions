@@ -1,0 +1,115 @@
+{
+  "architecture": {
+    "architectureDebt": "None introduced by this tooling-only train.",
+    "canonicalOwnersTouched": [
+      "tools/source-atlas/foundry"
+    ],
+    "compatibilityShimsLeftBehind": [],
+    "finalArchitectureTreeInspected": true,
+    "noEquivalentFolderPathInterpretationUsed": true,
+    "nonCanonicalOwnersTouched": [],
+    "oldNonCanonicalPathsRemoved": [],
+    "filesMovedOrCreated": [
+      "tools/source-atlas/foundry/catalog_direct_source_review_gate.py",
+      "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_gate_train_71.py",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71-closeout.md",
+      "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71-closeout.json"
+    ]
+  },
+  "baselineSha": "a370bd92bdf8f819e40afef7829d7c8a7adfc989",
+  "filesChanged": [
+    "tools/source-atlas/foundry/catalog_direct_source_review_gate.py",
+    "tools/source-atlas/foundry/tests/test_catalog_direct_source_review_gate_train_71.py",
+    "tools/source-atlas/foundry/cli.py",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71-intake-integration.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71-intake-integration.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71-closeout.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71-closeout.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-live-data-gov/catalog-direct-source-review-gate.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-live-data-gov/source-review-completion-packets.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-live-data-gov/blocked-direct-source-reviews.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-live-data-gov/closeout.md",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/catalog-reviewer-completion-intake.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/blocked-review-completions.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/catalog-approval-decision-completion.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/manifest.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/closeout.md"
+  ],
+  "gateRecordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDirectSourceReviews": 4,
+    "blockedSourceReviewCompletionPackets": 4,
+    "claims": 0,
+    "completedSourceReviewCompletionPackets": 0,
+    "directSourceReviewPackets": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "resolutionCandidates": 4,
+    "sourceReviewCompletionPackets": 4
+  },
+  "integrationRecordCounts": {
+    "activeRegistryMutations": 0,
+    "approvedEntries": 0,
+    "blockedReviewCompletions": 4,
+    "claims": 0,
+    "completedDecisionArtifacts": 0,
+    "completedReviewCompletions": 0,
+    "decisionInputPackets": 4,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "reviewPackets": 4
+  },
+  "knownRisks": [
+    "Live candidates still need actual direct-source review packets before Train 67 can emit completion artifacts.",
+    "No source-specific legal/terms approval exists for the live catalog candidates.",
+    "Overall Source Atlas remains Yellow below production legal/R2/runtime/release proof."
+  ],
+  "productLawPreserved": true,
+  "proof": {
+    "freshnessRevocationProof": "No pack is emitted; freshness/revocation proof is out of scope for this train.",
+    "licenseTermsProof": "Live candidates remain blocked; completed fixture packets require legal/terms entries and outside legal artifacts when required or claimed.",
+    "lkgRollbackProof": "No stable pointer, LKG pointer, R2 object, or rollback object is emitted.",
+    "nativeOfflineNoAccountProof": "Not touched in this tooling-only train.",
+    "noPrivateGraphEgressProof": "Input/output privacy scans, Source Atlas boundary audit, and no-private-graph egress audit passed.",
+    "provenanceCompletenessProof": "No claims are emitted; packable-claim provenance is out of scope for this train.",
+    "r2RequestPrivacyProof": "No R2 request, object key, upload plan, stable pointer, or R2 artifact is emitted.",
+    "restrictedSourceExclusionProof": "Gate and integration counts show 0 active registry mutations, 0 claims, 0 packable claims, and 0 R2-packable artifacts."
+  },
+  "proofArtifacts": [
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71.json",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71-intake-integration.md",
+    "docs/qa/source-atlas/domain-expansion/source-atlas-catalog-direct-source-review-gate-train-71-intake-integration.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-live-data-gov/manifest.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-live-data-gov/source-review-completion-packets.json",
+    "tools/source-atlas/generated/catalog-direct-source-review-gate/train-71-intake-integration/manifest.json"
+  ],
+  "rollbackPlan": [
+    "Remove Train 71 CLI command wiring.",
+    "Remove Train 71 module and tests.",
+    "Remove generated Train 71 evidence and integration artifacts."
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; direct-source review gate tooling only.",
+  "status": "Source Green for catalog direct-source review gate tooling / Yellow overall Source Atlas",
+  "validationNotRun": [
+    "Production R2 upload/readback was not run.",
+    "Native XCTest/build-for-testing was not run; no Swift/native files were touched.",
+    "Outside legal review was not run or claimed.",
+    "Runtime, Visual, Release, App Store, entitlement, and production-readiness proof were not run or claimed."
+  ],
+  "validationRun": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_catalog_direct_source_review_gate_train_71.py -> 6 passed",
+    "python3 -m tools.source-atlas.foundry.cli catalog-direct-source-review-gate ... -> valid",
+    "python3 -m tools.source-atlas.foundry.cli catalog-reviewer-completion-intake ... -> valid integration proof",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 306 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "Train 71 JSON parse checks -> PASS",
+    "git diff --check -> PASS"
+  ]
+}

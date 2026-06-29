@@ -77,6 +77,9 @@ python3 tools/source-atlas/source-atlas-foundry.py promotion-gate \
   --r2-plan output/source-atlas/foundry/source-atlas-2026-06-25/r2-plan.json \
   --channel staging \
   --output output/source-atlas/foundry/source-atlas-2026-06-25/promotion-gate-dry-run.json
+
+python3 tools/source-atlas/source-atlas-m09.py run-all \
+  --output-root output/source-atlas/m09
 ```
 
 The first compiled seed bundle covers:
@@ -224,3 +227,18 @@ The expanded command surface is local and deterministic:
 - `r2-contracts`, `revocation-manifest`, `last-known-good`, and `promotion-gate` validate manifest/freshness/R2 promotion shape locally.
 
 `promotion-gate` is dry-run only. It writes no remote object and must not be reported as R2 production readiness.
+
+## M09 Validation / Repair Evidence Commands
+
+M09 adds a validation and repair evidence command surface:
+
+```bash
+python3 tools/source-atlas/source-atlas-m09.py validation-matrix
+python3 tools/source-atlas/source-atlas-m09.py golden-benchmarks
+python3 tools/source-atlas/source-atlas-m09.py source-state-repair
+python3 tools/source-atlas/source-atlas-m09.py known-issue-router
+python3 tools/source-atlas/source-atlas-m09.py evidence-pack
+python3 tools/source-atlas/source-atlas-m09.py run-all
+```
+
+These commands validate the M09 command matrix, the 17-scenario golden benchmark matrix, source-state repair fixtures, known-issue routing, and repeatable evidence-pack generation. They do not upload to R2, close known issues, close the Source Atlas project, prove account readiness, or claim release readiness.

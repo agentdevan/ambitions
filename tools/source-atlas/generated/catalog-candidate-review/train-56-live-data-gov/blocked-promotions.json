@@ -1,0 +1,130 @@
+{
+  "blockedPromotions": [
+    {
+      "active_source_lane_emitted": false,
+      "blocking_reasons": [
+        "api_policy_review_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.360ee5f3bf5a97f3",
+      "candidate_score": 75,
+      "claim_authority_allowed": false,
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "non_claims": [
+        "blocked promotion report only",
+        "not source authority",
+        "not pack output",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "packet_id": "catalog_candidate_review_packet.cebc1c509a1decb0",
+      "promotion_decision": "blocked_until_review",
+      "r2_pack_policy": "pack_blocked_unknown_terms",
+      "schema_version": "1.0.0"
+    },
+    {
+      "active_source_lane_emitted": false,
+      "blocking_reasons": [
+        "api_policy_review_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.dc59095203ffce34",
+      "candidate_score": 50,
+      "claim_authority_allowed": false,
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "education_credentialing",
+      "non_claims": [
+        "blocked promotion report only",
+        "not source authority",
+        "not pack output",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "packet_id": "catalog_candidate_review_packet.63d91c03ab918eae",
+      "promotion_decision": "blocked_until_review",
+      "r2_pack_policy": "pack_blocked_unknown_terms",
+      "schema_version": "1.0.0"
+    },
+    {
+      "active_source_lane_emitted": false,
+      "blocking_reasons": [
+        "api_policy_review_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.2a8955ec3f4ab9de",
+      "candidate_score": 40,
+      "claim_authority_allowed": false,
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "non_claims": [
+        "blocked promotion report only",
+        "not source authority",
+        "not pack output",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "packet_id": "catalog_candidate_review_packet.3009135e7d0b463b",
+      "promotion_decision": "blocked_until_review",
+      "r2_pack_policy": "pack_blocked_unknown_terms",
+      "schema_version": "1.0.0"
+    },
+    {
+      "active_source_lane_emitted": false,
+      "blocking_reasons": [
+        "api_policy_review_required",
+        "authority_review_required",
+        "candidate_score_cannot_override_review",
+        "catalog_metadata_not_claim_authority",
+        "legal_terms_review_required",
+        "missing_rights_url",
+        "missing_terms_url",
+        "pack_output_blocked_until_review",
+        "review_required",
+        "source_lane_review_required"
+      ],
+      "candidate_id": "catalog_candidate.ca31bfdbd0d473eb",
+      "candidate_score": 40,
+      "claim_authority_allowed": false,
+      "created_at": "2026-06-28T00:00:00Z",
+      "domain_guess": "health_wellness_reference",
+      "non_claims": [
+        "blocked promotion report only",
+        "not source authority",
+        "not pack output",
+        "not R2 readiness"
+      ],
+      "pack_output_allowed": false,
+      "packet_id": "catalog_candidate_review_packet.a361aaefa37c0d83",
+      "promotion_decision": "blocked_until_review",
+      "r2_pack_policy": "pack_blocked_unknown_terms",
+      "schema_version": "1.0.0"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogCandidateBlockedPromotions.v1"
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "train": "37",
+  "linear_issue": "AMB-1523",
+  "title": "Source Atlas public R2 Worker gateway civic allowlist approval",
+  "created_at": "2026-06-28T04:29:00Z",
+  "status": "approved_for_bounded_public_civic_gateway_live_transport_proof",
+  "approval_type": "owner_public_endpoint_exposure_approval",
+  "approval_scope": [
+    "Update the existing Cloudflare Worker gateway for Source Atlas public/reference packs.",
+    "Keep the gateway bound to R2 bucket ambitions-source-atlas-prod.",
+    "Expose only explicit allowlisted production stable occupation_foundation and public_civic_requirements object keys.",
+    "Use the endpoint for HTTPS readback proof for public_civic_requirements.",
+    "Preserve no-private-context request shape."
+  ],
+  "approved_bucket": "ambitions-source-atlas-prod",
+  "approved_gateway": {
+    "name": "ambitions-source-atlas-public-gateway",
+    "path": "tools/source-atlas/r2-public-gateway",
+    "workers_dev": true,
+    "binding": "SOURCE_ATLAS_BUCKET"
+  },
+  "approved_object_keys": [
+    "source-atlas/v1/production/stable/public_civic_requirements/current.json",
+    "source-atlas/v1/production/stable/public_civic_requirements/lkg.json",
+    "source-atlas/v1/production/stable/public_civic_requirements/revocations.json",
+    "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/manifest.json",
+    "source-atlas/v1/production/stable/public_civic_requirements/20260628T041500Z/pack.json"
+  ],
+  "blocked_exposure_modes": [
+    "Do not enable bucket-wide r2.dev public access.",
+    "Do not expose a bucket listing route.",
+    "Do not expose arbitrary source-atlas/* object keys.",
+    "Do not expose pack slices beyond the current pointer, LKG pointer, revocations, manifest, and pack objects for this train.",
+    "Do not expose private user context, goals, captures, schedules, proof, receipts, account identifiers, device identifiers, or private graph data.",
+    "Do not claim production custom-domain readiness from workers.dev proof."
+  ],
+  "non_claims": [
+    "not outside legal approval",
+    "not privacy/legal owner release signoff",
+    "not Release Green",
+    "not App Store readiness",
+    "not Visual Green",
+    "not universal goal coverage",
+    "not entitlement readiness",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "approval_source": "User authorized work needed to get Source Atlas green in production target, legal approval, live transport, R2 write, runtime/release Green, and universal coverage areas. This artifact scopes that authorization to bounded public/reference Worker exposure for the public_civic_requirements production stable pack only and does not convert it into outside legal or release approval.",
+  "expires_at": "2026-07-28T04:29:00Z",
+  "rollback_plan": [
+    "Remove the public_civic_requirements keys from the Worker allowlist and redeploy if public endpoint exposure must be revoked.",
+    "Do not enable bucket-wide r2.dev public access.",
+    "R2 objects remain managed by existing revocation/LKG/rollback proof."
+  ]
+}

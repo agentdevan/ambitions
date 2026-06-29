@@ -1,0 +1,390 @@
+{
+  "adapterID": "irs_when_to_file_tax_deadline_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_irs_tax_deadline_public_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_tax_deadline_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_tax_deadline_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.4da77274d696cefc",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "IRS When to File public reference page",
+      "provenanceIDs": [
+        "provenance.c2874df0875a1780"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "irs.when_to_file"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "public_tax_deadline_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.dca3c7235d626520",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "individual return filing deadline",
+      "provenanceIDs": [
+        "provenance.c2874df0875a1780"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "irs.when_to_file"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "regulated_body",
+      "checksum": "checksum.81ee273a1a471df7",
+      "claimType": "tax_deadline_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly IRS filing page and policy re-review; tax deadline references require strict official-source recheck before critical use",
+      "id": "claim.6e1444305056f873",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy",
+      "provenanceIDs": [
+        "provenance.c2874df0875a1780"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Internal Revenue Service",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "irs.when_to_file",
+      "sourceIDs": [
+        "irs.when_to_file"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.irs.gov/filing/individuals/when-to-file",
+      "state": "source_backed",
+      "text": "IRS When to File guidance publishes public individual income tax return filing-deadline context, including the general April filing-deadline pattern and official-source exceptions, for reference only and not as tax advice or a personalized filing strategy.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "irs_when_to_file_tax_deadline_adapter",
+    "atomCount": 2,
+    "claimCount": 1,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "finance_public_reference",
+    "edgeCount": 1,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 1,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "regulated_body",
+    "sourceCount": 1,
+    "sourceLane": "irs.when_to_file",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "tax_deadline_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateLegalAdvice": true,
+      "doesNotCreatePersonalizedFilingStrategy": true,
+      "doesNotCreateTaxAdvice": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.financePublicReferenceCoverage.v1",
+      "label": "IRS individual return filing deadline public reference",
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "irs.when_to_file",
+      "subject": "tax_deadlines.individual_return_due_date"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "finance_public_reference",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.4da77274d696cefc",
+      "id": "edge.9df7ec0474d06250",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.c2874df0875a1780"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_tax_deadline_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "irs.when_to_file"
+      ],
+      "toAtomID": "atom.dca3c7235d626520",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.4da77274d696cefc",
+        "atom.dca3c7235d626520"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.9df7ec0474d06250"
+      ],
+      "id": "lattice.96abdee4c3720ee7",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "irs_when_to_file_tax_deadline_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "finance_public_reference",
+      "id": "pack_candidate.7d60e005f20519eb",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 2,
+        "claims": 1,
+        "crosswalks": 0,
+        "edges": 1,
+        "requirements": 1
+      },
+      "schemaVersion": 1,
+      "sourceID": "irs.when_to_file",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "irs.when_to_file"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "regulated_body",
+      "contentHash": "e963029668f807e242fae8933a978d0a215f7210f11f7aa2cf025cc7d27bf519",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly IRS filing page and policy re-review; tax deadline references require strict official-source recheck before critical use",
+      "id": "provenance.c2874df0875a1780",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with IRS privacy, disclosure, third-party, trademark, and media caveats retained",
+      "locator": "https://www.irs.gov/filing/individuals/when-to-file",
+      "publicReferenceOnly": true,
+      "publisher": "Internal Revenue Service",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "irs.when_to_file",
+      "sourceState": "current",
+      "sourceURL": "https://www.irs.gov/filing/individuals/when-to-file",
+      "termsURL": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.6e1444305056f873",
+      "dataClass": "public_requirement",
+      "gateType": "public_tax_deadline_reference_only",
+      "id": "requirement.04f3048c2ffa1265",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.c2874df0875a1780"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "irs.when_to_file"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "irs.when_to_file",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "regulated_body",
+    "freshnessCadence": "quarterly IRS filing page and policy re-review; tax deadline references require strict official-source recheck before critical use",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with IRS privacy, disclosure, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current IRS.gov public website posture",
+    "publisher": "Internal Revenue Service",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "irs.when_to_file",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.irs.gov/privacy-disclosure/irs-privacy-policy"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "irs.when_to_file"
+  }
+}

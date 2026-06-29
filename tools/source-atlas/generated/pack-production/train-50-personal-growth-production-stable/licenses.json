@@ -1,0 +1,49 @@
+{
+  "licenses": [
+    {
+      "approval_artifact_path": "docs/qa/source-atlas/legal/source-atlas-personal-growth-legal-review-train-50.json",
+      "attribution_required": true,
+      "dataClass": "public_provenance",
+      "license_id": "medlineplus_public_domain_topic_summary",
+      "license_name": "MedlinePlus public-domain health topic summaries with vendor, media, and third-party exclusions retained",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "non_claims": [
+        "not mental health treatment",
+        "not diagnosis",
+        "not therapy",
+        "not emergency advice",
+        "not outside legal approval",
+        "not release readiness"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "terms_url": "https://medlineplus.gov/about/using/usingcontent/"
+    },
+    {
+      "approval_artifact_path": "",
+      "attribution_required": false,
+      "dataClass": "public_provenance",
+      "license_id": "openalex_cc0_metadata",
+      "license_name": "OpenAlex CC0 public scholarly metadata",
+      "license_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "non_claims": [
+        "not normative authority",
+        "not unbounded high-volume approval",
+        "not outside legal approval"
+      ],
+      "outside_legal_required": false,
+      "outside_legal_status": "not_claimed",
+      "pack_output_allowed": true,
+      "publicReferenceOnly": true,
+      "redistribution_allowed": true,
+      "review_status": "reviewed",
+      "rights_url": "https://docs.openalex.org/download-all-data/openalex-snapshot",
+      "terms_url": "https://docs.openalex.org/download-all-data/openalex-snapshot"
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "allowActiveRegistryWrite": false,
+  "checks": [
+    {
+      "issues": [],
+      "name": "direct_source_review_completion_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "direct_source_review_gate_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "reviewer_completion_intake_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "catalog_approval_chain_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "missing_review_evidence_blocks_without_approval",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "chain_emits_no_claims_or_packs",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "stage_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "report_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "executeRegistryApply": false,
+  "inputs": {
+    "decisionInputsPath": "tools/source-atlas/generated/catalog-approval-decision-inputs/train-64-live-data-gov/decision-input-packets.json",
+    "draftGovernancePacketsPath": "tools/source-atlas/generated/catalog-governance-intake/train-57-live-data-gov/draft-governance-packets.json",
+    "resolutionCandidatesPath": "tools/source-atlas/generated/catalog-direct-source-resolution/train-70-live-data-gov/direct-source-resolution-candidates.json",
+    "reviewEvidencePath": "tools/source-atlas/generated/catalog-direct-source-review-evidence/train-75-statcan-table-13100974/direct-source-review-evidence.json",
+    "templatesPath": "tools/source-atlas/generated/catalog-direct-source-review-template/train-72-live-data-gov/direct-source-review-packet-templates.json",
+    "termsProposalsPath": "tools/source-atlas/generated/catalog-terms-resolution/train-61-live-data-gov/terms-resolution-proposals.json"
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogDirectSourceApprovalChainProof.v1",
+  "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/catalog-direct-source-approval-chain-proof.json",
+  "nonClaims": [
+    "direct-source approval chain proof only",
+    "not source authority by itself",
+    "not legal approval",
+    "not outside legal approval without artifact",
+    "not production registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "report": "5d8a5aae20d3ecdefc99a9ce47b1c308a0709a7d30e56ceac86467214c09e402"
+  },
+  "outputPaths": {
+    "approvalChain": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain",
+    "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/closeout.md",
+    "directSourceReviewCompletion": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion",
+    "directSourceReviewGate": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate",
+    "report": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/catalog-direct-source-approval-chain-proof.json",
+    "reviewerCompletionIntake": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake"
+  },
+  "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "blockedDirectSourceReviews": 3,
+    "blockedSourceReviewCompletionPackets": 3,
+    "candidateRegistryMutations": 1,
+    "claims": 0,
+    "completedApprovalArtifacts": 1,
+    "completedDecisionArtifacts": 1,
+    "completedDirectSourceReviews": 1,
+    "completedReviewCompletions": 1,
+    "completedSourceReviewCompletionPackets": 1,
+    "directSourceReviewPackets": 4,
+    "directSourceReviewTemplates": 4,
+    "packableClaims": 0,
+    "plannedRegistryMutations": 1,
+    "r2PackableArtifacts": 0,
+    "reviewEvidenceRecords": 1,
+    "sourceReviewCompletionPackets": 4
+  },
+  "reviewCompletionArtifactPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake/catalog-approval-decision-completion.json",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; direct-source approval chain proof tooling only",
+  "stageResults": {
+    "approvalChain": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/catalog-approval-chain-proof.json",
+      "outputPaths": {
+        "approvalFinalizer": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/02-approval-finalizer",
+        "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/closeout.md",
+        "decisionAssembler": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/01-decision-assembler",
+        "mutationPlan": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/03-mutation-plan",
+        "registryApplier": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/04-registry-applier",
+        "report": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain/catalog-approval-chain-proof.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/04-approval-chain",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "blockedApprovalFinalizations": 3,
+        "blockedDecisionAssemblies": 3,
+        "blockedRegistryMutations": 3,
+        "candidateRegistryMutations": 1,
+        "claims": 0,
+        "completedApprovalArtifacts": 1,
+        "completedDecisionArtifacts": 1,
+        "decisionInputPackets": 4,
+        "packableClaims": 0,
+        "plannedRegistryMutations": 1,
+        "r2PackableArtifacts": 0
+      },
+      "status": "Source Green for catalog approval chain proof tooling",
+      "valid": true
+    },
+    "directSourceReviewCompletion": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/manifest.json",
+      "outputPaths": {
+        "blockedDirectSourceReviewCompletions": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/blocked-direct-source-review-completions.json",
+        "catalogDirectSourceReviewCompletion": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/catalog-direct-source-review-completion.json",
+        "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/closeout.md",
+        "directSourceReviewPackets": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion/direct-source-review-packets.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/01-direct-source-review-completion",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "blockedDirectSourceReviewCompletions": 3,
+        "blockedDirectSourceReviews": 3,
+        "claims": 0,
+        "completedDirectSourceReviews": 1,
+        "directSourceReviewPackets": 4,
+        "directSourceReviewTemplates": 4,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0,
+        "reviewEvidenceRecords": 1
+      },
+      "status": "Source Green for catalog direct-source review completion assembler tooling",
+      "valid": true
+    },
+    "directSourceReviewGate": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/manifest.json",
+      "outputPaths": {
+        "blockedDirectSourceReviews": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/blocked-direct-source-reviews.json",
+        "catalogDirectSourceReviewGate": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/catalog-direct-source-review-gate.json",
+        "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/closeout.md",
+        "sourceReviewCompletionPackets": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate/source-review-completion-packets.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/02-direct-source-review-gate",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "blockedDirectSourceReviews": 3,
+        "blockedSourceReviewCompletionPackets": 3,
+        "claims": 0,
+        "completedSourceReviewCompletionPackets": 1,
+        "directSourceReviewPackets": 4,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0,
+        "resolutionCandidates": 4,
+        "sourceReviewCompletionPackets": 4
+      },
+      "status": "Source Green for catalog direct-source review gate tooling",
+      "valid": true
+    },
+    "reviewerCompletionIntake": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake/manifest.json",
+      "outputPaths": {
+        "blockedReviewCompletions": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake/blocked-review-completions.json",
+        "catalogReviewerCompletionIntake": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake/catalog-reviewer-completion-intake.json",
+        "closeout": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake/closeout.md",
+        "reviewCompletionArtifact": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake/catalog-approval-decision-completion.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/catalog-direct-source-approval-chain/train-75-statcan-table-13100974/03-reviewer-completion-intake",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "approvedEntries": 1,
+        "blockedReviewCompletions": 3,
+        "claims": 0,
+        "completedDecisionArtifacts": 1,
+        "completedReviewCompletions": 1,
+        "decisionInputPackets": 4,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0,
+        "reviewPackets": 4
+      },
+      "status": "Source Green for catalog reviewer completion intake tooling",
+      "valid": true
+    }
+  },
+  "status": "Source Green for catalog direct-source approval chain proof tooling",
+  "valid": true,
+  "versionID": "source-atlas-catalog-direct-source-approval-chain-train-74"
+}

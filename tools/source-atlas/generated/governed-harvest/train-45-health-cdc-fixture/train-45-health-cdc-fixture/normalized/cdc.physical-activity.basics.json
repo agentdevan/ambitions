@@ -1,0 +1,594 @@
+{
+  "adapterID": "cdc_physical_activity_basics_adapter",
+  "adapterSDKVersion": "source-atlas-adapter-sdk-v1",
+  "apiLanes": {
+    "fixtureMode": "no_network_static_cdc_public_reference",
+    "liveMode": "requires_live_flag_and_static_page_budget",
+    "packOutput": "allowed_for_bounded_public_health_wellness_reference_with_attribution"
+  },
+  "atoms": [
+    {
+      "atomType": "public_health_reference_guide",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.f766e9562e6f2690",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "CDC Physical Activity Basics public reference",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "public_health_wellness_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.28a0e96f8f5a57c3",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "adult physical activity guideline context",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "public_health_wellness_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.0fee1d3811c151a7",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "physical activity types",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "atomType": "public_health_wellness_reference_topic",
+      "dataClass": "public_atom_edge_lattice",
+      "id": "atom.4e6119a6f3d69547",
+      "kind": "ambitions.sourceAtlas.atom.v1",
+      "label": "physical activity benefits context",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "claims": [
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.ad583cd83944771f",
+      "claimType": "public_health_guideline",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly CDC physical activity page and reuse terms re-review",
+      "id": "claim.300032a761f6bcab",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.cdc.gov/other/agencymaterials.html",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "cdc.physical-activity.basics",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "state": "source_backed",
+      "text": "CDC Physical Activity Basics publishes general adult aerobic and muscle-strengthening activity guideline context for public health reference only, not medical advice, diagnosis, treatment, individualized clearance, or a personalized fitness plan.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.1e93aa25437e568f",
+      "claimType": "exercise_taxonomy",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly CDC physical activity page and reuse terms re-review",
+      "id": "claim.61b255e4d4644c99",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.cdc.gov/other/agencymaterials.html",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "cdc.physical-activity.basics",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "state": "source_backed",
+      "text": "CDC Physical Activity Basics describes physical activity concepts such as aerobic activity, muscle strengthening, and intensity as general public reference terms, not as a personalized training prescription.",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "authorityTier": "official_government",
+      "checksum": "checksum.299df569aee5212d",
+      "claimType": "wellness_safety_reference",
+      "confidence": "high",
+      "dataClass": "public_reference_claim",
+      "freshness": "current",
+      "freshnessCadence": "quarterly CDC physical activity page and reuse terms re-review",
+      "id": "claim.de3037c5533bdaf7",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.claim.v1",
+      "licenseTermsReference": "https://www.cdc.gov/other/agencymaterials.html",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "reviewRequirement": false,
+      "schemaVersion": 1,
+      "sourceID": "cdc.physical-activity.basics",
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "sourceState": "current",
+      "sourceURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "state": "source_backed",
+      "text": "CDC Physical Activity Basics provides general public wellness context about physical activity and health benefits; Source Atlas must not use it for diagnosis, treatment, emergency advice, or individualized health decisions.",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "coverage": {
+    "adapter": "cdc_physical_activity_basics_adapter",
+    "atomCount": 4,
+    "claimCount": 3,
+    "conflictedClaims": 0,
+    "crosswalkCount": 0,
+    "dataClass": "public_freshness",
+    "domain": "health_wellness_reference",
+    "edgeCount": 3,
+    "evidenceArtifactPaths": [],
+    "freshnessStatus": "current",
+    "jurisdiction": "US",
+    "kind": "ambitions.sourceAtlas.coverageRecord.v2",
+    "licenseStatus": "reviewed",
+    "noFalseCompletionCoverage": true,
+    "packReadiness": "candidate",
+    "provenanceCompleteness": true,
+    "publicReferenceOnly": true,
+    "r2Readiness": "candidate_local_only",
+    "redistributionStatus": "redistributable_with_attribution",
+    "requirementCount": 3,
+    "reviewRequiredClaims": 0,
+    "scenarioCoverage": [
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "NASA astronaut"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "nurse"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "pilot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "teacher"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "software engineer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "small business owner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "music artist"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "audio engineer"
+      },
+      {
+        "coverage": "missing official source",
+        "doesNotCreateUserPath": true,
+        "reason": "athletic training source lane not included in Train 01",
+        "scenario": "marathon runner"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "electrician/apprenticeship"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "lawyer"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "medical school path"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "career pivot"
+      },
+      {
+        "coverage": "partially covered",
+        "doesNotCreateUserPath": true,
+        "reason": "public foundation references available, no user path generated",
+        "scenario": "still-counts pivot"
+      }
+    ],
+    "schemaVersion": 1,
+    "sourceAuthority": "official_government",
+    "sourceCount": 1,
+    "sourceLane": "cdc.physical-activity.basics",
+    "sourceStateCoverage": [
+      "current",
+      "unavailable",
+      "stale",
+      "stale-critical",
+      "conflicted",
+      "revoked",
+      "unsupported",
+      "malformed",
+      "rate-limited",
+      "terms-blocked",
+      "missing-provenance",
+      "private-field-injected"
+    ],
+    "staleCriticalClaims": 0,
+    "unsupportedClaims": 0
+  },
+  "coverageRecords": [
+    {
+      "claimType": "public_health_guideline",
+      "dataClass": "public_freshness",
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateMedicalAdvice": true,
+      "doesNotCreatePersonalizedFitnessPlan": true,
+      "doesNotCreateTreatmentPlan": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.healthWellnessReferenceCoverage.v1",
+      "label": "CDC adult physical activity public guideline reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "cdc.physical-activity.basics",
+      "subject": "physical_activity.adult_guideline_context"
+    },
+    {
+      "claimType": "exercise_taxonomy",
+      "dataClass": "public_freshness",
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateMedicalAdvice": true,
+      "doesNotCreatePersonalizedFitnessPlan": true,
+      "doesNotCreateTreatmentPlan": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.healthWellnessReferenceCoverage.v1",
+      "label": "CDC physical activity type public taxonomy reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "cdc.physical-activity.basics",
+      "subject": "physical_activity.activity_types"
+    },
+    {
+      "claimType": "wellness_safety_reference",
+      "dataClass": "public_freshness",
+      "doesNotCreateDiagnosis": true,
+      "doesNotCreateMedicalAdvice": true,
+      "doesNotCreatePersonalizedFitnessPlan": true,
+      "doesNotCreateTreatmentPlan": true,
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.healthWellnessReferenceCoverage.v1",
+      "label": "CDC physical activity benefits public wellness reference",
+      "mediaReuseExcluded": true,
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceID": "cdc.physical-activity.basics",
+      "subject": "physical_activity.health_benefits_context"
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "crosswalks": [],
+  "dataClass": "official_public_source",
+  "domain": "health_wellness_reference",
+  "edges": [
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.f766e9562e6f2690",
+      "id": "edge.c55c51027a8fc74a",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_health_wellness_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "toAtomID": "atom.28a0e96f8f5a57c3",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.f766e9562e6f2690",
+      "id": "edge.27573c7ee6425909",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_health_wellness_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "toAtomID": "atom.0fee1d3811c151a7",
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "dataClass": "public_atom_edge_lattice",
+      "fromAtomID": "atom.f766e9562e6f2690",
+      "id": "edge.c6540382a42187ce",
+      "kind": "ambitions.sourceAtlas.edge.v1",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "relationship": "includes_public_health_wellness_reference",
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "toAtomID": "atom.4e6119a6f3d69547",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "kind": "ambitions.sourceAtlas.adapterOutput.v1",
+  "lattices": [
+    {
+      "atomIDs": [
+        "atom.f766e9562e6f2690",
+        "atom.28a0e96f8f5a57c3",
+        "atom.0fee1d3811c151a7",
+        "atom.4e6119a6f3d69547"
+      ],
+      "dataClass": "public_atom_edge_lattice",
+      "edgeIDs": [
+        "edge.c55c51027a8fc74a",
+        "edge.27573c7ee6425909",
+        "edge.c6540382a42187ce"
+      ],
+      "id": "lattice.6cb65296945f4615",
+      "kind": "ambitions.sourceAtlas.lattice.v1",
+      "publicReferenceOnly": true,
+      "recipeIDs": [],
+      "schemaVersion": 1,
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "nonClaims": [
+    "does not create final user paths",
+    "does not create final schedules",
+    "does not create Step lists",
+    "does not gather private user data",
+    "does not claim legal, privacy, release, or R2 production readiness"
+  ],
+  "packCandidates": [
+    {
+      "adapterID": "cdc_physical_activity_basics_adapter",
+      "dataClass": "public_reference_claim",
+      "doesNotCreateFinalSchedule": true,
+      "doesNotStoreFinalUserPath": true,
+      "domain": "health_wellness_reference",
+      "id": "pack_candidate.32e7fd5b8a465d47",
+      "kind": "ambitions.sourceAtlas.packCandidate.v1",
+      "publicReferenceOnly": true,
+      "recordCounts": {
+        "atoms": 4,
+        "claims": 3,
+        "crosswalks": 0,
+        "edges": 3,
+        "requirements": 3
+      },
+      "schemaVersion": 1,
+      "sourceID": "cdc.physical-activity.basics",
+      "termsGate": {
+        "approvalPacketValidation": null,
+        "issues": [],
+        "packable": true,
+        "r2PackPolicy": "r2_pack_allowed",
+        "r2Ready": true,
+        "redistributionPolicy": "redistributable_with_attribution",
+        "sourceID": "cdc.physical-activity.basics"
+      }
+    }
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "provenance": [
+    {
+      "authorityTier": "official_government",
+      "contentHash": "fc4eafeabee71c4942718dfb5d77f9a32c5321b31111bf3ed725ba6229abb529",
+      "dataClass": "public_provenance",
+      "freshnessCadence": "quarterly CDC physical activity page and reuse terms re-review",
+      "id": "provenance.2676adcc6babb7e6",
+      "jurisdiction": "US",
+      "kind": "ambitions.sourceAtlas.provenance.v1",
+      "license": "U.S. federal public website text with CDC attribution, no-endorsement, third-party, trademark, and media caveats retained",
+      "locator": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "publicReferenceOnly": true,
+      "publisher": "Centers for Disease Control and Prevention",
+      "retrievedAt": "2026-06-28T00:00:00Z",
+      "schemaVersion": 1,
+      "sourceID": "cdc.physical-activity.basics",
+      "sourceState": "current",
+      "sourceURL": "https://www.cdc.gov/physical-activity-basics/guidelines/adults.html",
+      "termsURL": "https://www.cdc.gov/other/agencymaterials.html",
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "publicReferenceOnly": true,
+  "recipes": [],
+  "requirements": [
+    {
+      "claimID": "claim.300032a761f6bcab",
+      "dataClass": "public_requirement",
+      "gateType": "public_health_guideline_reference_only",
+      "id": "requirement.ece9df5982263547",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.61b255e4d4644c99",
+      "dataClass": "public_requirement",
+      "gateType": "public_exercise_taxonomy_reference_only",
+      "id": "requirement.1c46fb7fc23cf04f",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    },
+    {
+      "claimID": "claim.de3037c5533bdaf7",
+      "dataClass": "public_requirement",
+      "gateType": "public_wellness_safety_reference_only",
+      "id": "requirement.c9cafb741b33c972",
+      "kind": "ambitions.sourceAtlas.requirement.v1",
+      "provenanceIDs": [
+        "provenance.2676adcc6babb7e6"
+      ],
+      "publicReferenceOnly": true,
+      "schemaVersion": 1,
+      "sourceIDs": [
+        "cdc.physical-activity.basics"
+      ],
+      "structuredRule": {
+        "doesNotCreateRuntimeStep": true,
+        "sourceState": "current",
+        "type": "public_reference_only"
+      },
+      "versionID": "adapter-broad-coverage-train-01"
+    }
+  ],
+  "schemaVersion": 1,
+  "sourceID": "cdc.physical-activity.basics",
+  "sourceState": {
+    "blockedReasons": [],
+    "dataClass": "public_freshness",
+    "packEligible": true,
+    "publicReferenceOnly": true,
+    "runtimeEligible": true,
+    "state": "current"
+  },
+  "sourceStates": [
+    {
+      "blockedReasons": [],
+      "dataClass": "public_freshness",
+      "packEligible": true,
+      "publicReferenceOnly": true,
+      "runtimeEligible": true,
+      "state": "current"
+    }
+  ],
+  "terms": {
+    "attributionRequired": true,
+    "authorityTier": "official_government",
+    "freshnessCadence": "quarterly CDC physical activity page and reuse terms re-review",
+    "lastTermsReviewed": "2026-06-28",
+    "license": "U.S. federal public website text with CDC attribution, no-endorsement, third-party, trademark, and media caveats retained",
+    "licenseVersion": "current CDC.gov reuse posture",
+    "publisher": "Centers for Disease Control and Prevention",
+    "r2PackPolicy": "r2_pack_allowed",
+    "redistributionPolicy": "redistributable_with_attribution",
+    "reviewRequired": false,
+    "sourceID": "cdc.physical-activity.basics",
+    "termsReviewStatus": "reviewed",
+    "termsURL": "https://www.cdc.gov/other/agencymaterials.html"
+  },
+  "termsValidation": {
+    "approvalPacketValidation": null,
+    "issues": [],
+    "packable": true,
+    "r2PackPolicy": "r2_pack_allowed",
+    "r2Ready": true,
+    "redistributionPolicy": "redistributable_with_attribution",
+    "sourceID": "cdc.physical-activity.basics"
+  }
+}

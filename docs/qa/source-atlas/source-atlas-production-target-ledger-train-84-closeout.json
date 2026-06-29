@@ -1,0 +1,108 @@
+{
+  "architecture_closeout": {
+    "architecture_debt": "Overall Source Atlas still needs ongoing source discovery/frontier expansion and independent release/legal/device approval before broader readiness claims.",
+    "canonical_owners_touched": [
+      "none in app source; tooling and evidence only under tools/source-atlas"
+    ],
+    "compatibility_shims_left": [],
+    "files_moved_or_created": [
+      "tools/source-atlas/foundry/production_target_ledger.py",
+      "tools/source-atlas/foundry/tests/test_production_target_ledger_train_84.py",
+      "tools/source-atlas/generated/production-target-ledger/train-84/",
+      "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84.*"
+    ],
+    "final_architecture_tree_inspected": true,
+    "next_repair_train_if_debt_remains": "Promote the production-target ledger into the autonomous release orchestrator so new approved frontiers cannot publish without ledger inclusion.",
+    "no_equivalent_folder_interpretation_used": true,
+    "non_canonical_owners_touched": [],
+    "old_non_canonical_paths_removed": []
+  },
+  "created_at": "2026-06-28T00:00:00Z",
+  "files_changed": [
+    "tools/source-atlas/foundry/production_target_ledger.py",
+    "tools/source-atlas/foundry/cli.py",
+    "tools/source-atlas/frontier/coverage-frontiers.json",
+    "tools/source-atlas/foundry/tests/test_production_target_ledger_train_84.py",
+    "tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py",
+    "tools/source-atlas/foundry/tests/test_broad_domain_discovery_train_07.py",
+    "tools/source-atlas/generated/production-target-ledger/train-84/",
+    "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84.json",
+    "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84.md",
+    "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84-closeout.json",
+    "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84-closeout.md"
+  ],
+  "freshness_revocation_proof": "Inherited per domain from selected production R2 publisher reports and public gateway verification; ledger records revocation/LKG availability through the publisher and gateway evidence paths.",
+  "known_risks": [
+    "Literal universal coverage remains blocked by Source Atlas product law.",
+    "Overall Source Atlas remains Yellow outside the bounded configured-frontier production target ledger.",
+    "The repo worktree contains many pre-existing dirty/untracked Source Atlas and native files from earlier trains.",
+    "Outside legal approval, physical-device proof, TestFlight/App Store readiness, and independent release approval are not claimed."
+  ],
+  "license_terms_proof": "The ledger consumes production pack and R2 publisher reports whose legalTermsApprovalPacketValidation fields are valid; it does not upgrade internal terms review into outside legal approval.",
+  "lkg_rollback_proof": "Inherited from selected production R2 publisher reports and gateway release evidence; each ready domain has current/LKG/revocation object coverage through the selected publisher report set.",
+  "native_offline_no_account_proof": "Consumes Train 80 Native Boundary Green closeout plus Train 81 trideca active refresh registry evidence. No new native files were changed in Train 84.",
+  "no_private_graph_egress_proof": "Train 84 focused tests reject injected forbidden private-context keys; source-atlas-no-private-graph-egress-audit.py passed.",
+  "product_law_preserved": [
+    "R2 remains public/reference/freshness infrastructure only.",
+    "Ledger evidence is source/frontier/pack/R2/gateway/native proof metadata only.",
+    "No private user context is introduced into R2/gateway/native artifacts.",
+    "Source Atlas/R2 does not generate final user plans, schedules, Steps, or personalized paths."
+  ],
+  "production_non_claims": [
+    "Not literal universal coverage.",
+    "Not full Source Atlas Green.",
+    "Not outside legal approval.",
+    "Not App Store or TestFlight readiness.",
+    "Not physical-device proof.",
+    "Not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2.",
+    "Not approval for future domains without source/frontier/pack/R2/native evidence."
+  ],
+  "proof_artifacts": [
+    "tools/source-atlas/generated/production-target-ledger/train-84/production-target-ledger.json",
+    "tools/source-atlas/generated/production-target-ledger/train-84/production-target-ledger.md",
+    "tools/source-atlas/generated/production-target-ledger/train-84/closeout.md",
+    "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84.json",
+    "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84.md",
+    "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84-closeout.json",
+    "docs/qa/source-atlas/source-atlas-production-target-ledger-train-84-closeout.md"
+  ],
+  "provenance_completeness_proof": "Each ready domain must have claim-frontier provenance completeness, pack production proof, production R2 upload/readback proof, live gateway verification, active native registry target, and native runtime boundary proof.",
+  "r2_request_privacy_proof": "Ledger consumes Train 83 public gateway release proof with 65 HEAD checks, 39 SHA-checked GET checks, and blocked private/query-shaped requests.",
+  "record_counts": {
+    "bounded_production_target_ready": 13,
+    "configured_domains_not_ready": 0,
+    "configured_frontiers": 13,
+    "gateway_ready_domains": 13,
+    "native_registry_domains": 13,
+    "orphan_production_domains": 0,
+    "production_r2_domains": 13
+  },
+  "restricted_source_exclusion_proof": "Inherited from per-domain pack production and R2 publisher reports; ledger also requires source lanes to be reviewed and pack-allowed.",
+  "rollback_plan": [
+    "Revert the production_target_ledger module, CLI command wiring, focused tests, generated Train 84 ledger artifacts, and QA evidence.",
+    "If needed, revert the StatCan frontier config addition; the ledger would then flag StatCan production evidence as orphaned."
+  ],
+  "scope_completed": [
+    "Added deterministic production-target ledger compiler.",
+    "Added Foundry CLI command production-target-ledger.",
+    "Registered the StatCan health statistics production pack as a governed frontier.",
+    "Generated Train 84 ledger proving 13 configured frontiers, 13 production R2 domains, 13 gateway-ready domains, and 13 active native refresh targets.",
+    "Added tests for full configured-frontier readiness, orphan production evidence, missing native runtime proof, and private-context evidence rejection."
+  ],
+  "source_atlas_status_ceiling": "Yellow overall Source Atlas; Source Green only for the bounded configured-frontier production target ledger.",
+  "status": "Source Green for production target ledger / Yellow overall Source Atlas",
+  "validation_not_run": [
+    "Swift/Xcode build-for-testing was not run for Train 84 because no Train 84 native source changed.",
+    "No production R2 write or Worker deploy was run in Train 84; it consumes existing Train 81 and Train 83 proof.",
+    "No outside legal approval or release approval was run or claimed."
+  ],
+  "validation_run": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_production_target_ledger_train_84.py -> 4 passed",
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_production_target_ledger_train_84.py tools/source-atlas/foundry/tests/test_coverage_readiness_gate_train_36.py -> 12 passed",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 337 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN"
+  ]
+}

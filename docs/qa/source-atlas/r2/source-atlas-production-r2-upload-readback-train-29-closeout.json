@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 1,
+  "kind": "ambitions.sourceAtlas.trainCloseout.v1",
+  "train": "Train 29",
+  "linearIssue": "AMB-1515",
+  "title": "Source Atlas Production R2 Upload/Readback Proof",
+  "status": "Green for the specific production R2 upload/readback proof; Yellow overall Source Atlas",
+  "scopeCompleted": [
+    "Added remote_r2 execution mode to the pack R2 publisher.",
+    "Executed a bounded production R2 upload/readback operation for occupation_foundation pack version 20260628T000000Z.",
+    "Uploaded and read back 13 public/reference pack objects from ambitions-source-atlas-prod.",
+    "Updated the stable current pointer only after object upload/readback checksum verification succeeded.",
+    "Verified the remote current pointer directly from Cloudflare R2 after publication.",
+    "Recorded real R2 transport in the request privacy proof without private user context."
+  ],
+  "filesChanged": [
+    "tools/source-atlas/foundry/r2_pack_publisher.py",
+    "tools/source-atlas/foundry/cli.py",
+    "tools/source-atlas/foundry/tests/test_r2_pack_publisher_train_10.py",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-owner-approval-train-29.json",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-owner-approval-train-29.md",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-upload-readback-train-29.json",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-upload-readback-train-29.md",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-upload-readback-train-29-closeout.json",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-upload-readback-train-29-closeout.md",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2-readback/"
+  ],
+  "productLawPreserved": [
+    "R2 remains public/reference/freshness infrastructure only.",
+    "R2 object keys contain no user ID, account ID, device ID, goal text, capture text, schedule, receipt, proof ID, or private context.",
+    "Published payloads are public/reference pack artifacts only.",
+    "Source Atlas still does not generate final user plans, schedules, Steps, or personalized paths.",
+    "Native app runtime/release readiness is not claimed by this R2 operation."
+  ],
+  "validationRun": [
+    "python3 -m pytest tools/source-atlas/foundry/tests/test_r2_pack_publisher_train_10.py -> 9 passed",
+    "python3 -m pytest tools/source-atlas/foundry tools/source-atlas/tests -> 145 passed",
+    "python3 scripts/source-atlas-boundary-audit.py -> PASS (40 targets)",
+    "python3 scripts/source-atlas-no-private-graph-egress-audit.py -> PASS",
+    "python3 scripts/ambitions-green-standard-audit.py -> GREEN",
+    "python3 scripts/ambitions-local-first-boundary-scan.py -> GREEN",
+    "python3 -m json.tool docs/qa/source-atlas/r2/source-atlas-production-r2-owner-approval-train-29.json -> PASS",
+    "python3 -m json.tool docs/qa/source-atlas/r2/source-atlas-production-r2-upload-readback-train-29.json -> PASS",
+    "python3 -m json.tool tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-request-privacy-report.json -> PASS",
+    "wrangler r2 object get ambitions-source-atlas-prod/source-atlas/v1/production/stable/occupation_foundation/current.json --remote --file /tmp/source-atlas-current-check/current.json -> PASS",
+    "python3 -m json.tool /tmp/source-atlas-current-check/current.json -> PASS",
+    "shasum -a 256 /tmp/source-atlas-current-check/current.json tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/current-pointer-to-upload.json tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/current-pointer.json -> all 33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+    "git diff --check -> PASS"
+  ],
+  "validationNotRun": [
+    "Native XCTest/build-for-testing was not rerun in Train 29 because this train changed Source Atlas Python tooling, R2 evidence, and generated R2 artifacts only.",
+    "Independent outside legal counsel review was not run or claimed.",
+    "App Store/TestFlight/release submission proof was not run or claimed.",
+    "Universal all-domain coverage proof was not run or claimed."
+  ],
+  "proofArtifacts": [
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-owner-approval-train-29.json",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-owner-approval-train-29.md",
+    "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.json",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-upload-readback-train-29.json",
+    "docs/qa/source-atlas/r2/source-atlas-production-r2-upload-readback-train-29.md",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-publisher-report.json",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-request-privacy-report.json",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-upload-readback-report.json",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/current-pointer.json",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/previous-pointer-snapshot.json",
+    "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2-readback/",
+    "/tmp/source-atlas-current-check/current.json"
+  ],
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; Green only for this bounded production R2 upload/readback proof and R2 publisher gate harness.",
+  "r2RequestPrivacyProof": {
+    "transportMode": "remote_r2",
+    "realNetworkRequests": 30,
+    "credentialsUsed": true,
+    "objectKeyCount": 13,
+    "objectKeyPolicy": "public/reference object keys only",
+    "privateContextSent": false,
+    "proofPath": "tools/source-atlas/generated/r2-publisher/train-29-production-remote-r2/r2-request-privacy-report.json"
+  },
+  "noPrivateGraphEgressProof": [
+    "payloads_public_reference_only check passed",
+    "object_keys_public check passed",
+    "non_private_scan_passed check passed",
+    "source-atlas-no-private-graph-egress-audit passed",
+    "remote current pointer contains manifest/checksum/public freshness metadata only"
+  ],
+  "licenseTermsProof": {
+    "approvalPacket": "docs/qa/source-atlas/legal/source-atlas-legal-terms-approval-packet-train-27.json",
+    "approvalPacketSHA256": "be3c177e45d510e9a466150b878f9aa61ed5c903d74ca1c7c66a5c6f5bd32f59",
+    "status": "Green for internal legal/terms approval packet validation",
+    "outsideLegalApprovalClaimed": false,
+    "sourceIDs": [
+      "bls.public.data.api",
+      "onet.database",
+      "openalex.dataset"
+    ]
+  },
+  "restrictedSourceExclusionProof": [
+    "source_license_slices_present check passed",
+    "restricted source exclusions are inherited from the pack-production artifacts",
+    "publisher did not re-admit excluded or lookup-only claims"
+  ],
+  "provenanceCompletenessProof": [
+    "pack_artifacts_valid check passed",
+    "local_checksums_match_manifest check passed",
+    "pack manifest hash 6f8f394a912b4983c4b19512c776b21844834fd1df5713cf435816c0864ffe06",
+    "pack hash 55f2ae4593e40e30fe9aa48d0dab4988f186bc889cf225b3db2676b77e1d1ea3"
+  ],
+  "freshnessRevocationProof": [
+    "revocation_lkg_rollback_present check passed",
+    "revocations object uploaded and read back",
+    "lkg object uploaded and read back",
+    "current pointer updated only after all readbacks passed"
+  ],
+  "lkgRollbackProof": {
+    "previousCurrentPointerExisted": true,
+    "previousCurrentPointerSHA256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498",
+    "previousLKGExisted": true,
+    "previousLKGSHA256": "0bdce7b2eb6406f2234bd62f24101a44795d5d0a689fc88d28bb1ae930e4f12a",
+    "currentPointerKey": "source-atlas/v1/production/stable/occupation_foundation/current.json",
+    "currentPointerSHA256": "33eb11402140afb9e0cd44baa0f053021d2e8b04a4e8eca0b81b4b4e0ba2f498"
+  },
+  "nativeOfflineNoAccountProof": "Not claimed in Train 29. Native runtime proof remains a separate gate.",
+  "productionNonClaims": [
+    "not full Source Atlas Green",
+    "not native app runtime readiness",
+    "not R2 release readiness",
+    "not release readiness",
+    "not App Store readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a private user-data backend",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "knownRisks": [
+    "Runtime/native fetch, quarantine, offline/no-account, and inspection proof still need current native validation.",
+    "Outside legal counsel approval is not proven.",
+    "Universal coverage remains impossible as a literal claim; only governed coverage-frontier claims can become Green per scoped frontier.",
+    "Release Green remains blocked until native/device/accessibility/privacy/security/release packets pass."
+  ],
+  "followUpRequired": [
+    "Train 30: native production remote manifest fetch/cache/verify/quarantine/LKG proof against the production current pointer.",
+    "Train 31: runtime/source inspection local-only composition proof using the production pack metadata.",
+    "Train 32: release proof hardening packet with device/offline/no-account/accessibility/security gates.",
+    "Domain expansion/frontier trains for any additional coverage claims."
+  ],
+  "rollbackPlan": [
+    "Use source-atlas/v1/production/stable/occupation_foundation/lkg.json if current pointer must be rolled back.",
+    "Publish a revocation manifest for source-atlas/v1/domain/occupation_foundation/20260628T000000Z if the pack is later invalidated.",
+    "Repoint source-atlas/v1/production/stable/occupation_foundation/current.json to the previous safe manifest pointer if required.",
+    "Disable native remote pack refresh and fall back to bundled/local baseline if app-side proof fails."
+  ],
+  "architectureCloseout": {
+    "finalArchitectureTreeInspected": true,
+    "canonicalOwnersTouched": [
+      "tools/source-atlas/foundry",
+      "docs/qa/source-atlas/r2"
+    ],
+    "filesMovedOrCreated": [
+      "R2 publisher remote mode proof artifacts and Train 29 closeout"
+    ],
+    "oldNonCanonicalPathsRemoved": [],
+    "compatibilityShimsLeftBehind": [],
+    "yellowArchitectureDebtRemaining": "Native runtime/release proof remains separate; no app source was changed in Train 29.",
+    "nextRepairTrainIfDebtRemains": "Native production remote manifest fetch/cache/verify proof.",
+    "equivalentPathInterpretationUsed": false
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "created_at": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.catalogRegistryMutationApprovalUnavailable.v1",
+  "non_claims": [
+    "placeholder only",
+    "not an approval artifact"
+  ],
+  "reason": "decision artifact required before planner approval is available"
+}

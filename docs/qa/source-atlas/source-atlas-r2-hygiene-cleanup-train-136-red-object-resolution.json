@@ -1,0 +1,1877 @@
+{
+  "backups": [
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b.payload",
+      "bytes": 5354,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json",
+      "severity": "Red",
+      "sha256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/55c08599f81b49d693665f30f65ae72d95ecccaa293be9da545ea470ba564837.payload",
+      "bytes": 1006,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/last-known-good/stable.json",
+      "severity": "Red",
+      "sha256": "55c08599f81b49d693665f30f65ae72d95ecccaa293be9da545ea470ba564837"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/29c2a4017834b4d404d2f88502a140ac9b097cd0d4928adc4785c3b4aabaa051.payload",
+      "bytes": 1690,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/freshness-manifest.json",
+      "severity": "Red",
+      "sha256": "29c2a4017834b4d404d2f88502a140ac9b097cd0d4928adc4785c3b4aabaa051"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/cea8aedbfea7453941a79f995e0050788caa4921b807c83c853146590c048941.payload",
+      "bytes": 5354,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/manifest.json",
+      "severity": "Red",
+      "sha256": "cea8aedbfea7453941a79f995e0050788caa4921b807c83c853146590c048941"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/fb7e236a168628f7130e9de7f4d097ffa7415457abdccb738e3e8936a83b7a18.payload",
+      "bytes": 7277,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/packs/pack.occupation.broad_occupational_foundation.json",
+      "severity": "Red",
+      "sha256": "fb7e236a168628f7130e9de7f4d097ffa7415457abdccb738e3e8936a83b7a18"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/03af554856f26fd8f457c6c3ac546b8b12ad717cdb63155dd00e587bef014cf4.payload",
+      "bytes": 2536,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/provenance/receipt.source_atlas_foundry.2ff6a0994e07a28b.json",
+      "severity": "Red",
+      "sha256": "03af554856f26fd8f457c6c3ac546b8b12ad717cdb63155dd00e587bef014cf4"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/808ff6d8d475e7340014be11acfda1fc353cf809f3f44142b1c0ee2c9fcab598.payload",
+      "bytes": 2648,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/coverage-manifest.json",
+      "severity": "Red",
+      "sha256": "808ff6d8d475e7340014be11acfda1fc353cf809f3f44142b1c0ee2c9fcab598"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/d93d6a08e6d2826170e3e9a32d85690f0b80b46df24a27befe91f6367f88dd19.payload",
+      "bytes": 5647,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/entity-registry.json",
+      "severity": "Red",
+      "sha256": "d93d6a08e6d2826170e3e9a32d85690f0b80b46df24a27befe91f6367f88dd19"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/41d6bc0496500c88515e4d9f2669c6541d82324e4f44ed87f94cee02301c57e7.payload",
+      "bytes": 6211,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/source-certification.json",
+      "severity": "Red",
+      "sha256": "41d6bc0496500c88515e4d9f2669c6541d82324e4f44ed87f94cee02301c57e7"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/a5bd0c1b5a20ea21a6c14bb9155c2c5e99192db69636d21cf5d4c609310b2115.payload",
+      "bytes": 3530,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/source-registry.json",
+      "severity": "Red",
+      "sha256": "a5bd0c1b5a20ea21a6c14bb9155c2c5e99192db69636d21cf5d4c609310b2115"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/7329554950ad28c6ed18f3fccab503ec07fab0258c26d21b618173f99db66f07.payload",
+      "bytes": 1511,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/schemas/ontology-v1.json",
+      "severity": "Red",
+      "sha256": "7329554950ad28c6ed18f3fccab503ec07fab0258c26d21b618173f99db66f07"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/c89f5de444c831a6b6c612e4985f1fd7706b4418d22328b751cd8d7c7488df65.payload",
+      "bytes": 8943,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/schemas/schema-descriptors-v1.json",
+      "severity": "Red",
+      "sha256": "c89f5de444c831a6b6c612e4985f1fd7706b4418d22328b751cd8d7c7488df65"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/ba3344a5936904896c2cd369a90c3b03adfcf773b5d82a250aff8b6f324a075b.payload",
+      "bytes": 15516,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/shards/shard.source_atlas.1793681f9f91f7db.json",
+      "severity": "Red",
+      "sha256": "ba3344a5936904896c2cd369a90c3b03adfcf773b5d82a250aff8b6f324a075b"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/5a84b8a216cc6457a2697b6f3fbf4b6bc8facf0e0efb6b401d6e84f764438a20.payload",
+      "bytes": 1690,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json",
+      "severity": "Red",
+      "sha256": "5a84b8a216cc6457a2697b6f3fbf4b6bc8facf0e0efb6b401d6e84f764438a20"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b.payload",
+      "bytes": 5354,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json",
+      "severity": "Red",
+      "sha256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e.payload",
+      "bytes": 7277,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json",
+      "severity": "Red",
+      "sha256": "42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/369e3b3a2865e18b7658528e777ddcc839865bb61ce55e8f11631a2703f0e466.payload",
+      "bytes": 2536,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json",
+      "severity": "Red",
+      "sha256": "369e3b3a2865e18b7658528e777ddcc839865bb61ce55e8f11631a2703f0e466"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/c90ebf391710b8659802b0d478045c7560466ba00e20c6253a276d535c0310a0.payload",
+      "bytes": 2648,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json",
+      "severity": "Red",
+      "sha256": "c90ebf391710b8659802b0d478045c7560466ba00e20c6253a276d535c0310a0"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/d0c25cfd9db62b1a794334e45a438c8d0e38f2bf3ec3b9152f2d0f27af68c613.payload",
+      "bytes": 5647,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json",
+      "severity": "Red",
+      "sha256": "d0c25cfd9db62b1a794334e45a438c8d0e38f2bf3ec3b9152f2d0f27af68c613"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/c69c5a24f0a753e25a97608658060b5341217612a5c2898fe5cba0ba64830709.payload",
+      "bytes": 6211,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json",
+      "severity": "Red",
+      "sha256": "c69c5a24f0a753e25a97608658060b5341217612a5c2898fe5cba0ba64830709"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/dc2a8f7bad6d6802346aa1c01e8bd9fe17fe56ab35a396bc4c8c0a329ec87f5d.payload",
+      "bytes": 3530,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json",
+      "severity": "Red",
+      "sha256": "dc2a8f7bad6d6802346aa1c01e8bd9fe17fe56ab35a396bc4c8c0a329ec87f5d"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07.payload",
+      "bytes": 1511,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json",
+      "severity": "Red",
+      "sha256": "db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15.payload",
+      "bytes": 8943,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json",
+      "severity": "Red",
+      "sha256": "eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5.payload",
+      "bytes": 15516,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json",
+      "severity": "Red",
+      "sha256": "4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/2ffd249a33e8e78d529a2e2b4eaa9b2acd01a9c8562cde64b48acfc7bf6e9355.payload",
+      "bytes": 3245,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163338Z.json",
+      "severity": "Red",
+      "sha256": "2ffd249a33e8e78d529a2e2b4eaa9b2acd01a9c8562cde64b48acfc7bf6e9355"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/d5c4e4b671b694b40c4ef0b8992e185c86a33ede415fca6d2746d623aaea461e.payload",
+      "bytes": 3245,
+      "classification": "legacy_stable_noncurrent",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163539Z.json",
+      "severity": "Red",
+      "sha256": "d5c4e4b671b694b40c4ef0b8992e185c86a33ede415fca6d2746d623aaea461e"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/f9be073f3f20182737de3cfab54f8d50f3011ede948379b1474a085ab3ebb4f9.payload",
+      "bytes": 2230,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/adjudications.json",
+      "severity": "Red",
+      "sha256": "f9be073f3f20182737de3cfab54f8d50f3011ede948379b1474a085ab3ebb4f9"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/662515e691b613233f9108bd4c83c1cac865b6b7e1586cafde4ed265c6e879fb.payload",
+      "bytes": 2006,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/attribution.json",
+      "severity": "Red",
+      "sha256": "662515e691b613233f9108bd4c83c1cac865b6b7e1586cafde4ed265c6e879fb"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/1df2e50ac0416958f95e7b9e86b14bbcf52fd7ebb6503f8c2eb2efe4bfda8ba3.payload",
+      "bytes": 13830,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/claims.json",
+      "severity": "Red",
+      "sha256": "1df2e50ac0416958f95e7b9e86b14bbcf52fd7ebb6503f8c2eb2efe4bfda8ba3"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/a8ee4d96e698ccd12100e9fc4574835805c985517b04ec513468516d3eda1147.payload",
+      "bytes": 2508,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/coverage.json",
+      "severity": "Red",
+      "sha256": "a8ee4d96e698ccd12100e9fc4574835805c985517b04ec513468516d3eda1147"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/8bc74c75f1e4a1aadc06b937c1b49a1e8747b5ebb0cbdb8799df9fa4ffc8ee06.payload",
+      "bytes": 3122,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/entities.json",
+      "severity": "Red",
+      "sha256": "8bc74c75f1e4a1aadc06b937c1b49a1e8747b5ebb0cbdb8799df9fa4ffc8ee06"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/34b5382157890e75e451a0ccae7bc52941e32791b1e8e02ada8e73f5a0ecd7e8.payload",
+      "bytes": 3192,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/freshness.json",
+      "severity": "Red",
+      "sha256": "34b5382157890e75e451a0ccae7bc52941e32791b1e8e02ada8e73f5a0ecd7e8"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/d9a585d67a69fce7a9a6bc013253ffff3651b0ecdbca259269b75060caae4f63.payload",
+      "bytes": 1023,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/licenses.json",
+      "severity": "Red",
+      "sha256": "d9a585d67a69fce7a9a6bc013253ffff3651b0ecdbca259269b75060caae4f63"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/b56fe0c797c651611abb52504d0f573028f5060b06d495480f3140c1449f22fe.payload",
+      "bytes": 8708,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json",
+      "severity": "Red",
+      "sha256": "b56fe0c797c651611abb52504d0f573028f5060b06d495480f3140c1449f22fe"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/f3717d2a04969f99ce697438e9b6bfc2a62cc6f2d625833ea34c2ffcddb39387.payload",
+      "bytes": 1204,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/non_claims.json",
+      "severity": "Red",
+      "sha256": "f3717d2a04969f99ce697438e9b6bfc2a62cc6f2d625833ea34c2ffcddb39387"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/9fae76991b5f4d565f40c534db984ecc47ac03633e9b8130c393ce0042192fc3.payload",
+      "bytes": 26476,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/pack.json",
+      "severity": "Red",
+      "sha256": "9fae76991b5f4d565f40c534db984ecc47ac03633e9b8130c393ce0042192fc3"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/a43d11c7b284efb504c0b3bdfc57b8dfe8d6f6ccdb96227fffd763d804731a7f.payload",
+      "bytes": 1292,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/sources.json",
+      "severity": "Red",
+      "sha256": "a43d11c7b284efb504c0b3bdfc57b8dfe8d6f6ccdb96227fffd763d804731a7f"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/f3964d19ebabccda6bffcb2495f5897ce9a6b79d5083bd9ed952083efbd943d6.payload",
+      "bytes": 1734,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/current.json",
+      "severity": "Red",
+      "sha256": "f3964d19ebabccda6bffcb2495f5897ce9a6b79d5083bd9ed952083efbd943d6"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/abb4533cd49ddbfec55988894384f05c4504c2cfb570dd762ac62f0093631252.payload",
+      "bytes": 1269,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/lkg.json",
+      "severity": "Red",
+      "sha256": "abb4533cd49ddbfec55988894384f05c4504c2cfb570dd762ac62f0093631252"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/a496dbb2508d8a403ccef18e567199e65eb29d139c91634d09cb300a40bae488.payload",
+      "bytes": 1411,
+      "classification": "staging_candidate_in_production_bucket",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/revocations.json",
+      "severity": "Red",
+      "sha256": "a496dbb2508d8a403ccef18e567199e65eb29d139c91634d09cb300a40bae488"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/4df1cb012a4f50344352d75665b2496c80d3e60ecbb705bef79e2c9be2f33da5.payload",
+      "bytes": 3984,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/channels/stable/manifest.json",
+      "severity": "Red",
+      "sha256": "4df1cb012a4f50344352d75665b2496c80d3e60ecbb705bef79e2c9be2f33da5"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/e02a1fe43226ece5f477561aa8b01d44ebed812c553f200b6fcf375d642cf9a8.payload",
+      "bytes": 1003,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/last-known-good/stable.json",
+      "severity": "Red",
+      "sha256": "e02a1fe43226ece5f477561aa8b01d44ebed812c553f200b6fcf375d642cf9a8"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/40dcd617abaaf845c5ea8d0d757a72593d115b1d9678019cd725ac3eb92886b0.payload",
+      "bytes": 3412,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/freshness-manifest.json",
+      "severity": "Red",
+      "sha256": "40dcd617abaaf845c5ea8d0d757a72593d115b1d9678019cd725ac3eb92886b0"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/4df1cb012a4f50344352d75665b2496c80d3e60ecbb705bef79e2c9be2f33da5.payload",
+      "bytes": 3984,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/manifest.json",
+      "severity": "Red",
+      "sha256": "4df1cb012a4f50344352d75665b2496c80d3e60ecbb705bef79e2c9be2f33da5"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/ed1cc16042356180caa4e38b7328dca6be83be10477711c683364cd3988802fd.payload",
+      "bytes": 12959,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/packs/pack.career.nasa_astronaut.json",
+      "severity": "Red",
+      "sha256": "ed1cc16042356180caa4e38b7328dca6be83be10477711c683364cd3988802fd"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/de891c5a1b1730ff56614d2efe59d0a14458345314b7c10067b4d4948c1b5de5.payload",
+      "bytes": 7298,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/packs/pack.civic.us_president.json",
+      "severity": "Red",
+      "sha256": "de891c5a1b1730ff56614d2efe59d0a14458345314b7c10067b4d4948c1b5de5"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/a953b4701bba1585721188b8f591792ff5f1140acded2ca7641d28796e252805.payload",
+      "bytes": 3232,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/provenance/receipt.source_atlas_foundry.c2222a48fbd6791b.json",
+      "severity": "Red",
+      "sha256": "a953b4701bba1585721188b8f591792ff5f1140acded2ca7641d28796e252805"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/efc2940247f577a26d7099cb0ddf0238a7b4b385d8eea4c66a2fc81d21e83771.payload",
+      "bytes": 3724,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/coverage-manifest.json",
+      "severity": "Red",
+      "sha256": "efc2940247f577a26d7099cb0ddf0238a7b4b385d8eea4c66a2fc81d21e83771"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/5d8aa10cd5802c7033454dd2ee5e1a87d844cb407e79e7000242b03cb2bbd68b.payload",
+      "bytes": 16677,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/entity-registry.json",
+      "severity": "Red",
+      "sha256": "5d8aa10cd5802c7033454dd2ee5e1a87d844cb407e79e7000242b03cb2bbd68b"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/97d22ac6ffd209dfff75c4eef79dfc44958e96918875efea47c65a3523ca548d.payload",
+      "bytes": 20894,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/source-certification.json",
+      "severity": "Red",
+      "sha256": "97d22ac6ffd209dfff75c4eef79dfc44958e96918875efea47c65a3523ca548d"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/65f8e613a17601ea132afdc545d62f9e9a19501567b5d55d956a7e4264fba34b.payload",
+      "bytes": 7221,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/source-registry.json",
+      "severity": "Red",
+      "sha256": "65f8e613a17601ea132afdc545d62f9e9a19501567b5d55d956a7e4264fba34b"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/c1d26542c6f94b75777f3ce5680adcaa2cbf8a4e06798d11b25f9c4d7a68e9c2.payload",
+      "bytes": 1511,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/schemas/ontology-v1.json",
+      "severity": "Red",
+      "sha256": "c1d26542c6f94b75777f3ce5680adcaa2cbf8a4e06798d11b25f9c4d7a68e9c2"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/810bcd4a33366fde05a9e0126d5561e8477f78bdb4da6daedc0e5c65976a4f41.payload",
+      "bytes": 8940,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/schemas/schema-descriptors-v1.json",
+      "severity": "Red",
+      "sha256": "810bcd4a33366fde05a9e0126d5561e8477f78bdb4da6daedc0e5c65976a4f41"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/fcab9952a5c36f2fe819f4f3980e07637c93b81c71253b7b8e107f6b37026160.payload",
+      "bytes": 18079,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/shards/shard.source_atlas.5de45d2342c252fc.json",
+      "severity": "Red",
+      "sha256": "fcab9952a5c36f2fe819f4f3980e07637c93b81c71253b7b8e107f6b37026160"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/6ada525631e47eec2029e9887c51dd32db7bb8bdae16c1303008783b3f77759a.payload",
+      "bytes": 32868,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/shards/shard.source_atlas.8da56078384ab0ca.json",
+      "severity": "Red",
+      "sha256": "6ada525631e47eec2029e9887c51dd32db7bb8bdae16c1303008783b3f77759a"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/7873787cc80de10ca6489c1b547d3ab6aa48784c3e8de1326533f28bd9f11dfb.payload",
+      "bytes": 3713,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1429/revocations/source-atlas-r2-ops-proof-2026-06-27-stable.json",
+      "severity": "Red",
+      "sha256": "7873787cc80de10ca6489c1b547d3ab6aa48784c3e8de1326533f28bd9f11dfb"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/e0f709bf6f384ef51fb37d9306fb3a03753685b59192b5dc43db666d9872afef.payload",
+      "bytes": 4221,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/channels/validation/manifest.json",
+      "severity": "Red",
+      "sha256": "e0f709bf6f384ef51fb37d9306fb3a03753685b59192b5dc43db666d9872afef"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/c94a5b92233b3cf2ec077abf530a35edad27b18c5070480efbd58c19c7197ffb.payload",
+      "bytes": 369,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/last-known-good/validation.json",
+      "severity": "Red",
+      "sha256": "c94a5b92233b3cf2ec077abf530a35edad27b18c5070480efbd58c19c7197ffb"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/3f77b3bb70c6b67179f92ce8fc143f3490b25ae59d22bfebeeff3222d9998d7d.payload",
+      "bytes": 42567,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/coverage-report.json",
+      "severity": "Red",
+      "sha256": "3f77b3bb70c6b67179f92ce8fc143f3490b25ae59d22bfebeeff3222d9998d7d"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/642f369593342183458325e4d4eb559252f3bc28ebdc48611a99efdc52e61506.payload",
+      "bytes": 735,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/freshness-states.json",
+      "severity": "Red",
+      "sha256": "642f369593342183458325e4d4eb559252f3bc28ebdc48611a99efdc52e61506"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/4ec358314eb6038c63779ca822c12b482f828b51951cbf20c43a0d81a10e7b38.payload",
+      "bytes": 6957,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/license-terms-slice.json",
+      "severity": "Red",
+      "sha256": "4ec358314eb6038c63779ca822c12b482f828b51951cbf20c43a0d81a10e7b38"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/e0f709bf6f384ef51fb37d9306fb3a03753685b59192b5dc43db666d9872afef.payload",
+      "bytes": 4221,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/manifest.json",
+      "severity": "Red",
+      "sha256": "e0f709bf6f384ef51fb37d9306fb3a03753685b59192b5dc43db666d9872afef"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/683773f62dd20c6eeb411cfaa523f75f8dad3c4e356aad65c427a09daadb79ea.payload",
+      "bytes": 649,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/non-claims.json",
+      "severity": "Red",
+      "sha256": "683773f62dd20c6eeb411cfaa523f75f8dad3c4e356aad65c427a09daadb79ea"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/578c490c70b8872e2fc274d7a82611ad80da777f785cf94811ac868390c1e39c.payload",
+      "bytes": 155984,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/normalized-records.json",
+      "severity": "Red",
+      "sha256": "578c490c70b8872e2fc274d7a82611ad80da777f785cf94811ac868390c1e39c"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/a10e4bc3c3d27c7d729f0b7e2033617736d4813674a7c8f15bd1d4c531eac0c2.payload",
+      "bytes": 1006,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/pack-readiness-verdict.json",
+      "severity": "Red",
+      "sha256": "a10e4bc3c3d27c7d729f0b7e2033617736d4813674a7c8f15bd1d4c531eac0c2"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/ba2e0ffcc5187856b480179881580768b1a8a31a0411ce5a1dbf5e13d221957f.payload",
+      "bytes": 3931,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/provenance-receipts.json",
+      "severity": "Red",
+      "sha256": "ba2e0ffcc5187856b480179881580768b1a8a31a0411ce5a1dbf5e13d221957f"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/d057f166c2a6d41449c5959c2ea99e542aac7ef3b2044c8b80c8c88530eb765d.payload",
+      "bytes": 6718,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/source-registry-slice.json",
+      "severity": "Red",
+      "sha256": "d057f166c2a6d41449c5959c2ea99e542aac7ef3b2044c8b80c8c88530eb765d"
+    },
+    {
+      "backupPath": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/objects/122eff9471ffa86a0b2c03ec96e918a30e208658d62be331cd46f8d2017617e9.payload",
+      "bytes": 219,
+      "classification": "validation_in_production_bucket",
+      "objectKey": "source-atlas/v1/validation/amb-1430/revocations/source-atlas-broad-occupational-foundation-train-01.json",
+      "severity": "Red",
+      "sha256": "122eff9471ffa86a0b2c03ec96e918a30e208658d62be331cd46f8d2017617e9"
+    }
+  ],
+  "bucket": "ambitions-source-atlas-prod",
+  "checks": [
+    {
+      "issues": [],
+      "name": "inventory_has_red_hygiene_targets",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "targets_are_hygiene_red_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "r2_environment_resolved_without_secret_values",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "cleanup_execute_requested",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "backup_readback_sha256_recorded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "red_targets_deleted",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "deleted_targets_absent_after_readback",
+      "passed": true
+    }
+  ],
+  "cleanupID": "source-atlas/r2-hygiene-cleanup.d73fa631274eaed8",
+  "createdAt": "2026-06-29T02:55:54Z",
+  "deletes": [
+    {
+      "backupBytes": 5354,
+      "backupSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1006,
+      "backupSHA256": "55c08599f81b49d693665f30f65ae72d95ecccaa293be9da545ea470ba564837",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/last-known-good/stable.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1690,
+      "backupSHA256": "29c2a4017834b4d404d2f88502a140ac9b097cd0d4928adc4785c3b4aabaa051",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/freshness-manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 5354,
+      "backupSHA256": "cea8aedbfea7453941a79f995e0050788caa4921b807c83c853146590c048941",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 7277,
+      "backupSHA256": "fb7e236a168628f7130e9de7f4d097ffa7415457abdccb738e3e8936a83b7a18",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/packs/pack.occupation.broad_occupational_foundation.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 2536,
+      "backupSHA256": "03af554856f26fd8f457c6c3ac546b8b12ad717cdb63155dd00e587bef014cf4",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/provenance/receipt.source_atlas_foundry.2ff6a0994e07a28b.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 2648,
+      "backupSHA256": "808ff6d8d475e7340014be11acfda1fc353cf809f3f44142b1c0ee2c9fcab598",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/coverage-manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 5647,
+      "backupSHA256": "d93d6a08e6d2826170e3e9a32d85690f0b80b46df24a27befe91f6367f88dd19",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/entity-registry.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 6211,
+      "backupSHA256": "41d6bc0496500c88515e4d9f2669c6541d82324e4f44ed87f94cee02301c57e7",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/source-certification.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3530,
+      "backupSHA256": "a5bd0c1b5a20ea21a6c14bb9155c2c5e99192db69636d21cf5d4c609310b2115",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/source-registry.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1511,
+      "backupSHA256": "7329554950ad28c6ed18f3fccab503ec07fab0258c26d21b618173f99db66f07",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/schemas/ontology-v1.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 8943,
+      "backupSHA256": "c89f5de444c831a6b6c612e4985f1fd7706b4418d22328b751cd8d7c7488df65",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/schemas/schema-descriptors-v1.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 15516,
+      "backupSHA256": "ba3344a5936904896c2cd369a90c3b03adfcf773b5d82a250aff8b6f324a075b",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/shards/shard.source_atlas.1793681f9f91f7db.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1690,
+      "backupSHA256": "5a84b8a216cc6457a2697b6f3fbf4b6bc8facf0e0efb6b401d6e84f764438a20",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 5354,
+      "backupSHA256": "2264f37b2c794bf43b120be68d95fad9e8a846b2b637eaa3186a5ffb9c212d5b",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 7277,
+      "backupSHA256": "42ee88d7853c8844d0f61bc883aa6e7496d38425d4ce1e5c09f8e6520e39710e",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 2536,
+      "backupSHA256": "369e3b3a2865e18b7658528e777ddcc839865bb61ce55e8f11631a2703f0e466",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 2648,
+      "backupSHA256": "c90ebf391710b8659802b0d478045c7560466ba00e20c6253a276d535c0310a0",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 5647,
+      "backupSHA256": "d0c25cfd9db62b1a794334e45a438c8d0e38f2bf3ec3b9152f2d0f27af68c613",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 6211,
+      "backupSHA256": "c69c5a24f0a753e25a97608658060b5341217612a5c2898fe5cba0ba64830709",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3530,
+      "backupSHA256": "dc2a8f7bad6d6802346aa1c01e8bd9fe17fe56ab35a396bc4c8c0a329ec87f5d",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1511,
+      "backupSHA256": "db5040dafb17dbd280518f4e85796423250a5db304c8712f3b90f53aed768c07",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 8943,
+      "backupSHA256": "eb469242369dfea8e0a569e2c7a86dd6448d8d3b8ec4bd62bbd7625534739a15",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 15516,
+      "backupSHA256": "4b1e0ad59b60d158dfb8fb375bfc18e3572372e4f352769037a2278a3f3b0ad5",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3245,
+      "backupSHA256": "2ffd249a33e8e78d529a2e2b4eaa9b2acd01a9c8562cde64b48acfc7bf6e9355",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163338Z.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3245,
+      "backupSHA256": "d5c4e4b671b694b40c4ef0b8992e185c86a33ede415fca6d2746d623aaea461e",
+      "classification": "legacy_stable_noncurrent",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163539Z.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 2230,
+      "backupSHA256": "f9be073f3f20182737de3cfab54f8d50f3011ede948379b1474a085ab3ebb4f9",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/adjudications.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 2006,
+      "backupSHA256": "662515e691b613233f9108bd4c83c1cac865b6b7e1586cafde4ed265c6e879fb",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/attribution.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 13830,
+      "backupSHA256": "1df2e50ac0416958f95e7b9e86b14bbcf52fd7ebb6503f8c2eb2efe4bfda8ba3",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/claims.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 2508,
+      "backupSHA256": "a8ee4d96e698ccd12100e9fc4574835805c985517b04ec513468516d3eda1147",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/coverage.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3122,
+      "backupSHA256": "8bc74c75f1e4a1aadc06b937c1b49a1e8747b5ebb0cbdb8799df9fa4ffc8ee06",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/entities.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3192,
+      "backupSHA256": "34b5382157890e75e451a0ccae7bc52941e32791b1e8e02ada8e73f5a0ecd7e8",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/freshness.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1023,
+      "backupSHA256": "d9a585d67a69fce7a9a6bc013253ffff3651b0ecdbca259269b75060caae4f63",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/licenses.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 8708,
+      "backupSHA256": "b56fe0c797c651611abb52504d0f573028f5060b06d495480f3140c1449f22fe",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1204,
+      "backupSHA256": "f3717d2a04969f99ce697438e9b6bfc2a62cc6f2d625833ea34c2ffcddb39387",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/non_claims.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 26476,
+      "backupSHA256": "9fae76991b5f4d565f40c534db984ecc47ac03633e9b8130c393ce0042192fc3",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/pack.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1292,
+      "backupSHA256": "a43d11c7b284efb504c0b3bdfc57b8dfe8d6f6ccdb96227fffd763d804731a7f",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/sources.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1734,
+      "backupSHA256": "f3964d19ebabccda6bffcb2495f5897ce9a6b79d5083bd9ed952083efbd943d6",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/current.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1269,
+      "backupSHA256": "abb4533cd49ddbfec55988894384f05c4504c2cfb570dd762ac62f0093631252",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/lkg.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1411,
+      "backupSHA256": "a496dbb2508d8a403ccef18e567199e65eb29d139c91634d09cb300a40bae488",
+      "classification": "staging_candidate_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/revocations.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3984,
+      "backupSHA256": "4df1cb012a4f50344352d75665b2496c80d3e60ecbb705bef79e2c9be2f33da5",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/channels/stable/manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1003,
+      "backupSHA256": "e02a1fe43226ece5f477561aa8b01d44ebed812c553f200b6fcf375d642cf9a8",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/last-known-good/stable.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3412,
+      "backupSHA256": "40dcd617abaaf845c5ea8d0d757a72593d115b1d9678019cd725ac3eb92886b0",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/freshness-manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3984,
+      "backupSHA256": "4df1cb012a4f50344352d75665b2496c80d3e60ecbb705bef79e2c9be2f33da5",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 12959,
+      "backupSHA256": "ed1cc16042356180caa4e38b7328dca6be83be10477711c683364cd3988802fd",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/packs/pack.career.nasa_astronaut.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 7298,
+      "backupSHA256": "de891c5a1b1730ff56614d2efe59d0a14458345314b7c10067b4d4948c1b5de5",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/packs/pack.civic.us_president.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3232,
+      "backupSHA256": "a953b4701bba1585721188b8f591792ff5f1140acded2ca7641d28796e252805",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/provenance/receipt.source_atlas_foundry.c2222a48fbd6791b.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3724,
+      "backupSHA256": "efc2940247f577a26d7099cb0ddf0238a7b4b385d8eea4c66a2fc81d21e83771",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/coverage-manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 16677,
+      "backupSHA256": "5d8aa10cd5802c7033454dd2ee5e1a87d844cb407e79e7000242b03cb2bbd68b",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/entity-registry.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 20894,
+      "backupSHA256": "97d22ac6ffd209dfff75c4eef79dfc44958e96918875efea47c65a3523ca548d",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/source-certification.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 7221,
+      "backupSHA256": "65f8e613a17601ea132afdc545d62f9e9a19501567b5d55d956a7e4264fba34b",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/source-registry.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1511,
+      "backupSHA256": "c1d26542c6f94b75777f3ce5680adcaa2cbf8a4e06798d11b25f9c4d7a68e9c2",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/schemas/ontology-v1.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 8940,
+      "backupSHA256": "810bcd4a33366fde05a9e0126d5561e8477f78bdb4da6daedc0e5c65976a4f41",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/schemas/schema-descriptors-v1.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 18079,
+      "backupSHA256": "fcab9952a5c36f2fe819f4f3980e07637c93b81c71253b7b8e107f6b37026160",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/shards/shard.source_atlas.5de45d2342c252fc.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 32868,
+      "backupSHA256": "6ada525631e47eec2029e9887c51dd32db7bb8bdae16c1303008783b3f77759a",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/shards/shard.source_atlas.8da56078384ab0ca.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3713,
+      "backupSHA256": "7873787cc80de10ca6489c1b547d3ab6aa48784c3e8de1326533f28bd9f11dfb",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1429/revocations/source-atlas-r2-ops-proof-2026-06-27-stable.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 4221,
+      "backupSHA256": "e0f709bf6f384ef51fb37d9306fb3a03753685b59192b5dc43db666d9872afef",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/channels/validation/manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 369,
+      "backupSHA256": "c94a5b92233b3cf2ec077abf530a35edad27b18c5070480efbd58c19c7197ffb",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/last-known-good/validation.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 42567,
+      "backupSHA256": "3f77b3bb70c6b67179f92ce8fc143f3490b25ae59d22bfebeeff3222d9998d7d",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/coverage-report.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 735,
+      "backupSHA256": "642f369593342183458325e4d4eb559252f3bc28ebdc48611a99efdc52e61506",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/freshness-states.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 6957,
+      "backupSHA256": "4ec358314eb6038c63779ca822c12b482f828b51951cbf20c43a0d81a10e7b38",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/license-terms-slice.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 4221,
+      "backupSHA256": "e0f709bf6f384ef51fb37d9306fb3a03753685b59192b5dc43db666d9872afef",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/manifest.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 649,
+      "backupSHA256": "683773f62dd20c6eeb411cfaa523f75f8dad3c4e356aad65c427a09daadb79ea",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/non-claims.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 155984,
+      "backupSHA256": "578c490c70b8872e2fc274d7a82611ad80da777f785cf94811ac868390c1e39c",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/normalized-records.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 1006,
+      "backupSHA256": "a10e4bc3c3d27c7d729f0b7e2033617736d4813674a7c8f15bd1d4c531eac0c2",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/pack-readiness-verdict.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 3931,
+      "backupSHA256": "ba2e0ffcc5187856b480179881580768b1a8a31a0411ce5a1dbf5e13d221957f",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/provenance-receipts.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 6718,
+      "backupSHA256": "d057f166c2a6d41449c5959c2ea99e542aac7ef3b2044c8b80c8c88530eb765d",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/source-registry-slice.json",
+      "severity": "Red"
+    },
+    {
+      "backupBytes": 219,
+      "backupSHA256": "122eff9471ffa86a0b2c03ec96e918a30e208658d62be331cd46f8d2017617e9",
+      "classification": "validation_in_production_bucket",
+      "deleted": true,
+      "objectKey": "source-atlas/v1/validation/amb-1430/revocations/source-atlas-broad-occupational-foundation-train-01.json",
+      "severity": "Red"
+    }
+  ],
+  "environment": {
+    "accountID": "<redacted>",
+    "accountIDResolved": true,
+    "accountIDSource": "api_discovery",
+    "bucket": "ambitions-source-atlas-prod",
+    "credentialEnvNamesPresent": [
+      "CLOUDFLARE_API_TOKEN",
+      "CLOUDFLARE_R2_ACCESS_KEY_ID",
+      "CLOUDFLARE_R2_SECRET_ACCESS_KEY"
+    ],
+    "envFilesLoaded": [
+      "tools/source-atlas/foundry/.env"
+    ],
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.r2InventoryEnvironmentResolution.v1",
+    "prefix": "source-atlas/",
+    "schemaVersion": 1,
+    "secretValuesPrinted": false,
+    "valid": true
+  },
+  "inventoryPath": "docs/qa/source-atlas/source-atlas-r2-live-inventory-current.json",
+  "inventorySHA256": "54b03e1870300250874e105dbbadcf4bff02b54ad83a76b9f8c59275476b5218",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.r2ProductionHygieneCleanup.v1",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not R2 release readiness",
+    "not Source Atlas universal coverage",
+    "not app runtime R2 fetch/cache proof",
+    "not entitlement-gated access proof",
+    "not legal/privacy release approval"
+  ],
+  "outputPaths": {
+    "backupManifest": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/backup/backup-manifest.json",
+    "closeout": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/closeout.md",
+    "markdown": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/r2-hygiene-cleanup-report.md",
+    "report": "tools/source-atlas/generated/r2-hygiene-cleanup/train-136-red-object-resolution/r2-hygiene-cleanup-report.json"
+  },
+  "postDeletePresentTargets": [],
+  "prefix": "source-atlas/",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "backupReadbacks": 68,
+    "deleteFailures": 0,
+    "deletedObjects": 68,
+    "dryRunWouldDelete": 0,
+    "expectedCurrentObjectsProtected": 196,
+    "liveObjectsAfter": 196,
+    "liveObjectsBefore": 264,
+    "redTargets": 68,
+    "stillPresentAfterDelete": 0
+  },
+  "schemaVersion": 1,
+  "status": "Source Green for R2 production bucket hygiene cleanup",
+  "targets": [
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "4094339e5cce8544e30879f6417c7686",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:14.792Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/channels/stable/manifest.json",
+      "severity": "Red",
+      "size": 5354,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "c4c5f70aceb706afeb49d3385d203e69",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:18.391Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/last-known-good/stable.json",
+      "severity": "Red",
+      "size": 1006,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "6bd779e0b73fa8edf470d4968a1171f2",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:33:52.464Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/freshness-manifest.json",
+      "severity": "Red",
+      "size": 1690,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "a8f52f9c417314ddbb2aa6b0c9be3e0b",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:33:54.274Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/manifest.json",
+      "severity": "Red",
+      "size": 5354,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "3921ccae97a9ca6ac25954793932444f",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:33:56.087Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/packs/pack.occupation.broad_occupational_foundation.json",
+      "severity": "Red",
+      "size": 7277,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "665c8bc9cce5540c2dd7b14d41649e79",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:33:57.903Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/provenance/receipt.source_atlas_foundry.2ff6a0994e07a28b.json",
+      "severity": "Red",
+      "size": 2536,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "55be84f7e196490e2b2e9998a51306ca",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:33:59.953Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/coverage-manifest.json",
+      "severity": "Red",
+      "size": 2648,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "70523efa49c72c5e2de43ea54b8cb12f",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:34:02.093Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/entity-registry.json",
+      "severity": "Red",
+      "size": 5647,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "050eade8b0d7f2976ddc2c446bc78482",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:34:03.900Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/source-certification.json",
+      "severity": "Red",
+      "size": 6211,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "7a143708ead2cbb08ab4c3c954b3c3f4",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:34:05.846Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/registries/source-registry.json",
+      "severity": "Red",
+      "size": 3530,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "163f90103cd980d89b2d8699b2e69844",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:34:07.702Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/schemas/ontology-v1.json",
+      "severity": "Red",
+      "size": 1511,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "3cee61f539c640d71694bbff3e3b1fb1",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:34:09.711Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/schemas/schema-descriptors-v1.json",
+      "severity": "Red",
+      "size": 8943,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "b3cd63880c101805fd4190f3e17c09d5",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:34:11.947Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163338Z/shards/shard.source_atlas.1793681f9f91f7db.json",
+      "severity": "Red",
+      "size": 15516,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "1df16560c49e09d070335fa72dac5e19",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:35:52.262Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/freshness-manifest.json",
+      "severity": "Red",
+      "size": 1690,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "4094339e5cce8544e30879f6417c7686",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:35:54.063Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/manifest.json",
+      "severity": "Red",
+      "size": 5354,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "6f743c28ad4671ac4f5e3990946d689f",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:35:56.562Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/packs/pack.occupation.broad_occupational_foundation.json",
+      "severity": "Red",
+      "size": 7277,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "7c167d45ee864b6c54698d6f0b16c2f1",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:35:58.406Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/provenance/receipt.source_atlas_foundry.d00f519b9ffce479.json",
+      "severity": "Red",
+      "size": 2536,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "7c8829cd990fedfafda26a820f803ae5",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:00.505Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/coverage-manifest.json",
+      "severity": "Red",
+      "size": 2648,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "b79a9c07cc11148f9a52de3b3fdfbe47",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:02.348Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/entity-registry.json",
+      "severity": "Red",
+      "size": 5647,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "80c75746bf4954d741a86fc93a70e982",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:04.159Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-certification.json",
+      "severity": "Red",
+      "size": 6211,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "cc1d732a1f7cbe8b1f6919fe1f951405",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:05.968Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/registries/source-registry.json",
+      "severity": "Red",
+      "size": 3530,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "283c4f6038991a0dbfdc8065f381ff2f",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:08.567Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/ontology-v1.json",
+      "severity": "Red",
+      "size": 1511,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "2bb3986a1c378d24e6cd1c53d9393e07",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:10.767Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/schemas/schema-descriptors-v1.json",
+      "severity": "Red",
+      "size": 8943,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "55fe06d5a3308433c5a63ced5a44972f",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:12.880Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/releases/broad-occupational-foundation-20260627T163539Z/shards/shard.source_atlas.7cc3e06975e7f067.json",
+      "severity": "Red",
+      "size": 15516,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "80c04826d0010aa1580826a9f3fbe81d",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:34:46.921Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163338Z.json",
+      "severity": "Red",
+      "size": 3245,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "legacy_stable_noncurrent",
+      "etag": "f1f917f7f98176b784bf85ea7ebd154d",
+      "hygieneReason": "Legacy stable namespace is not the current configured production namespace.",
+      "lastModified": "2026-06-27T16:36:48.107Z",
+      "objectKey": "source-atlas/v1/stable/broad-occupational-foundation/revocations/broad-occupational-foundation-20260627T163539Z.json",
+      "severity": "Red",
+      "size": 3245,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "7ca3616f8d71f02a6028941e4b39e76e",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:11.263Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/adjudications.json",
+      "severity": "Red",
+      "size": 2230,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "07f349b3d824715494eabb0fec3f9398",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:15.095Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/attribution.json",
+      "severity": "Red",
+      "size": 2006,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "da1f2cb545d335577086bde88b6c3c31",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:18.762Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/claims.json",
+      "severity": "Red",
+      "size": 13830,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "2f7b1dde4ca3229712db98b7f6a6a708",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:22.338Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/coverage.json",
+      "severity": "Red",
+      "size": 2508,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "9d9bd662ae31588a984942aa36654ddf",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:25.951Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/entities.json",
+      "severity": "Red",
+      "size": 3122,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "03d8faa6901a6f7ee5d4881c30874964",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:29.545Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/freshness.json",
+      "severity": "Red",
+      "size": 3192,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "aeb9f1bed8a294c536d9a4f4754bcc60",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:33.358Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/licenses.json",
+      "severity": "Red",
+      "size": 1023,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "49bc025781ef90b519f79d877465ed49",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:41.274Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/manifest.json",
+      "severity": "Red",
+      "size": 8708,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "df01db8f817be8b4a764a9d092bfef52",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:44.795Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/non_claims.json",
+      "severity": "Red",
+      "size": 1204,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "00b208f7fdad6b03e50aacd5b5c33d5e",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:48.596Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/pack.json",
+      "severity": "Red",
+      "size": 26476,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "264638e3082f9e20c202864845a36a07",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:55.764Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/2026-06-28T000000Z/sources.json",
+      "severity": "Red",
+      "size": 1292,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "82ac6a2e9c32fd82ae0fa5974fa5d8d5",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:59.371Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/current.json",
+      "severity": "Red",
+      "size": 1734,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "f5538117da277e426efcb40797000a19",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:37.334Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/lkg.json",
+      "severity": "Red",
+      "size": 1269,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "staging_candidate_in_production_bucket",
+      "etag": "e67537b732c0e0a345129e7bd9331b03",
+      "hygieneReason": "Staging/candidate namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-28T05:06:52.168Z",
+      "objectKey": "source-atlas/v1/staging/candidate/education_credentialing/revocations.json",
+      "severity": "Red",
+      "size": 1411,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "cf0571fc48068e7ac695ea2b0433a4e2",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:35.736Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/channels/stable/manifest.json",
+      "severity": "Red",
+      "size": 3984,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "5eda6aabb2c74059a7abe387c94a72a5",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:40.982Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/last-known-good/stable.json",
+      "severity": "Red",
+      "size": 1003,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "e06c25bfc0f01bd7db1f50f7f4b2182d",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:03.054Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/freshness-manifest.json",
+      "severity": "Red",
+      "size": 3412,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "cf0571fc48068e7ac695ea2b0433a4e2",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:05.159Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/manifest.json",
+      "severity": "Red",
+      "size": 3984,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "be566a2da9fde69ae98f051254c568cb",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:07.201Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/packs/pack.career.nasa_astronaut.json",
+      "severity": "Red",
+      "size": 12959,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "b25222c39b4ca22b0b54e4a2f26f99b0",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:09.192Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/packs/pack.civic.us_president.json",
+      "severity": "Red",
+      "size": 7298,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "7f7474eb9f063bae56ba3e7cb1a9176a",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:11.279Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/provenance/receipt.source_atlas_foundry.c2222a48fbd6791b.json",
+      "severity": "Red",
+      "size": 3232,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "d77784d6186302068033e93f889846c0",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:13.188Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/coverage-manifest.json",
+      "severity": "Red",
+      "size": 3724,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "d2b42d1adcb634486cd1b56000a1ca1d",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:15.322Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/entity-registry.json",
+      "severity": "Red",
+      "size": 16677,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "cb20ad787ac8734ab6f2cbf2731ecccf",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:17.547Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/source-certification.json",
+      "severity": "Red",
+      "size": 20894,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "74bb4c350cda489e4aed898fe6a90600",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:19.692Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/registries/source-registry.json",
+      "severity": "Red",
+      "size": 7221,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "21e34b40867188ded6506c6b8089babc",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:23.718Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/schemas/ontology-v1.json",
+      "severity": "Red",
+      "size": 1511,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "5d0b649ff4d4020df0861bf7f99e3f5d",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:25.837Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/schemas/schema-descriptors-v1.json",
+      "severity": "Red",
+      "size": 8940,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "a6143045f3209e982d5b4de7d1c39af8",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:27.891Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/shards/shard.source_atlas.5de45d2342c252fc.json",
+      "severity": "Red",
+      "size": 18079,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "1951ae08fac4a1c7dc3d451f0ebc5f6b",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:56:31.887Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/releases/source-atlas-r2-ops-proof-2026-06-27-stable/shards/shard.source_atlas.8da56078384ab0ca.json",
+      "severity": "Red",
+      "size": 32868,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "76e910aedfb12dd8d7d24e2134c38cf4",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T03:58:44.133Z",
+      "objectKey": "source-atlas/v1/validation/amb-1429/revocations/source-atlas-r2-ops-proof-2026-06-27-stable.json",
+      "severity": "Red",
+      "size": 3713,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "04730a1691ffdd50b396b15719721e32",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:50:02.399Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/channels/validation/manifest.json",
+      "severity": "Red",
+      "size": 4221,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "f65d4a38ceefc6396fad380acb63c36e",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:50:06.562Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/last-known-good/validation.json",
+      "severity": "Red",
+      "size": 369,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "6c0f6754d86715eb2977b67a7e1ac1aa",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:46.976Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/coverage-report.json",
+      "severity": "Red",
+      "size": 42567,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "c1569fca25bffd7cc261ac9a8eca318d",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:48.839Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/freshness-states.json",
+      "severity": "Red",
+      "size": 735,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "1ac86cfc00e2c23993d1d4ead2c91673",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:50.666Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/license-terms-slice.json",
+      "severity": "Red",
+      "size": 6957,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "04730a1691ffdd50b396b15719721e32",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:44.971Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/manifest.json",
+      "severity": "Red",
+      "size": 4221,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "4026d6deeaf4335af98f69cb46744273",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:52.453Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/non-claims.json",
+      "severity": "Red",
+      "size": 649,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "7410f7194208c3030d5663e1c90e5071",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:54.453Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/normalized-records.json",
+      "severity": "Red",
+      "size": 155984,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "e215feedd9363c3484f0dab317f8181d",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:56.408Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/pack-readiness-verdict.json",
+      "severity": "Red",
+      "size": 1006,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "3940435f15be86d3f69d4cd1bdf4ef71",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:58.211Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/provenance-receipts.json",
+      "severity": "Red",
+      "size": 3931,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "1cb7fb293004c812b19e69bffdd0d7aa",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:49:59.980Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/releases/source-atlas-broad-occupational-foundation-train-01/source-registry-slice.json",
+      "severity": "Red",
+      "size": 6718,
+      "storageClass": "STANDARD"
+    },
+    {
+      "classification": "validation_in_production_bucket",
+      "etag": "5161e0e8a52f2df6898d37c871ab9ee0",
+      "hygieneReason": "Validation namespace must not remain in the production bucket without explicit retention approval.",
+      "lastModified": "2026-06-27T15:50:04.633Z",
+      "objectKey": "source-atlas/v1/validation/amb-1430/revocations/source-atlas-broad-occupational-foundation-train-01.json",
+      "severity": "Red",
+      "size": 219,
+      "storageClass": "STANDARD"
+    }
+  ],
+  "valid": true,
+  "versionID": "source-atlas-r2-hygiene-cleanup-train-136"
+}

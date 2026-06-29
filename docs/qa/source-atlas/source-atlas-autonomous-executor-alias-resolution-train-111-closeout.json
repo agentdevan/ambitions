@@ -1,0 +1,427 @@
+{
+  "actionResults": [
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "business_entrepreneurship",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "creative_project_reference",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "education_credentialing",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "finance_public_reference",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": true,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "health_wellness_reference",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "health_wellness_reference_ca_statistics",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "hobbies_recreation",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "home_life_admin",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "occupation_foundation",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "personal_growth",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "public_civic_requirements",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "relationships_family",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    },
+    {
+      "artifactPaths": [],
+      "blockers": [],
+      "childValid": null,
+      "domainID": "travel_relocation",
+      "frontierConfigured": true,
+      "message": "current production runtime observed only; no mutation",
+      "nextAction": "monitor_current_production_runtime",
+      "nonClaims": [
+        "not universal coverage",
+        "not outside legal approval",
+        "not release readiness",
+        "not a final user plan, schedule, or Step generator"
+      ],
+      "productionAction": false,
+      "productionWriteExecuted": false,
+      "readiness": "current_production_runtime_recertified",
+      "requested": false,
+      "requiredGate": "next_due_review_or_freshness_window",
+      "safeAction": true,
+      "status": "observed",
+      "unsafeExecutionAttempted": false
+    }
+  ],
+  "allowFixtureDeliveryChainRequested": false,
+  "allowedClaims": [
+    "deterministic_gated_autonomous_operations_execution"
+  ],
+  "artifacts": [],
+  "blockedClaims": [
+    "app_store_readiness",
+    "automatic_r2_write_without_execute_budget_approval",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "literal_universal_coverage",
+    "native_runtime_green_without_xcode_device_offline_proof",
+    "outside_legal_approval",
+    "release_green",
+    "uncontrolled_live_harvest",
+    "worker_deploy_without_execute"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "operations_plan_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "operations_plan_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_boundary",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_unsafe_actions_executed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_actions_blocked_without_production_gates",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "safe_actions_require_execute_safe_actions",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T23:32:00Z",
+  "executeSafeActionsRequested": false,
+  "executionID": "source_atlas.autonomous_operations_execution.2d47ad3ec0c85c7f",
+  "executionMode": "dry_run_plan_observation",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousOperationsExecutor.v1",
+  "manifestPath": "tools/source-atlas/generated/autonomous-operations-execution/train-111-public-benefits-alias-resolution-closeout/autonomous-operations-execution-report.json",
+  "nonClaims": [
+    "gated autonomous operations executor only",
+    "not uncontrolled live harvest",
+    "not automatic production R2 write",
+    "not Worker deployment",
+    "not native runtime proof",
+    "not release readiness",
+    "not literal universal coverage",
+    "not outside legal approval",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "operations planner only",
+    "not an uncontrolled live harvester",
+    "not an automatic production R2 writer",
+    "not a Worker deployer by itself",
+    "not native runtime proof by itself",
+    "not literal universal coverage",
+    "not full Source Atlas Green",
+    "not outside legal approval",
+    "not App Store or TestFlight readiness",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "operationsPlanPath": "tools/source-atlas/generated/autonomous-operations-plan/train-111-public-benefits-alias-resolution/autonomous-operations-plan.json",
+  "outputHashes": {
+    "report": "3ce95ba2614215cadb4c5ec523b698a03e150bfcf68a7d71b3451e2d5b915eba"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-operations-execution/train-111-public-benefits-alias-resolution-closeout/closeout.md",
+    "markdown": "tools/source-atlas/generated/autonomous-operations-execution/train-111-public-benefits-alias-resolution-closeout/autonomous-operations-execution-report.md",
+    "report": "tools/source-atlas/generated/autonomous-operations-execution/train-111-public-benefits-alias-resolution-closeout/autonomous-operations-execution-report.json"
+  },
+  "outputRoot": "tools/source-atlas/generated/autonomous-operations-execution/train-111-public-benefits-alias-resolution-closeout",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productionNonClaims": [
+    "no full Source Atlas Green",
+    "no literal universal coverage",
+    "no release Green",
+    "no App Store readiness",
+    "no outside legal approval",
+    "no final user plan, schedule, or Step generation",
+    "no live harvest execution",
+    "no Worker deployment",
+    "no native runtime/device/offline proof",
+    "no production Cloudflare R2 write executed by this executor"
+  ],
+  "recordCounts": {
+    "blockedByGate": 0,
+    "deliveryChainArtifacts": 0,
+    "failedActions": 0,
+    "frontierIntakeArtifacts": 0,
+    "observedDomains": 13,
+    "plannedDomains": 13,
+    "plannedNotExecuted": 0,
+    "productionWritesExecuted": 0,
+    "safeActionsExecuted": 0,
+    "unsafeExecutionAttempts": 0
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; gated autonomous execution tooling only",
+  "status": "Source Green for gated autonomous operations execution",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-operations-executor-train-106"
+}

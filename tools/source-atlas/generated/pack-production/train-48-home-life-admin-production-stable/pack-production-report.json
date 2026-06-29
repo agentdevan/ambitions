@@ -1,0 +1,507 @@
+{
+  "artifactValidation": {
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.packProductionArtifactValidation.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "requiredArtifacts": [
+      "adjudications.json",
+      "attribution.json",
+      "claims.json",
+      "coverage.json",
+      "entities.json",
+      "freshness.json",
+      "licenses.json",
+      "lkg.json",
+      "manifest.json",
+      "non-private-scan-report.json",
+      "non_claims.json",
+      "pack.json",
+      "r2-dry-run-plan.json",
+      "revocations.json",
+      "rollback-plan.json",
+      "sources.json"
+    ],
+    "schemaVersion": 1,
+    "valid": true
+  },
+  "channel": "stable",
+  "checks": [
+    {
+      "name": "governance_registries_valid",
+      "passed": true
+    },
+    {
+      "name": "pack_slices_written",
+      "passed": true
+    },
+    {
+      "name": "pack_contains_only_packable_claims",
+      "passed": true
+    },
+    {
+      "name": "restricted_and_crosswalk_claims_excluded",
+      "passed": true
+    },
+    {
+      "name": "manifest_hashes_present",
+      "passed": true
+    },
+    {
+      "name": "revocation_lkg_rollback_present",
+      "passed": true
+    },
+    {
+      "name": "dry_run_plan_only",
+      "passed": true
+    },
+    {
+      "name": "private_object_keys_blocked",
+      "passed": true
+    },
+    {
+      "name": "non_private_scan_passed",
+      "passed": true
+    },
+    {
+      "name": "required_artifacts_valid",
+      "passed": true
+    },
+    {
+      "name": "execute_requires_approval_artifact",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "legal_terms_approval_packet_valid",
+      "passed": true
+    },
+    {
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "domain": "home_life_admin",
+  "dryRunPlan": {
+    "channel": "stable",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_r2_object_key",
+    "dryRun": true,
+    "environment": "production",
+    "executeRequested": false,
+    "kind": "ambitions.sourceAtlas.r2DryRunPlan.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator",
+      "dry-run only; no R2 upload or production promotion was performed"
+    ],
+    "objects": [
+      {
+        "bytes": 1490,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "adjudications",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/adjudications.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/adjudications.json",
+        "sha256": "23e0fc333ec7b71d66ce92d1dce46d2b59ec04c64f93202b7d606569d0a603c6"
+      },
+      {
+        "bytes": 1440,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "attribution",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/attribution.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/attribution.json",
+        "sha256": "4a6a347d87500890e4b39f0088e383aaed1babfd0d77d5bed9c3f981e7d12500"
+      },
+      {
+        "bytes": 9685,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "claims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/claims.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/claims.json",
+        "sha256": "3e62230b2c9c3b2b83999290274e351f9a946735b04a28df89c027e176e96247"
+      },
+      {
+        "bytes": 4381,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "coverage",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/coverage.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/coverage.json",
+        "sha256": "b0a28ecf0ce38e909059cbf2733a377f23152f61ec6e25eaad675d879b7143b1"
+      },
+      {
+        "bytes": 2472,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "entities",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/entities.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/entities.json",
+        "sha256": "388081bc597ff9591aea686c3faf62cd320b2024f74f9f7cbdfd65f32ae5055a"
+      },
+      {
+        "bytes": 2168,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "freshness",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/freshness.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/freshness.json",
+        "sha256": "51eb7465776bfa323071896be212667ee3ac8b0cf2a47d464f1e3906e8dbe44d"
+      },
+      {
+        "bytes": 3105,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "licenses",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/licenses.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/licenses.json",
+        "sha256": "14625425b73c27fbe2037a8ec76f3e1aba343db544f49c8da195416976ab0d70"
+      },
+      {
+        "bytes": 1238,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "lkg",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/lkg.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+        "sha256": "d34d9a61dd9b3c3b28ae8bc33ed6e2b161480168c0a18990e96ea767965f28aa"
+      },
+      {
+        "bytes": 8596,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "manifest",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/manifest.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+        "sha256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84"
+      },
+      {
+        "bytes": 1317,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "nonClaims",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/non_claims.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/non_claims.json",
+        "sha256": "27a222eb09ebe2a6b89730ddc04b980623f67a1a33db67aa25a08bfcb7876fe4"
+      },
+      {
+        "bytes": 24573,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "pack",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/pack.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/pack.json",
+        "sha256": "e732019e96231678955e6a45665f245159f45fc57563b75bd1ddc4c2734212ee"
+      },
+      {
+        "bytes": 1393,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "revocations",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/revocations.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/revocations.json",
+        "sha256": "920ddbace8ccc6c7998fcbce731d0751fbc3a58d1d4d014325552923bbf7ddda"
+      },
+      {
+        "bytes": 3773,
+        "cacheControl": "public, max-age=3600",
+        "contentType": "application/json; charset=utf-8",
+        "label": "sources",
+        "localPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/sources.json",
+        "objectKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/sources.json",
+        "sha256": "77f14aaac5042eee1ba6627222887d6310dbdbeb190f02653431ff127d06b783"
+      }
+    ],
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackPlanPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/rollback-plan.json",
+    "schemaVersion": 1,
+    "secretBoundary": "Plan contains no R2 credentials. Real upload requires approved credentials outside this artifact.",
+    "wouldUpload": false
+  },
+  "environment": "production",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.packProductionManifest.v1",
+  "legalTermsApprovalPacketValidation": {
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.legalTermsApprovalPacketValidation.v1",
+    "nonClaims": [
+      "not outside legal approval unless an outside approval artifact is validated",
+      "not production R2 readiness",
+      "not release readiness"
+    ],
+    "outsideLegalApprovalClaimed": false,
+    "packetPath": "docs/qa/source-atlas/legal/source-atlas-home-life-admin-legal-review-train-48.json",
+    "packetSHA256": "38a289f5893fe9aaf0e463911dc36132b1520724b577068f1eaed96452daf498",
+    "requestedArtifactClasses": [
+      "official_public_source",
+      "public_freshness",
+      "public_provenance",
+      "public_reference_claim"
+    ],
+    "required": true,
+    "schemaVersion": 1,
+    "sourceIDs": [
+      "energy.gov.energy_saver",
+      "ready.gov.kit",
+      "usa.gov.home_repair"
+    ],
+    "status": "Green",
+    "valid": true,
+    "validations": [
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "energy.gov.energy_saver",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "ready.gov.kit",
+        "status": "Green",
+        "valid": true
+      },
+      {
+        "approvalReviewStatus": "approved_internal_terms_review",
+        "issues": [],
+        "outsideLegalApprovalArtifact": "",
+        "outsideLegalApprovalClaimed": false,
+        "sourceID": "usa.gov.home_repair",
+        "status": "Green",
+        "valid": true
+      }
+    ]
+  },
+  "lkg": {
+    "channel": "stable",
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "domain": "home_life_admin",
+    "manifest_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "pack_id": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "reason_selected": "dry_run_candidate",
+    "rollback_safe": true,
+    "sha256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84",
+    "valid_until": null
+  },
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval",
+    "not full Source Atlas Green",
+    "not production R2 readiness",
+    "not native app runtime readiness",
+    "not outside legal approval",
+    "not universal goal coverage",
+    "not a final user plan, schedule, or Step generator"
+  ],
+  "nonPrivateScan": {
+    "createdAt": "2026-06-27T00:00:00Z",
+    "dataClass": "public_provenance",
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.nonPrivateScanReport.v1",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "outputRoot": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable",
+    "passed": true,
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "schemaVersion": 1
+  },
+  "objectKeys": {
+    "adjudications": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/adjudications.json",
+    "attribution": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/attribution.json",
+    "claims": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/claims.json",
+    "coverage": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/coverage.json",
+    "current": "source-atlas/v1/production/stable/home_life_admin/current.json",
+    "entities": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/entities.json",
+    "freshness": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/freshness.json",
+    "licenses": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/licenses.json",
+    "lkg": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+    "manifest": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+    "nonClaims": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/non_claims.json",
+    "pack": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/pack.json",
+    "revocations": "source-atlas/v1/production/stable/home_life_admin/revocations.json",
+    "sources": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/sources.json"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/closeout.md",
+    "lkg": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/lkg.json",
+    "manifest": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/manifest.json",
+    "nonPrivateScan": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/non-private-scan-report.json",
+    "pack": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/pack.json",
+    "r2DryRunPlan": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/r2-dry-run-plan.json",
+    "revocation": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/revocations.json",
+    "rollback": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/rollback-plan.json"
+  },
+  "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+  "packVersion": "20260628T000000Z",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "blockedClaimsExcluded": 0,
+    "claims": 4,
+    "licenses": 3,
+    "objectCount": 13,
+    "sources": 3
+  },
+  "revocation": {
+    "created_at": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "lkg_policy": "use_lkg_if_future_pack_is_revoked_and_lkg_hash_verifies",
+    "native_behavior": "not_claimed_in_train_04",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "object_keys": {
+      "lkg": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+      "manifest": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "proof_artifacts": [],
+    "publicReferenceOnly": true,
+    "reason": "dry_run_no_revocations",
+    "replacement_pack_id": null,
+    "revocation_id": "source_atlas_revocation.07424ddff1ea148d",
+    "revoked_object_keys": [],
+    "revoked_pack_ids": [],
+    "severity": "none"
+  },
+  "rollback": {
+    "candidateManifestKey": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+    "createdAt": "2026-06-28T00:00:00Z",
+    "dataClass": "public_freshness",
+    "dryRunOnly": true,
+    "kind": "ambitions.sourceAtlas.rollbackPlan.v1",
+    "lkgPointerKey": "source-atlas/v1/production/stable/home_life_admin/lkg.json",
+    "nonClaims": [
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval",
+      "not full Source Atlas Green",
+      "not production R2 readiness",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not universal goal coverage",
+      "not a final user plan, schedule, or Step generator"
+    ],
+    "packID": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "publicReferenceOnly": true,
+    "rollbackCandidates": [
+      {
+        "channel": "stable",
+        "created_at": "2026-06-28T00:00:00Z",
+        "dataClass": "public_freshness",
+        "domain": "home_life_admin",
+        "manifest_key": "source-atlas/v1/production/stable/home_life_admin/20260628T000000Z/manifest.json",
+        "nonClaims": [
+          "not a private user-data backend",
+          "not private life graph storage",
+          "not an official legal, medical, financial, or admissions decision",
+          "not runtime recommendation proof by itself",
+          "not R2 release readiness",
+          "not accessibility, privacy, or legal approval",
+          "not full Source Atlas Green",
+          "not production R2 readiness",
+          "not native app runtime readiness",
+          "not outside legal approval",
+          "not universal goal coverage",
+          "not a final user plan, schedule, or Step generator"
+        ],
+        "pack_id": "source-atlas/v1/domain/home_life_admin/20260628T000000Z",
+        "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+        "publicReferenceOnly": true,
+        "reason_selected": "dry_run_candidate",
+        "rollback_safe": true,
+        "sha256": "7295ca448ffaa051b58ad4c15fac340ce8ebb3373f4d2140054c91de6c771e84",
+        "valid_until": null
+      }
+    ],
+    "schemaVersion": 1,
+    "stablePointerWillChange": false
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; pack compiler and R2 dry-run controls only",
+  "status": "Source Green for pack compiler/R2 dry-run controls",
+  "valid": true,
+  "versionID": "source-atlas-pack-production-train-04"
+}

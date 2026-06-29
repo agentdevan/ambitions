@@ -1,0 +1,200 @@
+{
+  "appCacheAllowed": true,
+  "automationLanes": [
+    {
+      "cadence": "weekly metadata check plus manual review for amendments or program updates",
+      "id": "static-law-watch",
+      "purpose": "Track stable constitutional/statutory eligibility sources for change events."
+    },
+    {
+      "cadence": "release watch and quarterly refresh",
+      "id": "occupation-skill-graph",
+      "purpose": "Compile O*NET occupation, skills, tasks, knowledge, abilities, and transfer data."
+    },
+    {
+      "cadence": "daily during open application windows; weekly otherwise",
+      "id": "public-program-requirements",
+      "purpose": "Track official program requirements such as NASA selection cycles."
+    },
+    {
+      "cadence": "on dataset release and monthly metadata check",
+      "id": "education-program-index",
+      "purpose": "Map credible education/training options from College Scorecard and related official datasets."
+    },
+    {
+      "cadence": "weekly harvest diff",
+      "id": "source-of-sources-discovery",
+      "purpose": "Use Data.gov metadata to discover public datasets without treating metadata as claim truth."
+    }
+  ],
+  "createdAt": "2026-06-27T03:55:45Z",
+  "dataClass": "official_public_source",
+  "fixtureAllowed": "public_synthetic_only",
+  "harvestRun": null,
+  "kind": "ambitions.sourceAtlas.sourceRegistry",
+  "logAllowed": "metadata_only",
+  "nonClaims": [
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "r2Allowed": true,
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "adapter": "official_static_page",
+      "authorityTier": "constitutional_primary",
+      "domains": [
+        "civic",
+        "law",
+        "public_service",
+        "eligibility"
+      ],
+      "freshnessCadence": "watch for constitutional amendment or authoritative transcript update",
+      "id": "nara.constitution.presidency",
+      "lastReviewed": "2026-06-25",
+      "license": "U.S. federal public source; cite source URL",
+      "publisher": "National Archives",
+      "title": "U.S. Constitution presidential eligibility",
+      "url": "https://www.archives.gov/founding-docs/constitution-transcript"
+    },
+    {
+      "adapter": "official_static_page",
+      "authorityTier": "official_program",
+      "domains": [
+        "space",
+        "career",
+        "stem",
+        "public_service",
+        "eligibility"
+      ],
+      "freshnessCadence": "before and during each astronaut selection cycle",
+      "id": "nasa.astronaut.requirements",
+      "lastReviewed": "2026-06-25",
+      "license": "NASA public web source; cite source URL",
+      "publisher": "NASA",
+      "title": "NASA astronaut candidate requirements",
+      "url": "https://www.nasa.gov/humans-in-space/astronauts/astronaut-requirements/"
+    },
+    {
+      "adapter": "official_static_page",
+      "authorityTier": "official_program",
+      "domains": [
+        "space",
+        "career",
+        "training",
+        "selection"
+      ],
+      "freshnessCadence": "before and during each selection cycle",
+      "id": "nasa.astronaut.selection",
+      "lastReviewed": "2026-06-25",
+      "license": "NASA public web source; cite source URL",
+      "publisher": "NASA",
+      "title": "NASA astronaut selection program",
+      "url": "https://www.nasa.gov/humans-in-space/astronauts/astronaut-selection-program/"
+    },
+    {
+      "adapter": "official_onet_text_database",
+      "authorityTier": "official_occupational_database",
+      "domains": [
+        "occupation",
+        "career_clusters",
+        "skills",
+        "essential_skills",
+        "transferable_skills",
+        "tasks",
+        "work_activities",
+        "interests",
+        "job_zones",
+        "education",
+        "training",
+        "knowledge",
+        "abilities",
+        "work_styles",
+        "software_skills",
+        "transfer"
+      ],
+      "freshnessCadence": "track O*NET production releases and Database Services current version",
+      "id": "onet.database",
+      "lastReviewed": "2026-06-25",
+      "license": "CC BY 4.0 with O*NET attribution requirements",
+      "publisher": "U.S. Department of Labor Employment and Training Administration",
+      "title": "O*NET database and Web Services",
+      "url": "https://www.onetcenter.org/database.html"
+    },
+    {
+      "adapter": "official_bls_public_api",
+      "authorityTier": "official_labor_statistics",
+      "domains": [
+        "labor_market",
+        "wages",
+        "employment",
+        "occupation",
+        "trend"
+      ],
+      "freshnessCadence": "series-specific BLS publication schedule",
+      "id": "bls.public.data.api",
+      "lastReviewed": "2026-06-25",
+      "license": "U.S. federal public source; cite source URL",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "title": "BLS Public Data API",
+      "url": "https://www.bls.gov/developers/home.htm"
+    },
+    {
+      "adapter": "official_usajobs_authenticated_search",
+      "authorityTier": "official_public_job_announcements",
+      "domains": [
+        "career",
+        "federal_jobs",
+        "requirements",
+        "qualifications"
+      ],
+      "freshnessCadence": "daily or per source modified date",
+      "id": "usajobs.search",
+      "lastReviewed": "2026-06-25",
+      "license": "public job announcement API; API key required for search APIs",
+      "publisher": "U.S. Office of Personnel Management",
+      "title": "USAJOBS current and historic job opportunity APIs",
+      "url": "https://developer.usajobs.gov/api-reference/"
+    },
+    {
+      "adapter": "official_datagov_v4_search",
+      "authorityTier": "source_of_sources_metadata",
+      "domains": [
+        "source_discovery",
+        "government_data",
+        "metadata"
+      ],
+      "freshnessCadence": "agency harvest cadence from Data.gov metadata",
+      "id": "data.gov.catalog",
+      "lastReviewed": "2026-06-25",
+      "license": "dataset-specific; catalog metadata only",
+      "publisher": "U.S. General Services Administration",
+      "title": "Data.gov API v4 metadata search",
+      "url": "https://api.gsa.gov/technology/datagov/v4/search"
+    },
+    {
+      "adapter": "official_college_scorecard_api",
+      "authorityTier": "official_education_data",
+      "domains": [
+        "education",
+        "programs",
+        "costs",
+        "outcomes",
+        "institutions"
+      ],
+      "freshnessCadence": "track Scorecard changelog and data release date",
+      "id": "college-scorecard.api",
+      "lastReviewed": "2026-06-25",
+      "license": "U.S. Department of Education public data; cite source URL",
+      "publisher": "U.S. Department of Education",
+      "title": "College Scorecard data API",
+      "url": "https://collegescorecard.ed.gov/data/api-documentation/"
+    }
+  ],
+  "versionID": "source-atlas-r2-ops-proof-2026-06-27-stable"
+}

@@ -1,0 +1,151 @@
+{
+  "createdAt": "2026-06-28T00:00:00Z",
+  "kind": "ambitions.sourceAtlas.goalDomainPlannedRegistryMutations.v1",
+  "nonClaims": [
+    "planned registry activation review only",
+    "not active registry mutation",
+    "not R2 publish"
+  ],
+  "plannedRegistryMutations": [
+    {
+      "activeRegistryWritten": false,
+      "apiPolicyEntry": {
+        "api_mode": "static_https_public_reference",
+        "api_policy_id": "api.approved_source_specific_train99_evidence.v1",
+        "backoff_policy": "exponential_jitter",
+        "budget_owner": "source-atlas-foundry",
+        "circuit_breaker_policy": "stop_after_retry_budget",
+        "daily_budget_limit": 10,
+        "env_var_name": "",
+        "evidence_output_policy": "public_reference_metadata_only",
+        "execute_flag_required": true,
+        "high_volume_review_required": false,
+        "key_required": false,
+        "live_flag_required": true,
+        "max_pages_per_run": 5,
+        "max_records_per_run": 5,
+        "missing_key_behavior": "no_key_required",
+        "monthly_budget_limit": 300,
+        "rate_limit_per_minute": 30,
+        "rate_limit_per_second": 1,
+        "retry_policy": "retry_429_500_502_503_504_only",
+        "schema_version": "1.0.0",
+        "secret_redaction_required": true,
+        "source_id": "approved.source_specific.train99_evidence",
+        "timeout_seconds": 120
+      },
+      "blockingReasons": [
+        "planner_does_not_write_active_registries",
+        "separate_registry_apply_required"
+      ],
+      "bundleID": "source-specific-review-bundle.evidence",
+      "claimOutputAllowed": false,
+      "completionStatus": "completed_review_ready_for_registry_apply_planning",
+      "createdAt": "2026-06-28T00:00:00Z",
+      "legalTermsEntry": {
+        "approval_artifact_path": "",
+        "attribution_required": true,
+        "commercial_use_allowed": false,
+        "effective_date": "2026-06-28",
+        "expires_at": "2026-12-28",
+        "license_id": "approved_source_specific_train99_evidence_terms",
+        "license_name": "Approved Source Specific Train 99 Evidence Terms",
+        "license_url": "https://agency.gov/source-atlas/train99/evidence/license",
+        "lookup_output_allowed": true,
+        "modification_allowed": false,
+        "non_claims": [
+          "not outside legal approval",
+          "not legal advice"
+        ],
+        "outside_legal_required": false,
+        "outside_legal_status": "not_claimed",
+        "pack_output_allowed": true,
+        "redistribution_allowed": true,
+        "review_owner": "Ambitions owner source review",
+        "review_required": false,
+        "reviewed_at": "2026-06-28",
+        "rights_url": "https://agency.gov/source-atlas/train99/evidence/rights",
+        "schema_version": "1.0.0",
+        "share_alike_required": false,
+        "source_specific_restrictions": [
+          "cite source URL"
+        ],
+        "terms_url": "https://agency.gov/source-atlas/train99/evidence/terms"
+      },
+      "matchedDomainID": "education_credentialing",
+      "mutationID": "source-specific-registry-mutation.evidence",
+      "nativeActivationAllowed": false,
+      "nonClaims": [
+        "planned registry mutation only",
+        "not active registry mutation",
+        "not claim output",
+        "not R2 publish"
+      ],
+      "packOutputAllowed": false,
+      "publicReferenceOnly": true,
+      "r2PublishAllowed": false,
+      "requestID": "public-reference-request.evidence",
+      "requestedDomain": "education_credentialing",
+      "reviewEvidenceClass": "source_specific_review",
+      "sourceLaneEntry": {
+        "allowed_artifact_classes": [
+          "official_public_source",
+          "public_reference_claim",
+          "public_requirement",
+          "public_provenance"
+        ],
+        "api_mode": "static_https_public_reference",
+        "api_policy_id": "api.approved_source_specific_train99_evidence.v1",
+        "attribution_required": true,
+        "authority_class": "official_government",
+        "budget_policy_id": "budget.approved_source_specific_train99_evidence.v1",
+        "claim_classes_allowed": [
+          "public_reference_claim"
+        ],
+        "claim_classes_forbidden": [
+          "legal_advice",
+          "personalized_plan"
+        ],
+        "crosswalk_policy": "not_crosswalk_source",
+        "domain_scope": [
+          "education_credentialing"
+        ],
+        "forbidden_artifact_classes": [
+          "final_user_path",
+          "final_schedule",
+          "step_list",
+          "personalized_plan",
+          "private_goal_graph"
+        ],
+        "freshness_sla": "quarterly_public_reference_recheck",
+        "jurisdiction": "US",
+        "last_reviewed_at": "2026-06-28",
+        "license_id": "approved_source_specific_train99_evidence_terms",
+        "license_url": "https://agency.gov/source-atlas/train99/evidence/license",
+        "lookup_policy": "lookup_allowed_public_reference_only",
+        "next_review_due_at": "2026-12-28",
+        "non_claims": [
+          "not legal advice",
+          "not a personalized education plan",
+          "not outside legal approval"
+        ],
+        "r2_object_key_prefix": "source-atlas/v1/stable/source-specific-train99/evidence",
+        "r2_pack_policy": "pack_allowed_with_attribution",
+        "rate_policy_id": "rate.approved_source_specific_train99_evidence.v1",
+        "redistribution_policy": "redistributable_with_attribution",
+        "review_owner": "Ambitions owner source review",
+        "review_status": "reviewed",
+        "rights_url": "https://agency.gov/source-atlas/train99/evidence/rights",
+        "schema_version": "1.0.0",
+        "secret_policy_id": "secret.no_secret_static_page.v1",
+        "source_class": "official_government",
+        "source_id": "approved.source_specific.train99_evidence",
+        "source_name": "Approved Source Specific Train 99 Evidence Reference",
+        "terms_url": "https://agency.gov/source-atlas/train99/evidence/terms"
+      },
+      "status": "dry_run_ready_for_separate_registry_apply"
+    }
+  ],
+  "reviewEvidenceClass": "source_specific_review",
+  "sourceSpecificReviewID": "source-specific-review.evidence"
+}

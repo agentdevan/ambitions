@@ -1,0 +1,654 @@
+{
+  "allowedClaims": [
+    "deterministic_autonomous_domain_expansion_chain"
+  ],
+  "blockedClaims": [
+    "active_registry_mutation",
+    "app_store_readiness",
+    "claim_output",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "full_source_atlas_green",
+    "literal_universal_coverage",
+    "native_activation",
+    "outside_legal_approval",
+    "pack_output",
+    "production_r2_upload",
+    "release_green",
+    "source_authority_for_candidate_domains"
+  ],
+  "chainID": "source_atlas.autonomous_domain_expansion_chain.de7cfb4059dd31e9",
+  "checks": [
+    {
+      "issues": [],
+      "name": "executor_report_loaded",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "executor_report_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "candidate_frontier_inputs_found",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "router_stage_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "production_lanes_stage_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "work_order_executor_stage_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_packets_stage_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "chain_emits_no_claims_packs_r2_or_native_activation",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "review_stage_matches_execution_path",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "output_privacy_scan_passed",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T22:55:00Z",
+  "executorReportPath": "tools/source-atlas/generated/autonomous-operations-execution/train-106-current/autonomous-operations-execution-report.json",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.autonomousDomainExpansionChain.v1",
+  "mode": "fixture",
+  "nonClaims": [
+    "autonomous candidate-domain expansion chain only",
+    "not completed legal review",
+    "not outside legal approval",
+    "not source authority",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not production R2 upload",
+    "not native activation proof",
+    "not literal universal coverage",
+    "not release readiness",
+    "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "goalDomainRouter": "e6d60032c85678218ce4292b00d2eae8edcee051b637d8224d83e684cd1a448d",
+    "productionLanes": "4d5572c561abffa66565898f8f34844fbbec9e5dec1169e01b2f362f900f5a77",
+    "report": "71d82709fc812fac72e34cc7cdbd4f65fb5fd99eaa615e25e0111443cc396d9a",
+    "reviewPackets": "a650a2d71852dbfce7a2e4dc1a879efe74b012cb5499e72b107eec634424e450",
+    "routerInput": "a6d1cec2fb466485dd52fda910fa243ffb3244b00546e14f05a18f77633653be",
+    "workOrderExecutor": "c8ac28ad3601e258feb963e10a31252a097b29bb87940f379b0db6a89f1c4b1b"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/closeout.md",
+    "goalDomainRouter": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/manifest.json",
+    "markdown": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/autonomous-domain-expansion-chain-report.md",
+    "productionLanes": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/manifest.json",
+    "report": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/autonomous-domain-expansion-chain-report.json",
+    "reviewPacketTemplates": "",
+    "reviewPackets": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/04-review-packets/manifest.json",
+    "routerInput": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/goal-domain-router-input.json",
+    "workOrderExecutor": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/manifest.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productionNonClaims": [
+    "no full Source Atlas Green",
+    "no literal universal coverage",
+    "no outside legal approval",
+    "no release Green",
+    "no App Store readiness",
+    "no completed source/legal/API review",
+    "no active registry mutation",
+    "no claim output",
+    "no pack output",
+    "no production Cloudflare R2 write",
+    "no native activation or runtime/device/offline proof",
+    "no final user plan, schedule, or Step generation"
+  ],
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvalArtifactsEmitted": 0,
+    "blockedReviewRequired": 0,
+    "blockedUpstreamEvidenceRequired": 0,
+    "candidateInputs": 1,
+    "candidateRoutes": 0,
+    "candidateWorkOrders": 0,
+    "claims": 0,
+    "completedReviewPackets": 0,
+    "completedSafeChecks": 4,
+    "finalOutputArtifacts": 0,
+    "nativeActivationOperations": 0,
+    "packableClaims": 0,
+    "productionReadyRoutes": 1,
+    "r2PackableArtifacts": 0,
+    "r2PublishOperations": 0,
+    "reviewPackets": 0,
+    "routes": 1,
+    "workOrders": 4
+  },
+  "reviewer": "source-atlas-reviewer",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; autonomous domain expansion, production-ready routing, and maintenance-check evidence only",
+  "stageSummaries": {
+    "goalDomainRouter": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/manifest.json",
+      "outputRoot": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router",
+      "recordCounts": {
+        "blockedPrivateRoutes": 0,
+        "candidateIntakeRoutes": 0,
+        "claims": 0,
+        "configuredNotReadyRoutes": 0,
+        "finalOutputArtifacts": 0,
+        "packableClaims": 0,
+        "productionTargetReadyRoutes": 1,
+        "r2PackableArtifacts": 0,
+        "r2PublishOperations": 0,
+        "requests": 1,
+        "routes": 1
+      },
+      "status": "Source Green for goal-domain routing tooling",
+      "valid": true
+    },
+    "productionLanes": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/manifest.json",
+      "outputRoot": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes",
+      "recordCounts": {
+        "blockedConfiguredWorkOrders": 0,
+        "candidateRoutes": 0,
+        "candidateWorkOrders": 0,
+        "claims": 0,
+        "configuredBlockedRoutes": 0,
+        "executeOperations": 0,
+        "finalOutputArtifacts": 0,
+        "liveOperations": 0,
+        "maintenanceWorkOrders": 4,
+        "nativeActivationOperations": 0,
+        "packableClaims": 0,
+        "productionReadyRoutes": 1,
+        "r2PackableArtifacts": 0,
+        "r2PublishOperations": 0,
+        "routes": 1,
+        "workOrders": 4
+      },
+      "status": "Source Green for goal-domain production-lane work-order tooling",
+      "valid": true
+    },
+    "reviewPackets": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/04-review-packets/manifest.json",
+      "outputRoot": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/04-review-packets",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "approvalArtifactsEmitted": 0,
+        "claims": 0,
+        "completedReviewPackets": 0,
+        "finalOutputArtifacts": 0,
+        "inputExecutionRecords": 4,
+        "nativeActivationOperations": 0,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0,
+        "r2PublishOperations": 0,
+        "reviewPackets": 0,
+        "selectedBlockedReviewRecords": 0
+      },
+      "status": "Source Green for review-not-required production-ready route evidence",
+      "valid": true
+    },
+    "workOrderExecutor": {
+      "issues": [],
+      "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/manifest.json",
+      "outputRoot": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor",
+      "recordCounts": {
+        "blockedConfiguredFrontier": 0,
+        "blockedReviewRequired": 0,
+        "blockedUpstreamEvidenceRequired": 0,
+        "claims": 0,
+        "completedDryRunChecks": 0,
+        "completedFixtureChecks": 4,
+        "executeOperations": 0,
+        "executionRecords": 4,
+        "finalOutputArtifacts": 0,
+        "liveOperations": 0,
+        "nativeActivationOperations": 0,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0,
+        "r2PublishOperations": 0,
+        "registryWriteOperations": 0,
+        "workOrders": 4
+      },
+      "status": "Source Green for goal-domain work-order fixture executor",
+      "valid": true
+    }
+  },
+  "stages": {
+    "goalDomainRouter": {
+      "candidateIntake": {
+        "inputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/candidate-intake-input.json",
+        "manifestPath": null,
+        "recordCounts": {
+          "claims": 0,
+          "packableClaims": 0,
+          "proposals": 0,
+          "r2PackableArtifacts": 0
+        },
+        "required": false,
+        "status": "not_required",
+        "valid": null
+      },
+      "checks": [
+        {
+          "issues": [],
+          "name": "input_schema_valid",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "input_privacy_scan_passed",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "production_ready_routes_require_ledger_ready_domain",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "candidate_routes_emit_candidate_intake_only",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "candidate_intake_valid_when_required",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "router_emits_no_claims_packs_or_r2_operations",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "no_final_plan_schedule_step_output",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "privacy_scan_passed",
+          "passed": true
+        }
+      ],
+      "createdAt": "2026-06-28T22:55:00Z",
+      "frontierConfigPath": "tools/source-atlas/frontier/coverage-frontiers.json",
+      "inputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/goal-domain-router-input.json",
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.goalDomainRouterManifest.v1",
+      "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/manifest.json",
+      "nonClaims": [
+        "not literal universal coverage",
+        "not full Source Atlas Green",
+        "not outside legal approval",
+        "not App Store or TestFlight readiness",
+        "not physical-device proof",
+        "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+        "not approval for future domains without source/frontier/pack/R2/native evidence",
+        "candidate routes are not claim authority",
+        "candidate routes are not pack output",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "outputHashes": {
+        "candidateIntakeInput": "13354f67c1e5fe67ee7292f64488e41a95a55063eb06206e926c8f21a254603c",
+        "goalDomainRouting": "c07c2bb783089dd6c7bf86b7ba0951728825dae1205c412e22f562f2b786f839",
+        "manifest": "87e9f1e7994f8a2d9c35c3bf459fbd4bd4e7977d05c27d31d023079363f0194f"
+      },
+      "outputPaths": {
+        "candidateIntakeInput": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/candidate-intake-input.json",
+        "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/closeout.md",
+        "goalDomainRouting": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/goal-domain-routing.json",
+        "manifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/manifest.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "productionTargetLedgerPath": "tools/source-atlas/generated/production-target-ledger/train-104-current-production-target/production-target-ledger.json",
+      "recordCounts": {
+        "blockedPrivateRoutes": 0,
+        "candidateIntakeRoutes": 0,
+        "claims": 0,
+        "configuredNotReadyRoutes": 0,
+        "finalOutputArtifacts": 0,
+        "packableClaims": 0,
+        "productionTargetReadyRoutes": 1,
+        "r2PackableArtifacts": 0,
+        "r2PublishOperations": 0,
+        "requests": 1,
+        "routes": 1
+      },
+      "schemaVersion": 1,
+      "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; configured-frontier production target routing plus candidate-only intake for new domains",
+      "status": "Source Green for goal-domain routing tooling",
+      "valid": true,
+      "versionID": "source-atlas-goal-domain-router-train-88"
+    },
+    "productionLanes": {
+      "checks": [
+        {
+          "issues": [],
+          "name": "router_manifest_valid",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "routing_artifact_valid",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "input_privacy_scan_passed",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "production_ready_routes_require_ledger_ready_domain",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "candidate_routes_have_complete_gate_work_orders",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "work_orders_default_to_no_live_or_execute",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "work_orders_emit_no_claims_packs_r2_or_native_activation",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "no_final_plan_schedule_step_output",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "privacy_scan_passed",
+          "passed": true
+        }
+      ],
+      "createdAt": "2026-06-28T22:55:00Z",
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.goalDomainProductionLanesManifest.v1",
+      "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/manifest.json",
+      "nonClaims": [
+        "not literal universal coverage",
+        "not full Source Atlas Green",
+        "not outside legal approval",
+        "not App Store or TestFlight readiness",
+        "not physical-device proof",
+        "not production R2 upload or overwrite",
+        "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+        "not approval for future domains without source/frontier/pack/R2/native evidence",
+        "candidate work orders are not source authority",
+        "candidate work orders are not pack output",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "outputHashes": {
+        "manifest": "00ff6b0cbe15888f27bbd5e1c2a8d5571d1d02512afb18be5300bb0f0040a1fe",
+        "productionLanes": "814bbcfc92d5a8ebf4c27b8e63c0f44b11697778f90bcace458e4b82de169304",
+        "workOrders": "8f0d7cb0ff9e080fc44de98418b19299a98a1820eae078e31492794f508dd474"
+      },
+      "outputPaths": {
+        "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/closeout.md",
+        "manifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/manifest.json",
+        "productionLanes": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/goal-domain-production-lanes.json",
+        "workOrders": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/domain-work-orders.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "productionTargetLedgerPath": "tools/source-atlas/generated/production-target-ledger/train-104-current-production-target/production-target-ledger.json",
+      "recordCounts": {
+        "blockedConfiguredWorkOrders": 0,
+        "candidateRoutes": 0,
+        "candidateWorkOrders": 0,
+        "claims": 0,
+        "configuredBlockedRoutes": 0,
+        "executeOperations": 0,
+        "finalOutputArtifacts": 0,
+        "liveOperations": 0,
+        "maintenanceWorkOrders": 4,
+        "nativeActivationOperations": 0,
+        "packableClaims": 0,
+        "productionReadyRoutes": 1,
+        "r2PackableArtifacts": 0,
+        "r2PublishOperations": 0,
+        "routes": 1,
+        "workOrders": 4
+      },
+      "routerManifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/manifest.json",
+      "routerOutputPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/01-goal-domain-router/goal-domain-routing.json",
+      "schemaVersion": 1,
+      "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; autonomous production-lane work orders only",
+      "status": "Source Green for goal-domain production-lane work-order tooling",
+      "valid": true,
+      "versionID": "source-atlas-goal-domain-production-lanes-train-89"
+    },
+    "reviewPackets": {
+      "checks": [
+        {
+          "issues": [],
+          "name": "review_not_required_for_production_ready_maintenance_lane",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "no_review_packets_or_approval_artifacts_emitted",
+          "passed": true
+        }
+      ],
+      "createdAt": "2026-06-28T22:55:00Z",
+      "executorManifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/manifest.json",
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.goalDomainReviewPacketsNotRequired.v1",
+      "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/04-review-packets/manifest.json",
+      "nonClaims": [
+        "review-not-required marker only",
+        "not legal approval",
+        "not source approval",
+        "not registry mutation",
+        "not claim output",
+        "not pack output",
+        "not R2 publish",
+        "not native activation",
+        "not release readiness"
+      ],
+      "outputHashes": {
+        "manifest": "641ad394eb56e98d27bf7ed4b985d559aae8cdd501081a0f3a06da0a177e146c"
+      },
+      "outputPaths": {
+        "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/04-review-packets/closeout.md",
+        "manifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/04-review-packets/manifest.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/04-review-packets",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "recordCounts": {
+        "activeRegistryMutations": 0,
+        "approvalArtifactsEmitted": 0,
+        "claims": 0,
+        "completedReviewPackets": 0,
+        "finalOutputArtifacts": 0,
+        "inputExecutionRecords": 4,
+        "nativeActivationOperations": 0,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0,
+        "r2PublishOperations": 0,
+        "reviewPackets": 0,
+        "selectedBlockedReviewRecords": 0
+      },
+      "schemaVersion": 1,
+      "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; review-not-required evidence only",
+      "status": "Source Green for review-not-required production-ready route evidence",
+      "valid": true,
+      "versionID": "source-atlas-autonomous-domain-expansion-chain-train-107"
+    },
+    "workOrderExecutor": {
+      "checks": [
+        {
+          "issues": [],
+          "name": "mode_valid",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "production_lanes_manifest_valid",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "work_orders_valid",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "input_privacy_scan_passed",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "safe_stages_can_complete_without_live_or_execute",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "review_gates_remain_blocked",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "upstream_gates_remain_blocked",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "executor_performs_no_live_write_claim_pack_r2_or_native_operations",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "no_final_plan_schedule_step_output",
+          "passed": true
+        },
+        {
+          "issues": [],
+          "name": "privacy_scan_passed",
+          "passed": true
+        }
+      ],
+      "createdAt": "2026-06-28T22:55:00Z",
+      "issues": [],
+      "kind": "ambitions.sourceAtlas.goalDomainWorkOrderExecutorManifest.v1",
+      "manifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/manifest.json",
+      "mode": "fixture",
+      "nonClaims": [
+        "not literal universal coverage",
+        "not full Source Atlas Green",
+        "not outside legal approval",
+        "not App Store or TestFlight readiness",
+        "not physical-device proof",
+        "not production R2 upload or overwrite",
+        "not native activation proof",
+        "not final user plans, schedules, Steps, or personalized paths from Source Atlas/R2",
+        "not source authority",
+        "not claim output",
+        "not pack output",
+        "not a private user-data backend",
+        "not private life graph storage",
+        "not an official legal, medical, financial, or admissions decision",
+        "not runtime recommendation proof by itself",
+        "not R2 release readiness",
+        "not accessibility, privacy, or legal approval"
+      ],
+      "outputHashes": {
+        "executionRecords": "c0cc63fc0acb6cd24777e37af6a0b78a8d9f5ce5ff105308dfc7868b986a5123",
+        "executorReport": "4a054a3d27f21cfc3a6296bf913d7e4aac1ef75e998f41ef33a0cc28eb153ece",
+        "manifest": "c1666f236957c4a00a81b809b95788ceb496ec40e97c2dab051931aaceb7538b"
+      },
+      "outputPaths": {
+        "closeout": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/closeout.md",
+        "executionRecords": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/execution-records.json",
+        "executorReport": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/work-order-executor-report.json",
+        "manifest": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor/manifest.json"
+      },
+      "outputRoot": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/03-work-order-executor",
+      "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+      "productionLanesManifestPath": "tools/source-atlas/generated/autonomous-domain-expansion-chain/train-109-public-benefits-alias-closeout/02-production-lanes/manifest.json",
+      "recordCounts": {
+        "blockedConfiguredFrontier": 0,
+        "blockedReviewRequired": 0,
+        "blockedUpstreamEvidenceRequired": 0,
+        "claims": 0,
+        "completedDryRunChecks": 0,
+        "completedFixtureChecks": 4,
+        "executeOperations": 0,
+        "executionRecords": 4,
+        "finalOutputArtifacts": 0,
+        "liveOperations": 0,
+        "nativeActivationOperations": 0,
+        "packableClaims": 0,
+        "r2PackableArtifacts": 0,
+        "r2PublishOperations": 0,
+        "registryWriteOperations": 0,
+        "workOrders": 4
+      },
+      "schemaVersion": 1,
+      "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; fixture/dry-run work-order executor only",
+      "status": "Source Green for goal-domain work-order fixture executor",
+      "valid": true,
+      "versionID": "source-atlas-goal-domain-work-order-executor-train-90"
+    }
+  },
+  "status": "Source Green for autonomous domain expansion chain",
+  "valid": true,
+  "versionID": "source-atlas-autonomous-domain-expansion-chain-train-107"
+}

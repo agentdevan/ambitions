@@ -1,0 +1,131 @@
+{
+  "coverage": {
+    "authority_coverage": {
+      "complete": true,
+      "missing": [],
+      "present": [
+        "official_government",
+        "official_institution"
+      ],
+      "required": [
+        "official_government",
+        "official_institution"
+      ]
+    },
+    "blocked_claim_count": 0,
+    "candidate_only_count": 0,
+    "claim_classes": [
+      "candidate_education_program_reference",
+      "candidate_institution_reference",
+      "credential_requirement"
+    ],
+    "conflict_status": "no_conflict_detected",
+    "covered_claim_classes": [
+      "candidate_education_program_reference",
+      "candidate_institution_reference",
+      "credential_requirement"
+    ],
+    "domain": "education_credentialing",
+    "freshness_compliance": {
+      "claimCount": 8,
+      "complete": true,
+      "freshCount": 8,
+      "percent": 1.0
+    },
+    "frontier_id": "education_credentialing",
+    "goal_intent_classes": [
+      "education_program_reference",
+      "credential_context_reference"
+    ],
+    "gold_set": {
+      "goldSetID": "gold.education_credentialing.public_institution_program_requirement.v1",
+      "matchedCount": 3,
+      "matches": [
+        {
+          "claimID": "canonical_claim.181e6edefbb63abd",
+          "claimType": "candidate_institution_reference",
+          "goldClaimID": "gold.education_credentialing.college_scorecard.berkeley.institution_reference",
+          "jurisdiction": "US",
+          "sourceID": "college-scorecard.api"
+        },
+        {
+          "claimID": "canonical_claim.3e6d47fdb46bb784",
+          "claimType": "candidate_education_program_reference",
+          "goldClaimID": "gold.education_credentialing.college_scorecard.berkeley.program_reference",
+          "jurisdiction": "US",
+          "sourceID": "college-scorecard.api"
+        },
+        {
+          "claimID": "canonical_claim.01b028b8ebdc2254",
+          "claimType": "credential_requirement",
+          "goldClaimID": "gold.education_credentialing.west_point.computer_science.curriculum_reference",
+          "jurisdiction": "US federal",
+          "sourceID": "westpoint.redbook.computer_science_major"
+        }
+      ],
+      "missing": [],
+      "nonClaims": [
+        "not Release Green",
+        "not a personalized degree plan",
+        "not admissions advice",
+        "not final user plans, schedules, or Steps",
+        "not legal advice",
+        "not release readiness",
+        "not universal coverage",
+        "not universal credential coverage"
+      ],
+      "required": true,
+      "requiredCount": 3,
+      "schemaVersion": 1,
+      "status": "passed",
+      "versionID": "source-atlas-gold-set-evaluator-train-40"
+    },
+    "gold_set_status": "passed",
+    "jurisdictions": [
+      "US"
+    ],
+    "kind": "ambitions.sourceAtlas.coverageFrontierReport.v1",
+    "legal_posture_completeness": {
+      "complete": true,
+      "completeCount": 2,
+      "laneCount": 2,
+      "percent": 1.0
+    },
+    "missing_claim_classes": [],
+    "non_claims": [
+      "not R2 release readiness",
+      "not a final user plan, schedule, or Step generator",
+      "not a personalized degree plan",
+      "not a private user-data backend",
+      "not accessibility, privacy, or legal approval",
+      "not admissions advice",
+      "not an official legal, medical, financial, or admissions decision",
+      "not credentialing authority",
+      "not financial aid guidance",
+      "not full Source Atlas Green",
+      "not native app runtime readiness",
+      "not outside legal approval",
+      "not private life graph storage",
+      "not production R2 readiness",
+      "not runtime recommendation proof by itself",
+      "not universal goal coverage"
+    ],
+    "packable_claim_count": 8,
+    "provenance_completeness": {
+      "claimCount": 8,
+      "complete": true,
+      "completeTupleCount": 8,
+      "packableClaimCount": 8,
+      "packableCompleteTupleCount": 8,
+      "packablePercent": 1.0
+    },
+    "restricted_exclusions": [],
+    "schemaVersion": 1,
+    "source_lanes": [
+      "college-scorecard.api",
+      "westpoint.redbook.computer_science_major"
+    ],
+    "status": "claim_graph_ready",
+    "status_ceiling": "pack_staging_ready"
+  }
+}

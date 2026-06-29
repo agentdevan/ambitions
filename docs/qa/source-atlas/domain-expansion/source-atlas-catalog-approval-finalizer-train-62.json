@@ -1,0 +1,136 @@
+{
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "decision_required_for_completed_approvals",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "provided_decision_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "completed_approval_artifacts_match_planner_contract",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "unfinalized_proposals_blocked",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "approval_finalizer_emits_no_claims",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_active_registry_mutations",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "no_final_plan_schedule_step_output",
+      "passed": true
+    }
+  ],
+  "createdAt": "2026-06-28T00:00:00Z",
+  "decisionArtifactPath": "",
+  "decisionValidation": {
+    "approvedEntries": [],
+    "decisionArtifactID": "",
+    "decisionArtifactPath": "",
+    "decisionArtifactProvided": false,
+    "issues": [
+      "decision artifact not provided; all terms-resolution proposals remain blocked"
+    ],
+    "nonClaims": [
+      "missing decision artifact is expected for blocked finalizer dry-runs"
+    ],
+    "outsideLegalStatus": "not_claimed",
+    "reviewOwner": "",
+    "reviewedAt": "",
+    "selectedIntakeIDs": [],
+    "selectedProposalIDs": [],
+    "valid": false
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.catalogApprovalFinalizerManifest.v1",
+  "manifestPath": "tools/source-atlas/generated/catalog-approval-finalizer/train-62-live-data-gov/manifest.json",
+  "nonClaims": [
+    "not legal approval by itself",
+    "not outside legal approval without outside approval artifact",
+    "not source authority without completed reviewer decision",
+    "not active registry mutation",
+    "not claim output",
+    "not pack output",
+    "not R2 readiness",
+    "not universal coverage",
+    "not app runtime readiness",
+    "not release readiness",
+    "not final user plans, schedules, or Steps",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "blockedApprovalFinalizations": "e38fcf4d545d442fc926a4f1f0ca62eb4eb2adba46e68001de235d812a3dbaa4",
+    "catalogApprovalFinalizer": "a163324fda4cae9d4e75dcc56953c5c9b2419d859e0b2bac8444946523de3de7",
+    "completedApprovalArtifacts": "2e289aa3ac9e3ec248775c436e66365d5722dd97035b717b449b02928ef78681",
+    "manifest": "b8ff05648b852c9e1b1c8f681801e6f59f959b3f63ce1acd06cf07a84f1e0503",
+    "plannerApprovalArtifact": "be06a4197c32fa507ba2aa35e365ffaaf4e6d24069b699ced3682cc3c107b8ce"
+  },
+  "outputPaths": {
+    "blockedApprovalFinalizations": "tools/source-atlas/generated/catalog-approval-finalizer/train-62-live-data-gov/blocked-approval-finalizations.json",
+    "catalogApprovalFinalizer": "tools/source-atlas/generated/catalog-approval-finalizer/train-62-live-data-gov/catalog-approval-finalizer.json",
+    "closeout": "tools/source-atlas/generated/catalog-approval-finalizer/train-62-live-data-gov/closeout.md",
+    "completedApprovalArtifacts": "tools/source-atlas/generated/catalog-approval-finalizer/train-62-live-data-gov/completed-approval-artifacts.json",
+    "plannerApprovalArtifact": "tools/source-atlas/generated/catalog-approval-finalizer/train-62-live-data-gov/catalog-registry-mutation-approval.json"
+  },
+  "outputRoot": "tools/source-atlas/generated/catalog-approval-finalizer/train-62-live-data-gov",
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "recordCounts": {
+    "activeRegistryMutations": 0,
+    "approvedApiPolicies": 0,
+    "approvedEntries": 0,
+    "approvedLegalEntries": 0,
+    "approvedSourceLanes": 0,
+    "blockedApprovalFinalizations": 4,
+    "claims": 0,
+    "completedApprovalArtifacts": 0,
+    "packableClaims": 0,
+    "r2PackableArtifacts": 0,
+    "termsResolutionProposals": 4
+  },
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; approval finalizer tooling only",
+  "status": "Source Green for catalog approval finalizer tooling",
+  "termsProposalsPath": "tools/source-atlas/generated/catalog-terms-resolution/train-61-live-data-gov/terms-resolution-proposals.json",
+  "valid": true,
+  "versionID": "source-atlas-catalog-approval-finalizer-train-62"
+}
