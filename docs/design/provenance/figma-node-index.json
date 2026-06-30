@@ -737,6 +737,80 @@
       "notes": [
         "Failure evidence retained in Figma; not approved target authority."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "219:93",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-06 - PART 01 - You native settings top-level options - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-part-01-options-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-01-you-native-settings-options-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-01-you-native-settings-options-R1.md",
+      "notes": [
+        "VSP-06 owner-direction exploration; not owner-approved."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "222:93",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-06 - PART 02 - Ambitions settings reference adaptations - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-part-02-settings-reference-adaptations-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
+      "notes": [
+        "Recommended top-level direction uses Reference A; Reference B is detail sheet pattern only."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "222:104",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-06 - Reference A - Ambitions Settings Root - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-a-ambitions-settings-root-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
+      "notes": [
+        "Recommended VSP-06 top-level root direction."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "222:205",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-06 - Reference B - Ambitions Profile Sheet - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-b-ambitions-profile-sheet-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
+      "notes": [
+        "Detail sheet pattern only; not root IA."
+      ]
     }
   ]
 }

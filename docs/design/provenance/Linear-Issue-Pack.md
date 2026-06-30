@@ -208,21 +208,24 @@ Rollback plan:
 ## VSP-06 - VSP-06 You Native Settings
 
 - Parent issue mirror: `AMB-1485`
-- Recommended status: `Needs Repair`
-- Labels: VSP, you, settings, yellow-proof
-- Blocked by: VSP-01 shell parity, VSP-10 source-owner map, VSP-09 accessibility matrix, account/offline boundary clarity, owner approval
+- Recommended status: `Ready For Review`
+- Labels: VSP, you, settings, owner-direction-needed, yellow-proof
+- Blocked by: owner direction selection, VSP-01 shell authority, VSP-10 source-owner map, VSP-09 accessibility matrix, final VSP-06 package approval
 - Do not create now: `True`
 
 Acceptance summary:
 - You remains native settings/user system.
-- No old profile IA and no account-gated core value.
+- Use Reference A as top-level root direction unless owner requests repair.
+- Use Reference B only as profile/account-boundary detail sheet pattern.
+- No old Profile root IA and no account-gated core value.
 - Every visible row opens real detail or an honest unavailable state.
 Validation summary:
 - focused You tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Clarify You account/offline boundary before source leaf - scope: Figma and policy readback, no source changes - status: Needs Repair
+- Owner-select VSP-06 You native settings direction - scope: Figma review only; choose Reference A root, Reference B sheet pattern, or request repair - status: Ready For Review
+- Produce VSP-06 final candidate package after direction selection - scope: Figma package only: hero, state matrix, accessibility matrix, SwiftUI anatomy, non-goals - status: Needs Direction
 - Produce You SwiftUI parity leaf - scope: Surfaces/You only, native settings rows with real targets - status: Spec Ready after owner approval
 
 Standard Codex closeout block:

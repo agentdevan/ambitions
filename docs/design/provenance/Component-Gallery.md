@@ -187,9 +187,12 @@ Required later for Green: live render, screenshot matrix, accessibility matrix, 
 ## VSP-06 - You Native Settings
 
 Figma candidate screenshots:
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-hero-r1.png
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-crop-r1.png
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-launch-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-part-02-settings-reference-adaptations-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-a-ambitions-settings-root-r1.png
+- docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-b-ambitions-profile-sheet-r1.png
+- docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-part-01-options-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-option-b-native-settings-lens-r1.png
+- docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-option-d-personal-system-center-r1.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/You/YouSurface.swift
 - Native/Ambitions/Surfaces/You/YouRootSurface.swift

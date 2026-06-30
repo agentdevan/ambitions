@@ -802,18 +802,25 @@
       "vsp_id": "VSP-06",
       "title": "You Native Settings",
       "category": "surface_content",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Ready For Review",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "14:713",
-        "frame_name": "CANDIDATE - VSP-06 - You Native Settings hero - R1",
+        "node_id": "222:93",
+        "frame_name": "EXPLORATION - VSP-06 - PART 02 - Ambitions settings reference adaptations - R1",
         "screenshot_paths": [
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-hero-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-crop-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-06-you-launch-board-r1.png"
+          "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-part-02-settings-reference-adaptations-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-a-ambitions-settings-root-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-b-ambitions-profile-sheet-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-part-01-options-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-option-b-native-settings-lens-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-option-d-personal-system-center-r1.png"
         ],
         "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
+          "docs/design/provenance/figma-frames/VSP-06-part-01-you-native-settings-options-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/manifest.md",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/manifest.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
         ],
@@ -859,11 +866,12 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1485",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Ready For Review",
         "recommended_labels": [
           "VSP",
           "you",
-          "surface-content",
+          "settings",
+          "owner-direction-needed",
           "yellow-proof"
         ],
         "should_create_or_update_now": false
@@ -900,10 +908,13 @@
       },
       "known_risks": [
         "Can drift into old Profile IA or account-gated core behavior.",
-        "Every visible row must open real controls or an honest unavailable state."
+        "Reference B is a detail sheet pattern only and must not become root IA.",
+        "Every visible row must open real controls or an honest unavailable state.",
+        "Figma uses Inter for render stability; SwiftUI target remains native system typography."
       ],
       "missing_evidence": [
-        "owner approval",
+        "owner direction selection",
+        "owner approval of final VSP-06 package",
         "live SwiftUI You parity screenshot",
         "device screenshot",
         "manual accessibility matrix",
@@ -911,10 +922,13 @@
       ],
       "green_blockers": [
         "No owner approval.",
+        "No final VSP-06 candidate package approval.",
         "No live SwiftUI parity screenshot.",
         "No account/offline boundary proof."
       ],
       "notes": [
+        "Part 02 adapts the owner-provided Apple Settings and profile/settings sheet references into Ambitions-native You directions.",
+        "Recommended read: Reference A is the top-level You direction; Reference B is the detail sheet/account-boundary pattern only.",
         "You is a native settings/user system surface. Account support must stay optional and cannot gate offline core value."
       ]
     },

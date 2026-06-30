@@ -107,6 +107,8 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - manual accessibility matrix
 - offline/account boundary proof
 - owner approval
+- owner approval of final VSP-06 package
+- owner direction selection
 - privacy boundary
 - runtime behavior
 ### VSP-07 - Trust Inspection Details

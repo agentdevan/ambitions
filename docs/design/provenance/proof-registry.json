@@ -1486,6 +1486,36 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Documents rejected package-generation/export defects so R1/R2 are not mistaken for approved target evidence.",
       "notes": "R1 node 212:93 was renamed for collapsed text rendering. R2 node 213:93 was renamed for SF-family zero-width export. R3 node 217:93 is the readable owner-approved package."
+    },
+    {
+      "proof_id": "vsp-06-part-01-options-r1",
+      "vsp_id": "VSP-06",
+      "proof_type": "figma_exploration",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-01-you-native-settings-options-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-part-01-options-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow owner-direction evidence only. Does not prove owner approval, SwiftUI parity, Visual Green, device behavior, or accessibility conformance.",
+      "notes": "Six-option VSP-06 You native settings exploration board."
+    },
+    {
+      "proof_id": "vsp-06-part-02-reference-adaptations-r1",
+      "vsp_id": "VSP-06",
+      "proof_type": "figma_exploration",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-part-02-settings-reference-adaptations-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-a-ambitions-settings-root-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-b-ambitions-profile-sheet-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow owner-direction evidence only. Does not prove owner approval, SwiftUI parity, Visual Green, device behavior, or accessibility conformance.",
+      "notes": "Ambitions-native adaptations of owner-provided Apple Settings root and profile/settings sheet references."
     }
   ]
 }
