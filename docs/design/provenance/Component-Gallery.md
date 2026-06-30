@@ -187,11 +187,11 @@ Required later for Green: live render, screenshot matrix, accessibility matrix, 
 ## VSP-06 - You Native Settings
 
 Figma candidate screenshots:
+- docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png
 - docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png
 - docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png
 - docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-b-trust-meridian-r1.png
 - docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-a-personal-os-field-r1.png
-- docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/You/YouSurface.swift
 - Native/Ambitions/Surfaces/You/YouRootSurface.swift

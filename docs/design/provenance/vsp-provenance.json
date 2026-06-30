@@ -802,20 +802,21 @@
       "vsp_id": "VSP-06",
       "title": "You Native Settings",
       "category": "surface_content",
-      "current_status_recommendation": "Ready For Review",
+      "current_status_recommendation": "Accepted Yellow",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "232:93",
-        "frame_name": "EXPLORATION - VSP-06 - PART 03 - Ambitions-owned You directions - R1",
+        "node_id": "232:248",
+        "frame_name": "EXPLORATION - VSP-06 - Option C - Preference Weave - R1",
         "screenshot_paths": [
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-b-trust-meridian-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-a-personal-os-field-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png"
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-a-personal-os-field-r1.png"
         ],
         "evidence_paths": [
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md",
           "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
           "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/manifest.md",
           "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
@@ -865,12 +866,12 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1485",
-        "recommended_status": "Ready For Review",
+        "recommended_status": "Accepted Yellow",
         "recommended_labels": [
           "VSP",
           "you",
           "settings",
-          "owner-direction-needed",
+          "owner-approved-direction",
           "yellow-proof"
         ],
         "should_create_or_update_now": false
@@ -890,7 +891,9 @@
         "privacy_boundary": true
       },
       "proof_present": {
-        "owner_approval": [],
+        "owner_approval": [
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md"
+        ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
         "dynamic_type": [],
@@ -912,23 +915,22 @@
         "Figma uses Inter for render stability; SwiftUI target remains native system typography."
       ],
       "missing_evidence": [
-        "owner direction selection for Part 03",
-        "owner approval of final VSP-06 package",
+        "final VSP-06 candidate package from approved C Preference Weave direction",
         "live SwiftUI You parity screenshot",
         "device screenshot",
         "manual accessibility matrix",
         "offline/account boundary proof"
       ],
       "green_blockers": [
-        "No owner approval.",
         "No final VSP-06 candidate package approval.",
         "No live SwiftUI parity screenshot.",
-        "No account/offline boundary proof."
+        "No account/offline boundary proof.",
+        "No accessibility proof."
       ],
       "notes": [
+        "Owner approved Part 03 Option C Preference Weave as the VSP-06 direction on 2026-06-30.",
         "Part 02 was rejected as too literal to the supplied Settings/Profile screenshots and is retained as failure evidence.",
-        "Part 03 replaces it with Ambitions-owned You directions that keep only the reference intent: native clarity, grouped controls, local-first account/privacy boundaries, and detail behavior.",
-        "Recommended read: Option D Local Control Observatory is the strongest direction; Option B Trust Meridian should inform ordering.",
+        "Option B Trust Meridian may inform ordering; Option D Local Control Observatory is non-selected context.",
         "You is a native settings/user system surface. Account support must stay optional and cannot gate offline core value."
       ]
     },

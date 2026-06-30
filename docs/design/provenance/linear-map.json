@@ -275,29 +275,24 @@
       "vsp_id": "VSP-06",
       "likely_parent_issue": "AMB-1485",
       "recommended_parent_title": "VSP-06 You Native Settings",
-      "recommended_status": "Ready For Review",
+      "recommended_status": "Accepted Yellow",
       "recommended_labels": [
         "VSP",
         "you",
         "settings",
-        "owner-direction-needed",
+        "owner-approved-direction",
         "yellow-proof"
       ],
       "recommended_sub_issues": [
         {
-          "title": "Owner-select VSP-06 Ambitions-owned You direction",
-          "scope": "Figma review only; Part 03 recommends D Local Control Observatory with B Trust Meridian ordering",
-          "recommended_status": "Ready For Review"
-        },
-        {
-          "title": "Produce VSP-06 final candidate package after direction selection",
+          "title": "Build VSP-06 final package from owner-approved Preference Weave",
           "scope": "Figma package only: hero, state matrix, accessibility matrix, SwiftUI anatomy, non-goals",
-          "recommended_status": "Needs Direction"
+          "recommended_status": "Ready For Review after package build"
         },
         {
           "title": "Produce You SwiftUI parity leaf",
           "scope": "Surfaces/You only, native settings rows with real targets",
-          "recommended_status": "Spec Ready after owner approval"
+          "recommended_status": "Spec Ready after final package approval"
         }
       ],
       "blocked_by": [
@@ -308,6 +303,7 @@
         "final VSP-06 package approval"
       ],
       "acceptance_summary": [
+        "Owner approved Part 03 Option C Preference Weave as VSP-06 direction.",
         "Part 02 is rejected as too literal to supplied references.",
         "Part 03 keeps only reference intent and uses Ambitions-owned object language.",
         "You remains native settings/user system.",
@@ -320,7 +316,7 @@
         "python3 scripts/ambitions-vsp-provenance-audit.py"
       ],
       "closeout_required": [
-        "owner-selected direction",
+        "final VSP-06 package built from C Preference Weave",
         "approved final frame ID after package pass",
         "live SwiftUI screenshot matrix after source implementation",
         "offline/account boundary proof"

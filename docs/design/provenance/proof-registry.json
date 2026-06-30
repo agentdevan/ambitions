@@ -838,11 +838,13 @@
       "proof_id": "vsp-06-owner-approval",
       "vsp_id": "VSP-06",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-06 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Lifts owner-direction proof only. VSP-06 remains Yellow because final package, SwiftUI parity, device, accessibility, runtime, and privacy-boundary proof are still missing.",
+      "notes": "Owner approved Part 03 Option C Preference Weave as the VSP-06 direction."
     },
     {
       "proof_id": "vsp-06-swiftui-simulator-screenshot",
@@ -1538,12 +1540,13 @@
       "artifact_paths": [
         "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
         "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/manifest.md",
-        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png",
-        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png"
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png"
       ],
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow owner-direction evidence only. Does not prove owner approval, SwiftUI parity, Visual Green, device behavior, or accessibility conformance.",
-      "notes": "Ambitions-owned replacement directions after Part 02 rejection."
+      "notes": "Owner-approved Ambitions-owned direction after Part 02 rejection: Option C Preference Weave."
     }
   ]
 }

@@ -15,10 +15,10 @@ Rejected prior pass: `FAILURE_EVIDENCE - VSP-06 - Part 02 too literal to supplie
 Options:
 - A Personal OS Field
 - B Trust Meridian
-- C Preference Weave
-- D Local Control Observatory
+- C Preference Weave (owner approved)
+- D Local Control Observatory (non-selected context)
 
-Recommended interpretation: Option D Local Control Observatory should be the next candidate direction. It is the best balance of Ambitions ownership, native plausibility, local-first proof clarity, and non-dashboard restraint. Option B Trust Meridian should inform the final information order: local custody, reuse rules, permission edges, and account/external boundary.
+Owner-approved interpretation: Option C Preference Weave is the approved direction for the next VSP-06 candidate package. Option B Trust Meridian may inform information ordering for local custody, reuse rules, permission edges, and account/external boundary. Option D Local Control Observatory is non-selected context only.
 
 SwiftUI provenance anchors:
 - `Native/Ambitions/Surfaces/You/YouRootSurface.swift`
@@ -29,7 +29,7 @@ SwiftUI provenance anchors:
 Evidence:
 - `docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/manifest.md`
 - `docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png`
-- `docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png`
+- `docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png`
 - `docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-b-trust-meridian-r1.png`
 
-Non-claims: this is not owner approval, source implementation, Visual Green, Done, device proof, accessibility proof, or Code Connect proof.
+Non-claims: this owner approval covers only the visual direction. It is not source implementation, Visual Green, Done, device proof, accessibility proof, runtime proof, or Code Connect proof.
