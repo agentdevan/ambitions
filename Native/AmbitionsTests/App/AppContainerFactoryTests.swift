@@ -39,6 +39,25 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertNil(state.lastSeededAt)
     }
 
+    func testLiveBootstrapUsesSQLiteRuntimeEventAuthority() async throws {
+        let store = try AmbitionsPersistenceStore(inMemory: true)
+
+        let repositories = try await AppContainerFactory.prepareRepositories(for: .live, store: store)
+        let runtimeEvents = try XCTUnwrap(repositories.runtimeEvents)
+        let factorySource = try String(
+            contentsOf: repoRoot().appendingPathComponent("Native/Ambitions/App/AppContainerFactory.swift"),
+            encoding: .utf8
+        )
+
+        XCTAssertEqual(runtimeEvents.storeKind, .sqlite)
+        XCTAssertTrue(runtimeEvents is EventStoreSQLite)
+        XCTAssertTrue(factorySource.contains("EventStoreSQLite.defaultLiveStore()"))
+        XCTAssertFalse(
+            factorySource.contains("return FileRuntimeEventStore.defaultLiveStore()"),
+            "Persistent AppContainerFactory runtime events must not use JSONL as live authority."
+        )
+    }
+
     func testDemoBootstrapSeedsRepositoriesOnlyWhenExplicitlyRequested() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
 
@@ -287,5 +306,16 @@ private extension AppContainerFactoryTests {
         case .clarificationRequired, .blocked:
             return nil
         }
+    }
+
+    func repoRoot() throws -> URL {
+        var candidate = URL(fileURLWithPath: #filePath)
+        while candidate.path != "/" {
+            if FileManager.default.fileExists(atPath: candidate.appendingPathComponent("project.yml").path) {
+                return candidate
+            }
+            candidate.deleteLastPathComponent()
+        }
+        throw NSError(domain: "AppContainerFactoryTests", code: 1)
     }
 }

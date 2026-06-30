@@ -6,7 +6,15 @@ enum RuntimeEventStoreError: Error, Equatable {
     case nonAppendOnlySequence(expected: Int64, actual: Int64)
 }
 
+enum RuntimeEventStoreKind: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case sqlite
+    case jsonlFile = "jsonl_file"
+    case inMemory = "in_memory"
+}
+
 protocol RuntimeEventStore: Sendable {
+    var storeKind: RuntimeEventStoreKind { get }
+
     @discardableResult
     func append(_ event: RuntimeEvent) async throws -> RuntimeEventEnvelope
     func fetchEvents(matching query: RuntimeEventQuery, limit: Int?) async throws -> [RuntimeEventEnvelope]
@@ -16,6 +24,8 @@ protocol RuntimeEventStore: Sendable {
 actor InMemoryRuntimeEventStore: RuntimeEventStore {
     private var envelopes: [RuntimeEventEnvelope] = []
     private let deviceID: String
+
+    nonisolated var storeKind: RuntimeEventStoreKind { .inMemory }
 
     init(deviceID: String = "in-memory-runtime-event-store") {
         self.deviceID = deviceID
@@ -63,6 +73,8 @@ actor FileRuntimeEventStore: RuntimeEventStore {
     private let deviceID: String
     private let encoder: JSONEncoder
     private let decoder: JSONDecoder
+
+    nonisolated var storeKind: RuntimeEventStoreKind { .jsonlFile }
 
     init(
         fileURL: URL,

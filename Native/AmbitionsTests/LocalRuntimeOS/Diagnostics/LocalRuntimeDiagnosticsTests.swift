@@ -145,6 +145,31 @@ final class LocalRuntimeDiagnosticsTests: XCTestCase {
         XCTAssertTrue(diagnostics.contains { $0.id == "store.tier_missing.projection_store_sqlite" && $0.severity == .warning })
     }
 
+    func testEventStoreSQLiteHealthSampleIncludesStoreKindCursorCountAndChecksum() {
+        let cursor = RuntimeEventCursor(
+            sequence: 2,
+            eventID: "runtime.event.2",
+            checksum: "checksum-head",
+            occurredAt: "2026-06-30T11:33:30Z"
+        )
+        let health = EventStoreSQLiteHealth(
+            schemaVersion: eventStoreSQLiteSchemaVersion,
+            storeKind: .sqlite,
+            eventCount: 2,
+            latestCursor: cursor,
+            checksumHead: "checksum-head",
+            storageTier: .eventStoreSQLite
+        )
+
+        let sample = LocalRuntimeStoreHealthSample(health)
+
+        XCTAssertEqual(sample.tier, .eventStoreSQLite)
+        XCTAssertEqual(sample.recordCount, 2)
+        XCTAssertEqual(sample.checksumHead, "checksum-head")
+        XCTAssertTrue(sample.detail.contains("Runtime event store kind: sqlite."))
+        XCTAssertTrue(sample.detail.contains("runtime.event.2"))
+    }
+
     func testPerformanceBudgetLedgerSurfacesOverBudgetMeasurements() throws {
         let budget = AFEPQueryBudgetDescriptor(
             scope: .today,

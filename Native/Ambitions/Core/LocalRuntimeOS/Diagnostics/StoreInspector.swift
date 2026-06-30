@@ -31,7 +31,7 @@ extension LocalRuntimeStoreHealthSample {
             schemaVersion: health.schemaVersion,
             recordCount: health.eventCount,
             checksumHead: health.checksumHead,
-            detail: "Latest event cursor: \(health.latestCursor?.eventID ?? "none")."
+            detail: "Runtime event store kind: \(health.storeKind.rawValue). Latest event cursor: \(health.latestCursor?.eventID ?? "none")."
         )
     }
 

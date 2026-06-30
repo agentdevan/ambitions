@@ -63,6 +63,64 @@ final class StorageTierTests: XCTestCase {
         XCTAssertEqual(health.eventCount, 2)
         XCTAssertEqual(health.checksumHead, second.checksum)
         XCTAssertEqual(health.storageTier, .eventStoreSQLite)
+        XCTAssertEqual(health.storeKind, .sqlite)
+    }
+
+    func testEventStoreSQLiteImportsLegacyJSONLJournalWhenDatabaseIsEmpty() async throws {
+        let directory = try scratchDirectory()
+        let legacyURL = directory.appendingPathComponent("RuntimeEventJournal.jsonl")
+        let legacyStore = FileRuntimeEventStore(fileURL: legacyURL, deviceID: "legacy-jsonl-device")
+        let legacyFirst = try await legacyStore.append(makeCommandEvent(id: "command-legacy-first", captureID: "capture-legacy-first"))
+        let legacySecond = try await legacyStore.append(makeProofEvent(id: "proof-legacy-second", goalID: "goal-legacy-second"))
+
+        let sqliteStore = EventStoreSQLite(
+            databaseURL: directory.appendingPathComponent("EventStore.sqlite"),
+            deviceID: "sqlite-live-device",
+            legacyJSONLImportURL: legacyURL
+        )
+
+        let importedHealth = try await sqliteStore.health()
+        let importedEvents = try await sqliteStore.fetchEvents(matching: .all, limit: nil)
+        let appendedAfterImport = try await sqliteStore.append(makeCommandEvent(id: "command-after-import", captureID: "capture-after-import"))
+
+        XCTAssertEqual(importedHealth.storeKind, .sqlite)
+        XCTAssertEqual(importedHealth.eventCount, 2)
+        XCTAssertEqual(importedHealth.latestCursor, legacySecond.cursor)
+        XCTAssertEqual(importedHealth.checksumHead, legacySecond.checksum)
+        XCTAssertEqual(importedEvents.map(\.id), [legacyFirst.id, legacySecond.id])
+        XCTAssertEqual(importedEvents.map(\.checksum), [legacyFirst.checksum, legacySecond.checksum])
+        XCTAssertEqual(appendedAfterImport.sequence, 3)
+        XCTAssertEqual(appendedAfterImport.previousChecksum, legacySecond.checksum)
+    }
+
+    func testEventStoreSQLiteDoesNotPartiallyImportCorruptLegacyJSONLJournal() async throws {
+        let directory = try scratchDirectory()
+        let legacyURL = directory.appendingPathComponent("RuntimeEventJournal.jsonl")
+        let legacyStore = FileRuntimeEventStore(fileURL: legacyURL, deviceID: "legacy-jsonl-device")
+        _ = try await legacyStore.append(makeCommandEvent(id: "command-legacy-first", captureID: "capture-legacy-first"))
+        let validLine = try XCTUnwrap(
+            String(contentsOf: legacyURL, encoding: .utf8)
+                .split(separator: "\n", omittingEmptySubsequences: true)
+                .first
+        )
+        try "\(validLine)\nnot-json\n".write(to: legacyURL, atomically: true, encoding: .utf8)
+        let databaseURL = directory.appendingPathComponent("EventStore.sqlite")
+        let importingStore = EventStoreSQLite(
+            databaseURL: databaseURL,
+            deviceID: "sqlite-live-device",
+            legacyJSONLImportURL: legacyURL
+        )
+
+        await XCTAssertThrowsErrorAsync {
+            _ = try await importingStore.health()
+        }
+        let databaseOnlyStore = EventStoreSQLite(databaseURL: databaseURL, deviceID: "sqlite-live-device")
+        let healthAfterFailedImport = try await databaseOnlyStore.health()
+
+        XCTAssertEqual(healthAfterFailedImport.storeKind, .sqlite)
+        XCTAssertEqual(healthAfterFailedImport.eventCount, 0)
+        XCTAssertNil(healthAfterFailedImport.latestCursor)
+        XCTAssertNil(healthAfterFailedImport.checksumHead)
     }
 
     func testProjectionStoreSQLitePersistsProjectionPayloadsAndCursors() async throws {

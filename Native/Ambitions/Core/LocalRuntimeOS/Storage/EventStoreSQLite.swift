@@ -5,6 +5,7 @@ let eventStoreSQLiteSchemaVersion = "event_store_sqlite.native.v1"
 
 struct EventStoreSQLiteHealth: Codable, Sendable, Equatable, Hashable {
     let schemaVersion: String
+    let storeKind: RuntimeEventStoreKind
     let eventCount: Int
     let latestCursor: RuntimeEventCursor?
     let checksumHead: String?
@@ -14,19 +15,29 @@ struct EventStoreSQLiteHealth: Codable, Sendable, Equatable, Hashable {
 actor EventStoreSQLite: RuntimeEventStore {
     private let databaseURL: URL
     private let deviceID: String
+    private let legacyJSONLImportURL: URL?
+    private var legacyJSONLImportAttempted = false
 
-    init(databaseURL: URL, deviceID: String = RuntimeLocalDeviceID.current) {
+    nonisolated var storeKind: RuntimeEventStoreKind { .sqlite }
+
+    init(
+        databaseURL: URL,
+        deviceID: String = RuntimeLocalDeviceID.current,
+        legacyJSONLImportURL: URL? = nil
+    ) {
         self.databaseURL = databaseURL
         self.deviceID = deviceID
+        self.legacyJSONLImportURL = legacyJSONLImportURL
     }
 
     static func defaultLiveStore(fileManager: FileManager = .default) -> EventStoreSQLite {
         let supportDirectory = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? URL(fileURLWithPath: "/tmp", isDirectory: true)
+        let runtimeDirectory = supportDirectory
+            .appendingPathComponent("AmbitionsLocalRuntimeOS", isDirectory: true)
         return EventStoreSQLite(
-            databaseURL: supportDirectory
-                .appendingPathComponent("AmbitionsLocalRuntimeOS", isDirectory: true)
-                .appendingPathComponent("EventStore.sqlite", isDirectory: false)
+            databaseURL: runtimeDirectory.appendingPathComponent("EventStore.sqlite", isDirectory: false),
+            legacyJSONLImportURL: runtimeDirectory.appendingPathComponent("RuntimeEventJournal.jsonl", isDirectory: false)
         )
     }
 
@@ -34,6 +45,7 @@ actor EventStoreSQLite: RuntimeEventStore {
     func append(_ event: RuntimeEvent) async throws -> RuntimeEventEnvelope {
         let database = try openDatabase()
         try createSchema(database)
+        try importLegacyJSONLIfNeeded(database)
         return try database.transaction {
             let previous = try latestEnvelope(database)
             let envelope = try RuntimeEventEnvelope.make(
@@ -51,6 +63,7 @@ actor EventStoreSQLite: RuntimeEventStore {
     func fetchEvents(matching query: RuntimeEventQuery = .all, limit: Int? = nil) async throws -> [RuntimeEventEnvelope] {
         let database = try openDatabase()
         try createSchema(database)
+        try importLegacyJSONLIfNeeded(database)
         let envelopes = try selectEnvelopes(query: query, limit: limit, database: database)
         return try envelopes.map(validateLoaded)
     }
@@ -58,16 +71,19 @@ actor EventStoreSQLite: RuntimeEventStore {
     func latestCursor() async throws -> RuntimeEventCursor? {
         let database = try openDatabase()
         try createSchema(database)
+        try importLegacyJSONLIfNeeded(database)
         return try latestEnvelope(database)?.cursor
     }
 
     func health() async throws -> EventStoreSQLiteHealth {
         let database = try openDatabase()
         try createSchema(database)
+        try importLegacyJSONLIfNeeded(database)
         let latest = try latestEnvelope(database)
         let count = try eventCount(database)
         return EventStoreSQLiteHealth(
             schemaVersion: eventStoreSQLiteSchemaVersion,
+            storeKind: storeKind,
             eventCount: count,
             latestCursor: latest?.cursor,
             checksumHead: latest?.checksum,
@@ -121,6 +137,51 @@ private extension EventStoreSQLite {
             throw RuntimeEventStoreError.checksumMismatch(eventID: envelope.id)
         }
         return envelope
+    }
+
+    func importLegacyJSONLIfNeeded(_ database: LocalRuntimeSQLiteDatabase) throws {
+        guard legacyJSONLImportAttempted == false else { return }
+        guard let legacyJSONLImportURL,
+              FileManager.default.fileExists(atPath: legacyJSONLImportURL.path)
+        else {
+            legacyJSONLImportAttempted = true
+            return
+        }
+        guard try eventCount(database) == 0 else {
+            legacyJSONLImportAttempted = true
+            return
+        }
+
+        let data = try Data(contentsOf: legacyJSONLImportURL)
+        guard data.isEmpty == false else {
+            legacyJSONLImportAttempted = true
+            return
+        }
+        guard let raw = String(data: data, encoding: .utf8) else {
+            throw RuntimeEventStoreError.invalidUTF8(legacyJSONLImportURL)
+        }
+
+        var previous: RuntimeEventEnvelope?
+        var validatedEnvelopes: [RuntimeEventEnvelope] = []
+        for line in raw.split(separator: "\n", omittingEmptySubsequences: true) {
+            let envelope = try JSONDecoder().decode(RuntimeEventEnvelope.self, from: Data(line.utf8))
+            let expectedSequence = (previous?.sequence ?? 0) + 1
+            guard envelope.sequence == expectedSequence else {
+                throw RuntimeEventStoreError.nonAppendOnlySequence(expected: expectedSequence, actual: envelope.sequence)
+            }
+            guard envelope.previousChecksum == previous?.checksum else {
+                throw RuntimeEventStoreError.checksumMismatch(eventID: envelope.id)
+            }
+            let validatedEnvelope = try validateLoaded(envelope)
+            validatedEnvelopes.append(validatedEnvelope)
+            previous = validatedEnvelope
+        }
+        try database.transaction {
+            for envelope in validatedEnvelopes {
+                try insert(envelope, database: database)
+            }
+        }
+        legacyJSONLImportAttempted = true
     }
 
     func insert(_ envelope: RuntimeEventEnvelope, database: LocalRuntimeSQLiteDatabase) throws {

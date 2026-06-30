@@ -54,7 +54,14 @@ INTEGRATION_MARKERS = {
             "commandJournal",
             "runtimeEventStore",
             "FileCommandJournal.defaultLiveStore",
-            "FileRuntimeEventStore.defaultLiveStore",
+            "EventStoreSQLite.defaultLiveStore",
+        ],
+    },
+    "runtime_event_sqlite_live_authority": {
+        "path": "Native/Ambitions/App/AppContainerFactory.swift",
+        "markers": [
+            "return EventStoreSQLite.defaultLiveStore()",
+            "return InMemoryRuntimeEventStore()",
         ],
     },
     "today_command_append_before_mutation": {
@@ -373,6 +380,69 @@ def check_integration_markers() -> CheckResult:
     )
 
 
+def check_live_event_store_authority() -> CheckResult:
+    path = ROOT / "Native" / "Ambitions" / "App" / "AppContainerFactory.swift"
+    findings: list[Finding] = []
+    if not path.exists():
+        findings.append(
+            Finding(
+                "blocker",
+                "missing-app-container-factory",
+                relative(path),
+                None,
+                "Live runtime event authority cannot be proven without AppContainerFactory source.",
+            )
+        )
+        return make_result(
+            "live_event_store_authority",
+            findings,
+            "Production runtime event authority is SQLite.",
+            "{count} live event-store authority blocker(s) remain.",
+        )
+
+    lines = read_text(path).splitlines()
+    for index, line in enumerate(lines, start=1):
+        if "return FileRuntimeEventStore.defaultLiveStore()" in line:
+            findings.append(
+                Finding(
+                    "blocker",
+                    "live-runtime-event-authority-jsonl",
+                    relative(path),
+                    index,
+                    "Production runtime event authority must be EventStoreSQLite; JSONL file-backed authority is migration/debug fallback only.",
+                )
+            )
+
+    text = "\n".join(lines)
+    if "return EventStoreSQLite.defaultLiveStore()" not in text:
+        findings.append(
+            Finding(
+                "blocker",
+                "live-runtime-event-authority-not-sqlite",
+                relative(path),
+                None,
+                "Persistent AppContainerFactory runtimeEventStore(for:) must select EventStoreSQLite.defaultLiveStore().",
+            )
+        )
+    if "return InMemoryRuntimeEventStore()" not in text:
+        findings.append(
+            Finding(
+                "warning",
+                "preview-runtime-event-authority-not-in-memory",
+                relative(path),
+                None,
+                "Preview/demo/test runtime event authority should remain in-memory.",
+            )
+        )
+
+    return make_result(
+        "live_event_store_authority",
+        findings,
+        "Production runtime event authority is SQLite; JSONL authority is not selected by AppContainerFactory.",
+        "{count} live event-store authority blocker(s) remain.",
+    )
+
+
 def scan_mutation_bypasses() -> CheckResult:
     findings: list[Finding] = []
     for path in production_swift_files():
@@ -438,6 +508,7 @@ def run_checks() -> list[CheckResult]:
         check_architecture_inventory(),
         check_owner_directories(),
         check_integration_markers(),
+        check_live_event_store_authority(),
         scan_mutation_bypasses(),
         check_truth_file_gaps(),
     ]

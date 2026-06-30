@@ -31,6 +31,12 @@
       "summary": "Core command, event, projection, replay, search, and outbox integration markers are present."
     },
     {
+      "checkId": "live_event_store_authority",
+      "findings": [],
+      "status": "pass",
+      "summary": "Production runtime event authority is SQLite; JSONL authority is not selected by AppContainerFactory."
+    },
+    {
       "checkId": "mutation_bypass_scan",
       "findings": [],
       "status": "pass",
@@ -43,14 +49,14 @@
       "summary": "Truth files no longer contain LocalRuntimeOS no-claim blockers."
     }
   ],
-  "generatedAt": "2026-06-30T21:02:15+00:00",
+  "generatedAt": "2026-06-30T23:01:26+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {
     "blockers": 0,
-    "checks": 5,
+    "checks": 6,
     "green": true,
-    "passed": 5,
+    "passed": 6,
     "warnings": 0
   }
 }

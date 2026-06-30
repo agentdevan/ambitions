@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-06-30T21:02:15+00:00`
+Generated: `2026-06-30T23:01:26+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 
@@ -8,8 +8,8 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 ## Summary
 
-- Checks: `5`
-- Passed: `5`
+- Checks: `6`
+- Passed: `6`
 - Warnings: `0`
 - Blockers: `0`
 
@@ -29,6 +29,11 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 - Status: `pass`
 - Summary: Core command, event, projection, replay, search, and outbox integration markers are present.
+
+### live_event_store_authority
+
+- Status: `pass`
+- Summary: Production runtime event authority is SQLite; JSONL authority is not selected by AppContainerFactory.
 
 ### mutation_bypass_scan
 

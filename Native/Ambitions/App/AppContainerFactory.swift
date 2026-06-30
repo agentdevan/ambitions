@@ -244,7 +244,7 @@ enum AppContainerFactory {
         if configuration.usesInMemoryStore {
             return InMemoryRuntimeEventStore()
         }
-        return FileRuntimeEventStore.defaultLiveStore()
+        return EventStoreSQLite.defaultLiveStore()
     }
 
     private static func commandJournal(for configuration: AppBootstrapConfiguration) -> any CommandJournal {
