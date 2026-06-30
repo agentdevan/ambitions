@@ -452,14 +452,14 @@
     },
     {
       "vsp_id": "VSP-04",
-      "title": "Time / LifeShape Week",
+      "title": "Time / Native Month Life Calendar",
       "category": "surface_content",
       "current_status_recommendation": "Needs Repair",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "14:354",
-        "frame_name": "CANDIDATE - VSP-04 - Time LifeShape Week hero - R1",
+        "node_id": "186:93",
+        "frame_name": "EXPLORATION - VSP-04 - PART 02 - Native Month Life Calendar options - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-crop-r1.png",
@@ -470,14 +470,23 @@
           "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-c-day-night-tide-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-d-time-loom-meridian-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-e-capacity-topography-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-f-aperture-calendar-field-r1.png"
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-f-aperture-calendar-field-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-native-month-options-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-a-native-capacity-month-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-b-unequal-week-bands-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-c-current-aperture-month-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-d-protected-month-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-e-goal-fit-month-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-f-apple-native-life-calendar-r1.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md",
           "docs/design/targets/time/lifeshape_field_visual_target.md",
           "docs/design/provenance/figma-frames/VSP-04-part-01-time-lifeshape-root-object-options-R1.md",
-          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/manifest.md"
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-04-part-02-native-month-life-calendar-options-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -485,7 +494,7 @@
       "shell_authority": {
         "requires_vsp_01_shell": true,
         "may_mutate_shell": false,
-        "shell_mutation_rationale": "Time candidate is content-only and must mount inside VSP-01 shell."
+        "shell_mutation_rationale": "Time candidate is content-only and must mount inside VSP-01 shell. Part 02 preserves native month calendar content without shell chrome."
       },
       "swiftui": {
         "canonical_source_owners": [
@@ -496,24 +505,34 @@
         "allowed_implementation_areas": [
           "Native/Ambitions/Surfaces/Time",
           "Native/Ambitions/Core/Time",
-          "Native/Ambitions/Core/Runtime",
+          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine",
+          "Native/Ambitions/DesignSystem/ProductObjects",
+          "Native/Ambitions/Rendering/CanvasPrimitives",
           "Sources/Components"
         ],
         "forbidden_implementation_areas": [
           "Native/Ambitions/Stage shell mutations",
           "calendar-clone-only root pattern",
           "top-level stale planning IA",
-          "unproven external calendar dependency for core value"
+          "unproven external calendar dependency for core value",
+          "Today-owned day timeline duplication as Time root"
         ],
         "known_component_candidates": [
           "Sources/Components/LifeDirectionalIntegrationPrimitives+02-LifeShapeField.swift",
           "Sources/Components/RealityMeridianTimeBand.swift",
-          "Sources/Components/HorizonCapacityPrimitiveFamily.swift"
+          "Sources/Components/HorizonCapacityPrimitiveFamily.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeBlockGraph.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PlacementEngine.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedTimeEngine.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecoveryWindowEngine.swift"
         ],
         "known_tests": [
           "Native/AmbitionsTests/Time/LifeShapeFieldViewReconstructionTests.swift",
           "Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift",
-          "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift"
+          "Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/TimeEngineTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift",
+          "Native/AmbitionsTests/Time/HorizonCapacityPrimitiveFamilyTests.swift"
         ],
         "known_preview_or_quality_files": [
           "Sources/Previews/RealityMeridianTemporalPreviews.swift",
@@ -528,7 +547,9 @@
           "VSP",
           "time",
           "surface-content",
-          "yellow-proof"
+          "yellow-proof",
+          "native-month-calendar",
+          "owner-selection-needed"
         ],
         "should_create_or_update_now": false
       },
@@ -566,7 +587,10 @@
         "Can drift into a generic calendar clone.",
         "External calendar behavior cannot become required for offline core value.",
         "Part 01 options need owner selection before candidate package buildout.",
-        "A selected option must not be synthesized with other directions unless explicitly scoped as a new candidate pass."
+        "A selected option must not be synthesized with other directions unless explicitly scoped as a new candidate pass.",
+        "Part 02 supersedes Part 01 root-object premise for owner selection: Time root should be month-level native Life Calendar, not an abstract day/week field.",
+        "Option C can drift into Today-owned day/current-step territory if aperture behavior becomes the root visual instead of a month-level behavior.",
+        "Goal/capacity/protection overlays can become KPI/dashboard clutter if they leave the month object or multiply as side panels."
       ],
       "missing_evidence": [
         "owner direction selection",
@@ -574,16 +598,27 @@
         "live SwiftUI Time parity screenshot",
         "device screenshot",
         "manual accessibility matrix",
-        "reflow/protection runtime proof"
+        "reflow/protection runtime proof",
+        "owner selection for Part 02 primary direction",
+        "complete VSP-04 candidate package for selected Part 02 direction",
+        "VoiceOver month summary proof",
+        "Dynamic Type month-grid stress proof",
+        "Reduce Motion static reflow marker proof"
       ],
       "green_blockers": [
         "No owner approval.",
         "No live SwiftUI parity screenshot.",
-        "No runtime/device/accessibility proof."
+        "No runtime/device/accessibility proof.",
+        "No owner selection for Part 02 primary direction.",
+        "No complete month-root candidate package."
       ],
       "notes": [
         "LifeShape-related source names are internal/source provenance and not top-level user IA.",
-        "Part 01 root object options at Figma node 182:93 are Yellow exploration evidence only and do not approve source implementation."
+        "Part 01 root object options at Figma node 182:93 are Yellow exploration evidence only and do not approve source implementation.",
+        "Part 02 Native Month Life Calendar options at Figma node 186:93 are the current VSP-04 owner-selection evidence.",
+        "Part 02 proof PNGs use Inter because SF Pro text did not render in Figma export; SwiftUI implementation remains system-font/SF aligned.",
+        "Recommended current read: Option F is the strongest native bridge if the floor is replacing the user's month calendar plus reminders.",
+        "New SwiftUI primitive required after owner approval: MonthLifeCalendarGrid / MonthLifeCalendarSemanticOverlay."
       ]
     },
     {

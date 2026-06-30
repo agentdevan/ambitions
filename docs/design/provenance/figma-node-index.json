@@ -419,6 +419,34 @@
       "notes": [
         "Readiness ledger says Code Connect publish is blocked by Figma account/seat capability."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "186:93",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-04 - PART 02 - Native Month Life Calendar options - R1",
+      "vsp_id": "VSP-04",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-native-month-options-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-a-native-capacity-month-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-b-unequal-week-bands-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-c-current-aperture-month-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-d-protected-month-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-e-goal-fit-month-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-f-apple-native-life-calendar-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-04-part-02-native-month-life-calendar-options-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-04---time--lifeshape-week",
+      "notes": [
+        "Part 02 records owner correction that Time root should be month-first native Life Calendar.",
+        "Yellow exploration only. Not owner approval, Visual Green, source implementation, device proof, or accessibility conformance.",
+        "Content-only Time object options inside approved VSP-01 shell authority. No shell mutation.",
+        "Proof typography uses Inter due SF Pro Figma PNG export issue; SwiftUI remains system-font aligned."
+      ]
     }
   ]
 }

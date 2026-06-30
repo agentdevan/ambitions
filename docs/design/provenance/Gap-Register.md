@@ -59,13 +59,17 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI screenshot
 - manual accessibility matrix
 - runtime behavior
-### VSP-04 - Time / LifeShape Week
+### VSP-04 - Time / Native Month Life Calendar
 
 - Dynamic Type
+- Dynamic Type month-grid stress proof
 - Increase Contrast
 - Reduce Motion
+- Reduce Motion static reflow marker proof
 - Reduce Transparency
 - VoiceOver
+- VoiceOver month summary proof
+- complete VSP-04 candidate package for selected Part 02 direction
 - device screenshot
 - haptics
 - live SwiftUI Time parity screenshot
@@ -73,6 +77,7 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - manual accessibility matrix
 - owner approval
 - owner direction selection
+- owner selection for Part 02 primary direction
 - reflow/protection runtime proof
 - runtime behavior
 ### VSP-05 - Capture Open Field Composer

@@ -104,7 +104,7 @@ Current visual proof status: SwiftUI render missing unless listed as a current l
 
 Required later for Green: live render, screenshot matrix, accessibility matrix, owner approval, and validation logs tied to current source.
 
-## VSP-04 - Time / LifeShape Week
+## VSP-04 - Time / Native Month Life Calendar
 
 Figma candidate screenshots:
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png
@@ -117,6 +117,13 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-d-time-loom-meridian-r1.png
 - docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-e-capacity-topography-r1.png
 - docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-f-aperture-calendar-field-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-native-month-options-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-a-native-capacity-month-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-b-unequal-week-bands-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-c-current-aperture-month-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-d-protected-month-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-e-goal-fit-month-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-f-apple-native-life-calendar-r1.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Time/TimeSurface.swift
 - Native/Ambitions/Surfaces/Time/TimeObjectView.swift
@@ -128,6 +135,9 @@ Known previews/tests/quality files:
 - Native/AmbitionsTests/Time/LifeShapeFieldViewReconstructionTests.swift
 - Native/AmbitionsTests/Time/TimeFieldMutationCoordinatorTests.swift
 - Native/AmbitionsTests/Time/TimeProjectionServiceTests.swift
+- Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/TimeEngineTests.swift
+- Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift
+- Native/AmbitionsTests/Time/HorizonCapacityPrimitiveFamilyTests.swift
 - Sources/Previews/RealityMeridianTemporalPreviews.swift
 - Native/Ambitions/Quality/LifeShapeConstructionAudit.swift
 - Native/Ambitions/Quality/VisualTargetArtifactAudit.swift
