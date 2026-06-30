@@ -28,6 +28,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
     let captureService: (any CaptureServicing)?
     let eventLedger: (any EventLedgerRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
+    let runtimeEvents: (any RuntimeEventStore)?
     let smartAttachmentService: (any SmartAttachmentRouting)?
     let validator: AmbitionsCommandValidator
     let runtimeValidator: RuntimeValidator
@@ -37,6 +38,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         captureService: (any CaptureServicing)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
+        runtimeEvents: (any RuntimeEventStore)? = nil,
         smartAttachmentService: (any SmartAttachmentRouting)? = DefaultSmartAttachmentService(),
         validator: AmbitionsCommandValidator = AmbitionsCommandValidator(),
         runtimeValidator: RuntimeValidator? = nil,
@@ -45,6 +47,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         self.captureService = captureService
         self.eventLedger = eventLedger
         self.commandExecutionRecords = commandExecutionRecords
+        self.runtimeEvents = runtimeEvents
         self.smartAttachmentService = smartAttachmentService
         self.validator = validator
         self.runtimeValidator = runtimeValidator ?? RuntimeValidator(commandValidator: validator)
@@ -130,14 +133,31 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         result: AmbitionsCommandExecutionResult,
         at timestamp: Date
     ) async {
-        guard let commandExecutionRecords else { return }
+        let recordedAt = DomainTimestamp.string(from: timestamp)
         let record = AmbitionsCommandExecutionRecord(
             command: command,
             result: result,
-            recordedAt: DomainTimestamp.string(from: timestamp)
+            recordedAt: recordedAt
         )
 
-        try? await commandExecutionRecords.append(record)
+        try? await commandExecutionRecords?.append(record)
+        await appendRuntimeEvent(command: command, result: result, recordedAt: recordedAt, commandRecordID: record.id)
+    }
+
+    private func appendRuntimeEvent(
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        recordedAt: String,
+        commandRecordID: String
+    ) async {
+        guard let runtimeEvents else { return }
+        let event = RuntimeEvent.commandExecution(
+            command: command,
+            result: result,
+            recordedAt: recordedAt,
+            commandRecordID: commandRecordID
+        )
+        _ = try? await runtimeEvents.append(event)
     }
 
     func fetchExistingExecutionRecord(

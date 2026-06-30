@@ -136,7 +136,7 @@ enum AppContainerFactory {
             store = try AmbitionsPersistenceStore(inMemory: configuration.usesInMemoryStore)
         }
 
-        let repositories = makeRepositories(store: store)
+        let repositories = makeRepositories(store: store, configuration: configuration)
         try await applySeedPolicy(configuration.seedPolicy, to: repositories)
         return repositories
     }
@@ -190,7 +190,10 @@ enum AppContainerFactory {
     }
     #endif
 
-    private static func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {
+    private static func makeRepositories(
+        store: AmbitionsPersistenceStore,
+        configuration: AppBootstrapConfiguration
+    ) -> AppRepositories {
         AppRepositories(
             goals: SwiftDataGoalRepository(store: store),
             drafts: SwiftDataGoalDraftRepository(store: store),
@@ -205,6 +208,7 @@ enum AppContainerFactory {
             entityRevisionTombstones: SwiftDataEntityRevisionTombstoneRepository(store: store),
             runtimeSnapshotLedger: SwiftDataRuntimeSnapshotLedgerRepository(store: store),
             commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store),
+            runtimeEvents: runtimeEventStore(for: configuration),
             executionLedgerReplayInspection: SwiftDataExecutionLedgerReplayInspectionRepository(store: store),
             graphOperationalRecords: SwiftDataAmbitionGraphOperationalRecordRepository(store: store),
             graphProofRecords: SwiftDataAmbitionGraphProofRecordRepository(store: store),
@@ -214,6 +218,13 @@ enum AppContainerFactory {
             capturePromotionUnitOfWork: SwiftDataCapturePromotionUnitOfWork(store: store),
             appState: SwiftDataAppStateRepository(store: store)
         )
+    }
+
+    private static func runtimeEventStore(for configuration: AppBootstrapConfiguration) -> any RuntimeEventStore {
+        if configuration.usesInMemoryStore {
+            return InMemoryRuntimeEventStore()
+        }
+        return FileRuntimeEventStore.defaultLiveStore()
     }
 
     private static func previewTodayServiceOverride(for source: AppSession.BootstrapSource) -> (any TodayServicing)? {

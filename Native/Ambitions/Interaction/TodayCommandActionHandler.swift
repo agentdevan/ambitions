@@ -81,13 +81,30 @@ struct TodayCommandActionHandler {
         result: AmbitionsCommandExecutionResult,
         at timestamp: Date
     ) async {
-        guard let commandExecutionRecords = repositories.commandExecutionRecords else { return }
+        let recordedAt = Self.iso.string(from: timestamp)
         let record = AmbitionsCommandExecutionRecord(
             command: command,
             result: result,
-            recordedAt: Self.iso.string(from: timestamp)
+            recordedAt: recordedAt
         )
-        try? await commandExecutionRecords.append(record)
+        try? await repositories.commandExecutionRecords?.append(record)
+        await appendRuntimeEvent(command: command, result: result, recordedAt: recordedAt, commandRecordID: record.id)
+    }
+
+    private func appendRuntimeEvent(
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        recordedAt: String,
+        commandRecordID: String
+    ) async {
+        guard let runtimeEvents = repositories.runtimeEvents else { return }
+        let event = RuntimeEvent.commandExecution(
+            command: command,
+            result: result,
+            recordedAt: recordedAt,
+            commandRecordID: commandRecordID
+        )
+        _ = try? await runtimeEvents.append(event)
     }
 
     private func effectiveValidation(

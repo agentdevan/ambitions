@@ -180,6 +180,7 @@ struct AppRepositories: Sendable {
     let entityRevisionTombstones: (any EntityRevisionTombstoneRepository)?
     let runtimeSnapshotLedger: (any RuntimeSnapshotLedgerRepository)?
     let commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)?
+    let runtimeEvents: (any RuntimeEventStore)?
     let executionLedgerReplayInspection: (any ExecutionLedgerReplayInspectionRepository)?
     let graphOperationalRecords: (any AmbitionGraphOperationalRecordRepository)?
     let graphProofRecords: (any AmbitionGraphProofRecordRepository)?
@@ -203,6 +204,7 @@ struct AppRepositories: Sendable {
         entityRevisionTombstones: (any EntityRevisionTombstoneRepository)? = nil,
         runtimeSnapshotLedger: (any RuntimeSnapshotLedgerRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
+        runtimeEvents: (any RuntimeEventStore)? = nil,
         executionLedgerReplayInspection: (any ExecutionLedgerReplayInspectionRepository)? = nil,
         graphOperationalRecords: (any AmbitionGraphOperationalRecordRepository)? = nil,
         graphProofRecords: (any AmbitionGraphProofRecordRepository)? = nil,
@@ -225,6 +227,7 @@ struct AppRepositories: Sendable {
         self.entityRevisionTombstones = entityRevisionTombstones
         self.runtimeSnapshotLedger = runtimeSnapshotLedger
         self.commandExecutionRecords = commandExecutionRecords
+        self.runtimeEvents = runtimeEvents
         self.executionLedgerReplayInspection = executionLedgerReplayInspection
         self.graphOperationalRecords = graphOperationalRecords
         self.graphProofRecords = graphProofRecords

@@ -65,7 +65,7 @@ Codex must treat:
 - R2 is not a user-data backend and must never receive, store, infer, personalize from, or transmit private user life data.
 - Hosted AI services, external/cloud LLMs, and cloud model APIs as excluded from core architecture and not core app runtime dependencies.
 - New backend/runtime authority belongs under `Core/LocalRuntimeOS/` and must preserve the `Command -> Event -> Projection -> Receipt -> Replay` target law.
-- Current command-spine source under `Core/LocalRuntimeOS/CommandSpine/` and the `RuntimeMutation` bridge under `Core/LocalRuntimeOS/TransactionKernel/` are the source-present start of the LocalRuntimeOS migration. Remaining `Core/Runtime/`, `Core/Persistence/`, and legacy projection-owner source is implementation scaffolding unless future source proof migrates or proves the responsibility under `Core/LocalRuntimeOS/`.
+- Current command-spine source under `Core/LocalRuntimeOS/CommandSpine/`, the `RuntimeMutation` bridge under `Core/LocalRuntimeOS/TransactionKernel/`, and the EventJournal foundation under `Core/LocalRuntimeOS/EventJournal/` are source-present starts of the LocalRuntimeOS migration. Remaining `Core/Runtime/`, `Core/Persistence/`, and legacy projection-owner source is implementation scaffolding unless future source proof migrates or proves the responsibility under `Core/LocalRuntimeOS/`.
 
 ---
 
@@ -140,7 +140,7 @@ Codex must not optimize for appearing done, broad diff volume, speculative imple
 
 Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, and identify hard-red risks. For work touching Life Capital, goal pathing, Future Steps, continuous adjustment, onboarding, reviews, Source Atlas composition, proof/progress transfer, automation, notifications, or scenario gates, Codex must also map the intended behavior to `PRODUCT_EXPERIENCE_CANON.md` and report which scenario gates are Existing, Partial, Missing, or Unknown.
 
-For LocalRuntimeOS, backend/runtime architecture, mutation, persistence substrate, projection, replay, side-effect, capture intake, privacy boundary, Source Atlas runtime boundary, sync continuity, migration, repair, or diagnostics work, Codex must start from Linear `AMB-1544` and the active leaf. As of 2026-06-30 the first active leaf is `AMB-1545`, which is canon/process tracking only; source movement belongs to later bounded leaves such as `AMB-1546` through `AMB-1552`.
+For LocalRuntimeOS, backend/runtime architecture, mutation, persistence substrate, projection, replay, side-effect, capture intake, privacy boundary, Source Atlas runtime boundary, sync continuity, migration, repair, or diagnostics work, Codex must start from Linear `AMB-1544` and the active leaf. As of 2026-06-30, `AMB-1545` is canon/process tracking only, `AMB-1546` covers the first command/transaction source move, and `AMB-1547` covers the EventJournal foundation. Later bounded leaves must continue through the full `Core/LocalRuntimeOS/` subtree coverage ledger rather than treating the initial leaves as implementation completion.
 
 Codex must not broad-edit without scope, rewrite major canon unless explicitly authorized, mutate app behavior during docs/governance tasks unless scoped, create new runtime dependencies without approval, silently accept stale tests/scripts as active truth, or bulk update snapshots/proof artifacts to hide failures.
 
