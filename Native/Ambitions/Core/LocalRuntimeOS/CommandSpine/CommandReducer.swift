@@ -121,7 +121,7 @@ struct CommandReducer: Sendable {
              .placeStepInTime, .protectTimeWindow, .correctTimeWindow, .startStepSession,
              .completeAction, .delayAction, .splitAction, .recoverAction, .markWaiting,
              .archiveItem, .setPriority, .setUrgency, .setDeadline, .setContextLens,
-             .clearContextLensOverride, .routeCommitment, .addDeliverable, .removeDeliverable,
+             .clearContextLensOverride, .updateUserPreferences, .routeCommitment, .addDeliverable, .removeDeliverable,
              .addGoalScopeItem, .removeGoalScopeItem, .quickCapture:
             return .runtimeMutation
         }

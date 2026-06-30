@@ -72,6 +72,11 @@ enum AppContainerFactory {
         let navigation = StageStore(selectedSurface: session.initialTab)
         let externalRouter = DefaultAppExternalRouter(navigation: navigation)
         let todayService = previewTodayServiceOverride(for: configuration.sessionSource) ?? runtime.todayService
+        let todayReceiptCommands = TodayReceiptCommandService(repositories: repositories)
+        let youPreferencesCommands = YouPreferencesCommandService(
+            repositories: repositories,
+            loadDashboard: { try await runtime.youService.loadYouDashboard() }
+        )
         let externalActionService = DefaultExternalActionCommandService(
             runtimeExecutor: runtime.actionExecutor,
             externalRouter: externalRouter
@@ -84,7 +89,9 @@ enum AppContainerFactory {
             commandJournal: repositories.commandJournal
         )
         let externalCreationImportService = DefaultExternalCreationImportService(
-            commandExecutor: externalCreationCommandExecutor
+            commandExecutor: externalCreationCommandExecutor,
+            externalSurfaceSideEffectLedger: FileSideEffectLedgerRepository.defaultExternalSurfaceLedger(),
+            appSideEffectLedger: repositories.sideEffectLedger
         )
         let sourceAtlasLifecycleRefreshService = SourceAtlasPublicPackLifecycleRefreshService(
             registry: SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.defaultAppRegistry(),
@@ -116,12 +123,14 @@ enum AppContainerFactory {
             accentFamily: session.accentFamily,
             navigation: navigation,
             todayService: todayService,
+            todayReceiptCommands: todayReceiptCommands,
             captureService: runtime.captureService,
             goalsService: runtime.goalsService,
             timeRitualsService: runtime.timeRitualsService,
             timeService: timeService,
             insightsService: runtime.insightsService,
             youService: runtime.youService,
+            youPreferencesCommands: youPreferencesCommands,
             notificationService: notificationService,
             calendarRemindersService: calendarRemindersService,
             actionRouter: DefaultAppActionRouter(navigation: navigation),

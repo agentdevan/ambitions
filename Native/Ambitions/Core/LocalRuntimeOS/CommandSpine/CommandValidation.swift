@@ -70,6 +70,8 @@ struct AmbitionsCommandValidator: Sendable {
             return command.payload.contextLens == nil ? .invalid : .valid
         case .clearContextLensOverride:
             return .valid
+        case .updateUserPreferences:
+            return command.target.destination == .you ? .valid : .needsMissingTarget
         case .routeCommitment:
             return command.payload.primaryText == nil && command.target.captureID == nil ? .invalid : .valid
         case .addDeliverable:

@@ -105,7 +105,8 @@ final class TodayViewModel {
     func confirmActionClosure(
         _ closure: TodayActionClosureSheetState,
         outcome: TodayActionClosureOutcomeState,
-        using service: any TodayServicing,
+        using receiptCommands: any TodayReceiptCommanding,
+        refreshService: any TodayServicing,
         userDisplayName: String,
         now: Date,
         calendar: Calendar,
@@ -113,9 +114,9 @@ final class TodayViewModel {
         timeZone: TimeZone? = nil
     ) async {
         do {
-            let response = try await service.recordActionClosure(closure, outcome: outcome, now: now)
+            let response = try await receiptCommands.recordActionClosure(closure, outcome: outcome, now: now)
             transientMessage = response.message
-            await refresh(using: service, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext, timeZone: timeZone)
+            await refresh(using: refreshService, userDisplayName: userDisplayName, now: now, calendar: calendar, entryContext: entryContext, timeZone: timeZone)
             if let stageMutation = response.stageMutation {
                 applyClosureStageMutation(stageMutation)
             }

@@ -76,6 +76,7 @@ enum SharedExternalCreationStoreError: LocalizedError {
 struct SharedExternalCreationStore {
     static let relativeDirectory = "ExternalCreations"
     static let fileName = "external-creations.v1.json"
+    static let sideEffectLedgerFileName = "external-side-effects.v1.json"
 
     var fileManager: FileManager = .default
     var baseURLOverride: URL?
@@ -96,7 +97,13 @@ struct SharedExternalCreationStore {
             .appendingPathComponent(Self.fileName)
     }
 
-    func append(_ request: ExternalCreationRequest) throws {
+    func sideEffectLedgerFileURL() -> URL {
+        queueFileURL()
+            .deletingLastPathComponent()
+            .appendingPathComponent(Self.sideEffectLedgerFileName)
+    }
+
+    func enqueueDurableRequest(_ request: ExternalCreationRequest) throws {
         let trimmed = request.text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed.isEmpty == false else {
             throw SharedExternalCreationStoreError.emptyText

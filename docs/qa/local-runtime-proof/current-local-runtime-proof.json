@@ -1,0 +1,56 @@
+{
+  "allowedClaims": [
+    "LocalRuntimeOS source-present owner inventory can be reported when architecture_inventory passes.",
+    "LocalRuntimeProof Green can be claimed only when this gate is green and current focused runtime tests also pass."
+  ],
+  "blockedClaims": [
+    "all meaningful Ambitions state changes route only through Command -> Event -> Projection -> Receipt -> Replay",
+    "LocalRuntimeOS is complete",
+    "app-wide command-only mutation is proven",
+    "app-wide event replay and projection consumption are proven",
+    "full side-effect outbox enforcement is proven",
+    "privacy/legal, Visual Green, Release Green, TestFlight, or App Store readiness"
+  ],
+  "checks": [
+    {
+      "checkId": "architecture_inventory",
+      "findings": [],
+      "status": "pass",
+      "summary": "Final architecture tree source parity is green."
+    },
+    {
+      "checkId": "owner_directories",
+      "findings": [],
+      "status": "pass",
+      "summary": "All 19 LocalRuntimeOS owners are source-present."
+    },
+    {
+      "checkId": "integration_markers",
+      "findings": [],
+      "status": "pass",
+      "summary": "Core command, event, projection, replay, search, and outbox integration markers are present."
+    },
+    {
+      "checkId": "mutation_bypass_scan",
+      "findings": [],
+      "status": "pass",
+      "summary": "No high-risk mutation or external-write bypass candidates were found."
+    },
+    {
+      "checkId": "truth_file_no_claim_gaps",
+      "findings": [],
+      "status": "pass",
+      "summary": "Truth files no longer contain LocalRuntimeOS no-claim blockers."
+    }
+  ],
+  "generatedAt": "2026-06-30T20:55:57+00:00",
+  "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
+  "status": "green",
+  "summary": {
+    "blockers": 0,
+    "checks": 5,
+    "green": true,
+    "passed": 5,
+    "warnings": 0
+  }
+}

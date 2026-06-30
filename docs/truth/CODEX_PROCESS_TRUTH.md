@@ -166,6 +166,8 @@ A Green claim requires proof appropriate to scope:
 
 No Codex report may claim build, device, release, privacy, account, R2, accessibility, performance, TestFlight, App Store, or production readiness without current evidence.
 
+For LocalRuntimeOS completion claims, Codex must run `scripts/ambitions-local-runtime-proof.py` in addition to architecture inventory and focused runtime tests. A passing final-tree inventory proves source parity only; it does not prove app-wide command-only mutation, event replay, projection consumption, side-effect outbox enforcement, privacy boundary enforcement, or LocalRuntimeProof Green.
+
 ---
 
 ## 7. Hard Red Conditions

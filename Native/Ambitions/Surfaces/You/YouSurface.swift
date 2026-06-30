@@ -81,7 +81,9 @@ struct YouSurface: View {
 
     func savePreferences() {
         Task {
-            await viewModel.save(using: featureFactory.youService)
+            await viewModel.commitPreferences(
+                using: featureFactory.youPreferencesCommands
+            )
             syncAppearanceFromLoadedDashboard()
             announce(YouInteractions.accessibilityAnnouncement(for: .savePreferences))
         }

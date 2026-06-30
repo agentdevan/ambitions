@@ -243,17 +243,27 @@ final class EventKitIntegrationServiceTests: XCTestCase {
 
         let record = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
 
-        let sideEffect = await sideEffectLedger.lastRecord
+        let records = await sideEffectLedger.records
+        let queuedSideEffect = records.first { $0.status == .queued }
+        let succeededSideEffect = records.first { $0.status == .succeeded }
+
         XCTAssertEqual(record.identifier, "event-1")
-        XCTAssertEqual(sideEffect?.effectKind, .calendar)
-        XCTAssertEqual(sideEffect?.status, .recordedLocalOnly)
-        XCTAssertEqual(sideEffect?.boundary, .externalEffect)
-        XCTAssertEqual(sideEffect?.actionKind, .writeCalendarBlock)
-        XCTAssertEqual(sideEffect?.sourceDomain, .time)
-        XCTAssertEqual(sideEffect?.requiresConfirmation, false)
-        XCTAssertEqual(sideEffect?.externalEffect, true)
-        XCTAssertTrue(sideEffect?.reasons.contains(.externalSideEffect) == true)
-        XCTAssertFalse(sideEffect?.blockedFacts.contains("Draft conference abstract") == true)
+        XCTAssertEqual(records.count, 2)
+        XCTAssertEqual(queuedSideEffect?.effectKind, .calendar)
+        XCTAssertEqual(queuedSideEffect?.boundary, .externalEffect)
+        XCTAssertEqual(queuedSideEffect?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(queuedSideEffect?.sourceDomain, .time)
+        XCTAssertEqual(queuedSideEffect?.requiresConfirmation, false)
+        XCTAssertEqual(queuedSideEffect?.externalEffect, true)
+        XCTAssertTrue(queuedSideEffect?.reasons.contains(.externalSideEffect) == true)
+        XCTAssertEqual(succeededSideEffect?.effectKind, .calendar)
+        XCTAssertEqual(succeededSideEffect?.boundary, .externalEffect)
+        XCTAssertEqual(succeededSideEffect?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(succeededSideEffect?.sourceDomain, .time)
+        XCTAssertEqual(succeededSideEffect?.requiresConfirmation, false)
+        XCTAssertEqual(succeededSideEffect?.externalEffect, true)
+        XCTAssertTrue(succeededSideEffect?.reasons.contains(.externalSideEffect) == true)
+        XCTAssertFalse(records.contains { $0.blockedFacts.contains("Draft conference abstract") })
     }
 
     func testRepeatedCalendarEventSuccessesRecordDistinctLedgerEntries() async throws {
@@ -269,10 +279,11 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
 
         let records = await sideEffectLedger.records
-        XCTAssertEqual(records.count, 2)
-        XCTAssertEqual(Set(records.map(\.id)).count, 2)
+        XCTAssertEqual(records.count, 4)
+        XCTAssertEqual(Set(records.map(\.id)).count, 4)
         XCTAssertTrue(records.allSatisfy { $0.effectKind == .calendar })
-        XCTAssertTrue(records.allSatisfy { $0.status == .recordedLocalOnly })
+        XCTAssertEqual(records.filter { $0.status == .queued }.count, 2)
+        XCTAssertEqual(records.filter { $0.status == .succeeded }.count, 2)
         XCTAssertTrue(records.allSatisfy { $0.externalEffect })
     }
 }

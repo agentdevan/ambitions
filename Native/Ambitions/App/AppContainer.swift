@@ -27,12 +27,14 @@ final class AppContainer {
     var accentFamily: AmbitionAccentFamily
     let navigation: StageStore
     let todayService: any TodayServicing
+    let todayReceiptCommands: any TodayReceiptCommanding
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
     let timeRitualsService: any TimeRitualsServicing
     let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing
+    let youPreferencesCommands: any YouPreferencesCommanding
     let notificationService: any NotificationServicing
     let calendarRemindersService: any CalendarRemindersServicing
     let actionRouter: any AppActionRouting
@@ -53,12 +55,14 @@ final class AppContainer {
         accentFamily: AmbitionAccentFamily,
         navigation: StageStore,
         todayService: any TodayServicing,
+        todayReceiptCommands: any TodayReceiptCommanding,
         captureService: any CaptureServicing,
         goalsService: any GoalsServicing,
         timeRitualsService: any TimeRitualsServicing,
         timeService: any TimeServicing,
         insightsService: any InsightsServicing,
         youService: any YouServicing,
+        youPreferencesCommands: any YouPreferencesCommanding,
         notificationService: any NotificationServicing,
         calendarRemindersService: any CalendarRemindersServicing,
         actionRouter: any AppActionRouting,
@@ -82,12 +86,14 @@ final class AppContainer {
             runtime: runtime,
             clock: clock,
             todayService: todayService,
+            todayReceiptCommands: todayReceiptCommands,
             captureService: captureService,
             goalsService: goalsService,
             timeRitualsService: timeRitualsService,
             timeService: timeService,
             insightsService: insightsService,
-            youService: youService
+            youService: youService,
+            youPreferencesCommands: youPreferencesCommands
         )
         self.persistence = AppPersistenceCapability(
             bootstrapConfiguration: bootstrapConfiguration,
@@ -104,12 +110,14 @@ final class AppContainer {
         self.featureFactory = AppFeatureFactoryCapability(
             clock: clock,
             todayService: todayService,
+            todayReceiptCommands: todayReceiptCommands,
             captureService: captureService,
             goalsService: goalsService,
             timeRitualsService: timeRitualsService,
             timeService: timeService,
             insightsService: insightsService,
-            youService: youService
+            youService: youService,
+            youPreferencesCommands: youPreferencesCommands
         )
         self.session = session
         self.clock = clock
@@ -118,12 +126,14 @@ final class AppContainer {
         self.accentFamily = accentFamily
         self.navigation = navigation
         self.todayService = todayService
+        self.todayReceiptCommands = todayReceiptCommands
         self.captureService = captureService
         self.goalsService = goalsService
         self.timeRitualsService = timeRitualsService
         self.timeService = timeService
         self.insightsService = insightsService
         self.youService = youService
+        self.youPreferencesCommands = youPreferencesCommands
         self.notificationService = notificationService
         self.calendarRemindersService = calendarRemindersService
         self.actionRouter = actionRouter

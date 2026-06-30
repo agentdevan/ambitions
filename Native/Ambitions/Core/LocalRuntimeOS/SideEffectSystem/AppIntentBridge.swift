@@ -12,12 +12,18 @@ struct AppIntentBridge {
         self.store = store
     }
 
+    static func defaultExternalSurfaceBridge() -> AppIntentBridge {
+        AppIntentBridge(
+            recorder: SideEffectOutbox(ledger: FileSideEffectLedgerRepository.defaultExternalSurfaceLedger())
+        )
+    }
+
     @discardableResult
     func enqueueExternalCreation(
         _ request: ExternalCreationRequest,
         acceptedAt: Date
     ) async throws -> SideEffectAttempt? {
-        try store.append(request)
+        try store.enqueueDurableRequest(request)
         guard let recorder else { return nil }
         let outboxRequest = SideEffectOutboxRequest(
             id: "app-intent-intake.\(request.id)",

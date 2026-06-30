@@ -63,7 +63,8 @@ struct TodaySurface: View {
                     await viewModel.confirmActionClosure(
                         closure,
                         outcome: outcome,
-                        using: featureFactory.todayService,
+                        using: featureFactory.todayReceiptCommands,
+                        refreshService: featureFactory.todayService,
                         userDisplayName: userSystem.session.userDisplayName,
                         now: clock.now,
                         calendar: clock.calendar,

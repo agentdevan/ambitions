@@ -328,6 +328,8 @@ extension SafeAutomationActionKind {
             self = .changeDeadline
         case .setContextLens, .clearContextLensOverride:
             self = .correctRecommendation
+        case .updateUserPreferences:
+            self = .editLocalNote
         case .routeCommitment:
             self = .routeCapture
         case .addDeliverable, .addGoalScopeItem:

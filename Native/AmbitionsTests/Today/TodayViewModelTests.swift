@@ -581,7 +581,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertTrue(copy.contains("Duration source: Suggested duration"))
         XCTAssertTrue(copy.contains("Start now"))
         XCTAssertTrue(copy.contains("Close the loop"))
-        XCTAssertTrue(copy.contains("Adjust time"))
+        XCTAssertTrue(copy.contains("Move it"))
         XCTAssertTrue(copy.contains("Review later"))
         XCTAssertTrue(copy.contains("Proof and receipts stay attached to this step"))
         XCTAssertTrue(copy.contains("Changes stay reviewable"))
@@ -682,7 +682,7 @@ final class TodayViewModelTests: XCTestCase {
         XCTAssertEqual(detail.primaryAction.kind, .startStepSession)
         XCTAssertEqual(detail.closureAction.kind, .closeActionClosure)
         XCTAssertEqual(detail.closureAction.title, "Close the loop")
-        XCTAssertEqual(detail.secondaryActions.map(\.title), ["Adjust time", "Review later"])
+        XCTAssertEqual(detail.secondaryActions.map(\.title), ["Mark Done", "Move it", "Review later"])
         XCTAssertTrue(rail.closureSlot.reservedForActionClosureSheet)
         XCTAssertFalse(rail.proofSlot.reservedForReceiptPeek)
         XCTAssertTrue(f02RenderedReservationCopy(rail).contains("Closure knot"))
@@ -696,7 +696,7 @@ final class TodayViewModelTests: XCTestCase {
             target: target
         )
 
-        XCTAssertEqual(sheet.prompt, "What happened with this step?")
+        XCTAssertEqual(sheet.prompt, "What changed?")
         XCTAssertEqual(sheet.primaryOutcomes.map(\.closureState), [.completed, .stillCounts, .moved, .waiting, .blocked, .notNeeded])
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .blocked })
         XCTAssertTrue(sheet.outcomes.contains { $0.closureState == .waiting })
@@ -868,6 +868,9 @@ final class TodayViewModelTests: XCTestCase {
         )
         let service = RecordingTodayService(
             experience: baseExperience,
+            actionResponse: TodayActionResponse(message: nil)
+        )
+        let receiptCommands = RecordingTodayReceiptCommands(
             actionResponse: TodayActionResponse(
                 message: TodayInlineMessage(
                     title: "Proof saved",
@@ -882,7 +885,8 @@ final class TodayViewModelTests: XCTestCase {
         await viewModel.confirmActionClosure(
             closure,
             outcome: outcome,
-            using: service,
+            using: receiptCommands,
+            refreshService: service,
             userDisplayName: "",
             now: now,
             calendar: Calendar(identifier: .gregorian)
@@ -1572,6 +1576,31 @@ private actor RecordingTodayService: TodayServicing {
 
     func performedActionCount() -> Int {
         performedActions.count
+    }
+}
+
+private actor RecordingTodayReceiptCommands: TodayReceiptCommanding {
+    let actionResponse: TodayActionResponse
+    private(set) var recordedClosures: [(TodayActionClosureSheetState, TodayActionClosureOutcomeState)] = []
+    private(set) var recordedRejections: [TodayRecommendationRejectionInput] = []
+
+    init(actionResponse: TodayActionResponse) {
+        self.actionResponse = actionResponse
+    }
+
+    func recordRecommendationRejection(_ input: TodayRecommendationRejectionInput) async throws -> TodayActionResponse {
+        recordedRejections.append(input)
+        return actionResponse
+    }
+
+    func recordActionClosure(
+        _ closure: TodayActionClosureSheetState,
+        outcome: TodayActionClosureOutcomeState,
+        now: Date
+    ) async throws -> TodayActionResponse {
+        _ = now
+        recordedClosures.append((closure, outcome))
+        return actionResponse
     }
 }
 

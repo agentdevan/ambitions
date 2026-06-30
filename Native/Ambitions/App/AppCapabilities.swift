@@ -13,12 +13,14 @@ struct AppRuntimeCapability {
     let runtime: AmbitionsRuntime
     let clock: any AmbitionsClock
     let todayService: any TodayServicing
+    let todayReceiptCommands: any TodayReceiptCommanding
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
     let timeRitualsService: any TimeRitualsServicing
     let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing
+    let youPreferencesCommands: any YouPreferencesCommanding
 }
 
 struct AppPersistenceCapability {
@@ -44,10 +46,12 @@ struct AppUserSystemCapability {
 struct AppFeatureFactoryCapability {
     let clock: any AmbitionsClock
     let todayService: any TodayServicing
+    let todayReceiptCommands: any TodayReceiptCommanding
     let captureService: any CaptureServicing
     let goalsService: any GoalsServicing
     let timeRitualsService: any TimeRitualsServicing
     let timeService: any TimeServicing
     let insightsService: any InsightsServicing
     let youService: any YouServicing
+    let youPreferencesCommands: any YouPreferencesCommanding
 }

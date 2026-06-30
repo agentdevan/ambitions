@@ -25,6 +25,12 @@ enum PreviewAppContainerFactory {
             ? PreviewTimeScenarios.protectedPlacementReviewSeeded
             : PreviewTimeScenarios.seeded
         let goalsService = runtime.goalsService
+        let todayReceiptCommands = TodayReceiptCommandService(repositories: runtime.repositories)
+        let youService = StubYouService(fixtures: fixtures)
+        let youPreferencesCommands = YouPreferencesCommandService(
+            repositories: runtime.repositories,
+            loadDashboard: { try await youService.loadYouDashboard() }
+        )
         let commandRouter = DefaultShellCommandRouter(
             navigation: navigation,
             captureService: captureService
@@ -48,6 +54,7 @@ enum PreviewAppContainerFactory {
             accentFamily: fixtures.preferences.accentFamily,
             navigation: navigation,
             todayService: todayService,
+            todayReceiptCommands: todayReceiptCommands,
             captureService: captureService,
             goalsService: goalsService,
             timeRitualsService: PreviewTimeRitualsService(dashboard: timeRitualsDashboard),
@@ -56,7 +63,8 @@ enum PreviewAppContainerFactory {
                 weeklyReviewState: PreviewTimeScenarios.weeklyReview
             ),
             insightsService: StubInsightsService(fixtures: fixtures),
-            youService: StubYouService(fixtures: fixtures),
+            youService: youService,
+            youPreferencesCommands: youPreferencesCommands,
             notificationService: StubNotificationService(),
             calendarRemindersService: StubCalendarRemindersService(),
             actionRouter: DefaultAppActionRouter(navigation: navigation),

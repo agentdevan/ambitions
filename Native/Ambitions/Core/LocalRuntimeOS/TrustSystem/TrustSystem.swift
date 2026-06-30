@@ -307,6 +307,8 @@ struct TrustSystemCommitPlanner: Sendable {
                 return .goalScopeItemRemoved
             case .dismissRecommendation:
                 return .recommendationDismissed
+            case .updateUserPreferences:
+                return .contextLensChanged
             case .openDestination, .protectTimeWindow, .correctTimeWindow, .startStepSession, .prepareExport, .performExport, .setContextLens, .clearContextLensOverride, .askWhy:
                 return .planUpdated
             }
@@ -343,6 +345,8 @@ struct TrustSystemCommitPlanner: Sendable {
             return "Goal created"
         case .completeAction:
             return "Step completed"
+        case .updateUserPreferences:
+            return "Preferences updated"
         case .placeStepInTime, .scheduleItem, .createTimeItem:
             return "Time updated"
         default:

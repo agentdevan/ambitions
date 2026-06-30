@@ -108,7 +108,7 @@ extension RepositoryBackedYouService {
     func syncTrustStatusLabel(_ status: SyncCapabilityStatus) -> String {
         if status.availability == .unavailable &&
             status.trustPosture == .localOnly &&
-            status.detail.contains("explicit local-only mode") {
+            status.detail.describesLocalOnlyRuntime {
             return "Not currently connected"
         }
         return status.detail
@@ -117,7 +117,7 @@ extension RepositoryBackedYouService {
     func syncExportTruthSubtitle(_ status: SyncCapabilityStatus) -> String {
         if status.availability == .unavailable &&
             status.trustPosture == .localOnly &&
-            status.detail.contains("explicit local-only mode") {
+            status.detail.describesLocalOnlyRuntime {
             return "Sync is not connected. Export and import proof remain future-owned until the disaster drill passes."
         }
         return "\(status.detail) Export and import proof remain future-owned until the disaster drill passes."
@@ -281,5 +281,11 @@ extension RepositoryBackedYouService {
         case .completed, .cancelled:
             return 2
         }
+    }
+}
+
+private extension String {
+    var describesLocalOnlyRuntime: Bool {
+        contains("explicit local-only mode") || contains("local-device authority")
     }
 }

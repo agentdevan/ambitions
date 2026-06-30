@@ -36,80 +36,13 @@ extension RepositoryBackedTodayService {
     }
 
     func recordRecommendationRejection(_ input: TodayRecommendationRejectionInput) async throws -> TodayActionResponse {
-        let receipt = ActionReceipt.stepRejectedReceipt(
-            id: "today.rejection.\(input.candidateID).\(input.recordedAt)",
-            candidateID: input.candidateID,
-            sourceStepID: input.sourceStepID,
-            sourceCandidateID: input.sourceCandidateID,
-            reason: input.reason,
-            contextFingerprint: input.contextFingerprint,
-            recordedAt: input.recordedAt,
-            customReasonText: input.customText,
-            skippedReason: input.skippedReason
-        )
-        let record = ActionReceiptHistoryRecord(
-            receipt: receipt,
-            privacyLevel: input.reason.code.isSensitive ? .sensitive : .safeToShow,
-            localOnly: true
-        )
-
-        guard let historyRepository = repositories.actionReceiptHistory else {
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Not this saved locally",
-                    body: "The current Today service does not have a receipt history repository wired, so the rejection could not be persisted here.",
-                    state: .warning
-                )
-            )
-        }
-
-        try await historyRepository.save([record])
-        return TodayActionResponse(
-            message: TodayInlineMessage(
-                title: input.skippedReason ? "Reason skipped" : "Reason saved",
-                body: input.skippedReason
-                    ? "Ambitions saved a local receipt and will learn less from the skipped reason."
-                    : "Ambitions saved a local receipt and will use the reason to adjust future recommendations.",
-                state: input.skippedReason ? .warning : .selected
-            )
-        )
+        try await TodayReceiptCommandService(repositories: repositories)
+            .recordRecommendationRejection(input)
     }
 
     func recordActionClosure(_ closure: TodayActionClosureSheetState, outcome: TodayActionClosureOutcomeState, now: Date) async throws -> TodayActionResponse {
-        let occurredAt = DomainTimestamp.string(from: now)
-        let record = closure.actionReceiptHistoryRecord(for: outcome, occurredAt: occurredAt)
-        let peek = closure.proofReceiptPeek(for: outcome, occurredAt: occurredAt)
-
-        guard let historyRepository = repositories.actionReceiptHistory else {
-            return TodayActionResponse(
-                message: TodayInlineMessage(
-                    title: "Closure receipt not saved",
-                    body: "The current Today service does not have a receipt history repository wired, so this closure stayed as a local preview.",
-                    state: .warning
-                )
-            )
-        }
-
-        try await historyRepository.save([record])
-        let stageRecord = TodayClosureRecord(
-            stepID: closure.target.stepID,
-            goalID: closure.target.goalID,
-            outcome: outcome.closureState,
-            occurredAt: now
-        )
-        let stageMutation = TodayClosureStageMutation(
-            record: stageRecord,
-            stepTitle: closure.objectTitle,
-            receiptSaved: true
-        )
-        return TodayActionResponse(
-            message: TodayInlineMessage(
-                title: peek.title,
-                body: "\(peek.subtitle). \(peek.privacyLabel). \(record.sourceRecordLabel). \(record.replayTraceLabel). You inspection can find this through local receipt history.",
-                state: outcome.createsProof ? .success : .selected
-            ),
-            stageMutation: stageMutation
-        )
+        try await TodayReceiptCommandService(repositories: repositories)
+            .recordActionClosure(closure, outcome: outcome, now: now)
     }
 }
 

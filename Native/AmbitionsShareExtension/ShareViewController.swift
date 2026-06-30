@@ -65,7 +65,7 @@ final class ShareViewController: UIViewController {
         )
 
         do {
-            try store.append(request)
+            try store.enqueueDurableRequest(request)
             openAmbitions(landing: landing)
         } catch {
             extensionContext?.cancelRequest(withError: error)

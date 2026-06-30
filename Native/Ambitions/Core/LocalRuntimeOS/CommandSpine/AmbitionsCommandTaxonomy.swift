@@ -27,6 +27,7 @@ enum AmbitionsCommandKind: String, Codable, Sendable, Equatable, Hashable, CaseI
     case setDeadline = "set_deadline"
     case setContextLens = "set_context_lens"
     case clearContextLensOverride = "clear_context_lens_override"
+    case updateUserPreferences = "update_user_preferences"
     case routeCommitment = "route_commitment"
     case addDeliverable = "add_deliverable"
     case removeDeliverable = "remove_deliverable"

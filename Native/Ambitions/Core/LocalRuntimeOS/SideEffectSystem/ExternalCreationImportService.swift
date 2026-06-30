@@ -27,16 +27,24 @@ enum ExternalCreationCommandMetadataKey {
 final class DefaultExternalCreationImportService: ExternalCreationImporting {
     private let store: SharedExternalCreationStore
     private let commandExecutor: any CommandExecuting
+    private let externalSurfaceSideEffectLedger: FileSideEffectLedgerRepository?
+    private let appSideEffectLedger: (any SideEffectLedgerRepository)?
 
     init(
         store: SharedExternalCreationStore = SharedExternalCreationStore(),
-        commandExecutor: any CommandExecuting
+        commandExecutor: any CommandExecuting,
+        externalSurfaceSideEffectLedger: FileSideEffectLedgerRepository? = nil,
+        appSideEffectLedger: (any SideEffectLedgerRepository)? = nil
     ) {
         self.store = store
         self.commandExecutor = commandExecutor
+        self.externalSurfaceSideEffectLedger = externalSurfaceSideEffectLedger
+        self.appSideEffectLedger = appSideEffectLedger
     }
 
     func importPendingCreations(now: Date = .now) async -> ExternalCreationImportResult {
+        await reconcileExternalSurfaceSideEffects()
+
         let requests: [ExternalCreationRequest]
         do {
             requests = try store.drain()
@@ -69,6 +77,32 @@ final class DefaultExternalCreationImportService: ExternalCreationImporting {
         }
 
         return ExternalCreationImportResult(importedCaptureIDs: importedIDs, preferredLanding: preferredLanding, source: source)
+    }
+
+    private func reconcileExternalSurfaceSideEffects() async {
+        guard let externalSurfaceSideEffectLedger, let appSideEffectLedger else { return }
+        do {
+            let records = try await externalSurfaceSideEffectLedger.drainRecords()
+            for record in records {
+                try await appSideEffectLedger.append(record)
+            }
+        } catch {
+            let occurredAt = DomainTimestamp.string(from: Date())
+            let record = SideEffectLedgerRecord(
+                id: "external-intake-reconciliation.failed.\(Int(Date().timeIntervalSince1970))",
+                effectKind: .externalSnapshot,
+                status: .failedSafely,
+                boundary: .localOnly,
+                actionKind: .createCapture,
+                sourceDomain: .externalSurface,
+                occurredAt: occurredAt,
+                localOnly: true,
+                requiresConfirmation: false,
+                externalEffect: false,
+                degradedFacts: ["External surface side-effect ledger reconciliation failed safely before import."]
+            )
+            try? await appSideEffectLedger.append(record)
+        }
     }
 
     private func command(for request: ExternalCreationRequest, now: Date) -> AmbitionsCommand {

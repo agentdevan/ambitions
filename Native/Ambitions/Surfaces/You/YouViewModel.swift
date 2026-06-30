@@ -62,12 +62,14 @@ final class YouViewModel {
         }
     }
 
-    func save(using service: any YouServicing) async {
+    func commitPreferences(
+        using preferencesCommands: any YouPreferencesCommanding
+    ) async {
         guard hasUnsavedChanges else { return }
         isSaving = true
         defer { isSaving = false }
         do {
-            let dashboard = try await service.saveYouPreferences(
+            let dashboard = try await preferencesCommands.saveYouPreferences(
                 YouPreferencesUpdate(
                     preferredTab: preferredTab,
                     appearancePreference: appearancePreference,

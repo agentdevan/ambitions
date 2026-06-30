@@ -58,20 +58,11 @@ struct RepositoryBackedYouService: YouServicing {
     /// - Returns: The updated, thread-safe dashboard representation.
     /// - Throws: An error if persistence fails.
     func saveYouPreferences(_ preferences: YouPreferencesUpdate) async throws -> YouDashboard {
-        // Assert thread-safety and input range integrity under Swift 6 rules
-        precondition(preferences.reviewCadenceDays >= 0, "Review cadence days cannot be negative.")
-        
-        var state = try await repositories.appState.loadState()
-        state.preferredTab = preferences.preferredTab.canonicalTopLevelTab
-        state.appearancePreference = preferences.appearancePreference
-        state.accentFamily = preferences.accentFamily
-        state.reviewCadenceDays = max(1, preferences.reviewCadenceDays)
-        
-        // Enforce the core local-first privacy boundary
-        state.localOnlyModeEnabled = true
-        
-        try await repositories.appState.saveState(state)
-        return try await loadYouDashboard()
+        try await YouPreferencesCommandService(
+            repositories: repositories,
+            loadDashboard: { try await loadYouDashboard() }
+        )
+        .saveYouPreferences(preferences)
     }
 }
 extension RepositoryBackedYouService {

@@ -285,17 +285,8 @@ extension TodaySurface {
 
 
     func submitRejection(_ submission: TodayRejectionSubmission, from sheetState: TodayRejectionReasonSheetState) async {
-        guard let service = featureFactory.todayService as? RepositoryBackedTodayService else {
-            viewModel.transientMessage = TodayInlineMessage(
-                title: "Not this saved locally",
-                body: "The current Today service cannot persist the rejection sheet in this preview path.",
-                state: .warning
-            )
-            return
-        }
-
         do {
-            let response = try await service.recordRecommendationRejection(
+            let response = try await featureFactory.todayReceiptCommands.recordRecommendationRejection(
                 TodayRecommendationRejectionInput(
                     candidateID: sheetState.candidateID,
                     sourceCandidateID: sheetState.sourceCandidateID,

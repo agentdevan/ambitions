@@ -7,7 +7,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
         let request = makeRequest(text: "Shared note", source: .shareExtensionText)
 
-        try store.append(request)
+        try store.enqueueDurableRequest(request)
 
         XCTAssertEqual(try store.peek(), [request])
         XCTAssertEqual(try store.drain(), [request])
@@ -27,7 +27,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         )
         let service = DefaultExternalCreationImportService(store: store, commandExecutor: executor)
 
-        try store.append(
+        try store.enqueueDurableRequest(
             makeRequest(
                 text: "https://example.com/source",
                 source: .shareExtensionURL,
@@ -64,7 +64,7 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         )
         let service = DefaultExternalCreationImportService(store: store, commandExecutor: executor)
 
-        try store.append(
+        try store.enqueueDurableRequest(
             makeRequest(
                 text: "Turn this into an ambition",
                 source: .appIntent,
@@ -99,8 +99,8 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         let service = DefaultExternalCreationImportService(store: store, commandExecutor: executor)
         let request = makeRequest(text: "Only import this once", source: .appIntent)
 
-        try store.append(request)
-        try store.append(request)
+        try store.enqueueDurableRequest(request)
+        try store.enqueueDurableRequest(request)
 
         let result = await service.importPendingCreations(now: Date(timeIntervalSince1970: 1_712_692_800))
         let captures = try await repository.listCaptures()

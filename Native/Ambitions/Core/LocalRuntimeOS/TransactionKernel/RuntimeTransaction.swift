@@ -148,7 +148,7 @@ enum RuntimeTransactionObjectFacts {
         case .completeAction, .delayAction, .splitAction, .recoverAction, .markWaiting, .archiveItem:
             families.append(.closure)
             families.append(.receipt)
-        case .prepareExport, .performExport, .forgetMemory:
+        case .prepareExport, .performExport, .forgetMemory, .updateUserPreferences:
             families.append(.userSystem)
         case .askWhy, .dismissRecommendation:
             families.append(.proof)
