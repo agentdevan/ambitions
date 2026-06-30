@@ -447,6 +447,29 @@
         "Content-only Time object options inside approved VSP-01 shell authority. No shell mutation.",
         "Proof typography uses Inter due SF Pro Figma PNG export issue; SwiftUI remains system-font aligned."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "196:93",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-04 - PART 02 - F Apple-Native Life Calendar selected direction - R1",
+      "vsp_id": "VSP-04",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selection-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selected-crop-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-04-part-02-F-apple-native-life-calendar-selection-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-04-part-02-F-apple-native-life-calendar-selection-R1.md",
+      "notes": [
+        "Owner selected F Apple-Native Life Calendar as the VSP-04 Part 02 direction for candidate-package buildout.",
+        "Yellow direction-selection evidence only. Not final owner approval, Visual Green, source implementation, device proof, or accessibility conformance.",
+        "Content-only Time object selection inside approved VSP-01 shell authority. No shell mutation.",
+        "Next gate is the complete VSP-04/F candidate package."
+      ]
     }
   ]
 }

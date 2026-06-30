@@ -1343,6 +1343,21 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow exploration and owner-selection routing only. Does not prove owner approval, SwiftUI parity, Visual Green, source implementation, device behavior, runtime behavior, or accessibility conformance.",
       "notes": "Six VSP-04 Part 02 native month Life Calendar options were built in Figma at node 186:93. This supersedes Part 01 as the current owner-selection board but does not approve implementation."
+    },
+    {
+      "proof_id": "vsp-04-owner-selection-part-02-f",
+      "vsp_id": "VSP-04",
+      "proof_type": "owner_selection",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-04-part-02-F-apple-native-life-calendar-selection-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selection-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selected-crop-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow direction-selection evidence only. Does not satisfy VSP-04 final owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, or accessibility conformance.",
+      "notes": "Owner selected F Apple-Native Life Calendar on 2026-06-30 as the VSP-04 Part 02 direction for candidate-package buildout. The next gate is the complete VSP-04/F candidate package."
     }
   ]
 }

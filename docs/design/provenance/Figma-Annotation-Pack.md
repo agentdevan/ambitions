@@ -55,13 +55,13 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-04 provenance - Time / Native Month Life Calendar
-Frame naming recommendation: EXPLORATION - VSP-04 - PART 02 - Native Month Life Calendar options - R1
+Frame naming recommendation: CANDIDATE - VSP-04 - PART 02 - F Apple-Native Life Calendar selected direction - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Surfaces/Time/TimeSurface.swift, Native/Ambitions/Surfaces/Time/TimeObjectView.swift, Native/Ambitions/Surfaces/Time/TimeAccessibility.swift
 Allowed implementation area: Native/Ambitions/Surfaces/Time, Native/Ambitions/Core/Time, Native/Ambitions/Core/LocalRuntimeOS/TimeEngine, Native/Ambitions/DesignSystem/ProductObjects, Native/Ambitions/Rendering/CanvasPrimitives, Sources/Components
 Forbidden implementation area: Native/Ambitions/Stage shell mutations, calendar-clone-only root pattern, top-level stale planning IA, unproven external calendar dependency for core value, Today-owned day timeline duplication as Time root
 Proof ceiling: Yellow
-Missing proof: owner direction selection, owner approval, live SwiftUI Time parity screenshot, device screenshot, manual accessibility matrix, reflow/protection runtime proof, owner selection for Part 02 primary direction, complete VSP-04 candidate package for selected Part 02 direction, VoiceOver month summary proof, Dynamic Type month-grid stress proof, Reduce Motion static reflow marker proof
+Missing proof: owner approval, live SwiftUI Time parity screenshot, device screenshot, manual accessibility matrix, reflow/protection runtime proof, complete VSP-04 candidate package for selected Part 02 direction, VoiceOver month summary proof, Dynamic Type month-grid stress proof, Reduce Motion static reflow marker proof
 Linear mirror: AMB-1483 (Needs Repair)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
