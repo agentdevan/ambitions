@@ -110,6 +110,13 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-crop-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-launch-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-options-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-a-lifeshape-field-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-b-protected-time-weave-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-c-day-night-tide-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-d-time-loom-meridian-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-e-capacity-topography-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-f-aperture-calendar-field-r1.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Time/TimeSurface.swift
 - Native/Ambitions/Surfaces/Time/TimeObjectView.swift
@@ -211,7 +218,7 @@ Candidate components:
 - `SourceAtlas boundary primitives` (`external_boundary`) - `Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift` - proof: `source_only`
 Known previews/tests/quality files:
 - Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift
-- Native/AmbitionsTests/Runtime/SourceAtlasOfflineNoAccountScenarioTests.swift
+- Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift
 - Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundaryTests.swift
 - Native/Ambitions/Quality/ForbiddenLanguageAudit.swift
 - scripts/ambitions-local-first-boundary-scan.py

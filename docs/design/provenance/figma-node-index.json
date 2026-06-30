@@ -246,6 +246,33 @@
     },
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "182:93",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-04 - PART 01 - Time LifeShape root object options - R1",
+      "vsp_id": "VSP-04",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-options-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-a-lifeshape-field-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-b-protected-time-weave-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-c-day-night-tide-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-d-time-loom-meridian-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-e-capacity-topography-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-f-aperture-calendar-field-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-04-part-01-time-lifeshape-root-object-options-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "present",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-04-part-01-time-lifeshape-root-object-options-R1.md",
+      "notes": [
+        "Six content-only VSP-04 Part 01 root object options for owner selection.",
+        "VSP-04 remains Needs Repair / Yellow until owner selects a direction and a full candidate package is built and approved.",
+        "No shell mutation, owner approval, Visual Green, source implementation, device proof, runtime proof, or accessibility conformance is claimed."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
       "node_id": "14:543",
       "node_id_status": "known",
       "frame_name": "CANDIDATE - VSP-05 - Capture Open Field Composer hero - R1",

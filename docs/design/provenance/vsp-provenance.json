@@ -463,12 +463,21 @@
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-crop-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-launch-board-r1.png"
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-launch-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-options-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-a-lifeshape-field-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-b-protected-time-weave-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-c-day-night-tide-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-d-time-loom-meridian-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-e-capacity-topography-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-f-aperture-calendar-field-r1.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md",
-          "docs/design/targets/time/lifeshape_field_visual_target.md"
+          "docs/design/targets/time/lifeshape_field_visual_target.md",
+          "docs/design/provenance/figma-frames/VSP-04-part-01-time-lifeshape-root-object-options-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -555,9 +564,12 @@
       },
       "known_risks": [
         "Can drift into a generic calendar clone.",
-        "External calendar behavior cannot become required for offline core value."
+        "External calendar behavior cannot become required for offline core value.",
+        "Part 01 options need owner selection before candidate package buildout.",
+        "A selected option must not be synthesized with other directions unless explicitly scoped as a new candidate pass."
       ],
       "missing_evidence": [
+        "owner direction selection",
         "owner approval",
         "live SwiftUI Time parity screenshot",
         "device screenshot",
@@ -570,7 +582,8 @@
         "No runtime/device/accessibility proof."
       ],
       "notes": [
-        "LifeShape-related source names are internal/source provenance and not top-level user IA."
+        "LifeShape-related source names are internal/source provenance and not top-level user IA.",
+        "Part 01 root object options at Figma node 182:93 are Yellow exploration evidence only and do not approve source implementation."
       ]
     },
     {
@@ -987,11 +1000,11 @@
         "known_component_candidates": [
           "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
           "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasBoundary.swift",
-          "Native/Ambitions/Core/Runtime/SourceAtlasLocalCompositionFallback.swift"
+          "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalCompositionFallback.swift"
         ],
         "known_tests": [
           "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
-          "Native/AmbitionsTests/Runtime/SourceAtlasOfflineNoAccountScenarioTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift",
           "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundaryTests.swift"
         ],
         "known_preview_or_quality_files": [

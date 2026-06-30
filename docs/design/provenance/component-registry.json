@@ -396,7 +396,7 @@
       ],
       "known_tests": [
         "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
-        "Native/AmbitionsTests/Runtime/SourceAtlasOfflineNoAccountScenarioTests.swift",
+        "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift",
         "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundaryTests.swift"
       ],
       "known_previews": [],

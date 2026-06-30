@@ -469,6 +469,26 @@
       "notes": "Candidate Figma evidence for Time / LifeShape Week."
     },
     {
+      "proof_id": "vsp-04-figma-exploration-part-01",
+      "vsp_id": "VSP-04",
+      "proof_type": "figma_exploration",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-04-part-01-time-lifeshape-root-object-options-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-options-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-a-lifeshape-field-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-b-protected-time-weave-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-c-day-night-tide-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-d-time-loom-meridian-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-e-capacity-topography-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-part-01-lifeshape-options-r1/vsp-04-part-01-option-f-aperture-calendar-field-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow exploration and owner-selection routing only. Does not prove owner approval, SwiftUI parity, Visual Green, source implementation, device behavior, runtime behavior, or accessibility conformance.",
+      "notes": "Six VSP-04 Part 01 Time root object options were built in Figma at node 182:93. VSP-04 remains Needs Repair until owner selects a direction and a complete candidate package is built."
+    },
+    {
       "proof_id": "vsp-04-owner-approval",
       "vsp_id": "VSP-04",
       "proof_type": "owner_approval",
