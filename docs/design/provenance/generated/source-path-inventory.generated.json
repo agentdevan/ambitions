@@ -5835,6 +5835,154 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 72,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/CapacityEnvelopeEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 130,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ConflictProposalEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 189,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ConstraintEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 134,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/LifeCalendarStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 254,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PlacementEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 243,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/PriorityPlacementPolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 453,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 51,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/ProtectedTimeEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 46,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecoveryWindowEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 89,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/RecurrenceEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 88,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TemporalMath.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 230,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeBlockGraph.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 134,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TimeEngine/TimeEngineRuntimeTrace.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-05",
@@ -7493,18 +7641,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 243,
-      "path": "Native/Ambitions/Core/Runtime/PriorityPlacementPolicy.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-07"
       ],
       "exists": true,
@@ -7523,18 +7659,6 @@
       "kind": "native_source",
       "line_count": 62,
       "path": "Native/Ambitions/Core/Runtime/ProofLedger.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 453,
-      "path": "Native/Ambitions/Core/Runtime/ProtectedStepPlacementPolicy.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -7795,7 +7919,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 343,
+      "line_count": 335,
       "path": "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService+Recurring.swift"
     },
     {
@@ -18464,6 +18588,42 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 166,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/PriorityPlacementPolicyTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 188,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/ProtectedStepPlacementPolicyTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 169,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TimeEngine/TimeEngineTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-07",
@@ -19302,30 +19462,6 @@
       "kind": "test",
       "line_count": 261,
       "path": "Native/AmbitionsTests/Runtime/PressureEngineTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 166,
-      "path": "Native/AmbitionsTests/Runtime/PriorityPlacementPolicyTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 188,
-      "path": "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -21837,7 +21973,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 420,
+      "line_count": 423,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -21921,7 +22057,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1770,
+  "entry_count": 1782,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

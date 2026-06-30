@@ -26,14 +26,14 @@ struct TimeFieldUndoResult: Sendable {
 
 struct TimeFieldMutationCoordinator: Sendable {
     let runtime: PrivateLifeRuntime
-    let protectedPlacementPolicy: ProtectedStepPlacementPolicy
+    let placementEngine: PlacementEngine
 
     init(
         runtime: PrivateLifeRuntime = PrivateLifeRuntime(),
-        protectedPlacementPolicy: ProtectedStepPlacementPolicy = ProtectedStepPlacementPolicy()
+        placementEngine: PlacementEngine = PlacementEngine()
     ) {
         self.runtime = runtime
-        self.protectedPlacementPolicy = protectedPlacementPolicy
+        self.placementEngine = placementEngine
     }
 
     func perform(
@@ -67,11 +67,11 @@ struct TimeFieldMutationCoordinator: Sendable {
             actor: actor,
             explicitProtectedPlacementApproval: explicitProtectedPlacementApproval
         )
-        if let decision = protectedPlacementPolicy.evaluate(
+        if let decision = placementEngine.evaluate(
             command: command,
             context: CommandExecutionContext(now: now, actor: actor, sourceSurface: "Time")
-        ), decision.kind != .allowed {
-            throw TimeFieldMutationError.protectedPlacementRequiresApproval(decision)
+        ), decision.requiresReviewBeforeMutation {
+            throw TimeFieldMutationError.protectedPlacementRequiresApproval(decision.protectedPlacementDecision)
         }
         let timeMutation = try TimeMutation.make(command: command, beforeProjection: visibleProjection)
         guard let runtimeMutation = runtime.mutation(

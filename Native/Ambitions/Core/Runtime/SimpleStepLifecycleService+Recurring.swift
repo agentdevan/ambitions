@@ -296,31 +296,29 @@ extension SimpleStepLifecycleService {
               goal.state != .paused,
               step.state != .cancelled,
               step.isRepeatable || step.type == .recurringRoutine,
-              var cursor = date(from: firstScheduledAt) else {
+              let cursor = date(from: firstScheduledAt) else {
             return []
         }
 
-        let cadenceDays = TimeRitualGoalSemantics.cadenceDays(goal: goal, step: step)
-        while cursor < start {
-            cursor = calendar.date(byAdding: .day, value: cadenceDays, to: cursor) ?? start
-        }
-
-        var occurrences: [RecurringStepOccurrence] = []
-        while occurrences.count < limit {
-            let scheduledAt = iso.string(from: cursor)
-            occurrences.append(
-                RecurringStepOccurrence(
-                    id: occurrenceID(stepID: step.id, scheduledAt: scheduledAt),
-                    goalID: goal.id,
-                    stepID: step.id,
-                    scheduledAt: scheduledAt,
-                    title: step.title,
-                    isPaused: false
-                )
+        let seed = TimeRecurrenceSeed(
+            id: step.id,
+            title: step.title,
+            startsAt: cursor,
+            rule: TimeRecurrenceRule(cadenceDays: TimeRitualGoalSemantics.cadenceDays(goal: goal, step: step)),
+            isPaused: false,
+            localOnly: true
+        )
+        return RecurrenceEngine().occurrences(seed: seed, from: start, limit: limit).map { occurrence in
+            let scheduledAt = iso.string(from: occurrence.scheduledAt)
+            return RecurringStepOccurrence(
+                id: occurrenceID(stepID: step.id, scheduledAt: scheduledAt),
+                goalID: goal.id,
+                stepID: step.id,
+                scheduledAt: scheduledAt,
+                title: step.title,
+                isPaused: false
             )
-            cursor = calendar.date(byAdding: .day, value: cadenceDays, to: cursor) ?? cursor
         }
-        return occurrences
     }
 
     private static func occurrenceID(stepID: String, scheduledAt: String) -> String {
@@ -332,11 +330,5 @@ extension SimpleStepLifecycleService {
 
     private static func date(from value: String) -> Date? {
         iso.date(from: value) ?? ISO8601DateFormatter().date(from: value)
-    }
-
-    private static var calendar: Calendar {
-        var calendar = Calendar(identifier: .gregorian)
-        calendar.timeZone = TimeZone(secondsFromGMT: 0) ?? .current
-        return calendar
     }
 }
