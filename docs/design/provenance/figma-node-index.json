@@ -50,6 +50,30 @@
     },
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "152:93",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-02 - Rail-Aperture State Matrix - R1",
+      "vsp_id": "VSP-02",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-matrix-r1-readable-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-calm-default-r1-readable.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-reduce-motion-r1-readable.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-02-rail-aperture-state-matrix-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-02---today-reality-window",
+      "notes": [
+        "R1 state matrix extends the selected R6 rail-aperture direction across calm, overloaded, protected, waiting/blocked, moved/still-counts, not-needed/recovery, Dynamic Type stress, and Reduce Motion static-proof states.",
+        "State matrix remains content-only inside VSP-01 shell authority and does not mutate shell chrome.",
+        "Readable proof uses temporary Inter clone because current Figma PNG export drops SF Pro/system-font text; the clone was removed after export.",
+        "No Visual Green, source implementation, device proof, runtime proof, or accessibility conformance is claimed."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
       "node_id": "14:171",
       "node_id_status": "known",
       "frame_name": "CANDIDATE - VSP-03 - Goals Life Area Atlas hero - R1",

@@ -150,11 +150,16 @@
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-board-r6.png",
           "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6.png",
-          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6-readable-export.png"
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6-readable-export.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-matrix-r1-readable-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-calm-default-r1-readable.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-reduce-motion-r1-readable.png"
         ],
         "evidence_paths": [
           "docs/design/provenance/figma-frames/VSP-02-rail-attached-time-bands-current-aperture-R6.md",
           "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-02-rail-aperture-state-matrix-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/manifest.md",
           "docs/design/provenance/figma-frames/VSP-02-today-reality-window-R2.md",
           "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md"
         ],
@@ -246,6 +251,7 @@
       "known_risks": [
         "Can drift into a dashboard, task list, calendar clone, KPI panel, or card-feed root pattern if analytics are detached from the timeline object.",
         "R6 is a Figma-selected direction and proof-bounded candidate; it is not runtime behavior proof or SwiftUI implementation proof.",
+        "R1 state matrix is Figma target evidence only; it does not prove live SwiftUI Dynamic Type, VoiceOver, Reduce Motion, haptics, or runtime mutation behavior.",
         "The current SwiftUI source has horizontal RealityMeridianTimeBand support, but the selected vertical rail-attached day bands and Current Aperture require a new or repaired Today primitive.",
         "Figma screenshot export drops SF Pro/system-font text; readable proof uses a temporary Inter-font export clone while the live candidate remains system-font aligned."
       ],
@@ -253,7 +259,6 @@
         "owner approval for implementation handoff",
         "live SwiftUI Today parity screenshot",
         "device screenshot",
-        "R6 full state matrix beyond the selected base viewport",
         "manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics",
         "runtime mutation/proof receipt evidence"
       ],
@@ -270,7 +275,9 @@
         "R6 selected direction is Rail-Attached Time Bands as the base with Current Aperture behavior for the centered current step.",
         "R6 remains content-only inside VSP-01 shell authority and may not mutate shell chrome, root IA, dock, Context Crown, Capture/Search placement, safe-area shell, or route depth.",
         "R6 Figma repair moved the current-time cursor right of the rail and shortened the time label to avoid marker/label collision.",
-        "Readable R6 screenshot proof uses a temporary Inter-font export clone because current Figma screenshot export drops SF Pro/system-font text. This is screenshot-proof scaffolding only; SwiftUI should remain system-font aligned."
+        "Readable R6 screenshot proof uses a temporary Inter-font export clone because current Figma screenshot export drops SF Pro/system-font text. This is screenshot-proof scaffolding only; SwiftUI should remain system-font aligned.",
+        "R1 state matrix at Figma node 152:93 extends the selected R6 rail-aperture direction across calm, overloaded, protected, waiting/blocked, moved/still-counts, not-needed/recovery, Dynamic Type stress, and Reduce Motion static-proof states.",
+        "R1 keeps proof and analytics integrated in the Today condition ribbon instead of detached KPI or inspection panels."
       ]
     },
     {

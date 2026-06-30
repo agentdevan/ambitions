@@ -35,7 +35,6 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 
 - Dynamic Type
 - Increase Contrast
-- R6 full state matrix beyond the selected base viewport
 - Reduce Motion
 - Reduce Transparency
 - VoiceOver

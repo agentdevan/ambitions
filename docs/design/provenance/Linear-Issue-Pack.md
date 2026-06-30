@@ -54,6 +54,7 @@ Rollback plan:
 
 Acceptance summary:
 - Current selected direction is Rail-Attached Time Bands as the base with Current Aperture behavior for the centered current step.
+- R1 state matrix at Figma node 152:93 extends the selected R6 direction across calm, overloaded, protected, waiting/blocked, moved/still-counts, not-needed/recovery, Dynamic Type stress, and Reduce Motion static-proof states.
 - Today remains Reality Window / Start here content and replaces schedule/reminder utility through a living vertical day rail, not cards on a background.
 - Analytics, risk, open time, drive, and proof signals must be integrated into the viewport object, not detached KPI dashboard rows.
 - No dashboard, task list, card feed, calendar clone, Capture root, Motion root, or shell mutation.

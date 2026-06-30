@@ -129,12 +129,17 @@
         "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-board-r6.png",
         "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6.png",
         "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6-readable-export.png",
+        "docs/design/provenance/figma-frames/VSP-02-rail-aperture-state-matrix-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-matrix-r1-readable-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-calm-default-r1-readable.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-reduce-motion-r1-readable.png",
         "docs/design/provenance/figma-frames/VSP-02-today-reality-window-R2.md",
         "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md"
       ],
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow/Ready For Review candidate evidence and owner-review routing only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, runtime behavior, or accessibility conformance.",
-      "notes": "R6 selected direction evidence for Rail-Attached Time Bands + Current Aperture. R2 remains historical lineage; R1 was reclassified as failure evidence. Readable R6 PNG uses a temporary Inter-font export clone because system-font text is dropped by current Figma export."
+      "notes": "R6 selected direction evidence for Rail-Attached Time Bands + Current Aperture plus R1 state matrix evidence at Figma node 152:93. R2 remains historical lineage; original R1 was reclassified as failure evidence. Readable PNGs use temporary Inter-font export clones because system-font text is dropped by current Figma export."
     },
     {
       "proof_id": "vsp-02-owner-approval",
