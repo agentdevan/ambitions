@@ -1558,32 +1558,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 36,
-      "path": "Native/Ambitions/Core/Domain/CaptureRouteCommandMapping.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 132,
-      "path": "Native/Ambitions/Core/Domain/CaptureRouteGraph.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-05",
         "VSP-07"
@@ -3908,6 +3882,175 @@
       "kind": "native_source",
       "line_count": 73,
       "path": "Native/Ambitions/Core/Domain/YouPlanningDefaultsModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 278,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureAttachmentVault.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 136,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureClassifier.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 142,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureCorrectionLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 204,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDirectLookupIndex.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 113,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureDraftStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 206,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureIntakeJournal.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 161,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CapturePromotionTransaction.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 36,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteCommandMapping.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 132,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraph.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 67,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphFileStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 138,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphRuntimeTrace.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 50,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphServices.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 170,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteResolver.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6754,7 +6897,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 133,
+      "line_count": 134,
       "path": "Native/Ambitions/Core/Runtime/AmbitionsRuntimeFactory.swift"
     },
     {
@@ -6929,25 +7072,26 @@
         "VSP-03",
         "VSP-04",
         "VSP-05",
+        "VSP-07",
         "VSP-09"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 397,
+      "line_count": 451,
       "path": "Native/Ambitions/Core/Runtime/CaptureService+03-DefaultCaptureService.swift"
     },
     {
       "candidate_vsp_ids": [
-        "VSP-03",
         "VSP-04",
         "VSP-05",
-        "VSP-07"
+        "VSP-07",
+        "VSP-09"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 380,
+      "line_count": 393,
       "path": "Native/Ambitions/Core/Runtime/CaptureService+04-DefaultCaptureService.swift"
     },
     {
@@ -16845,19 +16989,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 21,
-      "path": "Native/AmbitionsTests/Domain/CaptureRouteCommandMappingTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -18094,6 +18225,35 @@
       "kind": "test",
       "line_count": 47,
       "path": "Native/AmbitionsTests/LifeShapeBucketizerTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 21,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteCommandMappingTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 242,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/CaptureRouteGraph/CaptureRouteGraphTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -21973,7 +22133,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 423,
+      "line_count": 426,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -22057,7 +22217,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1782,
+  "entry_count": 1794,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

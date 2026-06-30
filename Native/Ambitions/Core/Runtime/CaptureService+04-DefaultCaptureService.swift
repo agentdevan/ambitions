@@ -1,6 +1,145 @@
 import Foundation
 
 extension DefaultCaptureService {
+    func prepareCaptureRouteGraphDecision(
+        captureID: String,
+        rawText: String,
+        sourceType: CaptureSourceType?,
+        sourceSurface: String,
+        timestamp: String,
+        requestedKind: CaptureKind?,
+        requestedRoute: CaptureRoute?,
+        deadlineText: String?,
+        contextLensHint: NowContextLens?,
+        priorityHints: CapturePriorityHints,
+        linkedGoalID: String?,
+        scopeItemHint: String?,
+        proofIntent: String?
+    ) async throws -> CaptureRouteGraphPreparation {
+        let intakeReceipt = try await captureRouteGraph.intakeJournal.append(
+            CaptureIntakeJournalAppendRequest(
+                captureID: captureID,
+                rawText: rawText,
+                sourceType: sourceType,
+                sourceSurface: sourceSurface,
+                receivedAt: timestamp,
+                deadlineIntent: deadlineText,
+                goalIntent: linkedGoalID,
+                stepIntent: scopeItemHint,
+                proofIntent: proofIntent,
+                privacy: .privateUserText
+            )
+        )
+        guard let intakeRecord = try await captureRouteGraph.intakeJournal.record(id: intakeReceipt.journalRecordID) else {
+            throw CaptureIntakeJournalError.missingDurableReceipt(intakeReceipt.journalRecordID)
+        }
+        let decision = try captureRouteGraph.routeResolver.resolve(
+            CaptureRouteResolveRequest(
+                intakeReceipt: intakeReceipt,
+                rawText: rawText,
+                requestedKind: requestedKind,
+                requestedRoute: requestedRoute,
+                deadlineText: deadlineText,
+                contextLensHint: contextLensHint,
+                priorityHints: priorityHints,
+                sourceType: sourceType,
+                sourceSurface: sourceSurface
+            )
+        )
+        let draft = try await captureRouteGraph.draftStore.upsert(
+            intake: intakeRecord,
+            decision: decision,
+            updatedAt: timestamp
+        )
+        let lookupEntry = try await captureRouteGraph.directLookupIndex.index(
+            intake: intakeRecord,
+            draft: draft,
+            decision: decision,
+            updatedAt: timestamp
+        )
+        return CaptureRouteGraphPreparation(
+            intakeReceipt: intakeReceipt,
+            intakeRecord: intakeRecord,
+            decision: decision,
+            draft: draft,
+            lookupEntry: lookupEntry
+        )
+    }
+
+    func durableIntakeReceipt(for capture: Capture, now: Date) async throws -> CaptureIntakeJournalReceipt {
+        if let record = try await captureRouteGraph.intakeJournal.latestRecord(captureID: capture.id) {
+            return CaptureIntakeJournalReceipt(record: record, acknowledgedAfterDurableWrite: true)
+        }
+        return try await captureRouteGraph.intakeJournal.append(
+            CaptureIntakeJournalAppendRequest(
+                captureID: capture.id,
+                rawText: capture.rawText,
+                sourceType: capture.sourceType,
+                sourceSurface: sourceSurface(for: capture.sourceType),
+                receivedAt: DomainTimestamp.string(from: now),
+                deadlineIntent: capture.deadlineText,
+                goalIntent: capture.linkedGoalID ?? capture.goalRelationship?.goalID,
+                stepIntent: capture.scopeItemHint,
+                proofIntent: capture.route == .proofItem || capture.route == .goalAttachment ? capture.rawText : nil,
+                privacy: capture.privacy
+            )
+        )
+    }
+
+    func recordRouteCorrection(
+        from existing: Capture,
+        to updated: Capture,
+        request: CaptureRouteUpdateRequest,
+        occurredAt: String
+    ) async throws {
+        let lookupEntry = try await captureRouteGraph.directLookupIndex.updateRoute(
+            captureID: updated.id,
+            route: updated.route,
+            kind: updated.kind,
+            updatedAt: occurredAt
+        )
+        _ = try await captureRouteGraph.correctionLedger.append(
+            CaptureCorrectionLedgerRequest(
+                captureID: updated.id,
+                previousRoute: existing.route,
+                correctedRoute: updated.route,
+                previousKind: existing.kind,
+                correctedKind: updated.kind,
+                reason: request.assumptionSummary ?? "User corrected capture route.",
+                occurredAt: occurredAt,
+                intakeRecordID: lookupEntry?.intakeRecordID,
+                decisionID: lookupEntry?.decisionID,
+                privacy: updated.privacy
+            )
+        )
+    }
+
+    func preparePromotionTransaction(
+        intakeReceipt: CaptureIntakeJournalReceipt,
+        captureID: String,
+        destination: CapturePromotionDestination,
+        targetObjectIDs: [String],
+        occurredAt: String,
+        summary: String,
+        privacy: EventLedgerPrivacyClassification
+    ) async throws {
+        _ = try await captureRouteGraph.promotionTransaction.prepare(
+            CapturePromotionTransactionRequest(
+                intakeReceipt: intakeReceipt,
+                captureID: captureID,
+                destination: destination,
+                targetObjectIDs: targetObjectIDs,
+                occurredAt: occurredAt,
+                summary: summary,
+                privacy: privacy
+            )
+        )
+    }
+
+    func sourceSurface(for sourceType: CaptureSourceType?) -> String {
+        sourceType?.title ?? "Capture"
+    }
+
     func createStepIfNeeded(
         captureID: String,
         rawText: String,
@@ -218,138 +357,12 @@ extension DefaultCaptureService {
     }
 }
 
-struct CaptureClassification {
-    let kind: CaptureKind
-    let route: CaptureRoute
-    let triageStatus: CaptureTriageStatus
-    let commitmentKind: NowCommitmentKind?
-    let deadlineText: String?
-    let deadlineKind: CaptureDeadlineKind
-    let contextLensHint: NowContextLens?
-    let priorityHints: CapturePriorityHints
-    let assumptionSummary: String
-}
-
-enum CaptureClassifier {
-    static func classify(
-        text: String,
-        requestedKind: CaptureKind?,
-        requestedRoute: CaptureRoute?,
-        deadlineText: String?,
-        contextLensHint: NowContextLens?,
-        priorityHints: CapturePriorityHints
-    ) -> CaptureClassification {
-        let lowercased = text.lowercased()
-        let inferredDeadline = deadlineText ?? deadlinePhrase(in: lowercased, original: text)
-        let hasDeadline = inferredDeadline != nil || lowercased.contains(" by ") || lowercased.contains("before ")
-        let looksWaiting = lowercased.contains("waiting on") || lowercased.contains("blocked by") || lowercased.contains("follow up")
-        let looksOptional = lowercased.contains("someday") || lowercased.contains("maybe") || lowercased.contains("optional")
-        let looksDeliverable = lowercased.contains("add another") || lowercased.contains("deliverable") || lowercased.contains("song")
-        let looksCommitment = lowercased.contains("send") || lowercased.contains("create") || lowercased.contains("finish") || lowercased.contains("call") || lowercased.contains("email")
-        let inferredKind: CaptureKind
-        let inferredRoute: CaptureRoute
-
-        if let requestedKind {
-            inferredKind = requestedKind
-            inferredRoute = requestedRoute ?? route(for: requestedKind)
-        } else if looksWaiting {
-            inferredKind = .waitingItem
-            inferredRoute = .waiting
-        } else if looksOptional {
-            inferredKind = .optionalSomeday
-            inferredRoute = .optionalSomeday
-        } else if looksDeliverable {
-            inferredKind = .deliverableSeed
-            inferredRoute = .deliverableSeed
-        } else if hasDeadline, looksCommitment {
-            inferredKind = .oneTimeCommitment
-            inferredRoute = .timeSeed
-        } else if hasDeadline {
-            inferredKind = .deadlineTask
-            inferredRoute = .timeSeed
-        } else if looksCommitment {
-            inferredKind = .oneTimeCommitment
-            inferredRoute = .timeSeed
-        } else {
-            inferredKind = .raw
-            inferredRoute = .captureInbox
-        }
-
-        let route = requestedRoute ?? inferredRoute
-        let context = contextLensHint ?? (lowercased.contains("spreadsheet") || lowercased.contains("kaylee") || lowercased.contains("client") ? .work : nil)
-        let deadlineLevel: NowPressureLevel? = hasDeadline ? .high : priorityHints.deadline
-        let mergedHints = CapturePriorityHints(
-            importance: priorityHints.importance,
-            urgency: priorityHints.urgency ?? (hasDeadline ? .elevated : nil),
-            consequence: priorityHints.consequence,
-            deadline: deadlineLevel,
-            effort: priorityHints.effort,
-            contextFit: priorityHints.contextFit,
-            optionalSomeday: inferredKind == .optionalSomeday || priorityHints.optionalSomeday,
-            passive: inferredKind == .optionalSomeday || priorityHints.passive,
-            goalSupporting: inferredKind == .goalSupportingTask || priorityHints.goalSupporting
-        )
-
-        return CaptureClassification(
-            kind: inferredKind,
-            route: route,
-            triageStatus: inferredKind == .raw ? .needsTriage : .assumedRoute,
-            commitmentKind: commitmentKind(for: inferredKind),
-            deadlineText: inferredDeadline,
-            deadlineKind: hasDeadline ? .hard : .none,
-            contextLensHint: context,
-            priorityHints: mergedHints,
-            assumptionSummary: assumption(for: inferredKind)
-        )
-    }
-
-    static func route(for kind: CaptureKind) -> CaptureRoute {
-        switch kind {
-        case .raw: .captureInbox
-        case .oneTimeCommitment, .deadlineTask: .timeSeed
-        case .goalSeed: .goalSeed
-        case .goalSupportingTask: .goalAttachment
-        case .deliverableSeed: .deliverableSeed
-        case .waitingItem: .waiting
-        case .optionalSomeday: .optionalSomeday
-        case .archiveItem: .archive
-        }
-    }
-
-    static func commitmentKind(for kind: CaptureKind) -> NowCommitmentKind? {
-        switch kind {
-        case .oneTimeCommitment, .deadlineTask: .oneTime
-        case .goalSupportingTask: .goalSupporting
-        case .waitingItem: .waiting
-        case .optionalSomeday: .optionalSomeday
-        case .raw, .goalSeed, .deliverableSeed, .archiveItem: nil
-        }
-    }
-
-    static func assumption(for kind: CaptureKind) -> String {
-        switch kind {
-        case .raw: "I left this as a raw capture because the route was not obvious."
-        case .oneTimeCommitment: "I treated this as a one-time commitment."
-        case .deadlineTask: "I treated this as deadline-bound work."
-        case .goalSeed: "I kept this as a possible goal seed."
-        case .goalSupportingTask: "I treated this as supporting a goal."
-        case .deliverableSeed: "I kept this as a deliverable seed."
-        case .waitingItem: "I treated this as waiting on someone or something."
-        case .optionalSomeday: "I parked this as optional or someday."
-        case .archiveItem: "I archived this capture."
-        }
-    }
-
-    static func deadlinePhrase(in lowercased: String, original: String) -> String? {
-        let markers = [" by ", " before ", " due "]
-        guard let marker = markers.first(where: { lowercased.contains($0) }),
-              let range = lowercased.range(of: marker) else {
-            return nil
-        }
-        let originalIndex = original.index(original.startIndex, offsetBy: lowercased.distance(from: lowercased.startIndex, to: range.upperBound))
-        let phrase = original[originalIndex...].trimmingCharacters(in: .whitespacesAndNewlines)
-        return phrase.isEmpty ? nil : phrase
-    }
+struct CaptureRouteGraphPreparation: Sendable, Equatable {
+    let intakeReceipt: CaptureIntakeJournalReceipt
+    let intakeRecord: CaptureIntakeJournalRecord
+    let decision: CaptureRouteDecision
+    let draft: CaptureDraftRecord
+    let lookupEntry: CaptureDirectLookupEntry
 }
 
 enum CaptureServiceError: LocalizedError {

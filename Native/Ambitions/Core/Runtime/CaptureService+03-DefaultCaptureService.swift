@@ -8,6 +8,7 @@ struct DefaultCaptureService: CaptureServicing {
     let capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)?
     let eventLedger: (any EventLedgerRepository)?
     let simpleStepLifecycleService: SimpleStepLifecycleService?
+    let captureRouteGraph: CaptureRouteGraphServices
     let idProvider: @Sendable () -> String
 
     init(
@@ -18,6 +19,7 @@ struct DefaultCaptureService: CaptureServicing {
         capturePromotionUnitOfWork: (any CapturePromotionUnitOfWorking)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
         simpleStepLifecycleService: SimpleStepLifecycleService? = nil,
+        captureRouteGraph: CaptureRouteGraphServices = .inMemory(),
         idProvider: @escaping @Sendable () -> String = { DomainIdentifier.prefixed("capture") }
     ) {
         self.repository = repository
@@ -27,6 +29,7 @@ struct DefaultCaptureService: CaptureServicing {
         self.capturePromotionUnitOfWork = capturePromotionUnitOfWork
         self.eventLedger = eventLedger
         self.simpleStepLifecycleService = simpleStepLifecycleService
+        self.captureRouteGraph = captureRouteGraph
         self.idProvider = idProvider
     }
 
@@ -37,15 +40,23 @@ struct DefaultCaptureService: CaptureServicing {
         }
 
         let timestamp = DomainTimestamp.string(from: now)
-        let classification = CaptureClassifier.classify(
-            text: trimmed,
+        let captureID = idProvider()
+        let routeGraphPreparation = try await prepareCaptureRouteGraphDecision(
+            captureID: captureID,
+            rawText: trimmed,
+            sourceType: request.sourceType,
+            sourceSurface: sourceSurface(for: request.sourceType),
+            timestamp: timestamp,
             requestedKind: request.kind,
             requestedRoute: request.route,
             deadlineText: request.deadlineText,
             contextLensHint: request.contextLensHint,
-            priorityHints: request.priorityHints
+            priorityHints: request.priorityHints,
+            linkedGoalID: request.linkedGoalID ?? request.goalRelationship?.goalID,
+            scopeItemHint: request.scopeItemHint,
+            proofIntent: request.route == .proofItem || request.route == .goalAttachment ? trimmed : nil
         )
-        let captureID = idProvider()
+        let classification = routeGraphPreparation.decision.classification
         let stepRouting: CaptureStepRoutingResult?
         if request.linkedGoalID == nil, request.goalRelationship?.goalID == nil {
             stepRouting = try await createStepIfNeeded(
@@ -57,6 +68,17 @@ struct DefaultCaptureService: CaptureServicing {
             )
         } else {
             stepRouting = nil
+        }
+        if let stepRouting {
+            try await preparePromotionTransaction(
+                intakeReceipt: routeGraphPreparation.intakeReceipt,
+                captureID: captureID,
+                destination: .step,
+                targetObjectIDs: [stepRouting.goalID, stepRouting.stepID],
+                occurredAt: timestamp,
+                summary: "Capture promoted into a local Step before capture persistence commit.",
+                privacy: routeGraphPreparation.intakeReceipt.privacy
+            )
         }
         let capture = Capture(
             id: captureID,
@@ -172,6 +194,9 @@ struct DefaultCaptureService: CaptureServicing {
         if request.route == .timeSeed {
             try await appendCaptureEvent(.commitmentRouted, capture: updated, occurredAt: timestamp)
         }
+        if request.userCorrection {
+            try await recordRouteCorrection(from: existing, to: updated, request: request, occurredAt: timestamp)
+        }
         return updated
     }
 
@@ -222,6 +247,17 @@ struct DefaultCaptureService: CaptureServicing {
             )
         } else {
             stepRouting = nil
+        }
+        if let stepRouting {
+            try await preparePromotionTransaction(
+                intakeReceipt: try await durableIntakeReceipt(for: existing, now: now),
+                captureID: existing.id,
+                destination: .step,
+                targetObjectIDs: [stepRouting.goalID, stepRouting.stepID],
+                occurredAt: DomainTimestamp.string(from: now),
+                summary: "Existing capture promoted into a local Step through Time routing.",
+                privacy: existing.privacy
+            )
         }
         return try await updateCaptureRoute(
             CaptureRouteUpdateRequest(
@@ -331,6 +367,15 @@ struct DefaultCaptureService: CaptureServicing {
                 recommendationExplanationIDs: existing.recommendationExplanationIDs,
                 now: now
             )
+            try await preparePromotionTransaction(
+                intakeReceipt: try await durableIntakeReceipt(for: existing, now: now),
+                captureID: existing.id,
+                destination: .goal,
+                targetObjectIDs: [goalID, prepared.draft.id],
+                occurredAt: DomainTimestamp.string(from: now),
+                summary: "Capture promoted into a goal through the local unit of work.",
+                privacy: updated.privacy
+            )
             let result = try await capturePromotionUnitOfWork.saveCapturePromotion(
                 CapturePromotionUnitOfWorkPayload(goal: goal, draft: prepared.draft, capture: updated),
                 id: "capture-promotion.\(existing.id).\(goalID).\(prepared.draft.id)",
@@ -368,6 +413,15 @@ struct DefaultCaptureService: CaptureServicing {
             correctionActions: existing.correctionActions,
             recommendationExplanationIDs: existing.recommendationExplanationIDs,
             now: now
+        )
+        try await preparePromotionTransaction(
+            intakeReceipt: try await durableIntakeReceipt(for: existing, now: now),
+            captureID: existing.id,
+            destination: .goal,
+            targetObjectIDs: [goalID],
+            occurredAt: DomainTimestamp.string(from: now),
+            summary: "Capture promoted into a goal through the local goal service.",
+            privacy: updated.privacy
         )
         try await repository.saveCaptures([updated])
         try await appendCaptureEvent(.captureTriaged, capture: updated, occurredAt: DomainTimestamp.string(from: now))

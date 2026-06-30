@@ -165,6 +165,9 @@ Current implementation evidence is narrower:
 - Source-present SyncContinuity source exists under `Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/`, including `LocalAuthoritativeSyncModel`, `CloudKitContinuityAdapter`, `SyncEnvelope`, `SyncEligibilityPolicy`, `AccountStateMachine`, `CausalMergeEngine`, `ConflictPolicyEngine`, `TombstoneSync`, and `SignOutDeleteResetCoordinator`.
 - The former `Core/Persistence` SyncCapability and CloudKit continuity owner files and the former `Core/Domain/Planning` LivingPlan continuity owner file were removed from those owners.
 - Focused simulator tests cover SyncContinuity owner files, old owner removal, local-device authority across unavailable account states, proof-backed envelope eligibility, private-graph payload denial, CloudKit zone preparation denial before proof, deterministic merge/conflict quarantine behavior, tombstone metadata propagation limits, sign-out cleanup retaining local data, and preserved account-state diagnostics.
+- Source-present CaptureRouteGraph foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/`, including `CaptureIntakeJournal`, `CaptureDraftStore`, `CaptureClassifier`, `CaptureRouteResolver`, `CaptureAttachmentVault`, `CapturePromotionTransaction`, `CaptureCorrectionLedger`, and `CaptureDirectLookupIndex`.
+- The former `Core/Domain` CaptureRouteGraph and CaptureRouteCommandMapping owner files were removed from that owner.
+- Focused simulator tests cover CaptureRouteGraph owner files, old owner removal, durable intake before classification, route-decision event traces, draft and direct-lookup indexing, attachment checksum/quarantine behavior, correction ledger writes, promotion transaction receipts, and DefaultCaptureService create/promotion routing through CaptureRouteGraph.
 - Remaining runtime and persistence scaffolding exists primarily under `Native/Ambitions/Core/Runtime/`, `Native/Ambitions/Core/Persistence/`, and `Native/Ambitions/Core/Domain/`.
 - `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until later implementation trains cover full cross-path replay, active app-wide storage consumption, full ObjectState migration beyond AppState, full app-wide side-effect outbox enforcement, app-wide PlanningEngine consumption across every goal/pathing/planning path, app-wide TimeEngine consumption across every scheduling/time/recovery/recurrence path, app-wide capacity/recovery/correction/projection invalidation ownership, app-wide privacy firewall/network-egress enforcement, executable migration/repair automation, app-wide diagnostics consumption or repair routing, app-wide SearchRecall consumption by every search or Memory Lens path, and production CloudKit continuity.
 - Current SwiftData persistence source is now owned by `ObjectStoreSwiftData`, but the app has not yet proven every app path consumes only the new storage tier split.
@@ -179,7 +182,7 @@ Unsupported implementation claims until future source proof exists:
 - every app path treats SwiftData only as the object store tier
 - SQLite/FTS-backed journal, projection, and search stores are active across all production mutation/read paths
 - every external side-effect path is fully outboxed with leases, retry, confirmation, and receipts
-- Capture intake is durably journaled before classification and promotion
+- every capture entrypoint, extension, widget/App Intent bridge, attachment flow, and direct repository fallback path is forced through the durable CaptureRouteGraph before classification/promotion
 - Source Atlas is a signed public-reference package manager
 - CloudKit continuity is approved or implemented as user-owned event-envelope sync
 - migration/repair/diagnostics prove runtime, privacy, release, or data-safety Green
@@ -386,9 +389,9 @@ Implementation truth: You source exists. Profile compatibility symbols may remai
 
 ### Capture
 
-Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`, `Native/Ambitions/Core/Domain/CaptureRouteGraph.swift`, `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, and `Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift`.
+Source-present evidence: `Native/Ambitions/Composer/Capture/CaptureSurface.swift`, `Native/Ambitions/Composer/Capture/CaptureAtmosphereComposer.swift`, `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/`, `Native/Ambitions/Projection/OverlayScenes/CaptureStageScene.swift`, and `Native/Ambitions/Projection/OverlayLenses/CaptureLens.swift`.
 
-Implementation truth: Capture source exists. Capture may still contain old route/screen assumptions. Product truth says Capture is the global typed route graph and full-screen Stage composer, not a root tab. Final global composer behavior remains unproven unless current proof exists.
+Implementation truth: Capture source exists. CaptureRouteGraph now has a source-present LocalRuntimeOS owner for durable intake, classification, route resolution, attachment staging, correction, direct lookup, and promotion receipts. Capture may still contain old route/screen assumptions outside that bounded source slice. Product truth says Capture is the global typed route graph and full-screen Stage composer, not a root tab. Final global composer behavior remains unproven unless current proof exists.
 
 ### Motion
 
