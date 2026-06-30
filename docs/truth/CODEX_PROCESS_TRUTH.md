@@ -30,6 +30,8 @@ Codex must prevent:
 - skipping validation
 - broad-editing the repo without a plan
 - adding hosted AI/cloud LLM dependencies
+- treating the LocalRuntimeOS target architecture as already implemented
+- bypassing the Command -> Event -> Projection -> Receipt -> Replay law for new meaningful runtime mutations
 - turning Ambitions Account work into private life graph backend work
 - sending private user data to R2/Source Atlas
 - treating batch docs as release proof
@@ -62,6 +64,8 @@ Codex must treat:
 - R2/Source Atlas as public/reference/freshness infrastructure only.
 - R2 is not a user-data backend and must never receive, store, infer, personalize from, or transmit private user life data.
 - Hosted AI services, external/cloud LLMs, and cloud model APIs as excluded from core architecture and not core app runtime dependencies.
+- New backend/runtime authority belongs under `Core/LocalRuntimeOS/` and must preserve the `Command -> Event -> Projection -> Receipt -> Replay` target law.
+- Current `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` source is implementation scaffolding unless future source proof migrates or proves the responsibility under `Core/LocalRuntimeOS/`.
 
 ---
 
@@ -136,6 +140,8 @@ Codex must not optimize for appearing done, broad diff volume, speculative imple
 
 Before editing, Codex must read truth files, inspect live source, identify task type, define narrow scope, list likely touched files, list validation commands, identify rollback, and identify hard-red risks. For work touching Life Capital, goal pathing, Future Steps, continuous adjustment, onboarding, reviews, Source Atlas composition, proof/progress transfer, automation, notifications, or scenario gates, Codex must also map the intended behavior to `PRODUCT_EXPERIENCE_CANON.md` and report which scenario gates are Existing, Partial, Missing, or Unknown.
 
+For LocalRuntimeOS, backend/runtime architecture, mutation, persistence substrate, projection, replay, side-effect, capture intake, privacy boundary, Source Atlas runtime boundary, sync continuity, migration, repair, or diagnostics work, Codex must start from Linear `AMB-1544` and the active leaf. As of 2026-06-30 the first active leaf is `AMB-1545`, which is canon/process tracking only; source movement belongs to later bounded leaves such as `AMB-1546` through `AMB-1552`.
+
 Codex must not broad-edit without scope, rewrite major canon unless explicitly authorized, mutate app behavior during docs/governance tasks unless scoped, create new runtime dependencies without approval, silently accept stale tests/scripts as active truth, or bulk update snapshots/proof artifacts to hide failures.
 
 ---
@@ -177,6 +183,7 @@ Stop and report Red when:
 - generated reports are treated as release proof
 - screenshot paths or source-string tests are treated as visual acceptance
 - Codex self-certifies Visual Green or Release Green
+- new meaningful runtime mutation authority is added outside `Core/LocalRuntimeOS/CommandSpine/`, `TransactionKernel/`, `EventJournal/`, `ProjectionEngine/`, and receipt/replay semantics without explicit scoped Yellow debt and a named follow-up issue
 
 ---
 

@@ -350,6 +350,14 @@ Motion = Stage/Motion behavior only
 
 Legacy/internal names that still appear in source or architecture inventory, including Reality Meridian, Constellation Atlas, LifeShape Field, Atmosphere Composer, Open Field, Motion Current, and User System Profile, are internal-only or compatibility names unless a future product canon explicitly promotes them. They must not appear as root surface labels, marketing names, persistent destinations, or user-facing proof of product depth.
 
+Backend/runtime architecture law:
+
+```text
+No meaningful Ambitions state changes except through Command -> Event -> Projection -> Receipt -> Replay.
+```
+
+As of Linear `AMB-1544` / `AMB-1545`, new backend/runtime authority belongs under `Core/LocalRuntimeOS/`. Existing source under `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` is implementation scaffolding and migration debt unless a later source train moves or proves the responsibility under `Core/LocalRuntimeOS/`. This tree names the target owner; it does not prove that the LocalRuntimeOS source, event journal, storage split, projection engine, replay system, side-effect outbox, privacy firewall, sync continuity, migration repair, or diagnostics implementation exists today.
+
 ```
 Ambitions/
   App/
@@ -422,25 +430,216 @@ Ambitions/
       DayBoundaryScheduler.swift
       RuntimeTickPolicy.swift
 
-    Runtime/
-      PrivateLifeRuntime.swift
-      RuntimeSnapshot.swift
-      RuntimeProjectionPipeline.swift
-      RecommendationEngine.swift
-      CapacityEngine.swift
-      ClosureEngine.swift
-      RecoveryEngine.swift
-      ProofLedger.swift
-      PrivacyBoundary.swift
-      RuntimeMutation.swift
-      RuntimeValidator.swift
+    LocalRuntimeOS/
+      RuntimeBoundary/
+        PrivateLifeRuntimeBoundary/
+        CapabilityMatrix/
+        NetworkEgressPolicy/
+        LocalOnlyMode/
+        AccountBoundary/
+        SourceAtlasBoundary/
 
-    Persistence/
-      SwiftDataModels/
-      Repositories/
-      Migrations/
-      LocalStore.swift
-      StoreHealthCheck.swift
+      CommandSpine/
+        AmbitionsCommand/
+        CommandEnvelope/
+        CommandCompiler/
+        CommandValidator/
+        CommandAuthorizer/
+        CommandIdempotencyKey/
+        CommandJournal/
+        CommandReducer/
+        CommandResult/
+        CommandReceiptFactory/
+        CommandReplayAdapter/
+
+      TransactionKernel/
+        RuntimeTransaction/
+        RuntimeTransactionCoordinator/
+        RuntimeMutationPlan/
+        RuntimeWriteSet/
+        RuntimeReadSet/
+        RuntimeCommitReceipt/
+        RuntimeRollbackPlan/
+        RuntimeConflictDetector/
+        RuntimeIdempotencyStore/
+
+      EventJournal/
+        RuntimeEvent/
+        RuntimeEventEnvelope/
+        RuntimeEventStore/
+        RuntimeEventCursor/
+        RuntimeEventCompactor/
+        RuntimeEventReplay/
+        RuntimeEventChecksum/
+        RuntimeCausalClock/
+        RuntimeTombstoneLedger/
+
+      ObjectState/
+        GoalThreadStore/
+        LifeAreaStore/
+        StepStore/
+        CaptureStore/
+        TimeBlockStore/
+        ClosureStore/
+        ProofStore/
+        ReceiptStore/
+        UserSystemStore/
+        AppStateStore/
+
+      ProjectionEngine/
+        ProjectionDefinition/
+        ProjectionCursor/
+        ProjectionInvalidation/
+        ProjectionMaterializer/
+        ProjectionChecksum/
+        TodayProjection/
+        GoalsProjection/
+        TimeProjection/
+        YouProjection/
+        SearchProjection/
+        WidgetProjection/
+        AppIntentProjection/
+        ReceiptProjection/
+        PrivacyProjection/
+
+      PrivateLifeRuntimeKernel/
+        DecisionKernel/
+        RecommendationKernel/
+        CapacityFitKernel/
+        RecoveryKernel/
+        ClosureKernel/
+        ProofKernel/
+        AdaptationKernel/
+        ExplanationKernel/
+        ReplayableDecisionTrace/
+        PersonalizationFactorLedger/
+
+      PlanningEngine/
+        PlanningGraph/
+        StepCandidateField/
+        GoalPathPlanner/
+        FreeFloatingStepPlanner/
+        PlanRepairEngine/
+        SmallerStepEngine/
+        DependencyResolver/
+        ProgressPreservationEngine/
+
+      TimeEngine/
+        LifeCalendarStore/
+        TimeBlockGraph/
+        ProtectedTimeEngine/
+        ConstraintEngine/
+        CapacityEnvelopeEngine/
+        RecurrenceEngine/
+        ConflictProposalEngine/
+        PlacementEngine/
+        RecoveryWindowEngine/
+        TemporalMath/
+
+      CaptureRouteGraph/
+        CaptureIntakeJournal/
+        CaptureDraftStore/
+        CaptureClassifier/
+        CaptureRouteResolver/
+        CaptureAttachmentVault/
+        CapturePromotionTransaction/
+        CaptureCorrectionLedger/
+        CaptureDirectLookupIndex/
+
+      TrustSystem/
+        EventLedger/
+        ActionReceiptHistory/
+        ProofLedger/
+        SourceRecordLedger/
+        EntityRevisionTombstones/
+        AuditTrail/
+        UndoLedger/
+        HistoryQueryEngine/
+
+      SearchRecall/
+        LocalSearchIndex/
+        FTSIndex/
+        SemanticLocalIndex/
+        ResultRanker/
+        FindActInspectContract/
+        SearchActionValidator/
+        SearchRebuildPipeline/
+
+      SideEffectSystem/
+        SideEffectOutbox/
+        SideEffectPolicyEngine/
+        NotificationOutbox/
+        EventKitOutbox/
+        ReminderOutbox/
+        WidgetRefreshOutbox/
+        AppIntentBridge/
+        ShareExtensionIntake/
+        ExternalReconciliation/
+
+      SyncContinuity/
+        LocalAuthoritativeSyncModel/
+        CloudKitContinuityAdapter/
+        SyncEligibilityPolicy/
+        SyncEnvelope/
+        CausalMergeEngine/
+        ConflictPolicyEngine/
+        TombstoneSync/
+        AccountStateMachine/
+        SignOutDeleteResetCoordinator/
+
+      SourceAtlas/
+        PublicPackRequestCompiler/
+        ManifestVerifier/
+        SignatureVerifier/
+        PublicPackCache/
+        FreshnessEngine/
+        LastKnownGoodStore/
+        R2GatewayClient/
+        PublicOnlyFirewall/
+        SourceAtlasProjection/
+
+      PrivacySecurity/
+        PrivacyClassifier/
+        RedactionEngine/
+        EgressFirewall/
+        ExportPolicy/
+        LocalAuthGate/
+        FileProtectionPolicy/
+        EncryptedBlobVault/
+        PrivacyManifestRuntimeMap/
+        SensitiveSurfacePolicy/
+
+      Storage/
+        EventStoreSQLite/
+        ObjectStoreSwiftData/
+        ProjectionStoreSQLite/
+        SearchStoreFTS/
+        BlobStoreFileSystem/
+        AppGroupSnapshotStore/
+        BackupStore/
+        MigrationStore/
+
+      MigrationRepair/
+        SchemaLedger/
+        MigrationDSL/
+        MigrationPlanner/
+        DryRunMigration/
+        PreMigrationBackup/
+        StoreInvariantChecker/
+        CorruptionQuarantine/
+        RuntimeDoctor/
+        RepairPlanEngine/
+        RestoreRollback/
+
+      Diagnostics/
+        LocalBackendHealth/
+        RuntimeTraceInspector/
+        ProjectionInspector/
+        CommandInspector/
+        PrivacyInspector/
+        SyncInspector/
+        StoreInspector/
+        PerformanceBudgetLedger/
 
     Permissions/
       PermissionState.swift
@@ -475,12 +674,6 @@ Ambitions/
       SearchStageScene.swift
       ClosureStageScene.swift
       InspectionStageScene.swift
-
-    Commands/
-      AmbitionsCommand.swift
-      CommandRouter.swift
-      CommandResult.swift
-      CommandValidation.swift
 
     Mutations/
       StageMutation.swift
@@ -671,6 +864,13 @@ Explicitly removed architecture:
 - ==Projection/SurfaceLenses/MotionLens.swift==
 - ==Projection/StageScenes/MotionStageScene.swift==
 - ==Scenarios/MotionScenarios.swift== as a top-level surface scenario
+
+Explicitly demoted backend/runtime architecture:
+
+- ==Core/Runtime/== as the final Private Life Runtime owner
+- ==Core/Persistence/== as the final local backend substrate owner
+- ==Projection/Commands/== as the final command spine owner
+- direct repository/service mutation paths outside `Core/LocalRuntimeOS/CommandSpine/`, `TransactionKernel/`, `EventJournal/`, `ProjectionEngine/`, `Receipt`, and `Replay` semantics
 
 ---
 

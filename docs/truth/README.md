@@ -88,7 +88,7 @@ Retained non-source material is intentionally small:
 - docs-local Figma/UI production gate skills under `docs/skills/`, subordinate to `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md`
 - five retained repo skills under `.agents/skills/`, registered in `.agents/skills/README.md`
 
-The five retained repo skills are intentionally distinct: source/truth authority, architecture tree enforcement, iOS quality gate, release proof honesty, and runtime contract engineering. The fifth skill is approved for Private Life Runtime behavior-contract work because that path needs a focused operating checklist for deterministic runtime mutations, receipts, undo/recovery, proof-ledger behavior, scenario gates, and degraded/offline boundaries. Any further retained skill requires explicit truth-file approval and proof that the need cannot be covered by the retained skills or `CODEX_START_HERE.md`.
+The five retained repo skills are intentionally distinct: source/truth authority, architecture tree enforcement, iOS quality gate, release proof honesty, and runtime contract engineering. The fifth skill is approved for Private Life Runtime behavior-contract and LocalRuntimeOS work because that path needs a focused operating checklist for deterministic command/event/projection/receipt/replay behavior, runtime mutations, receipts, undo/recovery, proof-ledger behavior, scenario gates, and degraded/offline boundaries. Any further retained skill requires explicit truth-file approval and proof that the need cannot be covered by the retained skills or `CODEX_START_HERE.md`.
 
 Generated Codex state, old artifacts, prompts, trains, stale batch docs, backup truth files, and historical proof matrices are not retained in-repo.
 

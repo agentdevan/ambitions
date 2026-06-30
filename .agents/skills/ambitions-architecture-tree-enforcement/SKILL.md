@@ -1,6 +1,6 @@
 ---
 name: ambitions-architecture-tree-enforcement
-description: Use before Ambitions source creation, movement, refactors, or reviews to enforce the exact architecture tree from PRODUCT_DESIGN_TRUTH.md with no equivalent folders, no legacy Features ownership, and no Motion/Capture root destinations.
+description: Use before Ambitions source creation, movement, refactors, or reviews to enforce the exact architecture tree from PRODUCT_DESIGN_TRUTH.md with no equivalent folders, no legacy Features ownership, no Motion/Capture root destinations, and no backend/runtime authority outside Core/LocalRuntimeOS.
 ---
 
 # Ambitions Architecture Tree Enforcement
@@ -11,7 +11,7 @@ description: Use before Ambitions source creation, movement, refactors, or revie
 - Required first read: `docs/truth/CODEX_START_HERE.md`.
 - Owns: exact Final Architecture Tree enforcement and non-equivalent owner checks.
 - Does not own: product canon, implementation completeness, release proof, or migration approval beyond the scoped train.
-- Hard red: new product logic under non-canonical owners, Motion/Capture root destinations, or "equivalent" folder/path interpretation.
+- Hard red: new product logic under non-canonical owners, new backend/runtime authority outside `Core/LocalRuntimeOS/`, Motion/Capture root destinations, or "equivalent" folder/path interpretation.
 - Required output: Final Architecture Tree inspected, canonical owners touched, non-canonical owners touched, shims left behind, architecture debt, next repair train.
 
 This skill is operating support only. The binding architecture tree lives in `docs/truth/PRODUCT_DESIGN_TRUTH.md` under `Final Architecture Tree`.
@@ -35,7 +35,7 @@ Do not use these escape hatches:
 - "parallel implementation"
 - "close enough for now"
 
-If product canon says an object belongs under `App/`, `Stage/`, `Core/`, `Projection/`, `Language/`, `Trust/`, `Interaction/`, `Rendering/`, `DesignSystem/`, `Surfaces/`, `Composer/`, `Scenarios/`, `Diagnostics/`, or `Quality/`, then new or moved implementation must use that exact owner.
+If product canon says an object belongs under `App/`, `Stage/`, `Core/`, `Core/LocalRuntimeOS/`, `Projection/`, `Language/`, `Trust/`, `Interaction/`, `Rendering/`, `DesignSystem/`, `Surfaces/`, `Composer/`, `Scenarios/`, `Diagnostics/`, or `Quality/`, then new or moved implementation must use that exact owner.
 
 ## Required Read Order
 
@@ -84,7 +84,9 @@ Required ownership rules:
 - App launch, environment, dependencies, feature flags, and stage host belong under `App/`.
 - Root shell, surfaces, overlays, routing, chrome, safe areas, focus, reducers, effects, transitions, and motion behavior belong under `Stage/`.
 - Motion belongs under `Stage/Motion/` only. Motion is not a root surface, not `Surfaces/Motion/`, not a tab, not a destination.
-- Domain models, time, runtime, persistence, and permissions belong under `Core/`.
+- Domain models, time primitives, and permissions belong under `Core/`.
+- New backend/runtime authority belongs under `Core/LocalRuntimeOS/` and must preserve the `Command -> Event -> Projection -> Receipt -> Replay` target law.
+- Existing `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` source is implementation scaffolding and migration debt when touched. Do not add new runtime policy, persistence substrate authority, command authority, event authority, projection materialization authority, side-effect authority, privacy egress authority, sync authority, migration authority, or diagnostics authority there.
 - Runtime-to-UI translation belongs under `Projection/`.
 - User-facing vocabulary, copy policy, forbidden terms, and copy budget belong under `Language/`.
 - Proof, Source, Privacy, History, Receipts, and trust disclosure behavior belong under `Trust/`.
@@ -132,6 +134,10 @@ Stop and repair before closeout if the train creates or expands:
 - fifth persistent surface
 - generic dashboard surface
 - feature-owned runtime policy
+- Core/Runtime-owned new backend/runtime policy
+- Core/Persistence-owned new backend substrate policy
+- Projection/Commands-owned new command spine policy
+- meaningful runtime mutations that bypass `Command -> Event -> Projection -> Receipt -> Replay`
 - feature-owned projection policy
 - feature-owned trust policy
 - feature-owned motion policy

@@ -30,7 +30,7 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 | Build/test/release/readiness/proof claims | `ambitions-source-truth-authority`, `ambitions-release-proof-honesty` |
 | Visual/product-surface closeout | `ambitions-ios-quality-gate`, `ambitions-release-proof-honesty` |
 | Figma/VSP/marketing render production gates | Use the retained proof/source skills as applicable, then load docs-local `docs/skills/figma-production-gate/SKILL.md`; add `docs/skills/ui-north-star-production-gate/SKILL.md` when SwiftUI plausibility, screenshots, accessibility, shell, or design-system implementation is in scope |
-| Private Life Runtime contract implementation/review | `ambitions-source-truth-authority`, `ambitions-architecture-tree-enforcement`, `ambitions-runtime-contract-engineering`; add `ambitions-ios-quality-gate` for Apple-platform/UI behavior and `ambitions-release-proof-honesty` for proof/readiness wording |
+| Private Life Runtime contract implementation/review | `ambitions-source-truth-authority`, `ambitions-architecture-tree-enforcement`, `ambitions-runtime-contract-engineering`; use Linear `AMB-1544` and the active LocalRuntimeOS leaf for backend/runtime authority; add `ambitions-ios-quality-gate` for Apple-platform/UI behavior and `ambitions-release-proof-honesty` for proof/readiness wording |
 | Docs/governance only | `ambitions-source-truth-authority`; add `ambitions-release-proof-honesty` only if proof/release wording is touched |
 | Account/R2/Source Atlas work | `ambitions-source-truth-authority`, `ambitions-ios-quality-gate` if platform code changes, `ambitions-release-proof-honesty` if readiness/proof is claimed |
 
@@ -50,7 +50,7 @@ Read `docs/truth/CODEX_START_HERE.md` before loading a skill. It is the routing 
 - Load `ambitions-architecture-tree-enforcement` before source creation, movement, refactor, architecture review, or any train touching `Features/` compatibility.
 - Load `ambitions-ios-quality-gate` before SwiftUI, UIKit, SwiftData, WidgetKit, App Intents, notification, permission, privacy, accessibility, shell, keyboard, or Apple-platform work.
 - Load `ambitions-release-proof-honesty` before build/test/release/readiness wording, proof packets, privacy/account/R2 proof, TestFlight/App Store wording, or any Green/Yellow/Red claim that depends on evidence.
-- Load `ambitions-runtime-contract-engineering` before implementing, reviewing, or testing Private Life Runtime behavior contracts, runtime mutations, receipts, undo/recovery, runtime scenario gates, or proof-ledger behavior.
+- Load `ambitions-runtime-contract-engineering` before implementing, reviewing, or testing Private Life Runtime behavior contracts, LocalRuntimeOS work, runtime mutations, receipts, undo/recovery, runtime scenario gates, replay/idempotency behavior, side-effect separation, or proof-ledger behavior.
 
 ## When Not To Load
 

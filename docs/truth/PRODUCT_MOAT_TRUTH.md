@@ -30,6 +30,14 @@ Ambitions’ moat is the Private Life Runtime: a local, inspectable, user-contro
 
 Ambitions does not win by being a better task app, calendar, habit tracker, chatbot, dashboard, or generic planning workflow. It wins when local history improves fit, timing, closure, proof, recovery, and future recommendations without weakening privacy or user control.
 
+As of Linear `AMB-1544`, the target local-backend spine for this moat is:
+
+```text
+Command -> Event -> Projection -> Receipt -> Replay
+```
+
+This is a moat requirement, not implementation proof. A service-and-repository runtime scaffold is not enough to prove the Private Life Runtime until meaningful state changes can be inspected, replayed, projected, receipted, and bounded locally.
+
 Short moat thesis:
 
 ```text
@@ -113,6 +121,7 @@ Minimum proof target:
 - each recommended Step exposes why this Step, why now, source context used, what the user can change, and what receipt exists when behavior changes
 - missed or unclosed execution routes through closure/recovery before stale carryover
 - early completion creates optional user-controlled reflow, not silent rearrangement
+- meaningful runtime state changes can be traced through command validation, event/journal append, projection materialization, user-visible receipt, undo/replay/idempotency behavior, and local privacy boundaries
 - relaunch restores the same local recommendation and receipt unless source data changed
 - user corrections affect later behavior and remain inspectable/resettable
 

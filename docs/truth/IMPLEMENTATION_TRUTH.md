@@ -86,6 +86,7 @@ Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift
 Native/Ambitions/App/AmbitionsStageHost.swift
 Native/Ambitions/Stage/AmbitionsStage.swift
 Native/Ambitions/App/AppContainerFactory.swift
+Native/Ambitions/Core/Runtime/
 Native/Ambitions/Core/Persistence/
 Native/Ambitions/Core/Domain/
 Native/Ambitions/Projection/StageScenes/TodayStageScene.swift
@@ -112,6 +113,35 @@ AmbitionsApp -> AmbitionsRootScene -> LaunchGateView -> AmbitionsStageHost -> Am
 ```
 
 This chain is source inventory only. It does not claim implementation completeness, runtime completeness, rendered product quality, accessibility conformance, device proof, or release readiness.
+
+### LocalRuntimeOS implementation posture
+
+As of Linear `AMB-1544` / `AMB-1545`, product truth names `Core/LocalRuntimeOS/` as the target backend/runtime architecture owner and uses this law:
+
+```text
+Command -> Event -> Projection -> Receipt -> Replay
+```
+
+Current implementation evidence is narrower:
+
+- Source-present runtime and persistence scaffolding exists primarily under `Native/Ambitions/Core/Runtime/`, `Native/Ambitions/Core/Persistence/`, `Native/Ambitions/Core/Domain/`, and `Native/Ambitions/Projection/Commands/`.
+- `Native/Ambitions/Core/LocalRuntimeOS/` is a target architecture owner, not a proven source implementation, until live Swift files, project inclusion, and focused tests prove otherwise.
+- Current SwiftData persistence source is real, but SwiftData has not been proven demoted to an `ObjectStoreSwiftData` tier behind a separate event journal, projection store, search store, blob store, backup store, and migration store.
+- Existing command, receipt, event ledger, side-effect ledger, snapshot ledger, search, Source Atlas, runtime kernel, and repository code may be reused as scaffolding, but they do not prove the LocalRuntimeOS spine is complete.
+
+Unsupported implementation claims until future source proof exists:
+
+- all meaningful state changes route only through `Command -> Event -> Projection -> Receipt -> Replay`
+- a durable append-only `RuntimeEventJournal` is the canonical mutation record
+- duplicate and failed command replay are deterministic
+- projections are materialized from event-journal cursors
+- SwiftData is only the object store tier
+- SQLite/FTS-backed journal, projection, and search stores are active
+- side effects are fully outboxed with leases, retry, confirmation, and receipts
+- Capture intake is durably journaled before classification and promotion
+- Source Atlas is a signed public-reference package manager
+- CloudKit continuity is approved or implemented as user-owned event-envelope sync
+- migration/repair/diagnostics prove runtime, privacy, release, or data-safety Green
 
 ---
 
@@ -162,6 +192,7 @@ Green implementation standard:
 
 - Source Green requires more than canonical paths: active root source must avoid architecture-as-UI copy and avoid generic wrapper ownership of the first viewport.
 - Runtime Green requires typed mutation, receipt, proof, undo, and accessibility consequences for scoped meaningful mutations.
+- LocalRuntimeOS Runtime Green additionally requires current source/test proof for command validation, event append, projection materialization, receipt generation, replay/idempotency behavior, and side-effect separation for the scoped mutation.
 - Interaction Green requires object-owned mutation feedback, keyboard/safe-area behavior, and accessibility actions where user-facing changes occur.
 - Visual Green and Release Green remain unavailable to Codex without current independent visual, physical-device, accessibility, and release proof under `IMPLEMENTATION_ACCEPTANCE_TRUTH.md` and `RELEASE_TRUTH.md`.
 

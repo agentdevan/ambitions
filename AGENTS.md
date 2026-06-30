@@ -180,6 +180,14 @@ Agents must not use:
 
 If product canon says an object belongs under `App/`, `Stage/`, `Core/`, `Projection/`, `Language/`, `Trust/`, `Interaction/`, `Rendering/`, `DesignSystem/`, `Surfaces/`, `Composer/`, `Scenarios/`, `Diagnostics/`, or `Quality/`, new or moved implementation must use that exact owner.
 
+New backend/runtime authority belongs under `Core/LocalRuntimeOS/`. Existing `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` source is implementation scaffolding and migration debt when touched. The runtime mutation law is:
+
+```text
+Command -> Event -> Projection -> Receipt -> Replay
+```
+
+Do not add new command, transaction, event, projection, side-effect, storage-substrate, privacy, sync, migration, repair, or diagnostics authority outside `Core/LocalRuntimeOS/` unless a scoped issue explicitly closes Yellow with a named repair train.
+
 `Features/` is not a canonical owner for new Ambitions architecture. Existing `Features/` code is legacy compatibility only. Any train touching `Features/` implementation must move ownership toward the final architecture tree or close Yellow with explicit architecture debt and a named repair train.
 
 Motion belongs under `Stage/Motion/` only. Motion must not become a root surface, tab, destination, activity feed, analytics surface, score, streak, XP layer, or dashboard.

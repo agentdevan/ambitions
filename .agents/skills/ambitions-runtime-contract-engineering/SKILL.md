@@ -23,11 +23,21 @@ For any runtime contract work, also read the smallest required subset:
 
 Load `ambitions-source-truth-authority`, `ambitions-architecture-tree-enforcement`, and `ambitions-ios-quality-gate` when the change touches source or Apple-platform behavior. Load `ambitions-release-proof-honesty` before any proof/readiness wording.
 
+## LocalRuntimeOS law
+
+New meaningful Private Life Runtime mutations must be designed against:
+
+```text
+Command -> Event -> Projection -> Receipt -> Replay
+```
+
+As of Linear `AMB-1544`, `Core/LocalRuntimeOS/` is the target backend/runtime owner. Existing `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` source may be scaffolding to migrate or reuse, but it is not the final authority for new command, transaction, event, projection, side-effect, privacy, sync, migration, repair, or diagnostics work.
+
 ## Contract workflow
 
 1. Name the contract: goal creation, full goal path, scheduling, future step, plan adjustment, conflict resolution, life capital, proof, progress transfer, onboarding, review, Source Atlas, or a truth-file-named scenario.
 2. Quote or cite the truth-file authority in your notes, then implement only the scoped contract slice.
-3. Map the contract to canonical owners: `Core/Runtime`, `Projection/Commands`, `Projection/Mutations`, `Trust`, `Scenarios`, `Surfaces`, `Composer/Capture`, `Stage/Motion`, or another exact Final Architecture Tree owner.
+3. Map the contract to canonical owners: `Core/LocalRuntimeOS/CommandSpine`, `Core/LocalRuntimeOS/TransactionKernel`, `Core/LocalRuntimeOS/EventJournal`, `Core/LocalRuntimeOS/ProjectionEngine`, `Core/LocalRuntimeOS/PrivateLifeRuntimeKernel`, `Core/LocalRuntimeOS/PlanningEngine`, `Core/LocalRuntimeOS/TimeEngine`, `Core/LocalRuntimeOS/CaptureRouteGraph`, `Core/LocalRuntimeOS/TrustSystem`, `Core/LocalRuntimeOS/SearchRecall`, `Core/LocalRuntimeOS/SideEffectSystem`, `Core/LocalRuntimeOS/SourceAtlas`, `Core/LocalRuntimeOS/PrivacySecurity`, `Core/LocalRuntimeOS/Storage`, `Core/LocalRuntimeOS/MigrationRepair`, `Core/LocalRuntimeOS/Diagnostics`, `Projection/Mutations`, `Trust`, `Scenarios`, `Surfaces`, `Composer/Capture`, `Stage/Motion`, or another exact Final Architecture Tree owner.
 4. Define deterministic inputs, state transition, mutation receipt, undo/recovery behavior, proof ledger event, accessibility announcement, offline/degraded behavior, and privacy boundary.
 5. Add or update scenario/test coverage at the lowest useful level: pure runtime tests first, projection/command tests next, UI/runtime proof only when user-facing behavior changes.
 6. Close with non-claims: no release proof, device proof, public accessibility proof, or privacy/legal signoff unless separately evidenced.
@@ -36,8 +46,8 @@ Load `ambitions-source-truth-authority`, `ambitions-architecture-tree-enforcemen
 
 - Runtime behavior must be local-first, inspectable, deterministic where feasible, and explainable through proof/receipt/history surfaces.
 - Do not implement a generic chatbot, activity feed, productivity score, streak system, cloud AI dependency, or backend profile path as a runtime contract.
-- Do not place new runtime authority under `Features/`. If touching legacy `Features/`, move toward the canonical owner or record explicit Yellow debt with a named repair train.
-- Every mutation that changes user-visible life state needs a receipt/undo/proof story or a deliberate, documented reason it does not.
+- Do not place new runtime authority under `Features/`, `Core/Runtime/`, `Core/Persistence/`, or `Projection/Commands/`. If touching legacy/scaffolded owners, move toward `Core/LocalRuntimeOS/` or record explicit Yellow debt with a named repair train.
+- Every mutation that changes user-visible life state needs command validation, event or ledger append semantics, projection/materialization consequences, a receipt/undo/proof story, replay/idempotency behavior, and a deliberate documented exception if any part is out of scope.
 
 ## Closeout shape
 

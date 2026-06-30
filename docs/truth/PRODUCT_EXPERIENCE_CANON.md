@@ -1835,9 +1835,11 @@ Every major runtime behavior must define:
 
 Inputs  
 Runtime action  
+Command / event / projection semantics
 Output  
 User-visible result  
 Proof / receipt behavior  
+Replay / undo / idempotency behavior
 Failure state  
 Acceptance gate
 

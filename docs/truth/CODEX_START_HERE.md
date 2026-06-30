@@ -53,6 +53,7 @@ Use the task matrix below to choose a smaller safe read path only when the task 
 | Product identity / IA / design law | `docs/truth/README.md`, `docs/truth/PRODUCT_ORIGIN_TRUTH.md` if present, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_MOAT_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md` |
 | Product-experience behavior | `docs/truth/README.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/PRODUCT_EXPERIENCE_ACTION_MAP.md`, `docs/qa/product-experience-scenario-gates.md` |
 | Swift source/runtime | `docs/truth/README.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, relevant source/tests |
+| LocalRuntimeOS / backend runtime | `docs/truth/README.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, `.agents/skills/ambitions-runtime-contract-engineering/SKILL.md`, Linear `AMB-1544` and the active leaf, relevant source/tests |
 | SwiftUI/frontend/visual | `docs/truth/README.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/PRODUCT_EXPERIENCE_CANON.md`, `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md` when screenshots/Figma/VSP/visual proof are in scope, `docs/skills/ui-north-star-production-gate/SKILL.md`, relevant source/tests/screenshots |
 | Figma/VSP/marketing render | `docs/truth/README.md`, `docs/truth/PRODUCT_DESIGN_TRUTH.md`, `docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md`, `docs/skills/figma-production-gate/SKILL.md`; add `docs/skills/ui-north-star-production-gate/SKILL.md` when SwiftUI plausibility, screenshots, accessibility, shell, or design-system implementation is in scope |
 | Build/test/release | `docs/truth/README.md`, `docs/truth/IMPLEMENTATION_TRUTH.md`, `docs/truth/RELEASE_TRUTH.md`, `docs/truth/CODEX_PROCESS_TRUTH.md`, build docs/scripts |
@@ -68,6 +69,7 @@ Use the task matrix below to choose a smaller safe read path only when the task 
 | Docs/governance | Truth-file diff, authority relationship preserved, no new canon conflict, relevant script/check output, `git diff --check`. |
 | Product behavior/gates | Scenario gate IDs, current status label, evidence paths or empty evidence list, future proof needed, no status upgrade without evidence. |
 | Swift source/runtime | Canonical owner/source proof, focused tests or explicit not-run reason, current logs, no forbidden IA/runtime drift, rollback path. |
+| LocalRuntimeOS / backend runtime | Proof that the scoped change preserves `Command -> Event -> Projection -> Receipt -> Replay`, exact owner under `Core/LocalRuntimeOS/` or explicit Yellow debt, focused runtime/storage/projection/replay tests or not-run reason, no implementation Green from canon alone. |
 | SwiftUI/frontend/visual | Source/tests, screenshots or explicit not-run reason, accessibility proof notes, Dynamic Type/Reduce Motion/contrast/safe-area notes, no Visual Green self-certification. |
 | Build/test/release | Exact commands, exit codes, branch, commit SHA, environment, logs/artifacts, unsupported claims listed as not supported. |
 | Account/R2/Source Atlas | Offline no-account boundary, no private life graph backend, no R2 private user context, request/privacy proof before any implementation or release claim. |
@@ -106,6 +108,7 @@ Stop and report Red if the train:
 - makes hosted AI/cloud LLMs core runtime dependencies
 - forgets R2 is not a user-data backend
 - sends private user context, goals, captures, schedule, proof, receipts, behavior, inferred priorities, or the private life graph to R2/Source Atlas
+- adds new meaningful runtime mutation authority outside the LocalRuntimeOS command/event/projection/receipt/replay spine
 - creates Source Atlas marketplace browsing as product center
 - adds productivity score, life score, XP, streak pressure, social feed, public profile, or AI-chatbot center
 - upgrades scenario gate status without evidence
