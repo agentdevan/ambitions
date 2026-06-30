@@ -76,8 +76,15 @@ enum AppContainerFactory {
             runtimeExecutor: runtime.actionExecutor,
             externalRouter: externalRouter
         )
+        let externalCreationCommandExecutor = AmbitionsCommandExecutor(
+            captureService: runtime.captureService,
+            eventLedger: repositories.eventLedger,
+            commandExecutionRecords: repositories.commandExecutionRecords,
+            runtimeEvents: repositories.runtimeEvents,
+            commandJournal: repositories.commandJournal
+        )
         let externalCreationImportService = DefaultExternalCreationImportService(
-            captureService: runtime.captureService
+            commandExecutor: externalCreationCommandExecutor
         )
         let sourceAtlasLifecycleRefreshService = SourceAtlasPublicPackLifecycleRefreshService(
             registry: SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.defaultAppRegistry(),

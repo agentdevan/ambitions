@@ -18,7 +18,14 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
         let repository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-external" })
-        let service = DefaultExternalCreationImportService(store: store, captureService: captureService)
+        let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let commandJournal = InMemoryCommandJournal()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            commandExecutionRecords: commandRecords,
+            commandJournal: commandJournal
+        )
+        let service = DefaultExternalCreationImportService(store: store, commandExecutor: executor)
 
         try store.append(
             makeRequest(
@@ -39,13 +46,23 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         XCTAssertEqual(captures.first?.sourceType, .shareExtensionURL)
         XCTAssertEqual(captures.first?.triage?.destination, .doSoon)
         XCTAssertEqual(captures.first?.triage?.hint, "From Safari: https://example.com/source")
+        let entries = try await commandJournal.fetchEntries(matching: .all, limit: nil)
+        XCTAssertEqual(entries.map(\.envelope.commandID), ["external.creation.command.external-request"])
+        let record = try await commandRecords.fetchRecord(commandID: "external.creation.command.external-request")
+        XCTAssertEqual(record?.result.metadata["commandReceiptID"], "command.receipt.external.creation.command.external-request")
     }
 
     func testImportServiceCanPreferCreateGoalLandingWithoutCreatingASeparateGoalPath() async throws {
         let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
         let repository = PreviewCaptureRepository()
         let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-goal-seed" })
-        let service = DefaultExternalCreationImportService(store: store, captureService: captureService)
+        let commandJournal = InMemoryCommandJournal()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            commandExecutionRecords: InMemoryAmbitionsCommandExecutionRecordRepository(),
+            commandJournal: commandJournal
+        )
+        let service = DefaultExternalCreationImportService(store: store, commandExecutor: executor)
 
         try store.append(
             makeRequest(
@@ -63,6 +80,37 @@ final class ExternalCreationImportServiceTests: XCTestCase {
         XCTAssertEqual(result.source, .appIntent)
         XCTAssertEqual(captures.first?.sourceType, .appIntent)
         XCTAssertEqual(captures.first?.triage?.destination, .turnIntoGoal)
+        let entries = try await commandJournal.fetchEntries(matching: .all, limit: nil)
+        XCTAssertEqual(entries.first?.envelope.source, .appIntent)
+        XCTAssertEqual(entries.first?.envelope.actor, .externalSurface)
+    }
+
+    func testImportServiceReplaysDuplicateExternalRequestIDsWithoutDoubleMutation() async throws {
+        let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
+        let repository = PreviewCaptureRepository()
+        let captureService = DefaultCaptureService(repository: repository, idProvider: { "capture-replayed" })
+        let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
+        let commandJournal = InMemoryCommandJournal()
+        let executor = AmbitionsCommandExecutor(
+            captureService: captureService,
+            commandExecutionRecords: commandRecords,
+            commandJournal: commandJournal
+        )
+        let service = DefaultExternalCreationImportService(store: store, commandExecutor: executor)
+        let request = makeRequest(text: "Only import this once", source: .appIntent)
+
+        try store.append(request)
+        try store.append(request)
+
+        let result = await service.importPendingCreations(now: Date(timeIntervalSince1970: 1_712_692_800))
+        let captures = try await repository.listCaptures()
+        let entries = try await commandJournal.fetchEntries(matching: .all, limit: nil)
+        let record = try await commandRecords.fetchRecord(commandID: "external.creation.command.external-request")
+
+        XCTAssertEqual(result.importedCaptureIDs, ["capture-replayed", "capture-replayed"])
+        XCTAssertEqual(captures.map(\.id), ["capture-replayed"])
+        XCTAssertEqual(entries.count, 1)
+        XCTAssertEqual(record?.result.metadata["commandReceiptID"], "command.receipt.external.creation.command.external-request")
     }
 
     private func makeRequest(

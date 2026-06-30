@@ -16,6 +16,7 @@ final class SideEffectSystemTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/WidgetRefreshOutbox.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalReconciliation.swift",
         ]
 
@@ -25,6 +26,9 @@ final class SideEffectSystemTests: XCTestCase {
 
         XCTAssertFalse(
             FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Domain/SideEffectLedgerModels.swift").path)
+        )
+        XCTAssertFalse(
+            FileManager.default.fileExists(atPath: root.appendingPathComponent("Native/Ambitions/Core/Runtime/ExternalCreationImportService.swift").path)
         )
 
         let oldPersistenceFile = try String(
@@ -141,6 +145,35 @@ final class SideEffectSystemTests: XCTestCase {
         XCTAssertEqual(storedState?.completedBootstrap, true)
     }
 
+    func testAppIntentBridgeAppendsExternalCreationThroughCanonicalSideEffectOwner() async throws {
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
+        let store = SharedExternalCreationStore(baseURL: temporaryDirectory())
+        let bridge = AppIntentBridge(recorder: outbox, store: store)
+        let request = ExternalCreationRequest(
+            id: "intent-side-effect-test",
+            createdAt: "2026-06-30T12:00:00Z",
+            text: "Capture from App Intent",
+            source: .appIntent,
+            landing: .captureComposer
+        )
+
+        let attempt = try await bridge.enqueueExternalCreation(
+            request,
+            acceptedAt: Date(timeIntervalSince1970: 1_777_113_600)
+        )
+
+        XCTAssertEqual(try store.peek(), [request])
+        XCTAssertEqual(attempt?.id, "app-intent-intake.intent-side-effect-test")
+        let stored = try await ledger.fetchRecord(id: "app-intent-intake.intent-side-effect-test")
+        XCTAssertEqual(stored?.effectKind, .externalSnapshot)
+        XCTAssertEqual(stored?.actionKind, .createCapture)
+        XCTAssertEqual(stored?.sourceDomain, .externalSurface)
+        XCTAssertEqual(stored?.status, .recordedLocalOnly)
+        XCTAssertEqual(stored?.boundary, .localOnly)
+        XCTAssertEqual(stored?.receiptID, "app-intent-intake-receipt.intent-side-effect-test")
+    }
+
     private func repositoryRoot() -> URL {
         var url = URL(fileURLWithPath: #filePath)
         for _ in 0..<5 {
@@ -151,5 +184,10 @@ final class SideEffectSystemTests: XCTestCase {
 
     private static func timestampProvider() -> @Sendable () -> String {
         { "2026-06-30T08:00:00Z" }
+    }
+
+    private func temporaryDirectory() -> URL {
+        FileManager.default.temporaryDirectory
+            .appendingPathComponent("AmbitionsSideEffectSystemTests-\(UUID().uuidString)", isDirectory: true)
     }
 }

@@ -16,14 +16,15 @@ struct CreateAmbitionsCaptureIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
+        let now = Date()
         let request: ExternalCreationRequest
         do {
-            request = try Self.makeCaptureRequest(text: text, now: Date(), id: "intent-\(UUID().uuidString)")
+            request = try Self.makeCaptureRequest(text: text, now: now, id: "intent-\(UUID().uuidString)")
         } catch {
             return .result(dialog: "Capture needs text.")
         }
 
-        try SharedExternalCreationStore().append(request)
+        try await AppIntentBridge(recorder: nil).enqueueExternalCreation(request, acceptedAt: now)
 
         await MainActor.run {
             if let url = ExternalSurfaceActionPayload.deepLinkURL(
@@ -68,14 +69,15 @@ struct CreateAmbitionsGoalDraftIntent: AppIntent {
     }
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
+        let now = Date()
         let request: ExternalCreationRequest
         do {
-            request = try Self.makeGoalDraftRequest(title: title, now: Date(), id: "intent-goal-\(UUID().uuidString)")
+            request = try Self.makeGoalDraftRequest(title: title, now: now, id: "intent-goal-\(UUID().uuidString)")
         } catch {
             return .result(dialog: "Goal draft needs text.")
         }
 
-        try SharedExternalCreationStore().append(request)
+        try await AppIntentBridge(recorder: nil).enqueueExternalCreation(request, acceptedAt: now)
 
         await MainActor.run {
             if let url = AmbitionsDeepActionShortcut.goalDraft.descriptor().routeURL {

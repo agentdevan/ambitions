@@ -131,7 +131,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 247,
+      "line_count": 262,
       "path": "Native/Ambitions/App/AppContainerFactory.swift"
     },
     {
@@ -356,7 +356,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 104,
+      "line_count": 106,
       "path": "Native/Ambitions/App/Intents/AmbitionsCreationIntents.swift"
     },
     {
@@ -3440,7 +3440,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 166,
+      "line_count": 188,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+02-AmbitionsCommandExecutor+03-scheduleMutationIntent.swift"
     },
     {
@@ -3452,7 +3452,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 258,
+      "line_count": 259,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+02-AmbitionsCommandExecutor.swift"
     },
     {
@@ -3478,7 +3478,30 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 374,
+      "line_count": 148,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+CalendarWriteIntent.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 311,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+ReceiptPersistence.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 196,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift"
     },
     {
@@ -3502,7 +3525,97 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 75,
+      "line_count": 79,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandAuthorizer.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 76,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandCompiler.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 80,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandEnvelope.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 36,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandIdempotencyKey.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 291,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandJournal.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 77,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandReceiptFactory.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 271,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandReducer.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 77,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandReplayAdapter.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 89,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandResult.swift"
     },
     {
@@ -5008,12 +5121,13 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
+        "VSP-05",
         "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 34,
+      "line_count": 66,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift"
     },
     {
@@ -5025,6 +5139,19 @@
       "kind": "native_source",
       "line_count": 42,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 133,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6365,7 +6492,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 95,
+      "line_count": 99,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationPlan.swift"
     },
     {
@@ -6413,7 +6540,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 146,
+      "line_count": 154,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift"
     },
     {
@@ -6425,7 +6552,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 98,
+      "line_count": 101,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeWriteSet.swift"
     },
     {
@@ -6965,7 +7092,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 218,
+      "line_count": 221,
       "path": "Native/Ambitions/Core/Persistence/PersistenceContracts+03-UnavailableReminderRepository.swift"
     },
     {
@@ -7589,18 +7716,6 @@
       "kind": "native_source",
       "line_count": 129,
       "path": "Native/Ambitions/Core/Runtime/ExecutionResilienceProjector.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 82,
-      "path": "Native/Ambitions/Core/Runtime/ExternalCreationImportService.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -9999,15 +10114,28 @@
     {
       "candidate_vsp_ids": [
         "VSP-02",
+        "VSP-03",
         "VSP-04",
         "VSP-05",
-        "VSP-07",
-        "VSP-09"
+        "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 383,
+      "line_count": 130,
+      "path": "Native/Ambitions/Interaction/TodayCommandActionHandler+Evidence.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 350,
       "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift"
     },
     {
@@ -10209,7 +10337,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 104,
+      "line_count": 110,
       "path": "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift"
     },
     {
@@ -15700,13 +15828,12 @@
         "VSP-04",
         "VSP-05",
         "VSP-07",
-        "VSP-08",
         "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 286,
+      "line_count": 292,
       "path": "Native/AmbitionsTests/App/AppContainerFactoryTests.swift"
     },
     {
@@ -15956,12 +16083,13 @@
         "VSP-01",
         "VSP-04",
         "VSP-05",
+        "VSP-07",
         "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 91,
+      "line_count": 139,
       "path": "Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift"
     },
     {
@@ -18310,6 +18438,20 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 221,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/CommandSpineLeafTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-01",
         "VSP-02",
         "VSP-04",
@@ -18333,7 +18475,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 119,
+      "line_count": 127,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/LocalRuntimeOSCommandSpineOwnershipTests.swift"
     },
     {
@@ -18373,7 +18515,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 231,
+      "line_count": 244,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/EventJournal/RuntimeEventJournalTests.swift"
     },
     {
@@ -18719,7 +18861,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 156,
+      "line_count": 194,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift"
     },
     {
@@ -20681,7 +20823,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 552,
+      "line_count": 566,
       "path": "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
     },
     {
@@ -22543,7 +22685,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 436,
+      "line_count": 438,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -22560,7 +22702,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 880,
+      "line_count": 882,
       "path": "docs/truth/PRODUCT_DESIGN_TRUTH.md"
     },
     {
@@ -22627,7 +22769,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1824,
+  "entry_count": 1836,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

@@ -3002,12 +3002,11 @@
         "VSP-04",
         "VSP-05",
         "VSP-07",
-        "VSP-08",
         "VSP-10"
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 286,
+      "line_count": 292,
       "path": "Native/AmbitionsTests/App/AppContainerFactoryTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -3404,11 +3403,12 @@
         "VSP-01",
         "VSP-04",
         "VSP-05",
+        "VSP-07",
         "VSP-10"
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 91,
+      "line_count": 139,
       "path": "Native/AmbitionsTests/App/ExternalCreationImportServiceTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -7234,6 +7234,28 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 221,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/CommandSpineLeafTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "CommandSpineLeafTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
         "VSP-01",
         "VSP-02",
         "VSP-04",
@@ -7264,7 +7286,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 119,
+      "line_count": 127,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/LocalRuntimeOSCommandSpineOwnershipTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -7328,7 +7350,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 231,
+      "line_count": 244,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/EventJournal/RuntimeEventJournalTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -7888,7 +7910,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 156,
+      "line_count": 194,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -11100,7 +11122,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 552,
+      "line_count": 566,
       "path": "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
@@ -12920,7 +12942,7 @@
       "view_structs": []
     }
   ],
-  "entry_count": 606,
+  "entry_count": 607,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "scan_roots": [

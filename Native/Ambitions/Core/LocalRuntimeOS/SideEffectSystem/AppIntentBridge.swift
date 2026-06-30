@@ -1,10 +1,42 @@
 import Foundation
 
-struct AppIntentBridge: Sendable {
+struct AppIntentBridge {
     private let recorder: (any SideEffectOutboxing)?
+    private let store: SharedExternalCreationStore
 
-    init(recorder: (any SideEffectOutboxing)?) {
+    init(
+        recorder: (any SideEffectOutboxing)?,
+        store: SharedExternalCreationStore = SharedExternalCreationStore()
+    ) {
         self.recorder = recorder
+        self.store = store
+    }
+
+    @discardableResult
+    func enqueueExternalCreation(
+        _ request: ExternalCreationRequest,
+        acceptedAt: Date
+    ) async throws -> SideEffectAttempt? {
+        try store.append(request)
+        guard let recorder else { return nil }
+        let outboxRequest = SideEffectOutboxRequest(
+            id: "app-intent-intake.\(request.id)",
+            effectKind: .externalSnapshot,
+            actionKind: .createCapture,
+            sourceDomain: .externalSurface,
+            requestedAt: acceptedAt,
+            externalEffect: false,
+            requiresConfirmation: false,
+            commitRequirement: .committedProjection,
+            requestedStatus: .recordedLocalOnly,
+            requestedBoundary: .localOnly,
+            degradedFacts: [
+                "App Intent external creation \(request.id) stored for local command-backed import.",
+                "Landing: \(request.landing.rawValue).",
+            ],
+            receiptID: "app-intent-intake-receipt.\(request.id)"
+        )
+        return try await recorder.enqueue(outboxRequest)
     }
 
     func recordCommandBridge(command: AmbitionsCommand, acceptedAt: Date) async {

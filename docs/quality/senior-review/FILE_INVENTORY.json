@@ -42570,18 +42570,23 @@
       ]
     },
     {
-      "current_owner": "Core/Runtime",
-      "expected_owner": "Core/Runtime",
-      "file_hash": "cb4429473e056042f58862fd480a589014b8248650aa98909e3a2bade574b2ab",
+      "current_owner": "Core/LocalRuntimeOS/SideEffectSystem",
+      "expected_owner": "Core/LocalRuntimeOS/SideEffectSystem",
+      "file_hash": "05ed81f2d996e46a914a92415064fed3b9b14e44eef464e44ce8dc5799df3527",
       "file_type": "swift",
       "imports": [
         "Foundation"
       ],
       "last_reviewed_sha": "4667d01eb004a7457df5bd92130b0b6dc3f2cb18",
-      "layer": "Core/Runtime",
-      "line_count": 81,
-      "path": "Native/Ambitions/Core/Runtime/ExternalCreationImportService.swift",
+      "layer": "Core/LocalRuntimeOS/SideEffectSystem",
+      "line_count": 132,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalCreationImportService.swift",
       "public_internal_types": [
+        {
+          "access": "internal",
+          "kind": "enum",
+          "name": "ExternalCreationCommandMetadataKey"
+        },
         {
           "access": "internal",
           "kind": "struct",
@@ -42601,7 +42606,7 @@
       "risk_level": "Green",
       "risk_reasons": [],
       "source_evidence": [
-        "Canonical Core owner.",
+        "Canonical LocalRuntimeOS SideEffectSystem owner.",
         "docs/quality/senior-review/BUILD_GRAPH_INVENTORY.json",
         "git ls-files",
         "project.yml/Package.swift membership rules"

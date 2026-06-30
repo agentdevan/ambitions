@@ -69,7 +69,13 @@ enum PreviewAppContainerFactory {
             ),
             externalCreationImportService: DefaultExternalCreationImportService(
                 store: SharedExternalCreationStore(baseURL: FileManager.default.temporaryDirectory),
-                captureService: captureService
+                commandExecutor: AmbitionsCommandExecutor(
+                    captureService: captureService,
+                    eventLedger: runtime.repositories.eventLedger,
+                    commandExecutionRecords: runtime.repositories.commandExecutionRecords,
+                    runtimeEvents: runtime.repositories.runtimeEvents,
+                    commandJournal: runtime.repositories.commandJournal
+                )
             ),
             commandRouter: commandRouter,
             memoryLensService: memoryLensService,

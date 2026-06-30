@@ -16,13 +16,14 @@ extension AmbitionsCommandExecutor {
         guard let text = command.payload.primaryText else {
             return blockedResult(for: .invalid, command: command)
         }
+        let sourceType = captureSourceType(for: command)
 
         do {
             let smartAttachment = smartAttachmentService?.route(
                 SmartAttachmentInput(
                     rawText: text,
                     sourceContext: SmartAttachmentSourceContext(
-                        sourceType: captureSourceType(for: command.source),
+                        sourceType: sourceType,
                         sourceSurface: context.sourceSurface,
                         commandID: command.id
                     )
@@ -33,9 +34,9 @@ extension AmbitionsCommandExecutor {
             let capture = try await captureService.createCapture(
                 CreateCaptureRequest(
                     rawText: text,
-                    sourceType: captureSourceType(for: command.source),
+                    sourceType: sourceType,
                     linkedGoalID: command.target.goalID,
-                    triage: nil,
+                    triage: externalCreationTriageMetadata(for: command),
                     revisitAfter: nil,
                     kind: captureKind(for: command.payload.commitmentKind) ?? smartAttachment?.captureKind,
                     route: route(for: command.payload.destinationRoute) ?? smartAttachment?.captureRoute,

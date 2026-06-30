@@ -142,6 +142,28 @@ extension AmbitionsCommandExecutor {
         }
     }
 
+    func captureSourceType(for command: AmbitionsCommand) -> CaptureSourceType {
+        if let rawValue = command.payload.metadata[ExternalCreationCommandMetadataKey.sourceType],
+           let sourceType = CaptureSourceType(rawValue: rawValue) {
+            return sourceType
+        }
+        return captureSourceType(for: command.source)
+    }
+
+    func externalCreationTriageMetadata(for command: AmbitionsCommand) -> CaptureTriageMetadata? {
+        guard let landingRawValue = command.payload.metadata[ExternalCreationCommandMetadataKey.landing],
+              let landing = ExternalCreationLanding(rawValue: landingRawValue)
+        else {
+            return nil
+        }
+
+        let destination: CaptureTriageDestination = landing == .createGoal ? .turnIntoGoal : .doSoon
+        return CaptureTriageMetadata(
+            destination: destination,
+            hint: command.payload.metadata[ExternalCreationCommandMetadataKey.provenanceHint]
+        )
+    }
+
 
     func captureKind(for commitmentKind: NowCommitmentKind?) -> CaptureKind? {
         switch commitmentKind {
