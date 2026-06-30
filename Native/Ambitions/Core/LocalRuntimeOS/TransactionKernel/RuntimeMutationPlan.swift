@@ -24,6 +24,8 @@ struct RuntimeMutationPlan: Sendable, Equatable, Identifiable {
         afterSnapshot: String,
         targetSurface: StageMutationTargetSurface,
         timeMutation: TimeMutation?,
+        executionResult: AmbitionsCommandExecutionResult? = nil,
+        commandRecordID: String? = nil,
         plannedAt: String,
         schemaVersion: String = runtimeMutationPlanSchemaVersion
     ) throws {
@@ -57,7 +59,9 @@ struct RuntimeMutationPlan: Sendable, Equatable, Identifiable {
             command: command,
             mutation: mutation,
             projectionIDs: projections,
-            occurredAt: plannedAt
+            occurredAt: plannedAt,
+            executionResult: executionResult,
+            commandRecordID: commandRecordID
         )
 
         self.id = "runtime.mutation-plan.\(command.id)"

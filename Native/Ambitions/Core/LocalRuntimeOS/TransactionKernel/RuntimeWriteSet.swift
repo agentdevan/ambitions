@@ -25,22 +25,25 @@ struct RuntimeWriteSet: Sendable, Codable, Equatable, Hashable, Identifiable {
         mutation: RuntimeMutation,
         projectionIDs: [ProjectionID],
         occurredAt: String,
+        executionResult: AmbitionsCommandExecutionResult? = nil,
+        commandRecordID: String? = nil,
         schemaVersion: String = runtimeWriteSetSchemaVersion
     ) {
-        let result = AmbitionsCommandExecutionResult(
+        let runtimeMetadata = [
+            "runtimeMutationID": mutation.id,
+            "stageMutationID": mutation.stageMutation.runtimeMutationID,
+            "proofArtifactID": mutation.stageMutation.proofArtifact.artifactID,
+            "receiptID": mutation.stageMutation.receipt.receiptID,
+            "motionEventID": mutation.stageMutation.motionEvent,
+            "visibleChange": mutation.stageMutation.visibleUserFacingChange,
+        ]
+        let result = executionResult?.mergingMetadata(runtimeMetadata) ?? AmbitionsCommandExecutionResult(
             status: .succeeded,
             summary: mutation.stageMutation.visibleUserFacingChange,
             target: command.target,
             eventLedgerEntryIDs: command.relations.eventLedgerEntryIDs,
             recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
-            metadata: [
-                "runtimeMutationID": mutation.id,
-                "stageMutationID": mutation.stageMutation.runtimeMutationID,
-                "proofArtifactID": mutation.stageMutation.proofArtifact.artifactID,
-                "receiptID": mutation.stageMutation.receipt.receiptID,
-                "motionEventID": mutation.stageMutation.motionEvent,
-                "visibleChange": mutation.stageMutation.visibleUserFacingChange,
-            ]
+            metadata: runtimeMetadata
         )
         self.id = "runtime.write-set.\(command.id)"
         self.commandID = command.id
@@ -48,7 +51,7 @@ struct RuntimeWriteSet: Sendable, Codable, Equatable, Hashable, Identifiable {
             command: command.validated(as: mutation.validation.validationState),
             result: result,
             recordedAt: occurredAt,
-            commandRecordID: "command.execution.\(command.id)"
+            commandRecordID: commandRecordID ?? "command.execution.\(command.id)"
         )
         self.affectedObjectIDs = RuntimeTransactionObjectFacts.affectedObjectIDs(command: command, mutation: mutation)
         self.objectFamilies = RuntimeTransactionObjectFacts.families(command: command, mutation: mutation)

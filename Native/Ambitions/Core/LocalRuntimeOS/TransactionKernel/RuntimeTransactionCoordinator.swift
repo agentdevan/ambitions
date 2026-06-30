@@ -72,6 +72,8 @@ struct RuntimeTransactionCoordinator: Sendable {
         targetSurface: StageMutationTargetSurface,
         timeMutation: TimeMutation? = nil,
         projectionCursors: [ProjectionID: ProjectionCursor] = [:],
+        executionResult: AmbitionsCommandExecutionResult? = nil,
+        commandRecordID: String? = nil,
         occurredAt: Date = .now
     ) async throws -> RuntimeTransaction {
         let latestCursor = try await eventStore.latestCursor()
@@ -86,6 +88,8 @@ struct RuntimeTransactionCoordinator: Sendable {
             afterSnapshot: afterSnapshot,
             targetSurface: targetSurface,
             timeMutation: timeMutation,
+            executionResult: executionResult,
+            commandRecordID: commandRecordID,
             plannedAt: timestamp
         )
         let transactionID = "runtime.transaction.\(command.id)"
@@ -100,6 +104,8 @@ struct RuntimeTransactionCoordinator: Sendable {
         targetSurface: StageMutationTargetSurface,
         timeMutation: TimeMutation? = nil,
         projectionCursors: [ProjectionID: ProjectionCursor] = [:],
+        executionResult: AmbitionsCommandExecutionResult? = nil,
+        commandRecordID: String? = nil,
         occurredAt: Date = .now
     ) async throws -> RuntimeTransactionCommitOutcome {
         let key = LedgerIdempotencyKey(command.id)
@@ -117,6 +123,8 @@ struct RuntimeTransactionCoordinator: Sendable {
             targetSurface: targetSurface,
             timeMutation: timeMutation,
             projectionCursors: projectionCursors,
+            executionResult: executionResult,
+            commandRecordID: commandRecordID,
             occurredAt: occurredAt
         )
         let committedReceipts = await idempotencyStore.committedReceipts()

@@ -41,6 +41,20 @@ struct AmbitionsCommandExecutionResult: Codable, Sendable, Equatable, Hashable {
     }
 }
 
+extension AmbitionsCommandExecutionResult {
+    func mergingMetadata(_ additionalMetadata: [String: String]) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: status,
+            summary: summary,
+            route: route,
+            target: target,
+            eventLedgerEntryIDs: eventLedgerEntryIDs,
+            recommendationExplanationIDs: recommendationExplanationIDs,
+            metadata: metadata.merging(additionalMetadata.filter { $0.key.isEmpty == false && $0.value.isEmpty == false }) { _, new in new }
+        )
+    }
+}
+
 struct AmbitionsCommandExecutionRecord: Codable, Sendable, Equatable, Hashable, Identifiable {
     let id: String
     let command: AmbitionsCommand

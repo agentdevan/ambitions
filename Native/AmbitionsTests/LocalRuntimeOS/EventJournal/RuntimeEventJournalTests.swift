@@ -144,6 +144,8 @@ final class RuntimeEventJournalTests: XCTestCase {
         let captures = try await captureRepository.listCaptures()
         let events = try await runtimeEvents.fetchEvents(matching: .all, limit: nil)
         let event = try XCTUnwrap(events.first)
+        let fetchedCommandRecord = try await commandRecords.fetchRecord(commandID: command.id)
+        let commandRecord = try XCTUnwrap(fetchedCommandRecord)
 
         XCTAssertEqual(first.status, .succeeded)
         XCTAssertEqual(replay.metadata["replayDecision"], LedgerReplayDecision.replayExistingReceipt.rawValue)
@@ -153,6 +155,14 @@ final class RuntimeEventJournalTests: XCTestCase {
         XCTAssertEqual(event.event.actor, .user)
         XCTAssertEqual(event.event.source, .today)
         XCTAssertEqual(event.event.privacy, .standard)
+        XCTAssertEqual(event.event.metadata["resultStatus"], AmbitionsCommandExecutionStatus.succeeded.rawValue)
+        XCTAssertEqual(commandRecord.result.metadata["runtimeTransactionDisposition"], RuntimeTransactionCommitDisposition.committed.rawValue)
+        XCTAssertEqual(commandRecord.result.metadata["runtimeTransactionID"], "runtime.transaction.command-runtime-journal")
+        XCTAssertEqual(commandRecord.result.metadata["runtimeEventID"], "runtime.event.1")
+        XCTAssertEqual(commandRecord.result.metadata["runtimeReceiptID"], "runtime.receipt.command-runtime-journal")
+        XCTAssertEqual(commandRecord.result.metadata["runtimeRollbackPlanID"], "runtime.rollback.command-runtime-journal")
+        XCTAssertEqual(commandRecord.result.metadata["runtimeReplayDecision"], LedgerReplayDecision.applyFresh.rawValue)
+        XCTAssertEqual(commandRecord.result.metadata["runtimeDoubleApplyDisposition"], LedgerDoubleApplyDisposition.applyOnce.rawValue)
         guard case let .commandExecution(payload) = event.event.payload else {
             XCTFail("Expected command execution payload")
             return
@@ -160,6 +170,9 @@ final class RuntimeEventJournalTests: XCTestCase {
         XCTAssertEqual(payload.resultStatus, .succeeded)
         XCTAssertEqual(payload.commandRecordID, "command.execution.command-runtime-journal")
         XCTAssertEqual(payload.resultMetadata["captureID"], "capture-runtime-journal")
+        XCTAssertEqual(payload.resultMetadata["receiptID"], "runtime.receipt.command-runtime-journal")
+        XCTAssertEqual(payload.resultMetadata["proofArtifactID"], "runtime.proof.command-runtime-journal")
+        XCTAssertEqual(payload.resultMetadata["runtimeMutationID"], "runtime.mutation.command-runtime-journal")
     }
 }
 
