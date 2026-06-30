@@ -33,9 +33,11 @@ Required later for Green: live render, screenshot matrix, accessibility matrix, 
 ## VSP-02 - Today Reality Window
 
 Figma candidate screenshots:
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-hero-r1-repaired.png
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-crop-r1.png
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-launch-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-hero-r2.png
+- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-state-matrix-r2.png
+- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-accessibility-matrix-r2.png
+- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-swiftui-anatomy-r2.png
+- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-marketing-crop-r2.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Today/TodaySurface.swift
 - Native/Ambitions/Surfaces/Today/TodayObjectView.swift

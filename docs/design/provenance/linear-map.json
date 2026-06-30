@@ -6,7 +6,7 @@
       "vsp_id": "VSP-01",
       "likely_parent_issue": "AMB-1480",
       "recommended_parent_title": "VSP-01 Shell Authority Reconfirmation",
-      "recommended_status": "Spec Ready",
+      "recommended_status": "Ready For Review",
       "recommended_labels": [
         "VSP",
         "shell-authority",
@@ -69,9 +69,6 @@
         }
       ],
       "blocked_by": [
-        "VSP-01 shell parity",
-        "VSP-10 source-owner map",
-        "VSP-09 accessibility matrix",
         "owner approval"
       ],
       "acceptance_summary": [
@@ -85,7 +82,7 @@
         "python3 scripts/ambitions-vsp-provenance-audit.py"
       ],
       "closeout_required": [
-        "approved frame ID",
+        "owner-approved frame ID",
         "live SwiftUI screenshot matrix",
         "owner review result"
       ],

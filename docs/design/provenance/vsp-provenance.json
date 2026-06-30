@@ -18,7 +18,7 @@
       "vsp_id": "VSP-01",
       "title": "Root Shell / Stage / Chrome",
       "category": "shell_authority",
-      "current_status_recommendation": "Spec Ready",
+      "current_status_recommendation": "Ready For Review",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
@@ -145,16 +145,18 @@
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "14:2",
-        "frame_name": "CANDIDATE - VSP-02 - Today Reality Window hero - R1",
+        "node_id": "98:2",
+        "frame_name": "CANDIDATE - VSP-02 - Today Reality Window hero - R2",
         "screenshot_paths": [
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-hero-r1-repaired.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-crop-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-02-today-launch-board-r1.png"
+          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-hero-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-state-matrix-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-accessibility-matrix-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-swiftui-anatomy-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-marketing-crop-r2.png"
         ],
         "evidence_paths": [
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+          "docs/design/provenance/figma-frames/VSP-02-today-reality-window-R2.md",
+          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -200,7 +202,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1481",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Ready For Review",
         "recommended_labels": [
           "VSP",
           "today",
@@ -241,7 +243,8 @@
       },
       "known_risks": [
         "Can drift into a dashboard, task list, timeline clone, or CTA stack.",
-        "Figma candidate proof is not runtime behavior proof."
+        "Figma candidate proof is not runtime behavior proof.",
+        "R2 is ready for owner visual review but not owner-approved."
       ],
       "missing_evidence": [
         "owner approval",
@@ -256,7 +259,9 @@
         "No accessibility proof."
       ],
       "notes": [
-        "Use Start here, Recommended step, Step, Start now, and Open step language where applicable."
+        "Use Start here, Recommended step, Step, Start now, and Open step language where applicable.",
+        "R1 was reclassified as failure evidence because it read as stacked cards on a background.",
+        "R2 applies VSP-09 and VSP-10 gates and remains content-only inside VSP-01 shell authority."
       ]
     },
     {
