@@ -6312,6 +6312,39 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 84,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeCommitReceipt.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 118,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeConflictDetector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 62,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeIdempotencyStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-05",
@@ -6323,6 +6356,77 @@
       "kind": "native_source",
       "line_count": 162,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutation.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 95,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationPlan.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 70,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeReadSet.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 65,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeRollbackPlan.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 214,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransaction.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 146,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 98,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeWriteSet.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19230,6 +19334,7 @@
     {
       "candidate_vsp_ids": [
         "VSP-02",
+        "VSP-03",
         "VSP-04",
         "VSP-07",
         "VSP-09",
@@ -19238,7 +19343,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 58,
+      "line_count": 232,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/LocalRuntimeOSTransactionKernelOwnershipTests.swift"
     },
     {
@@ -22438,7 +22543,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 435,
+      "line_count": 436,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -22455,7 +22560,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 878,
+      "line_count": 880,
       "path": "docs/truth/PRODUCT_DESIGN_TRUTH.md"
     },
     {
@@ -22522,7 +22627,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1815,
+  "entry_count": 1824,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

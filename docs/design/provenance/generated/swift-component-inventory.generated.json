@@ -8912,6 +8912,7 @@
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
         "VSP-02",
+        "VSP-03",
         "VSP-04",
         "VSP-07",
         "VSP-09",
@@ -8919,7 +8920,7 @@
       ],
       "has_preview_provider": false,
       "kind": "test",
-      "line_count": 58,
+      "line_count": 232,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/LocalRuntimeOSTransactionKernelOwnershipTests.swift",
       "preview_count": 0,
       "proof_status": "source_inventory_only",
