@@ -7832,6 +7832,182 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 222,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/DryRunMigrationTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "DryRunMigrationTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 113,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/MigrationPlannerTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "MigrationPlannerTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 79,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/MigrationRepairOwnershipTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "MigrationRepairOwnershipTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 228,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/PreMigrationBackupTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "PreMigrationBackupTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 153,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RepairPlanEngineTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 268,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RestoreRollbackTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "RestoreRollbackTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 83,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RuntimeDoctorTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "RuntimeDoctorTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 99,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/SchemaLedgerTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SchemaLedgerTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 277,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/StoreInvariantCheckerTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "StoreInvariantCheckerTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -8533,26 +8709,6 @@
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
         "VSP-03",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 268,
-      "path": "Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "PortableRestoreRollbackTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-03",
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -8567,27 +8723,6 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "PortableSnapshotServiceTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 228,
-      "path": "Native/AmbitionsTests/Persistence/PreMigrationBackupTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "PreMigrationBackupTests"
       ],
       "view_modifiers": [],
       "view_structs": []
@@ -8903,98 +9038,6 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 277,
-      "path": "Native/AmbitionsTests/Persistence/StorageInvariantCheckerTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "StorageInvariantCheckerTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 153,
-      "path": "Native/AmbitionsTests/Persistence/StorageMigrationExecutionReadinessTestingTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 222,
-      "path": "Native/AmbitionsTests/Persistence/StorageMigrationFoundationTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "StorageMigrationFoundationTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 113,
-      "path": "Native/AmbitionsTests/Persistence/StorageMigrationPlanScaffoldTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "StorageMigrationPlanScaffoldTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 83,
-      "path": "Native/AmbitionsTests/Persistence/StorageMigrationRecoveryTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "StorageMigrationRecoveryTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
         "VSP-03"
       ],
       "has_preview_provider": false,
@@ -9005,24 +9048,6 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "StoragePackageBoundaryModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 99,
-      "path": "Native/AmbitionsTests/Persistence/StorageSchemaVersionLedgerTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "StorageSchemaVersionLedgerTests"
       ],
       "view_modifiers": [],
       "view_structs": []
@@ -12676,7 +12701,7 @@
       "view_structs": []
     }
   ],
-  "entry_count": 596,
+  "entry_count": 597,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "scan_roots": [

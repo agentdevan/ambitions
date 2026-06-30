@@ -1,35 +1,35 @@
 import Foundation
 
-let storageSchemaVersionLedgerSchemaVersion = "storage_schema_version_ledger.native.v1"
+let schemaLedgerSchemaVersion = "storage_schema_version_ledger.native.v1"
 
-enum StorageSchemaFamily: String, Sendable, Equatable, Hashable, CaseIterable {
+enum SchemaLedgerFamily: String, Sendable, Equatable, Hashable, CaseIterable {
     case swiftDataRecord = "swift_data_record"
     case encodedSnapshot = "encoded_snapshot"
     case portableSnapshot = "portable_snapshot"
 }
 
-enum StorageMigrationReadiness: String, Sendable, Equatable, Hashable {
+enum MigrationReadiness: String, Sendable, Equatable, Hashable {
     case namedOnly = "named_only"
     case migrationPlanRequired = "migration_plan_required"
     case backupGateRequired = "backup_gate_required"
     case dryRunRequired = "dry_run_required"
 }
 
-enum StorageRollbackRequirement: String, Sendable, Equatable, Hashable {
+enum RollbackRequirement: String, Sendable, Equatable, Hashable {
     case notExecutable = "not_executable"
     case rollbackPlanRequired = "rollback_plan_required"
     case restoreSnapshotRequired = "restore_snapshot_required"
 }
 
-struct StorageSchemaVersionEntry: Identifiable, Sendable, Equatable, Hashable {
+struct SchemaLedgerEntry: Identifiable, Sendable, Equatable, Hashable {
     let id: String
-    let family: StorageSchemaFamily
+    let family: SchemaLedgerFamily
     let owner: String
     let storedTypeName: String
     let currentVersion: String
     let versionEvidence: String
-    let migrationReadiness: StorageMigrationReadiness
-    let rollbackRequirement: StorageRollbackRequirement
+    let migrationReadiness: MigrationReadiness
+    let rollbackRequirement: RollbackRequirement
     let notes: String
 
     var blocksMigrationExecution: Bool {
@@ -38,13 +38,13 @@ struct StorageSchemaVersionEntry: Identifiable, Sendable, Equatable, Hashable {
 
     init(
         id: String,
-        family: StorageSchemaFamily,
+        family: SchemaLedgerFamily,
         owner: String,
         storedTypeName: String,
         currentVersion: String,
         versionEvidence: String,
-        migrationReadiness: StorageMigrationReadiness,
-        rollbackRequirement: StorageRollbackRequirement,
+        migrationReadiness: MigrationReadiness,
+        rollbackRequirement: RollbackRequirement,
         notes: String
     ) {
         self.id = id
@@ -59,26 +59,26 @@ struct StorageSchemaVersionEntry: Identifiable, Sendable, Equatable, Hashable {
     }
 }
 
-struct StorageSchemaVersionLedger: Sendable, Equatable {
+struct SchemaLedger: Sendable, Equatable {
     let schemaVersion: String
-    let entries: [StorageSchemaVersionEntry]
+    let entries: [SchemaLedgerEntry]
     let migrationExecutionAllowed: Bool
 
-    var swiftDataEntries: [StorageSchemaVersionEntry] {
+    var swiftDataEntries: [SchemaLedgerEntry] {
         entries.filter { $0.family == .swiftDataRecord }
     }
 
-    var portableSnapshotEntries: [StorageSchemaVersionEntry] {
+    var portableSnapshotEntries: [SchemaLedgerEntry] {
         entries.filter { $0.family == .portableSnapshot }
     }
 
-    var migrationBlockers: [StorageSchemaVersionEntry] {
+    var migrationBlockers: [SchemaLedgerEntry] {
         entries.filter(\.blocksMigrationExecution)
     }
 
     init(
-        schemaVersion: String = storageSchemaVersionLedgerSchemaVersion,
-        entries: [StorageSchemaVersionEntry],
+        schemaVersion: String = schemaLedgerSchemaVersion,
+        entries: [SchemaLedgerEntry],
         migrationExecutionAllowed: Bool = false
     ) {
         self.schemaVersion = schemaVersion
@@ -86,7 +86,7 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
         self.migrationExecutionAllowed = migrationExecutionAllowed
     }
 
-    static let current = StorageSchemaVersionLedger(entries: [
+    static let current = SchemaLedger(entries: [
         .swiftData(
             id: "swiftdata.goal_record",
             storedTypeName: "GoalRecord",
@@ -234,7 +234,7 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
             versionEvidence: "Current SwiftData model in AmbitionsPersistenceStore.schema.",
             notes: "Local app state and user preference snapshot."
         ),
-        StorageSchemaVersionEntry(
+        SchemaLedgerEntry(
             id: "portable_snapshot.app_snapshot",
             family: .portableSnapshot,
             owner: "PortableSnapshotService",
@@ -247,10 +247,10 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
         )
     ])
 
-    static let seededHistoricalV0 = StorageSchemaVersionLedger(entries: current.entries.map { entry in
+    static let seededHistoricalV0 = SchemaLedger(entries: current.entries.map { entry in
         switch entry.family {
         case .swiftDataRecord:
-            return StorageSchemaVersionEntry(
+            return SchemaLedgerEntry(
                 id: entry.id,
                 family: entry.family,
                 owner: entry.owner,
@@ -267,7 +267,7 @@ struct StorageSchemaVersionLedger: Sendable, Equatable {
     })
 }
 
-enum StorageSchemaVersionLedgerIssue: Sendable, Equatable, Hashable {
+enum SchemaLedgerIssue: Sendable, Equatable, Hashable {
     case unsupportedLedgerSchema(String)
     case duplicateEntryID(String)
     case emptyStoredTypeName(String)
@@ -276,7 +276,7 @@ enum StorageSchemaVersionLedgerIssue: Sendable, Equatable, Hashable {
     case migrationExecutionAuthorizedWithoutDryRun(String)
 }
 
-struct StorageSchemaVersionLedgerValidator: Sendable {
+struct SchemaLedgerValidator: Sendable {
     static let requiredSwiftDataTypeNames: Set<String> = [
         "GoalRecord",
         "GoalDraftRecord",
@@ -301,10 +301,10 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         "AmbitionGraphProjectionRecordModel",
     ]
 
-    func validate(_ ledger: StorageSchemaVersionLedger) -> [StorageSchemaVersionLedgerIssue] {
-        var issues: [StorageSchemaVersionLedgerIssue] = []
+    func validate(_ ledger: SchemaLedger) -> [SchemaLedgerIssue] {
+        var issues: [SchemaLedgerIssue] = []
 
-        if ledger.schemaVersion != storageSchemaVersionLedgerSchemaVersion {
+        if ledger.schemaVersion != schemaLedgerSchemaVersion {
             issues.append(.unsupportedLedgerSchema(ledger.schemaVersion))
         }
 
@@ -328,22 +328,22 @@ struct StorageSchemaVersionLedgerValidator: Sendable {
         }
 
         if ledger.migrationExecutionAllowed && ledger.migrationBlockers.isEmpty == false {
-            issues.append(.migrationExecutionAuthorizedWithoutDryRun("PK07 is ledger-only."))
+            issues.append(.migrationExecutionAuthorizedWithoutDryRun("SchemaLedger is inventory-only."))
         }
 
         return issues
     }
 }
 
-private extension StorageSchemaVersionEntry {
+private extension SchemaLedgerEntry {
     static func swiftData(
         id: String,
         storedTypeName: String,
         currentVersion: String,
         versionEvidence: String,
         notes: String
-    ) -> StorageSchemaVersionEntry {
-        StorageSchemaVersionEntry(
+    ) -> SchemaLedgerEntry {
+        SchemaLedgerEntry(
             id: id,
             family: .swiftDataRecord,
             owner: "AmbitionsPersistenceStore",

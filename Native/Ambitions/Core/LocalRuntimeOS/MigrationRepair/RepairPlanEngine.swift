@@ -1,6 +1,6 @@
 import Foundation
 
-enum StorageMigrationProofKind: String, CaseIterable, Sendable, Equatable, Hashable {
+enum MigrationRepairProofKind: String, CaseIterable, Sendable, Equatable, Hashable {
     case storageInvariantCheck = "storage_invariant_check"
     case preMigrationBackupReceipt = "pre_migration_backup_receipt"
     case stagedDryRunResult = "staged_dry_run_result"
@@ -9,7 +9,7 @@ enum StorageMigrationProofKind: String, CaseIterable, Sendable, Equatable, Hasha
     case releaseClaimBlockerAcknowledgement = "release_claim_blocker_acknowledgement"
 }
 
-enum StorageMigrationPlanIssueKind: String, Sendable, Equatable, Hashable, Codable {
+enum MigrationPlanIssueKind: String, Sendable, Equatable, Hashable, Codable {
     case unsupportedPlanSchema = "unsupported_plan_schema"
     case unsupportedSourceLedger = "unsupported_source_ledger"
     case unsupportedTargetLedger = "unsupported_target_ledger"
@@ -18,16 +18,16 @@ enum StorageMigrationPlanIssueKind: String, Sendable, Equatable, Hashable, Codab
     case migrationExecutionAuthorized = "migration_execution_authorized"
 }
 
-enum StorageMigrationExecutionReadinessIssueKind: String, Sendable, Equatable, Hashable, Codable {
+enum RepairPlanIssueKind: String, Sendable, Equatable, Hashable, Codable {
     case validatorIssue = "validator_issue"
     case missingProof = "missing_proof"
     case duplicateProofID = "duplicate_proof_id"
     case mutationPlanHasNoMutation = "mutation_plan_has_no_mutation"
 }
 
-struct StorageMigrationProof: Identifiable, Sendable, Equatable, Hashable {
+struct MigrationRepairProof: Identifiable, Sendable, Equatable, Hashable {
     let id: String
-    let kind: StorageMigrationProofKind
+    let kind: MigrationRepairProofKind
     let subjectEntryID: String?
     let producedBy: String
     let producedAt: String
@@ -35,7 +35,7 @@ struct StorageMigrationProof: Identifiable, Sendable, Equatable, Hashable {
 
     init(
         id: String,
-        kind: StorageMigrationProofKind,
+        kind: MigrationRepairProofKind,
         subjectEntryID: String? = nil,
         producedBy: String,
         producedAt: String,
@@ -50,13 +50,13 @@ struct StorageMigrationProof: Identifiable, Sendable, Equatable, Hashable {
     }
 }
 
-enum StorageMigrationExecutionReadinessIssue: Sendable, Equatable, Hashable {
-    case validatorIssue(StorageMigrationPlanIssue)
-    case missingProof(entryID: String, gate: StorageMigrationPlanGate, expectedProofKind: StorageMigrationProofKind)
+enum RepairPlanIssue: Sendable, Equatable, Hashable {
+    case validatorIssue(MigrationPlanIssue)
+    case missingProof(entryID: String, gate: MigrationGate, expectedProofKind: MigrationRepairProofKind)
     case duplicateProofID(String)
     case mutationPlanHasNoMutation
 
-    var kind: StorageMigrationExecutionReadinessIssueKind {
+    var kind: RepairPlanIssueKind {
         switch self {
         case .validatorIssue:
             return .validatorIssue
@@ -69,7 +69,7 @@ enum StorageMigrationExecutionReadinessIssue: Sendable, Equatable, Hashable {
         }
     }
 
-    var validatorIssueKind: StorageMigrationPlanIssueKind? {
+    var validatorIssueKind: MigrationPlanIssueKind? {
         guard case let .validatorIssue(issue) = self else {
             return nil
         }
@@ -77,8 +77,8 @@ enum StorageMigrationExecutionReadinessIssue: Sendable, Equatable, Hashable {
     }
 }
 
-struct StorageMigrationExecutionReadiness: Sendable, Equatable {
-    let issues: [StorageMigrationExecutionReadinessIssue]
+struct RepairPlan: Sendable, Equatable {
+    let issues: [RepairPlanIssue]
     let proofIDsByEntryID: [String: Set<String>]
 
     var isGreen: Bool {
@@ -90,18 +90,18 @@ struct StorageMigrationExecutionReadiness: Sendable, Equatable {
     }
 }
 
-struct StorageMigrationExecutionReadinessEvaluator: Sendable {
-    private let validator: StorageMigrationPlanValidator
+struct RepairPlanEngine: Sendable {
+    private let validator: MigrationPlanValidator
 
-    init(validator: StorageMigrationPlanValidator = StorageMigrationPlanValidator()) {
+    init(validator: MigrationPlanValidator = MigrationPlanValidator()) {
         self.validator = validator
     }
 
     func evaluate(
-        plan: StorageMigrationPlan,
-        proofs: [StorageMigrationProof]
-    ) -> StorageMigrationExecutionReadiness {
-        var issues = validator.validate(plan).map(StorageMigrationExecutionReadinessIssue.validatorIssue)
+        plan: MigrationPlan,
+        proofs: [MigrationRepairProof]
+    ) -> RepairPlan {
+        var issues = validator.validate(plan).map(RepairPlanIssue.validatorIssue)
         let duplicateProofIDs = Dictionary(grouping: proofs, by: \.id)
             .filter { $0.value.count > 1 }
             .keys
@@ -110,7 +110,7 @@ struct StorageMigrationExecutionReadinessEvaluator: Sendable {
 
         guard plan.mutationEntries.isEmpty == false else {
             issues.append(.mutationPlanHasNoMutation)
-            return StorageMigrationExecutionReadiness(
+            return RepairPlan(
                 issues: issues,
                 proofIDsByEntryID: [:]
             )
@@ -140,13 +140,13 @@ struct StorageMigrationExecutionReadinessEvaluator: Sendable {
             }
         }
 
-        return StorageMigrationExecutionReadiness(
+        return RepairPlan(
             issues: issues,
             proofIDsByEntryID: proofIDsByEntryID
         )
     }
 
-    static func proofKind(for gate: StorageMigrationPlanGate) -> StorageMigrationProofKind {
+    static func proofKind(for gate: MigrationGate) -> MigrationRepairProofKind {
         switch gate {
         case .storageInvariantCheck:
             return .storageInvariantCheck
@@ -164,8 +164,8 @@ struct StorageMigrationExecutionReadinessEvaluator: Sendable {
     }
 }
 
-extension StorageMigrationPlanIssue {
-    var kind: StorageMigrationPlanIssueKind {
+extension MigrationPlanIssue {
+    var kind: MigrationPlanIssueKind {
         switch self {
         case .unsupportedPlanSchema:
             return .unsupportedPlanSchema

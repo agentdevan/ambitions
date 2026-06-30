@@ -1,7 +1,7 @@
 import XCTest
 @testable import Ambitions
 
-final class PortableRestoreRollbackTests: XCTestCase {
+final class RestoreRollbackTests: XCTestCase {
     func testRestoreRollbackRestoresBackupWhenImportThrowsAfterMutation() async throws {
         let backup = snapshot(displayName: "Backup User")
         let incoming = snapshot(displayName: "Incoming Fails")
@@ -11,7 +11,7 @@ final class PortableRestoreRollbackTests: XCTestCase {
             failingImportDisplayName: "Incoming Fails",
             damagedSnapshot: damaged
         )
-        let service = PortableRestoreRollbackService(snapshotService: scripted)
+        let service = RestoreRollback(snapshotService: scripted)
 
         let report = await service.restoreSnapshotWithRollback(
             incoming,
@@ -39,7 +39,7 @@ final class PortableRestoreRollbackTests: XCTestCase {
             current: backup,
             dryRunFailureDisplayName: "Incoming Dry Run Fails"
         )
-        let service = PortableRestoreRollbackService(snapshotService: scripted)
+        let service = RestoreRollback(snapshotService: scripted)
 
         let report = await service.restoreSnapshotWithRollback(
             incoming,
@@ -68,7 +68,7 @@ final class PortableRestoreRollbackTests: XCTestCase {
             rollbackFailureDisplayName: "Rollback Package Fails",
             damagedSnapshot: damaged
         )
-        let service = PortableRestoreRollbackService(snapshotService: scripted)
+        let service = RestoreRollback(snapshotService: scripted)
 
         let report = await service.restoreSnapshotWithRollback(
             incoming,
@@ -109,7 +109,7 @@ final class PortableRestoreRollbackTests: XCTestCase {
             repositories: repositories,
             resetStore: { try await store.resetAllData() }
         )
-        let service = PortableRestoreRollbackService(snapshotService: snapshotService)
+        let service = RestoreRollback(snapshotService: snapshotService)
         let report = await service.restoreSnapshotWithRollback(
             snapshot(displayName: incomingState.userDisplayName),
             mode: .replaceLocalStore
@@ -135,7 +135,7 @@ final class PortableRestoreRollbackTests: XCTestCase {
         }
         """.data(using: .utf8)!
 
-        let report = try JSONDecoder().decode(PortableRestoreRollbackReport.self, from: payload)
+        let report = try JSONDecoder().decode(RestoreRollbackReport.self, from: payload)
 
         XCTAssertEqual(report.status, .rollbackRestoredBackup)
         XCTAssertEqual(report.diagnosticKind, .rollbackRestored)

@@ -4413,6 +4413,119 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
+      "line_count": 99,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/CorruptionQuarantine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 572,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/DryRunMigration.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 156,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/MigrationDSL.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 83,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/MigrationPlanner.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 247,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/PreMigrationBackup.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 185,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RepairPlanEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 219,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RestoreRollback.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 163,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctor.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 359,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/SchemaLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 373,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/StoreInvariantChecker.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
       "line_count": 35,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
     },
@@ -5519,16 +5632,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 219,
-      "path": "Native/Ambitions/Core/Persistence/PortableRestoreRollback.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-03",
         "VSP-05",
         "VSP-07"
@@ -5602,19 +5705,6 @@
       "kind": "native_source",
       "line_count": 133,
       "path": "Native/Ambitions/Core/Persistence/PortableSnapshotService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 247,
-      "path": "Native/Ambitions/Core/Persistence/PreMigrationBackup.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5828,78 +5918,12 @@
       "path": "Native/Ambitions/Core/Persistence/SourceAtlasSeedFoundry.swift"
     },
     {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 373,
-      "path": "Native/Ambitions/Core/Persistence/StorageInvariantChecker.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 185,
-      "path": "Native/Ambitions/Core/Persistence/StorageMigrationExecutionReadiness.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 572,
-      "path": "Native/Ambitions/Core/Persistence/StorageMigrationFoundation.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 228,
-      "path": "Native/Ambitions/Core/Persistence/StorageMigrationPlanScaffold.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 168,
-      "path": "Native/Ambitions/Core/Persistence/StorageMigrationRecovery.swift"
-    },
-    {
       "candidate_vsp_ids": [],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
       "line_count": 129,
       "path": "Native/Ambitions/Core/Persistence/StoragePackageBoundaryModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 359,
-      "path": "Native/Ambitions/Core/Persistence/StorageSchemaVersionLedger.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -17696,6 +17720,112 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 222,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/DryRunMigrationTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 113,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/MigrationPlannerTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 79,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/MigrationRepairOwnershipTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 228,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/PreMigrationBackupTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 153,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RepairPlanEngineTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 268,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RestoreRollbackTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 83,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RuntimeDoctorTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 99,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/SchemaLedgerTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 277,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/StoreInvariantCheckerTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -18125,18 +18255,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-03",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 268,
-      "path": "Native/AmbitionsTests/Persistence/PortableRestoreRollbackTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -18148,19 +18266,6 @@
       "kind": "test",
       "line_count": 1159,
       "path": "Native/AmbitionsTests/Persistence/PortableSnapshotServiceTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 228,
-      "path": "Native/AmbitionsTests/Persistence/PreMigrationBackupTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18343,60 +18448,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 277,
-      "path": "Native/AmbitionsTests/Persistence/StorageInvariantCheckerTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 153,
-      "path": "Native/AmbitionsTests/Persistence/StorageMigrationExecutionReadinessTestingTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 222,
-      "path": "Native/AmbitionsTests/Persistence/StorageMigrationFoundationTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 113,
-      "path": "Native/AmbitionsTests/Persistence/StorageMigrationPlanScaffoldTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 83,
-      "path": "Native/AmbitionsTests/Persistence/StorageMigrationRecoveryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-03"
       ],
       "exists": true,
@@ -18404,16 +18455,6 @@
       "kind": "test",
       "line_count": 82,
       "path": "Native/AmbitionsTests/Persistence/StoragePackageBoundaryModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 99,
-      "path": "Native/AmbitionsTests/Persistence/StorageSchemaVersionLedgerTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -21407,7 +21448,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 406,
+      "line_count": 409,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -21491,7 +21532,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1736,
+  "entry_count": 1739,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

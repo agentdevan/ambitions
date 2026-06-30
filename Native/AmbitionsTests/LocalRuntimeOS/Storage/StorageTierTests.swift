@@ -160,7 +160,7 @@ final class StorageTierTests: XCTestCase {
         XCTAssertEqual(decryptedPackage, Data("portable snapshot".utf8))
 
         let migrationStore = MigrationStore(databaseURL: directory.appendingPathComponent("migration.sqlite"))
-        let plan = StorageMigrationPlanScaffold().plan(from: StorageSchemaVersionLedger.current, to: StorageSchemaVersionLedger.current)
+        let plan = MigrationPlanner().plan(from: SchemaLedger.current, to: SchemaLedger.current)
         let migrationRecord = try await migrationStore.recordDryRun(
             id: "dry-run-current",
             plan: plan,

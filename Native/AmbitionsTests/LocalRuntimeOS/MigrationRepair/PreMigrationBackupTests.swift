@@ -13,13 +13,13 @@ final class PreMigrationBackupTests: XCTestCase {
             repositories: repositories,
             resetStore: { try await store.resetAllData() }
         )
-        let backupService = PreMigrationBackupService(
+        let backupService = PreMigrationBackup(
             snapshotService: snapshotService,
-            invariantReportProvider: { try await StorageInvariantChecker().check(store: store) },
+            invariantReportProvider: { try await StoreInvariantChecker().check(store: store) },
             timestampProvider: { "2026-05-08T18:00:00Z" },
             idProvider: { "backup.receipt.test" }
         )
-        let plan = StorageMigrationPlanScaffold().plan(
+        let plan = MigrationPlanner().plan(
             from: .current,
             to: ledgerWithChangedVersion()
         )
@@ -39,14 +39,14 @@ final class PreMigrationBackupTests: XCTestCase {
         XCTAssertEqual(report.backupPackage?.appState.userDisplayName, "Backup User")
     }
 
-    func testBackupGateBlocksWhenStorageInvariantReportHasBlockers() async throws {
+    func testBackupGateBlocksWhenStoreInvariantReportHasBlockers() async throws {
         let snapshotService = FixedSnapshotService(snapshot: nonEmptySnapshot())
-        let backupService = PreMigrationBackupService(
+        let backupService = PreMigrationBackup(
             snapshotService: snapshotService,
             invariantReportProvider: {
-                StorageInvariantReport(
+                StoreInvariantReport(
                     issues: [
-                        StorageInvariantIssue(
+                        StoreInvariantIssue(
                             storedTypeName: "GoalRecord",
                             recordID: "goal-broken",
                             fieldName: "title",
@@ -59,7 +59,7 @@ final class PreMigrationBackupTests: XCTestCase {
         )
 
         let report = try await backupService.prepareBackup(
-            for: StorageMigrationPlanScaffold().plan(from: .current, to: ledgerWithChangedVersion())
+            for: MigrationPlanner().plan(from: .current, to: ledgerWithChangedVersion())
         )
 
         XCTAssertFalse(report.isGreen)
@@ -70,15 +70,15 @@ final class PreMigrationBackupTests: XCTestCase {
 
     func testBackupGateBlocksMalformedMutationPlanAndDoesNotCountEmptyPackages() async throws {
         let snapshotService = FixedSnapshotService(snapshot: emptySnapshot())
-        let backupService = PreMigrationBackupService(
+        let backupService = PreMigrationBackup(
             snapshotService: snapshotService,
-            invariantReportProvider: { StorageInvariantReport(issues: []) }
+            invariantReportProvider: { StoreInvariantReport(issues: []) }
         )
-        let plan = StorageMigrationPlan(
-            sourceLedgerSchemaVersion: storageSchemaVersionLedgerSchemaVersion,
-            targetLedgerSchemaVersion: storageSchemaVersionLedgerSchemaVersion,
+        let plan = MigrationPlan(
+            sourceLedgerSchemaVersion: schemaLedgerSchemaVersion,
+            targetLedgerSchemaVersion: schemaLedgerSchemaVersion,
             entries: [
-                StorageMigrationPlanEntry(
+                MigrationPlanEntry(
                     id: "migration.version_change.swiftdata.goal_record",
                     sourceEntryID: "swiftdata.goal_record",
                     targetEntryID: "swiftdata.goal_record",
@@ -167,13 +167,13 @@ private extension PreMigrationBackupTests {
     }
 }
 
-private func ledgerWithChangedVersion() -> StorageSchemaVersionLedger {
-    StorageSchemaVersionLedger(
-        entries: StorageSchemaVersionLedger.current.entries.map { entry in
+private func ledgerWithChangedVersion() -> SchemaLedger {
+    SchemaLedger(
+        entries: SchemaLedger.current.entries.map { entry in
             guard entry.id == "swiftdata.goal_record" else {
                 return entry
             }
-            return StorageSchemaVersionEntry(
+            return SchemaLedgerEntry(
                 id: entry.id,
                 family: entry.family,
                 owner: entry.owner,

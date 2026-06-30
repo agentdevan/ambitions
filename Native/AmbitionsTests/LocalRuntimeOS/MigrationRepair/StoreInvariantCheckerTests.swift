@@ -2,7 +2,7 @@ import XCTest
 import AmbitionsDesignSystem
 @testable import Ambitions
 
-final class StorageInvariantCheckerTests: XCTestCase {
+final class StoreInvariantCheckerTests: XCTestCase {
     func testCleanRepositoryStateProducesGreenReadOnlyReport() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let repositories = Self.makeRepositories(store: store)
@@ -11,10 +11,10 @@ final class StorageInvariantCheckerTests: XCTestCase {
 
         try await repositories.goals.saveGoals([goal])
 
-        let report = try await StorageInvariantChecker().check(store: store)
+        let report = try await StoreInvariantChecker().check(store: store)
 
-        XCTAssertEqual(report.schemaVersion, storageInvariantCheckerSchemaVersion)
-        XCTAssertEqual(report.ledgerSchemaVersion, StorageSchemaVersionLedger.current.schemaVersion)
+        XCTAssertEqual(report.schemaVersion, storeInvariantCheckerSchemaVersion)
+        XCTAssertEqual(report.ledgerSchemaVersion, SchemaLedger.current.schemaVersion)
         XCTAssertEqual(report.issues, [])
         XCTAssertEqual(report.issueCount, 0)
         XCTAssertEqual(report.blockerCount, 0)
@@ -32,7 +32,7 @@ final class StorageInvariantCheckerTests: XCTestCase {
             context.insert(Self.orphanAppStateRecord())
         }
 
-        let report = try await StorageInvariantChecker().check(store: store)
+        let report = try await StoreInvariantChecker().check(store: store)
         let issueFields = Set(report.issues.map { "\($0.storedTypeName).\($0.fieldName)" })
 
         XCTAssertTrue(issueFields.contains("StepRecord.goalID"))
@@ -65,7 +65,7 @@ final class StorageInvariantCheckerTests: XCTestCase {
             )
         }
 
-        let report = try await StorageInvariantChecker().check(store: store)
+        let report = try await StoreInvariantChecker().check(store: store)
         let rawIssues = report.issues.filter { $0.kind == .unknownRawValue }
 
         XCTAssertEqual(Set(rawIssues.map(\.fieldName)), ["sourceTypeRaw", "statusRaw"])
@@ -81,7 +81,7 @@ final class StorageInvariantCheckerTests: XCTestCase {
             context.insert(Self.malformedGoalRecord())
         }
 
-        let report = try await StorageInvariantChecker().check(store: store)
+        let report = try await StoreInvariantChecker().check(store: store)
 
         XCTAssertTrue(report.issues.contains {
             $0.storedTypeName == "GoalRecord"
@@ -97,7 +97,7 @@ final class StorageInvariantCheckerTests: XCTestCase {
     }
 }
 
-private extension StorageInvariantCheckerTests {
+private extension StoreInvariantCheckerTests {
     static func makeRepositories(store: AmbitionsPersistenceStore) -> AppRepositories {
         AppRepositories(
             goals: SwiftDataGoalRepository(store: store),

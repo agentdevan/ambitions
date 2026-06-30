@@ -1,12 +1,12 @@
 import Testing
 @testable import Ambitions
 
-struct StorageMigrationExecutionReadinessTestingTests {
+struct RepairPlanTestingTests {
     @Test func readinessRequiresProofForEveryMutationSafetyGate() throws {
         let plan = Self.versionChangePlan()
         let mutation = try #require(plan.mutationEntries.first)
 
-        let readiness = StorageMigrationExecutionReadinessEvaluator().evaluate(
+        let readiness = RepairPlanEngine().evaluate(
             plan: plan,
             proofs: []
         )
@@ -14,8 +14,8 @@ struct StorageMigrationExecutionReadinessTestingTests {
         #expect(readiness.isGreen == false)
         #expect(readiness.canRequestMigrationExecution == false)
 
-        for gate in StorageMigrationPlanEntry.requiredMutationGates {
-            let expectedKind = StorageMigrationExecutionReadinessEvaluator.proofKind(for: gate)
+        for gate in MigrationPlanEntry.requiredMutationGates {
+            let expectedKind = RepairPlanEngine.proofKind(for: gate)
             #expect(
                 readiness.issues.contains(
                     .missingProof(
@@ -33,20 +33,20 @@ struct StorageMigrationExecutionReadinessTestingTests {
         let mutation = try #require(plan.mutationEntries.first)
         let proofs = Self.completeProofs(for: mutation)
 
-        let readiness = StorageMigrationExecutionReadinessEvaluator().evaluate(
+        let readiness = RepairPlanEngine().evaluate(
             plan: plan,
             proofs: proofs
         )
 
         #expect(readiness.isGreen)
         #expect(readiness.canRequestMigrationExecution)
-        #expect(readiness.proofIDsByEntryID[mutation.id]?.count == StorageMigrationPlanEntry.requiredMutationGates.count)
+        #expect(readiness.proofIDsByEntryID[mutation.id]?.count == MigrationPlanEntry.requiredMutationGates.count)
     }
 
     @Test func readinessRejectsDuplicateProofIdentifiers() throws {
         let plan = Self.versionChangePlan()
         let mutation = try #require(plan.mutationEntries.first)
-        let duplicateProof = StorageMigrationProof(
+        let duplicateProof = MigrationRepairProof(
             id: "duplicate-proof",
             kind: .preMigrationBackupReceipt,
             subjectEntryID: mutation.id,
@@ -55,7 +55,7 @@ struct StorageMigrationExecutionReadinessTestingTests {
             summary: "Duplicate proof fixture."
         )
 
-        let readiness = StorageMigrationExecutionReadinessEvaluator().evaluate(
+        let readiness = RepairPlanEngine().evaluate(
             plan: plan,
             proofs: [duplicateProof, duplicateProof]
         )
@@ -66,12 +66,12 @@ struct StorageMigrationExecutionReadinessTestingTests {
     }
 
     @Test func noMutationPlanCannotRequestMigrationExecution() {
-        let plan = StorageMigrationPlanScaffold().plan(
-            from: StorageSchemaVersionLedger.current,
-            to: StorageSchemaVersionLedger.current
+        let plan = MigrationPlanner().plan(
+            from: SchemaLedger.current,
+            to: SchemaLedger.current
         )
 
-        let readiness = StorageMigrationExecutionReadinessEvaluator().evaluate(
+        let readiness = RepairPlanEngine().evaluate(
             plan: plan,
             proofs: []
         )
@@ -83,12 +83,12 @@ struct StorageMigrationExecutionReadinessTestingTests {
     }
 
     @Test func validatorIssuesExposeDeterministicFailureKinds() {
-        let plan = StorageMigrationPlan(
-            schemaVersion: "storage_migration_plan_scaffold.native.v0",
-            sourceLedgerSchemaVersion: StorageSchemaVersionLedger.current.schemaVersion,
-            targetLedgerSchemaVersion: StorageSchemaVersionLedger.current.schemaVersion,
-            entries: StorageSchemaVersionLedger.current.entries.map { entry in
-                StorageMigrationPlanEntry(
+        let plan = MigrationPlan(
+            schemaVersion: "migration_repair_dsl.native.v0",
+            sourceLedgerSchemaVersion: SchemaLedger.current.schemaVersion,
+            targetLedgerSchemaVersion: SchemaLedger.current.schemaVersion,
+            entries: SchemaLedger.current.entries.map { entry in
+                MigrationPlanEntry(
                     id: "migration.no_change.\(entry.id)",
                     sourceEntryID: entry.id,
                     targetEntryID: entry.id,
@@ -102,7 +102,7 @@ struct StorageMigrationExecutionReadinessTestingTests {
             }
         )
 
-        let readiness = StorageMigrationExecutionReadinessEvaluator().evaluate(
+        let readiness = RepairPlanEngine().evaluate(
             plan: plan,
             proofs: []
         )
@@ -112,11 +112,11 @@ struct StorageMigrationExecutionReadinessTestingTests {
         })
     }
 
-    private static func versionChangePlan() -> StorageMigrationPlan {
-        let target = StorageSchemaVersionLedger(
-            entries: StorageSchemaVersionLedger.current.entries.map { entry in
+    private static func versionChangePlan() -> MigrationPlan {
+        let target = SchemaLedger(
+            entries: SchemaLedger.current.entries.map { entry in
                 guard entry.id == "swiftdata.goal_record" else { return entry }
-                return StorageSchemaVersionEntry(
+                return SchemaLedgerEntry(
                     id: entry.id,
                     family: entry.family,
                     owner: entry.owner,
@@ -130,16 +130,16 @@ struct StorageMigrationExecutionReadinessTestingTests {
             }
         )
 
-        return StorageMigrationPlanScaffold().plan(
-            from: StorageSchemaVersionLedger.current,
+        return MigrationPlanner().plan(
+            from: SchemaLedger.current,
             to: target
         )
     }
 
-    private static func completeProofs(for entry: StorageMigrationPlanEntry) -> [StorageMigrationProof] {
-        StorageMigrationPlanEntry.requiredMutationGates.map { gate in
-            let kind = StorageMigrationExecutionReadinessEvaluator.proofKind(for: gate)
-            return StorageMigrationProof(
+    private static func completeProofs(for entry: MigrationPlanEntry) -> [MigrationRepairProof] {
+        MigrationPlanEntry.requiredMutationGates.map { gate in
+            let kind = RepairPlanEngine.proofKind(for: gate)
+            return MigrationRepairProof(
                 id: "proof.\(entry.id).\(kind.rawValue)",
                 kind: kind,
                 subjectEntryID: entry.id,

@@ -1,43 +1,31 @@
 import Foundation
 
-let storageMigrationRecoverySchemaVersion = "storage_migration_recovery.native.v1"
+let runtimeDoctorSchemaVersion = "storage_migration_recovery.native.v1"
 
-enum StorageRecoveryMode: String, Sendable, Equatable, Hashable {
+enum RuntimeDoctorMode: String, Sendable, Equatable, Hashable {
     case normal = "normal"
     case migrationReviewRequired = "migration_review_required"
     case corruptionReviewRequired = "corruption_review_required"
 }
 
-enum StorageRecoverySignalKind: String, Sendable, Equatable, Hashable {
-    case corruptStoreOpenFailed = "corrupt_store_open_failed"
-    case decodeFailure = "decode_failure"
-    case invariantBlocker = "invariant_blocker"
-}
-
-struct StorageRecoverySignal: Identifiable, Sendable, Equatable, Hashable {
-    let id: String
-    let kind: StorageRecoverySignalKind
-    let message: String
-}
-
-enum StorageRecoveryIssueKind: String, Sendable, Equatable, Hashable {
+enum RuntimeDoctorIssueKind: String, Sendable, Equatable, Hashable {
     case migrationReadinessBlocked = "migration_readiness_blocked"
     case missingPreMigrationBackupReceipt = "missing_pre_migration_backup_receipt"
     case corruptStoreSignal = "corrupt_store_signal"
     case destructiveResetNotAuthorized = "destructive_reset_not_authorized"
 }
 
-struct StorageRecoveryIssue: Identifiable, Sendable, Equatable, Hashable {
+struct RuntimeDoctorIssue: Identifiable, Sendable, Equatable, Hashable {
     let id: String
-    let kind: StorageRecoveryIssueKind
+    let kind: RuntimeDoctorIssueKind
     let message: String
 }
 
-struct StorageRecoveryReceipt: Identifiable, Sendable, Equatable, Hashable {
+struct RuntimeDoctorReceipt: Identifiable, Sendable, Equatable, Hashable {
     let id: String
     let schemaVersion: String
     let createdAt: String
-    let mode: StorageRecoveryMode
+    let mode: RuntimeDoctorMode
     let sourceLedgerSchemaVersion: String
     let targetLedgerSchemaVersion: String
     let migrationPlanSchemaVersion: String
@@ -51,11 +39,11 @@ struct StorageRecoveryReceipt: Identifiable, Sendable, Equatable, Hashable {
     let destructiveResetAllowed: Bool
 }
 
-struct StorageRecoveryAssessment: Sendable, Equatable {
+struct RuntimeDoctorAssessment: Sendable, Equatable {
     let schemaVersion: String
-    let mode: StorageRecoveryMode
-    let receipt: StorageRecoveryReceipt
-    let issues: [StorageRecoveryIssue]
+    let mode: RuntimeDoctorMode
+    let receipt: RuntimeDoctorReceipt
+    let issues: [RuntimeDoctorIssue]
 
     var canOpenRecoveryMode: Bool {
         mode != .normal
@@ -69,29 +57,36 @@ struct StorageRecoveryAssessment: Sendable, Equatable {
     }
 }
 
-struct StorageMigrationRecoveryCoordinator: Sendable {
+struct RuntimeDoctor: Sendable {
     let timestampProvider: @Sendable () -> String
     let idProvider: @Sendable () -> String
+    let corruptionQuarantine: CorruptionQuarantine
 
     init(
         timestampProvider: @escaping @Sendable () -> String = { DomainTimestamp.string(from: .now) },
-        idProvider: @escaping @Sendable () -> String = { UUID().uuidString }
+        idProvider: @escaping @Sendable () -> String = { UUID().uuidString },
+        corruptionQuarantine: CorruptionQuarantine? = nil
     ) {
         self.timestampProvider = timestampProvider
         self.idProvider = idProvider
+        self.corruptionQuarantine = corruptionQuarantine ?? CorruptionQuarantine(
+            timestampProvider: timestampProvider,
+            idProvider: idProvider
+        )
     }
 
     func assess(
-        plan: StorageMigrationPlan,
-        readiness: StorageMigrationExecutionReadiness,
+        plan: MigrationPlan,
+        readiness: RepairPlan,
         preMigrationBackup: PreMigrationBackupReceipt?,
-        recoverySignals: [StorageRecoverySignal] = []
-    ) -> StorageRecoveryAssessment {
-        var issues: [StorageRecoveryIssue] = []
+        recoverySignals: [CorruptionQuarantineSignal] = []
+    ) -> RuntimeDoctorAssessment {
+        var issues: [RuntimeDoctorIssue] = []
+        let quarantineDecision = corruptionQuarantine.evaluate(signals: recoverySignals)
 
         if plan.mutationEntries.isEmpty == false && readiness.canRequestMigrationExecution == false {
             issues.append(
-                StorageRecoveryIssue(
+                RuntimeDoctorIssue(
                     id: "migration_readiness_blocked",
                     kind: .migrationReadinessBlocked,
                     message: "Migration execution remains blocked until readiness gates are Green."
@@ -101,7 +96,7 @@ struct StorageMigrationRecoveryCoordinator: Sendable {
 
         if plan.mutationEntries.isEmpty == false && preMigrationBackup == nil {
             issues.append(
-                StorageRecoveryIssue(
+                RuntimeDoctorIssue(
                     id: "missing_pre_migration_backup_receipt",
                     kind: .missingPreMigrationBackupReceipt,
                     message: "A pre-migration backup Receipt is required before any storage mutation can execute."
@@ -109,9 +104,9 @@ struct StorageMigrationRecoveryCoordinator: Sendable {
             )
         }
 
-        for signal in recoverySignals {
+        for signal in quarantineDecision.signals {
             issues.append(
-                StorageRecoveryIssue(
+                RuntimeDoctorIssue(
                     id: "corrupt_store_signal.\(signal.id)",
                     kind: .corruptStoreSignal,
                     message: signal.message
@@ -119,9 +114,9 @@ struct StorageMigrationRecoveryCoordinator: Sendable {
             )
         }
 
-        if recoverySignals.isEmpty == false {
+        if quarantineDecision.quarantineRequired {
             issues.append(
-                StorageRecoveryIssue(
+                RuntimeDoctorIssue(
                     id: "destructive_reset_not_authorized",
                     kind: .destructiveResetNotAuthorized,
                     message: "Corrupt-store recovery opens review mode first; destructive reset requires explicit user action after backup/export review."
@@ -129,8 +124,8 @@ struct StorageMigrationRecoveryCoordinator: Sendable {
             )
         }
 
-        let mode: StorageRecoveryMode
-        if recoverySignals.isEmpty == false {
+        let mode: RuntimeDoctorMode
+        if quarantineDecision.quarantineRequired {
             mode = .corruptionReviewRequired
         } else if issues.isEmpty {
             mode = .normal
@@ -139,9 +134,9 @@ struct StorageMigrationRecoveryCoordinator: Sendable {
         }
 
         let receiptID = idProvider()
-        let receipt = StorageRecoveryReceipt(
+        let receipt = RuntimeDoctorReceipt(
             id: receiptID,
-            schemaVersion: storageMigrationRecoverySchemaVersion,
+            schemaVersion: runtimeDoctorSchemaVersion,
             createdAt: timestampProvider(),
             mode: mode,
             sourceLedgerSchemaVersion: plan.sourceLedgerSchemaVersion,
@@ -157,8 +152,8 @@ struct StorageMigrationRecoveryCoordinator: Sendable {
             destructiveResetAllowed: false
         )
 
-        return StorageRecoveryAssessment(
-            schemaVersion: storageMigrationRecoverySchemaVersion,
+        return RuntimeDoctorAssessment(
+            schemaVersion: runtimeDoctorSchemaVersion,
             mode: mode,
             receipt: receipt,
             issues: issues.sorted { $0.id < $1.id }

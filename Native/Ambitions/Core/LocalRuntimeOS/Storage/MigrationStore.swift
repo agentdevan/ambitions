@@ -54,7 +54,7 @@ struct MigrationStorePlanSummary: Codable, Sendable, Equatable, Hashable {
     let blockerCount: Int
     let executionAllowed: Bool
 
-    init(plan: StorageMigrationPlan) {
+    init(plan: MigrationPlan) {
         planSchemaVersion = plan.schemaVersion
         sourceLedgerSchemaVersion = plan.sourceLedgerSchemaVersion
         targetLedgerSchemaVersion = plan.targetLedgerSchemaVersion
@@ -90,7 +90,7 @@ actor MigrationStore {
 
     func recordDryRun(
         id: String,
-        plan: StorageMigrationPlan,
+        plan: MigrationPlan,
         relatedBackupID: String?,
         createdAt: String
     ) async throws -> MigrationStoreRecord {

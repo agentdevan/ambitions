@@ -1,16 +1,16 @@
 import XCTest
 @testable import Ambitions
 
-final class StorageSchemaVersionLedgerTests: XCTestCase {
-    private let validator = StorageSchemaVersionLedgerValidator()
+final class SchemaLedgerTests: XCTestCase {
+    private let validator = SchemaLedgerValidator()
 
     func testCurrentLedgerNamesEverySwiftDataRecordAndPortableSnapshotVersion() {
-        let ledger = StorageSchemaVersionLedger.current
+        let ledger = SchemaLedger.current
 
-        XCTAssertEqual(ledger.schemaVersion, storageSchemaVersionLedgerSchemaVersion)
+        XCTAssertEqual(ledger.schemaVersion, schemaLedgerSchemaVersion)
         XCTAssertEqual(validator.validate(ledger), [])
-        XCTAssertEqual(ledger.swiftDataEntries.count, StorageSchemaVersionLedgerValidator.requiredSwiftDataTypeNames.count)
-        XCTAssertEqual(Set(ledger.swiftDataEntries.map(\.storedTypeName)), StorageSchemaVersionLedgerValidator.requiredSwiftDataTypeNames)
+        XCTAssertEqual(ledger.swiftDataEntries.count, SchemaLedgerValidator.requiredSwiftDataTypeNames.count)
+        XCTAssertEqual(Set(ledger.swiftDataEntries.map(\.storedTypeName)), SchemaLedgerValidator.requiredSwiftDataTypeNames)
         XCTAssertEqual(
             ledger.portableSnapshotEntries.map(\.currentVersion),
             [PortableSnapshotSchemaVersion.v1.rawValue]
@@ -18,7 +18,7 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
     }
 
     func testCurrentLedgerIncludesCommandExecutionRecordSchemaType() {
-        let ledger = StorageSchemaVersionLedger.current
+        let ledger = SchemaLedger.current
         let commandEntry = ledger.swiftDataEntries.first(where: { $0.id == "swiftdata.command_execution_record" })
 
         XCTAssertNotNil(commandEntry)
@@ -29,7 +29,7 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
     }
 
     func testCurrentLedgerIncludesSideEffectLedgerSchemaType() {
-        let ledger = StorageSchemaVersionLedger.current
+        let ledger = SchemaLedger.current
         let sideEffectEntry = ledger.swiftDataEntries.first(where: { $0.id == "swiftdata.side_effect_ledger_record" })
 
         XCTAssertNotNil(sideEffectEntry)
@@ -38,7 +38,7 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
     }
 
     func testCurrentLedgerIncludesEntityRevisionTombstoneSchemaType() {
-        let ledger = StorageSchemaVersionLedger.current
+        let ledger = SchemaLedger.current
         let tombstoneEntry = ledger.swiftDataEntries.first(where: { $0.id == "swiftdata.entity_revision_tombstone_record" })
 
         XCTAssertNotNil(tombstoneEntry)
@@ -49,7 +49,7 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
     }
 
     func testCurrentLedgerIncludesReminderRecordSchemaType() {
-        let ledger = StorageSchemaVersionLedger.current
+        let ledger = SchemaLedger.current
         let reminderEntry = ledger.swiftDataEntries.first(where: { $0.id == "swiftdata.reminder_record" })
 
         XCTAssertNotNil(reminderEntry)
@@ -60,7 +60,7 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
     }
 
     func testCurrentLedgerBlocksMigrationExecutionUntilFutureMigrationProofExists() {
-        let ledger = StorageSchemaVersionLedger.current
+        let ledger = SchemaLedger.current
 
         XCTAssertFalse(ledger.migrationExecutionAllowed)
         XCTAssertFalse(ledger.migrationBlockers.isEmpty)
@@ -69,7 +69,7 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
     }
 
     func testValidatorRejectsMalformedLedgerEntries() {
-        let duplicate = StorageSchemaVersionEntry(
+        let duplicate = SchemaLedgerEntry(
             id: "swiftdata.goal_record",
             family: .swiftDataRecord,
             owner: "AmbitionsPersistenceStore",
@@ -80,7 +80,7 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
             rollbackRequirement: .notExecutable,
             notes: "Broken test fixture."
         )
-        let ledger = StorageSchemaVersionLedger(
+        let ledger = SchemaLedger(
             schemaVersion: "storage_schema_version_ledger.native.v0",
             entries: [duplicate, duplicate],
             migrationExecutionAllowed: true
@@ -93,6 +93,6 @@ final class StorageSchemaVersionLedgerTests: XCTestCase {
         XCTAssertTrue(issues.contains(.emptyStoredTypeName("swiftdata.goal_record")))
         XCTAssertTrue(issues.contains(.emptyCurrentVersion("swiftdata.goal_record")))
         XCTAssertTrue(issues.contains(.missingSwiftDataRecord("GoalRecord")))
-        XCTAssertTrue(issues.contains(.migrationExecutionAuthorizedWithoutDryRun("PK07 is ledger-only.")))
+        XCTAssertTrue(issues.contains(.migrationExecutionAuthorizedWithoutDryRun("SchemaLedger is inventory-only.")))
     }
 }

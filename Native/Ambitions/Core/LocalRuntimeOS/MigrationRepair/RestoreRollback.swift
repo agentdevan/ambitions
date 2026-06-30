@@ -1,22 +1,22 @@
 import Foundation
 
-enum PortableRestoreRollbackStatus: String, Codable, Sendable, Equatable {
+enum RestoreRollbackStatus: String, Codable, Sendable, Equatable {
     case importSucceeded = "import_succeeded"
     case blockedBeforeImport = "blocked_before_import"
     case rollbackRestoredBackup = "rollback_restored_backup"
     case rollbackFailed = "rollback_failed"
 }
 
-enum PortableRestoreRollbackDiagnosticKind: String, Codable, Sendable, Equatable, Hashable {
+enum RestoreRollbackDiagnosticKind: String, Codable, Sendable, Equatable, Hashable {
     case importSucceeded = "import_succeeded"
     case blockedBeforeImport = "blocked_before_import"
     case rollbackRestored = "rollback_restored"
     case rollbackFailed = "rollback_failed"
 }
 
-struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
-    let status: PortableRestoreRollbackStatus
-    let diagnosticKind: PortableRestoreRollbackDiagnosticKind
+struct RestoreRollbackReport: Codable, Sendable, Equatable {
+    let status: RestoreRollbackStatus
+    let diagnosticKind: RestoreRollbackDiagnosticKind
     let requestedMode: PortableImportMode
     let incomingDryRunReport: PortableImportDryRunReport?
     let rollbackDryRunReport: PortableImportDryRunReport?
@@ -44,8 +44,8 @@ struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
     }
 
     init(
-        status: PortableRestoreRollbackStatus,
-        diagnosticKind: PortableRestoreRollbackDiagnosticKind? = nil,
+        status: RestoreRollbackStatus,
+        diagnosticKind: RestoreRollbackDiagnosticKind? = nil,
         requestedMode: PortableImportMode,
         incomingDryRunReport: PortableImportDryRunReport?,
         rollbackDryRunReport: PortableImportDryRunReport?,
@@ -73,10 +73,10 @@ struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let status = try container.decode(PortableRestoreRollbackStatus.self, forKey: .status)
+        let status = try container.decode(RestoreRollbackStatus.self, forKey: .status)
         self.status = status
         self.diagnosticKind = try container.decodeIfPresent(
-            PortableRestoreRollbackDiagnosticKind.self,
+            RestoreRollbackDiagnosticKind.self,
             forKey: .diagnosticKind
         ) ?? Self.diagnosticKind(for: status)
         self.requestedMode = try container.decode(PortableImportMode.self, forKey: .requestedMode)
@@ -91,7 +91,7 @@ struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
         self.noClaimBoundary = try container.decode(String.self, forKey: .noClaimBoundary)
     }
 
-    private static func diagnosticKind(for status: PortableRestoreRollbackStatus) -> PortableRestoreRollbackDiagnosticKind {
+    private static func diagnosticKind(for status: RestoreRollbackStatus) -> RestoreRollbackDiagnosticKind {
         switch status {
         case .importSucceeded:
             return .importSucceeded
@@ -105,7 +105,7 @@ struct PortableRestoreRollbackReport: Codable, Sendable, Equatable {
     }
 }
 
-struct PortableRestoreRollbackService: Sendable {
+struct RestoreRollback: Sendable {
     let snapshotService: any PortableSnapshotServicing
 
     init(snapshotService: any PortableSnapshotServicing) {
@@ -116,12 +116,12 @@ struct PortableRestoreRollbackService: Sendable {
         _ snapshot: PortableAppSnapshot,
         mode: PortableImportMode,
         rollbackPackage providedRollbackPackage: PortableAppSnapshot? = nil
-    ) async -> PortableRestoreRollbackReport {
+    ) async -> RestoreRollbackReport {
         let incomingDryRun: PortableImportDryRunReport
         do {
             incomingDryRun = try await snapshotService.dryRunImportSnapshot(snapshot, mode: mode)
         } catch {
-            return PortableRestoreRollbackReport(
+            return RestoreRollbackReport(
                 status: .blockedBeforeImport,
                 requestedMode: mode,
                 incomingDryRunReport: nil,
@@ -142,7 +142,7 @@ struct PortableRestoreRollbackService: Sendable {
                 rollbackPackage = try await snapshotService.exportSnapshot(selection: .all)
             }
         } catch {
-            return PortableRestoreRollbackReport(
+            return RestoreRollbackReport(
                 status: .blockedBeforeImport,
                 requestedMode: mode,
                 incomingDryRunReport: incomingDryRun,
@@ -159,7 +159,7 @@ struct PortableRestoreRollbackService: Sendable {
         do {
             rollbackDryRun = try await snapshotService.dryRunImportSnapshot(rollbackPackage, mode: .replaceLocalStore)
         } catch {
-            return PortableRestoreRollbackReport(
+            return RestoreRollbackReport(
                 status: .blockedBeforeImport,
                 requestedMode: mode,
                 incomingDryRunReport: incomingDryRun,
@@ -174,7 +174,7 @@ struct PortableRestoreRollbackService: Sendable {
 
         do {
             let importReport = try await snapshotService.importSnapshot(snapshot, mode: mode)
-            return PortableRestoreRollbackReport(
+            return RestoreRollbackReport(
                 status: .importSucceeded,
                 requestedMode: mode,
                 incomingDryRunReport: incomingDryRun,
@@ -189,7 +189,7 @@ struct PortableRestoreRollbackService: Sendable {
             let importErrorMessage = "\(error)"
             do {
                 let rollbackReport = try await snapshotService.importSnapshot(rollbackPackage, mode: .replaceLocalStore)
-                return PortableRestoreRollbackReport(
+                return RestoreRollbackReport(
                     status: .rollbackRestoredBackup,
                     requestedMode: mode,
                     incomingDryRunReport: incomingDryRun,
@@ -201,7 +201,7 @@ struct PortableRestoreRollbackService: Sendable {
                     rollbackAttempted: true
                 )
             } catch {
-                return PortableRestoreRollbackReport(
+                return RestoreRollbackReport(
                     status: .rollbackFailed,
                     requestedMode: mode,
                     incomingDryRunReport: incomingDryRun,

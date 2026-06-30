@@ -2,14 +2,14 @@ import AmbitionsDesignSystem
 import Foundation
 import SwiftData
 
-let storageInvariantCheckerSchemaVersion = "storage_invariant_checker.native.v1"
+let storeInvariantCheckerSchemaVersion = "storage_invariant_checker.native.v1"
 
-enum StorageInvariantSeverity: String, Sendable, Equatable, Hashable {
+enum StoreInvariantSeverity: String, Sendable, Equatable, Hashable {
     case advisory
     case blocker
 }
 
-enum StorageInvariantIssueKind: String, Sendable, Equatable, Hashable {
+enum StoreInvariantIssueKind: String, Sendable, Equatable, Hashable {
     case emptyRequiredValue = "empty_required_value"
     case missingReferencedRecord = "missing_referenced_record"
     case malformedEncodedPayload = "malformed_encoded_payload"
@@ -17,13 +17,13 @@ enum StorageInvariantIssueKind: String, Sendable, Equatable, Hashable {
     case unknownRawValue = "unknown_raw_value"
 }
 
-struct StorageInvariantIssue: Identifiable, Sendable, Equatable, Hashable {
+struct StoreInvariantIssue: Identifiable, Sendable, Equatable, Hashable {
     let id: String
     let storedTypeName: String
     let recordID: String
     let fieldName: String
-    let kind: StorageInvariantIssueKind
-    let severity: StorageInvariantSeverity
+    let kind: StoreInvariantIssueKind
+    let severity: StoreInvariantSeverity
     let message: String
     let degradation: PersistedValueDegradationEntry?
 
@@ -31,8 +31,8 @@ struct StorageInvariantIssue: Identifiable, Sendable, Equatable, Hashable {
         storedTypeName: String,
         recordID: String,
         fieldName: String,
-        kind: StorageInvariantIssueKind,
-        severity: StorageInvariantSeverity = .blocker,
+        kind: StoreInvariantIssueKind,
+        severity: StoreInvariantSeverity = .blocker,
         message: String,
         degradation: PersistedValueDegradationEntry? = nil
     ) {
@@ -47,12 +47,12 @@ struct StorageInvariantIssue: Identifiable, Sendable, Equatable, Hashable {
     }
 }
 
-struct StorageInvariantReport: Sendable, Equatable {
+struct StoreInvariantReport: Sendable, Equatable {
     let schemaVersion: String
     let ledgerSchemaVersion: String
     let issueCount: Int
     let blockerCount: Int
-    let issues: [StorageInvariantIssue]
+    let issues: [StoreInvariantIssue]
     let migrationExecutionAllowed: Bool
 
     var isGreen: Bool {
@@ -60,9 +60,9 @@ struct StorageInvariantReport: Sendable, Equatable {
     }
 
     init(
-        schemaVersion: String = storageInvariantCheckerSchemaVersion,
-        ledgerSchemaVersion: String = StorageSchemaVersionLedger.current.schemaVersion,
-        issues: [StorageInvariantIssue],
+        schemaVersion: String = storeInvariantCheckerSchemaVersion,
+        ledgerSchemaVersion: String = SchemaLedger.current.schemaVersion,
+        issues: [StoreInvariantIssue],
         migrationExecutionAllowed: Bool = false
     ) {
         self.schemaVersion = schemaVersion
@@ -74,14 +74,14 @@ struct StorageInvariantReport: Sendable, Equatable {
     }
 }
 
-struct StorageInvariantChecker: Sendable {
-    func check(store: AmbitionsPersistenceStore) async throws -> StorageInvariantReport {
+struct StoreInvariantChecker: Sendable {
+    func check(store: AmbitionsPersistenceStore) async throws -> StoreInvariantReport {
         try await store.read { context in
             try check(context: context)
         }
     }
 
-    func check(context: ModelContext) throws -> StorageInvariantReport {
+    func check(context: ModelContext) throws -> StoreInvariantReport {
         let goals = try context.fetch(FetchDescriptor<GoalRecord>())
         let drafts = try context.fetch(FetchDescriptor<GoalDraftRecord>())
         let plans = try context.fetch(FetchDescriptor<GoalPlanRecord>())
@@ -102,7 +102,7 @@ struct StorageInvariantChecker: Sendable {
         let stepIDs = Set(steps.map(\.id))
         let captureIDs = Set(captures.map(\.id))
 
-        var issues: [StorageInvariantIssue] = []
+        var issues: [StoreInvariantIssue] = []
 
         for record in goals {
             appendRequired(record.id, "GoalRecord", record.id, "id", to: &issues)
@@ -230,7 +230,7 @@ struct StorageInvariantChecker: Sendable {
             appendJSON(record.snapshotData, "LifeContextBundleRecord", record.id, "snapshotData", to: &issues)
         }
 
-        return StorageInvariantReport(issues: issues.sorted { $0.id < $1.id })
+        return StoreInvariantReport(issues: issues.sorted { $0.id < $1.id })
     }
 
     private func appendRequired(
@@ -238,10 +238,10 @@ struct StorageInvariantChecker: Sendable {
         _ storedTypeName: String,
         _ recordID: String,
         _ fieldName: String,
-        to issues: inout [StorageInvariantIssue]
+        to issues: inout [StoreInvariantIssue]
     ) {
         if value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            issues.append(StorageInvariantIssue(
+            issues.append(StoreInvariantIssue(
                 storedTypeName: storedTypeName,
                 recordID: recordID,
                 fieldName: fieldName,
@@ -257,10 +257,10 @@ struct StorageInvariantChecker: Sendable {
         _ storedTypeName: String,
         _ recordID: String,
         _ fieldName: String,
-        to issues: inout [StorageInvariantIssue]
+        to issues: inout [StoreInvariantIssue]
     ) {
         if validIDs.contains(value) == false {
-            issues.append(StorageInvariantIssue(
+            issues.append(StoreInvariantIssue(
                 storedTypeName: storedTypeName,
                 recordID: recordID,
                 fieldName: fieldName,
@@ -276,12 +276,12 @@ struct StorageInvariantChecker: Sendable {
         _ storedTypeName: String,
         _ recordID: String,
         _ fieldName: String,
-        to issues: inout [StorageInvariantIssue]
+        to issues: inout [StoreInvariantIssue]
     ) {
         do {
             _ = try PersistenceCoding.decode(type, from: data)
         } catch {
-            issues.append(StorageInvariantIssue(
+            issues.append(StoreInvariantIssue(
                 storedTypeName: storedTypeName,
                 recordID: recordID,
                 fieldName: fieldName,
@@ -296,12 +296,12 @@ struct StorageInvariantChecker: Sendable {
         _ storedTypeName: String,
         _ recordID: String,
         _ fieldName: String,
-        to issues: inout [StorageInvariantIssue]
+        to issues: inout [StoreInvariantIssue]
     ) {
         do {
             _ = try JSONSerialization.jsonObject(with: data)
         } catch {
-            issues.append(StorageInvariantIssue(
+            issues.append(StoreInvariantIssue(
                 storedTypeName: storedTypeName,
                 recordID: recordID,
                 fieldName: fieldName,
@@ -319,7 +319,7 @@ struct StorageInvariantChecker: Sendable {
         _ recordID: String,
         _ fieldName: String,
         legacyAliases: [String: Value] = [:],
-        to issues: inout [StorageInvariantIssue]
+        to issues: inout [StoreInvariantIssue]
     ) where Value: RawRepresentable & Sendable & Equatable, Value.RawValue == String {
         let result = PersistedValueDegradation.resolve(
             type,
@@ -339,7 +339,7 @@ struct StorageInvariantChecker: Sendable {
         _ recordID: String,
         _ fieldName: String,
         legacyAliases: [String: Value] = [:],
-        to issues: inout [StorageInvariantIssue]
+        to issues: inout [StoreInvariantIssue]
     ) where Value: RawRepresentable & Sendable & Equatable, Value.RawValue == String {
         let result = PersistedValueDegradation.resolveOptional(
             type,
@@ -356,10 +356,10 @@ struct StorageInvariantChecker: Sendable {
         _ storedTypeName: String,
         _ recordID: String,
         _ fieldName: String,
-        to issues: inout [StorageInvariantIssue]
+        to issues: inout [StoreInvariantIssue]
     ) {
         guard let degradation else { return }
-        issues.append(StorageInvariantIssue(
+        issues.append(StoreInvariantIssue(
             storedTypeName: storedTypeName,
             recordID: recordID,
             fieldName: fieldName,

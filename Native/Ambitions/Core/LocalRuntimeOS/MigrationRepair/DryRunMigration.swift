@@ -1,14 +1,14 @@
 import Foundation
 
-let storageMigrationFoundationSchemaVersion = "storage_migration_foundation.native.v1"
+let dryRunMigrationSchemaVersion = "storage_migration_foundation.native.v1"
 
-enum StorageMigrationFoundationReviewState: String, Sendable, Equatable, Hashable {
+enum DryRunMigrationReviewState: String, Sendable, Equatable, Hashable {
     case noMigrationRequired = "no_migration_required"
     case readyForUserReview = "ready_for_user_review"
     case blocked = "blocked"
 }
 
-enum StorageMigrationFoundationBlockerKind: String, Sendable, Equatable, Hashable {
+enum DryRunMigrationBlockerKind: String, Sendable, Equatable, Hashable {
     case sourceLedgerInvalid = "source_ledger_invalid"
     case targetLedgerInvalid = "target_ledger_invalid"
     case migrationPlanInvalid = "migration_plan_invalid"
@@ -23,27 +23,27 @@ enum StorageMigrationFoundationBlockerKind: String, Sendable, Equatable, Hashabl
     case recoveryAuthorizedDestructiveReset = "recovery_authorized_destructive_reset"
 }
 
-struct StorageMigrationFoundationBlocker: Identifiable, Sendable, Equatable, Hashable {
+struct DryRunMigrationBlocker: Identifiable, Sendable, Equatable, Hashable {
     let id: String
-    let kind: StorageMigrationFoundationBlockerKind
+    let kind: DryRunMigrationBlockerKind
     let message: String
 
-    init(kind: StorageMigrationFoundationBlockerKind, id: String, message: String) {
+    init(kind: DryRunMigrationBlockerKind, id: String, message: String) {
         self.kind = kind
         self.id = "\(kind.rawValue).\(id)"
         self.message = message
     }
 }
 
-enum StorageMigrationCompactionHookKind: String, Sendable, Equatable, Hashable, CaseIterable {
+enum MigrationCompactionHookKind: String, Sendable, Equatable, Hashable, CaseIterable {
     case portableBackupRetentionReview = "portable_backup_retention_review"
     case derivedProjectionRebuildReview = "derived_projection_rebuild_review"
     case supersededRecordPruneReview = "superseded_record_prune_review"
 }
 
-struct StorageMigrationCompactionHook: Identifiable, Sendable, Equatable, Hashable {
+struct MigrationCompactionHook: Identifiable, Sendable, Equatable, Hashable {
     let id: String
-    let kind: StorageMigrationCompactionHookKind
+    let kind: MigrationCompactionHookKind
     let subjectPlanEntryIDs: [String]
     let reviewRequired: Bool
     let executionAllowed: Bool
@@ -53,7 +53,7 @@ struct StorageMigrationCompactionHook: Identifiable, Sendable, Equatable, Hashab
     let notes: String
 }
 
-struct StorageMigrationSchemaManifest: Sendable, Equatable, Hashable {
+struct MigrationSchemaManifest: Sendable, Equatable, Hashable {
     let schemaVersion: String
     let sourceLedgerSchemaVersion: String
     let targetLedgerSchemaVersion: String
@@ -67,7 +67,7 @@ struct StorageMigrationSchemaManifest: Sendable, Equatable, Hashable {
     let portableSnapshotVersions: [String]
 }
 
-struct StorageMigrationResetReview: Sendable, Equatable, Hashable {
+struct MigrationResetReview: Sendable, Equatable, Hashable {
     let id: String
     let dryRunMode: PortableImportMode?
     let wouldResetLocalStore: Bool
@@ -80,25 +80,25 @@ struct StorageMigrationResetReview: Sendable, Equatable, Hashable {
     let summary: String
 }
 
-struct StorageMigrationFoundationReport: Sendable, Equatable {
+struct DryRunMigrationReport: Sendable, Equatable {
     let schemaVersion: String
     let reviewID: String
     let createdAt: String
-    let reviewState: StorageMigrationFoundationReviewState
-    let schemaManifest: StorageMigrationSchemaManifest
-    let sourceLedgerIssues: [StorageSchemaVersionLedgerIssue]
-    let targetLedgerIssues: [StorageSchemaVersionLedgerIssue]
-    let migrationPlan: StorageMigrationPlan
-    let migrationPlanIssues: [StorageMigrationPlanIssue]
-    let invariantReport: StorageInvariantReport?
+    let reviewState: DryRunMigrationReviewState
+    let schemaManifest: MigrationSchemaManifest
+    let sourceLedgerIssues: [SchemaLedgerIssue]
+    let targetLedgerIssues: [SchemaLedgerIssue]
+    let migrationPlan: MigrationPlan
+    let migrationPlanIssues: [MigrationPlanIssue]
+    let invariantReport: StoreInvariantReport?
     let backupReport: PreMigrationBackupReport?
     let dryRunReport: PortableImportDryRunReport?
-    let systemProofs: [StorageMigrationProof]
-    let readiness: StorageMigrationExecutionReadiness
-    let recoveryAssessment: StorageRecoveryAssessment
-    let resetReview: StorageMigrationResetReview
-    let compactionHooks: [StorageMigrationCompactionHook]
-    let blockers: [StorageMigrationFoundationBlocker]
+    let systemProofs: [MigrationRepairProof]
+    let readiness: RepairPlan
+    let recoveryAssessment: RuntimeDoctorAssessment
+    let resetReview: MigrationResetReview
+    let compactionHooks: [MigrationCompactionHook]
+    let blockers: [DryRunMigrationBlocker]
     let migrationExecutionAllowed: Bool
     let destructiveResetAllowed: Bool
 
@@ -123,24 +123,24 @@ struct StorageMigrationFoundationReport: Sendable, Equatable {
     }
 
     init(
-        schemaVersion: String = storageMigrationFoundationSchemaVersion,
+        schemaVersion: String = dryRunMigrationSchemaVersion,
         reviewID: String,
         createdAt: String,
-        reviewState: StorageMigrationFoundationReviewState,
-        schemaManifest: StorageMigrationSchemaManifest,
-        sourceLedgerIssues: [StorageSchemaVersionLedgerIssue],
-        targetLedgerIssues: [StorageSchemaVersionLedgerIssue],
-        migrationPlan: StorageMigrationPlan,
-        migrationPlanIssues: [StorageMigrationPlanIssue],
-        invariantReport: StorageInvariantReport?,
+        reviewState: DryRunMigrationReviewState,
+        schemaManifest: MigrationSchemaManifest,
+        sourceLedgerIssues: [SchemaLedgerIssue],
+        targetLedgerIssues: [SchemaLedgerIssue],
+        migrationPlan: MigrationPlan,
+        migrationPlanIssues: [MigrationPlanIssue],
+        invariantReport: StoreInvariantReport?,
         backupReport: PreMigrationBackupReport?,
         dryRunReport: PortableImportDryRunReport?,
-        systemProofs: [StorageMigrationProof],
-        readiness: StorageMigrationExecutionReadiness,
-        recoveryAssessment: StorageRecoveryAssessment,
-        resetReview: StorageMigrationResetReview,
-        compactionHooks: [StorageMigrationCompactionHook],
-        blockers: [StorageMigrationFoundationBlocker],
+        systemProofs: [MigrationRepairProof],
+        readiness: RepairPlan,
+        recoveryAssessment: RuntimeDoctorAssessment,
+        resetReview: MigrationResetReview,
+        compactionHooks: [MigrationCompactionHook],
+        blockers: [DryRunMigrationBlocker],
         migrationExecutionAllowed: Bool = false,
         destructiveResetAllowed: Bool = false
     ) {
@@ -167,52 +167,52 @@ struct StorageMigrationFoundationReport: Sendable, Equatable {
     }
 }
 
-struct StorageMigrationFoundationAdapter: Sendable {
+struct DryRunMigration: Sendable {
     let snapshotService: any PortableSnapshotServicing
-    let invariantReportProvider: @Sendable () async throws -> StorageInvariantReport
-    let scaffold: StorageMigrationPlanScaffold
-    let ledgerValidator: StorageSchemaVersionLedgerValidator
-    let planValidator: StorageMigrationPlanValidator
-    let readinessEvaluator: StorageMigrationExecutionReadinessEvaluator
-    let recoveryCoordinator: StorageMigrationRecoveryCoordinator
+    let invariantReportProvider: @Sendable () async throws -> StoreInvariantReport
+    let planner: MigrationPlanner
+    let ledgerValidator: SchemaLedgerValidator
+    let planValidator: MigrationPlanValidator
+    let readinessEvaluator: RepairPlanEngine
+    let recoveryCoordinator: RuntimeDoctor
     let timestampProvider: @Sendable () -> String
     let idProvider: @Sendable () -> String
 
     init(
         snapshotService: any PortableSnapshotServicing,
-        invariantReportProvider: @escaping @Sendable () async throws -> StorageInvariantReport,
-        scaffold: StorageMigrationPlanScaffold = StorageMigrationPlanScaffold(),
-        ledgerValidator: StorageSchemaVersionLedgerValidator = StorageSchemaVersionLedgerValidator(),
-        planValidator: StorageMigrationPlanValidator = StorageMigrationPlanValidator(),
-        readinessEvaluator: StorageMigrationExecutionReadinessEvaluator = StorageMigrationExecutionReadinessEvaluator(),
-        recoveryCoordinator: StorageMigrationRecoveryCoordinator? = nil,
+        invariantReportProvider: @escaping @Sendable () async throws -> StoreInvariantReport,
+        planner: MigrationPlanner = MigrationPlanner(),
+        ledgerValidator: SchemaLedgerValidator = SchemaLedgerValidator(),
+        planValidator: MigrationPlanValidator = MigrationPlanValidator(),
+        readinessEvaluator: RepairPlanEngine = RepairPlanEngine(),
+        recoveryCoordinator: RuntimeDoctor? = nil,
         timestampProvider: @escaping @Sendable () -> String = { DomainTimestamp.string(from: .now) },
         idProvider: @escaping @Sendable () -> String = { UUID().uuidString }
     ) {
         self.snapshotService = snapshotService
         self.invariantReportProvider = invariantReportProvider
-        self.scaffold = scaffold
+        self.planner = planner
         self.ledgerValidator = ledgerValidator
         self.planValidator = planValidator
         self.readinessEvaluator = readinessEvaluator
         self.timestampProvider = timestampProvider
         self.idProvider = idProvider
-        self.recoveryCoordinator = recoveryCoordinator ?? StorageMigrationRecoveryCoordinator(
+        self.recoveryCoordinator = recoveryCoordinator ?? RuntimeDoctor(
             timestampProvider: timestampProvider,
             idProvider: idProvider
         )
     }
 
     func prepareReview(
-        from sourceLedger: StorageSchemaVersionLedger,
-        to targetLedger: StorageSchemaVersionLedger = .current,
+        from sourceLedger: SchemaLedger,
+        to targetLedger: SchemaLedger = .current,
         selection: PortableExportSelection = .all,
         dryRunMode: PortableImportMode = .replaceLocalStore,
-        recoverySignals: [StorageRecoverySignal] = []
-    ) async -> StorageMigrationFoundationReport {
+        recoverySignals: [CorruptionQuarantineSignal] = []
+    ) async -> DryRunMigrationReport {
         let reviewID = idProvider()
         let createdAt = timestampProvider()
-        let plan = scaffold.plan(from: sourceLedger, to: targetLedger)
+        let plan = planner.plan(from: sourceLedger, to: targetLedger)
         let sourceLedgerIssues = ledgerValidator.validate(sourceLedger)
         let targetLedgerIssues = ledgerValidator.validate(targetLedger)
         let planIssues = planValidator.validate(plan)
@@ -225,7 +225,7 @@ struct StorageMigrationFoundationAdapter: Sendable {
         let invariantReport = await loadInvariantReport(blockers: &blockers)
         var backupReport: PreMigrationBackupReport?
         var dryRunReport: PortableImportDryRunReport?
-        var systemProofs: [StorageMigrationProof] = []
+        var systemProofs: [MigrationRepairProof] = []
 
         let hasMutation = plan.mutationEntries.isEmpty == false
         if hasMutation {
@@ -264,7 +264,7 @@ struct StorageMigrationFoundationAdapter: Sendable {
                     blockers: &blockers
                 )
             } else if backupReport != nil {
-                blockers.append(StorageMigrationFoundationBlocker(
+                blockers.append(DryRunMigrationBlocker(
                     kind: .missingBackupPackage,
                     id: "portable_snapshot",
                     message: "A migration mutation review requires a portable backup package before dry-run validation."
@@ -311,7 +311,7 @@ struct StorageMigrationFoundationAdapter: Sendable {
             plan: plan
         )
 
-        return StorageMigrationFoundationReport(
+        return DryRunMigrationReport(
             reviewID: reviewID,
             createdAt: createdAt,
             reviewState: reviewState(
@@ -340,28 +340,28 @@ struct StorageMigrationFoundationAdapter: Sendable {
     }
 }
 
-private extension StorageMigrationFoundationAdapter {
+private extension DryRunMigration {
     func blockersForLedgerAndPlan(
-        sourceLedgerIssues: [StorageSchemaVersionLedgerIssue],
-        targetLedgerIssues: [StorageSchemaVersionLedgerIssue],
-        migrationPlanIssues: [StorageMigrationPlanIssue]
-    ) -> [StorageMigrationFoundationBlocker] {
+        sourceLedgerIssues: [SchemaLedgerIssue],
+        targetLedgerIssues: [SchemaLedgerIssue],
+        migrationPlanIssues: [MigrationPlanIssue]
+    ) -> [DryRunMigrationBlocker] {
         sourceLedgerIssues.map {
-            StorageMigrationFoundationBlocker(
+            DryRunMigrationBlocker(
                 kind: .sourceLedgerInvalid,
                 id: "\($0)",
                 message: "Source storage schema ledger must validate before migration review: \($0)."
             )
         }
         + targetLedgerIssues.map {
-            StorageMigrationFoundationBlocker(
+            DryRunMigrationBlocker(
                 kind: .targetLedgerInvalid,
                 id: "\($0)",
                 message: "Target storage schema ledger must validate before migration review: \($0)."
             )
         }
         + migrationPlanIssues.map {
-            StorageMigrationFoundationBlocker(
+            DryRunMigrationBlocker(
                 kind: .migrationPlanInvalid,
                 id: "\($0)",
                 message: "Migration plan must validate before backup, dry-run, or recovery review: \($0)."
@@ -369,11 +369,11 @@ private extension StorageMigrationFoundationAdapter {
         }
     }
 
-    func loadInvariantReport(blockers: inout [StorageMigrationFoundationBlocker]) async -> StorageInvariantReport? {
+    func loadInvariantReport(blockers: inout [DryRunMigrationBlocker]) async -> StoreInvariantReport? {
         do {
             let report = try await invariantReportProvider()
             for issue in report.issues where issue.severity == .blocker {
-                blockers.append(StorageMigrationFoundationBlocker(
+                blockers.append(DryRunMigrationBlocker(
                     kind: .invariantBlocker,
                     id: issue.id,
                     message: issue.message
@@ -381,7 +381,7 @@ private extension StorageMigrationFoundationAdapter {
             }
             return report
         } catch {
-            blockers.append(StorageMigrationFoundationBlocker(
+            blockers.append(DryRunMigrationBlocker(
                 kind: .invariantCheckFailed,
                 id: "storage_invariant_checker",
                 message: "Storage invariant check did not complete; migration review remains closed: \(String(describing: error))."
@@ -391,17 +391,17 @@ private extension StorageMigrationFoundationAdapter {
     }
 
     func prepareBackup(
-        plan: StorageMigrationPlan,
+        plan: MigrationPlan,
         selection: PortableExportSelection,
-        invariantReport: StorageInvariantReport?,
+        invariantReport: StoreInvariantReport?,
         reviewID: String,
-        blockers: inout [StorageMigrationFoundationBlocker]
+        blockers: inout [DryRunMigrationBlocker]
     ) async -> PreMigrationBackupReport? {
         guard let invariantReport else {
             return nil
         }
 
-        let backupService = PreMigrationBackupService(
+        let backupService = PreMigrationBackup(
             snapshotService: snapshotService,
             invariantReportProvider: { invariantReport },
             timestampProvider: timestampProvider,
@@ -414,7 +414,7 @@ private extension StorageMigrationFoundationAdapter {
                 selection: selection
             )
             for blocker in report.blockers {
-                blockers.append(StorageMigrationFoundationBlocker(
+                blockers.append(DryRunMigrationBlocker(
                     kind: .backupBlocked,
                     id: blocker.id,
                     message: blocker.message
@@ -422,7 +422,7 @@ private extension StorageMigrationFoundationAdapter {
             }
             return report
         } catch {
-            blockers.append(StorageMigrationFoundationBlocker(
+            blockers.append(DryRunMigrationBlocker(
                 kind: .backupPreparationFailed,
                 id: "pre_migration_backup",
                 message: "Pre-migration backup did not complete; migration review remains closed: \(String(describing: error))."
@@ -434,12 +434,12 @@ private extension StorageMigrationFoundationAdapter {
     func dryRunRestore(
         _ snapshot: PortableAppSnapshot,
         mode: PortableImportMode,
-        blockers: inout [StorageMigrationFoundationBlocker]
+        blockers: inout [DryRunMigrationBlocker]
     ) async -> PortableImportDryRunReport? {
         do {
             let report = try await snapshotService.dryRunImportSnapshot(snapshot, mode: mode)
             if report.durableMutationAllowed {
-                blockers.append(StorageMigrationFoundationBlocker(
+                blockers.append(DryRunMigrationBlocker(
                     kind: .dryRunAuthorizedDurableMutation,
                     id: mode.rawValue,
                     message: "Storage migration dry run must not authorize durable mutation."
@@ -447,7 +447,7 @@ private extension StorageMigrationFoundationAdapter {
             }
             return report
         } catch {
-            blockers.append(StorageMigrationFoundationBlocker(
+            blockers.append(DryRunMigrationBlocker(
                 kind: .dryRunFailed,
                 id: mode.rawValue,
                 message: "Storage migration dry run did not complete; migration review remains closed: \(String(describing: error))."
@@ -457,38 +457,38 @@ private extension StorageMigrationFoundationAdapter {
     }
 
     func appendRecoveryAuthorizationBlockers(
-        _ assessment: StorageRecoveryAssessment,
-        to blockers: inout [StorageMigrationFoundationBlocker]
+        _ assessment: RuntimeDoctorAssessment,
+        to blockers: inout [DryRunMigrationBlocker]
     ) {
         if assessment.receipt.migrationExecutionAllowed {
-            blockers.append(StorageMigrationFoundationBlocker(
+            blockers.append(DryRunMigrationBlocker(
                 kind: .recoveryAuthorizedMigrationExecution,
                 id: assessment.receipt.id,
-                message: "Storage recovery assessment must not authorize migration execution in AMB-1050."
+                message: "Storage recovery assessment must not authorize migration execution in AMB-1565."
             ))
         }
 
         if assessment.receipt.destructiveResetAllowed {
-            blockers.append(StorageMigrationFoundationBlocker(
+            blockers.append(DryRunMigrationBlocker(
                 kind: .recoveryAuthorizedDestructiveReset,
                 id: assessment.receipt.id,
-                message: "Storage recovery assessment must not authorize destructive reset in AMB-1050."
+                message: "Storage recovery assessment must not authorize destructive reset in AMB-1565."
             ))
         }
     }
 
     func proofs(
-        kind: StorageMigrationProofKind,
-        plan: StorageMigrationPlan,
+        kind: MigrationRepairProofKind,
+        plan: MigrationPlan,
         reviewID: String,
         summary: String
-    ) -> [StorageMigrationProof] {
+    ) -> [MigrationRepairProof] {
         plan.mutationEntries.map { entry in
-            StorageMigrationProof(
+            MigrationRepairProof(
                 id: "proof.\(reviewID).\(entry.id).\(kind.rawValue)",
                 kind: kind,
                 subjectEntryID: entry.id,
-                producedBy: "StorageMigrationFoundationAdapter",
+                producedBy: "DryRunMigration",
                 producedAt: timestampProvider(),
                 summary: summary
             )
@@ -498,8 +498,8 @@ private extension StorageMigrationFoundationAdapter {
     func makeResetReview(
         reviewID: String,
         dryRunReport: PortableImportDryRunReport?
-    ) -> StorageMigrationResetReview {
-        StorageMigrationResetReview(
+    ) -> MigrationResetReview {
+        MigrationResetReview(
             id: "storage-migration-reset-review.\(reviewID)",
             dryRunMode: dryRunReport?.mode,
             wouldResetLocalStore: dryRunReport?.wouldResetLocalStore ?? false,
@@ -517,15 +517,15 @@ private extension StorageMigrationFoundationAdapter {
 
     func makeCompactionHooks(
         reviewID: String,
-        plan: StorageMigrationPlan
-    ) -> [StorageMigrationCompactionHook] {
+        plan: MigrationPlan
+    ) -> [MigrationCompactionHook] {
         let mutationIDs = plan.mutationEntries.map(\.id).sorted()
         guard mutationIDs.isEmpty == false else {
             return []
         }
 
-        return StorageMigrationCompactionHookKind.allCases.map { kind in
-            StorageMigrationCompactionHook(
+        return MigrationCompactionHookKind.allCases.map { kind in
+            MigrationCompactionHook(
                 id: "storage-migration-compaction.\(reviewID).\(kind.rawValue)",
                 kind: kind,
                 subjectPlanEntryIDs: mutationIDs,
@@ -534,18 +534,18 @@ private extension StorageMigrationFoundationAdapter {
                 sourceRecordID: "SourceRecord.storage-migration-compaction.\(reviewID).\(kind.rawValue)",
                 receiptID: "Receipt.storage-migration-compaction.\(reviewID).\(kind.rawValue)",
                 replayTraceID: "ReplayTrace.storage-migration-compaction.\(reviewID).\(kind.rawValue)",
-                notes: "Compaction hook is review-only in AMB-1050 and cannot silently mutate local data."
+                notes: "Compaction hook is review-only in AMB-1565 and cannot silently mutate local data."
             )
         }
     }
 
     func schemaManifest(
-        sourceLedger: StorageSchemaVersionLedger,
-        targetLedger: StorageSchemaVersionLedger,
-        plan: StorageMigrationPlan
-    ) -> StorageMigrationSchemaManifest {
-        StorageMigrationSchemaManifest(
-            schemaVersion: storageMigrationFoundationSchemaVersion,
+        sourceLedger: SchemaLedger,
+        targetLedger: SchemaLedger,
+        plan: MigrationPlan
+    ) -> MigrationSchemaManifest {
+        MigrationSchemaManifest(
+            schemaVersion: dryRunMigrationSchemaVersion,
             sourceLedgerSchemaVersion: sourceLedger.schemaVersion,
             targetLedgerSchemaVersion: targetLedger.schemaVersion,
             migrationPlanSchemaVersion: plan.schemaVersion,
@@ -561,8 +561,8 @@ private extension StorageMigrationFoundationAdapter {
 
     func reviewState(
         hasMutation: Bool,
-        blockers: [StorageMigrationFoundationBlocker]
-    ) -> StorageMigrationFoundationReviewState {
+        blockers: [DryRunMigrationBlocker]
+    ) -> DryRunMigrationReviewState {
         guard blockers.isEmpty else {
             return .blocked
         }

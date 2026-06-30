@@ -29,8 +29,8 @@ final class StoragePackageBoundaryModelsTests: XCTestCase {
                 imports: ["Foundation"]
             ),
             StorageSourceFileBoundary(
-                path: "Native/Ambitions/Persistence/StorageInvariantChecker.swift",
-                imports: ["AmbitionsDesignSystem", "Foundation", "SwiftData"]
+                path: "Native/Ambitions/Persistence/StoreHealthCheck.swift",
+                imports: ["Foundation"]
             )
         ]
 

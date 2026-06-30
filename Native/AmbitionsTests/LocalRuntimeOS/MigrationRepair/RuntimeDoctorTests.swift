@@ -1,30 +1,30 @@
 import XCTest
 @testable import Ambitions
 
-final class StorageMigrationRecoveryTests: XCTestCase {
+final class RuntimeDoctorTests: XCTestCase {
     func testSeededHistoricalLedgerCreatesBlockedUpgradeMatrixForEverySwiftDataRecord() {
-        let plan = StorageMigrationPlanScaffold().plan(
+        let plan = MigrationPlanner().plan(
             from: .seededHistoricalV0,
             to: .current
         )
 
-        XCTAssertEqual(plan.mutationEntries.count, StorageSchemaVersionLedger.current.swiftDataEntries.count)
+        XCTAssertEqual(plan.mutationEntries.count, SchemaLedger.current.swiftDataEntries.count)
         XCTAssertTrue(plan.mutationEntries.allSatisfy { $0.action == .versionChange })
-        XCTAssertTrue(plan.mutationEntries.allSatisfy { $0.requiredGates == StorageMigrationPlanEntry.requiredMutationGates })
+        XCTAssertTrue(plan.mutationEntries.allSatisfy { $0.requiredGates == MigrationPlanEntry.requiredMutationGates })
         XCTAssertTrue(plan.mutationEntries.allSatisfy { $0.executionAllowed == false })
-        XCTAssertEqual(StorageMigrationPlanValidator().validate(plan), [])
+        XCTAssertEqual(MigrationPlanValidator().validate(plan), [])
     }
 
     func testRecoveryAssessmentBlocksHistoricalUpgradeUntilBackupAndProofGatesExist() {
-        let plan = StorageMigrationPlanScaffold().plan(
+        let plan = MigrationPlanner().plan(
             from: .seededHistoricalV0,
             to: .current
         )
-        let readiness = StorageMigrationExecutionReadinessEvaluator().evaluate(
+        let readiness = RepairPlanEngine().evaluate(
             plan: plan,
             proofs: []
         )
-        let assessment = StorageMigrationRecoveryCoordinator(
+        let assessment = RuntimeDoctor(
             timestampProvider: { "2026-05-31T16:20:00Z" },
             idProvider: { "storage-recovery-test" }
         ).assess(
@@ -47,15 +47,15 @@ final class StorageMigrationRecoveryTests: XCTestCase {
     }
 
     func testCorruptStoreSignalOpensNonDestructiveRecoveryReview() {
-        let plan = StorageMigrationPlanScaffold().plan(
+        let plan = MigrationPlanner().plan(
             from: .current,
             to: .current
         )
-        let readiness = StorageMigrationExecutionReadinessEvaluator().evaluate(
+        let readiness = RepairPlanEngine().evaluate(
             plan: plan,
             proofs: []
         )
-        let assessment = StorageMigrationRecoveryCoordinator(
+        let assessment = RuntimeDoctor(
             timestampProvider: { "2026-05-31T16:25:00Z" },
             idProvider: { "corrupt-store-test" }
         ).assess(
@@ -63,7 +63,7 @@ final class StorageMigrationRecoveryTests: XCTestCase {
             readiness: readiness,
             preMigrationBackup: nil,
             recoverySignals: [
-                StorageRecoverySignal(
+                CorruptionQuarantineSignal(
                     id: "open",
                     kind: .corruptStoreOpenFailed,
                     message: "Simulated corrupt-store open failure."

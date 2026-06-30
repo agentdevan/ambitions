@@ -56,12 +56,12 @@ struct StoreHealthReport: Codable, Sendable, Equatable, Hashable {
 
 struct StoreHealthCheck: Sendable {
     let requiredModelNames: Set<String>
-    let invariantChecker: StorageInvariantChecker
+    let invariantChecker: StoreInvariantChecker
     let timestampProvider: @Sendable () -> String
 
     init(
         requiredModelNames: Set<String> = AmbitionsPersistenceStore.storedModelNames,
-        invariantChecker: StorageInvariantChecker = StorageInvariantChecker(),
+        invariantChecker: StoreInvariantChecker = StoreInvariantChecker(),
         timestampProvider: @escaping @Sendable () -> String = { ISO8601DateFormatter().string(from: .now) }
     ) {
         self.requiredModelNames = requiredModelNames

@@ -1,7 +1,7 @@
 import XCTest
 @testable import Ambitions
 
-final class StorageMigrationFoundationTests: XCTestCase {
+final class DryRunMigrationTests: XCTestCase {
     func testHistoricalLedgerCreatesFailSafeReviewPipelineWithoutExecution() async {
         let adapter = makeAdapter(snapshot: Self.nonEmptySnapshot())
 
@@ -10,10 +10,10 @@ final class StorageMigrationFoundationTests: XCTestCase {
             to: .current
         )
 
-        XCTAssertEqual(report.schemaVersion, storageMigrationFoundationSchemaVersion)
+        XCTAssertEqual(report.schemaVersion, dryRunMigrationSchemaVersion)
         XCTAssertEqual(report.reviewState, .readyForUserReview)
         XCTAssertTrue(report.isFailSafeGreen)
-        XCTAssertEqual(report.schemaManifest.mutationEntryCount, StorageSchemaVersionLedger.current.swiftDataEntries.count)
+        XCTAssertEqual(report.schemaManifest.mutationEntryCount, SchemaLedger.current.swiftDataEntries.count)
         XCTAssertEqual(report.backupReport?.receipt?.id, "pre-migration-backup.foundation-review-test")
         XCTAssertEqual(report.dryRunReport?.mode, .replaceLocalStore)
         XCTAssertEqual(report.dryRunReport?.wouldResetLocalStore, true)
@@ -22,7 +22,7 @@ final class StorageMigrationFoundationTests: XCTestCase {
         XCTAssertEqual(report.resetReview.requiresExplicitConfirmation, true)
         XCTAssertEqual(report.resetReview.destructiveResetAllowed, false)
         XCTAssertEqual(report.resetReview.sourceRecordID, "SourceRecord.storage-migration-reset.foundation-review-test")
-        XCTAssertEqual(Set(report.compactionHooks.map(\.kind)), Set(StorageMigrationCompactionHookKind.allCases))
+        XCTAssertEqual(Set(report.compactionHooks.map(\.kind)), Set(MigrationCompactionHookKind.allCases))
         XCTAssertTrue(report.compactionHooks.allSatisfy { $0.reviewRequired && $0.executionAllowed == false })
         XCTAssertTrue(report.compactionHooks.allSatisfy { $0.sourceRecordID.hasPrefix("SourceRecord.storage-migration-compaction.") })
         XCTAssertEqual(report.recoveryAssessment.mode, .migrationReviewRequired)
@@ -70,7 +70,7 @@ final class StorageMigrationFoundationTests: XCTestCase {
             from: .current,
             to: .current,
             recoverySignals: [
-                StorageRecoverySignal(
+                CorruptionQuarantineSignal(
                     id: "open-did-not-complete",
                     kind: .corruptStoreOpenFailed,
                     message: "Simulated corrupt-store open failure."
@@ -93,9 +93,9 @@ final class StorageMigrationFoundationTests: XCTestCase {
     func testInvariantBlockerStopsBackupAndDryRunBeforeExecutionPosture() async {
         let adapter = makeAdapter(
             snapshot: Self.nonEmptySnapshot(),
-            invariantReport: StorageInvariantReport(
+            invariantReport: StoreInvariantReport(
                 issues: [
-                    StorageInvariantIssue(
+                    StoreInvariantIssue(
                         storedTypeName: "GoalRecord",
                         recordID: "goal-broken",
                         fieldName: "title",
@@ -124,12 +124,12 @@ final class StorageMigrationFoundationTests: XCTestCase {
 
     private func makeAdapter(
         snapshot: PortableAppSnapshot,
-        invariantReport: StorageInvariantReport = StorageInvariantReport(issues: [])
-    ) -> StorageMigrationFoundationAdapter {
-        StorageMigrationFoundationAdapter(
+        invariantReport: StoreInvariantReport = StoreInvariantReport(issues: [])
+    ) -> DryRunMigration {
+        DryRunMigration(
             snapshotService: FixedMigrationSnapshotService(snapshot: snapshot),
             invariantReportProvider: { invariantReport },
-            recoveryCoordinator: StorageMigrationRecoveryCoordinator(
+            recoveryCoordinator: RuntimeDoctor(
                 timestampProvider: { "2026-06-14T09:00:00Z" },
                 idProvider: { "foundation-review-test" }
             ),

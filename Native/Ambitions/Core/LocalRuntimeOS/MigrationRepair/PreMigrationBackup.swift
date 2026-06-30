@@ -44,7 +44,7 @@ struct PreMigrationBackupReceipt: Identifiable, Sendable, Equatable {
     let invariantBlockerCount: Int
     let migrationPlanEntryCount: Int
     let migrationMutationEntryCount: Int
-    let requiredGates: [StorageMigrationPlanGate]
+    let requiredGates: [MigrationGate]
     let backupRestoresGateSatisfied: Bool
     let migrationExecutionAllowed: Bool
 
@@ -87,15 +87,15 @@ struct PreMigrationBackupReport: Sendable, Equatable {
     }
 }
 
-struct PreMigrationBackupService: Sendable {
+struct PreMigrationBackup: Sendable {
     let snapshotService: any PortableSnapshotServicing
-    let invariantReportProvider: @Sendable () async throws -> StorageInvariantReport
+    let invariantReportProvider: @Sendable () async throws -> StoreInvariantReport
     let timestampProvider: @Sendable () -> String
     let idProvider: @Sendable () -> String
 
     init(
         snapshotService: any PortableSnapshotServicing,
-        invariantReportProvider: @escaping @Sendable () async throws -> StorageInvariantReport,
+        invariantReportProvider: @escaping @Sendable () async throws -> StoreInvariantReport,
         timestampProvider: @escaping @Sendable () -> String = { DomainTimestamp.string(from: .now) },
         idProvider: @escaping @Sendable () -> String = { UUID().uuidString }
     ) {
@@ -106,7 +106,7 @@ struct PreMigrationBackupService: Sendable {
     }
 
     func prepareBackup(
-        for plan: StorageMigrationPlan,
+        for plan: MigrationPlan,
         selection: PortableExportSelection = .all
     ) async throws -> PreMigrationBackupReport {
         async let invariantReport = invariantReportProvider()
@@ -121,11 +121,11 @@ struct PreMigrationBackupService: Sendable {
     }
 }
 
-private extension PreMigrationBackupService {
+private extension PreMigrationBackup {
     func makeReport(
-        plan: StorageMigrationPlan,
+        plan: MigrationPlan,
         selection: PortableExportSelection,
-        invariantReport: StorageInvariantReport,
+        invariantReport: StoreInvariantReport,
         snapshot: PortableAppSnapshot
     ) -> PreMigrationBackupReport {
         let blockers = blockersFor(plan: plan, invariantReport: invariantReport, snapshot: snapshot)
@@ -161,7 +161,7 @@ private extension PreMigrationBackupService {
                 invariantBlockerCount: invariantReport.blockerCount,
                 migrationPlanEntryCount: plan.entries.count,
                 migrationMutationEntryCount: plan.mutationEntries.count,
-                requiredGates: StorageMigrationPlanGate.allCases.sorted { $0.rawValue < $1.rawValue },
+                requiredGates: MigrationGate.allCases.sorted { $0.rawValue < $1.rawValue },
                 backupRestoresGateSatisfied: true,
                 migrationExecutionAllowed: false
             ),
@@ -171,8 +171,8 @@ private extension PreMigrationBackupService {
     }
 
     func blockersFor(
-        plan: StorageMigrationPlan,
-        invariantReport: StorageInvariantReport,
+        plan: MigrationPlan,
+        invariantReport: StoreInvariantReport,
         snapshot: PortableAppSnapshot
     ) -> [PreMigrationBackupBlocker] {
         var blockers: [PreMigrationBackupBlocker] = []
@@ -187,7 +187,7 @@ private extension PreMigrationBackupService {
                 )
             }
 
-        blockers += StorageMigrationPlanValidator().validate(plan).map {
+        blockers += MigrationPlanValidator().validate(plan).map {
             PreMigrationBackupBlocker(
                 kind: .invalidMigrationPlan,
                 id: "\($0)",
@@ -200,7 +200,7 @@ private extension PreMigrationBackupService {
                 PreMigrationBackupBlocker(
                     kind: .migrationExecutionAlreadyAllowed,
                     id: "plan",
-                    message: "PK11 can prepare a backup gate receipt but must not authorize migration execution."
+                    message: "PreMigrationBackup can prepare a backup gate receipt but must not authorize migration execution."
                 )
             )
         }
