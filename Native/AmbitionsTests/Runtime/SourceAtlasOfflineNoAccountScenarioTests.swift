@@ -3,7 +3,7 @@ import XCTest
 
 final class SourceAtlasOfflineNoAccountScenarioTests: XCTestCase {
     func testOfflineNoAccountKeepsPrivateLifeRuntimeLocalAndCoreSurfacesAvailable() {
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,
@@ -27,7 +27,7 @@ final class SourceAtlasOfflineNoAccountScenarioTests: XCTestCase {
     }
 
     func testOfflineNoAccountWithoutAnySourceAtlasPackReturnsHonestUnavailableStateOnlyForReferenceUpdate() {
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,

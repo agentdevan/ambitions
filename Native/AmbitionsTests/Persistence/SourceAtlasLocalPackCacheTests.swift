@@ -300,7 +300,7 @@ final class SourceAtlasLocalPackCacheTests: XCTestCase {
     func testDeniedEntitlementCanUseBundledPublicFallbackWithoutRemoteAccess() throws {
         let pack = Self.pack()
         let entry = try Self.entry(for: pack)
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .entitlementReferencePack,
                 accountSessionState: .signedIn,
@@ -339,7 +339,7 @@ final class SourceAtlasLocalPackCacheTests: XCTestCase {
     func testUnavailableAccessBoundaryFailsClosedForSourceAtlasButNotCorePlanning() throws {
         let pack = Self.pack()
         let entry = try Self.entry(for: pack)
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .entitlementReferencePack,
                 accountSessionState: .noAccount,

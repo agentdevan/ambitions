@@ -1,9 +1,9 @@
 import XCTest
 @testable import Ambitions
 
-final class SourceAtlasAccessBoundaryTests: XCTestCase {
+final class SourceAtlasBoundaryTests: XCTestCase {
     func testNoAccountOfflineBundledCoreKeepsLocalPlanningUnblocked() {
-        let decision = SourceAtlasAccessBoundary().resolve(
+        let decision = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .bundledCore,
                 accountSessionState: .noAccount,
@@ -22,7 +22,7 @@ final class SourceAtlasAccessBoundaryTests: XCTestCase {
     }
 
     func testSignedInEntitledOnlineMayRequestRemotePublicReference() {
-        let decision = SourceAtlasAccessBoundary().resolve(
+        let decision = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .entitlementReferencePack,
                 accountSessionState: .signedIn,
@@ -41,7 +41,7 @@ final class SourceAtlasAccessBoundaryTests: XCTestCase {
     }
 
     func testExpiredEntitlementFallsBackToCachedPublicArtifact() {
-        let decision = SourceAtlasAccessBoundary().resolve(
+        let decision = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .entitlementReferencePack,
                 accountSessionState: .signedIn,
@@ -59,7 +59,7 @@ final class SourceAtlasAccessBoundaryTests: XCTestCase {
     }
 
     func testNoAccountEntitlementPackUsesHonestUnavailableStateWithoutAccountWallingCore() {
-        let decision = SourceAtlasAccessBoundary().resolve(
+        let decision = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .entitlementReferencePack,
                 accountSessionState: .noAccount,
@@ -82,7 +82,7 @@ final class SourceAtlasAccessBoundaryTests: XCTestCase {
     }
 
     func testSignOutTransitionKeepsPublicCacheSeparateFromPrivateRuntimeData() {
-        let signedIn = SourceAtlasAccessBoundary().resolve(
+        let signedIn = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .entitlementReferencePack,
                 accountSessionState: .signedIn,
@@ -91,7 +91,7 @@ final class SourceAtlasAccessBoundaryTests: XCTestCase {
                 cachedPublicArtifactAvailable: true
             )
         )
-        let signedOut = SourceAtlasAccessBoundary().resolve(
+        let signedOut = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .entitlementReferencePack,
                 accountSessionState: .signedOut,

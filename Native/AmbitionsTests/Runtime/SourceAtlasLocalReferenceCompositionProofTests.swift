@@ -243,7 +243,7 @@ private extension SourceAtlasLocalReferenceCompositionProofTests {
                 fetchedLastKnownGoodPointerData: lkgData,
                 fetchedLastKnownGoodManifestData: manifestData,
                 downloadedPackData: packData,
-                accessDecision: SourceAtlasAccessBoundary().resolve(
+                accessDecision: SourceAtlasBoundary().resolve(
                     SourceAtlasAccessRequest(
                         artifactTier: .publicFreshness,
                         accountSessionState: .noAccount,

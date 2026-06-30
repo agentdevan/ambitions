@@ -72,7 +72,7 @@ final class SourceAtlasLocalCompositionFallbackTests: XCTestCase {
     func testNoAccountOfflineUnavailableSourceAtlasStillAllowsLocalStarterPlanning() throws {
         let pack = Self.pack()
         let entry = try Self.entry(for: pack)
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .entitlementReferencePack,
                 accountSessionState: .noAccount,

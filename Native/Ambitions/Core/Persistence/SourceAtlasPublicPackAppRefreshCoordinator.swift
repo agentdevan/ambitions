@@ -81,11 +81,11 @@ struct SourceAtlasPublicPackAppRefreshResolution: Sendable, Equatable, Hashable 
 }
 
 struct SourceAtlasPublicPackAppRefreshCoordinator {
-    private let accessBoundary: SourceAtlasAccessBoundary
+    private let accessBoundary: SourceAtlasBoundary
     private let refreshCoordinator: SourceAtlasPublicPackRepositoryBackedRemoteRefreshCoordinator
 
     init(
-        accessBoundary: SourceAtlasAccessBoundary = SourceAtlasAccessBoundary(),
+        accessBoundary: SourceAtlasBoundary = SourceAtlasBoundary(),
         refreshCoordinator: SourceAtlasPublicPackRepositoryBackedRemoteRefreshCoordinator = SourceAtlasPublicPackRepositoryBackedRemoteRefreshCoordinator()
     ) {
         self.accessBoundary = accessBoundary

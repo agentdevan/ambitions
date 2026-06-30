@@ -121,7 +121,7 @@ final class SourceAtlasPublicPackCacheJournalTests: XCTestCase {
             rollbackPointers: ["previous": lastKnownGoodEntry.currentSHA256]
         )
         let manifest = Self.manifest(entry: manifestEntry)
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,
@@ -200,7 +200,7 @@ private extension SourceAtlasPublicPackCacheJournalTests {
         downloadedPackData: Data?,
         bundledPayload: SourceAtlasStorePayload? = nil
     ) -> SourceAtlasPublicPackFetchResolution {
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,

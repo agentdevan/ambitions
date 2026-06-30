@@ -1,7 +1,7 @@
 @testable import Ambitions
 import XCTest
 
-final class SourceAtlasPublicArtifactPrivacyBoundaryTests: XCTestCase {
+final class SourceAtlasPublicArtifactBoundaryTests: XCTestCase {
     func testObjectKeyLogAndCacheMetadataStayPublicReferenceOnly() throws {
         let objectKey = SourceAtlasPublicArtifactObjectKey(
             channel: "stable",

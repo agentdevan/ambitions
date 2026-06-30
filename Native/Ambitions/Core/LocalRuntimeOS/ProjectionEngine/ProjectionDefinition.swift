@@ -193,7 +193,7 @@ extension ProjectionDefinition {
                 consumesEventKinds: RuntimeEventKind.allCases,
                 materializationMode: .privacyFiltered,
                 readModelInventory: [
-                    .init(sourcePath: "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift", responsibility: "Runtime privacy boundary scaffold", migrationTarget: .privacy),
+                    .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/PrivacyBoundary.swift", responsibility: "Runtime privacy boundary scaffold", migrationTarget: .privacy),
                     .init(sourcePath: "Native/Ambitions/Core/Persistence/StoragePrivacySecurityBoundary.swift", responsibility: "Storage privacy boundary scaffold", migrationTarget: .privacy),
                     .init(sourcePath: "Native/Ambitions/Trust/PrivacyInspectionView.swift", responsibility: "Privacy inspection surface", migrationTarget: .privacy),
                 ]

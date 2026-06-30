@@ -14,7 +14,6 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Runtime/PressureEngine.swift",
             "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
             "Native/Ambitions/Core/Runtime/ProofLedger.swift",
-            "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
@@ -28,10 +27,14 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Runtime/AmbitionsCommandExecutor.swift",
             "Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift",
             "Native/Ambitions/Core/Runtime/ExternalActionCommandService.swift",
+            "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift",
+            "Native/Ambitions/Core/Runtime/SourceAtlasAccessBoundary.swift",
+            "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift",
+            "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift",
         ] {
             XCTAssertFalse(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
-                "Retired command/transaction owner still exists: \(retiredPath)"
+                "Retired runtime-boundary owner still exists: \(retiredPath)"
             )
         }
     }

@@ -323,7 +323,7 @@ private extension SourceAtlasPublicPackAppRefreshCoordinatorTests {
     }
 
     static func access(networkReachability: SourceAtlasNetworkReachability) -> SourceAtlasAccessDecision {
-        SourceAtlasAccessBoundary().resolve(
+        SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,

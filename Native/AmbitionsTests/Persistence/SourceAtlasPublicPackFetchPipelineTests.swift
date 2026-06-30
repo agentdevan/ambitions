@@ -6,7 +6,7 @@ final class SourceAtlasPublicPackFetchPipelineTests: XCTestCase {
         let pack = Self.pack()
         let entry = try Self.entry(for: pack)
         let manifest = Self.manifest(entry: entry)
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,
@@ -42,7 +42,7 @@ final class SourceAtlasPublicPackFetchPipelineTests: XCTestCase {
     func testDownloadedHashMismatchQuarantinesDownloadedPackAndUsesBundledFallback() throws {
         let pack = Self.pack()
         let entry = try Self.entry(for: pack)
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,
@@ -83,7 +83,7 @@ final class SourceAtlasPublicPackFetchPipelineTests: XCTestCase {
             schemaVersion: "1.0.0",
             appVersion: "1.0"
         )
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 networkReachability: .online
@@ -122,7 +122,7 @@ final class SourceAtlasPublicPackFetchPipelineTests: XCTestCase {
                 "previous": lastKnownGoodEntry.currentSHA256
             ]
         )
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,
@@ -169,7 +169,7 @@ final class SourceAtlasPublicPackFetchPipelineTests: XCTestCase {
                 )
             ]
         )
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,
@@ -203,7 +203,7 @@ final class SourceAtlasPublicPackFetchPipelineTests: XCTestCase {
 
     func testPublisherCurrentPointerVerifiesManifestHashAndLoadsDomainPackAsReviewRequiredReference() throws {
         let fixture = try Self.publisherFixture()
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,
@@ -240,7 +240,7 @@ final class SourceAtlasPublicPackFetchPipelineTests: XCTestCase {
 
     func testPublisherManifestHashMismatchQuarantinesBeforeCacheReplacement() throws {
         let fixture = try Self.publisherFixture(manifestSHA256Override: String(repeating: "0", count: 64))
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,
@@ -273,7 +273,7 @@ final class SourceAtlasPublicPackFetchPipelineTests: XCTestCase {
         let fixture = try Self.publisherFixture(
             manifestKey: "source-atlas/v1/staging/candidate/user_id/private.json"
         )
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,

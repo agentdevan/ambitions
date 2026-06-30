@@ -413,7 +413,7 @@ private extension SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests {
         cachedPublicArtifactAvailable: Bool = false,
         bundledPublicArtifactAvailable: Bool = true
     ) -> SourceAtlasAccessDecision {
-        SourceAtlasAccessBoundary().resolve(
+        SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,

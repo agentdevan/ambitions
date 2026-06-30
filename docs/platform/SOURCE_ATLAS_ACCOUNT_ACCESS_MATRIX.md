@@ -40,8 +40,8 @@ Source Atlas is public/reference/freshness infrastructure. It is not the Private
 Current scoped implementation path:
 
 ```text
-Native/Ambitions/Core/Runtime/SourceAtlasAccessBoundary.swift
-Native/AmbitionsTests/Runtime/SourceAtlasAccessBoundaryTests.swift
+Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasBoundary.swift
+Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasBoundaryTests.swift
 Native/Ambitions/Core/Persistence/SourceAtlasLocalPackCache.swift
 Native/AmbitionsTests/Persistence/SourceAtlasLocalPackCacheTests.swift
 ```

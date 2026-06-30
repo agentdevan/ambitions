@@ -392,7 +392,7 @@ private extension SourceAtlasPublicPackCacheFileRepositoryTests {
                 targetPackID: pack.id,
                 fetchedManifestData: try encoded(nativeManifest),
                 downloadedPackData: packData,
-                accessDecision: SourceAtlasAccessBoundary().resolve(
+                accessDecision: SourceAtlasBoundary().resolve(
                     SourceAtlasAccessRequest(
                         artifactTier: .publicFreshness,
                         accountSessionState: .noAccount,
@@ -504,7 +504,7 @@ private extension SourceAtlasPublicPackCacheFileRepositoryTests {
         downloadedPackData: Data?,
         bundledPayload: SourceAtlasStorePayload? = nil
     ) -> SourceAtlasPublicPackFetchResolution {
-        let access = SourceAtlasAccessBoundary().resolve(
+        let access = SourceAtlasBoundary().resolve(
             SourceAtlasAccessRequest(
                 artifactTier: .publicFreshness,
                 accountSessionState: .noAccount,

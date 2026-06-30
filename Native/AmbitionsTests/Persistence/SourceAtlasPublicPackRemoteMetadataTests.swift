@@ -161,7 +161,7 @@ private extension SourceAtlasPublicPackRemoteMetadataTests {
             manifestRequest: manifestRequest,
             targetPackID: targetPackID,
             lastKnownGoodPayload: lastKnownGoodPayload,
-            accessDecision: SourceAtlasAccessBoundary().resolve(
+            accessDecision: SourceAtlasBoundary().resolve(
                 SourceAtlasAccessRequest(
                     artifactTier: .publicFreshness,
                     accountSessionState: .noAccount,

@@ -90,7 +90,7 @@ struct SourceAtlasAccessDecision: Codable, Sendable, Equatable, Hashable {
     let unavailableStateDetail: String
 }
 
-struct SourceAtlasAccessBoundary: Sendable, Equatable, Hashable {
+struct SourceAtlasBoundary: Sendable, Equatable, Hashable {
     func resolve(_ request: SourceAtlasAccessRequest) -> SourceAtlasAccessDecision {
         var issues: [SourceAtlasAccessIssue] = []
         let route: SourceAtlasAccessRoute
