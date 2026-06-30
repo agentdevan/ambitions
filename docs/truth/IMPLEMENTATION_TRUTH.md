@@ -128,8 +128,10 @@ Current implementation evidence is narrower:
 - Source-present transaction-kernel bridge source exists under `Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutation.swift`.
 - Source-present EventJournal foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/EventJournal/`, including runtime event envelopes, cursors, append-only stores, checksums, command replay projection, compaction snapshots, and tombstone event append support.
 - `AmbitionsCommandExecutor` and `TodayCommandActionHandler` append runtime command execution events when a runtime event store is injected; focused tests cover the standalone executor duplicate-replay path and EventJournal checksum/replay behavior.
+- Source-present ProjectionEngine foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/`, including projection definitions, cursors, invalidations, diffs, checksums, event-fed materialization, Today/Goals/Time/You/Search/Widget/App Intent/Receipt/Privacy projection outputs, and an inventory of existing surface read-model scaffolding.
+- `ProjectionMaterializer` materializes projection outputs from `RuntimeEventStore` envelopes and focused tests cover canonical owner files, definition coverage, inventory path existence, event-fed projection outputs, privacy-safe external filtering, cursor/checksum creation, invalidation, and diffs.
 - Remaining runtime and persistence scaffolding exists primarily under `Native/Ambitions/Core/Runtime/`, `Native/Ambitions/Core/Persistence/`, and `Native/Ambitions/Core/Domain/`.
-- `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until live Swift files, project inclusion, focused tests, and later implementation trains cover ProjectionEngine, full cross-path replay, storage tiers, side-effect outbox, privacy firewall, migration repair, diagnostics, and continuity.
+- `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until live Swift files, project inclusion, focused tests, and later implementation trains cover full cross-path replay, storage tiers, side-effect outbox, privacy firewall, migration repair, diagnostics, and continuity.
 - Current SwiftData persistence source is real, but SwiftData has not been proven demoted to an `ObjectStoreSwiftData` tier behind a separate event journal, projection store, search store, blob store, backup store, and migration store.
 - Existing command, receipt, event ledger, side-effect ledger, snapshot ledger, search, Source Atlas, runtime kernel, and repository code may be reused or moved as scaffolding, but they do not prove the LocalRuntimeOS spine is complete.
 
@@ -138,7 +140,7 @@ Unsupported implementation claims until future source proof exists:
 - all meaningful state changes route only through `Command -> Event -> Projection -> Receipt -> Replay`
 - the EventJournal is the sole canonical mutation record for every meaningful runtime mutation
 - duplicate and failed command replay are deterministic across every runtime path
-- projections are materialized from event-journal cursors
+- all app-facing projections are consumed by Stage/surfaces/widgets/App Intents only from `ProjectionEngine`
 - SwiftData is only the object store tier
 - SQLite/FTS-backed journal, projection, and search stores are active
 - side effects are fully outboxed with leases, retry, confirmation, and receipts
