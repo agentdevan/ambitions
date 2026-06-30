@@ -105,7 +105,7 @@
       "vsp_id": "VSP-03",
       "likely_parent_issue": "AMB-1482",
       "recommended_parent_title": "VSP-03 Goals Life Area Atlas",
-      "recommended_status": "Needs Repair",
+      "recommended_status": "Ready For Review",
       "recommended_labels": [
         "VSP",
         "goals",
@@ -115,13 +115,13 @@
       "recommended_sub_issues": [
         {
           "title": "Produce Goals Life Area Atlas SwiftUI parity leaf",
-          "scope": "Goals content object only inside VSP-01 shell",
+          "scope": "Goals content object only inside VSP-01 shell from owner-approved D5 Focus Lens Territory package",
           "recommended_status": "Spec Ready after owner approval"
         },
         {
           "title": "Prove Goals object accessibility and no-dashboard shape",
-          "scope": "screenshot and accessibility matrix",
-          "recommended_status": "Needs Repair"
+          "scope": "state matrix, Dynamic Type, VoiceOver order, Reduce Motion, Reduce Transparency, Increase Contrast, haptics, and screenshot proof",
+          "recommended_status": "Ready For Review"
         }
       ],
       "blocked_by": [
@@ -131,9 +131,12 @@
         "owner approval"
       ],
       "acceptance_summary": [
+        "Current review package is D5 Focus Lens Territory at Figma node 177:93.",
         "Goals remains Life Area Atlas content.",
+        "The selected life area expands as a focus lens while neighboring life areas remain spatially present and subordinate.",
         "No project board, scorecard, analytics root, or stale IA.",
-        "Life area rows must be product objects or native rows with real routes."
+        "No VSP-01 shell mutation, no Capture tab/inbox, no Motion destination, no cloud LLM core, and no R2/private graph behavior.",
+        "Owner approval is still required before source implementation."
       ],
       "validation_summary": [
         "focused Goals tests after source implementation",
@@ -141,9 +144,11 @@
         "python3 scripts/ambitions-vsp-provenance-audit.py"
       ],
       "closeout_required": [
-        "approved frame ID",
+        "D5 owner-review package frame ID 177:93 and durable proof paths",
+        "explicit owner approve/repair/reject result",
         "live SwiftUI screenshot matrix",
-        "owner review result"
+        "accessibility and reduced-motion proof after source implementation",
+        "explicit non-claims for no Visual Green, no source implementation, no runtime/device/accessibility proof, and no shell mutation until actually proven"
       ],
       "do_not_create_now": true
     },

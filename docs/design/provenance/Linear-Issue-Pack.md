@@ -89,22 +89,25 @@ Rollback plan:
 ## VSP-03 - VSP-03 Goals Life Area Atlas
 
 - Parent issue mirror: `AMB-1482`
-- Recommended status: `Needs Repair`
+- Recommended status: `Ready For Review`
 - Labels: VSP, goals, surface-content, yellow-proof
 - Blocked by: VSP-01 shell parity, VSP-10 source-owner map, VSP-09 accessibility matrix, owner approval
 - Do not create now: `True`
 
 Acceptance summary:
+- Current review package is D5 Focus Lens Territory at Figma node 177:93.
 - Goals remains Life Area Atlas content.
+- The selected life area expands as a focus lens while neighboring life areas remain spatially present and subordinate.
 - No project board, scorecard, analytics root, or stale IA.
-- Life area rows must be product objects or native rows with real routes.
+- No VSP-01 shell mutation, no Capture tab/inbox, no Motion destination, no cloud LLM core, and no R2/private graph behavior.
+- Owner approval is still required before source implementation.
 Validation summary:
 - focused Goals tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Produce Goals Life Area Atlas SwiftUI parity leaf - scope: Goals content object only inside VSP-01 shell - status: Spec Ready after owner approval
-- Prove Goals object accessibility and no-dashboard shape - scope: screenshot and accessibility matrix - status: Needs Repair
+- Produce Goals Life Area Atlas SwiftUI parity leaf - scope: Goals content object only inside VSP-01 shell from owner-approved D5 Focus Lens Territory package - status: Spec Ready after owner approval
+- Prove Goals object accessibility and no-dashboard shape - scope: state matrix, Dynamic Type, VoiceOver order, Reduce Motion, Reduce Transparency, Increase Contrast, haptics, and screenshot proof - status: Ready For Review
 
 Standard Codex closeout block:
 

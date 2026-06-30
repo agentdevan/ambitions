@@ -270,11 +270,20 @@
       "artifact_paths": [
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-hero-r1-repaired.png",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-crop-r1.png",
-        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png"
+        "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png",
+        "docs/design/provenance/figma-frames/VSP-03-D5-focus-lens-owner-review-package-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-hero.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-state-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-accessibility-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-swiftui-anatomy.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-marketing-crop.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-non-claims.png"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
-      "notes": "Candidate Figma evidence for Goals Life Area Atlas."
+      "proof_ceiling_impact": "Supports Yellow candidate evidence and owner-review routing only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, runtime behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for Goals Life Area Atlas, including D5 Focus Lens Territory owner-review package at Figma node 177:93. This is not final owner approval and does not mark VSP-03 Green or Done."
     },
     {
       "proof_id": "vsp-03-figma-exploration-part-01",

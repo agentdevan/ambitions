@@ -79,6 +79,13 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d6-open-field-shoreline-r1.png
 - docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selection-board-r1.png
 - docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selected-crop-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-board.png
+- docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-hero.png
+- docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-state-matrix.png
+- docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-accessibility-matrix.png
+- docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-swiftui-anatomy.png
+- docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-marketing-crop.png
+- docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-non-claims.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Goals/GoalsSurface.swift
 - Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift

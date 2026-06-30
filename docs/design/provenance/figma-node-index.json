@@ -197,6 +197,33 @@
     },
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "177:93",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-03 - D5 Focus Lens Territory owner review package - R1",
+      "vsp_id": "VSP-03",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-hero.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-state-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-accessibility-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-swiftui-anatomy.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-marketing-crop.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-non-claims.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-03-D5-focus-lens-owner-review-package-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-03-D5-focus-lens-owner-review-package-R1.md",
+      "notes": [
+        "Packages the owner-selected D5 Focus Lens Territory direction into hero, state matrix, accessibility matrix, SwiftUI anatomy, marketing crop, and non-claims frames.",
+        "Ready for owner visual review only; no final VSP-03 owner approval is claimed.",
+        "Content-only inside VSP-01 shell authority; no shell mutation, source implementation, device proof, runtime proof, Visual Green, or accessibility conformance is claimed."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
       "node_id": "14:354",
       "node_id_status": "known",
       "frame_name": "CANDIDATE - VSP-04 - Time LifeShape Week hero - R1",

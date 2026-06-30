@@ -297,12 +297,12 @@
       "vsp_id": "VSP-03",
       "title": "Goals Life Area Atlas",
       "category": "surface_content",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Ready For Review",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "14:171",
-        "frame_name": "CANDIDATE - VSP-03 - Goals Life Area Atlas hero - R1",
+        "node_id": "177:93",
+        "frame_name": "CANDIDATE - VSP-03 - D5 Focus Lens Territory owner review package - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-hero-r1-repaired.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-crop-r1.png",
@@ -315,7 +315,14 @@
           "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d5-focus-lens-territory-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d6-open-field-shoreline-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selection-board-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selected-crop-r1.png"
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selected-crop-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-hero.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-state-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-accessibility-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-swiftui-anatomy.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-marketing-crop.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/vsp-03-d5-owner-review-package-r1-non-claims.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
@@ -325,7 +332,9 @@
           "docs/design/provenance/figma-frames/VSP-03-part-02-living-map-territory-refinements-R1.md",
           "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/manifest.md",
           "docs/design/provenance/figma-frames/VSP-03-part-02-D5-focus-lens-selection-R1.md",
-          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/manifest.md"
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-03-D5-focus-lens-owner-review-package-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-03-d5-owner-review-package-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -370,7 +379,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1482",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Ready For Review",
         "recommended_labels": [
           "VSP",
           "goals",
@@ -412,7 +421,8 @@
       "known_risks": [
         "Can drift into KPI dashboards, project boards, ranking layers, analytics, or scorecards.",
         "Existing names must be treated as source/internal where canon says so.",
-        "Part 02 D-family territory refinements require careful follow-up to avoid map-as-project-board, edit-tool UI, or Capture/inbox drift."
+        "Part 02 D-family territory refinements require careful follow-up to avoid map-as-project-board, edit-tool UI, or Capture/inbox drift.",
+        "D5 owner-review package is Figma evidence only and still requires explicit owner approval before source implementation."
       ],
       "missing_evidence": [
         "owner approval",
@@ -432,7 +442,10 @@
         "Owner direction selected the Part 01 D Living Map Territories concept family for refinement, not as final approval.",
         "Part 02 exploration board at Figma node 169:93 refines D into six content-only territory-map options for owner selection. It is not a candidate package, owner approval, source implementation, or Visual Green.",
         "Owner selected D5 Focus Lens Territory on 2026-06-30 as the VSP-03 Part 02 direction for candidate-package buildout. This is direction selection only, not final VSP-03 candidate approval.",
-        "Part 02 proof uses readable Inter export text because the current Figma screenshot pipeline drops SF Pro/system-font text; SwiftUI implementation remains system-font aligned."
+        "D5 owner-review package at Figma node 177:93 packages the selected direction into hero, state matrix, accessibility matrix, SwiftUI anatomy, marketing crop, and non-claims frames for owner review.",
+        "The D5 package remains content-only inside VSP-01 shell authority and may not mutate shell chrome, root IA, dock, Context Crown, Capture/Search placement, safe-area shell, or route depth.",
+        "D5 owner-review package proof uses readable Inter export text because the current Figma screenshot pipeline can drop SF Pro/system-font text; SwiftUI implementation remains system-font aligned.",
+        "VSP-03 is ready for owner visual review only; owner approval, live SwiftUI parity, device proof, accessibility proof, runtime proof, Release Green, and Done remain unclaimed."
       ]
     },
     {
