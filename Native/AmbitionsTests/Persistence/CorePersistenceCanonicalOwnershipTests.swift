@@ -4,20 +4,20 @@ import SwiftData
 import XCTest
 
 final class CorePersistenceCanonicalOwnershipTests: XCTestCase {
-    func testCanonicalCorePersistenceOwnerFilesExist() {
+    func testCanonicalPersistenceAndStorageOwnerFilesExist() {
         let root = repoRoot()
         for requiredPath in [
-            "Native/Ambitions/Core/Persistence/LocalStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift",
             "Native/Ambitions/Core/Persistence/StoreHealthCheck.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
-                "Missing canonical Core/Persistence owner: \(requiredPath)"
+                "Missing canonical persistence/storage owner: \(requiredPath)"
             )
         }
     }
 
-    func testLocalStoreOwnsSwiftDataSchemaAndReadWriteHealth() async throws {
+    func testObjectStoreSwiftDataOwnsSwiftDataSchemaAndReadWriteHealth() async throws {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         let report = await store.healthReport(checker: StoreHealthCheck(timestampProvider: { "2026-06-20T23:00:00Z" }))
 

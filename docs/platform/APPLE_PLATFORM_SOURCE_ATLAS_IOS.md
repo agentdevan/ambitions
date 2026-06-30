@@ -559,6 +559,8 @@ Core/Persistence/SwiftDataModels/
   ReceiptRecord.swift
   UserSystemProfileRecord.swift
 
+Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift
+
 Core/Persistence/Repositories/
   StepRepository.swift
   GoalRepository.swift
@@ -638,7 +640,8 @@ Proof artifact is created by runtime, not widget UI.
 Add or preserve:
 
 ```text
-Core/Persistence/LocalStore.swift
+Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift
+Core/LocalRuntimeOS/Storage/
 Core/Persistence/StoreHealthCheck.swift
 Core/Persistence/Migrations/
 ```
@@ -1563,7 +1566,7 @@ Codex must not borrow:
 | Adopting App Intents | shared package, app + widget extension, discoverability | AmbitionsIntents package | sample entity model |
 | Accelerating App Intents | system action discovery and shortcuts | Capture/Step/Time intents | broad private graph exposure |
 | Emoji Rangers | Live Activity lifecycle, interactivity, animations | active Step or protected window Live Activity | game mechanics, scores, urgency |
-| SwiftData persistence samples | local model setup, container use, migrations | LocalStore / repositories | direct UI-to-model mutation |
+| SwiftData persistence samples | local model setup, container use, migrations | `ObjectStoreSwiftData` / repositories | direct UI-to-model mutation |
 | SwiftData history samples | transaction history patterns | proof/history implementation support | equating storage history with product proof |
 | CryptoKit keychain sample | secure local key storage | optional export/encryption keys | overbuilding crypto beyond approved scope |
 
@@ -1696,11 +1699,16 @@ Core/Time/
   RuntimeTickPolicy.swift
 
 Core/Persistence/
-  LocalStore.swift
   StoreHealthCheck.swift
   SwiftDataModels/
   Repositories/
   Migrations/
+
+Core/LocalRuntimeOS/Storage/
+  ObjectStoreSwiftData.swift
+  EventStoreSQLite.swift
+  ProjectionStoreSQLite.swift
+  SearchStoreFTS.swift
 
 Core/Permissions/
   PermissionCoordinator.swift

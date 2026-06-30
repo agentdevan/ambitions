@@ -130,9 +130,12 @@ Current implementation evidence is narrower:
 - `AmbitionsCommandExecutor` and `TodayCommandActionHandler` append runtime command execution events when a runtime event store is injected; focused tests cover the standalone executor duplicate-replay path and EventJournal checksum/replay behavior.
 - Source-present ProjectionEngine foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/`, including projection definitions, cursors, invalidations, diffs, checksums, event-fed materialization, Today/Goals/Time/You/Search/Widget/App Intent/Receipt/Privacy projection outputs, and an inventory of existing surface read-model scaffolding.
 - `ProjectionMaterializer` materializes projection outputs from `RuntimeEventStore` envelopes and focused tests cover canonical owner files, definition coverage, inventory path existence, event-fed projection outputs, privacy-safe external filtering, cursor/checksum creation, invalidation, and diffs.
+- Source-present Storage foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/Storage/`, including `EventStoreSQLite`, `ObjectStoreSwiftData`, `ProjectionStoreSQLite`, `SearchStoreFTS`, `BlobStoreFileSystem`, `AppGroupSnapshotStore`, `BackupStore`, and `MigrationStore`.
+- `ObjectStoreSwiftData.swift` owns the SwiftData object-store source; the former `Core/Persistence` local-store owner file was removed.
+- Focused simulator tests cover the storage manifest, SwiftData object-store authority rules, SQLite event append/query/checksum behavior, projection persistence, FTS search rebuild/privacy filtering, blob integrity, redacted external snapshots, encrypted backup/decrypt integrity, and migration dry-run metadata.
 - Remaining runtime and persistence scaffolding exists primarily under `Native/Ambitions/Core/Runtime/`, `Native/Ambitions/Core/Persistence/`, and `Native/Ambitions/Core/Domain/`.
-- `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until live Swift files, project inclusion, focused tests, and later implementation trains cover full cross-path replay, storage tiers, side-effect outbox, privacy firewall, migration repair, diagnostics, and continuity.
-- Current SwiftData persistence source is real, but SwiftData has not been proven demoted to an `ObjectStoreSwiftData` tier behind a separate event journal, projection store, search store, blob store, backup store, and migration store.
+- `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until later implementation trains cover full cross-path replay, active app-wide storage consumption, side-effect outbox, privacy firewall, migration repair, diagnostics, and continuity.
+- Current SwiftData persistence source is now owned by `ObjectStoreSwiftData`, but the app has not yet proven every app path consumes only the new storage tier split.
 - Existing command, receipt, event ledger, side-effect ledger, snapshot ledger, search, Source Atlas, runtime kernel, and repository code may be reused or moved as scaffolding, but they do not prove the LocalRuntimeOS spine is complete.
 
 Unsupported implementation claims until future source proof exists:
@@ -141,8 +144,8 @@ Unsupported implementation claims until future source proof exists:
 - the EventJournal is the sole canonical mutation record for every meaningful runtime mutation
 - duplicate and failed command replay are deterministic across every runtime path
 - all app-facing projections are consumed by Stage/surfaces/widgets/App Intents only from `ProjectionEngine`
-- SwiftData is only the object store tier
-- SQLite/FTS-backed journal, projection, and search stores are active
+- every app path treats SwiftData only as the object store tier
+- SQLite/FTS-backed journal, projection, and search stores are active across all production mutation/read paths
 - side effects are fully outboxed with leases, retry, confirmation, and receipts
 - Capture intake is durably journaled before classification and promotion
 - Source Atlas is a signed public-reference package manager
@@ -239,8 +242,8 @@ Native/Ambitions/Domain/
 Native/Ambitions/Domain/GoalEngine/
 Native/Ambitions/Domain/Planning/
 Native/Ambitions/Domain/Reschedule/
-Native/Ambitions/Persistence/SwiftDataModels.swift
-Native/Ambitions/Persistence/SwiftDataStore.swift
+Native/Ambitions/Core/Persistence/SwiftDataModels.swift
+Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift
 ```
 
 SwiftData persisted records are source-present for goals, goal drafts, goal plans, plan sections, steps, progress evidence, feedback events, captures, teaching signals, event ledger, and app state.
@@ -264,7 +267,7 @@ Do not claim the full external-brain graph, personalization, local learning, det
 Source truth:
 
 - SwiftData persistence source exists.
-- `AmbitionsPersistenceStore` creates a SwiftData `ModelContainer`.
+- `AmbitionsPersistenceStore` creates a SwiftData `ModelContainer` from `Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift`.
 - Store supports persistent and in-memory modes.
 - Live configuration uses persistent mode.
 - Repositories are built from `SwiftData*Repository` types in `AppContainerFactory`.
