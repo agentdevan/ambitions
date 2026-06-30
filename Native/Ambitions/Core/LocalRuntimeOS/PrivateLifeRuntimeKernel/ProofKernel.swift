@@ -1,103 +1,6 @@
 import Foundation
 
-extension PrivateLifeRuntimeKernel {
-    func evaluate(_ input: PrivateLifeRuntimeKernelDecisionInput) -> PrivateLifeRuntimeKernelDecisionOutput {
-        let record = makeDecisionRecord(input)
-        let personalizationFactorLedger = record?.personalizationFactorLedger ?? makePersonalizationFactorLedger(
-            for: input,
-            decisionRecord: nil,
-            decisionOutput: nil
-        )
-        let lifeContextEffect = record?.lifeContextEffect ?? makeLifeContextEffect(
-            goalText: input.goalText ?? input.traceContext.goalText,
-            projection: input.traceContext.lifeContextProjection
-        )
-        let lifeContextSignature = record?.lifeContextSignature ?? lifeContextSignature(
-            goalText: input.goalText ?? input.traceContext.goalText,
-            projection: input.traceContext.lifeContextProjection
-        )
-
-        return PrivateLifeRuntimeKernelDecisionOutput(
-            decisionID: decisionIdentifier(for: input, traceShape: record?.traceShape),
-            boundary: boundary,
-            canDriveRecommendation: record?.canDriveRecommendation ?? false,
-            hasRecommendationTrace: record != nil,
-            traceShape: record?.traceShape,
-            recordID: record?.id,
-            personalizationFactorLedger: personalizationFactorLedger,
-            lifeContextEffect: lifeContextEffect,
-            lifeContextSignature: lifeContextSignature
-        )
-    }
-
-
-    func makeDecisionRecord(_ input: PrivateLifeRuntimeKernelDecisionInput) -> PrivateLifeRuntimeKernelDecisionRecord? {
-        guard let recommendationTrace = input.recommendationTrace else {
-            return nil
-        }
-
-        let canDriveRecommendation = canDriveRecommendation(
-            traceContext: input.traceContext,
-            recommendationTrace: recommendationTrace
-        )
-        let traceShape = traceShape(for: recommendationTrace)
-        let personalizationFactorLedger = makePersonalizationFactorLedger(for: input)
-        let lifeContextEffect = makeLifeContextEffect(
-            goalText: input.goalText ?? input.traceContext.goalText,
-            projection: input.traceContext.lifeContextProjection
-        )
-        let lifeContextSignature = lifeContextSignature(
-            goalText: input.goalText ?? input.traceContext.goalText,
-            projection: input.traceContext.lifeContextProjection
-        )
-
-        return PrivateLifeRuntimeKernelDecisionRecord(
-            id: decisionIdentifier(for: input, traceShape: traceShape),
-            decisionKey: input.decisionKey,
-            goalText: input.goalText ?? input.traceContext.goalText,
-            traceContext: input.traceContext,
-            recommendationTrace: recommendationTrace,
-            personalizationFactorLedger: personalizationFactorLedger,
-            boundary: boundary,
-            canDriveRecommendation: canDriveRecommendation,
-            traceShape: traceShape,
-            lifeContextEffect: lifeContextEffect,
-            lifeContextSignature: lifeContextSignature
-        )
-    }
-
-
-    func canDriveRecommendation(
-        traceContext: PrivateLifeRuntimeKernelTraceContext,
-        recommendationTrace: RecommendationTrace
-    ) -> Bool {
-        boundary.isLocalOnly &&
-            traceContext.runtimeContext.capabilities.privateLifeRuntimeBoundary.isLocalOnly &&
-            traceContext.runtimeContext.capabilities.hasRemoteIntelligenceBackend == false &&
-            (traceContext.goalIntelligenceContext?.quarantine.canDriveRecommendation ?? true) &&
-            recommendationTrace.isComplete &&
-            recommendationTrace.canDriveRecommendationBehavior
-    }
-
-
-    func decisionIdentifier(
-        for input: PrivateLifeRuntimeKernelDecisionInput,
-        traceShape: String?
-    ) -> String {
-        let contextSignature = traceContextSignature(input.traceContext)
-        let traceSignature = traceShape ?? "missing-trace"
-        return [
-            "plr",
-            "decision",
-            boundary.isLocalOnly ? "local-only" : "mixed",
-            input.decisionKey.isEmpty ? "anonymous" : input.decisionKey,
-            contextSignature,
-            traceSignature
-        ]
-        .joined(separator: ".")
-    }
-
-
+struct ProofKernel: Sendable, Equatable {
     func traceContextSignature(_ traceContext: PrivateLifeRuntimeKernelTraceContext) -> String {
         let runtimeContext = traceContext.runtimeContext
         let knowledgeSignature = runtimeContext.knowledgeProviderStatuses
@@ -135,7 +38,6 @@ extension PrivateLifeRuntimeKernel {
         ]
         .joined(separator: "|")
     }
-
 
     func goalIntelligenceSignature(_ context: RuntimeGoalIntelligenceContext?) -> String {
         guard let context else {
@@ -197,46 +99,11 @@ extension PrivateLifeRuntimeKernel {
         .joined(separator: "|")
     }
 
-
-    func makeLifeContextEffect(
-        goalText: String?,
-        projection: LifeContextRuntimeProjection?
-    ) -> PrivateLifeRuntimeLifeContextEffect {
-        let readiness = lifeContextReadiness(for: projection)
-        let normalizedGoalTextValue = normalizeGoalText(goalText)
-        let startHereTitle = normalizedGoalTextValue ?? "Start here"
-        let explanation = lifeContextExplanation(
-            goalText: startHereTitle,
-            readiness: readiness,
-            projection: projection
-        )
-
-        return PrivateLifeRuntimeLifeContextEffect(
-            readiness: readiness,
-            goalText: normalizedGoalTextValue,
-            startHereTitle: startHereTitle,
-            startHereExplanation: explanation,
-            cadence: lifeContextCadence(for: projection, readiness: readiness),
-            urgency: lifeContextUrgency(for: projection, readiness: readiness),
-            milestone: lifeContextMilestone(for: projection, readiness: readiness),
-            pathwayLabels: projection?.eligibilityModel.compactMap { pathway in
-                normalizeGoalText(pathway.sexLeaguePathway) ?? normalizeGoalText(pathway.eligibilityRulesSummary)
-            } ?? [],
-            sourceFreshnessStates: projection?.sourceFreshnessSummary.map { "\($0.sourceID):\($0.freshness.rawValue)" } ?? [],
-            historyFactIDs: projection?.historySummary.map(\.id) ?? [],
-            excludedHistoryFactIDs: projection?.excludedHistorySummary.map(\.factID) ?? [],
-            excludedHistoryReasons: projection?.excludedHistorySummary.map { $0.reason.rawValue } ?? [],
-            missingContextQuestionIDs: projection?.missingContextQuestions.map(\.id) ?? [],
-            opportunityAnchorIDs: projection?.availableOpportunityAnchors.map(\.id) ?? []
-        )
-    }
-
-
     func lifeContextSignature(
         goalText: String?,
         projection: LifeContextRuntimeProjection?
     ) -> String {
-        let goalTextSignature = normalizeGoalText(goalText) ?? "goal:none"
+        let goalTextSignature = normalized(goalText) ?? "goal:none"
         guard let projection else {
             return [
                 goalTextSignature,
@@ -295,26 +162,131 @@ extension PrivateLifeRuntimeKernel {
         .joined(separator: "|")
     }
 
+    private func normalized(_ value: String?) -> String? {
+        let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed?.isEmpty == true ? nil : trimmed
+    }
 
-    func lifeContextReadiness(for projection: LifeContextRuntimeProjection?) -> PrivateLifeRuntimeLifeContextReadiness {
-        guard let projection else {
-            return .clarification
-        }
-        if projection.missingContextQuestions.isEmpty == false {
-            return .clarification
-        }
-        if projection.excludedHistorySummary.isEmpty == false {
-            return .review
-        }
-        if projection.sourceFreshnessSummary.contains(where: { $0.freshness != .current }) {
-            return .review
-        }
-        if projection.historySummary.contains(where: { $0.freshness != .current }) {
-            return .review
-        }
-        if projection.sensitiveUseWarnings.isEmpty == false {
-            return .review
-        }
-        return .ready
+    private static func whisperSignature(_ whisper: GoalTrustWhisperState) -> String {
+        [
+            whisper.title,
+            whisper.subtitle,
+            whisper.pillLine,
+            whisper.pills.map { pill in
+                [
+                    pill.id,
+                    pill.title,
+                    pill.icon,
+                    pill.state.rawValue
+                ]
+                .joined(separator: ":")
+            }
+            .sorted()
+            .joined(separator: ",")
+        ]
+        .joined(separator: "|")
+    }
+
+    private static func whyThisSignature(_ whyThis: GoalWhyThisState) -> String {
+        [
+            whyThis.compactSummary,
+            whyThis.lines.joined(separator: ",")
+        ]
+        .joined(separator: "|")
+    }
+
+    private static func freshnessSignature(_ freshness: GoalFreshnessState) -> String {
+        [
+            freshness.posture.rawValue,
+            freshness.postureLabel,
+            freshness.severityLabel,
+            freshness.detailLabels.joined(separator: ",")
+        ]
+        .joined(separator: "|")
+    }
+
+    private static func confidenceSignature(_ confidence: GoalConfidenceState) -> String {
+        [
+            confidence.understandingConfidence.rawValue,
+            confidence.pathConfidence?.rawValue ?? "none",
+            confidence.detailLabels.joined(separator: ",")
+        ]
+        .joined(separator: "|")
+    }
+
+    private static func sourceAuditSignature(_ sourceAudit: GoalSourceAuditSectionState) -> String {
+        sourceAudit.rows
+            .map(Self.sourceAuditRowSignature)
+            .sorted()
+            .joined(separator: ",")
+    }
+
+    private static func sourceAuditRowSignature(_ row: GoalSourceAuditRowState) -> String {
+        [
+            row.id,
+            row.resourceID,
+            row.title,
+            row.subtitle,
+            row.detailLabels.joined(separator: ","),
+            row.state.rawValue
+        ]
+        .joined(separator: ":")
+    }
+
+    private static func contradictionSignature(_ contradictions: [GoalContradictionSummaryState]) -> String {
+        contradictions
+            .map(Self.contradictionEntrySignature)
+            .sorted()
+            .joined(separator: ",")
+    }
+
+    private static func contradictionEntrySignature(_ contradiction: GoalContradictionSummaryState) -> String {
+        [
+            contradiction.id,
+            contradiction.code.rawValue,
+            contradiction.title,
+            contradiction.summary,
+            contradiction.severityLabel,
+            contradiction.state.rawValue
+        ]
+        .joined(separator: ":")
+    }
+
+    private static func correctionControlSignature(_ controls: [GoalCorrectionControlState]) -> String {
+        controls
+            .map(Self.correctionControlEntrySignature)
+            .sorted()
+            .joined(separator: ",")
+    }
+
+    private static func correctionControlEntrySignature(_ control: GoalCorrectionControlState) -> String {
+        [
+            control.id,
+            control.title,
+            control.subtitle,
+            control.kind.rawValue,
+            control.artifactKind.rawValue,
+            control.teachingSignalKind.rawValue,
+            control.state.rawValue
+        ]
+        .joined(separator: ":")
+    }
+
+    private static func appliedTeachingBadgeSignature(_ badges: [GoalAppliedTeachingBadgeState]) -> String {
+        badges
+            .map(Self.appliedTeachingBadgeEntrySignature)
+            .sorted()
+            .joined(separator: ",")
+    }
+
+    private static func appliedTeachingBadgeEntrySignature(_ badge: GoalAppliedTeachingBadgeState) -> String {
+        [
+            badge.id,
+            badge.signalID,
+            badge.title,
+            badge.subtitle,
+            badge.state.rawValue
+        ]
+        .joined(separator: ":")
     }
 }
