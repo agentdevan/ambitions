@@ -5224,6 +5224,89 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
+      "line_count": 138,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/FTSIndex.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 283,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/FindActInspectContract.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-01",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 130,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/LocalSearchIndex.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 106,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/ResultRanker.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 141,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchActionValidator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 93,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 98,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SemanticLocalIndex.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
       "line_count": 34,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift"
     },
@@ -7489,19 +7572,6 @@
       "kind": "native_source",
       "line_count": 356,
       "path": "Native/Ambitions/Core/Runtime/ScheduleInstallKernel.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-01",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 112,
-      "path": "Native/Ambitions/Core/Runtime/SearchIndex.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18164,6 +18234,21 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 302,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SearchRecall/SearchRecallTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-03",
         "VSP-04",
         "VSP-05",
@@ -21722,7 +21807,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1754,
+  "entry_count": 1761,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

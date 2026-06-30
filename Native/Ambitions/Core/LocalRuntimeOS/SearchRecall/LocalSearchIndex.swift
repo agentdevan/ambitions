@@ -1,6 +1,6 @@
 import Foundation
 
-enum LocalSearchObjectFamily: String, CaseIterable, Sendable, Equatable {
+enum LocalSearchObjectFamily: String, Codable, CaseIterable, Sendable, Equatable, Hashable {
     case step
     case goal
     case capture
@@ -34,6 +34,24 @@ enum LocalSearchObjectFamily: String, CaseIterable, Sendable, Equatable {
         case .timeWindow: "calendar"
         case .setting: "gearshape"
         }
+    }
+
+    static func inferred(objectFamily: String, objectIDs: [String]) -> LocalSearchObjectFamily {
+        if let family = LocalSearchObjectFamily(rawValue: objectFamily) {
+            return family
+        }
+
+        let haystack = ([objectFamily] + objectIDs)
+            .joined(separator: " ")
+            .lowercased()
+        if haystack.contains("step") { return .step }
+        if haystack.contains("goal") { return .goal }
+        if haystack.contains("capture") { return .capture }
+        if haystack.contains("proof") { return .proof }
+        if haystack.contains("receipt") { return .receipt }
+        if haystack.contains("time") || haystack.contains("calendar") { return .timeWindow }
+        if haystack.contains("setting") || haystack.contains("you") { return .setting }
+        return .thought
     }
 }
 
