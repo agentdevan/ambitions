@@ -607,7 +607,7 @@ gates:
     user_visible_behavior: "Life Capital supports all canon content types."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Core/Domain/SourceAtlasPackModels+06-SourceAtlasPack.swift"
+      - "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+06-SourceAtlasPack.swift"
       - "Native/Ambitions/Projection/SurfaceLenses/YouFeatureServiceLifeContextRuntimeProjection.swift"
     required_future_proof: "Dedicated Life Capital model/tests"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
@@ -778,7 +778,7 @@ gates:
     user_visible_behavior: "Source Atlas does not upload private context."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Core/Domain/SourceAtlasPackModels+06-SourceAtlasPack.swift"
+      - "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+06-SourceAtlasPack.swift"
       - "docs/truth/RELEASE_TRUTH.md"
     required_future_proof: "Request-shape privacy proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
@@ -801,7 +801,7 @@ gates:
     user_visible_behavior: "Source Atlas enriches path locally."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Core/Domain/SourceAtlasPackModels+06-SourceAtlasPack.swift"
+      - "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+06-SourceAtlasPack.swift"
     required_future_proof: "Local composition test"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"

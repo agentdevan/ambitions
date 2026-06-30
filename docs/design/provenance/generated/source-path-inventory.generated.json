@@ -3141,453 +3141,6 @@
       "path": "Native/Ambitions/Core/Domain/SmartAttachmentPlacementPreview.swift"
     },
     {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-09",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 168,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasBridgeReceiptReplayModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 329,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+02-extract.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 328,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+03-provenanceState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 64,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+04-locatorHint.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 5,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 134,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 160,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasCoverageRuntimeFixtureModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 456,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasDocumentTypeClassifierModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 225,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasFoundryM02ContractModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 90,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasFreshnessBrokerModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 428,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasImageScreenshotImporterModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 404,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasIntentMatchModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 218,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasLocalImpactMatcherModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 381,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPDFImportBoundaryModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 418,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPDFKitTextExtractionModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 391,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackFactoryModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 329,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+02-SourceAtlasClaim.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 317,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+03-SourceAtlasDomainPack.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 337,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+04-SourceAtlasLevelLadder.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 345,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+05-SourceAtlasFreshnessPolicy.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 362,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+06-SourceAtlasPack.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 70,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+07-PlanSkeletonRiskFlag.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 328,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer+02-goalID.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 220,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer+03-scorePath.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 294,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer+04-buildPlanSkeleton.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 133,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer+05-tradeoff.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 41,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 318,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPackModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 382,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasPlainTextImporterModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 290,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasQueryEngineModels+02-SourceAtlasQueryEngine+02-packs.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 165,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasQueryEngineModels+02-SourceAtlasQueryEngine+03-rank.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 6,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasQueryEngineModels+02-SourceAtlasQueryEngine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 207,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasQueryEngineModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 432,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasReviewModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 261,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasSourceContainerModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 295,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasStoreModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 369,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasURLSourceImporterModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 429,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasUserMiniPackBuilderModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 544,
-      "path": "Native/Ambitions/Core/Domain/SourceAtlasVisionOCRFallbackModels.swift"
-    },
-    {
       "candidate_vsp_ids": [],
       "exists": true,
       "inventory_only": true,
@@ -5578,6 +5131,828 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 79,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/FreshnessEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 66,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/LastKnownGoodStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 84,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/ManifestVerifier.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 106,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicOnlyFirewall.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 98,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicPackCache.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 81,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicPackRequestCompiler.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 118,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/R2GatewayClient.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 80,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SignatureVerifier.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 438,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasAuthorityMesh.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 168,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasBridgeReceiptReplayModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 329,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+02-extract.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 328,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+03-provenanceState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 64,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+04-locatorHint.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 5,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 134,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 160,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 456,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasDocumentTypeClassifierModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 225,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasFoundryM02ContractModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 90,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasFreshnessBrokerModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 428,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasImageScreenshotImporterModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 404,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasIntentMatchModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 69,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalCompositionFallback.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 218,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalImpactMatcherModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 503,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalPackCache.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 377,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalReferenceCompositionProof.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 381,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPDFImportBoundaryModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 418,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPDFKitTextExtractionModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 391,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackFactoryModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 329,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+02-SourceAtlasClaim.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 317,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+03-SourceAtlasDomainPack.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 337,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+04-SourceAtlasLevelLadder.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 345,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+05-SourceAtlasFreshnessPolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 362,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+06-SourceAtlasPack.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 70,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+07-PlanSkeletonRiskFlag.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 328,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer+02-goalID.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 220,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer+03-scorePath.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 294,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer+04-buildPlanSkeleton.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 133,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer+05-tradeoff.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 41,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels+08-SourceAtlasCapabilityPathComposer.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 318,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 382,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPlainTextImporterModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 56,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 253,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackAppRefreshCoordinator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 271,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackBackgroundRefreshTask.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 295,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepository+Storage.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 471,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepository.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 468,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheJournal.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 507,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackFetchPipeline.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 310,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackLifecycleRefreshService.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 281,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRefreshTargetRegistry.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 307,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 550,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransport.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 96,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransportAdapters.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 175,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRepositoryBackedRemoteRefresh.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 145,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRequestValidator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 202,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublishedPackMetadataDecoder.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 520,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublishedPackSchemaDecoder.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 290,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasQueryEngineModels+02-SourceAtlasQueryEngine+02-packs.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 165,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasQueryEngineModels+02-SourceAtlasQueryEngine+03-rank.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 6,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasQueryEngineModels+02-SourceAtlasQueryEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 207,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasQueryEngineModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 432,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasReviewModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 303,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeReplay.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 513,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasSeedFoundry.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 261,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasSourceContainerModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 295,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasStoreModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 369,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasURLSourceImporterModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 429,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasUserMiniPackBuilderModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 544,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasVisionOCRFallbackModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
         "VSP-07",
         "VSP-10"
       ],
@@ -6585,206 +6960,6 @@
       "kind": "native_source",
       "line_count": 24,
       "path": "Native/Ambitions/Core/Persistence/PreviewCaptureRepository.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 438,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasAuthorityMesh.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 503,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasLocalPackCache.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 253,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackAppRefreshCoordinator.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 271,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackBackgroundRefreshTask.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 295,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackCacheFileRepository+Storage.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 471,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackCacheFileRepository.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 468,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackCacheJournal.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 507,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackFetchPipeline.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 310,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackLifecycleRefreshService.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 281,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRefreshTargetRegistry.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 307,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 550,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransport.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 96,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRemoteTransportAdapters.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 175,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRepositoryBackedRemoteRefresh.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 145,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicPackRequestValidator.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 520,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublishedPackCompatibility.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 202,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublishedPackMetadataCompatibility.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 513,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasSeedFoundry.swift"
     },
     {
       "candidate_vsp_ids": [],
@@ -8228,43 +8403,6 @@
       "kind": "native_source",
       "line_count": 72,
       "path": "Native/Ambitions/Core/Runtime/SnapshotRefreshingServices.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 69,
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasLocalCompositionFallback.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 377,
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasLocalReferenceCompositionProof.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 303,
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasRuntimeBridgeReplay.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -17780,259 +17918,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 913,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasCapabilityPathCompositionModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 167,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasClaimCandidateExtractorModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 133,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasCoverageRuntimeFixtureModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 267,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasDocumentTypeClassifierModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 159,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasFoundryM02ContractModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 255,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 447,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasIntentMatchModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 123,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasLocalImpactMatcherModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 297,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasOfflineFallbackRuntimeModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 267,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 210,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 764,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPackFactoryModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 1374,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 252,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 367,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasQueryEngineModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 238,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasReviewModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 159,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasSourceContainerModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 338,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasStoreModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 189,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 121,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasUserMiniPackBuilderModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 328,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-07",
         "VSP-08",
@@ -18735,6 +18620,516 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 201,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasAuthorityMeshTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 913,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCapabilityPathCompositionModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 167,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 133,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 267,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasDocumentTypeClassifierModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 159,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasFoundryM02ContractModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 255,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasImageScreenshotImporterModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 447,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasIntentMatchModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 231,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalCompositionFallbackTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 123,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalImpactMatcherModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 516,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalPackCacheTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 465,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalReferenceCompositionProofTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 64,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalRuntimeOSOwnershipTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 297,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineFallbackRuntimeModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 50,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 267,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPDFImportBoundaryModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 210,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPDFKitTextExtractionModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 764,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackFactoryModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 1374,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 297,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackageManagerLeafTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 252,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPlainTextImporterModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 435,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackAppRefreshCoordinatorTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 524,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackBackgroundRefreshTaskTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 666,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepositoryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 358,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheJournalTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 603,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackFetchPipelineTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 1971,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 252,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 203,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRefreshTargetRegistryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 379,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteMetadataTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 1224,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransportTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 549,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 367,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasQueryEngineModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 238,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasReviewModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 1203,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 414,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeReplayTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 335,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasSeedFoundryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 159,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasSourceContainerModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 338,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasStoreModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 189,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasURLSourceImporterModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 121,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasUserMiniPackBuilderModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 328,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasVisionOCRFallbackModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-05",
@@ -19149,163 +19544,6 @@
       "kind": "test",
       "line_count": 117,
       "path": "Native/AmbitionsTests/Persistence/RuntimeSnapshotLedgerRepositoryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 201,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasAuthorityMeshTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 516,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasLocalPackCacheTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 435,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackAppRefreshCoordinatorTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 524,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackBackgroundRefreshTaskTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 666,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackCacheFileRepositoryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 358,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackCacheJournalTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 603,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackFetchPipelineTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 1971,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 252,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 203,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 379,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteMetadataTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 1224,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteTransportTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 549,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 335,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasSeedFoundryTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19794,66 +20032,6 @@
       "kind": "test",
       "line_count": 350,
       "path": "Native/AmbitionsTests/Runtime/ScheduleInstallKernelTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 231,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasLocalCompositionFallbackTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 465,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasLocalReferenceCompositionProofTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 50,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasOfflineNoAccountScenarioTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 1203,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 414,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeReplayTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -22260,7 +22438,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 431,
+      "line_count": 435,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -22344,7 +22522,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1804,
+  "entry_count": 1815,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

@@ -335,7 +335,7 @@ private extension SourceAtlasPublicPackFetchPipeline {
             if let currentPointer {
                 do {
                     var issues: [SourceAtlasPublicPackFetchIssue] = []
-                    let bridge = SourceAtlasPublishedPackManifestBridge(decoder: decoder)
+                    let bridge = SourceAtlasPublishedPackSchemaDecoder(decoder: decoder)
                     var manifest = try bridge.freshnessManifest(
                         from: fetchedManifestData,
                         pointer: currentPointer
@@ -371,7 +371,7 @@ private extension SourceAtlasPublicPackFetchPipeline {
                         }
                     }
                     return (manifest, issues)
-                } catch SourceAtlasPublishedPackCompatibilityIssue.manifestHashMismatch {
+                } catch SourceAtlasPublishedPackSchemaIssue.manifestHashMismatch {
                     if let cachedManifest = input.cachedManifest {
                         return (cachedManifest, [.manifestHashMismatch])
                     }

@@ -23,7 +23,7 @@ struct SourceAtlasFoundryM02Pack: Decodable, Equatable {
     }
 
     var preservesFoundryClaimStates: Bool {
-        claims.allSatisfy { $0.state != SourceAtlasClaimState.official.rawValue && $0.state != SourceAtlasClaimState.officialCurrentCompatibilityRawValue }
+        claims.allSatisfy { $0.state != SourceAtlasClaimState.official.rawValue && $0.state != SourceAtlasClaimState.officialCurrentSchemaAliasRawValue }
     }
 }
 
@@ -218,7 +218,7 @@ struct SourceAtlasFoundryM02BoundaryValidator {
 }
 
 private extension SourceAtlasClaimState {
-    static var officialCurrentCompatibilityRawValue: String {
+    static var officialCurrentSchemaAliasRawValue: String {
         "official_current"
     }
 }

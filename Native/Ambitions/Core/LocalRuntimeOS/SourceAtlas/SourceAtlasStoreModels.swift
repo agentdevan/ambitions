@@ -101,12 +101,12 @@ struct SourceAtlasStoreLoadResult: Sendable, Equatable, Hashable {
 struct SourceAtlasStore {
     private let decoder: JSONDecoder
     private let validator: SourceAtlasPackValidator
-    private let publishedPackBridge: SourceAtlasPublishedDomainPackBridge
+    private let publishedPackBridge: SourceAtlasPublishedDomainPackDecoder
 
     init(
         decoder: JSONDecoder = JSONDecoder(),
         validator: SourceAtlasPackValidator = SourceAtlasPackValidator(),
-        publishedPackBridge: SourceAtlasPublishedDomainPackBridge = SourceAtlasPublishedDomainPackBridge()
+        publishedPackBridge: SourceAtlasPublishedDomainPackDecoder = SourceAtlasPublishedDomainPackDecoder()
     ) {
         self.decoder = decoder
         self.validator = validator

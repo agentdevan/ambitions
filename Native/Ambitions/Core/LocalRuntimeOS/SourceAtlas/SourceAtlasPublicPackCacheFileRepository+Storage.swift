@@ -69,7 +69,7 @@ extension SourceAtlasPublicPackCacheFileRepository {
                 "not a final user plan, schedule, or Step generator"
             ]
         )
-        return try SourceAtlasPublishedPackManifestBridge(decoder: decoder)
+        return try SourceAtlasPublishedPackSchemaDecoder(decoder: decoder)
             .freshnessManifest(from: data, pointer: pointer)
     }
 

@@ -1,7 +1,7 @@
 # Source Atlas Coverage Ledger
 
 Status: Yellow
-Generated: 2026-06-28
+Generated: 2026-06-30
 Input commit: 0013594d1
 Owner posture: Retained coverage/proof roll-up, not product canon, production coverage proof, R2 readiness proof, privacy/legal approval, release proof, or known-issue closure.
 
@@ -24,7 +24,7 @@ This ledger rolls up the current Source Atlas registry, product-experience scena
 | Scenarios | 6 Source-related product gates; 17 M09 golden scenarios x 8 source-state variants | Scenario/contract coverage only | `docs/qa/product-experience-scenario-gates.yaml`, `tools/source-atlas/fixtures/m09/golden-benchmark-matrix.json` |
 | Source states | current, unavailable, stale, stale-critical, conflicted, revoked, unsupported, review-required | Local repair-routing proof only | `tools/source-atlas/foundry/m09_validation.py`, `tools/source-atlas/fixtures/m09/source-state-repair-fixtures.json` |
 | Claims, provenance, freshness | 8 seed claims; freshness values: selection_cycle_watch, stable_law_watch | Seed/source-record proof only | `tools/source-atlas/foundry/registry.py`, `tools/source-atlas/foundry/contracts/*` |
-| Native source | 68 SourceAtlas source files and 44 SourceAtlas test files | Source/test presence; no release proof | `Native/Ambitions/**/SourceAtlas*.swift`, `Native/AmbitionsTests/**/SourceAtlas*.swift` |
+| Native source | 69 SourceAtlas source files and 42 SourceAtlas test files under `Core/LocalRuntimeOS/SourceAtlas` | Source/test presence; no release proof | `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/*.swift`, `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/*.swift` |
 | Validation | 17 available M09 commands, 1 unavailable command, 14 areas | Local validation matrix proof only | `docs/qa/source-atlas/2026-06-26-m09-validation-command-matrix.json` |
 | R2 readiness | 5 contracts; production operations proof status Green for `source-atlas/v1/validation/amb-1429` | Green only for validation-prefix operations proof; Yellow for app/runtime/release readiness | `tools/source-atlas/foundry/contracts`, `docs/qa/source-atlas/production-r2-operations-proof.md` |
 | Broad occupational foundation | 4 sources, 38 claims, 19 requirements, 95 atoms, 60 edges, 10 crosswalks | Pack candidate_local_only; R2 candidate_local_only_not_uploaded | `tools/source-atlas/generated/broad-occupational-foundation`, `docs/qa/source-atlas/source-atlas-coverage-ledger.json` |
@@ -138,34 +138,32 @@ Unavailable validation entries are explicit non-claims:
 
 | Canonical owner | SourceAtlas file count |
 | --- | --- |
-| Core/Domain | 39 |
-| Core/Persistence | 17 |
-| Core/Runtime | 8 |
+| Core/LocalRuntimeOS/SourceAtlas | 69 |
 | Projection | 3 |
 | DesignSystem | 1 |
-| Tests | 44 |
+| Tests/LocalRuntimeOS/SourceAtlas | 42 |
 
 Sample native source evidence:
 
-- `Native/Ambitions/Core/Domain/SourceAtlasBridgeReceiptReplayModels.swift`
-- `Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+02-extract.swift`
-- `Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+03-provenanceState.swift`
-- `Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+04-locatorHint.swift`
-- `Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor.swift`
-- `Native/Ambitions/Core/Domain/SourceAtlasClaimCandidateExtractorModels.swift`
-- `Native/Ambitions/Core/Domain/SourceAtlasCoverageRuntimeFixtureModels.swift`
-- `Native/Ambitions/Core/Domain/SourceAtlasDocumentTypeClassifierModels.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasBridgeReceiptReplayModels.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+02-extract.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+03-provenanceState.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor+04-locatorHint.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels+02-SourceAtlasClaimCandidateExtractor.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModels.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicPackRequestCompiler.swift`
+- `Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicOnlyFirewall.swift`
 
 Sample native test evidence:
 
-- `Native/AmbitionsTests/Domain/SourceAtlasCapabilityPathCompositionModelsTests.swift`
-- `Native/AmbitionsTests/Domain/SourceAtlasClaimCandidateExtractorModelsTests.swift`
-- `Native/AmbitionsTests/Domain/SourceAtlasCoverageRuntimeFixtureModelsTests.swift`
-- `Native/AmbitionsTests/Domain/SourceAtlasDocumentTypeClassifierModelsTests.swift`
-- `Native/AmbitionsTests/Domain/SourceAtlasFoundryM02ContractModelsTests.swift`
-- `Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift`
-- `Native/AmbitionsTests/Domain/SourceAtlasIntentMatchModelsTests.swift`
-- `Native/AmbitionsTests/Domain/SourceAtlasLocalImpactMatcherModelsTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCapabilityPathCompositionModelsTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModelsTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModelsTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasDocumentTypeClassifierModelsTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalRuntimeOSOwnershipTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackageManagerLeafTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift`
+- `Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeReplayTests.swift`
 
 ## Next Repair Gates
 

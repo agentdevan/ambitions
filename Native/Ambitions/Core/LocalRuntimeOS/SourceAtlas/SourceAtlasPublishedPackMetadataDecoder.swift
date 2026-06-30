@@ -1,6 +1,6 @@
 import Foundation
 
-extension SourceAtlasPublishedPackManifestBridge {
+extension SourceAtlasPublishedPackSchemaDecoder {
     func currentPackIsRevoked(
         pointer: SourceAtlasPublishedCurrentPointer,
         manifestData: Data,
@@ -49,10 +49,10 @@ extension SourceAtlasPublishedPackManifestBridge {
     func lastKnownGoodManifestKey(from data: Data) throws -> String {
         let pointer = try Self.decodeLastKnownGoodPointer(from: data)
         guard pointer.rollbackSafe else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.notPublicReference
+            throw SourceAtlasPublishedPackSchemaIssue.notPublicReference
         }
         guard pointer.manifestKey.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == false else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.packObjectKeyMissing
+            throw SourceAtlasPublishedPackSchemaIssue.packObjectKeyMissing
         }
         return pointer.manifestKey
     }
@@ -66,13 +66,13 @@ extension SourceAtlasPublishedPackManifestBridge {
         guard pointer.rollbackSafe,
               SourceAtlasStore.sha256Hex(for: manifestData) == pointer.sha256.lowercased()
         else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestHashMismatch
+            throw SourceAtlasPublishedPackSchemaIssue.manifestHashMismatch
         }
         let lkgManifest = try Self.decodePackMetadataManifest(from: manifestData)
         guard let lkgPackSHA256 = lkgManifest.sha256?.lowercased(),
               SourceAtlasPublishedCurrentPointerValidator.isSHA256Hex(lkgPackSHA256)
         else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestHashMissing
+            throw SourceAtlasPublishedPackSchemaIssue.manifestHashMissing
         }
 
         let packIndex = manifest.packIndex.map { entry in
@@ -98,18 +98,18 @@ extension SourceAtlasPublishedPackManifestBridge {
     }
 }
 
-private extension SourceAtlasPublishedPackManifestBridge {
+private extension SourceAtlasPublishedPackSchemaDecoder {
     static func decodeRevocationManifest(from data: Data) throws -> PublishedRevocationMetadata {
         let revocation: PublishedRevocationMetadata
         do {
             revocation = try JSONDecoder().decode(PublishedRevocationMetadata.self, from: data)
         } catch {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestDecodeFailed
+            throw SourceAtlasPublishedPackSchemaIssue.manifestDecodeFailed
         }
         guard revocation.publicReferenceOnly,
               revocation.dataClass == "public_freshness"
         else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.notPublicReference
+            throw SourceAtlasPublishedPackSchemaIssue.notPublicReference
         }
         return revocation
     }
@@ -119,12 +119,12 @@ private extension SourceAtlasPublishedPackManifestBridge {
         do {
             pointer = try JSONDecoder().decode(PublishedLastKnownGoodMetadata.self, from: data)
         } catch {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestDecodeFailed
+            throw SourceAtlasPublishedPackSchemaIssue.manifestDecodeFailed
         }
         guard pointer.publicReferenceOnly,
               pointer.dataClass == "public_freshness"
         else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.notPublicReference
+            throw SourceAtlasPublishedPackSchemaIssue.notPublicReference
         }
         return pointer
     }
@@ -134,16 +134,16 @@ private extension SourceAtlasPublishedPackManifestBridge {
         do {
             manifest = try JSONDecoder().decode(PublishedPackMetadataManifest.self, from: data)
         } catch {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestDecodeFailed
+            throw SourceAtlasPublishedPackSchemaIssue.manifestDecodeFailed
         }
         guard manifest.kind == "ambitions.sourceAtlas.packManifest.v1" else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.unsupportedManifestKind
+            throw SourceAtlasPublishedPackSchemaIssue.unsupportedManifestKind
         }
         guard manifest.schemaVersion == "1.0.0" else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.unsupportedManifestSchema
+            throw SourceAtlasPublishedPackSchemaIssue.unsupportedManifestSchema
         }
         guard manifest.publicReferenceOnly else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.notPublicReference
+            throw SourceAtlasPublishedPackSchemaIssue.notPublicReference
         }
         return manifest
     }

@@ -6768,427 +6768,6 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 913,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasCapabilityPathCompositionModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasCapabilityPathCompositionModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 167,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasClaimCandidateExtractorModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasClaimCandidateExtractorModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 133,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasCoverageRuntimeFixtureModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasCoverageRuntimeFixtureModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 267,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasDocumentTypeClassifierModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasDocumentTypeClassifierModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 159,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasFoundryM02ContractModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasFoundryM02ContractModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 255,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasImageScreenshotImporterModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasImageScreenshotImporterModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 447,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasIntentMatchModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasIntentMatchModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 123,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasLocalImpactMatcherModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasLocalImpactMatcherModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 297,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasOfflineFallbackRuntimeModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasOfflineFallbackRuntimeModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 267,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPDFImportBoundaryModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPDFImportBoundaryModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 210,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPDFKitTextExtractionModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPDFKitTextExtractionModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 764,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPackFactoryModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPackFactoryModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 1374,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPackModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPackModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 252,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasPlainTextImporterModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPlainTextImporterModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 367,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasQueryEngineModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasQueryEngineModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 238,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasReviewModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasReviewModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 159,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasSourceContainerModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasSourceContainerModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 338,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasStoreModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasStoreModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 189,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasURLSourceImporterModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasURLSourceImporterModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 121,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasUserMiniPackBuilderModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasUserMiniPackBuilderModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 328,
-      "path": "Native/AmbitionsTests/Domain/SourceAtlasVisionOCRFallbackModelsTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasVisionOCRFallbackModelsTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-07",
         "VSP-08",
@@ -8323,6 +7902,852 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 201,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasAuthorityMeshTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasAuthorityMeshTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 913,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCapabilityPathCompositionModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasCapabilityPathCompositionModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 167,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasClaimCandidateExtractorModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasClaimCandidateExtractorModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 133,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasCoverageRuntimeFixtureModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasCoverageRuntimeFixtureModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 267,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasDocumentTypeClassifierModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasDocumentTypeClassifierModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 159,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasFoundryM02ContractModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasFoundryM02ContractModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 255,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasImageScreenshotImporterModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasImageScreenshotImporterModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 447,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasIntentMatchModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasIntentMatchModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 231,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalCompositionFallbackTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasLocalCompositionFallbackTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 123,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalImpactMatcherModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasLocalImpactMatcherModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 516,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalPackCacheTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasLocalPackCacheTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 465,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalReferenceCompositionProofTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasLocalReferenceCompositionProofTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 64,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalRuntimeOSOwnershipTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasLocalRuntimeOSOwnershipTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 297,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineFallbackRuntimeModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasOfflineFallbackRuntimeModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 50,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasOfflineNoAccountScenarioTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasOfflineNoAccountScenarioTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 267,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPDFImportBoundaryModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPDFImportBoundaryModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 210,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPDFKitTextExtractionModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPDFKitTextExtractionModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 764,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackFactoryModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPackFactoryModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 1374,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPackModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 297,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPackageManagerLeafTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPackageManagerLeafTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 252,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPlainTextImporterModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPlainTextImporterModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 435,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackAppRefreshCoordinatorTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackAppRefreshCoordinatorTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 524,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackBackgroundRefreshTaskTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackBackgroundRefreshTaskTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 666,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheFileRepositoryTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackCacheFileRepositoryTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 358,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackCacheJournalTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackCacheJournalTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 603,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackFetchPipelineTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackFetchPipelineTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 1971,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackLifecycleRefreshServiceTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 252,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 203,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRefreshTargetRegistryTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackRefreshTargetRegistryTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 379,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteMetadataTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackRemoteMetadataTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 1224,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransportTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackRemoteTransportTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 549,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 367,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasQueryEngineModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasQueryEngineModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 238,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasReviewModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasReviewModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 1203,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasRuntimeBridgeCoverageGauntletTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 414,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeReplayTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasRuntimeBridgeReplayTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 335,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasSeedFoundryTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasSeedFoundryTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 159,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasSourceContainerModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasSourceContainerModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 338,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasStoreModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasStoreModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 189,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasURLSourceImporterModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasURLSourceImporterModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 121,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasUserMiniPackBuilderModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasUserMiniPackBuilderModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 328,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasVisionOCRFallbackModelsTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasVisionOCRFallbackModelsTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-05",
@@ -9004,275 +9429,6 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "RuntimeSnapshotLedgerRepositoryTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 201,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasAuthorityMeshTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasAuthorityMeshTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 516,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasLocalPackCacheTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasLocalPackCacheTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 435,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackAppRefreshCoordinatorTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackAppRefreshCoordinatorTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 524,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackBackgroundRefreshTaskTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackBackgroundRefreshTaskTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 666,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackCacheFileRepositoryTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackCacheFileRepositoryTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 358,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackCacheJournalTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackCacheJournalTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 603,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackFetchPipelineTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackFetchPipelineTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 1971,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackLifecycleRefreshServiceTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackLifecycleRefreshServiceTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 252,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackRefreshTargetRegistryArtifactLoaderTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 203,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRefreshTargetRegistryTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackRefreshTargetRegistryTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 379,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteMetadataTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackRemoteMetadataTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 1224,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRemoteTransportTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackRemoteTransportTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 549,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasPublicPackRepositoryBackedRemoteRefreshTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 335,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasSeedFoundryTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasSeedFoundryTests"
       ],
       "view_modifiers": [],
       "view_structs": []
@@ -10049,106 +10205,6 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "ScheduleInstallKernelTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 231,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasLocalCompositionFallbackTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasLocalCompositionFallbackTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 465,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasLocalReferenceCompositionProofTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasLocalReferenceCompositionProofTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 50,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasOfflineNoAccountScenarioTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasOfflineNoAccountScenarioTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 1203,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasRuntimeBridgeCoverageGauntletTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 414,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasRuntimeBridgeReplayTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SourceAtlasRuntimeBridgeReplayTests"
       ],
       "view_modifiers": [],
       "view_structs": []
@@ -12863,7 +12919,7 @@
       "view_structs": []
     }
   ],
-  "entry_count": 604,
+  "entry_count": 606,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "scan_roots": [

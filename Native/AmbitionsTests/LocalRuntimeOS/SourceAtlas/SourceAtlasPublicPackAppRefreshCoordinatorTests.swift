@@ -1,19 +1,16 @@
 import XCTest
 @testable import Ambitions
 
-final class SourceAtlasPublicPackBackgroundRefreshTaskTests: XCTestCase {
-    func testOfflineNoAccountBackgroundTaskUsesCachedPublicPackWithoutTransport() async throws {
+final class SourceAtlasPublicPackAppRefreshCoordinatorTests: XCTestCase {
+    func testOfflineNoAccountStartupLoadsRepositoryCachedManifestAndPayloadWithoutTransport() async throws {
         let fixture = try Self.remoteNativeFixture()
         let repository = try Self.seededRepository(fixture: fixture)
-        let transport = SourceAtlasCountingPublicPackRemoteTransport(objectsByKey: [:])
+        let coordinator = SourceAtlasPublicPackAppRefreshCoordinator()
 
-        let resolution = await SourceAtlasPublicPackBackgroundRefreshTask().run(
-            SourceAtlasPublicPackBackgroundRefreshTaskRequest(
-                domainID: "sports",
-                channel: "stable",
-                schemaVersion: "1.0.0",
-                appVersion: "1.0",
-                publicLocale: "en-US",
+        let resolution = await coordinator.resolve(
+            SourceAtlasPublicPackAppRefreshInput(
+                mode: .startup,
+                manifestRequest: Self.sportsManifestRequest,
                 targetPackID: fixture.pack.id,
                 cachedManifestLookup: SourceAtlasPublicPackCacheManifestLookup(
                     packID: fixture.pack.id,
@@ -21,237 +18,151 @@ final class SourceAtlasPublicPackBackgroundRefreshTaskTests: XCTestCase {
                     declaredPackSHA256: fixture.packSHA256
                 ),
                 networkReachability: .offline,
+                query: SourceAtlasQuery(domainID: "sports"),
                 checkedAt: Self.checkedAt
             ),
-            transport: transport,
+            transport: SourceAtlasStaticPublicPackRemoteTransport(objectsByKey: [:]),
             repository: repository
         )
 
-        XCTAssertEqual(resolution.taskIdentifier, SourceAtlasPublicPackBackgroundRefreshTaskIdentifier.publicPackRefresh)
-        XCTAssertEqual(resolution.taskIssues, [])
-        XCTAssertEqual(resolution.egressFindings, [])
-        XCTAssertEqual(resolution.manifestRequest.domainID, "sports")
-        XCTAssertEqual(resolution.manifestRequest.publicLocale, "en-US")
-        XCTAssertEqual(resolution.appRefreshResolution?.mode, .background)
-        XCTAssertEqual(resolution.appRefreshResolution?.accessDecision.route, .cachedPublic)
-        XCTAssertEqual(resolution.appRefreshResolution?.refreshResolution.remoteResolution.transportIssues, [.remoteFetchSkipped])
-        XCTAssertEqual(resolution.appRefreshResolution?.refreshResolution.remoteResolution.objectRequests, [])
+        XCTAssertEqual(resolution.mode, .startup)
+        XCTAssertEqual(resolution.accessDecision.route, .cachedPublic)
+        XCTAssertTrue(resolution.cachedManifestLoadedFromRepository)
+        XCTAssertTrue(resolution.cachedPayloadLoadedFromRepository)
+        XCTAssertEqual(resolution.appRefreshIssues, [])
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.transportIssues, [.remoteFetchSkipped])
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.objectRequests, [])
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.pipelineResolution.status, .usingLocalFallback)
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.pipelineResolution.cacheResolution?.loadResult.selectedSource, .cached)
         XCTAssertEqual(resolution.selectedPack?.id, fixture.pack.id)
-        let requestCount = await transport.requestCount()
-        XCTAssertEqual(requestCount, 0)
-        XCTAssertFalse(resolution.sentPrivateRuntimeContext)
-        XCTAssertFalse(resolution.scheduledHiddenRuntimeMutation)
-        XCTAssertFalse(resolution.generatedFinalPlan)
-        XCTAssertFalse(resolution.generatedFinalSchedule)
-        XCTAssertFalse(resolution.generatedStepList)
+        XCTAssertFalse(resolution.persistedPackPayload)
         XCTAssertFalse(resolution.coreLocalPlanningBlocked)
     }
 
-    func testOfflineNoAccountBackgroundTaskDiscoversLatestCachedPublicPackWithoutExplicitLookup() async throws {
+    func testOnlineBackgroundRefreshLoadsRepositoryCacheThenAcceptsVerifiedRemotePack() async throws {
         let fixture = try Self.remoteNativeFixture()
         let repository = try Self.seededRepository(fixture: fixture)
-        let transport = SourceAtlasCountingPublicPackRemoteTransport(objectsByKey: [:])
 
-        let resolution = await SourceAtlasPublicPackBackgroundRefreshTask().run(
-            SourceAtlasPublicPackBackgroundRefreshTaskRequest(
-                domainID: "sports",
-                channel: "stable",
-                schemaVersion: "1.0.0",
-                appVersion: "1.0",
+        let resolution = await SourceAtlasPublicPackAppRefreshCoordinator().resolve(
+            SourceAtlasPublicPackAppRefreshInput(
+                mode: .background,
+                manifestRequest: Self.sportsManifestRequest,
                 targetPackID: fixture.pack.id,
-                networkReachability: .offline,
-                checkedAt: Self.checkedAt
-            ),
-            transport: transport,
-            repository: repository
-        )
-
-        XCTAssertEqual(resolution.taskIssues, [])
-        XCTAssertEqual(resolution.egressFindings, [])
-        XCTAssertEqual(resolution.appRefreshResolution?.mode, .background)
-        XCTAssertEqual(resolution.appRefreshResolution?.accessDecision.route, .cachedPublic)
-        XCTAssertTrue(resolution.appRefreshResolution?.cachedManifestLoadedFromRepository == true)
-        XCTAssertTrue(resolution.appRefreshResolution?.cachedPayloadLoadedFromRepository == true)
-        XCTAssertEqual(resolution.appRefreshResolution?.refreshResolution.remoteResolution.transportIssues, [.remoteFetchSkipped])
-        XCTAssertEqual(resolution.selectedPack?.id, fixture.pack.id)
-        let requestCount = await transport.requestCount()
-        XCTAssertEqual(requestCount, 0)
-        XCTAssertFalse(resolution.sentPrivateRuntimeContext)
-        XCTAssertFalse(resolution.coreLocalPlanningBlocked)
-    }
-
-    func testOnlineBackgroundTaskDelegatesToVerifiedRemoteRefreshAndPersistsPack() async throws {
-        let fixture = try Self.remoteNativeFixture()
-        let repository = try Self.repository()
-        let transport = SourceAtlasCountingPublicPackRemoteTransport(
-            objectsByKey: [
-                fixture.currentPointerKey: fixture.pointerData,
-                fixture.manifestKey: fixture.manifestData,
-                fixture.packObjectKey: fixture.packData,
-            ]
-        )
-
-        let resolution = await SourceAtlasPublicPackBackgroundRefreshTask().run(
-            SourceAtlasPublicPackBackgroundRefreshTaskRequest(
-                domainID: "sports",
-                channel: "stable",
-                schemaVersion: "1.0.0",
-                appVersion: "1.0",
-                targetPackID: fixture.pack.id,
+                cachedManifestLookup: SourceAtlasPublicPackCacheManifestLookup(
+                    packID: fixture.pack.id,
+                    manifestVersionID: fixture.manifestKey,
+                    declaredPackSHA256: fixture.packSHA256
+                ),
                 networkReachability: .online,
+                query: SourceAtlasQuery(domainID: "sports"),
                 checkedAt: Self.checkedAt
             ),
-            transport: transport,
+            transport: SourceAtlasStaticPublicPackRemoteTransport(
+                objectsByKey: [
+                    fixture.currentPointerKey: fixture.pointerData,
+                    fixture.manifestKey: fixture.manifestData,
+                    fixture.packObjectKey: fixture.packData
+                ]
+            ),
             repository: repository
         )
 
-        XCTAssertEqual(resolution.taskIssues, [])
-        XCTAssertEqual(resolution.egressFindings, [])
+        XCTAssertEqual(resolution.mode, .background)
+        XCTAssertEqual(resolution.accessDecision.route, .remotePublicReference)
+        XCTAssertTrue(resolution.cachedManifestLoadedFromRepository)
+        XCTAssertTrue(resolution.cachedPayloadLoadedFromRepository)
+        XCTAssertEqual(resolution.appRefreshIssues, [])
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.transportIssues, [])
         XCTAssertEqual(
-            resolution.appRefreshResolution?.refreshResolution.remoteResolution.objectRequests.map(\.objectKey),
+            resolution.refreshResolution.remoteResolution.objectRequests.map(\.objectKey),
             [fixture.currentPointerKey, fixture.manifestKey, fixture.packObjectKey]
         )
-        XCTAssertEqual(resolution.appRefreshResolution?.refreshResolution.remoteResolution.pipelineResolution.status, .accepted)
-        XCTAssertEqual(resolution.appRefreshResolution?.refreshResolution.cacheCommitResult?.status, .persistedCurrent)
-        XCTAssertTrue(resolution.appRefreshResolution?.persistedPackPayload == true)
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.pipelineResolution.status, .accepted)
+        XCTAssertEqual(resolution.refreshResolution.cacheCommitResult?.status, .persistedCurrent)
+        XCTAssertTrue(resolution.persistedPackPayload)
         XCTAssertEqual(resolution.selectedPack?.id, fixture.pack.id)
-        let requestCount = await transport.requestCount()
-        XCTAssertEqual(requestCount, 3)
-        XCTAssertFalse(resolution.sentPrivateRuntimeContext)
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.egressFindings, [])
         XCTAssertFalse(resolution.coreLocalPlanningBlocked)
     }
 
-    func testUnsafeTaskIdentifierStopsBeforeTransportOrPersistence() async throws {
+    func testPrivateCachedManifestHintSkipsTransportAndDoesNotPersistCurrentPayload() async throws {
         let fixture = try Self.remoteNativeFixture()
-        let repository = try Self.repository()
-        let transport = SourceAtlasCountingPublicPackRemoteTransport(
-            objectsByKey: [
-                fixture.currentPointerKey: fixture.pointerData,
-                fixture.manifestKey: fixture.manifestData,
-                fixture.packObjectKey: fixture.packData,
-            ]
+        let repository = try Self.seededRepository(fixture: fixture)
+
+        let resolution = await SourceAtlasPublicPackAppRefreshCoordinator().resolve(
+            SourceAtlasPublicPackAppRefreshInput(
+                mode: .startup,
+                manifestRequest: Self.sportsManifestRequest,
+                targetPackID: fixture.pack.id,
+                cachedManifestLookup: SourceAtlasPublicPackCacheManifestLookup(
+                    packID: "source-atlas/v1/user_id/private-goal",
+                    manifestVersionID: fixture.manifestKey,
+                    declaredPackSHA256: fixture.packSHA256
+                ),
+                networkReachability: .online,
+                query: SourceAtlasQuery(domainID: "sports"),
+                checkedAt: Self.checkedAt
+            ),
+            transport: SourceAtlasStaticPublicPackRemoteTransport(
+                objectsByKey: [
+                    fixture.currentPointerKey: fixture.pointerData,
+                    fixture.manifestKey: fixture.manifestData,
+                    fixture.packObjectKey: fixture.packData
+                ]
+            ),
+            repository: repository
         )
 
-        let resolution = await SourceAtlasPublicPackBackgroundRefreshTask().run(
-            SourceAtlasPublicPackBackgroundRefreshTaskRequest(
-                taskIdentifier: "com.ambitions.source-atlas.user_id.goal_text-refresh",
-                domainID: "sports",
-                channel: "stable",
-                schemaVersion: "1.0.0",
-                appVersion: "1.0",
+        XCTAssertEqual(resolution.appRefreshIssues, [.cachedManifestLookupRejected])
+        XCTAssertFalse(resolution.cachedManifestLoadedFromRepository)
+        XCTAssertFalse(resolution.cachedPayloadLoadedFromRepository)
+        XCTAssertEqual(resolution.accessDecision.route, .unavailable)
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.transportIssues, [.remoteFetchSkipped])
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.objectRequests, [])
+        XCTAssertFalse(resolution.persistedPackPayload)
+        XCTAssertFalse(resolution.coreLocalPlanningBlocked)
+    }
+
+    func testPrivateManifestRequestStopsBeforeTransportOrPersistence() async throws {
+        let fixture = try Self.remoteNativeFixture()
+        let repository = try Self.repository()
+        let unsafeRequest = SourceAtlasPublicManifestRequest(
+            domainID: "goal_text",
+            channel: "stable",
+            schemaVersion: "1.0.0",
+            appVersion: "1.0"
+        )
+
+        let resolution = await SourceAtlasPublicPackAppRefreshCoordinator().resolve(
+            SourceAtlasPublicPackAppRefreshInput(
+                mode: .manual,
+                manifestRequest: unsafeRequest,
                 targetPackID: fixture.pack.id,
                 networkReachability: .online,
+                query: SourceAtlasQuery(domainID: "sports"),
                 checkedAt: Self.checkedAt
             ),
-            transport: transport,
+            transport: SourceAtlasStaticPublicPackRemoteTransport(
+                objectsByKey: [
+                    fixture.currentPointerKey: fixture.pointerData,
+                    fixture.manifestKey: fixture.manifestData,
+                    fixture.packObjectKey: fixture.packData
+                ]
+            ),
             repository: repository
         )
 
-        XCTAssertEqual(resolution.taskIssues, [.unsafeTaskIdentifier, .privateTaskMetadata])
-        XCTAssertEqual(Set(resolution.egressFindings.map(\.forbiddenToken)), ["goal_text", "user_id"])
-        XCTAssertNil(resolution.appRefreshResolution)
-        XCTAssertNil(resolution.selectedPack)
-        let requestCount = await transport.requestCount()
-        XCTAssertEqual(requestCount, 0)
-        XCTAssertFalse(resolution.sentPrivateRuntimeContext)
-        XCTAssertFalse(resolution.scheduledHiddenRuntimeMutation)
-        XCTAssertFalse(resolution.generatedFinalPlan)
-        XCTAssertFalse(resolution.generatedFinalSchedule)
-        XCTAssertFalse(resolution.generatedStepList)
-        XCTAssertFalse(resolution.coreLocalPlanningBlocked)
-    }
-
-    func testPrivateManifestMetadataStopsBeforeTransportOrPersistence() async throws {
-        let fixture = try Self.remoteNativeFixture()
-        let repository = try Self.repository()
-        let transport = SourceAtlasCountingPublicPackRemoteTransport(
-            objectsByKey: [
-                fixture.currentPointerKey: fixture.pointerData,
-                fixture.manifestKey: fixture.manifestData,
-                fixture.packObjectKey: fixture.packData,
-            ]
-        )
-
-        let resolution = await SourceAtlasPublicPackBackgroundRefreshTask().run(
-            SourceAtlasPublicPackBackgroundRefreshTaskRequest(
-                domainID: "goal_text",
-                channel: "stable",
-                schemaVersion: "1.0.0",
-                appVersion: "1.0",
-                targetPackID: fixture.pack.id,
-                networkReachability: .online,
-                checkedAt: Self.checkedAt
-            ),
-            transport: transport,
-            repository: repository
-        )
-
-        XCTAssertEqual(resolution.taskIssues, [.privateTaskMetadata, .unsafeManifestRequest])
-        XCTAssertEqual(Set(resolution.egressFindings.map(\.forbiddenToken)), ["goal_text"])
-        XCTAssertNil(resolution.appRefreshResolution)
-        XCTAssertNil(resolution.selectedPack)
-        let requestCount = await transport.requestCount()
-        XCTAssertEqual(requestCount, 0)
-        XCTAssertFalse(resolution.sentPrivateRuntimeContext)
-        XCTAssertFalse(resolution.coreLocalPlanningBlocked)
-    }
-
-    func testPrivateTargetPackMetadataStopsBeforeTransportOrPersistence() async throws {
-        let fixture = try Self.remoteNativeFixture()
-        let repository = try Self.repository()
-        let transport = SourceAtlasCountingPublicPackRemoteTransport(
-            objectsByKey: [
-                fixture.currentPointerKey: fixture.pointerData,
-                fixture.manifestKey: fixture.manifestData,
-                fixture.packObjectKey: fixture.packData,
-            ]
-        )
-
-        let resolution = await SourceAtlasPublicPackBackgroundRefreshTask().run(
-            SourceAtlasPublicPackBackgroundRefreshTaskRequest(
-                domainID: "sports",
-                channel: "stable",
-                schemaVersion: "1.0.0",
-                appVersion: "1.0",
-                targetPackID: "source-atlas/v1/user_id/private-goal",
-                networkReachability: .online,
-                checkedAt: Self.checkedAt
-            ),
-            transport: transport,
-            repository: repository
-        )
-
-        XCTAssertEqual(resolution.taskIssues, [.privateTaskMetadata])
-        XCTAssertEqual(Set(resolution.egressFindings.map(\.forbiddenToken)), ["user_id"])
-        XCTAssertNil(resolution.appRefreshResolution)
-        let requestCount = await transport.requestCount()
-        XCTAssertEqual(requestCount, 0)
+        XCTAssertEqual(resolution.appRefreshIssues, [])
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.transportIssues, [.unsafeManifestRequest, .privateEgressFinding])
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.objectRequests, [])
+        XCTAssertEqual(resolution.refreshResolution.remoteResolution.pipelineResolution.status, .quarantined)
+        XCTAssertEqual(resolution.refreshResolution.cacheJournalRecord.status, .rejected)
+        XCTAssertFalse(resolution.persistedPackPayload)
         XCTAssertFalse(resolution.coreLocalPlanningBlocked)
     }
 }
 
-private actor SourceAtlasCountingPublicPackRemoteTransport: SourceAtlasPublicPackRemoteTransport {
-    private let objectsByKey: [String: Data]
-    private var requests: [SourceAtlasPublicPackRemoteObjectRequest] = []
-
-    init(objectsByKey: [String: Data]) {
-        self.objectsByKey = objectsByKey
-    }
-
-    func fetch(_ request: SourceAtlasPublicPackRemoteObjectRequest) async throws -> Data {
-        requests.append(request)
-        guard let data = objectsByKey[request.objectKey] else {
-            throw SourceAtlasPublicPackRemoteTransportError.missingObject(request.objectKey)
-        }
-        return data
-    }
-
-    func requestCount() -> Int {
-        requests.count
-    }
-}
-
-private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
+private extension SourceAtlasPublicPackAppRefreshCoordinatorTests {
     struct RemoteNativeFixture {
         let currentPointerKey: String
         let manifestKey: String
@@ -273,8 +184,8 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
     )
 
     static func repository() throws -> SourceAtlasPublicPackCacheFileRepository {
-        let root = FileManager.default.temporaryDirectory
-            .appendingPathComponent("source-atlas-background-refresh-task-tests", isDirectory: true)
+        let root = URL(fileURLWithPath: NSTemporaryDirectory())
+            .appendingPathComponent("source-atlas-app-refresh-tests", isDirectory: true)
             .appendingPathComponent(UUID().uuidString, isDirectory: true)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
         return SourceAtlasPublicPackCacheFileRepository(rootDirectory: root)
@@ -306,7 +217,7 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
                     SourceAtlasPublicPackRemoteObjectRequest(
                         kind: .pack,
                         objectKey: fixture.packObjectKey
-                    ),
+                    )
                 ],
                 fetchResolution: onlineResolution,
                 fetchedManifestData: fixture.manifestData,
@@ -397,7 +308,7 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
             {
               "kind": "ambitions.sourceAtlas.packManifest.v1",
               "schema_version": "1.0.0",
-              "manifest_id": "source_atlas_pack_manifest.background_refresh_test",
+              "manifest_id": "source_atlas_pack_manifest.app_refresh_test",
               "pack_id": "\(packID)",
               "created_at": "2026-06-27T00:00:00Z",
               "object_keys": {
@@ -448,7 +359,7 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
                     retrievedAt: "2026-06-01T12:00:00Z",
                     contentHash: "hash",
                     approvedForOfficialClaims: true
-                ),
+                )
             ],
             claims: [
                 SourceAtlasClaim(
@@ -459,7 +370,7 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
                     riskClass: .sportRules,
                     sourceIDs: ["source.official"],
                     reviewRequired: false
-                ),
+                )
             ],
             requirements: [
                 SourceAtlasRequirement(
@@ -472,7 +383,7 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
                     freshnessState: .current,
                     riskState: .low,
                     reviewState: .approved
-                ),
+                )
             ],
             starterItems: [
                 SourceAtlasStarterItem(
@@ -480,7 +391,7 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
                     title: "Review public rule",
                     stepCandidateSeed: "Review the public rule.",
                     storesFinalSchedule: false
-                ),
+                )
             ],
             proofMap: [
                 SourceAtlasProofMapEntry(
@@ -493,7 +404,7 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
                     capabilityNodeID: "sports.public.rules",
                     sourceRecordIDs: ["source.official"],
                     sourceClaimIDs: ["claim.current"]
-                ),
+                )
             ],
             projections: [
                 SourceAtlasGoalProjection(
@@ -501,7 +412,7 @@ private extension SourceAtlasPublicPackBackgroundRefreshTaskTests {
                     goalIntent: "sports",
                     requiredPackIDs: [id],
                     projectionProfiles: []
-                ),
+                )
             ],
             freshnessPolicy: .conservativeFreshness,
             riskPolicy: .conservative,

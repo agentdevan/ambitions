@@ -1694,7 +1694,7 @@ private extension SourceAtlasPublicPackLifecycleRefreshServiceTests {
     }
 
     static func repository() throws -> SourceAtlasPublicPackCacheFileRepository {
-        let root = FileManager.default.temporaryDirectory
+        let root = URL(fileURLWithPath: NSTemporaryDirectory())
             .appendingPathComponent("source-atlas-lifecycle-refresh-tests", isDirectory: true)
             .appendingPathComponent(UUID().uuidString, isDirectory: true)
         try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)

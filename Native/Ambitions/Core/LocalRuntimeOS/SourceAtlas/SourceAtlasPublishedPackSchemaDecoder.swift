@@ -107,7 +107,7 @@ struct SourceAtlasPublishedCurrentPointerValidator: Sendable, Equatable, Hashabl
     }
 }
 
-enum SourceAtlasPublishedPackCompatibilityIssue: String, Error, Codable, Sendable, Equatable, Hashable {
+enum SourceAtlasPublishedPackSchemaIssue: String, Error, Codable, Sendable, Equatable, Hashable {
     case manifestHashMismatch = "manifest_hash_mismatch"
     case manifestDecodeFailed = "manifest_decode_failed"
     case unsupportedManifestKind = "unsupported_manifest_kind"
@@ -118,7 +118,7 @@ enum SourceAtlasPublishedPackCompatibilityIssue: String, Error, Codable, Sendabl
     case notPublicReference = "not_public_reference"
 }
 
-struct SourceAtlasPublishedPackManifestBridge {
+struct SourceAtlasPublishedPackSchemaDecoder {
     private let decoder: JSONDecoder
 
     init(decoder: JSONDecoder = JSONDecoder()) {
@@ -130,30 +130,30 @@ struct SourceAtlasPublishedPackManifestBridge {
         pointer: SourceAtlasPublishedCurrentPointer
     ) throws -> SourceAtlasFreshnessManifest {
         guard SourceAtlasStore.sha256Hex(for: data) == pointer.manifestSHA256.lowercased() else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestHashMismatch
+            throw SourceAtlasPublishedPackSchemaIssue.manifestHashMismatch
         }
 
         let manifest: PublishedPackManifest
         do {
             manifest = try decoder.decode(PublishedPackManifest.self, from: data)
         } catch {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestDecodeFailed
+            throw SourceAtlasPublishedPackSchemaIssue.manifestDecodeFailed
         }
 
         guard manifest.kind == "ambitions.sourceAtlas.packManifest.v1" else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.unsupportedManifestKind
+            throw SourceAtlasPublishedPackSchemaIssue.unsupportedManifestKind
         }
         guard manifest.schemaVersion == "1.0.0" else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.unsupportedManifestSchema
+            throw SourceAtlasPublishedPackSchemaIssue.unsupportedManifestSchema
         }
         guard manifest.publicReferenceOnly else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.notPublicReference
+            throw SourceAtlasPublishedPackSchemaIssue.notPublicReference
         }
         guard manifest.packID == pointer.packID else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestPackMismatch
+            throw SourceAtlasPublishedPackSchemaIssue.manifestPackMismatch
         }
         guard manifest.sha256?.lowercased() == pointer.packSHA256.lowercased() else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestHashMissing
+            throw SourceAtlasPublishedPackSchemaIssue.manifestHashMissing
         }
 
         return SourceAtlasFreshnessManifest(
@@ -176,22 +176,22 @@ struct SourceAtlasPublishedPackManifestBridge {
         do {
             manifest = try decoder.decode(PublishedPackManifest.self, from: data)
         } catch {
-            throw SourceAtlasPublishedPackCompatibilityIssue.manifestDecodeFailed
+            throw SourceAtlasPublishedPackSchemaIssue.manifestDecodeFailed
         }
 
         guard manifest.kind == "ambitions.sourceAtlas.packManifest.v1" else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.unsupportedManifestKind
+            throw SourceAtlasPublishedPackSchemaIssue.unsupportedManifestKind
         }
         guard manifest.schemaVersion == "1.0.0" else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.unsupportedManifestSchema
+            throw SourceAtlasPublishedPackSchemaIssue.unsupportedManifestSchema
         }
         guard manifest.publicReferenceOnly else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.notPublicReference
+            throw SourceAtlasPublishedPackSchemaIssue.notPublicReference
         }
         guard let packObjectKey = manifest.objectKeys?["pack"]?.trimmingCharacters(in: .whitespacesAndNewlines),
               packObjectKey.isEmpty == false
         else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.packObjectKeyMissing
+            throw SourceAtlasPublishedPackSchemaIssue.packObjectKeyMissing
         }
         return packObjectKey
     }
@@ -217,7 +217,7 @@ struct SourceAtlasPublishedPackManifestBridge {
     }
 }
 
-struct SourceAtlasPublishedDomainPackBridge {
+struct SourceAtlasPublishedDomainPackDecoder {
     private let decoder: JSONDecoder
 
     init(decoder: JSONDecoder = JSONDecoder()) {
@@ -230,7 +230,7 @@ struct SourceAtlasPublishedDomainPackBridge {
               published.schemaVersion == "1.0.0",
               published.publicReferenceOnly
         else {
-            throw SourceAtlasPublishedPackCompatibilityIssue.notPublicReference
+            throw SourceAtlasPublishedPackSchemaIssue.notPublicReference
         }
 
         let domainID = published.frontierID ?? published.claims.first?.domain ?? "public_reference"

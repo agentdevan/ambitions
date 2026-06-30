@@ -132,12 +132,12 @@ struct SourceAtlasPublicPackRemoteFetchResolution: Sendable, Equatable, Hashable
 
 struct SourceAtlasPublicPackRemoteFetchCoordinator {
     private let decoder: JSONDecoder
-    private let manifestBridge: SourceAtlasPublishedPackManifestBridge
+    private let manifestBridge: SourceAtlasPublishedPackSchemaDecoder
     private let pipeline: SourceAtlasPublicPackFetchPipeline
 
     init(
         decoder: JSONDecoder = JSONDecoder(),
-        manifestBridge: SourceAtlasPublishedPackManifestBridge = SourceAtlasPublishedPackManifestBridge(),
+        manifestBridge: SourceAtlasPublishedPackSchemaDecoder = SourceAtlasPublishedPackSchemaDecoder(),
         pipeline: SourceAtlasPublicPackFetchPipeline = SourceAtlasPublicPackFetchPipeline()
     ) {
         self.decoder = decoder
@@ -347,9 +347,9 @@ struct SourceAtlasPublicPackRemoteFetchCoordinator {
                     )
                 }
                 lastKnownGoodManifestData = try await transport.fetch(lkgManifestRequest)
-            } catch SourceAtlasPublishedPackCompatibilityIssue.notPublicReference,
-                    SourceAtlasPublishedPackCompatibilityIssue.manifestDecodeFailed,
-                    SourceAtlasPublishedPackCompatibilityIssue.packObjectKeyMissing {
+            } catch SourceAtlasPublishedPackSchemaIssue.notPublicReference,
+                    SourceAtlasPublishedPackSchemaIssue.manifestDecodeFailed,
+                    SourceAtlasPublishedPackSchemaIssue.packObjectKeyMissing {
                 issues.append(.lastKnownGoodInvalid)
                 lastKnownGoodManifestData = nil
             } catch {
