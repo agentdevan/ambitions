@@ -85,100 +85,34 @@ struct LocalOnlyCloudKitContinuityDiagnosticsProvider: CloudKitContinuityDiagnos
     let accountStatusProbe: any CloudKitAccountStatusProbing
     let proofVerified: Bool
     let userPausedSync: Bool
+    let evaluatedAt: String
+    let accountStateMachine: AccountStateMachine
 
     init(
         featureFlagEnabled: Bool = CloudKitContinuityFeatureFlag.defaultEnabled,
         accountStatusProbe: any CloudKitAccountStatusProbing = StaticCloudKitAccountStatusProbe(accountStatusValue: .unknown),
         proofVerified: Bool = false,
-        userPausedSync: Bool = false
+        userPausedSync: Bool = false,
+        evaluatedAt: String = "local-sync-evaluation",
+        accountStateMachine: AccountStateMachine = AccountStateMachine()
     ) {
         self.featureFlagEnabled = featureFlagEnabled
         self.accountStatusProbe = accountStatusProbe
         self.proofVerified = proofVerified
         self.userPausedSync = userPausedSync
+        self.evaluatedAt = evaluatedAt
+        self.accountStateMachine = accountStateMachine
     }
 
     func diagnostics() async -> CloudKitContinuityDiagnostics {
         let accountStatus = await accountStatusProbe.accountStatus()
-        let syncMode: CloudKitContinuityMode = featureFlagEnabled ? .continuityEnabled : .localOnly
-        let syncState: CloudKitContinuitySyncState = Self.syncState(
-            featureFlagEnabled: featureFlagEnabled,
-            accountStatus: accountStatus,
-            proofVerified: proofVerified,
-            userPausedSync: userPausedSync
-        )
-        return CloudKitContinuityDiagnostics(
-            syncMode: syncMode,
-            syncState: syncState,
+        return accountStateMachine.evaluate(
             featureFlagEnabled: featureFlagEnabled,
             accountStatus: accountStatus,
             proofVerified: proofVerified,
             userPausedSync: userPausedSync,
-            sourceOfTruth: "local_device",
-            localOnlyFallbackActive: true,
-            localOperationBlocked: false,
-            writesUserData: false,
-            userDataCaptured: false,
-            detail: Self.detail(
-                syncMode: syncMode,
-                syncState: syncState,
-                accountStatus: accountStatus
-            ),
-            rollbackDetail: "Disable cloudKitContinuityEnabled to return to explicit local-only operation."
+            evaluatedAt: evaluatedAt
         )
-    }
-
-    private static func syncState(
-        featureFlagEnabled: Bool,
-        accountStatus: CloudKitContinuityAccountStatus,
-        proofVerified: Bool,
-        userPausedSync: Bool
-    ) -> CloudKitContinuitySyncState {
-        guard featureFlagEnabled else {
-            return .localOnlyUnavailable
-        }
-
-        if userPausedSync {
-            return .paused
-        }
-
-        switch accountStatus {
-        case .available:
-            return proofVerified ? .healthyAfterProof : .needsReview
-        case .noAccount:
-            return .accountUnavailable
-        case .restricted:
-            return .restricted
-        case .temporarilyUnavailable:
-            return .temporarilyUnavailable
-        case .unknown:
-            return .needsReview
-        }
-    }
-
-    private static func detail(
-        syncMode _: CloudKitContinuityMode,
-        syncState: CloudKitContinuitySyncState,
-        accountStatus _: CloudKitContinuityAccountStatus
-    ) -> String {
-        switch syncState {
-        case .localOnlyUnavailable:
-            return "CloudKit continuity stays off by default and local operation remains authoritative."
-        case .disabled:
-            return "CloudKit continuity is disabled and local operation remains authoritative."
-        case .accountUnavailable:
-            return "CloudKit continuity is enabled but no iCloud account is available; local operation remains authoritative."
-        case .restricted:
-            return "CloudKit continuity is enabled but the account is restricted; local operation remains authoritative."
-        case .temporarilyUnavailable:
-            return "CloudKit continuity is enabled but temporarily unavailable; local operation remains authoritative."
-        case .paused:
-            return "CloudKit continuity is paused by the user and local operation remains authoritative."
-        case .needsReview:
-            return "CloudKit continuity needs review before any continuity path can be considered healthy; local operation remains authoritative."
-        case .healthyAfterProof:
-            return "CloudKit continuity has proof-backed readiness, but local operation remains authoritative until the sync path is explicitly invoked."
-        }
     }
 }
 
@@ -241,34 +175,85 @@ protocol SyncCapability: Sendable {
     func status() async -> SyncCapabilityStatus
 }
 
-struct LocalOnlySyncCapability: SyncCapability {
-    let diagnosticsProvider: any CloudKitContinuityDiagnosticsProviding
+struct LocalAuthoritativeSyncModel: Sendable, Equatable {
+    let backendKind: SyncBackendKind
+    let localStoreAuthoritative: Bool
+    let continuityOptional: Bool
+    let offlineCoreAvailable: Bool
+    let accountRequiredForCoreUse: Bool
+    let allowsPrivateGraphBackendAuthority: Bool
+    let sourceOfTruth: String
 
     init(
-        diagnosticsProvider: any CloudKitContinuityDiagnosticsProviding = LocalOnlyCloudKitContinuityDiagnosticsProvider()
+        backendKind: SyncBackendKind = .localOnly,
+        localStoreAuthoritative: Bool = true,
+        continuityOptional: Bool = true,
+        offlineCoreAvailable: Bool = true,
+        accountRequiredForCoreUse: Bool = false,
+        allowsPrivateGraphBackendAuthority: Bool = false,
+        sourceOfTruth: String = "local_device"
     ) {
-        self.diagnosticsProvider = diagnosticsProvider
+        self.backendKind = backendKind
+        self.localStoreAuthoritative = localStoreAuthoritative
+        self.continuityOptional = continuityOptional
+        self.offlineCoreAvailable = offlineCoreAvailable
+        self.accountRequiredForCoreUse = accountRequiredForCoreUse
+        self.allowsPrivateGraphBackendAuthority = allowsPrivateGraphBackendAuthority
+        self.sourceOfTruth = sourceOfTruth.trimmingCharacters(in: .whitespacesAndNewlines).syncNilIfEmpty ?? "local_device"
     }
 
-    func status() async -> SyncCapabilityStatus {
-        let diagnostics = await diagnosticsProvider.diagnostics()
-        return SyncCapabilityStatus(
-            backendKind: .localOnly,
+    func status(from diagnostics: CloudKitContinuityDiagnostics) -> SyncCapabilityStatus {
+        SyncCapabilityStatus(
+            backendKind: backendKind,
             trustPosture: .localOnly,
-            availability: .unavailable,
-            detail: "Ambitions is running in explicit local-only mode. \(diagnostics.detail)",
+            availability: AccountStateMachine.availability(for: diagnostics.syncState),
+            detail: "Ambitions is running with local-device authority. \(diagnostics.detail)",
             syncMode: diagnostics.syncMode,
             syncState: diagnostics.syncState,
             cloudKitContinuityEnabled: diagnostics.featureFlagEnabled,
             cloudKitAccountStatus: diagnostics.accountStatus,
             proofVerified: diagnostics.proofVerified,
             userPausedSync: diagnostics.userPausedSync,
-            sourceOfTruth: diagnostics.sourceOfTruth,
+            sourceOfTruth: sourceOfTruth,
             localOnlyFallbackActive: diagnostics.localOnlyFallbackActive,
             localOperationBlocked: diagnostics.localOperationBlocked,
             writesUserData: diagnostics.writesUserData,
             userDataCaptured: diagnostics.userDataCaptured,
             rollbackDetail: diagnostics.rollbackDetail
         )
+    }
+
+    var invariants: [String] {
+        [
+            "local_store_authoritative=\(localStoreAuthoritative)",
+            "continuity_optional=\(continuityOptional)",
+            "offline_core_available=\(offlineCoreAvailable)",
+            "account_required_for_core_use=\(accountRequiredForCoreUse)",
+            "private_graph_backend_authority=\(allowsPrivateGraphBackendAuthority)",
+        ]
+    }
+}
+
+struct LocalOnlySyncCapability: SyncCapability {
+    let diagnosticsProvider: any CloudKitContinuityDiagnosticsProviding
+    let authority: LocalAuthoritativeSyncModel
+
+    init(
+        diagnosticsProvider: any CloudKitContinuityDiagnosticsProviding = LocalOnlyCloudKitContinuityDiagnosticsProvider(),
+        authority: LocalAuthoritativeSyncModel = LocalAuthoritativeSyncModel()
+    ) {
+        self.diagnosticsProvider = diagnosticsProvider
+        self.authority = authority
+    }
+
+    func status() async -> SyncCapabilityStatus {
+        let diagnostics = await diagnosticsProvider.diagnostics()
+        return authority.status(from: diagnostics)
+    }
+}
+
+private extension String {
+    var syncNilIfEmpty: String? {
+        isEmpty ? nil : self
     }
 }

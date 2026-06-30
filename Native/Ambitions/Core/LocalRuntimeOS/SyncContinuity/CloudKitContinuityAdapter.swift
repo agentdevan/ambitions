@@ -54,6 +54,45 @@ protocol CloudKitContinuityClient: Sendable {
     func ensureCoreZone() async -> CloudKitContinuityZoneSetupResult
 }
 
+struct CloudKitContinuityAdapter: Sendable {
+    let client: any CloudKitContinuityClient
+    let diagnosticsProvider: any CloudKitContinuityDiagnosticsProviding
+    let eligibilityPolicy: SyncEligibilityPolicy
+
+    init(
+        client: any CloudKitContinuityClient = StaticCloudKitContinuityClient(),
+        diagnosticsProvider: any CloudKitContinuityDiagnosticsProviding = LocalOnlyCloudKitContinuityDiagnosticsProvider(),
+        eligibilityPolicy: SyncEligibilityPolicy = SyncEligibilityPolicy()
+    ) {
+        self.client = client
+        self.diagnosticsProvider = diagnosticsProvider
+        self.eligibilityPolicy = eligibilityPolicy
+    }
+
+    func evaluate(_ envelope: CloudKitContinuityPortableRecordEnvelope, requestedAt: String) async -> SyncEligibilityDecision {
+        let diagnostics = await diagnosticsProvider.diagnostics()
+        let candidate = SyncEligibilityCandidate(
+            id: envelope.id,
+            envelope: envelope,
+            privacyPolicy: .privateCloud,
+            syncState: diagnostics.syncState,
+            accountStatus: diagnostics.accountStatus,
+            userConfirmed: diagnostics.proofVerified,
+            proofVerified: diagnostics.proofVerified,
+            requestedAt: requestedAt
+        )
+        return eligibilityPolicy.evaluate(candidate)
+    }
+
+    func prepareCoreZoneIfEligible() async -> CloudKitContinuityZoneSetupResult? {
+        let diagnostics = await diagnosticsProvider.diagnostics()
+        guard diagnostics.syncState == .healthyAfterProof else {
+            return nil
+        }
+        return await client.ensureCoreZone()
+    }
+}
+
 struct LiveCloudKitAccountStatusProbe: CloudKitAccountStatusProbing {
     let container: CKContainer
 
@@ -287,6 +326,7 @@ struct LocalFirstCloudKitContinuitySyncCoordinator: CloudKitContinuitySyncCoordi
     let client: any CloudKitContinuityClient
     let diagnosticsProvider: any CloudKitContinuityDiagnosticsProviding
     let outboxStore: any CloudKitContinuityOutboxStoring
+    let continuityBoundary: CloudKitContinuityAdapter
 
     init(
         client: any CloudKitContinuityClient = StaticCloudKitContinuityClient(),
@@ -296,6 +336,7 @@ struct LocalFirstCloudKitContinuitySyncCoordinator: CloudKitContinuitySyncCoordi
         self.client = client
         self.diagnosticsProvider = diagnosticsProvider
         self.outboxStore = outboxStore
+        self.continuityBoundary = CloudKitContinuityAdapter(client: client, diagnosticsProvider: diagnosticsProvider)
     }
 
     func recordLocalChange(_ entry: CloudKitContinuityOutboxEntry) async {
@@ -311,10 +352,6 @@ struct LocalFirstCloudKitContinuitySyncCoordinator: CloudKitContinuitySyncCoordi
     }
 
     func prepareCoreZoneIfEligible() async -> CloudKitContinuityZoneSetupResult? {
-        let diagnostics = await diagnosticsProvider.diagnostics()
-        guard diagnostics.syncState == .healthyAfterProof else {
-            return nil
-        }
-        return await client.ensureCoreZone()
+        await continuityBoundary.prepareCoreZoneIfEligible()
     }
 }

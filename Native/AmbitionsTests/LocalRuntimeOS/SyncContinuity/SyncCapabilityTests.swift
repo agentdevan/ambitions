@@ -24,7 +24,7 @@ final class SyncCapabilityTests: XCTestCase {
         XCTAssertFalse(status.userDataCaptured)
         XCTAssertEqual(
             status.detail,
-            "Ambitions is running in explicit local-only mode. CloudKit continuity stays off by default and local operation remains authoritative."
+            "Ambitions is running with local-device authority. CloudKit continuity stays off by default and local operation remains authoritative."
         )
         XCTAssertEqual(
             status.rollbackDetail,
@@ -45,7 +45,7 @@ final class SyncCapabilityTests: XCTestCase {
 
             XCTAssertEqual(status.backendKind, .localOnly)
             XCTAssertEqual(status.trustPosture, .localOnly)
-            XCTAssertEqual(status.availability, .unavailable)
+            XCTAssertEqual(status.availability, expectedAvailability(for: accountStatus))
             XCTAssertEqual(status.syncMode, .continuityEnabled)
             XCTAssertEqual(status.cloudKitContinuityEnabled, true)
             XCTAssertEqual(status.cloudKitAccountStatus, accountStatus)
@@ -72,7 +72,7 @@ final class SyncCapabilityTests: XCTestCase {
 
         XCTAssertEqual(status.cloudKitAccountStatus, .restricted)
         XCTAssertEqual(status.syncState, .localOnlyUnavailable)
-        XCTAssertTrue(status.detail.contains("local-only mode"))
+        XCTAssertTrue(status.detail.contains("local-device authority"))
         XCTAssertTrue(status.rollbackDetail.contains("Disable cloudKitContinuityEnabled"))
         XCTAssertFalse(status.writesUserData)
         XCTAssertFalse(status.userDataCaptured)
@@ -91,6 +91,19 @@ final class SyncCapabilityTests: XCTestCase {
             return .temporarilyUnavailable
         case .unknown:
             return .needsReview
+        }
+    }
+
+    private func expectedAvailability(for accountStatus: CloudKitContinuityAccountStatus) -> SyncCapabilityAvailability {
+        switch accountStatus {
+        case .available, .unknown:
+            return .unavailable
+        case .noAccount:
+            return .noAccount
+        case .restricted:
+            return .restricted
+        case .temporarilyUnavailable:
+            return .temporarilyUnavailable
         }
     }
 }

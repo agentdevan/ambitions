@@ -2935,17 +2935,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 63,
-      "path": "Native/Ambitions/Core/Domain/Planning/LivingPlanContinuitySync.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-03",
         "VSP-04",
         "VSP-07"
@@ -5460,6 +5449,110 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 174,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/AccountStateMachine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 180,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CausalMergeEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 358,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/CloudKitContinuityAdapter.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 76,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/ConflictPolicyEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 260,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/LocalAuthoritativeSyncModel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 114,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SignOutDeleteResetCoordinator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 232,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEligibilityPolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 243,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/SyncEnvelope.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 80,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SyncContinuity/TombstoneSync.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-05",
@@ -5612,27 +5705,6 @@
       "kind": "native_source",
       "line_count": 40,
       "path": "Native/Ambitions/Core/Persistence/AppPreferencesStore.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 321,
-      "path": "Native/Ambitions/Core/Persistence/CloudKitContinuityClient.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 161,
-      "path": "Native/Ambitions/Core/Persistence/CloudKitContinuityModels.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6214,18 +6286,6 @@
       "kind": "native_source",
       "line_count": 70,
       "path": "Native/Ambitions/Core/Persistence/SwiftDataRepositories.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 275,
-      "path": "Native/Ambitions/Core/Persistence/SyncCapabilityContracts.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -16958,16 +17018,6 @@
       "path": "Native/AmbitionsTests/Domain/LifeShapeDataContractTests.swift"
     },
     {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 29,
-      "path": "Native/AmbitionsTests/Domain/LivingPlanContinuitySyncTests.swift"
-    },
-    {
       "candidate_vsp_ids": [],
       "exists": true,
       "inventory_only": true,
@@ -18166,6 +18216,55 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 224,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/CloudKitContinuityFoundationTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 30,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/LivingPlanContinuitySyncTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 110,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/SyncCapabilityTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 272,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/SyncContinuityTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-07",
@@ -18251,17 +18350,6 @@
       "kind": "test",
       "line_count": 673,
       "path": "Native/AmbitionsTests/Persistence/CaptureServiceTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 224,
-      "path": "Native/AmbitionsTests/Persistence/CloudKitContinuityFoundationTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18583,18 +18671,6 @@
       "kind": "test",
       "line_count": 155,
       "path": "Native/AmbitionsTests/Persistence/SupportDiagnosticsBundleTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 97,
-      "path": "Native/AmbitionsTests/Persistence/SyncCapabilityTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -21562,7 +21638,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 409,
+      "line_count": 414,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -21646,7 +21722,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1748,
+  "entry_count": 1754,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

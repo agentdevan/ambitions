@@ -6408,24 +6408,6 @@
     {
       "button_styles": [],
       "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 29,
-      "path": "Native/AmbitionsTests/Domain/LivingPlanContinuitySyncTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "LivingPlanContinuitySyncTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
       "candidate_vsp_ids": [],
       "has_preview_provider": false,
       "kind": "test",
@@ -8392,6 +8374,87 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 224,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/CloudKitContinuityFoundationTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "CloudKitContinuityFoundationTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 30,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/LivingPlanContinuitySyncTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "LivingPlanContinuitySyncTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 110,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/SyncCapabilityTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SyncCapabilityTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 272,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SyncContinuity/SyncContinuityTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SyncContinuityTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-07",
@@ -8528,25 +8591,6 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "CaptureServiceTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 224,
-      "path": "Native/AmbitionsTests/Persistence/CloudKitContinuityFoundationTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "CloudKitContinuityFoundationTests"
       ],
       "view_modifiers": [],
       "view_structs": []
@@ -9092,26 +9136,6 @@
       "proof_status": "source_inventory_only",
       "test_cases": [
         "SupportDiagnosticsBundleTests"
-      ],
-      "view_modifiers": [],
-      "view_structs": []
-    },
-    {
-      "button_styles": [],
-      "candidate_inventory_only": true,
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "has_preview_provider": false,
-      "kind": "test",
-      "line_count": 97,
-      "path": "Native/AmbitionsTests/Persistence/SyncCapabilityTests.swift",
-      "preview_count": 0,
-      "proof_status": "source_inventory_only",
-      "test_cases": [
-        "SyncCapabilityTests"
       ],
       "view_modifiers": [],
       "view_structs": []
@@ -12723,7 +12747,7 @@
       "view_structs": []
     }
   ],
-  "entry_count": 598,
+  "entry_count": 599,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "scan_roots": [

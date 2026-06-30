@@ -5,6 +5,7 @@ final class LivingPlanContinuitySyncTests: XCTestCase {
     func testPrivacyWinsPolicy() {
         let sync = LivingPlanContinuitySync(privacyPolicy: .mostRestrictiveWins)
         XCTAssertEqual(sync.privacyPolicy, .mostRestrictiveWins)
+        XCTAssertTrue(sync.requiresExplicitConfirmation())
     }
     
     func testLocalOnlyRequiresConfirmation() {
