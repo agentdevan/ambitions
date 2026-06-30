@@ -52,6 +52,45 @@ final class CommandSpineLeafTests: XCTestCase {
         XCTAssertEqual(secondEnvelopes.first?.id, second.envelope.id)
     }
 
+    func testCommandJournalPersistsRuntimeEventAndReceiptLinks() async throws {
+        let tempDirectory = FileManager.default.temporaryDirectory
+            .appendingPathComponent("CommandJournalLinkTests-\(UUID().uuidString)", isDirectory: true)
+        try FileManager.default.createDirectory(at: tempDirectory, withIntermediateDirectories: true)
+        addTeardownBlock {
+            try? FileManager.default.removeItem(at: tempDirectory)
+        }
+        let fileURL = tempDirectory.appendingPathComponent("CommandJournal.jsonl")
+        let journal = FileCommandJournal(fileURL: fileURL)
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+        let compilation = CommandCompiler().compile(
+            quickCaptureCommand(id: "command.journal.linked", now: now),
+            context: CommandExecutionContext(now: now)
+        )
+
+        let appendReceipt = try await journal.append(compilation.envelope)
+        let linkReceipt = try await journal.linkRuntimeCommit(
+            commandID: compilation.command.id,
+            runtimeEventID: "runtime.event.7",
+            runtimeReceiptID: "runtime.receipt.command.journal.linked",
+            linkedAt: "2026-06-30T23:10:00Z"
+        )
+        let reloadedJournal = FileCommandJournal(fileURL: fileURL)
+        let reloadedEntries = try await reloadedJournal.fetchEntries(matching: .commandID(compilation.command.id), limit: nil)
+        let entry = try XCTUnwrap(reloadedEntries.first)
+        let link = try XCTUnwrap(entry.runtimeLink)
+
+        XCTAssertEqual(appendReceipt.envelopeID, compilation.envelope.id)
+        XCTAssertEqual(link.runtimeEventID, "runtime.event.7")
+        XCTAssertEqual(link.runtimeReceiptID, "runtime.receipt.command.journal.linked")
+        XCTAssertEqual(link.entryID, entry.id)
+        XCTAssertEqual(link.envelopeID, compilation.envelope.id)
+        XCTAssertEqual(linkReceipt.runtimeEventID, link.runtimeEventID)
+        XCTAssertEqual(linkReceipt.runtimeReceiptID, link.runtimeReceiptID)
+        XCTAssertEqual(linkReceipt.resultMetadata["commandJournalRuntimeLinkStatus"], nil)
+        XCTAssertTrue(CommandJournalChecksum.isValid(entry))
+        XCTAssertTrue(CommandJournalRuntimeLinkChecksum.isValid(link, entry: entry))
+    }
+
     func testCommandAuthorizerDeniesNonLocalPrivateRuntimeCommand() {
         let now = Date(timeIntervalSince1970: 1_777_113_600)
         let command = AmbitionsCommand(

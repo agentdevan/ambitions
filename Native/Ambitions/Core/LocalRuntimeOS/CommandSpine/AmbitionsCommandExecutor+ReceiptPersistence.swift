@@ -16,7 +16,8 @@ extension AmbitionsCommandExecutor {
             result: result,
             recordedAt: recordedAt,
             commandRecordID: commandRecordID,
-            timestamp: timestamp
+            timestamp: timestamp,
+            journalReceipt: journalReceipt
         )
         let receipt = receiptFactory.makeReceipt(
             command: command,
@@ -70,7 +71,8 @@ extension AmbitionsCommandExecutor {
         result: AmbitionsCommandExecutionResult,
         recordedAt: String,
         commandRecordID: String,
-        timestamp: Date
+        timestamp: Date,
+        journalReceipt: CommandJournalAppendReceipt?
     ) async -> AmbitionsCommandExecutionResult {
         guard let runtimeEvents,
               let request = runtimeTransactionRequest(
@@ -98,7 +100,7 @@ extension AmbitionsCommandExecutor {
                 commandRecordID: commandRecordID,
                 occurredAt: timestamp
             )
-            return result.mergingMetadata([
+            var runtimeMetadata = [
                 "runtimeTransactionDisposition": outcome.disposition.rawValue,
                 "runtimeTransactionID": outcome.receipt.transactionID,
                 "runtimeEventID": outcome.receipt.eventID,
@@ -109,7 +111,23 @@ extension AmbitionsCommandExecutor {
                 "runtimeDoubleApplyDisposition": outcome.replayOutcome.doubleApplyDisposition.rawValue,
                 "runtimeProjectionCursorCount": String(outcome.receipt.projectionCursors.count),
                 "runtimeProjectionIDs": outcome.receipt.projectionCursors.map(\.projectionID.rawValue).sorted().joined(separator: ","),
-            ])
+            ]
+            if journalReceipt != nil {
+                do {
+                    let linkReceipt = try await commandJournal.linkRuntimeCommit(
+                        commandID: command.id,
+                        runtimeEventID: outcome.receipt.eventID,
+                        runtimeReceiptID: outcome.receipt.receiptID,
+                        linkedAt: DomainTimestamp.string(from: timestamp)
+                    )
+                    runtimeMetadata.merge(linkReceipt.resultMetadata) { _, new in new }
+                    runtimeMetadata["commandJournalRuntimeLinkStatus"] = "linked"
+                } catch {
+                    runtimeMetadata["commandJournalRuntimeLinkStatus"] = "failed"
+                    runtimeMetadata["commandJournalRuntimeLinkError"] = String(describing: error)
+                }
+            }
+            return result.mergingMetadata(runtimeMetadata)
         } catch {
             return result.mergingMetadata([
                 "runtimeTransactionDisposition": "not_committed",

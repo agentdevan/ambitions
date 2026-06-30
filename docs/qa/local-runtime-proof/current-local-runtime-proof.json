@@ -37,6 +37,12 @@
       "summary": "Production runtime event authority is SQLite; JSONL authority is not selected by AppContainerFactory."
     },
     {
+      "checkId": "command_event_reconciliation",
+      "findings": [],
+      "status": "pass",
+      "summary": "Command journal/runtime event linkage and drift diagnostics are present."
+    },
+    {
       "checkId": "mutation_bypass_scan",
       "findings": [],
       "status": "pass",
@@ -49,14 +55,14 @@
       "summary": "Truth files no longer contain LocalRuntimeOS no-claim blockers."
     }
   ],
-  "generatedAt": "2026-06-30T23:01:26+00:00",
+  "generatedAt": "2026-06-30T23:16:15+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {
     "blockers": 0,
-    "checks": 6,
+    "checks": 7,
     "green": true,
-    "passed": 6,
+    "passed": 7,
     "warnings": 0
   }
 }

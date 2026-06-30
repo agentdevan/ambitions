@@ -170,6 +170,58 @@ final class LocalRuntimeDiagnosticsTests: XCTestCase {
         XCTAssertTrue(sample.detail.contains("runtime.event.2"))
     }
 
+    func testCommandInspectorReportsCommandJournalRuntimeEventDrift() throws {
+        let now = Date(timeIntervalSince1970: 1_777_113_600)
+        let command = diagnosticCommand(id: "command-drift", now: now)
+        let compilation = CommandCompiler().compile(command, context: CommandExecutionContext(now: now))
+        let entry = try CommandJournalEntry.make(
+            sequence: 1,
+            previousChecksum: nil,
+            envelope: compilation.envelope,
+            appendedAt: DomainTimestamp.string(from: now),
+            deviceID: "diagnostics-command-journal"
+        )
+        let linkedEntry = try entry.linked(
+            CommandJournalRuntimeLink.make(
+                entry: entry,
+                runtimeEventID: "runtime.event.missing",
+                runtimeReceiptID: "runtime.receipt.command-drift",
+                linkedAt: "2026-06-30T11:33:45Z"
+            )
+        )
+        let event = RuntimeEvent.commandExecution(
+            command: command,
+            result: AmbitionsCommandExecutionResult(
+                status: .succeeded,
+                summary: "Saved drift fixture.",
+                target: AmbitionsCommandTarget(captureID: "capture-drift")
+            ),
+            recordedAt: "2026-06-30T11:33:45Z",
+            commandRecordID: "command.execution.command-drift"
+        )
+        let envelope = try RuntimeEventEnvelope.make(
+            sequence: 1,
+            previousChecksum: nil,
+            event: event,
+            deviceID: "diagnostics-runtime-event"
+        )
+
+        let missingEventDiagnostics = CommandInspector().inspectJournalLinkage(
+            entries: [linkedEntry],
+            runtimeEvents: [],
+            generatedAt: "2026-06-30T11:33:46Z"
+        )
+        let missingJournalDiagnostics = CommandInspector().inspectJournalLinkage(
+            entries: [],
+            runtimeEvents: [envelope],
+            generatedAt: "2026-06-30T11:33:46Z"
+        )
+
+        XCTAssertTrue(missingEventDiagnostics.contains { $0.id.hasPrefix("command.journal_link_missing_event.") && $0.severity == .critical })
+        XCTAssertTrue(missingJournalDiagnostics.contains { $0.id.hasPrefix("command.event_without_journal.") && $0.severity == .critical })
+        XCTAssertTrue(missingJournalDiagnostics.contains { $0.id.hasPrefix("command.event_missing_journal_reference.") && $0.severity == .critical })
+    }
+
     func testPerformanceBudgetLedgerSurfacesOverBudgetMeasurements() throws {
         let budget = AFEPQueryBudgetDescriptor(
             scope: .today,
@@ -201,6 +253,18 @@ final class LocalRuntimeDiagnosticsTests: XCTestCase {
 }
 
 private extension LocalRuntimeDiagnosticsTests {
+    func diagnosticCommand(id: String, now: Date) -> AmbitionsCommand {
+        AmbitionsCommand(
+            id: id,
+            kind: .quickCapture,
+            source: .today,
+            payload: AmbitionsCommandPayload(rawText: "Diagnostic command"),
+            createdAt: DomainTimestamp.string(from: now),
+            actor: .user,
+            sourceSurface: "today"
+        )
+    }
+
     func correctionEvent(id: String, localOnly: Bool) -> RuntimeEvent {
         RuntimeEvent(
             commandID: "command-\(id)",

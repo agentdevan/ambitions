@@ -64,6 +64,24 @@ INTEGRATION_MARKERS = {
             "return InMemoryRuntimeEventStore()",
         ],
     },
+    "command_journal_runtime_linkage": {
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandJournal.swift",
+        "markers": [
+            "CommandJournalRuntimeLink",
+            "linkRuntimeCommit",
+            "runtimeEventID",
+            "runtimeReceiptID",
+        ],
+    },
+    "command_event_reconciliation_diagnostics": {
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/CommandInspector.swift",
+        "markers": [
+            "inspectJournalLinkage",
+            "command.event_without_journal",
+            "command.event_missing_journal_reference",
+            "command.journal_link_missing_event",
+        ],
+    },
     "today_command_append_before_mutation": {
         "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift",
         "markers": [
@@ -443,6 +461,62 @@ def check_live_event_store_authority() -> CheckResult:
     )
 
 
+def check_command_event_reconciliation() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "CommandJournal.swift": [
+            "CommandJournalRuntimeLink",
+            "CommandJournalRuntimeLinkChecksum",
+            "linkRuntimeCommit",
+            "runtimeEventID",
+            "runtimeReceiptID",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "AmbitionsCommandExecutor+ReceiptPersistence.swift": [
+            "commandJournal.linkRuntimeCommit",
+            "commandJournalRuntimeLinkStatus",
+            "linkReceipt.resultMetadata",
+            "runtimeMetadata.merge",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Diagnostics" / "CommandInspector.swift": [
+            "inspectJournalLinkage",
+            "command.event_without_journal",
+            "command.event_missing_journal_reference",
+            "command.journal_link_missing_event",
+        ],
+    }
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "command-event-reconciliation-missing-source",
+                    relative(path),
+                    None,
+                    "Command/event reconciliation source is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "command-event-reconciliation-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing command/event reconciliation marker `{marker}`.",
+                    )
+                )
+
+    return make_result(
+        "command_event_reconciliation",
+        findings,
+        "Command journal/runtime event linkage and drift diagnostics are present.",
+        "{count} command/event reconciliation blocker(s) remain.",
+    )
+
+
 def scan_mutation_bypasses() -> CheckResult:
     findings: list[Finding] = []
     for path in production_swift_files():
@@ -509,6 +583,7 @@ def run_checks() -> list[CheckResult]:
         check_owner_directories(),
         check_integration_markers(),
         check_live_event_store_authority(),
+        check_command_event_reconciliation(),
         scan_mutation_bypasses(),
         check_truth_file_gaps(),
     ]

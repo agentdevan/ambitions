@@ -129,11 +129,13 @@ final class RuntimeEventJournalTests: XCTestCase {
         let captureService = DefaultCaptureService(repository: captureRepository, idProvider: { "capture-runtime-journal" })
         let commandRecords = InMemoryAmbitionsCommandExecutionRecordRepository()
         let runtimeEvents = InMemoryRuntimeEventStore()
+        let commandJournal = InMemoryCommandJournal()
         let executor = AmbitionsCommandExecutor(
             captureService: captureService,
             eventLedger: InMemoryEventLedgerRepository(),
             commandExecutionRecords: commandRecords,
-            runtimeEvents: runtimeEvents
+            runtimeEvents: runtimeEvents,
+            commandJournal: commandJournal
         )
         let now = Date(timeIntervalSince1970: 1_777_113_600)
         let command = makeQuickCaptureCommand(id: "command-runtime-journal", text: "Capture once")
@@ -144,6 +146,9 @@ final class RuntimeEventJournalTests: XCTestCase {
         let captures = try await captureRepository.listCaptures()
         let events = try await runtimeEvents.fetchEvents(matching: .all, limit: nil)
         let event = try XCTUnwrap(events.first)
+        let commandJournalEntries = try await commandJournal.fetchEntries(matching: .commandID(command.id), limit: nil)
+        let commandJournalEntry = try XCTUnwrap(commandJournalEntries.first)
+        let runtimeLink = try XCTUnwrap(commandJournalEntry.runtimeLink)
         let fetchedCommandRecord = try await commandRecords.fetchRecord(commandID: command.id)
         let commandRecord = try XCTUnwrap(fetchedCommandRecord)
 
@@ -163,12 +168,21 @@ final class RuntimeEventJournalTests: XCTestCase {
         XCTAssertEqual(commandRecord.result.metadata["runtimeRollbackPlanID"], "runtime.rollback.command-runtime-journal")
         XCTAssertEqual(commandRecord.result.metadata["runtimeReplayDecision"], LedgerReplayDecision.applyFresh.rawValue)
         XCTAssertEqual(commandRecord.result.metadata["runtimeDoubleApplyDisposition"], LedgerDoubleApplyDisposition.applyOnce.rawValue)
+        XCTAssertEqual(commandRecord.result.metadata["commandJournalRuntimeLinkStatus"], "linked")
+        XCTAssertEqual(commandRecord.result.metadata["commandJournalRuntimeEventID"], event.id)
+        XCTAssertEqual(commandRecord.result.metadata["commandJournalRuntimeReceiptID"], "runtime.receipt.command-runtime-journal")
+        XCTAssertEqual(runtimeLink.runtimeEventID, event.id)
+        XCTAssertEqual(runtimeLink.runtimeReceiptID, "runtime.receipt.command-runtime-journal")
+        XCTAssertEqual(runtimeLink.envelopeID, commandJournalEntry.envelope.id)
+        XCTAssertTrue(CommandJournalRuntimeLinkChecksum.isValid(runtimeLink, entry: commandJournalEntry))
         guard case let .commandExecution(payload) = event.event.payload else {
             XCTFail("Expected command execution payload")
             return
         }
         XCTAssertEqual(payload.resultStatus, .succeeded)
         XCTAssertEqual(payload.commandRecordID, "command.execution.command-runtime-journal")
+        XCTAssertEqual(payload.resultMetadata["commandJournalEnvelopeID"], commandJournalEntry.envelope.id)
+        XCTAssertEqual(payload.resultMetadata["commandJournalReceiptID"], "command.journal.append.command-runtime-journal")
         XCTAssertEqual(payload.resultMetadata["captureID"], "capture-runtime-journal")
         XCTAssertEqual(payload.resultMetadata["receiptID"], "runtime.receipt.command-runtime-journal")
         XCTAssertEqual(payload.resultMetadata["proofArtifactID"], "runtime.proof.command-runtime-journal")

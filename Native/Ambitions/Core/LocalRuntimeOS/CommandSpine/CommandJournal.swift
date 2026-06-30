@@ -3,11 +3,16 @@ import Foundation
 
 let commandJournalEntrySchemaVersion = "command_journal_entry.native.v1"
 let commandJournalAppendReceiptSchemaVersion = "command_journal_append_receipt.native.v1"
+let commandJournalRuntimeLinkSchemaVersion = "command_journal_runtime_link.native.v1"
+let commandJournalRuntimeLinkReceiptSchemaVersion = "command_journal_runtime_link_receipt.native.v1"
 
 enum CommandJournalStoreError: Error, Equatable {
     case invalidUTF8(URL)
     case checksumMismatch(entryID: String)
+    case linkChecksumMismatch(linkID: String)
     case nonAppendOnlySequence(expected: Int64, actual: Int64)
+    case entryNotFound(commandID: String)
+    case runtimeLinkConflict(commandID: String, existingEventID: String, attemptedEventID: String)
 }
 
 struct CommandJournalQuery: Sendable, Equatable {
@@ -57,6 +62,7 @@ struct CommandJournalEntry: Codable, Sendable, Equatable, Hashable, Identifiable
     let deviceID: String
     let checksum: String
     let schemaVersion: String
+    let runtimeLink: CommandJournalRuntimeLink?
 
     static func make(
         sequence: Int64,
@@ -85,7 +91,8 @@ struct CommandJournalEntry: Codable, Sendable, Equatable, Hashable, Identifiable
             appendedAt: appendedAt,
             deviceID: deviceID,
             checksum: try CommandJournalChecksum.digest(material),
-            schemaVersion: schemaVersion
+            schemaVersion: schemaVersion,
+            runtimeLink: nil
         )
     }
 
@@ -99,6 +106,144 @@ struct CommandJournalEntry: Codable, Sendable, Equatable, Hashable, Identifiable
             deviceID: deviceID,
             schemaVersion: schemaVersion
         )
+    }
+
+    func linked(_ link: CommandJournalRuntimeLink) -> CommandJournalEntry {
+        CommandJournalEntry(
+            id: id,
+            sequence: sequence,
+            previousChecksum: previousChecksum,
+            envelope: envelope,
+            appendedAt: appendedAt,
+            deviceID: deviceID,
+            checksum: checksum,
+            schemaVersion: schemaVersion,
+            runtimeLink: link
+        )
+    }
+}
+
+struct CommandJournalRuntimeLinkChecksumMaterial: Codable, Sendable, Equatable, Hashable {
+    let id: String
+    let commandID: String
+    let entryID: String
+    let envelopeID: String
+    let entryChecksum: String
+    let runtimeEventID: String
+    let runtimeReceiptID: String
+    let linkedAt: String
+    let schemaVersion: String
+}
+
+enum CommandJournalRuntimeLinkChecksum {
+    static func digest(_ material: CommandJournalRuntimeLinkChecksumMaterial) throws -> String {
+        let data = try CommandJournalChecksum.encoder.encode(material)
+        let digest = SHA256.hash(data: data)
+        return digest.map { String(format: "%02x", $0) }.joined()
+    }
+
+    static func isValid(_ link: CommandJournalRuntimeLink, entry: CommandJournalEntry) -> Bool {
+        (try? digest(link.checksumMaterial(entry: entry))) == link.checksum
+    }
+}
+
+struct CommandJournalRuntimeLink: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let commandID: String
+    let entryID: String
+    let envelopeID: String
+    let entryChecksum: String
+    let runtimeEventID: String
+    let runtimeReceiptID: String
+    let linkedAt: String
+    let checksum: String
+    let schemaVersion: String
+
+    static func make(
+        entry: CommandJournalEntry,
+        runtimeEventID: String,
+        runtimeReceiptID: String,
+        linkedAt: String,
+        schemaVersion: String = commandJournalRuntimeLinkSchemaVersion
+    ) throws -> CommandJournalRuntimeLink {
+        let id = "command.journal.runtime-link.\(entry.envelope.commandID)"
+        let material = CommandJournalRuntimeLinkChecksumMaterial(
+            id: id,
+            commandID: entry.envelope.commandID,
+            entryID: entry.id,
+            envelopeID: entry.envelope.id,
+            entryChecksum: entry.checksum,
+            runtimeEventID: runtimeEventID,
+            runtimeReceiptID: runtimeReceiptID,
+            linkedAt: linkedAt,
+            schemaVersion: schemaVersion
+        )
+        return CommandJournalRuntimeLink(
+            id: id,
+            commandID: entry.envelope.commandID,
+            entryID: entry.id,
+            envelopeID: entry.envelope.id,
+            entryChecksum: entry.checksum,
+            runtimeEventID: runtimeEventID,
+            runtimeReceiptID: runtimeReceiptID,
+            linkedAt: linkedAt,
+            checksum: try CommandJournalRuntimeLinkChecksum.digest(material),
+            schemaVersion: schemaVersion
+        )
+    }
+
+    func checksumMaterial(entry: CommandJournalEntry) -> CommandJournalRuntimeLinkChecksumMaterial {
+        CommandJournalRuntimeLinkChecksumMaterial(
+            id: id,
+            commandID: commandID,
+            entryID: entry.id,
+            envelopeID: entry.envelope.id,
+            entryChecksum: entry.checksum,
+            runtimeEventID: runtimeEventID,
+            runtimeReceiptID: runtimeReceiptID,
+            linkedAt: linkedAt,
+            schemaVersion: schemaVersion
+        )
+    }
+}
+
+struct CommandJournalRuntimeLinkReceipt: Codable, Sendable, Equatable, Hashable, Identifiable {
+    let id: String
+    let commandID: String
+    let envelopeID: String
+    let commandJournalEntryID: String
+    let runtimeEventID: String
+    let runtimeReceiptID: String
+    let linkedAt: String
+    let checksum: String
+    let schemaVersion: String
+
+    init(
+        link: CommandJournalRuntimeLink,
+        schemaVersion: String = commandJournalRuntimeLinkReceiptSchemaVersion
+    ) {
+        self.id = "command.journal.runtime-link.receipt.\(link.commandID)"
+        self.commandID = link.commandID
+        self.envelopeID = link.envelopeID
+        self.commandJournalEntryID = link.entryID
+        self.runtimeEventID = link.runtimeEventID
+        self.runtimeReceiptID = link.runtimeReceiptID
+        self.linkedAt = link.linkedAt
+        self.checksum = link.checksum
+        self.schemaVersion = schemaVersion
+    }
+
+    var resultMetadata: [String: String] {
+        [
+            "commandJournalRuntimeLinkReceiptID": id,
+            "commandJournalRuntimeLinkID": "command.journal.runtime-link.\(commandID)",
+            "commandJournalRuntimeLinkedEntryID": commandJournalEntryID,
+            "commandJournalRuntimeLinkedEnvelopeID": envelopeID,
+            "commandJournalRuntimeEventID": runtimeEventID,
+            "commandJournalRuntimeReceiptID": runtimeReceiptID,
+            "commandJournalRuntimeLinkedAt": linkedAt,
+            "commandJournalRuntimeLinkChecksum": checksum
+        ]
     }
 }
 
@@ -144,6 +289,8 @@ struct CommandJournalAppendReceipt: Codable, Sendable, Equatable, Hashable, Iden
 protocol CommandJournal: Sendable {
     @discardableResult
     func append(_ envelope: CommandEnvelope) async throws -> CommandJournalAppendReceipt
+    @discardableResult
+    func linkRuntimeCommit(commandID: String, runtimeEventID: String, runtimeReceiptID: String, linkedAt: String) async throws -> CommandJournalRuntimeLinkReceipt
     func fetchEntries(matching query: CommandJournalQuery, limit: Int?) async throws -> [CommandJournalEntry]
     func fetchEnvelopes(matching query: CommandJournalQuery, limit: Int?) async throws -> [CommandEnvelope]
 }
@@ -168,6 +315,37 @@ actor InMemoryCommandJournal: CommandJournal {
         )
         entries.append(entry)
         return CommandJournalAppendReceipt(entry: entry)
+    }
+
+    @discardableResult
+    func linkRuntimeCommit(
+        commandID: String,
+        runtimeEventID: String,
+        runtimeReceiptID: String,
+        linkedAt: String
+    ) async throws -> CommandJournalRuntimeLinkReceipt {
+        guard let index = entries.firstIndex(where: { $0.envelope.commandID == commandID }) else {
+            throw CommandJournalStoreError.entryNotFound(commandID: commandID)
+        }
+        let entry = entries[index]
+        if let existingLink = entry.runtimeLink {
+            guard existingLink.runtimeEventID == runtimeEventID else {
+                throw CommandJournalStoreError.runtimeLinkConflict(
+                    commandID: commandID,
+                    existingEventID: existingLink.runtimeEventID,
+                    attemptedEventID: runtimeEventID
+                )
+            }
+            return CommandJournalRuntimeLinkReceipt(link: existingLink)
+        }
+        let link = try CommandJournalRuntimeLink.make(
+            entry: entry,
+            runtimeEventID: runtimeEventID,
+            runtimeReceiptID: runtimeReceiptID,
+            linkedAt: linkedAt
+        )
+        entries[index] = entry.linked(link)
+        return CommandJournalRuntimeLinkReceipt(link: link)
     }
 
     func fetchEntries(matching query: CommandJournalQuery = .all, limit: Int? = nil) async throws -> [CommandJournalEntry] {
@@ -230,6 +408,39 @@ actor FileCommandJournal: CommandJournal {
         return CommandJournalAppendReceipt(entry: entry)
     }
 
+    @discardableResult
+    func linkRuntimeCommit(
+        commandID: String,
+        runtimeEventID: String,
+        runtimeReceiptID: String,
+        linkedAt: String
+    ) async throws -> CommandJournalRuntimeLinkReceipt {
+        var entries = try readEntries()
+        guard let index = entries.firstIndex(where: { $0.envelope.commandID == commandID }) else {
+            throw CommandJournalStoreError.entryNotFound(commandID: commandID)
+        }
+        let entry = entries[index]
+        if let existingLink = entry.runtimeLink {
+            guard existingLink.runtimeEventID == runtimeEventID else {
+                throw CommandJournalStoreError.runtimeLinkConflict(
+                    commandID: commandID,
+                    existingEventID: existingLink.runtimeEventID,
+                    attemptedEventID: runtimeEventID
+                )
+            }
+            return CommandJournalRuntimeLinkReceipt(link: existingLink)
+        }
+        let link = try CommandJournalRuntimeLink.make(
+            entry: entry,
+            runtimeEventID: runtimeEventID,
+            runtimeReceiptID: runtimeReceiptID,
+            linkedAt: linkedAt
+        )
+        entries[index] = entry.linked(link)
+        try writeEntries(entries)
+        return CommandJournalRuntimeLinkReceipt(link: link)
+    }
+
     func fetchEntries(matching query: CommandJournalQuery = .all, limit: Int? = nil) async throws -> [CommandJournalEntry] {
         let filtered = InMemoryCommandJournal.apply(query, to: try readEntries())
         guard let limit else { return filtered }
@@ -268,6 +479,19 @@ actor FileCommandJournal: CommandJournal {
         handle.closeFile()
     }
 
+    private func writeEntries(_ entries: [CommandJournalEntry]) throws {
+        let fileManager = FileManager.default
+        let directory = fileURL.deletingLastPathComponent()
+        if fileManager.fileExists(atPath: directory.path) == false {
+            try fileManager.createDirectory(at: directory, withIntermediateDirectories: true)
+        }
+        let data = try entries.reduce(into: Data()) { output, entry in
+            output.append(try encoder.encode(entry))
+            output.append(0x0A)
+        }
+        try data.write(to: fileURL, options: [.atomic])
+    }
+
     private func readEntries() throws -> [CommandJournalEntry] {
         let fileManager = FileManager.default
         guard fileManager.fileExists(atPath: fileURL.path) else { return [] }
@@ -284,7 +508,26 @@ actor FileCommandJournal: CommandJournal {
                 guard CommandJournalChecksum.isValid(entry) else {
                     throw CommandJournalStoreError.checksumMismatch(entryID: entry.id)
                 }
+                if let link = entry.runtimeLink,
+                   CommandJournalRuntimeLinkChecksum.isValid(link, entry: entry) == false {
+                    throw CommandJournalStoreError.linkChecksumMismatch(linkID: link.id)
+                }
                 return entry
             }
+    }
+}
+
+extension CommandJournal {
+    @discardableResult
+    func linkRuntimeCommit(
+        commandID: String,
+        runtimeEventID: String,
+        runtimeReceiptID: String,
+        linkedAt: String
+    ) async throws -> CommandJournalRuntimeLinkReceipt {
+        _ = runtimeEventID
+        _ = runtimeReceiptID
+        _ = linkedAt
+        throw CommandJournalStoreError.entryNotFound(commandID: commandID)
     }
 }
