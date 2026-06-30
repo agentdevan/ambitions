@@ -15,12 +15,23 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
             "Native/Ambitions/Core/Runtime/ProofLedger.swift",
             "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeMutation.swift",
-            "Native/Ambitions/Core/Runtime/RuntimeValidator.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
                 "Missing canonical Core/Runtime owner: \(requiredPath)"
+            )
+        }
+
+        for retiredPath in [
+            "Native/Ambitions/Core/Runtime/RuntimeMutation.swift",
+            "Native/Ambitions/Core/Runtime/RuntimeValidator.swift",
+            "Native/Ambitions/Core/Runtime/AmbitionsCommandExecutor.swift",
+            "Native/Ambitions/Core/Runtime/PolicyGuardedCommandExecutor.swift",
+            "Native/Ambitions/Core/Runtime/ExternalActionCommandService.swift",
+        ] {
+            XCTAssertFalse(
+                FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
+                "Retired command/transaction owner still exists: \(retiredPath)"
             )
         }
     }
@@ -70,44 +81,6 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
         XCTAssertNil(mutation)
     }
 
-    func testRuntimeMutationRepresentsVisibleStageMutationAnnouncementAndProof() {
-        let runtime = PrivateLifeRuntime()
-        let command = AmbitionsCommand(
-            id: "command-start-step",
-            kind: .startStepSession,
-            source: .today,
-            target: AmbitionsCommandTarget(goalID: "goal-1", stepID: "step-1"),
-            payload: AmbitionsCommandPayload(title: "Open step"),
-            createdAt: "2026-04-25T12:00:00Z"
-        )
-
-        let mutation = runtime.mutation(
-            for: command,
-            beforeSnapshot: "today.before",
-            afterSnapshot: "today.after",
-            targetSurface: .today
-        )
-
-        XCTAssertNotNil(mutation)
-        XCTAssertTrue(mutation?.hasCompleteActionFlowProof == true)
-        XCTAssertEqual(mutation?.stageMutation.affectedObjectIDs, ["goal-1", "step-1"])
-        XCTAssertEqual(mutation?.stageMutation.motionEvent, "stage.motion.start_focus")
-        XCTAssertEqual(mutation?.stageMutation.accessibilityAnnouncement.message, "Step started. Proof is available.")
-        XCTAssertEqual(mutation?.userVisibleMutation.headline, "Step started")
-    }
-
-    func testCommandExecutorValidationRoutesThroughRuntimeValidator() {
-        let executor = AmbitionsCommandExecutor()
-        let command = AmbitionsCommand(
-            id: "command-empty-capture",
-            kind: .quickCapture,
-            source: .capture,
-            payload: AmbitionsCommandPayload(rawText: "   "),
-            createdAt: "2026-04-25T12:00:00Z"
-        )
-
-        XCTAssertEqual(executor.validate(command), .invalid)
-    }
 }
 
 private struct StaticNowStateProjector: NowStateProjecting {

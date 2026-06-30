@@ -65,7 +65,7 @@ Codex must treat:
 - R2 is not a user-data backend and must never receive, store, infer, personalize from, or transmit private user life data.
 - Hosted AI services, external/cloud LLMs, and cloud model APIs as excluded from core architecture and not core app runtime dependencies.
 - New backend/runtime authority belongs under `Core/LocalRuntimeOS/` and must preserve the `Command -> Event -> Projection -> Receipt -> Replay` target law.
-- Current `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` source is implementation scaffolding unless future source proof migrates or proves the responsibility under `Core/LocalRuntimeOS/`.
+- Current command-spine source under `Core/LocalRuntimeOS/CommandSpine/` and the `RuntimeMutation` bridge under `Core/LocalRuntimeOS/TransactionKernel/` are the source-present start of the LocalRuntimeOS migration. Remaining `Core/Runtime/`, `Core/Persistence/`, and legacy projection-owner source is implementation scaffolding unless future source proof migrates or proves the responsibility under `Core/LocalRuntimeOS/`.
 
 ---
 

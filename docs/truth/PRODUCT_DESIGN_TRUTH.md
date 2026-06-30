@@ -356,7 +356,7 @@ Backend/runtime architecture law:
 No meaningful Ambitions state changes except through Command -> Event -> Projection -> Receipt -> Replay.
 ```
 
-As of Linear `AMB-1544` / `AMB-1545`, new backend/runtime authority belongs under `Core/LocalRuntimeOS/`. Existing source under `Core/Runtime/`, `Core/Persistence/`, and `Projection/Commands/` is implementation scaffolding and migration debt unless a later source train moves or proves the responsibility under `Core/LocalRuntimeOS/`. This tree names the target owner; it does not prove that the LocalRuntimeOS source, event journal, storage split, projection engine, replay system, side-effect outbox, privacy firewall, sync continuity, migration repair, or diagnostics implementation exists today.
+As of Linear `AMB-1544` / `AMB-1545`, new backend/runtime authority belongs under `Core/LocalRuntimeOS/`. As of `AMB-1546`, the command-spine source and the current `RuntimeMutation` transaction-kernel bridge have moved under `Native/Ambitions/Core/LocalRuntimeOS/`. Existing source that remains under `Core/Runtime/`, `Core/Persistence/`, and legacy projection owners is implementation scaffolding and migration debt unless a later source train moves or proves the responsibility under `Core/LocalRuntimeOS/`. This tree names the target owner; it does not prove that the full LocalRuntimeOS event journal, storage split, projection engine, replay system, side-effect outbox, privacy firewall, sync continuity, migration repair, or diagnostics implementation exists today.
 
 ```
 Ambitions/

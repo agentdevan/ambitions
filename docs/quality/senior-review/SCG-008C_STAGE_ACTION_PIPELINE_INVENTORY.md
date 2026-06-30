@@ -12,7 +12,7 @@ Baseline: `28b660bbc937ef32d517aa88726e64df395b4bd8`
 
 ## Pipeline Contract
 
-The contract source is `Native/Ambitions/Projection/Commands/StageActionPipelineContract.swift`.
+The contract source is `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/StageActionPipelineContract.swift`.
 
 Required fields:
 
