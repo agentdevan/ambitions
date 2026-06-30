@@ -806,23 +806,22 @@
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "222:93",
-        "frame_name": "EXPLORATION - VSP-06 - PART 02 - Ambitions settings reference adaptations - R1",
+        "node_id": "232:93",
+        "frame_name": "EXPLORATION - VSP-06 - PART 03 - Ambitions-owned You directions - R1",
         "screenshot_paths": [
-          "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-part-02-settings-reference-adaptations-board-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-a-ambitions-settings-root-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-reference-b-ambitions-profile-sheet-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-part-01-options-board-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-option-b-native-settings-lens-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/images/vsp-06-option-d-personal-system-center-r1.png"
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-b-trust-meridian-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-a-personal-os-field-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png"
         ],
         "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/manifest.md",
           "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
           "docs/design/provenance/figma-frames/VSP-06-part-01-you-native-settings-options-R1.md",
           "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/manifest.md",
-          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/manifest.md",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
-          "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
+          "docs/qa/evidence/2026-06-30-vsp-06-part-01-you-options-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -907,13 +906,13 @@
         "privacy_boundary": []
       },
       "known_risks": [
+        "Part 02 was rejected because it copied the supplied references too literally.",
         "Can drift into old Profile IA or account-gated core behavior.",
-        "Reference B is a detail sheet pattern only and must not become root IA.",
         "Every visible row must open real controls or an honest unavailable state.",
         "Figma uses Inter for render stability; SwiftUI target remains native system typography."
       ],
       "missing_evidence": [
-        "owner direction selection",
+        "owner direction selection for Part 03",
         "owner approval of final VSP-06 package",
         "live SwiftUI You parity screenshot",
         "device screenshot",
@@ -927,8 +926,9 @@
         "No account/offline boundary proof."
       ],
       "notes": [
-        "Part 02 adapts the owner-provided Apple Settings and profile/settings sheet references into Ambitions-native You directions.",
-        "Recommended read: Reference A is the top-level You direction; Reference B is the detail sheet/account-boundary pattern only.",
+        "Part 02 was rejected as too literal to the supplied Settings/Profile screenshots and is retained as failure evidence.",
+        "Part 03 replaces it with Ambitions-owned You directions that keep only the reference intent: native clarity, grouped controls, local-first account/privacy boundaries, and detail behavior.",
+        "Recommended read: Option D Local Control Observatory is the strongest direction; Option B Trust Meridian should inform ordering.",
         "You is a native settings/user system surface. Account support must stay optional and cannot gate offline core value."
       ]
     },

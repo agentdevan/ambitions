@@ -85,13 +85,13 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-06 provenance - You Native Settings
-Frame naming recommendation: EXPLORATION - VSP-06 - PART 02 - Ambitions settings reference adaptations - R1
+Frame naming recommendation: EXPLORATION - VSP-06 - PART 03 - Ambitions-owned You directions - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Surfaces/You/YouSurface.swift, Native/Ambitions/Surfaces/You/YouRootSurface.swift, Native/Ambitions/Surfaces/You/YouObjectView.swift
 Allowed implementation area: Native/Ambitions/Surfaces/You, Native/Ambitions/Trust, Sources/Components
 Forbidden implementation area: old profile IA as root, account-required core value, private runtime graph backend, generic settings dashboard without real controls
 Proof ceiling: Yellow
-Missing proof: owner direction selection, owner approval of final VSP-06 package, live SwiftUI You parity screenshot, device screenshot, manual accessibility matrix, offline/account boundary proof
+Missing proof: owner direction selection for Part 03, owner approval of final VSP-06 package, live SwiftUI You parity screenshot, device screenshot, manual accessibility matrix, offline/account boundary proof
 Linear mirror: AMB-1485 (Ready For Review)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
