@@ -129,8 +129,8 @@ Rollback plan:
 
 - Parent issue mirror: `AMB-1483`
 - Recommended status: `Needs Repair`
-- Labels: VSP, time, surface-content, yellow-proof
-- Blocked by: VSP-01 shell parity, VSP-10 source-owner map, VSP-09 accessibility matrix, owner approval
+- Labels: VSP, time, surface-content, yellow-proof, native-month-calendar, owner-approved-direction
+- Blocked by: VSP-01 shell parity, VSP-10 source-owner map, VSP-09 accessibility matrix, complete VSP-04/F candidate package
 - Do not create now: `True`
 
 Acceptance summary:
@@ -142,7 +142,8 @@ Validation summary:
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Produce Time LifeShape SwiftUI parity leaf - scope: Time content object only inside VSP-01 shell - status: Spec Ready after owner approval
+- Build VSP-04/F Apple-Native Life Calendar candidate package - scope: Figma-only hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof - status: Needs Repair
+- Produce Time LifeShape SwiftUI parity leaf - scope: Time content object only inside VSP-01 shell after full VSP-04/F candidate-package approval - status: Blocked until candidate-package approval
 - Prove Time reflow/protected-time accessibility matrix - scope: state matrix, Reduce Motion, Dynamic Type, proof receipt - status: Needs Repair
 
 Standard Codex closeout block:

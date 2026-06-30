@@ -162,13 +162,20 @@
         "VSP",
         "time",
         "surface-content",
-        "yellow-proof"
+        "yellow-proof",
+        "native-month-calendar",
+        "owner-approved-direction"
       ],
       "recommended_sub_issues": [
         {
+          "title": "Build VSP-04/F Apple-Native Life Calendar candidate package",
+          "scope": "Figma-only hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof",
+          "recommended_status": "Needs Repair"
+        },
+        {
           "title": "Produce Time LifeShape SwiftUI parity leaf",
-          "scope": "Time content object only inside VSP-01 shell",
-          "recommended_status": "Spec Ready after owner approval"
+          "scope": "Time content object only inside VSP-01 shell after full VSP-04/F candidate-package approval",
+          "recommended_status": "Blocked until candidate-package approval"
         },
         {
           "title": "Prove Time reflow/protected-time accessibility matrix",
@@ -180,7 +187,7 @@
         "VSP-01 shell parity",
         "VSP-10 source-owner map",
         "VSP-09 accessibility matrix",
-        "owner approval"
+        "complete VSP-04/F candidate package"
       ],
       "acceptance_summary": [
         "Time remains native Life Calendar / LifeShape content.",

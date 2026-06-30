@@ -492,11 +492,13 @@
       "proof_id": "vsp-04-owner-approval",
       "vsp_id": "VSP-04",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-04 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for the VSP-04/F direction lock only. VSP-04 remains Yellow and Needs Repair until the full candidate package, live SwiftUI, device, accessibility, haptics, runtime, and validation proof exist.",
+      "notes": "Owner approved the VSP-04/F Apple-Native Life Calendar direction lock on 2026-06-30. This is not a complete candidate package, source implementation proof, device proof, accessibility proof, release readiness, Visual Green, or Done."
     },
     {
       "proof_id": "vsp-04-swiftui-simulator-screenshot",

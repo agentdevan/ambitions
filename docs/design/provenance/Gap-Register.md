@@ -75,7 +75,6 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI Time parity screenshot
 - live SwiftUI screenshot
 - manual accessibility matrix
-- owner approval
 - reflow/protection runtime proof
 - runtime behavior
 ### VSP-05 - Capture Open Field Composer

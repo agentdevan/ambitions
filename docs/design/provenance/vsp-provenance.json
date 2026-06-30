@@ -10,6 +10,7 @@
     "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md",
     "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md",
     "docs/design/provenance/owner-approvals/VSP-03-D5-Focus-Lens-Territory-approval.md",
+    "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md",
     "docs/truth/PRODUCT_DESIGN_TRUTH.md",
     "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md",
     "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
@@ -490,7 +491,8 @@
           "docs/design/provenance/figma-frames/VSP-04-part-02-native-month-life-calendar-options-R1.md",
           "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/manifest.md",
           "docs/design/provenance/figma-frames/VSP-04-part-02-F-apple-native-life-calendar-selection-R1.md",
-          "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/manifest.md"
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -553,7 +555,7 @@
           "surface-content",
           "yellow-proof",
           "native-month-calendar",
-          "owner-direction-selected"
+          "owner-approved-direction"
         ],
         "should_create_or_update_now": false
       },
@@ -572,7 +574,9 @@
         "privacy_boundary": false
       },
       "proof_present": {
-        "owner_approval": [],
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md"
+        ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
         "dynamic_type": [],
@@ -596,7 +600,6 @@
         "Goal/capacity/protection overlays can become KPI/dashboard clutter if they leave the month object or multiply as side panels."
       ],
       "missing_evidence": [
-        "owner approval",
         "live SwiftUI Time parity screenshot",
         "device screenshot",
         "manual accessibility matrix",
@@ -607,7 +610,6 @@
         "Reduce Motion static reflow marker proof"
       ],
       "green_blockers": [
-        "No owner approval.",
         "No live SwiftUI parity screenshot.",
         "No runtime/device/accessibility proof.",
         "No complete VSP-04/F Apple-Native Life Calendar candidate package."
@@ -617,10 +619,11 @@
         "Part 01 root object options at Figma node 182:93 are Yellow exploration evidence only and do not approve source implementation.",
         "Part 02 Native Month Life Calendar options at Figma node 186:93 are the current VSP-04 owner-selection evidence.",
         "Owner selected F Apple-Native Life Calendar on 2026-06-30 as the VSP-04 Part 02 direction for candidate-package buildout. This is direction selection only, not final VSP-04 candidate approval.",
+        "Owner approved the VSP-04/F Apple-Native Life Calendar direction lock on 2026-06-30. This approval does not claim a complete VSP-04/F candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior, Visual Green, Release Green, or Done.",
         "F selection record at Figma node 196:93 packages the selected option, rationale, next candidate-package gate, shell boundary, product-law non-claims, and durable screenshot proof.",
         "Part 02 proof PNGs use Inter because SF Pro text did not render in Figma export; SwiftUI implementation remains system-font/SF aligned.",
         "Recommended current read: Option F is the strongest native bridge if the floor is replacing the user's month calendar plus reminders.",
-        "New SwiftUI primitive required after owner approval: MonthLifeCalendarGrid / MonthLifeCalendarSemanticOverlay."
+        "New SwiftUI primitive required after full VSP-04/F candidate-package approval: MonthLifeCalendarGrid / MonthLifeCalendarSemanticOverlay."
       ]
     },
     {
