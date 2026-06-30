@@ -306,11 +306,26 @@
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-hero-r1-repaired.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-crop-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png"
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-territory-refinements-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d1-continuous-territory-field-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d2-editable-atlas-boundaries-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d3-path-overlay-territory-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d4-capacity-weather-map-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d5-focus-lens-territory-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d6-open-field-shoreline-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selection-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selected-crop-r1.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md",
+          "docs/design/provenance/figma-frames/VSP-03-part-01-life-area-atlas-root-object-options-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-03-part-02-living-map-territory-refinements-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-03-part-02-D5-focus-lens-selection-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -396,7 +411,8 @@
       },
       "known_risks": [
         "Can drift into KPI dashboards, project boards, ranking layers, analytics, or scorecards.",
-        "Existing names must be treated as source/internal where canon says so."
+        "Existing names must be treated as source/internal where canon says so.",
+        "Part 02 D-family territory refinements require careful follow-up to avoid map-as-project-board, edit-tool UI, or Capture/inbox drift."
       ],
       "missing_evidence": [
         "owner approval",
@@ -411,7 +427,12 @@
         "No device/accessibility proof."
       ],
       "notes": [
-        "Goals implementation must remain a Life Area Atlas content object inside Goals, not a competing root model."
+        "Goals implementation must remain a Life Area Atlas content object inside Goals, not a competing root model.",
+        "Part 01 exploration board at Figma node 164:93 provides six content-only root-object options for owner selection. It is not a candidate package, owner approval, source implementation, or Visual Green.",
+        "Owner direction selected the Part 01 D Living Map Territories concept family for refinement, not as final approval.",
+        "Part 02 exploration board at Figma node 169:93 refines D into six content-only territory-map options for owner selection. It is not a candidate package, owner approval, source implementation, or Visual Green.",
+        "Owner selected D5 Focus Lens Territory on 2026-06-30 as the VSP-03 Part 02 direction for candidate-package buildout. This is direction selection only, not final VSP-03 candidate approval.",
+        "Part 02 proof uses readable Inter export text because the current Figma screenshot pipeline drops SF Pro/system-font text; SwiftUI implementation remains system-font aligned."
       ]
     },
     {

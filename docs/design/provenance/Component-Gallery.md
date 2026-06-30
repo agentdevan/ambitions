@@ -70,6 +70,15 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-hero-r1-repaired.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-crop-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-03-goals-launch-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-territory-refinements-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d1-continuous-territory-field-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d2-editable-atlas-boundaries-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d3-path-overlay-territory-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d4-capacity-weather-map-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d5-focus-lens-territory-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d6-open-field-shoreline-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selection-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selected-crop-r1.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Goals/GoalsSurface.swift
 - Native/Ambitions/Surfaces/Goals/GoalsObjectView.swift

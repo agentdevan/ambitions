@@ -277,6 +277,61 @@
       "notes": "Candidate Figma evidence for Goals Life Area Atlas."
     },
     {
+      "proof_id": "vsp-03-figma-exploration-part-01",
+      "vsp_id": "VSP-03",
+      "proof_type": "figma_exploration",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-03-part-01-life-area-atlas-root-object-options-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/vsp-03-part-01-options-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/vsp-03-part-01-option-a-woven-direction-field-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/vsp-03-part-01-option-b-area-strata-field-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/vsp-03-part-01-option-c-goal-path-loom-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/vsp-03-part-01-option-d-living-map-territories-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/vsp-03-part-01-option-e-horizon-lens-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-01-life-area-atlas-options-r1/vsp-03-part-01-option-f-area-spine-atlas-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow exploration and owner-selection routing only. Does not satisfy VSP-03 owner approval, candidate approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, or accessibility conformance.",
+      "notes": "Part 01 Goals Life Area Atlas root-object options at Figma node 164:93. This is not the formal VSP-03 candidate until the owner selects one direction and a candidate package is produced."
+    },
+    {
+      "proof_id": "vsp-03-figma-exploration-part-02",
+      "vsp_id": "VSP-03",
+      "proof_type": "figma_exploration",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-03-part-02-living-map-territory-refinements-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-territory-refinements-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d1-continuous-territory-field-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d2-editable-atlas-boundaries-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d3-path-overlay-territory-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d4-capacity-weather-map-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d5-focus-lens-territory-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-living-map-territory-refinements-r1/vsp-03-part-02-d6-open-field-shoreline-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow exploration and owner-selection routing only. Does not satisfy VSP-03 owner approval, candidate approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, or accessibility conformance.",
+      "notes": "Part 02 refines the owner-selected D Living Map Territories concept family into six complete D-family options at Figma node 169:93. This is not the formal VSP-03 candidate until the owner selects one refinement and a candidate package is produced. Readable proof uses Inter because the current Figma screenshot pipeline drops SF Pro/system-font text; SwiftUI remains system-font aligned."
+    },
+    {
+      "proof_id": "vsp-03-owner-selection-part-02-d5",
+      "vsp_id": "VSP-03",
+      "proof_type": "owner_selection",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-03-part-02-D5-focus-lens-selection-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selection-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-03-part-02-d5-selection-r1/vsp-03-part-02-d5-selected-crop-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow direction-selection evidence only. Does not satisfy VSP-03 final owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, or accessibility conformance.",
+      "notes": "Owner selected D5 Focus Lens Territory on 2026-06-30 as the VSP-03 Part 02 direction for candidate-package buildout. This is not final VSP-03 candidate approval and does not mark VSP-03 Green or Done."
+    },
+    {
       "proof_id": "vsp-03-owner-approval",
       "vsp_id": "VSP-03",
       "proof_type": "owner_approval",
