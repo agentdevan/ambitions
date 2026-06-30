@@ -1516,6 +1516,34 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow owner-direction evidence only. Does not prove owner approval, SwiftUI parity, Visual Green, device behavior, or accessibility conformance.",
       "notes": "Ambitions-native adaptations of owner-provided Apple Settings root and profile/settings sheet references."
+    },
+    {
+      "proof_id": "vsp-06-part-02-rejected-too-literal-r1",
+      "vsp_id": "VSP-06",
+      "proof_type": "figma_failure_evidence",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/manifest.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Documents rejected exploration only. Must not be used as production authority.",
+      "notes": "Part 02 was rejected by owner because it was too close to supplied references."
+    },
+    {
+      "proof_id": "vsp-06-part-03-ambitions-owned-directions-r1",
+      "vsp_id": "VSP-06",
+      "proof_type": "figma_exploration",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow owner-direction evidence only. Does not prove owner approval, SwiftUI parity, Visual Green, device behavior, or accessibility conformance.",
+      "notes": "Ambitions-owned replacement directions after Part 02 rejection."
     }
   ]
 }

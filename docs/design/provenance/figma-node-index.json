@@ -761,7 +761,7 @@
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
       "node_id": "222:93",
       "node_id_status": "known",
-      "frame_name": "EXPLORATION - VSP-06 - PART 02 - Ambitions settings reference adaptations - R1",
+      "frame_name": "FAILURE_EVIDENCE - VSP-06 - Part 02 too literal to supplied references - R1",
       "vsp_id": "VSP-06",
       "evidence_screenshot_paths": [
         "docs/qa/evidence/2026-06-30-vsp-06-part-02-settings-reference-adaptations-r1/images/vsp-06-part-02-settings-reference-adaptations-board-r1.png"
@@ -773,7 +773,7 @@
       "provenance_annotation_status": "manual_required",
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
       "notes": [
-        "Recommended top-level direction uses Reference A; Reference B is detail sheet pattern only."
+        "Rejected by owner: too close to supplied reference screenshots. Retained as failure evidence only."
       ]
     },
     {
@@ -810,6 +810,61 @@
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-02-settings-reference-adaptations-R1.md",
       "notes": [
         "Detail sheet pattern only; not root IA."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "232:93",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-06 - PART 03 - Ambitions-owned You directions - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+      "notes": [
+        "Current VSP-06 owner-review exploration after rejected Part 02."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "232:322",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-06 - Option D - Local Control Observatory - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+      "notes": [
+        "Recommended VSP-06 direction."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "232:180",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-06 - Option B - Trust Meridian - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-b-trust-meridian-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md"
+      ],
+      "provenance_annotation_status": "manual_required",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
+      "notes": [
+        "Recommended ordering model for final VSP-06 direction."
       ]
     }
   ]

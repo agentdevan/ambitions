@@ -214,9 +214,9 @@ Rollback plan:
 - Do not create now: `True`
 
 Acceptance summary:
+- Part 02 is rejected as too literal to supplied references.
+- Part 03 keeps only reference intent and uses Ambitions-owned object language.
 - You remains native settings/user system.
-- Use Reference A as top-level root direction unless owner requests repair.
-- Use Reference B only as profile/account-boundary detail sheet pattern.
 - No old Profile root IA and no account-gated core value.
 - Every visible row opens real detail or an honest unavailable state.
 Validation summary:
@@ -224,7 +224,7 @@ Validation summary:
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Owner-select VSP-06 You native settings direction - scope: Figma review only; choose Reference A root, Reference B sheet pattern, or request repair - status: Ready For Review
+- Owner-select VSP-06 Ambitions-owned You direction - scope: Figma review only; Part 03 recommends D Local Control Observatory with B Trust Meridian ordering - status: Ready For Review
 - Produce VSP-06 final candidate package after direction selection - scope: Figma package only: hero, state matrix, accessibility matrix, SwiftUI anatomy, non-goals - status: Needs Direction
 - Produce You SwiftUI parity leaf - scope: Surfaces/You only, native settings rows with real targets - status: Spec Ready after owner approval
 
