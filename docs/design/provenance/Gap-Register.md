@@ -43,8 +43,6 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI Today parity screenshot
 - live SwiftUI screenshot
 - manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics
-- owner approval
-- owner approval for implementation handoff
 - runtime behavior
 - runtime mutation/proof receipt evidence
 ### VSP-03 - Goals Life Area Atlas

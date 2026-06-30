@@ -8,6 +8,7 @@
     "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
     "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
     "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md",
+    "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md",
     "docs/truth/PRODUCT_DESIGN_TRUTH.md",
     "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md",
     "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
@@ -141,7 +142,7 @@
       "vsp_id": "VSP-02",
       "title": "Today Reality Window",
       "category": "surface_content",
-      "current_status_recommendation": "Ready For Review",
+      "current_status_recommendation": "Spec Ready",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
@@ -168,7 +169,8 @@
           "docs/design/provenance/figma-frames/VSP-02-today-reality-window-R2.md",
           "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md",
           "docs/design/provenance/figma-frames/VSP-02-owner-review-package-R1.md",
-          "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/manifest.md"
+          "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -216,7 +218,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1481",
-        "recommended_status": "Ready For Review",
+        "recommended_status": "Spec Ready",
         "recommended_labels": [
           "VSP",
           "today",
@@ -240,7 +242,9 @@
         "privacy_boundary": false
       },
       "proof_present": {
-        "owner_approval": [],
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md"
+        ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
         "dynamic_type": [],
@@ -263,14 +267,12 @@
         "Figma screenshot export drops SF Pro/system-font text; readable proof uses a temporary Inter-font export clone while the live candidate remains system-font aligned."
       ],
       "missing_evidence": [
-        "owner approval for implementation handoff",
         "live SwiftUI Today parity screenshot",
         "device screenshot",
         "manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics",
         "runtime mutation/proof receipt evidence"
       ],
       "green_blockers": [
-        "No owner approval for implementation handoff.",
         "No live SwiftUI parity screenshot.",
         "No accessibility proof.",
         "No runtime mutation/proof receipt evidence."
@@ -287,7 +289,8 @@
         "R1 keeps proof and analytics integrated in the Today condition ribbon instead of detached KPI or inspection panels.",
         "Owner-review package at Figma node 160:93 explicitly packages the selected R6/R1 direction into hero, marketing crop, SwiftUI anatomy, accessibility matrix, state-matrix pointer, and non-claims frames.",
         "The owner-review package keeps the selected Today direction content-only inside VSP-01 shell authority and records no source implementation or Visual Green claim.",
-        "The package uses readable Inter proof clones for exported screenshots because the current MCP screenshot pipeline drops SF Pro text; the selected live R6/R1 candidate remains system-font aligned for SwiftUI plausibility."
+        "The package uses readable Inter proof clones for exported screenshots because the current MCP screenshot pipeline drops SF Pro text; the selected live R6/R1 candidate remains system-font aligned for SwiftUI plausibility.",
+        "Owner approved VSP-02 on 2026-06-30 as the visual/Figma target for the Rail-Aperture Today direction. This approval does not claim source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior, Release Green, or Done."
       ]
     },
     {

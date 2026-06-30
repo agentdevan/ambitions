@@ -31,8 +31,8 @@ SwiftUI source owner: Native/Ambitions/Surfaces/Today/TodaySurface.swift, Native
 Allowed implementation area: Native/Ambitions/Surfaces/Today, Native/Ambitions/Projection/StageScenes, Sources/Components
 Forbidden implementation area: Native/Ambitions/Stage shell mutations, dashboard/card-feed root pattern, task-list-only root pattern, Capture root/tab ownership
 Proof ceiling: Yellow
-Missing proof: owner approval for implementation handoff, live SwiftUI Today parity screenshot, device screenshot, manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics, runtime mutation/proof receipt evidence
-Linear mirror: AMB-1481 (Ready For Review)
+Missing proof: live SwiftUI Today parity screenshot, device screenshot, manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics, runtime mutation/proof receipt evidence
+Linear mirror: AMB-1481 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 

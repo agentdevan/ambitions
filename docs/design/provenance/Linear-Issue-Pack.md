@@ -47,9 +47,9 @@ Rollback plan:
 ## VSP-02 - VSP-02 Today Reality Window
 
 - Parent issue mirror: `AMB-1481`
-- Recommended status: `Ready For Review`
+- Recommended status: `Spec Ready`
 - Labels: VSP, today, surface-content, yellow-proof
-- Blocked by: owner approval for implementation handoff, live SwiftUI parity screenshot, accessibility and reduced-motion proof, runtime mutation/proof receipt evidence
+- Blocked by: live SwiftUI parity screenshot, accessibility and reduced-motion proof, runtime mutation/proof receipt evidence
 - Do not create now: `True`
 
 Acceptance summary:
@@ -60,9 +60,9 @@ Acceptance summary:
 - No dashboard, task list, card feed, calendar clone, Capture root, Motion root, or shell mutation.
 - Implementation leaf must list exact source owners, new vertical rail/current-aperture primitive requirements, non-goals, and proof artifacts.
 - Owner-review package at Figma node 160:93 explicitly provides hero, marketing crop, SwiftUI anatomy, accessibility matrix, state-matrix pointer, and non-claims frames for the selected R6/R1 direction.
-- Owner review should evaluate node 160:93 together with R6 selected direction node 134:44/134:48 and R1 state matrix node 152:93 before implementation handoff.
+- Owner approved node 160:93 together with R6 selected direction node 134:44/134:48 and R1 state matrix node 152:93 on 2026-06-30 for visual/Figma target authority.
 Validation summary:
-- Figma Production Gate review before owner approval
+- Figma Production Gate review and owner approval recorded before source implementation
 - focused Today tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py

@@ -152,11 +152,13 @@
       "proof_id": "vsp-02-owner-approval",
       "vsp_id": "VSP-02",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-02 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-02-Rail-Aperture-Today-approval.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for the VSP-02 visual/Figma target only. VSP-02 remains Yellow until live SwiftUI, device, accessibility, haptics, runtime, and validation proof exist.",
+      "notes": "Owner approved the VSP-02 Rail-Aperture Today owner-review package on 2026-06-30. This is not source implementation proof, device proof, accessibility proof, release readiness, or Done."
     },
     {
       "proof_id": "vsp-02-swiftui-simulator-screenshot",
