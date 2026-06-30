@@ -425,6 +425,7 @@ final class TodayCommandHandlerTests: XCTestCase {
     func testInvalidRuntimeCommandDoesNotBypassValidationIntoFeedbackHandler() async throws {
         let repositories = try await makeRepositories()
         let commandRecordRepository = try XCTUnwrap(repositories.commandExecutionRecords as? InMemoryAmbitionsCommandExecutionRecordRepository)
+        let commandJournal = try XCTUnwrap(repositories.commandJournal as? InMemoryCommandJournal)
         let handler = TodayCommandActionHandler(
             repositories: repositories,
             feedbackAction: { _, _ in
@@ -456,13 +457,20 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertEqual(record.result.status, .blocked)
         XCTAssertEqual(record.result.metadata["stageActionPipelineCommandValidation"], StageActionPipelineRequirementState.blocked.rawValue)
         XCTAssertEqual(record.result.metadata["stageActionPipelineRuntimeMutation"], StageActionPipelineRequirementState.blocked.rawValue)
+        XCTAssertEqual(record.result.metadata["commandEnvelopePhase"], CommandEnvelopePhase.rejectedBeforeMutation.rawValue)
+        XCTAssertEqual(record.result.metadata["commandJournalSequence"], "1")
+        XCTAssertEqual(record.result.metadata["commandReceiptID"], "command.receipt.command.invalid-runtime-pipeline")
         XCTAssertTrue(record.result.eventLedgerEntryIDs.isEmpty)
+        let envelopes = try await commandJournal.fetchEnvelopes(matching: .commandID(command.id), limit: nil)
+        XCTAssertEqual(envelopes.count, 1)
+        XCTAssertEqual(envelopes.first?.phase, .rejectedBeforeMutation)
     }
 
     func testAskWhyThisMattersCommandPreservesFeedbackShapeAndRecordsExecution() async throws {
         let repositories = try await makeRepositories()
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
         let commandRecordRepository = try XCTUnwrap(repositories.commandExecutionRecords as? InMemoryAmbitionsCommandExecutionRecordRepository)
+        let commandJournal = try XCTUnwrap(repositories.commandJournal as? InMemoryCommandJournal)
         let ledger = try XCTUnwrap(repositories.eventLedger as? InMemoryEventLedgerRepository)
         let todayService = RepositoryBackedTodayService(repositories: repositories)
 
@@ -502,6 +510,12 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertEqual(execution.result.status, .succeeded)
         XCTAssertEqual(execution.result.target?.goalID, goalID)
         XCTAssertFalse(execution.result.eventLedgerEntryIDs.isEmpty)
+        XCTAssertEqual(execution.result.metadata["commandEnvelopePhase"], CommandEnvelopePhase.acceptedBeforeMutation.rawValue)
+        XCTAssertEqual(execution.result.metadata["commandReceiptID"], "command.receipt.\(commandID)")
+        XCTAssertEqual(execution.result.metadata["commandJournalSequence"], "1")
+        let envelopes = try await commandJournal.fetchEnvelopes(matching: .commandID(commandID), limit: nil)
+        XCTAssertEqual(envelopes.count, 1)
+        XCTAssertEqual(envelopes.first?.phase, .acceptedBeforeMutation)
         let ledgerEntries = try await ledger.fetchRecent(limit: 20)
         XCTAssertTrue(
             execution.result.eventLedgerEntryIDs.allSatisfy { id in

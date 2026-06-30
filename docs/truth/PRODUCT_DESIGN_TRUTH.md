@@ -360,6 +360,8 @@ As of Linear `AMB-1544` / `AMB-1545`, new backend/runtime authority belongs unde
 
 As of `AMB-1567`, source-present TransactionKernel foundation files exist under `Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/`, including `RuntimeTransaction`, `RuntimeTransactionCoordinator`, `RuntimeMutationPlan`, `RuntimeWriteSet`, `RuntimeReadSet`, `RuntimeCommitReceipt`, `RuntimeRollbackPlan`, `RuntimeConflictDetector`, `RuntimeIdempotencyStore`, and `RuntimeMutation`. Focused simulator tests cover canonical owner files, old owner removal, validated transaction preparation, event/projection-backed commit receipts, rollback plans, duplicate idempotency replay, stale read-set conflict detection, and invalid-command rejection. This proof does not prove app-wide command-only mutation or full LocalRuntimeOS completion.
 
+As of `AMB-1568`, source-present CommandSpine files exist under `Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/`, including `CommandEnvelope`, `CommandCompiler`, `CommandValidator`, `CommandAuthorizer`, `CommandIdempotencyKey`, `CommandJournal`, `CommandReducer`, `CommandResult`, `CommandReceiptFactory`, and `CommandReplayAdapter`. Focused simulator tests cover canonical owner files, durable command-journal append before scoped capture mutation, idempotency replay lookup, authorization denial, reducer policy output, typed receipt metadata, Today command routing, app-container journal wiring, and no mutation after command-journal append failure. This proof does not prove app-wide command-only mutation or full LocalRuntimeOS completion.
+
 ```
 Ambitions/
   App/

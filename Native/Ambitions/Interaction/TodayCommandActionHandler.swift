@@ -3,14 +3,20 @@ import Foundation
 struct TodayCommandActionHandler {
     typealias FeedbackAction = (TodayInlineAction, Date) async throws -> TodayActionResponse
 
-    private let repositories: AppRepositories
+    let repositories: AppRepositories
     private let feedbackAction: FeedbackAction
+    private let compiler: CommandCompiler
+    private let receiptFactory: CommandReceiptFactory
 
     init(
         repositories: AppRepositories,
+        compiler: CommandCompiler = CommandCompiler(),
+        receiptFactory: CommandReceiptFactory = CommandReceiptFactory(),
         feedbackAction: @escaping FeedbackAction
     ) {
         self.repositories = repositories
+        self.compiler = compiler
+        self.receiptFactory = receiptFactory
         self.feedbackAction = feedbackAction
     }
 
@@ -19,7 +25,33 @@ struct TodayCommandActionHandler {
         command: AmbitionsCommand,
         now: Date
     ) async throws -> TodayActionResponse {
+        let replayAdapter = CommandReplayAdapter(commandExecutionRecords: repositories.commandExecutionRecords)
+        switch await replayAdapter.lookup(command) {
+        case .record:
+            return TodayActionResponse(message: nil)
+        case .lookupUnavailable:
+            let result = replayAdapter.lookupUnavailableResult(for: command)
+            await persistCommandExecution(command: command, result: result, at: now)
+            return blockedActionResponse(for: .blockedByMissingFoundation)
+        case .noRecord:
+            break
+        }
+
         let validation = effectiveValidation(command: command, action: action)
+        let context = CommandExecutionContext(
+            now: now,
+            actor: command.actor,
+            sourceSurface: command.sourceSurface
+        )
+        let compilation = compiler.compile(command, context: context, validation: validation)
+        let journalReceipt: CommandJournalAppendReceipt
+        do {
+            journalReceipt = try await repositories.commandJournal.append(compilation.envelope)
+        } catch {
+            let result = commandJournalFailureResult(command: command, compilation: compilation, error: error)
+            await persistCommandExecution(command: command, result: result, at: now, compilation: compilation)
+            return blockedActionResponse(for: .blockedByMissingFoundation)
+        }
 
         let goalID = action.target.goalID
         let beforeFeedback = try await preFeedbackEvents(for: goalID)
@@ -28,8 +60,33 @@ struct TodayCommandActionHandler {
 
         if validation != .valid {
             let result = blockedCommandResult(for: validation, command: command)
-            await persistCommandExecution(command: command, result: result, at: now)
+                .mergingMetadata(compilation.resultMetadata)
+                .mergingMetadata(journalReceipt.resultMetadata)
+            await persistCommandExecution(
+                command: command,
+                result: result,
+                at: now,
+                compilation: compilation,
+                journalReceipt: journalReceipt
+            )
             return blockedActionResponse(for: validation)
+        }
+
+        guard compilation.authorization.isAuthorized else {
+            let result = compiler.authorizer.blockedResult(
+                command: command,
+                authorization: compilation.authorization
+            )
+            .mergingMetadata(compilation.resultMetadata)
+            .mergingMetadata(journalReceipt.resultMetadata)
+            await persistCommandExecution(
+                command: command,
+                result: result,
+                at: now,
+                compilation: compilation,
+                journalReceipt: journalReceipt
+            )
+            return blockedActionResponse(for: .blockedByMissingFoundation)
         }
 
         let response = try await feedbackAction(action, now)
@@ -62,7 +119,15 @@ struct TodayCommandActionHandler {
                 newCaptures: newCaptures
             )
         )
-        await persistCommandExecution(command: command, result: result, at: now)
+        await persistCommandExecution(
+            command: command,
+            result: result
+                .mergingMetadata(compilation.resultMetadata)
+                .mergingMetadata(journalReceipt.resultMetadata),
+            at: now,
+            compilation: compilation,
+            journalReceipt: journalReceipt
+        )
 
         return response
     }
@@ -79,16 +144,44 @@ struct TodayCommandActionHandler {
     private func persistCommandExecution(
         command: AmbitionsCommand,
         result: AmbitionsCommandExecutionResult,
-        at timestamp: Date
+        at timestamp: Date,
+        compilation: CommandCompilation? = nil,
+        journalReceipt: CommandJournalAppendReceipt? = nil
     ) async {
         let recordedAt = Self.iso.string(from: timestamp)
-        let record = AmbitionsCommandExecutionRecord(
+        let commandReceipt = receiptFactory.makeReceipt(
             command: command,
             result: result,
+            compilation: compilation,
+            journalReceipt: journalReceipt,
+            issuedAt: recordedAt
+        )
+        let enrichedResult = result.mergingMetadata(commandReceipt.resultMetadata)
+        let record = AmbitionsCommandExecutionRecord(
+            command: command,
+            result: enrichedResult,
             recordedAt: recordedAt
         )
         try? await repositories.commandExecutionRecords?.append(record)
-        await appendRuntimeEvent(command: command, result: result, recordedAt: recordedAt, commandRecordID: record.id)
+        await appendRuntimeEvent(command: command, result: enrichedResult, recordedAt: recordedAt, commandRecordID: record.id)
+    }
+
+    private func commandJournalFailureResult(
+        command: AmbitionsCommand,
+        compilation: CommandCompilation,
+        error: Error
+    ) -> AmbitionsCommandExecutionResult {
+        AmbitionsCommandExecutionResult(
+            status: .blocked,
+            summary: "Command journal append failed before mutation, so Ambitions skipped execution to preserve replay safety.",
+            target: command.target,
+            recommendationExplanationIDs: command.relations.recommendationExplanationIDs,
+            metadata: [
+                "blockedBy": "command_journal_append_failed",
+                "commandJournalError": String(describing: error)
+            ]
+        )
+        .mergingMetadata(compilation.resultMetadata)
     }
 
     private func appendRuntimeEvent(
@@ -243,138 +336,12 @@ struct TodayCommandActionHandler {
         )
     }
 
-    private func emitTodayCommandEvidence(
-        for action: TodayInlineAction,
-        command: AmbitionsCommand,
-        now: Date,
-        goalID: String?,
-        beforeFeedback: [GoalFeedbackEvent],
-        afterFeedback: [GoalFeedbackEvent],
-        beforeEvidence: [ProgressEvidence],
-        afterEvidence: [ProgressEvidence],
-        beforeCaptures: [Capture],
-        afterCaptures: [Capture]
-    ) async -> [String] {
-        let beforeFeedbackIDs = Set(beforeFeedback.map(\.base.id))
-        let beforeEvidenceIDs = Set(beforeEvidence.map(\.id))
-        let newFeedback = afterFeedback.filter { beforeFeedbackIDs.contains($0.base.id) == false }
-        let newEvidence = afterEvidence.filter { beforeEvidenceIDs.contains($0.id) == false }
-        let newCaptures = newCaptures(before: beforeCaptures, after: afterCaptures)
-
-        guard !newFeedback.isEmpty || !newEvidence.isEmpty || !newCaptures.isEmpty else {
-            return []
-        }
-        guard let goalID else { return [] }
-
-        var eventLedgerEntryIDs: [String] = []
-
-        for event in newFeedback {
-            let entry = EventLedgerEntry.fromFeedbackEvent(event, goalID: goalID, source: .today)
-            do {
-                try await repositories.eventLedger.append(entry)
-                eventLedgerEntryIDs.append(entry.id)
-            } catch {
-                // Keep command behavior alive even if ledger emission fails.
-            }
-        }
-
-        for evidence in newEvidence {
-            let entry = EventLedgerEntry.fromProgressEvidence(evidence, source: .today)
-            do {
-                try await repositories.eventLedger.append(entry)
-                eventLedgerEntryIDs.append(entry.id)
-            } catch {
-                // Keep command behavior alive even if ledger emission fails.
-            }
-        }
-
-        for capture in newCaptures where action.kind == .quickLog {
-            let entry = commandCaptureCreatedEntry(
-                capture: capture,
-                command: command,
-                occurredAt: Self.iso.string(from: now)
-            )
-            do {
-                try await repositories.eventLedger.append(entry)
-                eventLedgerEntryIDs.append(entry.id)
-            } catch {
-                // Keep command behavior alive even if ledger emission fails.
-            }
-        }
-
-        return eventLedgerEntryIDs
-    }
-
-    private func newCaptures(before: [Capture], after: [Capture]) -> [Capture] {
+    func newCaptures(before: [Capture], after: [Capture]) -> [Capture] {
         let beforeCaptureIDs = Set(before.map(\.id))
         return after.filter { beforeCaptureIDs.contains($0.id) == false }
     }
 
-    private func commandCaptureCreatedEntry(
-        capture: Capture,
-        command: AmbitionsCommand,
-        occurredAt: String
-    ) -> EventLedgerEntry {
-        EventLedgerEntry(
-            id: "ledger.command.\(command.id)",
-            kind: .captureCreated,
-            occurredAt: occurredAt,
-            source: eventLedgerSource(for: command.source),
-            goalID: command.target.goalID,
-            captureID: capture.id,
-            title: "Capture created",
-            summary: nil,
-            semanticState: command.kind.rawValue,
-            tone: .neutral,
-            trust: EventLedgerTrustMetadata(isUserConfirmed: command.actor == .user),
-            evidenceReferences: [
-                EventLedgerEvidenceReference(
-                    id: command.id,
-                    kind: .externalCommand,
-                    occurredAt: command.requestedAt,
-                    summary: command.kind.rawValue
-                ),
-                EventLedgerEvidenceReference(
-                    id: capture.id,
-                    kind: .capture,
-                    occurredAt: capture.createdAt,
-                    summary: "quick_capture"
-                )
-            ],
-            metadata: [
-                "commandKind": command.kind.rawValue,
-                "commandSource": command.source.rawValue,
-                "sourceSurface": command.sourceSurface ?? ""
-            ].filter { $0.value.isEmpty == false },
-            payload: [
-                "captureID": capture.id,
-                "contextLens": command.payload.contextLens?.rawValue ?? "",
-                "commitmentKind": command.payload.commitmentKind?.rawValue ?? ""
-            ].filter { $0.value.isEmpty == false },
-            privacy: .privateUserText
-        )
-    }
-
-    private func eventLedgerSource(for source: AmbitionsCommandSource) -> EventLedgerSource {
-        switch source {
-        case .today:
-            return .today
-        case .goals, .goalDetail:
-            return .goals
-        case .capture:
-            return .capture
-        case .time:
-            return .plan
-        case .you:
-            return .you
-        case .reviews:
-            return .you
-        case .widget, .liveActivity, .appIntent, .notification, .deepLink, .system:
-            return .system
-        }
-    }
-
-    private static var iso: ISO8601DateFormatter {
+    static var iso: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter

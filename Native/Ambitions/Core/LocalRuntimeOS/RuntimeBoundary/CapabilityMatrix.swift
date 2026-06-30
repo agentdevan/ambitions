@@ -150,7 +150,7 @@ struct CapabilityMatrix: Sendable, Equatable {
                 localOnlyCompatible: false,
                 requiresAccount: false,
                 issueCodes: [LocalOnlyModeIssue.externalCloudLLMDependency.rawValue],
-                explanation: "External cloud LLM dependency is not permitted for core runtime behavior."
+                explanation: "Remote hosted intelligence dependency is not permitted for core runtime behavior."
             ),
             RuntimeCapabilityDecision(
                 capability: .externalSideEffectsInsideUnitOfWork,

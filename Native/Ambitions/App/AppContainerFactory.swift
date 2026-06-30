@@ -212,6 +212,7 @@ enum AppContainerFactory {
             runtimeSnapshotLedger: SwiftDataRuntimeSnapshotLedgerRepository(store: store),
             commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store),
             runtimeEvents: runtimeEventStore(for: configuration),
+            commandJournal: commandJournal(for: configuration),
             executionLedgerReplayInspection: SwiftDataExecutionLedgerReplayInspectionRepository(store: store),
             graphOperationalRecords: SwiftDataAmbitionGraphOperationalRecordRepository(store: store),
             graphProofRecords: SwiftDataAmbitionGraphProofRecordRepository(store: store),
@@ -228,6 +229,13 @@ enum AppContainerFactory {
             return InMemoryRuntimeEventStore()
         }
         return FileRuntimeEventStore.defaultLiveStore()
+    }
+
+    private static func commandJournal(for configuration: AppBootstrapConfiguration) -> any CommandJournal {
+        if configuration.usesInMemoryStore {
+            return InMemoryCommandJournal()
+        }
+        return FileCommandJournal.defaultLiveStore()
     }
 
     private static func previewTodayServiceOverride(for source: AppSession.BootstrapSource) -> (any TodayServicing)? {

@@ -15,6 +15,7 @@ final class AppContainerFactoryTests: XCTestCase {
         let actionReceipts = try await XCTUnwrap(repositories.actionReceiptHistory).listRecords()
         let runtimeSnapshots = try await XCTUnwrap(repositories.runtimeSnapshotLedger).fetchRecent(limit: 10)
         let commandRecords = try await XCTUnwrap(repositories.commandExecutionRecords).fetchRecent(limit: 10)
+        let commandJournalEntries = try await repositories.commandJournal.fetchEntries(matching: .all, limit: 10)
         let graphOperationalRecords = try await XCTUnwrap(repositories.graphOperationalRecords).fetchRecords(surface: nil, snapshotID: nil, limit: 10)
         let graphProofRecords = try await XCTUnwrap(repositories.graphProofRecords).fetchRecords(proofID: nil, limit: 10)
         let graphProjectionRecords = try await XCTUnwrap(repositories.graphProjectionRecords).fetchRecords(surface: nil, snapshotID: nil, limit: 10)
@@ -28,6 +29,7 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertTrue(actionReceipts.isEmpty)
         XCTAssertTrue(runtimeSnapshots.isEmpty)
         XCTAssertTrue(commandRecords.isEmpty)
+        XCTAssertTrue(commandJournalEntries.isEmpty)
         XCTAssertTrue(graphOperationalRecords.isEmpty)
         XCTAssertTrue(graphProofRecords.isEmpty)
         XCTAssertTrue(graphProjectionRecords.isEmpty)
@@ -111,6 +113,7 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertNotNil(container.runtime.repositories.reminders as? SwiftDataReminderRepository)
         XCTAssertNotNil(container.runtime.repositories.actionReceiptHistory as? SwiftDataActionReceiptHistoryRepository)
         XCTAssertNotNil(container.runtime.repositories.commandExecutionRecords as? SwiftDataAmbitionsCommandExecutionRecordRepository)
+        XCTAssertNotNil(container.runtime.repositories.commandJournal as? InMemoryCommandJournal)
         XCTAssertNotNil(container.runtime.repositories.runtimeSnapshotLedger as? SwiftDataRuntimeSnapshotLedgerRepository)
         XCTAssertNotNil(container.runtime.repositories.executionLedgerReplayInspection as? SwiftDataExecutionLedgerReplayInspectionRepository)
         XCTAssertNotNil(container.runtime.repositories.graphOperationalRecords as? SwiftDataAmbitionGraphOperationalRecordRepository)
@@ -138,8 +141,8 @@ final class AppContainerFactoryTests: XCTestCase {
                 checkedAt: Date(timeIntervalSince1970: 1_780_100_000)
             )
         )
-        XCTAssertEqual(sourceAtlasRefresh.configuredTargetCount, 13)
-        XCTAssertEqual(sourceAtlasRefresh.registryResolution.configuredEntryCount, 13)
+        XCTAssertEqual(sourceAtlasRefresh.configuredTargetCount, 14)
+        XCTAssertEqual(sourceAtlasRefresh.registryResolution.configuredEntryCount, 14)
         XCTAssertEqual(
             sourceAtlasRefresh.registryResolution.selectedTargetIDs,
             [
@@ -156,6 +159,7 @@ final class AppContainerFactoryTests: XCTestCase {
                 "source-atlas-refresh-target.public_civic_requirements.stable.20260628T041500Z",
                 "source-atlas-refresh-target.relationships_family.stable.20260628T000000Z",
                 "source-atlas-refresh-target.travel_relocation.stable.20260628T000000Z",
+                "source-atlas-refresh-target.volunteering_public_reference.stable.20260628T180600Z",
             ]
         )
         XCTAssertEqual(
@@ -166,9 +170,9 @@ final class AppContainerFactoryTests: XCTestCase {
         XCTAssertEqual(sourceAtlasRefresh.registryResolution.egressFindings, [])
         let registryLoad = SourceAtlasPublicPackRefreshTargetRegistryArtifactLoader.loadDefaultAppArtifact()
         XCTAssertEqual(registryLoad.issues, [])
-        XCTAssertEqual(registryLoad.artifactID, "source_atlas_public_refresh_targets.train81_trideca_live_worker_gateway")
+        XCTAssertEqual(registryLoad.artifactID, "source_atlas_public_refresh_targets.4d61a41e5350290c")
         XCTAssertFalse(registryLoad.usedFallbackEmptyRegistry)
-        XCTAssertEqual(registryLoad.registry.entries.count, 13)
+        XCTAssertEqual(registryLoad.registry.entries.count, 14)
         XCTAssertEqual(Set(registryLoad.registry.entries.map(\.status)), [.active])
         XCTAssertEqual(
             sourceAtlasRefresh.attemptedTargetIDs,
@@ -186,14 +190,16 @@ final class AppContainerFactoryTests: XCTestCase {
                 "source-atlas-refresh-target.public_civic_requirements.stable.20260628T041500Z",
                 "source-atlas-refresh-target.relationships_family.stable.20260628T000000Z",
                 "source-atlas-refresh-target.travel_relocation.stable.20260628T000000Z",
+                "source-atlas-refresh-target.volunteering_public_reference.stable.20260628T180600Z",
             ]
         )
-        XCTAssertEqual(sourceAtlasRefresh.targetResolutions.count, 13)
+        XCTAssertEqual(sourceAtlasRefresh.targetResolutions.count, 14)
         XCTAssertEqual(
             sourceAtlasRefresh.targetResolutions.compactMap {
                 $0.appRefreshResolution?.refreshResolution.remoteResolution.transportIssues
             },
             [
+                [.remoteFetchSkipped],
                 [.remoteFetchSkipped],
                 [.remoteFetchSkipped],
                 [.remoteFetchSkipped],
