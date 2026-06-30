@@ -58,7 +58,6 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI Goals parity screenshot
 - live SwiftUI screenshot
 - manual accessibility matrix
-- owner approval
 - runtime behavior
 ### VSP-04 - Time / LifeShape Week
 

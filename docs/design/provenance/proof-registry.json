@@ -344,11 +344,13 @@
       "proof_id": "vsp-03-owner-approval",
       "vsp_id": "VSP-03",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-03 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-03-D5-Focus-Lens-Territory-approval.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for the VSP-03 visual/Figma target only. VSP-03 remains Yellow until live SwiftUI, device, accessibility, haptics, runtime, and validation proof exist.",
+      "notes": "Owner approved the VSP-03 D5 Focus Lens Territory owner-review package on 2026-06-30. This is not source implementation proof, device proof, accessibility proof, release readiness, or Done."
     },
     {
       "proof_id": "vsp-03-swiftui-simulator-screenshot",

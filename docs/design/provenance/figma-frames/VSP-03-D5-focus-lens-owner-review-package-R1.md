@@ -1,8 +1,8 @@
 # VSP-03 D5 Focus Lens Territory Owner Review Package R1
 
-Status: Yellow owner-review candidate package.
+Status: Yellow owner-approved visual/Figma target.
 
-Claim boundary: this packages the owner-selected D5 Focus Lens Territory direction for visual review only. It is not final VSP-03 owner approval, not Visual Green, not source implementation, not live SwiftUI parity, not device proof, not runtime behavior proof, not accessibility conformance, not Release Green, and not Done.
+Claim boundary: this packages the owner-approved D5 Focus Lens Territory visual/Figma target. It is not Visual Green, not source implementation, not live SwiftUI parity, not device proof, not runtime behavior proof, not accessibility conformance, not Release Green, and not Done.
 
 ## Figma Frame
 
@@ -10,6 +10,13 @@ Claim boundary: this packages the owner-selected D5 Focus Lens Territory directi
 - Board node: `177:93`
 - Board name: `CANDIDATE - VSP-03 - D5 Focus Lens Territory owner review package - R1`
 - Link: https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=177-93
+
+## Owner Approval
+
+- Approval source: owner message in Codex thread, `Owner approved`
+- Approval date: 2026-06-30
+- Approval evidence: `docs/design/provenance/owner-approvals/VSP-03-D5-Focus-Lens-Territory-approval.md`
+- Approval scope: visual/Figma target only.
 
 ## Child Frames
 
@@ -81,4 +88,6 @@ The package intentionally keeps the active focus lens dominant. Inactive `People
 
 ## Required Next Gate
 
-Owner must explicitly approve, request repair, or reject this package before any Codex source implementation leaf can begin. Approval would be visual/Figma authority only unless source, device, runtime, accessibility, and validation proof are separately produced.
+Create a bounded Codex implementation leaf before source work begins. The leaf must include approved frame IDs, source owners, non-goals, required SwiftUI primitives, Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, haptic/static feedback acceptance criteria, validation commands, proof artifacts, and rollback plan.
+
+Even with owner approval, VSP-03 remains Yellow until source, device, runtime, accessibility, and validation proof are separately produced.

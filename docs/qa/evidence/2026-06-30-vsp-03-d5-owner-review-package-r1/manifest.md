@@ -1,8 +1,8 @@
 # VSP-03 D5 Focus Lens Territory Owner Review Package R1 Evidence
 
-Status: Yellow owner-review candidate package.
+Status: Yellow owner-approved visual/Figma target.
 
-Claim boundary: this records Figma candidate package evidence only. It does not claim final VSP-03 owner approval, Visual Green, source implementation, SwiftUI parity, device proof, runtime behavior, accessibility conformance, Release Green, or Done.
+Claim boundary: this records Figma target and owner approval evidence only. It does not claim Visual Green, source implementation, SwiftUI parity, device proof, runtime behavior, accessibility conformance, Release Green, or Done.
 
 ## Figma
 
@@ -10,6 +10,13 @@ Claim boundary: this records Figma candidate package evidence only. It does not 
 - Board node: `177:93`
 - Board name: `CANDIDATE - VSP-03 - D5 Focus Lens Territory owner review package - R1`
 - Link: https://www.figma.com/design/SWtHm9ouHTPbEFfNrrtZwv?node-id=177-93
+
+## Owner Approval
+
+- Approval source: owner message in Codex thread, `Owner approved`
+- Approval date: 2026-06-30
+- Approval evidence: `docs/design/provenance/owner-approvals/VSP-03-D5-Focus-Lens-Territory-approval.md`
+- Approval scope: visual/Figma target only.
 
 ## Frame Nodes
 
@@ -42,8 +49,8 @@ Claim boundary: this records Figma candidate package evidence only. It does not 
 - New SwiftUI primitives likely required: `LifeAreaFocusLens`, `LifeAreaAtlasField`, `LifeAreaBoundaryState`, `GoalPathStitchOverlay`, `FocusLensReducedMotionState`.
 - Accessibility proof: Figma acceptance matrix included; live/manual accessibility proof not run.
 - SwiftUI proof: not run; no source implementation.
-- Owner approval: not present; this is ready for owner visual review.
+- Owner approval: present for the visual/Figma target only.
 
 ## Next Gate
 
-Owner must explicitly approve, request repair, or reject the D5 owner-review package. Until that happens, VSP-03 remains Yellow and is not ready for source implementation.
+Create a bounded Codex implementation leaf before source work begins. VSP-03 remains Yellow until source, device, runtime, accessibility, and validation proof are separately produced.

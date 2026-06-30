@@ -46,8 +46,8 @@ SwiftUI source owner: Native/Ambitions/Surfaces/Goals/GoalsSurface.swift, Native
 Allowed implementation area: Native/Ambitions/Surfaces/Goals, Native/Ambitions/Projection/StageScenes, Sources/Components
 Forbidden implementation area: Native/Ambitions/Stage shell mutations, generic project-board root pattern, productivity-score or ranking root, stale top-level IA
 Proof ceiling: Yellow
-Missing proof: owner approval, live SwiftUI Goals parity screenshot, device screenshot, manual accessibility matrix, goal action runtime proof
-Linear mirror: AMB-1482 (Ready For Review)
+Missing proof: live SwiftUI Goals parity screenshot, device screenshot, manual accessibility matrix, goal action runtime proof
+Linear mirror: AMB-1482 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 

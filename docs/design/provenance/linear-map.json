@@ -105,7 +105,7 @@
       "vsp_id": "VSP-03",
       "likely_parent_issue": "AMB-1482",
       "recommended_parent_title": "VSP-03 Goals Life Area Atlas",
-      "recommended_status": "Ready For Review",
+      "recommended_status": "Spec Ready",
       "recommended_labels": [
         "VSP",
         "goals",
@@ -116,7 +116,7 @@
         {
           "title": "Produce Goals Life Area Atlas SwiftUI parity leaf",
           "scope": "Goals content object only inside VSP-01 shell from owner-approved D5 Focus Lens Territory package",
-          "recommended_status": "Spec Ready after owner approval"
+          "recommended_status": "Spec Ready after implementation authorization"
         },
         {
           "title": "Prove Goals object accessibility and no-dashboard shape",
@@ -132,11 +132,12 @@
       ],
       "acceptance_summary": [
         "Current review package is D5 Focus Lens Territory at Figma node 177:93.",
+        "Owner approved node 177:93 on 2026-06-30 for visual/Figma target authority.",
         "Goals remains Life Area Atlas content.",
         "The selected life area expands as a focus lens while neighboring life areas remain spatially present and subordinate.",
         "No project board, scorecard, analytics root, or stale IA.",
         "No VSP-01 shell mutation, no Capture tab/inbox, no Motion destination, no cloud LLM core, and no R2/private graph behavior.",
-        "Owner approval is still required before source implementation."
+        "Source implementation still requires a bounded Codex leaf with exact source owners, non-goals, validation commands, and proof artifacts."
       ],
       "validation_summary": [
         "focused Goals tests after source implementation",
@@ -145,7 +146,7 @@
       ],
       "closeout_required": [
         "D5 owner-review package frame ID 177:93 and durable proof paths",
-        "explicit owner approve/repair/reject result",
+        "owner approval evidence path",
         "live SwiftUI screenshot matrix",
         "accessibility and reduced-motion proof after source implementation",
         "explicit non-claims for no Visual Green, no source implementation, no runtime/device/accessibility proof, and no shell mutation until actually proven"
