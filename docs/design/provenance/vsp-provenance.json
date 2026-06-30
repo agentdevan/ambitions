@@ -651,19 +651,29 @@
       "vsp_id": "VSP-05",
       "title": "Capture Open Field Composer",
       "category": "global_composer",
-      "current_status_recommendation": "Ready For Review",
+      "current_status_recommendation": "Spec Ready",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "207:293",
-        "frame_name": "F - Quiet Placement Review selected direction from VSP-05 Part 01 R2",
+        "node_id": "217:93",
+        "frame_name": "CANDIDATE - VSP-05 - F Quiet Placement Review owner review package - R3",
         "screenshot_paths": [
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-hero.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-state-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-accessibility-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-swiftui-anatomy.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-marketing-crop.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-non-claims.png",
           "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png",
           "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png",
           "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-d-keyboard-native-stage-composer-r2.png",
           "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-b-route-bloom-composer-r2.png"
         ],
         "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md",
+          "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
           "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
           "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
           "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/manifest.md",
@@ -713,7 +723,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1484",
-        "recommended_status": "Ready For Review",
+        "recommended_status": "Spec Ready",
         "recommended_labels": [
           "VSP",
           "capture",
@@ -721,9 +731,10 @@
           "yellow-proof",
           "owner-approved-direction",
           "selected-f-quiet-placement",
-          "candidate-package-needed"
+          "owner-review-package",
+          "owner-approved-target"
         ],
-        "should_create_or_update_now": true
+        "should_create_or_update_now": false
       },
       "proof_required": {
         "owner_approval": true,
@@ -741,7 +752,8 @@
       },
       "proof_present": {
         "owner_approval": [
-          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md"
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md"
         ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
@@ -762,29 +774,28 @@
         "Keyboard, save, proposal, receipt, and offline proof are not established by Figma."
       ],
       "missing_evidence": [
-        "complete VSP-05/F Quiet Placement Review candidate package",
-        "full candidate-package owner approval",
-        "live SwiftUI composer parity screenshot",
+        "live SwiftUI Capture composer parity screenshot",
         "device keyboard/composer screenshots",
         "manual accessibility matrix",
-        "offline save/proposal/receipt runtime proof"
+        "offline save/proposal/receipt runtime proof",
+        "Dynamic Type keyboard/composer stress proof",
+        "VoiceOver route-review order proof",
+        "Reduce Motion static proof-step walkthrough"
       ],
       "green_blockers": [
-        "No complete VSP-05/F Quiet Placement Review candidate package.",
-        "No global route/composer proof.",
-        "No device keyboard proof."
+        "No live SwiftUI Capture composer parity proof.",
+        "No global route/composer runtime proof.",
+        "No device keyboard proof.",
+        "No manual accessibility proof."
       ],
       "notes": [
         "Capture remains the global composer and must not become a tab, inbox, chatbot, category wall, or root destination.",
         "VSP-05 Part 01 R2 at Figma node 207:93 provides six owner-selection directions for the global Capture composer.",
-        "R1 at Figma node 206:93 was renamed failure evidence after screenshot inspection showed oversized typography, text collision, keyboard clipping, and weak board density.",
-        "VSP-05 is Ready For Review for owner direction selection only; it is not Spec Ready until the owner selects one direction and a full candidate package is built.",
-        "Apple iOS 26 library components were discoverable, but current Figma tool permissions did not allow importing those library nodes; R2 uses native-shaped fallback primitives and records the limitation.",
-        "Recommended read: F is safest for Codex implementation, D is strongest native keyboard baseline, B is most distinctive but riskier.",
         "Owner approved F Quiet Placement Review as the VSP-05 Part 01 direction lock on 2026-06-30.",
-        "Option D may inform keyboard/focus implementation expectations, but the selected direction remains F and is not a B/D/F synthesis.",
-        "VSP-05 remains Ready For Review and Yellow because the complete candidate package, live SwiftUI parity, device, accessibility, haptics, runtime, and validation proof are still missing.",
-        "This direction approval does not authorize shell mutation and does not claim source implementation, Visual Green, Release Green, or Done."
+        "Owner approved the complete VSP-05/F owner-review package R3 at Figma node 217:93 on 2026-06-30; this moves the Figma target to Spec Ready / Yellow only.",
+        "R1 package at Figma node 212:93 was renamed failure evidence after text collapsed to 10px/non-rendered export.",
+        "R2 package at Figma node 213:93 was renamed failure evidence after SF-family text exported as zero-width; R3 uses readable Inter export text while preserving native San Francisco as the SwiftUI target.",
+        "No source implementation, live SwiftUI parity, device proof, accessibility conformance, runtime behavior proof, Visual Green, Release Green, or Done is claimed."
       ]
     },
     {

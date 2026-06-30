@@ -168,28 +168,27 @@ Rollback plan:
 ## VSP-05 - VSP-05 Capture Open Field Composer
 
 - Parent issue mirror: `AMB-1484`
-- Recommended status: `Ready For Review`
-- Labels: VSP, capture, global-composer, yellow-proof, owner-approved-direction, selected-f-quiet-placement, candidate-package-needed
-- Blocked by: complete VSP-05/F owner-review package, keyboard/device proof, accessibility and reduced-motion proof, offline save/proposal/receipt runtime proof
+- Recommended status: `Spec Ready`
+- Labels: VSP, capture, global-composer, yellow-proof, owner-approved-direction, selected-f-quiet-placement, owner-review-package, owner-approved-target
+- Blocked by: source implementation authorization, keyboard/device proof after source implementation, accessibility and reduced-motion proof after source implementation, offline save/proposal/receipt runtime proof after source implementation
 - Do not create now: `True`
 
 Acceptance summary:
-- Current owner-approved direction lock is VSP-05/F Quiet Placement Review from Part 01 R2 at selected option node 207:293.
-- Use F as the primary Capture direction for candidate-package buildout; D may inform keyboard/focus implementation expectations, but the direction is not a B/D/F synthesis.
+- Owner-approved visual/Figma target is VSP-05/F Quiet Placement Review owner-review package R3 at node 217:93.
+- Use F as the Capture implementation target; D may inform keyboard/focus implementation expectations, but the approved target is not a B/D/F synthesis.
 - Capture remains global composer.
 - No tab, root surface, inbox, notes feed, category wall, chatbot, persistent floating plus surface, or competing shell affordance.
-- Full candidate package must include hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshots before Spec Ready.
+- Approved package includes hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshots.
 - Offline save/proposal/receipt states must be proven before Green.
 - No VSP-01 shell mutation, no Motion destination, no cloud LLM core, and no R2/private graph behavior.
 Validation summary:
-- Figma Production Gate review and owner direction approval recorded before package buildout
+- Figma Production Gate review and owner package approval recorded before implementation
 - focused Capture tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Build VSP-05/F Quiet Placement Review candidate package - scope: Figma-only owner-review package with hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof; no source implementation - status: Ready For Review
-- Produce Capture SwiftUI parity leaf from owner-approved VSP-05/F package - scope: Composer/Capture and Stage overlay routing only after complete owner-approved Figma package and implementation authorization - status: Spec Ready after package approval and implementation authorization
-- Prove Capture keyboard, route preview, receipt, and accessibility states - scope: Dynamic Type, VoiceOver order/actions, Reduce Motion static proof step, Reduce Transparency, Increase Contrast, haptics, keyboard/device screenshots, offline save/proposal/receipt proof - status: Spec Ready after package approval
+- Produce Capture SwiftUI parity leaf from owner-approved VSP-05/F package - scope: Composer/Capture and Stage overlay routing only, preserving VSP-01 shell; implement the approved F Quiet Placement Review package after explicit source authorization - status: Spec Ready after implementation authorization
+- Prove Capture keyboard, route preview, receipt, and accessibility states - scope: Dynamic Type, VoiceOver order/actions, Reduce Motion static proof step, Reduce Transparency, Increase Contrast, haptics, keyboard/device screenshots, offline save/proposal/receipt proof - status: Spec Ready after source leaf exists
 
 Standard Codex closeout block:
 

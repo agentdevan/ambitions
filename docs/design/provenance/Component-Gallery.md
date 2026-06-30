@@ -157,6 +157,13 @@ Required later for Green: live render, screenshot matrix, accessibility matrix, 
 ## VSP-05 - Capture Open Field Composer
 
 Figma candidate screenshots:
+- docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-board.png
+- docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-hero.png
+- docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-state-matrix.png
+- docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-accessibility-matrix.png
+- docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-swiftui-anatomy.png
+- docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-marketing-crop.png
+- docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-non-claims.png
 - docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png
 - docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png
 - docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-d-keyboard-native-stage-composer-r2.png

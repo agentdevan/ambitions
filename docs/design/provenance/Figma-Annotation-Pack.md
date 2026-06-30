@@ -70,14 +70,14 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-05 provenance - Capture Open Field Composer
-Frame naming recommendation: F - Quiet Placement Review selected direction from VSP-05 Part 01 R2
+Frame naming recommendation: CANDIDATE - VSP-05 - F Quiet Placement Review owner review package - R3
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift, Native/Ambitions/Composer/Capture/CaptureSurface.swift, Native/Ambitions/Composer/Capture/CaptureObjectView.swift
 Allowed implementation area: Native/Ambitions/Composer/Capture, Native/Ambitions/Stage/Overlays, Sources/Components
 Forbidden implementation area: Native/Ambitions/Surfaces/Capture, Capture root tab, Capture inbox/feed, chatbot composer as core architecture, persistent floating root affordance
 Proof ceiling: Yellow
-Missing proof: complete VSP-05/F Quiet Placement Review candidate package, full candidate-package owner approval, live SwiftUI composer parity screenshot, device keyboard/composer screenshots, manual accessibility matrix, offline save/proposal/receipt runtime proof
-Linear mirror: AMB-1484 (Ready For Review)
+Missing proof: live SwiftUI Capture composer parity screenshot, device keyboard/composer screenshots, manual accessibility matrix, offline save/proposal/receipt runtime proof, Dynamic Type keyboard/composer stress proof, VoiceOver route-review order proof, Reduce Motion static proof-step walkthrough
+Linear mirror: AMB-1484 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 

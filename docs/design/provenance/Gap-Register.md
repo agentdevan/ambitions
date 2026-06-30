@@ -79,16 +79,17 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 ### VSP-05 - Capture Open Field Composer
 
 - Dynamic Type
+- Dynamic Type keyboard/composer stress proof
 - Increase Contrast
 - Reduce Motion
+- Reduce Motion static proof-step walkthrough
 - Reduce Transparency
 - VoiceOver
-- complete VSP-05/F Quiet Placement Review candidate package
+- VoiceOver route-review order proof
 - device keyboard/composer screenshots
 - device screenshot
-- full candidate-package owner approval
 - haptics
-- live SwiftUI composer parity screenshot
+- live SwiftUI Capture composer parity screenshot
 - live SwiftUI screenshot
 - manual accessibility matrix
 - offline save/proposal/receipt runtime proof

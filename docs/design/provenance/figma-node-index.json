@@ -562,6 +562,181 @@
         "Content-only inside VSP-01 shell authority; no shell mutation, source implementation, device proof, runtime proof, Visual Green, or accessibility conformance is claimed.",
         "Owner-approved visual/Figma target for VSP-04/F Apple-Native Life Calendar."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "217:93",
+      "frame_name": "CANDIDATE - VSP-05 - F Quiet Placement Review owner review package - R3",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-hero.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-state-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-accessibility-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-swiftui-anatomy.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-marketing-crop.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-non-claims.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+        "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "Owner-approved VSP-05/F Figma target package.",
+        "Spec Ready / Yellow only; no source, device, accessibility, runtime, Visual Green, Release Green, or Done claim."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "217:207",
+      "frame_name": "CANDIDATE - VSP-05 - F Quiet Placement Review hero - R3",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-hero.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "Hero frame for owner-approved global Capture composer target."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "217:343",
+      "frame_name": "CANDIDATE - VSP-05 - F Quiet Placement Review state matrix - R3",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-state-matrix.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "State matrix for draft retained, ambiguous route, invalid fallback, receipt, attachment/local, and share intake states."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "217:1049",
+      "frame_name": "CANDIDATE - VSP-05 - F Quiet Placement Review accessibility matrix - R3",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-accessibility-matrix.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "Figma accessibility and motion acceptance matrix; not live/manual accessibility proof."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "217:1069",
+      "frame_name": "CANDIDATE - VSP-05 - F Quiet Placement Review SwiftUI anatomy - R3",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-swiftui-anatomy.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "SwiftUI/source-owner anatomy map for future implementation leaf."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "217:1092",
+      "frame_name": "MARKETING_RENDER - VSP-05 - F Quiet Placement Review presentation crop - R3",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-marketing-crop.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "Presentation crop; not marketing-only authority and not source proof."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "217:1293",
+      "frame_name": "CANDIDATE - VSP-05 - F Quiet Placement Review non-claims - R3",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-non-claims.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "Non-claims frame preserving proof boundaries."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "212:93",
+      "frame_name": "FAILURE_EVIDENCE - VSP-05 - R1 collapsed text render - 2026-06-30",
+      "evidence_screenshot_paths": [],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "Failure evidence retained in Figma; not approved target authority."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "213:93",
+      "frame_name": "FAILURE_EVIDENCE - VSP-05 - R2 SF-family text export failure - 2026-06-30",
+      "evidence_screenshot_paths": [],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+      "notes": [
+        "Failure evidence retained in Figma; not approved target authority."
+      ]
     }
   ]
 }

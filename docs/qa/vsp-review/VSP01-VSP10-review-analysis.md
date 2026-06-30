@@ -45,7 +45,7 @@ What VSP does not mean, based on current repo evidence:
 | VSP-02 | Today Reality Window | Today surface content layer | Current selected R6 direction: Rail-Attached Time Bands as the base with Current Aperture behavior, content-only inside VSP-01 shell | `docs/design/provenance/figma-frames/VSP-02-rail-attached-time-bands-current-aperture-R6.md`; `docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/manifest.md`; R6 readable viewport PNG | `Native/Ambitions/Surfaces/Today/TodaySurface.swift`; `TodayObjectView.swift`; `TodayAccessibility.swift`; `Sources/Components/RealityMeridianTimeBand.swift` as existing horizontal source anchor plus new vertical rail/current-aperture primitive requirement | AMB-1481 | Ready For Review / Yellow | High | Missing owner approval for implementation handoff, rendered SwiftUI parity proof, manual a11y proof, Dynamic Type screenshot proof, and runtime mutation/proof evidence. |
 | VSP-03 | Goals Life Area Atlas | Goals surface content layer | Content-only Goals hero/state/a11y/anatomy/marketing candidate frames mounted inside VSP-01 shell | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-03-goals-hero-r1-repaired.png` | `Native/Ambitions/Surfaces/Goals/GoalsSurface.swift`; Goals object/projection source; shell tests | AMB-1482 | Partial | High | Missing owner approval, rendered parity proof, manual a11y proof, and source proof that the candidate is not a dashboard/project-board pattern. |
 | VSP-04 | Time / LifeShape Week | Time surface content layer | Content-only Time hero/state/a11y/anatomy/marketing candidate frames mounted inside VSP-01 shell | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-04-time-hero-r1-repaired.png`; `docs/design/targets/time/lifeshape_field_visual_target.md` | `Native/Ambitions/Surfaces/Time/TimeSurface.swift`; Time object/projection source; Time visual target audit source | AMB-1483 | Partial | High | Missing owner approval, rendered parity proof, manual a11y proof, and confirmation that LifeShape does not become a calendar clone. |
-| VSP-05 | Capture Open Field Composer | Global composer content layer | Content-only Capture composer candidate; global composer only, not root tab | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-05-capture-hero-r1.png` | `Native/Ambitions/Composer/Capture/CaptureSurface.swift`; `Native/Ambitions/Stage/StageStore.swift`; `Native/Ambitions/Stage/SurfaceOwnershipRegistry.swift`; Capture tests/source | AMB-1484 | Needs Repair | Medium-high | Repo-local packet definition depth is limited. Must not become tab, inbox, chatbot, category wall, or persistent floating button. Missing owner approval and rendered/global route proof. |
+| VSP-05 | Capture Open Field Composer | Global composer content layer | Owner-approved F Quiet Placement Review target; content-only global Capture composer, not root tab | `docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md`; `docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md`; `docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md`; R3 board/hero/state/a11y/anatomy/crop/non-claims PNGs | `Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift`; `Native/Ambitions/Composer/Capture/CaptureSurface.swift`; `Native/Ambitions/Composer/Capture/CaptureObjectView.swift`; Stage overlay routing source anchors | AMB-1484 | Spec Ready / Yellow | High | Figma target is owner-approved only. Must not become tab, inbox, chatbot, category wall, or persistent floating button. Missing live SwiftUI parity, device keyboard/composer proof, manual accessibility proof, and offline save/proposal/receipt runtime proof. |
 | VSP-06 | You Native Settings | You surface content layer | Content-only You/settings candidate mounted inside VSP-01 shell | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-06-you-hero-r1.png` | `Native/Ambitions/Surfaces/You/YouSurface.swift`; You detail routes; notification/account/local settings source | AMB-1485 | Partial | Medium-high | Missing owner approval, rendered parity proof, manual a11y proof, and exact boundary between user settings, account support, privacy controls, and private runtime data. |
 | VSP-07 | Trust Inspection Seams | Trust inspection detail layer | Content-only Proof/Source/Privacy/History/Receipts inspection seams; not a root surface | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-07-trust-hero-r1.png` | `Native/Ambitions/Trust/**`; `Native/Ambitions/Stage/SurfaceOwnershipRegistry.swift`; Source Atlas/trust source; tests where present | AMB-1486 | Needs Repair | Medium-high | Missing owner approval and rendered proof. Must stay contextual inspection detail, not a fifth persistent surface. |
 | VSP-08 | External Boundaries | Source Atlas/account/R2/offline boundary layer | Boundary candidate for external dependencies, account, R2, and local-first limits | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-08-boundaries-hero-r1.png` | `docs/truth/PRODUCT_DESIGN_TRUTH.md`; `docs/truth/PRODUCT_EXPERIENCE_CANON.md`; `docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md`; account/R2/Source Atlas scripts and source inventories | AMB-1487 | Needs Repair | Medium | Packet scope is underdefined. Must not require sign-in for core value, store private life graph in R2, or introduce cloud LLM core architecture. Needs explicit design authority before implementation. |
@@ -217,6 +217,8 @@ Evidence found:
 
 - `manifest.json` names VSP-05 `Capture Open Field Composer`.
 - `authority-map.md` says VSP-02 through VSP-10 are content-only and do not invent shell affordances.
+- `docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md` records the owner-approved F Quiet Placement Review package.
+- `docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md` records owner approval for the visual/Figma target only.
 
 Implementation evidence:
 
@@ -227,19 +229,22 @@ Implementation evidence:
 Risks:
 
 - Highest IA risk after VSP-01: Capture must not become a tab, inbox, notes feed, generic plus surface, chatbot, root destination, or persistent floating button.
-- Packet definition depth is limited outside the evidence package.
+- Package R3 uses Inter for readable Figma export because the current Figma screenshot pipeline rendered SF-family text as zero-width; SwiftUI implementation must still use native San Francisco/system typography.
+- Owner approval applies to the Figma target only and must not be read as source implementation, Visual Green, runtime proof, device proof, accessibility conformance, Release Green, or Done.
 
 Missing proof:
 
+- Live SwiftUI Capture composer parity screenshot.
+- Device keyboard/composer screenshots.
 - Global route graph proof.
 - Capture mutation receipt proof.
-- Accessibility proof for composer field, review, undo, and fallback states.
+- Accessibility proof for composer field, review, undo, fallback, Dynamic Type, VoiceOver order, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics.
 
 Recommended next action:
 
-Needs design clarification before source implementation. If implemented later, scope it to `Composer/Capture` and Stage overlay routing only.
+Create a bounded Codex implementation leaf only after explicit source authorization. Scope it to `Composer/Capture` and Stage overlay routing while preserving VSP-01 shell authority.
 
-Recommended status: Needs Repair.
+Recommended status: Spec Ready / Yellow.
 
 ### VSP-06
 
@@ -482,8 +487,9 @@ Safe to proceed now:
 
 Needs repair before implementation:
 
-- VSP-05, VSP-07, VSP-08, VSP-09, VSP-10.
+- VSP-07, VSP-08, VSP-09, VSP-10.
 - VSP-02 through VSP-04 also need proof repair before any Green claim, but can become bounded content-only implementation leaves sooner than the less-defined packets.
+- VSP-05 is Spec Ready / Yellow for a future implementation leaf after owner-approved R3 target evidence; it still needs source/device/accessibility/runtime proof before any Green claim.
 
 Analysis-only for now:
 

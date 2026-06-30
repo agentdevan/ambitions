@@ -654,6 +654,15 @@
       "proof_type": "figma_candidate",
       "status": "present",
       "artifact_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-hero.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-state-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-accessibility-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-swiftui-anatomy.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-marketing-crop.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-non-claims.png",
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
         "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png",
         "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png",
         "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
@@ -663,8 +672,8 @@
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-launch-board-r1.png"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
-      "notes": "Candidate/exploration Figma evidence for Capture Open Field Composer. The current owner-approved direction basis is F Quiet Placement Review from node 207:293; a complete candidate package is still missing."
+      "proof_ceiling_impact": "Supports Yellow owner-approved Figma target evidence only. Does not prove SwiftUI parity, Visual Green, device behavior, accessibility conformance, runtime behavior, Release Green, or Done.",
+      "notes": "Owner-approved VSP-05/F Quiet Placement Review package R3 at node 217:93 is the current Capture Figma target. Source/device/accessibility/runtime proof remains missing."
     },
     {
       "proof_id": "vsp-05-part-01-r1-failure-evidence",
@@ -702,11 +711,12 @@
       "proof_type": "owner_approval",
       "status": "present",
       "artifact_paths": [
-        "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md"
+        "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
+        "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports owner-approved direction lock only. VSP-05 remains Yellow and not Spec Ready until the complete F Quiet Placement Review candidate package is built and approved, then SwiftUI/device/accessibility/runtime proof is produced.",
-      "notes": "Owner approved VSP-05/F Quiet Placement Review direction lock on 2026-06-30. This is not source implementation, Visual Green, Release Green, or Done."
+      "proof_ceiling_impact": "Supports owner-approved VSP-05/F Figma target only. VSP-05 may be Spec Ready / Yellow for future implementation planning, but remains blocked from Green by missing SwiftUI/device/accessibility/runtime proof.",
+      "notes": "Owner approved VSP-05/F Quiet Placement Review direction and owner-review package on 2026-06-30. This is not source implementation, Visual Green, Release Green, or Done."
     },
     {
       "proof_id": "vsp-05-swiftui-simulator-screenshot",
@@ -1442,6 +1452,40 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow direction-selection evidence only. Does not satisfy VSP-04 final owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, or accessibility conformance.",
       "notes": "Owner selected F Apple-Native Life Calendar on 2026-06-30 as the VSP-04 Part 02 direction for candidate-package buildout. The next gate is the complete VSP-04/F candidate package."
+    },
+    {
+      "proof_id": "vsp-05-owner-review-package-r3",
+      "vsp_id": "VSP-05",
+      "proof_type": "owner_review_package",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+        "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-package-approval.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-hero.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-state-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-accessibility-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-swiftui-anatomy.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-marketing-crop.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/vsp-05-f-owner-review-package-r3-non-claims.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow owner-approved Figma target and Spec Ready handoff only. Does not prove source implementation, SwiftUI parity, device behavior, accessibility conformance, runtime behavior, Visual Green, Release Green, or Done.",
+      "notes": "Complete VSP-05/F package includes hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof. Inter is used only as Figma export fallback because SF-family text rendered zero-width in this tool."
+    },
+    {
+      "proof_id": "vsp-05-package-r1-r2-failure-evidence",
+      "vsp_id": "VSP-05",
+      "proof_type": "failure_evidence",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-05-F-quiet-placement-review-owner-review-package-R3.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-f-owner-review-package-r3/manifest.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Documents rejected package-generation/export defects so R1/R2 are not mistaken for approved target evidence.",
+      "notes": "R1 node 212:93 was renamed for collapsed text rendering. R2 node 213:93 was renamed for SF-family zero-width export. R3 node 217:93 is the readable owner-approved package."
     }
   ]
 }
