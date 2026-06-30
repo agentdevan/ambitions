@@ -24,26 +24,28 @@
     },
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-      "node_id": "98:2",
+      "node_id": "134:44",
       "node_id_status": "known",
-      "frame_name": "CANDIDATE - VSP-02 - Today Reality Window hero - R2",
+      "frame_name": "CANDIDATE - VSP-02 - Rail-Attached Time Bands + Current Aperture - selected direction - R6",
       "vsp_id": "VSP-02",
       "evidence_screenshot_paths": [
-        "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-hero-r2.png",
-        "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-state-matrix-r2.png",
-        "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-accessibility-matrix-r2.png",
-        "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-swiftui-anatomy-r2.png",
-        "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-marketing-crop-r2.png"
+        "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-board-r6.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6-readable-export.png"
       ],
       "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-02-rail-attached-time-bands-current-aperture-R6.md",
+        "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/manifest.md",
         "docs/design/provenance/figma-frames/VSP-02-today-reality-window-R2.md",
         "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md"
       ],
-      "provenance_annotation_status": "manual_required",
+      "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-02---today-reality-window",
       "notes": [
-        "R2 content-only candidate. Not Visual Green.",
-        "R1 reclassified as failure evidence because it read as stacked cards on a background."
+        "R6 selected direction recorded in Figma and Git provenance.",
+        "Rail-Attached Time Bands are the base; Current Aperture expands the centered current step.",
+        "Content-only Today object. Not Visual Green, not source implementation, not device proof, not accessibility conformance.",
+        "R6 repaired current-time label/marker collision. Readable export uses temporary Inter clone because current Figma PNG export drops SF Pro/system-font text."
       ]
     },
     {

@@ -33,11 +33,9 @@ Required later for Green: live render, screenshot matrix, accessibility matrix, 
 ## VSP-02 - Today Reality Window
 
 Figma candidate screenshots:
-- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-hero-r2.png
-- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-state-matrix-r2.png
-- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-accessibility-matrix-r2.png
-- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-swiftui-anatomy-r2.png
-- docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-marketing-crop-r2.png
+- docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-board-r6.png
+- docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6.png
+- docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6-readable-export.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Today/TodaySurface.swift
 - Native/Ambitions/Surfaces/Today/TodayObjectView.swift
@@ -45,10 +43,12 @@ SwiftUI source owners:
 Candidate components:
 - `StartHereProductProofStack` (`surface`) - `Sources/Components/StartHereProductPrimitives.swift` - proof: `swiftui_render_missing`
 - `Reality Window / temporal field primitives` (`surface`) - `Sources/Components/RealityMeridianTemporalPrimitives.swift` - proof: `swiftui_render_missing`
+- `TodayVerticalTimelineBand / Rail-Attached Time Bands + Current Aperture` (`surface`) - `Sources/Components/RealityMeridianTimeBand.swift` - proof: `figma_selected_new_vertical_primitive_required`
 Known previews/tests/quality files:
 - Native/AmbitionsTests/Today/TodayRealityWindowActionGatingTests.swift
 - Native/AmbitionsTests/Today/TodayShellIntegrationTests.swift
 - Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift
+- Native/AmbitionsTests/Today/TodayViewportSafetyTests.swift
 - Sources/Previews/RealityMeridianRichnessPreviews.swift
 - Sources/Previews/RealityMeridianTemporalPreviews.swift
 - Native/Ambitions/Quality/ProductObjectDominanceAudit.swift
@@ -235,6 +235,7 @@ SwiftUI source owners:
 - docs/design/provenance/generated/swift-component-inventory.generated.json
 Candidate components:
 - `StartHereProductProofStack` (`surface`) - `Sources/Components/StartHereProductPrimitives.swift` - proof: `swiftui_render_missing`
+- `TodayVerticalTimelineBand / Rail-Attached Time Bands + Current Aperture` (`surface`) - `Sources/Components/RealityMeridianTimeBand.swift` - proof: `figma_selected_new_vertical_primitive_required`
 - `GroupedNavigationRow / Life area row candidate` (`surface`) - `Sources/Components/GroupedNavigationList.swift` - proof: `source_only`
 - `LifeShapeField` (`surface`) - `Sources/Components/LifeDirectionalIntegrationPrimitives+02-LifeShapeField.swift` - proof: `swiftui_render_missing`
 - `VSP Git provenance registry` (`quality_proof`) - `docs/design/provenance/vsp-provenance.json` - proof: `source_only`

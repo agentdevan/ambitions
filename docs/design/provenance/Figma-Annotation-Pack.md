@@ -25,13 +25,13 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-02 provenance - Today Reality Window
-Frame naming recommendation: CANDIDATE - VSP-02 - Today Reality Window hero - R2
+Frame naming recommendation: CANDIDATE - VSP-02 - Rail-Attached Time Bands + Current Aperture - selected direction - R6
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Surfaces/Today/TodaySurface.swift, Native/Ambitions/Surfaces/Today/TodayObjectView.swift, Native/Ambitions/Surfaces/Today/TodayAccessibility.swift
 Allowed implementation area: Native/Ambitions/Surfaces/Today, Native/Ambitions/Projection/StageScenes, Sources/Components
 Forbidden implementation area: Native/Ambitions/Stage shell mutations, dashboard/card-feed root pattern, task-list-only root pattern, Capture root/tab ownership
 Proof ceiling: Yellow
-Missing proof: owner approval, live SwiftUI Today parity screenshot, device screenshot, manual accessibility matrix, runtime mutation/proof receipt evidence
+Missing proof: owner approval for implementation handoff, live SwiftUI Today parity screenshot, device screenshot, R6 full state matrix beyond the selected base viewport, manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics, runtime mutation/proof receipt evidence
 Linear mirror: AMB-1481 (Ready For Review)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```

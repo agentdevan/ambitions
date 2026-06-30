@@ -42,7 +42,7 @@ What VSP does not mean, based on current repo evidence:
 | Packet id | Discovered title/name | Intended ownership | Expected output | Source evidence paths | Current repo evidence | Likely Linear/project relationship | Status | Confidence | Blocking questions or missing authority |
 |---|---|---|---|---|---|---|---|---|---|
 | VSP-01 | Root Shell / Stage / Chrome | Shell authority | Approved shell frame and screenshot; immutable shell boundary for later packets | `docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md`; `manifest.json`; `screenshot-index.md`; `images/vsp-01-authority-1-2.png` | `Native/Ambitions/Stage/AmbitionsStage.swift`; `Native/Ambitions/Stage/AmbitionsSurface.swift`; `Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift`; `Native/Ambitions/Stage/Chrome/StageDockRail.swift`; `Native/AmbitionsTests/App/AppShellNavigationTests.swift` | AMB-1480 | Needs Repair | High | Owner approval is absent. No rendered SwiftUI parity proof that current shell matches approved VSP-01. |
-| VSP-02 | Today Reality Window | Today surface content layer | Content-only Today hero/state/a11y/anatomy/marketing candidate frames mounted inside VSP-01 shell | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-02-today-hero-r1-repaired.png` | `Native/Ambitions/Surfaces/Today/TodaySurface.swift`; Today view model/object code; `Native/AmbitionsTests/App/AppShellNavigationTests.swift` | AMB-1481 | Partial | High | Missing owner approval, rendered parity proof, manual a11y proof, Dynamic Type screenshot proof, and explicit VSP-to-SwiftUI acceptance map. |
+| VSP-02 | Today Reality Window | Today surface content layer | Current selected R6 direction: Rail-Attached Time Bands as the base with Current Aperture behavior, content-only inside VSP-01 shell | `docs/design/provenance/figma-frames/VSP-02-rail-attached-time-bands-current-aperture-R6.md`; `docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/manifest.md`; R6 readable viewport PNG | `Native/Ambitions/Surfaces/Today/TodaySurface.swift`; `TodayObjectView.swift`; `TodayAccessibility.swift`; `Sources/Components/RealityMeridianTimeBand.swift` as existing horizontal source anchor plus new vertical rail/current-aperture primitive requirement | AMB-1481 | Ready For Review / Yellow | High | Missing owner approval for implementation handoff, rendered SwiftUI parity proof, manual a11y proof, Dynamic Type screenshot proof, and runtime mutation/proof evidence. |
 | VSP-03 | Goals Life Area Atlas | Goals surface content layer | Content-only Goals hero/state/a11y/anatomy/marketing candidate frames mounted inside VSP-01 shell | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-03-goals-hero-r1-repaired.png` | `Native/Ambitions/Surfaces/Goals/GoalsSurface.swift`; Goals object/projection source; shell tests | AMB-1482 | Partial | High | Missing owner approval, rendered parity proof, manual a11y proof, and source proof that the candidate is not a dashboard/project-board pattern. |
 | VSP-04 | Time / LifeShape Week | Time surface content layer | Content-only Time hero/state/a11y/anatomy/marketing candidate frames mounted inside VSP-01 shell | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-04-time-hero-r1-repaired.png`; `docs/design/targets/time/lifeshape_field_visual_target.md` | `Native/Ambitions/Surfaces/Time/TimeSurface.swift`; Time object/projection source; Time visual target audit source | AMB-1483 | Partial | High | Missing owner approval, rendered parity proof, manual a11y proof, and confirmation that LifeShape does not become a calendar clone. |
 | VSP-05 | Capture Open Field Composer | Global composer content layer | Content-only Capture composer candidate; global composer only, not root tab | `manifest.json`; `screenshot-index.md`; `visual-audit-ledger.md`; `images/vsp-05-capture-hero-r1.png` | `Native/Ambitions/Composer/Capture/CaptureSurface.swift`; `Native/Ambitions/Stage/StageStore.swift`; `Native/Ambitions/Stage/SurfaceOwnershipRegistry.swift`; Capture tests/source | AMB-1484 | Needs Repair | Medium-high | Repo-local packet definition depth is limited. Must not become tab, inbox, chatbot, category wall, or persistent floating button. Missing owner approval and rendered/global route proof. |
@@ -119,28 +119,32 @@ Evidence found:
 - `manifest.json` names VSP-02 `Today Reality Window`.
 - `screenshot-index.md` records hero, crop, and launch-board images.
 - `visual-audit-ledger.md` says the candidate was repaired and reviewed as Figma proof only.
+- R6 now records the selected direction as Rail-Attached Time Bands with Current Aperture behavior at Figma node `134:44` / viewport `134:48`.
 
 Implementation evidence:
 
 - `Native/Ambitions/Surfaces/Today/TodaySurface.swift` exists and is hosted inside the approved four-surface shell.
 - Today source uses Dynamic Type and Reduce Motion environment inputs.
+- `Sources/Components/RealityMeridianTimeBand.swift` exists as a horizontal time-band source anchor, but the R6 vertical rail-attached day bands and Current Aperture require a new or repaired SwiftUI primitive.
 
 Risks:
 
-- A Today implementation could drift into dashboard, task-list, timeline, or stacked CTA patterns.
+- A Today implementation could drift into dashboard, task-list, calendar clone, KPI panel, or stacked CTA patterns.
 - Figma candidate proof is not runtime proof.
+- Figma PNG export currently drops SF Pro/system-font text; the readable R6 proof uses a temporary Inter-font export clone and does not prove SwiftUI typography.
 
 Missing proof:
 
-- SwiftUI parity to VSP-02 visual candidate.
+- SwiftUI parity to the VSP-02 R6 visual candidate.
 - VoiceOver order, large Dynamic Type, Reduce Motion, contrast, and motor proof.
 - Runtime mutation proof for meaningful Today actions.
+- Full R6 state/accessibility matrix beyond the selected base viewport.
 
 Recommended next action:
 
-Proceed only after VSP-01 shell parity is mapped. Then implement as a Today content-only leaf with no shell, nav, account, Capture-root, or Motion-root changes.
+Proceed only after explicit owner approval for implementation handoff. Then implement as a Today content-only rail/aperture leaf with no shell, nav, account, Capture-root, or Motion-root changes.
 
-Recommended status: Partial.
+Recommended status: Ready For Review / Yellow.
 
 ### VSP-03
 
@@ -511,19 +515,19 @@ Proof artifacts: shell parity map; screenshot references; missing-proof list.
 
 ### VSP-02 Today Reality Window Content Leaf
 
-Title: VSP-02 Today Reality Window content-only implementation leaf.
+Title: VSP-02 Today Rail-Attached Time Bands + Current Aperture content-only implementation leaf.
 
-Scope: Align Today content/object presentation with the approved VSP-02 candidate while preserving VSP-01 shell.
+Scope: Align Today content/object presentation with the approved VSP-02 R6 direction while preserving VSP-01 shell: vertical rail-attached day bands, centered Current Aperture, integrated condition ribbon, and proof seam.
 
-Files likely affected: `Native/Ambitions/Surfaces/Today/**`; Today view models/projections; relevant `Sources/Components/**`; Today tests/previews.
+Files likely affected: `Native/Ambitions/Surfaces/Today/**`; Today view models/projections; `Sources/Components/RealityMeridianTimeBand.swift`; a new or repaired vertical rail/current-aperture primitive; Today tests/previews.
 
-Non-goals: shell chrome, root navigation, Capture routing, Motion destination, dashboard/task-list/timeline conversion.
+Non-goals: shell chrome, root navigation, Capture routing, Motion destination, dashboard/task-list/calendar clone/KPI panel conversion.
 
-Acceptance criteria: Today remains one of four root surfaces; `Start here`, `Recommended step`, `Step`, `Start now`, and `Open step` language is preserved; meaningful actions mutate runtime state, visible stage state, accessible state, fallback, and proof artifacts where scoped.
+Acceptance criteria: Today remains one of four root surfaces; non-current events are rail-attached duration bands rather than cards; the centered current step opens into a Current Aperture with repair/proof affordances; analytics remain integrated into the object; `Start here`, `Recommended step`, `Step`, `Start now`, and `Open step` language is preserved; meaningful actions mutate runtime state, visible stage state, accessible state, fallback, and proof artifacts where scoped.
 
 Validation commands: `git diff --check`; `python3 scripts/ambitions-architecture-inventory.py`; `python3 scripts/ambitions-green-standard-audit.py`; focused Today tests; screenshot/a11y matrix if UI changes are authorized.
 
-Proof artifacts: rendered Today screenshot, Dynamic Type screenshot, VoiceOver note, Reduce Motion note, proof ceiling.
+Proof artifacts: approved R6 Figma frame IDs, readable R6 screenshot, rendered Today screenshot, Dynamic Type screenshot, VoiceOver note, Reduce Motion note, proof ceiling.
 
 ### VSP-03 Goals Life Area Atlas Content Leaf
 

@@ -49,7 +49,7 @@
       "vsp_id": "VSP-02",
       "likely_parent_issue": "AMB-1481",
       "recommended_parent_title": "VSP-02 Today Reality Window",
-      "recommended_status": "Spec Ready",
+      "recommended_status": "Ready For Review",
       "recommended_labels": [
         "VSP",
         "today",
@@ -58,32 +58,40 @@
       ],
       "recommended_sub_issues": [
         {
-          "title": "Produce Today SwiftUI parity leaf from approved Figma frame",
-          "scope": "Today content only inside VSP-01 shell",
-          "recommended_status": "Spec Ready after owner approval"
+          "title": "Produce Today rail-attached timeline SwiftUI parity leaf from approved R6 frame",
+          "scope": "Today content only inside VSP-01 shell; implement vertical rail-attached time bands, current aperture, integrated condition ribbon, and proof seam",
+          "recommended_status": "Spec Ready after owner implementation approval"
         },
         {
-          "title": "Capture Today accessibility and state matrix proof",
-          "scope": "Dynamic Type, VoiceOver, Reduce Motion, contrast, screenshots",
+          "title": "Capture Today rail/aperture accessibility and state matrix proof",
+          "scope": "Dynamic Type, VoiceOver order/actions, Reduce Motion static aperture step, Reduce Transparency, Increase Contrast, haptics, screenshots",
           "recommended_status": "Spec Ready"
         }
       ],
       "blocked_by": [
-        "owner approval"
+        "owner approval for implementation handoff",
+        "live SwiftUI parity screenshot",
+        "accessibility and reduced-motion proof",
+        "runtime mutation/proof receipt evidence"
       ],
       "acceptance_summary": [
-        "Today remains Reality Window / Start here content.",
-        "No dashboard, task list, card feed, Capture root, or shell mutation.",
-        "Implementation leaf must list exact source owners and non-goals."
+        "Current selected direction is Rail-Attached Time Bands as the base with Current Aperture behavior for the centered current step.",
+        "Today remains Reality Window / Start here content and replaces schedule/reminder utility through a living vertical day rail, not cards on a background.",
+        "Analytics, risk, open time, drive, and proof signals must be integrated into the viewport object, not detached KPI dashboard rows.",
+        "No dashboard, task list, card feed, calendar clone, Capture root, Motion root, or shell mutation.",
+        "Implementation leaf must list exact source owners, new vertical rail/current-aperture primitive requirements, non-goals, and proof artifacts."
       ],
       "validation_summary": [
+        "Figma Production Gate review before owner approval",
         "focused Today tests after source implementation",
         "python3 scripts/ambitions-green-standard-audit.py",
-        "python3 scripts/ambitions-vsp-provenance-audit.py"
+        "python3 scripts/ambitions-vsp-provenance-audit.py",
+        "screenshot/a11y matrix after SwiftUI implementation"
       ],
       "closeout_required": [
-        "owner-approved frame ID",
-        "live SwiftUI screenshot matrix",
+        "owner-approved R6 frame ID 134:44 / viewport 134:48",
+        "durable readable screenshot proof path or Linear attachment",
+        "live SwiftUI screenshot matrix after implementation",
         "owner review result"
       ],
       "do_not_create_now": true

@@ -141,20 +141,20 @@
       "vsp_id": "VSP-02",
       "title": "Today Reality Window",
       "category": "surface_content",
-      "current_status_recommendation": "Spec Ready",
+      "current_status_recommendation": "Ready For Review",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "98:2",
-        "frame_name": "CANDIDATE - VSP-02 - Today Reality Window hero - R2",
+        "node_id": "134:44",
+        "frame_name": "CANDIDATE - VSP-02 - Rail-Attached Time Bands + Current Aperture - selected direction - R6",
         "screenshot_paths": [
-          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-hero-r2.png",
-          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-state-matrix-r2.png",
-          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-accessibility-matrix-r2.png",
-          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-swiftui-anatomy-r2.png",
-          "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/vsp-02-today-marketing-crop-r2.png"
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-board-r6.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6.png",
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/vsp-02-rail-aperture-viewport-r6-readable-export.png"
         ],
         "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-02-rail-attached-time-bands-current-aperture-R6.md",
+          "docs/qa/evidence/2026-06-30-vsp-02-r6-rail-aperture/manifest.md",
           "docs/design/provenance/figma-frames/VSP-02-today-reality-window-R2.md",
           "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md"
         ],
@@ -187,12 +187,14 @@
           "Sources/Components/StartHereProductPrimitives.swift",
           "Sources/Components/FlagshipObjectStagePrimitives.swift",
           "Sources/Components/LifeDirectionalIntegrationPrimitives.swift",
-          "Sources/Components/RealityMeridianTemporalPrimitives.swift"
+          "Sources/Components/RealityMeridianTemporalPrimitives.swift",
+          "Sources/Components/RealityMeridianTimeBand.swift"
         ],
         "known_tests": [
           "Native/AmbitionsTests/Today/TodayRealityWindowActionGatingTests.swift",
           "Native/AmbitionsTests/Today/TodayShellIntegrationTests.swift",
-          "Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift"
+          "Native/AmbitionsTests/DesignSystem/StartHereProductKernelTests.swift",
+          "Native/AmbitionsTests/Today/TodayViewportSafetyTests.swift"
         ],
         "known_preview_or_quality_files": [
           "Sources/Previews/RealityMeridianRichnessPreviews.swift",
@@ -209,7 +211,7 @@
           "surface-content",
           "yellow-proof"
         ],
-        "should_create_or_update_now": false
+        "should_create_or_update_now": true
       },
       "proof_required": {
         "owner_approval": true,
@@ -242,26 +244,33 @@
         "privacy_boundary": []
       },
       "known_risks": [
-        "Can drift into a dashboard, task list, timeline clone, or CTA stack.",
-        "Figma candidate proof is not runtime behavior proof.",
-        "R2 is ready for owner visual review but not owner-approved."
+        "Can drift into a dashboard, task list, calendar clone, KPI panel, or card-feed root pattern if analytics are detached from the timeline object.",
+        "R6 is a Figma-selected direction and proof-bounded candidate; it is not runtime behavior proof or SwiftUI implementation proof.",
+        "The current SwiftUI source has horizontal RealityMeridianTimeBand support, but the selected vertical rail-attached day bands and Current Aperture require a new or repaired Today primitive.",
+        "Figma screenshot export drops SF Pro/system-font text; readable proof uses a temporary Inter-font export clone while the live candidate remains system-font aligned."
       ],
       "missing_evidence": [
-        "owner approval",
+        "owner approval for implementation handoff",
         "live SwiftUI Today parity screenshot",
         "device screenshot",
-        "manual accessibility matrix",
+        "R6 full state matrix beyond the selected base viewport",
+        "manual accessibility matrix for Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, and haptics",
         "runtime mutation/proof receipt evidence"
       ],
       "green_blockers": [
-        "No owner approval.",
+        "No owner approval for implementation handoff.",
         "No live SwiftUI parity screenshot.",
-        "No accessibility proof."
+        "No accessibility proof.",
+        "No runtime mutation/proof receipt evidence."
       ],
       "notes": [
         "Use Start here, Recommended step, Step, Start now, and Open step language where applicable.",
         "R1 was reclassified as failure evidence because it read as stacked cards on a background.",
-        "R2 applies VSP-09 and VSP-10 gates and remains content-only inside VSP-01 shell authority."
+        "R2 repaired the original card-stack issue but has been superseded as the current VSP-02 direction by R6.",
+        "R6 selected direction is Rail-Attached Time Bands as the base with Current Aperture behavior for the centered current step.",
+        "R6 remains content-only inside VSP-01 shell authority and may not mutate shell chrome, root IA, dock, Context Crown, Capture/Search placement, safe-area shell, or route depth.",
+        "R6 Figma repair moved the current-time cursor right of the rail and shortened the time label to avoid marker/label collision.",
+        "Readable R6 screenshot proof uses a temporary Inter-font export clone because current Figma screenshot export drops SF Pro/system-font text. This is screenshot-proof scaffolding only; SwiftUI should remain system-font aligned."
       ]
     },
     {

@@ -47,22 +47,26 @@ Rollback plan:
 ## VSP-02 - VSP-02 Today Reality Window
 
 - Parent issue mirror: `AMB-1481`
-- Recommended status: `Spec Ready`
+- Recommended status: `Ready For Review`
 - Labels: VSP, today, surface-content, yellow-proof
-- Blocked by: owner approval
+- Blocked by: owner approval for implementation handoff, live SwiftUI parity screenshot, accessibility and reduced-motion proof, runtime mutation/proof receipt evidence
 - Do not create now: `True`
 
 Acceptance summary:
-- Today remains Reality Window / Start here content.
-- No dashboard, task list, card feed, Capture root, or shell mutation.
-- Implementation leaf must list exact source owners and non-goals.
+- Current selected direction is Rail-Attached Time Bands as the base with Current Aperture behavior for the centered current step.
+- Today remains Reality Window / Start here content and replaces schedule/reminder utility through a living vertical day rail, not cards on a background.
+- Analytics, risk, open time, drive, and proof signals must be integrated into the viewport object, not detached KPI dashboard rows.
+- No dashboard, task list, card feed, calendar clone, Capture root, Motion root, or shell mutation.
+- Implementation leaf must list exact source owners, new vertical rail/current-aperture primitive requirements, non-goals, and proof artifacts.
 Validation summary:
+- Figma Production Gate review before owner approval
 - focused Today tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
+- screenshot/a11y matrix after SwiftUI implementation
 Recommended sub-issues:
-- Produce Today SwiftUI parity leaf from approved Figma frame - scope: Today content only inside VSP-01 shell - status: Spec Ready after owner approval
-- Capture Today accessibility and state matrix proof - scope: Dynamic Type, VoiceOver, Reduce Motion, contrast, screenshots - status: Spec Ready
+- Produce Today rail-attached timeline SwiftUI parity leaf from approved R6 frame - scope: Today content only inside VSP-01 shell; implement vertical rail-attached time bands, current aperture, integrated condition ribbon, and proof seam - status: Spec Ready after owner implementation approval
+- Capture Today rail/aperture accessibility and state matrix proof - scope: Dynamic Type, VoiceOver order/actions, Reduce Motion static aperture step, Reduce Transparency, Increase Contrast, haptics, screenshots - status: Spec Ready
 
 Standard Codex closeout block:
 

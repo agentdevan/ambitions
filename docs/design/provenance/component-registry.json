@@ -140,6 +140,47 @@
       ]
     },
     {
+      "component_id": "today-rail-attached-time-bands-current-aperture",
+      "component_name": "TodayVerticalTimelineBand / Rail-Attached Time Bands + Current Aperture",
+      "source_path": "Sources/Components/RealityMeridianTimeBand.swift",
+      "component_kind": "surface",
+      "owning_vsp_ids": [
+        "VSP-02",
+        "VSP-10"
+      ],
+      "owning_surface_or_layer": "Today content object / living vertical day rail candidate",
+      "used_by_paths": [
+        "Native/Ambitions/DesignSystem/ProductObjects/TodayDayRailCurrentTimeFusion.swift",
+        "Sources/Previews/RealityMeridianRichnessPreviews.swift"
+      ],
+      "known_tests": [
+        "Native/AmbitionsTests/DesignSystem/RealityMeridianTemporalWindowTests.swift",
+        "Native/AmbitionsTests/Today/TodayRealityMeridianExperienceElevationTests.swift",
+        "Native/AmbitionsTests/Today/TodayViewportSafetyTests.swift"
+      ],
+      "known_previews": [
+        "Sources/Previews/RealityMeridianRichnessPreviews.swift",
+        "Sources/Previews/RealityMeridianTemporalPreviews.swift"
+      ],
+      "proof_status": "figma_selected_new_vertical_primitive_required",
+      "stale_naming_risks": [
+        "Internal Reality Meridian naming is source provenance, not root IA or user-facing surface language.",
+        "Rail-attached day bands must not become a generic calendar clone or card-feed timeline."
+      ],
+      "accessibility_risks": [
+        "Current Aperture needs VoiceOver order/action proof and Dynamic Type expansion behavior.",
+        "Reduced Motion must use a static proof step rather than motion-only meaning."
+      ],
+      "motion_risks": [
+        "Current Aperture reveal must have a Reduce Motion static equivalent and cannot hide required meaning in animation."
+      ],
+      "notes": [
+        "R6 Figma direction selected by owner: Rail-Attached Time Bands as base with Current Aperture behavior.",
+        "Existing source has horizontal RealityMeridianTimeBand support; vertical rail-attached day bands/current aperture remain a new or repaired SwiftUI primitive requirement.",
+        "No source implementation is claimed by this registry entry."
+      ]
+    },
+    {
       "component_id": "goals-stage-scene",
       "component_name": "GoalsStageScene / Goals object owner",
       "source_path": "Native/Ambitions/Projection/StageScenes/GoalsStageScene.swift",
