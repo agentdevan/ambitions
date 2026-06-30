@@ -11,9 +11,10 @@ Basis:
 - `docs/design/provenance/proof-registry.json`
 - `docs/design/provenance/VSP-SwiftUI-Provenance-Map.md`
 - VSP-01 Nightglass Authority Shell owner-approved shell authority
+- Delegated owner approval record: `docs/design/provenance/owner-approvals/VSP-10-Implementation-Anatomy-Source-Owner-Map-approval.md`
 
 Scope:
-- Packet-level owner map for VSP-01 through VSP-10.
+- Owner-approved packet-level source-owner map for VSP-01 through VSP-10.
 - Object-level provenance tags:
   - Existing SwiftUI primitive
   - New SwiftUI primitive required
@@ -31,4 +32,5 @@ Non-claims:
 - No final status assertion
 
 Next required action:
-- Use this board as the source-owner handoff backbone for VSP-09 and all later surface workshops.
+- Use this board as the source-owner handoff backbone for all later surface workshops.
+- Keep Code Connect, source implementation, runtime, device, accessibility, and Green claims out of scope until proof exists.

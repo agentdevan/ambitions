@@ -1019,11 +1019,14 @@
       "proof_id": "vsp-09-owner-approval",
       "vsp_id": "VSP-09",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-09 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-09-Accessibility-Motion-Haptics-Matrix-approval.md",
+        "docs/qa/evidence/2026-06-30-vsp-09-10-delegated-approval/vsp-09-accessibility-motion-haptics-approved.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for VSP-09 matrix authority only. VSP-09 remains Yellow until live SwiftUI, device, accessibility, haptics, runtime, and validation proof exist.",
+      "notes": "Delegated owner approval for VSP-09 governance authority. This is not SwiftUI implementation proof, device proof, accessibility proof, release readiness, or a final-status claim."
     },
     {
       "proof_id": "vsp-09-swiftui-simulator-screenshot",
@@ -1146,11 +1149,14 @@
       "proof_id": "vsp-10-owner-approval",
       "vsp_id": "VSP-10",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-10 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-10-Implementation-Anatomy-Source-Owner-Map-approval.md",
+        "docs/qa/evidence/2026-06-30-vsp-09-10-delegated-approval/vsp-10-implementation-anatomy-approved.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for VSP-10 source-owner map authority only. VSP-10 remains Yellow until component preview, accessibility, validation, and implementation proof exist where applicable.",
+      "notes": "Delegated owner approval for VSP-10 governance authority. This is not Code Connect, SwiftUI implementation proof, device proof, accessibility proof, release readiness, or a final-status claim."
     },
     {
       "proof_id": "vsp-10-dynamic-type-screenshot",

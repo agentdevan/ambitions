@@ -47,7 +47,7 @@ Rollback plan:
 ## VSP-02 - VSP-02 Today Reality Window
 
 - Parent issue mirror: `AMB-1481`
-- Recommended status: `Needs Repair`
+- Recommended status: `Spec Ready`
 - Labels: VSP, today, surface-content, yellow-proof
 - Blocked by: VSP-01 shell parity, VSP-10 source-owner map, VSP-09 accessibility matrix, owner approval
 - Do not create now: `True`
@@ -62,7 +62,7 @@ Validation summary:
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
 - Produce Today SwiftUI parity leaf from approved Figma frame - scope: Today content only inside VSP-01 shell - status: Spec Ready after owner approval
-- Capture Today accessibility and state matrix proof - scope: Dynamic Type, VoiceOver, Reduce Motion, contrast, screenshots - status: Needs Repair
+- Capture Today accessibility and state matrix proof - scope: Dynamic Type, VoiceOver, Reduce Motion, contrast, screenshots - status: Spec Ready
 
 Standard Codex closeout block:
 
@@ -292,9 +292,9 @@ Rollback plan:
 ## VSP-09 - VSP-09 Motion / Haptics / Accessibility Matrix
 
 - Parent issue mirror: `AMB-1488`
-- Recommended status: `Needs Repair`
+- Recommended status: `Spec Ready`
 - Labels: VSP, accessibility, motion, haptics, yellow-proof
-- Blocked by: owner approval, manual accessibility proof, device haptic note
+- Blocked by: manual accessibility proof, device haptic note
 - Do not create now: `True`
 
 Acceptance summary:
@@ -306,7 +306,7 @@ Validation summary:
 - python3 scripts/ambitions-vsp-provenance-audit.py
 - git diff --check
 Recommended sub-issues:
-- Define cross-VSP accessibility/motion/haptics acceptance matrix - scope: Dynamic Type, VoiceOver, Reduce Motion, contrast, transparency, haptics - status: Needs Repair
+- Define cross-VSP accessibility/motion/haptics acceptance matrix - scope: Dynamic Type, VoiceOver, Reduce Motion, contrast, transparency, haptics - status: Spec Ready
 - Attach manual/device proof for accessibility and haptics - scope: proof only; no product UI Green without proof - status: Needs Repair
 
 Standard Codex closeout block:
@@ -327,23 +327,23 @@ Rollback plan:
 ## VSP-10 - VSP-10 Implementation Anatomy
 
 - Parent issue mirror: `AMB-1489`
-- Recommended status: `Needs Repair`
+- Recommended status: `Spec Ready`
 - Labels: VSP, implementation-anatomy, provenance, yellow-proof
-- Blocked by: owner approval, component preview proof, source-owner review
+- Blocked by: component preview proof
 - Do not create now: `True`
 
 Acceptance summary:
 - Git registry is canonical for Codex source ownership.
 - Linear is mirror only.
-- Figma annotations are generated/manual until Code Connect is available.
+- Figma annotations are generated/manual and Code-Connect-free.
 Validation summary:
 - python3 scripts/ambitions-component-inventory-generate.py
 - python3 scripts/ambitions-provenance-report-generate.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 - git diff --check
 Recommended sub-issues:
-- Maintain Git-owned VSP SwiftUI source-owner registry - scope: docs/design/provenance only - status: Needs Repair
-- Generate source inventory and provenance audit - scope: scripts and generated docs only - status: Needs Repair
+- Maintain Git-owned VSP SwiftUI source-owner registry - scope: docs/design/provenance only - status: Spec Ready
+- Generate source inventory and provenance audit - scope: scripts and generated docs only - status: Spec Ready
 
 Standard Codex closeout block:
 

@@ -49,7 +49,7 @@
       "vsp_id": "VSP-02",
       "likely_parent_issue": "AMB-1481",
       "recommended_parent_title": "VSP-02 Today Reality Window",
-      "recommended_status": "Needs Repair",
+      "recommended_status": "Spec Ready",
       "recommended_labels": [
         "VSP",
         "today",
@@ -65,7 +65,7 @@
         {
           "title": "Capture Today accessibility and state matrix proof",
           "scope": "Dynamic Type, VoiceOver, Reduce Motion, contrast, screenshots",
-          "recommended_status": "Needs Repair"
+          "recommended_status": "Spec Ready"
         }
       ],
       "blocked_by": [
@@ -372,7 +372,7 @@
       "vsp_id": "VSP-09",
       "likely_parent_issue": "AMB-1488",
       "recommended_parent_title": "VSP-09 Motion / Haptics / Accessibility Matrix",
-      "recommended_status": "Needs Repair",
+      "recommended_status": "Spec Ready",
       "recommended_labels": [
         "VSP",
         "accessibility",
@@ -384,7 +384,7 @@
         {
           "title": "Define cross-VSP accessibility/motion/haptics acceptance matrix",
           "scope": "Dynamic Type, VoiceOver, Reduce Motion, contrast, transparency, haptics",
-          "recommended_status": "Needs Repair"
+          "recommended_status": "Spec Ready"
         },
         {
           "title": "Attach manual/device proof for accessibility and haptics",
@@ -393,7 +393,6 @@
         }
       ],
       "blocked_by": [
-        "owner approval",
         "manual accessibility proof",
         "device haptic note"
       ],
@@ -408,7 +407,7 @@
         "git diff --check"
       ],
       "closeout_required": [
-        "accessibility matrix",
+        "owner-approved accessibility matrix",
         "Reduce Motion walkthrough",
         "haptic device note"
       ],
@@ -418,7 +417,7 @@
       "vsp_id": "VSP-10",
       "likely_parent_issue": "AMB-1489",
       "recommended_parent_title": "VSP-10 Implementation Anatomy",
-      "recommended_status": "Needs Repair",
+      "recommended_status": "Spec Ready",
       "recommended_labels": [
         "VSP",
         "implementation-anatomy",
@@ -429,23 +428,21 @@
         {
           "title": "Maintain Git-owned VSP SwiftUI source-owner registry",
           "scope": "docs/design/provenance only",
-          "recommended_status": "Needs Repair"
+          "recommended_status": "Spec Ready"
         },
         {
           "title": "Generate source inventory and provenance audit",
           "scope": "scripts and generated docs only",
-          "recommended_status": "Needs Repair"
+          "recommended_status": "Spec Ready"
         }
       ],
       "blocked_by": [
-        "owner approval",
-        "component preview proof",
-        "source-owner review"
+        "component preview proof"
       ],
       "acceptance_summary": [
         "Git registry is canonical for Codex source ownership.",
         "Linear is mirror only.",
-        "Figma annotations are generated/manual until Code Connect is available."
+        "Figma annotations are generated/manual and Code-Connect-free."
       ],
       "validation_summary": [
         "python3 scripts/ambitions-component-inventory-generate.py",
@@ -456,6 +453,7 @@
       "closeout_required": [
         "generated inventories",
         "audit report",
+        "owner approval record",
         "non-claims for Code Connect and Visual Green"
       ],
       "do_not_create_now": true

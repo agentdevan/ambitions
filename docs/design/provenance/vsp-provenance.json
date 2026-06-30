@@ -141,7 +141,7 @@
       "vsp_id": "VSP-02",
       "title": "Today Reality Window",
       "category": "surface_content",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Spec Ready",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
@@ -999,7 +999,7 @@
       "vsp_id": "VSP-09",
       "title": "Motion / Haptics / Accessibility Matrix",
       "category": "motion_accessibility_haptics",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Spec Ready",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
@@ -1008,10 +1008,12 @@
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-crop-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png"
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-09-10-delegated-approval/vsp-09-accessibility-motion-haptics-approved.png"
         ],
         "evidence_paths": [
           "docs/design/provenance/figma-frames/VSP-09-accessibility-motion-haptics-matrix-R1.md",
+          "docs/design/provenance/owner-approvals/VSP-09-Accessibility-Motion-Haptics-Matrix-approval.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
         ],
@@ -1062,7 +1064,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1488",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Spec Ready",
         "recommended_labels": [
           "VSP",
           "accessibility",
@@ -1086,7 +1088,9 @@
         "privacy_boundary": false
       },
       "proof_present": {
-        "owner_approval": [],
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-09-Accessibility-Motion-Haptics-Matrix-approval.md"
+        ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
         "dynamic_type": [],
@@ -1106,7 +1110,6 @@
         "Haptic policy needs device proof, not source-only review."
       ],
       "missing_evidence": [
-        "owner approval",
         "live SwiftUI accessibility/motion screenshots",
         "device haptic note",
         "manual VoiceOver order",
@@ -1114,19 +1117,19 @@
         "Reduce Motion and Reduce Transparency walkthroughs"
       ],
       "green_blockers": [
-        "No owner approval.",
         "No manual accessibility proof.",
         "No haptic device proof."
       ],
       "notes": [
-        "VSP-09 is the acceptance matrix for all later visual packets. Motion remains cross-surface behavior."
+        "VSP-09 is the acceptance matrix for all later visual packets. Motion remains cross-surface behavior.",
+        "Delegated owner approval recorded on 2026-06-30 for governance authority only; proof ceiling remains Yellow."
       ]
     },
     {
       "vsp_id": "VSP-10",
       "title": "Implementation Anatomy",
       "category": "implementation_anatomy",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Spec Ready",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
@@ -1135,10 +1138,12 @@
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-crop-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png"
+          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-09-10-delegated-approval/vsp-10-implementation-anatomy-approved.png"
         ],
         "evidence_paths": [
           "docs/design/provenance/figma-frames/VSP-10-implementation-anatomy-source-owner-map-R1.md",
+          "docs/design/provenance/owner-approvals/VSP-10-Implementation-Anatomy-Source-Owner-Map-approval.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
           "docs/design/provenance/component-registry.json"
@@ -1188,7 +1193,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1489",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Spec Ready",
         "recommended_labels": [
           "VSP",
           "implementation-anatomy",
@@ -1212,7 +1217,9 @@
         "privacy_boundary": false
       },
       "proof_present": {
-        "owner_approval": [],
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-10-Implementation-Anatomy-Source-Owner-Map-approval.md"
+        ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
         "dynamic_type": [],
@@ -1232,18 +1239,15 @@
         "Generated inventory can contain stale/internal names that are not product IA."
       ],
       "missing_evidence": [
-        "owner approval",
         "component preview matrix proof",
-        "accessibility acceptance matrix proof",
         "explicit stale-vocabulary cleanup plan for source-level compatibility names"
       ],
       "green_blockers": [
-        "No owner approval.",
-        "No owner-approved source-owner handoff.",
         "No component preview proof."
       ],
       "notes": [
-        "VSP-10 is implementation anatomy and provenance. It is not user-facing product UI and cannot substitute for product hero proof."
+        "VSP-10 is implementation anatomy and provenance. It is not user-facing product UI and cannot substitute for product hero proof.",
+        "Delegated owner approval recorded on 2026-06-30 for governance authority only; proof ceiling remains Yellow."
       ]
     }
   ]

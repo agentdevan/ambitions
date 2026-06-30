@@ -154,7 +154,6 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI accessibility/motion screenshots
 - live SwiftUI screenshot
 - manual VoiceOver order
-- owner approval
 - runtime behavior
 ### VSP-10 - Implementation Anatomy
 
@@ -163,7 +162,5 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - Reduce Motion
 - Reduce Transparency
 - VoiceOver
-- accessibility acceptance matrix proof
 - component preview matrix proof
 - explicit stale-vocabulary cleanup plan for source-level compatibility names
-- owner approval

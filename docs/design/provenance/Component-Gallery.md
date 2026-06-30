@@ -199,6 +199,7 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-crop-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-09-10-delegated-approval/vsp-09-accessibility-motion-haptics-approved.png
 SwiftUI source owners:
 - Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift
 - Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift
@@ -225,6 +226,7 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-crop-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-09-10-delegated-approval/vsp-10-implementation-anatomy-approved.png
 SwiftUI source owners:
 - docs/design/provenance/component-registry.json
 - docs/design/provenance/vsp-provenance.json

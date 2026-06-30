@@ -136,8 +136,8 @@ SwiftUI source owner: Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.s
 Allowed implementation area: Native/Ambitions/Stage/Motion, Native/Ambitions/Interaction, Native/Ambitions/DesignSystem/Accessibility, Sources/Accessibility, Sources/Components
 Forbidden implementation area: Native/Ambitions/Surfaces/Motion, Motion root destination, motion analytics dashboard, score/streak/XP layer
 Proof ceiling: Yellow
-Missing proof: owner approval, live SwiftUI accessibility/motion screenshots, device haptic note, manual VoiceOver order, Dynamic Type matrix, Reduce Motion and Reduce Transparency walkthroughs
-Linear mirror: AMB-1488 (Needs Repair)
+Missing proof: live SwiftUI accessibility/motion screenshots, device haptic note, manual VoiceOver order, Dynamic Type matrix, Reduce Motion and Reduce Transparency walkthroughs
+Linear mirror: AMB-1488 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 
@@ -151,7 +151,7 @@ SwiftUI source owner: docs/design/provenance/component-registry.json, docs/desig
 Allowed implementation area: docs/design/provenance, Sources/Components, Sources/Previews, Native/Ambitions/Quality
 Forbidden implementation area: product UI implementation from anatomy board alone, shell mutation, Linear as source of truth, Code Connect completion claim
 Proof ceiling: Yellow
-Missing proof: owner approval, component preview matrix proof, accessibility acceptance matrix proof, explicit stale-vocabulary cleanup plan for source-level compatibility names
-Linear mirror: AMB-1489 (Needs Repair)
+Missing proof: component preview matrix proof, explicit stale-vocabulary cleanup plan for source-level compatibility names
+Linear mirror: AMB-1489 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
