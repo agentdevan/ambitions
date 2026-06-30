@@ -74,6 +74,31 @@
     },
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "160:93",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-02 - owner review package - Rail Aperture Today - R1",
+      "vsp_id": "VSP-02",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-hero.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-marketing-crop.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-accessibility-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-swiftui-anatomy.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-02-owner-review-package-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-02---today-reality-window",
+      "notes": [
+        "Packages selected R6/R1 Today Rail-Aperture direction into explicit owner-review frames.",
+        "Child frames include hero 160:100, marketing crop 160:200, SwiftUI anatomy 160:300, accessibility matrix 160:343, state matrix pointer 160:386, and non-claims 160:390.",
+        "Content-only inside VSP-01 shell authority; no shell mutation, source implementation, Visual Green, device proof, runtime proof, or accessibility conformance is claimed."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
       "node_id": "14:171",
       "node_id_status": "known",
       "frame_name": "CANDIDATE - VSP-03 - Goals Life Area Atlas hero - R1",

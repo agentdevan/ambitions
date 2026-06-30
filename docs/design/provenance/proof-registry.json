@@ -135,11 +135,18 @@
         "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-calm-default-r1-readable.png",
         "docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-reduce-motion-r1-readable.png",
         "docs/design/provenance/figma-frames/VSP-02-today-reality-window-R2.md",
-        "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md"
+        "docs/qa/evidence/2026-06-30-vsp-02-r2-today-workshop/manifest.md",
+        "docs/design/provenance/figma-frames/VSP-02-owner-review-package-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-hero.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-marketing-crop.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-accessibility-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-swiftui-anatomy.png"
       ],
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow/Ready For Review candidate evidence and owner-review routing only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, runtime behavior, or accessibility conformance.",
-      "notes": "R6 selected direction evidence for Rail-Attached Time Bands + Current Aperture plus R1 state matrix evidence at Figma node 152:93. R2 remains historical lineage; original R1 was reclassified as failure evidence. Readable PNGs use temporary Inter-font export clones because system-font text is dropped by current Figma export."
+      "notes": "R6 selected direction evidence for Rail-Attached Time Bands + Current Aperture, R1 state matrix evidence at Figma node 152:93, and R1 owner-review package at Figma node 160:93. R2 remains historical lineage; original R1 was reclassified as failure evidence. Readable PNGs use Inter-font export clones where current Figma export drops SF Pro/system-font text."
     },
     {
       "proof_id": "vsp-02-owner-approval",

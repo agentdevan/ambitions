@@ -39,6 +39,11 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-matrix-r1-readable-board.png
 - docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-calm-default-r1-readable.png
 - docs/qa/evidence/2026-06-30-vsp-02-r1-state-matrix/vsp-02-rail-aperture-state-reduce-motion-r1-readable.png
+- docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-board.png
+- docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-hero.png
+- docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-marketing-crop.png
+- docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-accessibility-matrix.png
+- docs/qa/evidence/2026-06-30-vsp-02-r1-owner-review-package/vsp-02-owner-review-package-r1-swiftui-anatomy.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Today/TodaySurface.swift
 - Native/Ambitions/Surfaces/Today/TodayObjectView.swift

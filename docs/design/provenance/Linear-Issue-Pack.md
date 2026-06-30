@@ -59,6 +59,8 @@ Acceptance summary:
 - Analytics, risk, open time, drive, and proof signals must be integrated into the viewport object, not detached KPI dashboard rows.
 - No dashboard, task list, card feed, calendar clone, Capture root, Motion root, or shell mutation.
 - Implementation leaf must list exact source owners, new vertical rail/current-aperture primitive requirements, non-goals, and proof artifacts.
+- Owner-review package at Figma node 160:93 explicitly provides hero, marketing crop, SwiftUI anatomy, accessibility matrix, state-matrix pointer, and non-claims frames for the selected R6/R1 direction.
+- Owner review should evaluate node 160:93 together with R6 selected direction node 134:44/134:48 and R1 state matrix node 152:93 before implementation handoff.
 Validation summary:
 - Figma Production Gate review before owner approval
 - focused Today tests after source implementation
