@@ -30,12 +30,12 @@ Durable proof paths:
 
 Status impact:
 - VSP-04/F direction lock is owner-approved.
-- VSP-04 remains `Needs Repair` because the full VSP-04/F candidate package has not been built yet.
-- The next required packet is the complete VSP-04/F candidate package: hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof.
-- VSP-04 remains Yellow overall until the candidate package, live SwiftUI parity, device, Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, haptics, runtime mutation, and proof-receipt evidence exist.
+- This direction-lock approval is superseded for current package status by `docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md`.
+- The complete VSP-04/F owner-review package at Figma node `202:93` is now owner-approved as the visual/Figma target.
+- VSP-04 may move to `Spec Ready` for future bounded implementation leaf work.
+- VSP-04 remains Yellow overall until live SwiftUI parity, device, Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, haptics, runtime mutation, and proof-receipt evidence exist.
 
 Non-claims:
-- No complete VSP-04/F candidate package yet.
 - No source implementation.
 - No live SwiftUI parity proof.
 - No simulator or device proof.

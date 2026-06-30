@@ -1,8 +1,8 @@
 # VSP-04 F Apple-Native Life Calendar Owner Review Package R1
 
-Status: Yellow / Ready For Review candidate package.
+Status: Yellow owner-approved visual/Figma target.
 
-Claim boundary: this packages the owner-selected VSP-04/F Apple-Native Life Calendar direction for owner review. It is not owner-approved final package authority, not Visual Green, not source implementation, not live SwiftUI parity, not device proof, not runtime behavior proof, not accessibility conformance, not Release Green, and not Done.
+Claim boundary: this packages the owner-approved VSP-04/F Apple-Native Life Calendar visual/Figma target. It is not Visual Green, not source implementation, not live SwiftUI parity, not device proof, not runtime behavior proof, not accessibility conformance, not Release Green, and not Done.
 
 ## Figma Frame
 
@@ -16,8 +16,10 @@ Claim boundary: this packages the owner-selected VSP-04/F Apple-Native Life Cale
 - Direction approval source: owner message in Codex thread, `Owner approved`
 - Direction approval date: 2026-06-30
 - Direction approval evidence: `docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md`
-- Package approval state: pending owner review of this full package.
-- Approval scope so far: direction lock only.
+- Package approval source: owner message in Codex thread, `Owner approved`
+- Package approval date: 2026-06-30
+- Package approval evidence: `docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md`
+- Approval scope: visual/Figma target only.
 
 ## Child Frames
 
@@ -88,6 +90,6 @@ PNG proof uses readable Inter export text where needed because the current Figma
 
 ## Required Next Gate
 
-Owner must approve, request repair, or reject this full VSP-04/F package from the Figma frames and exported proof. Source implementation must not begin until an implementation leaf exists with approved frame IDs, source owners, non-goals, required SwiftUI primitives, Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, haptic/static feedback acceptance criteria, validation commands, proof artifacts, and rollback plan.
+Create a bounded Codex implementation leaf before source work begins. The leaf must include approved frame IDs, source owners, non-goals, required SwiftUI primitives, Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, Increase Contrast, haptic/static feedback acceptance criteria, validation commands, proof artifacts, and rollback plan.
 
-Even if owner approval is granted, VSP-04 remains Yellow until source, device, runtime, accessibility, and validation proof are separately produced.
+Even with owner approval, VSP-04 remains Yellow until source, device, runtime, accessibility, and validation proof are separately produced.

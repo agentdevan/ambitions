@@ -1,8 +1,8 @@
 # VSP-04 F Apple-Native Life Calendar Owner Review Package R1 Evidence
 
-Status: Yellow / Ready For Review candidate package.
+Status: Yellow owner-approved visual/Figma target.
 
-Claim boundary: this records Figma package evidence only. It does not claim full owner approval, Visual Green, source implementation, SwiftUI parity, device proof, runtime behavior, accessibility conformance, Release Green, or Done.
+Claim boundary: this records Figma target and owner approval evidence only. It does not claim Visual Green, source implementation, SwiftUI parity, device proof, runtime behavior, accessibility conformance, Release Green, or Done.
 
 ## Figma
 
@@ -14,8 +14,8 @@ Claim boundary: this records Figma package evidence only. It does not claim full
 ## Owner Review State
 
 - Direction approval evidence: `docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md`
-- Package approval state: pending owner review.
-- Approval scope so far: selected VSP-04/F direction only.
+- Package approval evidence: `docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md`
+- Approval scope: visual/Figma target only.
 
 ## Frame Nodes
 
@@ -48,9 +48,9 @@ Claim boundary: this records Figma package evidence only. It does not claim full
 - New SwiftUI primitives likely required: `MonthLifeCalendarGrid`, `MonthLifeCalendarSemanticOverlay`, `MonthReflowProtectionMarker`.
 - Accessibility proof: Figma acceptance matrix included; live/manual accessibility proof not run.
 - SwiftUI proof: not run; no source implementation.
-- Owner approval: direction lock present; full package approval pending.
+- Owner approval: present for the visual/Figma target only.
 - Figma repair made: state-matrix mini-calendar chip labels were widened and protected/recovery copy was tightened before final export.
 
 ## Next Gate
 
-Owner must approve, repair, or reject the full VSP-04/F owner-review package. VSP-04 remains Yellow until source, device, runtime, accessibility, and validation proof are separately produced.
+Create a bounded Codex implementation leaf before source work begins. VSP-04 remains Yellow until source, device, runtime, accessibility, and validation proof are separately produced.

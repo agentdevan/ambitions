@@ -10,7 +10,7 @@ Frame name: `EXPLORATION - VSP-04 - PART 01 - Time LifeShape root object options
 
 This frame is exploration evidence for owner selection only. It is not owner approval, Visual Green, source implementation, SwiftUI parity proof, device proof, runtime proof, accessibility conformance, release proof, or Done.
 
-VSP-04 remains `Needs Repair / Yellow` until the owner selects a direction and a complete VSP-04 candidate package is built and approved.
+This Part 01 exploration board is superseded by the owner-selected VSP-04/F direction and the complete owner-approved package at Figma node `202:93`. It remains Yellow exploration evidence only and does not itself prove SwiftUI parity, Visual Green, source implementation, device proof, runtime proof, accessibility conformance, release proof, or Done.
 
 ## Shell Boundary
 

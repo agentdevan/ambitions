@@ -267,7 +267,7 @@
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-04-part-01-time-lifeshape-root-object-options-R1.md",
       "notes": [
         "Six content-only VSP-04 Part 01 root object options for owner selection.",
-        "VSP-04 remains Needs Repair / Yellow until owner selects a direction and a full candidate package is built and approved.",
+        "This Part 01 exploration board is superseded by the owner-selected VSP-04/F direction and the complete owner-approved package at Figma node 202:93.",
         "No shell mutation, owner approval, Visual Green, source implementation, device proof, runtime proof, or accessibility conformance is claimed."
       ]
     },
@@ -488,14 +488,15 @@
       ],
       "evidence_doc_paths": [
         "docs/design/provenance/figma-frames/VSP-04-F-apple-native-life-calendar-owner-review-package-R1.md",
-        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/manifest.md"
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/manifest.md",
+        "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md"
       ],
       "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-04-F-apple-native-life-calendar-owner-review-package-R1.md",
       "notes": [
         "Packages the owner-selected F Apple-Native Life Calendar direction into hero, state matrix, accessibility matrix, SwiftUI anatomy, marketing crop, and non-claims frames.",
-        "Ready For Review / Yellow package evidence only. Full owner approval remains pending.",
-        "Content-only inside VSP-01 shell authority; no shell mutation, source implementation, device proof, runtime proof, Visual Green, or accessibility conformance is claimed."
+        "Content-only inside VSP-01 shell authority; no shell mutation, source implementation, device proof, runtime proof, Visual Green, or accessibility conformance is claimed.",
+        "Owner-approved visual/Figma target for VSP-04/F Apple-Native Life Calendar."
       ]
     }
   ]

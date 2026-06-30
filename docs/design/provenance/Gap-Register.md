@@ -70,7 +70,6 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - VoiceOver
 - VoiceOver month summary proof
 - device screenshot
-- full VSP-04/F owner-review package approval
 - haptics
 - live SwiftUI Time parity screenshot
 - live SwiftUI screenshot

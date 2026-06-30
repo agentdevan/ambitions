@@ -471,11 +471,12 @@
         "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-accessibility-matrix.png",
         "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-swiftui-anatomy.png",
         "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-marketing-crop.png",
-        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-non-claims.png"
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-non-claims.png",
+        "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports Yellow/Ready For Review candidate evidence and owner-review routing only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, runtime behavior, or accessibility conformance.",
-      "notes": "Candidate Figma evidence for VSP-04/F Apple-Native Life Calendar owner-review package at Figma node 202:93. This is not full owner approval and does not mark VSP-04 Green or Done."
+      "proof_ceiling_impact": "Supports Yellow/Spec Ready candidate evidence and owner-approved Figma target routing only. Does not prove SwiftUI parity, Visual Green, source implementation, device behavior, runtime behavior, or accessibility conformance.",
+      "notes": "Candidate Figma evidence for owner-approved VSP-04/F Apple-Native Life Calendar package at Figma node 202:93. This does not mark VSP-04 Green or Done."
     },
     {
       "proof_id": "vsp-04-owner-review-package-r1",
@@ -491,11 +492,12 @@
         "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-accessibility-matrix.png",
         "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-swiftui-anatomy.png",
         "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-marketing-crop.png",
-        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-non-claims.png"
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-non-claims.png",
+        "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports Yellow/Ready For Review package evidence only. Does not prove full owner approval, SwiftUI parity, Visual Green, source implementation, device behavior, runtime behavior, or accessibility conformance.",
-      "notes": "Full VSP-04/F Apple-Native Life Calendar owner-review package at Figma node 202:93. Package approval remains pending owner review."
+      "proof_ceiling_impact": "Supports Yellow/Spec Ready package evidence and owner-approved visual/Figma target routing only. Does not prove SwiftUI parity, Visual Green, source implementation, device behavior, runtime behavior, or accessibility conformance.",
+      "notes": "Full VSP-04/F Apple-Native Life Calendar owner-review package at Figma node 202:93 is owner-approved as visual/Figma target only."
     },
     {
       "proof_id": "vsp-04-figma-exploration-part-01",
@@ -515,7 +517,7 @@
       ],
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow exploration and owner-selection routing only. Does not prove owner approval, SwiftUI parity, Visual Green, source implementation, device behavior, runtime behavior, or accessibility conformance.",
-      "notes": "Six VSP-04 Part 01 Time root object options were built in Figma at node 182:93. VSP-04 remains Needs Repair until owner selects a direction and a complete candidate package is built."
+      "notes": "Six VSP-04 Part 01 Time root object options were built in Figma at node 182:93. This exploration proof is superseded by the owner-selected VSP-04/F direction and the complete owner-approved package at Figma node 202:93."
     },
     {
       "proof_id": "vsp-04-owner-approval",
@@ -523,11 +525,26 @@
       "proof_type": "owner_approval",
       "status": "present",
       "artifact_paths": [
-        "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md"
+        "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md",
+        "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Satisfies owner-approval evidence for the VSP-04/F direction lock only. VSP-04 remains Yellow until full package approval, live SwiftUI, device, accessibility, haptics, runtime, and validation proof exist.",
-      "notes": "Owner approved the VSP-04/F Apple-Native Life Calendar direction lock on 2026-06-30. This is not full package approval, source implementation proof, device proof, accessibility proof, release readiness, Visual Green, or Done."
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for the VSP-04/F direction lock and full visual/Figma package only. VSP-04 remains Yellow until live SwiftUI, device, accessibility, haptics, runtime, and validation proof exist.",
+      "notes": "Owner approved the VSP-04/F direction lock and full owner-review package on 2026-06-30. This is not source implementation proof, device proof, accessibility proof, release readiness, Visual Green, or Done."
+    },
+    {
+      "proof_id": "vsp-04-owner-approval-package-r1",
+      "vsp_id": "VSP-04",
+      "proof_type": "owner_approval",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md",
+        "docs/design/provenance/figma-frames/VSP-04-F-apple-native-life-calendar-owner-review-package-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/manifest.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for the VSP-04/F visual/Figma target only. VSP-04 remains Yellow until live SwiftUI, device, accessibility, haptics, runtime, and validation proof exist.",
+      "notes": "Owner approved the full VSP-04/F Apple-Native Life Calendar package on 2026-06-30. This is not source implementation proof, device proof, accessibility proof, release readiness, Visual Green, or Done."
     },
     {
       "proof_id": "vsp-04-swiftui-simulator-screenshot",

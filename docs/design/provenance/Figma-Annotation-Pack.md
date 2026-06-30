@@ -61,8 +61,8 @@ SwiftUI source owner: Native/Ambitions/Surfaces/Time/TimeSurface.swift, Native/A
 Allowed implementation area: Native/Ambitions/Surfaces/Time, Native/Ambitions/Core/Time, Native/Ambitions/Core/LocalRuntimeOS/TimeEngine, Native/Ambitions/DesignSystem/ProductObjects, Native/Ambitions/Rendering/CanvasPrimitives, Sources/Components
 Forbidden implementation area: Native/Ambitions/Stage shell mutations, calendar-clone-only root pattern, top-level stale planning IA, unproven external calendar dependency for core value, Today-owned day timeline duplication as Time root
 Proof ceiling: Yellow
-Missing proof: live SwiftUI Time parity screenshot, device screenshot, manual accessibility matrix, reflow/protection runtime proof, VoiceOver month summary proof, Dynamic Type month-grid stress proof, Reduce Motion static reflow marker proof, full VSP-04/F owner-review package approval
-Linear mirror: AMB-1483 (Ready For Review)
+Missing proof: live SwiftUI Time parity screenshot, device screenshot, manual accessibility matrix, reflow/protection runtime proof, VoiceOver month summary proof, Dynamic Type month-grid stress proof, Reduce Motion static reflow marker proof
+Linear mirror: AMB-1483 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 
