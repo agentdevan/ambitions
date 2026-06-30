@@ -294,6 +294,70 @@
     },
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "207:293",
+      "frame_name": "F - Quiet Placement Review selected direction from VSP-05 Part 01 R2",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
+        "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/manifest.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
+      "notes": [
+        "Owner-approved VSP-05/F direction lock for candidate-package buildout.",
+        "Direction only; full VSP-05 candidate package, source implementation, device proof, accessibility proof, Visual Green, Release Green, and Done are not claimed."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "207:93",
+      "frame_name": "EXPLORATION - VSP-05 - PART 01 - global Capture composer options - R2",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-b-route-bloom-composer-r2.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-d-keyboard-native-stage-composer-r2.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/manifest.md",
+        "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md"
+      ],
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
+      "notes": [
+        "R2 repaired VSP-05 Part 01 options board.",
+        "Owner approved F Quiet Placement Review direction from this board on 2026-06-30."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "vsp_id": "VSP-05",
+      "node_id_status": "known",
+      "provenance_annotation_status": "present",
+      "node_id": "206:93",
+      "frame_name": "FAILURE_EVIDENCE - VSP-05 - PART 01 - R1 oversized typography and board density",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/vsp-05-part-01-options-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/manifest.md"
+      ],
+      "annotation_copy_anchor": "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/manifest.md",
+      "notes": [
+        "R1 failure evidence retained after screenshot inspection.",
+        "Not owner-approved, not candidate evidence, and not implementation authority."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
       "node_id": "14:713",
       "node_id_status": "known",
       "frame_name": "CANDIDATE - VSP-06 - You Native Settings hero - R1",

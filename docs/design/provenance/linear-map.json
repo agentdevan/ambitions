@@ -218,46 +218,61 @@
       "vsp_id": "VSP-05",
       "likely_parent_issue": "AMB-1484",
       "recommended_parent_title": "VSP-05 Capture Open Field Composer",
-      "recommended_status": "Needs Repair",
+      "recommended_status": "Ready For Review",
       "recommended_labels": [
         "VSP",
         "capture",
         "global-composer",
-        "yellow-proof"
+        "yellow-proof",
+        "owner-approved-direction",
+        "selected-f-quiet-placement",
+        "candidate-package-needed"
       ],
       "recommended_sub_issues": [
         {
-          "title": "Repair Capture Figma handoff before source implementation",
-          "scope": "prove global composer, keyboard, proposal, receipt states",
-          "recommended_status": "Needs Repair"
+          "title": "Build VSP-05/F Quiet Placement Review candidate package",
+          "scope": "Figma-only owner-review package with hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof; no source implementation",
+          "recommended_status": "Ready For Review"
         },
         {
-          "title": "Produce Capture SwiftUI parity leaf",
-          "scope": "Composer/Capture and Stage overlay routing only",
-          "recommended_status": "Spec Ready after owner approval"
+          "title": "Produce Capture SwiftUI parity leaf from owner-approved VSP-05/F package",
+          "scope": "Composer/Capture and Stage overlay routing only after complete owner-approved Figma package and implementation authorization",
+          "recommended_status": "Spec Ready after package approval and implementation authorization"
+        },
+        {
+          "title": "Prove Capture keyboard, route preview, receipt, and accessibility states",
+          "scope": "Dynamic Type, VoiceOver order/actions, Reduce Motion static proof step, Reduce Transparency, Increase Contrast, haptics, keyboard/device screenshots, offline save/proposal/receipt proof",
+          "recommended_status": "Spec Ready after package approval"
         }
       ],
       "blocked_by": [
-        "VSP-01 shell parity",
-        "VSP-10 source-owner map",
-        "VSP-09 accessibility matrix",
-        "owner approval",
-        "composer keyboard proof"
+        "complete VSP-05/F owner-review package",
+        "keyboard/device proof",
+        "accessibility and reduced-motion proof",
+        "offline save/proposal/receipt runtime proof"
       ],
       "acceptance_summary": [
+        "Current owner-approved direction lock is VSP-05/F Quiet Placement Review from Part 01 R2 at selected option node 207:293.",
+        "Use F as the primary Capture direction for candidate-package buildout; D may inform keyboard/focus implementation expectations, but the direction is not a B/D/F synthesis.",
         "Capture remains global composer.",
-        "No tab, root surface, inbox, notes feed, chatbot, or persistent competing affordance.",
-        "Offline save/proposal/receipt states must be proven before Green."
+        "No tab, root surface, inbox, notes feed, category wall, chatbot, persistent floating plus surface, or competing shell affordance.",
+        "Full candidate package must include hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshots before Spec Ready.",
+        "Offline save/proposal/receipt states must be proven before Green.",
+        "No VSP-01 shell mutation, no Motion destination, no cloud LLM core, and no R2/private graph behavior."
       ],
       "validation_summary": [
+        "Figma Production Gate review and owner direction approval recorded before package buildout",
         "focused Capture tests after source implementation",
         "python3 scripts/ambitions-green-standard-audit.py",
         "python3 scripts/ambitions-vsp-provenance-audit.py"
       ],
       "closeout_required": [
-        "approved frame ID",
-        "keyboard/device screenshot proof",
-        "runtime proof for save/proposal/receipt"
+        "VSP-05/F selected option node 207:293 and source board node 207:93",
+        "owner direction approval evidence path",
+        "complete owner-review package frame ID and durable proof paths before Spec Ready",
+        "keyboard/device screenshot proof after source implementation",
+        "runtime proof for save/proposal/receipt after source implementation",
+        "explicit non-claims for no Visual Green, no source implementation, no runtime/device/accessibility proof, and no shell mutation until actually proven"
       ],
       "do_not_create_now": true
     },

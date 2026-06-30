@@ -8,7 +8,7 @@ Claim boundary: this audit checks provenance-system coherence only. It is not Co
 
 - Blocking failures: 0
 - Warnings: 0
-- Yellow proof gaps: 89
+- Yellow proof gaps: 88
 
 ## Blocking Failures
 
@@ -55,7 +55,6 @@ Claim boundary: this audit checks provenance-system coherence only. It is not Co
 - VSP-04: reduce_transparency_check is missing
 - VSP-04: haptic_device_note is missing
 - VSP-04: runtime_behavior_test is missing
-- VSP-05: owner_approval is missing
 - VSP-05: swiftui_simulator_screenshot is missing
 - VSP-05: swiftui_device_screenshot is missing
 - VSP-05: dynamic_type_screenshot is missing

@@ -654,23 +654,59 @@
       "proof_type": "figma_candidate",
       "status": "present",
       "artifact_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png",
+        "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/manifest.md",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-hero-r1.png",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-crop-r1.png",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-launch-board-r1.png"
       ],
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow candidate evidence only. Does not prove SwiftUI parity, Visual Green, owner approval, device behavior, or accessibility conformance.",
-      "notes": "Candidate Figma evidence for Capture Open Field Composer."
+      "notes": "Candidate/exploration Figma evidence for Capture Open Field Composer. The current owner-approved direction basis is F Quiet Placement Review from node 207:293; a complete candidate package is still missing."
+    },
+    {
+      "proof_id": "vsp-05-part-01-r1-failure-evidence",
+      "vsp_id": "VSP-05",
+      "proof_type": "failure_evidence",
+      "status": "present",
+      "artifact_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/vsp-05-part-01-options-board-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Documents rejected R1 quality defects so the failure is not mistaken for approved candidate evidence.",
+      "notes": "R1 was renamed failure evidence after screenshot inspection showed oversized typography, text collision, keyboard clipping, and weak board density."
+    },
+    {
+      "proof_id": "vsp-05-part-01-options-r2",
+      "vsp_id": "VSP-05",
+      "proof_type": "figma_exploration",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/manifest.md",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-d-keyboard-native-stage-composer-r2.png",
+        "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-b-route-bloom-composer-r2.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow exploration evidence and owner direction selection only. Does not prove a complete candidate package, SwiftUI parity, device behavior, accessibility conformance, runtime behavior, Visual Green, Release Green, or Done.",
+      "notes": "R2 repaired the R1 typography/spacing failures and provided six global Capture composer options for owner review."
     },
     {
       "proof_id": "vsp-05-owner-approval",
       "vsp_id": "VSP-05",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-05 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports owner-approved direction lock only. VSP-05 remains Yellow and not Spec Ready until the complete F Quiet Placement Review candidate package is built and approved, then SwiftUI/device/accessibility/runtime proof is produced.",
+      "notes": "Owner approved VSP-05/F Quiet Placement Review direction lock on 2026-06-30. This is not source implementation, Visual Green, Release Green, or Done."
     },
     {
       "proof_id": "vsp-05-swiftui-simulator-screenshot",

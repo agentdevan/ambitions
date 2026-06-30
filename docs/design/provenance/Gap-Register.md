@@ -83,14 +83,15 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - Reduce Motion
 - Reduce Transparency
 - VoiceOver
+- complete VSP-05/F Quiet Placement Review candidate package
 - device keyboard/composer screenshots
 - device screenshot
+- full candidate-package owner approval
 - haptics
 - live SwiftUI composer parity screenshot
 - live SwiftUI screenshot
 - manual accessibility matrix
 - offline save/proposal/receipt runtime proof
-- owner approval
 - runtime behavior
 ### VSP-06 - You Native Settings
 

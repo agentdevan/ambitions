@@ -157,9 +157,10 @@ Required later for Green: live render, screenshot matrix, accessibility matrix, 
 ## VSP-05 - Capture Open Field Composer
 
 Figma candidate screenshots:
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-hero-r1.png
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-crop-r1.png
-- docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-launch-board-r1.png
+- docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png
+- docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png
+- docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-d-keyboard-native-stage-composer-r2.png
+- docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-b-route-bloom-composer-r2.png
 SwiftUI source owners:
 - Native/Ambitions/Composer/Capture/CaptureComposerSurface.swift
 - Native/Ambitions/Composer/Capture/CaptureSurface.swift

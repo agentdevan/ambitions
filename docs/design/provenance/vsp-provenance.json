@@ -15,7 +15,8 @@
     "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md",
     "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
     "docs/truth/RELEASE_TRUTH.md",
-    "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md"
+    "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-package-approval.md",
+    "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md"
   ],
   "vsp_packets": [
     {
@@ -650,20 +651,24 @@
       "vsp_id": "VSP-05",
       "title": "Capture Open Field Composer",
       "category": "global_composer",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Ready For Review",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "14:543",
-        "frame_name": "CANDIDATE - VSP-05 - Capture Open Field Composer hero - R1",
+        "node_id": "207:293",
+        "frame_name": "F - Quiet Placement Review selected direction from VSP-05 Part 01 R2",
         "screenshot_paths": [
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-hero-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-crop-r1.png",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-05-capture-launch-board-r1.png"
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-f-quiet-placement-review-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-options-board-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-d-keyboard-native-stage-composer-r2.png",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/vsp-05-part-01-option-b-route-bloom-composer-r2.png"
         ],
         "evidence_paths": [
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
-          "docs/qa/evidence/2026-06-29-vsp-north-star-figma/visual-audit-ledger.md"
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md",
+          "docs/design/provenance/figma-frames/VSP-05-part-01-global-capture-composer-options-R2.md",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r2/manifest.md",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/manifest.md",
+          "docs/qa/evidence/2026-06-30-vsp-05-part-01-capture-options-r1/vsp-05-part-01-options-board-r1.png"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -708,14 +713,17 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1484",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Ready For Review",
         "recommended_labels": [
           "VSP",
           "capture",
           "global-composer",
-          "yellow-proof"
+          "yellow-proof",
+          "owner-approved-direction",
+          "selected-f-quiet-placement",
+          "candidate-package-needed"
         ],
-        "should_create_or_update_now": false
+        "should_create_or_update_now": true
       },
       "proof_required": {
         "owner_approval": true,
@@ -732,7 +740,9 @@
         "privacy_boundary": false
       },
       "proof_present": {
-        "owner_approval": [],
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-05-F-Quiet-Placement-Review-direction-approval.md"
+        ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
         "dynamic_type": [],
@@ -752,19 +762,29 @@
         "Keyboard, save, proposal, receipt, and offline proof are not established by Figma."
       ],
       "missing_evidence": [
-        "owner approval",
+        "complete VSP-05/F Quiet Placement Review candidate package",
+        "full candidate-package owner approval",
         "live SwiftUI composer parity screenshot",
         "device keyboard/composer screenshots",
         "manual accessibility matrix",
         "offline save/proposal/receipt runtime proof"
       ],
       "green_blockers": [
-        "No owner approval.",
+        "No complete VSP-05/F Quiet Placement Review candidate package.",
         "No global route/composer proof.",
         "No device keyboard proof."
       ],
       "notes": [
-        "Capture remains the global composer and must not become a tab, inbox, chatbot, category wall, or root destination."
+        "Capture remains the global composer and must not become a tab, inbox, chatbot, category wall, or root destination.",
+        "VSP-05 Part 01 R2 at Figma node 207:93 provides six owner-selection directions for the global Capture composer.",
+        "R1 at Figma node 206:93 was renamed failure evidence after screenshot inspection showed oversized typography, text collision, keyboard clipping, and weak board density.",
+        "VSP-05 is Ready For Review for owner direction selection only; it is not Spec Ready until the owner selects one direction and a full candidate package is built.",
+        "Apple iOS 26 library components were discoverable, but current Figma tool permissions did not allow importing those library nodes; R2 uses native-shaped fallback primitives and records the limitation.",
+        "Recommended read: F is safest for Codex implementation, D is strongest native keyboard baseline, B is most distinctive but riskier.",
+        "Owner approved F Quiet Placement Review as the VSP-05 Part 01 direction lock on 2026-06-30.",
+        "Option D may inform keyboard/focus implementation expectations, but the selected direction remains F and is not a B/D/F synthesis.",
+        "VSP-05 remains Ready For Review and Yellow because the complete candidate package, live SwiftUI parity, device, accessibility, haptics, runtime, and validation proof are still missing.",
+        "This direction approval does not authorize shell mutation and does not claim source implementation, Visual Green, Release Green, or Done."
       ]
     },
     {
