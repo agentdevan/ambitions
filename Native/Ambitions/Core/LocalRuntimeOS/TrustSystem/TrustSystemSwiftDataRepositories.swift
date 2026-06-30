@@ -212,34 +212,57 @@ extension Array where Element == EventLedgerEntry {
     }
 }
 
-struct SwiftDataAppStateRepository: AppStateRepository {
-    let store: AmbitionsPersistenceStore
+actor InMemoryEventLedgerRepository: EventLedgerRepository {
+    var events: [EventLedgerEntry] = []
 
-    func loadState() async throws -> AppStateSnapshot {
-        try await store.read { context in
-            guard let record = try context.fetch(FetchDescriptor<AppStateRecord>()).first else {
-                return .default
-            }
-            return try RepositoryMapping.appState(from: record)
+    func append(_ event: EventLedgerEntry) async throws {
+        events.removeAll { $0.id == event.id }
+        events.append(event)
+    }
+
+    func fetchRecent(limit: Int) async throws -> [EventLedgerEntry] {
+        Array(sorted(events).prefix(max(0, limit)))
+    }
+
+    func fetchEvents(goalID: String) async throws -> [EventLedgerEntry] {
+        sorted(events.filter { $0.goalID == goalID })
+    }
+
+    func fetchEvents(captureID: String) async throws -> [EventLedgerEntry] {
+        sorted(events.filter { $0.captureID == captureID })
+    }
+
+    func fetchEvents(kind: EventLedgerKind) async throws -> [EventLedgerEntry] {
+        sorted(events.filter { $0.kind == kind })
+    }
+
+    func fetchEvents(from start: String, through end: String) async throws -> [EventLedgerEntry] {
+        let startDate = PersistedTemporalValue.date(from: start)
+        let endDate = PersistedTemporalValue.date(from: end, fallback: .distantFuture)
+        return sorted(events.filter {
+            let occurredAtDate = PersistedTemporalValue.date(from: $0.occurredAt)
+            return occurredAtDate >= startDate && occurredAtDate <= endDate
+        })
+    }
+
+    func redactEvent(id: String, at timestamp: String) async throws {
+        events = events.map { event in
+            event.id == id ? event.redacted(at: timestamp) : event
         }
     }
 
-    func saveState(_ state: AppStateSnapshot) async throws {
-        try await store.write { context in
-            if let record = try context.fetch(FetchDescriptor<AppStateRecord>()).first(where: { $0.id == state.id }) {
-                record.preferredTabRaw = state.preferredTab.rawValue
-                record.userDisplayName = state.userDisplayName
-                record.appearancePreferenceRaw = state.appearancePreference.rawValue
-                record.hasCompletedBootstrap = state.hasCompletedBootstrap
-                record.lastBootstrapSourceRaw = state.lastBootstrapSource?.rawValue
-                record.lastBootstrapAt = state.lastBootstrapAt
-                record.lastSeedVersion = state.lastSeedVersion
-                record.lastSeededAt = state.lastSeededAt
-                record.lastOpenedGoalID = state.lastOpenedGoalID
-                record.snapshotData = try PersistenceCoding.encode(state)
-            } else {
-                context.insert(try RepositoryMapping.appStateRecord(from: state))
+    func deleteEvent(id: String) async throws {
+        events.removeAll { $0.id == id }
+    }
+
+    func sorted(_ events: [EventLedgerEntry]) -> [EventLedgerEntry] {
+        events.sorted {
+            let lhsDate = PersistedTemporalValue.date(from: $0.occurredAt)
+            let rhsDate = PersistedTemporalValue.date(from: $1.occurredAt)
+            if lhsDate != rhsDate {
+                return lhsDate > rhsDate
             }
+            return $0.id > $1.id
         }
     }
 }
@@ -279,6 +302,118 @@ struct SwiftDataActionReceiptHistoryRepository: ActionReceiptHistoryRepository {
             return persisted.compactMap { persistedRecord in
                 try? RepositoryMapping.actionReceiptHistoryRecord(from: persistedRecord)
             }
+        }
+    }
+}
+
+actor InMemoryActionReceiptHistoryRepository: ActionReceiptHistoryRepository {
+    private var records: [ActionReceiptHistoryRecord] = []
+    private let historyQueryEngine = HistoryQueryEngine()
+
+    func save(_ records: [ActionReceiptHistoryRecord]) async throws {
+        let incomingByID = Dictionary(uniqueKeysWithValues: records.map { ($0.id, $0) })
+        self.records.removeAll { incomingByID[$0.id] != nil }
+        self.records.append(contentsOf: records)
+    }
+
+    func fetch(_ query: ActionReceiptSearchQuery) async throws -> ActionReceiptSearchProjection {
+        ActionReceiptHistoryProjection(records: records).search(query)
+    }
+
+    func listRecords() async throws -> [ActionReceiptHistoryRecord] {
+        ActionReceiptHistoryProjection(records: records).records
+    }
+
+    func trustHistory(_ query: TrustHistoryQuery) async throws -> TrustHistoryQueryProjection {
+        historyQueryEngine.project(query: query, receiptRecords: records, eventLedgerEntries: [])
+    }
+}
+
+struct SwiftDataEntityRevisionTombstoneRepository: EntityRevisionTombstoneRepository {
+    let store: AmbitionsPersistenceStore
+
+    func append(_ tombstone: EntityRevisionTombstone) async throws {
+        guard tombstone.isWellFormed else { return }
+        try await store.write { context in
+            if let storage = try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .first(where: { $0.id == tombstone.id }) {
+                try RepositoryMapping.apply(tombstone, to: storage)
+            } else {
+                context.insert(try RepositoryMapping.entityRevisionTombstoneRecord(from: tombstone))
+            }
+        }
+    }
+
+    func fetchRecent(limit: Int) async throws -> [EntityRevisionTombstone] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .sorted {
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
+                    }
+                    return $0.id > $1.id
+                }
+                .prefix(max(0, limit))
+                .map(RepositoryMapping.entityRevisionTombstone(from:))
+        }
+    }
+
+    func fetch(for entityID: String) async throws -> [EntityRevisionTombstone] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .filter { $0.entityID == entityID }
+                .sorted {
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
+                    }
+                    return $0.id > $1.id
+                }
+                .map(RepositoryMapping.entityRevisionTombstone(from:))
+        }
+    }
+
+    func fetch(lineageID: String) async throws -> [EntityRevisionTombstone] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .filter { $0.lineageID == lineageID }
+                .sorted {
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
+                    }
+                    return $0.id > $1.id
+                }
+                .map(RepositoryMapping.entityRevisionTombstone(from:))
+        }
+    }
+
+    func fetchRecoverable(limit: Int) async throws -> [EntityRevisionTombstone] {
+        try await fetchByLifecycleState(.recoverable, limit: limit)
+    }
+
+    func fetchFinalized(limit: Int) async throws -> [EntityRevisionTombstone] {
+        try await fetchByLifecycleState(.finalized, limit: limit)
+    }
+
+    func fetchByLifecycleState(_ lifecycleState: EntityRevisionTombstoneLifecycleState, limit: Int) async throws -> [EntityRevisionTombstone] {
+        try await store.read { context in
+            try context.fetch(FetchDescriptor<EntityRevisionTombstoneRecord>())
+                .filter { $0.lifecycleStateRaw == lifecycleState.rawValue }
+                .sorted {
+                    let lhsDate = PersistedTemporalValue.dateKey(primary: $0.recordedAtDate, rawValue: $0.recordedAt)
+                    let rhsDate = PersistedTemporalValue.dateKey(primary: $1.recordedAtDate, rawValue: $1.recordedAt)
+                    if lhsDate != rhsDate {
+                        return lhsDate > rhsDate
+                    }
+                    return $0.id > $1.id
+                }
+                .prefix(max(0, limit))
+                .map(RepositoryMapping.entityRevisionTombstone(from:))
         }
     }
 }

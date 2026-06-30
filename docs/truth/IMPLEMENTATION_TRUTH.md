@@ -86,6 +86,7 @@ Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/LaunchGateView.swift
 Native/Ambitions/App/AmbitionsStageHost.swift
 Native/Ambitions/Stage/AmbitionsStage.swift
 Native/Ambitions/App/AppContainerFactory.swift
+Native/Ambitions/Core/LocalRuntimeOS/
 Native/Ambitions/Core/Runtime/
 Native/Ambitions/Core/Persistence/
 Native/Ambitions/Core/Domain/
@@ -168,10 +169,13 @@ Current implementation evidence is narrower:
 - Source-present CaptureRouteGraph foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/CaptureRouteGraph/`, including `CaptureIntakeJournal`, `CaptureDraftStore`, `CaptureClassifier`, `CaptureRouteResolver`, `CaptureAttachmentVault`, `CapturePromotionTransaction`, `CaptureCorrectionLedger`, and `CaptureDirectLookupIndex`.
 - The former `Core/Domain` CaptureRouteGraph and CaptureRouteCommandMapping owner files were removed from that owner.
 - Focused simulator tests cover CaptureRouteGraph owner files, old owner removal, durable intake before classification, route-decision event traces, draft and direct-lookup indexing, attachment checksum/quarantine behavior, correction ledger writes, promotion transaction receipts, and DefaultCaptureService create/promotion routing through CaptureRouteGraph.
+- Source-present TrustSystem source exists under `Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/`, including event ledger models, action receipt history models, action receipt proof ledger models, `ProofLedger`, `SourceRecordLedger`, entity revision tombstones, ledger replay models, `AuditTrail`, `UndoLedger`, `HistoryQueryEngine`, trust repository contracts, SwiftData trust repositories, unavailable trust repositories, and the goal-intent receipt persistence adapter.
+- The former `Core/Domain` receipt/event/proof/tombstone/replay model owner files, the former `Core/Runtime/ProofLedger.swift` owner file, and the former `Core/Persistence` trust-history and goal-intent receipt adapter owner files were removed from those owners.
+- Focused TrustSystem test source covers canonical owner files, old owner removal, and command/event/receipt/proof/source/audit/undo/history/replay planning behavior. This is source/build scope only unless current closeout proof shows simulator execution.
 - Remaining runtime and persistence scaffolding exists primarily under `Native/Ambitions/Core/Runtime/`, `Native/Ambitions/Core/Persistence/`, and `Native/Ambitions/Core/Domain/`.
-- `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until later implementation trains cover full cross-path replay, active app-wide storage consumption, full ObjectState migration beyond AppState, full app-wide side-effect outbox enforcement, app-wide PlanningEngine consumption across every goal/pathing/planning path, app-wide TimeEngine consumption across every scheduling/time/recovery/recurrence path, app-wide capacity/recovery/correction/projection invalidation ownership, app-wide privacy firewall/network-egress enforcement, executable migration/repair automation, app-wide diagnostics consumption or repair routing, app-wide SearchRecall consumption by every search or Memory Lens path, and production CloudKit continuity.
+- `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until later implementation trains cover full cross-path replay, active app-wide storage consumption, full ObjectState migration beyond AppState, full app-wide side-effect outbox enforcement, app-wide TrustSystem consumption across every receipt/proof/history/undo/trust inspection path, app-wide PlanningEngine consumption across every goal/pathing/planning path, app-wide TimeEngine consumption across every scheduling/time/recovery/recurrence path, app-wide capacity/recovery/correction/projection invalidation ownership, app-wide privacy firewall/network-egress enforcement, executable migration/repair automation, app-wide diagnostics consumption or repair routing, app-wide SearchRecall consumption by every search or Memory Lens path, and production CloudKit continuity.
 - Current SwiftData persistence source is now owned by `ObjectStoreSwiftData`, but the app has not yet proven every app path consumes only the new storage tier split.
-- Existing command, receipt, event ledger, side-effect ledger, snapshot ledger, Source Atlas, remaining runtime, and repository code may be reused or moved as scaffolding, but they do not prove the LocalRuntimeOS spine is complete.
+- Existing command, moved trust/receipt/event/proof scaffolding, side-effect ledger, snapshot ledger, Source Atlas, remaining runtime, and repository code may be reused or moved as scaffolding, but they do not prove the LocalRuntimeOS spine is complete.
 
 Unsupported implementation claims until future source proof exists:
 
@@ -183,6 +187,7 @@ Unsupported implementation claims until future source proof exists:
 - SQLite/FTS-backed journal, projection, and search stores are active across all production mutation/read paths
 - every external side-effect path is fully outboxed with leases, retry, confirmation, and receipts
 - every capture entrypoint, extension, widget/App Intent bridge, attachment flow, and direct repository fallback path is forced through the durable CaptureRouteGraph before classification/promotion
+- every trust/proof/source/history/receipt/undo path is produced and consumed only through TrustSystem
 - Source Atlas is a signed public-reference package manager
 - CloudKit continuity is approved or implemented as user-owned event-envelope sync
 - migration/repair/diagnostics prove runtime, privacy, release, or data-safety Green

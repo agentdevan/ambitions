@@ -13,7 +13,6 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Runtime/CapacityEngine.swift",
             "Native/Ambitions/Core/Runtime/PressureEngine.swift",
             "Native/Ambitions/Core/Runtime/RecoveryEngine.swift",
-            "Native/Ambitions/Core/Runtime/ProofLedger.swift",
         ] {
             XCTAssertTrue(
                 FileManager.default.fileExists(atPath: root.appendingPathComponent(requiredPath).path),
@@ -30,6 +29,7 @@ final class CoreRuntimeCanonicalOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift",
             "Native/Ambitions/Core/Runtime/SourceAtlasAccessBoundary.swift",
             "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift",
+            "Native/Ambitions/Core/Runtime/ProofLedger.swift",
             "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift",
         ] {
             XCTAssertFalse(

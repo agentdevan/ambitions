@@ -181,7 +181,7 @@ extension ProjectionDefinition {
                 family: .trust,
                 consumesEventKinds: [.commandExecution, .closureRecorded, .proofAttached, .correctionRecorded, .tombstoneRecorded],
                 readModelInventory: [
-                    .init(sourcePath: "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+07-ClosureState.swift", responsibility: "Action receipt projection scaffold", migrationTarget: .receipt),
+                    .init(sourcePath: "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+07-ClosureState.swift", responsibility: "Action receipt projection scaffold", migrationTarget: .receipt),
                     .init(sourcePath: "Native/Ambitions/Projection/Mutations/MutationReceipt.swift", responsibility: "Mutation receipt projection", migrationTarget: .receipt),
                     .init(sourcePath: "Native/Ambitions/Trust/ReceiptInspectionView.swift", responsibility: "Receipt inspection surface", migrationTarget: .receipt),
                 ]

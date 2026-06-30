@@ -724,137 +724,6 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 21,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+02-ActionReceiptProofFreshnessLineage.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 400,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+03-ActionReceiptHistoryRecord.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 313,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+04-ActionReceiptSourceFreshnessPrivacySummary.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 134,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+05-ActionReceipt.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 332,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+06-ActionReceipt+02-closureReceipt.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 341,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+06-ActionReceipt+03-alternateStepApprovedReceipt.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 92,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+06-ActionReceipt+04-rejectedCandidateSuppressedReceipt.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 233,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+07-ClosureState.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 245,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels+08-ActionReceipt.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 346,
-      "path": "Native/Ambitions/Core/Domain/ActionClosureReceiptModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 259,
-      "path": "Native/Ambitions/Core/Domain/ActionReceiptProofLedgerModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
       "line_count": 41,
       "path": "Native/Ambitions/Core/Domain/AmbitionGraphLineageModels.swift"
     },
@@ -1680,53 +1549,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 305,
-      "path": "Native/Ambitions/Core/Domain/EntityRevisionTombstoneModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 348,
-      "path": "Native/Ambitions/Core/Domain/EventLedgerModels+02-EventLedgerEntry.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 87,
-      "path": "Native/Ambitions/Core/Domain/EventLedgerModels+03-DiagnosticLedgerSnapshot.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 247,
-      "path": "Native/Ambitions/Core/Domain/EventLedgerModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-05"
       ],
@@ -2305,17 +2127,6 @@
       "kind": "native_source",
       "line_count": 98,
       "path": "Native/Ambitions/Core/Domain/LearningAnticipationModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 326,
-      "path": "Native/Ambitions/Core/Domain/LedgerReplayModels.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6140,6 +5951,329 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 21,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+02-ActionReceiptProofFreshnessLineage.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 400,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+03-ActionReceiptHistoryRecord.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 313,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+04-ActionReceiptSourceFreshnessPrivacySummary.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 134,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+05-ActionReceipt.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 332,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+06-ActionReceipt+02-closureReceipt.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 341,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+06-ActionReceipt+03-alternateStepApprovedReceipt.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 92,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+06-ActionReceipt+04-rejectedCandidateSuppressedReceipt.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 233,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+07-ClosureState.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 245,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels+08-ActionReceipt.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 346,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 259,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ActionReceiptProofLedgerModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 220,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/AuditTrail.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 305,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/EntityRevisionTombstoneModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 348,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/EventLedgerModels+02-EventLedgerEntry.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 87,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/EventLedgerModels+03-DiagnosticLedgerSnapshot.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 247,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/EventLedgerModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 169,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ExecutionLedgerReplayInspectionSwiftDataRepository.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 188,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/GoalIntentCompilerReceiptPersistenceAdapter.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 122,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/HistoryQueryEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 326,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/LedgerReplayModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 62,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/ProofLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 250,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/SourceRecordLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 411,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TrustSystem.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 126,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TrustSystemRepositoryContracts.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 420,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TrustSystemSwiftDataRepositories.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 25,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/UnavailableTrustSystemRepositories.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 124,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/UndoLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-04"
       ],
       "exists": true,
@@ -6296,17 +6430,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-03",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 188,
-      "path": "Native/Ambitions/Core/Persistence/GoalIntentCompilerReceiptPersistenceAdapter.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
         "VSP-04",
         "VSP-05",
         "VSP-08"
@@ -6349,7 +6472,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 363,
+      "line_count": 239,
       "path": "Native/Ambitions/Core/Persistence/PersistenceContracts+02-AFEPQueryBudgetCatalog.swift"
     },
     {
@@ -6357,12 +6480,13 @@
         "VSP-03",
         "VSP-04",
         "VSP-05",
-        "VSP-07"
+        "VSP-07",
+        "VSP-09"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 241,
+      "line_count": 218,
       "path": "Native/Ambitions/Core/Persistence/PersistenceContracts+03-UnavailableReminderRepository.swift"
     },
     {
@@ -6805,26 +6929,20 @@
       "path": "Native/Ambitions/Core/Persistence/SwiftDataRepositories+04-SwiftDataGoalPersistence.swift"
     },
     {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05"
-      ],
+      "candidate_vsp_ids": [],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 255,
+      "line_count": 111,
       "path": "Native/Ambitions/Core/Persistence/SwiftDataRepositories+05-SwiftDataAmbitionGraphProjectionRecordRepository.swift"
     },
     {
-      "candidate_vsp_ids": [
-        "VSP-05",
-        "VSP-07"
-      ],
+      "candidate_vsp_ids": [],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 285,
-      "path": "Native/Ambitions/Core/Persistence/SwiftDataRepositories+06-SwiftDataTrustHistoryQueryRepository.swift"
+      "line_count": 35,
+      "path": "Native/Ambitions/Core/Persistence/SwiftDataRepositories+06-SwiftDataAppStateRepository.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6834,7 +6952,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 336,
+      "line_count": 170,
       "path": "Native/Ambitions/Core/Persistence/SwiftDataRepositories+07-SwiftDataRuntimeSnapshotLedgerRepository.swift"
     },
     {
@@ -7792,17 +7910,6 @@
       "kind": "native_source",
       "line_count": 46,
       "path": "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 62,
-      "path": "Native/Ambitions/Core/Runtime/ProofLedger.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -16362,31 +16469,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 173,
-      "path": "Native/AmbitionsTests/Domain/AFEP009ExecutionLedgerReplayBrowserTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 1217,
-      "path": "Native/AmbitionsTests/Domain/ActionClosureReceiptModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-07"
       ],
       "exists": true,
@@ -17070,28 +17152,6 @@
       "path": "Native/AmbitionsTests/Domain/DomainPackageBoundaryModelsTests.swift"
     },
     {
-      "candidate_vsp_ids": [],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 49,
-      "path": "Native/AmbitionsTests/Domain/EntityRevisionTombstoneModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 180,
-      "path": "Native/AmbitionsTests/Domain/EventLedgerModelsTests.swift"
-    },
-    {
       "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
@@ -17366,16 +17426,6 @@
       "kind": "test",
       "line_count": 158,
       "path": "Native/AmbitionsTests/Domain/LearningAnticipationServiceTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 56,
-      "path": "Native/AmbitionsTests/Domain/LedgerReplayModelsTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18798,6 +18848,154 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 173,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/AFEP009ExecutionLedgerReplayBrowserTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 1217,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/ActionClosureReceiptModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 368,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/ActionReceiptHistoryRepositoryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 49,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/EntityRevisionTombstoneModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 151,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/EntityRevisionTombstoneRepositoryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 180,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/EventLedgerModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 281,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/EventLedgerRepositoryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 196,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/ExecutionLedgerReplayInspectionRepositoryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 279,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/GoalIntentCompilerReceiptPersistenceAdapterTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 56,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/LedgerReplayModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 318,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/TrustHistoryQueryRepositoryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 211,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/TrustSystem/TrustSystemTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-01",
         "VSP-07",
         "VSP-09",
@@ -18835,18 +19033,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 368,
-      "path": "Native/AmbitionsTests/Persistence/ActionReceiptHistoryRepositoryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-07"
       ],
       "exists": true,
@@ -18880,52 +19066,6 @@
       "kind": "test",
       "line_count": 117,
       "path": "Native/AmbitionsTests/Persistence/CorePersistenceCanonicalOwnershipTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 151,
-      "path": "Native/AmbitionsTests/Persistence/EntityRevisionTombstoneRepositoryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 281,
-      "path": "Native/AmbitionsTests/Persistence/EventLedgerRepositoryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 196,
-      "path": "Native/AmbitionsTests/Persistence/ExecutionLedgerReplayInspectionRepositoryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 279,
-      "path": "Native/AmbitionsTests/Persistence/GoalIntentCompilerReceiptPersistenceAdapterTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19190,19 +19330,6 @@
       "kind": "test",
       "line_count": 155,
       "path": "Native/AmbitionsTests/Persistence/SupportDiagnosticsBundleTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 318,
-      "path": "Native/AmbitionsTests/Persistence/TrustHistoryQueryRepositoryTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -22133,7 +22260,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 426,
+      "line_count": 431,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -22217,7 +22344,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1794,
+  "entry_count": 1804,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1
