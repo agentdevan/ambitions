@@ -77,7 +77,7 @@ gates:
     user_visible_behavior: "User can create, complete, and reschedule a reminder-like Step."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Core/Domain/Planning/"
+      - "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/"
       - "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/CommandRouter.swift"
       - "Native/AmbitionsTests/Today/TodayCommandHandlerTests.swift"
       - "Native/AmbitionsTests/Runtime/ProtectedStepPlacementPolicyTests.swift"
@@ -93,7 +93,7 @@ gates:
     user_visible_behavior: "Recurring Steps repeat and can be paused."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Core/Domain/Planning/PlanningDomainModels.swift"
+      - "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/PlanningDomainModels.swift"
       - "Native/Ambitions/Core/Runtime/SimpleStepLifecycleService.swift"
       - "Native/AmbitionsTests/Runtime/RecurringStepLifecycleServiceTests.swift"
     required_future_proof: "Rendered recurring Step UI test, accessibility proof, device/release proof, notification delivery proof if claimed"
@@ -242,7 +242,7 @@ gates:
     user_visible_behavior: "Goal without deadline gets flexible path."
     current_status: "Partial"
     evidence_paths:
-      - "Native/Ambitions/Core/Domain/Planning/DeterministicGoalPlanner.swift"
+      - "Native/Ambitions/Core/LocalRuntimeOS/PlanningEngine/DeterministicGoalPlanner.swift"
     required_future_proof: "Flexible scheduled path proof"
     last_verified_commit: "28a0c9bad3821b93118f38c864643db89ddce619"
     canon_source: "docs/truth/PRODUCT_EXPERIENCE_CANON.md"

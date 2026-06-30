@@ -8033,6 +8033,27 @@
       "button_styles": [],
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 179,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/PlanningEngine/PlanningEngineTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "PlanningEngineTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
         "VSP-03",
         "VSP-04",
         "VSP-05",
@@ -12770,7 +12791,7 @@
       "view_structs": []
     }
   ],
-  "entry_count": 600,
+  "entry_count": 601,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "scan_roots": [
