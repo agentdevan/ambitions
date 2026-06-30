@@ -3,20 +3,22 @@
   "claim_boundary": "Known Figma/VSP evidence index only. This file does not mutate Figma, does not claim Code Connect, and does not prove Visual Green.",
   "nodes": [
     {
-      "figma_file_key": "hnVi8KV2SAuWP3V5hV160W",
-      "node_id": "1:2",
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "87:2",
       "node_id_status": "known",
-      "frame_name": "AUTHORITY - VSP-01 - approved shell authority",
+      "frame_name": "AUTHORITY - VSP-01 - Nightglass Authority Shell - owner-approved shell authority - R1",
       "vsp_id": "VSP-01",
       "evidence_screenshot_paths": [
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-01-authority-1-2.png"
       ],
       "evidence_doc_paths": [
+        "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md"
       ],
-      "provenance_annotation_status": "manual_required",
+      "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-01---root-shell--stage--chrome",
       "notes": [
+        "Nightglass Authority Shell owner approval recorded in Figma and Git provenance.",
         "Approved shell authority. Do not mutate without explicit owner evidence."
       ]
     },
@@ -170,9 +172,9 @@
     },
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-      "node_id": "14:1215",
+      "node_id": "92:2",
       "node_id_status": "known",
-      "frame_name": "CANDIDATE - VSP-09 - Motion Accessibility Matrix hero - R1",
+      "frame_name": "CANDIDATE - VSP-09 - accessibility motion haptics matrix - R1",
       "vsp_id": "VSP-09",
       "evidence_screenshot_paths": [
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png",
@@ -180,20 +182,22 @@
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png"
       ],
       "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-09-accessibility-motion-haptics-matrix-R1.md",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
         "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
       ],
-      "provenance_annotation_status": "manual_required",
+      "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-09---motion--haptics--accessibility-matrix",
       "notes": [
+        "Current VSP-09 matrix board recorded in Figma and Git provenance.",
         "Motion/accessibility candidate. Motion must remain behavior, not destination."
       ]
     },
     {
       "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-      "node_id": "14:1384",
+      "node_id": "91:2",
       "node_id_status": "known",
-      "frame_name": "CANDIDATE - VSP-10 - Implementation Anatomy hero - R1",
+      "frame_name": "CANDIDATE - VSP-10 - implementation anatomy source-owner map - R1",
       "vsp_id": "VSP-10",
       "evidence_screenshot_paths": [
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png",
@@ -201,13 +205,15 @@
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png"
       ],
       "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-10-implementation-anatomy-source-owner-map-R1.md",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
         "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
         "docs/design/provenance/component-registry.json"
       ],
-      "provenance_annotation_status": "manual_required",
+      "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/Figma-Annotation-Pack.md#vsp-10---implementation-anatomy",
       "notes": [
+        "Current VSP-10 implementation anatomy/source-owner board recorded in Figma and Git provenance.",
         "Implementation anatomy candidate. Not a product hero substitute."
       ]
     },

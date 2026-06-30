@@ -31,7 +31,6 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI screenshot
 - live SwiftUI shell parity screenshot
 - manual accessibility and haptics proof
-- owner approval
 ### VSP-02 - Today Reality Window
 
 - Dynamic Type

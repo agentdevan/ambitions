@@ -13,9 +13,9 @@ Recommended project/epic title: VSP North Star Figma Authority and SwiftUI Prove
 ## VSP-01 - VSP-01 Shell Authority Reconfirmation
 
 - Parent issue mirror: `AMB-1480`
-- Recommended status: `Needs Repair`
+- Recommended status: `Spec Ready`
 - Labels: VSP, shell-authority, figma-handoff, yellow-proof
-- Blocked by: owner approval, live SwiftUI parity screenshot, device and accessibility proof
+- Blocked by: live SwiftUI parity screenshot, device and accessibility proof
 - Do not create now: `True`
 
 Acceptance summary:
@@ -27,7 +27,7 @@ Validation summary:
 - git diff --check
 Recommended sub-issues:
 - Audit approved VSP-01 shell against current SwiftUI shell - scope: analysis and screenshot parity only; no shell mutation - status: Needs Repair
-- Attach owner-approved shell readback frames before implementation - scope: Figma/owner review proof only - status: Needs Repair
+- Attach owner-approved shell readback frames before implementation - scope: Figma/owner review proof only - status: Spec Ready
 
 Standard Codex closeout block:
 

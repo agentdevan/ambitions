@@ -18,11 +18,13 @@
       "proof_id": "vsp-01-owner-approval",
       "vsp_id": "VSP-01",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner approval evidence for current VSP scope.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Required before VSP-01 can claim Green for owner approval."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Satisfies owner-approval evidence for VSP-01 shell authority only. VSP-01 remains Yellow until live SwiftUI, device, accessibility, haptics, and validation proof exist.",
+      "notes": "Owner approved the VSP-01 Nightglass Authority Shell as shell authority. This is not SwiftUI implementation proof, device proof, accessibility proof, release readiness, or a final-status claim."
     },
     {
       "proof_id": "vsp-01-swiftui-simulator-screenshot",
@@ -1004,6 +1006,7 @@
       "proof_type": "figma_candidate",
       "status": "present",
       "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-09-accessibility-motion-haptics-matrix-R1.md",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-crop-r1.png",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png"
@@ -1130,6 +1133,7 @@
       "proof_type": "figma_candidate",
       "status": "present",
       "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-10-implementation-anatomy-source-owner-map-R1.md",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-crop-r1.png",
         "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png"

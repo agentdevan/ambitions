@@ -7,6 +7,7 @@
     "docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md",
     "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
     "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
+    "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md",
     "docs/truth/PRODUCT_DESIGN_TRUTH.md",
     "docs/truth/FIGMA_PRODUCTION_GATE_ADDENDUM.md",
     "docs/truth/IMPLEMENTATION_ACCEPTANCE_TRUTH.md",
@@ -17,16 +18,17 @@
       "vsp_id": "VSP-01",
       "title": "Root Shell / Stage / Chrome",
       "category": "shell_authority",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Spec Ready",
       "proof_ceiling": "Yellow",
       "figma": {
-        "file_key": "hnVi8KV2SAuWP3V5hV160W",
-        "node_id": "1:2",
-        "frame_name": "AUTHORITY - VSP-01 - approved shell authority",
+        "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+        "node_id": "87:2",
+        "frame_name": "AUTHORITY - VSP-01 - Nightglass Authority Shell - owner-approved shell authority - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-01-authority-1-2.png"
         ],
         "evidence_paths": [
+          "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/authority-map.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/manifest.json"
         ],
@@ -76,7 +78,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1480",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Spec Ready",
         "recommended_labels": [
           "VSP",
           "shell-authority",
@@ -100,7 +102,9 @@
         "privacy_boundary": false
       },
       "proof_present": {
-        "owner_approval": [],
+        "owner_approval": [
+          "docs/design/provenance/owner-approvals/VSP-01-Nightglass-Authority-Shell-approval.md"
+        ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
         "dynamic_type": [],
@@ -120,17 +124,16 @@
         "Later packets can accidentally invent shell chrome if they are not audited against this registry."
       ],
       "missing_evidence": [
-        "owner approval",
         "live SwiftUI shell parity screenshot",
         "device shell screenshot",
         "manual accessibility and haptics proof"
       ],
       "green_blockers": [
-        "No owner approval.",
         "No current rendered SwiftUI parity proof.",
         "No device proof."
       ],
       "notes": [
+        "VSP-01 Nightglass Authority Shell is owner-approved shell authority for root shell, Stage, chrome, dock, Capture/Search placement, route depth, and root IA.",
         "VSP-01 approved shell authority is immutable unless explicit owner evidence changes it."
       ]
     },
@@ -1000,14 +1003,15 @@
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "14:1215",
-        "frame_name": "CANDIDATE - VSP-09 - Motion Accessibility Matrix hero - R1",
+        "node_id": "92:2",
+        "frame_name": "CANDIDATE - VSP-09 - accessibility motion haptics matrix - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-hero-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-crop-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-09-motion-launch-board-r1.png"
         ],
         "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-09-accessibility-motion-haptics-matrix-R1.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json"
         ],
@@ -1126,14 +1130,15 @@
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "14:1384",
-        "frame_name": "CANDIDATE - VSP-10 - Implementation Anatomy hero - R1",
+        "node_id": "91:2",
+        "frame_name": "CANDIDATE - VSP-10 - implementation anatomy source-owner map - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-hero-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-crop-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-10-anatomy-launch-board-r1.png"
         ],
         "evidence_paths": [
+          "docs/design/provenance/figma-frames/VSP-10-implementation-anatomy-source-owner-map-R1.md",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
           "docs/design/provenance/component-registry.json"

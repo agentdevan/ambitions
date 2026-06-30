@@ -10,14 +10,14 @@ These blocks are generated copy for manual Figma annotations. They are not confi
 
 ```text
 Annotation title: VSP-01 provenance - Root Shell / Stage / Chrome
-Frame naming recommendation: AUTHORITY - VSP-01 - approved shell authority
+Frame naming recommendation: AUTHORITY - VSP-01 - Nightglass Authority Shell - owner-approved shell authority - R1
 Shell relationship: requires VSP-01 shell = False; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Stage/AmbitionsStage.swift, Native/Ambitions/Stage/AmbitionsSurface.swift, Native/Ambitions/App/AmbitionsRootStageSurfaceHost.swift, Native/Ambitions/Stage/Chrome/StageDockRail.swift
 Allowed implementation area: Native/Ambitions/Stage, Native/Ambitions/App, Sources/Components
 Forbidden implementation area: Native/Ambitions/RootTab.swift, Native/Ambitions/Surfaces/Capture, Native/Ambitions/Surfaces/Motion, new shell chrome outside VSP-01 authority
 Proof ceiling: Yellow
-Missing proof: owner approval, live SwiftUI shell parity screenshot, device shell screenshot, manual accessibility and haptics proof
-Linear mirror: AMB-1480 (Needs Repair)
+Missing proof: live SwiftUI shell parity screenshot, device shell screenshot, manual accessibility and haptics proof
+Linear mirror: AMB-1480 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 
@@ -130,7 +130,7 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-09 provenance - Motion / Haptics / Accessibility Matrix
-Frame naming recommendation: CANDIDATE - VSP-09 - Motion Accessibility Matrix hero - R1
+Frame naming recommendation: CANDIDATE - VSP-09 - accessibility motion haptics matrix - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift, Native/Ambitions/Stage/Motion/StageMotionAccessibility.swift, Native/Ambitions/Interaction/HapticPolicy.swift, Native/Ambitions/DesignSystem/Accessibility/ReduceMotionPolicy.swift
 Allowed implementation area: Native/Ambitions/Stage/Motion, Native/Ambitions/Interaction, Native/Ambitions/DesignSystem/Accessibility, Sources/Accessibility, Sources/Components
@@ -145,7 +145,7 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-10 provenance - Implementation Anatomy
-Frame naming recommendation: CANDIDATE - VSP-10 - Implementation Anatomy hero - R1
+Frame naming recommendation: CANDIDATE - VSP-10 - implementation anatomy source-owner map - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: docs/design/provenance/component-registry.json, docs/design/provenance/vsp-provenance.json, docs/design/provenance/generated/swift-component-inventory.generated.json
 Allowed implementation area: docs/design/provenance, Sources/Components, Sources/Previews, Native/Ambitions/Quality

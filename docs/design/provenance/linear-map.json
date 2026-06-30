@@ -6,7 +6,7 @@
       "vsp_id": "VSP-01",
       "likely_parent_issue": "AMB-1480",
       "recommended_parent_title": "VSP-01 Shell Authority Reconfirmation",
-      "recommended_status": "Needs Repair",
+      "recommended_status": "Spec Ready",
       "recommended_labels": [
         "VSP",
         "shell-authority",
@@ -22,11 +22,10 @@
         {
           "title": "Attach owner-approved shell readback frames before implementation",
           "scope": "Figma/owner review proof only",
-          "recommended_status": "Needs Repair"
+          "recommended_status": "Spec Ready"
         }
       ],
       "blocked_by": [
-        "owner approval",
         "live SwiftUI parity screenshot",
         "device and accessibility proof"
       ],
@@ -41,7 +40,7 @@
       ],
       "closeout_required": [
         "exact frame ID and screenshot proof",
-        "no Visual Green unless owner approved",
+        "no Visual Green without runtime and accessibility proof",
         "rollback plan for source leaf if later authorized"
       ],
       "do_not_create_now": true
