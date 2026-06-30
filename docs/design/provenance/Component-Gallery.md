@@ -126,6 +126,13 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-f-apple-native-life-calendar-r1.png
 - docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selection-board-r1.png
 - docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selected-crop-r1.png
+- docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-board.png
+- docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-hero.png
+- docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-state-matrix.png
+- docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-accessibility-matrix.png
+- docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-swiftui-anatomy.png
+- docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-marketing-crop.png
+- docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-non-claims.png
 SwiftUI source owners:
 - Native/Ambitions/Surfaces/Time/TimeSurface.swift
 - Native/Ambitions/Surfaces/Time/TimeObjectView.swift

@@ -55,14 +55,14 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 
 ```text
 Annotation title: VSP-04 provenance - Time / Native Month Life Calendar
-Frame naming recommendation: CANDIDATE - VSP-04 - PART 02 - F Apple-Native Life Calendar selected direction - R1
+Frame naming recommendation: CANDIDATE - VSP-04 - F Apple-Native Life Calendar owner review package - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
 SwiftUI source owner: Native/Ambitions/Surfaces/Time/TimeSurface.swift, Native/Ambitions/Surfaces/Time/TimeObjectView.swift, Native/Ambitions/Surfaces/Time/TimeAccessibility.swift
 Allowed implementation area: Native/Ambitions/Surfaces/Time, Native/Ambitions/Core/Time, Native/Ambitions/Core/LocalRuntimeOS/TimeEngine, Native/Ambitions/DesignSystem/ProductObjects, Native/Ambitions/Rendering/CanvasPrimitives, Sources/Components
 Forbidden implementation area: Native/Ambitions/Stage shell mutations, calendar-clone-only root pattern, top-level stale planning IA, unproven external calendar dependency for core value, Today-owned day timeline duplication as Time root
 Proof ceiling: Yellow
-Missing proof: live SwiftUI Time parity screenshot, device screenshot, manual accessibility matrix, reflow/protection runtime proof, complete VSP-04 candidate package for selected Part 02 direction, VoiceOver month summary proof, Dynamic Type month-grid stress proof, Reduce Motion static reflow marker proof
-Linear mirror: AMB-1483 (Needs Repair)
+Missing proof: live SwiftUI Time parity screenshot, device screenshot, manual accessibility matrix, reflow/protection runtime proof, VoiceOver month summary proof, Dynamic Type month-grid stress proof, Reduce Motion static reflow marker proof, full VSP-04/F owner-review package approval
+Linear mirror: AMB-1483 (Ready For Review)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 

@@ -69,8 +69,8 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - Reduce Transparency
 - VoiceOver
 - VoiceOver month summary proof
-- complete VSP-04 candidate package for selected Part 02 direction
 - device screenshot
+- full VSP-04/F owner-review package approval
 - haptics
 - live SwiftUI Time parity screenshot
 - live SwiftUI screenshot

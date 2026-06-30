@@ -128,23 +128,26 @@ Rollback plan:
 ## VSP-04 - VSP-04 Time / LifeShape Week
 
 - Parent issue mirror: `AMB-1483`
-- Recommended status: `Needs Repair`
-- Labels: VSP, time, surface-content, yellow-proof, native-month-calendar, owner-approved-direction
-- Blocked by: VSP-01 shell parity, VSP-10 source-owner map, VSP-09 accessibility matrix, complete VSP-04/F candidate package
+- Recommended status: `Ready For Review`
+- Labels: VSP, time, surface-content, yellow-proof, native-month-calendar, owner-approved-direction, owner-review-package, ready-for-owner-review
+- Blocked by: VSP-01 shell parity, VSP-10 source-owner map, VSP-09 accessibility matrix, owner approval of VSP-04/F owner-review package
 - Do not create now: `True`
 
 Acceptance summary:
-- Time remains native Life Calendar / LifeShape content.
-- No calendar-clone-only implementation.
-- No external calendar dependency for offline core value.
+- Current review package is VSP-04/F Apple-Native Life Calendar at Figma node 202:93.
+- Time remains a month-first native Life Calendar / LifeShape content object inside VSP-01 shell authority.
+- Analytics are integrated as seams, bands, apertures, markers, and a single month readout rather than side KPI rails or dashboard cards.
+- No calendar-clone-only implementation, no Today-owned current-step timeline, no Plan/Profile/Habits/Insights top-level IA, no Capture tab, and no Motion destination.
+- No external calendar dependency for offline core value and no cloud/R2/private graph behavior.
+- Full package owner approval is still required before a Codex implementation leaf may start source work.
 Validation summary:
 - focused Time tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Build VSP-04/F Apple-Native Life Calendar candidate package - scope: Figma-only hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof - status: Needs Repair
-- Produce Time LifeShape SwiftUI parity leaf - scope: Time content object only inside VSP-01 shell after full VSP-04/F candidate-package approval - status: Blocked until candidate-package approval
-- Prove Time reflow/protected-time accessibility matrix - scope: state matrix, Reduce Motion, Dynamic Type, proof receipt - status: Needs Repair
+- Build VSP-04/F Apple-Native Life Calendar candidate package - scope: Figma-only owner-review package with hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, non-claims, and durable screenshot proof at node 202:93 - status: Ready For Review
+- Produce Time LifeShape SwiftUI parity leaf - scope: Time content object only inside VSP-01 shell after full VSP-04/F owner-review package approval - status: Blocked until full package owner approval
+- Prove Time reflow/protected-time accessibility matrix - scope: state matrix, Reduce Motion static proof step, Dynamic Type month-grid stress, VoiceOver month summary, proof receipt, haptics/static confirmation - status: Spec Ready after package approval
 
 Standard Codex closeout block:
 

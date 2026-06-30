@@ -470,6 +470,33 @@
         "Content-only Time object selection inside approved VSP-01 shell authority. No shell mutation.",
         "Next gate is the complete VSP-04/F candidate package."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "202:93",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-04 - F Apple-Native Life Calendar owner review package - R1",
+      "vsp_id": "VSP-04",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-board.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-hero.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-state-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-accessibility-matrix.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-swiftui-anatomy.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-marketing-crop.png",
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-non-claims.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-04-F-apple-native-life-calendar-owner-review-package-R1.md",
+        "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-04-F-apple-native-life-calendar-owner-review-package-R1.md",
+      "notes": [
+        "Packages the owner-selected F Apple-Native Life Calendar direction into hero, state matrix, accessibility matrix, SwiftUI anatomy, marketing crop, and non-claims frames.",
+        "Ready For Review / Yellow package evidence only. Full owner approval remains pending.",
+        "Content-only inside VSP-01 shell authority; no shell mutation, source implementation, device proof, runtime proof, Visual Green, or accessibility conformance is claimed."
+      ]
     }
   ]
 }

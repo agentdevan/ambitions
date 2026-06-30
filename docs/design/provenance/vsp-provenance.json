@@ -455,12 +455,12 @@
       "vsp_id": "VSP-04",
       "title": "Time / Native Month Life Calendar",
       "category": "surface_content",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Ready For Review",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "196:93",
-        "frame_name": "CANDIDATE - VSP-04 - PART 02 - F Apple-Native Life Calendar selected direction - R1",
+        "node_id": "202:93",
+        "frame_name": "CANDIDATE - VSP-04 - F Apple-Native Life Calendar owner review package - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-hero-r1-repaired.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-04-time-crop-r1.png",
@@ -480,7 +480,14 @@
           "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-e-goal-fit-month-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/vsp-04-part-02-option-f-apple-native-life-calendar-r1.png",
           "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selection-board-r1.png",
-          "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selected-crop-r1.png"
+          "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/vsp-04-part-02-f-selected-crop-r1.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-board.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-hero.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-state-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-accessibility-matrix.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-swiftui-anatomy.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-marketing-crop.png",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/vsp-04-f-owner-review-package-r1-non-claims.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
@@ -492,7 +499,9 @@
           "docs/qa/evidence/2026-06-30-vsp-04-part-02-native-month-life-calendar-r1/manifest.md",
           "docs/design/provenance/figma-frames/VSP-04-part-02-F-apple-native-life-calendar-selection-R1.md",
           "docs/qa/evidence/2026-06-30-vsp-04-part-02-f-selection-r1/manifest.md",
-          "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md"
+          "docs/design/provenance/owner-approvals/VSP-04-F-Apple-Native-Life-Calendar-direction-approval.md",
+          "docs/design/provenance/figma-frames/VSP-04-F-apple-native-life-calendar-owner-review-package-R1.md",
+          "docs/qa/evidence/2026-06-30-vsp-04-f-owner-review-package-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -548,14 +557,16 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1483",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Ready For Review",
         "recommended_labels": [
           "VSP",
           "time",
           "surface-content",
           "yellow-proof",
           "native-month-calendar",
-          "owner-approved-direction"
+          "owner-approved-direction",
+          "owner-review-package",
+          "ready-for-owner-review"
         ],
         "should_create_or_update_now": false
       },
@@ -597,22 +608,23 @@
         "A selected option must not be synthesized with other directions unless explicitly scoped as a new candidate pass.",
         "Part 02 supersedes Part 01 root-object premise for owner selection: Time root should be month-level native Life Calendar, not an abstract day/week field.",
         "Option C can drift into Today-owned day/current-step territory if aperture behavior becomes the root visual instead of a month-level behavior.",
-        "Goal/capacity/protection overlays can become KPI/dashboard clutter if they leave the month object or multiply as side panels."
+        "Goal/capacity/protection overlays can become KPI/dashboard clutter if they leave the month object or multiply as side panels.",
+        "The owner-review package can be mistaken for SwiftUI parity unless the Figma-only proof ceiling remains explicit."
       ],
       "missing_evidence": [
         "live SwiftUI Time parity screenshot",
         "device screenshot",
         "manual accessibility matrix",
         "reflow/protection runtime proof",
-        "complete VSP-04 candidate package for selected Part 02 direction",
         "VoiceOver month summary proof",
         "Dynamic Type month-grid stress proof",
-        "Reduce Motion static reflow marker proof"
+        "Reduce Motion static reflow marker proof",
+        "full VSP-04/F owner-review package approval"
       ],
       "green_blockers": [
         "No live SwiftUI parity screenshot.",
         "No runtime/device/accessibility proof.",
-        "No complete VSP-04/F Apple-Native Life Calendar candidate package."
+        "No full VSP-04/F owner-review package approval."
       ],
       "notes": [
         "LifeShape-related source names are internal/source provenance and not top-level user IA.",
@@ -623,7 +635,12 @@
         "F selection record at Figma node 196:93 packages the selected option, rationale, next candidate-package gate, shell boundary, product-law non-claims, and durable screenshot proof.",
         "Part 02 proof PNGs use Inter because SF Pro text did not render in Figma export; SwiftUI implementation remains system-font/SF aligned.",
         "Recommended current read: Option F is the strongest native bridge if the floor is replacing the user's month calendar plus reminders.",
-        "New SwiftUI primitive required after full VSP-04/F candidate-package approval: MonthLifeCalendarGrid / MonthLifeCalendarSemanticOverlay."
+        "New SwiftUI primitive required after full VSP-04/F candidate-package approval: MonthLifeCalendarGrid / MonthLifeCalendarSemanticOverlay.",
+        "Full VSP-04/F Apple-Native Life Calendar owner-review package at Figma node 202:93 includes hero, state matrix, accessibility matrix, SwiftUI anatomy, marketing crop, and non-claims frames.",
+        "The package is Ready For Review as Yellow Figma target evidence only; full package owner approval remains pending.",
+        "State-matrix mini-calendar chip labels were widened and the protected/recovery subtitle was tightened before final export to avoid wrapped label defects.",
+        "VSP-04/F remains content-only inside VSP-01 shell authority and may not mutate shell chrome, root IA, dock, Context Crown, Capture/Search placement, safe-area shell, or route depth.",
+        "New SwiftUI primitives required after full package approval: MonthLifeCalendarGrid, MonthLifeCalendarSemanticOverlay, MonthReflowProtectionMarker."
       ]
     },
     {
