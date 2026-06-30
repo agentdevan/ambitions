@@ -4310,6 +4310,106 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 100,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/CommandInspector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 209,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/LocalBackendHealth.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 118,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/PerformanceBudgetLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 88,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/PrivacyInspector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 117,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/ProjectionInspector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 99,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/RuntimeTraceInspector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 201,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/StoreInspector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 88,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Diagnostics/SyncInspector.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-04"
       ],
       "exists": true,
@@ -17709,6 +17809,20 @@
         "VSP-04",
         "VSP-05",
         "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 208,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Diagnostics/LocalRuntimeDiagnosticsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
         "VSP-09",
         "VSP-10"
       ],
@@ -21532,7 +21646,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1739,
+  "entry_count": 1748,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1
