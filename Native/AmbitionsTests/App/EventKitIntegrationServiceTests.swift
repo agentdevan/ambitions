@@ -170,7 +170,10 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
-        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
         let selection = NextStepSchedulingSelection(
             goalID: "goal-1",
             goalTitle: "Ship CFP proposal",
@@ -202,7 +205,10 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .denied, for: .calendarEvents)
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
-        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
 
         do {
             _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
@@ -230,7 +236,10 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
-        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
 
         let record = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
 
@@ -251,7 +260,10 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
-        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
 
         _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
         _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())

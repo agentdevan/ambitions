@@ -632,6 +632,7 @@ Main app writes redacted projection snapshots to App Group store.
 Widget reads only snapshot required for widget UI.
 Widget action invokes App Intent.
 Main app/runtime validates mutation.
+External write attempts are recorded through Core/LocalRuntimeOS/SideEffectSystem after local commit evidence exists.
 Proof artifact is created by runtime, not widget UI.
 ```
 
@@ -1709,6 +1710,14 @@ Core/LocalRuntimeOS/Storage/
   EventStoreSQLite.swift
   ProjectionStoreSQLite.swift
   SearchStoreFTS.swift
+
+Core/LocalRuntimeOS/SideEffectSystem/
+  SideEffectOutbox.swift
+  SideEffectPolicyEngine.swift
+  NotificationOutbox.swift
+  EventKitOutbox.swift
+  ReminderOutbox.swift
+  WidgetRefreshOutbox.swift
 
 Core/Permissions/
   PermissionCoordinator.swift

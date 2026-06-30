@@ -133,8 +133,11 @@ Current implementation evidence is narrower:
 - Source-present Storage foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/Storage/`, including `EventStoreSQLite`, `ObjectStoreSwiftData`, `ProjectionStoreSQLite`, `SearchStoreFTS`, `BlobStoreFileSystem`, `AppGroupSnapshotStore`, `BackupStore`, and `MigrationStore`.
 - `ObjectStoreSwiftData.swift` owns the SwiftData object-store source; the former `Core/Persistence` local-store owner file was removed.
 - Focused simulator tests cover the storage manifest, SwiftData object-store authority rules, SQLite event append/query/checksum behavior, projection persistence, FTS search rebuild/privacy filtering, blob integrity, redacted external snapshots, encrypted backup/decrypt integrity, and migration dry-run metadata.
+- Source-present SideEffectSystem foundation source exists under `Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/`, including `SideEffectOutbox`, `SideEffectPolicyEngine`, `NotificationOutbox`, `EventKitOutbox`, `ReminderOutbox`, `WidgetRefreshOutbox`, `AppIntentBridge`, `ShareExtensionIntake`, `ExternalReconciliation`, side-effect ledger models, and the SwiftData side-effect ledger repository.
+- The former `Core/Domain/SideEffectLedgerModels.swift` file and the former `Core/Persistence` side-effect ledger repository struct were removed from those owners.
+- Focused simulator tests cover SideEffectSystem owner files, old owner removal, policy blocking without local commit evidence, a real SwiftData local commit followed by queued external attempt/result recording, side-effect ledger modeling/repository behavior, notification outbox recording, EventKit outbox recording, and notification payload minimization for private ambient snapshots.
 - Remaining runtime and persistence scaffolding exists primarily under `Native/Ambitions/Core/Runtime/`, `Native/Ambitions/Core/Persistence/`, and `Native/Ambitions/Core/Domain/`.
-- `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until later implementation trains cover full cross-path replay, active app-wide storage consumption, side-effect outbox, privacy firewall, migration repair, diagnostics, and continuity.
+- `Native/Ambitions/Core/LocalRuntimeOS/` is only partially source-present. It does not prove the full local runtime OS until later implementation trains cover full cross-path replay, active app-wide storage consumption, full app-wide side-effect outbox enforcement, privacy firewall, migration repair, diagnostics, and continuity.
 - Current SwiftData persistence source is now owned by `ObjectStoreSwiftData`, but the app has not yet proven every app path consumes only the new storage tier split.
 - Existing command, receipt, event ledger, side-effect ledger, snapshot ledger, search, Source Atlas, runtime kernel, and repository code may be reused or moved as scaffolding, but they do not prove the LocalRuntimeOS spine is complete.
 
@@ -146,7 +149,7 @@ Unsupported implementation claims until future source proof exists:
 - all app-facing projections are consumed by Stage/surfaces/widgets/App Intents only from `ProjectionEngine`
 - every app path treats SwiftData only as the object store tier
 - SQLite/FTS-backed journal, projection, and search stores are active across all production mutation/read paths
-- side effects are fully outboxed with leases, retry, confirmation, and receipts
+- every external side-effect path is fully outboxed with leases, retry, confirmation, and receipts
 - Capture intake is durably journaled before classification and promotion
 - Source Atlas is a signed public-reference package manager
 - CloudKit continuity is approved or implemented as user-owned event-envelope sync

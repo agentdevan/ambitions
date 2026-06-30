@@ -16,7 +16,10 @@ final class CalendarRealityServiceTests: XCTestCase {
             )
         ])
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
-        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
 
         let result = await service.findOpenWindows(
             request: CalendarRealityReadRequest(
@@ -49,7 +52,10 @@ final class CalendarRealityServiceTests: XCTestCase {
         let now = Date(timeIntervalSince1970: 1_714_000_000)
         await store.setAuthorization(state: .denied, for: .calendarEvents)
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
-        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
 
         let result = await service.findOpenWindows(
             request: CalendarRealityReadRequest(
@@ -80,7 +86,10 @@ final class CalendarRealityServiceTests: XCTestCase {
         await store.setAuthorization(state: .notDetermined, for: .calendarEvents)
         await store.setWriteOnlyAuthorizationResponse(state: .writeOnly)
         let sideEffectLedger = RecordingSideEffectLedgerRepository()
-        let service = EventKitIntegrationService(storeClient: store, sideEffectLedger: sideEffectLedger)
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
         let block = ScheduledAmbitionsBlock(
             id: "block-1",
             title: "Draft proposal",

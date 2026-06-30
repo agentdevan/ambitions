@@ -3,18 +3,18 @@ import Foundation
 
 actor EventKitIntegrationService: CalendarRemindersServicing {
     let storeClient: any EventKitStoreClient
-    let sideEffectLedger: (any SideEffectLedgerRepository)?
+    let eventKitOutbox: EventKitOutbox
     let reminderRepository: (any ReminderRepository)?
     let calendar: Calendar
 
     init(
         storeClient: any EventKitStoreClient = EventKitStoreClientLive(),
-        sideEffectLedger: (any SideEffectLedgerRepository)? = nil,
+        eventKitOutbox: EventKitOutbox = EventKitOutbox(recorder: nil),
         reminderRepository: (any ReminderRepository)? = nil,
         calendar: Calendar = Calendar.current
     ) {
         self.storeClient = storeClient
-        self.sideEffectLedger = sideEffectLedger
+        self.eventKitOutbox = eventKitOutbox
         self.reminderRepository = reminderRepository
         self.calendar = calendar
     }

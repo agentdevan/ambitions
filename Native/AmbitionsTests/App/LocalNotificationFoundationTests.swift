@@ -161,7 +161,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
                     continuity: staleContinuity
                 )
             ),
-            sideEffectLedger: sideEffectLedger
+            notificationOutbox: NotificationOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
         await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
@@ -423,7 +423,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
         let foundation = LocalNotificationFoundation(
             centerClient: center,
             snapshotReader: StaticSnapshotReader(snapshot: snapshot),
-            sideEffectLedger: sideEffectLedger
+            notificationOutbox: NotificationOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
         await foundation.refreshSchedule(now: scheduleDate)
@@ -444,7 +444,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
         let foundation = LocalNotificationFoundation(
             centerClient: center,
             snapshotReader: StaticSnapshotReader(snapshot: nil),
-            sideEffectLedger: sideEffectLedger
+            notificationOutbox: NotificationOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
         await foundation.refreshSchedule(now: Date(timeIntervalSince1970: 1_712_779_200))
@@ -463,7 +463,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
         let foundation = LocalNotificationFoundation(
             centerClient: center,
             snapshotReader: ThrowingSnapshotReader(),
-            sideEffectLedger: sideEffectLedger
+            notificationOutbox: NotificationOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
         let scheduleDate = Date(timeIntervalSince1970: 1_712_779_200)
         let now = DomainTimestamp.string(from: scheduleDate)
@@ -486,7 +486,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
         let foundation = LocalNotificationFoundation(
             centerClient: center,
             snapshotReader: StaticSnapshotReader(snapshot: ExternalSurfaceSnapshot(generatedAt: "2026-04-15T12:00:00Z", nextAction: nil)),
-            sideEffectLedger: sideEffectLedger
+            notificationOutbox: NotificationOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
         let scheduleDate = Date(timeIntervalSince1970: 1_712_779_200)
         let now = DomainTimestamp.string(from: scheduleDate)
@@ -571,7 +571,7 @@ final class LocalNotificationFoundationTests: XCTestCase {
                     )
                 )
             ),
-            sideEffectLedger: sideEffectLedger
+            notificationOutbox: NotificationOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
         let scheduleDate = Date(timeIntervalSince1970: 1_712_779_200)
         let now = DomainTimestamp.string(from: scheduleDate)

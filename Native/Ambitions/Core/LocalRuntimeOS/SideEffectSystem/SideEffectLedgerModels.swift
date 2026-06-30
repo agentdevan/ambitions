@@ -17,6 +17,9 @@ enum SideEffectLedgerEffectKind: String, Codable, Sendable, Equatable, Hashable,
 
 enum SideEffectLedgerStatus: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
     case proposed
+    case queued
+    case leased
+    case succeeded
     case preparedDraft = "prepared_draft"
     case confirmationRequired = "confirmation_required"
     case blocked

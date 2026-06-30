@@ -51,9 +51,12 @@ enum AppContainerFactory {
     static func make(configuration: AppBootstrapConfiguration) async throws -> AppContainer {
         let repositories = try await prepareRepositories(for: configuration)
         let clock = AmbitionsClockFactory.clock(for: configuration.sessionSource)
-        let notificationService = LocalNotificationFoundation(sideEffectLedger: repositories.sideEffectLedger)
+        let sideEffectOutbox = repositories.sideEffectLedger.map { SideEffectOutbox(ledger: $0) }
+        let notificationService = LocalNotificationFoundation(
+            notificationOutbox: NotificationOutbox(recorder: sideEffectOutbox)
+        )
         let calendarRemindersService = EventKitIntegrationService(
-            sideEffectLedger: repositories.sideEffectLedger,
+            eventKitOutbox: EventKitOutbox(recorder: sideEffectOutbox),
             reminderRepository: repositories.reminders
         )
         let runtime = AmbitionsRuntimeFactory.make(

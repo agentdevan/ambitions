@@ -73,20 +73,20 @@ actor LocalNotificationFoundation: NotificationServicing {
     private let snapshotReader: any ExternalSurfaceSnapshotReading
     private let planner: NextStepLocalNotificationPlanner
     private let liveActivityService: any NextStepLiveActivityServicing
-    private let sideEffectLedger: (any SideEffectLedgerRepository)?
+    private let notificationOutbox: NotificationOutbox
 
     init(
         centerClient: any LocalNotificationCenterClient = UNUserNotificationCenterClient(),
         snapshotReader: any ExternalSurfaceSnapshotReading = FileExternalSurfaceSnapshotReader(),
         planner: NextStepLocalNotificationPlanner = NextStepLocalNotificationPlanner(),
         liveActivityService: any NextStepLiveActivityServicing = NextStepLiveActivityService(),
-        sideEffectLedger: (any SideEffectLedgerRepository)? = nil
+        notificationOutbox: NotificationOutbox = NotificationOutbox(recorder: nil)
     ) {
         self.centerClient = centerClient
         self.snapshotReader = snapshotReader
         self.planner = planner
         self.liveActivityService = liveActivityService
-        self.sideEffectLedger = sideEffectLedger
+        self.notificationOutbox = notificationOutbox
     }
 
     func currentAuthorizationState() async -> NotificationAuthorizationState {
@@ -147,28 +147,21 @@ actor LocalNotificationFoundation: NotificationServicing {
         now: Date,
         request: LocalNotificationScheduleRequest? = nil
     ) async {
-        guard let sideEffectLedger else { return }
-
-        let occurredAt = DomainTimestamp.string(from: now)
-        let record = SideEffectLedgerRecord(
-            id: "notification.\(outcome.rawValue).\(Int(now.timeIntervalSince1970))",
-            effectKind: .notification,
-            status: outcome.status,
-            boundary: .localOnly,
-            actionKind: .noOp,
-            sourceDomain: .system,
-            commandID: nil,
-            occurredAt: occurredAt,
-            localOnly: true,
-            requiresConfirmation: outcome.requiresConfirmation,
-            externalEffect: false,
-            reasons: outcome.reasons(request: request),
-            blockedFacts: outcome.blockedFacts,
-            degradedFacts: outcome.degradedFacts
+        let outboxOutcome: NotificationOutboxOutcome = switch outcome {
+        case .authorizationMissing:
+            .authorizationMissing
+        case .scheduled:
+            .scheduled
+        case .cleared:
+            .cleared
+        case .refreshFailed:
+            .refreshFailed
+        }
+        await notificationOutbox.recordRefresh(
+            outcome: outboxOutcome,
+            now: now,
+            requestIdentifier: request?.identifier
         )
-        do {
-            try await sideEffectLedger.append(record)
-        } catch {}
     }
 
     private enum NotificationSideEffectOutcome: String {
@@ -177,49 +170,6 @@ actor LocalNotificationFoundation: NotificationServicing {
         case cleared
         case refreshFailed
 
-        var status: SideEffectLedgerStatus {
-            switch self {
-            case .scheduled, .cleared:
-                .recordedLocalOnly
-            case .authorizationMissing:
-                .blocked
-            case .refreshFailed:
-                .failedSafely
-            }
-        }
-
-        var requiresConfirmation: Bool {
-            self == .authorizationMissing
-        }
-
-        func reasons(request: LocalNotificationScheduleRequest?) -> [SafeAutomationPolicyReason] {
-            guard self == .scheduled || self == .cleared else {
-                return self == .authorizationMissing ? [] : [.noChangeNeeded]
-            }
-
-            if request == nil {
-                return [.noChangeNeeded]
-            }
-            return []
-        }
-
-        var blockedFacts: [String] {
-            switch self {
-            case .authorizationMissing:
-                ["Notification authorization is required to refresh local reminders."]
-            default:
-                []
-            }
-        }
-
-        var degradedFacts: [String] {
-            switch self {
-            case .refreshFailed:
-                ["Notification snapshot could not be loaded; no schedule refresh was applied."]
-            default:
-                []
-            }
-        }
     }
 
     static func defaultCategories() -> [LocalNotificationCategoryDescriptor] {
@@ -262,10 +212,15 @@ struct NextStepLocalNotificationPlanner: Sendable {
         guard let next = snapshot?.nextAction else { return nil }
         guard snapshot?.continuity.lease.status != .stale else { return nil }
         guard snapshot?.continuity.lease.status != .unavailable else { return nil }
+        let route: AppExternalRoute = requiresMinimalPayload(for: snapshot)
+            ? .openToday(.focus)
+            : .openGoalDetail(goalID: next.goalID)
         var userInfo = AppExternalRouteTranslator()
-            .notificationPayload(for: .openGoalDetail(goalID: next.goalID), action: "open")
+            .notificationPayload(for: route, action: "open")
             .values
-        userInfo["stepID"] = next.stepID
+        if requiresObjectPayload(for: route) {
+            userInfo["stepID"] = next.stepID
+        }
         userInfo["origin"] = ExternalSurfaceOrigin.notification.rawValue
         userInfo["continuity"] = snapshot?.continuity.syncHealth.state.rawValue ?? ExternalSurfaceSyncHealthState.localFirst.rawValue
         userInfo["lease"] = snapshot?.continuity.lease.status.rawValue ?? ExternalSurfaceLeaseStatus.current.rawValue
@@ -278,6 +233,25 @@ struct NextStepLocalNotificationPlanner: Sendable {
             userInfo: userInfo,
             timeInterval: scheduleInterval(for: next.display.urgency)
         )
+    }
+
+    private func requiresMinimalPayload(for snapshot: ExternalSurfaceSnapshot?) -> Bool {
+        guard let snapshot else { return false }
+        guard snapshot.ambientState != nil else { return false }
+
+        switch snapshot.privacy.defaultVisibility {
+        case .sparse, .detailsHidden, .minimalPayload, .conservative, .optIn:
+            return true
+        case .glanceablePrivate:
+            return false
+        }
+    }
+
+    private func requiresObjectPayload(for route: AppExternalRoute) -> Bool {
+        if case .openGoalDetail = route {
+            return true
+        }
+        return false
     }
 
     private func title(for snapshot: ExternalSurfaceSnapshot?) -> String {

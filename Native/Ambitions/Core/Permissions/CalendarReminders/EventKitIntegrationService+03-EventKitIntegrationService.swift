@@ -185,30 +185,16 @@ extension EventKitIntegrationService {
         blockedFacts: [String] = [],
         degradedFacts: [String] = []
     ) async {
-        guard let sideEffectLedger else {
-            return
-        }
-
-        let now = Date()
-        let record = SideEffectLedgerRecord(
-            id: "calendar.\(actionKind.rawValue).\(status.rawValue).\(UUID().uuidString.lowercased())",
-            effectKind: .calendar,
+        await eventKitOutbox.recordCalendarSideEffect(
+            actionKind: actionKind,
             status: status,
             boundary: boundary,
-            actionKind: actionKind,
-            sourceDomain: .time,
-            occurredAt: DomainTimestamp.string(from: now),
-            localOnly: boundary == .localOnly,
             requiresConfirmation: requiresConfirmation,
             externalEffect: externalEffect,
             reasons: reasons,
             blockedFacts: blockedFacts,
             degradedFacts: degradedFacts
         )
-
-        do {
-            try await sideEffectLedger.append(record)
-        } catch {}
     }
 
     func makeReminder(
