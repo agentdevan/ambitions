@@ -930,12 +930,11 @@
       "swiftui": {
         "canonical_source_owners": [
           "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
-          "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift",
-          "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift"
+          "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift"
         ],
         "allowed_implementation_areas": [
-          "Native/Ambitions/Core/Runtime",
-          "Native/Ambitions/Core/Persistence",
+          "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary",
           "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI",
           "Native/Ambitions/Trust"
         ],
@@ -948,13 +947,13 @@
         ],
         "known_component_candidates": [
           "Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift",
-          "Native/Ambitions/Core/Runtime/SourceAtlasAccessBoundary.swift",
+          "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasBoundary.swift",
           "Native/Ambitions/Core/Runtime/SourceAtlasLocalCompositionFallback.swift"
         ],
         "known_tests": [
-          "Native/AmbitionsTests/Runtime/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
+          "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift",
           "Native/AmbitionsTests/Runtime/SourceAtlasOfflineNoAccountScenarioTests.swift",
-          "Native/AmbitionsTests/Persistence/SourceAtlasPublicArtifactPrivacyBoundaryTests.swift"
+          "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundaryTests.swift"
         ],
         "known_preview_or_quality_files": [
           "Native/Ambitions/Quality/ForbiddenLanguageAudit.swift",

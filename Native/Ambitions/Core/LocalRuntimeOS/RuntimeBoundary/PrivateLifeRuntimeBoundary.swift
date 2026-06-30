@@ -5,7 +5,7 @@ enum AmbitionsRuntimeClientKind: String, Codable, CaseIterable, Sendable, Equata
     case bedsideRitualCompanion = "bedside_ritual_companion"
 }
 
-struct PrivateLifeRuntimeBoundary: Sendable, Equatable {
+struct PrivateLifeRuntimeBoundary: Codable, Sendable, Equatable {
     let usesSwiftDataPersistence: Bool
     let usesRepositoryBackedMemory: Bool
     let syncBackendKind: SyncBackendKind

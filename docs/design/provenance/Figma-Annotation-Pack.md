@@ -117,8 +117,8 @@ Non-claim: this annotation is not Code Connect, not Visual Green, not source imp
 Annotation title: VSP-08 provenance - External Boundaries
 Frame naming recommendation: CANDIDATE - VSP-08 - External Boundaries hero - R1
 Shell relationship: requires VSP-01 shell = True; may mutate shell = False
-SwiftUI source owner: Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift, Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift, Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift
-Allowed implementation area: Native/Ambitions/Core/Runtime, Native/Ambitions/Core/Persistence, Native/Ambitions/DesignSystem/StagePrimitives/SharedUI, Native/Ambitions/Trust
+SwiftUI source owner: Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift, Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift, Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift
+Allowed implementation area: Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary, Native/Ambitions/DesignSystem/StagePrimitives/SharedUI, Native/Ambitions/Trust
 Forbidden implementation area: R2 private life graph storage, account-required core value, external/cloud LLM core runtime, private user context in Source Atlas, network dependency for offline core value
 Proof ceiling: Yellow
 Missing proof: owner approval, VSP-08A policy readback owner approval, VSP-08B implementation proof packet, live SwiftUI boundary parity screenshot, R2/Source Atlas request-shape proof, offline no-account proof

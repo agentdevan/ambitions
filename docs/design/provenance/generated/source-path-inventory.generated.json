@@ -131,7 +131,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 233,
+      "line_count": 247,
       "path": "Native/Ambitions/App/AppContainerFactory.swift"
     },
     {
@@ -2911,17 +2911,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 414,
-      "path": "Native/Ambitions/Core/Domain/PersonalizationFactorLedgerModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-05",
         "VSP-07",
         "VSP-09",
@@ -3516,19 +3505,6 @@
       "kind": "native_source",
       "line_count": 264,
       "path": "Native/Ambitions/Core/Domain/ScreenContractModels.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 273,
-      "path": "Native/Ambitions/Core/Domain/SideEffectLedgerModels.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -4228,7 +4204,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 354,
+      "line_count": 374,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift"
     },
     {
@@ -4334,6 +4310,943 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 40,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeCausalClock.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 234,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEvent.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 30,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventChecksum.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 56,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventCompactor.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 30,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventCursor.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 83,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventEnvelope.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 53,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventReplay.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 163,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 70,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeTombstoneLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 35,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 74,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 390,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 147,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/EgressFirewall.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 110,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/EncryptedBlobVault.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 118,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/ExportPolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 49,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/FileProtectionPolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 81,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/LocalAuthGate.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 170,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/PrivacyClassifier.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 73,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/PrivacyManifestRuntimeMap.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 148,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/RedactionEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 121,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/SensitiveSurfacePolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 481,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivacySecurity/StoragePrivacySecurityBoundary.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 276,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/AdaptationKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 80,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/CapacityFitKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 44,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/ClosureKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 193,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/DecisionKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 52,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/ExplanationKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 414,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedger.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 119,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedgerBuilder+02-makeFactors.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 324,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedgerBuilder+03-factor.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 173,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedgerBuilder+04-AccessOpportunityFactors.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 259,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedgerBuilder+05-HistoryConstraintFactors.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 164,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedgerBuilder+06-SourceProofFactors.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 114,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedgerBuilder.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 10,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PrivateLifeRuntimeKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 124,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/PrivateLifeRuntimeKernelContracts.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 293,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/ProofKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 101,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/RecommendationKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 58,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/RecoveryKernel.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 473,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/PrivateLifeRuntimeKernel/ReplayableDecisionTrace.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 41,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/AppIntentProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 41,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/GoalsProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 42,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/PrivacyProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 49,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionChecksum.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 40,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionCursor.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 204,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionDefinition.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 78,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionInvalidation.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 328,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionMaterializer.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 40,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ReceiptProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 54,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/SearchProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 48,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/TimeProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 42,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/TodayProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 41,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/WidgetProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 35,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/YouProjection.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 118,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/AccountBoundary.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 166,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/CapabilityMatrix.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 78,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/LocalOnlyMode.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 181,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/NetworkEgressPolicy.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 75,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/PrivacyBoundary.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 87,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/PrivateLifeRuntimeBoundary.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 200,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasBoundary.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 82,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 220,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundary.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 34,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 42,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/EventKitOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 38,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ExternalReconciliation.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 83,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/NotificationOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 43,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ReminderOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 29,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 276,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 51,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerSwiftDataRepository.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 222,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 211,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/SideEffectPolicyEngine.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 30,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/WidgetRefreshOutbox.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 141,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/AppGroupSnapshotStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 165,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/BackupStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 174,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/BlobStoreFileSystem.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 226,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/EventStoreSQLite.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 319,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/LocalRuntimeStorageCore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 265,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/MigrationStore.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 524,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/ObjectStoreSwiftData.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 223,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/ProjectionStoreSQLite.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 258,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/SearchStoreFTS.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-05",
@@ -4374,7 +5287,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 323,
+      "line_count": 309,
       "path": "Native/Ambitions/Core/Permissions/CalendarReminders/EventKitIntegrationService+03-EventKitIntegrationService.swift"
     },
     {
@@ -4410,12 +5323,13 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-02",
         "VSP-04"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 560,
+      "line_count": 534,
       "path": "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift"
     },
     {
@@ -4557,19 +5471,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 294,
-      "path": "Native/Ambitions/Core/Persistence/LocalStore.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-04"
       ],
       "exists": true,
@@ -4603,7 +5504,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 238,
+      "line_count": 241,
       "path": "Native/Ambitions/Core/Persistence/PersistenceContracts+03-UnavailableReminderRepository.swift"
     },
     {
@@ -4748,18 +5649,6 @@
       "kind": "native_source",
       "line_count": 503,
       "path": "Native/Ambitions/Core/Persistence/SourceAtlasLocalPackCache.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 220,
-      "path": "Native/Ambitions/Core/Persistence/SourceAtlasPublicArtifactPrivacyBoundary.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -5003,18 +5892,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 481,
-      "path": "Native/Ambitions/Core/Persistence/StoragePrivacySecurityBoundary.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-05",
         "VSP-07"
       ],
@@ -5166,7 +6043,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 303,
+      "line_count": 255,
       "path": "Native/Ambitions/Core/Persistence/SwiftDataRepositories+05-SwiftDataAmbitionGraphProjectionRecordRepository.swift"
     },
     {
@@ -5232,13 +6109,12 @@
         "VSP-02",
         "VSP-03",
         "VSP-04",
-        "VSP-05",
-        "VSP-07"
+        "VSP-05"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 228,
+      "line_count": 151,
       "path": "Native/Ambitions/Core/Runtime/AmbitionsRuntimeContracts.swift"
     },
     {
@@ -6140,71 +7016,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 119,
-      "path": "Native/Ambitions/Core/Runtime/PersonalizationFactorLedgerBuilder+02-makeFactors.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 324,
-      "path": "Native/Ambitions/Core/Runtime/PersonalizationFactorLedgerBuilder+03-factor.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 173,
-      "path": "Native/Ambitions/Core/Runtime/PersonalizationFactorLedgerBuilder+04-AccessOpportunityFactors.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 259,
-      "path": "Native/Ambitions/Core/Runtime/PersonalizationFactorLedgerBuilder+05-HistoryConstraintFactors.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 164,
-      "path": "Native/Ambitions/Core/Runtime/PersonalizationFactorLedgerBuilder+06-SourceProofFactors.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 114,
-      "path": "Native/Ambitions/Core/Runtime/PersonalizationFactorLedgerBuilder.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-09"
       ],
       "exists": true,
@@ -6233,75 +7044,8 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 75,
-      "path": "Native/Ambitions/Core/Runtime/PrivacyBoundary.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
       "line_count": 46,
       "path": "Native/Ambitions/Core/Runtime/PrivateLifeRuntime.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 321,
-      "path": "Native/Ambitions/Core/Runtime/PrivateLifeRuntimeKernelContracts+02-PrivateLifeRuntimeKernel+02-boundary.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 352,
-      "path": "Native/Ambitions/Core/Runtime/PrivateLifeRuntimeKernelContracts+02-PrivateLifeRuntimeKernel+03-lifeContextCadence.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 56,
-      "path": "Native/Ambitions/Core/Runtime/PrivateLifeRuntimeKernelContracts+02-PrivateLifeRuntimeKernel+04-traceReasonSignature.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 10,
-      "path": "Native/Ambitions/Core/Runtime/PrivateLifeRuntimeKernelContracts+02-PrivateLifeRuntimeKernel.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 124,
-      "path": "Native/Ambitions/Core/Runtime/PrivateLifeRuntimeKernelContracts.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6395,18 +7139,6 @@
       "kind": "native_source",
       "line_count": 30,
       "path": "Native/Ambitions/Core/Runtime/RecoveryEngine.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 473,
-      "path": "Native/Ambitions/Core/Runtime/ReplayableDecisionTraceModels.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6672,17 +7404,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 200,
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasAccessBoundary.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-07",
         "VSP-08"
       ],
@@ -6703,19 +7424,6 @@
       "kind": "native_source",
       "line_count": 377,
       "path": "Native/Ambitions/Core/Runtime/SourceAtlasLocalReferenceCompositionProof.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "native_source",
-      "line_count": 82,
-      "path": "Native/Ambitions/Core/Runtime/SourceAtlasNoPrivateGraphEgressAudit.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -8327,7 +9035,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 366,
+      "line_count": 383,
       "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift"
     },
     {
@@ -14134,7 +14842,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 222,
+      "line_count": 231,
       "path": "Native/AmbitionsTests/App/CalendarRealityServiceTests.swift"
     },
     {
@@ -14252,7 +14960,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 390,
+      "line_count": 402,
       "path": "Native/AmbitionsTests/App/EventKitIntegrationServiceTests.swift"
     },
     {
@@ -16407,19 +17115,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 200,
-      "path": "Native/AmbitionsTests/Domain/SideEffectLedgerModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
         "VSP-05",
@@ -16988,6 +17683,247 @@
       "candidate_vsp_ids": [
         "VSP-02",
         "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 231,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/EventJournal/RuntimeEventJournalTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 181,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/ObjectState/ObjectStateTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 241,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity/PrivacySecurityTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 157,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivacySecurity/StoragePrivacySecurityBoundaryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 263,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivateLifeRuntimeKernel/AmbitionsRuntimeKernelContractsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 373,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivateLifeRuntimeKernel/LifeContextRuntimeEffectProofTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 707,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivateLifeRuntimeKernel/PersonalizationFactorLedgerTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 95,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivateLifeRuntimeKernel/PrivateLifeRuntimeKernelOwnershipTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 631,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/PrivateLifeRuntimeKernel/ReplayableDecisionTraceTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 209,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/ProjectionEngineTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 143,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/RuntimeBoundaryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 111,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasBoundaryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-08",
+        "VSP-09"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 63,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAuditTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 110,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/RuntimeBoundary/SourceAtlasPublicArtifactBoundaryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 200,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerModelsTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 137,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectLedgerRepositoryTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 156,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 285,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Storage/StorageTierTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-04",
         "VSP-07",
         "VSP-09",
         "VSP-10"
@@ -17251,18 +18187,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 137,
-      "path": "Native/AmbitionsTests/Persistence/SideEffectLedgerRepositoryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-08"
       ],
       "exists": true,
@@ -17283,19 +18207,6 @@
       "kind": "test",
       "line_count": 516,
       "path": "Native/AmbitionsTests/Persistence/SourceAtlasLocalPackCacheTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-07",
-        "VSP-08",
-        "VSP-10"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 110,
-      "path": "Native/AmbitionsTests/Persistence/SourceAtlasPublicArtifactPrivacyBoundaryTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -17493,19 +18404,6 @@
       "kind": "test",
       "line_count": 82,
       "path": "Native/AmbitionsTests/Persistence/StoragePackageBoundaryModelsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-03",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 157,
-      "path": "Native/AmbitionsTests/Persistence/StoragePrivacySecurityBoundaryTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -17814,21 +18712,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 263,
-      "path": "Native/AmbitionsTests/Runtime/AmbitionsRuntimeKernelContractsTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-05",
         "VSP-07",
@@ -17874,12 +18757,13 @@
         "VSP-04",
         "VSP-05",
         "VSP-07",
+        "VSP-08",
         "VSP-10"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 107,
+      "line_count": 110,
       "path": "Native/AmbitionsTests/Runtime/CoreRuntimeCanonicalOwnershipTests.swift"
     },
     {
@@ -17934,18 +18818,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 373,
-      "path": "Native/AmbitionsTests/Runtime/LifeContextRuntimeEffectProofTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-01",
         "VSP-02",
         "VSP-03",
@@ -17986,18 +18858,6 @@
       "kind": "test",
       "line_count": 300,
       "path": "Native/AmbitionsTests/Runtime/P1FLocalSearchFoundationTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-04",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 707,
-      "path": "Native/AmbitionsTests/Runtime/PersonalizationFactorLedgerTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18051,20 +18911,6 @@
     },
     {
       "candidate_vsp_ids": [
-        "VSP-02",
-        "VSP-03",
-        "VSP-04",
-        "VSP-05",
-        "VSP-07"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 631,
-      "path": "Native/AmbitionsTests/Runtime/ReplayableDecisionTraceTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
         "VSP-04",
         "VSP-07"
       ],
@@ -18099,17 +18945,6 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
-        "VSP-08"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 111,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasAccessBoundaryTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
         "VSP-07",
         "VSP-08"
       ],
@@ -18130,20 +18965,6 @@
       "kind": "test",
       "line_count": 465,
       "path": "Native/AmbitionsTests/Runtime/SourceAtlasLocalReferenceCompositionProofTests.swift"
-    },
-    {
-      "candidate_vsp_ids": [
-        "VSP-04",
-        "VSP-05",
-        "VSP-07",
-        "VSP-08",
-        "VSP-09"
-      ],
-      "exists": true,
-      "inventory_only": true,
-      "kind": "test",
-      "line_count": 63,
-      "path": "Native/AmbitionsTests/Runtime/SourceAtlasNoPrivateGraphEgressAuditTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -20424,7 +21245,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 1765,
+      "line_count": 1782,
       "path": "docs/platform/APPLE_PLATFORM_SOURCE_ATLAS_IOS.md"
     },
     {
@@ -20586,7 +21407,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "doc",
-      "line_count": 384,
+      "line_count": 406,
       "path": "docs/truth/IMPLEMENTATION_TRUTH.md"
     },
     {
@@ -20670,7 +21491,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1665,
+  "entry_count": 1736,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1
