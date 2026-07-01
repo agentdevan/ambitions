@@ -1,8 +1,8 @@
 # VSP-07 Part 01 Contextual Trust Inspection Seams R1
 
-Status: Yellow / Exploration
+Status: Yellow / Owner-selected direction
 
-This evidence package opens VSP-07 with six contextual trust-inspection seam directions. It is not implementation authority, not Visual Green, and not owner approval.
+This evidence package opens VSP-07 with six contextual trust-inspection seam directions. The owner selected Option F Attached Receipt Stack on 2026-07-01 for Part 02 refinement. It is not implementation authority and not Visual Green.
 
 ## Figma Frames
 
@@ -37,18 +37,19 @@ This evidence package opens VSP-07 with six contextual trust-inspection seam dir
 - E Privacy Boundary: Strong boundary language, but this is likely better reserved for VSP-08 external boundaries.
 - F Attached Receipt Stack: Cross-object receipts remain temporary inspection state, not a global activity feed.
 
-## Recommendation
+## Owner Selection
 
-Recommended base for VSP-07 refinement: Option C Boundary Receipt.
+Owner-selected base for VSP-07 refinement: Option F Attached Receipt Stack.
 
-Rationale:
+Part 02 must make this direction richer and safer while preserving product law:
 
-- It keeps Trust attached to the object that changed.
-- It is easiest to prevent from becoming a fifth root surface.
-- It aligns with Time/Today/Goals/Capture mutation receipts.
-- It can support Proof, Source, Privacy, History, and Receipts as contextual detail affordances.
+- Receipts stay attached to changed objects.
+- Cross-object receipt stacking remains temporary inspection state.
+- The stack does not become an activity feed, history destination, receipt destination, or root Trust surface.
+- The user can return to the owning object.
+- Proof, Source, Privacy, History, and Receipts remain contextual detail affordances.
 
-Option E should be retained as context for VSP-08 because it carries account/R2/Source Atlas boundary language.
+Prior review recommended Option C Boundary Receipt. That recommendation is now historical context and should be used as a guardrail for object attachment, not as the selected direction. Option E should be retained as context for VSP-08 because it carries account/R2/Source Atlas boundary language.
 
 ## Audit Notes
 
@@ -60,7 +61,7 @@ Option E should be retained as context for VSP-08 because it carries account/R2/
 
 ## Non-Claims
 
-- No owner approval.
+- Owner direction selection only. No final VSP-07 candidate package approval.
 - No source implementation.
 - No SwiftUI parity.
 - No Visual Green.
@@ -71,4 +72,4 @@ Option E should be retained as context for VSP-08 because it carries account/R2/
 
 ## Follow-Up
 
-Owner must choose one option, request synthesis, or reject this exploration before VSP-07 Part 02 refinement.
+Proceed to VSP-07 Part 02 refinement from Option F Attached Receipt Stack, with the product-law guardrails above.

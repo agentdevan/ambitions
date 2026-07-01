@@ -1018,16 +1018,19 @@
         "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-c-boundary-receipt-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-d-route-trace-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-e-privacy-boundary-r1.png",
-        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png"
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png"
       ],
       "evidence_doc_paths": [
         "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
-        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
+        "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md"
       ],
       "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
       "notes": [
-        "Part 01 exploration board with six contextual trust inspection seam options. No owner approval, Visual Green, source implementation, device proof, or accessibility conformance claimed."
+        "Owner selected Option F Attached Receipt Stack on 2026-07-01. Yellow proof ceiling remains; no Visual Green, source implementation, device proof, or accessibility conformance claimed."
       ]
     },
     {
@@ -1132,16 +1135,20 @@
       "frame_name": "EXPLORATION - VSP-07 - Option F - Attached Receipt Stack - R1",
       "vsp_id": "VSP-07",
       "evidence_screenshot_paths": [
-        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png"
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png"
       ],
       "evidence_doc_paths": [
         "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
-        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md"
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
+        "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md"
       ],
       "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
       "notes": [
-        "Exploration option: temporary cross-object receipt stack, not activity feed or root destination."
+        "Owner-selected VSP-07 Part 01 direction: temporary cross-object attached receipt stack, not an activity feed or root destination."
       ]
     }
   ]

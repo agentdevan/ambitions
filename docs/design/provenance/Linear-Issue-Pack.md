@@ -251,8 +251,8 @@ Rollback plan:
 
 - Parent issue mirror: `AMB-1486`
 - Recommended status: `Needs Repair`
-- Labels: VSP, trust, inspection, yellow-proof, figma-exploration
-- Blocked by: owner selection for VSP-07 direction, surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval
+- Labels: VSP, trust, inspection, yellow-proof, figma-exploration, owner-selected-direction, selected-f-attached-receipt-stack
+- Blocked by: surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval, final VSP-07 Option F candidate package approval, live SwiftUI/device/accessibility/runtime proof
 - Do not create now: `True`
 
 Acceptance summary:
@@ -260,16 +260,18 @@ Acceptance summary:
 - No Proof, Source, Privacy, History, or Receipts root surfaces.
 - Copy cannot overclaim proof or privacy readiness.
 - Part 01 exploration board is node 244:93 with options A-F.
-- Recommended base is Option C Boundary Receipt because inspection stays attached to the changed object.
 - Option E Privacy Boundary is retained as VSP-08 context because it carries account/R2/Source Atlas boundary risk.
-- VSP-07 cannot proceed to implementation until owner selects a direction and a final package is approved.
+- Owner selected Option F Attached Receipt Stack as the VSP-07 Part 01 direction on 2026-07-01.
+- Part 02 must keep receipts attached to owning objects and prevent activity-feed/history/root-surface drift.
+- Option C remains a historical guardrail for object attachment; it is not the selected direction.
+- VSP-07 cannot proceed to implementation until the final Option F candidate package is owner-approved.
 Validation summary:
 - focused Trust tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Owner-select VSP-07 contextual trust inspection direction - scope: Review Part 01 node 244:93 and choose one option, synthesis, or rejection before refinement - status: Needs Repair
-- Refine VSP-07 selected trust seam into candidate package - scope: Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, proof/non-claim board - status: Spec Ready after owner direction selection
+- Refine VSP-07 Option F Attached Receipt Stack into Part 02 candidate package - scope: Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, proof/non-claim board, and durable screenshots from selected node 244:502 - status: Needs Repair
+- Owner-review VSP-07 Option F candidate package - scope: Owner approves, repairs, or rejects the Part 02 package before any source implementation issue is created - status: Blocked until Part 02 exists
 - Produce Trust inspection SwiftUI parity leaf - scope: Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces - status: Spec Ready after final package approval
 
 Standard Codex closeout block:

@@ -967,11 +967,16 @@
       "proof_id": "vsp-07-owner-approval",
       "vsp_id": "VSP-07",
       "proof_type": "owner_approval",
-      "status": "missing",
-      "artifact_paths": [],
-      "blocking_reason": "Missing owner selection/approval evidence for current VSP-07 direction.",
-      "proof_ceiling_impact": "Keeps proof ceiling Yellow and blocks Green.",
-      "notes": "Owner must select, synthesize, or reject Part 01 node 244:93 before VSP-07 can proceed."
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Records owner direction selection only. Keeps proof ceiling Yellow and does not prove final package approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, or accessibility conformance.",
+      "notes": "Owner selected Option F Attached Receipt Stack on 2026-07-01 for Part 02 refinement."
     },
     {
       "proof_id": "vsp-07-swiftui-simulator-screenshot",
@@ -1595,11 +1600,30 @@
         "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-c-boundary-receipt-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-d-route-trace-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-e-privacy-boundary-r1.png",
-        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png"
+        "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-f-attached-receipt-stack-r1.png",
+        "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports Yellow exploration evidence only. Does not prove owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, or accessibility conformance.",
-      "notes": "Part 01 exploration board at node 244:93. Owner selection required before refinement."
+      "proof_ceiling_impact": "Supports Yellow exploration and owner-selected direction evidence only. Does not prove final package approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, or accessibility conformance.",
+      "notes": "Part 01 exploration board at node 244:93. Owner selected Option F Attached Receipt Stack at node 244:502 for Part 02 refinement."
+    },
+    {
+      "proof_id": "vsp-07-option-f-direction-selection-r1",
+      "vsp_id": "VSP-07",
+      "proof_type": "owner_direction_selection",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Lifts only the owner-selection blocker for VSP-07 Part 02 refinement. Does not authorize source implementation or Green claims.",
+      "notes": "Owner selected Option F Attached Receipt Stack on 2026-07-01."
     }
   ]
 }

@@ -342,18 +342,20 @@
         "trust",
         "inspection",
         "yellow-proof",
-        "figma-exploration"
+        "figma-exploration",
+        "owner-selected-direction",
+        "selected-f-attached-receipt-stack"
       ],
       "recommended_sub_issues": [
         {
-          "title": "Owner-select VSP-07 contextual trust inspection direction",
-          "scope": "Review Part 01 node 244:93 and choose one option, synthesis, or rejection before refinement",
+          "title": "Refine VSP-07 Option F Attached Receipt Stack into Part 02 candidate package",
+          "scope": "Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, proof/non-claim board, and durable screenshots from selected node 244:502",
           "recommended_status": "Needs Repair"
         },
         {
-          "title": "Refine VSP-07 selected trust seam into candidate package",
-          "scope": "Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, proof/non-claim board",
-          "recommended_status": "Spec Ready after owner direction selection"
+          "title": "Owner-review VSP-07 Option F candidate package",
+          "scope": "Owner approves, repairs, or rejects the Part 02 package before any source implementation issue is created",
+          "recommended_status": "Blocked until Part 02 exists"
         },
         {
           "title": "Produce Trust inspection SwiftUI parity leaf",
@@ -362,19 +364,22 @@
         }
       ],
       "blocked_by": [
-        "owner selection for VSP-07 direction",
         "surface object existence from VSP-02 through VSP-06",
         "VSP-09 accessibility matrix",
-        "owner approval"
+        "owner approval",
+        "final VSP-07 Option F candidate package approval",
+        "live SwiftUI/device/accessibility/runtime proof"
       ],
       "acceptance_summary": [
         "Trust remains contextual inspection detail.",
         "No Proof, Source, Privacy, History, or Receipts root surfaces.",
         "Copy cannot overclaim proof or privacy readiness.",
         "Part 01 exploration board is node 244:93 with options A-F.",
-        "Recommended base is Option C Boundary Receipt because inspection stays attached to the changed object.",
         "Option E Privacy Boundary is retained as VSP-08 context because it carries account/R2/Source Atlas boundary risk.",
-        "VSP-07 cannot proceed to implementation until owner selects a direction and a final package is approved."
+        "Owner selected Option F Attached Receipt Stack as the VSP-07 Part 01 direction on 2026-07-01.",
+        "Part 02 must keep receipts attached to owning objects and prevent activity-feed/history/root-surface drift.",
+        "Option C remains a historical guardrail for object attachment; it is not the selected direction.",
+        "VSP-07 cannot proceed to implementation until the final Option F candidate package is owner-approved."
       ],
       "validation_summary": [
         "focused Trust tests after source implementation",
@@ -383,10 +388,12 @@
       ],
       "closeout_required": [
         "Part 01 frame ID 244:93 and durable proof paths",
-        "owner-selected VSP-07 direction before Part 02",
         "approved frame ID",
         "contextual inspection screenshot proof",
-        "privacy/trust disclosure proof"
+        "privacy/trust disclosure proof",
+        "Option F selection proof",
+        "Part 02 owner-review package",
+        "final package owner approval"
       ],
       "do_not_create_now": true
     },

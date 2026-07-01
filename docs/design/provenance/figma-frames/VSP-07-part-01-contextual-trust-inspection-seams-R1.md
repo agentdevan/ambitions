@@ -1,8 +1,8 @@
 # VSP-07 Part 01 Contextual Trust Inspection Seams R1
 
-Status: Yellow / Exploration
+Status: Yellow / Owner-selected direction
 
-This frame note registers the first VSP-07 workshop board. It is direction-finding only and does not approve implementation.
+This frame note registers the first VSP-07 workshop board. The owner selected Option F Attached Receipt Stack on 2026-07-01 for Part 02 refinement. This does not approve source implementation.
 
 ## Frame Index
 
@@ -14,7 +14,7 @@ This frame note registers the first VSP-07 workshop board. It is direction-findi
 | Option C | `EXPLORATION - VSP-07 - Option C - Boundary Receipt - R1` | `244:263` |
 | Option D | `EXPLORATION - VSP-07 - Option D - Route Trace - R1` | `244:344` |
 | Option E | `EXPLORATION - VSP-07 - Option E - Privacy Boundary - R1` | `244:423` |
-| Option F | `EXPLORATION - VSP-07 - Option F - Attached Receipt Stack - R1` | `244:502` |
+| Option F - owner selected | `EXPLORATION - VSP-07 - Option F - Attached Receipt Stack - R1` | `244:502` |
 
 ## Intended Ownership
 
@@ -32,11 +32,13 @@ This frame note registers the first VSP-07 workshop board. It is direction-findi
 - Inspection must not become an activity feed, analytics dashboard, Source Atlas center, account center, or global history destination.
 - Copy cannot overclaim proof, privacy, source certainty, R2 readiness, account readiness, or release readiness.
 
-## Recommended Next Direction
+## Owner-Selected Direction
 
-Use Option C Boundary Receipt as the Part 02 base unless the owner selects a different direction.
+Use Option F Attached Receipt Stack as the Part 02 base.
 
-Option E Privacy Boundary should inform VSP-08 external boundaries rather than becoming the VSP-07 base.
+Prior review recommended Option C Boundary Receipt, but owner selection now controls the next workshop step. Option C remains useful as a guardrail for keeping receipts attached to changed objects. Option E Privacy Boundary should inform VSP-08 external boundaries rather than becoming the VSP-07 base.
+
+Required Part 02 repair pressure: Option F must not become an activity feed, receipts destination, history destination, or global Trust surface.
 
 ## Acceptance Criteria For Future Candidate
 
@@ -51,3 +53,5 @@ Option E Privacy Boundary should inform VSP-08 external boundaries rather than b
 ## Durable Proof
 
 See `docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md`.
+
+Selection proof: `docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md`.

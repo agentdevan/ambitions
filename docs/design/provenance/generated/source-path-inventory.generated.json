@@ -6548,7 +6548,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 104,
+      "line_count": 227,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"
     },
     {
@@ -6596,7 +6596,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 220,
+      "line_count": 225,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransaction.swift"
     },
     {
@@ -18725,7 +18725,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 206,
+      "line_count": 212,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/ObjectState/ObjectStateTests.swift"
     },
     {
@@ -19576,7 +19576,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 235,
+      "line_count": 279,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/LocalRuntimeOSTransactionKernelOwnershipTests.swift"
     },
     {

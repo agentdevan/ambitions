@@ -229,6 +229,8 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-hero-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-crop-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-launch-board-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png
 SwiftUI source owners:
 - Native/Ambitions/Trust/InspectionSurface.swift
 - Native/Ambitions/Trust/ProofInspectionView.swift
