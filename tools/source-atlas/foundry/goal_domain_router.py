@@ -18,6 +18,7 @@ from typing import Any
 
 from .claim_frontier import DEFAULT_FRONTIER_CONFIG_PATH, SOURCE_ATLAS_ROOT
 from .frontier_intake import FrontierIntakeOptions, compile_frontier_intake
+from .launch_floor_domain_taxonomy import launch_floor_taxonomy_domain_index
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, privacy_findings_for_value, read_json, stable_hash, stable_id, utc_now, write_json
 
 
@@ -51,6 +52,7 @@ class GoalDomainRouterOptions:
     output_root: Path
     frontier_config_path: Path | None = DEFAULT_FRONTIER_CONFIG_PATH
     production_target_ledger_path: Path | None = DEFAULT_PRODUCTION_TARGET_LEDGER_PATH
+    launch_floor_taxonomy_path: Path | None = None
     created_at: str | None = None
 
 
@@ -69,6 +71,8 @@ def compile_goal_domain_router(options: GoalDomainRouterOptions) -> dict[str, An
     frontiers = _frontiers(frontier_config_path)
     ledger = _read_json_if_exists(production_target_ledger_path)
     ledger_by_domain = _ledger_by_domain(ledger)
+    taxonomy = _read_json_if_exists(options.launch_floor_taxonomy_path)
+    taxonomy_by_domain = launch_floor_taxonomy_domain_index(taxonomy)
 
     routes: list[dict[str, Any]] = []
     candidate_requests: list[dict[str, Any]] = []
@@ -80,6 +84,8 @@ def compile_goal_domain_router(options: GoalDomainRouterOptions) -> dict[str, An
                 frontiers=frontiers,
                 ledger_by_domain=ledger_by_domain,
                 production_target_ledger_path=production_target_ledger_path,
+                taxonomy_by_domain=taxonomy_by_domain,
+                launch_floor_taxonomy_path=options.launch_floor_taxonomy_path,
             )
             routes.append(route)
             if route["route"] == ROUTE_CANDIDATE_INTAKE:
@@ -125,6 +131,7 @@ def compile_goal_domain_router(options: GoalDomainRouterOptions) -> dict[str, An
         "routes": len(routes),
         "productionTargetReadyRoutes": sum(1 for route in routes if route["route"] == ROUTE_PRODUCTION_READY),
         "configuredNotReadyRoutes": sum(1 for route in routes if route["route"] == ROUTE_CONFIGURED_NOT_READY),
+        "launchFloorTaxonomyRoutes": sum(1 for route in routes if route.get("taxonomyRoute") is True),
         "candidateIntakeRoutes": sum(1 for route in routes if route["route"] == ROUTE_CANDIDATE_INTAKE),
         "blockedPrivateRoutes": sum(1 for route in routes if route["route"] == ROUTE_BLOCKED_PRIVATE),
         "claims": 0,
@@ -150,6 +157,7 @@ def compile_goal_domain_router(options: GoalDomainRouterOptions) -> dict[str, An
         "inputPath": str(options.input_path),
         "frontierConfigPath": str(frontier_config_path),
         "productionTargetLedgerPath": str(production_target_ledger_path),
+        "launchFloorTaxonomyPath": str(options.launch_floor_taxonomy_path) if options.launch_floor_taxonomy_path else None,
         "routes": sorted(routes, key=lambda item: item["requestID"]),
         "candidateIntake": {
             "required": bool(candidate_requests),
@@ -202,6 +210,20 @@ def compile_goal_domain_router(options: GoalDomainRouterOptions) -> dict[str, An
             "issues": [],
         },
         {
+            "name": "taxonomy_configured_not_ready_routes_are_pack_r2_native_blocked",
+            "passed": all(
+                route.get("taxonomyRoute") is not True
+                or route["route"] != ROUTE_CONFIGURED_NOT_READY
+                or (
+                    route["packOutputAllowed"] is False
+                    and route["r2PublishAllowed"] is False
+                    and route["nativeUsabilityReady"] is False
+                )
+                for route in routes
+            ),
+            "issues": [],
+        },
+        {
             "name": "no_final_plan_schedule_step_output",
             "passed": record_counts["finalOutputArtifacts"] == 0 and not _contains_forbidden_output_marker(artifact),
             "issues": [],
@@ -224,6 +246,7 @@ def compile_goal_domain_router(options: GoalDomainRouterOptions) -> dict[str, An
         "inputPath": str(options.input_path),
         "frontierConfigPath": str(frontier_config_path),
         "productionTargetLedgerPath": str(production_target_ledger_path),
+        "launchFloorTaxonomyPath": str(options.launch_floor_taxonomy_path) if options.launch_floor_taxonomy_path else None,
         "recordCounts": record_counts,
         "candidateIntake": artifact["candidateIntake"],
         "checks": checks,
@@ -253,6 +276,7 @@ def write_goal_domain_router_report(
     output_root: Path,
     frontier_config_path: Path | None = None,
     production_target_ledger_path: Path | None = None,
+    launch_floor_taxonomy_path: Path | None = None,
     created_at: str | None = None,
 ) -> dict[str, Any]:
     result = compile_goal_domain_router(
@@ -261,6 +285,7 @@ def write_goal_domain_router_report(
             output_root=output_root,
             frontier_config_path=frontier_config_path,
             production_target_ledger_path=production_target_ledger_path,
+            launch_floor_taxonomy_path=launch_floor_taxonomy_path,
             created_at=created_at,
         )
     )
@@ -355,11 +380,22 @@ def _route_request(
     frontiers: list[dict[str, Any]],
     ledger_by_domain: dict[str, dict[str, Any]],
     production_target_ledger_path: Path,
+    taxonomy_by_domain: dict[str, dict[str, Any]],
+    launch_floor_taxonomy_path: Path | None,
 ) -> dict[str, Any]:
     request_id = str(request.get("request_id") or stable_id("goal_domain_request", {"index": index, "request": request}))
     requested_domain = _normalize_id(str(request.get("domain") or request_id))
     match = _best_frontier_match(request, frontiers)
     if match["ambiguous"] or match["frontier"] is None:
+        taxonomy_domain = taxonomy_by_domain.get(requested_domain)
+        if taxonomy_domain and taxonomy_domain.get("launchFloorState") == "accepted":
+            return _taxonomy_configured_not_ready_route(
+                request_id=request_id,
+                requested_domain=requested_domain,
+                taxonomy_domain=taxonomy_domain,
+                launch_floor_taxonomy_path=launch_floor_taxonomy_path,
+                match=match,
+            )
         reasons = ["no_configured_frontier_match"] if match["frontier"] is None else ["ambiguous_frontier_match"]
         return _candidate_route(
             request_id=request_id,
@@ -392,6 +428,7 @@ def _route_request(
         "r2PublishAllowed": False,
         "nativeUsabilityReady": bool(ledger_domain.get("nativeUsabilityProofComplete")) if production_ready else False,
         "blockingReasons": blocking_reasons,
+        "taxonomyRoute": False,
         "nonClaims": [
             "bounded production-target route only" if production_ready else "configured frontier is not production-target ready",
             "not literal universal coverage",
@@ -424,11 +461,56 @@ def _candidate_route(
         "r2PublishAllowed": False,
         "nativeUsabilityReady": False,
         "blockingReasons": sorted(set(blocking_reasons)),
+        "taxonomyRoute": False,
         "nonClaims": [
             "candidate-only route",
             "not source authority",
             "not claim output",
             "not pack output",
+            "not final user plans, schedules, or Steps",
+        ],
+    }
+
+
+def _taxonomy_configured_not_ready_route(
+    *,
+    request_id: str,
+    requested_domain: str,
+    taxonomy_domain: dict[str, Any],
+    launch_floor_taxonomy_path: Path | None,
+    match: dict[str, Any],
+) -> dict[str, Any]:
+    return {
+        "requestID": request_id,
+        "requestedDomain": requested_domain,
+        "route": ROUTE_CONFIGURED_NOT_READY,
+        "matchedFrontierID": None,
+        "matchedDomainID": taxonomy_domain["domainID"],
+        "matchedTaxonomyDomainID": taxonomy_domain["domainID"],
+        "matchScore": 100 if taxonomy_domain["domainID"] == requested_domain else match.get("score", 0),
+        "matchReasons": ["launch_floor_taxonomy_exact_domain"],
+        "readinessStatus": "launch_floor_taxonomy_configured_not_ready",
+        "launchFloorTaxonomyPath": str(launch_floor_taxonomy_path) if launch_floor_taxonomy_path else None,
+        "sourceLaneCoverageState": taxonomy_domain.get("sourceLaneCoverageState"),
+        "sourceLaneProfileIDs": taxonomy_domain.get("sourceLaneProfileIDs", []),
+        "allowedClaimScopes": [],
+        "candidateIntakeRequired": False,
+        "productionTargetReady": False,
+        "packOutputAllowed": False,
+        "r2PublishAllowed": False,
+        "nativeUsabilityReady": False,
+        "blockingReasons": [
+            "launch_floor_taxonomy_domain_requires_source_lane_review",
+            "production_target_ledger_domain_not_ready",
+        ],
+        "taxonomyRoute": True,
+        "nonClaims": [
+            "accepted launch-floor taxonomy route only",
+            "configured-not-ready taxonomy record is not production proof",
+            "not source authority",
+            "not claim output",
+            "not pack output",
+            "not R2 output",
             "not final user plans, schedules, or Steps",
         ],
     }

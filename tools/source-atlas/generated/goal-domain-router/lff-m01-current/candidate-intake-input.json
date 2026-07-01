@@ -1,0 +1,40 @@
+{
+  "domainProposals": [
+    {
+      "candidate_sources": [
+        {
+          "authority_class_guess": "official_institution",
+          "locator": "https://example.edu/public-reference",
+          "source_class_guess": "institutional_public_page",
+          "source_name": "Example Public Reference Catalog"
+        }
+      ],
+      "claim_classes": [
+        "public_reference"
+      ],
+      "domain": "space_weather_public_reference",
+      "freshness_slas": [],
+      "goal_intent_classes": [
+        "space_weather_public_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "non_claims": [
+        "candidate-only route from goal-domain router",
+        "not source authority",
+        "not claim output",
+        "not pack output"
+      ],
+      "proposal_id": "unknown-candidate-space-weather",
+      "source_classes_required": [
+        "official_public_source",
+        "institutional_public_page"
+      ]
+    }
+  ]
+}

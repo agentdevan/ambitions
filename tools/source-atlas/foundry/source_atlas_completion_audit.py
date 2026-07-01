@@ -778,6 +778,11 @@ def _requirement_launch_floor(artifacts: dict[str, Any]) -> dict[str, Any]:
         for item in target_statuses
         if isinstance(item, dict) and item.get("status") != "met"
     ]
+    incomplete_labels = [
+        str(item.get("label") or item.get("targetID"))
+        for item in target_statuses
+        if isinstance(item, dict) and item.get("status") != "met"
+    ]
     if ledger.get("valid") is True and ledger.get("launchFloorMet") is True and ledger.get("launchFloorClaimAllowed") is True and not incomplete:
         return _evaluation(
             "near_universal_launch_floor",
@@ -794,7 +799,7 @@ def _requirement_launch_floor(artifacts: dict[str, Any]) -> dict[str, Any]:
         evidence=["launchFloorLedger"],
         gaps=gaps,
         next_actions=[
-            "Complete 1M public/reference shards, 500 domains, 5,000 subdomains, 50,000 golden intents, <5% fallback metric, and every-event missing-shard expansion proof.",
+            "Complete remaining launch-floor targets: " + "; ".join(incomplete_labels or ["all launch-floor counters"]) + ".",
             "Rerun source-atlas-launch-floor-ledger and completion audit after each launch-floor train.",
         ],
     )

@@ -12,6 +12,7 @@ from foundry.model import read_json, write_json
 CREATED_AT = "2026-06-28T00:00:00Z"
 FIXTURE_PATH = Path("tools/source-atlas/fixtures/goal-domain-router/train-88-goal-domain-requests.json")
 LEDGER_PATH = Path("tools/source-atlas/generated/production-target-ledger/train-86/production-target-ledger.json")
+LAUNCH_FLOOR_TAXONOMY_PATH = Path("tools/source-atlas/frontier/launch-floor-domain-taxonomy.json")
 
 
 def test_goal_domain_router_maps_configured_ready_frontier_and_candidates_new_domains(tmp_path: Path):
@@ -135,6 +136,52 @@ def test_goal_domain_router_does_not_mark_configured_domain_ready_without_ledger
     assert known["productionTargetReady"] is False
     assert known["candidateIntakeRequired"] is False
     assert "production_target_ledger_domain_not_ready" in known["blockingReasons"]
+
+
+def test_goal_domain_router_routes_launch_floor_taxonomy_domain_as_configured_not_ready(tmp_path: Path):
+    input_path = tmp_path / "goal-domain-request.json"
+    write_json(
+        input_path,
+        {
+            "goalDomainRequests": [
+                {
+                    "request_id": "language-learning-requirements",
+                    "domain": "language_learning_reference_requirements",
+                    "claim_classes": ["requirements_public_reference"],
+                    "jurisdictions": ["US"],
+                    "source_classes_required": ["institutional_public_reference"],
+                    "minimum_authority_classes": ["official_institution"],
+                    "candidate_sources": [],
+                }
+            ]
+        },
+    )
+
+    result = compile_goal_domain_router(
+        GoalDomainRouterOptions(
+            input_path=input_path,
+            output_root=tmp_path / "goal-domain-router",
+            production_target_ledger_path=LEDGER_PATH,
+            launch_floor_taxonomy_path=LAUNCH_FLOOR_TAXONOMY_PATH,
+            created_at=CREATED_AT,
+        )
+    )
+
+    assert result["valid"], result["issues"]
+    assert result["recordCounts"]["launchFloorTaxonomyRoutes"] == 1
+    assert result["recordCounts"]["configuredNotReadyRoutes"] == 1
+    assert result["recordCounts"]["candidateIntakeRoutes"] == 0
+    assert _check(result, "taxonomy_configured_not_ready_routes_are_pack_r2_native_blocked")
+    route = read_json(Path(result["outputRoot"]) / "goal-domain-routing.json")["routes"][0]
+    assert route["route"] == "configured_frontier_not_production_ready"
+    assert route["taxonomyRoute"] is True
+    assert route["matchedTaxonomyDomainID"] == "language_learning_reference_requirements"
+    assert route["candidateIntakeRequired"] is False
+    assert route["productionTargetReady"] is False
+    assert route["packOutputAllowed"] is False
+    assert route["r2PublishAllowed"] is False
+    assert route["nativeUsabilityReady"] is False
+    assert "launch_floor_taxonomy_domain_requires_source_lane_review" in route["blockingReasons"]
 
 
 def test_goal_domain_router_stable_ordering_is_deterministic(tmp_path: Path):

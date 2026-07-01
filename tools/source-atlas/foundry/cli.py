@@ -90,6 +90,12 @@ from .source_atlas_launch_floor_ledger import (
     build_source_atlas_launch_floor_ledger,
     source_atlas_launch_floor_ledger_markdown,
 )
+from .launch_floor_domain_taxonomy import (
+    DEFAULT_LAUNCH_FLOOR_TAXONOMY_PATH,
+    LaunchFloorDomainTaxonomyOptions,
+    compile_launch_floor_domain_taxonomy,
+    launch_floor_domain_taxonomy_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -891,6 +897,16 @@ def main(argv: list[str] | None = None) -> int:
     completion_audit_parser.add_argument("--emit-evidence")
     completion_audit_parser.add_argument("--markdown")
 
+    launch_floor_taxonomy_parser = sub.add_parser("launch-floor-domain-taxonomy")
+    launch_floor_taxonomy_parser.add_argument("--taxonomy", default=str(DEFAULT_LAUNCH_FLOOR_TAXONOMY_PATH))
+    launch_floor_taxonomy_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
+    launch_floor_taxonomy_parser.add_argument("--production-target-ledger", default="tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json")
+    launch_floor_taxonomy_parser.add_argument("--output-root", required=True)
+    launch_floor_taxonomy_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    launch_floor_taxonomy_parser.add_argument("--run-label", default="current")
+    launch_floor_taxonomy_parser.add_argument("--emit-evidence")
+    launch_floor_taxonomy_parser.add_argument("--markdown")
+
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
     launch_floor_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
@@ -904,6 +920,7 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_parser.add_argument("--production-supervisor", default="tools/source-atlas/generated/autonomous-production-supervisor/train-133-current-proof-refresh/autonomous-production-supervisor-report.json")
     launch_floor_parser.add_argument("--autonomous-control-loop", default="tools/source-atlas/generated/autonomous-control-loop/train-131-tetradeca-final/autonomous-control-loop-report.json")
     launch_floor_parser.add_argument("--autonomous-domain-expansion-chain", default="tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/autonomous-domain-expansion-chain-report.json")
+    launch_floor_parser.add_argument("--launch-floor-taxonomy", default=str(DEFAULT_LAUNCH_FLOOR_TAXONOMY_PATH))
     launch_floor_parser.add_argument("--shard-corpus-manifest")
     launch_floor_parser.add_argument("--golden-intent-corpus")
     launch_floor_parser.add_argument("--fallback-metric")
@@ -1023,6 +1040,7 @@ def main(argv: list[str] | None = None) -> int:
     goal_domain_router_parser.add_argument("--output-root", required=True)
     goal_domain_router_parser.add_argument("--frontier-config")
     goal_domain_router_parser.add_argument("--production-target-ledger")
+    goal_domain_router_parser.add_argument("--launch-floor-taxonomy")
     goal_domain_router_parser.add_argument("--created-at")
     goal_domain_router_parser.add_argument("--emit-evidence")
     goal_domain_router_parser.add_argument("--markdown")
@@ -2237,6 +2255,26 @@ def main(argv: list[str] | None = None) -> int:
             Path(args.markdown).write_text(source_atlas_completion_audit_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
+    if args.command == "launch-floor-domain-taxonomy":
+        result = compile_launch_floor_domain_taxonomy(
+            LaunchFloorDomainTaxonomyOptions(
+                taxonomy_path=Path(args.taxonomy),
+                source_lane_registry_path=Path(args.source_lane_registry) if args.source_lane_registry else None,
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(launch_floor_domain_taxonomy_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":
         result = build_source_atlas_launch_floor_ledger(
             SourceAtlasLaunchFloorLedgerOptions(
@@ -2254,6 +2292,7 @@ def main(argv: list[str] | None = None) -> int:
                 autonomous_domain_expansion_chain_path=Path(args.autonomous_domain_expansion_chain)
                 if args.autonomous_domain_expansion_chain
                 else None,
+                launch_floor_taxonomy_path=Path(args.launch_floor_taxonomy) if args.launch_floor_taxonomy else None,
                 shard_corpus_manifest_path=Path(args.shard_corpus_manifest) if args.shard_corpus_manifest else None,
                 golden_intent_corpus_path=Path(args.golden_intent_corpus) if args.golden_intent_corpus else None,
                 fallback_metric_path=Path(args.fallback_metric) if args.fallback_metric else None,
@@ -2475,6 +2514,7 @@ def main(argv: list[str] | None = None) -> int:
                 output_root=output_root,
                 frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
                 production_target_ledger_path=production_target_ledger_path,
+                launch_floor_taxonomy_path=Path(args.launch_floor_taxonomy) if args.launch_floor_taxonomy else None,
                 created_at=args.created_at,
             )
         else:
@@ -2484,6 +2524,7 @@ def main(argv: list[str] | None = None) -> int:
                     output_root=output_root,
                     frontier_config_path=Path(args.frontier_config) if args.frontier_config else None,
                     production_target_ledger_path=production_target_ledger_path,
+                    launch_floor_taxonomy_path=Path(args.launch_floor_taxonomy) if args.launch_floor_taxonomy else None,
                     created_at=args.created_at,
                 )
             )

@@ -1,0 +1,76 @@
+{
+  "goalDomainRequests": [
+    {
+      "candidate_sources": [],
+      "claim_classes": [
+        "candidate_education_program_reference"
+      ],
+      "domain": "education_credentialing",
+      "goal_intent_classes": [
+        "education_program_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "request_id": "known-production-ready-education",
+      "source_classes_required": [
+        "official_government",
+        "official_institution"
+      ]
+    },
+    {
+      "candidate_sources": [],
+      "claim_classes": [
+        "requirements_public_reference"
+      ],
+      "domain": "language_learning_reference_requirements",
+      "goal_intent_classes": [
+        "language_learning_reference_public_reference",
+        "requirements_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "minimum_authority_classes": [
+        "official_institution"
+      ],
+      "request_id": "taxonomy-configured-not-ready-language",
+      "source_classes_required": [
+        "institutional_public_reference"
+      ]
+    },
+    {
+      "candidate_sources": [
+        {
+          "authority_class_guess": "official_institution",
+          "locator": "https://example.edu/public-reference",
+          "source_class_guess": "institutional_public_page",
+          "source_name": "Example Public Reference Catalog"
+        }
+      ],
+      "claim_classes": [
+        "public_reference"
+      ],
+      "domain": "space_weather_public_reference",
+      "goal_intent_classes": [
+        "space_weather_public_reference"
+      ],
+      "jurisdictions": [
+        "US"
+      ],
+      "minimum_authority_classes": [
+        "official_government",
+        "official_institution"
+      ],
+      "request_id": "unknown-candidate-space-weather",
+      "source_classes_required": [
+        "official_public_source",
+        "institutional_public_page"
+      ]
+    }
+  ]
+}

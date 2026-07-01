@@ -15,11 +15,12 @@ from pathlib import Path
 from typing import Any
 
 from .boundary import boundary_issues_for_value, is_boundary_line
+from .launch_floor_domain_taxonomy import launch_floor_domain_taxonomy_summary
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_id, write_json
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m00"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m01"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -119,6 +120,7 @@ class SourceAtlasLaunchFloorLedgerOptions:
     production_supervisor_path: Path | None = None
     autonomous_control_loop_path: Path | None = None
     autonomous_domain_expansion_chain_path: Path | None = None
+    launch_floor_taxonomy_path: Path | None = None
     shard_corpus_manifest_path: Path | None = None
     golden_intent_corpus_path: Path | None = None
     fallback_metric_path: Path | None = None
@@ -150,12 +152,14 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         "productionSupervisor": _read_optional_json(options.production_supervisor_path, "production supervisor", issues),
         "autonomousControlLoop": _read_optional_json(options.autonomous_control_loop_path, "autonomous control loop", issues),
         "autonomousDomainExpansionChain": _read_optional_json(options.autonomous_domain_expansion_chain_path, "autonomous domain expansion chain", issues),
+        "launchFloorTaxonomy": _read_optional_json(options.launch_floor_taxonomy_path, "launch-floor domain taxonomy", issues),
         "shardCorpusManifest": _read_optional_json(options.shard_corpus_manifest_path, "shard corpus manifest", issues),
         "goldenIntentCorpus": _read_optional_json(options.golden_intent_corpus_path, "golden intent corpus", issues),
         "fallbackMetric": _read_optional_json(options.fallback_metric_path, "source-needed fallback metric", issues),
         "missingShardEvents": _read_optional_json(options.missing_shard_events_path, "missing-shard events", issues),
     }
     native_bridge_source_contract = _native_bridge_source_contract(options.native_runtime_bridge_gauntlet_source_path)
+    launch_floor_taxonomy_summary = _launch_floor_taxonomy_summary(artifacts)
 
     input_paths = _input_paths(options)
     input_privacy_issues = _privacy_issues(
@@ -168,7 +172,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
     artifact_privacy_issues = _privacy_issues(artifacts, "source-atlas-launch-floor-ledger-artifacts")
     overclaim_issues = _overclaim_issues(artifacts)
 
-    counters = _counters(artifacts, native_bridge_source_contract)
+    counters = _counters(artifacts, native_bridge_source_contract, launch_floor_taxonomy_summary)
     target_statuses = _target_statuses(counters)
     current_capabilities = _current_capabilities(counters, target_statuses)
     missing_capabilities = _missing_capabilities(target_statuses)
@@ -180,10 +184,17 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         input_privacy_issues=input_privacy_issues,
         artifact_privacy_issues=artifact_privacy_issues,
         overclaim_issues=overclaim_issues,
+        taxonomy_issues=launch_floor_taxonomy_summary["issues"],
         target_statuses=target_statuses,
     )
     all_targets_met = all(target["status"] == "met" for target in target_statuses)
-    valid = not issues and not input_privacy_issues and not artifact_privacy_issues and not overclaim_issues
+    valid = (
+        not issues
+        and not input_privacy_issues
+        and not artifact_privacy_issues
+        and not overclaim_issues
+        and not launch_floor_taxonomy_summary["issues"]
+    )
     launch_floor_met = valid and all_targets_met
     launch_floor_claim_allowed = launch_floor_met
     output_json_path = output_root / "source-atlas-launch-floor-ledger.json"
@@ -229,6 +240,13 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         "privacyBoundary": PRIVACY_BOUNDARY,
         "privacyIssues": sorted(set([*input_privacy_issues, *artifact_privacy_issues])),
         "overclaimIssues": sorted(set(overclaim_issues)),
+        "taxonomyIssues": launch_floor_taxonomy_summary["issues"],
+        "launchFloorTaxonomy": {
+            "present": artifacts["launchFloorTaxonomy"] is not None,
+            "valid": not launch_floor_taxonomy_summary["issues"],
+            "recordCounts": launch_floor_taxonomy_summary["recordCounts"],
+            "targetStatus": launch_floor_taxonomy_summary["launchFloorTargets"],
+        },
         "allowedClaims": _allowed_claims(valid, launch_floor_met),
         "blockedClaims": _blocked_claims(),
         "productLaw": {
@@ -288,6 +306,9 @@ def source_atlas_launch_floor_ledger_markdown(report: dict[str, Any]) -> str:
         "",
         f"- Configured goal domains: {counts['configuredGoalDomains']}",
         f"- Bounded production-ready domains: {counts['boundedProductionReadyDomains']}",
+        f"- Launch-floor accepted taxonomy domains: {counts['launchFloorTaxonomyAcceptedGoalDomains']}",
+        f"- Launch-floor accepted taxonomy subdomains: {counts['launchFloorTaxonomyAcceptedSubdomains']}",
+        f"- Launch-floor taxonomy source-lane review backlog items: {counts['launchFloorTaxonomySourceLaneReviewBacklogItems']}",
         f"- Packable public/reference claims: {counts['packablePublicReferenceClaimProxy']}",
         f"- Live R2 objects: {counts['liveR2ObjectProxy']}",
         f"- Source lanes: {counts['sourceLaneCount']}",
@@ -355,7 +376,11 @@ def source_atlas_launch_floor_ledger_markdown(report: dict[str, Any]) -> str:
     return "\n".join(lines)
 
 
-def _counters(artifacts: dict[str, Any], native_bridge_source_contract: dict[str, int | None]) -> dict[str, Any]:
+def _counters(
+    artifacts: dict[str, Any],
+    native_bridge_source_contract: dict[str, int | None],
+    launch_floor_taxonomy: dict[str, Any],
+) -> dict[str, Any]:
     frontier_config = artifacts["frontierConfig"]
     source_lane_registry = artifacts["sourceLaneRegistry"]
     legal_terms_registry = artifacts["legalTermsRegistry"]
@@ -371,6 +396,8 @@ def _counters(artifacts: dict[str, Any], native_bridge_source_contract: dict[str
     golden_corpus = artifacts["goldenIntentCorpus"]
     fallback_metric = artifacts["fallbackMetric"]
     missing_shard_events = artifacts["missingShardEvents"]
+    taxonomy_counts = launch_floor_taxonomy["recordCounts"]
+    taxonomy_valid = not launch_floor_taxonomy["issues"]
 
     frontiers = frontier_config.get("frontiers", []) if isinstance(frontier_config, dict) else []
     configured_domain_ids = sorted(
@@ -392,8 +419,23 @@ def _counters(artifacts: dict[str, Any], native_bridge_source_contract: dict[str
     final_outputs = _record_count(gauntlet, "finalOutputsGenerated")
     source_needed_numerator, source_needed_denominator = _fallback_fraction(fallback_metric)
     missing_event_summary = _missing_shard_event_summary(missing_shard_events)
+    goal_domain_counter = (
+        taxonomy_counts["acceptedGoalDomains"]
+        if taxonomy_valid and taxonomy_counts["acceptedGoalDomains"] > 0
+        else len(configured_domain_ids)
+    )
+    subdomain_counter = (
+        taxonomy_counts["acceptedSubdomains"]
+        if taxonomy_valid and taxonomy_counts["acceptedSubdomains"] > 0
+        else len(subdomain_values)
+        if subdomain_values
+        else None
+    )
 
     return {
+        "launchFloorTaxonomyValid": taxonomy_valid,
+        "goalDomainCounter": goal_domain_counter,
+        "subdomainCounter": subdomain_counter,
         "shardCorpusCount": _record_count(shard_manifest, "publicReferenceShards", "public_reference_shards", "shardCount", "shards"),
         "goldenIntentCorpusCount": _record_count(golden_corpus, "goldenIntentCount", "golden_intent_count", "intentCount", "intents"),
         "fallbackNumerator": source_needed_numerator,
@@ -413,6 +455,15 @@ def _counters(artifacts: dict[str, Any], native_bridge_source_contract: dict[str
             "legalTermsEntries": len(legal_terms_registry.get("licenses", [])) if isinstance(legal_terms_registry, dict) else 0,
             "apiGovernancePolicies": len(api_governance_registry.get("api_policies", [])) if isinstance(api_governance_registry, dict) else 0,
             "explicitSubdomains": len(subdomain_values),
+            "launchFloorTaxonomyAcceptedGoalDomains": taxonomy_counts["acceptedGoalDomains"],
+            "launchFloorTaxonomyAcceptedSubdomains": taxonomy_counts["acceptedSubdomains"],
+            "launchFloorTaxonomyConfiguredReadyDomains": taxonomy_counts["configuredReadyDomains"],
+            "launchFloorTaxonomyConfiguredNotReadyDomains": taxonomy_counts["configuredNotReadyDomains"],
+            "launchFloorTaxonomySourceLaneReviewBacklogItems": taxonomy_counts["sourceLaneReviewBacklogItems"],
+            "launchFloorTaxonomyCandidateOnlyBacklogItems": taxonomy_counts["candidateOnlyBacklogItems"],
+            "launchFloorTaxonomyStaleCandidateOnlyBacklogItems": taxonomy_counts["staleCandidateOnlyBacklogItems"],
+            "launchFloorTaxonomyDomainsWithSourceLaneCoverage": taxonomy_counts["domainsWithSourceLaneCoverage"],
+            "launchFloorTaxonomySubdomainsWithSourceLaneCoverage": taxonomy_counts["subdomainsWithSourceLaneCoverage"],
             "packablePublicReferenceClaimProxy": packable_claims,
             "liveR2ObjectProxy": live_r2_objects,
             "expectedCurrentR2ObjectProxy": expected_current_objects,
@@ -474,10 +525,15 @@ def _target_statuses(counters: dict[str, Any]) -> list[dict[str, Any]]:
         ),
         _threshold_target(
             "goal_domains_500",
-            record_counts["configuredGoalDomains"],
+            counters["goalDomainCounter"],
             500,
-            counter_present=True,
-            proxy_values={"boundedProductionReadyDomains": record_counts["boundedProductionReadyDomains"]},
+            counter_present=counters["goalDomainCounter"] is not None,
+            proxy_values={
+                "configuredGoalDomains": record_counts["configuredGoalDomains"],
+                "boundedProductionReadyDomains": record_counts["boundedProductionReadyDomains"],
+                "launchFloorTaxonomyConfiguredReadyDomains": record_counts["launchFloorTaxonomyConfiguredReadyDomains"],
+                "launchFloorTaxonomyConfiguredNotReadyDomains": record_counts["launchFloorTaxonomyConfiguredNotReadyDomains"],
+            },
             missing_counter_gap="active frontier taxonomy is missing",
             required_changes=[
                 "Expand active governed frontier taxonomy to at least 500 lawful public/reference goal domains.",
@@ -486,10 +542,14 @@ def _target_statuses(counters: dict[str, Any]) -> list[dict[str, Any]]:
         ),
         _threshold_target(
             "subdomains_5000",
-            record_counts["explicitSubdomains"] if counters["explicitSubdomainCountPresent"] else None,
+            counters["subdomainCounter"],
             5_000,
-            counter_present=counters["explicitSubdomainCountPresent"],
-            proxy_values={"sourceLaneDomainScopeProxy": record_counts["sourceLaneDomainScopeProxy"]},
+            counter_present=counters["subdomainCounter"] is not None,
+            proxy_values={
+                "sourceLaneDomainScopeProxy": record_counts["sourceLaneDomainScopeProxy"],
+                "launchFloorTaxonomyDomainsWithSourceLaneCoverage": record_counts["launchFloorTaxonomyDomainsWithSourceLaneCoverage"],
+                "launchFloorTaxonomySubdomainsWithSourceLaneCoverage": record_counts["launchFloorTaxonomySubdomainsWithSourceLaneCoverage"],
+            },
             missing_counter_gap="canonical subdomain taxonomy is missing",
             required_changes=[
                 "Add canonical subdomain taxonomy with at least 5,000 governed subdomains.",
@@ -621,7 +681,7 @@ def _counter_contract() -> list[dict[str, Any]]:
 
 def _current_capabilities(counters: dict[str, Any], target_statuses: list[dict[str, Any]]) -> list[dict[str, Any]]:
     counts = counters["recordCounts"]
-    return [
+    capabilities = [
         {
             "capabilityID": "bounded_configured_frontier_proof",
             "status": "proven_current",
@@ -648,6 +708,18 @@ def _current_capabilities(counters: dict[str, Any], target_statuses: list[dict[s
             "evidence": f"{len(target_statuses)} launch-floor counters defined with fail-closed status",
         },
     ]
+    capabilities.append(
+        {
+            "capabilityID": "launch_floor_taxonomy_universe",
+            "status": "proven_current" if counters["launchFloorTaxonomyValid"] else "not_proven",
+            "evidence": (
+                f"{counts['launchFloorTaxonomyAcceptedGoalDomains']} accepted taxonomy domains and "
+                f"{counts['launchFloorTaxonomyAcceptedSubdomains']} accepted taxonomy subdomains; "
+                f"{counts['launchFloorTaxonomyConfiguredNotReadyDomains']} accepted domains remain configured-not-ready"
+            ),
+        }
+    )
+    return capabilities
 
 
 def _missing_capabilities(target_statuses: list[dict[str, Any]]) -> list[dict[str, Any]]:
@@ -749,16 +821,16 @@ def _validation_matrix() -> list[dict[str, str]]:
         {
             "validationID": "status",
             "command": "git status --short",
-            "purpose": "confirm scoped working tree before and after LFF-M00 evidence generation",
+            "purpose": "confirm scoped working tree before and after launch-floor evidence generation",
         },
         {
             "validationID": "launch_floor_pytest",
-            "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_source_atlas_launch_floor_ledger.py tools/source-atlas/foundry/tests/test_source_atlas_completion_audit_train_129.py",
-            "purpose": "prove fail-closed launch-floor ledger and completion-audit wiring",
+            "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_launch_floor_domain_taxonomy_lff_m01.py tools/source-atlas/foundry/tests/test_goal_domain_router_train_88.py tools/source-atlas/foundry/tests/test_source_atlas_launch_floor_ledger.py tools/source-atlas/foundry/tests/test_source_atlas_completion_audit_train_129.py",
+            "purpose": "prove fail-closed launch-floor taxonomy, router, ledger, and completion-audit wiring",
         },
         {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m00-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
             "purpose": "regenerate current launch-floor ledger without source/R2/native mutation",
         },
         {
@@ -780,6 +852,7 @@ def _checks(
     input_privacy_issues: list[str],
     artifact_privacy_issues: list[str],
     overclaim_issues: list[str],
+    taxonomy_issues: list[str],
     target_statuses: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     all_targets_met = all(target["status"] == "met" for target in target_statuses)
@@ -788,6 +861,7 @@ def _checks(
         _check("input_privacy_scan_passed", not input_privacy_issues, input_privacy_issues, "red"),
         _check("artifact_privacy_scan_passed", not artifact_privacy_issues, artifact_privacy_issues, "red"),
         _check("overclaim_scan_passed", not overclaim_issues, overclaim_issues, "red"),
+        _check("launch_floor_taxonomy_valid_when_supplied", not taxonomy_issues, taxonomy_issues, "red"),
         _check("launch_floor_counter_contract_defined", len(target_statuses) == len(LAUNCH_FLOOR_TARGETS), ["counter contract incomplete"], "red"),
         _check(
             "launch_floor_targets_met",
@@ -896,6 +970,36 @@ def _missing_shard_event_summary(events_artifact: Any) -> dict[str, Any]:
     return {"eventCount": len(raw_events), "durableExpansionEventCount": durable_count, "issues": issues}
 
 
+def _launch_floor_taxonomy_summary(artifacts: dict[str, Any]) -> dict[str, Any]:
+    taxonomy = artifacts.get("launchFloorTaxonomy")
+    if not isinstance(taxonomy, dict):
+        return {
+            "recordCounts": {
+                "acceptedGoalDomains": 0,
+                "acceptedSubdomains": 0,
+                "configuredReadyDomains": 0,
+                "configuredNotReadyDomains": 0,
+                "candidateOnlyBacklogItems": 0,
+                "staleCandidateOnlyBacklogItems": 0,
+                "sourceLaneReviewBacklogItems": 0,
+                "domainsWithSourceLaneCoverage": 0,
+                "subdomainsWithSourceLaneCoverage": 0,
+            },
+            "launchFloorTargets": {
+                "goalDomains500": False,
+                "subdomains5000": False,
+                "candidateOnlyBacklogExcludedFromCounts": True,
+                "sourceLaneCoverageComplete": False,
+            },
+            "issues": [],
+        }
+    return launch_floor_domain_taxonomy_summary(
+        taxonomy,
+        source_lane_registry=artifacts.get("sourceLaneRegistry"),
+        production_target_ledger=artifacts.get("productionTargetLedger"),
+    )
+
+
 def _explicit_subdomains(frontiers: list[Any]) -> set[str]:
     subdomains: set[str] = set()
     for frontier in frontiers:
@@ -982,6 +1086,7 @@ def _input_paths(options: SourceAtlasLaunchFloorLedgerOptions) -> dict[str, str 
         "productionSupervisor": str(options.production_supervisor_path) if options.production_supervisor_path else None,
         "autonomousControlLoop": str(options.autonomous_control_loop_path) if options.autonomous_control_loop_path else None,
         "autonomousDomainExpansionChain": str(options.autonomous_domain_expansion_chain_path) if options.autonomous_domain_expansion_chain_path else None,
+        "launchFloorTaxonomy": str(options.launch_floor_taxonomy_path) if options.launch_floor_taxonomy_path else None,
         "shardCorpusManifest": str(options.shard_corpus_manifest_path) if options.shard_corpus_manifest_path else None,
         "goldenIntentCorpus": str(options.golden_intent_corpus_path) if options.golden_intent_corpus_path else None,
         "fallbackMetric": str(options.fallback_metric_path) if options.fallback_metric_path else None,

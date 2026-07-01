@@ -27,6 +27,7 @@ RELEASE_PROOF_PACKET = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atla
 PRODUCTION_SUPERVISOR = SOURCE_ATLAS_ROOT / "generated" / "autonomous-production-supervisor" / "train-133-current-proof-refresh" / "autonomous-production-supervisor-report.json"
 AUTONOMOUS_CONTROL_LOOP = SOURCE_ATLAS_ROOT / "generated" / "autonomous-control-loop" / "train-131-tetradeca-final" / "autonomous-control-loop-report.json"
 AUTONOMOUS_DOMAIN_EXPANSION_CHAIN = SOURCE_ATLAS_ROOT / "generated" / "autonomous-domain-expansion-chain" / "train-107-current" / "autonomous-domain-expansion-chain-report.json"
+LAUNCH_FLOOR_TAXONOMY = SOURCE_ATLAS_ROOT / "frontier" / "launch-floor-domain-taxonomy.json"
 NATIVE_BRIDGE_GAUNTLET_SOURCE = REPO_ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SourceAtlas" / "SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
 
 
@@ -39,6 +40,11 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     counts = result["recordCounts"]
     assert counts["configuredGoalDomains"] == 14
     assert counts["boundedProductionReadyDomains"] == 14
+    assert counts["launchFloorTaxonomyAcceptedGoalDomains"] == 500
+    assert counts["launchFloorTaxonomyAcceptedSubdomains"] == 5000
+    assert counts["launchFloorTaxonomyConfiguredReadyDomains"] == 14
+    assert counts["launchFloorTaxonomyConfiguredNotReadyDomains"] == 486
+    assert counts["launchFloorTaxonomySourceLaneReviewBacklogItems"] == 486
     assert counts["packablePublicReferenceClaimProxy"] == 71
     assert counts["liveR2ObjectProxy"] == 196
     assert counts["sourceLaneCount"] == 34
@@ -46,9 +52,9 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert counts["configuredGauntletCases"] == 14
     assert counts["nativeBridgeSourceIntentContract"] == 100
     assert counts["nativeBridgeSourcePermutationContract"] == 1000
-    assert result["launchFloorTargetStatus"]["goal_domains_500"]["status"] == "not_met"
+    assert result["launchFloorTargetStatus"]["goal_domains_500"]["status"] == "met"
     assert result["launchFloorTargetStatus"]["public_reference_shards_1m"]["status"] == "not_measurable_fail_closed"
-    assert result["launchFloorTargetStatus"]["subdomains_5000"]["status"] == "not_measurable_fail_closed"
+    assert result["launchFloorTargetStatus"]["subdomains_5000"]["status"] == "met"
     assert result["launchFloorTargetStatus"]["golden_intents_50000"]["status"] == "not_measurable_fail_closed"
     assert result["launchFloorTargetStatus"]["source_needed_fallback_under_5_percent"]["status"] == "not_measurable_fail_closed"
     assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["status"] == "not_measurable_fail_closed"
@@ -139,6 +145,7 @@ def _current_options(tmp_path: Path) -> SourceAtlasLaunchFloorLedgerOptions:
         production_supervisor_path=PRODUCTION_SUPERVISOR,
         autonomous_control_loop_path=AUTONOMOUS_CONTROL_LOOP,
         autonomous_domain_expansion_chain_path=AUTONOMOUS_DOMAIN_EXPANSION_CHAIN,
+        launch_floor_taxonomy_path=LAUNCH_FLOOR_TAXONOMY,
         native_runtime_bridge_gauntlet_source_path=NATIVE_BRIDGE_GAUNTLET_SOURCE,
         output_root=tmp_path / "current-launch-floor",
         created_at="2026-07-01T00:00:00Z",
