@@ -299,14 +299,17 @@ Rollback plan:
 
 - Parent issue mirror: `AMB-1487`
 - Recommended status: `Needs Repair`
-- Labels: VSP, external-boundary, privacy, yellow-proof
-- Blocked by: owner approval, privacy-boundary proof, offline no-account proof, R2 request-shape proof
+- Labels: VSP, external-boundary, privacy, yellow-proof, owner-review-needed, part-01
+- Blocked by: owner approval, privacy-boundary proof, offline no-account proof, R2 request-shape proof, owner direction selection
 - Do not create now: `True`
 
 Acceptance summary:
 - Offline no-account core value remains usable.
 - R2/Source Atlas is public/reference/freshness only.
 - No private graph egress and no external/cloud LLM core runtime.
+- Part 01 board is node 264:93 with six external-boundary directions A-F.
+- Codex recommends Option B Airlock Review Gate for owner review.
+- No option may make account, R2, Source Atlas, widgets, notifications, external tools, or hosted AI part of core/root architecture.
 Validation summary:
 - privacy/request-shape proof after source implementation
 - python3 scripts/ambitions-local-first-boundary-scan.py when applicable

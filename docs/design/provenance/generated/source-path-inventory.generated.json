@@ -133,7 +133,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 271,
+      "line_count": 289,
       "path": "Native/Ambitions/App/AppContainerFactory.swift"
     },
     {
@@ -3491,7 +3491,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 96,
+      "line_count": 98,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+ReceiptPersistence.swift"
     },
     {
@@ -3503,7 +3503,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 205,
+      "line_count": 211,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift"
     },
     {
@@ -3678,7 +3678,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 233,
+      "line_count": 241,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeCommandMutationCommitter.swift"
     },
     {
@@ -3689,7 +3689,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 344,
+      "line_count": 352,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeTransactionCommitPolicy.swift"
     },
     {
@@ -4084,7 +4084,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 95,
+      "line_count": 97,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/YouPreferencesCommandService.swift"
     },
     {
@@ -4910,6 +4910,19 @@
       "kind": "native_source",
       "line_count": 328,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionMaterializer.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 241,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6249,7 +6262,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 223,
+      "line_count": 253,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/Storage/ProjectionStoreSQLite.swift"
     },
     {
@@ -6630,7 +6643,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 154,
+      "line_count": 179,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift"
     },
     {
@@ -6930,7 +6943,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 222,
+      "line_count": 224,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TrustSystem/TodayReceiptCommandService.swift"
     },
     {
@@ -7205,7 +7218,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 221,
+      "line_count": 227,
       "path": "Native/Ambitions/Core/Persistence/PersistenceContracts+03-UnavailableReminderRepository.swift"
     },
     {
@@ -10248,7 +10261,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 360,
+      "line_count": 362,
       "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift"
     },
     {
@@ -10451,7 +10464,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 118,
+      "line_count": 120,
       "path": "Native/Ambitions/PreviewSupport/PreviewAppContainer.swift"
     },
     {
@@ -15947,7 +15960,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 322,
+      "line_count": 326,
       "path": "Native/AmbitionsTests/App/AppContainerFactoryTests.swift"
     },
     {
@@ -18886,7 +18899,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 209,
+      "line_count": 292,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/ProjectionEngine/ProjectionEngineTests.swift"
     },
     {
@@ -19626,7 +19639,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 279,
+      "line_count": 327,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/TransactionKernel/LocalRuntimeOSTransactionKernelOwnershipTests.swift"
     },
     {
@@ -22910,7 +22923,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1848,
+  "entry_count": 1849,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

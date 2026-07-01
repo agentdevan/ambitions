@@ -1706,6 +1706,23 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Lifts the final VSP-07 package owner-review blocker and moves VSP-07 to Spec Ready / Yellow. Does not authorize Green, source completion, device proof, accessibility conformance, runtime proof, Release Green, or Done.",
       "notes": "Owner approved VSP-07 Object Wake Stack final package node 257:93 on 2026-07-01."
+    },
+    {
+      "proof_id": "vsp-08-part-01-external-boundary-directions-r1",
+      "vsp_id": "VSP-08",
+      "proof_type": "figma_exploration_board",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-08-part-01-external-boundary-directions-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-part-01-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-a-local-first-membrane-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-b-airlock-review-gate-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-f-boundary-constellation-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow owner-review exploration only. Does not prove owner approval, privacy boundary behavior, R2 request shape, offline no-account behavior, SwiftUI parity, Visual Green, device behavior, runtime behavior, accessibility conformance, Release Green, or Done.",
+      "notes": "Part 01 board at node 264:93 with six options A-F. Codex recommendation is Option B Airlock Review Gate; owner selection remains required."
     }
   ]
 }

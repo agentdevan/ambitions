@@ -272,6 +272,10 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-hero-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-crop-r1.png
 - docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-08-boundaries-launch-board-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-part-01-board-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-a-local-first-membrane-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-b-airlock-review-gate-r1.png
+- docs/qa/evidence/2026-07-01-vsp-08-part-01-external-boundary-directions-r1/images/vsp-08-option-f-boundary-constellation-r1.png
 SwiftUI source owners:
 - Native/Ambitions/DesignSystem/StagePrimitives/SharedUI/SourceAtlasUIPrimitives.swift
 - Native/Ambitions/Core/LocalRuntimeOS/RuntimeBoundary/SourceAtlasNoPrivateGraphEgressAudit.swift

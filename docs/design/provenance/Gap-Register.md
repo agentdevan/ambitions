@@ -137,6 +137,7 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - live SwiftUI screenshot
 - offline no-account proof
 - owner approval
+- owner direction selection
 - privacy boundary
 - runtime behavior
 ### VSP-09 - Motion / Haptics / Accessibility Matrix
