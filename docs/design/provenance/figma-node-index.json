@@ -829,7 +829,6 @@
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
       "notes": [
         "Board updated: owner approved Option C Preference Weave as direction."
-
       ]
     },
     {
@@ -848,7 +847,6 @@
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-part-03-ambitions-owned-you-directions-R1.md",
       "notes": [
         "Non-selected context only after owner approved Option C."
-
       ]
     },
     {
@@ -887,7 +885,125 @@
       "notes": [
         "Owner-approved VSP-06 direction."
       ]
-
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "240:93",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-06 - Preference Weave final package - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-final-package-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-hero-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-state-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-accessibility-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-swiftui-anatomy-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-presentation-crop-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+      "notes": [
+        "Package board built from owner-approved Option C direction. Yellow / Ready For Review; no source, device, accessibility, runtime, or Visual Green claim."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "240:103",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-06 - Preference Weave hero - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-hero-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+      "notes": [
+        "Hero candidate for Ambitions-owned You Preference Weave object."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "240:220",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-06 - Preference Weave state matrix - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-state-matrix-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+      "notes": [
+        "State matrix covering offline core, optional account, and privacy inspection detail states."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "240:583",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-06 - Preference Weave accessibility matrix - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-accessibility-matrix-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+      "notes": [
+        "Figma accessibility intent matrix; source/device/manual accessibility proof still missing."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "240:946",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-06 - Preference Weave SwiftUI anatomy - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-swiftui-anatomy-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+      "notes": [
+        "SwiftUI anatomy/provenance board identifying existing row/group primitives and proposed PreferenceWeaveField."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "240:1110",
+      "node_id_status": "known",
+      "frame_name": "MARKETING_RENDER - VSP-06 - Preference Weave presentation crop - R1",
+      "vsp_id": "VSP-06",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-presentation-crop-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+      "notes": [
+        "Presentation crop; marketing-only atmospheric effects must not be treated as source proof."
+      ]
     }
   ]
 }

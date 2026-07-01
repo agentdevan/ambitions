@@ -7,7 +7,7 @@ Claim boundary: this audit checks provenance-system coherence only. It is not Co
 ## Summary
 
 - Blocking failures: 0
-- Warnings: 1
+- Warnings: 0
 - Yellow proof gaps: 87
 
 ## Blocking Failures
@@ -16,7 +16,7 @@ Claim boundary: this audit checks provenance-system coherence only. It is not Co
 
 ## Warnings
 
-- VSP-06 is Accepted Yellow; ensure owner accepted risk and follow-up are explicit
+- none
 
 ## Yellow Proof Gaps
 

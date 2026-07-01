@@ -843,8 +843,8 @@
         "docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/owner-approval.md"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Lifts owner-direction proof only. VSP-06 remains Yellow because final package, SwiftUI parity, device, accessibility, runtime, and privacy-boundary proof are still missing.",
-      "notes": "Owner approved Part 03 Option C Preference Weave as the VSP-06 direction."
+      "proof_ceiling_impact": "Lifts owner-direction proof only. VSP-06 remains Yellow because final package owner approval, SwiftUI parity, device, accessibility, runtime, and privacy-boundary proof are still missing.",
+      "notes": "Owner approved Part 03 Option C Preference Weave as the VSP-06 direction; final package node 240:93 still needs owner approval."
     },
     {
       "proof_id": "vsp-06-swiftui-simulator-screenshot",
@@ -1548,7 +1548,25 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Supports Yellow owner-direction evidence only. Does not prove owner approval, SwiftUI parity, Visual Green, device behavior, or accessibility conformance.",
       "notes": "Owner-approved Ambitions-owned direction after Part 02 rejection: Option C Preference Weave."
-
+    },
+    {
+      "proof_id": "vsp-06-preference-weave-final-package-r1",
+      "vsp_id": "VSP-06",
+      "proof_type": "figma_candidate_package",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-06-preference-weave-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-final-package-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-hero-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-state-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-accessibility-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-swiftui-anatomy-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-presentation-crop-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow / Ready For Review package evidence only. Does not prove final package owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, account/R2 readiness, or accessibility conformance.",
+      "notes": "Final candidate package R1 built from owner-approved Option C Preference Weave direction at Figma node 240:93."
     }
   ]
 }

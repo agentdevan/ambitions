@@ -208,27 +208,28 @@ Rollback plan:
 ## VSP-06 - VSP-06 You Native Settings
 
 - Parent issue mirror: `AMB-1485`
-- Recommended status: `Accepted Yellow`
-- Labels: VSP, you, settings, owner-approved-direction, yellow-proof
-- Blocked by: owner direction selection, VSP-01 shell authority, VSP-10 source-owner map, VSP-09 accessibility matrix, final VSP-06 package approval
+- Recommended status: `Ready For Review`
+- Labels: VSP, you, settings, owner-approved-direction, yellow-proof, figma-handoff, ready-for-review
+- Blocked by: final VSP-06 package owner approval, VSP-01 shell authority, VSP-10 source-owner map, VSP-09 accessibility matrix, live SwiftUI/accessibility/device proof after source implementation
 - Do not create now: `True`
 
 Acceptance summary:
 - Owner approved Part 03 Option C Preference Weave as VSP-06 direction.
-
 - Part 02 is rejected as too literal to supplied references.
 - Part 03 keeps only reference intent and uses Ambitions-owned object language.
 - You remains native settings/user system.
 - No old Profile root IA and no account-gated core value.
 - Every visible row opens real detail or an honest unavailable state.
+- Final candidate package R1 is Figma node 240:93 with child frames 240:103, 240:220, 240:583, 240:946, and 240:1110.
+- Package is Yellow / Ready For Review only; it does not claim source implementation, Visual Green, device proof, accessibility conformance, runtime proof, account readiness, or R2 readiness.
+- PreferenceWeaveField is a proposed primitive; implementation must keep meaning semantic and accessible, not dependent on decorative motion/glow.
 Validation summary:
 - focused You tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Build VSP-06 final package from owner-approved Preference Weave - scope: Figma package only: hero, state matrix, accessibility matrix, SwiftUI anatomy, non-goals - status: Ready For Review after package build
-- Produce You SwiftUI parity leaf - scope: Surfaces/You only, native settings rows with real targets - status: Spec Ready after final package approval
-
+- Owner-review VSP-06 Preference Weave final package R1 - scope: Review Figma node 240:93, durable screenshots, state matrix, accessibility matrix, SwiftUI anatomy, and non-claims; approve, repair, or reject before implementation - status: Ready For Review
+- Produce You SwiftUI parity leaf from approved VSP-06 package - scope: Surfaces/You only; native settings rows, PreferenceWeaveField if approved, offline/account/privacy boundaries, and screenshot/a11y proof - status: Spec Ready after final package approval
 
 Standard Codex closeout block:
 

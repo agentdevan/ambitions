@@ -3491,7 +3491,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 329,
+      "line_count": 174,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor+ReceiptPersistence.swift"
     },
     {
@@ -3678,8 +3678,22 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 198,
+      "line_count": 302,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeCommandMutationCommitter.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-02",
+        "VSP-03",
+        "VSP-04",
+        "VSP-05",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 240,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeTransactionCommitPolicy.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -6526,7 +6540,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 162,
+      "line_count": 166,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutation.swift"
     },
     {
@@ -6574,7 +6588,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 214,
+      "line_count": 220,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransaction.swift"
     },
     {
@@ -6587,6 +6601,17 @@
       "kind": "native_source",
       "line_count": 154,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 57,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionFailureReceipt.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18491,7 +18516,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 750,
+      "line_count": 764,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutorTests.swift"
     },
     {
@@ -18505,7 +18530,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 260,
+      "line_count": 384,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/CommandSpineLeafTests.swift"
     },
     {
@@ -18573,7 +18598,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 259,
+      "line_count": 258,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/EventJournal/RuntimeEventJournalTests.swift"
     },
     {
@@ -18919,7 +18944,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 194,
+      "line_count": 217,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/SideEffectSystem/SideEffectSystemTests.swift"
     },
     {
@@ -22827,7 +22852,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1841,
+  "entry_count": 1843,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

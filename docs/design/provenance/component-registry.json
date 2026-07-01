@@ -342,11 +342,15 @@
         "Old Profile naming is rejected as root IA."
       ],
       "accessibility_risks": [
-        "Every settings row needs a real target or honest unavailable state."
+        "Every settings row needs a real target or honest unavailable state.",
+        "Preference Weave rows need Dynamic Type, VoiceOver, Reduce Motion, Reduce Transparency, and Increase Contrast proof after source implementation."
       ],
-      "motion_risks": [],
+      "motion_risks": [
+        "Preference Weave motion must have a static reduced-motion equivalent."
+      ],
       "notes": [
-        "You must preserve offline no-account value and optional account boundaries."
+        "You must preserve offline no-account value and optional account boundaries.",
+        "VSP-06 final package R1 maps YouRootSurface to the Preference Weave candidate while preserving optional account and offline core boundaries."
       ]
     },
     {
@@ -473,6 +477,38 @@
       ],
       "notes": [
         "This is the Code-Connect-free canonical mapping layer."
+      ]
+    },
+    {
+      "component_id": "you-preference-weave-field",
+      "component_name": "PreferenceWeaveField",
+      "source_path": "Native/Ambitions/Surfaces/You/YouObjectView.swift",
+      "component_kind": "surface_candidate",
+      "owning_vsp_ids": [
+        "VSP-06",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "owning_surface_or_layer": "You content object / preference weave primitive",
+      "used_by_paths": [
+        "Native/Ambitions/Surfaces/You/YouObjectView.swift"
+      ],
+      "known_tests": [],
+      "known_previews": [],
+      "proof_status": "figma_candidate_only",
+      "stale_naming_risks": [
+        "Do not expose Preference Weave as architecture jargon if owner rejects the final package wording."
+      ],
+      "accessibility_risks": [
+        "Must provide semantic row mapping, VoiceOver labels/actions, Dynamic Type resilience, and reduced-motion static equivalent."
+      ],
+      "motion_risks": [
+        "Motion/glow must not carry required meaning; Reduce Motion must use static proof steps."
+      ],
+      "notes": [
+        "Proposed by VSP-06 final package R1 at Figma node 240:93.",
+        "Dedicated PreferenceWeaveField source does not exist yet; current candidate owner maps to YouObjectView.swift until an approved implementation leaf creates or extracts the primitive.",
+        "Existing native settings row/group primitives should be reused before adding custom surface code."
       ]
     }
   ]

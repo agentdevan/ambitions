@@ -275,42 +275,45 @@
       "vsp_id": "VSP-06",
       "likely_parent_issue": "AMB-1485",
       "recommended_parent_title": "VSP-06 You Native Settings",
-      "recommended_status": "Accepted Yellow",
+      "recommended_status": "Ready For Review",
       "recommended_labels": [
         "VSP",
         "you",
         "settings",
         "owner-approved-direction",
-        "yellow-proof"
+        "yellow-proof",
+        "figma-handoff",
+        "ready-for-review"
       ],
       "recommended_sub_issues": [
         {
-          "title": "Build VSP-06 final package from owner-approved Preference Weave",
-
-          "scope": "Figma package only: hero, state matrix, accessibility matrix, SwiftUI anatomy, non-goals",
-          "recommended_status": "Ready For Review after package build"
+          "title": "Owner-review VSP-06 Preference Weave final package R1",
+          "scope": "Review Figma node 240:93, durable screenshots, state matrix, accessibility matrix, SwiftUI anatomy, and non-claims; approve, repair, or reject before implementation",
+          "recommended_status": "Ready For Review"
         },
         {
-          "title": "Produce You SwiftUI parity leaf",
-          "scope": "Surfaces/You only, native settings rows with real targets",
+          "title": "Produce You SwiftUI parity leaf from approved VSP-06 package",
+          "scope": "Surfaces/You only; native settings rows, PreferenceWeaveField if approved, offline/account/privacy boundaries, and screenshot/a11y proof",
           "recommended_status": "Spec Ready after final package approval"
         }
       ],
       "blocked_by": [
-        "owner direction selection",
+        "final VSP-06 package owner approval",
         "VSP-01 shell authority",
         "VSP-10 source-owner map",
         "VSP-09 accessibility matrix",
-        "final VSP-06 package approval"
+        "live SwiftUI/accessibility/device proof after source implementation"
       ],
       "acceptance_summary": [
         "Owner approved Part 03 Option C Preference Weave as VSP-06 direction.",
-
         "Part 02 is rejected as too literal to supplied references.",
         "Part 03 keeps only reference intent and uses Ambitions-owned object language.",
         "You remains native settings/user system.",
         "No old Profile root IA and no account-gated core value.",
-        "Every visible row opens real detail or an honest unavailable state."
+        "Every visible row opens real detail or an honest unavailable state.",
+        "Final candidate package R1 is Figma node 240:93 with child frames 240:103, 240:220, 240:583, 240:946, and 240:1110.",
+        "Package is Yellow / Ready For Review only; it does not claim source implementation, Visual Green, device proof, accessibility conformance, runtime proof, account readiness, or R2 readiness.",
+        "PreferenceWeaveField is a proposed primitive; implementation must keep meaning semantic and accessible, not dependent on decorative motion/glow."
       ],
       "validation_summary": [
         "focused You tests after source implementation",
@@ -318,10 +321,12 @@
         "python3 scripts/ambitions-vsp-provenance-audit.py"
       ],
       "closeout_required": [
-        "final VSP-06 package built from C Preference Weave",
-        "approved final frame ID after package pass",
+        "final package frame ID 240:93 and durable proof paths",
+        "owner approval, repair request, or rejection for node 240:93",
         "live SwiftUI screenshot matrix after source implementation",
-        "offline/account boundary proof"
+        "accessibility and reduced-motion proof after source implementation",
+        "offline/account/privacy boundary proof after source implementation",
+        "explicit non-claims for no Visual Green, no source implementation, no runtime/device/accessibility proof, and no shell mutation until actually proven"
       ],
       "do_not_create_now": true
     },

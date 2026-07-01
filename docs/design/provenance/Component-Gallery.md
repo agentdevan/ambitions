@@ -187,8 +187,13 @@ Required later for Green: live render, screenshot matrix, accessibility matrix, 
 ## VSP-06 - You Native Settings
 
 Figma candidate screenshots:
+- docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-final-package-board-r1.png
+- docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-hero-r1.png
+- docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-state-matrix-r1.png
+- docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-accessibility-matrix-r1.png
+- docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-swiftui-anatomy-r1.png
+- docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/images/vsp-06-preference-weave-presentation-crop-r1.png
 - docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-c-preference-weave-r1.png
-
 - docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-part-03-ambitions-owned-you-directions-board-r1.png
 - docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-d-local-control-observatory-r1.png
 - docs/qa/evidence/2026-06-30-vsp-06-part-03-ambitions-owned-you-directions-r1/images/vsp-06-option-b-trust-meridian-r1.png
@@ -200,6 +205,7 @@ SwiftUI source owners:
 Candidate components:
 - `GroupedNavigationRow / Life area row candidate` (`surface`) - `Sources/Components/GroupedNavigationList.swift` - proof: `source_only`
 - `YouRootSurface / User system settings` (`surface`) - `Native/Ambitions/Surfaces/You/YouRootSurface.swift` - proof: `swiftui_render_missing`
+- `PreferenceWeaveField` (`surface_candidate`) - `Native/Ambitions/Surfaces/You/YouObjectView.swift` - proof: `figma_candidate_only`
 Known previews/tests/quality files:
 - Native/AmbitionsTests/You/YouUserSystemProfileReconstructionTests.swift
 - Native/AmbitionsTests/You/YouFeatureServiceTests.swift
@@ -271,6 +277,7 @@ SwiftUI source owners:
 Candidate components:
 - `StageDockRail` (`shell`) - `Native/Ambitions/Stage/Chrome/StageDockRail.swift` - proof: `swiftui_render_missing`
 - `StageMotionReductionPolicy / accessibility matrix` (`motion_behavior`) - `Native/Ambitions/Stage/Motion/StageMotionReductionPolicy.swift` - proof: `source_only`
+- `PreferenceWeaveField` (`surface_candidate`) - `Native/Ambitions/Surfaces/You/YouObjectView.swift` - proof: `figma_candidate_only`
 Known previews/tests/quality files:
 - Native/AmbitionsTests/App/AccessibilityAdaptiveInterfaceDesignSystemTests.swift
 - Native/AmbitionsTests/App/InteractionMotionHapticsDesignSystemTests.swift
@@ -300,6 +307,7 @@ Candidate components:
 - `GroupedNavigationRow / Life area row candidate` (`surface`) - `Sources/Components/GroupedNavigationList.swift` - proof: `source_only`
 - `LifeShapeField` (`surface`) - `Sources/Components/LifeDirectionalIntegrationPrimitives+02-LifeShapeField.swift` - proof: `swiftui_render_missing`
 - `VSP Git provenance registry` (`quality_proof`) - `docs/design/provenance/vsp-provenance.json` - proof: `source_only`
+- `PreferenceWeaveField` (`surface_candidate`) - `Native/Ambitions/Surfaces/You/YouObjectView.swift` - proof: `figma_candidate_only`
 Known previews/tests/quality files:
 - Native/AmbitionsTests/App/FE09ComponentSystemTests.swift
 - Native/AmbitionsTests/App/ShellPreviewMatrixTests.swift
