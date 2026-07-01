@@ -21,9 +21,17 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .notDetermined, for: .reminders)
         await store.setAuthorizationResponse(state: .fullAccess, for: .reminders)
-        let service = EventKitIntegrationService(storeClient: store)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
 
-        let record = try await service.createReminder(for: fixtureSelection(), now: fixtureNow())
+        let record = try await service.createReminder(
+            for: fixtureSelection(),
+            now: fixtureNow(),
+            localCommit: runtimeLocalCommitEvidence("reminder")
+        )
         let payload = await store.lastReminderPayload
 
         XCTAssertEqual(record.identifier, "reminder-1")
@@ -40,12 +48,18 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .reminders)
         let reminderRepository = try await makeReminderRepository()
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
         let service = EventKitIntegrationService(
             storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger)),
             reminderRepository: reminderRepository
         )
 
-        let record = try await service.createReminder(for: fixtureSelection(), now: fixtureNow())
+        let record = try await service.createReminder(
+            for: fixtureSelection(),
+            now: fixtureNow(),
+            localCommit: runtimeLocalCommitEvidence("reminder-persist")
+        )
         let loadedReminder = try await reminderRepository.reminder(id: record.identifier)
         let loaded = try XCTUnwrap(loadedReminder)
 
@@ -60,6 +74,34 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertTrue(loaded.state.isActive)
         XCTAssertFalse(loaded.state.isTerminal)
         XCTAssertTrue(loaded.deliveryPolicy.usesLocalNotificationDelivery)
+    }
+
+    func testCreateReminderRequiresLocalCommitReceiptBeforeSaving() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .reminders)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
+
+        do {
+            _ = try await service.createReminder(for: fixtureSelection(), now: fixtureNow())
+            XCTFail("Expected missing local commit receipt to throw.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .reminders))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        let payload = await store.lastReminderPayload
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertNil(payload)
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.status, .blocked)
+        XCTAssertEqual(record?.boundary, .externalEffect)
+        XCTAssertEqual(record?.externalEffect, true)
+        XCTAssertTrue(record?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
     }
 
     func testDetectConflictsReturnsOverlappingEventsAndNearbyRoom() async {
@@ -232,6 +274,34 @@ final class EventKitIntegrationServiceTests: XCTestCase {
         XCTAssertTrue(record?.blockedFacts.contains("Calendar write permission was not available for this requested calendar event.") == true)
     }
 
+    func testCreateCalendarEventRequiresLocalCommitReceiptBeforeSaving() async throws {
+        let store = RecordingEventKitStoreClient()
+        await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
+
+        do {
+            _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+            XCTFail("Expected missing local commit receipt to throw.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .calendarEvents))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        let saveCount = await store.currentSaveEventCount()
+        let record = await sideEffectLedger.lastRecord
+        XCTAssertEqual(saveCount, 0)
+        XCTAssertEqual(record?.effectKind, .calendar)
+        XCTAssertEqual(record?.status, .blocked)
+        XCTAssertEqual(record?.boundary, .externalEffect)
+        XCTAssertEqual(record?.externalEffect, true)
+        XCTAssertTrue(record?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
+    }
+
     func testCreateCalendarEventSuccessRecordsCalendarSideEffect() async throws {
         let store = RecordingEventKitStoreClient()
         await store.setAuthorization(state: .fullAccess, for: .calendarEvents)
@@ -241,7 +311,12 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
-        let record = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+        let record = try await service.createCalendarEvent(
+            for: fixtureSelection(),
+            durationMinutes: 45,
+            now: fixtureNow(),
+            localCommit: runtimeLocalCommitEvidence("calendar-event")
+        )
 
         let records = await sideEffectLedger.records
         let queuedSideEffect = records.first { $0.status == .queued }
@@ -275,8 +350,18 @@ final class EventKitIntegrationServiceTests: XCTestCase {
             eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
         )
 
-        _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
-        _ = try await service.createCalendarEvent(for: fixtureSelection(), durationMinutes: 45, now: fixtureNow())
+        _ = try await service.createCalendarEvent(
+            for: fixtureSelection(),
+            durationMinutes: 45,
+            now: fixtureNow(),
+            localCommit: runtimeLocalCommitEvidence("calendar-event-repeat-1")
+        )
+        _ = try await service.createCalendarEvent(
+            for: fixtureSelection(),
+            durationMinutes: 45,
+            now: fixtureNow(),
+            localCommit: runtimeLocalCommitEvidence("calendar-event-repeat-2")
+        )
 
         let records = await sideEffectLedger.records
         XCTAssertEqual(records.count, 4)
@@ -310,6 +395,20 @@ private extension EventKitIntegrationServiceTests {
             stepTitle: "Draft conference abstract",
             stepSummary: "First concrete draft.",
             suggestedDate: fixtureSuggestedDate()
+        )
+    }
+
+    func runtimeLocalCommitEvidence(_ suffix: String) -> SideEffectLocalCommitEvidence {
+        SideEffectLocalCommitEvidence(
+            receiptID: "runtime.commit-receipt.\(suffix)",
+            writeScope: .localSwiftDataSingleContext,
+            committedAt: "2026-04-16T09:00:00Z",
+            didCommitChanges: true,
+            sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects,
+            runtimeTransactionID: "runtime.transaction.\(suffix)",
+            runtimeEventID: "runtime.event.\(suffix)",
+            runtimeReceiptID: "runtime.receipt.\(suffix)",
+            rollbackPlanID: "runtime.rollback.\(suffix)"
         )
     }
 }

@@ -7,6 +7,7 @@ struct EventKitOutbox: Sendable {
         self.recorder = recorder
     }
 
+    @discardableResult
     func recordCalendarSideEffect(
         actionKind: SafeAutomationActionKind,
         status: SideEffectLedgerStatus,
@@ -18,8 +19,8 @@ struct EventKitOutbox: Sendable {
         degradedFacts: [String] = [],
         localCommit: SideEffectLocalCommitEvidence? = nil,
         now: Date = Date()
-    ) async {
-        guard let recorder else { return }
+    ) async -> SideEffectAttempt? {
+        guard let recorder else { return nil }
         let request = SideEffectOutboxRequest(
             id: "calendar.\(actionKind.rawValue).\(status.rawValue).\(UUID().uuidString.lowercased())",
             effectKind: .calendar,
@@ -28,7 +29,7 @@ struct EventKitOutbox: Sendable {
             requestedAt: now,
             externalEffect: externalEffect,
             requiresConfirmation: requiresConfirmation,
-            commitRequirement: externalEffect ? .resultObservation : .noUserStateMutation,
+            commitRequirement: externalEffect ? .localCommitRequired : .noUserStateMutation,
             localCommit: localCommit,
             requestedStatus: status,
             requestedBoundary: boundary,
@@ -36,6 +37,6 @@ struct EventKitOutbox: Sendable {
             blockedFacts: blockedFacts,
             degradedFacts: degradedFacts
         )
-        _ = try? await recorder.enqueue(request)
+        return try? await recorder.enqueue(request)
     }
 }

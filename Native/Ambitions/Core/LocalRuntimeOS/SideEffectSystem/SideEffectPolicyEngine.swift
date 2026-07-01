@@ -13,19 +13,31 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
     let committedAt: String
     let didCommitChanges: Bool
     let sideEffectPolicy: String
+    let runtimeTransactionID: String?
+    let runtimeEventID: String?
+    let runtimeReceiptID: String?
+    let rollbackPlanID: String?
 
     init(
         receiptID: String,
         writeScope: AppUnitOfWorkWriteScope,
         committedAt: String,
         didCommitChanges: Bool,
-        sideEffectPolicy: String
+        sideEffectPolicy: String,
+        runtimeTransactionID: String? = nil,
+        runtimeEventID: String? = nil,
+        runtimeReceiptID: String? = nil,
+        rollbackPlanID: String? = nil
     ) {
         self.receiptID = receiptID.trimmingCharacters(in: .whitespacesAndNewlines)
         self.writeScope = writeScope
         self.committedAt = committedAt.trimmingCharacters(in: .whitespacesAndNewlines)
         self.didCommitChanges = didCommitChanges
         self.sideEffectPolicy = sideEffectPolicy.trimmingCharacters(in: .whitespacesAndNewlines)
+        self.runtimeTransactionID = runtimeTransactionID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.runtimeEventID = runtimeEventID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.runtimeReceiptID = runtimeReceiptID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
+        self.rollbackPlanID = rollbackPlanID?.trimmingCharacters(in: .whitespacesAndNewlines).nilIfEmpty
     }
 
     init(receipt: AppUnitOfWorkReceipt) {
@@ -38,11 +50,29 @@ struct SideEffectLocalCommitEvidence: Codable, Sendable, Equatable, Hashable {
         )
     }
 
+    init(runtimeReceipt: RuntimeCommitReceipt, writeScope: AppUnitOfWorkWriteScope = .localSwiftDataSingleContext) {
+        self.init(
+            receiptID: runtimeReceipt.id,
+            writeScope: writeScope,
+            committedAt: runtimeReceipt.committedAt,
+            didCommitChanges: true,
+            sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects,
+            runtimeTransactionID: runtimeReceipt.transactionID,
+            runtimeEventID: runtimeReceipt.eventID,
+            runtimeReceiptID: runtimeReceipt.receiptID,
+            rollbackPlanID: runtimeReceipt.rollbackPlanID
+        )
+    }
+
     var provesCommittedLocalMutationWithoutExternalEffects: Bool {
         receiptID.isEmpty == false &&
-        committedAt.isEmpty == false &&
-        didCommitChanges &&
-        sideEffectPolicy == AppUnitOfWorkReceipt.noExternalSideEffects
+            committedAt.isEmpty == false &&
+            didCommitChanges &&
+            sideEffectPolicy == AppUnitOfWorkReceipt.noExternalSideEffects &&
+            runtimeTransactionID != nil &&
+            runtimeEventID != nil &&
+            runtimeReceiptID != nil &&
+            rollbackPlanID != nil
     }
 }
 
@@ -123,13 +153,16 @@ struct SideEffectPolicyEngine: Sendable {
     func evaluate(_ request: SideEffectOutboxRequest) -> SideEffectPolicyDecision {
         var reasons = normalizedReasons(request.reasons)
         var blockedFacts = normalizedStrings(request.blockedFacts)
-        var degradedFacts = normalizedStrings(request.degradedFacts)
+        let degradedFacts = normalizedStrings(request.degradedFacts)
 
         if request.id.isEmpty {
             blockedFacts.append("Side-effect request did not include a durable id.")
         }
 
         let localCommitIsValid = request.localCommit?.provesCommittedLocalMutationWithoutExternalEffects ?? false
+        if request.externalEffect && request.commitRequirement != .localCommitRequired {
+            blockedFacts.append("External side effect must declare a local runtime commit receipt requirement.")
+        }
         if request.commitRequirement == .localCommitRequired && localCommitIsValid == false {
             blockedFacts.append("External side effect cannot be attempted before a committed local mutation receipt.")
         }
@@ -175,8 +208,9 @@ struct SideEffectPolicyEngine: Sendable {
             return request.externalEffect ? .externalEffect : .localOnly
         }()
 
+        let confirmationGateSatisfied = request.requiresConfirmation == false || status == .queued
         let mayAttempt = request.externalEffect &&
-            request.requiresConfirmation == false &&
+            confirmationGateSatisfied &&
             status != .blocked &&
             status != .failedSafely &&
             status != .confirmationRequired

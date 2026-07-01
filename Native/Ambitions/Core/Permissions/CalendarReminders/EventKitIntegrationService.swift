@@ -127,6 +127,7 @@ enum CalendarRemindersError: LocalizedError, Equatable {
     case missingEventStartDate
     case authorizationDenied(scope: CalendarRemindersScope)
     case missingDefaultCalendar(scope: CalendarRemindersScope)
+    case missingLocalCommitReceipt(scope: CalendarRemindersScope)
     case saveFailed(String)
 
     var errorDescription: String? {
@@ -146,6 +147,13 @@ enum CalendarRemindersError: LocalizedError, Equatable {
                 return "No default reminders list is available on this device."
             case .calendarEvents:
                 return "No writable default calendar is available on this device."
+            }
+        case let .missingLocalCommitReceipt(scope):
+            switch scope {
+            case .reminders:
+                return "A local runtime commit receipt is required before creating reminder items."
+            case .calendarEvents:
+                return "A local runtime commit receipt is required before creating calendar events."
             }
         case let .saveFailed(message):
             return "Unable to save to EventKit: \(message)"

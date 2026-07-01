@@ -1,4 +1,3 @@
-import SwiftData
 import XCTest
 @testable import Ambitions
 
@@ -67,34 +66,45 @@ final class SideEffectSystemTests: XCTestCase {
         XCTAssertTrue(stored?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
     }
 
+    func testOutboxBlocksExternalAttemptThatDoesNotDeclareLocalCommitRequirement() async throws {
+        let eventStore = InMemoryRuntimeEventStore()
+        let localCommitOutcome = try await runtimeCommit(
+            id: "command-before-bad-requirement",
+            eventStore: eventStore
+        )
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
+        let request = SideEffectOutboxRequest(
+            id: "side-effect.calendar.write.bad-requirement",
+            effectKind: .calendar,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            requestedAt: Date(timeIntervalSince1970: 1_714_000_000),
+            externalEffect: true,
+            requiresConfirmation: false,
+            commitRequirement: .resultObservation,
+            localCommit: SideEffectLocalCommitEvidence(runtimeReceipt: localCommitOutcome.receipt),
+            requestedStatus: .queued,
+            requestedBoundary: .externalEffect,
+            reasons: [.externalSideEffect]
+        )
+
+        let attempt = try await outbox.enqueue(request)
+        let stored = try await ledger.fetchRecord(id: request.id)
+
+        XCTAssertFalse(attempt.mayAttemptExternalWrite)
+        XCTAssertNil(attempt.lease)
+        XCTAssertEqual(stored?.status, .blocked)
+        XCTAssertTrue(stored?.blockedFacts.contains("External side effect must declare a local runtime commit receipt requirement.") == true)
+    }
+
     func testLocalCommitReceiptSurvivesExternalAttemptFailure() async throws {
-        let store = try AmbitionsPersistenceStore(inMemory: true)
-        let unitOfWork = SwiftDataAppUnitOfWork(store: store)
-        let localCommit = try await unitOfWork.perform(
-            id: "local-commit.before-side-effect",
-            timestampProvider: Self.timestampProvider()
-        ) { context in
-            context.insert(
-                AppStateRecord(
-                    id: "side-effect-system-test-state",
-                    preferredTabRaw: "today",
-                    userDisplayName: "Local Runtime",
-                    appearancePreferenceRaw: "system",
-                    accentFamilyRaw: nil,
-                    hasCompletedBootstrap: true,
-                    lastBootstrapSourceRaw: "test",
-                    lastBootstrapAt: "2026-06-30T08:00:00Z",
-                    lastSeedVersion: nil,
-                    lastSeededAt: nil,
-                    lastOpenedGoalID: nil,
-                    snapshotData: Data()
-                )
-            )
-            return "committed"
-        }
-        XCTAssertEqual(localCommit.value, "committed")
-        XCTAssertTrue(localCommit.receipt.didCommitChanges)
-        XCTAssertEqual(localCommit.receipt.sideEffectPolicy, AppUnitOfWorkReceipt.noExternalSideEffects)
+        let eventStore = InMemoryRuntimeEventStore()
+        let localCommitOutcome = try await runtimeCommit(
+            id: "command-before-side-effect",
+            eventStore: eventStore
+        )
+        let localCommit = SideEffectLocalCommitEvidence(runtimeReceipt: localCommitOutcome.receipt)
 
         let ledger = InMemorySideEffectLedgerRepository()
         let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
@@ -108,7 +118,7 @@ final class SideEffectSystemTests: XCTestCase {
             externalEffect: true,
             requiresConfirmation: false,
             commitRequirement: .localCommitRequired,
-            localCommit: SideEffectLocalCommitEvidence(receipt: localCommit.receipt),
+            localCommit: localCommit,
             requestedStatus: .queued,
             requestedBoundary: .externalEffect,
             reasons: [.externalSideEffect]
@@ -120,7 +130,7 @@ final class SideEffectSystemTests: XCTestCase {
         XCTAssertTrue(attempt.mayAttemptExternalWrite)
         XCTAssertEqual(attempt.lease?.sideEffectID, request.id)
         XCTAssertEqual(queued?.status, .queued)
-        XCTAssertTrue(queued?.degradedFacts.contains("Local commit receipt local-commit.before-side-effect completed before side-effect recording.") == true)
+        XCTAssertTrue(queued?.degradedFacts.contains("Local commit receipt runtime.commit-receipt.command-before-side-effect completed before side-effect recording.") == true)
 
         let receipt = try await outbox.recordResult(
             SideEffectAttemptResult(
@@ -131,18 +141,84 @@ final class SideEffectSystemTests: XCTestCase {
             occurredAt: Date(timeIntervalSince1970: 1_714_000_120)
         )
         let failed = try await ledger.fetchRecord(id: request.id)
-        let storedState = try await store.read { context -> (id: String, completedBootstrap: Bool)? in
-            try context.fetch(FetchDescriptor<AppStateRecord>())
-                .first(where: { $0.id == "side-effect-system-test-state" })
-                .map { ($0.id, $0.hasCompletedBootstrap) }
-        }
+        let events = try await eventStore.fetchEvents(matching: .all, limit: nil)
 
-        XCTAssertEqual(receipt.localCommitReceiptID, "local-commit.before-side-effect")
+        XCTAssertEqual(receipt.localCommitReceiptID, "runtime.commit-receipt.command-before-side-effect")
         XCTAssertEqual(receipt.status, .failedSafely)
         XCTAssertEqual(failed?.status, .failedSafely)
         XCTAssertEqual(failed?.receiptID, receipt.id)
-        XCTAssertEqual(storedState?.id, "side-effect-system-test-state")
-        XCTAssertEqual(storedState?.completedBootstrap, true)
+        XCTAssertEqual(events.count, 1)
+        XCTAssertEqual(events.first?.event.commandID, "command-before-side-effect")
+        XCTAssertTrue(localCommitOutcome.receipt.hasReplayableProof)
+    }
+
+    func testConfirmedExternalWriteWithRuntimeReceiptMayAttempt() async throws {
+        let eventStore = InMemoryRuntimeEventStore()
+        let localCommitOutcome = try await runtimeCommit(
+            id: "command-before-confirmed-side-effect",
+            eventStore: eventStore
+        )
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
+        let request = SideEffectOutboxRequest(
+            id: "side-effect.calendar.write.after-confirmation",
+            effectKind: .calendar,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            requestedAt: Date(timeIntervalSince1970: 1_714_000_000),
+            externalEffect: true,
+            requiresConfirmation: true,
+            commitRequirement: .localCommitRequired,
+            localCommit: SideEffectLocalCommitEvidence(runtimeReceipt: localCommitOutcome.receipt),
+            requestedStatus: .queued,
+            requestedBoundary: .externalEffect,
+            reasons: [.externalSideEffect, .confirmationRequired]
+        )
+
+        let attempt = try await outbox.enqueue(request)
+        let queued = try await ledger.fetchRecord(id: request.id)
+
+        XCTAssertTrue(attempt.mayAttemptExternalWrite)
+        XCTAssertEqual(attempt.lease?.sideEffectID, request.id)
+        XCTAssertEqual(queued?.status, .queued)
+        XCTAssertEqual(queued?.requiresConfirmation, true)
+        XCTAssertEqual(queued?.externalEffect, true)
+    }
+
+    func testLegacyUnitOfWorkReceiptDoesNotPermitExternalWriteWithoutRuntimeReceiptProof() async throws {
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
+        let legacyReceipt = AppUnitOfWorkReceipt(
+            id: "legacy.unit-of-work.receipt",
+            startedAt: "2026-06-30T08:00:00Z",
+            completedAt: "2026-06-30T08:00:01Z",
+            writeScope: .localSwiftDataSingleContext,
+            didCommitChanges: true,
+            rollbackBehavior: AppUnitOfWorkReceipt.rollbackOnThrownError,
+            sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects
+        )
+        let request = SideEffectOutboxRequest(
+            id: "side-effect.calendar.write.legacy-receipt",
+            effectKind: .calendar,
+            actionKind: .writeCalendarBlock,
+            sourceDomain: .time,
+            requestedAt: Date(timeIntervalSince1970: 1_714_000_000),
+            externalEffect: true,
+            requiresConfirmation: false,
+            commitRequirement: .localCommitRequired,
+            localCommit: SideEffectLocalCommitEvidence(receipt: legacyReceipt),
+            requestedStatus: .queued,
+            requestedBoundary: .externalEffect,
+            reasons: [.externalSideEffect]
+        )
+
+        let attempt = try await outbox.enqueue(request)
+        let stored = try await ledger.fetchRecord(id: request.id)
+
+        XCTAssertFalse(attempt.mayAttemptExternalWrite)
+        XCTAssertNil(attempt.lease)
+        XCTAssertEqual(stored?.status, .blocked)
+        XCTAssertTrue(stored?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
     }
 
     func testAppIntentBridgeAppendsExternalCreationThroughCanonicalSideEffectOwner() async throws {
@@ -205,8 +281,27 @@ final class SideEffectSystemTests: XCTestCase {
         return url
     }
 
-    private static func timestampProvider() -> @Sendable () -> String {
-        { "2026-06-30T08:00:00Z" }
+    private func runtimeCommit(
+        id: String,
+        eventStore: InMemoryRuntimeEventStore
+    ) async throws -> RuntimeTransactionCommitOutcome {
+        let coordinator = RuntimeTransactionCoordinator(eventStore: eventStore)
+        let occurredAt = try XCTUnwrap(DomainTimestamp.date(from: "2026-04-25T12:00:00Z"))
+        let command = AmbitionsCommand(
+            id: id,
+            kind: .startStepSession,
+            source: .today,
+            target: AmbitionsCommandTarget(goalID: "goal-1", stepID: "step-1"),
+            payload: AmbitionsCommandPayload(title: "Open step"),
+            createdAt: "2026-04-25T12:00:00Z"
+        )
+        return try await coordinator.commit(
+            command: command,
+            beforeSnapshot: "today.before",
+            afterSnapshot: "today.after",
+            targetSurface: .today,
+            occurredAt: occurredAt
+        )
     }
 
     private func temporaryDirectory() -> URL {

@@ -102,7 +102,8 @@ final class CalendarRealityServiceTests: XCTestCase {
 
         let written = try await service.createCalendarBlock(
             intent: ScheduledBlockWriteIntent(id: "intent-1", block: block, requestedAt: now),
-            now: now
+            now: now,
+            localCommit: runtimeLocalCommitEvidence("calendar-block")
         )
         let payload = await store.lastEventPayload
         let writeOnlyRequestCount = await store.currentWriteOnlyRequestCount()
@@ -112,12 +113,62 @@ final class CalendarRealityServiceTests: XCTestCase {
         XCTAssertEqual(payload?.title, "Draft proposal")
         XCTAssertEqual(payload?.notes, "Created by Ambitions after explicit Time confirmation.")
 
+        let records = await sideEffectLedger.records
+        let queuedSideEffect = records.first { $0.status == .queued }
+        let completedSideEffect = records.first { $0.status == .recordedLocalOnly }
+        XCTAssertEqual(records.count, 2)
+        XCTAssertEqual(queuedSideEffect?.effectKind, .calendar)
+        XCTAssertEqual(queuedSideEffect?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(queuedSideEffect?.requiresConfirmation, true)
+        XCTAssertEqual(queuedSideEffect?.externalEffect, true)
+        XCTAssertEqual(completedSideEffect?.effectKind, .calendar)
+        XCTAssertEqual(completedSideEffect?.status, .recordedLocalOnly)
+        XCTAssertEqual(completedSideEffect?.actionKind, .writeCalendarBlock)
+        XCTAssertEqual(completedSideEffect?.requiresConfirmation, true)
+        XCTAssertEqual(completedSideEffect?.externalEffect, true)
+    }
+
+    func testConfirmedBlockWriteRequiresLocalCommitReceiptBeforeSavingEvent() async throws {
+        let store = RecordingRealityEventKitStoreClient()
+        let now = Date(timeIntervalSince1970: 1_714_000_000)
+        await store.setAuthorization(state: .notDetermined, for: .calendarEvents)
+        await store.setWriteOnlyAuthorizationResponse(state: .writeOnly)
+        let sideEffectLedger = RecordingSideEffectLedgerRepository()
+        let service = EventKitIntegrationService(
+            storeClient: store,
+            eventKitOutbox: EventKitOutbox(recorder: SideEffectOutbox(ledger: sideEffectLedger))
+        )
+        let block = ScheduledAmbitionsBlock(
+            id: "block-1",
+            title: "Draft proposal",
+            start: now.addingTimeInterval(3_600),
+            end: now.addingTimeInterval(5_400),
+            contextLens: .work,
+            relatedPlanID: "plan-1",
+            isUserConfirmed: true
+        )
+
+        do {
+            _ = try await service.createCalendarBlock(
+                intent: ScheduledBlockWriteIntent(id: "intent-1", block: block, requestedAt: now),
+                now: now
+            )
+            XCTFail("Expected missing local commit receipt to throw.")
+        } catch let error as CalendarRemindersError {
+            XCTAssertEqual(error, .missingLocalCommitReceipt(scope: .calendarEvents))
+        } catch {
+            XCTFail("Unexpected error: \(error)")
+        }
+
+        let payload = await store.lastEventPayload
         let record = await sideEffectLedger.lastRecord
+        XCTAssertNil(payload)
         XCTAssertEqual(record?.effectKind, .calendar)
-        XCTAssertEqual(record?.status, .recordedLocalOnly)
+        XCTAssertEqual(record?.status, .blocked)
         XCTAssertEqual(record?.actionKind, .writeCalendarBlock)
         XCTAssertEqual(record?.requiresConfirmation, true)
         XCTAssertEqual(record?.externalEffect, true)
+        XCTAssertTrue(record?.blockedFacts.contains("External side effect cannot be attempted before a committed local mutation receipt.") == true)
     }
 }
 
@@ -227,4 +278,18 @@ private actor RecordingSideEffectLedgerRepository: SideEffectLedgerRepository {
         }
         return lhs.id < rhs.id
     }
+}
+
+private func runtimeLocalCommitEvidence(_ suffix: String) -> SideEffectLocalCommitEvidence {
+    SideEffectLocalCommitEvidence(
+        receiptID: "runtime.commit-receipt.\(suffix)",
+        writeScope: .localSwiftDataSingleContext,
+        committedAt: "2026-04-16T09:00:00Z",
+        didCommitChanges: true,
+        sideEffectPolicy: AppUnitOfWorkReceipt.noExternalSideEffects,
+        runtimeTransactionID: "runtime.transaction.\(suffix)",
+        runtimeEventID: "runtime.event.\(suffix)",
+        runtimeReceiptID: "runtime.receipt.\(suffix)",
+        rollbackPlanID: "runtime.rollback.\(suffix)"
+    )
 }

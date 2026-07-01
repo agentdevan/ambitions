@@ -1138,6 +1138,119 @@ def check_external_surface_sanitized_projection_gate() -> CheckResult:
     )
 
 
+def check_side_effect_local_commit_receipt_gate() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "SideEffectSystem" / "SideEffectPolicyEngine.swift": [
+            "let runtimeTransactionID: String?",
+            "let runtimeEventID: String?",
+            "let runtimeReceiptID: String?",
+            "let rollbackPlanID: String?",
+            "init(runtimeReceipt: RuntimeCommitReceipt",
+            "runtimeTransactionID: runtimeReceipt.transactionID",
+            "runtimeEventID: runtimeReceipt.eventID",
+            "runtimeReceiptID: runtimeReceipt.receiptID",
+            "rollbackPlanID: runtimeReceipt.rollbackPlanID",
+            "runtimeTransactionID != nil",
+            "runtimeEventID != nil",
+            "runtimeReceiptID != nil",
+            "rollbackPlanID != nil",
+            "request.externalEffect && request.commitRequirement != .localCommitRequired",
+            "External side effect must declare a local runtime commit receipt requirement.",
+            "External side effect cannot be attempted before a committed local mutation receipt.",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "SideEffectSystem" / "EventKitOutbox.swift": [
+            "async -> SideEffectAttempt?",
+            "commitRequirement: externalEffect ? .localCommitRequired : .noUserStateMutation",
+            "localCommit: localCommit",
+            "return try? await recorder.enqueue(request)",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "SideEffectSystem" / "ReminderOutbox.swift": [
+            "localCommit: SideEffectLocalCommitEvidence",
+            "externalEffect: true",
+            "commitRequirement: .localCommitRequired",
+            "localCommit: localCommit",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "Permissions" / "CalendarReminders" / "EventKitIntegrationService.swift": [
+            "case missingLocalCommitReceipt(scope: CalendarRemindersScope)",
+            "A local runtime commit receipt is required before creating reminder items.",
+            "A local runtime commit receipt is required before creating calendar events.",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "Permissions" / "CalendarReminders" / "EventKitIntegrationService+02-EventKitIntegrationService.swift": [
+            "localCommit: SideEffectLocalCommitEvidence?",
+            "guard attempt?.mayAttemptExternalWrite == true else",
+            "throw CalendarRemindersError.missingLocalCommitReceipt(scope: .reminders)",
+            "throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)",
+            "localCommit: localCommit",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "Permissions" / "CalendarReminders" / "EventKitIntegrationService+03-EventKitIntegrationService.swift": [
+            "localCommit: SideEffectLocalCommitEvidence?",
+            "guard attempt?.mayAttemptExternalWrite == true else",
+            "throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)",
+            "localCommit: localCommit",
+        ],
+        ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SideEffectSystem" / "SideEffectSystemTests.swift": [
+            "SideEffectLocalCommitEvidence(runtimeReceipt: localCommitOutcome.receipt)",
+            "RuntimeTransactionCoordinator(eventStore: eventStore)",
+            "testLegacyUnitOfWorkReceiptDoesNotPermitExternalWriteWithoutRuntimeReceiptProof",
+            "External side effect must declare a local runtime commit receipt requirement.",
+            "External side effect cannot be attempted before a committed local mutation receipt.",
+        ],
+    }
+
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "side-effect-local-commit-missing-source",
+                    relative(path),
+                    None,
+                    "Side-effect local commit receipt gate source is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "side-effect-local-commit-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing side-effect local commit receipt marker `{marker}`.",
+                    )
+                )
+
+    side_effect_root = LOCAL_RUNTIME_ROOT / "SideEffectSystem"
+    if side_effect_root.exists():
+        for path in sorted(side_effect_root.glob("*.swift")):
+            rel = relative(path)
+            lines = read_text(path).splitlines()
+            for index, line in enumerate(lines, start=1):
+                if "externalEffect: true" not in line:
+                    continue
+                nearby = "\n".join(lines[index - 1:index + 12])
+                if "commitRequirement: .localCommitRequired" not in nearby:
+                    findings.append(
+                        Finding(
+                            "blocker",
+                            "external-side-effect-without-local-commit-requirement",
+                            rel,
+                            index,
+                            "SideEffectSystem external-effect requests must require a local runtime commit receipt.",
+                        )
+                    )
+
+    return make_result(
+        "side_effect_local_commit_receipt_gate",
+        findings,
+        "External side effects require local runtime commit receipt evidence before attempt.",
+        "{count} side-effect local commit receipt blocker(s) remain.",
+    )
+
+
 def check_runtime_mutation_context_boundaries() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
@@ -1301,6 +1414,7 @@ def run_checks() -> list[CheckResult]:
         check_transaction_coordinator_commit_ownership(),
         check_projection_store_surface_read_gate(),
         check_external_surface_sanitized_projection_gate(),
+        check_side_effect_local_commit_receipt_gate(),
         check_runtime_mutation_context_boundaries(),
         scan_mutation_bypasses(),
         scan_feature_service_mutation_authority(),
@@ -1436,6 +1550,7 @@ def run_self_test() -> int:
     assert "surface_projection_store_consumption" in INTEGRATION_MARKERS
     assert any(prefix.endswith("AmbitionsWidgetExtension/") for prefix in EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES)
     assert any(result.check_id == "external_surface_sanitized_projection_gate" for result in [check_external_surface_sanitized_projection_gate()])
+    assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
     assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
     service_write = "try await repositories.goals.saveGoals([goal])"
     service_match = SERVICE_MUTATION_CALL_PATTERN.search(service_write)

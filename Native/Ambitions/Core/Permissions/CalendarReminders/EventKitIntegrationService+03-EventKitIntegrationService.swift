@@ -111,6 +111,14 @@ extension EventKitIntegrationService {
     }
 
     func createCalendarBlock(intent: ScheduledBlockWriteIntent, now: Date) async throws -> ScheduledAmbitionsBlock {
+        try await createCalendarBlock(intent: intent, now: now, localCommit: nil)
+    }
+
+    func createCalendarBlock(
+        intent: ScheduledBlockWriteIntent,
+        now: Date,
+        localCommit: SideEffectLocalCommitEvidence?
+    ) async throws -> ScheduledAmbitionsBlock {
         guard intent.isExecutable else {
             await recordCalendarSideEffect(
                 actionKind: .writeCalendarBlock,
@@ -141,6 +149,18 @@ extension EventKitIntegrationService {
             endDate: intent.block.end
         )
         do {
+            let attempt = await recordCalendarSideEffect(
+                actionKind: .writeCalendarBlock,
+                status: .queued,
+                boundary: .externalEffect,
+                requiresConfirmation: true,
+                externalEffect: true,
+                reasons: [.externalSideEffect],
+                localCommit: localCommit
+            )
+            guard attempt?.mayAttemptExternalWrite == true else {
+                throw CalendarRemindersError.missingLocalCommitReceipt(scope: .calendarEvents)
+            }
             let identifier = try await storeClient.saveEvent(payload)
             await recordCalendarSideEffect(
                 actionKind: .writeCalendarBlock,
@@ -148,7 +168,8 @@ extension EventKitIntegrationService {
                 boundary: .externalEffect,
                 requiresConfirmation: true,
                 externalEffect: true,
-                reasons: [.externalSideEffect]
+                reasons: [.externalSideEffect],
+                localCommit: localCommit
             )
             return ScheduledAmbitionsBlock(
                 id: intent.block.id,
@@ -162,6 +183,8 @@ extension EventKitIntegrationService {
                 isUserConfirmed: true,
                 calendarEventIdentifier: identifier
             )
+        } catch CalendarRemindersError.missingLocalCommitReceipt(let scope) {
+            throw CalendarRemindersError.missingLocalCommitReceipt(scope: scope)
         } catch {
             await recordCalendarSideEffect(
                 actionKind: .writeCalendarBlock,
@@ -175,6 +198,7 @@ extension EventKitIntegrationService {
         }
     }
 
+    @discardableResult
     func recordCalendarSideEffect(
         actionKind: SafeAutomationActionKind,
         status: SideEffectLedgerStatus,
@@ -183,9 +207,10 @@ extension EventKitIntegrationService {
         externalEffect: Bool,
         reasons: [SafeAutomationPolicyReason] = [],
         blockedFacts: [String] = [],
-        degradedFacts: [String] = []
-    ) async {
-        await eventKitOutbox.recordCalendarSideEffect(
+        degradedFacts: [String] = [],
+        localCommit: SideEffectLocalCommitEvidence? = nil
+    ) async -> SideEffectAttempt? {
+        return await eventKitOutbox.recordCalendarSideEffect(
             actionKind: actionKind,
             status: status,
             boundary: boundary,
@@ -193,7 +218,8 @@ extension EventKitIntegrationService {
             externalEffect: externalEffect,
             reasons: reasons,
             blockedFacts: blockedFacts,
-            degradedFacts: degradedFacts
+            degradedFacts: degradedFacts,
+            localCommit: localCommit
         )
     }
 
