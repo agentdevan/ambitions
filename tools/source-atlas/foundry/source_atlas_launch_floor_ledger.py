@@ -23,7 +23,7 @@ from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m04-l03"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m04-l04"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -132,6 +132,7 @@ class SourceAtlasLaunchFloorLedgerOptions:
     missing_shard_events_path: Path | None = None
     missing_shard_review_gate_path: Path | None = None
     missing_shard_activation_executor_path: Path | None = None
+    missing_shard_expansion_supervisor_path: Path | None = None
     native_runtime_bridge_gauntlet_source_path: Path | None = None
     emit_evidence_path: Path | None = None
     markdown_path: Path | None = None
@@ -173,6 +174,11 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         "missingShardActivationExecutor": _read_optional_json(
             options.missing_shard_activation_executor_path,
             "missing-shard activation executor",
+            issues,
+        ),
+        "missingShardExpansionSupervisor": _read_optional_json(
+            options.missing_shard_expansion_supervisor_path,
+            "missing-shard expansion supervisor",
             issues,
         ),
     }
@@ -373,6 +379,7 @@ def source_atlas_launch_floor_ledger_markdown(report: dict[str, Any]) -> str:
         f"- Launch-floor golden intent source-needed/stale-source/candidate-only: {counts['launchFloorGoldenIntentSourceNeeded']}/{counts['launchFloorGoldenIntentStaleSource']}/{counts['launchFloorGoldenIntentCandidateOnly']}",
         f"- Missing-shard review-gate decisions/blocked/active mutations: {counts.get('missingShardReviewGateDecisions') or 0}/{counts.get('missingShardReviewGateBlockedEvents') or 0}/{counts.get('missingShardReviewGateActiveRegistryMutations') or 0}",
         f"- Missing-shard activation stage decisions/blocked/R2 writes/native activations: {counts.get('missingShardActivationStageDecisions') or 0}/{counts.get('missingShardActivationBlockedStageDecisions') or 0}/{counts.get('missingShardActivationR2WriteOperations') or 0}/{counts.get('missingShardActivationNativeActivationOperations') or 0}",
+        f"- Missing-shard supervisor events review-only/held/blocked/stale: {counts.get('missingShardSupervisorReviewOnlyEvents') or 0}/{counts.get('missingShardSupervisorHeldEvents') or 0}/{counts.get('missingShardSupervisorBlockedEvents') or 0}/{counts.get('missingShardSupervisorStaleEvents') or 0}",
         "",
         "## Launch-Floor Target Status",
         "",
@@ -455,6 +462,7 @@ def _counters(
     missing_shard_events = artifacts["missingShardEvents"]
     missing_shard_review_gate = artifacts["missingShardReviewGate"]
     missing_shard_activation_executor = artifacts["missingShardActivationExecutor"]
+    missing_shard_expansion_supervisor = artifacts["missingShardExpansionSupervisor"]
     r2_layout_proof = artifacts["r2LayoutProof"]
     taxonomy_counts = launch_floor_taxonomy["recordCounts"]
     taxonomy_valid = not launch_floor_taxonomy["issues"]
@@ -617,6 +625,58 @@ def _counters(
                 missing_shard_activation_executor,
                 "finalOutputArtifacts",
             ),
+            "missingShardSupervisorEvents": _record_count(
+                missing_shard_expansion_supervisor,
+                "supervisedEvents",
+            ),
+            "missingShardSupervisorMonitorOnlyEvents": _record_count(
+                missing_shard_expansion_supervisor,
+                "monitorOnlyEvents",
+            ),
+            "missingShardSupervisorReviewOnlyEvents": _record_count(
+                missing_shard_expansion_supervisor,
+                "reviewOnlyEvents",
+            ),
+            "missingShardSupervisorApprovedExecuteEvents": _record_count(
+                missing_shard_expansion_supervisor,
+                "approvedExecuteEvents",
+            ),
+            "missingShardSupervisorHeldEvents": _record_count(
+                missing_shard_expansion_supervisor,
+                "heldEvents",
+            ),
+            "missingShardSupervisorBlockedEvents": _record_count(
+                missing_shard_expansion_supervisor,
+                "blockedEvents",
+            ),
+            "missingShardSupervisorStaleEvents": _record_count(
+                missing_shard_expansion_supervisor,
+                "staleEvents",
+            ),
+            "missingShardSupervisorResolvedEvents": _record_count(
+                missing_shard_expansion_supervisor,
+                "resolvedEvents",
+            ),
+            "missingShardSupervisorResolutionRateBps": _record_count(
+                missing_shard_expansion_supervisor,
+                "resolutionRateBps",
+            ),
+            "missingShardSupervisorFallbackMetricRateBps": _record_count(
+                missing_shard_expansion_supervisor,
+                "fallbackMetricRateBps",
+            ),
+            "missingShardSupervisorR2WriteOperations": _record_count(
+                missing_shard_expansion_supervisor,
+                "r2WriteOperations",
+            ),
+            "missingShardSupervisorNativeActivationOperations": _record_count(
+                missing_shard_expansion_supervisor,
+                "nativeActivationOperations",
+            ),
+            "missingShardSupervisorFinalOutputArtifacts": _record_count(
+                missing_shard_expansion_supervisor,
+                "finalOutputArtifacts",
+            ),
         },
     }
 
@@ -631,6 +691,13 @@ def _target_statuses(counters: dict[str, Any]) -> list[dict[str, Any]]:
         else None
     )
     missing_events = counters["missingShardEventSummary"]
+    supervisor_every_event_proven = (
+        record_counts["missingShardSupervisorEvents"] is not None
+        and record_counts["missingShardSupervisorEvents"] == missing_events["eventCount"]
+        and record_counts["missingShardSupervisorR2WriteOperations"] == 0
+        and record_counts["missingShardSupervisorNativeActivationOperations"] == 0
+        and record_counts["missingShardSupervisorFinalOutputArtifacts"] == 0
+    )
     continuous_pipeline_present = (
         counters["candidateOnlyRoutingProven"]
         and counters["autonomousSupervisorProven"]
@@ -638,6 +705,7 @@ def _target_statuses(counters: dict[str, Any]) -> list[dict[str, Any]]:
         and counters["domainExpansionChainProven"]
         and missing_events["eventCount"] > 0
         and missing_events["eventCount"] == missing_events["durableExpansionEventCount"]
+        and supervisor_every_event_proven
     )
     return [
         _threshold_target(
@@ -723,6 +791,14 @@ def _target_statuses(counters: dict[str, Any]) -> list[dict[str, Any]]:
                 "domainExpansionChainProven": counters["domainExpansionChainProven"],
                 "missingShardEventCount": missing_events["eventCount"],
                 "durableExpansionEventCount": missing_events["durableExpansionEventCount"],
+                "missingShardSupervisorEvents": record_counts["missingShardSupervisorEvents"],
+                "missingShardSupervisorReviewOnlyEvents": record_counts["missingShardSupervisorReviewOnlyEvents"],
+                "missingShardSupervisorHeldEvents": record_counts["missingShardSupervisorHeldEvents"],
+                "missingShardSupervisorBlockedEvents": record_counts["missingShardSupervisorBlockedEvents"],
+                "missingShardSupervisorStaleEvents": record_counts["missingShardSupervisorStaleEvents"],
+                "missingShardSupervisorR2WriteOperations": record_counts["missingShardSupervisorR2WriteOperations"],
+                "missingShardSupervisorNativeActivationOperations": record_counts["missingShardSupervisorNativeActivationOperations"],
+                "missingShardSupervisorFinalOutputArtifacts": record_counts["missingShardSupervisorFinalOutputArtifacts"],
                 "eventIssues": missing_events["issues"],
             },
             "gaps": []
@@ -730,6 +806,7 @@ def _target_statuses(counters: dict[str, Any]) -> list[dict[str, Any]]:
             else [
                 "missing-shard event ledger is absent or every-event durable expansion is unproven",
                 "existing candidate-only/domain-expansion/supervision components are not proof of continuous expansion for every missing-shard event",
+                "missing-shard expansion supervisor is absent or does not supervise every current event without unsafe mutation claims",
             ],
             "requiredChanges": [
                 "Create durable missing-shard event queue and replayable expansion state machine.",
@@ -928,6 +1005,28 @@ def _current_capabilities(counters: dict[str, Any], target_statuses: list[dict[s
                 ),
             }
         )
+    if counts["missingShardSupervisorEvents"] is not None:
+        supervisor_proven = (
+            counts["missingShardSupervisorR2WriteOperations"] == 0
+            and counts["missingShardSupervisorNativeActivationOperations"] == 0
+            and counts["missingShardSupervisorFinalOutputArtifacts"] == 0
+        )
+        capabilities.append(
+            {
+                "capabilityID": "missing_shard_expansion_supervisor_gate",
+                "status": "proven_current" if supervisor_proven else "not_proven",
+                "evidence": (
+                    f"{counts['missingShardSupervisorEvents']} supervised events, "
+                    f"{counts['missingShardSupervisorReviewOnlyEvents'] or 0} review-only, "
+                    f"{counts['missingShardSupervisorApprovedExecuteEvents'] or 0} approved-execute, "
+                    f"{counts['missingShardSupervisorHeldEvents'] or 0} held, "
+                    f"{counts['missingShardSupervisorBlockedEvents'] or 0} blocked, "
+                    f"{counts['missingShardSupervisorStaleEvents'] or 0} stale, "
+                    f"{counts['missingShardSupervisorR2WriteOperations'] or 0} R2 writes, "
+                    f"{counts['missingShardSupervisorNativeActivationOperations'] or 0} native activations"
+                ),
+            }
+        )
     return capabilities
 
 
@@ -1063,8 +1162,13 @@ def _validation_matrix() -> list[dict[str, str]]:
             "purpose": "prove approved missing-shard work cannot advance through harvest, claim extraction, adjudication, pack compilation, R2 promotion, or native activation without explicit activation approvals and downstream public/reference proof",
         },
         {
+            "validationID": "missing_shard_expansion_supervisor",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py missing-shard-expansion-supervisor --missing-shard-queue docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json --review-gate docs/qa/source-atlas/source-atlas-missing-shard-review-gate-lff-m04.json --activation-executor docs/qa/source-atlas/source-atlas-missing-shard-activation-executor-lff-m04.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-missing-shard-expansion-supervisor/lff-m04-l04-current --emit-evidence docs/qa/source-atlas/source-atlas-missing-shard-expansion-supervisor-lff-m04.json --markdown docs/qa/source-atlas/source-atlas-missing-shard-expansion-supervisor-lff-m04.md",
+            "purpose": "prove every current missing-shard event is supervised into monitor-only, review-only, approved-execute, held, or blocked state with backlog, stale-event, resolution-rate, and fallback-regression reports and no unsafe mutation claims",
+        },
+        {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json --missing-shard-review-gate docs/qa/source-atlas/source-atlas-missing-shard-review-gate-lff-m04.json --missing-shard-activation-executor docs/qa/source-atlas/source-atlas-missing-shard-activation-executor-lff-m04.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m04-l03-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json --missing-shard-review-gate docs/qa/source-atlas/source-atlas-missing-shard-review-gate-lff-m04.json --missing-shard-activation-executor docs/qa/source-atlas/source-atlas-missing-shard-activation-executor-lff-m04.json --missing-shard-expansion-supervisor docs/qa/source-atlas/source-atlas-missing-shard-expansion-supervisor-lff-m04.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m04-l04-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
             "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, validated source-needed fallback metric, durable LFF-M04 missing-shard queue evidence, native launch-floor corpus sample contract, and no source/R2/native mutation",
         },
         {
@@ -1451,6 +1555,7 @@ def _input_paths(options: SourceAtlasLaunchFloorLedgerOptions) -> dict[str, str 
         "missingShardEvents": str(options.missing_shard_events_path) if options.missing_shard_events_path else None,
         "missingShardReviewGate": str(options.missing_shard_review_gate_path) if options.missing_shard_review_gate_path else None,
         "missingShardActivationExecutor": str(options.missing_shard_activation_executor_path) if options.missing_shard_activation_executor_path else None,
+        "missingShardExpansionSupervisor": str(options.missing_shard_expansion_supervisor_path) if options.missing_shard_expansion_supervisor_path else None,
         "nativeRuntimeBridgeGauntletSource": str(options.native_runtime_bridge_gauntlet_source_path) if options.native_runtime_bridge_gauntlet_source_path else None,
     }
 

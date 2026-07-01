@@ -44,6 +44,7 @@ FALLBACK_METRIC = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-sou
 MISSING_SHARD_EVENTS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-event-queue-lff-m04.json"
 MISSING_SHARD_REVIEW_GATE = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-review-gate-lff-m04.json"
 MISSING_SHARD_ACTIVATION_EXECUTOR = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-activation-executor-lff-m04.json"
+MISSING_SHARD_EXPANSION_SUPERVISOR = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-expansion-supervisor-lff-m04.json"
 NATIVE_BRIDGE_GAUNTLET_SOURCE = REPO_ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SourceAtlas" / "SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
 
 
@@ -88,6 +89,14 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert counts["missingShardActivationBlockedStageDecisions"] == 1200
     assert counts["missingShardActivationR2WriteOperations"] == 0
     assert counts["missingShardActivationNativeActivationOperations"] == 0
+    assert counts["missingShardSupervisorEvents"] == 200
+    assert counts["missingShardSupervisorReviewOnlyEvents"] == 200
+    assert counts["missingShardSupervisorApprovedExecuteEvents"] == 0
+    assert counts["missingShardSupervisorHeldEvents"] == 0
+    assert counts["missingShardSupervisorBlockedEvents"] == 0
+    assert counts["missingShardSupervisorStaleEvents"] == 0
+    assert counts["missingShardSupervisorR2WriteOperations"] == 0
+    assert counts["missingShardSupervisorNativeActivationOperations"] == 0
     assert counts["nativeBridgeLaunchFloorCorpusSamples"] == 7
     assert counts["nativeBridgeLaunchFloorCorpusPermutations"] == 14
     assert counts["packablePublicReferenceClaimProxy"] == 71
@@ -108,6 +117,7 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["status"] == "met"
     assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["evidence"]["missingShardEventCount"] == 200
     assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["evidence"]["durableExpansionEventCount"] == 200
+    assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["evidence"]["missingShardSupervisorEvents"] == 200
     assert "source_atlas_launch_floor_ready" in result["blockedClaims"]
     assert "final_user_plans_schedules_steps_from_source_atlas_or_r2" in result["blockedClaims"]
 
@@ -133,6 +143,7 @@ def test_launch_floor_ledger_can_pass_only_with_canonical_launch_floor_counters(
             golden_intent_corpus_path=paths["golden_corpus"],
             fallback_metric_path=paths["fallback_metric"],
             missing_shard_events_path=paths["missing_events"],
+            missing_shard_expansion_supervisor_path=paths["missing_supervisor"],
             output_root=tmp_path / "launch-floor-pass",
             created_at="2026-07-01T00:00:00Z",
             run_label="synthetic-contract-pass",
@@ -203,6 +214,7 @@ def _current_options(tmp_path: Path) -> SourceAtlasLaunchFloorLedgerOptions:
         missing_shard_events_path=MISSING_SHARD_EVENTS,
         missing_shard_review_gate_path=MISSING_SHARD_REVIEW_GATE,
         missing_shard_activation_executor_path=MISSING_SHARD_ACTIVATION_EXECUTOR,
+        missing_shard_expansion_supervisor_path=MISSING_SHARD_EXPANSION_SUPERVISOR,
         native_runtime_bridge_gauntlet_source_path=NATIVE_BRIDGE_GAUNTLET_SOURCE,
         output_root=tmp_path / "current-launch-floor",
         created_at="2026-07-01T00:00:00Z",
@@ -229,6 +241,7 @@ def _passing_fixture_paths(tmp_path: Path) -> dict[str, Path]:
         "golden_corpus": root / "golden-corpus.json",
         "fallback_metric": root / "fallback.json",
         "missing_events": root / "missing-events.json",
+        "missing_supervisor": root / "missing-supervisor.json",
     }
     write_json(paths["frontier"], _frontier_config())
     write_json(paths["source_registry"], {"kind": "ambitions.sourceAtlas.sourceLaneRegistry.v1", "source_lanes": [{"source_id": "synthetic.public", "domain_scope": ["domain_000"]}]})
@@ -253,6 +266,7 @@ def _passing_fixture_paths(tmp_path: Path) -> dict[str, Path]:
         },
     )
     write_json(paths["missing_events"], _missing_events())
+    write_json(paths["missing_supervisor"], _missing_supervisor())
     return paths
 
 
@@ -284,6 +298,7 @@ def test_launch_floor_ledger_rejects_raw_shard_counter_without_partition_manifes
             golden_intent_corpus_path=paths["golden_corpus"],
             fallback_metric_path=paths["fallback_metric"],
             missing_shard_events_path=paths["missing_events"],
+            missing_shard_expansion_supervisor_path=paths["missing_supervisor"],
             output_root=tmp_path / "raw-shard-counter-rejected",
             created_at="2026-07-01T00:00:00Z",
             run_label="synthetic-raw-shard-counter",
@@ -328,6 +343,7 @@ def test_launch_floor_ledger_rejects_raw_golden_intent_counter_without_corpus_co
             golden_intent_corpus_path=paths["golden_corpus"],
             fallback_metric_path=paths["fallback_metric"],
             missing_shard_events_path=paths["missing_events"],
+            missing_shard_expansion_supervisor_path=paths["missing_supervisor"],
             output_root=tmp_path / "raw-golden-counter-rejected",
             created_at="2026-07-01T00:00:00Z",
             run_label="synthetic-raw-golden-counter",
@@ -372,6 +388,7 @@ def test_launch_floor_ledger_rejects_raw_fallback_counter_without_metric_contrac
             golden_intent_corpus_path=paths["golden_corpus"],
             fallback_metric_path=paths["fallback_metric"],
             missing_shard_events_path=paths["missing_events"],
+            missing_shard_expansion_supervisor_path=paths["missing_supervisor"],
             output_root=tmp_path / "raw-fallback-counter-rejected",
             created_at="2026-07-01T00:00:00Z",
             run_label="synthetic-raw-fallback-counter",
@@ -615,4 +632,30 @@ def _missing_events() -> dict:
                 "privateContextPresent": False,
             },
         ],
+    }
+
+
+def _missing_supervisor() -> dict:
+    return {
+        "kind": "ambitions.sourceAtlas.missingShardExpansionSupervisor.v1",
+        "valid": True,
+        "allowedClaims": [
+            "missing_shard_expansion_supervisor_green",
+            "every_current_missing_shard_event_supervised",
+        ],
+        "recordCounts": {
+            "supervisedEvents": 2,
+            "monitorOnlyEvents": 0,
+            "reviewOnlyEvents": 2,
+            "approvedExecuteEvents": 0,
+            "heldEvents": 0,
+            "blockedEvents": 0,
+            "staleEvents": 0,
+            "resolvedEvents": 0,
+            "resolutionRateBps": 0,
+            "fallbackMetricRateBps": 490,
+            "r2WriteOperations": 0,
+            "nativeActivationOperations": 0,
+            "finalOutputArtifacts": 0,
+        },
     }

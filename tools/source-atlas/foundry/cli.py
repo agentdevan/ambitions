@@ -149,6 +149,11 @@ from .missing_shard_activation_executor import (
     compile_missing_shard_activation_executor,
     missing_shard_activation_executor_markdown,
 )
+from .missing_shard_expansion_supervisor import (
+    MissingShardExpansionSupervisorOptions,
+    compile_missing_shard_expansion_supervisor,
+    missing_shard_expansion_supervisor_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -1106,6 +1111,31 @@ def main(argv: list[str] | None = None) -> int:
     missing_shard_activation_executor_parser.add_argument("--emit-evidence")
     missing_shard_activation_executor_parser.add_argument("--markdown")
 
+    missing_shard_expansion_supervisor_parser = sub.add_parser("missing-shard-expansion-supervisor")
+    missing_shard_expansion_supervisor_parser.add_argument(
+        "--missing-shard-queue",
+        default="docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json",
+    )
+    missing_shard_expansion_supervisor_parser.add_argument(
+        "--review-gate",
+        default="docs/qa/source-atlas/source-atlas-missing-shard-review-gate-lff-m04.json",
+    )
+    missing_shard_expansion_supervisor_parser.add_argument(
+        "--activation-executor",
+        default="docs/qa/source-atlas/source-atlas-missing-shard-activation-executor-lff-m04.json",
+    )
+    missing_shard_expansion_supervisor_parser.add_argument(
+        "--fallback-metric",
+        default="docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json",
+    )
+    missing_shard_expansion_supervisor_parser.add_argument("--previous-fallback-metric")
+    missing_shard_expansion_supervisor_parser.add_argument("--output-root", required=True)
+    missing_shard_expansion_supervisor_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    missing_shard_expansion_supervisor_parser.add_argument("--as-of", default="2026-07-01T00:00:00Z")
+    missing_shard_expansion_supervisor_parser.add_argument("--run-label", default="current")
+    missing_shard_expansion_supervisor_parser.add_argument("--emit-evidence")
+    missing_shard_expansion_supervisor_parser.add_argument("--markdown")
+
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
     launch_floor_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
@@ -1127,6 +1157,7 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_parser.add_argument("--missing-shard-events")
     launch_floor_parser.add_argument("--missing-shard-review-gate")
     launch_floor_parser.add_argument("--missing-shard-activation-executor")
+    launch_floor_parser.add_argument("--missing-shard-expansion-supervisor")
     launch_floor_parser.add_argument("--native-runtime-bridge-gauntlet-source", default="Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift")
     launch_floor_parser.add_argument("--output-root", required=True)
     launch_floor_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
@@ -2689,6 +2720,31 @@ def main(argv: list[str] | None = None) -> int:
             Path(args.markdown).write_text(missing_shard_activation_executor_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
+    if args.command == "missing-shard-expansion-supervisor":
+        result = compile_missing_shard_expansion_supervisor(
+            MissingShardExpansionSupervisorOptions(
+                missing_shard_queue_path=Path(args.missing_shard_queue),
+                review_gate_path=Path(args.review_gate),
+                activation_executor_path=Path(args.activation_executor),
+                fallback_metric_path=Path(args.fallback_metric),
+                previous_fallback_metric_path=Path(args.previous_fallback_metric)
+                if args.previous_fallback_metric
+                else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                as_of=args.as_of,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(missing_shard_expansion_supervisor_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":
         result = build_source_atlas_launch_floor_ledger(
             SourceAtlasLaunchFloorLedgerOptions(
@@ -2717,6 +2773,9 @@ def main(argv: list[str] | None = None) -> int:
                 else None,
                 missing_shard_activation_executor_path=Path(args.missing_shard_activation_executor)
                 if args.missing_shard_activation_executor
+                else None,
+                missing_shard_expansion_supervisor_path=Path(args.missing_shard_expansion_supervisor)
+                if args.missing_shard_expansion_supervisor
                 else None,
                 native_runtime_bridge_gauntlet_source_path=Path(args.native_runtime_bridge_gauntlet_source)
                 if args.native_runtime_bridge_gauntlet_source

@@ -1,0 +1,10 @@
+{
+  "asOf": "2026-07-01T00:00:00Z",
+  "byDomain": [],
+  "bySourceLaneLegalApiState": [],
+  "firstReviewOverdueEventCount": 0,
+  "firstReviewOverdueEventIDs": [],
+  "kind": "ambitions.sourceAtlas.missingShardStaleEventReport.v1",
+  "staleEventCount": 0,
+  "staleEventIDs": []
+}
