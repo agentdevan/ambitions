@@ -108,6 +108,110 @@ enum RuntimeTransactionCommitPolicy {
             metadata: metadata
         )
     }
+
+    static func resultByCommittingRuntimeTransaction(
+        command: AmbitionsCommand,
+        result: AmbitionsCommandExecutionResult,
+        recordedAt: String,
+        commandRecordID: String,
+        timestamp: Date,
+        runtimeEvents: (any RuntimeEventStore)?,
+        runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore,
+        runtimeValidator: RuntimeValidator,
+        commandJournal: any CommandJournal,
+        journalReceipt: CommandJournalAppendReceipt?
+    ) async -> AmbitionsCommandExecutionResult {
+        guard requiresCommit(command: command, result: result) else {
+            return result
+        }
+        guard let runtimeEvents else {
+            return failureResult(
+                command: command,
+                result: result,
+                recordedAt: recordedAt,
+                reason: "runtime_events_unavailable"
+            )
+        }
+        guard let request = transactionRequest(
+            command: command,
+            result: result,
+            recordedAt: recordedAt
+        ) else {
+            return failureResult(
+                command: command,
+                result: result,
+                recordedAt: recordedAt,
+                reason: "runtime_transaction_request_unavailable"
+            )
+        }
+
+        let coordinator = RuntimeTransactionCoordinator(
+            eventStore: runtimeEvents,
+            idempotencyStore: runtimeTransactionIdempotencyStore,
+            validator: runtimeValidator
+        )
+
+        do {
+            let outcome = try await coordinator.commit(
+                command: request.command,
+                beforeSnapshot: request.beforeSnapshot,
+                afterSnapshot: request.afterSnapshot,
+                targetSurface: request.targetSurface,
+                executionResult: result,
+                commandRecordID: commandRecordID,
+                occurredAt: timestamp
+            )
+            var runtimeMetadata = [
+                "runtimeTransactionDisposition": outcome.disposition.rawValue,
+                "runtimeTransactionID": outcome.receipt.transactionID,
+                "runtimeEventID": outcome.receipt.eventID,
+                "runtimeReceiptID": outcome.receipt.receiptID,
+                "runtimeRollbackPlanID": outcome.receipt.rollbackPlanID,
+                "runtimeReplayTraceID": outcome.receipt.replayTraceID,
+                "runtimeReplayDecision": outcome.replayOutcome.decision.rawValue,
+                "runtimeDoubleApplyDisposition": outcome.replayOutcome.doubleApplyDisposition.rawValue,
+                "runtimeProjectionCursorCount": String(outcome.receipt.projectionCursors.count),
+                "runtimeProjectionIDs": outcome.receipt.projectionCursors.map(\.projectionID.rawValue).sorted().joined(separator: ","),
+            ]
+            if journalReceipt != nil {
+                do {
+                    let linkReceipt = try await commandJournal.linkRuntimeCommit(
+                        commandID: command.id,
+                        runtimeEventID: outcome.receipt.eventID,
+                        runtimeReceiptID: outcome.receipt.receiptID,
+                        linkedAt: DomainTimestamp.string(from: timestamp)
+                    )
+                    runtimeMetadata.merge(linkReceipt.resultMetadata) { _, new in new }
+                    runtimeMetadata["commandJournalRuntimeLinkStatus"] = "linked"
+                } catch {
+                    runtimeMetadata["commandJournalRuntimeLinkStatus"] = "failed"
+                    runtimeMetadata["commandJournalRuntimeLinkError"] = String(describing: error)
+                }
+            }
+            let committedResult = result.mergingMetadata(runtimeMetadata)
+            guard hasCommittedEvidence(committedResult) else {
+                return failureResult(
+                    command: command,
+                    result: committedResult,
+                    recordedAt: recordedAt,
+                    reason: "runtime_commit_evidence_missing"
+                )
+            }
+            return committedResult
+        } catch {
+            let failedResult = result.mergingMetadata([
+                "runtimeTransactionDisposition": "not_committed",
+                "runtimeTransactionBlockedBy": String(describing: error),
+            ])
+            return failureResult(
+                command: command,
+                result: failedResult,
+                recordedAt: recordedAt,
+                reason: "runtime_transaction_commit_failed",
+                error: error
+            )
+        }
+    }
 }
 
 extension AmbitionsCommand {

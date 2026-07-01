@@ -49,6 +49,12 @@
       "summary": "Meaningful successful mutations require runtime transaction, event, receipt, rollback, and replay evidence or fail closed."
     },
     {
+      "checkId": "transaction_coordinator_commit_ownership",
+      "findings": [],
+      "status": "pass",
+      "summary": "Runtime event append and projection materialization ownership is restricted to the coordinator and approved rebuild path."
+    },
+    {
       "checkId": "mutation_bypass_scan",
       "findings": [],
       "status": "pass",
@@ -61,14 +67,14 @@
       "summary": "Truth files no longer contain LocalRuntimeOS no-claim blockers."
     }
   ],
-  "generatedAt": "2026-07-01T00:08:05+00:00",
+  "generatedAt": "2026-07-01T01:09:01+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {
     "blockers": 0,
-    "checks": 8,
+    "checks": 9,
     "green": true,
-    "passed": 8,
+    "passed": 9,
     "warnings": 0
   }
 }

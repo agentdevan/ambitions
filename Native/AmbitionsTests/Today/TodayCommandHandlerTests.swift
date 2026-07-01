@@ -164,6 +164,7 @@ final class TodayCommandHandlerTests: XCTestCase {
         let goalsService = RepositoryBackedGoalsService(repositories: repositories)
         let commandRecordRepository = try XCTUnwrap(repositories.commandExecutionRecords as? InMemoryAmbitionsCommandExecutionRecordRepository)
         let ledger = try XCTUnwrap(repositories.eventLedger as? InMemoryEventLedgerRepository)
+        let runtimeEvents = try XCTUnwrap(repositories.runtimeEvents)
         let todayService = RepositoryBackedTodayService(repositories: repositories)
 
         let created = try await goalsService.createGoal(
@@ -223,6 +224,28 @@ final class TodayCommandHandlerTests: XCTestCase {
         XCTAssertEqual(record.result.metadata["stageActionPipelineProofReceipt"], StageActionPipelineRequirementState.satisfied.rawValue)
         XCTAssertEqual(record.result.metadata["stageActionPipelineFallbackUndo"], StageActionPipelineRequirementState.satisfied.rawValue)
         XCTAssertFalse(record.result.metadata["stageActionPipelineAccessibilityAnnouncement"]?.isEmpty ?? true)
+        XCTAssertEqual(record.result.metadata["runtimeTransactionDisposition"], RuntimeTransactionCommitDisposition.committed.rawValue)
+        XCTAssertEqual(record.result.metadata["runtimeTransactionID"], "runtime.transaction.\(commandID)")
+        XCTAssertEqual(record.result.metadata["runtimeReceiptID"], "runtime.receipt.\(commandID)")
+        XCTAssertEqual(record.result.metadata["runtimeRollbackPlanID"], "runtime.rollback.\(commandID)")
+        XCTAssertEqual(record.result.metadata["runtimeReplayTraceID"], "runtime.replay.\(commandID)")
+        XCTAssertEqual(record.result.metadata["runtimeProjectionCursorCount"], String(ProjectionID.allCases.count))
+        XCTAssertEqual(record.result.metadata["commandJournalRuntimeLinkStatus"], "linked")
+        let runtimeEventEnvelopes = try await runtimeEvents.fetchEvents(matching: .all, limit: nil)
+        let runtimeEvent = try XCTUnwrap(runtimeEventEnvelopes.first)
+        XCTAssertEqual(runtimeEventEnvelopes.count, 1)
+        XCTAssertEqual(runtimeEvent.id, record.result.metadata["runtimeEventID"])
+        XCTAssertEqual(runtimeEvent.event.commandID, commandID)
+        guard case let .commandExecution(payload) = runtimeEvent.event.payload else {
+            XCTFail("Expected Today command execution runtime event")
+            return
+        }
+        XCTAssertEqual(payload.commandRecordID, "command.execution.\(commandID)")
+        XCTAssertEqual(
+            payload.resultMetadata["stageActionPipelineRuntimeMutation"],
+            StageActionPipelineRequirementState.satisfied.rawValue
+        )
+        XCTAssertNil(payload.resultMetadata["runtimeProjectionCursorCount"])
         let ledgerEntries = try await ledger.fetchRecent(limit: 30)
         XCTAssertTrue(
             Set(record.result.eventLedgerEntryIDs).isSubset(of: Set(ledgerEntries.map(\.id)))
@@ -543,6 +566,7 @@ private extension TodayCommandHandlerTests {
             captures: SwiftDataCaptureRepository(store: store),
             eventLedger: InMemoryEventLedgerRepository(),
             commandExecutionRecords: InMemoryAmbitionsCommandExecutionRecordRepository(),
+            runtimeEvents: InMemoryRuntimeEventStore(),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }

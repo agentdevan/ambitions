@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-07-01T00:08:05+00:00`
+Generated: `2026-07-01T01:09:01+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 
@@ -8,8 +8,8 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 ## Summary
 
-- Checks: `8`
-- Passed: `8`
+- Checks: `9`
+- Passed: `9`
 - Warnings: `0`
 - Blockers: `0`
 
@@ -44,6 +44,11 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 - Status: `pass`
 - Summary: Meaningful successful mutations require runtime transaction, event, receipt, rollback, and replay evidence or fail closed.
+
+### transaction_coordinator_commit_ownership
+
+- Status: `pass`
+- Summary: Runtime event append and projection materialization ownership is restricted to the coordinator and approved rebuild path.
 
 ### mutation_bypass_scan
 

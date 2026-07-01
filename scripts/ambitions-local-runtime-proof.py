@@ -88,7 +88,8 @@ INTEGRATION_MARKERS = {
             "CommandReplayAdapter",
             "commandJournal.append",
             "persistCommandExecution",
-            "appendRuntimeEvent",
+            "RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction",
+            "runtimeTransactionIdempotencyStore",
             "CommandJournalAppendReceipt",
         ],
     },
@@ -186,6 +187,15 @@ MUTATION_SCAN_INCLUDED_PREFIXES = [
     "Native/AmbitionsWidgetExtension/",
     "Native/AmbitionsShareExtension/",
 ]
+
+RUNTIME_EVENT_APPEND_ALLOWED_PATHS = {
+    "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift",
+}
+
+PROJECTION_MATERIALIZATION_ALLOWED_PATHS = {
+    "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift",
+    "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift",
+}
 
 TRUTH_GAP_PATTERNS = [
     (
@@ -471,7 +481,7 @@ def check_command_event_reconciliation() -> CheckResult:
             "runtimeEventID",
             "runtimeReceiptID",
         ],
-        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "AmbitionsCommandExecutor+ReceiptPersistence.swift": [
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeTransactionCommitPolicy.swift": [
             "commandJournal.linkRuntimeCommit",
             "commandJournalRuntimeLinkStatus",
             "linkReceipt.resultMetadata",
@@ -526,7 +536,10 @@ def check_meaningful_mutation_commit_policy() -> CheckResult:
             "requiredEvidenceKeys",
             "runtimeRollbackPlanID",
             "runtimeReplayTraceID",
+            "resultByCommittingRuntimeTransaction",
+            "requiresCommit(command: command, result: result)",
             "failureResult",
+            "RuntimeTransactionCoordinator",
         ],
         ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TransactionKernel" / "RuntimeTransactionFailureReceipt.swift": [
             "RuntimeTransactionFailureReceipt",
@@ -534,14 +547,13 @@ def check_meaningful_mutation_commit_policy() -> CheckResult:
             "runtimeCommitFailureReceiptID",
         ],
         ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "AmbitionsCommandExecutor+ReceiptPersistence.swift": [
-            "RuntimeTransactionCommitPolicy.requiresCommit",
-            "RuntimeTransactionCommitPolicy.failureResult",
-            "RuntimeTransactionCoordinator",
+            "RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction",
         ],
         ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeCommandMutationCommitter.swift": [
-            "RuntimeTransactionCommitPolicy.requiresCommit",
-            "RuntimeTransactionCommitPolicy.failureResult",
-            "RuntimeTransactionCoordinator",
+            "RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction",
+        ],
+        ROOT / "Native" / "Ambitions" / "Interaction" / "TodayCommandActionHandler.swift": [
+            "RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction",
         ],
         ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TransactionKernel" / "RuntimeTransaction.swift": [
             "youPreferencesObjectID",
@@ -607,6 +619,45 @@ def scan_mutation_bypasses() -> CheckResult:
     )
 
 
+def check_transaction_coordinator_commit_ownership() -> CheckResult:
+    findings: list[Finding] = []
+    for path in production_swift_files():
+        rel = relative(path)
+        lines = read_text(path).splitlines()
+        for index, line in enumerate(lines, start=1):
+            stripped = line.strip()
+            if stripped.startswith("//"):
+                continue
+            if ("runtimeEvents.append(" in stripped or "eventStore.append(" in stripped) and rel not in RUNTIME_EVENT_APPEND_ALLOWED_PATHS:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "runtime-event-append-outside-coordinator",
+                        rel,
+                        index,
+                        "Meaningful runtime event appends must be owned by RuntimeTransactionCoordinator.",
+                    )
+                )
+            if (
+                "ProjectionMaterializer(store:" in stripped or ".materializeAll(" in stripped
+            ) and rel not in PROJECTION_MATERIALIZATION_ALLOWED_PATHS:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "projection-materialization-outside-approved-owner",
+                        rel,
+                        index,
+                        "Projection materialization for mutation commits must be owned by RuntimeTransactionCoordinator; SearchRecall may rebuild from runtime events.",
+                    )
+                )
+    return make_result(
+        "transaction_coordinator_commit_ownership",
+        findings,
+        "Runtime event append and projection materialization ownership is restricted to the coordinator and approved rebuild path.",
+        "{count} transaction coordinator ownership blocker(s) remain.",
+    )
+
+
 def check_truth_file_gaps() -> CheckResult:
     findings: list[Finding] = []
     truth_files = [IMPLEMENTATION_TRUTH, PRODUCT_DESIGN_TRUTH]
@@ -653,6 +704,7 @@ def run_checks() -> list[CheckResult]:
         check_live_event_store_authority(),
         check_command_event_reconciliation(),
         check_meaningful_mutation_commit_policy(),
+        check_transaction_coordinator_commit_ownership(),
         scan_mutation_bypasses(),
         check_truth_file_gaps(),
     ]
@@ -781,6 +833,8 @@ def run_self_test() -> int:
     assert MUTATION_PATTERNS[3][1].search(sample)
     assert is_included_mutation_scan_path(ROOT / "Native" / "Ambitions" / "Surfaces" / "You" / "YouSurface.swift")
     assert not is_included_mutation_scan_path(ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "Storage" / "ObjectStoreSwiftData.swift")
+    assert "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift" in RUNTIME_EVENT_APPEND_ALLOWED_PATHS
+    assert "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift" in PROJECTION_MATERIALIZATION_ALLOWED_PATHS
     result = make_result(
         "fixture",
         [Finding("blocker", "fixture-blocker", "Fixture.swift", 1, "Fixture blocker.")],

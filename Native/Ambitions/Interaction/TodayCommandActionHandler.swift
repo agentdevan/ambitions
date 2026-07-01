@@ -7,16 +7,22 @@ struct TodayCommandActionHandler {
     private let feedbackAction: FeedbackAction
     private let compiler: CommandCompiler
     private let receiptFactory: CommandReceiptFactory
+    private let runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore
+    private let runtimeValidator: RuntimeValidator
 
     init(
         repositories: AppRepositories,
         compiler: CommandCompiler = CommandCompiler(),
         receiptFactory: CommandReceiptFactory = CommandReceiptFactory(),
+        runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore = RuntimeIdempotencyStore(),
+        runtimeValidator: RuntimeValidator = RuntimeValidator(commandValidator: AmbitionsCommandValidator()),
         feedbackAction: @escaping FeedbackAction
     ) {
         self.repositories = repositories
         self.compiler = compiler
         self.receiptFactory = receiptFactory
+        self.runtimeTransactionIdempotencyStore = runtimeTransactionIdempotencyStore
+        self.runtimeValidator = runtimeValidator
         self.feedbackAction = feedbackAction
     }
 
@@ -149,21 +155,34 @@ struct TodayCommandActionHandler {
         journalReceipt: CommandJournalAppendReceipt? = nil
     ) async {
         let recordedAt = Self.iso.string(from: timestamp)
-        let commandReceipt = receiptFactory.makeReceipt(
+        let commandRecordID = "command.execution.\(command.id)"
+        let transactionResult = await RuntimeTransactionCommitPolicy.resultByCommittingRuntimeTransaction(
             command: command,
             result: result,
+            recordedAt: recordedAt,
+            commandRecordID: commandRecordID,
+            timestamp: timestamp,
+            runtimeEvents: repositories.runtimeEvents,
+            runtimeTransactionIdempotencyStore: runtimeTransactionIdempotencyStore,
+            runtimeValidator: runtimeValidator,
+            commandJournal: repositories.commandJournal,
+            journalReceipt: journalReceipt
+        )
+        let commandReceipt = receiptFactory.makeReceipt(
+            command: command,
+            result: transactionResult,
             compilation: compilation,
             journalReceipt: journalReceipt,
             issuedAt: recordedAt
         )
-        let enrichedResult = result.mergingMetadata(commandReceipt.resultMetadata)
+        let enrichedResult = transactionResult.mergingMetadata(commandReceipt.resultMetadata)
         let record = AmbitionsCommandExecutionRecord(
+            id: commandRecordID,
             command: command,
             result: enrichedResult,
             recordedAt: recordedAt
         )
         try? await repositories.commandExecutionRecords?.append(record)
-        await appendRuntimeEvent(command: command, result: enrichedResult, recordedAt: recordedAt, commandRecordID: record.id)
     }
 
     private func commandJournalFailureResult(
@@ -182,22 +201,6 @@ struct TodayCommandActionHandler {
             ]
         )
         .mergingMetadata(compilation.resultMetadata)
-    }
-
-    private func appendRuntimeEvent(
-        command: AmbitionsCommand,
-        result: AmbitionsCommandExecutionResult,
-        recordedAt: String,
-        commandRecordID: String
-    ) async {
-        guard let runtimeEvents = repositories.runtimeEvents else { return }
-        let event = RuntimeEvent.commandExecution(
-            command: command,
-            result: result,
-            recordedAt: recordedAt,
-            commandRecordID: commandRecordID
-        )
-        _ = try? await runtimeEvents.append(event)
     }
 
     private func effectiveValidation(
