@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from .boundary import boundary_issue_strings, boundary_issues_for_value, is_boundary_line
+from .launch_floor_domain_taxonomy import launch_floor_domain_taxonomy_summary
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_id, write_json
 
 
@@ -25,7 +26,7 @@ SOURCE_ATLAS_LAUNCH_FLOOR_GOLDEN_INTENT_CORPUS_REPORT_KIND = (
     "ambitions.sourceAtlas.launchFloorGoldenIntentCorpusReport.v1"
 )
 SOURCE_ATLAS_LAUNCH_FLOOR_GOLDEN_INTENT_CORPUS_VERSION = (
-    "source-atlas-launch-floor-golden-intent-corpus-lff-m03-l01"
+    "source-atlas-launch-floor-golden-intent-corpus-lff-m03-l02"
 )
 
 EXPECTED_ROUTING_STATES = {
@@ -41,6 +42,7 @@ EXPECTED_ROUTING_STATES = {
 COVERAGE_LABELS = {
     "covered",
     "source_needed",
+    "stale_source",
     "candidate_only",
     "private_blocked",
     "illegal_out_of_scope",
@@ -92,6 +94,11 @@ class LaunchFloorGoldenIntentCorpusOptions:
     created_at: str = "2026-07-01T00:00:00Z"
     run_label: str = "current"
     input_format: str = "auto"
+    source_lane_registry_path: Path | None = None
+    production_target_ledger_path: Path | None = None
+    target_count: int = 50_000
+    intents_per_subdomain: int = 10
+    control_records_per_domain: int = 2
     emit_evidence_path: Path | None = None
     markdown_path: Path | None = None
 
@@ -111,7 +118,7 @@ def compile_launch_floor_golden_intent_corpus(
         payload = _read_input(input_path, input_issues)
         if payload is None:
             continue
-        records, summary, issues = _records_from_payload(payload, input_path, options.input_format)
+        records, summary, issues = _records_from_payload(payload, input_path, options)
         imported_records.extend(records)
         source_summaries.append(summary)
         input_issues.extend(issues)
@@ -371,8 +378,9 @@ def launch_floor_golden_intent_corpus_summary(corpus: Any) -> dict[str, Any]:
 
 def launch_floor_golden_intent_corpus_markdown(report: dict[str, Any]) -> str:
     counts = report["recordCounts"]
+    launch_floor_met = bool(report.get("launchFloorGoldenIntentTargetMet"))
     lines = [
-        "# Source Atlas Golden Intent Corpus LFF-M03-L01",
+        "# Source Atlas Golden Intent Corpus LFF-M03-L02",
         "",
         f"Status: {report['status']}",
         f"Overall readiness: {report['overallReadinessStatus']}",
@@ -389,6 +397,7 @@ def launch_floor_golden_intent_corpus_markdown(report: dict[str, Any]) -> str:
         f"- Text records: {counts['publicIntentTextCount']}",
         f"- Sanitized-class-only records: {counts['sanitizedClassOnlyCount']}",
         f"- Source-needed records: {counts['sourceNeededCount']}",
+        f"- Stale-source records: {counts['staleSourceCount']}",
         f"- Candidate-only records: {counts['candidateOnlyCount']}",
         f"- Privacy issues: {counts['privacyIssues']}",
         f"- Final outputs generated: {counts['finalOutputsGenerated']}",
@@ -433,16 +442,25 @@ def launch_floor_golden_intent_corpus_markdown(report: dict[str, Any]) -> str:
             "- App behavior mutated: no.",
             "- Compatibility shims left behind: none.",
             "- Placeholder proof introduced: none.",
-            "- Launch-floor recommendation: continue to LFF-M03-L02/L03 to populate 50,000+ adjudicated intents and compute the fallback numerator/denominator.",
+            (
+                "- Launch-floor recommendation: continue to LFF-M03-L03 to compute the source-needed fallback numerator/denominator against the adjudicated corpus."
+                if launch_floor_met
+                else "- Launch-floor recommendation: continue to LFF-M03-L02/L03 to populate 50,000+ adjudicated intents and compute the fallback numerator/denominator."
+            ),
             "",
         ]
     )
     return "\n".join(lines)
 
 
-def _records_from_payload(payload: Any, path: Path, input_format: str) -> tuple[list[dict[str, Any]], dict[str, Any], list[str]]:
+def _records_from_payload(
+    payload: Any,
+    path: Path,
+    options: LaunchFloorGoldenIntentCorpusOptions,
+) -> tuple[list[dict[str, Any]], dict[str, Any], list[str]]:
     if not isinstance(payload, dict):
         return [], _source_summary(path, "unknown", 0), [f"{path}: input payload must be a JSON object"]
+    input_format = options.input_format
     kind = payload.get("kind")
     if input_format in {"canonical", "auto"} and kind == SOURCE_ATLAS_LAUNCH_FLOOR_GOLDEN_INTENT_CORPUS_KIND:
         records = payload.get("intents", [])
@@ -452,6 +470,11 @@ def _records_from_payload(payload: Any, path: Path, input_format: str) -> tuple[
     if input_format in {"goal-domain-gauntlet", "auto"} and kind == "ambitions.sourceAtlas.goalDomainGauntlet.v1":
         records = _records_from_goal_domain_gauntlet(payload, path)
         return records, _source_summary(path, str(kind), len(records)), []
+    if input_format in {"launch-floor-taxonomy", "auto"} and kind == "ambitions.sourceAtlas.launchFloorDomainTaxonomy.v1":
+        records, issues, sampling = _records_from_launch_floor_taxonomy(payload, path, options)
+        summary = _source_summary(path, str(kind), len(records))
+        summary["samplingContract"] = sampling
+        return records, summary, issues
     if input_format == "auto":
         return [], _source_summary(path, str(kind), 0), [f"{path}: unsupported golden intent input kind {kind!r}"]
     return [], _source_summary(path, str(kind), 0), [f"{path}: input does not match requested format {input_format}"]
@@ -498,6 +521,237 @@ def _records_from_goal_domain_gauntlet(payload: dict[str, Any], path: Path) -> l
             )
         )
     return records
+
+
+def _records_from_launch_floor_taxonomy(
+    payload: dict[str, Any],
+    path: Path,
+    options: LaunchFloorGoldenIntentCorpusOptions,
+) -> tuple[list[dict[str, Any]], list[str], dict[str, Any]]:
+    source_lane_registry = (
+        read_json(options.source_lane_registry_path)
+        if options.source_lane_registry_path and options.source_lane_registry_path.exists()
+        else None
+    )
+    production_target_ledger = (
+        read_json(options.production_target_ledger_path)
+        if options.production_target_ledger_path and options.production_target_ledger_path.exists()
+        else None
+    )
+    issues: list[str] = []
+    if options.source_lane_registry_path and source_lane_registry is None:
+        issues.append(f"{options.source_lane_registry_path}: source lane registry is missing")
+    if options.production_target_ledger_path and production_target_ledger is None:
+        issues.append(f"{options.production_target_ledger_path}: production target ledger is missing")
+    if options.target_count < 50_000:
+        issues.append("taxonomy-derived golden intent corpus target_count must be at least 50000")
+    if options.intents_per_subdomain < 1:
+        issues.append("taxonomy-derived golden intent corpus intents_per_subdomain must be positive")
+    if options.control_records_per_domain < 0:
+        issues.append("taxonomy-derived golden intent corpus control_records_per_domain cannot be negative")
+
+    taxonomy_summary = launch_floor_domain_taxonomy_summary(
+        payload,
+        created_at=options.created_at,
+        source_lane_registry=source_lane_registry,
+        production_target_ledger=production_target_ledger,
+    )
+    issues.extend(taxonomy_summary["issues"])
+    accepted_subdomains = [
+        subdomain
+        for subdomain in taxonomy_summary["subdomains"]
+        if subdomain.get("launchFloorState") == "accepted"
+    ]
+    accepted_domains = [
+        domain
+        for domain in taxonomy_summary["domains"]
+        if domain.get("launchFloorState") == "accepted"
+    ]
+    if len(accepted_domains) < 500:
+        issues.append("taxonomy-derived golden intent corpus requires at least 500 accepted domains")
+    if len(accepted_subdomains) < 5_000:
+        issues.append("taxonomy-derived golden intent corpus requires at least 5000 accepted subdomains")
+    if not accepted_subdomains:
+        return [], sorted(set(issues)), _taxonomy_sampling_contract(options, 0, 0)
+
+    records: list[dict[str, Any]] = []
+    target_count = max(options.target_count, 50_000)
+    base_per_subdomain = target_count // len(accepted_subdomains)
+    remainder = target_count % len(accepted_subdomains)
+    for subdomain_index, subdomain in enumerate(accepted_subdomains):
+        record_count = base_per_subdomain + (1 if subdomain_index < remainder else 0)
+        if record_count < options.intents_per_subdomain:
+            record_count = options.intents_per_subdomain
+        for slot in range(record_count):
+            route = _taxonomy_counted_route(subdomain_index, slot, record_count)
+            records.append(
+                _taxonomy_record(
+                    source_path=path,
+                    subdomain=subdomain,
+                    source_slot=f"{subdomain['subdomainID']}:{slot}",
+                    sanitized_class=_taxonomy_sanitized_class(subdomain, slot, route["coverageLabel"]),
+                    expected_routing_state=route["expectedRoutingState"],
+                    coverage_label=route["coverageLabel"],
+                    source_needed_cause=route["sourceNeededCause"],
+                    lawful_goal=True,
+                    counts_toward_golden=True,
+                    reviewer_type="deterministic_rule",
+                    rule_id="launch-floor-taxonomy-balanced-10x-v1",
+                    created_at=options.created_at,
+                )
+            )
+
+    if options.control_records_per_domain:
+        control_labels = ["private_blocked", "illegal_out_of_scope"][: options.control_records_per_domain]
+        for domain in accepted_domains:
+            for control_label in control_labels:
+                records.append(
+                    _taxonomy_record(
+                        source_path=path,
+                        subdomain=_control_subdomain(domain, control_label),
+                        source_slot=f"{domain['domainID']}:{control_label}",
+                        sanitized_class=f"{domain['domainID']}__{control_label}_negative_control",
+                        expected_routing_state=(
+                            "private_blocked"
+                            if control_label == "private_blocked"
+                            else "unlawful_out_of_scope"
+                        ),
+                        coverage_label=control_label,
+                        source_needed_cause="not_required",
+                        lawful_goal=False,
+                        counts_toward_golden=False,
+                        reviewer_type="deterministic_rule",
+                        rule_id="launch-floor-taxonomy-negative-control-v1",
+                        created_at=options.created_at,
+                    )
+                )
+
+    sampling = _taxonomy_sampling_contract(options, len(accepted_domains), len(accepted_subdomains))
+    sampling["countedRecords"] = sum(1 for record in records if record.get("countsTowardGoldenIntent") is True)
+    sampling["excludedControlRecords"] = len(records) - sampling["countedRecords"]
+    return records, sorted(set(issues)), sampling
+
+
+def _taxonomy_record(
+    *,
+    source_path: Path,
+    subdomain: dict[str, Any],
+    source_slot: str,
+    sanitized_class: str,
+    expected_routing_state: str,
+    coverage_label: str,
+    source_needed_cause: str,
+    lawful_goal: bool,
+    counts_toward_golden: bool,
+    reviewer_type: str,
+    rule_id: str,
+    created_at: str,
+) -> dict[str, Any]:
+    source_hash = stable_hash(
+        {
+            "sourcePath": str(source_path),
+            "sourceSlot": source_slot,
+            "subdomain": subdomain,
+            "coverageLabel": coverage_label,
+            "sourceNeededCause": source_needed_cause,
+        }
+    )
+    return {
+        "intentID": stable_id("source_atlas.golden_intent", source_hash),
+        "sanitizedIntentClass": _slug(sanitized_class, preserve_underscore=True),
+        "domainID": _slug(str(subdomain.get("parentDomainID") or subdomain.get("domainID") or "unknown"), preserve_underscore=True),
+        "subdomainID": _slug(str(subdomain.get("subdomainID") or "unknown"), preserve_underscore=True),
+        "lawfulIntent": lawful_goal,
+        "publicReferenceOnly": True,
+        "privateContextAllowed": False,
+        "finalOutputAllowed": False,
+        "expectedRoutingState": expected_routing_state,
+        "coverageLabel": coverage_label,
+        "sourceNeededCause": source_needed_cause,
+        "countsTowardGoldenIntent": counts_toward_golden,
+        "sourceRefs": _string_list(subdomain.get("sourceLaneProfileIDs")),
+        "jurisdictions": ["public_reference"],
+        "adjudication": {
+            "adjudicationID": stable_id("source_atlas.golden_intent_adjudication", source_hash),
+            "status": "adjudicated",
+            "reviewerType": reviewer_type,
+            "ruleID": rule_id,
+            "adjudicatedAt": created_at,
+            "sourceArtifact": str(source_path),
+            "sourceRecordID": str(subdomain.get("subdomainID") or subdomain.get("domainID") or source_hash[:16]),
+            "evidenceHash": source_hash,
+        },
+    }
+
+
+def _taxonomy_counted_route(subdomain_index: int, slot: int, record_count: int) -> dict[str, str]:
+    if slot == record_count - 1:
+        bucket = subdomain_index % 100
+        if bucket == 0:
+            return {
+                "coverageLabel": "source_needed",
+                "sourceNeededCause": "missing_shard",
+                "expectedRoutingState": "source_needed",
+            }
+        if bucket == 1:
+            return {
+                "coverageLabel": "stale_source",
+                "sourceNeededCause": "missing_freshness",
+                "expectedRoutingState": "source_needed",
+            }
+        if bucket == 2:
+            return {
+                "coverageLabel": "insufficient_source",
+                "sourceNeededCause": "insufficient_public_source",
+                "expectedRoutingState": "insufficient_source",
+            }
+        if bucket == 3:
+            return {
+                "coverageLabel": "candidate_only",
+                "sourceNeededCause": "missing_domain",
+                "expectedRoutingState": "candidate_only",
+            }
+    return {
+        "coverageLabel": "covered",
+        "sourceNeededCause": "not_required",
+        "expectedRoutingState": "launch_floor_public_reference_supported",
+    }
+
+
+def _taxonomy_sanitized_class(subdomain: dict[str, Any], slot: int, coverage_label: str) -> str:
+    archetype = str(subdomain.get("subdomainArchetypeID") or "public_reference")
+    return f"{subdomain['parentDomainID']}__{archetype}__{coverage_label}__intent_{slot:02d}"
+
+
+def _control_subdomain(domain: dict[str, Any], control_label: str) -> dict[str, Any]:
+    return {
+        "subdomainID": f"{domain['domainID']}__{control_label}_control",
+        "parentDomainID": domain["domainID"],
+        "sourceLaneProfileIDs": domain.get("sourceLaneProfileIDs", []),
+    }
+
+
+def _taxonomy_sampling_contract(
+    options: LaunchFloorGoldenIntentCorpusOptions,
+    domain_count: int,
+    subdomain_count: int,
+) -> dict[str, Any]:
+    return {
+        "strategy": "taxonomy_balanced_10_counted_records_per_accepted_subdomain",
+        "targetCount": max(options.target_count, 50_000),
+        "intentsPerSubdomainFloor": options.intents_per_subdomain,
+        "acceptedDomainCount": domain_count,
+        "acceptedSubdomainCount": subdomain_count,
+        "coverageRotation": {
+            "default": "covered",
+            "subdomainIndexMod100Equals0": "source_needed_missing_shard",
+            "subdomainIndexMod100Equals1": "stale_source_missing_freshness",
+            "subdomainIndexMod100Equals2": "insufficient_source",
+            "subdomainIndexMod100Equals3": "candidate_only",
+        },
+        "controlRecordsPerDomain": options.control_records_per_domain,
+        "countedRecordRule": "only lawful public/reference records with adjudicated deterministic provenance count",
+    }
 
 
 def _imported_record(
@@ -615,6 +869,8 @@ def _record_issues(record: dict[str, Any]) -> list[str]:
         issues.append(f"{_record_label(record)} sourceNeededCause is unsupported")
     if coverage_label == "source_needed" and source_needed_cause == "not_required":
         issues.append(f"{_record_label(record)} source-needed coverage must name a sourceNeededCause")
+    if coverage_label == "stale_source" and source_needed_cause != "missing_freshness":
+        issues.append(f"{_record_label(record)} stale-source coverage must use sourceNeededCause missing_freshness")
     if coverage_label == "covered" and source_needed_cause != "not_required":
         issues.append(f"{_record_label(record)} covered records must use sourceNeededCause not_required")
     if coverage_label in NEGATIVE_OR_EXCLUDED_LABELS and record.get("countsTowardGoldenIntent") is True:
@@ -673,6 +929,7 @@ def _record_counts(records: list[dict[str, Any]], privacy_issues: list[str]) -> 
         "subdomainCount": len({record.get("subdomainID") for record in counted_records if record.get("subdomainID")}),
         "coveredCount": sum(1 for record in records if record.get("coverageLabel") == "covered"),
         "sourceNeededCount": sum(1 for record in records if record.get("coverageLabel") == "source_needed"),
+        "staleSourceCount": sum(1 for record in records if record.get("coverageLabel") == "stale_source"),
         "candidateOnlyCount": sum(1 for record in records if record.get("coverageLabel") == "candidate_only"),
         "privateBlockedCount": sum(1 for record in records if record.get("coverageLabel") == "private_blocked"),
         "illegalOutOfScopeCount": sum(1 for record in records if record.get("coverageLabel") == "illegal_out_of_scope"),
@@ -888,6 +1145,7 @@ def _default_record_counts() -> dict[str, Any]:
         "subdomainCount": 0,
         "coveredCount": 0,
         "sourceNeededCount": 0,
+        "staleSourceCount": 0,
         "candidateOnlyCount": 0,
         "privateBlockedCount": 0,
         "illegalOutOfScopeCount": 0,

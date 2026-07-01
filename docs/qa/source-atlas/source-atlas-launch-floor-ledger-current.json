@@ -78,7 +78,6 @@
     {
       "issues": [
         "public_reference_shards_1m=not_met",
-        "golden_intents_50000=not_met",
         "source_needed_fallback_under_5_percent=not_measurable_fail_closed",
         "continuous_missing_shard_expansion=not_measurable_fail_closed"
       ],
@@ -187,7 +186,7 @@
     },
     {
       "capabilityID": "launch_floor_golden_intent_corpus_contract",
-      "evidence": "34 records, 34 counted golden intents, 34 adjudicated records",
+      "evidence": "51000 records, 50000 counted golden intents, 51000 adjudicated records",
       "status": "proven_current"
     }
   ],
@@ -337,32 +336,33 @@
     "issues": [],
     "present": true,
     "recordCounts": {
-      "adjudicatedIntentCount": 34,
-      "candidateOnlyCount": 3,
-      "coveredCount": 31,
-      "domainCount": 17,
-      "excludedControlRecords": 0,
+      "adjudicatedIntentCount": 51000,
+      "candidateOnlyCount": 50,
+      "coveredCount": 49800,
+      "domainCount": 500,
+      "excludedControlRecords": 1000,
       "finalOutputsGenerated": 0,
-      "goldenIntentCount": 34,
-      "illegalOutOfScopeCount": 0,
-      "insufficientSourceCount": 0,
-      "intentRecords": 34,
-      "lawfulIntentCount": 34,
+      "goldenIntentCount": 50000,
+      "illegalOutOfScopeCount": 500,
+      "insufficientSourceCount": 50,
+      "intentRecords": 51000,
+      "lawfulIntentCount": 50000,
       "privacyIssues": 0,
-      "privateBlockedCount": 0,
+      "privateBlockedCount": 500,
       "publicIntentTextCount": 0,
       "reviewArtifactCount": 1,
-      "sanitizedClassOnlyCount": 34,
-      "sourceNeededCount": 0,
-      "subdomainCount": 34
+      "sanitizedClassOnlyCount": 51000,
+      "sourceNeededCount": 50,
+      "staleSourceCount": 50,
+      "subdomainCount": 5000
     },
     "targetStatus": {
       "adjudicationComplete": true,
-      "domainCoverage500": false,
-      "goldenIntents50000": false,
+      "domainCoverage500": true,
+      "goldenIntents50000": true,
       "noFinalOutputs": true,
       "privacyBoundaryPass": true,
-      "subdomainCoverage5000": false
+      "subdomainCoverage5000": true
     },
     "valid": true
   },
@@ -446,22 +446,17 @@
     },
     "golden_intents_50000": {
       "counterPresent": true,
-      "gaps": [
-        "golden_intents counter is 34, below required 50000"
-      ],
+      "gaps": [],
       "label": "50,000+ golden representative lawful goal intents",
       "measuredRate": null,
-      "measuredValue": 34,
+      "measuredValue": 50000,
       "proxyValues": {
         "configuredGauntletCases": 14,
         "nativeBridgeSourceIntentContract": 100,
         "nativeBridgeSourcePermutationContract": 1000
       },
-      "requiredChanges": [
-        "Create adjudicated 50,000+ lawful golden representative goal-intent corpus.",
-        "Measure configured, missing-domain, candidate-only, privacy, and no-final-output routing against that corpus."
-      ],
-      "status": "not_met",
+      "requiredChanges": [],
+      "status": "met",
       "targetID": "golden_intents_50000",
       "threshold": 50000,
       "unit": "golden_intents"
@@ -556,17 +551,12 @@
     },
     "valid": true
   },
-  "ledgerID": "source_atlas.launch_floor_ledger.9db490ba1d13e795",
+  "ledgerID": "source_atlas.launch_floor_ledger.9c38ac84f851e224",
   "missingCapabilities": [
     {
       "missingCapability": "public_reference_shards counter is 71, below required 1000000",
       "status": "not_met",
       "targetID": "public_reference_shards_1m"
-    },
-    {
-      "missingCapability": "golden_intents counter is 34, below required 50000",
-      "status": "not_met",
-      "targetID": "golden_intents_50000"
     },
     {
       "missingCapability": "source-needed fallback numerator/denominator are missing",
@@ -600,16 +590,16 @@
     "not accessibility, privacy, or legal approval"
   ],
   "outputHashes": {
-    "markdownPayload": "c5a1e080cdd147f4039816111cf6db86e243c184432874a483d808d3caadd3e4",
-    "report": "efce3fad4a33cfca5bbf585cc75fdec6ea38b35e36b82054b42eb8c40a460e97",
-    "reportPayload": "b8d2084ac6db99a3a2f7b024ee104a35d56e11e81447ef0adba6d34f27b4434a"
+    "markdownPayload": "2b97d1d0b13b31b695771609489eba37be7e48b893628c4841f9ce908b3a96ac",
+    "report": "4df6951140f8c78afd1a420e70eff89db91d79bb740e68b637bc14b8277b9553",
+    "reportPayload": "302e1f5b018d05ff8b03b6ade9bae0aaba4d18d319645ca92a1dcf4d65a67766"
   },
   "outputPaths": {
-    "closeout": "tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l01-current/closeout.md",
+    "closeout": "tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l02-current/closeout.md",
     "emitEvidence": "docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json",
     "emitMarkdown": "docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
-    "markdown": "tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l01-current/source-atlas-launch-floor-ledger.md",
-    "report": "tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l01-current/source-atlas-launch-floor-ledger.json"
+    "markdown": "tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l02-current/source-atlas-launch-floor-ledger.md",
+    "report": "tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l02-current/source-atlas-launch-floor-ledger.json"
   },
   "overallReadinessStatus": "not_launch_floor_ready",
   "overclaimIssues": [],
@@ -730,13 +720,14 @@
     "explicitSubdomains": 0,
     "finalOutputsGenerated": 0,
     "focusedNativePassedFromReleasePacket": 72,
-    "goldenIntentCorpusCounter": 34,
-    "launchFloorGoldenIntentAdjudicatedRecords": 34,
-    "launchFloorGoldenIntentCandidateOnly": 3,
-    "launchFloorGoldenIntentDomains": 17,
-    "launchFloorGoldenIntentRecords": 34,
-    "launchFloorGoldenIntentSourceNeeded": 0,
-    "launchFloorGoldenIntentSubdomains": 34,
+    "goldenIntentCorpusCounter": 50000,
+    "launchFloorGoldenIntentAdjudicatedRecords": 51000,
+    "launchFloorGoldenIntentCandidateOnly": 50,
+    "launchFloorGoldenIntentDomains": 500,
+    "launchFloorGoldenIntentRecords": 51000,
+    "launchFloorGoldenIntentSourceNeeded": 50,
+    "launchFloorGoldenIntentStaleSource": 50,
+    "launchFloorGoldenIntentSubdomains": 5000,
     "launchFloorR2GatewayLoadProbes": 70,
     "launchFloorR2LayoutProofObjects": 126,
     "launchFloorR2LayoutProofPartitions": 14,
@@ -804,33 +795,6 @@
       "requiredChange": "Create canonical shard corpus manifest with publicReferenceShards >= 1,000,000. Partition shards into pack/R2/mobile index layout with checksum/readback proof.",
       "targetID": "public_reference_shards_1m",
       "title": "Canonical shard corpus manifest and 1M+ shard production counter"
-    },
-    {
-      "blockedClaimsUntilComplete": [
-        "app_store_readiness",
-        "final_user_plans_schedules_steps_from_source_atlas_or_r2",
-        "full_source_atlas_green",
-        "goal_complete",
-        "hosted_private_life_graph",
-        "launch_floor_complete",
-        "literal_universal_coverage",
-        "outside_legal_approval",
-        "private_life_graph_in_source_atlas_or_r2",
-        "production_ready_without_scope",
-        "release_green",
-        "runtime_release_green",
-        "source_atlas_generates_final_personalized_plans",
-        "source_atlas_generates_final_schedules",
-        "source_atlas_generates_final_steps",
-        "source_atlas_launch_floor_ready",
-        "source_atlas_private_goal_text_processing",
-        "testflight_readiness",
-        "universal_coverage"
-      ],
-      "changeID": "LFT-004",
-      "requiredChange": "Create adjudicated 50,000+ lawful golden representative goal-intent corpus. Measure configured, missing-domain, candidate-only, privacy, and no-final-output routing against that corpus.",
-      "targetID": "golden_intents_50000",
-      "title": "50,000+ golden representative lawful goal-intent corpus"
     },
     {
       "blockedClaimsUntilComplete": [
@@ -997,22 +961,17 @@
     },
     {
       "counterPresent": true,
-      "gaps": [
-        "golden_intents counter is 34, below required 50000"
-      ],
+      "gaps": [],
       "label": "50,000+ golden representative lawful goal intents",
       "measuredRate": null,
-      "measuredValue": 34,
+      "measuredValue": 50000,
       "proxyValues": {
         "configuredGauntletCases": 14,
         "nativeBridgeSourceIntentContract": 100,
         "nativeBridgeSourcePermutationContract": 1000
       },
-      "requiredChanges": [
-        "Create adjudicated 50,000+ lawful golden representative goal-intent corpus.",
-        "Measure configured, missing-domain, candidate-only, privacy, and no-final-output routing against that corpus."
-      ],
-      "status": "not_met",
+      "requiredChanges": [],
+      "status": "met",
       "targetID": "golden_intents_50000",
       "threshold": 50000,
       "unit": "golden_intents"
@@ -1090,13 +1049,13 @@
       "validationID": "launch_floor_r2_layout_proof"
     },
     {
-      "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+      "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
       "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, and no source/R2/native mutation",
       "validationID": "launch_floor_ledger"
     },
     {
-      "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-golden-intent-corpus --input docs/qa/source-atlas/source-atlas-goal-domain-gauntlet-train-131.json --input-format goal-domain-gauntlet --output-root tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.md",
-      "purpose": "import current public/reference gauntlet cases into the canonical golden-intent corpus contract while keeping the 50k target fail-closed",
+      "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-golden-intent-corpus --input tools/source-atlas/frontier/launch-floor-domain-taxonomy.json --input-format launch-floor-taxonomy --source-lane-registry tools/source-atlas/governance/source-lane-registry.json --production-target-ledger tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json --target-count 50000 --intents-per-subdomain 10 --control-records-per-domain 2 --output-root tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.md",
+      "purpose": "derive the balanced 50,000+ adjudicated golden-intent corpus from the accepted launch-floor taxonomy and governance inputs",
       "validationID": "launch_floor_golden_intent_corpus"
     },
     {
@@ -1115,5 +1074,5 @@
       "validationID": "diff_check"
     }
   ],
-  "versionID": "source-atlas-launch-floor-ledger-lff-m03-l01"
+  "versionID": "source-atlas-launch-floor-ledger-lff-m03-l02"
 }

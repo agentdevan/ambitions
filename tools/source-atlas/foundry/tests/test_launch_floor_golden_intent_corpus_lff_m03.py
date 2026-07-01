@@ -17,6 +17,17 @@ from foundry.model import read_json, write_json  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
 GOAL_DOMAIN_GAUNTLET = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-goal-domain-gauntlet-train-131.json"
+LAUNCH_FLOOR_TAXONOMY = REPO_ROOT / "tools" / "source-atlas" / "frontier" / "launch-floor-domain-taxonomy.json"
+SOURCE_LANE_REGISTRY = REPO_ROOT / "tools" / "source-atlas" / "governance" / "source-lane-registry.json"
+PRODUCTION_TARGET_LEDGER = (
+    REPO_ROOT
+    / "tools"
+    / "source-atlas"
+    / "generated"
+    / "production-target-ledger"
+    / "train-131-tetradeca-current"
+    / "production-target-ledger.json"
+)
 CREATED_AT = "2026-07-01T00:00:00Z"
 
 
@@ -74,6 +85,49 @@ def test_launch_floor_golden_intent_summary_accepts_50k_adjudicated_public_recor
     assert summary["launchFloorTargets"]["domainCoverage500"] is True
     assert summary["launchFloorTargets"]["subdomainCoverage5000"] is True
     assert summary["launchFloorTargets"]["adjudicationComplete"] is True
+
+
+def test_launch_floor_taxonomy_import_generates_balanced_50k_adjudicated_corpus(tmp_path: Path):
+    result = compile_launch_floor_golden_intent_corpus(
+        LaunchFloorGoldenIntentCorpusOptions(
+            input_paths=(LAUNCH_FLOOR_TAXONOMY,),
+            input_format="launch-floor-taxonomy",
+            output_root=tmp_path / "taxonomy-golden-intents",
+            created_at=CREATED_AT,
+            run_label="taxonomy-balanced-test",
+            source_lane_registry_path=SOURCE_LANE_REGISTRY,
+            production_target_ledger_path=PRODUCTION_TARGET_LEDGER,
+        )
+    )
+
+    counts = result["recordCounts"]
+    assert result["valid"], result["issues"]
+    assert result["launchFloorGoldenIntentTargetMet"] is True
+    assert counts["goldenIntentCount"] == 50_000
+    assert counts["intentRecords"] == 51_000
+    assert counts["adjudicatedIntentCount"] == 51_000
+    assert counts["lawfulIntentCount"] == 50_000
+    assert counts["domainCount"] == 500
+    assert counts["subdomainCount"] == 5_000
+    assert counts["coveredCount"] == 49_800
+    assert counts["sourceNeededCount"] == 50
+    assert counts["staleSourceCount"] == 50
+    assert counts["candidateOnlyCount"] == 50
+    assert counts["insufficientSourceCount"] == 50
+    assert counts["privateBlockedCount"] == 500
+    assert counts["illegalOutOfScopeCount"] == 500
+    assert counts["excludedControlRecords"] == 1_000
+    assert counts["publicIntentTextCount"] == 0
+    assert counts["sanitizedClassOnlyCount"] == 51_000
+    assert counts["privacyIssues"] == 0
+    assert counts["finalOutputsGenerated"] == 0
+    assert result["targetStatus"]["goldenIntents50000"] is True
+    assert result["targetStatus"]["domainCoverage500"] is True
+    assert result["targetStatus"]["subdomainCoverage5000"] is True
+    assert result["targetStatus"]["adjudicationComplete"] is True
+    assert "launch_floor_golden_intents_50000_met" in result["allowedClaims"]
+    assert result["sourceSummaries"][0]["samplingContract"]["countedRecords"] == 50_000
+    assert result["sourceSummaries"][0]["samplingContract"]["excludedControlRecords"] == 1_000
 
 
 def test_private_looking_public_intent_text_is_rejected(tmp_path: Path):

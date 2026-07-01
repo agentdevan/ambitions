@@ -53,6 +53,7 @@
   "coverageLabels": [
     "covered",
     "source_needed",
+    "stale_source",
     "candidate_only",
     "private_blocked",
     "illegal_out_of_scope",

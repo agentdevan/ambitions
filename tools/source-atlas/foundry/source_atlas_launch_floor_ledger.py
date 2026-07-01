@@ -22,7 +22,7 @@ from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m03-l01"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m03-l02"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -355,6 +355,7 @@ def source_atlas_launch_floor_ledger_markdown(report: dict[str, Any]) -> str:
         f"- Launch-floor golden intent records: {counts['launchFloorGoldenIntentRecords']}",
         f"- Launch-floor golden intents counted: {counts['goldenIntentCorpusCounter'] or 0}",
         f"- Launch-floor golden intent domains/subdomains: {counts['launchFloorGoldenIntentDomains']}/{counts['launchFloorGoldenIntentSubdomains']}",
+        f"- Launch-floor golden intent source-needed/stale-source/candidate-only: {counts['launchFloorGoldenIntentSourceNeeded']}/{counts['launchFloorGoldenIntentStaleSource']}/{counts['launchFloorGoldenIntentCandidateOnly']}",
         "",
         "## Launch-Floor Target Status",
         "",
@@ -545,6 +546,7 @@ def _counters(
             "launchFloorGoldenIntentDomains": golden_intent_counts["domainCount"],
             "launchFloorGoldenIntentSubdomains": golden_intent_counts["subdomainCount"],
             "launchFloorGoldenIntentSourceNeeded": golden_intent_counts["sourceNeededCount"],
+            "launchFloorGoldenIntentStaleSource": golden_intent_counts["staleSourceCount"],
             "launchFloorGoldenIntentCandidateOnly": golden_intent_counts["candidateOnlyCount"],
             "goldenIntentCorpusCounter": golden_intent_counts["goldenIntentCount"] if golden_intent_valid else None,
             "sourceNeededFallbackNumerator": source_needed_numerator,
@@ -942,13 +944,13 @@ def _validation_matrix() -> list[dict[str, str]]:
         },
         {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
             "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, and no source/R2/native mutation",
         },
         {
             "validationID": "launch_floor_golden_intent_corpus",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-golden-intent-corpus --input docs/qa/source-atlas/source-atlas-goal-domain-gauntlet-train-131.json --input-format goal-domain-gauntlet --output-root tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.md",
-            "purpose": "import current public/reference gauntlet cases into the canonical golden-intent corpus contract while keeping the 50k target fail-closed",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-golden-intent-corpus --input tools/source-atlas/frontier/launch-floor-domain-taxonomy.json --input-format launch-floor-taxonomy --source-lane-registry tools/source-atlas/governance/source-lane-registry.json --production-target-ledger tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json --target-count 50000 --intents-per-subdomain 10 --control-records-per-domain 2 --output-root tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.md",
+            "purpose": "derive the balanced 50,000+ adjudicated golden-intent corpus from the accepted launch-floor taxonomy and governance inputs",
         },
         {
             "validationID": "launch_floor_shard_corpus",
@@ -1179,6 +1181,7 @@ def _launch_floor_golden_intent_summary(artifacts: dict[str, Any]) -> dict[str, 
                 "subdomainCount": 0,
                 "coveredCount": 0,
                 "sourceNeededCount": 0,
+                "staleSourceCount": 0,
                 "candidateOnlyCount": 0,
                 "privateBlockedCount": 0,
                 "illegalOutOfScopeCount": 0,

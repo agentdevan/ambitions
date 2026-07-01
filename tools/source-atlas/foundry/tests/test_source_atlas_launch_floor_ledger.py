@@ -39,6 +39,7 @@ LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST = (
     / "launch-floor-shard-corpus-manifest.json"
 )
 R2_LAYOUT_PROOF = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-launch-floor-r2-layout-proof-lff-m02.json"
+GOLDEN_INTENT_CORPUS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-launch-floor-golden-intent-corpus-lff-m03.json"
 NATIVE_BRIDGE_GAUNTLET_SOURCE = REPO_ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SourceAtlas" / "SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
 
 
@@ -64,6 +65,14 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert counts["launchFloorR2RollbackTransitions"] == 14
     assert counts["launchFloorR2GatewayLoadProbes"] == 70
     assert counts["launchFloorR2LiveWrites"] == 0
+    assert counts["launchFloorGoldenIntentRecords"] == 51_000
+    assert counts["launchFloorGoldenIntentAdjudicatedRecords"] == 51_000
+    assert counts["launchFloorGoldenIntentDomains"] == 500
+    assert counts["launchFloorGoldenIntentSubdomains"] == 5_000
+    assert counts["launchFloorGoldenIntentSourceNeeded"] == 50
+    assert counts["launchFloorGoldenIntentStaleSource"] == 50
+    assert counts["launchFloorGoldenIntentCandidateOnly"] == 50
+    assert counts["goldenIntentCorpusCounter"] == 50_000
     assert counts["packablePublicReferenceClaimProxy"] == 71
     assert counts["liveR2ObjectProxy"] == 196
     assert counts["sourceLaneCount"] == 34
@@ -75,7 +84,8 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert result["launchFloorTargetStatus"]["public_reference_shards_1m"]["status"] == "not_met"
     assert result["launchFloorTargetStatus"]["public_reference_shards_1m"]["measuredValue"] == 71
     assert result["launchFloorTargetStatus"]["subdomains_5000"]["status"] == "met"
-    assert result["launchFloorTargetStatus"]["golden_intents_50000"]["status"] == "not_measurable_fail_closed"
+    assert result["launchFloorTargetStatus"]["golden_intents_50000"]["status"] == "met"
+    assert result["launchFloorTargetStatus"]["golden_intents_50000"]["measuredValue"] == 50_000
     assert result["launchFloorTargetStatus"]["source_needed_fallback_under_5_percent"]["status"] == "not_measurable_fail_closed"
     assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["status"] == "not_measurable_fail_closed"
     assert "source_atlas_launch_floor_ready" in result["blockedClaims"]
@@ -168,6 +178,7 @@ def _current_options(tmp_path: Path) -> SourceAtlasLaunchFloorLedgerOptions:
         launch_floor_taxonomy_path=LAUNCH_FLOOR_TAXONOMY,
         shard_corpus_manifest_path=LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST,
         r2_layout_proof_path=R2_LAYOUT_PROOF,
+        golden_intent_corpus_path=GOLDEN_INTENT_CORPUS,
         native_runtime_bridge_gauntlet_source_path=NATIVE_BRIDGE_GAUNTLET_SOURCE,
         output_root=tmp_path / "current-launch-floor",
         created_at="2026-07-01T00:00:00Z",
@@ -447,32 +458,55 @@ def _golden_corpus_report() -> dict:
     return {
         "schemaVersion": 1,
         "kind": SOURCE_ATLAS_LAUNCH_FLOOR_GOLDEN_INTENT_CORPUS_REPORT_KIND,
-        "versionID": "source-atlas-launch-floor-golden-intent-corpus-lff-m03-l01",
+        "versionID": "source-atlas-launch-floor-golden-intent-corpus-lff-m03-l02",
         "valid": True,
         "launchFloorGoldenIntentTargetMet": True,
         "recordCounts": {
-            "intentRecords": 50_000,
+            "intentRecords": 51_000,
             "goldenIntentCount": 50_000,
             "lawfulIntentCount": 50_000,
-            "excludedControlRecords": 0,
-            "publicIntentTextCount": 50_000,
-            "sanitizedClassOnlyCount": 0,
-            "adjudicatedIntentCount": 50_000,
+            "excludedControlRecords": 1_000,
+            "publicIntentTextCount": 0,
+            "sanitizedClassOnlyCount": 51_000,
+            "adjudicatedIntentCount": 51_000,
             "domainCount": 500,
             "subdomainCount": 5_000,
-            "coveredCount": 49_951,
-            "sourceNeededCount": 49,
-            "candidateOnlyCount": 0,
-            "privateBlockedCount": 0,
-            "illegalOutOfScopeCount": 0,
-            "insufficientSourceCount": 0,
+            "coveredCount": 49_800,
+            "sourceNeededCount": 50,
+            "staleSourceCount": 50,
+            "candidateOnlyCount": 50,
+            "privateBlockedCount": 500,
+            "illegalOutOfScopeCount": 500,
+            "insufficientSourceCount": 50,
             "reviewArtifactCount": 1,
             "privacyIssues": 0,
             "finalOutputsGenerated": 0,
         },
-        "coverageLabelCounts": {"covered": 49_951, "source_needed": 49},
-        "expectedRoutingStateCounts": {"launch_floor_public_reference_supported": 49_951, "source_needed": 49},
-        "sourceNeededCauseCounts": {"not_required": 49_951, "missing_shard": 49},
+        "coverageLabelCounts": {
+            "covered": 49_800,
+            "source_needed": 50,
+            "stale_source": 50,
+            "candidate_only": 50,
+            "insufficient_source": 50,
+            "private_blocked": 500,
+            "illegal_out_of_scope": 500,
+        },
+        "expectedRoutingStateCounts": {
+            "launch_floor_public_reference_supported": 49_800,
+            "source_needed": 50,
+            "stale_source": 50,
+            "candidate_only": 50,
+            "insufficient_source": 50,
+            "blocked_private_context": 500,
+            "illegal_out_of_scope": 500,
+        },
+        "sourceNeededCauseCounts": {
+            "not_required": 50_800,
+            "missing_shard": 50,
+            "missing_freshness": 50,
+            "insufficient_public_source": 50,
+            "missing_domain": 50,
+        },
         "balance": {"launchFloorBalanceReady": True},
         "counterContract": {
             "goldenIntentCount": {

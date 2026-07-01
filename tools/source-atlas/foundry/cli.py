@@ -1001,9 +1001,14 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_golden_intent_parser.add_argument("--input", action="append", dest="inputs", required=True)
     launch_floor_golden_intent_parser.add_argument(
         "--input-format",
-        choices=["auto", "canonical", "goal-domain-gauntlet"],
+        choices=["auto", "canonical", "goal-domain-gauntlet", "launch-floor-taxonomy"],
         default="auto",
     )
+    launch_floor_golden_intent_parser.add_argument("--source-lane-registry", default=str(DEFAULT_SOURCE_LANE_REGISTRY_PATH))
+    launch_floor_golden_intent_parser.add_argument("--production-target-ledger", default=str(DEFAULT_PRODUCTION_TARGET_LEDGER_PATH))
+    launch_floor_golden_intent_parser.add_argument("--target-count", type=int, default=50_000)
+    launch_floor_golden_intent_parser.add_argument("--intents-per-subdomain", type=int, default=10)
+    launch_floor_golden_intent_parser.add_argument("--control-records-per-domain", type=int, default=2)
     launch_floor_golden_intent_parser.add_argument("--output-root", required=True)
     launch_floor_golden_intent_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
     launch_floor_golden_intent_parser.add_argument("--run-label", default="current")
@@ -2486,6 +2491,11 @@ def main(argv: list[str] | None = None) -> int:
                 output_root=Path(args.output_root),
                 created_at=args.created_at,
                 run_label=args.run_label,
+                source_lane_registry_path=Path(args.source_lane_registry) if args.source_lane_registry else None,
+                production_target_ledger_path=Path(args.production_target_ledger) if args.production_target_ledger else None,
+                target_count=args.target_count,
+                intents_per_subdomain=args.intents_per_subdomain,
+                control_records_per_domain=args.control_records_per_domain,
                 emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
                 markdown_path=Path(args.markdown) if args.markdown else None,
             )

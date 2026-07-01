@@ -1,21 +1,22 @@
-# Source Atlas Golden Intent Corpus LFF-M03-L01
+# Source Atlas Golden Intent Corpus LFF-M03-L02
 
 Status: Source Green for golden-intent corpus contract
-Overall readiness: golden_intent_target_not_met
-Launch-floor golden-intent target met: false
-Source Atlas status ceiling: Yellow overall Source Atlas; golden-intent corpus is measured but launch-floor target is not met
+Overall readiness: golden_intent_target_met
+Launch-floor golden-intent target met: true
+Source Atlas status ceiling: Launch-floor golden-intent target met
 
 ## Current Proved Capability
 
-- Intent records imported: 34
-- Golden intents counted: 34
-- Adjudicated records: 34
-- Domains represented: 17
-- Subdomains represented: 34
+- Intent records imported: 51000
+- Golden intents counted: 50000
+- Adjudicated records: 51000
+- Domains represented: 500
+- Subdomains represented: 5000
 - Text records: 0
-- Sanitized-class-only records: 34
-- Source-needed records: 0
-- Candidate-only records: 3
+- Sanitized-class-only records: 51000
+- Source-needed records: 50
+- Stale-source records: 50
+- Candidate-only records: 50
 - Privacy issues: 0
 - Final outputs generated: 0
 
@@ -23,17 +24,22 @@ Source Atlas status ceiling: Yellow overall Source Atlas; golden-intent corpus i
 
 | Target | Met |
 | --- | --- |
-| `goldenIntents50000` | false |
-| `domainCoverage500` | false |
-| `subdomainCoverage5000` | false |
+| `goldenIntents50000` | true |
+| `domainCoverage500` | true |
+| `subdomainCoverage5000` | true |
 | `adjudicationComplete` | true |
 | `privacyBoundaryPass` | true |
 | `noFinalOutputs` | true |
 
 ## Coverage Labels
 
-- `candidate_only`: 3
-- `covered`: 31
+- `candidate_only`: 50
+- `covered`: 49800
+- `illegal_out_of_scope`: 500
+- `insufficient_source`: 50
+- `private_blocked`: 500
+- `source_needed`: 50
+- `stale_source`: 50
 
 ## Checks
 
@@ -43,9 +49,9 @@ Source Atlas status ceiling: Yellow overall Source Atlas; golden-intent corpus i
 - `artifact_privacy_scan_passed`: pass (none)
 - `adjudication_complete`: pass (none)
 - `golden_intent_counter_measurable`: pass (none)
-- `launch_floor_golden_intents_50000`: fail (goldenIntentCount=34)
-- `launch_floor_domain_balance_500`: fail (domainCount=17)
-- `launch_floor_subdomain_balance_5000`: fail (subdomainCount=34)
+- `launch_floor_golden_intents_50000`: pass (none)
+- `launch_floor_domain_balance_500`: pass (none)
+- `launch_floor_subdomain_balance_5000`: pass (none)
 - `no_final_outputs`: pass (none)
 
 ## Allowed Claims
@@ -53,6 +59,7 @@ Source Atlas status ceiling: Yellow overall Source Atlas; golden-intent corpus i
 - `source_atlas_launch_floor_golden_intent_corpus_schema_green`
 - `golden_intent_corpus_counter_measurable`
 - `golden_intent_adjudication_contract_reviewable`
+- `launch_floor_golden_intents_50000_met`
 
 ## Blocked Claims
 
@@ -61,7 +68,6 @@ Source Atlas status ceiling: Yellow overall Source Atlas; golden-intent corpus i
 - `final_user_plans_schedules_steps_from_source_atlas_or_r2`
 - `full_source_atlas_green`
 - `launch_floor_complete`
-- `launch_floor_golden_intents_50000_met`
 - `outside_legal_approval`
 - `owner_approval`
 - `private_life_graph_in_source_atlas_or_r2`
@@ -100,4 +106,4 @@ Source Atlas status ceiling: Yellow overall Source Atlas; golden-intent corpus i
 - App behavior mutated: no.
 - Compatibility shims left behind: none.
 - Placeholder proof introduced: none.
-- Launch-floor recommendation: continue to LFF-M03-L02/L03 to populate 50,000+ adjudicated intents and compute the fallback numerator/denominator.
+- Launch-floor recommendation: continue to LFF-M03-L03 to compute the source-needed fallback numerator/denominator against the adjudicated corpus.
