@@ -965,8 +965,8 @@
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "244:502",
-        "frame_name": "EXPLORATION - VSP-07 - Option F - Attached Receipt Stack - R1",
+        "node_id": "250:93",
+        "frame_name": "EXPLORATION - VSP-07 - PART 02 - attached receipt stack refinements - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-part-01-options-board-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png",
@@ -979,7 +979,14 @@
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-crop-r1.png",
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/images/vsp-07-trust-launch-board-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png",
-          "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png"
+          "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-attached-receipt-stack-refinements-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-a-object-wake-stack-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-b-receipt-aperture-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-c-mutation-ledger-stack-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-d-undo-corridor-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-e-private-source-veil-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
@@ -987,7 +994,9 @@
           "docs/qa/evidence/2026-06-29-vsp-north-star-figma/screenshot-index.md",
           "docs/qa/evidence/2026-06-29-vsp-code-connect-readiness/manifest.json",
           "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
-          "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md"
+          "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
+          "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -1043,7 +1052,9 @@
           "yellow-proof",
           "figma-exploration",
           "owner-selected-direction",
-          "selected-f-attached-receipt-stack"
+          "selected-f-attached-receipt-stack",
+          "part-02-refinement",
+          "recommended-b-receipt-aperture"
         ],
         "should_create_or_update_now": false
       },
@@ -1084,16 +1095,20 @@
         "Source/trust copy can overclaim proof or privacy readiness.",
         "Cross-object receipts can become activity-feed UI if not tied to an owning object.",
         "Option F can become an activity feed, receipt destination, or History surface if Part 02 does not keep receipts attached to owning objects.",
-        "Cross-object receipt stacking can overexpose architecture if it is not scoped to changed objects and narrow reasons."
+        "Cross-object receipt stacking can overexpose architecture if it is not scoped to changed objects and narrow reasons.",
+        "Part 02 Option E carries VSP-08 boundary risk and should not become VSP-07 source/account architecture.",
+        "Part 02 broader stack variants can become receipt-feed UI if the final candidate does not preserve single object ownership."
       ],
       "missing_evidence": [
         "live SwiftUI inspection parity screenshot",
         "device screenshot",
         "manual accessibility matrix",
         "privacy/trust disclosure proof",
-        "final VSP-07 Option F candidate package approval"
+        "owner selection for VSP-07 Part 02 direction",
+        "final VSP-07 candidate package approval"
       ],
       "green_blockers": [
+        "No owner selection for VSP-07 Part 02 direction.",
         "No final VSP-07 candidate package approval.",
         "No live SwiftUI parity screenshot.",
         "No contextual inspection proof.",
@@ -1105,8 +1120,12 @@
         "Owner selected Option F Attached Receipt Stack on 2026-07-01 as the VSP-07 Part 01 direction for Part 02 refinement.",
         "Prior Option C recommendation remains a guardrail for object attachment, but Option F is the selected direction.",
         "Option F must remain temporary contextual inspection state and must not become a root receipts, history, proof, privacy, source, or trust surface.",
-        "Selection proof is recorded in docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md.",
-        "No final VSP-07 candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior proof, Visual Green, Release Green, or Done is claimed."
+        "No final VSP-07 candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior proof, Visual Green, Release Green, or Done is claimed.",
+        "Part 02 refinement board created on 2026-07-01 at node 250:93 with six Attached Receipt Stack refinement directions.",
+        "Recommended Part 02 base is Option B Receipt Aperture because it keeps one owning object in control of the inspection.",
+        "Option F Return Ribbon Stack should be treated as a return-path rule if B is selected, not as a merged composition.",
+        "Option E Private Source Veil remains VSP-08-adjacent boundary context unless explicitly selected for VSP-07.",
+        "Part 02 remains Yellow exploration: no owner selection, final candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed."
       ]
     },
     {

@@ -1150,6 +1150,139 @@
       "notes": [
         "Owner-selected VSP-07 Part 01 direction: temporary cross-object attached receipt stack, not an activity feed or root destination."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "250:93",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - PART 02 - attached receipt stack refinements - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-attached-receipt-stack-refinements-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+      "notes": [
+        "Part 02 refinement board with six Attached Receipt Stack refinement directions. Recommended base: Option B Receipt Aperture. Yellow exploration only."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "250:104",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Part 02 - Option A - Object Wake Stack - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-a-object-wake-stack-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+      "notes": [
+        "Part 02 option: object wake stack. Evidence blooms under changed object and collapses back."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "250:119",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Part 02 - Option B - Receipt Aperture - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-b-receipt-aperture-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+      "notes": [
+        "Recommended Part 02 option: one object-owned receipt aperture pages receipt layers inside one inspection detail."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "250:134",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Part 02 - Option C - Mutation Ledger Stack - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-c-mutation-ledger-stack-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+      "notes": [
+        "Part 02 option: narrow related-change ledger; must not become activity feed."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "250:149",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Part 02 - Option D - Undo Corridor - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-d-undo-corridor-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+      "notes": [
+        "Part 02 option: undo/review/recovery corridor for reversible receipts."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "250:164",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Part 02 - Option E - Private Source Veil - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-e-private-source-veil-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+      "notes": [
+        "Part 02 option: privacy/source boundary emphasis; VSP-08-adjacent and must remain object inspection if used."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "250:179",
+      "node_id_status": "known",
+      "frame_name": "EXPLORATION - VSP-07 - Part 02 - Option F - Return Ribbon Stack - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
+      "notes": [
+        "Part 02 option: receipt rows carry visible return ribbons to owning objects."
+      ]
     }
   ]
 }

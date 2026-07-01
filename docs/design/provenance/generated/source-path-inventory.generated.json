@@ -3503,7 +3503,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 196,
+      "line_count": 205,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutor.swift"
     },
     {
@@ -3678,7 +3678,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 224,
+      "line_count": 233,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/CommandSpine/RuntimeCommandMutationCommitter.swift"
     },
     {
@@ -3852,6 +3852,17 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 144,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventCommandReplayAdapter.swift"
+    },
+    {
+      "candidate_vsp_ids": [
         "VSP-04"
       ],
       "exists": true,
@@ -3888,7 +3899,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 53,
+      "line_count": 61,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/EventJournal/RuntimeEventReplay.swift"
     },
     {
@@ -4001,7 +4012,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 163,
+      "line_count": 219,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/MigrationRepair/RuntimeDoctor.swift"
     },
     {
@@ -10225,7 +10236,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 353,
+      "line_count": 360,
       "path": "Native/Ambitions/Interaction/TodayCommandActionHandler.swift"
     },
     {
@@ -18524,7 +18535,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 764,
+      "line_count": 838,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/AmbitionsCommandExecutorTests.swift"
     },
     {
@@ -18538,7 +18549,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 384,
+      "line_count": 481,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/CommandSpineLeafTests.swift"
     },
     {
@@ -18566,7 +18577,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 127,
+      "line_count": 128,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/LocalRuntimeOSCommandSpineOwnershipTests.swift"
     },
     {
@@ -18579,6 +18590,20 @@
       "kind": "test",
       "line_count": 242,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/CommandSpine/PolicyGuardedCommandExecutorTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-05",
+        "VSP-07",
+        "VSP-09",
+        "VSP-10"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 124,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/Diagnostics/FeatureServiceMutationAuthorityTests.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -18683,13 +18708,15 @@
     },
     {
       "candidate_vsp_ids": [
+        "VSP-02",
         "VSP-04",
+        "VSP-05",
         "VSP-07"
       ],
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 83,
+      "line_count": 153,
       "path": "Native/AmbitionsTests/LocalRuntimeOS/MigrationRepair/RuntimeDoctorTests.swift"
     },
     {
@@ -20998,7 +21025,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "test",
-      "line_count": 1627,
+      "line_count": 1629,
       "path": "Native/AmbitionsTests/Today/TodayViewModelTests.swift"
     },
     {
@@ -22860,7 +22887,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1844,
+  "entry_count": 1846,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1
