@@ -40,6 +40,8 @@ LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST = (
 )
 R2_LAYOUT_PROOF = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-launch-floor-r2-layout-proof-lff-m02.json"
 GOLDEN_INTENT_CORPUS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-launch-floor-golden-intent-corpus-lff-m03.json"
+FALLBACK_METRIC = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-source-needed-fallback-metric-lff-m03.json"
+MISSING_SHARD_EVENTS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-events-lff-m03.json"
 NATIVE_BRIDGE_GAUNTLET_SOURCE = REPO_ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SourceAtlas" / "SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
 
 
@@ -73,6 +75,10 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert counts["launchFloorGoldenIntentStaleSource"] == 50
     assert counts["launchFloorGoldenIntentCandidateOnly"] == 50
     assert counts["goldenIntentCorpusCounter"] == 50_000
+    assert counts["sourceNeededFallbackNumerator"] == 200
+    assert counts["sourceNeededFallbackDenominator"] == 50_000
+    assert counts["missingShardEvents"] == 200
+    assert counts["missingShardEventsWithDurableExpansion"] == 0
     assert counts["packablePublicReferenceClaimProxy"] == 71
     assert counts["liveR2ObjectProxy"] == 196
     assert counts["sourceLaneCount"] == 34
@@ -86,8 +92,11 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert result["launchFloorTargetStatus"]["subdomains_5000"]["status"] == "met"
     assert result["launchFloorTargetStatus"]["golden_intents_50000"]["status"] == "met"
     assert result["launchFloorTargetStatus"]["golden_intents_50000"]["measuredValue"] == 50_000
-    assert result["launchFloorTargetStatus"]["source_needed_fallback_under_5_percent"]["status"] == "not_measurable_fail_closed"
+    assert result["launchFloorTargetStatus"]["source_needed_fallback_under_5_percent"]["status"] == "met"
+    assert result["launchFloorTargetStatus"]["source_needed_fallback_under_5_percent"]["measuredRate"] == 200 / 50_000
     assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["status"] == "not_measurable_fail_closed"
+    assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["evidence"]["missingShardEventCount"] == 200
+    assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["evidence"]["durableExpansionEventCount"] == 0
     assert "source_atlas_launch_floor_ready" in result["blockedClaims"]
     assert "final_user_plans_schedules_steps_from_source_atlas_or_r2" in result["blockedClaims"]
 
@@ -179,6 +188,8 @@ def _current_options(tmp_path: Path) -> SourceAtlasLaunchFloorLedgerOptions:
         shard_corpus_manifest_path=LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST,
         r2_layout_proof_path=R2_LAYOUT_PROOF,
         golden_intent_corpus_path=GOLDEN_INTENT_CORPUS,
+        fallback_metric_path=FALLBACK_METRIC,
+        missing_shard_events_path=MISSING_SHARD_EVENTS,
         native_runtime_bridge_gauntlet_source_path=NATIVE_BRIDGE_GAUNTLET_SOURCE,
         output_root=tmp_path / "current-launch-floor",
         created_at="2026-07-01T00:00:00Z",
@@ -220,7 +231,14 @@ def _passing_fixture_paths(tmp_path: Path) -> dict[str, Path]:
     write_json(paths["expansion_chain"], {"kind": "ambitions.sourceAtlas.autonomousDomainExpansionChain.v1", "valid": True, "allowedClaims": ["deterministic_autonomous_candidate_domain_expansion_chain"], "recordCounts": {"candidateRoutes": 2, "r2PublishOperations": 0}})
     write_json(paths["shard_manifest"], _launch_floor_shard_manifest())
     write_json(paths["golden_corpus"], _golden_corpus_report())
-    write_json(paths["fallback_metric"], {"kind": "ambitions.sourceAtlas.sourceNeededFallbackMetric.v1", "recordCounts": {"sourceNeededFallbacks": 49, "lawfulGoals": 1000}})
+    write_json(
+        paths["fallback_metric"],
+        {
+            "kind": "ambitions.sourceAtlas.sourceNeededFallbackMetric.v1",
+            "valid": True,
+            "recordCounts": {"sourceNeededFallbacks": 49, "lawfulGoals": 1000},
+        },
+    )
     write_json(paths["missing_events"], _missing_events())
     return paths
 
@@ -311,6 +329,47 @@ def test_launch_floor_ledger_rejects_raw_golden_intent_counter_without_corpus_co
         "golden intent corpus kind must be ambitions.sourceAtlas.launchFloorGoldenIntentCorpus.v1" in issue
         for issue in result["launchFloorGoldenIntentCorpus"]["issues"]
     )
+
+
+def test_launch_floor_ledger_rejects_raw_fallback_counter_without_metric_contract(tmp_path: Path):
+    paths = _passing_fixture_paths(tmp_path)
+    write_json(
+        paths["fallback_metric"],
+        {
+            "kind": "ambitions.sourceAtlas.rawFallbackCounter.v1",
+            "recordCounts": {"sourceNeededFallbacks": 1, "lawfulGoals": 1000},
+        },
+    )
+
+    result = build_source_atlas_launch_floor_ledger(
+        SourceAtlasLaunchFloorLedgerOptions(
+            frontier_config_path=paths["frontier"],
+            source_lane_registry_path=paths["source_registry"],
+            legal_terms_registry_path=paths["legal_registry"],
+            api_governance_registry_path=paths["api_registry"],
+            production_target_ledger_path=paths["production_ledger"],
+            r2_live_inventory_path=paths["r2_inventory"],
+            goal_domain_gauntlet_path=paths["gauntlet"],
+            completion_audit_path=paths["completion"],
+            release_proof_packet_path=paths["release"],
+            production_supervisor_path=paths["supervisor"],
+            autonomous_control_loop_path=paths["control_loop"],
+            autonomous_domain_expansion_chain_path=paths["expansion_chain"],
+            shard_corpus_manifest_path=paths["shard_manifest"],
+            golden_intent_corpus_path=paths["golden_corpus"],
+            fallback_metric_path=paths["fallback_metric"],
+            missing_shard_events_path=paths["missing_events"],
+            output_root=tmp_path / "raw-fallback-counter-rejected",
+            created_at="2026-07-01T00:00:00Z",
+            run_label="synthetic-raw-fallback-counter",
+        )
+    )
+
+    assert result["valid"], result["issues"]
+    assert result["launchFloorMet"] is False
+    assert result["recordCounts"]["sourceNeededFallbackNumerator"] is None
+    assert result["recordCounts"]["sourceNeededFallbackDenominator"] is None
+    assert result["launchFloorTargetStatus"]["source_needed_fallback_under_5_percent"]["status"] == "not_measurable_fail_closed"
 
 
 def _frontier_config() -> dict:

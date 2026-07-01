@@ -129,6 +129,11 @@ from .launch_floor_golden_intent_corpus import (
     compile_launch_floor_golden_intent_corpus,
     launch_floor_golden_intent_corpus_markdown,
 )
+from .source_needed_fallback_metric import (
+    SourceNeededFallbackMetricOptions,
+    compile_source_needed_fallback_metric,
+    source_needed_fallback_metric_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -1014,6 +1019,20 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_golden_intent_parser.add_argument("--run-label", default="current")
     launch_floor_golden_intent_parser.add_argument("--emit-evidence")
     launch_floor_golden_intent_parser.add_argument("--markdown")
+
+    source_needed_fallback_parser = sub.add_parser("source-needed-fallback-metric")
+    source_needed_fallback_parser.add_argument(
+        "--golden-intent-corpus-report",
+        default="docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json",
+    )
+    source_needed_fallback_parser.add_argument("--normalized-corpus")
+    source_needed_fallback_parser.add_argument("--previous-metric")
+    source_needed_fallback_parser.add_argument("--output-root", required=True)
+    source_needed_fallback_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    source_needed_fallback_parser.add_argument("--run-label", default="current")
+    source_needed_fallback_parser.add_argument("--emit-evidence")
+    source_needed_fallback_parser.add_argument("--emit-missing-shard-events")
+    source_needed_fallback_parser.add_argument("--markdown")
 
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
@@ -2505,6 +2524,29 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(launch_floor_golden_intent_corpus_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "source-needed-fallback-metric":
+        result = compile_source_needed_fallback_metric(
+            SourceNeededFallbackMetricOptions(
+                golden_intent_corpus_report_path=Path(args.golden_intent_corpus_report),
+                normalized_corpus_path=Path(args.normalized_corpus) if args.normalized_corpus else None,
+                previous_metric_path=Path(args.previous_metric) if args.previous_metric else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                emit_missing_shard_events_path=Path(args.emit_missing_shard_events)
+                if args.emit_missing_shard_events
+                else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(source_needed_fallback_metric_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":

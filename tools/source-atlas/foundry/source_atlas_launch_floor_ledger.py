@@ -18,11 +18,12 @@ from .boundary import boundary_issues_for_value, is_boundary_line
 from .launch_floor_domain_taxonomy import launch_floor_domain_taxonomy_summary
 from .launch_floor_golden_intent_corpus import launch_floor_golden_intent_corpus_summary
 from .launch_floor_shard_corpus import launch_floor_shard_corpus_summary
+from .source_needed_fallback_metric import SOURCE_ATLAS_SOURCE_NEEDED_FALLBACK_METRIC_KIND
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_id, write_json
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m03-l02"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m03-l03"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -944,13 +945,18 @@ def _validation_matrix() -> list[dict[str, str]]:
         },
         {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
-            "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, and no source/R2/native mutation",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-events-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l03-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, validated source-needed fallback metric, LFF-M04-pending missing-shard events, and no source/R2/native mutation",
         },
         {
             "validationID": "launch_floor_golden_intent_corpus",
             "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-golden-intent-corpus --input tools/source-atlas/frontier/launch-floor-domain-taxonomy.json --input-format launch-floor-taxonomy --source-lane-registry tools/source-atlas/governance/source-lane-registry.json --production-target-ledger tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json --target-count 50000 --intents-per-subdomain 10 --control-records-per-domain 2 --output-root tools/source-atlas/generated/source-atlas-launch-floor-golden-intent-corpus/lff-m03-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.md",
             "purpose": "derive the balanced 50,000+ adjudicated golden-intent corpus from the accepted launch-floor taxonomy and governance inputs",
+        },
+        {
+            "validationID": "source_needed_fallback_metric",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-needed-fallback-metric --golden-intent-corpus-report docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-source-needed-fallback-metric/lff-m03-l03-current --emit-evidence docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --emit-missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-events-lff-m03.json --markdown docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.md",
+            "purpose": "derive the lawful-goal fallback numerator/denominator from the adjudicated golden-intent corpus and emit LFF-M04-pending missing-shard events without claiming continuous expansion",
         },
         {
             "validationID": "launch_floor_shard_corpus",
@@ -1067,6 +1073,8 @@ def _int(value: Any) -> int | None:
 def _fallback_fraction(metric: Any) -> tuple[int | None, int | None]:
     if not isinstance(metric, dict):
         return None, None
+    if metric.get("kind") != SOURCE_ATLAS_SOURCE_NEEDED_FALLBACK_METRIC_KIND or metric.get("valid") is not True:
+        return None, None
     numerator = _record_count(metric, "sourceNeededFallbackNumerator", "source_needed_fallback_numerator", "fallbackNumerator")
     denominator = _record_count(metric, "lawfulGoalDenominator", "lawful_goal_denominator", "fallbackDenominator", "totalLawfulGoals")
     if numerator is not None and denominator is not None:
@@ -1083,10 +1091,12 @@ def _missing_shard_event_summary(events_artifact: Any) -> dict[str, Any]:
         return {"eventCount": 0, "durableExpansionEventCount": 0, "issues": ["missing-shard events are not a list"]}
     issues = []
     durable_count = 0
+    non_durable_count = 0
+    malformed_count = 0
     durable_states = {"queued", "review_queued", "source_review_queued", "approved", "activated", "rejected_lawful_no_public_source"}
     for index, event in enumerate(raw_events):
         if not isinstance(event, dict):
-            issues.append(f"event[{index}] is not an object")
+            malformed_count += 1
             continue
         state = str(event.get("expansionState") or event.get("expansion_state") or event.get("status") or "")
         has_work = bool(event.get("workItemID") or event.get("work_item_id") or event.get("expansionWorkItemID"))
@@ -1094,7 +1104,11 @@ def _missing_shard_event_summary(events_artifact: Any) -> dict[str, Any]:
         if state in durable_states and has_work and has_public_boundary:
             durable_count += 1
         else:
-            issues.append(f"event[{index}] lacks durable governed public/reference expansion state")
+            non_durable_count += 1
+    if malformed_count:
+        issues.append(f"{malformed_count} missing-shard events are not objects")
+    if non_durable_count:
+        issues.append(f"{non_durable_count} missing-shard events lack durable governed public/reference expansion state")
     return {"eventCount": len(raw_events), "durableExpansionEventCount": durable_count, "issues": issues}
 
 
