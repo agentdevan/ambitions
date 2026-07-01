@@ -31,6 +31,10 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
     let proofReferenceIDs: [String]
     let eventLedgerEntryIDs: [String]
     let commandIDs: [String]
+    let runtimeTransactionID: String?
+    let runtimeEventID: String?
+    let runtimeReceiptID: String?
+    let runtimeReplayTraceID: String?
     let schemaVersion: String
 
     init(
@@ -48,6 +52,10 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
         proofReferenceIDs: [String] = [],
         eventLedgerEntryIDs: [String] = [],
         commandIDs: [String] = [],
+        runtimeTransactionID: String? = nil,
+        runtimeEventID: String? = nil,
+        runtimeReceiptID: String? = nil,
+        runtimeReplayTraceID: String? = nil,
         schemaVersion: String = sourceRecordLedgerSchemaVersion
     ) {
         self.id = Self.normalized(id, fallback: "\(kind.rawValue).\(sourceID)")
@@ -64,6 +72,10 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
         self.proofReferenceIDs = Self.orderedUnique(proofReferenceIDs)
         self.eventLedgerEntryIDs = Self.orderedUnique(eventLedgerEntryIDs)
         self.commandIDs = Self.orderedUnique(commandIDs)
+        self.runtimeTransactionID = Self.normalizedOptional(runtimeTransactionID)
+        self.runtimeEventID = Self.normalizedOptional(runtimeEventID)
+        self.runtimeReceiptID = Self.normalizedOptional(runtimeReceiptID)
+        self.runtimeReplayTraceID = Self.normalizedOptional(runtimeReplayTraceID)
         self.schemaVersion = schemaVersion
     }
 
@@ -77,11 +89,19 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
             occurredAt: commandRecord.recordedAt,
             privacy: commandRecord.privacy,
             containsPrivateLifeGraph: true,
-            commandIDs: [commandRecord.commandID]
+            commandIDs: [commandRecord.commandID],
+            runtimeTransactionID: RuntimeTrustLineage.eventMetadataLineage(commandRecord.result.metadata)?.runtimeTransactionID,
+            runtimeEventID: RuntimeTrustLineage.eventMetadataLineage(commandRecord.result.metadata)?.runtimeEventID,
+            runtimeReceiptID: RuntimeTrustLineage.eventMetadataLineage(commandRecord.result.metadata)?.runtimeReceiptID,
+            runtimeReplayTraceID: RuntimeTrustLineage.eventMetadataLineage(commandRecord.result.metadata)?.runtimeReplayTraceID
         )
     }
 
-    static func runtimeEvent(_ eventLedgerEntry: EventLedgerEntry, commandID: String?) -> SourceRecordLedgerRecord {
+    static func runtimeEvent(
+        _ eventLedgerEntry: EventLedgerEntry,
+        commandID: String?,
+        runtimeLineage: RuntimeTrustLineage?
+    ) -> SourceRecordLedgerRecord {
         SourceRecordLedgerRecord(
             id: "source.event.\(eventLedgerEntry.id)",
             kind: .runtimeEvent,
@@ -93,7 +113,11 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
             localOnly: eventLedgerEntry.localOnly,
             containsPrivateLifeGraph: true,
             eventLedgerEntryIDs: [eventLedgerEntry.id],
-            commandIDs: [commandID].compactMap { $0 }
+            commandIDs: [commandID].compactMap { $0 },
+            runtimeTransactionID: runtimeLineage?.runtimeTransactionID,
+            runtimeEventID: runtimeLineage?.runtimeEventID,
+            runtimeReceiptID: runtimeLineage?.runtimeReceiptID,
+            runtimeReplayTraceID: runtimeLineage?.runtimeReplayTraceID
         )
     }
 
@@ -109,7 +133,11 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
             localOnly: receiptRecord.localOnly,
             containsPrivateLifeGraph: true,
             receiptIDs: [receiptRecord.id],
-            proofReferenceIDs: receiptRecord.proofReferenceIDs
+            proofReferenceIDs: receiptRecord.proofReferenceIDs,
+            runtimeTransactionID: receiptRecord.runtimeLineage?.runtimeTransactionID,
+            runtimeEventID: receiptRecord.runtimeLineage?.runtimeEventID,
+            runtimeReceiptID: receiptRecord.runtimeLineage?.runtimeReceiptID,
+            runtimeReplayTraceID: receiptRecord.runtimeLineage?.runtimeReplayTraceID
         )
     }
 
@@ -128,7 +156,11 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
             localOnly: true,
             containsPrivateLifeGraph: true,
             receiptIDs: [receiptRecord.id],
-            proofReferenceIDs: [proofReference.id]
+            proofReferenceIDs: [proofReference.id],
+            runtimeTransactionID: receiptRecord.runtimeLineage?.runtimeTransactionID,
+            runtimeEventID: receiptRecord.runtimeLineage?.runtimeEventID,
+            runtimeReceiptID: receiptRecord.runtimeLineage?.runtimeReceiptID,
+            runtimeReplayTraceID: receiptRecord.runtimeLineage?.runtimeReplayTraceID
         )
     }
 
@@ -159,12 +191,31 @@ struct SourceRecordLedgerRecord: Codable, Sendable, Equatable, Hashable, Identif
         boundary == .publicReference &&
             kind == .publicSourceAtlasReference &&
             containsPrivateLifeGraph == false &&
-            privacy == .standard
+            privacy == .standard &&
+            runtimeTransactionID == nil &&
+            runtimeEventID == nil &&
+            runtimeReceiptID == nil &&
+            runtimeReplayTraceID == nil
+    }
+
+    var hasPrivateRuntimeLineage: Bool {
+        runtimeTransactionID != nil &&
+            runtimeEventID != nil &&
+            runtimeReceiptID != nil &&
+            runtimeReplayTraceID != nil
     }
 
     private static func normalized(_ value: String, fallback: String) -> String {
         let trimmed = value.trimmingCharacters(in: .whitespacesAndNewlines)
         return trimmed.isEmpty ? fallback : trimmed
+    }
+
+    private static func normalizedOptional(_ value: String?) -> String? {
+        guard let trimmed = value?.trimmingCharacters(in: .whitespacesAndNewlines),
+              trimmed.isEmpty == false else {
+            return nil
+        }
+        return trimmed
     }
 
     private static func orderedUnique(_ values: [String]) -> [String] {

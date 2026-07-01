@@ -3,6 +3,11 @@ import Foundation
 enum TrustSystemCommitError: Error, Sendable, Equatable {
     case commandMismatch(expected: String, actual: String?)
     case nonLocalInput(String)
+    case runtimeCommitReceiptNotReplayable(String)
+    case runtimeCommitReceiptCommandMismatch(expected: String, actual: String)
+    case runtimeCommitReceiptEventMismatch(expected: String, actual: String)
+    case runtimeCommitReceiptCursorMismatch(expected: RuntimeEventCursor, actual: RuntimeEventCursor)
+    case runtimeCommitReceiptReceiptMismatch(expected: String, actual: String)
     case receiptMissingAffectedObject(String)
     case receiptCommandMismatch(receiptID: String, commandID: String)
 }
@@ -21,32 +26,42 @@ struct TrustSystemPublicSourceAtlasReference: Sendable, Equatable, Hashable {
 
 struct TrustSystemCommitInput: Sendable, Equatable {
     let commandRecord: AmbitionsCommandExecutionRecord
-    let runtimeEvent: RuntimeEvent
+    let runtimeEventEnvelope: RuntimeEventEnvelope
+    let runtimeCommitReceipt: RuntimeCommitReceipt
     let receipt: ActionReceipt
     let proofRelevance: ActionReceiptProofRelevance
     let publicSourceAtlasReferences: [TrustSystemPublicSourceAtlasReference]
 
     init(
         commandRecord: AmbitionsCommandExecutionRecord,
-        runtimeEvent: RuntimeEvent,
+        runtimeEventEnvelope: RuntimeEventEnvelope,
+        runtimeCommitReceipt: RuntimeCommitReceipt,
         receipt: ActionReceipt,
         proofRelevance: ActionReceiptProofRelevance = .notProof,
         publicSourceAtlasReferences: [TrustSystemPublicSourceAtlasReference] = []
     ) {
         self.commandRecord = commandRecord
-        self.runtimeEvent = runtimeEvent
+        self.runtimeEventEnvelope = runtimeEventEnvelope
+        self.runtimeCommitReceipt = runtimeCommitReceipt
         self.receipt = receipt
         self.proofRelevance = proofRelevance
         self.publicSourceAtlasReferences = publicSourceAtlasReferences
+    }
+
+    var runtimeEvent: RuntimeEvent {
+        runtimeEventEnvelope.event
     }
 }
 
 struct TrustSystemCommitPlan: Sendable, Equatable {
     let commandRecord: AmbitionsCommandExecutionRecord
-    let runtimeEvent: RuntimeEvent
+    let runtimeEventEnvelope: RuntimeEventEnvelope
+    let runtimeCommitReceipt: RuntimeCommitReceipt
+    let runtimeLineage: RuntimeTrustLineage
     let eventLedgerEntry: EventLedgerEntry
     let receiptRecord: ActionReceiptHistoryRecord
     let proofLedgerEntry: ActionReceiptProofLedgerEntry
+    let proofLedger: ProofLedger
     let sourceRecordLedger: SourceRecordLedger
     let undoLedger: UndoLedger
     let auditTrail: AuditTrail
@@ -58,7 +73,17 @@ struct TrustSystemCommitPlan: Sendable, Equatable {
             commandID: commandRecord.commandID,
             receiptID: receiptRecord.id
         ) &&
+            auditTrail.hasCompleteRuntimeLineage(
+                commandID: commandRecord.commandID,
+                receiptID: receiptRecord.id
+            ) &&
+            runtimeLineage.hasCompleteTrustTrace &&
+            receiptRecord.hasRuntimeLineage &&
+            proofLedgerEntry.hasRuntimeLineage &&
+            proofLedger.hasRuntimeLineage &&
+            undoLedger.entry(receiptID: receiptRecord.id)?.hasRuntimeRollbackLineage == true &&
             historyProjection.results.isEmpty == false &&
+            historyProjection.results.allSatisfy { $0.runtimeLineage?.runtimeTransactionID == runtimeLineage.runtimeTransactionID } &&
             replayOutcome.doubleApplyDisposition == .skipDuplicateMutation &&
             sourceRecordLedger.separationReport.isSeparated
     }
@@ -77,19 +102,27 @@ struct TrustSystemCommitPlanner: Sendable {
     ) throws -> TrustSystemCommitPlan {
         try validate(input)
 
+        let runtimeLineage = RuntimeTrustLineage(runtimeCommitReceipt: input.runtimeCommitReceipt)
         let eventLedgerEntry = makeEventLedgerEntry(input: input, plannedAt: plannedAt)
         let receiptRecord = ActionReceiptHistoryRecord(
             receipt: input.receipt,
             privacyLevel: input.runtimeEvent.privacy.receiptPrivacyLevel,
             localOnly: input.receipt.localOnlyForTrustInput(defaultValue: input.runtimeEvent.localOnly),
-            proofRelevance: input.proofRelevance
+            proofRelevance: input.proofRelevance,
+            runtimeLineage: runtimeLineage
         )
         let proofLedgerEntry = ActionReceiptProofLedgerEntry(
             receipt: receiptRecord.receipt,
             privacyLevel: receiptRecord.privacyLevel,
             localOnly: receiptRecord.localOnly,
             visibilityLevels: [.peek, .trail, .search],
-            proofRelevance: receiptRecord.proofRelevance
+            proofRelevance: receiptRecord.proofRelevance,
+            runtimeLineage: runtimeLineage
+        )
+        let proofLedger = ProofLedger(
+            proofLedgerEntry: proofLedgerEntry,
+            eventLedgerEntryID: eventLedgerEntry.id,
+            generatedAt: plannedAt
         )
         let sourceRecordLedger = SourceRecordLedger(records: makeSourceRecords(
             input: input,
@@ -100,7 +133,8 @@ struct TrustSystemCommitPlanner: Sendable {
         ))
         let undoEntry = UndoLedgerEntry(
             commandID: input.commandRecord.commandID,
-            receiptRecord: receiptRecord
+            receiptRecord: receiptRecord,
+            runtimeLineage: runtimeLineage
         )
         let undoLedger = UndoLedger(entries: [undoEntry])
         let historyProjection = historyQueryEngine.project(
@@ -122,15 +156,19 @@ struct TrustSystemCommitPlanner: Sendable {
             sourceRecordLedger: sourceRecordLedger,
             undoEntry: undoEntry,
             historyProjection: historyProjection,
-            occurredAt: plannedAt
+            occurredAt: plannedAt,
+            runtimeLineage: runtimeLineage
         )
 
         return TrustSystemCommitPlan(
             commandRecord: input.commandRecord,
-            runtimeEvent: input.runtimeEvent,
+            runtimeEventEnvelope: input.runtimeEventEnvelope,
+            runtimeCommitReceipt: input.runtimeCommitReceipt,
+            runtimeLineage: runtimeLineage,
             eventLedgerEntry: eventLedgerEntry,
             receiptRecord: receiptRecord,
             proofLedgerEntry: proofLedgerEntry,
+            proofLedger: proofLedger,
             sourceRecordLedger: sourceRecordLedger,
             undoLedger: undoLedger,
             auditTrail: auditTrail,
@@ -144,6 +182,36 @@ struct TrustSystemCommitPlanner: Sendable {
             throw TrustSystemCommitError.commandMismatch(
                 expected: input.commandRecord.commandID,
                 actual: input.runtimeEvent.commandID
+            )
+        }
+        guard input.runtimeCommitReceipt.hasReplayableProof else {
+            throw TrustSystemCommitError.runtimeCommitReceiptNotReplayable(input.runtimeCommitReceipt.id)
+        }
+        guard input.runtimeCommitReceipt.localOnly else {
+            throw TrustSystemCommitError.nonLocalInput("runtime commit receipt")
+        }
+        guard input.runtimeCommitReceipt.commandID == input.commandRecord.commandID else {
+            throw TrustSystemCommitError.runtimeCommitReceiptCommandMismatch(
+                expected: input.commandRecord.commandID,
+                actual: input.runtimeCommitReceipt.commandID
+            )
+        }
+        guard input.runtimeCommitReceipt.eventID == input.runtimeEventEnvelope.id else {
+            throw TrustSystemCommitError.runtimeCommitReceiptEventMismatch(
+                expected: input.runtimeCommitReceipt.eventID,
+                actual: input.runtimeEventEnvelope.id
+            )
+        }
+        guard input.runtimeCommitReceipt.eventCursor == input.runtimeEventEnvelope.cursor else {
+            throw TrustSystemCommitError.runtimeCommitReceiptCursorMismatch(
+                expected: input.runtimeCommitReceipt.eventCursor,
+                actual: input.runtimeEventEnvelope.cursor
+            )
+        }
+        guard input.runtimeCommitReceipt.receiptID == input.receipt.id else {
+            throw TrustSystemCommitError.runtimeCommitReceiptReceiptMismatch(
+                expected: input.runtimeCommitReceipt.receiptID,
+                actual: input.receipt.id
             )
         }
         guard input.commandRecord.localOnly else {
@@ -168,6 +236,7 @@ struct TrustSystemCommitPlanner: Sendable {
         input: TrustSystemCommitInput,
         plannedAt: String
     ) -> EventLedgerEntry {
+        let runtimeLineage = RuntimeTrustLineage(runtimeCommitReceipt: input.runtimeCommitReceipt)
         let resultSummary: String
         let resultStatus: AmbitionsCommandExecutionStatus
         switch input.runtimeEvent.payload {
@@ -210,8 +279,10 @@ struct TrustSystemCommitPlanner: Sendable {
                 "runtimeEventKind": input.runtimeEvent.kind.rawValue,
                 "receiptID": input.receipt.id,
                 "plannedAt": plannedAt,
-            ],
-            payload: input.runtimeEvent.metadata.merging(input.commandRecord.result.metadata) { _, new in new },
+            ].merging(runtimeLineage.metadata) { _, new in new },
+            payload: input.runtimeEvent.metadata
+                .merging(input.commandRecord.result.metadata) { _, new in new }
+                .merging(runtimeLineage.metadata) { _, new in new },
             privacy: input.runtimeEvent.privacy,
             localOnly: input.runtimeEvent.localOnly,
             createdAt: plannedAt,
@@ -228,7 +299,11 @@ struct TrustSystemCommitPlanner: Sendable {
     ) -> [SourceRecordLedgerRecord] {
         var records = [
             SourceRecordLedgerRecord.command(input.commandRecord),
-            SourceRecordLedgerRecord.runtimeEvent(eventLedgerEntry, commandID: input.commandRecord.commandID),
+            SourceRecordLedgerRecord.runtimeEvent(
+                eventLedgerEntry,
+                commandID: input.commandRecord.commandID,
+                runtimeLineage: receiptRecord.runtimeLineage
+            ),
             SourceRecordLedgerRecord.actionReceipt(receiptRecord),
         ]
 

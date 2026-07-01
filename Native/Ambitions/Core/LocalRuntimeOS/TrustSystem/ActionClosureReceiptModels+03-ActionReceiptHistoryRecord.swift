@@ -7,6 +7,7 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
     let proofRelevance: ActionReceiptProofRelevance
     let requiresConfirmationBeforeBroaderUse: Bool
     let proofFreshnessLineage: ActionReceiptProofFreshnessLineage
+    let runtimeLineage: RuntimeTrustLineage?
 
     init(
         receipt: ActionReceipt,
@@ -14,13 +15,15 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
         localOnly: Bool = true,
         proofRelevance: ActionReceiptProofRelevance? = nil,
         requiresConfirmationBeforeBroaderUse: Bool? = nil,
-        proofFreshnessLineage: ActionReceiptProofFreshnessLineage? = nil
+        proofFreshnessLineage: ActionReceiptProofFreshnessLineage? = nil,
+        runtimeLineage: RuntimeTrustLineage? = nil
     ) {
         self.receipt = receipt
         self.privacyLevel = privacyLevel
         self.localOnly = localOnly
         self.proofRelevance = proofRelevance ?? Self.inferredProofRelevance(receipt)
         self.requiresConfirmationBeforeBroaderUse = requiresConfirmationBeforeBroaderUse ?? Self.inferredConfirmationNeed(receipt)
+        self.runtimeLineage = runtimeLineage
         self.proofFreshnessLineage = proofFreshnessLineage ?? Self.proofFreshnessLineage(
             receipt: receipt,
             privacyLevel: privacyLevel,
@@ -97,6 +100,7 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
             undoLabel: receipt.undoAvailability.isAvailable ? "Undo available" : "Undo not available",
             proofLabel: proofLabel,
             proofFreshnessLineage: proofFreshnessLineage,
+            runtimeLineage: runtimeLineage,
             relatedObjectLabels: relatedObjectLabels,
             changedFactSummaries: shouldRedact ? redactedChangedFactSummaries : receipt.changedFacts.map(\.summary),
             hiddenDetailLabel: shouldRedact ? "Detail hidden" : nil
@@ -190,11 +194,34 @@ struct ActionReceiptHistoryRecord: Sendable, Equatable, Identifiable {
     }
 
     var replayTraceLabel: String {
-        proofFreshnessLineage.canUseAsCurrentLocalSource ? "Replay trace stays local and inspectable" : "Replay trace needs review"
+        if let runtimeLineage, runtimeLineage.runtimeReplayTraceID.isEmpty == false {
+            return "Runtime replay trace stays local and inspectable"
+        }
+        return proofFreshnessLineage.canUseAsCurrentLocalSource ? "Replay trace stays local and inspectable" : "Replay trace needs review"
     }
 
     var hasProofBridge: Bool {
         proofReferenceIDs.isEmpty == false
+    }
+
+    var hasRuntimeLineage: Bool {
+        runtimeLineage?.hasCompleteTrustTrace == true
+    }
+
+    var runtimeTransactionID: String? {
+        runtimeLineage?.runtimeTransactionID
+    }
+
+    var runtimeEventID: String? {
+        runtimeLineage?.runtimeEventID
+    }
+
+    var runtimeReceiptID: String? {
+        runtimeLineage?.runtimeReceiptID
+    }
+
+    var runtimeReplayTraceID: String? {
+        runtimeLineage?.runtimeReplayTraceID
     }
 
     static func orderedUnique(_ values: [String]) -> [String] {

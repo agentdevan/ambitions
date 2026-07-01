@@ -25,6 +25,7 @@ struct AuditTrailEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
     let summary: String
     let privacy: EventLedgerPrivacyClassification
     let localOnly: Bool
+    let runtimeLineage: RuntimeTrustLineage?
     let schemaVersion: String
 
     init(
@@ -40,6 +41,7 @@ struct AuditTrailEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
         summary: String,
         privacy: EventLedgerPrivacyClassification,
         localOnly: Bool = true,
+        runtimeLineage: RuntimeTrustLineage? = nil,
         schemaVersion: String = auditTrailSchemaVersion
     ) {
         self.id = Self.normalized(id, fallback: "audit.\(kind.rawValue)")
@@ -54,7 +56,12 @@ struct AuditTrailEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.summary = Self.normalized(summary, fallback: kind.rawValue)
         self.privacy = privacy
         self.localOnly = localOnly
+        self.runtimeLineage = runtimeLineage
         self.schemaVersion = schemaVersion
+    }
+
+    var hasRuntimeLineage: Bool {
+        runtimeLineage?.hasCompleteTrustTrace == true
     }
 
     private static func normalized(_ value: String, fallback: String) -> String {
@@ -102,6 +109,14 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
             scoped.contains { $0.kind == .historyProjected }
     }
 
+    func hasCompleteRuntimeLineage(commandID: String, receiptID: String) -> Bool {
+        let scoped = entries(commandID: commandID).filter {
+            $0.receiptID == nil || $0.receiptID == receiptID
+        }
+        return scoped.isEmpty == false &&
+            scoped.allSatisfy(\.hasRuntimeLineage)
+    }
+
     static func forCommit(
         commandRecord: AmbitionsCommandExecutionRecord,
         eventLedgerEntry: EventLedgerEntry,
@@ -110,7 +125,8 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
         sourceRecordLedger: SourceRecordLedger,
         undoEntry: UndoLedgerEntry,
         historyProjection: TrustHistoryQueryProjection,
-        occurredAt: String
+        occurredAt: String,
+        runtimeLineage: RuntimeTrustLineage? = nil
     ) -> AuditTrail {
         let commandID = commandRecord.commandID
         let proofIDs = proofLedgerEntry.proofReferenceIDs
@@ -125,7 +141,8 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
                 occurredAt: occurredAt,
                 summary: "Command accepted into TrustSystem.",
                 privacy: commandRecord.privacy,
-                localOnly: commandRecord.localOnly
+                localOnly: commandRecord.localOnly,
+                runtimeLineage: runtimeLineage
             ),
             AuditTrailEntry(
                 id: "audit.event.\(eventLedgerEntry.id)",
@@ -137,7 +154,8 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
                 occurredAt: eventLedgerEntry.occurredAt,
                 summary: "Event ledger entry appended from runtime event.",
                 privacy: eventLedgerEntry.privacy,
-                localOnly: eventLedgerEntry.localOnly
+                localOnly: eventLedgerEntry.localOnly,
+                runtimeLineage: runtimeLineage
             ),
             AuditTrailEntry(
                 id: "audit.receipt.\(receiptRecord.id)",
@@ -150,7 +168,8 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
                 occurredAt: receiptRecord.receipt.occurredAt,
                 summary: "Action receipt history recorded.",
                 privacy: receiptRecord.privacyLevel.eventLedgerPrivacy,
-                localOnly: receiptRecord.localOnly
+                localOnly: receiptRecord.localOnly,
+                runtimeLineage: runtimeLineage
             ),
             AuditTrailEntry(
                 id: "audit.proof.\(receiptRecord.id)",
@@ -163,7 +182,8 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
                 occurredAt: receiptRecord.receipt.occurredAt,
                 summary: proofIDs.isEmpty ? "Receipt did not create proof reference." : "Proof reference linked to receipt.",
                 privacy: receiptRecord.privacyLevel.eventLedgerPrivacy,
-                localOnly: receiptRecord.localOnly
+                localOnly: receiptRecord.localOnly,
+                runtimeLineage: runtimeLineage
             ),
             AuditTrailEntry(
                 id: "audit.source-records.\(receiptRecord.id)",
@@ -175,7 +195,8 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
                 occurredAt: occurredAt,
                 summary: "Source records indexed with public/private boundary separation.",
                 privacy: .standard,
-                localOnly: true
+                localOnly: true,
+                runtimeLineage: runtimeLineage
             ),
             AuditTrailEntry(
                 id: "audit.undo.\(undoEntry.id)",
@@ -187,7 +208,8 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
                 occurredAt: undoEntry.createdAt,
                 summary: "Undo ledger entry indexed from receipt.",
                 privacy: undoEntry.privacy,
-                localOnly: undoEntry.localOnly
+                localOnly: undoEntry.localOnly,
+                runtimeLineage: runtimeLineage
             ),
             AuditTrailEntry(
                 id: "audit.history.\(receiptRecord.id).\(historyProjection.totalMatchCount)",
@@ -198,7 +220,8 @@ struct AuditTrail: Codable, Sendable, Equatable, Hashable {
                 occurredAt: occurredAt,
                 summary: "History projection materialized from receipt and event ledgers.",
                 privacy: .standard,
-                localOnly: historyProjection.localOnly
+                localOnly: historyProjection.localOnly,
+                runtimeLineage: runtimeLineage
             ),
         ]
         return AuditTrail(entries: entries)

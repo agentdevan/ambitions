@@ -11,7 +11,11 @@ struct TodayProofReceiptPeekState: Equatable, Sendable {
 extension TodayActionClosureSheetState {
     func proofReceiptPeek(for outcome: TodayActionClosureOutcomeState, occurredAt: String = "2026-05-01T12:00:00Z") -> TodayProofReceiptPeekState {
         let record = actionReceiptHistoryRecord(for: outcome, occurredAt: occurredAt)
-        let entry = ActionReceiptProofLedgerEntry(receipt: record.receipt, proofRelevance: record.proofRelevance)
+        let entry = ActionReceiptProofLedgerEntry(
+            receipt: record.receipt,
+            proofRelevance: record.proofRelevance,
+            runtimeLineage: record.runtimeLineage
+        )
 
         return TodayProofReceiptPeekState(
             title: entry.peekTitle,

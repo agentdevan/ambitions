@@ -202,6 +202,7 @@ struct ActionReceiptSearchResult: Sendable, Equatable, Identifiable {
     let undoLabel: String
     let proofLabel: String
     let proofFreshnessLineage: ActionReceiptProofFreshnessLineage
+    let runtimeLineage: RuntimeTrustLineage?
     let relatedObjectLabels: [String]
     let changedFactSummaries: [String]
     let hiddenDetailLabel: String?

@@ -121,6 +121,7 @@ final class ActionReceiptHistoryRecordModel {
     var occurredAtDate: Date?
     var receiptData: Data
     var proofFreshnessLineageData: Data
+    var runtimeLineageData: Data?
 
     init(
         id: String,
@@ -137,7 +138,8 @@ final class ActionReceiptHistoryRecordModel {
         occurredAt: String,
         occurredAtDate: Date? = nil,
         receiptData: Data,
-        proofFreshnessLineageData: Data
+        proofFreshnessLineageData: Data,
+        runtimeLineageData: Data? = nil
     ) {
         self.id = id
         self.schemaVersion = schemaVersion
@@ -154,6 +156,7 @@ final class ActionReceiptHistoryRecordModel {
         self.occurredAtDate = occurredAtDate ?? PersistedTemporalValue.date(from: occurredAt)
         self.receiptData = receiptData
         self.proofFreshnessLineageData = proofFreshnessLineageData
+        self.runtimeLineageData = runtimeLineageData
     }
 }
 

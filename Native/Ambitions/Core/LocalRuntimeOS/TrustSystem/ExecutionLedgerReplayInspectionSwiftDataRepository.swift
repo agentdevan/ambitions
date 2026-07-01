@@ -111,7 +111,8 @@ struct SwiftDataExecutionLedgerReplayInspectionRepository: ExecutionLedgerReplay
             privacyLevel: receiptRecord.privacyLevel,
             localOnly: receiptRecord.localOnly,
             visibilityLevels: [.peek, .trail, .search],
-            proofRelevance: receiptRecord.proofRelevance
+            proofRelevance: receiptRecord.proofRelevance,
+            runtimeLineage: receiptRecord.runtimeLineage
         )
         let projection = ExecutionLedgerReplayBrowserProjection(
             receiptRecord: receiptRecord,

@@ -25,6 +25,11 @@ struct TrustHistoryQuery: Sendable, Equatable {
     let userConfirmed: Bool?
     let proofReferenceKinds: Set<EventLedgerEvidenceKind>
     let requiresProofReferences: Bool?
+    let runtimeTransactionIDs: Set<String>
+    let runtimeEventIDs: Set<String>
+    let runtimeReceiptIDs: Set<String>
+    let runtimeReplayTraceIDs: Set<String>
+    let requiresRuntimeLineage: Bool?
     let includeReceiptHistory: Bool
     let includeEventLedger: Bool
     let limit: Int?
@@ -43,6 +48,11 @@ struct TrustHistoryQuery: Sendable, Equatable {
         userConfirmed: Bool? = nil,
         proofReferenceKinds: Set<EventLedgerEvidenceKind> = [],
         requiresProofReferences: Bool? = nil,
+        runtimeTransactionIDs: Set<String> = [],
+        runtimeEventIDs: Set<String> = [],
+        runtimeReceiptIDs: Set<String> = [],
+        runtimeReplayTraceIDs: Set<String> = [],
+        requiresRuntimeLineage: Bool? = nil,
         includeReceiptHistory: Bool = true,
         includeEventLedger: Bool = true,
         limit: Int? = nil
@@ -60,9 +70,18 @@ struct TrustHistoryQuery: Sendable, Equatable {
         self.userConfirmed = userConfirmed
         self.proofReferenceKinds = proofReferenceKinds
         self.requiresProofReferences = requiresProofReferences
+        self.runtimeTransactionIDs = Self.normalized(runtimeTransactionIDs)
+        self.runtimeEventIDs = Self.normalized(runtimeEventIDs)
+        self.runtimeReceiptIDs = Self.normalized(runtimeReceiptIDs)
+        self.runtimeReplayTraceIDs = Self.normalized(runtimeReplayTraceIDs)
+        self.requiresRuntimeLineage = requiresRuntimeLineage
         self.includeReceiptHistory = includeReceiptHistory
         self.includeEventLedger = includeEventLedger
         self.limit = limit
+    }
+
+    private static func normalized(_ values: Set<String>) -> Set<String> {
+        Set(values.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }.filter { $0.isEmpty == false })
     }
 }
 
@@ -81,6 +100,7 @@ struct TrustHistoryQueryResult: Sendable, Equatable, Identifiable {
     let title: String
     let summary: String
     let proofFreshnessLineage: ActionReceiptProofFreshnessLineage?
+    let runtimeLineage: RuntimeTrustLineage?
 }
 
 struct TrustHistoryQueryProjection: Sendable, Equatable {

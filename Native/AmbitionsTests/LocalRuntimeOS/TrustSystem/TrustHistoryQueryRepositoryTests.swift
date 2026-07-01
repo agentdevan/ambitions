@@ -229,6 +229,69 @@ final class TrustHistoryQueryRepositoryTests: XCTestCase {
         XCTAssertEqual(filtered.results.first?.proofFreshnessLineage?.sourceFreshnessLabel, "Source freshness needs detail")
     }
 
+    func testSwiftDataTrustHistoryQueryFiltersByRuntimeLineage() async throws {
+        let store = try await makeStore()
+        let repository = SwiftDataTrustHistoryQueryRepository(store: store)
+        let eventRepository = SwiftDataEventLedgerRepository(store: store)
+        let receiptRepository = SwiftDataActionReceiptHistoryRepository(store: store)
+        let goal = object(.goal, "goal-runtime", label: "Runtime goal")
+        let lineage = runtimeLineage(
+            commandID: "command-runtime-history",
+            receiptID: "receipt-runtime-history",
+            eventSequence: 11
+        )
+
+        try await receiptRepository.save([
+            ActionReceiptHistoryRecord(
+                receipt: receipt(
+                    id: "receipt-runtime-history",
+                    resultState: .completed,
+                    title: "Runtime receipt",
+                    affectedObjects: [goal],
+                    changedFacts: [
+                        ActionReceiptChangedFact(
+                            id: "fact-runtime-history",
+                            kind: .completedTask,
+                            object: goal,
+                            summary: "Completed from runtime event."
+                        )
+                    ],
+                    sourceDomain: .time
+                ),
+                privacyLevel: .safeToShow,
+                proofRelevance: .countsAsProof,
+                runtimeLineage: lineage
+            )
+        ])
+        try await eventRepository.append(
+            EventLedgerEntry(
+                id: "event-runtime-history",
+                kind: .actionCompleted,
+                occurredAt: "2026-04-26T12:00:00Z",
+                source: .time,
+                title: "Runtime event history",
+                summary: "Trust event generated from runtime event.",
+                metadata: lineage.metadata,
+                privacy: .standard
+            )
+        )
+
+        let projection = try await repository.fetch(
+            TrustHistoryQuery(
+                runtimeTransactionIDs: [lineage.runtimeTransactionID],
+                runtimeEventIDs: [lineage.runtimeEventID],
+                requiresRuntimeLineage: true,
+                includeReceiptHistory: true,
+                includeEventLedger: true
+            )
+        )
+
+        XCTAssertEqual(projection.totalMatchCount, 2)
+        XCTAssertEqual(Set(projection.results.map(\.kind)), [.actionReceipt, .eventLedger])
+        XCTAssertTrue(projection.results.allSatisfy { $0.runtimeLineage?.runtimeTransactionID == lineage.runtimeTransactionID })
+        XCTAssertTrue(projection.results.allSatisfy { $0.runtimeLineage?.runtimeReplayTraceID == lineage.runtimeReplayTraceID })
+    }
+
     func testSwiftDataTrustHistoryQueryFiltersEventProofReferencePresence() async throws {
         let store = try await makeStore()
         let repository = SwiftDataTrustHistoryQueryRepository(store: store)
@@ -281,6 +344,31 @@ final class TrustHistoryQueryRepositoryTests: XCTestCase {
 
     private func makeStore() async throws -> AmbitionsPersistenceStore {
         try AmbitionsPersistenceStore(inMemory: true)
+    }
+
+    private func runtimeLineage(
+        commandID: String,
+        receiptID: String,
+        eventSequence: Int64
+    ) -> RuntimeTrustLineage {
+        RuntimeTrustLineage(
+            runtimeCommitReceiptID: "runtime.commit-receipt.\(commandID)",
+            runtimeTransactionID: "runtime.transaction.\(commandID)",
+            runtimeEventID: "runtime.event.\(eventSequence)",
+            runtimeReceiptID: receiptID,
+            runtimeProofArtifactID: "runtime.proof.\(commandID)",
+            runtimeRollbackPlanID: "runtime.rollback.\(commandID)",
+            runtimeReplayTraceID: "runtime.replay.\(commandID)",
+            runtimeCommandID: commandID,
+            runtimeEventSequence: eventSequence,
+            runtimeEventChecksum: "runtime.event.checksum.\(eventSequence)",
+            projectionCursorIDs: ["receipt", "time"],
+            projectionCursorChecksums: ["projection.receipt.checksum", "projection.time.checksum"],
+            affectedObjectIDs: ["goal-runtime"],
+            objectFamilies: [.step],
+            committedAt: "2026-04-26T12:00:00Z",
+            localOnly: true
+        )
     }
 
     private func object(

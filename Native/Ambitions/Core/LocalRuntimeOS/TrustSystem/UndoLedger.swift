@@ -39,12 +39,14 @@ struct UndoLedgerEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
     let createdAt: String
     let privacy: EventLedgerPrivacyClassification
     let localOnly: Bool
+    let runtimeLineage: RuntimeTrustLineage?
     let schemaVersion: String
 
     init(
         commandID: String,
         receiptRecord: ActionReceiptHistoryRecord,
         rollbackSummary: String? = nil,
+        runtimeLineage: RuntimeTrustLineage? = nil,
         schemaVersion: String = undoLedgerSchemaVersion
     ) {
         self.id = "undo.\(receiptRecord.id)"
@@ -56,11 +58,34 @@ struct UndoLedgerEntry: Codable, Sendable, Equatable, Hashable, Identifiable {
         self.createdAt = receiptRecord.receipt.occurredAt
         self.privacy = receiptRecord.privacyLevel.eventLedgerPrivacy
         self.localOnly = receiptRecord.localOnly
+        self.runtimeLineage = runtimeLineage ?? receiptRecord.runtimeLineage
         self.schemaVersion = schemaVersion
     }
 
     var canUndoLocally: Bool {
         availability.canUndoWithoutExternalEffect && localOnly
+    }
+
+    var runtimeTransactionID: String? {
+        runtimeLineage?.runtimeTransactionID
+    }
+
+    var runtimeEventID: String? {
+        runtimeLineage?.runtimeEventID
+    }
+
+    var runtimeRollbackPlanID: String? {
+        runtimeLineage?.runtimeRollbackPlanID
+    }
+
+    var runtimeReplayTraceID: String? {
+        runtimeLineage?.runtimeReplayTraceID
+    }
+
+    var hasRuntimeRollbackLineage: Bool {
+        runtimeLineage?.hasCompleteTrustTrace == true &&
+            runtimeRollbackPlanID?.isEmpty == false &&
+            runtimeReplayTraceID?.isEmpty == false
     }
 
     private static func defaultRollbackSummary(_ receiptRecord: ActionReceiptHistoryRecord) -> String {

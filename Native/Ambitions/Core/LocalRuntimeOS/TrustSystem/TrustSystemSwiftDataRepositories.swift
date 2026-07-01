@@ -72,12 +72,14 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
             localOnly: record.localOnly,
             title: record.receipt.title,
             summary: record.receipt.summary,
-            proofFreshnessLineage: record.proofFreshnessLineage
+            proofFreshnessLineage: record.proofFreshnessLineage,
+            runtimeLineage: record.runtimeLineage
         )
     }
 
     func makeResult(from event: EventLedgerEntry) -> TrustHistoryQueryResult {
-        TrustHistoryQueryResult(
+        let runtimeLineage = RuntimeTrustLineage.eventMetadataLineage(event.metadata)
+        return TrustHistoryQueryResult(
             id: "event.\(event.id)",
             kind: .eventLedger,
             source: event.source.rawValue,
@@ -95,7 +97,8 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
             localOnly: event.localOnly,
             title: event.title,
             summary: event.summary ?? "",
-            proofFreshnessLineage: nil
+            proofFreshnessLineage: nil,
+            runtimeLineage: runtimeLineage
         )
     }
 
@@ -109,6 +112,7 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
         if query.receiptProofRelevance.isEmpty == false && query.receiptProofRelevance.contains(record.proofRelevance) == false { return false }
         if query.receiptTrustStatuses.isEmpty == false && query.receiptTrustStatuses.contains(record.trustStatus) == false { return false }
         if let requiresFreshnessReview = query.receiptRequiresFreshnessReview, record.proofFreshnessLineage.requiresFreshnessReview != requiresFreshnessReview { return false }
+        if matchesRuntimeLineage(record.runtimeLineage, query: query) == false { return false }
         return true
     }
 
@@ -126,6 +130,31 @@ struct SwiftDataTrustHistoryQueryRepository: TrustHistoryQueryRepository {
         }
         if query.proofReferenceKinds.isEmpty == false {
             if event.evidenceReferences.map({ $0.kind }).contains(where: { query.proofReferenceKinds.contains($0) }) == false { return false }
+        }
+        if matchesRuntimeLineage(RuntimeTrustLineage.eventMetadataLineage(event.metadata), query: query) == false { return false }
+        return true
+    }
+
+    func matchesRuntimeLineage(_ runtimeLineage: RuntimeTrustLineage?, query: TrustHistoryQuery) -> Bool {
+        if let requiresRuntimeLineage = query.requiresRuntimeLineage {
+            if requiresRuntimeLineage && runtimeLineage?.hasCompleteTrustTrace != true { return false }
+            if requiresRuntimeLineage == false && runtimeLineage != nil { return false }
+        }
+        if query.runtimeTransactionIDs.isEmpty == false &&
+            runtimeLineage.map({ query.runtimeTransactionIDs.contains($0.runtimeTransactionID) }) != true {
+            return false
+        }
+        if query.runtimeEventIDs.isEmpty == false &&
+            runtimeLineage.map({ query.runtimeEventIDs.contains($0.runtimeEventID) }) != true {
+            return false
+        }
+        if query.runtimeReceiptIDs.isEmpty == false &&
+            runtimeLineage.map({ query.runtimeReceiptIDs.contains($0.runtimeReceiptID) }) != true {
+            return false
+        }
+        if query.runtimeReplayTraceIDs.isEmpty == false &&
+            runtimeLineage.map({ query.runtimeReplayTraceIDs.contains($0.runtimeReplayTraceID) }) != true {
+            return false
         }
         return true
     }

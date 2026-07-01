@@ -235,6 +235,7 @@ actor AmbitionsPersistenceStore {
                 mutationAuthority: "Core/LocalRuntimeOS/TrustSystem + ProjectionEngine",
                 fieldRules: [
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "receiptData", authority: .encodedValue, encodedTypeName: "ActionReceipt", notes: "Typed receipt payload."),
+                    ObjectStoreSwiftDataFieldRule(storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "runtimeLineageData", authority: .encodedValue, encodedTypeName: "RuntimeTrustLineage", notes: "Runtime commit receipt lineage tying receipt history to transaction, event, rollback, and replay proof."),
                     ObjectStoreSwiftDataFieldRule(storedTypeName: "RuntimeSnapshotLedgerRecord", fieldName: "snapshotData", authority: .snapshotFallback, encodedTypeName: "RuntimeSnapshotLedgerEnvelope", notes: "Replay-validation payload fallback.")
                 ]
             ),

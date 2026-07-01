@@ -50,12 +50,13 @@ final class TrustSystemTests: XCTestCase {
             eventLedger: eventLedger,
             actionReceiptHistory: receiptHistory
         )
-        let fixture = Self.sanctionedMutationFixture()
+        let fixture = try await Self.sanctionedMutationFixture()
 
         let plan = try await recorder.record(
             TrustSystemCommitInput(
                 commandRecord: fixture.commandRecord,
-                runtimeEvent: fixture.runtimeEvent,
+                runtimeEventEnvelope: fixture.runtimeEventEnvelope,
+                runtimeCommitReceipt: fixture.runtimeCommitReceipt,
                 receipt: fixture.receipt,
                 proofRelevance: .countsAsProof,
                 publicSourceAtlasReferences: [
@@ -73,23 +74,36 @@ final class TrustSystemTests: XCTestCase {
         let storedReceipts = try await receiptHistory.listRecords()
 
         XCTAssertEqual(storedEvents.map(\.id), [plan.eventLedgerEntry.id])
-        XCTAssertEqual(storedReceipts.map(\.id), ["receipt-trust-1"])
+        XCTAssertEqual(storedReceipts.map(\.id), [fixture.runtimeCommitReceipt.receiptID])
         XCTAssertTrue(plan.hasCompleteCommandEventProjectionReceiptReplayFlow)
-        XCTAssertEqual(plan.proofLedgerEntry.proofReference?.id, "proof.receipt-trust-1")
-        XCTAssertEqual(plan.undoLedger.entry(receiptID: "receipt-trust-1")?.canUndoLocally, true)
+        XCTAssertEqual(plan.runtimeLineage.runtimeTransactionID, fixture.runtimeCommitReceipt.transactionID)
+        XCTAssertEqual(plan.runtimeLineage.runtimeEventID, fixture.runtimeCommitReceipt.eventID)
+        XCTAssertEqual(plan.receiptRecord.runtimeLineage?.runtimeReplayTraceID, fixture.runtimeCommitReceipt.replayTraceID)
+        XCTAssertEqual(plan.proofLedgerEntry.runtimeTransactionID, fixture.runtimeCommitReceipt.transactionID)
+        XCTAssertEqual(plan.proofLedger.runtimeReplayTraceIDs, [fixture.runtimeCommitReceipt.replayTraceID])
+        XCTAssertEqual(plan.proofLedgerEntry.proofReference?.id, "proof.\(fixture.runtimeCommitReceipt.receiptID)")
+        XCTAssertEqual(plan.undoLedger.entry(receiptID: fixture.runtimeCommitReceipt.receiptID)?.runtimeRollbackPlanID, fixture.runtimeCommitReceipt.rollbackPlanID)
+        XCTAssertEqual(plan.undoLedger.entry(receiptID: fixture.runtimeCommitReceipt.receiptID)?.canUndoLocally, true)
         XCTAssertEqual(plan.historyProjection.results.count, 2)
+        XCTAssertTrue(plan.historyProjection.results.allSatisfy { $0.runtimeLineage?.runtimeEventID == fixture.runtimeCommitReceipt.eventID })
         XCTAssertEqual(plan.replayOutcome.decision, .replayExistingReceipt)
         XCTAssertTrue(plan.auditTrail.localOnly)
+        XCTAssertTrue(plan.auditTrail.hasCompleteRuntimeLineage(
+            commandID: fixture.commandRecord.commandID,
+            receiptID: fixture.runtimeCommitReceipt.receiptID
+        ))
         XCTAssertTrue(plan.sourceRecordLedger.separationReport.isSeparated)
         XCTAssertEqual(plan.sourceRecordLedger.publicSourceAtlasRecords.map(\.id), [
             "source.public-source-atlas.source-atlas.public.life-calendar"
         ])
         XCTAssertTrue(plan.sourceRecordLedger.privateLifeGraphRecords.allSatisfy { $0.allowsNetworkRefresh == false })
+        XCTAssertTrue(plan.sourceRecordLedger.privateLifeGraphRecords.allSatisfy(\.hasPrivateRuntimeLineage))
         XCTAssertFalse(plan.sourceRecordLedger.publicSourceAtlasRecords.contains { $0.containsPrivateLifeGraph })
+        XCTAssertTrue(plan.sourceRecordLedger.publicSourceAtlasRecords.allSatisfy(\.isPublicReferenceOnly))
     }
 
-    func testTrustSystemRejectsRuntimeEventThatDoesNotMatchCommandRecord() throws {
-        let fixture = Self.sanctionedMutationFixture()
+    func testTrustSystemRejectsRuntimeEventThatDoesNotMatchCommandRecord() async throws {
+        let fixture = try await Self.sanctionedMutationFixture()
         let mismatchedEvent = RuntimeEvent(
             commandID: "command-other",
             actor: .user,
@@ -112,11 +126,17 @@ final class TrustSystemTests: XCTestCase {
                 )
             )
         )
+        let mismatchedEnvelope = try RuntimeEventEnvelope.make(
+            sequence: fixture.runtimeEventEnvelope.sequence,
+            previousChecksum: nil,
+            event: mismatchedEvent
+        )
 
         XCTAssertThrowsError(try TrustSystemCommitPlanner().plan(
             TrustSystemCommitInput(
                 commandRecord: fixture.commandRecord,
-                runtimeEvent: mismatchedEvent,
+                runtimeEventEnvelope: mismatchedEnvelope,
+                runtimeCommitReceipt: fixture.runtimeCommitReceipt,
                 receipt: fixture.receipt
             ),
             plannedAt: "2026-06-30T12:01:00Z"
@@ -128,11 +148,14 @@ final class TrustSystemTests: XCTestCase {
         }
     }
 
-    private static func sanctionedMutationFixture() -> (
+    private static func sanctionedMutationFixture() async throws -> (
         commandRecord: AmbitionsCommandExecutionRecord,
-        runtimeEvent: RuntimeEvent,
+        runtimeEventEnvelope: RuntimeEventEnvelope,
+        runtimeCommitReceipt: RuntimeCommitReceipt,
         receipt: ActionReceipt
     ) {
+        let eventStore = InMemoryRuntimeEventStore()
+        let coordinator = RuntimeTransactionCoordinator(eventStore: eventStore)
         let target = AmbitionsCommandTarget(
             goalID: "goal-trust-1",
             stepID: "step-trust-1",
@@ -145,24 +168,38 @@ final class TrustSystemTests: XCTestCase {
             target: target,
             createdAt: "2026-06-30T12:00:00Z"
         )
+        let runtimeReceiptID = "runtime.receipt.command-trust-1"
         let result = AmbitionsCommandExecutionResult(
             status: .succeeded,
             summary: "Completed recommended step",
             route: .today,
             target: target,
             eventLedgerEntryIDs: ["event-ledger.command-trust-1.command_execution"],
-            metadata: ["receiptID": "receipt-trust-1"]
+            metadata: ["receiptID": runtimeReceiptID]
         )
+        guard let occurredAt = DomainTimestamp.date(from: "2026-06-30T12:00:30Z") else {
+            throw NSError(domain: "TrustSystemTests", code: 2)
+        }
+        let outcome = try await coordinator.commit(
+            command: command,
+            beforeSnapshot: "step.active",
+            afterSnapshot: "step.completed",
+            targetSurface: .today,
+            executionResult: result,
+            commandRecordID: "command.execution.command-trust-1",
+            occurredAt: occurredAt
+        )
+        let envelopes = try await eventStore.fetchEvents(matching: .all, limit: nil)
+        guard let runtimeEventEnvelope = envelopes.first else {
+            throw NSError(domain: "TrustSystemTests", code: 3)
+        }
+        let lineage = RuntimeTrustLineage(runtimeCommitReceipt: outcome.receipt)
+        let commandResult = result.mergingMetadata(lineage.metadata)
         let commandRecord = AmbitionsCommandExecutionRecord(
+            id: "command.execution.command-trust-1",
             command: command,
-            result: result,
+            result: commandResult,
             recordedAt: "2026-06-30T12:00:30Z"
-        )
-        let runtimeEvent = RuntimeEvent.commandExecution(
-            command: command,
-            result: result,
-            recordedAt: "2026-06-30T12:00:30Z",
-            commandRecordID: commandRecord.id
         )
         let step = LifeGraphObjectReference(
             kind: .step,
@@ -172,7 +209,7 @@ final class TrustSystemTests: XCTestCase {
             sourceDomain: .today
         )
         let receipt = ActionReceipt(
-            id: "receipt-trust-1",
+            id: outcome.receipt.receiptID,
             resultState: .completed,
             title: "Step completed",
             summary: "Completed recommended step with local proof.",
@@ -194,7 +231,7 @@ final class TrustSystemTests: XCTestCase {
             undoAvailability: .availableLocal,
             sourceObject: step
         )
-        return (commandRecord, runtimeEvent, receipt)
+        return (commandRecord, runtimeEventEnvelope, outcome.receipt, receipt)
     }
 
     private func repoRoot() throws -> URL {

@@ -151,7 +151,8 @@ extension RepositoryMapping {
             occurredAt: record.receipt.occurredAt,
             occurredAtDate: PersistedTemporalValue.date(from: record.receipt.occurredAt),
             receiptData: try PersistenceCoding.encode(record.receipt),
-            proofFreshnessLineageData: try PersistenceCoding.encode(record.proofFreshnessLineage)
+            proofFreshnessLineageData: try PersistenceCoding.encode(record.proofFreshnessLineage),
+            runtimeLineageData: try record.runtimeLineage.map { try PersistenceCoding.encode($0) }
         )
     }
 
@@ -171,6 +172,7 @@ extension RepositoryMapping {
         persisted.occurredAtDate = PersistedTemporalValue.date(from: record.receipt.occurredAt)
         persisted.receiptData = try PersistenceCoding.encode(record.receipt)
         persisted.proofFreshnessLineageData = try PersistenceCoding.encode(record.proofFreshnessLineage)
+        persisted.runtimeLineageData = try record.runtimeLineage.map { try PersistenceCoding.encode($0) }
     }
 
 
@@ -183,7 +185,8 @@ extension RepositoryMapping {
                 localOnly: persistedRecord.localOnly,
                 proofRelevance: RepositoryMapping.persisted(ActionReceiptProofRelevance.self, rawValue: persistedRecord.proofRelevanceRaw, fallback: .notProof, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "proofRelevanceRaw"),
                 requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse,
-                proofFreshnessLineage: proofFreshnessLineage
+                proofFreshnessLineage: proofFreshnessLineage,
+                runtimeLineage: persistedRecord.runtimeLineageData.flatMap { try? PersistenceCoding.decode(RuntimeTrustLineage.self, from: $0) }
             )
         }
 
@@ -207,7 +210,8 @@ extension RepositoryMapping {
             localOnly: persistedRecord.localOnly,
             proofRelevance: RepositoryMapping.persisted(ActionReceiptProofRelevance.self, rawValue: persistedRecord.proofRelevanceRaw, fallback: .notProof, storedTypeName: "ActionReceiptHistoryRecordModel", fieldName: "proofRelevanceRaw"),
             requiresConfirmationBeforeBroaderUse: persistedRecord.requiresConfirmationBeforeBroaderUse,
-            proofFreshnessLineage: (try? PersistenceCoding.decode(ActionReceiptProofFreshnessLineage.self, from: persistedRecord.proofFreshnessLineageData))
+            proofFreshnessLineage: (try? PersistenceCoding.decode(ActionReceiptProofFreshnessLineage.self, from: persistedRecord.proofFreshnessLineageData)),
+            runtimeLineage: persistedRecord.runtimeLineageData.flatMap { try? PersistenceCoding.decode(RuntimeTrustLineage.self, from: $0) }
         )
     }
 

@@ -14,25 +14,29 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
     let visibilityLevels: [ActionReceiptVisibilityLevel]
     let noSilentChanges: Bool
     let localOnly: Bool
+    let runtimeLineage: RuntimeTrustLineage?
 
     init(
         receipt: ActionReceipt,
         privacyLevel: ActionReceiptPrivacyLevel = .safeToShow,
         localOnly: Bool = true,
         visibilityLevels: [ActionReceiptVisibilityLevel] = [.toast, .peek, .trail, .search],
-        proofRelevance: ActionReceiptProofRelevance? = nil
+        proofRelevance: ActionReceiptProofRelevance? = nil,
+        runtimeLineage: RuntimeTrustLineage? = nil
     ) {
         let record = ActionReceiptHistoryRecord(
             receipt: receipt,
             privacyLevel: privacyLevel,
             localOnly: localOnly,
-            proofRelevance: proofRelevance
+            proofRelevance: proofRelevance,
+            runtimeLineage: runtimeLineage
         )
         self.receiptRecord = record
         self.proofReference = Self.proofReference(for: record)
         self.visibilityLevels = Self.normalizedVisibility(visibilityLevels)
         self.noSilentChanges = true
         self.localOnly = localOnly
+        self.runtimeLineage = runtimeLineage
     }
 
     var id: String { receiptRecord.id }
@@ -59,6 +63,26 @@ struct ActionReceiptProofLedgerEntry: Sendable, Equatable, Identifiable {
 
     var replayTraceLabel: String {
         receiptRecord.replayTraceLabel
+    }
+
+    var hasRuntimeLineage: Bool {
+        runtimeLineage?.hasCompleteTrustTrace == true
+    }
+
+    var runtimeTransactionID: String? {
+        runtimeLineage?.runtimeTransactionID
+    }
+
+    var runtimeEventID: String? {
+        runtimeLineage?.runtimeEventID
+    }
+
+    var runtimeReceiptID: String? {
+        runtimeLineage?.runtimeReceiptID
+    }
+
+    var runtimeReplayTraceID: String? {
+        runtimeLineage?.runtimeReplayTraceID
     }
 
     var hasProofBridge: Bool {

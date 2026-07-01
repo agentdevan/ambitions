@@ -26,7 +26,12 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
                 sourceDomain: .time
             ),
             privacyLevel: .safeToShow,
-            localOnly: true
+            localOnly: true,
+            runtimeLineage: runtimeLineage(
+                commandID: "command-receipt-completed",
+                receiptID: "receipt-completed",
+                eventSequence: 7
+            )
         )
         let changed = ActionReceiptHistoryRecord(
             receipt: receipt(
@@ -67,6 +72,9 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
         XCTAssertEqual(projection.results.first?.proofFreshnessLineage.proofReferenceIDs, ["proof.receipt-completed"])
         XCTAssertEqual(Set(projection.results.first?.proofFreshnessLineage.lineageObjectIDs ?? []), ["goal-1", "plan-item-1"])
         XCTAssertFalse(projection.results.first?.proofFreshnessLineage.requiresFreshnessReview ?? true)
+        XCTAssertEqual(projection.results.first?.runtimeLineage?.runtimeTransactionID, "runtime.transaction.command-receipt-completed")
+        XCTAssertEqual(projection.results.first?.runtimeLineage?.runtimeEventID, "runtime.event.7")
+        XCTAssertEqual(projection.results.first?.runtimeLineage?.runtimeReplayTraceID, "runtime.replay.command-receipt-completed")
     }
 
     func testSwiftDataReceiptHistoryRepositoryReplacesExistingRecordsByIDAndSortsDeterministically() async throws {
@@ -331,6 +339,31 @@ final class ActionReceiptHistoryRepositoryTests: XCTestCase {
     private func makeRepository() async throws -> SwiftDataActionReceiptHistoryRepository {
         let store = try AmbitionsPersistenceStore(inMemory: true)
         return SwiftDataActionReceiptHistoryRepository(store: store)
+    }
+
+    private func runtimeLineage(
+        commandID: String,
+        receiptID: String,
+        eventSequence: Int64
+    ) -> RuntimeTrustLineage {
+        RuntimeTrustLineage(
+            runtimeCommitReceiptID: "runtime.commit-receipt.\(commandID)",
+            runtimeTransactionID: "runtime.transaction.\(commandID)",
+            runtimeEventID: "runtime.event.\(eventSequence)",
+            runtimeReceiptID: receiptID,
+            runtimeProofArtifactID: "runtime.proof.\(commandID)",
+            runtimeRollbackPlanID: "runtime.rollback.\(commandID)",
+            runtimeReplayTraceID: "runtime.replay.\(commandID)",
+            runtimeCommandID: commandID,
+            runtimeEventSequence: eventSequence,
+            runtimeEventChecksum: "runtime.event.checksum.\(eventSequence)",
+            projectionCursorIDs: ["receipt", "today"],
+            projectionCursorChecksums: ["projection.receipt.checksum", "projection.today.checksum"],
+            affectedObjectIDs: ["goal-1", "plan-item-1"],
+            objectFamilies: [.step],
+            committedAt: "2026-04-26T12:00:00Z",
+            localOnly: true
+        )
     }
 
     private func object(

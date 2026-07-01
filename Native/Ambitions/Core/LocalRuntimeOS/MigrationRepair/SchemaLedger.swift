@@ -167,9 +167,9 @@ struct SchemaLedger: Sendable, Equatable {
         .swiftData(
             id: "swiftdata.action_receipt_history_record",
             storedTypeName: "ActionReceiptHistoryRecordModel",
-            currentVersion: "action_receipt_history_record.swiftdata.v1",
-            versionEvidence: "ActionReceiptHistoryRecord.snapshot schema derives from actionClosureReceiptSchemaVersion and metadata columns.",
-            notes: "Receipt history records persisted locally for deterministic local history search and recovery."
+            currentVersion: "action_receipt_history_record.swiftdata.v2",
+            versionEvidence: "ActionReceiptHistoryRecordModel includes optional runtimeLineageData for RuntimeTrustLineage while retaining encoded receipt and freshness payloads.",
+            notes: "Receipt history records persisted locally for deterministic local history search, recovery, and runtime commit receipt lineage."
         ),
         .swiftData(
             id: "swiftdata.runtime_snapshot_ledger_record",
