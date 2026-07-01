@@ -8,12 +8,12 @@ on:
         default: Ambitions
         type: string
       destination:
-        required: true
-        default: 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5'
+        required: false
+        default: ''
         type: string
       simulator_name:
         required: true
-        default: 'iPhone 17 Pro'
+        default: 'iPhone 17'
         type: string
   push:
     branches:
@@ -41,8 +41,8 @@ jobs:
     timeout-minutes: 180
     env:
       SCHEME: ${{ github.event_name == 'workflow_dispatch' && inputs.scheme || 'Ambitions' }}
-      DESTINATION: ${{ github.event_name == 'workflow_dispatch' && inputs.destination || 'platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5' }}
-      SIMULATOR_NAME: ${{ github.event_name == 'workflow_dispatch' && inputs.simulator_name || 'iPhone 17 Pro' }}
+      DESTINATION: ${{ github.event_name == 'workflow_dispatch' && inputs.destination || '' }}
+      SIMULATOR_NAME: ${{ github.event_name == 'workflow_dispatch' && inputs.simulator_name || 'iPhone 17' }}
       RUN_STAMP: strict-${{ github.run_id }}-${{ github.run_attempt }}
       OUTPUT_ROOT: artifacts/strict-build-launch/strict-${{ github.run_id }}-${{ github.run_attempt }}
 

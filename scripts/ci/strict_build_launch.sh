@@ -2,8 +2,9 @@
 set -uo pipefail
 
 SCHEME="${SCHEME:-Ambitions}"
-DESTINATION="${DESTINATION:-platform=iOS Simulator,name=iPhone 17 Pro,OS=26.5}"
-SIMULATOR_NAME="${SIMULATOR_NAME:-iPhone 17 Pro}"
+DESTINATION="${DESTINATION:-}"
+SIMULATOR_NAME="${SIMULATOR_NAME:-iPhone 17}"
+SIMULATOR_UDID="${SIMULATOR_UDID:-}"
 RUN_STAMP="${RUN_STAMP:-$(date -u +%Y%m%dT%H%M%SZ)}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-artifacts/strict-build-launch/${RUN_STAMP}}"
 DERIVED_DATA="${OUTPUT_ROOT}/DerivedData"
@@ -14,6 +15,55 @@ mkdir -p "${LOG_DIR}" "${SCREENSHOT_DIR}"
 
 PHASE_STATUS=()
 FIRST_FAILURE=0
+
+select_simulator_udid() {
+  python3 - <<'PY'
+import json
+import os
+import subprocess
+import sys
+
+preferred = os.environ.get("SIMULATOR_NAME", "iPhone 17")
+explicit = os.environ.get("SIMULATOR_UDID", "").strip()
+if explicit:
+    print(explicit)
+    raise SystemExit(0)
+
+payload = subprocess.check_output(
+    ["xcrun", "simctl", "list", "devices", "available", "-j"],
+    text=True,
+)
+devices = json.loads(payload).get("devices", {})
+candidates = []
+for runtime, runtime_devices in devices.items():
+    if "iOS" not in runtime:
+        continue
+    for device in runtime_devices:
+        if not device.get("isAvailable", True):
+            continue
+        name = device.get("name", "")
+        udid = device.get("udid", "")
+        if not udid:
+            continue
+        candidates.append(
+            (
+                0 if name == preferred else 1,
+                0 if name.startswith("iPhone") else 1,
+                0 if device.get("state") == "Booted" else 1,
+                name,
+                udid,
+                runtime,
+            )
+        )
+
+if not candidates:
+    print("No available iOS simulator found.", file=sys.stderr)
+    raise SystemExit(2)
+
+candidates.sort()
+print(candidates[0][4])
+PY
+}
 
 record_phase() {
   local phase="$1"
@@ -63,6 +113,7 @@ run_phase() {
   echo "scheme=${SCHEME}"
   echo "destination=${DESTINATION}"
   echo "simulator_name=${SIMULATOR_NAME}"
+  echo "simulator_udid=${SIMULATOR_UDID}"
   echo "output_root=${OUTPUT_ROOT}"
   echo "head=$(git rev-parse HEAD 2>/dev/null || true)"
   echo "branch=$(git branch --show-current 2>/dev/null || true)"
@@ -97,6 +148,14 @@ if [[ "${FIRST_FAILURE}" != "0" ]]; then
   python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
   exit "${FIRST_FAILURE}"
 fi
+
+SIMULATOR_UDID="$(select_simulator_udid)"
+export SIMULATOR_UDID
+if [[ -z "${DESTINATION}" ]]; then
+  DESTINATION="platform=iOS Simulator,id=${SIMULATOR_UDID}"
+fi
+echo "${SIMULATOR_UDID}" > "${OUTPUT_ROOT}/simulator-udid.txt"
+echo "${DESTINATION}" > "${OUTPUT_ROOT}/destination.txt"
 
 run_phase simulator_build xcodebuild \
   -project Ambitions.xcodeproj \
@@ -136,28 +195,28 @@ fi
 
 echo "${BUNDLE_ID}" > "${OUTPUT_ROOT}/bundle-id.txt"
 
-run_phase simulator_boot xcrun simctl boot "${SIMULATOR_NAME}" || true
+run_phase simulator_boot xcrun simctl boot "${SIMULATOR_UDID}" || true
 # boot may return non-zero if already booted; bootstatus decides readiness.
-run_phase simulator_bootstatus xcrun simctl bootstatus "${SIMULATOR_NAME}" -b || true
+run_phase simulator_bootstatus xcrun simctl bootstatus "${SIMULATOR_UDID}" -b || true
 if [[ "${FIRST_FAILURE}" != "0" ]]; then
   python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
   exit "${FIRST_FAILURE}"
 fi
 
-run_phase simulator_install xcrun simctl install "${SIMULATOR_NAME}" "${APP_PATH}" || true
+run_phase simulator_install xcrun simctl install "${SIMULATOR_UDID}" "${APP_PATH}" || true
 if [[ "${FIRST_FAILURE}" != "0" ]]; then
   python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
   exit "${FIRST_FAILURE}"
 fi
 
-run_phase simulator_launch xcrun simctl launch "${SIMULATOR_NAME}" "${BUNDLE_ID}" || true
+run_phase simulator_launch xcrun simctl launch "${SIMULATOR_UDID}" "${BUNDLE_ID}" || true
 if [[ "${FIRST_FAILURE}" != "0" ]]; then
   python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
   exit "${FIRST_FAILURE}"
 fi
 
 sleep 4
-run_phase simulator_screenshot xcrun simctl io "${SIMULATOR_NAME}" screenshot "${SCREENSHOT_DIR}/launch.png" || true
+run_phase simulator_screenshot xcrun simctl io "${SIMULATOR_UDID}" screenshot "${SCREENSHOT_DIR}/launch.png" || true
 python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
 
 if [[ "${FIRST_FAILURE}" != "0" ]]; then
