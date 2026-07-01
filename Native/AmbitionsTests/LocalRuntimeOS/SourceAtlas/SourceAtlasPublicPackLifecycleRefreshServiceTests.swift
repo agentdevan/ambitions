@@ -77,6 +77,54 @@ final class SourceAtlasPublicPackLifecycleRefreshServiceTests: XCTestCase {
         XCTAssertFalse(resolution.coreLocalPlanningBlocked)
     }
 
+    func testCancelledLifecycleRefreshReturnsCancellationIssueWithoutBlockingLocalPlanning() async throws {
+        let fixture = try Self.remoteNativeFixture()
+        let transport = SourceAtlasLifecycleSuspendingTransport()
+        let service = SourceAtlasPublicPackLifecycleRefreshService(
+            registry: SourceAtlasPublicPackRefreshTargetRegistry(
+                entries: [
+                    Self.approvedEntry(
+                        id: "sports-stable",
+                        targetPackID: fixture.pack.id,
+                        allowedModes: [.activeLifecycle]
+                    ),
+                ]
+            ),
+            transport: transport,
+            repository: try Self.repository()
+        )
+
+        let input = SourceAtlasPublicPackLifecycleRefreshInput(
+            mode: .activeLifecycle,
+            networkReachability: .online,
+            checkedAt: Self.checkedAt
+        )
+        let refresh = Task.detached {
+            await service.refreshPublicSourceAtlasPacks(input)
+        }
+
+        try await transport.waitForRequestCount(1)
+        refresh.cancel()
+        await transport.failAllSuspendedFetches()
+
+        let resolution = await refresh.value
+        XCTAssertEqual(resolution.configuredTargetCount, 1)
+        XCTAssertEqual(resolution.attemptedTargetIDs, ["sports-stable"])
+        XCTAssertEqual(resolution.issues, [.cancelled])
+        XCTAssertEqual(resolution.egressFindings, [])
+        XCTAssertEqual(resolution.targetResolutions.count, 1)
+        XCTAssertEqual(
+            resolution.targetResolutions.first?.appRefreshResolution?.refreshResolution.remoteResolution.transportIssues,
+            [.currentPointerUnavailable]
+        )
+        XCTAssertFalse(resolution.sentPrivateRuntimeContext)
+        XCTAssertFalse(resolution.scheduledHiddenRuntimeMutation)
+        XCTAssertFalse(resolution.generatedFinalPlan)
+        XCTAssertFalse(resolution.generatedFinalSchedule)
+        XCTAssertFalse(resolution.generatedStepList)
+        XCTAssertFalse(resolution.coreLocalPlanningBlocked)
+    }
+
     func testDirectTargetInitializerLeavesTargetsReviewRequiredBeforeTransport() async throws {
         let transport = SourceAtlasLifecycleCountingTransport(objectsByKey: [:])
         let service = try SourceAtlasPublicPackLifecycleRefreshService(
@@ -1607,6 +1655,36 @@ private actor SourceAtlasLifecycleCountingTransport: SourceAtlasPublicPackRemote
 
     func requestCount() -> Int {
         requests.count
+    }
+}
+
+private actor SourceAtlasLifecycleSuspendingTransport: SourceAtlasPublicPackRemoteTransport {
+    private var requests: [SourceAtlasPublicPackRemoteObjectRequest] = []
+    private var continuations: [CheckedContinuation<Data, Error>] = []
+
+    func fetch(_ request: SourceAtlasPublicPackRemoteObjectRequest) async throws -> Data {
+        requests.append(request)
+        return try await withCheckedThrowingContinuation { continuation in
+            continuations.append(continuation)
+        }
+    }
+
+    func waitForRequestCount(_ count: Int) async throws {
+        for _ in 0..<100 {
+            if requests.count >= count {
+                return
+            }
+            try await Task.sleep(nanoseconds: 5_000_000)
+        }
+        throw XCTSkip("Suspending Source Atlas transport did not receive \(count) request(s).")
+    }
+
+    func failAllSuspendedFetches() {
+        let suspended = continuations
+        continuations.removeAll(keepingCapacity: false)
+        for continuation in suspended {
+            continuation.resume(throwing: CancellationError())
+        }
     }
 }
 

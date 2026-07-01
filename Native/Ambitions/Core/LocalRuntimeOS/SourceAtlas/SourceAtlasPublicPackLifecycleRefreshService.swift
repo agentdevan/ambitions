@@ -7,6 +7,7 @@ enum SourceAtlasPublicPackLifecycleRefreshMode: String, Codable, Sendable, Equat
 }
 
 enum SourceAtlasPublicPackLifecycleRefreshIssue: String, Codable, Sendable, Equatable, Hashable, CaseIterable {
+    case cancelled
     case unsafeTarget = "unsafe_target"
     case missingApprovalArtifact = "missing_approval_artifact"
     case privateTargetMetadata = "private_target_metadata"
@@ -177,6 +178,11 @@ actor SourceAtlasPublicPackLifecycleRefreshService: SourceAtlasPublicPackLifecyc
         var targetResolutions: [SourceAtlasPublicPackBackgroundRefreshTaskResolution] = []
 
         for target in registryResolution.selectedTargets {
+            if Task.isCancelled {
+                issues.insert(.cancelled)
+                break
+            }
+
             let validation = validate(target)
             findings.append(contentsOf: validation.findings)
             if validation.issues.isEmpty == false {
@@ -202,6 +208,11 @@ actor SourceAtlasPublicPackLifecycleRefreshService: SourceAtlasPublicPackLifecyc
             )
             findings.append(contentsOf: resolution.egressFindings)
             targetResolutions.append(resolution)
+
+            if Task.isCancelled {
+                issues.insert(.cancelled)
+                break
+            }
         }
 
         return SourceAtlasPublicPackLifecycleRefreshResolution(

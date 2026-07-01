@@ -27,6 +27,7 @@ final class AppBootstrapper {
     private var hasStarted = false
     private var pendingDeepLinks: [URL] = []
     private var didQueueConfiguredLaunchURL = false
+    private let sourceAtlasRefreshScheduler = AppSourceAtlasLifecycleRefreshScheduler()
 
     init(mode: BootstrapMode = .automatic) {
         self.mode = mode
@@ -45,7 +46,7 @@ final class AppBootstrapper {
             #endif
             phase = .ready(container)
             await importPendingExternalCreations(using: container)
-            await reconcileMaintenance(using: container, now: .now)
+            await reconcileMaintenance(using: container, mode: .startup, now: .now)
             flushPendingDeepLinks(using: container)
         } catch {
             phase = .failed("Ambitions could not finish launching: \(error.localizedDescription)")
@@ -53,6 +54,7 @@ final class AppBootstrapper {
     }
 
     func retry() async {
+        sourceAtlasRefreshScheduler.cancelInFlightRefresh()
         hasStarted = false
         await start()
     }
@@ -81,7 +83,7 @@ final class AppBootstrapper {
     func reconcileActiveLifecycle(now: Date = .now) {
         guard case let .ready(container) = phase else { return }
         Task {
-            await reconcileMaintenance(using: container, now: now)
+            await reconcileMaintenance(using: container, mode: .activeLifecycle, now: now)
         }
     }
 
@@ -226,14 +228,29 @@ final class AppBootstrapper {
         }
     }
 
-    private func reconcileMaintenance(using container: AppContainer, now: Date) async {
+    private func reconcileMaintenance(
+        using container: AppContainer,
+        mode: SourceAtlasPublicPackLifecycleRefreshMode,
+        now: Date
+    ) async {
         await container.notificationService.reconcileBackgroundMaintenance(now: now)
-        _ = await container.sourceAtlasLifecycleRefreshService.refreshPublicSourceAtlasPacks(
-            SourceAtlasPublicPackLifecycleRefreshInput(
-                mode: .activeLifecycle,
-                networkReachability: .online,
-                checkedAt: now
-            )
+        scheduleSourceAtlasLifecycleRefresh(
+            using: container,
+            mode: mode,
+            now: now
+        )
+    }
+
+    private func scheduleSourceAtlasLifecycleRefresh(
+        using container: AppContainer,
+        mode: SourceAtlasPublicPackLifecycleRefreshMode,
+        now: Date
+    ) {
+        sourceAtlasRefreshScheduler.scheduleRefresh(
+            using: container.sourceAtlasLifecycleRefreshService,
+            mode: mode,
+            networkReachability: .online,
+            checkedAt: now
         )
     }
 

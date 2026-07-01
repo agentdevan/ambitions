@@ -156,6 +156,71 @@ final class SourceAtlasLaunchFloorShardIndexCompatibilityTests: XCTestCase {
         XCTAssertEqual(compilation.egressFindings, [])
         XCTAssertFalse(access.coreLocalPlanningBlocked)
     }
+
+    func testLargeLaunchFloorShardIndexPerformanceEnvelopeUsesBoundedPublicRequests() throws {
+        let launchFloorPartitionCount = 5_000
+        let shardsPerPartition = 200
+        let maximumMobilePartitionFetchWindow = 64
+        let maximumMobileObjectRequestsPerRefresh = maximumMobilePartitionFetchWindow * 3
+        let manifest = Self.syntheticLaunchFloorManifest(
+            partitionCount: launchFloorPartitionCount,
+            shardsPerPartition: shardsPerPartition
+        )
+        let selectedPartitionIDs = Set(
+            manifest.countedPartitions
+                .prefix(maximumMobilePartitionFetchWindow)
+                .map(\.partitionID)
+        )
+
+        XCTAssertEqual(manifest.validationIssues, [])
+        XCTAssertEqual(manifest.countedPartitions.count, launchFloorPartitionCount)
+        XCTAssertEqual(manifest.publicReferenceShardCount, 1_000_000)
+
+        let compilation = PublicPackRequestCompiler().compileLaunchFloorShardIndexRequests(
+            manifest: manifest,
+            partitionIDs: selectedPartitionIDs,
+            channel: "stable",
+            appVersion: "1.0.0",
+            accessDecision: Self.remotePublicAccess(),
+            publicLocale: "en-US"
+        )
+
+        XCTAssertTrue(compilation.canFetchRemotePublicReference)
+        XCTAssertEqual(compilation.issues, [])
+        XCTAssertEqual(compilation.egressFindings, [])
+        XCTAssertEqual(compilation.partitionPlans.count, maximumMobilePartitionFetchWindow)
+        XCTAssertEqual(Set(compilation.partitionPlans.map(\.partitionID)), selectedPartitionIDs)
+        XCTAssertEqual(compilation.objectRequests.count, maximumMobileObjectRequestsPerRefresh)
+        XCTAssertEqual(
+            Set(compilation.partitionPlans.map(\.route)),
+            Set([SourceAtlasLaunchFloorShardPartitionRoute.current])
+        )
+        XCTAssertEqual(
+            Dictionary(grouping: compilation.objectRequests, by: \.role).mapValues(\.count),
+            [
+                .currentPointer: maximumMobilePartitionFetchWindow,
+                .partitionManifest: maximumMobilePartitionFetchWindow,
+                .partitionIndex: maximumMobilePartitionFetchWindow,
+            ]
+        )
+        XCTAssertTrue(compilation.objectRequests.allSatisfy { $0.validationIssues.isEmpty })
+        XCTAssertTrue(compilation.objectRequests.allSatisfy { $0.queryItems.keys.contains("object_key") })
+        XCTAssertTrue(
+            compilation.objectRequests
+                .filter { $0.role != .currentPointer }
+                .allSatisfy { $0.queryItems.keys.contains("expected_sha256") }
+        )
+        XCTAssertTrue(
+            compilation.objectRequests
+                .filter { $0.role == .currentPointer }
+                .allSatisfy { $0.queryItems.keys.contains("expected_sha256") == false }
+        )
+        XCTAssertFalse(compilation.objectRequests.contains { request in
+            request.requestShapeEgressRecord.inspectedValue.contains("goal_text") ||
+                request.requestShapeEgressRecord.inspectedValue.contains("account_id") ||
+                request.requestShapeEgressRecord.inspectedValue.contains("device_id")
+        })
+    }
 }
 
 private extension SourceAtlasLaunchFloorShardIndexCompatibilityTests {
@@ -191,6 +256,95 @@ private extension SourceAtlasLaunchFloorShardIndexCompatibilityTests {
                 bundledPublicArtifactAvailable: false
             )
         )
+    }
+
+    static func syntheticLaunchFloorManifest(
+        partitionCount: Int,
+        shardsPerPartition: Int
+    ) -> SourceAtlasLaunchFloorShardCorpusManifest {
+        SourceAtlasLaunchFloorShardCorpusManifest(
+            createdAt: "2026-07-01T00:00:00Z",
+            finalOutputAllowed: false,
+            kind: "ambitions.sourceAtlas.launchFloorShardCorpusManifest.v1",
+            nonClaims: [
+                "not final user plans, schedules, or Steps",
+                "public/reference/freshness infrastructure only",
+            ],
+            partitions: (0..<partitionCount).map { index in
+                syntheticPartition(index: index, shardsPerPartition: shardsPerPartition)
+            },
+            privateContextAllowed: false,
+            publicReferenceOnly: true,
+            schemaVersion: 1,
+            versionID: "synthetic-launch-floor-1m-performance-envelope"
+        )
+    }
+
+    static func syntheticPartition(
+        index: Int,
+        shardsPerPartition: Int
+    ) -> SourceAtlasLaunchFloorShardPartition {
+        let domainIndex = index / 10
+        let domainID = "public_domain_\(padded(domainIndex, width: 4))"
+        let subdomainID = "\(domainID)__public_subdomain_\(padded(index, width: 5))"
+        let partitionID = "lfp_\(padded(index, width: 5))"
+        let start = index * shardsPerPartition
+        let end = start + shardsPerPartition - 1
+        let baseKey = "source-atlas/public-reference/launch-floor/\(domainID)/\(subdomainID)/\(partitionID)"
+
+        return SourceAtlasLaunchFloorShardPartition(
+            apiPolicyState: "approved",
+            countsTowardLaunchFloor: true,
+            domainID: domainID,
+            finalOutputAllowed: false,
+            freshnessSLA: "P30D",
+            indexObjectKey: "\(baseKey)/index-v1.json",
+            indexSHA256: hex64(index + 1),
+            legalPolicyState: "approved",
+            manifestObjectKey: "\(baseKey)/manifest-v1.json",
+            manifestSHA256: hex64(index + 10_001),
+            nativeCompatibility: SourceAtlasLaunchFloorShardNativeCompatibility(
+                partitionedShardIndexV1: true,
+                privateContextAllowed: false,
+                requestShape: "public_ids_hashes_only"
+            ),
+            partitionID: partitionID,
+            privateContextAllowed: false,
+            publicReferenceOnly: true,
+            r2Layout: SourceAtlasLaunchFloorShardR2Layout(
+                currentPointerKey: "\(baseKey)/current.json",
+                gatewayAllowlistKey: "\(baseKey)/gateway-allowlist.json",
+                lastKnownGoodKey: "\(baseKey)/lkg.json",
+                promotedPrefix: "\(baseKey)/promoted/",
+                revocationKey: "\(baseKey)/revocations.json",
+                rollbackKey: "\(baseKey)/rollback-plan.json",
+                stagedPrefix: "\(baseKey)/staged/"
+            ),
+            readbackProof: SourceAtlasLaunchFloorShardReadbackProof(
+                checksumVerified: true,
+                gatewayAllowlistVerified: true,
+                rollbackVerified: true
+            ),
+            revocationState: "current",
+            shardCount: shardsPerPartition,
+            shardRangeEndInclusive: end,
+            shardRangeStart: start,
+            sourceLane: SourceAtlasLaunchFloorShardSourceLane(
+                profileIDs: ["public-source-profile-\(padded(domainIndex, width: 4))"],
+                registryIDs: ["public-source-registry-\(padded(index, width: 5))"]
+            ),
+            subdomainID: subdomainID
+        )
+    }
+
+    static func padded(_ value: Int, width: Int) -> String {
+        let raw = String(value)
+        return String(repeating: "0", count: max(0, width - raw.count)) + raw
+    }
+
+    static func hex64(_ value: Int) -> String {
+        let raw = String(value, radix: 16)
+        return String(repeating: "0", count: max(0, 64 - raw.count)) + raw
     }
 
     static func repoRoot() -> URL {
