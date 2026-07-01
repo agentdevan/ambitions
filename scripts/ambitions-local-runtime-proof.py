@@ -517,6 +517,74 @@ def check_command_event_reconciliation() -> CheckResult:
     )
 
 
+def check_meaningful_mutation_commit_policy() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeTransactionCommitPolicy.swift": [
+            "RuntimeTransactionCommitPolicy",
+            "meaningful_mutation_requires_commit",
+            "requiredEvidenceKeys",
+            "runtimeRollbackPlanID",
+            "runtimeReplayTraceID",
+            "failureResult",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TransactionKernel" / "RuntimeTransactionFailureReceipt.swift": [
+            "RuntimeTransactionFailureReceipt",
+            "runtime_transaction_failure_receipt.native.v1",
+            "runtimeCommitFailureReceiptID",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "AmbitionsCommandExecutor+ReceiptPersistence.swift": [
+            "RuntimeTransactionCommitPolicy.requiresCommit",
+            "RuntimeTransactionCommitPolicy.failureResult",
+            "RuntimeTransactionCoordinator",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "CommandSpine" / "RuntimeCommandMutationCommitter.swift": [
+            "RuntimeTransactionCommitPolicy.requiresCommit",
+            "RuntimeTransactionCommitPolicy.failureResult",
+            "RuntimeTransactionCoordinator",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TransactionKernel" / "RuntimeTransaction.swift": [
+            "youPreferencesObjectID",
+            "updateUserPreferences",
+        ],
+        ROOT / "Native" / "Ambitions" / "Core" / "LocalRuntimeOS" / "TransactionKernel" / "RuntimeMutation.swift": [
+            "youPreferencesObjectID",
+            "updateUserPreferences",
+        ],
+    }
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "meaningful-mutation-commit-policy-missing-source",
+                    relative(path),
+                    None,
+                    "Meaningful mutation commit policy source is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "meaningful-mutation-commit-policy-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing meaningful mutation commit-policy marker `{marker}`.",
+                    )
+                )
+
+    return make_result(
+        "meaningful_mutation_commit_policy",
+        findings,
+        "Meaningful successful mutations require runtime transaction, event, receipt, rollback, and replay evidence or fail closed.",
+        "{count} meaningful mutation commit-policy blocker(s) remain.",
+    )
+
+
 def scan_mutation_bypasses() -> CheckResult:
     findings: list[Finding] = []
     for path in production_swift_files():
@@ -584,6 +652,7 @@ def run_checks() -> list[CheckResult]:
         check_integration_markers(),
         check_live_event_store_authority(),
         check_command_event_reconciliation(),
+        check_meaningful_mutation_commit_policy(),
         scan_mutation_bypasses(),
         check_truth_file_gaps(),
     ]

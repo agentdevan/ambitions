@@ -112,8 +112,10 @@ enum RuntimeTransactionDigest {
 }
 
 enum RuntimeTransactionObjectFacts {
+    static let youPreferencesObjectID = "you.preferences"
+
     static func affectedObjectIDs(command: AmbitionsCommand, mutation: RuntimeMutation? = nil) -> [String] {
-        normalized([
+        var objectIDs = [
             command.target.goalID,
             command.target.captureID,
             command.target.timeID,
@@ -123,7 +125,11 @@ enum RuntimeTransactionObjectFacts {
             command.target.scopeItemID,
             command.target.recommendationID,
             command.target.explanationID,
-        ].compactMap { $0 } + (mutation?.stageMutation.affectedObjectIDs ?? []))
+        ].compactMap { $0 } + (mutation?.stageMutation.affectedObjectIDs ?? [])
+        if command.kind == .updateUserPreferences {
+            objectIDs.append(youPreferencesObjectID)
+        }
+        return normalized(objectIDs)
     }
 
     static func families(command: AmbitionsCommand, mutation: RuntimeMutation? = nil) -> [ObjectStateFamily] {

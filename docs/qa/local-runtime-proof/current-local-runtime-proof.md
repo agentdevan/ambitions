@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-06-30T23:16:15+00:00`
+Generated: `2026-07-01T00:08:05+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 
@@ -8,8 +8,8 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 ## Summary
 
-- Checks: `7`
-- Passed: `7`
+- Checks: `8`
+- Passed: `8`
 - Warnings: `0`
 - Blockers: `0`
 
@@ -39,6 +39,11 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 - Status: `pass`
 - Summary: Command journal/runtime event linkage and drift diagnostics are present.
+
+### meaningful_mutation_commit_policy
+
+- Status: `pass`
+- Summary: Meaningful successful mutations require runtime transaction, event, receipt, rollback, and replay evidence or fail closed.
 
 ### mutation_bypass_scan
 

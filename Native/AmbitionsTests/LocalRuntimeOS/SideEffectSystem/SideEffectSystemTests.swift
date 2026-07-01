@@ -172,6 +172,29 @@ final class SideEffectSystemTests: XCTestCase {
         XCTAssertEqual(stored?.status, .recordedLocalOnly)
         XCTAssertEqual(stored?.boundary, .localOnly)
         XCTAssertEqual(stored?.receiptID, "app-intent-intake-receipt.intent-side-effect-test")
+        XCTAssertTrue(stored?.degradedFacts.contains("App Intent external creation intent-side-effect-test stored for local command-backed import.") == true)
+    }
+
+    func testShareExtensionIntakeRecordsCommittedProjectionOutboxInsteadOfDirectMutation() async throws {
+        let ledger = InMemorySideEffectLedgerRepository()
+        let outbox = SideEffectOutbox(ledger: ledger, leaseDuration: 60)
+        let intake = ShareExtensionIntake(recorder: outbox)
+
+        await intake.recordDurableIntake(
+            requestID: "share-side-effect-test",
+            landing: .captureComposer,
+            receivedAt: Date(timeIntervalSince1970: 1_777_113_600)
+        )
+
+        let stored = try await ledger.fetchRecord(id: "share-intake.share-side-effect-test")
+        XCTAssertEqual(stored?.effectKind, .externalSnapshot)
+        XCTAssertEqual(stored?.actionKind, .createCapture)
+        XCTAssertEqual(stored?.sourceDomain, .capture)
+        XCTAssertEqual(stored?.status, .recordedLocalOnly)
+        XCTAssertEqual(stored?.boundary, .localOnly)
+        XCTAssertEqual(stored?.externalEffect, false)
+        XCTAssertEqual(stored?.receiptID, "share-intake-receipt.share-side-effect-test")
+        XCTAssertTrue(stored?.degradedFacts.contains("Share extension intake stored request for capture_composer without direct private graph mutation.") == true)
     }
 
     private func repositoryRoot() -> URL {
