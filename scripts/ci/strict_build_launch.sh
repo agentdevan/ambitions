@@ -65,6 +65,11 @@ print(candidates[0][4])
 PY
 }
 
+boot_selected_simulator() {
+  xcrun simctl boot "${SIMULATOR_UDID}" || true
+  xcrun simctl bootstatus "${SIMULATOR_UDID}" -b
+}
+
 record_phase() {
   local phase="$1"
   local exit_code="$2"
@@ -195,9 +200,7 @@ fi
 
 echo "${BUNDLE_ID}" > "${OUTPUT_ROOT}/bundle-id.txt"
 
-run_phase simulator_boot xcrun simctl boot "${SIMULATOR_UDID}" || true
-# boot may return non-zero if already booted; bootstatus decides readiness.
-run_phase simulator_bootstatus xcrun simctl bootstatus "${SIMULATOR_UDID}" -b || true
+run_phase simulator_boot boot_selected_simulator || true
 if [[ "${FIRST_FAILURE}" != "0" ]]; then
   python3 scripts/ci/parse_strict_build_failures.py --root "${OUTPUT_ROOT}" || true
   exit "${FIRST_FAILURE}"
