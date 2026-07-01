@@ -139,6 +139,11 @@ from .missing_shard_event_queue import (
     compile_missing_shard_event_queue,
     missing_shard_event_queue_markdown,
 )
+from .missing_shard_review_gate import (
+    MissingShardReviewGateOptions,
+    compile_missing_shard_review_gate,
+    missing_shard_review_gate_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -1055,6 +1060,32 @@ def main(argv: list[str] | None = None) -> int:
     missing_shard_event_queue_parser.add_argument("--emit-evidence")
     missing_shard_event_queue_parser.add_argument("--markdown")
 
+    missing_shard_review_gate_parser = sub.add_parser("missing-shard-review-gate")
+    missing_shard_review_gate_parser.add_argument(
+        "--missing-shard-queue",
+        default="docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json",
+    )
+    missing_shard_review_gate_parser.add_argument(
+        "--source-lane-registry",
+        default="tools/source-atlas/governance/source-lane-registry.json",
+    )
+    missing_shard_review_gate_parser.add_argument(
+        "--legal-terms-registry",
+        default="tools/source-atlas/governance/legal-terms-registry.json",
+    )
+    missing_shard_review_gate_parser.add_argument(
+        "--api-governance-registry",
+        default="tools/source-atlas/governance/api-governance-registry.json",
+    )
+    missing_shard_review_gate_parser.add_argument("--approval-artifact")
+    missing_shard_review_gate_parser.add_argument("--output-root", required=True)
+    missing_shard_review_gate_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    missing_shard_review_gate_parser.add_argument("--run-label", default="current")
+    missing_shard_review_gate_parser.add_argument("--execute", action="store_true")
+    missing_shard_review_gate_parser.add_argument("--allow-active-registry-write", action="store_true")
+    missing_shard_review_gate_parser.add_argument("--emit-evidence")
+    missing_shard_review_gate_parser.add_argument("--markdown")
+
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
     launch_floor_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
@@ -1074,6 +1105,7 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_parser.add_argument("--golden-intent-corpus")
     launch_floor_parser.add_argument("--fallback-metric")
     launch_floor_parser.add_argument("--missing-shard-events")
+    launch_floor_parser.add_argument("--missing-shard-review-gate")
     launch_floor_parser.add_argument("--native-runtime-bridge-gauntlet-source", default="Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasRuntimeBridgeCoverageGauntletTests.swift")
     launch_floor_parser.add_argument("--output-root", required=True)
     launch_floor_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
@@ -2590,6 +2622,30 @@ def main(argv: list[str] | None = None) -> int:
             Path(args.markdown).write_text(missing_shard_event_queue_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
+    if args.command == "missing-shard-review-gate":
+        result = compile_missing_shard_review_gate(
+            MissingShardReviewGateOptions(
+                missing_shard_queue_path=Path(args.missing_shard_queue),
+                source_lane_registry_path=Path(args.source_lane_registry) if args.source_lane_registry else None,
+                legal_terms_registry_path=Path(args.legal_terms_registry) if args.legal_terms_registry else None,
+                api_governance_registry_path=Path(args.api_governance_registry) if args.api_governance_registry else None,
+                approval_artifact_path=Path(args.approval_artifact) if args.approval_artifact else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                execute=args.execute,
+                allow_active_registry_write=args.allow_active_registry_write,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(missing_shard_review_gate_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":
         result = build_source_atlas_launch_floor_ledger(
             SourceAtlasLaunchFloorLedgerOptions(
@@ -2613,6 +2669,9 @@ def main(argv: list[str] | None = None) -> int:
                 golden_intent_corpus_path=Path(args.golden_intent_corpus) if args.golden_intent_corpus else None,
                 fallback_metric_path=Path(args.fallback_metric) if args.fallback_metric else None,
                 missing_shard_events_path=Path(args.missing_shard_events) if args.missing_shard_events else None,
+                missing_shard_review_gate_path=Path(args.missing_shard_review_gate)
+                if args.missing_shard_review_gate
+                else None,
                 native_runtime_bridge_gauntlet_source_path=Path(args.native_runtime_bridge_gauntlet_source)
                 if args.native_runtime_bridge_gauntlet_source
                 else None,

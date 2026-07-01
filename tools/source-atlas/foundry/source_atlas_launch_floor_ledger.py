@@ -23,7 +23,7 @@ from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m04-l01"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m04-l02"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -130,6 +130,7 @@ class SourceAtlasLaunchFloorLedgerOptions:
     golden_intent_corpus_path: Path | None = None
     fallback_metric_path: Path | None = None
     missing_shard_events_path: Path | None = None
+    missing_shard_review_gate_path: Path | None = None
     native_runtime_bridge_gauntlet_source_path: Path | None = None
     emit_evidence_path: Path | None = None
     markdown_path: Path | None = None
@@ -163,6 +164,11 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         "goldenIntentCorpus": _read_optional_json(options.golden_intent_corpus_path, "golden intent corpus", issues),
         "fallbackMetric": _read_optional_json(options.fallback_metric_path, "source-needed fallback metric", issues),
         "missingShardEvents": _read_optional_json(options.missing_shard_events_path, "missing-shard events", issues),
+        "missingShardReviewGate": _read_optional_json(
+            options.missing_shard_review_gate_path,
+            "missing-shard review gate",
+            issues,
+        ),
     }
     native_bridge_source_contract = _native_bridge_source_contract(options.native_runtime_bridge_gauntlet_source_path)
     launch_floor_taxonomy_summary = _launch_floor_taxonomy_summary(artifacts)
@@ -439,6 +445,7 @@ def _counters(
     expansion_chain = artifacts["autonomousDomainExpansionChain"]
     fallback_metric = artifacts["fallbackMetric"]
     missing_shard_events = artifacts["missingShardEvents"]
+    missing_shard_review_gate = artifacts["missingShardReviewGate"]
     r2_layout_proof = artifacts["r2LayoutProof"]
     taxonomy_counts = launch_floor_taxonomy["recordCounts"]
     taxonomy_valid = not launch_floor_taxonomy["issues"]
@@ -558,6 +565,21 @@ def _counters(
             "sourceNeededFallbackDenominator": source_needed_denominator,
             "missingShardEvents": missing_event_summary["eventCount"],
             "missingShardEventsWithDurableExpansion": missing_event_summary["durableExpansionEventCount"],
+            "missingShardReviewGateDecisions": _record_count(missing_shard_review_gate, "gateDecisions"),
+            "missingShardReviewGateApprovedEvents": _record_count(missing_shard_review_gate, "approvedEvents"),
+            "missingShardReviewGateBlockedEvents": _record_count(missing_shard_review_gate, "blockedEvents"),
+            "missingShardReviewGatePlannedRegistryMutations": _record_count(
+                missing_shard_review_gate,
+                "plannedRegistryMutations",
+            ),
+            "missingShardReviewGateActiveRegistryMutations": _record_count(
+                missing_shard_review_gate,
+                "activeRegistryMutations",
+            ),
+            "missingShardReviewGateCoverageCounterMutations": _record_count(
+                missing_shard_review_gate,
+                "coverageCounterMutations",
+            ),
         },
     }
 
@@ -830,6 +852,25 @@ def _current_capabilities(counters: dict[str, Any], target_statuses: list[dict[s
             ),
         }
     )
+    if counts["missingShardReviewGateDecisions"] is not None:
+        review_gate_proven = (
+            counts["missingShardReviewGateActiveRegistryMutations"] == 0
+            and counts["missingShardReviewGateCoverageCounterMutations"] == 0
+        )
+        capabilities.append(
+            {
+                "capabilityID": "missing_shard_review_legal_api_gate",
+                "status": "proven_current" if review_gate_proven else "not_proven",
+                "evidence": (
+                    f"{counts['missingShardReviewGateDecisions']} gate decisions, "
+                    f"{counts['missingShardReviewGateApprovedEvents'] or 0} approved for dry-run planning, "
+                    f"{counts['missingShardReviewGateBlockedEvents'] or 0} blocked, "
+                    f"{counts['missingShardReviewGatePlannedRegistryMutations'] or 0} planned dry-run mutations, "
+                    f"{counts['missingShardReviewGateActiveRegistryMutations'] or 0} active mutations, "
+                    f"{counts['missingShardReviewGateCoverageCounterMutations'] or 0} coverage counter mutations"
+                ),
+            }
+        )
     return capabilities
 
 
@@ -955,8 +996,13 @@ def _validation_matrix() -> list[dict[str, str]]:
             "purpose": "convert every lawful LFF-M03 source-needed fallback into a durable public/reference candidate-only expansion queue item without source review, legal/API approval, harvest execution, R2 promotion, native activation, or final-output claims",
         },
         {
+            "validationID": "missing_shard_review_gate",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py missing-shard-review-gate --missing-shard-queue docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json --output-root tools/source-atlas/generated/source-atlas-missing-shard-review-gate/lff-m04-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-missing-shard-review-gate-lff-m04.json --markdown docs/qa/source-atlas/source-atlas-missing-shard-review-gate-lff-m04.md",
+            "purpose": "prove every current missing-shard queue item is blocked behind public/reference, source-lane, legal/terms, API, no-private-data, and required owner gates before registry mutation planning",
+        },
+        {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m04-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json --missing-shard-review-gate docs/qa/source-atlas/source-atlas-missing-shard-review-gate-lff-m04.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m04-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
             "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, validated source-needed fallback metric, durable LFF-M04 missing-shard queue evidence, native launch-floor corpus sample contract, and no source/R2/native mutation",
         },
         {
@@ -1341,6 +1387,7 @@ def _input_paths(options: SourceAtlasLaunchFloorLedgerOptions) -> dict[str, str 
         "goldenIntentCorpus": str(options.golden_intent_corpus_path) if options.golden_intent_corpus_path else None,
         "fallbackMetric": str(options.fallback_metric_path) if options.fallback_metric_path else None,
         "missingShardEvents": str(options.missing_shard_events_path) if options.missing_shard_events_path else None,
+        "missingShardReviewGate": str(options.missing_shard_review_gate_path) if options.missing_shard_review_gate_path else None,
         "nativeRuntimeBridgeGauntletSource": str(options.native_runtime_bridge_gauntlet_source_path) if options.native_runtime_bridge_gauntlet_source_path else None,
     }
 
