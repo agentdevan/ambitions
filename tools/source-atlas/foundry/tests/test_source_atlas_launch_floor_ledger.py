@@ -42,6 +42,8 @@ R2_LAYOUT_PROOF = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-lau
 GOLDEN_INTENT_CORPUS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-launch-floor-golden-intent-corpus-lff-m03.json"
 FALLBACK_METRIC = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-source-needed-fallback-metric-lff-m03.json"
 MISSING_SHARD_EVENTS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-event-queue-lff-m04.json"
+MISSING_SHARD_REVIEW_GATE = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-review-gate-lff-m04.json"
+MISSING_SHARD_ACTIVATION_EXECUTOR = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-activation-executor-lff-m04.json"
 NATIVE_BRIDGE_GAUNTLET_SOURCE = REPO_ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SourceAtlas" / "SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
 
 
@@ -79,6 +81,13 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert counts["sourceNeededFallbackDenominator"] == 50_000
     assert counts["missingShardEvents"] == 200
     assert counts["missingShardEventsWithDurableExpansion"] == 200
+    assert counts["missingShardReviewGateDecisions"] == 200
+    assert counts["missingShardReviewGateBlockedEvents"] == 200
+    assert counts["missingShardReviewGateActiveRegistryMutations"] == 0
+    assert counts["missingShardActivationStageDecisions"] == 1200
+    assert counts["missingShardActivationBlockedStageDecisions"] == 1200
+    assert counts["missingShardActivationR2WriteOperations"] == 0
+    assert counts["missingShardActivationNativeActivationOperations"] == 0
     assert counts["nativeBridgeLaunchFloorCorpusSamples"] == 7
     assert counts["nativeBridgeLaunchFloorCorpusPermutations"] == 14
     assert counts["packablePublicReferenceClaimProxy"] == 71
@@ -192,6 +201,8 @@ def _current_options(tmp_path: Path) -> SourceAtlasLaunchFloorLedgerOptions:
         golden_intent_corpus_path=GOLDEN_INTENT_CORPUS,
         fallback_metric_path=FALLBACK_METRIC,
         missing_shard_events_path=MISSING_SHARD_EVENTS,
+        missing_shard_review_gate_path=MISSING_SHARD_REVIEW_GATE,
+        missing_shard_activation_executor_path=MISSING_SHARD_ACTIVATION_EXECUTOR,
         native_runtime_bridge_gauntlet_source_path=NATIVE_BRIDGE_GAUNTLET_SOURCE,
         output_root=tmp_path / "current-launch-floor",
         created_at="2026-07-01T00:00:00Z",

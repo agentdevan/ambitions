@@ -1,0 +1,38 @@
+{
+  "activationApprovalID": "source_atlas.missing_shard_activation_approval_template.9eabbb050acdc1e4",
+  "activationStatus": "template_not_approved",
+  "coverageCounterMutationAllowed": false,
+  "finalOutputAllowed": false,
+  "kind": "ambitions.sourceAtlas.missingShardActivationApproval.v1",
+  "nativeActivationApproval": {
+    "allowed": false,
+    "noPrivateEgressRequired": true,
+    "verifiedPublicManifestRequired": true
+  },
+  "nonClaims": [
+    "template only",
+    "not approval",
+    "not R2 write",
+    "not native activation"
+  ],
+  "plannedMutations": [],
+  "privateContextPresent": false,
+  "publicReferenceOnly": true,
+  "r2WriteApproval": {
+    "allowed": false,
+    "publicReferenceOnly": true,
+    "reversible": true
+  },
+  "reversibleActivation": true,
+  "reviewOwner": "",
+  "reviewedAt": "",
+  "selectedMutationIDs": [],
+  "stageApprovals": {
+    "adjudication": "required",
+    "claimExtraction": "required",
+    "harvest": "required",
+    "nativeActivation": "required",
+    "packCompile": "required",
+    "r2Promotion": "required"
+  }
+}
