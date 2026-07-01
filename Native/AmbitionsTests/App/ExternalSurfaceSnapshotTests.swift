@@ -617,16 +617,31 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
         XCTAssertEqual(refreshCount, 4)
     }
 
-    func testSnapshotWriterRecordsExternalSnapshotSuccessInSideEffectLedger() async {
-        let goal = makeGoal(
-            goalID: "goal-success",
-            goalTitle: "System title",
-            stepID: "step-success",
-            stepTitle: "Complete task",
-            dueAt: "2026-04-16T09:00:00Z"
-        )
+    func testSnapshotWriterConsumesSanitizedProjectionsAndWritesSafeAppGroupRecord() async throws {
+        let directory = try scratchDirectory()
+        let runtimeStore = InMemoryRuntimeEventStore()
+        _ = try await runtimeStore.append(commandEvent(
+            id: "command-safe-widget",
+            kind: .quickCapture,
+            source: .capture,
+            target: AmbitionsCommandTarget(captureID: "capture-safe", destination: .captureInbox),
+            summary: "Safe capture update",
+            privacy: .standard
+        ))
+        _ = try await runtimeStore.append(commandEvent(
+            id: "command-private-widget",
+            kind: .openDestination,
+            source: .widget,
+            target: AmbitionsCommandTarget(destination: .today),
+            summary: "Private Therapy Session",
+            privacy: .privateUserText
+        ))
+        let batch = try await ProjectionMaterializer(store: runtimeStore).materializeAll(materializedAt: "2026-06-30T09:00:00Z")
+        let projectionStore = ProjectionStoreSQLite(databaseURL: directory.appendingPathComponent("projections.sqlite"))
+        try await projectionStore.save(batch: batch, updatedAt: "2026-06-30T09:01:00Z")
+        let appGroupStore = AppGroupSnapshotStore(rootDirectory: directory.appendingPathComponent("snapshots", isDirectory: true))
         let sideEffectLedger = InMemorySideEffectLedgerRepository()
-        let repositories = StaticSnapshotWriterRepositories(goals: [goal])
+        let repositories = StaticSnapshotWriterRepositories(failOnRawGraphRead: true)
         let now = Date(timeIntervalSince1970: 1_712_779_200)
         let writer = ExternalSurfaceSnapshotWriter(
             repositories: AppRepositories(
@@ -638,24 +653,46 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                 teaching: repositories,
                 eventLedger: InMemoryEventLedgerRepository(),
                 sideEffectLedger: sideEffectLedger,
+                projectionStore: projectionStore,
+                appGroupSnapshotStore: appGroupStore,
                 appState: repositories
-            ),
-            sink: NoopExternalSurfaceSnapshotDataSink()
+            )
         )
 
         await writer.refresh(now: now)
 
-        let record = try? await sideEffectLedger.fetchRecord(id: "externalSnapshot.recorded_local_only.1712779200")
+        let storedRecord = try await appGroupStore.read(id: SharedExternalSnapshotStore.snapshotRecordID)
+        let snapshot = try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: storedRecord.payloadData)
+        let payloadJSON = try XCTUnwrap(String(data: storedRecord.payloadData, encoding: .utf8))
+        let sharedRecordURL = directory
+            .appendingPathComponent("snapshots", isDirectory: true)
+            .appendingPathComponent("\(SharedExternalSnapshotStore.snapshotRecordID).snapshot.json")
+        let sharedRecord = try PersistenceCoding.decode(SharedExternalSnapshotRecord.self, from: Data(contentsOf: sharedRecordURL))
+        let sideEffectRecord = try? await sideEffectLedger.fetchRecord(id: "externalSnapshot.recorded_local_only.1712779200")
 
-        XCTAssertEqual(record?.effectKind, .externalSnapshot)
-        XCTAssertEqual(record?.status, .recordedLocalOnly)
-        XCTAssertEqual(record?.boundary, .localOnly)
-        XCTAssertEqual(record?.sourceDomain, .system)
-        XCTAssertEqual(record?.actionKind, .noOp)
-        XCTAssertEqual(record?.occurredAt, DomainTimestamp.string(from: now))
+        XCTAssertEqual(storedRecord.id, SharedExternalSnapshotStore.snapshotRecordID)
+        XCTAssertEqual(storedRecord.snapshotKind, SharedExternalSnapshotStore.snapshotKind)
+        XCTAssertEqual(storedRecord.privacyClasses, [.standard])
+        XCTAssertFalse(storedRecord.containsPrivateRuntimeData)
+        XCTAssertTrue(sharedRecord.isSafeForExternalProcess)
+        XCTAssertEqual(try sharedRecord.verifiedPayloadData(), storedRecord.payloadData)
+        XCTAssertNil(snapshot.nextAction)
+        XCTAssertEqual(snapshot.nowState?.todayPosture, .active)
+        XCTAssertEqual(snapshot.nowState?.openCaptureUrgency, .low)
+        XCTAssertEqual(snapshot.nowState?.blockerSummary.waitingCount, 1)
+        XCTAssertEqual(snapshot.nowState?.supportedCommands.map(\.kind), [.openToday, .openCaptureComposer, .openMemoryLens])
+        XCTAssertFalse(payloadJSON.contains("Private Therapy Session"))
+        XCTAssertFalse(payloadJSON.contains("command-private-widget"))
+        XCTAssertFalse(payloadJSON.contains("capture-safe"))
+        XCTAssertEqual(sideEffectRecord?.effectKind, .externalSnapshot)
+        XCTAssertEqual(sideEffectRecord?.status, .recordedLocalOnly)
+        XCTAssertEqual(sideEffectRecord?.boundary, .localOnly)
+        XCTAssertEqual(sideEffectRecord?.sourceDomain, .system)
+        XCTAssertEqual(sideEffectRecord?.actionKind, .noOp)
+        XCTAssertEqual(sideEffectRecord?.occurredAt, DomainTimestamp.string(from: now))
     }
 
-    func testSnapshotWriterRecordsFailedWriteFailureInSideEffectLedger() async {
+    func testSnapshotWriterFailsClosedWithoutProjectionStore() async {
         let sideEffectLedger = InMemorySideEffectLedgerRepository()
         let repositories = StaticSnapshotWriterRepositories()
         let now = Date(timeIntervalSince1970: 1_712_779_200)
@@ -670,8 +707,7 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
                 eventLedger: InMemoryEventLedgerRepository(),
                 sideEffectLedger: sideEffectLedger,
                 appState: repositories
-            ),
-            sink: ThrowingExternalSurfaceSnapshotDataSink()
+            )
         )
 
         await writer.refresh(now: now)
@@ -688,13 +724,18 @@ final class ExternalSurfaceSnapshotTests: XCTestCase {
 
 private actor StaticSnapshotWriterRepositories: GoalRepository, GoalDraftRepository, ProgressEvidenceRepository, FeedbackEventRepository, CaptureRepository, GoalTeachingSignalRepository, EventLedgerRepository, AppStateRepository {
     private let goals: [Goal]
+    private let failOnRawGraphRead: Bool
 
-    init(goals: [Goal] = []) {
+    init(goals: [Goal] = [], failOnRawGraphRead: Bool = false) {
         self.goals = goals
+        self.failOnRawGraphRead = failOnRawGraphRead
     }
 
     func listGoals() async throws -> [Goal] {
-        goals
+        if failOnRawGraphRead {
+            throw SnapshotWriterRawGraphReadError.unexpectedRawGraphRead
+        }
+        return goals
     }
 
     func listHabitGoals() async throws -> [Goal] {
@@ -771,7 +812,10 @@ private actor StaticSnapshotWriterRepositories: GoalRepository, GoalDraftReposit
     }
 
     func listCaptures() async throws -> [Capture] {
-        []
+        if failOnRawGraphRead {
+            throw SnapshotWriterRawGraphReadError.unexpectedRawGraphRead
+        }
+        return []
     }
 
     func capture(id: String) async throws -> Capture? {
@@ -831,22 +875,54 @@ private actor StaticSnapshotWriterRepositories: GoalRepository, GoalDraftReposit
     }
 }
 
-private struct NoopExternalSurfaceSnapshotDataSink: ExternalSurfaceSnapshotDataSink {
-    func write(_ data: Data) throws {
-        _ = data
-    }
-}
-
-private struct ThrowingExternalSurfaceSnapshotDataSink: ExternalSurfaceSnapshotDataSink {
-    struct SnapshotWriteError: Error {}
-
-    func write(_ data: Data) throws {
-        _ = data
-        throw SnapshotWriteError()
-    }
+private enum SnapshotWriterRawGraphReadError: Error {
+    case unexpectedRawGraphRead
 }
 
 private extension ExternalSurfaceSnapshotTests {
+    func commandEvent(
+        id: String,
+        kind: AmbitionsCommandKind,
+        source: AmbitionsCommandSource,
+        target: AmbitionsCommandTarget,
+        summary: String,
+        privacy: EventLedgerPrivacyClassification
+    ) -> RuntimeEvent {
+        let command = AmbitionsCommand(
+            id: id,
+            kind: kind,
+            source: source,
+            target: target,
+            payload: AmbitionsCommandPayload(rawText: summary),
+            createdAt: "2026-06-30T09:00:00Z",
+            privacy: privacy
+        )
+        let result = AmbitionsCommandExecutionResult(
+            status: .succeeded,
+            summary: summary,
+            route: target.destination,
+            target: target,
+            eventLedgerEntryIDs: ["ledger.\(id)"],
+            metadata: ["objectID": target.captureID ?? target.goalID ?? "object-\(id)"]
+        )
+        return RuntimeEvent.commandExecution(
+            command: command,
+            result: result,
+            recordedAt: "2026-06-30T09:00:00Z",
+            commandRecordID: "command.execution.\(id)"
+        )
+    }
+
+    func scratchDirectory() throws -> URL {
+        let directory = URL(fileURLWithPath: "/tmp", isDirectory: true)
+            .appendingPathComponent("ambitions-external-surface-snapshot-tests-\(UUID().uuidString)", isDirectory: true)
+        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
+        addTeardownBlock {
+            try? FileManager.default.removeItem(at: directory)
+        }
+        return directory
+    }
+
     func makeGoal(
         goalID: String,
         goalTitle: String,

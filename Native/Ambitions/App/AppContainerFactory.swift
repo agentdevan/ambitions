@@ -231,6 +231,7 @@ enum AppContainerFactory {
             commandExecutionRecords: SwiftDataAmbitionsCommandExecutionRecordRepository(store: store),
             runtimeEvents: runtimeEventStore(for: configuration),
             projectionStore: projectionStore(for: configuration),
+            appGroupSnapshotStore: appGroupSnapshotStore(for: configuration),
             searchIndex: searchIndex(for: configuration),
             commandJournal: commandJournal(for: configuration),
             executionLedgerReplayInspection: SwiftDataExecutionLedgerReplayInspectionRepository(store: store),
@@ -256,6 +257,13 @@ enum AppContainerFactory {
             return nil
         }
         return ProjectionStoreSQLite.defaultLiveStore()
+    }
+
+    private static func appGroupSnapshotStore(for configuration: AppBootstrapConfiguration) -> AppGroupSnapshotStore? {
+        if configuration.usesInMemoryStore {
+            return nil
+        }
+        return AppGroupSnapshotStore.defaultLiveStore()
     }
 
     private static func searchIndex(for configuration: AppBootstrapConfiguration) -> FTSIndex? {

@@ -439,14 +439,15 @@ actor UNUserNotificationCenterClient: LocalNotificationCenterClient {
 actor FileExternalSurfaceSnapshotReader: ExternalSurfaceSnapshotReading {
     private let fileURL: URL
 
-    init(fileURL: URL = SharedExternalSnapshotStore.snapshotFileURL()) {
+    init(fileURL: URL = SharedExternalSnapshotStore.snapshotRecordFileURL()) {
         self.fileURL = fileURL
     }
 
     func loadSnapshot() async throws -> ExternalSurfaceSnapshot? {
         guard FileManager.default.fileExists(atPath: fileURL.path) else { return nil }
         let data = try Data(contentsOf: fileURL)
-        return try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: data)
+        let record = try PersistenceCoding.decode(SharedExternalSnapshotRecord.self, from: data)
+        return try PersistenceCoding.decode(ExternalSurfaceSnapshot.self, from: try record.verifiedPayloadData())
     }
 }
 

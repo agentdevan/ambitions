@@ -84,6 +84,10 @@ final class ProjectionEngineTests: XCTestCase {
         XCTAssertTrue(batch.receipt.receiptEventIDs.contains(goal.id))
         XCTAssertTrue(batch.privacy.redactionRequiredEventIDs.contains(privateCommand.id))
         XCTAssertFalse(batch.widget.rows.map(\.eventID).contains(privateCommand.id))
+        let blockedAppIntentAction = AppIntentProjectionAction(record: ProjectionEventRecord(envelope: privateCommand))
+        XCTAssertFalse(blockedAppIntentAction.canRunFromIntent)
+        XCTAssertEqual(blockedAppIntentAction.title, "Open Ambitions")
+        XCTAssertEqual(blockedAppIntentAction.blockedReason, "Requires in-app confirmation or private context.")
         XCTAssertEqual(batch.cursors[.today]?.eventCursor, privateCommand.cursor)
         XCTAssertEqual(batch.cursors[.privacy]?.eventCursor, privateCommand.cursor)
         XCTAssertTrue(batch.invalidations.contains { $0.projectionID == .today && $0.eventID == privateCommand.id })
@@ -156,6 +160,9 @@ final class ProjectionEngineTests: XCTestCase {
         let goalsRead = try await adapter.readGoals(minimumEventCursor: batch.goals.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
         let timeRead = try await adapter.readTime(minimumEventCursor: batch.time.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
         let youRead = try await adapter.readYou(minimumEventCursor: batch.you.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
+        let widgetRead = try await adapter.readWidget(minimumEventCursor: batch.widget.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
+        let appIntentRead = try await adapter.readAppIntent(minimumEventCursor: batch.appIntent.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
+        let privacyRead = try await adapter.readPrivacy(minimumEventCursor: batch.privacy.cursor.eventCursor, inspectedAt: "2026-06-30T06:12:00Z")
         let searchRead = try await adapter.search(
             SearchRecallQuery(rawText: "adapter", limit: 10),
             minimumEventCursor: batch.search.cursor.eventCursor,
@@ -171,6 +178,12 @@ final class ProjectionEngineTests: XCTestCase {
         XCTAssertTrue(goalsRead.projection?.proofEventIDs.contains(proof.id) == true)
         XCTAssertTrue(timeRead.projection?.placementEventIDs.contains(time.id) == true)
         XCTAssertTrue(youRead.projection?.proofEventIDs.contains(proof.id) == true)
+        XCTAssertEqual(widgetRead.status, .available)
+        XCTAssertTrue(widgetRead.projection?.rows.contains { $0.eventID == today.id } == true)
+        XCTAssertEqual(appIntentRead.status, .available)
+        XCTAssertTrue(appIntentRead.projection?.actions.contains { $0.eventID == today.id } == true)
+        XCTAssertEqual(privacyRead.status, .available)
+        XCTAssertTrue(privacyRead.projection?.buckets.contains { $0.id == .standard } == true)
         XCTAssertEqual(searchRead.projectionState.status, .available)
         XCTAssertEqual(searchRead.source, .searchStoreFTS)
         XCTAssertTrue(searchRead.results.contains { $0.provenance.eventID == today.id })

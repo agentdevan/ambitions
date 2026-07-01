@@ -4,32 +4,51 @@ protocol ExternalSurfaceSnapshotWriting: Sendable {
     func refresh(now: Date) async
 }
 
-protocol ExternalSurfaceSnapshotDataSink: Sendable {
-    func write(_ data: Data) throws
-}
-
 actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
     private let repositories: AppRepositories
     private let builder: ExternalSurfaceSnapshotBuilder
-    private let sink: any ExternalSurfaceSnapshotDataSink
+    private let appGroupSnapshotStore: AppGroupSnapshotStore?
 
     init(
         repositories: AppRepositories,
         builder: ExternalSurfaceSnapshotBuilder = ExternalSurfaceSnapshotBuilder(),
-        sink: any ExternalSurfaceSnapshotDataSink = FileExternalSurfaceSnapshotDataSink.default()
+        appGroupSnapshotStore: AppGroupSnapshotStore? = nil
     ) {
         self.repositories = repositories
         self.builder = builder
-        self.sink = sink
+        self.appGroupSnapshotStore = appGroupSnapshotStore ?? repositories.appGroupSnapshotStore
     }
 
     func refresh(now: Date = .now) async {
         do {
-            async let goals = repositories.goals.listGoals()
-            async let captures = repositories.captures.listCaptures()
-            let snapshot = try await builder.makeSnapshot(goals: goals, captures: captures, now: now)
+            guard let projectionStore = repositories.projectionStore else {
+                throw ExternalSurfaceSnapshotWriterError.missingProjectionStore
+            }
+            guard let appGroupSnapshotStore else {
+                throw ExternalSurfaceSnapshotWriterError.missingAppGroupSnapshotStore
+            }
+            guard let widgetRecord = try await projectionStore.fetchRecord(id: .widget) else {
+                throw ExternalSurfaceSnapshotWriterError.missingProjection(.widget)
+            }
+            guard let privacyRecord = try await projectionStore.fetchRecord(id: .privacy) else {
+                throw ExternalSurfaceSnapshotWriterError.missingProjection(.privacy)
+            }
+
+            let widget = try LocalRuntimeStorageCoding.decode(WidgetProjection.self, from: widgetRecord.payloadData)
+            let privacy = try LocalRuntimeStorageCoding.decode(PrivacyProjection.self, from: privacyRecord.payloadData)
+            try validateExternalSurfacePrivacy(widget: widget, privacy: privacy)
+
+            let snapshot = builder.makeSnapshot(widget: widget, privacy: privacy, now: now)
             let data = try PersistenceCoding.encode(snapshot)
-            try sink.write(data)
+            let record = AppGroupSnapshotRecord(
+                id: SharedExternalSnapshotStore.snapshotRecordID,
+                snapshotKind: SharedExternalSnapshotStore.snapshotKind,
+                createdAt: DomainTimestamp.string(from: now),
+                privacyClasses: safePrivacyClasses(from: widget),
+                containsPrivateRuntimeData: false,
+                payloadData: data
+            )
+            try await appGroupSnapshotStore.write(record)
 
             await recordExternalSnapshotSideEffect(status: .recordedLocalOnly, at: now)
         } catch {
@@ -40,6 +59,34 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
             )
             // Snapshot export is best-effort and must never block user flows.
         }
+    }
+
+    private func validateExternalSurfacePrivacy(widget: WidgetProjection, privacy: PrivacyProjection) throws {
+        let unsafeRowPrivacy = widget.rows.map(\.privacySummary).filter { value in
+            value == EventLedgerPrivacyClassification.privateUserText.rawValue ||
+                value == EventLedgerPrivacyClassification.sensitive.rawValue
+        }
+        guard unsafeRowPrivacy.isEmpty else {
+            throw ExternalSurfaceSnapshotWriterError.unsafeWidgetProjection
+        }
+
+        let redactionRequired = Set(privacy.redactionRequiredEventIDs)
+        let widgetRedacted = Set(widget.redactedEventIDs)
+        guard widgetRedacted.isSubset(of: redactionRequired) else {
+            throw ExternalSurfaceSnapshotWriterError.privacyProjectionMismatch
+        }
+    }
+
+    private func safePrivacyClasses(from widget: WidgetProjection) -> [EventLedgerPrivacyClassification] {
+        let classes = widget.rows.compactMap { row -> EventLedgerPrivacyClassification? in
+            guard let classification = EventLedgerPrivacyClassification(rawValue: row.privacySummary),
+                  classification == .standard || classification == .calendarDerived || classification == .syncMetadata else {
+                return nil
+            }
+            return classification
+        }
+        let unique = Array(Set(classes)).sorted { $0.rawValue < $1.rawValue }
+        return unique.isEmpty ? [.standard] : unique
     }
 
     private func recordExternalSnapshotSideEffect(
@@ -72,16 +119,10 @@ actor ExternalSurfaceSnapshotWriter: ExternalSurfaceSnapshotWriting {
     }
 }
 
-struct FileExternalSurfaceSnapshotDataSink: ExternalSurfaceSnapshotDataSink {
-    let fileURL: URL
-
-    func write(_ data: Data) throws {
-        let directory = fileURL.deletingLastPathComponent()
-        try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true, attributes: nil)
-        try data.write(to: fileURL, options: .atomic)
-    }
-
-    static func `default`() -> FileExternalSurfaceSnapshotDataSink {
-        FileExternalSurfaceSnapshotDataSink(fileURL: SharedExternalSnapshotStore.snapshotFileURL())
-    }
+enum ExternalSurfaceSnapshotWriterError: Error {
+    case missingProjectionStore
+    case missingAppGroupSnapshotStore
+    case missingProjection(ProjectionID)
+    case unsafeWidgetProjection
+    case privacyProjectionMismatch
 }

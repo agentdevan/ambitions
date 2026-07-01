@@ -49,6 +49,8 @@ final class ExternalSurfaceVerificationChecklistTests: XCTestCase {
         XCTAssertEqual(SharedExternalSnapshotStore.appGroupIdentifier, "group.com.ambitions.shared")
         XCTAssertEqual(SharedExternalSnapshotStore.relativeDirectory, "ExternalSnapshots")
         XCTAssertEqual(SharedExternalSnapshotStore.fileName, "external-snapshot.v1.json")
+        XCTAssertEqual(SharedExternalSnapshotStore.snapshotRecordID, "external-surface-current")
+        XCTAssertEqual(SharedExternalSnapshotStore.snapshotKind, "widget_projection_external_surface")
         XCTAssertTrue(record.receiptRequirements.contains("Shared container does not create a separate mutation or receipt store"))
         XCTAssertTrue(record.privacyRequirements.contains("Store lightweight privacy-safe snapshots only"))
 

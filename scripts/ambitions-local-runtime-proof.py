@@ -214,6 +214,40 @@ MUTATION_SCAN_INCLUDED_PREFIXES = [
     "Native/AmbitionsShareExtension/",
 ]
 
+EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES = [
+    "Native/Ambitions/App/Intents/",
+    "Native/AmbitionsWidgetExtension/",
+    "Native/AmbitionsShareExtension/",
+]
+
+EXTERNAL_SURFACE_PRIVATE_GRAPH_READ_PATTERNS = [
+    (
+        "external-surface-app-repositories-read",
+        re.compile(r"\bAppRepositories\b"),
+        "External surfaces must not read the app repository bundle or private object graph directly.",
+    ),
+    (
+        "external-surface-goal-repository-read",
+        re.compile(r"\bGoalRepository\b|\blistGoals\s*\("),
+        "External surfaces must consume sanitized projections or durable intake records, not goals repositories.",
+    ),
+    (
+        "external-surface-capture-repository-read",
+        re.compile(r"\bCaptureRepository\b|\blistCaptures\s*\("),
+        "External surfaces must consume sanitized projections or durable intake records, not captures repositories.",
+    ),
+    (
+        "external-surface-swiftdata-read",
+        re.compile(r"\bSwiftData\b|\bModelContext\b|\bAmbitionsPersistenceStore\b"),
+        "External surfaces must not open SwiftData/private persistence directly.",
+    ),
+    (
+        "external-surface-runtime-store-read",
+        re.compile(r"\bProjectionStoreSQLite\b|\bEventStoreSQLite\b|\bRuntimeEventStore\b"),
+        "Extensions/App Intents must not open LocalRuntimeOS stores directly; app-owned projection writers create sanitized handoff records.",
+    ),
+]
+
 RUNTIME_EVENT_APPEND_ALLOWED_PATHS = {
     "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift",
 }
@@ -968,6 +1002,142 @@ def check_projection_store_surface_read_gate() -> CheckResult:
     )
 
 
+def check_external_surface_sanitized_projection_gate() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift": [
+            "projectionStore.fetchRecord(id: .widget)",
+            "projectionStore.fetchRecord(id: .privacy)",
+            "LocalRuntimeStorageCoding.decode(WidgetProjection.self",
+            "LocalRuntimeStorageCoding.decode(PrivacyProjection.self",
+            "validateExternalSurfacePrivacy(widget: widget, privacy: privacy)",
+            "builder.makeSnapshot(widget: widget, privacy: privacy",
+            "AppGroupSnapshotRecord(",
+            "SharedExternalSnapshotStore.snapshotRecordID",
+            "SharedExternalSnapshotStore.snapshotKind",
+            "appGroupSnapshotStore.write(record)",
+            "privacy.redactionRequiredEventIDs",
+        ],
+        ROOT / "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotBuilder.swift": [
+            "func makeSnapshot(widget: WidgetProjection, privacy: PrivacyProjection, now: Date)",
+            "nextAction: nil",
+            "Glance-safe updates only",
+        ],
+        ROOT / "Native/Ambitions/Projection/ExternalSnapshots/SharedExternalSnapshotStore.swift": [
+            "snapshotRecordID",
+            "snapshotRecordFileURL",
+            "struct SharedExternalSnapshotRecord",
+            "payloadChecksum",
+            "isSafeForExternalProcess",
+            "verifiedPayloadData",
+            "SHA256.hash",
+        ],
+        ROOT / "Native/AmbitionsWidgetExtension/NextStepWidget.swift": [
+            "SharedExternalSnapshotStore.snapshotRecordFileURL()",
+            "SharedExternalSnapshotRecord.self",
+            "record.verifiedPayloadData()",
+        ],
+        ROOT / "Native/Ambitions/Core/Permissions/LocalNotificationFoundation.swift": [
+            "SharedExternalSnapshotStore.snapshotRecordFileURL()",
+            "SharedExternalSnapshotRecord.self",
+            "record.verifiedPayloadData()",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/ProjectionStoreSurfaceReadAdapter.swift": [
+            "readWidget",
+            "WidgetProjection.self",
+            "readAppIntent",
+            "AppIntentProjection.self",
+            "readPrivacy",
+            "PrivacyProjection.self",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/ProjectionEngine/AppIntentProjection.swift": [
+            "canRunFromIntent = record.isPrivacySafeForExternalSurface && record.resultStatus != .failed",
+            'title = canRunFromIntent ? record.summary : "Open Ambitions"',
+            "blockedReason = canRunFromIntent ? nil",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/AppIntentBridge.swift": [
+            "SharedExternalCreationStore",
+            "enqueueExternalCreation",
+            "commitRequirement: .committedProjection",
+            "requestedBoundary: .localOnly",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SideEffectSystem/ShareExtensionIntake.swift": [
+            "recordDurableIntake",
+            "commitRequirement: .committedProjection",
+            "without direct private graph mutation",
+        ],
+        ROOT / "Native/AmbitionsShareExtension/ShareViewController.swift": [
+            "store.enqueueDurableRequest(request)",
+            "ExternalCreationRequest(",
+        ],
+    }
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "external-surface-sanitized-projection-missing-source",
+                    relative(path),
+                    None,
+                    "External-surface sanitized projection source is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "external-surface-sanitized-projection-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing external-surface sanitized projection marker `{marker}`.",
+                    )
+                )
+
+    writer_path = ROOT / "Native/Ambitions/Projection/ExternalSnapshots/ExternalSurfaceSnapshotWriter.swift"
+    if writer_path.exists():
+        writer_text = read_text(writer_path)
+        forbidden_writer_markers = [
+            "repositories.goals.listGoals",
+            "repositories.captures.listCaptures",
+            "FileExternalSurfaceSnapshotDataSink",
+            "SharedExternalSnapshotStore.snapshotFileURL()",
+        ]
+        for marker in forbidden_writer_markers:
+            if marker in writer_text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "external-surface-writer-raw-graph-or-plain-file-path",
+                        relative(writer_path),
+                        None,
+                        f"ExternalSurfaceSnapshotWriter must not use `{marker}`.",
+                    )
+                )
+
+    for path in production_swift_files():
+        rel = relative(path)
+        if not any(rel.startswith(prefix) for prefix in EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES):
+            continue
+        lines = read_text(path).splitlines()
+        for index, line in enumerate(lines, start=1):
+            stripped = line.strip()
+            if stripped.startswith("//"):
+                continue
+            for code, pattern, message in EXTERNAL_SURFACE_PRIVATE_GRAPH_READ_PATTERNS:
+                if pattern.search(stripped):
+                    findings.append(Finding("blocker", code, rel, index, message))
+
+    return make_result(
+        "external_surface_sanitized_projection_gate",
+        findings,
+        "Widget/runtime readers use safe AppGroup snapshot records; writer consumes sanitized projections; App Intents/share use sanitized or durable-intake bridges.",
+        "{count} external-surface sanitized projection blocker(s) remain.",
+    )
+
+
 def check_runtime_mutation_context_boundaries() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
@@ -1130,6 +1300,7 @@ def run_checks() -> list[CheckResult]:
         check_meaningful_mutation_commit_policy(),
         check_transaction_coordinator_commit_ownership(),
         check_projection_store_surface_read_gate(),
+        check_external_surface_sanitized_projection_gate(),
         check_runtime_mutation_context_boundaries(),
         scan_mutation_bypasses(),
         scan_feature_service_mutation_authority(),
@@ -1263,6 +1434,8 @@ def run_self_test() -> int:
     assert "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift" in RUNTIME_EVENT_APPEND_ALLOWED_PATHS
     assert "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift" in PROJECTION_MATERIALIZATION_ALLOWED_PATHS
     assert "surface_projection_store_consumption" in INTEGRATION_MARKERS
+    assert any(prefix.endswith("AmbitionsWidgetExtension/") for prefix in EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES)
+    assert any(result.check_id == "external_surface_sanitized_projection_gate" for result in [check_external_surface_sanitized_projection_gate()])
     assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
     service_write = "try await repositories.goals.saveGoals([goal])"
     service_match = SERVICE_MUTATION_CALL_PATTERN.search(service_write)

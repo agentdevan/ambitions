@@ -124,6 +124,27 @@ struct ProjectionStoreSurfaceReadAdapter {
         try await readProjection(.search, as: SearchProjection.self, minimumEventCursor: minimumEventCursor, inspectedAt: inspectedAt)
     }
 
+    func readWidget(
+        minimumEventCursor: RuntimeEventCursor? = nil,
+        inspectedAt: String
+    ) async throws -> ProjectionStoreSurfaceReadEnvelope<WidgetProjection> {
+        try await readProjection(.widget, as: WidgetProjection.self, minimumEventCursor: minimumEventCursor, inspectedAt: inspectedAt)
+    }
+
+    func readAppIntent(
+        minimumEventCursor: RuntimeEventCursor? = nil,
+        inspectedAt: String
+    ) async throws -> ProjectionStoreSurfaceReadEnvelope<AppIntentProjection> {
+        try await readProjection(.appIntent, as: AppIntentProjection.self, minimumEventCursor: minimumEventCursor, inspectedAt: inspectedAt)
+    }
+
+    func readPrivacy(
+        minimumEventCursor: RuntimeEventCursor? = nil,
+        inspectedAt: String
+    ) async throws -> ProjectionStoreSurfaceReadEnvelope<PrivacyProjection> {
+        try await readProjection(.privacy, as: PrivacyProjection.self, minimumEventCursor: minimumEventCursor, inspectedAt: inspectedAt)
+    }
+
     func search(
         _ query: SearchRecallQuery,
         minimumEventCursor: RuntimeEventCursor? = nil,

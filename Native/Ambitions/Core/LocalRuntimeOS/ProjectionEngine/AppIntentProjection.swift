@@ -14,8 +14,8 @@ struct AppIntentProjectionAction: Codable, Equatable, Hashable, Identifiable {
         eventID = record.id
         commandID = record.commandID
         destination = record.route ?? record.target.destination
-        title = record.summary
         canRunFromIntent = record.isPrivacySafeForExternalSurface && record.resultStatus != .failed
+        title = canRunFromIntent ? record.summary : "Open Ambitions"
         blockedReason = canRunFromIntent ? nil : "Requires in-app confirmation or private context."
     }
 }
