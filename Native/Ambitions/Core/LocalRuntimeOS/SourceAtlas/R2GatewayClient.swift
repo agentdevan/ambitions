@@ -6,6 +6,12 @@ enum R2GatewayRequestKind: String, Codable, Sendable, Equatable, Hashable, CaseI
     case pack
     case revocation
     case lastKnownGood = "last_known_good"
+    case partitionIndex = "partition_index"
+    case partitionManifest = "partition_manifest"
+    case stagedManifest = "staged_manifest"
+    case promotedManifest = "promoted_manifest"
+    case rollback
+    case gatewayAllowlist = "gateway_allowlist"
 }
 
 enum R2GatewayClientIssue: String, Codable, Sendable, Equatable, Hashable, Error, CaseIterable {
@@ -90,6 +96,51 @@ struct R2GatewayClient: Sendable, Equatable, Hashable {
         )
     }
 
+    func compile(
+        objectRequest: SourceAtlasLaunchFloorShardObjectRequest,
+        manifestRequest: SourceAtlasPublicManifestRequest,
+        accessDecision: SourceAtlasAccessDecision
+    ) throws -> R2GatewayCompiledRequest {
+        guard baseURL.scheme == "https", baseURL.host?.isEmpty == false else {
+            throw R2GatewayClientIssue.invalidBaseURL
+        }
+        if objectRequest.validationIssues.contains(.privateObjectKey) {
+            throw R2GatewayClientIssue.privateObjectKey
+        }
+        let verdict = firewall.validate(
+            manifestRequest: manifestRequest,
+            packRequest: nil,
+            accessDecision: accessDecision,
+            additionalRecords: [
+                objectRequest.objectKeyEgressRecord,
+                objectRequest.requestShapeEgressRecord,
+            ]
+        )
+        guard verdict.isAllowed else {
+            throw R2GatewayClientIssue.firewallRejected
+        }
+
+        var components = URLComponents(url: baseURL, resolvingAgainstBaseURL: false)
+        let basePath = components?.path.trimmingCharacters(in: CharacterSet(charactersIn: "/")) ?? ""
+        let objectPath = objectRequest.objectKey.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
+        components?.path = "/" + ([basePath, objectPath].filter { $0.isEmpty == false }.joined(separator: "/"))
+        components?.queryItems = launchFloorQueryItems(
+            request: objectRequest,
+            manifestRequest: manifestRequest
+        ).sorted { $0.key < $1.key }.map { URLQueryItem(name: $0.key, value: $0.value) }
+
+        guard let url = components?.url else {
+            throw R2GatewayClientIssue.invalidBaseURL
+        }
+        return R2GatewayCompiledRequest(
+            kind: objectRequest.role.gatewayRequestKind,
+            url: url,
+            objectKey: objectRequest.objectKey,
+            queryItems: Dictionary(uniqueKeysWithValues: components?.queryItems?.map { ($0.name, $0.value ?? "") } ?? []),
+            firewallVerdict: verdict
+        )
+    }
+
     func urlRequest(for compiled: R2GatewayCompiledRequest) -> URLRequest {
         var request = URLRequest(url: compiled.url)
         request.httpMethod = "GET"
@@ -112,6 +163,16 @@ struct R2GatewayClient: Sendable, Equatable, Hashable {
             values["manifest_version"] = packRequest.manifestVersionID
             values["sha256"] = packRequest.declaredSHA256
         }
+        return values
+    }
+
+    private func launchFloorQueryItems(
+        request: SourceAtlasLaunchFloorShardObjectRequest,
+        manifestRequest: SourceAtlasPublicManifestRequest
+    ) -> [String: String] {
+        var values = manifestRequest.queryItems
+        values["request_kind"] = request.role.gatewayRequestKind.rawValue
+        values.merge(request.queryItems, uniquingKeysWith: { current, _ in current })
         return values
     }
 }

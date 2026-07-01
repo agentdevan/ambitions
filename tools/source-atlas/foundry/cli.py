@@ -118,6 +118,12 @@ from .launch_floor_r2_layout_proof import (
     launch_floor_r2_layout_proof_markdown,
     run_launch_floor_r2_layout_proof,
 )
+from .launch_floor_native_shard_index_proof import (
+    DEFAULT_R2_LAYOUT_INVENTORY_PATH,
+    LaunchFloorNativeShardIndexProofOptions,
+    launch_floor_native_shard_index_proof_markdown,
+    run_launch_floor_native_shard_index_proof,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -965,6 +971,26 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_r2_layout_proof_parser.add_argument("--simulate-readback-mismatch-object-key")
     launch_floor_r2_layout_proof_parser.add_argument("--emit-evidence")
     launch_floor_r2_layout_proof_parser.add_argument("--markdown")
+
+    launch_floor_native_shard_index_parser = sub.add_parser("launch-floor-native-shard-index-proof")
+    launch_floor_native_shard_index_parser.add_argument("--shard-corpus-manifest", default=str(DEFAULT_LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST_PATH))
+    launch_floor_native_shard_index_parser.add_argument("--r2-layout-inventory", default=str(DEFAULT_R2_LAYOUT_INVENTORY_PATH))
+    launch_floor_native_shard_index_parser.add_argument("--output-root", required=True)
+    launch_floor_native_shard_index_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    launch_floor_native_shard_index_parser.add_argument("--run-label", default="current")
+    launch_floor_native_shard_index_parser.add_argument("--xcode-result", default="NOT_RUN")
+    launch_floor_native_shard_index_parser.add_argument("--xcode-passed", type=int, default=0)
+    launch_floor_native_shard_index_parser.add_argument("--xcode-failed", type=int, default=0)
+    launch_floor_native_shard_index_parser.add_argument("--xcode-skipped", type=int, default=0)
+    launch_floor_native_shard_index_parser.add_argument("--xcode-duration-ms", type=int)
+    launch_floor_native_shard_index_parser.add_argument("--xcode-log-path")
+    launch_floor_native_shard_index_parser.add_argument("--xcode-profile")
+    launch_floor_native_shard_index_parser.add_argument("--branch")
+    launch_floor_native_shard_index_parser.add_argument("--commit-sha")
+    launch_floor_native_shard_index_parser.add_argument("--worktree-dirty-entry-count", type=int)
+    launch_floor_native_shard_index_parser.add_argument("--test-suite", action="append", dest="test_suites")
+    launch_floor_native_shard_index_parser.add_argument("--emit-evidence")
+    launch_floor_native_shard_index_parser.add_argument("--markdown")
 
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
@@ -2402,6 +2428,36 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(launch_floor_r2_layout_proof_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "launch-floor-native-shard-index-proof":
+        result = run_launch_floor_native_shard_index_proof(
+            LaunchFloorNativeShardIndexProofOptions(
+                shard_corpus_manifest_path=Path(args.shard_corpus_manifest),
+                r2_layout_inventory_path=Path(args.r2_layout_inventory),
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                xcode_result=args.xcode_result,
+                xcode_passed=args.xcode_passed,
+                xcode_failed=args.xcode_failed,
+                xcode_skipped=args.xcode_skipped,
+                xcode_duration_ms=args.xcode_duration_ms,
+                xcode_log_path=args.xcode_log_path,
+                xcode_profile=args.xcode_profile,
+                branch=args.branch,
+                commit_sha=args.commit_sha,
+                worktree_dirty_entry_count=args.worktree_dirty_entry_count,
+                test_suites=tuple(args.test_suites or ()),
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(launch_floor_native_shard_index_proof_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":

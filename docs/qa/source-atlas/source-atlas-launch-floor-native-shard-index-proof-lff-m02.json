@@ -1,0 +1,201 @@
+{
+  "allowedClaims": [
+    "source_atlas_native_partitioned_shard_index_compatibility_green"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "independent_accessibility_green",
+    "launch_floor_complete",
+    "literal_universal_coverage",
+    "live_r2_production_write_completed",
+    "native_physical_device_green",
+    "outside_legal_approval",
+    "r2_release_ready",
+    "release_green",
+    "source_atlas_launch_floor_ready",
+    "testflight_readiness"
+  ],
+  "branch": "main",
+  "checks": [
+    {
+      "issues": [],
+      "name": "shard_corpus_manifest_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "r2_layout_inventory_valid",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "native_source_files_present",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "focused_native_tests_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "request_shape_public_ids_hashes_only",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "privacy_boundary",
+      "passed": true
+    }
+  ],
+  "commitSHA": "3983b7f6708f2f716b6848e2aab155f06be568eb",
+  "createdAt": "2026-07-01T03:45:20Z",
+  "evidencePaths": {
+    "r2LayoutInventory": "tools/source-atlas/generated/source-atlas-launch-floor-r2-layout-proof/lff-m02-l03-current/r2-layout-inventory.json",
+    "shardCorpusManifest": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json",
+    "xcodeLog": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-07-01T03-36-36-116Z_pid79059_5a0e9def.log"
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.launchFloorNativeShardIndexProof.v1",
+  "launchFloorShardTargetMet": false,
+  "nativeShardIndexCompatibilityProofMet": true,
+  "nativeSourceProof": {
+    "files": [
+      {
+        "exists": true,
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLaunchFloorShardIndexModels.swift",
+        "sha256": "7fecfb74f8828d0513098d3ad24ffe234021123000805d66d9dd1278618ca0cd"
+      },
+      {
+        "exists": true,
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublishedPackSchemaDecoder.swift",
+        "sha256": "fc0784f01ff5593bd953e73284a94be86a168580ee13d357c7b1fcd22c3f173e"
+      },
+      {
+        "exists": true,
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicPackRequestCompiler.swift",
+        "sha256": "bed29cef1a296ee68f61390de92e4d7665ac7468f168a4ea57ad8e01da153a50"
+      },
+      {
+        "exists": true,
+        "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/R2GatewayClient.swift",
+        "sha256": "8c5be86ffb45186164f006dfb6b82fbc489d7ba59b1a21a15f1e5ece4117eae4"
+      },
+      {
+        "exists": true,
+        "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLaunchFloorShardIndexCompatibilityTests.swift",
+        "sha256": "56bdbebcb9f717cf23856f219565303bfbb255753e6d15ee589a78160c6bd6ac"
+      }
+    ],
+    "filesPresent": 5,
+    "issues": [],
+    "requiredTokens": [
+      "SourceAtlasLaunchFloorShardCorpusManifest",
+      "SourceAtlasLaunchFloorR2LayoutInventory",
+      "compileLaunchFloorShardIndexRequests",
+      "SourceAtlasLaunchFloorShardObjectRequest",
+      "partitionIndex"
+    ]
+  },
+  "nonClaims": [
+    "native decoder/request compatibility proof only",
+    "not launch-floor complete",
+    "not proof of 1,000,000 public/reference shards unless the corpus counter reaches that threshold",
+    "not live Cloudflare R2 production write proof",
+    "not R2 release readiness",
+    "not outside legal approval",
+    "not Release Green, App Store readiness, or TestFlight readiness",
+    "not native physical-device proof",
+    "not independent accessibility proof",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "markdownPayload": "b0d01cd863af205a17a400879f21d55fffc40b9da0bc407888a9d65a15dee9df",
+    "reportPayload": "dd949dcc14e1592ed4d867a3e2186630dbb81b6c43cbd7ee4bb6a8ce4bf4c47f"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/source-atlas-launch-floor-native-shard-index-proof/lff-m02-l04-current/closeout.md",
+    "emitEvidence": "docs/qa/source-atlas/source-atlas-launch-floor-native-shard-index-proof-lff-m02.json",
+    "emitMarkdown": "docs/qa/source-atlas/source-atlas-launch-floor-native-shard-index-proof-lff-m02.md",
+    "markdown": "tools/source-atlas/generated/source-atlas-launch-floor-native-shard-index-proof/lff-m02-l04-current/native-shard-index-proof-report.md",
+    "report": "tools/source-atlas/generated/source-atlas-launch-floor-native-shard-index-proof/lff-m02-l04-current/native-shard-index-proof-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productLaw": {
+    "privateContextAllowed": false,
+    "publicReferenceOnly": true,
+    "r2Role": "public/reference/freshness infrastructure only",
+    "sourceAtlasGeneratesFinalPlansSchedulesSteps": false
+  },
+  "proofID": "source_atlas.launch_floor_native_shard_index_proof.a3f4c96442da6e66",
+  "recordCounts": {
+    "layoutObjects": 126,
+    "nativeCompatiblePartitions": 14,
+    "nativeSourceFilesPresent": 5,
+    "partitions": 14,
+    "partitionsWithR2Layout": 14,
+    "partitionsWithReadbackProof": 14,
+    "privacyIssues": 0,
+    "publicReferenceShards": 71,
+    "requestShapeObjectKeysChecked": 252,
+    "requestShapePrivateIssues": 0,
+    "xcodeFailed": 0,
+    "xcodePassed": 4,
+    "xcodeSkipped": 0
+  },
+  "requestShapeProof": {
+    "forbiddenPrivateFields": [
+      "goal_text",
+      "capture_text",
+      "schedule",
+      "proof",
+      "receipt",
+      "account_id",
+      "device_id",
+      "private_life_graph",
+      "behavior_history",
+      "inferred_priority"
+    ],
+    "issues": [],
+    "objectKeysChecked": 252,
+    "queryFieldsAllowed": [
+      "domain_id",
+      "subdomain_id",
+      "partition_id",
+      "object_role",
+      "object_key",
+      "expected_sha256",
+      "shard_range_start",
+      "shard_range_end",
+      "shard_count"
+    ],
+    "requestShape": "public_ids_hashes_object_keys_only"
+  },
+  "runLabel": "lff-m02-l04-current",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; native partitioned shard-index compatibility proof only",
+  "status": "Source Green for native launch-floor shard-index compatibility / shard target not met",
+  "valid": true,
+  "versionID": "source-atlas-launch-floor-native-shard-index-proof-lff-m02",
+  "worktreeDirtyEntryCountAtProof": 11,
+  "xcodeProof": {
+    "durationMS": 157882,
+    "failed": 0,
+    "logPath": "/Users/devan/Library/Developer/XcodeBuildMCP/workspaces/ambitions-822bbc11acdf/logs/test_sim_2026-07-01T03-36-36-116Z_pid79059_5a0e9def.log",
+    "passed": 4,
+    "profile": "XcodeBuildMCP-focused",
+    "result": "PASSED",
+    "skipped": 0,
+    "testSuites": [
+      "SourceAtlasLaunchFloorShardIndexCompatibilityTests"
+    ]
+  }
+}
