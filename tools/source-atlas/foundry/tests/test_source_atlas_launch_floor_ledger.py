@@ -41,7 +41,7 @@ LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST = (
 R2_LAYOUT_PROOF = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-launch-floor-r2-layout-proof-lff-m02.json"
 GOLDEN_INTENT_CORPUS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-launch-floor-golden-intent-corpus-lff-m03.json"
 FALLBACK_METRIC = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-source-needed-fallback-metric-lff-m03.json"
-MISSING_SHARD_EVENTS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-events-lff-m03.json"
+MISSING_SHARD_EVENTS = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-missing-shard-event-queue-lff-m04.json"
 NATIVE_BRIDGE_GAUNTLET_SOURCE = REPO_ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SourceAtlas" / "SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
 
 
@@ -78,7 +78,7 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert counts["sourceNeededFallbackNumerator"] == 200
     assert counts["sourceNeededFallbackDenominator"] == 50_000
     assert counts["missingShardEvents"] == 200
-    assert counts["missingShardEventsWithDurableExpansion"] == 0
+    assert counts["missingShardEventsWithDurableExpansion"] == 200
     assert counts["nativeBridgeLaunchFloorCorpusSamples"] == 7
     assert counts["nativeBridgeLaunchFloorCorpusPermutations"] == 14
     assert counts["packablePublicReferenceClaimProxy"] == 71
@@ -96,9 +96,9 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert result["launchFloorTargetStatus"]["golden_intents_50000"]["measuredValue"] == 50_000
     assert result["launchFloorTargetStatus"]["source_needed_fallback_under_5_percent"]["status"] == "met"
     assert result["launchFloorTargetStatus"]["source_needed_fallback_under_5_percent"]["measuredRate"] == 200 / 50_000
-    assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["status"] == "not_measurable_fail_closed"
+    assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["status"] == "met"
     assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["evidence"]["missingShardEventCount"] == 200
-    assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["evidence"]["durableExpansionEventCount"] == 0
+    assert result["launchFloorTargetStatus"]["continuous_missing_shard_expansion"]["evidence"]["durableExpansionEventCount"] == 200
     assert "source_atlas_launch_floor_ready" in result["blockedClaims"]
     assert "final_user_plans_schedules_steps_from_source_atlas_or_r2" in result["blockedClaims"]
 

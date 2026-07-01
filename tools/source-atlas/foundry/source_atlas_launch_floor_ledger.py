@@ -23,7 +23,7 @@ from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m03-l04"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m04-l01"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -96,6 +96,7 @@ LAUNCH_FLOOR_NON_CLAIMS = [
     "not proof of 50,000 golden intents unless a golden intent corpus supplies the canonical counter",
     "not proof of <5% fallback unless numerator and denominator are present",
     "not proof of continuous expansion unless every missing-shard event is durably queued through governed expansion",
+    "not proof of missing-shard source review, legal/API approval, harvest execution, R2 promotion, or native activation from queue evidence alone",
     "not final user plans, schedules, Steps, priority order, recovery paths, or personalized paths from Source Atlas/R2",
     *NON_CLAIMS,
 ]
@@ -949,9 +950,14 @@ def _validation_matrix() -> list[dict[str, str]]:
             "purpose": "prove staged/promoted/current/LKG/revocation/rollback/gateway R2 layout and deterministic readback metadata without executing live R2 writes",
         },
         {
+            "validationID": "missing_shard_event_queue",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py missing-shard-event-queue --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-events-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-missing-shard-event-queue/lff-m04-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json --markdown docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.md",
+            "purpose": "convert every lawful LFF-M03 source-needed fallback into a durable public/reference candidate-only expansion queue item without source review, legal/API approval, harvest execution, R2 promotion, native activation, or final-output claims",
+        },
+        {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-events-lff-m03.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m03-l04-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
-            "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, validated source-needed fallback metric, LFF-M04-pending missing-shard events, native launch-floor corpus sample contract, and no source/R2/native mutation",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --golden-intent-corpus docs/qa/source-atlas/source-atlas-launch-floor-golden-intent-corpus-lff-m03.json --fallback-metric docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json --missing-shard-events docs/qa/source-atlas/source-atlas-missing-shard-event-queue-lff-m04.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m04-l01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "purpose": "regenerate current launch-floor ledger with bounded shard corpus/R2 proof, validated golden-intent corpus report, validated source-needed fallback metric, durable LFF-M04 missing-shard queue evidence, native launch-floor corpus sample contract, and no source/R2/native mutation",
         },
         {
             "validationID": "launch_floor_native_bridge_focused",

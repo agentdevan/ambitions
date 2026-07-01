@@ -134,6 +134,11 @@ from .source_needed_fallback_metric import (
     compile_source_needed_fallback_metric,
     source_needed_fallback_metric_markdown,
 )
+from .missing_shard_event_queue import (
+    MissingShardEventQueueOptions,
+    compile_missing_shard_event_queue,
+    missing_shard_event_queue_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -1033,6 +1038,22 @@ def main(argv: list[str] | None = None) -> int:
     source_needed_fallback_parser.add_argument("--emit-evidence")
     source_needed_fallback_parser.add_argument("--emit-missing-shard-events")
     source_needed_fallback_parser.add_argument("--markdown")
+
+    missing_shard_event_queue_parser = sub.add_parser("missing-shard-event-queue")
+    missing_shard_event_queue_parser.add_argument(
+        "--missing-shard-events",
+        default="docs/qa/source-atlas/source-atlas-missing-shard-events-lff-m03.json",
+    )
+    missing_shard_event_queue_parser.add_argument(
+        "--fallback-metric",
+        default="docs/qa/source-atlas/source-atlas-source-needed-fallback-metric-lff-m03.json",
+    )
+    missing_shard_event_queue_parser.add_argument("--previous-queue")
+    missing_shard_event_queue_parser.add_argument("--output-root", required=True)
+    missing_shard_event_queue_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    missing_shard_event_queue_parser.add_argument("--run-label", default="current")
+    missing_shard_event_queue_parser.add_argument("--emit-evidence")
+    missing_shard_event_queue_parser.add_argument("--markdown")
 
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
@@ -2547,6 +2568,26 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(source_needed_fallback_metric_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "missing-shard-event-queue":
+        result = compile_missing_shard_event_queue(
+            MissingShardEventQueueOptions(
+                missing_shard_events_path=Path(args.missing_shard_events),
+                fallback_metric_path=Path(args.fallback_metric) if args.fallback_metric else None,
+                previous_queue_path=Path(args.previous_queue) if args.previous_queue else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(missing_shard_event_queue_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":
