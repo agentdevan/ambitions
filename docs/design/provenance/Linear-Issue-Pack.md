@@ -250,9 +250,9 @@ Rollback plan:
 ## VSP-07 - VSP-07 Trust Inspection Details
 
 - Parent issue mirror: `AMB-1486`
-- Recommended status: `Ready For Review`
-- Labels: VSP, trust, inspection, yellow-proof, figma-exploration, owner-selected-direction, selected-f-attached-receipt-stack, part-02-refinement, owner-approved-direction, selected-a-object-wake-stack, part-02-approved, owner-review-package, ready-for-review, object-wake-stack, candidate-package
-- Blocked by: surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval, live SwiftUI/device/accessibility/runtime proof, final VSP-07 candidate package approval
+- Recommended status: `Spec Ready`
+- Labels: VSP, trust, inspection, yellow-proof, figma-exploration, owner-selected-direction, selected-f-attached-receipt-stack, part-02-refinement, owner-approved-direction, selected-a-object-wake-stack, part-02-approved, owner-review-package, ready-for-review, object-wake-stack, candidate-package, owner-approved-package, spec-ready
+- Blocked by: surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, live SwiftUI/device/accessibility/runtime proof
 - Do not create now: `True`
 
 Acceptance summary:
@@ -264,22 +264,21 @@ Acceptance summary:
 - Owner selected Option F Attached Receipt Stack as the VSP-07 Part 01 direction on 2026-07-01.
 - Part 02 must keep receipts attached to owning objects and prevent activity-feed/history/root-surface drift.
 - Option C remains a historical guardrail for object attachment; it is not the selected direction.
-- VSP-07 cannot proceed to implementation until the final Option F candidate package is owner-approved.
 - Part 02 refinement board is node 250:93 with options A-F derived from owner-selected Option F Attached Receipt Stack.
 - Owner approved Option A Object Wake Stack as the VSP-07 Part 02 direction on 2026-07-01.
 - Prior Codex recommendation for Option B is superseded by owner approval of Option A.
 - Final package must keep receipts attached to the changed object and prevent receipt-feed/history/root-surface drift.
-- VSP-07 cannot proceed to implementation until the final Object Wake Stack candidate package is built and owner-approved.
 - Final Object Wake Stack candidate package is node 257:93 with hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof non-claims, package readback, and durable repo proof images.
-- Final package is Ready For Review but requires explicit owner approval before implementation authority.
+- Owner approved final VSP-07 Object Wake Stack package node 257:93 on 2026-07-01.
+- VSP-07 is Spec Ready for a future bounded implementation leaf but remains Yellow until live SwiftUI/device/accessibility/runtime/privacy proof exists.
 Validation summary:
 - focused Trust tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
 - Build final VSP-07 Object Wake Stack candidate package - scope: Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof/non-claim board, and durable screenshots from owner-approved node 250:104 - status: Complete in repo evidence; pending owner review
-- Owner-review final VSP-07 Object Wake Stack package - scope: Owner approves, repairs, or rejects the final package before any source implementation issue is created - status: Ready For Review
-- Produce Trust inspection SwiftUI parity leaf - scope: Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces - status: Spec Ready after final package approval
+- Owner-review final VSP-07 Object Wake Stack package - scope: Owner approves, repairs, or rejects the final package before any source implementation issue is created - status: Complete in repo evidence; owner approved
+- Produce Trust inspection SwiftUI parity leaf - scope: Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces - status: Spec Ready after implementation authorization
 
 Standard Codex closeout block:
 

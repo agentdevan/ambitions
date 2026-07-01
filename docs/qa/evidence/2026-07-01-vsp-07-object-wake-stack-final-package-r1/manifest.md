@@ -1,10 +1,12 @@
 # VSP-07 Object Wake Stack Final Package R1
 
-Status: Yellow / Ready For Review
+Status: Owner approved / Spec Ready / Yellow proof ceiling
 
 This evidence package records the final VSP-07 Object Wake Stack candidate package built from owner-approved Part 02 Option A.
 
-It is not final owner approval, implementation authority, SwiftUI parity, Visual Green, device proof, accessibility conformance, runtime proof, Release Green, or Done.
+The owner approved package node `257:93` on 2026-07-01 as the VSP-07 Figma design target for a future implementation leaf.
+
+It is not implementation authority, SwiftUI parity, Visual Green, device proof, accessibility conformance, runtime proof, Release Green, or Done.
 
 ## Figma Frames
 
@@ -34,9 +36,9 @@ It is not final owner approval, implementation authority, SwiftUI parity, Visual
 
 ## Owner Review State
 
-The final candidate package is ready for owner review.
+The final candidate package is owner-approved.
 
-Owner must explicitly approve, repair, or reject node `257:93` before any source implementation issue can claim implementation authority.
+Source implementation still requires a bounded Codex implementation leaf with exact source owners, non-goals, validation commands, screenshot/accessibility proof requirements, and rollback plan.
 
 ## Product-Law Guardrails
 
@@ -55,7 +57,6 @@ The PNG proof images are durable local render mirrors of the Figma package struc
 
 ## Non-Claims
 
-- No final owner approval for the package yet.
 - No source implementation.
 - No SwiftUI parity.
 - No Visual Green.

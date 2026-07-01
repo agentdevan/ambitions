@@ -1,8 +1,8 @@
 # VSP-07 Object Wake Stack Final Package R1
 
-Status: Yellow / Ready For Review
+Status: Owner approved / Spec Ready / Yellow proof ceiling
 
-This frame note maps the VSP-07 final Figma candidate package to Code-Connect-free provenance. It is a handoff record for owner review, not implementation authority, Visual Green, source parity, device proof, accessibility conformance, runtime proof, Release Green, or Done.
+This frame note maps the VSP-07 final Figma candidate package to Code-Connect-free provenance. It is an owner-approved Figma design target for a future implementation leaf, not implementation authority, Visual Green, source parity, device proof, accessibility conformance, runtime proof, Release Green, or Done.
 
 ## Source Direction
 
@@ -12,7 +12,7 @@ This frame note maps the VSP-07 final Figma candidate package to Code-Connect-fr
 - Final package board: `257:93`
 - Figma file: `SWtHm9ouHTPbEFfNrrtZwv`
 
-The owner approved `A Object Wake Stack` as the VSP-07 Part 02 direction on 2026-07-01. The final package board now needs explicit owner review before source implementation begins.
+The owner approved `A Object Wake Stack` as the VSP-07 Part 02 direction on 2026-07-01. The owner then approved final package node `257:93` on 2026-07-01 as the VSP-07 Figma design target for a future implementation leaf.
 
 ## Final Package Frames
 
@@ -78,3 +78,5 @@ The owner approved `A Object Wake Stack` as the VSP-07 Part 02 direction on 2026
 See `docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md`.
 
 The PNG proof images are durable local render mirrors of the Figma package structure anchored to the Figma node IDs above. Direct Figma PNG export through the plugin response channel was not used as the source of these repo images, so the proof ceiling remains Yellow and the Figma node IDs remain the design authority anchors.
+
+Owner approval proof: `docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md`.

@@ -1686,11 +1686,26 @@
         "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-swiftui-anatomy-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-presentation-crop-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-proof-nonclaims-r1.png",
-        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-package-readback-r1.png"
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-package-readback-r1.png",
+        "docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports Yellow / Ready For Review owner-review package evidence only. Does not prove final package owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, accessibility conformance, Release Green, or Done.",
-      "notes": "Final candidate package board at node 257:93. Built from owner-approved Part 02 Option A Object Wake Stack. Direct Figma PNG export is not claimed; repo PNGs are local render mirrors anchored to Figma node IDs."
+      "proof_ceiling_impact": "Supports owner-approved Figma target / Spec Ready evidence only. Does not prove SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, accessibility conformance, Release Green, or Done.",
+      "notes": "Final candidate package board at node 257:93. Built from owner-approved Part 02 Option A Object Wake Stack. Owner approved package node 257:93 on 2026-07-01. Direct Figma PNG export is not claimed; repo PNGs are local render mirrors anchored to Figma node IDs."
+    },
+    {
+      "proof_id": "vsp-07-object-wake-stack-package-approval-r1",
+      "vsp_id": "VSP-07",
+      "proof_type": "owner_package_approval",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md",
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Lifts the final VSP-07 package owner-review blocker and moves VSP-07 to Spec Ready / Yellow. Does not authorize Green, source completion, device proof, accessibility conformance, runtime proof, Release Green, or Done.",
+      "notes": "Owner approved VSP-07 Object Wake Stack final package node 257:93 on 2026-07-01."
     }
   ]
 }

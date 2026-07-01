@@ -106,8 +106,8 @@ SwiftUI source owner: Native/Ambitions/Trust/InspectionSurface.swift, Native/Amb
 Allowed implementation area: Native/Ambitions/Trust, Native/Ambitions/Projection/OverlayScenes, Sources/Components
 Forbidden implementation area: Trust root surface, Proof root surface, Source root surface, Privacy root surface, History root surface, Receipts root surface
 Proof ceiling: Yellow
-Missing proof: live SwiftUI inspection parity screenshot, device screenshot, manual accessibility matrix, privacy/trust disclosure proof, final VSP-07 candidate package approval
-Linear mirror: AMB-1486 (Ready For Review)
+Missing proof: live SwiftUI inspection parity screenshot, device screenshot, manual accessibility matrix, privacy/trust disclosure proof
+Linear mirror: AMB-1486 (Spec Ready)
 Non-claim: this annotation is not Code Connect, not Visual Green, not source implementation, and not owner approval.
 ```
 

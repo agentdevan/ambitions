@@ -1302,12 +1302,14 @@
       ],
       "evidence_doc_paths": [
         "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
-        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md",
+        "docs/design/provenance/owner-approvals/VSP-07-Object-Wake-Stack-package-approval.md"
       ],
       "provenance_annotation_status": "figma_recorded",
       "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
       "notes": [
-        "Package board; final candidate package ready for owner review, not Green."
+        "Package board; owner-approved final candidate package, still Yellow until source/device/accessibility/runtime proof exists.",
+        "Owner approved package on 2026-07-01; Figma node annotated with owner-approved package metadata."
       ]
     },
     {

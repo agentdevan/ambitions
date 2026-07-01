@@ -336,7 +336,7 @@
       "vsp_id": "VSP-07",
       "likely_parent_issue": "AMB-1486",
       "recommended_parent_title": "VSP-07 Trust Inspection Details",
-      "recommended_status": "Ready For Review",
+      "recommended_status": "Spec Ready",
       "recommended_labels": [
         "VSP",
         "trust",
@@ -352,7 +352,9 @@
         "owner-review-package",
         "ready-for-review",
         "object-wake-stack",
-        "candidate-package"
+        "candidate-package",
+        "owner-approved-package",
+        "spec-ready"
       ],
       "recommended_sub_issues": [
         {
@@ -363,20 +365,18 @@
         {
           "title": "Owner-review final VSP-07 Object Wake Stack package",
           "scope": "Owner approves, repairs, or rejects the final package before any source implementation issue is created",
-          "recommended_status": "Ready For Review"
+          "recommended_status": "Complete in repo evidence; owner approved"
         },
         {
           "title": "Produce Trust inspection SwiftUI parity leaf",
           "scope": "Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces",
-          "recommended_status": "Spec Ready after final package approval"
+          "recommended_status": "Spec Ready after implementation authorization"
         }
       ],
       "blocked_by": [
         "surface object existence from VSP-02 through VSP-06",
         "VSP-09 accessibility matrix",
-        "owner approval",
-        "live SwiftUI/device/accessibility/runtime proof",
-        "final VSP-07 candidate package approval"
+        "live SwiftUI/device/accessibility/runtime proof"
       ],
       "acceptance_summary": [
         "Trust remains contextual inspection detail.",
@@ -387,14 +387,13 @@
         "Owner selected Option F Attached Receipt Stack as the VSP-07 Part 01 direction on 2026-07-01.",
         "Part 02 must keep receipts attached to owning objects and prevent activity-feed/history/root-surface drift.",
         "Option C remains a historical guardrail for object attachment; it is not the selected direction.",
-        "VSP-07 cannot proceed to implementation until the final Option F candidate package is owner-approved.",
         "Part 02 refinement board is node 250:93 with options A-F derived from owner-selected Option F Attached Receipt Stack.",
         "Owner approved Option A Object Wake Stack as the VSP-07 Part 02 direction on 2026-07-01.",
         "Prior Codex recommendation for Option B is superseded by owner approval of Option A.",
         "Final package must keep receipts attached to the changed object and prevent receipt-feed/history/root-surface drift.",
-        "VSP-07 cannot proceed to implementation until the final Object Wake Stack candidate package is built and owner-approved.",
         "Final Object Wake Stack candidate package is node 257:93 with hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof non-claims, package readback, and durable repo proof images.",
-        "Final package is Ready For Review but requires explicit owner approval before implementation authority."
+        "Owner approved final VSP-07 Object Wake Stack package node 257:93 on 2026-07-01.",
+        "VSP-07 is Spec Ready for a future bounded implementation leaf but remains Yellow until live SwiftUI/device/accessibility/runtime/privacy proof exists."
       ],
       "validation_summary": [
         "focused Trust tests after source implementation",
@@ -408,11 +407,11 @@
         "privacy/trust disclosure proof",
         "Option F selection proof",
         "Part 02 owner-review package",
-        "final package owner approval",
         "Part 02 frame ID 250:93 and durable proof paths",
         "Option A owner approval proof",
-        "final Object Wake Stack package owner approval",
-        "node 257:93 package proof paths"
+        "node 257:93 package proof paths",
+        "live SwiftUI parity proof after implementation",
+        "device/accessibility/runtime proof after implementation"
       ],
       "do_not_create_now": true
     },
