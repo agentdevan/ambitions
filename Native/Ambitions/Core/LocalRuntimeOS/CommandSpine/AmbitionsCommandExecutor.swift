@@ -42,7 +42,7 @@ struct AmbitionsCommandExecutor: CommandExecuting {
         captureService: (any CaptureServicing)? = nil,
         eventLedger: (any EventLedgerRepository)? = nil,
         commandExecutionRecords: (any AmbitionsCommandExecutionRecordRepository)? = nil,
-        runtimeEvents: (any RuntimeEventStore)? = nil,
+        runtimeEvents: (any RuntimeEventStore)? = InMemoryRuntimeEventStore(),
         commandJournal: any CommandJournal = InMemoryCommandJournal(),
         runtimeTransactionIdempotencyStore: RuntimeIdempotencyStore = RuntimeIdempotencyStore(),
         smartAttachmentService: (any SmartAttachmentRouting)? = DefaultSmartAttachmentService(),

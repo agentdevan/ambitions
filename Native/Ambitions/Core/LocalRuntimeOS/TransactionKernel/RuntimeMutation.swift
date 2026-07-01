@@ -113,13 +113,17 @@ struct RuntimeMutation: Sendable, Equatable, Identifiable {
     }
 
     private static func affectedObjectIDs(_ command: AmbitionsCommand, timeMutation: TimeMutation?) -> [String] {
-        Array(Set([
+        var objectIDs = [
             command.target.goalID,
             command.target.captureID,
             command.target.timeID,
             command.target.reviewID,
             command.target.stepID
-        ].compactMap { $0 } + (timeMutation?.affectedBucketIDs ?? []))).sorted()
+        ].compactMap { $0 } + (timeMutation?.affectedBucketIDs ?? [])
+        if command.kind == .updateUserPreferences {
+            objectIDs.append(RuntimeTransactionObjectFacts.youPreferencesObjectID)
+        }
+        return Array(Set(objectIDs)).sorted()
     }
 
     private static func visibleChange(_ command: AmbitionsCommand) -> String {
