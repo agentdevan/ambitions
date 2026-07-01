@@ -11,6 +11,7 @@ struct SourceAtlasStepCandidateFieldBridge: Sendable {
         deadlineTargetDate: String? = nil,
         factorLedger: PersonalizationFactorLedger? = nil,
         lifeContextProjection: LifeContextRuntimeProjection? = nil,
+        publicPlanningContext: SourceAtlasPublicPlanningContext? = nil,
         candidateLimit: Int = 24,
         localOnly: Bool = true
     ) -> StepCandidateField {
@@ -22,14 +23,16 @@ struct SourceAtlasStepCandidateFieldBridge: Sendable {
                 composition: composition,
                 pack: pack,
                 sourcePath: sourcePath,
-                lifeContextProjection: lifeContextProjection
+                lifeContextProjection: lifeContextProjection,
+                publicPlanningContext: publicPlanningContext
             )
         let effectiveSeedTraces = seedTraces.isEmpty
             ? [makeFallbackSeedTrace(
                 composition: composition,
                 pack: pack,
                 sourcePath: sourcePath,
-                lifeContextProjection: lifeContextProjection
+                lifeContextProjection: lifeContextProjection,
+                publicPlanningContext: publicPlanningContext
             )]
             : seedTraces
         let compiledSteps = fallbackOnly
@@ -48,7 +51,8 @@ struct SourceAtlasStepCandidateFieldBridge: Sendable {
             composition: composition,
             pack: pack,
             factorLedger: factorLedger,
-            lifeContextProjection: lifeContextProjection
+            lifeContextProjection: lifeContextProjection,
+            publicPlanningContext: publicPlanningContext
         )
 
         let compilerOutput = compiledSteps.isEmpty
@@ -92,7 +96,8 @@ struct SourceAtlasStepCandidateFieldBridge: Sendable {
             composition: composition,
             pack: pack,
             factorLedger: factorLedger,
-            lifeContextProjection: lifeContextProjection
+            lifeContextProjection: lifeContextProjection,
+            publicPlanningContext: publicPlanningContext
         )
 
         return rebuildField(

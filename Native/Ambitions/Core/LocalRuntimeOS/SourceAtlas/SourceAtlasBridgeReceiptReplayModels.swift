@@ -6,6 +6,9 @@ enum SourceAtlasBridgeReceiptKind: String, Codable, Sendable, Equatable, Hashabl
     case sourceAtlasIntentMatched
     case sourceAtlasPackSelected
     case sourceAtlasPackRejected
+    case sourceAtlasPublicContextVerified
+    case sourceAtlasPublicContextApplied
+    case sourceAtlasPublicContextRejected
     case sourceAtlasPathComposed
     case sourceAtlasPathRejected
     case sourceAtlasStepCandidatesExpanded

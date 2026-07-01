@@ -52,7 +52,8 @@ extension SourceAtlasStepCandidateFieldBridge {
         composition: PersonalPathComposition,
         pack: SourceAtlasPack,
         sourcePath: SourceAtlasCapabilityPath,
-        lifeContextProjection: LifeContextRuntimeProjection?
+        lifeContextProjection: LifeContextRuntimeProjection?,
+        publicPlanningContext: SourceAtlasPublicPlanningContext?
     ) -> [SourceAtlasStepCandidateSeedTrace] {
         let sourcePackID = pack.id
         let sourcePathID = sourcePath.id
@@ -176,10 +177,39 @@ extension SourceAtlasStepCandidateFieldBridge {
             )
         }
 
-        return traces.sorted { lhs, rhs in
+        return seedTraces(
+            traces,
+            filteredBy: publicPlanningContext
+        ).sorted { lhs, rhs in
             if lhs.seedKind != rhs.seedKind { return lhs.seedKind < rhs.seedKind }
             return lhs.id < rhs.id
         }
+    }
+
+
+    func seedTraces(
+        _ traces: [SourceAtlasStepCandidateSeedTrace],
+        filteredBy publicPlanningContext: SourceAtlasPublicPlanningContext?
+    ) -> [SourceAtlasStepCandidateSeedTrace] {
+        guard let publicPlanningContext else {
+            return traces
+        }
+
+        let sourceIDs = Set(publicPlanningContext.sourceIDs)
+        let claimIDs = Set(publicPlanningContext.claimIDs)
+        let requirementIDs = Set(publicPlanningContext.requirements.map(\.id))
+        let proofRequirementIDs = Set(publicPlanningContext.proofNeeds.map(\.requirementID))
+        let starterActionIDs = Set(publicPlanningContext.starterActions.map(\.id))
+
+        let filtered = traces.filter { trace in
+            sourceIDs.isDisjoint(with: trace.sourceRecordIDs) == false ||
+                claimIDs.isDisjoint(with: trace.sourceClaimIDs) == false ||
+                requirementIDs.isDisjoint(with: trace.sourceRequirementIDs) == false ||
+                proofRequirementIDs.isDisjoint(with: trace.sourceProofRequirementIDs) == false ||
+                starterActionIDs.isDisjoint(with: trace.sourceStarterItemIDs) == false
+        }
+
+        return filtered.isEmpty ? traces : filtered
     }
 
 
@@ -187,22 +217,27 @@ extension SourceAtlasStepCandidateFieldBridge {
         composition: PersonalPathComposition,
         pack: SourceAtlasPack,
         sourcePath: SourceAtlasCapabilityPath,
-        lifeContextProjection: LifeContextRuntimeProjection?
+        lifeContextProjection: LifeContextRuntimeProjection?,
+        publicPlanningContext: SourceAtlasPublicPlanningContext?
     ) -> SourceAtlasStepCandidateSeedTrace {
         let warnings = sourceFreshnessWarnings(path: sourcePath, projection: lifeContextProjection)
+        let publicScope = publicPlanningContext.map(SourceAtlasVerifiedPublicShardInfluence.init(context:))
+        let publicProofRequirementIDs = publicPlanningContext.map { context in
+            context.proofNeeds.map(\.requirementID)
+        }
         return SourceAtlasStepCandidateSeedTrace(
             id: stableIdentifier(prefix: "source-atlas.seed.fallback", components: [composition.goalID, pack.id, sourcePath.id]),
             sourcePackID: pack.id,
             sourcePathID: sourcePath.id,
             sourcePathOverlayIDs: sourcePath.selectedPathOverlayIDs,
             sourceNodeIDs: sourcePath.selectedNodeIDs,
-            sourceRequirementIDs: sourcePath.requirementProjection.allRequirements.map(\.id),
-            sourceProofRequirementIDs: sourcePath.requirementProjection.proofNeeds.map(\.id),
-            sourceStarterItemIDs: [],
+            sourceRequirementIDs: publicScope?.requirementIDs ?? sourcePath.requirementProjection.allRequirements.map(\.id),
+            sourceProofRequirementIDs: publicProofRequirementIDs ?? sourcePath.requirementProjection.proofNeeds.map(\.id),
+            sourceStarterItemIDs: publicScope?.starterActionIDs ?? [],
             seedKind: "fallback",
             seedText: "Keep the goal open and review the next step.",
-            sourceRecordIDs: pack.sources.map(\.id),
-            sourceClaimIDs: pack.claims.map(\.id),
+            sourceRecordIDs: publicScope?.sourceIDs ?? pack.sources.map(\.id),
+            sourceClaimIDs: publicScope?.claimIDs ?? pack.claims.map(\.id),
             freshnessWarnings: warnings,
             sensitiveContextRedactions: ["[redacted]"]
         )

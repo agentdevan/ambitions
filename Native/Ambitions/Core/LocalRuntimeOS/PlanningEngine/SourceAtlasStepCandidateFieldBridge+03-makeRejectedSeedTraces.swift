@@ -33,37 +33,66 @@ extension SourceAtlasStepCandidateFieldBridge {
         composition: PersonalPathComposition,
         pack: SourceAtlasPack,
         factorLedger: PersonalizationFactorLedger?,
-        lifeContextProjection: LifeContextRuntimeProjection?
+        lifeContextProjection: LifeContextRuntimeProjection?,
+        publicPlanningContext: SourceAtlasPublicPlanningContext?
     ) -> SourceAtlasStepExpansionTrace {
         let personalizationFactorsUsed = factorLedger.map { ledger in
             ledger.factors.map { $0.factorType.rawValue }
         } ?? []
         let freshnessWarnings = uniqueStrings(
             seedTraces.flatMap(\.freshnessWarnings) +
-            sourceFreshnessWarnings(path: composition.selectedPath, projection: lifeContextProjection)
+            sourceFreshnessWarnings(path: composition.selectedPath, projection: lifeContextProjection) +
+            publicPlanningContextWarnings(publicPlanningContext)
         )
         let sensitiveContextRedactions = uniqueStrings(
             seedTraces.flatMap(\.sensitiveContextRedactions) +
             composition.explanationProjection.sourceLabels.compactMap(redactIfSensitive(_:)) +
             [composition.selectedPath.pathSummary].compactMap(redactIfSensitive(_:))
         )
+        var expansionRules = [
+            "Selected path nodes become direct, prerequisite, access, and proof candidates.",
+            "Requirements become admin setup, proof gathering, learning, and recovery-safe candidates.",
+            "Starter seeds become concise action candidates with provenance preserved.",
+            "Plan skeleton milestones become deadline-aware and recovery-aware candidates.",
+            "Duplicate semantic signatures collapse to one candidate.",
+            "Deadline protection comes from simulation, not from invented copy."
+        ]
+        if publicPlanningContext != nil {
+            expansionRules.append("Verified public planning context filters Source Atlas seeds before local ranking.")
+            expansionRules.append("Private Runtime owns personalization, ranking, scheduling, receipts, and final Steps.")
+        }
 
         return SourceAtlasStepExpansionTrace(
             sourceStepCandidateSeeds: seedTraces,
             expandedCandidates: expandedCandidates,
             rejectedSeeds: rejectedSeedTraces,
-            expansionRules: [
-                "Selected path nodes become direct, prerequisite, access, and proof candidates.",
-                "Requirements become admin setup, proof gathering, learning, and recovery-safe candidates.",
-                "Starter seeds become concise action candidates with provenance preserved.",
-                "Plan skeleton milestones become deadline-aware and recovery-aware candidates.",
-                "Duplicate semantic signatures collapse to one candidate.",
-                "Deadline protection comes from simulation, not from invented copy."
-            ],
+            expansionRules: expansionRules,
             personalizationFactorsUsed: personalizationFactorsUsed,
             freshnessWarnings: freshnessWarnings,
             sensitiveContextRedactions: sensitiveContextRedactions
         )
+    }
+
+
+    func publicPlanningContextWarnings(_ context: SourceAtlasPublicPlanningContext?) -> [String] {
+        guard let context else {
+            return []
+        }
+
+        var warnings = context.caveats.map(\.id)
+        if context.useMode == .reviewOnlyReference {
+            warnings.append("public-context-review-only")
+        }
+        if context.availability.isLastKnownGood {
+            warnings.append("public-context-last-known-good")
+        }
+        if context.availability.isLocalFallback {
+            warnings.append("public-context-local-fallback")
+        }
+        if context.availability.localPlanningBlocked {
+            warnings.append("public-context-local-planning-blocked")
+        }
+        return uniqueStrings(warnings)
     }
 
 

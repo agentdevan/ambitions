@@ -253,7 +253,10 @@ extension RepositoryBackedYouService {
         let receipts = makeSourceAtlasReplayReceipts(snapshot: snapshot)
 
         return receipts.map { receipt in
-            let reviewNeeded = receipt.kind == .sourceAtlasPackRejected || receipt.kind == .sourceAtlasFreshnessBlocked || receipt.kind == .sourceAtlasUnsupportedGoalFallback
+            let reviewNeeded = receipt.kind == .sourceAtlasPackRejected ||
+                receipt.kind == .sourceAtlasPublicContextRejected ||
+                receipt.kind == .sourceAtlasFreshnessBlocked ||
+                receipt.kind == .sourceAtlasUnsupportedGoalFallback
             return makeSourceAtlasKnowledgeRow(
                 id: "receipt-\(receipt.id)",
                 icon: "arrow.clockwise",
@@ -281,6 +284,12 @@ extension RepositoryBackedYouService {
             return "Pack selected"
         case .sourceAtlasPackRejected:
             return "Pack rejected"
+        case .sourceAtlasPublicContextVerified:
+            return "Public context verified"
+        case .sourceAtlasPublicContextApplied:
+            return "Public context applied"
+        case .sourceAtlasPublicContextRejected:
+            return "Public context rejected"
         case .sourceAtlasPathComposed:
             return "Path composed"
         case .sourceAtlasPathRejected:
