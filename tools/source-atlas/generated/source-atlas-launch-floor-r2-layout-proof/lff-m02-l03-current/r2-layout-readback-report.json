@@ -1,0 +1,1164 @@
+{
+  "createdAt": "2026-07-01T00:00:00Z",
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.launchFloorR2LayoutReadbackReport.v1",
+  "mode": "full",
+  "nonClaims": [
+    "not live Cloudflare R2 production write proof",
+    "not launch-floor complete unless every launch-floor target is met",
+    "not proof of 1,000,000 public/reference shards unless the corpus counter reaches that threshold",
+    "not outside legal approval",
+    "not Release Green, App Store readiness, or TestFlight readiness",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "recordCounts": {
+    "checksumMismatches": 0,
+    "objectsChecked": 126,
+    "partitionsChecked": 14
+  },
+  "results": [
+    {
+      "actualSHA256": "2ab72c7d6edeefc33525f18b7c561d7bd6f6e04adf7767ba4373ddd531bbe9b7",
+      "expectedSHA256": "2ab72c7d6edeefc33525f18b7c561d7bd6f6e04adf7767ba4373ddd531bbe9b7",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "3e109d5a4f6b9418a84d6adf933e2953042cddafcc0f4b1d27eaed817d55c9a8",
+      "expectedSHA256": "3e109d5a4f6b9418a84d6adf933e2953042cddafcc0f4b1d27eaed817d55c9a8",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "50ee3db51920e1de56d20ea3a2ec1fa09b85662a00d22a83ee3e9b5b19c3aec4",
+      "expectedSHA256": "50ee3db51920e1de56d20ea3a2ec1fa09b85662a00d22a83ee3e9b5b19c3aec4",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "e16752c1a538a4fbecb390f4e60a35e9166ab4d6d222182ac838b335fc660e26",
+      "expectedSHA256": "e16752c1a538a4fbecb390f4e60a35e9166ab4d6d222182ac838b335fc660e26",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "72ab9d066f57e9ce20dbe15d00585e5025e14e42bd7369fe1a52e85a863135cc",
+      "expectedSHA256": "72ab9d066f57e9ce20dbe15d00585e5025e14e42bd7369fe1a52e85a863135cc",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a24fc319f9368c4ec6846d470178e9266774b9919299b78bfbaf7b396eb40746",
+      "expectedSHA256": "a24fc319f9368c4ec6846d470178e9266774b9919299b78bfbaf7b396eb40746",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "52a572871d0c90d469a6b8a94df7f08b919f78ca0fb18326b7d656a3bb8abde7",
+      "expectedSHA256": "52a572871d0c90d469a6b8a94df7f08b919f78ca0fb18326b7d656a3bb8abde7",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "516e24c4fcd0ae1e69dfd589ec6843a745feb7eb2802adb68fad9c9a8a21ca2b",
+      "expectedSHA256": "516e24c4fcd0ae1e69dfd589ec6843a745feb7eb2802adb68fad9c9a8a21ca2b",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "9070f017683fc61f0d67b3a57ca07f4e5df9f84f25b7b87ff4df6071572b4830",
+      "expectedSHA256": "9070f017683fc61f0d67b3a57ca07f4e5df9f84f25b7b87ff4df6071572b4830",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ba935246ba9518b7d254e7ec552da3ddd45e30dae70c70ce573235c8a5329ae7",
+      "expectedSHA256": "ba935246ba9518b7d254e7ec552da3ddd45e30dae70c70ce573235c8a5329ae7",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "2ad0a196a1ff316875981924eae3f1322fc529a16273da54fe7352aa0d02f441",
+      "expectedSHA256": "2ad0a196a1ff316875981924eae3f1322fc529a16273da54fe7352aa0d02f441",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "b00d99ae488f834933c43879cb17f0cc8be6df9adec328a9ccbe146ce2dc3895",
+      "expectedSHA256": "b00d99ae488f834933c43879cb17f0cc8be6df9adec328a9ccbe146ce2dc3895",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ed3aad1ab2af4d472acb6b3c726b83a37d02dbc56a765ca2b776e94afac246e7",
+      "expectedSHA256": "ed3aad1ab2af4d472acb6b3c726b83a37d02dbc56a765ca2b776e94afac246e7",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ad5da34d8b4d3f2ee66f2c93c4dd9759ae881f6493a4c350e6f6c01e37149971",
+      "expectedSHA256": "ad5da34d8b4d3f2ee66f2c93c4dd9759ae881f6493a4c350e6f6c01e37149971",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "9a7d6813dcd53ce4bc1610cd118e4e91965747c98b6285310479fb2552e2be28",
+      "expectedSHA256": "9a7d6813dcd53ce4bc1610cd118e4e91965747c98b6285310479fb2552e2be28",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "01cddd24e719b48995ffc6564a0b2d76cf137ae3f4aa414985d3e4dc239dacee",
+      "expectedSHA256": "01cddd24e719b48995ffc6564a0b2d76cf137ae3f4aa414985d3e4dc239dacee",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "16415a8477a744d933debac4ffc52e252149926371f910f9e472bcd3df94fb8c",
+      "expectedSHA256": "16415a8477a744d933debac4ffc52e252149926371f910f9e472bcd3df94fb8c",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "4f3b47db9356b6d9ace82c9646355c1eddb169938513ad67fa1dedc829123790",
+      "expectedSHA256": "4f3b47db9356b6d9ace82c9646355c1eddb169938513ad67fa1dedc829123790",
+      "objectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "c7ea280df218ddf3dd2add3cf05e065f27667d0dd74561624ff3b3e279288d6a",
+      "expectedSHA256": "c7ea280df218ddf3dd2add3cf05e065f27667d0dd74561624ff3b3e279288d6a",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "5ee306e6f135de98c1a502e053fbf0c0387fdbb8db1bacd69a2156c0d9db8bb7",
+      "expectedSHA256": "5ee306e6f135de98c1a502e053fbf0c0387fdbb8db1bacd69a2156c0d9db8bb7",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "bd6aeb254609ad8218aafc9b05c5062c300b5c8c20a3b6969e4bca3784401b26",
+      "expectedSHA256": "bd6aeb254609ad8218aafc9b05c5062c300b5c8c20a3b6969e4bca3784401b26",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "482d922f26f2a6929931f3e8a7d482100cdf6db7181b077f31b83bf78afe9016",
+      "expectedSHA256": "482d922f26f2a6929931f3e8a7d482100cdf6db7181b077f31b83bf78afe9016",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "d238d89b2ef391197a161833c9c67451e989af20cadcd9f8d61da8aaae91d485",
+      "expectedSHA256": "d238d89b2ef391197a161833c9c67451e989af20cadcd9f8d61da8aaae91d485",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "9734458bf30bdac2f5ae261a36bcc21c71333cb48ff34748be59ef6b7e857dbd",
+      "expectedSHA256": "9734458bf30bdac2f5ae261a36bcc21c71333cb48ff34748be59ef6b7e857dbd",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "c06ceda931c8f66c3ef090b483290f0142ca3fd9264008731c01393de0262d33",
+      "expectedSHA256": "c06ceda931c8f66c3ef090b483290f0142ca3fd9264008731c01393de0262d33",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "17194cdd6e143e9e7733ed4d13aec92b1c78d179c97f43e533e96e3b30fc55d8",
+      "expectedSHA256": "17194cdd6e143e9e7733ed4d13aec92b1c78d179c97f43e533e96e3b30fc55d8",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "19238484377fe3b5be17a4298ce4605b4c7b651ff2f54f86b8dffc521750017e",
+      "expectedSHA256": "19238484377fe3b5be17a4298ce4605b4c7b651ff2f54f86b8dffc521750017e",
+      "objectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "6fdf3e5d6c1bddff19d88035a37beb73eda40278c7e53415ed5f1dbe503f1feb",
+      "expectedSHA256": "6fdf3e5d6c1bddff19d88035a37beb73eda40278c7e53415ed5f1dbe503f1feb",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "54270fb47759e15c8499b8cc773f1b65766b52397f8f5e5445ffe7a1b52311e2",
+      "expectedSHA256": "54270fb47759e15c8499b8cc773f1b65766b52397f8f5e5445ffe7a1b52311e2",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "bc4888eeaf459ea0fa36c499e03d911e5bc0954198760ac55d6d8f07473e7487",
+      "expectedSHA256": "bc4888eeaf459ea0fa36c499e03d911e5bc0954198760ac55d6d8f07473e7487",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "72ca63751c4cc37c1403b2bb71c6ce8721e79653034dff16fa582191daa8adde",
+      "expectedSHA256": "72ca63751c4cc37c1403b2bb71c6ce8721e79653034dff16fa582191daa8adde",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "3324d550c9038eb4a480c17cd4bed29c7b330ba15faac36d3307f85b2206dc16",
+      "expectedSHA256": "3324d550c9038eb4a480c17cd4bed29c7b330ba15faac36d3307f85b2206dc16",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "0d518b89fefd7725c03f1a571f2b57e52aec17f36cb8d689dc732984c8799144",
+      "expectedSHA256": "0d518b89fefd7725c03f1a571f2b57e52aec17f36cb8d689dc732984c8799144",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "139fe9f4f7768abc315607fd79cc3296ccf7ba90485ced37a5161372c7edb8b7",
+      "expectedSHA256": "139fe9f4f7768abc315607fd79cc3296ccf7ba90485ced37a5161372c7edb8b7",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "1f721596fa40c229ef3c4f8179f01efb80d45222b64eafb31121cb9033ddbc9e",
+      "expectedSHA256": "1f721596fa40c229ef3c4f8179f01efb80d45222b64eafb31121cb9033ddbc9e",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "d4bda64cac82dc5cc3a9f30fd8c0200bdc839f163c36389685deafaa3ea8a969",
+      "expectedSHA256": "d4bda64cac82dc5cc3a9f30fd8c0200bdc839f163c36389685deafaa3ea8a969",
+      "objectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "173823ee421b5735835668db5b63f86cf8b4cd5f35206186a4c16187686e9118",
+      "expectedSHA256": "173823ee421b5735835668db5b63f86cf8b4cd5f35206186a4c16187686e9118",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "472cf420ede63c7a56a05715ede918ed619719fcf261014a7f068ce79c6a43af",
+      "expectedSHA256": "472cf420ede63c7a56a05715ede918ed619719fcf261014a7f068ce79c6a43af",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ddee101a0afd95f2ea8cba614f40f5a6dc112be895dbe33379c4556a1180a358",
+      "expectedSHA256": "ddee101a0afd95f2ea8cba614f40f5a6dc112be895dbe33379c4556a1180a358",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "094db5f13a1b804c69660bc457d181d68e430eb226c9bf89d6983219ac6fcce5",
+      "expectedSHA256": "094db5f13a1b804c69660bc457d181d68e430eb226c9bf89d6983219ac6fcce5",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "8754067177bd2ee1b751d002bf3f69c121a6220472d3d8f6e98af0245c6ba1b4",
+      "expectedSHA256": "8754067177bd2ee1b751d002bf3f69c121a6220472d3d8f6e98af0245c6ba1b4",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "027bcf3a40a79fae405d81406aec6f783c13966a4ff54812eb36d57e1b5a6e3a",
+      "expectedSHA256": "027bcf3a40a79fae405d81406aec6f783c13966a4ff54812eb36d57e1b5a6e3a",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "9e037c1df8ae6bea4bc458bd23ca80e91f655f9784a07d4159aacae91cc21b7b",
+      "expectedSHA256": "9e037c1df8ae6bea4bc458bd23ca80e91f655f9784a07d4159aacae91cc21b7b",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "32eaa7a2556ba3d71c3ae6c3b77a1cf4202bc0fd122fddf56df2cfedb3d3a7c5",
+      "expectedSHA256": "32eaa7a2556ba3d71c3ae6c3b77a1cf4202bc0fd122fddf56df2cfedb3d3a7c5",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "f3250a2c8d01156b28583db4e50319c89df97d5a8ea259c23934236d3f5baca3",
+      "expectedSHA256": "f3250a2c8d01156b28583db4e50319c89df97d5a8ea259c23934236d3f5baca3",
+      "objectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "eabf3540bacc93a2fc118dc2998cd2e61d43908b7c14bf3719cd3ca4898bc203",
+      "expectedSHA256": "eabf3540bacc93a2fc118dc2998cd2e61d43908b7c14bf3719cd3ca4898bc203",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "f0fa4ceedd52029c54e39824aca0a41019a922aec4610e51973be44ac7ddb544",
+      "expectedSHA256": "f0fa4ceedd52029c54e39824aca0a41019a922aec4610e51973be44ac7ddb544",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "02a7585efa5874d6c13dec2f5a99ae1ffc9ca9b14d9577ae05d61bb44ad0520f",
+      "expectedSHA256": "02a7585efa5874d6c13dec2f5a99ae1ffc9ca9b14d9577ae05d61bb44ad0520f",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "9b9bf08c9f513c62a4ae736123a41677dc75723a532a65a715ceb1cb1d89b34c",
+      "expectedSHA256": "9b9bf08c9f513c62a4ae736123a41677dc75723a532a65a715ceb1cb1d89b34c",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "1aefdebb8a8a171d11eda4d0e5eabe3ac87b91752d77c188806ccfbb4cd9947d",
+      "expectedSHA256": "1aefdebb8a8a171d11eda4d0e5eabe3ac87b91752d77c188806ccfbb4cd9947d",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "e7d6b7bdde092fc92e6deb0481291679bb95968a4d264cc0f5ff85cbe2424d0e",
+      "expectedSHA256": "e7d6b7bdde092fc92e6deb0481291679bb95968a4d264cc0f5ff85cbe2424d0e",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a6c5a3fd7484271d761164d462dbac008e0a6c1992711cb531f8d08215eee0cd",
+      "expectedSHA256": "a6c5a3fd7484271d761164d462dbac008e0a6c1992711cb531f8d08215eee0cd",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "853315c744ef02d438d60301fc0e30c379f3a0ef364f9ec6a376e0adf2d62ec4",
+      "expectedSHA256": "853315c744ef02d438d60301fc0e30c379f3a0ef364f9ec6a376e0adf2d62ec4",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "19b831106504309ef0e9dc7d2ccba0685d1b6f4d1060e3fccb47269419edd0b2",
+      "expectedSHA256": "19b831106504309ef0e9dc7d2ccba0685d1b6f4d1060e3fccb47269419edd0b2",
+      "objectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "af18244284d1465f43ae8302c3efb64fc8301b2816af764a1f71f898cf5f8a05",
+      "expectedSHA256": "af18244284d1465f43ae8302c3efb64fc8301b2816af764a1f71f898cf5f8a05",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "07046308b94f03cabf2bc8bc6ada6bb54ff6f56a57cef4e68bd3b2da2dd3725c",
+      "expectedSHA256": "07046308b94f03cabf2bc8bc6ada6bb54ff6f56a57cef4e68bd3b2da2dd3725c",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "239772f35d20c8ad60a14ab8b8d2f31e94e149970422a249866e9e7444f26025",
+      "expectedSHA256": "239772f35d20c8ad60a14ab8b8d2f31e94e149970422a249866e9e7444f26025",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "fea52bf0b7f82e0e19f92c6e3cfc09d763cfa4d6aa037031ede4b3c0a76f50bc",
+      "expectedSHA256": "fea52bf0b7f82e0e19f92c6e3cfc09d763cfa4d6aa037031ede4b3c0a76f50bc",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "aa62febb7e76d5aa25590ce585f6151e101e3393ca46234bebfd05114cd8c44c",
+      "expectedSHA256": "aa62febb7e76d5aa25590ce585f6151e101e3393ca46234bebfd05114cd8c44c",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "42e5ae4b868cf5c7a2f2999fc554314b685f63bf92b94144b4871a8365b4c67e",
+      "expectedSHA256": "42e5ae4b868cf5c7a2f2999fc554314b685f63bf92b94144b4871a8365b4c67e",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "eace68a628e5679ff3686e2f6ab0f838b6b8e3d5fe710da39a09bd9370e11ace",
+      "expectedSHA256": "eace68a628e5679ff3686e2f6ab0f838b6b8e3d5fe710da39a09bd9370e11ace",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "9eb0a33754c4deaa2eea120cfa6f37189b5ff43f47a39d7747d443aace0ffb7a",
+      "expectedSHA256": "9eb0a33754c4deaa2eea120cfa6f37189b5ff43f47a39d7747d443aace0ffb7a",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "7d7dd2d1a0e323576183559ce579d7877d60e6627d04a3fdb3284a0a7302dee8",
+      "expectedSHA256": "7d7dd2d1a0e323576183559ce579d7877d60e6627d04a3fdb3284a0a7302dee8",
+      "objectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "34db765ed122406d82187d7771f50717ebf5f4f3d744fd17577ba6f19c73c0ad",
+      "expectedSHA256": "34db765ed122406d82187d7771f50717ebf5f4f3d744fd17577ba6f19c73c0ad",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "5dbc714071c682ebeaffda00c7b3e76158f46bbc2d55935c379c02e964586139",
+      "expectedSHA256": "5dbc714071c682ebeaffda00c7b3e76158f46bbc2d55935c379c02e964586139",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ddeb0f2d47bfda18d284bded4172e7954f054f655c3135ec79dad101291d8146",
+      "expectedSHA256": "ddeb0f2d47bfda18d284bded4172e7954f054f655c3135ec79dad101291d8146",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "4d293a87f31c4c3d18477cc088f4371294d1c2d05e1f2baa63124b0cc18d719f",
+      "expectedSHA256": "4d293a87f31c4c3d18477cc088f4371294d1c2d05e1f2baa63124b0cc18d719f",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "3e8516ae0d97f6c9da801e30e149120ae21f4c920a87011a4c6e0bf05b070b25",
+      "expectedSHA256": "3e8516ae0d97f6c9da801e30e149120ae21f4c920a87011a4c6e0bf05b070b25",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "467f25f7a74b64e81dea59ef6da3cb58ead4a1d293a7a5c42e4607b30161a6bd",
+      "expectedSHA256": "467f25f7a74b64e81dea59ef6da3cb58ead4a1d293a7a5c42e4607b30161a6bd",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "5391dc6866a178f51fccf3259cb7da8d69a762d542bbbf04960f74ee994bd605",
+      "expectedSHA256": "5391dc6866a178f51fccf3259cb7da8d69a762d542bbbf04960f74ee994bd605",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "be38fc87cf8cde3407557ae587801a010fde4c40c9477f757cc33da25ad4e6bb",
+      "expectedSHA256": "be38fc87cf8cde3407557ae587801a010fde4c40c9477f757cc33da25ad4e6bb",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "463eeb5b8584d66037b252fcaf2035a318e4d2338571b540776397a2c3f22927",
+      "expectedSHA256": "463eeb5b8584d66037b252fcaf2035a318e4d2338571b540776397a2c3f22927",
+      "objectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "5e2ba6b680ebd3c81b258bf94904299bcb42aa145bbb93456e862e7118000d03",
+      "expectedSHA256": "5e2ba6b680ebd3c81b258bf94904299bcb42aa145bbb93456e862e7118000d03",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "2df306630e624fd00e28d7c5beb73411f26a6b474190b9f3d373be288034bd3c",
+      "expectedSHA256": "2df306630e624fd00e28d7c5beb73411f26a6b474190b9f3d373be288034bd3c",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "be084766aad1151bf491325b9fd2aa05768421d554689ee66345c177d1063387",
+      "expectedSHA256": "be084766aad1151bf491325b9fd2aa05768421d554689ee66345c177d1063387",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "719688c8224a9477c44ac0fb0a780e5a2f73a4fe1f93489ff9292acda3e97be3",
+      "expectedSHA256": "719688c8224a9477c44ac0fb0a780e5a2f73a4fe1f93489ff9292acda3e97be3",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "8d6db0067b75e0c78f68fe12f8321fecb1507e73d6d0e9637c5ebd7594aedabf",
+      "expectedSHA256": "8d6db0067b75e0c78f68fe12f8321fecb1507e73d6d0e9637c5ebd7594aedabf",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "781654969b5767c07ae8019fbbe49c029e6ef5bfaa88b11778cdcf4ef059cf8f",
+      "expectedSHA256": "781654969b5767c07ae8019fbbe49c029e6ef5bfaa88b11778cdcf4ef059cf8f",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "75376b84d87964edcceb5416d2f15dba1faac0b239986c77a342c5d810fab0d9",
+      "expectedSHA256": "75376b84d87964edcceb5416d2f15dba1faac0b239986c77a342c5d810fab0d9",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "7a95214e8199b4f5cb65d4dd0d452d1b645ce0addab338ffa31b104e494e848d",
+      "expectedSHA256": "7a95214e8199b4f5cb65d4dd0d452d1b645ce0addab338ffa31b104e494e848d",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a3d534b48940ff16703a03b987119a56a98c8c39f0b08aa6e41ca3e2ff5cb222",
+      "expectedSHA256": "a3d534b48940ff16703a03b987119a56a98c8c39f0b08aa6e41ca3e2ff5cb222",
+      "objectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a58e3333ee1e8663f8fb7c0571f50971cc57e2539edf0397310f3da615faa0d1",
+      "expectedSHA256": "a58e3333ee1e8663f8fb7c0571f50971cc57e2539edf0397310f3da615faa0d1",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "8667c45cd9c015cad2c86b75399ada35beb51ca7d934c65465e06cd3a782111a",
+      "expectedSHA256": "8667c45cd9c015cad2c86b75399ada35beb51ca7d934c65465e06cd3a782111a",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a8129c44efc4214c712ed64e8b5ac31a2a4cdd625d8b549dc538a82d2f682e73",
+      "expectedSHA256": "a8129c44efc4214c712ed64e8b5ac31a2a4cdd625d8b549dc538a82d2f682e73",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "4e29debd325b37065c7416e40fdc1b905908e3130b41096f9dcff2fcad481ae0",
+      "expectedSHA256": "4e29debd325b37065c7416e40fdc1b905908e3130b41096f9dcff2fcad481ae0",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a272c54f970cf16f4cedff7ca0ce21df32cdec1b22df128bb51705b3b60b21f1",
+      "expectedSHA256": "a272c54f970cf16f4cedff7ca0ce21df32cdec1b22df128bb51705b3b60b21f1",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a660b7c2bbedb11c0e0ba796a278cb8714567b1aa641c9642916dba727f5320f",
+      "expectedSHA256": "a660b7c2bbedb11c0e0ba796a278cb8714567b1aa641c9642916dba727f5320f",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "b2ce0ea8bf96b916f65fd7c586966725f5869dd724c8217cd3a9d39e3494c536",
+      "expectedSHA256": "b2ce0ea8bf96b916f65fd7c586966725f5869dd724c8217cd3a9d39e3494c536",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a7071ffe5decb14287a3917a202ed2fe0b1585aecd5b73bbcb548724dc66b5eb",
+      "expectedSHA256": "a7071ffe5decb14287a3917a202ed2fe0b1585aecd5b73bbcb548724dc66b5eb",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ecedefa7ea27b7560a4d2353d498918c77810055ac012bedd89332ee46e1483d",
+      "expectedSHA256": "ecedefa7ea27b7560a4d2353d498918c77810055ac012bedd89332ee46e1483d",
+      "objectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "1db4fe4b0d00ac9eb80268d611e1b710799d176d26ed63f1583b25779c00ebcc",
+      "expectedSHA256": "1db4fe4b0d00ac9eb80268d611e1b710799d176d26ed63f1583b25779c00ebcc",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "b4295ccf42eddb9587ff5bac6128373f0e4a8dc6685335c1e9f60e6fedf86b7c",
+      "expectedSHA256": "b4295ccf42eddb9587ff5bac6128373f0e4a8dc6685335c1e9f60e6fedf86b7c",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "525aa324d21511ac4c7b86ff5ca30703efb2183f3eae96d2eed914e308039f78",
+      "expectedSHA256": "525aa324d21511ac4c7b86ff5ca30703efb2183f3eae96d2eed914e308039f78",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "3e8f3b82c9286d6c8bd159d2f69fa72925ad91789a0ec6dd3ea1b4dc0c488611",
+      "expectedSHA256": "3e8f3b82c9286d6c8bd159d2f69fa72925ad91789a0ec6dd3ea1b4dc0c488611",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a14ef7de5a5e3eaaa79517ae75b37cdb34b553bb4851b1abbbebf01511a04d62",
+      "expectedSHA256": "a14ef7de5a5e3eaaa79517ae75b37cdb34b553bb4851b1abbbebf01511a04d62",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "f1aed7523e072ef1057236f75a9aeae5c46e74e2f4792b06f050f81bd44cf19e",
+      "expectedSHA256": "f1aed7523e072ef1057236f75a9aeae5c46e74e2f4792b06f050f81bd44cf19e",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ba01cd38fdb8327bb219baf6699670c94eef41ae047ee2fad53b2c282b55cc15",
+      "expectedSHA256": "ba01cd38fdb8327bb219baf6699670c94eef41ae047ee2fad53b2c282b55cc15",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "957e740826713a6870df89f1bb31a62e24f4537f60a80957e65b4788f6f496e0",
+      "expectedSHA256": "957e740826713a6870df89f1bb31a62e24f4537f60a80957e65b4788f6f496e0",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "090729d8b5456c36da92cb839042a4ac6763d019ead20cd5ca5b809e472fa036",
+      "expectedSHA256": "090729d8b5456c36da92cb839042a4ac6763d019ead20cd5ca5b809e472fa036",
+      "objectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "e727611604ca57d102ac45636163741c57121d14b6c540a3383d4bbc53f9f5fa",
+      "expectedSHA256": "e727611604ca57d102ac45636163741c57121d14b6c540a3383d4bbc53f9f5fa",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "e67369117a11a04fa57d49ecc090040b61eb0ea66209504236f020dea3e1825b",
+      "expectedSHA256": "e67369117a11a04fa57d49ecc090040b61eb0ea66209504236f020dea3e1825b",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "b11f5858c734301152caaa3eca3c6e6ea2812e89e76827b4ec48e3173e4bab80",
+      "expectedSHA256": "b11f5858c734301152caaa3eca3c6e6ea2812e89e76827b4ec48e3173e4bab80",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "84cf065687da138ab82eef84f1650ad6d427c623f9d47162d39c08fe2276b1c5",
+      "expectedSHA256": "84cf065687da138ab82eef84f1650ad6d427c623f9d47162d39c08fe2276b1c5",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "81fa2b0cbb7104a575a15d4b89f21d271a846d1d99b58cc800df87ca57019d56",
+      "expectedSHA256": "81fa2b0cbb7104a575a15d4b89f21d271a846d1d99b58cc800df87ca57019d56",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "c9cfd84efca5ed19ec2a94235c1ff3a89bdf092fcd5cef564dd3946a94cd366a",
+      "expectedSHA256": "c9cfd84efca5ed19ec2a94235c1ff3a89bdf092fcd5cef564dd3946a94cd366a",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "d9c19b9a368580e25411ed176691a5f7b19bf33178f46aaab40c5654a1bb474f",
+      "expectedSHA256": "d9c19b9a368580e25411ed176691a5f7b19bf33178f46aaab40c5654a1bb474f",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "9d7db41fe399bf946cc320ba7e97eeec164427a8688fa5f320d416404c9eddee",
+      "expectedSHA256": "9d7db41fe399bf946cc320ba7e97eeec164427a8688fa5f320d416404c9eddee",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "c1a133301ba092b7e42a5905d5a1dd3b90277bfdca7d357b4e069f5d8ab20b5b",
+      "expectedSHA256": "c1a133301ba092b7e42a5905d5a1dd3b90277bfdca7d357b4e069f5d8ab20b5b",
+      "objectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "00c8bdba2f79c3615855de5453d547ad820f968799c01df3f2cf4f74f5b8f7ac",
+      "expectedSHA256": "00c8bdba2f79c3615855de5453d547ad820f968799c01df3f2cf4f74f5b8f7ac",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "50874230daccbc26a93cc795aaf86445f42dbad9b7c5aec94afd5339a911749d",
+      "expectedSHA256": "50874230daccbc26a93cc795aaf86445f42dbad9b7c5aec94afd5339a911749d",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ed51a3f9392877f82439e2dc436bef729c03be9d0af0412444a295cea35ce281",
+      "expectedSHA256": "ed51a3f9392877f82439e2dc436bef729c03be9d0af0412444a295cea35ce281",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "8266a51400c6abd32a707816cec697cd21d78a4907b73f48b7dc07d25fcb8d22",
+      "expectedSHA256": "8266a51400c6abd32a707816cec697cd21d78a4907b73f48b7dc07d25fcb8d22",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "c52eb1a24d536e35570be934faedc534301d68b47d1197c3bcd99d887c8184fc",
+      "expectedSHA256": "c52eb1a24d536e35570be934faedc534301d68b47d1197c3bcd99d887c8184fc",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ed5bc83f9b249fb9365e7afc9de5849f853dc7f55e0f70a1b7432acce2ce3110",
+      "expectedSHA256": "ed5bc83f9b249fb9365e7afc9de5849f853dc7f55e0f70a1b7432acce2ce3110",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "589912a6eaea5534ea6ef9134c3538176f0af77f4a867eb6a862c3e783243ca0",
+      "expectedSHA256": "589912a6eaea5534ea6ef9134c3538176f0af77f4a867eb6a862c3e783243ca0",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "a8737e7d43f05fdb21d7e85c624ddb4efba25d91a1007d5371ab695305dbc466",
+      "expectedSHA256": "a8737e7d43f05fdb21d7e85c624ddb4efba25d91a1007d5371ab695305dbc466",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "065b18fbeb97e5a51f055035120fa2d66ef4dcafb3dca01eac34789d82dbaee2",
+      "expectedSHA256": "065b18fbeb97e5a51f055035120fa2d66ef4dcafb3dca01eac34789d82dbaee2",
+      "objectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "e3cac141b2946061700be7fdee695565b63d71e7eb8638a80ae3dca09d94a60f",
+      "expectedSHA256": "e3cac141b2946061700be7fdee695565b63d71e7eb8638a80ae3dca09d94a60f",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/current-pointer-v1.json",
+      "objectRole": "current_pointer",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "26b4af7745b6cab2d0c094e0fcf5961158030f425f2f16a39e10ad5036f3321a",
+      "expectedSHA256": "26b4af7745b6cab2d0c094e0fcf5961158030f425f2f16a39e10ad5036f3321a",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/gateway-allowlist-v1.json",
+      "objectRole": "gateway_allowlist",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "cd0288d9d6c31d624a9b8549654cb2b2112365c38f47e1bd6e69b162de9dd107",
+      "expectedSHA256": "cd0288d9d6c31d624a9b8549654cb2b2112365c38f47e1bd6e69b162de9dd107",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/last-known-good-v1.json",
+      "objectRole": "last_known_good",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "cee8a77d57977512cc028251200ef5099f492039d755398d54dab7b1edb50442",
+      "expectedSHA256": "cee8a77d57977512cc028251200ef5099f492039d755398d54dab7b1edb50442",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/index-v1.json",
+      "objectRole": "partition_index",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "1a210b6d541e35db542d735e06cc6e37110507dcdceca6d4d0c1ece5ef66aa23",
+      "expectedSHA256": "1a210b6d541e35db542d735e06cc6e37110507dcdceca6d4d0c1ece5ef66aa23",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/manifest-v1.json",
+      "objectRole": "partition_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "cfdf547024f27f8dcf3827bf0637454558b76454acbf5f0a292564eb6e10a594",
+      "expectedSHA256": "cfdf547024f27f8dcf3827bf0637454558b76454acbf5f0a292564eb6e10a594",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/promoted-manifest-v1.json",
+      "objectRole": "promoted_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "0ff0a7ab9add16e1042c07711d601bd7a8c6ddc4638d98b685d5254f63a50377",
+      "expectedSHA256": "0ff0a7ab9add16e1042c07711d601bd7a8c6ddc4638d98b685d5254f63a50377",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/revocation-v1.json",
+      "objectRole": "revocation_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "c50094b7a890fad9a2ea4f83c9b32a8ab78f4fb7348269be4f0b8b82abe52451",
+      "expectedSHA256": "c50094b7a890fad9a2ea4f83c9b32a8ab78f4fb7348269be4f0b8b82abe52451",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/rollback-v1.json",
+      "objectRole": "rollback_plan",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    },
+    {
+      "actualSHA256": "ba726bba05a6d61716824f88ea035de6551b6696093568fdc7cc6993ec36a1ef",
+      "expectedSHA256": "ba726bba05a6d61716824f88ea035de6551b6696093568fdc7cc6993ec36a1ef",
+      "objectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/staged-manifest-v1.json",
+      "objectRole": "staged_manifest",
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "passed": true,
+      "publicReferenceOnly": true
+    }
+  ],
+  "sampleStride": 97,
+  "schemaVersion": 1,
+  "valid": true
+}

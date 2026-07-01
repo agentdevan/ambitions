@@ -35,6 +35,7 @@ LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST = (
     / "lff-m02-l02-current"
     / "launch-floor-shard-corpus-manifest.json"
 )
+R2_LAYOUT_PROOF = REPO_ROOT / "docs" / "qa" / "source-atlas" / "source-atlas-launch-floor-r2-layout-proof-lff-m02.json"
 NATIVE_BRIDGE_GAUNTLET_SOURCE = REPO_ROOT / "Native" / "AmbitionsTests" / "LocalRuntimeOS" / "SourceAtlas" / "SourceAtlasRuntimeBridgeCoverageGauntletTests.swift"
 
 
@@ -54,6 +55,12 @@ def test_launch_floor_ledger_current_repo_evidence_fails_closed(tmp_path: Path):
     assert counts["launchFloorTaxonomySourceLaneReviewBacklogItems"] == 486
     assert counts["shardCorpusCounter"] == 71
     assert counts["launchFloorShardCorpusCountedPartitions"] == 14
+    assert counts["launchFloorR2LayoutProofObjects"] == 126
+    assert counts["launchFloorR2ReadbackObjectsChecked"] == 126
+    assert counts["launchFloorR2ReadbackChecksumMismatches"] == 0
+    assert counts["launchFloorR2RollbackTransitions"] == 14
+    assert counts["launchFloorR2GatewayLoadProbes"] == 70
+    assert counts["launchFloorR2LiveWrites"] == 0
     assert counts["packablePublicReferenceClaimProxy"] == 71
     assert counts["liveR2ObjectProxy"] == 196
     assert counts["sourceLaneCount"] == 34
@@ -157,6 +164,7 @@ def _current_options(tmp_path: Path) -> SourceAtlasLaunchFloorLedgerOptions:
         autonomous_domain_expansion_chain_path=AUTONOMOUS_DOMAIN_EXPANSION_CHAIN,
         launch_floor_taxonomy_path=LAUNCH_FLOOR_TAXONOMY,
         shard_corpus_manifest_path=LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST,
+        r2_layout_proof_path=R2_LAYOUT_PROOF,
         native_runtime_bridge_gauntlet_source_path=NATIVE_BRIDGE_GAUNTLET_SOURCE,
         output_root=tmp_path / "current-launch-floor",
         created_at="2026-07-01T00:00:00Z",

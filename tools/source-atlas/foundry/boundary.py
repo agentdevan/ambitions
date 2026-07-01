@@ -60,6 +60,7 @@ BOUNDARY_CONTEXT_KEYS = {
     "mustNotUploadPrivateContext",
     "doesNotStoreFinalUserPath",
     "doesNotCreateFinalSchedule",
+    "sourceAtlasGeneratesFinalPlansSchedulesSteps",
     "forbidden_artifact_classes",
     "forbiddenArtifactClasses",
     "forbiddenPrivateClasses",

@@ -111,6 +111,13 @@ from .launch_floor_shard_corpus_compiler import (
     compile_launch_floor_shard_corpus_bulk,
     launch_floor_shard_corpus_compiler_markdown,
 )
+from .launch_floor_r2_layout_proof import (
+    DEFAULT_LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST_PATH,
+    READBACK_MODES,
+    LaunchFloorR2LayoutProofOptions,
+    launch_floor_r2_layout_proof_markdown,
+    run_launch_floor_r2_layout_proof,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -946,6 +953,19 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_shard_corpus_compiler_parser.add_argument("--markdown")
     launch_floor_shard_corpus_compiler_parser.add_argument("--emit-manifest")
 
+    launch_floor_r2_layout_proof_parser = sub.add_parser("launch-floor-r2-layout-proof")
+    launch_floor_r2_layout_proof_parser.add_argument("--shard-corpus-manifest", default=str(DEFAULT_LAUNCH_FLOOR_SHARD_CORPUS_MANIFEST_PATH))
+    launch_floor_r2_layout_proof_parser.add_argument("--launch-floor-taxonomy", default=str(DEFAULT_LAUNCH_FLOOR_TAXONOMY_PATH))
+    launch_floor_r2_layout_proof_parser.add_argument("--output-root", required=True)
+    launch_floor_r2_layout_proof_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    launch_floor_r2_layout_proof_parser.add_argument("--run-label", default="current")
+    launch_floor_r2_layout_proof_parser.add_argument("--readback-mode", choices=sorted(READBACK_MODES), default="full")
+    launch_floor_r2_layout_proof_parser.add_argument("--sample-stride", type=int, default=97)
+    launch_floor_r2_layout_proof_parser.add_argument("--gateway-load-probe-count", type=int, default=1000)
+    launch_floor_r2_layout_proof_parser.add_argument("--simulate-readback-mismatch-object-key")
+    launch_floor_r2_layout_proof_parser.add_argument("--emit-evidence")
+    launch_floor_r2_layout_proof_parser.add_argument("--markdown")
+
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
     launch_floor_parser.add_argument("--source-lane-registry", default="tools/source-atlas/governance/source-lane-registry.json")
@@ -961,6 +981,7 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_parser.add_argument("--autonomous-domain-expansion-chain", default="tools/source-atlas/generated/autonomous-domain-expansion-chain/train-107-current/autonomous-domain-expansion-chain-report.json")
     launch_floor_parser.add_argument("--launch-floor-taxonomy", default=str(DEFAULT_LAUNCH_FLOOR_TAXONOMY_PATH))
     launch_floor_parser.add_argument("--shard-corpus-manifest")
+    launch_floor_parser.add_argument("--r2-layout-proof")
     launch_floor_parser.add_argument("--golden-intent-corpus")
     launch_floor_parser.add_argument("--fallback-metric")
     launch_floor_parser.add_argument("--missing-shard-events")
@@ -2360,6 +2381,29 @@ def main(argv: list[str] | None = None) -> int:
             write_json(Path(args.emit_manifest), read_json(Path(result["outputPaths"]["manifest"])))
         print_json(result)
         return 0 if result["valid"] else 1
+    if args.command == "launch-floor-r2-layout-proof":
+        result = run_launch_floor_r2_layout_proof(
+            LaunchFloorR2LayoutProofOptions(
+                shard_corpus_manifest_path=Path(args.shard_corpus_manifest),
+                launch_floor_taxonomy_path=Path(args.launch_floor_taxonomy) if args.launch_floor_taxonomy else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                readback_mode=args.readback_mode,
+                sample_stride=args.sample_stride,
+                gateway_load_probe_count=args.gateway_load_probe_count,
+                simulate_readback_mismatch_object_key=args.simulate_readback_mismatch_object_key,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(launch_floor_r2_layout_proof_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":
         result = build_source_atlas_launch_floor_ledger(
             SourceAtlasLaunchFloorLedgerOptions(
@@ -2379,6 +2423,7 @@ def main(argv: list[str] | None = None) -> int:
                 else None,
                 launch_floor_taxonomy_path=Path(args.launch_floor_taxonomy) if args.launch_floor_taxonomy else None,
                 shard_corpus_manifest_path=Path(args.shard_corpus_manifest) if args.shard_corpus_manifest else None,
+                r2_layout_proof_path=Path(args.r2_layout_proof) if args.r2_layout_proof else None,
                 golden_intent_corpus_path=Path(args.golden_intent_corpus) if args.golden_intent_corpus else None,
                 fallback_metric_path=Path(args.fallback_metric) if args.fallback_metric else None,
                 missing_shard_events_path=Path(args.missing_shard_events) if args.missing_shard_events else None,

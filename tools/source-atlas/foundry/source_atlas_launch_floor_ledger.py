@@ -123,6 +123,7 @@ class SourceAtlasLaunchFloorLedgerOptions:
     autonomous_domain_expansion_chain_path: Path | None = None
     launch_floor_taxonomy_path: Path | None = None
     shard_corpus_manifest_path: Path | None = None
+    r2_layout_proof_path: Path | None = None
     golden_intent_corpus_path: Path | None = None
     fallback_metric_path: Path | None = None
     missing_shard_events_path: Path | None = None
@@ -155,6 +156,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         "autonomousDomainExpansionChain": _read_optional_json(options.autonomous_domain_expansion_chain_path, "autonomous domain expansion chain", issues),
         "launchFloorTaxonomy": _read_optional_json(options.launch_floor_taxonomy_path, "launch-floor domain taxonomy", issues),
         "shardCorpusManifest": _read_optional_json(options.shard_corpus_manifest_path, "shard corpus manifest", issues),
+        "r2LayoutProof": _read_optional_json(options.r2_layout_proof_path, "launch-floor R2 layout proof", issues),
         "goldenIntentCorpus": _read_optional_json(options.golden_intent_corpus_path, "golden intent corpus", issues),
         "fallbackMetric": _read_optional_json(options.fallback_metric_path, "source-needed fallback metric", issues),
         "missingShardEvents": _read_optional_json(options.missing_shard_events_path, "missing-shard events", issues),
@@ -327,6 +329,11 @@ def source_atlas_launch_floor_ledger_markdown(report: dict[str, Any]) -> str:
         f"- Launch-floor taxonomy source-lane review backlog items: {counts['launchFloorTaxonomySourceLaneReviewBacklogItems']}",
         f"- Packable public/reference claims: {counts['packablePublicReferenceClaimProxy']}",
         f"- Live R2 objects: {counts['liveR2ObjectProxy']}",
+        f"- Launch-floor R2 layout proof objects: {counts['launchFloorR2LayoutProofObjects'] or 0}",
+        f"- Launch-floor R2 readback objects checked: {counts['launchFloorR2ReadbackObjectsChecked'] or 0}",
+        f"- Launch-floor R2 rollback transitions: {counts['launchFloorR2RollbackTransitions'] or 0}",
+        f"- Launch-floor R2 gateway load probes: {counts['launchFloorR2GatewayLoadProbes'] or 0}",
+        f"- Launch-floor R2 live writes: {counts['launchFloorR2LiveWrites'] or 0}",
         f"- Source lanes: {counts['sourceLaneCount']}",
         f"- Source-lane domain-scope values: {counts['sourceLaneDomainScopeProxy']}",
         f"- Representative configured gauntlet cases: {counts['configuredGauntletCases']}",
@@ -412,6 +419,7 @@ def _counters(
     golden_corpus = artifacts["goldenIntentCorpus"]
     fallback_metric = artifacts["fallbackMetric"]
     missing_shard_events = artifacts["missingShardEvents"]
+    r2_layout_proof = artifacts["r2LayoutProof"]
     taxonomy_counts = launch_floor_taxonomy["recordCounts"]
     taxonomy_valid = not launch_floor_taxonomy["issues"]
     shard_corpus_counts = launch_floor_shard_corpus["recordCounts"]
@@ -490,6 +498,13 @@ def _counters(
             "launchFloorShardCorpusRollbackPartitions": shard_corpus_counts["partitionsWithRollbackProof"],
             "launchFloorShardCorpusGatewayPartitions": shard_corpus_counts["partitionsWithGatewayProof"],
             "launchFloorShardCorpusNativeCompatiblePartitions": shard_corpus_counts["partitionsWithNativeCompatibility"],
+            "launchFloorR2LayoutProofPartitions": _record_count(r2_layout_proof, "launchFloorCountedPartitions"),
+            "launchFloorR2LayoutProofObjects": _record_count(r2_layout_proof, "layoutObjects"),
+            "launchFloorR2ReadbackObjectsChecked": _record_count(r2_layout_proof, "readbackObjectsChecked"),
+            "launchFloorR2ReadbackChecksumMismatches": _record_count(r2_layout_proof, "readbackChecksumMismatches"),
+            "launchFloorR2RollbackTransitions": _record_count(r2_layout_proof, "rollbackTransitionsTested"),
+            "launchFloorR2GatewayLoadProbes": _record_count(r2_layout_proof, "gatewayLoadProbes"),
+            "launchFloorR2LiveWrites": _record_count(r2_layout_proof, "r2LiveWrites"),
             "packablePublicReferenceClaimProxy": packable_claims,
             "liveR2ObjectProxy": live_r2_objects,
             "expectedCurrentR2ObjectProxy": expected_current_objects,
@@ -755,6 +770,21 @@ def _current_capabilities(counters: dict[str, Any], target_statuses: list[dict[s
             ),
         }
     )
+    capabilities.append(
+        {
+            "capabilityID": "launch_floor_r2_layout_readback_gate",
+            "status": "proven_current"
+            if counts["launchFloorR2LayoutProofObjects"] and counts["launchFloorR2ReadbackChecksumMismatches"] == 0
+            else "not_proven",
+            "evidence": (
+                f"{counts['launchFloorR2LayoutProofObjects'] or 0} layout objects, "
+                f"{counts['launchFloorR2ReadbackObjectsChecked'] or 0} readback checks, "
+                f"{counts['launchFloorR2RollbackTransitions'] or 0} rollback transitions, "
+                f"{counts['launchFloorR2GatewayLoadProbes'] or 0} gateway load probes, "
+                f"{counts['launchFloorR2LiveWrites'] or 0} live writes"
+            ),
+        }
+    )
     return capabilities
 
 
@@ -870,9 +900,14 @@ def _validation_matrix() -> list[dict[str, str]]:
             "purpose": "compile reviewed bounded production-target evidence into a measurable public/reference shard corpus manifest without claiming 1M readiness",
         },
         {
+            "validationID": "launch_floor_r2_layout_proof",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-r2-layout-proof --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-r2-layout-proof/lff-m02-l03-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.md",
+            "purpose": "prove staged/promoted/current/LKG/revocation/rollback/gateway R2 layout and deterministic readback metadata without executing live R2 writes",
+        },
+        {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m02-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
-            "purpose": "regenerate current launch-floor ledger with the compiled bounded shard corpus manifest and no source/R2/native mutation",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --r2-layout-proof docs/qa/source-atlas/source-atlas-launch-floor-r2-layout-proof-lff-m02.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m02-l03-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "purpose": "regenerate current launch-floor ledger with the compiled bounded shard corpus manifest, R2 layout proof, and no source/R2/native mutation",
         },
         {
             "validationID": "launch_floor_shard_corpus",
@@ -1173,6 +1208,7 @@ def _input_paths(options: SourceAtlasLaunchFloorLedgerOptions) -> dict[str, str 
         "autonomousDomainExpansionChain": str(options.autonomous_domain_expansion_chain_path) if options.autonomous_domain_expansion_chain_path else None,
         "launchFloorTaxonomy": str(options.launch_floor_taxonomy_path) if options.launch_floor_taxonomy_path else None,
         "shardCorpusManifest": str(options.shard_corpus_manifest_path) if options.shard_corpus_manifest_path else None,
+        "r2LayoutProof": str(options.r2_layout_proof_path) if options.r2_layout_proof_path else None,
         "goldenIntentCorpus": str(options.golden_intent_corpus_path) if options.golden_intent_corpus_path else None,
         "fallbackMetric": str(options.fallback_metric_path) if options.fallback_metric_path else None,
         "missingShardEvents": str(options.missing_shard_events_path) if options.missing_shard_events_path else None,
