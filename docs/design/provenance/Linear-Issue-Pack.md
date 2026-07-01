@@ -251,8 +251,8 @@ Rollback plan:
 
 - Parent issue mirror: `AMB-1486`
 - Recommended status: `Needs Repair`
-- Labels: VSP, trust, inspection, yellow-proof, figma-exploration, owner-selected-direction, selected-f-attached-receipt-stack, part-02-refinement, recommended-b-receipt-aperture
-- Blocked by: surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval, live SwiftUI/device/accessibility/runtime proof, owner selection for VSP-07 Part 02 direction, final VSP-07 candidate package approval
+- Labels: VSP, trust, inspection, yellow-proof, figma-exploration, owner-selected-direction, selected-f-attached-receipt-stack, part-02-refinement, owner-approved-direction, selected-a-object-wake-stack, part-02-approved
+- Blocked by: surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval, live SwiftUI/device/accessibility/runtime proof, final VSP-07 candidate package approval, final VSP-07 candidate package
 - Do not create now: `True`
 
 Acceptance summary:
@@ -266,16 +266,17 @@ Acceptance summary:
 - Option C remains a historical guardrail for object attachment; it is not the selected direction.
 - VSP-07 cannot proceed to implementation until the final Option F candidate package is owner-approved.
 - Part 02 refinement board is node 250:93 with options A-F derived from owner-selected Option F Attached Receipt Stack.
-- Recommended next base is Option B Receipt Aperture because it keeps inspection owned by one changed object.
-- Option F Return Ribbon Stack is a return-path rule candidate if B is selected; avoid merged composition unless owner asks.
-- VSP-07 cannot proceed to implementation until owner selects a Part 02 direction and the final candidate package is owner-approved.
+- Owner approved Option A Object Wake Stack as the VSP-07 Part 02 direction on 2026-07-01.
+- Prior Codex recommendation for Option B is superseded by owner approval of Option A.
+- Final package must keep receipts attached to the changed object and prevent receipt-feed/history/root-surface drift.
+- VSP-07 cannot proceed to implementation until the final Object Wake Stack candidate package is built and owner-approved.
 Validation summary:
 - focused Trust tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Owner-select VSP-07 Part 02 attached receipt refinement direction - scope: Review node 250:93 and choose B Receipt Aperture, another option, repair, or rejection before final package buildout - status: Needs Repair
-- Build final VSP-07 candidate package from selected Part 02 direction - scope: Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof/non-claim board, and durable screenshots - status: Blocked until Part 02 owner selection
+- Build final VSP-07 Object Wake Stack candidate package - scope: Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof/non-claim board, and durable screenshots from owner-approved node 250:104 - status: Needs Repair
+- Owner-review final VSP-07 Object Wake Stack package - scope: Owner approves, repairs, or rejects the final package before any source implementation issue is created - status: Blocked until final package exists
 - Produce Trust inspection SwiftUI parity leaf - scope: Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces - status: Spec Ready after final package approval
 
 Standard Codex closeout block:

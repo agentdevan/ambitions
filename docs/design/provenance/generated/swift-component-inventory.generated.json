@@ -8114,6 +8114,25 @@
       "candidate_inventory_only": true,
       "candidate_vsp_ids": [
         "VSP-04",
+        "VSP-08"
+      ],
+      "has_preview_provider": false,
+      "kind": "test",
+      "line_count": 210,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLaunchFloorShardIndexCompatibilityTests.swift",
+      "preview_count": 0,
+      "proof_status": "source_inventory_only",
+      "test_cases": [
+        "SourceAtlasLaunchFloorShardIndexCompatibilityTests"
+      ],
+      "view_modifiers": [],
+      "view_structs": []
+    },
+    {
+      "button_styles": [],
+      "candidate_inventory_only": true,
+      "candidate_vsp_ids": [
+        "VSP-04",
         "VSP-07",
         "VSP-08"
       ],
@@ -12965,7 +12984,7 @@
       "view_structs": []
     }
   ],
-  "entry_count": 608,
+  "entry_count": 609,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "scan_roots": [

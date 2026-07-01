@@ -5397,7 +5397,7 @@
       "exists": true,
       "inventory_only": true,
       "kind": "native_source",
-      "line_count": 118,
+      "line_count": 179,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/R2GatewayClient.swift"
     },
     {
@@ -5568,6 +5568,18 @@
       "kind": "native_source",
       "line_count": 404,
       "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasIntentMatchModels.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
+        "VSP-07",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "native_source",
+      "line_count": 696,
+      "path": "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLaunchFloorShardIndexModels.swift"
     },
     {
       "candidate_vsp_ids": [
@@ -19087,6 +19099,17 @@
     {
       "candidate_vsp_ids": [
         "VSP-04",
+        "VSP-08"
+      ],
+      "exists": true,
+      "inventory_only": true,
+      "kind": "test",
+      "line_count": 210,
+      "path": "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLaunchFloorShardIndexCompatibilityTests.swift"
+    },
+    {
+      "candidate_vsp_ids": [
+        "VSP-04",
         "VSP-07",
         "VSP-08"
       ],
@@ -22887,7 +22910,7 @@
       "path": "scripts/ambitions-quality-gate.py"
     }
   ],
-  "entry_count": 1846,
+  "entry_count": 1848,
   "generated_at": "deterministic-from-current-source-inputs",
   "generator": "scripts/ambitions-component-inventory-generate.py",
   "schema_version": 1

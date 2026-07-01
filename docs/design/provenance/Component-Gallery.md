@@ -238,6 +238,8 @@ Figma candidate screenshots:
 - docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-d-undo-corridor-r1.png
 - docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-e-private-source-veil-r1.png
 - docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-approval-board-r1.png
+- docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-object-wake-stack-approved-r1.png
 SwiftUI source owners:
 - Native/Ambitions/Trust/InspectionSurface.swift
 - Native/Ambitions/Trust/ProofInspectionView.swift

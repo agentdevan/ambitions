@@ -1,8 +1,8 @@
 # VSP-07 Part 02 Attached Receipt Stack Refinements R1
 
-Status: Yellow / Exploration
+Status: Yellow / Owner-approved Part 02 direction
 
-This evidence package records six VSP-07 Part 02 refinement directions based on the owner-selected `F Attached Receipt Stack` Part 01 direction.
+This evidence package records six VSP-07 Part 02 refinement directions based on the owner-selected `F Attached Receipt Stack` Part 01 direction. The owner approved Option A Object Wake Stack on 2026-07-01 for final candidate-package buildout.
 
 It is not a final candidate package, not implementation authority, and not Visual Green.
 
@@ -30,15 +30,15 @@ It is not a final candidate package, not implementation authority, and not Visua
 | Option E | `docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-e-private-source-veil-r1.png` |
 | Option F | `docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png` |
 
-## Recommendation
+## Owner Approval
 
-Recommended base for the final VSP-07 candidate package: Option B Receipt Aperture.
+Approved base for the final VSP-07 candidate package: Option A Object Wake Stack.
 
-Option F Return Ribbon Stack should be treated as a return-path rule if B is selected, not merged as a separate composition. Option E Private Source Veil should inform VSP-08 boundary work unless the owner explicitly selects it for VSP-07.
+Prior Codex recommendation was Option B Receipt Aperture. Owner approval now controls the next step. Option F Return Ribbon Stack should not be merged unless explicitly requested. Option E Private Source Veil should inform VSP-08 boundary work unless the owner explicitly selects it for VSP-07.
 
 ## Audit Notes
 
-- Typography audit: pass for exploration. Option B was repaired after an initial row collision and duplicate Reduce Motion pill.
+- Typography audit: pass for exploration. Option B was repaired after an initial row collision and duplicate Reduce Motion pill. Option A approval screenshot exported cleanly.
 - Spatial audit: pass for exploration. No shell chrome, dock, root navigation, or status/nav approximation is introduced.
 - Product-law audit: pass for exploration. Trust remains contextual inspection detail.
 - Accessibility / Dynamic Type audit: not proven. Future candidate package must include Dynamic Type, VoiceOver order, Reduce Motion, Reduce Transparency, and Increase Contrast states.
@@ -46,7 +46,7 @@ Option F Return Ribbon Stack should be treated as a return-path rule if B is sel
 
 ## Non-Claims
 
-- No owner selection for Part 02.
+- Owner approval for Part 02 direction only. No final VSP-07 candidate package approval.
 - No final VSP-07 candidate package approval.
 - No source implementation.
 - No SwiftUI parity.
@@ -60,4 +60,4 @@ Option F Return Ribbon Stack should be treated as a return-path rule if B is sel
 
 ## Follow-Up
 
-Owner must choose one Part 02 direction, request repair, or reject this exploration before VSP-07 final candidate-package buildout.
+Proceed to final VSP-07 candidate-package buildout from owner-approved Option A Object Wake Stack.

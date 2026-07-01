@@ -116,11 +116,11 @@ Claim boundary: this document is a Git-owned provenance/handoff artifact. It is 
 - Reduce Transparency
 - VoiceOver
 - device screenshot
+- final VSP-07 candidate package
 - final VSP-07 candidate package approval
 - live SwiftUI inspection parity screenshot
 - live SwiftUI screenshot
 - manual accessibility matrix
-- owner selection for VSP-07 Part 02 direction
 - privacy boundary
 - privacy/trust disclosure proof
 - runtime behavior

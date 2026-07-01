@@ -965,8 +965,8 @@
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "250:93",
-        "frame_name": "EXPLORATION - VSP-07 - PART 02 - attached receipt stack refinements - R1",
+        "node_id": "250:104",
+        "frame_name": "EXPLORATION - VSP-07 - Part 02 - Option A - Object Wake Stack - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-part-01-options-board-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png",
@@ -986,7 +986,9 @@
           "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-c-mutation-ledger-stack-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-d-undo-corridor-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-e-private-source-veil-r1.png",
-          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png"
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-approval-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-object-wake-stack-approved-r1.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
@@ -996,7 +998,9 @@
           "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
           "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
           "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
-          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md"
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md",
+          "docs/design/provenance/owner-approvals/VSP-07-A-Object-Wake-Stack-direction-approval.md",
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -1054,7 +1058,9 @@
           "owner-selected-direction",
           "selected-f-attached-receipt-stack",
           "part-02-refinement",
-          "recommended-b-receipt-aperture"
+          "owner-approved-direction",
+          "selected-a-object-wake-stack",
+          "part-02-approved"
         ],
         "should_create_or_update_now": false
       },
@@ -1074,7 +1080,8 @@
       },
       "proof_present": {
         "owner_approval": [
-          "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md"
+          "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
+          "docs/design/provenance/owner-approvals/VSP-07-A-Object-Wake-Stack-direction-approval.md"
         ],
         "live_swiftui_screenshot": [],
         "device_screenshot": [],
@@ -1104,11 +1111,11 @@
         "device screenshot",
         "manual accessibility matrix",
         "privacy/trust disclosure proof",
-        "owner selection for VSP-07 Part 02 direction",
-        "final VSP-07 candidate package approval"
+        "final VSP-07 candidate package approval",
+        "final VSP-07 candidate package"
       ],
       "green_blockers": [
-        "No owner selection for VSP-07 Part 02 direction.",
+        "No final VSP-07 candidate package.",
         "No final VSP-07 candidate package approval.",
         "No live SwiftUI parity screenshot.",
         "No contextual inspection proof.",
@@ -1122,10 +1129,12 @@
         "Option F must remain temporary contextual inspection state and must not become a root receipts, history, proof, privacy, source, or trust surface.",
         "No final VSP-07 candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime behavior proof, Visual Green, Release Green, or Done is claimed.",
         "Part 02 refinement board created on 2026-07-01 at node 250:93 with six Attached Receipt Stack refinement directions.",
-        "Recommended Part 02 base is Option B Receipt Aperture because it keeps one owning object in control of the inspection.",
-        "Option F Return Ribbon Stack should be treated as a return-path rule if B is selected, not as a merged composition.",
         "Option E Private Source Veil remains VSP-08-adjacent boundary context unless explicitly selected for VSP-07.",
-        "Part 02 remains Yellow exploration: no owner selection, final candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed."
+        "Owner approved Part 02 Option A Object Wake Stack on 2026-07-01 as the VSP-07 direction for final candidate-package buildout.",
+        "Prior Codex recommendation for Option B Receipt Aperture is superseded by owner approval of Option A.",
+        "Final VSP-07 candidate package must be built from Object Wake Stack without merging multiple Part 02 options unless explicitly requested.",
+        "Option A must keep receipts attached to the changed object and must not become a receipt feed, history feed, root Trust surface, or shell mutation.",
+        "Part 02 owner approval remains Yellow: no final candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed."
       ]
     },
     {

@@ -1,18 +1,18 @@
 # VSP-07 Part 02 Attached Receipt Stack Refinements R1
 
-Status: Yellow / Exploration
+Status: Yellow / Owner-approved Part 02 direction
 
 This frame note registers the VSP-07 Part 02 refinement board built from the owner-selected Part 01 direction `F Attached Receipt Stack`.
 
-This is not a final VSP-07 candidate package and does not approve implementation.
+The owner approved Option A Object Wake Stack on 2026-07-01 as the Part 02 direction for final VSP-07 candidate-package buildout. This is not a final VSP-07 candidate package and does not approve implementation.
 
 ## Frame Index
 
 | Purpose | Frame | Node |
 |---|---|---:|
 | Exploration board | `EXPLORATION - VSP-07 - PART 02 - attached receipt stack refinements - R1` | `250:93` |
-| Option A | `EXPLORATION - VSP-07 - Part 02 - Option A - Object Wake Stack - R1` | `250:104` |
-| Option B - recommended | `EXPLORATION - VSP-07 - Part 02 - Option B - Receipt Aperture - R1` | `250:119` |
+| Option A - owner approved | `EXPLORATION - VSP-07 - Part 02 - Option A - Object Wake Stack - R1` | `250:104` |
+| Option B | `EXPLORATION - VSP-07 - Part 02 - Option B - Receipt Aperture - R1` | `250:119` |
 | Option C | `EXPLORATION - VSP-07 - Part 02 - Option C - Mutation Ledger Stack - R1` | `250:134` |
 | Option D | `EXPLORATION - VSP-07 - Part 02 - Option D - Undo Corridor - R1` | `250:149` |
 | Option E | `EXPLORATION - VSP-07 - Part 02 - Option E - Private Source Veil - R1` | `250:164` |
@@ -23,7 +23,7 @@ This is not a final VSP-07 candidate package and does not approve implementation
 - VSP: `VSP-07`
 - Category: contextual trust inspection detail
 - Selected base: `F Attached Receipt Stack`
-- Recommended Part 02 direction: `B Receipt Aperture`
+- Owner-approved Part 02 direction: `A Object Wake Stack`
 - Canonical source owner for future implementation: `Native/Ambitions/Trust/`
 - Allowed implementation support: `Native/Ambitions/Projection/OverlayScenes/`, `Sources/Components/TrustReceiptLayerPrimitives+02-SourceTrustReceiptStrip.swift`
 - New primitive likely required after final package approval: `AttachedReceiptStack` / `ContextualTrustInspection`
@@ -38,17 +38,19 @@ This is not a final VSP-07 candidate package and does not approve implementation
 - E Private Source Veil: privacy/source boundaries are explicit; this carries VSP-08 risk and must remain object inspection if used here.
 - F Return Ribbon Stack: every receipt row carries a visible return path to its owning object.
 
-## Recommendation
+## Owner-Approved Direction
 
-Use Option B Receipt Aperture as the next VSP-07 candidate-package base.
+Use Option A Object Wake Stack as the final VSP-07 candidate-package base.
 
 Rationale:
 
-- It keeps one owning object in control of the inspection.
-- It avoids global receipt-feed drift better than the broader cross-object variants.
-- It can absorb Option F's return-ribbon rule without becoming a mixed design.
-- It gives Reduce Motion a clear static proof-step equivalent.
-- It is plausible as SwiftUI overlay/detail composition rather than shell navigation.
+- It keeps the receipt physically and conceptually attached to the changed object.
+- It avoids global receipt-feed, history-feed, and root Trust destination drift.
+- It makes missing-proof honesty visible without turning trust into an analytics panel.
+- It can become a final package without merging multiple Part 02 options.
+- It is plausible as SwiftUI object-detail composition rather than shell navigation.
+
+Prior Codex recommendation was Option B Receipt Aperture. Owner approval now controls the next step.
 
 ## Product Law
 
@@ -64,11 +66,12 @@ Rationale:
 
 - Replaced abstract line-only placeholders in B, D, and E with concrete receipt rows.
 - Removed duplicate Reduce Motion pill collision from B Receipt Aperture.
+- Removed stale B recommendation marker after owner approved A.
 - Kept all option frames content-only with no invented shell chrome.
 
 ## Acceptance Criteria For Future Candidate
 
-- Owner selects one Part 02 direction or requests repair.
+- Final candidate package is built from owner-approved Option A Object Wake Stack.
 - Final candidate includes hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, and durable screenshots.
 - Inspection is visibly attached to an owning object.
 - The user can close inspection and return to the owning object.
@@ -80,3 +83,5 @@ Rationale:
 ## Durable Proof
 
 See `docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md`.
+
+Approval proof: `docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/manifest.md`.

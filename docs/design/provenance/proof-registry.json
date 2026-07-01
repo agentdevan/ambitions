@@ -972,11 +972,15 @@
         "docs/design/provenance/owner-approvals/VSP-07-F-Attached-Receipt-Stack-direction-approval.md",
         "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/manifest.md",
         "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-selection-board-r1.png",
-        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png"
+        "docs/qa/evidence/2026-07-01-vsp-07-option-f-attached-receipt-stack-selection-r1/images/vsp-07-option-f-attached-receipt-stack-selected-r1.png",
+        "docs/design/provenance/owner-approvals/VSP-07-A-Object-Wake-Stack-direction-approval.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-approval-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-object-wake-stack-approved-r1.png"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Records owner direction selection only. Keeps proof ceiling Yellow and does not prove final package approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, or accessibility conformance.",
-      "notes": "Owner selected Part 01 Option F Attached Receipt Stack on 2026-07-01 for Part 02 refinement. Part 02 owner selection is still required."
+      "proof_ceiling_impact": "Records owner direction approvals only. Keeps proof ceiling Yellow and does not prove final package approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, or accessibility conformance.",
+      "notes": "Owner selected Part 01 Option F and approved Part 02 Option A Object Wake Stack for final candidate-package buildout. Final package approval is still missing."
     },
     {
       "proof_id": "vsp-07-swiftui-simulator-screenshot",
@@ -1642,11 +1646,30 @@
         "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-c-mutation-ledger-stack-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-d-undo-corridor-r1.png",
         "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-e-private-source-veil-r1.png",
-        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png"
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png",
+        "docs/design/provenance/owner-approvals/VSP-07-A-Object-Wake-Stack-direction-approval.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-approval-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-object-wake-stack-approved-r1.png"
       ],
       "blocking_reason": "",
-      "proof_ceiling_impact": "Supports Yellow exploration evidence only. Does not prove owner selection, final package approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, or accessibility conformance.",
-      "notes": "Part 02 refinement board at node 250:93. Recommended next base is Option B Receipt Aperture; owner selection is still required."
+      "proof_ceiling_impact": "Supports Yellow exploration and owner-approved direction evidence only. Does not prove final package approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, or accessibility conformance.",
+      "notes": "Part 02 refinement board at node 250:93. Owner approved Option A Object Wake Stack at node 250:104 for final package buildout."
+    },
+    {
+      "proof_id": "vsp-07-option-a-direction-approval-r1",
+      "vsp_id": "VSP-07",
+      "proof_type": "owner_direction_approval",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/owner-approvals/VSP-07-A-Object-Wake-Stack-direction-approval.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-approval-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-object-wake-stack-approved-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Lifts only the VSP-07 Part 02 direction-selection blocker for final candidate-package buildout. Does not authorize source implementation or Green claims.",
+      "notes": "Owner approved Option A Object Wake Stack on 2026-07-01."
     }
   ]
 }
