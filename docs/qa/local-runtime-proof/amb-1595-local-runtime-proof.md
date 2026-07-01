@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-07-01T18:06:36+00:00`
+Generated: `2026-07-01T18:06:12+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 

@@ -55,12 +55,19 @@ struct SourceAtlasPublicPackRemoteEndpoint: Codable, Sendable, Equatable, Hashab
 
 struct SourceAtlasURLSessionPublicPackRemoteTransport: SourceAtlasPublicPackRemoteTransport {
     let endpoint: SourceAtlasPublicPackRemoteEndpoint
+    private let publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate
 
-    init(endpoint: SourceAtlasPublicPackRemoteEndpoint) {
+    init(
+        endpoint: SourceAtlasPublicPackRemoteEndpoint,
+        publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate = SourceAtlasPublicOnlyBoundaryGate()
+    ) {
         self.endpoint = endpoint
+        self.publicOnlyGate = publicOnlyGate
     }
 
     func fetch(_ objectRequest: SourceAtlasPublicPackRemoteObjectRequest) async throws -> Data {
+        try publicOnlyGate.requireAllowed(publicOnlyGate.evaluateRemoteEndpoint(endpoint))
+        try publicOnlyGate.requireAllowed(publicOnlyGate.evaluateRemoteObjectRequest(objectRequest))
         guard let url = endpoint.url(for: objectRequest) else {
             throw SourceAtlasPublicPackRemoteTransportError.invalidURL
         }
@@ -69,6 +76,8 @@ struct SourceAtlasURLSessionPublicPackRemoteTransport: SourceAtlasPublicPackRemo
         urlRequest.httpMethod = "GET"
         urlRequest.cachePolicy = .reloadIgnoringLocalCacheData
         urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
+        urlRequest.setValue("public-reference", forHTTPHeaderField: "X-Ambitions-Data-Class")
+        try publicOnlyGate.requireAllowed(publicOnlyGate.evaluateURLRequest(urlRequest))
 
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         if let http = response as? HTTPURLResponse,

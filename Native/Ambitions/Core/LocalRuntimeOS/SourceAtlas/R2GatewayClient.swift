@@ -31,14 +31,14 @@ struct R2GatewayCompiledRequest: Codable, Sendable, Equatable, Hashable {
 
 struct R2GatewayClient: Sendable, Equatable, Hashable {
     private let baseURL: URL
-    private let firewall: PublicOnlyFirewall
+    private let publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate
 
     init(
         baseURL: URL,
         firewall: PublicOnlyFirewall = PublicOnlyFirewall()
     ) {
         self.baseURL = baseURL
-        self.firewall = firewall
+        self.publicOnlyGate = SourceAtlasPublicOnlyBoundaryGate(firewall: firewall)
     }
 
     func compile(
@@ -52,22 +52,17 @@ struct R2GatewayClient: Sendable, Equatable, Hashable {
             throw R2GatewayClientIssue.invalidBaseURL
         }
         let trimmedObjectKey = objectKey.trimmingCharacters(in: .whitespacesAndNewlines)
-        let objectRecord = SourceAtlasNoPrivateGraphEgressRecord(
-            surface: .objectKey,
-            identifier: "source-atlas-r2-object-key",
-            inspectedValue: trimmedObjectKey
-        )
-        if SourceAtlasNoPrivateGraphEgressAudit.validate([objectRecord]).isEmpty == false {
-            throw R2GatewayClientIssue.privateObjectKey
-        }
-
-        let verdict = firewall.validate(
+        let publicOnlyDecision = publicOnlyGate.evaluateR2GatewayRequest(
+            kind: kind,
+            objectKey: trimmedObjectKey,
             manifestRequest: manifestRequest,
             packRequest: packRequest,
-            accessDecision: accessDecision,
-            additionalRecords: [objectRecord]
+            accessDecision: accessDecision
         )
-        guard verdict.isAllowed else {
+        if publicOnlyDecision.issues.contains(.unsafeR2ObjectKey) {
+            throw R2GatewayClientIssue.privateObjectKey
+        }
+        guard publicOnlyDecision.isAllowed else {
             throw R2GatewayClientIssue.firewallRejected
         }
         if kind == .pack && packRequest == nil {
@@ -87,13 +82,21 @@ struct R2GatewayClient: Sendable, Equatable, Hashable {
         guard let url = components?.url else {
             throw R2GatewayClientIssue.invalidBaseURL
         }
-        return R2GatewayCompiledRequest(
+        let compiled = R2GatewayCompiledRequest(
             kind: kind,
             url: url,
             objectKey: trimmedObjectKey,
             queryItems: Dictionary(uniqueKeysWithValues: components?.queryItems?.map { ($0.name, $0.value ?? "") } ?? []),
-            firewallVerdict: verdict
+            firewallVerdict: publicOnlyDecision.firewallVerdict ?? PublicOnlyFirewallVerdict(
+                issues: [],
+                manifestRequestIssues: [],
+                packRequestIssues: [],
+                egressFindings: [],
+                permitsRemotePublicReference: false
+            )
         )
+        try publicOnlyGate.requireAllowed(publicOnlyGate.evaluateCompiledR2GatewayRequest(compiled))
+        return compiled
     }
 
     func compile(
@@ -107,7 +110,7 @@ struct R2GatewayClient: Sendable, Equatable, Hashable {
         if objectRequest.validationIssues.contains(.privateObjectKey) {
             throw R2GatewayClientIssue.privateObjectKey
         }
-        let verdict = firewall.validate(
+        let publicOnlyDecision = publicOnlyGate.evaluatePublicPackRequest(
             manifestRequest: manifestRequest,
             packRequest: nil,
             accessDecision: accessDecision,
@@ -116,7 +119,7 @@ struct R2GatewayClient: Sendable, Equatable, Hashable {
                 objectRequest.requestShapeEgressRecord,
             ]
         )
-        guard verdict.isAllowed else {
+        guard publicOnlyDecision.isAllowed else {
             throw R2GatewayClientIssue.firewallRejected
         }
 
@@ -132,13 +135,21 @@ struct R2GatewayClient: Sendable, Equatable, Hashable {
         guard let url = components?.url else {
             throw R2GatewayClientIssue.invalidBaseURL
         }
-        return R2GatewayCompiledRequest(
+        let compiled = R2GatewayCompiledRequest(
             kind: objectRequest.role.gatewayRequestKind,
             url: url,
             objectKey: objectRequest.objectKey,
             queryItems: Dictionary(uniqueKeysWithValues: components?.queryItems?.map { ($0.name, $0.value ?? "") } ?? []),
-            firewallVerdict: verdict
+            firewallVerdict: publicOnlyDecision.firewallVerdict ?? PublicOnlyFirewallVerdict(
+                issues: [],
+                manifestRequestIssues: [],
+                packRequestIssues: [],
+                egressFindings: [],
+                permitsRemotePublicReference: false
+            )
         )
+        try publicOnlyGate.requireAllowed(publicOnlyGate.evaluateCompiledR2GatewayRequest(compiled))
+        return compiled
     }
 
     func urlRequest(for compiled: R2GatewayCompiledRequest) -> URLRequest {
@@ -147,6 +158,10 @@ struct R2GatewayClient: Sendable, Equatable, Hashable {
         request.cachePolicy = .reloadIgnoringLocalCacheData
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("public-reference", forHTTPHeaderField: "X-Ambitions-Data-Class")
+        precondition(
+            publicOnlyGate.evaluateURLRequest(request).isAllowed,
+            "R2 URLRequest must remain a public-reference GET without private headers."
+        )
         return request
     }
 

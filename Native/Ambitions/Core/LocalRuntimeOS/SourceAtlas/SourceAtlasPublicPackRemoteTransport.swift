@@ -134,15 +134,18 @@ struct SourceAtlasPublicPackRemoteFetchCoordinator {
     private let decoder: JSONDecoder
     private let manifestBridge: SourceAtlasPublishedPackSchemaDecoder
     private let pipeline: SourceAtlasPublicPackFetchPipeline
+    private let publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate
 
     init(
         decoder: JSONDecoder = JSONDecoder(),
         manifestBridge: SourceAtlasPublishedPackSchemaDecoder = SourceAtlasPublishedPackSchemaDecoder(),
-        pipeline: SourceAtlasPublicPackFetchPipeline = SourceAtlasPublicPackFetchPipeline()
+        pipeline: SourceAtlasPublicPackFetchPipeline = SourceAtlasPublicPackFetchPipeline(),
+        publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate = SourceAtlasPublicOnlyBoundaryGate()
     ) {
         self.decoder = decoder
         self.manifestBridge = manifestBridge
         self.pipeline = pipeline
+        self.publicOnlyGate = publicOnlyGate
     }
 
     func resolve(
@@ -176,6 +179,8 @@ struct SourceAtlasPublicPackRemoteFetchCoordinator {
         let currentPointerRequest = currentPointerObjectRequest(input)
         guard appendIfSafe(
             currentPointerRequest,
+            manifestRequest: input.manifestRequest,
+            accessDecision: input.accessDecision,
             issues: &issues,
             objectRequests: &objectRequests,
             egressRecords: &egressRecords
@@ -218,6 +223,8 @@ struct SourceAtlasPublicPackRemoteFetchCoordinator {
                 objectKey: currentPointer.revocationManifestKey,
                 kind: .revocations,
                 unavailableIssue: .revocationManifestUnavailable,
+                manifestRequest: input.manifestRequest,
+                accessDecision: input.accessDecision,
                 transport: transport,
                 issues: &issues,
                 objectRequests: &objectRequests,
@@ -239,6 +246,8 @@ struct SourceAtlasPublicPackRemoteFetchCoordinator {
         )
         guard appendIfSafe(
             manifestRequest,
+            manifestRequest: input.manifestRequest,
+            accessDecision: input.accessDecision,
             issues: &issues,
             objectRequests: &objectRequests,
             egressRecords: &egressRecords
@@ -304,6 +313,8 @@ struct SourceAtlasPublicPackRemoteFetchCoordinator {
                 objectKey: currentPointer.lastKnownGoodKey,
                 kind: .lastKnownGood,
                 unavailableIssue: .lastKnownGoodUnavailable,
+                manifestRequest: input.manifestRequest,
+                accessDecision: input.accessDecision,
                 transport: transport,
                 issues: &issues,
                 objectRequests: &objectRequests,
@@ -331,6 +342,8 @@ struct SourceAtlasPublicPackRemoteFetchCoordinator {
                 )
                 guard appendIfSafe(
                     lkgManifestRequest,
+                    manifestRequest: input.manifestRequest,
+                    accessDecision: input.accessDecision,
                     issues: &issues,
                     objectRequests: &objectRequests,
                     egressRecords: &egressRecords
@@ -385,6 +398,8 @@ struct SourceAtlasPublicPackRemoteFetchCoordinator {
         )
         guard appendIfSafe(
             packRequest,
+            manifestRequest: input.manifestRequest,
+            accessDecision: input.accessDecision,
             issues: &issues,
             objectRequests: &objectRequests,
             egressRecords: &egressRecords
@@ -442,6 +457,8 @@ private extension SourceAtlasPublicPackRemoteFetchCoordinator {
 
     func appendIfSafe(
         _ request: SourceAtlasPublicPackRemoteObjectRequest,
+        manifestRequest: SourceAtlasPublicManifestRequest,
+        accessDecision: SourceAtlasAccessDecision,
         issues: inout [SourceAtlasPublicPackRemoteTransportIssue],
         objectRequests: inout [SourceAtlasPublicPackRemoteObjectRequest],
         egressRecords: inout [SourceAtlasNoPrivateGraphEgressRecord]
@@ -450,13 +467,28 @@ private extension SourceAtlasPublicPackRemoteFetchCoordinator {
         egressRecords.append(request.egressRecord)
         let requestIssues = request.validationIssues
         issues.append(contentsOf: requestIssues)
-        return requestIssues.isEmpty
+        let publicOnlyDecision = publicOnlyGate.evaluateRemoteObjectRequest(
+            request,
+            manifestRequest: manifestRequest,
+            accessDecision: accessDecision
+        )
+        if publicOnlyDecision.egressFindings.isEmpty == false {
+            issues.append(.privateEgressFinding)
+        }
+        if publicOnlyDecision.issues.contains(.firewallRejected) ||
+            publicOnlyDecision.issues.contains(.remoteReferenceNotPermitted) ||
+            publicOnlyDecision.issues.contains(.privateRuntimeDataTouched) {
+            issues.append(.unsafeManifestRequest)
+        }
+        return requestIssues.isEmpty && publicOnlyDecision.isAllowed
     }
 
     func optionalObjectData(
         objectKey: String?,
         kind: SourceAtlasPublicPackRemoteObjectKind,
         unavailableIssue: SourceAtlasPublicPackRemoteTransportIssue,
+        manifestRequest: SourceAtlasPublicManifestRequest,
+        accessDecision: SourceAtlasAccessDecision,
         transport: SourceAtlasPublicPackRemoteTransport,
         issues: inout [SourceAtlasPublicPackRemoteTransportIssue],
         objectRequests: inout [SourceAtlasPublicPackRemoteObjectRequest],
@@ -468,6 +500,8 @@ private extension SourceAtlasPublicPackRemoteFetchCoordinator {
         let request = SourceAtlasPublicPackRemoteObjectRequest(kind: kind, objectKey: objectKey)
         guard appendIfSafe(
             request,
+            manifestRequest: manifestRequest,
+            accessDecision: accessDecision,
             issues: &issues,
             objectRequests: &objectRequests,
             egressRecords: &egressRecords

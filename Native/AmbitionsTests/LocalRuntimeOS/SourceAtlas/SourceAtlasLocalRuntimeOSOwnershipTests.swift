@@ -14,6 +14,7 @@ final class SourceAtlasLocalRuntimeOSOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/LastKnownGoodStore.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/R2GatewayClient.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicOnlyFirewall.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicOnlyBoundaryGate.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasProjection.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalPackCache.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackFetchPipeline.swift",

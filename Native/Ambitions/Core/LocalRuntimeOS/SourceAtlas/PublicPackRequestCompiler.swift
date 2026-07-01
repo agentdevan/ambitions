@@ -18,10 +18,10 @@ struct PublicPackRequestCompilation: Codable, Sendable, Equatable, Hashable {
 }
 
 struct PublicPackRequestCompiler: Sendable, Equatable, Hashable {
-    private let firewall: PublicOnlyFirewall
+    private let publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate
 
     init(firewall: PublicOnlyFirewall = PublicOnlyFirewall()) {
-        self.firewall = firewall
+        self.publicOnlyGate = SourceAtlasPublicOnlyBoundaryGate(firewall: firewall)
     }
 
     func compile(
@@ -55,17 +55,24 @@ struct PublicPackRequestCompiler: Sendable, Equatable, Hashable {
                 publicLocale: publicLocale
             )
         }
-        let verdict = firewall.validate(
+        let publicOnlyDecision = publicOnlyGate.evaluatePublicPackRequest(
             manifestRequest: manifestRequest,
             packRequest: packRequest,
             accessDecision: accessDecision
+        )
+        let verdict = publicOnlyDecision.firewallVerdict ?? PublicOnlyFirewallVerdict(
+            issues: [],
+            manifestRequestIssues: [],
+            packRequestIssues: [],
+            egressFindings: [],
+            permitsRemotePublicReference: false
         )
 
         var issues: Set<PublicPackRequestCompilationIssue> = []
         if selectedEntry == nil {
             issues.insert(.missingPackEntry)
         }
-        if verdict.isAllowed == false {
+        if publicOnlyDecision.isAllowed == false {
             issues.insert(.firewallRejected)
         }
 

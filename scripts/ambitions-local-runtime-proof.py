@@ -311,6 +311,10 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
+def normalize_source_atlas_egress_value(value: str) -> str:
+    return value.lower().replace("-", "_").replace(" ", "_").replace(".", "_")
+
+
 def production_swift_files() -> list[Path]:
     files: list[Path] = []
     ignored_parts = {".build", "DerivedData", "Resources", "PreviewSupport", "Previews"}
@@ -1231,6 +1235,151 @@ def check_privacy_security_external_boundary_gate() -> CheckResult:
     )
 
 
+def check_source_atlas_r2_public_only_gate() -> CheckResult:
+    findings: list[Finding] = []
+    required_markers = {
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicOnlyBoundaryGate.swift": [
+            "enum SourceAtlasPublicOnlyBoundarySurface",
+            "case requestCompilation",
+            "case remoteObjectRequest",
+            "case remoteEndpoint",
+            "case r2GatewayRequest",
+            "case r2URLRequest",
+            "case manifestCacheRollback",
+            "case sourceAtlasProjection",
+            "struct SourceAtlasPublicOnlyBoundaryGate",
+            "func evaluatePublicPackRequest(",
+            "func evaluateRemoteObjectRequest(",
+            "func evaluateRemoteEndpoint(",
+            "func evaluateR2GatewayRequest(",
+            "func evaluateCompiledR2GatewayRequest(",
+            "func evaluateURLRequest(_ request: URLRequest)",
+            "func evaluateManifestCacheRollbackEvidence(",
+            "func evaluateSourceAtlasProjection(",
+            "func requireAllowed(_ decision: SourceAtlasPublicOnlyBoundaryDecision)",
+            ".privateRuntimeDataTouched",
+            "SourceAtlasNoPrivateGraphEgressAudit.validate",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicPackRequestCompiler.swift": [
+            "private let publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate",
+            "publicOnlyGate.evaluatePublicPackRequest(",
+            "publicOnlyDecision.isAllowed == false",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/R2GatewayClient.swift": [
+            "private let publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate",
+            "publicOnlyGate.evaluateR2GatewayRequest(",
+            "publicOnlyGate.evaluateCompiledR2GatewayRequest(compiled)",
+            "publicOnlyGate.evaluateURLRequest(request)",
+            "\"X-Ambitions-Data-Class\"",
+            "\"public-reference\"",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransportAdapters.swift": [
+            "private let publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate",
+            "publicOnlyGate.evaluateRemoteEndpoint(endpoint)",
+            "publicOnlyGate.evaluateRemoteObjectRequest(objectRequest)",
+            "publicOnlyGate.evaluateURLRequest(urlRequest)",
+            "\"X-Ambitions-Data-Class\"",
+            "\"public-reference\"",
+        ],
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransport.swift": [
+            "private let publicOnlyGate: SourceAtlasPublicOnlyBoundaryGate",
+            "publicOnlyGate.evaluateRemoteObjectRequest(",
+            "publicOnlyDecision.issues.contains(.privateRuntimeDataTouched)",
+        ],
+        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicOnlyBoundaryGateTests.swift": [
+            "testPublicOnlyBoundaryGateAllowsRequestGatewayEndpointCacheRollbackAndProjectionEvidence",
+            "testPublicOnlyBoundaryGateRejectsPrivateRuntimeR2EndpointHeaderAndProjectionMarkers",
+            "gate.evaluatePublicPackRequest",
+            "gate.evaluateRemoteEndpoint",
+            "gate.evaluateRemoteObjectRequest",
+            "gate.evaluateCompiledR2GatewayRequest",
+            "gate.evaluateURLRequest",
+            "gate.evaluateManifestCacheRollbackEvidence",
+            "gate.evaluateSourceAtlasProjection",
+        ],
+        ROOT / "Native/AmbitionsTests/LocalRuntimeOS/SourceAtlas/SourceAtlasLocalRuntimeOSOwnershipTests.swift": [
+            "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicOnlyBoundaryGate.swift",
+        ],
+    }
+
+    for path, markers in required_markers.items():
+        if not path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "source-atlas-r2-public-only-gate-missing-source",
+                    relative(path),
+                    None,
+                    "SourceAtlas/R2 public-only gate source/test file is missing.",
+                )
+            )
+            continue
+        text = read_text(path)
+        for marker in markers:
+            if marker not in text:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "source-atlas-r2-public-only-gate-marker-missing",
+                        relative(path),
+                        None,
+                        f"Missing SourceAtlas/R2 public-only marker `{marker}`.",
+                    )
+                )
+
+    operational_request_paths = [
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/PublicPackRequestCompiler.swift",
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/R2GatewayClient.swift",
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransport.swift",
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPackRemoteTransportAdapters.swift",
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasVerifiedPublicPackProvider.swift",
+        ROOT / "Native/Ambitions/Core/LocalRuntimeOS/SourceAtlas/SourceAtlasPublicPlanningContextModels.swift",
+    ]
+    forbidden_request_tokens = [
+        "goal_text",
+        "capture_text",
+        "schedule_assumption",
+        "proof_payload",
+        "receipt_payload",
+        "private_graph",
+        "account_secret",
+        "user_id",
+        "inferred_priority",
+        "behavior_history",
+        "personal_context",
+        "private_user_context",
+        "calendar_context",
+        "life_area",
+    ]
+    for path in operational_request_paths:
+        if not path.exists():
+            continue
+        lines = read_text(path).splitlines()
+        for index, line in enumerate(lines, start=1):
+            stripped = line.strip()
+            if stripped.startswith("//"):
+                continue
+            normalized = normalize_source_atlas_egress_value(stripped)
+            for token in forbidden_request_tokens:
+                if token in normalized:
+                    findings.append(
+                        Finding(
+                            "blocker",
+                            "source-atlas-r2-request-private-marker",
+                            relative(path),
+                            index,
+                            f"Operational SourceAtlas/R2 request code contains forbidden private marker `{token}`.",
+                        )
+                    )
+
+    return make_result(
+        "source_atlas_r2_public_only_gate",
+        findings,
+        "SourceAtlas/R2 request, gateway, endpoint, manifest/cache/LKG, and projection paths are gated as public-reference-only.",
+        "{count} SourceAtlas/R2 public-only blocker(s) remain.",
+    )
+
+
 def check_capture_intake_durability_gate() -> CheckResult:
     findings: list[Finding] = []
     required_markers = {
@@ -1765,6 +1914,7 @@ def run_checks() -> list[CheckResult]:
         check_projection_store_surface_read_gate(),
         check_external_surface_sanitized_projection_gate(),
         check_privacy_security_external_boundary_gate(),
+        check_source_atlas_r2_public_only_gate(),
         check_capture_intake_durability_gate(),
         check_side_effect_local_commit_receipt_gate(),
         check_trust_system_runtime_lineage_gate(),
@@ -1904,6 +2054,7 @@ def run_self_test() -> int:
     assert any(prefix.endswith("AmbitionsWidgetExtension/") for prefix in EXTERNAL_SURFACE_SCAN_INCLUDED_PREFIXES)
     assert any(result.check_id == "external_surface_sanitized_projection_gate" for result in [check_external_surface_sanitized_projection_gate()])
     assert any(result.check_id == "privacy_security_external_boundary_gate" for result in [check_privacy_security_external_boundary_gate()])
+    assert any(result.check_id == "source_atlas_r2_public_only_gate" for result in [check_source_atlas_r2_public_only_gate()])
     assert any(result.check_id == "capture_intake_durability_gate" for result in [check_capture_intake_durability_gate()])
     assert any(result.check_id == "side_effect_local_commit_receipt_gate" for result in [check_side_effect_local_commit_receipt_gate()])
     assert any(result.check_id == "trust_system_runtime_lineage_gate" for result in [check_trust_system_runtime_lineage_gate()])
