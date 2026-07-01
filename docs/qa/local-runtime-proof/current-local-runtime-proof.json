@@ -67,20 +67,26 @@
       "summary": "No high-risk mutation or external-write bypass candidates were found."
     },
     {
+      "checkId": "feature_service_mutation_authority",
+      "findings": [],
+      "status": "pass",
+      "summary": "Feature/service repository writes are classified as command-owned, transaction-owned, test-only, migration-owned, or explicitly non-canonical."
+    },
+    {
       "checkId": "truth_file_no_claim_gaps",
       "findings": [],
       "status": "pass",
       "summary": "Truth files no longer contain LocalRuntimeOS no-claim blockers."
     }
   ],
-  "generatedAt": "2026-07-01T02:06:10+00:00",
+  "generatedAt": "2026-07-01T02:41:58+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {
     "blockers": 0,
-    "checks": 10,
+    "checks": 11,
     "green": true,
-    "passed": 10,
+    "passed": 11,
     "warnings": 0
   }
 }

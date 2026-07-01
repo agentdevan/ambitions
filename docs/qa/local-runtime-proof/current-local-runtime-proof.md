@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-07-01T02:06:10+00:00`
+Generated: `2026-07-01T02:41:58+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 
@@ -8,8 +8,8 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 ## Summary
 
-- Checks: `10`
-- Passed: `10`
+- Checks: `11`
+- Passed: `11`
 - Warnings: `0`
 - Blockers: `0`
 
@@ -59,6 +59,11 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 
 - Status: `pass`
 - Summary: No high-risk mutation or external-write bypass candidates were found.
+
+### feature_service_mutation_authority
+
+- Status: `pass`
+- Summary: Feature/service repository writes are classified as command-owned, transaction-owned, test-only, migration-owned, or explicitly non-canonical.
 
 ### truth_file_no_claim_gaps
 

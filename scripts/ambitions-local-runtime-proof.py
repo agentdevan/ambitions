@@ -202,6 +202,13 @@ RUNTIME_TRANSACTION_PATH = "Native/Ambitions/Core/LocalRuntimeOS/TransactionKern
 OBJECT_STATE_CORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"
 OBJECT_STATE_CONTRACTS_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"
 APP_STATE_STORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
+FEATURE_SERVICE_MUTATION_AUTHORITY_PATH = "docs/qa/local-runtime-proof/feature-service-mutation-authority.json"
+
+SERVICE_MUTATION_CALL_PATTERN = re.compile(
+    r"\b((?:repositories\.[A-Za-z0-9_]+|[A-Za-z0-9_]*(?:Repository|repository)|repository|"
+    r"eventLedger|reminderRepository|appStateRepository|capturePromotionUnitOfWork)"
+    r"\.(?:save[A-Za-z0-9_]*|append|create|update|delete|archive|persist|upsert|record[A-Za-z0-9_]*))\s*\("
+)
 
 TRUTH_GAP_PATTERNS = [
     (
@@ -625,6 +632,177 @@ def scan_mutation_bypasses() -> CheckResult:
     )
 
 
+def load_feature_service_mutation_authority() -> tuple[dict[str, object] | None, dict[tuple[str, str], str], list[Finding]]:
+    path = ROOT / FEATURE_SERVICE_MUTATION_AUTHORITY_PATH
+    findings: list[Finding] = []
+    if not path.exists():
+        return None, {}, [
+            Finding(
+                "blocker",
+                "feature-service-mutation-authority-missing",
+                FEATURE_SERVICE_MUTATION_AUTHORITY_PATH,
+                None,
+                "Feature service mutation authority manifest is missing.",
+            )
+        ]
+
+    try:
+        manifest = json.loads(read_text(path))
+    except json.JSONDecodeError as error:
+        return None, {}, [
+            Finding(
+                "blocker",
+                "feature-service-mutation-authority-invalid-json",
+                FEATURE_SERVICE_MUTATION_AUTHORITY_PATH,
+                error.lineno,
+                f"Feature service mutation authority manifest is invalid JSON: {error.msg}",
+            )
+        ]
+
+    allowed_pairs: dict[tuple[str, str], str] = {}
+    classifications = set(manifest.get("allowedClassifications", []))
+    entries = manifest.get("allowedWritePaths", [])
+    if not isinstance(entries, list):
+        findings.append(
+            Finding(
+                "blocker",
+                "feature-service-mutation-authority-invalid-shape",
+                FEATURE_SERVICE_MUTATION_AUTHORITY_PATH,
+                None,
+                "Feature service mutation authority manifest must contain allowedWritePaths.",
+            )
+        )
+        return manifest, allowed_pairs, findings
+
+    for entry in entries:
+        if not isinstance(entry, dict):
+            findings.append(
+                Finding(
+                    "blocker",
+                    "feature-service-mutation-authority-invalid-entry",
+                    FEATURE_SERVICE_MUTATION_AUTHORITY_PATH,
+                    None,
+                    "Feature service mutation authority entries must be objects.",
+                )
+            )
+            continue
+        rel = entry.get("path")
+        classification = entry.get("classification")
+        calls = entry.get("allowedCalls", [])
+        if not isinstance(rel, str) or not isinstance(classification, str) or not isinstance(calls, list):
+            findings.append(
+                Finding(
+                    "blocker",
+                    "feature-service-mutation-authority-invalid-entry",
+                    FEATURE_SERVICE_MUTATION_AUTHORITY_PATH,
+                    None,
+                    "Each mutation authority entry must include path, classification, and allowedCalls.",
+                )
+            )
+            continue
+        if classification not in classifications:
+            findings.append(
+                Finding(
+                    "blocker",
+                    "feature-service-mutation-authority-invalid-classification",
+                    rel,
+                    None,
+                    f"Unknown feature service mutation classification `{classification}`.",
+                )
+            )
+        source_path = ROOT / rel
+        if not source_path.exists():
+            findings.append(
+                Finding(
+                    "blocker",
+                    "feature-service-mutation-authority-stale-path",
+                    rel,
+                    None,
+                    "Feature service mutation authority entry points at a missing source file.",
+                )
+            )
+            continue
+        source = read_text(source_path)
+        for call in calls:
+            if not isinstance(call, str):
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "feature-service-mutation-authority-invalid-call",
+                        rel,
+                        None,
+                        "Feature service mutation authority allowedCalls entries must be strings.",
+                    )
+                )
+                continue
+            allowed_pairs[(rel, call)] = classification
+            if f"{call}(" not in source:
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "feature-service-mutation-authority-stale-call",
+                        rel,
+                        None,
+                        f"Feature service mutation authority allows `{call}`, but the call is not present.",
+                    )
+                )
+    return manifest, allowed_pairs, findings
+
+
+def scan_feature_service_mutation_authority() -> CheckResult:
+    manifest, allowed_pairs, findings = load_feature_service_mutation_authority()
+    if manifest is None:
+        return make_result(
+            "feature_service_mutation_authority",
+            findings,
+            "Feature service mutation authority manifest is present.",
+            "{count} feature service mutation authority blocker(s) remain.",
+        )
+
+    prefixes = manifest.get("scanIncludedPrefixes", [])
+    if not isinstance(prefixes, list) or not all(isinstance(prefix, str) for prefix in prefixes):
+        findings.append(
+            Finding(
+                "blocker",
+                "feature-service-mutation-authority-invalid-prefixes",
+                FEATURE_SERVICE_MUTATION_AUTHORITY_PATH,
+                None,
+                "Feature service mutation authority manifest must contain string scanIncludedPrefixes.",
+            )
+        )
+        prefixes = []
+
+    for path in production_swift_files():
+        rel = relative(path)
+        if not any(rel.startswith(prefix) for prefix in prefixes):
+            continue
+        lines = read_text(path).splitlines()
+        for index, line in enumerate(lines, start=1):
+            stripped = line.strip()
+            if stripped.startswith("//"):
+                continue
+            for match in SERVICE_MUTATION_CALL_PATTERN.finditer(stripped):
+                call = match.group(1)
+                if (rel, call) in allowed_pairs:
+                    continue
+                findings.append(
+                    Finding(
+                        "blocker",
+                        "feature-service-unclassified-mutation-write",
+                        rel,
+                        index,
+                        f"Feature/service write `{call}` must be command-owned, transaction-owned, migration-owned, test-only, or explicitly non-canonical.",
+                    )
+                )
+
+    return make_result(
+        "feature_service_mutation_authority",
+        findings,
+        "Feature/service repository writes are classified as command-owned, transaction-owned, test-only, migration-owned, or explicitly non-canonical.",
+        "{count} feature service mutation authority blocker(s) remain.",
+    )
+
+
 def check_transaction_coordinator_commit_ownership() -> CheckResult:
     findings: list[Finding] = []
     for path in production_swift_files():
@@ -827,6 +1005,7 @@ def run_checks() -> list[CheckResult]:
         check_transaction_coordinator_commit_ownership(),
         check_runtime_mutation_context_boundaries(),
         scan_mutation_bypasses(),
+        scan_feature_service_mutation_authority(),
         check_truth_file_gaps(),
     ]
 
@@ -957,6 +1136,10 @@ def run_self_test() -> int:
     assert "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransactionCoordinator.swift" in RUNTIME_EVENT_APPEND_ALLOWED_PATHS
     assert "Native/Ambitions/Core/LocalRuntimeOS/SearchRecall/SearchRebuildPipeline.swift" in PROJECTION_MATERIALIZATION_ALLOWED_PATHS
     assert RUNTIME_MUTATION_CONTEXT_PATH.endswith("TransactionKernel/RuntimeMutationContext.swift")
+    service_write = "try await repositories.goals.saveGoals([goal])"
+    service_match = SERVICE_MUTATION_CALL_PATTERN.search(service_write)
+    assert service_match is not None
+    assert service_match.group(1) == "repositories.goals.saveGoals"
     result = make_result(
         "fixture",
         [Finding("blocker", "fixture-blocker", "Fixture.swift", 1, "Fixture blocker.")],

@@ -1494,6 +1494,8 @@ private extension TodayViewModelTests {
             feedback: SwiftDataFeedbackEventRepository(store: store),
             captures: SwiftDataCaptureRepository(store: store),
             actionReceiptHistory: SwiftDataActionReceiptHistoryRepository(store: store),
+            commandExecutionRecords: InMemoryAmbitionsCommandExecutionRecordRepository(),
+            runtimeEvents: InMemoryRuntimeEventStore(),
             appState: SwiftDataAppStateRepository(store: store)
         )
     }
