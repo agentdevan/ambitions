@@ -96,6 +96,12 @@ from .launch_floor_domain_taxonomy import (
     compile_launch_floor_domain_taxonomy,
     launch_floor_domain_taxonomy_markdown,
 )
+from .launch_floor_shard_corpus import (
+    DEFAULT_LAUNCH_FLOOR_SHARD_CORPUS_PATH,
+    LaunchFloorShardCorpusOptions,
+    compile_launch_floor_shard_corpus,
+    launch_floor_shard_corpus_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -906,6 +912,15 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_taxonomy_parser.add_argument("--run-label", default="current")
     launch_floor_taxonomy_parser.add_argument("--emit-evidence")
     launch_floor_taxonomy_parser.add_argument("--markdown")
+
+    launch_floor_shard_corpus_parser = sub.add_parser("launch-floor-shard-corpus")
+    launch_floor_shard_corpus_parser.add_argument("--manifest", default=str(DEFAULT_LAUNCH_FLOOR_SHARD_CORPUS_PATH))
+    launch_floor_shard_corpus_parser.add_argument("--launch-floor-taxonomy", default=str(DEFAULT_LAUNCH_FLOOR_TAXONOMY_PATH))
+    launch_floor_shard_corpus_parser.add_argument("--output-root", required=True)
+    launch_floor_shard_corpus_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    launch_floor_shard_corpus_parser.add_argument("--run-label", default="current")
+    launch_floor_shard_corpus_parser.add_argument("--emit-evidence")
+    launch_floor_shard_corpus_parser.add_argument("--markdown")
 
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
@@ -2273,6 +2288,25 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(launch_floor_domain_taxonomy_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "launch-floor-shard-corpus":
+        result = compile_launch_floor_shard_corpus(
+            LaunchFloorShardCorpusOptions(
+                manifest_path=Path(args.manifest),
+                launch_floor_taxonomy_path=Path(args.launch_floor_taxonomy) if args.launch_floor_taxonomy else None,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(launch_floor_shard_corpus_markdown(result), encoding="utf-8")
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":

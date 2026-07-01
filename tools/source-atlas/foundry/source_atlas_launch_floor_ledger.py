@@ -16,11 +16,12 @@ from typing import Any
 
 from .boundary import boundary_issues_for_value, is_boundary_line
 from .launch_floor_domain_taxonomy import launch_floor_domain_taxonomy_summary
+from .launch_floor_shard_corpus import launch_floor_shard_corpus_summary
 from .model import NON_CLAIMS, PRIVACY_BOUNDARY, read_json, stable_hash, stable_id, write_json
 
 
 SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_KIND = "ambitions.sourceAtlas.launchFloorLedger.v1"
-SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m01"
+SOURCE_ATLAS_LAUNCH_FLOOR_LEDGER_VERSION = "source-atlas-launch-floor-ledger-lff-m02"
 
 LAUNCH_FLOOR_TARGETS = [
     {
@@ -160,6 +161,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
     }
     native_bridge_source_contract = _native_bridge_source_contract(options.native_runtime_bridge_gauntlet_source_path)
     launch_floor_taxonomy_summary = _launch_floor_taxonomy_summary(artifacts)
+    launch_floor_shard_corpus_summary = _launch_floor_shard_corpus_summary(artifacts)
 
     input_paths = _input_paths(options)
     input_privacy_issues = _privacy_issues(
@@ -172,7 +174,12 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
     artifact_privacy_issues = _privacy_issues(artifacts, "source-atlas-launch-floor-ledger-artifacts")
     overclaim_issues = _overclaim_issues(artifacts)
 
-    counters = _counters(artifacts, native_bridge_source_contract, launch_floor_taxonomy_summary)
+    counters = _counters(
+        artifacts,
+        native_bridge_source_contract,
+        launch_floor_taxonomy_summary,
+        launch_floor_shard_corpus_summary,
+    )
     target_statuses = _target_statuses(counters)
     current_capabilities = _current_capabilities(counters, target_statuses)
     missing_capabilities = _missing_capabilities(target_statuses)
@@ -185,6 +192,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         artifact_privacy_issues=artifact_privacy_issues,
         overclaim_issues=overclaim_issues,
         taxonomy_issues=launch_floor_taxonomy_summary["issues"],
+        shard_corpus_issues=launch_floor_shard_corpus_summary["issues"],
         target_statuses=target_statuses,
     )
     all_targets_met = all(target["status"] == "met" for target in target_statuses)
@@ -194,6 +202,7 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
         and not artifact_privacy_issues
         and not overclaim_issues
         and not launch_floor_taxonomy_summary["issues"]
+        and not launch_floor_shard_corpus_summary["issues"]
     )
     launch_floor_met = valid and all_targets_met
     launch_floor_claim_allowed = launch_floor_met
@@ -246,6 +255,13 @@ def build_source_atlas_launch_floor_ledger(options: SourceAtlasLaunchFloorLedger
             "valid": not launch_floor_taxonomy_summary["issues"],
             "recordCounts": launch_floor_taxonomy_summary["recordCounts"],
             "targetStatus": launch_floor_taxonomy_summary["launchFloorTargets"],
+        },
+        "launchFloorShardCorpus": {
+            "present": artifacts["shardCorpusManifest"] is not None,
+            "valid": artifacts["shardCorpusManifest"] is not None and not launch_floor_shard_corpus_summary["issues"],
+            "recordCounts": launch_floor_shard_corpus_summary["recordCounts"],
+            "targetStatus": launch_floor_shard_corpus_summary["launchFloorTargets"],
+            "issues": launch_floor_shard_corpus_summary["issues"],
         },
         "allowedClaims": _allowed_claims(valid, launch_floor_met),
         "blockedClaims": _blocked_claims(),
@@ -380,6 +396,7 @@ def _counters(
     artifacts: dict[str, Any],
     native_bridge_source_contract: dict[str, int | None],
     launch_floor_taxonomy: dict[str, Any],
+    launch_floor_shard_corpus: dict[str, Any],
 ) -> dict[str, Any]:
     frontier_config = artifacts["frontierConfig"]
     source_lane_registry = artifacts["sourceLaneRegistry"]
@@ -392,12 +409,13 @@ def _counters(
     supervisor = artifacts["productionSupervisor"]
     control_loop = artifacts["autonomousControlLoop"]
     expansion_chain = artifacts["autonomousDomainExpansionChain"]
-    shard_manifest = artifacts["shardCorpusManifest"]
     golden_corpus = artifacts["goldenIntentCorpus"]
     fallback_metric = artifacts["fallbackMetric"]
     missing_shard_events = artifacts["missingShardEvents"]
     taxonomy_counts = launch_floor_taxonomy["recordCounts"]
     taxonomy_valid = not launch_floor_taxonomy["issues"]
+    shard_corpus_counts = launch_floor_shard_corpus["recordCounts"]
+    shard_corpus_valid = not launch_floor_shard_corpus["issues"] and artifacts["shardCorpusManifest"] is not None
 
     frontiers = frontier_config.get("frontiers", []) if isinstance(frontier_config, dict) else []
     configured_domain_ids = sorted(
@@ -434,9 +452,10 @@ def _counters(
 
     return {
         "launchFloorTaxonomyValid": taxonomy_valid,
+        "launchFloorShardCorpusValid": shard_corpus_valid,
         "goalDomainCounter": goal_domain_counter,
         "subdomainCounter": subdomain_counter,
-        "shardCorpusCount": _record_count(shard_manifest, "publicReferenceShards", "public_reference_shards", "shardCount", "shards"),
+        "shardCorpusCount": shard_corpus_counts["publicReferenceShards"] if shard_corpus_valid else None,
         "goldenIntentCorpusCount": _record_count(golden_corpus, "goldenIntentCount", "golden_intent_count", "intentCount", "intents"),
         "fallbackNumerator": source_needed_numerator,
         "fallbackDenominator": source_needed_denominator,
@@ -464,6 +483,13 @@ def _counters(
             "launchFloorTaxonomyStaleCandidateOnlyBacklogItems": taxonomy_counts["staleCandidateOnlyBacklogItems"],
             "launchFloorTaxonomyDomainsWithSourceLaneCoverage": taxonomy_counts["domainsWithSourceLaneCoverage"],
             "launchFloorTaxonomySubdomainsWithSourceLaneCoverage": taxonomy_counts["subdomainsWithSourceLaneCoverage"],
+            "launchFloorShardCorpusPartitions": shard_corpus_counts["partitions"],
+            "launchFloorShardCorpusCountedPartitions": shard_corpus_counts["launchFloorCountedPartitions"],
+            "launchFloorShardCorpusR2LayoutPartitions": shard_corpus_counts["partitionsWithR2Layout"],
+            "launchFloorShardCorpusReadbackPartitions": shard_corpus_counts["partitionsWithReadbackProof"],
+            "launchFloorShardCorpusRollbackPartitions": shard_corpus_counts["partitionsWithRollbackProof"],
+            "launchFloorShardCorpusGatewayPartitions": shard_corpus_counts["partitionsWithGatewayProof"],
+            "launchFloorShardCorpusNativeCompatiblePartitions": shard_corpus_counts["partitionsWithNativeCompatibility"],
             "packablePublicReferenceClaimProxy": packable_claims,
             "liveR2ObjectProxy": live_r2_objects,
             "expectedCurrentR2ObjectProxy": expected_current_objects,
@@ -479,7 +505,7 @@ def _counters(
             "autonomousControlLoopUnknownDomainsCandidateOnly": _record_count(control_loop, "unknownDomainsCandidateOnly"),
             "domainExpansionCandidateRoutes": _record_count(expansion_chain, "candidateRoutes"),
             "domainExpansionR2PublishOperations": _record_count(expansion_chain, "r2PublishOperations"),
-            "shardCorpusCounter": _record_count(shard_manifest, "publicReferenceShards", "public_reference_shards", "shardCount", "shards"),
+            "shardCorpusCounter": shard_corpus_counts["publicReferenceShards"] if shard_corpus_valid else None,
             "goldenIntentCorpusCounter": _record_count(golden_corpus, "goldenIntentCount", "golden_intent_count", "intentCount", "intents"),
             "sourceNeededFallbackNumerator": source_needed_numerator,
             "sourceNeededFallbackDenominator": source_needed_denominator,
@@ -719,6 +745,16 @@ def _current_capabilities(counters: dict[str, Any], target_statuses: list[dict[s
             ),
         }
     )
+    capabilities.append(
+        {
+            "capabilityID": "launch_floor_shard_corpus_manifest_gate",
+            "status": "proven_current" if counters["launchFloorShardCorpusValid"] else "not_proven",
+            "evidence": (
+                f"{counts['launchFloorShardCorpusCountedPartitions']} counted partitions and "
+                f"{counts['shardCorpusCounter'] or 0} validated public/reference shards"
+            ),
+        }
+    )
     return capabilities
 
 
@@ -825,13 +861,18 @@ def _validation_matrix() -> list[dict[str, str]]:
         },
         {
             "validationID": "launch_floor_pytest",
-            "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_launch_floor_domain_taxonomy_lff_m01.py tools/source-atlas/foundry/tests/test_goal_domain_router_train_88.py tools/source-atlas/foundry/tests/test_source_atlas_launch_floor_ledger.py tools/source-atlas/foundry/tests/test_source_atlas_completion_audit_train_129.py",
-            "purpose": "prove fail-closed launch-floor taxonomy, router, ledger, and completion-audit wiring",
+            "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_launch_floor_domain_taxonomy_lff_m01.py tools/source-atlas/foundry/tests/test_launch_floor_shard_corpus_lff_m02.py tools/source-atlas/foundry/tests/test_goal_domain_router_train_88.py tools/source-atlas/foundry/tests/test_source_atlas_launch_floor_ledger.py tools/source-atlas/foundry/tests/test_source_atlas_completion_audit_train_129.py",
+            "purpose": "prove fail-closed launch-floor taxonomy, shard corpus, router, ledger, and completion-audit wiring",
         },
         {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m01-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m02-schema-gate-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
             "purpose": "regenerate current launch-floor ledger without source/R2/native mutation",
+        },
+        {
+            "validationID": "launch_floor_shard_corpus",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-shard-corpus --manifest <validated-manifest> --output-root <proof-root>",
+            "purpose": "validate partitioned 1M+ shard corpus manifests before any shard count can satisfy the launch-floor ledger",
         },
         {
             "validationID": "completion_audit_with_launch_floor",
@@ -853,6 +894,7 @@ def _checks(
     artifact_privacy_issues: list[str],
     overclaim_issues: list[str],
     taxonomy_issues: list[str],
+    shard_corpus_issues: list[str],
     target_statuses: list[dict[str, Any]],
 ) -> list[dict[str, Any]]:
     all_targets_met = all(target["status"] == "met" for target in target_statuses)
@@ -862,6 +904,7 @@ def _checks(
         _check("artifact_privacy_scan_passed", not artifact_privacy_issues, artifact_privacy_issues, "red"),
         _check("overclaim_scan_passed", not overclaim_issues, overclaim_issues, "red"),
         _check("launch_floor_taxonomy_valid_when_supplied", not taxonomy_issues, taxonomy_issues, "red"),
+        _check("launch_floor_shard_corpus_valid_when_supplied", not shard_corpus_issues, shard_corpus_issues, "red"),
         _check("launch_floor_counter_contract_defined", len(target_statuses) == len(LAUNCH_FLOOR_TARGETS), ["counter contract incomplete"], "red"),
         _check(
             "launch_floor_targets_met",
@@ -997,6 +1040,43 @@ def _launch_floor_taxonomy_summary(artifacts: dict[str, Any]) -> dict[str, Any]:
         taxonomy,
         source_lane_registry=artifacts.get("sourceLaneRegistry"),
         production_target_ledger=artifacts.get("productionTargetLedger"),
+    )
+
+
+def _launch_floor_shard_corpus_summary(artifacts: dict[str, Any]) -> dict[str, Any]:
+    manifest = artifacts.get("shardCorpusManifest")
+    if not isinstance(manifest, dict):
+        return {
+            "recordCounts": {
+                "partitions": 0,
+                "launchFloorCountedPartitions": 0,
+                "publicReferenceShards": 0,
+                "partitionsWithR2Layout": 0,
+                "partitionsWithReadbackProof": 0,
+                "partitionsWithRollbackProof": 0,
+                "partitionsWithGatewayProof": 0,
+                "partitionsWithNativeCompatibility": 0,
+                "partitionsWithSourceLaneRegistryLinks": 0,
+                "claims": 0,
+                "r2PublishOperations": 0,
+                "finalOutputArtifacts": 0,
+                "privacyIssues": 0,
+            },
+            "launchFloorTargets": {
+                "publicReferenceShards1M": False,
+                "r2LayoutComplete": False,
+                "readbackComplete": False,
+                "rollbackComplete": False,
+                "gatewayAllowlistComplete": False,
+                "nativeDecoderCompatibilityComplete": False,
+                "sourceLaneRegistryLinksComplete": False,
+            },
+            "partitions": [],
+            "issues": [],
+        }
+    return launch_floor_shard_corpus_summary(
+        manifest,
+        taxonomy=artifacts.get("launchFloorTaxonomy"),
     )
 
 

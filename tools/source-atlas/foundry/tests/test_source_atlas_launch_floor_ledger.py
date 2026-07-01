@@ -185,11 +185,55 @@ def _passing_fixture_paths(tmp_path: Path) -> dict[str, Path]:
     write_json(paths["supervisor"], {"kind": "ambitions.sourceAtlas.autonomousProductionSupervisor.v1", "valid": True, "allowedClaims": ["supervised_autonomous_source_atlas_work_loop_green"], "recordCounts": {"workQueueItems": 2, "promotionDecisions": 2}})
     write_json(paths["control_loop"], {"kind": "ambitions.sourceAtlas.autonomousControlLoop.v1", "valid": True, "allowedClaims": ["unknown_domains_candidate_only_controlled"], "recordCounts": {"unknownDomainsCandidateOnly": 2}})
     write_json(paths["expansion_chain"], {"kind": "ambitions.sourceAtlas.autonomousDomainExpansionChain.v1", "valid": True, "allowedClaims": ["deterministic_autonomous_candidate_domain_expansion_chain"], "recordCounts": {"candidateRoutes": 2, "r2PublishOperations": 0}})
-    write_json(paths["shard_manifest"], {"kind": "ambitions.sourceAtlas.shardCorpusManifest.v1", "recordCounts": {"publicReferenceShards": 1_000_000}})
+    write_json(paths["shard_manifest"], _launch_floor_shard_manifest())
     write_json(paths["golden_corpus"], {"kind": "ambitions.sourceAtlas.goldenIntentCorpus.v1", "recordCounts": {"goldenIntentCount": 50_000}})
     write_json(paths["fallback_metric"], {"kind": "ambitions.sourceAtlas.sourceNeededFallbackMetric.v1", "recordCounts": {"sourceNeededFallbacks": 49, "lawfulGoals": 1000}})
     write_json(paths["missing_events"], _missing_events())
     return paths
+
+
+def test_launch_floor_ledger_rejects_raw_shard_counter_without_partition_manifest(tmp_path: Path):
+    paths = _passing_fixture_paths(tmp_path)
+    write_json(
+        paths["shard_manifest"],
+        {
+            "kind": "ambitions.sourceAtlas.shardCorpusManifest.v1",
+            "recordCounts": {"publicReferenceShards": 1_000_000},
+        },
+    )
+
+    result = build_source_atlas_launch_floor_ledger(
+        SourceAtlasLaunchFloorLedgerOptions(
+            frontier_config_path=paths["frontier"],
+            source_lane_registry_path=paths["source_registry"],
+            legal_terms_registry_path=paths["legal_registry"],
+            api_governance_registry_path=paths["api_registry"],
+            production_target_ledger_path=paths["production_ledger"],
+            r2_live_inventory_path=paths["r2_inventory"],
+            goal_domain_gauntlet_path=paths["gauntlet"],
+            completion_audit_path=paths["completion"],
+            release_proof_packet_path=paths["release"],
+            production_supervisor_path=paths["supervisor"],
+            autonomous_control_loop_path=paths["control_loop"],
+            autonomous_domain_expansion_chain_path=paths["expansion_chain"],
+            shard_corpus_manifest_path=paths["shard_manifest"],
+            golden_intent_corpus_path=paths["golden_corpus"],
+            fallback_metric_path=paths["fallback_metric"],
+            missing_shard_events_path=paths["missing_events"],
+            output_root=tmp_path / "raw-shard-counter-rejected",
+            created_at="2026-07-01T00:00:00Z",
+            run_label="synthetic-raw-shard-counter",
+        )
+    )
+
+    assert result["valid"] is False
+    assert result["launchFloorMet"] is False
+    assert result["recordCounts"]["shardCorpusCounter"] is None
+    assert result["launchFloorTargetStatus"]["public_reference_shards_1m"]["status"] == "not_measurable_fail_closed"
+    assert any(
+        "shard corpus manifest kind must be ambitions.sourceAtlas.launchFloorShardCorpusManifest.v1" in issue
+        for issue in result["launchFloorShardCorpus"]["issues"]
+    )
 
 
 def _frontier_config() -> dict:
@@ -220,6 +264,96 @@ def _production_ledger() -> dict:
             {"domainID": f"domain_{index:03d}", "packableClaimCount": 2000, "readinessStatus": "bounded_production_target_ready"}
             for index in range(500)
         ],
+    }
+
+
+def _launch_floor_shard_manifest() -> dict:
+    return {
+        "schemaVersion": 1,
+        "kind": "ambitions.sourceAtlas.launchFloorShardCorpusManifest.v1",
+        "versionID": "test-launch-floor-shard-corpus-1m",
+        "createdAt": "2026-07-01T00:00:00Z",
+        "publicReferenceOnly": True,
+        "privateContextAllowed": False,
+        "finalOutputAllowed": False,
+        "partitions": [
+            _shard_partition(
+                partition_id="public-reference-accessibility-costs-p000",
+                domain_id="accessibility_disability_reference",
+                subdomain_id="accessibility_disability_reference__costs_fees_and_funding",
+                start=0,
+                count=500_000,
+                sha_seed="a",
+            ),
+            _shard_partition(
+                partition_id="public-reference-accessibility-costs-p001",
+                domain_id="accessibility_disability_reference",
+                subdomain_id="accessibility_disability_reference__costs_fees_and_funding",
+                start=500_000,
+                count=500_000,
+                sha_seed="b",
+            ),
+        ],
+        "nonClaims": [
+            "test fixture only",
+            "not R2 production upload proof",
+            "not final user plans, schedules, or Steps",
+        ],
+    }
+
+
+def _shard_partition(
+    *,
+    partition_id: str,
+    domain_id: str,
+    subdomain_id: str,
+    start: int,
+    count: int,
+    sha_seed: str,
+) -> dict:
+    base = f"source-atlas/public-reference/corpus/{domain_id.replace('_', '-')}/{subdomain_id.replace('_', '-')}/{partition_id}"
+    return {
+        "partitionID": partition_id,
+        "domainID": domain_id,
+        "subdomainID": subdomain_id,
+        "publicReferenceOnly": True,
+        "privateContextAllowed": False,
+        "finalOutputAllowed": False,
+        "countsTowardLaunchFloor": True,
+        "shardRangeStart": start,
+        "shardRangeEndInclusive": start + count - 1,
+        "shardCount": count,
+        "indexObjectKey": f"{base}/index-v1.json",
+        "indexSHA256": sha_seed * 64,
+        "manifestObjectKey": f"{base}/manifest-v1.json",
+        "manifestSHA256": sha_seed * 64,
+        "sourceLane": {
+            "profileIDs": ["official_government_public_reference"],
+            "registryIDs": ["synthetic.public"],
+        },
+        "legalPolicyState": "approved_public_reference_fixture",
+        "apiPolicyState": "approved_public_reference_fixture",
+        "freshnessSLA": "30d",
+        "revocationState": "revocable_by_partition",
+        "r2Layout": {
+            "stagedPrefix": f"{base}/staged-manifest-v1.json",
+            "promotedPrefix": f"{base}/promoted-manifest-v1.json",
+            "currentPointerKey": f"{base}/current-pointer-v1.json",
+            "lastKnownGoodKey": f"{base}/last-known-good-v1.json",
+            "revocationKey": f"{base}/revocation-v1.json",
+            "rollbackKey": f"{base}/rollback-v1.json",
+            "gatewayAllowlistKey": f"{base}/gateway-allowlist-v1.json",
+        },
+        "readbackProof": {
+            "checksumVerified": True,
+            "rollbackVerified": True,
+            "gatewayAllowlistVerified": True,
+        },
+        "nativeCompatibility": {
+            "partitionedShardIndexV1": True,
+            "requestShape": "public_ids_hashes_only",
+            "privateContextAllowed": False,
+        },
     }
 
 
