@@ -250,9 +250,9 @@ Rollback plan:
 ## VSP-07 - VSP-07 Trust Inspection Details
 
 - Parent issue mirror: `AMB-1486`
-- Recommended status: `Needs Repair`
-- Labels: VSP, trust, inspection, yellow-proof, figma-exploration, owner-selected-direction, selected-f-attached-receipt-stack, part-02-refinement, owner-approved-direction, selected-a-object-wake-stack, part-02-approved
-- Blocked by: surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval, live SwiftUI/device/accessibility/runtime proof, final VSP-07 candidate package approval, final VSP-07 candidate package
+- Recommended status: `Ready For Review`
+- Labels: VSP, trust, inspection, yellow-proof, figma-exploration, owner-selected-direction, selected-f-attached-receipt-stack, part-02-refinement, owner-approved-direction, selected-a-object-wake-stack, part-02-approved, owner-review-package, ready-for-review, object-wake-stack, candidate-package
+- Blocked by: surface object existence from VSP-02 through VSP-06, VSP-09 accessibility matrix, owner approval, live SwiftUI/device/accessibility/runtime proof, final VSP-07 candidate package approval
 - Do not create now: `True`
 
 Acceptance summary:
@@ -270,13 +270,15 @@ Acceptance summary:
 - Prior Codex recommendation for Option B is superseded by owner approval of Option A.
 - Final package must keep receipts attached to the changed object and prevent receipt-feed/history/root-surface drift.
 - VSP-07 cannot proceed to implementation until the final Object Wake Stack candidate package is built and owner-approved.
+- Final Object Wake Stack candidate package is node 257:93 with hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof non-claims, package readback, and durable repo proof images.
+- Final package is Ready For Review but requires explicit owner approval before implementation authority.
 Validation summary:
 - focused Trust tests after source implementation
 - python3 scripts/ambitions-green-standard-audit.py
 - python3 scripts/ambitions-vsp-provenance-audit.py
 Recommended sub-issues:
-- Build final VSP-07 Object Wake Stack candidate package - scope: Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof/non-claim board, and durable screenshots from owner-approved node 250:104 - status: Needs Repair
-- Owner-review final VSP-07 Object Wake Stack package - scope: Owner approves, repairs, or rejects the final package before any source implementation issue is created - status: Blocked until final package exists
+- Build final VSP-07 Object Wake Stack candidate package - scope: Figma only: hero, state matrix, accessibility matrix, SwiftUI anatomy, presentation crop, proof/non-claim board, and durable screenshots from owner-approved node 250:104 - status: Complete in repo evidence; pending owner review
+- Owner-review final VSP-07 Object Wake Stack package - scope: Owner approves, repairs, or rejects the final package before any source implementation issue is created - status: Ready For Review
 - Produce Trust inspection SwiftUI parity leaf - scope: Trust and overlay inspection owners only; no root Trust/Proof/Source/Privacy/History/Receipts surfaces - status: Spec Ready after final package approval
 
 Standard Codex closeout block:

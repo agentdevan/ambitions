@@ -1290,6 +1290,158 @@
       "notes": [
         "Part 02 option: receipt rows carry visible return ribbons to owning objects."
       ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "257:93",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack final package - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-final-package-board-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+      "notes": [
+        "Package board; final candidate package ready for owner review, not Green."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "257:102",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack hero - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-hero-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+      "notes": [
+        "Hero frame showing object-attached receipt wake."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "257:151",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack state matrix - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-state-matrix-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+      "notes": [
+        "State matrix for available, missing proof, stale source, undo, privacy, and return states."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "257:238",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack accessibility matrix - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-accessibility-matrix-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+      "notes": [
+        "Accessibility intent matrix; not device accessibility proof."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "257:273",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack SwiftUI anatomy - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-swiftui-anatomy-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+      "notes": [
+        "SwiftUI anatomy and source-owner map for later implementation leaf."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "257:312",
+      "node_id_status": "known",
+      "frame_name": "MARKETING_RENDER - VSP-07 - Object Wake Stack presentation crop - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-presentation-crop-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+      "notes": [
+        "Presentation crop; marketing-only atmospheric effects are not source proof."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "257:355",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack proof non-claims - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-proof-nonclaims-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+      "notes": [
+        "Proof/non-claim boundary for owner review."
+      ]
+    },
+    {
+      "figma_file_key": "SWtHm9ouHTPbEFfNrrtZwv",
+      "node_id": "257:389",
+      "node_id_status": "known",
+      "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack package readback - R1",
+      "vsp_id": "VSP-07",
+      "evidence_screenshot_paths": [
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-package-readback-r1.png"
+      ],
+      "evidence_doc_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
+      ],
+      "provenance_annotation_status": "figma_recorded",
+      "annotation_copy_anchor": "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+      "notes": [
+        "Owner review readback and future Codex leaf outline."
+      ]
     }
   ]
 }

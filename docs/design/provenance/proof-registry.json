@@ -1670,6 +1670,27 @@
       "blocking_reason": "",
       "proof_ceiling_impact": "Lifts only the VSP-07 Part 02 direction-selection blocker for final candidate-package buildout. Does not authorize source implementation or Green claims.",
       "notes": "Owner approved Option A Object Wake Stack on 2026-07-01."
+    },
+    {
+      "proof_id": "vsp-07-object-wake-stack-final-package-r1",
+      "vsp_id": "VSP-07",
+      "proof_type": "figma_candidate_package",
+      "status": "present",
+      "artifact_paths": [
+        "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-final-package-board-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-hero-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-state-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-accessibility-matrix-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-swiftui-anatomy-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-presentation-crop-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-proof-nonclaims-r1.png",
+        "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-package-readback-r1.png"
+      ],
+      "blocking_reason": "",
+      "proof_ceiling_impact": "Supports Yellow / Ready For Review owner-review package evidence only. Does not prove final package owner approval, SwiftUI parity, Visual Green, device behavior, runtime behavior, privacy readiness, accessibility conformance, Release Green, or Done.",
+      "notes": "Final candidate package board at node 257:93. Built from owner-approved Part 02 Option A Object Wake Stack. Direct Figma PNG export is not claimed; repo PNGs are local render mirrors anchored to Figma node IDs."
     }
   ]
 }

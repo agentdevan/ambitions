@@ -21,7 +21,9 @@
     "docs/qa/evidence/2026-07-01-vsp-06-preference-weave-final-package-r1/manifest.md",
     "docs/design/provenance/owner-approvals/VSP-06-Preference-Weave-package-approval.md",
     "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
-    "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md"
+    "docs/design/provenance/figma-frames/VSP-07-part-01-contextual-trust-inspection-seams-R1.md",
+    "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+    "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
   ],
   "vsp_packets": [
     {
@@ -961,12 +963,12 @@
       "vsp_id": "VSP-07",
       "title": "Trust Inspection Details",
       "category": "contextual_inspection",
-      "current_status_recommendation": "Needs Repair",
+      "current_status_recommendation": "Ready For Review",
       "proof_ceiling": "Yellow",
       "figma": {
         "file_key": "SWtHm9ouHTPbEFfNrrtZwv",
-        "node_id": "250:104",
-        "frame_name": "EXPLORATION - VSP-07 - Part 02 - Option A - Object Wake Stack - R1",
+        "node_id": "257:93",
+        "frame_name": "CANDIDATE - VSP-07 - Object Wake Stack final package - R1",
         "screenshot_paths": [
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-part-01-options-board-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/images/vsp-07-option-a-proof-wake-r1.png",
@@ -988,7 +990,15 @@
           "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-e-private-source-veil-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/images/vsp-07-part-02-option-f-return-ribbon-stack-r1.png",
           "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-approval-board-r1.png",
-          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-object-wake-stack-approved-r1.png"
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/images/vsp-07-part-02-option-a-object-wake-stack-approved-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-final-package-board-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-hero-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-state-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-accessibility-matrix-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-swiftui-anatomy-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-presentation-crop-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-proof-nonclaims-r1.png",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/images/vsp-07-object-wake-stack-package-readback-r1.png"
         ],
         "evidence_paths": [
           "docs/qa/evidence/2026-07-01-vsp-07-part-01-contextual-trust-inspection-seams-r1/manifest.md",
@@ -1000,7 +1010,9 @@
           "docs/design/provenance/figma-frames/VSP-07-part-02-attached-receipt-stack-refinements-R1.md",
           "docs/qa/evidence/2026-07-01-vsp-07-part-02-attached-receipt-stack-refinements-r1/manifest.md",
           "docs/design/provenance/owner-approvals/VSP-07-A-Object-Wake-Stack-direction-approval.md",
-          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/manifest.md"
+          "docs/qa/evidence/2026-07-01-vsp-07-part-02-option-a-object-wake-stack-approval-r1/manifest.md",
+          "docs/design/provenance/figma-frames/VSP-07-object-wake-stack-final-package-R1.md",
+          "docs/qa/evidence/2026-07-01-vsp-07-object-wake-stack-final-package-r1/manifest.md"
         ],
         "node_id_status": "known",
         "unknown_rationale": ""
@@ -1048,7 +1060,7 @@
       },
       "linear": {
         "likely_parent_issue": "AMB-1486",
-        "recommended_status": "Needs Repair",
+        "recommended_status": "Ready For Review",
         "recommended_labels": [
           "VSP",
           "trust",
@@ -1060,9 +1072,13 @@
           "part-02-refinement",
           "owner-approved-direction",
           "selected-a-object-wake-stack",
-          "part-02-approved"
+          "part-02-approved",
+          "owner-review-package",
+          "ready-for-review",
+          "object-wake-stack",
+          "candidate-package"
         ],
-        "should_create_or_update_now": false
+        "should_create_or_update_now": true
       },
       "proof_required": {
         "owner_approval": true,
@@ -1111,11 +1127,9 @@
         "device screenshot",
         "manual accessibility matrix",
         "privacy/trust disclosure proof",
-        "final VSP-07 candidate package approval",
-        "final VSP-07 candidate package"
+        "final VSP-07 candidate package approval"
       ],
       "green_blockers": [
-        "No final VSP-07 candidate package.",
         "No final VSP-07 candidate package approval.",
         "No live SwiftUI parity screenshot.",
         "No contextual inspection proof.",
@@ -1134,7 +1148,10 @@
         "Prior Codex recommendation for Option B Receipt Aperture is superseded by owner approval of Option A.",
         "Final VSP-07 candidate package must be built from Object Wake Stack without merging multiple Part 02 options unless explicitly requested.",
         "Option A must keep receipts attached to the changed object and must not become a receipt feed, history feed, root Trust surface, or shell mutation.",
-        "Part 02 owner approval remains Yellow: no final candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed."
+        "Part 02 owner approval remains Yellow: no final candidate package, source implementation, SwiftUI parity, device proof, accessibility conformance, runtime proof, Visual Green, Release Green, or Done is claimed.",
+        "Final VSP-07 Object Wake Stack candidate package created on 2026-07-01 at node 257:93.",
+        "The package is ready for owner review but is not final owner approval, implementation authority, Visual Green, device proof, accessibility conformance, runtime proof, Release Green, or Done.",
+        "Durable repo PNG proof images are local render mirrors anchored to the Figma node IDs; direct Figma PNG export is not claimed."
       ]
     },
     {
