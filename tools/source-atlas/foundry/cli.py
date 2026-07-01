@@ -102,6 +102,15 @@ from .launch_floor_shard_corpus import (
     compile_launch_floor_shard_corpus,
     launch_floor_shard_corpus_markdown,
 )
+from .launch_floor_shard_corpus_compiler import (
+    DEFAULT_API_GOVERNANCE_REGISTRY_PATH,
+    DEFAULT_LEGAL_TERMS_REGISTRY_PATH,
+    DEFAULT_PRODUCTION_TARGET_LEDGER_PATH,
+    DEFAULT_SOURCE_LANE_REGISTRY_PATH,
+    LaunchFloorShardCorpusCompilerOptions,
+    compile_launch_floor_shard_corpus_bulk,
+    launch_floor_shard_corpus_compiler_markdown,
+)
 from .release_proof_packet import (
     SourceAtlasReleaseProofPacketOptions,
     run_source_atlas_release_proof_packet,
@@ -921,6 +930,21 @@ def main(argv: list[str] | None = None) -> int:
     launch_floor_shard_corpus_parser.add_argument("--run-label", default="current")
     launch_floor_shard_corpus_parser.add_argument("--emit-evidence")
     launch_floor_shard_corpus_parser.add_argument("--markdown")
+
+    launch_floor_shard_corpus_compiler_parser = sub.add_parser("launch-floor-shard-corpus-compiler")
+    launch_floor_shard_corpus_compiler_parser.add_argument("--production-target-ledger", default=str(DEFAULT_PRODUCTION_TARGET_LEDGER_PATH))
+    launch_floor_shard_corpus_compiler_parser.add_argument("--source-lane-registry", default=str(DEFAULT_SOURCE_LANE_REGISTRY_PATH))
+    launch_floor_shard_corpus_compiler_parser.add_argument("--legal-terms-registry", default=str(DEFAULT_LEGAL_TERMS_REGISTRY_PATH))
+    launch_floor_shard_corpus_compiler_parser.add_argument("--api-governance-registry", default=str(DEFAULT_API_GOVERNANCE_REGISTRY_PATH))
+    launch_floor_shard_corpus_compiler_parser.add_argument("--launch-floor-taxonomy", default=str(DEFAULT_LAUNCH_FLOOR_TAXONOMY_PATH))
+    launch_floor_shard_corpus_compiler_parser.add_argument("--source-units")
+    launch_floor_shard_corpus_compiler_parser.add_argument("--max-partition-shards", type=int, default=100000)
+    launch_floor_shard_corpus_compiler_parser.add_argument("--output-root", required=True)
+    launch_floor_shard_corpus_compiler_parser.add_argument("--created-at", default="2026-07-01T00:00:00Z")
+    launch_floor_shard_corpus_compiler_parser.add_argument("--run-label", default="current")
+    launch_floor_shard_corpus_compiler_parser.add_argument("--emit-evidence")
+    launch_floor_shard_corpus_compiler_parser.add_argument("--markdown")
+    launch_floor_shard_corpus_compiler_parser.add_argument("--emit-manifest")
 
     launch_floor_parser = sub.add_parser("source-atlas-launch-floor-ledger")
     launch_floor_parser.add_argument("--frontier-config", default="tools/source-atlas/frontier/coverage-frontiers.json")
@@ -2307,6 +2331,33 @@ def main(argv: list[str] | None = None) -> int:
         if args.markdown:
             Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
             Path(args.markdown).write_text(launch_floor_shard_corpus_markdown(result), encoding="utf-8")
+        print_json(result)
+        return 0 if result["valid"] else 1
+    if args.command == "launch-floor-shard-corpus-compiler":
+        result = compile_launch_floor_shard_corpus_bulk(
+            LaunchFloorShardCorpusCompilerOptions(
+                production_target_ledger_path=Path(args.production_target_ledger),
+                source_lane_registry_path=Path(args.source_lane_registry),
+                legal_terms_registry_path=Path(args.legal_terms_registry),
+                api_governance_registry_path=Path(args.api_governance_registry),
+                launch_floor_taxonomy_path=Path(args.launch_floor_taxonomy),
+                source_units_path=Path(args.source_units) if args.source_units else None,
+                max_partition_shards=args.max_partition_shards,
+                output_root=Path(args.output_root),
+                created_at=args.created_at,
+                run_label=args.run_label,
+                emit_evidence_path=Path(args.emit_evidence) if args.emit_evidence else None,
+                markdown_path=Path(args.markdown) if args.markdown else None,
+                emit_manifest_path=Path(args.emit_manifest) if args.emit_manifest else None,
+            )
+        )
+        if args.emit_evidence:
+            write_json(Path(args.emit_evidence), result)
+        if args.markdown:
+            Path(args.markdown).parent.mkdir(parents=True, exist_ok=True)
+            Path(args.markdown).write_text(launch_floor_shard_corpus_compiler_markdown(result), encoding="utf-8")
+        if args.emit_manifest:
+            write_json(Path(args.emit_manifest), read_json(Path(result["outputPaths"]["manifest"])))
         print_json(result)
         return 0 if result["valid"] else 1
     if args.command == "source-atlas-launch-floor-ledger":

@@ -861,13 +861,18 @@ def _validation_matrix() -> list[dict[str, str]]:
         },
         {
             "validationID": "launch_floor_pytest",
-            "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_launch_floor_domain_taxonomy_lff_m01.py tools/source-atlas/foundry/tests/test_launch_floor_shard_corpus_lff_m02.py tools/source-atlas/foundry/tests/test_goal_domain_router_train_88.py tools/source-atlas/foundry/tests/test_source_atlas_launch_floor_ledger.py tools/source-atlas/foundry/tests/test_source_atlas_completion_audit_train_129.py",
-            "purpose": "prove fail-closed launch-floor taxonomy, shard corpus, router, ledger, and completion-audit wiring",
+            "command": "python3 -m pytest tools/source-atlas/foundry/tests/test_launch_floor_domain_taxonomy_lff_m01.py tools/source-atlas/foundry/tests/test_launch_floor_shard_corpus_lff_m02.py tools/source-atlas/foundry/tests/test_launch_floor_shard_corpus_compiler_lff_m02.py tools/source-atlas/foundry/tests/test_goal_domain_router_train_88.py tools/source-atlas/foundry/tests/test_source_atlas_launch_floor_ledger.py tools/source-atlas/foundry/tests/test_source_atlas_completion_audit_train_129.py",
+            "purpose": "prove fail-closed launch-floor taxonomy, shard corpus compiler, shard corpus, router, ledger, and completion-audit wiring",
+        },
+        {
+            "validationID": "launch_floor_shard_corpus_compiler",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py launch-floor-shard-corpus-compiler --output-root tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-shard-corpus-compiler-lff-m02.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-shard-corpus-compiler-lff-m02.md --emit-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json",
+            "purpose": "compile reviewed bounded production-target evidence into a measurable public/reference shard corpus manifest without claiming 1M readiness",
         },
         {
             "validationID": "launch_floor_ledger",
-            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m02-schema-gate-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
-            "purpose": "regenerate current launch-floor ledger without source/R2/native mutation",
+            "command": "python3 tools/source-atlas/source-atlas-foundry.py source-atlas-launch-floor-ledger --shard-corpus-manifest tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json --output-root tools/source-atlas/generated/source-atlas-launch-floor-ledger/lff-m02-l02-current --emit-evidence docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.json --markdown docs/qa/source-atlas/source-atlas-launch-floor-ledger-current.md",
+            "purpose": "regenerate current launch-floor ledger with the compiled bounded shard corpus manifest and no source/R2/native mutation",
         },
         {
             "validationID": "launch_floor_shard_corpus",

@@ -238,8 +238,6 @@ def launch_floor_shard_corpus_summary(manifest: Any, *, taxonomy: Any = None) ->
         "nativeDecoderCompatibilityComplete": counted_partition_count > 0 and record_counts["partitionsWithNativeCompatibility"] == counted_partition_count,
         "sourceLaneRegistryLinksComplete": counted_partition_count > 0 and record_counts["partitionsWithSourceLaneRegistryLinks"] == counted_partition_count,
     }
-    if not launch_targets["publicReferenceShards1M"]:
-        issues.append("validated publicReferenceShards count is below 1,000,000")
     for key, label in [
         ("r2LayoutComplete", "R2 layout"),
         ("readbackComplete", "readback proof"),

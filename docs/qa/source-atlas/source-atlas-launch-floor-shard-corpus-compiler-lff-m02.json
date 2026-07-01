@@ -1,0 +1,1142 @@
+{
+  "allowedClaims": [
+    "source_atlas_launch_floor_shard_corpus_compiler_green"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "launch_floor_complete",
+    "literal_universal_coverage",
+    "outside_legal_approval",
+    "r2_production_ready",
+    "release_green",
+    "source_atlas_launch_floor_ready",
+    "testflight_readiness"
+  ],
+  "checks": [
+    {
+      "issues": [],
+      "name": "input_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "artifact_privacy_scan_passed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_units_reviewed",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_units_have_legal_policy",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_units_have_api_policy",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "source_units_have_provenance",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "manifest_schema_valid",
+      "passed": true
+    },
+    {
+      "issues": [
+        "publicReferenceShards=71"
+      ],
+      "name": "public_reference_shards_at_least_1m",
+      "passed": false
+    },
+    {
+      "issues": [],
+      "name": "r2_layout_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "readback_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "rollback_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "gateway_allowlist_complete",
+      "passed": true
+    },
+    {
+      "issues": [],
+      "name": "native_decoder_compatibility_complete",
+      "passed": true
+    }
+  ],
+  "compiledManifest": {
+    "issues": [],
+    "path": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/compiled-shard-corpus-manifest.json",
+    "recordCounts": {
+      "claims": 0,
+      "finalOutputArtifacts": 0,
+      "launchFloorCountedPartitions": 14,
+      "partitions": 14,
+      "partitionsWithGatewayProof": 14,
+      "partitionsWithNativeCompatibility": 14,
+      "partitionsWithR2Layout": 14,
+      "partitionsWithReadbackProof": 14,
+      "partitionsWithRollbackProof": 14,
+      "partitionsWithSourceLaneRegistryLinks": 14,
+      "privacyIssues": 0,
+      "publicReferenceShards": 71,
+      "r2PublishOperations": 0
+    },
+    "sha256": "24d126f58adf9ecd982d92c19ccb09ff601ec5d3b074b78aa5c2c0a2380abfa6",
+    "targetStatus": {
+      "gatewayAllowlistComplete": true,
+      "nativeDecoderCompatibilityComplete": true,
+      "publicReferenceShards1M": false,
+      "r2LayoutComplete": true,
+      "readbackComplete": true,
+      "rollbackComplete": true,
+      "sourceLaneRegistryLinksComplete": true
+    }
+  },
+  "compilerReportID": "source_atlas.launch_floor_shard_corpus_compiler.0c857662ebf86ee3",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "evidencePaths": {
+    "apiGovernanceRegistry": "tools/source-atlas/governance/api-governance-registry.json",
+    "launchFloorTaxonomy": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/launch-floor-domain-taxonomy.json",
+    "legalTermsRegistry": "tools/source-atlas/governance/legal-terms-registry.json",
+    "productionTargetLedger": "tools/source-atlas/generated/production-target-ledger/train-131-tetradeca-current/production-target-ledger.json",
+    "sourceLaneRegistry": "tools/source-atlas/governance/source-lane-registry.json",
+    "sourceUnits": null
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.launchFloorShardCorpusCompilerReport.v1",
+  "launchFloorShardTargetMet": false,
+  "nonClaims": [
+    "not launch-floor complete unless the compiled manifest validates and reaches 1,000,000 public/reference shards",
+    "not proof of new R2 production writes",
+    "not outside legal approval",
+    "not Release Green, App Store readiness, or TestFlight readiness",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "manifest": "24d126f58adf9ecd982d92c19ccb09ff601ec5d3b074b78aa5c2c0a2380abfa6",
+    "markdownPayload": "abae59a243b514831f0ea85d537822a98772b9b2f95a0b013e4a5570b4b38985",
+    "reportPayload": "9bd7d8965d36cc892f3fb417cdeb654c04933be5608103297bce668a0ec6a8ed",
+    "validatorReport": "a3d1e6e095db5df2af4b393463b88b27f090a2eee467416ea18c21d9f01cd6f6"
+  },
+  "outputPaths": {
+    "closeout": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/closeout.md",
+    "emitEvidence": "docs/qa/source-atlas/source-atlas-launch-floor-shard-corpus-compiler-lff-m02.json",
+    "emitManifest": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-manifest.json",
+    "emitMarkdown": "docs/qa/source-atlas/source-atlas-launch-floor-shard-corpus-compiler-lff-m02.md",
+    "manifest": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/compiled-shard-corpus-manifest.json",
+    "markdown": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-compiler-report.md",
+    "report": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/launch-floor-shard-corpus-compiler-report.json",
+    "validatorMarkdown": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/manifest-validator/launch-floor-shard-corpus-report.md",
+    "validatorReport": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/manifest-validator/launch-floor-shard-corpus-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productLaw": {
+    "finalPersonalizedOutputsAllowed": false,
+    "privateContextAllowed": false,
+    "publicReferenceOnly": true,
+    "r2Role": "public/reference/freshness infrastructure only",
+    "sourceAtlasGeneratesFinalPlansSchedulesSteps": false
+  },
+  "recordCounts": {
+    "claims": 0,
+    "finalOutputArtifacts": 0,
+    "launchFloorCountedPartitions": 14,
+    "partitions": 14,
+    "partitionsWithGatewayProof": 14,
+    "partitionsWithNativeCompatibility": 14,
+    "partitionsWithR2Layout": 14,
+    "partitionsWithReadbackProof": 14,
+    "partitionsWithRollbackProof": 14,
+    "partitionsWithSourceLaneRegistryLinks": 14,
+    "privacyIssues": 0,
+    "publicReferenceShards": 71,
+    "r2PublishOperations": 0,
+    "reviewedSourceUnits": 14,
+    "sourceRecords": 71,
+    "sourceUnits": 14,
+    "sourceUnitsWithAPIPolicy": 14,
+    "sourceUnitsWithLegalPolicy": 14,
+    "sourceUnitsWithProvenance": 14
+  },
+  "runLabel": "current",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; corpus compiler proof only",
+  "sourceUnitSummary": {
+    "issues": [],
+    "recordCounts": {
+      "privacyIssues": 0,
+      "publicReferenceShards": 71,
+      "reviewedSourceUnits": 14,
+      "sourceRecords": 71,
+      "sourceUnits": 14,
+      "sourceUnitsWithAPIPolicy": 14,
+      "sourceUnitsWithLegalPolicy": 14,
+      "sourceUnitsWithProvenance": 14
+    },
+    "sourceUnits": [
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 3,
+        "domainID": "health_wellness_reference",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_cdc_physical_activity_and_reuse_terms_recheck",
+        "legalPolicyIDs": [
+          "cdc_public_web"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-45-health-production-stable/pack-production-report.json",
+            "artifactSHA256": "1b2f89fb064127854375f47baeeef87e03ad5521d25c55262e5a7938ccccf68f",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "cdc.physical-activity.basics"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "1b2f89fb064127854375f47baeeef87e03ad5521d25c55262e5a7938ccccf68f",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "cdc.physical-activity.basics"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "cdc.physical-activity.basics"
+          ]
+        },
+        "sourceRecordCount": 3,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.295bfbfbcc61fe62",
+        "subdomainID": "health_wellness_reference__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 2,
+        "domainID": "public_civic_requirements",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "stable_law_watch_quarterly_review",
+        "legalPolicyIDs": [
+          "us_federal_public_source"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-37-civic-production-stable/pack-production-report.json",
+            "artifactSHA256": "d0f401ba95bdcc78dd8e72ca13041fed28f0643d8114b790c7b2d1ff9c48961a",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "nara.constitution.presidency"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "d0f401ba95bdcc78dd8e72ca13041fed28f0643d8114b790c7b2d1ff9c48961a",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "nara.constitution.presidency"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference"
+          ],
+          "registryIDs": [
+            "nara.constitution.presidency"
+          ]
+        },
+        "sourceRecordCount": 2,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.299a96f4e032d2e0",
+        "subdomainID": "public_civic_requirements__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 3,
+        "domainID": "hobbies_recreation",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_nps_health_safety_and_disclaimer_recheck",
+        "legalPolicyIDs": [
+          "nps_public_web"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-44-hobbies-production-stable/pack-production-report.json",
+            "artifactSHA256": "696adbaf6861a7dd6c78bf7880105d2c585ba48beb70cde7f9ae456040121603",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "nps.recreation-safety"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "696adbaf6861a7dd6c78bf7880105d2c585ba48beb70cde7f9ae456040121603",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "nps.recreation-safety"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "nps.recreation-safety"
+          ]
+        },
+        "sourceRecordCount": 3,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.3a55dcab79eb7421",
+        "subdomainID": "hobbies_recreation__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 3,
+        "domainID": "travel_relocation",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_state_travel_pages_and_terms_recheck_with_strict_advisory_review;quarterly_usagov_change_address_and_government_works_terms_recheck",
+        "legalPolicyIDs": [
+          "state_travel_public_web",
+          "usagov_public_web"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/pack-production-report.json",
+            "artifactSHA256": "5c54cc96f10765519401704ce10b3562770e5d5ed96571e41f90b9ad1160d357",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "state.travel.public_travel"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-46-travel-production-stable/pack-production-report.json",
+            "artifactSHA256": "5c54cc96f10765519401704ce10b3562770e5d5ed96571e41f90b9ad1160d357",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "usa.gov.change_address"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "5c54cc96f10765519401704ce10b3562770e5d5ed96571e41f90b9ad1160d357",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "state.travel.public_travel",
+          "usa.gov.change_address"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "state.travel.public_travel",
+            "usa.gov.change_address"
+          ]
+        },
+        "sourceRecordCount": 3,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.3fdfcc7298d8e130",
+        "subdomainID": "travel_relocation__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 3,
+        "domainID": "creative_project_reference",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_creative_commons_licenses_terms_and_policies_recheck;quarterly_loc_primary_sources_page_and_legal_rights_recheck;quarterly_w3c_standards_copyright_and_policies_recheck",
+        "legalPolicyIDs": [
+          "creativecommons_site_cc_by_4_cc0_tools",
+          "loc_usgov_work",
+          "w3c_document_license_public_web"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-49-creative-project-production-stable/pack-production-report.json",
+            "artifactSHA256": "2897b2218aa91c6fd4216374fa1325182ca987b266e03b72085ee72170efbaa7",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "creative-commons.licenses"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-49-creative-project-production-stable/pack-production-report.json",
+            "artifactSHA256": "2897b2218aa91c6fd4216374fa1325182ca987b266e03b72085ee72170efbaa7",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "loc.primary_sources"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-49-creative-project-production-stable/pack-production-report.json",
+            "artifactSHA256": "2897b2218aa91c6fd4216374fa1325182ca987b266e03b72085ee72170efbaa7",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "w3c.web-standards"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "2897b2218aa91c6fd4216374fa1325182ca987b266e03b72085ee72170efbaa7",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "creative-commons.licenses",
+          "loc.primary_sources",
+          "w3c.web-standards"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "standards_body_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "creative-commons.licenses",
+            "loc.primary_sources",
+            "w3c.web-standards"
+          ]
+        },
+        "sourceRecordCount": 3,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.73933d9be7ee4d86",
+        "subdomainID": "creative_project_reference__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 4,
+        "domainID": "home_life_admin",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_doe_energy_saver_and_web_policies_recheck;quarterly_ready_gov_kit_and_terms_recheck;quarterly_usagov_home_repair_and_government_works_recheck",
+        "legalPolicyIDs": [
+          "doe_public_web",
+          "ready_public_web",
+          "usagov_public_web"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/pack-production-report.json",
+            "artifactSHA256": "77922830e66703c6f221eec0dc75b4f39527bdfe0fa12921b4d37a2466ce6af6",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "energy.gov.energy_saver"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/pack-production-report.json",
+            "artifactSHA256": "77922830e66703c6f221eec0dc75b4f39527bdfe0fa12921b4d37a2466ce6af6",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "ready.gov.kit"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-48-home-life-admin-production-stable/pack-production-report.json",
+            "artifactSHA256": "77922830e66703c6f221eec0dc75b4f39527bdfe0fa12921b4d37a2466ce6af6",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "usa.gov.home_repair"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "77922830e66703c6f221eec0dc75b4f39527bdfe0fa12921b4d37a2466ce6af6",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "energy.gov.energy_saver",
+          "ready.gov.kit",
+          "usa.gov.home_repair"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "energy.gov.energy_saver",
+            "ready.gov.kit",
+            "usa.gov.home_repair"
+          ]
+        },
+        "sourceRecordCount": 4,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.7aaf757ece073889",
+        "subdomainID": "home_life_admin__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 3,
+        "domainID": "finance_public_reference",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_cfpb_financial_education_recheck;quarterly_irs_deadline_recheck_stale_critical_before_tax_use;quarterly_usagov_benefits_recheck",
+        "legalPolicyIDs": [
+          "cfpb_public_web",
+          "irs_public_web",
+          "usagov_public_web"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/pack-production-report.json",
+            "artifactSHA256": "a2f042cd4f7f6ff6e98dd0d2571cae366887ede721394a4e233a578ccec6e899",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "cfpb.adult_financial_education"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/pack-production-report.json",
+            "artifactSHA256": "a2f042cd4f7f6ff6e98dd0d2571cae366887ede721394a4e233a578ccec6e899",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "irs.when_to_file"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-47-finance-production-stable/pack-production-report.json",
+            "artifactSHA256": "a2f042cd4f7f6ff6e98dd0d2571cae366887ede721394a4e233a578ccec6e899",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "usa.gov.benefits"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "a2f042cd4f7f6ff6e98dd0d2571cae366887ede721394a4e233a578ccec6e899",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "cfpb.adult_financial_education",
+          "irs.when_to_file",
+          "usa.gov.benefits"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "regulated_public_disclosure"
+          ],
+          "registryIDs": [
+            "cfpb.adult_financial_education",
+            "irs.when_to_file",
+            "usa.gov.benefits"
+          ]
+        },
+        "sourceRecordCount": 3,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.7eddbfbbdfaa93d1",
+        "subdomainID": "finance_public_reference__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.college_scorecard.v1",
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 8,
+        "domainID": "education_credentialing",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "catalog_year_review_quarterly_institutional_recheck;college_scorecard_release_quarterly_review",
+        "legalPolicyIDs": [
+          "education_public_data_review",
+          "us_federal_public_source"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-42-education-production-stable/pack-production-report.json",
+            "artifactSHA256": "8398e07dee7926f0340a913f825fa5ee7c2817e3c83c3c1cf6d3b931a074b71f",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "college-scorecard.api"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-42-education-production-stable/pack-production-report.json",
+            "artifactSHA256": "8398e07dee7926f0340a913f825fa5ee7c2817e3c83c3c1cf6d3b931a074b71f",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "westpoint.redbook.computer_science_major"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "8398e07dee7926f0340a913f825fa5ee7c2817e3c83c3c1cf6d3b931a074b71f",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "college-scorecard.api",
+          "westpoint.redbook.computer_science_major"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "college-scorecard.api",
+            "westpoint.redbook.computer_science_major"
+          ]
+        },
+        "sourceRecordCount": 8,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.93811b77e29c7317",
+        "subdomainID": "education_credentialing__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 3,
+        "domainID": "business_entrepreneurship",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_sba_guide_and_terms_recheck",
+        "legalPolicyIDs": [
+          "sba_public_web"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-43-business-production-stable/pack-production-report.json",
+            "artifactSHA256": "66ccf03680904b21bfcb251b3f5db724ef1827e9a3bca2fb028545ba19570bda",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "sba.business_guide.start_business"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "66ccf03680904b21bfcb251b3f5db724ef1827e9a3bca2fb028545ba19570bda",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "sba.business_guide.start_business"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "sba.business_guide.start_business"
+          ]
+        },
+        "sourceRecordCount": 3,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.abe8ca26f0d4a5b9",
+        "subdomainID": "business_entrepreneurship__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.americorps.socrata_public_dataset.v1"
+        ],
+        "compiledShardCount": 3,
+        "domainID": "volunteering_public_reference",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "biennial_dataset_posting_context_quarterly_metadata_recheck",
+        "legalPolicyIDs": [
+          "americorps_public_domain"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-131-volunteering-production-stable/pack-production-report.json",
+            "artifactSHA256": "e872bc8c4a29c5a214e7019d17e4fa235ea21e7788504ef4edc67fcff1747001",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "americorps.volunteer_rate_state"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "e872bc8c4a29c5a214e7019d17e4fa235ea21e7788504ef4edc67fcff1747001",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "americorps.volunteer_rate_state"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "americorps.volunteer_rate_state"
+          ]
+        },
+        "sourceRecordCount": 3,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.af346cd36056b9b1",
+        "subdomainID": "volunteering_public_reference__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.bls_public_data.v1",
+          "api.onet_public_database.v1",
+          "api.openalex_api.v1",
+          "api.openalex_snapshot.v1"
+        ],
+        "compiledShardCount": 26,
+        "domainID": "occupation_foundation",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "monthly_snapshot_or_api_review;series_publication_schedule;track_release_quarterly_review",
+        "legalPolicyIDs": [
+          "bls_public_terms",
+          "onet_cc_by_4",
+          "openalex_cc0_metadata"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/pack-production-report.json",
+            "artifactSHA256": "845be8d907d2e272b6f055322ab11d80d9b4df8fa7c3b4570531e4d851d046a5",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "bls.public.data.api"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/pack-production-report.json",
+            "artifactSHA256": "845be8d907d2e272b6f055322ab11d80d9b4df8fa7c3b4570531e4d851d046a5",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "onet.database"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/pack-production-report.json",
+            "artifactSHA256": "845be8d907d2e272b6f055322ab11d80d9b4df8fa7c3b4570531e4d851d046a5",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "openalex.dataset"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-28-stable-approval-gate/pack-production-report.json",
+            "artifactSHA256": "845be8d907d2e272b6f055322ab11d80d9b4df8fa7c3b4570531e4d851d046a5",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "openalex.works"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "845be8d907d2e272b6f055322ab11d80d9b4df8fa7c3b4570531e4d851d046a5",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "bls.public.data.api",
+          "onet.database",
+          "openalex.dataset",
+          "openalex.works"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "open_data_public_reference"
+          ],
+          "registryIDs": [
+            "bls.public.data.api",
+            "onet.database",
+            "openalex.dataset",
+            "openalex.works"
+          ]
+        },
+        "sourceRecordCount": 26,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.bf06419e77989267",
+        "subdomainID": "occupation_foundation__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 5,
+        "domainID": "relationships_family",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_acf_hmrf_and_digital_policy_recheck;quarterly_cdc_positive_parenting_and_reuse_terms_recheck;quarterly_childwelfare_resources_and_policy_recheck",
+        "legalPolicyIDs": [
+          "acf_hmrf_public_web",
+          "cdc_positive_parenting_public_web",
+          "childwelfare_public_web"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/pack-production-report.json",
+            "artifactSHA256": "805641f0663452cafbca55db553dc2bcbba292120eee0cb641f417975e1860fe",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "acf.healthy_marriage_fatherhood"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/pack-production-report.json",
+            "artifactSHA256": "805641f0663452cafbca55db553dc2bcbba292120eee0cb641f417975e1860fe",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "cdc.positive_parenting"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-51-relationships-family-production-stable/pack-production-report.json",
+            "artifactSHA256": "805641f0663452cafbca55db553dc2bcbba292120eee0cb641f417975e1860fe",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "childwelfare.family_support"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "805641f0663452cafbca55db553dc2bcbba292120eee0cb641f417975e1860fe",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "acf.healthy_marriage_fatherhood",
+          "cdc.positive_parenting",
+          "childwelfare.family_support"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "institutional_public_reference"
+          ],
+          "registryIDs": [
+            "acf.healthy_marriage_fatherhood",
+            "cdc.positive_parenting",
+            "childwelfare.family_support"
+          ]
+        },
+        "sourceRecordCount": 5,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.c23c04ef11f0cee4",
+        "subdomainID": "relationships_family__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.official.statcan.table.13100974.v1"
+        ],
+        "compiledShardCount": 2,
+        "domainID": "health_wellness_reference_ca_statistics",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "quarterly_source_and_terms_review",
+        "legalPolicyIDs": [
+          "statcan.open-licence.2026-06-28"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-81-statcan-production-stable/pack-production-report.json",
+            "artifactSHA256": "aafc3da07ef4ca9b565c8a8446accd0abb2befac240b79696523facf8eaed501",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "official.statcan.table.13100974"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "aafc3da07ef4ca9b565c8a8446accd0abb2befac240b79696523facf8eaed501",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "official.statcan.table.13100974"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "official_government_public_reference",
+            "open_data_public_reference"
+          ],
+          "registryIDs": [
+            "official.statcan.table.13100974"
+          ]
+        },
+        "sourceRecordCount": 2,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.d2ee96e55df1a204",
+        "subdomainID": "health_wellness_reference_ca_statistics__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      },
+      {
+        "apiPolicyIDs": [
+          "api.openalex_api.v1",
+          "api.static_public_page.v1"
+        ],
+        "compiledShardCount": 3,
+        "domainID": "personal_growth",
+        "finalOutputAllowed": false,
+        "finalOutputExplicitlyFalse": true,
+        "freshnessSLA": "monthly_openalex_personal_growth_metadata_and_api_governance_recheck;quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck",
+        "legalPolicyIDs": [
+          "medlineplus_public_domain_topic_summary",
+          "openalex_cc0_metadata"
+        ],
+        "privateContextAllowed": false,
+        "privateContextExplicitlyFalse": true,
+        "provenanceRefs": [
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/pack-production-report.json",
+            "artifactSHA256": "95c9aa029458d11f6bdd72a82fba081458bcb60debfec003c4556ac4fa0e14f4",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "nih.medlineplus.wellness"
+          },
+          {
+            "artifactPath": "tools/source-atlas/generated/pack-production/train-50-personal-growth-production-stable/pack-production-report.json",
+            "artifactSHA256": "95c9aa029458d11f6bdd72a82fba081458bcb60debfec003c4556ac4fa0e14f4",
+            "retrievedAt": "2026-07-01T00:00:00Z",
+            "sourceID": "openalex.personal_growth_research"
+          }
+        ],
+        "publicReferenceOnly": true,
+        "recordEvidenceSHA256": "95c9aa029458d11f6bdd72a82fba081458bcb60debfec003c4556ac4fa0e14f4",
+        "reviewedPublicReferenceSource": true,
+        "shardClasses": [
+          "public_reference_claim"
+        ],
+        "sourceIDs": [
+          "nih.medlineplus.wellness",
+          "openalex.personal_growth_research"
+        ],
+        "sourceLane": {
+          "profileIDs": [
+            "institutional_public_reference",
+            "standards_body_public_reference"
+          ],
+          "registryIDs": [
+            "nih.medlineplus.wellness",
+            "openalex.personal_growth_research"
+          ]
+        },
+        "sourceRecordCount": 3,
+        "sourceReviewState": "reviewed_public_reference",
+        "sourceUnitID": "source_atlas.shard_source_unit.d76acb167df5ecad",
+        "subdomainID": "personal_growth__costs_fees_and_funding",
+        "verificationProof": {
+          "checksumVerified": true,
+          "gatewayAllowlistVerified": true,
+          "nativePartitionedShardIndexV1": true,
+          "r2LayoutPrepared": true,
+          "rollbackVerified": true
+        }
+      }
+    ]
+  },
+  "status": "Source Green for shard corpus compiler / shard target not met",
+  "valid": true,
+  "validatorReport": {
+    "allowedClaims": [
+      "source_atlas_launch_floor_shard_corpus_validator_green"
+    ],
+    "blockedClaims": [
+      "app_store_readiness",
+      "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+      "launch_floor_complete",
+      "literal_universal_coverage",
+      "outside_legal_approval",
+      "r2_production_ready",
+      "release_green",
+      "source_atlas_launch_floor_ready",
+      "testflight_readiness"
+    ],
+    "checks": [],
+    "corpusReportID": "source_atlas.launch_floor_shard_corpus.44c80ad6a69cac19",
+    "createdAt": "2026-07-01T00:00:00Z",
+    "evidencePaths": {
+      "launchFloorTaxonomy": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/launch-floor-domain-taxonomy.json",
+      "manifest": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/compiled-shard-corpus-manifest.json"
+    },
+    "issues": [],
+    "kind": "ambitions.sourceAtlas.launchFloorShardCorpusReport.v1",
+    "launchFloorShardTargetMet": false,
+    "nonClaims": [
+      "not launch-floor complete unless the validated publicReferenceShards counter is at least 1,000,000",
+      "not R2 production upload proof by itself",
+      "not outside legal approval",
+      "not Release Green, App Store readiness, or TestFlight readiness",
+      "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+      "not a private user-data backend",
+      "not private life graph storage",
+      "not an official legal, medical, financial, or admissions decision",
+      "not runtime recommendation proof by itself",
+      "not R2 release readiness",
+      "not accessibility, privacy, or legal approval"
+    ],
+    "outputHashes": {
+      "markdownPayload": "63c6dbf563ae516960a3b7ec63c374964f6cc8abc989168ecbffa99eca053924",
+      "reportPayload": "6155b2680ec3b7bf36669d45efb8fda34f47ab21b44df83f6f6131452ad43750"
+    },
+    "outputPaths": {
+      "markdown": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/manifest-validator/launch-floor-shard-corpus-report.md",
+      "report": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/manifest-validator/launch-floor-shard-corpus-report.json"
+    },
+    "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+    "privacyIssues": [],
+    "productLaw": {
+      "finalPersonalizedOutputsAllowed": false,
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Role": "public/reference/freshness infrastructure only",
+      "sourceAtlasGeneratesFinalPlansSchedulesSteps": false
+    },
+    "recordCounts": {
+      "claims": 0,
+      "finalOutputArtifacts": 0,
+      "launchFloorCountedPartitions": 14,
+      "partitions": 14,
+      "partitionsWithGatewayProof": 14,
+      "partitionsWithNativeCompatibility": 14,
+      "partitionsWithR2Layout": 14,
+      "partitionsWithReadbackProof": 14,
+      "partitionsWithRollbackProof": 14,
+      "partitionsWithSourceLaneRegistryLinks": 14,
+      "privacyIssues": 0,
+      "publicReferenceShards": 71,
+      "r2PublishOperations": 0
+    },
+    "runLabel": "current-compiler-validator",
+    "schemaVersion": 1,
+    "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; shard corpus manifest validation only",
+    "status": "Source Green for shard corpus manifest validator / shard target not met",
+    "valid": true,
+    "versionID": "source-atlas-launch-floor-shard-corpus-lff-m02"
+  },
+  "versionID": "source-atlas-launch-floor-shard-corpus-compiler-lff-m02"
+}

@@ -1,0 +1,709 @@
+{
+  "createdAt": "2026-07-01T00:00:00Z",
+  "finalOutputAllowed": false,
+  "kind": "ambitions.sourceAtlas.launchFloorShardCorpusManifest.v1",
+  "nonClaims": [
+    "not launch-floor complete unless the validated publicReferenceShards counter is at least 1,000,000",
+    "not R2 production upload proof by itself",
+    "not outside legal approval",
+    "not Release Green, App Store readiness, or TestFlight readiness",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "partitions": [
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "health_wellness_reference",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_cdc_physical_activity_and_reuse_terms_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/index-v1.json",
+      "indexSHA256": "e16752c1a538a4fbecb390f4e60a35e9166ab4d6d222182ac838b335fc660e26",
+      "legalPolicyState": "reviewed_public_reference:cdc_public_web",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/manifest-v1.json",
+      "manifestSHA256": "72ab9d066f57e9ce20dbe15d00585e5025e14e42bd7369fe1a52e85a863135cc",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/health-wellness-reference/health-wellness-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-295bfbfbcc61fe62-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 3,
+      "shardRangeEndInclusive": 2,
+      "shardRangeStart": 0,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "cdc.physical-activity.basics"
+        ]
+      },
+      "subdomainID": "health_wellness_reference__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "public_civic_requirements",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "stable_law_watch_quarterly_review",
+      "indexObjectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/index-v1.json",
+      "indexSHA256": "ed3aad1ab2af4d472acb6b3c726b83a37d02dbc56a765ca2b776e94afac246e7",
+      "legalPolicyState": "reviewed_public_reference:us_federal_public_source",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/manifest-v1.json",
+      "manifestSHA256": "ad5da34d8b4d3f2ee66f2c93c4dd9759ae881f6493a4c350e6f6c01e37149971",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/public-civic-requirements/public-civic-requirements-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-299a96f4e032d2e0-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 2,
+      "shardRangeEndInclusive": 4,
+      "shardRangeStart": 3,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference"
+        ],
+        "registryIDs": [
+          "nara.constitution.presidency"
+        ]
+      },
+      "subdomainID": "public_civic_requirements__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "hobbies_recreation",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_nps_health_safety_and_disclaimer_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/index-v1.json",
+      "indexSHA256": "482d922f26f2a6929931f3e8a7d482100cdf6db7181b077f31b83bf78afe9016",
+      "legalPolicyState": "reviewed_public_reference:nps_public_web",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/manifest-v1.json",
+      "manifestSHA256": "d238d89b2ef391197a161833c9c67451e989af20cadcd9f8d61da8aaae91d485",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/hobbies-recreation/hobbies-recreation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3a55dcab79eb7421-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 3,
+      "shardRangeEndInclusive": 7,
+      "shardRangeStart": 5,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "nps.recreation-safety"
+        ]
+      },
+      "subdomainID": "hobbies_recreation__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "travel_relocation",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_state_travel_pages_and_terms_recheck_with_strict_advisory_review;quarterly_usagov_change_address_and_government_works_terms_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/index-v1.json",
+      "indexSHA256": "72ca63751c4cc37c1403b2bb71c6ce8721e79653034dff16fa582191daa8adde",
+      "legalPolicyState": "reviewed_public_reference:state_travel_public_web,usagov_public_web",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/manifest-v1.json",
+      "manifestSHA256": "3324d550c9038eb4a480c17cd4bed29c7b330ba15faac36d3307f85b2206dc16",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/travel-relocation/travel-relocation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-3fdfcc7298d8e130-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 3,
+      "shardRangeEndInclusive": 10,
+      "shardRangeStart": 8,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "state.travel.public_travel",
+          "usa.gov.change_address"
+        ]
+      },
+      "subdomainID": "travel_relocation__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "creative_project_reference",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_creative_commons_licenses_terms_and_policies_recheck;quarterly_loc_primary_sources_page_and_legal_rights_recheck;quarterly_w3c_standards_copyright_and_policies_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/index-v1.json",
+      "indexSHA256": "094db5f13a1b804c69660bc457d181d68e430eb226c9bf89d6983219ac6fcce5",
+      "legalPolicyState": "reviewed_public_reference:creativecommons_site_cc_by_4_cc0_tools,loc_usgov_work,w3c_document_license_public_web",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/manifest-v1.json",
+      "manifestSHA256": "8754067177bd2ee1b751d002bf3f69c121a6220472d3d8f6e98af0245c6ba1b4",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/creative-project-reference/creative-project-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-73933d9be7ee4d86-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 3,
+      "shardRangeEndInclusive": 13,
+      "shardRangeStart": 11,
+      "sourceLane": {
+        "profileIDs": [
+          "standards_body_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "creative-commons.licenses",
+          "loc.primary_sources",
+          "w3c.web-standards"
+        ]
+      },
+      "subdomainID": "creative_project_reference__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "home_life_admin",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_doe_energy_saver_and_web_policies_recheck;quarterly_ready_gov_kit_and_terms_recheck;quarterly_usagov_home_repair_and_government_works_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/index-v1.json",
+      "indexSHA256": "9b9bf08c9f513c62a4ae736123a41677dc75723a532a65a715ceb1cb1d89b34c",
+      "legalPolicyState": "reviewed_public_reference:doe_public_web,ready_public_web,usagov_public_web",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/manifest-v1.json",
+      "manifestSHA256": "1aefdebb8a8a171d11eda4d0e5eabe3ac87b91752d77c188806ccfbb4cd9947d",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/home-life-admin/home-life-admin-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7aaf757ece073889-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 4,
+      "shardRangeEndInclusive": 17,
+      "shardRangeStart": 14,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "energy.gov.energy_saver",
+          "ready.gov.kit",
+          "usa.gov.home_repair"
+        ]
+      },
+      "subdomainID": "home_life_admin__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "finance_public_reference",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_cfpb_financial_education_recheck;quarterly_irs_deadline_recheck_stale_critical_before_tax_use;quarterly_usagov_benefits_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/index-v1.json",
+      "indexSHA256": "fea52bf0b7f82e0e19f92c6e3cfc09d763cfa4d6aa037031ede4b3c0a76f50bc",
+      "legalPolicyState": "reviewed_public_reference:cfpb_public_web,irs_public_web,usagov_public_web",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/manifest-v1.json",
+      "manifestSHA256": "aa62febb7e76d5aa25590ce585f6151e101e3393ca46234bebfd05114cd8c44c",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/finance-public-reference/finance-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-7eddbfbbdfaa93d1-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 3,
+      "shardRangeEndInclusive": 20,
+      "shardRangeStart": 18,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "regulated_public_disclosure"
+        ],
+        "registryIDs": [
+          "cfpb.adult_financial_education",
+          "irs.when_to_file",
+          "usa.gov.benefits"
+        ]
+      },
+      "subdomainID": "finance_public_reference__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.college_scorecard.v1,api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "education_credentialing",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "catalog_year_review_quarterly_institutional_recheck;college_scorecard_release_quarterly_review",
+      "indexObjectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/index-v1.json",
+      "indexSHA256": "4d293a87f31c4c3d18477cc088f4371294d1c2d05e1f2baa63124b0cc18d719f",
+      "legalPolicyState": "reviewed_public_reference:education_public_data_review,us_federal_public_source",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/manifest-v1.json",
+      "manifestSHA256": "3e8516ae0d97f6c9da801e30e149120ae21f4c920a87011a4c6e0bf05b070b25",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/education-credentialing/education-credentialing-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-93811b77e29c7317-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 8,
+      "shardRangeEndInclusive": 28,
+      "shardRangeStart": 21,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "college-scorecard.api",
+          "westpoint.redbook.computer_science_major"
+        ]
+      },
+      "subdomainID": "education_credentialing__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "business_entrepreneurship",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_sba_guide_and_terms_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/index-v1.json",
+      "indexSHA256": "719688c8224a9477c44ac0fb0a780e5a2f73a4fe1f93489ff9292acda3e97be3",
+      "legalPolicyState": "reviewed_public_reference:sba_public_web",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/manifest-v1.json",
+      "manifestSHA256": "8d6db0067b75e0c78f68fe12f8321fecb1507e73d6d0e9637c5ebd7594aedabf",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/business-entrepreneurship/business-entrepreneurship-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-abe8ca26f0d4a5b9-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 3,
+      "shardRangeEndInclusive": 31,
+      "shardRangeStart": 29,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "sba.business_guide.start_business"
+        ]
+      },
+      "subdomainID": "business_entrepreneurship__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.americorps.socrata_public_dataset.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "volunteering_public_reference",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "biennial_dataset_posting_context_quarterly_metadata_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/index-v1.json",
+      "indexSHA256": "4e29debd325b37065c7416e40fdc1b905908e3130b41096f9dcff2fcad481ae0",
+      "legalPolicyState": "reviewed_public_reference:americorps_public_domain",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/manifest-v1.json",
+      "manifestSHA256": "a272c54f970cf16f4cedff7ca0ce21df32cdec1b22df128bb51705b3b60b21f1",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/volunteering-public-reference/volunteering-public-reference-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-af346cd36056b9b1-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 3,
+      "shardRangeEndInclusive": 34,
+      "shardRangeStart": 32,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "americorps.volunteer_rate_state"
+        ]
+      },
+      "subdomainID": "volunteering_public_reference__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.bls_public_data.v1,api.onet_public_database.v1,api.openalex_api.v1,api.openalex_snapshot.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "occupation_foundation",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "monthly_snapshot_or_api_review;series_publication_schedule;track_release_quarterly_review",
+      "indexObjectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/index-v1.json",
+      "indexSHA256": "3e8f3b82c9286d6c8bd159d2f69fa72925ad91789a0ec6dd3ea1b4dc0c488611",
+      "legalPolicyState": "reviewed_public_reference:bls_public_terms,onet_cc_by_4,openalex_cc0_metadata",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/manifest-v1.json",
+      "manifestSHA256": "a14ef7de5a5e3eaaa79517ae75b37cdb34b553bb4851b1abbbebf01511a04d62",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/occupation-foundation/occupation-foundation-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-bf06419e77989267-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 26,
+      "shardRangeEndInclusive": 60,
+      "shardRangeStart": 35,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "open_data_public_reference"
+        ],
+        "registryIDs": [
+          "bls.public.data.api",
+          "onet.database",
+          "openalex.dataset",
+          "openalex.works"
+        ]
+      },
+      "subdomainID": "occupation_foundation__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "relationships_family",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_acf_hmrf_and_digital_policy_recheck;quarterly_cdc_positive_parenting_and_reuse_terms_recheck;quarterly_childwelfare_resources_and_policy_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/index-v1.json",
+      "indexSHA256": "84cf065687da138ab82eef84f1650ad6d427c623f9d47162d39c08fe2276b1c5",
+      "legalPolicyState": "reviewed_public_reference:acf_hmrf_public_web,cdc_positive_parenting_public_web,childwelfare_public_web",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/manifest-v1.json",
+      "manifestSHA256": "81fa2b0cbb7104a575a15d4b89f21d271a846d1d99b58cc800df87ca57019d56",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/relationships-family/relationships-family-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-c23c04ef11f0cee4-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 5,
+      "shardRangeEndInclusive": 65,
+      "shardRangeStart": 61,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "institutional_public_reference"
+        ],
+        "registryIDs": [
+          "acf.healthy_marriage_fatherhood",
+          "cdc.positive_parenting",
+          "childwelfare.family_support"
+        ]
+      },
+      "subdomainID": "relationships_family__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.official.statcan.table.13100974.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "health_wellness_reference_ca_statistics",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "quarterly_source_and_terms_review",
+      "indexObjectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/index-v1.json",
+      "indexSHA256": "8266a51400c6abd32a707816cec697cd21d78a4907b73f48b7dc07d25fcb8d22",
+      "legalPolicyState": "reviewed_public_reference:statcan.open-licence.2026-06-28",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/manifest-v1.json",
+      "manifestSHA256": "c52eb1a24d536e35570be934faedc534301d68b47d1197c3bcd99d887c8184fc",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/health-wellness-reference-ca-statistics/health-wellness-reference-ca-statistics-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d2ee96e55df1a204-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 2,
+      "shardRangeEndInclusive": 67,
+      "shardRangeStart": 66,
+      "sourceLane": {
+        "profileIDs": [
+          "official_government_public_reference",
+          "open_data_public_reference"
+        ],
+        "registryIDs": [
+          "official.statcan.table.13100974"
+        ]
+      },
+      "subdomainID": "health_wellness_reference_ca_statistics__costs_fees_and_funding"
+    },
+    {
+      "apiPolicyState": "reviewed_public_reference:api.openalex_api.v1,api.static_public_page.v1",
+      "countsTowardLaunchFloor": true,
+      "domainID": "personal_growth",
+      "finalOutputAllowed": false,
+      "freshnessSLA": "monthly_openalex_personal_growth_metadata_and_api_governance_recheck;quarterly_medlineplus_wellness_topic_and_content_use_terms_recheck",
+      "indexObjectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/index-v1.json",
+      "indexSHA256": "cee8a77d57977512cc028251200ef5099f492039d755398d54dab7b1edb50442",
+      "legalPolicyState": "reviewed_public_reference:medlineplus_public_domain_topic_summary,openalex_cc0_metadata",
+      "manifestObjectKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/manifest-v1.json",
+      "manifestSHA256": "1a210b6d541e35db542d735e06cc6e37110507dcdceca6d4d0c1ece5ef66aa23",
+      "nativeCompatibility": {
+        "partitionedShardIndexV1": true,
+        "privateContextAllowed": false,
+        "requestShape": "public_ids_hashes_only"
+      },
+      "partitionID": "lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000",
+      "privateContextAllowed": false,
+      "publicReferenceOnly": true,
+      "r2Layout": {
+        "currentPointerKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/current-pointer-v1.json",
+        "gatewayAllowlistKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/gateway-allowlist-v1.json",
+        "lastKnownGoodKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/last-known-good-v1.json",
+        "promotedPrefix": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/promoted-manifest-v1.json",
+        "revocationKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/revocation-v1.json",
+        "rollbackKey": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/rollback-v1.json",
+        "stagedPrefix": "source-atlas/public-reference/corpus/personal-growth/personal-growth-costs-fees-and-funding/lfsc-source-atlas-shard-source-unit-d76acb167df5ecad-p00000/staged-manifest-v1.json"
+      },
+      "readbackProof": {
+        "checksumVerified": true,
+        "gatewayAllowlistVerified": true,
+        "rollbackVerified": true
+      },
+      "revocationState": "revocable_by_source_unit_and_partition",
+      "shardCount": 3,
+      "shardRangeEndInclusive": 70,
+      "shardRangeStart": 68,
+      "sourceLane": {
+        "profileIDs": [
+          "institutional_public_reference",
+          "standards_body_public_reference"
+        ],
+        "registryIDs": [
+          "nih.medlineplus.wellness",
+          "openalex.personal_growth_research"
+        ]
+      },
+      "subdomainID": "personal_growth__costs_fees_and_funding"
+    }
+  ],
+  "privateContextAllowed": false,
+  "publicReferenceOnly": true,
+  "schemaVersion": 1,
+  "versionID": "source-atlas-launch-floor-shard-corpus-compiled-current"
+}

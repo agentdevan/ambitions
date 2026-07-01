@@ -1,0 +1,77 @@
+{
+  "allowedClaims": [
+    "source_atlas_launch_floor_shard_corpus_validator_green"
+  ],
+  "blockedClaims": [
+    "app_store_readiness",
+    "final_user_plans_schedules_steps_from_source_atlas_or_r2",
+    "launch_floor_complete",
+    "literal_universal_coverage",
+    "outside_legal_approval",
+    "r2_production_ready",
+    "release_green",
+    "source_atlas_launch_floor_ready",
+    "testflight_readiness"
+  ],
+  "checks": [],
+  "corpusReportID": "source_atlas.launch_floor_shard_corpus.44c80ad6a69cac19",
+  "createdAt": "2026-07-01T00:00:00Z",
+  "evidencePaths": {
+    "launchFloorTaxonomy": "/Users/devan/Documents/GitHub/ambitions/tools/source-atlas/frontier/launch-floor-domain-taxonomy.json",
+    "manifest": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/compiled-shard-corpus-manifest.json"
+  },
+  "issues": [],
+  "kind": "ambitions.sourceAtlas.launchFloorShardCorpusReport.v1",
+  "launchFloorShardTargetMet": false,
+  "nonClaims": [
+    "not launch-floor complete unless the validated publicReferenceShards counter is at least 1,000,000",
+    "not R2 production upload proof by itself",
+    "not outside legal approval",
+    "not Release Green, App Store readiness, or TestFlight readiness",
+    "not final user plans, schedules, Steps, priority order, or personalized paths from Source Atlas/R2",
+    "not a private user-data backend",
+    "not private life graph storage",
+    "not an official legal, medical, financial, or admissions decision",
+    "not runtime recommendation proof by itself",
+    "not R2 release readiness",
+    "not accessibility, privacy, or legal approval"
+  ],
+  "outputHashes": {
+    "markdownPayload": "63c6dbf563ae516960a3b7ec63c374964f6cc8abc989168ecbffa99eca053924",
+    "reportPayload": "6155b2680ec3b7bf36669d45efb8fda34f47ab21b44df83f6f6131452ad43750"
+  },
+  "outputPaths": {
+    "markdown": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/manifest-validator/launch-floor-shard-corpus-report.md",
+    "report": "tools/source-atlas/generated/source-atlas-launch-floor-shard-corpus-compiler/lff-m02-l02-current/manifest-validator/launch-floor-shard-corpus-report.json"
+  },
+  "privacyBoundary": "public/reference/freshness only; no private life graph, goals, captures, calendar data, proof, receipts, personalization, behavior history, or private user context",
+  "privacyIssues": [],
+  "productLaw": {
+    "finalPersonalizedOutputsAllowed": false,
+    "privateContextAllowed": false,
+    "publicReferenceOnly": true,
+    "r2Role": "public/reference/freshness infrastructure only",
+    "sourceAtlasGeneratesFinalPlansSchedulesSteps": false
+  },
+  "recordCounts": {
+    "claims": 0,
+    "finalOutputArtifacts": 0,
+    "launchFloorCountedPartitions": 14,
+    "partitions": 14,
+    "partitionsWithGatewayProof": 14,
+    "partitionsWithNativeCompatibility": 14,
+    "partitionsWithR2Layout": 14,
+    "partitionsWithReadbackProof": 14,
+    "partitionsWithRollbackProof": 14,
+    "partitionsWithSourceLaneRegistryLinks": 14,
+    "privacyIssues": 0,
+    "publicReferenceShards": 71,
+    "r2PublishOperations": 0
+  },
+  "runLabel": "current-compiler-validator",
+  "schemaVersion": 1,
+  "sourceAtlasStatusCeiling": "Yellow overall Source Atlas; shard corpus manifest validation only",
+  "status": "Source Green for shard corpus manifest validator / shard target not met",
+  "valid": true,
+  "versionID": "source-atlas-launch-floor-shard-corpus-lff-m02"
+}
