@@ -66,18 +66,8 @@ final class ObjectStateTests: XCTestCase {
         var state = AppStateSnapshot.default
         state.userDisplayName = "Blocked"
 
-        let unsanctionedContext = RuntimeMutationContext(
-            family: .appState,
+        let unsanctionedContext = try decodedRuntimeMutationContext(
             commandID: "",
-            transactionID: "transaction.app-state",
-            eventID: "runtime.event.app-state",
-            projectionID: .privacy,
-            receiptID: "receipt.app-state",
-            replayTraceID: "replay.app-state",
-            actor: .user,
-            source: .you,
-            privacy: .standard,
-            occurredAt: "2026-06-30T09:00:00Z",
             rollbackPlanID: "rollback.app-state"
         )
 
@@ -87,18 +77,8 @@ final class ObjectStateTests: XCTestCase {
             XCTAssertEqual(error as? ObjectStateContractError, .missingCommand(.appState))
         }
 
-        let missingRollbackContext = RuntimeMutationContext(
-            family: .appState,
+        let missingRollbackContext = try decodedRuntimeMutationContext(
             commandID: "command.app-state",
-            transactionID: "transaction.app-state",
-            eventID: "runtime.event.app-state",
-            projectionID: .privacy,
-            receiptID: "receipt.app-state",
-            replayTraceID: "replay.app-state",
-            actor: .user,
-            source: .you,
-            privacy: .standard,
-            occurredAt: "2026-06-30T09:00:00Z",
             rollbackPlanID: ""
         )
 
@@ -117,15 +97,16 @@ final class ObjectStateTests: XCTestCase {
         let objectStore = SwiftDataAppStateStore(store: persistenceStore)
         let command = AmbitionsCommand(
             id: "command.app-state.preferences",
-            kind: .updateGoal,
+            kind: .updateUserPreferences,
             source: .you,
-            target: AmbitionsCommandTarget(goalID: "goal-for-last-opened"),
+            target: AmbitionsCommandTarget(destination: .you),
             payload: AmbitionsCommandPayload(title: "Save local app state"),
             createdAt: "2026-06-30T09:05:00Z",
             actor: .user,
             privacy: .standard
         )
         let eventStore = InMemoryRuntimeEventStore(deviceID: "object-state-test-device")
+        let coordinator = RuntimeTransactionCoordinator(eventStore: eventStore)
         let result = AmbitionsCommandExecutionResult(
             status: .succeeded,
             summary: "App state saved locally.",
@@ -133,23 +114,19 @@ final class ObjectStateTests: XCTestCase {
             eventLedgerEntryIDs: ["event-ledger.app-state"],
             metadata: ["objectStateFamily": ObjectStateFamily.appState.rawValue]
         )
-        let eventEnvelope = try await eventStore.append(
-            RuntimeEvent.commandExecution(
-                command: command,
-                result: result,
-                recordedAt: "2026-06-30T09:05:01Z",
-                commandRecordID: "command.execution.app-state"
-            )
-        )
-        let context = RuntimeMutationContext(
-            family: .appState,
+        let occurredAt = try XCTUnwrap(DomainTimestamp.date(from: "2026-06-30T09:05:01Z"))
+        let outcome = try await coordinator.commit(
             command: command,
-            transactionID: "runtime.transaction.app-state",
-            eventEnvelope: eventEnvelope,
+            beforeSnapshot: "app-state.before",
+            afterSnapshot: "app-state.after",
+            targetSurface: .you,
+            executionResult: result,
+            occurredAt: occurredAt
+        )
+        let context = try coordinator.issueMutationContext(
+            family: .appState,
             projectionID: .privacy,
-            receiptID: "runtime.receipt.command.app-state.preferences",
-            replayTraceID: "runtime.replay.command.app-state.preferences",
-            rollbackPlanID: "runtime.rollback.command.app-state.preferences"
+            from: outcome
         )
         var state = AppStateSnapshot.default
         state.userDisplayName = "Object State"
@@ -166,14 +143,16 @@ final class ObjectStateTests: XCTestCase {
         XCTAssertEqual(receipt.identity.family, .appState)
         XCTAssertEqual(receipt.identity.id, AppStateSnapshot.default.id)
         XCTAssertEqual(receipt.commandID, command.id)
-        XCTAssertEqual(receipt.transactionID, "runtime.transaction.app-state")
-        XCTAssertEqual(receipt.eventID, eventEnvelope.id)
+        XCTAssertEqual(receipt.transactionID, outcome.receipt.transactionID)
+        XCTAssertEqual(receipt.eventID, outcome.receipt.eventID)
         XCTAssertEqual(receipt.projectionID, .privacy)
-        XCTAssertEqual(receipt.receiptID, "runtime.receipt.command.app-state.preferences")
-        XCTAssertEqual(receipt.replayTraceID, "runtime.replay.command.app-state.preferences")
-        XCTAssertEqual(receipt.rollbackPlanID, "runtime.rollback.command.app-state.preferences")
+        XCTAssertTrue(context.projectionPlan.contains(.privacy))
+        XCTAssertEqual(Set(context.projectionPlan), Set(outcome.receipt.projectionCursors.map(\.projectionID)))
+        XCTAssertEqual(receipt.receiptID, outcome.receipt.receiptID)
+        XCTAssertEqual(receipt.replayTraceID, outcome.receipt.replayTraceID)
+        XCTAssertEqual(receipt.rollbackPlanID, outcome.receipt.rollbackPlanID)
         XCTAssertTrue(receipt.localOnly)
-        XCTAssertEqual(persistedEvents.map(\.id), [eventEnvelope.id])
+        XCTAssertEqual(persistedEvents.map(\.id), [outcome.receipt.eventID])
     }
 }
 
@@ -187,6 +166,33 @@ private extension ObjectStateTests {
             }
         }
         throw NSError(domain: "ObjectStateTests", code: 1)
+    }
+
+    func decodedRuntimeMutationContext(
+        commandID: String,
+        rollbackPlanID: String,
+        projectionPlan: [String] = ["privacy"]
+    ) throws -> RuntimeMutationContext {
+        let encodedProjectionPlan = projectionPlan.map { "\"\($0)\"" }.joined(separator: ",")
+        let payload = """
+        {
+          "family": "app_state",
+          "commandID": "\(commandID)",
+          "transactionID": "transaction.app-state",
+          "eventID": "runtime.event.app-state",
+          "projectionID": "privacy",
+          "projectionPlan": [\(encodedProjectionPlan)],
+          "receiptID": "receipt.app-state",
+          "replayTraceID": "replay.app-state",
+          "actor": "user",
+          "source": "you",
+          "privacy": "standard",
+          "occurredAt": "2026-06-30T09:00:00Z",
+          "localOnly": true,
+          "rollbackPlanID": "\(rollbackPlanID)"
+        }
+        """
+        return try JSONDecoder().decode(RuntimeMutationContext.self, from: Data(payload.utf8))
     }
 }
 

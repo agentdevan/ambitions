@@ -1,6 +1,6 @@
 # LocalRuntimeProof Gate
 
-Generated: `2026-07-01T01:28:02+00:00`
+Generated: `2026-07-01T02:06:10+00:00`
 Status: `green`
 Runtime law: `Command -> Event -> Projection -> Receipt -> Replay`
 
@@ -53,7 +53,7 @@ This artifact is a runtime-proof gate. It is not Visual Green, Release Green, pr
 ### runtime_mutation_context_boundaries
 
 - Status: `pass`
-- Summary: Canonical object-state write repositories require TransactionKernel-owned RuntimeMutationContext.
+- Summary: Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext.
 
 ### mutation_bypass_scan
 

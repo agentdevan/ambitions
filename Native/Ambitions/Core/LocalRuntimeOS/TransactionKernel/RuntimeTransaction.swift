@@ -112,6 +112,7 @@ enum RuntimeTransactionDigest {
 }
 
 enum RuntimeTransactionObjectFacts {
+    static let appStateObjectID = AppStateSnapshot.default.id
     static let youPreferencesObjectID = "you.preferences"
 
     static func affectedObjectIDs(command: AmbitionsCommand, mutation: RuntimeMutation? = nil) -> [String] {
@@ -127,6 +128,7 @@ enum RuntimeTransactionObjectFacts {
             command.target.explanationID,
         ].compactMap { $0 } + (mutation?.stageMutation.affectedObjectIDs ?? [])
         if command.kind == .updateUserPreferences {
+            objectIDs.append(appStateObjectID)
             objectIDs.append(youPreferencesObjectID)
         }
         return normalized(objectIDs)
@@ -154,7 +156,10 @@ enum RuntimeTransactionObjectFacts {
         case .completeAction, .delayAction, .splitAction, .recoverAction, .markWaiting, .archiveItem:
             families.append(.closure)
             families.append(.receipt)
-        case .prepareExport, .performExport, .forgetMemory, .updateUserPreferences:
+        case .prepareExport, .performExport, .forgetMemory:
+            families.append(.userSystem)
+        case .updateUserPreferences:
+            families.append(.appState)
             families.append(.userSystem)
         case .askWhy, .dismissRecommendation:
             families.append(.proof)

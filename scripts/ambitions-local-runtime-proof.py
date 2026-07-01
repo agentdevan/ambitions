@@ -198,6 +198,7 @@ PROJECTION_MATERIALIZATION_ALLOWED_PATHS = {
 }
 
 RUNTIME_MUTATION_CONTEXT_PATH = "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"
+RUNTIME_TRANSACTION_PATH = "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeTransaction.swift"
 OBJECT_STATE_CORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateCore.swift"
 OBJECT_STATE_CONTRACTS_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/ObjectStateContracts.swift"
 APP_STATE_STORE_PATH = "Native/Ambitions/Core/LocalRuntimeOS/ObjectState/AppStateStore.swift"
@@ -673,10 +674,21 @@ def check_runtime_mutation_context_boundaries() -> CheckResult:
             "let transactionID: String",
             "let eventID: String",
             "let projectionID: ProjectionID",
+            "let projectionPlan: [ProjectionID]",
             "let receiptID: String",
             "let replayTraceID: String",
             "let rollbackPlanID: String",
+            "fileprivate init(",
+            "extension RuntimeTransactionCoordinator",
+            "func issueMutationContext(",
+            "projectionPlan.contains(projectionID)",
+            "RuntimeMutationContextIssuanceError",
             "func validated(for expectedFamily: ObjectStateFamily) throws",
+        ],
+        ROOT / RUNTIME_TRANSACTION_PATH: [
+            "static let appStateObjectID = AppStateSnapshot.default.id",
+            "objectIDs.append(appStateObjectID)",
+            "families.append(.appState)",
         ],
         ROOT / OBJECT_STATE_CORE_PATH: [
             "ObjectStateWriteReceipt",
@@ -736,22 +748,32 @@ def check_runtime_mutation_context_boundaries() -> CheckResult:
         rel = relative(path)
         if rel == RUNTIME_MUTATION_CONTEXT_PATH:
             continue
-        if "RuntimeObjectStateMutationContext" not in read_text(path):
-            continue
-        findings.append(
-            Finding(
-                "blocker",
-                "legacy-runtime-object-state-context-reference",
-                rel,
-                None,
-                "Production code must use RuntimeMutationContext for canonical object-state writes.",
+        text = read_text(path)
+        if "RuntimeObjectStateMutationContext" in text:
+            findings.append(
+                Finding(
+                    "blocker",
+                    "legacy-runtime-object-state-context-reference",
+                    rel,
+                    None,
+                    "Production code must use RuntimeMutationContext for canonical object-state writes.",
+                )
             )
-        )
+        if "RuntimeMutationContext(" in text:
+            findings.append(
+                Finding(
+                    "blocker",
+                    "runtime-mutation-context-direct-construction",
+                    rel,
+                    None,
+                    "Production code must obtain RuntimeMutationContext from RuntimeTransactionCoordinator.",
+                )
+            )
 
     return make_result(
         "runtime_mutation_context_boundaries",
         findings,
-        "Canonical object-state write repositories require TransactionKernel-owned RuntimeMutationContext.",
+        "Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext.",
         "{count} runtime mutation context boundary blocker(s) remain.",
     )
 

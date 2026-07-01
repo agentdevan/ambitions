@@ -58,7 +58,7 @@
       "checkId": "runtime_mutation_context_boundaries",
       "findings": [],
       "status": "pass",
-      "summary": "Canonical object-state write repositories require TransactionKernel-owned RuntimeMutationContext."
+      "summary": "Canonical object-state write repositories require coordinator-issued TransactionKernel RuntimeMutationContext."
     },
     {
       "checkId": "mutation_bypass_scan",
@@ -73,7 +73,7 @@
       "summary": "Truth files no longer contain LocalRuntimeOS no-claim blockers."
     }
   ],
-  "generatedAt": "2026-07-01T01:28:02+00:00",
+  "generatedAt": "2026-07-01T02:06:10+00:00",
   "runtimeLaw": "Command -> Event -> Projection -> Receipt -> Replay",
   "status": "green",
   "summary": {

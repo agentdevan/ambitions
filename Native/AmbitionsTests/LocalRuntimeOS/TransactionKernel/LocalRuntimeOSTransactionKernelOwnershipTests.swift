@@ -14,6 +14,7 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeRollbackPlan.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeConflictDetector.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeIdempotencyStore.swift",
+            "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift",
             "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutation.swift",
         ]
         let retiredPath = "Native/Ambitions/Core/Runtime/RuntimeMutation.swift"
@@ -28,6 +29,30 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
             FileManager.default.fileExists(atPath: root.appendingPathComponent(retiredPath).path),
             "Retired transaction owner still exists: \(retiredPath)"
         )
+    }
+
+    func testRuntimeMutationContextCreationIsCoordinatorOwnedInProductionSource() throws {
+        let root = repoRoot().resolvingSymlinksInPath()
+        let contextPath = "Native/Ambitions/Core/LocalRuntimeOS/TransactionKernel/RuntimeMutationContext.swift"
+        let contextURL = root.appendingPathComponent(contextPath)
+        let contextSource = try String(contentsOf: contextURL, encoding: .utf8)
+
+        XCTAssertTrue(contextSource.contains("fileprivate init("))
+        XCTAssertTrue(contextSource.contains("extension RuntimeTransactionCoordinator"))
+        XCTAssertTrue(contextSource.contains("func issueMutationContext("))
+        XCTAssertTrue(contextSource.contains("let projectionPlan: [ProjectionID]"))
+        XCTAssertTrue(contextSource.contains("projectionPlan.contains(projectionID)"))
+
+        let productionRoot = root.appendingPathComponent("Native/Ambitions")
+        let enumerator = FileManager.default.enumerator(at: productionRoot, includingPropertiesForKeys: nil)
+        while let fileURL = enumerator?.nextObject() as? URL {
+            guard fileURL.pathExtension == "swift" else { continue }
+            let canonicalFileURL = fileURL.resolvingSymlinksInPath()
+            let relativePath = canonicalFileURL.path.replacingOccurrences(of: root.path + "/", with: "")
+            guard canonicalFileURL.path != contextURL.path else { continue }
+            let source = try String(contentsOf: canonicalFileURL, encoding: .utf8)
+            XCTAssertFalse(source.contains("RuntimeMutationContext("), relativePath)
+        }
     }
 
     func testRuntimeMutationRepresentsVisibleStageMutationAnnouncementAndProof() {
@@ -112,6 +137,19 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
         XCTAssertEqual(outcome.receipt.projectionCursors.count, ProjectionID.allCases.count)
         XCTAssertTrue(outcome.receipt.projectionCursors.allSatisfy { $0.eventCursor == events.first?.cursor })
         XCTAssertTrue(outcome.receipt.projectionCursors.map(\.projectionID).contains(.receipt))
+        let context = try coordinator.issueMutationContext(family: .step, projectionID: .today, from: outcome)
+        XCTAssertEqual(context.commandID, command.id)
+        XCTAssertEqual(context.transactionID, outcome.receipt.transactionID)
+        XCTAssertEqual(context.eventID, outcome.receipt.eventID)
+        XCTAssertEqual(context.receiptID, outcome.receipt.receiptID)
+        XCTAssertEqual(context.rollbackPlanID, outcome.receipt.rollbackPlanID)
+        XCTAssertEqual(Set(context.projectionPlan), Set(outcome.receipt.projectionCursors.map(\.projectionID)))
+        XCTAssertThrowsError(try coordinator.issueMutationContext(family: .appState, projectionID: .today, from: outcome)) { error in
+            guard case RuntimeMutationContextIssuanceError.commitScopeMissingFamily(let family, _) = error else {
+                return XCTFail("Unexpected error: \(error)")
+            }
+            XCTAssertEqual(family, .appState)
+        }
         XCTAssertEqual(outcome.replayOutcome.decision, .applyFresh)
         XCTAssertEqual(outcome.replayOutcome.doubleApplyDisposition, .applyOnce)
     }
@@ -148,6 +186,12 @@ final class LocalRuntimeOSTransactionKernelOwnershipTests: XCTestCase {
         XCTAssertEqual(second.receipt, first.receipt)
         XCTAssertEqual(second.replayOutcome.decision, .replayExistingReceipt)
         XCTAssertEqual(second.replayOutcome.doubleApplyDisposition, .skipDuplicateMutation)
+        XCTAssertThrowsError(try coordinator.issueMutationContext(family: .step, projectionID: .today, from: second)) { error in
+            guard case RuntimeMutationContextIssuanceError.replayedOutcomeCannotIssueContext(let commandID) = error else {
+                return XCTFail("Unexpected error: \(error)")
+            }
+            XCTAssertEqual(commandID, command.id)
+        }
     }
 
     func testConflictDetectorBlocksStaleReadSetObjectOverlap() async throws {
